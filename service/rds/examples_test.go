@@ -75,7 +75,7 @@ func ExampleRDS_AddTagsToResourceRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.AddTagsToResourceInput{
 		ResourceName: aws.String("arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup"),
-		Tags: []*rds.Tag{
+		Tags: []rds.Tag{
 			{
 				Key:   aws.String("Staging"),
 				Value: aws.String("LocationDB"),
@@ -413,8 +413,8 @@ func ExampleRDS_CreateDBClusterRequest_shared00() {
 
 	svc := rds.New(cfg)
 	input := &rds.CreateDBClusterInput{
-		AvailabilityZones: []*string{
-			aws.String("us-east-1a"),
+		AvailabilityZones: []string{
+			"us-east-1a",
 		},
 		BackupRetentionPeriod:       aws.Int64(1),
 		DBClusterIdentifier:         aws.String("mydbcluster"),
@@ -652,7 +652,7 @@ func ExampleRDS_CreateDBInstanceReadReplicaRequest_shared00() {
 		PubliclyAccessible:         aws.Bool(true),
 		SourceDBInstanceIdentifier: aws.String("mymysqlinstance"),
 		StorageType:                aws.String("gp2"),
-		Tags: []*rds.Tag{
+		Tags: []rds.Tag{
 			{
 				Key:   aws.String("mydbreadreplicakey"),
 				Value: aws.String("mydbreadreplicavalue"),
@@ -849,9 +849,9 @@ func ExampleRDS_CreateDBSubnetGroupRequest_shared00() {
 	input := &rds.CreateDBSubnetGroupInput{
 		DBSubnetGroupDescription: aws.String("My DB subnet group"),
 		DBSubnetGroupName:        aws.String("mydbsubnetgroup"),
-		SubnetIds: []*string{
-			aws.String("subnet-1fab8a69"),
-			aws.String("subnet-d43a468c"),
+		SubnetIds: []string{
+			"subnet-1fab8a69",
+			"subnet-d43a468c",
 		},
 	}
 
@@ -896,12 +896,12 @@ func ExampleRDS_CreateEventSubscriptionRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.CreateEventSubscriptionInput{
 		Enabled: aws.Bool(true),
-		EventCategories: []*string{
-			aws.String("availability"),
+		EventCategories: []string{
+			"availability",
 		},
 		SnsTopicArn: aws.String("arn:aws:sns:us-east-1:992648334831:MyDemoSNSTopic"),
-		SourceIds: []*string{
-			aws.String("mymysqlinstance"),
+		SourceIds: []string{
+			"mymysqlinstance",
 		},
 		SourceType:       aws.String("db-instance"),
 		SubscriptionName: aws.String("mymysqleventsubscription"),
@@ -2084,8 +2084,8 @@ func ExampleRDS_DescribeEventsRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.DescribeEventsInput{
 		Duration: aws.Int64(10080),
-		EventCategories: []*string{
-			aws.String("backup"),
+		EventCategories: []string{
+			"backup",
 		},
 		SourceIdentifier: aws.String("mymysqlinstance"),
 		SourceType:       rds.SourceTypeDbInstance,
@@ -2558,7 +2558,7 @@ func ExampleRDS_ModifyDBClusterParameterGroupRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.ModifyDBClusterParameterGroupInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
-		Parameters: []*rds.Parameter{
+		Parameters: []rds.Parameter{
 			{
 				ApplyMethod:    rds.ApplyMethodImmediate,
 				ParameterName:  aws.String("time_zone"),
@@ -2604,12 +2604,12 @@ func ExampleRDS_ModifyDBClusterSnapshotAttributeRequest_shared00() {
 	input := &rds.ModifyDBClusterSnapshotAttributeInput{
 		AttributeName:               aws.String("restore"),
 		DBClusterSnapshotIdentifier: aws.String("manual-cluster-snapshot1"),
-		ValuesToAdd: []*string{
-			aws.String("123451234512"),
-			aws.String("123456789012"),
+		ValuesToAdd: []string{
+			"123451234512",
+			"123456789012",
 		},
-		ValuesToRemove: []*string{
-			aws.String("all"),
+		ValuesToRemove: []string{
+			"all",
 		},
 	}
 
@@ -2723,7 +2723,7 @@ func ExampleRDS_ModifyDBParameterGroupRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.ModifyDBParameterGroupInput{
 		DBParameterGroupName: aws.String("mymysqlparametergroup"),
-		Parameters: []*rds.Parameter{
+		Parameters: []rds.Parameter{
 			{
 				ApplyMethod:    rds.ApplyMethodImmediate,
 				ParameterName:  aws.String("time_zone"),
@@ -2768,8 +2768,8 @@ func ExampleRDS_ModifyDBSnapshotAttributeRequest_shared00() {
 	input := &rds.ModifyDBSnapshotAttributeInput{
 		AttributeName:        aws.String("restore"),
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
-		ValuesToAdd: []*string{
-			aws.String("all"),
+		ValuesToAdd: []string{
+			"all",
 		},
 	}
 
@@ -2810,9 +2810,9 @@ func ExampleRDS_ModifyDBSubnetGroupRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.ModifyDBSubnetGroupInput{
 		DBSubnetGroupName: aws.String("mydbsubnetgroup"),
-		SubnetIds: []*string{
-			aws.String("subnet-70e1975a"),
-			aws.String("subnet-747a5c49"),
+		SubnetIds: []string{
+			"subnet-70e1975a",
+			"subnet-747a5c49",
 		},
 	}
 
@@ -2857,9 +2857,9 @@ func ExampleRDS_ModifyEventSubscriptionRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.ModifyEventSubscriptionInput{
 		Enabled: aws.Bool(true),
-		EventCategories: []*string{
-			aws.String("deletion"),
-			aws.String("low storage"),
+		EventCategories: []string{
+			"deletion",
+			"low storage",
 		},
 		SourceType:       aws.String("db-instance"),
 		SubscriptionName: aws.String("mymysqleventsubscription"),
@@ -2909,10 +2909,10 @@ func ExampleRDS_ModifyOptionGroupRequest_shared00() {
 	input := &rds.ModifyOptionGroupInput{
 		ApplyImmediately: aws.Bool(true),
 		OptionGroupName:  aws.String("myawsuser-og02"),
-		OptionsToInclude: []*rds.OptionConfiguration{
+		OptionsToInclude: []rds.OptionConfiguration{
 			{
-				DBSecurityGroupMemberships: []*string{
-					aws.String("default"),
+				DBSecurityGroupMemberships: []string{
+					"default",
 				},
 				OptionName: aws.String("MEMCACHED"),
 			},
@@ -3112,8 +3112,8 @@ func ExampleRDS_RemoveTagsFromResourceRequest_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.RemoveTagsFromResourceInput{
 		ResourceName: aws.String("arn:aws:rds:us-east-1:992648334831:og:mydboptiongroup"),
-		TagKeys: []*string{
-			aws.String("MyKey"),
+		TagKeys: []string{
+			"MyKey",
 		},
 	}
 

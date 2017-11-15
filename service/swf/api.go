@@ -4200,7 +4200,7 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// of 5 tags can be specified. You can list workflow executions with a specific
 	// tag by calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions
 	// and specifying a TagFilter.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The task list to use for the decisions of the new (continued) workflow execution.
 	TaskList *TaskList `locationName:"taskList" type:"structure"`
@@ -4289,7 +4289,7 @@ func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetLambdaRole(v strin
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetTagList(v []*string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
+func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetTagList(v []string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
 	s.TagList = v
 	return s
 }
@@ -6466,7 +6466,7 @@ type GetWorkflowExecutionHistoryOutput struct {
 	// The list of history events.
 	//
 	// Events is a required field
-	Events []*HistoryEvent `locationName:"events" type:"list" required:"true"`
+	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using
@@ -6488,7 +6488,7 @@ func (s GetWorkflowExecutionHistoryOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *GetWorkflowExecutionHistoryOutput) SetEvents(v []*HistoryEvent) *GetWorkflowExecutionHistoryOutput {
+func (s *GetWorkflowExecutionHistoryOutput) SetEvents(v []HistoryEvent) *GetWorkflowExecutionHistoryOutput {
 	s.Events = v
 	return s
 }
@@ -7655,7 +7655,7 @@ type ListActivityTypesOutput struct {
 	// List of activity type information.
 	//
 	// TypeInfos is a required field
-	TypeInfos []*ActivityTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
+	TypeInfos []ActivityTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7675,7 +7675,7 @@ func (s *ListActivityTypesOutput) SetNextPageToken(v string) *ListActivityTypesO
 }
 
 // SetTypeInfos sets the TypeInfos field's value.
-func (s *ListActivityTypesOutput) SetTypeInfos(v []*ActivityTypeInfo) *ListActivityTypesOutput {
+func (s *ListActivityTypesOutput) SetTypeInfos(v []ActivityTypeInfo) *ListActivityTypesOutput {
 	s.TypeInfos = v
 	return s
 }
@@ -7956,7 +7956,7 @@ type ListDomainsOutput struct {
 	// A list of DomainInfo structures.
 	//
 	// DomainInfos is a required field
-	DomainInfos []*DomainInfo `locationName:"domainInfos" type:"list" required:"true"`
+	DomainInfos []DomainInfo `locationName:"domainInfos" type:"list" required:"true"`
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using
@@ -7978,7 +7978,7 @@ func (s ListDomainsOutput) GoString() string {
 }
 
 // SetDomainInfos sets the DomainInfos field's value.
-func (s *ListDomainsOutput) SetDomainInfos(v []*DomainInfo) *ListDomainsOutput {
+func (s *ListDomainsOutput) SetDomainInfos(v []DomainInfo) *ListDomainsOutput {
 	s.DomainInfos = v
 	return s
 }
@@ -8150,7 +8150,7 @@ type ListOpenWorkflowExecutionsOutput struct {
 	// The list of workflow information structures.
 	//
 	// ExecutionInfos is a required field
-	ExecutionInfos []*WorkflowExecutionInfo `locationName:"executionInfos" type:"list" required:"true"`
+	ExecutionInfos []WorkflowExecutionInfo `locationName:"executionInfos" type:"list" required:"true"`
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using
@@ -8172,7 +8172,7 @@ func (s ListOpenWorkflowExecutionsOutput) GoString() string {
 }
 
 // SetExecutionInfos sets the ExecutionInfos field's value.
-func (s *ListOpenWorkflowExecutionsOutput) SetExecutionInfos(v []*WorkflowExecutionInfo) *ListOpenWorkflowExecutionsOutput {
+func (s *ListOpenWorkflowExecutionsOutput) SetExecutionInfos(v []WorkflowExecutionInfo) *ListOpenWorkflowExecutionsOutput {
 	s.ExecutionInfos = v
 	return s
 }
@@ -8306,7 +8306,7 @@ type ListWorkflowTypesOutput struct {
 	// The list of workflow type information.
 	//
 	// TypeInfos is a required field
-	TypeInfos []*WorkflowTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
+	TypeInfos []WorkflowTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8326,7 +8326,7 @@ func (s *ListWorkflowTypesOutput) SetNextPageToken(v string) *ListWorkflowTypesO
 }
 
 // SetTypeInfos sets the TypeInfos field's value.
-func (s *ListWorkflowTypesOutput) SetTypeInfos(v []*WorkflowTypeInfo) *ListWorkflowTypesOutput {
+func (s *ListWorkflowTypesOutput) SetTypeInfos(v []WorkflowTypeInfo) *ListWorkflowTypesOutput {
 	s.TypeInfos = v
 	return s
 }
@@ -8669,7 +8669,7 @@ type PollForDecisionTaskOutput struct {
 	// uses this during the processing of the decision task.
 	//
 	// Events is a required field
-	Events []*HistoryEvent `locationName:"events" type:"list" required:"true"`
+	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using
@@ -8719,7 +8719,7 @@ func (s PollForDecisionTaskOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *PollForDecisionTaskOutput) SetEvents(v []*HistoryEvent) *PollForDecisionTaskOutput {
+func (s *PollForDecisionTaskOutput) SetEvents(v []HistoryEvent) *PollForDecisionTaskOutput {
 	s.Events = v
 	return s
 }
@@ -10149,7 +10149,7 @@ type RespondDecisionTaskCompletedInput struct {
 
 	// The list of decisions (possibly empty) made by the decider while processing
 	// this decision task. See the docs for the Decision structure for details.
-	Decisions []*Decision `locationName:"decisions" type:"list"`
+	Decisions []Decision `locationName:"decisions" type:"list"`
 
 	// User defined context to add to workflow execution.
 	ExecutionContext *string `locationName:"executionContext" type:"string"`
@@ -10186,9 +10186,6 @@ func (s *RespondDecisionTaskCompletedInput) Validate() error {
 	}
 	if s.Decisions != nil {
 		for i, v := range s.Decisions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Decisions", i), err.(aws.ErrInvalidParams))
 			}
@@ -10202,7 +10199,7 @@ func (s *RespondDecisionTaskCompletedInput) Validate() error {
 }
 
 // SetDecisions sets the Decisions field's value.
-func (s *RespondDecisionTaskCompletedInput) SetDecisions(v []*Decision) *RespondDecisionTaskCompletedInput {
+func (s *RespondDecisionTaskCompletedInput) SetDecisions(v []Decision) *RespondDecisionTaskCompletedInput {
 	s.Decisions = v
 	return s
 }
@@ -11160,7 +11157,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// of 5 tags can be specified. You can list workflow executions with a specific
 	// tag by calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions
 	// and specifying a TagFilter.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The name of the task list to be used for decision tasks of the child workflow
 	// execution.
@@ -11289,7 +11286,7 @@ func (s *StartChildWorkflowExecutionDecisionAttributes) SetLambdaRole(v string) 
 }
 
 // SetTagList sets the TagList field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetTagList(v []*string) *StartChildWorkflowExecutionDecisionAttributes {
+func (s *StartChildWorkflowExecutionDecisionAttributes) SetTagList(v []string) *StartChildWorkflowExecutionDecisionAttributes {
 	s.TagList = v
 	return s
 }
@@ -11468,7 +11465,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	LambdaRole *string `locationName:"lambdaRole" min:"1" type:"string"`
 
 	// The list of tags to associated with the child workflow execution.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The name of the task list used for the decision tasks of the child workflow
 	// execution.
@@ -11549,7 +11546,7 @@ func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetLambdaRole(v st
 }
 
 // SetTagList sets the TagList field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetTagList(v []*string) *StartChildWorkflowExecutionInitiatedEventAttributes {
+func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetTagList(v []string) *StartChildWorkflowExecutionInitiatedEventAttributes {
 	s.TagList = v
 	return s
 }
@@ -11853,7 +11850,7 @@ type StartWorkflowExecutionInput struct {
 	// a maximum of 5 tags. You can list workflow executions with a specific tag
 	// by calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
 	// specifying a TagFilter.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The task list to use for the decision tasks generated for this workflow execution.
 	// This overrides the defaultTaskList specified when registering the workflow
@@ -11994,7 +11991,7 @@ func (s *StartWorkflowExecutionInput) SetLambdaRole(v string) *StartWorkflowExec
 }
 
 // SetTagList sets the TagList field's value.
-func (s *StartWorkflowExecutionInput) SetTagList(v []*string) *StartWorkflowExecutionInput {
+func (s *StartWorkflowExecutionInput) SetTagList(v []string) *StartWorkflowExecutionInput {
 	s.TagList = v
 	return s
 }
@@ -12761,7 +12758,7 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	NewExecutionRunId *string `locationName:"newExecutionRunId" min:"1" type:"string" required:"true"`
 
 	// The list of tags associated with the new workflow execution.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The task list to use for the decisions of the new (continued) workflow execution.
 	//
@@ -12831,7 +12828,7 @@ func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetNewExecutionRunId(v 
 }
 
 // SetTagList sets the TagList field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetTagList(v []*string) *WorkflowExecutionContinuedAsNewEventAttributes {
+func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetTagList(v []string) *WorkflowExecutionContinuedAsNewEventAttributes {
 	s.TagList = v
 	return s
 }
@@ -13003,7 +13000,7 @@ type WorkflowExecutionInfo struct {
 	// The list of tags associated with the workflow execution. Tags can be used
 	// to identify and list workflow executions of interest through the visibility
 	// APIs. A workflow execution can have a maximum of 5 tags.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The type of the workflow execution.
 	//
@@ -13064,7 +13061,7 @@ func (s *WorkflowExecutionInfo) SetStartTimestamp(v time.Time) *WorkflowExecutio
 }
 
 // SetTagList sets the TagList field's value.
-func (s *WorkflowExecutionInfo) SetTagList(v []*string) *WorkflowExecutionInfo {
+func (s *WorkflowExecutionInfo) SetTagList(v []string) *WorkflowExecutionInfo {
 	s.TagList = v
 	return s
 }
@@ -13259,7 +13256,7 @@ type WorkflowExecutionStartedEventAttributes struct {
 
 	// The list of tags associated with this workflow execution. An execution can
 	// have up to 5 tags.
-	TagList []*string `locationName:"tagList" type:"list"`
+	TagList []string `locationName:"tagList" type:"list"`
 
 	// The name of the task list for scheduling the decision tasks for this workflow
 	// execution.
@@ -13335,7 +13332,7 @@ func (s *WorkflowExecutionStartedEventAttributes) SetParentWorkflowExecution(v *
 }
 
 // SetTagList sets the TagList field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetTagList(v []*string) *WorkflowExecutionStartedEventAttributes {
+func (s *WorkflowExecutionStartedEventAttributes) SetTagList(v []string) *WorkflowExecutionStartedEventAttributes {
 	s.TagList = v
 	return s
 }

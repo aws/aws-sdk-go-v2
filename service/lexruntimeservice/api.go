@@ -258,7 +258,7 @@ type GenericAttachment struct {
 	AttachmentLinkUrl *string `locationName:"attachmentLinkUrl" min:"1" type:"string"`
 
 	// The list of options to show to the user.
-	Buttons []*Button `locationName:"buttons" type:"list"`
+	Buttons []Button `locationName:"buttons" type:"list"`
 
 	// The URL of an image that is displayed to the user.
 	ImageUrl *string `locationName:"imageUrl" min:"1" type:"string"`
@@ -287,7 +287,7 @@ func (s *GenericAttachment) SetAttachmentLinkUrl(v string) *GenericAttachment {
 }
 
 // SetButtons sets the Buttons field's value.
-func (s *GenericAttachment) SetButtons(v []*Button) *GenericAttachment {
+func (s *GenericAttachment) SetButtons(v []Button) *GenericAttachment {
 	s.Buttons = v
 	return s
 }
@@ -721,12 +721,12 @@ type PostTextInput struct {
 	// any request attributes with the prefix x-amz-lex:.
 	//
 	// For more information, see Setting Request Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
-	RequestAttributes map[string]*string `locationName:"requestAttributes" type:"map"`
+	RequestAttributes map[string]string `locationName:"requestAttributes" type:"map"`
 
 	// Application-specific information passed between Amazon Lex and a client application.
 	//
 	// For more information, see Setting Session Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
-	SessionAttributes map[string]*string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
 	// user's conversation with your bot. At runtime, each request must contain
@@ -817,13 +817,13 @@ func (s *PostTextInput) SetInputText(v string) *PostTextInput {
 }
 
 // SetRequestAttributes sets the RequestAttributes field's value.
-func (s *PostTextInput) SetRequestAttributes(v map[string]*string) *PostTextInput {
+func (s *PostTextInput) SetRequestAttributes(v map[string]string) *PostTextInput {
 	s.RequestAttributes = v
 	return s
 }
 
 // SetSessionAttributes sets the SessionAttributes field's value.
-func (s *PostTextInput) SetSessionAttributes(v map[string]*string) *PostTextInput {
+func (s *PostTextInput) SetSessionAttributes(v map[string]string) *PostTextInput {
 	s.SessionAttributes = v
 	return s
 }
@@ -905,7 +905,7 @@ type PostTextOutput struct {
 	ResponseCard *ResponseCard `locationName:"responseCard" type:"structure"`
 
 	// A map of key-value pairs representing the session-specific context information.
-	SessionAttributes map[string]*string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
 
 	// If the dialogState value is ElicitSlot, returns the name of the slot for
 	// which Amazon Lex is eliciting a value.
@@ -921,7 +921,7 @@ type PostTextOutput struct {
 	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list
 	// or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy,
 	// the default is ORIGINAL_VALUE.
-	Slots map[string]*string `locationName:"slots" type:"map"`
+	Slots map[string]string `locationName:"slots" type:"map"`
 }
 
 // String returns the string representation
@@ -959,7 +959,7 @@ func (s *PostTextOutput) SetResponseCard(v *ResponseCard) *PostTextOutput {
 }
 
 // SetSessionAttributes sets the SessionAttributes field's value.
-func (s *PostTextOutput) SetSessionAttributes(v map[string]*string) *PostTextOutput {
+func (s *PostTextOutput) SetSessionAttributes(v map[string]string) *PostTextOutput {
 	s.SessionAttributes = v
 	return s
 }
@@ -971,7 +971,7 @@ func (s *PostTextOutput) SetSlotToElicit(v string) *PostTextOutput {
 }
 
 // SetSlots sets the Slots field's value.
-func (s *PostTextOutput) SetSlots(v map[string]*string) *PostTextOutput {
+func (s *PostTextOutput) SetSlots(v map[string]string) *PostTextOutput {
 	s.Slots = v
 	return s
 }
@@ -988,7 +988,7 @@ type ResponseCard struct {
 	ContentType ContentType `locationName:"contentType" type:"string"`
 
 	// An array of attachment objects representing options.
-	GenericAttachments []*GenericAttachment `locationName:"genericAttachments" type:"list"`
+	GenericAttachments []GenericAttachment `locationName:"genericAttachments" type:"list"`
 
 	// The version of the response card format.
 	Version *string `locationName:"version" type:"string"`
@@ -1011,7 +1011,7 @@ func (s *ResponseCard) SetContentType(v ContentType) *ResponseCard {
 }
 
 // SetGenericAttachments sets the GenericAttachments field's value.
-func (s *ResponseCard) SetGenericAttachments(v []*GenericAttachment) *ResponseCard {
+func (s *ResponseCard) SetGenericAttachments(v []GenericAttachment) *ResponseCard {
 	s.GenericAttachments = v
 	return s
 }

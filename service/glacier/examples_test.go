@@ -122,9 +122,9 @@ func ExampleGlacier_AddTagsToVaultRequest_shared00() {
 
 	svc := glacier.New(cfg)
 	input := &glacier.AddTagsToVaultInput{
-		Tags: map[string]*string{
-			"examplekey1": aws.String("examplevalue1"),
-			"examplekey2": aws.String("examplevalue2"),
+		Tags: map[string]string{
+			"examplekey1": "examplevalue1",
+			"examplekey2": "examplevalue2",
 		},
 		AccountId: aws.String("-"),
 		VaultName: aws.String("my-vault"),
@@ -1200,9 +1200,9 @@ func ExampleGlacier_RemoveTagsFromVaultRequest_shared00() {
 
 	svc := glacier.New(cfg)
 	input := &glacier.RemoveTagsFromVaultInput{
-		TagKeys: []*string{
-			aws.String("examplekey1"),
-			aws.String("examplekey2"),
+		TagKeys: []string{
+			"examplekey1",
+			"examplekey2",
 		},
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
@@ -1247,7 +1247,7 @@ func ExampleGlacier_SetDataRetrievalPolicyRequest_shared00() {
 	svc := glacier.New(cfg)
 	input := &glacier.SetDataRetrievalPolicyInput{
 		Policy: &glacier.DataRetrievalPolicy{
-			Rules: []*glacier.DataRetrievalRule{
+			Rules: []glacier.DataRetrievalRule{
 				{
 					BytesPerHour: aws.Int64(10737418240),
 					Strategy:     aws.String("BytesPerHour"),
@@ -1341,9 +1341,9 @@ func ExampleGlacier_SetVaultNotificationsRequest_shared00() {
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 		VaultNotificationConfig: &glacier.VaultNotificationConfig{
-			Events: []*string{
-				aws.String("ArchiveRetrievalCompleted"),
-				aws.String("InventoryRetrievalCompleted"),
+			Events: []string{
+				"ArchiveRetrievalCompleted",
+				"InventoryRetrievalCompleted",
 			},
 			SNSTopic: aws.String("arn:aws:sns:us-west-2:012345678901:mytopic"),
 		},

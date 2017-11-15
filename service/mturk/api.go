@@ -3202,7 +3202,7 @@ type CreateHITInput struct {
 	// If the HITLayoutId is provided, any placeholder values must be filled in
 	// with values using the HITLayoutParameter structure. For more information,
 	// see HITLayout.
-	HITLayoutParameters []*HITLayoutParameter `type:"list"`
+	HITLayoutParameters []HITLayoutParameter `type:"list"`
 
 	// The HIT-level Review Policy applies to the HIT. You can specify for Mechanical
 	// Turk to take various actions based on the policy.
@@ -3226,7 +3226,7 @@ type CreateHITInput struct {
 
 	// A condition that a Worker's Qualifications must meet before the Worker is
 	// allowed to accept and complete the HIT.
-	QualificationRequirements []*QualificationRequirement `type:"list"`
+	QualificationRequirements []QualificationRequirement `type:"list"`
 
 	// The data the person completing the HIT uses to produce the results.
 	//
@@ -3321,9 +3321,6 @@ func (s *CreateHITInput) Validate() error {
 	}
 	if s.HITLayoutParameters != nil {
 		for i, v := range s.HITLayoutParameters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HITLayoutParameters", i), err.(aws.ErrInvalidParams))
 			}
@@ -3336,9 +3333,6 @@ func (s *CreateHITInput) Validate() error {
 	}
 	if s.QualificationRequirements != nil {
 		for i, v := range s.QualificationRequirements {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QualificationRequirements", i), err.(aws.ErrInvalidParams))
 			}
@@ -3382,7 +3376,7 @@ func (s *CreateHITInput) SetHITLayoutId(v string) *CreateHITInput {
 }
 
 // SetHITLayoutParameters sets the HITLayoutParameters field's value.
-func (s *CreateHITInput) SetHITLayoutParameters(v []*HITLayoutParameter) *CreateHITInput {
+func (s *CreateHITInput) SetHITLayoutParameters(v []HITLayoutParameter) *CreateHITInput {
 	s.HITLayoutParameters = v
 	return s
 }
@@ -3412,7 +3406,7 @@ func (s *CreateHITInput) SetMaxAssignments(v int64) *CreateHITInput {
 }
 
 // SetQualificationRequirements sets the QualificationRequirements field's value.
-func (s *CreateHITInput) SetQualificationRequirements(v []*QualificationRequirement) *CreateHITInput {
+func (s *CreateHITInput) SetQualificationRequirements(v []QualificationRequirement) *CreateHITInput {
 	s.QualificationRequirements = v
 	return s
 }
@@ -3505,7 +3499,7 @@ type CreateHITTypeInput struct {
 
 	// A condition that a Worker's Qualifications must meet before the Worker is
 	// allowed to accept and complete the HIT.
-	QualificationRequirements []*QualificationRequirement `type:"list"`
+	QualificationRequirements []QualificationRequirement `type:"list"`
 
 	// The amount of money the Requester will pay a Worker for successfully completing
 	// the HIT.
@@ -3552,9 +3546,6 @@ func (s *CreateHITTypeInput) Validate() error {
 	}
 	if s.QualificationRequirements != nil {
 		for i, v := range s.QualificationRequirements {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QualificationRequirements", i), err.(aws.ErrInvalidParams))
 			}
@@ -3592,7 +3583,7 @@ func (s *CreateHITTypeInput) SetKeywords(v string) *CreateHITTypeInput {
 }
 
 // SetQualificationRequirements sets the QualificationRequirements field's value.
-func (s *CreateHITTypeInput) SetQualificationRequirements(v []*QualificationRequirement) *CreateHITTypeInput {
+func (s *CreateHITTypeInput) SetQualificationRequirements(v []QualificationRequirement) *CreateHITTypeInput {
 	s.QualificationRequirements = v
 	return s
 }
@@ -3652,7 +3643,7 @@ type CreateHITWithHITTypeInput struct {
 	// If the HITLayoutId is provided, any placeholder values must be filled in
 	// with values using the HITLayoutParameter structure. For more information,
 	// see HITLayout.
-	HITLayoutParameters []*HITLayoutParameter `type:"list"`
+	HITLayoutParameters []HITLayoutParameter `type:"list"`
 
 	// The HIT-level Review Policy applies to the HIT. You can specify for Mechanical
 	// Turk to take various actions based on the policy.
@@ -3746,9 +3737,6 @@ func (s *CreateHITWithHITTypeInput) Validate() error {
 	}
 	if s.HITLayoutParameters != nil {
 		for i, v := range s.HITLayoutParameters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HITLayoutParameters", i), err.(aws.ErrInvalidParams))
 			}
@@ -3779,7 +3767,7 @@ func (s *CreateHITWithHITTypeInput) SetHITLayoutId(v string) *CreateHITWithHITTy
 }
 
 // SetHITLayoutParameters sets the HITLayoutParameters field's value.
-func (s *CreateHITWithHITTypeInput) SetHITLayoutParameters(v []*HITLayoutParameter) *CreateHITWithHITTypeInput {
+func (s *CreateHITWithHITTypeInput) SetHITLayoutParameters(v []HITLayoutParameter) *CreateHITWithHITTypeInput {
 	s.HITLayoutParameters = v
 	return s
 }
@@ -4883,7 +4871,7 @@ type HIT struct {
 	// HIT. A HIT can have between zero and ten Qualification requirements. All
 	// requirements must be met by a Worker's Qualifications for the Worker to accept
 	// the HIT.
-	QualificationRequirements []*QualificationRequirement `type:"list"`
+	QualificationRequirements []QualificationRequirement `type:"list"`
 
 	// The data the Worker completing the HIT uses produce the results. This is
 	// either either a QuestionForm, HTMLQuestion or an ExternalQuestion data structure.
@@ -5007,7 +4995,7 @@ func (s *HIT) SetNumberOfAssignmentsPending(v int64) *HIT {
 }
 
 // SetQualificationRequirements sets the QualificationRequirements field's value.
-func (s *HIT) SetQualificationRequirements(v []*QualificationRequirement) *HIT {
+func (s *HIT) SetQualificationRequirements(v []QualificationRequirement) *HIT {
 	s.QualificationRequirements = v
 	return s
 }
@@ -5174,7 +5162,7 @@ type ListAssignmentsForHITOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The collection of Assignment data structures returned by this call.
-	Assignments []*Assignment `type:"list"`
+	Assignments []Assignment `type:"list"`
 
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
@@ -5197,7 +5185,7 @@ func (s ListAssignmentsForHITOutput) GoString() string {
 }
 
 // SetAssignments sets the Assignments field's value.
-func (s *ListAssignmentsForHITOutput) SetAssignments(v []*Assignment) *ListAssignmentsForHITOutput {
+func (s *ListAssignmentsForHITOutput) SetAssignments(v []Assignment) *ListAssignmentsForHITOutput {
 	s.Assignments = v
 	return s
 }
@@ -5296,7 +5284,7 @@ type ListBonusPaymentsOutput struct {
 
 	// A successful request to the ListBonusPayments operation returns a list of
 	// BonusPayment objects.
-	BonusPayments []*BonusPayment `type:"list"`
+	BonusPayments []BonusPayment `type:"list"`
 
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
@@ -5319,7 +5307,7 @@ func (s ListBonusPaymentsOutput) GoString() string {
 }
 
 // SetBonusPayments sets the BonusPayments field's value.
-func (s *ListBonusPaymentsOutput) SetBonusPayments(v []*BonusPayment) *ListBonusPaymentsOutput {
+func (s *ListBonusPaymentsOutput) SetBonusPayments(v []BonusPayment) *ListBonusPaymentsOutput {
 	s.BonusPayments = v
 	return s
 }
@@ -5408,7 +5396,7 @@ type ListHITsForQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of HIT elements returned by the query.
-	HITs []*HIT `type:"list"`
+	HITs []HIT `type:"list"`
 
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
@@ -5431,7 +5419,7 @@ func (s ListHITsForQualificationTypeOutput) GoString() string {
 }
 
 // SetHITs sets the HITs field's value.
-func (s *ListHITsForQualificationTypeOutput) SetHITs(v []*HIT) *ListHITsForQualificationTypeOutput {
+func (s *ListHITsForQualificationTypeOutput) SetHITs(v []HIT) *ListHITsForQualificationTypeOutput {
 	s.HITs = v
 	return s
 }
@@ -5501,7 +5489,7 @@ type ListHITsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of HIT elements returned by the query.
-	HITs []*HIT `type:"list"`
+	HITs []HIT `type:"list"`
 
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
@@ -5524,7 +5512,7 @@ func (s ListHITsOutput) GoString() string {
 }
 
 // SetHITs sets the HITs field's value.
-func (s *ListHITsOutput) SetHITs(v []*HIT) *ListHITsOutput {
+func (s *ListHITsOutput) SetHITs(v []HIT) *ListHITsOutput {
 	s.HITs = v
 	return s
 }
@@ -5620,7 +5608,7 @@ type ListQualificationRequestsOutput struct {
 
 	// The Qualification request. The response includes one QualificationRequest
 	// element for each Qualification request returned by the query.
-	QualificationRequests []*QualificationRequest `type:"list"`
+	QualificationRequests []QualificationRequest `type:"list"`
 }
 
 // String returns the string representation
@@ -5646,7 +5634,7 @@ func (s *ListQualificationRequestsOutput) SetNumResults(v int64) *ListQualificat
 }
 
 // SetQualificationRequests sets the QualificationRequests field's value.
-func (s *ListQualificationRequestsOutput) SetQualificationRequests(v []*QualificationRequest) *ListQualificationRequestsOutput {
+func (s *ListQualificationRequestsOutput) SetQualificationRequests(v []QualificationRequest) *ListQualificationRequestsOutput {
 	s.QualificationRequests = v
 	return s
 }
@@ -5755,7 +5743,7 @@ type ListQualificationTypesOutput struct {
 	NumResults *int64 `type:"integer"`
 
 	// The list of QualificationType elements returned by the query.
-	QualificationTypes []*QualificationType `type:"list"`
+	QualificationTypes []QualificationType `type:"list"`
 }
 
 // String returns the string representation
@@ -5781,7 +5769,7 @@ func (s *ListQualificationTypesOutput) SetNumResults(v int64) *ListQualification
 }
 
 // SetQualificationTypes sets the QualificationTypes field's value.
-func (s *ListQualificationTypesOutput) SetQualificationTypes(v []*QualificationType) *ListQualificationTypesOutput {
+func (s *ListQualificationTypesOutput) SetQualificationTypes(v []QualificationType) *ListQualificationTypesOutput {
 	s.QualificationTypes = v
 	return s
 }
@@ -6033,7 +6021,7 @@ type ListReviewableHITsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of HIT elements returned by the query.
-	HITs []*HIT `type:"list"`
+	HITs []HIT `type:"list"`
 
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
@@ -6056,7 +6044,7 @@ func (s ListReviewableHITsOutput) GoString() string {
 }
 
 // SetHITs sets the HITs field's value.
-func (s *ListReviewableHITsOutput) SetHITs(v []*HIT) *ListReviewableHITsOutput {
+func (s *ListReviewableHITsOutput) SetHITs(v []HIT) *ListReviewableHITsOutput {
 	s.HITs = v
 	return s
 }
@@ -6136,7 +6124,7 @@ type ListWorkerBlocksOutput struct {
 
 	// The list of WorkerBlocks, containing the collection of Worker IDs and reasons
 	// for blocking.
-	WorkerBlocks []*WorkerBlock `type:"list"`
+	WorkerBlocks []WorkerBlock `type:"list"`
 }
 
 // String returns the string representation
@@ -6162,7 +6150,7 @@ func (s *ListWorkerBlocksOutput) SetNumResults(v int64) *ListWorkerBlocksOutput 
 }
 
 // SetWorkerBlocks sets the WorkerBlocks field's value.
-func (s *ListWorkerBlocksOutput) SetWorkerBlocks(v []*WorkerBlock) *ListWorkerBlocksOutput {
+func (s *ListWorkerBlocksOutput) SetWorkerBlocks(v []WorkerBlock) *ListWorkerBlocksOutput {
 	s.WorkerBlocks = v
 	return s
 }
@@ -6257,7 +6245,7 @@ type ListWorkersWithQualificationTypeOutput struct {
 	NumResults *int64 `type:"integer"`
 
 	// The list of Qualification elements returned by this call.
-	Qualifications []*Qualification `type:"list"`
+	Qualifications []Qualification `type:"list"`
 }
 
 // String returns the string representation
@@ -6283,7 +6271,7 @@ func (s *ListWorkersWithQualificationTypeOutput) SetNumResults(v int64) *ListWor
 }
 
 // SetQualifications sets the Qualifications field's value.
-func (s *ListWorkersWithQualificationTypeOutput) SetQualifications(v []*Qualification) *ListWorkersWithQualificationTypeOutput {
+func (s *ListWorkersWithQualificationTypeOutput) SetQualifications(v []Qualification) *ListWorkersWithQualificationTypeOutput {
 	s.Qualifications = v
 	return s
 }
@@ -6506,7 +6494,7 @@ type NotifyWorkersInput struct {
 	// at a time.
 	//
 	// WorkerIds is a required field
-	WorkerIds []*string `type:"list" required:"true"`
+	WorkerIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6554,7 +6542,7 @@ func (s *NotifyWorkersInput) SetSubject(v string) *NotifyWorkersInput {
 }
 
 // SetWorkerIds sets the WorkerIds field's value.
-func (s *NotifyWorkersInput) SetWorkerIds(v []*string) *NotifyWorkersInput {
+func (s *NotifyWorkersInput) SetWorkerIds(v []string) *NotifyWorkersInput {
 	s.WorkerIds = v
 	return s
 }
@@ -6565,7 +6553,7 @@ type NotifyWorkersOutput struct {
 
 	// When MTurk sends notifications to the list of Workers, it returns back any
 	// failures it encounters in this list of NotifyWorkersFailureStatus objects.
-	NotifyWorkersFailureStatuses []*NotifyWorkersFailureStatus `type:"list"`
+	NotifyWorkersFailureStatuses []NotifyWorkersFailureStatus `type:"list"`
 }
 
 // String returns the string representation
@@ -6579,7 +6567,7 @@ func (s NotifyWorkersOutput) GoString() string {
 }
 
 // SetNotifyWorkersFailureStatuses sets the NotifyWorkersFailureStatuses field's value.
-func (s *NotifyWorkersOutput) SetNotifyWorkersFailureStatuses(v []*NotifyWorkersFailureStatus) *NotifyWorkersOutput {
+func (s *NotifyWorkersOutput) SetNotifyWorkersFailureStatuses(v []NotifyWorkersFailureStatus) *NotifyWorkersOutput {
 	s.NotifyWorkersFailureStatuses = v
 	return s
 }
@@ -6597,7 +6585,7 @@ type ParameterMapEntry struct {
 
 	// The list of answers to the question specified in the MapEntry Key element.
 	// The Worker must match all values in order for the answer to be scored correctly.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6617,7 +6605,7 @@ func (s *ParameterMapEntry) SetKey(v string) *ParameterMapEntry {
 }
 
 // SetValues sets the Values field's value.
-func (s *ParameterMapEntry) SetValues(v []*string) *ParameterMapEntry {
+func (s *ParameterMapEntry) SetValues(v []string) *ParameterMapEntry {
 	s.Values = v
 	return s
 }
@@ -6631,10 +6619,10 @@ type PolicyParameter struct {
 	Key *string `type:"string"`
 
 	// List of ParameterMapEntry objects.
-	MapEntries []*ParameterMapEntry `type:"list"`
+	MapEntries []ParameterMapEntry `type:"list"`
 
 	// The list of values of the Parameter
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6654,13 +6642,13 @@ func (s *PolicyParameter) SetKey(v string) *PolicyParameter {
 }
 
 // SetMapEntries sets the MapEntries field's value.
-func (s *PolicyParameter) SetMapEntries(v []*ParameterMapEntry) *PolicyParameter {
+func (s *PolicyParameter) SetMapEntries(v []ParameterMapEntry) *PolicyParameter {
 	s.MapEntries = v
 	return s
 }
 
 // SetValues sets the Values field's value.
-func (s *PolicyParameter) SetValues(v []*string) *PolicyParameter {
+func (s *PolicyParameter) SetValues(v []string) *PolicyParameter {
 	s.Values = v
 	return s
 }
@@ -6847,7 +6835,7 @@ type QualificationRequirement struct {
 	// be used with the Worker_Locale QualificationType ID. When performing a set
 	// comparison by using the In or the NotIn comparator, you can use up to 15
 	// IntegerValue elements in a QualificationRequirement data structure.
-	IntegerValues []*int64 `type:"list"`
+	IntegerValues []int64 `type:"list"`
 
 	// The locale value to compare against the Qualification's value. The local
 	// value must be a valid ISO 3166 country code or supports ISO 3166-2 subdivisions.
@@ -6857,7 +6845,7 @@ type QualificationRequirement struct {
 	// NotEqualTo comparators. When performing a set comparison by using the In
 	// or the NotIn comparator, you can use up to 30 LocaleValue elements in a QualificationRequirement
 	// data structure.
-	LocaleValues []*Locale `type:"list"`
+	LocaleValues []Locale `type:"list"`
 
 	// The ID of the Qualification type for the requirement.
 	//
@@ -6897,9 +6885,6 @@ func (s *QualificationRequirement) Validate() error {
 	}
 	if s.LocaleValues != nil {
 		for i, v := range s.LocaleValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocaleValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -6919,13 +6904,13 @@ func (s *QualificationRequirement) SetComparator(v Comparator) *QualificationReq
 }
 
 // SetIntegerValues sets the IntegerValues field's value.
-func (s *QualificationRequirement) SetIntegerValues(v []*int64) *QualificationRequirement {
+func (s *QualificationRequirement) SetIntegerValues(v []int64) *QualificationRequirement {
 	s.IntegerValues = v
 	return s
 }
 
 // SetLocaleValues sets the LocaleValues field's value.
-func (s *QualificationRequirement) SetLocaleValues(v []*Locale) *QualificationRequirement {
+func (s *QualificationRequirement) SetLocaleValues(v []Locale) *QualificationRequirement {
 	s.LocaleValues = v
 	return s
 }
@@ -7340,7 +7325,7 @@ type ReviewPolicy struct {
 	_ struct{} `type:"structure"`
 
 	// Name of the parameter from the Review policy.
-	Parameters []*PolicyParameter `type:"list"`
+	Parameters []PolicyParameter `type:"list"`
 
 	// Name of a Review Policy: SimplePlurality/2011-09-01 or ScoreMyKnownAnswers/2011-09-01
 	//
@@ -7373,7 +7358,7 @@ func (s *ReviewPolicy) Validate() error {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ReviewPolicy) SetParameters(v []*PolicyParameter) *ReviewPolicy {
+func (s *ReviewPolicy) SetParameters(v []PolicyParameter) *ReviewPolicy {
 	s.Parameters = v
 	return s
 }
@@ -7390,10 +7375,10 @@ type ReviewReport struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ReviewAction objects for each action specified in the Review Policy.
-	ReviewActions []*ReviewActionDetail `type:"list"`
+	ReviewActions []ReviewActionDetail `type:"list"`
 
 	// A list of ReviewResults objects for each action specified in the Review Policy.
-	ReviewResults []*ReviewResultDetail `type:"list"`
+	ReviewResults []ReviewResultDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -7407,13 +7392,13 @@ func (s ReviewReport) GoString() string {
 }
 
 // SetReviewActions sets the ReviewActions field's value.
-func (s *ReviewReport) SetReviewActions(v []*ReviewActionDetail) *ReviewReport {
+func (s *ReviewReport) SetReviewActions(v []ReviewActionDetail) *ReviewReport {
 	s.ReviewActions = v
 	return s
 }
 
 // SetReviewResults sets the ReviewResults field's value.
-func (s *ReviewReport) SetReviewResults(v []*ReviewResultDetail) *ReviewReport {
+func (s *ReviewReport) SetReviewResults(v []ReviewResultDetail) *ReviewReport {
 	s.ReviewResults = v
 	return s
 }

@@ -5816,7 +5816,7 @@ type AddTagsToResourceInput struct {
 	// The tags to be assigned to the Amazon RDS resource.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationNameList:"Tag" type:"list" required:"true"`
+	Tags []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5854,7 +5854,7 @@ func (s *AddTagsToResourceInput) SetResourceName(v string) *AddTagsToResourceInp
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []*Tag) *AddTagsToResourceInput {
+func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	s.Tags = v
 	return s
 }
@@ -6257,7 +6257,7 @@ type CopyDBClusterParameterGroupInput struct {
 	SourceDBClusterParameterGroupIdentifier *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A description for the copied DB cluster parameter group.
 	//
@@ -6321,7 +6321,7 @@ func (s *CopyDBClusterParameterGroupInput) SetSourceDBClusterParameterGroupIdent
 }
 
 // SetTags sets the Tags field's value.
-func (s *CopyDBClusterParameterGroupInput) SetTags(v []*Tag) *CopyDBClusterParameterGroupInput {
+func (s *CopyDBClusterParameterGroupInput) SetTags(v []Tag) *CopyDBClusterParameterGroupInput {
 	s.Tags = v
 	return s
 }
@@ -6466,7 +6466,7 @@ type CopyDBClusterSnapshotInput struct {
 	SourceRegion *string `type:"string" ignore:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The identifier of the new DB cluster snapshot to create from the source DB
 	// cluster snapshot. This parameter is not case-sensitive.
@@ -6550,7 +6550,7 @@ func (s *CopyDBClusterSnapshotInput) SetSourceRegion(v string) *CopyDBClusterSna
 }
 
 // SetTags sets the Tags field's value.
-func (s *CopyDBClusterSnapshotInput) SetTags(v []*Tag) *CopyDBClusterSnapshotInput {
+func (s *CopyDBClusterSnapshotInput) SetTags(v []Tag) *CopyDBClusterSnapshotInput {
 	s.Tags = v
 	return s
 }
@@ -6611,7 +6611,7 @@ type CopyDBParameterGroupInput struct {
 	SourceDBParameterGroupIdentifier *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A description for the copied DB parameter group.
 	//
@@ -6675,7 +6675,7 @@ func (s *CopyDBParameterGroupInput) SetSourceDBParameterGroupIdentifier(v string
 }
 
 // SetTags sets the Tags field's value.
-func (s *CopyDBParameterGroupInput) SetTags(v []*Tag) *CopyDBParameterGroupInput {
+func (s *CopyDBParameterGroupInput) SetTags(v []Tag) *CopyDBParameterGroupInput {
 	s.Tags = v
 	return s
 }
@@ -6834,7 +6834,7 @@ type CopyDBSnapshotInput struct {
 	SourceRegion *string `type:"string" ignore:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The identifier for the copy of the snapshot.
 	//
@@ -6925,7 +6925,7 @@ func (s *CopyDBSnapshotInput) SetSourceRegion(v string) *CopyDBSnapshotInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CopyDBSnapshotInput) SetTags(v []*Tag) *CopyDBSnapshotInput {
+func (s *CopyDBSnapshotInput) SetTags(v []Tag) *CopyDBSnapshotInput {
 	s.Tags = v
 	return s
 }
@@ -6988,7 +6988,7 @@ type CopyOptionGroupInput struct {
 	SourceOptionGroupIdentifier *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The description for the copied option group.
 	//
@@ -7052,7 +7052,7 @@ func (s *CopyOptionGroupInput) SetSourceOptionGroupIdentifier(v string) *CopyOpt
 }
 
 // SetTags sets the Tags field's value.
-func (s *CopyOptionGroupInput) SetTags(v []*Tag) *CopyOptionGroupInput {
+func (s *CopyOptionGroupInput) SetTags(v []Tag) *CopyOptionGroupInput {
 	s.Tags = v
 	return s
 }
@@ -7099,7 +7099,7 @@ type CreateDBClusterInput struct {
 	// A list of EC2 Availability Zones that instances in the DB cluster can be
 	// created in. For information on regions and Availability Zones, see Regions
 	// and Availability Zones (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
-	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The number of days for which automated backups are retained. You must specify
 	// a minimum value of 1.
@@ -7309,10 +7309,10 @@ type CreateDBClusterInput struct {
 	StorageEncrypted *bool `type:"boolean"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A list of EC2 VPC security groups to associate with this DB cluster.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -7344,7 +7344,7 @@ func (s *CreateDBClusterInput) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *CreateDBClusterInput) SetAvailabilityZones(v []*string) *CreateDBClusterInput {
+func (s *CreateDBClusterInput) SetAvailabilityZones(v []string) *CreateDBClusterInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -7476,13 +7476,13 @@ func (s *CreateDBClusterInput) SetStorageEncrypted(v bool) *CreateDBClusterInput
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBClusterInput) SetTags(v []*Tag) *CreateDBClusterInput {
+func (s *CreateDBClusterInput) SetTags(v []Tag) *CreateDBClusterInput {
 	s.Tags = v
 	return s
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *CreateDBClusterInput) SetVpcSecurityGroupIds(v []*string) *CreateDBClusterInput {
+func (s *CreateDBClusterInput) SetVpcSecurityGroupIds(v []string) *CreateDBClusterInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -7558,7 +7558,7 @@ type CreateDBClusterParameterGroupInput struct {
 	Description *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -7612,7 +7612,7 @@ func (s *CreateDBClusterParameterGroupInput) SetDescription(v string) *CreateDBC
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBClusterParameterGroupInput) SetTags(v []*Tag) *CreateDBClusterParameterGroupInput {
+func (s *CreateDBClusterParameterGroupInput) SetTags(v []Tag) *CreateDBClusterParameterGroupInput {
 	s.Tags = v
 	return s
 }
@@ -7683,7 +7683,7 @@ type CreateDBClusterSnapshotInput struct {
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 
 	// The tags to be assigned to the DB cluster snapshot.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -7727,7 +7727,7 @@ func (s *CreateDBClusterSnapshotInput) SetDBClusterSnapshotIdentifier(v string) 
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBClusterSnapshotInput) SetTags(v []*Tag) *CreateDBClusterSnapshotInput {
+func (s *CreateDBClusterSnapshotInput) SetTags(v []Tag) *CreateDBClusterSnapshotInput {
 	s.Tags = v
 	return s
 }
@@ -8014,7 +8014,7 @@ type CreateDBInstanceInput struct {
 	// A list of DB security groups to associate with this DB instance.
 	//
 	// Default: The default DB security group for the database engine.
-	DBSecurityGroups []*string `locationNameList:"DBSecurityGroupName" type:"list"`
+	DBSecurityGroups []string `locationNameList:"DBSecurityGroupName" type:"list"`
 
 	// A DB subnet group to associate with this DB instance.
 	//
@@ -8507,7 +8507,7 @@ type CreateDBInstanceInput struct {
 	StorageType *string `type:"string"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The ARN from the Key Store with which to associate the instance for TDE encryption.
 	TdeCredentialArn *string `type:"string"`
@@ -8528,7 +8528,7 @@ type CreateDBInstanceInput struct {
 	// by the DB cluster. For more information, see CreateDBCluster.
 	//
 	// Default: The default EC2 VPC security group for the DB subnet group's VPC.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -8630,7 +8630,7 @@ func (s *CreateDBInstanceInput) SetDBParameterGroupName(v string) *CreateDBInsta
 }
 
 // SetDBSecurityGroups sets the DBSecurityGroups field's value.
-func (s *CreateDBInstanceInput) SetDBSecurityGroups(v []*string) *CreateDBInstanceInput {
+func (s *CreateDBInstanceInput) SetDBSecurityGroups(v []string) *CreateDBInstanceInput {
 	s.DBSecurityGroups = v
 	return s
 }
@@ -8780,7 +8780,7 @@ func (s *CreateDBInstanceInput) SetStorageType(v string) *CreateDBInstanceInput 
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBInstanceInput) SetTags(v []*Tag) *CreateDBInstanceInput {
+func (s *CreateDBInstanceInput) SetTags(v []Tag) *CreateDBInstanceInput {
 	s.Tags = v
 	return s
 }
@@ -8804,7 +8804,7 @@ func (s *CreateDBInstanceInput) SetTimezone(v string) *CreateDBInstanceInput {
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *CreateDBInstanceInput) SetVpcSecurityGroupIds(v []*string) *CreateDBInstanceInput {
+func (s *CreateDBInstanceInput) SetVpcSecurityGroupIds(v []string) *CreateDBInstanceInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -9089,7 +9089,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	StorageType *string `type:"string"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9247,7 +9247,7 @@ func (s *CreateDBInstanceReadReplicaInput) SetStorageType(v string) *CreateDBIns
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBInstanceReadReplicaInput) SetTags(v []*Tag) *CreateDBInstanceReadReplicaInput {
+func (s *CreateDBInstanceReadReplicaInput) SetTags(v []Tag) *CreateDBInstanceReadReplicaInput {
 	s.Tags = v
 	return s
 }
@@ -9321,7 +9321,7 @@ type CreateDBParameterGroupInput struct {
 	Description *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9375,7 +9375,7 @@ func (s *CreateDBParameterGroupInput) SetDescription(v string) *CreateDBParamete
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBParameterGroupInput) SetTags(v []*Tag) *CreateDBParameterGroupInput {
+func (s *CreateDBParameterGroupInput) SetTags(v []Tag) *CreateDBParameterGroupInput {
 	s.Tags = v
 	return s
 }
@@ -9435,7 +9435,7 @@ type CreateDBSecurityGroupInput struct {
 	DBSecurityGroupName *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9479,7 +9479,7 @@ func (s *CreateDBSecurityGroupInput) SetDBSecurityGroupName(v string) *CreateDBS
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBSecurityGroupInput) SetTags(v []*Tag) *CreateDBSecurityGroupInput {
+func (s *CreateDBSecurityGroupInput) SetTags(v []Tag) *CreateDBSecurityGroupInput {
 	s.Tags = v
 	return s
 }
@@ -9554,7 +9554,7 @@ type CreateDBSnapshotInput struct {
 	DBSnapshotIdentifier *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9598,7 +9598,7 @@ func (s *CreateDBSnapshotInput) SetDBSnapshotIdentifier(v string) *CreateDBSnaps
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBSnapshotInput) SetTags(v []*Tag) *CreateDBSnapshotInput {
+func (s *CreateDBSnapshotInput) SetTags(v []Tag) *CreateDBSnapshotInput {
 	s.Tags = v
 	return s
 }
@@ -9655,10 +9655,10 @@ type CreateDBSubnetGroupInput struct {
 	// The EC2 Subnet IDs for the DB subnet group.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
+	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9706,13 +9706,13 @@ func (s *CreateDBSubnetGroupInput) SetDBSubnetGroupName(v string) *CreateDBSubne
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateDBSubnetGroupInput) SetSubnetIds(v []*string) *CreateDBSubnetGroupInput {
+func (s *CreateDBSubnetGroupInput) SetSubnetIds(v []string) *CreateDBSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateDBSubnetGroupInput) SetTags(v []*Tag) *CreateDBSubnetGroupInput {
+func (s *CreateDBSubnetGroupInput) SetTags(v []Tag) *CreateDBSubnetGroupInput {
 	s.Tags = v
 	return s
 }
@@ -9765,7 +9765,7 @@ type CreateEventSubscriptionInput struct {
 	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
 	// topic in the Amazon RDS User Guide or by using the DescribeEventCategories
 	// action.
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
 	// The ARN is created by Amazon SNS when you create a topic and subscribe to
@@ -9794,7 +9794,7 @@ type CreateEventSubscriptionInput struct {
 	//
 	//    * If the source type is a DB snapshot, a DBSnapshotIdentifier must be
 	//    supplied.
-	SourceIds []*string `locationNameList:"SourceId" type:"list"`
+	SourceIds []string `locationNameList:"SourceId" type:"list"`
 
 	// The type of source that will be generating the events. For example, if you
 	// want to be notified of events generated by a DB instance, you would set this
@@ -9813,7 +9813,7 @@ type CreateEventSubscriptionInput struct {
 	SubscriptionName *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9851,7 +9851,7 @@ func (s *CreateEventSubscriptionInput) SetEnabled(v bool) *CreateEventSubscripti
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *CreateEventSubscriptionInput) SetEventCategories(v []*string) *CreateEventSubscriptionInput {
+func (s *CreateEventSubscriptionInput) SetEventCategories(v []string) *CreateEventSubscriptionInput {
 	s.EventCategories = v
 	return s
 }
@@ -9863,7 +9863,7 @@ func (s *CreateEventSubscriptionInput) SetSnsTopicArn(v string) *CreateEventSubs
 }
 
 // SetSourceIds sets the SourceIds field's value.
-func (s *CreateEventSubscriptionInput) SetSourceIds(v []*string) *CreateEventSubscriptionInput {
+func (s *CreateEventSubscriptionInput) SetSourceIds(v []string) *CreateEventSubscriptionInput {
 	s.SourceIds = v
 	return s
 }
@@ -9881,7 +9881,7 @@ func (s *CreateEventSubscriptionInput) SetSubscriptionName(v string) *CreateEven
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateEventSubscriptionInput) SetTags(v []*Tag) *CreateEventSubscriptionInput {
+func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscriptionInput {
 	s.Tags = v
 	return s
 }
@@ -9948,7 +9948,7 @@ type CreateOptionGroupInput struct {
 	OptionGroupName *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -10012,7 +10012,7 @@ func (s *CreateOptionGroupInput) SetOptionGroupName(v string) *CreateOptionGroup
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateOptionGroupInput) SetTags(v []*Tag) *CreateOptionGroupInput {
+func (s *CreateOptionGroupInput) SetTags(v []Tag) *CreateOptionGroupInput {
 	s.Tags = v
 	return s
 }
@@ -10069,11 +10069,11 @@ type DBCluster struct {
 	// are associated with the DB cluster. IAM roles that are associated with a
 	// DB cluster grant permission for the DB cluster to access other AWS services
 	// on your behalf.
-	AssociatedRoles []*DBClusterRole `locationNameList:"DBClusterRole" type:"list"`
+	AssociatedRoles []DBClusterRole `locationNameList:"DBClusterRole" type:"list"`
 
 	// Provides the list of EC2 Availability Zones that instances in the DB cluster
 	// can be created in.
-	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
@@ -10097,10 +10097,10 @@ type DBCluster struct {
 	DBClusterIdentifier *string `type:"string"`
 
 	// Provides the list of instances that make up the DB cluster.
-	DBClusterMembers []*DBClusterMember `locationNameList:"DBClusterMember" type:"list"`
+	DBClusterMembers []DBClusterMember `locationNameList:"DBClusterMember" type:"list"`
 
 	// Provides the list of option group memberships for this DB cluster.
-	DBClusterOptionGroupMemberships []*DBClusterOptionGroupStatus `locationNameList:"DBClusterOptionGroup" type:"list"`
+	DBClusterOptionGroupMemberships []DBClusterOptionGroupStatus `locationNameList:"DBClusterOptionGroup" type:"list"`
 
 	// Specifies the name of the DB cluster parameter group for the DB cluster.
 	DBClusterParameterGroup *string `type:"string"`
@@ -10169,7 +10169,7 @@ type DBCluster struct {
 
 	// Contains one or more identifiers of the Read Replicas associated with this
 	// DB cluster.
-	ReadReplicaIdentifiers []*string `locationNameList:"ReadReplicaIdentifier" type:"list"`
+	ReadReplicaIdentifiers []string `locationNameList:"ReadReplicaIdentifier" type:"list"`
 
 	// The reader endpoint for the DB cluster. The reader endpoint for a DB cluster
 	// load-balances connections across the Aurora Replicas that are available in
@@ -10195,7 +10195,7 @@ type DBCluster struct {
 	StorageEncrypted *bool `type:"boolean"`
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
+	VpcSecurityGroups []VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
 
 // String returns the string representation
@@ -10215,13 +10215,13 @@ func (s *DBCluster) SetAllocatedStorage(v int64) *DBCluster {
 }
 
 // SetAssociatedRoles sets the AssociatedRoles field's value.
-func (s *DBCluster) SetAssociatedRoles(v []*DBClusterRole) *DBCluster {
+func (s *DBCluster) SetAssociatedRoles(v []DBClusterRole) *DBCluster {
 	s.AssociatedRoles = v
 	return s
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DBCluster) SetAvailabilityZones(v []*string) *DBCluster {
+func (s *DBCluster) SetAvailabilityZones(v []string) *DBCluster {
 	s.AvailabilityZones = v
 	return s
 }
@@ -10263,13 +10263,13 @@ func (s *DBCluster) SetDBClusterIdentifier(v string) *DBCluster {
 }
 
 // SetDBClusterMembers sets the DBClusterMembers field's value.
-func (s *DBCluster) SetDBClusterMembers(v []*DBClusterMember) *DBCluster {
+func (s *DBCluster) SetDBClusterMembers(v []DBClusterMember) *DBCluster {
 	s.DBClusterMembers = v
 	return s
 }
 
 // SetDBClusterOptionGroupMemberships sets the DBClusterOptionGroupMemberships field's value.
-func (s *DBCluster) SetDBClusterOptionGroupMemberships(v []*DBClusterOptionGroupStatus) *DBCluster {
+func (s *DBCluster) SetDBClusterOptionGroupMemberships(v []DBClusterOptionGroupStatus) *DBCluster {
 	s.DBClusterOptionGroupMemberships = v
 	return s
 }
@@ -10383,7 +10383,7 @@ func (s *DBCluster) SetPreferredMaintenanceWindow(v string) *DBCluster {
 }
 
 // SetReadReplicaIdentifiers sets the ReadReplicaIdentifiers field's value.
-func (s *DBCluster) SetReadReplicaIdentifiers(v []*string) *DBCluster {
+func (s *DBCluster) SetReadReplicaIdentifiers(v []string) *DBCluster {
 	s.ReadReplicaIdentifiers = v
 	return s
 }
@@ -10413,7 +10413,7 @@ func (s *DBCluster) SetStorageEncrypted(v bool) *DBCluster {
 }
 
 // SetVpcSecurityGroups sets the VpcSecurityGroups field's value.
-func (s *DBCluster) SetVpcSecurityGroups(v []*VpcSecurityGroupMembership) *DBCluster {
+func (s *DBCluster) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *DBCluster {
 	s.VpcSecurityGroups = v
 	return s
 }
@@ -10630,7 +10630,7 @@ type DBClusterSnapshot struct {
 
 	// Provides the list of EC2 Availability Zones that instances in the DB cluster
 	// snapshot can be restored in.
-	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// Specifies the time when the DB cluster was created, in Universal Coordinated
 	// Time (UTC).
@@ -10712,7 +10712,7 @@ func (s *DBClusterSnapshot) SetAllocatedStorage(v int64) *DBClusterSnapshot {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DBClusterSnapshot) SetAvailabilityZones(v []*string) *DBClusterSnapshot {
+func (s *DBClusterSnapshot) SetAvailabilityZones(v []string) *DBClusterSnapshot {
 	s.AvailabilityZones = v
 	return s
 }
@@ -10848,7 +10848,7 @@ type DBClusterSnapshotAttribute struct {
 	// manual DB cluster snapshot. If a value of all is in the list, then the manual
 	// DB cluster snapshot is public and available for any AWS account to copy or
 	// restore.
-	AttributeValues []*string `locationNameList:"AttributeValue" type:"list"`
+	AttributeValues []string `locationNameList:"AttributeValue" type:"list"`
 }
 
 // String returns the string representation
@@ -10868,7 +10868,7 @@ func (s *DBClusterSnapshotAttribute) SetAttributeName(v string) *DBClusterSnapsh
 }
 
 // SetAttributeValues sets the AttributeValues field's value.
-func (s *DBClusterSnapshotAttribute) SetAttributeValues(v []*string) *DBClusterSnapshotAttribute {
+func (s *DBClusterSnapshotAttribute) SetAttributeValues(v []string) *DBClusterSnapshotAttribute {
 	s.AttributeValues = v
 	return s
 }
@@ -10884,7 +10884,7 @@ type DBClusterSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
 	// The list of attributes and values for the manual DB cluster snapshot.
-	DBClusterSnapshotAttributes []*DBClusterSnapshotAttribute `locationNameList:"DBClusterSnapshotAttribute" type:"list"`
+	DBClusterSnapshotAttributes []DBClusterSnapshotAttribute `locationNameList:"DBClusterSnapshotAttribute" type:"list"`
 
 	// The identifier of the manual DB cluster snapshot that the attributes apply
 	// to.
@@ -10902,7 +10902,7 @@ func (s DBClusterSnapshotAttributesResult) GoString() string {
 }
 
 // SetDBClusterSnapshotAttributes sets the DBClusterSnapshotAttributes field's value.
-func (s *DBClusterSnapshotAttributesResult) SetDBClusterSnapshotAttributes(v []*DBClusterSnapshotAttribute) *DBClusterSnapshotAttributesResult {
+func (s *DBClusterSnapshotAttributesResult) SetDBClusterSnapshotAttributes(v []DBClusterSnapshotAttribute) *DBClusterSnapshotAttributesResult {
 	s.DBClusterSnapshotAttributes = v
 	return s
 }
@@ -10939,15 +10939,15 @@ type DBEngineVersion struct {
 
 	// A list of the character sets supported by this engine for the CharacterSetName
 	// parameter of the CreateDBInstance action.
-	SupportedCharacterSets []*CharacterSet `locationNameList:"CharacterSet" type:"list"`
+	SupportedCharacterSets []CharacterSet `locationNameList:"CharacterSet" type:"list"`
 
 	// A list of the time zones supported by this engine for the Timezone parameter
 	// of the CreateDBInstance action.
-	SupportedTimezones []*Timezone `locationNameList:"Timezone" type:"list"`
+	SupportedTimezones []Timezone `locationNameList:"Timezone" type:"list"`
 
 	// A list of engine versions that this database engine version can be upgraded
 	// to.
-	ValidUpgradeTarget []*UpgradeTarget `locationNameList:"UpgradeTarget" type:"list"`
+	ValidUpgradeTarget []UpgradeTarget `locationNameList:"UpgradeTarget" type:"list"`
 }
 
 // String returns the string representation
@@ -10997,19 +10997,19 @@ func (s *DBEngineVersion) SetEngineVersion(v string) *DBEngineVersion {
 }
 
 // SetSupportedCharacterSets sets the SupportedCharacterSets field's value.
-func (s *DBEngineVersion) SetSupportedCharacterSets(v []*CharacterSet) *DBEngineVersion {
+func (s *DBEngineVersion) SetSupportedCharacterSets(v []CharacterSet) *DBEngineVersion {
 	s.SupportedCharacterSets = v
 	return s
 }
 
 // SetSupportedTimezones sets the SupportedTimezones field's value.
-func (s *DBEngineVersion) SetSupportedTimezones(v []*Timezone) *DBEngineVersion {
+func (s *DBEngineVersion) SetSupportedTimezones(v []Timezone) *DBEngineVersion {
 	s.SupportedTimezones = v
 	return s
 }
 
 // SetValidUpgradeTarget sets the ValidUpgradeTarget field's value.
-func (s *DBEngineVersion) SetValidUpgradeTarget(v []*UpgradeTarget) *DBEngineVersion {
+func (s *DBEngineVersion) SetValidUpgradeTarget(v []UpgradeTarget) *DBEngineVersion {
 	s.ValidUpgradeTarget = v
 	return s
 }
@@ -11091,11 +11091,11 @@ type DBInstance struct {
 	DBName *string `type:"string"`
 
 	// Provides the list of DB parameter groups applied to this DB instance.
-	DBParameterGroups []*DBParameterGroupStatus `locationNameList:"DBParameterGroup" type:"list"`
+	DBParameterGroups []DBParameterGroupStatus `locationNameList:"DBParameterGroup" type:"list"`
 
 	// Provides List of DB security group elements containing only DBSecurityGroup.Name
 	// and DBSecurityGroup.Status subelements.
-	DBSecurityGroups []*DBSecurityGroupMembership `locationNameList:"DBSecurityGroup" type:"list"`
+	DBSecurityGroups []DBSecurityGroupMembership `locationNameList:"DBSecurityGroup" type:"list"`
 
 	// Specifies information on the subnet group associated with the DB instance,
 	// including the name, description, and subnets in the subnet group.
@@ -11111,7 +11111,7 @@ type DBInstance struct {
 	DbiResourceId *string `type:"string"`
 
 	// The Active Directory Domain membership records associated with the DB instance.
-	DomainMemberships []*DomainMembership `locationNameList:"DomainMembership" type:"list"`
+	DomainMemberships []DomainMembership `locationNameList:"DomainMembership" type:"list"`
 
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint `type:"structure"`
@@ -11171,7 +11171,7 @@ type DBInstance struct {
 	MultiAZ *bool `type:"boolean"`
 
 	// Provides the list of option group memberships for this DB instance.
-	OptionGroupMemberships []*OptionGroupMembership `locationNameList:"OptionGroupMembership" type:"list"`
+	OptionGroupMemberships []OptionGroupMembership `locationNameList:"OptionGroupMembership" type:"list"`
 
 	// Specifies that changes to the DB instance are pending. This element is only
 	// included when changes are pending. Specific changes are identified by subelements.
@@ -11214,11 +11214,11 @@ type DBInstance struct {
 
 	// Contains one or more identifiers of Aurora DB clusters that are Read Replicas
 	// of this DB instance.
-	ReadReplicaDBClusterIdentifiers []*string `locationNameList:"ReadReplicaDBClusterIdentifier" type:"list"`
+	ReadReplicaDBClusterIdentifiers []string `locationNameList:"ReadReplicaDBClusterIdentifier" type:"list"`
 
 	// Contains one or more identifiers of the Read Replicas associated with this
 	// DB instance.
-	ReadReplicaDBInstanceIdentifiers []*string `locationNameList:"ReadReplicaDBInstanceIdentifier" type:"list"`
+	ReadReplicaDBInstanceIdentifiers []string `locationNameList:"ReadReplicaDBInstanceIdentifier" type:"list"`
 
 	// Contains the identifier of the source DB instance if this DB instance is
 	// a Read Replica.
@@ -11230,7 +11230,7 @@ type DBInstance struct {
 
 	// The status of a Read Replica. If the instance is not a Read Replica, this
 	// will be blank.
-	StatusInfos []*DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
+	StatusInfos []DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
 
 	// Specifies whether the DB instance is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
@@ -11249,7 +11249,7 @@ type DBInstance struct {
 
 	// Provides a list of VPC security group elements that the DB instance belongs
 	// to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
+	VpcSecurityGroups []VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
 
 // String returns the string representation
@@ -11341,13 +11341,13 @@ func (s *DBInstance) SetDBName(v string) *DBInstance {
 }
 
 // SetDBParameterGroups sets the DBParameterGroups field's value.
-func (s *DBInstance) SetDBParameterGroups(v []*DBParameterGroupStatus) *DBInstance {
+func (s *DBInstance) SetDBParameterGroups(v []DBParameterGroupStatus) *DBInstance {
 	s.DBParameterGroups = v
 	return s
 }
 
 // SetDBSecurityGroups sets the DBSecurityGroups field's value.
-func (s *DBInstance) SetDBSecurityGroups(v []*DBSecurityGroupMembership) *DBInstance {
+func (s *DBInstance) SetDBSecurityGroups(v []DBSecurityGroupMembership) *DBInstance {
 	s.DBSecurityGroups = v
 	return s
 }
@@ -11371,7 +11371,7 @@ func (s *DBInstance) SetDbiResourceId(v string) *DBInstance {
 }
 
 // SetDomainMemberships sets the DomainMemberships field's value.
-func (s *DBInstance) SetDomainMemberships(v []*DomainMembership) *DBInstance {
+func (s *DBInstance) SetDomainMemberships(v []DomainMembership) *DBInstance {
 	s.DomainMemberships = v
 	return s
 }
@@ -11461,7 +11461,7 @@ func (s *DBInstance) SetMultiAZ(v bool) *DBInstance {
 }
 
 // SetOptionGroupMemberships sets the OptionGroupMemberships field's value.
-func (s *DBInstance) SetOptionGroupMemberships(v []*OptionGroupMembership) *DBInstance {
+func (s *DBInstance) SetOptionGroupMemberships(v []OptionGroupMembership) *DBInstance {
 	s.OptionGroupMemberships = v
 	return s
 }
@@ -11509,13 +11509,13 @@ func (s *DBInstance) SetPubliclyAccessible(v bool) *DBInstance {
 }
 
 // SetReadReplicaDBClusterIdentifiers sets the ReadReplicaDBClusterIdentifiers field's value.
-func (s *DBInstance) SetReadReplicaDBClusterIdentifiers(v []*string) *DBInstance {
+func (s *DBInstance) SetReadReplicaDBClusterIdentifiers(v []string) *DBInstance {
 	s.ReadReplicaDBClusterIdentifiers = v
 	return s
 }
 
 // SetReadReplicaDBInstanceIdentifiers sets the ReadReplicaDBInstanceIdentifiers field's value.
-func (s *DBInstance) SetReadReplicaDBInstanceIdentifiers(v []*string) *DBInstance {
+func (s *DBInstance) SetReadReplicaDBInstanceIdentifiers(v []string) *DBInstance {
 	s.ReadReplicaDBInstanceIdentifiers = v
 	return s
 }
@@ -11533,7 +11533,7 @@ func (s *DBInstance) SetSecondaryAvailabilityZone(v string) *DBInstance {
 }
 
 // SetStatusInfos sets the StatusInfos field's value.
-func (s *DBInstance) SetStatusInfos(v []*DBInstanceStatusInfo) *DBInstance {
+func (s *DBInstance) SetStatusInfos(v []DBInstanceStatusInfo) *DBInstance {
 	s.StatusInfos = v
 	return s
 }
@@ -11563,7 +11563,7 @@ func (s *DBInstance) SetTimezone(v string) *DBInstance {
 }
 
 // SetVpcSecurityGroups sets the VpcSecurityGroups field's value.
-func (s *DBInstance) SetVpcSecurityGroups(v []*VpcSecurityGroupMembership) *DBInstance {
+func (s *DBInstance) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *DBInstance {
 	s.VpcSecurityGroups = v
 	return s
 }
@@ -11754,10 +11754,10 @@ type DBSecurityGroup struct {
 	DBSecurityGroupName *string `type:"string"`
 
 	// Contains a list of EC2SecurityGroup elements.
-	EC2SecurityGroups []*EC2SecurityGroup `locationNameList:"EC2SecurityGroup" type:"list"`
+	EC2SecurityGroups []EC2SecurityGroup `locationNameList:"EC2SecurityGroup" type:"list"`
 
 	// Contains a list of IPRange elements.
-	IPRanges []*IPRange `locationNameList:"IPRange" type:"list"`
+	IPRanges []IPRange `locationNameList:"IPRange" type:"list"`
 
 	// Provides the AWS ID of the owner of a specific DB security group.
 	OwnerId *string `type:"string"`
@@ -11795,13 +11795,13 @@ func (s *DBSecurityGroup) SetDBSecurityGroupName(v string) *DBSecurityGroup {
 }
 
 // SetEC2SecurityGroups sets the EC2SecurityGroups field's value.
-func (s *DBSecurityGroup) SetEC2SecurityGroups(v []*EC2SecurityGroup) *DBSecurityGroup {
+func (s *DBSecurityGroup) SetEC2SecurityGroups(v []EC2SecurityGroup) *DBSecurityGroup {
 	s.EC2SecurityGroups = v
 	return s
 }
 
 // SetIPRanges sets the IPRanges field's value.
-func (s *DBSecurityGroup) SetIPRanges(v []*IPRange) *DBSecurityGroup {
+func (s *DBSecurityGroup) SetIPRanges(v []IPRange) *DBSecurityGroup {
 	s.IPRanges = v
 	return s
 }
@@ -12148,7 +12148,7 @@ type DBSnapshotAttribute struct {
 	// list of IDs of the AWS accounts that are authorized to copy or restore the
 	// manual DB snapshot. If a value of all is in the list, then the manual DB
 	// snapshot is public and available for any AWS account to copy or restore.
-	AttributeValues []*string `locationNameList:"AttributeValue" type:"list"`
+	AttributeValues []string `locationNameList:"AttributeValue" type:"list"`
 }
 
 // String returns the string representation
@@ -12168,7 +12168,7 @@ func (s *DBSnapshotAttribute) SetAttributeName(v string) *DBSnapshotAttribute {
 }
 
 // SetAttributeValues sets the AttributeValues field's value.
-func (s *DBSnapshotAttribute) SetAttributeValues(v []*string) *DBSnapshotAttribute {
+func (s *DBSnapshotAttribute) SetAttributeValues(v []string) *DBSnapshotAttribute {
 	s.AttributeValues = v
 	return s
 }
@@ -12184,7 +12184,7 @@ type DBSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
 	// The list of attributes and values for the manual DB snapshot.
-	DBSnapshotAttributes []*DBSnapshotAttribute `locationNameList:"DBSnapshotAttribute" type:"list"`
+	DBSnapshotAttributes []DBSnapshotAttribute `locationNameList:"DBSnapshotAttribute" type:"list"`
 
 	// The identifier of the manual DB snapshot that the attributes apply to.
 	DBSnapshotIdentifier *string `type:"string"`
@@ -12201,7 +12201,7 @@ func (s DBSnapshotAttributesResult) GoString() string {
 }
 
 // SetDBSnapshotAttributes sets the DBSnapshotAttributes field's value.
-func (s *DBSnapshotAttributesResult) SetDBSnapshotAttributes(v []*DBSnapshotAttribute) *DBSnapshotAttributesResult {
+func (s *DBSnapshotAttributesResult) SetDBSnapshotAttributes(v []DBSnapshotAttribute) *DBSnapshotAttributesResult {
 	s.DBSnapshotAttributes = v
 	return s
 }
@@ -12241,7 +12241,7 @@ type DBSubnetGroup struct {
 	SubnetGroupStatus *string `type:"string"`
 
 	// Contains a list of Subnet elements.
-	Subnets []*Subnet `locationNameList:"Subnet" type:"list"`
+	Subnets []Subnet `locationNameList:"Subnet" type:"list"`
 
 	// Provides the VpcId of the DB subnet group.
 	VpcId *string `type:"string"`
@@ -12282,7 +12282,7 @@ func (s *DBSubnetGroup) SetSubnetGroupStatus(v string) *DBSubnetGroup {
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *DBSubnetGroup) SetSubnets(v []*Subnet) *DBSubnetGroup {
+func (s *DBSubnetGroup) SetSubnets(v []Subnet) *DBSubnetGroup {
 	s.Subnets = v
 	return s
 }
@@ -13095,7 +13095,7 @@ type DescribeAccountAttributesOutput struct {
 
 	// A list of AccountQuota objects. Within this list, each quota has a name,
 	// a count of usage toward the quota maximum, and a maximum value for the quota.
-	AccountQuotas []*AccountQuota `locationNameList:"AccountQuota" type:"list"`
+	AccountQuotas []AccountQuota `locationNameList:"AccountQuota" type:"list"`
 }
 
 // String returns the string representation
@@ -13109,7 +13109,7 @@ func (s DescribeAccountAttributesOutput) GoString() string {
 }
 
 // SetAccountQuotas sets the AccountQuotas field's value.
-func (s *DescribeAccountAttributesOutput) SetAccountQuotas(v []*AccountQuota) *DescribeAccountAttributesOutput {
+func (s *DescribeAccountAttributesOutput) SetAccountQuotas(v []AccountQuota) *DescribeAccountAttributesOutput {
 	s.AccountQuotas = v
 	return s
 }
@@ -13132,7 +13132,7 @@ type DescribeCertificatesInput struct {
 	CertificateIdentifier *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records
@@ -13164,9 +13164,6 @@ func (s *DescribeCertificatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificatesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -13186,7 +13183,7 @@ func (s *DescribeCertificatesInput) SetCertificateIdentifier(v string) *Describe
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeCertificatesInput) SetFilters(v []*Filter) *DescribeCertificatesInput {
+func (s *DescribeCertificatesInput) SetFilters(v []Filter) *DescribeCertificatesInput {
 	s.Filters = v
 	return s
 }
@@ -13209,7 +13206,7 @@ type DescribeCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of Certificate objects for the AWS account.
-	Certificates []*Certificate `locationNameList:"Certificate" type:"list"`
+	Certificates []Certificate `locationNameList:"Certificate" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records
@@ -13228,7 +13225,7 @@ func (s DescribeCertificatesOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *DescribeCertificatesOutput) SetCertificates(v []*Certificate) *DescribeCertificatesOutput {
+func (s *DescribeCertificatesOutput) SetCertificates(v []Certificate) *DescribeCertificatesOutput {
 	s.Certificates = v
 	return s
 }
@@ -13255,7 +13252,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 	DBClusterParameterGroupName *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameterGroups
 	// request. If this parameter is specified, the response includes only records
@@ -13287,9 +13284,6 @@ func (s *DescribeDBClusterParameterGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterParameterGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -13309,7 +13303,7 @@ func (s *DescribeDBClusterParameterGroupsInput) SetDBClusterParameterGroupName(v
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBClusterParameterGroupsInput) SetFilters(v []*Filter) *DescribeDBClusterParameterGroupsInput {
+func (s *DescribeDBClusterParameterGroupsInput) SetFilters(v []Filter) *DescribeDBClusterParameterGroupsInput {
 	s.Filters = v
 	return s
 }
@@ -13331,7 +13325,7 @@ type DescribeDBClusterParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DB cluster parameter groups.
-	DBClusterParameterGroups []*DBClusterParameterGroup `locationNameList:"DBClusterParameterGroup" type:"list"`
+	DBClusterParameterGroups []DBClusterParameterGroup `locationNameList:"DBClusterParameterGroup" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameterGroups
 	// request. If this parameter is specified, the response includes only records
@@ -13350,7 +13344,7 @@ func (s DescribeDBClusterParameterGroupsOutput) GoString() string {
 }
 
 // SetDBClusterParameterGroups sets the DBClusterParameterGroups field's value.
-func (s *DescribeDBClusterParameterGroupsOutput) SetDBClusterParameterGroups(v []*DBClusterParameterGroup) *DescribeDBClusterParameterGroupsOutput {
+func (s *DescribeDBClusterParameterGroupsOutput) SetDBClusterParameterGroups(v []DBClusterParameterGroup) *DescribeDBClusterParameterGroupsOutput {
 	s.DBClusterParameterGroups = v
 	return s
 }
@@ -13380,7 +13374,7 @@ type DescribeDBClusterParametersInput struct {
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
@@ -13420,9 +13414,6 @@ func (s *DescribeDBClusterParametersInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -13442,7 +13433,7 @@ func (s *DescribeDBClusterParametersInput) SetDBClusterParameterGroupName(v stri
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBClusterParametersInput) SetFilters(v []*Filter) *DescribeDBClusterParametersInput {
+func (s *DescribeDBClusterParametersInput) SetFilters(v []Filter) *DescribeDBClusterParametersInput {
 	s.Filters = v
 	return s
 }
@@ -13477,7 +13468,7 @@ type DescribeDBClusterParametersOutput struct {
 	Marker *string `type:"string"`
 
 	// Provides a list of parameters for the DB cluster parameter group.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -13497,7 +13488,7 @@ func (s *DescribeDBClusterParametersOutput) SetMarker(v string) *DescribeDBClust
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeDBClusterParametersOutput) SetParameters(v []*Parameter) *DescribeDBClusterParametersOutput {
+func (s *DescribeDBClusterParametersOutput) SetParameters(v []Parameter) *DescribeDBClusterParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -13605,7 +13596,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	DBClusterSnapshotIdentifier *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// Set this value to true to include manual DB cluster snapshots that are public
 	// and can be copied or restored by any AWS account, otherwise set this value
@@ -13679,9 +13670,6 @@ func (s *DescribeDBClusterSnapshotsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterSnapshotsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -13707,7 +13695,7 @@ func (s *DescribeDBClusterSnapshotsInput) SetDBClusterSnapshotIdentifier(v strin
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBClusterSnapshotsInput) SetFilters(v []*Filter) *DescribeDBClusterSnapshotsInput {
+func (s *DescribeDBClusterSnapshotsInput) SetFilters(v []Filter) *DescribeDBClusterSnapshotsInput {
 	s.Filters = v
 	return s
 }
@@ -13749,7 +13737,7 @@ type DescribeDBClusterSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Provides a list of DB cluster snapshots for the user.
-	DBClusterSnapshots []*DBClusterSnapshot `locationNameList:"DBClusterSnapshot" type:"list"`
+	DBClusterSnapshots []DBClusterSnapshot `locationNameList:"DBClusterSnapshot" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
 	// request. If this parameter is specified, the response includes only records
@@ -13768,7 +13756,7 @@ func (s DescribeDBClusterSnapshotsOutput) GoString() string {
 }
 
 // SetDBClusterSnapshots sets the DBClusterSnapshots field's value.
-func (s *DescribeDBClusterSnapshotsOutput) SetDBClusterSnapshots(v []*DBClusterSnapshot) *DescribeDBClusterSnapshotsOutput {
+func (s *DescribeDBClusterSnapshotsOutput) SetDBClusterSnapshots(v []DBClusterSnapshot) *DescribeDBClusterSnapshotsOutput {
 	s.DBClusterSnapshots = v
 	return s
 }
@@ -13803,7 +13791,7 @@ type DescribeDBClustersInput struct {
 	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	//    Resource Names (ARNs). The results list will only include information
 	//    about the DB clusters identified by these ARNs.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond
@@ -13835,9 +13823,6 @@ func (s *DescribeDBClustersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClustersInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -13857,7 +13842,7 @@ func (s *DescribeDBClustersInput) SetDBClusterIdentifier(v string) *DescribeDBCl
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBClustersInput) SetFilters(v []*Filter) *DescribeDBClustersInput {
+func (s *DescribeDBClustersInput) SetFilters(v []Filter) *DescribeDBClustersInput {
 	s.Filters = v
 	return s
 }
@@ -13881,7 +13866,7 @@ type DescribeDBClustersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Contains a list of DB clusters for the user.
-	DBClusters []*DBCluster `locationNameList:"DBCluster" type:"list"`
+	DBClusters []DBCluster `locationNameList:"DBCluster" type:"list"`
 
 	// A pagination token that can be used in a subsequent DescribeDBClusters request.
 	Marker *string `type:"string"`
@@ -13898,7 +13883,7 @@ func (s DescribeDBClustersOutput) GoString() string {
 }
 
 // SetDBClusters sets the DBClusters field's value.
-func (s *DescribeDBClustersOutput) SetDBClusters(v []*DBCluster) *DescribeDBClustersOutput {
+func (s *DescribeDBClustersOutput) SetDBClusters(v []DBCluster) *DescribeDBClustersOutput {
 	s.DBClusters = v
 	return s
 }
@@ -13937,7 +13922,7 @@ type DescribeDBEngineVersionsInput struct {
 	EngineVersion *string `type:"string"`
 
 	// Not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// If this parameter is specified and the requested engine supports the CharacterSetName
 	// parameter for CreateDBInstance, the response includes a list of supported
@@ -13979,9 +13964,6 @@ func (s *DescribeDBEngineVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBEngineVersionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14019,7 +14001,7 @@ func (s *DescribeDBEngineVersionsInput) SetEngineVersion(v string) *DescribeDBEn
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBEngineVersionsInput) SetFilters(v []*Filter) *DescribeDBEngineVersionsInput {
+func (s *DescribeDBEngineVersionsInput) SetFilters(v []Filter) *DescribeDBEngineVersionsInput {
 	s.Filters = v
 	return s
 }
@@ -14055,7 +14037,7 @@ type DescribeDBEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBEngineVersion elements.
-	DBEngineVersions []*DBEngineVersion `locationNameList:"DBEngineVersion" type:"list"`
+	DBEngineVersions []DBEngineVersion `locationNameList:"DBEngineVersion" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -14074,7 +14056,7 @@ func (s DescribeDBEngineVersionsOutput) GoString() string {
 }
 
 // SetDBEngineVersions sets the DBEngineVersions field's value.
-func (s *DescribeDBEngineVersionsOutput) SetDBEngineVersions(v []*DBEngineVersion) *DescribeDBEngineVersionsOutput {
+func (s *DescribeDBEngineVersionsOutput) SetDBEngineVersions(v []DBEngineVersion) *DescribeDBEngineVersionsOutput {
 	s.DBEngineVersions = v
 	return s
 }
@@ -14113,7 +14095,7 @@ type DescribeDBInstancesInput struct {
 	//    * db-instance-id - Accepts DB instance identifiers and DB instance Amazon
 	//    Resource Names (ARNs). The results list will only include information
 	//    about the DB instances identified by these ARNs.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.
 	// If this parameter is specified, the response includes only records beyond
@@ -14145,9 +14127,6 @@ func (s *DescribeDBInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBInstancesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14167,7 +14146,7 @@ func (s *DescribeDBInstancesInput) SetDBInstanceIdentifier(v string) *DescribeDB
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBInstancesInput) SetFilters(v []*Filter) *DescribeDBInstancesInput {
+func (s *DescribeDBInstancesInput) SetFilters(v []Filter) *DescribeDBInstancesInput {
 	s.Filters = v
 	return s
 }
@@ -14191,7 +14170,7 @@ type DescribeDBInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBInstance instances.
-	DBInstances []*DBInstance `locationNameList:"DBInstance" type:"list"`
+	DBInstances []DBInstance `locationNameList:"DBInstance" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -14210,7 +14189,7 @@ func (s DescribeDBInstancesOutput) GoString() string {
 }
 
 // SetDBInstances sets the DBInstances field's value.
-func (s *DescribeDBInstancesOutput) SetDBInstances(v []*DBInstance) *DescribeDBInstancesOutput {
+func (s *DescribeDBInstancesOutput) SetDBInstances(v []DBInstance) *DescribeDBInstancesOutput {
 	s.DBInstances = v
 	return s
 }
@@ -14294,7 +14273,7 @@ type DescribeDBLogFilesInput struct {
 	FilenameContains *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The pagination token provided in the previous request. If this parameter
 	// is specified the response includes only records beyond the marker, up to
@@ -14326,9 +14305,6 @@ func (s *DescribeDBLogFilesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14366,7 +14342,7 @@ func (s *DescribeDBLogFilesInput) SetFilenameContains(v string) *DescribeDBLogFi
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBLogFilesInput) SetFilters(v []*Filter) *DescribeDBLogFilesInput {
+func (s *DescribeDBLogFilesInput) SetFilters(v []Filter) *DescribeDBLogFilesInput {
 	s.Filters = v
 	return s
 }
@@ -14389,7 +14365,7 @@ type DescribeDBLogFilesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The DB log files returned.
-	DescribeDBLogFiles []*DescribeDBLogFilesDetails `locationNameList:"DescribeDBLogFilesDetails" type:"list"`
+	DescribeDBLogFiles []DescribeDBLogFilesDetails `locationNameList:"DescribeDBLogFilesDetails" type:"list"`
 
 	// A pagination token that can be used in a subsequent DescribeDBLogFiles request.
 	Marker *string `type:"string"`
@@ -14406,7 +14382,7 @@ func (s DescribeDBLogFilesOutput) GoString() string {
 }
 
 // SetDescribeDBLogFiles sets the DescribeDBLogFiles field's value.
-func (s *DescribeDBLogFilesOutput) SetDescribeDBLogFiles(v []*DescribeDBLogFilesDetails) *DescribeDBLogFilesOutput {
+func (s *DescribeDBLogFilesOutput) SetDescribeDBLogFiles(v []DescribeDBLogFilesDetails) *DescribeDBLogFilesOutput {
 	s.DescribeDBLogFiles = v
 	return s
 }
@@ -14433,7 +14409,7 @@ type DescribeDBParameterGroupsInput struct {
 	DBParameterGroupName *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBParameterGroups
 	// request. If this parameter is specified, the response includes only records
@@ -14465,9 +14441,6 @@ func (s *DescribeDBParameterGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBParameterGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14487,7 +14460,7 @@ func (s *DescribeDBParameterGroupsInput) SetDBParameterGroupName(v string) *Desc
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBParameterGroupsInput) SetFilters(v []*Filter) *DescribeDBParameterGroupsInput {
+func (s *DescribeDBParameterGroupsInput) SetFilters(v []Filter) *DescribeDBParameterGroupsInput {
 	s.Filters = v
 	return s
 }
@@ -14511,7 +14484,7 @@ type DescribeDBParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBParameterGroup instances.
-	DBParameterGroups []*DBParameterGroup `locationNameList:"DBParameterGroup" type:"list"`
+	DBParameterGroups []DBParameterGroup `locationNameList:"DBParameterGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -14530,7 +14503,7 @@ func (s DescribeDBParameterGroupsOutput) GoString() string {
 }
 
 // SetDBParameterGroups sets the DBParameterGroups field's value.
-func (s *DescribeDBParameterGroupsOutput) SetDBParameterGroups(v []*DBParameterGroup) *DescribeDBParameterGroupsOutput {
+func (s *DescribeDBParameterGroupsOutput) SetDBParameterGroups(v []DBParameterGroup) *DescribeDBParameterGroupsOutput {
 	s.DBParameterGroups = v
 	return s
 }
@@ -14559,7 +14532,7 @@ type DescribeDBParametersInput struct {
 	DBParameterGroupName *string `type:"string" required:"true"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBParameters
 	// request. If this parameter is specified, the response includes only records
@@ -14602,9 +14575,6 @@ func (s *DescribeDBParametersInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14624,7 +14594,7 @@ func (s *DescribeDBParametersInput) SetDBParameterGroupName(v string) *DescribeD
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBParametersInput) SetFilters(v []*Filter) *DescribeDBParametersInput {
+func (s *DescribeDBParametersInput) SetFilters(v []Filter) *DescribeDBParametersInput {
 	s.Filters = v
 	return s
 }
@@ -14659,7 +14629,7 @@ type DescribeDBParametersOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of Parameter values.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -14679,7 +14649,7 @@ func (s *DescribeDBParametersOutput) SetMarker(v string) *DescribeDBParametersOu
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeDBParametersOutput) SetParameters(v []*Parameter) *DescribeDBParametersOutput {
+func (s *DescribeDBParametersOutput) SetParameters(v []Parameter) *DescribeDBParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -14692,7 +14662,7 @@ type DescribeDBSecurityGroupsInput struct {
 	DBSecurityGroupName *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBSecurityGroups
 	// request. If this parameter is specified, the response includes only records
@@ -14724,9 +14694,6 @@ func (s *DescribeDBSecurityGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSecurityGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14746,7 +14713,7 @@ func (s *DescribeDBSecurityGroupsInput) SetDBSecurityGroupName(v string) *Descri
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBSecurityGroupsInput) SetFilters(v []*Filter) *DescribeDBSecurityGroupsInput {
+func (s *DescribeDBSecurityGroupsInput) SetFilters(v []Filter) *DescribeDBSecurityGroupsInput {
 	s.Filters = v
 	return s
 }
@@ -14770,7 +14737,7 @@ type DescribeDBSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBSecurityGroup instances.
-	DBSecurityGroups []*DBSecurityGroup `locationNameList:"DBSecurityGroup" type:"list"`
+	DBSecurityGroups []DBSecurityGroup `locationNameList:"DBSecurityGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -14789,7 +14756,7 @@ func (s DescribeDBSecurityGroupsOutput) GoString() string {
 }
 
 // SetDBSecurityGroups sets the DBSecurityGroups field's value.
-func (s *DescribeDBSecurityGroupsOutput) SetDBSecurityGroups(v []*DBSecurityGroup) *DescribeDBSecurityGroupsOutput {
+func (s *DescribeDBSecurityGroupsOutput) SetDBSecurityGroups(v []DBSecurityGroup) *DescribeDBSecurityGroupsOutput {
 	s.DBSecurityGroups = v
 	return s
 }
@@ -14903,7 +14870,7 @@ type DescribeDBSnapshotsInput struct {
 	DBSnapshotIdentifier *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// Set this value to true to include manual DB snapshots that are public and
 	// can be copied or restored by any AWS account, otherwise set this value to
@@ -14976,9 +14943,6 @@ func (s *DescribeDBSnapshotsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSnapshotsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15004,7 +14968,7 @@ func (s *DescribeDBSnapshotsInput) SetDBSnapshotIdentifier(v string) *DescribeDB
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBSnapshotsInput) SetFilters(v []*Filter) *DescribeDBSnapshotsInput {
+func (s *DescribeDBSnapshotsInput) SetFilters(v []Filter) *DescribeDBSnapshotsInput {
 	s.Filters = v
 	return s
 }
@@ -15046,7 +15010,7 @@ type DescribeDBSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBSnapshot instances.
-	DBSnapshots []*DBSnapshot `locationNameList:"DBSnapshot" type:"list"`
+	DBSnapshots []DBSnapshot `locationNameList:"DBSnapshot" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -15065,7 +15029,7 @@ func (s DescribeDBSnapshotsOutput) GoString() string {
 }
 
 // SetDBSnapshots sets the DBSnapshots field's value.
-func (s *DescribeDBSnapshotsOutput) SetDBSnapshots(v []*DBSnapshot) *DescribeDBSnapshotsOutput {
+func (s *DescribeDBSnapshotsOutput) SetDBSnapshots(v []DBSnapshot) *DescribeDBSnapshotsOutput {
 	s.DBSnapshots = v
 	return s
 }
@@ -15084,7 +15048,7 @@ type DescribeDBSubnetGroupsInput struct {
 	DBSubnetGroupName *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBSubnetGroups
 	// request. If this parameter is specified, the response includes only records
@@ -15116,9 +15080,6 @@ func (s *DescribeDBSubnetGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSubnetGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15138,7 +15099,7 @@ func (s *DescribeDBSubnetGroupsInput) SetDBSubnetGroupName(v string) *DescribeDB
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDBSubnetGroupsInput) SetFilters(v []*Filter) *DescribeDBSubnetGroupsInput {
+func (s *DescribeDBSubnetGroupsInput) SetFilters(v []Filter) *DescribeDBSubnetGroupsInput {
 	s.Filters = v
 	return s
 }
@@ -15162,7 +15123,7 @@ type DescribeDBSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBSubnetGroup instances.
-	DBSubnetGroups []*DBSubnetGroup `locationNameList:"DBSubnetGroup" type:"list"`
+	DBSubnetGroups []DBSubnetGroup `locationNameList:"DBSubnetGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -15181,7 +15142,7 @@ func (s DescribeDBSubnetGroupsOutput) GoString() string {
 }
 
 // SetDBSubnetGroups sets the DBSubnetGroups field's value.
-func (s *DescribeDBSubnetGroupsOutput) SetDBSubnetGroups(v []*DBSubnetGroup) *DescribeDBSubnetGroupsOutput {
+func (s *DescribeDBSubnetGroupsOutput) SetDBSubnetGroups(v []DBSubnetGroup) *DescribeDBSubnetGroupsOutput {
 	s.DBSubnetGroups = v
 	return s
 }
@@ -15203,7 +15164,7 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	DBParameterGroupFamily *string `type:"string" required:"true"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeEngineDefaultClusterParameters
 	// request. If this parameter is specified, the response includes only records
@@ -15239,9 +15200,6 @@ func (s *DescribeEngineDefaultClusterParametersInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15261,7 +15219,7 @@ func (s *DescribeEngineDefaultClusterParametersInput) SetDBParameterGroupFamily(
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeEngineDefaultClusterParametersInput) SetFilters(v []*Filter) *DescribeEngineDefaultClusterParametersInput {
+func (s *DescribeEngineDefaultClusterParametersInput) SetFilters(v []Filter) *DescribeEngineDefaultClusterParametersInput {
 	s.Filters = v
 	return s
 }
@@ -15313,7 +15271,7 @@ type DescribeEngineDefaultParametersInput struct {
 	DBParameterGroupFamily *string `type:"string" required:"true"`
 
 	// Not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeEngineDefaultParameters
 	// request. If this parameter is specified, the response includes only records
@@ -15349,9 +15307,6 @@ func (s *DescribeEngineDefaultParametersInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15371,7 +15326,7 @@ func (s *DescribeEngineDefaultParametersInput) SetDBParameterGroupFamily(v strin
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeEngineDefaultParametersInput) SetFilters(v []*Filter) *DescribeEngineDefaultParametersInput {
+func (s *DescribeEngineDefaultParametersInput) SetFilters(v []Filter) *DescribeEngineDefaultParametersInput {
 	s.Filters = v
 	return s
 }
@@ -15418,7 +15373,7 @@ type DescribeEventCategoriesInput struct {
 	_ struct{} `type:"structure"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The type of source that will be generating the events.
 	//
@@ -15441,9 +15396,6 @@ func (s *DescribeEventCategoriesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventCategoriesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15457,7 +15409,7 @@ func (s *DescribeEventCategoriesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeEventCategoriesInput) SetFilters(v []*Filter) *DescribeEventCategoriesInput {
+func (s *DescribeEventCategoriesInput) SetFilters(v []Filter) *DescribeEventCategoriesInput {
 	s.Filters = v
 	return s
 }
@@ -15474,7 +15426,7 @@ type DescribeEventCategoriesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of EventCategoriesMap data types.
-	EventCategoriesMapList []*EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
+	EventCategoriesMapList []EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
 }
 
 // String returns the string representation
@@ -15488,7 +15440,7 @@ func (s DescribeEventCategoriesOutput) GoString() string {
 }
 
 // SetEventCategoriesMapList sets the EventCategoriesMapList field's value.
-func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []*EventCategoriesMap) *DescribeEventCategoriesOutput {
+func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []EventCategoriesMap) *DescribeEventCategoriesOutput {
 	s.EventCategoriesMapList = v
 	return s
 }
@@ -15498,7 +15450,7 @@ type DescribeEventSubscriptionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions
 	// request. If this parameter is specified, the response includes only records
@@ -15533,9 +15485,6 @@ func (s *DescribeEventSubscriptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15549,7 +15498,7 @@ func (s *DescribeEventSubscriptionsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeEventSubscriptionsInput) SetFilters(v []*Filter) *DescribeEventSubscriptionsInput {
+func (s *DescribeEventSubscriptionsInput) SetFilters(v []Filter) *DescribeEventSubscriptionsInput {
 	s.Filters = v
 	return s
 }
@@ -15578,7 +15527,7 @@ type DescribeEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of EventSubscriptions data types.
-	EventSubscriptionsList []*EventSubscription `locationNameList:"EventSubscription" type:"list"`
+	EventSubscriptionsList []EventSubscription `locationNameList:"EventSubscription" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions
 	// request. If this parameter is specified, the response includes only records
@@ -15597,7 +15546,7 @@ func (s DescribeEventSubscriptionsOutput) GoString() string {
 }
 
 // SetEventSubscriptionsList sets the EventSubscriptionsList field's value.
-func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []*EventSubscription) *DescribeEventSubscriptionsOutput {
+func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []EventSubscription) *DescribeEventSubscriptionsOutput {
 	s.EventSubscriptionsList = v
 	return s
 }
@@ -15626,10 +15575,10 @@ type DescribeEventsInput struct {
 
 	// A list of event categories that trigger notifications for a event notification
 	// subscription.
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeEvents request.
 	// If this parameter is specified, the response includes only records beyond
@@ -15693,9 +15642,6 @@ func (s *DescribeEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15721,13 +15667,13 @@ func (s *DescribeEventsInput) SetEndTime(v time.Time) *DescribeEventsInput {
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *DescribeEventsInput) SetEventCategories(v []*string) *DescribeEventsInput {
+func (s *DescribeEventsInput) SetEventCategories(v []string) *DescribeEventsInput {
 	s.EventCategories = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeEventsInput) SetFilters(v []*Filter) *DescribeEventsInput {
+func (s *DescribeEventsInput) SetFilters(v []Filter) *DescribeEventsInput {
 	s.Filters = v
 	return s
 }
@@ -15768,7 +15714,7 @@ type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Event instances.
-	Events []*Event `locationNameList:"Event" type:"list"`
+	Events []Event `locationNameList:"Event" type:"list"`
 
 	// An optional pagination token provided by a previous Events request. If this
 	// parameter is specified, the response includes only records beyond the marker,
@@ -15787,7 +15733,7 @@ func (s DescribeEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []*Event) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 	s.Events = v
 	return s
 }
@@ -15809,7 +15755,7 @@ type DescribeOptionGroupOptionsInput struct {
 	EngineName *string `type:"string" required:"true"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// If specified, filters the results to include only options for the specified
 	// major engine version.
@@ -15849,9 +15795,6 @@ func (s *DescribeOptionGroupOptionsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -15871,7 +15814,7 @@ func (s *DescribeOptionGroupOptionsInput) SetEngineName(v string) *DescribeOptio
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeOptionGroupOptionsInput) SetFilters(v []*Filter) *DescribeOptionGroupOptionsInput {
+func (s *DescribeOptionGroupOptionsInput) SetFilters(v []Filter) *DescribeOptionGroupOptionsInput {
 	s.Filters = v
 	return s
 }
@@ -15904,7 +15847,7 @@ type DescribeOptionGroupOptionsOutput struct {
 	Marker *string `type:"string"`
 
 	// List of available option group options.
-	OptionGroupOptions []*OptionGroupOption `locationNameList:"OptionGroupOption" type:"list"`
+	OptionGroupOptions []OptionGroupOption `locationNameList:"OptionGroupOption" type:"list"`
 }
 
 // String returns the string representation
@@ -15924,7 +15867,7 @@ func (s *DescribeOptionGroupOptionsOutput) SetMarker(v string) *DescribeOptionGr
 }
 
 // SetOptionGroupOptions sets the OptionGroupOptions field's value.
-func (s *DescribeOptionGroupOptionsOutput) SetOptionGroupOptions(v []*OptionGroupOption) *DescribeOptionGroupOptionsOutput {
+func (s *DescribeOptionGroupOptionsOutput) SetOptionGroupOptions(v []OptionGroupOption) *DescribeOptionGroupOptionsOutput {
 	s.OptionGroupOptions = v
 	return s
 }
@@ -15938,7 +15881,7 @@ type DescribeOptionGroupsInput struct {
 	EngineName *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// Filters the list of option groups to only include groups associated with
 	// a specific database engine version. If specified, then EngineName must also
@@ -15979,9 +15922,6 @@ func (s *DescribeOptionGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeOptionGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16001,7 +15941,7 @@ func (s *DescribeOptionGroupsInput) SetEngineName(v string) *DescribeOptionGroup
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeOptionGroupsInput) SetFilters(v []*Filter) *DescribeOptionGroupsInput {
+func (s *DescribeOptionGroupsInput) SetFilters(v []Filter) *DescribeOptionGroupsInput {
 	s.Filters = v
 	return s
 }
@@ -16041,7 +15981,7 @@ type DescribeOptionGroupsOutput struct {
 	Marker *string `type:"string"`
 
 	// List of option groups.
-	OptionGroupsList []*OptionGroup `locationNameList:"OptionGroup" type:"list"`
+	OptionGroupsList []OptionGroup `locationNameList:"OptionGroup" type:"list"`
 }
 
 // String returns the string representation
@@ -16061,7 +16001,7 @@ func (s *DescribeOptionGroupsOutput) SetMarker(v string) *DescribeOptionGroupsOu
 }
 
 // SetOptionGroupsList sets the OptionGroupsList field's value.
-func (s *DescribeOptionGroupsOutput) SetOptionGroupsList(v []*OptionGroup) *DescribeOptionGroupsOutput {
+func (s *DescribeOptionGroupsOutput) SetOptionGroupsList(v []OptionGroup) *DescribeOptionGroupsOutput {
 	s.OptionGroupsList = v
 	return s
 }
@@ -16084,7 +16024,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	EngineVersion *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The license model filter value. Specify this parameter to show only the available
 	// offerings matching the specified license model.
@@ -16128,9 +16068,6 @@ func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16162,7 +16099,7 @@ func (s *DescribeOrderableDBInstanceOptionsInput) SetEngineVersion(v string) *De
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeOrderableDBInstanceOptionsInput) SetFilters(v []*Filter) *DescribeOrderableDBInstanceOptionsInput {
+func (s *DescribeOrderableDBInstanceOptionsInput) SetFilters(v []Filter) *DescribeOrderableDBInstanceOptionsInput {
 	s.Filters = v
 	return s
 }
@@ -16204,7 +16141,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An OrderableDBInstanceOption structure containing information about orderable
 	// options for the DB instance.
-	OrderableDBInstanceOptions []*OrderableDBInstanceOption `locationNameList:"OrderableDBInstanceOption" type:"list"`
+	OrderableDBInstanceOptions []OrderableDBInstanceOption `locationNameList:"OrderableDBInstanceOption" type:"list"`
 }
 
 // String returns the string representation
@@ -16224,7 +16161,7 @@ func (s *DescribeOrderableDBInstanceOptionsOutput) SetMarker(v string) *Describe
 }
 
 // SetOrderableDBInstanceOptions sets the OrderableDBInstanceOptions field's value.
-func (s *DescribeOrderableDBInstanceOptionsOutput) SetOrderableDBInstanceOptions(v []*OrderableDBInstanceOption) *DescribeOrderableDBInstanceOptionsOutput {
+func (s *DescribeOrderableDBInstanceOptionsOutput) SetOrderableDBInstanceOptions(v []OrderableDBInstanceOption) *DescribeOrderableDBInstanceOptionsOutput {
 	s.OrderableDBInstanceOptions = v
 	return s
 }
@@ -16245,7 +16182,7 @@ type DescribePendingMaintenanceActionsInput struct {
 	//    * db-instance-id - Accepts DB instance identifiers and DB instance ARNs.
 	//    The results list will only include pending maintenance actions for the
 	//    DB instances identified by these ARNs.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribePendingMaintenanceActions
 	// request. If this parameter is specified, the response includes only records
@@ -16280,9 +16217,6 @@ func (s *DescribePendingMaintenanceActionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribePendingMaintenanceActionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16296,7 +16230,7 @@ func (s *DescribePendingMaintenanceActionsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribePendingMaintenanceActionsInput) SetFilters(v []*Filter) *DescribePendingMaintenanceActionsInput {
+func (s *DescribePendingMaintenanceActionsInput) SetFilters(v []Filter) *DescribePendingMaintenanceActionsInput {
 	s.Filters = v
 	return s
 }
@@ -16330,7 +16264,7 @@ type DescribePendingMaintenanceActionsOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of the pending maintenance actions for the resource.
-	PendingMaintenanceActions []*ResourcePendingMaintenanceActions `locationNameList:"ResourcePendingMaintenanceActions" type:"list"`
+	PendingMaintenanceActions []ResourcePendingMaintenanceActions `locationNameList:"ResourcePendingMaintenanceActions" type:"list"`
 }
 
 // String returns the string representation
@@ -16350,7 +16284,7 @@ func (s *DescribePendingMaintenanceActionsOutput) SetMarker(v string) *DescribeP
 }
 
 // SetPendingMaintenanceActions sets the PendingMaintenanceActions field's value.
-func (s *DescribePendingMaintenanceActionsOutput) SetPendingMaintenanceActions(v []*ResourcePendingMaintenanceActions) *DescribePendingMaintenanceActionsOutput {
+func (s *DescribePendingMaintenanceActionsOutput) SetPendingMaintenanceActions(v []ResourcePendingMaintenanceActions) *DescribePendingMaintenanceActionsOutput {
 	s.PendingMaintenanceActions = v
 	return s
 }
@@ -16370,7 +16304,7 @@ type DescribeReservedDBInstancesInput struct {
 	Duration *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -16424,9 +16358,6 @@ func (s *DescribeReservedDBInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeReservedDBInstancesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16452,7 +16383,7 @@ func (s *DescribeReservedDBInstancesInput) SetDuration(v string) *DescribeReserv
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeReservedDBInstancesInput) SetFilters(v []*Filter) *DescribeReservedDBInstancesInput {
+func (s *DescribeReservedDBInstancesInput) SetFilters(v []Filter) *DescribeReservedDBInstancesInput {
 	s.Filters = v
 	return s
 }
@@ -16514,7 +16445,7 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	Duration *string `type:"string"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
@@ -16566,9 +16497,6 @@ func (s *DescribeReservedDBInstancesOfferingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeReservedDBInstancesOfferingsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16594,7 +16522,7 @@ func (s *DescribeReservedDBInstancesOfferingsInput) SetDuration(v string) *Descr
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeReservedDBInstancesOfferingsInput) SetFilters(v []*Filter) *DescribeReservedDBInstancesOfferingsInput {
+func (s *DescribeReservedDBInstancesOfferingsInput) SetFilters(v []Filter) *DescribeReservedDBInstancesOfferingsInput {
 	s.Filters = v
 	return s
 }
@@ -16647,7 +16575,7 @@ type DescribeReservedDBInstancesOfferingsOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of reserved DB instance offerings.
-	ReservedDBInstancesOfferings []*ReservedDBInstancesOffering `locationNameList:"ReservedDBInstancesOffering" type:"list"`
+	ReservedDBInstancesOfferings []ReservedDBInstancesOffering `locationNameList:"ReservedDBInstancesOffering" type:"list"`
 }
 
 // String returns the string representation
@@ -16667,7 +16595,7 @@ func (s *DescribeReservedDBInstancesOfferingsOutput) SetMarker(v string) *Descri
 }
 
 // SetReservedDBInstancesOfferings sets the ReservedDBInstancesOfferings field's value.
-func (s *DescribeReservedDBInstancesOfferingsOutput) SetReservedDBInstancesOfferings(v []*ReservedDBInstancesOffering) *DescribeReservedDBInstancesOfferingsOutput {
+func (s *DescribeReservedDBInstancesOfferingsOutput) SetReservedDBInstancesOfferings(v []ReservedDBInstancesOffering) *DescribeReservedDBInstancesOfferingsOutput {
 	s.ReservedDBInstancesOfferings = v
 	return s
 }
@@ -16684,7 +16612,7 @@ type DescribeReservedDBInstancesOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of reserved DB instances.
-	ReservedDBInstances []*ReservedDBInstance `locationNameList:"ReservedDBInstance" type:"list"`
+	ReservedDBInstances []ReservedDBInstance `locationNameList:"ReservedDBInstance" type:"list"`
 }
 
 // String returns the string representation
@@ -16704,7 +16632,7 @@ func (s *DescribeReservedDBInstancesOutput) SetMarker(v string) *DescribeReserve
 }
 
 // SetReservedDBInstances sets the ReservedDBInstances field's value.
-func (s *DescribeReservedDBInstancesOutput) SetReservedDBInstances(v []*ReservedDBInstance) *DescribeReservedDBInstancesOutput {
+func (s *DescribeReservedDBInstancesOutput) SetReservedDBInstances(v []ReservedDBInstance) *DescribeReservedDBInstancesOutput {
 	s.ReservedDBInstances = v
 	return s
 }
@@ -16714,7 +16642,7 @@ type DescribeSourceRegionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeSourceRegions
 	// request. If this parameter is specified, the response includes only records
@@ -16753,9 +16681,6 @@ func (s *DescribeSourceRegionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSourceRegionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16769,7 +16694,7 @@ func (s *DescribeSourceRegionsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeSourceRegionsInput) SetFilters(v []*Filter) *DescribeSourceRegionsInput {
+func (s *DescribeSourceRegionsInput) SetFilters(v []Filter) *DescribeSourceRegionsInput {
 	s.Filters = v
 	return s
 }
@@ -16805,7 +16730,7 @@ type DescribeSourceRegionsOutput struct {
 
 	// A list of SourceRegion instances that contains each source AWS Region that
 	// the current AWS Region can get a Read Replica or a DB snapshot from.
-	SourceRegions []*SourceRegion `locationNameList:"SourceRegion" type:"list"`
+	SourceRegions []SourceRegion `locationNameList:"SourceRegion" type:"list"`
 }
 
 // String returns the string representation
@@ -16825,7 +16750,7 @@ func (s *DescribeSourceRegionsOutput) SetMarker(v string) *DescribeSourceRegions
 }
 
 // SetSourceRegions sets the SourceRegions field's value.
-func (s *DescribeSourceRegionsOutput) SetSourceRegions(v []*SourceRegion) *DescribeSourceRegionsOutput {
+func (s *DescribeSourceRegionsOutput) SetSourceRegions(v []SourceRegion) *DescribeSourceRegionsOutput {
 	s.SourceRegions = v
 	return s
 }
@@ -17158,7 +17083,7 @@ type EngineDefaults struct {
 	Marker *string `type:"string"`
 
 	// Contains a list of engine default parameters.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -17184,7 +17109,7 @@ func (s *EngineDefaults) SetMarker(v string) *EngineDefaults {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *EngineDefaults) SetParameters(v []*Parameter) *EngineDefaults {
+func (s *EngineDefaults) SetParameters(v []Parameter) *EngineDefaults {
 	s.Parameters = v
 	return s
 }
@@ -17198,7 +17123,7 @@ type Event struct {
 	Date *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// Specifies the category for the event.
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// Provides the text of this event.
 	Message *string `type:"string"`
@@ -17230,7 +17155,7 @@ func (s *Event) SetDate(v time.Time) *Event {
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *Event) SetEventCategories(v []*string) *Event {
+func (s *Event) SetEventCategories(v []string) *Event {
 	s.EventCategories = v
 	return s
 }
@@ -17266,7 +17191,7 @@ type EventCategoriesMap struct {
 	_ struct{} `type:"structure"`
 
 	// The event categories for the specified source type
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// The source type that the returned categories belong to
 	SourceType *string `type:"string"`
@@ -17283,7 +17208,7 @@ func (s EventCategoriesMap) GoString() string {
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *EventCategoriesMap) SetEventCategories(v []*string) *EventCategoriesMap {
+func (s *EventCategoriesMap) SetEventCategories(v []string) *EventCategoriesMap {
 	s.EventCategories = v
 	return s
 }
@@ -17311,7 +17236,7 @@ type EventSubscription struct {
 	Enabled *bool `type:"boolean"`
 
 	// A list of event categories for the RDS event notification subscription.
-	EventCategoriesList []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategoriesList []string `locationNameList:"EventCategory" type:"list"`
 
 	// The Amazon Resource Name (ARN) for the event subscription.
 	EventSubscriptionArn *string `type:"string"`
@@ -17320,7 +17245,7 @@ type EventSubscription struct {
 	SnsTopicArn *string `type:"string"`
 
 	// A list of source IDs for the RDS event notification subscription.
-	SourceIdsList []*string `locationNameList:"SourceId" type:"list"`
+	SourceIdsList []string `locationNameList:"SourceId" type:"list"`
 
 	// The source type for the RDS event notification subscription.
 	SourceType *string `type:"string"`
@@ -17370,7 +17295,7 @@ func (s *EventSubscription) SetEnabled(v bool) *EventSubscription {
 }
 
 // SetEventCategoriesList sets the EventCategoriesList field's value.
-func (s *EventSubscription) SetEventCategoriesList(v []*string) *EventSubscription {
+func (s *EventSubscription) SetEventCategoriesList(v []string) *EventSubscription {
 	s.EventCategoriesList = v
 	return s
 }
@@ -17388,7 +17313,7 @@ func (s *EventSubscription) SetSnsTopicArn(v string) *EventSubscription {
 }
 
 // SetSourceIdsList sets the SourceIdsList field's value.
-func (s *EventSubscription) SetSourceIdsList(v []*string) *EventSubscription {
+func (s *EventSubscription) SetSourceIdsList(v []string) *EventSubscription {
 	s.SourceIdsList = v
 	return s
 }
@@ -17506,7 +17431,7 @@ type Filter struct {
 	// This parameter is not currently supported.
 	//
 	// Values is a required field
-	Values []*string `locationNameList:"Value" type:"list" required:"true"`
+	Values []string `locationNameList:"Value" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17544,7 +17469,7 @@ func (s *Filter) SetName(v string) *Filter {
 }
 
 // SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []*string) *Filter {
+func (s *Filter) SetValues(v []string) *Filter {
 	s.Values = v
 	return s
 }
@@ -17590,7 +17515,7 @@ type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// This parameter is not currently supported.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The Amazon RDS resource with tags to be listed. This value is an Amazon Resource
 	// Name (ARN). For information about creating an ARN, see  Constructing an RDS
@@ -17619,9 +17544,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -17635,7 +17557,7 @@ func (s *ListTagsForResourceInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListTagsForResourceInput) SetFilters(v []*Filter) *ListTagsForResourceInput {
+func (s *ListTagsForResourceInput) SetFilters(v []Filter) *ListTagsForResourceInput {
 	s.Filters = v
 	return s
 }
@@ -17651,7 +17573,7 @@ type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of tags returned by the ListTagsForResource operation.
-	TagList []*Tag `locationNameList:"Tag" type:"list"`
+	TagList []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -17665,7 +17587,7 @@ func (s ListTagsForResourceOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ListTagsForResourceOutput) SetTagList(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTagList(v []Tag) *ListTagsForResourceOutput {
 	s.TagList = v
 	return s
 }
@@ -17799,7 +17721,7 @@ type ModifyDBClusterInput struct {
 	PreferredMaintenanceWindow *string `type:"string"`
 
 	// A list of VPC security groups that the DB cluster will belong to.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -17893,7 +17815,7 @@ func (s *ModifyDBClusterInput) SetPreferredMaintenanceWindow(v string) *ModifyDB
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *ModifyDBClusterInput) SetVpcSecurityGroupIds(v []*string) *ModifyDBClusterInput {
+func (s *ModifyDBClusterInput) SetVpcSecurityGroupIds(v []string) *ModifyDBClusterInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -17948,7 +17870,7 @@ type ModifyDBClusterParameterGroupInput struct {
 	// A list of parameters in the DB cluster parameter group to modify.
 	//
 	// Parameters is a required field
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list" required:"true"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17986,7 +17908,7 @@ func (s *ModifyDBClusterParameterGroupInput) SetDBClusterParameterGroupName(v st
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ModifyDBClusterParameterGroupInput) SetParameters(v []*Parameter) *ModifyDBClusterParameterGroupInput {
+func (s *ModifyDBClusterParameterGroupInput) SetParameters(v []Parameter) *ModifyDBClusterParameterGroupInput {
 	s.Parameters = v
 	return s
 }
@@ -18016,7 +17938,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// manual DB cluster snapshot restorable by any AWS account. Do not add the
 	// all value for any manual DB cluster snapshots that contain private information
 	// that you don't want available to all AWS accounts.
-	ValuesToAdd []*string `locationNameList:"AttributeValue" type:"list"`
+	ValuesToAdd []string `locationNameList:"AttributeValue" type:"list"`
 
 	// A list of DB cluster snapshot attributes to remove from the attribute specified
 	// by AttributeName.
@@ -18027,7 +17949,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// DB cluster snapshot. If you specify all, an AWS account whose account ID
 	// is explicitly added to the restore attribute can still copy or restore a
 	// manual DB cluster snapshot.
-	ValuesToRemove []*string `locationNameList:"AttributeValue" type:"list"`
+	ValuesToRemove []string `locationNameList:"AttributeValue" type:"list"`
 }
 
 // String returns the string representation
@@ -18071,13 +17993,13 @@ func (s *ModifyDBClusterSnapshotAttributeInput) SetDBClusterSnapshotIdentifier(v
 }
 
 // SetValuesToAdd sets the ValuesToAdd field's value.
-func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToAdd(v []*string) *ModifyDBClusterSnapshotAttributeInput {
+func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToAdd(v []string) *ModifyDBClusterSnapshotAttributeInput {
 	s.ValuesToAdd = v
 	return s
 }
 
 // SetValuesToRemove sets the ValuesToRemove field's value.
-func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToRemove(v []*string) *ModifyDBClusterSnapshotAttributeInput {
+func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToRemove(v []string) *ModifyDBClusterSnapshotAttributeInput {
 	s.ValuesToRemove = v
 	return s
 }
@@ -18360,7 +18282,7 @@ type ModifyDBInstanceInput struct {
 	//    * First character must be a letter
 	//
 	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	DBSecurityGroups []*string `locationNameList:"DBSecurityGroupName" type:"list"`
+	DBSecurityGroups []string `locationNameList:"DBSecurityGroupName" type:"list"`
 
 	// The new DB subnet group for the DB instance. You can use this parameter to
 	// move your DB instance to a different VPC. If your DB instance is not in a
@@ -18634,7 +18556,7 @@ type ModifyDBInstanceInput struct {
 	//    * First character must be a letter
 	//
 	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -18728,7 +18650,7 @@ func (s *ModifyDBInstanceInput) SetDBPortNumber(v int64) *ModifyDBInstanceInput 
 }
 
 // SetDBSecurityGroups sets the DBSecurityGroups field's value.
-func (s *ModifyDBInstanceInput) SetDBSecurityGroups(v []*string) *ModifyDBInstanceInput {
+func (s *ModifyDBInstanceInput) SetDBSecurityGroups(v []string) *ModifyDBInstanceInput {
 	s.DBSecurityGroups = v
 	return s
 }
@@ -18866,7 +18788,7 @@ func (s *ModifyDBInstanceInput) SetTdeCredentialPassword(v string) *ModifyDBInst
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *ModifyDBInstanceInput) SetVpcSecurityGroupIds(v []*string) *ModifyDBInstanceInput {
+func (s *ModifyDBInstanceInput) SetVpcSecurityGroupIds(v []string) *ModifyDBInstanceInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -18938,7 +18860,7 @@ type ModifyDBParameterGroupInput struct {
 	// are applied when you reboot the DB instance without failover.
 	//
 	// Parameters is a required field
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list" required:"true"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -18976,7 +18898,7 @@ func (s *ModifyDBParameterGroupInput) SetDBParameterGroupName(v string) *ModifyD
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ModifyDBParameterGroupInput) SetParameters(v []*Parameter) *ModifyDBParameterGroupInput {
+func (s *ModifyDBParameterGroupInput) SetParameters(v []Parameter) *ModifyDBParameterGroupInput {
 	s.Parameters = v
 	return s
 }
@@ -19005,7 +18927,7 @@ type ModifyDBSnapshotAttributeInput struct {
 	// DB snapshot restorable by any AWS account. Do not add the all value for any
 	// manual DB snapshots that contain private information that you don't want
 	// available to all AWS accounts.
-	ValuesToAdd []*string `locationNameList:"AttributeValue" type:"list"`
+	ValuesToAdd []string `locationNameList:"AttributeValue" type:"list"`
 
 	// A list of DB snapshot attributes to remove from the attribute specified by
 	// AttributeName.
@@ -19015,7 +18937,7 @@ type ModifyDBSnapshotAttributeInput struct {
 	// all to remove authorization for any AWS account to copy or restore the DB
 	// snapshot. If you specify all, an AWS account whose account ID is explicitly
 	// added to the restore attribute can still copy or restore the manual DB snapshot.
-	ValuesToRemove []*string `locationNameList:"AttributeValue" type:"list"`
+	ValuesToRemove []string `locationNameList:"AttributeValue" type:"list"`
 }
 
 // String returns the string representation
@@ -19059,13 +18981,13 @@ func (s *ModifyDBSnapshotAttributeInput) SetDBSnapshotIdentifier(v string) *Modi
 }
 
 // SetValuesToAdd sets the ValuesToAdd field's value.
-func (s *ModifyDBSnapshotAttributeInput) SetValuesToAdd(v []*string) *ModifyDBSnapshotAttributeInput {
+func (s *ModifyDBSnapshotAttributeInput) SetValuesToAdd(v []string) *ModifyDBSnapshotAttributeInput {
 	s.ValuesToAdd = v
 	return s
 }
 
 // SetValuesToRemove sets the ValuesToRemove field's value.
-func (s *ModifyDBSnapshotAttributeInput) SetValuesToRemove(v []*string) *ModifyDBSnapshotAttributeInput {
+func (s *ModifyDBSnapshotAttributeInput) SetValuesToRemove(v []string) *ModifyDBSnapshotAttributeInput {
 	s.ValuesToRemove = v
 	return s
 }
@@ -19227,7 +19149,7 @@ type ModifyDBSubnetGroupInput struct {
 	// The EC2 subnet IDs for the DB subnet group.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
+	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -19271,7 +19193,7 @@ func (s *ModifyDBSubnetGroupInput) SetDBSubnetGroupName(v string) *ModifyDBSubne
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *ModifyDBSubnetGroupInput) SetSubnetIds(v []*string) *ModifyDBSubnetGroupInput {
+func (s *ModifyDBSubnetGroupInput) SetSubnetIds(v []string) *ModifyDBSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
@@ -19323,7 +19245,7 @@ type ModifyEventSubscriptionInput struct {
 	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
 	// topic in the Amazon RDS User Guide or by using the DescribeEventCategories
 	// action.
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
 	// The ARN is created by Amazon SNS when you create a topic and subscribe to
@@ -19375,7 +19297,7 @@ func (s *ModifyEventSubscriptionInput) SetEnabled(v bool) *ModifyEventSubscripti
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *ModifyEventSubscriptionInput) SetEventCategories(v []*string) *ModifyEventSubscriptionInput {
+func (s *ModifyEventSubscriptionInput) SetEventCategories(v []string) *ModifyEventSubscriptionInput {
 	s.EventCategories = v
 	return s
 }
@@ -19442,10 +19364,10 @@ type ModifyOptionGroupInput struct {
 
 	// Options in this list are added to the option group or, if already present,
 	// the specified configuration is used to update the existing configuration.
-	OptionsToInclude []*OptionConfiguration `locationNameList:"OptionConfiguration" type:"list"`
+	OptionsToInclude []OptionConfiguration `locationNameList:"OptionConfiguration" type:"list"`
 
 	// Options in this list are removed from the option group.
-	OptionsToRemove []*string `type:"list"`
+	OptionsToRemove []string `type:"list"`
 }
 
 // String returns the string representation
@@ -19467,9 +19389,6 @@ func (s *ModifyOptionGroupInput) Validate() error {
 	}
 	if s.OptionsToInclude != nil {
 		for i, v := range s.OptionsToInclude {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToInclude", i), err.(aws.ErrInvalidParams))
 			}
@@ -19495,13 +19414,13 @@ func (s *ModifyOptionGroupInput) SetOptionGroupName(v string) *ModifyOptionGroup
 }
 
 // SetOptionsToInclude sets the OptionsToInclude field's value.
-func (s *ModifyOptionGroupInput) SetOptionsToInclude(v []*OptionConfiguration) *ModifyOptionGroupInput {
+func (s *ModifyOptionGroupInput) SetOptionsToInclude(v []OptionConfiguration) *ModifyOptionGroupInput {
 	s.OptionsToInclude = v
 	return s
 }
 
 // SetOptionsToRemove sets the OptionsToRemove field's value.
-func (s *ModifyOptionGroupInput) SetOptionsToRemove(v []*string) *ModifyOptionGroupInput {
+func (s *ModifyOptionGroupInput) SetOptionsToRemove(v []string) *ModifyOptionGroupInput {
 	s.OptionsToRemove = v
 	return s
 }
@@ -19536,7 +19455,7 @@ type Option struct {
 
 	// If the option requires access to a port, then this DB security group allows
 	// access to the port.
-	DBSecurityGroupMemberships []*DBSecurityGroupMembership `locationNameList:"DBSecurityGroup" type:"list"`
+	DBSecurityGroupMemberships []DBSecurityGroupMembership `locationNameList:"DBSecurityGroup" type:"list"`
 
 	// The description of the option.
 	OptionDescription *string `type:"string"`
@@ -19545,7 +19464,7 @@ type Option struct {
 	OptionName *string `type:"string"`
 
 	// The option settings for this option.
-	OptionSettings []*OptionSetting `locationNameList:"OptionSetting" type:"list"`
+	OptionSettings []OptionSetting `locationNameList:"OptionSetting" type:"list"`
 
 	// The version of the option.
 	OptionVersion *string `type:"string"`
@@ -19561,7 +19480,7 @@ type Option struct {
 
 	// If the option requires access to a port, then this VPC security group allows
 	// access to the port.
-	VpcSecurityGroupMemberships []*VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
+	VpcSecurityGroupMemberships []VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
 
 // String returns the string representation
@@ -19575,7 +19494,7 @@ func (s Option) GoString() string {
 }
 
 // SetDBSecurityGroupMemberships sets the DBSecurityGroupMemberships field's value.
-func (s *Option) SetDBSecurityGroupMemberships(v []*DBSecurityGroupMembership) *Option {
+func (s *Option) SetDBSecurityGroupMemberships(v []DBSecurityGroupMembership) *Option {
 	s.DBSecurityGroupMemberships = v
 	return s
 }
@@ -19593,7 +19512,7 @@ func (s *Option) SetOptionName(v string) *Option {
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *Option) SetOptionSettings(v []*OptionSetting) *Option {
+func (s *Option) SetOptionSettings(v []OptionSetting) *Option {
 	s.OptionSettings = v
 	return s
 }
@@ -19623,7 +19542,7 @@ func (s *Option) SetPort(v int64) *Option {
 }
 
 // SetVpcSecurityGroupMemberships sets the VpcSecurityGroupMemberships field's value.
-func (s *Option) SetVpcSecurityGroupMemberships(v []*VpcSecurityGroupMembership) *Option {
+func (s *Option) SetVpcSecurityGroupMemberships(v []VpcSecurityGroupMembership) *Option {
 	s.VpcSecurityGroupMemberships = v
 	return s
 }
@@ -19634,7 +19553,7 @@ type OptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DBSecurityGroupMemebrship name strings used for this option.
-	DBSecurityGroupMemberships []*string `locationNameList:"DBSecurityGroupName" type:"list"`
+	DBSecurityGroupMemberships []string `locationNameList:"DBSecurityGroupName" type:"list"`
 
 	// The configuration of options to include in a group.
 	//
@@ -19642,7 +19561,7 @@ type OptionConfiguration struct {
 	OptionName *string `type:"string" required:"true"`
 
 	// The option settings to include in an option group.
-	OptionSettings []*OptionSetting `locationNameList:"OptionSetting" type:"list"`
+	OptionSettings []OptionSetting `locationNameList:"OptionSetting" type:"list"`
 
 	// The version for the option.
 	OptionVersion *string `type:"string"`
@@ -19651,7 +19570,7 @@ type OptionConfiguration struct {
 	Port *int64 `type:"integer"`
 
 	// A list of VpcSecurityGroupMemebrship name strings used for this option.
-	VpcSecurityGroupMemberships []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupMemberships []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -19679,7 +19598,7 @@ func (s *OptionConfiguration) Validate() error {
 }
 
 // SetDBSecurityGroupMemberships sets the DBSecurityGroupMemberships field's value.
-func (s *OptionConfiguration) SetDBSecurityGroupMemberships(v []*string) *OptionConfiguration {
+func (s *OptionConfiguration) SetDBSecurityGroupMemberships(v []string) *OptionConfiguration {
 	s.DBSecurityGroupMemberships = v
 	return s
 }
@@ -19691,7 +19610,7 @@ func (s *OptionConfiguration) SetOptionName(v string) *OptionConfiguration {
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *OptionConfiguration) SetOptionSettings(v []*OptionSetting) *OptionConfiguration {
+func (s *OptionConfiguration) SetOptionSettings(v []OptionSetting) *OptionConfiguration {
 	s.OptionSettings = v
 	return s
 }
@@ -19709,7 +19628,7 @@ func (s *OptionConfiguration) SetPort(v int64) *OptionConfiguration {
 }
 
 // SetVpcSecurityGroupMemberships sets the VpcSecurityGroupMemberships field's value.
-func (s *OptionConfiguration) SetVpcSecurityGroupMemberships(v []*string) *OptionConfiguration {
+func (s *OptionConfiguration) SetVpcSecurityGroupMemberships(v []string) *OptionConfiguration {
 	s.VpcSecurityGroupMemberships = v
 	return s
 }
@@ -19739,7 +19658,7 @@ type OptionGroup struct {
 	OptionGroupName *string `type:"string"`
 
 	// Indicates what options are available in the option group.
-	Options []*Option `locationNameList:"Option" type:"list"`
+	Options []Option `locationNameList:"Option" type:"list"`
 
 	// If AllowsVpcAndNonVpcInstanceMemberships is false, this field is blank. If
 	// AllowsVpcAndNonVpcInstanceMemberships is true and this field is blank, then
@@ -19796,7 +19715,7 @@ func (s *OptionGroup) SetOptionGroupName(v string) *OptionGroup {
 }
 
 // SetOptions sets the Options field's value.
-func (s *OptionGroup) SetOptions(v []*Option) *OptionGroup {
+func (s *OptionGroup) SetOptions(v []Option) *OptionGroup {
 	s.Options = v
 	return s
 }
@@ -19868,16 +19787,16 @@ type OptionGroupOption struct {
 
 	// The option settings that are available (and the default value) for each option
 	// in an option group.
-	OptionGroupOptionSettings []*OptionGroupOptionSetting `locationNameList:"OptionGroupOptionSetting" type:"list"`
+	OptionGroupOptionSettings []OptionGroupOptionSetting `locationNameList:"OptionGroupOptionSetting" type:"list"`
 
 	// The versions that are available for the option.
-	OptionGroupOptionVersions []*OptionVersion `locationNameList:"OptionVersion" type:"list"`
+	OptionGroupOptionVersions []OptionVersion `locationNameList:"OptionVersion" type:"list"`
 
 	// The options that conflict with this option.
-	OptionsConflictsWith []*string `locationNameList:"OptionConflictName" type:"list"`
+	OptionsConflictsWith []string `locationNameList:"OptionConflictName" type:"list"`
 
 	// The options that are prerequisites for this option.
-	OptionsDependedOn []*string `locationNameList:"OptionName" type:"list"`
+	OptionsDependedOn []string `locationNameList:"OptionName" type:"list"`
 
 	// Permanent options can never be removed from an option group. An option group
 	// containing a permanent option can't be removed from a DB instance.
@@ -19953,25 +19872,25 @@ func (s *OptionGroupOption) SetName(v string) *OptionGroupOption {
 }
 
 // SetOptionGroupOptionSettings sets the OptionGroupOptionSettings field's value.
-func (s *OptionGroupOption) SetOptionGroupOptionSettings(v []*OptionGroupOptionSetting) *OptionGroupOption {
+func (s *OptionGroupOption) SetOptionGroupOptionSettings(v []OptionGroupOptionSetting) *OptionGroupOption {
 	s.OptionGroupOptionSettings = v
 	return s
 }
 
 // SetOptionGroupOptionVersions sets the OptionGroupOptionVersions field's value.
-func (s *OptionGroupOption) SetOptionGroupOptionVersions(v []*OptionVersion) *OptionGroupOption {
+func (s *OptionGroupOption) SetOptionGroupOptionVersions(v []OptionVersion) *OptionGroupOption {
 	s.OptionGroupOptionVersions = v
 	return s
 }
 
 // SetOptionsConflictsWith sets the OptionsConflictsWith field's value.
-func (s *OptionGroupOption) SetOptionsConflictsWith(v []*string) *OptionGroupOption {
+func (s *OptionGroupOption) SetOptionsConflictsWith(v []string) *OptionGroupOption {
 	s.OptionsConflictsWith = v
 	return s
 }
 
 // SetOptionsDependedOn sets the OptionsDependedOn field's value.
-func (s *OptionGroupOption) SetOptionsDependedOn(v []*string) *OptionGroupOption {
+func (s *OptionGroupOption) SetOptionsDependedOn(v []string) *OptionGroupOption {
 	s.OptionsDependedOn = v
 	return s
 }
@@ -20230,7 +20149,7 @@ type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Availability Zones for the orderable DB instance.
-	AvailabilityZones []*AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The DB instance class for the orderable DB instance.
 	DBInstanceClass *string `type:"string"`
@@ -20283,7 +20202,7 @@ func (s OrderableDBInstanceOption) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *OrderableDBInstanceOption) SetAvailabilityZones(v []*AvailabilityZone) *OrderableDBInstanceOption {
+func (s *OrderableDBInstanceOption) SetAvailabilityZones(v []AvailabilityZone) *OrderableDBInstanceOption {
 	s.AvailabilityZones = v
 	return s
 }
@@ -20939,7 +20858,7 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 	ReservedDBInstancesOfferingId *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -20985,7 +20904,7 @@ func (s *PurchaseReservedDBInstancesOfferingInput) SetReservedDBInstancesOfferin
 }
 
 // SetTags sets the Tags field's value.
-func (s *PurchaseReservedDBInstancesOfferingInput) SetTags(v []*Tag) *PurchaseReservedDBInstancesOfferingInput {
+func (s *PurchaseReservedDBInstancesOfferingInput) SetTags(v []Tag) *PurchaseReservedDBInstancesOfferingInput {
 	s.Tags = v
 	return s
 }
@@ -21313,7 +21232,7 @@ type RemoveTagsFromResourceInput struct {
 	// The tag key (name) of the tag to be removed.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -21351,7 +21270,7 @@ func (s *RemoveTagsFromResourceInput) SetResourceName(v string) *RemoveTagsFromR
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []*string) *RemoveTagsFromResourceInput {
+func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -21402,7 +21321,7 @@ type ReservedDBInstance struct {
 	ProductDescription *string `type:"string"`
 
 	// The recurring price charged to run this reserved DB instance.
-	RecurringCharges []*RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
+	RecurringCharges []RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
 
 	// The Amazon Resource Name (ARN) for the reserved DB instance.
 	ReservedDBInstanceArn *string `type:"string"`
@@ -21482,7 +21401,7 @@ func (s *ReservedDBInstance) SetProductDescription(v string) *ReservedDBInstance
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedDBInstance) SetRecurringCharges(v []*RecurringCharge) *ReservedDBInstance {
+func (s *ReservedDBInstance) SetRecurringCharges(v []RecurringCharge) *ReservedDBInstance {
 	s.RecurringCharges = v
 	return s
 }
@@ -21551,7 +21470,7 @@ type ReservedDBInstancesOffering struct {
 	ProductDescription *string `type:"string"`
 
 	// The recurring price charged to run this reserved DB instance.
-	RecurringCharges []*RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
+	RecurringCharges []RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
 
 	// The offering identifier.
 	ReservedDBInstancesOfferingId *string `type:"string"`
@@ -21613,7 +21532,7 @@ func (s *ReservedDBInstancesOffering) SetProductDescription(v string) *ReservedD
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedDBInstancesOffering) SetRecurringCharges(v []*RecurringCharge) *ReservedDBInstancesOffering {
+func (s *ReservedDBInstancesOffering) SetRecurringCharges(v []RecurringCharge) *ReservedDBInstancesOffering {
 	s.RecurringCharges = v
 	return s
 }
@@ -21642,7 +21561,7 @@ type ResetDBClusterParameterGroupInput struct {
 	// A list of parameter names in the DB cluster parameter group to reset to the
 	// default values. You cannot use this parameter if the ResetAllParameters parameter
 	// is set to true.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 
 	// A value that is set to true to reset all parameters in the DB cluster parameter
 	// group to their default values, and false otherwise. You cannot use this parameter
@@ -21681,7 +21600,7 @@ func (s *ResetDBClusterParameterGroupInput) SetDBClusterParameterGroupName(v str
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ResetDBClusterParameterGroupInput) SetParameters(v []*Parameter) *ResetDBClusterParameterGroupInput {
+func (s *ResetDBClusterParameterGroupInput) SetParameters(v []Parameter) *ResetDBClusterParameterGroupInput {
 	s.Parameters = v
 	return s
 }
@@ -21767,7 +21686,7 @@ type ResetDBParameterGroupInput struct {
 	// Oracle
 	//
 	// Valid Values (for Apply method): pending-reboot
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 
 	// Specifies whether (true) or not (false) to reset all parameters in the DB
 	// parameter group to default values.
@@ -21807,7 +21726,7 @@ func (s *ResetDBParameterGroupInput) SetDBParameterGroupName(v string) *ResetDBP
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ResetDBParameterGroupInput) SetParameters(v []*Parameter) *ResetDBParameterGroupInput {
+func (s *ResetDBParameterGroupInput) SetParameters(v []Parameter) *ResetDBParameterGroupInput {
 	s.Parameters = v
 	return s
 }
@@ -21851,7 +21770,7 @@ type ResourcePendingMaintenanceActions struct {
 
 	// A list that provides details about the pending maintenance actions for the
 	// resource.
-	PendingMaintenanceActionDetails []*PendingMaintenanceAction `locationNameList:"PendingMaintenanceAction" type:"list"`
+	PendingMaintenanceActionDetails []PendingMaintenanceAction `locationNameList:"PendingMaintenanceAction" type:"list"`
 
 	// The ARN of the resource that has pending maintenance actions.
 	ResourceIdentifier *string `type:"string"`
@@ -21868,7 +21787,7 @@ func (s ResourcePendingMaintenanceActions) GoString() string {
 }
 
 // SetPendingMaintenanceActionDetails sets the PendingMaintenanceActionDetails field's value.
-func (s *ResourcePendingMaintenanceActions) SetPendingMaintenanceActionDetails(v []*PendingMaintenanceAction) *ResourcePendingMaintenanceActions {
+func (s *ResourcePendingMaintenanceActions) SetPendingMaintenanceActionDetails(v []PendingMaintenanceAction) *ResourcePendingMaintenanceActions {
 	s.PendingMaintenanceActionDetails = v
 	return s
 }
@@ -21885,7 +21804,7 @@ type RestoreDBClusterFromS3Input struct {
 
 	// A list of EC2 Availability Zones that instances in the restored DB cluster
 	// can be created in.
-	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The number of days for which automated backups of the restored DB cluster
 	// are retained. You must specify a minimum value of 1.
@@ -22081,10 +22000,10 @@ type RestoreDBClusterFromS3Input struct {
 	StorageEncrypted *bool `type:"boolean"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A list of EC2 VPC security groups to associate with the restored DB cluster.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -22140,7 +22059,7 @@ func (s *RestoreDBClusterFromS3Input) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *RestoreDBClusterFromS3Input) SetAvailabilityZones(v []*string) *RestoreDBClusterFromS3Input {
+func (s *RestoreDBClusterFromS3Input) SetAvailabilityZones(v []string) *RestoreDBClusterFromS3Input {
 	s.AvailabilityZones = v
 	return s
 }
@@ -22278,13 +22197,13 @@ func (s *RestoreDBClusterFromS3Input) SetStorageEncrypted(v bool) *RestoreDBClus
 }
 
 // SetTags sets the Tags field's value.
-func (s *RestoreDBClusterFromS3Input) SetTags(v []*Tag) *RestoreDBClusterFromS3Input {
+func (s *RestoreDBClusterFromS3Input) SetTags(v []Tag) *RestoreDBClusterFromS3Input {
 	s.Tags = v
 	return s
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *RestoreDBClusterFromS3Input) SetVpcSecurityGroupIds(v []*string) *RestoreDBClusterFromS3Input {
+func (s *RestoreDBClusterFromS3Input) SetVpcSecurityGroupIds(v []string) *RestoreDBClusterFromS3Input {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -22333,7 +22252,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// Provides the list of EC2 Availability Zones that instances in the restored
 	// DB cluster can be created in.
-	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The name of the DB cluster to create from the DB snapshot or DB cluster snapshot.
 	// This parameter isn't case-sensitive.
@@ -22427,10 +22346,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	SnapshotIdentifier *string `type:"string" required:"true"`
 
 	// The tags to be assigned to the restored DB cluster.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A list of VPC security groups that the new DB cluster will belong to.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -22466,7 +22385,7 @@ func (s *RestoreDBClusterFromSnapshotInput) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *RestoreDBClusterFromSnapshotInput) SetAvailabilityZones(v []*string) *RestoreDBClusterFromSnapshotInput {
+func (s *RestoreDBClusterFromSnapshotInput) SetAvailabilityZones(v []string) *RestoreDBClusterFromSnapshotInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -22532,13 +22451,13 @@ func (s *RestoreDBClusterFromSnapshotInput) SetSnapshotIdentifier(v string) *Res
 }
 
 // SetTags sets the Tags field's value.
-func (s *RestoreDBClusterFromSnapshotInput) SetTags(v []*Tag) *RestoreDBClusterFromSnapshotInput {
+func (s *RestoreDBClusterFromSnapshotInput) SetTags(v []Tag) *RestoreDBClusterFromSnapshotInput {
 	s.Tags = v
 	return s
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *RestoreDBClusterFromSnapshotInput) SetVpcSecurityGroupIds(v []*string) *RestoreDBClusterFromSnapshotInput {
+func (s *RestoreDBClusterFromSnapshotInput) SetVpcSecurityGroupIds(v []string) *RestoreDBClusterFromSnapshotInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -22697,7 +22616,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	SourceDBClusterIdentifier *string `type:"string" required:"true"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A value that is set to true to restore the DB cluster to the latest restorable
 	// backup time, and false otherwise.
@@ -22708,7 +22627,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	UseLatestRestorableTime *bool `type:"boolean"`
 
 	// A list of VPC security groups that the new DB cluster belongs to.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -22794,7 +22713,7 @@ func (s *RestoreDBClusterToPointInTimeInput) SetSourceDBClusterIdentifier(v stri
 }
 
 // SetTags sets the Tags field's value.
-func (s *RestoreDBClusterToPointInTimeInput) SetTags(v []*Tag) *RestoreDBClusterToPointInTimeInput {
+func (s *RestoreDBClusterToPointInTimeInput) SetTags(v []Tag) *RestoreDBClusterToPointInTimeInput {
 	s.Tags = v
 	return s
 }
@@ -22806,7 +22725,7 @@ func (s *RestoreDBClusterToPointInTimeInput) SetUseLatestRestorableTime(v bool) 
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *RestoreDBClusterToPointInTimeInput) SetVpcSecurityGroupIds(v []*string) *RestoreDBClusterToPointInTimeInput {
+func (s *RestoreDBClusterToPointInTimeInput) SetVpcSecurityGroupIds(v []string) *RestoreDBClusterToPointInTimeInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -23026,7 +22945,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	StorageType *string `type:"string"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The ARN from the Key Store with which to associate the instance for TDE encryption.
 	TdeCredentialArn *string `type:"string"`
@@ -23179,7 +23098,7 @@ func (s *RestoreDBInstanceFromDBSnapshotInput) SetStorageType(v string) *Restore
 }
 
 // SetTags sets the Tags field's value.
-func (s *RestoreDBInstanceFromDBSnapshotInput) SetTags(v []*Tag) *RestoreDBInstanceFromDBSnapshotInput {
+func (s *RestoreDBInstanceFromDBSnapshotInput) SetTags(v []Tag) *RestoreDBInstanceFromDBSnapshotInput {
 	s.Tags = v
 	return s
 }
@@ -23402,7 +23321,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	StorageType *string `type:"string"`
 
 	// A list of tags.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The name of the new database instance to be created.
 	//
@@ -23576,7 +23495,7 @@ func (s *RestoreDBInstanceToPointInTimeInput) SetStorageType(v string) *RestoreD
 }
 
 // SetTags sets the Tags field's value.
-func (s *RestoreDBInstanceToPointInTimeInput) SetTags(v []*Tag) *RestoreDBInstanceToPointInTimeInput {
+func (s *RestoreDBInstanceToPointInTimeInput) SetTags(v []Tag) *RestoreDBInstanceToPointInTimeInput {
 	s.Tags = v
 	return s
 }

@@ -639,7 +639,7 @@ type AddTagsToCertificateInput struct {
 	// The key-value pair that defines the tag. The tag value is optional.
 	//
 	// Tags is a required field
-	Tags []*Tag `min:"1" type:"list" required:"true"`
+	Tags []Tag `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -671,9 +671,6 @@ func (s *AddTagsToCertificateInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -693,7 +690,7 @@ func (s *AddTagsToCertificateInput) SetCertificateArn(v string) *AddTagsToCertif
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToCertificateInput) SetTags(v []*Tag) *AddTagsToCertificateInput {
+func (s *AddTagsToCertificateInput) SetTags(v []Tag) *AddTagsToCertificateInput {
 	s.Tags = v
 	return s
 }
@@ -735,7 +732,7 @@ type CertificateDetail struct {
 	// Contains information about the initial validation of each domain name that
 	// occurs as a result of the RequestCertificate request. This field exists only
 	// when the certificate type is AMAZON_ISSUED.
-	DomainValidationOptions []*DomainValidation `min:"1" type:"list"`
+	DomainValidationOptions []DomainValidation `min:"1" type:"list"`
 
 	// The reason the certificate request failed. This value exists only when the
 	// certificate status is FAILED. For more information, see Certificate Request
@@ -749,7 +746,7 @@ type CertificateDetail struct {
 
 	// A list of ARNs for the AWS resources that are using the certificate. A certificate
 	// can be used by multiple AWS resources.
-	InUseBy []*string `type:"list"`
+	InUseBy []string `type:"list"`
 
 	// The time at which the certificate was issued. This value exists only when
 	// the certificate type is AMAZON_ISSUED.
@@ -799,7 +796,7 @@ type CertificateDetail struct {
 	// is contained in the certificate. The subject alternative names include the
 	// canonical domain name (CN) of the certificate and additional domain names
 	// that can be used to connect to the website.
-	SubjectAlternativeNames []*string `min:"1" type:"list"`
+	SubjectAlternativeNames []string `min:"1" type:"list"`
 
 	// The source of the certificate. For certificates provided by ACM, this value
 	// is AMAZON_ISSUED. For certificates that you imported with ImportCertificate,
@@ -840,7 +837,7 @@ func (s *CertificateDetail) SetDomainName(v string) *CertificateDetail {
 }
 
 // SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *CertificateDetail) SetDomainValidationOptions(v []*DomainValidation) *CertificateDetail {
+func (s *CertificateDetail) SetDomainValidationOptions(v []DomainValidation) *CertificateDetail {
 	s.DomainValidationOptions = v
 	return s
 }
@@ -858,7 +855,7 @@ func (s *CertificateDetail) SetImportedAt(v time.Time) *CertificateDetail {
 }
 
 // SetInUseBy sets the InUseBy field's value.
-func (s *CertificateDetail) SetInUseBy(v []*string) *CertificateDetail {
+func (s *CertificateDetail) SetInUseBy(v []string) *CertificateDetail {
 	s.InUseBy = v
 	return s
 }
@@ -936,7 +933,7 @@ func (s *CertificateDetail) SetSubject(v string) *CertificateDetail {
 }
 
 // SetSubjectAlternativeNames sets the SubjectAlternativeNames field's value.
-func (s *CertificateDetail) SetSubjectAlternativeNames(v []*string) *CertificateDetail {
+func (s *CertificateDetail) SetSubjectAlternativeNames(v []string) *CertificateDetail {
 	s.SubjectAlternativeNames = v
 	return s
 }
@@ -1139,7 +1136,7 @@ type DomainValidation struct {
 	ValidationDomain *string `min:"1" type:"string"`
 
 	// A list of email addresses that ACM used to send domain validation emails.
-	ValidationEmails []*string `type:"list"`
+	ValidationEmails []string `type:"list"`
 
 	// The validation status of the domain name.
 	ValidationStatus DomainStatus `type:"string"`
@@ -1168,7 +1165,7 @@ func (s *DomainValidation) SetValidationDomain(v string) *DomainValidation {
 }
 
 // SetValidationEmails sets the ValidationEmails field's value.
-func (s *DomainValidation) SetValidationEmails(v []*string) *DomainValidation {
+func (s *DomainValidation) SetValidationEmails(v []string) *DomainValidation {
 	s.ValidationEmails = v
 	return s
 }
@@ -1540,7 +1537,7 @@ type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ACM Certificates.
-	CertificateSummaryList []*CertificateSummary `type:"list"`
+	CertificateSummaryList []CertificateSummary `type:"list"`
 
 	// When the list is truncated, this value is present and contains the value
 	// to use for the NextToken parameter in a subsequent pagination request.
@@ -1558,7 +1555,7 @@ func (s ListCertificatesOutput) GoString() string {
 }
 
 // SetCertificateSummaryList sets the CertificateSummaryList field's value.
-func (s *ListCertificatesOutput) SetCertificateSummaryList(v []*CertificateSummary) *ListCertificatesOutput {
+func (s *ListCertificatesOutput) SetCertificateSummaryList(v []CertificateSummary) *ListCertificatesOutput {
 	s.CertificateSummaryList = v
 	return s
 }
@@ -1623,7 +1620,7 @@ type ListTagsForCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The key-value pairs that define the applied tags.
-	Tags []*Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1637,7 +1634,7 @@ func (s ListTagsForCertificateOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForCertificateOutput) SetTags(v []*Tag) *ListTagsForCertificateOutput {
+func (s *ListTagsForCertificateOutput) SetTags(v []Tag) *ListTagsForCertificateOutput {
 	s.Tags = v
 	return s
 }
@@ -1660,7 +1657,7 @@ type RemoveTagsFromCertificateInput struct {
 	// The key-value pair that defines the tag to remove.
 	//
 	// Tags is a required field
-	Tags []*Tag `min:"1" type:"list" required:"true"`
+	Tags []Tag `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1692,9 +1689,6 @@ func (s *RemoveTagsFromCertificateInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1714,7 +1708,7 @@ func (s *RemoveTagsFromCertificateInput) SetCertificateArn(v string) *RemoveTags
 }
 
 // SetTags sets the Tags field's value.
-func (s *RemoveTagsFromCertificateInput) SetTags(v []*Tag) *RemoveTagsFromCertificateInput {
+func (s *RemoveTagsFromCertificateInput) SetTags(v []Tag) *RemoveTagsFromCertificateInput {
 	s.Tags = v
 	return s
 }
@@ -1748,7 +1742,7 @@ type RenewalSummary struct {
 	// type is AMAZON_ISSUED.
 	//
 	// DomainValidationOptions is a required field
-	DomainValidationOptions []*DomainValidation `min:"1" type:"list" required:"true"`
+	DomainValidationOptions []DomainValidation `min:"1" type:"list" required:"true"`
 
 	// The status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 	// of the certificate.
@@ -1768,7 +1762,7 @@ func (s RenewalSummary) GoString() string {
 }
 
 // SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *RenewalSummary) SetDomainValidationOptions(v []*DomainValidation) *RenewalSummary {
+func (s *RenewalSummary) SetDomainValidationOptions(v []DomainValidation) *RenewalSummary {
 	s.DomainValidationOptions = v
 	return s
 }
@@ -1807,7 +1801,7 @@ type RequestCertificateInput struct {
 
 	// The domain name that you want ACM to use to send you emails to validate your
 	// ownership of the domain.
-	DomainValidationOptions []*DomainValidationOption `min:"1" type:"list"`
+	DomainValidationOptions []DomainValidationOption `min:"1" type:"list"`
 
 	// Customer chosen string that can be used to distinguish between calls to RequestCertificate.
 	// Idempotency tokens time out after one hour. Therefore, if you call RequestCertificate
@@ -1824,7 +1818,7 @@ type RequestCertificateInput struct {
 	// add to an ACM Certificate is 100. However, the initial limit is 10 domain
 	// names. If you need more than 10 names, you must request a limit increase.
 	// For more information, see Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
-	SubjectAlternativeNames []*string `min:"1" type:"list"`
+	SubjectAlternativeNames []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1858,9 +1852,6 @@ func (s *RequestCertificateInput) Validate() error {
 	}
 	if s.DomainValidationOptions != nil {
 		for i, v := range s.DomainValidationOptions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DomainValidationOptions", i), err.(aws.ErrInvalidParams))
 			}
@@ -1880,7 +1871,7 @@ func (s *RequestCertificateInput) SetDomainName(v string) *RequestCertificateInp
 }
 
 // SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *RequestCertificateInput) SetDomainValidationOptions(v []*DomainValidationOption) *RequestCertificateInput {
+func (s *RequestCertificateInput) SetDomainValidationOptions(v []DomainValidationOption) *RequestCertificateInput {
 	s.DomainValidationOptions = v
 	return s
 }
@@ -1892,7 +1883,7 @@ func (s *RequestCertificateInput) SetIdempotencyToken(v string) *RequestCertific
 }
 
 // SetSubjectAlternativeNames sets the SubjectAlternativeNames field's value.
-func (s *RequestCertificateInput) SetSubjectAlternativeNames(v []*string) *RequestCertificateInput {
+func (s *RequestCertificateInput) SetSubjectAlternativeNames(v []string) *RequestCertificateInput {
 	s.SubjectAlternativeNames = v
 	return s
 }

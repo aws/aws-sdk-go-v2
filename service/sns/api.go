@@ -1833,14 +1833,14 @@ type AddPermissionInput struct {
 	// to be signed up for this service.
 	//
 	// AWSAccountId is a required field
-	AWSAccountId []*string `type:"list" required:"true"`
+	AWSAccountId []string `type:"list" required:"true"`
 
 	// The action you want to allow for the specified principal(s).
 	//
 	// Valid values: any Amazon SNS action name.
 	//
 	// ActionName is a required field
-	ActionName []*string `type:"list" required:"true"`
+	ActionName []string `type:"list" required:"true"`
 
 	// A unique identifier for the new policy statement.
 	//
@@ -1890,13 +1890,13 @@ func (s *AddPermissionInput) Validate() error {
 }
 
 // SetAWSAccountId sets the AWSAccountId field's value.
-func (s *AddPermissionInput) SetAWSAccountId(v []*string) *AddPermissionInput {
+func (s *AddPermissionInput) SetAWSAccountId(v []string) *AddPermissionInput {
 	s.AWSAccountId = v
 	return s
 }
 
 // SetActionName sets the ActionName field's value.
-func (s *AddPermissionInput) SetActionName(v []*string) *AddPermissionInput {
+func (s *AddPermissionInput) SetActionName(v []string) *AddPermissionInput {
 	s.ActionName = v
 	return s
 }
@@ -2101,7 +2101,7 @@ type CreatePlatformApplicationInput struct {
 	// For a list of attributes, see SetPlatformApplicationAttributes (http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
 	//
 	// Attributes is a required field
-	Attributes map[string]*string `type:"map" required:"true"`
+	Attributes map[string]string `type:"map" required:"true"`
 
 	// Application names must be made up of only uppercase and lowercase ASCII letters,
 	// numbers, underscores, hyphens, and periods, and must be between 1 and 256
@@ -2150,7 +2150,7 @@ func (s *CreatePlatformApplicationInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreatePlatformApplicationInput) SetAttributes(v map[string]*string) *CreatePlatformApplicationInput {
+func (s *CreatePlatformApplicationInput) SetAttributes(v map[string]string) *CreatePlatformApplicationInput {
 	s.Attributes = v
 	return s
 }
@@ -2198,7 +2198,7 @@ type CreatePlatformEndpointInput struct {
 	_ struct{} `type:"structure"`
 
 	// For a list of attributes, see SetEndpointAttributes (http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html).
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use
 	// this data. The data must be in UTF-8 format and less than 2KB.
@@ -2249,7 +2249,7 @@ func (s *CreatePlatformEndpointInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreatePlatformEndpointInput) SetAttributes(v map[string]*string) *CreatePlatformEndpointInput {
+func (s *CreatePlatformEndpointInput) SetAttributes(v map[string]string) *CreatePlatformEndpointInput {
 	s.Attributes = v
 	return s
 }
@@ -2540,7 +2540,7 @@ type Endpoint struct {
 	_ struct{} `type:"structure"`
 
 	// Attributes for endpoint.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// EndpointArn for mobile app and device.
 	EndpointArn *string `type:"string"`
@@ -2557,7 +2557,7 @@ func (s Endpoint) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Endpoint) SetAttributes(v map[string]*string) *Endpoint {
+func (s *Endpoint) SetAttributes(v map[string]string) *Endpoint {
 	s.Attributes = v
 	return s
 }
@@ -2628,7 +2628,7 @@ type GetEndpointAttributesOutput struct {
 	//    * Token -- device token, also referred to as a registration id, for an
 	//    app and mobile device. This is returned from the notification service
 	//    when an app and mobile device are registered with the notification service.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -2642,7 +2642,7 @@ func (s GetEndpointAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetEndpointAttributesOutput) SetAttributes(v map[string]*string) *GetEndpointAttributesOutput {
+func (s *GetEndpointAttributesOutput) SetAttributes(v map[string]string) *GetEndpointAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -2707,7 +2707,7 @@ type GetPlatformApplicationAttributesOutput struct {
 	//    * EventDeliveryFailure -- Topic ARN to which DeliveryFailure event notifications
 	//    should be sent upon Direct Publish delivery failure (permanent) to one
 	//    of the application's endpoints.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -2721,7 +2721,7 @@ func (s GetPlatformApplicationAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetPlatformApplicationAttributesOutput) SetAttributes(v map[string]*string) *GetPlatformApplicationAttributesOutput {
+func (s *GetPlatformApplicationAttributesOutput) SetAttributes(v map[string]string) *GetPlatformApplicationAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -2737,7 +2737,7 @@ type GetSMSAttributesInput struct {
 	// For all attribute names, see SetSMSAttributes (http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html).
 	//
 	// If you don't use this parameter, Amazon SNS returns all SMS attributes.
-	Attributes []*string `locationName:"attributes" type:"list"`
+	Attributes []string `locationName:"attributes" type:"list"`
 }
 
 // String returns the string representation
@@ -2751,7 +2751,7 @@ func (s GetSMSAttributesInput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetSMSAttributesInput) SetAttributes(v []*string) *GetSMSAttributesInput {
+func (s *GetSMSAttributesInput) SetAttributes(v []string) *GetSMSAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -2762,7 +2762,7 @@ type GetSMSAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The SMS attribute names and their values.
-	Attributes map[string]*string `locationName:"attributes" type:"map"`
+	Attributes map[string]string `locationName:"attributes" type:"map"`
 }
 
 // String returns the string representation
@@ -2776,7 +2776,7 @@ func (s GetSMSAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetSMSAttributesOutput) SetAttributes(v map[string]*string) *GetSMSAttributesOutput {
+func (s *GetSMSAttributesOutput) SetAttributes(v map[string]string) *GetSMSAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -2845,7 +2845,7 @@ type GetSubscriptionAttributesOutput struct {
 	//    * EffectiveDeliveryPolicy -- the JSON serialization of the effective delivery
 	//    policy that takes into account the topic delivery policy and account system
 	//    defaults
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -2859,7 +2859,7 @@ func (s GetSubscriptionAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetSubscriptionAttributesOutput) SetAttributes(v map[string]*string) *GetSubscriptionAttributesOutput {
+func (s *GetSubscriptionAttributesOutput) SetAttributes(v map[string]string) *GetSubscriptionAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -2934,7 +2934,7 @@ type GetTopicAttributesOutput struct {
 	//
 	//    * EffectiveDeliveryPolicy -- the JSON serialization of the effective delivery
 	//    policy that takes into account system defaults
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -2948,7 +2948,7 @@ func (s GetTopicAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetTopicAttributesOutput) SetAttributes(v map[string]*string) *GetTopicAttributesOutput {
+func (s *GetTopicAttributesOutput) SetAttributes(v map[string]string) *GetTopicAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -3011,7 +3011,7 @@ type ListEndpointsByPlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Endpoints returned for ListEndpointsByPlatformApplication action.
-	Endpoints []*Endpoint `type:"list"`
+	Endpoints []Endpoint `type:"list"`
 
 	// NextToken string is returned when calling ListEndpointsByPlatformApplication
 	// action if additional records are available after the first page results.
@@ -3029,7 +3029,7 @@ func (s ListEndpointsByPlatformApplicationOutput) GoString() string {
 }
 
 // SetEndpoints sets the Endpoints field's value.
-func (s *ListEndpointsByPlatformApplicationOutput) SetEndpoints(v []*Endpoint) *ListEndpointsByPlatformApplicationOutput {
+func (s *ListEndpointsByPlatformApplicationOutput) SetEndpoints(v []Endpoint) *ListEndpointsByPlatformApplicationOutput {
 	s.Endpoints = v
 	return s
 }
@@ -3078,7 +3078,7 @@ type ListPhoneNumbersOptedOutOutput struct {
 
 	// A list of phone numbers that are opted out of receiving SMS messages. The
 	// list is paginated, and each page can contain up to 100 phone numbers.
-	PhoneNumbers []*string `locationName:"phoneNumbers" type:"list"`
+	PhoneNumbers []string `locationName:"phoneNumbers" type:"list"`
 }
 
 // String returns the string representation
@@ -3098,7 +3098,7 @@ func (s *ListPhoneNumbersOptedOutOutput) SetNextToken(v string) *ListPhoneNumber
 }
 
 // SetPhoneNumbers sets the PhoneNumbers field's value.
-func (s *ListPhoneNumbersOptedOutOutput) SetPhoneNumbers(v []*string) *ListPhoneNumbersOptedOutOutput {
+func (s *ListPhoneNumbersOptedOutOutput) SetPhoneNumbers(v []string) *ListPhoneNumbersOptedOutOutput {
 	s.PhoneNumbers = v
 	return s
 }
@@ -3139,7 +3139,7 @@ type ListPlatformApplicationsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Platform applications returned when calling ListPlatformApplications action.
-	PlatformApplications []*PlatformApplication `type:"list"`
+	PlatformApplications []PlatformApplication `type:"list"`
 }
 
 // String returns the string representation
@@ -3159,7 +3159,7 @@ func (s *ListPlatformApplicationsOutput) SetNextToken(v string) *ListPlatformApp
 }
 
 // SetPlatformApplications sets the PlatformApplications field's value.
-func (s *ListPlatformApplicationsOutput) SetPlatformApplications(v []*PlatformApplication) *ListPlatformApplicationsOutput {
+func (s *ListPlatformApplicationsOutput) SetPlatformApplications(v []PlatformApplication) *ListPlatformApplicationsOutput {
 	s.PlatformApplications = v
 	return s
 }
@@ -3224,7 +3224,7 @@ type ListSubscriptionsByTopicOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of subscriptions.
-	Subscriptions []*Subscription `type:"list"`
+	Subscriptions []Subscription `type:"list"`
 }
 
 // String returns the string representation
@@ -3244,7 +3244,7 @@ func (s *ListSubscriptionsByTopicOutput) SetNextToken(v string) *ListSubscriptio
 }
 
 // SetSubscriptions sets the Subscriptions field's value.
-func (s *ListSubscriptionsByTopicOutput) SetSubscriptions(v []*Subscription) *ListSubscriptionsByTopicOutput {
+func (s *ListSubscriptionsByTopicOutput) SetSubscriptions(v []Subscription) *ListSubscriptionsByTopicOutput {
 	s.Subscriptions = v
 	return s
 }
@@ -3284,7 +3284,7 @@ type ListSubscriptionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of subscriptions.
-	Subscriptions []*Subscription `type:"list"`
+	Subscriptions []Subscription `type:"list"`
 }
 
 // String returns the string representation
@@ -3304,7 +3304,7 @@ func (s *ListSubscriptionsOutput) SetNextToken(v string) *ListSubscriptionsOutpu
 }
 
 // SetSubscriptions sets the Subscriptions field's value.
-func (s *ListSubscriptionsOutput) SetSubscriptions(v []*Subscription) *ListSubscriptionsOutput {
+func (s *ListSubscriptionsOutput) SetSubscriptions(v []Subscription) *ListSubscriptionsOutput {
 	s.Subscriptions = v
 	return s
 }
@@ -3343,7 +3343,7 @@ type ListTopicsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of topic ARNs.
-	Topics []*Topic `type:"list"`
+	Topics []Topic `type:"list"`
 }
 
 // String returns the string representation
@@ -3363,7 +3363,7 @@ func (s *ListTopicsOutput) SetNextToken(v string) *ListTopicsOutput {
 }
 
 // SetTopics sets the Topics field's value.
-func (s *ListTopicsOutput) SetTopics(v []*Topic) *ListTopicsOutput {
+func (s *ListTopicsOutput) SetTopics(v []Topic) *ListTopicsOutput {
 	s.Topics = v
 	return s
 }
@@ -3503,7 +3503,7 @@ type PlatformApplication struct {
 	_ struct{} `type:"structure"`
 
 	// Attributes for platform application object.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// PlatformApplicationArn for platform application object.
 	PlatformApplicationArn *string `type:"string"`
@@ -3520,7 +3520,7 @@ func (s PlatformApplication) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *PlatformApplication) SetAttributes(v map[string]*string) *PlatformApplication {
+func (s *PlatformApplication) SetAttributes(v map[string]string) *PlatformApplication {
 	s.Attributes = v
 	return s
 }
@@ -3577,7 +3577,7 @@ type PublishInput struct {
 	Message *string `type:"string" required:"true"`
 
 	// Message attributes for Publish action.
-	MessageAttributes map[string]*MessageAttributeValue `locationNameKey:"Name" locationNameValue:"Value" type:"map"`
+	MessageAttributes map[string]MessageAttributeValue `locationNameKey:"Name" locationNameValue:"Value" type:"map"`
 
 	// Set MessageStructure to json if you want to send a different message for
 	// each protocol. For example, using one publish action, you can send a short
@@ -3647,9 +3647,6 @@ func (s *PublishInput) Validate() error {
 	}
 	if s.MessageAttributes != nil {
 		for i, v := range s.MessageAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -3669,7 +3666,7 @@ func (s *PublishInput) SetMessage(v string) *PublishInput {
 }
 
 // SetMessageAttributes sets the MessageAttributes field's value.
-func (s *PublishInput) SetMessageAttributes(v map[string]*MessageAttributeValue) *PublishInput {
+func (s *PublishInput) SetMessageAttributes(v map[string]MessageAttributeValue) *PublishInput {
 	s.MessageAttributes = v
 	return s
 }
@@ -3823,7 +3820,7 @@ type SetEndpointAttributesInput struct {
 	//    when an app and mobile device are registered with the notification service.
 	//
 	// Attributes is a required field
-	Attributes map[string]*string `type:"map" required:"true"`
+	Attributes map[string]string `type:"map" required:"true"`
 
 	// EndpointArn used for SetEndpointAttributes action.
 	//
@@ -3860,7 +3857,7 @@ func (s *SetEndpointAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *SetEndpointAttributesInput) SetAttributes(v map[string]*string) *SetEndpointAttributesInput {
+func (s *SetEndpointAttributesInput) SetAttributes(v map[string]string) *SetEndpointAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -3927,7 +3924,7 @@ type SetPlatformApplicationAttributesInput struct {
 	//    delivered messages.
 	//
 	// Attributes is a required field
-	Attributes map[string]*string `type:"map" required:"true"`
+	Attributes map[string]string `type:"map" required:"true"`
 
 	// PlatformApplicationArn for SetPlatformApplicationAttributes action.
 	//
@@ -3964,7 +3961,7 @@ func (s *SetPlatformApplicationAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *SetPlatformApplicationAttributesInput) SetAttributes(v map[string]*string) *SetPlatformApplicationAttributesInput {
+func (s *SetPlatformApplicationAttributesInput) SetAttributes(v map[string]string) *SetPlatformApplicationAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -4069,7 +4066,7 @@ type SetSMSAttributesInput struct {
 	// Developer Guide.
 	//
 	// Attributes is a required field
-	Attributes map[string]*string `locationName:"attributes" type:"map" required:"true"`
+	Attributes map[string]string `locationName:"attributes" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -4097,7 +4094,7 @@ func (s *SetSMSAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *SetSMSAttributesInput) SetAttributes(v map[string]*string) *SetSMSAttributesInput {
+func (s *SetSMSAttributesInput) SetAttributes(v map[string]string) *SetSMSAttributesInput {
 	s.Attributes = v
 	return s
 }

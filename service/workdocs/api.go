@@ -2325,7 +2325,7 @@ type AddResourcePermissionsInput struct {
 	// The users, groups, or organization being granted permission.
 	//
 	// Principals is a required field
-	Principals []*SharePrincipal `type:"list" required:"true"`
+	Principals []SharePrincipal `type:"list" required:"true"`
 
 	// The ID of the resource.
 	//
@@ -2362,9 +2362,6 @@ func (s *AddResourcePermissionsInput) Validate() error {
 	}
 	if s.Principals != nil {
 		for i, v := range s.Principals {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Principals", i), err.(aws.ErrInvalidParams))
 			}
@@ -2384,7 +2381,7 @@ func (s *AddResourcePermissionsInput) SetAuthenticationToken(v string) *AddResou
 }
 
 // SetPrincipals sets the Principals field's value.
-func (s *AddResourcePermissionsInput) SetPrincipals(v []*SharePrincipal) *AddResourcePermissionsInput {
+func (s *AddResourcePermissionsInput) SetPrincipals(v []SharePrincipal) *AddResourcePermissionsInput {
 	s.Principals = v
 	return s
 }
@@ -2400,7 +2397,7 @@ type AddResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The share results.
-	ShareResults []*ShareResult `type:"list"`
+	ShareResults []ShareResult `type:"list"`
 }
 
 // String returns the string representation
@@ -2414,7 +2411,7 @@ func (s AddResourcePermissionsOutput) GoString() string {
 }
 
 // SetShareResults sets the ShareResults field's value.
-func (s *AddResourcePermissionsOutput) SetShareResults(v []*ShareResult) *AddResourcePermissionsOutput {
+func (s *AddResourcePermissionsOutput) SetShareResults(v []ShareResult) *AddResourcePermissionsOutput {
 	s.ShareResults = v
 	return s
 }
@@ -2752,7 +2749,7 @@ type CreateCustomMetadataInput struct {
 	// Custom metadata in the form of name-value pairs.
 	//
 	// CustomMetadata is a required field
-	CustomMetadata map[string]*string `min:"1" type:"map" required:"true"`
+	CustomMetadata map[string]string `min:"1" type:"map" required:"true"`
 
 	// The ID of the resource.
 	//
@@ -2811,7 +2808,7 @@ func (s *CreateCustomMetadataInput) SetAuthenticationToken(v string) *CreateCust
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
-func (s *CreateCustomMetadataInput) SetCustomMetadata(v map[string]*string) *CreateCustomMetadataInput {
+func (s *CreateCustomMetadataInput) SetCustomMetadata(v map[string]string) *CreateCustomMetadataInput {
 	s.CustomMetadata = v
 	return s
 }
@@ -2946,7 +2943,7 @@ type CreateLabelsInput struct {
 	// List of labels to add to the resource.
 	//
 	// Labels is a required field
-	Labels []*string `type:"list" required:"true"`
+	Labels []string `type:"list" required:"true"`
 
 	// The ID of the resource.
 	//
@@ -2995,7 +2992,7 @@ func (s *CreateLabelsInput) SetAuthenticationToken(v string) *CreateLabelsInput 
 }
 
 // SetLabels sets the Labels field's value.
-func (s *CreateLabelsInput) SetLabels(v []*string) *CreateLabelsInput {
+func (s *CreateLabelsInput) SetLabels(v []string) *CreateLabelsInput {
 	s.Labels = v
 	return s
 }
@@ -3506,7 +3503,7 @@ type DeleteCustomMetadataInput struct {
 	DeleteAll *bool `location:"querystring" locationName:"deleteAll" type:"boolean"`
 
 	// List of properties to remove.
-	Keys []*string `location:"querystring" locationName:"keys" type:"list"`
+	Keys []string `location:"querystring" locationName:"keys" type:"list"`
 
 	// The ID of the resource, either a document or folder.
 	//
@@ -3564,7 +3561,7 @@ func (s *DeleteCustomMetadataInput) SetDeleteAll(v bool) *DeleteCustomMetadataIn
 }
 
 // SetKeys sets the Keys field's value.
-func (s *DeleteCustomMetadataInput) SetKeys(v []*string) *DeleteCustomMetadataInput {
+func (s *DeleteCustomMetadataInput) SetKeys(v []string) *DeleteCustomMetadataInput {
 	s.Keys = v
 	return s
 }
@@ -3821,7 +3818,7 @@ type DeleteLabelsInput struct {
 	DeleteAll *bool `location:"querystring" locationName:"deleteAll" type:"boolean"`
 
 	// List of labels to delete from the resource.
-	Labels []*string `location:"querystring" locationName:"labels" type:"list"`
+	Labels []string `location:"querystring" locationName:"labels" type:"list"`
 
 	// The ID of the resource.
 	//
@@ -3872,7 +3869,7 @@ func (s *DeleteLabelsInput) SetDeleteAll(v bool) *DeleteLabelsInput {
 }
 
 // SetLabels sets the Labels field's value.
-func (s *DeleteLabelsInput) SetLabels(v []*string) *DeleteLabelsInput {
+func (s *DeleteLabelsInput) SetLabels(v []string) *DeleteLabelsInput {
 	s.Labels = v
 	return s
 }
@@ -4163,7 +4160,7 @@ type DescribeActivitiesOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// The list of activities for the specified user and time period.
-	UserActivities []*Activity `type:"list"`
+	UserActivities []Activity `type:"list"`
 }
 
 // String returns the string representation
@@ -4183,7 +4180,7 @@ func (s *DescribeActivitiesOutput) SetMarker(v string) *DescribeActivitiesOutput
 }
 
 // SetUserActivities sets the UserActivities field's value.
-func (s *DescribeActivitiesOutput) SetUserActivities(v []*Activity) *DescribeActivitiesOutput {
+func (s *DescribeActivitiesOutput) SetUserActivities(v []Activity) *DescribeActivitiesOutput {
 	s.UserActivities = v
 	return s
 }
@@ -4292,7 +4289,7 @@ type DescribeCommentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of comments for the specified document version.
-	Comments []*Comment `type:"list"`
+	Comments []Comment `type:"list"`
 
 	// The marker for the next set of results. This marker was received from a previous
 	// call.
@@ -4310,7 +4307,7 @@ func (s DescribeCommentsOutput) GoString() string {
 }
 
 // SetComments sets the Comments field's value.
-func (s *DescribeCommentsOutput) SetComments(v []*Comment) *DescribeCommentsOutput {
+func (s *DescribeCommentsOutput) SetComments(v []Comment) *DescribeCommentsOutput {
 	s.Comments = v
 	return s
 }
@@ -4433,7 +4430,7 @@ type DescribeDocumentVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The document versions.
-	DocumentVersions []*DocumentVersionMetadata `type:"list"`
+	DocumentVersions []DocumentVersionMetadata `type:"list"`
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -4451,7 +4448,7 @@ func (s DescribeDocumentVersionsOutput) GoString() string {
 }
 
 // SetDocumentVersions sets the DocumentVersions field's value.
-func (s *DescribeDocumentVersionsOutput) SetDocumentVersions(v []*DocumentVersionMetadata) *DescribeDocumentVersionsOutput {
+func (s *DescribeDocumentVersionsOutput) SetDocumentVersions(v []DocumentVersionMetadata) *DescribeDocumentVersionsOutput {
 	s.DocumentVersions = v
 	return s
 }
@@ -4587,10 +4584,10 @@ type DescribeFolderContentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The documents in the specified folder.
-	Documents []*DocumentMetadata `type:"list"`
+	Documents []DocumentMetadata `type:"list"`
 
 	// The subfolders in the specified folder.
-	Folders []*FolderMetadata `type:"list"`
+	Folders []FolderMetadata `type:"list"`
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -4608,13 +4605,13 @@ func (s DescribeFolderContentsOutput) GoString() string {
 }
 
 // SetDocuments sets the Documents field's value.
-func (s *DescribeFolderContentsOutput) SetDocuments(v []*DocumentMetadata) *DescribeFolderContentsOutput {
+func (s *DescribeFolderContentsOutput) SetDocuments(v []DocumentMetadata) *DescribeFolderContentsOutput {
 	s.Documents = v
 	return s
 }
 
 // SetFolders sets the Folders field's value.
-func (s *DescribeFolderContentsOutput) SetFolders(v []*FolderMetadata) *DescribeFolderContentsOutput {
+func (s *DescribeFolderContentsOutput) SetFolders(v []FolderMetadata) *DescribeFolderContentsOutput {
 	s.Folders = v
 	return s
 }
@@ -4702,7 +4699,7 @@ type DescribeNotificationSubscriptionsOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// The subscriptions.
-	Subscriptions []*Subscription `type:"list"`
+	Subscriptions []Subscription `type:"list"`
 }
 
 // String returns the string representation
@@ -4722,7 +4719,7 @@ func (s *DescribeNotificationSubscriptionsOutput) SetMarker(v string) *DescribeN
 }
 
 // SetSubscriptions sets the Subscriptions field's value.
-func (s *DescribeNotificationSubscriptionsOutput) SetSubscriptions(v []*Subscription) *DescribeNotificationSubscriptionsOutput {
+func (s *DescribeNotificationSubscriptionsOutput) SetSubscriptions(v []Subscription) *DescribeNotificationSubscriptionsOutput {
 	s.Subscriptions = v
 	return s
 }
@@ -4817,7 +4814,7 @@ type DescribeResourcePermissionsOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// The principals.
-	Principals []*Principal `type:"list"`
+	Principals []Principal `type:"list"`
 }
 
 // String returns the string representation
@@ -4837,7 +4834,7 @@ func (s *DescribeResourcePermissionsOutput) SetMarker(v string) *DescribeResourc
 }
 
 // SetPrincipals sets the Principals field's value.
-func (s *DescribeResourcePermissionsOutput) SetPrincipals(v []*Principal) *DescribeResourcePermissionsOutput {
+func (s *DescribeResourcePermissionsOutput) SetPrincipals(v []Principal) *DescribeResourcePermissionsOutput {
 	s.Principals = v
 	return s
 }
@@ -4916,7 +4913,7 @@ type DescribeRootFoldersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The user's special folders.
-	Folders []*FolderMetadata `type:"list"`
+	Folders []FolderMetadata `type:"list"`
 
 	// The marker for the next set of results.
 	Marker *string `min:"1" type:"string"`
@@ -4933,7 +4930,7 @@ func (s DescribeRootFoldersOutput) GoString() string {
 }
 
 // SetFolders sets the Folders field's value.
-func (s *DescribeRootFoldersOutput) SetFolders(v []*FolderMetadata) *DescribeRootFoldersOutput {
+func (s *DescribeRootFoldersOutput) SetFolders(v []FolderMetadata) *DescribeRootFoldersOutput {
 	s.Folders = v
 	return s
 }
@@ -5095,7 +5092,7 @@ type DescribeUsersOutput struct {
 	TotalNumberOfUsers *int64 `type:"long"`
 
 	// The users.
-	Users []*User `type:"list"`
+	Users []User `type:"list"`
 }
 
 // String returns the string representation
@@ -5121,7 +5118,7 @@ func (s *DescribeUsersOutput) SetTotalNumberOfUsers(v int64) *DescribeUsersOutpu
 }
 
 // SetUsers sets the Users field's value.
-func (s *DescribeUsersOutput) SetUsers(v []*User) *DescribeUsersOutput {
+func (s *DescribeUsersOutput) SetUsers(v []User) *DescribeUsersOutput {
 	s.Users = v
 	return s
 }
@@ -5141,7 +5138,7 @@ type DocumentMetadata struct {
 	Id *string `min:"1" type:"string"`
 
 	// List of labels on the document.
-	Labels []*string `type:"list"`
+	Labels []string `type:"list"`
 
 	// The latest version of the document.
 	LatestVersionMetadata *DocumentVersionMetadata `type:"structure"`
@@ -5185,7 +5182,7 @@ func (s *DocumentMetadata) SetId(v string) *DocumentMetadata {
 }
 
 // SetLabels sets the Labels field's value.
-func (s *DocumentMetadata) SetLabels(v []*string) *DocumentMetadata {
+func (s *DocumentMetadata) SetLabels(v []string) *DocumentMetadata {
 	s.Labels = v
 	return s
 }
@@ -5250,13 +5247,13 @@ type DocumentVersionMetadata struct {
 	Size *int64 `type:"long"`
 
 	// The source of the document.
-	Source map[string]*string `type:"map"`
+	Source map[string]string `type:"map"`
 
 	// The status of the document.
 	Status DocumentStatusType `type:"string"`
 
 	// The thumbnail of the document.
-	Thumbnail map[string]*string `type:"map"`
+	Thumbnail map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5330,7 +5327,7 @@ func (s *DocumentVersionMetadata) SetSize(v int64) *DocumentVersionMetadata {
 }
 
 // SetSource sets the Source field's value.
-func (s *DocumentVersionMetadata) SetSource(v map[string]*string) *DocumentVersionMetadata {
+func (s *DocumentVersionMetadata) SetSource(v map[string]string) *DocumentVersionMetadata {
 	s.Source = v
 	return s
 }
@@ -5342,7 +5339,7 @@ func (s *DocumentVersionMetadata) SetStatus(v DocumentStatusType) *DocumentVersi
 }
 
 // SetThumbnail sets the Thumbnail field's value.
-func (s *DocumentVersionMetadata) SetThumbnail(v map[string]*string) *DocumentVersionMetadata {
+func (s *DocumentVersionMetadata) SetThumbnail(v map[string]string) *DocumentVersionMetadata {
 	s.Thumbnail = v
 	return s
 }
@@ -5362,7 +5359,7 @@ type FolderMetadata struct {
 	Id *string `min:"1" type:"string"`
 
 	// List of labels on the folder.
-	Labels []*string `type:"list"`
+	Labels []string `type:"list"`
 
 	// The size of the latest version of the folder metadata.
 	LatestVersionSize *int64 `type:"long"`
@@ -5415,7 +5412,7 @@ func (s *FolderMetadata) SetId(v string) *FolderMetadata {
 }
 
 // SetLabels sets the Labels field's value.
-func (s *FolderMetadata) SetLabels(v []*string) *FolderMetadata {
+func (s *FolderMetadata) SetLabels(v []string) *FolderMetadata {
 	s.Labels = v
 	return s
 }
@@ -5599,7 +5596,7 @@ type GetDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The custom metadata on the document.
-	CustomMetadata map[string]*string `min:"1" type:"map"`
+	CustomMetadata map[string]string `min:"1" type:"map"`
 
 	// The metadata details of the document.
 	Metadata *DocumentMetadata `type:"structure"`
@@ -5616,7 +5613,7 @@ func (s GetDocumentOutput) GoString() string {
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
-func (s *GetDocumentOutput) SetCustomMetadata(v map[string]*string) *GetDocumentOutput {
+func (s *GetDocumentOutput) SetCustomMetadata(v map[string]string) *GetDocumentOutput {
 	s.CustomMetadata = v
 	return s
 }
@@ -5845,7 +5842,7 @@ type GetDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The custom metadata on the document version.
-	CustomMetadata map[string]*string `min:"1" type:"map"`
+	CustomMetadata map[string]string `min:"1" type:"map"`
 
 	// The version metadata.
 	Metadata *DocumentVersionMetadata `type:"structure"`
@@ -5862,7 +5859,7 @@ func (s GetDocumentVersionOutput) GoString() string {
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
-func (s *GetDocumentVersionOutput) SetCustomMetadata(v map[string]*string) *GetDocumentVersionOutput {
+func (s *GetDocumentVersionOutput) SetCustomMetadata(v map[string]string) *GetDocumentVersionOutput {
 	s.CustomMetadata = v
 	return s
 }
@@ -5943,7 +5940,7 @@ type GetFolderOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The custom metadata on the folder.
-	CustomMetadata map[string]*string `min:"1" type:"map"`
+	CustomMetadata map[string]string `min:"1" type:"map"`
 
 	// The metadata of the folder.
 	Metadata *FolderMetadata `type:"structure"`
@@ -5960,7 +5957,7 @@ func (s GetFolderOutput) GoString() string {
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
-func (s *GetFolderOutput) SetCustomMetadata(v map[string]*string) *GetFolderOutput {
+func (s *GetFolderOutput) SetCustomMetadata(v map[string]string) *GetFolderOutput {
 	s.CustomMetadata = v
 	return s
 }
@@ -6280,10 +6277,10 @@ type Participants struct {
 	_ struct{} `type:"structure"`
 
 	// The list of user groups.
-	Groups []*GroupMetadata `type:"list"`
+	Groups []GroupMetadata `type:"list"`
 
 	// The list of users.
-	Users []*UserMetadata `type:"list"`
+	Users []UserMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -6297,13 +6294,13 @@ func (s Participants) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *Participants) SetGroups(v []*GroupMetadata) *Participants {
+func (s *Participants) SetGroups(v []GroupMetadata) *Participants {
 	s.Groups = v
 	return s
 }
 
 // SetUsers sets the Users field's value.
-func (s *Participants) SetUsers(v []*UserMetadata) *Participants {
+func (s *Participants) SetUsers(v []UserMetadata) *Participants {
 	s.Users = v
 	return s
 }
@@ -6351,7 +6348,7 @@ type Principal struct {
 	Id *string `min:"1" type:"string"`
 
 	// The permission information for the resource.
-	Roles []*PermissionInfo `type:"list"`
+	Roles []PermissionInfo `type:"list"`
 
 	// The type of resource.
 	Type PrincipalType `type:"string"`
@@ -6374,7 +6371,7 @@ func (s *Principal) SetId(v string) *Principal {
 }
 
 // SetRoles sets the Roles field's value.
-func (s *Principal) SetRoles(v []*PermissionInfo) *Principal {
+func (s *Principal) SetRoles(v []PermissionInfo) *Principal {
 	s.Roles = v
 	return s
 }
@@ -6640,7 +6637,7 @@ type ResourcePath struct {
 	_ struct{} `type:"structure"`
 
 	// The components of the resource path.
-	Components []*ResourcePathComponent `type:"list"`
+	Components []ResourcePathComponent `type:"list"`
 }
 
 // String returns the string representation
@@ -6654,7 +6651,7 @@ func (s ResourcePath) GoString() string {
 }
 
 // SetComponents sets the Components field's value.
-func (s *ResourcePath) SetComponents(v []*ResourcePathComponent) *ResourcePath {
+func (s *ResourcePath) SetComponents(v []ResourcePathComponent) *ResourcePath {
 	s.Components = v
 	return s
 }
@@ -7360,7 +7357,7 @@ type UploadMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The signed headers.
-	SignedHeaders map[string]*string `type:"map"`
+	SignedHeaders map[string]string `type:"map"`
 
 	// The URL of the upload.
 	UploadUrl *string `min:"1" type:"string"`
@@ -7377,7 +7374,7 @@ func (s UploadMetadata) GoString() string {
 }
 
 // SetSignedHeaders sets the SignedHeaders field's value.
-func (s *UploadMetadata) SetSignedHeaders(v map[string]*string) *UploadMetadata {
+func (s *UploadMetadata) SetSignedHeaders(v map[string]string) *UploadMetadata {
 	s.SignedHeaders = v
 	return s
 }

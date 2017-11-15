@@ -4029,7 +4029,7 @@ type AddCustomAttributesInput struct {
 	// An array of custom attributes, such as Mutable and Name.
 	//
 	// CustomAttributes is a required field
-	CustomAttributes []*SchemaAttributeType `min:"1" type:"list" required:"true"`
+	CustomAttributes []SchemaAttributeType `min:"1" type:"list" required:"true"`
 
 	// The user pool ID for the user pool where you want to add custom attributes.
 	//
@@ -4066,9 +4066,6 @@ func (s *AddCustomAttributesInput) Validate() error {
 	}
 	if s.CustomAttributes != nil {
 		for i, v := range s.CustomAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CustomAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -4082,7 +4079,7 @@ func (s *AddCustomAttributesInput) Validate() error {
 }
 
 // SetCustomAttributes sets the CustomAttributes field's value.
-func (s *AddCustomAttributesInput) SetCustomAttributes(v []*SchemaAttributeType) *AddCustomAttributesInput {
+func (s *AddCustomAttributesInput) SetCustomAttributes(v []SchemaAttributeType) *AddCustomAttributesInput {
 	s.CustomAttributes = v
 	return s
 }
@@ -4415,7 +4412,7 @@ type AdminCreateUserInput struct {
 	//    contains the code and username will be sent. Required if the phone_number_verified
 	//    attribute is set to True, or if "SMS" is specified in the DesiredDeliveryMediums
 	//    parameter.
-	UserAttributes []*AttributeType `type:"list"`
+	UserAttributes []AttributeType `type:"list"`
 
 	// The user pool ID for the user pool where the user will be created.
 	//
@@ -4441,7 +4438,7 @@ type AdminCreateUserInput struct {
 	// process.
 	//
 	// The user's validation data is not persisted.
-	ValidationData []*AttributeType `type:"list"`
+	ValidationData []AttributeType `type:"list"`
 }
 
 // String returns the string representation
@@ -4476,9 +4473,6 @@ func (s *AdminCreateUserInput) Validate() error {
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -4486,9 +4480,6 @@ func (s *AdminCreateUserInput) Validate() error {
 	}
 	if s.ValidationData != nil {
 		for i, v := range s.ValidationData {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(aws.ErrInvalidParams))
 			}
@@ -4526,7 +4517,7 @@ func (s *AdminCreateUserInput) SetTemporaryPassword(v string) *AdminCreateUserIn
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *AdminCreateUserInput) SetUserAttributes(v []*AttributeType) *AdminCreateUserInput {
+func (s *AdminCreateUserInput) SetUserAttributes(v []AttributeType) *AdminCreateUserInput {
 	s.UserAttributes = v
 	return s
 }
@@ -4544,7 +4535,7 @@ func (s *AdminCreateUserInput) SetUsername(v string) *AdminCreateUserInput {
 }
 
 // SetValidationData sets the ValidationData field's value.
-func (s *AdminCreateUserInput) SetValidationData(v []*AttributeType) *AdminCreateUserInput {
+func (s *AdminCreateUserInput) SetValidationData(v []AttributeType) *AdminCreateUserInput {
 	s.ValidationData = v
 	return s
 }
@@ -4585,7 +4576,7 @@ type AdminDeleteUserAttributesInput struct {
 	// name.
 	//
 	// UserAttributeNames is a required field
-	UserAttributeNames []*string `type:"list" required:"true"`
+	UserAttributeNames []string `type:"list" required:"true"`
 
 	// The user pool ID for the user pool where you want to delete user attributes.
 	//
@@ -4637,7 +4628,7 @@ func (s *AdminDeleteUserAttributesInput) Validate() error {
 }
 
 // SetUserAttributeNames sets the UserAttributeNames field's value.
-func (s *AdminDeleteUserAttributesInput) SetUserAttributeNames(v []*string) *AdminDeleteUserAttributesInput {
+func (s *AdminDeleteUserAttributesInput) SetUserAttributeNames(v []string) *AdminDeleteUserAttributesInput {
 	s.UserAttributeNames = v
 	return s
 }
@@ -5256,10 +5247,10 @@ type AdminGetUserOutput struct {
 	Enabled *bool `type:"boolean"`
 
 	// Specifies the options for MFA (e.g., email or phone number).
-	MFAOptions []*MFAOptionType `type:"list"`
+	MFAOptions []MFAOptionType `type:"list"`
 
 	// An array of name-value pairs representing user attributes.
-	UserAttributes []*AttributeType `type:"list"`
+	UserAttributes []AttributeType `type:"list"`
 
 	// The date the user was created.
 	UserCreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -5303,13 +5294,13 @@ func (s *AdminGetUserOutput) SetEnabled(v bool) *AdminGetUserOutput {
 }
 
 // SetMFAOptions sets the MFAOptions field's value.
-func (s *AdminGetUserOutput) SetMFAOptions(v []*MFAOptionType) *AdminGetUserOutput {
+func (s *AdminGetUserOutput) SetMFAOptions(v []MFAOptionType) *AdminGetUserOutput {
 	s.MFAOptions = v
 	return s
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *AdminGetUserOutput) SetUserAttributes(v []*AttributeType) *AdminGetUserOutput {
+func (s *AdminGetUserOutput) SetUserAttributes(v []AttributeType) *AdminGetUserOutput {
 	s.UserAttributes = v
 	return s
 }
@@ -5384,7 +5375,7 @@ type AdminInitiateAuthInput struct {
 	//
 	//    * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is
 	//    configured with client secret), DEVICE_KEY
-	AuthParameters map[string]*string `type:"map"`
+	AuthParameters map[string]string `type:"map"`
 
 	// The app client ID.
 	//
@@ -5394,7 +5385,7 @@ type AdminInitiateAuthInput struct {
 	// This is a random key-value pair map which can contain any key and will be
 	// passed to your PreAuthentication Lambda trigger as-is. It can be used to
 	// implement additional validations around authentication.
-	ClientMetadata map[string]*string `type:"map"`
+	ClientMetadata map[string]string `type:"map"`
 
 	// The ID of the Amazon Cognito user pool.
 	//
@@ -5446,7 +5437,7 @@ func (s *AdminInitiateAuthInput) SetAuthFlow(v AuthFlowType) *AdminInitiateAuthI
 }
 
 // SetAuthParameters sets the AuthParameters field's value.
-func (s *AdminInitiateAuthInput) SetAuthParameters(v map[string]*string) *AdminInitiateAuthInput {
+func (s *AdminInitiateAuthInput) SetAuthParameters(v map[string]string) *AdminInitiateAuthInput {
 	s.AuthParameters = v
 	return s
 }
@@ -5458,7 +5449,7 @@ func (s *AdminInitiateAuthInput) SetClientId(v string) *AdminInitiateAuthInput {
 }
 
 // SetClientMetadata sets the ClientMetadata field's value.
-func (s *AdminInitiateAuthInput) SetClientMetadata(v map[string]*string) *AdminInitiateAuthInput {
+func (s *AdminInitiateAuthInput) SetClientMetadata(v map[string]string) *AdminInitiateAuthInput {
 	s.ClientMetadata = v
 	return s
 }
@@ -5520,7 +5511,7 @@ type AdminInitiateAuthOutput struct {
 	// not an alias (such as email address or phone number), even if you specified
 	// an alias in your call to AdminInitiateAuth. This is because, in the AdminRespondToAuthChallenge
 	// API ChallengeResponses, the USERNAME attribute cannot be an alias.
-	ChallengeParameters map[string]*string `type:"map"`
+	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If AdminInitiateAuth or AdminRespondToAuthChallenge API call
@@ -5553,7 +5544,7 @@ func (s *AdminInitiateAuthOutput) SetChallengeName(v ChallengeNameType) *AdminIn
 }
 
 // SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *AdminInitiateAuthOutput) SetChallengeParameters(v map[string]*string) *AdminInitiateAuthOutput {
+func (s *AdminInitiateAuthOutput) SetChallengeParameters(v map[string]string) *AdminInitiateAuthOutput {
 	s.ChallengeParameters = v
 	return s
 }
@@ -5771,7 +5762,7 @@ type AdminListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The devices in the list of devices response.
-	Devices []*DeviceType `type:"list"`
+	Devices []DeviceType `type:"list"`
 
 	// The pagination token.
 	PaginationToken *string `min:"1" type:"string"`
@@ -5788,7 +5779,7 @@ func (s AdminListDevicesOutput) GoString() string {
 }
 
 // SetDevices sets the Devices field's value.
-func (s *AdminListDevicesOutput) SetDevices(v []*DeviceType) *AdminListDevicesOutput {
+func (s *AdminListDevicesOutput) SetDevices(v []DeviceType) *AdminListDevicesOutput {
 	s.Devices = v
 	return s
 }
@@ -5887,7 +5878,7 @@ type AdminListGroupsForUserOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The groups that the user belongs to.
-	Groups []*GroupType `type:"list"`
+	Groups []GroupType `type:"list"`
 
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
@@ -5905,7 +5896,7 @@ func (s AdminListGroupsForUserOutput) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *AdminListGroupsForUserOutput) SetGroups(v []*GroupType) *AdminListGroupsForUserOutput {
+func (s *AdminListGroupsForUserOutput) SetGroups(v []GroupType) *AdminListGroupsForUserOutput {
 	s.Groups = v
 	return s
 }
@@ -6119,7 +6110,7 @@ type AdminRespondToAuthChallengeInput struct {
 	// an alias (such as email address or phone number). To make this easier, the
 	// AdminInitiateAuth response includes the actual username value in the USERNAMEUSER_ID_FOR_SRP
 	// attribute, even if you specified an alias in your call to AdminInitiateAuth.
-	ChallengeResponses map[string]*string `type:"map"`
+	ChallengeResponses map[string]string `type:"map"`
 
 	// The app client ID.
 	//
@@ -6186,7 +6177,7 @@ func (s *AdminRespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType)
 }
 
 // SetChallengeResponses sets the ChallengeResponses field's value.
-func (s *AdminRespondToAuthChallengeInput) SetChallengeResponses(v map[string]*string) *AdminRespondToAuthChallengeInput {
+func (s *AdminRespondToAuthChallengeInput) SetChallengeResponses(v map[string]string) *AdminRespondToAuthChallengeInput {
 	s.ChallengeResponses = v
 	return s
 }
@@ -6221,7 +6212,7 @@ type AdminRespondToAuthChallengeOutput struct {
 	ChallengeName ChallengeNameType `type:"string"`
 
 	// The challenge parameters. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
-	ChallengeParameters map[string]*string `type:"map"`
+	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If the InitiateAuth (API_InitiateAuth.html) or RespondToAuthChallenge
@@ -6255,7 +6246,7 @@ func (s *AdminRespondToAuthChallengeOutput) SetChallengeName(v ChallengeNameType
 }
 
 // SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *AdminRespondToAuthChallengeOutput) SetChallengeParameters(v map[string]*string) *AdminRespondToAuthChallengeOutput {
+func (s *AdminRespondToAuthChallengeOutput) SetChallengeParameters(v map[string]string) *AdminRespondToAuthChallengeOutput {
 	s.ChallengeParameters = v
 	return s
 }
@@ -6274,7 +6265,7 @@ type AdminSetUserSettingsInput struct {
 	// Specifies the options for MFA (e.g., email or phone number).
 	//
 	// MFAOptions is a required field
-	MFAOptions []*MFAOptionType `type:"list" required:"true"`
+	MFAOptions []MFAOptionType `type:"list" required:"true"`
 
 	// The user pool ID for the user pool where you want to set the user's settings,
 	// such as MFA options.
@@ -6321,9 +6312,6 @@ func (s *AdminSetUserSettingsInput) Validate() error {
 	}
 	if s.MFAOptions != nil {
 		for i, v := range s.MFAOptions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(aws.ErrInvalidParams))
 			}
@@ -6337,7 +6325,7 @@ func (s *AdminSetUserSettingsInput) Validate() error {
 }
 
 // SetMFAOptions sets the MFAOptions field's value.
-func (s *AdminSetUserSettingsInput) SetMFAOptions(v []*MFAOptionType) *AdminSetUserSettingsInput {
+func (s *AdminSetUserSettingsInput) SetMFAOptions(v []MFAOptionType) *AdminSetUserSettingsInput {
 	s.MFAOptions = v
 	return s
 }
@@ -6486,7 +6474,7 @@ type AdminUpdateUserAttributesInput struct {
 	// name.
 	//
 	// UserAttributes is a required field
-	UserAttributes []*AttributeType `type:"list" required:"true"`
+	UserAttributes []AttributeType `type:"list" required:"true"`
 
 	// The user pool ID for the user pool where you want to update user attributes.
 	//
@@ -6532,9 +6520,6 @@ func (s *AdminUpdateUserAttributesInput) Validate() error {
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -6548,7 +6533,7 @@ func (s *AdminUpdateUserAttributesInput) Validate() error {
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *AdminUpdateUserAttributesInput) SetUserAttributes(v []*AttributeType) *AdminUpdateUserAttributesInput {
+func (s *AdminUpdateUserAttributesInput) SetUserAttributes(v []AttributeType) *AdminUpdateUserAttributesInput {
 	s.UserAttributes = v
 	return s
 }
@@ -7413,15 +7398,15 @@ type CreateIdentityProviderInput struct {
 
 	// A mapping of identity provider attributes to standard and custom user pool
 	// attributes.
-	AttributeMapping map[string]*string `type:"map"`
+	AttributeMapping map[string]string `type:"map"`
 
 	// A list of identity provider identifiers.
-	IdpIdentifiers []*string `type:"list"`
+	IdpIdentifiers []string `type:"list"`
 
 	// The identity provider details, such as MetadataURL and MetadataFile.
 	//
 	// ProviderDetails is a required field
-	ProviderDetails map[string]*string `type:"map" required:"true"`
+	ProviderDetails map[string]string `type:"map" required:"true"`
 
 	// The identity provider name.
 	//
@@ -7481,19 +7466,19 @@ func (s *CreateIdentityProviderInput) Validate() error {
 }
 
 // SetAttributeMapping sets the AttributeMapping field's value.
-func (s *CreateIdentityProviderInput) SetAttributeMapping(v map[string]*string) *CreateIdentityProviderInput {
+func (s *CreateIdentityProviderInput) SetAttributeMapping(v map[string]string) *CreateIdentityProviderInput {
 	s.AttributeMapping = v
 	return s
 }
 
 // SetIdpIdentifiers sets the IdpIdentifiers field's value.
-func (s *CreateIdentityProviderInput) SetIdpIdentifiers(v []*string) *CreateIdentityProviderInput {
+func (s *CreateIdentityProviderInput) SetIdpIdentifiers(v []string) *CreateIdentityProviderInput {
 	s.IdpIdentifiers = v
 	return s
 }
 
 // SetProviderDetails sets the ProviderDetails field's value.
-func (s *CreateIdentityProviderInput) SetProviderDetails(v map[string]*string) *CreateIdentityProviderInput {
+func (s *CreateIdentityProviderInput) SetProviderDetails(v map[string]string) *CreateIdentityProviderInput {
 	s.ProviderDetails = v
 	return s
 }
@@ -7558,7 +7543,7 @@ type CreateResourceServerInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A list of scopes. Each scope is map, where the keys are name and description.
-	Scopes []*ResourceServerScopeType `type:"list"`
+	Scopes []ResourceServerScopeType `type:"list"`
 
 	// The user pool ID for the user pool.
 	//
@@ -7602,9 +7587,6 @@ func (s *CreateResourceServerInput) Validate() error {
 	}
 	if s.Scopes != nil {
 		for i, v := range s.Scopes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(aws.ErrInvalidParams))
 			}
@@ -7630,7 +7612,7 @@ func (s *CreateResourceServerInput) SetName(v string) *CreateResourceServerInput
 }
 
 // SetScopes sets the Scopes field's value.
-func (s *CreateResourceServerInput) SetScopes(v []*ResourceServerScopeType) *CreateResourceServerInput {
+func (s *CreateResourceServerInput) SetScopes(v []ResourceServerScopeType) *CreateResourceServerInput {
 	s.Scopes = v
 	return s
 }
@@ -7792,10 +7774,10 @@ type CreateUserPoolClientInput struct {
 
 	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
 	// "openid", and "Cognito".
-	AllowedOAuthScopes []*string `type:"list"`
+	AllowedOAuthScopes []string `type:"list"`
 
 	// A list of allowed callback URLs for the identity providers.
-	CallbackURLs []*string `type:"list"`
+	CallbackURLs []string `type:"list"`
 
 	// The client name for the user pool client you would like to create.
 	//
@@ -7813,10 +7795,10 @@ type CreateUserPoolClientInput struct {
 	GenerateSecret *bool `type:"boolean"`
 
 	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []*string `type:"list"`
+	LogoutURLs []string `type:"list"`
 
 	// The read attributes.
-	ReadAttributes []*string `type:"list"`
+	ReadAttributes []string `type:"list"`
 
 	// The time limit, in days, after which the refresh token is no longer valid
 	// and cannot be used.
@@ -7824,7 +7806,7 @@ type CreateUserPoolClientInput struct {
 
 	// A list of provider names for the identity providers that are supported on
 	// this client.
-	SupportedIdentityProviders []*string `type:"list"`
+	SupportedIdentityProviders []string `type:"list"`
 
 	// The user pool ID for the user pool where you want to create a user pool client.
 	//
@@ -7832,7 +7814,7 @@ type CreateUserPoolClientInput struct {
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
 	// The write attributes.
-	WriteAttributes []*string `type:"list"`
+	WriteAttributes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7885,13 +7867,13 @@ func (s *CreateUserPoolClientInput) SetAllowedOAuthFlowsUserPoolClient(v bool) *
 }
 
 // SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
-func (s *CreateUserPoolClientInput) SetAllowedOAuthScopes(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetAllowedOAuthScopes(v []string) *CreateUserPoolClientInput {
 	s.AllowedOAuthScopes = v
 	return s
 }
 
 // SetCallbackURLs sets the CallbackURLs field's value.
-func (s *CreateUserPoolClientInput) SetCallbackURLs(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetCallbackURLs(v []string) *CreateUserPoolClientInput {
 	s.CallbackURLs = v
 	return s
 }
@@ -7921,13 +7903,13 @@ func (s *CreateUserPoolClientInput) SetGenerateSecret(v bool) *CreateUserPoolCli
 }
 
 // SetLogoutURLs sets the LogoutURLs field's value.
-func (s *CreateUserPoolClientInput) SetLogoutURLs(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetLogoutURLs(v []string) *CreateUserPoolClientInput {
 	s.LogoutURLs = v
 	return s
 }
 
 // SetReadAttributes sets the ReadAttributes field's value.
-func (s *CreateUserPoolClientInput) SetReadAttributes(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetReadAttributes(v []string) *CreateUserPoolClientInput {
 	s.ReadAttributes = v
 	return s
 }
@@ -7939,7 +7921,7 @@ func (s *CreateUserPoolClientInput) SetRefreshTokenValidity(v int64) *CreateUser
 }
 
 // SetSupportedIdentityProviders sets the SupportedIdentityProviders field's value.
-func (s *CreateUserPoolClientInput) SetSupportedIdentityProviders(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetSupportedIdentityProviders(v []string) *CreateUserPoolClientInput {
 	s.SupportedIdentityProviders = v
 	return s
 }
@@ -7951,7 +7933,7 @@ func (s *CreateUserPoolClientInput) SetUserPoolId(v string) *CreateUserPoolClien
 }
 
 // SetWriteAttributes sets the WriteAttributes field's value.
-func (s *CreateUserPoolClientInput) SetWriteAttributes(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetWriteAttributes(v []string) *CreateUserPoolClientInput {
 	s.WriteAttributes = v
 	return s
 }
@@ -8100,7 +8082,7 @@ type CreateUserPoolInput struct {
 
 	// An array of schema attributes for the new user pool. These attributes can
 	// be standard or custom attributes.
-	Schema []*SchemaAttributeType `min:"1" type:"list"`
+	Schema []SchemaAttributeType `min:"1" type:"list"`
 
 	// A string representing the SMS authentication message.
 	SmsAuthenticationMessage *string `min:"6" type:"string"`
@@ -8113,7 +8095,7 @@ type CreateUserPoolInput struct {
 
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
-	UserPoolTags map[string]*string `type:"map"`
+	UserPoolTags map[string]string `type:"map"`
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
@@ -8181,9 +8163,6 @@ func (s *CreateUserPoolInput) Validate() error {
 	}
 	if s.Schema != nil {
 		for i, v := range s.Schema {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Schema", i), err.(aws.ErrInvalidParams))
 			}
@@ -8273,7 +8252,7 @@ func (s *CreateUserPoolInput) SetPoolName(v string) *CreateUserPoolInput {
 }
 
 // SetSchema sets the Schema field's value.
-func (s *CreateUserPoolInput) SetSchema(v []*SchemaAttributeType) *CreateUserPoolInput {
+func (s *CreateUserPoolInput) SetSchema(v []SchemaAttributeType) *CreateUserPoolInput {
 	s.Schema = v
 	return s
 }
@@ -8297,7 +8276,7 @@ func (s *CreateUserPoolInput) SetSmsVerificationMessage(v string) *CreateUserPoo
 }
 
 // SetUserPoolTags sets the UserPoolTags field's value.
-func (s *CreateUserPoolInput) SetUserPoolTags(v map[string]*string) *CreateUserPoolInput {
+func (s *CreateUserPoolInput) SetUserPoolTags(v map[string]string) *CreateUserPoolInput {
 	s.UserPoolTags = v
 	return s
 }
@@ -8584,7 +8563,7 @@ type DeleteUserAttributesInput struct {
 	// name.
 	//
 	// UserAttributeNames is a required field
-	UserAttributeNames []*string `type:"list" required:"true"`
+	UserAttributeNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8622,7 +8601,7 @@ func (s *DeleteUserAttributesInput) SetAccessToken(v string) *DeleteUserAttribut
 }
 
 // SetUserAttributeNames sets the UserAttributeNames field's value.
-func (s *DeleteUserAttributesInput) SetUserAttributeNames(v []*string) *DeleteUserAttributesInput {
+func (s *DeleteUserAttributesInput) SetUserAttributeNames(v []string) *DeleteUserAttributesInput {
 	s.UserAttributeNames = v
 	return s
 }
@@ -9472,7 +9451,7 @@ type DeviceType struct {
 	_ struct{} `type:"structure"`
 
 	// The device attributes.
-	DeviceAttributes []*AttributeType `type:"list"`
+	DeviceAttributes []AttributeType `type:"list"`
 
 	// The creation date of the device.
 	DeviceCreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -9498,7 +9477,7 @@ func (s DeviceType) GoString() string {
 }
 
 // SetDeviceAttributes sets the DeviceAttributes field's value.
-func (s *DeviceType) SetDeviceAttributes(v []*AttributeType) *DeviceType {
+func (s *DeviceType) SetDeviceAttributes(v []AttributeType) *DeviceType {
 	s.DeviceAttributes = v
 	return s
 }
@@ -9876,7 +9855,7 @@ type GetCSVHeaderOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The header information for the .csv file for the user import job.
-	CSVHeader []*string `type:"list"`
+	CSVHeader []string `type:"list"`
 
 	// The user pool ID for the user pool that the users are to be imported into.
 	UserPoolId *string `min:"1" type:"string"`
@@ -9893,7 +9872,7 @@ func (s GetCSVHeaderOutput) GoString() string {
 }
 
 // SetCSVHeader sets the CSVHeader field's value.
-func (s *GetCSVHeaderOutput) SetCSVHeader(v []*string) *GetCSVHeaderOutput {
+func (s *GetCSVHeaderOutput) SetCSVHeader(v []string) *GetCSVHeaderOutput {
 	s.CSVHeader = v
 	return s
 }
@@ -10374,7 +10353,7 @@ type GetUserOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the options for MFA (e.g., email or phone number).
-	MFAOptions []*MFAOptionType `type:"list"`
+	MFAOptions []MFAOptionType `type:"list"`
 
 	// An array of name-value pairs representing user attributes.
 	//
@@ -10382,7 +10361,7 @@ type GetUserOutput struct {
 	// name.
 	//
 	// UserAttributes is a required field
-	UserAttributes []*AttributeType `type:"list" required:"true"`
+	UserAttributes []AttributeType `type:"list" required:"true"`
 
 	// The user name of the user you wish to retrieve from the get user request.
 	//
@@ -10401,13 +10380,13 @@ func (s GetUserOutput) GoString() string {
 }
 
 // SetMFAOptions sets the MFAOptions field's value.
-func (s *GetUserOutput) SetMFAOptions(v []*MFAOptionType) *GetUserOutput {
+func (s *GetUserOutput) SetMFAOptions(v []MFAOptionType) *GetUserOutput {
 	s.MFAOptions = v
 	return s
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *GetUserOutput) SetUserAttributes(v []*AttributeType) *GetUserOutput {
+func (s *GetUserOutput) SetUserAttributes(v []AttributeType) *GetUserOutput {
 	s.UserAttributes = v
 	return s
 }
@@ -10574,19 +10553,19 @@ type IdentityProviderType struct {
 
 	// A mapping of identity provider attributes to standard and custom user pool
 	// attributes.
-	AttributeMapping map[string]*string `type:"map"`
+	AttributeMapping map[string]string `type:"map"`
 
 	// The date the identity provider was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of identity provider identifiers.
-	IdpIdentifiers []*string `type:"list"`
+	IdpIdentifiers []string `type:"list"`
 
 	// The date the identity provider was last modified.
 	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The identity provider details, such as MetadataURL and MetadataFile.
-	ProviderDetails map[string]*string `type:"map"`
+	ProviderDetails map[string]string `type:"map"`
 
 	// The identity provider name.
 	ProviderName *string `min:"1" type:"string"`
@@ -10609,7 +10588,7 @@ func (s IdentityProviderType) GoString() string {
 }
 
 // SetAttributeMapping sets the AttributeMapping field's value.
-func (s *IdentityProviderType) SetAttributeMapping(v map[string]*string) *IdentityProviderType {
+func (s *IdentityProviderType) SetAttributeMapping(v map[string]string) *IdentityProviderType {
 	s.AttributeMapping = v
 	return s
 }
@@ -10621,7 +10600,7 @@ func (s *IdentityProviderType) SetCreationDate(v time.Time) *IdentityProviderTyp
 }
 
 // SetIdpIdentifiers sets the IdpIdentifiers field's value.
-func (s *IdentityProviderType) SetIdpIdentifiers(v []*string) *IdentityProviderType {
+func (s *IdentityProviderType) SetIdpIdentifiers(v []string) *IdentityProviderType {
 	s.IdpIdentifiers = v
 	return s
 }
@@ -10633,7 +10612,7 @@ func (s *IdentityProviderType) SetLastModifiedDate(v time.Time) *IdentityProvide
 }
 
 // SetProviderDetails sets the ProviderDetails field's value.
-func (s *IdentityProviderType) SetProviderDetails(v map[string]*string) *IdentityProviderType {
+func (s *IdentityProviderType) SetProviderDetails(v map[string]string) *IdentityProviderType {
 	s.ProviderDetails = v
 	return s
 }
@@ -10697,7 +10676,7 @@ type InitiateAuthInput struct {
 	//
 	//    * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is
 	//    configured with client secret), DEVICE_KEY
-	AuthParameters map[string]*string `type:"map"`
+	AuthParameters map[string]string `type:"map"`
 
 	// The app client ID.
 	//
@@ -10707,7 +10686,7 @@ type InitiateAuthInput struct {
 	// This is a random key-value pair map which can contain any key and will be
 	// passed to your PreAuthentication Lambda trigger as-is. It can be used to
 	// implement additional validations around authentication.
-	ClientMetadata map[string]*string `type:"map"`
+	ClientMetadata map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -10747,7 +10726,7 @@ func (s *InitiateAuthInput) SetAuthFlow(v AuthFlowType) *InitiateAuthInput {
 }
 
 // SetAuthParameters sets the AuthParameters field's value.
-func (s *InitiateAuthInput) SetAuthParameters(v map[string]*string) *InitiateAuthInput {
+func (s *InitiateAuthInput) SetAuthParameters(v map[string]string) *InitiateAuthInput {
 	s.AuthParameters = v
 	return s
 }
@@ -10759,7 +10738,7 @@ func (s *InitiateAuthInput) SetClientId(v string) *InitiateAuthInput {
 }
 
 // SetClientMetadata sets the ClientMetadata field's value.
-func (s *InitiateAuthInput) SetClientMetadata(v map[string]*string) *InitiateAuthInput {
+func (s *InitiateAuthInput) SetClientMetadata(v map[string]string) *InitiateAuthInput {
 	s.ClientMetadata = v
 	return s
 }
@@ -10809,7 +10788,7 @@ type InitiateAuthOutput struct {
 	// be used to compute inputs to the next call (RespondToAuthChallenge).
 	//
 	// All challenges require USERNAME and SECRET_HASH (if applicable).
-	ChallengeParameters map[string]*string `type:"map"`
+	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If the InitiateAuth (API_InitiateAuth.html) or RespondToAuthChallenge
@@ -10843,7 +10822,7 @@ func (s *InitiateAuthOutput) SetChallengeName(v ChallengeNameType) *InitiateAuth
 }
 
 // SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *InitiateAuthOutput) SetChallengeParameters(v map[string]*string) *InitiateAuthOutput {
+func (s *InitiateAuthOutput) SetChallengeParameters(v map[string]string) *InitiateAuthOutput {
 	s.ChallengeParameters = v
 	return s
 }
@@ -11044,7 +11023,7 @@ type ListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The devices returned in the list devices response.
-	Devices []*DeviceType `type:"list"`
+	Devices []DeviceType `type:"list"`
 
 	// The pagination token for the list device response.
 	PaginationToken *string `min:"1" type:"string"`
@@ -11061,7 +11040,7 @@ func (s ListDevicesOutput) GoString() string {
 }
 
 // SetDevices sets the Devices field's value.
-func (s *ListDevicesOutput) SetDevices(v []*DeviceType) *ListDevicesOutput {
+func (s *ListDevicesOutput) SetDevices(v []DeviceType) *ListDevicesOutput {
 	s.Devices = v
 	return s
 }
@@ -11142,7 +11121,7 @@ type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The group objects for the groups.
-	Groups []*GroupType `type:"list"`
+	Groups []GroupType `type:"list"`
 
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
@@ -11160,7 +11139,7 @@ func (s ListGroupsOutput) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []*GroupType) *ListGroupsOutput {
+func (s *ListGroupsOutput) SetGroups(v []GroupType) *ListGroupsOutput {
 	s.Groups = v
 	return s
 }
@@ -11248,7 +11227,7 @@ type ListIdentityProvidersOutput struct {
 	// A list of identity provider objects.
 	//
 	// Providers is a required field
-	Providers []*ProviderDescription `type:"list" required:"true"`
+	Providers []ProviderDescription `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -11268,7 +11247,7 @@ func (s *ListIdentityProvidersOutput) SetNextToken(v string) *ListIdentityProvid
 }
 
 // SetProviders sets the Providers field's value.
-func (s *ListIdentityProvidersOutput) SetProviders(v []*ProviderDescription) *ListIdentityProvidersOutput {
+func (s *ListIdentityProvidersOutput) SetProviders(v []ProviderDescription) *ListIdentityProvidersOutput {
 	s.Providers = v
 	return s
 }
@@ -11350,7 +11329,7 @@ type ListResourceServersOutput struct {
 	// The resource servers.
 	//
 	// ResourceServers is a required field
-	ResourceServers []*ResourceServerType `type:"list" required:"true"`
+	ResourceServers []ResourceServerType `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -11370,7 +11349,7 @@ func (s *ListResourceServersOutput) SetNextToken(v string) *ListResourceServersO
 }
 
 // SetResourceServers sets the ResourceServers field's value.
-func (s *ListResourceServersOutput) SetResourceServers(v []*ResourceServerType) *ListResourceServersOutput {
+func (s *ListResourceServersOutput) SetResourceServers(v []ResourceServerType) *ListResourceServersOutput {
 	s.ResourceServers = v
 	return s
 }
@@ -11461,7 +11440,7 @@ type ListUserImportJobsOutput struct {
 	PaginationToken *string `min:"1" type:"string"`
 
 	// The user import jobs.
-	UserImportJobs []*UserImportJobType `min:"1" type:"list"`
+	UserImportJobs []UserImportJobType `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -11481,7 +11460,7 @@ func (s *ListUserImportJobsOutput) SetPaginationToken(v string) *ListUserImportJ
 }
 
 // SetUserImportJobs sets the UserImportJobs field's value.
-func (s *ListUserImportJobsOutput) SetUserImportJobs(v []*UserImportJobType) *ListUserImportJobsOutput {
+func (s *ListUserImportJobsOutput) SetUserImportJobs(v []UserImportJobType) *ListUserImportJobsOutput {
 	s.UserImportJobs = v
 	return s
 }
@@ -11566,7 +11545,7 @@ type ListUserPoolClientsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The user pool clients in the response that lists user pool clients.
-	UserPoolClients []*UserPoolClientDescription `type:"list"`
+	UserPoolClients []UserPoolClientDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -11586,7 +11565,7 @@ func (s *ListUserPoolClientsOutput) SetNextToken(v string) *ListUserPoolClientsO
 }
 
 // SetUserPoolClients sets the UserPoolClients field's value.
-func (s *ListUserPoolClientsOutput) SetUserPoolClients(v []*UserPoolClientDescription) *ListUserPoolClientsOutput {
+func (s *ListUserPoolClientsOutput) SetUserPoolClients(v []UserPoolClientDescription) *ListUserPoolClientsOutput {
 	s.UserPoolClients = v
 	return s
 }
@@ -11659,7 +11638,7 @@ type ListUserPoolsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The user pools from the response to list users.
-	UserPools []*UserPoolDescriptionType `type:"list"`
+	UserPools []UserPoolDescriptionType `type:"list"`
 }
 
 // String returns the string representation
@@ -11679,7 +11658,7 @@ func (s *ListUserPoolsOutput) SetNextToken(v string) *ListUserPoolsOutput {
 }
 
 // SetUserPools sets the UserPools field's value.
-func (s *ListUserPoolsOutput) SetUserPools(v []*UserPoolDescriptionType) *ListUserPoolsOutput {
+func (s *ListUserPoolsOutput) SetUserPools(v []UserPoolDescriptionType) *ListUserPoolsOutput {
 	s.UserPools = v
 	return s
 }
@@ -11776,7 +11755,7 @@ type ListUsersInGroupOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The users returned in the request to list users.
-	Users []*UserType `type:"list"`
+	Users []UserType `type:"list"`
 }
 
 // String returns the string representation
@@ -11796,7 +11775,7 @@ func (s *ListUsersInGroupOutput) SetNextToken(v string) *ListUsersInGroupOutput 
 }
 
 // SetUsers sets the Users field's value.
-func (s *ListUsersInGroupOutput) SetUsers(v []*UserType) *ListUsersInGroupOutput {
+func (s *ListUsersInGroupOutput) SetUsers(v []UserType) *ListUsersInGroupOutput {
 	s.Users = v
 	return s
 }
@@ -11809,7 +11788,7 @@ type ListUsersInput struct {
 	// An array of strings, where each string is the name of a user attribute to
 	// be returned for each user in the search results. If the array is empty, all
 	// attributes are returned.
-	AttributesToGet []*string `type:"list"`
+	AttributesToGet []string `type:"list"`
 
 	// A filter string of the form "AttributeNameFilter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash
@@ -11897,7 +11876,7 @@ func (s *ListUsersInput) Validate() error {
 }
 
 // SetAttributesToGet sets the AttributesToGet field's value.
-func (s *ListUsersInput) SetAttributesToGet(v []*string) *ListUsersInput {
+func (s *ListUsersInput) SetAttributesToGet(v []string) *ListUsersInput {
 	s.AttributesToGet = v
 	return s
 }
@@ -11936,7 +11915,7 @@ type ListUsersOutput struct {
 	PaginationToken *string `min:"1" type:"string"`
 
 	// The users returned in the request to list users.
-	Users []*UserType `type:"list"`
+	Users []UserType `type:"list"`
 }
 
 // String returns the string representation
@@ -11956,7 +11935,7 @@ func (s *ListUsersOutput) SetPaginationToken(v string) *ListUsersOutput {
 }
 
 // SetUsers sets the Users field's value.
-func (s *ListUsersOutput) SetUsers(v []*UserType) *ListUsersOutput {
+func (s *ListUsersOutput) SetUsers(v []UserType) *ListUsersOutput {
 	s.Users = v
 	return s
 }
@@ -12502,7 +12481,7 @@ type ResourceServerType struct {
 	Name *string `min:"1" type:"string"`
 
 	// A list of scopes that are defined for the resource server.
-	Scopes []*ResourceServerScopeType `type:"list"`
+	Scopes []ResourceServerScopeType `type:"list"`
 
 	// The user pool ID for the user pool that hosts the resource server.
 	UserPoolId *string `min:"1" type:"string"`
@@ -12531,7 +12510,7 @@ func (s *ResourceServerType) SetName(v string) *ResourceServerType {
 }
 
 // SetScopes sets the Scopes field's value.
-func (s *ResourceServerType) SetScopes(v []*ResourceServerScopeType) *ResourceServerType {
+func (s *ResourceServerType) SetScopes(v []ResourceServerScopeType) *ResourceServerType {
 	s.Scopes = v
 	return s
 }
@@ -12566,7 +12545,7 @@ type RespondToAuthChallengeInput struct {
 	//
 	//    * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes,
 	//    USERNAME, SECRET_HASH (if app client is configured with client secret).
-	ChallengeResponses map[string]*string `type:"map"`
+	ChallengeResponses map[string]string `type:"map"`
 
 	// The app client ID.
 	//
@@ -12621,7 +12600,7 @@ func (s *RespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType) *Res
 }
 
 // SetChallengeResponses sets the ChallengeResponses field's value.
-func (s *RespondToAuthChallengeInput) SetChallengeResponses(v map[string]*string) *RespondToAuthChallengeInput {
+func (s *RespondToAuthChallengeInput) SetChallengeResponses(v map[string]string) *RespondToAuthChallengeInput {
 	s.ChallengeResponses = v
 	return s
 }
@@ -12651,7 +12630,7 @@ type RespondToAuthChallengeOutput struct {
 	ChallengeName ChallengeNameType `type:"string"`
 
 	// The challenge parameters. For more information, see InitiateAuth (API_InitiateAuth.html).
-	ChallengeParameters map[string]*string `type:"map"`
+	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If the InitiateAuth (API_InitiateAuth.html) or RespondToAuthChallenge
@@ -12685,7 +12664,7 @@ func (s *RespondToAuthChallengeOutput) SetChallengeName(v ChallengeNameType) *Re
 }
 
 // SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *RespondToAuthChallengeOutput) SetChallengeParameters(v map[string]*string) *RespondToAuthChallengeOutput {
+func (s *RespondToAuthChallengeOutput) SetChallengeParameters(v map[string]string) *RespondToAuthChallengeOutput {
 	s.ChallengeParameters = v
 	return s
 }
@@ -12904,7 +12883,7 @@ type SetUserSettingsInput struct {
 	// Specifies the options for MFA (e.g., email or phone number).
 	//
 	// MFAOptions is a required field
-	MFAOptions []*MFAOptionType `type:"list" required:"true"`
+	MFAOptions []MFAOptionType `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -12930,9 +12909,6 @@ func (s *SetUserSettingsInput) Validate() error {
 	}
 	if s.MFAOptions != nil {
 		for i, v := range s.MFAOptions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(aws.ErrInvalidParams))
 			}
@@ -12952,7 +12928,7 @@ func (s *SetUserSettingsInput) SetAccessToken(v string) *SetUserSettingsInput {
 }
 
 // SetMFAOptions sets the MFAOptions field's value.
-func (s *SetUserSettingsInput) SetMFAOptions(v []*MFAOptionType) *SetUserSettingsInput {
+func (s *SetUserSettingsInput) SetMFAOptions(v []MFAOptionType) *SetUserSettingsInput {
 	s.MFAOptions = v
 	return s
 }
@@ -12996,7 +12972,7 @@ type SignUpInput struct {
 	//
 	// For custom attributes, you must prepend the custom: prefix to the attribute
 	// name.
-	UserAttributes []*AttributeType `type:"list"`
+	UserAttributes []AttributeType `type:"list"`
 
 	// The user name of the user you wish to register.
 	//
@@ -13004,7 +12980,7 @@ type SignUpInput struct {
 	Username *string `min:"1" type:"string" required:"true"`
 
 	// The validation data in the request to register a user.
-	ValidationData []*AttributeType `type:"list"`
+	ValidationData []AttributeType `type:"list"`
 }
 
 // String returns the string representation
@@ -13046,9 +13022,6 @@ func (s *SignUpInput) Validate() error {
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -13056,9 +13029,6 @@ func (s *SignUpInput) Validate() error {
 	}
 	if s.ValidationData != nil {
 		for i, v := range s.ValidationData {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(aws.ErrInvalidParams))
 			}
@@ -13090,7 +13060,7 @@ func (s *SignUpInput) SetSecretHash(v string) *SignUpInput {
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *SignUpInput) SetUserAttributes(v []*AttributeType) *SignUpInput {
+func (s *SignUpInput) SetUserAttributes(v []AttributeType) *SignUpInput {
 	s.UserAttributes = v
 	return s
 }
@@ -13102,7 +13072,7 @@ func (s *SignUpInput) SetUsername(v string) *SignUpInput {
 }
 
 // SetValidationData sets the ValidationData field's value.
-func (s *SignUpInput) SetValidationData(v []*AttributeType) *SignUpInput {
+func (s *SignUpInput) SetValidationData(v []AttributeType) *SignUpInput {
 	s.ValidationData = v
 	return s
 }
@@ -13705,13 +13675,13 @@ type UpdateIdentityProviderInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identity provider attribute mapping to be changed.
-	AttributeMapping map[string]*string `type:"map"`
+	AttributeMapping map[string]string `type:"map"`
 
 	// A list of identity provider identifiers.
-	IdpIdentifiers []*string `type:"list"`
+	IdpIdentifiers []string `type:"list"`
 
 	// The identity provider details to be updated, such as MetadataURL and MetadataFile.
-	ProviderDetails map[string]*string `type:"map"`
+	ProviderDetails map[string]string `type:"map"`
 
 	// The identity provider name.
 	//
@@ -13759,19 +13729,19 @@ func (s *UpdateIdentityProviderInput) Validate() error {
 }
 
 // SetAttributeMapping sets the AttributeMapping field's value.
-func (s *UpdateIdentityProviderInput) SetAttributeMapping(v map[string]*string) *UpdateIdentityProviderInput {
+func (s *UpdateIdentityProviderInput) SetAttributeMapping(v map[string]string) *UpdateIdentityProviderInput {
 	s.AttributeMapping = v
 	return s
 }
 
 // SetIdpIdentifiers sets the IdpIdentifiers field's value.
-func (s *UpdateIdentityProviderInput) SetIdpIdentifiers(v []*string) *UpdateIdentityProviderInput {
+func (s *UpdateIdentityProviderInput) SetIdpIdentifiers(v []string) *UpdateIdentityProviderInput {
 	s.IdpIdentifiers = v
 	return s
 }
 
 // SetProviderDetails sets the ProviderDetails field's value.
-func (s *UpdateIdentityProviderInput) SetProviderDetails(v map[string]*string) *UpdateIdentityProviderInput {
+func (s *UpdateIdentityProviderInput) SetProviderDetails(v map[string]string) *UpdateIdentityProviderInput {
 	s.ProviderDetails = v
 	return s
 }
@@ -13829,7 +13799,7 @@ type UpdateResourceServerInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The scope values to be set for the resource server.
-	Scopes []*ResourceServerScopeType `type:"list"`
+	Scopes []ResourceServerScopeType `type:"list"`
 
 	// The user pool ID for the user pool.
 	//
@@ -13873,9 +13843,6 @@ func (s *UpdateResourceServerInput) Validate() error {
 	}
 	if s.Scopes != nil {
 		for i, v := range s.Scopes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(aws.ErrInvalidParams))
 			}
@@ -13901,7 +13868,7 @@ func (s *UpdateResourceServerInput) SetName(v string) *UpdateResourceServerInput
 }
 
 // SetScopes sets the Scopes field's value.
-func (s *UpdateResourceServerInput) SetScopes(v []*ResourceServerScopeType) *UpdateResourceServerInput {
+func (s *UpdateResourceServerInput) SetScopes(v []ResourceServerScopeType) *UpdateResourceServerInput {
 	s.Scopes = v
 	return s
 }
@@ -13954,7 +13921,7 @@ type UpdateUserAttributesInput struct {
 	// name.
 	//
 	// UserAttributes is a required field
-	UserAttributes []*AttributeType `type:"list" required:"true"`
+	UserAttributes []AttributeType `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -13980,9 +13947,6 @@ func (s *UpdateUserAttributesInput) Validate() error {
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -14002,7 +13966,7 @@ func (s *UpdateUserAttributesInput) SetAccessToken(v string) *UpdateUserAttribut
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *UpdateUserAttributesInput) SetUserAttributes(v []*AttributeType) *UpdateUserAttributesInput {
+func (s *UpdateUserAttributesInput) SetUserAttributes(v []AttributeType) *UpdateUserAttributesInput {
 	s.UserAttributes = v
 	return s
 }
@@ -14014,7 +13978,7 @@ type UpdateUserAttributesOutput struct {
 
 	// The code delivery details list from the server for the request to update
 	// user attributes.
-	CodeDeliveryDetailsList []*CodeDeliveryDetailsType `type:"list"`
+	CodeDeliveryDetailsList []CodeDeliveryDetailsType `type:"list"`
 }
 
 // String returns the string representation
@@ -14028,7 +13992,7 @@ func (s UpdateUserAttributesOutput) GoString() string {
 }
 
 // SetCodeDeliveryDetailsList sets the CodeDeliveryDetailsList field's value.
-func (s *UpdateUserAttributesOutput) SetCodeDeliveryDetailsList(v []*CodeDeliveryDetailsType) *UpdateUserAttributesOutput {
+func (s *UpdateUserAttributesOutput) SetCodeDeliveryDetailsList(v []CodeDeliveryDetailsType) *UpdateUserAttributesOutput {
 	s.CodeDeliveryDetailsList = v
 	return s
 }
@@ -14052,10 +14016,10 @@ type UpdateUserPoolClientInput struct {
 
 	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
 	// "openid", and "Cognito".
-	AllowedOAuthScopes []*string `type:"list"`
+	AllowedOAuthScopes []string `type:"list"`
 
 	// A list of allowed callback URLs for the identity providers.
-	CallbackURLs []*string `type:"list"`
+	CallbackURLs []string `type:"list"`
 
 	// The ID of the client associated with the user pool.
 	//
@@ -14072,10 +14036,10 @@ type UpdateUserPoolClientInput struct {
 	ExplicitAuthFlows []ExplicitAuthFlowsType `type:"list"`
 
 	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []*string `type:"list"`
+	LogoutURLs []string `type:"list"`
 
 	// The read-only attributes of the user pool.
-	ReadAttributes []*string `type:"list"`
+	ReadAttributes []string `type:"list"`
 
 	// The time limit, in days, after which the refresh token is no longer valid
 	// and cannot be used.
@@ -14083,7 +14047,7 @@ type UpdateUserPoolClientInput struct {
 
 	// A list of provider names for the identity providers that are supported on
 	// this client.
-	SupportedIdentityProviders []*string `type:"list"`
+	SupportedIdentityProviders []string `type:"list"`
 
 	// The user pool ID for the user pool where you want to update the user pool
 	// client.
@@ -14092,7 +14056,7 @@ type UpdateUserPoolClientInput struct {
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
 	// The writeable attributes of the user pool.
-	WriteAttributes []*string `type:"list"`
+	WriteAttributes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -14148,13 +14112,13 @@ func (s *UpdateUserPoolClientInput) SetAllowedOAuthFlowsUserPoolClient(v bool) *
 }
 
 // SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
-func (s *UpdateUserPoolClientInput) SetAllowedOAuthScopes(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetAllowedOAuthScopes(v []string) *UpdateUserPoolClientInput {
 	s.AllowedOAuthScopes = v
 	return s
 }
 
 // SetCallbackURLs sets the CallbackURLs field's value.
-func (s *UpdateUserPoolClientInput) SetCallbackURLs(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetCallbackURLs(v []string) *UpdateUserPoolClientInput {
 	s.CallbackURLs = v
 	return s
 }
@@ -14184,13 +14148,13 @@ func (s *UpdateUserPoolClientInput) SetExplicitAuthFlows(v []ExplicitAuthFlowsTy
 }
 
 // SetLogoutURLs sets the LogoutURLs field's value.
-func (s *UpdateUserPoolClientInput) SetLogoutURLs(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetLogoutURLs(v []string) *UpdateUserPoolClientInput {
 	s.LogoutURLs = v
 	return s
 }
 
 // SetReadAttributes sets the ReadAttributes field's value.
-func (s *UpdateUserPoolClientInput) SetReadAttributes(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetReadAttributes(v []string) *UpdateUserPoolClientInput {
 	s.ReadAttributes = v
 	return s
 }
@@ -14202,7 +14166,7 @@ func (s *UpdateUserPoolClientInput) SetRefreshTokenValidity(v int64) *UpdateUser
 }
 
 // SetSupportedIdentityProviders sets the SupportedIdentityProviders field's value.
-func (s *UpdateUserPoolClientInput) SetSupportedIdentityProviders(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetSupportedIdentityProviders(v []string) *UpdateUserPoolClientInput {
 	s.SupportedIdentityProviders = v
 	return s
 }
@@ -14214,7 +14178,7 @@ func (s *UpdateUserPoolClientInput) SetUserPoolId(v string) *UpdateUserPoolClien
 }
 
 // SetWriteAttributes sets the WriteAttributes field's value.
-func (s *UpdateUserPoolClientInput) SetWriteAttributes(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetWriteAttributes(v []string) *UpdateUserPoolClientInput {
 	s.WriteAttributes = v
 	return s
 }
@@ -14304,7 +14268,7 @@ type UpdateUserPoolInput struct {
 
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
-	UserPoolTags map[string]*string `type:"map"`
+	UserPoolTags map[string]string `type:"map"`
 
 	// The template for verification messages.
 	VerificationMessageTemplate *VerificationMessageTemplateType `type:"structure"`
@@ -14458,7 +14422,7 @@ func (s *UpdateUserPoolInput) SetUserPoolId(v string) *UpdateUserPoolInput {
 }
 
 // SetUserPoolTags sets the UserPoolTags field's value.
-func (s *UpdateUserPoolInput) SetUserPoolTags(v map[string]*string) *UpdateUserPoolInput {
+func (s *UpdateUserPoolInput) SetUserPoolTags(v map[string]string) *UpdateUserPoolInput {
 	s.UserPoolTags = v
 	return s
 }
@@ -14705,10 +14669,10 @@ type UserPoolClientType struct {
 
 	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
 	// "openid", and "Cognito".
-	AllowedOAuthScopes []*string `type:"list"`
+	AllowedOAuthScopes []string `type:"list"`
 
 	// A list of allowed callback URLs for the identity providers.
-	CallbackURLs []*string `type:"list"`
+	CallbackURLs []string `type:"list"`
 
 	// The ID of the client associated with the user pool.
 	ClientId *string `min:"1" type:"string"`
@@ -14732,10 +14696,10 @@ type UserPoolClientType struct {
 	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []*string `type:"list"`
+	LogoutURLs []string `type:"list"`
 
 	// The Read-only attributes.
-	ReadAttributes []*string `type:"list"`
+	ReadAttributes []string `type:"list"`
 
 	// The time limit, in days, after which the refresh token is no longer valid
 	// and cannot be used.
@@ -14743,13 +14707,13 @@ type UserPoolClientType struct {
 
 	// A list of provider names for the identity providers that are supported on
 	// this client.
-	SupportedIdentityProviders []*string `type:"list"`
+	SupportedIdentityProviders []string `type:"list"`
 
 	// The user pool ID for the user pool client.
 	UserPoolId *string `min:"1" type:"string"`
 
 	// The writeable attributes.
-	WriteAttributes []*string `type:"list"`
+	WriteAttributes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -14775,13 +14739,13 @@ func (s *UserPoolClientType) SetAllowedOAuthFlowsUserPoolClient(v bool) *UserPoo
 }
 
 // SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
-func (s *UserPoolClientType) SetAllowedOAuthScopes(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetAllowedOAuthScopes(v []string) *UserPoolClientType {
 	s.AllowedOAuthScopes = v
 	return s
 }
 
 // SetCallbackURLs sets the CallbackURLs field's value.
-func (s *UserPoolClientType) SetCallbackURLs(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetCallbackURLs(v []string) *UserPoolClientType {
 	s.CallbackURLs = v
 	return s
 }
@@ -14829,13 +14793,13 @@ func (s *UserPoolClientType) SetLastModifiedDate(v time.Time) *UserPoolClientTyp
 }
 
 // SetLogoutURLs sets the LogoutURLs field's value.
-func (s *UserPoolClientType) SetLogoutURLs(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetLogoutURLs(v []string) *UserPoolClientType {
 	s.LogoutURLs = v
 	return s
 }
 
 // SetReadAttributes sets the ReadAttributes field's value.
-func (s *UserPoolClientType) SetReadAttributes(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetReadAttributes(v []string) *UserPoolClientType {
 	s.ReadAttributes = v
 	return s
 }
@@ -14847,7 +14811,7 @@ func (s *UserPoolClientType) SetRefreshTokenValidity(v int64) *UserPoolClientTyp
 }
 
 // SetSupportedIdentityProviders sets the SupportedIdentityProviders field's value.
-func (s *UserPoolClientType) SetSupportedIdentityProviders(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetSupportedIdentityProviders(v []string) *UserPoolClientType {
 	s.SupportedIdentityProviders = v
 	return s
 }
@@ -14859,7 +14823,7 @@ func (s *UserPoolClientType) SetUserPoolId(v string) *UserPoolClientType {
 }
 
 // SetWriteAttributes sets the WriteAttributes field's value.
-func (s *UserPoolClientType) SetWriteAttributes(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetWriteAttributes(v []string) *UserPoolClientType {
 	s.WriteAttributes = v
 	return s
 }
@@ -15036,7 +15000,7 @@ type UserPoolType struct {
 	Policies *UserPoolPolicyType `type:"structure"`
 
 	// A container with the schema attributes of a user pool.
-	SchemaAttributes []*SchemaAttributeType `min:"1" type:"list"`
+	SchemaAttributes []SchemaAttributeType `min:"1" type:"list"`
 
 	// The contents of the SMS authentication message.
 	SmsAuthenticationMessage *string `min:"6" type:"string"`
@@ -15055,7 +15019,7 @@ type UserPoolType struct {
 
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
-	UserPoolTags map[string]*string `type:"map"`
+	UserPoolTags map[string]string `type:"map"`
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
@@ -15172,7 +15136,7 @@ func (s *UserPoolType) SetPolicies(v *UserPoolPolicyType) *UserPoolType {
 }
 
 // SetSchemaAttributes sets the SchemaAttributes field's value.
-func (s *UserPoolType) SetSchemaAttributes(v []*SchemaAttributeType) *UserPoolType {
+func (s *UserPoolType) SetSchemaAttributes(v []SchemaAttributeType) *UserPoolType {
 	s.SchemaAttributes = v
 	return s
 }
@@ -15208,7 +15172,7 @@ func (s *UserPoolType) SetStatus(v StatusType) *UserPoolType {
 }
 
 // SetUserPoolTags sets the UserPoolTags field's value.
-func (s *UserPoolType) SetUserPoolTags(v map[string]*string) *UserPoolType {
+func (s *UserPoolType) SetUserPoolTags(v map[string]string) *UserPoolType {
 	s.UserPoolTags = v
 	return s
 }
@@ -15231,13 +15195,13 @@ type UserType struct {
 	_ struct{} `type:"structure"`
 
 	// A container with information about the user type attributes.
-	Attributes []*AttributeType `type:"list"`
+	Attributes []AttributeType `type:"list"`
 
 	// Specifies whether the user is enabled.
 	Enabled *bool `type:"boolean"`
 
 	// The MFA options for the user.
-	MFAOptions []*MFAOptionType `type:"list"`
+	MFAOptions []MFAOptionType `type:"list"`
 
 	// The creation date of the user.
 	UserCreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -15273,7 +15237,7 @@ func (s UserType) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *UserType) SetAttributes(v []*AttributeType) *UserType {
+func (s *UserType) SetAttributes(v []AttributeType) *UserType {
 	s.Attributes = v
 	return s
 }
@@ -15285,7 +15249,7 @@ func (s *UserType) SetEnabled(v bool) *UserType {
 }
 
 // SetMFAOptions sets the MFAOptions field's value.
-func (s *UserType) SetMFAOptions(v []*MFAOptionType) *UserType {
+func (s *UserType) SetMFAOptions(v []MFAOptionType) *UserType {
 	s.MFAOptions = v
 	return s
 }

@@ -123,7 +123,7 @@ func ExampleECS_CreateServiceRequest_shared01() {
 	svc := ecs.New(cfg)
 	input := &ecs.CreateServiceInput{
 		DesiredCount: aws.Int64(10),
-		LoadBalancers: []*ecs.LoadBalancer{
+		LoadBalancers: []ecs.LoadBalancer{
 			{
 				ContainerName:    aws.String("simple-app"),
 				ContainerPort:    aws.Int64(80),
@@ -307,8 +307,8 @@ func ExampleECS_DescribeClustersRequest_shared00() {
 
 	svc := ecs.New(cfg)
 	input := &ecs.DescribeClustersInput{
-		Clusters: []*string{
-			aws.String("default"),
+		Clusters: []string{
+			"default",
 		},
 	}
 
@@ -350,8 +350,8 @@ func ExampleECS_DescribeContainerInstancesRequest_shared00() {
 	svc := ecs.New(cfg)
 	input := &ecs.DescribeContainerInstancesInput{
 		Cluster: aws.String("default"),
-		ContainerInstances: []*string{
-			aws.String("f2756532-8f13-4d53-87c9-aed50dc94cd7"),
+		ContainerInstances: []string{
+			"f2756532-8f13-4d53-87c9-aed50dc94cd7",
 		},
 	}
 
@@ -393,8 +393,8 @@ func ExampleECS_DescribeServicesRequest_shared00() {
 
 	svc := ecs.New(cfg)
 	input := &ecs.DescribeServicesInput{
-		Services: []*string{
-			aws.String("ecs-simple-service"),
+		Services: []string{
+			"ecs-simple-service",
 		},
 	}
 
@@ -476,8 +476,8 @@ func ExampleECS_DescribeTasksRequest_shared00() {
 
 	svc := ecs.New(cfg)
 	input := &ecs.DescribeTasksInput{
-		Tasks: []*string{
-			aws.String("c5cba4eb-5dad-405e-96db-71ef8eefe6a8"),
+		Tasks: []string{
+			"c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
 		},
 	}
 
@@ -877,11 +877,11 @@ func ExampleECS_RegisterTaskDefinitionRequest_shared00() {
 
 	svc := ecs.New(cfg)
 	input := &ecs.RegisterTaskDefinitionInput{
-		ContainerDefinitions: []*ecs.ContainerDefinition{
+		ContainerDefinitions: []ecs.ContainerDefinition{
 			{
-				Command: []*string{
-					aws.String("sleep"),
-					aws.String("360"),
+				Command: []string{
+					"sleep",
+					"360",
 				},
 				Cpu:       aws.Int64(10),
 				Essential: aws.Bool(true),

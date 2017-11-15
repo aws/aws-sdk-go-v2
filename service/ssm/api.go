@@ -5234,7 +5234,7 @@ type AddTagsToResourceInput struct {
 	// the value to an empty string.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5263,9 +5263,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -5291,7 +5288,7 @@ func (s *AddTagsToResourceInput) SetResourceType(v ResourceTypeForTagging) *AddT
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []*Tag) *AddTagsToResourceInput {
+func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	s.Tags = v
 	return s
 }
@@ -5345,7 +5342,7 @@ type Association struct {
 	ScheduleExpression *string `min:"1" type:"string"`
 
 	// The instances targeted by the request to create an association.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -5413,7 +5410,7 @@ func (s *Association) SetScheduleExpression(v string) *Association {
 }
 
 // SetTargets sets the Targets field's value.
-func (s *Association) SetTargets(v []*Target) *Association {
+func (s *Association) SetTargets(v []Target) *Association {
 	s.Targets = v
 	return s
 }
@@ -5460,7 +5457,7 @@ type AssociationDescription struct {
 	Overview *AssociationOverview `type:"structure"`
 
 	// A description of the parameters for a document.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// A cron expression that specifies a schedule when the association runs.
 	ScheduleExpression *string `min:"1" type:"string"`
@@ -5469,7 +5466,7 @@ type AssociationDescription struct {
 	Status *AssociationStatus `type:"structure"`
 
 	// The instances targeted by the request.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -5555,7 +5552,7 @@ func (s *AssociationDescription) SetOverview(v *AssociationOverview) *Associatio
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *AssociationDescription) SetParameters(v map[string][]*string) *AssociationDescription {
+func (s *AssociationDescription) SetParameters(v map[string][]string) *AssociationDescription {
 	s.Parameters = v
 	return s
 }
@@ -5573,7 +5570,7 @@ func (s *AssociationDescription) SetStatus(v *AssociationStatus) *AssociationDes
 }
 
 // SetTargets sets the Targets field's value.
-func (s *AssociationDescription) SetTargets(v []*Target) *AssociationDescription {
+func (s *AssociationDescription) SetTargets(v []Target) *AssociationDescription {
 	s.Targets = v
 	return s
 }
@@ -5644,7 +5641,7 @@ type AssociationOverview struct {
 	// Returns the number of targets for the association status. For example, if
 	// you created an association with two instances, and one of them was successful,
 	// this would return the count of instances by status.
-	AssociationStatusAggregatedCount map[string]*int64 `type:"map"`
+	AssociationStatusAggregatedCount map[string]int64 `type:"map"`
 
 	// A detailed status of the association.
 	DetailedStatus *string `type:"string"`
@@ -5664,7 +5661,7 @@ func (s AssociationOverview) GoString() string {
 }
 
 // SetAssociationStatusAggregatedCount sets the AssociationStatusAggregatedCount field's value.
-func (s *AssociationOverview) SetAssociationStatusAggregatedCount(v map[string]*int64) *AssociationOverview {
+func (s *AssociationOverview) SetAssociationStatusAggregatedCount(v map[string]int64) *AssociationOverview {
 	s.AssociationStatusAggregatedCount = v
 	return s
 }
@@ -5793,7 +5790,7 @@ type AssociationVersionInfo struct {
 	OutputLocation *InstanceAssociationOutputLocation `type:"structure"`
 
 	// Parameters specified when the association version was created.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// The cron or rate schedule specified for the association when the association
 	// version was created.
@@ -5801,7 +5798,7 @@ type AssociationVersionInfo struct {
 
 	// The targets specified for the association when the association version was
 	// created.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -5857,7 +5854,7 @@ func (s *AssociationVersionInfo) SetOutputLocation(v *InstanceAssociationOutputL
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *AssociationVersionInfo) SetParameters(v map[string][]*string) *AssociationVersionInfo {
+func (s *AssociationVersionInfo) SetParameters(v map[string][]string) *AssociationVersionInfo {
 	s.Parameters = v
 	return s
 }
@@ -5869,7 +5866,7 @@ func (s *AssociationVersionInfo) SetScheduleExpression(v string) *AssociationVer
 }
 
 // SetTargets sets the Targets field's value.
-func (s *AssociationVersionInfo) SetTargets(v []*Target) *AssociationVersionInfo {
+func (s *AssociationVersionInfo) SetTargets(v []Target) *AssociationVersionInfo {
 	s.Targets = v
 	return s
 }
@@ -5903,15 +5900,15 @@ type AutomationExecution struct {
 	FailureMessage *string `type:"string"`
 
 	// The list of execution outputs as defined in the automation document.
-	Outputs map[string][]*string `min:"1" type:"map"`
+	Outputs map[string][]string `min:"1" type:"map"`
 
 	// The key-value map of execution parameters, which were supplied when calling
 	// StartAutomationExecution.
-	Parameters map[string][]*string `min:"1" type:"map"`
+	Parameters map[string][]string `min:"1" type:"map"`
 
 	// A list of details about the current state of all steps that comprise an execution.
 	// An Automation document contains a list of steps that are executed in order.
-	StepExecutions []*StepExecution `type:"list"`
+	StepExecutions []StepExecution `type:"list"`
 }
 
 // String returns the string representation
@@ -5967,19 +5964,19 @@ func (s *AutomationExecution) SetFailureMessage(v string) *AutomationExecution {
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *AutomationExecution) SetOutputs(v map[string][]*string) *AutomationExecution {
+func (s *AutomationExecution) SetOutputs(v map[string][]string) *AutomationExecution {
 	s.Outputs = v
 	return s
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *AutomationExecution) SetParameters(v map[string][]*string) *AutomationExecution {
+func (s *AutomationExecution) SetParameters(v map[string][]string) *AutomationExecution {
 	s.Parameters = v
 	return s
 }
 
 // SetStepExecutions sets the StepExecutions field's value.
-func (s *AutomationExecution) SetStepExecutions(v []*StepExecution) *AutomationExecution {
+func (s *AutomationExecution) SetStepExecutions(v []StepExecution) *AutomationExecution {
 	s.StepExecutions = v
 	return s
 }
@@ -5999,7 +5996,7 @@ type AutomationExecutionFilter struct {
 	// key.
 	//
 	// Values is a required field
-	Values []*string `min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6039,7 +6036,7 @@ func (s *AutomationExecutionFilter) SetKey(v AutomationExecutionFilterKey) *Auto
 }
 
 // SetValues sets the Values field's value.
-func (s *AutomationExecutionFilter) SetValues(v []*string) *AutomationExecutionFilter {
+func (s *AutomationExecutionFilter) SetValues(v []string) *AutomationExecutionFilter {
 	s.Values = v
 	return s
 }
@@ -6076,7 +6073,7 @@ type AutomationExecutionMetadata struct {
 	LogFile *string `type:"string"`
 
 	// The list of execution outputs as defined in the Automation document.
-	Outputs map[string][]*string `min:"1" type:"map"`
+	Outputs map[string][]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -6138,7 +6135,7 @@ func (s *AutomationExecutionMetadata) SetLogFile(v string) *AutomationExecutionM
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *AutomationExecutionMetadata) SetOutputs(v map[string][]*string) *AutomationExecutionMetadata {
+func (s *AutomationExecutionMetadata) SetOutputs(v map[string][]string) *AutomationExecutionMetadata {
 	s.Outputs = v
 	return s
 }
@@ -6155,7 +6152,7 @@ type CancelCommandInput struct {
 	// (Optional) A list of instance IDs on which you want to cancel the command.
 	// If not provided, the command is canceled on every instance on which it was
 	// requested.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6192,7 +6189,7 @@ func (s *CancelCommandInput) SetCommandId(v string) *CancelCommandInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *CancelCommandInput) SetInstanceIds(v []*string) *CancelCommandInput {
+func (s *CancelCommandInput) SetInstanceIds(v []string) *CancelCommandInput {
 	s.InstanceIds = v
 	return s
 }
@@ -6243,7 +6240,7 @@ type Command struct {
 	ExpiresAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The instance IDs against which this command was requested.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// The maximum number of instances that are allowed to execute the command at
 	// the same time. You can specify a number of instances, such as 10, or a percentage
@@ -6276,7 +6273,7 @@ type Command struct {
 	OutputS3Region *string `min:"3" type:"string"`
 
 	// The parameter values to be inserted in the document when executing the command.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// The date and time the command was requested.
 	RequestedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -6329,7 +6326,7 @@ type Command struct {
 	// An array of search criteria that targets instances using a Key,Value combination
 	// that you specify. Targets is required if you don't provide one or more instance
 	// IDs in the call.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -6379,7 +6376,7 @@ func (s *Command) SetExpiresAfter(v time.Time) *Command {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *Command) SetInstanceIds(v []*string) *Command {
+func (s *Command) SetInstanceIds(v []string) *Command {
 	s.InstanceIds = v
 	return s
 }
@@ -6421,7 +6418,7 @@ func (s *Command) SetOutputS3Region(v string) *Command {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *Command) SetParameters(v map[string][]*string) *Command {
+func (s *Command) SetParameters(v map[string][]string) *Command {
 	s.Parameters = v
 	return s
 }
@@ -6457,7 +6454,7 @@ func (s *Command) SetTargetCount(v int64) *Command {
 }
 
 // SetTargets sets the Targets field's value.
-func (s *Command) SetTargets(v []*Target) *Command {
+func (s *Command) SetTargets(v []Target) *Command {
 	s.Targets = v
 	return s
 }
@@ -6532,7 +6529,7 @@ type CommandInvocation struct {
 	// The command against which this invocation was requested.
 	CommandId *string `min:"36" type:"string"`
 
-	CommandPlugins []*CommandPlugin `type:"list"`
+	CommandPlugins []CommandPlugin `type:"list"`
 
 	// User-specified information about the command, such as a brief description
 	// of what the command should do.
@@ -6640,7 +6637,7 @@ func (s *CommandInvocation) SetCommandId(v string) *CommandInvocation {
 }
 
 // SetCommandPlugins sets the CommandPlugins field's value.
-func (s *CommandInvocation) SetCommandPlugins(v []*CommandPlugin) *CommandInvocation {
+func (s *CommandInvocation) SetCommandPlugins(v []CommandPlugin) *CommandInvocation {
 	s.CommandPlugins = v
 	return s
 }
@@ -6988,7 +6985,7 @@ type ComplianceItem struct {
 	ComplianceType *string `min:"1" type:"string"`
 
 	// A "Key": "Value" tag combination for the compliance item.
-	Details map[string]*string `type:"map"`
+	Details map[string]string `type:"map"`
 
 	// A summary for the compliance item. The summary includes an execution ID,
 	// the execution type (for example, command), and the execution time.
@@ -7035,7 +7032,7 @@ func (s *ComplianceItem) SetComplianceType(v string) *ComplianceItem {
 }
 
 // SetDetails sets the Details field's value.
-func (s *ComplianceItem) SetDetails(v map[string]*string) *ComplianceItem {
+func (s *ComplianceItem) SetDetails(v map[string]string) *ComplianceItem {
 	s.Details = v
 	return s
 }
@@ -7088,7 +7085,7 @@ type ComplianceItemEntry struct {
 	_ struct{} `type:"structure"`
 
 	// A "Key": "Value" tag combination for the compliance item.
-	Details map[string]*string `type:"map"`
+	Details map[string]string `type:"map"`
 
 	// The compliance item ID. For example, if the compliance item is a Windows
 	// patch, the ID could be the number of the KB article.
@@ -7141,7 +7138,7 @@ func (s *ComplianceItemEntry) Validate() error {
 }
 
 // SetDetails sets the Details field's value.
-func (s *ComplianceItemEntry) SetDetails(v map[string]*string) *ComplianceItemEntry {
+func (s *ComplianceItemEntry) SetDetails(v map[string]string) *ComplianceItemEntry {
 	s.Details = v
 	return s
 }
@@ -7183,7 +7180,7 @@ type ComplianceStringFilter struct {
 	Type ComplianceQueryOperatorType `type:"string"`
 
 	// The value for which to search.
-	Values []*string `locationNameList:"FilterValue" min:"1" type:"list"`
+	Values []string `locationNameList:"FilterValue" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -7225,7 +7222,7 @@ func (s *ComplianceStringFilter) SetType(v ComplianceQueryOperatorType) *Complia
 }
 
 // SetValues sets the Values field's value.
-func (s *ComplianceStringFilter) SetValues(v []*string) *ComplianceStringFilter {
+func (s *ComplianceStringFilter) SetValues(v []string) *ComplianceStringFilter {
 	s.Values = v
 	return s
 }
@@ -7435,7 +7432,7 @@ type CreateAssociationBatchInput struct {
 	// One or more associations.
 	//
 	// Entries is a required field
-	Entries []*CreateAssociationBatchRequestEntry `locationNameList:"entries" min:"1" type:"list" required:"true"`
+	Entries []CreateAssociationBatchRequestEntry `locationNameList:"entries" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7460,9 +7457,6 @@ func (s *CreateAssociationBatchInput) Validate() error {
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
@@ -7476,7 +7470,7 @@ func (s *CreateAssociationBatchInput) Validate() error {
 }
 
 // SetEntries sets the Entries field's value.
-func (s *CreateAssociationBatchInput) SetEntries(v []*CreateAssociationBatchRequestEntry) *CreateAssociationBatchInput {
+func (s *CreateAssociationBatchInput) SetEntries(v []CreateAssociationBatchRequestEntry) *CreateAssociationBatchInput {
 	s.Entries = v
 	return s
 }
@@ -7486,10 +7480,10 @@ type CreateAssociationBatchOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the associations that failed.
-	Failed []*FailedCreateAssociation `locationNameList:"FailedCreateAssociationEntry" type:"list"`
+	Failed []FailedCreateAssociation `locationNameList:"FailedCreateAssociationEntry" type:"list"`
 
 	// Information about the associations that succeeded.
-	Successful []*AssociationDescription `locationNameList:"AssociationDescription" type:"list"`
+	Successful []AssociationDescription `locationNameList:"AssociationDescription" type:"list"`
 }
 
 // String returns the string representation
@@ -7503,13 +7497,13 @@ func (s CreateAssociationBatchOutput) GoString() string {
 }
 
 // SetFailed sets the Failed field's value.
-func (s *CreateAssociationBatchOutput) SetFailed(v []*FailedCreateAssociation) *CreateAssociationBatchOutput {
+func (s *CreateAssociationBatchOutput) SetFailed(v []FailedCreateAssociation) *CreateAssociationBatchOutput {
 	s.Failed = v
 	return s
 }
 
 // SetSuccessful sets the Successful field's value.
-func (s *CreateAssociationBatchOutput) SetSuccessful(v []*AssociationDescription) *CreateAssociationBatchOutput {
+func (s *CreateAssociationBatchOutput) SetSuccessful(v []AssociationDescription) *CreateAssociationBatchOutput {
 	s.Successful = v
 	return s
 }
@@ -7537,13 +7531,13 @@ type CreateAssociationBatchRequestEntry struct {
 	OutputLocation *InstanceAssociationOutputLocation `type:"structure"`
 
 	// A description of the parameters for a document.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// A cron expression that specifies a schedule when the association runs.
 	ScheduleExpression *string `min:"1" type:"string"`
 
 	// The instances targeted by the request.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -7573,9 +7567,6 @@ func (s *CreateAssociationBatchRequestEntry) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -7619,7 +7610,7 @@ func (s *CreateAssociationBatchRequestEntry) SetOutputLocation(v *InstanceAssoci
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateAssociationBatchRequestEntry) SetParameters(v map[string][]*string) *CreateAssociationBatchRequestEntry {
+func (s *CreateAssociationBatchRequestEntry) SetParameters(v map[string][]string) *CreateAssociationBatchRequestEntry {
 	s.Parameters = v
 	return s
 }
@@ -7631,7 +7622,7 @@ func (s *CreateAssociationBatchRequestEntry) SetScheduleExpression(v string) *Cr
 }
 
 // SetTargets sets the Targets field's value.
-func (s *CreateAssociationBatchRequestEntry) SetTargets(v []*Target) *CreateAssociationBatchRequestEntry {
+func (s *CreateAssociationBatchRequestEntry) SetTargets(v []Target) *CreateAssociationBatchRequestEntry {
 	s.Targets = v
 	return s
 }
@@ -7659,13 +7650,13 @@ type CreateAssociationInput struct {
 	OutputLocation *InstanceAssociationOutputLocation `type:"structure"`
 
 	// The parameters for the documents runtime configuration.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// A cron expression when the association will be applied to the target(s).
 	ScheduleExpression *string `min:"1" type:"string"`
 
 	// The targets (either instances or tags) for the association.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -7695,9 +7686,6 @@ func (s *CreateAssociationInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -7741,7 +7729,7 @@ func (s *CreateAssociationInput) SetOutputLocation(v *InstanceAssociationOutputL
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateAssociationInput) SetParameters(v map[string][]*string) *CreateAssociationInput {
+func (s *CreateAssociationInput) SetParameters(v map[string][]string) *CreateAssociationInput {
 	s.Parameters = v
 	return s
 }
@@ -7753,7 +7741,7 @@ func (s *CreateAssociationInput) SetScheduleExpression(v string) *CreateAssociat
 }
 
 // SetTargets sets the Targets field's value.
-func (s *CreateAssociationInput) SetTargets(v []*Target) *CreateAssociationInput {
+func (s *CreateAssociationInput) SetTargets(v []Target) *CreateAssociationInput {
 	s.Targets = v
 	return s
 }
@@ -8047,7 +8035,7 @@ type CreatePatchBaselineInput struct {
 	ApprovalRules *PatchRuleGroup `type:"structure"`
 
 	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string `type:"list"`
+	ApprovedPatches []string `type:"list"`
 
 	// Defines the compliance level for approved patches. This means that if an
 	// approved patch is reported as missing, this is the severity of the compliance
@@ -8075,7 +8063,7 @@ type CreatePatchBaselineInput struct {
 	OperatingSystem OperatingSystem `type:"string"`
 
 	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string `type:"list"`
+	RejectedPatches []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8128,7 +8116,7 @@ func (s *CreatePatchBaselineInput) SetApprovalRules(v *PatchRuleGroup) *CreatePa
 }
 
 // SetApprovedPatches sets the ApprovedPatches field's value.
-func (s *CreatePatchBaselineInput) SetApprovedPatches(v []*string) *CreatePatchBaselineInput {
+func (s *CreatePatchBaselineInput) SetApprovedPatches(v []string) *CreatePatchBaselineInput {
 	s.ApprovedPatches = v
 	return s
 }
@@ -8170,7 +8158,7 @@ func (s *CreatePatchBaselineInput) SetOperatingSystem(v OperatingSystem) *Create
 }
 
 // SetRejectedPatches sets the RejectedPatches field's value.
-func (s *CreatePatchBaselineInput) SetRejectedPatches(v []*string) *CreatePatchBaselineInput {
+func (s *CreatePatchBaselineInput) SetRejectedPatches(v []string) *CreatePatchBaselineInput {
 	s.RejectedPatches = v
 	return s
 }
@@ -8576,7 +8564,7 @@ type DeleteParametersInput struct {
 	// The names of the parameters to delete.
 	//
 	// Names is a required field
-	Names []*string `min:"1" type:"list" required:"true"`
+	Names []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8607,7 +8595,7 @@ func (s *DeleteParametersInput) Validate() error {
 }
 
 // SetNames sets the Names field's value.
-func (s *DeleteParametersInput) SetNames(v []*string) *DeleteParametersInput {
+func (s *DeleteParametersInput) SetNames(v []string) *DeleteParametersInput {
 	s.Names = v
 	return s
 }
@@ -8617,11 +8605,11 @@ type DeleteParametersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the deleted parameters.
-	DeletedParameters []*string `min:"1" type:"list"`
+	DeletedParameters []string `min:"1" type:"list"`
 
 	// The names of parameters that weren't deleted because the parameters are not
 	// valid.
-	InvalidParameters []*string `min:"1" type:"list"`
+	InvalidParameters []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -8635,13 +8623,13 @@ func (s DeleteParametersOutput) GoString() string {
 }
 
 // SetDeletedParameters sets the DeletedParameters field's value.
-func (s *DeleteParametersOutput) SetDeletedParameters(v []*string) *DeleteParametersOutput {
+func (s *DeleteParametersOutput) SetDeletedParameters(v []string) *DeleteParametersOutput {
 	s.DeletedParameters = v
 	return s
 }
 
 // SetInvalidParameters sets the InvalidParameters field's value.
-func (s *DeleteParametersOutput) SetInvalidParameters(v []*string) *DeleteParametersOutput {
+func (s *DeleteParametersOutput) SetInvalidParameters(v []string) *DeleteParametersOutput {
 	s.InvalidParameters = v
 	return s
 }
@@ -9129,7 +9117,7 @@ type DescribeActivationsFilter struct {
 	FilterKey DescribeActivationsFilterKeys `type:"string"`
 
 	// The filter values.
-	FilterValues []*string `type:"list"`
+	FilterValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -9149,7 +9137,7 @@ func (s *DescribeActivationsFilter) SetFilterKey(v DescribeActivationsFilterKeys
 }
 
 // SetFilterValues sets the FilterValues field's value.
-func (s *DescribeActivationsFilter) SetFilterValues(v []*string) *DescribeActivationsFilter {
+func (s *DescribeActivationsFilter) SetFilterValues(v []string) *DescribeActivationsFilter {
 	s.FilterValues = v
 	return s
 }
@@ -9159,7 +9147,7 @@ type DescribeActivationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A filter to view information about your activations.
-	Filters []*DescribeActivationsFilter `type:"list"`
+	Filters []DescribeActivationsFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -9194,7 +9182,7 @@ func (s *DescribeActivationsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeActivationsInput) SetFilters(v []*DescribeActivationsFilter) *DescribeActivationsInput {
+func (s *DescribeActivationsInput) SetFilters(v []DescribeActivationsFilter) *DescribeActivationsInput {
 	s.Filters = v
 	return s
 }
@@ -9216,7 +9204,7 @@ type DescribeActivationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of activations for your AWS account.
-	ActivationList []*Activation `type:"list"`
+	ActivationList []Activation `type:"list"`
 
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
@@ -9234,7 +9222,7 @@ func (s DescribeActivationsOutput) GoString() string {
 }
 
 // SetActivationList sets the ActivationList field's value.
-func (s *DescribeActivationsOutput) SetActivationList(v []*Activation) *DescribeActivationsOutput {
+func (s *DescribeActivationsOutput) SetActivationList(v []Activation) *DescribeActivationsOutput {
 	s.ActivationList = v
 	return s
 }
@@ -9328,7 +9316,7 @@ type DescribeAutomationExecutionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Filters used to limit the scope of executions that are requested.
-	Filters []*AutomationExecutionFilter `min:"1" type:"list"`
+	Filters []AutomationExecutionFilter `min:"1" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -9361,9 +9349,6 @@ func (s *DescribeAutomationExecutionsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -9377,7 +9362,7 @@ func (s *DescribeAutomationExecutionsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeAutomationExecutionsInput) SetFilters(v []*AutomationExecutionFilter) *DescribeAutomationExecutionsInput {
+func (s *DescribeAutomationExecutionsInput) SetFilters(v []AutomationExecutionFilter) *DescribeAutomationExecutionsInput {
 	s.Filters = v
 	return s
 }
@@ -9400,7 +9385,7 @@ type DescribeAutomationExecutionsOutput struct {
 
 	// The list of details about each automation execution which has occurred which
 	// matches the filter specification, if any.
-	AutomationExecutionMetadataList []*AutomationExecutionMetadata `type:"list"`
+	AutomationExecutionMetadataList []AutomationExecutionMetadata `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -9418,7 +9403,7 @@ func (s DescribeAutomationExecutionsOutput) GoString() string {
 }
 
 // SetAutomationExecutionMetadataList sets the AutomationExecutionMetadataList field's value.
-func (s *DescribeAutomationExecutionsOutput) SetAutomationExecutionMetadataList(v []*AutomationExecutionMetadata) *DescribeAutomationExecutionsOutput {
+func (s *DescribeAutomationExecutionsOutput) SetAutomationExecutionMetadataList(v []AutomationExecutionMetadata) *DescribeAutomationExecutionsOutput {
 	s.AutomationExecutionMetadataList = v
 	return s
 }
@@ -9434,7 +9419,7 @@ type DescribeAvailablePatchesInput struct {
 	_ struct{} `type:"structure"`
 
 	// Filters used to scope down the returned patches.
-	Filters []*PatchOrchestratorFilter `type:"list"`
+	Filters []PatchOrchestratorFilter `type:"list"`
 
 	// The maximum number of patches to return (per page).
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -9462,9 +9447,6 @@ func (s *DescribeAvailablePatchesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -9478,7 +9460,7 @@ func (s *DescribeAvailablePatchesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeAvailablePatchesInput) SetFilters(v []*PatchOrchestratorFilter) *DescribeAvailablePatchesInput {
+func (s *DescribeAvailablePatchesInput) SetFilters(v []PatchOrchestratorFilter) *DescribeAvailablePatchesInput {
 	s.Filters = v
 	return s
 }
@@ -9504,7 +9486,7 @@ type DescribeAvailablePatchesOutput struct {
 	NextToken *string `type:"string"`
 
 	// An array of patches. Each entry in the array is a patch structure.
-	Patches []*Patch `type:"list"`
+	Patches []Patch `type:"list"`
 }
 
 // String returns the string representation
@@ -9524,7 +9506,7 @@ func (s *DescribeAvailablePatchesOutput) SetNextToken(v string) *DescribeAvailab
 }
 
 // SetPatches sets the Patches field's value.
-func (s *DescribeAvailablePatchesOutput) SetPatches(v []*Patch) *DescribeAvailablePatchesOutput {
+func (s *DescribeAvailablePatchesOutput) SetPatches(v []Patch) *DescribeAvailablePatchesOutput {
 	s.Patches = v
 	return s
 }
@@ -9663,7 +9645,7 @@ type DescribeDocumentPermissionOutput struct {
 
 	// The account IDs that have permission to use this document. The ID can be
 	// either an AWS account or All.
-	AccountIds []*string `locationNameList:"AccountId" type:"list"`
+	AccountIds []string `locationNameList:"AccountId" type:"list"`
 }
 
 // String returns the string representation
@@ -9677,7 +9659,7 @@ func (s DescribeDocumentPermissionOutput) GoString() string {
 }
 
 // SetAccountIds sets the AccountIds field's value.
-func (s *DescribeDocumentPermissionOutput) SetAccountIds(v []*string) *DescribeDocumentPermissionOutput {
+func (s *DescribeDocumentPermissionOutput) SetAccountIds(v []string) *DescribeDocumentPermissionOutput {
 	s.AccountIds = v
 	return s
 }
@@ -9751,7 +9733,7 @@ type DescribeEffectiveInstanceAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The associations for the requested instance.
-	Associations []*InstanceAssociation `type:"list"`
+	Associations []InstanceAssociation `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -9769,7 +9751,7 @@ func (s DescribeEffectiveInstanceAssociationsOutput) GoString() string {
 }
 
 // SetAssociations sets the Associations field's value.
-func (s *DescribeEffectiveInstanceAssociationsOutput) SetAssociations(v []*InstanceAssociation) *DescribeEffectiveInstanceAssociationsOutput {
+func (s *DescribeEffectiveInstanceAssociationsOutput) SetAssociations(v []InstanceAssociation) *DescribeEffectiveInstanceAssociationsOutput {
 	s.Associations = v
 	return s
 }
@@ -9850,7 +9832,7 @@ type DescribeEffectivePatchesForPatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of patches and patch status.
-	EffectivePatches []*EffectivePatch `type:"list"`
+	EffectivePatches []EffectivePatch `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -9868,7 +9850,7 @@ func (s DescribeEffectivePatchesForPatchBaselineOutput) GoString() string {
 }
 
 // SetEffectivePatches sets the EffectivePatches field's value.
-func (s *DescribeEffectivePatchesForPatchBaselineOutput) SetEffectivePatches(v []*EffectivePatch) *DescribeEffectivePatchesForPatchBaselineOutput {
+func (s *DescribeEffectivePatchesForPatchBaselineOutput) SetEffectivePatches(v []EffectivePatch) *DescribeEffectivePatchesForPatchBaselineOutput {
 	s.EffectivePatches = v
 	return s
 }
@@ -9948,7 +9930,7 @@ type DescribeInstanceAssociationsStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Status information about the association.
-	InstanceAssociationStatusInfos []*InstanceAssociationStatusInfo `type:"list"`
+	InstanceAssociationStatusInfos []InstanceAssociationStatusInfo `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -9966,7 +9948,7 @@ func (s DescribeInstanceAssociationsStatusOutput) GoString() string {
 }
 
 // SetInstanceAssociationStatusInfos sets the InstanceAssociationStatusInfos field's value.
-func (s *DescribeInstanceAssociationsStatusOutput) SetInstanceAssociationStatusInfos(v []*InstanceAssociationStatusInfo) *DescribeInstanceAssociationsStatusOutput {
+func (s *DescribeInstanceAssociationsStatusOutput) SetInstanceAssociationStatusInfos(v []InstanceAssociationStatusInfo) *DescribeInstanceAssociationsStatusOutput {
 	s.InstanceAssociationStatusInfos = v
 	return s
 }
@@ -9982,10 +9964,10 @@ type DescribeInstanceInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of instances.
-	Filters []*InstanceInformationStringFilter `locationNameList:"InstanceInformationStringFilter" type:"list"`
+	Filters []InstanceInformationStringFilter `locationNameList:"InstanceInformationStringFilter" type:"list"`
 
 	// One or more filters. Use a filter to return a more specific list of instances.
-	InstanceInformationFilterList []*InstanceInformationFilter `locationNameList:"InstanceInformationFilter" type:"list"`
+	InstanceInformationFilterList []InstanceInformationFilter `locationNameList:"InstanceInformationFilter" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -10015,9 +9997,6 @@ func (s *DescribeInstanceInformationInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10025,9 +10004,6 @@ func (s *DescribeInstanceInformationInput) Validate() error {
 	}
 	if s.InstanceInformationFilterList != nil {
 		for i, v := range s.InstanceInformationFilterList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceInformationFilterList", i), err.(aws.ErrInvalidParams))
 			}
@@ -10041,13 +10017,13 @@ func (s *DescribeInstanceInformationInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeInstanceInformationInput) SetFilters(v []*InstanceInformationStringFilter) *DescribeInstanceInformationInput {
+func (s *DescribeInstanceInformationInput) SetFilters(v []InstanceInformationStringFilter) *DescribeInstanceInformationInput {
 	s.Filters = v
 	return s
 }
 
 // SetInstanceInformationFilterList sets the InstanceInformationFilterList field's value.
-func (s *DescribeInstanceInformationInput) SetInstanceInformationFilterList(v []*InstanceInformationFilter) *DescribeInstanceInformationInput {
+func (s *DescribeInstanceInformationInput) SetInstanceInformationFilterList(v []InstanceInformationFilter) *DescribeInstanceInformationInput {
 	s.InstanceInformationFilterList = v
 	return s
 }
@@ -10069,7 +10045,7 @@ type DescribeInstanceInformationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The instance information list.
-	InstanceInformationList []*InstanceInformation `locationNameList:"InstanceInformation" type:"list"`
+	InstanceInformationList []InstanceInformation `locationNameList:"InstanceInformation" type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -10087,7 +10063,7 @@ func (s DescribeInstanceInformationOutput) GoString() string {
 }
 
 // SetInstanceInformationList sets the InstanceInformationList field's value.
-func (s *DescribeInstanceInformationOutput) SetInstanceInformationList(v []*InstanceInformation) *DescribeInstanceInformationOutput {
+func (s *DescribeInstanceInformationOutput) SetInstanceInformationList(v []InstanceInformation) *DescribeInstanceInformationOutput {
 	s.InstanceInformationList = v
 	return s
 }
@@ -10109,7 +10085,7 @@ type DescribeInstancePatchStatesForPatchGroupInput struct {
 	// Values (array containing a single string)
 	//
 	// Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")
-	Filters []*InstancePatchStateFilter `type:"list"`
+	Filters []InstancePatchStateFilter `type:"list"`
 
 	// The maximum number of patches to return (per page).
 	MaxResults *int64 `min:"10" type:"integer"`
@@ -10150,9 +10126,6 @@ func (s *DescribeInstancePatchStatesForPatchGroupInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10166,7 +10139,7 @@ func (s *DescribeInstancePatchStatesForPatchGroupInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeInstancePatchStatesForPatchGroupInput) SetFilters(v []*InstancePatchStateFilter) *DescribeInstancePatchStatesForPatchGroupInput {
+func (s *DescribeInstancePatchStatesForPatchGroupInput) SetFilters(v []InstancePatchStateFilter) *DescribeInstancePatchStatesForPatchGroupInput {
 	s.Filters = v
 	return s
 }
@@ -10194,7 +10167,7 @@ type DescribeInstancePatchStatesForPatchGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The high-level patch state for the requested instances.
-	InstancePatchStates []*InstancePatchState `min:"1" type:"list"`
+	InstancePatchStates []InstancePatchState `min:"1" type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -10212,7 +10185,7 @@ func (s DescribeInstancePatchStatesForPatchGroupOutput) GoString() string {
 }
 
 // SetInstancePatchStates sets the InstancePatchStates field's value.
-func (s *DescribeInstancePatchStatesForPatchGroupOutput) SetInstancePatchStates(v []*InstancePatchState) *DescribeInstancePatchStatesForPatchGroupOutput {
+func (s *DescribeInstancePatchStatesForPatchGroupOutput) SetInstancePatchStates(v []InstancePatchState) *DescribeInstancePatchStatesForPatchGroupOutput {
 	s.InstancePatchStates = v
 	return s
 }
@@ -10230,7 +10203,7 @@ type DescribeInstancePatchStatesInput struct {
 	// The ID of the instance whose patch state information should be retrieved.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `type:"list" required:"true"`
+	InstanceIds []string `type:"list" required:"true"`
 
 	// The maximum number of instances to return (per page).
 	MaxResults *int64 `min:"10" type:"integer"`
@@ -10268,7 +10241,7 @@ func (s *DescribeInstancePatchStatesInput) Validate() error {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstancePatchStatesInput) SetInstanceIds(v []*string) *DescribeInstancePatchStatesInput {
+func (s *DescribeInstancePatchStatesInput) SetInstanceIds(v []string) *DescribeInstancePatchStatesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -10290,7 +10263,7 @@ type DescribeInstancePatchStatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The high-level patch state for the requested instances.
-	InstancePatchStates []*InstancePatchState `type:"list"`
+	InstancePatchStates []InstancePatchState `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -10308,7 +10281,7 @@ func (s DescribeInstancePatchStatesOutput) GoString() string {
 }
 
 // SetInstancePatchStates sets the InstancePatchStates field's value.
-func (s *DescribeInstancePatchStatesOutput) SetInstancePatchStates(v []*InstancePatchState) *DescribeInstancePatchStatesOutput {
+func (s *DescribeInstancePatchStatesOutput) SetInstancePatchStates(v []InstancePatchState) *DescribeInstancePatchStatesOutput {
 	s.InstancePatchStates = v
 	return s
 }
@@ -10328,7 +10301,7 @@ type DescribeInstancePatchesInput struct {
 	// Key (string, between 1 and 128 characters)
 	//
 	// Values (array of strings, each string between 1 and 256 characters)
-	Filters []*PatchOrchestratorFilter `type:"list"`
+	Filters []PatchOrchestratorFilter `type:"list"`
 
 	// The ID of the instance whose patch state information should be retrieved.
 	//
@@ -10365,9 +10338,6 @@ func (s *DescribeInstancePatchesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10381,7 +10351,7 @@ func (s *DescribeInstancePatchesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeInstancePatchesInput) SetFilters(v []*PatchOrchestratorFilter) *DescribeInstancePatchesInput {
+func (s *DescribeInstancePatchesInput) SetFilters(v []PatchOrchestratorFilter) *DescribeInstancePatchesInput {
 	s.Filters = v
 	return s
 }
@@ -10428,7 +10398,7 @@ type DescribeInstancePatchesOutput struct {
 	// InstalledTime (DateTime)
 	//
 	// InstalledBy (string)
-	Patches []*PatchComplianceData `type:"list"`
+	Patches []PatchComplianceData `type:"list"`
 }
 
 // String returns the string representation
@@ -10448,7 +10418,7 @@ func (s *DescribeInstancePatchesOutput) SetNextToken(v string) *DescribeInstance
 }
 
 // SetPatches sets the Patches field's value.
-func (s *DescribeInstancePatchesOutput) SetPatches(v []*PatchComplianceData) *DescribeInstancePatchesOutput {
+func (s *DescribeInstancePatchesOutput) SetPatches(v []PatchComplianceData) *DescribeInstancePatchesOutput {
 	s.Patches = v
 	return s
 }
@@ -10460,7 +10430,7 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsInput struct {
 	// Optional filters used to scope down the returned task invocations. The supported
 	// filter key is STATUS with the corresponding values PENDING, IN_PROGRESS,
 	// SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
-	Filters []*MaintenanceWindowFilter `type:"list"`
+	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -10515,9 +10485,6 @@ func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) Validate() erro
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10531,7 +10498,7 @@ func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) Validate() erro
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) SetFilters(v []*MaintenanceWindowFilter) *DescribeMaintenanceWindowExecutionTaskInvocationsInput {
+func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) SetFilters(v []MaintenanceWindowFilter) *DescribeMaintenanceWindowExecutionTaskInvocationsInput {
 	s.Filters = v
 	return s
 }
@@ -10569,7 +10536,7 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the task invocation results per invocation.
-	WindowExecutionTaskInvocationIdentities []*MaintenanceWindowExecutionTaskInvocationIdentity `type:"list"`
+	WindowExecutionTaskInvocationIdentities []MaintenanceWindowExecutionTaskInvocationIdentity `type:"list"`
 }
 
 // String returns the string representation
@@ -10589,7 +10556,7 @@ func (s *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) SetNextToken(v
 }
 
 // SetWindowExecutionTaskInvocationIdentities sets the WindowExecutionTaskInvocationIdentities field's value.
-func (s *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) SetWindowExecutionTaskInvocationIdentities(v []*MaintenanceWindowExecutionTaskInvocationIdentity) *DescribeMaintenanceWindowExecutionTaskInvocationsOutput {
+func (s *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) SetWindowExecutionTaskInvocationIdentities(v []MaintenanceWindowExecutionTaskInvocationIdentity) *DescribeMaintenanceWindowExecutionTaskInvocationsOutput {
 	s.WindowExecutionTaskInvocationIdentities = v
 	return s
 }
@@ -10601,7 +10568,7 @@ type DescribeMaintenanceWindowExecutionTasksInput struct {
 	// Optional filters used to scope down the returned tasks. The supported filter
 	// key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS,
 	// FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
-	Filters []*MaintenanceWindowFilter `type:"list"`
+	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -10644,9 +10611,6 @@ func (s *DescribeMaintenanceWindowExecutionTasksInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10660,7 +10624,7 @@ func (s *DescribeMaintenanceWindowExecutionTasksInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMaintenanceWindowExecutionTasksInput) SetFilters(v []*MaintenanceWindowFilter) *DescribeMaintenanceWindowExecutionTasksInput {
+func (s *DescribeMaintenanceWindowExecutionTasksInput) SetFilters(v []MaintenanceWindowFilter) *DescribeMaintenanceWindowExecutionTasksInput {
 	s.Filters = v
 	return s
 }
@@ -10692,7 +10656,7 @@ type DescribeMaintenanceWindowExecutionTasksOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the task executions.
-	WindowExecutionTaskIdentities []*MaintenanceWindowExecutionTaskIdentity `type:"list"`
+	WindowExecutionTaskIdentities []MaintenanceWindowExecutionTaskIdentity `type:"list"`
 }
 
 // String returns the string representation
@@ -10712,7 +10676,7 @@ func (s *DescribeMaintenanceWindowExecutionTasksOutput) SetNextToken(v string) *
 }
 
 // SetWindowExecutionTaskIdentities sets the WindowExecutionTaskIdentities field's value.
-func (s *DescribeMaintenanceWindowExecutionTasksOutput) SetWindowExecutionTaskIdentities(v []*MaintenanceWindowExecutionTaskIdentity) *DescribeMaintenanceWindowExecutionTasksOutput {
+func (s *DescribeMaintenanceWindowExecutionTasksOutput) SetWindowExecutionTaskIdentities(v []MaintenanceWindowExecutionTaskIdentity) *DescribeMaintenanceWindowExecutionTasksOutput {
 	s.WindowExecutionTaskIdentities = v
 	return s
 }
@@ -10729,7 +10693,7 @@ type DescribeMaintenanceWindowExecutionsInput struct {
 	//
 	// The supported Keys are ExecutedBefore and ExecutedAfter with the value being
 	// a date/time string such as 2016-11-04T05:00:00Z.
-	Filters []*MaintenanceWindowFilter `type:"list"`
+	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -10771,9 +10735,6 @@ func (s *DescribeMaintenanceWindowExecutionsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10787,7 +10748,7 @@ func (s *DescribeMaintenanceWindowExecutionsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMaintenanceWindowExecutionsInput) SetFilters(v []*MaintenanceWindowFilter) *DescribeMaintenanceWindowExecutionsInput {
+func (s *DescribeMaintenanceWindowExecutionsInput) SetFilters(v []MaintenanceWindowFilter) *DescribeMaintenanceWindowExecutionsInput {
 	s.Filters = v
 	return s
 }
@@ -10819,7 +10780,7 @@ type DescribeMaintenanceWindowExecutionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the Maintenance Windows execution.
-	WindowExecutions []*MaintenanceWindowExecution `type:"list"`
+	WindowExecutions []MaintenanceWindowExecution `type:"list"`
 }
 
 // String returns the string representation
@@ -10839,7 +10800,7 @@ func (s *DescribeMaintenanceWindowExecutionsOutput) SetNextToken(v string) *Desc
 }
 
 // SetWindowExecutions sets the WindowExecutions field's value.
-func (s *DescribeMaintenanceWindowExecutionsOutput) SetWindowExecutions(v []*MaintenanceWindowExecution) *DescribeMaintenanceWindowExecutionsOutput {
+func (s *DescribeMaintenanceWindowExecutionsOutput) SetWindowExecutions(v []MaintenanceWindowExecution) *DescribeMaintenanceWindowExecutionsOutput {
 	s.WindowExecutions = v
 	return s
 }
@@ -10850,7 +10811,7 @@ type DescribeMaintenanceWindowTargetsInput struct {
 
 	// Optional filters that can be used to narrow down the scope of the returned
 	// window targets. The supported filter keys are Type, WindowTargetId and OwnerInformation.
-	Filters []*MaintenanceWindowFilter `type:"list"`
+	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -10892,9 +10853,6 @@ func (s *DescribeMaintenanceWindowTargetsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10908,7 +10866,7 @@ func (s *DescribeMaintenanceWindowTargetsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMaintenanceWindowTargetsInput) SetFilters(v []*MaintenanceWindowFilter) *DescribeMaintenanceWindowTargetsInput {
+func (s *DescribeMaintenanceWindowTargetsInput) SetFilters(v []MaintenanceWindowFilter) *DescribeMaintenanceWindowTargetsInput {
 	s.Filters = v
 	return s
 }
@@ -10940,7 +10898,7 @@ type DescribeMaintenanceWindowTargetsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the targets in the Maintenance Window.
-	Targets []*MaintenanceWindowTarget `type:"list"`
+	Targets []MaintenanceWindowTarget `type:"list"`
 }
 
 // String returns the string representation
@@ -10960,7 +10918,7 @@ func (s *DescribeMaintenanceWindowTargetsOutput) SetNextToken(v string) *Describ
 }
 
 // SetTargets sets the Targets field's value.
-func (s *DescribeMaintenanceWindowTargetsOutput) SetTargets(v []*MaintenanceWindowTarget) *DescribeMaintenanceWindowTargetsOutput {
+func (s *DescribeMaintenanceWindowTargetsOutput) SetTargets(v []MaintenanceWindowTarget) *DescribeMaintenanceWindowTargetsOutput {
 	s.Targets = v
 	return s
 }
@@ -10971,7 +10929,7 @@ type DescribeMaintenanceWindowTasksInput struct {
 
 	// Optional filters used to narrow down the scope of the returned tasks. The
 	// supported filter keys are WindowTaskId, TaskArn, Priority, and TaskType.
-	Filters []*MaintenanceWindowFilter `type:"list"`
+	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -11013,9 +10971,6 @@ func (s *DescribeMaintenanceWindowTasksInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -11029,7 +10984,7 @@ func (s *DescribeMaintenanceWindowTasksInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMaintenanceWindowTasksInput) SetFilters(v []*MaintenanceWindowFilter) *DescribeMaintenanceWindowTasksInput {
+func (s *DescribeMaintenanceWindowTasksInput) SetFilters(v []MaintenanceWindowFilter) *DescribeMaintenanceWindowTasksInput {
 	s.Filters = v
 	return s
 }
@@ -11061,7 +11016,7 @@ type DescribeMaintenanceWindowTasksOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the tasks in the Maintenance Window.
-	Tasks []*MaintenanceWindowTask `type:"list"`
+	Tasks []MaintenanceWindowTask `type:"list"`
 }
 
 // String returns the string representation
@@ -11081,7 +11036,7 @@ func (s *DescribeMaintenanceWindowTasksOutput) SetNextToken(v string) *DescribeM
 }
 
 // SetTasks sets the Tasks field's value.
-func (s *DescribeMaintenanceWindowTasksOutput) SetTasks(v []*MaintenanceWindowTask) *DescribeMaintenanceWindowTasksOutput {
+func (s *DescribeMaintenanceWindowTasksOutput) SetTasks(v []MaintenanceWindowTask) *DescribeMaintenanceWindowTasksOutput {
 	s.Tasks = v
 	return s
 }
@@ -11092,7 +11047,7 @@ type DescribeMaintenanceWindowsInput struct {
 
 	// Optional filters used to narrow down the scope of the returned Maintenance
 	// Windows. Supported filter keys are Name and Enabled.
-	Filters []*MaintenanceWindowFilter `type:"list"`
+	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -11122,9 +11077,6 @@ func (s *DescribeMaintenanceWindowsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -11138,7 +11090,7 @@ func (s *DescribeMaintenanceWindowsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMaintenanceWindowsInput) SetFilters(v []*MaintenanceWindowFilter) *DescribeMaintenanceWindowsInput {
+func (s *DescribeMaintenanceWindowsInput) SetFilters(v []MaintenanceWindowFilter) *DescribeMaintenanceWindowsInput {
 	s.Filters = v
 	return s
 }
@@ -11164,7 +11116,7 @@ type DescribeMaintenanceWindowsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the Maintenance Windows.
-	WindowIdentities []*MaintenanceWindowIdentity `type:"list"`
+	WindowIdentities []MaintenanceWindowIdentity `type:"list"`
 }
 
 // String returns the string representation
@@ -11184,7 +11136,7 @@ func (s *DescribeMaintenanceWindowsOutput) SetNextToken(v string) *DescribeMaint
 }
 
 // SetWindowIdentities sets the WindowIdentities field's value.
-func (s *DescribeMaintenanceWindowsOutput) SetWindowIdentities(v []*MaintenanceWindowIdentity) *DescribeMaintenanceWindowsOutput {
+func (s *DescribeMaintenanceWindowsOutput) SetWindowIdentities(v []MaintenanceWindowIdentity) *DescribeMaintenanceWindowsOutput {
 	s.WindowIdentities = v
 	return s
 }
@@ -11194,7 +11146,7 @@ type DescribeParametersInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*ParametersFilter `type:"list"`
+	Filters []ParametersFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -11206,7 +11158,7 @@ type DescribeParametersInput struct {
 	NextToken *string `type:"string"`
 
 	// Filters to limit the request results.
-	ParameterFilters []*ParameterStringFilter `type:"list"`
+	ParameterFilters []ParameterStringFilter `type:"list"`
 }
 
 // String returns the string representation
@@ -11227,9 +11179,6 @@ func (s *DescribeParametersInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -11237,9 +11186,6 @@ func (s *DescribeParametersInput) Validate() error {
 	}
 	if s.ParameterFilters != nil {
 		for i, v := range s.ParameterFilters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(aws.ErrInvalidParams))
 			}
@@ -11253,7 +11199,7 @@ func (s *DescribeParametersInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeParametersInput) SetFilters(v []*ParametersFilter) *DescribeParametersInput {
+func (s *DescribeParametersInput) SetFilters(v []ParametersFilter) *DescribeParametersInput {
 	s.Filters = v
 	return s
 }
@@ -11271,7 +11217,7 @@ func (s *DescribeParametersInput) SetNextToken(v string) *DescribeParametersInpu
 }
 
 // SetParameterFilters sets the ParameterFilters field's value.
-func (s *DescribeParametersInput) SetParameterFilters(v []*ParameterStringFilter) *DescribeParametersInput {
+func (s *DescribeParametersInput) SetParameterFilters(v []ParameterStringFilter) *DescribeParametersInput {
 	s.ParameterFilters = v
 	return s
 }
@@ -11285,7 +11231,7 @@ type DescribeParametersOutput struct {
 	NextToken *string `type:"string"`
 
 	// Parameters returned by the request.
-	Parameters []*ParameterMetadata `type:"list"`
+	Parameters []ParameterMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -11305,7 +11251,7 @@ func (s *DescribeParametersOutput) SetNextToken(v string) *DescribeParametersOut
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeParametersOutput) SetParameters(v []*ParameterMetadata) *DescribeParametersOutput {
+func (s *DescribeParametersOutput) SetParameters(v []ParameterMetadata) *DescribeParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -11319,7 +11265,7 @@ type DescribePatchBaselinesInput struct {
 	// Key: (string, "NAME_PREFIX" or "OWNER")
 	//
 	// Value: (array of strings, exactly 1 entry, between 1 and 255 characters)
-	Filters []*PatchOrchestratorFilter `type:"list"`
+	Filters []PatchOrchestratorFilter `type:"list"`
 
 	// The maximum number of patch baselines to return (per page).
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -11347,9 +11293,6 @@ func (s *DescribePatchBaselinesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -11363,7 +11306,7 @@ func (s *DescribePatchBaselinesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribePatchBaselinesInput) SetFilters(v []*PatchOrchestratorFilter) *DescribePatchBaselinesInput {
+func (s *DescribePatchBaselinesInput) SetFilters(v []PatchOrchestratorFilter) *DescribePatchBaselinesInput {
 	s.Filters = v
 	return s
 }
@@ -11385,7 +11328,7 @@ type DescribePatchBaselinesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of PatchBaselineIdentity elements.
-	BaselineIdentities []*PatchBaselineIdentity `type:"list"`
+	BaselineIdentities []PatchBaselineIdentity `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -11403,7 +11346,7 @@ func (s DescribePatchBaselinesOutput) GoString() string {
 }
 
 // SetBaselineIdentities sets the BaselineIdentities field's value.
-func (s *DescribePatchBaselinesOutput) SetBaselineIdentities(v []*PatchBaselineIdentity) *DescribePatchBaselinesOutput {
+func (s *DescribePatchBaselinesOutput) SetBaselineIdentities(v []PatchBaselineIdentity) *DescribePatchBaselinesOutput {
 	s.BaselineIdentities = v
 	return s
 }
@@ -11533,7 +11476,7 @@ type DescribePatchGroupsInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*PatchOrchestratorFilter `type:"list"`
+	Filters []PatchOrchestratorFilter `type:"list"`
 
 	// The maximum number of patch groups to return (per page).
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -11561,9 +11504,6 @@ func (s *DescribePatchGroupsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -11577,7 +11517,7 @@ func (s *DescribePatchGroupsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribePatchGroupsInput) SetFilters(v []*PatchOrchestratorFilter) *DescribePatchGroupsInput {
+func (s *DescribePatchGroupsInput) SetFilters(v []PatchOrchestratorFilter) *DescribePatchGroupsInput {
 	s.Filters = v
 	return s
 }
@@ -11603,7 +11543,7 @@ type DescribePatchGroupsOutput struct {
 	// PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
 	//
 	// PatchBaselineIdentity: A PatchBaselineIdentity element.
-	Mappings []*PatchGroupPatchBaselineMapping `type:"list"`
+	Mappings []PatchGroupPatchBaselineMapping `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -11621,7 +11561,7 @@ func (s DescribePatchGroupsOutput) GoString() string {
 }
 
 // SetMappings sets the Mappings field's value.
-func (s *DescribePatchGroupsOutput) SetMappings(v []*PatchGroupPatchBaselineMapping) *DescribePatchGroupsOutput {
+func (s *DescribePatchGroupsOutput) SetMappings(v []PatchGroupPatchBaselineMapping) *DescribePatchGroupsOutput {
 	s.Mappings = v
 	return s
 }
@@ -11706,7 +11646,7 @@ type DocumentDescription struct {
 	Owner *string `type:"string"`
 
 	// A description of the parameters for a document.
-	Parameters []*DocumentParameter `locationNameList:"DocumentParameter" type:"list"`
+	Parameters []DocumentParameter `locationNameList:"DocumentParameter" type:"list"`
 
 	// The list of OS platforms compatible with this Systems Manager document.
 	PlatformTypes []PlatformType `locationNameList:"PlatformType" type:"list"`
@@ -11721,7 +11661,7 @@ type DocumentDescription struct {
 	Status DocumentStatus `type:"string"`
 
 	// The tags, or metadata, that have been applied to the document.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -11795,7 +11735,7 @@ func (s *DocumentDescription) SetOwner(v string) *DocumentDescription {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DocumentDescription) SetParameters(v []*DocumentParameter) *DocumentDescription {
+func (s *DocumentDescription) SetParameters(v []DocumentParameter) *DocumentDescription {
 	s.Parameters = v
 	return s
 }
@@ -11825,7 +11765,7 @@ func (s *DocumentDescription) SetStatus(v DocumentStatus) *DocumentDescription {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DocumentDescription) SetTags(v []*Tag) *DocumentDescription {
+func (s *DocumentDescription) SetTags(v []Tag) *DocumentDescription {
 	s.Tags = v
 	return s
 }
@@ -11912,7 +11852,7 @@ type DocumentIdentifier struct {
 	SchemaVersion *string `type:"string"`
 
 	// The tags, or metadata, that have been applied to the document.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -11962,7 +11902,7 @@ func (s *DocumentIdentifier) SetSchemaVersion(v string) *DocumentIdentifier {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DocumentIdentifier) SetTags(v []*Tag) *DocumentIdentifier {
+func (s *DocumentIdentifier) SetTags(v []Tag) *DocumentIdentifier {
 	s.Tags = v
 	return s
 }
@@ -12000,7 +11940,7 @@ type DocumentKeyValuesFilter struct {
 	Key *string `min:"1" type:"string"`
 
 	// The value for the filter key.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -12033,7 +11973,7 @@ func (s *DocumentKeyValuesFilter) SetKey(v string) *DocumentKeyValuesFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *DocumentKeyValuesFilter) SetValues(v []*string) *DocumentKeyValuesFilter {
+func (s *DocumentKeyValuesFilter) SetValues(v []string) *DocumentKeyValuesFilter {
 	s.Values = v
 	return s
 }
@@ -12236,7 +12176,7 @@ type FailureDetails struct {
 	_ struct{} `type:"structure"`
 
 	// Detailed information about the Automation step failure.
-	Details map[string][]*string `min:"1" type:"map"`
+	Details map[string][]string `min:"1" type:"map"`
 
 	// The stage of the Automation execution when the failure occurred. The stages
 	// include the following: InputValidation, PreVerification, Invocation, PostVerification.
@@ -12258,7 +12198,7 @@ func (s FailureDetails) GoString() string {
 }
 
 // SetDetails sets the Details field's value.
-func (s *FailureDetails) SetDetails(v map[string][]*string) *FailureDetails {
+func (s *FailureDetails) SetDetails(v map[string][]string) *FailureDetails {
 	s.Details = v
 	return s
 }
@@ -12910,7 +12850,7 @@ type GetInventoryInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*InventoryFilter `locationNameList:"InventoryFilter" min:"1" type:"list"`
+	Filters []InventoryFilter `locationNameList:"InventoryFilter" min:"1" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -12922,7 +12862,7 @@ type GetInventoryInput struct {
 	NextToken *string `type:"string"`
 
 	// The list of inventory item types to return.
-	ResultAttributes []*ResultAttribute `locationNameList:"ResultAttribute" min:"1" type:"list"`
+	ResultAttributes []ResultAttribute `locationNameList:"ResultAttribute" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -12949,9 +12889,6 @@ func (s *GetInventoryInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -12959,9 +12896,6 @@ func (s *GetInventoryInput) Validate() error {
 	}
 	if s.ResultAttributes != nil {
 		for i, v := range s.ResultAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResultAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -12975,7 +12909,7 @@ func (s *GetInventoryInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *GetInventoryInput) SetFilters(v []*InventoryFilter) *GetInventoryInput {
+func (s *GetInventoryInput) SetFilters(v []InventoryFilter) *GetInventoryInput {
 	s.Filters = v
 	return s
 }
@@ -12993,7 +12927,7 @@ func (s *GetInventoryInput) SetNextToken(v string) *GetInventoryInput {
 }
 
 // SetResultAttributes sets the ResultAttributes field's value.
-func (s *GetInventoryInput) SetResultAttributes(v []*ResultAttribute) *GetInventoryInput {
+func (s *GetInventoryInput) SetResultAttributes(v []ResultAttribute) *GetInventoryInput {
 	s.ResultAttributes = v
 	return s
 }
@@ -13003,7 +12937,7 @@ type GetInventoryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of inventory entities such as a collection of instance inventory.
-	Entities []*InventoryResultEntity `locationNameList:"Entity" type:"list"`
+	Entities []InventoryResultEntity `locationNameList:"Entity" type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -13021,7 +12955,7 @@ func (s GetInventoryOutput) GoString() string {
 }
 
 // SetEntities sets the Entities field's value.
-func (s *GetInventoryOutput) SetEntities(v []*InventoryResultEntity) *GetInventoryOutput {
+func (s *GetInventoryOutput) SetEntities(v []InventoryResultEntity) *GetInventoryOutput {
 	s.Entities = v
 	return s
 }
@@ -13108,7 +13042,7 @@ type GetInventorySchemaOutput struct {
 	NextToken *string `type:"string"`
 
 	// Inventory schemas returned by the request.
-	Schemas []*InventoryItemSchema `type:"list"`
+	Schemas []InventoryItemSchema `type:"list"`
 }
 
 // String returns the string representation
@@ -13128,7 +13062,7 @@ func (s *GetInventorySchemaOutput) SetNextToken(v string) *GetInventorySchemaOut
 }
 
 // SetSchemas sets the Schemas field's value.
-func (s *GetInventorySchemaOutput) SetSchemas(v []*InventoryItemSchema) *GetInventorySchemaOutput {
+func (s *GetInventorySchemaOutput) SetSchemas(v []InventoryItemSchema) *GetInventorySchemaOutput {
 	s.Schemas = v
 	return s
 }
@@ -13193,7 +13127,7 @@ type GetMaintenanceWindowExecutionOutput struct {
 	StatusDetails *string `type:"string"`
 
 	// The ID of the task executions from the Maintenance Window execution.
-	TaskIds []*string `type:"list"`
+	TaskIds []string `type:"list"`
 
 	// The ID of the Maintenance Window execution.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -13234,7 +13168,7 @@ func (s *GetMaintenanceWindowExecutionOutput) SetStatusDetails(v string) *GetMai
 }
 
 // SetTaskIds sets the TaskIds field's value.
-func (s *GetMaintenanceWindowExecutionOutput) SetTaskIds(v []*string) *GetMaintenanceWindowExecutionOutput {
+func (s *GetMaintenanceWindowExecutionOutput) SetTaskIds(v []string) *GetMaintenanceWindowExecutionOutput {
 	s.TaskIds = v
 	return s
 }
@@ -13555,7 +13489,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// Key: string, between 1 and 255 characters
 	//
 	// Value: an array of strings, each string is between 1 and 255 characters
-	TaskParameters []map[string]*MaintenanceWindowTaskParameterValueExpression `type:"list"`
+	TaskParameters []map[string]MaintenanceWindowTaskParameterValueExpression `type:"list"`
 
 	// The type of task executed.
 	Type MaintenanceWindowTaskType `type:"string"`
@@ -13635,7 +13569,7 @@ func (s *GetMaintenanceWindowExecutionTaskOutput) SetTaskExecutionId(v string) *
 }
 
 // SetTaskParameters sets the TaskParameters field's value.
-func (s *GetMaintenanceWindowExecutionTaskOutput) SetTaskParameters(v []map[string]*MaintenanceWindowTaskParameterValueExpression) *GetMaintenanceWindowExecutionTaskOutput {
+func (s *GetMaintenanceWindowExecutionTaskOutput) SetTaskParameters(v []map[string]MaintenanceWindowTaskParameterValueExpression) *GetMaintenanceWindowExecutionTaskOutput {
 	s.TaskParameters = v
 	return s
 }
@@ -13890,7 +13824,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	ServiceRoleArn *string `type:"string"`
 
 	// The targets where the task should execute.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The resource that the task used during execution. For RUN_COMMAND and AUTOMATION
 	// task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA
@@ -13902,7 +13836,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	TaskInvocationParameters *MaintenanceWindowTaskInvocationParameters `type:"structure"`
 
 	// The parameters to pass to the task when it executes.
-	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task to execute.
 	TaskType MaintenanceWindowTaskType `type:"string"`
@@ -13967,7 +13901,7 @@ func (s *GetMaintenanceWindowTaskOutput) SetServiceRoleArn(v string) *GetMainten
 }
 
 // SetTargets sets the Targets field's value.
-func (s *GetMaintenanceWindowTaskOutput) SetTargets(v []*Target) *GetMaintenanceWindowTaskOutput {
+func (s *GetMaintenanceWindowTaskOutput) SetTargets(v []Target) *GetMaintenanceWindowTaskOutput {
 	s.Targets = v
 	return s
 }
@@ -13985,7 +13919,7 @@ func (s *GetMaintenanceWindowTaskOutput) SetTaskInvocationParameters(v *Maintena
 }
 
 // SetTaskParameters sets the TaskParameters field's value.
-func (s *GetMaintenanceWindowTaskOutput) SetTaskParameters(v map[string]*MaintenanceWindowTaskParameterValueExpression) *GetMaintenanceWindowTaskOutput {
+func (s *GetMaintenanceWindowTaskOutput) SetTaskParameters(v map[string]MaintenanceWindowTaskParameterValueExpression) *GetMaintenanceWindowTaskOutput {
 	s.TaskParameters = v
 	return s
 }
@@ -14094,7 +14028,7 @@ type GetParameterHistoryOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of parameters returned by the request.
-	Parameters []*ParameterHistory `type:"list"`
+	Parameters []ParameterHistory `type:"list"`
 }
 
 // String returns the string representation
@@ -14114,7 +14048,7 @@ func (s *GetParameterHistoryOutput) SetNextToken(v string) *GetParameterHistoryO
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *GetParameterHistoryOutput) SetParameters(v []*ParameterHistory) *GetParameterHistoryOutput {
+func (s *GetParameterHistoryOutput) SetParameters(v []ParameterHistory) *GetParameterHistoryOutput {
 	s.Parameters = v
 	return s
 }
@@ -14209,7 +14143,7 @@ type GetParametersByPathInput struct {
 	NextToken *string `type:"string"`
 
 	// Filters to limit the request results.
-	ParameterFilters []*ParameterStringFilter `type:"list"`
+	ParameterFilters []ParameterStringFilter `type:"list"`
 
 	// The hierarchy for the parameter. Hierarchies start with a forward slash (/)
 	// and end with the parameter name. A hierarchy can have a maximum of five levels.
@@ -14252,9 +14186,6 @@ func (s *GetParametersByPathInput) Validate() error {
 	}
 	if s.ParameterFilters != nil {
 		for i, v := range s.ParameterFilters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(aws.ErrInvalidParams))
 			}
@@ -14280,7 +14211,7 @@ func (s *GetParametersByPathInput) SetNextToken(v string) *GetParametersByPathIn
 }
 
 // SetParameterFilters sets the ParameterFilters field's value.
-func (s *GetParametersByPathInput) SetParameterFilters(v []*ParameterStringFilter) *GetParametersByPathInput {
+func (s *GetParametersByPathInput) SetParameterFilters(v []ParameterStringFilter) *GetParametersByPathInput {
 	s.ParameterFilters = v
 	return s
 }
@@ -14312,7 +14243,7 @@ type GetParametersByPathOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of parameters found in the specified hierarchy.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 }
 
 // String returns the string representation
@@ -14332,7 +14263,7 @@ func (s *GetParametersByPathOutput) SetNextToken(v string) *GetParametersByPathO
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *GetParametersByPathOutput) SetParameters(v []*Parameter) *GetParametersByPathOutput {
+func (s *GetParametersByPathOutput) SetParameters(v []Parameter) *GetParametersByPathOutput {
 	s.Parameters = v
 	return s
 }
@@ -14344,7 +14275,7 @@ type GetParametersInput struct {
 	// Names of the parameters for which you want to query information.
 	//
 	// Names is a required field
-	Names []*string `min:"1" type:"list" required:"true"`
+	Names []string `min:"1" type:"list" required:"true"`
 
 	// Return decrypted secure string value. Return decrypted values for secure
 	// string parameters. This flag is ignored for String and StringList parameter
@@ -14380,7 +14311,7 @@ func (s *GetParametersInput) Validate() error {
 }
 
 // SetNames sets the Names field's value.
-func (s *GetParametersInput) SetNames(v []*string) *GetParametersInput {
+func (s *GetParametersInput) SetNames(v []string) *GetParametersInput {
 	s.Names = v
 	return s
 }
@@ -14397,10 +14328,10 @@ type GetParametersOutput struct {
 
 	// A list of parameters that are not formatted correctly or do not run when
 	// executed.
-	InvalidParameters []*string `min:"1" type:"list"`
+	InvalidParameters []string `min:"1" type:"list"`
 
 	// A list of details for a parameter.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 }
 
 // String returns the string representation
@@ -14414,13 +14345,13 @@ func (s GetParametersOutput) GoString() string {
 }
 
 // SetInvalidParameters sets the InvalidParameters field's value.
-func (s *GetParametersOutput) SetInvalidParameters(v []*string) *GetParametersOutput {
+func (s *GetParametersOutput) SetInvalidParameters(v []string) *GetParametersOutput {
 	s.InvalidParameters = v
 	return s
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *GetParametersOutput) SetParameters(v []*Parameter) *GetParametersOutput {
+func (s *GetParametersOutput) SetParameters(v []Parameter) *GetParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -14571,7 +14502,7 @@ type GetPatchBaselineOutput struct {
 	ApprovalRules *PatchRuleGroup `type:"structure"`
 
 	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string `type:"list"`
+	ApprovedPatches []string `type:"list"`
 
 	// Returns the specified compliance severity level for approved patches in the
 	// patch baseline.
@@ -14599,10 +14530,10 @@ type GetPatchBaselineOutput struct {
 	OperatingSystem OperatingSystem `type:"string"`
 
 	// Patch groups included in the patch baseline.
-	PatchGroups []*string `type:"list"`
+	PatchGroups []string `type:"list"`
 
 	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string `type:"list"`
+	RejectedPatches []string `type:"list"`
 }
 
 // String returns the string representation
@@ -14622,7 +14553,7 @@ func (s *GetPatchBaselineOutput) SetApprovalRules(v *PatchRuleGroup) *GetPatchBa
 }
 
 // SetApprovedPatches sets the ApprovedPatches field's value.
-func (s *GetPatchBaselineOutput) SetApprovedPatches(v []*string) *GetPatchBaselineOutput {
+func (s *GetPatchBaselineOutput) SetApprovedPatches(v []string) *GetPatchBaselineOutput {
 	s.ApprovedPatches = v
 	return s
 }
@@ -14676,13 +14607,13 @@ func (s *GetPatchBaselineOutput) SetOperatingSystem(v OperatingSystem) *GetPatch
 }
 
 // SetPatchGroups sets the PatchGroups field's value.
-func (s *GetPatchBaselineOutput) SetPatchGroups(v []*string) *GetPatchBaselineOutput {
+func (s *GetPatchBaselineOutput) SetPatchGroups(v []string) *GetPatchBaselineOutput {
 	s.PatchGroups = v
 	return s
 }
 
 // SetRejectedPatches sets the RejectedPatches field's value.
-func (s *GetPatchBaselineOutput) SetRejectedPatches(v []*string) *GetPatchBaselineOutput {
+func (s *GetPatchBaselineOutput) SetRejectedPatches(v []string) *GetPatchBaselineOutput {
 	s.RejectedPatches = v
 	return s
 }
@@ -14696,7 +14627,7 @@ type InstanceAggregatedAssociationOverview struct {
 	DetailedStatus *string `type:"string"`
 
 	// The number of associations for the instance(s).
-	InstanceAssociationStatusAggregatedCount map[string]*int64 `type:"map"`
+	InstanceAssociationStatusAggregatedCount map[string]int64 `type:"map"`
 }
 
 // String returns the string representation
@@ -14716,7 +14647,7 @@ func (s *InstanceAggregatedAssociationOverview) SetDetailedStatus(v string) *Ins
 }
 
 // SetInstanceAssociationStatusAggregatedCount sets the InstanceAssociationStatusAggregatedCount field's value.
-func (s *InstanceAggregatedAssociationOverview) SetInstanceAssociationStatusAggregatedCount(v map[string]*int64) *InstanceAggregatedAssociationOverview {
+func (s *InstanceAggregatedAssociationOverview) SetInstanceAssociationStatusAggregatedCount(v map[string]int64) *InstanceAggregatedAssociationOverview {
 	s.InstanceAssociationStatusAggregatedCount = v
 	return s
 }
@@ -15164,7 +15095,7 @@ type InstanceInformationFilter struct {
 	// The filter values.
 	//
 	// ValueSet is a required field
-	ValueSet []*string `locationName:"valueSet" locationNameList:"InstanceInformationFilterValue" min:"1" type:"list" required:"true"`
+	ValueSet []string `locationName:"valueSet" locationNameList:"InstanceInformationFilterValue" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -15204,7 +15135,7 @@ func (s *InstanceInformationFilter) SetKey(v InstanceInformationFilterKey) *Inst
 }
 
 // SetValueSet sets the ValueSet field's value.
-func (s *InstanceInformationFilter) SetValueSet(v []*string) *InstanceInformationFilter {
+func (s *InstanceInformationFilter) SetValueSet(v []string) *InstanceInformationFilter {
 	s.ValueSet = v
 	return s
 }
@@ -15225,7 +15156,7 @@ type InstanceInformationStringFilter struct {
 	// The filter values.
 	//
 	// Values is a required field
-	Values []*string `locationNameList:"InstanceInformationFilterValue" min:"1" type:"list" required:"true"`
+	Values []string `locationNameList:"InstanceInformationFilterValue" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -15269,7 +15200,7 @@ func (s *InstanceInformationStringFilter) SetKey(v string) *InstanceInformationS
 }
 
 // SetValues sets the Values field's value.
-func (s *InstanceInformationStringFilter) SetValues(v []*string) *InstanceInformationStringFilter {
+func (s *InstanceInformationStringFilter) SetValues(v []string) *InstanceInformationStringFilter {
 	s.Values = v
 	return s
 }
@@ -15451,7 +15382,7 @@ type InstancePatchStateFilter struct {
 	// The value for the filter, must be an integer greater than or equal to 0.
 	//
 	// Values is a required field
-	Values []*string `min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -15504,7 +15435,7 @@ func (s *InstancePatchStateFilter) SetType(v InstancePatchStateOperatorType) *In
 }
 
 // SetValues sets the Values field's value.
-func (s *InstancePatchStateFilter) SetValues(v []*string) *InstancePatchStateFilter {
+func (s *InstancePatchStateFilter) SetValues(v []string) *InstancePatchStateFilter {
 	s.Values = v
 	return s
 }
@@ -15527,7 +15458,7 @@ type InventoryFilter struct {
 	// i-1a2b3c4d5e6,Type=Equal
 	//
 	// Values is a required field
-	Values []*string `locationNameList:"FilterValue" min:"1" type:"list" required:"true"`
+	Values []string `locationNameList:"FilterValue" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -15577,7 +15508,7 @@ func (s *InventoryFilter) SetType(v InventoryQueryOperatorType) *InventoryFilter
 }
 
 // SetValues sets the Values field's value.
-func (s *InventoryFilter) SetValues(v []*string) *InventoryFilter {
+func (s *InventoryFilter) SetValues(v []string) *InventoryFilter {
 	s.Values = v
 	return s
 }
@@ -15594,7 +15525,7 @@ type InventoryItem struct {
 	CaptureTime *string `type:"string" required:"true"`
 
 	// The inventory data of the inventory type.
-	Content []map[string]*string `type:"list"`
+	Content []map[string]string `type:"list"`
 
 	// MD5 hash of the inventory item type contents. The content hash is used to
 	// determine whether to update inventory information. The PutInventory API does
@@ -15605,7 +15536,7 @@ type InventoryItem struct {
 	// A map of associated properties for a specified inventory type. For example,
 	// with this attribute, you can specify the ExecutionId, ExecutionType, ComplianceType
 	// properties of the AWS:ComplianceItem type.
-	Context map[string]*string `type:"map"`
+	Context map[string]string `type:"map"`
 
 	// The schema version for the inventory item.
 	//
@@ -15663,7 +15594,7 @@ func (s *InventoryItem) SetCaptureTime(v string) *InventoryItem {
 }
 
 // SetContent sets the Content field's value.
-func (s *InventoryItem) SetContent(v []map[string]*string) *InventoryItem {
+func (s *InventoryItem) SetContent(v []map[string]string) *InventoryItem {
 	s.Content = v
 	return s
 }
@@ -15675,7 +15606,7 @@ func (s *InventoryItem) SetContentHash(v string) *InventoryItem {
 }
 
 // SetContext sets the Context field's value.
-func (s *InventoryItem) SetContext(v map[string]*string) *InventoryItem {
+func (s *InventoryItem) SetContext(v map[string]string) *InventoryItem {
 	s.Context = v
 	return s
 }
@@ -15741,7 +15672,7 @@ type InventoryItemSchema struct {
 	// name.
 	//
 	// Attributes is a required field
-	Attributes []*InventoryItemAttribute `locationNameList:"Attribute" min:"1" type:"list" required:"true"`
+	Attributes []InventoryItemAttribute `locationNameList:"Attribute" min:"1" type:"list" required:"true"`
 
 	// The name of the inventory type. Default inventory item type names start with
 	// AWS. Custom inventory type names will start with Custom. Default inventory
@@ -15766,7 +15697,7 @@ func (s InventoryItemSchema) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *InventoryItemSchema) SetAttributes(v []*InventoryItemAttribute) *InventoryItemSchema {
+func (s *InventoryItemSchema) SetAttributes(v []InventoryItemAttribute) *InventoryItemSchema {
 	s.Attributes = v
 	return s
 }
@@ -15789,7 +15720,7 @@ type InventoryResultEntity struct {
 	_ struct{} `type:"structure"`
 
 	// The data section in the inventory result entity json.
-	Data map[string]*InventoryResultItem `type:"map"`
+	Data map[string]InventoryResultItem `type:"map"`
 
 	// ID of the inventory result entity. For example, for managed instance inventory
 	// the result will be the managed instance ID. For EC2 instance inventory, the
@@ -15808,7 +15739,7 @@ func (s InventoryResultEntity) GoString() string {
 }
 
 // SetData sets the Data field's value.
-func (s *InventoryResultEntity) SetData(v map[string]*InventoryResultItem) *InventoryResultEntity {
+func (s *InventoryResultEntity) SetData(v map[string]InventoryResultItem) *InventoryResultEntity {
 	s.Data = v
 	return s
 }
@@ -15831,7 +15762,7 @@ type InventoryResultItem struct {
 	// names and values.
 	//
 	// Content is a required field
-	Content []map[string]*string `type:"list" required:"true"`
+	Content []map[string]string `type:"list" required:"true"`
 
 	// MD5 hash of the inventory item type contents. The content hash is used to
 	// determine whether to update inventory information. The PutInventory API does
@@ -15867,7 +15798,7 @@ func (s *InventoryResultItem) SetCaptureTime(v string) *InventoryResultItem {
 }
 
 // SetContent sets the Content field's value.
-func (s *InventoryResultItem) SetContent(v []map[string]*string) *InventoryResultItem {
+func (s *InventoryResultItem) SetContent(v []map[string]string) *InventoryResultItem {
 	s.Content = v
 	return s
 }
@@ -15959,7 +15890,7 @@ type ListAssociationVersionsOutput struct {
 
 	// Information about all versions of the association for the specified association
 	// ID.
-	AssociationVersions []*AssociationVersionInfo `min:"1" type:"list"`
+	AssociationVersions []AssociationVersionInfo `min:"1" type:"list"`
 
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
@@ -15977,7 +15908,7 @@ func (s ListAssociationVersionsOutput) GoString() string {
 }
 
 // SetAssociationVersions sets the AssociationVersions field's value.
-func (s *ListAssociationVersionsOutput) SetAssociationVersions(v []*AssociationVersionInfo) *ListAssociationVersionsOutput {
+func (s *ListAssociationVersionsOutput) SetAssociationVersions(v []AssociationVersionInfo) *ListAssociationVersionsOutput {
 	s.AssociationVersions = v
 	return s
 }
@@ -15993,7 +15924,7 @@ type ListAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	AssociationFilterList []*AssociationFilter `locationNameList:"AssociationFilter" min:"1" type:"list"`
+	AssociationFilterList []AssociationFilter `locationNameList:"AssociationFilter" min:"1" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -16026,9 +15957,6 @@ func (s *ListAssociationsInput) Validate() error {
 	}
 	if s.AssociationFilterList != nil {
 		for i, v := range s.AssociationFilterList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AssociationFilterList", i), err.(aws.ErrInvalidParams))
 			}
@@ -16042,7 +15970,7 @@ func (s *ListAssociationsInput) Validate() error {
 }
 
 // SetAssociationFilterList sets the AssociationFilterList field's value.
-func (s *ListAssociationsInput) SetAssociationFilterList(v []*AssociationFilter) *ListAssociationsInput {
+func (s *ListAssociationsInput) SetAssociationFilterList(v []AssociationFilter) *ListAssociationsInput {
 	s.AssociationFilterList = v
 	return s
 }
@@ -16064,7 +15992,7 @@ type ListAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The associations.
-	Associations []*Association `locationNameList:"Association" type:"list"`
+	Associations []Association `locationNameList:"Association" type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -16082,7 +16010,7 @@ func (s ListAssociationsOutput) GoString() string {
 }
 
 // SetAssociations sets the Associations field's value.
-func (s *ListAssociationsOutput) SetAssociations(v []*Association) *ListAssociationsOutput {
+func (s *ListAssociationsOutput) SetAssociations(v []Association) *ListAssociationsOutput {
 	s.Associations = v
 	return s
 }
@@ -16106,7 +16034,7 @@ type ListCommandInvocationsInput struct {
 
 	// (Optional) One or more filters. Use a filter to return a more specific list
 	// of results.
-	Filters []*CommandFilter `min:"1" type:"list"`
+	Filters []CommandFilter `min:"1" type:"list"`
 
 	// (Optional) The command execution details for a specific instance ID.
 	InstanceId *string `type:"string"`
@@ -16145,9 +16073,6 @@ func (s *ListCommandInvocationsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16173,7 +16098,7 @@ func (s *ListCommandInvocationsInput) SetDetails(v bool) *ListCommandInvocations
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListCommandInvocationsInput) SetFilters(v []*CommandFilter) *ListCommandInvocationsInput {
+func (s *ListCommandInvocationsInput) SetFilters(v []CommandFilter) *ListCommandInvocationsInput {
 	s.Filters = v
 	return s
 }
@@ -16201,7 +16126,7 @@ type ListCommandInvocationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// (Optional) A list of all invocations.
-	CommandInvocations []*CommandInvocation `type:"list"`
+	CommandInvocations []CommandInvocation `type:"list"`
 
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
@@ -16219,7 +16144,7 @@ func (s ListCommandInvocationsOutput) GoString() string {
 }
 
 // SetCommandInvocations sets the CommandInvocations field's value.
-func (s *ListCommandInvocationsOutput) SetCommandInvocations(v []*CommandInvocation) *ListCommandInvocationsOutput {
+func (s *ListCommandInvocationsOutput) SetCommandInvocations(v []CommandInvocation) *ListCommandInvocationsOutput {
 	s.CommandInvocations = v
 	return s
 }
@@ -16239,7 +16164,7 @@ type ListCommandsInput struct {
 
 	// (Optional) One or more filters. Use a filter to return a more specific list
 	// of results.
-	Filters []*CommandFilter `min:"1" type:"list"`
+	Filters []CommandFilter `min:"1" type:"list"`
 
 	// (Optional) Lists commands issued against this instance ID.
 	InstanceId *string `type:"string"`
@@ -16278,9 +16203,6 @@ func (s *ListCommandsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16300,7 +16222,7 @@ func (s *ListCommandsInput) SetCommandId(v string) *ListCommandsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListCommandsInput) SetFilters(v []*CommandFilter) *ListCommandsInput {
+func (s *ListCommandsInput) SetFilters(v []CommandFilter) *ListCommandsInput {
 	s.Filters = v
 	return s
 }
@@ -16328,7 +16250,7 @@ type ListCommandsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// (Optional) The list of commands requested by the user.
-	Commands []*Command `type:"list"`
+	Commands []Command `type:"list"`
 
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
@@ -16346,7 +16268,7 @@ func (s ListCommandsOutput) GoString() string {
 }
 
 // SetCommands sets the Commands field's value.
-func (s *ListCommandsOutput) SetCommands(v []*Command) *ListCommandsOutput {
+func (s *ListCommandsOutput) SetCommands(v []Command) *ListCommandsOutput {
 	s.Commands = v
 	return s
 }
@@ -16363,7 +16285,7 @@ type ListComplianceItemsInput struct {
 
 	// One or more compliance filters. Use a filter to return a more specific list
 	// of results.
-	Filters []*ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
+	Filters []ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -16375,11 +16297,11 @@ type ListComplianceItemsInput struct {
 
 	// The ID for the resources from which to get compliance information. Currently,
 	// you can only specify one resource ID.
-	ResourceIds []*string `min:"1" type:"list"`
+	ResourceIds []string `min:"1" type:"list"`
 
 	// The type of resource from which to get compliance information. Currently,
 	// the only supported resource type is ManagedInstance.
-	ResourceTypes []*string `min:"1" type:"list"`
+	ResourceTypes []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -16406,9 +16328,6 @@ func (s *ListComplianceItemsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16422,7 +16341,7 @@ func (s *ListComplianceItemsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListComplianceItemsInput) SetFilters(v []*ComplianceStringFilter) *ListComplianceItemsInput {
+func (s *ListComplianceItemsInput) SetFilters(v []ComplianceStringFilter) *ListComplianceItemsInput {
 	s.Filters = v
 	return s
 }
@@ -16440,13 +16359,13 @@ func (s *ListComplianceItemsInput) SetNextToken(v string) *ListComplianceItemsIn
 }
 
 // SetResourceIds sets the ResourceIds field's value.
-func (s *ListComplianceItemsInput) SetResourceIds(v []*string) *ListComplianceItemsInput {
+func (s *ListComplianceItemsInput) SetResourceIds(v []string) *ListComplianceItemsInput {
 	s.ResourceIds = v
 	return s
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *ListComplianceItemsInput) SetResourceTypes(v []*string) *ListComplianceItemsInput {
+func (s *ListComplianceItemsInput) SetResourceTypes(v []string) *ListComplianceItemsInput {
 	s.ResourceTypes = v
 	return s
 }
@@ -16456,7 +16375,7 @@ type ListComplianceItemsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of compliance information for the specified resource ID.
-	ComplianceItems []*ComplianceItem `locationNameList:"Item" type:"list"`
+	ComplianceItems []ComplianceItem `locationNameList:"Item" type:"list"`
 
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
@@ -16474,7 +16393,7 @@ func (s ListComplianceItemsOutput) GoString() string {
 }
 
 // SetComplianceItems sets the ComplianceItems field's value.
-func (s *ListComplianceItemsOutput) SetComplianceItems(v []*ComplianceItem) *ListComplianceItemsOutput {
+func (s *ListComplianceItemsOutput) SetComplianceItems(v []ComplianceItem) *ListComplianceItemsOutput {
 	s.ComplianceItems = v
 	return s
 }
@@ -16491,7 +16410,7 @@ type ListComplianceSummariesInput struct {
 
 	// One or more compliance or inventory filters. Use a filter to return a more
 	// specific list of results.
-	Filters []*ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
+	Filters []ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
 
 	// The maximum number of items to return for this call. Currently, you can specify
 	// null or 50. The call also returns a token that you can specify in a subsequent
@@ -16520,9 +16439,6 @@ func (s *ListComplianceSummariesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16536,7 +16452,7 @@ func (s *ListComplianceSummariesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListComplianceSummariesInput) SetFilters(v []*ComplianceStringFilter) *ListComplianceSummariesInput {
+func (s *ListComplianceSummariesInput) SetFilters(v []ComplianceStringFilter) *ListComplianceSummariesInput {
 	s.Filters = v
 	return s
 }
@@ -16560,7 +16476,7 @@ type ListComplianceSummariesOutput struct {
 	// A list of compliant and non-compliant summary counts based on compliance
 	// types. For example, this call returns State Manager associations, patches,
 	// or custom compliance types according to the filter criteria that you specified.
-	ComplianceSummaryItems []*ComplianceSummaryItem `locationNameList:"Item" type:"list"`
+	ComplianceSummaryItems []ComplianceSummaryItem `locationNameList:"Item" type:"list"`
 
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
@@ -16578,7 +16494,7 @@ func (s ListComplianceSummariesOutput) GoString() string {
 }
 
 // SetComplianceSummaryItems sets the ComplianceSummaryItems field's value.
-func (s *ListComplianceSummariesOutput) SetComplianceSummaryItems(v []*ComplianceSummaryItem) *ListComplianceSummariesOutput {
+func (s *ListComplianceSummariesOutput) SetComplianceSummaryItems(v []ComplianceSummaryItem) *ListComplianceSummariesOutput {
 	s.ComplianceSummaryItems = v
 	return s
 }
@@ -16658,7 +16574,7 @@ type ListDocumentVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The document versions.
-	DocumentVersions []*DocumentVersionInfo `min:"1" type:"list"`
+	DocumentVersions []DocumentVersionInfo `min:"1" type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -16676,7 +16592,7 @@ func (s ListDocumentVersionsOutput) GoString() string {
 }
 
 // SetDocumentVersions sets the DocumentVersions field's value.
-func (s *ListDocumentVersionsOutput) SetDocumentVersions(v []*DocumentVersionInfo) *ListDocumentVersionsOutput {
+func (s *ListDocumentVersionsOutput) SetDocumentVersions(v []DocumentVersionInfo) *ListDocumentVersionsOutput {
 	s.DocumentVersions = v
 	return s
 }
@@ -16692,10 +16608,10 @@ type ListDocumentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	DocumentFilterList []*DocumentFilter `locationNameList:"DocumentFilter" min:"1" type:"list"`
+	DocumentFilterList []DocumentFilter `locationNameList:"DocumentFilter" min:"1" type:"list"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*DocumentKeyValuesFilter `type:"list"`
+	Filters []DocumentKeyValuesFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -16728,9 +16644,6 @@ func (s *ListDocumentsInput) Validate() error {
 	}
 	if s.DocumentFilterList != nil {
 		for i, v := range s.DocumentFilterList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DocumentFilterList", i), err.(aws.ErrInvalidParams))
 			}
@@ -16738,9 +16651,6 @@ func (s *ListDocumentsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16754,13 +16664,13 @@ func (s *ListDocumentsInput) Validate() error {
 }
 
 // SetDocumentFilterList sets the DocumentFilterList field's value.
-func (s *ListDocumentsInput) SetDocumentFilterList(v []*DocumentFilter) *ListDocumentsInput {
+func (s *ListDocumentsInput) SetDocumentFilterList(v []DocumentFilter) *ListDocumentsInput {
 	s.DocumentFilterList = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListDocumentsInput) SetFilters(v []*DocumentKeyValuesFilter) *ListDocumentsInput {
+func (s *ListDocumentsInput) SetFilters(v []DocumentKeyValuesFilter) *ListDocumentsInput {
 	s.Filters = v
 	return s
 }
@@ -16782,7 +16692,7 @@ type ListDocumentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the Systems Manager documents.
-	DocumentIdentifiers []*DocumentIdentifier `locationNameList:"DocumentIdentifier" type:"list"`
+	DocumentIdentifiers []DocumentIdentifier `locationNameList:"DocumentIdentifier" type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -16800,7 +16710,7 @@ func (s ListDocumentsOutput) GoString() string {
 }
 
 // SetDocumentIdentifiers sets the DocumentIdentifiers field's value.
-func (s *ListDocumentsOutput) SetDocumentIdentifiers(v []*DocumentIdentifier) *ListDocumentsOutput {
+func (s *ListDocumentsOutput) SetDocumentIdentifiers(v []DocumentIdentifier) *ListDocumentsOutput {
 	s.DocumentIdentifiers = v
 	return s
 }
@@ -16816,7 +16726,7 @@ type ListInventoryEntriesInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*InventoryFilter `locationNameList:"InventoryFilter" min:"1" type:"list"`
+	Filters []InventoryFilter `locationNameList:"InventoryFilter" min:"1" type:"list"`
 
 	// The instance ID for which you want inventory information.
 	//
@@ -16870,9 +16780,6 @@ func (s *ListInventoryEntriesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -16886,7 +16793,7 @@ func (s *ListInventoryEntriesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListInventoryEntriesInput) SetFilters(v []*InventoryFilter) *ListInventoryEntriesInput {
+func (s *ListInventoryEntriesInput) SetFilters(v []InventoryFilter) *ListInventoryEntriesInput {
 	s.Filters = v
 	return s
 }
@@ -16923,7 +16830,7 @@ type ListInventoryEntriesOutput struct {
 	CaptureTime *string `type:"string"`
 
 	// A list of inventory items on the instance(s).
-	Entries []map[string]*string `type:"list"`
+	Entries []map[string]string `type:"list"`
 
 	// The instance ID targeted by the request to query inventory information.
 	InstanceId *string `type:"string"`
@@ -16956,7 +16863,7 @@ func (s *ListInventoryEntriesOutput) SetCaptureTime(v string) *ListInventoryEntr
 }
 
 // SetEntries sets the Entries field's value.
-func (s *ListInventoryEntriesOutput) SetEntries(v []map[string]*string) *ListInventoryEntriesOutput {
+func (s *ListInventoryEntriesOutput) SetEntries(v []map[string]string) *ListInventoryEntriesOutput {
 	s.Entries = v
 	return s
 }
@@ -16990,7 +16897,7 @@ type ListResourceComplianceSummariesInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
+	Filters []ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -17019,9 +16926,6 @@ func (s *ListResourceComplianceSummariesInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -17035,7 +16939,7 @@ func (s *ListResourceComplianceSummariesInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListResourceComplianceSummariesInput) SetFilters(v []*ComplianceStringFilter) *ListResourceComplianceSummariesInput {
+func (s *ListResourceComplianceSummariesInput) SetFilters(v []ComplianceStringFilter) *ListResourceComplianceSummariesInput {
 	s.Filters = v
 	return s
 }
@@ -17063,7 +16967,7 @@ type ListResourceComplianceSummariesOutput struct {
 	// A summary count for specified or targeted managed instances. Summary count
 	// includes information about compliant and non-compliant State Manager associations,
 	// patch status, or custom items according to the filter criteria that you specify.
-	ResourceComplianceSummaryItems []*ResourceComplianceSummaryItem `locationNameList:"Item" type:"list"`
+	ResourceComplianceSummaryItems []ResourceComplianceSummaryItem `locationNameList:"Item" type:"list"`
 }
 
 // String returns the string representation
@@ -17083,7 +16987,7 @@ func (s *ListResourceComplianceSummariesOutput) SetNextToken(v string) *ListReso
 }
 
 // SetResourceComplianceSummaryItems sets the ResourceComplianceSummaryItems field's value.
-func (s *ListResourceComplianceSummariesOutput) SetResourceComplianceSummaryItems(v []*ResourceComplianceSummaryItem) *ListResourceComplianceSummariesOutput {
+func (s *ListResourceComplianceSummariesOutput) SetResourceComplianceSummaryItems(v []ResourceComplianceSummaryItem) *ListResourceComplianceSummariesOutput {
 	s.ResourceComplianceSummaryItems = v
 	return s
 }
@@ -17145,7 +17049,7 @@ type ListResourceDataSyncOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of your current Resource Data Sync configurations and their statuses.
-	ResourceDataSyncItems []*ResourceDataSyncItem `type:"list"`
+	ResourceDataSyncItems []ResourceDataSyncItem `type:"list"`
 }
 
 // String returns the string representation
@@ -17165,7 +17069,7 @@ func (s *ListResourceDataSyncOutput) SetNextToken(v string) *ListResourceDataSyn
 }
 
 // SetResourceDataSyncItems sets the ResourceDataSyncItems field's value.
-func (s *ListResourceDataSyncOutput) SetResourceDataSyncItems(v []*ResourceDataSyncItem) *ListResourceDataSyncOutput {
+func (s *ListResourceDataSyncOutput) SetResourceDataSyncItems(v []ResourceDataSyncItem) *ListResourceDataSyncOutput {
 	s.ResourceDataSyncItems = v
 	return s
 }
@@ -17229,7 +17133,7 @@ type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of tags.
-	TagList []*Tag `type:"list"`
+	TagList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -17243,7 +17147,7 @@ func (s ListTagsForResourceOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ListTagsForResourceOutput) SetTagList(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTagList(v []Tag) *ListTagsForResourceOutput {
 	s.TagList = v
 	return s
 }
@@ -17328,7 +17232,7 @@ type MaintenanceWindowAutomationParameters struct {
 	DocumentVersion *string `type:"string"`
 
 	// The parameters for the AUTOMATION task.
-	Parameters map[string][]*string `min:"1" type:"map"`
+	Parameters map[string][]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -17361,7 +17265,7 @@ func (s *MaintenanceWindowAutomationParameters) SetDocumentVersion(v string) *Ma
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *MaintenanceWindowAutomationParameters) SetParameters(v map[string][]*string) *MaintenanceWindowAutomationParameters {
+func (s *MaintenanceWindowAutomationParameters) SetParameters(v map[string][]string) *MaintenanceWindowAutomationParameters {
 	s.Parameters = v
 	return s
 }
@@ -17665,7 +17569,7 @@ type MaintenanceWindowFilter struct {
 	Key *string `min:"1" type:"string"`
 
 	// The filter values.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -17698,7 +17602,7 @@ func (s *MaintenanceWindowFilter) SetKey(v string) *MaintenanceWindowFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *MaintenanceWindowFilter) SetValues(v []*string) *MaintenanceWindowFilter {
+func (s *MaintenanceWindowFilter) SetValues(v []string) *MaintenanceWindowFilter {
 	s.Values = v
 	return s
 }
@@ -17866,7 +17770,7 @@ type MaintenanceWindowRunCommandParameters struct {
 	OutputS3KeyPrefix *string `type:"string"`
 
 	// The parameters for the RUN_COMMAND task execution.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// The IAM service role to assume during task execution.
 	ServiceRoleArn *string `type:"string"`
@@ -17939,7 +17843,7 @@ func (s *MaintenanceWindowRunCommandParameters) SetOutputS3KeyPrefix(v string) *
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *MaintenanceWindowRunCommandParameters) SetParameters(v map[string][]*string) *MaintenanceWindowRunCommandParameters {
+func (s *MaintenanceWindowRunCommandParameters) SetParameters(v map[string][]string) *MaintenanceWindowRunCommandParameters {
 	s.Parameters = v
 	return s
 }
@@ -18023,7 +17927,7 @@ type MaintenanceWindowTarget struct {
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The Maintenance Window ID where the target is registered.
 	WindowId *string `min:"20" type:"string"`
@@ -18067,7 +17971,7 @@ func (s *MaintenanceWindowTarget) SetResourceType(v MaintenanceWindowResourceTyp
 }
 
 // SetTargets sets the Targets field's value.
-func (s *MaintenanceWindowTarget) SetTargets(v []*Target) *MaintenanceWindowTarget {
+func (s *MaintenanceWindowTarget) SetTargets(v []Target) *MaintenanceWindowTarget {
 	s.Targets = v
 	return s
 }
@@ -18114,7 +18018,7 @@ type MaintenanceWindowTask struct {
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION
 	// task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA
@@ -18123,7 +18027,7 @@ type MaintenanceWindowTask struct {
 	TaskArn *string `min:"1" type:"string"`
 
 	// The parameters that should be passed to the task when it is executed.
-	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
 	// LAMBDA, or STEP_FUNCTION.
@@ -18189,7 +18093,7 @@ func (s *MaintenanceWindowTask) SetServiceRoleArn(v string) *MaintenanceWindowTa
 }
 
 // SetTargets sets the Targets field's value.
-func (s *MaintenanceWindowTask) SetTargets(v []*Target) *MaintenanceWindowTask {
+func (s *MaintenanceWindowTask) SetTargets(v []Target) *MaintenanceWindowTask {
 	s.Targets = v
 	return s
 }
@@ -18201,7 +18105,7 @@ func (s *MaintenanceWindowTask) SetTaskArn(v string) *MaintenanceWindowTask {
 }
 
 // SetTaskParameters sets the TaskParameters field's value.
-func (s *MaintenanceWindowTask) SetTaskParameters(v map[string]*MaintenanceWindowTaskParameterValueExpression) *MaintenanceWindowTask {
+func (s *MaintenanceWindowTask) SetTaskParameters(v map[string]MaintenanceWindowTaskParameterValueExpression) *MaintenanceWindowTask {
 	s.TaskParameters = v
 	return s
 }
@@ -18313,7 +18217,7 @@ type MaintenanceWindowTaskParameterValueExpression struct {
 
 	// This field contains an array of 0 or more strings, each 1 to 255 characters
 	// in length.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -18327,7 +18231,7 @@ func (s MaintenanceWindowTaskParameterValueExpression) GoString() string {
 }
 
 // SetValues sets the Values field's value.
-func (s *MaintenanceWindowTaskParameterValueExpression) SetValues(v []*string) *MaintenanceWindowTaskParameterValueExpression {
+func (s *MaintenanceWindowTaskParameterValueExpression) SetValues(v []string) *MaintenanceWindowTaskParameterValueExpression {
 	s.Values = v
 	return s
 }
@@ -18338,13 +18242,13 @@ type ModifyDocumentPermissionInput struct {
 
 	// The AWS user accounts that should have access to the document. The account
 	// IDs can either be a group of account IDs or All.
-	AccountIdsToAdd []*string `locationNameList:"AccountId" type:"list"`
+	AccountIdsToAdd []string `locationNameList:"AccountId" type:"list"`
 
 	// The AWS user accounts that should no longer have access to the document.
 	// The AWS user account can either be a group of account IDs or All. This action
 	// has a higher priority than AccountIdsToAdd. If you specify an account ID
 	// to add and the same ID to remove, the system removes access to the document.
-	AccountIdsToRemove []*string `locationNameList:"AccountId" type:"list"`
+	AccountIdsToRemove []string `locationNameList:"AccountId" type:"list"`
 
 	// The name of the document that you want to share.
 	//
@@ -18385,13 +18289,13 @@ func (s *ModifyDocumentPermissionInput) Validate() error {
 }
 
 // SetAccountIdsToAdd sets the AccountIdsToAdd field's value.
-func (s *ModifyDocumentPermissionInput) SetAccountIdsToAdd(v []*string) *ModifyDocumentPermissionInput {
+func (s *ModifyDocumentPermissionInput) SetAccountIdsToAdd(v []string) *ModifyDocumentPermissionInput {
 	s.AccountIdsToAdd = v
 	return s
 }
 
 // SetAccountIdsToRemove sets the AccountIdsToRemove field's value.
-func (s *ModifyDocumentPermissionInput) SetAccountIdsToRemove(v []*string) *ModifyDocumentPermissionInput {
+func (s *ModifyDocumentPermissionInput) SetAccountIdsToRemove(v []string) *ModifyDocumentPermissionInput {
 	s.AccountIdsToRemove = v
 	return s
 }
@@ -18740,7 +18644,7 @@ type ParameterStringFilter struct {
 	Option *string `min:"1" type:"string"`
 
 	// The value you want to search for.
-	Values []*string `min:"1" type:"list"`
+	Values []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -18789,7 +18693,7 @@ func (s *ParameterStringFilter) SetOption(v string) *ParameterStringFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *ParameterStringFilter) SetValues(v []*string) *ParameterStringFilter {
+func (s *ParameterStringFilter) SetValues(v []string) *ParameterStringFilter {
 	s.Values = v
 	return s
 }
@@ -18807,7 +18711,7 @@ type ParametersFilter struct {
 	// The filter values.
 	//
 	// Values is a required field
-	Values []*string `min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -18847,7 +18751,7 @@ func (s *ParametersFilter) SetKey(v ParametersFilterKey) *ParametersFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *ParametersFilter) SetValues(v []*string) *ParametersFilter {
+func (s *ParametersFilter) SetValues(v []string) *ParametersFilter {
 	s.Values = v
 	return s
 }
@@ -19149,7 +19053,7 @@ type PatchFilter struct {
 	// The value for the filter key.
 	//
 	// Values is a required field
-	Values []*string `min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -19189,7 +19093,7 @@ func (s *PatchFilter) SetKey(v PatchFilterKey) *PatchFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *PatchFilter) SetValues(v []*string) *PatchFilter {
+func (s *PatchFilter) SetValues(v []string) *PatchFilter {
 	s.Values = v
 	return s
 }
@@ -19202,7 +19106,7 @@ type PatchFilterGroup struct {
 	// The set of patch filters that make up the group.
 	//
 	// PatchFilters is a required field
-	PatchFilters []*PatchFilter `type:"list" required:"true"`
+	PatchFilters []PatchFilter `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -19224,9 +19128,6 @@ func (s *PatchFilterGroup) Validate() error {
 	}
 	if s.PatchFilters != nil {
 		for i, v := range s.PatchFilters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchFilters", i), err.(aws.ErrInvalidParams))
 			}
@@ -19240,7 +19141,7 @@ func (s *PatchFilterGroup) Validate() error {
 }
 
 // SetPatchFilters sets the PatchFilters field's value.
-func (s *PatchFilterGroup) SetPatchFilters(v []*PatchFilter) *PatchFilterGroup {
+func (s *PatchFilterGroup) SetPatchFilters(v []PatchFilter) *PatchFilterGroup {
 	s.PatchFilters = v
 	return s
 }
@@ -19289,7 +19190,7 @@ type PatchOrchestratorFilter struct {
 	Key *string `min:"1" type:"string"`
 
 	// The value for the filter.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -19322,7 +19223,7 @@ func (s *PatchOrchestratorFilter) SetKey(v string) *PatchOrchestratorFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *PatchOrchestratorFilter) SetValues(v []*string) *PatchOrchestratorFilter {
+func (s *PatchOrchestratorFilter) SetValues(v []string) *PatchOrchestratorFilter {
 	s.Values = v
 	return s
 }
@@ -19408,7 +19309,7 @@ type PatchRuleGroup struct {
 	// The rules that make up the rule group.
 	//
 	// PatchRules is a required field
-	PatchRules []*PatchRule `type:"list" required:"true"`
+	PatchRules []PatchRule `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -19430,9 +19331,6 @@ func (s *PatchRuleGroup) Validate() error {
 	}
 	if s.PatchRules != nil {
 		for i, v := range s.PatchRules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchRules", i), err.(aws.ErrInvalidParams))
 			}
@@ -19446,7 +19344,7 @@ func (s *PatchRuleGroup) Validate() error {
 }
 
 // SetPatchRules sets the PatchRules field's value.
-func (s *PatchRuleGroup) SetPatchRules(v []*PatchRule) *PatchRuleGroup {
+func (s *PatchRuleGroup) SetPatchRules(v []PatchRule) *PatchRuleGroup {
 	s.PatchRules = v
 	return s
 }
@@ -19522,7 +19420,7 @@ type PutComplianceItemsInput struct {
 	// Classification, etc.
 	//
 	// Items is a required field
-	Items []*ComplianceItemEntry `type:"list" required:"true"`
+	Items []ComplianceItemEntry `type:"list" required:"true"`
 
 	// Specify an ID for this resource. For a managed instance, this is the instance
 	// ID.
@@ -19586,9 +19484,6 @@ func (s *PutComplianceItemsInput) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -19620,7 +19515,7 @@ func (s *PutComplianceItemsInput) SetItemContentHash(v string) *PutComplianceIte
 }
 
 // SetItems sets the Items field's value.
-func (s *PutComplianceItemsInput) SetItems(v []*ComplianceItemEntry) *PutComplianceItemsInput {
+func (s *PutComplianceItemsInput) SetItems(v []ComplianceItemEntry) *PutComplianceItemsInput {
 	s.Items = v
 	return s
 }
@@ -19664,7 +19559,7 @@ type PutInventoryInput struct {
 	// The inventory items that you want to add or update on instances.
 	//
 	// Items is a required field
-	Items []*InventoryItem `locationNameList:"Item" min:"1" type:"list" required:"true"`
+	Items []InventoryItem `locationNameList:"Item" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -19693,9 +19588,6 @@ func (s *PutInventoryInput) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -19715,7 +19607,7 @@ func (s *PutInventoryInput) SetInstanceId(v string) *PutInventoryInput {
 }
 
 // SetItems sets the Items field's value.
-func (s *PutInventoryInput) SetItems(v []*InventoryItem) *PutInventoryInput {
+func (s *PutInventoryInput) SetItems(v []InventoryItem) *PutInventoryInput {
 	s.Items = v
 	return s
 }
@@ -20058,7 +19950,7 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
 	//
 	// Targets is a required field
-	Targets []*Target `type:"list" required:"true"`
+	Targets []Target `type:"list" required:"true"`
 
 	// The ID of the Maintenance Window the target should be registered with.
 	//
@@ -20107,9 +19999,6 @@ func (s *RegisterTargetWithMaintenanceWindowInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -20153,7 +20042,7 @@ func (s *RegisterTargetWithMaintenanceWindowInput) SetResourceType(v Maintenance
 }
 
 // SetTargets sets the Targets field's value.
-func (s *RegisterTargetWithMaintenanceWindowInput) SetTargets(v []*Target) *RegisterTargetWithMaintenanceWindowInput {
+func (s *RegisterTargetWithMaintenanceWindowInput) SetTargets(v []Target) *RegisterTargetWithMaintenanceWindowInput {
 	s.Targets = v
 	return s
 }
@@ -20229,7 +20118,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
 	//
 	// Targets is a required field
-	Targets []*Target `type:"list" required:"true"`
+	Targets []Target `type:"list" required:"true"`
 
 	// The ARN of the task to execute
 	//
@@ -20241,7 +20130,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	TaskInvocationParameters *MaintenanceWindowTaskInvocationParameters `type:"structure"`
 
 	// The parameters that should be passed to the task when it is executed.
-	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task being registered.
 	//
@@ -20322,9 +20211,6 @@ func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -20391,7 +20277,7 @@ func (s *RegisterTaskWithMaintenanceWindowInput) SetServiceRoleArn(v string) *Re
 }
 
 // SetTargets sets the Targets field's value.
-func (s *RegisterTaskWithMaintenanceWindowInput) SetTargets(v []*Target) *RegisterTaskWithMaintenanceWindowInput {
+func (s *RegisterTaskWithMaintenanceWindowInput) SetTargets(v []Target) *RegisterTaskWithMaintenanceWindowInput {
 	s.Targets = v
 	return s
 }
@@ -20409,7 +20295,7 @@ func (s *RegisterTaskWithMaintenanceWindowInput) SetTaskInvocationParameters(v *
 }
 
 // SetTaskParameters sets the TaskParameters field's value.
-func (s *RegisterTaskWithMaintenanceWindowInput) SetTaskParameters(v map[string]*MaintenanceWindowTaskParameterValueExpression) *RegisterTaskWithMaintenanceWindowInput {
+func (s *RegisterTaskWithMaintenanceWindowInput) SetTaskParameters(v map[string]MaintenanceWindowTaskParameterValueExpression) *RegisterTaskWithMaintenanceWindowInput {
 	s.TaskParameters = v
 	return s
 }
@@ -20467,7 +20353,7 @@ type RemoveTagsFromResourceInput struct {
 	// Tag keys that you want to remove from the specified resource.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -20514,7 +20400,7 @@ func (s *RemoveTagsFromResourceInput) SetResourceType(v ResourceTypeForTagging) 
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []*string) *RemoveTagsFromResourceInput {
+func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -20940,7 +20826,7 @@ type SendAutomationSignalInput struct {
 
 	// The data sent with the signal. The data schema depends on the type of signal
 	// used in the request.
-	Payload map[string][]*string `min:"1" type:"map"`
+	Payload map[string][]string `min:"1" type:"map"`
 
 	// The type of signal. Valid signal types include the following: Approve and
 	// Reject
@@ -20989,7 +20875,7 @@ func (s *SendAutomationSignalInput) SetAutomationExecutionId(v string) *SendAuto
 }
 
 // SetPayload sets the Payload field's value.
-func (s *SendAutomationSignalInput) SetPayload(v map[string][]*string) *SendAutomationSignalInput {
+func (s *SendAutomationSignalInput) SetPayload(v map[string][]string) *SendAutomationSignalInput {
 	s.Payload = v
 	return s
 }
@@ -21044,7 +20930,7 @@ type SendCommandInput struct {
 	// send commands to a fleet of instances using the Targets parameter, which
 	// accepts EC2 tags. For more information about how to use Targets, see Sending
 	// Commands to a Fleet (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html).
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// (Optional) The maximum number of instances that are allowed to execute the
 	// command at the same time. You can specify a number such as 10 or a percentage
@@ -21075,7 +20961,7 @@ type SendCommandInput struct {
 	OutputS3Region *string `min:"3" type:"string"`
 
 	// The required and optional parameters specified in the document being executed.
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// The IAM role that Systems Manager uses to send notifications.
 	ServiceRoleArn *string `type:"string"`
@@ -21084,7 +20970,7 @@ type SendCommandInput struct {
 	// combination that you specify. Targets is required if you don't provide one
 	// or more instance IDs in the call. For more information about how to use Targets,
 	// see Sending Commands to a Fleet (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html).
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// If this time is reached and the command has not already started executing,
 	// it will not execute.
@@ -21125,9 +21011,6 @@ func (s *SendCommandInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -21165,7 +21048,7 @@ func (s *SendCommandInput) SetDocumentName(v string) *SendCommandInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *SendCommandInput) SetInstanceIds(v []*string) *SendCommandInput {
+func (s *SendCommandInput) SetInstanceIds(v []string) *SendCommandInput {
 	s.InstanceIds = v
 	return s
 }
@@ -21207,7 +21090,7 @@ func (s *SendCommandInput) SetOutputS3Region(v string) *SendCommandInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *SendCommandInput) SetParameters(v map[string][]*string) *SendCommandInput {
+func (s *SendCommandInput) SetParameters(v map[string][]string) *SendCommandInput {
 	s.Parameters = v
 	return s
 }
@@ -21219,7 +21102,7 @@ func (s *SendCommandInput) SetServiceRoleArn(v string) *SendCommandInput {
 }
 
 // SetTargets sets the Targets field's value.
-func (s *SendCommandInput) SetTargets(v []*Target) *SendCommandInput {
+func (s *SendCommandInput) SetTargets(v []Target) *SendCommandInput {
 	s.Targets = v
 	return s
 }
@@ -21356,7 +21239,7 @@ type StartAutomationExecutionInput struct {
 
 	// A key-value map of execution parameters, which match the declared parameters
 	// in the Automation document.
-	Parameters map[string][]*string `min:"1" type:"map"`
+	Parameters map[string][]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -21408,7 +21291,7 @@ func (s *StartAutomationExecutionInput) SetDocumentVersion(v string) *StartAutom
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *StartAutomationExecutionInput) SetParameters(v map[string][]*string) *StartAutomationExecutionInput {
+func (s *StartAutomationExecutionInput) SetParameters(v map[string][]string) *StartAutomationExecutionInput {
 	s.Parameters = v
 	return s
 }
@@ -21461,10 +21344,10 @@ type StepExecution struct {
 	FailureMessage *string `type:"string"`
 
 	// Fully-resolved values passed into the step before execution.
-	Inputs map[string]*string `type:"map"`
+	Inputs map[string]string `type:"map"`
 
 	// Returned values from the execution of the step.
-	Outputs map[string][]*string `min:"1" type:"map"`
+	Outputs map[string][]string `min:"1" type:"map"`
 
 	// A message associated with the response code for an execution.
 	Response *string `type:"string"`
@@ -21521,13 +21404,13 @@ func (s *StepExecution) SetFailureMessage(v string) *StepExecution {
 }
 
 // SetInputs sets the Inputs field's value.
-func (s *StepExecution) SetInputs(v map[string]*string) *StepExecution {
+func (s *StepExecution) SetInputs(v map[string]string) *StepExecution {
 	s.Inputs = v
 	return s
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *StepExecution) SetOutputs(v map[string][]*string) *StepExecution {
+func (s *StepExecution) SetOutputs(v map[string][]string) *StepExecution {
 	s.Outputs = v
 	return s
 }
@@ -21697,7 +21580,7 @@ type Target struct {
 	// include Amazon EC2 tags of ServerRole,WebServer. For more information about
 	// how to send commands that target instances using Key,Value parameters, see
 	// Executing a Command Using Systems Manager Run Command (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html).
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -21730,7 +21613,7 @@ func (s *Target) SetKey(v string) *Target {
 }
 
 // SetValues sets the Values field's value.
-func (s *Target) SetValues(v []*string) *Target {
+func (s *Target) SetValues(v []string) *Target {
 	s.Values = v
 	return s
 }
@@ -21763,13 +21646,13 @@ type UpdateAssociationInput struct {
 
 	// The parameters you want to update for the association. If you create a parameter
 	// using Parameter Store, you can reference the parameter using {{ssm:parameter-name}}
-	Parameters map[string][]*string `type:"map"`
+	Parameters map[string][]string `type:"map"`
 
 	// The cron expression used to schedule the association that you want to update.
 	ScheduleExpression *string `min:"1" type:"string"`
 
 	// The targets of the association.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -21799,9 +21682,6 @@ func (s *UpdateAssociationInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -21851,7 +21731,7 @@ func (s *UpdateAssociationInput) SetOutputLocation(v *InstanceAssociationOutputL
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *UpdateAssociationInput) SetParameters(v map[string][]*string) *UpdateAssociationInput {
+func (s *UpdateAssociationInput) SetParameters(v map[string][]string) *UpdateAssociationInput {
 	s.Parameters = v
 	return s
 }
@@ -21863,7 +21743,7 @@ func (s *UpdateAssociationInput) SetScheduleExpression(v string) *UpdateAssociat
 }
 
 // SetTargets sets the Targets field's value.
-func (s *UpdateAssociationInput) SetTargets(v []*Target) *UpdateAssociationInput {
+func (s *UpdateAssociationInput) SetTargets(v []Target) *UpdateAssociationInput {
 	s.Targets = v
 	return s
 }
@@ -22402,7 +22282,7 @@ type UpdateMaintenanceWindowTargetInput struct {
 	Replace *bool `type:"boolean"`
 
 	// The targets to add or replace.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The Maintenance Window ID with which to modify the target.
 	//
@@ -22453,9 +22333,6 @@ func (s *UpdateMaintenanceWindowTargetInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -22493,7 +22370,7 @@ func (s *UpdateMaintenanceWindowTargetInput) SetReplace(v bool) *UpdateMaintenan
 }
 
 // SetTargets sets the Targets field's value.
-func (s *UpdateMaintenanceWindowTargetInput) SetTargets(v []*Target) *UpdateMaintenanceWindowTargetInput {
+func (s *UpdateMaintenanceWindowTargetInput) SetTargets(v []Target) *UpdateMaintenanceWindowTargetInput {
 	s.Targets = v
 	return s
 }
@@ -22524,7 +22401,7 @@ type UpdateMaintenanceWindowTargetOutput struct {
 	OwnerInformation *string `min:"1" type:"string"`
 
 	// The updated targets.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The Maintenance Window ID specified in the update request.
 	WindowId *string `min:"20" type:"string"`
@@ -22562,7 +22439,7 @@ func (s *UpdateMaintenanceWindowTargetOutput) SetOwnerInformation(v string) *Upd
 }
 
 // SetTargets sets the Targets field's value.
-func (s *UpdateMaintenanceWindowTargetOutput) SetTargets(v []*Target) *UpdateMaintenanceWindowTargetOutput {
+func (s *UpdateMaintenanceWindowTargetOutput) SetTargets(v []Target) *UpdateMaintenanceWindowTargetOutput {
 	s.Targets = v
 	return s
 }
@@ -22616,7 +22493,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// The targets (either instances or tags) to modify. Instances are specified
 	// using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified
 	// using Key=tag_name,Values=tag_value.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The task ARN to modify.
 	TaskArn *string `min:"1" type:"string"`
@@ -22630,7 +22507,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// Key: string, between 1 and 255 characters
 	//
 	// Value: an array of strings, each string is between 1 and 255 characters
-	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The Maintenance Window ID that contains the task to modify.
 	//
@@ -22692,9 +22569,6 @@ func (s *UpdateMaintenanceWindowTaskInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -22761,7 +22635,7 @@ func (s *UpdateMaintenanceWindowTaskInput) SetServiceRoleArn(v string) *UpdateMa
 }
 
 // SetTargets sets the Targets field's value.
-func (s *UpdateMaintenanceWindowTaskInput) SetTargets(v []*Target) *UpdateMaintenanceWindowTaskInput {
+func (s *UpdateMaintenanceWindowTaskInput) SetTargets(v []Target) *UpdateMaintenanceWindowTaskInput {
 	s.Targets = v
 	return s
 }
@@ -22779,7 +22653,7 @@ func (s *UpdateMaintenanceWindowTaskInput) SetTaskInvocationParameters(v *Mainte
 }
 
 // SetTaskParameters sets the TaskParameters field's value.
-func (s *UpdateMaintenanceWindowTaskInput) SetTaskParameters(v map[string]*MaintenanceWindowTaskParameterValueExpression) *UpdateMaintenanceWindowTaskInput {
+func (s *UpdateMaintenanceWindowTaskInput) SetTaskParameters(v map[string]MaintenanceWindowTaskParameterValueExpression) *UpdateMaintenanceWindowTaskInput {
 	s.TaskParameters = v
 	return s
 }
@@ -22822,7 +22696,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	ServiceRoleArn *string `type:"string"`
 
 	// The updated target values.
-	Targets []*Target `type:"list"`
+	Targets []Target `type:"list"`
 
 	// The updated task ARN value.
 	TaskArn *string `min:"1" type:"string"`
@@ -22831,7 +22705,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	TaskInvocationParameters *MaintenanceWindowTaskInvocationParameters `type:"structure"`
 
 	// The updated parameter values.
-	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The ID of the Maintenance Window that was updated.
 	WindowId *string `min:"20" type:"string"`
@@ -22893,7 +22767,7 @@ func (s *UpdateMaintenanceWindowTaskOutput) SetServiceRoleArn(v string) *UpdateM
 }
 
 // SetTargets sets the Targets field's value.
-func (s *UpdateMaintenanceWindowTaskOutput) SetTargets(v []*Target) *UpdateMaintenanceWindowTaskOutput {
+func (s *UpdateMaintenanceWindowTaskOutput) SetTargets(v []Target) *UpdateMaintenanceWindowTaskOutput {
 	s.Targets = v
 	return s
 }
@@ -22911,7 +22785,7 @@ func (s *UpdateMaintenanceWindowTaskOutput) SetTaskInvocationParameters(v *Maint
 }
 
 // SetTaskParameters sets the TaskParameters field's value.
-func (s *UpdateMaintenanceWindowTaskOutput) SetTaskParameters(v map[string]*MaintenanceWindowTaskParameterValueExpression) *UpdateMaintenanceWindowTaskOutput {
+func (s *UpdateMaintenanceWindowTaskOutput) SetTaskParameters(v map[string]MaintenanceWindowTaskParameterValueExpression) *UpdateMaintenanceWindowTaskOutput {
 	s.TaskParameters = v
 	return s
 }
@@ -23006,7 +22880,7 @@ type UpdatePatchBaselineInput struct {
 	ApprovalRules *PatchRuleGroup `type:"structure"`
 
 	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string `type:"list"`
+	ApprovedPatches []string `type:"list"`
 
 	// Assigns a new compliance severity level to an existing patch baseline.
 	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
@@ -23026,7 +22900,7 @@ type UpdatePatchBaselineInput struct {
 	Name *string `min:"3" type:"string"`
 
 	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string `type:"list"`
+	RejectedPatches []string `type:"list"`
 }
 
 // String returns the string representation
@@ -23079,7 +22953,7 @@ func (s *UpdatePatchBaselineInput) SetApprovalRules(v *PatchRuleGroup) *UpdatePa
 }
 
 // SetApprovedPatches sets the ApprovedPatches field's value.
-func (s *UpdatePatchBaselineInput) SetApprovedPatches(v []*string) *UpdatePatchBaselineInput {
+func (s *UpdatePatchBaselineInput) SetApprovedPatches(v []string) *UpdatePatchBaselineInput {
 	s.ApprovedPatches = v
 	return s
 }
@@ -23115,7 +22989,7 @@ func (s *UpdatePatchBaselineInput) SetName(v string) *UpdatePatchBaselineInput {
 }
 
 // SetRejectedPatches sets the RejectedPatches field's value.
-func (s *UpdatePatchBaselineInput) SetRejectedPatches(v []*string) *UpdatePatchBaselineInput {
+func (s *UpdatePatchBaselineInput) SetRejectedPatches(v []string) *UpdatePatchBaselineInput {
 	s.RejectedPatches = v
 	return s
 }
@@ -23128,7 +23002,7 @@ type UpdatePatchBaselineOutput struct {
 	ApprovalRules *PatchRuleGroup `type:"structure"`
 
 	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string `type:"list"`
+	ApprovedPatches []string `type:"list"`
 
 	// The compliance severity level assigned to the patch baseline after the update
 	// completed.
@@ -23156,7 +23030,7 @@ type UpdatePatchBaselineOutput struct {
 	OperatingSystem OperatingSystem `type:"string"`
 
 	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string `type:"list"`
+	RejectedPatches []string `type:"list"`
 }
 
 // String returns the string representation
@@ -23176,7 +23050,7 @@ func (s *UpdatePatchBaselineOutput) SetApprovalRules(v *PatchRuleGroup) *UpdateP
 }
 
 // SetApprovedPatches sets the ApprovedPatches field's value.
-func (s *UpdatePatchBaselineOutput) SetApprovedPatches(v []*string) *UpdatePatchBaselineOutput {
+func (s *UpdatePatchBaselineOutput) SetApprovedPatches(v []string) *UpdatePatchBaselineOutput {
 	s.ApprovedPatches = v
 	return s
 }
@@ -23230,7 +23104,7 @@ func (s *UpdatePatchBaselineOutput) SetOperatingSystem(v OperatingSystem) *Updat
 }
 
 // SetRejectedPatches sets the RejectedPatches field's value.
-func (s *UpdatePatchBaselineOutput) SetRejectedPatches(v []*string) *UpdatePatchBaselineOutput {
+func (s *UpdatePatchBaselineOutput) SetRejectedPatches(v []string) *UpdatePatchBaselineOutput {
 	s.RejectedPatches = v
 	return s
 }

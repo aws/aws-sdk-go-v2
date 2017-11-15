@@ -676,7 +676,7 @@ type BatchDeleteBuildsInput struct {
 	// The IDs of the builds to delete.
 	//
 	// Ids is a required field
-	Ids []*string `locationName:"ids" min:"1" type:"list" required:"true"`
+	Ids []string `locationName:"ids" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -707,7 +707,7 @@ func (s *BatchDeleteBuildsInput) Validate() error {
 }
 
 // SetIds sets the Ids field's value.
-func (s *BatchDeleteBuildsInput) SetIds(v []*string) *BatchDeleteBuildsInput {
+func (s *BatchDeleteBuildsInput) SetIds(v []string) *BatchDeleteBuildsInput {
 	s.Ids = v
 	return s
 }
@@ -717,10 +717,10 @@ type BatchDeleteBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IDs of the builds that were successfully deleted.
-	BuildsDeleted []*string `locationName:"buildsDeleted" min:"1" type:"list"`
+	BuildsDeleted []string `locationName:"buildsDeleted" min:"1" type:"list"`
 
 	// Information about any builds that could not be successfully deleted.
-	BuildsNotDeleted []*BuildNotDeleted `locationName:"buildsNotDeleted" type:"list"`
+	BuildsNotDeleted []BuildNotDeleted `locationName:"buildsNotDeleted" type:"list"`
 }
 
 // String returns the string representation
@@ -734,13 +734,13 @@ func (s BatchDeleteBuildsOutput) GoString() string {
 }
 
 // SetBuildsDeleted sets the BuildsDeleted field's value.
-func (s *BatchDeleteBuildsOutput) SetBuildsDeleted(v []*string) *BatchDeleteBuildsOutput {
+func (s *BatchDeleteBuildsOutput) SetBuildsDeleted(v []string) *BatchDeleteBuildsOutput {
 	s.BuildsDeleted = v
 	return s
 }
 
 // SetBuildsNotDeleted sets the BuildsNotDeleted field's value.
-func (s *BatchDeleteBuildsOutput) SetBuildsNotDeleted(v []*BuildNotDeleted) *BatchDeleteBuildsOutput {
+func (s *BatchDeleteBuildsOutput) SetBuildsNotDeleted(v []BuildNotDeleted) *BatchDeleteBuildsOutput {
 	s.BuildsNotDeleted = v
 	return s
 }
@@ -752,7 +752,7 @@ type BatchGetBuildsInput struct {
 	// The IDs of the builds.
 	//
 	// Ids is a required field
-	Ids []*string `locationName:"ids" min:"1" type:"list" required:"true"`
+	Ids []string `locationName:"ids" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -783,7 +783,7 @@ func (s *BatchGetBuildsInput) Validate() error {
 }
 
 // SetIds sets the Ids field's value.
-func (s *BatchGetBuildsInput) SetIds(v []*string) *BatchGetBuildsInput {
+func (s *BatchGetBuildsInput) SetIds(v []string) *BatchGetBuildsInput {
 	s.Ids = v
 	return s
 }
@@ -793,10 +793,10 @@ type BatchGetBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the requested builds.
-	Builds []*Build `locationName:"builds" type:"list"`
+	Builds []Build `locationName:"builds" type:"list"`
 
 	// The IDs of builds for which information could not be found.
-	BuildsNotFound []*string `locationName:"buildsNotFound" min:"1" type:"list"`
+	BuildsNotFound []string `locationName:"buildsNotFound" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -810,13 +810,13 @@ func (s BatchGetBuildsOutput) GoString() string {
 }
 
 // SetBuilds sets the Builds field's value.
-func (s *BatchGetBuildsOutput) SetBuilds(v []*Build) *BatchGetBuildsOutput {
+func (s *BatchGetBuildsOutput) SetBuilds(v []Build) *BatchGetBuildsOutput {
 	s.Builds = v
 	return s
 }
 
 // SetBuildsNotFound sets the BuildsNotFound field's value.
-func (s *BatchGetBuildsOutput) SetBuildsNotFound(v []*string) *BatchGetBuildsOutput {
+func (s *BatchGetBuildsOutput) SetBuildsNotFound(v []string) *BatchGetBuildsOutput {
 	s.BuildsNotFound = v
 	return s
 }
@@ -828,7 +828,7 @@ type BatchGetProjectsInput struct {
 	// The names of the build projects.
 	//
 	// Names is a required field
-	Names []*string `locationName:"names" min:"1" type:"list" required:"true"`
+	Names []string `locationName:"names" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -859,7 +859,7 @@ func (s *BatchGetProjectsInput) Validate() error {
 }
 
 // SetNames sets the Names field's value.
-func (s *BatchGetProjectsInput) SetNames(v []*string) *BatchGetProjectsInput {
+func (s *BatchGetProjectsInput) SetNames(v []string) *BatchGetProjectsInput {
 	s.Names = v
 	return s
 }
@@ -869,10 +869,10 @@ type BatchGetProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the requested build projects.
-	Projects []*Project `locationName:"projects" type:"list"`
+	Projects []Project `locationName:"projects" type:"list"`
 
 	// The names of build projects for which information could not be found.
-	ProjectsNotFound []*string `locationName:"projectsNotFound" min:"1" type:"list"`
+	ProjectsNotFound []string `locationName:"projectsNotFound" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -886,13 +886,13 @@ func (s BatchGetProjectsOutput) GoString() string {
 }
 
 // SetProjects sets the Projects field's value.
-func (s *BatchGetProjectsOutput) SetProjects(v []*Project) *BatchGetProjectsOutput {
+func (s *BatchGetProjectsOutput) SetProjects(v []Project) *BatchGetProjectsOutput {
 	s.Projects = v
 	return s
 }
 
 // SetProjectsNotFound sets the ProjectsNotFound field's value.
-func (s *BatchGetProjectsOutput) SetProjectsNotFound(v []*string) *BatchGetProjectsOutput {
+func (s *BatchGetProjectsOutput) SetProjectsNotFound(v []string) *BatchGetProjectsOutput {
 	s.ProjectsNotFound = v
 	return s
 }
@@ -955,7 +955,7 @@ type Build struct {
 
 	// Information about all previous build phases that are completed and information
 	// about any current build phase that is not yet complete.
-	Phases []*BuildPhase `locationName:"phases" type:"list"`
+	Phases []BuildPhase `locationName:"phases" type:"list"`
 
 	// The name of the build project.
 	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
@@ -1045,7 +1045,7 @@ func (s *Build) SetLogs(v *LogsLocation) *Build {
 }
 
 // SetPhases sets the Phases field's value.
-func (s *Build) SetPhases(v []*BuildPhase) *Build {
+func (s *Build) SetPhases(v []BuildPhase) *Build {
 	s.Phases = v
 	return s
 }
@@ -1176,7 +1176,7 @@ type BuildPhase struct {
 
 	// Additional information about a build phase, especially to help troubleshoot
 	// a failed build.
-	Contexts []*PhaseContext `locationName:"contexts" type:"list"`
+	Contexts []PhaseContext `locationName:"contexts" type:"list"`
 
 	// How long, in seconds, between the starting and ending times of the build's
 	// phase.
@@ -1239,7 +1239,7 @@ func (s BuildPhase) GoString() string {
 }
 
 // SetContexts sets the Contexts field's value.
-func (s *BuildPhase) SetContexts(v []*PhaseContext) *BuildPhase {
+func (s *BuildPhase) SetContexts(v []PhaseContext) *BuildPhase {
 	s.Contexts = v
 	return s
 }
@@ -1317,7 +1317,7 @@ type CreateProjectInput struct {
 	//
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// build project tags.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait
 	// until timing out any build that has not been marked as completed. The default
@@ -1383,9 +1383,6 @@ func (s *CreateProjectInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1441,7 +1438,7 @@ func (s *CreateProjectInput) SetSource(v *ProjectSource) *CreateProjectInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateProjectInput) SetTags(v []*Tag) *CreateProjectInput {
+func (s *CreateProjectInput) SetTags(v []Tag) *CreateProjectInput {
 	s.Tags = v
 	return s
 }
@@ -1701,7 +1698,7 @@ type EnvironmentLanguage struct {
 	_ struct{} `type:"structure"`
 
 	// The list of Docker images that are related by the specified programming language.
-	Images []*EnvironmentImage `locationName:"images" type:"list"`
+	Images []EnvironmentImage `locationName:"images" type:"list"`
 
 	// The programming language for the Docker images.
 	Language LanguageType `locationName:"language" type:"string"`
@@ -1718,7 +1715,7 @@ func (s EnvironmentLanguage) GoString() string {
 }
 
 // SetImages sets the Images field's value.
-func (s *EnvironmentLanguage) SetImages(v []*EnvironmentImage) *EnvironmentLanguage {
+func (s *EnvironmentLanguage) SetImages(v []EnvironmentImage) *EnvironmentLanguage {
 	s.Images = v
 	return s
 }
@@ -1736,7 +1733,7 @@ type EnvironmentPlatform struct {
 	_ struct{} `type:"structure"`
 
 	// The list of programming languages that are available for the specified platform.
-	Languages []*EnvironmentLanguage `locationName:"languages" type:"list"`
+	Languages []EnvironmentLanguage `locationName:"languages" type:"list"`
 
 	// The platform's name.
 	Platform PlatformType `locationName:"platform" type:"string"`
@@ -1753,7 +1750,7 @@ func (s EnvironmentPlatform) GoString() string {
 }
 
 // SetLanguages sets the Languages field's value.
-func (s *EnvironmentPlatform) SetLanguages(v []*EnvironmentLanguage) *EnvironmentPlatform {
+func (s *EnvironmentPlatform) SetLanguages(v []EnvironmentLanguage) *EnvironmentPlatform {
 	s.Languages = v
 	return s
 }
@@ -1918,7 +1915,7 @@ type ListBuildsForProjectOutput struct {
 
 	// A list of build IDs for the specified build project, with each build ID representing
 	// a single build.
-	Ids []*string `locationName:"ids" min:"1" type:"list"`
+	Ids []string `locationName:"ids" min:"1" type:"list"`
 
 	// If there are more than 100 items in the list, only the first 100 items are
 	// returned, along with a unique string called a next token. To get the next
@@ -1938,7 +1935,7 @@ func (s ListBuildsForProjectOutput) GoString() string {
 }
 
 // SetIds sets the Ids field's value.
-func (s *ListBuildsForProjectOutput) SetIds(v []*string) *ListBuildsForProjectOutput {
+func (s *ListBuildsForProjectOutput) SetIds(v []string) *ListBuildsForProjectOutput {
 	s.Ids = v
 	return s
 }
@@ -1996,7 +1993,7 @@ type ListBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of build IDs, with each build ID representing a single build.
-	Ids []*string `locationName:"ids" min:"1" type:"list"`
+	Ids []string `locationName:"ids" min:"1" type:"list"`
 
 	// If there are more than 100 items in the list, only the first 100 items are
 	// returned, along with a unique string called a next token. To get the next
@@ -2016,7 +2013,7 @@ func (s ListBuildsOutput) GoString() string {
 }
 
 // SetIds sets the Ids field's value.
-func (s *ListBuildsOutput) SetIds(v []*string) *ListBuildsOutput {
+func (s *ListBuildsOutput) SetIds(v []string) *ListBuildsOutput {
 	s.Ids = v
 	return s
 }
@@ -2048,7 +2045,7 @@ type ListCuratedEnvironmentImagesOutput struct {
 
 	// Information about supported platforms for Docker images that are managed
 	// by AWS CodeBuild.
-	Platforms []*EnvironmentPlatform `locationName:"platforms" type:"list"`
+	Platforms []EnvironmentPlatform `locationName:"platforms" type:"list"`
 }
 
 // String returns the string representation
@@ -2062,7 +2059,7 @@ func (s ListCuratedEnvironmentImagesOutput) GoString() string {
 }
 
 // SetPlatforms sets the Platforms field's value.
-func (s *ListCuratedEnvironmentImagesOutput) SetPlatforms(v []*EnvironmentPlatform) *ListCuratedEnvironmentImagesOutput {
+func (s *ListCuratedEnvironmentImagesOutput) SetPlatforms(v []EnvironmentPlatform) *ListCuratedEnvironmentImagesOutput {
 	s.Platforms = v
 	return s
 }
@@ -2156,7 +2153,7 @@ type ListProjectsOutput struct {
 
 	// The list of build project names, with each build project name representing
 	// a single build project.
-	Projects []*string `locationName:"projects" min:"1" type:"list"`
+	Projects []string `locationName:"projects" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2176,7 +2173,7 @@ func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
 }
 
 // SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []*string) *ListProjectsOutput {
+func (s *ListProjectsOutput) SetProjects(v []string) *ListProjectsOutput {
 	s.Projects = v
 	return s
 }
@@ -2306,7 +2303,7 @@ type Project struct {
 	//
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// build project tags.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait
 	// before timing out any related build that did not get marked as completed.
@@ -2389,7 +2386,7 @@ func (s *Project) SetSource(v *ProjectSource) *Project {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Project) SetTags(v []*Tag) *Project {
+func (s *Project) SetTags(v []Tag) *Project {
 	s.Tags = v
 	return s
 }
@@ -2590,7 +2587,7 @@ type ProjectEnvironment struct {
 
 	// A set of environment variables to make available to builds for this build
 	// project.
-	EnvironmentVariables []*EnvironmentVariable `locationName:"environmentVariables" type:"list"`
+	EnvironmentVariables []EnvironmentVariable `locationName:"environmentVariables" type:"list"`
 
 	// The ID of the Docker image to use for this build project.
 	//
@@ -2648,9 +2645,6 @@ func (s *ProjectEnvironment) Validate() error {
 	}
 	if s.EnvironmentVariables != nil {
 		for i, v := range s.EnvironmentVariables {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariables", i), err.(aws.ErrInvalidParams))
 			}
@@ -2670,7 +2664,7 @@ func (s *ProjectEnvironment) SetComputeType(v ComputeType) *ProjectEnvironment {
 }
 
 // SetEnvironmentVariables sets the EnvironmentVariables field's value.
-func (s *ProjectEnvironment) SetEnvironmentVariables(v []*EnvironmentVariable) *ProjectEnvironment {
+func (s *ProjectEnvironment) SetEnvironmentVariables(v []EnvironmentVariable) *ProjectEnvironment {
 	s.EnvironmentVariables = v
 	return s
 }
@@ -2893,7 +2887,7 @@ type StartBuildInput struct {
 
 	// A set of environment variables that overrides, for this build only, the latest
 	// ones already defined in the build project.
-	EnvironmentVariablesOverride []*EnvironmentVariable `locationName:"environmentVariablesOverride" type:"list"`
+	EnvironmentVariablesOverride []EnvironmentVariable `locationName:"environmentVariablesOverride" type:"list"`
 
 	// The name of the build project to start running a build.
 	//
@@ -2956,9 +2950,6 @@ func (s *StartBuildInput) Validate() error {
 	}
 	if s.EnvironmentVariablesOverride != nil {
 		for i, v := range s.EnvironmentVariablesOverride {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(aws.ErrInvalidParams))
 			}
@@ -2984,7 +2975,7 @@ func (s *StartBuildInput) SetBuildspecOverride(v string) *StartBuildInput {
 }
 
 // SetEnvironmentVariablesOverride sets the EnvironmentVariablesOverride field's value.
-func (s *StartBuildInput) SetEnvironmentVariablesOverride(v []*EnvironmentVariable) *StartBuildInput {
+func (s *StartBuildInput) SetEnvironmentVariablesOverride(v []EnvironmentVariable) *StartBuildInput {
 	s.EnvironmentVariablesOverride = v
 	return s
 }
@@ -3191,7 +3182,7 @@ type UpdateProjectInput struct {
 	//
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// build project tags.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild
 	// to wait before timing out any related build that did not get marked as completed.
@@ -3244,9 +3235,6 @@ func (s *UpdateProjectInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3302,7 +3290,7 @@ func (s *UpdateProjectInput) SetSource(v *ProjectSource) *UpdateProjectInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *UpdateProjectInput) SetTags(v []*Tag) *UpdateProjectInput {
+func (s *UpdateProjectInput) SetTags(v []Tag) *UpdateProjectInput {
 	s.Tags = v
 	return s
 }

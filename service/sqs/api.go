@@ -1097,7 +1097,7 @@ type AddPermissionInput struct {
 	// in the Amazon SQS Developer Guide.
 	//
 	// AWSAccountIds is a required field
-	AWSAccountIds []*string `locationNameList:"AWSAccountId" type:"list" flattened:"true" required:"true"`
+	AWSAccountIds []string `locationNameList:"AWSAccountId" type:"list" flattened:"true" required:"true"`
 
 	// The action the client wants to allow for the specified principal. The following
 	// values are valid:
@@ -1124,7 +1124,7 @@ type AddPermissionInput struct {
 	// SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch.
 	//
 	// Actions is a required field
-	Actions []*string `locationNameList:"ActionName" type:"list" flattened:"true" required:"true"`
+	Actions []string `locationNameList:"ActionName" type:"list" flattened:"true" required:"true"`
 
 	// The unique identification of the permission you're setting (for example,
 	// AliceSendMessage). Maximum 80 characters. Allowed characters include alphanumeric
@@ -1178,13 +1178,13 @@ func (s *AddPermissionInput) Validate() error {
 }
 
 // SetAWSAccountIds sets the AWSAccountIds field's value.
-func (s *AddPermissionInput) SetAWSAccountIds(v []*string) *AddPermissionInput {
+func (s *AddPermissionInput) SetAWSAccountIds(v []string) *AddPermissionInput {
 	s.AWSAccountIds = v
 	return s
 }
 
 // SetActions sets the Actions field's value.
-func (s *AddPermissionInput) SetActions(v []*string) *AddPermissionInput {
+func (s *AddPermissionInput) SetActions(v []string) *AddPermissionInput {
 	s.Actions = v
 	return s
 }
@@ -1283,7 +1283,7 @@ type ChangeMessageVisibilityBatchInput struct {
 	// must be changed.
 	//
 	// Entries is a required field
-	Entries []*ChangeMessageVisibilityBatchRequestEntry `locationNameList:"ChangeMessageVisibilityBatchRequestEntry" type:"list" flattened:"true" required:"true"`
+	Entries []ChangeMessageVisibilityBatchRequestEntry `locationNameList:"ChangeMessageVisibilityBatchRequestEntry" type:"list" flattened:"true" required:"true"`
 
 	// The URL of the Amazon SQS queue whose messages' visibility is changed.
 	//
@@ -1316,9 +1316,6 @@ func (s *ChangeMessageVisibilityBatchInput) Validate() error {
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
@@ -1332,7 +1329,7 @@ func (s *ChangeMessageVisibilityBatchInput) Validate() error {
 }
 
 // SetEntries sets the Entries field's value.
-func (s *ChangeMessageVisibilityBatchInput) SetEntries(v []*ChangeMessageVisibilityBatchRequestEntry) *ChangeMessageVisibilityBatchInput {
+func (s *ChangeMessageVisibilityBatchInput) SetEntries(v []ChangeMessageVisibilityBatchRequestEntry) *ChangeMessageVisibilityBatchInput {
 	s.Entries = v
 	return s
 }
@@ -1353,12 +1350,12 @@ type ChangeMessageVisibilityBatchOutput struct {
 	// A list of BatchResultErrorEntry items.
 	//
 	// Failed is a required field
-	Failed []*BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
+	Failed []BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
 
 	// A list of ChangeMessageVisibilityBatchResultEntry items.
 	//
 	// Successful is a required field
-	Successful []*ChangeMessageVisibilityBatchResultEntry `locationNameList:"ChangeMessageVisibilityBatchResultEntry" type:"list" flattened:"true" required:"true"`
+	Successful []ChangeMessageVisibilityBatchResultEntry `locationNameList:"ChangeMessageVisibilityBatchResultEntry" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -1372,13 +1369,13 @@ func (s ChangeMessageVisibilityBatchOutput) GoString() string {
 }
 
 // SetFailed sets the Failed field's value.
-func (s *ChangeMessageVisibilityBatchOutput) SetFailed(v []*BatchResultErrorEntry) *ChangeMessageVisibilityBatchOutput {
+func (s *ChangeMessageVisibilityBatchOutput) SetFailed(v []BatchResultErrorEntry) *ChangeMessageVisibilityBatchOutput {
 	s.Failed = v
 	return s
 }
 
 // SetSuccessful sets the Successful field's value.
-func (s *ChangeMessageVisibilityBatchOutput) SetSuccessful(v []*ChangeMessageVisibilityBatchResultEntry) *ChangeMessageVisibilityBatchOutput {
+func (s *ChangeMessageVisibilityBatchOutput) SetSuccessful(v []ChangeMessageVisibilityBatchResultEntry) *ChangeMessageVisibilityBatchOutput {
 	s.Successful = v
 	return s
 }
@@ -1699,7 +1696,7 @@ type CreateQueueInput struct {
 	//    * LastModifiedTimestamp
 	//
 	//    * QueueArn
-	Attributes map[string]*string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	Attributes map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
 	// The name of the new queue. The following limits apply to this name:
 	//
@@ -1741,7 +1738,7 @@ func (s *CreateQueueInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreateQueueInput) SetAttributes(v map[string]*string) *CreateQueueInput {
+func (s *CreateQueueInput) SetAttributes(v map[string]string) *CreateQueueInput {
 	s.Attributes = v
 	return s
 }
@@ -1784,7 +1781,7 @@ type DeleteMessageBatchInput struct {
 	// A list of receipt handles for the messages to be deleted.
 	//
 	// Entries is a required field
-	Entries []*DeleteMessageBatchRequestEntry `locationNameList:"DeleteMessageBatchRequestEntry" type:"list" flattened:"true" required:"true"`
+	Entries []DeleteMessageBatchRequestEntry `locationNameList:"DeleteMessageBatchRequestEntry" type:"list" flattened:"true" required:"true"`
 
 	// The URL of the Amazon SQS queue from which messages are deleted.
 	//
@@ -1817,9 +1814,6 @@ func (s *DeleteMessageBatchInput) Validate() error {
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
@@ -1833,7 +1827,7 @@ func (s *DeleteMessageBatchInput) Validate() error {
 }
 
 // SetEntries sets the Entries field's value.
-func (s *DeleteMessageBatchInput) SetEntries(v []*DeleteMessageBatchRequestEntry) *DeleteMessageBatchInput {
+func (s *DeleteMessageBatchInput) SetEntries(v []DeleteMessageBatchRequestEntry) *DeleteMessageBatchInput {
 	s.Entries = v
 	return s
 }
@@ -1854,12 +1848,12 @@ type DeleteMessageBatchOutput struct {
 	// A list of BatchResultErrorEntry items.
 	//
 	// Failed is a required field
-	Failed []*BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
+	Failed []BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
 
 	// A list of DeleteMessageBatchResultEntry items.
 	//
 	// Successful is a required field
-	Successful []*DeleteMessageBatchResultEntry `locationNameList:"DeleteMessageBatchResultEntry" type:"list" flattened:"true" required:"true"`
+	Successful []DeleteMessageBatchResultEntry `locationNameList:"DeleteMessageBatchResultEntry" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -1873,13 +1867,13 @@ func (s DeleteMessageBatchOutput) GoString() string {
 }
 
 // SetFailed sets the Failed field's value.
-func (s *DeleteMessageBatchOutput) SetFailed(v []*BatchResultErrorEntry) *DeleteMessageBatchOutput {
+func (s *DeleteMessageBatchOutput) SetFailed(v []BatchResultErrorEntry) *DeleteMessageBatchOutput {
 	s.Failed = v
 	return s
 }
 
 // SetSuccessful sets the Successful field's value.
-func (s *DeleteMessageBatchOutput) SetSuccessful(v []*DeleteMessageBatchResultEntry) *DeleteMessageBatchOutput {
+func (s *DeleteMessageBatchOutput) SetSuccessful(v []DeleteMessageBatchResultEntry) *DeleteMessageBatchOutput {
 	s.Successful = v
 	return s
 }
@@ -2243,7 +2237,7 @@ type GetQueueAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A map of attributes to their respective values.
-	Attributes map[string]*string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	Attributes map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 }
 
 // String returns the string representation
@@ -2257,7 +2251,7 @@ func (s GetQueueAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetQueueAttributesOutput) SetAttributes(v map[string]*string) *GetQueueAttributesOutput {
+func (s *GetQueueAttributesOutput) SetAttributes(v map[string]string) *GetQueueAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -2391,7 +2385,7 @@ type ListDeadLetterSourceQueuesOutput struct {
 	// with a dead-letter queue.
 	//
 	// QueueUrls is a required field
-	QueueUrls []*string `locationName:"queueUrls" locationNameList:"QueueUrl" type:"list" flattened:"true" required:"true"`
+	QueueUrls []string `locationName:"queueUrls" locationNameList:"QueueUrl" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -2405,7 +2399,7 @@ func (s ListDeadLetterSourceQueuesOutput) GoString() string {
 }
 
 // SetQueueUrls sets the QueueUrls field's value.
-func (s *ListDeadLetterSourceQueuesOutput) SetQueueUrls(v []*string) *ListDeadLetterSourceQueuesOutput {
+func (s *ListDeadLetterSourceQueuesOutput) SetQueueUrls(v []string) *ListDeadLetterSourceQueuesOutput {
 	s.QueueUrls = v
 	return s
 }
@@ -2443,7 +2437,7 @@ type ListQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of queue URLs, up to 1,000 entries.
-	QueueUrls []*string `locationNameList:"QueueUrl" type:"list" flattened:"true"`
+	QueueUrls []string `locationNameList:"QueueUrl" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -2457,7 +2451,7 @@ func (s ListQueuesOutput) GoString() string {
 }
 
 // SetQueueUrls sets the QueueUrls field's value.
-func (s *ListQueuesOutput) SetQueueUrls(v []*string) *ListQueuesOutput {
+func (s *ListQueuesOutput) SetQueueUrls(v []string) *ListQueuesOutput {
 	s.QueueUrls = v
 	return s
 }
@@ -2471,7 +2465,7 @@ type Message struct {
 	// SentTimestamp and ApproximateFirstReceiveTimestamp are each returned as an
 	// integer representing the epoch time (http://en.wikipedia.org/wiki/Unix_time)
 	// in milliseconds.
-	Attributes map[string]*string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	Attributes map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
 	// The message's contents (not URL-encoded).
 	Body *string `type:"string"`
@@ -2488,7 +2482,7 @@ type Message struct {
 	// Each message attribute consists of a Name, Type, and Value. For more information,
 	// see Message Attribute Items and Validation (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation)
 	// in the Amazon SQS Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	MessageAttributes map[string]MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
 	// A unique identifier for the message. A MessageIdis considered unique across
 	// all AWS accounts for an extended period of time.
@@ -2511,7 +2505,7 @@ func (s Message) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Message) SetAttributes(v map[string]*string) *Message {
+func (s *Message) SetAttributes(v map[string]string) *Message {
 	s.Attributes = v
 	return s
 }
@@ -2535,7 +2529,7 @@ func (s *Message) SetMD5OfMessageAttributes(v string) *Message {
 }
 
 // SetMessageAttributes sets the MessageAttributes field's value.
-func (s *Message) SetMessageAttributes(v map[string]*MessageAttributeValue) *Message {
+func (s *Message) SetMessageAttributes(v map[string]MessageAttributeValue) *Message {
 	s.MessageAttributes = v
 	return s
 }
@@ -2583,7 +2577,7 @@ type MessageAttributeValue struct {
 	DataType *string `type:"string" required:"true"`
 
 	// Not implemented. Reserved for future use.
-	StringListValues []*string `locationName:"StringListValue" locationNameList:"StringListValue" type:"list" flattened:"true"`
+	StringListValues []string `locationName:"StringListValue" locationNameList:"StringListValue" type:"list" flattened:"true"`
 
 	// Strings are Unicode with UTF-8 binary encoding. For a list of code values,
 	// see ASCII Printable Characters (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
@@ -2633,7 +2627,7 @@ func (s *MessageAttributeValue) SetDataType(v string) *MessageAttributeValue {
 }
 
 // SetStringListValues sets the StringListValues field's value.
-func (s *MessageAttributeValue) SetStringListValues(v []*string) *MessageAttributeValue {
+func (s *MessageAttributeValue) SetStringListValues(v []string) *MessageAttributeValue {
 	s.StringListValues = v
 	return s
 }
@@ -2793,7 +2787,7 @@ type ReceiveMessageInput struct {
 	// or you can return all of the attributes by specifying All or .* in your request.
 	// You can also use all message attributes starting with a prefix, for example
 	// bar.*.
-	MessageAttributeNames []*string `locationNameList:"MessageAttributeName" type:"list" flattened:"true"`
+	MessageAttributeNames []string `locationNameList:"MessageAttributeName" type:"list" flattened:"true"`
 
 	// The URL of the Amazon SQS queue from which messages are received.
 	//
@@ -2905,7 +2899,7 @@ func (s *ReceiveMessageInput) SetMaxNumberOfMessages(v int64) *ReceiveMessageInp
 }
 
 // SetMessageAttributeNames sets the MessageAttributeNames field's value.
-func (s *ReceiveMessageInput) SetMessageAttributeNames(v []*string) *ReceiveMessageInput {
+func (s *ReceiveMessageInput) SetMessageAttributeNames(v []string) *ReceiveMessageInput {
 	s.MessageAttributeNames = v
 	return s
 }
@@ -2940,7 +2934,7 @@ type ReceiveMessageOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of messages.
-	Messages []*Message `locationNameList:"Message" type:"list" flattened:"true"`
+	Messages []Message `locationNameList:"Message" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -2954,7 +2948,7 @@ func (s ReceiveMessageOutput) GoString() string {
 }
 
 // SetMessages sets the Messages field's value.
-func (s *ReceiveMessageOutput) SetMessages(v []*Message) *ReceiveMessageOutput {
+func (s *ReceiveMessageOutput) SetMessages(v []Message) *ReceiveMessageOutput {
 	s.Messages = v
 	return s
 }
@@ -3039,7 +3033,7 @@ type SendMessageBatchInput struct {
 	// A list of SendMessageBatchRequestEntry items.
 	//
 	// Entries is a required field
-	Entries []*SendMessageBatchRequestEntry `locationNameList:"SendMessageBatchRequestEntry" type:"list" flattened:"true" required:"true"`
+	Entries []SendMessageBatchRequestEntry `locationNameList:"SendMessageBatchRequestEntry" type:"list" flattened:"true" required:"true"`
 
 	// The URL of the Amazon SQS queue to which batched messages are sent.
 	//
@@ -3072,9 +3066,6 @@ func (s *SendMessageBatchInput) Validate() error {
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
@@ -3088,7 +3079,7 @@ func (s *SendMessageBatchInput) Validate() error {
 }
 
 // SetEntries sets the Entries field's value.
-func (s *SendMessageBatchInput) SetEntries(v []*SendMessageBatchRequestEntry) *SendMessageBatchInput {
+func (s *SendMessageBatchInput) SetEntries(v []SendMessageBatchRequestEntry) *SendMessageBatchInput {
 	s.Entries = v
 	return s
 }
@@ -3110,12 +3101,12 @@ type SendMessageBatchOutput struct {
 	// that can't be enqueued.
 	//
 	// Failed is a required field
-	Failed []*BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
+	Failed []BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
 
 	// A list of SendMessageBatchResultEntry items.
 	//
 	// Successful is a required field
-	Successful []*SendMessageBatchResultEntry `locationNameList:"SendMessageBatchResultEntry" type:"list" flattened:"true" required:"true"`
+	Successful []SendMessageBatchResultEntry `locationNameList:"SendMessageBatchResultEntry" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -3129,13 +3120,13 @@ func (s SendMessageBatchOutput) GoString() string {
 }
 
 // SetFailed sets the Failed field's value.
-func (s *SendMessageBatchOutput) SetFailed(v []*BatchResultErrorEntry) *SendMessageBatchOutput {
+func (s *SendMessageBatchOutput) SetFailed(v []BatchResultErrorEntry) *SendMessageBatchOutput {
 	s.Failed = v
 	return s
 }
 
 // SetSuccessful sets the Successful field's value.
-func (s *SendMessageBatchOutput) SetSuccessful(v []*SendMessageBatchResultEntry) *SendMessageBatchOutput {
+func (s *SendMessageBatchOutput) SetSuccessful(v []SendMessageBatchResultEntry) *SendMessageBatchOutput {
 	s.Successful = v
 	return s
 }
@@ -3164,7 +3155,7 @@ type SendMessageBatchRequestEntry struct {
 	// Each message attribute consists of a Name, Type, and Value. For more information,
 	// see Message Attribute Items and Validation (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation)
 	// in the Amazon SQS Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	MessageAttributes map[string]MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
 	// The body of the message.
 	//
@@ -3271,9 +3262,6 @@ func (s *SendMessageBatchRequestEntry) Validate() error {
 	}
 	if s.MessageAttributes != nil {
 		for i, v := range s.MessageAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -3299,7 +3287,7 @@ func (s *SendMessageBatchRequestEntry) SetId(v string) *SendMessageBatchRequestE
 }
 
 // SetMessageAttributes sets the MessageAttributes field's value.
-func (s *SendMessageBatchRequestEntry) SetMessageAttributes(v map[string]*MessageAttributeValue) *SendMessageBatchRequestEntry {
+func (s *SendMessageBatchRequestEntry) SetMessageAttributes(v map[string]MessageAttributeValue) *SendMessageBatchRequestEntry {
 	s.MessageAttributes = v
 	return s
 }
@@ -3416,7 +3404,7 @@ type SendMessageInput struct {
 	// Each message attribute consists of a Name, Type, and Value. For more information,
 	// see Message Attribute Items and Validation (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation)
 	// in the Amazon SQS Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	MessageAttributes map[string]MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
 	// The message to send. The maximum string size is 256 KB.
 	//
@@ -3538,9 +3526,6 @@ func (s *SendMessageInput) Validate() error {
 	}
 	if s.MessageAttributes != nil {
 		for i, v := range s.MessageAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -3560,7 +3545,7 @@ func (s *SendMessageInput) SetDelaySeconds(v int64) *SendMessageInput {
 }
 
 // SetMessageAttributes sets the MessageAttributes field's value.
-func (s *SendMessageInput) SetMessageAttributes(v map[string]*MessageAttributeValue) *SendMessageInput {
+func (s *SendMessageInput) SetMessageAttributes(v map[string]MessageAttributeValue) *SendMessageInput {
 	s.MessageAttributes = v
 	return s
 }
@@ -3771,7 +3756,7 @@ type SetQueueAttributesInput struct {
 	//    * QueueArn
 	//
 	// Attributes is a required field
-	Attributes map[string]*string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
+	Attributes map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
 
 	// The URL of the Amazon SQS queue whose attributes are set.
 	//
@@ -3810,7 +3795,7 @@ func (s *SetQueueAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *SetQueueAttributesInput) SetAttributes(v map[string]*string) *SetQueueAttributesInput {
+func (s *SetQueueAttributesInput) SetAttributes(v map[string]string) *SetQueueAttributesInput {
 	s.Attributes = v
 	return s
 }

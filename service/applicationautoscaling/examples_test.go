@@ -263,7 +263,7 @@ func ExampleApplicationAutoScaling_PutScalingPolicyRequest_shared00() {
 		StepScalingPolicyConfiguration: &applicationautoscaling.StepScalingPolicyConfiguration{
 			AdjustmentType: applicationautoscaling.AdjustmentTypePercentChangeInCapacity,
 			Cooldown:       aws.Int64(60),
-			StepAdjustments: []*applicationautoscaling.StepAdjustment{
+			StepAdjustments: []applicationautoscaling.StepAdjustment{
 				{
 					MetricIntervalLowerBound: aws.Float64(0.000000),
 					ScalingAdjustment:        aws.Int64(200),
@@ -325,7 +325,7 @@ func ExampleApplicationAutoScaling_PutScalingPolicyRequest_shared01() {
 		StepScalingPolicyConfiguration: &applicationautoscaling.StepScalingPolicyConfiguration{
 			AdjustmentType: applicationautoscaling.AdjustmentTypePercentChangeInCapacity,
 			Cooldown:       aws.Int64(180),
-			StepAdjustments: []*applicationautoscaling.StepAdjustment{
+			StepAdjustments: []applicationautoscaling.StepAdjustment{
 				{
 					MetricIntervalLowerBound: aws.Float64(0.000000),
 					ScalingAdjustment:        aws.Int64(200),

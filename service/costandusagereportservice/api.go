@@ -308,7 +308,7 @@ type DescribeReportDefinitionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of report definitions.
-	ReportDefinitions []*ReportDefinition `type:"list"`
+	ReportDefinitions []ReportDefinition `type:"list"`
 }
 
 // String returns the string representation
@@ -328,7 +328,7 @@ func (s *DescribeReportDefinitionsOutput) SetNextToken(v string) *DescribeReport
 }
 
 // SetReportDefinitions sets the ReportDefinitions field's value.
-func (s *DescribeReportDefinitionsOutput) SetReportDefinitions(v []*ReportDefinition) *DescribeReportDefinitionsOutput {
+func (s *DescribeReportDefinitionsOutput) SetReportDefinitions(v []ReportDefinition) *DescribeReportDefinitionsOutput {
 	s.ReportDefinitions = v
 	return s
 }

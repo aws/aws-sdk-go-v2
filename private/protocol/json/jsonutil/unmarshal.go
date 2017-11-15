@@ -183,6 +183,8 @@ func unmarshalScalar(value reflect.Value, data interface{}, tag reflect.StructTa
 		switch value.Interface().(type) {
 		case *string:
 			value.Set(reflect.ValueOf(&d))
+		case string:
+			value.Set(reflect.ValueOf(d))
 		case []byte:
 			b, err := base64.StdEncoding.DecodeString(d)
 			if err != nil {

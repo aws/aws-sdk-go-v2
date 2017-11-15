@@ -82,7 +82,7 @@ func Unmarshal(av *dynamodb.AttributeValue, out interface{}) error {
 // a map of AttributeValues.
 //
 // The output value provided must be a non-nil pointer
-func UnmarshalMap(m map[string]*dynamodb.AttributeValue, out interface{}) error {
+func UnmarshalMap(m map[string]dynamodb.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(&dynamodb.AttributeValue{M: m}, out)
 }
 
@@ -90,7 +90,7 @@ func UnmarshalMap(m map[string]*dynamodb.AttributeValue, out interface{}) error 
 // a slice of AttributeValues.
 //
 // The output value provided must be a non-nil pointer
-func UnmarshalList(l []*dynamodb.AttributeValue, out interface{}) error {
+func UnmarshalList(l []dynamodb.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(&dynamodb.AttributeValue{L: l}, out)
 }
 
@@ -101,10 +101,10 @@ func UnmarshalList(l []*dynamodb.AttributeValue, out interface{}) error {
 // Query API call.
 //
 // The output value provided must be a non-nil pointer
-func UnmarshalListOfMaps(l []map[string]*dynamodb.AttributeValue, out interface{}) error {
-	items := make([]*dynamodb.AttributeValue, len(l))
+func UnmarshalListOfMaps(l []map[string]dynamodb.AttributeValue, out interface{}) error {
+	items := make([]dynamodb.AttributeValue, len(l))
 	for i, m := range l {
-		items[i] = &dynamodb.AttributeValue{M: m}
+		items[i] = dynamodb.AttributeValue{M: m}
 	}
 
 	return UnmarshalList(items, out)
@@ -362,7 +362,7 @@ func (d *Decoder) decodeNumberToInterface(n *string) (interface{}, error) {
 	return strconv.ParseFloat(*n, 64)
 }
 
-func (d *Decoder) decodeNumberSet(ns []*string, v reflect.Value) error {
+func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Slice:
 		// Make room for the slice elements if needed
@@ -376,7 +376,7 @@ func (d *Decoder) decodeNumberSet(ns []*string, v reflect.Value) error {
 		if d.UseNumber {
 			set := make([]Number, len(ns))
 			for i, n := range ns {
-				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+				if err := d.decodeNumber(&n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
 					return err
 				}
 			}
@@ -384,7 +384,7 @@ func (d *Decoder) decodeNumberSet(ns []*string, v reflect.Value) error {
 		} else {
 			set := make([]float64, len(ns))
 			for i, n := range ns {
-				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+				if err := d.decodeNumber(&n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
 					return err
 				}
 			}
@@ -401,7 +401,7 @@ func (d *Decoder) decodeNumberSet(ns []*string, v reflect.Value) error {
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&dynamodb.AttributeValue{NS: ns})
 		}
-		if err := d.decodeNumber(ns[i], elem, tag{}); err != nil {
+		if err := d.decodeNumber(&ns[i], elem, tag{}); err != nil {
 			return err
 		}
 	}
@@ -409,7 +409,7 @@ func (d *Decoder) decodeNumberSet(ns []*string, v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder) decodeList(avList []*dynamodb.AttributeValue, v reflect.Value) error {
+func (d *Decoder) decodeList(avList []dynamodb.AttributeValue, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Slice:
 		// Make room for the slice elements if needed
@@ -422,7 +422,7 @@ func (d *Decoder) decodeList(avList []*dynamodb.AttributeValue, v reflect.Value)
 	case reflect.Interface:
 		s := make([]interface{}, len(avList))
 		for i, av := range avList {
-			if err := d.decode(av, reflect.ValueOf(&s[i]).Elem(), tag{}); err != nil {
+			if err := d.decode(&av, reflect.ValueOf(&s[i]).Elem(), tag{}); err != nil {
 				return err
 			}
 		}
@@ -435,7 +435,7 @@ func (d *Decoder) decodeList(avList []*dynamodb.AttributeValue, v reflect.Value)
 	// If v is not a slice, array
 	for i := 0; i < v.Cap() && i < len(avList); i++ {
 		v.SetLen(i + 1)
-		if err := d.decode(avList[i], v.Index(i), tag{}); err != nil {
+		if err := d.decode(&avList[i], v.Index(i), tag{}); err != nil {
 			return err
 		}
 	}
@@ -443,7 +443,7 @@ func (d *Decoder) decodeList(avList []*dynamodb.AttributeValue, v reflect.Value)
 	return nil
 }
 
-func (d *Decoder) decodeMap(avMap map[string]*dynamodb.AttributeValue, v reflect.Value) error {
+func (d *Decoder) decodeMap(avMap map[string]dynamodb.AttributeValue, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Map:
 		t := v.Type()
@@ -465,7 +465,7 @@ func (d *Decoder) decodeMap(avMap map[string]*dynamodb.AttributeValue, v reflect
 		for k, av := range avMap {
 			key := reflect.ValueOf(k)
 			elem := reflect.New(v.Type().Elem()).Elem()
-			if err := d.decode(av, elem, tag{}); err != nil {
+			if err := d.decode(&av, elem, tag{}); err != nil {
 				return err
 			}
 			v.SetMapIndex(key, elem)
@@ -478,7 +478,7 @@ func (d *Decoder) decodeMap(avMap map[string]*dynamodb.AttributeValue, v reflect
 					v.Set(reflect.New(v.Type().Elem()))
 					return true // to continue the loop.
 				})
-				if err := d.decode(av, fv, f.tag); err != nil {
+				if err := d.decode(&av, fv, f.tag); err != nil {
 					return err
 				}
 			}
@@ -525,7 +525,7 @@ func (d *Decoder) decodeString(s *string, v reflect.Value, fieldTag tag) error {
 	return nil
 }
 
-func (d *Decoder) decodeStringSet(ss []*string, v reflect.Value) error {
+func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Slice:
 		// Make room for the slice elements if needed
@@ -537,7 +537,7 @@ func (d *Decoder) decodeStringSet(ss []*string, v reflect.Value) error {
 	case reflect.Interface:
 		set := make([]string, len(ss))
 		for i, s := range ss {
-			if err := d.decodeString(s, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+			if err := d.decodeString(&s, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
 				return err
 			}
 		}
@@ -553,7 +553,7 @@ func (d *Decoder) decodeStringSet(ss []*string, v reflect.Value) error {
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&dynamodb.AttributeValue{SS: ss})
 		}
-		if err := d.decodeString(ss[i], elem, tag{}); err != nil {
+		if err := d.decodeString(&ss[i], elem, tag{}); err != nil {
 			return err
 		}
 	}

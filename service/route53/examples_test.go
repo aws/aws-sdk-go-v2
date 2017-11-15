@@ -91,7 +91,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared00() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -144,7 +144,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared01() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -199,7 +199,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared02() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -253,7 +253,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared03() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -309,7 +309,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared04() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -365,7 +365,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared05() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -422,7 +422,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared06() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -479,7 +479,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared07() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -536,7 +536,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared08() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -599,7 +599,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared09() {
 	svc := route53.New(cfg)
 	input := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 				},
@@ -659,7 +659,7 @@ func ExampleRoute53_ChangeTagsForResourceRequest_shared00() {
 
 	svc := route53.New(cfg)
 	input := &route53.ChangeTagsForResourceInput{
-		AddTags: []*route53.Tag{
+		AddTags: []route53.Tag{
 			{
 				Key:   aws.String("apex"),
 				Value: aws.String("3874"),
@@ -669,8 +669,8 @@ func ExampleRoute53_ChangeTagsForResourceRequest_shared00() {
 				Value: aws.String("4938"),
 			},
 		},
-		RemoveTagKeys: []*string{
-			aws.String("Nadir"),
+		RemoveTagKeys: []string{
+			"Nadir",
 		},
 		ResourceId:   aws.String("Z3M3LMPEXAMPLE"),
 		ResourceType: route53.TagResourceTypeHostedzone,

@@ -1021,7 +1021,7 @@ type BatchGetRepositoriesInput struct {
 	// The names of the repositories to get information about.
 	//
 	// RepositoryNames is a required field
-	RepositoryNames []*string `locationName:"repositoryNames" type:"list" required:"true"`
+	RepositoryNames []string `locationName:"repositoryNames" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1049,7 +1049,7 @@ func (s *BatchGetRepositoriesInput) Validate() error {
 }
 
 // SetRepositoryNames sets the RepositoryNames field's value.
-func (s *BatchGetRepositoriesInput) SetRepositoryNames(v []*string) *BatchGetRepositoriesInput {
+func (s *BatchGetRepositoriesInput) SetRepositoryNames(v []string) *BatchGetRepositoriesInput {
 	s.RepositoryNames = v
 	return s
 }
@@ -1060,10 +1060,10 @@ type BatchGetRepositoriesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of repositories returned by the batch get repositories operation.
-	Repositories []*RepositoryMetadata `locationName:"repositories" type:"list"`
+	Repositories []RepositoryMetadata `locationName:"repositories" type:"list"`
 
 	// Returns a list of repository names for which information could not be found.
-	RepositoriesNotFound []*string `locationName:"repositoriesNotFound" type:"list"`
+	RepositoriesNotFound []string `locationName:"repositoriesNotFound" type:"list"`
 }
 
 // String returns the string representation
@@ -1077,13 +1077,13 @@ func (s BatchGetRepositoriesOutput) GoString() string {
 }
 
 // SetRepositories sets the Repositories field's value.
-func (s *BatchGetRepositoriesOutput) SetRepositories(v []*RepositoryMetadata) *BatchGetRepositoriesOutput {
+func (s *BatchGetRepositoriesOutput) SetRepositories(v []RepositoryMetadata) *BatchGetRepositoriesOutput {
 	s.Repositories = v
 	return s
 }
 
 // SetRepositoriesNotFound sets the RepositoriesNotFound field's value.
-func (s *BatchGetRepositoriesOutput) SetRepositoriesNotFound(v []*string) *BatchGetRepositoriesOutput {
+func (s *BatchGetRepositoriesOutput) SetRepositoriesNotFound(v []string) *BatchGetRepositoriesOutput {
 	s.RepositoriesNotFound = v
 	return s
 }
@@ -1200,7 +1200,7 @@ type Commit struct {
 	Message *string `locationName:"message" type:"string"`
 
 	// The parent list for the specified commit.
-	Parents []*string `locationName:"parents" type:"list"`
+	Parents []string `locationName:"parents" type:"list"`
 
 	// Tree information for the specified commit.
 	TreeId *string `locationName:"treeId" type:"string"`
@@ -1241,7 +1241,7 @@ func (s *Commit) SetMessage(v string) *Commit {
 }
 
 // SetParents sets the Parents field's value.
-func (s *Commit) SetParents(v []*string) *Commit {
+func (s *Commit) SetParents(v []string) *Commit {
 	s.Parents = v
 	return s
 }
@@ -1919,7 +1919,7 @@ type GetDifferencesOutput struct {
 
 	// A differences data type object that contains information about the differences,
 	// including whether the difference is added, modified, or deleted (A, D, M).
-	Differences []*Difference `locationName:"differences" type:"list"`
+	Differences []Difference `locationName:"differences" type:"list"`
 
 	// An enumeration token that can be used in a request to return the next batch
 	// of the results.
@@ -1937,7 +1937,7 @@ func (s GetDifferencesOutput) GoString() string {
 }
 
 // SetDifferences sets the Differences field's value.
-func (s *GetDifferencesOutput) SetDifferences(v []*Difference) *GetDifferencesOutput {
+func (s *GetDifferencesOutput) SetDifferences(v []Difference) *GetDifferencesOutput {
 	s.Differences = v
 	return s
 }
@@ -2070,7 +2070,7 @@ type GetRepositoryTriggersOutput struct {
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
 	// The JSON block of configuration information for each trigger.
-	Triggers []*RepositoryTrigger `locationName:"triggers" type:"list"`
+	Triggers []RepositoryTrigger `locationName:"triggers" type:"list"`
 }
 
 // String returns the string representation
@@ -2090,7 +2090,7 @@ func (s *GetRepositoryTriggersOutput) SetConfigurationId(v string) *GetRepositor
 }
 
 // SetTriggers sets the Triggers field's value.
-func (s *GetRepositoryTriggersOutput) SetTriggers(v []*RepositoryTrigger) *GetRepositoryTriggersOutput {
+func (s *GetRepositoryTriggersOutput) SetTriggers(v []RepositoryTrigger) *GetRepositoryTriggersOutput {
 	s.Triggers = v
 	return s
 }
@@ -2154,7 +2154,7 @@ type ListBranchesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of branch names.
-	Branches []*string `locationName:"branches" type:"list"`
+	Branches []string `locationName:"branches" type:"list"`
 
 	// An enumeration token that returns the batch of the results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -2171,7 +2171,7 @@ func (s ListBranchesOutput) GoString() string {
 }
 
 // SetBranches sets the Branches field's value.
-func (s *ListBranchesOutput) SetBranches(v []*string) *ListBranchesOutput {
+func (s *ListBranchesOutput) SetBranches(v []string) *ListBranchesOutput {
 	s.Branches = v
 	return s
 }
@@ -2240,7 +2240,7 @@ type ListRepositoriesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Lists the repositories called by the list repositories operation.
-	Repositories []*RepositoryNameIdPair `locationName:"repositories" type:"list"`
+	Repositories []RepositoryNameIdPair `locationName:"repositories" type:"list"`
 }
 
 // String returns the string representation
@@ -2260,7 +2260,7 @@ func (s *ListRepositoriesOutput) SetNextToken(v string) *ListRepositoriesOutput 
 }
 
 // SetRepositories sets the Repositories field's value.
-func (s *ListRepositoriesOutput) SetRepositories(v []*RepositoryNameIdPair) *ListRepositoriesOutput {
+func (s *ListRepositoriesOutput) SetRepositories(v []RepositoryNameIdPair) *ListRepositoriesOutput {
 	s.Repositories = v
 	return s
 }
@@ -2278,7 +2278,7 @@ type PutRepositoryTriggersInput struct {
 	// The JSON block of configuration information for each trigger.
 	//
 	// Triggers is a required field
-	Triggers []*RepositoryTrigger `locationName:"triggers" type:"list" required:"true"`
+	Triggers []RepositoryTrigger `locationName:"triggers" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2307,9 +2307,6 @@ func (s *PutRepositoryTriggersInput) Validate() error {
 	}
 	if s.Triggers != nil {
 		for i, v := range s.Triggers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
 			}
@@ -2329,7 +2326,7 @@ func (s *PutRepositoryTriggersInput) SetRepositoryName(v string) *PutRepositoryT
 }
 
 // SetTriggers sets the Triggers field's value.
-func (s *PutRepositoryTriggersInput) SetTriggers(v []*RepositoryTrigger) *PutRepositoryTriggersInput {
+func (s *PutRepositoryTriggersInput) SetTriggers(v []RepositoryTrigger) *PutRepositoryTriggersInput {
 	s.Triggers = v
 	return s
 }
@@ -2506,7 +2503,7 @@ type RepositoryTrigger struct {
 
 	// The branches that will be included in the trigger configuration. If no branches
 	// are specified, the trigger will apply to all branches.
-	Branches []*string `locationName:"branches" type:"list"`
+	Branches []string `locationName:"branches" type:"list"`
 
 	// Any custom data associated with the trigger that will be included in the
 	// information sent to the target of the trigger.
@@ -2566,7 +2563,7 @@ func (s *RepositoryTrigger) Validate() error {
 }
 
 // SetBranches sets the Branches field's value.
-func (s *RepositoryTrigger) SetBranches(v []*string) *RepositoryTrigger {
+func (s *RepositoryTrigger) SetBranches(v []string) *RepositoryTrigger {
 	s.Branches = v
 	return s
 }
@@ -2642,7 +2639,7 @@ type TestRepositoryTriggersInput struct {
 	// The list of triggers to test.
 	//
 	// Triggers is a required field
-	Triggers []*RepositoryTrigger `locationName:"triggers" type:"list" required:"true"`
+	Triggers []RepositoryTrigger `locationName:"triggers" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2671,9 +2668,6 @@ func (s *TestRepositoryTriggersInput) Validate() error {
 	}
 	if s.Triggers != nil {
 		for i, v := range s.Triggers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
 			}
@@ -2693,7 +2687,7 @@ func (s *TestRepositoryTriggersInput) SetRepositoryName(v string) *TestRepositor
 }
 
 // SetTriggers sets the Triggers field's value.
-func (s *TestRepositoryTriggersInput) SetTriggers(v []*RepositoryTrigger) *TestRepositoryTriggersInput {
+func (s *TestRepositoryTriggersInput) SetTriggers(v []RepositoryTrigger) *TestRepositoryTriggersInput {
 	s.Triggers = v
 	return s
 }
@@ -2705,11 +2699,11 @@ type TestRepositoryTriggersOutput struct {
 
 	// The list of triggers that were not able to be tested. This list provides
 	// the names of the triggers that could not be tested, separated by commas.
-	FailedExecutions []*RepositoryTriggerExecutionFailure `locationName:"failedExecutions" type:"list"`
+	FailedExecutions []RepositoryTriggerExecutionFailure `locationName:"failedExecutions" type:"list"`
 
 	// The list of triggers that were successfully tested. This list provides the
 	// names of the triggers that were successfully tested, separated by commas.
-	SuccessfulExecutions []*string `locationName:"successfulExecutions" type:"list"`
+	SuccessfulExecutions []string `locationName:"successfulExecutions" type:"list"`
 }
 
 // String returns the string representation
@@ -2723,13 +2717,13 @@ func (s TestRepositoryTriggersOutput) GoString() string {
 }
 
 // SetFailedExecutions sets the FailedExecutions field's value.
-func (s *TestRepositoryTriggersOutput) SetFailedExecutions(v []*RepositoryTriggerExecutionFailure) *TestRepositoryTriggersOutput {
+func (s *TestRepositoryTriggersOutput) SetFailedExecutions(v []RepositoryTriggerExecutionFailure) *TestRepositoryTriggersOutput {
 	s.FailedExecutions = v
 	return s
 }
 
 // SetSuccessfulExecutions sets the SuccessfulExecutions field's value.
-func (s *TestRepositoryTriggersOutput) SetSuccessfulExecutions(v []*string) *TestRepositoryTriggersOutput {
+func (s *TestRepositoryTriggersOutput) SetSuccessfulExecutions(v []string) *TestRepositoryTriggersOutput {
 	s.SuccessfulExecutions = v
 	return s
 }

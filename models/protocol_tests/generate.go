@@ -322,7 +322,7 @@ func (i *testCase) TestCase(idx int) string {
 			TestCase:   i,
 			Body:       fmt.Sprintf("%q", i.OutputTest.Body),
 			OpName:     strings.ToUpper(opName[0:1]) + opName[1:],
-			Assertions: GenerateAssertions(i.Data, i.Given.OutputRef.Shape, "out"),
+			Assertions: GenerateAssertions(i.Data, i.Given.OutputRef.Shape, "out", false),
 		}
 
 		if err := tplOutputTestCase.Execute(&buf, output); err != nil {
@@ -459,7 +459,7 @@ func findMember(shape *api.Shape, key string) string {
 // GenerateAssertions builds assertions for a shape based on its type.
 //
 // The shape's recursive values also will have assertions generated for them.
-func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string {
+func GenerateAssertions(out interface{}, shape *api.Shape, prefix string, parentCollection bool) string {
 	if shape == nil {
 		return ""
 	}
@@ -471,6 +471,11 @@ func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string
 		)
 	}
 
+	pointer := "*"
+	if parentCollection {
+		pointer = ""
+	}
+
 	switch t := out.(type) {
 	case map[string]interface{}:
 		keys := util.SortedKeys(t)
@@ -480,7 +485,7 @@ func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string
 			for _, k := range keys {
 				v := t[k]
 				s := shape.ValueRef.Shape
-				code += GenerateAssertions(v, s, prefix+"[\""+k+"\"]")
+				code += GenerateAssertions(v, s, prefix+"[\""+k+"\"]", true)
 			}
 		} else if shape.Type == "jsonvalue" {
 			code += fmt.Sprintf("reflect.DeepEqual(%s, map[string]interface{}%s)", prefix, walkMap(out.(map[string]interface{})))
@@ -489,7 +494,7 @@ func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string
 				v := t[k]
 				m := findMember(shape, k)
 				s := shape.MemberRefs[m].Shape
-				code += GenerateAssertions(v, s, prefix+"."+m+"")
+				code += GenerateAssertions(v, s, prefix+"."+m+"", false)
 			}
 		}
 		return code
@@ -497,7 +502,7 @@ func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string
 		code := ""
 		for i, v := range t {
 			s := shape.MemberRef.Shape
-			code += GenerateAssertions(v, s, prefix+"["+strconv.Itoa(i)+"]")
+			code += GenerateAssertions(v, s, prefix+"["+strconv.Itoa(i)+"]", true)
 		}
 		return code
 	default:
@@ -515,15 +520,32 @@ func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string
 		case "integer", "long":
 			return fmtAssertEqual(
 				fmt.Sprintf("int64(%#v)", out),
-				fmt.Sprintf("*%s", prefix),
+				fmt.Sprintf("%s%s", pointer, prefix),
+			)
+		case "string":
+			expr := fmt.Sprintf("string(%#v)", out)
+			if parentCollection && !reflect.ValueOf(out).IsValid() {
+				expr = `""`
+			}
+
+			return fmtAssertEqual(
+				expr,
+				fmt.Sprintf("%s%s", pointer, prefix),
 			)
 		default:
-			if !reflect.ValueOf(out).IsValid() {
+			if !(parentCollection || reflect.ValueOf(out).IsValid()) {
 				return fmtAssertNil(prefix)
 			}
+
+			if parentCollection {
+				// TODO: Fix
+				return ""
+				//return fmtAssertNil(prefix)
+			}
+
 			return fmtAssertEqual(
 				fmt.Sprintf("%#v", out),
-				fmt.Sprintf("*%s", prefix),
+				fmt.Sprintf("%s%s", pointer, prefix),
 			)
 		}
 	}

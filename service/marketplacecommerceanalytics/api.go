@@ -129,7 +129,7 @@ type GenerateDataSetInput struct {
 	// SNS notification message and the data set metadata file. These key-value
 	// pairs can be used to correlated responses with tracking information from
 	// other systems.
-	CustomerDefinedValues map[string]*string `locationName:"customerDefinedValues" min:"1" type:"map"`
+	CustomerDefinedValues map[string]string `locationName:"customerDefinedValues" min:"1" type:"map"`
 
 	// The date a data set was published. For daily data sets, provide a date with
 	// day-level granularity for the desired day. For weekly data sets, provide
@@ -313,7 +313,7 @@ func (s *GenerateDataSetInput) Validate() error {
 }
 
 // SetCustomerDefinedValues sets the CustomerDefinedValues field's value.
-func (s *GenerateDataSetInput) SetCustomerDefinedValues(v map[string]*string) *GenerateDataSetInput {
+func (s *GenerateDataSetInput) SetCustomerDefinedValues(v map[string]string) *GenerateDataSetInput {
 	s.CustomerDefinedValues = v
 	return s
 }
@@ -388,7 +388,7 @@ type StartSupportDataExportInput struct {
 
 	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon
 	// SNS notification message and the data set metadata file.
-	CustomerDefinedValues map[string]*string `locationName:"customerDefinedValues" min:"1" type:"map"`
+	CustomerDefinedValues map[string]string `locationName:"customerDefinedValues" min:"1" type:"map"`
 
 	// Specifies the data set type to be written to the output csv file. The data
 	// set types customer_support_contacts_data and test_customer_support_contacts_data
@@ -490,7 +490,7 @@ func (s *StartSupportDataExportInput) Validate() error {
 }
 
 // SetCustomerDefinedValues sets the CustomerDefinedValues field's value.
-func (s *StartSupportDataExportInput) SetCustomerDefinedValues(v map[string]*string) *StartSupportDataExportInput {
+func (s *StartSupportDataExportInput) SetCustomerDefinedValues(v map[string]string) *StartSupportDataExportInput {
 	s.CustomerDefinedValues = v
 	return s
 }

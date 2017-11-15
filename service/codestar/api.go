@@ -1854,7 +1854,7 @@ type ListProjectsOutput struct {
 	// A list of projects.
 	//
 	// Projects is a required field
-	Projects []*ProjectSummary `locationName:"projects" type:"list" required:"true"`
+	Projects []ProjectSummary `locationName:"projects" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1874,7 +1874,7 @@ func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
 }
 
 // SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []*ProjectSummary) *ListProjectsOutput {
+func (s *ListProjectsOutput) SetProjects(v []ProjectSummary) *ListProjectsOutput {
 	s.Projects = v
 	return s
 }
@@ -1956,7 +1956,7 @@ type ListResourcesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// An array of resources associated with the project.
-	Resources []*Resource `locationName:"resources" type:"list"`
+	Resources []Resource `locationName:"resources" type:"list"`
 }
 
 // String returns the string representation
@@ -1976,7 +1976,7 @@ func (s *ListResourcesOutput) SetNextToken(v string) *ListResourcesOutput {
 }
 
 // SetResources sets the Resources field's value.
-func (s *ListResourcesOutput) SetResources(v []*Resource) *ListResourcesOutput {
+func (s *ListResourcesOutput) SetResources(v []Resource) *ListResourcesOutput {
 	s.Resources = v
 	return s
 }
@@ -2056,7 +2056,7 @@ type ListTagsForProjectOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The tags for the project.
-	Tags map[string]*string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -2076,7 +2076,7 @@ func (s *ListTagsForProjectOutput) SetNextToken(v string) *ListTagsForProjectOut
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForProjectOutput) SetTags(v map[string]*string) *ListTagsForProjectOutput {
+func (s *ListTagsForProjectOutput) SetTags(v map[string]string) *ListTagsForProjectOutput {
 	s.Tags = v
 	return s
 }
@@ -2160,7 +2160,7 @@ type ListTeamMembersOutput struct {
 	// A list of team member objects for the project.
 	//
 	// TeamMembers is a required field
-	TeamMembers []*TeamMember `locationName:"teamMembers" type:"list" required:"true"`
+	TeamMembers []TeamMember `locationName:"teamMembers" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2180,7 +2180,7 @@ func (s *ListTeamMembersOutput) SetNextToken(v string) *ListTeamMembersOutput {
 }
 
 // SetTeamMembers sets the TeamMembers field's value.
-func (s *ListTeamMembersOutput) SetTeamMembers(v []*TeamMember) *ListTeamMembersOutput {
+func (s *ListTeamMembersOutput) SetTeamMembers(v []TeamMember) *ListTeamMembersOutput {
 	s.TeamMembers = v
 	return s
 }
@@ -2246,7 +2246,7 @@ type ListUserProfilesOutput struct {
 	// All the user profiles configured in AWS CodeStar for an AWS account.
 	//
 	// UserProfiles is a required field
-	UserProfiles []*UserProfileSummary `locationName:"userProfiles" type:"list" required:"true"`
+	UserProfiles []UserProfileSummary `locationName:"userProfiles" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2266,7 +2266,7 @@ func (s *ListUserProfilesOutput) SetNextToken(v string) *ListUserProfilesOutput 
 }
 
 // SetUserProfiles sets the UserProfiles field's value.
-func (s *ListUserProfilesOutput) SetUserProfiles(v []*UserProfileSummary) *ListUserProfilesOutput {
+func (s *ListUserProfilesOutput) SetUserProfiles(v []UserProfileSummary) *ListUserProfilesOutput {
 	s.UserProfiles = v
 	return s
 }
@@ -2344,7 +2344,7 @@ type TagProjectInput struct {
 	// The tags you want to add to the project.
 	//
 	// Tags is a required field
-	Tags map[string]*string `locationName:"tags" type:"map" required:"true"`
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -2385,7 +2385,7 @@ func (s *TagProjectInput) SetId(v string) *TagProjectInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagProjectInput) SetTags(v map[string]*string) *TagProjectInput {
+func (s *TagProjectInput) SetTags(v map[string]string) *TagProjectInput {
 	s.Tags = v
 	return s
 }
@@ -2395,7 +2395,7 @@ type TagProjectOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The tags for the project.
-	Tags map[string]*string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -2409,7 +2409,7 @@ func (s TagProjectOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagProjectOutput) SetTags(v map[string]*string) *TagProjectOutput {
+func (s *TagProjectOutput) SetTags(v map[string]string) *TagProjectOutput {
 	s.Tags = v
 	return s
 }
@@ -2476,7 +2476,7 @@ type UntagProjectInput struct {
 	// The tags to remove from the project.
 	//
 	// Tags is a required field
-	Tags []*string `locationName:"tags" type:"list" required:"true"`
+	Tags []string `locationName:"tags" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2517,7 +2517,7 @@ func (s *UntagProjectInput) SetId(v string) *UntagProjectInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *UntagProjectInput) SetTags(v []*string) *UntagProjectInput {
+func (s *UntagProjectInput) SetTags(v []string) *UntagProjectInput {
 	s.Tags = v
 	return s
 }

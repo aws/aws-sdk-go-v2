@@ -985,7 +985,7 @@ type AddTagsToResourceInput struct {
 	// One or more tags.
 	//
 	// TagList is a required field
-	TagList []*Tag `type:"list" required:"true"`
+	TagList []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1011,9 +1011,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	}
 	if s.TagList != nil {
 		for i, v := range s.TagList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
 			}
@@ -1033,7 +1030,7 @@ func (s *AddTagsToResourceInput) SetResourceArn(v string) *AddTagsToResourceInpu
 }
 
 // SetTagList sets the TagList field's value.
-func (s *AddTagsToResourceInput) SetTagList(v []*Tag) *AddTagsToResourceInput {
+func (s *AddTagsToResourceInput) SetTagList(v []Tag) *AddTagsToResourceInput {
 	s.TagList = v
 	return s
 }
@@ -1620,13 +1617,13 @@ type DescribeHapgOutput struct {
 	HapgSerial *string `type:"string"`
 
 	// Contains a list of ARNs that identify the HSMs.
-	HsmsLastActionFailed []*string `type:"list"`
+	HsmsLastActionFailed []string `type:"list"`
 
 	// Contains a list of ARNs that identify the HSMs.
-	HsmsPendingDeletion []*string `type:"list"`
+	HsmsPendingDeletion []string `type:"list"`
 
 	// Contains a list of ARNs that identify the HSMs.
-	HsmsPendingRegistration []*string `type:"list"`
+	HsmsPendingRegistration []string `type:"list"`
 
 	// The label for the high-availability partition group.
 	Label *string `type:"string"`
@@ -1636,7 +1633,7 @@ type DescribeHapgOutput struct {
 
 	// The list of partition serial numbers that belong to the high-availability
 	// partition group.
-	PartitionSerialList []*string `type:"list"`
+	PartitionSerialList []string `type:"list"`
 
 	// The state of the high-availability partition group.
 	State CloudHsmObjectState `type:"string"`
@@ -1665,19 +1662,19 @@ func (s *DescribeHapgOutput) SetHapgSerial(v string) *DescribeHapgOutput {
 }
 
 // SetHsmsLastActionFailed sets the HsmsLastActionFailed field's value.
-func (s *DescribeHapgOutput) SetHsmsLastActionFailed(v []*string) *DescribeHapgOutput {
+func (s *DescribeHapgOutput) SetHsmsLastActionFailed(v []string) *DescribeHapgOutput {
 	s.HsmsLastActionFailed = v
 	return s
 }
 
 // SetHsmsPendingDeletion sets the HsmsPendingDeletion field's value.
-func (s *DescribeHapgOutput) SetHsmsPendingDeletion(v []*string) *DescribeHapgOutput {
+func (s *DescribeHapgOutput) SetHsmsPendingDeletion(v []string) *DescribeHapgOutput {
 	s.HsmsPendingDeletion = v
 	return s
 }
 
 // SetHsmsPendingRegistration sets the HsmsPendingRegistration field's value.
-func (s *DescribeHapgOutput) SetHsmsPendingRegistration(v []*string) *DescribeHapgOutput {
+func (s *DescribeHapgOutput) SetHsmsPendingRegistration(v []string) *DescribeHapgOutput {
 	s.HsmsPendingRegistration = v
 	return s
 }
@@ -1695,7 +1692,7 @@ func (s *DescribeHapgOutput) SetLastModifiedTimestamp(v string) *DescribeHapgOut
 }
 
 // SetPartitionSerialList sets the PartitionSerialList field's value.
-func (s *DescribeHapgOutput) SetPartitionSerialList(v []*string) *DescribeHapgOutput {
+func (s *DescribeHapgOutput) SetPartitionSerialList(v []string) *DescribeHapgOutput {
 	s.PartitionSerialList = v
 	return s
 }
@@ -1766,7 +1763,7 @@ type DescribeHsmOutput struct {
 	IamRoleArn *string `type:"string"`
 
 	// The list of partitions on the HSM.
-	Partitions []*string `type:"list"`
+	Partitions []string `type:"list"`
 
 	// The serial number of the HSM.
 	SerialNumber *string `type:"string"`
@@ -1862,7 +1859,7 @@ func (s *DescribeHsmOutput) SetIamRoleArn(v string) *DescribeHsmOutput {
 }
 
 // SetPartitions sets the Partitions field's value.
-func (s *DescribeHsmOutput) SetPartitions(v []*string) *DescribeHsmOutput {
+func (s *DescribeHsmOutput) SetPartitions(v []string) *DescribeHsmOutput {
 	s.Partitions = v
 	return s
 }
@@ -2062,7 +2059,7 @@ type GetConfigInput struct {
 	// are associated with the client.
 	//
 	// HapgList is a required field
-	HapgList []*string `type:"list" required:"true"`
+	HapgList []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2109,7 +2106,7 @@ func (s *GetConfigInput) SetClientVersion(v ClientVersion) *GetConfigInput {
 }
 
 // SetHapgList sets the HapgList field's value.
-func (s *GetConfigInput) SetHapgList(v []*string) *GetConfigInput {
+func (s *GetConfigInput) SetHapgList(v []string) *GetConfigInput {
 	s.HapgList = v
 	return s
 }
@@ -2177,7 +2174,7 @@ type ListAvailableZonesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of Availability Zones that have available AWS CloudHSM capacity.
-	AZList []*string `type:"list"`
+	AZList []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2191,7 +2188,7 @@ func (s ListAvailableZonesOutput) GoString() string {
 }
 
 // SetAZList sets the AZList field's value.
-func (s *ListAvailableZonesOutput) SetAZList(v []*string) *ListAvailableZonesOutput {
+func (s *ListAvailableZonesOutput) SetAZList(v []string) *ListAvailableZonesOutput {
 	s.AZList = v
 	return s
 }
@@ -2228,7 +2225,7 @@ type ListHapgsOutput struct {
 	// The list of high-availability partition groups.
 	//
 	// HapgList is a required field
-	HapgList []*string `type:"list" required:"true"`
+	HapgList []string `type:"list" required:"true"`
 
 	// If not null, more results are available. Pass this value to ListHapgs to
 	// retrieve the next set of items.
@@ -2246,7 +2243,7 @@ func (s ListHapgsOutput) GoString() string {
 }
 
 // SetHapgList sets the HapgList field's value.
-func (s *ListHapgsOutput) SetHapgList(v []*string) *ListHapgsOutput {
+func (s *ListHapgsOutput) SetHapgList(v []string) *ListHapgsOutput {
 	s.HapgList = v
 	return s
 }
@@ -2288,7 +2285,7 @@ type ListHsmsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of ARNs that identify the HSMs.
-	HsmList []*string `type:"list"`
+	HsmList []string `type:"list"`
 
 	// If not null, more results are available. Pass this value to ListHsms to retrieve
 	// the next set of items.
@@ -2306,7 +2303,7 @@ func (s ListHsmsOutput) GoString() string {
 }
 
 // SetHsmList sets the HsmList field's value.
-func (s *ListHsmsOutput) SetHsmList(v []*string) *ListHsmsOutput {
+func (s *ListHsmsOutput) SetHsmList(v []string) *ListHsmsOutput {
 	s.HsmList = v
 	return s
 }
@@ -2349,7 +2346,7 @@ type ListLunaClientsOutput struct {
 	// The list of clients.
 	//
 	// ClientList is a required field
-	ClientList []*string `type:"list" required:"true"`
+	ClientList []string `type:"list" required:"true"`
 
 	// If not null, more results are available. Pass this to ListLunaClients to
 	// retrieve the next set of items.
@@ -2367,7 +2364,7 @@ func (s ListLunaClientsOutput) GoString() string {
 }
 
 // SetClientList sets the ClientList field's value.
-func (s *ListLunaClientsOutput) SetClientList(v []*string) *ListLunaClientsOutput {
+func (s *ListLunaClientsOutput) SetClientList(v []string) *ListLunaClientsOutput {
 	s.ClientList = v
 	return s
 }
@@ -2425,7 +2422,7 @@ type ListTagsForResourceOutput struct {
 	// One or more tags.
 	//
 	// TagList is a required field
-	TagList []*Tag `type:"list" required:"true"`
+	TagList []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2439,7 +2436,7 @@ func (s ListTagsForResourceOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ListTagsForResourceOutput) SetTagList(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTagList(v []Tag) *ListTagsForResourceOutput {
 	s.TagList = v
 	return s
 }
@@ -2458,7 +2455,7 @@ type ModifyHapgInput struct {
 
 	// The list of partition serial numbers to make members of the high-availability
 	// partition group.
-	PartitionSerialList []*string `type:"list"`
+	PartitionSerialList []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2498,7 +2495,7 @@ func (s *ModifyHapgInput) SetLabel(v string) *ModifyHapgInput {
 }
 
 // SetPartitionSerialList sets the PartitionSerialList field's value.
-func (s *ModifyHapgInput) SetPartitionSerialList(v []*string) *ModifyHapgInput {
+func (s *ModifyHapgInput) SetPartitionSerialList(v []string) *ModifyHapgInput {
 	s.PartitionSerialList = v
 	return s
 }
@@ -2741,7 +2738,7 @@ type RemoveTagsFromResourceInput struct {
 	// for an existing tag, use AddTagsToResource.
 	//
 	// TagKeyList is a required field
-	TagKeyList []*string `type:"list" required:"true"`
+	TagKeyList []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2779,7 +2776,7 @@ func (s *RemoveTagsFromResourceInput) SetResourceArn(v string) *RemoveTagsFromRe
 }
 
 // SetTagKeyList sets the TagKeyList field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeyList(v []*string) *RemoveTagsFromResourceInput {
+func (s *RemoveTagsFromResourceInput) SetTagKeyList(v []string) *RemoveTagsFromResourceInput {
 	s.TagKeyList = v
 	return s
 }

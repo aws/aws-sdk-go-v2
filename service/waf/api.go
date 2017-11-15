@@ -2850,7 +2850,7 @@ type ByteMatchSet struct {
 	// that you want AWS WAF to search, and other settings.
 	//
 	// ByteMatchTuples is a required field
-	ByteMatchTuples []*ByteMatchTuple `type:"list" required:"true"`
+	ByteMatchTuples []ByteMatchTuple `type:"list" required:"true"`
 
 	// A friendly name or description of the ByteMatchSet. You can't change Name
 	// after you create a ByteMatchSet.
@@ -2874,7 +2874,7 @@ func (s *ByteMatchSet) SetByteMatchSetId(v string) *ByteMatchSet {
 }
 
 // SetByteMatchTuples sets the ByteMatchTuples field's value.
-func (s *ByteMatchSet) SetByteMatchTuples(v []*ByteMatchTuple) *ByteMatchSet {
+func (s *ByteMatchSet) SetByteMatchTuples(v []ByteMatchTuple) *ByteMatchSet {
 	s.ByteMatchTuples = v
 	return s
 }
@@ -5288,7 +5288,7 @@ type GetRateBasedRuleManagedKeysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of IP addresses that currently are blocked by the specified RateBasedRule.
-	ManagedKeys []*string `type:"list"`
+	ManagedKeys []string `type:"list"`
 
 	// A null value and not currently used.
 	NextMarker *string `min:"1" type:"string"`
@@ -5305,7 +5305,7 @@ func (s GetRateBasedRuleManagedKeysOutput) GoString() string {
 }
 
 // SetManagedKeys sets the ManagedKeys field's value.
-func (s *GetRateBasedRuleManagedKeysOutput) SetManagedKeys(v []*string) *GetRateBasedRuleManagedKeysOutput {
+func (s *GetRateBasedRuleManagedKeysOutput) SetManagedKeys(v []string) *GetRateBasedRuleManagedKeysOutput {
 	s.ManagedKeys = v
 	return s
 }
@@ -5538,7 +5538,7 @@ type GetSampledRequestsOutput struct {
 
 	// A complex type that contains detailed information about each of the requests
 	// in the sample.
-	SampledRequests []*SampledHTTPRequest `type:"list"`
+	SampledRequests []SampledHTTPRequest `type:"list"`
 
 	// Usually, TimeWindow is the time range that you specified in the GetSampledRequests
 	// request. However, if your AWS resource received more than 5,000 requests
@@ -5564,7 +5564,7 @@ func (s *GetSampledRequestsOutput) SetPopulationSize(v int64) *GetSampledRequest
 }
 
 // SetSampledRequests sets the SampledRequests field's value.
-func (s *GetSampledRequestsOutput) SetSampledRequests(v []*SampledHTTPRequest) *GetSampledRequestsOutput {
+func (s *GetSampledRequestsOutput) SetSampledRequests(v []SampledHTTPRequest) *GetSampledRequestsOutput {
 	s.SampledRequests = v
 	return s
 }
@@ -5954,7 +5954,7 @@ type HTTPRequest struct {
 
 	// A complex type that contains two values for each header in the sampled web
 	// request: the name of the header and the value of the header.
-	Headers []*HTTPHeader `type:"list"`
+	Headers []HTTPHeader `type:"list"`
 
 	// The HTTP method specified in the sampled web request. CloudFront supports
 	// the following methods: DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT.
@@ -5993,7 +5993,7 @@ func (s *HTTPRequest) SetHTTPVersion(v string) *HTTPRequest {
 }
 
 // SetHeaders sets the Headers field's value.
-func (s *HTTPRequest) SetHeaders(v []*HTTPHeader) *HTTPRequest {
+func (s *HTTPRequest) SetHeaders(v []HTTPHeader) *HTTPRequest {
 	s.Headers = v
 	return s
 }
@@ -6031,7 +6031,7 @@ type IPSet struct {
 	// access logs.
 	//
 	// IPSetDescriptors is a required field
-	IPSetDescriptors []*IPSetDescriptor `type:"list" required:"true"`
+	IPSetDescriptors []IPSetDescriptor `type:"list" required:"true"`
 
 	// The IPSetId for an IPSet. You use IPSetId to get information about an IPSet
 	// (see GetIPSet), update an IPSet (see UpdateIPSet), insert an IPSet into a
@@ -6059,7 +6059,7 @@ func (s IPSet) GoString() string {
 }
 
 // SetIPSetDescriptors sets the IPSetDescriptors field's value.
-func (s *IPSet) SetIPSetDescriptors(v []*IPSetDescriptor) *IPSet {
+func (s *IPSet) SetIPSetDescriptors(v []IPSetDescriptor) *IPSet {
 	s.IPSetDescriptors = v
 	return s
 }
@@ -6309,7 +6309,7 @@ type ListByteMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of ByteMatchSetSummary objects.
-	ByteMatchSets []*ByteMatchSetSummary `type:"list"`
+	ByteMatchSets []ByteMatchSetSummary `type:"list"`
 
 	// If you have more ByteMatchSet objects than the number that you specified
 	// for Limit in the request, the response includes a NextMarker value. To list
@@ -6330,7 +6330,7 @@ func (s ListByteMatchSetsOutput) GoString() string {
 }
 
 // SetByteMatchSets sets the ByteMatchSets field's value.
-func (s *ListByteMatchSetsOutput) SetByteMatchSets(v []*ByteMatchSetSummary) *ListByteMatchSetsOutput {
+func (s *ListByteMatchSetsOutput) SetByteMatchSets(v []ByteMatchSetSummary) *ListByteMatchSetsOutput {
 	s.ByteMatchSets = v
 	return s
 }
@@ -6399,7 +6399,7 @@ type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of IPSetSummary objects.
-	IPSets []*IPSetSummary `type:"list"`
+	IPSets []IPSetSummary `type:"list"`
 
 	// If you have more IPSet objects than the number that you specified for Limit
 	// in the request, the response includes a NextMarker value. To list more IPSet
@@ -6419,7 +6419,7 @@ func (s ListIPSetsOutput) GoString() string {
 }
 
 // SetIPSets sets the IPSets field's value.
-func (s *ListIPSetsOutput) SetIPSets(v []*IPSetSummary) *ListIPSetsOutput {
+func (s *ListIPSetsOutput) SetIPSets(v []IPSetSummary) *ListIPSetsOutput {
 	s.IPSets = v
 	return s
 }
@@ -6493,7 +6493,7 @@ type ListRateBasedRulesOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of RuleSummary objects.
-	Rules []*RuleSummary `type:"list"`
+	Rules []RuleSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6513,7 +6513,7 @@ func (s *ListRateBasedRulesOutput) SetNextMarker(v string) *ListRateBasedRulesOu
 }
 
 // SetRules sets the Rules field's value.
-func (s *ListRateBasedRulesOutput) SetRules(v []*RuleSummary) *ListRateBasedRulesOutput {
+func (s *ListRateBasedRulesOutput) SetRules(v []RuleSummary) *ListRateBasedRulesOutput {
 	s.Rules = v
 	return s
 }
@@ -6581,7 +6581,7 @@ type ListRulesOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of RuleSummary objects.
-	Rules []*RuleSummary `type:"list"`
+	Rules []RuleSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6601,7 +6601,7 @@ func (s *ListRulesOutput) SetNextMarker(v string) *ListRulesOutput {
 }
 
 // SetRules sets the Rules field's value.
-func (s *ListRulesOutput) SetRules(v []*RuleSummary) *ListRulesOutput {
+func (s *ListRulesOutput) SetRules(v []RuleSummary) *ListRulesOutput {
 	s.Rules = v
 	return s
 }
@@ -6671,7 +6671,7 @@ type ListSizeConstraintSetsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of SizeConstraintSetSummary objects.
-	SizeConstraintSets []*SizeConstraintSetSummary `type:"list"`
+	SizeConstraintSets []SizeConstraintSetSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6691,7 +6691,7 @@ func (s *ListSizeConstraintSetsOutput) SetNextMarker(v string) *ListSizeConstrai
 }
 
 // SetSizeConstraintSets sets the SizeConstraintSets field's value.
-func (s *ListSizeConstraintSetsOutput) SetSizeConstraintSets(v []*SizeConstraintSetSummary) *ListSizeConstraintSetsOutput {
+func (s *ListSizeConstraintSetsOutput) SetSizeConstraintSets(v []SizeConstraintSetSummary) *ListSizeConstraintSetsOutput {
 	s.SizeConstraintSets = v
 	return s
 }
@@ -6764,7 +6764,7 @@ type ListSqlInjectionMatchSetsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of SqlInjectionMatchSetSummary objects.
-	SqlInjectionMatchSets []*SqlInjectionMatchSetSummary `type:"list"`
+	SqlInjectionMatchSets []SqlInjectionMatchSetSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6784,7 +6784,7 @@ func (s *ListSqlInjectionMatchSetsOutput) SetNextMarker(v string) *ListSqlInject
 }
 
 // SetSqlInjectionMatchSets sets the SqlInjectionMatchSets field's value.
-func (s *ListSqlInjectionMatchSetsOutput) SetSqlInjectionMatchSets(v []*SqlInjectionMatchSetSummary) *ListSqlInjectionMatchSetsOutput {
+func (s *ListSqlInjectionMatchSetsOutput) SetSqlInjectionMatchSets(v []SqlInjectionMatchSetSummary) *ListSqlInjectionMatchSetsOutput {
 	s.SqlInjectionMatchSets = v
 	return s
 }
@@ -6854,7 +6854,7 @@ type ListWebACLsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of WebACLSummary objects.
-	WebACLs []*WebACLSummary `type:"list"`
+	WebACLs []WebACLSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6874,7 +6874,7 @@ func (s *ListWebACLsOutput) SetNextMarker(v string) *ListWebACLsOutput {
 }
 
 // SetWebACLs sets the WebACLs field's value.
-func (s *ListWebACLsOutput) SetWebACLs(v []*WebACLSummary) *ListWebACLsOutput {
+func (s *ListWebACLsOutput) SetWebACLs(v []WebACLSummary) *ListWebACLsOutput {
 	s.WebACLs = v
 	return s
 }
@@ -6946,7 +6946,7 @@ type ListXssMatchSetsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// An array of XssMatchSetSummary objects.
-	XssMatchSets []*XssMatchSetSummary `type:"list"`
+	XssMatchSets []XssMatchSetSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6966,7 +6966,7 @@ func (s *ListXssMatchSetsOutput) SetNextMarker(v string) *ListXssMatchSetsOutput
 }
 
 // SetXssMatchSets sets the XssMatchSets field's value.
-func (s *ListXssMatchSetsOutput) SetXssMatchSets(v []*XssMatchSetSummary) *ListXssMatchSetsOutput {
+func (s *ListXssMatchSetsOutput) SetXssMatchSets(v []XssMatchSetSummary) *ListXssMatchSetsOutput {
 	s.XssMatchSets = v
 	return s
 }
@@ -7081,7 +7081,7 @@ type RateBasedRule struct {
 	// IPSet, or SqlInjectionMatchSet object that you want to include in a RateBasedRule.
 	//
 	// MatchPredicates is a required field
-	MatchPredicates []*Predicate `type:"list" required:"true"`
+	MatchPredicates []Predicate `type:"list" required:"true"`
 
 	// A friendly name or description for the metrics for a RateBasedRule. The name
 	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
@@ -7131,7 +7131,7 @@ func (s RateBasedRule) GoString() string {
 }
 
 // SetMatchPredicates sets the MatchPredicates field's value.
-func (s *RateBasedRule) SetMatchPredicates(v []*Predicate) *RateBasedRule {
+func (s *RateBasedRule) SetMatchPredicates(v []Predicate) *RateBasedRule {
 	s.MatchPredicates = v
 	return s
 }
@@ -7195,7 +7195,7 @@ type Rule struct {
 	// IPSet, or SqlInjectionMatchSet object that you want to include in a Rule.
 	//
 	// Predicates is a required field
-	Predicates []*Predicate `type:"list" required:"true"`
+	Predicates []Predicate `type:"list" required:"true"`
 
 	// A unique identifier for a Rule. You use RuleId to get more information about
 	// a Rule (see GetRule), update a Rule (see UpdateRule), insert a Rule into
@@ -7231,7 +7231,7 @@ func (s *Rule) SetName(v string) *Rule {
 }
 
 // SetPredicates sets the Predicates field's value.
-func (s *Rule) SetPredicates(v []*Predicate) *Rule {
+func (s *Rule) SetPredicates(v []Predicate) *Rule {
 	s.Predicates = v
 	return s
 }
@@ -7626,7 +7626,7 @@ type SizeConstraintSet struct {
 	// Specifies the parts of web requests that you want to inspect the size of.
 	//
 	// SizeConstraints is a required field
-	SizeConstraints []*SizeConstraint `type:"list" required:"true"`
+	SizeConstraints []SizeConstraint `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7652,7 +7652,7 @@ func (s *SizeConstraintSet) SetSizeConstraintSetId(v string) *SizeConstraintSet 
 }
 
 // SetSizeConstraints sets the SizeConstraints field's value.
-func (s *SizeConstraintSet) SetSizeConstraints(v []*SizeConstraint) *SizeConstraintSet {
+func (s *SizeConstraintSet) SetSizeConstraints(v []SizeConstraint) *SizeConstraintSet {
 	s.SizeConstraints = v
 	return s
 }
@@ -7795,7 +7795,7 @@ type SqlInjectionMatchSet struct {
 	// of malicious SQL code.
 	//
 	// SqlInjectionMatchTuples is a required field
-	SqlInjectionMatchTuples []*SqlInjectionMatchTuple `type:"list" required:"true"`
+	SqlInjectionMatchTuples []SqlInjectionMatchTuple `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7821,7 +7821,7 @@ func (s *SqlInjectionMatchSet) SetSqlInjectionMatchSetId(v string) *SqlInjection
 }
 
 // SetSqlInjectionMatchTuples sets the SqlInjectionMatchTuples field's value.
-func (s *SqlInjectionMatchSet) SetSqlInjectionMatchTuples(v []*SqlInjectionMatchTuple) *SqlInjectionMatchSet {
+func (s *SqlInjectionMatchSet) SetSqlInjectionMatchTuples(v []SqlInjectionMatchTuple) *SqlInjectionMatchSet {
 	s.SqlInjectionMatchTuples = v
 	return s
 }
@@ -8163,7 +8163,7 @@ type UpdateByteMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []*ByteMatchSetUpdate `type:"list" required:"true"`
+	Updates []ByteMatchSetUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8199,9 +8199,6 @@ func (s *UpdateByteMatchSetInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8227,7 +8224,7 @@ func (s *UpdateByteMatchSetInput) SetChangeToken(v string) *UpdateByteMatchSetIn
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateByteMatchSetInput) SetUpdates(v []*ByteMatchSetUpdate) *UpdateByteMatchSetInput {
+func (s *UpdateByteMatchSetInput) SetUpdates(v []ByteMatchSetUpdate) *UpdateByteMatchSetInput {
 	s.Updates = v
 	return s
 }
@@ -8281,7 +8278,7 @@ type UpdateIPSetInput struct {
 	//    * IPSetDescriptor: Contains Type and Value
 	//
 	// Updates is a required field
-	Updates []*IPSetUpdate `type:"list" required:"true"`
+	Updates []IPSetUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8317,9 +8314,6 @@ func (s *UpdateIPSetInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8345,7 +8339,7 @@ func (s *UpdateIPSetInput) SetIPSetId(v string) *UpdateIPSetInput {
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateIPSetInput) SetUpdates(v []*IPSetUpdate) *UpdateIPSetInput {
+func (s *UpdateIPSetInput) SetUpdates(v []IPSetUpdate) *UpdateIPSetInput {
 	s.Updates = v
 	return s
 }
@@ -8404,7 +8398,7 @@ type UpdateRateBasedRuleInput struct {
 	// a RateBasedRule.
 	//
 	// Updates is a required field
-	Updates []*RuleUpdate `type:"list" required:"true"`
+	Updates []RuleUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8447,9 +8441,6 @@ func (s *UpdateRateBasedRuleInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8481,7 +8472,7 @@ func (s *UpdateRateBasedRuleInput) SetRuleId(v string) *UpdateRateBasedRuleInput
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateRateBasedRuleInput) SetUpdates(v []*RuleUpdate) *UpdateRateBasedRuleInput {
+func (s *UpdateRateBasedRuleInput) SetUpdates(v []RuleUpdate) *UpdateRateBasedRuleInput {
 	s.Updates = v
 	return s
 }
@@ -8537,7 +8528,7 @@ type UpdateRuleInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []*RuleUpdate `type:"list" required:"true"`
+	Updates []RuleUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8573,9 +8564,6 @@ func (s *UpdateRuleInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8601,7 +8589,7 @@ func (s *UpdateRuleInput) SetRuleId(v string) *UpdateRuleInput {
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateRuleInput) SetUpdates(v []*RuleUpdate) *UpdateRuleInput {
+func (s *UpdateRuleInput) SetUpdates(v []RuleUpdate) *UpdateRuleInput {
 	s.Updates = v
 	return s
 }
@@ -8659,7 +8647,7 @@ type UpdateSizeConstraintSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []*SizeConstraintSetUpdate `type:"list" required:"true"`
+	Updates []SizeConstraintSetUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8695,9 +8683,6 @@ func (s *UpdateSizeConstraintSetInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8723,7 +8708,7 @@ func (s *UpdateSizeConstraintSetInput) SetSizeConstraintSetId(v string) *UpdateS
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateSizeConstraintSetInput) SetUpdates(v []*SizeConstraintSetUpdate) *UpdateSizeConstraintSetInput {
+func (s *UpdateSizeConstraintSetInput) SetUpdates(v []SizeConstraintSetUpdate) *UpdateSizeConstraintSetInput {
 	s.Updates = v
 	return s
 }
@@ -8781,7 +8766,7 @@ type UpdateSqlInjectionMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []*SqlInjectionMatchSetUpdate `type:"list" required:"true"`
+	Updates []SqlInjectionMatchSetUpdate `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8817,9 +8802,6 @@ func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8845,7 +8827,7 @@ func (s *UpdateSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *U
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateSqlInjectionMatchSetInput) SetUpdates(v []*SqlInjectionMatchSetUpdate) *UpdateSqlInjectionMatchSetInput {
+func (s *UpdateSqlInjectionMatchSetInput) SetUpdates(v []SqlInjectionMatchSetUpdate) *UpdateSqlInjectionMatchSetInput {
 	s.Updates = v
 	return s
 }
@@ -8901,7 +8883,7 @@ type UpdateWebACLInput struct {
 	//    * ActivatedRule: Contains Action, Priority, RuleId, and Type
 	//
 	//    * WafAction: Contains Type
-	Updates []*WebACLUpdate `type:"list"`
+	Updates []WebACLUpdate `type:"list"`
 
 	// The WebACLId of the WebACL that you want to update. WebACLId is returned
 	// by CreateWebACL and by ListWebACLs.
@@ -8944,9 +8926,6 @@ func (s *UpdateWebACLInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -8972,7 +8951,7 @@ func (s *UpdateWebACLInput) SetDefaultAction(v *WafAction) *UpdateWebACLInput {
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateWebACLInput) SetUpdates(v []*WebACLUpdate) *UpdateWebACLInput {
+func (s *UpdateWebACLInput) SetUpdates(v []WebACLUpdate) *UpdateWebACLInput {
 	s.Updates = v
 	return s
 }
@@ -9029,7 +9008,7 @@ type UpdateXssMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []*XssMatchSetUpdate `type:"list" required:"true"`
+	Updates []XssMatchSetUpdate `type:"list" required:"true"`
 
 	// The XssMatchSetId of the XssMatchSet that you want to update. XssMatchSetId
 	// is returned by CreateXssMatchSet and by ListXssMatchSets.
@@ -9071,9 +9050,6 @@ func (s *UpdateXssMatchSetInput) Validate() error {
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
@@ -9093,7 +9069,7 @@ func (s *UpdateXssMatchSetInput) SetChangeToken(v string) *UpdateXssMatchSetInpu
 }
 
 // SetUpdates sets the Updates field's value.
-func (s *UpdateXssMatchSetInput) SetUpdates(v []*XssMatchSetUpdate) *UpdateXssMatchSetInput {
+func (s *UpdateXssMatchSetInput) SetUpdates(v []XssMatchSetUpdate) *UpdateXssMatchSetInput {
 	s.Updates = v
 	return s
 }
@@ -9216,7 +9192,7 @@ type WebACL struct {
 	// of the Rule, and the ID of the Rule.
 	//
 	// Rules is a required field
-	Rules []*ActivatedRule `type:"list" required:"true"`
+	Rules []ActivatedRule `type:"list" required:"true"`
 
 	// A unique identifier for a WebACL. You use WebACLId to get information about
 	// a WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete
@@ -9257,7 +9233,7 @@ func (s *WebACL) SetName(v string) *WebACL {
 }
 
 // SetRules sets the Rules field's value.
-func (s *WebACL) SetRules(v []*ActivatedRule) *WebACL {
+func (s *WebACL) SetRules(v []ActivatedRule) *WebACL {
 	s.Rules = v
 	return s
 }
@@ -9401,7 +9377,7 @@ type XssMatchSet struct {
 	// scripting attacks.
 	//
 	// XssMatchTuples is a required field
-	XssMatchTuples []*XssMatchTuple `type:"list" required:"true"`
+	XssMatchTuples []XssMatchTuple `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9427,7 +9403,7 @@ func (s *XssMatchSet) SetXssMatchSetId(v string) *XssMatchSet {
 }
 
 // SetXssMatchTuples sets the XssMatchTuples field's value.
-func (s *XssMatchSet) SetXssMatchTuples(v []*XssMatchTuple) *XssMatchSet {
+func (s *XssMatchSet) SetXssMatchTuples(v []XssMatchTuple) *XssMatchSet {
 	s.XssMatchTuples = v
 	return s
 }

@@ -1171,7 +1171,7 @@ type GetConnectorsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of connectors
-	ConnectorList []*Connector `locationName:"connectorList" locationNameList:"item" type:"list"`
+	ConnectorList []Connector `locationName:"connectorList" locationNameList:"item" type:"list"`
 
 	// Pagination token to pass as input to API call
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -1188,7 +1188,7 @@ func (s GetConnectorsOutput) GoString() string {
 }
 
 // SetConnectorList sets the ConnectorList field's value.
-func (s *GetConnectorsOutput) SetConnectorList(v []*Connector) *GetConnectorsOutput {
+func (s *GetConnectorsOutput) SetConnectorList(v []Connector) *GetConnectorsOutput {
 	s.ConnectorList = v
 	return s
 }
@@ -1250,7 +1250,7 @@ type GetReplicationJobsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// List of Replication Jobs
-	ReplicationJobList []*ReplicationJob `locationName:"replicationJobList" locationNameList:"item" type:"list"`
+	ReplicationJobList []ReplicationJob `locationName:"replicationJobList" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -1270,7 +1270,7 @@ func (s *GetReplicationJobsOutput) SetNextToken(v string) *GetReplicationJobsOut
 }
 
 // SetReplicationJobList sets the ReplicationJobList field's value.
-func (s *GetReplicationJobsOutput) SetReplicationJobList(v []*ReplicationJob) *GetReplicationJobsOutput {
+func (s *GetReplicationJobsOutput) SetReplicationJobList(v []ReplicationJob) *GetReplicationJobsOutput {
 	s.ReplicationJobList = v
 	return s
 }
@@ -1345,7 +1345,7 @@ type GetReplicationRunsOutput struct {
 	ReplicationJob *ReplicationJob `locationName:"replicationJob" type:"structure"`
 
 	// List of Replication Runs
-	ReplicationRunList []*ReplicationRun `locationName:"replicationRunList" locationNameList:"item" type:"list"`
+	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -1371,7 +1371,7 @@ func (s *GetReplicationRunsOutput) SetReplicationJob(v *ReplicationJob) *GetRepl
 }
 
 // SetReplicationRunList sets the ReplicationRunList field's value.
-func (s *GetReplicationRunsOutput) SetReplicationRunList(v []*ReplicationRun) *GetReplicationRunsOutput {
+func (s *GetReplicationRunsOutput) SetReplicationRunList(v []ReplicationRun) *GetReplicationRunsOutput {
 	s.ReplicationRunList = v
 	return s
 }
@@ -1424,7 +1424,7 @@ type GetServersOutput struct {
 	ServerCatalogStatus ServerCatalogStatus `locationName:"serverCatalogStatus" type:"string"`
 
 	// List of servers from catalog
-	ServerList []*Server `locationName:"serverList" locationNameList:"item" type:"list"`
+	ServerList []Server `locationName:"serverList" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -1456,7 +1456,7 @@ func (s *GetServersOutput) SetServerCatalogStatus(v ServerCatalogStatus) *GetSer
 }
 
 // SetServerList sets the ServerList field's value.
-func (s *GetServersOutput) SetServerList(v []*Server) *GetServersOutput {
+func (s *GetServersOutput) SetServerList(v []Server) *GetServersOutput {
 	s.ServerList = v
 	return s
 }
@@ -1517,7 +1517,7 @@ type ReplicationJob struct {
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
 
 	// List of Replication Runs
-	ReplicationRunList []*ReplicationRun `locationName:"replicationRunList" locationNameList:"item" type:"list"`
+	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" locationNameList:"item" type:"list"`
 
 	// Name of service role in customer's account to be used by SMS service.
 	RoleName *string `locationName:"roleName" type:"string"`
@@ -1588,7 +1588,7 @@ func (s *ReplicationJob) SetReplicationJobId(v string) *ReplicationJob {
 }
 
 // SetReplicationRunList sets the ReplicationRunList field's value.
-func (s *ReplicationJob) SetReplicationRunList(v []*ReplicationRun) *ReplicationJob {
+func (s *ReplicationJob) SetReplicationRunList(v []ReplicationRun) *ReplicationJob {
 	s.ReplicationRunList = v
 	return s
 }

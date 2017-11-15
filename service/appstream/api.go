@@ -1363,7 +1363,7 @@ type Application struct {
 	LaunchPath *string `min:"1" type:"string"`
 
 	// Additional attributes that describe the application.
-	Metadata map[string]*string `type:"map"`
+	Metadata map[string]string `type:"map"`
 
 	// The name of the application.
 	Name *string `min:"1" type:"string"`
@@ -1410,7 +1410,7 @@ func (s *Application) SetLaunchPath(v string) *Application {
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *Application) SetMetadata(v map[string]*string) *Application {
+func (s *Application) SetMetadata(v map[string]string) *Application {
 	s.Metadata = v
 	return s
 }
@@ -1604,7 +1604,7 @@ type CreateDirectoryConfigInput struct {
 	// The distinguished names of the organizational units for computer accounts.
 	//
 	// OrganizationalUnitDistinguishedNames is a required field
-	OrganizationalUnitDistinguishedNames []*string `type:"list" required:"true"`
+	OrganizationalUnitDistinguishedNames []string `type:"list" required:"true"`
 
 	// The credentials for the service account used by the streaming instance to
 	// connect to the directory.
@@ -1657,7 +1657,7 @@ func (s *CreateDirectoryConfigInput) SetDirectoryName(v string) *CreateDirectory
 }
 
 // SetOrganizationalUnitDistinguishedNames sets the OrganizationalUnitDistinguishedNames field's value.
-func (s *CreateDirectoryConfigInput) SetOrganizationalUnitDistinguishedNames(v []*string) *CreateDirectoryConfigInput {
+func (s *CreateDirectoryConfigInput) SetOrganizationalUnitDistinguishedNames(v []string) *CreateDirectoryConfigInput {
 	s.OrganizationalUnitDistinguishedNames = v
 	return s
 }
@@ -2159,7 +2159,7 @@ type CreateStackInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The storage connectors to enable.
-	StorageConnectors []*StorageConnector `type:"list"`
+	StorageConnectors []StorageConnector `type:"list"`
 }
 
 // String returns the string representation
@@ -2184,9 +2184,6 @@ func (s *CreateStackInput) Validate() error {
 	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(aws.ErrInvalidParams))
 			}
@@ -2218,7 +2215,7 @@ func (s *CreateStackInput) SetName(v string) *CreateStackInput {
 }
 
 // SetStorageConnectors sets the StorageConnectors field's value.
-func (s *CreateStackInput) SetStorageConnectors(v []*StorageConnector) *CreateStackInput {
+func (s *CreateStackInput) SetStorageConnectors(v []StorageConnector) *CreateStackInput {
 	s.StorageConnectors = v
 	return s
 }
@@ -2692,7 +2689,7 @@ type DescribeDirectoryConfigsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The directory names.
-	DirectoryNames []*string `type:"list"`
+	DirectoryNames []string `type:"list"`
 
 	// The maximum size of each page of results.
 	MaxResults *int64 `type:"integer"`
@@ -2726,7 +2723,7 @@ func (s *DescribeDirectoryConfigsInput) Validate() error {
 }
 
 // SetDirectoryNames sets the DirectoryNames field's value.
-func (s *DescribeDirectoryConfigsInput) SetDirectoryNames(v []*string) *DescribeDirectoryConfigsInput {
+func (s *DescribeDirectoryConfigsInput) SetDirectoryNames(v []string) *DescribeDirectoryConfigsInput {
 	s.DirectoryNames = v
 	return s
 }
@@ -2748,7 +2745,7 @@ type DescribeDirectoryConfigsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the directory configurations.
-	DirectoryConfigs []*DirectoryConfig `type:"list"`
+	DirectoryConfigs []DirectoryConfig `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
@@ -2766,7 +2763,7 @@ func (s DescribeDirectoryConfigsOutput) GoString() string {
 }
 
 // SetDirectoryConfigs sets the DirectoryConfigs field's value.
-func (s *DescribeDirectoryConfigsOutput) SetDirectoryConfigs(v []*DirectoryConfig) *DescribeDirectoryConfigsOutput {
+func (s *DescribeDirectoryConfigsOutput) SetDirectoryConfigs(v []DirectoryConfig) *DescribeDirectoryConfigsOutput {
 	s.DirectoryConfigs = v
 	return s
 }
@@ -2782,7 +2779,7 @@ type DescribeFleetsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the fleets to describe.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
@@ -2813,7 +2810,7 @@ func (s *DescribeFleetsInput) Validate() error {
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeFleetsInput) SetNames(v []*string) *DescribeFleetsInput {
+func (s *DescribeFleetsInput) SetNames(v []string) *DescribeFleetsInput {
 	s.Names = v
 	return s
 }
@@ -2829,7 +2826,7 @@ type DescribeFleetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the fleets.
-	Fleets []*Fleet `type:"list"`
+	Fleets []Fleet `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
@@ -2847,7 +2844,7 @@ func (s DescribeFleetsOutput) GoString() string {
 }
 
 // SetFleets sets the Fleets field's value.
-func (s *DescribeFleetsOutput) SetFleets(v []*Fleet) *DescribeFleetsOutput {
+func (s *DescribeFleetsOutput) SetFleets(v []Fleet) *DescribeFleetsOutput {
 	s.Fleets = v
 	return s
 }
@@ -2864,7 +2861,7 @@ type DescribeImageBuildersInput struct {
 
 	MaxResults *int64 `type:"integer"`
 
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	NextToken *string `min:"1" type:"string"`
 }
@@ -2899,7 +2896,7 @@ func (s *DescribeImageBuildersInput) SetMaxResults(v int64) *DescribeImageBuilde
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeImageBuildersInput) SetNames(v []*string) *DescribeImageBuildersInput {
+func (s *DescribeImageBuildersInput) SetNames(v []string) *DescribeImageBuildersInput {
 	s.Names = v
 	return s
 }
@@ -2914,7 +2911,7 @@ func (s *DescribeImageBuildersInput) SetNextToken(v string) *DescribeImageBuilde
 type DescribeImageBuildersOutput struct {
 	_ struct{} `type:"structure"`
 
-	ImageBuilders []*ImageBuilder `type:"list"`
+	ImageBuilders []ImageBuilder `type:"list"`
 
 	NextToken *string `min:"1" type:"string"`
 }
@@ -2930,7 +2927,7 @@ func (s DescribeImageBuildersOutput) GoString() string {
 }
 
 // SetImageBuilders sets the ImageBuilders field's value.
-func (s *DescribeImageBuildersOutput) SetImageBuilders(v []*ImageBuilder) *DescribeImageBuildersOutput {
+func (s *DescribeImageBuildersOutput) SetImageBuilders(v []ImageBuilder) *DescribeImageBuildersOutput {
 	s.ImageBuilders = v
 	return s
 }
@@ -2946,7 +2943,7 @@ type DescribeImagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the images to describe.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2960,7 +2957,7 @@ func (s DescribeImagesInput) GoString() string {
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeImagesInput) SetNames(v []*string) *DescribeImagesInput {
+func (s *DescribeImagesInput) SetNames(v []string) *DescribeImagesInput {
 	s.Names = v
 	return s
 }
@@ -2970,7 +2967,7 @@ type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the images.
-	Images []*Image `type:"list"`
+	Images []Image `type:"list"`
 }
 
 // String returns the string representation
@@ -2984,7 +2981,7 @@ func (s DescribeImagesOutput) GoString() string {
 }
 
 // SetImages sets the Images field's value.
-func (s *DescribeImagesOutput) SetImages(v []*Image) *DescribeImagesOutput {
+func (s *DescribeImagesOutput) SetImages(v []Image) *DescribeImagesOutput {
 	s.Images = v
 	return s
 }
@@ -3105,7 +3102,7 @@ type DescribeSessionsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// Information about the streaming sessions.
-	Sessions []*Session `type:"list"`
+	Sessions []Session `type:"list"`
 }
 
 // String returns the string representation
@@ -3125,7 +3122,7 @@ func (s *DescribeSessionsOutput) SetNextToken(v string) *DescribeSessionsOutput 
 }
 
 // SetSessions sets the Sessions field's value.
-func (s *DescribeSessionsOutput) SetSessions(v []*Session) *DescribeSessionsOutput {
+func (s *DescribeSessionsOutput) SetSessions(v []Session) *DescribeSessionsOutput {
 	s.Sessions = v
 	return s
 }
@@ -3135,7 +3132,7 @@ type DescribeStacksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the stacks to describe.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
@@ -3166,7 +3163,7 @@ func (s *DescribeStacksInput) Validate() error {
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeStacksInput) SetNames(v []*string) *DescribeStacksInput {
+func (s *DescribeStacksInput) SetNames(v []string) *DescribeStacksInput {
 	s.Names = v
 	return s
 }
@@ -3186,7 +3183,7 @@ type DescribeStacksOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// Information about the stacks.
-	Stacks []*Stack `type:"list"`
+	Stacks []Stack `type:"list"`
 }
 
 // String returns the string representation
@@ -3206,7 +3203,7 @@ func (s *DescribeStacksOutput) SetNextToken(v string) *DescribeStacksOutput {
 }
 
 // SetStacks sets the Stacks field's value.
-func (s *DescribeStacksOutput) SetStacks(v []*Stack) *DescribeStacksOutput {
+func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
 	s.Stacks = v
 	return s
 }
@@ -3225,7 +3222,7 @@ type DirectoryConfig struct {
 	DirectoryName *string `type:"string" required:"true"`
 
 	// The distinguished names of the organizational units for computer accounts.
-	OrganizationalUnitDistinguishedNames []*string `type:"list"`
+	OrganizationalUnitDistinguishedNames []string `type:"list"`
 
 	// The credentials for the service account used by the streaming instance to
 	// connect to the directory.
@@ -3255,7 +3252,7 @@ func (s *DirectoryConfig) SetDirectoryName(v string) *DirectoryConfig {
 }
 
 // SetOrganizationalUnitDistinguishedNames sets the OrganizationalUnitDistinguishedNames field's value.
-func (s *DirectoryConfig) SetOrganizationalUnitDistinguishedNames(v []*string) *DirectoryConfig {
+func (s *DirectoryConfig) SetOrganizationalUnitDistinguishedNames(v []string) *DirectoryConfig {
 	s.OrganizationalUnitDistinguishedNames = v
 	return s
 }
@@ -3471,7 +3468,7 @@ type Fleet struct {
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
 	// The fleet errors.
-	FleetErrors []*FleetError `type:"list"`
+	FleetErrors []FleetError `type:"list"`
 
 	FleetType FleetType `type:"string"`
 
@@ -3562,7 +3559,7 @@ func (s *Fleet) SetEnableDefaultInternetAccess(v bool) *Fleet {
 }
 
 // SetFleetErrors sets the FleetErrors field's value.
-func (s *Fleet) SetFleetErrors(v []*FleetError) *Fleet {
+func (s *Fleet) SetFleetErrors(v []FleetError) *Fleet {
 	s.FleetErrors = v
 	return s
 }
@@ -3649,7 +3646,7 @@ type Image struct {
 	_ struct{} `type:"structure"`
 
 	// The applications associated with the image.
-	Applications []*Application `type:"list"`
+	Applications []Application `type:"list"`
 
 	// The ARN of the image.
 	Arn *string `type:"string"`
@@ -3703,7 +3700,7 @@ func (s Image) GoString() string {
 }
 
 // SetApplications sets the Applications field's value.
-func (s *Image) SetApplications(v []*Application) *Image {
+func (s *Image) SetApplications(v []Application) *Image {
 	s.Applications = v
 	return s
 }
@@ -3799,7 +3796,7 @@ type ImageBuilder struct {
 
 	ImageArn *string `type:"string"`
 
-	ImageBuilderErrors []*ResourceError `type:"list"`
+	ImageBuilderErrors []ResourceError `type:"list"`
 
 	InstanceType *string `min:"1" type:"string"`
 
@@ -3869,7 +3866,7 @@ func (s *ImageBuilder) SetImageArn(v string) *ImageBuilder {
 }
 
 // SetImageBuilderErrors sets the ImageBuilderErrors field's value.
-func (s *ImageBuilder) SetImageBuilderErrors(v []*ResourceError) *ImageBuilder {
+func (s *ImageBuilder) SetImageBuilderErrors(v []ResourceError) *ImageBuilder {
 	s.ImageBuilderErrors = v
 	return s
 }
@@ -4036,7 +4033,7 @@ type ListAssociatedFleetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the fleets.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
@@ -4054,7 +4051,7 @@ func (s ListAssociatedFleetsOutput) GoString() string {
 }
 
 // SetNames sets the Names field's value.
-func (s *ListAssociatedFleetsOutput) SetNames(v []*string) *ListAssociatedFleetsOutput {
+func (s *ListAssociatedFleetsOutput) SetNames(v []string) *ListAssociatedFleetsOutput {
 	s.Names = v
 	return s
 }
@@ -4126,7 +4123,7 @@ type ListAssociatedStacksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the stacks.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
@@ -4144,7 +4141,7 @@ func (s ListAssociatedStacksOutput) GoString() string {
 }
 
 // SetNames sets the Names field's value.
-func (s *ListAssociatedStacksOutput) SetNames(v []*string) *ListAssociatedStacksOutput {
+func (s *ListAssociatedStacksOutput) SetNames(v []string) *ListAssociatedStacksOutput {
 	s.Names = v
 	return s
 }
@@ -4363,10 +4360,10 @@ type Stack struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The errors for the stack.
-	StackErrors []*StackError `type:"list"`
+	StackErrors []StackError `type:"list"`
 
 	// The storage connectors to enable.
-	StorageConnectors []*StorageConnector `type:"list"`
+	StorageConnectors []StorageConnector `type:"list"`
 }
 
 // String returns the string representation
@@ -4410,13 +4407,13 @@ func (s *Stack) SetName(v string) *Stack {
 }
 
 // SetStackErrors sets the StackErrors field's value.
-func (s *Stack) SetStackErrors(v []*StackError) *Stack {
+func (s *Stack) SetStackErrors(v []StackError) *Stack {
 	s.StackErrors = v
 	return s
 }
 
 // SetStorageConnectors sets the StorageConnectors field's value.
-func (s *Stack) SetStorageConnectors(v []*StorageConnector) *Stack {
+func (s *Stack) SetStorageConnectors(v []StorageConnector) *Stack {
 	s.StorageConnectors = v
 	return s
 }
@@ -4761,7 +4758,7 @@ type UpdateDirectoryConfigInput struct {
 	DirectoryName *string `type:"string" required:"true"`
 
 	// The distinguished names of the organizational units for computer accounts.
-	OrganizationalUnitDistinguishedNames []*string `type:"list"`
+	OrganizationalUnitDistinguishedNames []string `type:"list"`
 
 	// The credentials for the service account used by the streaming instance to
 	// connect to the directory.
@@ -4804,7 +4801,7 @@ func (s *UpdateDirectoryConfigInput) SetDirectoryName(v string) *UpdateDirectory
 }
 
 // SetOrganizationalUnitDistinguishedNames sets the OrganizationalUnitDistinguishedNames field's value.
-func (s *UpdateDirectoryConfigInput) SetOrganizationalUnitDistinguishedNames(v []*string) *UpdateDirectoryConfigInput {
+func (s *UpdateDirectoryConfigInput) SetOrganizationalUnitDistinguishedNames(v []string) *UpdateDirectoryConfigInput {
 	s.OrganizationalUnitDistinguishedNames = v
 	return s
 }
@@ -5089,7 +5086,7 @@ type UpdateStackInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The storage connectors to enable.
-	StorageConnectors []*StorageConnector `type:"list"`
+	StorageConnectors []StorageConnector `type:"list"`
 }
 
 // String returns the string representation
@@ -5114,9 +5111,6 @@ func (s *UpdateStackInput) Validate() error {
 	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(aws.ErrInvalidParams))
 			}
@@ -5154,7 +5148,7 @@ func (s *UpdateStackInput) SetName(v string) *UpdateStackInput {
 }
 
 // SetStorageConnectors sets the StorageConnectors field's value.
-func (s *UpdateStackInput) SetStorageConnectors(v []*StorageConnector) *UpdateStackInput {
+func (s *UpdateStackInput) SetStorageConnectors(v []StorageConnector) *UpdateStackInput {
 	s.StorageConnectors = v
 	return s
 }
@@ -5189,10 +5183,10 @@ type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The security groups for the fleet.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The subnets to which a network interface is established from the fleet instance.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5206,13 +5200,13 @@ func (s VpcConfig) GoString() string {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfig) SetSecurityGroupIds(v []*string) *VpcConfig {
+func (s *VpcConfig) SetSecurityGroupIds(v []string) *VpcConfig {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcConfig) SetSubnetIds(v []*string) *VpcConfig {
+func (s *VpcConfig) SetSubnetIds(v []string) *VpcConfig {
 	s.SubnetIds = v
 	return s
 }

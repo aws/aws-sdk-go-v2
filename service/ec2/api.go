@@ -13570,11 +13570,11 @@ type AcceptReservedInstancesExchangeQuoteInput struct {
 	// Reserved Instances of the same or higher value.
 	//
 	// ReservedInstanceIds is a required field
-	ReservedInstanceIds []*string `locationName:"ReservedInstanceId" locationNameList:"ReservedInstanceId" type:"list" required:"true"`
+	ReservedInstanceIds []string `locationName:"ReservedInstanceId" locationNameList:"ReservedInstanceId" type:"list" required:"true"`
 
 	// The configurations of the Convertible Reserved Instance offerings that you
 	// are purchasing in this exchange.
-	TargetConfigurations []*TargetConfigurationRequest `locationName:"TargetConfiguration" locationNameList:"TargetConfigurationRequest" type:"list"`
+	TargetConfigurations []TargetConfigurationRequest `locationName:"TargetConfiguration" locationNameList:"TargetConfigurationRequest" type:"list"`
 }
 
 // String returns the string representation
@@ -13596,9 +13596,6 @@ func (s *AcceptReservedInstancesExchangeQuoteInput) Validate() error {
 	}
 	if s.TargetConfigurations != nil {
 		for i, v := range s.TargetConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -13618,13 +13615,13 @@ func (s *AcceptReservedInstancesExchangeQuoteInput) SetDryRun(v bool) *AcceptRes
 }
 
 // SetReservedInstanceIds sets the ReservedInstanceIds field's value.
-func (s *AcceptReservedInstancesExchangeQuoteInput) SetReservedInstanceIds(v []*string) *AcceptReservedInstancesExchangeQuoteInput {
+func (s *AcceptReservedInstancesExchangeQuoteInput) SetReservedInstanceIds(v []string) *AcceptReservedInstancesExchangeQuoteInput {
 	s.ReservedInstanceIds = v
 	return s
 }
 
 // SetTargetConfigurations sets the TargetConfigurations field's value.
-func (s *AcceptReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []*TargetConfigurationRequest) *AcceptReservedInstancesExchangeQuoteInput {
+func (s *AcceptReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []TargetConfigurationRequest) *AcceptReservedInstancesExchangeQuoteInput {
 	s.TargetConfigurations = v
 	return s
 }
@@ -13725,7 +13722,7 @@ type AccountAttribute struct {
 	AttributeName *string `locationName:"attributeName" type:"string"`
 
 	// One or more values for the account attribute.
-	AttributeValues []*AccountAttributeValue `locationName:"attributeValueSet" locationNameList:"item" type:"list"`
+	AttributeValues []AccountAttributeValue `locationName:"attributeValueSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -13745,7 +13742,7 @@ func (s *AccountAttribute) SetAttributeName(v string) *AccountAttribute {
 }
 
 // SetAttributeValues sets the AttributeValues field's value.
-func (s *AccountAttribute) SetAttributeValues(v []*AccountAttributeValue) *AccountAttribute {
+func (s *AccountAttribute) SetAttributeValues(v []AccountAttributeValue) *AccountAttribute {
 	s.AttributeValues = v
 	return s
 }
@@ -14117,7 +14114,7 @@ type AllocateHostsOutput struct {
 
 	// The ID of the allocated Dedicated Host. This is used when you want to launch
 	// an instance onto a specific host.
-	HostIds []*string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
+	HostIds []string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -14131,7 +14128,7 @@ func (s AllocateHostsOutput) GoString() string {
 }
 
 // SetHostIds sets the HostIds field's value.
-func (s *AllocateHostsOutput) SetHostIds(v []*string) *AllocateHostsOutput {
+func (s *AllocateHostsOutput) SetHostIds(v []string) *AllocateHostsOutput {
 	s.HostIds = v
 	return s
 }
@@ -14147,7 +14144,7 @@ type AssignIpv6AddressesInput struct {
 
 	// One or more specific IPv6 addresses to be assigned to the network interface.
 	// You can't use this option if you're specifying a number of IPv6 addresses.
-	Ipv6Addresses []*string `locationName:"ipv6Addresses" locationNameList:"item" type:"list"`
+	Ipv6Addresses []string `locationName:"ipv6Addresses" locationNameList:"item" type:"list"`
 
 	// The ID of the network interface.
 	//
@@ -14186,7 +14183,7 @@ func (s *AssignIpv6AddressesInput) SetIpv6AddressCount(v int64) *AssignIpv6Addre
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *AssignIpv6AddressesInput) SetIpv6Addresses(v []*string) *AssignIpv6AddressesInput {
+func (s *AssignIpv6AddressesInput) SetIpv6Addresses(v []string) *AssignIpv6AddressesInput {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -14202,7 +14199,7 @@ type AssignIpv6AddressesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IPv6 addresses assigned to the network interface.
-	AssignedIpv6Addresses []*string `locationName:"assignedIpv6Addresses" locationNameList:"item" type:"list"`
+	AssignedIpv6Addresses []string `locationName:"assignedIpv6Addresses" locationNameList:"item" type:"list"`
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
@@ -14219,7 +14216,7 @@ func (s AssignIpv6AddressesOutput) GoString() string {
 }
 
 // SetAssignedIpv6Addresses sets the AssignedIpv6Addresses field's value.
-func (s *AssignIpv6AddressesOutput) SetAssignedIpv6Addresses(v []*string) *AssignIpv6AddressesOutput {
+func (s *AssignIpv6AddressesOutput) SetAssignedIpv6Addresses(v []string) *AssignIpv6AddressesOutput {
 	s.AssignedIpv6Addresses = v
 	return s
 }
@@ -14250,7 +14247,7 @@ type AssignPrivateIpAddressesInput struct {
 	//
 	// If you don't specify an IP address, Amazon EC2 automatically selects an IP
 	// address within the subnet range.
-	PrivateIpAddresses []*string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list"`
+	PrivateIpAddresses []string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list"`
 
 	// The number of secondary IP addresses to assign to the network interface.
 	// You can't specify this parameter when also specifying private IP addresses.
@@ -14294,7 +14291,7 @@ func (s *AssignPrivateIpAddressesInput) SetNetworkInterfaceId(v string) *AssignP
 }
 
 // SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *AssignPrivateIpAddressesInput) SetPrivateIpAddresses(v []*string) *AssignPrivateIpAddressesInput {
+func (s *AssignPrivateIpAddressesInput) SetPrivateIpAddresses(v []string) *AssignPrivateIpAddressesInput {
 	s.PrivateIpAddresses = v
 	return s
 }
@@ -14900,7 +14897,7 @@ type AttachClassicLinkVpcInput struct {
 	// groups from a different VPC.
 	//
 	// Groups is a required field
-	Groups []*string `locationName:"SecurityGroupId" locationNameList:"groupId" type:"list" required:"true"`
+	Groups []string `locationName:"SecurityGroupId" locationNameList:"groupId" type:"list" required:"true"`
 
 	// The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.
 	//
@@ -14952,7 +14949,7 @@ func (s *AttachClassicLinkVpcInput) SetDryRun(v bool) *AttachClassicLinkVpcInput
 }
 
 // SetGroups sets the Groups field's value.
-func (s *AttachClassicLinkVpcInput) SetGroups(v []*string) *AttachClassicLinkVpcInput {
+func (s *AttachClassicLinkVpcInput) SetGroups(v []string) *AttachClassicLinkVpcInput {
 	s.Groups = v
 	return s
 }
@@ -15436,7 +15433,7 @@ type AuthorizeSecurityGroupEgressInput struct {
 
 	// One or more sets of IP permissions. You can't specify a destination security
 	// group and a CIDR IP address range in the same set of permissions.
-	IpPermissions []*IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
 	// Not supported. Use a set of IP permissions to specify the protocol name or
 	// number.
@@ -15503,7 +15500,7 @@ func (s *AuthorizeSecurityGroupEgressInput) SetGroupId(v string) *AuthorizeSecur
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetIpPermissions(v []*IpPermission) *AuthorizeSecurityGroupEgressInput {
+func (s *AuthorizeSecurityGroupEgressInput) SetIpPermissions(v []IpPermission) *AuthorizeSecurityGroupEgressInput {
 	s.IpPermissions = v
 	return s
 }
@@ -15578,7 +15575,7 @@ type AuthorizeSecurityGroupIngressInput struct {
 
 	// One or more sets of IP permissions. Can be used to specify multiple rules
 	// in a single command.
-	IpPermissions []*IpPermission `locationNameList:"item" type:"list"`
+	IpPermissions []IpPermission `locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	// (VPC only) Use -1 to specify all protocols. If you specify -1, or a protocol
@@ -15652,7 +15649,7 @@ func (s *AuthorizeSecurityGroupIngressInput) SetGroupName(v string) *AuthorizeSe
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetIpPermissions(v []*IpPermission) *AuthorizeSecurityGroupIngressInput {
+func (s *AuthorizeSecurityGroupIngressInput) SetIpPermissions(v []IpPermission) *AuthorizeSecurityGroupIngressInput {
 	s.IpPermissions = v
 	return s
 }
@@ -15702,7 +15699,7 @@ type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
 	// Any messages about the Availability Zone.
-	Messages []*AvailabilityZoneMessage `locationName:"messageSet" locationNameList:"item" type:"list"`
+	Messages []AvailabilityZoneMessage `locationName:"messageSet" locationNameList:"item" type:"list"`
 
 	// The name of the region.
 	RegionName *string `locationName:"regionName" type:"string"`
@@ -15725,7 +15722,7 @@ func (s AvailabilityZone) GoString() string {
 }
 
 // SetMessages sets the Messages field's value.
-func (s *AvailabilityZone) SetMessages(v []*AvailabilityZoneMessage) *AvailabilityZone {
+func (s *AvailabilityZone) SetMessages(v []AvailabilityZoneMessage) *AvailabilityZone {
 	s.Messages = v
 	return s
 }
@@ -15779,7 +15776,7 @@ type AvailableCapacity struct {
 	_ struct{} `type:"structure"`
 
 	// The total number of instances that the Dedicated Host supports.
-	AvailableInstanceCapacity []*InstanceCapacity `locationName:"availableInstanceCapacity" locationNameList:"item" type:"list"`
+	AvailableInstanceCapacity []InstanceCapacity `locationName:"availableInstanceCapacity" locationNameList:"item" type:"list"`
 
 	// The number of vCPUs available on the Dedicated Host.
 	AvailableVCpus *int64 `locationName:"availableVCpus" type:"integer"`
@@ -15796,7 +15793,7 @@ func (s AvailableCapacity) GoString() string {
 }
 
 // SetAvailableInstanceCapacity sets the AvailableInstanceCapacity field's value.
-func (s *AvailableCapacity) SetAvailableInstanceCapacity(v []*InstanceCapacity) *AvailableCapacity {
+func (s *AvailableCapacity) SetAvailableInstanceCapacity(v []InstanceCapacity) *AvailableCapacity {
 	s.AvailableInstanceCapacity = v
 	return s
 }
@@ -16464,7 +16461,7 @@ type CancelReservedInstancesListingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Reserved Instance listing.
-	ReservedInstancesListings []*ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
+	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -16478,7 +16475,7 @@ func (s CancelReservedInstancesListingOutput) GoString() string {
 }
 
 // SetReservedInstancesListings sets the ReservedInstancesListings field's value.
-func (s *CancelReservedInstancesListingOutput) SetReservedInstancesListings(v []*ReservedInstancesListing) *CancelReservedInstancesListingOutput {
+func (s *CancelReservedInstancesListingOutput) SetReservedInstancesListings(v []ReservedInstancesListing) *CancelReservedInstancesListingOutput {
 	s.ReservedInstancesListings = v
 	return s
 }
@@ -16573,7 +16570,7 @@ type CancelSpotFleetRequestsInput struct {
 	// The IDs of the Spot fleet requests.
 	//
 	// SpotFleetRequestIds is a required field
-	SpotFleetRequestIds []*string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list" required:"true"`
+	SpotFleetRequestIds []string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list" required:"true"`
 
 	// Indicates whether to terminate instances for a Spot fleet request if it is
 	// canceled successfully.
@@ -16617,7 +16614,7 @@ func (s *CancelSpotFleetRequestsInput) SetDryRun(v bool) *CancelSpotFleetRequest
 }
 
 // SetSpotFleetRequestIds sets the SpotFleetRequestIds field's value.
-func (s *CancelSpotFleetRequestsInput) SetSpotFleetRequestIds(v []*string) *CancelSpotFleetRequestsInput {
+func (s *CancelSpotFleetRequestsInput) SetSpotFleetRequestIds(v []string) *CancelSpotFleetRequestsInput {
 	s.SpotFleetRequestIds = v
 	return s
 }
@@ -16634,10 +16631,10 @@ type CancelSpotFleetRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Spot fleet requests that are successfully canceled.
-	SuccessfulFleetRequests []*CancelSpotFleetRequestsSuccessItem `locationName:"successfulFleetRequestSet" locationNameList:"item" type:"list"`
+	SuccessfulFleetRequests []CancelSpotFleetRequestsSuccessItem `locationName:"successfulFleetRequestSet" locationNameList:"item" type:"list"`
 
 	// Information about the Spot fleet requests that are not successfully canceled.
-	UnsuccessfulFleetRequests []*CancelSpotFleetRequestsErrorItem `locationName:"unsuccessfulFleetRequestSet" locationNameList:"item" type:"list"`
+	UnsuccessfulFleetRequests []CancelSpotFleetRequestsErrorItem `locationName:"unsuccessfulFleetRequestSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -16651,13 +16648,13 @@ func (s CancelSpotFleetRequestsOutput) GoString() string {
 }
 
 // SetSuccessfulFleetRequests sets the SuccessfulFleetRequests field's value.
-func (s *CancelSpotFleetRequestsOutput) SetSuccessfulFleetRequests(v []*CancelSpotFleetRequestsSuccessItem) *CancelSpotFleetRequestsOutput {
+func (s *CancelSpotFleetRequestsOutput) SetSuccessfulFleetRequests(v []CancelSpotFleetRequestsSuccessItem) *CancelSpotFleetRequestsOutput {
 	s.SuccessfulFleetRequests = v
 	return s
 }
 
 // SetUnsuccessfulFleetRequests sets the UnsuccessfulFleetRequests field's value.
-func (s *CancelSpotFleetRequestsOutput) SetUnsuccessfulFleetRequests(v []*CancelSpotFleetRequestsErrorItem) *CancelSpotFleetRequestsOutput {
+func (s *CancelSpotFleetRequestsOutput) SetUnsuccessfulFleetRequests(v []CancelSpotFleetRequestsErrorItem) *CancelSpotFleetRequestsOutput {
 	s.UnsuccessfulFleetRequests = v
 	return s
 }
@@ -16725,7 +16722,7 @@ type CancelSpotInstanceRequestsInput struct {
 	// One or more Spot instance request IDs.
 	//
 	// SpotInstanceRequestIds is a required field
-	SpotInstanceRequestIds []*string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list" required:"true"`
+	SpotInstanceRequestIds []string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -16759,7 +16756,7 @@ func (s *CancelSpotInstanceRequestsInput) SetDryRun(v bool) *CancelSpotInstanceR
 }
 
 // SetSpotInstanceRequestIds sets the SpotInstanceRequestIds field's value.
-func (s *CancelSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []*string) *CancelSpotInstanceRequestsInput {
+func (s *CancelSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []string) *CancelSpotInstanceRequestsInput {
 	s.SpotInstanceRequestIds = v
 	return s
 }
@@ -16770,7 +16767,7 @@ type CancelSpotInstanceRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more Spot instance requests.
-	CancelledSpotInstanceRequests []*CancelledSpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
+	CancelledSpotInstanceRequests []CancelledSpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -16784,7 +16781,7 @@ func (s CancelSpotInstanceRequestsOutput) GoString() string {
 }
 
 // SetCancelledSpotInstanceRequests sets the CancelledSpotInstanceRequests field's value.
-func (s *CancelSpotInstanceRequestsOutput) SetCancelledSpotInstanceRequests(v []*CancelledSpotInstanceRequest) *CancelSpotInstanceRequestsOutput {
+func (s *CancelSpotInstanceRequestsOutput) SetCancelledSpotInstanceRequests(v []CancelledSpotInstanceRequest) *CancelSpotInstanceRequestsOutput {
 	s.CancelledSpotInstanceRequests = v
 	return s
 }
@@ -16888,13 +16885,13 @@ type ClassicLinkInstance struct {
 	_ struct{} `type:"structure"`
 
 	// A list of security groups.
-	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Any tags assigned to the instance.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -16911,7 +16908,7 @@ func (s ClassicLinkInstance) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ClassicLinkInstance) SetGroups(v []*GroupIdentifier) *ClassicLinkInstance {
+func (s *ClassicLinkInstance) SetGroups(v []GroupIdentifier) *ClassicLinkInstance {
 	s.Groups = v
 	return s
 }
@@ -16923,7 +16920,7 @@ func (s *ClassicLinkInstance) SetInstanceId(v string) *ClassicLinkInstance {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ClassicLinkInstance) SetTags(v []*Tag) *ClassicLinkInstance {
+func (s *ClassicLinkInstance) SetTags(v []Tag) *ClassicLinkInstance {
 	s.Tags = v
 	return s
 }
@@ -17121,7 +17118,7 @@ type ConversionTask struct {
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Any tags assigned to the task.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -17171,7 +17168,7 @@ func (s *ConversionTask) SetStatusMessage(v string) *ConversionTask {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ConversionTask) SetTags(v []*Tag) *ConversionTask {
+func (s *ConversionTask) SetTags(v []Tag) *ConversionTask {
 	s.Tags = v
 	return s
 }
@@ -17792,7 +17789,7 @@ type CreateDhcpOptionsInput struct {
 	// A DHCP configuration option.
 	//
 	// DhcpConfigurations is a required field
-	DhcpConfigurations []*NewDhcpConfiguration `locationName:"dhcpConfiguration" locationNameList:"item" type:"list" required:"true"`
+	DhcpConfigurations []NewDhcpConfiguration `locationName:"dhcpConfiguration" locationNameList:"item" type:"list" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -17826,7 +17823,7 @@ func (s *CreateDhcpOptionsInput) Validate() error {
 }
 
 // SetDhcpConfigurations sets the DhcpConfigurations field's value.
-func (s *CreateDhcpOptionsInput) SetDhcpConfigurations(v []*NewDhcpConfiguration) *CreateDhcpOptionsInput {
+func (s *CreateDhcpOptionsInput) SetDhcpConfigurations(v []NewDhcpConfiguration) *CreateDhcpOptionsInput {
 	s.DhcpConfigurations = v
 	return s
 }
@@ -17983,7 +17980,7 @@ type CreateFlowLogsInput struct {
 	// Constraints: Maximum of 1000 resources
 	//
 	// ResourceIds is a required field
-	ResourceIds []*string `locationName:"ResourceId" locationNameList:"item" type:"list" required:"true"`
+	ResourceIds []string `locationName:"ResourceId" locationNameList:"item" type:"list" required:"true"`
 
 	// The type of resource on which to create the flow log.
 	//
@@ -18053,7 +18050,7 @@ func (s *CreateFlowLogsInput) SetLogGroupName(v string) *CreateFlowLogsInput {
 }
 
 // SetResourceIds sets the ResourceIds field's value.
-func (s *CreateFlowLogsInput) SetResourceIds(v []*string) *CreateFlowLogsInput {
+func (s *CreateFlowLogsInput) SetResourceIds(v []string) *CreateFlowLogsInput {
 	s.ResourceIds = v
 	return s
 }
@@ -18080,10 +18077,10 @@ type CreateFlowLogsOutput struct {
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
 	// The IDs of the flow logs.
-	FlowLogIds []*string `locationName:"flowLogIdSet" locationNameList:"item" type:"list"`
+	FlowLogIds []string `locationName:"flowLogIdSet" locationNameList:"item" type:"list"`
 
 	// Information about the flow logs that could not be created successfully.
-	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
+	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -18103,13 +18100,13 @@ func (s *CreateFlowLogsOutput) SetClientToken(v string) *CreateFlowLogsOutput {
 }
 
 // SetFlowLogIds sets the FlowLogIds field's value.
-func (s *CreateFlowLogsOutput) SetFlowLogIds(v []*string) *CreateFlowLogsOutput {
+func (s *CreateFlowLogsOutput) SetFlowLogIds(v []string) *CreateFlowLogsOutput {
 	s.FlowLogIds = v
 	return s
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
-func (s *CreateFlowLogsOutput) SetUnsuccessful(v []*UnsuccessfulItem) *CreateFlowLogsOutput {
+func (s *CreateFlowLogsOutput) SetUnsuccessful(v []UnsuccessfulItem) *CreateFlowLogsOutput {
 	s.Unsuccessful = v
 	return s
 }
@@ -18243,7 +18240,7 @@ type CreateImageInput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more block device mappings.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// A description for the new image.
 	Description *string `locationName:"description" type:"string"`
@@ -18304,7 +18301,7 @@ func (s *CreateImageInput) Validate() error {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *CreateImageInput) SetBlockDeviceMappings(v []*BlockDeviceMapping) *CreateImageInput {
+func (s *CreateImageInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *CreateImageInput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -18982,7 +18979,7 @@ type CreateNetworkInterfaceInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The IDs of one or more security groups.
-	Groups []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+	Groups []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
 	// automatically selects the IPv6 addresses from the subnet range. You can't
@@ -18993,7 +18990,7 @@ type CreateNetworkInterfaceInput struct {
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
 	// subnet. You can't use this option if you're specifying a number of IPv6 addresses.
-	Ipv6Addresses []*InstanceIpv6Address `locationName:"ipv6Addresses" locationNameList:"item" type:"list"`
+	Ipv6Addresses []InstanceIpv6Address `locationName:"ipv6Addresses" locationNameList:"item" type:"list"`
 
 	// The primary private IPv4 address of the network interface. If you don't specify
 	// an IPv4 address, Amazon EC2 selects one for you from the subnet's IPv4 CIDR
@@ -19003,7 +19000,7 @@ type CreateNetworkInterfaceInput struct {
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// One or more private IPv4 addresses.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `locationName:"privateIpAddresses" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []PrivateIpAddressSpecification `locationName:"privateIpAddresses" locationNameList:"item" type:"list"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface.
 	// When you specify a number of secondary IPv4 addresses, Amazon EC2 selects
@@ -19041,9 +19038,6 @@ func (s *CreateNetworkInterfaceInput) Validate() error {
 	}
 	if s.PrivateIpAddresses != nil {
 		for i, v := range s.PrivateIpAddresses {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PrivateIpAddresses", i), err.(aws.ErrInvalidParams))
 			}
@@ -19069,7 +19063,7 @@ func (s *CreateNetworkInterfaceInput) SetDryRun(v bool) *CreateNetworkInterfaceI
 }
 
 // SetGroups sets the Groups field's value.
-func (s *CreateNetworkInterfaceInput) SetGroups(v []*string) *CreateNetworkInterfaceInput {
+func (s *CreateNetworkInterfaceInput) SetGroups(v []string) *CreateNetworkInterfaceInput {
 	s.Groups = v
 	return s
 }
@@ -19081,7 +19075,7 @@ func (s *CreateNetworkInterfaceInput) SetIpv6AddressCount(v int64) *CreateNetwor
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *CreateNetworkInterfaceInput) SetIpv6Addresses(v []*InstanceIpv6Address) *CreateNetworkInterfaceInput {
+func (s *CreateNetworkInterfaceInput) SetIpv6Addresses(v []InstanceIpv6Address) *CreateNetworkInterfaceInput {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -19093,7 +19087,7 @@ func (s *CreateNetworkInterfaceInput) SetPrivateIpAddress(v string) *CreateNetwo
 }
 
 // SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *CreateNetworkInterfaceInput) SetPrivateIpAddresses(v []*PrivateIpAddressSpecification) *CreateNetworkInterfaceInput {
+func (s *CreateNetworkInterfaceInput) SetPrivateIpAddresses(v []PrivateIpAddressSpecification) *CreateNetworkInterfaceInput {
 	s.PrivateIpAddresses = v
 	return s
 }
@@ -19353,7 +19347,7 @@ type CreateReservedInstancesListingInput struct {
 	// remaining in the Reserved Instance term.
 	//
 	// PriceSchedules is a required field
-	PriceSchedules []*PriceScheduleSpecification `locationName:"priceSchedules" locationNameList:"item" type:"list" required:"true"`
+	PriceSchedules []PriceScheduleSpecification `locationName:"priceSchedules" locationNameList:"item" type:"list" required:"true"`
 
 	// The ID of the active Standard Reserved Instance.
 	//
@@ -19410,7 +19404,7 @@ func (s *CreateReservedInstancesListingInput) SetInstanceCount(v int64) *CreateR
 }
 
 // SetPriceSchedules sets the PriceSchedules field's value.
-func (s *CreateReservedInstancesListingInput) SetPriceSchedules(v []*PriceScheduleSpecification) *CreateReservedInstancesListingInput {
+func (s *CreateReservedInstancesListingInput) SetPriceSchedules(v []PriceScheduleSpecification) *CreateReservedInstancesListingInput {
 	s.PriceSchedules = v
 	return s
 }
@@ -19427,7 +19421,7 @@ type CreateReservedInstancesListingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Standard Reserved Instance listing.
-	ReservedInstancesListings []*ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
+	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -19441,7 +19435,7 @@ func (s CreateReservedInstancesListingOutput) GoString() string {
 }
 
 // SetReservedInstancesListings sets the ReservedInstancesListings field's value.
-func (s *CreateReservedInstancesListingOutput) SetReservedInstancesListings(v []*ReservedInstancesListing) *CreateReservedInstancesListingOutput {
+func (s *CreateReservedInstancesListingOutput) SetReservedInstancesListings(v []ReservedInstancesListing) *CreateReservedInstancesListingOutput {
 	s.ReservedInstancesListings = v
 	return s
 }
@@ -19907,7 +19901,7 @@ type CreateSnapshotOutput struct {
 	StateMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Any tags assigned to the snapshot.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the volume that was used to create the snapshot. Snapshots created
 	// by the CopySnapshot action have an arbitrary volume ID that should not be
@@ -19995,7 +19989,7 @@ func (s *CreateSnapshotOutput) SetStateMessage(v string) *CreateSnapshotOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateSnapshotOutput) SetTags(v []*Tag) *CreateSnapshotOutput {
+func (s *CreateSnapshotOutput) SetTags(v []Tag) *CreateSnapshotOutput {
 	s.Tags = v
 	return s
 }
@@ -20228,14 +20222,14 @@ type CreateTagsInput struct {
 	// The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
 	//
 	// Resources is a required field
-	Resources []*string `locationName:"ResourceId" type:"list" required:"true"`
+	Resources []string `locationName:"ResourceId" type:"list" required:"true"`
 
 	// One or more tags. The value parameter is required, but if you don't want
 	// the tag to have a value, specify the parameter with no value, and we set
 	// the value to an empty string.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationName:"Tag" locationNameList:"item" type:"list" required:"true"`
+	Tags []Tag `locationName:"Tag" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -20273,13 +20267,13 @@ func (s *CreateTagsInput) SetDryRun(v bool) *CreateTagsInput {
 }
 
 // SetResources sets the Resources field's value.
-func (s *CreateTagsInput) SetResources(v []*string) *CreateTagsInput {
+func (s *CreateTagsInput) SetResources(v []string) *CreateTagsInput {
 	s.Resources = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateTagsInput) SetTags(v []*Tag) *CreateTagsInput {
+func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	s.Tags = v
 	return s
 }
@@ -20355,7 +20349,7 @@ type CreateVolumeInput struct {
 	SnapshotId *string `type:"string"`
 
 	// The tags to apply to the volume during creation.
-	TagSpecifications []*TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
+	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
 
 	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
 	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard
@@ -20432,7 +20426,7 @@ func (s *CreateVolumeInput) SetSnapshotId(v string) *CreateVolumeInput {
 }
 
 // SetTagSpecifications sets the TagSpecifications field's value.
-func (s *CreateVolumeInput) SetTagSpecifications(v []*TagSpecification) *CreateVolumeInput {
+func (s *CreateVolumeInput) SetTagSpecifications(v []TagSpecification) *CreateVolumeInput {
 	s.TagSpecifications = v
 	return s
 }
@@ -20449,7 +20443,7 @@ type CreateVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the volume attachments.
-	Attachments []*DetachVolumeOutput `locationName:"attachmentSet" locationNameList:"item" type:"list"`
+	Attachments []DetachVolumeOutput `locationName:"attachmentSet" locationNameList:"item" type:"list"`
 
 	// The Availability Zone for the volume.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
@@ -20489,7 +20483,7 @@ type CreateVolumeOutput struct {
 	State VolumeState `locationName:"status" type:"string"`
 
 	// Any tags assigned to the volume.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the volume.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -20511,7 +20505,7 @@ func (s CreateVolumeOutput) GoString() string {
 }
 
 // SetAttachments sets the Attachments field's value.
-func (s *CreateVolumeOutput) SetAttachments(v []*DetachVolumeOutput) *CreateVolumeOutput {
+func (s *CreateVolumeOutput) SetAttachments(v []DetachVolumeOutput) *CreateVolumeOutput {
 	s.Attachments = v
 	return s
 }
@@ -20565,7 +20559,7 @@ func (s *CreateVolumeOutput) SetState(v VolumeState) *CreateVolumeOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateVolumeOutput) SetTags(v []*Tag) *CreateVolumeOutput {
+func (s *CreateVolumeOutput) SetTags(v []Tag) *CreateVolumeOutput {
 	s.Tags = v
 	return s
 }
@@ -20626,11 +20620,11 @@ type CreateVolumePermissionModifications struct {
 
 	// Adds a specific AWS account ID or group to a volume's list of create volume
 	// permissions.
-	Add []*CreateVolumePermission `locationNameList:"item" type:"list"`
+	Add []CreateVolumePermission `locationNameList:"item" type:"list"`
 
 	// Removes a specific AWS account ID or group from a volume's list of create
 	// volume permissions.
-	Remove []*CreateVolumePermission `locationNameList:"item" type:"list"`
+	Remove []CreateVolumePermission `locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -20644,13 +20638,13 @@ func (s CreateVolumePermissionModifications) GoString() string {
 }
 
 // SetAdd sets the Add field's value.
-func (s *CreateVolumePermissionModifications) SetAdd(v []*CreateVolumePermission) *CreateVolumePermissionModifications {
+func (s *CreateVolumePermissionModifications) SetAdd(v []CreateVolumePermission) *CreateVolumePermissionModifications {
 	s.Add = v
 	return s
 }
 
 // SetRemove sets the Remove field's value.
-func (s *CreateVolumePermissionModifications) SetRemove(v []*CreateVolumePermission) *CreateVolumePermissionModifications {
+func (s *CreateVolumePermissionModifications) SetRemove(v []CreateVolumePermission) *CreateVolumePermissionModifications {
 	s.Remove = v
 	return s
 }
@@ -20676,7 +20670,7 @@ type CreateVpcEndpointInput struct {
 	PolicyDocument *string `type:"string"`
 
 	// One or more route table IDs.
-	RouteTableIds []*string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
+	RouteTableIds []string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
 
 	// The AWS service name, in the form com.amazonaws.region.service. To get a
 	// list of available services, use the DescribeVpcEndpointServices request.
@@ -20737,7 +20731,7 @@ func (s *CreateVpcEndpointInput) SetPolicyDocument(v string) *CreateVpcEndpointI
 }
 
 // SetRouteTableIds sets the RouteTableIds field's value.
-func (s *CreateVpcEndpointInput) SetRouteTableIds(v []*string) *CreateVpcEndpointInput {
+func (s *CreateVpcEndpointInput) SetRouteTableIds(v []string) *CreateVpcEndpointInput {
 	s.RouteTableIds = v
 	return s
 }
@@ -21285,7 +21279,7 @@ type CustomerGateway struct {
 	State *string `locationName:"state" type:"string"`
 
 	// Any tags assigned to the customer gateway.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection the customer gateway supports (ipsec.1).
 	Type *string `locationName:"type" type:"string"`
@@ -21326,7 +21320,7 @@ func (s *CustomerGateway) SetState(v string) *CustomerGateway {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CustomerGateway) SetTags(v []*Tag) *CustomerGateway {
+func (s *CustomerGateway) SetTags(v []Tag) *CustomerGateway {
 	s.Tags = v
 	return s
 }
@@ -21557,7 +21551,7 @@ type DeleteFlowLogsInput struct {
 	// One or more flow log IDs.
 	//
 	// FlowLogIds is a required field
-	FlowLogIds []*string `locationName:"FlowLogId" locationNameList:"item" type:"list" required:"true"`
+	FlowLogIds []string `locationName:"FlowLogId" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -21585,7 +21579,7 @@ func (s *DeleteFlowLogsInput) Validate() error {
 }
 
 // SetFlowLogIds sets the FlowLogIds field's value.
-func (s *DeleteFlowLogsInput) SetFlowLogIds(v []*string) *DeleteFlowLogsInput {
+func (s *DeleteFlowLogsInput) SetFlowLogIds(v []string) *DeleteFlowLogsInput {
 	s.FlowLogIds = v
 	return s
 }
@@ -21596,7 +21590,7 @@ type DeleteFlowLogsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the flow logs that could not be deleted successfully.
-	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
+	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -21610,7 +21604,7 @@ func (s DeleteFlowLogsOutput) GoString() string {
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
-func (s *DeleteFlowLogsOutput) SetUnsuccessful(v []*UnsuccessfulItem) *DeleteFlowLogsOutput {
+func (s *DeleteFlowLogsOutput) SetUnsuccessful(v []UnsuccessfulItem) *DeleteFlowLogsOutput {
 	s.Unsuccessful = v
 	return s
 }
@@ -22694,7 +22688,7 @@ type DeleteTagsInput struct {
 	// The IDs of one or more resources.
 	//
 	// Resources is a required field
-	Resources []*string `locationName:"resourceId" type:"list" required:"true"`
+	Resources []string `locationName:"resourceId" type:"list" required:"true"`
 
 	// One or more tags to delete. If you omit this parameter, we delete all tags
 	// for the specified resources. Specify a tag key and an optional tag value
@@ -22702,7 +22696,7 @@ type DeleteTagsInput struct {
 	// delete any tag with this key regardless of its value. If you specify a tag
 	// key with an empty string as the tag value, we delete the tag only if its
 	// value is an empty string.
-	Tags []*Tag `locationName:"tag" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tag" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -22736,13 +22730,13 @@ func (s *DeleteTagsInput) SetDryRun(v bool) *DeleteTagsInput {
 }
 
 // SetResources sets the Resources field's value.
-func (s *DeleteTagsInput) SetResources(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetResources(v []string) *DeleteTagsInput {
 	s.Resources = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *DeleteTagsInput) SetTags(v []*Tag) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 	s.Tags = v
 	return s
 }
@@ -22844,7 +22838,7 @@ type DeleteVpcEndpointsInput struct {
 	// One or more endpoint IDs.
 	//
 	// VpcEndpointIds is a required field
-	VpcEndpointIds []*string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
+	VpcEndpointIds []string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -22878,7 +22872,7 @@ func (s *DeleteVpcEndpointsInput) SetDryRun(v bool) *DeleteVpcEndpointsInput {
 }
 
 // SetVpcEndpointIds sets the VpcEndpointIds field's value.
-func (s *DeleteVpcEndpointsInput) SetVpcEndpointIds(v []*string) *DeleteVpcEndpointsInput {
+func (s *DeleteVpcEndpointsInput) SetVpcEndpointIds(v []string) *DeleteVpcEndpointsInput {
 	s.VpcEndpointIds = v
 	return s
 }
@@ -22889,7 +22883,7 @@ type DeleteVpcEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the endpoints that were not successfully deleted.
-	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
+	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -22903,7 +22897,7 @@ func (s DeleteVpcEndpointsOutput) GoString() string {
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
-func (s *DeleteVpcEndpointsOutput) SetUnsuccessful(v []*UnsuccessfulItem) *DeleteVpcEndpointsOutput {
+func (s *DeleteVpcEndpointsOutput) SetUnsuccessful(v []UnsuccessfulItem) *DeleteVpcEndpointsOutput {
 	s.Unsuccessful = v
 	return s
 }
@@ -23372,7 +23366,7 @@ type DescribeAccountAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more account attributes.
-	AccountAttributes []*AccountAttribute `locationName:"accountAttributeSet" locationNameList:"item" type:"list"`
+	AccountAttributes []AccountAttribute `locationName:"accountAttributeSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -23386,7 +23380,7 @@ func (s DescribeAccountAttributesOutput) GoString() string {
 }
 
 // SetAccountAttributes sets the AccountAttributes field's value.
-func (s *DescribeAccountAttributesOutput) SetAccountAttributes(v []*AccountAttribute) *DescribeAccountAttributesOutput {
+func (s *DescribeAccountAttributesOutput) SetAccountAttributes(v []AccountAttribute) *DescribeAccountAttributesOutput {
 	s.AccountAttributes = v
 	return s
 }
@@ -23399,7 +23393,7 @@ type DescribeAddressesInput struct {
 	// [EC2-VPC] One or more allocation IDs.
 	//
 	// Default: Describes all your Elastic IP addresses.
-	AllocationIds []*string `locationName:"AllocationId" locationNameList:"AllocationId" type:"list"`
+	AllocationIds []string `locationName:"AllocationId" locationNameList:"AllocationId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -23428,12 +23422,12 @@ type DescribeAddressesInput struct {
 	//    the Elastic IP address.
 	//
 	//    * public-ip - The Elastic IP address.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// [EC2-Classic] One or more Elastic IP addresses.
 	//
 	// Default: Describes all your Elastic IP addresses.
-	PublicIps []*string `locationName:"PublicIp" locationNameList:"PublicIp" type:"list"`
+	PublicIps []string `locationName:"PublicIp" locationNameList:"PublicIp" type:"list"`
 }
 
 // String returns the string representation
@@ -23447,7 +23441,7 @@ func (s DescribeAddressesInput) GoString() string {
 }
 
 // SetAllocationIds sets the AllocationIds field's value.
-func (s *DescribeAddressesInput) SetAllocationIds(v []*string) *DescribeAddressesInput {
+func (s *DescribeAddressesInput) SetAllocationIds(v []string) *DescribeAddressesInput {
 	s.AllocationIds = v
 	return s
 }
@@ -23459,13 +23453,13 @@ func (s *DescribeAddressesInput) SetDryRun(v bool) *DescribeAddressesInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeAddressesInput) SetFilters(v []*Filter) *DescribeAddressesInput {
+func (s *DescribeAddressesInput) SetFilters(v []Filter) *DescribeAddressesInput {
 	s.Filters = v
 	return s
 }
 
 // SetPublicIps sets the PublicIps field's value.
-func (s *DescribeAddressesInput) SetPublicIps(v []*string) *DescribeAddressesInput {
+func (s *DescribeAddressesInput) SetPublicIps(v []string) *DescribeAddressesInput {
 	s.PublicIps = v
 	return s
 }
@@ -23476,7 +23470,7 @@ type DescribeAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more Elastic IP addresses.
-	Addresses []*Address `locationName:"addressesSet" locationNameList:"item" type:"list"`
+	Addresses []Address `locationName:"addressesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -23490,7 +23484,7 @@ func (s DescribeAddressesOutput) GoString() string {
 }
 
 // SetAddresses sets the Addresses field's value.
-func (s *DescribeAddressesOutput) SetAddresses(v []*Address) *DescribeAddressesOutput {
+func (s *DescribeAddressesOutput) SetAddresses(v []Address) *DescribeAddressesOutput {
 	s.Addresses = v
 	return s
 }
@@ -23517,10 +23511,10 @@ type DescribeAvailabilityZonesInput struct {
 	//    | impaired | unavailable).
 	//
 	//    * zone-name - The name of the Availability Zone (for example, us-east-1a).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The names of one or more Availability Zones.
-	ZoneNames []*string `locationName:"ZoneName" locationNameList:"ZoneName" type:"list"`
+	ZoneNames []string `locationName:"ZoneName" locationNameList:"ZoneName" type:"list"`
 }
 
 // String returns the string representation
@@ -23540,13 +23534,13 @@ func (s *DescribeAvailabilityZonesInput) SetDryRun(v bool) *DescribeAvailability
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeAvailabilityZonesInput) SetFilters(v []*Filter) *DescribeAvailabilityZonesInput {
+func (s *DescribeAvailabilityZonesInput) SetFilters(v []Filter) *DescribeAvailabilityZonesInput {
 	s.Filters = v
 	return s
 }
 
 // SetZoneNames sets the ZoneNames field's value.
-func (s *DescribeAvailabilityZonesInput) SetZoneNames(v []*string) *DescribeAvailabilityZonesInput {
+func (s *DescribeAvailabilityZonesInput) SetZoneNames(v []string) *DescribeAvailabilityZonesInput {
 	s.ZoneNames = v
 	return s
 }
@@ -23557,7 +23551,7 @@ type DescribeAvailabilityZonesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more Availability Zones.
-	AvailabilityZones []*AvailabilityZone `locationName:"availabilityZoneInfo" locationNameList:"item" type:"list"`
+	AvailabilityZones []AvailabilityZone `locationName:"availabilityZoneInfo" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -23571,7 +23565,7 @@ func (s DescribeAvailabilityZonesOutput) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DescribeAvailabilityZonesOutput) SetAvailabilityZones(v []*AvailabilityZone) *DescribeAvailabilityZonesOutput {
+func (s *DescribeAvailabilityZonesOutput) SetAvailabilityZones(v []AvailabilityZone) *DescribeAvailabilityZonesOutput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -23584,7 +23578,7 @@ type DescribeBundleTasksInput struct {
 	// One or more bundle task IDs.
 	//
 	// Default: Describes all your bundle tasks.
-	BundleIds []*string `locationName:"BundleId" locationNameList:"BundleId" type:"list"`
+	BundleIds []string `locationName:"BundleId" locationNameList:"BundleId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -23615,7 +23609,7 @@ type DescribeBundleTasksInput struct {
 	//    | storing | cancelling | complete | failed).
 	//
 	//    * update-time - The time of the most recent update for the task.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 }
 
 // String returns the string representation
@@ -23629,7 +23623,7 @@ func (s DescribeBundleTasksInput) GoString() string {
 }
 
 // SetBundleIds sets the BundleIds field's value.
-func (s *DescribeBundleTasksInput) SetBundleIds(v []*string) *DescribeBundleTasksInput {
+func (s *DescribeBundleTasksInput) SetBundleIds(v []string) *DescribeBundleTasksInput {
 	s.BundleIds = v
 	return s
 }
@@ -23641,7 +23635,7 @@ func (s *DescribeBundleTasksInput) SetDryRun(v bool) *DescribeBundleTasksInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeBundleTasksInput) SetFilters(v []*Filter) *DescribeBundleTasksInput {
+func (s *DescribeBundleTasksInput) SetFilters(v []Filter) *DescribeBundleTasksInput {
 	s.Filters = v
 	return s
 }
@@ -23652,7 +23646,7 @@ type DescribeBundleTasksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more bundle tasks.
-	BundleTasks []*BundleTask `locationName:"bundleInstanceTasksSet" locationNameList:"item" type:"list"`
+	BundleTasks []BundleTask `locationName:"bundleInstanceTasksSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -23666,7 +23660,7 @@ func (s DescribeBundleTasksOutput) GoString() string {
 }
 
 // SetBundleTasks sets the BundleTasks field's value.
-func (s *DescribeBundleTasksOutput) SetBundleTasks(v []*BundleTask) *DescribeBundleTasksOutput {
+func (s *DescribeBundleTasksOutput) SetBundleTasks(v []BundleTask) *DescribeBundleTasksOutput {
 	s.BundleTasks = v
 	return s
 }
@@ -23703,10 +23697,10 @@ type DescribeClassicLinkInstancesInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC that the instance is linked to.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results of the initial request can be seen by sending another
@@ -23739,13 +23733,13 @@ func (s *DescribeClassicLinkInstancesInput) SetDryRun(v bool) *DescribeClassicLi
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeClassicLinkInstancesInput) SetFilters(v []*Filter) *DescribeClassicLinkInstancesInput {
+func (s *DescribeClassicLinkInstancesInput) SetFilters(v []Filter) *DescribeClassicLinkInstancesInput {
 	s.Filters = v
 	return s
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeClassicLinkInstancesInput) SetInstanceIds(v []*string) *DescribeClassicLinkInstancesInput {
+func (s *DescribeClassicLinkInstancesInput) SetInstanceIds(v []string) *DescribeClassicLinkInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -23768,7 +23762,7 @@ type DescribeClassicLinkInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more linked EC2-Classic instances.
-	Instances []*ClassicLinkInstance `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	Instances []ClassicLinkInstance `locationName:"instancesSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -23786,7 +23780,7 @@ func (s DescribeClassicLinkInstancesOutput) GoString() string {
 }
 
 // SetInstances sets the Instances field's value.
-func (s *DescribeClassicLinkInstancesOutput) SetInstances(v []*ClassicLinkInstance) *DescribeClassicLinkInstancesOutput {
+func (s *DescribeClassicLinkInstancesOutput) SetInstances(v []ClassicLinkInstance) *DescribeClassicLinkInstancesOutput {
 	s.Instances = v
 	return s
 }
@@ -23803,7 +23797,7 @@ type DescribeConversionTasksInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more conversion task IDs.
-	ConversionTaskIds []*string `locationName:"conversionTaskId" locationNameList:"item" type:"list"`
+	ConversionTaskIds []string `locationName:"conversionTaskId" locationNameList:"item" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -23823,7 +23817,7 @@ func (s DescribeConversionTasksInput) GoString() string {
 }
 
 // SetConversionTaskIds sets the ConversionTaskIds field's value.
-func (s *DescribeConversionTasksInput) SetConversionTaskIds(v []*string) *DescribeConversionTasksInput {
+func (s *DescribeConversionTasksInput) SetConversionTaskIds(v []string) *DescribeConversionTasksInput {
 	s.ConversionTaskIds = v
 	return s
 }
@@ -23840,7 +23834,7 @@ type DescribeConversionTasksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the conversion tasks.
-	ConversionTasks []*ConversionTask `locationName:"conversionTasks" locationNameList:"item" type:"list"`
+	ConversionTasks []ConversionTask `locationName:"conversionTasks" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -23854,7 +23848,7 @@ func (s DescribeConversionTasksOutput) GoString() string {
 }
 
 // SetConversionTasks sets the ConversionTasks field's value.
-func (s *DescribeConversionTasksOutput) SetConversionTasks(v []*ConversionTask) *DescribeConversionTasksOutput {
+func (s *DescribeConversionTasksOutput) SetConversionTasks(v []ConversionTask) *DescribeConversionTasksOutput {
 	s.ConversionTasks = v
 	return s
 }
@@ -23867,7 +23861,7 @@ type DescribeCustomerGatewaysInput struct {
 	// One or more customer gateway IDs.
 	//
 	// Default: Describes all your customer gateways.
-	CustomerGatewayIds []*string `locationName:"CustomerGatewayId" locationNameList:"CustomerGatewayId" type:"list"`
+	CustomerGatewayIds []string `locationName:"CustomerGatewayId" locationNameList:"CustomerGatewayId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -23906,7 +23900,7 @@ type DescribeCustomerGatewaysInput struct {
 	//
 	//    * tag-value - The value of a tag assigned to the resource. This filter
 	//    is independent of the tag-key filter.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 }
 
 // String returns the string representation
@@ -23920,7 +23914,7 @@ func (s DescribeCustomerGatewaysInput) GoString() string {
 }
 
 // SetCustomerGatewayIds sets the CustomerGatewayIds field's value.
-func (s *DescribeCustomerGatewaysInput) SetCustomerGatewayIds(v []*string) *DescribeCustomerGatewaysInput {
+func (s *DescribeCustomerGatewaysInput) SetCustomerGatewayIds(v []string) *DescribeCustomerGatewaysInput {
 	s.CustomerGatewayIds = v
 	return s
 }
@@ -23932,7 +23926,7 @@ func (s *DescribeCustomerGatewaysInput) SetDryRun(v bool) *DescribeCustomerGatew
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeCustomerGatewaysInput) SetFilters(v []*Filter) *DescribeCustomerGatewaysInput {
+func (s *DescribeCustomerGatewaysInput) SetFilters(v []Filter) *DescribeCustomerGatewaysInput {
 	s.Filters = v
 	return s
 }
@@ -23943,7 +23937,7 @@ type DescribeCustomerGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more customer gateways.
-	CustomerGateways []*CustomerGateway `locationName:"customerGatewaySet" locationNameList:"item" type:"list"`
+	CustomerGateways []CustomerGateway `locationName:"customerGatewaySet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -23957,7 +23951,7 @@ func (s DescribeCustomerGatewaysOutput) GoString() string {
 }
 
 // SetCustomerGateways sets the CustomerGateways field's value.
-func (s *DescribeCustomerGatewaysOutput) SetCustomerGateways(v []*CustomerGateway) *DescribeCustomerGatewaysOutput {
+func (s *DescribeCustomerGatewaysOutput) SetCustomerGateways(v []CustomerGateway) *DescribeCustomerGatewaysOutput {
 	s.CustomerGateways = v
 	return s
 }
@@ -23970,7 +23964,7 @@ type DescribeDhcpOptionsInput struct {
 	// The IDs of one or more DHCP options sets.
 	//
 	// Default: Describes all your DHCP options sets.
-	DhcpOptionsIds []*string `locationName:"DhcpOptionsId" locationNameList:"DhcpOptionsId" type:"list"`
+	DhcpOptionsIds []string `locationName:"DhcpOptionsId" locationNameList:"DhcpOptionsId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -24001,7 +23995,7 @@ type DescribeDhcpOptionsInput struct {
 	//
 	//    * tag-value - The value of a tag assigned to the resource. This filter
 	//    is independent of the tag-key filter.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 }
 
 // String returns the string representation
@@ -24015,7 +24009,7 @@ func (s DescribeDhcpOptionsInput) GoString() string {
 }
 
 // SetDhcpOptionsIds sets the DhcpOptionsIds field's value.
-func (s *DescribeDhcpOptionsInput) SetDhcpOptionsIds(v []*string) *DescribeDhcpOptionsInput {
+func (s *DescribeDhcpOptionsInput) SetDhcpOptionsIds(v []string) *DescribeDhcpOptionsInput {
 	s.DhcpOptionsIds = v
 	return s
 }
@@ -24027,7 +24021,7 @@ func (s *DescribeDhcpOptionsInput) SetDryRun(v bool) *DescribeDhcpOptionsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeDhcpOptionsInput) SetFilters(v []*Filter) *DescribeDhcpOptionsInput {
+func (s *DescribeDhcpOptionsInput) SetFilters(v []Filter) *DescribeDhcpOptionsInput {
 	s.Filters = v
 	return s
 }
@@ -24038,7 +24032,7 @@ type DescribeDhcpOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more DHCP options sets.
-	DhcpOptions []*DhcpOptions `locationName:"dhcpOptionsSet" locationNameList:"item" type:"list"`
+	DhcpOptions []DhcpOptions `locationName:"dhcpOptionsSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -24052,7 +24046,7 @@ func (s DescribeDhcpOptionsOutput) GoString() string {
 }
 
 // SetDhcpOptions sets the DhcpOptions field's value.
-func (s *DescribeDhcpOptionsOutput) SetDhcpOptions(v []*DhcpOptions) *DescribeDhcpOptionsOutput {
+func (s *DescribeDhcpOptionsOutput) SetDhcpOptions(v []DhcpOptions) *DescribeDhcpOptionsOutput {
 	s.DhcpOptions = v
 	return s
 }
@@ -24068,7 +24062,7 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// One or more egress-only Internet gateway IDs.
-	EgressOnlyInternetGatewayIds []*string `locationName:"EgressOnlyInternetGatewayId" locationNameList:"item" type:"list"`
+	EgressOnlyInternetGatewayIds []string `locationName:"EgressOnlyInternetGatewayId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results can be seen by sending another request with the returned
@@ -24097,7 +24091,7 @@ func (s *DescribeEgressOnlyInternetGatewaysInput) SetDryRun(v bool) *DescribeEgr
 }
 
 // SetEgressOnlyInternetGatewayIds sets the EgressOnlyInternetGatewayIds field's value.
-func (s *DescribeEgressOnlyInternetGatewaysInput) SetEgressOnlyInternetGatewayIds(v []*string) *DescribeEgressOnlyInternetGatewaysInput {
+func (s *DescribeEgressOnlyInternetGatewaysInput) SetEgressOnlyInternetGatewayIds(v []string) *DescribeEgressOnlyInternetGatewaysInput {
 	s.EgressOnlyInternetGatewayIds = v
 	return s
 }
@@ -24119,7 +24113,7 @@ type DescribeEgressOnlyInternetGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the egress-only Internet gateways.
-	EgressOnlyInternetGateways []*EgressOnlyInternetGateway `locationName:"egressOnlyInternetGatewaySet" locationNameList:"item" type:"list"`
+	EgressOnlyInternetGateways []EgressOnlyInternetGateway `locationName:"egressOnlyInternetGatewaySet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -24136,7 +24130,7 @@ func (s DescribeEgressOnlyInternetGatewaysOutput) GoString() string {
 }
 
 // SetEgressOnlyInternetGateways sets the EgressOnlyInternetGateways field's value.
-func (s *DescribeEgressOnlyInternetGatewaysOutput) SetEgressOnlyInternetGateways(v []*EgressOnlyInternetGateway) *DescribeEgressOnlyInternetGatewaysOutput {
+func (s *DescribeEgressOnlyInternetGatewaysOutput) SetEgressOnlyInternetGateways(v []EgressOnlyInternetGateway) *DescribeEgressOnlyInternetGatewaysOutput {
 	s.EgressOnlyInternetGateways = v
 	return s
 }
@@ -24158,7 +24152,7 @@ type DescribeElasticGpusInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// One or more Elastic GPU IDs.
-	ElasticGpuIds []*string `locationName:"ElasticGpuId" locationNameList:"item" type:"list"`
+	ElasticGpuIds []string `locationName:"ElasticGpuId" locationNameList:"item" type:"list"`
 
 	// One or more filters.
 	//
@@ -24171,7 +24165,7 @@ type DescribeElasticGpusInput struct {
 	//    * elastic-gpu-type - The type of Elastic GPU; for example, eg1.medium.
 	//
 	//    * instance-id - The ID of the instance to which the Elastic GPU is associated.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
@@ -24199,13 +24193,13 @@ func (s *DescribeElasticGpusInput) SetDryRun(v bool) *DescribeElasticGpusInput {
 }
 
 // SetElasticGpuIds sets the ElasticGpuIds field's value.
-func (s *DescribeElasticGpusInput) SetElasticGpuIds(v []*string) *DescribeElasticGpusInput {
+func (s *DescribeElasticGpusInput) SetElasticGpuIds(v []string) *DescribeElasticGpusInput {
 	s.ElasticGpuIds = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeElasticGpusInput) SetFilters(v []*Filter) *DescribeElasticGpusInput {
+func (s *DescribeElasticGpusInput) SetFilters(v []Filter) *DescribeElasticGpusInput {
 	s.Filters = v
 	return s
 }
@@ -24227,7 +24221,7 @@ type DescribeElasticGpusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Elastic GPUs.
-	ElasticGpuSet []*ElasticGpus `locationName:"elasticGpuSet" locationNameList:"item" type:"list"`
+	ElasticGpuSet []ElasticGpus `locationName:"elasticGpuSet" locationNameList:"item" type:"list"`
 
 	// The total number of items to return. If the total number of items available
 	// is more than the value specified in max-items then a Next-Token will be provided
@@ -24250,7 +24244,7 @@ func (s DescribeElasticGpusOutput) GoString() string {
 }
 
 // SetElasticGpuSet sets the ElasticGpuSet field's value.
-func (s *DescribeElasticGpusOutput) SetElasticGpuSet(v []*ElasticGpus) *DescribeElasticGpusOutput {
+func (s *DescribeElasticGpusOutput) SetElasticGpuSet(v []ElasticGpus) *DescribeElasticGpusOutput {
 	s.ElasticGpuSet = v
 	return s
 }
@@ -24273,7 +24267,7 @@ type DescribeExportTasksInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more export task IDs.
-	ExportTaskIds []*string `locationName:"exportTaskId" locationNameList:"ExportTaskId" type:"list"`
+	ExportTaskIds []string `locationName:"exportTaskId" locationNameList:"ExportTaskId" type:"list"`
 }
 
 // String returns the string representation
@@ -24287,7 +24281,7 @@ func (s DescribeExportTasksInput) GoString() string {
 }
 
 // SetExportTaskIds sets the ExportTaskIds field's value.
-func (s *DescribeExportTasksInput) SetExportTaskIds(v []*string) *DescribeExportTasksInput {
+func (s *DescribeExportTasksInput) SetExportTaskIds(v []string) *DescribeExportTasksInput {
 	s.ExportTaskIds = v
 	return s
 }
@@ -24298,7 +24292,7 @@ type DescribeExportTasksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the export tasks.
-	ExportTasks []*ExportTask `locationName:"exportTaskSet" locationNameList:"item" type:"list"`
+	ExportTasks []ExportTask `locationName:"exportTaskSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -24312,7 +24306,7 @@ func (s DescribeExportTasksOutput) GoString() string {
 }
 
 // SetExportTasks sets the ExportTasks field's value.
-func (s *DescribeExportTasksOutput) SetExportTasks(v []*ExportTask) *DescribeExportTasksOutput {
+func (s *DescribeExportTasksOutput) SetExportTasks(v []ExportTask) *DescribeExportTasksOutput {
 	s.ExportTasks = v
 	return s
 }
@@ -24333,10 +24327,10 @@ type DescribeFlowLogsInput struct {
 	//    * resource-id - The ID of the VPC, subnet, or network interface.
 	//
 	//    * traffic-type - The type of traffic (ACCEPT | REJECT | ALL)
-	Filter []*Filter `locationNameList:"Filter" type:"list"`
+	Filter []Filter `locationNameList:"Filter" type:"list"`
 
 	// One or more flow log IDs.
-	FlowLogIds []*string `locationName:"FlowLogId" locationNameList:"item" type:"list"`
+	FlowLogIds []string `locationName:"FlowLogId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results can be seen by sending another request with the returned
@@ -24360,13 +24354,13 @@ func (s DescribeFlowLogsInput) GoString() string {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *DescribeFlowLogsInput) SetFilter(v []*Filter) *DescribeFlowLogsInput {
+func (s *DescribeFlowLogsInput) SetFilter(v []Filter) *DescribeFlowLogsInput {
 	s.Filter = v
 	return s
 }
 
 // SetFlowLogIds sets the FlowLogIds field's value.
-func (s *DescribeFlowLogsInput) SetFlowLogIds(v []*string) *DescribeFlowLogsInput {
+func (s *DescribeFlowLogsInput) SetFlowLogIds(v []string) *DescribeFlowLogsInput {
 	s.FlowLogIds = v
 	return s
 }
@@ -24389,7 +24383,7 @@ type DescribeFlowLogsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the flow logs.
-	FlowLogs []*FlowLog `locationName:"flowLogSet" locationNameList:"item" type:"list"`
+	FlowLogs []FlowLog `locationName:"flowLogSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -24407,7 +24401,7 @@ func (s DescribeFlowLogsOutput) GoString() string {
 }
 
 // SetFlowLogs sets the FlowLogs field's value.
-func (s *DescribeFlowLogsOutput) SetFlowLogs(v []*FlowLog) *DescribeFlowLogsOutput {
+func (s *DescribeFlowLogsOutput) SetFlowLogs(v []FlowLog) *DescribeFlowLogsOutput {
 	s.FlowLogs = v
 	return s
 }
@@ -24554,10 +24548,10 @@ type DescribeFpgaImagesInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * update-time - The time of the most recent update.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more AFI IDs.
-	FpgaImageIds []*string `locationName:"FpgaImageId" locationNameList:"item" type:"list"`
+	FpgaImageIds []string `locationName:"FpgaImageId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return in a single call.
 	MaxResults *int64 `min:"5" type:"integer"`
@@ -24567,7 +24561,7 @@ type DescribeFpgaImagesInput struct {
 
 	// Filters the AFI by owner. Specify an AWS account ID, self (owner is the sender
 	// of the request), or an AWS owner alias (valid values are amazon | aws-marketplace).
-	Owners []*string `locationName:"Owner" locationNameList:"Owner" type:"list"`
+	Owners []string `locationName:"Owner" locationNameList:"Owner" type:"list"`
 }
 
 // String returns the string representation
@@ -24603,13 +24597,13 @@ func (s *DescribeFpgaImagesInput) SetDryRun(v bool) *DescribeFpgaImagesInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeFpgaImagesInput) SetFilters(v []*Filter) *DescribeFpgaImagesInput {
+func (s *DescribeFpgaImagesInput) SetFilters(v []Filter) *DescribeFpgaImagesInput {
 	s.Filters = v
 	return s
 }
 
 // SetFpgaImageIds sets the FpgaImageIds field's value.
-func (s *DescribeFpgaImagesInput) SetFpgaImageIds(v []*string) *DescribeFpgaImagesInput {
+func (s *DescribeFpgaImagesInput) SetFpgaImageIds(v []string) *DescribeFpgaImagesInput {
 	s.FpgaImageIds = v
 	return s
 }
@@ -24627,7 +24621,7 @@ func (s *DescribeFpgaImagesInput) SetNextToken(v string) *DescribeFpgaImagesInpu
 }
 
 // SetOwners sets the Owners field's value.
-func (s *DescribeFpgaImagesInput) SetOwners(v []*string) *DescribeFpgaImagesInput {
+func (s *DescribeFpgaImagesInput) SetOwners(v []string) *DescribeFpgaImagesInput {
 	s.Owners = v
 	return s
 }
@@ -24637,7 +24631,7 @@ type DescribeFpgaImagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more FPGA images.
-	FpgaImages []*FpgaImage `locationName:"fpgaImageSet" locationNameList:"item" type:"list"`
+	FpgaImages []FpgaImage `locationName:"fpgaImageSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -24655,7 +24649,7 @@ func (s DescribeFpgaImagesOutput) GoString() string {
 }
 
 // SetFpgaImages sets the FpgaImages field's value.
-func (s *DescribeFpgaImagesOutput) SetFpgaImages(v []*FpgaImage) *DescribeFpgaImagesOutput {
+func (s *DescribeFpgaImagesOutput) SetFpgaImages(v []FpgaImage) *DescribeFpgaImagesOutput {
 	s.FpgaImages = v
 	return s
 }
@@ -24675,7 +24669,7 @@ type DescribeHostReservationOfferingsInput struct {
 	//    * instance-family - The instance family of the offering (e.g., m4).
 	//
 	//    * payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).
-	Filter []*Filter `locationNameList:"Filter" type:"list"`
+	Filter []Filter `locationNameList:"Filter" type:"list"`
 
 	// This is the maximum duration of the reservation you'd like to purchase, specified
 	// in seconds. Reservations are available in one-year and three-year terms.
@@ -24715,7 +24709,7 @@ func (s DescribeHostReservationOfferingsInput) GoString() string {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *DescribeHostReservationOfferingsInput) SetFilter(v []*Filter) *DescribeHostReservationOfferingsInput {
+func (s *DescribeHostReservationOfferingsInput) SetFilter(v []Filter) *DescribeHostReservationOfferingsInput {
 	s.Filter = v
 	return s
 }
@@ -24759,7 +24753,7 @@ type DescribeHostReservationOfferingsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the offerings.
-	OfferingSet []*HostOffering `locationName:"offeringSet" locationNameList:"item" type:"list"`
+	OfferingSet []HostOffering `locationName:"offeringSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -24779,7 +24773,7 @@ func (s *DescribeHostReservationOfferingsOutput) SetNextToken(v string) *Describ
 }
 
 // SetOfferingSet sets the OfferingSet field's value.
-func (s *DescribeHostReservationOfferingsOutput) SetOfferingSet(v []*HostOffering) *DescribeHostReservationOfferingsOutput {
+func (s *DescribeHostReservationOfferingsOutput) SetOfferingSet(v []HostOffering) *DescribeHostReservationOfferingsOutput {
 	s.OfferingSet = v
 	return s
 }
@@ -24796,10 +24790,10 @@ type DescribeHostReservationsInput struct {
 	//
 	//    * state - The state of the reservation (payment-pending | payment-failed
 	//    | active | retired).
-	Filter []*Filter `locationNameList:"Filter" type:"list"`
+	Filter []Filter `locationNameList:"Filter" type:"list"`
 
 	// One or more host reservation IDs.
-	HostReservationIdSet []*string `locationNameList:"item" type:"list"`
+	HostReservationIdSet []string `locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results can be seen by sending another request with the returned
@@ -24822,13 +24816,13 @@ func (s DescribeHostReservationsInput) GoString() string {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *DescribeHostReservationsInput) SetFilter(v []*Filter) *DescribeHostReservationsInput {
+func (s *DescribeHostReservationsInput) SetFilter(v []Filter) *DescribeHostReservationsInput {
 	s.Filter = v
 	return s
 }
 
 // SetHostReservationIdSet sets the HostReservationIdSet field's value.
-func (s *DescribeHostReservationsInput) SetHostReservationIdSet(v []*string) *DescribeHostReservationsInput {
+func (s *DescribeHostReservationsInput) SetHostReservationIdSet(v []string) *DescribeHostReservationsInput {
 	s.HostReservationIdSet = v
 	return s
 }
@@ -24850,7 +24844,7 @@ type DescribeHostReservationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Details about the reservation's configuration.
-	HostReservationSet []*HostReservation `locationName:"hostReservationSet" locationNameList:"item" type:"list"`
+	HostReservationSet []HostReservation `locationName:"hostReservationSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -24868,7 +24862,7 @@ func (s DescribeHostReservationsOutput) GoString() string {
 }
 
 // SetHostReservationSet sets the HostReservationSet field's value.
-func (s *DescribeHostReservationsOutput) SetHostReservationSet(v []*HostReservation) *DescribeHostReservationsOutput {
+func (s *DescribeHostReservationsOutput) SetHostReservationSet(v []HostReservation) *DescribeHostReservationsOutput {
 	s.HostReservationSet = v
 	return s
 }
@@ -24901,10 +24895,10 @@ type DescribeHostsInput struct {
 	//    | permanent-failure | released | released-permanent-failure).
 	//
 	//    * availability-zone - The Availability Zone of the host.
-	Filter []*Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
+	Filter []Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
 
 	// The IDs of the Dedicated Hosts. The IDs are used for targeted instance launches.
-	HostIds []*string `locationName:"hostId" locationNameList:"item" type:"list"`
+	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results can be seen by sending another request with the returned
@@ -24928,13 +24922,13 @@ func (s DescribeHostsInput) GoString() string {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *DescribeHostsInput) SetFilter(v []*Filter) *DescribeHostsInput {
+func (s *DescribeHostsInput) SetFilter(v []Filter) *DescribeHostsInput {
 	s.Filter = v
 	return s
 }
 
 // SetHostIds sets the HostIds field's value.
-func (s *DescribeHostsInput) SetHostIds(v []*string) *DescribeHostsInput {
+func (s *DescribeHostsInput) SetHostIds(v []string) *DescribeHostsInput {
 	s.HostIds = v
 	return s
 }
@@ -24957,7 +24951,7 @@ type DescribeHostsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Dedicated Hosts.
-	Hosts []*Host `locationName:"hostSet" locationNameList:"item" type:"list"`
+	Hosts []Host `locationName:"hostSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -24975,7 +24969,7 @@ func (s DescribeHostsOutput) GoString() string {
 }
 
 // SetHosts sets the Hosts field's value.
-func (s *DescribeHostsOutput) SetHosts(v []*Host) *DescribeHostsOutput {
+func (s *DescribeHostsOutput) SetHosts(v []Host) *DescribeHostsOutput {
 	s.Hosts = v
 	return s
 }
@@ -24991,7 +24985,7 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more IAM instance profile associations.
-	AssociationIds []*string `locationName:"AssociationId" locationNameList:"AssociationId" type:"list"`
+	AssociationIds []string `locationName:"AssociationId" locationNameList:"AssociationId" type:"list"`
 
 	// One or more filters.
 	//
@@ -24999,7 +24993,7 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 	//
 	//    * state - The state of the association (associating | associated | disassociating
 	//    | disassociated).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
@@ -25036,13 +25030,13 @@ func (s *DescribeIamInstanceProfileAssociationsInput) Validate() error {
 }
 
 // SetAssociationIds sets the AssociationIds field's value.
-func (s *DescribeIamInstanceProfileAssociationsInput) SetAssociationIds(v []*string) *DescribeIamInstanceProfileAssociationsInput {
+func (s *DescribeIamInstanceProfileAssociationsInput) SetAssociationIds(v []string) *DescribeIamInstanceProfileAssociationsInput {
 	s.AssociationIds = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeIamInstanceProfileAssociationsInput) SetFilters(v []*Filter) *DescribeIamInstanceProfileAssociationsInput {
+func (s *DescribeIamInstanceProfileAssociationsInput) SetFilters(v []Filter) *DescribeIamInstanceProfileAssociationsInput {
 	s.Filters = v
 	return s
 }
@@ -25064,7 +25058,7 @@ type DescribeIamInstanceProfileAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more IAM instance profile associations.
-	IamInstanceProfileAssociations []*IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociationSet" locationNameList:"item" type:"list"`
+	IamInstanceProfileAssociations []IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociationSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -25082,7 +25076,7 @@ func (s DescribeIamInstanceProfileAssociationsOutput) GoString() string {
 }
 
 // SetIamInstanceProfileAssociations sets the IamInstanceProfileAssociations field's value.
-func (s *DescribeIamInstanceProfileAssociationsOutput) SetIamInstanceProfileAssociations(v []*IamInstanceProfileAssociation) *DescribeIamInstanceProfileAssociationsOutput {
+func (s *DescribeIamInstanceProfileAssociationsOutput) SetIamInstanceProfileAssociations(v []IamInstanceProfileAssociation) *DescribeIamInstanceProfileAssociationsOutput {
 	s.IamInstanceProfileAssociations = v
 	return s
 }
@@ -25124,7 +25118,7 @@ type DescribeIdFormatOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the ID format for the resource.
-	Statuses []*IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
+	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -25138,7 +25132,7 @@ func (s DescribeIdFormatOutput) GoString() string {
 }
 
 // SetStatuses sets the Statuses field's value.
-func (s *DescribeIdFormatOutput) SetStatuses(v []*IdFormat) *DescribeIdFormatOutput {
+func (s *DescribeIdFormatOutput) SetStatuses(v []IdFormat) *DescribeIdFormatOutput {
 	s.Statuses = v
 	return s
 }
@@ -25200,7 +25194,7 @@ type DescribeIdentityIdFormatOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the ID format for the resources.
-	Statuses []*IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
+	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -25214,7 +25208,7 @@ func (s DescribeIdentityIdFormatOutput) GoString() string {
 }
 
 // SetStatuses sets the Statuses field's value.
-func (s *DescribeIdentityIdFormatOutput) SetStatuses(v []*IdFormat) *DescribeIdentityIdFormatOutput {
+func (s *DescribeIdentityIdFormatOutput) SetStatuses(v []IdFormat) *DescribeIdentityIdFormatOutput {
 	s.Statuses = v
 	return s
 }
@@ -25296,7 +25290,7 @@ type DescribeImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more block device mapping entries.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// A description for the AMI.
 	Description *AttributeValue `locationName:"description" type:"structure"`
@@ -25308,10 +25302,10 @@ type DescribeImageAttributeOutput struct {
 	KernelId *AttributeValue `locationName:"kernel" type:"structure"`
 
 	// One or more launch permissions.
-	LaunchPermissions []*LaunchPermission `locationName:"launchPermission" locationNameList:"item" type:"list"`
+	LaunchPermissions []LaunchPermission `locationName:"launchPermission" locationNameList:"item" type:"list"`
 
 	// One or more product codes.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The RAM disk ID.
 	RamdiskId *AttributeValue `locationName:"ramdisk" type:"structure"`
@@ -25332,7 +25326,7 @@ func (s DescribeImageAttributeOutput) GoString() string {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *DescribeImageAttributeOutput) SetBlockDeviceMappings(v []*BlockDeviceMapping) *DescribeImageAttributeOutput {
+func (s *DescribeImageAttributeOutput) SetBlockDeviceMappings(v []BlockDeviceMapping) *DescribeImageAttributeOutput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -25356,13 +25350,13 @@ func (s *DescribeImageAttributeOutput) SetKernelId(v *AttributeValue) *DescribeI
 }
 
 // SetLaunchPermissions sets the LaunchPermissions field's value.
-func (s *DescribeImageAttributeOutput) SetLaunchPermissions(v []*LaunchPermission) *DescribeImageAttributeOutput {
+func (s *DescribeImageAttributeOutput) SetLaunchPermissions(v []LaunchPermission) *DescribeImageAttributeOutput {
 	s.LaunchPermissions = v
 	return s
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeImageAttributeOutput) SetProductCodes(v []*ProductCode) *DescribeImageAttributeOutput {
+func (s *DescribeImageAttributeOutput) SetProductCodes(v []ProductCode) *DescribeImageAttributeOutput {
 	s.ProductCodes = v
 	return s
 }
@@ -25392,7 +25386,7 @@ type DescribeImagesInput struct {
 
 	// Scopes the images by users with explicit launch permissions. Specify an AWS
 	// account ID, self (the sender of the request), or all (public AMIs).
-	ExecutableUsers []*string `locationName:"ExecutableBy" locationNameList:"ExecutableBy" type:"list"`
+	ExecutableUsers []string `locationName:"ExecutableBy" locationNameList:"ExecutableBy" type:"list"`
 
 	// One or more filters.
 	//
@@ -25474,18 +25468,18 @@ type DescribeImagesInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * virtualization-type - The virtualization type (paravirtual | hvm).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more image IDs.
 	//
 	// Default: Describes all images available to you.
-	ImageIds []*string `locationName:"ImageId" locationNameList:"ImageId" type:"list"`
+	ImageIds []string `locationName:"ImageId" locationNameList:"ImageId" type:"list"`
 
 	// Filters the images by the owner. Specify an AWS account ID, self (owner is
 	// the sender of the request), or an AWS owner alias (valid values are amazon
 	// | aws-marketplace | microsoft). Omitting this option returns all images for
 	// which you have launch permissions, regardless of ownership.
-	Owners []*string `locationName:"Owner" locationNameList:"Owner" type:"list"`
+	Owners []string `locationName:"Owner" locationNameList:"Owner" type:"list"`
 }
 
 // String returns the string representation
@@ -25505,25 +25499,25 @@ func (s *DescribeImagesInput) SetDryRun(v bool) *DescribeImagesInput {
 }
 
 // SetExecutableUsers sets the ExecutableUsers field's value.
-func (s *DescribeImagesInput) SetExecutableUsers(v []*string) *DescribeImagesInput {
+func (s *DescribeImagesInput) SetExecutableUsers(v []string) *DescribeImagesInput {
 	s.ExecutableUsers = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeImagesInput) SetFilters(v []*Filter) *DescribeImagesInput {
+func (s *DescribeImagesInput) SetFilters(v []Filter) *DescribeImagesInput {
 	s.Filters = v
 	return s
 }
 
 // SetImageIds sets the ImageIds field's value.
-func (s *DescribeImagesInput) SetImageIds(v []*string) *DescribeImagesInput {
+func (s *DescribeImagesInput) SetImageIds(v []string) *DescribeImagesInput {
 	s.ImageIds = v
 	return s
 }
 
 // SetOwners sets the Owners field's value.
-func (s *DescribeImagesInput) SetOwners(v []*string) *DescribeImagesInput {
+func (s *DescribeImagesInput) SetOwners(v []string) *DescribeImagesInput {
 	s.Owners = v
 	return s
 }
@@ -25534,7 +25528,7 @@ type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more images.
-	Images []*Image `locationName:"imagesSet" locationNameList:"item" type:"list"`
+	Images []Image `locationName:"imagesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -25548,7 +25542,7 @@ func (s DescribeImagesOutput) GoString() string {
 }
 
 // SetImages sets the Images field's value.
-func (s *DescribeImagesOutput) SetImages(v []*Image) *DescribeImagesOutput {
+func (s *DescribeImagesOutput) SetImages(v []Image) *DescribeImagesOutput {
 	s.Images = v
 	return s
 }
@@ -25566,10 +25560,10 @@ type DescribeImportImageTasksInput struct {
 
 	// Filter tasks using the task-state filter and one of the following values:
 	// active, completed, deleting, deleted.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// A list of import image task IDs.
-	ImportTaskIds []*string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
+	ImportTaskIds []string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
@@ -25596,13 +25590,13 @@ func (s *DescribeImportImageTasksInput) SetDryRun(v bool) *DescribeImportImageTa
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeImportImageTasksInput) SetFilters(v []*Filter) *DescribeImportImageTasksInput {
+func (s *DescribeImportImageTasksInput) SetFilters(v []Filter) *DescribeImportImageTasksInput {
 	s.Filters = v
 	return s
 }
 
 // SetImportTaskIds sets the ImportTaskIds field's value.
-func (s *DescribeImportImageTasksInput) SetImportTaskIds(v []*string) *DescribeImportImageTasksInput {
+func (s *DescribeImportImageTasksInput) SetImportTaskIds(v []string) *DescribeImportImageTasksInput {
 	s.ImportTaskIds = v
 	return s
 }
@@ -25626,7 +25620,7 @@ type DescribeImportImageTasksOutput struct {
 
 	// A list of zero or more import image tasks that are currently active or were
 	// completed or canceled in the previous 7 days.
-	ImportImageTasks []*ImportImageTask `locationName:"importImageTaskSet" locationNameList:"item" type:"list"`
+	ImportImageTasks []ImportImageTask `locationName:"importImageTaskSet" locationNameList:"item" type:"list"`
 
 	// The token to use to get the next page of results. This value is null when
 	// there are no more results to return.
@@ -25644,7 +25638,7 @@ func (s DescribeImportImageTasksOutput) GoString() string {
 }
 
 // SetImportImageTasks sets the ImportImageTasks field's value.
-func (s *DescribeImportImageTasksOutput) SetImportImageTasks(v []*ImportImageTask) *DescribeImportImageTasksOutput {
+func (s *DescribeImportImageTasksOutput) SetImportImageTasks(v []ImportImageTask) *DescribeImportImageTasksOutput {
 	s.ImportImageTasks = v
 	return s
 }
@@ -25667,10 +25661,10 @@ type DescribeImportSnapshotTasksInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// One or more filters.
-	Filters []*Filter `locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// A list of import snapshot task IDs.
-	ImportTaskIds []*string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
+	ImportTaskIds []string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
@@ -25697,13 +25691,13 @@ func (s *DescribeImportSnapshotTasksInput) SetDryRun(v bool) *DescribeImportSnap
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeImportSnapshotTasksInput) SetFilters(v []*Filter) *DescribeImportSnapshotTasksInput {
+func (s *DescribeImportSnapshotTasksInput) SetFilters(v []Filter) *DescribeImportSnapshotTasksInput {
 	s.Filters = v
 	return s
 }
 
 // SetImportTaskIds sets the ImportTaskIds field's value.
-func (s *DescribeImportSnapshotTasksInput) SetImportTaskIds(v []*string) *DescribeImportSnapshotTasksInput {
+func (s *DescribeImportSnapshotTasksInput) SetImportTaskIds(v []string) *DescribeImportSnapshotTasksInput {
 	s.ImportTaskIds = v
 	return s
 }
@@ -25727,7 +25721,7 @@ type DescribeImportSnapshotTasksOutput struct {
 
 	// A list of zero or more import snapshot tasks that are currently active or
 	// were completed or canceled in the previous 7 days.
-	ImportSnapshotTasks []*ImportSnapshotTask `locationName:"importSnapshotTaskSet" locationNameList:"item" type:"list"`
+	ImportSnapshotTasks []ImportSnapshotTask `locationName:"importSnapshotTaskSet" locationNameList:"item" type:"list"`
 
 	// The token to use to get the next page of results. This value is null when
 	// there are no more results to return.
@@ -25745,7 +25739,7 @@ func (s DescribeImportSnapshotTasksOutput) GoString() string {
 }
 
 // SetImportSnapshotTasks sets the ImportSnapshotTasks field's value.
-func (s *DescribeImportSnapshotTasksOutput) SetImportSnapshotTasks(v []*ImportSnapshotTask) *DescribeImportSnapshotTasksOutput {
+func (s *DescribeImportSnapshotTasksOutput) SetImportSnapshotTasks(v []ImportSnapshotTask) *DescribeImportSnapshotTasksOutput {
 	s.ImportSnapshotTasks = v
 	return s
 }
@@ -25831,7 +25825,7 @@ type DescribeInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The block device mapping of the instance.
-	BlockDeviceMappings []*InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// If the value is true, you can't terminate the instance through the Amazon
 	// EC2 console, CLI, or API; otherwise, you can.
@@ -25844,7 +25838,7 @@ type DescribeInstanceAttributeOutput struct {
 	EnaSupport *AttributeBooleanValue `locationName:"enaSupport" type:"structure"`
 
 	// The security groups associated with the instance.
-	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
@@ -25860,7 +25854,7 @@ type DescribeInstanceAttributeOutput struct {
 	KernelId *AttributeValue `locationName:"kernel" type:"structure"`
 
 	// A list of product codes.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The RAM disk ID.
 	RamdiskId *AttributeValue `locationName:"ramdisk" type:"structure"`
@@ -25892,7 +25886,7 @@ func (s DescribeInstanceAttributeOutput) GoString() string {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *DescribeInstanceAttributeOutput) SetBlockDeviceMappings(v []*InstanceBlockDeviceMapping) *DescribeInstanceAttributeOutput {
+func (s *DescribeInstanceAttributeOutput) SetBlockDeviceMappings(v []InstanceBlockDeviceMapping) *DescribeInstanceAttributeOutput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -25916,7 +25910,7 @@ func (s *DescribeInstanceAttributeOutput) SetEnaSupport(v *AttributeBooleanValue
 }
 
 // SetGroups sets the Groups field's value.
-func (s *DescribeInstanceAttributeOutput) SetGroups(v []*GroupIdentifier) *DescribeInstanceAttributeOutput {
+func (s *DescribeInstanceAttributeOutput) SetGroups(v []GroupIdentifier) *DescribeInstanceAttributeOutput {
 	s.Groups = v
 	return s
 }
@@ -25946,7 +25940,7 @@ func (s *DescribeInstanceAttributeOutput) SetKernelId(v *AttributeValue) *Descri
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeInstanceAttributeOutput) SetProductCodes(v []*ProductCode) *DescribeInstanceAttributeOutput {
+func (s *DescribeInstanceAttributeOutput) SetProductCodes(v []ProductCode) *DescribeInstanceAttributeOutput {
 	s.ProductCodes = v
 	return s
 }
@@ -26027,7 +26021,7 @@ type DescribeInstanceStatusInput struct {
 	//
 	//    * system-status.status - The system status of the instance (ok | impaired
 	//    | initializing | insufficient-data | not-applicable).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// When true, includes the health status for all instances. When false, includes
 	// the health status for running instances only.
@@ -26040,7 +26034,7 @@ type DescribeInstanceStatusInput struct {
 	// Default: Describes all your instances.
 	//
 	// Constraints: Maximum 100 explicitly specified instance IDs.
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
@@ -26069,7 +26063,7 @@ func (s *DescribeInstanceStatusInput) SetDryRun(v bool) *DescribeInstanceStatusI
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeInstanceStatusInput) SetFilters(v []*Filter) *DescribeInstanceStatusInput {
+func (s *DescribeInstanceStatusInput) SetFilters(v []Filter) *DescribeInstanceStatusInput {
 	s.Filters = v
 	return s
 }
@@ -26081,7 +26075,7 @@ func (s *DescribeInstanceStatusInput) SetIncludeAllInstances(v bool) *DescribeIn
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstanceStatusInput) SetInstanceIds(v []*string) *DescribeInstanceStatusInput {
+func (s *DescribeInstanceStatusInput) SetInstanceIds(v []string) *DescribeInstanceStatusInput {
 	s.InstanceIds = v
 	return s
 }
@@ -26104,7 +26098,7 @@ type DescribeInstanceStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more instance status descriptions.
-	InstanceStatuses []*InstanceStatus `locationName:"instanceStatusSet" locationNameList:"item" type:"list"`
+	InstanceStatuses []InstanceStatus `locationName:"instanceStatusSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -26122,7 +26116,7 @@ func (s DescribeInstanceStatusOutput) GoString() string {
 }
 
 // SetInstanceStatuses sets the InstanceStatuses field's value.
-func (s *DescribeInstanceStatusOutput) SetInstanceStatuses(v []*InstanceStatus) *DescribeInstanceStatusOutput {
+func (s *DescribeInstanceStatusOutput) SetInstanceStatuses(v []InstanceStatus) *DescribeInstanceStatusOutput {
 	s.InstanceStatuses = v
 	return s
 }
@@ -26383,12 +26377,12 @@ type DescribeInstancesInput struct {
 	//    | hvm).
 	//
 	//    * vpc-id - The ID of the VPC that the instance is running in.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more instance IDs.
 	//
 	// Default: Describes all your instances.
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
@@ -26417,13 +26411,13 @@ func (s *DescribeInstancesInput) SetDryRun(v bool) *DescribeInstancesInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeInstancesInput) SetFilters(v []*Filter) *DescribeInstancesInput {
+func (s *DescribeInstancesInput) SetFilters(v []Filter) *DescribeInstancesInput {
 	s.Filters = v
 	return s
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstancesInput) SetInstanceIds(v []*string) *DescribeInstancesInput {
+func (s *DescribeInstancesInput) SetInstanceIds(v []string) *DescribeInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -26450,7 +26444,7 @@ type DescribeInstancesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Zero or more reservations.
-	Reservations []*RunInstancesOutput `locationName:"reservationSet" locationNameList:"item" type:"list"`
+	Reservations []RunInstancesOutput `locationName:"reservationSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26470,7 +26464,7 @@ func (s *DescribeInstancesOutput) SetNextToken(v string) *DescribeInstancesOutpu
 }
 
 // SetReservations sets the Reservations field's value.
-func (s *DescribeInstancesOutput) SetReservations(v []*RunInstancesOutput) *DescribeInstancesOutput {
+func (s *DescribeInstancesOutput) SetReservations(v []RunInstancesOutput) *DescribeInstancesOutput {
 	s.Reservations = v
 	return s
 }
@@ -26510,12 +26504,12 @@ type DescribeInternetGatewaysInput struct {
 	//
 	//    * tag-value - The value of a tag assigned to the resource. This filter
 	//    is independent of the tag-key filter.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more Internet gateway IDs.
 	//
 	// Default: Describes all your Internet gateways.
-	InternetGatewayIds []*string `locationName:"internetGatewayId" locationNameList:"item" type:"list"`
+	InternetGatewayIds []string `locationName:"internetGatewayId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26535,13 +26529,13 @@ func (s *DescribeInternetGatewaysInput) SetDryRun(v bool) *DescribeInternetGatew
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeInternetGatewaysInput) SetFilters(v []*Filter) *DescribeInternetGatewaysInput {
+func (s *DescribeInternetGatewaysInput) SetFilters(v []Filter) *DescribeInternetGatewaysInput {
 	s.Filters = v
 	return s
 }
 
 // SetInternetGatewayIds sets the InternetGatewayIds field's value.
-func (s *DescribeInternetGatewaysInput) SetInternetGatewayIds(v []*string) *DescribeInternetGatewaysInput {
+func (s *DescribeInternetGatewaysInput) SetInternetGatewayIds(v []string) *DescribeInternetGatewaysInput {
 	s.InternetGatewayIds = v
 	return s
 }
@@ -26552,7 +26546,7 @@ type DescribeInternetGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more Internet gateways.
-	InternetGateways []*InternetGateway `locationName:"internetGatewaySet" locationNameList:"item" type:"list"`
+	InternetGateways []InternetGateway `locationName:"internetGatewaySet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26566,7 +26560,7 @@ func (s DescribeInternetGatewaysOutput) GoString() string {
 }
 
 // SetInternetGateways sets the InternetGateways field's value.
-func (s *DescribeInternetGatewaysOutput) SetInternetGateways(v []*InternetGateway) *DescribeInternetGatewaysOutput {
+func (s *DescribeInternetGatewaysOutput) SetInternetGateways(v []InternetGateway) *DescribeInternetGatewaysOutput {
 	s.InternetGateways = v
 	return s
 }
@@ -26587,12 +26581,12 @@ type DescribeKeyPairsInput struct {
 	//    * fingerprint - The fingerprint of the key pair.
 	//
 	//    * key-name - The name of the key pair.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more key pair names.
 	//
 	// Default: Describes all your key pairs.
-	KeyNames []*string `locationName:"KeyName" locationNameList:"KeyName" type:"list"`
+	KeyNames []string `locationName:"KeyName" locationNameList:"KeyName" type:"list"`
 }
 
 // String returns the string representation
@@ -26612,13 +26606,13 @@ func (s *DescribeKeyPairsInput) SetDryRun(v bool) *DescribeKeyPairsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeKeyPairsInput) SetFilters(v []*Filter) *DescribeKeyPairsInput {
+func (s *DescribeKeyPairsInput) SetFilters(v []Filter) *DescribeKeyPairsInput {
 	s.Filters = v
 	return s
 }
 
 // SetKeyNames sets the KeyNames field's value.
-func (s *DescribeKeyPairsInput) SetKeyNames(v []*string) *DescribeKeyPairsInput {
+func (s *DescribeKeyPairsInput) SetKeyNames(v []string) *DescribeKeyPairsInput {
 	s.KeyNames = v
 	return s
 }
@@ -26629,7 +26623,7 @@ type DescribeKeyPairsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more key pairs.
-	KeyPairs []*KeyPairInfo `locationName:"keySet" locationNameList:"item" type:"list"`
+	KeyPairs []KeyPairInfo `locationName:"keySet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26643,7 +26637,7 @@ func (s DescribeKeyPairsOutput) GoString() string {
 }
 
 // SetKeyPairs sets the KeyPairs field's value.
-func (s *DescribeKeyPairsOutput) SetKeyPairs(v []*KeyPairInfo) *DescribeKeyPairsOutput {
+func (s *DescribeKeyPairsOutput) SetKeyPairs(v []KeyPairInfo) *DescribeKeyPairsOutput {
 	s.KeyPairs = v
 	return s
 }
@@ -26663,7 +26657,7 @@ type DescribeMovingAddressesInput struct {
 	//
 	//    * moving-status - The status of the Elastic IP address (MovingToVpc |
 	//    RestoringToClassic).
-	Filters []*Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results of the initial request can be seen by sending another
@@ -26677,7 +26671,7 @@ type DescribeMovingAddressesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// One or more Elastic IP addresses.
-	PublicIps []*string `locationName:"publicIp" locationNameList:"item" type:"list"`
+	PublicIps []string `locationName:"publicIp" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26697,7 +26691,7 @@ func (s *DescribeMovingAddressesInput) SetDryRun(v bool) *DescribeMovingAddresse
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeMovingAddressesInput) SetFilters(v []*Filter) *DescribeMovingAddressesInput {
+func (s *DescribeMovingAddressesInput) SetFilters(v []Filter) *DescribeMovingAddressesInput {
 	s.Filters = v
 	return s
 }
@@ -26715,7 +26709,7 @@ func (s *DescribeMovingAddressesInput) SetNextToken(v string) *DescribeMovingAdd
 }
 
 // SetPublicIps sets the PublicIps field's value.
-func (s *DescribeMovingAddressesInput) SetPublicIps(v []*string) *DescribeMovingAddressesInput {
+func (s *DescribeMovingAddressesInput) SetPublicIps(v []string) *DescribeMovingAddressesInput {
 	s.PublicIps = v
 	return s
 }
@@ -26726,7 +26720,7 @@ type DescribeMovingAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status for each Elastic IP address.
-	MovingAddressStatuses []*MovingAddressStatus `locationName:"movingAddressStatusSet" locationNameList:"item" type:"list"`
+	MovingAddressStatuses []MovingAddressStatus `locationName:"movingAddressStatusSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -26744,7 +26738,7 @@ func (s DescribeMovingAddressesOutput) GoString() string {
 }
 
 // SetMovingAddressStatuses sets the MovingAddressStatuses field's value.
-func (s *DescribeMovingAddressesOutput) SetMovingAddressStatuses(v []*MovingAddressStatus) *DescribeMovingAddressesOutput {
+func (s *DescribeMovingAddressesOutput) SetMovingAddressStatuses(v []MovingAddressStatus) *DescribeMovingAddressesOutput {
 	s.MovingAddressStatuses = v
 	return s
 }
@@ -26786,7 +26780,7 @@ type DescribeNatGatewaysInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC in which the NAT gateway resides.
-	Filter []*Filter `locationNameList:"Filter" type:"list"`
+	Filter []Filter `locationNameList:"Filter" type:"list"`
 
 	// The maximum number of items to return for this request. The request returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -26797,7 +26791,7 @@ type DescribeNatGatewaysInput struct {
 	MaxResults *int64 `type:"integer"`
 
 	// One or more NAT gateway IDs.
-	NatGatewayIds []*string `locationName:"NatGatewayId" locationNameList:"item" type:"list"`
+	NatGatewayIds []string `locationName:"NatGatewayId" locationNameList:"item" type:"list"`
 
 	// The token to retrieve the next page of results.
 	NextToken *string `type:"string"`
@@ -26814,7 +26808,7 @@ func (s DescribeNatGatewaysInput) GoString() string {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *DescribeNatGatewaysInput) SetFilter(v []*Filter) *DescribeNatGatewaysInput {
+func (s *DescribeNatGatewaysInput) SetFilter(v []Filter) *DescribeNatGatewaysInput {
 	s.Filter = v
 	return s
 }
@@ -26826,7 +26820,7 @@ func (s *DescribeNatGatewaysInput) SetMaxResults(v int64) *DescribeNatGatewaysIn
 }
 
 // SetNatGatewayIds sets the NatGatewayIds field's value.
-func (s *DescribeNatGatewaysInput) SetNatGatewayIds(v []*string) *DescribeNatGatewaysInput {
+func (s *DescribeNatGatewaysInput) SetNatGatewayIds(v []string) *DescribeNatGatewaysInput {
 	s.NatGatewayIds = v
 	return s
 }
@@ -26843,7 +26837,7 @@ type DescribeNatGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the NAT gateways.
-	NatGateways []*NatGateway `locationName:"natGatewaySet" locationNameList:"item" type:"list"`
+	NatGateways []NatGateway `locationName:"natGatewaySet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
@@ -26861,7 +26855,7 @@ func (s DescribeNatGatewaysOutput) GoString() string {
 }
 
 // SetNatGateways sets the NatGateways field's value.
-func (s *DescribeNatGatewaysOutput) SetNatGateways(v []*NatGateway) *DescribeNatGatewaysOutput {
+func (s *DescribeNatGatewaysOutput) SetNatGateways(v []NatGateway) *DescribeNatGatewaysOutput {
 	s.NatGateways = v
 	return s
 }
@@ -26938,12 +26932,12 @@ type DescribeNetworkAclsInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC for the network ACL.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more network ACL IDs.
 	//
 	// Default: Describes all your network ACLs.
-	NetworkAclIds []*string `locationName:"NetworkAclId" locationNameList:"item" type:"list"`
+	NetworkAclIds []string `locationName:"NetworkAclId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26963,13 +26957,13 @@ func (s *DescribeNetworkAclsInput) SetDryRun(v bool) *DescribeNetworkAclsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeNetworkAclsInput) SetFilters(v []*Filter) *DescribeNetworkAclsInput {
+func (s *DescribeNetworkAclsInput) SetFilters(v []Filter) *DescribeNetworkAclsInput {
 	s.Filters = v
 	return s
 }
 
 // SetNetworkAclIds sets the NetworkAclIds field's value.
-func (s *DescribeNetworkAclsInput) SetNetworkAclIds(v []*string) *DescribeNetworkAclsInput {
+func (s *DescribeNetworkAclsInput) SetNetworkAclIds(v []string) *DescribeNetworkAclsInput {
 	s.NetworkAclIds = v
 	return s
 }
@@ -26980,7 +26974,7 @@ type DescribeNetworkAclsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more network ACLs.
-	NetworkAcls []*NetworkAcl `locationName:"networkAclSet" locationNameList:"item" type:"list"`
+	NetworkAcls []NetworkAcl `locationName:"networkAclSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -26994,7 +26988,7 @@ func (s DescribeNetworkAclsOutput) GoString() string {
 }
 
 // SetNetworkAcls sets the NetworkAcls field's value.
-func (s *DescribeNetworkAclsOutput) SetNetworkAcls(v []*NetworkAcl) *DescribeNetworkAclsOutput {
+func (s *DescribeNetworkAclsOutput) SetNetworkAcls(v []NetworkAcl) *DescribeNetworkAclsOutput {
 	s.NetworkAcls = v
 	return s
 }
@@ -27073,7 +27067,7 @@ type DescribeNetworkInterfaceAttributeOutput struct {
 	Description *AttributeValue `locationName:"description" type:"structure"`
 
 	// The security groups associated with the network interface.
-	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
@@ -27105,7 +27099,7 @@ func (s *DescribeNetworkInterfaceAttributeOutput) SetDescription(v *AttributeVal
 }
 
 // SetGroups sets the Groups field's value.
-func (s *DescribeNetworkInterfaceAttributeOutput) SetGroups(v []*GroupIdentifier) *DescribeNetworkInterfaceAttributeOutput {
+func (s *DescribeNetworkInterfaceAttributeOutput) SetGroups(v []GroupIdentifier) *DescribeNetworkInterfaceAttributeOutput {
 	s.Groups = v
 	return s
 }
@@ -27141,7 +27135,7 @@ type DescribeNetworkInterfacePermissionsInput struct {
 	//
 	//    * network-interface-permission.permission - The type of permission (INSTANCE-ATTACH
 	//    | EIP-ASSOCIATE).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. If
@@ -27149,7 +27143,7 @@ type DescribeNetworkInterfacePermissionsInput struct {
 	MaxResults *int64 `type:"integer"`
 
 	// One or more network interface permission IDs.
-	NetworkInterfacePermissionIds []*string `locationName:"NetworkInterfacePermissionId" type:"list"`
+	NetworkInterfacePermissionIds []string `locationName:"NetworkInterfacePermissionId" type:"list"`
 
 	// The token to request the next page of results.
 	NextToken *string `type:"string"`
@@ -27166,7 +27160,7 @@ func (s DescribeNetworkInterfacePermissionsInput) GoString() string {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeNetworkInterfacePermissionsInput) SetFilters(v []*Filter) *DescribeNetworkInterfacePermissionsInput {
+func (s *DescribeNetworkInterfacePermissionsInput) SetFilters(v []Filter) *DescribeNetworkInterfacePermissionsInput {
 	s.Filters = v
 	return s
 }
@@ -27178,7 +27172,7 @@ func (s *DescribeNetworkInterfacePermissionsInput) SetMaxResults(v int64) *Descr
 }
 
 // SetNetworkInterfacePermissionIds sets the NetworkInterfacePermissionIds field's value.
-func (s *DescribeNetworkInterfacePermissionsInput) SetNetworkInterfacePermissionIds(v []*string) *DescribeNetworkInterfacePermissionsInput {
+func (s *DescribeNetworkInterfacePermissionsInput) SetNetworkInterfacePermissionIds(v []string) *DescribeNetworkInterfacePermissionsInput {
 	s.NetworkInterfacePermissionIds = v
 	return s
 }
@@ -27195,7 +27189,7 @@ type DescribeNetworkInterfacePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The network interface permissions.
-	NetworkInterfacePermissions []*NetworkInterfacePermission `locationName:"networkInterfacePermissions" locationNameList:"item" type:"list"`
+	NetworkInterfacePermissions []NetworkInterfacePermission `locationName:"networkInterfacePermissions" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -27212,7 +27206,7 @@ func (s DescribeNetworkInterfacePermissionsOutput) GoString() string {
 }
 
 // SetNetworkInterfacePermissions sets the NetworkInterfacePermissions field's value.
-func (s *DescribeNetworkInterfacePermissionsOutput) SetNetworkInterfacePermissions(v []*NetworkInterfacePermission) *DescribeNetworkInterfacePermissionsOutput {
+func (s *DescribeNetworkInterfacePermissionsOutput) SetNetworkInterfacePermissions(v []NetworkInterfacePermission) *DescribeNetworkInterfacePermissionsOutput {
 	s.NetworkInterfacePermissions = v
 	return s
 }
@@ -27345,12 +27339,12 @@ type DescribeNetworkInterfacesInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC for the network interface.
-	Filters []*Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
 
 	// One or more network interface IDs.
 	//
 	// Default: Describes all your network interfaces.
-	NetworkInterfaceIds []*string `locationName:"NetworkInterfaceId" locationNameList:"item" type:"list"`
+	NetworkInterfaceIds []string `locationName:"NetworkInterfaceId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27370,13 +27364,13 @@ func (s *DescribeNetworkInterfacesInput) SetDryRun(v bool) *DescribeNetworkInter
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeNetworkInterfacesInput) SetFilters(v []*Filter) *DescribeNetworkInterfacesInput {
+func (s *DescribeNetworkInterfacesInput) SetFilters(v []Filter) *DescribeNetworkInterfacesInput {
 	s.Filters = v
 	return s
 }
 
 // SetNetworkInterfaceIds sets the NetworkInterfaceIds field's value.
-func (s *DescribeNetworkInterfacesInput) SetNetworkInterfaceIds(v []*string) *DescribeNetworkInterfacesInput {
+func (s *DescribeNetworkInterfacesInput) SetNetworkInterfaceIds(v []string) *DescribeNetworkInterfacesInput {
 	s.NetworkInterfaceIds = v
 	return s
 }
@@ -27387,7 +27381,7 @@ type DescribeNetworkInterfacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more network interfaces.
-	NetworkInterfaces []*NetworkInterface `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
+	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27401,7 +27395,7 @@ func (s DescribeNetworkInterfacesOutput) GoString() string {
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *DescribeNetworkInterfacesOutput) SetNetworkInterfaces(v []*NetworkInterface) *DescribeNetworkInterfacesOutput {
+func (s *DescribeNetworkInterfacesOutput) SetNetworkInterfaces(v []NetworkInterface) *DescribeNetworkInterfacesOutput {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -27425,12 +27419,12 @@ type DescribePlacementGroupsInput struct {
 	//    | deleted).
 	//
 	//    * strategy - The strategy of the placement group (cluster).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more placement group names.
 	//
 	// Default: Describes all your placement groups, or only those otherwise specified.
-	GroupNames []*string `locationName:"groupName" type:"list"`
+	GroupNames []string `locationName:"groupName" type:"list"`
 }
 
 // String returns the string representation
@@ -27450,13 +27444,13 @@ func (s *DescribePlacementGroupsInput) SetDryRun(v bool) *DescribePlacementGroup
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribePlacementGroupsInput) SetFilters(v []*Filter) *DescribePlacementGroupsInput {
+func (s *DescribePlacementGroupsInput) SetFilters(v []Filter) *DescribePlacementGroupsInput {
 	s.Filters = v
 	return s
 }
 
 // SetGroupNames sets the GroupNames field's value.
-func (s *DescribePlacementGroupsInput) SetGroupNames(v []*string) *DescribePlacementGroupsInput {
+func (s *DescribePlacementGroupsInput) SetGroupNames(v []string) *DescribePlacementGroupsInput {
 	s.GroupNames = v
 	return s
 }
@@ -27467,7 +27461,7 @@ type DescribePlacementGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more placement groups.
-	PlacementGroups []*PlacementGroup `locationName:"placementGroupSet" locationNameList:"item" type:"list"`
+	PlacementGroups []PlacementGroup `locationName:"placementGroupSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27481,7 +27475,7 @@ func (s DescribePlacementGroupsOutput) GoString() string {
 }
 
 // SetPlacementGroups sets the PlacementGroups field's value.
-func (s *DescribePlacementGroupsOutput) SetPlacementGroups(v []*PlacementGroup) *DescribePlacementGroupsOutput {
+func (s *DescribePlacementGroupsOutput) SetPlacementGroups(v []PlacementGroup) *DescribePlacementGroupsOutput {
 	s.PlacementGroups = v
 	return s
 }
@@ -27502,7 +27496,7 @@ type DescribePrefixListsInput struct {
 	//    * prefix-list-id: The ID of a prefix list.
 	//
 	//    * prefix-list-name: The name of a prefix list.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of items to return for this request. The request returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -27517,7 +27511,7 @@ type DescribePrefixListsInput struct {
 	NextToken *string `type:"string"`
 
 	// One or more prefix list IDs.
-	PrefixListIds []*string `locationName:"PrefixListId" locationNameList:"item" type:"list"`
+	PrefixListIds []string `locationName:"PrefixListId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27537,7 +27531,7 @@ func (s *DescribePrefixListsInput) SetDryRun(v bool) *DescribePrefixListsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribePrefixListsInput) SetFilters(v []*Filter) *DescribePrefixListsInput {
+func (s *DescribePrefixListsInput) SetFilters(v []Filter) *DescribePrefixListsInput {
 	s.Filters = v
 	return s
 }
@@ -27555,7 +27549,7 @@ func (s *DescribePrefixListsInput) SetNextToken(v string) *DescribePrefixListsIn
 }
 
 // SetPrefixListIds sets the PrefixListIds field's value.
-func (s *DescribePrefixListsInput) SetPrefixListIds(v []*string) *DescribePrefixListsInput {
+func (s *DescribePrefixListsInput) SetPrefixListIds(v []string) *DescribePrefixListsInput {
 	s.PrefixListIds = v
 	return s
 }
@@ -27570,7 +27564,7 @@ type DescribePrefixListsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// All available prefix lists.
-	PrefixLists []*PrefixList `locationName:"prefixListSet" locationNameList:"item" type:"list"`
+	PrefixLists []PrefixList `locationName:"prefixListSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27590,7 +27584,7 @@ func (s *DescribePrefixListsOutput) SetNextToken(v string) *DescribePrefixListsO
 }
 
 // SetPrefixLists sets the PrefixLists field's value.
-func (s *DescribePrefixListsOutput) SetPrefixLists(v []*PrefixList) *DescribePrefixListsOutput {
+func (s *DescribePrefixListsOutput) SetPrefixLists(v []PrefixList) *DescribePrefixListsOutput {
 	s.PrefixLists = v
 	return s
 }
@@ -27611,10 +27605,10 @@ type DescribeRegionsInput struct {
 	//    * endpoint - The endpoint of the region (for example, ec2.us-east-1.amazonaws.com).
 	//
 	//    * region-name - The name of the region (for example, us-east-1).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The names of one or more regions.
-	RegionNames []*string `locationName:"RegionName" locationNameList:"RegionName" type:"list"`
+	RegionNames []string `locationName:"RegionName" locationNameList:"RegionName" type:"list"`
 }
 
 // String returns the string representation
@@ -27634,13 +27628,13 @@ func (s *DescribeRegionsInput) SetDryRun(v bool) *DescribeRegionsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeRegionsInput) SetFilters(v []*Filter) *DescribeRegionsInput {
+func (s *DescribeRegionsInput) SetFilters(v []Filter) *DescribeRegionsInput {
 	s.Filters = v
 	return s
 }
 
 // SetRegionNames sets the RegionNames field's value.
-func (s *DescribeRegionsInput) SetRegionNames(v []*string) *DescribeRegionsInput {
+func (s *DescribeRegionsInput) SetRegionNames(v []string) *DescribeRegionsInput {
 	s.RegionNames = v
 	return s
 }
@@ -27651,7 +27645,7 @@ type DescribeRegionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more regions.
-	Regions []*Region `locationName:"regionInfo" locationNameList:"item" type:"list"`
+	Regions []Region `locationName:"regionInfo" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27665,7 +27659,7 @@ func (s DescribeRegionsOutput) GoString() string {
 }
 
 // SetRegions sets the Regions field's value.
-func (s *DescribeRegionsOutput) SetRegions(v []*Region) *DescribeRegionsOutput {
+func (s *DescribeRegionsOutput) SetRegions(v []Region) *DescribeRegionsOutput {
 	s.Regions = v
 	return s
 }
@@ -27734,7 +27728,7 @@ type DescribeReservedInstancesInput struct {
 	//
 	//    * usage-price - The usage price of the Reserved Instance, per hour (for
 	//    example, 0.84).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// Describes whether the Reserved Instance is Standard or Convertible.
 	OfferingClass OfferingClassType `type:"string"`
@@ -27747,7 +27741,7 @@ type DescribeReservedInstancesInput struct {
 	// One or more Reserved Instance IDs.
 	//
 	// Default: Describes all your Reserved Instances, or only those otherwise specified.
-	ReservedInstancesIds []*string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list"`
+	ReservedInstancesIds []string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list"`
 }
 
 // String returns the string representation
@@ -27767,7 +27761,7 @@ func (s *DescribeReservedInstancesInput) SetDryRun(v bool) *DescribeReservedInst
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesInput) SetFilters(v []*Filter) *DescribeReservedInstancesInput {
+func (s *DescribeReservedInstancesInput) SetFilters(v []Filter) *DescribeReservedInstancesInput {
 	s.Filters = v
 	return s
 }
@@ -27785,7 +27779,7 @@ func (s *DescribeReservedInstancesInput) SetOfferingType(v OfferingTypeValues) *
 }
 
 // SetReservedInstancesIds sets the ReservedInstancesIds field's value.
-func (s *DescribeReservedInstancesInput) SetReservedInstancesIds(v []*string) *DescribeReservedInstancesInput {
+func (s *DescribeReservedInstancesInput) SetReservedInstancesIds(v []string) *DescribeReservedInstancesInput {
 	s.ReservedInstancesIds = v
 	return s
 }
@@ -27805,7 +27799,7 @@ type DescribeReservedInstancesListingsInput struct {
 	//    | cancelled | closed).
 	//
 	//    * status-message - The reason for the status.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more Reserved Instance IDs.
 	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
@@ -27825,7 +27819,7 @@ func (s DescribeReservedInstancesListingsInput) GoString() string {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesListingsInput) SetFilters(v []*Filter) *DescribeReservedInstancesListingsInput {
+func (s *DescribeReservedInstancesListingsInput) SetFilters(v []Filter) *DescribeReservedInstancesListingsInput {
 	s.Filters = v
 	return s
 }
@@ -27848,7 +27842,7 @@ type DescribeReservedInstancesListingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Reserved Instance listing.
-	ReservedInstancesListings []*ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
+	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27862,7 +27856,7 @@ func (s DescribeReservedInstancesListingsOutput) GoString() string {
 }
 
 // SetReservedInstancesListings sets the ReservedInstancesListings field's value.
-func (s *DescribeReservedInstancesListingsOutput) SetReservedInstancesListings(v []*ReservedInstancesListing) *DescribeReservedInstancesListingsOutput {
+func (s *DescribeReservedInstancesListingsOutput) SetReservedInstancesListings(v []ReservedInstancesListing) *DescribeReservedInstancesListingsOutput {
 	s.ReservedInstancesListings = v
 	return s
 }
@@ -27906,13 +27900,13 @@ type DescribeReservedInstancesModificationsInput struct {
 	//    * status-message - The reason for the status.
 	//
 	//    * update-date - The time when the modification request was last updated.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The token to retrieve the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// IDs for the submitted modification request.
-	ReservedInstancesModificationIds []*string `locationName:"ReservedInstancesModificationId" locationNameList:"ReservedInstancesModificationId" type:"list"`
+	ReservedInstancesModificationIds []string `locationName:"ReservedInstancesModificationId" locationNameList:"ReservedInstancesModificationId" type:"list"`
 }
 
 // String returns the string representation
@@ -27926,7 +27920,7 @@ func (s DescribeReservedInstancesModificationsInput) GoString() string {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesModificationsInput) SetFilters(v []*Filter) *DescribeReservedInstancesModificationsInput {
+func (s *DescribeReservedInstancesModificationsInput) SetFilters(v []Filter) *DescribeReservedInstancesModificationsInput {
 	s.Filters = v
 	return s
 }
@@ -27938,7 +27932,7 @@ func (s *DescribeReservedInstancesModificationsInput) SetNextToken(v string) *De
 }
 
 // SetReservedInstancesModificationIds sets the ReservedInstancesModificationIds field's value.
-func (s *DescribeReservedInstancesModificationsInput) SetReservedInstancesModificationIds(v []*string) *DescribeReservedInstancesModificationsInput {
+func (s *DescribeReservedInstancesModificationsInput) SetReservedInstancesModificationIds(v []string) *DescribeReservedInstancesModificationsInput {
 	s.ReservedInstancesModificationIds = v
 	return s
 }
@@ -27953,7 +27947,7 @@ type DescribeReservedInstancesModificationsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The Reserved Instance modification information.
-	ReservedInstancesModifications []*ReservedInstancesModification `locationName:"reservedInstancesModificationsSet" locationNameList:"item" type:"list"`
+	ReservedInstancesModifications []ReservedInstancesModification `locationName:"reservedInstancesModificationsSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -27973,7 +27967,7 @@ func (s *DescribeReservedInstancesModificationsOutput) SetNextToken(v string) *D
 }
 
 // SetReservedInstancesModifications sets the ReservedInstancesModifications field's value.
-func (s *DescribeReservedInstancesModificationsOutput) SetReservedInstancesModifications(v []*ReservedInstancesModification) *DescribeReservedInstancesModificationsOutput {
+func (s *DescribeReservedInstancesModificationsOutput) SetReservedInstancesModifications(v []ReservedInstancesModification) *DescribeReservedInstancesModificationsOutput {
 	s.ReservedInstancesModifications = v
 	return s
 }
@@ -28027,7 +28021,7 @@ type DescribeReservedInstancesOfferingsInput struct {
 	//
 	//    * usage-price - The usage price of the Reserved Instance, per hour (for
 	//    example, 0.84).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// Include Reserved Instance Marketplace offerings in the response.
 	IncludeMarketplace *bool `type:"boolean"`
@@ -28085,7 +28079,7 @@ type DescribeReservedInstancesOfferingsInput struct {
 	ProductDescription RIProductDescription `type:"string"`
 
 	// One or more Reserved Instances offering IDs.
-	ReservedInstancesOfferingIds []*string `locationName:"ReservedInstancesOfferingId" type:"list"`
+	ReservedInstancesOfferingIds []string `locationName:"ReservedInstancesOfferingId" type:"list"`
 }
 
 // String returns the string representation
@@ -28111,7 +28105,7 @@ func (s *DescribeReservedInstancesOfferingsInput) SetDryRun(v bool) *DescribeRes
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetFilters(v []*Filter) *DescribeReservedInstancesOfferingsInput {
+func (s *DescribeReservedInstancesOfferingsInput) SetFilters(v []Filter) *DescribeReservedInstancesOfferingsInput {
 	s.Filters = v
 	return s
 }
@@ -28183,7 +28177,7 @@ func (s *DescribeReservedInstancesOfferingsInput) SetProductDescription(v RIProd
 }
 
 // SetReservedInstancesOfferingIds sets the ReservedInstancesOfferingIds field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetReservedInstancesOfferingIds(v []*string) *DescribeReservedInstancesOfferingsInput {
+func (s *DescribeReservedInstancesOfferingsInput) SetReservedInstancesOfferingIds(v []string) *DescribeReservedInstancesOfferingsInput {
 	s.ReservedInstancesOfferingIds = v
 	return s
 }
@@ -28198,7 +28192,7 @@ type DescribeReservedInstancesOfferingsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of Reserved Instances offerings.
-	ReservedInstancesOfferings []*ReservedInstancesOffering `locationName:"reservedInstancesOfferingsSet" locationNameList:"item" type:"list"`
+	ReservedInstancesOfferings []ReservedInstancesOffering `locationName:"reservedInstancesOfferingsSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28218,7 +28212,7 @@ func (s *DescribeReservedInstancesOfferingsOutput) SetNextToken(v string) *Descr
 }
 
 // SetReservedInstancesOfferings sets the ReservedInstancesOfferings field's value.
-func (s *DescribeReservedInstancesOfferingsOutput) SetReservedInstancesOfferings(v []*ReservedInstancesOffering) *DescribeReservedInstancesOfferingsOutput {
+func (s *DescribeReservedInstancesOfferingsOutput) SetReservedInstancesOfferings(v []ReservedInstancesOffering) *DescribeReservedInstancesOfferingsOutput {
 	s.ReservedInstancesOfferings = v
 	return s
 }
@@ -28229,7 +28223,7 @@ type DescribeReservedInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Reserved Instances.
-	ReservedInstances []*ReservedInstances `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
+	ReservedInstances []ReservedInstances `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28243,7 +28237,7 @@ func (s DescribeReservedInstancesOutput) GoString() string {
 }
 
 // SetReservedInstances sets the ReservedInstances field's value.
-func (s *DescribeReservedInstancesOutput) SetReservedInstances(v []*ReservedInstances) *DescribeReservedInstancesOutput {
+func (s *DescribeReservedInstancesOutput) SetReservedInstances(v []ReservedInstances) *DescribeReservedInstancesOutput {
 	s.ReservedInstances = v
 	return s
 }
@@ -28325,12 +28319,12 @@ type DescribeRouteTablesInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC for the route table.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more route table IDs.
 	//
 	// Default: Describes all your route tables.
-	RouteTableIds []*string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
+	RouteTableIds []string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28350,13 +28344,13 @@ func (s *DescribeRouteTablesInput) SetDryRun(v bool) *DescribeRouteTablesInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeRouteTablesInput) SetFilters(v []*Filter) *DescribeRouteTablesInput {
+func (s *DescribeRouteTablesInput) SetFilters(v []Filter) *DescribeRouteTablesInput {
 	s.Filters = v
 	return s
 }
 
 // SetRouteTableIds sets the RouteTableIds field's value.
-func (s *DescribeRouteTablesInput) SetRouteTableIds(v []*string) *DescribeRouteTablesInput {
+func (s *DescribeRouteTablesInput) SetRouteTableIds(v []string) *DescribeRouteTablesInput {
 	s.RouteTableIds = v
 	return s
 }
@@ -28367,7 +28361,7 @@ type DescribeRouteTablesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more route tables.
-	RouteTables []*RouteTable `locationName:"routeTableSet" locationNameList:"item" type:"list"`
+	RouteTables []RouteTable `locationName:"routeTableSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28381,7 +28375,7 @@ func (s DescribeRouteTablesOutput) GoString() string {
 }
 
 // SetRouteTables sets the RouteTables field's value.
-func (s *DescribeRouteTablesOutput) SetRouteTables(v []*RouteTable) *DescribeRouteTablesOutput {
+func (s *DescribeRouteTablesOutput) SetRouteTables(v []RouteTable) *DescribeRouteTablesOutput {
 	s.RouteTables = v
 	return s
 }
@@ -28406,7 +28400,7 @@ type DescribeScheduledInstanceAvailabilityInput struct {
 	//    * network-platform - The network platform (EC2-Classic or EC2-VPC).
 	//
 	//    * platform - The platform (Linux/UNIX or Windows).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The time period for the first schedule to start.
 	//
@@ -28477,7 +28471,7 @@ func (s *DescribeScheduledInstanceAvailabilityInput) SetDryRun(v bool) *Describe
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetFilters(v []*Filter) *DescribeScheduledInstanceAvailabilityInput {
+func (s *DescribeScheduledInstanceAvailabilityInput) SetFilters(v []Filter) *DescribeScheduledInstanceAvailabilityInput {
 	s.Filters = v
 	return s
 }
@@ -28528,7 +28522,7 @@ type DescribeScheduledInstanceAvailabilityOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the available Scheduled Instances.
-	ScheduledInstanceAvailabilitySet []*ScheduledInstanceAvailability `locationName:"scheduledInstanceAvailabilitySet" locationNameList:"item" type:"list"`
+	ScheduledInstanceAvailabilitySet []ScheduledInstanceAvailability `locationName:"scheduledInstanceAvailabilitySet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28548,7 +28542,7 @@ func (s *DescribeScheduledInstanceAvailabilityOutput) SetNextToken(v string) *De
 }
 
 // SetScheduledInstanceAvailabilitySet sets the ScheduledInstanceAvailabilitySet field's value.
-func (s *DescribeScheduledInstanceAvailabilityOutput) SetScheduledInstanceAvailabilitySet(v []*ScheduledInstanceAvailability) *DescribeScheduledInstanceAvailabilityOutput {
+func (s *DescribeScheduledInstanceAvailabilityOutput) SetScheduledInstanceAvailabilitySet(v []ScheduledInstanceAvailability) *DescribeScheduledInstanceAvailabilityOutput {
 	s.ScheduledInstanceAvailabilitySet = v
 	return s
 }
@@ -28573,7 +28567,7 @@ type DescribeScheduledInstancesInput struct {
 	//    * network-platform - The network platform (EC2-Classic or EC2-VPC).
 	//
 	//    * platform - The platform (Linux/UNIX or Windows).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results to return in a single call. This value can
 	// be between 5 and 300. The default value is 100. To retrieve the remaining
@@ -28584,7 +28578,7 @@ type DescribeScheduledInstancesInput struct {
 	NextToken *string `type:"string"`
 
 	// One or more Scheduled Instance IDs.
-	ScheduledInstanceIds []*string `locationName:"ScheduledInstanceId" locationNameList:"ScheduledInstanceId" type:"list"`
+	ScheduledInstanceIds []string `locationName:"ScheduledInstanceId" locationNameList:"ScheduledInstanceId" type:"list"`
 
 	// The time period for the first schedule to start.
 	SlotStartTimeRange *SlotStartTimeRangeRequest `type:"structure"`
@@ -28607,7 +28601,7 @@ func (s *DescribeScheduledInstancesInput) SetDryRun(v bool) *DescribeScheduledIn
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeScheduledInstancesInput) SetFilters(v []*Filter) *DescribeScheduledInstancesInput {
+func (s *DescribeScheduledInstancesInput) SetFilters(v []Filter) *DescribeScheduledInstancesInput {
 	s.Filters = v
 	return s
 }
@@ -28625,7 +28619,7 @@ func (s *DescribeScheduledInstancesInput) SetNextToken(v string) *DescribeSchedu
 }
 
 // SetScheduledInstanceIds sets the ScheduledInstanceIds field's value.
-func (s *DescribeScheduledInstancesInput) SetScheduledInstanceIds(v []*string) *DescribeScheduledInstancesInput {
+func (s *DescribeScheduledInstancesInput) SetScheduledInstanceIds(v []string) *DescribeScheduledInstancesInput {
 	s.ScheduledInstanceIds = v
 	return s
 }
@@ -28646,7 +28640,7 @@ type DescribeScheduledInstancesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the Scheduled Instances.
-	ScheduledInstanceSet []*ScheduledInstance `locationName:"scheduledInstanceSet" locationNameList:"item" type:"list"`
+	ScheduledInstanceSet []ScheduledInstance `locationName:"scheduledInstanceSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28666,7 +28660,7 @@ func (s *DescribeScheduledInstancesOutput) SetNextToken(v string) *DescribeSched
 }
 
 // SetScheduledInstanceSet sets the ScheduledInstanceSet field's value.
-func (s *DescribeScheduledInstancesOutput) SetScheduledInstanceSet(v []*ScheduledInstance) *DescribeScheduledInstancesOutput {
+func (s *DescribeScheduledInstancesOutput) SetScheduledInstanceSet(v []ScheduledInstance) *DescribeScheduledInstancesOutput {
 	s.ScheduledInstanceSet = v
 	return s
 }
@@ -28684,7 +28678,7 @@ type DescribeSecurityGroupReferencesInput struct {
 	// One or more security group IDs in your account.
 	//
 	// GroupId is a required field
-	GroupId []*string `locationNameList:"item" type:"list" required:"true"`
+	GroupId []string `locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -28718,7 +28712,7 @@ func (s *DescribeSecurityGroupReferencesInput) SetDryRun(v bool) *DescribeSecuri
 }
 
 // SetGroupId sets the GroupId field's value.
-func (s *DescribeSecurityGroupReferencesInput) SetGroupId(v []*string) *DescribeSecurityGroupReferencesInput {
+func (s *DescribeSecurityGroupReferencesInput) SetGroupId(v []string) *DescribeSecurityGroupReferencesInput {
 	s.GroupId = v
 	return s
 }
@@ -28728,7 +28722,7 @@ type DescribeSecurityGroupReferencesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the VPCs with the referencing security groups.
-	SecurityGroupReferenceSet []*SecurityGroupReference `locationName:"securityGroupReferenceSet" locationNameList:"item" type:"list"`
+	SecurityGroupReferenceSet []SecurityGroupReference `locationName:"securityGroupReferenceSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28742,7 +28736,7 @@ func (s DescribeSecurityGroupReferencesOutput) GoString() string {
 }
 
 // SetSecurityGroupReferenceSet sets the SecurityGroupReferenceSet field's value.
-func (s *DescribeSecurityGroupReferencesOutput) SetSecurityGroupReferenceSet(v []*SecurityGroupReference) *DescribeSecurityGroupReferencesOutput {
+func (s *DescribeSecurityGroupReferencesOutput) SetSecurityGroupReferenceSet(v []SecurityGroupReference) *DescribeSecurityGroupReferencesOutput {
 	s.SecurityGroupReferenceSet = v
 	return s
 }
@@ -28802,13 +28796,13 @@ type DescribeSecurityGroupsInput struct {
 	//    * tag-value - The value of a tag assigned to the security group.
 	//
 	//    * vpc-id - The ID of the VPC specified when the security group was created.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more security group IDs. Required for security groups in a nondefault
 	// VPC.
 	//
 	// Default: Describes all your security groups.
-	GroupIds []*string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
+	GroupIds []string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
 
 	// [EC2-Classic and default VPC only] One or more security group names. You
 	// can specify either the security group name or the security group ID. For
@@ -28816,7 +28810,7 @@ type DescribeSecurityGroupsInput struct {
 	// security groups by name.
 	//
 	// Default: Describes all your security groups.
-	GroupNames []*string `locationName:"GroupName" locationNameList:"GroupName" type:"list"`
+	GroupNames []string `locationName:"GroupName" locationNameList:"GroupName" type:"list"`
 }
 
 // String returns the string representation
@@ -28836,19 +28830,19 @@ func (s *DescribeSecurityGroupsInput) SetDryRun(v bool) *DescribeSecurityGroupsI
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeSecurityGroupsInput) SetFilters(v []*Filter) *DescribeSecurityGroupsInput {
+func (s *DescribeSecurityGroupsInput) SetFilters(v []Filter) *DescribeSecurityGroupsInput {
 	s.Filters = v
 	return s
 }
 
 // SetGroupIds sets the GroupIds field's value.
-func (s *DescribeSecurityGroupsInput) SetGroupIds(v []*string) *DescribeSecurityGroupsInput {
+func (s *DescribeSecurityGroupsInput) SetGroupIds(v []string) *DescribeSecurityGroupsInput {
 	s.GroupIds = v
 	return s
 }
 
 // SetGroupNames sets the GroupNames field's value.
-func (s *DescribeSecurityGroupsInput) SetGroupNames(v []*string) *DescribeSecurityGroupsInput {
+func (s *DescribeSecurityGroupsInput) SetGroupNames(v []string) *DescribeSecurityGroupsInput {
 	s.GroupNames = v
 	return s
 }
@@ -28859,7 +28853,7 @@ type DescribeSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more security groups.
-	SecurityGroups []*SecurityGroup `locationName:"securityGroupInfo" locationNameList:"item" type:"list"`
+	SecurityGroups []SecurityGroup `locationName:"securityGroupInfo" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -28873,7 +28867,7 @@ func (s DescribeSecurityGroupsOutput) GoString() string {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *DescribeSecurityGroupsOutput) SetSecurityGroups(v []*SecurityGroup) *DescribeSecurityGroupsOutput {
+func (s *DescribeSecurityGroupsOutput) SetSecurityGroups(v []SecurityGroup) *DescribeSecurityGroupsOutput {
 	s.SecurityGroups = v
 	return s
 }
@@ -28951,10 +28945,10 @@ type DescribeSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of permissions for creating volumes from the snapshot.
-	CreateVolumePermissions []*CreateVolumePermission `locationName:"createVolumePermission" locationNameList:"item" type:"list"`
+	CreateVolumePermissions []CreateVolumePermission `locationName:"createVolumePermission" locationNameList:"item" type:"list"`
 
 	// A list of product codes.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The ID of the EBS snapshot.
 	SnapshotId *string `locationName:"snapshotId" type:"string"`
@@ -28971,13 +28965,13 @@ func (s DescribeSnapshotAttributeOutput) GoString() string {
 }
 
 // SetCreateVolumePermissions sets the CreateVolumePermissions field's value.
-func (s *DescribeSnapshotAttributeOutput) SetCreateVolumePermissions(v []*CreateVolumePermission) *DescribeSnapshotAttributeOutput {
+func (s *DescribeSnapshotAttributeOutput) SetCreateVolumePermissions(v []CreateVolumePermission) *DescribeSnapshotAttributeOutput {
 	s.CreateVolumePermissions = v
 	return s
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeSnapshotAttributeOutput) SetProductCodes(v []*ProductCode) *DescribeSnapshotAttributeOutput {
+func (s *DescribeSnapshotAttributeOutput) SetProductCodes(v []ProductCode) *DescribeSnapshotAttributeOutput {
 	s.ProductCodes = v
 	return s
 }
@@ -29037,7 +29031,7 @@ type DescribeSnapshotsInput struct {
 	//    * volume-id - The ID of the volume the snapshot is for.
 	//
 	//    * volume-size - The size of the volume, in GiB.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of snapshot results returned by DescribeSnapshots in paginated
 	// output. When this parameter is used, DescribeSnapshots only returns MaxResults
@@ -29059,15 +29053,15 @@ type DescribeSnapshotsInput struct {
 
 	// Returns the snapshots owned by the specified owner. Multiple owners can be
 	// specified.
-	OwnerIds []*string `locationName:"Owner" locationNameList:"Owner" type:"list"`
+	OwnerIds []string `locationName:"Owner" locationNameList:"Owner" type:"list"`
 
 	// One or more AWS accounts IDs that can create volumes from the snapshot.
-	RestorableByUserIds []*string `locationName:"RestorableBy" type:"list"`
+	RestorableByUserIds []string `locationName:"RestorableBy" type:"list"`
 
 	// One or more snapshot IDs.
 	//
 	// Default: Describes snapshots for which you have launch permissions.
-	SnapshotIds []*string `locationName:"SnapshotId" locationNameList:"SnapshotId" type:"list"`
+	SnapshotIds []string `locationName:"SnapshotId" locationNameList:"SnapshotId" type:"list"`
 }
 
 // String returns the string representation
@@ -29087,7 +29081,7 @@ func (s *DescribeSnapshotsInput) SetDryRun(v bool) *DescribeSnapshotsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeSnapshotsInput) SetFilters(v []*Filter) *DescribeSnapshotsInput {
+func (s *DescribeSnapshotsInput) SetFilters(v []Filter) *DescribeSnapshotsInput {
 	s.Filters = v
 	return s
 }
@@ -29105,19 +29099,19 @@ func (s *DescribeSnapshotsInput) SetNextToken(v string) *DescribeSnapshotsInput 
 }
 
 // SetOwnerIds sets the OwnerIds field's value.
-func (s *DescribeSnapshotsInput) SetOwnerIds(v []*string) *DescribeSnapshotsInput {
+func (s *DescribeSnapshotsInput) SetOwnerIds(v []string) *DescribeSnapshotsInput {
 	s.OwnerIds = v
 	return s
 }
 
 // SetRestorableByUserIds sets the RestorableByUserIds field's value.
-func (s *DescribeSnapshotsInput) SetRestorableByUserIds(v []*string) *DescribeSnapshotsInput {
+func (s *DescribeSnapshotsInput) SetRestorableByUserIds(v []string) *DescribeSnapshotsInput {
 	s.RestorableByUserIds = v
 	return s
 }
 
 // SetSnapshotIds sets the SnapshotIds field's value.
-func (s *DescribeSnapshotsInput) SetSnapshotIds(v []*string) *DescribeSnapshotsInput {
+func (s *DescribeSnapshotsInput) SetSnapshotIds(v []string) *DescribeSnapshotsInput {
 	s.SnapshotIds = v
 	return s
 }
@@ -29134,7 +29128,7 @@ type DescribeSnapshotsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the snapshots.
-	Snapshots []*CreateSnapshotOutput `locationName:"snapshotSet" locationNameList:"item" type:"list"`
+	Snapshots []CreateSnapshotOutput `locationName:"snapshotSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -29154,7 +29148,7 @@ func (s *DescribeSnapshotsOutput) SetNextToken(v string) *DescribeSnapshotsOutpu
 }
 
 // SetSnapshots sets the Snapshots field's value.
-func (s *DescribeSnapshotsOutput) SetSnapshots(v []*CreateSnapshotOutput) *DescribeSnapshotsOutput {
+func (s *DescribeSnapshotsOutput) SetSnapshots(v []CreateSnapshotOutput) *DescribeSnapshotsOutput {
 	s.Snapshots = v
 	return s
 }
@@ -29294,7 +29288,7 @@ type DescribeSpotFleetInstancesOutput struct {
 	// might be out of date.
 	//
 	// ActiveInstances is a required field
-	ActiveInstances []*ActiveInstance `locationName:"activeInstanceSet" locationNameList:"item" type:"list" required:"true"`
+	ActiveInstances []ActiveInstance `locationName:"activeInstanceSet" locationNameList:"item" type:"list" required:"true"`
 
 	// The token required to retrieve the next set of results. This value is null
 	// when there are no more results to return.
@@ -29317,7 +29311,7 @@ func (s DescribeSpotFleetInstancesOutput) GoString() string {
 }
 
 // SetActiveInstances sets the ActiveInstances field's value.
-func (s *DescribeSpotFleetInstancesOutput) SetActiveInstances(v []*ActiveInstance) *DescribeSpotFleetInstancesOutput {
+func (s *DescribeSpotFleetInstancesOutput) SetActiveInstances(v []ActiveInstance) *DescribeSpotFleetInstancesOutput {
 	s.ActiveInstances = v
 	return s
 }
@@ -29439,7 +29433,7 @@ type DescribeSpotFleetRequestHistoryOutput struct {
 	// Information about the events in the history of the Spot fleet request.
 	//
 	// HistoryRecords is a required field
-	HistoryRecords []*HistoryRecord `locationName:"historyRecordSet" locationNameList:"item" type:"list" required:"true"`
+	HistoryRecords []HistoryRecord `locationName:"historyRecordSet" locationNameList:"item" type:"list" required:"true"`
 
 	// The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	// All records up to this time were retrieved.
@@ -29475,7 +29469,7 @@ func (s DescribeSpotFleetRequestHistoryOutput) GoString() string {
 }
 
 // SetHistoryRecords sets the HistoryRecords field's value.
-func (s *DescribeSpotFleetRequestHistoryOutput) SetHistoryRecords(v []*HistoryRecord) *DescribeSpotFleetRequestHistoryOutput {
+func (s *DescribeSpotFleetRequestHistoryOutput) SetHistoryRecords(v []HistoryRecord) *DescribeSpotFleetRequestHistoryOutput {
 	s.HistoryRecords = v
 	return s
 }
@@ -29524,7 +29518,7 @@ type DescribeSpotFleetRequestsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The IDs of the Spot fleet requests.
-	SpotFleetRequestIds []*string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list"`
+	SpotFleetRequestIds []string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -29556,7 +29550,7 @@ func (s *DescribeSpotFleetRequestsInput) SetNextToken(v string) *DescribeSpotFle
 }
 
 // SetSpotFleetRequestIds sets the SpotFleetRequestIds field's value.
-func (s *DescribeSpotFleetRequestsInput) SetSpotFleetRequestIds(v []*string) *DescribeSpotFleetRequestsInput {
+func (s *DescribeSpotFleetRequestsInput) SetSpotFleetRequestIds(v []string) *DescribeSpotFleetRequestsInput {
 	s.SpotFleetRequestIds = v
 	return s
 }
@@ -29573,7 +29567,7 @@ type DescribeSpotFleetRequestsOutput struct {
 	// Information about the configuration of your Spot fleet.
 	//
 	// SpotFleetRequestConfigs is a required field
-	SpotFleetRequestConfigs []*SpotFleetRequestConfig `locationName:"spotFleetRequestConfigSet" locationNameList:"item" type:"list" required:"true"`
+	SpotFleetRequestConfigs []SpotFleetRequestConfig `locationName:"spotFleetRequestConfigSet" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -29593,7 +29587,7 @@ func (s *DescribeSpotFleetRequestsOutput) SetNextToken(v string) *DescribeSpotFl
 }
 
 // SetSpotFleetRequestConfigs sets the SpotFleetRequestConfigs field's value.
-func (s *DescribeSpotFleetRequestsOutput) SetSpotFleetRequestConfigs(v []*SpotFleetRequestConfig) *DescribeSpotFleetRequestsOutput {
+func (s *DescribeSpotFleetRequestsOutput) SetSpotFleetRequestConfigs(v []SpotFleetRequestConfig) *DescribeSpotFleetRequestsOutput {
 	s.SpotFleetRequestConfigs = v
 	return s
 }
@@ -29719,10 +29713,10 @@ type DescribeSpotInstanceRequestsInput struct {
 	//    * valid-from - The start date of the request.
 	//
 	//    * valid-until - The end date of the request.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more Spot instance request IDs.
-	SpotInstanceRequestIds []*string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list"`
+	SpotInstanceRequestIds []string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list"`
 }
 
 // String returns the string representation
@@ -29742,13 +29736,13 @@ func (s *DescribeSpotInstanceRequestsInput) SetDryRun(v bool) *DescribeSpotInsta
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeSpotInstanceRequestsInput) SetFilters(v []*Filter) *DescribeSpotInstanceRequestsInput {
+func (s *DescribeSpotInstanceRequestsInput) SetFilters(v []Filter) *DescribeSpotInstanceRequestsInput {
 	s.Filters = v
 	return s
 }
 
 // SetSpotInstanceRequestIds sets the SpotInstanceRequestIds field's value.
-func (s *DescribeSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []*string) *DescribeSpotInstanceRequestsInput {
+func (s *DescribeSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []string) *DescribeSpotInstanceRequestsInput {
 	s.SpotInstanceRequestIds = v
 	return s
 }
@@ -29759,7 +29753,7 @@ type DescribeSpotInstanceRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more Spot instance requests.
-	SpotInstanceRequests []*SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
+	SpotInstanceRequests []SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -29773,7 +29767,7 @@ func (s DescribeSpotInstanceRequestsOutput) GoString() string {
 }
 
 // SetSpotInstanceRequests sets the SpotInstanceRequests field's value.
-func (s *DescribeSpotInstanceRequestsOutput) SetSpotInstanceRequests(v []*SpotInstanceRequest) *DescribeSpotInstanceRequestsOutput {
+func (s *DescribeSpotInstanceRequestsOutput) SetSpotInstanceRequests(v []SpotInstanceRequest) *DescribeSpotInstanceRequestsOutput {
 	s.SpotInstanceRequests = v
 	return s
 }
@@ -29813,7 +29807,7 @@ type DescribeSpotPriceHistoryInput struct {
 	//    * timestamp - The timestamp of the Spot price history, in UTC format (for
 	//    example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater
 	//    than or less than comparison is not supported.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// Filters the results by the specified instance types. Note that T2 and HS1
 	// instance types are not supported.
@@ -29828,7 +29822,7 @@ type DescribeSpotPriceHistoryInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Filters the results by the specified basic product descriptions.
-	ProductDescriptions []*string `locationName:"ProductDescription" type:"list"`
+	ProductDescriptions []string `locationName:"ProductDescription" type:"list"`
 
 	// The date and time, up to the past 90 days, from which to start retrieving
 	// the price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
@@ -29864,7 +29858,7 @@ func (s *DescribeSpotPriceHistoryInput) SetEndTime(v time.Time) *DescribeSpotPri
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeSpotPriceHistoryInput) SetFilters(v []*Filter) *DescribeSpotPriceHistoryInput {
+func (s *DescribeSpotPriceHistoryInput) SetFilters(v []Filter) *DescribeSpotPriceHistoryInput {
 	s.Filters = v
 	return s
 }
@@ -29888,7 +29882,7 @@ func (s *DescribeSpotPriceHistoryInput) SetNextToken(v string) *DescribeSpotPric
 }
 
 // SetProductDescriptions sets the ProductDescriptions field's value.
-func (s *DescribeSpotPriceHistoryInput) SetProductDescriptions(v []*string) *DescribeSpotPriceHistoryInput {
+func (s *DescribeSpotPriceHistoryInput) SetProductDescriptions(v []string) *DescribeSpotPriceHistoryInput {
 	s.ProductDescriptions = v
 	return s
 }
@@ -29909,7 +29903,7 @@ type DescribeSpotPriceHistoryOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The historical Spot prices.
-	SpotPriceHistory []*SpotPrice `locationName:"spotPriceHistorySet" locationNameList:"item" type:"list"`
+	SpotPriceHistory []SpotPrice `locationName:"spotPriceHistorySet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -29929,7 +29923,7 @@ func (s *DescribeSpotPriceHistoryOutput) SetNextToken(v string) *DescribeSpotPri
 }
 
 // SetSpotPriceHistory sets the SpotPriceHistory field's value.
-func (s *DescribeSpotPriceHistoryOutput) SetSpotPriceHistory(v []*SpotPrice) *DescribeSpotPriceHistoryOutput {
+func (s *DescribeSpotPriceHistoryOutput) SetSpotPriceHistory(v []SpotPrice) *DescribeSpotPriceHistoryOutput {
 	s.SpotPriceHistory = v
 	return s
 }
@@ -30022,7 +30016,7 @@ type DescribeStaleSecurityGroupsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the stale security groups.
-	StaleSecurityGroupSet []*StaleSecurityGroup `locationName:"staleSecurityGroupSet" locationNameList:"item" type:"list"`
+	StaleSecurityGroupSet []StaleSecurityGroup `locationName:"staleSecurityGroupSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30042,7 +30036,7 @@ func (s *DescribeStaleSecurityGroupsOutput) SetNextToken(v string) *DescribeStal
 }
 
 // SetStaleSecurityGroupSet sets the StaleSecurityGroupSet field's value.
-func (s *DescribeStaleSecurityGroupsOutput) SetStaleSecurityGroupSet(v []*StaleSecurityGroup) *DescribeStaleSecurityGroupsOutput {
+func (s *DescribeStaleSecurityGroupsOutput) SetStaleSecurityGroupSet(v []StaleSecurityGroup) *DescribeStaleSecurityGroupsOutput {
 	s.StaleSecurityGroupSet = v
 	return s
 }
@@ -30103,12 +30097,12 @@ type DescribeSubnetsInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC for the subnet.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more subnet IDs.
 	//
 	// Default: Describes all your subnets.
-	SubnetIds []*string `locationName:"SubnetId" locationNameList:"SubnetId" type:"list"`
+	SubnetIds []string `locationName:"SubnetId" locationNameList:"SubnetId" type:"list"`
 }
 
 // String returns the string representation
@@ -30128,13 +30122,13 @@ func (s *DescribeSubnetsInput) SetDryRun(v bool) *DescribeSubnetsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeSubnetsInput) SetFilters(v []*Filter) *DescribeSubnetsInput {
+func (s *DescribeSubnetsInput) SetFilters(v []Filter) *DescribeSubnetsInput {
 	s.Filters = v
 	return s
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *DescribeSubnetsInput) SetSubnetIds(v []*string) *DescribeSubnetsInput {
+func (s *DescribeSubnetsInput) SetSubnetIds(v []string) *DescribeSubnetsInput {
 	s.SubnetIds = v
 	return s
 }
@@ -30145,7 +30139,7 @@ type DescribeSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more subnets.
-	Subnets []*Subnet `locationName:"subnetSet" locationNameList:"item" type:"list"`
+	Subnets []Subnet `locationName:"subnetSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30159,7 +30153,7 @@ func (s DescribeSubnetsOutput) GoString() string {
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *DescribeSubnetsOutput) SetSubnets(v []*Subnet) *DescribeSubnetsOutput {
+func (s *DescribeSubnetsOutput) SetSubnets(v []Subnet) *DescribeSubnetsOutput {
 	s.Subnets = v
 	return s
 }
@@ -30187,7 +30181,7 @@ type DescribeTagsInput struct {
 	//    | subnet | volume | vpc | vpn-connection | vpn-gateway).
 	//
 	//    * value - The tag value.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results to return in a single call. This value can
 	// be between 5 and 1000. To retrieve the remaining results, make another call
@@ -30215,7 +30209,7 @@ func (s *DescribeTagsInput) SetDryRun(v bool) *DescribeTagsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeTagsInput) SetFilters(v []*Filter) *DescribeTagsInput {
+func (s *DescribeTagsInput) SetFilters(v []Filter) *DescribeTagsInput {
 	s.Filters = v
 	return s
 }
@@ -30242,7 +30236,7 @@ type DescribeTagsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of tags.
-	Tags []*TagDescription `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []TagDescription `locationName:"tagSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30262,7 +30256,7 @@ func (s *DescribeTagsOutput) SetNextToken(v string) *DescribeTagsOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []*TagDescription) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTags(v []TagDescription) *DescribeTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -30338,7 +30332,7 @@ type DescribeVolumeAttributeOutput struct {
 	AutoEnableIO *AttributeBooleanValue `locationName:"autoEnableIO" type:"structure"`
 
 	// A list of product codes.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The ID of the volume.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -30361,7 +30355,7 @@ func (s *DescribeVolumeAttributeOutput) SetAutoEnableIO(v *AttributeBooleanValue
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeVolumeAttributeOutput) SetProductCodes(v []*ProductCode) *DescribeVolumeAttributeOutput {
+func (s *DescribeVolumeAttributeOutput) SetProductCodes(v []ProductCode) *DescribeVolumeAttributeOutput {
 	s.ProductCodes = v
 	return s
 }
@@ -30414,7 +30408,7 @@ type DescribeVolumeStatusInput struct {
 	//
 	//    * volume-status.status - The status of the volume (ok | impaired | warning
 	//    | insufficient-data).
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of volume results returned by DescribeVolumeStatus in
 	// paginated output. When this parameter is used, the request only returns MaxResults
@@ -30435,7 +30429,7 @@ type DescribeVolumeStatusInput struct {
 	// One or more volume IDs.
 	//
 	// Default: Describes all your volumes.
-	VolumeIds []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
+	VolumeIds []string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
 }
 
 // String returns the string representation
@@ -30455,7 +30449,7 @@ func (s *DescribeVolumeStatusInput) SetDryRun(v bool) *DescribeVolumeStatusInput
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVolumeStatusInput) SetFilters(v []*Filter) *DescribeVolumeStatusInput {
+func (s *DescribeVolumeStatusInput) SetFilters(v []Filter) *DescribeVolumeStatusInput {
 	s.Filters = v
 	return s
 }
@@ -30473,7 +30467,7 @@ func (s *DescribeVolumeStatusInput) SetNextToken(v string) *DescribeVolumeStatus
 }
 
 // SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumeStatusInput) SetVolumeIds(v []*string) *DescribeVolumeStatusInput {
+func (s *DescribeVolumeStatusInput) SetVolumeIds(v []string) *DescribeVolumeStatusInput {
 	s.VolumeIds = v
 	return s
 }
@@ -30488,7 +30482,7 @@ type DescribeVolumeStatusOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of volumes.
-	VolumeStatuses []*VolumeStatusItem `locationName:"volumeStatusSet" locationNameList:"item" type:"list"`
+	VolumeStatuses []VolumeStatusItem `locationName:"volumeStatusSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30508,7 +30502,7 @@ func (s *DescribeVolumeStatusOutput) SetNextToken(v string) *DescribeVolumeStatu
 }
 
 // SetVolumeStatuses sets the VolumeStatuses field's value.
-func (s *DescribeVolumeStatusOutput) SetVolumeStatuses(v []*VolumeStatusItem) *DescribeVolumeStatusOutput {
+func (s *DescribeVolumeStatusOutput) SetVolumeStatuses(v []VolumeStatusItem) *DescribeVolumeStatusOutput {
 	s.VolumeStatuses = v
 	return s
 }
@@ -30574,7 +30568,7 @@ type DescribeVolumesInput struct {
 	//    * volume-type - The Amazon EBS volume type. This can be gp2 for General
 	//    Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized
 	//    HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of volume results returned by DescribeVolumes in paginated
 	// output. When this parameter is used, DescribeVolumes only returns MaxResults
@@ -30594,7 +30588,7 @@ type DescribeVolumesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// One or more volume IDs.
-	VolumeIds []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
+	VolumeIds []string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
 }
 
 // String returns the string representation
@@ -30614,7 +30608,7 @@ func (s *DescribeVolumesInput) SetDryRun(v bool) *DescribeVolumesInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVolumesInput) SetFilters(v []*Filter) *DescribeVolumesInput {
+func (s *DescribeVolumesInput) SetFilters(v []Filter) *DescribeVolumesInput {
 	s.Filters = v
 	return s
 }
@@ -30632,7 +30626,7 @@ func (s *DescribeVolumesInput) SetNextToken(v string) *DescribeVolumesInput {
 }
 
 // SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumesInput) SetVolumeIds(v []*string) *DescribeVolumesInput {
+func (s *DescribeVolumesInput) SetVolumeIds(v []string) *DescribeVolumesInput {
 	s.VolumeIds = v
 	return s
 }
@@ -30650,7 +30644,7 @@ type DescribeVolumesModificationsInput struct {
 	// One or more filters. Supported filters: volume-id, modification-state, target-size,
 	// target-iops, target-volume-type, original-size, original-iops, original-volume-type,
 	// start-time.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of results (up to a limit of 500) to be returned in a
 	// paginated request.
@@ -30660,7 +30654,7 @@ type DescribeVolumesModificationsInput struct {
 	NextToken *string `type:"string"`
 
 	// One or more volume IDs for which in-progress modifications will be described.
-	VolumeIds []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
+	VolumeIds []string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
 }
 
 // String returns the string representation
@@ -30680,7 +30674,7 @@ func (s *DescribeVolumesModificationsInput) SetDryRun(v bool) *DescribeVolumesMo
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVolumesModificationsInput) SetFilters(v []*Filter) *DescribeVolumesModificationsInput {
+func (s *DescribeVolumesModificationsInput) SetFilters(v []Filter) *DescribeVolumesModificationsInput {
 	s.Filters = v
 	return s
 }
@@ -30698,7 +30692,7 @@ func (s *DescribeVolumesModificationsInput) SetNextToken(v string) *DescribeVolu
 }
 
 // SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumesModificationsInput) SetVolumeIds(v []*string) *DescribeVolumesModificationsInput {
+func (s *DescribeVolumesModificationsInput) SetVolumeIds(v []string) *DescribeVolumesModificationsInput {
 	s.VolumeIds = v
 	return s
 }
@@ -30711,7 +30705,7 @@ type DescribeVolumesModificationsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of returned VolumeModification objects.
-	VolumesModifications []*VolumeModification `locationName:"volumeModificationSet" locationNameList:"item" type:"list"`
+	VolumesModifications []VolumeModification `locationName:"volumeModificationSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30731,7 +30725,7 @@ func (s *DescribeVolumesModificationsOutput) SetNextToken(v string) *DescribeVol
 }
 
 // SetVolumesModifications sets the VolumesModifications field's value.
-func (s *DescribeVolumesModificationsOutput) SetVolumesModifications(v []*VolumeModification) *DescribeVolumesModificationsOutput {
+func (s *DescribeVolumesModificationsOutput) SetVolumesModifications(v []VolumeModification) *DescribeVolumesModificationsOutput {
 	s.VolumesModifications = v
 	return s
 }
@@ -30748,7 +30742,7 @@ type DescribeVolumesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the volumes.
-	Volumes []*CreateVolumeOutput `locationName:"volumeSet" locationNameList:"item" type:"list"`
+	Volumes []CreateVolumeOutput `locationName:"volumeSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30768,7 +30762,7 @@ func (s *DescribeVolumesOutput) SetNextToken(v string) *DescribeVolumesOutput {
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *DescribeVolumesOutput) SetVolumes(v []*CreateVolumeOutput) *DescribeVolumesOutput {
+func (s *DescribeVolumesOutput) SetVolumes(v []CreateVolumeOutput) *DescribeVolumesOutput {
 	s.Volumes = v
 	return s
 }
@@ -30902,7 +30896,7 @@ type DescribeVpcClassicLinkDnsSupportInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// One or more VPC IDs.
-	VpcIds []*string `locationNameList:"VpcId" type:"list"`
+	VpcIds []string `locationNameList:"VpcId" type:"list"`
 }
 
 // String returns the string representation
@@ -30944,7 +30938,7 @@ func (s *DescribeVpcClassicLinkDnsSupportInput) SetNextToken(v string) *Describe
 }
 
 // SetVpcIds sets the VpcIds field's value.
-func (s *DescribeVpcClassicLinkDnsSupportInput) SetVpcIds(v []*string) *DescribeVpcClassicLinkDnsSupportInput {
+func (s *DescribeVpcClassicLinkDnsSupportInput) SetVpcIds(v []string) *DescribeVpcClassicLinkDnsSupportInput {
 	s.VpcIds = v
 	return s
 }
@@ -30958,7 +30952,7 @@ type DescribeVpcClassicLinkDnsSupportOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// Information about the ClassicLink DNS support status of the VPCs.
-	Vpcs []*ClassicLinkDnsSupport `locationName:"vpcs" locationNameList:"item" type:"list"`
+	Vpcs []ClassicLinkDnsSupport `locationName:"vpcs" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -30978,7 +30972,7 @@ func (s *DescribeVpcClassicLinkDnsSupportOutput) SetNextToken(v string) *Describ
 }
 
 // SetVpcs sets the Vpcs field's value.
-func (s *DescribeVpcClassicLinkDnsSupportOutput) SetVpcs(v []*ClassicLinkDnsSupport) *DescribeVpcClassicLinkDnsSupportOutput {
+func (s *DescribeVpcClassicLinkDnsSupportOutput) SetVpcs(v []ClassicLinkDnsSupport) *DescribeVpcClassicLinkDnsSupportOutput {
 	s.Vpcs = v
 	return s
 }
@@ -31014,10 +31008,10 @@ type DescribeVpcClassicLinkInput struct {
 	//
 	//    * tag-value - The value of a tag assigned to the resource. This filter
 	//    is independent of the tag-key filter.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more VPCs for which you want to describe the ClassicLink status.
-	VpcIds []*string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
+	VpcIds []string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
 }
 
 // String returns the string representation
@@ -31037,13 +31031,13 @@ func (s *DescribeVpcClassicLinkInput) SetDryRun(v bool) *DescribeVpcClassicLinkI
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVpcClassicLinkInput) SetFilters(v []*Filter) *DescribeVpcClassicLinkInput {
+func (s *DescribeVpcClassicLinkInput) SetFilters(v []Filter) *DescribeVpcClassicLinkInput {
 	s.Filters = v
 	return s
 }
 
 // SetVpcIds sets the VpcIds field's value.
-func (s *DescribeVpcClassicLinkInput) SetVpcIds(v []*string) *DescribeVpcClassicLinkInput {
+func (s *DescribeVpcClassicLinkInput) SetVpcIds(v []string) *DescribeVpcClassicLinkInput {
 	s.VpcIds = v
 	return s
 }
@@ -31054,7 +31048,7 @@ type DescribeVpcClassicLinkOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The ClassicLink status of one or more VPCs.
-	Vpcs []*VpcClassicLink `locationName:"vpcSet" locationNameList:"item" type:"list"`
+	Vpcs []VpcClassicLink `locationName:"vpcSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31068,7 +31062,7 @@ func (s DescribeVpcClassicLinkOutput) GoString() string {
 }
 
 // SetVpcs sets the Vpcs field's value.
-func (s *DescribeVpcClassicLinkOutput) SetVpcs(v []*VpcClassicLink) *DescribeVpcClassicLinkOutput {
+func (s *DescribeVpcClassicLinkOutput) SetVpcs(v []VpcClassicLink) *DescribeVpcClassicLinkOutput {
 	s.Vpcs = v
 	return s
 }
@@ -31134,7 +31128,7 @@ type DescribeVpcEndpointServicesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of supported AWS services.
-	ServiceNames []*string `locationName:"serviceNameSet" locationNameList:"item" type:"list"`
+	ServiceNames []string `locationName:"serviceNameSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31154,7 +31148,7 @@ func (s *DescribeVpcEndpointServicesOutput) SetNextToken(v string) *DescribeVpcE
 }
 
 // SetServiceNames sets the ServiceNames field's value.
-func (s *DescribeVpcEndpointServicesOutput) SetServiceNames(v []*string) *DescribeVpcEndpointServicesOutput {
+func (s *DescribeVpcEndpointServicesOutput) SetServiceNames(v []string) *DescribeVpcEndpointServicesOutput {
 	s.ServiceNames = v
 	return s
 }
@@ -31180,7 +31174,7 @@ type DescribeVpcEndpointsInput struct {
 	//
 	//    * vpc-endpoint-state: The state of the endpoint. (pending | available
 	//    | deleting | deleted)
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The maximum number of items to return for this request. The request returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -31194,7 +31188,7 @@ type DescribeVpcEndpointsInput struct {
 	NextToken *string `type:"string"`
 
 	// One or more endpoint IDs.
-	VpcEndpointIds []*string `locationName:"VpcEndpointId" locationNameList:"item" type:"list"`
+	VpcEndpointIds []string `locationName:"VpcEndpointId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31214,7 +31208,7 @@ func (s *DescribeVpcEndpointsInput) SetDryRun(v bool) *DescribeVpcEndpointsInput
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointsInput) SetFilters(v []*Filter) *DescribeVpcEndpointsInput {
+func (s *DescribeVpcEndpointsInput) SetFilters(v []Filter) *DescribeVpcEndpointsInput {
 	s.Filters = v
 	return s
 }
@@ -31232,7 +31226,7 @@ func (s *DescribeVpcEndpointsInput) SetNextToken(v string) *DescribeVpcEndpoints
 }
 
 // SetVpcEndpointIds sets the VpcEndpointIds field's value.
-func (s *DescribeVpcEndpointsInput) SetVpcEndpointIds(v []*string) *DescribeVpcEndpointsInput {
+func (s *DescribeVpcEndpointsInput) SetVpcEndpointIds(v []string) *DescribeVpcEndpointsInput {
 	s.VpcEndpointIds = v
 	return s
 }
@@ -31247,7 +31241,7 @@ type DescribeVpcEndpointsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about the endpoints.
-	VpcEndpoints []*VpcEndpoint `locationName:"vpcEndpointSet" locationNameList:"item" type:"list"`
+	VpcEndpoints []VpcEndpoint `locationName:"vpcEndpointSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31267,7 +31261,7 @@ func (s *DescribeVpcEndpointsOutput) SetNextToken(v string) *DescribeVpcEndpoint
 }
 
 // SetVpcEndpoints sets the VpcEndpoints field's value.
-func (s *DescribeVpcEndpointsOutput) SetVpcEndpoints(v []*VpcEndpoint) *DescribeVpcEndpointsOutput {
+func (s *DescribeVpcEndpointsOutput) SetVpcEndpoints(v []VpcEndpoint) *DescribeVpcEndpointsOutput {
 	s.VpcEndpoints = v
 	return s
 }
@@ -31325,12 +31319,12 @@ type DescribeVpcPeeringConnectionsInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-peering-connection-id - The ID of the VPC peering connection.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more VPC peering connection IDs.
 	//
 	// Default: Describes all your VPC peering connections.
-	VpcPeeringConnectionIds []*string `locationName:"VpcPeeringConnectionId" locationNameList:"item" type:"list"`
+	VpcPeeringConnectionIds []string `locationName:"VpcPeeringConnectionId" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31350,13 +31344,13 @@ func (s *DescribeVpcPeeringConnectionsInput) SetDryRun(v bool) *DescribeVpcPeeri
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVpcPeeringConnectionsInput) SetFilters(v []*Filter) *DescribeVpcPeeringConnectionsInput {
+func (s *DescribeVpcPeeringConnectionsInput) SetFilters(v []Filter) *DescribeVpcPeeringConnectionsInput {
 	s.Filters = v
 	return s
 }
 
 // SetVpcPeeringConnectionIds sets the VpcPeeringConnectionIds field's value.
-func (s *DescribeVpcPeeringConnectionsInput) SetVpcPeeringConnectionIds(v []*string) *DescribeVpcPeeringConnectionsInput {
+func (s *DescribeVpcPeeringConnectionsInput) SetVpcPeeringConnectionIds(v []string) *DescribeVpcPeeringConnectionsInput {
 	s.VpcPeeringConnectionIds = v
 	return s
 }
@@ -31367,7 +31361,7 @@ type DescribeVpcPeeringConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the VPC peering connections.
-	VpcPeeringConnections []*VpcPeeringConnection `locationName:"vpcPeeringConnectionSet" locationNameList:"item" type:"list"`
+	VpcPeeringConnections []VpcPeeringConnection `locationName:"vpcPeeringConnectionSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31381,7 +31375,7 @@ func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
 }
 
 // SetVpcPeeringConnections sets the VpcPeeringConnections field's value.
-func (s *DescribeVpcPeeringConnectionsOutput) SetVpcPeeringConnections(v []*VpcPeeringConnection) *DescribeVpcPeeringConnectionsOutput {
+func (s *DescribeVpcPeeringConnectionsOutput) SetVpcPeeringConnections(v []VpcPeeringConnection) *DescribeVpcPeeringConnectionsOutput {
 	s.VpcPeeringConnections = v
 	return s
 }
@@ -31445,12 +31439,12 @@ type DescribeVpcsInput struct {
 	//    is independent of the tag-key filter.
 	//
 	//    * vpc-id - The ID of the VPC.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more VPC IDs.
 	//
 	// Default: Describes all your VPCs.
-	VpcIds []*string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
+	VpcIds []string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
 }
 
 // String returns the string representation
@@ -31470,13 +31464,13 @@ func (s *DescribeVpcsInput) SetDryRun(v bool) *DescribeVpcsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVpcsInput) SetFilters(v []*Filter) *DescribeVpcsInput {
+func (s *DescribeVpcsInput) SetFilters(v []Filter) *DescribeVpcsInput {
 	s.Filters = v
 	return s
 }
 
 // SetVpcIds sets the VpcIds field's value.
-func (s *DescribeVpcsInput) SetVpcIds(v []*string) *DescribeVpcsInput {
+func (s *DescribeVpcsInput) SetVpcIds(v []string) *DescribeVpcsInput {
 	s.VpcIds = v
 	return s
 }
@@ -31487,7 +31481,7 @@ type DescribeVpcsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more VPCs.
-	Vpcs []*Vpc `locationName:"vpcSet" locationNameList:"item" type:"list"`
+	Vpcs []Vpc `locationName:"vpcSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31501,7 +31495,7 @@ func (s DescribeVpcsOutput) GoString() string {
 }
 
 // SetVpcs sets the Vpcs field's value.
-func (s *DescribeVpcsOutput) SetVpcs(v []*Vpc) *DescribeVpcsOutput {
+func (s *DescribeVpcsOutput) SetVpcs(v []Vpc) *DescribeVpcsOutput {
 	s.Vpcs = v
 	return s
 }
@@ -31561,12 +31555,12 @@ type DescribeVpnConnectionsInput struct {
 	//
 	//    * vpn-gateway-id - The ID of a virtual private gateway associated with
 	//    the VPN connection.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more VPN connection IDs.
 	//
 	// Default: Describes your VPN connections.
-	VpnConnectionIds []*string `locationName:"VpnConnectionId" locationNameList:"VpnConnectionId" type:"list"`
+	VpnConnectionIds []string `locationName:"VpnConnectionId" locationNameList:"VpnConnectionId" type:"list"`
 }
 
 // String returns the string representation
@@ -31586,13 +31580,13 @@ func (s *DescribeVpnConnectionsInput) SetDryRun(v bool) *DescribeVpnConnectionsI
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVpnConnectionsInput) SetFilters(v []*Filter) *DescribeVpnConnectionsInput {
+func (s *DescribeVpnConnectionsInput) SetFilters(v []Filter) *DescribeVpnConnectionsInput {
 	s.Filters = v
 	return s
 }
 
 // SetVpnConnectionIds sets the VpnConnectionIds field's value.
-func (s *DescribeVpnConnectionsInput) SetVpnConnectionIds(v []*string) *DescribeVpnConnectionsInput {
+func (s *DescribeVpnConnectionsInput) SetVpnConnectionIds(v []string) *DescribeVpnConnectionsInput {
 	s.VpnConnectionIds = v
 	return s
 }
@@ -31603,7 +31597,7 @@ type DescribeVpnConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more VPN connections.
-	VpnConnections []*VpnConnection `locationName:"vpnConnectionSet" locationNameList:"item" type:"list"`
+	VpnConnections []VpnConnection `locationName:"vpnConnectionSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31617,7 +31611,7 @@ func (s DescribeVpnConnectionsOutput) GoString() string {
 }
 
 // SetVpnConnections sets the VpnConnections field's value.
-func (s *DescribeVpnConnectionsOutput) SetVpnConnections(v []*VpnConnection) *DescribeVpnConnectionsOutput {
+func (s *DescribeVpnConnectionsOutput) SetVpnConnections(v []VpnConnection) *DescribeVpnConnectionsOutput {
 	s.VpnConnections = v
 	return s
 }
@@ -31669,12 +31663,12 @@ type DescribeVpnGatewaysInput struct {
 	//    type is ipsec.1.
 	//
 	//    * vpn-gateway-id - The ID of the virtual private gateway.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more virtual private gateway IDs.
 	//
 	// Default: Describes all your virtual private gateways.
-	VpnGatewayIds []*string `locationName:"VpnGatewayId" locationNameList:"VpnGatewayId" type:"list"`
+	VpnGatewayIds []string `locationName:"VpnGatewayId" locationNameList:"VpnGatewayId" type:"list"`
 }
 
 // String returns the string representation
@@ -31694,13 +31688,13 @@ func (s *DescribeVpnGatewaysInput) SetDryRun(v bool) *DescribeVpnGatewaysInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeVpnGatewaysInput) SetFilters(v []*Filter) *DescribeVpnGatewaysInput {
+func (s *DescribeVpnGatewaysInput) SetFilters(v []Filter) *DescribeVpnGatewaysInput {
 	s.Filters = v
 	return s
 }
 
 // SetVpnGatewayIds sets the VpnGatewayIds field's value.
-func (s *DescribeVpnGatewaysInput) SetVpnGatewayIds(v []*string) *DescribeVpnGatewaysInput {
+func (s *DescribeVpnGatewaysInput) SetVpnGatewayIds(v []string) *DescribeVpnGatewaysInput {
 	s.VpnGatewayIds = v
 	return s
 }
@@ -31711,7 +31705,7 @@ type DescribeVpnGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more virtual private gateways.
-	VpnGateways []*VpnGateway `locationName:"vpnGatewaySet" locationNameList:"item" type:"list"`
+	VpnGateways []VpnGateway `locationName:"vpnGatewaySet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -31725,7 +31719,7 @@ func (s DescribeVpnGatewaysOutput) GoString() string {
 }
 
 // SetVpnGateways sets the VpnGateways field's value.
-func (s *DescribeVpnGatewaysOutput) SetVpnGateways(v []*VpnGateway) *DescribeVpnGatewaysOutput {
+func (s *DescribeVpnGatewaysOutput) SetVpnGateways(v []VpnGateway) *DescribeVpnGatewaysOutput {
 	s.VpnGateways = v
 	return s
 }
@@ -32231,7 +32225,7 @@ type DhcpConfiguration struct {
 	Key *string `locationName:"key" type:"string"`
 
 	// One or more values for the DHCP option.
-	Values []*AttributeValue `locationName:"valueSet" locationNameList:"item" type:"list"`
+	Values []AttributeValue `locationName:"valueSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -32251,7 +32245,7 @@ func (s *DhcpConfiguration) SetKey(v string) *DhcpConfiguration {
 }
 
 // SetValues sets the Values field's value.
-func (s *DhcpConfiguration) SetValues(v []*AttributeValue) *DhcpConfiguration {
+func (s *DhcpConfiguration) SetValues(v []AttributeValue) *DhcpConfiguration {
 	s.Values = v
 	return s
 }
@@ -32262,13 +32256,13 @@ type DhcpOptions struct {
 	_ struct{} `type:"structure"`
 
 	// One or more DHCP options in the set.
-	DhcpConfigurations []*DhcpConfiguration `locationName:"dhcpConfigurationSet" locationNameList:"item" type:"list"`
+	DhcpConfigurations []DhcpConfiguration `locationName:"dhcpConfigurationSet" locationNameList:"item" type:"list"`
 
 	// The ID of the set of DHCP options.
 	DhcpOptionsId *string `locationName:"dhcpOptionsId" type:"string"`
 
 	// Any tags assigned to the DHCP options set.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -32282,7 +32276,7 @@ func (s DhcpOptions) GoString() string {
 }
 
 // SetDhcpConfigurations sets the DhcpConfigurations field's value.
-func (s *DhcpOptions) SetDhcpConfigurations(v []*DhcpConfiguration) *DhcpOptions {
+func (s *DhcpOptions) SetDhcpConfigurations(v []DhcpConfiguration) *DhcpOptions {
 	s.DhcpConfigurations = v
 	return s
 }
@@ -32294,7 +32288,7 @@ func (s *DhcpOptions) SetDhcpOptionsId(v string) *DhcpOptions {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DhcpOptions) SetTags(v []*Tag) *DhcpOptions {
+func (s *DhcpOptions) SetTags(v []Tag) *DhcpOptions {
 	s.Tags = v
 	return s
 }
@@ -33275,7 +33269,7 @@ type EgressOnlyInternetGateway struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the attachment of the egress-only Internet gateway.
-	Attachments []*InternetGatewayAttachment `locationName:"attachmentSet" locationNameList:"item" type:"list"`
+	Attachments []InternetGatewayAttachment `locationName:"attachmentSet" locationNameList:"item" type:"list"`
 
 	// The ID of the egress-only Internet gateway.
 	EgressOnlyInternetGatewayId *string `locationName:"egressOnlyInternetGatewayId" type:"string"`
@@ -33292,7 +33286,7 @@ func (s EgressOnlyInternetGateway) GoString() string {
 }
 
 // SetAttachments sets the Attachments field's value.
-func (s *EgressOnlyInternetGateway) SetAttachments(v []*InternetGatewayAttachment) *EgressOnlyInternetGateway {
+func (s *EgressOnlyInternetGateway) SetAttachments(v []InternetGatewayAttachment) *EgressOnlyInternetGateway {
 	s.Attachments = v
 	return s
 }
@@ -34043,7 +34037,7 @@ type Filter struct {
 	Name *string `type:"string"`
 
 	// One or more filter values. Filter values are case-sensitive.
-	Values []*string `locationName:"Value" locationNameList:"item" type:"list"`
+	Values []string `locationName:"Value" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -34063,7 +34057,7 @@ func (s *Filter) SetName(v string) *Filter {
 }
 
 // SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []*string) *Filter {
+func (s *Filter) SetValues(v []string) *Filter {
 	s.Values = v
 	return s
 }
@@ -34200,7 +34194,7 @@ type FpgaImage struct {
 	PciId *PciId `locationName:"pciId" type:"structure"`
 
 	// The product codes for the AFI.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// Indicates whether the AFI is public.
 	Public *bool `locationName:"public" type:"boolean"`
@@ -34212,7 +34206,7 @@ type FpgaImage struct {
 	State *FpgaImageState `locationName:"state" type:"structure"`
 
 	// Any tags assigned to the AFI.
-	Tags []*Tag `locationName:"tags" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tags" locationNameList:"item" type:"list"`
 
 	// The time of the most recent update to the AFI.
 	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" timestampFormat:"iso8601"`
@@ -34277,7 +34271,7 @@ func (s *FpgaImage) SetPciId(v *PciId) *FpgaImage {
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *FpgaImage) SetProductCodes(v []*ProductCode) *FpgaImage {
+func (s *FpgaImage) SetProductCodes(v []ProductCode) *FpgaImage {
 	s.ProductCodes = v
 	return s
 }
@@ -34301,7 +34295,7 @@ func (s *FpgaImage) SetState(v *FpgaImageState) *FpgaImage {
 }
 
 // SetTags sets the Tags field's value.
-func (s *FpgaImage) SetTags(v []*Tag) *FpgaImage {
+func (s *FpgaImage) SetTags(v []Tag) *FpgaImage {
 	s.Tags = v
 	return s
 }
@@ -34324,13 +34318,13 @@ type FpgaImageAttribute struct {
 	FpgaImageId *string `locationName:"fpgaImageId" type:"string"`
 
 	// One or more load permissions.
-	LoadPermissions []*LoadPermission `locationName:"loadPermissions" locationNameList:"item" type:"list"`
+	LoadPermissions []LoadPermission `locationName:"loadPermissions" locationNameList:"item" type:"list"`
 
 	// The name of the AFI.
 	Name *string `locationName:"name" type:"string"`
 
 	// One or more product codes.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -34356,7 +34350,7 @@ func (s *FpgaImageAttribute) SetFpgaImageId(v string) *FpgaImageAttribute {
 }
 
 // SetLoadPermissions sets the LoadPermissions field's value.
-func (s *FpgaImageAttribute) SetLoadPermissions(v []*LoadPermission) *FpgaImageAttribute {
+func (s *FpgaImageAttribute) SetLoadPermissions(v []LoadPermission) *FpgaImageAttribute {
 	s.LoadPermissions = v
 	return s
 }
@@ -34368,7 +34362,7 @@ func (s *FpgaImageAttribute) SetName(v string) *FpgaImageAttribute {
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *FpgaImageAttribute) SetProductCodes(v []*ProductCode) *FpgaImageAttribute {
+func (s *FpgaImageAttribute) SetProductCodes(v []ProductCode) *FpgaImageAttribute {
 	s.ProductCodes = v
 	return s
 }
@@ -34618,7 +34612,7 @@ type GetHostReservationPurchasePreviewInput struct {
 	// with.
 	//
 	// HostIdSet is a required field
-	HostIdSet []*string `locationNameList:"item" type:"list" required:"true"`
+	HostIdSet []string `locationNameList:"item" type:"list" required:"true"`
 
 	// The offering ID of the reservation.
 	//
@@ -34655,7 +34649,7 @@ func (s *GetHostReservationPurchasePreviewInput) Validate() error {
 }
 
 // SetHostIdSet sets the HostIdSet field's value.
-func (s *GetHostReservationPurchasePreviewInput) SetHostIdSet(v []*string) *GetHostReservationPurchasePreviewInput {
+func (s *GetHostReservationPurchasePreviewInput) SetHostIdSet(v []string) *GetHostReservationPurchasePreviewInput {
 	s.HostIdSet = v
 	return s
 }
@@ -34676,7 +34670,7 @@ type GetHostReservationPurchasePreviewOutput struct {
 
 	// The purchase information of the Dedicated Host Reservation and the Dedicated
 	// Hosts associated with it.
-	Purchase []*Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
+	Purchase []Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
 
 	// The potential total hourly price of the reservation per hour.
 	TotalHourlyPrice *string `locationName:"totalHourlyPrice" type:"string"`
@@ -34702,7 +34696,7 @@ func (s *GetHostReservationPurchasePreviewOutput) SetCurrencyCode(v CurrencyCode
 }
 
 // SetPurchase sets the Purchase field's value.
-func (s *GetHostReservationPurchasePreviewOutput) SetPurchase(v []*Purchase) *GetHostReservationPurchasePreviewOutput {
+func (s *GetHostReservationPurchasePreviewOutput) SetPurchase(v []Purchase) *GetHostReservationPurchasePreviewOutput {
 	s.Purchase = v
 	return s
 }
@@ -34830,11 +34824,11 @@ type GetReservedInstancesExchangeQuoteInput struct {
 	// The IDs of the Convertible Reserved Instances to exchange.
 	//
 	// ReservedInstanceIds is a required field
-	ReservedInstanceIds []*string `locationName:"ReservedInstanceId" locationNameList:"ReservedInstanceId" type:"list" required:"true"`
+	ReservedInstanceIds []string `locationName:"ReservedInstanceId" locationNameList:"ReservedInstanceId" type:"list" required:"true"`
 
 	// The configuration requirements of the Convertible Reserved Instances to exchange
 	// for your current Convertible Reserved Instances.
-	TargetConfigurations []*TargetConfigurationRequest `locationName:"TargetConfiguration" locationNameList:"TargetConfigurationRequest" type:"list"`
+	TargetConfigurations []TargetConfigurationRequest `locationName:"TargetConfiguration" locationNameList:"TargetConfigurationRequest" type:"list"`
 }
 
 // String returns the string representation
@@ -34856,9 +34850,6 @@ func (s *GetReservedInstancesExchangeQuoteInput) Validate() error {
 	}
 	if s.TargetConfigurations != nil {
 		for i, v := range s.TargetConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -34878,13 +34869,13 @@ func (s *GetReservedInstancesExchangeQuoteInput) SetDryRun(v bool) *GetReservedI
 }
 
 // SetReservedInstanceIds sets the ReservedInstanceIds field's value.
-func (s *GetReservedInstancesExchangeQuoteInput) SetReservedInstanceIds(v []*string) *GetReservedInstancesExchangeQuoteInput {
+func (s *GetReservedInstancesExchangeQuoteInput) SetReservedInstanceIds(v []string) *GetReservedInstancesExchangeQuoteInput {
 	s.ReservedInstanceIds = v
 	return s
 }
 
 // SetTargetConfigurations sets the TargetConfigurations field's value.
-func (s *GetReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []*TargetConfigurationRequest) *GetReservedInstancesExchangeQuoteInput {
+func (s *GetReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []TargetConfigurationRequest) *GetReservedInstancesExchangeQuoteInput {
 	s.TargetConfigurations = v
 	return s
 }
@@ -34910,13 +34901,13 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 	ReservedInstanceValueRollup *ReservationValue `locationName:"reservedInstanceValueRollup" type:"structure"`
 
 	// The configuration of your Convertible Reserved Instances.
-	ReservedInstanceValueSet []*ReservedInstanceReservationValue `locationName:"reservedInstanceValueSet" locationNameList:"item" type:"list"`
+	ReservedInstanceValueSet []ReservedInstanceReservationValue `locationName:"reservedInstanceValueSet" locationNameList:"item" type:"list"`
 
 	// The cost associated with the Reserved Instance.
 	TargetConfigurationValueRollup *ReservationValue `locationName:"targetConfigurationValueRollup" type:"structure"`
 
 	// The values of the target Convertible Reserved Instances.
-	TargetConfigurationValueSet []*TargetReservationValue `locationName:"targetConfigurationValueSet" locationNameList:"item" type:"list"`
+	TargetConfigurationValueSet []TargetReservationValue `locationName:"targetConfigurationValueSet" locationNameList:"item" type:"list"`
 
 	// Describes the reason why the exchange cannot be completed.
 	ValidationFailureReason *string `locationName:"validationFailureReason" type:"string"`
@@ -34963,7 +34954,7 @@ func (s *GetReservedInstancesExchangeQuoteOutput) SetReservedInstanceValueRollup
 }
 
 // SetReservedInstanceValueSet sets the ReservedInstanceValueSet field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetReservedInstanceValueSet(v []*ReservedInstanceReservationValue) *GetReservedInstancesExchangeQuoteOutput {
+func (s *GetReservedInstancesExchangeQuoteOutput) SetReservedInstanceValueSet(v []ReservedInstanceReservationValue) *GetReservedInstancesExchangeQuoteOutput {
 	s.ReservedInstanceValueSet = v
 	return s
 }
@@ -34975,7 +34966,7 @@ func (s *GetReservedInstancesExchangeQuoteOutput) SetTargetConfigurationValueRol
 }
 
 // SetTargetConfigurationValueSet sets the TargetConfigurationValueSet field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetTargetConfigurationValueSet(v []*TargetReservationValue) *GetReservedInstancesExchangeQuoteOutput {
+func (s *GetReservedInstancesExchangeQuoteOutput) SetTargetConfigurationValueSet(v []TargetReservationValue) *GetReservedInstancesExchangeQuoteOutput {
 	s.TargetConfigurationValueSet = v
 	return s
 }
@@ -35106,7 +35097,7 @@ type Host struct {
 	HostReservationId *string `locationName:"hostReservationId" type:"string"`
 
 	// The IDs and instance type that are currently running on the Dedicated Host.
-	Instances []*HostInstance `locationName:"instances" locationNameList:"item" type:"list"`
+	Instances []HostInstance `locationName:"instances" locationNameList:"item" type:"list"`
 
 	// The Dedicated Host's state.
 	State AllocationState `locationName:"state" type:"string"`
@@ -35165,7 +35156,7 @@ func (s *Host) SetHostReservationId(v string) *Host {
 }
 
 // SetInstances sets the Instances field's value.
-func (s *Host) SetInstances(v []*HostInstance) *Host {
+func (s *Host) SetInstances(v []HostInstance) *Host {
 	s.Instances = v
 	return s
 }
@@ -35361,7 +35352,7 @@ type HostReservation struct {
 	End *time.Time `locationName:"end" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The IDs of the Dedicated Hosts associated with the reservation.
-	HostIdSet []*string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
+	HostIdSet []string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
 
 	// The ID of the reservation that specifies the associated Dedicated Hosts.
 	HostReservationId *string `locationName:"hostReservationId" type:"string"`
@@ -35426,7 +35417,7 @@ func (s *HostReservation) SetEnd(v time.Time) *HostReservation {
 }
 
 // SetHostIdSet sets the HostIdSet field's value.
-func (s *HostReservation) SetHostIdSet(v []*string) *HostReservation {
+func (s *HostReservation) SetHostIdSet(v []string) *HostReservation {
 	s.HostIdSet = v
 	return s
 }
@@ -35696,7 +35687,7 @@ type Image struct {
 	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// Any block device mapping entries.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// The date and time the image was created.
 	CreationDate *string `locationName:"creationDate" type:"string"`
@@ -35737,7 +35728,7 @@ type Image struct {
 	Platform PlatformValues `locationName:"platform" type:"string"`
 
 	// Any product codes associated with the AMI.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// Indicates whether the image has public launch permissions. The value is true
 	// if this image has public launch permissions or false if it has only implicit
@@ -35767,7 +35758,7 @@ type Image struct {
 	StateReason *StateReason `locationName:"stateReason" type:"structure"`
 
 	// Any tags assigned to the image.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of virtualization of the AMI.
 	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string"`
@@ -35790,7 +35781,7 @@ func (s *Image) SetArchitecture(v ArchitectureValues) *Image {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *Image) SetBlockDeviceMappings(v []*BlockDeviceMapping) *Image {
+func (s *Image) SetBlockDeviceMappings(v []BlockDeviceMapping) *Image {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -35868,7 +35859,7 @@ func (s *Image) SetPlatform(v PlatformValues) *Image {
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *Image) SetProductCodes(v []*ProductCode) *Image {
+func (s *Image) SetProductCodes(v []ProductCode) *Image {
 	s.ProductCodes = v
 	return s
 }
@@ -35916,7 +35907,7 @@ func (s *Image) SetStateReason(v *StateReason) *Image {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Image) SetTags(v []*Tag) *Image {
+func (s *Image) SetTags(v []Tag) *Image {
 	s.Tags = v
 	return s
 }
@@ -36020,7 +36011,7 @@ type ImportImageInput struct {
 	Description *string `type:"string"`
 
 	// Information about the disk containers.
-	DiskContainers []*ImageDiskContainer `locationName:"DiskContainer" locationNameList:"item" type:"list"`
+	DiskContainers []ImageDiskContainer `locationName:"DiskContainer" locationNameList:"item" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -36087,7 +36078,7 @@ func (s *ImportImageInput) SetDescription(v string) *ImportImageInput {
 }
 
 // SetDiskContainers sets the DiskContainers field's value.
-func (s *ImportImageInput) SetDiskContainers(v []*ImageDiskContainer) *ImportImageInput {
+func (s *ImportImageInput) SetDiskContainers(v []ImageDiskContainer) *ImportImageInput {
 	s.DiskContainers = v
 	return s
 }
@@ -36152,7 +36143,7 @@ type ImportImageOutput struct {
 	Progress *string `locationName:"progress" type:"string"`
 
 	// Information about the snapshots.
-	SnapshotDetails []*SnapshotDetail `locationName:"snapshotDetailSet" locationNameList:"item" type:"list"`
+	SnapshotDetails []SnapshotDetail `locationName:"snapshotDetailSet" locationNameList:"item" type:"list"`
 
 	// A brief status of the task.
 	Status *string `locationName:"status" type:"string"`
@@ -36220,7 +36211,7 @@ func (s *ImportImageOutput) SetProgress(v string) *ImportImageOutput {
 }
 
 // SetSnapshotDetails sets the SnapshotDetails field's value.
-func (s *ImportImageOutput) SetSnapshotDetails(v []*SnapshotDetail) *ImportImageOutput {
+func (s *ImportImageOutput) SetSnapshotDetails(v []SnapshotDetail) *ImportImageOutput {
 	s.SnapshotDetails = v
 	return s
 }
@@ -36271,7 +36262,7 @@ type ImportImageTask struct {
 	Progress *string `locationName:"progress" type:"string"`
 
 	// Information about the snapshots.
-	SnapshotDetails []*SnapshotDetail `locationName:"snapshotDetailSet" locationNameList:"item" type:"list"`
+	SnapshotDetails []SnapshotDetail `locationName:"snapshotDetailSet" locationNameList:"item" type:"list"`
 
 	// A brief status for the import image task.
 	Status *string `locationName:"status" type:"string"`
@@ -36339,7 +36330,7 @@ func (s *ImportImageTask) SetProgress(v string) *ImportImageTask {
 }
 
 // SetSnapshotDetails sets the SnapshotDetails field's value.
-func (s *ImportImageTask) SetSnapshotDetails(v []*SnapshotDetail) *ImportImageTask {
+func (s *ImportImageTask) SetSnapshotDetails(v []SnapshotDetail) *ImportImageTask {
 	s.SnapshotDetails = v
 	return s
 }
@@ -36365,7 +36356,7 @@ type ImportInstanceInput struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The disk image.
-	DiskImages []*DiskImage `locationName:"diskImage" type:"list"`
+	DiskImages []DiskImage `locationName:"diskImage" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -36400,9 +36391,6 @@ func (s *ImportInstanceInput) Validate() error {
 	}
 	if s.DiskImages != nil {
 		for i, v := range s.DiskImages {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DiskImages", i), err.(aws.ErrInvalidParams))
 			}
@@ -36422,7 +36410,7 @@ func (s *ImportInstanceInput) SetDescription(v string) *ImportInstanceInput {
 }
 
 // SetDiskImages sets the DiskImages field's value.
-func (s *ImportInstanceInput) SetDiskImages(v []*DiskImage) *ImportInstanceInput {
+func (s *ImportInstanceInput) SetDiskImages(v []DiskImage) *ImportInstanceInput {
 	s.DiskImages = v
 	return s
 }
@@ -36457,10 +36445,10 @@ type ImportInstanceLaunchSpecification struct {
 	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// One or more security group IDs.
-	GroupIds []*string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
+	GroupIds []string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// One or more security group names.
-	GroupNames []*string `locationName:"GroupName" locationNameList:"SecurityGroup" type:"list"`
+	GroupNames []string `locationName:"GroupName" locationNameList:"SecurityGroup" type:"list"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
@@ -36512,13 +36500,13 @@ func (s *ImportInstanceLaunchSpecification) SetArchitecture(v ArchitectureValues
 }
 
 // SetGroupIds sets the GroupIds field's value.
-func (s *ImportInstanceLaunchSpecification) SetGroupIds(v []*string) *ImportInstanceLaunchSpecification {
+func (s *ImportInstanceLaunchSpecification) SetGroupIds(v []string) *ImportInstanceLaunchSpecification {
 	s.GroupIds = v
 	return s
 }
 
 // SetGroupNames sets the GroupNames field's value.
-func (s *ImportInstanceLaunchSpecification) SetGroupNames(v []*string) *ImportInstanceLaunchSpecification {
+func (s *ImportInstanceLaunchSpecification) SetGroupNames(v []string) *ImportInstanceLaunchSpecification {
 	s.GroupNames = v
 	return s
 }
@@ -36607,7 +36595,7 @@ type ImportInstanceTaskDetails struct {
 	// One or more volumes.
 	//
 	// Volumes is a required field
-	Volumes []*ImportInstanceVolumeDetailItem `locationName:"volumes" locationNameList:"item" type:"list" required:"true"`
+	Volumes []ImportInstanceVolumeDetailItem `locationName:"volumes" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -36639,7 +36627,7 @@ func (s *ImportInstanceTaskDetails) SetPlatform(v PlatformValues) *ImportInstanc
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *ImportInstanceTaskDetails) SetVolumes(v []*ImportInstanceVolumeDetailItem) *ImportInstanceTaskDetails {
+func (s *ImportInstanceTaskDetails) SetVolumes(v []ImportInstanceVolumeDetailItem) *ImportInstanceTaskDetails {
 	s.Volumes = v
 	return s
 }
@@ -37206,7 +37194,7 @@ type Instance struct {
 	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// Any block device mapping entries for the instance.
-	BlockDeviceMappings []*InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// The idempotency token you provided when you launched the instance, if applicable.
 	ClientToken *string `locationName:"clientToken" type:"string"`
@@ -37219,7 +37207,7 @@ type Instance struct {
 	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
 	// The Elastic GPU associated with the instance.
-	ElasticGpuAssociations []*ElasticGpuAssociation `locationName:"elasticGpuAssociationSet" locationNameList:"item" type:"list"`
+	ElasticGpuAssociations []ElasticGpuAssociation `locationName:"elasticGpuAssociationSet" locationNameList:"item" type:"list"`
 
 	// Specifies whether enhanced networking with ENA is enabled.
 	EnaSupport *bool `locationName:"enaSupport" type:"boolean"`
@@ -37256,7 +37244,7 @@ type Instance struct {
 	Monitoring *Monitoring `locationName:"monitoring" type:"structure"`
 
 	// [EC2-VPC] One or more network interfaces for the instance.
-	NetworkInterfaces []*InstanceNetworkInterface `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
+	NetworkInterfaces []InstanceNetworkInterface `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
 
 	// The location where the instance launched, if applicable.
 	Placement *Placement `locationName:"placement" type:"structure"`
@@ -37278,7 +37266,7 @@ type Instance struct {
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The product codes attached to this instance, if applicable.
-	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
+	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// (IPv4 only) The public DNS name assigned to the instance. This name is not
 	// available until the instance enters the running state. For EC2-VPC, this
@@ -37299,7 +37287,7 @@ type Instance struct {
 	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string"`
 
 	// One or more security groups for the instance.
-	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	SecurityGroups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// Specifies whether to enable an instance launched in a VPC to perform NAT.
 	// This controls whether source/destination checking is enabled on the instance.
@@ -37329,7 +37317,7 @@ type Instance struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// Any tags assigned to the instance.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The virtualization type of the instance.
 	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string"`
@@ -37361,7 +37349,7 @@ func (s *Instance) SetArchitecture(v ArchitectureValues) *Instance {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *Instance) SetBlockDeviceMappings(v []*InstanceBlockDeviceMapping) *Instance {
+func (s *Instance) SetBlockDeviceMappings(v []InstanceBlockDeviceMapping) *Instance {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -37379,7 +37367,7 @@ func (s *Instance) SetEbsOptimized(v bool) *Instance {
 }
 
 // SetElasticGpuAssociations sets the ElasticGpuAssociations field's value.
-func (s *Instance) SetElasticGpuAssociations(v []*ElasticGpuAssociation) *Instance {
+func (s *Instance) SetElasticGpuAssociations(v []ElasticGpuAssociation) *Instance {
 	s.ElasticGpuAssociations = v
 	return s
 }
@@ -37451,7 +37439,7 @@ func (s *Instance) SetMonitoring(v *Monitoring) *Instance {
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *Instance) SetNetworkInterfaces(v []*InstanceNetworkInterface) *Instance {
+func (s *Instance) SetNetworkInterfaces(v []InstanceNetworkInterface) *Instance {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -37481,7 +37469,7 @@ func (s *Instance) SetPrivateIpAddress(v string) *Instance {
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *Instance) SetProductCodes(v []*ProductCode) *Instance {
+func (s *Instance) SetProductCodes(v []ProductCode) *Instance {
 	s.ProductCodes = v
 	return s
 }
@@ -37517,7 +37505,7 @@ func (s *Instance) SetRootDeviceType(v DeviceType) *Instance {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *Instance) SetSecurityGroups(v []*GroupIdentifier) *Instance {
+func (s *Instance) SetSecurityGroups(v []GroupIdentifier) *Instance {
 	s.SecurityGroups = v
 	return s
 }
@@ -37565,7 +37553,7 @@ func (s *Instance) SetSubnetId(v string) *Instance {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Instance) SetTags(v []*Tag) *Instance {
+func (s *Instance) SetTags(v []Tag) *Instance {
 	s.Tags = v
 	return s
 }
@@ -37856,10 +37844,10 @@ type InstanceNetworkInterface struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// One or more security groups.
-	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// One or more IPv6 addresses associated with the network interface.
-	Ipv6Addresses []*InstanceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
+	Ipv6Addresses []InstanceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
 
 	// The MAC address.
 	MacAddress *string `locationName:"macAddress" type:"string"`
@@ -37877,7 +37865,7 @@ type InstanceNetworkInterface struct {
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// One or more private IPv4 addresses associated with the network interface.
-	PrivateIpAddresses []*InstancePrivateIpAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []InstancePrivateIpAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
 
 	// Indicates whether to validate network traffic to or from this network interface.
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
@@ -37921,13 +37909,13 @@ func (s *InstanceNetworkInterface) SetDescription(v string) *InstanceNetworkInte
 }
 
 // SetGroups sets the Groups field's value.
-func (s *InstanceNetworkInterface) SetGroups(v []*GroupIdentifier) *InstanceNetworkInterface {
+func (s *InstanceNetworkInterface) SetGroups(v []GroupIdentifier) *InstanceNetworkInterface {
 	s.Groups = v
 	return s
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *InstanceNetworkInterface) SetIpv6Addresses(v []*InstanceIpv6Address) *InstanceNetworkInterface {
+func (s *InstanceNetworkInterface) SetIpv6Addresses(v []InstanceIpv6Address) *InstanceNetworkInterface {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -37963,7 +37951,7 @@ func (s *InstanceNetworkInterface) SetPrivateIpAddress(v string) *InstanceNetwor
 }
 
 // SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *InstanceNetworkInterface) SetPrivateIpAddresses(v []*InstancePrivateIpAddress) *InstanceNetworkInterface {
+func (s *InstanceNetworkInterface) SetPrivateIpAddresses(v []InstancePrivateIpAddress) *InstanceNetworkInterface {
 	s.PrivateIpAddresses = v
 	return s
 }
@@ -38124,7 +38112,7 @@ type InstanceNetworkInterfaceSpecification struct {
 
 	// The IDs of the security groups for the network interface. Applies only if
 	// creating a network interface when launching an instance.
-	Groups []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+	Groups []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// A number of IPv6 addresses to assign to the network interface. Amazon EC2
 	// chooses the IPv6 addresses from the range of the subnet. You cannot specify
@@ -38137,7 +38125,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// specify this option and the option to assign a number of IPv6 addresses in
 	// the same request. You cannot specify this option if you've specified a minimum
 	// number of instances to launch.
-	Ipv6Addresses []*InstanceIpv6Address `locationName:"ipv6AddressesSet" queryName:"Ipv6Addresses" locationNameList:"item" type:"list"`
+	Ipv6Addresses []InstanceIpv6Address `locationName:"ipv6AddressesSet" queryName:"Ipv6Addresses" locationNameList:"item" type:"list"`
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
@@ -38151,7 +38139,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// one private IPv4 address can be designated as primary. You cannot specify
 	// this option if you're launching more than one instance in a RunInstances
 	// request.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `locationName:"privateIpAddressesSet" queryName:"PrivateIpAddresses" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []PrivateIpAddressSpecification `locationName:"privateIpAddressesSet" queryName:"PrivateIpAddresses" locationNameList:"item" type:"list"`
 
 	// The number of secondary private IPv4 addresses. You can't specify this option
 	// and specify more than one private IP address using the private IP addresses
@@ -38179,9 +38167,6 @@ func (s *InstanceNetworkInterfaceSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceNetworkInterfaceSpecification"}
 	if s.PrivateIpAddresses != nil {
 		for i, v := range s.PrivateIpAddresses {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PrivateIpAddresses", i), err.(aws.ErrInvalidParams))
 			}
@@ -38219,7 +38204,7 @@ func (s *InstanceNetworkInterfaceSpecification) SetDeviceIndex(v int64) *Instanc
 }
 
 // SetGroups sets the Groups field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetGroups(v []*string) *InstanceNetworkInterfaceSpecification {
+func (s *InstanceNetworkInterfaceSpecification) SetGroups(v []string) *InstanceNetworkInterfaceSpecification {
 	s.Groups = v
 	return s
 }
@@ -38231,7 +38216,7 @@ func (s *InstanceNetworkInterfaceSpecification) SetIpv6AddressCount(v int64) *In
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetIpv6Addresses(v []*InstanceIpv6Address) *InstanceNetworkInterfaceSpecification {
+func (s *InstanceNetworkInterfaceSpecification) SetIpv6Addresses(v []InstanceIpv6Address) *InstanceNetworkInterfaceSpecification {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -38249,7 +38234,7 @@ func (s *InstanceNetworkInterfaceSpecification) SetPrivateIpAddress(v string) *I
 }
 
 // SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetPrivateIpAddresses(v []*PrivateIpAddressSpecification) *InstanceNetworkInterfaceSpecification {
+func (s *InstanceNetworkInterfaceSpecification) SetPrivateIpAddresses(v []PrivateIpAddressSpecification) *InstanceNetworkInterfaceSpecification {
 	s.PrivateIpAddresses = v
 	return s
 }
@@ -38418,7 +38403,7 @@ type InstanceStatus struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// Any scheduled events associated with the instance.
-	Events []*InstanceStatusEvent `locationName:"eventsSet" locationNameList:"item" type:"list"`
+	Events []InstanceStatusEvent `locationName:"eventsSet" locationNameList:"item" type:"list"`
 
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
@@ -38454,7 +38439,7 @@ func (s *InstanceStatus) SetAvailabilityZone(v string) *InstanceStatus {
 }
 
 // SetEvents sets the Events field's value.
-func (s *InstanceStatus) SetEvents(v []*InstanceStatusEvent) *InstanceStatus {
+func (s *InstanceStatus) SetEvents(v []InstanceStatusEvent) *InstanceStatus {
 	s.Events = v
 	return s
 }
@@ -38589,7 +38574,7 @@ type InstanceStatusSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The system instance health or application instance health.
-	Details []*InstanceStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
+	Details []InstanceStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status.
 	Status SummaryStatus `locationName:"status" type:"string"`
@@ -38606,7 +38591,7 @@ func (s InstanceStatusSummary) GoString() string {
 }
 
 // SetDetails sets the Details field's value.
-func (s *InstanceStatusSummary) SetDetails(v []*InstanceStatusDetails) *InstanceStatusSummary {
+func (s *InstanceStatusSummary) SetDetails(v []InstanceStatusDetails) *InstanceStatusSummary {
 	s.Details = v
 	return s
 }
@@ -38623,13 +38608,13 @@ type InternetGateway struct {
 	_ struct{} `type:"structure"`
 
 	// Any VPCs attached to the Internet gateway.
-	Attachments []*InternetGatewayAttachment `locationName:"attachmentSet" locationNameList:"item" type:"list"`
+	Attachments []InternetGatewayAttachment `locationName:"attachmentSet" locationNameList:"item" type:"list"`
 
 	// The ID of the Internet gateway.
 	InternetGatewayId *string `locationName:"internetGatewayId" type:"string"`
 
 	// Any tags assigned to the Internet gateway.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -38643,7 +38628,7 @@ func (s InternetGateway) GoString() string {
 }
 
 // SetAttachments sets the Attachments field's value.
-func (s *InternetGateway) SetAttachments(v []*InternetGatewayAttachment) *InternetGateway {
+func (s *InternetGateway) SetAttachments(v []InternetGatewayAttachment) *InternetGateway {
 	s.Attachments = v
 	return s
 }
@@ -38655,7 +38640,7 @@ func (s *InternetGateway) SetInternetGatewayId(v string) *InternetGateway {
 }
 
 // SetTags sets the Tags field's value.
-func (s *InternetGateway) SetTags(v []*Tag) *InternetGateway {
+func (s *InternetGateway) SetTags(v []Tag) *InternetGateway {
 	s.Tags = v
 	return s
 }
@@ -38716,16 +38701,16 @@ type IpPermission struct {
 	IpProtocol *string `locationName:"ipProtocol" type:"string"`
 
 	// One or more IPv4 ranges.
-	IpRanges []*IpRange `locationName:"ipRanges" locationNameList:"item" type:"list"`
+	IpRanges []IpRange `locationName:"ipRanges" locationNameList:"item" type:"list"`
 
 	// [EC2-VPC only] One or more IPv6 ranges.
-	Ipv6Ranges []*Ipv6Range `locationName:"ipv6Ranges" locationNameList:"item" type:"list"`
+	Ipv6Ranges []Ipv6Range `locationName:"ipv6Ranges" locationNameList:"item" type:"list"`
 
 	// (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress and DescribeSecurityGroups
 	// only) One or more prefix list IDs for an AWS service. In an AuthorizeSecurityGroupEgress
 	// request, this is the AWS service that you want to access through a VPC endpoint
 	// from instances associated with the security group.
-	PrefixListIds []*PrefixListId `locationName:"prefixListIds" locationNameList:"item" type:"list"`
+	PrefixListIds []PrefixListId `locationName:"prefixListIds" locationNameList:"item" type:"list"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	// A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type.
@@ -38733,7 +38718,7 @@ type IpPermission struct {
 	ToPort *int64 `locationName:"toPort" type:"integer"`
 
 	// One or more security group and AWS account ID pairs.
-	UserIdGroupPairs []*UserIdGroupPair `locationName:"groups" locationNameList:"item" type:"list"`
+	UserIdGroupPairs []UserIdGroupPair `locationName:"groups" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -38759,19 +38744,19 @@ func (s *IpPermission) SetIpProtocol(v string) *IpPermission {
 }
 
 // SetIpRanges sets the IpRanges field's value.
-func (s *IpPermission) SetIpRanges(v []*IpRange) *IpPermission {
+func (s *IpPermission) SetIpRanges(v []IpRange) *IpPermission {
 	s.IpRanges = v
 	return s
 }
 
 // SetIpv6Ranges sets the Ipv6Ranges field's value.
-func (s *IpPermission) SetIpv6Ranges(v []*Ipv6Range) *IpPermission {
+func (s *IpPermission) SetIpv6Ranges(v []Ipv6Range) *IpPermission {
 	s.Ipv6Ranges = v
 	return s
 }
 
 // SetPrefixListIds sets the PrefixListIds field's value.
-func (s *IpPermission) SetPrefixListIds(v []*PrefixListId) *IpPermission {
+func (s *IpPermission) SetPrefixListIds(v []PrefixListId) *IpPermission {
 	s.PrefixListIds = v
 	return s
 }
@@ -38783,7 +38768,7 @@ func (s *IpPermission) SetToPort(v int64) *IpPermission {
 }
 
 // SetUserIdGroupPairs sets the UserIdGroupPairs field's value.
-func (s *IpPermission) SetUserIdGroupPairs(v []*UserIdGroupPair) *IpPermission {
+func (s *IpPermission) SetUserIdGroupPairs(v []UserIdGroupPair) *IpPermission {
 	s.UserIdGroupPairs = v
 	return s
 }
@@ -38968,11 +38953,11 @@ type LaunchPermissionModifications struct {
 	_ struct{} `type:"structure"`
 
 	// The AWS account ID to add to the list of launch permissions for the AMI.
-	Add []*LaunchPermission `locationNameList:"item" type:"list"`
+	Add []LaunchPermission `locationNameList:"item" type:"list"`
 
 	// The AWS account ID to remove from the list of launch permissions for the
 	// AMI.
-	Remove []*LaunchPermission `locationNameList:"item" type:"list"`
+	Remove []LaunchPermission `locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -38986,13 +38971,13 @@ func (s LaunchPermissionModifications) GoString() string {
 }
 
 // SetAdd sets the Add field's value.
-func (s *LaunchPermissionModifications) SetAdd(v []*LaunchPermission) *LaunchPermissionModifications {
+func (s *LaunchPermissionModifications) SetAdd(v []LaunchPermission) *LaunchPermissionModifications {
 	s.Add = v
 	return s
 }
 
 // SetRemove sets the Remove field's value.
-func (s *LaunchPermissionModifications) SetRemove(v []*LaunchPermission) *LaunchPermissionModifications {
+func (s *LaunchPermissionModifications) SetRemove(v []LaunchPermission) *LaunchPermissionModifications {
 	s.Remove = v
 	return s
 }
@@ -39009,7 +38994,7 @@ type LaunchSpecification struct {
 	//
 	// Although you can specify encrypted EBS volumes in this block device mapping
 	// for your Spot Instances, these volumes are not encrypted.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// Indicates whether the instance is optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration
@@ -39040,7 +39025,7 @@ type LaunchSpecification struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify subnet IDs and security group IDs using the network interface.
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
 
 	// The placement information for the instance.
 	Placement *SpotPlacement `locationName:"placement" type:"structure"`
@@ -39051,7 +39036,7 @@ type LaunchSpecification struct {
 	// One or more security groups. When requesting instances in a VPC, you must
 	// specify the IDs of the security groups. When requesting instances in EC2-Classic,
 	// you can specify the names or the IDs of the security groups.
-	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	SecurityGroups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -39079,7 +39064,7 @@ func (s *LaunchSpecification) SetAddressingType(v string) *LaunchSpecification {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *LaunchSpecification) SetBlockDeviceMappings(v []*BlockDeviceMapping) *LaunchSpecification {
+func (s *LaunchSpecification) SetBlockDeviceMappings(v []BlockDeviceMapping) *LaunchSpecification {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -39127,7 +39112,7 @@ func (s *LaunchSpecification) SetMonitoring(v *RunInstancesMonitoringEnabled) *L
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *LaunchSpecification) SetNetworkInterfaces(v []*InstanceNetworkInterfaceSpecification) *LaunchSpecification {
+func (s *LaunchSpecification) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *LaunchSpecification {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -39145,7 +39130,7 @@ func (s *LaunchSpecification) SetRamdiskId(v string) *LaunchSpecification {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *LaunchSpecification) SetSecurityGroups(v []*GroupIdentifier) *LaunchSpecification {
+func (s *LaunchSpecification) SetSecurityGroups(v []GroupIdentifier) *LaunchSpecification {
 	s.SecurityGroups = v
 	return s
 }
@@ -39202,10 +39187,10 @@ type LoadPermissionModifications struct {
 	_ struct{} `type:"structure"`
 
 	// The load permissions to add.
-	Add []*LoadPermissionRequest `locationNameList:"item" type:"list"`
+	Add []LoadPermissionRequest `locationNameList:"item" type:"list"`
 
 	// The load permissions to remove.
-	Remove []*LoadPermissionRequest `locationNameList:"item" type:"list"`
+	Remove []LoadPermissionRequest `locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -39219,13 +39204,13 @@ func (s LoadPermissionModifications) GoString() string {
 }
 
 // SetAdd sets the Add field's value.
-func (s *LoadPermissionModifications) SetAdd(v []*LoadPermissionRequest) *LoadPermissionModifications {
+func (s *LoadPermissionModifications) SetAdd(v []LoadPermissionRequest) *LoadPermissionModifications {
 	s.Add = v
 	return s
 }
 
 // SetRemove sets the Remove field's value.
-func (s *LoadPermissionModifications) SetRemove(v []*LoadPermissionRequest) *LoadPermissionModifications {
+func (s *LoadPermissionModifications) SetRemove(v []LoadPermissionRequest) *LoadPermissionModifications {
 	s.Remove = v
 	return s
 }
@@ -39297,15 +39282,15 @@ type ModifyFpgaImageAttributeInput struct {
 	// One or more product codes. After you add a product code to an AFI, it can't
 	// be removed. This parameter is valid only when modifying the productCodes
 	// attribute.
-	ProductCodes []*string `locationName:"ProductCode" locationNameList:"ProductCode" type:"list"`
+	ProductCodes []string `locationName:"ProductCode" locationNameList:"ProductCode" type:"list"`
 
 	// One or more user groups. This parameter is valid only when modifying the
 	// loadPermission attribute.
-	UserGroups []*string `locationName:"UserGroup" locationNameList:"UserGroup" type:"list"`
+	UserGroups []string `locationName:"UserGroup" locationNameList:"UserGroup" type:"list"`
 
 	// One or more AWS account IDs. This parameter is valid only when modifying
 	// the loadPermission attribute.
-	UserIds []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
+	UserIds []string `locationName:"UserId" locationNameList:"UserId" type:"list"`
 }
 
 // String returns the string representation
@@ -39375,19 +39360,19 @@ func (s *ModifyFpgaImageAttributeInput) SetOperationType(v OperationType) *Modif
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *ModifyFpgaImageAttributeInput) SetProductCodes(v []*string) *ModifyFpgaImageAttributeInput {
+func (s *ModifyFpgaImageAttributeInput) SetProductCodes(v []string) *ModifyFpgaImageAttributeInput {
 	s.ProductCodes = v
 	return s
 }
 
 // SetUserGroups sets the UserGroups field's value.
-func (s *ModifyFpgaImageAttributeInput) SetUserGroups(v []*string) *ModifyFpgaImageAttributeInput {
+func (s *ModifyFpgaImageAttributeInput) SetUserGroups(v []string) *ModifyFpgaImageAttributeInput {
 	s.UserGroups = v
 	return s
 }
 
 // SetUserIds sets the UserIds field's value.
-func (s *ModifyFpgaImageAttributeInput) SetUserIds(v []*string) *ModifyFpgaImageAttributeInput {
+func (s *ModifyFpgaImageAttributeInput) SetUserIds(v []string) *ModifyFpgaImageAttributeInput {
 	s.UserIds = v
 	return s
 }
@@ -39429,7 +39414,7 @@ type ModifyHostsInput struct {
 	// The host IDs of the Dedicated Hosts you want to modify.
 	//
 	// HostIds is a required field
-	HostIds []*string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
+	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -39466,7 +39451,7 @@ func (s *ModifyHostsInput) SetAutoPlacement(v AutoPlacement) *ModifyHostsInput {
 }
 
 // SetHostIds sets the HostIds field's value.
-func (s *ModifyHostsInput) SetHostIds(v []*string) *ModifyHostsInput {
+func (s *ModifyHostsInput) SetHostIds(v []string) *ModifyHostsInput {
 	s.HostIds = v
 	return s
 }
@@ -39477,11 +39462,11 @@ type ModifyHostsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IDs of the Dedicated Hosts that were successfully modified.
-	Successful []*string `locationName:"successful" locationNameList:"item" type:"list"`
+	Successful []string `locationName:"successful" locationNameList:"item" type:"list"`
 
 	// The IDs of the Dedicated Hosts that could not be modified. Check whether
 	// the setting you requested can be used.
-	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
+	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -39495,13 +39480,13 @@ func (s ModifyHostsOutput) GoString() string {
 }
 
 // SetSuccessful sets the Successful field's value.
-func (s *ModifyHostsOutput) SetSuccessful(v []*string) *ModifyHostsOutput {
+func (s *ModifyHostsOutput) SetSuccessful(v []string) *ModifyHostsOutput {
 	s.Successful = v
 	return s
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
-func (s *ModifyHostsOutput) SetUnsuccessful(v []*UnsuccessfulItem) *ModifyHostsOutput {
+func (s *ModifyHostsOutput) SetUnsuccessful(v []UnsuccessfulItem) *ModifyHostsOutput {
 	s.Unsuccessful = v
 	return s
 }
@@ -39697,15 +39682,15 @@ type ModifyImageAttributeInput struct {
 
 	// One or more DevPay product codes. After you add a product code to an AMI,
 	// it can't be removed.
-	ProductCodes []*string `locationName:"ProductCode" locationNameList:"ProductCode" type:"list"`
+	ProductCodes []string `locationName:"ProductCode" locationNameList:"ProductCode" type:"list"`
 
 	// One or more user groups. This parameter can be used only when the Attribute
 	// parameter is launchPermission.
-	UserGroups []*string `locationName:"UserGroup" locationNameList:"UserGroup" type:"list"`
+	UserGroups []string `locationName:"UserGroup" locationNameList:"UserGroup" type:"list"`
 
 	// One or more AWS account IDs. This parameter can be used only when the Attribute
 	// parameter is launchPermission.
-	UserIds []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
+	UserIds []string `locationName:"UserId" locationNameList:"UserId" type:"list"`
 
 	// The value of the attribute being modified. This parameter can be used only
 	// when the Attribute parameter is description or productCodes.
@@ -39773,19 +39758,19 @@ func (s *ModifyImageAttributeInput) SetOperationType(v OperationType) *ModifyIma
 }
 
 // SetProductCodes sets the ProductCodes field's value.
-func (s *ModifyImageAttributeInput) SetProductCodes(v []*string) *ModifyImageAttributeInput {
+func (s *ModifyImageAttributeInput) SetProductCodes(v []string) *ModifyImageAttributeInput {
 	s.ProductCodes = v
 	return s
 }
 
 // SetUserGroups sets the UserGroups field's value.
-func (s *ModifyImageAttributeInput) SetUserGroups(v []*string) *ModifyImageAttributeInput {
+func (s *ModifyImageAttributeInput) SetUserGroups(v []string) *ModifyImageAttributeInput {
 	s.UserGroups = v
 	return s
 }
 
 // SetUserIds sets the UserIds field's value.
-func (s *ModifyImageAttributeInput) SetUserIds(v []*string) *ModifyImageAttributeInput {
+func (s *ModifyImageAttributeInput) SetUserIds(v []string) *ModifyImageAttributeInput {
 	s.UserIds = v
 	return s
 }
@@ -39828,7 +39813,7 @@ type ModifyInstanceAttributeInput struct {
 	// add them when you launch the instance. For more information, see Updating
 	// the Block Device Mapping when Launching an Instance (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	BlockDeviceMappings []*InstanceBlockDeviceMappingSpecification `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []InstanceBlockDeviceMappingSpecification `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// If the value is true, you can't terminate the instance using the Amazon EC2
 	// console, CLI, or API; otherwise, you can. You cannot use this parameter for
@@ -39857,7 +39842,7 @@ type ModifyInstanceAttributeInput struct {
 	// [EC2-VPC] Changes the security groups of the instance. You must specify at
 	// least one security group, even if it's just the default security group for
 	// the VPC. You must specify the security group ID, not the security group name.
-	Groups []*string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
+	Groups []string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
 
 	// The ID of the instance.
 	//
@@ -39940,7 +39925,7 @@ func (s *ModifyInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *Mo
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *ModifyInstanceAttributeInput) SetBlockDeviceMappings(v []*InstanceBlockDeviceMappingSpecification) *ModifyInstanceAttributeInput {
+func (s *ModifyInstanceAttributeInput) SetBlockDeviceMappings(v []InstanceBlockDeviceMappingSpecification) *ModifyInstanceAttributeInput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -39970,7 +39955,7 @@ func (s *ModifyInstanceAttributeInput) SetEnaSupport(v *AttributeBooleanValue) *
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ModifyInstanceAttributeInput) SetGroups(v []*string) *ModifyInstanceAttributeInput {
+func (s *ModifyInstanceAttributeInput) SetGroups(v []string) *ModifyInstanceAttributeInput {
 	s.Groups = v
 	return s
 }
@@ -40159,7 +40144,7 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	// you specify replaces the current set. You must specify at least one group,
 	// even if it's just the default security group in the VPC. You must specify
 	// the ID of the security group, not the name.
-	Groups []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+	Groups []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The ID of the network interface.
 	//
@@ -40217,7 +40202,7 @@ func (s *ModifyNetworkInterfaceAttributeInput) SetDryRun(v bool) *ModifyNetworkI
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetGroups(v []*string) *ModifyNetworkInterfaceAttributeInput {
+func (s *ModifyNetworkInterfaceAttributeInput) SetGroups(v []string) *ModifyNetworkInterfaceAttributeInput {
 	s.Groups = v
 	return s
 }
@@ -40261,12 +40246,12 @@ type ModifyReservedInstancesInput struct {
 	// The IDs of the Reserved Instances to modify.
 	//
 	// ReservedInstancesIds is a required field
-	ReservedInstancesIds []*string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list" required:"true"`
+	ReservedInstancesIds []string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list" required:"true"`
 
 	// The configuration settings for the Reserved Instances to modify.
 	//
 	// TargetConfigurations is a required field
-	TargetConfigurations []*ReservedInstancesConfiguration `locationName:"ReservedInstancesConfigurationSetItemType" locationNameList:"item" type:"list" required:"true"`
+	TargetConfigurations []ReservedInstancesConfiguration `locationName:"ReservedInstancesConfigurationSetItemType" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -40304,13 +40289,13 @@ func (s *ModifyReservedInstancesInput) SetClientToken(v string) *ModifyReservedI
 }
 
 // SetReservedInstancesIds sets the ReservedInstancesIds field's value.
-func (s *ModifyReservedInstancesInput) SetReservedInstancesIds(v []*string) *ModifyReservedInstancesInput {
+func (s *ModifyReservedInstancesInput) SetReservedInstancesIds(v []string) *ModifyReservedInstancesInput {
 	s.ReservedInstancesIds = v
 	return s
 }
 
 // SetTargetConfigurations sets the TargetConfigurations field's value.
-func (s *ModifyReservedInstancesInput) SetTargetConfigurations(v []*ReservedInstancesConfiguration) *ModifyReservedInstancesInput {
+func (s *ModifyReservedInstancesInput) SetTargetConfigurations(v []ReservedInstancesConfiguration) *ModifyReservedInstancesInput {
 	s.TargetConfigurations = v
 	return s
 }
@@ -40360,7 +40345,7 @@ type ModifySnapshotAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The group to modify for the snapshot.
-	GroupNames []*string `locationName:"UserGroup" locationNameList:"GroupName" type:"list"`
+	GroupNames []string `locationName:"UserGroup" locationNameList:"GroupName" type:"list"`
 
 	// The type of operation to perform to the attribute.
 	OperationType OperationType `type:"string"`
@@ -40371,7 +40356,7 @@ type ModifySnapshotAttributeInput struct {
 	SnapshotId *string `type:"string" required:"true"`
 
 	// The account ID to modify for the snapshot.
-	UserIds []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
+	UserIds []string `locationName:"UserId" locationNameList:"UserId" type:"list"`
 }
 
 // String returns the string representation
@@ -40417,7 +40402,7 @@ func (s *ModifySnapshotAttributeInput) SetDryRun(v bool) *ModifySnapshotAttribut
 }
 
 // SetGroupNames sets the GroupNames field's value.
-func (s *ModifySnapshotAttributeInput) SetGroupNames(v []*string) *ModifySnapshotAttributeInput {
+func (s *ModifySnapshotAttributeInput) SetGroupNames(v []string) *ModifySnapshotAttributeInput {
 	s.GroupNames = v
 	return s
 }
@@ -40435,7 +40420,7 @@ func (s *ModifySnapshotAttributeInput) SetSnapshotId(v string) *ModifySnapshotAt
 }
 
 // SetUserIds sets the UserIds field's value.
-func (s *ModifySnapshotAttributeInput) SetUserIds(v []*string) *ModifySnapshotAttributeInput {
+func (s *ModifySnapshotAttributeInput) SetUserIds(v []string) *ModifySnapshotAttributeInput {
 	s.UserIds = v
 	return s
 }
@@ -40911,7 +40896,7 @@ type ModifyVpcEndpointInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more route tables IDs to associate with the endpoint.
-	AddRouteTableIds []*string `locationName:"AddRouteTableId" locationNameList:"item" type:"list"`
+	AddRouteTableIds []string `locationName:"AddRouteTableId" locationNameList:"item" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -40924,7 +40909,7 @@ type ModifyVpcEndpointInput struct {
 	PolicyDocument *string `type:"string"`
 
 	// One or more route table IDs to disassociate from the endpoint.
-	RemoveRouteTableIds []*string `locationName:"RemoveRouteTableId" locationNameList:"item" type:"list"`
+	RemoveRouteTableIds []string `locationName:"RemoveRouteTableId" locationNameList:"item" type:"list"`
 
 	// Specify true to reset the policy document to the default policy. The default
 	// policy allows access to the service.
@@ -40961,7 +40946,7 @@ func (s *ModifyVpcEndpointInput) Validate() error {
 }
 
 // SetAddRouteTableIds sets the AddRouteTableIds field's value.
-func (s *ModifyVpcEndpointInput) SetAddRouteTableIds(v []*string) *ModifyVpcEndpointInput {
+func (s *ModifyVpcEndpointInput) SetAddRouteTableIds(v []string) *ModifyVpcEndpointInput {
 	s.AddRouteTableIds = v
 	return s
 }
@@ -40979,7 +40964,7 @@ func (s *ModifyVpcEndpointInput) SetPolicyDocument(v string) *ModifyVpcEndpointI
 }
 
 // SetRemoveRouteTableIds sets the RemoveRouteTableIds field's value.
-func (s *ModifyVpcEndpointInput) SetRemoveRouteTableIds(v []*string) *ModifyVpcEndpointInput {
+func (s *ModifyVpcEndpointInput) SetRemoveRouteTableIds(v []string) *ModifyVpcEndpointInput {
 	s.RemoveRouteTableIds = v
 	return s
 }
@@ -41138,7 +41123,7 @@ type MonitorInstancesInput struct {
 	// One or more instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -41172,7 +41157,7 @@ func (s *MonitorInstancesInput) SetDryRun(v bool) *MonitorInstancesInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *MonitorInstancesInput) SetInstanceIds(v []*string) *MonitorInstancesInput {
+func (s *MonitorInstancesInput) SetInstanceIds(v []string) *MonitorInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -41183,7 +41168,7 @@ type MonitorInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The monitoring information.
-	InstanceMonitorings []*InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	InstanceMonitorings []InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -41197,7 +41182,7 @@ func (s MonitorInstancesOutput) GoString() string {
 }
 
 // SetInstanceMonitorings sets the InstanceMonitorings field's value.
-func (s *MonitorInstancesOutput) SetInstanceMonitorings(v []*InstanceMonitoring) *MonitorInstancesOutput {
+func (s *MonitorInstancesOutput) SetInstanceMonitorings(v []InstanceMonitoring) *MonitorInstancesOutput {
 	s.InstanceMonitorings = v
 	return s
 }
@@ -41390,7 +41375,7 @@ type NatGateway struct {
 
 	// Information about the IP addresses and network interface associated with
 	// the NAT gateway.
-	NatGatewayAddresses []*NatGatewayAddress `locationName:"natGatewayAddressSet" locationNameList:"item" type:"list"`
+	NatGatewayAddresses []NatGatewayAddress `locationName:"natGatewayAddressSet" locationNameList:"item" type:"list"`
 
 	// The ID of the NAT gateway.
 	NatGatewayId *string `locationName:"natGatewayId" type:"string"`
@@ -41423,7 +41408,7 @@ type NatGateway struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The tags for the NAT gateway.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC in which the NAT gateway is located.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -41464,7 +41449,7 @@ func (s *NatGateway) SetFailureMessage(v string) *NatGateway {
 }
 
 // SetNatGatewayAddresses sets the NatGatewayAddresses field's value.
-func (s *NatGateway) SetNatGatewayAddresses(v []*NatGatewayAddress) *NatGateway {
+func (s *NatGateway) SetNatGatewayAddresses(v []NatGatewayAddress) *NatGateway {
 	s.NatGatewayAddresses = v
 	return s
 }
@@ -41494,7 +41479,7 @@ func (s *NatGateway) SetSubnetId(v string) *NatGateway {
 }
 
 // SetTags sets the Tags field's value.
-func (s *NatGateway) SetTags(v []*Tag) *NatGateway {
+func (s *NatGateway) SetTags(v []Tag) *NatGateway {
 	s.Tags = v
 	return s
 }
@@ -41564,10 +41549,10 @@ type NetworkAcl struct {
 	_ struct{} `type:"structure"`
 
 	// Any associations between the network ACL and one or more subnets
-	Associations []*NetworkAclAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
+	Associations []NetworkAclAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
 
 	// One or more entries (rules) in the network ACL.
-	Entries []*NetworkAclEntry `locationName:"entrySet" locationNameList:"item" type:"list"`
+	Entries []NetworkAclEntry `locationName:"entrySet" locationNameList:"item" type:"list"`
 
 	// Indicates whether this is the default network ACL for the VPC.
 	IsDefault *bool `locationName:"default" type:"boolean"`
@@ -41576,7 +41561,7 @@ type NetworkAcl struct {
 	NetworkAclId *string `locationName:"networkAclId" type:"string"`
 
 	// Any tags assigned to the network ACL.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC for the network ACL.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -41593,13 +41578,13 @@ func (s NetworkAcl) GoString() string {
 }
 
 // SetAssociations sets the Associations field's value.
-func (s *NetworkAcl) SetAssociations(v []*NetworkAclAssociation) *NetworkAcl {
+func (s *NetworkAcl) SetAssociations(v []NetworkAclAssociation) *NetworkAcl {
 	s.Associations = v
 	return s
 }
 
 // SetEntries sets the Entries field's value.
-func (s *NetworkAcl) SetEntries(v []*NetworkAclEntry) *NetworkAcl {
+func (s *NetworkAcl) SetEntries(v []NetworkAclEntry) *NetworkAcl {
 	s.Entries = v
 	return s
 }
@@ -41617,7 +41602,7 @@ func (s *NetworkAcl) SetNetworkAclId(v string) *NetworkAcl {
 }
 
 // SetTags sets the Tags field's value.
-func (s *NetworkAcl) SetTags(v []*Tag) *NetworkAcl {
+func (s *NetworkAcl) SetTags(v []Tag) *NetworkAcl {
 	s.Tags = v
 	return s
 }
@@ -41780,13 +41765,13 @@ type NetworkInterface struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// Any security groups for the network interface.
-	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The type of interface.
 	InterfaceType NetworkInterfaceType `locationName:"interfaceType" type:"string"`
 
 	// The IPv6 addresses associated with the network interface.
-	Ipv6Addresses []*NetworkInterfaceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
+	Ipv6Addresses []NetworkInterfaceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
 
 	// The MAC address.
 	MacAddress *string `locationName:"macAddress" type:"string"`
@@ -41804,7 +41789,7 @@ type NetworkInterface struct {
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The private IPv4 addresses associated with the network interface.
-	PrivateIpAddresses []*NetworkInterfacePrivateIpAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []NetworkInterfacePrivateIpAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
 
 	// The ID of the entity that launched the instance on your behalf (for example,
 	// AWS Management Console or Auto Scaling).
@@ -41823,7 +41808,7 @@ type NetworkInterface struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// Any tags assigned to the network interface.
-	TagSet []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	TagSet []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -41864,7 +41849,7 @@ func (s *NetworkInterface) SetDescription(v string) *NetworkInterface {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *NetworkInterface) SetGroups(v []*GroupIdentifier) *NetworkInterface {
+func (s *NetworkInterface) SetGroups(v []GroupIdentifier) *NetworkInterface {
 	s.Groups = v
 	return s
 }
@@ -41876,7 +41861,7 @@ func (s *NetworkInterface) SetInterfaceType(v NetworkInterfaceType) *NetworkInte
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *NetworkInterface) SetIpv6Addresses(v []*NetworkInterfaceIpv6Address) *NetworkInterface {
+func (s *NetworkInterface) SetIpv6Addresses(v []NetworkInterfaceIpv6Address) *NetworkInterface {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -41912,7 +41897,7 @@ func (s *NetworkInterface) SetPrivateIpAddress(v string) *NetworkInterface {
 }
 
 // SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *NetworkInterface) SetPrivateIpAddresses(v []*NetworkInterfacePrivateIpAddress) *NetworkInterface {
+func (s *NetworkInterface) SetPrivateIpAddresses(v []NetworkInterfacePrivateIpAddress) *NetworkInterface {
 	s.PrivateIpAddresses = v
 	return s
 }
@@ -41948,7 +41933,7 @@ func (s *NetworkInterface) SetSubnetId(v string) *NetworkInterface {
 }
 
 // SetTagSet sets the TagSet field's value.
-func (s *NetworkInterface) SetTagSet(v []*Tag) *NetworkInterface {
+func (s *NetworkInterface) SetTagSet(v []Tag) *NetworkInterface {
 	s.TagSet = v
 	return s
 }
@@ -42322,7 +42307,7 @@ type NewDhcpConfiguration struct {
 
 	Key *string `locationName:"key" type:"string"`
 
-	Values []*string `locationName:"Value" locationNameList:"item" type:"list"`
+	Values []string `locationName:"Value" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -42342,7 +42327,7 @@ func (s *NewDhcpConfiguration) SetKey(v string) *NewDhcpConfiguration {
 }
 
 // SetValues sets the Values field's value.
-func (s *NewDhcpConfiguration) SetValues(v []*string) *NewDhcpConfiguration {
+func (s *NewDhcpConfiguration) SetValues(v []string) *NewDhcpConfiguration {
 	s.Values = v
 	return s
 }
@@ -42649,7 +42634,7 @@ type PrefixList struct {
 	_ struct{} `type:"structure"`
 
 	// The IP address range of the AWS service.
-	Cidrs []*string `locationName:"cidrSet" locationNameList:"item" type:"list"`
+	Cidrs []string `locationName:"cidrSet" locationNameList:"item" type:"list"`
 
 	// The ID of the prefix.
 	PrefixListId *string `locationName:"prefixListId" type:"string"`
@@ -42669,7 +42654,7 @@ func (s PrefixList) GoString() string {
 }
 
 // SetCidrs sets the Cidrs field's value.
-func (s *PrefixList) SetCidrs(v []*string) *PrefixList {
+func (s *PrefixList) SetCidrs(v []string) *PrefixList {
 	s.Cidrs = v
 	return s
 }
@@ -43062,7 +43047,7 @@ type Purchase struct {
 	Duration *int64 `locationName:"duration" type:"integer"`
 
 	// The IDs of the Dedicated Hosts associated with the reservation.
-	HostIdSet []*string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
+	HostIdSet []string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
 
 	// The ID of the reservation.
 	HostReservationId *string `locationName:"hostReservationId" type:"string"`
@@ -43104,7 +43089,7 @@ func (s *Purchase) SetDuration(v int64) *Purchase {
 }
 
 // SetHostIdSet sets the HostIdSet field's value.
-func (s *Purchase) SetHostIdSet(v []*string) *Purchase {
+func (s *Purchase) SetHostIdSet(v []string) *Purchase {
 	s.HostIdSet = v
 	return s
 }
@@ -43156,7 +43141,7 @@ type PurchaseHostReservationInput struct {
 	// with.
 	//
 	// HostIdSet is a required field
-	HostIdSet []*string `locationNameList:"item" type:"list" required:"true"`
+	HostIdSet []string `locationNameList:"item" type:"list" required:"true"`
 
 	// The specified limit is checked against the total upfront cost of the reservation
 	// (calculated as the offering's upfront cost multiplied by the host count).
@@ -43214,7 +43199,7 @@ func (s *PurchaseHostReservationInput) SetCurrencyCode(v CurrencyCodeValues) *Pu
 }
 
 // SetHostIdSet sets the HostIdSet field's value.
-func (s *PurchaseHostReservationInput) SetHostIdSet(v []*string) *PurchaseHostReservationInput {
+func (s *PurchaseHostReservationInput) SetHostIdSet(v []string) *PurchaseHostReservationInput {
 	s.HostIdSet = v
 	return s
 }
@@ -43245,7 +43230,7 @@ type PurchaseHostReservationOutput struct {
 	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// Describes the details of the purchase.
-	Purchase []*Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
+	Purchase []Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
 
 	// The total hourly price of the reservation calculated per hour.
 	TotalHourlyPrice *string `locationName:"totalHourlyPrice" type:"string"`
@@ -43278,7 +43263,7 @@ func (s *PurchaseHostReservationOutput) SetCurrencyCode(v CurrencyCodeValues) *P
 }
 
 // SetPurchase sets the Purchase field's value.
-func (s *PurchaseHostReservationOutput) SetPurchase(v []*Purchase) *PurchaseHostReservationOutput {
+func (s *PurchaseHostReservationOutput) SetPurchase(v []Purchase) *PurchaseHostReservationOutput {
 	s.Purchase = v
 	return s
 }
@@ -43473,7 +43458,7 @@ type PurchaseScheduledInstancesInput struct {
 	// One or more purchase requests.
 	//
 	// PurchaseRequests is a required field
-	PurchaseRequests []*PurchaseRequest `locationName:"PurchaseRequest" locationNameList:"PurchaseRequest" min:"1" type:"list" required:"true"`
+	PurchaseRequests []PurchaseRequest `locationName:"PurchaseRequest" locationNameList:"PurchaseRequest" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -43498,9 +43483,6 @@ func (s *PurchaseScheduledInstancesInput) Validate() error {
 	}
 	if s.PurchaseRequests != nil {
 		for i, v := range s.PurchaseRequests {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PurchaseRequests", i), err.(aws.ErrInvalidParams))
 			}
@@ -43526,7 +43508,7 @@ func (s *PurchaseScheduledInstancesInput) SetDryRun(v bool) *PurchaseScheduledIn
 }
 
 // SetPurchaseRequests sets the PurchaseRequests field's value.
-func (s *PurchaseScheduledInstancesInput) SetPurchaseRequests(v []*PurchaseRequest) *PurchaseScheduledInstancesInput {
+func (s *PurchaseScheduledInstancesInput) SetPurchaseRequests(v []PurchaseRequest) *PurchaseScheduledInstancesInput {
 	s.PurchaseRequests = v
 	return s
 }
@@ -43537,7 +43519,7 @@ type PurchaseScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Scheduled Instances.
-	ScheduledInstanceSet []*ScheduledInstance `locationName:"scheduledInstanceSet" locationNameList:"item" type:"list"`
+	ScheduledInstanceSet []ScheduledInstance `locationName:"scheduledInstanceSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -43551,7 +43533,7 @@ func (s PurchaseScheduledInstancesOutput) GoString() string {
 }
 
 // SetScheduledInstanceSet sets the ScheduledInstanceSet field's value.
-func (s *PurchaseScheduledInstancesOutput) SetScheduledInstanceSet(v []*ScheduledInstance) *PurchaseScheduledInstancesOutput {
+func (s *PurchaseScheduledInstancesOutput) SetScheduledInstanceSet(v []ScheduledInstance) *PurchaseScheduledInstancesOutput {
 	s.ScheduledInstanceSet = v
 	return s
 }
@@ -43570,7 +43552,7 @@ type RebootInstancesInput struct {
 	// One or more instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -43604,7 +43586,7 @@ func (s *RebootInstancesInput) SetDryRun(v bool) *RebootInstancesInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *RebootInstancesInput) SetInstanceIds(v []*string) *RebootInstancesInput {
+func (s *RebootInstancesInput) SetInstanceIds(v []string) *RebootInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -43706,10 +43688,10 @@ type RegisterImageInput struct {
 	// The billing product codes. Your account must be authorized to specify billing
 	// product codes. Otherwise, you can use the AWS Marketplace to bill for the
 	// use of an AMI.
-	BillingProducts []*string `locationName:"BillingProduct" locationNameList:"item" type:"list"`
+	BillingProducts []string `locationName:"BillingProduct" locationNameList:"item" type:"list"`
 
 	// One or more block device mapping entries.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// A description for your AMI.
 	Description *string `locationName:"description" type:"string"`
@@ -43795,13 +43777,13 @@ func (s *RegisterImageInput) SetArchitecture(v ArchitectureValues) *RegisterImag
 }
 
 // SetBillingProducts sets the BillingProducts field's value.
-func (s *RegisterImageInput) SetBillingProducts(v []*string) *RegisterImageInput {
+func (s *RegisterImageInput) SetBillingProducts(v []string) *RegisterImageInput {
 	s.BillingProducts = v
 	return s
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RegisterImageInput) SetBlockDeviceMappings(v []*BlockDeviceMapping) *RegisterImageInput {
+func (s *RegisterImageInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *RegisterImageInput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -44038,7 +44020,7 @@ type ReleaseHostsInput struct {
 	// The IDs of the Dedicated Hosts you want to release.
 	//
 	// HostIds is a required field
-	HostIds []*string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
+	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -44066,7 +44048,7 @@ func (s *ReleaseHostsInput) Validate() error {
 }
 
 // SetHostIds sets the HostIds field's value.
-func (s *ReleaseHostsInput) SetHostIds(v []*string) *ReleaseHostsInput {
+func (s *ReleaseHostsInput) SetHostIds(v []string) *ReleaseHostsInput {
 	s.HostIds = v
 	return s
 }
@@ -44077,11 +44059,11 @@ type ReleaseHostsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IDs of the Dedicated Hosts that were successfully released.
-	Successful []*string `locationName:"successful" locationNameList:"item" type:"list"`
+	Successful []string `locationName:"successful" locationNameList:"item" type:"list"`
 
 	// The IDs of the Dedicated Hosts that could not be released, including an error
 	// message.
-	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
+	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -44095,13 +44077,13 @@ func (s ReleaseHostsOutput) GoString() string {
 }
 
 // SetSuccessful sets the Successful field's value.
-func (s *ReleaseHostsOutput) SetSuccessful(v []*string) *ReleaseHostsOutput {
+func (s *ReleaseHostsOutput) SetSuccessful(v []string) *ReleaseHostsOutput {
 	s.Successful = v
 	return s
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
-func (s *ReleaseHostsOutput) SetUnsuccessful(v []*UnsuccessfulItem) *ReleaseHostsOutput {
+func (s *ReleaseHostsOutput) SetUnsuccessful(v []UnsuccessfulItem) *ReleaseHostsOutput {
 	s.Unsuccessful = v
 	return s
 }
@@ -44707,7 +44689,7 @@ type ReportInstanceStatusInput struct {
 	// One or more instances.
 	//
 	// Instances is a required field
-	Instances []*string `locationName:"instanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	Instances []string `locationName:"instanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	// One or more reason codes that describe the health state of your instance.
 	//
@@ -44794,7 +44776,7 @@ func (s *ReportInstanceStatusInput) SetEndTime(v time.Time) *ReportInstanceStatu
 }
 
 // SetInstances sets the Instances field's value.
-func (s *ReportInstanceStatusInput) SetInstances(v []*string) *ReportInstanceStatusInput {
+func (s *ReportInstanceStatusInput) SetInstances(v []string) *ReportInstanceStatusInput {
 	s.Instances = v
 	return s
 }
@@ -45120,7 +45102,7 @@ type RequestSpotInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more Spot instance requests.
-	SpotInstanceRequests []*SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
+	SpotInstanceRequests []SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -45134,7 +45116,7 @@ func (s RequestSpotInstancesOutput) GoString() string {
 }
 
 // SetSpotInstanceRequests sets the SpotInstanceRequests field's value.
-func (s *RequestSpotInstancesOutput) SetSpotInstanceRequests(v []*SpotInstanceRequest) *RequestSpotInstancesOutput {
+func (s *RequestSpotInstancesOutput) SetSpotInstanceRequests(v []SpotInstanceRequest) *RequestSpotInstancesOutput {
 	s.SpotInstanceRequests = v
 	return s
 }
@@ -45151,7 +45133,7 @@ type RequestSpotLaunchSpecification struct {
 	//
 	// Although you can specify encrypted EBS volumes in this block device mapping
 	// for your Spot Instances, these volumes are not encrypted.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// Indicates whether the instance is optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration
@@ -45184,7 +45166,7 @@ type RequestSpotLaunchSpecification struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify subnet IDs and security group IDs using the network interface.
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification `locationName:"NetworkInterface" locationNameList:"item" type:"list"`
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification `locationName:"NetworkInterface" locationNameList:"item" type:"list"`
 
 	// The placement information for the instance.
 	Placement *SpotPlacement `locationName:"placement" type:"structure"`
@@ -45193,12 +45175,12 @@ type RequestSpotLaunchSpecification struct {
 	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
 	// One or more security group IDs.
-	SecurityGroupIds []*string `locationName:"SecurityGroupId" locationNameList:"item" type:"list"`
+	SecurityGroupIds []string `locationName:"SecurityGroupId" locationNameList:"item" type:"list"`
 
 	// One or more security groups. When requesting instances in a VPC, you must
 	// specify the IDs of the security groups. When requesting instances in EC2-Classic,
 	// you can specify the names or the IDs of the security groups.
-	SecurityGroups []*string `locationName:"SecurityGroup" locationNameList:"item" type:"list"`
+	SecurityGroups []string `locationName:"SecurityGroup" locationNameList:"item" type:"list"`
 
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -45229,9 +45211,6 @@ func (s *RequestSpotLaunchSpecification) Validate() error {
 	}
 	if s.NetworkInterfaces != nil {
 		for i, v := range s.NetworkInterfaces {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NetworkInterfaces", i), err.(aws.ErrInvalidParams))
 			}
@@ -45251,7 +45230,7 @@ func (s *RequestSpotLaunchSpecification) SetAddressingType(v string) *RequestSpo
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RequestSpotLaunchSpecification) SetBlockDeviceMappings(v []*BlockDeviceMapping) *RequestSpotLaunchSpecification {
+func (s *RequestSpotLaunchSpecification) SetBlockDeviceMappings(v []BlockDeviceMapping) *RequestSpotLaunchSpecification {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -45299,7 +45278,7 @@ func (s *RequestSpotLaunchSpecification) SetMonitoring(v *RunInstancesMonitoring
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *RequestSpotLaunchSpecification) SetNetworkInterfaces(v []*InstanceNetworkInterfaceSpecification) *RequestSpotLaunchSpecification {
+func (s *RequestSpotLaunchSpecification) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *RequestSpotLaunchSpecification {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -45317,13 +45296,13 @@ func (s *RequestSpotLaunchSpecification) SetRamdiskId(v string) *RequestSpotLaun
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RequestSpotLaunchSpecification) SetSecurityGroupIds(v []*string) *RequestSpotLaunchSpecification {
+func (s *RequestSpotLaunchSpecification) SetSecurityGroupIds(v []string) *RequestSpotLaunchSpecification {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *RequestSpotLaunchSpecification) SetSecurityGroups(v []*string) *RequestSpotLaunchSpecification {
+func (s *RequestSpotLaunchSpecification) SetSecurityGroups(v []string) *RequestSpotLaunchSpecification {
 	s.SecurityGroups = v
 	return s
 }
@@ -45494,7 +45473,7 @@ type ReservedInstances struct {
 	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
 
 	// The recurring charge tag assigned to the resource.
-	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
+	RecurringCharges []RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
 
 	// The ID of the Reserved Instance.
 	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
@@ -45509,7 +45488,7 @@ type ReservedInstances struct {
 	State ReservedInstanceState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the resource.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The usage price of the Reserved Instance, per hour.
 	UsagePrice *float64 `locationName:"usagePrice" type:"float"`
@@ -45592,7 +45571,7 @@ func (s *ReservedInstances) SetProductDescription(v RIProductDescription) *Reser
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedInstances) SetRecurringCharges(v []*RecurringCharge) *ReservedInstances {
+func (s *ReservedInstances) SetRecurringCharges(v []RecurringCharge) *ReservedInstances {
 	s.RecurringCharges = v
 	return s
 }
@@ -45622,7 +45601,7 @@ func (s *ReservedInstances) SetState(v ReservedInstanceState) *ReservedInstances
 }
 
 // SetTags sets the Tags field's value.
-func (s *ReservedInstances) SetTags(v []*Tag) *ReservedInstances {
+func (s *ReservedInstances) SetTags(v []Tag) *ReservedInstances {
 	s.Tags = v
 	return s
 }
@@ -45734,10 +45713,10 @@ type ReservedInstancesListing struct {
 	CreateDate *time.Time `locationName:"createDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The number of instances in this state.
-	InstanceCounts []*InstanceCount `locationName:"instanceCounts" locationNameList:"item" type:"list"`
+	InstanceCounts []InstanceCount `locationName:"instanceCounts" locationNameList:"item" type:"list"`
 
 	// The price of the Reserved Instance listing.
-	PriceSchedules []*PriceSchedule `locationName:"priceSchedules" locationNameList:"item" type:"list"`
+	PriceSchedules []PriceSchedule `locationName:"priceSchedules" locationNameList:"item" type:"list"`
 
 	// The ID of the Reserved Instance.
 	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
@@ -45753,7 +45732,7 @@ type ReservedInstancesListing struct {
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Any tags assigned to the resource.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The last modified timestamp of the listing.
 	UpdateDate *time.Time `locationName:"updateDate" type:"timestamp" timestampFormat:"iso8601"`
@@ -45782,13 +45761,13 @@ func (s *ReservedInstancesListing) SetCreateDate(v time.Time) *ReservedInstances
 }
 
 // SetInstanceCounts sets the InstanceCounts field's value.
-func (s *ReservedInstancesListing) SetInstanceCounts(v []*InstanceCount) *ReservedInstancesListing {
+func (s *ReservedInstancesListing) SetInstanceCounts(v []InstanceCount) *ReservedInstancesListing {
 	s.InstanceCounts = v
 	return s
 }
 
 // SetPriceSchedules sets the PriceSchedules field's value.
-func (s *ReservedInstancesListing) SetPriceSchedules(v []*PriceSchedule) *ReservedInstancesListing {
+func (s *ReservedInstancesListing) SetPriceSchedules(v []PriceSchedule) *ReservedInstancesListing {
 	s.PriceSchedules = v
 	return s
 }
@@ -45818,7 +45797,7 @@ func (s *ReservedInstancesListing) SetStatusMessage(v string) *ReservedInstances
 }
 
 // SetTags sets the Tags field's value.
-func (s *ReservedInstancesListing) SetTags(v []*Tag) *ReservedInstancesListing {
+func (s *ReservedInstancesListing) SetTags(v []Tag) *ReservedInstancesListing {
 	s.Tags = v
 	return s
 }
@@ -45846,10 +45825,10 @@ type ReservedInstancesModification struct {
 
 	// Contains target configurations along with their corresponding new Reserved
 	// Instance IDs.
-	ModificationResults []*ReservedInstancesModificationResult `locationName:"modificationResultSet" locationNameList:"item" type:"list"`
+	ModificationResults []ReservedInstancesModificationResult `locationName:"modificationResultSet" locationNameList:"item" type:"list"`
 
 	// The IDs of one or more Reserved Instances.
-	ReservedInstancesIds []*ReservedInstancesId `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
+	ReservedInstancesIds []ReservedInstancesId `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
 
 	// A unique ID for the Reserved Instance modification.
 	ReservedInstancesModificationId *string `locationName:"reservedInstancesModificationId" type:"string"`
@@ -45893,13 +45872,13 @@ func (s *ReservedInstancesModification) SetEffectiveDate(v time.Time) *ReservedI
 }
 
 // SetModificationResults sets the ModificationResults field's value.
-func (s *ReservedInstancesModification) SetModificationResults(v []*ReservedInstancesModificationResult) *ReservedInstancesModification {
+func (s *ReservedInstancesModification) SetModificationResults(v []ReservedInstancesModificationResult) *ReservedInstancesModification {
 	s.ModificationResults = v
 	return s
 }
 
 // SetReservedInstancesIds sets the ReservedInstancesIds field's value.
-func (s *ReservedInstancesModification) SetReservedInstancesIds(v []*ReservedInstancesId) *ReservedInstancesModification {
+func (s *ReservedInstancesModification) SetReservedInstancesIds(v []ReservedInstancesId) *ReservedInstancesModification {
 	s.ReservedInstancesIds = v
 	return s
 }
@@ -46003,13 +45982,13 @@ type ReservedInstancesOffering struct {
 	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
 
 	// The pricing details of the Reserved Instance offering.
-	PricingDetails []*PricingDetail `locationName:"pricingDetailsSet" locationNameList:"item" type:"list"`
+	PricingDetails []PricingDetail `locationName:"pricingDetailsSet" locationNameList:"item" type:"list"`
 
 	// The Reserved Instance product platform description.
 	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
 
 	// The recurring charge tag assigned to the resource.
-	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
+	RecurringCharges []RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
 
 	// The ID of the Reserved Instance offering. This is the offering ID used in
 	// GetReservedInstancesExchangeQuote to confirm that an exchange can be made.
@@ -46088,7 +46067,7 @@ func (s *ReservedInstancesOffering) SetOfferingType(v OfferingTypeValues) *Reser
 }
 
 // SetPricingDetails sets the PricingDetails field's value.
-func (s *ReservedInstancesOffering) SetPricingDetails(v []*PricingDetail) *ReservedInstancesOffering {
+func (s *ReservedInstancesOffering) SetPricingDetails(v []PricingDetail) *ReservedInstancesOffering {
 	s.PricingDetails = v
 	return s
 }
@@ -46100,7 +46079,7 @@ func (s *ReservedInstancesOffering) SetProductDescription(v RIProductDescription
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedInstancesOffering) SetRecurringCharges(v []*RecurringCharge) *ReservedInstancesOffering {
+func (s *ReservedInstancesOffering) SetRecurringCharges(v []RecurringCharge) *ReservedInstancesOffering {
 	s.RecurringCharges = v
 	return s
 }
@@ -46647,7 +46626,7 @@ type RevokeSecurityGroupEgressInput struct {
 
 	// One or more sets of IP permissions. You can't specify a destination security
 	// group and a CIDR IP address range in the same set of permissions.
-	IpPermissions []*IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
 	// Not supported. Use a set of IP permissions to specify the protocol name or
 	// number.
@@ -46714,7 +46693,7 @@ func (s *RevokeSecurityGroupEgressInput) SetGroupId(v string) *RevokeSecurityGro
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *RevokeSecurityGroupEgressInput) SetIpPermissions(v []*IpPermission) *RevokeSecurityGroupEgressInput {
+func (s *RevokeSecurityGroupEgressInput) SetIpPermissions(v []IpPermission) *RevokeSecurityGroupEgressInput {
 	s.IpPermissions = v
 	return s
 }
@@ -46788,7 +46767,7 @@ type RevokeSecurityGroupIngressInput struct {
 
 	// One or more sets of IP permissions. You can't specify a source security group
 	// and a CIDR IP address range in the same set of permissions.
-	IpPermissions []*IpPermission `locationNameList:"item" type:"list"`
+	IpPermissions []IpPermission `locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	// Use -1 to specify all.
@@ -46856,7 +46835,7 @@ func (s *RevokeSecurityGroupIngressInput) SetGroupName(v string) *RevokeSecurity
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *RevokeSecurityGroupIngressInput) SetIpPermissions(v []*IpPermission) *RevokeSecurityGroupIngressInput {
+func (s *RevokeSecurityGroupIngressInput) SetIpPermissions(v []IpPermission) *RevokeSecurityGroupIngressInput {
 	s.IpPermissions = v
 	return s
 }
@@ -47039,19 +47018,19 @@ type RouteTable struct {
 	_ struct{} `type:"structure"`
 
 	// The associations between the route table and one or more subnets.
-	Associations []*RouteTableAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
+	Associations []RouteTableAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
 
 	// Any virtual private gateway (VGW) propagating routes.
-	PropagatingVgws []*PropagatingVgw `locationName:"propagatingVgwSet" locationNameList:"item" type:"list"`
+	PropagatingVgws []PropagatingVgw `locationName:"propagatingVgwSet" locationNameList:"item" type:"list"`
 
 	// The ID of the route table.
 	RouteTableId *string `locationName:"routeTableId" type:"string"`
 
 	// The routes in the route table.
-	Routes []*Route `locationName:"routeSet" locationNameList:"item" type:"list"`
+	Routes []Route `locationName:"routeSet" locationNameList:"item" type:"list"`
 
 	// Any tags assigned to the route table.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -47068,13 +47047,13 @@ func (s RouteTable) GoString() string {
 }
 
 // SetAssociations sets the Associations field's value.
-func (s *RouteTable) SetAssociations(v []*RouteTableAssociation) *RouteTable {
+func (s *RouteTable) SetAssociations(v []RouteTableAssociation) *RouteTable {
 	s.Associations = v
 	return s
 }
 
 // SetPropagatingVgws sets the PropagatingVgws field's value.
-func (s *RouteTable) SetPropagatingVgws(v []*PropagatingVgw) *RouteTable {
+func (s *RouteTable) SetPropagatingVgws(v []PropagatingVgw) *RouteTable {
 	s.PropagatingVgws = v
 	return s
 }
@@ -47086,13 +47065,13 @@ func (s *RouteTable) SetRouteTableId(v string) *RouteTable {
 }
 
 // SetRoutes sets the Routes field's value.
-func (s *RouteTable) SetRoutes(v []*Route) *RouteTable {
+func (s *RouteTable) SetRoutes(v []Route) *RouteTable {
 	s.Routes = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *RouteTable) SetTags(v []*Tag) *RouteTable {
+func (s *RouteTable) SetTags(v []Tag) *RouteTable {
 	s.Tags = v
 	return s
 }
@@ -47170,7 +47149,7 @@ type RunInstancesInput struct {
 	// on start, and these are not created from a snapshot. If a snapshot is the
 	// basis for the volume, it contains data by definition and its encryption status
 	// cannot be changed using this action.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of
 	// the request. For more information, see Ensuring Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
@@ -47203,7 +47182,7 @@ type RunInstancesInput struct {
 	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
 	// An Elastic GPU to associate with the instance.
-	ElasticGpuSpecification []*ElasticGpuSpecification `locationNameList:"item" type:"list"`
+	ElasticGpuSpecification []ElasticGpuSpecification `locationNameList:"item" type:"list"`
 
 	// The IAM instance profile.
 	IamInstanceProfile *IamInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
@@ -47237,7 +47216,7 @@ type RunInstancesInput struct {
 	// option and the option to assign a number of IPv6 addresses in the same request.
 	// You cannot specify this option if you've specified a minimum number of instances
 	// to launch.
-	Ipv6Addresses []*InstanceIpv6Address `locationName:"Ipv6Address" locationNameList:"item" type:"list"`
+	Ipv6Addresses []InstanceIpv6Address `locationName:"Ipv6Address" locationNameList:"item" type:"list"`
 
 	// The ID of the kernel.
 	//
@@ -47281,7 +47260,7 @@ type RunInstancesInput struct {
 	Monitoring *RunInstancesMonitoringEnabled `type:"structure"`
 
 	// One or more network interfaces.
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification `locationName:"networkInterface" locationNameList:"item" type:"list"`
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification `locationName:"networkInterface" locationNameList:"item" type:"list"`
 
 	// The placement for the instance.
 	Placement *Placement `type:"structure"`
@@ -47305,13 +47284,13 @@ type RunInstancesInput struct {
 	// One or more security group IDs. You can create a security group using CreateSecurityGroup.
 	//
 	// Default: Amazon EC2 uses the default security group.
-	SecurityGroupIds []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// [EC2-Classic, default VPC] One or more security group names. For a nondefault
 	// VPC, you must use security group IDs instead.
 	//
 	// Default: Amazon EC2 uses the default security group.
-	SecurityGroups []*string `locationName:"SecurityGroup" locationNameList:"SecurityGroup" type:"list"`
+	SecurityGroups []string `locationName:"SecurityGroup" locationNameList:"SecurityGroup" type:"list"`
 
 	// [EC2-VPC] The ID of the subnet to launch the instance into.
 	SubnetId *string `type:"string"`
@@ -47319,7 +47298,7 @@ type RunInstancesInput struct {
 	// The tags to apply to the resources during launch. You can tag instances and
 	// volumes. The specified tags are applied to all instances or volumes that
 	// are created during launch.
-	TagSpecifications []*TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
+	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
 
 	// The user data to make available to the instance. For more information, see
 	// Running Commands on Your Linux Instance at Launch (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
@@ -47357,9 +47336,6 @@ func (s *RunInstancesInput) Validate() error {
 	}
 	if s.ElasticGpuSpecification != nil {
 		for i, v := range s.ElasticGpuSpecification {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ElasticGpuSpecification", i), err.(aws.ErrInvalidParams))
 			}
@@ -47372,9 +47348,6 @@ func (s *RunInstancesInput) Validate() error {
 	}
 	if s.NetworkInterfaces != nil {
 		for i, v := range s.NetworkInterfaces {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NetworkInterfaces", i), err.(aws.ErrInvalidParams))
 			}
@@ -47394,7 +47367,7 @@ func (s *RunInstancesInput) SetAdditionalInfo(v string) *RunInstancesInput {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RunInstancesInput) SetBlockDeviceMappings(v []*BlockDeviceMapping) *RunInstancesInput {
+func (s *RunInstancesInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *RunInstancesInput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -47424,7 +47397,7 @@ func (s *RunInstancesInput) SetEbsOptimized(v bool) *RunInstancesInput {
 }
 
 // SetElasticGpuSpecification sets the ElasticGpuSpecification field's value.
-func (s *RunInstancesInput) SetElasticGpuSpecification(v []*ElasticGpuSpecification) *RunInstancesInput {
+func (s *RunInstancesInput) SetElasticGpuSpecification(v []ElasticGpuSpecification) *RunInstancesInput {
 	s.ElasticGpuSpecification = v
 	return s
 }
@@ -47460,7 +47433,7 @@ func (s *RunInstancesInput) SetIpv6AddressCount(v int64) *RunInstancesInput {
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *RunInstancesInput) SetIpv6Addresses(v []*InstanceIpv6Address) *RunInstancesInput {
+func (s *RunInstancesInput) SetIpv6Addresses(v []InstanceIpv6Address) *RunInstancesInput {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -47496,7 +47469,7 @@ func (s *RunInstancesInput) SetMonitoring(v *RunInstancesMonitoringEnabled) *Run
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *RunInstancesInput) SetNetworkInterfaces(v []*InstanceNetworkInterfaceSpecification) *RunInstancesInput {
+func (s *RunInstancesInput) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *RunInstancesInput {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -47520,13 +47493,13 @@ func (s *RunInstancesInput) SetRamdiskId(v string) *RunInstancesInput {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RunInstancesInput) SetSecurityGroupIds(v []*string) *RunInstancesInput {
+func (s *RunInstancesInput) SetSecurityGroupIds(v []string) *RunInstancesInput {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *RunInstancesInput) SetSecurityGroups(v []*string) *RunInstancesInput {
+func (s *RunInstancesInput) SetSecurityGroups(v []string) *RunInstancesInput {
 	s.SecurityGroups = v
 	return s
 }
@@ -47538,7 +47511,7 @@ func (s *RunInstancesInput) SetSubnetId(v string) *RunInstancesInput {
 }
 
 // SetTagSpecifications sets the TagSpecifications field's value.
-func (s *RunInstancesInput) SetTagSpecifications(v []*TagSpecification) *RunInstancesInput {
+func (s *RunInstancesInput) SetTagSpecifications(v []TagSpecification) *RunInstancesInput {
 	s.TagSpecifications = v
 	return s
 }
@@ -47597,10 +47570,10 @@ type RunInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// [EC2-Classic only] One or more security groups.
-	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// One or more instances.
-	Instances []*Instance `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	Instances []Instance `locationName:"instancesSet" locationNameList:"item" type:"list"`
 
 	// The ID of the AWS account that owns the reservation.
 	OwnerId *string `locationName:"ownerId" type:"string"`
@@ -47624,13 +47597,13 @@ func (s RunInstancesOutput) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *RunInstancesOutput) SetGroups(v []*GroupIdentifier) *RunInstancesOutput {
+func (s *RunInstancesOutput) SetGroups(v []GroupIdentifier) *RunInstancesOutput {
 	s.Groups = v
 	return s
 }
 
 // SetInstances sets the Instances field's value.
-func (s *RunInstancesOutput) SetInstances(v []*Instance) *RunInstancesOutput {
+func (s *RunInstancesOutput) SetInstances(v []Instance) *RunInstancesOutput {
 	s.Instances = v
 	return s
 }
@@ -47754,7 +47727,7 @@ type RunScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IDs of the newly launched instances.
-	InstanceIdSet []*string `locationName:"instanceIdSet" locationNameList:"item" type:"list"`
+	InstanceIdSet []string `locationName:"instanceIdSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -47768,7 +47741,7 @@ func (s RunScheduledInstancesOutput) GoString() string {
 }
 
 // SetInstanceIdSet sets the InstanceIdSet field's value.
-func (s *RunScheduledInstancesOutput) SetInstanceIdSet(v []*string) *RunScheduledInstancesOutput {
+func (s *RunScheduledInstancesOutput) SetInstanceIdSet(v []string) *RunScheduledInstancesOutput {
 	s.InstanceIdSet = v
 	return s
 }
@@ -48142,7 +48115,7 @@ type ScheduledInstanceRecurrence struct {
 	// The days. For a monthly schedule, this is one or more days of the month (1-31).
 	// For a weekly schedule, this is one or more days of the week (1-7, where 1
 	// is Sunday).
-	OccurrenceDaySet []*int64 `locationName:"occurrenceDaySet" locationNameList:"item" type:"list"`
+	OccurrenceDaySet []int64 `locationName:"occurrenceDaySet" locationNameList:"item" type:"list"`
 
 	// Indicates whether the occurrence is relative to the end of the specified
 	// week or month.
@@ -48175,7 +48148,7 @@ func (s *ScheduledInstanceRecurrence) SetInterval(v int64) *ScheduledInstanceRec
 }
 
 // SetOccurrenceDaySet sets the OccurrenceDaySet field's value.
-func (s *ScheduledInstanceRecurrence) SetOccurrenceDaySet(v []*int64) *ScheduledInstanceRecurrence {
+func (s *ScheduledInstanceRecurrence) SetOccurrenceDaySet(v []int64) *ScheduledInstanceRecurrence {
 	s.OccurrenceDaySet = v
 	return s
 }
@@ -48208,7 +48181,7 @@ type ScheduledInstanceRecurrenceRequest struct {
 	// For a weekly schedule, this is one or more days of the week (1-7, where 1
 	// is Sunday). You can't specify this value with a daily schedule. If the occurrence
 	// is relative to the end of the month, you can specify only a single day.
-	OccurrenceDays []*int64 `locationName:"OccurrenceDay" locationNameList:"OccurenceDay" type:"list"`
+	OccurrenceDays []int64 `locationName:"OccurrenceDay" locationNameList:"OccurenceDay" type:"list"`
 
 	// Indicates whether the occurrence is relative to the end of the specified
 	// week or month. You can't specify this value with a daily schedule.
@@ -48243,7 +48216,7 @@ func (s *ScheduledInstanceRecurrenceRequest) SetInterval(v int64) *ScheduledInst
 }
 
 // SetOccurrenceDays sets the OccurrenceDays field's value.
-func (s *ScheduledInstanceRecurrenceRequest) SetOccurrenceDays(v []*int64) *ScheduledInstanceRecurrenceRequest {
+func (s *ScheduledInstanceRecurrenceRequest) SetOccurrenceDays(v []int64) *ScheduledInstanceRecurrenceRequest {
 	s.OccurrenceDays = v
 	return s
 }
@@ -48481,7 +48454,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// One or more block device mapping entries.
-	BlockDeviceMappings []*ScheduledInstancesBlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
+	BlockDeviceMappings []ScheduledInstancesBlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// Indicates whether the instances are optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration
@@ -48513,7 +48486,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	Monitoring *ScheduledInstancesMonitoring `type:"structure"`
 
 	// One or more network interfaces.
-	NetworkInterfaces []*ScheduledInstancesNetworkInterface `locationName:"NetworkInterface" locationNameList:"NetworkInterface" type:"list"`
+	NetworkInterfaces []ScheduledInstancesNetworkInterface `locationName:"NetworkInterface" locationNameList:"NetworkInterface" type:"list"`
 
 	// The placement information.
 	Placement *ScheduledInstancesPlacement `type:"structure"`
@@ -48522,7 +48495,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	RamdiskId *string `type:"string"`
 
 	// The IDs of one or more security groups.
-	SecurityGroupIds []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The ID of the subnet in which to launch the instances.
 	SubnetId *string `type:"string"`
@@ -48556,7 +48529,7 @@ func (s *ScheduledInstancesLaunchSpecification) Validate() error {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetBlockDeviceMappings(v []*ScheduledInstancesBlockDeviceMapping) *ScheduledInstancesLaunchSpecification {
+func (s *ScheduledInstancesLaunchSpecification) SetBlockDeviceMappings(v []ScheduledInstancesBlockDeviceMapping) *ScheduledInstancesLaunchSpecification {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -48604,7 +48577,7 @@ func (s *ScheduledInstancesLaunchSpecification) SetMonitoring(v *ScheduledInstan
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetNetworkInterfaces(v []*ScheduledInstancesNetworkInterface) *ScheduledInstancesLaunchSpecification {
+func (s *ScheduledInstancesLaunchSpecification) SetNetworkInterfaces(v []ScheduledInstancesNetworkInterface) *ScheduledInstancesLaunchSpecification {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -48622,7 +48595,7 @@ func (s *ScheduledInstancesLaunchSpecification) SetRamdiskId(v string) *Schedule
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetSecurityGroupIds(v []*string) *ScheduledInstancesLaunchSpecification {
+func (s *ScheduledInstancesLaunchSpecification) SetSecurityGroupIds(v []string) *ScheduledInstancesLaunchSpecification {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -48686,14 +48659,14 @@ type ScheduledInstancesNetworkInterface struct {
 	DeviceIndex *int64 `type:"integer"`
 
 	// The IDs of one or more security groups.
-	Groups []*string `locationName:"Group" locationNameList:"SecurityGroupId" type:"list"`
+	Groups []string `locationName:"Group" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The number of IPv6 addresses to assign to the network interface. The IPv6
 	// addresses are automatically selected from the subnet range.
 	Ipv6AddressCount *int64 `type:"integer"`
 
 	// One or more specific IPv6 addresses from the subnet range.
-	Ipv6Addresses []*ScheduledInstancesIpv6Address `locationName:"Ipv6Address" locationNameList:"Ipv6Address" type:"list"`
+	Ipv6Addresses []ScheduledInstancesIpv6Address `locationName:"Ipv6Address" locationNameList:"Ipv6Address" type:"list"`
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string `type:"string"`
@@ -48702,7 +48675,7 @@ type ScheduledInstancesNetworkInterface struct {
 	PrivateIpAddress *string `type:"string"`
 
 	// The private IPv4 addresses.
-	PrivateIpAddressConfigs []*ScheduledInstancesPrivateIpAddressConfig `locationName:"PrivateIpAddressConfig" locationNameList:"PrivateIpAddressConfigSet" type:"list"`
+	PrivateIpAddressConfigs []ScheduledInstancesPrivateIpAddressConfig `locationName:"PrivateIpAddressConfig" locationNameList:"PrivateIpAddressConfigSet" type:"list"`
 
 	// The number of secondary private IPv4 addresses.
 	SecondaryPrivateIpAddressCount *int64 `type:"integer"`
@@ -48746,7 +48719,7 @@ func (s *ScheduledInstancesNetworkInterface) SetDeviceIndex(v int64) *ScheduledI
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ScheduledInstancesNetworkInterface) SetGroups(v []*string) *ScheduledInstancesNetworkInterface {
+func (s *ScheduledInstancesNetworkInterface) SetGroups(v []string) *ScheduledInstancesNetworkInterface {
 	s.Groups = v
 	return s
 }
@@ -48758,7 +48731,7 @@ func (s *ScheduledInstancesNetworkInterface) SetIpv6AddressCount(v int64) *Sched
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *ScheduledInstancesNetworkInterface) SetIpv6Addresses(v []*ScheduledInstancesIpv6Address) *ScheduledInstancesNetworkInterface {
+func (s *ScheduledInstancesNetworkInterface) SetIpv6Addresses(v []ScheduledInstancesIpv6Address) *ScheduledInstancesNetworkInterface {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -48776,7 +48749,7 @@ func (s *ScheduledInstancesNetworkInterface) SetPrivateIpAddress(v string) *Sche
 }
 
 // SetPrivateIpAddressConfigs sets the PrivateIpAddressConfigs field's value.
-func (s *ScheduledInstancesNetworkInterface) SetPrivateIpAddressConfigs(v []*ScheduledInstancesPrivateIpAddressConfig) *ScheduledInstancesNetworkInterface {
+func (s *ScheduledInstancesNetworkInterface) SetPrivateIpAddressConfigs(v []ScheduledInstancesPrivateIpAddressConfig) *ScheduledInstancesNetworkInterface {
 	s.PrivateIpAddressConfigs = v
 	return s
 }
@@ -48877,16 +48850,16 @@ type SecurityGroup struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// One or more inbound rules associated with the security group.
-	IpPermissions []*IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
 	// [EC2-VPC] One or more outbound rules associated with the security group.
-	IpPermissionsEgress []*IpPermission `locationName:"ipPermissionsEgress" locationNameList:"item" type:"list"`
+	IpPermissionsEgress []IpPermission `locationName:"ipPermissionsEgress" locationNameList:"item" type:"list"`
 
 	// The AWS account ID of the owner of the security group.
 	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// Any tags assigned to the security group.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// [EC2-VPC] The ID of the VPC for the security group.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -48921,13 +48894,13 @@ func (s *SecurityGroup) SetGroupName(v string) *SecurityGroup {
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *SecurityGroup) SetIpPermissions(v []*IpPermission) *SecurityGroup {
+func (s *SecurityGroup) SetIpPermissions(v []IpPermission) *SecurityGroup {
 	s.IpPermissions = v
 	return s
 }
 
 // SetIpPermissionsEgress sets the IpPermissionsEgress field's value.
-func (s *SecurityGroup) SetIpPermissionsEgress(v []*IpPermission) *SecurityGroup {
+func (s *SecurityGroup) SetIpPermissionsEgress(v []IpPermission) *SecurityGroup {
 	s.IpPermissionsEgress = v
 	return s
 }
@@ -48939,7 +48912,7 @@ func (s *SecurityGroup) SetOwnerId(v string) *SecurityGroup {
 }
 
 // SetTags sets the Tags field's value.
-func (s *SecurityGroup) SetTags(v []*Tag) *SecurityGroup {
+func (s *SecurityGroup) SetTags(v []Tag) *SecurityGroup {
 	s.Tags = v
 	return s
 }
@@ -49418,7 +49391,7 @@ type SpotFleetLaunchSpecification struct {
 	AddressingType *string `locationName:"addressingType" type:"string"`
 
 	// One or more block device mapping entries.
-	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// Indicates whether the instances are optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration
@@ -49449,7 +49422,7 @@ type SpotFleetLaunchSpecification struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify subnet IDs and security group IDs using the network interface.
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
 
 	// The placement information.
 	Placement *SpotPlacement `locationName:"placement" type:"structure"`
@@ -49460,7 +49433,7 @@ type SpotFleetLaunchSpecification struct {
 	// One or more security groups. When requesting instances in a VPC, you must
 	// specify the IDs of the security groups. When requesting instances in EC2-Classic,
 	// you can specify the names or the IDs of the security groups.
-	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+	SecurityGroups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The bid price per unit hour for the specified instance type. If this value
 	// is not specified, the default is the Spot bid price specified for the fleet.
@@ -49473,7 +49446,7 @@ type SpotFleetLaunchSpecification struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The tags to apply during creation.
-	TagSpecifications []*SpotFleetTagSpecification `locationName:"tagSpecificationSet" locationNameList:"item" type:"list"`
+	TagSpecifications []SpotFleetTagSpecification `locationName:"tagSpecificationSet" locationNameList:"item" type:"list"`
 
 	// The user data to make available to the instances. If you are using an AWS
 	// SDK or command line tool, Base64-encoding is performed for you, and you can
@@ -49505,9 +49478,6 @@ func (s *SpotFleetLaunchSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SpotFleetLaunchSpecification"}
 	if s.NetworkInterfaces != nil {
 		for i, v := range s.NetworkInterfaces {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NetworkInterfaces", i), err.(aws.ErrInvalidParams))
 			}
@@ -49527,7 +49497,7 @@ func (s *SpotFleetLaunchSpecification) SetAddressingType(v string) *SpotFleetLau
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *SpotFleetLaunchSpecification) SetBlockDeviceMappings(v []*BlockDeviceMapping) *SpotFleetLaunchSpecification {
+func (s *SpotFleetLaunchSpecification) SetBlockDeviceMappings(v []BlockDeviceMapping) *SpotFleetLaunchSpecification {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -49575,7 +49545,7 @@ func (s *SpotFleetLaunchSpecification) SetMonitoring(v *SpotFleetMonitoring) *Sp
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *SpotFleetLaunchSpecification) SetNetworkInterfaces(v []*InstanceNetworkInterfaceSpecification) *SpotFleetLaunchSpecification {
+func (s *SpotFleetLaunchSpecification) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *SpotFleetLaunchSpecification {
 	s.NetworkInterfaces = v
 	return s
 }
@@ -49593,7 +49563,7 @@ func (s *SpotFleetLaunchSpecification) SetRamdiskId(v string) *SpotFleetLaunchSp
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *SpotFleetLaunchSpecification) SetSecurityGroups(v []*GroupIdentifier) *SpotFleetLaunchSpecification {
+func (s *SpotFleetLaunchSpecification) SetSecurityGroups(v []GroupIdentifier) *SpotFleetLaunchSpecification {
 	s.SecurityGroups = v
 	return s
 }
@@ -49611,7 +49581,7 @@ func (s *SpotFleetLaunchSpecification) SetSubnetId(v string) *SpotFleetLaunchSpe
 }
 
 // SetTagSpecifications sets the TagSpecifications field's value.
-func (s *SpotFleetLaunchSpecification) SetTagSpecifications(v []*SpotFleetTagSpecification) *SpotFleetLaunchSpecification {
+func (s *SpotFleetLaunchSpecification) SetTagSpecifications(v []SpotFleetTagSpecification) *SpotFleetLaunchSpecification {
 	s.TagSpecifications = v
 	return s
 }
@@ -49764,7 +49734,7 @@ type SpotFleetRequestConfigData struct {
 	// Information about the launch specifications for the Spot fleet request.
 	//
 	// LaunchSpecifications is a required field
-	LaunchSpecifications []*SpotFleetLaunchSpecification `locationName:"launchSpecifications" locationNameList:"item" min:"1" type:"list" required:"true"`
+	LaunchSpecifications []SpotFleetLaunchSpecification `locationName:"launchSpecifications" locationNameList:"item" min:"1" type:"list" required:"true"`
 
 	// Indicates whether Spot fleet should replace unhealthy instances.
 	ReplaceUnhealthyInstances *bool `locationName:"replaceUnhealthyInstances" type:"boolean"`
@@ -49839,9 +49809,6 @@ func (s *SpotFleetRequestConfigData) Validate() error {
 	}
 	if s.LaunchSpecifications != nil {
 		for i, v := range s.LaunchSpecifications {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LaunchSpecifications", i), err.(aws.ErrInvalidParams))
 			}
@@ -49891,7 +49858,7 @@ func (s *SpotFleetRequestConfigData) SetInstanceInterruptionBehavior(v InstanceI
 }
 
 // SetLaunchSpecifications sets the LaunchSpecifications field's value.
-func (s *SpotFleetRequestConfigData) SetLaunchSpecifications(v []*SpotFleetLaunchSpecification) *SpotFleetRequestConfigData {
+func (s *SpotFleetRequestConfigData) SetLaunchSpecifications(v []SpotFleetLaunchSpecification) *SpotFleetRequestConfigData {
 	s.LaunchSpecifications = v
 	return s
 }
@@ -49948,7 +49915,7 @@ type SpotFleetTagSpecification struct {
 	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The tags.
-	Tags []*Tag `locationName:"tag" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tag" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -49968,7 +49935,7 @@ func (s *SpotFleetTagSpecification) SetResourceType(v ResourceType) *SpotFleetTa
 }
 
 // SetTags sets the Tags field's value.
-func (s *SpotFleetTagSpecification) SetTags(v []*Tag) *SpotFleetTagSpecification {
+func (s *SpotFleetTagSpecification) SetTags(v []Tag) *SpotFleetTagSpecification {
 	s.Tags = v
 	return s
 }
@@ -50034,7 +50001,7 @@ type SpotInstanceRequest struct {
 	Status *SpotInstanceStatus `locationName:"status" type:"structure"`
 
 	// Any tags assigned to the resource.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The Spot instance request type.
 	Type SpotInstanceType `locationName:"type" type:"string"`
@@ -50151,7 +50118,7 @@ func (s *SpotInstanceRequest) SetStatus(v *SpotInstanceStatus) *SpotInstanceRequ
 }
 
 // SetTags sets the Tags field's value.
-func (s *SpotInstanceRequest) SetTags(v []*Tag) *SpotInstanceRequest {
+func (s *SpotInstanceRequest) SetTags(v []Tag) *SpotInstanceRequest {
 	s.Tags = v
 	return s
 }
@@ -50377,11 +50344,11 @@ type StaleIpPermission struct {
 	IpProtocol *string `locationName:"ipProtocol" type:"string"`
 
 	// One or more IP ranges. Not applicable for stale security group rules.
-	IpRanges []*string `locationName:"ipRanges" locationNameList:"item" type:"list"`
+	IpRanges []string `locationName:"ipRanges" locationNameList:"item" type:"list"`
 
 	// One or more prefix list IDs for an AWS service. Not applicable for stale
 	// security group rules.
-	PrefixListIds []*string `locationName:"prefixListIds" locationNameList:"item" type:"list"`
+	PrefixListIds []string `locationName:"prefixListIds" locationNameList:"item" type:"list"`
 
 	// The end of the port range for the TCP and UDP protocols, or an ICMP type
 	// number. A value of -1 indicates all ICMP types.
@@ -50389,7 +50356,7 @@ type StaleIpPermission struct {
 
 	// One or more security group pairs. Returns the ID of the referenced security
 	// group and VPC, and the ID and status of the VPC peering connection.
-	UserIdGroupPairs []*UserIdGroupPair `locationName:"groups" locationNameList:"item" type:"list"`
+	UserIdGroupPairs []UserIdGroupPair `locationName:"groups" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -50415,13 +50382,13 @@ func (s *StaleIpPermission) SetIpProtocol(v string) *StaleIpPermission {
 }
 
 // SetIpRanges sets the IpRanges field's value.
-func (s *StaleIpPermission) SetIpRanges(v []*string) *StaleIpPermission {
+func (s *StaleIpPermission) SetIpRanges(v []string) *StaleIpPermission {
 	s.IpRanges = v
 	return s
 }
 
 // SetPrefixListIds sets the PrefixListIds field's value.
-func (s *StaleIpPermission) SetPrefixListIds(v []*string) *StaleIpPermission {
+func (s *StaleIpPermission) SetPrefixListIds(v []string) *StaleIpPermission {
 	s.PrefixListIds = v
 	return s
 }
@@ -50433,7 +50400,7 @@ func (s *StaleIpPermission) SetToPort(v int64) *StaleIpPermission {
 }
 
 // SetUserIdGroupPairs sets the UserIdGroupPairs field's value.
-func (s *StaleIpPermission) SetUserIdGroupPairs(v []*UserIdGroupPair) *StaleIpPermission {
+func (s *StaleIpPermission) SetUserIdGroupPairs(v []UserIdGroupPair) *StaleIpPermission {
 	s.UserIdGroupPairs = v
 	return s
 }
@@ -50455,10 +50422,10 @@ type StaleSecurityGroup struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// Information about the stale inbound rules in the security group.
-	StaleIpPermissions []*StaleIpPermission `locationName:"staleIpPermissions" locationNameList:"item" type:"list"`
+	StaleIpPermissions []StaleIpPermission `locationName:"staleIpPermissions" locationNameList:"item" type:"list"`
 
 	// Information about the stale outbound rules in the security group.
-	StaleIpPermissionsEgress []*StaleIpPermission `locationName:"staleIpPermissionsEgress" locationNameList:"item" type:"list"`
+	StaleIpPermissionsEgress []StaleIpPermission `locationName:"staleIpPermissionsEgress" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC for the security group.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -50493,13 +50460,13 @@ func (s *StaleSecurityGroup) SetGroupName(v string) *StaleSecurityGroup {
 }
 
 // SetStaleIpPermissions sets the StaleIpPermissions field's value.
-func (s *StaleSecurityGroup) SetStaleIpPermissions(v []*StaleIpPermission) *StaleSecurityGroup {
+func (s *StaleSecurityGroup) SetStaleIpPermissions(v []StaleIpPermission) *StaleSecurityGroup {
 	s.StaleIpPermissions = v
 	return s
 }
 
 // SetStaleIpPermissionsEgress sets the StaleIpPermissionsEgress field's value.
-func (s *StaleSecurityGroup) SetStaleIpPermissionsEgress(v []*StaleIpPermission) *StaleSecurityGroup {
+func (s *StaleSecurityGroup) SetStaleIpPermissionsEgress(v []StaleIpPermission) *StaleSecurityGroup {
 	s.StaleIpPermissionsEgress = v
 	return s
 }
@@ -50527,7 +50494,7 @@ type StartInstancesInput struct {
 	// One or more instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -50567,7 +50534,7 @@ func (s *StartInstancesInput) SetDryRun(v bool) *StartInstancesInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *StartInstancesInput) SetInstanceIds(v []*string) *StartInstancesInput {
+func (s *StartInstancesInput) SetInstanceIds(v []string) *StartInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -50578,7 +50545,7 @@ type StartInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more started instances.
-	StartingInstances []*InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	StartingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -50592,7 +50559,7 @@ func (s StartInstancesOutput) GoString() string {
 }
 
 // SetStartingInstances sets the StartingInstances field's value.
-func (s *StartInstancesOutput) SetStartingInstances(v []*InstanceStateChange) *StartInstancesOutput {
+func (s *StartInstancesOutput) SetStartingInstances(v []InstanceStateChange) *StartInstancesOutput {
 	s.StartingInstances = v
 	return s
 }
@@ -50682,7 +50649,7 @@ type StopInstancesInput struct {
 	// One or more instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -50722,7 +50689,7 @@ func (s *StopInstancesInput) SetForce(v bool) *StopInstancesInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *StopInstancesInput) SetInstanceIds(v []*string) *StopInstancesInput {
+func (s *StopInstancesInput) SetInstanceIds(v []string) *StopInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -50733,7 +50700,7 @@ type StopInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more stopped instances.
-	StoppingInstances []*InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	StoppingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -50747,7 +50714,7 @@ func (s StopInstancesOutput) GoString() string {
 }
 
 // SetStoppingInstances sets the StoppingInstances field's value.
-func (s *StopInstancesOutput) SetStoppingInstances(v []*InstanceStateChange) *StopInstancesOutput {
+func (s *StopInstancesOutput) SetStoppingInstances(v []InstanceStateChange) *StopInstancesOutput {
 	s.StoppingInstances = v
 	return s
 }
@@ -50834,7 +50801,7 @@ type Subnet struct {
 	DefaultForAz *bool `locationName:"defaultForAz" type:"boolean"`
 
 	// Information about the IPv6 CIDR blocks associated with the subnet.
-	Ipv6CidrBlockAssociationSet []*SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
+	Ipv6CidrBlockAssociationSet []SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
 
 	// Indicates whether instances launched in this subnet receive a public IPv4
 	// address.
@@ -50847,7 +50814,7 @@ type Subnet struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// Any tags assigned to the subnet.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC the subnet is in.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -50894,7 +50861,7 @@ func (s *Subnet) SetDefaultForAz(v bool) *Subnet {
 }
 
 // SetIpv6CidrBlockAssociationSet sets the Ipv6CidrBlockAssociationSet field's value.
-func (s *Subnet) SetIpv6CidrBlockAssociationSet(v []*SubnetIpv6CidrBlockAssociation) *Subnet {
+func (s *Subnet) SetIpv6CidrBlockAssociationSet(v []SubnetIpv6CidrBlockAssociation) *Subnet {
 	s.Ipv6CidrBlockAssociationSet = v
 	return s
 }
@@ -50918,7 +50885,7 @@ func (s *Subnet) SetSubnetId(v string) *Subnet {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Subnet) SetTags(v []*Tag) *Subnet {
+func (s *Subnet) SetTags(v []Tag) *Subnet {
 	s.Tags = v
 	return s
 }
@@ -51108,7 +51075,7 @@ type TagSpecification struct {
 	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The tags to apply to the resource.
-	Tags []*Tag `locationName:"Tag" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"Tag" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -51128,7 +51095,7 @@ func (s *TagSpecification) SetResourceType(v ResourceType) *TagSpecification {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagSpecification) SetTags(v []*Tag) *TagSpecification {
+func (s *TagSpecification) SetTags(v []Tag) *TagSpecification {
 	s.Tags = v
 	return s
 }
@@ -51273,7 +51240,7 @@ type TerminateInstancesInput struct {
 	// into smaller batches.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -51307,7 +51274,7 @@ func (s *TerminateInstancesInput) SetDryRun(v bool) *TerminateInstancesInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *TerminateInstancesInput) SetInstanceIds(v []*string) *TerminateInstancesInput {
+func (s *TerminateInstancesInput) SetInstanceIds(v []string) *TerminateInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -51318,7 +51285,7 @@ type TerminateInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about one or more terminated instances.
-	TerminatingInstances []*InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	TerminatingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -51332,7 +51299,7 @@ func (s TerminateInstancesOutput) GoString() string {
 }
 
 // SetTerminatingInstances sets the TerminatingInstances field's value.
-func (s *TerminateInstancesOutput) SetTerminatingInstances(v []*InstanceStateChange) *TerminateInstancesOutput {
+func (s *TerminateInstancesOutput) SetTerminatingInstances(v []InstanceStateChange) *TerminateInstancesOutput {
 	s.TerminatingInstances = v
 	return s
 }
@@ -51344,7 +51311,7 @@ type UnassignIpv6AddressesInput struct {
 	// The IPv6 addresses to unassign from the network interface.
 	//
 	// Ipv6Addresses is a required field
-	Ipv6Addresses []*string `locationName:"ipv6Addresses" locationNameList:"item" type:"list" required:"true"`
+	Ipv6Addresses []string `locationName:"ipv6Addresses" locationNameList:"item" type:"list" required:"true"`
 
 	// The ID of the network interface.
 	//
@@ -51381,7 +51348,7 @@ func (s *UnassignIpv6AddressesInput) Validate() error {
 }
 
 // SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *UnassignIpv6AddressesInput) SetIpv6Addresses(v []*string) *UnassignIpv6AddressesInput {
+func (s *UnassignIpv6AddressesInput) SetIpv6Addresses(v []string) *UnassignIpv6AddressesInput {
 	s.Ipv6Addresses = v
 	return s
 }
@@ -51400,7 +51367,7 @@ type UnassignIpv6AddressesOutput struct {
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The IPv6 addresses that have been unassigned from the network interface.
-	UnassignedIpv6Addresses []*string `locationName:"unassignedIpv6Addresses" locationNameList:"item" type:"list"`
+	UnassignedIpv6Addresses []string `locationName:"unassignedIpv6Addresses" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -51420,7 +51387,7 @@ func (s *UnassignIpv6AddressesOutput) SetNetworkInterfaceId(v string) *UnassignI
 }
 
 // SetUnassignedIpv6Addresses sets the UnassignedIpv6Addresses field's value.
-func (s *UnassignIpv6AddressesOutput) SetUnassignedIpv6Addresses(v []*string) *UnassignIpv6AddressesOutput {
+func (s *UnassignIpv6AddressesOutput) SetUnassignedIpv6Addresses(v []string) *UnassignIpv6AddressesOutput {
 	s.UnassignedIpv6Addresses = v
 	return s
 }
@@ -51439,7 +51406,7 @@ type UnassignPrivateIpAddressesInput struct {
 	// You can specify this option multiple times to unassign more than one IP address.
 	//
 	// PrivateIpAddresses is a required field
-	PrivateIpAddresses []*string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list" required:"true"`
+	PrivateIpAddresses []string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -51477,7 +51444,7 @@ func (s *UnassignPrivateIpAddressesInput) SetNetworkInterfaceId(v string) *Unass
 }
 
 // SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *UnassignPrivateIpAddressesInput) SetPrivateIpAddresses(v []*string) *UnassignPrivateIpAddressesInput {
+func (s *UnassignPrivateIpAddressesInput) SetPrivateIpAddresses(v []string) *UnassignPrivateIpAddressesInput {
 	s.PrivateIpAddresses = v
 	return s
 }
@@ -51511,7 +51478,7 @@ type UnmonitorInstancesInput struct {
 	// One or more instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -51545,7 +51512,7 @@ func (s *UnmonitorInstancesInput) SetDryRun(v bool) *UnmonitorInstancesInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *UnmonitorInstancesInput) SetInstanceIds(v []*string) *UnmonitorInstancesInput {
+func (s *UnmonitorInstancesInput) SetInstanceIds(v []string) *UnmonitorInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -51556,7 +51523,7 @@ type UnmonitorInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The monitoring information.
-	InstanceMonitorings []*InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
+	InstanceMonitorings []InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -51570,7 +51537,7 @@ func (s UnmonitorInstancesOutput) GoString() string {
 }
 
 // SetInstanceMonitorings sets the InstanceMonitorings field's value.
-func (s *UnmonitorInstancesOutput) SetInstanceMonitorings(v []*InstanceMonitoring) *UnmonitorInstancesOutput {
+func (s *UnmonitorInstancesOutput) SetInstanceMonitorings(v []InstanceMonitoring) *UnmonitorInstancesOutput {
 	s.InstanceMonitorings = v
 	return s
 }
@@ -51673,7 +51640,7 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 	// The IP permissions for the security group rule.
 	//
 	// IpPermissions is a required field
-	IpPermissions []*IpPermission `locationNameList:"item" type:"list" required:"true"`
+	IpPermissions []IpPermission `locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -51719,7 +51686,7 @@ func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetGroupName(v string) 
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetIpPermissions(v []*IpPermission) *UpdateSecurityGroupRuleDescriptionsEgressInput {
+func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetIpPermissions(v []IpPermission) *UpdateSecurityGroupRuleDescriptionsEgressInput {
 	s.IpPermissions = v
 	return s
 }
@@ -51772,7 +51739,7 @@ type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
 	// The IP permissions for the security group rule.
 	//
 	// IpPermissions is a required field
-	IpPermissions []*IpPermission `locationNameList:"item" type:"list" required:"true"`
+	IpPermissions []IpPermission `locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -51818,7 +51785,7 @@ func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetGroupName(v string)
 }
 
 // SetIpPermissions sets the IpPermissions field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetIpPermissions(v []*IpPermission) *UpdateSecurityGroupRuleDescriptionsIngressInput {
+func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetIpPermissions(v []IpPermission) *UpdateSecurityGroupRuleDescriptionsIngressInput {
 	s.IpPermissions = v
 	return s
 }
@@ -52415,7 +52382,7 @@ type VolumeStatusInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The details of the volume status.
-	Details []*VolumeStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
+	Details []VolumeStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status of the volume.
 	Status VolumeStatusInfoStatus `locationName:"status" type:"string"`
@@ -52432,7 +52399,7 @@ func (s VolumeStatusInfo) GoString() string {
 }
 
 // SetDetails sets the Details field's value.
-func (s *VolumeStatusInfo) SetDetails(v []*VolumeStatusDetails) *VolumeStatusInfo {
+func (s *VolumeStatusInfo) SetDetails(v []VolumeStatusDetails) *VolumeStatusInfo {
 	s.Details = v
 	return s
 }
@@ -52449,13 +52416,13 @@ type VolumeStatusItem struct {
 	_ struct{} `type:"structure"`
 
 	// The details of the operation.
-	Actions []*VolumeStatusAction `locationName:"actionsSet" locationNameList:"item" type:"list"`
+	Actions []VolumeStatusAction `locationName:"actionsSet" locationNameList:"item" type:"list"`
 
 	// The Availability Zone of the volume.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// A list of events associated with the volume.
-	Events []*VolumeStatusEvent `locationName:"eventsSet" locationNameList:"item" type:"list"`
+	Events []VolumeStatusEvent `locationName:"eventsSet" locationNameList:"item" type:"list"`
 
 	// The volume ID.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -52475,7 +52442,7 @@ func (s VolumeStatusItem) GoString() string {
 }
 
 // SetActions sets the Actions field's value.
-func (s *VolumeStatusItem) SetActions(v []*VolumeStatusAction) *VolumeStatusItem {
+func (s *VolumeStatusItem) SetActions(v []VolumeStatusAction) *VolumeStatusItem {
 	s.Actions = v
 	return s
 }
@@ -52487,7 +52454,7 @@ func (s *VolumeStatusItem) SetAvailabilityZone(v string) *VolumeStatusItem {
 }
 
 // SetEvents sets the Events field's value.
-func (s *VolumeStatusItem) SetEvents(v []*VolumeStatusEvent) *VolumeStatusItem {
+func (s *VolumeStatusItem) SetEvents(v []VolumeStatusEvent) *VolumeStatusItem {
 	s.Events = v
 	return s
 }
@@ -52513,7 +52480,7 @@ type Vpc struct {
 	CidrBlock *string `locationName:"cidrBlock" type:"string"`
 
 	// Information about the IPv4 CIDR blocks associated with the VPC.
-	CidrBlockAssociationSet []*VpcCidrBlockAssociation `locationName:"cidrBlockAssociationSet" locationNameList:"item" type:"list"`
+	CidrBlockAssociationSet []VpcCidrBlockAssociation `locationName:"cidrBlockAssociationSet" locationNameList:"item" type:"list"`
 
 	// The ID of the set of DHCP options you've associated with the VPC (or default
 	// if the default options are associated with the VPC).
@@ -52523,7 +52490,7 @@ type Vpc struct {
 	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
 
 	// Information about the IPv6 CIDR blocks associated with the VPC.
-	Ipv6CidrBlockAssociationSet []*VpcIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
+	Ipv6CidrBlockAssociationSet []VpcIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
 
 	// Indicates whether the VPC is the default VPC.
 	IsDefault *bool `locationName:"isDefault" type:"boolean"`
@@ -52532,7 +52499,7 @@ type Vpc struct {
 	State VpcState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the VPC.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -52555,7 +52522,7 @@ func (s *Vpc) SetCidrBlock(v string) *Vpc {
 }
 
 // SetCidrBlockAssociationSet sets the CidrBlockAssociationSet field's value.
-func (s *Vpc) SetCidrBlockAssociationSet(v []*VpcCidrBlockAssociation) *Vpc {
+func (s *Vpc) SetCidrBlockAssociationSet(v []VpcCidrBlockAssociation) *Vpc {
 	s.CidrBlockAssociationSet = v
 	return s
 }
@@ -52573,7 +52540,7 @@ func (s *Vpc) SetInstanceTenancy(v Tenancy) *Vpc {
 }
 
 // SetIpv6CidrBlockAssociationSet sets the Ipv6CidrBlockAssociationSet field's value.
-func (s *Vpc) SetIpv6CidrBlockAssociationSet(v []*VpcIpv6CidrBlockAssociation) *Vpc {
+func (s *Vpc) SetIpv6CidrBlockAssociationSet(v []VpcIpv6CidrBlockAssociation) *Vpc {
 	s.Ipv6CidrBlockAssociationSet = v
 	return s
 }
@@ -52591,7 +52558,7 @@ func (s *Vpc) SetState(v VpcState) *Vpc {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Vpc) SetTags(v []*Tag) *Vpc {
+func (s *Vpc) SetTags(v []Tag) *Vpc {
 	s.Tags = v
 	return s
 }
@@ -52722,7 +52689,7 @@ type VpcClassicLink struct {
 	ClassicLinkEnabled *bool `locationName:"classicLinkEnabled" type:"boolean"`
 
 	// Any tags assigned to the VPC.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -52745,7 +52712,7 @@ func (s *VpcClassicLink) SetClassicLinkEnabled(v bool) *VpcClassicLink {
 }
 
 // SetTags sets the Tags field's value.
-func (s *VpcClassicLink) SetTags(v []*Tag) *VpcClassicLink {
+func (s *VpcClassicLink) SetTags(v []Tag) *VpcClassicLink {
 	s.Tags = v
 	return s
 }
@@ -52768,7 +52735,7 @@ type VpcEndpoint struct {
 	PolicyDocument *string `locationName:"policyDocument" type:"string"`
 
 	// One or more route tables associated with the endpoint.
-	RouteTableIds []*string `locationName:"routeTableIdSet" locationNameList:"item" type:"list"`
+	RouteTableIds []string `locationName:"routeTableIdSet" locationNameList:"item" type:"list"`
 
 	// The name of the AWS service to which the endpoint is associated.
 	ServiceName *string `locationName:"serviceName" type:"string"`
@@ -52806,7 +52773,7 @@ func (s *VpcEndpoint) SetPolicyDocument(v string) *VpcEndpoint {
 }
 
 // SetRouteTableIds sets the RouteTableIds field's value.
-func (s *VpcEndpoint) SetRouteTableIds(v []*string) *VpcEndpoint {
+func (s *VpcEndpoint) SetRouteTableIds(v []string) *VpcEndpoint {
 	s.RouteTableIds = v
 	return s
 }
@@ -52898,7 +52865,7 @@ type VpcPeeringConnection struct {
 	Status *VpcPeeringConnectionStateReason `locationName:"status" type:"structure"`
 
 	// Any tags assigned to the resource.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC peering connection.
 	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
@@ -52939,7 +52906,7 @@ func (s *VpcPeeringConnection) SetStatus(v *VpcPeeringConnectionStateReason) *Vp
 }
 
 // SetTags sets the Tags field's value.
-func (s *VpcPeeringConnection) SetTags(v []*Tag) *VpcPeeringConnection {
+func (s *VpcPeeringConnection) SetTags(v []Tag) *VpcPeeringConnection {
 	s.Tags = v
 	return s
 }
@@ -53039,10 +53006,10 @@ type VpcPeeringConnectionVpcInfo struct {
 	CidrBlock *string `locationName:"cidrBlock" type:"string"`
 
 	// Information about the IPv4 CIDR blocks for the VPC.
-	CidrBlockSet []*CidrBlock `locationName:"cidrBlockSet" locationNameList:"item" type:"list"`
+	CidrBlockSet []CidrBlock `locationName:"cidrBlockSet" locationNameList:"item" type:"list"`
 
 	// The IPv6 CIDR block for the VPC.
-	Ipv6CidrBlockSet []*Ipv6CidrBlock `locationName:"ipv6CidrBlockSet" locationNameList:"item" type:"list"`
+	Ipv6CidrBlockSet []Ipv6CidrBlock `locationName:"ipv6CidrBlockSet" locationNameList:"item" type:"list"`
 
 	// The AWS account ID of the VPC owner.
 	OwnerId *string `locationName:"ownerId" type:"string"`
@@ -53072,13 +53039,13 @@ func (s *VpcPeeringConnectionVpcInfo) SetCidrBlock(v string) *VpcPeeringConnecti
 }
 
 // SetCidrBlockSet sets the CidrBlockSet field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetCidrBlockSet(v []*CidrBlock) *VpcPeeringConnectionVpcInfo {
+func (s *VpcPeeringConnectionVpcInfo) SetCidrBlockSet(v []CidrBlock) *VpcPeeringConnectionVpcInfo {
 	s.CidrBlockSet = v
 	return s
 }
 
 // SetIpv6CidrBlockSet sets the Ipv6CidrBlockSet field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetIpv6CidrBlockSet(v []*Ipv6CidrBlock) *VpcPeeringConnectionVpcInfo {
+func (s *VpcPeeringConnectionVpcInfo) SetIpv6CidrBlockSet(v []Ipv6CidrBlock) *VpcPeeringConnectionVpcInfo {
 	s.Ipv6CidrBlockSet = v
 	return s
 }
@@ -53125,19 +53092,19 @@ type VpnConnection struct {
 	Options *VpnConnectionOptions `locationName:"options" type:"structure"`
 
 	// The static routes associated with the VPN connection.
-	Routes []*VpnStaticRoute `locationName:"routes" locationNameList:"item" type:"list"`
+	Routes []VpnStaticRoute `locationName:"routes" locationNameList:"item" type:"list"`
 
 	// The current state of the VPN connection.
 	State VpnState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the VPN connection.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection.
 	Type GatewayType `locationName:"type" type:"string"`
 
 	// Information about the VPN tunnel.
-	VgwTelemetry []*VgwTelemetry `locationName:"vgwTelemetry" locationNameList:"item" type:"list"`
+	VgwTelemetry []VgwTelemetry `locationName:"vgwTelemetry" locationNameList:"item" type:"list"`
 
 	// The ID of the VPN connection.
 	VpnConnectionId *string `locationName:"vpnConnectionId" type:"string"`
@@ -53181,7 +53148,7 @@ func (s *VpnConnection) SetOptions(v *VpnConnectionOptions) *VpnConnection {
 }
 
 // SetRoutes sets the Routes field's value.
-func (s *VpnConnection) SetRoutes(v []*VpnStaticRoute) *VpnConnection {
+func (s *VpnConnection) SetRoutes(v []VpnStaticRoute) *VpnConnection {
 	s.Routes = v
 	return s
 }
@@ -53193,7 +53160,7 @@ func (s *VpnConnection) SetState(v VpnState) *VpnConnection {
 }
 
 // SetTags sets the Tags field's value.
-func (s *VpnConnection) SetTags(v []*Tag) *VpnConnection {
+func (s *VpnConnection) SetTags(v []Tag) *VpnConnection {
 	s.Tags = v
 	return s
 }
@@ -53205,7 +53172,7 @@ func (s *VpnConnection) SetType(v GatewayType) *VpnConnection {
 }
 
 // SetVgwTelemetry sets the VgwTelemetry field's value.
-func (s *VpnConnection) SetVgwTelemetry(v []*VgwTelemetry) *VpnConnection {
+func (s *VpnConnection) SetVgwTelemetry(v []VgwTelemetry) *VpnConnection {
 	s.VgwTelemetry = v
 	return s
 }
@@ -53261,7 +53228,7 @@ type VpnConnectionOptionsSpecification struct {
 	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
 
 	// The tunnel options for the VPN connection.
-	TunnelOptions []*VpnTunnelOptionsSpecification `locationNameList:"item" type:"list"`
+	TunnelOptions []VpnTunnelOptionsSpecification `locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -53281,7 +53248,7 @@ func (s *VpnConnectionOptionsSpecification) SetStaticRoutesOnly(v bool) *VpnConn
 }
 
 // SetTunnelOptions sets the TunnelOptions field's value.
-func (s *VpnConnectionOptionsSpecification) SetTunnelOptions(v []*VpnTunnelOptionsSpecification) *VpnConnectionOptionsSpecification {
+func (s *VpnConnectionOptionsSpecification) SetTunnelOptions(v []VpnTunnelOptionsSpecification) *VpnConnectionOptionsSpecification {
 	s.TunnelOptions = v
 	return s
 }
@@ -53302,13 +53269,13 @@ type VpnGateway struct {
 	State VpnState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the virtual private gateway.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection the virtual private gateway supports.
 	Type GatewayType `locationName:"type" type:"string"`
 
 	// Any VPCs attached to the virtual private gateway.
-	VpcAttachments []*VpcAttachment `locationName:"attachments" locationNameList:"item" type:"list"`
+	VpcAttachments []VpcAttachment `locationName:"attachments" locationNameList:"item" type:"list"`
 
 	// The ID of the virtual private gateway.
 	VpnGatewayId *string `locationName:"vpnGatewayId" type:"string"`
@@ -53343,7 +53310,7 @@ func (s *VpnGateway) SetState(v VpnState) *VpnGateway {
 }
 
 // SetTags sets the Tags field's value.
-func (s *VpnGateway) SetTags(v []*Tag) *VpnGateway {
+func (s *VpnGateway) SetTags(v []Tag) *VpnGateway {
 	s.Tags = v
 	return s
 }
@@ -53355,7 +53322,7 @@ func (s *VpnGateway) SetType(v GatewayType) *VpnGateway {
 }
 
 // SetVpcAttachments sets the VpcAttachments field's value.
-func (s *VpnGateway) SetVpcAttachments(v []*VpcAttachment) *VpnGateway {
+func (s *VpnGateway) SetVpcAttachments(v []VpcAttachment) *VpnGateway {
 	s.VpcAttachments = v
 	return s
 }

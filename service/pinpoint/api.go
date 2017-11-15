@@ -2653,7 +2653,7 @@ type ADMMessage struct {
 	// favor of this one.
 	ConsolidationKey *string `type:"string"`
 
-	Data map[string]*string `type:"map"`
+	Data map[string]string `type:"map"`
 
 	// Optional. Number of seconds ADM should retain the message if the device is
 	// offline
@@ -2695,7 +2695,7 @@ type ADMMessage struct {
 	// sound files must reside in /res/raw/
 	Sound *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// The message title that displays above the message on the user's device.
 	Title *string `type:"string"`
@@ -2734,7 +2734,7 @@ func (s *ADMMessage) SetConsolidationKey(v string) *ADMMessage {
 }
 
 // SetData sets the Data field's value.
-func (s *ADMMessage) SetData(v map[string]*string) *ADMMessage {
+func (s *ADMMessage) SetData(v map[string]string) *ADMMessage {
 	s.Data = v
 	return s
 }
@@ -2800,7 +2800,7 @@ func (s *ADMMessage) SetSound(v string) *ADMMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *ADMMessage) SetSubstitutions(v map[string][]*string) *ADMMessage {
+func (s *ADMMessage) SetSubstitutions(v map[string][]string) *ADMMessage {
 	s.Substitutions = v
 	return s
 }
@@ -3029,7 +3029,7 @@ type APNSMessage struct {
 	// your app's registered categories.
 	Category *string `type:"string"`
 
-	Data map[string]*string `type:"map"`
+	Data map[string]string `type:"map"`
 
 	// The data payload used for a silent push. This payload is added to the notifications'
 	// data.pinpoint.jsonBody' object
@@ -3055,7 +3055,7 @@ type APNSMessage struct {
 	// if you specify defaultfor the value, the system plays the default alert sound.
 	Sound *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// Provide this key with a string value that represents the app-specific identifier
 	// for grouping notifications. If you provide a Notification Content app extension,
@@ -3105,7 +3105,7 @@ func (s *APNSMessage) SetCategory(v string) *APNSMessage {
 }
 
 // SetData sets the Data field's value.
-func (s *APNSMessage) SetData(v map[string]*string) *APNSMessage {
+func (s *APNSMessage) SetData(v map[string]string) *APNSMessage {
 	s.Data = v
 	return s
 }
@@ -3147,7 +3147,7 @@ func (s *APNSMessage) SetSound(v string) *APNSMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *APNSMessage) SetSubstitutions(v map[string][]*string) *APNSMessage {
+func (s *APNSMessage) SetSubstitutions(v map[string][]string) *APNSMessage {
 	s.Substitutions = v
 	return s
 }
@@ -3361,7 +3361,7 @@ type ActivitiesResponse struct {
 	_ struct{} `type:"structure"`
 
 	// List of campaign activities
-	Item []*ActivityResponse `type:"list"`
+	Item []ActivityResponse `type:"list"`
 }
 
 // String returns the string representation
@@ -3375,7 +3375,7 @@ func (s ActivitiesResponse) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *ActivitiesResponse) SetItem(v []*ActivityResponse) *ActivitiesResponse {
+func (s *ActivitiesResponse) SetItem(v []ActivityResponse) *ActivitiesResponse {
 	s.Item = v
 	return s
 }
@@ -3527,13 +3527,13 @@ type AddressConfiguration struct {
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
 	ChannelType ChannelType `type:"string"`
 
-	Context map[string]*string `type:"map"`
+	Context map[string]string `type:"map"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
 	// the message.
 	RawContent *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// Title override. If specified will override default title if applicable.
 	TitleOverride *string `type:"string"`
@@ -3562,7 +3562,7 @@ func (s *AddressConfiguration) SetChannelType(v ChannelType) *AddressConfigurati
 }
 
 // SetContext sets the Context field's value.
-func (s *AddressConfiguration) SetContext(v map[string]*string) *AddressConfiguration {
+func (s *AddressConfiguration) SetContext(v map[string]string) *AddressConfiguration {
 	s.Context = v
 	return s
 }
@@ -3574,7 +3574,7 @@ func (s *AddressConfiguration) SetRawContent(v string) *AddressConfiguration {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *AddressConfiguration) SetSubstitutions(v map[string][]*string) *AddressConfiguration {
+func (s *AddressConfiguration) SetSubstitutions(v map[string][]string) *AddressConfiguration {
 	s.Substitutions = v
 	return s
 }
@@ -3681,7 +3681,7 @@ type ApplicationsResponse struct {
 	_ struct{} `type:"structure"`
 
 	// List of applications returned in this page.
-	Item []*ApplicationResponse `type:"list"`
+	Item []ApplicationResponse `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -3699,7 +3699,7 @@ func (s ApplicationsResponse) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *ApplicationsResponse) SetItem(v []*ApplicationResponse) *ApplicationsResponse {
+func (s *ApplicationsResponse) SetItem(v []ApplicationResponse) *ApplicationsResponse {
 	s.Item = v
 	return s
 }
@@ -3720,7 +3720,7 @@ type AttributeDimension struct {
 	// from the segment.
 	AttributeType AttributeType `type:"string"`
 
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3740,7 +3740,7 @@ func (s *AttributeDimension) SetAttributeType(v AttributeType) *AttributeDimensi
 }
 
 // SetValues sets the Values field's value.
-func (s *AttributeDimension) SetValues(v []*string) *AttributeDimension {
+func (s *AttributeDimension) SetValues(v []string) *AttributeDimension {
 	s.Values = v
 	return s
 }
@@ -3911,7 +3911,7 @@ type BaiduMessage struct {
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
 
-	Data map[string]*string `type:"map"`
+	Data map[string]string `type:"map"`
 
 	// The icon image name of the asset saved in your application.
 	IconReference *string `type:"string"`
@@ -3945,7 +3945,7 @@ type BaiduMessage struct {
 	// sound files must reside in /res/raw/
 	Sound *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// The message title that displays above the message on the user's device.
 	Title *string `type:"string"`
@@ -3978,7 +3978,7 @@ func (s *BaiduMessage) SetBody(v string) *BaiduMessage {
 }
 
 // SetData sets the Data field's value.
-func (s *BaiduMessage) SetData(v map[string]*string) *BaiduMessage {
+func (s *BaiduMessage) SetData(v map[string]string) *BaiduMessage {
 	s.Data = v
 	return s
 }
@@ -4032,7 +4032,7 @@ func (s *BaiduMessage) SetSound(v string) *BaiduMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *BaiduMessage) SetSubstitutions(v map[string][]*string) *BaiduMessage {
+func (s *BaiduMessage) SetSubstitutions(v map[string][]string) *BaiduMessage {
 	s.Substitutions = v
 	return s
 }
@@ -4163,7 +4163,7 @@ type CampaignResponse struct {
 	_ struct{} `type:"structure"`
 
 	// Treatments that are defined in addition to the default treatment.
-	AdditionalTreatments []*TreatmentResource `type:"list"`
+	AdditionalTreatments []TreatmentResource `type:"list"`
 
 	// The ID of the application to which the campaign applies.
 	ApplicationId *string `type:"string"`
@@ -4235,7 +4235,7 @@ func (s CampaignResponse) GoString() string {
 }
 
 // SetAdditionalTreatments sets the AdditionalTreatments field's value.
-func (s *CampaignResponse) SetAdditionalTreatments(v []*TreatmentResource) *CampaignResponse {
+func (s *CampaignResponse) SetAdditionalTreatments(v []TreatmentResource) *CampaignResponse {
 	s.AdditionalTreatments = v
 	return s
 }
@@ -4424,7 +4424,7 @@ type CampaignsResponse struct {
 	_ struct{} `type:"structure"`
 
 	// A list of campaigns.
-	Item []*CampaignResponse `type:"list"`
+	Item []CampaignResponse `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -4442,7 +4442,7 @@ func (s CampaignsResponse) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *CampaignsResponse) SetItem(v []*CampaignResponse) *CampaignsResponse {
+func (s *CampaignsResponse) SetItem(v []CampaignResponse) *CampaignsResponse {
 	s.Item = v
 	return s
 }
@@ -4785,7 +4785,7 @@ type DefaultMessage struct {
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 }
 
 // String returns the string representation
@@ -4805,7 +4805,7 @@ func (s *DefaultMessage) SetBody(v string) *DefaultMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *DefaultMessage) SetSubstitutions(v map[string][]*string) *DefaultMessage {
+func (s *DefaultMessage) SetSubstitutions(v map[string][]string) *DefaultMessage {
 	s.Substitutions = v
 	return s
 }
@@ -4827,7 +4827,7 @@ type DefaultPushNotificationMessage struct {
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
 
-	Data map[string]*string `type:"map"`
+	Data map[string]string `type:"map"`
 
 	// The data payload used for a silent push. This payload is added to the notifications'
 	// data.pinpoint.jsonBody' object
@@ -4837,7 +4837,7 @@ type DefaultPushNotificationMessage struct {
 	// can be used for Remote Configuration and Phone Home use cases.
 	SilentPush *bool `type:"boolean"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// The message title that displays above the message on the user's device.
 	Title *string `type:"string"`
@@ -4870,7 +4870,7 @@ func (s *DefaultPushNotificationMessage) SetBody(v string) *DefaultPushNotificat
 }
 
 // SetData sets the Data field's value.
-func (s *DefaultPushNotificationMessage) SetData(v map[string]*string) *DefaultPushNotificationMessage {
+func (s *DefaultPushNotificationMessage) SetData(v map[string]string) *DefaultPushNotificationMessage {
 	s.Data = v
 	return s
 }
@@ -4888,7 +4888,7 @@ func (s *DefaultPushNotificationMessage) SetSilentPush(v bool) *DefaultPushNotif
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *DefaultPushNotificationMessage) SetSubstitutions(v map[string][]*string) *DefaultPushNotificationMessage {
+func (s *DefaultPushNotificationMessage) SetSubstitutions(v map[string][]string) *DefaultPushNotificationMessage {
 	s.Substitutions = v
 	return s
 }
@@ -5917,7 +5917,7 @@ type EmailMessage struct {
 	// The HTML part of the email.
 	HtmlBody *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// The ARN of the template to use for the email.
 	TemplateArn *string `type:"string"`
@@ -5955,7 +5955,7 @@ func (s *EmailMessage) SetHtmlBody(v string) *EmailMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *EmailMessage) SetSubstitutions(v map[string][]*string) *EmailMessage {
+func (s *EmailMessage) SetSubstitutions(v map[string][]string) *EmailMessage {
 	s.Substitutions = v
 	return s
 }
@@ -5981,7 +5981,7 @@ type EndpointBatchItem struct {
 	// DeviceToken or RegistrationId).
 	Address *string `type:"string"`
 
-	Attributes map[string][]*string `type:"map"`
+	Attributes map[string][]string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
 	ChannelType ChannelType `type:"string"`
@@ -6002,7 +6002,7 @@ type EndpointBatchItem struct {
 	// The endpoint location attributes.
 	Location *EndpointLocation `type:"structure"`
 
-	Metrics map[string]*float64 `type:"map"`
+	Metrics map[string]float64 `type:"map"`
 
 	// Indicates whether a user has opted out of receiving messages with one of
 	// the following values:ALL - User has opted out of all messages.NONE - Users
@@ -6033,7 +6033,7 @@ func (s *EndpointBatchItem) SetAddress(v string) *EndpointBatchItem {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *EndpointBatchItem) SetAttributes(v map[string][]*string) *EndpointBatchItem {
+func (s *EndpointBatchItem) SetAttributes(v map[string][]string) *EndpointBatchItem {
 	s.Attributes = v
 	return s
 }
@@ -6075,7 +6075,7 @@ func (s *EndpointBatchItem) SetLocation(v *EndpointLocation) *EndpointBatchItem 
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *EndpointBatchItem) SetMetrics(v map[string]*float64) *EndpointBatchItem {
+func (s *EndpointBatchItem) SetMetrics(v map[string]float64) *EndpointBatchItem {
 	s.Metrics = v
 	return s
 }
@@ -6104,7 +6104,7 @@ type EndpointBatchRequest struct {
 	_ struct{} `type:"structure"`
 
 	// List of items to update. Maximum 100 items
-	Item []*EndpointBatchItem `type:"list"`
+	Item []EndpointBatchItem `type:"list"`
 }
 
 // String returns the string representation
@@ -6118,7 +6118,7 @@ func (s EndpointBatchRequest) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *EndpointBatchRequest) SetItem(v []*EndpointBatchItem) *EndpointBatchRequest {
+func (s *EndpointBatchRequest) SetItem(v []EndpointBatchItem) *EndpointBatchRequest {
 	s.Item = v
 	return s
 }
@@ -6355,7 +6355,7 @@ type EndpointRequest struct {
 	// DeviceToken or RegistrationId).
 	Address *string `type:"string"`
 
-	Attributes map[string][]*string `type:"map"`
+	Attributes map[string][]string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
 	ChannelType ChannelType `type:"string"`
@@ -6373,7 +6373,7 @@ type EndpointRequest struct {
 	// The endpoint location attributes.
 	Location *EndpointLocation `type:"structure"`
 
-	Metrics map[string]*float64 `type:"map"`
+	Metrics map[string]float64 `type:"map"`
 
 	// Indicates whether a user has opted out of receiving messages with one of
 	// the following values:ALL - User has opted out of all messages.NONE - Users
@@ -6404,7 +6404,7 @@ func (s *EndpointRequest) SetAddress(v string) *EndpointRequest {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *EndpointRequest) SetAttributes(v map[string][]*string) *EndpointRequest {
+func (s *EndpointRequest) SetAttributes(v map[string][]string) *EndpointRequest {
 	s.Attributes = v
 	return s
 }
@@ -6440,7 +6440,7 @@ func (s *EndpointRequest) SetLocation(v *EndpointLocation) *EndpointRequest {
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *EndpointRequest) SetMetrics(v map[string]*float64) *EndpointRequest {
+func (s *EndpointRequest) SetMetrics(v map[string]float64) *EndpointRequest {
 	s.Metrics = v
 	return s
 }
@@ -6475,7 +6475,7 @@ type EndpointResponse struct {
 	// The ID of the application associated with the endpoint.
 	ApplicationId *string `type:"string"`
 
-	Attributes map[string][]*string `type:"map"`
+	Attributes map[string][]string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
 	ChannelType ChannelType `type:"string"`
@@ -6507,7 +6507,7 @@ type EndpointResponse struct {
 	// The endpoint location attributes.
 	Location *EndpointLocation `type:"structure"`
 
-	Metrics map[string]*float64 `type:"map"`
+	Metrics map[string]float64 `type:"map"`
 
 	// Indicates whether a user has opted out of receiving messages with one of
 	// the following values:ALL - User has opted out of all messages.NONE - Users
@@ -6547,7 +6547,7 @@ func (s *EndpointResponse) SetApplicationId(v string) *EndpointResponse {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *EndpointResponse) SetAttributes(v map[string][]*string) *EndpointResponse {
+func (s *EndpointResponse) SetAttributes(v map[string][]string) *EndpointResponse {
 	s.Attributes = v
 	return s
 }
@@ -6601,7 +6601,7 @@ func (s *EndpointResponse) SetLocation(v *EndpointLocation) *EndpointResponse {
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *EndpointResponse) SetMetrics(v map[string]*float64) *EndpointResponse {
+func (s *EndpointResponse) SetMetrics(v map[string]float64) *EndpointResponse {
 	s.Metrics = v
 	return s
 }
@@ -6638,13 +6638,13 @@ type EndpointSendConfiguration struct {
 	// Body override. If specified will override default body.
 	BodyOverride *string `type:"string"`
 
-	Context map[string]*string `type:"map"`
+	Context map[string]string `type:"map"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
 	// the message.
 	RawContent *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// Title override. If specified will override default title if applicable.
 	TitleOverride *string `type:"string"`
@@ -6667,7 +6667,7 @@ func (s *EndpointSendConfiguration) SetBodyOverride(v string) *EndpointSendConfi
 }
 
 // SetContext sets the Context field's value.
-func (s *EndpointSendConfiguration) SetContext(v map[string]*string) *EndpointSendConfiguration {
+func (s *EndpointSendConfiguration) SetContext(v map[string]string) *EndpointSendConfiguration {
 	s.Context = v
 	return s
 }
@@ -6679,7 +6679,7 @@ func (s *EndpointSendConfiguration) SetRawContent(v string) *EndpointSendConfigu
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *EndpointSendConfiguration) SetSubstitutions(v map[string][]*string) *EndpointSendConfiguration {
+func (s *EndpointSendConfiguration) SetSubstitutions(v map[string][]string) *EndpointSendConfiguration {
 	s.Substitutions = v
 	return s
 }
@@ -6695,7 +6695,7 @@ func (s *EndpointSendConfiguration) SetTitleOverride(v string) *EndpointSendConf
 type EndpointUser struct {
 	_ struct{} `type:"structure"`
 
-	UserAttributes map[string][]*string `type:"map"`
+	UserAttributes map[string][]string `type:"map"`
 
 	// The unique ID of the user.
 	UserId *string `type:"string"`
@@ -6712,7 +6712,7 @@ func (s EndpointUser) GoString() string {
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *EndpointUser) SetUserAttributes(v map[string][]*string) *EndpointUser {
+func (s *EndpointUser) SetUserAttributes(v map[string][]string) *EndpointUser {
 	s.UserAttributes = v
 	return s
 }
@@ -6960,7 +6960,7 @@ type GCMMessage struct {
 	// of the same messages when the device comes back online or becomes active.
 	CollapseKey *string `type:"string"`
 
-	Data map[string]*string `type:"map"`
+	Data map[string]string `type:"map"`
 
 	// The icon image name of the asset saved in your application.
 	IconReference *string `type:"string"`
@@ -6998,7 +6998,7 @@ type GCMMessage struct {
 	// sound files must reside in /res/raw/
 	Sound *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 
 	// The message title that displays above the message on the user's device.
 	Title *string `type:"string"`
@@ -7037,7 +7037,7 @@ func (s *GCMMessage) SetCollapseKey(v string) *GCMMessage {
 }
 
 // SetData sets the Data field's value.
-func (s *GCMMessage) SetData(v map[string]*string) *GCMMessage {
+func (s *GCMMessage) SetData(v map[string]string) *GCMMessage {
 	s.Data = v
 	return s
 }
@@ -7097,7 +7097,7 @@ func (s *GCMMessage) SetSound(v string) *GCMMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *GCMMessage) SetSubstitutions(v map[string][]*string) *GCMMessage {
+func (s *GCMMessage) SetSubstitutions(v map[string][]string) *GCMMessage {
 	s.Substitutions = v
 	return s
 }
@@ -9124,7 +9124,7 @@ type ImportJobResponse struct {
 	// The number of pieces that have failed to import as of the time of the request.
 	FailedPieces *int64 `type:"integer"`
 
-	Failures []*string `type:"list"`
+	Failures []string `type:"list"`
 
 	// The unique ID of the import job.
 	Id *string `type:"string"`
@@ -9196,7 +9196,7 @@ func (s *ImportJobResponse) SetFailedPieces(v int64) *ImportJobResponse {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *ImportJobResponse) SetFailures(v []*string) *ImportJobResponse {
+func (s *ImportJobResponse) SetFailures(v []string) *ImportJobResponse {
 	s.Failures = v
 	return s
 }
@@ -9243,7 +9243,7 @@ type ImportJobsResponse struct {
 	_ struct{} `type:"structure"`
 
 	// A list of import jobs for the application.
-	Item []*ImportJobResponse `type:"list"`
+	Item []ImportJobResponse `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -9261,7 +9261,7 @@ func (s ImportJobsResponse) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *ImportJobsResponse) SetItem(v []*ImportJobResponse) *ImportJobsResponse {
+func (s *ImportJobsResponse) SetItem(v []ImportJobResponse) *ImportJobsResponse {
 	s.Item = v
 	return s
 }
@@ -9500,15 +9500,15 @@ type MessageRequest struct {
 
 	// A map of destination addresses, with the address as the key(Email address,
 	// phone number or push token) and the Address Configuration as the value.
-	Addresses map[string]*AddressConfiguration `type:"map"`
+	Addresses map[string]AddressConfiguration `type:"map"`
 
-	Campaign map[string]*string `type:"map"`
+	Campaign map[string]string `type:"map"`
 
-	Context map[string]*string `type:"map"`
+	Context map[string]string `type:"map"`
 
 	// A map of destination addresses, with the address as the key(Email address,
 	// phone number or push token) and the Address Configuration as the value.
-	Endpoints map[string]*EndpointSendConfiguration `type:"map"`
+	Endpoints map[string]EndpointSendConfiguration `type:"map"`
 
 	// Message configuration.
 	MessageConfiguration *DirectMessageConfiguration `type:"structure"`
@@ -9528,25 +9528,25 @@ func (s MessageRequest) GoString() string {
 }
 
 // SetAddresses sets the Addresses field's value.
-func (s *MessageRequest) SetAddresses(v map[string]*AddressConfiguration) *MessageRequest {
+func (s *MessageRequest) SetAddresses(v map[string]AddressConfiguration) *MessageRequest {
 	s.Addresses = v
 	return s
 }
 
 // SetCampaign sets the Campaign field's value.
-func (s *MessageRequest) SetCampaign(v map[string]*string) *MessageRequest {
+func (s *MessageRequest) SetCampaign(v map[string]string) *MessageRequest {
 	s.Campaign = v
 	return s
 }
 
 // SetContext sets the Context field's value.
-func (s *MessageRequest) SetContext(v map[string]*string) *MessageRequest {
+func (s *MessageRequest) SetContext(v map[string]string) *MessageRequest {
 	s.Context = v
 	return s
 }
 
 // SetEndpoints sets the Endpoints field's value.
-func (s *MessageRequest) SetEndpoints(v map[string]*EndpointSendConfiguration) *MessageRequest {
+func (s *MessageRequest) SetEndpoints(v map[string]EndpointSendConfiguration) *MessageRequest {
 	s.Endpoints = v
 	return s
 }
@@ -9573,7 +9573,7 @@ type MessageResponse struct {
 
 	// A map containing a multi part response for each address, with the endpointId
 	// as the key and the result as the value.
-	EndpointResult map[string]*EndpointMessageResult `type:"map"`
+	EndpointResult map[string]EndpointMessageResult `type:"map"`
 
 	// Original request Id for which this message was delivered.
 	RequestId *string `type:"string"`
@@ -9581,7 +9581,7 @@ type MessageResponse struct {
 	// A map containing a multi part response for each address, with the address
 	// as the key(Email address, phone number or push token) and the result as the
 	// value.
-	Result map[string]*MessageResult `type:"map"`
+	Result map[string]MessageResult `type:"map"`
 }
 
 // String returns the string representation
@@ -9601,7 +9601,7 @@ func (s *MessageResponse) SetApplicationId(v string) *MessageResponse {
 }
 
 // SetEndpointResult sets the EndpointResult field's value.
-func (s *MessageResponse) SetEndpointResult(v map[string]*EndpointMessageResult) *MessageResponse {
+func (s *MessageResponse) SetEndpointResult(v map[string]EndpointMessageResult) *MessageResponse {
 	s.EndpointResult = v
 	return s
 }
@@ -9613,7 +9613,7 @@ func (s *MessageResponse) SetRequestId(v string) *MessageResponse {
 }
 
 // SetResult sets the Result field's value.
-func (s *MessageResponse) SetResult(v map[string]*MessageResult) *MessageResponse {
+func (s *MessageResponse) SetResult(v map[string]MessageResult) *MessageResponse {
 	s.Result = v
 	return s
 }
@@ -9992,7 +9992,7 @@ type SMSMessage struct {
 	// Sender ID of sent message.
 	SenderId *string `type:"string"`
 
-	Substitutions map[string][]*string `type:"map"`
+	Substitutions map[string][]string `type:"map"`
 }
 
 // String returns the string representation
@@ -10024,7 +10024,7 @@ func (s *SMSMessage) SetSenderId(v string) *SMSMessage {
 }
 
 // SetSubstitutions sets the Substitutions field's value.
-func (s *SMSMessage) SetSubstitutions(v map[string][]*string) *SMSMessage {
+func (s *SMSMessage) SetSubstitutions(v map[string][]string) *SMSMessage {
 	s.Substitutions = v
 	return s
 }
@@ -10203,7 +10203,7 @@ type SegmentDimensions struct {
 	_ struct{} `type:"structure"`
 
 	// Custom segment attributes.
-	Attributes map[string]*AttributeDimension `type:"map"`
+	Attributes map[string]AttributeDimension `type:"map"`
 
 	// The segment behaviors attributes.
 	Behavior *SegmentBehaviors `type:"structure"`
@@ -10215,7 +10215,7 @@ type SegmentDimensions struct {
 	Location *SegmentLocation `type:"structure"`
 
 	// Custom segment user attributes.
-	UserAttributes map[string]*AttributeDimension `type:"map"`
+	UserAttributes map[string]AttributeDimension `type:"map"`
 }
 
 // String returns the string representation
@@ -10229,7 +10229,7 @@ func (s SegmentDimensions) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *SegmentDimensions) SetAttributes(v map[string]*AttributeDimension) *SegmentDimensions {
+func (s *SegmentDimensions) SetAttributes(v map[string]AttributeDimension) *SegmentDimensions {
 	s.Attributes = v
 	return s
 }
@@ -10253,7 +10253,7 @@ func (s *SegmentDimensions) SetLocation(v *SegmentLocation) *SegmentDimensions {
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *SegmentDimensions) SetUserAttributes(v map[string]*AttributeDimension) *SegmentDimensions {
+func (s *SegmentDimensions) SetUserAttributes(v map[string]AttributeDimension) *SegmentDimensions {
 	s.UserAttributes = v
 	return s
 }
@@ -10263,7 +10263,7 @@ func (s *SegmentDimensions) SetUserAttributes(v map[string]*AttributeDimension) 
 type SegmentImportResource struct {
 	_ struct{} `type:"structure"`
 
-	ChannelCounts map[string]*int64 `type:"map"`
+	ChannelCounts map[string]int64 `type:"map"`
 
 	// A unique, custom ID assigned to the IAM role that restricts who can assume
 	// the role.
@@ -10296,7 +10296,7 @@ func (s SegmentImportResource) GoString() string {
 }
 
 // SetChannelCounts sets the ChannelCounts field's value.
-func (s *SegmentImportResource) SetChannelCounts(v map[string]*int64) *SegmentImportResource {
+func (s *SegmentImportResource) SetChannelCounts(v map[string]int64) *SegmentImportResource {
 	s.ChannelCounts = v
 	return s
 }
@@ -10465,7 +10465,7 @@ type SegmentsResponse struct {
 	_ struct{} `type:"structure"`
 
 	// The list of segments.
-	Item []*SegmentResponse `type:"list"`
+	Item []SegmentResponse `type:"list"`
 
 	// An identifier used to retrieve the next page of results. The token is null
 	// if no additional pages exist.
@@ -10483,7 +10483,7 @@ func (s SegmentsResponse) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *SegmentsResponse) SetItem(v []*SegmentResponse) *SegmentsResponse {
+func (s *SegmentsResponse) SetItem(v []SegmentResponse) *SegmentsResponse {
 	s.Item = v
 	return s
 }
@@ -10578,7 +10578,7 @@ func (s *SendMessagesOutput) SetMessageResponse(v *MessageResponse) *SendMessage
 type SendUsersMessageRequest struct {
 	_ struct{} `type:"structure"`
 
-	Context map[string]*string `type:"map"`
+	Context map[string]string `type:"map"`
 
 	// Message configuration.
 	MessageConfiguration *DirectMessageConfiguration `type:"structure"`
@@ -10588,7 +10588,7 @@ type SendUsersMessageRequest struct {
 
 	// A map of destination endpoints, with the EndpointId as the key Endpoint Message
 	// Configuration as the value.
-	Users map[string]*EndpointSendConfiguration `type:"map"`
+	Users map[string]EndpointSendConfiguration `type:"map"`
 }
 
 // String returns the string representation
@@ -10602,7 +10602,7 @@ func (s SendUsersMessageRequest) GoString() string {
 }
 
 // SetContext sets the Context field's value.
-func (s *SendUsersMessageRequest) SetContext(v map[string]*string) *SendUsersMessageRequest {
+func (s *SendUsersMessageRequest) SetContext(v map[string]string) *SendUsersMessageRequest {
 	s.Context = v
 	return s
 }
@@ -10620,7 +10620,7 @@ func (s *SendUsersMessageRequest) SetRequestId(v string) *SendUsersMessageReques
 }
 
 // SetUsers sets the Users field's value.
-func (s *SendUsersMessageRequest) SetUsers(v map[string]*EndpointSendConfiguration) *SendUsersMessageRequest {
+func (s *SendUsersMessageRequest) SetUsers(v map[string]EndpointSendConfiguration) *SendUsersMessageRequest {
 	s.Users = v
 	return s
 }
@@ -10637,7 +10637,7 @@ type SendUsersMessageResponse struct {
 	RequestId *string `type:"string"`
 
 	// A map containing of UserId to Map of EndpointId to Endpoint Message Result.
-	Result map[string]map[string]*EndpointMessageResult `type:"map"`
+	Result map[string]map[string]EndpointMessageResult `type:"map"`
 }
 
 // String returns the string representation
@@ -10663,7 +10663,7 @@ func (s *SendUsersMessageResponse) SetRequestId(v string) *SendUsersMessageRespo
 }
 
 // SetResult sets the Result field's value.
-func (s *SendUsersMessageResponse) SetResult(v map[string]map[string]*EndpointMessageResult) *SendUsersMessageResponse {
+func (s *SendUsersMessageResponse) SetResult(v map[string]map[string]EndpointMessageResult) *SendUsersMessageResponse {
 	s.Result = v
 	return s
 }
@@ -10757,7 +10757,7 @@ type SetDimension struct {
 	// from the segment.
 	DimensionType DimensionType `type:"string"`
 
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -10777,7 +10777,7 @@ func (s *SetDimension) SetDimensionType(v DimensionType) *SetDimension {
 }
 
 // SetValues sets the Values field's value.
-func (s *SetDimension) SetValues(v []*string) *SetDimension {
+func (s *SetDimension) SetValues(v []string) *SetDimension {
 	s.Values = v
 	return s
 }
@@ -11892,7 +11892,7 @@ type WriteCampaignRequest struct {
 	_ struct{} `type:"structure"`
 
 	// Treatments that are defined in addition to the default treatment.
-	AdditionalTreatments []*WriteTreatmentResource `type:"list"`
+	AdditionalTreatments []WriteTreatmentResource `type:"list"`
 
 	// A description of the campaign.
 	Description *string `type:"string"`
@@ -11944,7 +11944,7 @@ func (s WriteCampaignRequest) GoString() string {
 }
 
 // SetAdditionalTreatments sets the AdditionalTreatments field's value.
-func (s *WriteCampaignRequest) SetAdditionalTreatments(v []*WriteTreatmentResource) *WriteCampaignRequest {
+func (s *WriteCampaignRequest) SetAdditionalTreatments(v []WriteTreatmentResource) *WriteCampaignRequest {
 	s.AdditionalTreatments = v
 	return s
 }

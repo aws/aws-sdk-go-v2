@@ -1071,7 +1071,7 @@ type BatchCheckLayerAvailabilityInput struct {
 	// The digests of the image layers to check.
 	//
 	// LayerDigests is a required field
-	LayerDigests []*string `locationName:"layerDigests" min:"1" type:"list" required:"true"`
+	LayerDigests []string `locationName:"layerDigests" min:"1" type:"list" required:"true"`
 
 	// The AWS account ID associated with the registry that contains the image layers
 	// to check. If you do not specify a registry, the default registry is assumed.
@@ -1118,7 +1118,7 @@ func (s *BatchCheckLayerAvailabilityInput) Validate() error {
 }
 
 // SetLayerDigests sets the LayerDigests field's value.
-func (s *BatchCheckLayerAvailabilityInput) SetLayerDigests(v []*string) *BatchCheckLayerAvailabilityInput {
+func (s *BatchCheckLayerAvailabilityInput) SetLayerDigests(v []string) *BatchCheckLayerAvailabilityInput {
 	s.LayerDigests = v
 	return s
 }
@@ -1140,11 +1140,11 @@ type BatchCheckLayerAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*LayerFailure `locationName:"failures" type:"list"`
+	Failures []LayerFailure `locationName:"failures" type:"list"`
 
 	// A list of image layer objects corresponding to the image layer references
 	// in the request.
-	Layers []*Layer `locationName:"layers" type:"list"`
+	Layers []Layer `locationName:"layers" type:"list"`
 }
 
 // String returns the string representation
@@ -1158,13 +1158,13 @@ func (s BatchCheckLayerAvailabilityOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *BatchCheckLayerAvailabilityOutput) SetFailures(v []*LayerFailure) *BatchCheckLayerAvailabilityOutput {
+func (s *BatchCheckLayerAvailabilityOutput) SetFailures(v []LayerFailure) *BatchCheckLayerAvailabilityOutput {
 	s.Failures = v
 	return s
 }
 
 // SetLayers sets the Layers field's value.
-func (s *BatchCheckLayerAvailabilityOutput) SetLayers(v []*Layer) *BatchCheckLayerAvailabilityOutput {
+func (s *BatchCheckLayerAvailabilityOutput) SetLayers(v []Layer) *BatchCheckLayerAvailabilityOutput {
 	s.Layers = v
 	return s
 }
@@ -1179,7 +1179,7 @@ type BatchDeleteImageInput struct {
 	// of the imageIds reference is imageTag=tag or imageDigest=digest.
 	//
 	// ImageIds is a required field
-	ImageIds []*ImageIdentifier `locationName:"imageIds" min:"1" type:"list" required:"true"`
+	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list" required:"true"`
 
 	// The AWS account ID associated with the registry that contains the image to
 	// delete. If you do not specify a registry, the default registry is assumed.
@@ -1226,7 +1226,7 @@ func (s *BatchDeleteImageInput) Validate() error {
 }
 
 // SetImageIds sets the ImageIds field's value.
-func (s *BatchDeleteImageInput) SetImageIds(v []*ImageIdentifier) *BatchDeleteImageInput {
+func (s *BatchDeleteImageInput) SetImageIds(v []ImageIdentifier) *BatchDeleteImageInput {
 	s.ImageIds = v
 	return s
 }
@@ -1248,10 +1248,10 @@ type BatchDeleteImageOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*ImageFailure `locationName:"failures" type:"list"`
+	Failures []ImageFailure `locationName:"failures" type:"list"`
 
 	// The image IDs of the deleted images.
-	ImageIds []*ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
+	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1265,13 +1265,13 @@ func (s BatchDeleteImageOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *BatchDeleteImageOutput) SetFailures(v []*ImageFailure) *BatchDeleteImageOutput {
+func (s *BatchDeleteImageOutput) SetFailures(v []ImageFailure) *BatchDeleteImageOutput {
 	s.Failures = v
 	return s
 }
 
 // SetImageIds sets the ImageIds field's value.
-func (s *BatchDeleteImageOutput) SetImageIds(v []*ImageIdentifier) *BatchDeleteImageOutput {
+func (s *BatchDeleteImageOutput) SetImageIds(v []ImageIdentifier) *BatchDeleteImageOutput {
 	s.ImageIds = v
 	return s
 }
@@ -1284,13 +1284,13 @@ type BatchGetImageInput struct {
 	//
 	// Valid values: application/vnd.docker.distribution.manifest.v1+json | application/vnd.docker.distribution.manifest.v2+json
 	// | application/vnd.oci.image.manifest.v1+json
-	AcceptedMediaTypes []*string `locationName:"acceptedMediaTypes" min:"1" type:"list"`
+	AcceptedMediaTypes []string `locationName:"acceptedMediaTypes" min:"1" type:"list"`
 
 	// A list of image ID references that correspond to images to describe. The
 	// format of the imageIds reference is imageTag=tag or imageDigest=digest.
 	//
 	// ImageIds is a required field
-	ImageIds []*ImageIdentifier `locationName:"imageIds" min:"1" type:"list" required:"true"`
+	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list" required:"true"`
 
 	// The AWS account ID associated with the registry that contains the images
 	// to describe. If you do not specify a registry, the default registry is assumed.
@@ -1340,13 +1340,13 @@ func (s *BatchGetImageInput) Validate() error {
 }
 
 // SetAcceptedMediaTypes sets the AcceptedMediaTypes field's value.
-func (s *BatchGetImageInput) SetAcceptedMediaTypes(v []*string) *BatchGetImageInput {
+func (s *BatchGetImageInput) SetAcceptedMediaTypes(v []string) *BatchGetImageInput {
 	s.AcceptedMediaTypes = v
 	return s
 }
 
 // SetImageIds sets the ImageIds field's value.
-func (s *BatchGetImageInput) SetImageIds(v []*ImageIdentifier) *BatchGetImageInput {
+func (s *BatchGetImageInput) SetImageIds(v []ImageIdentifier) *BatchGetImageInput {
 	s.ImageIds = v
 	return s
 }
@@ -1368,10 +1368,10 @@ type BatchGetImageOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*ImageFailure `locationName:"failures" type:"list"`
+	Failures []ImageFailure `locationName:"failures" type:"list"`
 
 	// A list of image objects corresponding to the image references in the request.
-	Images []*Image `locationName:"images" type:"list"`
+	Images []Image `locationName:"images" type:"list"`
 }
 
 // String returns the string representation
@@ -1385,13 +1385,13 @@ func (s BatchGetImageOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *BatchGetImageOutput) SetFailures(v []*ImageFailure) *BatchGetImageOutput {
+func (s *BatchGetImageOutput) SetFailures(v []ImageFailure) *BatchGetImageOutput {
 	s.Failures = v
 	return s
 }
 
 // SetImages sets the Images field's value.
-func (s *BatchGetImageOutput) SetImages(v []*Image) *BatchGetImageOutput {
+func (s *BatchGetImageOutput) SetImages(v []Image) *BatchGetImageOutput {
 	s.Images = v
 	return s
 }
@@ -1403,7 +1403,7 @@ type CompleteLayerUploadInput struct {
 	// The sha256 digest of the image layer.
 	//
 	// LayerDigests is a required field
-	LayerDigests []*string `locationName:"layerDigests" min:"1" type:"list" required:"true"`
+	LayerDigests []string `locationName:"layerDigests" min:"1" type:"list" required:"true"`
 
 	// The AWS account ID associated with the registry to which to upload layers.
 	// If you do not specify a registry, the default registry is assumed.
@@ -1460,7 +1460,7 @@ func (s *CompleteLayerUploadInput) Validate() error {
 }
 
 // SetLayerDigests sets the LayerDigests field's value.
-func (s *CompleteLayerUploadInput) SetLayerDigests(v []*string) *CompleteLayerUploadInput {
+func (s *CompleteLayerUploadInput) SetLayerDigests(v []string) *CompleteLayerUploadInput {
 	s.LayerDigests = v
 	return s
 }
@@ -1820,7 +1820,7 @@ type DescribeImagesInput struct {
 	Filter *DescribeImagesFilter `locationName:"filter" type:"structure"`
 
 	// The list of image IDs for the requested repository.
-	ImageIds []*ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
+	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
 
 	// The maximum number of repository results returned by DescribeImages in paginated
 	// output. When this parameter is used, DescribeImages only returns maxResults
@@ -1889,7 +1889,7 @@ func (s *DescribeImagesInput) SetFilter(v *DescribeImagesFilter) *DescribeImages
 }
 
 // SetImageIds sets the ImageIds field's value.
-func (s *DescribeImagesInput) SetImageIds(v []*ImageIdentifier) *DescribeImagesInput {
+func (s *DescribeImagesInput) SetImageIds(v []ImageIdentifier) *DescribeImagesInput {
 	s.ImageIds = v
 	return s
 }
@@ -1923,7 +1923,7 @@ type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ImageDetail objects that contain data about the image.
-	ImageDetails []*ImageDetail `locationName:"imageDetails" type:"list"`
+	ImageDetails []ImageDetail `locationName:"imageDetails" type:"list"`
 
 	// The nextToken value to include in a future DescribeImages request. When the
 	// results of a DescribeImages request exceed maxResults, this value can be
@@ -1943,7 +1943,7 @@ func (s DescribeImagesOutput) GoString() string {
 }
 
 // SetImageDetails sets the ImageDetails field's value.
-func (s *DescribeImagesOutput) SetImageDetails(v []*ImageDetail) *DescribeImagesOutput {
+func (s *DescribeImagesOutput) SetImageDetails(v []ImageDetail) *DescribeImagesOutput {
 	s.ImageDetails = v
 	return s
 }
@@ -1984,7 +1984,7 @@ type DescribeRepositoriesInput struct {
 
 	// A list of repositories to describe. If this parameter is omitted, then all
 	// repositories in a registry are described.
-	RepositoryNames []*string `locationName:"repositoryNames" min:"1" type:"list"`
+	RepositoryNames []string `locationName:"repositoryNames" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2032,7 +2032,7 @@ func (s *DescribeRepositoriesInput) SetRegistryId(v string) *DescribeRepositorie
 }
 
 // SetRepositoryNames sets the RepositoryNames field's value.
-func (s *DescribeRepositoriesInput) SetRepositoryNames(v []*string) *DescribeRepositoriesInput {
+func (s *DescribeRepositoriesInput) SetRepositoryNames(v []string) *DescribeRepositoriesInput {
 	s.RepositoryNames = v
 	return s
 }
@@ -2048,7 +2048,7 @@ type DescribeRepositoriesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of repository objects corresponding to valid repositories.
-	Repositories []*Repository `locationName:"repositories" type:"list"`
+	Repositories []Repository `locationName:"repositories" type:"list"`
 }
 
 // String returns the string representation
@@ -2068,7 +2068,7 @@ func (s *DescribeRepositoriesOutput) SetNextToken(v string) *DescribeRepositorie
 }
 
 // SetRepositories sets the Repositories field's value.
-func (s *DescribeRepositoriesOutput) SetRepositories(v []*Repository) *DescribeRepositoriesOutput {
+func (s *DescribeRepositoriesOutput) SetRepositories(v []Repository) *DescribeRepositoriesOutput {
 	s.Repositories = v
 	return s
 }
@@ -2080,7 +2080,7 @@ type GetAuthorizationTokenInput struct {
 	// A list of AWS account IDs that are associated with the registries for which
 	// to get authorization tokens. If you do not specify a registry, the default
 	// registry is assumed.
-	RegistryIds []*string `locationName:"registryIds" min:"1" type:"list"`
+	RegistryIds []string `locationName:"registryIds" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2107,7 +2107,7 @@ func (s *GetAuthorizationTokenInput) Validate() error {
 }
 
 // SetRegistryIds sets the RegistryIds field's value.
-func (s *GetAuthorizationTokenInput) SetRegistryIds(v []*string) *GetAuthorizationTokenInput {
+func (s *GetAuthorizationTokenInput) SetRegistryIds(v []string) *GetAuthorizationTokenInput {
 	s.RegistryIds = v
 	return s
 }
@@ -2118,7 +2118,7 @@ type GetAuthorizationTokenOutput struct {
 
 	// A list of authorization token data objects that correspond to the registryIds
 	// values in the request.
-	AuthorizationData []*AuthorizationData `locationName:"authorizationData" type:"list"`
+	AuthorizationData []AuthorizationData `locationName:"authorizationData" type:"list"`
 }
 
 // String returns the string representation
@@ -2132,7 +2132,7 @@ func (s GetAuthorizationTokenOutput) GoString() string {
 }
 
 // SetAuthorizationData sets the AuthorizationData field's value.
-func (s *GetAuthorizationTokenOutput) SetAuthorizationData(v []*AuthorizationData) *GetAuthorizationTokenOutput {
+func (s *GetAuthorizationTokenOutput) SetAuthorizationData(v []AuthorizationData) *GetAuthorizationTokenOutput {
 	s.AuthorizationData = v
 	return s
 }
@@ -2406,7 +2406,7 @@ type ImageDetail struct {
 	ImageSizeInBytes *int64 `locationName:"imageSizeInBytes" type:"long"`
 
 	// The list of tags associated with this image.
-	ImageTags []*string `locationName:"imageTags" type:"list"`
+	ImageTags []string `locationName:"imageTags" type:"list"`
 
 	// The AWS account ID associated with the registry to which this image belongs.
 	RegistryId *string `locationName:"registryId" type:"string"`
@@ -2444,7 +2444,7 @@ func (s *ImageDetail) SetImageSizeInBytes(v int64) *ImageDetail {
 }
 
 // SetImageTags sets the ImageTags field's value.
-func (s *ImageDetail) SetImageTags(v []*string) *ImageDetail {
+func (s *ImageDetail) SetImageTags(v []string) *ImageDetail {
 	s.ImageTags = v
 	return s
 }
@@ -2849,7 +2849,7 @@ type ListImagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of image IDs for the requested repository.
-	ImageIds []*ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
+	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
 
 	// The nextToken value to include in a future ListImages request. When the results
 	// of a ListImages request exceed maxResults, this value can be used to retrieve
@@ -2869,7 +2869,7 @@ func (s ListImagesOutput) GoString() string {
 }
 
 // SetImageIds sets the ImageIds field's value.
-func (s *ListImagesOutput) SetImageIds(v []*ImageIdentifier) *ListImagesOutput {
+func (s *ListImagesOutput) SetImageIds(v []ImageIdentifier) *ListImagesOutput {
 	s.ImageIds = v
 	return s
 }

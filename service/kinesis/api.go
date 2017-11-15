@@ -1571,7 +1571,7 @@ type AddTagsToStreamInput struct {
 	// The set of key-value pairs to use to create the tags.
 	//
 	// Tags is a required field
-	Tags map[string]*string `min:"1" type:"map" required:"true"`
+	Tags map[string]string `min:"1" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -1615,7 +1615,7 @@ func (s *AddTagsToStreamInput) SetStreamName(v string) *AddTagsToStreamInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToStreamInput) SetTags(v map[string]*string) *AddTagsToStreamInput {
+func (s *AddTagsToStreamInput) SetTags(v map[string]string) *AddTagsToStreamInput {
 	s.Tags = v
 	return s
 }
@@ -2347,7 +2347,7 @@ type GetRecordsOutput struct {
 	// The data records retrieved from the shard.
 	//
 	// Records is a required field
-	Records []*Record `type:"list" required:"true"`
+	Records []Record `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2373,7 +2373,7 @@ func (s *GetRecordsOutput) SetNextShardIterator(v string) *GetRecordsOutput {
 }
 
 // SetRecords sets the Records field's value.
-func (s *GetRecordsOutput) SetRecords(v []*Record) *GetRecordsOutput {
+func (s *GetRecordsOutput) SetRecords(v []Record) *GetRecordsOutput {
 	s.Records = v
 	return s
 }
@@ -2705,7 +2705,7 @@ type ListStreamsOutput struct {
 	// the ListStreams request.
 	//
 	// StreamNames is a required field
-	StreamNames []*string `type:"list" required:"true"`
+	StreamNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2725,7 +2725,7 @@ func (s *ListStreamsOutput) SetHasMoreStreams(v bool) *ListStreamsOutput {
 }
 
 // SetStreamNames sets the StreamNames field's value.
-func (s *ListStreamsOutput) SetStreamNames(v []*string) *ListStreamsOutput {
+func (s *ListStreamsOutput) SetStreamNames(v []string) *ListStreamsOutput {
 	s.StreamNames = v
 	return s
 }
@@ -2816,7 +2816,7 @@ type ListTagsForStreamOutput struct {
 	// ExclusiveStartTagKey and up to the specified Limit.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2836,7 +2836,7 @@ func (s *ListTagsForStreamOutput) SetHasMoreTags(v bool) *ListTagsForStreamOutpu
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForStreamOutput) SetTags(v []*Tag) *ListTagsForStreamOutput {
+func (s *ListTagsForStreamOutput) SetTags(v []Tag) *ListTagsForStreamOutput {
 	s.Tags = v
 	return s
 }
@@ -3112,7 +3112,7 @@ type PutRecordsInput struct {
 	// The records associated with the request.
 	//
 	// Records is a required field
-	Records []*PutRecordsRequestEntry `min:"1" type:"list" required:"true"`
+	Records []PutRecordsRequestEntry `min:"1" type:"list" required:"true"`
 
 	// The stream name associated with the request.
 	//
@@ -3149,9 +3149,6 @@ func (s *PutRecordsInput) Validate() error {
 	}
 	if s.Records != nil {
 		for i, v := range s.Records {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(aws.ErrInvalidParams))
 			}
@@ -3165,7 +3162,7 @@ func (s *PutRecordsInput) Validate() error {
 }
 
 // SetRecords sets the Records field's value.
-func (s *PutRecordsInput) SetRecords(v []*PutRecordsRequestEntry) *PutRecordsInput {
+func (s *PutRecordsInput) SetRecords(v []PutRecordsRequestEntry) *PutRecordsInput {
 	s.Records = v
 	return s
 }
@@ -3200,7 +3197,7 @@ type PutRecordsOutput struct {
 	// result.
 	//
 	// Records is a required field
-	Records []*PutRecordsResultEntry `min:"1" type:"list" required:"true"`
+	Records []PutRecordsResultEntry `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3226,7 +3223,7 @@ func (s *PutRecordsOutput) SetFailedRecordCount(v int64) *PutRecordsOutput {
 }
 
 // SetRecords sets the Records field's value.
-func (s *PutRecordsOutput) SetRecords(v []*PutRecordsResultEntry) *PutRecordsOutput {
+func (s *PutRecordsOutput) SetRecords(v []PutRecordsResultEntry) *PutRecordsOutput {
 	s.Records = v
 	return s
 }
@@ -3464,7 +3461,7 @@ type RemoveTagsFromStreamInput struct {
 	// A list of tag keys. Each corresponding tag is removed from the stream.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `min:"1" type:"list" required:"true"`
+	TagKeys []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3508,7 +3505,7 @@ func (s *RemoveTagsFromStreamInput) SetStreamName(v string) *RemoveTagsFromStrea
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromStreamInput) SetTagKeys(v []*string) *RemoveTagsFromStreamInput {
+func (s *RemoveTagsFromStreamInput) SetTagKeys(v []string) *RemoveTagsFromStreamInput {
 	s.TagKeys = v
 	return s
 }
@@ -3941,7 +3938,7 @@ type StreamDescription struct {
 	// Represents the current enhanced monitoring settings of the stream.
 	//
 	// EnhancedMonitoring is a required field
-	EnhancedMonitoring []*EnhancedMetrics `type:"list" required:"true"`
+	EnhancedMonitoring []EnhancedMetrics `type:"list" required:"true"`
 
 	// If set to true, more shards in the stream are available to describe.
 	//
@@ -3959,7 +3956,7 @@ type StreamDescription struct {
 	// The shards that comprise the stream.
 	//
 	// Shards is a required field
-	Shards []*Shard `type:"list" required:"true"`
+	Shards []Shard `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) for the stream being described.
 	//
@@ -4014,7 +4011,7 @@ func (s *StreamDescription) SetEncryptionType(v EncryptionType) *StreamDescripti
 }
 
 // SetEnhancedMonitoring sets the EnhancedMonitoring field's value.
-func (s *StreamDescription) SetEnhancedMonitoring(v []*EnhancedMetrics) *StreamDescription {
+func (s *StreamDescription) SetEnhancedMonitoring(v []EnhancedMetrics) *StreamDescription {
 	s.EnhancedMonitoring = v
 	return s
 }
@@ -4038,7 +4035,7 @@ func (s *StreamDescription) SetRetentionPeriodHours(v int64) *StreamDescription 
 }
 
 // SetShards sets the Shards field's value.
-func (s *StreamDescription) SetShards(v []*Shard) *StreamDescription {
+func (s *StreamDescription) SetShards(v []Shard) *StreamDescription {
 	s.Shards = v
 	return s
 }

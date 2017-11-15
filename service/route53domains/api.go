@@ -1636,7 +1636,7 @@ type ContactDetail struct {
 	Email *string `type:"string"`
 
 	// A list of name-value pairs for parameters required by certain top-level domains.
-	ExtraParams []*ExtraParam `type:"list"`
+	ExtraParams []ExtraParam `type:"list"`
 
 	// Fax number of the contact.
 	//
@@ -1683,9 +1683,6 @@ func (s *ContactDetail) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContactDetail"}
 	if s.ExtraParams != nil {
 		for i, v := range s.ExtraParams {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtraParams", i), err.(aws.ErrInvalidParams))
 			}
@@ -1735,7 +1732,7 @@ func (s *ContactDetail) SetEmail(v string) *ContactDetail {
 }
 
 // SetExtraParams sets the ExtraParams field's value.
-func (s *ContactDetail) SetExtraParams(v []*ExtraParam) *ContactDetail {
+func (s *ContactDetail) SetExtraParams(v []ExtraParam) *ContactDetail {
 	s.ExtraParams = v
 	return s
 }
@@ -1795,7 +1792,7 @@ type DeleteTagsForDomainInput struct {
 	// A list of tag keys to delete.
 	//
 	// TagsToDelete is a required field
-	TagsToDelete []*string `type:"list" required:"true"`
+	TagsToDelete []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1833,7 +1830,7 @@ func (s *DeleteTagsForDomainInput) SetDomainName(v string) *DeleteTagsForDomainI
 }
 
 // SetTagsToDelete sets the TagsToDelete field's value.
-func (s *DeleteTagsForDomainInput) SetTagsToDelete(v []*string) *DeleteTagsForDomainInput {
+func (s *DeleteTagsForDomainInput) SetTagsToDelete(v []string) *DeleteTagsForDomainInput {
 	s.TagsToDelete = v
 	return s
 }
@@ -2458,7 +2455,7 @@ type GetDomainDetailOutput struct {
 	// The name of the domain.
 	//
 	// Nameservers is a required field
-	Nameservers []*Nameserver `type:"list" required:"true"`
+	Nameservers []Nameserver `type:"list" required:"true"`
 
 	// Provides details about the domain registrant.
 	//
@@ -2499,7 +2496,7 @@ type GetDomainDetailOutput struct {
 	// each code means, go to the ICANN website (https://www.icann.org/) and search
 	// for epp status codes. (Search on the ICANN website; web searches sometimes
 	// return an old version of the document.)
-	StatusList []*string `type:"list"`
+	StatusList []string `type:"list"`
 
 	// Provides details about the domain technical contact.
 	//
@@ -2586,7 +2583,7 @@ func (s *GetDomainDetailOutput) SetExpirationDate(v time.Time) *GetDomainDetailO
 }
 
 // SetNameservers sets the Nameservers field's value.
-func (s *GetDomainDetailOutput) SetNameservers(v []*Nameserver) *GetDomainDetailOutput {
+func (s *GetDomainDetailOutput) SetNameservers(v []Nameserver) *GetDomainDetailOutput {
 	s.Nameservers = v
 	return s
 }
@@ -2628,7 +2625,7 @@ func (s *GetDomainDetailOutput) SetReseller(v string) *GetDomainDetailOutput {
 }
 
 // SetStatusList sets the StatusList field's value.
-func (s *GetDomainDetailOutput) SetStatusList(v []*string) *GetDomainDetailOutput {
+func (s *GetDomainDetailOutput) SetStatusList(v []string) *GetDomainDetailOutput {
 	s.StatusList = v
 	return s
 }
@@ -2741,7 +2738,7 @@ type GetDomainSuggestionsOutput struct {
 
 	// A list of possible domain names. If you specified true for OnlyAvailable
 	// in the request, the list contains only domains that are available for registration.
-	SuggestionsList []*DomainSuggestion `type:"list"`
+	SuggestionsList []DomainSuggestion `type:"list"`
 }
 
 // String returns the string representation
@@ -2755,7 +2752,7 @@ func (s GetDomainSuggestionsOutput) GoString() string {
 }
 
 // SetSuggestionsList sets the SuggestionsList field's value.
-func (s *GetDomainSuggestionsOutput) SetSuggestionsList(v []*DomainSuggestion) *GetDomainSuggestionsOutput {
+func (s *GetDomainSuggestionsOutput) SetSuggestionsList(v []DomainSuggestion) *GetDomainSuggestionsOutput {
 	s.SuggestionsList = v
 	return s
 }
@@ -2923,7 +2920,7 @@ type ListDomainsOutput struct {
 	// A summary of domains.
 	//
 	// Domains is a required field
-	Domains []*DomainSummary `type:"list" required:"true"`
+	Domains []DomainSummary `type:"list" required:"true"`
 
 	// If there are more domains than you specified for MaxItems in the request,
 	// submit another request and include the value of NextPageMarker in the value
@@ -2942,7 +2939,7 @@ func (s ListDomainsOutput) GoString() string {
 }
 
 // SetDomains sets the Domains field's value.
-func (s *ListDomainsOutput) SetDomains(v []*DomainSummary) *ListDomainsOutput {
+func (s *ListDomainsOutput) SetDomains(v []DomainSummary) *ListDomainsOutput {
 	s.Domains = v
 	return s
 }
@@ -3007,7 +3004,7 @@ type ListOperationsOutput struct {
 	// Lists summaries of the operations.
 	//
 	// Operations is a required field
-	Operations []*OperationSummary `type:"list" required:"true"`
+	Operations []OperationSummary `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3027,7 +3024,7 @@ func (s *ListOperationsOutput) SetNextPageMarker(v string) *ListOperationsOutput
 }
 
 // SetOperations sets the Operations field's value.
-func (s *ListOperationsOutput) SetOperations(v []*OperationSummary) *ListOperationsOutput {
+func (s *ListOperationsOutput) SetOperations(v []OperationSummary) *ListOperationsOutput {
 	s.Operations = v
 	return s
 }
@@ -3081,7 +3078,7 @@ type ListTagsForDomainOutput struct {
 	// A list of the tags that are associated with the specified domain.
 	//
 	// TagList is a required field
-	TagList []*Tag `type:"list" required:"true"`
+	TagList []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3095,7 +3092,7 @@ func (s ListTagsForDomainOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ListTagsForDomainOutput) SetTagList(v []*Tag) *ListTagsForDomainOutput {
+func (s *ListTagsForDomainOutput) SetTagList(v []Tag) *ListTagsForDomainOutput {
 	s.TagList = v
 	return s
 }
@@ -3111,7 +3108,7 @@ type Nameserver struct {
 	// you need to specify the IP address for ns.example.com.
 	//
 	// Constraints: The list can contain only one IPv4 and one IPv6 address.
-	GlueIps []*string `type:"list"`
+	GlueIps []string `type:"list"`
 
 	// The fully qualified host name of the name server.
 	//
@@ -3146,7 +3143,7 @@ func (s *Nameserver) Validate() error {
 }
 
 // SetGlueIps sets the GlueIps field's value.
-func (s *Nameserver) SetGlueIps(v []*string) *Nameserver {
+func (s *Nameserver) SetGlueIps(v []string) *Nameserver {
 	s.GlueIps = v
 	return s
 }
@@ -3762,7 +3759,7 @@ type TransferDomainInput struct {
 	IdnLangCode *string `type:"string"`
 
 	// Contains details for the host and glue IP addresses.
-	Nameservers []*Nameserver `type:"list"`
+	Nameservers []Nameserver `type:"list"`
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries will return contact information for
@@ -3842,9 +3839,6 @@ func (s *TransferDomainInput) Validate() error {
 	}
 	if s.Nameservers != nil {
 		for i, v := range s.Nameservers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(aws.ErrInvalidParams))
 			}
@@ -3904,7 +3898,7 @@ func (s *TransferDomainInput) SetIdnLangCode(v string) *TransferDomainInput {
 }
 
 // SetNameservers sets the Nameservers field's value.
-func (s *TransferDomainInput) SetNameservers(v []*Nameserver) *TransferDomainInput {
+func (s *TransferDomainInput) SetNameservers(v []Nameserver) *TransferDomainInput {
 	s.Nameservers = v
 	return s
 }
@@ -4205,7 +4199,7 @@ type UpdateDomainNameserversInput struct {
 	// A list of new name servers for the domain.
 	//
 	// Nameservers is a required field
-	Nameservers []*Nameserver `type:"list" required:"true"`
+	Nameservers []Nameserver `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4231,9 +4225,6 @@ func (s *UpdateDomainNameserversInput) Validate() error {
 	}
 	if s.Nameservers != nil {
 		for i, v := range s.Nameservers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(aws.ErrInvalidParams))
 			}
@@ -4259,7 +4250,7 @@ func (s *UpdateDomainNameserversInput) SetFIAuthKey(v string) *UpdateDomainNames
 }
 
 // SetNameservers sets the Nameservers field's value.
-func (s *UpdateDomainNameserversInput) SetNameservers(v []*Nameserver) *UpdateDomainNameserversInput {
+func (s *UpdateDomainNameserversInput) SetNameservers(v []Nameserver) *UpdateDomainNameserversInput {
 	s.Nameservers = v
 	return s
 }
@@ -4304,7 +4295,7 @@ type UpdateTagsForDomainInput struct {
 
 	// A list of the tag keys and values that you want to add or update. If you
 	// specify a key that already exists, the corresponding value will be replaced.
-	TagsToUpdate []*Tag `type:"list"`
+	TagsToUpdate []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4338,7 +4329,7 @@ func (s *UpdateTagsForDomainInput) SetDomainName(v string) *UpdateTagsForDomainI
 }
 
 // SetTagsToUpdate sets the TagsToUpdate field's value.
-func (s *UpdateTagsForDomainInput) SetTagsToUpdate(v []*Tag) *UpdateTagsForDomainInput {
+func (s *UpdateTagsForDomainInput) SetTagsToUpdate(v []Tag) *UpdateTagsForDomainInput {
 	s.TagsToUpdate = v
 	return s
 }
@@ -4428,7 +4419,7 @@ type ViewBillingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A summary of billing records.
-	BillingRecords []*BillingRecord `type:"list"`
+	BillingRecords []BillingRecord `type:"list"`
 
 	// If there are more billing records than you specified for MaxItems in the
 	// request, submit another request and include the value of NextPageMarker in
@@ -4447,7 +4438,7 @@ func (s ViewBillingOutput) GoString() string {
 }
 
 // SetBillingRecords sets the BillingRecords field's value.
-func (s *ViewBillingOutput) SetBillingRecords(v []*BillingRecord) *ViewBillingOutput {
+func (s *ViewBillingOutput) SetBillingRecords(v []BillingRecord) *ViewBillingOutput {
 	s.BillingRecords = v
 	return s
 }

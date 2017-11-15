@@ -556,7 +556,7 @@ func TestSetValueBuilder(t *testing.T) {
 					{
 						values: []dynamodb.AttributeValue{
 							{
-								L: []*dynamodb.AttributeValue{
+								L: []dynamodb.AttributeValue{
 									{
 										N: aws.String("1"),
 									},

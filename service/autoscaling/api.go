@@ -3359,7 +3359,7 @@ type AttachInstancesInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// One or more instance IDs.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3396,7 +3396,7 @@ func (s *AttachInstancesInput) SetAutoScalingGroupName(v string) *AttachInstance
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *AttachInstancesInput) SetInstanceIds(v []*string) *AttachInstancesInput {
+func (s *AttachInstancesInput) SetInstanceIds(v []string) *AttachInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -3428,7 +3428,7 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	// The Amazon Resource Names (ARN) of the target groups.
 	//
 	// TargetGroupARNs is a required field
-	TargetGroupARNs []*string `type:"list" required:"true"`
+	TargetGroupARNs []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3469,7 +3469,7 @@ func (s *AttachLoadBalancerTargetGroupsInput) SetAutoScalingGroupName(v string) 
 }
 
 // SetTargetGroupARNs sets the TargetGroupARNs field's value.
-func (s *AttachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []*string) *AttachLoadBalancerTargetGroupsInput {
+func (s *AttachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []string) *AttachLoadBalancerTargetGroupsInput {
 	s.TargetGroupARNs = v
 	return s
 }
@@ -3501,7 +3501,7 @@ type AttachLoadBalancersInput struct {
 	// One or more load balancer names.
 	//
 	// LoadBalancerNames is a required field
-	LoadBalancerNames []*string `type:"list" required:"true"`
+	LoadBalancerNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3542,7 +3542,7 @@ func (s *AttachLoadBalancersInput) SetAutoScalingGroupName(v string) *AttachLoad
 }
 
 // SetLoadBalancerNames sets the LoadBalancerNames field's value.
-func (s *AttachLoadBalancersInput) SetLoadBalancerNames(v []*string) *AttachLoadBalancersInput {
+func (s *AttachLoadBalancersInput) SetLoadBalancerNames(v []string) *AttachLoadBalancersInput {
 	s.LoadBalancerNames = v
 	return s
 }
@@ -3775,7 +3775,7 @@ type CreateAutoScalingGroupInput struct {
 
 	// One or more Availability Zones for the group. This parameter is optional
 	// if you specify one or more subnets.
-	AvailabilityZones []*string `min:"1" type:"list"`
+	AvailabilityZones []string `min:"1" type:"list"`
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start. The default is 300.
@@ -3826,7 +3826,7 @@ type CreateAutoScalingGroupInput struct {
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
 	// One or more lifecycle hooks.
-	LifecycleHookSpecificationList []*LifecycleHookSpecification `type:"list"`
+	LifecycleHookSpecificationList []LifecycleHookSpecification `type:"list"`
 
 	// One or more Classic Load Balancers. To specify an Application Load Balancer,
 	// use TargetGroupARNs instead.
@@ -3834,7 +3834,7 @@ type CreateAutoScalingGroupInput struct {
 	// For more information, see Using a Load Balancer With an Auto Scaling Group
 	// (http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html)
 	// in the Auto Scaling User Guide.
-	LoadBalancerNames []*string `type:"list"`
+	LoadBalancerNames []string `type:"list"`
 
 	// The maximum size of the group.
 	//
@@ -3859,10 +3859,10 @@ type CreateAutoScalingGroupInput struct {
 	//
 	// For more information, see Tagging Auto Scaling Groups and Instances (http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html)
 	// in the Auto Scaling User Guide.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The Amazon Resource Names (ARN) of the target groups.
-	TargetGroupARNs []*string `type:"list"`
+	TargetGroupARNs []string `type:"list"`
 
 	// One or more termination policies used to select the instance to terminate.
 	// These policies are executed in the order that they are listed.
@@ -3870,7 +3870,7 @@ type CreateAutoScalingGroupInput struct {
 	// For more information, see Controlling Which Instances Auto Scaling Terminates
 	// During Scale In (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html)
 	// in the Auto Scaling User Guide.
-	TerminationPolicies []*string `type:"list"`
+	TerminationPolicies []string `type:"list"`
 
 	// A comma-separated list of subnet identifiers for your virtual private cloud
 	// (VPC).
@@ -3931,9 +3931,6 @@ func (s *CreateAutoScalingGroupInput) Validate() error {
 	}
 	if s.LifecycleHookSpecificationList != nil {
 		for i, v := range s.LifecycleHookSpecificationList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LifecycleHookSpecificationList", i), err.(aws.ErrInvalidParams))
 			}
@@ -3941,9 +3938,6 @@ func (s *CreateAutoScalingGroupInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3963,7 +3957,7 @@ func (s *CreateAutoScalingGroupInput) SetAutoScalingGroupName(v string) *CreateA
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *CreateAutoScalingGroupInput) SetAvailabilityZones(v []*string) *CreateAutoScalingGroupInput {
+func (s *CreateAutoScalingGroupInput) SetAvailabilityZones(v []string) *CreateAutoScalingGroupInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -4005,13 +3999,13 @@ func (s *CreateAutoScalingGroupInput) SetLaunchConfigurationName(v string) *Crea
 }
 
 // SetLifecycleHookSpecificationList sets the LifecycleHookSpecificationList field's value.
-func (s *CreateAutoScalingGroupInput) SetLifecycleHookSpecificationList(v []*LifecycleHookSpecification) *CreateAutoScalingGroupInput {
+func (s *CreateAutoScalingGroupInput) SetLifecycleHookSpecificationList(v []LifecycleHookSpecification) *CreateAutoScalingGroupInput {
 	s.LifecycleHookSpecificationList = v
 	return s
 }
 
 // SetLoadBalancerNames sets the LoadBalancerNames field's value.
-func (s *CreateAutoScalingGroupInput) SetLoadBalancerNames(v []*string) *CreateAutoScalingGroupInput {
+func (s *CreateAutoScalingGroupInput) SetLoadBalancerNames(v []string) *CreateAutoScalingGroupInput {
 	s.LoadBalancerNames = v
 	return s
 }
@@ -4041,19 +4035,19 @@ func (s *CreateAutoScalingGroupInput) SetPlacementGroup(v string) *CreateAutoSca
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateAutoScalingGroupInput) SetTags(v []*Tag) *CreateAutoScalingGroupInput {
+func (s *CreateAutoScalingGroupInput) SetTags(v []Tag) *CreateAutoScalingGroupInput {
 	s.Tags = v
 	return s
 }
 
 // SetTargetGroupARNs sets the TargetGroupARNs field's value.
-func (s *CreateAutoScalingGroupInput) SetTargetGroupARNs(v []*string) *CreateAutoScalingGroupInput {
+func (s *CreateAutoScalingGroupInput) SetTargetGroupARNs(v []string) *CreateAutoScalingGroupInput {
 	s.TargetGroupARNs = v
 	return s
 }
 
 // SetTerminationPolicies sets the TerminationPolicies field's value.
-func (s *CreateAutoScalingGroupInput) SetTerminationPolicies(v []*string) *CreateAutoScalingGroupInput {
+func (s *CreateAutoScalingGroupInput) SetTerminationPolicies(v []string) *CreateAutoScalingGroupInput {
 	s.TerminationPolicies = v
 	return s
 }
@@ -4100,7 +4094,7 @@ type CreateLaunchConfigurationInput struct {
 	// One or more mappings that specify how block devices are exposed to the instance.
 	// For more information, see Block Device Mapping (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	BlockDeviceMappings []*BlockDeviceMapping `type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `type:"list"`
 
 	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.
 	// This parameter is supported only if you are launching EC2-Classic instances.
@@ -4112,7 +4106,7 @@ type CreateLaunchConfigurationInput struct {
 	// VPC. This parameter is required if you specify a ClassicLink-enabled VPC,
 	// and is not supported otherwise. For more information, see ClassicLink (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	ClassicLinkVPCSecurityGroups []*string `type:"list"`
+	ClassicLinkVPCSecurityGroups []string `type:"list"`
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. By default,
 	// the instance is not optimized for EBS I/O. The optimization provides dedicated
@@ -4212,7 +4206,7 @@ type CreateLaunchConfigurationInput struct {
 	// If your instances are launched into a VPC, specify security group IDs. For
 	// more information, see Security Groups for Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)
 	// in the Amazon Virtual Private Cloud User Guide.
-	SecurityGroups []*string `type:"list"`
+	SecurityGroups []string `type:"list"`
 
 	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
 	// the request. Spot Instances are launched when the price you specify exceeds
@@ -4279,9 +4273,6 @@ func (s *CreateLaunchConfigurationInput) Validate() error {
 	}
 	if s.BlockDeviceMappings != nil {
 		for i, v := range s.BlockDeviceMappings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BlockDeviceMappings", i), err.(aws.ErrInvalidParams))
 			}
@@ -4301,7 +4292,7 @@ func (s *CreateLaunchConfigurationInput) SetAssociatePublicIpAddress(v bool) *Cr
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *CreateLaunchConfigurationInput) SetBlockDeviceMappings(v []*BlockDeviceMapping) *CreateLaunchConfigurationInput {
+func (s *CreateLaunchConfigurationInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *CreateLaunchConfigurationInput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -4313,7 +4304,7 @@ func (s *CreateLaunchConfigurationInput) SetClassicLinkVPCId(v string) *CreateLa
 }
 
 // SetClassicLinkVPCSecurityGroups sets the ClassicLinkVPCSecurityGroups field's value.
-func (s *CreateLaunchConfigurationInput) SetClassicLinkVPCSecurityGroups(v []*string) *CreateLaunchConfigurationInput {
+func (s *CreateLaunchConfigurationInput) SetClassicLinkVPCSecurityGroups(v []string) *CreateLaunchConfigurationInput {
 	s.ClassicLinkVPCSecurityGroups = v
 	return s
 }
@@ -4385,7 +4376,7 @@ func (s *CreateLaunchConfigurationInput) SetRamdiskId(v string) *CreateLaunchCon
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *CreateLaunchConfigurationInput) SetSecurityGroups(v []*string) *CreateLaunchConfigurationInput {
+func (s *CreateLaunchConfigurationInput) SetSecurityGroups(v []string) *CreateLaunchConfigurationInput {
 	s.SecurityGroups = v
 	return s
 }
@@ -4424,7 +4415,7 @@ type CreateOrUpdateTagsInput struct {
 	// One or more tags.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4446,9 +4437,6 @@ func (s *CreateOrUpdateTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -4462,7 +4450,7 @@ func (s *CreateOrUpdateTagsInput) Validate() error {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateOrUpdateTagsInput) SetTags(v []*Tag) *CreateOrUpdateTagsInput {
+func (s *CreateOrUpdateTagsInput) SetTags(v []Tag) *CreateOrUpdateTagsInput {
 	s.Tags = v
 	return s
 }
@@ -4488,7 +4476,7 @@ type CustomizedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// The dimensions of the metric.
-	Dimensions []*MetricDimension `type:"list"`
+	Dimensions []MetricDimension `type:"list"`
 
 	// The name of the metric.
 	//
@@ -4535,9 +4523,6 @@ func (s *CustomizedMetricSpecification) Validate() error {
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
@@ -4551,7 +4536,7 @@ func (s *CustomizedMetricSpecification) Validate() error {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *CustomizedMetricSpecification) SetDimensions(v []*MetricDimension) *CustomizedMetricSpecification {
+func (s *CustomizedMetricSpecification) SetDimensions(v []MetricDimension) *CustomizedMetricSpecification {
 	s.Dimensions = v
 	return s
 }
@@ -5013,7 +4998,7 @@ type DeleteTagsInput struct {
 	// One or more tags.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5035,9 +5020,6 @@ func (s *DeleteTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -5051,7 +5033,7 @@ func (s *DeleteTagsInput) Validate() error {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DeleteTagsInput) SetTags(v []*Tag) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 	s.Tags = v
 	return s
 }
@@ -5159,7 +5141,7 @@ type DescribeAdjustmentTypesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The policy adjustment types.
-	AdjustmentTypes []*AdjustmentType `type:"list"`
+	AdjustmentTypes []AdjustmentType `type:"list"`
 }
 
 // String returns the string representation
@@ -5173,7 +5155,7 @@ func (s DescribeAdjustmentTypesOutput) GoString() string {
 }
 
 // SetAdjustmentTypes sets the AdjustmentTypes field's value.
-func (s *DescribeAdjustmentTypesOutput) SetAdjustmentTypes(v []*AdjustmentType) *DescribeAdjustmentTypesOutput {
+func (s *DescribeAdjustmentTypesOutput) SetAdjustmentTypes(v []AdjustmentType) *DescribeAdjustmentTypesOutput {
 	s.AdjustmentTypes = v
 	return s
 }
@@ -5184,7 +5166,7 @@ type DescribeAutoScalingGroupsInput struct {
 
 	// The group names. If you omit this parameter, all Auto Scaling groups are
 	// described.
-	AutoScalingGroupNames []*string `type:"list"`
+	AutoScalingGroupNames []string `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
 	// 50 and the maximum value is 100.
@@ -5206,7 +5188,7 @@ func (s DescribeAutoScalingGroupsInput) GoString() string {
 }
 
 // SetAutoScalingGroupNames sets the AutoScalingGroupNames field's value.
-func (s *DescribeAutoScalingGroupsInput) SetAutoScalingGroupNames(v []*string) *DescribeAutoScalingGroupsInput {
+func (s *DescribeAutoScalingGroupsInput) SetAutoScalingGroupNames(v []string) *DescribeAutoScalingGroupsInput {
 	s.AutoScalingGroupNames = v
 	return s
 }
@@ -5230,7 +5212,7 @@ type DescribeAutoScalingGroupsOutput struct {
 	// The groups.
 	//
 	// AutoScalingGroups is a required field
-	AutoScalingGroups []*Group `type:"list" required:"true"`
+	AutoScalingGroups []Group `type:"list" required:"true"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -5248,7 +5230,7 @@ func (s DescribeAutoScalingGroupsOutput) GoString() string {
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *DescribeAutoScalingGroupsOutput) SetAutoScalingGroups(v []*Group) *DescribeAutoScalingGroupsOutput {
+func (s *DescribeAutoScalingGroupsOutput) SetAutoScalingGroups(v []Group) *DescribeAutoScalingGroupsOutput {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -5266,7 +5248,7 @@ type DescribeAutoScalingInstancesInput struct {
 	// The instances to describe; up to 50 instance IDs. If you omit this parameter,
 	// all Auto Scaling instances are described. If you specify an ID that does
 	// not exist, it is ignored with no error.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
 	// 50 and the maximum value is 100.
@@ -5288,7 +5270,7 @@ func (s DescribeAutoScalingInstancesInput) GoString() string {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeAutoScalingInstancesInput) SetInstanceIds(v []*string) *DescribeAutoScalingInstancesInput {
+func (s *DescribeAutoScalingInstancesInput) SetInstanceIds(v []string) *DescribeAutoScalingInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -5310,7 +5292,7 @@ type DescribeAutoScalingInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The instances.
-	AutoScalingInstances []*InstanceDetails `type:"list"`
+	AutoScalingInstances []InstanceDetails `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -5328,7 +5310,7 @@ func (s DescribeAutoScalingInstancesOutput) GoString() string {
 }
 
 // SetAutoScalingInstances sets the AutoScalingInstances field's value.
-func (s *DescribeAutoScalingInstancesOutput) SetAutoScalingInstances(v []*InstanceDetails) *DescribeAutoScalingInstancesOutput {
+func (s *DescribeAutoScalingInstancesOutput) SetAutoScalingInstances(v []InstanceDetails) *DescribeAutoScalingInstancesOutput {
 	s.AutoScalingInstances = v
 	return s
 }
@@ -5359,7 +5341,7 @@ type DescribeAutoScalingNotificationTypesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The notification types.
-	AutoScalingNotificationTypes []*string `type:"list"`
+	AutoScalingNotificationTypes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5373,7 +5355,7 @@ func (s DescribeAutoScalingNotificationTypesOutput) GoString() string {
 }
 
 // SetAutoScalingNotificationTypes sets the AutoScalingNotificationTypes field's value.
-func (s *DescribeAutoScalingNotificationTypesOutput) SetAutoScalingNotificationTypes(v []*string) *DescribeAutoScalingNotificationTypesOutput {
+func (s *DescribeAutoScalingNotificationTypesOutput) SetAutoScalingNotificationTypes(v []string) *DescribeAutoScalingNotificationTypesOutput {
 	s.AutoScalingNotificationTypes = v
 	return s
 }
@@ -5384,7 +5366,7 @@ type DescribeLaunchConfigurationsInput struct {
 
 	// The launch configuration names. If you omit this parameter, all launch configurations
 	// are described.
-	LaunchConfigurationNames []*string `type:"list"`
+	LaunchConfigurationNames []string `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
 	// 50 and the maximum value is 100.
@@ -5406,7 +5388,7 @@ func (s DescribeLaunchConfigurationsInput) GoString() string {
 }
 
 // SetLaunchConfigurationNames sets the LaunchConfigurationNames field's value.
-func (s *DescribeLaunchConfigurationsInput) SetLaunchConfigurationNames(v []*string) *DescribeLaunchConfigurationsInput {
+func (s *DescribeLaunchConfigurationsInput) SetLaunchConfigurationNames(v []string) *DescribeLaunchConfigurationsInput {
 	s.LaunchConfigurationNames = v
 	return s
 }
@@ -5430,7 +5412,7 @@ type DescribeLaunchConfigurationsOutput struct {
 	// The launch configurations.
 	//
 	// LaunchConfigurations is a required field
-	LaunchConfigurations []*LaunchConfiguration `type:"list" required:"true"`
+	LaunchConfigurations []LaunchConfiguration `type:"list" required:"true"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -5448,7 +5430,7 @@ func (s DescribeLaunchConfigurationsOutput) GoString() string {
 }
 
 // SetLaunchConfigurations sets the LaunchConfigurations field's value.
-func (s *DescribeLaunchConfigurationsOutput) SetLaunchConfigurations(v []*LaunchConfiguration) *DescribeLaunchConfigurationsOutput {
+func (s *DescribeLaunchConfigurationsOutput) SetLaunchConfigurations(v []LaunchConfiguration) *DescribeLaunchConfigurationsOutput {
 	s.LaunchConfigurations = v
 	return s
 }
@@ -5479,7 +5461,7 @@ type DescribeLifecycleHookTypesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The lifecycle hook types.
-	LifecycleHookTypes []*string `type:"list"`
+	LifecycleHookTypes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5493,7 +5475,7 @@ func (s DescribeLifecycleHookTypesOutput) GoString() string {
 }
 
 // SetLifecycleHookTypes sets the LifecycleHookTypes field's value.
-func (s *DescribeLifecycleHookTypesOutput) SetLifecycleHookTypes(v []*string) *DescribeLifecycleHookTypesOutput {
+func (s *DescribeLifecycleHookTypesOutput) SetLifecycleHookTypes(v []string) *DescribeLifecycleHookTypesOutput {
 	s.LifecycleHookTypes = v
 	return s
 }
@@ -5509,7 +5491,7 @@ type DescribeLifecycleHooksInput struct {
 
 	// The names of one or more lifecycle hooks. If you omit this parameter, all
 	// lifecycle hooks are described.
-	LifecycleHookNames []*string `type:"list"`
+	LifecycleHookNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5546,7 +5528,7 @@ func (s *DescribeLifecycleHooksInput) SetAutoScalingGroupName(v string) *Describ
 }
 
 // SetLifecycleHookNames sets the LifecycleHookNames field's value.
-func (s *DescribeLifecycleHooksInput) SetLifecycleHookNames(v []*string) *DescribeLifecycleHooksInput {
+func (s *DescribeLifecycleHooksInput) SetLifecycleHookNames(v []string) *DescribeLifecycleHooksInput {
 	s.LifecycleHookNames = v
 	return s
 }
@@ -5556,7 +5538,7 @@ type DescribeLifecycleHooksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The lifecycle hooks for the specified group.
-	LifecycleHooks []*LifecycleHook `type:"list"`
+	LifecycleHooks []LifecycleHook `type:"list"`
 }
 
 // String returns the string representation
@@ -5570,7 +5552,7 @@ func (s DescribeLifecycleHooksOutput) GoString() string {
 }
 
 // SetLifecycleHooks sets the LifecycleHooks field's value.
-func (s *DescribeLifecycleHooksOutput) SetLifecycleHooks(v []*LifecycleHook) *DescribeLifecycleHooksOutput {
+func (s *DescribeLifecycleHooksOutput) SetLifecycleHooks(v []LifecycleHook) *DescribeLifecycleHooksOutput {
 	s.LifecycleHooks = v
 	return s
 }
@@ -5643,7 +5625,7 @@ type DescribeLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the target groups.
-	LoadBalancerTargetGroups []*LoadBalancerTargetGroupState `type:"list"`
+	LoadBalancerTargetGroups []LoadBalancerTargetGroupState `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -5661,7 +5643,7 @@ func (s DescribeLoadBalancerTargetGroupsOutput) GoString() string {
 }
 
 // SetLoadBalancerTargetGroups sets the LoadBalancerTargetGroups field's value.
-func (s *DescribeLoadBalancerTargetGroupsOutput) SetLoadBalancerTargetGroups(v []*LoadBalancerTargetGroupState) *DescribeLoadBalancerTargetGroupsOutput {
+func (s *DescribeLoadBalancerTargetGroupsOutput) SetLoadBalancerTargetGroups(v []LoadBalancerTargetGroupState) *DescribeLoadBalancerTargetGroupsOutput {
 	s.LoadBalancerTargetGroups = v
 	return s
 }
@@ -5740,7 +5722,7 @@ type DescribeLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The load balancers.
-	LoadBalancers []*LoadBalancerState `type:"list"`
+	LoadBalancers []LoadBalancerState `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -5758,7 +5740,7 @@ func (s DescribeLoadBalancersOutput) GoString() string {
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
-func (s *DescribeLoadBalancersOutput) SetLoadBalancers(v []*LoadBalancerState) *DescribeLoadBalancersOutput {
+func (s *DescribeLoadBalancersOutput) SetLoadBalancers(v []LoadBalancerState) *DescribeLoadBalancersOutput {
 	s.LoadBalancers = v
 	return s
 }
@@ -5789,10 +5771,10 @@ type DescribeMetricCollectionTypesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The granularities for the metrics.
-	Granularities []*MetricGranularityType `type:"list"`
+	Granularities []MetricGranularityType `type:"list"`
 
 	// One or more metrics.
-	Metrics []*MetricCollectionType `type:"list"`
+	Metrics []MetricCollectionType `type:"list"`
 }
 
 // String returns the string representation
@@ -5806,13 +5788,13 @@ func (s DescribeMetricCollectionTypesOutput) GoString() string {
 }
 
 // SetGranularities sets the Granularities field's value.
-func (s *DescribeMetricCollectionTypesOutput) SetGranularities(v []*MetricGranularityType) *DescribeMetricCollectionTypesOutput {
+func (s *DescribeMetricCollectionTypesOutput) SetGranularities(v []MetricGranularityType) *DescribeMetricCollectionTypesOutput {
 	s.Granularities = v
 	return s
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *DescribeMetricCollectionTypesOutput) SetMetrics(v []*MetricCollectionType) *DescribeMetricCollectionTypesOutput {
+func (s *DescribeMetricCollectionTypesOutput) SetMetrics(v []MetricCollectionType) *DescribeMetricCollectionTypesOutput {
 	s.Metrics = v
 	return s
 }
@@ -5822,7 +5804,7 @@ type DescribeNotificationConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	AutoScalingGroupNames []*string `type:"list"`
+	AutoScalingGroupNames []string `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
 	// 50 and the maximum value is 100.
@@ -5844,7 +5826,7 @@ func (s DescribeNotificationConfigurationsInput) GoString() string {
 }
 
 // SetAutoScalingGroupNames sets the AutoScalingGroupNames field's value.
-func (s *DescribeNotificationConfigurationsInput) SetAutoScalingGroupNames(v []*string) *DescribeNotificationConfigurationsInput {
+func (s *DescribeNotificationConfigurationsInput) SetAutoScalingGroupNames(v []string) *DescribeNotificationConfigurationsInput {
 	s.AutoScalingGroupNames = v
 	return s
 }
@@ -5872,7 +5854,7 @@ type DescribeNotificationConfigurationsOutput struct {
 	// The notification configurations.
 	//
 	// NotificationConfigurations is a required field
-	NotificationConfigurations []*NotificationConfiguration `type:"list" required:"true"`
+	NotificationConfigurations []NotificationConfiguration `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5892,7 +5874,7 @@ func (s *DescribeNotificationConfigurationsOutput) SetNextToken(v string) *Descr
 }
 
 // SetNotificationConfigurations sets the NotificationConfigurations field's value.
-func (s *DescribeNotificationConfigurationsOutput) SetNotificationConfigurations(v []*NotificationConfiguration) *DescribeNotificationConfigurationsOutput {
+func (s *DescribeNotificationConfigurationsOutput) SetNotificationConfigurations(v []NotificationConfiguration) *DescribeNotificationConfigurationsOutput {
 	s.NotificationConfigurations = v
 	return s
 }
@@ -5916,10 +5898,10 @@ type DescribePoliciesInput struct {
 	// parameter, all policy names are described. If an group name is provided,
 	// the results are limited to that group. This list is limited to 50 items.
 	// If you specify an unknown policy name, it is ignored with no error.
-	PolicyNames []*string `type:"list"`
+	PolicyNames []string `type:"list"`
 
 	// One or more policy types. Valid values are SimpleScaling and StepScaling.
-	PolicyTypes []*string `type:"list"`
+	PolicyTypes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5964,13 +5946,13 @@ func (s *DescribePoliciesInput) SetNextToken(v string) *DescribePoliciesInput {
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *DescribePoliciesInput) SetPolicyNames(v []*string) *DescribePoliciesInput {
+func (s *DescribePoliciesInput) SetPolicyNames(v []string) *DescribePoliciesInput {
 	s.PolicyNames = v
 	return s
 }
 
 // SetPolicyTypes sets the PolicyTypes field's value.
-func (s *DescribePoliciesInput) SetPolicyTypes(v []*string) *DescribePoliciesInput {
+func (s *DescribePoliciesInput) SetPolicyTypes(v []string) *DescribePoliciesInput {
 	s.PolicyTypes = v
 	return s
 }
@@ -5984,7 +5966,7 @@ type DescribePoliciesOutput struct {
 	NextToken *string `type:"string"`
 
 	// The scaling policies.
-	ScalingPolicies []*ScalingPolicy `type:"list"`
+	ScalingPolicies []ScalingPolicy `type:"list"`
 }
 
 // String returns the string representation
@@ -6004,7 +5986,7 @@ func (s *DescribePoliciesOutput) SetNextToken(v string) *DescribePoliciesOutput 
 }
 
 // SetScalingPolicies sets the ScalingPolicies field's value.
-func (s *DescribePoliciesOutput) SetScalingPolicies(v []*ScalingPolicy) *DescribePoliciesOutput {
+func (s *DescribePoliciesOutput) SetScalingPolicies(v []ScalingPolicy) *DescribePoliciesOutput {
 	s.ScalingPolicies = v
 	return s
 }
@@ -6018,7 +6000,7 @@ type DescribeScalingActivitiesInput struct {
 	// Scaling group, the results are limited to that group. The list of requested
 	// activities cannot contain more than 50 items. If unknown activities are requested,
 	// they are ignored with no error.
-	ActivityIds []*string `type:"list"`
+	ActivityIds []string `type:"list"`
 
 	// The name of the group.
 	AutoScalingGroupName *string `min:"1" type:"string"`
@@ -6056,7 +6038,7 @@ func (s *DescribeScalingActivitiesInput) Validate() error {
 }
 
 // SetActivityIds sets the ActivityIds field's value.
-func (s *DescribeScalingActivitiesInput) SetActivityIds(v []*string) *DescribeScalingActivitiesInput {
+func (s *DescribeScalingActivitiesInput) SetActivityIds(v []string) *DescribeScalingActivitiesInput {
 	s.ActivityIds = v
 	return s
 }
@@ -6087,7 +6069,7 @@ type DescribeScalingActivitiesOutput struct {
 	// in progress are described first.
 	//
 	// Activities is a required field
-	Activities []*Activity `type:"list" required:"true"`
+	Activities []Activity `type:"list" required:"true"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -6105,7 +6087,7 @@ func (s DescribeScalingActivitiesOutput) GoString() string {
 }
 
 // SetActivities sets the Activities field's value.
-func (s *DescribeScalingActivitiesOutput) SetActivities(v []*Activity) *DescribeScalingActivitiesOutput {
+func (s *DescribeScalingActivitiesOutput) SetActivities(v []Activity) *DescribeScalingActivitiesOutput {
 	s.Activities = v
 	return s
 }
@@ -6136,7 +6118,7 @@ type DescribeScalingProcessTypesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the process types.
-	Processes []*ProcessType `type:"list"`
+	Processes []ProcessType `type:"list"`
 }
 
 // String returns the string representation
@@ -6150,7 +6132,7 @@ func (s DescribeScalingProcessTypesOutput) GoString() string {
 }
 
 // SetProcesses sets the Processes field's value.
-func (s *DescribeScalingProcessTypesOutput) SetProcesses(v []*ProcessType) *DescribeScalingProcessTypesOutput {
+func (s *DescribeScalingProcessTypesOutput) SetProcesses(v []ProcessType) *DescribeScalingProcessTypesOutput {
 	s.Processes = v
 	return s
 }
@@ -6181,7 +6163,7 @@ type DescribeScheduledActionsInput struct {
 	// You can describe up to a maximum of 50 instances with a single call. If there
 	// are more items to return, the call returns a token. To get the next set of
 	// items, repeat the call with the returned token.
-	ScheduledActionNames []*string `type:"list"`
+	ScheduledActionNames []string `type:"list"`
 
 	// The earliest scheduled start time to return. If scheduled action names are
 	// provided, this parameter is ignored.
@@ -6236,7 +6218,7 @@ func (s *DescribeScheduledActionsInput) SetNextToken(v string) *DescribeSchedule
 }
 
 // SetScheduledActionNames sets the ScheduledActionNames field's value.
-func (s *DescribeScheduledActionsInput) SetScheduledActionNames(v []*string) *DescribeScheduledActionsInput {
+func (s *DescribeScheduledActionsInput) SetScheduledActionNames(v []string) *DescribeScheduledActionsInput {
 	s.ScheduledActionNames = v
 	return s
 }
@@ -6256,7 +6238,7 @@ type DescribeScheduledActionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// The scheduled actions.
-	ScheduledUpdateGroupActions []*ScheduledUpdateGroupAction `type:"list"`
+	ScheduledUpdateGroupActions []ScheduledUpdateGroupAction `type:"list"`
 }
 
 // String returns the string representation
@@ -6276,7 +6258,7 @@ func (s *DescribeScheduledActionsOutput) SetNextToken(v string) *DescribeSchedul
 }
 
 // SetScheduledUpdateGroupActions sets the ScheduledUpdateGroupActions field's value.
-func (s *DescribeScheduledActionsOutput) SetScheduledUpdateGroupActions(v []*ScheduledUpdateGroupAction) *DescribeScheduledActionsOutput {
+func (s *DescribeScheduledActionsOutput) SetScheduledUpdateGroupActions(v []ScheduledUpdateGroupAction) *DescribeScheduledActionsOutput {
 	s.ScheduledUpdateGroupActions = v
 	return s
 }
@@ -6286,7 +6268,7 @@ type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A filter used to scope the tags to return.
-	Filters []*Filter `type:"list"`
+	Filters []Filter `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
 	// 50 and the maximum value is 100.
@@ -6308,7 +6290,7 @@ func (s DescribeTagsInput) GoString() string {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeTagsInput) SetFilters(v []*Filter) *DescribeTagsInput {
+func (s *DescribeTagsInput) SetFilters(v []Filter) *DescribeTagsInput {
 	s.Filters = v
 	return s
 }
@@ -6334,7 +6316,7 @@ type DescribeTagsOutput struct {
 	NextToken *string `type:"string"`
 
 	// One or more tags.
-	Tags []*TagDescription `type:"list"`
+	Tags []TagDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -6354,7 +6336,7 @@ func (s *DescribeTagsOutput) SetNextToken(v string) *DescribeTagsOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []*TagDescription) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTags(v []TagDescription) *DescribeTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -6380,7 +6362,7 @@ type DescribeTerminationPolicyTypesOutput struct {
 
 	// The termination policies supported by Auto Scaling (OldestInstance, OldestLaunchConfiguration,
 	// NewestInstance, ClosestToNextInstanceHour, and Default).
-	TerminationPolicyTypes []*string `type:"list"`
+	TerminationPolicyTypes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6394,7 +6376,7 @@ func (s DescribeTerminationPolicyTypesOutput) GoString() string {
 }
 
 // SetTerminationPolicyTypes sets the TerminationPolicyTypes field's value.
-func (s *DescribeTerminationPolicyTypesOutput) SetTerminationPolicyTypes(v []*string) *DescribeTerminationPolicyTypesOutput {
+func (s *DescribeTerminationPolicyTypesOutput) SetTerminationPolicyTypes(v []string) *DescribeTerminationPolicyTypesOutput {
 	s.TerminationPolicyTypes = v
 	return s
 }
@@ -6409,7 +6391,7 @@ type DetachInstancesInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// One or more instance IDs.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// If True, the Auto Scaling group decrements the desired capacity value by
 	// the number of instances detached.
@@ -6456,7 +6438,7 @@ func (s *DetachInstancesInput) SetAutoScalingGroupName(v string) *DetachInstance
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DetachInstancesInput) SetInstanceIds(v []*string) *DetachInstancesInput {
+func (s *DetachInstancesInput) SetInstanceIds(v []string) *DetachInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -6472,7 +6454,7 @@ type DetachInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The activities related to detaching the instances from the Auto Scaling group.
-	Activities []*Activity `type:"list"`
+	Activities []Activity `type:"list"`
 }
 
 // String returns the string representation
@@ -6486,7 +6468,7 @@ func (s DetachInstancesOutput) GoString() string {
 }
 
 // SetActivities sets the Activities field's value.
-func (s *DetachInstancesOutput) SetActivities(v []*Activity) *DetachInstancesOutput {
+func (s *DetachInstancesOutput) SetActivities(v []Activity) *DetachInstancesOutput {
 	s.Activities = v
 	return s
 }
@@ -6503,7 +6485,7 @@ type DetachLoadBalancerTargetGroupsInput struct {
 	// The Amazon Resource Names (ARN) of the target groups.
 	//
 	// TargetGroupARNs is a required field
-	TargetGroupARNs []*string `type:"list" required:"true"`
+	TargetGroupARNs []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6544,7 +6526,7 @@ func (s *DetachLoadBalancerTargetGroupsInput) SetAutoScalingGroupName(v string) 
 }
 
 // SetTargetGroupARNs sets the TargetGroupARNs field's value.
-func (s *DetachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []*string) *DetachLoadBalancerTargetGroupsInput {
+func (s *DetachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []string) *DetachLoadBalancerTargetGroupsInput {
 	s.TargetGroupARNs = v
 	return s
 }
@@ -6576,7 +6558,7 @@ type DetachLoadBalancersInput struct {
 	// One or more load balancer names.
 	//
 	// LoadBalancerNames is a required field
-	LoadBalancerNames []*string `type:"list" required:"true"`
+	LoadBalancerNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6617,7 +6599,7 @@ func (s *DetachLoadBalancersInput) SetAutoScalingGroupName(v string) *DetachLoad
 }
 
 // SetLoadBalancerNames sets the LoadBalancerNames field's value.
-func (s *DetachLoadBalancersInput) SetLoadBalancerNames(v []*string) *DetachLoadBalancersInput {
+func (s *DetachLoadBalancersInput) SetLoadBalancerNames(v []string) *DetachLoadBalancersInput {
 	s.LoadBalancerNames = v
 	return s
 }
@@ -6664,7 +6646,7 @@ type DisableMetricsCollectionInput struct {
 	//    * GroupTerminatingInstances
 	//
 	//    * GroupTotalInstances
-	Metrics []*string `type:"list"`
+	Metrics []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6701,7 +6683,7 @@ func (s *DisableMetricsCollectionInput) SetAutoScalingGroupName(v string) *Disab
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *DisableMetricsCollectionInput) SetMetrics(v []*string) *DisableMetricsCollectionInput {
+func (s *DisableMetricsCollectionInput) SetMetrics(v []string) *DisableMetricsCollectionInput {
 	s.Metrics = v
 	return s
 }
@@ -6867,7 +6849,7 @@ type EnableMetricsCollectionInput struct {
 	//    * GroupTerminatingInstances
 	//
 	//    * GroupTotalInstances
-	Metrics []*string `type:"list"`
+	Metrics []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6917,7 +6899,7 @@ func (s *EnableMetricsCollectionInput) SetGranularity(v string) *EnableMetricsCo
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *EnableMetricsCollectionInput) SetMetrics(v []*string) *EnableMetricsCollectionInput {
+func (s *EnableMetricsCollectionInput) SetMetrics(v []string) *EnableMetricsCollectionInput {
 	s.Metrics = v
 	return s
 }
@@ -6998,7 +6980,7 @@ type EnterStandbyInput struct {
 
 	// One or more instances to move into Standby mode. You must specify at least
 	// one instance ID.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// Specifies whether the instances moved to Standby mode count as part of the
 	// Auto Scaling group's desired capacity. If set, the desired capacity for the
@@ -7047,7 +7029,7 @@ func (s *EnterStandbyInput) SetAutoScalingGroupName(v string) *EnterStandbyInput
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *EnterStandbyInput) SetInstanceIds(v []*string) *EnterStandbyInput {
+func (s *EnterStandbyInput) SetInstanceIds(v []string) *EnterStandbyInput {
 	s.InstanceIds = v
 	return s
 }
@@ -7063,7 +7045,7 @@ type EnterStandbyOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The activities related to moving instances into Standby mode.
-	Activities []*Activity `type:"list"`
+	Activities []Activity `type:"list"`
 }
 
 // String returns the string representation
@@ -7077,7 +7059,7 @@ func (s EnterStandbyOutput) GoString() string {
 }
 
 // SetActivities sets the Activities field's value.
-func (s *EnterStandbyOutput) SetActivities(v []*Activity) *EnterStandbyOutput {
+func (s *EnterStandbyOutput) SetActivities(v []Activity) *EnterStandbyOutput {
 	s.Activities = v
 	return s
 }
@@ -7209,7 +7191,7 @@ type ExitStandbyInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// One or more instance IDs. You must specify at least one instance ID.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7246,7 +7228,7 @@ func (s *ExitStandbyInput) SetAutoScalingGroupName(v string) *ExitStandbyInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *ExitStandbyInput) SetInstanceIds(v []*string) *ExitStandbyInput {
+func (s *ExitStandbyInput) SetInstanceIds(v []string) *ExitStandbyInput {
 	s.InstanceIds = v
 	return s
 }
@@ -7256,7 +7238,7 @@ type ExitStandbyOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The activities related to moving instances out of Standby mode.
-	Activities []*Activity `type:"list"`
+	Activities []Activity `type:"list"`
 }
 
 // String returns the string representation
@@ -7270,7 +7252,7 @@ func (s ExitStandbyOutput) GoString() string {
 }
 
 // SetActivities sets the Activities field's value.
-func (s *ExitStandbyOutput) SetActivities(v []*Activity) *ExitStandbyOutput {
+func (s *ExitStandbyOutput) SetActivities(v []Activity) *ExitStandbyOutput {
 	s.Activities = v
 	return s
 }
@@ -7285,7 +7267,7 @@ type Filter struct {
 	Name *string `type:"string"`
 
 	// The value of the filter.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7305,7 +7287,7 @@ func (s *Filter) SetName(v string) *Filter {
 }
 
 // SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []*string) *Filter {
+func (s *Filter) SetValues(v []string) *Filter {
 	s.Values = v
 	return s
 }
@@ -7326,7 +7308,7 @@ type Group struct {
 	// One or more Availability Zones for the group.
 	//
 	// AvailabilityZones is a required field
-	AvailabilityZones []*string `min:"1" type:"list" required:"true"`
+	AvailabilityZones []string `min:"1" type:"list" required:"true"`
 
 	// The date and time the group was created.
 	//
@@ -7345,7 +7327,7 @@ type Group struct {
 	DesiredCapacity *int64 `type:"integer" required:"true"`
 
 	// The metrics enabled for the group.
-	EnabledMetrics []*EnabledMetric `type:"list"`
+	EnabledMetrics []EnabledMetric `type:"list"`
 
 	// The amount of time, in seconds, that Auto Scaling waits before checking the
 	// health status of an EC2 instance that has come into service.
@@ -7357,13 +7339,13 @@ type Group struct {
 	HealthCheckType *string `min:"1" type:"string" required:"true"`
 
 	// The EC2 instances associated with the group.
-	Instances []*Instance `type:"list"`
+	Instances []Instance `type:"list"`
 
 	// The name of the associated launch configuration.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
 	// One or more load balancers associated with the group.
-	LoadBalancerNames []*string `type:"list"`
+	LoadBalancerNames []string `type:"list"`
 
 	// The maximum size of the group.
 	//
@@ -7388,16 +7370,16 @@ type Group struct {
 	Status *string `min:"1" type:"string"`
 
 	// The suspended processes associated with the group.
-	SuspendedProcesses []*SuspendedProcess `type:"list"`
+	SuspendedProcesses []SuspendedProcess `type:"list"`
 
 	// The tags for the group.
-	Tags []*TagDescription `type:"list"`
+	Tags []TagDescription `type:"list"`
 
 	// The Amazon Resource Names (ARN) of the target groups for your load balancer.
-	TargetGroupARNs []*string `type:"list"`
+	TargetGroupARNs []string `type:"list"`
 
 	// The termination policies for the group.
-	TerminationPolicies []*string `type:"list"`
+	TerminationPolicies []string `type:"list"`
 
 	// One or more subnet IDs, if applicable, separated by commas.
 	//
@@ -7429,7 +7411,7 @@ func (s *Group) SetAutoScalingGroupName(v string) *Group {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *Group) SetAvailabilityZones(v []*string) *Group {
+func (s *Group) SetAvailabilityZones(v []string) *Group {
 	s.AvailabilityZones = v
 	return s
 }
@@ -7453,7 +7435,7 @@ func (s *Group) SetDesiredCapacity(v int64) *Group {
 }
 
 // SetEnabledMetrics sets the EnabledMetrics field's value.
-func (s *Group) SetEnabledMetrics(v []*EnabledMetric) *Group {
+func (s *Group) SetEnabledMetrics(v []EnabledMetric) *Group {
 	s.EnabledMetrics = v
 	return s
 }
@@ -7471,7 +7453,7 @@ func (s *Group) SetHealthCheckType(v string) *Group {
 }
 
 // SetInstances sets the Instances field's value.
-func (s *Group) SetInstances(v []*Instance) *Group {
+func (s *Group) SetInstances(v []Instance) *Group {
 	s.Instances = v
 	return s
 }
@@ -7483,7 +7465,7 @@ func (s *Group) SetLaunchConfigurationName(v string) *Group {
 }
 
 // SetLoadBalancerNames sets the LoadBalancerNames field's value.
-func (s *Group) SetLoadBalancerNames(v []*string) *Group {
+func (s *Group) SetLoadBalancerNames(v []string) *Group {
 	s.LoadBalancerNames = v
 	return s
 }
@@ -7519,25 +7501,25 @@ func (s *Group) SetStatus(v string) *Group {
 }
 
 // SetSuspendedProcesses sets the SuspendedProcesses field's value.
-func (s *Group) SetSuspendedProcesses(v []*SuspendedProcess) *Group {
+func (s *Group) SetSuspendedProcesses(v []SuspendedProcess) *Group {
 	s.SuspendedProcesses = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *Group) SetTags(v []*TagDescription) *Group {
+func (s *Group) SetTags(v []TagDescription) *Group {
 	s.Tags = v
 	return s
 }
 
 // SetTargetGroupARNs sets the TargetGroupARNs field's value.
-func (s *Group) SetTargetGroupARNs(v []*string) *Group {
+func (s *Group) SetTargetGroupARNs(v []string) *Group {
 	s.TargetGroupARNs = v
 	return s
 }
 
 // SetTerminationPolicies sets the TerminationPolicies field's value.
-func (s *Group) SetTerminationPolicies(v []*string) *Group {
+func (s *Group) SetTerminationPolicies(v []string) *Group {
 	s.TerminationPolicies = v
 	return s
 }
@@ -7767,7 +7749,7 @@ type LaunchConfiguration struct {
 	AssociatePublicIpAddress *bool `type:"boolean"`
 
 	// A block device mapping, which specifies the block devices for the instance.
-	BlockDeviceMappings []*BlockDeviceMapping `type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `type:"list"`
 
 	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.
 	// This parameter can only be used if you are launching EC2-Classic instances.
@@ -7779,7 +7761,7 @@ type LaunchConfiguration struct {
 	// This parameter is required if you specify a ClassicLink-enabled VPC, and
 	// cannot be used otherwise. For more information, see ClassicLink (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	ClassicLinkVPCSecurityGroups []*string `type:"list"`
+	ClassicLinkVPCSecurityGroups []string `type:"list"`
 
 	// The creation date and time for the launch configuration.
 	//
@@ -7830,7 +7812,7 @@ type LaunchConfiguration struct {
 	RamdiskId *string `min:"1" type:"string"`
 
 	// The security groups to associate with the instances.
-	SecurityGroups []*string `type:"list"`
+	SecurityGroups []string `type:"list"`
 
 	// The price to bid when launching Spot Instances.
 	SpotPrice *string `min:"1" type:"string"`
@@ -7856,7 +7838,7 @@ func (s *LaunchConfiguration) SetAssociatePublicIpAddress(v bool) *LaunchConfigu
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *LaunchConfiguration) SetBlockDeviceMappings(v []*BlockDeviceMapping) *LaunchConfiguration {
+func (s *LaunchConfiguration) SetBlockDeviceMappings(v []BlockDeviceMapping) *LaunchConfiguration {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -7868,7 +7850,7 @@ func (s *LaunchConfiguration) SetClassicLinkVPCId(v string) *LaunchConfiguration
 }
 
 // SetClassicLinkVPCSecurityGroups sets the ClassicLinkVPCSecurityGroups field's value.
-func (s *LaunchConfiguration) SetClassicLinkVPCSecurityGroups(v []*string) *LaunchConfiguration {
+func (s *LaunchConfiguration) SetClassicLinkVPCSecurityGroups(v []string) *LaunchConfiguration {
 	s.ClassicLinkVPCSecurityGroups = v
 	return s
 }
@@ -7946,7 +7928,7 @@ func (s *LaunchConfiguration) SetRamdiskId(v string) *LaunchConfiguration {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *LaunchConfiguration) SetSecurityGroups(v []*string) *LaunchConfiguration {
+func (s *LaunchConfiguration) SetSecurityGroups(v []string) *LaunchConfiguration {
 	s.SecurityGroups = v
 	return s
 }
@@ -8781,7 +8763,7 @@ type PutNotificationConfigurationInput struct {
 	// about notification types supported by Auto Scaling, see DescribeAutoScalingNotificationTypes.
 	//
 	// NotificationTypes is a required field
-	NotificationTypes []*string `type:"list" required:"true"`
+	NotificationTypes []string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
 	// (SNS) topic.
@@ -8835,7 +8817,7 @@ func (s *PutNotificationConfigurationInput) SetAutoScalingGroupName(v string) *P
 }
 
 // SetNotificationTypes sets the NotificationTypes field's value.
-func (s *PutNotificationConfigurationInput) SetNotificationTypes(v []*string) *PutNotificationConfigurationInput {
+func (s *PutNotificationConfigurationInput) SetNotificationTypes(v []string) *PutNotificationConfigurationInput {
 	s.NotificationTypes = v
 	return s
 }
@@ -8936,7 +8918,7 @@ type PutScalingPolicyInput struct {
 	//
 	// This parameter is required if the policy type is StepScaling and not supported
 	// otherwise.
-	StepAdjustments []*StepAdjustment `type:"list"`
+	StepAdjustments []StepAdjustment `type:"list"`
 
 	// A target tracking policy.
 	//
@@ -8983,9 +8965,6 @@ func (s *PutScalingPolicyInput) Validate() error {
 	}
 	if s.StepAdjustments != nil {
 		for i, v := range s.StepAdjustments {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StepAdjustments", i), err.(aws.ErrInvalidParams))
 			}
@@ -9064,7 +9043,7 @@ func (s *PutScalingPolicyInput) SetScalingAdjustment(v int64) *PutScalingPolicyI
 }
 
 // SetStepAdjustments sets the StepAdjustments field's value.
-func (s *PutScalingPolicyInput) SetStepAdjustments(v []*StepAdjustment) *PutScalingPolicyInput {
+func (s *PutScalingPolicyInput) SetStepAdjustments(v []StepAdjustment) *PutScalingPolicyInput {
 	s.StepAdjustments = v
 	return s
 }
@@ -9081,7 +9060,7 @@ type PutScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The CloudWatch alarms created for the target tracking policy.
-	Alarms []*Alarm `type:"list"`
+	Alarms []Alarm `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the policy.
 	PolicyARN *string `min:"1" type:"string"`
@@ -9098,7 +9077,7 @@ func (s PutScalingPolicyOutput) GoString() string {
 }
 
 // SetAlarms sets the Alarms field's value.
-func (s *PutScalingPolicyOutput) SetAlarms(v []*Alarm) *PutScalingPolicyOutput {
+func (s *PutScalingPolicyOutput) SetAlarms(v []Alarm) *PutScalingPolicyOutput {
 	s.Alarms = v
 	return s
 }
@@ -9387,7 +9366,7 @@ type ScalingPolicy struct {
 	AdjustmentType *string `min:"1" type:"string"`
 
 	// The CloudWatch alarms related to the policy.
-	Alarms []*Alarm `type:"list"`
+	Alarms []Alarm `type:"list"`
 
 	// The name of the Auto Scaling group associated with this scaling policy.
 	AutoScalingGroupName *string `min:"1" type:"string"`
@@ -9429,7 +9408,7 @@ type ScalingPolicy struct {
 
 	// A set of adjustments that enable you to scale based on the size of the alarm
 	// breach.
-	StepAdjustments []*StepAdjustment `type:"list"`
+	StepAdjustments []StepAdjustment `type:"list"`
 
 	// A target tracking policy.
 	TargetTrackingConfiguration *TargetTrackingConfiguration `type:"structure"`
@@ -9452,7 +9431,7 @@ func (s *ScalingPolicy) SetAdjustmentType(v string) *ScalingPolicy {
 }
 
 // SetAlarms sets the Alarms field's value.
-func (s *ScalingPolicy) SetAlarms(v []*Alarm) *ScalingPolicy {
+func (s *ScalingPolicy) SetAlarms(v []Alarm) *ScalingPolicy {
 	s.Alarms = v
 	return s
 }
@@ -9518,7 +9497,7 @@ func (s *ScalingPolicy) SetScalingAdjustment(v int64) *ScalingPolicy {
 }
 
 // SetStepAdjustments sets the StepAdjustments field's value.
-func (s *ScalingPolicy) SetStepAdjustments(v []*StepAdjustment) *ScalingPolicy {
+func (s *ScalingPolicy) SetStepAdjustments(v []StepAdjustment) *ScalingPolicy {
 	s.StepAdjustments = v
 	return s
 }
@@ -9830,7 +9809,7 @@ type SetInstanceProtectionInput struct {
 	// One or more instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `type:"list" required:"true"`
+	InstanceIds []string `type:"list" required:"true"`
 
 	// Indicates whether the instance is protected from termination by Auto Scaling
 	// when scaling in.
@@ -9881,7 +9860,7 @@ func (s *SetInstanceProtectionInput) SetAutoScalingGroupName(v string) *SetInsta
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *SetInstanceProtectionInput) SetInstanceIds(v []*string) *SetInstanceProtectionInput {
+func (s *SetInstanceProtectionInput) SetInstanceIds(v []string) *SetInstanceProtectionInput {
 	s.InstanceIds = v
 	return s
 }
@@ -10033,7 +10012,7 @@ type SuspendProcessesInput struct {
 	//    * ScheduledActions
 	//
 	//    * AddToLoadBalancer
-	ScalingProcesses []*string `type:"list"`
+	ScalingProcesses []string `type:"list"`
 }
 
 // String returns the string representation
@@ -10070,7 +10049,7 @@ func (s *SuspendProcessesInput) SetAutoScalingGroupName(v string) *SuspendProces
 }
 
 // SetScalingProcesses sets the ScalingProcesses field's value.
-func (s *SuspendProcessesInput) SetScalingProcesses(v []*string) *SuspendProcessesInput {
+func (s *SuspendProcessesInput) SetScalingProcesses(v []string) *SuspendProcessesInput {
 	s.ScalingProcesses = v
 	return s
 }
@@ -10444,7 +10423,7 @@ type UpdateAutoScalingGroupInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// One or more Availability Zones for the group.
-	AvailabilityZones []*string `min:"1" type:"list"`
+	AvailabilityZones []string `min:"1" type:"list"`
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start. The default is 300.
@@ -10494,7 +10473,7 @@ type UpdateAutoScalingGroupInput struct {
 	// For more information, see Controlling Which Instances Auto Scaling Terminates
 	// During Scale In (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html)
 	// in the Auto Scaling User Guide.
-	TerminationPolicies []*string `type:"list"`
+	TerminationPolicies []string `type:"list"`
 
 	// The ID of the subnet, if you are launching into a VPC. You can specify several
 	// subnets in a comma-separated list.
@@ -10556,7 +10535,7 @@ func (s *UpdateAutoScalingGroupInput) SetAutoScalingGroupName(v string) *UpdateA
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *UpdateAutoScalingGroupInput) SetAvailabilityZones(v []*string) *UpdateAutoScalingGroupInput {
+func (s *UpdateAutoScalingGroupInput) SetAvailabilityZones(v []string) *UpdateAutoScalingGroupInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -10616,7 +10595,7 @@ func (s *UpdateAutoScalingGroupInput) SetPlacementGroup(v string) *UpdateAutoSca
 }
 
 // SetTerminationPolicies sets the TerminationPolicies field's value.
-func (s *UpdateAutoScalingGroupInput) SetTerminationPolicies(v []*string) *UpdateAutoScalingGroupInput {
+func (s *UpdateAutoScalingGroupInput) SetTerminationPolicies(v []string) *UpdateAutoScalingGroupInput {
 	s.TerminationPolicies = v
 	return s
 }

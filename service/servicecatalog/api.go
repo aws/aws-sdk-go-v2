@@ -3595,7 +3595,7 @@ type CopyProductInput struct {
 
 	// The IDs of the product versions to copy. By default, all provisioning artifacts
 	// are copied.
-	SourceProvisioningArtifactIdentifiers []map[string]*string `type:"list"`
+	SourceProvisioningArtifactIdentifiers []map[string]string `type:"list"`
 
 	// The ID of the target product. By default, a new product is created.
 	TargetProductId *string `min:"1" type:"string"`
@@ -3666,7 +3666,7 @@ func (s *CopyProductInput) SetSourceProductArn(v string) *CopyProductInput {
 }
 
 // SetSourceProvisioningArtifactIdentifiers sets the SourceProvisioningArtifactIdentifiers field's value.
-func (s *CopyProductInput) SetSourceProvisioningArtifactIdentifiers(v []map[string]*string) *CopyProductInput {
+func (s *CopyProductInput) SetSourceProvisioningArtifactIdentifiers(v []map[string]string) *CopyProductInput {
 	s.SourceProvisioningArtifactIdentifiers = v
 	return s
 }
@@ -3930,7 +3930,7 @@ type CreatePortfolioInput struct {
 	ProviderName *string `min:"1" type:"string" required:"true"`
 
 	// Tags to associate with the new portfolio.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -3969,9 +3969,6 @@ func (s *CreatePortfolioInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -4015,7 +4012,7 @@ func (s *CreatePortfolioInput) SetProviderName(v string) *CreatePortfolioInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreatePortfolioInput) SetTags(v []*Tag) *CreatePortfolioInput {
+func (s *CreatePortfolioInput) SetTags(v []Tag) *CreatePortfolioInput {
 	s.Tags = v
 	return s
 }
@@ -4028,7 +4025,7 @@ type CreatePortfolioOutput struct {
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
 	// Tags successfully associated with the new portfolio.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4048,7 +4045,7 @@ func (s *CreatePortfolioOutput) SetPortfolioDetail(v *PortfolioDetail) *CreatePo
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreatePortfolioOutput) SetTags(v []*Tag) *CreatePortfolioOutput {
+func (s *CreatePortfolioOutput) SetTags(v []Tag) *CreatePortfolioOutput {
 	s.Tags = v
 	return s
 }
@@ -4197,7 +4194,7 @@ type CreateProductInput struct {
 	SupportUrl *string `type:"string"`
 
 	// Tags to associate with the new product.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4242,9 +4239,6 @@ func (s *CreateProductInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -4324,7 +4318,7 @@ func (s *CreateProductInput) SetSupportUrl(v string) *CreateProductInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateProductInput) SetTags(v []*Tag) *CreateProductInput {
+func (s *CreateProductInput) SetTags(v []Tag) *CreateProductInput {
 	s.Tags = v
 	return s
 }
@@ -4340,7 +4334,7 @@ type CreateProductOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// Tags successfully associated with the new product.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4366,7 +4360,7 @@ func (s *CreateProductOutput) SetProvisioningArtifactDetail(v *ProvisioningArtif
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateProductOutput) SetTags(v []*Tag) *CreateProductOutput {
+func (s *CreateProductOutput) SetTags(v []Tag) *CreateProductOutput {
 	s.Tags = v
 	return s
 }
@@ -4474,7 +4468,7 @@ type CreateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Additional information about the creation request for the provisioning artifact.
-	Info map[string]*string `min:"1" type:"map"`
+	Info map[string]string `min:"1" type:"map"`
 
 	// The resulting detailed provisioning artifact information.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
@@ -4494,7 +4488,7 @@ func (s CreateProvisioningArtifactOutput) GoString() string {
 }
 
 // SetInfo sets the Info field's value.
-func (s *CreateProvisioningArtifactOutput) SetInfo(v map[string]*string) *CreateProvisioningArtifactOutput {
+func (s *CreateProvisioningArtifactOutput) SetInfo(v map[string]string) *CreateProvisioningArtifactOutput {
 	s.Info = v
 	return s
 }
@@ -5261,10 +5255,10 @@ type DescribePortfolioOutput struct {
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
 	// TagOptions associated with the portfolio.
-	TagOptions []*TagOptionDetail `type:"list"`
+	TagOptions []TagOptionDetail `type:"list"`
 
 	// Tags associated with the portfolio.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -5284,13 +5278,13 @@ func (s *DescribePortfolioOutput) SetPortfolioDetail(v *PortfolioDetail) *Descri
 }
 
 // SetTagOptions sets the TagOptions field's value.
-func (s *DescribePortfolioOutput) SetTagOptions(v []*TagOptionDetail) *DescribePortfolioOutput {
+func (s *DescribePortfolioOutput) SetTagOptions(v []TagOptionDetail) *DescribePortfolioOutput {
 	s.TagOptions = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribePortfolioOutput) SetTags(v []*Tag) *DescribePortfolioOutput {
+func (s *DescribePortfolioOutput) SetTags(v []Tag) *DescribePortfolioOutput {
 	s.Tags = v
 	return s
 }
@@ -5361,13 +5355,13 @@ type DescribeProductAsAdminOutput struct {
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
 	// A list of provisioning artifact summaries for the product.
-	ProvisioningArtifactSummaries []*ProvisioningArtifactSummary `type:"list"`
+	ProvisioningArtifactSummaries []ProvisioningArtifactSummary `type:"list"`
 
 	// List of TagOptions associated with the product.
-	TagOptions []*TagOptionDetail `type:"list"`
+	TagOptions []TagOptionDetail `type:"list"`
 
 	// Tags associated with the product.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -5387,19 +5381,19 @@ func (s *DescribeProductAsAdminOutput) SetProductViewDetail(v *ProductViewDetail
 }
 
 // SetProvisioningArtifactSummaries sets the ProvisioningArtifactSummaries field's value.
-func (s *DescribeProductAsAdminOutput) SetProvisioningArtifactSummaries(v []*ProvisioningArtifactSummary) *DescribeProductAsAdminOutput {
+func (s *DescribeProductAsAdminOutput) SetProvisioningArtifactSummaries(v []ProvisioningArtifactSummary) *DescribeProductAsAdminOutput {
 	s.ProvisioningArtifactSummaries = v
 	return s
 }
 
 // SetTagOptions sets the TagOptions field's value.
-func (s *DescribeProductAsAdminOutput) SetTagOptions(v []*TagOptionDetail) *DescribeProductAsAdminOutput {
+func (s *DescribeProductAsAdminOutput) SetTagOptions(v []TagOptionDetail) *DescribeProductAsAdminOutput {
 	s.TagOptions = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeProductAsAdminOutput) SetTags(v []*Tag) *DescribeProductAsAdminOutput {
+func (s *DescribeProductAsAdminOutput) SetTags(v []Tag) *DescribeProductAsAdminOutput {
 	s.Tags = v
 	return s
 }
@@ -5471,7 +5465,7 @@ type DescribeProductOutput struct {
 
 	// A list of provisioning artifact objects for the specified product. The ProvisioningArtifacts
 	// parameter represent the ways the specified product can be provisioned.
-	ProvisioningArtifacts []*ProvisioningArtifact `type:"list"`
+	ProvisioningArtifacts []ProvisioningArtifact `type:"list"`
 }
 
 // String returns the string representation
@@ -5491,7 +5485,7 @@ func (s *DescribeProductOutput) SetProductViewSummary(v *ProductViewSummary) *De
 }
 
 // SetProvisioningArtifacts sets the ProvisioningArtifacts field's value.
-func (s *DescribeProductOutput) SetProvisioningArtifacts(v []*ProvisioningArtifact) *DescribeProductOutput {
+func (s *DescribeProductOutput) SetProvisioningArtifacts(v []ProvisioningArtifact) *DescribeProductOutput {
 	s.ProvisioningArtifacts = v
 	return s
 }
@@ -5563,7 +5557,7 @@ type DescribeProductViewOutput struct {
 
 	// A list of provisioning artifact objects for the specified product. The ProvisioningArtifacts
 	// represent the ways in which the specified product can be provisioned.
-	ProvisioningArtifacts []*ProvisioningArtifact `type:"list"`
+	ProvisioningArtifacts []ProvisioningArtifact `type:"list"`
 }
 
 // String returns the string representation
@@ -5583,7 +5577,7 @@ func (s *DescribeProductViewOutput) SetProductViewSummary(v *ProductViewSummary)
 }
 
 // SetProvisioningArtifacts sets the ProvisioningArtifacts field's value.
-func (s *DescribeProductViewOutput) SetProvisioningArtifacts(v []*ProvisioningArtifact) *DescribeProductViewOutput {
+func (s *DescribeProductViewOutput) SetProvisioningArtifacts(v []ProvisioningArtifact) *DescribeProductViewOutput {
 	s.ProvisioningArtifacts = v
 	return s
 }
@@ -5761,7 +5755,7 @@ type DescribeProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Additional information about the provisioning artifact.
-	Info map[string]*string `min:"1" type:"map"`
+	Info map[string]string `min:"1" type:"map"`
 
 	// Detailed provisioning artifact information.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
@@ -5781,7 +5775,7 @@ func (s DescribeProvisioningArtifactOutput) GoString() string {
 }
 
 // SetInfo sets the Info field's value.
-func (s *DescribeProvisioningArtifactOutput) SetInfo(v map[string]*string) *DescribeProvisioningArtifactOutput {
+func (s *DescribeProvisioningArtifactOutput) SetInfo(v map[string]string) *DescribeProvisioningArtifactOutput {
 	s.Info = v
 	return s
 }
@@ -5894,18 +5888,18 @@ type DescribeProvisioningParametersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of constraint summaries that apply to provisioning this product.
-	ConstraintSummaries []*ConstraintSummary `type:"list"`
+	ConstraintSummaries []ConstraintSummary `type:"list"`
 
 	// The list of parameters used to successfully provision the product. Each parameter
 	// includes a list of allowable values and additional metadata about each parameter.
-	ProvisioningArtifactParameters []*ProvisioningArtifactParameter `type:"list"`
+	ProvisioningArtifactParameters []ProvisioningArtifactParameter `type:"list"`
 
 	// List of TagOptions associated with the provisioned provisioning parameters.
-	TagOptions []*TagOptionSummary `type:"list"`
+	TagOptions []TagOptionSummary `type:"list"`
 
 	// Any additional metadata specifically related to the provisioning of the product.
 	// For example, see the Version field of the CloudFormation template.
-	UsageInstructions []*UsageInstruction `type:"list"`
+	UsageInstructions []UsageInstruction `type:"list"`
 }
 
 // String returns the string representation
@@ -5919,25 +5913,25 @@ func (s DescribeProvisioningParametersOutput) GoString() string {
 }
 
 // SetConstraintSummaries sets the ConstraintSummaries field's value.
-func (s *DescribeProvisioningParametersOutput) SetConstraintSummaries(v []*ConstraintSummary) *DescribeProvisioningParametersOutput {
+func (s *DescribeProvisioningParametersOutput) SetConstraintSummaries(v []ConstraintSummary) *DescribeProvisioningParametersOutput {
 	s.ConstraintSummaries = v
 	return s
 }
 
 // SetProvisioningArtifactParameters sets the ProvisioningArtifactParameters field's value.
-func (s *DescribeProvisioningParametersOutput) SetProvisioningArtifactParameters(v []*ProvisioningArtifactParameter) *DescribeProvisioningParametersOutput {
+func (s *DescribeProvisioningParametersOutput) SetProvisioningArtifactParameters(v []ProvisioningArtifactParameter) *DescribeProvisioningParametersOutput {
 	s.ProvisioningArtifactParameters = v
 	return s
 }
 
 // SetTagOptions sets the TagOptions field's value.
-func (s *DescribeProvisioningParametersOutput) SetTagOptions(v []*TagOptionSummary) *DescribeProvisioningParametersOutput {
+func (s *DescribeProvisioningParametersOutput) SetTagOptions(v []TagOptionSummary) *DescribeProvisioningParametersOutput {
 	s.TagOptions = v
 	return s
 }
 
 // SetUsageInstructions sets the UsageInstructions field's value.
-func (s *DescribeProvisioningParametersOutput) SetUsageInstructions(v []*UsageInstruction) *DescribeProvisioningParametersOutput {
+func (s *DescribeProvisioningParametersOutput) SetUsageInstructions(v []UsageInstruction) *DescribeProvisioningParametersOutput {
 	s.UsageInstructions = v
 	return s
 }
@@ -6037,7 +6031,7 @@ type DescribeRecordOutput struct {
 	// A list of outputs for the specified Product object created as the result
 	// of a request. For example, a CloudFormation-backed product that creates an
 	// S3 bucket would have an output for the S3 bucket URL.
-	RecordOutputs []*RecordOutput `type:"list"`
+	RecordOutputs []RecordOutput `type:"list"`
 }
 
 // String returns the string representation
@@ -6063,7 +6057,7 @@ func (s *DescribeRecordOutput) SetRecordDetail(v *RecordDetail) *DescribeRecordO
 }
 
 // SetRecordOutputs sets the RecordOutputs field's value.
-func (s *DescribeRecordOutput) SetRecordOutputs(v []*RecordOutput) *DescribeRecordOutput {
+func (s *DescribeRecordOutput) SetRecordOutputs(v []RecordOutput) *DescribeRecordOutput {
 	s.RecordOutputs = v
 	return s
 }
@@ -6397,7 +6391,7 @@ type LaunchPathSummary struct {
 	_ struct{} `type:"structure"`
 
 	// List of constraints on the portfolio-product relationship.
-	ConstraintSummaries []*ConstraintSummary `type:"list"`
+	ConstraintSummaries []ConstraintSummary `type:"list"`
 
 	// The unique identifier of the product path.
 	Id *string `min:"1" type:"string"`
@@ -6406,7 +6400,7 @@ type LaunchPathSummary struct {
 	Name *string `type:"string"`
 
 	// List of tags used by this launch path.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -6420,7 +6414,7 @@ func (s LaunchPathSummary) GoString() string {
 }
 
 // SetConstraintSummaries sets the ConstraintSummaries field's value.
-func (s *LaunchPathSummary) SetConstraintSummaries(v []*ConstraintSummary) *LaunchPathSummary {
+func (s *LaunchPathSummary) SetConstraintSummaries(v []ConstraintSummary) *LaunchPathSummary {
 	s.ConstraintSummaries = v
 	return s
 }
@@ -6438,7 +6432,7 @@ func (s *LaunchPathSummary) SetName(v string) *LaunchPathSummary {
 }
 
 // SetTags sets the Tags field's value.
-func (s *LaunchPathSummary) SetTags(v []*Tag) *LaunchPathSummary {
+func (s *LaunchPathSummary) SetTags(v []Tag) *LaunchPathSummary {
 	s.Tags = v
 	return s
 }
@@ -6503,7 +6497,7 @@ type ListAcceptedPortfolioSharesOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// List of detailed portfolio information objects.
-	PortfolioDetails []*PortfolioDetail `type:"list"`
+	PortfolioDetails []PortfolioDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -6523,7 +6517,7 @@ func (s *ListAcceptedPortfolioSharesOutput) SetNextPageToken(v string) *ListAcce
 }
 
 // SetPortfolioDetails sets the PortfolioDetails field's value.
-func (s *ListAcceptedPortfolioSharesOutput) SetPortfolioDetails(v []*PortfolioDetail) *ListAcceptedPortfolioSharesOutput {
+func (s *ListAcceptedPortfolioSharesOutput) SetPortfolioDetails(v []PortfolioDetail) *ListAcceptedPortfolioSharesOutput {
 	s.PortfolioDetails = v
 	return s
 }
@@ -6624,7 +6618,7 @@ type ListConstraintsForPortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of detailed constraint information objects.
-	ConstraintDetails []*ConstraintDetail `type:"list"`
+	ConstraintDetails []ConstraintDetail `type:"list"`
 
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
@@ -6642,7 +6636,7 @@ func (s ListConstraintsForPortfolioOutput) GoString() string {
 }
 
 // SetConstraintDetails sets the ConstraintDetails field's value.
-func (s *ListConstraintsForPortfolioOutput) SetConstraintDetails(v []*ConstraintDetail) *ListConstraintsForPortfolioOutput {
+func (s *ListConstraintsForPortfolioOutput) SetConstraintDetails(v []ConstraintDetail) *ListConstraintsForPortfolioOutput {
 	s.ConstraintDetails = v
 	return s
 }
@@ -6738,7 +6732,7 @@ type ListLaunchPathsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of launch path information summaries for the specified PageToken.
-	LaunchPathSummaries []*LaunchPathSummary `type:"list"`
+	LaunchPathSummaries []LaunchPathSummary `type:"list"`
 
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
@@ -6756,7 +6750,7 @@ func (s ListLaunchPathsOutput) GoString() string {
 }
 
 // SetLaunchPathSummaries sets the LaunchPathSummaries field's value.
-func (s *ListLaunchPathsOutput) SetLaunchPathSummaries(v []*LaunchPathSummary) *ListLaunchPathsOutput {
+func (s *ListLaunchPathsOutput) SetLaunchPathSummaries(v []LaunchPathSummary) *ListLaunchPathsOutput {
 	s.LaunchPathSummaries = v
 	return s
 }
@@ -6830,7 +6824,7 @@ type ListPortfolioAccessOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of account IDs associated with access to the portfolio.
-	AccountIds []*string `type:"list"`
+	AccountIds []string `type:"list"`
 
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
@@ -6848,7 +6842,7 @@ func (s ListPortfolioAccessOutput) GoString() string {
 }
 
 // SetAccountIds sets the AccountIds field's value.
-func (s *ListPortfolioAccessOutput) SetAccountIds(v []*string) *ListPortfolioAccessOutput {
+func (s *ListPortfolioAccessOutput) SetAccountIds(v []string) *ListPortfolioAccessOutput {
 	s.AccountIds = v
 	return s
 }
@@ -6947,7 +6941,7 @@ type ListPortfoliosForProductOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// List of detailed portfolio information objects.
-	PortfolioDetails []*PortfolioDetail `type:"list"`
+	PortfolioDetails []PortfolioDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -6967,7 +6961,7 @@ func (s *ListPortfoliosForProductOutput) SetNextPageToken(v string) *ListPortfol
 }
 
 // SetPortfolioDetails sets the PortfolioDetails field's value.
-func (s *ListPortfoliosForProductOutput) SetPortfolioDetails(v []*PortfolioDetail) *ListPortfoliosForProductOutput {
+func (s *ListPortfoliosForProductOutput) SetPortfolioDetails(v []PortfolioDetail) *ListPortfoliosForProductOutput {
 	s.PortfolioDetails = v
 	return s
 }
@@ -7032,7 +7026,7 @@ type ListPortfoliosOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// List of detailed portfolio information objects.
-	PortfolioDetails []*PortfolioDetail `type:"list"`
+	PortfolioDetails []PortfolioDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -7052,7 +7046,7 @@ func (s *ListPortfoliosOutput) SetNextPageToken(v string) *ListPortfoliosOutput 
 }
 
 // SetPortfolioDetails sets the PortfolioDetails field's value.
-func (s *ListPortfoliosOutput) SetPortfolioDetails(v []*PortfolioDetail) *ListPortfoliosOutput {
+func (s *ListPortfoliosOutput) SetPortfolioDetails(v []PortfolioDetail) *ListPortfoliosOutput {
 	s.PortfolioDetails = v
 	return s
 }
@@ -7145,7 +7139,7 @@ type ListPrincipalsForPortfolioOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// The IAM principals (users or roles) associated with the portfolio.
-	Principals []*Principal `type:"list"`
+	Principals []Principal `type:"list"`
 }
 
 // String returns the string representation
@@ -7165,7 +7159,7 @@ func (s *ListPrincipalsForPortfolioOutput) SetNextPageToken(v string) *ListPrinc
 }
 
 // SetPrincipals sets the Principals field's value.
-func (s *ListPrincipalsForPortfolioOutput) SetPrincipals(v []*Principal) *ListPrincipalsForPortfolioOutput {
+func (s *ListPrincipalsForPortfolioOutput) SetPrincipals(v []Principal) *ListPrincipalsForPortfolioOutput {
 	s.Principals = v
 	return s
 }
@@ -7237,7 +7231,7 @@ type ListProvisioningArtifactsOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// List of detailed provisioning artifact information objects.
-	ProvisioningArtifactDetails []*ProvisioningArtifactDetail `type:"list"`
+	ProvisioningArtifactDetails []ProvisioningArtifactDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -7257,7 +7251,7 @@ func (s *ListProvisioningArtifactsOutput) SetNextPageToken(v string) *ListProvis
 }
 
 // SetProvisioningArtifactDetails sets the ProvisioningArtifactDetails field's value.
-func (s *ListProvisioningArtifactsOutput) SetProvisioningArtifactDetails(v []*ProvisioningArtifactDetail) *ListProvisioningArtifactsOutput {
+func (s *ListProvisioningArtifactsOutput) SetProvisioningArtifactDetails(v []ProvisioningArtifactDetail) *ListProvisioningArtifactsOutput {
 	s.ProvisioningArtifactDetails = v
 	return s
 }
@@ -7341,7 +7335,7 @@ type ListRecordHistoryOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// A list of record detail objects, listed in reverse chronological order.
-	RecordDetails []*RecordDetail `type:"list"`
+	RecordDetails []RecordDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -7361,7 +7355,7 @@ func (s *ListRecordHistoryOutput) SetNextPageToken(v string) *ListRecordHistoryO
 }
 
 // SetRecordDetails sets the RecordDetails field's value.
-func (s *ListRecordHistoryOutput) SetRecordDetails(v []*RecordDetail) *ListRecordHistoryOutput {
+func (s *ListRecordHistoryOutput) SetRecordDetails(v []RecordDetail) *ListRecordHistoryOutput {
 	s.RecordDetails = v
 	return s
 }
@@ -7482,7 +7476,7 @@ type ListResourcesForTagOptionOutput struct {
 	PageToken *string `type:"string"`
 
 	// The resulting detailed resource information.
-	ResourceDetails []*ResourceDetail `type:"list"`
+	ResourceDetails []ResourceDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -7502,7 +7496,7 @@ func (s *ListResourcesForTagOptionOutput) SetPageToken(v string) *ListResourcesF
 }
 
 // SetResourceDetails sets the ResourceDetails field's value.
-func (s *ListResourcesForTagOptionOutput) SetResourceDetails(v []*ResourceDetail) *ListResourcesForTagOptionOutput {
+func (s *ListResourcesForTagOptionOutput) SetResourceDetails(v []ResourceDetail) *ListResourcesForTagOptionOutput {
 	s.ResourceDetails = v
 	return s
 }
@@ -7636,7 +7630,7 @@ type ListTagOptionsOutput struct {
 	PageToken *string `type:"string"`
 
 	// The resulting detailed TagOption information.
-	TagOptionDetails []*TagOptionDetail `type:"list"`
+	TagOptionDetails []TagOptionDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -7656,7 +7650,7 @@ func (s *ListTagOptionsOutput) SetPageToken(v string) *ListTagOptionsOutput {
 }
 
 // SetTagOptionDetails sets the TagOptionDetails field's value.
-func (s *ListTagOptionsOutput) SetTagOptionDetails(v []*TagOptionDetail) *ListTagOptionsOutput {
+func (s *ListTagOptionsOutput) SetTagOptionDetails(v []TagOptionDetail) *ListTagOptionsOutput {
 	s.TagOptionDetails = v
 	return s
 }
@@ -7667,7 +7661,7 @@ type ParameterConstraints struct {
 	_ struct{} `type:"structure"`
 
 	// The values that the administrator has allowed for the parameter.
-	AllowedValues []*string `type:"list"`
+	AllowedValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7681,7 +7675,7 @@ func (s ParameterConstraints) GoString() string {
 }
 
 // SetAllowedValues sets the AllowedValues field's value.
-func (s *ParameterConstraints) SetAllowedValues(v []*string) *ParameterConstraints {
+func (s *ParameterConstraints) SetAllowedValues(v []string) *ParameterConstraints {
 	s.AllowedValues = v
 	return s
 }
@@ -8021,7 +8015,7 @@ type ProvisionProductInput struct {
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
-	NotificationArns []*string `type:"list"`
+	NotificationArns []string `type:"list"`
 
 	// The identifier of the path for this product's provisioning. This value is
 	// optional if the product has a default path, and is required if there is more
@@ -8053,10 +8047,10 @@ type ProvisionProductInput struct {
 
 	// Parameters specified by the administrator that are required for provisioning
 	// the product.
-	ProvisioningParameters []*ProvisioningParameter `type:"list"`
+	ProvisioningParameters []ProvisioningParameter `type:"list"`
 
 	// A list of tags to use as provisioning options.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -8105,9 +8099,6 @@ func (s *ProvisionProductInput) Validate() error {
 	}
 	if s.ProvisioningParameters != nil {
 		for i, v := range s.ProvisioningParameters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
 			}
@@ -8115,9 +8106,6 @@ func (s *ProvisionProductInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -8137,7 +8125,7 @@ func (s *ProvisionProductInput) SetAcceptLanguage(v string) *ProvisionProductInp
 }
 
 // SetNotificationArns sets the NotificationArns field's value.
-func (s *ProvisionProductInput) SetNotificationArns(v []*string) *ProvisionProductInput {
+func (s *ProvisionProductInput) SetNotificationArns(v []string) *ProvisionProductInput {
 	s.NotificationArns = v
 	return s
 }
@@ -8173,13 +8161,13 @@ func (s *ProvisionProductInput) SetProvisioningArtifactId(v string) *ProvisionPr
 }
 
 // SetProvisioningParameters sets the ProvisioningParameters field's value.
-func (s *ProvisionProductInput) SetProvisioningParameters(v []*ProvisioningParameter) *ProvisionProductInput {
+func (s *ProvisionProductInput) SetProvisioningParameters(v []ProvisioningParameter) *ProvisionProductInput {
 	s.ProvisioningParameters = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *ProvisionProductInput) SetTags(v []*Tag) *ProvisionProductInput {
+func (s *ProvisionProductInput) SetTags(v []Tag) *ProvisionProductInput {
 	s.Tags = v
 	return s
 }
@@ -8532,7 +8520,7 @@ type ProvisioningArtifactProperties struct {
 	// information, see CreateProvisioningArtifact.
 	//
 	// Info is a required field
-	Info map[string]*string `min:"1" type:"map" required:"true"`
+	Info map[string]string `min:"1" type:"map" required:"true"`
 
 	// The name assigned to the provisioning artifact properties.
 	Name *string `type:"string"`
@@ -8580,7 +8568,7 @@ func (s *ProvisioningArtifactProperties) SetDescription(v string) *ProvisioningA
 }
 
 // SetInfo sets the Info field's value.
-func (s *ProvisioningArtifactProperties) SetInfo(v map[string]*string) *ProvisioningArtifactProperties {
+func (s *ProvisioningArtifactProperties) SetInfo(v map[string]string) *ProvisioningArtifactProperties {
 	s.Info = v
 	return s
 }
@@ -8616,7 +8604,7 @@ type ProvisioningArtifactSummary struct {
 
 	// The provisioning artifact metadata. This data is used with products created
 	// by AWS Marketplace.
-	ProvisioningArtifactMetadata map[string]*string `min:"1" type:"map"`
+	ProvisioningArtifactMetadata map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -8654,7 +8642,7 @@ func (s *ProvisioningArtifactSummary) SetName(v string) *ProvisioningArtifactSum
 }
 
 // SetProvisioningArtifactMetadata sets the ProvisioningArtifactMetadata field's value.
-func (s *ProvisioningArtifactSummary) SetProvisioningArtifactMetadata(v map[string]*string) *ProvisioningArtifactSummary {
+func (s *ProvisioningArtifactSummary) SetProvisioningArtifactMetadata(v map[string]string) *ProvisioningArtifactSummary {
 	s.ProvisioningArtifactMetadata = v
 	return s
 }
@@ -8735,13 +8723,13 @@ type RecordDetail struct {
 	ProvisioningArtifactId *string `min:"1" type:"string"`
 
 	// A list of errors that occurred while processing the request.
-	RecordErrors []*RecordError `type:"list"`
+	RecordErrors []RecordError `type:"list"`
 
 	// The identifier of the ProvisionedProduct object record.
 	RecordId *string `min:"1" type:"string"`
 
 	// List of tags associated with this record.
-	RecordTags []*RecordTag `type:"list"`
+	RecordTags []RecordTag `type:"list"`
 
 	// The record type for this record.
 	RecordType *string `type:"string"`
@@ -8818,7 +8806,7 @@ func (s *RecordDetail) SetProvisioningArtifactId(v string) *RecordDetail {
 }
 
 // SetRecordErrors sets the RecordErrors field's value.
-func (s *RecordDetail) SetRecordErrors(v []*RecordError) *RecordDetail {
+func (s *RecordDetail) SetRecordErrors(v []RecordError) *RecordDetail {
 	s.RecordErrors = v
 	return s
 }
@@ -8830,7 +8818,7 @@ func (s *RecordDetail) SetRecordId(v string) *RecordDetail {
 }
 
 // SetRecordTags sets the RecordTags field's value.
-func (s *RecordDetail) SetRecordTags(v []*RecordTag) *RecordDetail {
+func (s *RecordDetail) SetRecordTags(v []RecordTag) *RecordDetail {
 	s.RecordTags = v
 	return s
 }
@@ -9170,7 +9158,7 @@ type ScanProvisionedProductsOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// A list of ProvisionedProduct detail objects.
-	ProvisionedProducts []*ProvisionedProductDetail `type:"list"`
+	ProvisionedProducts []ProvisionedProductDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -9190,7 +9178,7 @@ func (s *ScanProvisionedProductsOutput) SetNextPageToken(v string) *ScanProvisio
 }
 
 // SetProvisionedProducts sets the ProvisionedProducts field's value.
-func (s *ScanProvisionedProductsOutput) SetProvisionedProducts(v []*ProvisionedProductDetail) *ScanProvisionedProductsOutput {
+func (s *ScanProvisionedProductsOutput) SetProvisionedProducts(v []ProvisionedProductDetail) *ScanProvisionedProductsOutput {
 	s.ProvisionedProducts = v
 	return s
 }
@@ -9211,7 +9199,7 @@ type SearchProductsAsAdminInput struct {
 	// The list of filters with which to limit search results. If no search filters
 	// are specified, the output is all the products to which the administrator
 	// has access.
-	Filters map[string][]*string `type:"map"`
+	Filters map[string][]string `type:"map"`
 
 	// The maximum number of items to return in the results. If more results exist
 	// than fit in the specified PageSize, the value of NextPageToken in the response
@@ -9265,7 +9253,7 @@ func (s *SearchProductsAsAdminInput) SetAcceptLanguage(v string) *SearchProducts
 }
 
 // SetFilters sets the Filters field's value.
-func (s *SearchProductsAsAdminInput) SetFilters(v map[string][]*string) *SearchProductsAsAdminInput {
+func (s *SearchProductsAsAdminInput) SetFilters(v map[string][]string) *SearchProductsAsAdminInput {
 	s.Filters = v
 	return s
 }
@@ -9315,7 +9303,7 @@ type SearchProductsAsAdminOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// List of detailed product view information objects.
-	ProductViewDetails []*ProductViewDetail `type:"list"`
+	ProductViewDetails []ProductViewDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -9335,7 +9323,7 @@ func (s *SearchProductsAsAdminOutput) SetNextPageToken(v string) *SearchProducts
 }
 
 // SetProductViewDetails sets the ProductViewDetails field's value.
-func (s *SearchProductsAsAdminOutput) SetProductViewDetails(v []*ProductViewDetail) *SearchProductsAsAdminOutput {
+func (s *SearchProductsAsAdminOutput) SetProductViewDetails(v []ProductViewDetail) *SearchProductsAsAdminOutput {
 	s.ProductViewDetails = v
 	return s
 }
@@ -9356,7 +9344,7 @@ type SearchProductsInput struct {
 	// The list of filters with which to limit search results. If no search filters
 	// are specified, the output is all the products to which the calling user has
 	// access.
-	Filters map[string][]*string `type:"map"`
+	Filters map[string][]string `type:"map"`
 
 	// The maximum number of items to return in the results. If more results exist
 	// than fit in the specified PageSize, the value of NextPageToken in the response
@@ -9391,7 +9379,7 @@ func (s *SearchProductsInput) SetAcceptLanguage(v string) *SearchProductsInput {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *SearchProductsInput) SetFilters(v map[string][]*string) *SearchProductsInput {
+func (s *SearchProductsInput) SetFilters(v map[string][]string) *SearchProductsInput {
 	s.Filters = v
 	return s
 }
@@ -9429,10 +9417,10 @@ type SearchProductsOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// A list of the product view aggregation value objects.
-	ProductViewAggregations map[string][]*ProductViewAggregationValue `type:"map"`
+	ProductViewAggregations map[string][]ProductViewAggregationValue `type:"map"`
 
 	// A list of the product view summary objects.
-	ProductViewSummaries []*ProductViewSummary `type:"list"`
+	ProductViewSummaries []ProductViewSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -9452,13 +9440,13 @@ func (s *SearchProductsOutput) SetNextPageToken(v string) *SearchProductsOutput 
 }
 
 // SetProductViewAggregations sets the ProductViewAggregations field's value.
-func (s *SearchProductsOutput) SetProductViewAggregations(v map[string][]*ProductViewAggregationValue) *SearchProductsOutput {
+func (s *SearchProductsOutput) SetProductViewAggregations(v map[string][]ProductViewAggregationValue) *SearchProductsOutput {
 	s.ProductViewAggregations = v
 	return s
 }
 
 // SetProductViewSummaries sets the ProductViewSummaries field's value.
-func (s *SearchProductsOutput) SetProductViewSummaries(v []*ProductViewSummary) *SearchProductsOutput {
+func (s *SearchProductsOutput) SetProductViewSummaries(v []ProductViewSummary) *SearchProductsOutput {
 	s.ProductViewSummaries = v
 	return s
 }
@@ -9587,7 +9575,7 @@ type TagOptionSummary struct {
 	Key *string `min:"1" type:"string"`
 
 	// The TagOptionSummary value.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -9607,7 +9595,7 @@ func (s *TagOptionSummary) SetKey(v string) *TagOptionSummary {
 }
 
 // SetValues sets the Values field's value.
-func (s *TagOptionSummary) SetValues(v []*string) *TagOptionSummary {
+func (s *TagOptionSummary) SetValues(v []string) *TagOptionSummary {
 	s.Values = v
 	return s
 }
@@ -9859,7 +9847,7 @@ type UpdatePortfolioInput struct {
 	AcceptLanguage *string `type:"string"`
 
 	// Tags to add to the existing list of tags associated with the portfolio.
-	AddTags []*Tag `type:"list"`
+	AddTags []Tag `type:"list"`
 
 	// The updated text description of the portfolio.
 	Description *string `type:"string"`
@@ -9876,7 +9864,7 @@ type UpdatePortfolioInput struct {
 	ProviderName *string `min:"1" type:"string"`
 
 	// Tags to remove from the existing list of tags associated with the portfolio.
-	RemoveTags []*string `type:"list"`
+	RemoveTags []string `type:"list"`
 }
 
 // String returns the string representation
@@ -9907,9 +9895,6 @@ func (s *UpdatePortfolioInput) Validate() error {
 	}
 	if s.AddTags != nil {
 		for i, v := range s.AddTags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(aws.ErrInvalidParams))
 			}
@@ -9929,7 +9914,7 @@ func (s *UpdatePortfolioInput) SetAcceptLanguage(v string) *UpdatePortfolioInput
 }
 
 // SetAddTags sets the AddTags field's value.
-func (s *UpdatePortfolioInput) SetAddTags(v []*Tag) *UpdatePortfolioInput {
+func (s *UpdatePortfolioInput) SetAddTags(v []Tag) *UpdatePortfolioInput {
 	s.AddTags = v
 	return s
 }
@@ -9959,7 +9944,7 @@ func (s *UpdatePortfolioInput) SetProviderName(v string) *UpdatePortfolioInput {
 }
 
 // SetRemoveTags sets the RemoveTags field's value.
-func (s *UpdatePortfolioInput) SetRemoveTags(v []*string) *UpdatePortfolioInput {
+func (s *UpdatePortfolioInput) SetRemoveTags(v []string) *UpdatePortfolioInput {
 	s.RemoveTags = v
 	return s
 }
@@ -9972,7 +9957,7 @@ type UpdatePortfolioOutput struct {
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
 	// Tags associated with the portfolio.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -9992,7 +9977,7 @@ func (s *UpdatePortfolioOutput) SetPortfolioDetail(v *PortfolioDetail) *UpdatePo
 }
 
 // SetTags sets the Tags field's value.
-func (s *UpdatePortfolioOutput) SetTags(v []*Tag) *UpdatePortfolioOutput {
+func (s *UpdatePortfolioOutput) SetTags(v []Tag) *UpdatePortfolioOutput {
 	s.Tags = v
 	return s
 }
@@ -10011,7 +9996,7 @@ type UpdateProductInput struct {
 	AcceptLanguage *string `type:"string"`
 
 	// Tags to add to the existing list of tags associated with the product.
-	AddTags []*Tag `type:"list"`
+	AddTags []Tag `type:"list"`
 
 	// The updated text description of the product.
 	Description *string `type:"string"`
@@ -10031,7 +10016,7 @@ type UpdateProductInput struct {
 	Owner *string `type:"string"`
 
 	// Tags to remove from the existing list of tags associated with the product.
-	RemoveTags []*string `type:"list"`
+	RemoveTags []string `type:"list"`
 
 	// The updated support description for the product.
 	SupportDescription *string `type:"string"`
@@ -10065,9 +10050,6 @@ func (s *UpdateProductInput) Validate() error {
 	}
 	if s.AddTags != nil {
 		for i, v := range s.AddTags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(aws.ErrInvalidParams))
 			}
@@ -10087,7 +10069,7 @@ func (s *UpdateProductInput) SetAcceptLanguage(v string) *UpdateProductInput {
 }
 
 // SetAddTags sets the AddTags field's value.
-func (s *UpdateProductInput) SetAddTags(v []*Tag) *UpdateProductInput {
+func (s *UpdateProductInput) SetAddTags(v []Tag) *UpdateProductInput {
 	s.AddTags = v
 	return s
 }
@@ -10123,7 +10105,7 @@ func (s *UpdateProductInput) SetOwner(v string) *UpdateProductInput {
 }
 
 // SetRemoveTags sets the RemoveTags field's value.
-func (s *UpdateProductInput) SetRemoveTags(v []*string) *UpdateProductInput {
+func (s *UpdateProductInput) SetRemoveTags(v []string) *UpdateProductInput {
 	s.RemoveTags = v
 	return s
 }
@@ -10154,7 +10136,7 @@ type UpdateProductOutput struct {
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
 	// Tags associated with the product.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -10174,7 +10156,7 @@ func (s *UpdateProductOutput) SetProductViewDetail(v *ProductViewDetail) *Update
 }
 
 // SetTags sets the Tags field's value.
-func (s *UpdateProductOutput) SetTags(v []*Tag) *UpdateProductOutput {
+func (s *UpdateProductOutput) SetTags(v []Tag) *UpdateProductOutput {
 	s.Tags = v
 	return s
 }
@@ -10214,7 +10196,7 @@ type UpdateProvisionedProductInput struct {
 
 	// A list of ProvisioningParameter objects used to update the ProvisionedProduct
 	// object.
-	ProvisioningParameters []*UpdateProvisioningParameter `type:"list"`
+	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
 
 	// The idempotency token that uniquely identifies the provisioning update request.
 	//
@@ -10259,9 +10241,6 @@ func (s *UpdateProvisionedProductInput) Validate() error {
 	}
 	if s.ProvisioningParameters != nil {
 		for i, v := range s.ProvisioningParameters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
 			}
@@ -10311,7 +10290,7 @@ func (s *UpdateProvisionedProductInput) SetProvisioningArtifactId(v string) *Upd
 }
 
 // SetProvisioningParameters sets the ProvisioningParameters field's value.
-func (s *UpdateProvisionedProductInput) SetProvisioningParameters(v []*UpdateProvisioningParameter) *UpdateProvisionedProductInput {
+func (s *UpdateProvisionedProductInput) SetProvisioningParameters(v []UpdateProvisioningParameter) *UpdateProvisionedProductInput {
 	s.ProvisioningParameters = v
 	return s
 }
@@ -10449,7 +10428,7 @@ type UpdateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Additional information about the provisioning artifact update request.
-	Info map[string]*string `min:"1" type:"map"`
+	Info map[string]string `min:"1" type:"map"`
 
 	// The resulting detailed provisioning artifact information.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
@@ -10469,7 +10448,7 @@ func (s UpdateProvisioningArtifactOutput) GoString() string {
 }
 
 // SetInfo sets the Info field's value.
-func (s *UpdateProvisioningArtifactOutput) SetInfo(v map[string]*string) *UpdateProvisioningArtifactOutput {
+func (s *UpdateProvisioningArtifactOutput) SetInfo(v map[string]string) *UpdateProvisioningArtifactOutput {
 	s.Info = v
 	return s
 }

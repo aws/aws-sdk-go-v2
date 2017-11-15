@@ -2171,7 +2171,7 @@ type ApplicationDescription struct {
 	ApplicationName *string `min:"1" type:"string"`
 
 	// The names of the configuration templates associated with this application.
-	ConfigurationTemplates []*string `type:"list"`
+	ConfigurationTemplates []string `type:"list"`
 
 	// The date when the application was created.
 	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -2186,7 +2186,7 @@ type ApplicationDescription struct {
 	ResourceLifecycleConfig *ApplicationResourceLifecycleConfig `type:"structure"`
 
 	// The names of the versions for this application.
-	Versions []*string `type:"list"`
+	Versions []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2206,7 +2206,7 @@ func (s *ApplicationDescription) SetApplicationName(v string) *ApplicationDescri
 }
 
 // SetConfigurationTemplates sets the ConfigurationTemplates field's value.
-func (s *ApplicationDescription) SetConfigurationTemplates(v []*string) *ApplicationDescription {
+func (s *ApplicationDescription) SetConfigurationTemplates(v []string) *ApplicationDescription {
 	s.ConfigurationTemplates = v
 	return s
 }
@@ -2236,7 +2236,7 @@ func (s *ApplicationDescription) SetResourceLifecycleConfig(v *ApplicationResour
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ApplicationDescription) SetVersions(v []*string) *ApplicationDescription {
+func (s *ApplicationDescription) SetVersions(v []string) *ApplicationDescription {
 	s.Versions = v
 	return s
 }
@@ -2958,7 +2958,7 @@ type ComposeEnvironmentsInput struct {
 	// environment manifest that specifies the name of the environment and the name
 	// of the solution stack to use, and optionally can specify environment links
 	// to create.
-	VersionLabels []*string `type:"list"`
+	VersionLabels []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3000,7 +3000,7 @@ func (s *ComposeEnvironmentsInput) SetGroupName(v string) *ComposeEnvironmentsIn
 }
 
 // SetVersionLabels sets the VersionLabels field's value.
-func (s *ComposeEnvironmentsInput) SetVersionLabels(v []*string) *ComposeEnvironmentsInput {
+func (s *ComposeEnvironmentsInput) SetVersionLabels(v []string) *ComposeEnvironmentsInput {
 	s.VersionLabels = v
 	return s
 }
@@ -3065,7 +3065,7 @@ type ConfigurationOptionDescription struct {
 
 	// If specified, values for the configuration option are selected from this
 	// list.
-	ValueOptions []*string `type:"list"`
+	ValueOptions []string `type:"list"`
 
 	// An indication of which type of values this option has and whether it is allowable
 	// to select one or more than one of the possible values:
@@ -3148,7 +3148,7 @@ func (s *ConfigurationOptionDescription) SetUserDefined(v bool) *ConfigurationOp
 }
 
 // SetValueOptions sets the ValueOptions field's value.
-func (s *ConfigurationOptionDescription) SetValueOptions(v []*string) *ConfigurationOptionDescription {
+func (s *ConfigurationOptionDescription) SetValueOptions(v []string) *ConfigurationOptionDescription {
 	s.ValueOptions = v
 	return s
 }
@@ -3460,7 +3460,7 @@ type CreateConfigurationTemplateInput struct {
 	// If specified, AWS Elastic Beanstalk sets the specified configuration option
 	// to the requested value. The new value overrides the value obtained from the
 	// solution stack or the source configuration template.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+	OptionSettings []ConfigurationOptionSetting `type:"list"`
 
 	// The ARN of the custome platform.
 	PlatformArn *string `type:"string"`
@@ -3534,9 +3534,6 @@ func (s *CreateConfigurationTemplateInput) Validate() error {
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
@@ -3573,7 +3570,7 @@ func (s *CreateConfigurationTemplateInput) SetEnvironmentId(v string) *CreateCon
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *CreateConfigurationTemplateInput) SetOptionSettings(v []*ConfigurationOptionSetting) *CreateConfigurationTemplateInput {
+func (s *CreateConfigurationTemplateInput) SetOptionSettings(v []ConfigurationOptionSetting) *CreateConfigurationTemplateInput {
 	s.OptionSettings = v
 	return s
 }
@@ -3645,11 +3642,11 @@ type CreateEnvironmentInput struct {
 	// to the requested value in the configuration set for the new environment.
 	// These override the values obtained from the solution stack or the configuration
 	// template.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+	OptionSettings []ConfigurationOptionSetting `type:"list"`
 
 	// A list of custom user-defined configuration options to remove from the configuration
 	// set for this new environment.
-	OptionsToRemove []*OptionSpecification `type:"list"`
+	OptionsToRemove []OptionSpecification `type:"list"`
 
 	// The ARN of the platform.
 	PlatformArn *string `type:"string"`
@@ -3660,7 +3657,7 @@ type CreateEnvironmentInput struct {
 	SolutionStackName *string `type:"string"`
 
 	// This specifies the tags applied to resources in the environment.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The name of the configuration template to use in deployment. If no configuration
 	// template is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue
@@ -3717,9 +3714,6 @@ func (s *CreateEnvironmentInput) Validate() error {
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
@@ -3727,9 +3721,6 @@ func (s *CreateEnvironmentInput) Validate() error {
 	}
 	if s.OptionsToRemove != nil {
 		for i, v := range s.OptionsToRemove {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
 			}
@@ -3737,9 +3728,6 @@ func (s *CreateEnvironmentInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3783,13 +3771,13 @@ func (s *CreateEnvironmentInput) SetGroupName(v string) *CreateEnvironmentInput 
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *CreateEnvironmentInput) SetOptionSettings(v []*ConfigurationOptionSetting) *CreateEnvironmentInput {
+func (s *CreateEnvironmentInput) SetOptionSettings(v []ConfigurationOptionSetting) *CreateEnvironmentInput {
 	s.OptionSettings = v
 	return s
 }
 
 // SetOptionsToRemove sets the OptionsToRemove field's value.
-func (s *CreateEnvironmentInput) SetOptionsToRemove(v []*OptionSpecification) *CreateEnvironmentInput {
+func (s *CreateEnvironmentInput) SetOptionsToRemove(v []OptionSpecification) *CreateEnvironmentInput {
 	s.OptionsToRemove = v
 	return s
 }
@@ -3807,7 +3795,7 @@ func (s *CreateEnvironmentInput) SetSolutionStackName(v string) *CreateEnvironme
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateEnvironmentInput) SetTags(v []*Tag) *CreateEnvironmentInput {
+func (s *CreateEnvironmentInput) SetTags(v []Tag) *CreateEnvironmentInput {
 	s.Tags = v
 	return s
 }
@@ -3839,7 +3827,7 @@ type CreatePlatformVersionInput struct {
 	EnvironmentName *string `min:"4" type:"string"`
 
 	// The configuration option settings to apply to the builder environment.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+	OptionSettings []ConfigurationOptionSetting `type:"list"`
 
 	// The location of the platform definition archive in Amazon S3.
 	//
@@ -3887,9 +3875,6 @@ func (s *CreatePlatformVersionInput) Validate() error {
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
@@ -3909,7 +3894,7 @@ func (s *CreatePlatformVersionInput) SetEnvironmentName(v string) *CreatePlatfor
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *CreatePlatformVersionInput) SetOptionSettings(v []*ConfigurationOptionSetting) *CreatePlatformVersionInput {
+func (s *CreatePlatformVersionInput) SetOptionSettings(v []ConfigurationOptionSetting) *CreatePlatformVersionInput {
 	s.OptionSettings = v
 	return s
 }
@@ -4482,7 +4467,7 @@ type DescribeApplicationVersionsInput struct {
 	NextToken *string `type:"string"`
 
 	// Specify a version label to show a specific application version.
-	VersionLabels []*string `type:"list"`
+	VersionLabels []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4530,7 +4515,7 @@ func (s *DescribeApplicationVersionsInput) SetNextToken(v string) *DescribeAppli
 }
 
 // SetVersionLabels sets the VersionLabels field's value.
-func (s *DescribeApplicationVersionsInput) SetVersionLabels(v []*string) *DescribeApplicationVersionsInput {
+func (s *DescribeApplicationVersionsInput) SetVersionLabels(v []string) *DescribeApplicationVersionsInput {
 	s.VersionLabels = v
 	return s
 }
@@ -4541,7 +4526,7 @@ type DescribeApplicationVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of ApplicationVersionDescription objects sorted in order of creation.
-	ApplicationVersions []*ApplicationVersionDescription `type:"list"`
+	ApplicationVersions []ApplicationVersionDescription `type:"list"`
 
 	// In a paginated request, the token that you can pass in a subsequent request
 	// to get the next response page.
@@ -4559,7 +4544,7 @@ func (s DescribeApplicationVersionsOutput) GoString() string {
 }
 
 // SetApplicationVersions sets the ApplicationVersions field's value.
-func (s *DescribeApplicationVersionsOutput) SetApplicationVersions(v []*ApplicationVersionDescription) *DescribeApplicationVersionsOutput {
+func (s *DescribeApplicationVersionsOutput) SetApplicationVersions(v []ApplicationVersionDescription) *DescribeApplicationVersionsOutput {
 	s.ApplicationVersions = v
 	return s
 }
@@ -4577,7 +4562,7 @@ type DescribeApplicationsInput struct {
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// only include those with the specified names.
-	ApplicationNames []*string `type:"list"`
+	ApplicationNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4591,7 +4576,7 @@ func (s DescribeApplicationsInput) GoString() string {
 }
 
 // SetApplicationNames sets the ApplicationNames field's value.
-func (s *DescribeApplicationsInput) SetApplicationNames(v []*string) *DescribeApplicationsInput {
+func (s *DescribeApplicationsInput) SetApplicationNames(v []string) *DescribeApplicationsInput {
 	s.ApplicationNames = v
 	return s
 }
@@ -4602,7 +4587,7 @@ type DescribeApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// This parameter contains a list of ApplicationDescription.
-	Applications []*ApplicationDescription `type:"list"`
+	Applications []ApplicationDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -4616,7 +4601,7 @@ func (s DescribeApplicationsOutput) GoString() string {
 }
 
 // SetApplications sets the Applications field's value.
-func (s *DescribeApplicationsOutput) SetApplications(v []*ApplicationDescription) *DescribeApplicationsOutput {
+func (s *DescribeApplicationsOutput) SetApplications(v []ApplicationDescription) *DescribeApplicationsOutput {
 	s.Applications = v
 	return s
 }
@@ -4635,7 +4620,7 @@ type DescribeConfigurationOptionsInput struct {
 	EnvironmentName *string `min:"4" type:"string"`
 
 	// If specified, restricts the descriptions to only the specified options.
-	Options []*OptionSpecification `type:"list"`
+	Options []OptionSpecification `type:"list"`
 
 	// The ARN of the custom platform.
 	PlatformArn *string `type:"string"`
@@ -4672,9 +4657,6 @@ func (s *DescribeConfigurationOptionsInput) Validate() error {
 	}
 	if s.Options != nil {
 		for i, v := range s.Options {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Options", i), err.(aws.ErrInvalidParams))
 			}
@@ -4700,7 +4682,7 @@ func (s *DescribeConfigurationOptionsInput) SetEnvironmentName(v string) *Descri
 }
 
 // SetOptions sets the Options field's value.
-func (s *DescribeConfigurationOptionsInput) SetOptions(v []*OptionSpecification) *DescribeConfigurationOptionsInput {
+func (s *DescribeConfigurationOptionsInput) SetOptions(v []OptionSpecification) *DescribeConfigurationOptionsInput {
 	s.Options = v
 	return s
 }
@@ -4729,7 +4711,7 @@ type DescribeConfigurationOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ConfigurationOptionDescription.
-	Options []*ConfigurationOptionDescription `type:"list"`
+	Options []ConfigurationOptionDescription `type:"list"`
 
 	// The ARN of the platform.
 	PlatformArn *string `type:"string"`
@@ -4749,7 +4731,7 @@ func (s DescribeConfigurationOptionsOutput) GoString() string {
 }
 
 // SetOptions sets the Options field's value.
-func (s *DescribeConfigurationOptionsOutput) SetOptions(v []*ConfigurationOptionDescription) *DescribeConfigurationOptionsOutput {
+func (s *DescribeConfigurationOptionsOutput) SetOptions(v []ConfigurationOptionDescription) *DescribeConfigurationOptionsOutput {
 	s.Options = v
 	return s
 }
@@ -4851,7 +4833,7 @@ type DescribeConfigurationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ConfigurationSettingsDescription.
-	ConfigurationSettings []*UpdateConfigurationTemplateOutput `type:"list"`
+	ConfigurationSettings []UpdateConfigurationTemplateOutput `type:"list"`
 }
 
 // String returns the string representation
@@ -4865,7 +4847,7 @@ func (s DescribeConfigurationSettingsOutput) GoString() string {
 }
 
 // SetConfigurationSettings sets the ConfigurationSettings field's value.
-func (s *DescribeConfigurationSettingsOutput) SetConfigurationSettings(v []*UpdateConfigurationTemplateOutput) *DescribeConfigurationSettingsOutput {
+func (s *DescribeConfigurationSettingsOutput) SetConfigurationSettings(v []UpdateConfigurationTemplateOutput) *DescribeConfigurationSettingsOutput {
 	s.ConfigurationSettings = v
 	return s
 }
@@ -4941,7 +4923,7 @@ type DescribeEnvironmentHealthOutput struct {
 
 	// Descriptions of the data that contributed to the environment's current health
 	// status.
-	Causes []*string `type:"list"`
+	Causes []string `type:"list"`
 
 	// The health color (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
 	// of the environment.
@@ -4982,7 +4964,7 @@ func (s *DescribeEnvironmentHealthOutput) SetApplicationMetrics(v *ApplicationMe
 }
 
 // SetCauses sets the Causes field's value.
-func (s *DescribeEnvironmentHealthOutput) SetCauses(v []*string) *DescribeEnvironmentHealthOutput {
+func (s *DescribeEnvironmentHealthOutput) SetCauses(v []string) *DescribeEnvironmentHealthOutput {
 	s.Causes = v
 	return s
 }
@@ -5094,7 +5076,7 @@ type DescribeEnvironmentManagedActionHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of completed and failed managed actions.
-	ManagedActionHistoryItems []*ManagedActionHistoryItem `min:"1" type:"list"`
+	ManagedActionHistoryItems []ManagedActionHistoryItem `min:"1" type:"list"`
 
 	// A pagination token that you pass to DescribeEnvironmentManagedActionHistory
 	// to get the next page of results.
@@ -5112,7 +5094,7 @@ func (s DescribeEnvironmentManagedActionHistoryOutput) GoString() string {
 }
 
 // SetManagedActionHistoryItems sets the ManagedActionHistoryItems field's value.
-func (s *DescribeEnvironmentManagedActionHistoryOutput) SetManagedActionHistoryItems(v []*ManagedActionHistoryItem) *DescribeEnvironmentManagedActionHistoryOutput {
+func (s *DescribeEnvironmentManagedActionHistoryOutput) SetManagedActionHistoryItems(v []ManagedActionHistoryItem) *DescribeEnvironmentManagedActionHistoryOutput {
 	s.ManagedActionHistoryItems = v
 	return s
 }
@@ -5172,7 +5154,7 @@ type DescribeEnvironmentManagedActionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of upcoming and in-progress managed actions.
-	ManagedActions []*ManagedAction `min:"1" type:"list"`
+	ManagedActions []ManagedAction `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -5186,7 +5168,7 @@ func (s DescribeEnvironmentManagedActionsOutput) GoString() string {
 }
 
 // SetManagedActions sets the ManagedActions field's value.
-func (s *DescribeEnvironmentManagedActionsOutput) SetManagedActions(v []*ManagedAction) *DescribeEnvironmentManagedActionsOutput {
+func (s *DescribeEnvironmentManagedActionsOutput) SetManagedActions(v []ManagedAction) *DescribeEnvironmentManagedActionsOutput {
 	s.ManagedActions = v
 	return s
 }
@@ -5282,11 +5264,11 @@ type DescribeEnvironmentsInput struct {
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified IDs.
-	EnvironmentIds []*string `type:"list"`
+	EnvironmentIds []string `type:"list"`
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified names.
-	EnvironmentNames []*string `type:"list"`
+	EnvironmentNames []string `type:"list"`
 
 	// Indicates whether to include deleted environments:
 	//
@@ -5355,13 +5337,13 @@ func (s *DescribeEnvironmentsInput) SetApplicationName(v string) *DescribeEnviro
 }
 
 // SetEnvironmentIds sets the EnvironmentIds field's value.
-func (s *DescribeEnvironmentsInput) SetEnvironmentIds(v []*string) *DescribeEnvironmentsInput {
+func (s *DescribeEnvironmentsInput) SetEnvironmentIds(v []string) *DescribeEnvironmentsInput {
 	s.EnvironmentIds = v
 	return s
 }
 
 // SetEnvironmentNames sets the EnvironmentNames field's value.
-func (s *DescribeEnvironmentsInput) SetEnvironmentNames(v []*string) *DescribeEnvironmentsInput {
+func (s *DescribeEnvironmentsInput) SetEnvironmentNames(v []string) *DescribeEnvironmentsInput {
 	s.EnvironmentNames = v
 	return s
 }
@@ -5402,7 +5384,7 @@ type DescribeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Returns an EnvironmentDescription list.
-	Environments []*UpdateEnvironmentOutput `type:"list"`
+	Environments []UpdateEnvironmentOutput `type:"list"`
 
 	// In a paginated request, the token that you can pass in a subsequent request
 	// to get the next response page.
@@ -5420,7 +5402,7 @@ func (s DescribeEnvironmentsOutput) GoString() string {
 }
 
 // SetEnvironments sets the Environments field's value.
-func (s *DescribeEnvironmentsOutput) SetEnvironments(v []*UpdateEnvironmentOutput) *DescribeEnvironmentsOutput {
+func (s *DescribeEnvironmentsOutput) SetEnvironments(v []UpdateEnvironmentOutput) *DescribeEnvironmentsOutput {
 	s.Environments = v
 	return s
 }
@@ -5596,7 +5578,7 @@ type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of EventDescription.
-	Events []*EventDescription `type:"list"`
+	Events []EventDescription `type:"list"`
 
 	// If returned, this indicates that there are more results to obtain. Use this
 	// token in the next DescribeEvents call to get the next batch of events.
@@ -5614,7 +5596,7 @@ func (s DescribeEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []*EventDescription) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetEvents(v []EventDescription) *DescribeEventsOutput {
 	s.Events = v
 	return s
 }
@@ -5701,7 +5683,7 @@ type DescribeInstancesHealthOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Detailed health information about each instance.
-	InstanceHealthList []*SingleInstanceHealth `type:"list"`
+	InstanceHealthList []SingleInstanceHealth `type:"list"`
 
 	// Pagination token for the next page of results, if available.
 	NextToken *string `min:"1" type:"string"`
@@ -5721,7 +5703,7 @@ func (s DescribeInstancesHealthOutput) GoString() string {
 }
 
 // SetInstanceHealthList sets the InstanceHealthList field's value.
-func (s *DescribeInstancesHealthOutput) SetInstanceHealthList(v []*SingleInstanceHealth) *DescribeInstancesHealthOutput {
+func (s *DescribeInstancesHealthOutput) SetInstanceHealthList(v []SingleInstanceHealth) *DescribeInstancesHealthOutput {
 	s.InstanceHealthList = v
 	return s
 }
@@ -5882,25 +5864,25 @@ type EnvironmentResourceDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The AutoScalingGroups used by this environment.
-	AutoScalingGroups []*AutoScalingGroup `type:"list"`
+	AutoScalingGroups []AutoScalingGroup `type:"list"`
 
 	// The name of the environment.
 	EnvironmentName *string `min:"4" type:"string"`
 
 	// The Amazon EC2 instances used by this environment.
-	Instances []*Instance `type:"list"`
+	Instances []Instance `type:"list"`
 
 	// The Auto Scaling launch configurations in use by this environment.
-	LaunchConfigurations []*LaunchConfiguration `type:"list"`
+	LaunchConfigurations []LaunchConfiguration `type:"list"`
 
 	// The LoadBalancers in use by this environment.
-	LoadBalancers []*LoadBalancer `type:"list"`
+	LoadBalancers []LoadBalancer `type:"list"`
 
 	// The queues used by this environment.
-	Queues []*Queue `type:"list"`
+	Queues []Queue `type:"list"`
 
 	// The AutoScaling triggers in use by this environment.
-	Triggers []*Trigger `type:"list"`
+	Triggers []Trigger `type:"list"`
 }
 
 // String returns the string representation
@@ -5914,7 +5896,7 @@ func (s EnvironmentResourceDescription) GoString() string {
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *EnvironmentResourceDescription) SetAutoScalingGroups(v []*AutoScalingGroup) *EnvironmentResourceDescription {
+func (s *EnvironmentResourceDescription) SetAutoScalingGroups(v []AutoScalingGroup) *EnvironmentResourceDescription {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -5926,31 +5908,31 @@ func (s *EnvironmentResourceDescription) SetEnvironmentName(v string) *Environme
 }
 
 // SetInstances sets the Instances field's value.
-func (s *EnvironmentResourceDescription) SetInstances(v []*Instance) *EnvironmentResourceDescription {
+func (s *EnvironmentResourceDescription) SetInstances(v []Instance) *EnvironmentResourceDescription {
 	s.Instances = v
 	return s
 }
 
 // SetLaunchConfigurations sets the LaunchConfigurations field's value.
-func (s *EnvironmentResourceDescription) SetLaunchConfigurations(v []*LaunchConfiguration) *EnvironmentResourceDescription {
+func (s *EnvironmentResourceDescription) SetLaunchConfigurations(v []LaunchConfiguration) *EnvironmentResourceDescription {
 	s.LaunchConfigurations = v
 	return s
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
-func (s *EnvironmentResourceDescription) SetLoadBalancers(v []*LoadBalancer) *EnvironmentResourceDescription {
+func (s *EnvironmentResourceDescription) SetLoadBalancers(v []LoadBalancer) *EnvironmentResourceDescription {
 	s.LoadBalancers = v
 	return s
 }
 
 // SetQueues sets the Queues field's value.
-func (s *EnvironmentResourceDescription) SetQueues(v []*Queue) *EnvironmentResourceDescription {
+func (s *EnvironmentResourceDescription) SetQueues(v []Queue) *EnvironmentResourceDescription {
 	s.Queues = v
 	return s
 }
 
 // SetTriggers sets the Triggers field's value.
-func (s *EnvironmentResourceDescription) SetTriggers(v []*Trigger) *EnvironmentResourceDescription {
+func (s *EnvironmentResourceDescription) SetTriggers(v []Trigger) *EnvironmentResourceDescription {
 	s.Triggers = v
 	return s
 }
@@ -6384,10 +6366,10 @@ type ListAvailableSolutionStacksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of available solution stacks and their SolutionStackDescription.
-	SolutionStackDetails []*SolutionStackDescription `type:"list"`
+	SolutionStackDetails []SolutionStackDescription `type:"list"`
 
 	// A list of available solution stacks.
-	SolutionStacks []*string `type:"list"`
+	SolutionStacks []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6401,13 +6383,13 @@ func (s ListAvailableSolutionStacksOutput) GoString() string {
 }
 
 // SetSolutionStackDetails sets the SolutionStackDetails field's value.
-func (s *ListAvailableSolutionStacksOutput) SetSolutionStackDetails(v []*SolutionStackDescription) *ListAvailableSolutionStacksOutput {
+func (s *ListAvailableSolutionStacksOutput) SetSolutionStackDetails(v []SolutionStackDescription) *ListAvailableSolutionStacksOutput {
 	s.SolutionStackDetails = v
 	return s
 }
 
 // SetSolutionStacks sets the SolutionStacks field's value.
-func (s *ListAvailableSolutionStacksOutput) SetSolutionStacks(v []*string) *ListAvailableSolutionStacksOutput {
+func (s *ListAvailableSolutionStacksOutput) SetSolutionStacks(v []string) *ListAvailableSolutionStacksOutput {
 	s.SolutionStacks = v
 	return s
 }
@@ -6418,7 +6400,7 @@ type ListPlatformVersionsInput struct {
 
 	// List only the platforms where the platform member value relates to one of
 	// the supplied values.
-	Filters []*PlatformFilter `type:"list"`
+	Filters []PlatformFilter `type:"list"`
 
 	// The maximum number of platform values returned in one call.
 	MaxRecords *int64 `min:"1" type:"integer"`
@@ -6452,7 +6434,7 @@ func (s *ListPlatformVersionsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListPlatformVersionsInput) SetFilters(v []*PlatformFilter) *ListPlatformVersionsInput {
+func (s *ListPlatformVersionsInput) SetFilters(v []PlatformFilter) *ListPlatformVersionsInput {
 	s.Filters = v
 	return s
 }
@@ -6478,7 +6460,7 @@ type ListPlatformVersionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Detailed information about the platforms.
-	PlatformSummaryList []*PlatformSummary `type:"list"`
+	PlatformSummaryList []PlatformSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6498,7 +6480,7 @@ func (s *ListPlatformVersionsOutput) SetNextToken(v string) *ListPlatformVersion
 }
 
 // SetPlatformSummaryList sets the PlatformSummaryList field's value.
-func (s *ListPlatformVersionsOutput) SetPlatformSummaryList(v []*PlatformSummary) *ListPlatformVersionsOutput {
+func (s *ListPlatformVersionsOutput) SetPlatformSummaryList(v []PlatformSummary) *ListPlatformVersionsOutput {
 	s.PlatformSummaryList = v
 	return s
 }
@@ -6571,7 +6553,7 @@ type LoadBalancerDescription struct {
 	Domain *string `type:"string"`
 
 	// A list of Listeners used by the LoadBalancer.
-	Listeners []*Listener `type:"list"`
+	Listeners []Listener `type:"list"`
 
 	// The name of the LoadBalancer.
 	LoadBalancerName *string `type:"string"`
@@ -6594,7 +6576,7 @@ func (s *LoadBalancerDescription) SetDomain(v string) *LoadBalancerDescription {
 }
 
 // SetListeners sets the Listeners field's value.
-func (s *LoadBalancerDescription) SetListeners(v []*Listener) *LoadBalancerDescription {
+func (s *LoadBalancerDescription) SetListeners(v []Listener) *LoadBalancerDescription {
 	s.Listeners = v
 	return s
 }
@@ -6976,7 +6958,7 @@ type PlatformDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The custom AMIs supported by the platform.
-	CustomAmiList []*CustomAmi `type:"list"`
+	CustomAmiList []CustomAmi `type:"list"`
 
 	// The date when the platform was created.
 	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -6988,7 +6970,7 @@ type PlatformDescription struct {
 	Description *string `type:"string"`
 
 	// The frameworks supported by the platform.
-	Frameworks []*PlatformFramework `type:"list"`
+	Frameworks []PlatformFramework `type:"list"`
 
 	// Information about the maintainer of the platform.
 	Maintainer *string `type:"string"`
@@ -7018,16 +7000,16 @@ type PlatformDescription struct {
 	PlatformVersion *string `type:"string"`
 
 	// The programming languages supported by the platform.
-	ProgrammingLanguages []*PlatformProgrammingLanguage `type:"list"`
+	ProgrammingLanguages []PlatformProgrammingLanguage `type:"list"`
 
 	// The name of the solution stack used by the platform.
 	SolutionStackName *string `type:"string"`
 
 	// The additions supported by the platform.
-	SupportedAddonList []*string `type:"list"`
+	SupportedAddonList []string `type:"list"`
 
 	// The tiers supported by the platform.
-	SupportedTierList []*string `type:"list"`
+	SupportedTierList []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7041,7 +7023,7 @@ func (s PlatformDescription) GoString() string {
 }
 
 // SetCustomAmiList sets the CustomAmiList field's value.
-func (s *PlatformDescription) SetCustomAmiList(v []*CustomAmi) *PlatformDescription {
+func (s *PlatformDescription) SetCustomAmiList(v []CustomAmi) *PlatformDescription {
 	s.CustomAmiList = v
 	return s
 }
@@ -7065,7 +7047,7 @@ func (s *PlatformDescription) SetDescription(v string) *PlatformDescription {
 }
 
 // SetFrameworks sets the Frameworks field's value.
-func (s *PlatformDescription) SetFrameworks(v []*PlatformFramework) *PlatformDescription {
+func (s *PlatformDescription) SetFrameworks(v []PlatformFramework) *PlatformDescription {
 	s.Frameworks = v
 	return s
 }
@@ -7125,7 +7107,7 @@ func (s *PlatformDescription) SetPlatformVersion(v string) *PlatformDescription 
 }
 
 // SetProgrammingLanguages sets the ProgrammingLanguages field's value.
-func (s *PlatformDescription) SetProgrammingLanguages(v []*PlatformProgrammingLanguage) *PlatformDescription {
+func (s *PlatformDescription) SetProgrammingLanguages(v []PlatformProgrammingLanguage) *PlatformDescription {
 	s.ProgrammingLanguages = v
 	return s
 }
@@ -7137,13 +7119,13 @@ func (s *PlatformDescription) SetSolutionStackName(v string) *PlatformDescriptio
 }
 
 // SetSupportedAddonList sets the SupportedAddonList field's value.
-func (s *PlatformDescription) SetSupportedAddonList(v []*string) *PlatformDescription {
+func (s *PlatformDescription) SetSupportedAddonList(v []string) *PlatformDescription {
 	s.SupportedAddonList = v
 	return s
 }
 
 // SetSupportedTierList sets the SupportedTierList field's value.
-func (s *PlatformDescription) SetSupportedTierList(v []*string) *PlatformDescription {
+func (s *PlatformDescription) SetSupportedTierList(v []string) *PlatformDescription {
 	s.SupportedTierList = v
 	return s
 }
@@ -7170,7 +7152,7 @@ type PlatformFilter struct {
 	Type *string `type:"string"`
 
 	// The list of values applied to the custom platform attribute.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7196,7 +7178,7 @@ func (s *PlatformFilter) SetType(v string) *PlatformFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *PlatformFilter) SetValues(v []*string) *PlatformFilter {
+func (s *PlatformFilter) SetValues(v []string) *PlatformFilter {
 	s.Values = v
 	return s
 }
@@ -7294,10 +7276,10 @@ type PlatformSummary struct {
 	PlatformStatus PlatformStatus `type:"string"`
 
 	// The additions associated with the platform.
-	SupportedAddonList []*string `type:"list"`
+	SupportedAddonList []string `type:"list"`
 
 	// The tiers in which the platform runs.
-	SupportedTierList []*string `type:"list"`
+	SupportedTierList []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7347,13 +7329,13 @@ func (s *PlatformSummary) SetPlatformStatus(v PlatformStatus) *PlatformSummary {
 }
 
 // SetSupportedAddonList sets the SupportedAddonList field's value.
-func (s *PlatformSummary) SetSupportedAddonList(v []*string) *PlatformSummary {
+func (s *PlatformSummary) SetSupportedAddonList(v []string) *PlatformSummary {
 	s.SupportedAddonList = v
 	return s
 }
 
 // SetSupportedTierList sets the SupportedTierList field's value.
-func (s *PlatformSummary) SetSupportedTierList(v []*string) *PlatformSummary {
+func (s *PlatformSummary) SetSupportedTierList(v []string) *PlatformSummary {
 	s.SupportedTierList = v
 	return s
 }
@@ -7700,7 +7682,7 @@ type RetrieveEnvironmentInfoOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The EnvironmentInfoDescription of the environment.
-	EnvironmentInfo []*EnvironmentInfoDescription `type:"list"`
+	EnvironmentInfo []EnvironmentInfoDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -7714,7 +7696,7 @@ func (s RetrieveEnvironmentInfoOutput) GoString() string {
 }
 
 // SetEnvironmentInfo sets the EnvironmentInfo field's value.
-func (s *RetrieveEnvironmentInfoOutput) SetEnvironmentInfo(v []*EnvironmentInfoDescription) *RetrieveEnvironmentInfoOutput {
+func (s *RetrieveEnvironmentInfoOutput) SetEnvironmentInfo(v []EnvironmentInfoDescription) *RetrieveEnvironmentInfoOutput {
 	s.EnvironmentInfo = v
 	return s
 }
@@ -7767,7 +7749,7 @@ type SingleInstanceHealth struct {
 
 	// Represents the causes, which provide more information about the current health
 	// status.
-	Causes []*string `type:"list"`
+	Causes []string `type:"list"`
 
 	// Represents the color indicator that gives you information about the health
 	// of the EC2 instance. For more information, see Health Colors and Statuses
@@ -7817,7 +7799,7 @@ func (s *SingleInstanceHealth) SetAvailabilityZone(v string) *SingleInstanceHeal
 }
 
 // SetCauses sets the Causes field's value.
-func (s *SingleInstanceHealth) SetCauses(v []*string) *SingleInstanceHealth {
+func (s *SingleInstanceHealth) SetCauses(v []string) *SingleInstanceHealth {
 	s.Causes = v
 	return s
 }
@@ -7870,7 +7852,7 @@ type SolutionStackDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The permitted file types allowed for a solution stack.
-	PermittedFileTypes []*string `type:"list"`
+	PermittedFileTypes []string `type:"list"`
 
 	// The name of the solution stack.
 	SolutionStackName *string `type:"string"`
@@ -7887,7 +7869,7 @@ func (s SolutionStackDescription) GoString() string {
 }
 
 // SetPermittedFileTypes sets the PermittedFileTypes field's value.
-func (s *SolutionStackDescription) SetPermittedFileTypes(v []*string) *SolutionStackDescription {
+func (s *SolutionStackDescription) SetPermittedFileTypes(v []string) *SolutionStackDescription {
 	s.PermittedFileTypes = v
 	return s
 }
@@ -8202,7 +8184,7 @@ type SystemStatus struct {
 
 	// Load average in the last 1-minute, 5-minute, and 15-minute periods. For more
 	// information, see Operating System Metrics (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os).
-	LoadAverage []*float64 `type:"list"`
+	LoadAverage []float64 `type:"list"`
 }
 
 // String returns the string representation
@@ -8222,7 +8204,7 @@ func (s *SystemStatus) SetCPUUtilization(v *CPUUtilization) *SystemStatus {
 }
 
 // SetLoadAverage sets the LoadAverage field's value.
-func (s *SystemStatus) SetLoadAverage(v []*float64) *SystemStatus {
+func (s *SystemStatus) SetLoadAverage(v []float64) *SystemStatus {
 	s.LoadAverage = v
 	return s
 }
@@ -8686,12 +8668,12 @@ type UpdateConfigurationTemplateInput struct {
 
 	// A list of configuration option settings to update with the new specified
 	// option value.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+	OptionSettings []ConfigurationOptionSetting `type:"list"`
 
 	// A list of configuration options to remove from the configuration set.
 	//
 	// Constraint: You can remove only UserDefined configuration options.
-	OptionsToRemove []*OptionSpecification `type:"list"`
+	OptionsToRemove []OptionSpecification `type:"list"`
 
 	// The name of the configuration template to update.
 	//
@@ -8731,9 +8713,6 @@ func (s *UpdateConfigurationTemplateInput) Validate() error {
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
@@ -8741,9 +8720,6 @@ func (s *UpdateConfigurationTemplateInput) Validate() error {
 	}
 	if s.OptionsToRemove != nil {
 		for i, v := range s.OptionsToRemove {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
 			}
@@ -8769,13 +8745,13 @@ func (s *UpdateConfigurationTemplateInput) SetDescription(v string) *UpdateConfi
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *UpdateConfigurationTemplateInput) SetOptionSettings(v []*ConfigurationOptionSetting) *UpdateConfigurationTemplateInput {
+func (s *UpdateConfigurationTemplateInput) SetOptionSettings(v []ConfigurationOptionSetting) *UpdateConfigurationTemplateInput {
 	s.OptionSettings = v
 	return s
 }
 
 // SetOptionsToRemove sets the OptionsToRemove field's value.
-func (s *UpdateConfigurationTemplateInput) SetOptionsToRemove(v []*OptionSpecification) *UpdateConfigurationTemplateInput {
+func (s *UpdateConfigurationTemplateInput) SetOptionsToRemove(v []OptionSpecification) *UpdateConfigurationTemplateInput {
 	s.OptionsToRemove = v
 	return s
 }
@@ -8822,7 +8798,7 @@ type UpdateConfigurationTemplateOutput struct {
 
 	// A list of the configuration options and their values in this configuration
 	// set.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+	OptionSettings []ConfigurationOptionSetting `type:"list"`
 
 	// The ARN of the platform.
 	PlatformArn *string `type:"string"`
@@ -8882,7 +8858,7 @@ func (s *UpdateConfigurationTemplateOutput) SetEnvironmentName(v string) *Update
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *UpdateConfigurationTemplateOutput) SetOptionSettings(v []*ConfigurationOptionSetting) *UpdateConfigurationTemplateOutput {
+func (s *UpdateConfigurationTemplateOutput) SetOptionSettings(v []ConfigurationOptionSetting) *UpdateConfigurationTemplateOutput {
 	s.OptionSettings = v
 	return s
 }
@@ -8945,11 +8921,11 @@ type UpdateEnvironmentInput struct {
 	// If specified, AWS Elastic Beanstalk updates the configuration set associated
 	// with the running environment and sets the specified configuration options
 	// to the requested value.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+	OptionSettings []ConfigurationOptionSetting `type:"list"`
 
 	// A list of custom user-defined configuration options to remove from the configuration
 	// set for this environment.
-	OptionsToRemove []*OptionSpecification `type:"list"`
+	OptionsToRemove []OptionSpecification `type:"list"`
 
 	// The ARN of the platform, if used.
 	PlatformArn *string `type:"string"`
@@ -9005,9 +8981,6 @@ func (s *UpdateEnvironmentInput) Validate() error {
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
@@ -9015,9 +8988,6 @@ func (s *UpdateEnvironmentInput) Validate() error {
 	}
 	if s.OptionsToRemove != nil {
 		for i, v := range s.OptionsToRemove {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
 			}
@@ -9061,13 +9031,13 @@ func (s *UpdateEnvironmentInput) SetGroupName(v string) *UpdateEnvironmentInput 
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *UpdateEnvironmentInput) SetOptionSettings(v []*ConfigurationOptionSetting) *UpdateEnvironmentInput {
+func (s *UpdateEnvironmentInput) SetOptionSettings(v []ConfigurationOptionSetting) *UpdateEnvironmentInput {
 	s.OptionSettings = v
 	return s
 }
 
 // SetOptionsToRemove sets the OptionsToRemove field's value.
-func (s *UpdateEnvironmentInput) SetOptionsToRemove(v []*OptionSpecification) *UpdateEnvironmentInput {
+func (s *UpdateEnvironmentInput) SetOptionsToRemove(v []OptionSpecification) *UpdateEnvironmentInput {
 	s.OptionsToRemove = v
 	return s
 }
@@ -9142,7 +9112,7 @@ type UpdateEnvironmentOutput struct {
 	EnvironmentId *string `type:"string"`
 
 	// A list of links to other environments in the same group.
-	EnvironmentLinks []*EnvironmentLink `type:"list"`
+	EnvironmentLinks []EnvironmentLink `type:"list"`
 
 	// The name of this environment.
 	EnvironmentName *string `min:"4" type:"string"`
@@ -9268,7 +9238,7 @@ func (s *UpdateEnvironmentOutput) SetEnvironmentId(v string) *UpdateEnvironmentO
 }
 
 // SetEnvironmentLinks sets the EnvironmentLinks field's value.
-func (s *UpdateEnvironmentOutput) SetEnvironmentLinks(v []*EnvironmentLink) *UpdateEnvironmentOutput {
+func (s *UpdateEnvironmentOutput) SetEnvironmentLinks(v []EnvironmentLink) *UpdateEnvironmentOutput {
 	s.EnvironmentLinks = v
 	return s
 }
@@ -9352,7 +9322,7 @@ type ValidateConfigurationSettingsInput struct {
 	// A list of the options and desired values to evaluate.
 	//
 	// OptionSettings is a required field
-	OptionSettings []*ConfigurationOptionSetting `type:"list" required:"true"`
+	OptionSettings []ConfigurationOptionSetting `type:"list" required:"true"`
 
 	// The name of the configuration template to validate the settings against.
 	//
@@ -9392,9 +9362,6 @@ func (s *ValidateConfigurationSettingsInput) Validate() error {
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
@@ -9420,7 +9387,7 @@ func (s *ValidateConfigurationSettingsInput) SetEnvironmentName(v string) *Valid
 }
 
 // SetOptionSettings sets the OptionSettings field's value.
-func (s *ValidateConfigurationSettingsInput) SetOptionSettings(v []*ConfigurationOptionSetting) *ValidateConfigurationSettingsInput {
+func (s *ValidateConfigurationSettingsInput) SetOptionSettings(v []ConfigurationOptionSetting) *ValidateConfigurationSettingsInput {
 	s.OptionSettings = v
 	return s
 }
@@ -9437,7 +9404,7 @@ type ValidateConfigurationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ValidationMessage.
-	Messages []*ValidationMessage `type:"list"`
+	Messages []ValidationMessage `type:"list"`
 }
 
 // String returns the string representation
@@ -9451,7 +9418,7 @@ func (s ValidateConfigurationSettingsOutput) GoString() string {
 }
 
 // SetMessages sets the Messages field's value.
-func (s *ValidateConfigurationSettingsOutput) SetMessages(v []*ValidationMessage) *ValidateConfigurationSettingsOutput {
+func (s *ValidateConfigurationSettingsOutput) SetMessages(v []ValidationMessage) *ValidateConfigurationSettingsOutput {
 	s.Messages = v
 	return s
 }

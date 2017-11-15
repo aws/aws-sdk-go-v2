@@ -69,8 +69,8 @@ func TestGetObjectGCM(t *testing.T) {
 			},
 			Body: ioutil.NopCloser(bytes.NewBuffer(b)),
 		}
-		out.Metadata = make(map[string]*string)
-		out.Metadata["x-amz-wrap-alg"] = aws.String(s3crypto.KMSWrap)
+		out.Metadata = make(map[string]string)
+		out.Metadata["x-amz-wrap-alg"] = s3crypto.KMSWrap
 	})
 	_, err := req.Send()
 	if err != nil {
@@ -137,8 +137,8 @@ func TestGetObjectCBC(t *testing.T) {
 			},
 			Body: ioutil.NopCloser(bytes.NewBuffer(b)),
 		}
-		out.Metadata = make(map[string]*string)
-		out.Metadata["x-amz-wrap-alg"] = aws.String(s3crypto.KMSWrap)
+		out.Metadata = make(map[string]string)
+		out.Metadata["x-amz-wrap-alg"] = s3crypto.KMSWrap
 	})
 	_, err := req.Send()
 	if err != nil {
@@ -201,9 +201,8 @@ func TestGetObjectCBC2(t *testing.T) {
 			},
 			Body: ioutil.NopCloser(bytes.NewBuffer(b)),
 		}
-		fmt.Println("HEADER", r.HTTPResponse.Header)
-		out.Metadata = make(map[string]*string)
-		out.Metadata["x-amz-wrap-alg"] = aws.String(s3crypto.KMSWrap)
+		out.Metadata = make(map[string]string)
+		out.Metadata["x-amz-wrap-alg"] = s3crypto.KMSWrap
 	})
 	_, err := req.Send()
 	if err != nil {

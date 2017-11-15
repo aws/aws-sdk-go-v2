@@ -417,7 +417,7 @@ type DescribeVoicesOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of voices with their properties.
-	Voices []*Voice `type:"list"`
+	Voices []Voice `type:"list"`
 }
 
 // String returns the string representation
@@ -437,7 +437,7 @@ func (s *DescribeVoicesOutput) SetNextToken(v string) *DescribeVoicesOutput {
 }
 
 // SetVoices sets the Voices field's value.
-func (s *DescribeVoicesOutput) SetVoices(v []*Voice) *DescribeVoicesOutput {
+func (s *DescribeVoicesOutput) SetVoices(v []Voice) *DescribeVoicesOutput {
 	s.Voices = v
 	return s
 }
@@ -690,7 +690,7 @@ type ListLexiconsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of lexicon names and attributes.
-	Lexicons []*LexiconDescription `type:"list"`
+	Lexicons []LexiconDescription `type:"list"`
 
 	// The pagination token to use in the next request to continue the listing of
 	// lexicons. NextToken is returned only if the response is truncated.
@@ -708,7 +708,7 @@ func (s ListLexiconsOutput) GoString() string {
 }
 
 // SetLexicons sets the Lexicons field's value.
-func (s *ListLexiconsOutput) SetLexicons(v []*LexiconDescription) *ListLexiconsOutput {
+func (s *ListLexiconsOutput) SetLexicons(v []LexiconDescription) *ListLexiconsOutput {
 	s.Lexicons = v
 	return s
 }
@@ -799,7 +799,7 @@ type SynthesizeSpeechInput struct {
 	// during synthesis. Lexicons are applied only if the language of the lexicon
 	// is the same as the language of the voice. For information about storing lexicons,
 	// see PutLexicon (http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html).
-	LexiconNames []*string `type:"list"`
+	LexiconNames []string `type:"list"`
 
 	// The format in which the returned output will be encoded. For audio stream,
 	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
@@ -867,7 +867,7 @@ func (s *SynthesizeSpeechInput) Validate() error {
 }
 
 // SetLexiconNames sets the LexiconNames field's value.
-func (s *SynthesizeSpeechInput) SetLexiconNames(v []*string) *SynthesizeSpeechInput {
+func (s *SynthesizeSpeechInput) SetLexiconNames(v []string) *SynthesizeSpeechInput {
 	s.LexiconNames = v
 	return s
 }

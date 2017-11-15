@@ -2440,7 +2440,7 @@ type CreateLogGroupInput struct {
 	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
 
 	// The key-value pairs to use for the tags.
-	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -2486,7 +2486,7 @@ func (s *CreateLogGroupInput) SetLogGroupName(v string) *CreateLogGroupInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateLogGroupInput) SetTags(v map[string]*string) *CreateLogGroupInput {
+func (s *CreateLogGroupInput) SetTags(v map[string]string) *CreateLogGroupInput {
 	s.Tags = v
 	return s
 }
@@ -3091,7 +3091,7 @@ type DescribeDestinationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The destinations.
-	Destinations []*Destination `locationName:"destinations" type:"list"`
+	Destinations []Destination `locationName:"destinations" type:"list"`
 
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
@@ -3109,7 +3109,7 @@ func (s DescribeDestinationsOutput) GoString() string {
 }
 
 // SetDestinations sets the Destinations field's value.
-func (s *DescribeDestinationsOutput) SetDestinations(v []*Destination) *DescribeDestinationsOutput {
+func (s *DescribeDestinationsOutput) SetDestinations(v []Destination) *DescribeDestinationsOutput {
 	s.Destinations = v
 	return s
 }
@@ -3199,7 +3199,7 @@ type DescribeExportTasksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The export tasks.
-	ExportTasks []*ExportTask `locationName:"exportTasks" type:"list"`
+	ExportTasks []ExportTask `locationName:"exportTasks" type:"list"`
 
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
@@ -3217,7 +3217,7 @@ func (s DescribeExportTasksOutput) GoString() string {
 }
 
 // SetExportTasks sets the ExportTasks field's value.
-func (s *DescribeExportTasksOutput) SetExportTasks(v []*ExportTask) *DescribeExportTasksOutput {
+func (s *DescribeExportTasksOutput) SetExportTasks(v []ExportTask) *DescribeExportTasksOutput {
 	s.ExportTasks = v
 	return s
 }
@@ -3296,7 +3296,7 @@ type DescribeLogGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The log groups.
-	LogGroups []*LogGroup `locationName:"logGroups" type:"list"`
+	LogGroups []LogGroup `locationName:"logGroups" type:"list"`
 
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
@@ -3314,7 +3314,7 @@ func (s DescribeLogGroupsOutput) GoString() string {
 }
 
 // SetLogGroups sets the LogGroups field's value.
-func (s *DescribeLogGroupsOutput) SetLogGroups(v []*LogGroup) *DescribeLogGroupsOutput {
+func (s *DescribeLogGroupsOutput) SetLogGroups(v []LogGroup) *DescribeLogGroupsOutput {
 	s.LogGroups = v
 	return s
 }
@@ -3444,7 +3444,7 @@ type DescribeLogStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The log streams.
-	LogStreams []*LogStream `locationName:"logStreams" type:"list"`
+	LogStreams []LogStream `locationName:"logStreams" type:"list"`
 
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
@@ -3462,7 +3462,7 @@ func (s DescribeLogStreamsOutput) GoString() string {
 }
 
 // SetLogStreams sets the LogStreams field's value.
-func (s *DescribeLogStreamsOutput) SetLogStreams(v []*LogStream) *DescribeLogStreamsOutput {
+func (s *DescribeLogStreamsOutput) SetLogStreams(v []LogStream) *DescribeLogStreamsOutput {
 	s.LogStreams = v
 	return s
 }
@@ -3572,7 +3572,7 @@ type DescribeMetricFiltersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The metric filters.
-	MetricFilters []*MetricFilter `locationName:"metricFilters" type:"list"`
+	MetricFilters []MetricFilter `locationName:"metricFilters" type:"list"`
 
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
@@ -3590,7 +3590,7 @@ func (s DescribeMetricFiltersOutput) GoString() string {
 }
 
 // SetMetricFilters sets the MetricFilters field's value.
-func (s *DescribeMetricFiltersOutput) SetMetricFilters(v []*MetricFilter) *DescribeMetricFiltersOutput {
+func (s *DescribeMetricFiltersOutput) SetMetricFilters(v []MetricFilter) *DescribeMetricFiltersOutput {
 	s.MetricFilters = v
 	return s
 }
@@ -3661,7 +3661,7 @@ type DescribeResourcePoliciesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The resource policies that exist in this account.
-	ResourcePolicies []*ResourcePolicy `locationName:"resourcePolicies" type:"list"`
+	ResourcePolicies []ResourcePolicy `locationName:"resourcePolicies" type:"list"`
 }
 
 // String returns the string representation
@@ -3681,7 +3681,7 @@ func (s *DescribeResourcePoliciesOutput) SetNextToken(v string) *DescribeResourc
 }
 
 // SetResourcePolicies sets the ResourcePolicies field's value.
-func (s *DescribeResourcePoliciesOutput) SetResourcePolicies(v []*ResourcePolicy) *DescribeResourcePoliciesOutput {
+func (s *DescribeResourcePoliciesOutput) SetResourcePolicies(v []ResourcePolicy) *DescribeResourcePoliciesOutput {
 	s.ResourcePolicies = v
 	return s
 }
@@ -3776,7 +3776,7 @@ type DescribeSubscriptionFiltersOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The subscription filters.
-	SubscriptionFilters []*SubscriptionFilter `locationName:"subscriptionFilters" type:"list"`
+	SubscriptionFilters []SubscriptionFilter `locationName:"subscriptionFilters" type:"list"`
 }
 
 // String returns the string representation
@@ -3796,7 +3796,7 @@ func (s *DescribeSubscriptionFiltersOutput) SetNextToken(v string) *DescribeSubs
 }
 
 // SetSubscriptionFilters sets the SubscriptionFilters field's value.
-func (s *DescribeSubscriptionFiltersOutput) SetSubscriptionFilters(v []*SubscriptionFilter) *DescribeSubscriptionFiltersOutput {
+func (s *DescribeSubscriptionFiltersOutput) SetSubscriptionFilters(v []SubscriptionFilter) *DescribeSubscriptionFiltersOutput {
 	s.SubscriptionFilters = v
 	return s
 }
@@ -4129,7 +4129,7 @@ type FilterLogEventsInput struct {
 	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
 
 	// Optional list of log stream names.
-	LogStreamNames []*string `locationName:"logStreamNames" min:"1" type:"list"`
+	LogStreamNames []string `locationName:"logStreamNames" min:"1" type:"list"`
 
 	// The token for the next set of events to return. (You received this token
 	// from a previous call.)
@@ -4208,7 +4208,7 @@ func (s *FilterLogEventsInput) SetLogGroupName(v string) *FilterLogEventsInput {
 }
 
 // SetLogStreamNames sets the LogStreamNames field's value.
-func (s *FilterLogEventsInput) SetLogStreamNames(v []*string) *FilterLogEventsInput {
+func (s *FilterLogEventsInput) SetLogStreamNames(v []string) *FilterLogEventsInput {
 	s.LogStreamNames = v
 	return s
 }
@@ -4230,7 +4230,7 @@ type FilterLogEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The matched events.
-	Events []*FilteredLogEvent `locationName:"events" type:"list"`
+	Events []FilteredLogEvent `locationName:"events" type:"list"`
 
 	// The token to use when requesting the next set of items. The token expires
 	// after 24 hours.
@@ -4238,7 +4238,7 @@ type FilterLogEventsOutput struct {
 
 	// Indicates which log streams have been searched and whether each has been
 	// searched completely.
-	SearchedLogStreams []*SearchedLogStream `locationName:"searchedLogStreams" type:"list"`
+	SearchedLogStreams []SearchedLogStream `locationName:"searchedLogStreams" type:"list"`
 }
 
 // String returns the string representation
@@ -4252,7 +4252,7 @@ func (s FilterLogEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *FilterLogEventsOutput) SetEvents(v []*FilteredLogEvent) *FilterLogEventsOutput {
+func (s *FilterLogEventsOutput) SetEvents(v []FilteredLogEvent) *FilterLogEventsOutput {
 	s.Events = v
 	return s
 }
@@ -4264,7 +4264,7 @@ func (s *FilterLogEventsOutput) SetNextToken(v string) *FilterLogEventsOutput {
 }
 
 // SetSearchedLogStreams sets the SearchedLogStreams field's value.
-func (s *FilterLogEventsOutput) SetSearchedLogStreams(v []*SearchedLogStream) *FilterLogEventsOutput {
+func (s *FilterLogEventsOutput) SetSearchedLogStreams(v []SearchedLogStream) *FilterLogEventsOutput {
 	s.SearchedLogStreams = v
 	return s
 }
@@ -4458,7 +4458,7 @@ type GetLogEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The events.
-	Events []*OutputLogEvent `locationName:"events" type:"list"`
+	Events []OutputLogEvent `locationName:"events" type:"list"`
 
 	// The token for the next set of items in the backward direction. The token
 	// expires after 24 hours.
@@ -4480,7 +4480,7 @@ func (s GetLogEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *GetLogEventsOutput) SetEvents(v []*OutputLogEvent) *GetLogEventsOutput {
+func (s *GetLogEventsOutput) SetEvents(v []OutputLogEvent) *GetLogEventsOutput {
 	s.Events = v
 	return s
 }
@@ -4606,7 +4606,7 @@ type ListTagsLogGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The tags for the log group.
-	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -4620,7 +4620,7 @@ func (s ListTagsLogGroupOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsLogGroupOutput) SetTags(v map[string]*string) *ListTagsLogGroupOutput {
+func (s *ListTagsLogGroupOutput) SetTags(v map[string]string) *ListTagsLogGroupOutput {
 	s.Tags = v
 	return s
 }
@@ -4827,7 +4827,7 @@ type MetricFilter struct {
 	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string"`
 
 	// The metric transformations.
-	MetricTransformations []*MetricTransformation `locationName:"metricTransformations" min:"1" type:"list"`
+	MetricTransformations []MetricTransformation `locationName:"metricTransformations" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -4865,7 +4865,7 @@ func (s *MetricFilter) SetLogGroupName(v string) *MetricFilter {
 }
 
 // SetMetricTransformations sets the MetricTransformations field's value.
-func (s *MetricFilter) SetMetricTransformations(v []*MetricTransformation) *MetricFilter {
+func (s *MetricFilter) SetMetricTransformations(v []MetricTransformation) *MetricFilter {
 	s.MetricTransformations = v
 	return s
 }
@@ -4882,7 +4882,7 @@ type MetricFilterMatchRecord struct {
 	EventNumber *int64 `locationName:"eventNumber" type:"long"`
 
 	// The values extracted from the event data by the filter.
-	ExtractedValues map[string]*string `locationName:"extractedValues" type:"map"`
+	ExtractedValues map[string]string `locationName:"extractedValues" type:"map"`
 }
 
 // String returns the string representation
@@ -4908,7 +4908,7 @@ func (s *MetricFilterMatchRecord) SetEventNumber(v int64) *MetricFilterMatchReco
 }
 
 // SetExtractedValues sets the ExtractedValues field's value.
-func (s *MetricFilterMatchRecord) SetExtractedValues(v map[string]*string) *MetricFilterMatchRecord {
+func (s *MetricFilterMatchRecord) SetExtractedValues(v map[string]string) *MetricFilterMatchRecord {
 	s.ExtractedValues = v
 	return s
 }
@@ -5229,7 +5229,7 @@ type PutLogEventsInput struct {
 	// The log events.
 	//
 	// LogEvents is a required field
-	LogEvents []*InputLogEvent `locationName:"logEvents" min:"1" type:"list" required:"true"`
+	LogEvents []InputLogEvent `locationName:"logEvents" min:"1" type:"list" required:"true"`
 
 	// The name of the log group.
 	//
@@ -5288,9 +5288,6 @@ func (s *PutLogEventsInput) Validate() error {
 	}
 	if s.LogEvents != nil {
 		for i, v := range s.LogEvents {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LogEvents", i), err.(aws.ErrInvalidParams))
 			}
@@ -5304,7 +5301,7 @@ func (s *PutLogEventsInput) Validate() error {
 }
 
 // SetLogEvents sets the LogEvents field's value.
-func (s *PutLogEventsInput) SetLogEvents(v []*InputLogEvent) *PutLogEventsInput {
+func (s *PutLogEventsInput) SetLogEvents(v []InputLogEvent) *PutLogEventsInput {
 	s.LogEvents = v
 	return s
 }
@@ -5382,7 +5379,7 @@ type PutMetricFilterInput struct {
 	// A collection of information that defines how metric data gets emitted.
 	//
 	// MetricTransformations is a required field
-	MetricTransformations []*MetricTransformation `locationName:"metricTransformations" min:"1" type:"list" required:"true"`
+	MetricTransformations []MetricTransformation `locationName:"metricTransformations" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5425,9 +5422,6 @@ func (s *PutMetricFilterInput) Validate() error {
 	}
 	if s.MetricTransformations != nil {
 		for i, v := range s.MetricTransformations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricTransformations", i), err.(aws.ErrInvalidParams))
 			}
@@ -5459,7 +5453,7 @@ func (s *PutMetricFilterInput) SetLogGroupName(v string) *PutMetricFilterInput {
 }
 
 // SetMetricTransformations sets the MetricTransformations field's value.
-func (s *PutMetricFilterInput) SetMetricTransformations(v []*MetricTransformation) *PutMetricFilterInput {
+func (s *PutMetricFilterInput) SetMetricTransformations(v []MetricTransformation) *PutMetricFilterInput {
 	s.MetricTransformations = v
 	return s
 }
@@ -6002,7 +5996,7 @@ type TagLogGroupInput struct {
 	// The key-value pairs to use for the tags.
 	//
 	// Tags is a required field
-	Tags map[string]*string `locationName:"tags" min:"1" type:"map" required:"true"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -6046,7 +6040,7 @@ func (s *TagLogGroupInput) SetLogGroupName(v string) *TagLogGroupInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagLogGroupInput) SetTags(v map[string]*string) *TagLogGroupInput {
+func (s *TagLogGroupInput) SetTags(v map[string]string) *TagLogGroupInput {
 	s.Tags = v
 	return s
 }
@@ -6081,7 +6075,7 @@ type TestMetricFilterInput struct {
 	// The log event messages to test.
 	//
 	// LogEventMessages is a required field
-	LogEventMessages []*string `locationName:"logEventMessages" min:"1" type:"list" required:"true"`
+	LogEventMessages []string `locationName:"logEventMessages" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6122,7 +6116,7 @@ func (s *TestMetricFilterInput) SetFilterPattern(v string) *TestMetricFilterInpu
 }
 
 // SetLogEventMessages sets the LogEventMessages field's value.
-func (s *TestMetricFilterInput) SetLogEventMessages(v []*string) *TestMetricFilterInput {
+func (s *TestMetricFilterInput) SetLogEventMessages(v []string) *TestMetricFilterInput {
 	s.LogEventMessages = v
 	return s
 }
@@ -6132,7 +6126,7 @@ type TestMetricFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The matched events.
-	Matches []*MetricFilterMatchRecord `locationName:"matches" type:"list"`
+	Matches []MetricFilterMatchRecord `locationName:"matches" type:"list"`
 }
 
 // String returns the string representation
@@ -6146,7 +6140,7 @@ func (s TestMetricFilterOutput) GoString() string {
 }
 
 // SetMatches sets the Matches field's value.
-func (s *TestMetricFilterOutput) SetMatches(v []*MetricFilterMatchRecord) *TestMetricFilterOutput {
+func (s *TestMetricFilterOutput) SetMatches(v []MetricFilterMatchRecord) *TestMetricFilterOutput {
 	s.Matches = v
 	return s
 }
@@ -6163,7 +6157,7 @@ type UntagLogGroupInput struct {
 	// The tag keys. The corresponding tags are removed from the log group.
 	//
 	// Tags is a required field
-	Tags []*string `locationName:"tags" min:"1" type:"list" required:"true"`
+	Tags []string `locationName:"tags" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6207,7 +6201,7 @@ func (s *UntagLogGroupInput) SetLogGroupName(v string) *UntagLogGroupInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *UntagLogGroupInput) SetTags(v []*string) *UntagLogGroupInput {
+func (s *UntagLogGroupInput) SetTags(v []string) *UntagLogGroupInput {
 	s.Tags = v
 	return s
 }

@@ -1653,7 +1653,7 @@ type AddTagsInput struct {
 	// a value, Amazon ML creates a tag with the specified key and a value of null.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1685,9 +1685,6 @@ func (s *AddTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1713,7 +1710,7 @@ func (s *AddTagsInput) SetResourceType(v TaggableResourceType) *AddTagsInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsInput) SetTags(v []*Tag) *AddTagsInput {
+func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 	s.Tags = v
 	return s
 }
@@ -2676,7 +2673,7 @@ type CreateMLModelInput struct {
 	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// The data recipe for creating the MLModel. You must specify either the recipe
 	// or its URI. If you don't specify a recipe or its URI, Amazon ML creates a
@@ -2750,7 +2747,7 @@ func (s *CreateMLModelInput) SetMLModelType(v MLModelType) *CreateMLModelInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateMLModelInput) SetParameters(v map[string]*string) *CreateMLModelInput {
+func (s *CreateMLModelInput) SetParameters(v map[string]string) *CreateMLModelInput {
 	s.Parameters = v
 	return s
 }
@@ -3453,7 +3450,7 @@ type DeleteTagsInput struct {
 	// One or more tags to delete.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3503,7 +3500,7 @@ func (s *DeleteTagsInput) SetResourceType(v TaggableResourceType) *DeleteTagsInp
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DeleteTagsInput) SetTagKeys(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -3716,7 +3713,7 @@ type DescribeBatchPredictionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of BatchPrediction objects that meet the search criteria.
-	Results []*BatchPrediction `type:"list"`
+	Results []BatchPrediction `type:"list"`
 }
 
 // String returns the string representation
@@ -3736,7 +3733,7 @@ func (s *DescribeBatchPredictionsOutput) SetNextToken(v string) *DescribeBatchPr
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeBatchPredictionsOutput) SetResults(v []*BatchPrediction) *DescribeBatchPredictionsOutput {
+func (s *DescribeBatchPredictionsOutput) SetResults(v []BatchPrediction) *DescribeBatchPredictionsOutput {
 	s.Results = v
 	return s
 }
@@ -3907,7 +3904,7 @@ type DescribeDataSourcesOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of DataSource that meet the search criteria.
-	Results []*DataSource `type:"list"`
+	Results []DataSource `type:"list"`
 }
 
 // String returns the string representation
@@ -3927,7 +3924,7 @@ func (s *DescribeDataSourcesOutput) SetNextToken(v string) *DescribeDataSourcesO
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeDataSourcesOutput) SetResults(v []*DataSource) *DescribeDataSourcesOutput {
+func (s *DescribeDataSourcesOutput) SetResults(v []DataSource) *DescribeDataSourcesOutput {
 	s.Results = v
 	return s
 }
@@ -4103,7 +4100,7 @@ type DescribeEvaluationsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of Evaluation that meet the search criteria.
-	Results []*Evaluation `type:"list"`
+	Results []Evaluation `type:"list"`
 }
 
 // String returns the string representation
@@ -4123,7 +4120,7 @@ func (s *DescribeEvaluationsOutput) SetNextToken(v string) *DescribeEvaluationsO
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeEvaluationsOutput) SetResults(v []*Evaluation) *DescribeEvaluationsOutput {
+func (s *DescribeEvaluationsOutput) SetResults(v []Evaluation) *DescribeEvaluationsOutput {
 	s.Results = v
 	return s
 }
@@ -4303,7 +4300,7 @@ type DescribeMLModelsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of MLModel that meet the search criteria.
-	Results []*MLModel `type:"list"`
+	Results []MLModel `type:"list"`
 }
 
 // String returns the string representation
@@ -4323,7 +4320,7 @@ func (s *DescribeMLModelsOutput) SetNextToken(v string) *DescribeMLModelsOutput 
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeMLModelsOutput) SetResults(v []*MLModel) *DescribeMLModelsOutput {
+func (s *DescribeMLModelsOutput) SetResults(v []MLModel) *DescribeMLModelsOutput {
 	s.Results = v
 	return s
 }
@@ -4395,7 +4392,7 @@ type DescribeTagsOutput struct {
 	ResourceType TaggableResourceType `type:"string"`
 
 	// A list of tags associated with the ML object.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4421,7 +4418,7 @@ func (s *DescribeTagsOutput) SetResourceType(v TaggableResourceType) *DescribeTa
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []*Tag) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTags(v []Tag) *DescribeTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -5533,7 +5530,7 @@ type GetMLModelOutput struct {
 	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
-	TrainingParameters map[string]*string `type:"map"`
+	TrainingParameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5667,7 +5664,7 @@ func (s *GetMLModelOutput) SetTrainingDataSourceId(v string) *GetMLModelOutput {
 }
 
 // SetTrainingParameters sets the TrainingParameters field's value.
-func (s *GetMLModelOutput) SetTrainingParameters(v map[string]*string) *GetMLModelOutput {
+func (s *GetMLModelOutput) SetTrainingParameters(v map[string]string) *GetMLModelOutput {
 	s.TrainingParameters = v
 	return s
 }
@@ -5794,7 +5791,7 @@ type MLModel struct {
 	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
-	TrainingParameters map[string]*string `type:"map"`
+	TrainingParameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5916,7 +5913,7 @@ func (s *MLModel) SetTrainingDataSourceId(v string) *MLModel {
 }
 
 // SetTrainingParameters sets the TrainingParameters field's value.
-func (s *MLModel) SetTrainingParameters(v map[string]*string) *MLModel {
+func (s *MLModel) SetTrainingParameters(v map[string]string) *MLModel {
 	s.TrainingParameters = v
 	return s
 }
@@ -5939,7 +5936,7 @@ func (s *MLModel) SetTrainingParameters(v map[string]*string) *MLModel {
 type PerformanceMetrics struct {
 	_ struct{} `type:"structure"`
 
-	Properties map[string]*string `type:"map"`
+	Properties map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5953,7 +5950,7 @@ func (s PerformanceMetrics) GoString() string {
 }
 
 // SetProperties sets the Properties field's value.
-func (s *PerformanceMetrics) SetProperties(v map[string]*string) *PerformanceMetrics {
+func (s *PerformanceMetrics) SetProperties(v map[string]string) *PerformanceMetrics {
 	s.Properties = v
 	return s
 }
@@ -5972,7 +5969,7 @@ type PredictInput struct {
 	// A map of variable name-value pairs that represent an observation.
 	//
 	// Record is a required field
-	Record map[string]*string `type:"map" required:"true"`
+	Record map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -6023,7 +6020,7 @@ func (s *PredictInput) SetPredictEndpoint(v string) *PredictInput {
 }
 
 // SetRecord sets the Record field's value.
-func (s *PredictInput) SetRecord(v map[string]*string) *PredictInput {
+func (s *PredictInput) SetRecord(v map[string]string) *PredictInput {
 	s.Record = v
 	return s
 }
@@ -6078,13 +6075,13 @@ type Prediction struct {
 	_ struct{} `type:"structure"`
 
 	// Provides any additional details regarding the prediction.
-	Details map[string]*string `locationName:"details" type:"map"`
+	Details map[string]string `locationName:"details" type:"map"`
 
 	// The prediction label for either a BINARY or MULTICLASSMLModel.
 	PredictedLabel *string `locationName:"predictedLabel" min:"1" type:"string"`
 
 	// Provides the raw classification score corresponding to each label.
-	PredictedScores map[string]*float64 `locationName:"predictedScores" type:"map"`
+	PredictedScores map[string]float64 `locationName:"predictedScores" type:"map"`
 
 	// The prediction value for REGRESSIONMLModel
 	PredictedValue *float64 `locationName:"predictedValue" type:"float"`
@@ -6101,7 +6098,7 @@ func (s Prediction) GoString() string {
 }
 
 // SetDetails sets the Details field's value.
-func (s *Prediction) SetDetails(v map[string]*string) *Prediction {
+func (s *Prediction) SetDetails(v map[string]string) *Prediction {
 	s.Details = v
 	return s
 }
@@ -6113,7 +6110,7 @@ func (s *Prediction) SetPredictedLabel(v string) *Prediction {
 }
 
 // SetPredictedScores sets the PredictedScores field's value.
-func (s *Prediction) SetPredictedScores(v map[string]*float64) *Prediction {
+func (s *Prediction) SetPredictedScores(v map[string]float64) *Prediction {
 	s.PredictedScores = v
 	return s
 }
@@ -6278,7 +6275,7 @@ type RDSDataSpec struct {
 	// the copy operation from Amazon RDS to an Amazon S3 task.
 	//
 	// SecurityGroupIds is a required field
-	SecurityGroupIds []*string `type:"list" required:"true"`
+	SecurityGroupIds []string `type:"list" required:"true"`
 
 	// The query that is used to retrieve the observation data for the DataSource.
 	//
@@ -6418,7 +6415,7 @@ func (s *RDSDataSpec) SetS3StagingLocation(v string) *RDSDataSpec {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RDSDataSpec) SetSecurityGroupIds(v []*string) *RDSDataSpec {
+func (s *RDSDataSpec) SetSecurityGroupIds(v []string) *RDSDataSpec {
 	s.SecurityGroupIds = v
 	return s
 }

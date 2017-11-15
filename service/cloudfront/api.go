@@ -1635,7 +1635,7 @@ type ActiveTrustedSigners struct {
 	// that is specified in the TrustedSigners complex type.
 	//
 	// For more information, see ActiveTrustedSigners.
-	Items []*Signer `locationNameList:"Signer" type:"list"`
+	Items []Signer `locationNameList:"Signer" type:"list"`
 
 	// A complex type that contains one Signer complex type for each trusted signer
 	// specified in the TrustedSigners complex type.
@@ -1663,7 +1663,7 @@ func (s *ActiveTrustedSigners) SetEnabled(v bool) *ActiveTrustedSigners {
 }
 
 // SetItems sets the Items field's value.
-func (s *ActiveTrustedSigners) SetItems(v []*Signer) *ActiveTrustedSigners {
+func (s *ActiveTrustedSigners) SetItems(v []Signer) *ActiveTrustedSigners {
 	s.Items = v
 	return s
 }
@@ -1682,7 +1682,7 @@ type Aliases struct {
 
 	// A complex type that contains the CNAME aliases, if any, that you want to
 	// associate with this distribution.
-	Items []*string `locationNameList:"CNAME" type:"list"`
+	Items []string `locationNameList:"CNAME" type:"list"`
 
 	// The number of CNAME aliases, if any, that you want to associate with this
 	// distribution.
@@ -1716,7 +1716,7 @@ func (s *Aliases) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *Aliases) SetItems(v []*string) *Aliases {
+func (s *Aliases) SetItems(v []string) *Aliases {
 	s.Items = v
 	return s
 }
@@ -2142,7 +2142,7 @@ type CacheBehaviors struct {
 
 	// Optional: A complex type that contains cache behaviors for this distribution.
 	// If Quantity is 0, you can omit Items.
-	Items []*CacheBehavior `locationNameList:"CacheBehavior" type:"list"`
+	Items []CacheBehavior `locationNameList:"CacheBehavior" type:"list"`
 
 	// The number of cache behaviors for this distribution.
 	//
@@ -2169,9 +2169,6 @@ func (s *CacheBehaviors) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -2185,7 +2182,7 @@ func (s *CacheBehaviors) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *CacheBehaviors) SetItems(v []*CacheBehavior) *CacheBehaviors {
+func (s *CacheBehaviors) SetItems(v []CacheBehavior) *CacheBehaviors {
 	s.Items = v
 	return s
 }
@@ -2275,7 +2272,7 @@ type CookieNames struct {
 
 	// A complex type that contains one Name element for each cookie that you want
 	// CloudFront to forward to the origin for this cache behavior.
-	Items []*string `locationNameList:"Name" type:"list"`
+	Items []string `locationNameList:"Name" type:"list"`
 
 	// The number of different cookies that you want CloudFront to forward to the
 	// origin for this cache behavior.
@@ -2309,7 +2306,7 @@ func (s *CookieNames) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *CookieNames) SetItems(v []*string) *CookieNames {
+func (s *CookieNames) SetItems(v []string) *CookieNames {
 	s.Items = v
 	return s
 }
@@ -3087,7 +3084,7 @@ type CustomErrorResponses struct {
 	// A complex type that contains a CustomErrorResponse element for each HTTP
 	// status code for which you want to specify a custom error page and/or a caching
 	// duration.
-	Items []*CustomErrorResponse `locationNameList:"CustomErrorResponse" type:"list"`
+	Items []CustomErrorResponse `locationNameList:"CustomErrorResponse" type:"list"`
 
 	// The number of HTTP status codes for which you want to specify a custom error
 	// page and/or a caching duration. If Quantity is 0, you can omit Items.
@@ -3115,9 +3112,6 @@ func (s *CustomErrorResponses) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -3131,7 +3125,7 @@ func (s *CustomErrorResponses) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *CustomErrorResponses) SetItems(v []*CustomErrorResponse) *CustomErrorResponses {
+func (s *CustomErrorResponses) SetItems(v []CustomErrorResponse) *CustomErrorResponses {
 	s.Items = v
 	return s
 }
@@ -3150,7 +3144,7 @@ type CustomHeaders struct {
 	// Optional: A list that contains one OriginCustomHeader element for each custom
 	// header that you want CloudFront to forward to the origin. If Quantity is
 	// 0, omit Items.
-	Items []*OriginCustomHeader `locationNameList:"OriginCustomHeader" type:"list"`
+	Items []OriginCustomHeader `locationNameList:"OriginCustomHeader" type:"list"`
 
 	// The number of custom headers, if any, for this distribution.
 	//
@@ -3177,9 +3171,6 @@ func (s *CustomHeaders) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -3193,7 +3184,7 @@ func (s *CustomHeaders) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *CustomHeaders) SetItems(v []*OriginCustomHeader) *CustomHeaders {
+func (s *CustomHeaders) SetItems(v []OriginCustomHeader) *CustomHeaders {
 	s.Items = v
 	return s
 }
@@ -4372,7 +4363,7 @@ type DistributionList struct {
 
 	// A complex type that contains one DistributionSummary element for each distribution
 	// that was created by the current AWS account.
-	Items []*DistributionSummary `locationNameList:"DistributionSummary" type:"list"`
+	Items []DistributionSummary `locationNameList:"DistributionSummary" type:"list"`
 
 	// The value you provided for the Marker request parameter.
 	//
@@ -4412,7 +4403,7 @@ func (s *DistributionList) SetIsTruncated(v bool) *DistributionList {
 }
 
 // SetItems sets the Items field's value.
-func (s *DistributionList) SetItems(v []*DistributionSummary) *DistributionList {
+func (s *DistributionList) SetItems(v []DistributionSummary) *DistributionList {
 	s.Items = v
 	return s
 }
@@ -4811,7 +4802,7 @@ type GeoRestriction struct {
 	// the International Organization for Standardization website. You can also
 	// refer to the country list in the CloudFront console, which includes both
 	// country names and codes.
-	Items []*string `locationNameList:"Location" type:"list"`
+	Items []string `locationNameList:"Location" type:"list"`
 
 	// When geo restriction is enabled, this is the number of countries in your
 	// whitelist or blacklist. Otherwise, when it is not enabled, Quantity is 0,
@@ -4864,7 +4855,7 @@ func (s *GeoRestriction) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *GeoRestriction) SetItems(v []*string) *GeoRestriction {
+func (s *GeoRestriction) SetItems(v []string) *GeoRestriction {
 	s.Items = v
 	return s
 }
@@ -5435,7 +5426,7 @@ type Headers struct {
 	// A complex type that contains one Name element for each header that you want
 	// CloudFront to forward to the origin and to vary on for this cache behavior.
 	// If Quantity is 0, omit Items.
-	Items []*string `locationNameList:"Name" type:"list"`
+	Items []string `locationNameList:"Name" type:"list"`
 
 	// The number of different headers that you want CloudFront to forward to the
 	// origin for this cache behavior. You can configure each cache behavior in
@@ -5488,7 +5479,7 @@ func (s *Headers) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *Headers) SetItems(v []*string) *Headers {
+func (s *Headers) SetItems(v []string) *Headers {
 	s.Items = v
 	return s
 }
@@ -5656,7 +5647,7 @@ type InvalidationList struct {
 
 	// A complex type that contains one InvalidationSummary element for each invalidation
 	// batch created by the current AWS account.
-	Items []*InvalidationSummary `locationNameList:"InvalidationSummary" type:"list"`
+	Items []InvalidationSummary `locationNameList:"InvalidationSummary" type:"list"`
 
 	// The value that you provided for the Marker request parameter.
 	//
@@ -5696,7 +5687,7 @@ func (s *InvalidationList) SetIsTruncated(v bool) *InvalidationList {
 }
 
 // SetItems sets the Items field's value.
-func (s *InvalidationList) SetItems(v []*InvalidationSummary) *InvalidationList {
+func (s *InvalidationList) SetItems(v []InvalidationSummary) *InvalidationList {
 	s.Items = v
 	return s
 }
@@ -5784,7 +5775,7 @@ type KeyPairIds struct {
 	// associated with AwsAccountNumber.
 	//
 	// For more information, see ActiveTrustedSigners.
-	Items []*string `locationNameList:"KeyPairId" type:"list"`
+	Items []string `locationNameList:"KeyPairId" type:"list"`
 
 	// The number of active CloudFront key pairs for AwsAccountNumber.
 	//
@@ -5805,7 +5796,7 @@ func (s KeyPairIds) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *KeyPairIds) SetItems(v []*string) *KeyPairIds {
+func (s *KeyPairIds) SetItems(v []string) *KeyPairIds {
 	s.Items = v
 	return s
 }
@@ -5876,7 +5867,7 @@ type LambdaFunctionAssociations struct {
 
 	// Optional: A complex type that contains LambdaFunctionAssociation items for
 	// this cache behavior. If Quantity is 0, you can omit Items.
-	Items []*LambdaFunctionAssociation `locationNameList:"LambdaFunctionAssociation" type:"list"`
+	Items []LambdaFunctionAssociation `locationNameList:"LambdaFunctionAssociation" type:"list"`
 
 	// The number of Lambda function associations for this cache behavior.
 	//
@@ -5909,7 +5900,7 @@ func (s *LambdaFunctionAssociations) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *LambdaFunctionAssociations) SetItems(v []*LambdaFunctionAssociation) *LambdaFunctionAssociations {
+func (s *LambdaFunctionAssociations) SetItems(v []LambdaFunctionAssociation) *LambdaFunctionAssociations {
 	s.Items = v
 	return s
 }
@@ -6761,7 +6752,7 @@ type OriginAccessIdentityList struct {
 
 	// A complex type that contains one CloudFrontOriginAccessIdentitySummary element
 	// for each origin access identity that was created by the current AWS account.
-	Items []*OriginAccessIdentitySummary `locationNameList:"CloudFrontOriginAccessIdentitySummary" type:"list"`
+	Items []OriginAccessIdentitySummary `locationNameList:"CloudFrontOriginAccessIdentitySummary" type:"list"`
 
 	// Use this when paginating results to indicate where to begin in your list
 	// of origin access identities. The results include identities in the list that
@@ -6806,7 +6797,7 @@ func (s *OriginAccessIdentityList) SetIsTruncated(v bool) *OriginAccessIdentityL
 }
 
 // SetItems sets the Items field's value.
-func (s *OriginAccessIdentityList) SetItems(v []*OriginAccessIdentitySummary) *OriginAccessIdentityList {
+func (s *OriginAccessIdentityList) SetItems(v []OriginAccessIdentitySummary) *OriginAccessIdentityList {
 	s.Items = v
 	return s
 }
@@ -7011,7 +7002,7 @@ type Origins struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that contains origins for this distribution.
-	Items []*Origin `locationNameList:"Origin" min:"1" type:"list"`
+	Items []Origin `locationNameList:"Origin" min:"1" type:"list"`
 
 	// The number of origins for this distribution.
 	//
@@ -7041,9 +7032,6 @@ func (s *Origins) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -7057,7 +7045,7 @@ func (s *Origins) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *Origins) SetItems(v []*Origin) *Origins {
+func (s *Origins) SetItems(v []Origin) *Origins {
 	s.Items = v
 	return s
 }
@@ -7077,7 +7065,7 @@ type Paths struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that contains a list of the paths that you want to invalidate.
-	Items []*string `locationNameList:"Path" type:"list"`
+	Items []string `locationNameList:"Path" type:"list"`
 
 	// The number of objects that you want to invalidate.
 	//
@@ -7110,7 +7098,7 @@ func (s *Paths) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *Paths) SetItems(v []*string) *Paths {
+func (s *Paths) SetItems(v []string) *Paths {
 	s.Items = v
 	return s
 }
@@ -7128,7 +7116,7 @@ type QueryStringCacheKeys struct {
 	// (Optional) A list that contains the query string parameters that you want
 	// CloudFront to use as a basis for caching for this cache behavior. If Quantity
 	// is 0, you can omit Items.
-	Items []*string `locationNameList:"Name" type:"list"`
+	Items []string `locationNameList:"Name" type:"list"`
 
 	// The number of whitelisted query string parameters for this cache behavior.
 	//
@@ -7161,7 +7149,7 @@ func (s *QueryStringCacheKeys) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *QueryStringCacheKeys) SetItems(v []*string) *QueryStringCacheKeys {
+func (s *QueryStringCacheKeys) SetItems(v []string) *QueryStringCacheKeys {
 	s.Items = v
 	return s
 }
@@ -7749,7 +7737,7 @@ type StreamingDistributionList struct {
 
 	// A complex type that contains one StreamingDistributionSummary element for
 	// each distribution that was created by the current AWS account.
-	Items []*StreamingDistributionSummary `locationNameList:"StreamingDistributionSummary" type:"list"`
+	Items []StreamingDistributionSummary `locationNameList:"StreamingDistributionSummary" type:"list"`
 
 	// The value you provided for the Marker request parameter.
 	//
@@ -7790,7 +7778,7 @@ func (s *StreamingDistributionList) SetIsTruncated(v bool) *StreamingDistributio
 }
 
 // SetItems sets the Items field's value.
-func (s *StreamingDistributionList) SetItems(v []*StreamingDistributionSummary) *StreamingDistributionList {
+func (s *StreamingDistributionList) SetItems(v []StreamingDistributionSummary) *StreamingDistributionList {
 	s.Items = v
 	return s
 }
@@ -8114,7 +8102,7 @@ type TagKeys struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that contains Tag key elements.
-	Items []*string `locationNameList:"Key" type:"list"`
+	Items []string `locationNameList:"Key" type:"list"`
 }
 
 // String returns the string representation
@@ -8128,7 +8116,7 @@ func (s TagKeys) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *TagKeys) SetItems(v []*string) *TagKeys {
+func (s *TagKeys) SetItems(v []string) *TagKeys {
 	s.Items = v
 	return s
 }
@@ -8215,7 +8203,7 @@ type Tags struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that contains Tag elements.
-	Items []*Tag `locationNameList:"Tag" type:"list"`
+	Items []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -8233,9 +8221,6 @@ func (s *Tags) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tags"}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -8249,7 +8234,7 @@ func (s *Tags) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *Tags) SetItems(v []*Tag) *Tags {
+func (s *Tags) SetItems(v []Tag) *Tags {
 	s.Items = v
 	return s
 }
@@ -8284,7 +8269,7 @@ type TrustedSigners struct {
 
 	// Optional: A complex type that contains trusted signers for this cache behavior.
 	// If Quantity is 0, you can omit Items.
-	Items []*string `locationNameList:"AwsAccountNumber" type:"list"`
+	Items []string `locationNameList:"AwsAccountNumber" type:"list"`
 
 	// The number of trusted signers for this cache behavior.
 	//
@@ -8327,7 +8312,7 @@ func (s *TrustedSigners) SetEnabled(v bool) *TrustedSigners {
 }
 
 // SetItems sets the Items field's value.
-func (s *TrustedSigners) SetItems(v []*string) *TrustedSigners {
+func (s *TrustedSigners) SetItems(v []string) *TrustedSigners {
 	s.Items = v
 	return s
 }

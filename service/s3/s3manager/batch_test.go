@@ -311,13 +311,12 @@ func TestBatchDelete(t *testing.T) {
 type mockS3Client struct {
 	*s3.S3
 	index   int
-	objects []*s3.ListObjectsOutput
+	objects []s3.ListObjectsOutput
 }
 
 func (client *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
 	object := client.objects[client.index]
 	client.index++
-
 	req := client.S3.ListObjectsRequest(input)
 	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		r.Data = object
@@ -334,9 +333,9 @@ func TestBatchDeleteList(t *testing.T) {
 		count++
 	}))
 
-	objects := []*s3.ListObjectsOutput{
+	objects := []s3.ListObjectsOutput{
 		{
-			Contents: []*s3.Object{
+			Contents: []s3.Object{
 				{
 					Key: aws.String("1"),
 				},
@@ -345,7 +344,7 @@ func TestBatchDeleteList(t *testing.T) {
 			IsTruncated: aws.Bool(true),
 		},
 		{
-			Contents: []*s3.Object{
+			Contents: []s3.Object{
 				{
 					Key: aws.String("2"),
 				},
@@ -354,7 +353,7 @@ func TestBatchDeleteList(t *testing.T) {
 			IsTruncated: aws.Bool(true),
 		},
 		{
-			Contents: []*s3.Object{
+			Contents: []s3.Object{
 				{
 					Key: aws.String("3"),
 				},
@@ -417,9 +416,9 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 
 	svc := &mockS3Client{
 		S3: buildS3SvcClient(server.URL),
-		objects: []*s3.ListObjectsOutput{
+		objects: []s3.ListObjectsOutput{
 			// Simulate empty listing
-			{Contents: []*s3.Object{}},
+			{Contents: []s3.Object{}},
 		},
 	}
 	batcher := BatchDelete{

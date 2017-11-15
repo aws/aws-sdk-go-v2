@@ -563,7 +563,7 @@ type AffectedEntity struct {
 	StatusCode EntityStatusCode `locationName:"statusCode" type:"string"`
 
 	// A map of entity tags attached to the affected entity.
-	Tags map[string]*string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -613,7 +613,7 @@ func (s *AffectedEntity) SetStatusCode(v EntityStatusCode) *AffectedEntity {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AffectedEntity) SetTags(v map[string]*string) *AffectedEntity {
+func (s *AffectedEntity) SetTags(v map[string]string) *AffectedEntity {
 	s.Tags = v
 	return s
 }
@@ -745,7 +745,7 @@ type DescribeAffectedEntitiesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The entities that match the filter criteria.
-	Entities []*AffectedEntity `locationName:"entities" type:"list"`
+	Entities []AffectedEntity `locationName:"entities" type:"list"`
 
 	// If the results of a search are large, only a portion of the results are returned,
 	// and a nextToken pagination token is returned in the response. To retrieve
@@ -766,7 +766,7 @@ func (s DescribeAffectedEntitiesOutput) GoString() string {
 }
 
 // SetEntities sets the Entities field's value.
-func (s *DescribeAffectedEntitiesOutput) SetEntities(v []*AffectedEntity) *DescribeAffectedEntitiesOutput {
+func (s *DescribeAffectedEntitiesOutput) SetEntities(v []AffectedEntity) *DescribeAffectedEntitiesOutput {
 	s.Entities = v
 	return s
 }
@@ -783,7 +783,7 @@ type DescribeEntityAggregatesInput struct {
 
 	// A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
 	// "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"
-	EventArns []*string `locationName:"eventArns" min:"1" type:"list"`
+	EventArns []string `locationName:"eventArns" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -810,7 +810,7 @@ func (s *DescribeEntityAggregatesInput) Validate() error {
 }
 
 // SetEventArns sets the EventArns field's value.
-func (s *DescribeEntityAggregatesInput) SetEventArns(v []*string) *DescribeEntityAggregatesInput {
+func (s *DescribeEntityAggregatesInput) SetEventArns(v []string) *DescribeEntityAggregatesInput {
 	s.EventArns = v
 	return s
 }
@@ -820,7 +820,7 @@ type DescribeEntityAggregatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The number of entities that are affected by each of the specified events.
-	EntityAggregates []*EntityAggregate `locationName:"entityAggregates" type:"list"`
+	EntityAggregates []EntityAggregate `locationName:"entityAggregates" type:"list"`
 }
 
 // String returns the string representation
@@ -834,7 +834,7 @@ func (s DescribeEntityAggregatesOutput) GoString() string {
 }
 
 // SetEntityAggregates sets the EntityAggregates field's value.
-func (s *DescribeEntityAggregatesOutput) SetEntityAggregates(v []*EntityAggregate) *DescribeEntityAggregatesOutput {
+func (s *DescribeEntityAggregatesOutput) SetEntityAggregates(v []EntityAggregate) *DescribeEntityAggregatesOutput {
 	s.EntityAggregates = v
 	return s
 }
@@ -922,7 +922,7 @@ type DescribeEventAggregatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The number of events in each category that meet the optional filter criteria.
-	EventAggregates []*EventAggregate `locationName:"eventAggregates" type:"list"`
+	EventAggregates []EventAggregate `locationName:"eventAggregates" type:"list"`
 
 	// If the results of a search are large, only a portion of the results are returned,
 	// and a nextToken pagination token is returned in the response. To retrieve
@@ -943,7 +943,7 @@ func (s DescribeEventAggregatesOutput) GoString() string {
 }
 
 // SetEventAggregates sets the EventAggregates field's value.
-func (s *DescribeEventAggregatesOutput) SetEventAggregates(v []*EventAggregate) *DescribeEventAggregatesOutput {
+func (s *DescribeEventAggregatesOutput) SetEventAggregates(v []EventAggregate) *DescribeEventAggregatesOutput {
 	s.EventAggregates = v
 	return s
 }
@@ -962,7 +962,7 @@ type DescribeEventDetailsInput struct {
 	// "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"
 	//
 	// EventArns is a required field
-	EventArns []*string `locationName:"eventArns" min:"1" type:"list" required:"true"`
+	EventArns []string `locationName:"eventArns" min:"1" type:"list" required:"true"`
 
 	// The locale (language) to return information in. English (en) is the default
 	// and the only supported value at this time.
@@ -1000,7 +1000,7 @@ func (s *DescribeEventDetailsInput) Validate() error {
 }
 
 // SetEventArns sets the EventArns field's value.
-func (s *DescribeEventDetailsInput) SetEventArns(v []*string) *DescribeEventDetailsInput {
+func (s *DescribeEventDetailsInput) SetEventArns(v []string) *DescribeEventDetailsInput {
 	s.EventArns = v
 	return s
 }
@@ -1016,10 +1016,10 @@ type DescribeEventDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Error messages for any events that could not be retrieved.
-	FailedSet []*EventDetailsErrorItem `locationName:"failedSet" type:"list"`
+	FailedSet []EventDetailsErrorItem `locationName:"failedSet" type:"list"`
 
 	// Information about the events that could be retrieved.
-	SuccessfulSet []*EventDetails `locationName:"successfulSet" type:"list"`
+	SuccessfulSet []EventDetails `locationName:"successfulSet" type:"list"`
 }
 
 // String returns the string representation
@@ -1033,13 +1033,13 @@ func (s DescribeEventDetailsOutput) GoString() string {
 }
 
 // SetFailedSet sets the FailedSet field's value.
-func (s *DescribeEventDetailsOutput) SetFailedSet(v []*EventDetailsErrorItem) *DescribeEventDetailsOutput {
+func (s *DescribeEventDetailsOutput) SetFailedSet(v []EventDetailsErrorItem) *DescribeEventDetailsOutput {
 	s.FailedSet = v
 	return s
 }
 
 // SetSuccessfulSet sets the SuccessfulSet field's value.
-func (s *DescribeEventDetailsOutput) SetSuccessfulSet(v []*EventDetails) *DescribeEventDetailsOutput {
+func (s *DescribeEventDetailsOutput) SetSuccessfulSet(v []EventDetails) *DescribeEventDetailsOutput {
 	s.SuccessfulSet = v
 	return s
 }
@@ -1129,7 +1129,7 @@ type DescribeEventTypesOutput struct {
 	// category (issue, accountNotification, or scheduledChange), a service (for
 	// example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format AWS_SERVICE_DESCRIPTION;
 	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
-	EventTypes []*EventType `locationName:"eventTypes" type:"list"`
+	EventTypes []EventType `locationName:"eventTypes" type:"list"`
 
 	// If the results of a search are large, only a portion of the results are returned,
 	// and a nextToken pagination token is returned in the response. To retrieve
@@ -1150,7 +1150,7 @@ func (s DescribeEventTypesOutput) GoString() string {
 }
 
 // SetEventTypes sets the EventTypes field's value.
-func (s *DescribeEventTypesOutput) SetEventTypes(v []*EventType) *DescribeEventTypesOutput {
+func (s *DescribeEventTypesOutput) SetEventTypes(v []EventType) *DescribeEventTypesOutput {
 	s.EventTypes = v
 	return s
 }
@@ -1243,7 +1243,7 @@ type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The events that match the specified filter criteria.
-	Events []*Event `locationName:"events" type:"list"`
+	Events []Event `locationName:"events" type:"list"`
 
 	// If the results of a search are large, only a portion of the results are returned,
 	// and a nextToken pagination token is returned in the response. To retrieve
@@ -1264,7 +1264,7 @@ func (s DescribeEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []*Event) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 	s.Events = v
 	return s
 }
@@ -1317,25 +1317,25 @@ type EntityFilter struct {
 	_ struct{} `type:"structure"`
 
 	// A list of entity ARNs (unique identifiers).
-	EntityArns []*string `locationName:"entityArns" min:"1" type:"list"`
+	EntityArns []string `locationName:"entityArns" min:"1" type:"list"`
 
 	// A list of IDs for affected entities.
-	EntityValues []*string `locationName:"entityValues" min:"1" type:"list"`
+	EntityValues []string `locationName:"entityValues" min:"1" type:"list"`
 
 	// A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
 	// "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"
 	//
 	// EventArns is a required field
-	EventArns []*string `locationName:"eventArns" min:"1" type:"list" required:"true"`
+	EventArns []string `locationName:"eventArns" min:"1" type:"list" required:"true"`
 
 	// A list of the most recent dates and times that the entity was updated.
-	LastUpdatedTimes []*DateTimeRange `locationName:"lastUpdatedTimes" min:"1" type:"list"`
+	LastUpdatedTimes []DateTimeRange `locationName:"lastUpdatedTimes" min:"1" type:"list"`
 
 	// A list of entity status codes (IMPAIRED, UNIMPAIRED, or UNKNOWN).
 	StatusCodes []EntityStatusCode `locationName:"statusCodes" min:"1" type:"list"`
 
 	// A map of entity tags attached to the affected entity.
-	Tags []map[string]*string `locationName:"tags" type:"list"`
+	Tags []map[string]string `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -1378,25 +1378,25 @@ func (s *EntityFilter) Validate() error {
 }
 
 // SetEntityArns sets the EntityArns field's value.
-func (s *EntityFilter) SetEntityArns(v []*string) *EntityFilter {
+func (s *EntityFilter) SetEntityArns(v []string) *EntityFilter {
 	s.EntityArns = v
 	return s
 }
 
 // SetEntityValues sets the EntityValues field's value.
-func (s *EntityFilter) SetEntityValues(v []*string) *EntityFilter {
+func (s *EntityFilter) SetEntityValues(v []string) *EntityFilter {
 	s.EntityValues = v
 	return s
 }
 
 // SetEventArns sets the EventArns field's value.
-func (s *EntityFilter) SetEventArns(v []*string) *EntityFilter {
+func (s *EntityFilter) SetEventArns(v []string) *EntityFilter {
 	s.EventArns = v
 	return s
 }
 
 // SetLastUpdatedTimes sets the LastUpdatedTimes field's value.
-func (s *EntityFilter) SetLastUpdatedTimes(v []*DateTimeRange) *EntityFilter {
+func (s *EntityFilter) SetLastUpdatedTimes(v []DateTimeRange) *EntityFilter {
 	s.LastUpdatedTimes = v
 	return s
 }
@@ -1408,7 +1408,7 @@ func (s *EntityFilter) SetStatusCodes(v []EntityStatusCode) *EntityFilter {
 }
 
 // SetTags sets the Tags field's value.
-func (s *EntityFilter) SetTags(v []map[string]*string) *EntityFilter {
+func (s *EntityFilter) SetTags(v []map[string]string) *EntityFilter {
 	s.Tags = v
 	return s
 }
@@ -1599,7 +1599,7 @@ type EventDetails struct {
 	EventDescription *EventDescription `locationName:"eventDescription" type:"structure"`
 
 	// Additional metadata about the event.
-	EventMetadata map[string]*string `locationName:"eventMetadata" type:"map"`
+	EventMetadata map[string]string `locationName:"eventMetadata" type:"map"`
 }
 
 // String returns the string representation
@@ -1625,7 +1625,7 @@ func (s *EventDetails) SetEventDescription(v *EventDescription) *EventDetails {
 }
 
 // SetEventMetadata sets the EventMetadata field's value.
-func (s *EventDetails) SetEventMetadata(v map[string]*string) *EventDetails {
+func (s *EventDetails) SetEventMetadata(v map[string]string) *EventDetails {
 	s.EventMetadata = v
 	return s
 }
@@ -1682,21 +1682,21 @@ type EventFilter struct {
 	_ struct{} `type:"structure"`
 
 	// A list of AWS availability zones.
-	AvailabilityZones []*string `locationName:"availabilityZones" type:"list"`
+	AvailabilityZones []string `locationName:"availabilityZones" type:"list"`
 
 	// A list of dates and times that the event ended.
-	EndTimes []*DateTimeRange `locationName:"endTimes" min:"1" type:"list"`
+	EndTimes []DateTimeRange `locationName:"endTimes" min:"1" type:"list"`
 
 	// A list of entity ARNs (unique identifiers).
-	EntityArns []*string `locationName:"entityArns" min:"1" type:"list"`
+	EntityArns []string `locationName:"entityArns" min:"1" type:"list"`
 
 	// A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS
 	// volumes (vol-426ab23e).
-	EntityValues []*string `locationName:"entityValues" min:"1" type:"list"`
+	EntityValues []string `locationName:"entityValues" min:"1" type:"list"`
 
 	// A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
 	// "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"
-	EventArns []*string `locationName:"eventArns" min:"1" type:"list"`
+	EventArns []string `locationName:"eventArns" min:"1" type:"list"`
 
 	// A list of event status codes.
 	EventStatusCodes []EventStatusCode `locationName:"eventStatusCodes" min:"1" type:"list"`
@@ -1705,22 +1705,22 @@ type EventFilter struct {
 	EventTypeCategories []EventTypeCategory `locationName:"eventTypeCategories" min:"1" type:"list"`
 
 	// A list of unique identifiers for event types. For example, "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED"
-	EventTypeCodes []*string `locationName:"eventTypeCodes" min:"1" type:"list"`
+	EventTypeCodes []string `locationName:"eventTypeCodes" min:"1" type:"list"`
 
 	// A list of dates and times that the event was last updated.
-	LastUpdatedTimes []*DateTimeRange `locationName:"lastUpdatedTimes" min:"1" type:"list"`
+	LastUpdatedTimes []DateTimeRange `locationName:"lastUpdatedTimes" min:"1" type:"list"`
 
 	// A list of AWS regions.
-	Regions []*string `locationName:"regions" min:"1" type:"list"`
+	Regions []string `locationName:"regions" min:"1" type:"list"`
 
 	// The AWS services associated with the event. For example, EC2, RDS.
-	Services []*string `locationName:"services" min:"1" type:"list"`
+	Services []string `locationName:"services" min:"1" type:"list"`
 
 	// A list of dates and times that the event began.
-	StartTimes []*DateTimeRange `locationName:"startTimes" min:"1" type:"list"`
+	StartTimes []DateTimeRange `locationName:"startTimes" min:"1" type:"list"`
 
 	// A map of entity tags attached to the affected entity.
-	Tags []map[string]*string `locationName:"tags" type:"list"`
+	Tags []map[string]string `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -1777,31 +1777,31 @@ func (s *EventFilter) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *EventFilter) SetAvailabilityZones(v []*string) *EventFilter {
+func (s *EventFilter) SetAvailabilityZones(v []string) *EventFilter {
 	s.AvailabilityZones = v
 	return s
 }
 
 // SetEndTimes sets the EndTimes field's value.
-func (s *EventFilter) SetEndTimes(v []*DateTimeRange) *EventFilter {
+func (s *EventFilter) SetEndTimes(v []DateTimeRange) *EventFilter {
 	s.EndTimes = v
 	return s
 }
 
 // SetEntityArns sets the EntityArns field's value.
-func (s *EventFilter) SetEntityArns(v []*string) *EventFilter {
+func (s *EventFilter) SetEntityArns(v []string) *EventFilter {
 	s.EntityArns = v
 	return s
 }
 
 // SetEntityValues sets the EntityValues field's value.
-func (s *EventFilter) SetEntityValues(v []*string) *EventFilter {
+func (s *EventFilter) SetEntityValues(v []string) *EventFilter {
 	s.EntityValues = v
 	return s
 }
 
 // SetEventArns sets the EventArns field's value.
-func (s *EventFilter) SetEventArns(v []*string) *EventFilter {
+func (s *EventFilter) SetEventArns(v []string) *EventFilter {
 	s.EventArns = v
 	return s
 }
@@ -1819,37 +1819,37 @@ func (s *EventFilter) SetEventTypeCategories(v []EventTypeCategory) *EventFilter
 }
 
 // SetEventTypeCodes sets the EventTypeCodes field's value.
-func (s *EventFilter) SetEventTypeCodes(v []*string) *EventFilter {
+func (s *EventFilter) SetEventTypeCodes(v []string) *EventFilter {
 	s.EventTypeCodes = v
 	return s
 }
 
 // SetLastUpdatedTimes sets the LastUpdatedTimes field's value.
-func (s *EventFilter) SetLastUpdatedTimes(v []*DateTimeRange) *EventFilter {
+func (s *EventFilter) SetLastUpdatedTimes(v []DateTimeRange) *EventFilter {
 	s.LastUpdatedTimes = v
 	return s
 }
 
 // SetRegions sets the Regions field's value.
-func (s *EventFilter) SetRegions(v []*string) *EventFilter {
+func (s *EventFilter) SetRegions(v []string) *EventFilter {
 	s.Regions = v
 	return s
 }
 
 // SetServices sets the Services field's value.
-func (s *EventFilter) SetServices(v []*string) *EventFilter {
+func (s *EventFilter) SetServices(v []string) *EventFilter {
 	s.Services = v
 	return s
 }
 
 // SetStartTimes sets the StartTimes field's value.
-func (s *EventFilter) SetStartTimes(v []*DateTimeRange) *EventFilter {
+func (s *EventFilter) SetStartTimes(v []DateTimeRange) *EventFilter {
 	s.StartTimes = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *EventFilter) SetTags(v []map[string]*string) *EventFilter {
+func (s *EventFilter) SetTags(v []map[string]string) *EventFilter {
 	s.Tags = v
 	return s
 }
@@ -1909,10 +1909,10 @@ type EventTypeFilter struct {
 	EventTypeCategories []EventTypeCategory `locationName:"eventTypeCategories" min:"1" type:"list"`
 
 	// A list of event type codes.
-	EventTypeCodes []*string `locationName:"eventTypeCodes" min:"1" type:"list"`
+	EventTypeCodes []string `locationName:"eventTypeCodes" min:"1" type:"list"`
 
 	// The AWS services associated with the event. For example, EC2, RDS.
-	Services []*string `locationName:"services" min:"1" type:"list"`
+	Services []string `locationName:"services" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1951,13 +1951,13 @@ func (s *EventTypeFilter) SetEventTypeCategories(v []EventTypeCategory) *EventTy
 }
 
 // SetEventTypeCodes sets the EventTypeCodes field's value.
-func (s *EventTypeFilter) SetEventTypeCodes(v []*string) *EventTypeFilter {
+func (s *EventTypeFilter) SetEventTypeCodes(v []string) *EventTypeFilter {
 	s.EventTypeCodes = v
 	return s
 }
 
 // SetServices sets the Services field's value.
-func (s *EventTypeFilter) SetServices(v []*string) *EventTypeFilter {
+func (s *EventTypeFilter) SetServices(v []string) *EventTypeFilter {
 	s.Services = v
 	return s
 }

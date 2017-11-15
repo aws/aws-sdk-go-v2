@@ -5662,7 +5662,7 @@ type CreateApiKeyInput struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.
-	StageKeys []*StageKey `locationName:"stageKeys" type:"list"`
+	StageKeys []StageKey `locationName:"stageKeys" type:"list"`
 
 	// Specifies a value of the API key.
 	Value *string `locationName:"value" type:"string"`
@@ -5709,7 +5709,7 @@ func (s *CreateApiKeyInput) SetName(v string) *CreateApiKeyInput {
 }
 
 // SetStageKeys sets the StageKeys field's value.
-func (s *CreateApiKeyInput) SetStageKeys(v []*StageKey) *CreateApiKeyInput {
+func (s *CreateApiKeyInput) SetStageKeys(v []StageKey) *CreateApiKeyInput {
 	s.StageKeys = v
 	return s
 }
@@ -5787,7 +5787,7 @@ type CreateAuthorizerInput struct {
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.
 	// Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
 	// For a TOKEN or REQUEST authorizer, this is not defined.
-	ProviderARNs []*string `locationName:"providerARNs" type:"list"`
+	ProviderARNs []string `locationName:"providerARNs" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -5877,7 +5877,7 @@ func (s *CreateAuthorizerInput) SetName(v string) *CreateAuthorizerInput {
 }
 
 // SetProviderARNs sets the ProviderARNs field's value.
-func (s *CreateAuthorizerInput) SetProviderARNs(v []*string) *CreateAuthorizerInput {
+func (s *CreateAuthorizerInput) SetProviderARNs(v []string) *CreateAuthorizerInput {
 	s.ProviderARNs = v
 	return s
 }
@@ -6000,7 +6000,7 @@ type CreateDeploymentInput struct {
 	// A map that defines the stage variables for the Stage resource that is associated
 	// with the new deployment. Variable names can have alphanumeric and underscore
 	// characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
-	Variables map[string]*string `locationName:"variables" type:"map"`
+	Variables map[string]string `locationName:"variables" type:"map"`
 }
 
 // String returns the string representation
@@ -6064,7 +6064,7 @@ func (s *CreateDeploymentInput) SetStageName(v string) *CreateDeploymentInput {
 }
 
 // SetVariables sets the Variables field's value.
-func (s *CreateDeploymentInput) SetVariables(v map[string]*string) *CreateDeploymentInput {
+func (s *CreateDeploymentInput) SetVariables(v map[string]string) *CreateDeploymentInput {
 	s.Variables = v
 	return s
 }
@@ -6546,7 +6546,7 @@ type CreateRestApiInput struct {
 
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string `locationName:"binaryMediaTypes" type:"list"`
+	BinaryMediaTypes []string `locationName:"binaryMediaTypes" type:"list"`
 
 	// The ID of the RestApi that you want to clone from.
 	CloneFrom *string `locationName:"cloneFrom" type:"string"`
@@ -6588,7 +6588,7 @@ func (s *CreateRestApiInput) Validate() error {
 }
 
 // SetBinaryMediaTypes sets the BinaryMediaTypes field's value.
-func (s *CreateRestApiInput) SetBinaryMediaTypes(v []*string) *CreateRestApiInput {
+func (s *CreateRestApiInput) SetBinaryMediaTypes(v []string) *CreateRestApiInput {
 	s.BinaryMediaTypes = v
 	return s
 }
@@ -6651,7 +6651,7 @@ type CreateStageInput struct {
 	// A map that defines the stage variables for the new Stage resource. Variable
 	// names can have alphanumeric and underscore characters, and the values must
 	// match [A-Za-z0-9-._~:/?#&=,]+.
-	Variables map[string]*string `locationName:"variables" type:"map"`
+	Variables map[string]string `locationName:"variables" type:"map"`
 }
 
 // String returns the string representation
@@ -6729,7 +6729,7 @@ func (s *CreateStageInput) SetStageName(v string) *CreateStageInput {
 }
 
 // SetVariables sets the Variables field's value.
-func (s *CreateStageInput) SetVariables(v map[string]*string) *CreateStageInput {
+func (s *CreateStageInput) SetVariables(v map[string]string) *CreateStageInput {
 	s.Variables = v
 	return s
 }
@@ -6741,7 +6741,7 @@ type CreateUsagePlanInput struct {
 	_ struct{} `type:"structure"`
 
 	// The associated API stages of the usage plan.
-	ApiStages []*ApiStage `locationName:"apiStages" type:"list"`
+	ApiStages []ApiStage `locationName:"apiStages" type:"list"`
 
 	// The description of the usage plan.
 	Description *string `locationName:"description" type:"string"`
@@ -6783,7 +6783,7 @@ func (s *CreateUsagePlanInput) Validate() error {
 }
 
 // SetApiStages sets the ApiStages field's value.
-func (s *CreateUsagePlanInput) SetApiStages(v []*ApiStage) *CreateUsagePlanInput {
+func (s *CreateUsagePlanInput) SetApiStages(v []ApiStage) *CreateUsagePlanInput {
 	s.ApiStages = v
 	return s
 }
@@ -8698,13 +8698,13 @@ type GetApiKeysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateApiKeyOutput `locationName:"item" type:"list"`
+	Items []UpdateApiKeyOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 
 	// A list of warning messages logged during the import of API keys when the
 	// failOnWarnings option is set to true.
-	Warnings []*string `locationName:"warnings" type:"list"`
+	Warnings []string `locationName:"warnings" type:"list"`
 }
 
 // String returns the string representation
@@ -8718,7 +8718,7 @@ func (s GetApiKeysOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetApiKeysOutput) SetItems(v []*UpdateApiKeyOutput) *GetApiKeysOutput {
+func (s *GetApiKeysOutput) SetItems(v []UpdateApiKeyOutput) *GetApiKeysOutput {
 	s.Items = v
 	return s
 }
@@ -8730,7 +8730,7 @@ func (s *GetApiKeysOutput) SetPosition(v string) *GetApiKeysOutput {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *GetApiKeysOutput) SetWarnings(v []*string) *GetApiKeysOutput {
+func (s *GetApiKeysOutput) SetWarnings(v []string) *GetApiKeysOutput {
 	s.Warnings = v
 	return s
 }
@@ -8855,7 +8855,7 @@ type GetAuthorizersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateAuthorizerOutput `locationName:"item" type:"list"`
+	Items []UpdateAuthorizerOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -8871,7 +8871,7 @@ func (s GetAuthorizersOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetAuthorizersOutput) SetItems(v []*UpdateAuthorizerOutput) *GetAuthorizersOutput {
+func (s *GetAuthorizersOutput) SetItems(v []UpdateAuthorizerOutput) *GetAuthorizersOutput {
 	s.Items = v
 	return s
 }
@@ -9006,7 +9006,7 @@ type GetBasePathMappingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateBasePathMappingOutput `locationName:"item" type:"list"`
+	Items []UpdateBasePathMappingOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -9022,7 +9022,7 @@ func (s GetBasePathMappingsOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetBasePathMappingsOutput) SetItems(v []*UpdateBasePathMappingOutput) *GetBasePathMappingsOutput {
+func (s *GetBasePathMappingsOutput) SetItems(v []UpdateBasePathMappingOutput) *GetBasePathMappingsOutput {
 	s.Items = v
 	return s
 }
@@ -9114,7 +9114,7 @@ type GetClientCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateClientCertificateOutput `locationName:"item" type:"list"`
+	Items []UpdateClientCertificateOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -9130,7 +9130,7 @@ func (s GetClientCertificatesOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetClientCertificatesOutput) SetItems(v []*UpdateClientCertificateOutput) *GetClientCertificatesOutput {
+func (s *GetClientCertificatesOutput) SetItems(v []UpdateClientCertificateOutput) *GetClientCertificatesOutput {
 	s.Items = v
 	return s
 }
@@ -9157,7 +9157,7 @@ type GetDeploymentInput struct {
 	// for the list. Currently, this request supports only retrieval of the embedded
 	// API summary this way. Hence, the parameter value must be a single-valued
 	// list containing only the "apisummary" string. For example, GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
-	Embed []*string `location:"querystring" locationName:"embed" type:"list"`
+	Embed []string `location:"querystring" locationName:"embed" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -9200,7 +9200,7 @@ func (s *GetDeploymentInput) SetDeploymentId(v string) *GetDeploymentInput {
 }
 
 // SetEmbed sets the Embed field's value.
-func (s *GetDeploymentInput) SetEmbed(v []*string) *GetDeploymentInput {
+func (s *GetDeploymentInput) SetEmbed(v []string) *GetDeploymentInput {
 	s.Embed = v
 	return s
 }
@@ -9286,7 +9286,7 @@ type GetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateDeploymentOutput `locationName:"item" type:"list"`
+	Items []UpdateDeploymentOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -9302,7 +9302,7 @@ func (s GetDeploymentsOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetDeploymentsOutput) SetItems(v []*UpdateDeploymentOutput) *GetDeploymentsOutput {
+func (s *GetDeploymentsOutput) SetItems(v []UpdateDeploymentOutput) *GetDeploymentsOutput {
 	s.Items = v
 	return s
 }
@@ -9461,7 +9461,7 @@ type GetDocumentationPartsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateDocumentationPartOutput `locationName:"item" type:"list"`
+	Items []UpdateDocumentationPartOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -9477,7 +9477,7 @@ func (s GetDocumentationPartsOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetDocumentationPartsOutput) SetItems(v []*UpdateDocumentationPartOutput) *GetDocumentationPartsOutput {
+func (s *GetDocumentationPartsOutput) SetItems(v []UpdateDocumentationPartOutput) *GetDocumentationPartsOutput {
 	s.Items = v
 	return s
 }
@@ -9612,7 +9612,7 @@ type GetDocumentationVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateDocumentationVersionOutput `locationName:"item" type:"list"`
+	Items []UpdateDocumentationVersionOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -9628,7 +9628,7 @@ func (s GetDocumentationVersionsOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetDocumentationVersionsOutput) SetItems(v []*UpdateDocumentationVersionOutput) *GetDocumentationVersionsOutput {
+func (s *GetDocumentationVersionsOutput) SetItems(v []UpdateDocumentationVersionOutput) *GetDocumentationVersionsOutput {
 	s.Items = v
 	return s
 }
@@ -9720,7 +9720,7 @@ type GetDomainNamesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateDomainNameOutput `locationName:"item" type:"list"`
+	Items []UpdateDomainNameOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -9736,7 +9736,7 @@ func (s GetDomainNamesOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetDomainNamesOutput) SetItems(v []*UpdateDomainNameOutput) *GetDomainNamesOutput {
+func (s *GetDomainNamesOutput) SetItems(v []UpdateDomainNameOutput) *GetDomainNamesOutput {
 	s.Items = v
 	return s
 }
@@ -9768,7 +9768,7 @@ type GetExportInput struct {
 	// will export the API with x-amazon-apigateway-authorizer extensions. postman
 	// will export the API with Postman extensions, allowing for import to the Postman
 	// tool
-	Parameters map[string]*string `location:"querystring" locationName:"parameters" type:"map"`
+	Parameters map[string]string `location:"querystring" locationName:"parameters" type:"map"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -9826,7 +9826,7 @@ func (s *GetExportInput) SetExportType(v string) *GetExportInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *GetExportInput) SetParameters(v map[string]*string) *GetExportInput {
+func (s *GetExportInput) SetParameters(v map[string]string) *GetExportInput {
 	s.Parameters = v
 	return s
 }
@@ -10187,7 +10187,7 @@ type GetGatewayResponsesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the entire collection, because of no pagination support.
-	Items []*UpdateGatewayResponseOutput `locationName:"item" type:"list"`
+	Items []UpdateGatewayResponseOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -10203,7 +10203,7 @@ func (s GetGatewayResponsesOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetGatewayResponsesOutput) SetItems(v []*UpdateGatewayResponseOutput) *GetGatewayResponsesOutput {
+func (s *GetGatewayResponsesOutput) SetItems(v []UpdateGatewayResponseOutput) *GetGatewayResponsesOutput {
 	s.Items = v
 	return s
 }
@@ -10738,7 +10738,7 @@ type GetModelsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateModelOutput `locationName:"item" type:"list"`
+	Items []UpdateModelOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -10754,7 +10754,7 @@ func (s GetModelsOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetModelsOutput) SetItems(v []*UpdateModelOutput) *GetModelsOutput {
+func (s *GetModelsOutput) SetItems(v []UpdateModelOutput) *GetModelsOutput {
 	s.Items = v
 	return s
 }
@@ -10889,7 +10889,7 @@ type GetRequestValidatorsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateRequestValidatorOutput `locationName:"item" type:"list"`
+	Items []UpdateRequestValidatorOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -10905,7 +10905,7 @@ func (s GetRequestValidatorsOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetRequestValidatorsOutput) SetItems(v []*UpdateRequestValidatorOutput) *GetRequestValidatorsOutput {
+func (s *GetRequestValidatorsOutput) SetItems(v []UpdateRequestValidatorOutput) *GetRequestValidatorsOutput {
 	s.Items = v
 	return s
 }
@@ -10926,7 +10926,7 @@ type GetResourceInput struct {
 	// of the embedded Method resources this way. The query parameter value must
 	// be a single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
-	Embed []*string `location:"querystring" locationName:"embed" type:"list"`
+	Embed []string `location:"querystring" locationName:"embed" type:"list"`
 
 	// The identifier for the Resource resource.
 	//
@@ -10968,7 +10968,7 @@ func (s *GetResourceInput) Validate() error {
 }
 
 // SetEmbed sets the Embed field's value.
-func (s *GetResourceInput) SetEmbed(v []*string) *GetResourceInput {
+func (s *GetResourceInput) SetEmbed(v []string) *GetResourceInput {
 	s.Embed = v
 	return s
 }
@@ -10995,7 +10995,7 @@ type GetResourcesInput struct {
 	// of the embedded Method resources this way. The query parameter value must
 	// be a single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources?embed=methods.
-	Embed []*string `location:"querystring" locationName:"embed" type:"list"`
+	Embed []string `location:"querystring" locationName:"embed" type:"list"`
 
 	// The maximum number of returned results per page. The value is 25 by default
 	// and could be between 1 - 500.
@@ -11035,7 +11035,7 @@ func (s *GetResourcesInput) Validate() error {
 }
 
 // SetEmbed sets the Embed field's value.
-func (s *GetResourcesInput) SetEmbed(v []*string) *GetResourcesInput {
+func (s *GetResourcesInput) SetEmbed(v []string) *GetResourcesInput {
 	s.Embed = v
 	return s
 }
@@ -11065,7 +11065,7 @@ type GetResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateResourceOutput `locationName:"item" type:"list"`
+	Items []UpdateResourceOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -11081,7 +11081,7 @@ func (s GetResourcesOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetResourcesOutput) SetItems(v []*UpdateResourceOutput) *GetResourcesOutput {
+func (s *GetResourcesOutput) SetItems(v []UpdateResourceOutput) *GetResourcesOutput {
 	s.Items = v
 	return s
 }
@@ -11174,7 +11174,7 @@ type GetRestApisOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateRestApiOutput `locationName:"item" type:"list"`
+	Items []UpdateRestApiOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -11190,7 +11190,7 @@ func (s GetRestApisOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetRestApisOutput) SetItems(v []*UpdateRestApiOutput) *GetRestApisOutput {
+func (s *GetRestApisOutput) SetItems(v []UpdateRestApiOutput) *GetRestApisOutput {
 	s.Items = v
 	return s
 }
@@ -11210,7 +11210,7 @@ type GetSdkInput struct {
 	// is required. For sdkType of android, parameters named groupId, artifactId,
 	// artifactVersion, and invokerPackage are required. For sdkType of java, parameters
 	// named serviceName and javaPackageName are required.
-	Parameters map[string]*string `location:"querystring" locationName:"parameters" type:"map"`
+	Parameters map[string]string `location:"querystring" locationName:"parameters" type:"map"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -11262,7 +11262,7 @@ func (s *GetSdkInput) Validate() error {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *GetSdkInput) SetParameters(v map[string]*string) *GetSdkInput {
+func (s *GetSdkInput) SetParameters(v map[string]string) *GetSdkInput {
 	s.Parameters = v
 	return s
 }
@@ -11372,7 +11372,7 @@ type GetSdkTypeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of configuration properties of an SdkType.
-	ConfigurationProperties []*SdkConfigurationProperty `locationName:"configurationProperties" type:"list"`
+	ConfigurationProperties []SdkConfigurationProperty `locationName:"configurationProperties" type:"list"`
 
 	// The description of an SdkType.
 	Description *string `locationName:"description" type:"string"`
@@ -11395,7 +11395,7 @@ func (s GetSdkTypeOutput) GoString() string {
 }
 
 // SetConfigurationProperties sets the ConfigurationProperties field's value.
-func (s *GetSdkTypeOutput) SetConfigurationProperties(v []*SdkConfigurationProperty) *GetSdkTypeOutput {
+func (s *GetSdkTypeOutput) SetConfigurationProperties(v []SdkConfigurationProperty) *GetSdkTypeOutput {
 	s.ConfigurationProperties = v
 	return s
 }
@@ -11456,7 +11456,7 @@ type GetSdkTypesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*GetSdkTypeOutput `locationName:"item" type:"list"`
+	Items []GetSdkTypeOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -11472,7 +11472,7 @@ func (s GetSdkTypesOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetSdkTypesOutput) SetItems(v []*GetSdkTypeOutput) *GetSdkTypesOutput {
+func (s *GetSdkTypesOutput) SetItems(v []GetSdkTypeOutput) *GetSdkTypesOutput {
 	s.Items = v
 	return s
 }
@@ -11594,7 +11594,7 @@ type GetStagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Item []*UpdateStageOutput `locationName:"item" type:"list"`
+	Item []UpdateStageOutput `locationName:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -11608,7 +11608,7 @@ func (s GetStagesOutput) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *GetStagesOutput) SetItem(v []*UpdateStageOutput) *GetStagesOutput {
+func (s *GetStagesOutput) SetItem(v []UpdateStageOutput) *GetStagesOutput {
 	s.Item = v
 	return s
 }
@@ -11941,7 +11941,7 @@ type GetUsagePlanKeysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*GetUsagePlanKeyOutput `locationName:"item" type:"list"`
+	Items []GetUsagePlanKeyOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -11957,7 +11957,7 @@ func (s GetUsagePlanKeysOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetUsagePlanKeysOutput) SetItems(v []*GetUsagePlanKeyOutput) *GetUsagePlanKeysOutput {
+func (s *GetUsagePlanKeysOutput) SetItems(v []GetUsagePlanKeyOutput) *GetUsagePlanKeysOutput {
 	s.Items = v
 	return s
 }
@@ -12017,7 +12017,7 @@ type GetUsagePlansOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The current page of elements from this collection.
-	Items []*UpdateUsagePlanOutput `locationName:"item" type:"list"`
+	Items []UpdateUsagePlanOutput `locationName:"item" type:"list"`
 
 	Position *string `locationName:"position" type:"string"`
 }
@@ -12033,7 +12033,7 @@ func (s GetUsagePlansOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *GetUsagePlansOutput) SetItems(v []*UpdateUsagePlanOutput) *GetUsagePlansOutput {
+func (s *GetUsagePlansOutput) SetItems(v []UpdateUsagePlanOutput) *GetUsagePlansOutput {
 	s.Items = v
 	return s
 }
@@ -12116,10 +12116,10 @@ type ImportApiKeysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of all the ApiKey identifiers.
-	Ids []*string `locationName:"ids" type:"list"`
+	Ids []string `locationName:"ids" type:"list"`
 
 	// A list of warning messages.
-	Warnings []*string `locationName:"warnings" type:"list"`
+	Warnings []string `locationName:"warnings" type:"list"`
 }
 
 // String returns the string representation
@@ -12133,13 +12133,13 @@ func (s ImportApiKeysOutput) GoString() string {
 }
 
 // SetIds sets the Ids field's value.
-func (s *ImportApiKeysOutput) SetIds(v []*string) *ImportApiKeysOutput {
+func (s *ImportApiKeysOutput) SetIds(v []string) *ImportApiKeysOutput {
 	s.Ids = v
 	return s
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *ImportApiKeysOutput) SetWarnings(v []*string) *ImportApiKeysOutput {
+func (s *ImportApiKeysOutput) SetWarnings(v []string) *ImportApiKeysOutput {
 	s.Warnings = v
 	return s
 }
@@ -12233,10 +12233,10 @@ type ImportDocumentationPartsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the returned documentation part identifiers.
-	Ids []*string `locationName:"ids" type:"list"`
+	Ids []string `locationName:"ids" type:"list"`
 
 	// A list of warning messages reported during import of documentation parts.
-	Warnings []*string `locationName:"warnings" type:"list"`
+	Warnings []string `locationName:"warnings" type:"list"`
 }
 
 // String returns the string representation
@@ -12250,13 +12250,13 @@ func (s ImportDocumentationPartsOutput) GoString() string {
 }
 
 // SetIds sets the Ids field's value.
-func (s *ImportDocumentationPartsOutput) SetIds(v []*string) *ImportDocumentationPartsOutput {
+func (s *ImportDocumentationPartsOutput) SetIds(v []string) *ImportDocumentationPartsOutput {
 	s.Ids = v
 	return s
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *ImportDocumentationPartsOutput) SetWarnings(v []*string) *ImportDocumentationPartsOutput {
+func (s *ImportDocumentationPartsOutput) SetWarnings(v []string) *ImportDocumentationPartsOutput {
 	s.Warnings = v
 	return s
 }
@@ -12281,7 +12281,7 @@ type ImportRestApiInput struct {
 	// DocumentationParts from an imported API, set ignore=documentation as a parameters
 	// value, as in the AWS CLI command of aws apigateway import-rest-api --parameters
 	// ignore=documentation --body 'file:///path/to/imported-api-body.json.
-	Parameters map[string]*string `location:"querystring" locationName:"parameters" type:"map"`
+	Parameters map[string]string `location:"querystring" locationName:"parameters" type:"map"`
 }
 
 // String returns the string representation
@@ -12321,7 +12321,7 @@ func (s *ImportRestApiInput) SetFailOnWarnings(v bool) *ImportRestApiInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ImportRestApiInput) SetParameters(v map[string]*string) *ImportRestApiInput {
+func (s *ImportRestApiInput) SetParameters(v map[string]string) *ImportRestApiInput {
 	s.Parameters = v
 	return s
 }
@@ -12561,11 +12561,11 @@ type PutGatewayResponseInput struct {
 
 	// Response parameters (paths, query strings and headers) of the GatewayResponse
 	// as a string-to-string map of key-value pairs.
-	ResponseParameters map[string]*string `locationName:"responseParameters" type:"map"`
+	ResponseParameters map[string]string `locationName:"responseParameters" type:"map"`
 
 	// Response templates of the GatewayResponse as a string-to-string map of key-value
 	// pairs.
-	ResponseTemplates map[string]*string `locationName:"responseTemplates" type:"map"`
+	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
 
 	// The response type of the associated GatewayResponse. Valid values are ACCESS_DENIED
 	//
@@ -12629,13 +12629,13 @@ func (s *PutGatewayResponseInput) Validate() error {
 }
 
 // SetResponseParameters sets the ResponseParameters field's value.
-func (s *PutGatewayResponseInput) SetResponseParameters(v map[string]*string) *PutGatewayResponseInput {
+func (s *PutGatewayResponseInput) SetResponseParameters(v map[string]string) *PutGatewayResponseInput {
 	s.ResponseParameters = v
 	return s
 }
 
 // SetResponseTemplates sets the ResponseTemplates field's value.
-func (s *PutGatewayResponseInput) SetResponseTemplates(v map[string]*string) *PutGatewayResponseInput {
+func (s *PutGatewayResponseInput) SetResponseTemplates(v map[string]string) *PutGatewayResponseInput {
 	s.ResponseTemplates = v
 	return s
 }
@@ -12663,7 +12663,7 @@ type PutIntegrationInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies a put integration input's cache key parameters.
-	CacheKeyParameters []*string `locationName:"cacheKeyParameters" type:"list"`
+	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
 	// Specifies a put integration input's cache namespace.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
@@ -12717,13 +12717,13 @@ type PutIntegrationInput struct {
 	// the back end. The method request parameter value must match the pattern of
 	// method.request.{location}.{name}, where location is querystring, path, or
 	// header and name must be a valid and unique method request parameter name.
-	RequestParameters map[string]*string `locationName:"requestParameters" type:"map"`
+	RequestParameters map[string]string `locationName:"requestParameters" type:"map"`
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the
 	// value.
-	RequestTemplates map[string]*string `locationName:"requestTemplates" type:"map"`
+	RequestTemplates map[string]string `locationName:"requestTemplates" type:"map"`
 
 	// Specifies a put integration request's resource ID.
 	//
@@ -12788,7 +12788,7 @@ func (s *PutIntegrationInput) Validate() error {
 }
 
 // SetCacheKeyParameters sets the CacheKeyParameters field's value.
-func (s *PutIntegrationInput) SetCacheKeyParameters(v []*string) *PutIntegrationInput {
+func (s *PutIntegrationInput) SetCacheKeyParameters(v []string) *PutIntegrationInput {
 	s.CacheKeyParameters = v
 	return s
 }
@@ -12830,13 +12830,13 @@ func (s *PutIntegrationInput) SetPassthroughBehavior(v string) *PutIntegrationIn
 }
 
 // SetRequestParameters sets the RequestParameters field's value.
-func (s *PutIntegrationInput) SetRequestParameters(v map[string]*string) *PutIntegrationInput {
+func (s *PutIntegrationInput) SetRequestParameters(v map[string]string) *PutIntegrationInput {
 	s.RequestParameters = v
 	return s
 }
 
 // SetRequestTemplates sets the RequestTemplates field's value.
-func (s *PutIntegrationInput) SetRequestTemplates(v map[string]*string) *PutIntegrationInput {
+func (s *PutIntegrationInput) SetRequestTemplates(v map[string]string) *PutIntegrationInput {
 	s.RequestTemplates = v
 	return s
 }
@@ -12902,10 +12902,10 @@ type PutIntegrationResponseInput struct {
 	// or integration.response.body.{JSON-expression}, where name must be a valid
 	// and unique response header name and JSON-expression a valid JSON expression
 	// without the $ prefix.
-	ResponseParameters map[string]*string `locationName:"responseParameters" type:"map"`
+	ResponseParameters map[string]string `locationName:"responseParameters" type:"map"`
 
 	// Specifies a put integration response's templates.
-	ResponseTemplates map[string]*string `locationName:"responseTemplates" type:"map"`
+	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -12977,13 +12977,13 @@ func (s *PutIntegrationResponseInput) SetResourceId(v string) *PutIntegrationRes
 }
 
 // SetResponseParameters sets the ResponseParameters field's value.
-func (s *PutIntegrationResponseInput) SetResponseParameters(v map[string]*string) *PutIntegrationResponseInput {
+func (s *PutIntegrationResponseInput) SetResponseParameters(v map[string]string) *PutIntegrationResponseInput {
 	s.ResponseParameters = v
 	return s
 }
 
 // SetResponseTemplates sets the ResponseTemplates field's value.
-func (s *PutIntegrationResponseInput) SetResponseTemplates(v map[string]*string) *PutIntegrationResponseInput {
+func (s *PutIntegrationResponseInput) SetResponseTemplates(v map[string]string) *PutIntegrationResponseInput {
 	s.ResponseTemplates = v
 	return s
 }
@@ -13037,7 +13037,7 @@ type PutMethodInput struct {
 	// Specifies the Model resources used for the request's content type. Request
 	// models are represented as a key/value map, with a content type as the key
 	// and a Model name as the value.
-	RequestModels map[string]*string `locationName:"requestModels" type:"map"`
+	RequestModels map[string]string `locationName:"requestModels" type:"map"`
 
 	// A key-value map defining required or optional method request parameters that
 	// can be accepted by Amazon API Gateway. A key defines a method request parameter
@@ -13047,7 +13047,7 @@ type PutMethodInput struct {
 	// the parameter is required (true) or optional (false). The method request
 	// parameter names defined here are available in Integration to be mapped to
 	// integration request parameters or body-mapping templates.
-	RequestParameters map[string]*bool `locationName:"requestParameters" type:"map"`
+	RequestParameters map[string]bool `locationName:"requestParameters" type:"map"`
 
 	// The identifier of a RequestValidator for validating the method request.
 	RequestValidatorId *string `locationName:"requestValidatorId" type:"string"`
@@ -13130,13 +13130,13 @@ func (s *PutMethodInput) SetOperationName(v string) *PutMethodInput {
 }
 
 // SetRequestModels sets the RequestModels field's value.
-func (s *PutMethodInput) SetRequestModels(v map[string]*string) *PutMethodInput {
+func (s *PutMethodInput) SetRequestModels(v map[string]string) *PutMethodInput {
 	s.RequestModels = v
 	return s
 }
 
 // SetRequestParameters sets the RequestParameters field's value.
-func (s *PutMethodInput) SetRequestParameters(v map[string]*bool) *PutMethodInput {
+func (s *PutMethodInput) SetRequestParameters(v map[string]bool) *PutMethodInput {
 	s.RequestParameters = v
 	return s
 }
@@ -13176,7 +13176,7 @@ type PutMethodResponseInput struct {
 	// Specifies the Model resources used for the response's content type. Response
 	// models are represented as a key/value map, with a content type as the key
 	// and a Model name as the value.
-	ResponseModels map[string]*string `locationName:"responseModels" type:"map"`
+	ResponseModels map[string]string `locationName:"responseModels" type:"map"`
 
 	// A key-value map specifying required or optional response parameters that
 	// Amazon API Gateway can send back to the caller. A key defines a method response
@@ -13189,7 +13189,7 @@ type PutMethodResponseInput struct {
 	// value enclosed within a pair of single quotes (e.g., 'application/json'),
 	// or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression},
 	// where JSON-expression is a valid JSON expression without the $ prefix.)
-	ResponseParameters map[string]*bool `locationName:"responseParameters" type:"map"`
+	ResponseParameters map[string]bool `locationName:"responseParameters" type:"map"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -13251,13 +13251,13 @@ func (s *PutMethodResponseInput) SetResourceId(v string) *PutMethodResponseInput
 }
 
 // SetResponseModels sets the ResponseModels field's value.
-func (s *PutMethodResponseInput) SetResponseModels(v map[string]*string) *PutMethodResponseInput {
+func (s *PutMethodResponseInput) SetResponseModels(v map[string]string) *PutMethodResponseInput {
 	s.ResponseModels = v
 	return s
 }
 
 // SetResponseParameters sets the ResponseParameters field's value.
-func (s *PutMethodResponseInput) SetResponseParameters(v map[string]*bool) *PutMethodResponseInput {
+func (s *PutMethodResponseInput) SetResponseParameters(v map[string]bool) *PutMethodResponseInput {
 	s.ResponseParameters = v
 	return s
 }
@@ -13298,7 +13298,7 @@ type PutRestApiInput struct {
 	// DocumentationParts from an imported API, set ignore=documentation as a parameters
 	// value, as in the AWS CLI command of aws apigateway import-rest-api --parameters
 	// ignore=documentation --body 'file:///path/to/imported-api-body.json.
-	Parameters map[string]*string `location:"querystring" locationName:"parameters" type:"map"`
+	Parameters map[string]string `location:"querystring" locationName:"parameters" type:"map"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -13353,7 +13353,7 @@ func (s *PutRestApiInput) SetMode(v PutMode) *PutRestApiInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *PutRestApiInput) SetParameters(v map[string]*string) *PutRestApiInput {
+func (s *PutRestApiInput) SetParameters(v map[string]string) *PutRestApiInput {
 	s.Parameters = v
 	return s
 }
@@ -13507,7 +13507,7 @@ type TestInvokeAuthorizerInput struct {
 	_ struct{} `type:"structure"`
 
 	// [Optional] A key-value map of additional context variables.
-	AdditionalContext map[string]*string `locationName:"additionalContext" type:"map"`
+	AdditionalContext map[string]string `locationName:"additionalContext" type:"map"`
 
 	// Specifies a test invoke authorizer request's Authorizer ID.
 	//
@@ -13520,7 +13520,7 @@ type TestInvokeAuthorizerInput struct {
 	// [Required] A key-value map of headers to simulate an incoming invocation
 	// request. This is where the incoming authorization token, or identity source,
 	// should be specified.
-	Headers map[string]*string `locationName:"headers" type:"map"`
+	Headers map[string]string `locationName:"headers" type:"map"`
 
 	// [Optional] The URI path, including query string, of the simulated invocation
 	// request. Use this to specify path parameters and query string parameters.
@@ -13533,7 +13533,7 @@ type TestInvokeAuthorizerInput struct {
 
 	// A key-value map of stage variables to simulate an invocation on a deployed
 	// Stage.
-	StageVariables map[string]*string `locationName:"stageVariables" type:"map"`
+	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
 }
 
 // String returns the string representation
@@ -13565,7 +13565,7 @@ func (s *TestInvokeAuthorizerInput) Validate() error {
 }
 
 // SetAdditionalContext sets the AdditionalContext field's value.
-func (s *TestInvokeAuthorizerInput) SetAdditionalContext(v map[string]*string) *TestInvokeAuthorizerInput {
+func (s *TestInvokeAuthorizerInput) SetAdditionalContext(v map[string]string) *TestInvokeAuthorizerInput {
 	s.AdditionalContext = v
 	return s
 }
@@ -13583,7 +13583,7 @@ func (s *TestInvokeAuthorizerInput) SetBody(v string) *TestInvokeAuthorizerInput
 }
 
 // SetHeaders sets the Headers field's value.
-func (s *TestInvokeAuthorizerInput) SetHeaders(v map[string]*string) *TestInvokeAuthorizerInput {
+func (s *TestInvokeAuthorizerInput) SetHeaders(v map[string]string) *TestInvokeAuthorizerInput {
 	s.Headers = v
 	return s
 }
@@ -13601,7 +13601,7 @@ func (s *TestInvokeAuthorizerInput) SetRestApiId(v string) *TestInvokeAuthorizer
 }
 
 // SetStageVariables sets the StageVariables field's value.
-func (s *TestInvokeAuthorizerInput) SetStageVariables(v map[string]*string) *TestInvokeAuthorizerInput {
+func (s *TestInvokeAuthorizerInput) SetStageVariables(v map[string]string) *TestInvokeAuthorizerInput {
 	s.StageVariables = v
 	return s
 }
@@ -13610,12 +13610,12 @@ func (s *TestInvokeAuthorizerInput) SetStageVariables(v map[string]*string) *Tes
 type TestInvokeAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
-	Authorization map[string][]*string `locationName:"authorization" type:"map"`
+	Authorization map[string][]string `locationName:"authorization" type:"map"`
 
 	// The open identity claims (http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims),
 	// with any supported custom attributes, returned from the Cognito Your User
 	// Pool configured for the API.
-	Claims map[string]*string `locationName:"claims" type:"map"`
+	Claims map[string]string `locationName:"claims" type:"map"`
 
 	// The HTTP status code that the client would have received. Value is 0 if the
 	// authorizer succeeded.
@@ -13645,13 +13645,13 @@ func (s TestInvokeAuthorizerOutput) GoString() string {
 }
 
 // SetAuthorization sets the Authorization field's value.
-func (s *TestInvokeAuthorizerOutput) SetAuthorization(v map[string][]*string) *TestInvokeAuthorizerOutput {
+func (s *TestInvokeAuthorizerOutput) SetAuthorization(v map[string][]string) *TestInvokeAuthorizerOutput {
 	s.Authorization = v
 	return s
 }
 
 // SetClaims sets the Claims field's value.
-func (s *TestInvokeAuthorizerOutput) SetClaims(v map[string]*string) *TestInvokeAuthorizerOutput {
+func (s *TestInvokeAuthorizerOutput) SetClaims(v map[string]string) *TestInvokeAuthorizerOutput {
 	s.Claims = v
 	return s
 }
@@ -13699,7 +13699,7 @@ type TestInvokeMethodInput struct {
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
 	// A key-value map of headers to simulate an incoming invocation request.
-	Headers map[string]*string `locationName:"headers" type:"map"`
+	Headers map[string]string `locationName:"headers" type:"map"`
 
 	// Specifies a test invoke method request's HTTP method.
 	//
@@ -13722,7 +13722,7 @@ type TestInvokeMethodInput struct {
 
 	// A key-value map of stage variables to simulate an invocation on a deployed
 	// Stage.
-	StageVariables map[string]*string `locationName:"stageVariables" type:"map"`
+	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
 }
 
 // String returns the string representation
@@ -13770,7 +13770,7 @@ func (s *TestInvokeMethodInput) SetClientCertificateId(v string) *TestInvokeMeth
 }
 
 // SetHeaders sets the Headers field's value.
-func (s *TestInvokeMethodInput) SetHeaders(v map[string]*string) *TestInvokeMethodInput {
+func (s *TestInvokeMethodInput) SetHeaders(v map[string]string) *TestInvokeMethodInput {
 	s.Headers = v
 	return s
 }
@@ -13800,7 +13800,7 @@ func (s *TestInvokeMethodInput) SetRestApiId(v string) *TestInvokeMethodInput {
 }
 
 // SetStageVariables sets the StageVariables field's value.
-func (s *TestInvokeMethodInput) SetStageVariables(v map[string]*string) *TestInvokeMethodInput {
+func (s *TestInvokeMethodInput) SetStageVariables(v map[string]string) *TestInvokeMethodInput {
 	s.StageVariables = v
 	return s
 }
@@ -13815,7 +13815,7 @@ type TestInvokeMethodOutput struct {
 	Body *string `locationName:"body" type:"string"`
 
 	// The headers of the HTTP response.
-	Headers map[string]*string `locationName:"headers" type:"map"`
+	Headers map[string]string `locationName:"headers" type:"map"`
 
 	// The execution latency of the test invoke request.
 	Latency *int64 `locationName:"latency" type:"long"`
@@ -13844,7 +13844,7 @@ func (s *TestInvokeMethodOutput) SetBody(v string) *TestInvokeMethodOutput {
 }
 
 // SetHeaders sets the Headers field's value.
-func (s *TestInvokeMethodOutput) SetHeaders(v map[string]*string) *TestInvokeMethodOutput {
+func (s *TestInvokeMethodOutput) SetHeaders(v map[string]string) *TestInvokeMethodOutput {
 	s.Headers = v
 	return s
 }
@@ -13909,7 +13909,7 @@ type UpdateAccountInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 }
 
 // String returns the string representation
@@ -13923,7 +13923,7 @@ func (s UpdateAccountInput) GoString() string {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateAccountInput) SetPatchOperations(v []*PatchOperation) *UpdateAccountInput {
+func (s *UpdateAccountInput) SetPatchOperations(v []PatchOperation) *UpdateAccountInput {
 	s.PatchOperations = v
 	return s
 }
@@ -13975,7 +13975,7 @@ type UpdateAccountOutput struct {
 
 	// A list of features supported for the account. When usage plans are enabled,
 	// the features list will include an entry of "UsagePlans".
-	Features []*string `locationName:"features" type:"list"`
+	Features []string `locationName:"features" type:"list"`
 
 	// Specifies the API request limits configured for the current Account.
 	ThrottleSettings *ThrottleSettings `locationName:"throttleSettings" type:"structure"`
@@ -14004,7 +14004,7 @@ func (s *UpdateAccountOutput) SetCloudwatchRoleArn(v string) *UpdateAccountOutpu
 }
 
 // SetFeatures sets the Features field's value.
-func (s *UpdateAccountOutput) SetFeatures(v []*string) *UpdateAccountOutput {
+func (s *UpdateAccountOutput) SetFeatures(v []string) *UpdateAccountOutput {
 	s.Features = v
 	return s
 }
@@ -14026,7 +14026,7 @@ type UpdateApiKeyInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 }
 
 // String returns the string representation
@@ -14060,7 +14060,7 @@ func (s *UpdateApiKeyInput) SetApiKey(v string) *UpdateApiKeyInput {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateApiKeyInput) SetPatchOperations(v []*PatchOperation) *UpdateApiKeyInput {
+func (s *UpdateApiKeyInput) SetPatchOperations(v []PatchOperation) *UpdateApiKeyInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14097,7 +14097,7 @@ type UpdateApiKeyOutput struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// A list of Stage resources that are associated with the ApiKey resource.
-	StageKeys []*string `locationName:"stageKeys" type:"list"`
+	StageKeys []string `locationName:"stageKeys" type:"list"`
 
 	// The value of the API Key.
 	Value *string `locationName:"value" type:"string"`
@@ -14156,7 +14156,7 @@ func (s *UpdateApiKeyOutput) SetName(v string) *UpdateApiKeyOutput {
 }
 
 // SetStageKeys sets the StageKeys field's value.
-func (s *UpdateApiKeyOutput) SetStageKeys(v []*string) *UpdateApiKeyOutput {
+func (s *UpdateApiKeyOutput) SetStageKeys(v []string) *UpdateApiKeyOutput {
 	s.StageKeys = v
 	return s
 }
@@ -14178,7 +14178,7 @@ type UpdateAuthorizerInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -14221,7 +14221,7 @@ func (s *UpdateAuthorizerInput) SetAuthorizerId(v string) *UpdateAuthorizerInput
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateAuthorizerInput) SetPatchOperations(v []*PatchOperation) *UpdateAuthorizerInput {
+func (s *UpdateAuthorizerInput) SetPatchOperations(v []PatchOperation) *UpdateAuthorizerInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14303,7 +14303,7 @@ type UpdateAuthorizerOutput struct {
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.
 	// Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
 	// For a TOKEN or REQUEST authorizer, this is not defined.
-	ProviderARNs []*string `locationName:"providerARNs" type:"list"`
+	ProviderARNs []string `locationName:"providerARNs" type:"list"`
 
 	// [Required] The authorizer type. Valid values are TOKEN for a Lambda function
 	// using a single authorization token submitted in a custom header, REQUEST
@@ -14371,7 +14371,7 @@ func (s *UpdateAuthorizerOutput) SetName(v string) *UpdateAuthorizerOutput {
 }
 
 // SetProviderARNs sets the ProviderARNs field's value.
-func (s *UpdateAuthorizerOutput) SetProviderARNs(v []*string) *UpdateAuthorizerOutput {
+func (s *UpdateAuthorizerOutput) SetProviderARNs(v []string) *UpdateAuthorizerOutput {
 	s.ProviderARNs = v
 	return s
 }
@@ -14398,7 +14398,7 @@ type UpdateBasePathMappingInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 }
 
 // String returns the string representation
@@ -14442,7 +14442,7 @@ func (s *UpdateBasePathMappingInput) SetDomainName(v string) *UpdateBasePathMapp
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateBasePathMappingInput) SetPatchOperations(v []*PatchOperation) *UpdateBasePathMappingInput {
+func (s *UpdateBasePathMappingInput) SetPatchOperations(v []PatchOperation) *UpdateBasePathMappingInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14506,7 +14506,7 @@ type UpdateClientCertificateInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 }
 
 // String returns the string representation
@@ -14540,7 +14540,7 @@ func (s *UpdateClientCertificateInput) SetClientCertificateId(v string) *UpdateC
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateClientCertificateInput) SetPatchOperations(v []*PatchOperation) *UpdateClientCertificateInput {
+func (s *UpdateClientCertificateInput) SetPatchOperations(v []PatchOperation) *UpdateClientCertificateInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14624,7 +14624,7 @@ type UpdateDeploymentInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -14667,7 +14667,7 @@ func (s *UpdateDeploymentInput) SetDeploymentId(v string) *UpdateDeploymentInput
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateDeploymentInput) SetPatchOperations(v []*PatchOperation) *UpdateDeploymentInput {
+func (s *UpdateDeploymentInput) SetPatchOperations(v []PatchOperation) *UpdateDeploymentInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14693,7 +14693,7 @@ type UpdateDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource
 	// was created.
-	ApiSummary map[string]map[string]*MethodSnapshot `locationName:"apiSummary" type:"map"`
+	ApiSummary map[string]map[string]MethodSnapshot `locationName:"apiSummary" type:"map"`
 
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
@@ -14716,7 +14716,7 @@ func (s UpdateDeploymentOutput) GoString() string {
 }
 
 // SetApiSummary sets the ApiSummary field's value.
-func (s *UpdateDeploymentOutput) SetApiSummary(v map[string]map[string]*MethodSnapshot) *UpdateDeploymentOutput {
+func (s *UpdateDeploymentOutput) SetApiSummary(v map[string]map[string]MethodSnapshot) *UpdateDeploymentOutput {
 	s.ApiSummary = v
 	return s
 }
@@ -14750,7 +14750,7 @@ type UpdateDocumentationPartInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// [Required] The string identifier of the associated RestApi.
 	//
@@ -14793,7 +14793,7 @@ func (s *UpdateDocumentationPartInput) SetDocumentationPartId(v string) *UpdateD
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateDocumentationPartInput) SetPatchOperations(v []*PatchOperation) *UpdateDocumentationPartInput {
+func (s *UpdateDocumentationPartInput) SetPatchOperations(v []PatchOperation) *UpdateDocumentationPartInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14882,7 +14882,7 @@ type UpdateDocumentationVersionInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// [Required] The string identifier of the associated RestApi..
 	//
@@ -14925,7 +14925,7 @@ func (s *UpdateDocumentationVersionInput) SetDocumentationVersion(v string) *Upd
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateDocumentationVersionInput) SetPatchOperations(v []*PatchOperation) *UpdateDocumentationVersionInput {
+func (s *UpdateDocumentationVersionInput) SetPatchOperations(v []PatchOperation) *UpdateDocumentationVersionInput {
 	s.PatchOperations = v
 	return s
 }
@@ -14996,7 +14996,7 @@ type UpdateDomainNameInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 }
 
 // String returns the string representation
@@ -15030,7 +15030,7 @@ func (s *UpdateDomainNameInput) SetDomainName(v string) *UpdateDomainNameInput {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateDomainNameInput) SetPatchOperations(v []*PatchOperation) *UpdateDomainNameInput {
+func (s *UpdateDomainNameInput) SetPatchOperations(v []PatchOperation) *UpdateDomainNameInput {
 	s.PatchOperations = v
 	return s
 }
@@ -15106,7 +15106,7 @@ type UpdateGatewayResponseInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The response type of the associated GatewayResponse. Valid values are ACCESS_DENIED
 	//
@@ -15167,7 +15167,7 @@ func (s *UpdateGatewayResponseInput) Validate() error {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateGatewayResponseInput) SetPatchOperations(v []*PatchOperation) *UpdateGatewayResponseInput {
+func (s *UpdateGatewayResponseInput) SetPatchOperations(v []PatchOperation) *UpdateGatewayResponseInput {
 	s.PatchOperations = v
 	return s
 }
@@ -15235,11 +15235,11 @@ type UpdateGatewayResponseOutput struct {
 
 	// Response parameters (paths, query strings and headers) of the GatewayResponse
 	// as a string-to-string map of key-value pairs.
-	ResponseParameters map[string]*string `locationName:"responseParameters" type:"map"`
+	ResponseParameters map[string]string `locationName:"responseParameters" type:"map"`
 
 	// Response templates of the GatewayResponse as a string-to-string map of key-value
 	// pairs.
-	ResponseTemplates map[string]*string `locationName:"responseTemplates" type:"map"`
+	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
 
 	// The response type of the associated GatewayResponse. Valid values are ACCESS_DENIED
 	//
@@ -15285,13 +15285,13 @@ func (s *UpdateGatewayResponseOutput) SetDefaultResponse(v bool) *UpdateGatewayR
 }
 
 // SetResponseParameters sets the ResponseParameters field's value.
-func (s *UpdateGatewayResponseOutput) SetResponseParameters(v map[string]*string) *UpdateGatewayResponseOutput {
+func (s *UpdateGatewayResponseOutput) SetResponseParameters(v map[string]string) *UpdateGatewayResponseOutput {
 	s.ResponseParameters = v
 	return s
 }
 
 // SetResponseTemplates sets the ResponseTemplates field's value.
-func (s *UpdateGatewayResponseOutput) SetResponseTemplates(v map[string]*string) *UpdateGatewayResponseOutput {
+func (s *UpdateGatewayResponseOutput) SetResponseTemplates(v map[string]string) *UpdateGatewayResponseOutput {
 	s.ResponseTemplates = v
 	return s
 }
@@ -15319,7 +15319,7 @@ type UpdateIntegrationInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// Represents an update integration request's resource identifier.
 	//
@@ -15371,7 +15371,7 @@ func (s *UpdateIntegrationInput) SetHttpMethod(v string) *UpdateIntegrationInput
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateIntegrationInput) SetPatchOperations(v []*PatchOperation) *UpdateIntegrationInput {
+func (s *UpdateIntegrationInput) SetPatchOperations(v []PatchOperation) *UpdateIntegrationInput {
 	s.PatchOperations = v
 	return s
 }
@@ -15397,7 +15397,7 @@ type UpdateIntegrationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the integration's cache key parameters.
-	CacheKeyParameters []*string `locationName:"cacheKeyParameters" type:"list"`
+	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
 	// Specifies the integration's cache namespace.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
@@ -15449,7 +15449,7 @@ type UpdateIntegrationOutput struct {
 	// }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
 	// in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
 	// }, "statusCode": "200" }
-	IntegrationResponses map[string]*UpdateIntegrationResponseOutput `locationName:"integrationResponses" type:"map"`
+	IntegrationResponses map[string]UpdateIntegrationResponseOutput `locationName:"integrationResponses" type:"map"`
 
 	// Specifies how the method request body of an unmapped content type will be
 	// passed through the integration request to the back end without transformation.
@@ -15480,13 +15480,13 @@ type UpdateIntegrationOutput struct {
 	// the back end. The method request parameter value must match the pattern of
 	// method.request.{location}.{name}, where location is querystring, path, or
 	// header and name must be a valid and unique method request parameter name.
-	RequestParameters map[string]*string `locationName:"requestParameters" type:"map"`
+	RequestParameters map[string]string `locationName:"requestParameters" type:"map"`
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the
 	// value.
-	RequestTemplates map[string]*string `locationName:"requestTemplates" type:"map"`
+	RequestTemplates map[string]string `locationName:"requestTemplates" type:"map"`
 
 	// Specifies the integration's type. The valid value is HTTP for integrating
 	// with an HTTP back end, AWS for any AWS service endpoints, MOCK for testing
@@ -15518,7 +15518,7 @@ func (s UpdateIntegrationOutput) GoString() string {
 }
 
 // SetCacheKeyParameters sets the CacheKeyParameters field's value.
-func (s *UpdateIntegrationOutput) SetCacheKeyParameters(v []*string) *UpdateIntegrationOutput {
+func (s *UpdateIntegrationOutput) SetCacheKeyParameters(v []string) *UpdateIntegrationOutput {
 	s.CacheKeyParameters = v
 	return s
 }
@@ -15548,7 +15548,7 @@ func (s *UpdateIntegrationOutput) SetHttpMethod(v string) *UpdateIntegrationOutp
 }
 
 // SetIntegrationResponses sets the IntegrationResponses field's value.
-func (s *UpdateIntegrationOutput) SetIntegrationResponses(v map[string]*UpdateIntegrationResponseOutput) *UpdateIntegrationOutput {
+func (s *UpdateIntegrationOutput) SetIntegrationResponses(v map[string]UpdateIntegrationResponseOutput) *UpdateIntegrationOutput {
 	s.IntegrationResponses = v
 	return s
 }
@@ -15560,13 +15560,13 @@ func (s *UpdateIntegrationOutput) SetPassthroughBehavior(v string) *UpdateIntegr
 }
 
 // SetRequestParameters sets the RequestParameters field's value.
-func (s *UpdateIntegrationOutput) SetRequestParameters(v map[string]*string) *UpdateIntegrationOutput {
+func (s *UpdateIntegrationOutput) SetRequestParameters(v map[string]string) *UpdateIntegrationOutput {
 	s.RequestParameters = v
 	return s
 }
 
 // SetRequestTemplates sets the RequestTemplates field's value.
-func (s *UpdateIntegrationOutput) SetRequestTemplates(v map[string]*string) *UpdateIntegrationOutput {
+func (s *UpdateIntegrationOutput) SetRequestTemplates(v map[string]string) *UpdateIntegrationOutput {
 	s.RequestTemplates = v
 	return s
 }
@@ -15594,7 +15594,7 @@ type UpdateIntegrationResponseInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// Specifies an update integration response request's resource identifier.
 	//
@@ -15655,7 +15655,7 @@ func (s *UpdateIntegrationResponseInput) SetHttpMethod(v string) *UpdateIntegrat
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateIntegrationResponseInput) SetPatchOperations(v []*PatchOperation) *UpdateIntegrationResponseInput {
+func (s *UpdateIntegrationResponseInput) SetPatchOperations(v []PatchOperation) *UpdateIntegrationResponseInput {
 	s.PatchOperations = v
 	return s
 }
@@ -15709,12 +15709,12 @@ type UpdateIntegrationResponseOutput struct {
 	// or integration.response.body.{JSON-expression}, where name is a valid and
 	// unique response header name and JSON-expression is a valid JSON expression
 	// without the $ prefix.
-	ResponseParameters map[string]*string `locationName:"responseParameters" type:"map"`
+	ResponseParameters map[string]string `locationName:"responseParameters" type:"map"`
 
 	// Specifies the templates used to transform the integration response body.
 	// Response templates are represented as a key/value map, with a content-type
 	// as the key and a template as the value.
-	ResponseTemplates map[string]*string `locationName:"responseTemplates" type:"map"`
+	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
 
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success
@@ -15748,13 +15748,13 @@ func (s *UpdateIntegrationResponseOutput) SetContentHandling(v ContentHandlingSt
 }
 
 // SetResponseParameters sets the ResponseParameters field's value.
-func (s *UpdateIntegrationResponseOutput) SetResponseParameters(v map[string]*string) *UpdateIntegrationResponseOutput {
+func (s *UpdateIntegrationResponseOutput) SetResponseParameters(v map[string]string) *UpdateIntegrationResponseOutput {
 	s.ResponseParameters = v
 	return s
 }
 
 // SetResponseTemplates sets the ResponseTemplates field's value.
-func (s *UpdateIntegrationResponseOutput) SetResponseTemplates(v map[string]*string) *UpdateIntegrationResponseOutput {
+func (s *UpdateIntegrationResponseOutput) SetResponseTemplates(v map[string]string) *UpdateIntegrationResponseOutput {
 	s.ResponseTemplates = v
 	return s
 }
@@ -15782,7 +15782,7 @@ type UpdateMethodInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The Resource identifier for the Method resource.
 	//
@@ -15834,7 +15834,7 @@ func (s *UpdateMethodInput) SetHttpMethod(v string) *UpdateMethodInput {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateMethodInput) SetPatchOperations(v []*PatchOperation) *UpdateMethodInput {
+func (s *UpdateMethodInput) SetPatchOperations(v []PatchOperation) *UpdateMethodInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16011,7 +16011,7 @@ type UpdateMethodOutput struct {
 	//    { "method.response.header.operator": false, "method.response.header.operand_2":
 	//    false, "method.response.header.operand_1": false }, "statusCode": "200"
 	//    }
-	MethodResponses map[string]*UpdateMethodResponseOutput `locationName:"methodResponses" type:"map"`
+	MethodResponses map[string]UpdateMethodResponseOutput `locationName:"methodResponses" type:"map"`
 
 	// A human-friendly operation identifier for the method. For example, you can
 	// assign the operationName of ListPets for the GET /pets method in PetStore
@@ -16021,7 +16021,7 @@ type UpdateMethodOutput struct {
 	// A key-value map specifying data schemas, represented by Model resources,
 	// (as the mapped value) of the request payloads of given content types (as
 	// the mapping key).
-	RequestModels map[string]*string `locationName:"requestModels" type:"map"`
+	RequestModels map[string]string `locationName:"requestModels" type:"map"`
 
 	// A key-value map defining required or optional method request parameters that
 	// can be accepted by Amazon API Gateway. A key is a method request parameter
@@ -16031,7 +16031,7 @@ type UpdateMethodOutput struct {
 	// the parameter is required (true) or optional (false). The method request
 	// parameter names defined here are available in Integration to be mapped to
 	// integration request parameters or templates.
-	RequestParameters map[string]*bool `locationName:"requestParameters" type:"map"`
+	RequestParameters map[string]bool `locationName:"requestParameters" type:"map"`
 
 	// The identifier of a RequestValidator for request validation.
 	RequestValidatorId *string `locationName:"requestValidatorId" type:"string"`
@@ -16078,7 +16078,7 @@ func (s *UpdateMethodOutput) SetMethodIntegration(v *UpdateIntegrationOutput) *U
 }
 
 // SetMethodResponses sets the MethodResponses field's value.
-func (s *UpdateMethodOutput) SetMethodResponses(v map[string]*UpdateMethodResponseOutput) *UpdateMethodOutput {
+func (s *UpdateMethodOutput) SetMethodResponses(v map[string]UpdateMethodResponseOutput) *UpdateMethodOutput {
 	s.MethodResponses = v
 	return s
 }
@@ -16090,13 +16090,13 @@ func (s *UpdateMethodOutput) SetOperationName(v string) *UpdateMethodOutput {
 }
 
 // SetRequestModels sets the RequestModels field's value.
-func (s *UpdateMethodOutput) SetRequestModels(v map[string]*string) *UpdateMethodOutput {
+func (s *UpdateMethodOutput) SetRequestModels(v map[string]string) *UpdateMethodOutput {
 	s.RequestModels = v
 	return s
 }
 
 // SetRequestParameters sets the RequestParameters field's value.
-func (s *UpdateMethodOutput) SetRequestParameters(v map[string]*bool) *UpdateMethodOutput {
+func (s *UpdateMethodOutput) SetRequestParameters(v map[string]bool) *UpdateMethodOutput {
 	s.RequestParameters = v
 	return s
 }
@@ -16118,7 +16118,7 @@ type UpdateMethodResponseInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The Resource identifier for the MethodResponse resource.
 	//
@@ -16179,7 +16179,7 @@ func (s *UpdateMethodResponseInput) SetHttpMethod(v string) *UpdateMethodRespons
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateMethodResponseInput) SetPatchOperations(v []*PatchOperation) *UpdateMethodResponseInput {
+func (s *UpdateMethodResponseInput) SetPatchOperations(v []PatchOperation) *UpdateMethodResponseInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16233,7 +16233,7 @@ type UpdateMethodResponseOutput struct {
 	// Specifies the Model resources used for the response's content-type. Response
 	// models are represented as a key/value map, with a content-type as the key
 	// and a Model name as the value.
-	ResponseModels map[string]*string `locationName:"responseModels" type:"map"`
+	ResponseModels map[string]string `locationName:"responseModels" type:"map"`
 
 	// A key-value map specifying required or optional response parameters that
 	// Amazon API Gateway can send back to the caller. A key defines a method response
@@ -16247,7 +16247,7 @@ type UpdateMethodResponseOutput struct {
 	// of single quotes (e.g., 'application/json'), or a JSON expression from the
 	// back-end response payload in the form of integration.response.body.{JSON-expression},
 	// where JSON-expression is a valid JSON expression without the $ prefix.)
-	ResponseParameters map[string]*bool `locationName:"responseParameters" type:"map"`
+	ResponseParameters map[string]bool `locationName:"responseParameters" type:"map"`
 
 	// The method response's status code.
 	StatusCode *string `locationName:"statusCode" type:"string"`
@@ -16264,13 +16264,13 @@ func (s UpdateMethodResponseOutput) GoString() string {
 }
 
 // SetResponseModels sets the ResponseModels field's value.
-func (s *UpdateMethodResponseOutput) SetResponseModels(v map[string]*string) *UpdateMethodResponseOutput {
+func (s *UpdateMethodResponseOutput) SetResponseModels(v map[string]string) *UpdateMethodResponseOutput {
 	s.ResponseModels = v
 	return s
 }
 
 // SetResponseParameters sets the ResponseParameters field's value.
-func (s *UpdateMethodResponseOutput) SetResponseParameters(v map[string]*bool) *UpdateMethodResponseOutput {
+func (s *UpdateMethodResponseOutput) SetResponseParameters(v map[string]bool) *UpdateMethodResponseOutput {
 	s.ResponseParameters = v
 	return s
 }
@@ -16292,7 +16292,7 @@ type UpdateModelInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -16335,7 +16335,7 @@ func (s *UpdateModelInput) SetModelName(v string) *UpdateModelInput {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateModelInput) SetPatchOperations(v []*PatchOperation) *UpdateModelInput {
+func (s *UpdateModelInput) SetPatchOperations(v []PatchOperation) *UpdateModelInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16427,7 +16427,7 @@ type UpdateRequestValidatorInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// [Required] The identifier of RequestValidator to be updated.
 	//
@@ -16469,7 +16469,7 @@ func (s *UpdateRequestValidatorInput) Validate() error {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateRequestValidatorInput) SetPatchOperations(v []*PatchOperation) *UpdateRequestValidatorInput {
+func (s *UpdateRequestValidatorInput) SetPatchOperations(v []PatchOperation) *UpdateRequestValidatorInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16553,7 +16553,7 @@ type UpdateResourceInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The identifier of the Resource resource.
 	//
@@ -16595,7 +16595,7 @@ func (s *UpdateResourceInput) Validate() error {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateResourceInput) SetPatchOperations(v []*PatchOperation) *UpdateResourceInput {
+func (s *UpdateResourceInput) SetPatchOperations(v []PatchOperation) *UpdateResourceInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16687,7 +16687,7 @@ type UpdateResourceOutput struct {
 	// If the OPTIONS is enabled on the resource, you can follow the example here
 	// to get that method. Just replace the GET of the last path segment in the
 	// request URL with OPTIONS.
-	ResourceMethods map[string]*UpdateMethodOutput `locationName:"resourceMethods" type:"map"`
+	ResourceMethods map[string]UpdateMethodOutput `locationName:"resourceMethods" type:"map"`
 }
 
 // String returns the string representation
@@ -16725,7 +16725,7 @@ func (s *UpdateResourceOutput) SetPathPart(v string) *UpdateResourceOutput {
 }
 
 // SetResourceMethods sets the ResourceMethods field's value.
-func (s *UpdateResourceOutput) SetResourceMethods(v map[string]*UpdateMethodOutput) *UpdateResourceOutput {
+func (s *UpdateResourceOutput) SetResourceMethods(v map[string]UpdateMethodOutput) *UpdateResourceOutput {
 	s.ResourceMethods = v
 	return s
 }
@@ -16736,7 +16736,7 @@ type UpdateRestApiInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -16769,7 +16769,7 @@ func (s *UpdateRestApiInput) Validate() error {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateRestApiInput) SetPatchOperations(v []*PatchOperation) *UpdateRestApiInput {
+func (s *UpdateRestApiInput) SetPatchOperations(v []PatchOperation) *UpdateRestApiInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16788,7 +16788,7 @@ type UpdateRestApiOutput struct {
 
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string `locationName:"binaryMediaTypes" type:"list"`
+	BinaryMediaTypes []string `locationName:"binaryMediaTypes" type:"list"`
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
@@ -16808,7 +16808,7 @@ type UpdateRestApiOutput struct {
 
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
-	Warnings []*string `locationName:"warnings" type:"list"`
+	Warnings []string `locationName:"warnings" type:"list"`
 }
 
 // String returns the string representation
@@ -16822,7 +16822,7 @@ func (s UpdateRestApiOutput) GoString() string {
 }
 
 // SetBinaryMediaTypes sets the BinaryMediaTypes field's value.
-func (s *UpdateRestApiOutput) SetBinaryMediaTypes(v []*string) *UpdateRestApiOutput {
+func (s *UpdateRestApiOutput) SetBinaryMediaTypes(v []string) *UpdateRestApiOutput {
 	s.BinaryMediaTypes = v
 	return s
 }
@@ -16858,7 +16858,7 @@ func (s *UpdateRestApiOutput) SetVersion(v string) *UpdateRestApiOutput {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *UpdateRestApiOutput) SetWarnings(v []*string) *UpdateRestApiOutput {
+func (s *UpdateRestApiOutput) SetWarnings(v []string) *UpdateRestApiOutput {
 	s.Warnings = v
 	return s
 }
@@ -16869,7 +16869,7 @@ type UpdateStageInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -16911,7 +16911,7 @@ func (s *UpdateStageInput) Validate() error {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateStageInput) SetPatchOperations(v []*PatchOperation) *UpdateStageInput {
+func (s *UpdateStageInput) SetPatchOperations(v []PatchOperation) *UpdateStageInput {
 	s.PatchOperations = v
 	return s
 }
@@ -16966,7 +16966,7 @@ type UpdateStageOutput struct {
 	// as /{method_setting_key below) are method paths defined as {resource_path}/{http_method}
 	// for an individual method override, or /\*/\* for overriding all methods in
 	// the stage.
-	MethodSettings map[string]*MethodSetting `locationName:"methodSettings" type:"map"`
+	MethodSettings map[string]MethodSetting `locationName:"methodSettings" type:"map"`
 
 	// The name of the stage is the first path segment in the Uniform Resource Identifier
 	// (URI) of a call to Amazon API Gateway.
@@ -16975,7 +16975,7 @@ type UpdateStageOutput struct {
 	// A map that defines the stage variables for a Stage resource. Variable names
 	// can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
-	Variables map[string]*string `locationName:"variables" type:"map"`
+	Variables map[string]string `locationName:"variables" type:"map"`
 }
 
 // String returns the string representation
@@ -17043,7 +17043,7 @@ func (s *UpdateStageOutput) SetLastUpdatedDate(v time.Time) *UpdateStageOutput {
 }
 
 // SetMethodSettings sets the MethodSettings field's value.
-func (s *UpdateStageOutput) SetMethodSettings(v map[string]*MethodSetting) *UpdateStageOutput {
+func (s *UpdateStageOutput) SetMethodSettings(v map[string]MethodSetting) *UpdateStageOutput {
 	s.MethodSettings = v
 	return s
 }
@@ -17055,7 +17055,7 @@ func (s *UpdateStageOutput) SetStageName(v string) *UpdateStageOutput {
 }
 
 // SetVariables sets the Variables field's value.
-func (s *UpdateStageOutput) SetVariables(v map[string]*string) *UpdateStageOutput {
+func (s *UpdateStageOutput) SetVariables(v map[string]string) *UpdateStageOutput {
 	s.Variables = v
 	return s
 }
@@ -17073,7 +17073,7 @@ type UpdateUsageInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The Id of the usage plan associated with the usage data.
 	//
@@ -17116,7 +17116,7 @@ func (s *UpdateUsageInput) SetKeyId(v string) *UpdateUsageInput {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateUsageInput) SetPatchOperations(v []*PatchOperation) *UpdateUsageInput {
+func (s *UpdateUsageInput) SetPatchOperations(v []PatchOperation) *UpdateUsageInput {
 	s.PatchOperations = v
 	return s
 }
@@ -17141,7 +17141,7 @@ type UpdateUsageOutput struct {
 	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
 	// stands for an API key value and the daily log entry is of the format [used
 	// quota, remaining quota].
-	Items map[string][][]*int64 `locationName:"values" type:"map"`
+	Items map[string][][]int64 `locationName:"values" type:"map"`
 
 	Position *string `locationName:"position" type:"string"`
 
@@ -17169,7 +17169,7 @@ func (s *UpdateUsageOutput) SetEndDate(v string) *UpdateUsageOutput {
 }
 
 // SetItems sets the Items field's value.
-func (s *UpdateUsageOutput) SetItems(v map[string][][]*int64) *UpdateUsageOutput {
+func (s *UpdateUsageOutput) SetItems(v map[string][][]int64) *UpdateUsageOutput {
 	s.Items = v
 	return s
 }
@@ -17198,7 +17198,7 @@ type UpdateUsagePlanInput struct {
 
 	// A list of update operations to be applied to the specified resource and in
 	// the order specified in this list.
-	PatchOperations []*PatchOperation `locationName:"patchOperations" type:"list"`
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
 
 	// The Id of the to-be-updated usage plan.
 	//
@@ -17231,7 +17231,7 @@ func (s *UpdateUsagePlanInput) Validate() error {
 }
 
 // SetPatchOperations sets the PatchOperations field's value.
-func (s *UpdateUsagePlanInput) SetPatchOperations(v []*PatchOperation) *UpdateUsagePlanInput {
+func (s *UpdateUsagePlanInput) SetPatchOperations(v []PatchOperation) *UpdateUsagePlanInput {
 	s.PatchOperations = v
 	return s
 }
@@ -17254,7 +17254,7 @@ type UpdateUsagePlanOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The associated API stages of a usage plan.
-	ApiStages []*ApiStage `locationName:"apiStages" type:"list"`
+	ApiStages []ApiStage `locationName:"apiStages" type:"list"`
 
 	// The description of a usage plan.
 	Description *string `locationName:"description" type:"string"`
@@ -17287,7 +17287,7 @@ func (s UpdateUsagePlanOutput) GoString() string {
 }
 
 // SetApiStages sets the ApiStages field's value.
-func (s *UpdateUsagePlanOutput) SetApiStages(v []*ApiStage) *UpdateUsagePlanOutput {
+func (s *UpdateUsagePlanOutput) SetApiStages(v []ApiStage) *UpdateUsagePlanOutput {
 	s.ApiStages = v
 	return s
 }

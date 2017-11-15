@@ -45,7 +45,7 @@ type marshalMarshaler struct {
 }
 
 func (m *marshalMarshaler) MarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) error {
-	av.M = map[string]*dynamodb.AttributeValue{
+	av.M = map[string]dynamodb.AttributeValue{
 		"abc": {S: &m.Value},
 		"def": {N: aws.String(fmt.Sprintf("%d", m.Value2))},
 		"ghi": {BOOL: &m.Value3},
@@ -64,7 +64,7 @@ func TestMarshalMashaler(t *testing.T) {
 	}
 
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
 			"abc": {S: aws.String("value")},
 			"def": {N: aws.String("123")},
 			"ghi": {BOOL: aws.Bool(true)},
@@ -92,8 +92,8 @@ type testOmitEmptyElemMapStruct struct {
 
 func TestMarshalListOmitEmptyElem(t *testing.T) {
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
-			"Values": {L: []*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
+			"Values": {L: []dynamodb.AttributeValue{
 				{S: aws.String("abc")},
 				{S: aws.String("123")},
 			}},
@@ -113,8 +113,8 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 
 func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
-			"Values": {M: map[string]*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
+			"Values": {M: map[string]dynamodb.AttributeValue{
 				"abc": {N: aws.String("123")},
 				"klm": {S: aws.String("abc")},
 			}},
@@ -145,7 +145,7 @@ type testOmitEmptyScalar struct {
 
 func TestMarshalOmitEmpty(t *testing.T) {
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
 			"IntPtrSetZero": {N: aws.String("0")},
 		},
 	}
@@ -189,7 +189,7 @@ func TestEncodeEmbeddedPointerStruct(t *testing.T) {
 		t.Errorf("expect nil, got %v", err)
 	}
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
 			"Aint": {
 				N: aws.String("321"),
 			},
@@ -221,7 +221,7 @@ func TestEncodeUnixTime(t *testing.T) {
 		t.Errorf("expect nil, got %v", err)
 	}
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
 			"Normal": {
 				S: aws.String("1970-01-01T00:02:03Z"),
 			},
@@ -256,7 +256,7 @@ func TestEncodeAliasedUnixTime(t *testing.T) {
 		t.Errorf("expect no err, got %v", err)
 	}
 	expect := &dynamodb.AttributeValue{
-		M: map[string]*dynamodb.AttributeValue{
+		M: map[string]dynamodb.AttributeValue{
 			"Normal": {
 				S: aws.String("1970-01-01T00:02:03Z"),
 			},

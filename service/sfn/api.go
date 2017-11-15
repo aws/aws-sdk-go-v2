@@ -2383,7 +2383,7 @@ type GetExecutionHistoryOutput struct {
 	// The list of events that occurred in the execution.
 	//
 	// Events is a required field
-	Events []*HistoryEvent `locationName:"events" type:"list" required:"true"`
+	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
 
 	// If a nextToken is returned, there are more results available. To retrieve
 	// the next page of results, make the call again using the returned token in
@@ -2405,7 +2405,7 @@ func (s GetExecutionHistoryOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *GetExecutionHistoryOutput) SetEvents(v []*HistoryEvent) *GetExecutionHistoryOutput {
+func (s *GetExecutionHistoryOutput) SetEvents(v []HistoryEvent) *GetExecutionHistoryOutput {
 	s.Events = v
 	return s
 }
@@ -2888,7 +2888,7 @@ type ListActivitiesOutput struct {
 	// The list of activities.
 	//
 	// Activities is a required field
-	Activities []*ActivityListItem `locationName:"activities" type:"list" required:"true"`
+	Activities []ActivityListItem `locationName:"activities" type:"list" required:"true"`
 
 	// If a nextToken is returned, there are more results available. To retrieve
 	// the next page of results, make the call again using the returned token in
@@ -2910,7 +2910,7 @@ func (s ListActivitiesOutput) GoString() string {
 }
 
 // SetActivities sets the Activities field's value.
-func (s *ListActivitiesOutput) SetActivities(v []*ActivityListItem) *ListActivitiesOutput {
+func (s *ListActivitiesOutput) SetActivities(v []ActivityListItem) *ListActivitiesOutput {
 	s.Activities = v
 	return s
 }
@@ -3013,7 +3013,7 @@ type ListExecutionsOutput struct {
 	// The list of matching executions.
 	//
 	// Executions is a required field
-	Executions []*ExecutionListItem `locationName:"executions" type:"list" required:"true"`
+	Executions []ExecutionListItem `locationName:"executions" type:"list" required:"true"`
 
 	// If a nextToken is returned, there are more results available. To retrieve
 	// the next page of results, make the call again using the returned token in
@@ -3035,7 +3035,7 @@ func (s ListExecutionsOutput) GoString() string {
 }
 
 // SetExecutions sets the Executions field's value.
-func (s *ListExecutionsOutput) SetExecutions(v []*ExecutionListItem) *ListExecutionsOutput {
+func (s *ListExecutionsOutput) SetExecutions(v []ExecutionListItem) *ListExecutionsOutput {
 	s.Executions = v
 	return s
 }
@@ -3115,7 +3115,7 @@ type ListStateMachinesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// StateMachines is a required field
-	StateMachines []*StateMachineListItem `locationName:"stateMachines" type:"list" required:"true"`
+	StateMachines []StateMachineListItem `locationName:"stateMachines" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3135,7 +3135,7 @@ func (s *ListStateMachinesOutput) SetNextToken(v string) *ListStateMachinesOutpu
 }
 
 // SetStateMachines sets the StateMachines field's value.
-func (s *ListStateMachinesOutput) SetStateMachines(v []*StateMachineListItem) *ListStateMachinesOutput {
+func (s *ListStateMachinesOutput) SetStateMachines(v []StateMachineListItem) *ListStateMachinesOutput {
 	s.StateMachines = v
 	return s
 }

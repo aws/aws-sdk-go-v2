@@ -951,7 +951,7 @@ type CreateIdentityPoolInput struct {
 	AllowUnauthenticatedIdentities *bool `type:"boolean" required:"true"`
 
 	// An array of Amazon Cognito Identity user pools and their client IDs.
-	CognitoIdentityProviders []*Provider `type:"list"`
+	CognitoIdentityProviders []Provider `type:"list"`
 
 	// The "domain" by which Cognito will refer to your users. This name acts as
 	// a placeholder that allows your backend and the Cognito service to communicate
@@ -968,14 +968,14 @@ type CreateIdentityPoolInput struct {
 	IdentityPoolName *string `min:"1" type:"string" required:"true"`
 
 	// A list of OpendID Connect provider ARNs.
-	OpenIdConnectProviderARNs []*string `type:"list"`
+	OpenIdConnectProviderARNs []string `type:"list"`
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
 	// pool.
-	SamlProviderARNs []*string `type:"list"`
+	SamlProviderARNs []string `type:"list"`
 
 	// Optional key:value pairs mapping provider names to provider app IDs.
-	SupportedLoginProviders map[string]*string `type:"map"`
+	SupportedLoginProviders map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1007,9 +1007,6 @@ func (s *CreateIdentityPoolInput) Validate() error {
 	}
 	if s.CognitoIdentityProviders != nil {
 		for i, v := range s.CognitoIdentityProviders {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CognitoIdentityProviders", i), err.(aws.ErrInvalidParams))
 			}
@@ -1029,7 +1026,7 @@ func (s *CreateIdentityPoolInput) SetAllowUnauthenticatedIdentities(v bool) *Cre
 }
 
 // SetCognitoIdentityProviders sets the CognitoIdentityProviders field's value.
-func (s *CreateIdentityPoolInput) SetCognitoIdentityProviders(v []*Provider) *CreateIdentityPoolInput {
+func (s *CreateIdentityPoolInput) SetCognitoIdentityProviders(v []Provider) *CreateIdentityPoolInput {
 	s.CognitoIdentityProviders = v
 	return s
 }
@@ -1047,19 +1044,19 @@ func (s *CreateIdentityPoolInput) SetIdentityPoolName(v string) *CreateIdentityP
 }
 
 // SetOpenIdConnectProviderARNs sets the OpenIdConnectProviderARNs field's value.
-func (s *CreateIdentityPoolInput) SetOpenIdConnectProviderARNs(v []*string) *CreateIdentityPoolInput {
+func (s *CreateIdentityPoolInput) SetOpenIdConnectProviderARNs(v []string) *CreateIdentityPoolInput {
 	s.OpenIdConnectProviderARNs = v
 	return s
 }
 
 // SetSamlProviderARNs sets the SamlProviderARNs field's value.
-func (s *CreateIdentityPoolInput) SetSamlProviderARNs(v []*string) *CreateIdentityPoolInput {
+func (s *CreateIdentityPoolInput) SetSamlProviderARNs(v []string) *CreateIdentityPoolInput {
 	s.SamlProviderARNs = v
 	return s
 }
 
 // SetSupportedLoginProviders sets the SupportedLoginProviders field's value.
-func (s *CreateIdentityPoolInput) SetSupportedLoginProviders(v map[string]*string) *CreateIdentityPoolInput {
+func (s *CreateIdentityPoolInput) SetSupportedLoginProviders(v map[string]string) *CreateIdentityPoolInput {
 	s.SupportedLoginProviders = v
 	return s
 }
@@ -1124,7 +1121,7 @@ type DeleteIdentitiesInput struct {
 	// A list of 1-60 identities that you want to delete.
 	//
 	// IdentityIdsToDelete is a required field
-	IdentityIdsToDelete []*string `min:"1" type:"list" required:"true"`
+	IdentityIdsToDelete []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1155,7 +1152,7 @@ func (s *DeleteIdentitiesInput) Validate() error {
 }
 
 // SetIdentityIdsToDelete sets the IdentityIdsToDelete field's value.
-func (s *DeleteIdentitiesInput) SetIdentityIdsToDelete(v []*string) *DeleteIdentitiesInput {
+func (s *DeleteIdentitiesInput) SetIdentityIdsToDelete(v []string) *DeleteIdentitiesInput {
 	s.IdentityIdsToDelete = v
 	return s
 }
@@ -1167,7 +1164,7 @@ type DeleteIdentitiesOutput struct {
 
 	// An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
 	// and IdentityId.
-	UnprocessedIdentityIds []*UnprocessedIdentityId `type:"list"`
+	UnprocessedIdentityIds []UnprocessedIdentityId `type:"list"`
 }
 
 // String returns the string representation
@@ -1181,7 +1178,7 @@ func (s DeleteIdentitiesOutput) GoString() string {
 }
 
 // SetUnprocessedIdentityIds sets the UnprocessedIdentityIds field's value.
-func (s *DeleteIdentitiesOutput) SetUnprocessedIdentityIds(v []*UnprocessedIdentityId) *DeleteIdentitiesOutput {
+func (s *DeleteIdentitiesOutput) SetUnprocessedIdentityIds(v []UnprocessedIdentityId) *DeleteIdentitiesOutput {
 	s.UnprocessedIdentityIds = v
 	return s
 }
@@ -1304,7 +1301,7 @@ type DescribeIdentityOutput struct {
 	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A set of optional name-value pairs that map provider names to provider tokens.
-	Logins []*string `type:"list"`
+	Logins []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1336,7 +1333,7 @@ func (s *DescribeIdentityOutput) SetLastModifiedDate(v time.Time) *DescribeIdent
 }
 
 // SetLogins sets the Logins field's value.
-func (s *DescribeIdentityOutput) SetLogins(v []*string) *DescribeIdentityOutput {
+func (s *DescribeIdentityOutput) SetLogins(v []string) *DescribeIdentityOutput {
 	s.Logins = v
 	return s
 }
@@ -1402,7 +1399,7 @@ type GetCredentialsForIdentityInput struct {
 	IdentityId *string `min:"1" type:"string" required:"true"`
 
 	// A set of optional name-value pairs that map provider names to provider tokens.
-	Logins map[string]*string `type:"map"`
+	Logins map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1448,7 +1445,7 @@ func (s *GetCredentialsForIdentityInput) SetIdentityId(v string) *GetCredentials
 }
 
 // SetLogins sets the Logins field's value.
-func (s *GetCredentialsForIdentityInput) SetLogins(v map[string]*string) *GetCredentialsForIdentityInput {
+func (s *GetCredentialsForIdentityInput) SetLogins(v map[string]string) *GetCredentialsForIdentityInput {
 	s.Logins = v
 	return s
 }
@@ -1514,7 +1511,7 @@ type GetIdInput struct {
 	//    * Twitter: api.twitter.com
 	//
 	//    * Digits: www.digits.com
-	Logins map[string]*string `type:"map"`
+	Logins map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1560,7 +1557,7 @@ func (s *GetIdInput) SetIdentityPoolId(v string) *GetIdInput {
 }
 
 // SetLogins sets the Logins field's value.
-func (s *GetIdInput) SetLogins(v map[string]*string) *GetIdInput {
+func (s *GetIdInput) SetLogins(v map[string]string) *GetIdInput {
 	s.Logins = v
 	return s
 }
@@ -1645,11 +1642,11 @@ type GetIdentityPoolRolesOutput struct {
 	// How users for a specific identity provider are to mapped to roles. This is
 	// a String-to-RoleMapping object map. The string identifies the identity provider,
 	// for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
-	RoleMappings map[string]*RoleMapping `type:"map"`
+	RoleMappings map[string]RoleMapping `type:"map"`
 
 	// The map of roles associated with this pool. Currently only authenticated
 	// and unauthenticated roles are supported.
-	Roles map[string]*string `type:"map"`
+	Roles map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1669,13 +1666,13 @@ func (s *GetIdentityPoolRolesOutput) SetIdentityPoolId(v string) *GetIdentityPoo
 }
 
 // SetRoleMappings sets the RoleMappings field's value.
-func (s *GetIdentityPoolRolesOutput) SetRoleMappings(v map[string]*RoleMapping) *GetIdentityPoolRolesOutput {
+func (s *GetIdentityPoolRolesOutput) SetRoleMappings(v map[string]RoleMapping) *GetIdentityPoolRolesOutput {
 	s.RoleMappings = v
 	return s
 }
 
 // SetRoles sets the Roles field's value.
-func (s *GetIdentityPoolRolesOutput) SetRoles(v map[string]*string) *GetIdentityPoolRolesOutput {
+func (s *GetIdentityPoolRolesOutput) SetRoles(v map[string]string) *GetIdentityPoolRolesOutput {
 	s.Roles = v
 	return s
 }
@@ -1704,7 +1701,7 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// supported logins.
 	//
 	// Logins is a required field
-	Logins map[string]*string `type:"map" required:"true"`
+	Logins map[string]string `type:"map" required:"true"`
 
 	// The expiration time of the token, in seconds. You can specify a custom expiration
 	// time for the token so that you can cache it. If you don't provide an expiration
@@ -1767,7 +1764,7 @@ func (s *GetOpenIdTokenForDeveloperIdentityInput) SetIdentityPoolId(v string) *G
 }
 
 // SetLogins sets the Logins field's value.
-func (s *GetOpenIdTokenForDeveloperIdentityInput) SetLogins(v map[string]*string) *GetOpenIdTokenForDeveloperIdentityInput {
+func (s *GetOpenIdTokenForDeveloperIdentityInput) SetLogins(v map[string]string) *GetOpenIdTokenForDeveloperIdentityInput {
 	s.Logins = v
 	return s
 }
@@ -1827,7 +1824,7 @@ type GetOpenIdTokenInput struct {
 	// returned from the provider's authflow. For accounts.google.com, an Amazon
 	// Cognito Identity Provider, or any other OpenId Connect provider, always include
 	// the id_token.
-	Logins map[string]*string `type:"map"`
+	Logins map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1864,7 +1861,7 @@ func (s *GetOpenIdTokenInput) SetIdentityId(v string) *GetOpenIdTokenInput {
 }
 
 // SetLogins sets the Logins field's value.
-func (s *GetOpenIdTokenInput) SetLogins(v map[string]*string) *GetOpenIdTokenInput {
+func (s *GetOpenIdTokenInput) SetLogins(v map[string]string) *GetOpenIdTokenInput {
 	s.Logins = v
 	return s
 }
@@ -2029,7 +2026,7 @@ type ListIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An object containing a set of identities and associated mappings.
-	Identities []*DescribeIdentityOutput `type:"list"`
+	Identities []DescribeIdentityOutput `type:"list"`
 
 	// An identity pool ID in the format REGION:GUID.
 	IdentityPoolId *string `min:"1" type:"string"`
@@ -2049,7 +2046,7 @@ func (s ListIdentitiesOutput) GoString() string {
 }
 
 // SetIdentities sets the Identities field's value.
-func (s *ListIdentitiesOutput) SetIdentities(v []*DescribeIdentityOutput) *ListIdentitiesOutput {
+func (s *ListIdentitiesOutput) SetIdentities(v []DescribeIdentityOutput) *ListIdentitiesOutput {
 	s.Identities = v
 	return s
 }
@@ -2128,7 +2125,7 @@ type ListIdentityPoolsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The identity pools returned by the ListIdentityPools action.
-	IdentityPools []*IdentityPoolShortDescription `type:"list"`
+	IdentityPools []IdentityPoolShortDescription `type:"list"`
 
 	// A pagination token.
 	NextToken *string `min:"1" type:"string"`
@@ -2145,7 +2142,7 @@ func (s ListIdentityPoolsOutput) GoString() string {
 }
 
 // SetIdentityPools sets the IdentityPools field's value.
-func (s *ListIdentityPoolsOutput) SetIdentityPools(v []*IdentityPoolShortDescription) *ListIdentityPoolsOutput {
+func (s *ListIdentityPoolsOutput) SetIdentityPools(v []IdentityPoolShortDescription) *ListIdentityPoolsOutput {
 	s.IdentityPools = v
 	return s
 }
@@ -2263,7 +2260,7 @@ type LookupDeveloperIdentityOutput struct {
 	// This is the list of developer user identifiers associated with an identity
 	// ID. Cognito supports the association of multiple developer user identifiers
 	// with an identity ID.
-	DeveloperUserIdentifierList []*string `type:"list"`
+	DeveloperUserIdentifierList []string `type:"list"`
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string `min:"1" type:"string"`
@@ -2288,7 +2285,7 @@ func (s LookupDeveloperIdentityOutput) GoString() string {
 }
 
 // SetDeveloperUserIdentifierList sets the DeveloperUserIdentifierList field's value.
-func (s *LookupDeveloperIdentityOutput) SetDeveloperUserIdentifierList(v []*string) *LookupDeveloperIdentityOutput {
+func (s *LookupDeveloperIdentityOutput) SetDeveloperUserIdentifierList(v []string) *LookupDeveloperIdentityOutput {
 	s.DeveloperUserIdentifierList = v
 	return s
 }
@@ -2672,7 +2669,7 @@ type RulesConfigurationType struct {
 	// Rules are evaluated in order. The first one to match specifies the role.
 	//
 	// Rules is a required field
-	Rules []*MappingRule `min:"1" type:"list" required:"true"`
+	Rules []MappingRule `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2697,9 +2694,6 @@ func (s *RulesConfigurationType) Validate() error {
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
@@ -2713,7 +2707,7 @@ func (s *RulesConfigurationType) Validate() error {
 }
 
 // SetRules sets the Rules field's value.
-func (s *RulesConfigurationType) SetRules(v []*MappingRule) *RulesConfigurationType {
+func (s *RulesConfigurationType) SetRules(v []MappingRule) *RulesConfigurationType {
 	s.Rules = v
 	return s
 }
@@ -2733,14 +2727,14 @@ type SetIdentityPoolRolesInput struct {
 	// for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
 	//
 	// Up to 25 rules can be specified per identity provider.
-	RoleMappings map[string]*RoleMapping `type:"map"`
+	RoleMappings map[string]RoleMapping `type:"map"`
 
 	// The map of roles associated with this pool. For a given role, the key will
 	// be either "authenticated" or "unauthenticated" and the value will be the
 	// Role ARN.
 	//
 	// Roles is a required field
-	Roles map[string]*string `type:"map" required:"true"`
+	Roles map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -2769,9 +2763,6 @@ func (s *SetIdentityPoolRolesInput) Validate() error {
 	}
 	if s.RoleMappings != nil {
 		for i, v := range s.RoleMappings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RoleMappings", i), err.(aws.ErrInvalidParams))
 			}
@@ -2791,13 +2782,13 @@ func (s *SetIdentityPoolRolesInput) SetIdentityPoolId(v string) *SetIdentityPool
 }
 
 // SetRoleMappings sets the RoleMappings field's value.
-func (s *SetIdentityPoolRolesInput) SetRoleMappings(v map[string]*RoleMapping) *SetIdentityPoolRolesInput {
+func (s *SetIdentityPoolRolesInput) SetRoleMappings(v map[string]RoleMapping) *SetIdentityPoolRolesInput {
 	s.RoleMappings = v
 	return s
 }
 
 // SetRoles sets the Roles field's value.
-func (s *SetIdentityPoolRolesInput) SetRoles(v map[string]*string) *SetIdentityPoolRolesInput {
+func (s *SetIdentityPoolRolesInput) SetRoles(v map[string]string) *SetIdentityPoolRolesInput {
 	s.Roles = v
 	return s
 }
@@ -2943,12 +2934,12 @@ type UnlinkIdentityInput struct {
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	//
 	// Logins is a required field
-	Logins map[string]*string `type:"map" required:"true"`
+	Logins map[string]string `type:"map" required:"true"`
 
 	// Provider names to unlink from this identity.
 	//
 	// LoginsToRemove is a required field
-	LoginsToRemove []*string `type:"list" required:"true"`
+	LoginsToRemove []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2993,13 +2984,13 @@ func (s *UnlinkIdentityInput) SetIdentityId(v string) *UnlinkIdentityInput {
 }
 
 // SetLogins sets the Logins field's value.
-func (s *UnlinkIdentityInput) SetLogins(v map[string]*string) *UnlinkIdentityInput {
+func (s *UnlinkIdentityInput) SetLogins(v map[string]string) *UnlinkIdentityInput {
 	s.Logins = v
 	return s
 }
 
 // SetLoginsToRemove sets the LoginsToRemove field's value.
-func (s *UnlinkIdentityInput) SetLoginsToRemove(v []*string) *UnlinkIdentityInput {
+func (s *UnlinkIdentityInput) SetLoginsToRemove(v []string) *UnlinkIdentityInput {
 	s.LoginsToRemove = v
 	return s
 }
@@ -3065,7 +3056,7 @@ type UpdateIdentityPoolOutput struct {
 	AllowUnauthenticatedIdentities *bool `type:"boolean" required:"true"`
 
 	// A list representing an Amazon Cognito Identity User Pool and its client ID.
-	CognitoIdentityProviders []*Provider `type:"list"`
+	CognitoIdentityProviders []Provider `type:"list"`
 
 	// The "domain" by which Cognito will refer to your users.
 	DeveloperProviderName *string `min:"1" type:"string"`
@@ -3081,14 +3072,14 @@ type UpdateIdentityPoolOutput struct {
 	IdentityPoolName *string `min:"1" type:"string" required:"true"`
 
 	// A list of OpendID Connect provider ARNs.
-	OpenIdConnectProviderARNs []*string `type:"list"`
+	OpenIdConnectProviderARNs []string `type:"list"`
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
 	// pool.
-	SamlProviderARNs []*string `type:"list"`
+	SamlProviderARNs []string `type:"list"`
 
 	// Optional key:value pairs mapping provider names to provider app IDs.
-	SupportedLoginProviders map[string]*string `type:"map"`
+	SupportedLoginProviders map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -3127,9 +3118,6 @@ func (s *UpdateIdentityPoolOutput) Validate() error {
 	}
 	if s.CognitoIdentityProviders != nil {
 		for i, v := range s.CognitoIdentityProviders {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CognitoIdentityProviders", i), err.(aws.ErrInvalidParams))
 			}
@@ -3149,7 +3137,7 @@ func (s *UpdateIdentityPoolOutput) SetAllowUnauthenticatedIdentities(v bool) *Up
 }
 
 // SetCognitoIdentityProviders sets the CognitoIdentityProviders field's value.
-func (s *UpdateIdentityPoolOutput) SetCognitoIdentityProviders(v []*Provider) *UpdateIdentityPoolOutput {
+func (s *UpdateIdentityPoolOutput) SetCognitoIdentityProviders(v []Provider) *UpdateIdentityPoolOutput {
 	s.CognitoIdentityProviders = v
 	return s
 }
@@ -3173,19 +3161,19 @@ func (s *UpdateIdentityPoolOutput) SetIdentityPoolName(v string) *UpdateIdentity
 }
 
 // SetOpenIdConnectProviderARNs sets the OpenIdConnectProviderARNs field's value.
-func (s *UpdateIdentityPoolOutput) SetOpenIdConnectProviderARNs(v []*string) *UpdateIdentityPoolOutput {
+func (s *UpdateIdentityPoolOutput) SetOpenIdConnectProviderARNs(v []string) *UpdateIdentityPoolOutput {
 	s.OpenIdConnectProviderARNs = v
 	return s
 }
 
 // SetSamlProviderARNs sets the SamlProviderARNs field's value.
-func (s *UpdateIdentityPoolOutput) SetSamlProviderARNs(v []*string) *UpdateIdentityPoolOutput {
+func (s *UpdateIdentityPoolOutput) SetSamlProviderARNs(v []string) *UpdateIdentityPoolOutput {
 	s.SamlProviderARNs = v
 	return s
 }
 
 // SetSupportedLoginProviders sets the SupportedLoginProviders field's value.
-func (s *UpdateIdentityPoolOutput) SetSupportedLoginProviders(v map[string]*string) *UpdateIdentityPoolOutput {
+func (s *UpdateIdentityPoolOutput) SetSupportedLoginProviders(v map[string]string) *UpdateIdentityPoolOutput {
 	s.SupportedLoginProviders = v
 	return s
 }

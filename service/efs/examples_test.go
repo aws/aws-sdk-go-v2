@@ -138,7 +138,7 @@ func ExampleEFS_CreateTagsRequest_shared00() {
 	svc := efs.New(cfg)
 	input := &efs.CreateTagsInput{
 		FileSystemId: aws.String("fs-01234567"),
-		Tags: []*efs.Tag{
+		Tags: []efs.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyFileSystem"),
@@ -265,8 +265,8 @@ func ExampleEFS_DeleteTagsRequest_shared00() {
 	svc := efs.New(cfg)
 	input := &efs.DeleteTagsInput{
 		FileSystemId: aws.String("fs-01234567"),
-		TagKeys: []*string{
-			aws.String("Name"),
+		TagKeys: []string{
+			"Name",
 		},
 	}
 
@@ -466,8 +466,8 @@ func ExampleEFS_ModifyMountTargetSecurityGroupsRequest_shared00() {
 	svc := efs.New(cfg)
 	input := &efs.ModifyMountTargetSecurityGroupsInput{
 		MountTargetId: aws.String("fsmt-12340abc"),
-		SecurityGroups: []*string{
-			aws.String("sg-abcd1234"),
+		SecurityGroups: []string{
+			"sg-abcd1234",
 		},
 	}
 

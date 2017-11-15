@@ -3984,7 +3984,7 @@ type AccessControlPolicy struct {
 	_ struct{} `type:"structure"`
 
 	// A list of grants.
-	Grants []*Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
+	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
 	Owner *Owner `type:"structure"`
 }
@@ -4004,9 +4004,6 @@ func (s *AccessControlPolicy) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AccessControlPolicy"}
 	if s.Grants != nil {
 		for i, v := range s.Grants {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Grants", i), err.(aws.ErrInvalidParams))
 			}
@@ -4020,7 +4017,7 @@ func (s *AccessControlPolicy) Validate() error {
 }
 
 // SetGrants sets the Grants field's value.
-func (s *AccessControlPolicy) SetGrants(v []*Grant) *AccessControlPolicy {
+func (s *AccessControlPolicy) SetGrants(v []Grant) *AccessControlPolicy {
 	s.Grants = v
 	return s
 }
@@ -4039,7 +4036,7 @@ type AnalyticsAndOperator struct {
 	Prefix *string `type:"string"`
 
 	// The list of tags to use when evaluating an AND predicate.
-	Tags []*Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
+	Tags []Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -4057,9 +4054,6 @@ func (s *AnalyticsAndOperator) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsAndOperator"}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -4079,7 +4073,7 @@ func (s *AnalyticsAndOperator) SetPrefix(v string) *AnalyticsAndOperator {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AnalyticsAndOperator) SetTags(v []*Tag) *AnalyticsAndOperator {
+func (s *AnalyticsAndOperator) SetTags(v []Tag) *AnalyticsAndOperator {
 	s.Tags = v
 	return s
 }
@@ -4388,7 +4382,7 @@ type BucketLifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Rules is a required field
-	Rules []*LifecycleRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
+	Rules []LifecycleRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -4410,9 +4404,6 @@ func (s *BucketLifecycleConfiguration) Validate() error {
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
@@ -4426,7 +4417,7 @@ func (s *BucketLifecycleConfiguration) Validate() error {
 }
 
 // SetRules sets the Rules field's value.
-func (s *BucketLifecycleConfiguration) SetRules(v []*LifecycleRule) *BucketLifecycleConfiguration {
+func (s *BucketLifecycleConfiguration) SetRules(v []LifecycleRule) *BucketLifecycleConfiguration {
 	s.Rules = v
 	return s
 }
@@ -4474,7 +4465,7 @@ type CORSConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// CORSRules is a required field
-	CORSRules []*CORSRule `locationName:"CORSRule" type:"list" flattened:"true" required:"true"`
+	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -4496,9 +4487,6 @@ func (s *CORSConfiguration) Validate() error {
 	}
 	if s.CORSRules != nil {
 		for i, v := range s.CORSRules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CORSRules", i), err.(aws.ErrInvalidParams))
 			}
@@ -4512,7 +4500,7 @@ func (s *CORSConfiguration) Validate() error {
 }
 
 // SetCORSRules sets the CORSRules field's value.
-func (s *CORSConfiguration) SetCORSRules(v []*CORSRule) *CORSConfiguration {
+func (s *CORSConfiguration) SetCORSRules(v []CORSRule) *CORSConfiguration {
 	s.CORSRules = v
 	return s
 }
@@ -4522,23 +4510,23 @@ type CORSRule struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies which headers are allowed in a pre-flight OPTIONS request.
-	AllowedHeaders []*string `locationName:"AllowedHeader" type:"list" flattened:"true"`
+	AllowedHeaders []string `locationName:"AllowedHeader" type:"list" flattened:"true"`
 
 	// Identifies HTTP methods that the domain/origin specified in the rule is allowed
 	// to execute.
 	//
 	// AllowedMethods is a required field
-	AllowedMethods []*string `locationName:"AllowedMethod" type:"list" flattened:"true" required:"true"`
+	AllowedMethods []string `locationName:"AllowedMethod" type:"list" flattened:"true" required:"true"`
 
 	// One or more origins you want customers to be able to access the bucket from.
 	//
 	// AllowedOrigins is a required field
-	AllowedOrigins []*string `locationName:"AllowedOrigin" type:"list" flattened:"true" required:"true"`
+	AllowedOrigins []string `locationName:"AllowedOrigin" type:"list" flattened:"true" required:"true"`
 
 	// One or more headers in the response that you want customers to be able to
 	// access from their applications (for example, from a JavaScript XMLHttpRequest
 	// object).
-	ExposeHeaders []*string `locationName:"ExposeHeader" type:"list" flattened:"true"`
+	ExposeHeaders []string `locationName:"ExposeHeader" type:"list" flattened:"true"`
 
 	// The time in seconds that your browser is to cache the preflight response
 	// for the specified resource.
@@ -4574,25 +4562,25 @@ func (s *CORSRule) Validate() error {
 }
 
 // SetAllowedHeaders sets the AllowedHeaders field's value.
-func (s *CORSRule) SetAllowedHeaders(v []*string) *CORSRule {
+func (s *CORSRule) SetAllowedHeaders(v []string) *CORSRule {
 	s.AllowedHeaders = v
 	return s
 }
 
 // SetAllowedMethods sets the AllowedMethods field's value.
-func (s *CORSRule) SetAllowedMethods(v []*string) *CORSRule {
+func (s *CORSRule) SetAllowedMethods(v []string) *CORSRule {
 	s.AllowedMethods = v
 	return s
 }
 
 // SetAllowedOrigins sets the AllowedOrigins field's value.
-func (s *CORSRule) SetAllowedOrigins(v []*string) *CORSRule {
+func (s *CORSRule) SetAllowedOrigins(v []string) *CORSRule {
 	s.AllowedOrigins = v
 	return s
 }
 
 // SetExposeHeaders sets the ExposeHeaders field's value.
-func (s *CORSRule) SetExposeHeaders(v []*string) *CORSRule {
+func (s *CORSRule) SetExposeHeaders(v []string) *CORSRule {
 	s.ExposeHeaders = v
 	return s
 }
@@ -4886,7 +4874,7 @@ func (s *CompleteMultipartUploadOutput) SetVersionId(v string) *CompleteMultipar
 type CompletedMultipartUpload struct {
 	_ struct{} `type:"structure"`
 
-	Parts []*CompletedPart `locationName:"Part" type:"list" flattened:"true"`
+	Parts []CompletedPart `locationName:"Part" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -4900,7 +4888,7 @@ func (s CompletedMultipartUpload) GoString() string {
 }
 
 // SetParts sets the Parts field's value.
-func (s *CompletedMultipartUpload) SetParts(v []*CompletedPart) *CompletedMultipartUpload {
+func (s *CompletedMultipartUpload) SetParts(v []CompletedPart) *CompletedMultipartUpload {
 	s.Parts = v
 	return s
 }
@@ -5060,7 +5048,7 @@ type CopyObjectInput struct {
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// Specifies whether the metadata is copied from the source object or replaced
 	// with metadata provided in the request.
@@ -5291,7 +5279,7 @@ func (s *CopyObjectInput) SetKey(v string) *CopyObjectInput {
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *CopyObjectInput) SetMetadata(v map[string]*string) *CopyObjectInput {
+func (s *CopyObjectInput) SetMetadata(v map[string]string) *CopyObjectInput {
 	s.Metadata = v
 	return s
 }
@@ -5736,7 +5724,7 @@ type CreateMultipartUploadInput struct {
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
@@ -5898,7 +5886,7 @@ func (s *CreateMultipartUploadInput) SetKey(v string) *CreateMultipartUploadInpu
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *CreateMultipartUploadInput) SetMetadata(v map[string]*string) *CreateMultipartUploadInput {
+func (s *CreateMultipartUploadInput) SetMetadata(v map[string]string) *CreateMultipartUploadInput {
 	s.Metadata = v
 	return s
 }
@@ -6089,7 +6077,7 @@ type Delete struct {
 	_ struct{} `type:"structure"`
 
 	// Objects is a required field
-	Objects []*ObjectIdentifier `locationName:"Object" type:"list" flattened:"true" required:"true"`
+	Objects []ObjectIdentifier `locationName:"Object" type:"list" flattened:"true" required:"true"`
 
 	// Element to enable quiet mode for the request. When you add this element,
 	// you must set its value to true.
@@ -6115,9 +6103,6 @@ func (s *Delete) Validate() error {
 	}
 	if s.Objects != nil {
 		for i, v := range s.Objects {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Objects", i), err.(aws.ErrInvalidParams))
 			}
@@ -6131,7 +6116,7 @@ func (s *Delete) Validate() error {
 }
 
 // SetObjects sets the Objects field's value.
-func (s *Delete) SetObjects(v []*ObjectIdentifier) *Delete {
+func (s *Delete) SetObjects(v []ObjectIdentifier) *Delete {
 	s.Objects = v
 	return s
 }
@@ -7173,9 +7158,9 @@ func (s *DeleteObjectsInput) SetRequestPayer(v RequestPayer) *DeleteObjectsInput
 type DeleteObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Deleted []*DeletedObject `type:"list" flattened:"true"`
+	Deleted []DeletedObject `type:"list" flattened:"true"`
 
-	Errors []*Error `locationName:"Error" type:"list" flattened:"true"`
+	Errors []Error `locationName:"Error" type:"list" flattened:"true"`
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
@@ -7193,13 +7178,13 @@ func (s DeleteObjectsOutput) GoString() string {
 }
 
 // SetDeleted sets the Deleted field's value.
-func (s *DeleteObjectsOutput) SetDeleted(v []*DeletedObject) *DeleteObjectsOutput {
+func (s *DeleteObjectsOutput) SetDeleted(v []DeletedObject) *DeleteObjectsOutput {
 	s.Deleted = v
 	return s
 }
 
 // SetErrors sets the Errors field's value.
-func (s *DeleteObjectsOutput) SetErrors(v []*Error) *DeleteObjectsOutput {
+func (s *DeleteObjectsOutput) SetErrors(v []Error) *DeleteObjectsOutput {
 	s.Errors = v
 	return s
 }
@@ -7561,7 +7546,7 @@ type GetBucketAclOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of grants.
-	Grants []*Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
+	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
 	Owner *Owner `type:"structure"`
 }
@@ -7577,7 +7562,7 @@ func (s GetBucketAclOutput) GoString() string {
 }
 
 // SetGrants sets the Grants field's value.
-func (s *GetBucketAclOutput) SetGrants(v []*Grant) *GetBucketAclOutput {
+func (s *GetBucketAclOutput) SetGrants(v []Grant) *GetBucketAclOutput {
 	s.Grants = v
 	return s
 }
@@ -7723,7 +7708,7 @@ func (s *GetBucketCorsInput) getBucket() (v string) {
 type GetBucketCorsOutput struct {
 	_ struct{} `type:"structure"`
 
-	CORSRules []*CORSRule `locationName:"CORSRule" type:"list" flattened:"true"`
+	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -7737,7 +7722,7 @@ func (s GetBucketCorsOutput) GoString() string {
 }
 
 // SetCORSRules sets the CORSRules field's value.
-func (s *GetBucketCorsOutput) SetCORSRules(v []*CORSRule) *GetBucketCorsOutput {
+func (s *GetBucketCorsOutput) SetCORSRules(v []CORSRule) *GetBucketCorsOutput {
 	s.CORSRules = v
 	return s
 }
@@ -7877,7 +7862,7 @@ func (s *GetBucketLifecycleConfigurationInput) getBucket() (v string) {
 type GetBucketLifecycleConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	Rules []*LifecycleRule `locationName:"Rule" type:"list" flattened:"true"`
+	Rules []LifecycleRule `locationName:"Rule" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -7891,7 +7876,7 @@ func (s GetBucketLifecycleConfigurationOutput) GoString() string {
 }
 
 // SetRules sets the Rules field's value.
-func (s *GetBucketLifecycleConfigurationOutput) SetRules(v []*LifecycleRule) *GetBucketLifecycleConfigurationOutput {
+func (s *GetBucketLifecycleConfigurationOutput) SetRules(v []LifecycleRule) *GetBucketLifecycleConfigurationOutput {
 	s.Rules = v
 	return s
 }
@@ -7945,7 +7930,7 @@ func (s *GetBucketLifecycleInput) getBucket() (v string) {
 type GetBucketLifecycleOutput struct {
 	_ struct{} `type:"structure"`
 
-	Rules []*Rule `locationName:"Rule" type:"list" flattened:"true"`
+	Rules []Rule `locationName:"Rule" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -7959,7 +7944,7 @@ func (s GetBucketLifecycleOutput) GoString() string {
 }
 
 // SetRules sets the Rules field's value.
-func (s *GetBucketLifecycleOutput) SetRules(v []*Rule) *GetBucketLifecycleOutput {
+func (s *GetBucketLifecycleOutput) SetRules(v []Rule) *GetBucketLifecycleOutput {
 	s.Rules = v
 	return s
 }
@@ -8239,11 +8224,11 @@ func (s *GetBucketNotificationConfigurationInput) getBucket() (v string) {
 type GetBucketNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	LambdaFunctionConfigurations []*LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
+	LambdaFunctionConfigurations []LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
 
-	QueueConfigurations []*QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
+	QueueConfigurations []QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
 
-	TopicConfigurations []*TopicConfiguration `locationName:"TopicConfiguration" type:"list" flattened:"true"`
+	TopicConfigurations []TopicConfiguration `locationName:"TopicConfiguration" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -8261,9 +8246,6 @@ func (s *GetBucketNotificationConfigurationOutput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketNotificationConfigurationOutput"}
 	if s.LambdaFunctionConfigurations != nil {
 		for i, v := range s.LambdaFunctionConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LambdaFunctionConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -8271,9 +8253,6 @@ func (s *GetBucketNotificationConfigurationOutput) Validate() error {
 	}
 	if s.QueueConfigurations != nil {
 		for i, v := range s.QueueConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueueConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -8281,9 +8260,6 @@ func (s *GetBucketNotificationConfigurationOutput) Validate() error {
 	}
 	if s.TopicConfigurations != nil {
 		for i, v := range s.TopicConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TopicConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -8297,19 +8273,19 @@ func (s *GetBucketNotificationConfigurationOutput) Validate() error {
 }
 
 // SetLambdaFunctionConfigurations sets the LambdaFunctionConfigurations field's value.
-func (s *GetBucketNotificationConfigurationOutput) SetLambdaFunctionConfigurations(v []*LambdaFunctionConfiguration) *GetBucketNotificationConfigurationOutput {
+func (s *GetBucketNotificationConfigurationOutput) SetLambdaFunctionConfigurations(v []LambdaFunctionConfiguration) *GetBucketNotificationConfigurationOutput {
 	s.LambdaFunctionConfigurations = v
 	return s
 }
 
 // SetQueueConfigurations sets the QueueConfigurations field's value.
-func (s *GetBucketNotificationConfigurationOutput) SetQueueConfigurations(v []*QueueConfiguration) *GetBucketNotificationConfigurationOutput {
+func (s *GetBucketNotificationConfigurationOutput) SetQueueConfigurations(v []QueueConfiguration) *GetBucketNotificationConfigurationOutput {
 	s.QueueConfigurations = v
 	return s
 }
 
 // SetTopicConfigurations sets the TopicConfigurations field's value.
-func (s *GetBucketNotificationConfigurationOutput) SetTopicConfigurations(v []*TopicConfiguration) *GetBucketNotificationConfigurationOutput {
+func (s *GetBucketNotificationConfigurationOutput) SetTopicConfigurations(v []TopicConfiguration) *GetBucketNotificationConfigurationOutput {
 	s.TopicConfigurations = v
 	return s
 }
@@ -8611,7 +8587,7 @@ type GetBucketTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// TagSet is a required field
-	TagSet []*Tag `locationNameList:"Tag" type:"list" required:"true"`
+	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8625,7 +8601,7 @@ func (s GetBucketTaggingOutput) GoString() string {
 }
 
 // SetTagSet sets the TagSet field's value.
-func (s *GetBucketTaggingOutput) SetTagSet(v []*Tag) *GetBucketTaggingOutput {
+func (s *GetBucketTaggingOutput) SetTagSet(v []Tag) *GetBucketTaggingOutput {
 	s.TagSet = v
 	return s
 }
@@ -8765,7 +8741,7 @@ type GetBucketWebsiteOutput struct {
 
 	RedirectAllRequestsTo *RedirectAllRequestsTo `type:"structure"`
 
-	RoutingRules []*RoutingRule `locationNameList:"RoutingRule" type:"list"`
+	RoutingRules []RoutingRule `locationNameList:"RoutingRule" type:"list"`
 }
 
 // String returns the string representation
@@ -8797,7 +8773,7 @@ func (s *GetBucketWebsiteOutput) SetRedirectAllRequestsTo(v *RedirectAllRequests
 }
 
 // SetRoutingRules sets the RoutingRules field's value.
-func (s *GetBucketWebsiteOutput) SetRoutingRules(v []*RoutingRule) *GetBucketWebsiteOutput {
+func (s *GetBucketWebsiteOutput) SetRoutingRules(v []RoutingRule) *GetBucketWebsiteOutput {
 	s.RoutingRules = v
 	return s
 }
@@ -8889,7 +8865,7 @@ type GetObjectAclOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of grants.
-	Grants []*Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
+	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
 	Owner *Owner `type:"structure"`
 
@@ -8909,7 +8885,7 @@ func (s GetObjectAclOutput) GoString() string {
 }
 
 // SetGrants sets the Grants field's value.
-func (s *GetObjectAclOutput) SetGrants(v []*Grant) *GetObjectAclOutput {
+func (s *GetObjectAclOutput) SetGrants(v []Grant) *GetObjectAclOutput {
 	s.Grants = v
 	return s
 }
@@ -9216,7 +9192,7 @@ type GetObjectOutput struct {
 	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp" timestampFormat:"rfc822"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// This is set to the number of metadata entries not returned in x-amz-meta
 	// headers. This can happen if you create metadata using an API like SOAP that
@@ -9364,7 +9340,7 @@ func (s *GetObjectOutput) SetLastModified(v time.Time) *GetObjectOutput {
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *GetObjectOutput) SetMetadata(v map[string]*string) *GetObjectOutput {
+func (s *GetObjectOutput) SetMetadata(v map[string]string) *GetObjectOutput {
 	s.Metadata = v
 	return s
 }
@@ -9521,7 +9497,7 @@ type GetObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// TagSet is a required field
-	TagSet []*Tag `locationNameList:"Tag" type:"list" required:"true"`
+	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
 }
@@ -9537,7 +9513,7 @@ func (s GetObjectTaggingOutput) GoString() string {
 }
 
 // SetTagSet sets the TagSet field's value.
-func (s *GetObjectTaggingOutput) SetTagSet(v []*Tag) *GetObjectTaggingOutput {
+func (s *GetObjectTaggingOutput) SetTagSet(v []Tag) *GetObjectTaggingOutput {
 	s.TagSet = v
 	return s
 }
@@ -10106,7 +10082,7 @@ type HeadObjectOutput struct {
 	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp" timestampFormat:"rfc822"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// This is set to the number of metadata entries not returned in x-amz-meta
 	// headers. This can happen if you create metadata using an API like SOAP that
@@ -10239,7 +10215,7 @@ func (s *HeadObjectOutput) SetLastModified(v time.Time) *HeadObjectOutput {
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *HeadObjectOutput) SetMetadata(v map[string]*string) *HeadObjectOutput {
+func (s *HeadObjectOutput) SetMetadata(v map[string]string) *HeadObjectOutput {
 	s.Metadata = v
 	return s
 }
@@ -10738,7 +10714,7 @@ type KeyFilter struct {
 
 	// A list of containers for key value pair that defines the criteria for the
 	// filter rule.
-	FilterRules []*FilterRule `locationName:"FilterRule" type:"list" flattened:"true"`
+	FilterRules []FilterRule `locationName:"FilterRule" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -10752,7 +10728,7 @@ func (s KeyFilter) GoString() string {
 }
 
 // SetFilterRules sets the FilterRules field's value.
-func (s *KeyFilter) SetFilterRules(v []*FilterRule) *KeyFilter {
+func (s *KeyFilter) SetFilterRules(v []FilterRule) *KeyFilter {
 	s.FilterRules = v
 	return s
 }
@@ -10837,7 +10813,7 @@ type LifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Rules is a required field
-	Rules []*Rule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
+	Rules []Rule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -10859,9 +10835,6 @@ func (s *LifecycleConfiguration) Validate() error {
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
@@ -10875,7 +10848,7 @@ func (s *LifecycleConfiguration) Validate() error {
 }
 
 // SetRules sets the Rules field's value.
-func (s *LifecycleConfiguration) SetRules(v []*Rule) *LifecycleConfiguration {
+func (s *LifecycleConfiguration) SetRules(v []Rule) *LifecycleConfiguration {
 	s.Rules = v
 	return s
 }
@@ -10951,7 +10924,7 @@ type LifecycleRule struct {
 	// period in the object's lifetime.
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration `type:"structure"`
 
-	NoncurrentVersionTransitions []*NoncurrentVersionTransition `locationName:"NoncurrentVersionTransition" type:"list" flattened:"true"`
+	NoncurrentVersionTransitions []NoncurrentVersionTransition `locationName:"NoncurrentVersionTransition" type:"list" flattened:"true"`
 
 	// Prefix identifying one or more objects to which the rule applies. This is
 	// deprecated; use Filter instead.
@@ -10963,7 +10936,7 @@ type LifecycleRule struct {
 	// Status is a required field
 	Status ExpirationStatus `type:"string" required:"true"`
 
-	Transitions []*Transition `locationName:"Transition" type:"list" flattened:"true"`
+	Transitions []Transition `locationName:"Transition" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -11025,7 +10998,7 @@ func (s *LifecycleRule) SetNoncurrentVersionExpiration(v *NoncurrentVersionExpir
 }
 
 // SetNoncurrentVersionTransitions sets the NoncurrentVersionTransitions field's value.
-func (s *LifecycleRule) SetNoncurrentVersionTransitions(v []*NoncurrentVersionTransition) *LifecycleRule {
+func (s *LifecycleRule) SetNoncurrentVersionTransitions(v []NoncurrentVersionTransition) *LifecycleRule {
 	s.NoncurrentVersionTransitions = v
 	return s
 }
@@ -11043,7 +11016,7 @@ func (s *LifecycleRule) SetStatus(v ExpirationStatus) *LifecycleRule {
 }
 
 // SetTransitions sets the Transitions field's value.
-func (s *LifecycleRule) SetTransitions(v []*Transition) *LifecycleRule {
+func (s *LifecycleRule) SetTransitions(v []Transition) *LifecycleRule {
 	s.Transitions = v
 	return s
 }
@@ -11059,7 +11032,7 @@ type LifecycleRuleAndOperator struct {
 
 	// All of these tags must exist in the object's tag set in order for the rule
 	// to apply.
-	Tags []*Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
+	Tags []Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -11077,9 +11050,6 @@ func (s *LifecycleRuleAndOperator) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LifecycleRuleAndOperator"}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -11099,7 +11069,7 @@ func (s *LifecycleRuleAndOperator) SetPrefix(v string) *LifecycleRuleAndOperator
 }
 
 // SetTags sets the Tags field's value.
-func (s *LifecycleRuleAndOperator) SetTags(v []*Tag) *LifecycleRuleAndOperator {
+func (s *LifecycleRuleAndOperator) SetTags(v []Tag) *LifecycleRuleAndOperator {
 	s.Tags = v
 	return s
 }
@@ -11232,7 +11202,7 @@ type ListBucketAnalyticsConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of analytics configurations for a bucket.
-	AnalyticsConfigurationList []*AnalyticsConfiguration `locationName:"AnalyticsConfiguration" type:"list" flattened:"true"`
+	AnalyticsConfigurationList []AnalyticsConfiguration `locationName:"AnalyticsConfiguration" type:"list" flattened:"true"`
 
 	// The ContinuationToken that represents where this request began.
 	ContinuationToken *string `type:"string"`
@@ -11259,7 +11229,7 @@ func (s ListBucketAnalyticsConfigurationsOutput) GoString() string {
 }
 
 // SetAnalyticsConfigurationList sets the AnalyticsConfigurationList field's value.
-func (s *ListBucketAnalyticsConfigurationsOutput) SetAnalyticsConfigurationList(v []*AnalyticsConfiguration) *ListBucketAnalyticsConfigurationsOutput {
+func (s *ListBucketAnalyticsConfigurationsOutput) SetAnalyticsConfigurationList(v []AnalyticsConfiguration) *ListBucketAnalyticsConfigurationsOutput {
 	s.AnalyticsConfigurationList = v
 	return s
 }
@@ -11350,7 +11320,7 @@ type ListBucketInventoryConfigurationsOutput struct {
 	ContinuationToken *string `type:"string"`
 
 	// The list of inventory configurations for a bucket.
-	InventoryConfigurationList []*InventoryConfiguration `locationName:"InventoryConfiguration" type:"list" flattened:"true"`
+	InventoryConfigurationList []InventoryConfiguration `locationName:"InventoryConfiguration" type:"list" flattened:"true"`
 
 	// Indicates whether the returned list of inventory configurations is truncated
 	// in this response. A value of true indicates that the list is truncated.
@@ -11379,7 +11349,7 @@ func (s *ListBucketInventoryConfigurationsOutput) SetContinuationToken(v string)
 }
 
 // SetInventoryConfigurationList sets the InventoryConfigurationList field's value.
-func (s *ListBucketInventoryConfigurationsOutput) SetInventoryConfigurationList(v []*InventoryConfiguration) *ListBucketInventoryConfigurationsOutput {
+func (s *ListBucketInventoryConfigurationsOutput) SetInventoryConfigurationList(v []InventoryConfiguration) *ListBucketInventoryConfigurationsOutput {
 	s.InventoryConfigurationList = v
 	return s
 }
@@ -11469,7 +11439,7 @@ type ListBucketMetricsConfigurationsOutput struct {
 	IsTruncated *bool `type:"boolean"`
 
 	// The list of metrics configurations for a bucket.
-	MetricsConfigurationList []*MetricsConfiguration `locationName:"MetricsConfiguration" type:"list" flattened:"true"`
+	MetricsConfigurationList []MetricsConfiguration `locationName:"MetricsConfiguration" type:"list" flattened:"true"`
 
 	// The marker used to continue a metrics configuration listing that has been
 	// truncated. Use the NextContinuationToken from a previously truncated list
@@ -11501,7 +11471,7 @@ func (s *ListBucketMetricsConfigurationsOutput) SetIsTruncated(v bool) *ListBuck
 }
 
 // SetMetricsConfigurationList sets the MetricsConfigurationList field's value.
-func (s *ListBucketMetricsConfigurationsOutput) SetMetricsConfigurationList(v []*MetricsConfiguration) *ListBucketMetricsConfigurationsOutput {
+func (s *ListBucketMetricsConfigurationsOutput) SetMetricsConfigurationList(v []MetricsConfiguration) *ListBucketMetricsConfigurationsOutput {
 	s.MetricsConfigurationList = v
 	return s
 }
@@ -11531,7 +11501,7 @@ func (s ListBucketsInput) GoString() string {
 type ListBucketsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Buckets []*Bucket `locationNameList:"Bucket" type:"list"`
+	Buckets []Bucket `locationNameList:"Bucket" type:"list"`
 
 	Owner *Owner `type:"structure"`
 }
@@ -11547,7 +11517,7 @@ func (s ListBucketsOutput) GoString() string {
 }
 
 // SetBuckets sets the Buckets field's value.
-func (s *ListBucketsOutput) SetBuckets(v []*Bucket) *ListBucketsOutput {
+func (s *ListBucketsOutput) SetBuckets(v []Bucket) *ListBucketsOutput {
 	s.Buckets = v
 	return s
 }
@@ -11675,7 +11645,7 @@ type ListMultipartUploadsOutput struct {
 	// Name of the bucket to which the multipart upload was initiated.
 	Bucket *string `type:"string"`
 
-	CommonPrefixes []*CommonPrefix `type:"list" flattened:"true"`
+	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
 	Delimiter *string `type:"string"`
 
@@ -11710,7 +11680,7 @@ type ListMultipartUploadsOutput struct {
 	// Upload ID after which listing began.
 	UploadIdMarker *string `type:"string"`
 
-	Uploads []*MultipartUpload `locationName:"Upload" type:"list" flattened:"true"`
+	Uploads []MultipartUpload `locationName:"Upload" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -11737,7 +11707,7 @@ func (s *ListMultipartUploadsOutput) getBucket() (v string) {
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListMultipartUploadsOutput) SetCommonPrefixes(v []*CommonPrefix) *ListMultipartUploadsOutput {
+func (s *ListMultipartUploadsOutput) SetCommonPrefixes(v []CommonPrefix) *ListMultipartUploadsOutput {
 	s.CommonPrefixes = v
 	return s
 }
@@ -11797,7 +11767,7 @@ func (s *ListMultipartUploadsOutput) SetUploadIdMarker(v string) *ListMultipartU
 }
 
 // SetUploads sets the Uploads field's value.
-func (s *ListMultipartUploadsOutput) SetUploads(v []*MultipartUpload) *ListMultipartUploadsOutput {
+func (s *ListMultipartUploadsOutput) SetUploads(v []MultipartUpload) *ListMultipartUploadsOutput {
 	s.Uploads = v
 	return s
 }
@@ -11911,9 +11881,9 @@ func (s *ListObjectVersionsInput) SetVersionIdMarker(v string) *ListObjectVersio
 type ListObjectVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	CommonPrefixes []*CommonPrefix `type:"list" flattened:"true"`
+	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
-	DeleteMarkers []*DeleteMarkerEntry `locationName:"DeleteMarker" type:"list" flattened:"true"`
+	DeleteMarkers []DeleteMarkerEntry `locationName:"DeleteMarker" type:"list" flattened:"true"`
 
 	Delimiter *string `type:"string"`
 
@@ -11944,7 +11914,7 @@ type ListObjectVersionsOutput struct {
 
 	VersionIdMarker *string `type:"string"`
 
-	Versions []*ObjectVersion `locationName:"Version" type:"list" flattened:"true"`
+	Versions []ObjectVersion `locationName:"Version" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -11958,13 +11928,13 @@ func (s ListObjectVersionsOutput) GoString() string {
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListObjectVersionsOutput) SetCommonPrefixes(v []*CommonPrefix) *ListObjectVersionsOutput {
+func (s *ListObjectVersionsOutput) SetCommonPrefixes(v []CommonPrefix) *ListObjectVersionsOutput {
 	s.CommonPrefixes = v
 	return s
 }
 
 // SetDeleteMarkers sets the DeleteMarkers field's value.
-func (s *ListObjectVersionsOutput) SetDeleteMarkers(v []*DeleteMarkerEntry) *ListObjectVersionsOutput {
+func (s *ListObjectVersionsOutput) SetDeleteMarkers(v []DeleteMarkerEntry) *ListObjectVersionsOutput {
 	s.DeleteMarkers = v
 	return s
 }
@@ -12030,7 +12000,7 @@ func (s *ListObjectVersionsOutput) SetVersionIdMarker(v string) *ListObjectVersi
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListObjectVersionsOutput) SetVersions(v []*ObjectVersion) *ListObjectVersionsOutput {
+func (s *ListObjectVersionsOutput) SetVersions(v []ObjectVersion) *ListObjectVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -12146,9 +12116,9 @@ func (s *ListObjectsInput) SetRequestPayer(v RequestPayer) *ListObjectsInput {
 type ListObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
-	CommonPrefixes []*CommonPrefix `type:"list" flattened:"true"`
+	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
-	Contents []*Object `type:"list" flattened:"true"`
+	Contents []Object `type:"list" flattened:"true"`
 
 	Delimiter *string `type:"string"`
 
@@ -12188,13 +12158,13 @@ func (s ListObjectsOutput) GoString() string {
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListObjectsOutput) SetCommonPrefixes(v []*CommonPrefix) *ListObjectsOutput {
+func (s *ListObjectsOutput) SetCommonPrefixes(v []CommonPrefix) *ListObjectsOutput {
 	s.CommonPrefixes = v
 	return s
 }
 
 // SetContents sets the Contents field's value.
-func (s *ListObjectsOutput) SetContents(v []*Object) *ListObjectsOutput {
+func (s *ListObjectsOutput) SetContents(v []Object) *ListObjectsOutput {
 	s.Contents = v
 	return s
 }
@@ -12380,10 +12350,10 @@ type ListObjectsV2Output struct {
 
 	// CommonPrefixes contains all (if there are any) keys between Prefix and the
 	// next occurrence of the string specified by delimiter
-	CommonPrefixes []*CommonPrefix `type:"list" flattened:"true"`
+	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
 	// Metadata about each object returned.
-	Contents []*Object `type:"list" flattened:"true"`
+	Contents []Object `type:"list" flattened:"true"`
 
 	// ContinuationToken indicates Amazon S3 that the list is being continued on
 	// this bucket with a token. ContinuationToken is obfuscated and is not a real
@@ -12437,13 +12407,13 @@ func (s ListObjectsV2Output) GoString() string {
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListObjectsV2Output) SetCommonPrefixes(v []*CommonPrefix) *ListObjectsV2Output {
+func (s *ListObjectsV2Output) SetCommonPrefixes(v []CommonPrefix) *ListObjectsV2Output {
 	s.CommonPrefixes = v
 	return s
 }
 
 // SetContents sets the Contents field's value.
-func (s *ListObjectsV2Output) SetContents(v []*Object) *ListObjectsV2Output {
+func (s *ListObjectsV2Output) SetContents(v []Object) *ListObjectsV2Output {
 	s.Contents = v
 	return s
 }
@@ -12651,7 +12621,7 @@ type ListPartsOutput struct {
 	// Part number after which listing begins.
 	PartNumberMarker *int64 `type:"integer"`
 
-	Parts []*Part `locationName:"Part" type:"list" flattened:"true"`
+	Parts []Part `locationName:"Part" type:"list" flattened:"true"`
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
@@ -12742,7 +12712,7 @@ func (s *ListPartsOutput) SetPartNumberMarker(v int64) *ListPartsOutput {
 }
 
 // SetParts sets the Parts field's value.
-func (s *ListPartsOutput) SetParts(v []*Part) *ListPartsOutput {
+func (s *ListPartsOutput) SetParts(v []Part) *ListPartsOutput {
 	s.Parts = v
 	return s
 }
@@ -12777,7 +12747,7 @@ type LoggingEnabled struct {
 	// log files can be distinguished by key.
 	TargetBucket *string `type:"string"`
 
-	TargetGrants []*TargetGrant `locationNameList:"Grant" type:"list"`
+	TargetGrants []TargetGrant `locationNameList:"Grant" type:"list"`
 
 	// This element lets you specify a prefix for the keys that the log files will
 	// be stored under.
@@ -12799,9 +12769,6 @@ func (s *LoggingEnabled) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LoggingEnabled"}
 	if s.TargetGrants != nil {
 		for i, v := range s.TargetGrants {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetGrants", i), err.(aws.ErrInvalidParams))
 			}
@@ -12821,7 +12788,7 @@ func (s *LoggingEnabled) SetTargetBucket(v string) *LoggingEnabled {
 }
 
 // SetTargetGrants sets the TargetGrants field's value.
-func (s *LoggingEnabled) SetTargetGrants(v []*TargetGrant) *LoggingEnabled {
+func (s *LoggingEnabled) SetTargetGrants(v []TargetGrant) *LoggingEnabled {
 	s.TargetGrants = v
 	return s
 }
@@ -12840,7 +12807,7 @@ type MetricsAndOperator struct {
 	Prefix *string `type:"string"`
 
 	// The list of tags used when evaluating an AND predicate.
-	Tags []*Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
+	Tags []Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -12858,9 +12825,6 @@ func (s *MetricsAndOperator) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MetricsAndOperator"}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -12880,7 +12844,7 @@ func (s *MetricsAndOperator) SetPrefix(v string) *MetricsAndOperator {
 }
 
 // SetTags sets the Tags field's value.
-func (s *MetricsAndOperator) SetTags(v []*Tag) *MetricsAndOperator {
+func (s *MetricsAndOperator) SetTags(v []Tag) *MetricsAndOperator {
 	s.Tags = v
 	return s
 }
@@ -15117,7 +15081,7 @@ type PutObjectInput struct {
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
@@ -15297,7 +15261,7 @@ func (s *PutObjectInput) SetKey(v string) *PutObjectInput {
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *PutObjectInput) SetMetadata(v map[string]*string) *PutObjectInput {
+func (s *PutObjectInput) SetMetadata(v map[string]string) *PutObjectInput {
 	s.Metadata = v
 	return s
 }
@@ -15829,7 +15793,7 @@ type ReplicationConfiguration struct {
 	// configuration must have at least one rule and can contain up to 1,000 rules.
 	//
 	// Rules is a required field
-	Rules []*ReplicationRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
+	Rules []ReplicationRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -15855,9 +15819,6 @@ func (s *ReplicationConfiguration) Validate() error {
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
@@ -15877,7 +15838,7 @@ func (s *ReplicationConfiguration) SetRole(v string) *ReplicationConfiguration {
 }
 
 // SetRules sets the Rules field's value.
-func (s *ReplicationConfiguration) SetRules(v []*ReplicationRule) *ReplicationConfiguration {
+func (s *ReplicationConfiguration) SetRules(v []ReplicationRule) *ReplicationConfiguration {
 	s.Rules = v
 	return s
 }
@@ -16509,7 +16470,7 @@ type Tagging struct {
 	_ struct{} `type:"structure"`
 
 	// TagSet is a required field
-	TagSet []*Tag `locationNameList:"Tag" type:"list" required:"true"`
+	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -16531,9 +16492,6 @@ func (s *Tagging) Validate() error {
 	}
 	if s.TagSet != nil {
 		for i, v := range s.TagSet {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagSet", i), err.(aws.ErrInvalidParams))
 			}
@@ -16547,7 +16505,7 @@ func (s *Tagging) Validate() error {
 }
 
 // SetTagSet sets the TagSet field's value.
-func (s *Tagging) SetTagSet(v []*Tag) *Tagging {
+func (s *Tagging) SetTagSet(v []Tag) *Tagging {
 	s.TagSet = v
 	return s
 }
@@ -17403,7 +17361,7 @@ type WebsiteConfiguration struct {
 
 	RedirectAllRequestsTo *RedirectAllRequestsTo `type:"structure"`
 
-	RoutingRules []*RoutingRule `locationNameList:"RoutingRule" type:"list"`
+	RoutingRules []RoutingRule `locationNameList:"RoutingRule" type:"list"`
 }
 
 // String returns the string representation
@@ -17436,9 +17394,6 @@ func (s *WebsiteConfiguration) Validate() error {
 	}
 	if s.RoutingRules != nil {
 		for i, v := range s.RoutingRules {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RoutingRules", i), err.(aws.ErrInvalidParams))
 			}
@@ -17470,7 +17425,7 @@ func (s *WebsiteConfiguration) SetRedirectAllRequestsTo(v *RedirectAllRequestsTo
 }
 
 // SetRoutingRules sets the RoutingRules field's value.
-func (s *WebsiteConfiguration) SetRoutingRules(v []*RoutingRule) *WebsiteConfiguration {
+func (s *WebsiteConfiguration) SetRoutingRules(v []RoutingRule) *WebsiteConfiguration {
 	s.RoutingRules = v
 	return s
 }

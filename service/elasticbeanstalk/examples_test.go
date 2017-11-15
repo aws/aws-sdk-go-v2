@@ -466,8 +466,8 @@ func ExampleElasticBeanstalk_DescribeApplicationVersionsRequest_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeApplicationVersionsInput{
 		ApplicationName: aws.String("my-app"),
-		VersionLabels: []*string{
-			aws.String("v2"),
+		VersionLabels: []string{
+			"v2",
 		},
 	}
 
@@ -683,8 +683,8 @@ func ExampleElasticBeanstalk_DescribeEnvironmentsRequest_shared00() {
 
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeEnvironmentsInput{
-		EnvironmentNames: []*string{
-			aws.String("my-env"),
+		EnvironmentNames: []string{
+			"my-env",
 		},
 	}
 
@@ -1102,7 +1102,7 @@ func ExampleElasticBeanstalk_UpdateConfigurationTemplateRequest_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.UpdateConfigurationTemplateInput{
 		ApplicationName: aws.String("my-app"),
-		OptionsToRemove: []*elasticbeanstalk.OptionSpecification{
+		OptionsToRemove: []elasticbeanstalk.OptionSpecification{
 			{
 				Namespace:  aws.String("aws:elasticbeanstalk:healthreporting:system"),
 				OptionName: aws.String("ConfigDocument"),
@@ -1185,7 +1185,7 @@ func ExampleElasticBeanstalk_UpdateEnvironmentRequest_shared01() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.UpdateEnvironmentInput{
 		EnvironmentName: aws.String("my-env"),
-		OptionSettings: []*elasticbeanstalk.ConfigurationOptionSetting{
+		OptionSettings: []elasticbeanstalk.ConfigurationOptionSetting{
 			{
 				Namespace:  aws.String("aws:elb:healthcheck"),
 				OptionName: aws.String("Interval"),
@@ -1245,7 +1245,7 @@ func ExampleElasticBeanstalk_ValidateConfigurationSettingsRequest_shared00() {
 	input := &elasticbeanstalk.ValidateConfigurationSettingsInput{
 		ApplicationName: aws.String("my-app"),
 		EnvironmentName: aws.String("my-env"),
-		OptionSettings: []*elasticbeanstalk.ConfigurationOptionSetting{
+		OptionSettings: []elasticbeanstalk.ConfigurationOptionSetting{
 			{
 				Namespace:  aws.String("aws:elasticbeanstalk:healthreporting:system"),
 				OptionName: aws.String("ConfigDocument"),

@@ -2788,7 +2788,7 @@ type AddTagsToResourceInput struct {
 	// pair. A tag key must be accompanied by a tag value.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationNameList:"Tag" type:"list" required:"true"`
+	Tags []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2826,7 +2826,7 @@ func (s *AddTagsToResourceInput) SetResourceName(v string) *AddTagsToResourceInp
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []*Tag) *AddTagsToResourceInput {
+func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	s.Tags = v
 	return s
 }
@@ -3021,13 +3021,13 @@ type CacheCluster struct {
 	CacheNodeType *string `type:"string"`
 
 	// A list of cache nodes that are members of the cache cluster.
-	CacheNodes []*CacheNode `locationNameList:"CacheNode" type:"list"`
+	CacheNodes []CacheNode `locationNameList:"CacheNode" type:"list"`
 
 	// Status of the cache parameter group.
 	CacheParameterGroup *CacheParameterGroupStatus `type:"structure"`
 
 	// A list of cache security group elements, composed of name and status sub-elements.
-	CacheSecurityGroups []*CacheSecurityGroupMembership `locationNameList:"CacheSecurityGroup" type:"list"`
+	CacheSecurityGroups []CacheSecurityGroupMembership `locationNameList:"CacheSecurityGroup" type:"list"`
 
 	// The name of the cache subnet group associated with the cache cluster.
 	CacheSubnetGroupName *string `type:"string"`
@@ -3097,7 +3097,7 @@ type CacheCluster struct {
 	ReplicationGroupId *string `type:"string"`
 
 	// A list of VPC Security Groups associated with the cache cluster.
-	SecurityGroups []*SecurityGroupMembership `type:"list"`
+	SecurityGroups []SecurityGroupMembership `type:"list"`
 
 	// The number of days for which ElastiCache retains automatic cache cluster
 	// snapshots before deleting them. For example, if you set SnapshotRetentionLimit
@@ -3156,7 +3156,7 @@ func (s *CacheCluster) SetCacheNodeType(v string) *CacheCluster {
 }
 
 // SetCacheNodes sets the CacheNodes field's value.
-func (s *CacheCluster) SetCacheNodes(v []*CacheNode) *CacheCluster {
+func (s *CacheCluster) SetCacheNodes(v []CacheNode) *CacheCluster {
 	s.CacheNodes = v
 	return s
 }
@@ -3168,7 +3168,7 @@ func (s *CacheCluster) SetCacheParameterGroup(v *CacheParameterGroupStatus) *Cac
 }
 
 // SetCacheSecurityGroups sets the CacheSecurityGroups field's value.
-func (s *CacheCluster) SetCacheSecurityGroups(v []*CacheSecurityGroupMembership) *CacheCluster {
+func (s *CacheCluster) SetCacheSecurityGroups(v []CacheSecurityGroupMembership) *CacheCluster {
 	s.CacheSecurityGroups = v
 	return s
 }
@@ -3240,7 +3240,7 @@ func (s *CacheCluster) SetReplicationGroupId(v string) *CacheCluster {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *CacheCluster) SetSecurityGroups(v []*SecurityGroupMembership) *CacheCluster {
+func (s *CacheCluster) SetSecurityGroups(v []SecurityGroupMembership) *CacheCluster {
 	s.SecurityGroups = v
 	return s
 }
@@ -3453,7 +3453,7 @@ type CacheNodeTypeSpecificParameter struct {
 	AllowedValues *string `type:"string"`
 
 	// A list of cache node types and their corresponding values for this parameter.
-	CacheNodeTypeSpecificValues []*CacheNodeTypeSpecificValue `locationNameList:"CacheNodeTypeSpecificValue" type:"list"`
+	CacheNodeTypeSpecificValues []CacheNodeTypeSpecificValue `locationNameList:"CacheNodeTypeSpecificValue" type:"list"`
 
 	// Indicates whether a change to the parameter is applied immediately or requires
 	// a reboot for the change to be applied. You can force a reboot or wait until
@@ -3499,7 +3499,7 @@ func (s *CacheNodeTypeSpecificParameter) SetAllowedValues(v string) *CacheNodeTy
 }
 
 // SetCacheNodeTypeSpecificValues sets the CacheNodeTypeSpecificValues field's value.
-func (s *CacheNodeTypeSpecificParameter) SetCacheNodeTypeSpecificValues(v []*CacheNodeTypeSpecificValue) *CacheNodeTypeSpecificParameter {
+func (s *CacheNodeTypeSpecificParameter) SetCacheNodeTypeSpecificValues(v []CacheNodeTypeSpecificValue) *CacheNodeTypeSpecificParameter {
 	s.CacheNodeTypeSpecificValues = v
 	return s
 }
@@ -3633,7 +3633,7 @@ type CacheParameterGroupStatus struct {
 
 	// A list of the cache node IDs which need to be rebooted for parameter changes
 	// to be applied. A node ID is a numeric identifier (0001, 0002, etc.).
-	CacheNodeIdsToReboot []*string `locationNameList:"CacheNodeId" type:"list"`
+	CacheNodeIdsToReboot []string `locationNameList:"CacheNodeId" type:"list"`
 
 	// The name of the cache parameter group.
 	CacheParameterGroupName *string `type:"string"`
@@ -3653,7 +3653,7 @@ func (s CacheParameterGroupStatus) GoString() string {
 }
 
 // SetCacheNodeIdsToReboot sets the CacheNodeIdsToReboot field's value.
-func (s *CacheParameterGroupStatus) SetCacheNodeIdsToReboot(v []*string) *CacheParameterGroupStatus {
+func (s *CacheParameterGroupStatus) SetCacheNodeIdsToReboot(v []string) *CacheParameterGroupStatus {
 	s.CacheNodeIdsToReboot = v
 	return s
 }
@@ -3689,7 +3689,7 @@ type CacheSecurityGroup struct {
 
 	// A list of Amazon EC2 security groups that are associated with this cache
 	// security group.
-	EC2SecurityGroups []*EC2SecurityGroup `locationNameList:"EC2SecurityGroup" type:"list"`
+	EC2SecurityGroups []EC2SecurityGroup `locationNameList:"EC2SecurityGroup" type:"list"`
 
 	// The AWS account ID of the cache security group owner.
 	OwnerId *string `type:"string"`
@@ -3718,7 +3718,7 @@ func (s *CacheSecurityGroup) SetDescription(v string) *CacheSecurityGroup {
 }
 
 // SetEC2SecurityGroups sets the EC2SecurityGroups field's value.
-func (s *CacheSecurityGroup) SetEC2SecurityGroups(v []*EC2SecurityGroup) *CacheSecurityGroup {
+func (s *CacheSecurityGroup) SetEC2SecurityGroups(v []EC2SecurityGroup) *CacheSecurityGroup {
 	s.EC2SecurityGroups = v
 	return s
 }
@@ -3781,7 +3781,7 @@ type CacheSubnetGroup struct {
 	CacheSubnetGroupName *string `type:"string"`
 
 	// A list of subnets associated with the cache subnet group.
-	Subnets []*Subnet `locationNameList:"Subnet" type:"list"`
+	Subnets []Subnet `locationNameList:"Subnet" type:"list"`
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet
 	// group.
@@ -3811,7 +3811,7 @@ func (s *CacheSubnetGroup) SetCacheSubnetGroupName(v string) *CacheSubnetGroup {
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *CacheSubnetGroup) SetSubnets(v []*Subnet) *CacheSubnetGroup {
+func (s *CacheSubnetGroup) SetSubnets(v []Subnet) *CacheSubnetGroup {
 	s.Subnets = v
 	return s
 }
@@ -4019,7 +4019,7 @@ type CreateCacheClusterInput struct {
 	//
 	// Use this parameter only when you are creating a cache cluster outside of
 	// an Amazon Virtual Private Cloud (Amazon VPC).
-	CacheSecurityGroupNames []*string `locationNameList:"CacheSecurityGroupName" type:"list"`
+	CacheSecurityGroupNames []string `locationNameList:"CacheSecurityGroupName" type:"list"`
 
 	// The name of the subnet group to be used for the cache cluster.
 	//
@@ -4090,7 +4090,7 @@ type CreateCacheClusterInput struct {
 	// instead, or repeat the Availability Zone multiple times in the list.
 	//
 	// Default: System chosen Availability Zones.
-	PreferredAvailabilityZones []*string `locationNameList:"PreferredAvailabilityZone" type:"list"`
+	PreferredAvailabilityZones []string `locationNameList:"PreferredAvailabilityZone" type:"list"`
 
 	// Specifies the weekly time range during which maintenance on the cache cluster
 	// is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi
@@ -4140,7 +4140,7 @@ type CreateCacheClusterInput struct {
 	//
 	// Use this parameter only when you are creating a cache cluster in an Amazon
 	// Virtual Private Cloud (Amazon VPC).
-	SecurityGroupIds []*string `locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []string `locationNameList:"SecurityGroupId" type:"list"`
 
 	// A single-element string list containing an Amazon Resource Name (ARN) that
 	// uniquely identifies a Redis RDB snapshot file stored in Amazon S3. The snapshot
@@ -4150,7 +4150,7 @@ type CreateCacheClusterInput struct {
 	// This parameter is only valid if the Engine parameter is redis.
 	//
 	// Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
-	SnapshotArns []*string `locationNameList:"SnapshotArn" type:"list"`
+	SnapshotArns []string `locationNameList:"SnapshotArn" type:"list"`
 
 	// The name of a Redis snapshot from which to restore data into the new node
 	// group (shard). The snapshot status changes to restoring while the new node
@@ -4181,7 +4181,7 @@ type CreateCacheClusterInput struct {
 
 	// A list of cost allocation tags to be added to this resource. A tag is a key-value
 	// pair. A tag key must be accompanied by a tag value.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -4245,7 +4245,7 @@ func (s *CreateCacheClusterInput) SetCacheParameterGroupName(v string) *CreateCa
 }
 
 // SetCacheSecurityGroupNames sets the CacheSecurityGroupNames field's value.
-func (s *CreateCacheClusterInput) SetCacheSecurityGroupNames(v []*string) *CreateCacheClusterInput {
+func (s *CreateCacheClusterInput) SetCacheSecurityGroupNames(v []string) *CreateCacheClusterInput {
 	s.CacheSecurityGroupNames = v
 	return s
 }
@@ -4293,7 +4293,7 @@ func (s *CreateCacheClusterInput) SetPreferredAvailabilityZone(v string) *Create
 }
 
 // SetPreferredAvailabilityZones sets the PreferredAvailabilityZones field's value.
-func (s *CreateCacheClusterInput) SetPreferredAvailabilityZones(v []*string) *CreateCacheClusterInput {
+func (s *CreateCacheClusterInput) SetPreferredAvailabilityZones(v []string) *CreateCacheClusterInput {
 	s.PreferredAvailabilityZones = v
 	return s
 }
@@ -4311,13 +4311,13 @@ func (s *CreateCacheClusterInput) SetReplicationGroupId(v string) *CreateCacheCl
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateCacheClusterInput) SetSecurityGroupIds(v []*string) *CreateCacheClusterInput {
+func (s *CreateCacheClusterInput) SetSecurityGroupIds(v []string) *CreateCacheClusterInput {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSnapshotArns sets the SnapshotArns field's value.
-func (s *CreateCacheClusterInput) SetSnapshotArns(v []*string) *CreateCacheClusterInput {
+func (s *CreateCacheClusterInput) SetSnapshotArns(v []string) *CreateCacheClusterInput {
 	s.SnapshotArns = v
 	return s
 }
@@ -4341,7 +4341,7 @@ func (s *CreateCacheClusterInput) SetSnapshotWindow(v string) *CreateCacheCluste
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateCacheClusterInput) SetTags(v []*Tag) *CreateCacheClusterInput {
+func (s *CreateCacheClusterInput) SetTags(v []Tag) *CreateCacheClusterInput {
 	s.Tags = v
 	return s
 }
@@ -4582,7 +4582,7 @@ type CreateCacheSubnetGroupInput struct {
 	// A list of VPC subnet IDs for the cache subnet group.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
+	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4630,7 +4630,7 @@ func (s *CreateCacheSubnetGroupInput) SetCacheSubnetGroupName(v string) *CreateC
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateCacheSubnetGroupInput) SetSubnetIds(v []*string) *CreateCacheSubnetGroupInput {
+func (s *CreateCacheSubnetGroupInput) SetSubnetIds(v []string) *CreateCacheSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
@@ -4759,7 +4759,7 @@ type CreateReplicationGroupInput struct {
 	CacheParameterGroupName *string `type:"string"`
 
 	// A list of cache security group names to associate with this replication group.
-	CacheSecurityGroupNames []*string `locationNameList:"CacheSecurityGroupName" type:"list"`
+	CacheSecurityGroupNames []string `locationNameList:"CacheSecurityGroupName" type:"list"`
 
 	// The name of the cache subnet group to be used for the replication group.
 	//
@@ -4791,7 +4791,7 @@ type CreateReplicationGroupInput struct {
 	// If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode
 	// enabled) replication group, you can use this parameter to individually configure
 	// each node group (shard), or you can omit this parameter.
-	NodeGroupConfiguration []*NodeGroupConfiguration `locationNameList:"NodeGroupConfiguration" type:"list"`
+	NodeGroupConfiguration []NodeGroupConfiguration `locationNameList:"NodeGroupConfiguration" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
 	// (SNS) topic to which notifications are sent.
@@ -4837,7 +4837,7 @@ type CreateReplicationGroupInput struct {
 	// The number of Availability Zones listed must equal the value of NumCacheClusters.
 	//
 	// Default: system chosen Availability Zones.
-	PreferredCacheClusterAZs []*string `locationNameList:"AvailabilityZone" type:"list"`
+	PreferredCacheClusterAZs []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// Specifies the weekly time range during which maintenance on the cache cluster
 	// is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi
@@ -4901,7 +4901,7 @@ type CreateReplicationGroupInput struct {
 	//
 	// Use this parameter only when you are creating a replication group in an Amazon
 	// Virtual Private Cloud (Amazon VPC).
-	SecurityGroupIds []*string `locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []string `locationNameList:"SecurityGroupId" type:"list"`
 
 	// A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB
 	// snapshot files stored in Amazon S3. The snapshot files are used to populate
@@ -4914,7 +4914,7 @@ type CreateReplicationGroupInput struct {
 	// This parameter is only valid if the Engine parameter is redis.
 	//
 	// Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
-	SnapshotArns []*string `locationNameList:"SnapshotArn" type:"list"`
+	SnapshotArns []string `locationNameList:"SnapshotArn" type:"list"`
 
 	// The name of a snapshot from which to restore data into the new replication
 	// group. The snapshot status changes to restoring while the new replication
@@ -4945,7 +4945,7 @@ type CreateReplicationGroupInput struct {
 
 	// A list of cost allocation tags to be added to this resource. A tag is a key-value
 	// pair. A tag key must be accompanied by a tag value.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -5007,7 +5007,7 @@ func (s *CreateReplicationGroupInput) SetCacheParameterGroupName(v string) *Crea
 }
 
 // SetCacheSecurityGroupNames sets the CacheSecurityGroupNames field's value.
-func (s *CreateReplicationGroupInput) SetCacheSecurityGroupNames(v []*string) *CreateReplicationGroupInput {
+func (s *CreateReplicationGroupInput) SetCacheSecurityGroupNames(v []string) *CreateReplicationGroupInput {
 	s.CacheSecurityGroupNames = v
 	return s
 }
@@ -5031,7 +5031,7 @@ func (s *CreateReplicationGroupInput) SetEngineVersion(v string) *CreateReplicat
 }
 
 // SetNodeGroupConfiguration sets the NodeGroupConfiguration field's value.
-func (s *CreateReplicationGroupInput) SetNodeGroupConfiguration(v []*NodeGroupConfiguration) *CreateReplicationGroupInput {
+func (s *CreateReplicationGroupInput) SetNodeGroupConfiguration(v []NodeGroupConfiguration) *CreateReplicationGroupInput {
 	s.NodeGroupConfiguration = v
 	return s
 }
@@ -5061,7 +5061,7 @@ func (s *CreateReplicationGroupInput) SetPort(v int64) *CreateReplicationGroupIn
 }
 
 // SetPreferredCacheClusterAZs sets the PreferredCacheClusterAZs field's value.
-func (s *CreateReplicationGroupInput) SetPreferredCacheClusterAZs(v []*string) *CreateReplicationGroupInput {
+func (s *CreateReplicationGroupInput) SetPreferredCacheClusterAZs(v []string) *CreateReplicationGroupInput {
 	s.PreferredCacheClusterAZs = v
 	return s
 }
@@ -5097,13 +5097,13 @@ func (s *CreateReplicationGroupInput) SetReplicationGroupId(v string) *CreateRep
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateReplicationGroupInput) SetSecurityGroupIds(v []*string) *CreateReplicationGroupInput {
+func (s *CreateReplicationGroupInput) SetSecurityGroupIds(v []string) *CreateReplicationGroupInput {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSnapshotArns sets the SnapshotArns field's value.
-func (s *CreateReplicationGroupInput) SetSnapshotArns(v []*string) *CreateReplicationGroupInput {
+func (s *CreateReplicationGroupInput) SetSnapshotArns(v []string) *CreateReplicationGroupInput {
 	s.SnapshotArns = v
 	return s
 }
@@ -5127,7 +5127,7 @@ func (s *CreateReplicationGroupInput) SetSnapshotWindow(v string) *CreateReplica
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateReplicationGroupInput) SetTags(v []*Tag) *CreateReplicationGroupInput {
+func (s *CreateReplicationGroupInput) SetTags(v []Tag) *CreateReplicationGroupInput {
 	s.Tags = v
 	return s
 }
@@ -5729,7 +5729,7 @@ type DescribeCacheClustersOutput struct {
 
 	// A list of cache clusters. Each item in the list contains detailed information
 	// about one cache cluster.
-	CacheClusters []*CacheCluster `locationNameList:"CacheCluster" type:"list"`
+	CacheClusters []CacheCluster `locationNameList:"CacheCluster" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
@@ -5746,7 +5746,7 @@ func (s DescribeCacheClustersOutput) GoString() string {
 }
 
 // SetCacheClusters sets the CacheClusters field's value.
-func (s *DescribeCacheClustersOutput) SetCacheClusters(v []*CacheCluster) *DescribeCacheClustersOutput {
+func (s *DescribeCacheClustersOutput) SetCacheClusters(v []CacheCluster) *DescribeCacheClustersOutput {
 	s.CacheClusters = v
 	return s
 }
@@ -5855,7 +5855,7 @@ type DescribeCacheEngineVersionsOutput struct {
 
 	// A list of cache engine version details. Each element in the list contains
 	// detailed information about one cache engine version.
-	CacheEngineVersions []*CacheEngineVersion `locationNameList:"CacheEngineVersion" type:"list"`
+	CacheEngineVersions []CacheEngineVersion `locationNameList:"CacheEngineVersion" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
@@ -5872,7 +5872,7 @@ func (s DescribeCacheEngineVersionsOutput) GoString() string {
 }
 
 // SetCacheEngineVersions sets the CacheEngineVersions field's value.
-func (s *DescribeCacheEngineVersionsOutput) SetCacheEngineVersions(v []*CacheEngineVersion) *DescribeCacheEngineVersionsOutput {
+func (s *DescribeCacheEngineVersionsOutput) SetCacheEngineVersions(v []CacheEngineVersion) *DescribeCacheEngineVersionsOutput {
 	s.CacheEngineVersions = v
 	return s
 }
@@ -5941,7 +5941,7 @@ type DescribeCacheParameterGroupsOutput struct {
 
 	// A list of cache parameter groups. Each element in the list contains detailed
 	// information about one cache parameter group.
-	CacheParameterGroups []*CacheParameterGroup `locationNameList:"CacheParameterGroup" type:"list"`
+	CacheParameterGroups []CacheParameterGroup `locationNameList:"CacheParameterGroup" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
@@ -5958,7 +5958,7 @@ func (s DescribeCacheParameterGroupsOutput) GoString() string {
 }
 
 // SetCacheParameterGroups sets the CacheParameterGroups field's value.
-func (s *DescribeCacheParameterGroupsOutput) SetCacheParameterGroups(v []*CacheParameterGroup) *DescribeCacheParameterGroupsOutput {
+func (s *DescribeCacheParameterGroupsOutput) SetCacheParameterGroups(v []CacheParameterGroup) *DescribeCacheParameterGroupsOutput {
 	s.CacheParameterGroups = v
 	return s
 }
@@ -6054,13 +6054,13 @@ type DescribeCacheParametersOutput struct {
 
 	// A list of parameters specific to a particular cache node type. Each element
 	// in the list contains detailed information about one parameter.
-	CacheNodeTypeSpecificParameters []*CacheNodeTypeSpecificParameter `locationNameList:"CacheNodeTypeSpecificParameter" type:"list"`
+	CacheNodeTypeSpecificParameters []CacheNodeTypeSpecificParameter `locationNameList:"CacheNodeTypeSpecificParameter" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
 
 	// A list of Parameter instances.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -6074,7 +6074,7 @@ func (s DescribeCacheParametersOutput) GoString() string {
 }
 
 // SetCacheNodeTypeSpecificParameters sets the CacheNodeTypeSpecificParameters field's value.
-func (s *DescribeCacheParametersOutput) SetCacheNodeTypeSpecificParameters(v []*CacheNodeTypeSpecificParameter) *DescribeCacheParametersOutput {
+func (s *DescribeCacheParametersOutput) SetCacheNodeTypeSpecificParameters(v []CacheNodeTypeSpecificParameter) *DescribeCacheParametersOutput {
 	s.CacheNodeTypeSpecificParameters = v
 	return s
 }
@@ -6086,7 +6086,7 @@ func (s *DescribeCacheParametersOutput) SetMarker(v string) *DescribeCacheParame
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeCacheParametersOutput) SetParameters(v []*Parameter) *DescribeCacheParametersOutput {
+func (s *DescribeCacheParametersOutput) SetParameters(v []Parameter) *DescribeCacheParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -6149,7 +6149,7 @@ type DescribeCacheSecurityGroupsOutput struct {
 
 	// A list of cache security groups. Each element in the list contains detailed
 	// information about one group.
-	CacheSecurityGroups []*CacheSecurityGroup `locationNameList:"CacheSecurityGroup" type:"list"`
+	CacheSecurityGroups []CacheSecurityGroup `locationNameList:"CacheSecurityGroup" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
@@ -6166,7 +6166,7 @@ func (s DescribeCacheSecurityGroupsOutput) GoString() string {
 }
 
 // SetCacheSecurityGroups sets the CacheSecurityGroups field's value.
-func (s *DescribeCacheSecurityGroupsOutput) SetCacheSecurityGroups(v []*CacheSecurityGroup) *DescribeCacheSecurityGroupsOutput {
+func (s *DescribeCacheSecurityGroupsOutput) SetCacheSecurityGroups(v []CacheSecurityGroup) *DescribeCacheSecurityGroupsOutput {
 	s.CacheSecurityGroups = v
 	return s
 }
@@ -6235,7 +6235,7 @@ type DescribeCacheSubnetGroupsOutput struct {
 
 	// A list of cache subnet groups. Each element in the list contains detailed
 	// information about one group.
-	CacheSubnetGroups []*CacheSubnetGroup `locationNameList:"CacheSubnetGroup" type:"list"`
+	CacheSubnetGroups []CacheSubnetGroup `locationNameList:"CacheSubnetGroup" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
@@ -6252,7 +6252,7 @@ func (s DescribeCacheSubnetGroupsOutput) GoString() string {
 }
 
 // SetCacheSubnetGroups sets the CacheSubnetGroups field's value.
-func (s *DescribeCacheSubnetGroupsOutput) SetCacheSubnetGroups(v []*CacheSubnetGroup) *DescribeCacheSubnetGroupsOutput {
+func (s *DescribeCacheSubnetGroupsOutput) SetCacheSubnetGroups(v []CacheSubnetGroup) *DescribeCacheSubnetGroupsOutput {
 	s.CacheSubnetGroups = v
 	return s
 }
@@ -6458,7 +6458,7 @@ type DescribeEventsOutput struct {
 
 	// A list of events. Each element in the list contains detailed information
 	// about one event.
-	Events []*Event `locationNameList:"Event" type:"list"`
+	Events []Event `locationNameList:"Event" type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
@@ -6475,7 +6475,7 @@ func (s DescribeEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []*Event) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 	s.Events = v
 	return s
 }
@@ -6551,7 +6551,7 @@ type DescribeReplicationGroupsOutput struct {
 
 	// A list of replication groups. Each item in the list contains detailed information
 	// about one replication group.
-	ReplicationGroups []*ReplicationGroup `locationNameList:"ReplicationGroup" type:"list"`
+	ReplicationGroups []ReplicationGroup `locationNameList:"ReplicationGroup" type:"list"`
 }
 
 // String returns the string representation
@@ -6571,7 +6571,7 @@ func (s *DescribeReplicationGroupsOutput) SetMarker(v string) *DescribeReplicati
 }
 
 // SetReplicationGroups sets the ReplicationGroups field's value.
-func (s *DescribeReplicationGroupsOutput) SetReplicationGroups(v []*ReplicationGroup) *DescribeReplicationGroupsOutput {
+func (s *DescribeReplicationGroupsOutput) SetReplicationGroups(v []ReplicationGroup) *DescribeReplicationGroupsOutput {
 	s.ReplicationGroups = v
 	return s
 }
@@ -6864,7 +6864,7 @@ type DescribeReservedCacheNodesOfferingsOutput struct {
 
 	// A list of reserved cache node offerings. Each element in the list contains
 	// detailed information about one offering.
-	ReservedCacheNodesOfferings []*ReservedCacheNodesOffering `locationNameList:"ReservedCacheNodesOffering" type:"list"`
+	ReservedCacheNodesOfferings []ReservedCacheNodesOffering `locationNameList:"ReservedCacheNodesOffering" type:"list"`
 }
 
 // String returns the string representation
@@ -6884,7 +6884,7 @@ func (s *DescribeReservedCacheNodesOfferingsOutput) SetMarker(v string) *Describ
 }
 
 // SetReservedCacheNodesOfferings sets the ReservedCacheNodesOfferings field's value.
-func (s *DescribeReservedCacheNodesOfferingsOutput) SetReservedCacheNodesOfferings(v []*ReservedCacheNodesOffering) *DescribeReservedCacheNodesOfferingsOutput {
+func (s *DescribeReservedCacheNodesOfferingsOutput) SetReservedCacheNodesOfferings(v []ReservedCacheNodesOffering) *DescribeReservedCacheNodesOfferingsOutput {
 	s.ReservedCacheNodesOfferings = v
 	return s
 }
@@ -6899,7 +6899,7 @@ type DescribeReservedCacheNodesOutput struct {
 
 	// A list of reserved cache nodes. Each element in the list contains detailed
 	// information about one node.
-	ReservedCacheNodes []*ReservedCacheNode `locationNameList:"ReservedCacheNode" type:"list"`
+	ReservedCacheNodes []ReservedCacheNode `locationNameList:"ReservedCacheNode" type:"list"`
 }
 
 // String returns the string representation
@@ -6919,7 +6919,7 @@ func (s *DescribeReservedCacheNodesOutput) SetMarker(v string) *DescribeReserved
 }
 
 // SetReservedCacheNodes sets the ReservedCacheNodes field's value.
-func (s *DescribeReservedCacheNodesOutput) SetReservedCacheNodes(v []*ReservedCacheNode) *DescribeReservedCacheNodesOutput {
+func (s *DescribeReservedCacheNodesOutput) SetReservedCacheNodes(v []ReservedCacheNode) *DescribeReservedCacheNodesOutput {
 	s.ReservedCacheNodes = v
 	return s
 }
@@ -7030,7 +7030,7 @@ type DescribeSnapshotsOutput struct {
 
 	// A list of snapshots. Each item in the list contains detailed information
 	// about one snapshot.
-	Snapshots []*Snapshot `locationNameList:"Snapshot" type:"list"`
+	Snapshots []Snapshot `locationNameList:"Snapshot" type:"list"`
 }
 
 // String returns the string representation
@@ -7050,7 +7050,7 @@ func (s *DescribeSnapshotsOutput) SetMarker(v string) *DescribeSnapshotsOutput {
 }
 
 // SetSnapshots sets the Snapshots field's value.
-func (s *DescribeSnapshotsOutput) SetSnapshots(v []*Snapshot) *DescribeSnapshotsOutput {
+func (s *DescribeSnapshotsOutput) SetSnapshots(v []Snapshot) *DescribeSnapshotsOutput {
 	s.Snapshots = v
 	return s
 }
@@ -7140,7 +7140,7 @@ type EngineDefaults struct {
 
 	// A list of parameters specific to a particular cache node type. Each element
 	// in the list contains detailed information about one parameter.
-	CacheNodeTypeSpecificParameters []*CacheNodeTypeSpecificParameter `locationNameList:"CacheNodeTypeSpecificParameter" type:"list"`
+	CacheNodeTypeSpecificParameters []CacheNodeTypeSpecificParameter `locationNameList:"CacheNodeTypeSpecificParameter" type:"list"`
 
 	// Specifies the name of the cache parameter group family to which the engine
 	// default parameters apply.
@@ -7152,7 +7152,7 @@ type EngineDefaults struct {
 	Marker *string `type:"string"`
 
 	// Contains a list of engine default parameters.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -7166,7 +7166,7 @@ func (s EngineDefaults) GoString() string {
 }
 
 // SetCacheNodeTypeSpecificParameters sets the CacheNodeTypeSpecificParameters field's value.
-func (s *EngineDefaults) SetCacheNodeTypeSpecificParameters(v []*CacheNodeTypeSpecificParameter) *EngineDefaults {
+func (s *EngineDefaults) SetCacheNodeTypeSpecificParameters(v []CacheNodeTypeSpecificParameter) *EngineDefaults {
 	s.CacheNodeTypeSpecificParameters = v
 	return s
 }
@@ -7184,7 +7184,7 @@ func (s *EngineDefaults) SetMarker(v string) *EngineDefaults {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *EngineDefaults) SetParameters(v []*Parameter) *EngineDefaults {
+func (s *EngineDefaults) SetParameters(v []Parameter) *EngineDefaults {
 	s.Parameters = v
 	return s
 }
@@ -7302,7 +7302,7 @@ type ListAllowedNodeTypeModificationsOutput struct {
 	// When scaling up a Redis cluster or replication group using ModifyCacheCluster
 	// or ModifyReplicationGroup, use a value from this list for the CacheNodeType
 	// parameter.
-	ScaleUpModifications []*string `type:"list"`
+	ScaleUpModifications []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7316,7 +7316,7 @@ func (s ListAllowedNodeTypeModificationsOutput) GoString() string {
 }
 
 // SetScaleUpModifications sets the ScaleUpModifications field's value.
-func (s *ListAllowedNodeTypeModificationsOutput) SetScaleUpModifications(v []*string) *ListAllowedNodeTypeModificationsOutput {
+func (s *ListAllowedNodeTypeModificationsOutput) SetScaleUpModifications(v []string) *ListAllowedNodeTypeModificationsOutput {
 	s.ScaleUpModifications = v
 	return s
 }
@@ -7422,7 +7422,7 @@ type ModifyCacheClusterInput struct {
 	// For example: If you have 3 active cache nodes, 7 pending cache nodes, and
 	// the number of cache nodes in this ModifyCacheCluser call is 5, you must list
 	// 2 (7 - 5) cache node IDs to remove.
-	CacheNodeIdsToRemove []*string `locationNameList:"CacheNodeId" type:"list"`
+	CacheNodeIdsToRemove []string `locationNameList:"CacheNodeId" type:"list"`
 
 	// A valid cache node type that you want to scale this cache cluster up to.
 	CacheNodeType *string `type:"string"`
@@ -7440,7 +7440,7 @@ type ModifyCacheClusterInput struct {
 	//
 	// Constraints: Must contain no more than 255 alphanumeric characters. Must
 	// not be "Default".
-	CacheSecurityGroupNames []*string `locationNameList:"CacheSecurityGroupName" type:"list"`
+	CacheSecurityGroupNames []string `locationNameList:"CacheSecurityGroupName" type:"list"`
 
 	// The upgraded version of the cache engine to be run on the cache nodes.
 	//
@@ -7521,7 +7521,7 @@ type ModifyCacheClusterInput struct {
 	// Important: If the new create request is Apply Immediately - Yes, all creates
 	//    are performed immediately. If the new create request is Apply Immediately
 	//    - No, all creates are pending.
-	NewAvailabilityZones []*string `locationNameList:"PreferredAvailabilityZone" type:"list"`
+	NewAvailabilityZones []string `locationNameList:"PreferredAvailabilityZone" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications
 	// are sent.
@@ -7595,7 +7595,7 @@ type ModifyCacheClusterInput struct {
 	//
 	// This parameter can be used only with clusters that are created in an Amazon
 	// Virtual Private Cloud (Amazon VPC).
-	SecurityGroupIds []*string `locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []string `locationNameList:"SecurityGroupId" type:"list"`
 
 	// The number of days for which ElastiCache retains automatic cache cluster
 	// snapshots before deleting them. For example, if you set SnapshotRetentionLimit
@@ -7660,7 +7660,7 @@ func (s *ModifyCacheClusterInput) SetCacheClusterId(v string) *ModifyCacheCluste
 }
 
 // SetCacheNodeIdsToRemove sets the CacheNodeIdsToRemove field's value.
-func (s *ModifyCacheClusterInput) SetCacheNodeIdsToRemove(v []*string) *ModifyCacheClusterInput {
+func (s *ModifyCacheClusterInput) SetCacheNodeIdsToRemove(v []string) *ModifyCacheClusterInput {
 	s.CacheNodeIdsToRemove = v
 	return s
 }
@@ -7678,7 +7678,7 @@ func (s *ModifyCacheClusterInput) SetCacheParameterGroupName(v string) *ModifyCa
 }
 
 // SetCacheSecurityGroupNames sets the CacheSecurityGroupNames field's value.
-func (s *ModifyCacheClusterInput) SetCacheSecurityGroupNames(v []*string) *ModifyCacheClusterInput {
+func (s *ModifyCacheClusterInput) SetCacheSecurityGroupNames(v []string) *ModifyCacheClusterInput {
 	s.CacheSecurityGroupNames = v
 	return s
 }
@@ -7690,7 +7690,7 @@ func (s *ModifyCacheClusterInput) SetEngineVersion(v string) *ModifyCacheCluster
 }
 
 // SetNewAvailabilityZones sets the NewAvailabilityZones field's value.
-func (s *ModifyCacheClusterInput) SetNewAvailabilityZones(v []*string) *ModifyCacheClusterInput {
+func (s *ModifyCacheClusterInput) SetNewAvailabilityZones(v []string) *ModifyCacheClusterInput {
 	s.NewAvailabilityZones = v
 	return s
 }
@@ -7720,7 +7720,7 @@ func (s *ModifyCacheClusterInput) SetPreferredMaintenanceWindow(v string) *Modif
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ModifyCacheClusterInput) SetSecurityGroupIds(v []*string) *ModifyCacheClusterInput {
+func (s *ModifyCacheClusterInput) SetSecurityGroupIds(v []string) *ModifyCacheClusterInput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -7776,7 +7776,7 @@ type ModifyCacheParameterGroupInput struct {
 	// A maximum of 20 parameters may be modified per request.
 	//
 	// ParameterNameValues is a required field
-	ParameterNameValues []*ParameterNameValue `locationNameList:"ParameterNameValue" type:"list" required:"true"`
+	ParameterNameValues []ParameterNameValue `locationNameList:"ParameterNameValue" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7814,7 +7814,7 @@ func (s *ModifyCacheParameterGroupInput) SetCacheParameterGroupName(v string) *M
 }
 
 // SetParameterNameValues sets the ParameterNameValues field's value.
-func (s *ModifyCacheParameterGroupInput) SetParameterNameValues(v []*ParameterNameValue) *ModifyCacheParameterGroupInput {
+func (s *ModifyCacheParameterGroupInput) SetParameterNameValues(v []ParameterNameValue) *ModifyCacheParameterGroupInput {
 	s.ParameterNameValues = v
 	return s
 }
@@ -7838,7 +7838,7 @@ type ModifyCacheSubnetGroupInput struct {
 	CacheSubnetGroupName *string `type:"string" required:"true"`
 
 	// The EC2 subnet IDs for the cache subnet group.
-	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list"`
+	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list"`
 }
 
 // String returns the string representation
@@ -7878,7 +7878,7 @@ func (s *ModifyCacheSubnetGroupInput) SetCacheSubnetGroupName(v string) *ModifyC
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *ModifyCacheSubnetGroupInput) SetSubnetIds(v []*string) *ModifyCacheSubnetGroupInput {
+func (s *ModifyCacheSubnetGroupInput) SetSubnetIds(v []string) *ModifyCacheSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
@@ -7963,7 +7963,7 @@ type ModifyReplicationGroupInput struct {
 	//
 	// Constraints: Must contain no more than 255 alphanumeric characters. Must
 	// not be Default.
-	CacheSecurityGroupNames []*string `locationNameList:"CacheSecurityGroupName" type:"list"`
+	CacheSecurityGroupNames []string `locationNameList:"CacheSecurityGroupName" type:"list"`
 
 	// The upgraded version of the cache engine to be run on the cache clusters
 	// in the replication group.
@@ -8032,7 +8032,7 @@ type ModifyReplicationGroupInput struct {
 	//
 	// This parameter can be used only with replication group containing cache clusters
 	// running in an Amazon Virtual Private Cloud (Amazon VPC).
-	SecurityGroupIds []*string `locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []string `locationNameList:"SecurityGroupId" type:"list"`
 
 	// The number of days for which ElastiCache retains automatic node group (shard)
 	// snapshots before deleting them. For example, if you set SnapshotRetentionLimit
@@ -8113,7 +8113,7 @@ func (s *ModifyReplicationGroupInput) SetCacheParameterGroupName(v string) *Modi
 }
 
 // SetCacheSecurityGroupNames sets the CacheSecurityGroupNames field's value.
-func (s *ModifyReplicationGroupInput) SetCacheSecurityGroupNames(v []*string) *ModifyReplicationGroupInput {
+func (s *ModifyReplicationGroupInput) SetCacheSecurityGroupNames(v []string) *ModifyReplicationGroupInput {
 	s.CacheSecurityGroupNames = v
 	return s
 }
@@ -8167,7 +8167,7 @@ func (s *ModifyReplicationGroupInput) SetReplicationGroupId(v string) *ModifyRep
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ModifyReplicationGroupInput) SetSecurityGroupIds(v []*string) *ModifyReplicationGroupInput {
+func (s *ModifyReplicationGroupInput) SetSecurityGroupIds(v []string) *ModifyReplicationGroupInput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -8229,7 +8229,7 @@ type NodeGroup struct {
 
 	// A list containing information about individual nodes within the node group
 	// (shard).
-	NodeGroupMembers []*NodeGroupMember `locationNameList:"NodeGroupMember" type:"list"`
+	NodeGroupMembers []NodeGroupMember `locationNameList:"NodeGroupMember" type:"list"`
 
 	// The endpoint of the primary node in this node group (shard).
 	PrimaryEndpoint *Endpoint `type:"structure"`
@@ -8258,7 +8258,7 @@ func (s *NodeGroup) SetNodeGroupId(v string) *NodeGroup {
 }
 
 // SetNodeGroupMembers sets the NodeGroupMembers field's value.
-func (s *NodeGroup) SetNodeGroupMembers(v []*NodeGroupMember) *NodeGroup {
+func (s *NodeGroup) SetNodeGroupMembers(v []NodeGroupMember) *NodeGroup {
 	s.NodeGroupMembers = v
 	return s
 }
@@ -8295,7 +8295,7 @@ type NodeGroupConfiguration struct {
 	// A list of Availability Zones to be used for the read replicas. The number
 	// of Availability Zones in this list must match the value of ReplicaCount or
 	// ReplicasPerNodeGroup if not specified.
-	ReplicaAvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
+	ReplicaAvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The number of read replica nodes in this node group (shard).
 	ReplicaCount *int64 `type:"integer"`
@@ -8324,7 +8324,7 @@ func (s *NodeGroupConfiguration) SetPrimaryAvailabilityZone(v string) *NodeGroup
 }
 
 // SetReplicaAvailabilityZones sets the ReplicaAvailabilityZones field's value.
-func (s *NodeGroupConfiguration) SetReplicaAvailabilityZones(v []*string) *NodeGroupConfiguration {
+func (s *NodeGroupConfiguration) SetReplicaAvailabilityZones(v []string) *NodeGroupConfiguration {
 	s.ReplicaAvailabilityZones = v
 	return s
 }
@@ -8665,7 +8665,7 @@ type PendingModifiedValues struct {
 
 	// A list of cache node IDs that are being removed (or will be removed) from
 	// the cache cluster. A node ID is a numeric identifier (0001, 0002, etc.).
-	CacheNodeIdsToRemove []*string `locationNameList:"CacheNodeId" type:"list"`
+	CacheNodeIdsToRemove []string `locationNameList:"CacheNodeId" type:"list"`
 
 	// The cache node type that this cache cluster or replication group is scaled
 	// to.
@@ -8692,7 +8692,7 @@ func (s PendingModifiedValues) GoString() string {
 }
 
 // SetCacheNodeIdsToRemove sets the CacheNodeIdsToRemove field's value.
-func (s *PendingModifiedValues) SetCacheNodeIdsToRemove(v []*string) *PendingModifiedValues {
+func (s *PendingModifiedValues) SetCacheNodeIdsToRemove(v []string) *PendingModifiedValues {
 	s.CacheNodeIdsToRemove = v
 	return s
 }
@@ -8823,7 +8823,7 @@ type RebootCacheClusterInput struct {
 	// node IDs.
 	//
 	// CacheNodeIdsToReboot is a required field
-	CacheNodeIdsToReboot []*string `locationNameList:"CacheNodeId" type:"list" required:"true"`
+	CacheNodeIdsToReboot []string `locationNameList:"CacheNodeId" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8861,7 +8861,7 @@ func (s *RebootCacheClusterInput) SetCacheClusterId(v string) *RebootCacheCluste
 }
 
 // SetCacheNodeIdsToReboot sets the CacheNodeIdsToReboot field's value.
-func (s *RebootCacheClusterInput) SetCacheNodeIdsToReboot(v []*string) *RebootCacheClusterInput {
+func (s *RebootCacheClusterInput) SetCacheNodeIdsToReboot(v []string) *RebootCacheClusterInput {
 	s.CacheNodeIdsToReboot = v
 	return s
 }
@@ -8943,7 +8943,7 @@ type RemoveTagsFromResourceInput struct {
 	// A list of TagKeys identifying the tags you want removed from the named resource.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8981,7 +8981,7 @@ func (s *RemoveTagsFromResourceInput) SetResourceName(v string) *RemoveTagsFromR
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []*string) *RemoveTagsFromResourceInput {
+func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -8993,7 +8993,7 @@ type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of cost allocation tags as key-value pairs.
-	TagList []*Tag `locationNameList:"Tag" type:"list"`
+	TagList []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -9007,7 +9007,7 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *RemoveTagsFromResourceOutput) SetTagList(v []*Tag) *RemoveTagsFromResourceOutput {
+func (s *RemoveTagsFromResourceOutput) SetTagList(v []Tag) *RemoveTagsFromResourceOutput {
 	s.TagList = v
 	return s
 }
@@ -9047,11 +9047,11 @@ type ReplicationGroup struct {
 	Description *string `type:"string"`
 
 	// The names of all the cache clusters that are part of this replication group.
-	MemberClusters []*string `locationNameList:"ClusterId" type:"list"`
+	MemberClusters []string `locationNameList:"ClusterId" type:"list"`
 
 	// A single element list with information about the nodes in the replication
 	// group.
-	NodeGroups []*NodeGroup `locationNameList:"NodeGroup" type:"list"`
+	NodeGroups []NodeGroup `locationNameList:"NodeGroup" type:"list"`
 
 	// A group of settings to be applied to the replication group, either immediately
 	// or during the next maintenance window.
@@ -9130,13 +9130,13 @@ func (s *ReplicationGroup) SetDescription(v string) *ReplicationGroup {
 }
 
 // SetMemberClusters sets the MemberClusters field's value.
-func (s *ReplicationGroup) SetMemberClusters(v []*string) *ReplicationGroup {
+func (s *ReplicationGroup) SetMemberClusters(v []string) *ReplicationGroup {
 	s.MemberClusters = v
 	return s
 }
 
 // SetNodeGroups sets the NodeGroups field's value.
-func (s *ReplicationGroup) SetNodeGroups(v []*NodeGroup) *ReplicationGroup {
+func (s *ReplicationGroup) SetNodeGroups(v []NodeGroup) *ReplicationGroup {
 	s.NodeGroups = v
 	return s
 }
@@ -9282,7 +9282,7 @@ type ReservedCacheNode struct {
 	ProductDescription *string `type:"string"`
 
 	// The recurring price charged to run this reserved cache node.
-	RecurringCharges []*RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
+	RecurringCharges []RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
 
 	// The unique identifier for the reservation.
 	ReservedCacheNodeId *string `type:"string"`
@@ -9347,7 +9347,7 @@ func (s *ReservedCacheNode) SetProductDescription(v string) *ReservedCacheNode {
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedCacheNode) SetRecurringCharges(v []*RecurringCharge) *ReservedCacheNode {
+func (s *ReservedCacheNode) SetRecurringCharges(v []RecurringCharge) *ReservedCacheNode {
 	s.RecurringCharges = v
 	return s
 }
@@ -9440,7 +9440,7 @@ type ReservedCacheNodesOffering struct {
 	ProductDescription *string `type:"string"`
 
 	// The recurring price charged to run this reserved cache node.
-	RecurringCharges []*RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
+	RecurringCharges []RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
 
 	// A unique identifier for the reserved cache node offering.
 	ReservedCacheNodesOfferingId *string `type:"string"`
@@ -9490,7 +9490,7 @@ func (s *ReservedCacheNodesOffering) SetProductDescription(v string) *ReservedCa
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedCacheNodesOffering) SetRecurringCharges(v []*RecurringCharge) *ReservedCacheNodesOffering {
+func (s *ReservedCacheNodesOffering) SetRecurringCharges(v []RecurringCharge) *ReservedCacheNodesOffering {
 	s.RecurringCharges = v
 	return s
 }
@@ -9520,7 +9520,7 @@ type ResetCacheParameterGroupInput struct {
 	// An array of parameter names to reset to their default values. If ResetAllParameters
 	// is true, do not use ParameterNameValues. If ResetAllParameters is false,
 	// you must specify the name of at least one parameter to reset.
-	ParameterNameValues []*ParameterNameValue `locationNameList:"ParameterNameValue" type:"list"`
+	ParameterNameValues []ParameterNameValue `locationNameList:"ParameterNameValue" type:"list"`
 
 	// If true, all parameters in the cache parameter group are reset to their default
 	// values. If false, only the parameters listed by ParameterNameValues are reset
@@ -9561,7 +9561,7 @@ func (s *ResetCacheParameterGroupInput) SetCacheParameterGroupName(v string) *Re
 }
 
 // SetParameterNameValues sets the ParameterNameValues field's value.
-func (s *ResetCacheParameterGroupInput) SetParameterNameValues(v []*ParameterNameValue) *ResetCacheParameterGroupInput {
+func (s *ResetCacheParameterGroupInput) SetParameterNameValues(v []ParameterNameValue) *ResetCacheParameterGroupInput {
 	s.ParameterNameValues = v
 	return s
 }
@@ -9822,7 +9822,7 @@ type Snapshot struct {
 	EngineVersion *string `type:"string"`
 
 	// A list of the cache nodes in the source cache cluster.
-	NodeSnapshots []*NodeSnapshot `locationNameList:"NodeSnapshot" type:"list"`
+	NodeSnapshots []NodeSnapshot `locationNameList:"NodeSnapshot" type:"list"`
 
 	// The number of cache nodes in the source cache cluster.
 	//
@@ -9972,7 +9972,7 @@ func (s *Snapshot) SetEngineVersion(v string) *Snapshot {
 }
 
 // SetNodeSnapshots sets the NodeSnapshots field's value.
-func (s *Snapshot) SetNodeSnapshots(v []*NodeSnapshot) *Snapshot {
+func (s *Snapshot) SetNodeSnapshots(v []NodeSnapshot) *Snapshot {
 	s.NodeSnapshots = v
 	return s
 }

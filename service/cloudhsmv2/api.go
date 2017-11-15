@@ -805,7 +805,7 @@ type Cluster struct {
 	HsmType *string `type:"string"`
 
 	// Contains information about the HSMs in the cluster.
-	Hsms []*Hsm `type:"list"`
+	Hsms []Hsm `type:"list"`
 
 	// The default password for the cluster's Pre-Crypto Officer (PRECO) user.
 	PreCoPassword *string `min:"7" type:"string"`
@@ -824,7 +824,7 @@ type Cluster struct {
 	StateMessage *string `type:"string"`
 
 	// A map of the cluster's subnets and their corresponding Availability Zones.
-	SubnetMapping map[string]*string `type:"map"`
+	SubnetMapping map[string]string `type:"map"`
 
 	// The identifier (ID) of the virtual private cloud (VPC) that contains the
 	// cluster.
@@ -872,7 +872,7 @@ func (s *Cluster) SetHsmType(v string) *Cluster {
 }
 
 // SetHsms sets the Hsms field's value.
-func (s *Cluster) SetHsms(v []*Hsm) *Cluster {
+func (s *Cluster) SetHsms(v []Hsm) *Cluster {
 	s.Hsms = v
 	return s
 }
@@ -908,7 +908,7 @@ func (s *Cluster) SetStateMessage(v string) *Cluster {
 }
 
 // SetSubnetMapping sets the SubnetMapping field's value.
-func (s *Cluster) SetSubnetMapping(v map[string]*string) *Cluster {
+func (s *Cluster) SetSubnetMapping(v map[string]string) *Cluster {
 	s.SubnetMapping = v
 	return s
 }
@@ -943,7 +943,7 @@ type CreateClusterInput struct {
 	//    * You can specify only one subnet per Availability Zone.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `min:"1" type:"list" required:"true"`
+	SubnetIds []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -990,7 +990,7 @@ func (s *CreateClusterInput) SetSourceBackupId(v string) *CreateClusterInput {
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateClusterInput) SetSubnetIds(v []*string) *CreateClusterInput {
+func (s *CreateClusterInput) SetSubnetIds(v []string) *CreateClusterInput {
 	s.SubnetIds = v
 	return s
 }
@@ -1282,7 +1282,7 @@ type DescribeBackupsInput struct {
 	// Specify clusters by their cluster identifier (ID).
 	//
 	// Use the states filter to return only backups that match the specified state.
-	Filters map[string][]*string `type:"map"`
+	Filters map[string][]string `type:"map"`
 
 	// The maximum number of backups to return in the response. When there are more
 	// backups than the number you specify, the response contains a NextToken value.
@@ -1317,7 +1317,7 @@ func (s *DescribeBackupsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeBackupsInput) SetFilters(v map[string][]*string) *DescribeBackupsInput {
+func (s *DescribeBackupsInput) SetFilters(v map[string][]string) *DescribeBackupsInput {
 	s.Filters = v
 	return s
 }
@@ -1339,7 +1339,7 @@ type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of backups.
-	Backups []*Backup `type:"list"`
+	Backups []Backup `type:"list"`
 
 	// An opaque string that indicates that the response contains only a subset
 	// of backups. Use this value in a subsequent DescribeBackups request to get
@@ -1358,7 +1358,7 @@ func (s DescribeBackupsOutput) GoString() string {
 }
 
 // SetBackups sets the Backups field's value.
-func (s *DescribeBackupsOutput) SetBackups(v []*Backup) *DescribeBackupsOutput {
+func (s *DescribeBackupsOutput) SetBackups(v []Backup) *DescribeBackupsOutput {
 	s.Backups = v
 	return s
 }
@@ -1382,7 +1382,7 @@ type DescribeClustersInput struct {
 	// private clouds (VPCs). Specify VPCs by their VPC identifier (ID).
 	//
 	// Use the states filter to return only clusters that match the specified state.
-	Filters map[string][]*string `type:"map"`
+	Filters map[string][]string `type:"map"`
 
 	// The maximum number of clusters to return in the response. When there are
 	// more clusters than the number you specify, the response contains a NextToken
@@ -1418,7 +1418,7 @@ func (s *DescribeClustersInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeClustersInput) SetFilters(v map[string][]*string) *DescribeClustersInput {
+func (s *DescribeClustersInput) SetFilters(v map[string][]string) *DescribeClustersInput {
 	s.Filters = v
 	return s
 }
@@ -1440,7 +1440,7 @@ type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of clusters.
-	Clusters []*Cluster `type:"list"`
+	Clusters []Cluster `type:"list"`
 
 	// An opaque string that indicates that the response contains only a subset
 	// of clusters. Use this value in a subsequent DescribeClusters request to get
@@ -1459,7 +1459,7 @@ func (s DescribeClustersOutput) GoString() string {
 }
 
 // SetClusters sets the Clusters field's value.
-func (s *DescribeClustersOutput) SetClusters(v []*Cluster) *DescribeClustersOutput {
+func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutput {
 	s.Clusters = v
 	return s
 }
@@ -1745,7 +1745,7 @@ type ListTagsOutput struct {
 	// A list of tags.
 	//
 	// TagList is a required field
-	TagList []*Tag `min:"1" type:"list" required:"true"`
+	TagList []Tag `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1765,7 +1765,7 @@ func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ListTagsOutput) SetTagList(v []*Tag) *ListTagsOutput {
+func (s *ListTagsOutput) SetTagList(v []Tag) *ListTagsOutput {
 	s.TagList = v
 	return s
 }
@@ -1842,7 +1842,7 @@ type TagResourceInput struct {
 	// A list of one or more tags.
 	//
 	// TagList is a required field
-	TagList []*Tag `min:"1" type:"list" required:"true"`
+	TagList []Tag `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1871,9 +1871,6 @@ func (s *TagResourceInput) Validate() error {
 	}
 	if s.TagList != nil {
 		for i, v := range s.TagList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
 			}
@@ -1893,7 +1890,7 @@ func (s *TagResourceInput) SetResourceId(v string) *TagResourceInput {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *TagResourceInput) SetTagList(v []*Tag) *TagResourceInput {
+func (s *TagResourceInput) SetTagList(v []Tag) *TagResourceInput {
 	s.TagList = v
 	return s
 }
@@ -1927,7 +1924,7 @@ type UntagResourceInput struct {
 	// only the tag keys, not the tag values.
 	//
 	// TagKeyList is a required field
-	TagKeyList []*string `min:"1" type:"list" required:"true"`
+	TagKeyList []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1968,7 +1965,7 @@ func (s *UntagResourceInput) SetResourceId(v string) *UntagResourceInput {
 }
 
 // SetTagKeyList sets the TagKeyList field's value.
-func (s *UntagResourceInput) SetTagKeyList(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeyList(v []string) *UntagResourceInput {
 	s.TagKeyList = v
 	return s
 }

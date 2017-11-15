@@ -236,7 +236,7 @@ type BucketInfo struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the calculated facet values and counts.
-	Buckets []*Bucket `locationName:"buckets" type:"list"`
+	Buckets []Bucket `locationName:"buckets" type:"list"`
 }
 
 // String returns the string representation
@@ -250,7 +250,7 @@ func (s BucketInfo) GoString() string {
 }
 
 // SetBuckets sets the Buckets field's value.
-func (s *BucketInfo) SetBuckets(v []*Bucket) *BucketInfo {
+func (s *BucketInfo) SetBuckets(v []Bucket) *BucketInfo {
 	s.Buckets = v
 	return s
 }
@@ -394,13 +394,13 @@ type Hit struct {
 	_ struct{} `type:"structure"`
 
 	// The expressions returned from a document that matches the search request.
-	Exprs map[string]*string `locationName:"exprs" type:"map"`
+	Exprs map[string]string `locationName:"exprs" type:"map"`
 
 	// The fields returned from a document that matches the search request.
-	Fields map[string][]*string `locationName:"fields" type:"map"`
+	Fields map[string][]string `locationName:"fields" type:"map"`
 
 	// The highlights returned from a document that matches the search request.
-	Highlights map[string]*string `locationName:"highlights" type:"map"`
+	Highlights map[string]string `locationName:"highlights" type:"map"`
 
 	// The document ID of a document that matches the search request.
 	Id *string `locationName:"id" type:"string"`
@@ -417,19 +417,19 @@ func (s Hit) GoString() string {
 }
 
 // SetExprs sets the Exprs field's value.
-func (s *Hit) SetExprs(v map[string]*string) *Hit {
+func (s *Hit) SetExprs(v map[string]string) *Hit {
 	s.Exprs = v
 	return s
 }
 
 // SetFields sets the Fields field's value.
-func (s *Hit) SetFields(v map[string][]*string) *Hit {
+func (s *Hit) SetFields(v map[string][]string) *Hit {
 	s.Fields = v
 	return s
 }
 
 // SetHighlights sets the Highlights field's value.
-func (s *Hit) SetHighlights(v map[string]*string) *Hit {
+func (s *Hit) SetHighlights(v map[string]string) *Hit {
 	s.Highlights = v
 	return s
 }
@@ -452,7 +452,7 @@ type Hits struct {
 	Found *int64 `locationName:"found" type:"long"`
 
 	// A document that matches the search request.
-	Hit []*Hit `locationName:"hit" type:"list"`
+	Hit []Hit `locationName:"hit" type:"list"`
 
 	// The index of the first matching document.
 	Start *int64 `locationName:"start" type:"long"`
@@ -481,7 +481,7 @@ func (s *Hits) SetFound(v int64) *Hits {
 }
 
 // SetHit sets the Hit field's value.
-func (s *Hits) SetHit(v []*Hit) *Hits {
+func (s *Hits) SetHit(v []Hit) *Hits {
 	s.Hit = v
 	return s
 }
@@ -910,13 +910,13 @@ type SearchOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The requested facet information.
-	Facets map[string]*BucketInfo `locationName:"facets" type:"map"`
+	Facets map[string]BucketInfo `locationName:"facets" type:"map"`
 
 	// The documents that match the search criteria.
 	Hits *Hits `locationName:"hits" type:"structure"`
 
 	// The requested field statistics information.
-	Stats map[string]*FieldStats `locationName:"stats" type:"map"`
+	Stats map[string]FieldStats `locationName:"stats" type:"map"`
 
 	// The status information returned for the search request.
 	Status *SearchStatus `locationName:"status" type:"structure"`
@@ -933,7 +933,7 @@ func (s SearchOutput) GoString() string {
 }
 
 // SetFacets sets the Facets field's value.
-func (s *SearchOutput) SetFacets(v map[string]*BucketInfo) *SearchOutput {
+func (s *SearchOutput) SetFacets(v map[string]BucketInfo) *SearchOutput {
 	s.Facets = v
 	return s
 }
@@ -945,7 +945,7 @@ func (s *SearchOutput) SetHits(v *Hits) *SearchOutput {
 }
 
 // SetStats sets the Stats field's value.
-func (s *SearchOutput) SetStats(v map[string]*FieldStats) *SearchOutput {
+func (s *SearchOutput) SetStats(v map[string]FieldStats) *SearchOutput {
 	s.Stats = v
 	return s
 }
@@ -1065,7 +1065,7 @@ type SuggestModel struct {
 	Query *string `locationName:"query" type:"string"`
 
 	// The documents that match the query string.
-	Suggestions []*SuggestionMatch `locationName:"suggestions" type:"list"`
+	Suggestions []SuggestionMatch `locationName:"suggestions" type:"list"`
 }
 
 // String returns the string representation
@@ -1091,7 +1091,7 @@ func (s *SuggestModel) SetQuery(v string) *SuggestModel {
 }
 
 // SetSuggestions sets the Suggestions field's value.
-func (s *SuggestModel) SetSuggestions(v []*SuggestionMatch) *SuggestModel {
+func (s *SuggestModel) SetSuggestions(v []SuggestionMatch) *SuggestModel {
 	s.Suggestions = v
 	return s
 }
@@ -1278,7 +1278,7 @@ type UploadDocumentsOutput struct {
 	Status *string `locationName:"status" type:"string"`
 
 	// Any warnings returned by the document service about the documents being uploaded.
-	Warnings []*DocumentServiceWarning `locationName:"warnings" type:"list"`
+	Warnings []DocumentServiceWarning `locationName:"warnings" type:"list"`
 }
 
 // String returns the string representation
@@ -1310,7 +1310,7 @@ func (s *UploadDocumentsOutput) SetStatus(v string) *UploadDocumentsOutput {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *UploadDocumentsOutput) SetWarnings(v []*DocumentServiceWarning) *UploadDocumentsOutput {
+func (s *UploadDocumentsOutput) SetWarnings(v []DocumentServiceWarning) *UploadDocumentsOutput {
 	s.Warnings = v
 	return s
 }

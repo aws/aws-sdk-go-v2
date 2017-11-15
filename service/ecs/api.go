@@ -2264,7 +2264,7 @@ type Container struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The network bindings associated with the container.
-	NetworkBindings []*NetworkBinding `locationName:"networkBindings" type:"list"`
+	NetworkBindings []NetworkBinding `locationName:"networkBindings" type:"list"`
 
 	// A short (255 max characters) human-readable string to provide additional
 	// details about a running or stopped container.
@@ -2309,7 +2309,7 @@ func (s *Container) SetName(v string) *Container {
 }
 
 // SetNetworkBindings sets the NetworkBindings field's value.
-func (s *Container) SetNetworkBindings(v []*NetworkBinding) *Container {
+func (s *Container) SetNetworkBindings(v []NetworkBinding) *Container {
 	s.NetworkBindings = v
 	return s
 }
@@ -2338,7 +2338,7 @@ type ContainerDefinition struct {
 	// and the COMMAND parameter to docker run (https://docs.docker.com/engine/reference/run/).
 	// For more information, see https://docs.docker.com/engine/reference/builder/#cmd
 	// (https://docs.docker.com/engine/reference/builder/#cmd).
-	Command []*string `locationName:"command" type:"list"`
+	Command []string `locationName:"command" type:"list"`
 
 	// The number of cpu units reserved for the container. A container instance
 	// has 1,024 cpu units for every CPU core. This parameter specifies the minimum
@@ -2390,13 +2390,13 @@ type ContainerDefinition struct {
 	// maps to DnsSearch in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --dns-search option to docker run (https://docs.docker.com/engine/reference/run/).
-	DnsSearchDomains []*string `locationName:"dnsSearchDomains" type:"list"`
+	DnsSearchDomains []string `locationName:"dnsSearchDomains" type:"list"`
 
 	// A list of DNS servers that are presented to the container. This parameter
 	// maps to Dns in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --dns option to docker run (https://docs.docker.com/engine/reference/run/).
-	DnsServers []*string `locationName:"dnsServers" type:"list"`
+	DnsServers []string `locationName:"dnsServers" type:"list"`
 
 	// A key/value map of labels to add to the container. This parameter maps to
 	// Labels in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -2406,7 +2406,7 @@ type ContainerDefinition struct {
 	// on your container instance. To check the Docker Remote API version on your
 	// container instance, log into your container instance and run the following
 	// command: sudo docker version | grep "Server API version"
-	DockerLabels map[string]*string `locationName:"dockerLabels" type:"map"`
+	DockerLabels map[string]string `locationName:"dockerLabels" type:"map"`
 
 	// A list of strings to provide custom labels for SELinux and AppArmor multi-level
 	// security systems. This parameter maps to SecurityOpt in the Create a container
@@ -2420,7 +2420,7 @@ type ContainerDefinition struct {
 	// options. For more information, see Amazon ECS Container Agent Configuration
 	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 	// in the Amazon EC2 Container Service Developer Guide.
-	DockerSecurityOptions []*string `locationName:"dockerSecurityOptions" type:"list"`
+	DockerSecurityOptions []string `locationName:"dockerSecurityOptions" type:"list"`
 
 	// Early versions of the Amazon ECS container agent do not properly handle entryPoint
 	// parameters. If you have problems using entryPoint, update your container
@@ -2432,7 +2432,7 @@ type ContainerDefinition struct {
 	// and the --entrypoint option to docker run (https://docs.docker.com/engine/reference/run/).
 	// For more information, see https://docs.docker.com/engine/reference/builder/#entrypoint
 	// (https://docs.docker.com/engine/reference/builder/#entrypoint).
-	EntryPoint []*string `locationName:"entryPoint" type:"list"`
+	EntryPoint []string `locationName:"entryPoint" type:"list"`
 
 	// The environment variables to pass to a container. This parameter maps to
 	// Env in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -2441,7 +2441,7 @@ type ContainerDefinition struct {
 	//
 	// We do not recommend using plain text environment variables for sensitive
 	// information, such as credential data.
-	Environment []*KeyValuePair `locationName:"environment" type:"list"`
+	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
 	// If the essential parameter of a container is marked as true, and that container
 	// fails or stops for any reason, all other containers that are part of the
@@ -2462,7 +2462,7 @@ type ContainerDefinition struct {
 	// (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --add-host option to docker run (https://docs.docker.com/engine/reference/run/).
-	ExtraHosts []*HostEntry `locationName:"extraHosts" type:"list"`
+	ExtraHosts []HostEntry `locationName:"extraHosts" type:"list"`
 
 	// The hostname to use for your container. This parameter maps to Hostname in
 	// the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -2511,7 +2511,7 @@ type ContainerDefinition struct {
 	// to communicate with each other without requiring links or host port mappings.
 	// Network isolation is achieved on the container instance using security groups
 	// and VPC settings.
-	Links []*string `locationName:"links" type:"list"`
+	Links []string `locationName:"links" type:"list"`
 
 	// Linux-specific modifications that are applied to the container, such as Linux
 	// KernelCapabilities.
@@ -2591,7 +2591,7 @@ type ContainerDefinition struct {
 	// to Volumes in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --volume option to docker run (https://docs.docker.com/engine/reference/run/).
-	MountPoints []*MountPoint `locationName:"mountPoints" type:"list"`
+	MountPoints []MountPoint `locationName:"mountPoints" type:"list"`
 
 	// The name of a container. If you are linking multiple containers together
 	// in a task definition, the name of one container can be entered in the links
@@ -2616,7 +2616,7 @@ type ContainerDefinition struct {
 	// port assignments are visible in the Network Bindings section of a container
 	// description of a selected task in the Amazon ECS console, or the networkBindings
 	// section DescribeTasks responses.
-	PortMappings []*PortMapping `locationName:"portMappings" type:"list"`
+	PortMappings []PortMapping `locationName:"portMappings" type:"list"`
 
 	// When this parameter is true, the container is given elevated privileges on
 	// the host container instance (similar to the root user). This parameter maps
@@ -2641,7 +2641,7 @@ type ContainerDefinition struct {
 	// instance. To check the Docker Remote API version on your container instance,
 	// log into your container instance and run the following command: sudo docker
 	// version | grep "Server API version"
-	Ulimits []*Ulimit `locationName:"ulimits" type:"list"`
+	Ulimits []Ulimit `locationName:"ulimits" type:"list"`
 
 	// The user name to use inside the container. This parameter maps to User in
 	// the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -2653,7 +2653,7 @@ type ContainerDefinition struct {
 	// in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --volumes-from option to docker run (https://docs.docker.com/engine/reference/run/).
-	VolumesFrom []*VolumeFrom `locationName:"volumesFrom" type:"list"`
+	VolumesFrom []VolumeFrom `locationName:"volumesFrom" type:"list"`
 
 	// The working directory in which to run commands inside the container. This
 	// parameter maps to WorkingDir in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -2677,9 +2677,6 @@ func (s *ContainerDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerDefinition"}
 	if s.ExtraHosts != nil {
 		for i, v := range s.ExtraHosts {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtraHosts", i), err.(aws.ErrInvalidParams))
 			}
@@ -2692,9 +2689,6 @@ func (s *ContainerDefinition) Validate() error {
 	}
 	if s.Ulimits != nil {
 		for i, v := range s.Ulimits {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ulimits", i), err.(aws.ErrInvalidParams))
 			}
@@ -2708,7 +2702,7 @@ func (s *ContainerDefinition) Validate() error {
 }
 
 // SetCommand sets the Command field's value.
-func (s *ContainerDefinition) SetCommand(v []*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetCommand(v []string) *ContainerDefinition {
 	s.Command = v
 	return s
 }
@@ -2726,37 +2720,37 @@ func (s *ContainerDefinition) SetDisableNetworking(v bool) *ContainerDefinition 
 }
 
 // SetDnsSearchDomains sets the DnsSearchDomains field's value.
-func (s *ContainerDefinition) SetDnsSearchDomains(v []*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetDnsSearchDomains(v []string) *ContainerDefinition {
 	s.DnsSearchDomains = v
 	return s
 }
 
 // SetDnsServers sets the DnsServers field's value.
-func (s *ContainerDefinition) SetDnsServers(v []*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetDnsServers(v []string) *ContainerDefinition {
 	s.DnsServers = v
 	return s
 }
 
 // SetDockerLabels sets the DockerLabels field's value.
-func (s *ContainerDefinition) SetDockerLabels(v map[string]*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetDockerLabels(v map[string]string) *ContainerDefinition {
 	s.DockerLabels = v
 	return s
 }
 
 // SetDockerSecurityOptions sets the DockerSecurityOptions field's value.
-func (s *ContainerDefinition) SetDockerSecurityOptions(v []*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetDockerSecurityOptions(v []string) *ContainerDefinition {
 	s.DockerSecurityOptions = v
 	return s
 }
 
 // SetEntryPoint sets the EntryPoint field's value.
-func (s *ContainerDefinition) SetEntryPoint(v []*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetEntryPoint(v []string) *ContainerDefinition {
 	s.EntryPoint = v
 	return s
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *ContainerDefinition) SetEnvironment(v []*KeyValuePair) *ContainerDefinition {
+func (s *ContainerDefinition) SetEnvironment(v []KeyValuePair) *ContainerDefinition {
 	s.Environment = v
 	return s
 }
@@ -2768,7 +2762,7 @@ func (s *ContainerDefinition) SetEssential(v bool) *ContainerDefinition {
 }
 
 // SetExtraHosts sets the ExtraHosts field's value.
-func (s *ContainerDefinition) SetExtraHosts(v []*HostEntry) *ContainerDefinition {
+func (s *ContainerDefinition) SetExtraHosts(v []HostEntry) *ContainerDefinition {
 	s.ExtraHosts = v
 	return s
 }
@@ -2786,7 +2780,7 @@ func (s *ContainerDefinition) SetImage(v string) *ContainerDefinition {
 }
 
 // SetLinks sets the Links field's value.
-func (s *ContainerDefinition) SetLinks(v []*string) *ContainerDefinition {
+func (s *ContainerDefinition) SetLinks(v []string) *ContainerDefinition {
 	s.Links = v
 	return s
 }
@@ -2816,7 +2810,7 @@ func (s *ContainerDefinition) SetMemoryReservation(v int64) *ContainerDefinition
 }
 
 // SetMountPoints sets the MountPoints field's value.
-func (s *ContainerDefinition) SetMountPoints(v []*MountPoint) *ContainerDefinition {
+func (s *ContainerDefinition) SetMountPoints(v []MountPoint) *ContainerDefinition {
 	s.MountPoints = v
 	return s
 }
@@ -2828,7 +2822,7 @@ func (s *ContainerDefinition) SetName(v string) *ContainerDefinition {
 }
 
 // SetPortMappings sets the PortMappings field's value.
-func (s *ContainerDefinition) SetPortMappings(v []*PortMapping) *ContainerDefinition {
+func (s *ContainerDefinition) SetPortMappings(v []PortMapping) *ContainerDefinition {
 	s.PortMappings = v
 	return s
 }
@@ -2846,7 +2840,7 @@ func (s *ContainerDefinition) SetReadonlyRootFilesystem(v bool) *ContainerDefini
 }
 
 // SetUlimits sets the Ulimits field's value.
-func (s *ContainerDefinition) SetUlimits(v []*Ulimit) *ContainerDefinition {
+func (s *ContainerDefinition) SetUlimits(v []Ulimit) *ContainerDefinition {
 	s.Ulimits = v
 	return s
 }
@@ -2858,7 +2852,7 @@ func (s *ContainerDefinition) SetUser(v string) *ContainerDefinition {
 }
 
 // SetVolumesFrom sets the VolumesFrom field's value.
-func (s *ContainerDefinition) SetVolumesFrom(v []*VolumeFrom) *ContainerDefinition {
+func (s *ContainerDefinition) SetVolumesFrom(v []VolumeFrom) *ContainerDefinition {
 	s.VolumesFrom = v
 	return s
 }
@@ -2887,7 +2881,7 @@ type ContainerInstance struct {
 
 	// The attributes set for the container instance, either by the Amazon ECS container
 	// agent at instance registration or manually with the PutAttributes operation.
-	Attributes []*Attribute `locationName:"attributes" type:"list"`
+	Attributes []Attribute `locationName:"attributes" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the container instance. The ARN contains
 	// the arn:aws:ecs namespace, followed by the region of the container instance,
@@ -2909,14 +2903,14 @@ type ContainerInstance struct {
 	// types, this parameter describes the ports that were reserved by the Amazon
 	// ECS container agent when it registered the container instance with Amazon
 	// ECS.
-	RegisteredResources []*Resource `locationName:"registeredResources" type:"list"`
+	RegisteredResources []Resource `locationName:"registeredResources" type:"list"`
 
 	// For most resource types, this parameter describes the remaining resources
 	// of the container instance that are available for new tasks. For port resource
 	// types, this parameter describes the ports that are reserved by the Amazon
 	// ECS container agent and any containers that have reserved port mappings;
 	// any port that is not specified here is available for new tasks.
-	RemainingResources []*Resource `locationName:"remainingResources" type:"list"`
+	RemainingResources []Resource `locationName:"remainingResources" type:"list"`
 
 	// The number of tasks on the container instance that are in the RUNNING status.
 	RunningTasksCount *int64 `locationName:"runningTasksCount" type:"integer"`
@@ -2966,7 +2960,7 @@ func (s *ContainerInstance) SetAgentUpdateStatus(v AgentUpdateStatus) *Container
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ContainerInstance) SetAttributes(v []*Attribute) *ContainerInstance {
+func (s *ContainerInstance) SetAttributes(v []Attribute) *ContainerInstance {
 	s.Attributes = v
 	return s
 }
@@ -2996,13 +2990,13 @@ func (s *ContainerInstance) SetRegisteredAt(v time.Time) *ContainerInstance {
 }
 
 // SetRegisteredResources sets the RegisteredResources field's value.
-func (s *ContainerInstance) SetRegisteredResources(v []*Resource) *ContainerInstance {
+func (s *ContainerInstance) SetRegisteredResources(v []Resource) *ContainerInstance {
 	s.RegisteredResources = v
 	return s
 }
 
 // SetRemainingResources sets the RemainingResources field's value.
-func (s *ContainerInstance) SetRemainingResources(v []*Resource) *ContainerInstance {
+func (s *ContainerInstance) SetRemainingResources(v []Resource) *ContainerInstance {
 	s.RemainingResources = v
 	return s
 }
@@ -3039,7 +3033,7 @@ type ContainerOverride struct {
 	// The command to send to the container that overrides the default command from
 	// the Docker image or the task definition. You must also specify a container
 	// name.
-	Command []*string `locationName:"command" type:"list"`
+	Command []string `locationName:"command" type:"list"`
 
 	// The number of cpu units reserved for the container, instead of the default
 	// value from the task definition. You must also specify a container name.
@@ -3049,7 +3043,7 @@ type ContainerOverride struct {
 	// variables, which are added to the container at launch, or you can override
 	// the existing environment variables from the Docker image or the task definition.
 	// You must also specify a container name.
-	Environment []*KeyValuePair `locationName:"environment" type:"list"`
+	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
 	// The hard limit (in MiB) of memory to present to the container, instead of
 	// the default value from the task definition. If your container attempts to
@@ -3078,7 +3072,7 @@ func (s ContainerOverride) GoString() string {
 }
 
 // SetCommand sets the Command field's value.
-func (s *ContainerOverride) SetCommand(v []*string) *ContainerOverride {
+func (s *ContainerOverride) SetCommand(v []string) *ContainerOverride {
 	s.Command = v
 	return s
 }
@@ -3090,7 +3084,7 @@ func (s *ContainerOverride) SetCpu(v int64) *ContainerOverride {
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *ContainerOverride) SetEnvironment(v []*KeyValuePair) *ContainerOverride {
+func (s *ContainerOverride) SetEnvironment(v []KeyValuePair) *ContainerOverride {
 	s.Environment = v
 	return s
 }
@@ -3203,16 +3197,16 @@ type CreateServiceInput struct {
 	// balancer. When a task from this service is placed on a container instance,
 	// the container instance and port combination is registered as a target in
 	// the target group specified here.
-	LoadBalancers []*LoadBalancer `locationName:"loadBalancers" type:"list"`
+	LoadBalancers []LoadBalancer `locationName:"loadBalancers" type:"list"`
 
 	// An array of placement constraint objects to use for tasks in your service.
 	// You can specify a maximum of 10 constraints per task (this limit includes
 	// constraints in the task definition and those specified at run time).
-	PlacementConstraints []*PlacementConstraint `locationName:"placementConstraints" type:"list"`
+	PlacementConstraints []PlacementConstraint `locationName:"placementConstraints" type:"list"`
 
 	// The placement strategy objects to use for tasks in your service. You can
 	// specify a maximum of 5 strategy rules per service.
-	PlacementStrategy []*PlacementStrategy `locationName:"placementStrategy" type:"list"`
+	PlacementStrategy []PlacementStrategy `locationName:"placementStrategy" type:"list"`
 
 	// The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon
 	// ECS to make calls to your load balancer on your behalf. This parameter is
@@ -3301,19 +3295,19 @@ func (s *CreateServiceInput) SetDesiredCount(v int64) *CreateServiceInput {
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
-func (s *CreateServiceInput) SetLoadBalancers(v []*LoadBalancer) *CreateServiceInput {
+func (s *CreateServiceInput) SetLoadBalancers(v []LoadBalancer) *CreateServiceInput {
 	s.LoadBalancers = v
 	return s
 }
 
 // SetPlacementConstraints sets the PlacementConstraints field's value.
-func (s *CreateServiceInput) SetPlacementConstraints(v []*PlacementConstraint) *CreateServiceInput {
+func (s *CreateServiceInput) SetPlacementConstraints(v []PlacementConstraint) *CreateServiceInput {
 	s.PlacementConstraints = v
 	return s
 }
 
 // SetPlacementStrategy sets the PlacementStrategy field's value.
-func (s *CreateServiceInput) SetPlacementStrategy(v []*PlacementStrategy) *CreateServiceInput {
+func (s *CreateServiceInput) SetPlacementStrategy(v []PlacementStrategy) *CreateServiceInput {
 	s.PlacementStrategy = v
 	return s
 }
@@ -3370,7 +3364,7 @@ type DeleteAttributesInput struct {
 	// short form, you must also specify the target type.
 	//
 	// Attributes is a required field
-	Attributes []*Attribute `locationName:"attributes" type:"list" required:"true"`
+	Attributes []Attribute `locationName:"attributes" type:"list" required:"true"`
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
 	// the resource to delete attributes. If you do not specify a cluster, the default
@@ -3397,9 +3391,6 @@ func (s *DeleteAttributesInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -3413,7 +3404,7 @@ func (s *DeleteAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DeleteAttributesInput) SetAttributes(v []*Attribute) *DeleteAttributesInput {
+func (s *DeleteAttributesInput) SetAttributes(v []Attribute) *DeleteAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -3429,7 +3420,7 @@ type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of attribute objects that were successfully deleted from your resource.
-	Attributes []*Attribute `locationName:"attributes" type:"list"`
+	Attributes []Attribute `locationName:"attributes" type:"list"`
 }
 
 // String returns the string representation
@@ -3443,7 +3434,7 @@ func (s DeleteAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DeleteAttributesOutput) SetAttributes(v []*Attribute) *DeleteAttributesOutput {
+func (s *DeleteAttributesOutput) SetAttributes(v []Attribute) *DeleteAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -3891,7 +3882,7 @@ type DescribeClustersInput struct {
 
 	// A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN)
 	// entries. If you do not specify a cluster, the default cluster is assumed.
-	Clusters []*string `locationName:"clusters" type:"list"`
+	Clusters []string `locationName:"clusters" type:"list"`
 }
 
 // String returns the string representation
@@ -3905,7 +3896,7 @@ func (s DescribeClustersInput) GoString() string {
 }
 
 // SetClusters sets the Clusters field's value.
-func (s *DescribeClustersInput) SetClusters(v []*string) *DescribeClustersInput {
+func (s *DescribeClustersInput) SetClusters(v []string) *DescribeClustersInput {
 	s.Clusters = v
 	return s
 }
@@ -3915,10 +3906,10 @@ type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of clusters.
-	Clusters []*Cluster `locationName:"clusters" type:"list"`
+	Clusters []Cluster `locationName:"clusters" type:"list"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 }
 
 // String returns the string representation
@@ -3932,13 +3923,13 @@ func (s DescribeClustersOutput) GoString() string {
 }
 
 // SetClusters sets the Clusters field's value.
-func (s *DescribeClustersOutput) SetClusters(v []*Cluster) *DescribeClustersOutput {
+func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutput {
 	s.Clusters = v
 	return s
 }
 
 // SetFailures sets the Failures field's value.
-func (s *DescribeClustersOutput) SetFailures(v []*Failure) *DescribeClustersOutput {
+func (s *DescribeClustersOutput) SetFailures(v []Failure) *DescribeClustersOutput {
 	s.Failures = v
 	return s
 }
@@ -3955,7 +3946,7 @@ type DescribeContainerInstancesInput struct {
 	// A list of container instance IDs or full Amazon Resource Name (ARN) entries.
 	//
 	// ContainerInstances is a required field
-	ContainerInstances []*string `locationName:"containerInstances" type:"list" required:"true"`
+	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3989,7 +3980,7 @@ func (s *DescribeContainerInstancesInput) SetCluster(v string) *DescribeContaine
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
-func (s *DescribeContainerInstancesInput) SetContainerInstances(v []*string) *DescribeContainerInstancesInput {
+func (s *DescribeContainerInstancesInput) SetContainerInstances(v []string) *DescribeContainerInstancesInput {
 	s.ContainerInstances = v
 	return s
 }
@@ -3999,10 +3990,10 @@ type DescribeContainerInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of container instances.
-	ContainerInstances []*ContainerInstance `locationName:"containerInstances" type:"list"`
+	ContainerInstances []ContainerInstance `locationName:"containerInstances" type:"list"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 }
 
 // String returns the string representation
@@ -4016,13 +4007,13 @@ func (s DescribeContainerInstancesOutput) GoString() string {
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
-func (s *DescribeContainerInstancesOutput) SetContainerInstances(v []*ContainerInstance) *DescribeContainerInstancesOutput {
+func (s *DescribeContainerInstancesOutput) SetContainerInstances(v []ContainerInstance) *DescribeContainerInstancesOutput {
 	s.ContainerInstances = v
 	return s
 }
 
 // SetFailures sets the Failures field's value.
-func (s *DescribeContainerInstancesOutput) SetFailures(v []*Failure) *DescribeContainerInstancesOutput {
+func (s *DescribeContainerInstancesOutput) SetFailures(v []Failure) *DescribeContainerInstancesOutput {
 	s.Failures = v
 	return s
 }
@@ -4040,7 +4031,7 @@ type DescribeServicesInput struct {
 	// in a single operation.
 	//
 	// Services is a required field
-	Services []*string `locationName:"services" type:"list" required:"true"`
+	Services []string `locationName:"services" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4074,7 +4065,7 @@ func (s *DescribeServicesInput) SetCluster(v string) *DescribeServicesInput {
 }
 
 // SetServices sets the Services field's value.
-func (s *DescribeServicesInput) SetServices(v []*string) *DescribeServicesInput {
+func (s *DescribeServicesInput) SetServices(v []string) *DescribeServicesInput {
 	s.Services = v
 	return s
 }
@@ -4084,10 +4075,10 @@ type DescribeServicesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 
 	// The list of services described.
-	Services []*Service `locationName:"services" type:"list"`
+	Services []Service `locationName:"services" type:"list"`
 }
 
 // String returns the string representation
@@ -4101,13 +4092,13 @@ func (s DescribeServicesOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *DescribeServicesOutput) SetFailures(v []*Failure) *DescribeServicesOutput {
+func (s *DescribeServicesOutput) SetFailures(v []Failure) *DescribeServicesOutput {
 	s.Failures = v
 	return s
 }
 
 // SetServices sets the Services field's value.
-func (s *DescribeServicesOutput) SetServices(v []*Service) *DescribeServicesOutput {
+func (s *DescribeServicesOutput) SetServices(v []Service) *DescribeServicesOutput {
 	s.Services = v
 	return s
 }
@@ -4190,7 +4181,7 @@ type DescribeTasksInput struct {
 	// A list of up to 100 task IDs or full Amazon Resource Name (ARN) entries.
 	//
 	// Tasks is a required field
-	Tasks []*string `locationName:"tasks" type:"list" required:"true"`
+	Tasks []string `locationName:"tasks" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4224,7 +4215,7 @@ func (s *DescribeTasksInput) SetCluster(v string) *DescribeTasksInput {
 }
 
 // SetTasks sets the Tasks field's value.
-func (s *DescribeTasksInput) SetTasks(v []*string) *DescribeTasksInput {
+func (s *DescribeTasksInput) SetTasks(v []string) *DescribeTasksInput {
 	s.Tasks = v
 	return s
 }
@@ -4234,10 +4225,10 @@ type DescribeTasksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 
 	// The list of tasks.
-	Tasks []*Task `locationName:"tasks" type:"list"`
+	Tasks []Task `locationName:"tasks" type:"list"`
 }
 
 // String returns the string representation
@@ -4251,13 +4242,13 @@ func (s DescribeTasksOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *DescribeTasksOutput) SetFailures(v []*Failure) *DescribeTasksOutput {
+func (s *DescribeTasksOutput) SetFailures(v []Failure) *DescribeTasksOutput {
 	s.Failures = v
 	return s
 }
 
 // SetTasks sets the Tasks field's value.
-func (s *DescribeTasksOutput) SetTasks(v []*Task) *DescribeTasksOutput {
+func (s *DescribeTasksOutput) SetTasks(v []Task) *DescribeTasksOutput {
 	s.Tasks = v
 	return s
 }
@@ -4471,14 +4462,14 @@ type KernelCapabilities struct {
 	// a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --cap-add option to docker run (https://docs.docker.com/engine/reference/run/).
-	Add []*string `locationName:"add" type:"list"`
+	Add []string `locationName:"add" type:"list"`
 
 	// The Linux capabilities for the container that have been removed from the
 	// default configuration provided by Docker. This parameter maps to CapDrop
 	// in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --cap-drop option to docker run (https://docs.docker.com/engine/reference/run/).
-	Drop []*string `locationName:"drop" type:"list"`
+	Drop []string `locationName:"drop" type:"list"`
 }
 
 // String returns the string representation
@@ -4492,13 +4483,13 @@ func (s KernelCapabilities) GoString() string {
 }
 
 // SetAdd sets the Add field's value.
-func (s *KernelCapabilities) SetAdd(v []*string) *KernelCapabilities {
+func (s *KernelCapabilities) SetAdd(v []string) *KernelCapabilities {
 	s.Add = v
 	return s
 }
 
 // SetDrop sets the Drop field's value.
-func (s *KernelCapabilities) SetDrop(v []*string) *KernelCapabilities {
+func (s *KernelCapabilities) SetDrop(v []string) *KernelCapabilities {
 	s.Drop = v
 	return s
 }
@@ -4668,7 +4659,7 @@ type ListAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of attribute objects that meet the criteria of the request.
-	Attributes []*Attribute `locationName:"attributes" type:"list"`
+	Attributes []Attribute `locationName:"attributes" type:"list"`
 
 	// The nextToken value to include in a future ListAttributes request. When the
 	// results of a ListAttributes request exceed maxResults, this value can be
@@ -4688,7 +4679,7 @@ func (s ListAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ListAttributesOutput) SetAttributes(v []*Attribute) *ListAttributesOutput {
+func (s *ListAttributesOutput) SetAttributes(v []Attribute) *ListAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -4750,7 +4741,7 @@ type ListClustersOutput struct {
 
 	// The list of full Amazon Resource Name (ARN) entries for each cluster associated
 	// with your account.
-	ClusterArns []*string `locationName:"clusterArns" type:"list"`
+	ClusterArns []string `locationName:"clusterArns" type:"list"`
 
 	// The nextToken value to include in a future ListClusters request. When the
 	// results of a ListClusters request exceed maxResults, this value can be used
@@ -4770,7 +4761,7 @@ func (s ListClustersOutput) GoString() string {
 }
 
 // SetClusterArns sets the ClusterArns field's value.
-func (s *ListClustersOutput) SetClusterArns(v []*string) *ListClustersOutput {
+func (s *ListClustersOutput) SetClusterArns(v []string) *ListClustersOutput {
 	s.ClusterArns = v
 	return s
 }
@@ -4870,7 +4861,7 @@ type ListContainerInstancesOutput struct {
 
 	// The list of container instances with full Amazon Resource Name (ARN) entries
 	// for each container instance associated with the specified cluster.
-	ContainerInstanceArns []*string `locationName:"containerInstanceArns" type:"list"`
+	ContainerInstanceArns []string `locationName:"containerInstanceArns" type:"list"`
 
 	// The nextToken value to include in a future ListContainerInstances request.
 	// When the results of a ListContainerInstances request exceed maxResults, this
@@ -4890,7 +4881,7 @@ func (s ListContainerInstancesOutput) GoString() string {
 }
 
 // SetContainerInstanceArns sets the ContainerInstanceArns field's value.
-func (s *ListContainerInstancesOutput) SetContainerInstanceArns(v []*string) *ListContainerInstancesOutput {
+func (s *ListContainerInstancesOutput) SetContainerInstanceArns(v []string) *ListContainerInstancesOutput {
 	s.ContainerInstanceArns = v
 	return s
 }
@@ -4969,7 +4960,7 @@ type ListServicesOutput struct {
 
 	// The list of full Amazon Resource Name (ARN) entries for each service associated
 	// with the specified cluster.
-	ServiceArns []*string `locationName:"serviceArns" type:"list"`
+	ServiceArns []string `locationName:"serviceArns" type:"list"`
 }
 
 // String returns the string representation
@@ -4989,7 +4980,7 @@ func (s *ListServicesOutput) SetNextToken(v string) *ListServicesOutput {
 }
 
 // SetServiceArns sets the ServiceArns field's value.
-func (s *ListServicesOutput) SetServiceArns(v []*string) *ListServicesOutput {
+func (s *ListServicesOutput) SetServiceArns(v []string) *ListServicesOutput {
 	s.ServiceArns = v
 	return s
 }
@@ -5073,7 +5064,7 @@ type ListTaskDefinitionFamiliesOutput struct {
 
 	// The list of task definition family names that match the ListTaskDefinitionFamilies
 	// request.
-	Families []*string `locationName:"families" type:"list"`
+	Families []string `locationName:"families" type:"list"`
 
 	// The nextToken value to include in a future ListTaskDefinitionFamilies request.
 	// When the results of a ListTaskDefinitionFamilies request exceed maxResults,
@@ -5093,7 +5084,7 @@ func (s ListTaskDefinitionFamiliesOutput) GoString() string {
 }
 
 // SetFamilies sets the Families field's value.
-func (s *ListTaskDefinitionFamiliesOutput) SetFamilies(v []*string) *ListTaskDefinitionFamiliesOutput {
+func (s *ListTaskDefinitionFamiliesOutput) SetFamilies(v []string) *ListTaskDefinitionFamiliesOutput {
 	s.Families = v
 	return s
 }
@@ -5200,7 +5191,7 @@ type ListTaskDefinitionsOutput struct {
 
 	// The list of task definition Amazon Resource Name (ARN) entries for the ListTaskDefinitions
 	// request.
-	TaskDefinitionArns []*string `locationName:"taskDefinitionArns" type:"list"`
+	TaskDefinitionArns []string `locationName:"taskDefinitionArns" type:"list"`
 }
 
 // String returns the string representation
@@ -5220,7 +5211,7 @@ func (s *ListTaskDefinitionsOutput) SetNextToken(v string) *ListTaskDefinitionsO
 }
 
 // SetTaskDefinitionArns sets the TaskDefinitionArns field's value.
-func (s *ListTaskDefinitionsOutput) SetTaskDefinitionArns(v []*string) *ListTaskDefinitionsOutput {
+func (s *ListTaskDefinitionsOutput) SetTaskDefinitionArns(v []string) *ListTaskDefinitionsOutput {
 	s.TaskDefinitionArns = v
 	return s
 }
@@ -5350,7 +5341,7 @@ type ListTasksOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The list of task Amazon Resource Name (ARN) entries for the ListTasks request.
-	TaskArns []*string `locationName:"taskArns" type:"list"`
+	TaskArns []string `locationName:"taskArns" type:"list"`
 }
 
 // String returns the string representation
@@ -5370,7 +5361,7 @@ func (s *ListTasksOutput) SetNextToken(v string) *ListTasksOutput {
 }
 
 // SetTaskArns sets the TaskArns field's value.
-func (s *ListTasksOutput) SetTaskArns(v []*string) *ListTasksOutput {
+func (s *ListTasksOutput) SetTaskArns(v []string) *ListTasksOutput {
 	s.TaskArns = v
 	return s
 }
@@ -5462,7 +5453,7 @@ type LogConfiguration struct {
 	// To check the Docker Remote API version on your container instance, log into
 	// your container instance and run the following command: sudo docker version
 	// | grep "Server API version"
-	Options map[string]*string `locationName:"options" type:"map"`
+	Options map[string]string `locationName:"options" type:"map"`
 }
 
 // String returns the string representation
@@ -5495,7 +5486,7 @@ func (s *LogConfiguration) SetLogDriver(v LogDriver) *LogConfiguration {
 }
 
 // SetOptions sets the Options field's value.
-func (s *LogConfiguration) SetOptions(v map[string]*string) *LogConfiguration {
+func (s *LogConfiguration) SetOptions(v map[string]string) *LogConfiguration {
 	s.Options = v
 	return s
 }
@@ -5774,7 +5765,7 @@ type PutAttributesInput struct {
 	// call.
 	//
 	// Attributes is a required field
-	Attributes []*Attribute `locationName:"attributes" type:"list" required:"true"`
+	Attributes []Attribute `locationName:"attributes" type:"list" required:"true"`
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
 	// the resource to apply attributes. If you do not specify a cluster, the default
@@ -5801,9 +5792,6 @@ func (s *PutAttributesInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -5817,7 +5805,7 @@ func (s *PutAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *PutAttributesInput) SetAttributes(v []*Attribute) *PutAttributesInput {
+func (s *PutAttributesInput) SetAttributes(v []Attribute) *PutAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -5833,7 +5821,7 @@ type PutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The attributes applied to your resource.
-	Attributes []*Attribute `locationName:"attributes" type:"list"`
+	Attributes []Attribute `locationName:"attributes" type:"list"`
 }
 
 // String returns the string representation
@@ -5847,7 +5835,7 @@ func (s PutAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *PutAttributesOutput) SetAttributes(v []*Attribute) *PutAttributesOutput {
+func (s *PutAttributesOutput) SetAttributes(v []Attribute) *PutAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -5857,7 +5845,7 @@ type RegisterContainerInstanceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The container instance attributes that this container instance supports.
-	Attributes []*Attribute `locationName:"attributes" type:"list"`
+	Attributes []Attribute `locationName:"attributes" type:"list"`
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster with which
 	// to register your container instance. If you do not specify a cluster, the
@@ -5878,7 +5866,7 @@ type RegisterContainerInstanceInput struct {
 	InstanceIdentityDocumentSignature *string `locationName:"instanceIdentityDocumentSignature" type:"string"`
 
 	// The resources available on the instance.
-	TotalResources []*Resource `locationName:"totalResources" type:"list"`
+	TotalResources []Resource `locationName:"totalResources" type:"list"`
 
 	// The version information for the Amazon ECS container agent and Docker daemon
 	// running on the container instance.
@@ -5900,9 +5888,6 @@ func (s *RegisterContainerInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterContainerInstanceInput"}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -5916,7 +5901,7 @@ func (s *RegisterContainerInstanceInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *RegisterContainerInstanceInput) SetAttributes(v []*Attribute) *RegisterContainerInstanceInput {
+func (s *RegisterContainerInstanceInput) SetAttributes(v []Attribute) *RegisterContainerInstanceInput {
 	s.Attributes = v
 	return s
 }
@@ -5946,7 +5931,7 @@ func (s *RegisterContainerInstanceInput) SetInstanceIdentityDocumentSignature(v 
 }
 
 // SetTotalResources sets the TotalResources field's value.
-func (s *RegisterContainerInstanceInput) SetTotalResources(v []*Resource) *RegisterContainerInstanceInput {
+func (s *RegisterContainerInstanceInput) SetTotalResources(v []Resource) *RegisterContainerInstanceInput {
 	s.TotalResources = v
 	return s
 }
@@ -5989,7 +5974,7 @@ type RegisterTaskDefinitionInput struct {
 	// containers that make up your task.
 	//
 	// ContainerDefinitions is a required field
-	ContainerDefinitions []*ContainerDefinition `locationName:"containerDefinitions" type:"list" required:"true"`
+	ContainerDefinitions []ContainerDefinition `locationName:"containerDefinitions" type:"list" required:"true"`
 
 	// You must specify a family for a task definition, which allows you to track
 	// multiple versions of the same task definition. The family is used as a name
@@ -6019,7 +6004,7 @@ type RegisterTaskDefinitionInput struct {
 	// An array of placement constraint objects to use for the task. You can specify
 	// a maximum of 10 constraints per task (this limit includes constraints in
 	// the task definition and those specified at run time).
-	PlacementConstraints []*TaskDefinitionPlacementConstraint `locationName:"placementConstraints" type:"list"`
+	PlacementConstraints []TaskDefinitionPlacementConstraint `locationName:"placementConstraints" type:"list"`
 
 	// The short name or full Amazon Resource Name (ARN) of the IAM role that containers
 	// in this task can assume. All containers in this task are granted the permissions
@@ -6030,7 +6015,7 @@ type RegisterTaskDefinitionInput struct {
 
 	// A list of volume definitions in JSON format that containers in your task
 	// may use.
-	Volumes []*Volume `locationName:"volumes" type:"list"`
+	Volumes []Volume `locationName:"volumes" type:"list"`
 }
 
 // String returns the string representation
@@ -6056,9 +6041,6 @@ func (s *RegisterTaskDefinitionInput) Validate() error {
 	}
 	if s.ContainerDefinitions != nil {
 		for i, v := range s.ContainerDefinitions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContainerDefinitions", i), err.(aws.ErrInvalidParams))
 			}
@@ -6072,7 +6054,7 @@ func (s *RegisterTaskDefinitionInput) Validate() error {
 }
 
 // SetContainerDefinitions sets the ContainerDefinitions field's value.
-func (s *RegisterTaskDefinitionInput) SetContainerDefinitions(v []*ContainerDefinition) *RegisterTaskDefinitionInput {
+func (s *RegisterTaskDefinitionInput) SetContainerDefinitions(v []ContainerDefinition) *RegisterTaskDefinitionInput {
 	s.ContainerDefinitions = v
 	return s
 }
@@ -6090,7 +6072,7 @@ func (s *RegisterTaskDefinitionInput) SetNetworkMode(v NetworkMode) *RegisterTas
 }
 
 // SetPlacementConstraints sets the PlacementConstraints field's value.
-func (s *RegisterTaskDefinitionInput) SetPlacementConstraints(v []*TaskDefinitionPlacementConstraint) *RegisterTaskDefinitionInput {
+func (s *RegisterTaskDefinitionInput) SetPlacementConstraints(v []TaskDefinitionPlacementConstraint) *RegisterTaskDefinitionInput {
 	s.PlacementConstraints = v
 	return s
 }
@@ -6102,7 +6084,7 @@ func (s *RegisterTaskDefinitionInput) SetTaskRoleArn(v string) *RegisterTaskDefi
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *RegisterTaskDefinitionInput) SetVolumes(v []*Volume) *RegisterTaskDefinitionInput {
+func (s *RegisterTaskDefinitionInput) SetVolumes(v []Volume) *RegisterTaskDefinitionInput {
 	s.Volumes = v
 	return s
 }
@@ -6152,7 +6134,7 @@ type Resource struct {
 
 	// When the stringSetValue type is set, the value of the resource must be a
 	// string type.
-	StringSetValue []*string `locationName:"stringSetValue" type:"list"`
+	StringSetValue []string `locationName:"stringSetValue" type:"list"`
 
 	// The type of the resource, such as INTEGER, DOUBLE, LONG, or STRINGSET.
 	Type *string `locationName:"type" type:"string"`
@@ -6193,7 +6175,7 @@ func (s *Resource) SetName(v string) *Resource {
 }
 
 // SetStringSetValue sets the StringSetValue field's value.
-func (s *Resource) SetStringSetValue(v []*string) *Resource {
+func (s *Resource) SetStringSetValue(v []string) *Resource {
 	s.StringSetValue = v
 	return s
 }
@@ -6236,11 +6218,11 @@ type RunTaskInput struct {
 	// An array of placement constraint objects to use for the task. You can specify
 	// up to 10 constraints per task (including constraints in the task definition
 	// and those specified at run time).
-	PlacementConstraints []*PlacementConstraint `locationName:"placementConstraints" type:"list"`
+	PlacementConstraints []PlacementConstraint `locationName:"placementConstraints" type:"list"`
 
 	// The placement strategy objects to use for the task. You can specify a maximum
 	// of 5 strategy rules per task.
-	PlacementStrategy []*PlacementStrategy `locationName:"placementStrategy" type:"list"`
+	PlacementStrategy []PlacementStrategy `locationName:"placementStrategy" type:"list"`
 
 	// An optional tag specified when a task is started. For example if you automatically
 	// trigger a task to run a batch process job, you could apply a unique identifier
@@ -6310,13 +6292,13 @@ func (s *RunTaskInput) SetOverrides(v *TaskOverride) *RunTaskInput {
 }
 
 // SetPlacementConstraints sets the PlacementConstraints field's value.
-func (s *RunTaskInput) SetPlacementConstraints(v []*PlacementConstraint) *RunTaskInput {
+func (s *RunTaskInput) SetPlacementConstraints(v []PlacementConstraint) *RunTaskInput {
 	s.PlacementConstraints = v
 	return s
 }
 
 // SetPlacementStrategy sets the PlacementStrategy field's value.
-func (s *RunTaskInput) SetPlacementStrategy(v []*PlacementStrategy) *RunTaskInput {
+func (s *RunTaskInput) SetPlacementStrategy(v []PlacementStrategy) *RunTaskInput {
 	s.PlacementStrategy = v
 	return s
 }
@@ -6338,11 +6320,11 @@ type RunTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 
 	// A full description of the tasks that were run. Each task that was successfully
 	// placed on your cluster are described here.
-	Tasks []*Task `locationName:"tasks" type:"list"`
+	Tasks []Task `locationName:"tasks" type:"list"`
 }
 
 // String returns the string representation
@@ -6356,13 +6338,13 @@ func (s RunTaskOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *RunTaskOutput) SetFailures(v []*Failure) *RunTaskOutput {
+func (s *RunTaskOutput) SetFailures(v []Failure) *RunTaskOutput {
 	s.Failures = v
 	return s
 }
 
 // SetTasks sets the Tasks field's value.
-func (s *RunTaskOutput) SetTasks(v []*Task) *RunTaskOutput {
+func (s *RunTaskOutput) SetTasks(v []Task) *RunTaskOutput {
 	s.Tasks = v
 	return s
 }
@@ -6383,7 +6365,7 @@ type Service struct {
 	DeploymentConfiguration *DeploymentConfiguration `locationName:"deploymentConfiguration" type:"structure"`
 
 	// The current state of deployments for the service.
-	Deployments []*Deployment `locationName:"deployments" type:"list"`
+	Deployments []Deployment `locationName:"deployments" type:"list"`
 
 	// The desired number of instantiations of the task definition to keep running
 	// on the service. This value is specified when the service is created with
@@ -6392,21 +6374,21 @@ type Service struct {
 
 	// The event stream for your service. A maximum of 100 of the latest events
 	// are displayed.
-	Events []*ServiceEvent `locationName:"events" type:"list"`
+	Events []ServiceEvent `locationName:"events" type:"list"`
 
 	// A list of Elastic Load Balancing load balancer objects, containing the load
 	// balancer name, the container name (as it appears in a container definition),
 	// and the container port to access from the load balancer.
-	LoadBalancers []*LoadBalancer `locationName:"loadBalancers" type:"list"`
+	LoadBalancers []LoadBalancer `locationName:"loadBalancers" type:"list"`
 
 	// The number of tasks in the cluster that are in the PENDING state.
 	PendingCount *int64 `locationName:"pendingCount" type:"integer"`
 
 	// The placement constraints for the tasks in the service.
-	PlacementConstraints []*PlacementConstraint `locationName:"placementConstraints" type:"list"`
+	PlacementConstraints []PlacementConstraint `locationName:"placementConstraints" type:"list"`
 
 	// The placement strategy that determines how tasks for the service are placed.
-	PlacementStrategy []*PlacementStrategy `locationName:"placementStrategy" type:"list"`
+	PlacementStrategy []PlacementStrategy `locationName:"placementStrategy" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the IAM role associated with the service
 	// that allows the Amazon ECS container agent to register container instances
@@ -6466,7 +6448,7 @@ func (s *Service) SetDeploymentConfiguration(v *DeploymentConfiguration) *Servic
 }
 
 // SetDeployments sets the Deployments field's value.
-func (s *Service) SetDeployments(v []*Deployment) *Service {
+func (s *Service) SetDeployments(v []Deployment) *Service {
 	s.Deployments = v
 	return s
 }
@@ -6478,13 +6460,13 @@ func (s *Service) SetDesiredCount(v int64) *Service {
 }
 
 // SetEvents sets the Events field's value.
-func (s *Service) SetEvents(v []*ServiceEvent) *Service {
+func (s *Service) SetEvents(v []ServiceEvent) *Service {
 	s.Events = v
 	return s
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
-func (s *Service) SetLoadBalancers(v []*LoadBalancer) *Service {
+func (s *Service) SetLoadBalancers(v []LoadBalancer) *Service {
 	s.LoadBalancers = v
 	return s
 }
@@ -6496,13 +6478,13 @@ func (s *Service) SetPendingCount(v int64) *Service {
 }
 
 // SetPlacementConstraints sets the PlacementConstraints field's value.
-func (s *Service) SetPlacementConstraints(v []*PlacementConstraint) *Service {
+func (s *Service) SetPlacementConstraints(v []PlacementConstraint) *Service {
 	s.PlacementConstraints = v
 	return s
 }
 
 // SetPlacementStrategy sets the PlacementStrategy field's value.
-func (s *Service) SetPlacementStrategy(v []*PlacementStrategy) *Service {
+func (s *Service) SetPlacementStrategy(v []PlacementStrategy) *Service {
 	s.PlacementStrategy = v
 	return s
 }
@@ -6600,7 +6582,7 @@ type StartTaskInput struct {
 	// specify up to 10 container instances.
 	//
 	// ContainerInstances is a required field
-	ContainerInstances []*string `locationName:"containerInstances" type:"list" required:"true"`
+	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
 
 	// The name of the task group to associate with the task. The default value
 	// is the family name of the task definition (for example, family:my-family-name).
@@ -6672,7 +6654,7 @@ func (s *StartTaskInput) SetCluster(v string) *StartTaskInput {
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
-func (s *StartTaskInput) SetContainerInstances(v []*string) *StartTaskInput {
+func (s *StartTaskInput) SetContainerInstances(v []string) *StartTaskInput {
 	s.ContainerInstances = v
 	return s
 }
@@ -6706,11 +6688,11 @@ type StartTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 
 	// A full description of the tasks that were started. Each task that was successfully
 	// placed on your container instances are described here.
-	Tasks []*Task `locationName:"tasks" type:"list"`
+	Tasks []Task `locationName:"tasks" type:"list"`
 }
 
 // String returns the string representation
@@ -6724,13 +6706,13 @@ func (s StartTaskOutput) GoString() string {
 }
 
 // SetFailures sets the Failures field's value.
-func (s *StartTaskOutput) SetFailures(v []*Failure) *StartTaskOutput {
+func (s *StartTaskOutput) SetFailures(v []Failure) *StartTaskOutput {
 	s.Failures = v
 	return s
 }
 
 // SetTasks sets the Tasks field's value.
-func (s *StartTaskOutput) SetTasks(v []*Task) *StartTaskOutput {
+func (s *StartTaskOutput) SetTasks(v []Task) *StartTaskOutput {
 	s.Tasks = v
 	return s
 }
@@ -6837,7 +6819,7 @@ type SubmitContainerStateChangeInput struct {
 	ExitCode *int64 `locationName:"exitCode" type:"integer"`
 
 	// The network bindings of the container.
-	NetworkBindings []*NetworkBinding `locationName:"networkBindings" type:"list"`
+	NetworkBindings []NetworkBinding `locationName:"networkBindings" type:"list"`
 
 	// The reason for the state change request.
 	Reason *string `locationName:"reason" type:"string"`
@@ -6879,7 +6861,7 @@ func (s *SubmitContainerStateChangeInput) SetExitCode(v int64) *SubmitContainerS
 }
 
 // SetNetworkBindings sets the NetworkBindings field's value.
-func (s *SubmitContainerStateChangeInput) SetNetworkBindings(v []*NetworkBinding) *SubmitContainerStateChangeInput {
+func (s *SubmitContainerStateChangeInput) SetNetworkBindings(v []NetworkBinding) *SubmitContainerStateChangeInput {
 	s.NetworkBindings = v
 	return s
 }
@@ -7015,7 +6997,7 @@ type Task struct {
 	ContainerInstanceArn *string `locationName:"containerInstanceArn" type:"string"`
 
 	// The containers associated with the task.
-	Containers []*Container `locationName:"containers" type:"list"`
+	Containers []Container `locationName:"containers" type:"list"`
 
 	// The Unix timestamp for when the task was created (the task entered the PENDING
 	// state).
@@ -7087,7 +7069,7 @@ func (s *Task) SetContainerInstanceArn(v string) *Task {
 }
 
 // SetContainers sets the Containers field's value.
-func (s *Task) SetContainers(v []*Container) *Task {
+func (s *Task) SetContainers(v []Container) *Task {
 	s.Containers = v
 	return s
 }
@@ -7173,7 +7155,7 @@ type TaskDefinition struct {
 	// containers that make up your task. For more information about container definition
 	// parameters and defaults, see Amazon ECS Task Definitions (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
 	// in the Amazon EC2 Container Service Developer Guide.
-	ContainerDefinitions []*ContainerDefinition `locationName:"containerDefinitions" type:"list"`
+	ContainerDefinitions []ContainerDefinition `locationName:"containerDefinitions" type:"list"`
 
 	// The family of your task definition, used as the definition name.
 	Family *string `locationName:"family" type:"string"`
@@ -7191,10 +7173,10 @@ type TaskDefinition struct {
 	NetworkMode NetworkMode `locationName:"networkMode" type:"string"`
 
 	// An array of placement constraint objects to use for tasks.
-	PlacementConstraints []*TaskDefinitionPlacementConstraint `locationName:"placementConstraints" type:"list"`
+	PlacementConstraints []TaskDefinitionPlacementConstraint `locationName:"placementConstraints" type:"list"`
 
 	// The container instance attributes required by your task.
-	RequiresAttributes []*Attribute `locationName:"requiresAttributes" type:"list"`
+	RequiresAttributes []Attribute `locationName:"requiresAttributes" type:"list"`
 
 	// The revision of the task in a particular family. The revision is a version
 	// number of a task definition in a family. When you register a task definition
@@ -7217,7 +7199,7 @@ type TaskDefinition struct {
 	// The list of volumes in a task. For more information about volume definition
 	// parameters and defaults, see Amazon ECS Task Definitions (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
 	// in the Amazon EC2 Container Service Developer Guide.
-	Volumes []*Volume `locationName:"volumes" type:"list"`
+	Volumes []Volume `locationName:"volumes" type:"list"`
 }
 
 // String returns the string representation
@@ -7231,7 +7213,7 @@ func (s TaskDefinition) GoString() string {
 }
 
 // SetContainerDefinitions sets the ContainerDefinitions field's value.
-func (s *TaskDefinition) SetContainerDefinitions(v []*ContainerDefinition) *TaskDefinition {
+func (s *TaskDefinition) SetContainerDefinitions(v []ContainerDefinition) *TaskDefinition {
 	s.ContainerDefinitions = v
 	return s
 }
@@ -7249,13 +7231,13 @@ func (s *TaskDefinition) SetNetworkMode(v NetworkMode) *TaskDefinition {
 }
 
 // SetPlacementConstraints sets the PlacementConstraints field's value.
-func (s *TaskDefinition) SetPlacementConstraints(v []*TaskDefinitionPlacementConstraint) *TaskDefinition {
+func (s *TaskDefinition) SetPlacementConstraints(v []TaskDefinitionPlacementConstraint) *TaskDefinition {
 	s.PlacementConstraints = v
 	return s
 }
 
 // SetRequiresAttributes sets the RequiresAttributes field's value.
-func (s *TaskDefinition) SetRequiresAttributes(v []*Attribute) *TaskDefinition {
+func (s *TaskDefinition) SetRequiresAttributes(v []Attribute) *TaskDefinition {
 	s.RequiresAttributes = v
 	return s
 }
@@ -7285,7 +7267,7 @@ func (s *TaskDefinition) SetTaskRoleArn(v string) *TaskDefinition {
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *TaskDefinition) SetVolumes(v []*Volume) *TaskDefinition {
+func (s *TaskDefinition) SetVolumes(v []Volume) *TaskDefinition {
 	s.Volumes = v
 	return s
 }
@@ -7336,7 +7318,7 @@ type TaskOverride struct {
 	_ struct{} `type:"structure"`
 
 	// One or more container overrides sent to a task.
-	ContainerOverrides []*ContainerOverride `locationName:"containerOverrides" type:"list"`
+	ContainerOverrides []ContainerOverride `locationName:"containerOverrides" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task
 	// can assume. All containers in this task are granted the permissions that
@@ -7355,7 +7337,7 @@ func (s TaskOverride) GoString() string {
 }
 
 // SetContainerOverrides sets the ContainerOverrides field's value.
-func (s *TaskOverride) SetContainerOverrides(v []*ContainerOverride) *TaskOverride {
+func (s *TaskOverride) SetContainerOverrides(v []ContainerOverride) *TaskOverride {
 	s.ContainerOverrides = v
 	return s
 }
@@ -7525,7 +7507,7 @@ type UpdateContainerInstancesStateInput struct {
 	// A list of container instance IDs or full Amazon Resource Name (ARN) entries.
 	//
 	// ContainerInstances is a required field
-	ContainerInstances []*string `locationName:"containerInstances" type:"list" required:"true"`
+	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
 
 	// The container instance state with which to update the container instance.
 	//
@@ -7567,7 +7549,7 @@ func (s *UpdateContainerInstancesStateInput) SetCluster(v string) *UpdateContain
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
-func (s *UpdateContainerInstancesStateInput) SetContainerInstances(v []*string) *UpdateContainerInstancesStateInput {
+func (s *UpdateContainerInstancesStateInput) SetContainerInstances(v []string) *UpdateContainerInstancesStateInput {
 	s.ContainerInstances = v
 	return s
 }
@@ -7583,10 +7565,10 @@ type UpdateContainerInstancesStateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of container instances.
-	ContainerInstances []*ContainerInstance `locationName:"containerInstances" type:"list"`
+	ContainerInstances []ContainerInstance `locationName:"containerInstances" type:"list"`
 
 	// Any failures associated with the call.
-	Failures []*Failure `locationName:"failures" type:"list"`
+	Failures []Failure `locationName:"failures" type:"list"`
 }
 
 // String returns the string representation
@@ -7600,13 +7582,13 @@ func (s UpdateContainerInstancesStateOutput) GoString() string {
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
-func (s *UpdateContainerInstancesStateOutput) SetContainerInstances(v []*ContainerInstance) *UpdateContainerInstancesStateOutput {
+func (s *UpdateContainerInstancesStateOutput) SetContainerInstances(v []ContainerInstance) *UpdateContainerInstancesStateOutput {
 	s.ContainerInstances = v
 	return s
 }
 
 // SetFailures sets the Failures field's value.
-func (s *UpdateContainerInstancesStateOutput) SetFailures(v []*Failure) *UpdateContainerInstancesStateOutput {
+func (s *UpdateContainerInstancesStateOutput) SetFailures(v []Failure) *UpdateContainerInstancesStateOutput {
 	s.Failures = v
 	return s
 }

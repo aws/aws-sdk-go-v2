@@ -234,13 +234,22 @@ func fillArgs(in reflect.Value, args [][]string) {
 }
 
 func callWithJSON(op, j string, allowError bool) {
+	methodName := op + "Request"
 	v := reflect.ValueOf(gucumber.World["client"])
-	if m := findMethod(v, op); m != nil {
+	if m := findMethod(v, methodName); m != nil {
 		t := m.Type()
 		in := reflect.New(t.In(0).Elem())
 		fillJSON(in, j)
 
-		resps := m.Call([]reflect.Value{in})
+		// req := svc.__Request(in)
+		results := m.Call([]reflect.Value{in})
+		m = findMethod(results[0], "Send")
+		if m == nil {
+			gucumber.T.Errorf("failed to find request's send method")
+			return
+		}
+
+		resps := m.Call([]reflect.Value{})
 		gucumber.World["response"] = resps[0].Interface()
 		gucumber.World["error"] = resps[1].Interface()
 
@@ -251,7 +260,7 @@ func callWithJSON(op, j string, allowError bool) {
 			}
 		}
 	} else {
-		gucumber.T.Errorf("failed to find operation " + op)
+		gucumber.T.Errorf("failed to find operation " + methodName)
 	}
 }
 

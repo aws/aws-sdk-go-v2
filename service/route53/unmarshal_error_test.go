@@ -79,14 +79,14 @@ but it already exists
 	params := &route53.ChangeResourceRecordSetsInput{
 		HostedZoneId: aws.String("zoneId"),
 		ChangeBatch: &route53.ChangeBatch{
-			Changes: []*route53.Change{
+			Changes: []route53.Change{
 				{
 					Action: route53.ChangeActionCreate,
 					ResourceRecordSet: &route53.ResourceRecordSet{
 						Name: aws.String("domain"),
 						Type: route53.RRTypeCname,
 						TTL:  aws.Int64(120),
-						ResourceRecords: []*route53.ResourceRecord{
+						ResourceRecords: []route53.ResourceRecord{
 							{
 								Value: aws.String("cname"),
 							},

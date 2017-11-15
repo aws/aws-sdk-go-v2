@@ -2286,7 +2286,7 @@ type AllocateStaticIpOutput struct {
 
 	// An array of key-value pairs containing information about the static IP address
 	// you allocated.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -2300,7 +2300,7 @@ func (s AllocateStaticIpOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *AllocateStaticIpOutput) SetOperations(v []*Operation) *AllocateStaticIpOutput {
+func (s *AllocateStaticIpOutput) SetOperations(v []Operation) *AllocateStaticIpOutput {
 	s.Operations = v
 	return s
 }
@@ -2365,7 +2365,7 @@ type AttachStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about your API operations.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -2379,7 +2379,7 @@ func (s AttachStaticIpOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *AttachStaticIpOutput) SetOperations(v []*Operation) *AttachStaticIpOutput {
+func (s *AttachStaticIpOutput) SetOperations(v []Operation) *AttachStaticIpOutput {
 	s.Operations = v
 	return s
 }
@@ -2935,7 +2935,7 @@ type CreateInstanceSnapshotOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// create instances snapshot request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -2949,7 +2949,7 @@ func (s CreateInstanceSnapshotOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *CreateInstanceSnapshotOutput) SetOperations(v []*Operation) *CreateInstanceSnapshotOutput {
+func (s *CreateInstanceSnapshotOutput) SetOperations(v []Operation) *CreateInstanceSnapshotOutput {
 	s.Operations = v
 	return s
 }
@@ -2976,7 +2976,7 @@ type CreateInstancesFromSnapshotInput struct {
 	// The names for your new instances.
 	//
 	// InstanceNames is a required field
-	InstanceNames []*string `locationName:"instanceNames" type:"list" required:"true"`
+	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
 
 	// The name of the instance snapshot on which you are basing your new instances.
 	// Use the get instance snapshots operation to return information about your
@@ -3047,7 +3047,7 @@ func (s *CreateInstancesFromSnapshotInput) SetBundleId(v string) *CreateInstance
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
-func (s *CreateInstancesFromSnapshotInput) SetInstanceNames(v []*string) *CreateInstancesFromSnapshotInput {
+func (s *CreateInstancesFromSnapshotInput) SetInstanceNames(v []string) *CreateInstancesFromSnapshotInput {
 	s.InstanceNames = v
 	return s
 }
@@ -3076,7 +3076,7 @@ type CreateInstancesFromSnapshotOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// create instances from snapshot request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -3090,7 +3090,7 @@ func (s CreateInstancesFromSnapshotOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *CreateInstancesFromSnapshotOutput) SetOperations(v []*Operation) *CreateInstancesFromSnapshotOutput {
+func (s *CreateInstancesFromSnapshotOutput) SetOperations(v []Operation) *CreateInstancesFromSnapshotOutput {
 	s.Operations = v
 	return s
 }
@@ -3131,7 +3131,7 @@ type CreateInstancesInput struct {
 	// using quotation marks and commas, for example: ["MyFirstInstance","MySecondInstance"]
 	//
 	// InstanceNames is a required field
-	InstanceNames []*string `locationName:"instanceNames" type:"list" required:"true"`
+	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
 
 	// The name of your key pair.
 	KeyPairName *string `locationName:"keyPairName" type:"string"`
@@ -3207,7 +3207,7 @@ func (s *CreateInstancesInput) SetCustomImageName(v string) *CreateInstancesInpu
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
-func (s *CreateInstancesInput) SetInstanceNames(v []*string) *CreateInstancesInput {
+func (s *CreateInstancesInput) SetInstanceNames(v []string) *CreateInstancesInput {
 	s.InstanceNames = v
 	return s
 }
@@ -3230,7 +3230,7 @@ type CreateInstancesOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// create instances request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -3244,7 +3244,7 @@ func (s CreateInstancesOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *CreateInstancesOutput) SetOperations(v []*Operation) *CreateInstancesOutput {
+func (s *CreateInstancesOutput) SetOperations(v []Operation) *CreateInstancesOutput {
 	s.Operations = v
 	return s
 }
@@ -3533,7 +3533,7 @@ type DeleteInstanceOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// delete instance request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -3547,7 +3547,7 @@ func (s DeleteInstanceOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *DeleteInstanceOutput) SetOperations(v []*Operation) *DeleteInstanceOutput {
+func (s *DeleteInstanceOutput) SetOperations(v []Operation) *DeleteInstanceOutput {
 	s.Operations = v
 	return s
 }
@@ -3598,7 +3598,7 @@ type DeleteInstanceSnapshotOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// delete instance snapshot request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -3612,7 +3612,7 @@ func (s DeleteInstanceSnapshotOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *DeleteInstanceSnapshotOutput) SetOperations(v []*Operation) *DeleteInstanceSnapshotOutput {
+func (s *DeleteInstanceSnapshotOutput) SetOperations(v []Operation) *DeleteInstanceSnapshotOutput {
 	s.Operations = v
 	return s
 }
@@ -3728,7 +3728,7 @@ type DetachStaticIpOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// detach static IP request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -3742,7 +3742,7 @@ func (s DetachStaticIpOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *DetachStaticIpOutput) SetOperations(v []*Operation) *DetachStaticIpOutput {
+func (s *DetachStaticIpOutput) SetOperations(v []Operation) *DetachStaticIpOutput {
 	s.Operations = v
 	return s
 }
@@ -3904,7 +3904,7 @@ type Domain struct {
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
 	// An array of key-value pairs containing information about the domain entries.
-	DomainEntries []*DomainEntry `locationName:"domainEntries" type:"list"`
+	DomainEntries []DomainEntry `locationName:"domainEntries" type:"list"`
 
 	// The AWS Region and Availability Zones where the domain recordset was created.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
@@ -3944,7 +3944,7 @@ func (s *Domain) SetCreatedAt(v time.Time) *Domain {
 }
 
 // SetDomainEntries sets the DomainEntries field's value.
-func (s *Domain) SetDomainEntries(v []*DomainEntry) *Domain {
+func (s *Domain) SetDomainEntries(v []DomainEntry) *Domain {
 	s.DomainEntries = v
 	return s
 }
@@ -3985,7 +3985,7 @@ type DomainEntry struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The options for the domain entry.
-	Options map[string]*string `locationName:"options" type:"map"`
+	Options map[string]string `locationName:"options" type:"map"`
 
 	// The target AWS name server (e.g., ns-111.awsdns-22.com.).
 	Target *string `locationName:"target" type:"string"`
@@ -4017,7 +4017,7 @@ func (s *DomainEntry) SetName(v string) *DomainEntry {
 }
 
 // SetOptions sets the Options field's value.
-func (s *DomainEntry) SetOptions(v map[string]*string) *DomainEntry {
+func (s *DomainEntry) SetOptions(v map[string]string) *DomainEntry {
 	s.Options = v
 	return s
 }
@@ -4111,7 +4111,7 @@ type GetActiveNamesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of active names returned by the get active names request.
-	ActiveNames []*string `locationName:"activeNames" type:"list"`
+	ActiveNames []string `locationName:"activeNames" type:"list"`
 
 	// A token used for advancing to the next page of results from your get active
 	// names request.
@@ -4129,7 +4129,7 @@ func (s GetActiveNamesOutput) GoString() string {
 }
 
 // SetActiveNames sets the ActiveNames field's value.
-func (s *GetActiveNamesOutput) SetActiveNames(v []*string) *GetActiveNamesOutput {
+func (s *GetActiveNamesOutput) SetActiveNames(v []string) *GetActiveNamesOutput {
 	s.ActiveNames = v
 	return s
 }
@@ -4180,7 +4180,7 @@ type GetBlueprintsOutput struct {
 
 	// An array of key-value pairs that contains information about the available
 	// blueprints.
-	Blueprints []*Blueprint `locationName:"blueprints" type:"list"`
+	Blueprints []Blueprint `locationName:"blueprints" type:"list"`
 
 	// A token used for advancing to the next page of results from your get blueprints
 	// request.
@@ -4198,7 +4198,7 @@ func (s GetBlueprintsOutput) GoString() string {
 }
 
 // SetBlueprints sets the Blueprints field's value.
-func (s *GetBlueprintsOutput) SetBlueprints(v []*Blueprint) *GetBlueprintsOutput {
+func (s *GetBlueprintsOutput) SetBlueprints(v []Blueprint) *GetBlueprintsOutput {
 	s.Blueprints = v
 	return s
 }
@@ -4250,7 +4250,7 @@ type GetBundlesOutput struct {
 
 	// An array of key-value pairs that contains information about the available
 	// bundles.
-	Bundles []*Bundle `locationName:"bundles" type:"list"`
+	Bundles []Bundle `locationName:"bundles" type:"list"`
 
 	// A token used for advancing to the next page of results from your get active
 	// names request.
@@ -4268,7 +4268,7 @@ func (s GetBundlesOutput) GoString() string {
 }
 
 // SetBundles sets the Bundles field's value.
-func (s *GetBundlesOutput) SetBundles(v []*Bundle) *GetBundlesOutput {
+func (s *GetBundlesOutput) SetBundles(v []Bundle) *GetBundlesOutput {
 	s.Bundles = v
 	return s
 }
@@ -4375,7 +4375,7 @@ type GetDomainsOutput struct {
 
 	// An array of key-value pairs containing information about each of the domain
 	// entries in the user's account.
-	Domains []*Domain `locationName:"domains" type:"list"`
+	Domains []Domain `locationName:"domains" type:"list"`
 
 	// A token used for advancing to the next page of results from your get active
 	// names request.
@@ -4393,7 +4393,7 @@ func (s GetDomainsOutput) GoString() string {
 }
 
 // SetDomains sets the Domains field's value.
-func (s *GetDomainsOutput) SetDomains(v []*Domain) *GetDomainsOutput {
+func (s *GetDomainsOutput) SetDomains(v []Domain) *GetDomainsOutput {
 	s.Domains = v
 	return s
 }
@@ -4655,7 +4655,7 @@ type GetInstanceMetricDataOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// get instance metric data request.
-	MetricData []*MetricDatapoint `locationName:"metricData" type:"list"`
+	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
 
 	// The metric name to return data for.
 	MetricName InstanceMetricName `locationName:"metricName" type:"string"`
@@ -4672,7 +4672,7 @@ func (s GetInstanceMetricDataOutput) GoString() string {
 }
 
 // SetMetricData sets the MetricData field's value.
-func (s *GetInstanceMetricDataOutput) SetMetricData(v []*MetricDatapoint) *GetInstanceMetricDataOutput {
+func (s *GetInstanceMetricDataOutput) SetMetricData(v []MetricDatapoint) *GetInstanceMetricDataOutput {
 	s.MetricData = v
 	return s
 }
@@ -4752,7 +4752,7 @@ type GetInstancePortStatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the port states resulting from your request.
-	PortStates []*InstancePortState `locationName:"portStates" type:"list"`
+	PortStates []InstancePortState `locationName:"portStates" type:"list"`
 }
 
 // String returns the string representation
@@ -4766,7 +4766,7 @@ func (s GetInstancePortStatesOutput) GoString() string {
 }
 
 // SetPortStates sets the PortStates field's value.
-func (s *GetInstancePortStatesOutput) SetPortStates(v []*InstancePortState) *GetInstancePortStatesOutput {
+func (s *GetInstancePortStatesOutput) SetPortStates(v []InstancePortState) *GetInstancePortStatesOutput {
 	s.PortStates = v
 	return s
 }
@@ -4867,7 +4867,7 @@ type GetInstanceSnapshotsOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// get instance snapshots request.
-	InstanceSnapshots []*InstanceSnapshot `locationName:"instanceSnapshots" type:"list"`
+	InstanceSnapshots []InstanceSnapshot `locationName:"instanceSnapshots" type:"list"`
 
 	// A token used for advancing to the next page of results from your get instance
 	// snapshots request.
@@ -4885,7 +4885,7 @@ func (s GetInstanceSnapshotsOutput) GoString() string {
 }
 
 // SetInstanceSnapshots sets the InstanceSnapshots field's value.
-func (s *GetInstanceSnapshotsOutput) SetInstanceSnapshots(v []*InstanceSnapshot) *GetInstanceSnapshotsOutput {
+func (s *GetInstanceSnapshotsOutput) SetInstanceSnapshots(v []InstanceSnapshot) *GetInstanceSnapshotsOutput {
 	s.InstanceSnapshots = v
 	return s
 }
@@ -4990,7 +4990,7 @@ type GetInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about your instances.
-	Instances []*Instance `locationName:"instances" type:"list"`
+	Instances []Instance `locationName:"instances" type:"list"`
 
 	// A token used for advancing to the next page of results from your get instances
 	// request.
@@ -5008,7 +5008,7 @@ func (s GetInstancesOutput) GoString() string {
 }
 
 // SetInstances sets the Instances field's value.
-func (s *GetInstancesOutput) SetInstances(v []*Instance) *GetInstancesOutput {
+func (s *GetInstancesOutput) SetInstances(v []Instance) *GetInstancesOutput {
 	s.Instances = v
 	return s
 }
@@ -5113,7 +5113,7 @@ type GetKeyPairsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about the key pairs.
-	KeyPairs []*KeyPair `locationName:"keyPairs" type:"list"`
+	KeyPairs []KeyPair `locationName:"keyPairs" type:"list"`
 
 	// A token used for advancing to the next page of results from your get key
 	// pairs request.
@@ -5131,7 +5131,7 @@ func (s GetKeyPairsOutput) GoString() string {
 }
 
 // SetKeyPairs sets the KeyPairs field's value.
-func (s *GetKeyPairsOutput) SetKeyPairs(v []*KeyPair) *GetKeyPairsOutput {
+func (s *GetKeyPairsOutput) SetKeyPairs(v []KeyPair) *GetKeyPairsOutput {
 	s.KeyPairs = v
 	return s
 }
@@ -5273,7 +5273,7 @@ type GetOperationsForResourceOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// get operations for resource request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -5299,7 +5299,7 @@ func (s *GetOperationsForResourceOutput) SetNextPageToken(v string) *GetOperatio
 }
 
 // SetOperations sets the Operations field's value.
-func (s *GetOperationsForResourceOutput) SetOperations(v []*Operation) *GetOperationsForResourceOutput {
+func (s *GetOperationsForResourceOutput) SetOperations(v []Operation) *GetOperationsForResourceOutput {
 	s.Operations = v
 	return s
 }
@@ -5339,7 +5339,7 @@ type GetOperationsOutput struct {
 
 	// An array of key-value pairs containing information about the results of your
 	// get operations request.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -5359,7 +5359,7 @@ func (s *GetOperationsOutput) SetNextPageToken(v string) *GetOperationsOutput {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *GetOperationsOutput) SetOperations(v []*Operation) *GetOperationsOutput {
+func (s *GetOperationsOutput) SetOperations(v []Operation) *GetOperationsOutput {
 	s.Operations = v
 	return s
 }
@@ -5396,7 +5396,7 @@ type GetRegionsOutput struct {
 
 	// An array of key-value pairs containing information about your get regions
 	// request.
-	Regions []*Region `locationName:"regions" type:"list"`
+	Regions []Region `locationName:"regions" type:"list"`
 }
 
 // String returns the string representation
@@ -5410,7 +5410,7 @@ func (s GetRegionsOutput) GoString() string {
 }
 
 // SetRegions sets the Regions field's value.
-func (s *GetRegionsOutput) SetRegions(v []*Region) *GetRegionsOutput {
+func (s *GetRegionsOutput) SetRegions(v []Region) *GetRegionsOutput {
 	s.Regions = v
 	return s
 }
@@ -5515,7 +5515,7 @@ type GetStaticIpsOutput struct {
 
 	// An array of key-value pairs containing information about your get static
 	// IPs request.
-	StaticIps []*StaticIp `locationName:"staticIps" type:"list"`
+	StaticIps []StaticIp `locationName:"staticIps" type:"list"`
 }
 
 // String returns the string representation
@@ -5535,7 +5535,7 @@ func (s *GetStaticIpsOutput) SetNextPageToken(v string) *GetStaticIpsOutput {
 }
 
 // SetStaticIps sets the StaticIps field's value.
-func (s *GetStaticIpsOutput) SetStaticIps(v []*StaticIp) *GetStaticIpsOutput {
+func (s *GetStaticIpsOutput) SetStaticIps(v []StaticIp) *GetStaticIpsOutput {
 	s.StaticIps = v
 	return s
 }
@@ -5901,7 +5901,7 @@ type InstanceHardware struct {
 	CpuCount *int64 `locationName:"cpuCount" type:"integer"`
 
 	// The disks attached to the instance.
-	Disks []*Disk `locationName:"disks" type:"list"`
+	Disks []Disk `locationName:"disks" type:"list"`
 
 	// The amount of RAM in GB on the instance (e.g., 1.0).
 	RamSizeInGb *float64 `locationName:"ramSizeInGb" type:"float"`
@@ -5924,7 +5924,7 @@ func (s *InstanceHardware) SetCpuCount(v int64) *InstanceHardware {
 }
 
 // SetDisks sets the Disks field's value.
-func (s *InstanceHardware) SetDisks(v []*Disk) *InstanceHardware {
+func (s *InstanceHardware) SetDisks(v []Disk) *InstanceHardware {
 	s.Disks = v
 	return s
 }
@@ -5945,7 +5945,7 @@ type InstanceNetworking struct {
 
 	// An array of key-value pairs containing information about the ports on the
 	// instance.
-	Ports []*InstancePortInfo `locationName:"ports" type:"list"`
+	Ports []InstancePortInfo `locationName:"ports" type:"list"`
 }
 
 // String returns the string representation
@@ -5965,7 +5965,7 @@ func (s *InstanceNetworking) SetMonthlyTransfer(v *MonthlyTransfer) *InstanceNet
 }
 
 // SetPorts sets the Ports field's value.
-func (s *InstanceNetworking) SetPorts(v []*InstancePortInfo) *InstanceNetworking {
+func (s *InstanceNetworking) SetPorts(v []InstancePortInfo) *InstanceNetworking {
 	s.Ports = v
 	return s
 }
@@ -6830,7 +6830,7 @@ type PutInstancePublicPortsInput struct {
 	// Specifies information about the public port(s).
 	//
 	// PortInfos is a required field
-	PortInfos []*PortInfo `locationName:"portInfos" type:"list" required:"true"`
+	PortInfos []PortInfo `locationName:"portInfos" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6868,7 +6868,7 @@ func (s *PutInstancePublicPortsInput) SetInstanceName(v string) *PutInstancePubl
 }
 
 // SetPortInfos sets the PortInfos field's value.
-func (s *PutInstancePublicPortsInput) SetPortInfos(v []*PortInfo) *PutInstancePublicPortsInput {
+func (s *PutInstancePublicPortsInput) SetPortInfos(v []PortInfo) *PutInstancePublicPortsInput {
 	s.PortInfos = v
 	return s
 }
@@ -6942,7 +6942,7 @@ type RebootInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about the request operation.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -6956,7 +6956,7 @@ func (s RebootInstanceOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *RebootInstanceOutput) SetOperations(v []*Operation) *RebootInstanceOutput {
+func (s *RebootInstanceOutput) SetOperations(v []Operation) *RebootInstanceOutput {
 	s.Operations = v
 	return s
 }
@@ -6967,7 +6967,7 @@ type Region struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zones. Follows the format us-east-1a (case-sensitive).
-	AvailabilityZones []*AvailabilityZone `locationName:"availabilityZones" type:"list"`
+	AvailabilityZones []AvailabilityZone `locationName:"availabilityZones" type:"list"`
 
 	// The continent code (e.g., NA, meaning North America).
 	ContinentCode *string `locationName:"continentCode" type:"string"`
@@ -6994,7 +6994,7 @@ func (s Region) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *Region) SetAvailabilityZones(v []*AvailabilityZone) *Region {
+func (s *Region) SetAvailabilityZones(v []AvailabilityZone) *Region {
 	s.AvailabilityZones = v
 	return s
 }
@@ -7068,7 +7068,7 @@ type ReleaseStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about the request operation.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -7082,7 +7082,7 @@ func (s ReleaseStaticIpOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *ReleaseStaticIpOutput) SetOperations(v []*Operation) *ReleaseStaticIpOutput {
+func (s *ReleaseStaticIpOutput) SetOperations(v []Operation) *ReleaseStaticIpOutput {
 	s.Operations = v
 	return s
 }
@@ -7166,7 +7166,7 @@ type StartInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about the request operation.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -7180,7 +7180,7 @@ func (s StartInstanceOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *StartInstanceOutput) SetOperations(v []*Operation) *StartInstanceOutput {
+func (s *StartInstanceOutput) SetOperations(v []Operation) *StartInstanceOutput {
 	s.Operations = v
 	return s
 }
@@ -7329,7 +7329,7 @@ type StopInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about the request operation.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -7343,7 +7343,7 @@ func (s StopInstanceOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *StopInstanceOutput) SetOperations(v []*Operation) *StopInstanceOutput {
+func (s *StopInstanceOutput) SetOperations(v []Operation) *StopInstanceOutput {
 	s.Operations = v
 	return s
 }
@@ -7447,7 +7447,7 @@ type UpdateDomainEntryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of key-value pairs containing information about the request operation.
-	Operations []*Operation `locationName:"operations" type:"list"`
+	Operations []Operation `locationName:"operations" type:"list"`
 }
 
 // String returns the string representation
@@ -7461,7 +7461,7 @@ func (s UpdateDomainEntryOutput) GoString() string {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *UpdateDomainEntryOutput) SetOperations(v []*Operation) *UpdateDomainEntryOutput {
+func (s *UpdateDomainEntryOutput) SetOperations(v []Operation) *UpdateDomainEntryOutput {
 	s.Operations = v
 	return s
 }

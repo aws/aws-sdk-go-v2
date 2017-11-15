@@ -1734,7 +1734,7 @@ func ExampleDeviceFarm_UpdateDevicePoolRequest_shared00() {
 		Arn:         aws.String("arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE"),
 		Description: aws.String("NewDescription"),
 		Name:        aws.String("NewName"),
-		Rules: []*devicefarm.Rule{
+		Rules: []devicefarm.Rule{
 			{
 				Attribute: devicefarm.DeviceAttributeRemoteAccessEnabled,
 				Operator:  devicefarm.RuleOperatorEquals,

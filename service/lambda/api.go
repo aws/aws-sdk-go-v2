@@ -2236,7 +2236,7 @@ type CreateFunctionInput struct {
 	Runtime Runtime `type:"string" required:"true"`
 
 	// The list of tags (key-value pairs) assigned to the new function.
-	Tags map[string]*string `type:"map"`
+	Tags map[string]string `type:"map"`
 
 	// The function execution time at which Lambda should terminate the function.
 	// Because the execution time has cost implications, we recommend you set this
@@ -2373,7 +2373,7 @@ func (s *CreateFunctionInput) SetRuntime(v Runtime) *CreateFunctionInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateFunctionInput) SetTags(v map[string]*string) *CreateFunctionInput {
+func (s *CreateFunctionInput) SetTags(v map[string]string) *CreateFunctionInput {
 	s.Tags = v
 	return s
 }
@@ -2639,7 +2639,7 @@ type Environment struct {
 	_ struct{} `type:"structure"`
 
 	// The key-value pairs that represent your environment's configuration settings.
-	Variables map[string]*string `type:"map"`
+	Variables map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -2653,7 +2653,7 @@ func (s Environment) GoString() string {
 }
 
 // SetVariables sets the Variables field's value.
-func (s *Environment) SetVariables(v map[string]*string) *Environment {
+func (s *Environment) SetVariables(v map[string]string) *Environment {
 	s.Variables = v
 	return s
 }
@@ -2705,7 +2705,7 @@ type EnvironmentResponse struct {
 
 	// The key-value pairs returned that represent your environment's configuration
 	// settings or error information.
-	Variables map[string]*string `type:"map"`
+	Variables map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -2725,7 +2725,7 @@ func (s *EnvironmentResponse) SetError(v *EnvironmentError) *EnvironmentResponse
 }
 
 // SetVariables sets the Variables field's value.
-func (s *EnvironmentResponse) SetVariables(v map[string]*string) *EnvironmentResponse {
+func (s *EnvironmentResponse) SetVariables(v map[string]string) *EnvironmentResponse {
 	s.Variables = v
 	return s
 }
@@ -3148,7 +3148,7 @@ type GetFunctionOutput struct {
 	Configuration *UpdateFunctionConfigurationOutput `type:"structure"`
 
 	// Returns the list of tags associated with the function.
-	Tags map[string]*string `type:"map"`
+	Tags map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -3174,7 +3174,7 @@ func (s *GetFunctionOutput) SetConfiguration(v *UpdateFunctionConfigurationOutpu
 }
 
 // SetTags sets the Tags field's value.
-func (s *GetFunctionOutput) SetTags(v map[string]*string) *GetFunctionOutput {
+func (s *GetFunctionOutput) SetTags(v map[string]string) *GetFunctionOutput {
 	s.Tags = v
 	return s
 }
@@ -3630,7 +3630,7 @@ type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of aliases.
-	Aliases []*UpdateAliasOutput `type:"list"`
+	Aliases []UpdateAliasOutput `type:"list"`
 
 	// A string, present if there are more aliases.
 	NextMarker *string `type:"string"`
@@ -3647,7 +3647,7 @@ func (s ListAliasesOutput) GoString() string {
 }
 
 // SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []*UpdateAliasOutput) *ListAliasesOutput {
+func (s *ListAliasesOutput) SetAliases(v []UpdateAliasOutput) *ListAliasesOutput {
 	s.Aliases = v
 	return s
 }
@@ -3744,7 +3744,7 @@ type ListEventSourceMappingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of EventSourceMappingConfiguration objects.
-	EventSourceMappings []*UpdateEventSourceMappingOutput `type:"list"`
+	EventSourceMappings []UpdateEventSourceMappingOutput `type:"list"`
 
 	// A string, present if there are more event source mappings.
 	NextMarker *string `type:"string"`
@@ -3761,7 +3761,7 @@ func (s ListEventSourceMappingsOutput) GoString() string {
 }
 
 // SetEventSourceMappings sets the EventSourceMappings field's value.
-func (s *ListEventSourceMappingsOutput) SetEventSourceMappings(v []*UpdateEventSourceMappingOutput) *ListEventSourceMappingsOutput {
+func (s *ListEventSourceMappingsOutput) SetEventSourceMappings(v []UpdateEventSourceMappingOutput) *ListEventSourceMappingsOutput {
 	s.EventSourceMappings = v
 	return s
 }
@@ -3859,7 +3859,7 @@ type ListFunctionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Lambda functions.
-	Functions []*UpdateFunctionConfigurationOutput `type:"list"`
+	Functions []UpdateFunctionConfigurationOutput `type:"list"`
 
 	// A string, present if there are more functions.
 	NextMarker *string `type:"string"`
@@ -3876,7 +3876,7 @@ func (s ListFunctionsOutput) GoString() string {
 }
 
 // SetFunctions sets the Functions field's value.
-func (s *ListFunctionsOutput) SetFunctions(v []*UpdateFunctionConfigurationOutput) *ListFunctionsOutput {
+func (s *ListFunctionsOutput) SetFunctions(v []UpdateFunctionConfigurationOutput) *ListFunctionsOutput {
 	s.Functions = v
 	return s
 }
@@ -3932,7 +3932,7 @@ type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of tags assigned to the function.
-	Tags map[string]*string `type:"map"`
+	Tags map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -3946,7 +3946,7 @@ func (s ListTagsOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v map[string]*string) *ListTagsOutput {
+func (s *ListTagsOutput) SetTags(v map[string]string) *ListTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -4030,7 +4030,7 @@ type ListVersionsByFunctionOutput struct {
 	NextMarker *string `type:"string"`
 
 	// A list of Lambda function versions.
-	Versions []*UpdateFunctionConfigurationOutput `type:"list"`
+	Versions []UpdateFunctionConfigurationOutput `type:"list"`
 }
 
 // String returns the string representation
@@ -4050,7 +4050,7 @@ func (s *ListVersionsByFunctionOutput) SetNextMarker(v string) *ListVersionsByFu
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListVersionsByFunctionOutput) SetVersions(v []*UpdateFunctionConfigurationOutput) *ListVersionsByFunctionOutput {
+func (s *ListVersionsByFunctionOutput) SetVersions(v []UpdateFunctionConfigurationOutput) *ListVersionsByFunctionOutput {
 	s.Versions = v
 	return s
 }
@@ -4234,7 +4234,7 @@ type TagResourceInput struct {
 	// The list of tags (key-value pairs) you are assigning to the Lambda function.
 	//
 	// Tags is a required field
-	Tags map[string]*string `type:"map" required:"true"`
+	Tags map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -4272,7 +4272,7 @@ func (s *TagResourceInput) SetResource(v string) *TagResourceInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v map[string]*string) *TagResourceInput {
+func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
 	s.Tags = v
 	return s
 }
@@ -4358,7 +4358,7 @@ type UntagResourceInput struct {
 	// The list of tag keys to be deleted from the function.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4396,7 +4396,7 @@ func (s *UntagResourceInput) SetResource(v string) *UntagResourceInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -5247,10 +5247,10 @@ type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
 	// A list of one or more security groups IDs in your VPC.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// A list of one or more subnet IDs in your VPC.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5264,13 +5264,13 @@ func (s VpcConfig) GoString() string {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfig) SetSecurityGroupIds(v []*string) *VpcConfig {
+func (s *VpcConfig) SetSecurityGroupIds(v []string) *VpcConfig {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcConfig) SetSubnetIds(v []*string) *VpcConfig {
+func (s *VpcConfig) SetSubnetIds(v []string) *VpcConfig {
 	s.SubnetIds = v
 	return s
 }
@@ -5281,10 +5281,10 @@ type VpcConfigResponse struct {
 	_ struct{} `type:"structure"`
 
 	// A list of security group IDs associated with the Lambda function.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// A list of subnet IDs associated with the Lambda function.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 
 	// The VPC ID associated with you Lambda function.
 	VpcId *string `type:"string"`
@@ -5301,13 +5301,13 @@ func (s VpcConfigResponse) GoString() string {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfigResponse) SetSecurityGroupIds(v []*string) *VpcConfigResponse {
+func (s *VpcConfigResponse) SetSecurityGroupIds(v []string) *VpcConfigResponse {
 	s.SecurityGroupIds = v
 	return s
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcConfigResponse) SetSubnetIds(v []*string) *VpcConfigResponse {
+func (s *VpcConfigResponse) SetSubnetIds(v []string) *VpcConfigResponse {
 	s.SubnetIds = v
 	return s
 }

@@ -189,8 +189,8 @@ func ExampleRekognition_DeleteFacesRequest_shared00() {
 	svc := rekognition.New(cfg)
 	input := &rekognition.DeleteFacesInput{
 		CollectionId: aws.String("myphotos"),
-		FaceIds: []*string{
-			aws.String("ff43d742-0c13-5d16-a3e8-03d3f58e980b"),
+		FaceIds: []string{
+			"ff43d742-0c13-5d16-a3e8-03d3f58e980b",
 		},
 	}
 

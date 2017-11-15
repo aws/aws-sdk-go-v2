@@ -1624,12 +1624,12 @@ type AttributeValue struct {
 	// An attribute of type List. For example:
 	//
 	// "L": ["Cookies", "Coffee", 3.14159]
-	L []*AttributeValue `type:"list"`
+	L []AttributeValue `type:"list"`
 
 	// An attribute of type Map. For example:
 	//
 	// "M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}
-	M map[string]*AttributeValue `type:"map"`
+	M map[string]AttributeValue `type:"map"`
 
 	// An attribute of type Number. For example:
 	//
@@ -1647,7 +1647,7 @@ type AttributeValue struct {
 	// Numbers are sent across the network to DynamoDB as strings, to maximize compatibility
 	// across languages and libraries. However, DynamoDB treats them as number type
 	// attributes for mathematical operations.
-	NS []*string `type:"list"`
+	NS []string `type:"list"`
 
 	// An attribute of type Null. For example:
 	//
@@ -1662,7 +1662,7 @@ type AttributeValue struct {
 	// An attribute of type String Set. For example:
 	//
 	// "SS": ["Giraffe", "Hippo" ,"Zebra"]
-	SS []*string `type:"list"`
+	SS []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1694,13 +1694,13 @@ func (s *AttributeValue) SetBS(v [][]byte) *AttributeValue {
 }
 
 // SetL sets the L field's value.
-func (s *AttributeValue) SetL(v []*AttributeValue) *AttributeValue {
+func (s *AttributeValue) SetL(v []AttributeValue) *AttributeValue {
 	s.L = v
 	return s
 }
 
 // SetM sets the M field's value.
-func (s *AttributeValue) SetM(v map[string]*AttributeValue) *AttributeValue {
+func (s *AttributeValue) SetM(v map[string]AttributeValue) *AttributeValue {
 	s.M = v
 	return s
 }
@@ -1712,7 +1712,7 @@ func (s *AttributeValue) SetN(v string) *AttributeValue {
 }
 
 // SetNS sets the NS field's value.
-func (s *AttributeValue) SetNS(v []*string) *AttributeValue {
+func (s *AttributeValue) SetNS(v []string) *AttributeValue {
 	s.NS = v
 	return s
 }
@@ -1730,7 +1730,7 @@ func (s *AttributeValue) SetS(v string) *AttributeValue {
 }
 
 // SetSS sets the SS field's value.
-func (s *AttributeValue) SetSS(v []*string) *AttributeValue {
+func (s *AttributeValue) SetSS(v []string) *AttributeValue {
 	s.SS = v
 	return s
 }
@@ -1919,7 +1919,7 @@ type BatchGetItemInput struct {
 	//    in the Amazon DynamoDB Developer Guide.
 	//
 	// RequestItems is a required field
-	RequestItems map[string]*KeysAndAttributes `min:"1" type:"map" required:"true"`
+	RequestItems map[string]KeysAndAttributes `min:"1" type:"map" required:"true"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -1961,9 +1961,6 @@ func (s *BatchGetItemInput) Validate() error {
 	}
 	if s.RequestItems != nil {
 		for i, v := range s.RequestItems {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequestItems", i), err.(aws.ErrInvalidParams))
 			}
@@ -1977,7 +1974,7 @@ func (s *BatchGetItemInput) Validate() error {
 }
 
 // SetRequestItems sets the RequestItems field's value.
-func (s *BatchGetItemInput) SetRequestItems(v map[string]*KeysAndAttributes) *BatchGetItemInput {
+func (s *BatchGetItemInput) SetRequestItems(v map[string]KeysAndAttributes) *BatchGetItemInput {
 	s.RequestItems = v
 	return s
 }
@@ -2000,12 +1997,12 @@ type BatchGetItemOutput struct {
 	//    * TableName - The table that consumed the provisioned throughput.
 	//
 	//    * CapacityUnits - The total number of capacity units consumed.
-	ConsumedCapacity []*ConsumedCapacity `type:"list"`
+	ConsumedCapacity []ConsumedCapacity `type:"list"`
 
 	// A map of table name to a list of items. Each object in Responses consists
 	// of a table name, along with a map of attribute data consisting of the data
 	// type and attribute value.
-	Responses map[string][]map[string]*AttributeValue `type:"map"`
+	Responses map[string][]map[string]AttributeValue `type:"map"`
 
 	// A map of tables and their respective keys that were not processed with the
 	// current response. The UnprocessedKeys value is in the same form as RequestItems,
@@ -2027,7 +2024,7 @@ type BatchGetItemOutput struct {
 	//
 	// If there are no unprocessed keys remaining, the response contains an empty
 	// UnprocessedKeys map.
-	UnprocessedKeys map[string]*KeysAndAttributes `min:"1" type:"map"`
+	UnprocessedKeys map[string]KeysAndAttributes `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -2041,19 +2038,19 @@ func (s BatchGetItemOutput) GoString() string {
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *BatchGetItemOutput) SetConsumedCapacity(v []*ConsumedCapacity) *BatchGetItemOutput {
+func (s *BatchGetItemOutput) SetConsumedCapacity(v []ConsumedCapacity) *BatchGetItemOutput {
 	s.ConsumedCapacity = v
 	return s
 }
 
 // SetResponses sets the Responses field's value.
-func (s *BatchGetItemOutput) SetResponses(v map[string][]map[string]*AttributeValue) *BatchGetItemOutput {
+func (s *BatchGetItemOutput) SetResponses(v map[string][]map[string]AttributeValue) *BatchGetItemOutput {
 	s.Responses = v
 	return s
 }
 
 // SetUnprocessedKeys sets the UnprocessedKeys field's value.
-func (s *BatchGetItemOutput) SetUnprocessedKeys(v map[string]*KeysAndAttributes) *BatchGetItemOutput {
+func (s *BatchGetItemOutput) SetUnprocessedKeys(v map[string]KeysAndAttributes) *BatchGetItemOutput {
 	s.UnprocessedKeys = v
 	return s
 }
@@ -2091,7 +2088,7 @@ type BatchWriteItemInput struct {
 	//    attribute definition.
 	//
 	// RequestItems is a required field
-	RequestItems map[string][]*WriteRequest `min:"1" type:"map" required:"true"`
+	RequestItems map[string][]WriteRequest `min:"1" type:"map" required:"true"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -2145,7 +2142,7 @@ func (s *BatchWriteItemInput) Validate() error {
 }
 
 // SetRequestItems sets the RequestItems field's value.
-func (s *BatchWriteItemInput) SetRequestItems(v map[string][]*WriteRequest) *BatchWriteItemInput {
+func (s *BatchWriteItemInput) SetRequestItems(v map[string][]WriteRequest) *BatchWriteItemInput {
 	s.RequestItems = v
 	return s
 }
@@ -2174,7 +2171,7 @@ type BatchWriteItemOutput struct {
 	//    * TableName - The table that consumed the provisioned throughput.
 	//
 	//    * CapacityUnits - The total number of capacity units consumed.
-	ConsumedCapacity []*ConsumedCapacity `type:"list"`
+	ConsumedCapacity []ConsumedCapacity `type:"list"`
 
 	// A list of tables that were processed by BatchWriteItem and, for each table,
 	// information about any item collections that were affected by individual DeleteItem
@@ -2194,7 +2191,7 @@ type BatchWriteItemOutput struct {
 	//
 	// The estimate is subject to change over time; therefore, do not rely on the
 	//    precision or accuracy of the estimate.
-	ItemCollectionMetrics map[string][]*ItemCollectionMetrics `type:"map"`
+	ItemCollectionMetrics map[string][]ItemCollectionMetrics `type:"map"`
 
 	// A map of tables and requests against those tables that were not processed.
 	// The UnprocessedItems value is in the same form as RequestItems, so you can
@@ -2226,7 +2223,7 @@ type BatchWriteItemOutput struct {
 	//
 	// If there are no unprocessed items remaining, the response contains an empty
 	// UnprocessedItems map.
-	UnprocessedItems map[string][]*WriteRequest `min:"1" type:"map"`
+	UnprocessedItems map[string][]WriteRequest `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -2240,19 +2237,19 @@ func (s BatchWriteItemOutput) GoString() string {
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *BatchWriteItemOutput) SetConsumedCapacity(v []*ConsumedCapacity) *BatchWriteItemOutput {
+func (s *BatchWriteItemOutput) SetConsumedCapacity(v []ConsumedCapacity) *BatchWriteItemOutput {
 	s.ConsumedCapacity = v
 	return s
 }
 
 // SetItemCollectionMetrics sets the ItemCollectionMetrics field's value.
-func (s *BatchWriteItemOutput) SetItemCollectionMetrics(v map[string][]*ItemCollectionMetrics) *BatchWriteItemOutput {
+func (s *BatchWriteItemOutput) SetItemCollectionMetrics(v map[string][]ItemCollectionMetrics) *BatchWriteItemOutput {
 	s.ItemCollectionMetrics = v
 	return s
 }
 
 // SetUnprocessedItems sets the UnprocessedItems field's value.
-func (s *BatchWriteItemOutput) SetUnprocessedItems(v map[string][]*WriteRequest) *BatchWriteItemOutput {
+func (s *BatchWriteItemOutput) SetUnprocessedItems(v map[string][]WriteRequest) *BatchWriteItemOutput {
 	s.UnprocessedItems = v
 	return s
 }
@@ -2312,7 +2309,7 @@ type Condition struct {
 	//
 	// For Binary, DynamoDB treats each byte of the binary data as unsigned when
 	// it compares binary values.
-	AttributeValueList []*AttributeValue `type:"list"`
+	AttributeValueList []AttributeValue `type:"list"`
 
 	// A comparator for evaluating attributes. For example, equals, greater than,
 	// less than, etc.
@@ -2384,7 +2381,7 @@ func (s *Condition) Validate() error {
 }
 
 // SetAttributeValueList sets the AttributeValueList field's value.
-func (s *Condition) SetAttributeValueList(v []*AttributeValue) *Condition {
+func (s *Condition) SetAttributeValueList(v []AttributeValue) *Condition {
 	s.AttributeValueList = v
 	return s
 }
@@ -2409,10 +2406,10 @@ type ConsumedCapacity struct {
 	CapacityUnits *float64 `type:"double"`
 
 	// The amount of throughput consumed on each global index affected by the operation.
-	GlobalSecondaryIndexes map[string]*Capacity `type:"map"`
+	GlobalSecondaryIndexes map[string]Capacity `type:"map"`
 
 	// The amount of throughput consumed on each local index affected by the operation.
-	LocalSecondaryIndexes map[string]*Capacity `type:"map"`
+	LocalSecondaryIndexes map[string]Capacity `type:"map"`
 
 	// The amount of throughput consumed on the table affected by the operation.
 	Table *Capacity `type:"structure"`
@@ -2438,13 +2435,13 @@ func (s *ConsumedCapacity) SetCapacityUnits(v float64) *ConsumedCapacity {
 }
 
 // SetGlobalSecondaryIndexes sets the GlobalSecondaryIndexes field's value.
-func (s *ConsumedCapacity) SetGlobalSecondaryIndexes(v map[string]*Capacity) *ConsumedCapacity {
+func (s *ConsumedCapacity) SetGlobalSecondaryIndexes(v map[string]Capacity) *ConsumedCapacity {
 	s.GlobalSecondaryIndexes = v
 	return s
 }
 
 // SetLocalSecondaryIndexes sets the LocalSecondaryIndexes field's value.
-func (s *ConsumedCapacity) SetLocalSecondaryIndexes(v map[string]*Capacity) *ConsumedCapacity {
+func (s *ConsumedCapacity) SetLocalSecondaryIndexes(v map[string]Capacity) *ConsumedCapacity {
 	s.LocalSecondaryIndexes = v
 	return s
 }
@@ -2474,7 +2471,7 @@ type CreateGlobalSecondaryIndexAction struct {
 	// The key schema for the global secondary index.
 	//
 	// KeySchema is a required field
-	KeySchema []*KeySchemaElement `min:"1" type:"list" required:"true"`
+	KeySchema []KeySchemaElement `min:"1" type:"list" required:"true"`
 
 	// Represents attributes that are copied (projected) from the table into an
 	// index. These are in addition to the primary key attributes and index key
@@ -2531,9 +2528,6 @@ func (s *CreateGlobalSecondaryIndexAction) Validate() error {
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
@@ -2563,7 +2557,7 @@ func (s *CreateGlobalSecondaryIndexAction) SetIndexName(v string) *CreateGlobalS
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *CreateGlobalSecondaryIndexAction) SetKeySchema(v []*KeySchemaElement) *CreateGlobalSecondaryIndexAction {
+func (s *CreateGlobalSecondaryIndexAction) SetKeySchema(v []KeySchemaElement) *CreateGlobalSecondaryIndexAction {
 	s.KeySchema = v
 	return s
 }
@@ -2588,7 +2582,7 @@ type CreateTableInput struct {
 	// An array of attributes that describe the key schema for the table and indexes.
 	//
 	// AttributeDefinitions is a required field
-	AttributeDefinitions []*AttributeDefinition `type:"list" required:"true"`
+	AttributeDefinitions []AttributeDefinition `type:"list" required:"true"`
 
 	// One or more global secondary indexes (the maximum is five) to be created
 	// on the table. Each global secondary index in the array includes the following:
@@ -2620,7 +2614,7 @@ type CreateTableInput struct {
 	//
 	//    * ProvisionedThroughput - The provisioned throughput settings for the
 	//    global secondary index, consisting of read and write capacity units.
-	GlobalSecondaryIndexes []*GlobalSecondaryIndex `type:"list"`
+	GlobalSecondaryIndexes []GlobalSecondaryIndex `type:"list"`
 
 	// Specifies the attributes that make up the primary key for a table or an index.
 	// The attributes in KeySchema must also be defined in the AttributeDefinitions
@@ -2657,7 +2651,7 @@ type CreateTableInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	//
 	// KeySchema is a required field
-	KeySchema []*KeySchemaElement `min:"1" type:"list" required:"true"`
+	KeySchema []KeySchemaElement `min:"1" type:"list" required:"true"`
 
 	// One or more local secondary indexes (the maximum is five) to be created on
 	// the table. Each index is scoped to a given partition key value. There is
@@ -2691,7 +2685,7 @@ type CreateTableInput struct {
 	//    in NonKeyAttributes, summed across all of the secondary indexes, must
 	//    not exceed 20. If you project the same attribute into two different indexes,
 	//    this counts as two distinct attributes when determining the total.
-	LocalSecondaryIndexes []*LocalSecondaryIndex `type:"list"`
+	LocalSecondaryIndexes []LocalSecondaryIndex `type:"list"`
 
 	// Represents the provisioned throughput settings for a specified table or index.
 	// The settings can be modified using the UpdateTable operation.
@@ -2768,9 +2762,6 @@ func (s *CreateTableInput) Validate() error {
 	}
 	if s.AttributeDefinitions != nil {
 		for i, v := range s.AttributeDefinitions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2778,9 +2769,6 @@ func (s *CreateTableInput) Validate() error {
 	}
 	if s.GlobalSecondaryIndexes != nil {
 		for i, v := range s.GlobalSecondaryIndexes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexes", i), err.(aws.ErrInvalidParams))
 			}
@@ -2788,9 +2776,6 @@ func (s *CreateTableInput) Validate() error {
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
@@ -2798,9 +2783,6 @@ func (s *CreateTableInput) Validate() error {
 	}
 	if s.LocalSecondaryIndexes != nil {
 		for i, v := range s.LocalSecondaryIndexes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocalSecondaryIndexes", i), err.(aws.ErrInvalidParams))
 			}
@@ -2819,25 +2801,25 @@ func (s *CreateTableInput) Validate() error {
 }
 
 // SetAttributeDefinitions sets the AttributeDefinitions field's value.
-func (s *CreateTableInput) SetAttributeDefinitions(v []*AttributeDefinition) *CreateTableInput {
+func (s *CreateTableInput) SetAttributeDefinitions(v []AttributeDefinition) *CreateTableInput {
 	s.AttributeDefinitions = v
 	return s
 }
 
 // SetGlobalSecondaryIndexes sets the GlobalSecondaryIndexes field's value.
-func (s *CreateTableInput) SetGlobalSecondaryIndexes(v []*GlobalSecondaryIndex) *CreateTableInput {
+func (s *CreateTableInput) SetGlobalSecondaryIndexes(v []GlobalSecondaryIndex) *CreateTableInput {
 	s.GlobalSecondaryIndexes = v
 	return s
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *CreateTableInput) SetKeySchema(v []*KeySchemaElement) *CreateTableInput {
+func (s *CreateTableInput) SetKeySchema(v []KeySchemaElement) *CreateTableInput {
 	s.KeySchema = v
 	return s
 }
 
 // SetLocalSecondaryIndexes sets the LocalSecondaryIndexes field's value.
-func (s *CreateTableInput) SetLocalSecondaryIndexes(v []*LocalSecondaryIndex) *CreateTableInput {
+func (s *CreateTableInput) SetLocalSecondaryIndexes(v []LocalSecondaryIndex) *CreateTableInput {
 	s.LocalSecondaryIndexes = v
 	return s
 }
@@ -2961,7 +2943,7 @@ type DeleteItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
 	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]*ExpectedAttributeValue `type:"map"`
+	Expected map[string]ExpectedAttributeValue `type:"map"`
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -2998,7 +2980,7 @@ type DeleteItemInput struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// One or more values that can be substituted in an expression.
 	//
@@ -3020,7 +3002,7 @@ type DeleteItemInput struct {
 	// For more information on expression attribute values, see Specifying Conditions
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*AttributeValue `type:"map"`
+	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
 
 	// A map of attribute names to AttributeValue objects, representing the primary
 	// key of the item to delete.
@@ -3031,7 +3013,7 @@ type DeleteItemInput struct {
 	// key and the sort key.
 	//
 	// Key is a required field
-	Key map[string]*AttributeValue `type:"map" required:"true"`
+	Key map[string]AttributeValue `type:"map" required:"true"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -3118,25 +3100,25 @@ func (s *DeleteItemInput) SetConditionalOperator(v ConditionalOperator) *DeleteI
 }
 
 // SetExpected sets the Expected field's value.
-func (s *DeleteItemInput) SetExpected(v map[string]*ExpectedAttributeValue) *DeleteItemInput {
+func (s *DeleteItemInput) SetExpected(v map[string]ExpectedAttributeValue) *DeleteItemInput {
 	s.Expected = v
 	return s
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *DeleteItemInput) SetExpressionAttributeNames(v map[string]*string) *DeleteItemInput {
+func (s *DeleteItemInput) SetExpressionAttributeNames(v map[string]string) *DeleteItemInput {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *DeleteItemInput) SetExpressionAttributeValues(v map[string]*AttributeValue) *DeleteItemInput {
+func (s *DeleteItemInput) SetExpressionAttributeValues(v map[string]AttributeValue) *DeleteItemInput {
 	s.ExpressionAttributeValues = v
 	return s
 }
 
 // SetKey sets the Key field's value.
-func (s *DeleteItemInput) SetKey(v map[string]*AttributeValue) *DeleteItemInput {
+func (s *DeleteItemInput) SetKey(v map[string]AttributeValue) *DeleteItemInput {
 	s.Key = v
 	return s
 }
@@ -3173,7 +3155,7 @@ type DeleteItemOutput struct {
 	// A map of attribute names to AttributeValue objects, representing the item
 	// as it appeared before the DeleteItem operation. This map appears in the response
 	// only if ReturnValues was specified as ALL_OLD in the request.
-	Attributes map[string]*AttributeValue `type:"map"`
+	Attributes map[string]AttributeValue `type:"map"`
 
 	// The capacity units consumed by the DeleteItem operation. The data returned
 	// includes the total provisioned throughput consumed, along with statistics
@@ -3216,7 +3198,7 @@ func (s DeleteItemOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DeleteItemOutput) SetAttributes(v map[string]*AttributeValue) *DeleteItemOutput {
+func (s *DeleteItemOutput) SetAttributes(v map[string]AttributeValue) *DeleteItemOutput {
 	s.Attributes = v
 	return s
 }
@@ -3243,7 +3225,7 @@ type DeleteRequest struct {
 	// specified, and their data types must match those of the table's key schema.
 	//
 	// Key is a required field
-	Key map[string]*AttributeValue `type:"map" required:"true"`
+	Key map[string]AttributeValue `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -3257,7 +3239,7 @@ func (s DeleteRequest) GoString() string {
 }
 
 // SetKey sets the Key field's value.
-func (s *DeleteRequest) SetKey(v map[string]*AttributeValue) *DeleteRequest {
+func (s *DeleteRequest) SetKey(v map[string]AttributeValue) *DeleteRequest {
 	s.Key = v
 	return s
 }
@@ -3580,7 +3562,7 @@ type ExpectedAttributeValue struct {
 	//
 	// For information on specifying data types in JSON, see JSON Data Format (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributeValueList []*AttributeValue `type:"list"`
+	AttributeValueList []AttributeValue `type:"list"`
 
 	// A comparator for evaluating attributes in the AttributeValueList. For example,
 	// equals, greater than, less than, etc.
@@ -3670,7 +3652,7 @@ func (s ExpectedAttributeValue) GoString() string {
 }
 
 // SetAttributeValueList sets the AttributeValueList field's value.
-func (s *ExpectedAttributeValue) SetAttributeValueList(v []*AttributeValue) *ExpectedAttributeValue {
+func (s *ExpectedAttributeValue) SetAttributeValueList(v []AttributeValue) *ExpectedAttributeValue {
 	s.AttributeValueList = v
 	return s
 }
@@ -3701,7 +3683,7 @@ type GetItemInput struct {
 	// This is a legacy parameter. Use ProjectionExpression instead. For more information,
 	// see AttributesToGet (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string `min:"1" type:"list"`
+	AttributesToGet []string `min:"1" type:"list"`
 
 	// Determines the read consistency model: If set to true, then the operation
 	// uses strongly consistent reads; otherwise, the operation uses eventually
@@ -3743,7 +3725,7 @@ type GetItemInput struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// A map of attribute names to AttributeValue objects, representing the primary
 	// key of the item to retrieve.
@@ -3754,7 +3736,7 @@ type GetItemInput struct {
 	// key and the sort key.
 	//
 	// Key is a required field
-	Key map[string]*AttributeValue `type:"map" required:"true"`
+	Key map[string]AttributeValue `type:"map" required:"true"`
 
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document.
@@ -3826,7 +3808,7 @@ func (s *GetItemInput) Validate() error {
 }
 
 // SetAttributesToGet sets the AttributesToGet field's value.
-func (s *GetItemInput) SetAttributesToGet(v []*string) *GetItemInput {
+func (s *GetItemInput) SetAttributesToGet(v []string) *GetItemInput {
 	s.AttributesToGet = v
 	return s
 }
@@ -3838,13 +3820,13 @@ func (s *GetItemInput) SetConsistentRead(v bool) *GetItemInput {
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *GetItemInput) SetExpressionAttributeNames(v map[string]*string) *GetItemInput {
+func (s *GetItemInput) SetExpressionAttributeNames(v map[string]string) *GetItemInput {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetKey sets the Key field's value.
-func (s *GetItemInput) SetKey(v map[string]*AttributeValue) *GetItemInput {
+func (s *GetItemInput) SetKey(v map[string]AttributeValue) *GetItemInput {
 	s.Key = v
 	return s
 }
@@ -3881,7 +3863,7 @@ type GetItemOutput struct {
 	ConsumedCapacity *ConsumedCapacity `type:"structure"`
 
 	// A map of attribute names to AttributeValue objects, as specified by ProjectionExpression.
-	Item map[string]*AttributeValue `type:"map"`
+	Item map[string]AttributeValue `type:"map"`
 }
 
 // String returns the string representation
@@ -3901,7 +3883,7 @@ func (s *GetItemOutput) SetConsumedCapacity(v *ConsumedCapacity) *GetItemOutput 
 }
 
 // SetItem sets the Item field's value.
-func (s *GetItemOutput) SetItem(v map[string]*AttributeValue) *GetItemOutput {
+func (s *GetItemOutput) SetItem(v map[string]AttributeValue) *GetItemOutput {
 	s.Item = v
 	return s
 }
@@ -3934,7 +3916,7 @@ type GlobalSecondaryIndex struct {
 	// key physically close together, in sorted order by the sort key value.
 	//
 	// KeySchema is a required field
-	KeySchema []*KeySchemaElement `min:"1" type:"list" required:"true"`
+	KeySchema []KeySchemaElement `min:"1" type:"list" required:"true"`
 
 	// Represents attributes that are copied (projected) from the table into the
 	// global secondary index. These are in addition to the primary key attributes
@@ -3991,9 +3973,6 @@ func (s *GlobalSecondaryIndex) Validate() error {
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
@@ -4023,7 +4002,7 @@ func (s *GlobalSecondaryIndex) SetIndexName(v string) *GlobalSecondaryIndex {
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *GlobalSecondaryIndex) SetKeySchema(v []*KeySchemaElement) *GlobalSecondaryIndex {
+func (s *GlobalSecondaryIndex) SetKeySchema(v []KeySchemaElement) *GlobalSecondaryIndex {
 	s.KeySchema = v
 	return s
 }
@@ -4097,7 +4076,7 @@ type GlobalSecondaryIndexDescription struct {
 	// The sort key of an item is also known as its range attribute. The term "range
 	// attribute" derives from the way DynamoDB stores items with the same partition
 	// key physically close together, in sorted order by the sort key value.
-	KeySchema []*KeySchemaElement `min:"1" type:"list"`
+	KeySchema []KeySchemaElement `min:"1" type:"list"`
 
 	// Represents attributes that are copied (projected) from the table into the
 	// global secondary index. These are in addition to the primary key attributes
@@ -4160,7 +4139,7 @@ func (s *GlobalSecondaryIndexDescription) SetItemCount(v int64) *GlobalSecondary
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *GlobalSecondaryIndexDescription) SetKeySchema(v []*KeySchemaElement) *GlobalSecondaryIndexDescription {
+func (s *GlobalSecondaryIndexDescription) SetKeySchema(v []KeySchemaElement) *GlobalSecondaryIndexDescription {
 	s.KeySchema = v
 	return s
 }
@@ -4274,7 +4253,7 @@ type ItemCollectionMetrics struct {
 
 	// The partition key value of the item collection. This value is the same as
 	// the partition key value of the item.
-	ItemCollectionKey map[string]*AttributeValue `type:"map"`
+	ItemCollectionKey map[string]AttributeValue `type:"map"`
 
 	// An estimate of item collection size, in gigabytes. This value is a two-element
 	// array containing a lower bound and an upper bound for the estimate. The estimate
@@ -4285,7 +4264,7 @@ type ItemCollectionMetrics struct {
 	//
 	// The estimate is subject to change over time; therefore, do not rely on the
 	// precision or accuracy of the estimate.
-	SizeEstimateRangeGB []*float64 `type:"list"`
+	SizeEstimateRangeGB []float64 `type:"list"`
 }
 
 // String returns the string representation
@@ -4299,13 +4278,13 @@ func (s ItemCollectionMetrics) GoString() string {
 }
 
 // SetItemCollectionKey sets the ItemCollectionKey field's value.
-func (s *ItemCollectionMetrics) SetItemCollectionKey(v map[string]*AttributeValue) *ItemCollectionMetrics {
+func (s *ItemCollectionMetrics) SetItemCollectionKey(v map[string]AttributeValue) *ItemCollectionMetrics {
 	s.ItemCollectionKey = v
 	return s
 }
 
 // SetSizeEstimateRangeGB sets the SizeEstimateRangeGB field's value.
-func (s *ItemCollectionMetrics) SetSizeEstimateRangeGB(v []*float64) *ItemCollectionMetrics {
+func (s *ItemCollectionMetrics) SetSizeEstimateRangeGB(v []float64) *ItemCollectionMetrics {
 	s.SizeEstimateRangeGB = v
 	return s
 }
@@ -4405,7 +4384,7 @@ type KeysAndAttributes struct {
 	// This is a legacy parameter. Use ProjectionExpression instead. For more information,
 	// see Legacy Conditional Parameters (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string `min:"1" type:"list"`
+	AttributesToGet []string `min:"1" type:"list"`
 
 	// The consistency of a read operation. If set to true, then a strongly consistent
 	// read is used; otherwise, an eventually consistent read is used.
@@ -4446,13 +4425,13 @@ type KeysAndAttributes struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// The primary key attribute values that define the items and the attributes
 	// associated with the items.
 	//
 	// Keys is a required field
-	Keys []map[string]*AttributeValue `min:"1" type:"list" required:"true"`
+	Keys []map[string]AttributeValue `min:"1" type:"list" required:"true"`
 
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document.
@@ -4498,7 +4477,7 @@ func (s *KeysAndAttributes) Validate() error {
 }
 
 // SetAttributesToGet sets the AttributesToGet field's value.
-func (s *KeysAndAttributes) SetAttributesToGet(v []*string) *KeysAndAttributes {
+func (s *KeysAndAttributes) SetAttributesToGet(v []string) *KeysAndAttributes {
 	s.AttributesToGet = v
 	return s
 }
@@ -4510,13 +4489,13 @@ func (s *KeysAndAttributes) SetConsistentRead(v bool) *KeysAndAttributes {
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *KeysAndAttributes) SetExpressionAttributeNames(v map[string]*string) *KeysAndAttributes {
+func (s *KeysAndAttributes) SetExpressionAttributeNames(v map[string]string) *KeysAndAttributes {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetKeys sets the Keys field's value.
-func (s *KeysAndAttributes) SetKeys(v []map[string]*AttributeValue) *KeysAndAttributes {
+func (s *KeysAndAttributes) SetKeys(v []map[string]AttributeValue) *KeysAndAttributes {
 	s.Keys = v
 	return s
 }
@@ -4599,7 +4578,7 @@ type ListTablesOutput struct {
 	// If LastEvaluatedTableName also appears in the output, you can use this value
 	// as the ExclusiveStartTableName parameter in a subsequent ListTables request
 	// and obtain the next page of results.
-	TableNames []*string `type:"list"`
+	TableNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4619,7 +4598,7 @@ func (s *ListTablesOutput) SetLastEvaluatedTableName(v string) *ListTablesOutput
 }
 
 // SetTableNames sets the TableNames field's value.
-func (s *ListTablesOutput) SetTableNames(v []*string) *ListTablesOutput {
+func (s *ListTablesOutput) SetTableNames(v []string) *ListTablesOutput {
 	s.TableNames = v
 	return s
 }
@@ -4689,7 +4668,7 @@ type ListTagsOfResourceOutput struct {
 	NextToken *string `type:"string"`
 
 	// The tags currently associated with the Amazon DynamoDB resource.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4709,7 +4688,7 @@ func (s *ListTagsOfResourceOutput) SetNextToken(v string) *ListTagsOfResourceOut
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsOfResourceOutput) SetTags(v []*Tag) *ListTagsOfResourceOutput {
+func (s *ListTagsOfResourceOutput) SetTags(v []Tag) *ListTagsOfResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -4742,7 +4721,7 @@ type LocalSecondaryIndex struct {
 	// key physically close together, in sorted order by the sort key value.
 	//
 	// KeySchema is a required field
-	KeySchema []*KeySchemaElement `min:"1" type:"list" required:"true"`
+	KeySchema []KeySchemaElement `min:"1" type:"list" required:"true"`
 
 	// Represents attributes that are copied (projected) from the table into the
 	// local secondary index. These are in addition to the primary key attributes
@@ -4785,9 +4764,6 @@ func (s *LocalSecondaryIndex) Validate() error {
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
@@ -4812,7 +4788,7 @@ func (s *LocalSecondaryIndex) SetIndexName(v string) *LocalSecondaryIndex {
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *LocalSecondaryIndex) SetKeySchema(v []*KeySchemaElement) *LocalSecondaryIndex {
+func (s *LocalSecondaryIndex) SetKeySchema(v []KeySchemaElement) *LocalSecondaryIndex {
 	s.KeySchema = v
 	return s
 }
@@ -4858,7 +4834,7 @@ type LocalSecondaryIndexDescription struct {
 	// The sort key of an item is also known as its range attribute. The term "range
 	// attribute" derives from the way DynamoDB stores items with the same partition
 	// key physically close together, in sorted order by the sort key value.
-	KeySchema []*KeySchemaElement `min:"1" type:"list"`
+	KeySchema []KeySchemaElement `min:"1" type:"list"`
 
 	// Represents attributes that are copied (projected) from the table into the
 	// global secondary index. These are in addition to the primary key attributes
@@ -4901,7 +4877,7 @@ func (s *LocalSecondaryIndexDescription) SetItemCount(v int64) *LocalSecondaryIn
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *LocalSecondaryIndexDescription) SetKeySchema(v []*KeySchemaElement) *LocalSecondaryIndexDescription {
+func (s *LocalSecondaryIndexDescription) SetKeySchema(v []KeySchemaElement) *LocalSecondaryIndexDescription {
 	s.KeySchema = v
 	return s
 }
@@ -4925,7 +4901,7 @@ type Projection struct {
 	// all of the local secondary indexes, must not exceed 20. If you project the
 	// same attribute into two different indexes, this counts as two distinct attributes
 	// when determining the total.
-	NonKeyAttributes []*string `min:"1" type:"list"`
+	NonKeyAttributes []string `min:"1" type:"list"`
 
 	// The set of attributes that are projected into the index:
 	//
@@ -4962,7 +4938,7 @@ func (s *Projection) Validate() error {
 }
 
 // SetNonKeyAttributes sets the NonKeyAttributes field's value.
-func (s *Projection) SetNonKeyAttributes(v []*string) *Projection {
+func (s *Projection) SetNonKeyAttributes(v []string) *Projection {
 	s.NonKeyAttributes = v
 	return s
 }
@@ -5147,7 +5123,7 @@ type PutItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
 	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]*ExpectedAttributeValue `type:"map"`
+	Expected map[string]ExpectedAttributeValue `type:"map"`
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -5184,7 +5160,7 @@ type PutItemInput struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// One or more values that can be substituted in an expression.
 	//
@@ -5206,7 +5182,7 @@ type PutItemInput struct {
 	// For more information on expression attribute values, see Specifying Conditions
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*AttributeValue `type:"map"`
+	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
 
 	// A map of attribute name/value pairs, one for each attribute. Only the primary
 	// key attributes are required; you can optionally provide other attribute name-value
@@ -5227,7 +5203,7 @@ type PutItemInput struct {
 	// Each element in the Item map is an AttributeValue object.
 	//
 	// Item is a required field
-	Item map[string]*AttributeValue `type:"map" required:"true"`
+	Item map[string]AttributeValue `type:"map" required:"true"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -5316,25 +5292,25 @@ func (s *PutItemInput) SetConditionalOperator(v ConditionalOperator) *PutItemInp
 }
 
 // SetExpected sets the Expected field's value.
-func (s *PutItemInput) SetExpected(v map[string]*ExpectedAttributeValue) *PutItemInput {
+func (s *PutItemInput) SetExpected(v map[string]ExpectedAttributeValue) *PutItemInput {
 	s.Expected = v
 	return s
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *PutItemInput) SetExpressionAttributeNames(v map[string]*string) *PutItemInput {
+func (s *PutItemInput) SetExpressionAttributeNames(v map[string]string) *PutItemInput {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *PutItemInput) SetExpressionAttributeValues(v map[string]*AttributeValue) *PutItemInput {
+func (s *PutItemInput) SetExpressionAttributeValues(v map[string]AttributeValue) *PutItemInput {
 	s.ExpressionAttributeValues = v
 	return s
 }
 
 // SetItem sets the Item field's value.
-func (s *PutItemInput) SetItem(v map[string]*AttributeValue) *PutItemInput {
+func (s *PutItemInput) SetItem(v map[string]AttributeValue) *PutItemInput {
 	s.Item = v
 	return s
 }
@@ -5371,7 +5347,7 @@ type PutItemOutput struct {
 	// The attribute values as they appeared before the PutItem operation, but only
 	// if ReturnValues is specified as ALL_OLD in the request. Each element consists
 	// of an attribute name and an attribute value.
-	Attributes map[string]*AttributeValue `type:"map"`
+	Attributes map[string]AttributeValue `type:"map"`
 
 	// The capacity units consumed by the PutItem operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the
@@ -5414,7 +5390,7 @@ func (s PutItemOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *PutItemOutput) SetAttributes(v map[string]*AttributeValue) *PutItemOutput {
+func (s *PutItemOutput) SetAttributes(v map[string]AttributeValue) *PutItemOutput {
 	s.Attributes = v
 	return s
 }
@@ -5443,7 +5419,7 @@ type PutRequest struct {
 	// key schema for the table, their types must match the index key schema.
 	//
 	// Item is a required field
-	Item map[string]*AttributeValue `type:"map" required:"true"`
+	Item map[string]AttributeValue `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5457,7 +5433,7 @@ func (s PutRequest) GoString() string {
 }
 
 // SetItem sets the Item field's value.
-func (s *PutRequest) SetItem(v map[string]*AttributeValue) *PutRequest {
+func (s *PutRequest) SetItem(v map[string]AttributeValue) *PutRequest {
 	s.Item = v
 	return s
 }
@@ -5470,7 +5446,7 @@ type QueryInput struct {
 	// This is a legacy parameter. Use ProjectionExpression instead. For more information,
 	// see AttributesToGet (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string `min:"1" type:"list"`
+	AttributesToGet []string `min:"1" type:"list"`
 
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
@@ -5491,7 +5467,7 @@ type QueryInput struct {
 	//
 	// The data type for ExclusiveStartKey must be String, Number or Binary. No
 	// set data types are allowed.
-	ExclusiveStartKey map[string]*AttributeValue `type:"map"`
+	ExclusiveStartKey map[string]AttributeValue `type:"map"`
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -5528,7 +5504,7 @@ type QueryInput struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// One or more values that can be substituted in an expression.
 	//
@@ -5550,7 +5526,7 @@ type QueryInput struct {
 	// For more information on expression attribute values, see Specifying Conditions
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*AttributeValue `type:"map"`
+	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
 
 	// A string that contains conditions that DynamoDB applies after the Query operation,
 	// but before the data is returned to you. Items that do not satisfy the FilterExpression
@@ -5642,7 +5618,7 @@ type QueryInput struct {
 	// This is a legacy parameter. Use KeyConditionExpression instead. For more
 	// information, see KeyConditions (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	KeyConditions map[string]*Condition `type:"map"`
+	KeyConditions map[string]Condition `type:"map"`
 
 	// The maximum number of items to evaluate (not necessarily the number of matching
 	// items). If DynamoDB processes the number of items up to the limit while processing
@@ -5671,7 +5647,7 @@ type QueryInput struct {
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see QueryFilter (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html)
 	// in the Amazon DynamoDB Developer Guide.
-	QueryFilter map[string]*Condition `type:"map"`
+	QueryFilter map[string]Condition `type:"map"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -5789,9 +5765,6 @@ func (s *QueryInput) Validate() error {
 	}
 	if s.KeyConditions != nil {
 		for i, v := range s.KeyConditions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeyConditions", i), err.(aws.ErrInvalidParams))
 			}
@@ -5799,9 +5772,6 @@ func (s *QueryInput) Validate() error {
 	}
 	if s.QueryFilter != nil {
 		for i, v := range s.QueryFilter {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueryFilter", i), err.(aws.ErrInvalidParams))
 			}
@@ -5815,7 +5785,7 @@ func (s *QueryInput) Validate() error {
 }
 
 // SetAttributesToGet sets the AttributesToGet field's value.
-func (s *QueryInput) SetAttributesToGet(v []*string) *QueryInput {
+func (s *QueryInput) SetAttributesToGet(v []string) *QueryInput {
 	s.AttributesToGet = v
 	return s
 }
@@ -5833,19 +5803,19 @@ func (s *QueryInput) SetConsistentRead(v bool) *QueryInput {
 }
 
 // SetExclusiveStartKey sets the ExclusiveStartKey field's value.
-func (s *QueryInput) SetExclusiveStartKey(v map[string]*AttributeValue) *QueryInput {
+func (s *QueryInput) SetExclusiveStartKey(v map[string]AttributeValue) *QueryInput {
 	s.ExclusiveStartKey = v
 	return s
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *QueryInput) SetExpressionAttributeNames(v map[string]*string) *QueryInput {
+func (s *QueryInput) SetExpressionAttributeNames(v map[string]string) *QueryInput {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *QueryInput) SetExpressionAttributeValues(v map[string]*AttributeValue) *QueryInput {
+func (s *QueryInput) SetExpressionAttributeValues(v map[string]AttributeValue) *QueryInput {
 	s.ExpressionAttributeValues = v
 	return s
 }
@@ -5869,7 +5839,7 @@ func (s *QueryInput) SetKeyConditionExpression(v string) *QueryInput {
 }
 
 // SetKeyConditions sets the KeyConditions field's value.
-func (s *QueryInput) SetKeyConditions(v map[string]*Condition) *QueryInput {
+func (s *QueryInput) SetKeyConditions(v map[string]Condition) *QueryInput {
 	s.KeyConditions = v
 	return s
 }
@@ -5887,7 +5857,7 @@ func (s *QueryInput) SetProjectionExpression(v string) *QueryInput {
 }
 
 // SetQueryFilter sets the QueryFilter field's value.
-func (s *QueryInput) SetQueryFilter(v map[string]*Condition) *QueryInput {
+func (s *QueryInput) SetQueryFilter(v map[string]Condition) *QueryInput {
 	s.QueryFilter = v
 	return s
 }
@@ -5941,7 +5911,7 @@ type QueryOutput struct {
 
 	// An array of item attributes that match the query criteria. Each element in
 	// this array consists of an attribute name and the value for that attribute.
-	Items []map[string]*AttributeValue `type:"list"`
+	Items []map[string]AttributeValue `type:"list"`
 
 	// The primary key of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
@@ -5953,7 +5923,7 @@ type QueryOutput struct {
 	// If LastEvaluatedKey is not empty, it does not necessarily mean that there
 	// is more data in the result set. The only way to know when you have reached
 	// the end of the result set is when LastEvaluatedKey is empty.
-	LastEvaluatedKey map[string]*AttributeValue `type:"map"`
+	LastEvaluatedKey map[string]AttributeValue `type:"map"`
 
 	// The number of items evaluated, before any QueryFilter is applied. A high
 	// ScannedCount value with few, or no, Count results indicates an inefficient
@@ -5988,13 +5958,13 @@ func (s *QueryOutput) SetCount(v int64) *QueryOutput {
 }
 
 // SetItems sets the Items field's value.
-func (s *QueryOutput) SetItems(v []map[string]*AttributeValue) *QueryOutput {
+func (s *QueryOutput) SetItems(v []map[string]AttributeValue) *QueryOutput {
 	s.Items = v
 	return s
 }
 
 // SetLastEvaluatedKey sets the LastEvaluatedKey field's value.
-func (s *QueryOutput) SetLastEvaluatedKey(v map[string]*AttributeValue) *QueryOutput {
+func (s *QueryOutput) SetLastEvaluatedKey(v map[string]AttributeValue) *QueryOutput {
 	s.LastEvaluatedKey = v
 	return s
 }
@@ -6013,7 +5983,7 @@ type ScanInput struct {
 	// This is a legacy parameter. Use ProjectionExpression instead. For more information,
 	// see AttributesToGet (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string `min:"1" type:"list"`
+	AttributesToGet []string `min:"1" type:"list"`
 
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
@@ -6045,7 +6015,7 @@ type ScanInput struct {
 	// In a parallel scan, a Scan request that includes ExclusiveStartKey must specify
 	// the same segment whose previous Scan returned the corresponding value of
 	// LastEvaluatedKey.
-	ExclusiveStartKey map[string]*AttributeValue `type:"map"`
+	ExclusiveStartKey map[string]AttributeValue `type:"map"`
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -6082,7 +6052,7 @@ type ScanInput struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// One or more values that can be substituted in an expression.
 	//
@@ -6104,7 +6074,7 @@ type ScanInput struct {
 	// For more information on expression attribute values, see Specifying Conditions
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*AttributeValue `type:"map"`
+	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
 
 	// A string that contains conditions that DynamoDB applies after the Scan operation,
 	// but before the data is returned to you. Items that do not satisfy the FilterExpression
@@ -6166,7 +6136,7 @@ type ScanInput struct {
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ScanFilter (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ScanFilter map[string]*Condition `type:"map"`
+	ScanFilter map[string]Condition `type:"map"`
 
 	// For a parallel Scan request, Segment identifies an individual segment to
 	// be scanned by an application worker.
@@ -6286,9 +6256,6 @@ func (s *ScanInput) Validate() error {
 	}
 	if s.ScanFilter != nil {
 		for i, v := range s.ScanFilter {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScanFilter", i), err.(aws.ErrInvalidParams))
 			}
@@ -6302,7 +6269,7 @@ func (s *ScanInput) Validate() error {
 }
 
 // SetAttributesToGet sets the AttributesToGet field's value.
-func (s *ScanInput) SetAttributesToGet(v []*string) *ScanInput {
+func (s *ScanInput) SetAttributesToGet(v []string) *ScanInput {
 	s.AttributesToGet = v
 	return s
 }
@@ -6320,19 +6287,19 @@ func (s *ScanInput) SetConsistentRead(v bool) *ScanInput {
 }
 
 // SetExclusiveStartKey sets the ExclusiveStartKey field's value.
-func (s *ScanInput) SetExclusiveStartKey(v map[string]*AttributeValue) *ScanInput {
+func (s *ScanInput) SetExclusiveStartKey(v map[string]AttributeValue) *ScanInput {
 	s.ExclusiveStartKey = v
 	return s
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *ScanInput) SetExpressionAttributeNames(v map[string]*string) *ScanInput {
+func (s *ScanInput) SetExpressionAttributeNames(v map[string]string) *ScanInput {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *ScanInput) SetExpressionAttributeValues(v map[string]*AttributeValue) *ScanInput {
+func (s *ScanInput) SetExpressionAttributeValues(v map[string]AttributeValue) *ScanInput {
 	s.ExpressionAttributeValues = v
 	return s
 }
@@ -6368,7 +6335,7 @@ func (s *ScanInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *ScanInp
 }
 
 // SetScanFilter sets the ScanFilter field's value.
-func (s *ScanInput) SetScanFilter(v map[string]*Condition) *ScanInput {
+func (s *ScanInput) SetScanFilter(v map[string]Condition) *ScanInput {
 	s.ScanFilter = v
 	return s
 }
@@ -6421,7 +6388,7 @@ type ScanOutput struct {
 
 	// An array of item attributes that match the scan criteria. Each element in
 	// this array consists of an attribute name and the value for that attribute.
-	Items []map[string]*AttributeValue `type:"list"`
+	Items []map[string]AttributeValue `type:"list"`
 
 	// The primary key of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
@@ -6433,7 +6400,7 @@ type ScanOutput struct {
 	// If LastEvaluatedKey is not empty, it does not necessarily mean that there
 	// is more data in the result set. The only way to know when you have reached
 	// the end of the result set is when LastEvaluatedKey is empty.
-	LastEvaluatedKey map[string]*AttributeValue `type:"map"`
+	LastEvaluatedKey map[string]AttributeValue `type:"map"`
 
 	// The number of items evaluated, before any ScanFilter is applied. A high ScannedCount
 	// value with few, or no, Count results indicates an inefficient Scan operation.
@@ -6468,13 +6435,13 @@ func (s *ScanOutput) SetCount(v int64) *ScanOutput {
 }
 
 // SetItems sets the Items field's value.
-func (s *ScanOutput) SetItems(v []map[string]*AttributeValue) *ScanOutput {
+func (s *ScanOutput) SetItems(v []map[string]AttributeValue) *ScanOutput {
 	s.Items = v
 	return s
 }
 
 // SetLastEvaluatedKey sets the LastEvaluatedKey field's value.
-func (s *ScanOutput) SetLastEvaluatedKey(v map[string]*AttributeValue) *ScanOutput {
+func (s *ScanOutput) SetLastEvaluatedKey(v map[string]AttributeValue) *ScanOutput {
 	s.LastEvaluatedKey = v
 	return s
 }
@@ -6547,7 +6514,7 @@ type TableDescription struct {
 	//    * AttributeName - The name of the attribute.
 	//
 	//    * AttributeType - The data type for the attribute.
-	AttributeDefinitions []*AttributeDefinition `type:"list"`
+	AttributeDefinitions []AttributeDefinition `type:"list"`
 
 	// The date and time when the table was created, in UNIX epoch time (http://www.epochconverter.com/)
 	// format.
@@ -6612,7 +6579,7 @@ type TableDescription struct {
 	//
 	// If the table is in the DELETING state, no information about indexes will
 	// be returned.
-	GlobalSecondaryIndexes []*GlobalSecondaryIndexDescription `type:"list"`
+	GlobalSecondaryIndexes []GlobalSecondaryIndexDescription `type:"list"`
 
 	// The number of items in the specified table. DynamoDB updates this value approximately
 	// every six hours. Recent changes might not be reflected in this value.
@@ -6639,7 +6606,7 @@ type TableDescription struct {
 	//
 	// For more information about primary keys, see Primary Key (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey)
 	// in the Amazon DynamoDB Developer Guide.
-	KeySchema []*KeySchemaElement `min:"1" type:"list"`
+	KeySchema []KeySchemaElement `min:"1" type:"list"`
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the latest stream
 	// for this table.
@@ -6701,7 +6668,7 @@ type TableDescription struct {
 	//
 	// If the table is in the DELETING state, no information about indexes will
 	// be returned.
-	LocalSecondaryIndexes []*LocalSecondaryIndexDescription `type:"list"`
+	LocalSecondaryIndexes []LocalSecondaryIndexDescription `type:"list"`
 
 	// The provisioned throughput settings for the table, consisting of read and
 	// write capacity units, along with data about increases and decreases.
@@ -6744,7 +6711,7 @@ func (s TableDescription) GoString() string {
 }
 
 // SetAttributeDefinitions sets the AttributeDefinitions field's value.
-func (s *TableDescription) SetAttributeDefinitions(v []*AttributeDefinition) *TableDescription {
+func (s *TableDescription) SetAttributeDefinitions(v []AttributeDefinition) *TableDescription {
 	s.AttributeDefinitions = v
 	return s
 }
@@ -6756,7 +6723,7 @@ func (s *TableDescription) SetCreationDateTime(v time.Time) *TableDescription {
 }
 
 // SetGlobalSecondaryIndexes sets the GlobalSecondaryIndexes field's value.
-func (s *TableDescription) SetGlobalSecondaryIndexes(v []*GlobalSecondaryIndexDescription) *TableDescription {
+func (s *TableDescription) SetGlobalSecondaryIndexes(v []GlobalSecondaryIndexDescription) *TableDescription {
 	s.GlobalSecondaryIndexes = v
 	return s
 }
@@ -6768,7 +6735,7 @@ func (s *TableDescription) SetItemCount(v int64) *TableDescription {
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *TableDescription) SetKeySchema(v []*KeySchemaElement) *TableDescription {
+func (s *TableDescription) SetKeySchema(v []KeySchemaElement) *TableDescription {
 	s.KeySchema = v
 	return s
 }
@@ -6786,7 +6753,7 @@ func (s *TableDescription) SetLatestStreamLabel(v string) *TableDescription {
 }
 
 // SetLocalSecondaryIndexes sets the LocalSecondaryIndexes field's value.
-func (s *TableDescription) SetLocalSecondaryIndexes(v []*LocalSecondaryIndexDescription) *TableDescription {
+func (s *TableDescription) SetLocalSecondaryIndexes(v []LocalSecondaryIndexDescription) *TableDescription {
 	s.LocalSecondaryIndexes = v
 	return s
 }
@@ -6910,7 +6877,7 @@ type TagResourceInput struct {
 	// The tags to be assigned to the Amazon DynamoDB resource.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6939,9 +6906,6 @@ func (s *TagResourceInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -6961,7 +6925,7 @@ func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 	s.Tags = v
 	return s
 }
@@ -7091,7 +7055,7 @@ type UntagResourceInput struct {
 	// of this list will be removed from the Amazon DynamoDB resource.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7132,7 +7096,7 @@ func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -7230,7 +7194,7 @@ type UpdateItemInput struct {
 	// This is a legacy parameter. Use UpdateExpression instead. For more information,
 	// see AttributeUpdates (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributeUpdates map[string]*AttributeValueUpdate `type:"map"`
+	AttributeUpdates map[string]AttributeValueUpdate `type:"map"`
 
 	// A condition that must be satisfied in order for a conditional update to succeed.
 	//
@@ -7258,7 +7222,7 @@ type UpdateItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
 	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]*ExpectedAttributeValue `type:"map"`
+	Expected map[string]ExpectedAttributeValue `type:"map"`
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -7295,7 +7259,7 @@ type UpdateItemInput struct {
 	// For more information on expression attribute names, see Accessing Item Attributes
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string `type:"map"`
+	ExpressionAttributeNames map[string]string `type:"map"`
 
 	// One or more values that can be substituted in an expression.
 	//
@@ -7317,7 +7281,7 @@ type UpdateItemInput struct {
 	// For more information on expression attribute values, see Specifying Conditions
 	// (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*AttributeValue `type:"map"`
+	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
 
 	// The primary key of the item to be updated. Each element consists of an attribute
 	// name and a value for that attribute.
@@ -7328,7 +7292,7 @@ type UpdateItemInput struct {
 	// key and the sort key.
 	//
 	// Key is a required field
-	Key map[string]*AttributeValue `type:"map" required:"true"`
+	Key map[string]AttributeValue `type:"map" required:"true"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -7491,7 +7455,7 @@ func (s *UpdateItemInput) Validate() error {
 }
 
 // SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateItemInput) SetAttributeUpdates(v map[string]*AttributeValueUpdate) *UpdateItemInput {
+func (s *UpdateItemInput) SetAttributeUpdates(v map[string]AttributeValueUpdate) *UpdateItemInput {
 	s.AttributeUpdates = v
 	return s
 }
@@ -7509,25 +7473,25 @@ func (s *UpdateItemInput) SetConditionalOperator(v ConditionalOperator) *UpdateI
 }
 
 // SetExpected sets the Expected field's value.
-func (s *UpdateItemInput) SetExpected(v map[string]*ExpectedAttributeValue) *UpdateItemInput {
+func (s *UpdateItemInput) SetExpected(v map[string]ExpectedAttributeValue) *UpdateItemInput {
 	s.Expected = v
 	return s
 }
 
 // SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *UpdateItemInput) SetExpressionAttributeNames(v map[string]*string) *UpdateItemInput {
+func (s *UpdateItemInput) SetExpressionAttributeNames(v map[string]string) *UpdateItemInput {
 	s.ExpressionAttributeNames = v
 	return s
 }
 
 // SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *UpdateItemInput) SetExpressionAttributeValues(v map[string]*AttributeValue) *UpdateItemInput {
+func (s *UpdateItemInput) SetExpressionAttributeValues(v map[string]AttributeValue) *UpdateItemInput {
 	s.ExpressionAttributeValues = v
 	return s
 }
 
 // SetKey sets the Key field's value.
-func (s *UpdateItemInput) SetKey(v map[string]*AttributeValue) *UpdateItemInput {
+func (s *UpdateItemInput) SetKey(v map[string]AttributeValue) *UpdateItemInput {
 	s.Key = v
 	return s
 }
@@ -7572,7 +7536,7 @@ type UpdateItemOutput struct {
 	//
 	// The Attributes map is only present if ReturnValues was specified as something
 	// other than NONE in the request. Each element represents one attribute.
-	Attributes map[string]*AttributeValue `type:"map"`
+	Attributes map[string]AttributeValue `type:"map"`
 
 	// The capacity units consumed by the UpdateItem operation. The data returned
 	// includes the total provisioned throughput consumed, along with statistics
@@ -7615,7 +7579,7 @@ func (s UpdateItemOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *UpdateItemOutput) SetAttributes(v map[string]*AttributeValue) *UpdateItemOutput {
+func (s *UpdateItemOutput) SetAttributes(v map[string]AttributeValue) *UpdateItemOutput {
 	s.Attributes = v
 	return s
 }
@@ -7640,7 +7604,7 @@ type UpdateTableInput struct {
 	// An array of attributes that describe the key schema for the table and indexes.
 	// If you are adding a new global secondary index to the table, AttributeDefinitions
 	// must include the key element(s) of the new index.
-	AttributeDefinitions []*AttributeDefinition `type:"list"`
+	AttributeDefinitions []AttributeDefinition `type:"list"`
 
 	// An array of one or more global secondary indexes for the table. For each
 	// index in the array, you can request one action:
@@ -7654,7 +7618,7 @@ type UpdateTableInput struct {
 	//
 	// For more information, see Managing Global Secondary Indexes (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 	// in the Amazon DynamoDB Developer Guide.
-	GlobalSecondaryIndexUpdates []*GlobalSecondaryIndexUpdate `type:"list"`
+	GlobalSecondaryIndexUpdates []GlobalSecondaryIndexUpdate `type:"list"`
 
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *ProvisionedThroughput `type:"structure"`
@@ -7694,9 +7658,6 @@ func (s *UpdateTableInput) Validate() error {
 	}
 	if s.AttributeDefinitions != nil {
 		for i, v := range s.AttributeDefinitions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(aws.ErrInvalidParams))
 			}
@@ -7704,9 +7665,6 @@ func (s *UpdateTableInput) Validate() error {
 	}
 	if s.GlobalSecondaryIndexUpdates != nil {
 		for i, v := range s.GlobalSecondaryIndexUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -7725,13 +7683,13 @@ func (s *UpdateTableInput) Validate() error {
 }
 
 // SetAttributeDefinitions sets the AttributeDefinitions field's value.
-func (s *UpdateTableInput) SetAttributeDefinitions(v []*AttributeDefinition) *UpdateTableInput {
+func (s *UpdateTableInput) SetAttributeDefinitions(v []AttributeDefinition) *UpdateTableInput {
 	s.AttributeDefinitions = v
 	return s
 }
 
 // SetGlobalSecondaryIndexUpdates sets the GlobalSecondaryIndexUpdates field's value.
-func (s *UpdateTableInput) SetGlobalSecondaryIndexUpdates(v []*GlobalSecondaryIndexUpdate) *UpdateTableInput {
+func (s *UpdateTableInput) SetGlobalSecondaryIndexUpdates(v []GlobalSecondaryIndexUpdate) *UpdateTableInput {
 	s.GlobalSecondaryIndexUpdates = v
 	return s
 }

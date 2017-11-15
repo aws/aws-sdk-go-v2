@@ -2160,7 +2160,7 @@ type DescribeAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Snowball shipping addresses that were created for this account.
-	Addresses []*Address `type:"list"`
+	Addresses []Address `type:"list"`
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next DescribeAddresses call, your list of returned addresses
@@ -2179,7 +2179,7 @@ func (s DescribeAddressesOutput) GoString() string {
 }
 
 // SetAddresses sets the Addresses field's value.
-func (s *DescribeAddressesOutput) SetAddresses(v []*Address) *DescribeAddressesOutput {
+func (s *DescribeAddressesOutput) SetAddresses(v []Address) *DescribeAddressesOutput {
 	s.Addresses = v
 	return s
 }
@@ -2311,7 +2311,7 @@ type DescribeJobOutput struct {
 
 	// Information about a specific job part (in the case of an export job), including
 	// shipping information, job status, and other important metadata.
-	SubJobMetadata []*JobMetadata `type:"list"`
+	SubJobMetadata []JobMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -2331,7 +2331,7 @@ func (s *DescribeJobOutput) SetJobMetadata(v *JobMetadata) *DescribeJobOutput {
 }
 
 // SetSubJobMetadata sets the SubJobMetadata field's value.
-func (s *DescribeJobOutput) SetSubJobMetadata(v []*JobMetadata) *DescribeJobOutput {
+func (s *DescribeJobOutput) SetSubJobMetadata(v []JobMetadata) *DescribeJobOutput {
 	s.SubJobMetadata = v
 	return s
 }
@@ -2893,10 +2893,10 @@ type JobResource struct {
 	_ struct{} `type:"structure"`
 
 	// The Python-language Lambda functions for this job.
-	LambdaResources []*LambdaResource `type:"list"`
+	LambdaResources []LambdaResource `type:"list"`
 
 	// An array of S3Resource objects.
-	S3Resources []*S3Resource `type:"list"`
+	S3Resources []S3Resource `type:"list"`
 }
 
 // String returns the string representation
@@ -2914,9 +2914,6 @@ func (s *JobResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "JobResource"}
 	if s.S3Resources != nil {
 		for i, v := range s.S3Resources {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3Resources", i), err.(aws.ErrInvalidParams))
 			}
@@ -2930,13 +2927,13 @@ func (s *JobResource) Validate() error {
 }
 
 // SetLambdaResources sets the LambdaResources field's value.
-func (s *JobResource) SetLambdaResources(v []*LambdaResource) *JobResource {
+func (s *JobResource) SetLambdaResources(v []LambdaResource) *JobResource {
 	s.LambdaResources = v
 	return s
 }
 
 // SetS3Resources sets the S3Resources field's value.
-func (s *JobResource) SetS3Resources(v []*S3Resource) *JobResource {
+func (s *JobResource) SetS3Resources(v []S3Resource) *JobResource {
 	s.S3Resources = v
 	return s
 }
@@ -3003,7 +3000,7 @@ type LambdaResource struct {
 
 	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects
 	// associated with this job.
-	EventTriggers []*EventTriggerDefinition `type:"list"`
+	EventTriggers []EventTriggerDefinition `type:"list"`
 
 	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
 	// triggered by PUT object actions on the associated local Amazon S3 resource.
@@ -3021,7 +3018,7 @@ func (s LambdaResource) GoString() string {
 }
 
 // SetEventTriggers sets the EventTriggers field's value.
-func (s *LambdaResource) SetEventTriggers(v []*EventTriggerDefinition) *LambdaResource {
+func (s *LambdaResource) SetEventTriggers(v []EventTriggerDefinition) *LambdaResource {
 	s.EventTriggers = v
 	return s
 }
@@ -3104,7 +3101,7 @@ type ListClusterJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value
 	// that indicates whether the job is a job part, in the case of export jobs.
-	JobListEntries []*JobListEntry `type:"list"`
+	JobListEntries []JobListEntry `type:"list"`
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ListClusterJobsResult call, your list of returned jobs
@@ -3123,7 +3120,7 @@ func (s ListClusterJobsOutput) GoString() string {
 }
 
 // SetJobListEntries sets the JobListEntries field's value.
-func (s *ListClusterJobsOutput) SetJobListEntries(v []*JobListEntry) *ListClusterJobsOutput {
+func (s *ListClusterJobsOutput) SetJobListEntries(v []JobListEntry) *ListClusterJobsOutput {
 	s.JobListEntries = v
 	return s
 }
@@ -3188,7 +3185,7 @@ type ListClustersOutput struct {
 
 	// Each ClusterListEntry object contains a cluster's state, a cluster's ID,
 	// and other important status information.
-	ClusterListEntries []*ClusterListEntry `type:"list"`
+	ClusterListEntries []ClusterListEntry `type:"list"`
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ClusterListEntry call, your list of returned clusters
@@ -3207,7 +3204,7 @@ func (s ListClustersOutput) GoString() string {
 }
 
 // SetClusterListEntries sets the ClusterListEntries field's value.
-func (s *ListClustersOutput) SetClusterListEntries(v []*ClusterListEntry) *ListClustersOutput {
+func (s *ListClustersOutput) SetClusterListEntries(v []ClusterListEntry) *ListClustersOutput {
 	s.ClusterListEntries = v
 	return s
 }
@@ -3272,7 +3269,7 @@ type ListJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value
 	// that indicates whether the job is a job part, in the case of export jobs.
-	JobListEntries []*JobListEntry `type:"list"`
+	JobListEntries []JobListEntry `type:"list"`
 
 	// HTTP requests are stateless. If you use this automatically generated NextToken
 	// value in your next ListJobs call, your returned JobListEntry objects will
@@ -3291,7 +3288,7 @@ func (s ListJobsOutput) GoString() string {
 }
 
 // SetJobListEntries sets the JobListEntries field's value.
-func (s *ListJobsOutput) SetJobListEntries(v []*JobListEntry) *ListJobsOutput {
+func (s *ListJobsOutput) SetJobListEntries(v []JobListEntry) *ListJobsOutput {
 	s.JobListEntries = v
 	return s
 }

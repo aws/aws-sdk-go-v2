@@ -3825,7 +3825,7 @@ type AddFacetToObjectInput struct {
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 
 	// Attributes on the facet that you are adding to the object.
-	ObjectAttributeList []*AttributeKeyAndValue `type:"list"`
+	ObjectAttributeList []AttributeKeyAndValue `type:"list"`
 
 	// A reference to the object you are adding the specified facet to.
 	//
@@ -3865,9 +3865,6 @@ func (s *AddFacetToObjectInput) Validate() error {
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -3892,7 +3889,7 @@ func (s *AddFacetToObjectInput) SetDirectoryArn(v string) *AddFacetToObjectInput
 }
 
 // SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *AddFacetToObjectInput) SetObjectAttributeList(v []*AttributeKeyAndValue) *AddFacetToObjectInput {
+func (s *AddFacetToObjectInput) SetObjectAttributeList(v []AttributeKeyAndValue) *AddFacetToObjectInput {
 	s.ObjectAttributeList = v
 	return s
 }
@@ -4312,7 +4309,7 @@ type AttachTypedLinkInput struct {
 	// A set of attributes that are associated with the typed link.
 	//
 	// Attributes is a required field
-	Attributes []*AttributeNameAndValue `type:"list" required:"true"`
+	Attributes []AttributeNameAndValue `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the directory where you want to attach
 	// the typed link.
@@ -4371,9 +4368,6 @@ func (s *AttachTypedLinkInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -4392,7 +4386,7 @@ func (s *AttachTypedLinkInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *AttachTypedLinkInput) SetAttributes(v []*AttributeNameAndValue) *AttachTypedLinkInput {
+func (s *AttachTypedLinkInput) SetAttributes(v []AttributeNameAndValue) *AttachTypedLinkInput {
 	s.Attributes = v
 	return s
 }
@@ -4651,7 +4645,7 @@ type BatchAddFacetToObject struct {
 	// The attributes to set on the object.
 	//
 	// ObjectAttributeList is a required field
-	ObjectAttributeList []*AttributeKeyAndValue `type:"list" required:"true"`
+	ObjectAttributeList []AttributeKeyAndValue `type:"list" required:"true"`
 
 	// A reference to the object being mutated.
 	//
@@ -4691,9 +4685,6 @@ func (s *BatchAddFacetToObject) Validate() error {
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -4712,7 +4703,7 @@ func (s *BatchAddFacetToObject) Validate() error {
 }
 
 // SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *BatchAddFacetToObject) SetObjectAttributeList(v []*AttributeKeyAndValue) *BatchAddFacetToObject {
+func (s *BatchAddFacetToObject) SetObjectAttributeList(v []AttributeKeyAndValue) *BatchAddFacetToObject {
 	s.ObjectAttributeList = v
 	return s
 }
@@ -5008,7 +4999,7 @@ type BatchAttachTypedLink struct {
 	// A set of attributes that are associated with the typed link.
 	//
 	// Attributes is a required field
-	Attributes []*AttributeNameAndValue `type:"list" required:"true"`
+	Attributes []AttributeNameAndValue `type:"list" required:"true"`
 
 	// Identifies the source object that the typed link will attach to.
 	//
@@ -5057,9 +5048,6 @@ func (s *BatchAttachTypedLink) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -5078,7 +5066,7 @@ func (s *BatchAttachTypedLink) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *BatchAttachTypedLink) SetAttributes(v []*AttributeNameAndValue) *BatchAttachTypedLink {
+func (s *BatchAttachTypedLink) SetAttributes(v []AttributeNameAndValue) *BatchAttachTypedLink {
 	s.Attributes = v
 	return s
 }
@@ -5149,7 +5137,7 @@ type BatchCreateIndex struct {
 	// attribute is supported.
 	//
 	// OrderedIndexedAttributeList is a required field
-	OrderedIndexedAttributeList []*AttributeKey `type:"list" required:"true"`
+	OrderedIndexedAttributeList []AttributeKey `type:"list" required:"true"`
 
 	// A reference to the parent object that contains the index object.
 	ParentReference *ObjectReference `type:"structure"`
@@ -5181,9 +5169,6 @@ func (s *BatchCreateIndex) Validate() error {
 	}
 	if s.OrderedIndexedAttributeList != nil {
 		for i, v := range s.OrderedIndexedAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -5215,7 +5200,7 @@ func (s *BatchCreateIndex) SetLinkName(v string) *BatchCreateIndex {
 }
 
 // SetOrderedIndexedAttributeList sets the OrderedIndexedAttributeList field's value.
-func (s *BatchCreateIndex) SetOrderedIndexedAttributeList(v []*AttributeKey) *BatchCreateIndex {
+func (s *BatchCreateIndex) SetOrderedIndexedAttributeList(v []AttributeKey) *BatchCreateIndex {
 	s.OrderedIndexedAttributeList = v
 	return s
 }
@@ -5271,7 +5256,7 @@ type BatchCreateObject struct {
 	// value as the map value.
 	//
 	// ObjectAttributeList is a required field
-	ObjectAttributeList []*AttributeKeyAndValue `type:"list" required:"true"`
+	ObjectAttributeList []AttributeKeyAndValue `type:"list" required:"true"`
 
 	// If specified, the parent reference to which this object will be attached.
 	//
@@ -5282,7 +5267,7 @@ type BatchCreateObject struct {
 	// see arns.
 	//
 	// SchemaFacet is a required field
-	SchemaFacet []*SchemaFacet `type:"list" required:"true"`
+	SchemaFacet []SchemaFacet `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5323,9 +5308,6 @@ func (s *BatchCreateObject) Validate() error {
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -5333,9 +5315,6 @@ func (s *BatchCreateObject) Validate() error {
 	}
 	if s.SchemaFacet != nil {
 		for i, v := range s.SchemaFacet {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SchemaFacet", i), err.(aws.ErrInvalidParams))
 			}
@@ -5361,7 +5340,7 @@ func (s *BatchCreateObject) SetLinkName(v string) *BatchCreateObject {
 }
 
 // SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *BatchCreateObject) SetObjectAttributeList(v []*AttributeKeyAndValue) *BatchCreateObject {
+func (s *BatchCreateObject) SetObjectAttributeList(v []AttributeKeyAndValue) *BatchCreateObject {
 	s.ObjectAttributeList = v
 	return s
 }
@@ -5373,7 +5352,7 @@ func (s *BatchCreateObject) SetParentReference(v *ObjectReference) *BatchCreateO
 }
 
 // SetSchemaFacet sets the SchemaFacet field's value.
-func (s *BatchCreateObject) SetSchemaFacet(v []*SchemaFacet) *BatchCreateObject {
+func (s *BatchCreateObject) SetSchemaFacet(v []SchemaFacet) *BatchCreateObject {
 	s.SchemaFacet = v
 	return s
 }
@@ -5829,7 +5808,7 @@ type BatchGetObjectInformationResponse struct {
 	ObjectIdentifier *string `type:"string"`
 
 	// The facets attached to the specified object.
-	SchemaFacets []*SchemaFacet `type:"list"`
+	SchemaFacets []SchemaFacet `type:"list"`
 }
 
 // String returns the string representation
@@ -5849,7 +5828,7 @@ func (s *BatchGetObjectInformationResponse) SetObjectIdentifier(v string) *Batch
 }
 
 // SetSchemaFacets sets the SchemaFacets field's value.
-func (s *BatchGetObjectInformationResponse) SetSchemaFacets(v []*SchemaFacet) *BatchGetObjectInformationResponse {
+func (s *BatchGetObjectInformationResponse) SetSchemaFacets(v []SchemaFacet) *BatchGetObjectInformationResponse {
 	s.SchemaFacets = v
 	return s
 }
@@ -5923,7 +5902,7 @@ type BatchListAttachedIndicesResponse struct {
 	_ struct{} `type:"structure"`
 
 	// The indices attached to the specified object.
-	IndexAttachments []*IndexAttachment `type:"list"`
+	IndexAttachments []IndexAttachment `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -5940,7 +5919,7 @@ func (s BatchListAttachedIndicesResponse) GoString() string {
 }
 
 // SetIndexAttachments sets the IndexAttachments field's value.
-func (s *BatchListAttachedIndicesResponse) SetIndexAttachments(v []*IndexAttachment) *BatchListAttachedIndicesResponse {
+func (s *BatchListAttachedIndicesResponse) SetIndexAttachments(v []IndexAttachment) *BatchListAttachedIndicesResponse {
 	s.IndexAttachments = v
 	return s
 }
@@ -5962,7 +5941,7 @@ type BatchListIncomingTypedLinks struct {
 	// typed link selection, any inexact ranges must be specified at the end. Any
 	// attributes that do not have a range specified are presumed to match the entire
 	// range.
-	FilterAttributeRanges []*TypedLinkAttributeRange `type:"list"`
+	FilterAttributeRanges []TypedLinkAttributeRange `type:"list"`
 
 	// Filters are interpreted in the order of the attributes on the typed link
 	// facet, not the order in which they are supplied to any API calls.
@@ -6002,9 +5981,6 @@ func (s *BatchListIncomingTypedLinks) Validate() error {
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
@@ -6023,7 +5999,7 @@ func (s *BatchListIncomingTypedLinks) Validate() error {
 }
 
 // SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *BatchListIncomingTypedLinks) SetFilterAttributeRanges(v []*TypedLinkAttributeRange) *BatchListIncomingTypedLinks {
+func (s *BatchListIncomingTypedLinks) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *BatchListIncomingTypedLinks {
 	s.FilterAttributeRanges = v
 	return s
 }
@@ -6058,7 +6034,7 @@ type BatchListIncomingTypedLinksResponse struct {
 	_ struct{} `type:"structure"`
 
 	// Returns one or more typed link specifiers as output.
-	LinkSpecifiers []*TypedLinkSpecifier `type:"list"`
+	LinkSpecifiers []TypedLinkSpecifier `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -6075,7 +6051,7 @@ func (s BatchListIncomingTypedLinksResponse) GoString() string {
 }
 
 // SetLinkSpecifiers sets the LinkSpecifiers field's value.
-func (s *BatchListIncomingTypedLinksResponse) SetLinkSpecifiers(v []*TypedLinkSpecifier) *BatchListIncomingTypedLinksResponse {
+func (s *BatchListIncomingTypedLinksResponse) SetLinkSpecifiers(v []TypedLinkSpecifier) *BatchListIncomingTypedLinksResponse {
 	s.LinkSpecifiers = v
 	return s
 }
@@ -6104,7 +6080,7 @@ type BatchListIndex struct {
 	NextToken *string `type:"string"`
 
 	// Specifies the ranges of indexed values that you want to query.
-	RangesOnIndexedValues []*ObjectAttributeRange `type:"list"`
+	RangesOnIndexedValues []ObjectAttributeRange `type:"list"`
 }
 
 // String returns the string representation
@@ -6129,9 +6105,6 @@ func (s *BatchListIndex) Validate() error {
 	}
 	if s.RangesOnIndexedValues != nil {
 		for i, v := range s.RangesOnIndexedValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RangesOnIndexedValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -6163,7 +6136,7 @@ func (s *BatchListIndex) SetNextToken(v string) *BatchListIndex {
 }
 
 // SetRangesOnIndexedValues sets the RangesOnIndexedValues field's value.
-func (s *BatchListIndex) SetRangesOnIndexedValues(v []*ObjectAttributeRange) *BatchListIndex {
+func (s *BatchListIndex) SetRangesOnIndexedValues(v []ObjectAttributeRange) *BatchListIndex {
 	s.RangesOnIndexedValues = v
 	return s
 }
@@ -6174,7 +6147,7 @@ type BatchListIndexResponse struct {
 	_ struct{} `type:"structure"`
 
 	// The objects and indexed values attached to the index.
-	IndexAttachments []*IndexAttachment `type:"list"`
+	IndexAttachments []IndexAttachment `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -6191,7 +6164,7 @@ func (s BatchListIndexResponse) GoString() string {
 }
 
 // SetIndexAttachments sets the IndexAttachments field's value.
-func (s *BatchListIndexResponse) SetIndexAttachments(v []*IndexAttachment) *BatchListIndexResponse {
+func (s *BatchListIndexResponse) SetIndexAttachments(v []IndexAttachment) *BatchListIndexResponse {
 	s.IndexAttachments = v
 	return s
 }
@@ -6287,7 +6260,7 @@ type BatchListObjectAttributesResponse struct {
 
 	// The attributes map that is associated with the object. AttributeArn is the
 	// key; attribute value is the value.
-	Attributes []*AttributeKeyAndValue `type:"list"`
+	Attributes []AttributeKeyAndValue `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -6304,7 +6277,7 @@ func (s BatchListObjectAttributesResponse) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *BatchListObjectAttributesResponse) SetAttributes(v []*AttributeKeyAndValue) *BatchListObjectAttributesResponse {
+func (s *BatchListObjectAttributesResponse) SetAttributes(v []AttributeKeyAndValue) *BatchListObjectAttributesResponse {
 	s.Attributes = v
 	return s
 }
@@ -6385,7 +6358,7 @@ type BatchListObjectChildrenResponse struct {
 
 	// The children structure, which is a map with the key as the LinkName and ObjectIdentifier
 	// as the value.
-	Children map[string]*string `type:"map"`
+	Children map[string]string `type:"map"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -6402,7 +6375,7 @@ func (s BatchListObjectChildrenResponse) GoString() string {
 }
 
 // SetChildren sets the Children field's value.
-func (s *BatchListObjectChildrenResponse) SetChildren(v map[string]*string) *BatchListObjectChildrenResponse {
+func (s *BatchListObjectChildrenResponse) SetChildren(v map[string]string) *BatchListObjectChildrenResponse {
 	s.Children = v
 	return s
 }
@@ -6486,7 +6459,7 @@ type BatchListObjectParentPathsResponse struct {
 	NextToken *string `type:"string"`
 
 	// Returns the path to the ObjectIdentifiers that are associated with the directory.
-	PathToObjectIdentifiersList []*PathToObjectIdentifiers `type:"list"`
+	PathToObjectIdentifiersList []PathToObjectIdentifiers `type:"list"`
 }
 
 // String returns the string representation
@@ -6506,7 +6479,7 @@ func (s *BatchListObjectParentPathsResponse) SetNextToken(v string) *BatchListOb
 }
 
 // SetPathToObjectIdentifiersList sets the PathToObjectIdentifiersList field's value.
-func (s *BatchListObjectParentPathsResponse) SetPathToObjectIdentifiersList(v []*PathToObjectIdentifiers) *BatchListObjectParentPathsResponse {
+func (s *BatchListObjectParentPathsResponse) SetPathToObjectIdentifiersList(v []PathToObjectIdentifiers) *BatchListObjectParentPathsResponse {
 	s.PathToObjectIdentifiersList = v
 	return s
 }
@@ -6580,7 +6553,7 @@ type BatchListObjectPoliciesResponse struct {
 	_ struct{} `type:"structure"`
 
 	// A list of policy ObjectIdentifiers, that are attached to the object.
-	AttachedPolicyIds []*string `type:"list"`
+	AttachedPolicyIds []string `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -6597,7 +6570,7 @@ func (s BatchListObjectPoliciesResponse) GoString() string {
 }
 
 // SetAttachedPolicyIds sets the AttachedPolicyIds field's value.
-func (s *BatchListObjectPoliciesResponse) SetAttachedPolicyIds(v []*string) *BatchListObjectPoliciesResponse {
+func (s *BatchListObjectPoliciesResponse) SetAttachedPolicyIds(v []string) *BatchListObjectPoliciesResponse {
 	s.AttachedPolicyIds = v
 	return s
 }
@@ -6619,7 +6592,7 @@ type BatchListOutgoingTypedLinks struct {
 	// typed link selection, any inexact ranges must be specified at the end. Any
 	// attributes that do not have a range specified are presumed to match the entire
 	// range.
-	FilterAttributeRanges []*TypedLinkAttributeRange `type:"list"`
+	FilterAttributeRanges []TypedLinkAttributeRange `type:"list"`
 
 	// Filters are interpreted in the order of the attributes defined on the typed
 	// link facet, not the order they are supplied to any API calls.
@@ -6659,9 +6632,6 @@ func (s *BatchListOutgoingTypedLinks) Validate() error {
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
@@ -6680,7 +6650,7 @@ func (s *BatchListOutgoingTypedLinks) Validate() error {
 }
 
 // SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *BatchListOutgoingTypedLinks) SetFilterAttributeRanges(v []*TypedLinkAttributeRange) *BatchListOutgoingTypedLinks {
+func (s *BatchListOutgoingTypedLinks) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *BatchListOutgoingTypedLinks {
 	s.FilterAttributeRanges = v
 	return s
 }
@@ -6718,7 +6688,7 @@ type BatchListOutgoingTypedLinksResponse struct {
 	NextToken *string `type:"string"`
 
 	// Returns a typed link specifier as output.
-	TypedLinkSpecifiers []*TypedLinkSpecifier `type:"list"`
+	TypedLinkSpecifiers []TypedLinkSpecifier `type:"list"`
 }
 
 // String returns the string representation
@@ -6738,7 +6708,7 @@ func (s *BatchListOutgoingTypedLinksResponse) SetNextToken(v string) *BatchListO
 }
 
 // SetTypedLinkSpecifiers sets the TypedLinkSpecifiers field's value.
-func (s *BatchListOutgoingTypedLinksResponse) SetTypedLinkSpecifiers(v []*TypedLinkSpecifier) *BatchListOutgoingTypedLinksResponse {
+func (s *BatchListOutgoingTypedLinksResponse) SetTypedLinkSpecifiers(v []TypedLinkSpecifier) *BatchListOutgoingTypedLinksResponse {
 	s.TypedLinkSpecifiers = v
 	return s
 }
@@ -6816,7 +6786,7 @@ type BatchListPolicyAttachmentsResponse struct {
 	NextToken *string `type:"string"`
 
 	// A list of ObjectIdentifiers to which the policy is attached.
-	ObjectIdentifiers []*string `type:"list"`
+	ObjectIdentifiers []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6836,7 +6806,7 @@ func (s *BatchListPolicyAttachmentsResponse) SetNextToken(v string) *BatchListPo
 }
 
 // SetObjectIdentifiers sets the ObjectIdentifiers field's value.
-func (s *BatchListPolicyAttachmentsResponse) SetObjectIdentifiers(v []*string) *BatchListPolicyAttachmentsResponse {
+func (s *BatchListPolicyAttachmentsResponse) SetObjectIdentifiers(v []string) *BatchListPolicyAttachmentsResponse {
 	s.ObjectIdentifiers = v
 	return s
 }
@@ -6915,7 +6885,7 @@ type BatchLookupPolicyResponse struct {
 
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
 	// and PolicyType. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
-	PolicyToPathList []*PolicyToPath `type:"list"`
+	PolicyToPathList []PolicyToPath `type:"list"`
 }
 
 // String returns the string representation
@@ -6935,7 +6905,7 @@ func (s *BatchLookupPolicyResponse) SetNextToken(v string) *BatchLookupPolicyRes
 }
 
 // SetPolicyToPathList sets the PolicyToPathList field's value.
-func (s *BatchLookupPolicyResponse) SetPolicyToPathList(v []*PolicyToPath) *BatchLookupPolicyResponse {
+func (s *BatchLookupPolicyResponse) SetPolicyToPathList(v []PolicyToPath) *BatchLookupPolicyResponse {
 	s.PolicyToPathList = v
 	return s
 }
@@ -6992,7 +6962,7 @@ type BatchReadInput struct {
 	// A list of operations that are part of the batch.
 	//
 	// Operations is a required field
-	Operations []*BatchReadOperation `type:"list" required:"true"`
+	Operations []BatchReadOperation `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7018,9 +6988,6 @@ func (s *BatchReadInput) Validate() error {
 	}
 	if s.Operations != nil {
 		for i, v := range s.Operations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(aws.ErrInvalidParams))
 			}
@@ -7046,7 +7013,7 @@ func (s *BatchReadInput) SetDirectoryArn(v string) *BatchReadInput {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *BatchReadInput) SetOperations(v []*BatchReadOperation) *BatchReadInput {
+func (s *BatchReadInput) SetOperations(v []BatchReadOperation) *BatchReadInput {
 	s.Operations = v
 	return s
 }
@@ -7283,7 +7250,7 @@ type BatchReadOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of all the responses for each batch read.
-	Responses []*BatchReadOperationResponse `type:"list"`
+	Responses []BatchReadOperationResponse `type:"list"`
 }
 
 // String returns the string representation
@@ -7297,7 +7264,7 @@ func (s BatchReadOutput) GoString() string {
 }
 
 // SetResponses sets the Responses field's value.
-func (s *BatchReadOutput) SetResponses(v []*BatchReadOperationResponse) *BatchReadOutput {
+func (s *BatchReadOutput) SetResponses(v []BatchReadOperationResponse) *BatchReadOutput {
 	s.Responses = v
 	return s
 }
@@ -7515,7 +7482,7 @@ type BatchUpdateObjectAttributes struct {
 	// Attributes update structure.
 	//
 	// AttributeUpdates is a required field
-	AttributeUpdates []*ObjectAttributeUpdate `type:"list" required:"true"`
+	AttributeUpdates []ObjectAttributeUpdate `type:"list" required:"true"`
 
 	// Reference that identifies the object.
 	//
@@ -7546,9 +7513,6 @@ func (s *BatchUpdateObjectAttributes) Validate() error {
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -7562,7 +7526,7 @@ func (s *BatchUpdateObjectAttributes) Validate() error {
 }
 
 // SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *BatchUpdateObjectAttributes) SetAttributeUpdates(v []*ObjectAttributeUpdate) *BatchUpdateObjectAttributes {
+func (s *BatchUpdateObjectAttributes) SetAttributeUpdates(v []ObjectAttributeUpdate) *BatchUpdateObjectAttributes {
 	s.AttributeUpdates = v
 	return s
 }
@@ -7611,7 +7575,7 @@ type BatchWriteInput struct {
 	// A list of operations that are part of the batch.
 	//
 	// Operations is a required field
-	Operations []*BatchWriteOperation `type:"list" required:"true"`
+	Operations []BatchWriteOperation `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7637,9 +7601,6 @@ func (s *BatchWriteInput) Validate() error {
 	}
 	if s.Operations != nil {
 		for i, v := range s.Operations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(aws.ErrInvalidParams))
 			}
@@ -7659,7 +7620,7 @@ func (s *BatchWriteInput) SetDirectoryArn(v string) *BatchWriteInput {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *BatchWriteInput) SetOperations(v []*BatchWriteOperation) *BatchWriteInput {
+func (s *BatchWriteInput) SetOperations(v []BatchWriteOperation) *BatchWriteInput {
 	s.Operations = v
 	return s
 }
@@ -8041,7 +8002,7 @@ type BatchWriteOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of all the responses for each batch write.
-	Responses []*BatchWriteOperationResponse `type:"list"`
+	Responses []BatchWriteOperationResponse `type:"list"`
 }
 
 // String returns the string representation
@@ -8055,7 +8016,7 @@ func (s BatchWriteOutput) GoString() string {
 }
 
 // SetResponses sets the Responses field's value.
-func (s *BatchWriteOutput) SetResponses(v []*BatchWriteOperationResponse) *BatchWriteOutput {
+func (s *BatchWriteOutput) SetResponses(v []BatchWriteOperationResponse) *BatchWriteOutput {
 	s.Responses = v
 	return s
 }
@@ -8186,7 +8147,7 @@ type CreateFacetInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attributes that are associated with the Facet.
-	Attributes []*FacetAttribute `type:"list"`
+	Attributes []FacetAttribute `type:"list"`
 
 	// The name of the Facet, which is unique for a given schema.
 	//
@@ -8244,9 +8205,6 @@ func (s *CreateFacetInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -8260,7 +8218,7 @@ func (s *CreateFacetInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreateFacetInput) SetAttributes(v []*FacetAttribute) *CreateFacetInput {
+func (s *CreateFacetInput) SetAttributes(v []FacetAttribute) *CreateFacetInput {
 	s.Attributes = v
 	return s
 }
@@ -8320,7 +8278,7 @@ type CreateIndexInput struct {
 	// attribute is supported.
 	//
 	// OrderedIndexedAttributeList is a required field
-	OrderedIndexedAttributeList []*AttributeKey `type:"list" required:"true"`
+	OrderedIndexedAttributeList []AttributeKey `type:"list" required:"true"`
 
 	// A reference to the parent object that contains the index object.
 	ParentReference *ObjectReference `type:"structure"`
@@ -8356,9 +8314,6 @@ func (s *CreateIndexInput) Validate() error {
 	}
 	if s.OrderedIndexedAttributeList != nil {
 		for i, v := range s.OrderedIndexedAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -8390,7 +8345,7 @@ func (s *CreateIndexInput) SetLinkName(v string) *CreateIndexInput {
 }
 
 // SetOrderedIndexedAttributeList sets the OrderedIndexedAttributeList field's value.
-func (s *CreateIndexInput) SetOrderedIndexedAttributeList(v []*AttributeKey) *CreateIndexInput {
+func (s *CreateIndexInput) SetOrderedIndexedAttributeList(v []AttributeKey) *CreateIndexInput {
 	s.OrderedIndexedAttributeList = v
 	return s
 }
@@ -8440,7 +8395,7 @@ type CreateObjectInput struct {
 
 	// The attribute map whose attribute ARN contains the key and attribute value
 	// as the map value.
-	ObjectAttributeList []*AttributeKeyAndValue `type:"list"`
+	ObjectAttributeList []AttributeKeyAndValue `type:"list"`
 
 	// If specified, the parent reference to which this object will be attached.
 	ParentReference *ObjectReference `type:"structure"`
@@ -8449,7 +8404,7 @@ type CreateObjectInput struct {
 	// and facet name. For more information, see arns.
 	//
 	// SchemaFacets is a required field
-	SchemaFacets []*SchemaFacet `type:"list" required:"true"`
+	SchemaFacets []SchemaFacet `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8478,9 +8433,6 @@ func (s *CreateObjectInput) Validate() error {
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -8488,9 +8440,6 @@ func (s *CreateObjectInput) Validate() error {
 	}
 	if s.SchemaFacets != nil {
 		for i, v := range s.SchemaFacets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SchemaFacets", i), err.(aws.ErrInvalidParams))
 			}
@@ -8516,7 +8465,7 @@ func (s *CreateObjectInput) SetLinkName(v string) *CreateObjectInput {
 }
 
 // SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *CreateObjectInput) SetObjectAttributeList(v []*AttributeKeyAndValue) *CreateObjectInput {
+func (s *CreateObjectInput) SetObjectAttributeList(v []AttributeKeyAndValue) *CreateObjectInput {
 	s.ObjectAttributeList = v
 	return s
 }
@@ -8528,7 +8477,7 @@ func (s *CreateObjectInput) SetParentReference(v *ObjectReference) *CreateObject
 }
 
 // SetSchemaFacets sets the SchemaFacets field's value.
-func (s *CreateObjectInput) SetSchemaFacets(v []*SchemaFacet) *CreateObjectInput {
+func (s *CreateObjectInput) SetSchemaFacets(v []SchemaFacet) *CreateObjectInput {
 	s.SchemaFacets = v
 	return s
 }
@@ -9724,7 +9673,7 @@ type FacetAttributeDefinition struct {
 	IsImmutable *bool `type:"boolean"`
 
 	// Validation rules attached to the attribute definition.
-	Rules map[string]*Rule `type:"map"`
+	Rules map[string]Rule `type:"map"`
 
 	// The type of the attribute.
 	//
@@ -9768,7 +9717,7 @@ func (s *FacetAttributeDefinition) SetIsImmutable(v bool) *FacetAttributeDefinit
 }
 
 // SetRules sets the Rules field's value.
-func (s *FacetAttributeDefinition) SetRules(v map[string]*Rule) *FacetAttributeDefinition {
+func (s *FacetAttributeDefinition) SetRules(v map[string]Rule) *FacetAttributeDefinition {
 	s.Rules = v
 	return s
 }
@@ -10116,7 +10065,7 @@ type GetObjectInformationOutput struct {
 	ObjectIdentifier *string `type:"string"`
 
 	// The facets attached to the specified object.
-	SchemaFacets []*SchemaFacet `type:"list"`
+	SchemaFacets []SchemaFacet `type:"list"`
 }
 
 // String returns the string representation
@@ -10136,7 +10085,7 @@ func (s *GetObjectInformationOutput) SetObjectIdentifier(v string) *GetObjectInf
 }
 
 // SetSchemaFacets sets the SchemaFacets field's value.
-func (s *GetObjectInformationOutput) SetSchemaFacets(v []*SchemaFacet) *GetObjectInformationOutput {
+func (s *GetObjectInformationOutput) SetSchemaFacets(v []SchemaFacet) *GetObjectInformationOutput {
 	s.SchemaFacets = v
 	return s
 }
@@ -10282,7 +10231,7 @@ type GetTypedLinkFacetInformationOutput struct {
 	// entire range. Filters are interpreted in the order of the attributes on the
 	// typed link facet, not the order in which they are supplied to any API calls.
 	// For more information about identity attributes, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-	IdentityAttributeOrder []*string `type:"list"`
+	IdentityAttributeOrder []string `type:"list"`
 }
 
 // String returns the string representation
@@ -10296,7 +10245,7 @@ func (s GetTypedLinkFacetInformationOutput) GoString() string {
 }
 
 // SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
-func (s *GetTypedLinkFacetInformationOutput) SetIdentityAttributeOrder(v []*string) *GetTypedLinkFacetInformationOutput {
+func (s *GetTypedLinkFacetInformationOutput) SetIdentityAttributeOrder(v []string) *GetTypedLinkFacetInformationOutput {
 	s.IdentityAttributeOrder = v
 	return s
 }
@@ -10307,7 +10256,7 @@ type IndexAttachment struct {
 	_ struct{} `type:"structure"`
 
 	// The indexed attribute values.
-	IndexedAttributes []*AttributeKeyAndValue `type:"list"`
+	IndexedAttributes []AttributeKeyAndValue `type:"list"`
 
 	// The ObjectIdentifier of the object attached to the index.
 	ObjectIdentifier *string `type:"string"`
@@ -10324,7 +10273,7 @@ func (s IndexAttachment) GoString() string {
 }
 
 // SetIndexedAttributes sets the IndexedAttributes field's value.
-func (s *IndexAttachment) SetIndexedAttributes(v []*AttributeKeyAndValue) *IndexAttachment {
+func (s *IndexAttachment) SetIndexedAttributes(v []AttributeKeyAndValue) *IndexAttachment {
 	s.IndexedAttributes = v
 	return s
 }
@@ -10404,7 +10353,7 @@ type ListAppliedSchemaArnsOutput struct {
 	NextToken *string `type:"string"`
 
 	// The ARNs of schemas that are applied to the directory.
-	SchemaArns []*string `type:"list"`
+	SchemaArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -10424,7 +10373,7 @@ func (s *ListAppliedSchemaArnsOutput) SetNextToken(v string) *ListAppliedSchemaA
 }
 
 // SetSchemaArns sets the SchemaArns field's value.
-func (s *ListAppliedSchemaArnsOutput) SetSchemaArns(v []*string) *ListAppliedSchemaArnsOutput {
+func (s *ListAppliedSchemaArnsOutput) SetSchemaArns(v []string) *ListAppliedSchemaArnsOutput {
 	s.SchemaArns = v
 	return s
 }
@@ -10519,7 +10468,7 @@ type ListAttachedIndicesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The indices attached to the specified object.
-	IndexAttachments []*IndexAttachment `type:"list"`
+	IndexAttachments []IndexAttachment `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -10536,7 +10485,7 @@ func (s ListAttachedIndicesOutput) GoString() string {
 }
 
 // SetIndexAttachments sets the IndexAttachments field's value.
-func (s *ListAttachedIndicesOutput) SetIndexAttachments(v []*IndexAttachment) *ListAttachedIndicesOutput {
+func (s *ListAttachedIndicesOutput) SetIndexAttachments(v []IndexAttachment) *ListAttachedIndicesOutput {
 	s.IndexAttachments = v
 	return s
 }
@@ -10601,7 +10550,7 @@ type ListDevelopmentSchemaArnsOutput struct {
 	NextToken *string `type:"string"`
 
 	// The ARNs of retrieved development schemas.
-	SchemaArns []*string `type:"list"`
+	SchemaArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -10621,7 +10570,7 @@ func (s *ListDevelopmentSchemaArnsOutput) SetNextToken(v string) *ListDevelopmen
 }
 
 // SetSchemaArns sets the SchemaArns field's value.
-func (s *ListDevelopmentSchemaArnsOutput) SetSchemaArns(v []*string) *ListDevelopmentSchemaArnsOutput {
+func (s *ListDevelopmentSchemaArnsOutput) SetSchemaArns(v []string) *ListDevelopmentSchemaArnsOutput {
 	s.SchemaArns = v
 	return s
 }
@@ -10690,7 +10639,7 @@ type ListDirectoriesOutput struct {
 	// fashion.
 	//
 	// Directories is a required field
-	Directories []*Directory `type:"list" required:"true"`
+	Directories []Directory `type:"list" required:"true"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -10707,7 +10656,7 @@ func (s ListDirectoriesOutput) GoString() string {
 }
 
 // SetDirectories sets the Directories field's value.
-func (s *ListDirectoriesOutput) SetDirectories(v []*Directory) *ListDirectoriesOutput {
+func (s *ListDirectoriesOutput) SetDirectories(v []Directory) *ListDirectoriesOutput {
 	s.Directories = v
 	return s
 }
@@ -10802,7 +10751,7 @@ type ListFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The attributes attached to the facet.
-	Attributes []*FacetAttribute `type:"list"`
+	Attributes []FacetAttribute `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -10819,7 +10768,7 @@ func (s ListFacetAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ListFacetAttributesOutput) SetAttributes(v []*FacetAttribute) *ListFacetAttributesOutput {
+func (s *ListFacetAttributesOutput) SetAttributes(v []FacetAttribute) *ListFacetAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -10896,7 +10845,7 @@ type ListFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of facets that exist within the schema.
-	FacetNames []*string `type:"list"`
+	FacetNames []string `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -10913,7 +10862,7 @@ func (s ListFacetNamesOutput) GoString() string {
 }
 
 // SetFacetNames sets the FacetNames field's value.
-func (s *ListFacetNamesOutput) SetFacetNames(v []*string) *ListFacetNamesOutput {
+func (s *ListFacetNamesOutput) SetFacetNames(v []string) *ListFacetNamesOutput {
 	s.FacetNames = v
 	return s
 }
@@ -10941,7 +10890,7 @@ type ListIncomingTypedLinksInput struct {
 	// typed link selection, any inexact ranges must be specified at the end. Any
 	// attributes that do not have a range specified are presumed to match the entire
 	// range.
-	FilterAttributeRanges []*TypedLinkAttributeRange `type:"list"`
+	FilterAttributeRanges []TypedLinkAttributeRange `type:"list"`
 
 	// Filters are interpreted in the order of the attributes on the typed link
 	// facet, not the order in which they are supplied to any API calls.
@@ -10985,9 +10934,6 @@ func (s *ListIncomingTypedLinksInput) Validate() error {
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
@@ -11018,7 +10964,7 @@ func (s *ListIncomingTypedLinksInput) SetDirectoryArn(v string) *ListIncomingTyp
 }
 
 // SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *ListIncomingTypedLinksInput) SetFilterAttributeRanges(v []*TypedLinkAttributeRange) *ListIncomingTypedLinksInput {
+func (s *ListIncomingTypedLinksInput) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *ListIncomingTypedLinksInput {
 	s.FilterAttributeRanges = v
 	return s
 }
@@ -11052,7 +10998,7 @@ type ListIncomingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Returns one or more typed link specifiers as output.
-	LinkSpecifiers []*TypedLinkSpecifier `type:"list"`
+	LinkSpecifiers []TypedLinkSpecifier `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -11069,7 +11015,7 @@ func (s ListIncomingTypedLinksOutput) GoString() string {
 }
 
 // SetLinkSpecifiers sets the LinkSpecifiers field's value.
-func (s *ListIncomingTypedLinksOutput) SetLinkSpecifiers(v []*TypedLinkSpecifier) *ListIncomingTypedLinksOutput {
+func (s *ListIncomingTypedLinksOutput) SetLinkSpecifiers(v []TypedLinkSpecifier) *ListIncomingTypedLinksOutput {
 	s.LinkSpecifiers = v
 	return s
 }
@@ -11104,7 +11050,7 @@ type ListIndexInput struct {
 	NextToken *string `type:"string"`
 
 	// Specifies the ranges of indexed values that you want to query.
-	RangesOnIndexedValues []*ObjectAttributeRange `type:"list"`
+	RangesOnIndexedValues []ObjectAttributeRange `type:"list"`
 }
 
 // String returns the string representation
@@ -11133,9 +11079,6 @@ func (s *ListIndexInput) Validate() error {
 	}
 	if s.RangesOnIndexedValues != nil {
 		for i, v := range s.RangesOnIndexedValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RangesOnIndexedValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -11179,7 +11122,7 @@ func (s *ListIndexInput) SetNextToken(v string) *ListIndexInput {
 }
 
 // SetRangesOnIndexedValues sets the RangesOnIndexedValues field's value.
-func (s *ListIndexInput) SetRangesOnIndexedValues(v []*ObjectAttributeRange) *ListIndexInput {
+func (s *ListIndexInput) SetRangesOnIndexedValues(v []ObjectAttributeRange) *ListIndexInput {
 	s.RangesOnIndexedValues = v
 	return s
 }
@@ -11189,7 +11132,7 @@ type ListIndexOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The objects and indexed values attached to the index.
-	IndexAttachments []*IndexAttachment `type:"list"`
+	IndexAttachments []IndexAttachment `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -11206,7 +11149,7 @@ func (s ListIndexOutput) GoString() string {
 }
 
 // SetIndexAttachments sets the IndexAttachments field's value.
-func (s *ListIndexOutput) SetIndexAttachments(v []*IndexAttachment) *ListIndexOutput {
+func (s *ListIndexOutput) SetIndexAttachments(v []IndexAttachment) *ListIndexOutput {
 	s.IndexAttachments = v
 	return s
 }
@@ -11326,7 +11269,7 @@ type ListObjectAttributesOutput struct {
 
 	// Attributes map that is associated with the object. AttributeArn is the key,
 	// and attribute value is the value.
-	Attributes []*AttributeKeyAndValue `type:"list"`
+	Attributes []AttributeKeyAndValue `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -11343,7 +11286,7 @@ func (s ListObjectAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ListObjectAttributesOutput) SetAttributes(v []*AttributeKeyAndValue) *ListObjectAttributesOutput {
+func (s *ListObjectAttributesOutput) SetAttributes(v []AttributeKeyAndValue) *ListObjectAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -11449,7 +11392,7 @@ type ListObjectChildrenOutput struct {
 
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
 	// as the value.
-	Children map[string]*string `type:"map"`
+	Children map[string]string `type:"map"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -11466,7 +11409,7 @@ func (s ListObjectChildrenOutput) GoString() string {
 }
 
 // SetChildren sets the Children field's value.
-func (s *ListObjectChildrenOutput) SetChildren(v map[string]*string) *ListObjectChildrenOutput {
+func (s *ListObjectChildrenOutput) SetChildren(v map[string]string) *ListObjectChildrenOutput {
 	s.Children = v
 	return s
 }
@@ -11562,7 +11505,7 @@ type ListObjectParentPathsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Returns the path to the ObjectIdentifiers that are associated with the directory.
-	PathToObjectIdentifiersList []*PathToObjectIdentifiers `type:"list"`
+	PathToObjectIdentifiersList []PathToObjectIdentifiers `type:"list"`
 }
 
 // String returns the string representation
@@ -11582,7 +11525,7 @@ func (s *ListObjectParentPathsOutput) SetNextToken(v string) *ListObjectParentPa
 }
 
 // SetPathToObjectIdentifiersList sets the PathToObjectIdentifiersList field's value.
-func (s *ListObjectParentPathsOutput) SetPathToObjectIdentifiersList(v []*PathToObjectIdentifiers) *ListObjectParentPathsOutput {
+func (s *ListObjectParentPathsOutput) SetPathToObjectIdentifiersList(v []PathToObjectIdentifiers) *ListObjectParentPathsOutput {
 	s.PathToObjectIdentifiersList = v
 	return s
 }
@@ -11685,7 +11628,7 @@ type ListObjectParentsOutput struct {
 
 	// The parent structure, which is a map with key as the ObjectIdentifier and
 	// LinkName as the value.
-	Parents map[string]*string `type:"map"`
+	Parents map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -11705,7 +11648,7 @@ func (s *ListObjectParentsOutput) SetNextToken(v string) *ListObjectParentsOutpu
 }
 
 // SetParents sets the Parents field's value.
-func (s *ListObjectParentsOutput) SetParents(v map[string]*string) *ListObjectParentsOutput {
+func (s *ListObjectParentsOutput) SetParents(v map[string]string) *ListObjectParentsOutput {
 	s.Parents = v
 	return s
 }
@@ -11803,7 +11746,7 @@ type ListObjectPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of policy ObjectIdentifiers, that are attached to the object.
-	AttachedPolicyIds []*string `type:"list"`
+	AttachedPolicyIds []string `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -11820,7 +11763,7 @@ func (s ListObjectPoliciesOutput) GoString() string {
 }
 
 // SetAttachedPolicyIds sets the AttachedPolicyIds field's value.
-func (s *ListObjectPoliciesOutput) SetAttachedPolicyIds(v []*string) *ListObjectPoliciesOutput {
+func (s *ListObjectPoliciesOutput) SetAttachedPolicyIds(v []string) *ListObjectPoliciesOutput {
 	s.AttachedPolicyIds = v
 	return s
 }
@@ -11848,7 +11791,7 @@ type ListOutgoingTypedLinksInput struct {
 	// typed link selection, any inexact ranges must be specified at the end. Any
 	// attributes that do not have a range specified are presumed to match the entire
 	// range.
-	FilterAttributeRanges []*TypedLinkAttributeRange `type:"list"`
+	FilterAttributeRanges []TypedLinkAttributeRange `type:"list"`
 
 	// Filters are interpreted in the order of the attributes defined on the typed
 	// link facet, not the order they are supplied to any API calls.
@@ -11892,9 +11835,6 @@ func (s *ListOutgoingTypedLinksInput) Validate() error {
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
@@ -11925,7 +11865,7 @@ func (s *ListOutgoingTypedLinksInput) SetDirectoryArn(v string) *ListOutgoingTyp
 }
 
 // SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *ListOutgoingTypedLinksInput) SetFilterAttributeRanges(v []*TypedLinkAttributeRange) *ListOutgoingTypedLinksInput {
+func (s *ListOutgoingTypedLinksInput) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *ListOutgoingTypedLinksInput {
 	s.FilterAttributeRanges = v
 	return s
 }
@@ -11962,7 +11902,7 @@ type ListOutgoingTypedLinksOutput struct {
 	NextToken *string `type:"string"`
 
 	// Returns a typed link specifier as output.
-	TypedLinkSpecifiers []*TypedLinkSpecifier `type:"list"`
+	TypedLinkSpecifiers []TypedLinkSpecifier `type:"list"`
 }
 
 // String returns the string representation
@@ -11982,7 +11922,7 @@ func (s *ListOutgoingTypedLinksOutput) SetNextToken(v string) *ListOutgoingTyped
 }
 
 // SetTypedLinkSpecifiers sets the TypedLinkSpecifiers field's value.
-func (s *ListOutgoingTypedLinksOutput) SetTypedLinkSpecifiers(v []*TypedLinkSpecifier) *ListOutgoingTypedLinksOutput {
+func (s *ListOutgoingTypedLinksOutput) SetTypedLinkSpecifiers(v []TypedLinkSpecifier) *ListOutgoingTypedLinksOutput {
 	s.TypedLinkSpecifiers = v
 	return s
 }
@@ -12083,7 +12023,7 @@ type ListPolicyAttachmentsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of ObjectIdentifiers to which the policy is attached.
-	ObjectIdentifiers []*string `type:"list"`
+	ObjectIdentifiers []string `type:"list"`
 }
 
 // String returns the string representation
@@ -12103,7 +12043,7 @@ func (s *ListPolicyAttachmentsOutput) SetNextToken(v string) *ListPolicyAttachme
 }
 
 // SetObjectIdentifiers sets the ObjectIdentifiers field's value.
-func (s *ListPolicyAttachmentsOutput) SetObjectIdentifiers(v []*string) *ListPolicyAttachmentsOutput {
+func (s *ListPolicyAttachmentsOutput) SetObjectIdentifiers(v []string) *ListPolicyAttachmentsOutput {
 	s.ObjectIdentifiers = v
 	return s
 }
@@ -12162,7 +12102,7 @@ type ListPublishedSchemaArnsOutput struct {
 	NextToken *string `type:"string"`
 
 	// The ARNs of published schemas.
-	SchemaArns []*string `type:"list"`
+	SchemaArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -12182,7 +12122,7 @@ func (s *ListPublishedSchemaArnsOutput) SetNextToken(v string) *ListPublishedSch
 }
 
 // SetSchemaArns sets the SchemaArns field's value.
-func (s *ListPublishedSchemaArnsOutput) SetSchemaArns(v []*string) *ListPublishedSchemaArnsOutput {
+func (s *ListPublishedSchemaArnsOutput) SetSchemaArns(v []string) *ListPublishedSchemaArnsOutput {
 	s.SchemaArns = v
 	return s
 }
@@ -12260,7 +12200,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of tag key value pairs that are associated with the response.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -12280,7 +12220,7 @@ func (s *ListTagsForResourceOutput) SetNextToken(v string) *ListTagsForResourceO
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -12367,7 +12307,7 @@ type ListTypedLinkFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An ordered set of attributes associate with the typed link.
-	Attributes []*TypedLinkAttributeDefinition `type:"list"`
+	Attributes []TypedLinkAttributeDefinition `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -12384,7 +12324,7 @@ func (s ListTypedLinkFacetAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ListTypedLinkFacetAttributesOutput) SetAttributes(v []*TypedLinkAttributeDefinition) *ListTypedLinkFacetAttributesOutput {
+func (s *ListTypedLinkFacetAttributesOutput) SetAttributes(v []TypedLinkAttributeDefinition) *ListTypedLinkFacetAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -12462,7 +12402,7 @@ type ListTypedLinkFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of typed link facets that exist within the schema.
-	FacetNames []*string `type:"list"`
+	FacetNames []string `type:"list"`
 
 	// The pagination token.
 	NextToken *string `type:"string"`
@@ -12479,7 +12419,7 @@ func (s ListTypedLinkFacetNamesOutput) GoString() string {
 }
 
 // SetFacetNames sets the FacetNames field's value.
-func (s *ListTypedLinkFacetNamesOutput) SetFacetNames(v []*string) *ListTypedLinkFacetNamesOutput {
+func (s *ListTypedLinkFacetNamesOutput) SetFacetNames(v []string) *ListTypedLinkFacetNamesOutput {
 	s.FacetNames = v
 	return s
 }
@@ -12577,7 +12517,7 @@ type LookupPolicyOutput struct {
 
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
 	// and PolicyType. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
-	PolicyToPathList []*PolicyToPath `type:"list"`
+	PolicyToPathList []PolicyToPath `type:"list"`
 }
 
 // String returns the string representation
@@ -12597,7 +12537,7 @@ func (s *LookupPolicyOutput) SetNextToken(v string) *LookupPolicyOutput {
 }
 
 // SetPolicyToPathList sets the PolicyToPathList field's value.
-func (s *LookupPolicyOutput) SetPolicyToPathList(v []*PolicyToPath) *LookupPolicyOutput {
+func (s *LookupPolicyOutput) SetPolicyToPathList(v []PolicyToPath) *LookupPolicyOutput {
 	s.PolicyToPathList = v
 	return s
 }
@@ -12785,7 +12725,7 @@ type PathToObjectIdentifiers struct {
 
 	// Lists ObjectIdentifiers starting from directory root to the object in the
 	// request.
-	ObjectIdentifiers []*string `type:"list"`
+	ObjectIdentifiers []string `type:"list"`
 
 	// The path that is used to identify the object starting from directory root.
 	Path *string `type:"string"`
@@ -12802,7 +12742,7 @@ func (s PathToObjectIdentifiers) GoString() string {
 }
 
 // SetObjectIdentifiers sets the ObjectIdentifiers field's value.
-func (s *PathToObjectIdentifiers) SetObjectIdentifiers(v []*string) *PathToObjectIdentifiers {
+func (s *PathToObjectIdentifiers) SetObjectIdentifiers(v []string) *PathToObjectIdentifiers {
 	s.ObjectIdentifiers = v
 	return s
 }
@@ -12868,7 +12808,7 @@ type PolicyToPath struct {
 	Path *string `type:"string"`
 
 	// List of policy objects.
-	Policies []*PolicyAttachment `type:"list"`
+	Policies []PolicyAttachment `type:"list"`
 }
 
 // String returns the string representation
@@ -12888,7 +12828,7 @@ func (s *PolicyToPath) SetPath(v string) *PolicyToPath {
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *PolicyToPath) SetPolicies(v []*PolicyAttachment) *PolicyToPath {
+func (s *PolicyToPath) SetPolicies(v []PolicyAttachment) *PolicyToPath {
 	s.Policies = v
 	return s
 }
@@ -13166,7 +13106,7 @@ type Rule struct {
 	_ struct{} `type:"structure"`
 
 	// The minimum and maximum parameters that are associated with the rule.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// The type of attribute validation rule.
 	Type RuleType `type:"string"`
@@ -13183,7 +13123,7 @@ func (s Rule) GoString() string {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *Rule) SetParameters(v map[string]*string) *Rule {
+func (s *Rule) SetParameters(v map[string]string) *Rule {
 	s.Parameters = v
 	return s
 }
@@ -13288,7 +13228,7 @@ type TagResourceInput struct {
 	// A list of tag key-value pairs.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -13326,7 +13266,7 @@ func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 	s.Tags = v
 	return s
 }
@@ -13505,7 +13445,7 @@ type TypedLinkAttributeDefinition struct {
 	RequiredBehavior RequiredAttributeBehavior `type:"string" required:"true"`
 
 	// Validation rules that are attached to the attribute definition.
-	Rules map[string]*Rule `type:"map"`
+	Rules map[string]Rule `type:"map"`
 
 	// The type of the attribute.
 	//
@@ -13571,7 +13511,7 @@ func (s *TypedLinkAttributeDefinition) SetRequiredBehavior(v RequiredAttributeBe
 }
 
 // SetRules sets the Rules field's value.
-func (s *TypedLinkAttributeDefinition) SetRules(v map[string]*Rule) *TypedLinkAttributeDefinition {
+func (s *TypedLinkAttributeDefinition) SetRules(v map[string]Rule) *TypedLinkAttributeDefinition {
 	s.Rules = v
 	return s
 }
@@ -13652,7 +13592,7 @@ type TypedLinkFacet struct {
 	// to distinguish the link from others of the same type between the same objects.
 	//
 	// Attributes is a required field
-	Attributes []*TypedLinkAttributeDefinition `type:"list" required:"true"`
+	Attributes []TypedLinkAttributeDefinition `type:"list" required:"true"`
 
 	// The set of attributes that distinguish links made from this facet from each
 	// other, in the order of significance. Listing typed links can filter on the
@@ -13660,7 +13600,7 @@ type TypedLinkFacet struct {
 	// for details.
 	//
 	// IdentityAttributeOrder is a required field
-	IdentityAttributeOrder []*string `type:"list" required:"true"`
+	IdentityAttributeOrder []string `type:"list" required:"true"`
 
 	// The unique name of the typed link facet.
 	//
@@ -13695,9 +13635,6 @@ func (s *TypedLinkFacet) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -13711,13 +13648,13 @@ func (s *TypedLinkFacet) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *TypedLinkFacet) SetAttributes(v []*TypedLinkAttributeDefinition) *TypedLinkFacet {
+func (s *TypedLinkFacet) SetAttributes(v []TypedLinkAttributeDefinition) *TypedLinkFacet {
 	s.Attributes = v
 	return s
 }
 
 // SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
-func (s *TypedLinkFacet) SetIdentityAttributeOrder(v []*string) *TypedLinkFacet {
+func (s *TypedLinkFacet) SetIdentityAttributeOrder(v []string) *TypedLinkFacet {
 	s.IdentityAttributeOrder = v
 	return s
 }
@@ -13859,7 +13796,7 @@ type TypedLinkSpecifier struct {
 	// Identifies the attribute value to update.
 	//
 	// IdentityAttributeValues is a required field
-	IdentityAttributeValues []*AttributeNameAndValue `type:"list" required:"true"`
+	IdentityAttributeValues []AttributeNameAndValue `type:"list" required:"true"`
 
 	// Identifies the source object that the typed link will attach to.
 	//
@@ -13908,9 +13845,6 @@ func (s *TypedLinkSpecifier) Validate() error {
 	}
 	if s.IdentityAttributeValues != nil {
 		for i, v := range s.IdentityAttributeValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "IdentityAttributeValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -13929,7 +13863,7 @@ func (s *TypedLinkSpecifier) Validate() error {
 }
 
 // SetIdentityAttributeValues sets the IdentityAttributeValues field's value.
-func (s *TypedLinkSpecifier) SetIdentityAttributeValues(v []*AttributeNameAndValue) *TypedLinkSpecifier {
+func (s *TypedLinkSpecifier) SetIdentityAttributeValues(v []AttributeNameAndValue) *TypedLinkSpecifier {
 	s.IdentityAttributeValues = v
 	return s
 }
@@ -13965,7 +13899,7 @@ type UntagResourceInput struct {
 	// Keys of the tag that need to be removed from the resource.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -14003,7 +13937,7 @@ func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -14030,7 +13964,7 @@ type UpdateFacetInput struct {
 	// List of attributes that need to be updated in a given schema Facet. Each
 	// attribute is followed by AttributeAction, which specifies the type of update
 	// operation to perform.
-	AttributeUpdates []*FacetAttributeUpdate `type:"list"`
+	AttributeUpdates []FacetAttributeUpdate `type:"list"`
 
 	// The name of the facet.
 	//
@@ -14074,9 +14008,6 @@ func (s *UpdateFacetInput) Validate() error {
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -14090,7 +14021,7 @@ func (s *UpdateFacetInput) Validate() error {
 }
 
 // SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateFacetInput) SetAttributeUpdates(v []*FacetAttributeUpdate) *UpdateFacetInput {
+func (s *UpdateFacetInput) SetAttributeUpdates(v []FacetAttributeUpdate) *UpdateFacetInput {
 	s.AttributeUpdates = v
 	return s
 }
@@ -14135,7 +14066,7 @@ type UpdateObjectAttributesInput struct {
 	// The attributes update structure.
 	//
 	// AttributeUpdates is a required field
-	AttributeUpdates []*ObjectAttributeUpdate `type:"list" required:"true"`
+	AttributeUpdates []ObjectAttributeUpdate `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -14176,9 +14107,6 @@ func (s *UpdateObjectAttributesInput) Validate() error {
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -14192,7 +14120,7 @@ func (s *UpdateObjectAttributesInput) Validate() error {
 }
 
 // SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateObjectAttributesInput) SetAttributeUpdates(v []*ObjectAttributeUpdate) *UpdateObjectAttributesInput {
+func (s *UpdateObjectAttributesInput) SetAttributeUpdates(v []ObjectAttributeUpdate) *UpdateObjectAttributesInput {
 	s.AttributeUpdates = v
 	return s
 }
@@ -14324,7 +14252,7 @@ type UpdateTypedLinkFacetInput struct {
 	// Attributes update structure.
 	//
 	// AttributeUpdates is a required field
-	AttributeUpdates []*TypedLinkFacetAttributeUpdate `type:"list" required:"true"`
+	AttributeUpdates []TypedLinkFacetAttributeUpdate `type:"list" required:"true"`
 
 	// The order of identity attributes for the facet, from most significant to
 	// least significant. The ability to filter typed links considers the order
@@ -14336,7 +14264,7 @@ type UpdateTypedLinkFacetInput struct {
 	// For more information about identity attributes, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 	//
 	// IdentityAttributeOrder is a required field
-	IdentityAttributeOrder []*string `type:"list" required:"true"`
+	IdentityAttributeOrder []string `type:"list" required:"true"`
 
 	// The unique name of the typed link facet.
 	//
@@ -14381,9 +14309,6 @@ func (s *UpdateTypedLinkFacetInput) Validate() error {
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -14397,13 +14322,13 @@ func (s *UpdateTypedLinkFacetInput) Validate() error {
 }
 
 // SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateTypedLinkFacetInput) SetAttributeUpdates(v []*TypedLinkFacetAttributeUpdate) *UpdateTypedLinkFacetInput {
+func (s *UpdateTypedLinkFacetInput) SetAttributeUpdates(v []TypedLinkFacetAttributeUpdate) *UpdateTypedLinkFacetInput {
 	s.AttributeUpdates = v
 	return s
 }
 
 // SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
-func (s *UpdateTypedLinkFacetInput) SetIdentityAttributeOrder(v []*string) *UpdateTypedLinkFacetInput {
+func (s *UpdateTypedLinkFacetInput) SetIdentityAttributeOrder(v []string) *UpdateTypedLinkFacetInput {
 	s.IdentityAttributeOrder = v
 	return s
 }

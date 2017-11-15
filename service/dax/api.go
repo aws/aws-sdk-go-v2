@@ -1046,14 +1046,14 @@ type Cluster struct {
 	IamRoleArn *string `type:"string"`
 
 	// A list of nodes to be removed from the cluster.
-	NodeIdsToRemove []*string `type:"list"`
+	NodeIdsToRemove []string `type:"list"`
 
 	// The node type for the nodes in the cluster. (All nodes in a DAX cluster are
 	// of the same type.)
 	NodeType *string `type:"string"`
 
 	// A list of nodes that are currently in the cluster.
-	Nodes []*Node `type:"list"`
+	Nodes []Node `type:"list"`
 
 	// Describes a notification topic and its status. Notification topics are used
 	// for publishing DAX events to subscribers using Amazon Simple Notification
@@ -1069,7 +1069,7 @@ type Cluster struct {
 	PreferredMaintenanceWindow *string `type:"string"`
 
 	// A list of security groups, and the status of each, for the nodes in the cluster.
-	SecurityGroups []*SecurityGroupMembership `type:"list"`
+	SecurityGroups []SecurityGroupMembership `type:"list"`
 
 	// The current status of the cluster.
 	Status *string `type:"string"`
@@ -1128,7 +1128,7 @@ func (s *Cluster) SetIamRoleArn(v string) *Cluster {
 }
 
 // SetNodeIdsToRemove sets the NodeIdsToRemove field's value.
-func (s *Cluster) SetNodeIdsToRemove(v []*string) *Cluster {
+func (s *Cluster) SetNodeIdsToRemove(v []string) *Cluster {
 	s.NodeIdsToRemove = v
 	return s
 }
@@ -1140,7 +1140,7 @@ func (s *Cluster) SetNodeType(v string) *Cluster {
 }
 
 // SetNodes sets the Nodes field's value.
-func (s *Cluster) SetNodes(v []*Node) *Cluster {
+func (s *Cluster) SetNodes(v []Node) *Cluster {
 	s.Nodes = v
 	return s
 }
@@ -1164,7 +1164,7 @@ func (s *Cluster) SetPreferredMaintenanceWindow(v string) *Cluster {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *Cluster) SetSecurityGroups(v []*SecurityGroupMembership) *Cluster {
+func (s *Cluster) SetSecurityGroups(v []SecurityGroupMembership) *Cluster {
 	s.SecurityGroups = v
 	return s
 }
@@ -1194,7 +1194,7 @@ type CreateClusterInput struct {
 	// The Availability Zones (AZs) in which the cluster nodes will be created.
 	// All nodes belonging to the cluster are placed in these Availability Zones.
 	// Use this parameter if you want to distribute the nodes across multiple AZs.
-	AvailabilityZones []*string `type:"list"`
+	AvailabilityZones []string `type:"list"`
 
 	// The cluster identifier. This parameter is stored as a lowercase string.
 	//
@@ -1274,7 +1274,7 @@ type CreateClusterInput struct {
 	//
 	// If this parameter is not specified, DAX assigns the default VPC security
 	// group to each node.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The name of the subnet group to be used for the replication group.
 	//
@@ -1283,7 +1283,7 @@ type CreateClusterInput struct {
 	SubnetGroupName *string `type:"string"`
 
 	// A set of tags to associate with the DAX cluster.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -1323,7 +1323,7 @@ func (s *CreateClusterInput) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *CreateClusterInput) SetAvailabilityZones(v []*string) *CreateClusterInput {
+func (s *CreateClusterInput) SetAvailabilityZones(v []string) *CreateClusterInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -1377,7 +1377,7 @@ func (s *CreateClusterInput) SetReplicationFactor(v int64) *CreateClusterInput {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateClusterInput) SetSecurityGroupIds(v []*string) *CreateClusterInput {
+func (s *CreateClusterInput) SetSecurityGroupIds(v []string) *CreateClusterInput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -1389,7 +1389,7 @@ func (s *CreateClusterInput) SetSubnetGroupName(v string) *CreateClusterInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateClusterInput) SetTags(v []*Tag) *CreateClusterInput {
+func (s *CreateClusterInput) SetTags(v []Tag) *CreateClusterInput {
 	s.Tags = v
 	return s
 }
@@ -1507,7 +1507,7 @@ type CreateSubnetGroupInput struct {
 	// A list of VPC subnet IDs for the subnet group.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `type:"list" required:"true"`
+	SubnetIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1551,7 +1551,7 @@ func (s *CreateSubnetGroupInput) SetSubnetGroupName(v string) *CreateSubnetGroup
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateSubnetGroupInput) SetSubnetIds(v []*string) *CreateSubnetGroupInput {
+func (s *CreateSubnetGroupInput) SetSubnetIds(v []string) *CreateSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
@@ -1585,7 +1585,7 @@ type DecreaseReplicationFactorInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zone(s) from which to remove nodes.
-	AvailabilityZones []*string `type:"list"`
+	AvailabilityZones []string `type:"list"`
 
 	// The name of the DAX cluster from which you want to remove nodes.
 	//
@@ -1598,7 +1598,7 @@ type DecreaseReplicationFactorInput struct {
 	NewReplicationFactor *int64 `type:"integer" required:"true"`
 
 	// The unique identifiers of the nodes to be removed from the cluster.
-	NodeIdsToRemove []*string `type:"list"`
+	NodeIdsToRemove []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1630,7 +1630,7 @@ func (s *DecreaseReplicationFactorInput) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DecreaseReplicationFactorInput) SetAvailabilityZones(v []*string) *DecreaseReplicationFactorInput {
+func (s *DecreaseReplicationFactorInput) SetAvailabilityZones(v []string) *DecreaseReplicationFactorInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -1648,7 +1648,7 @@ func (s *DecreaseReplicationFactorInput) SetNewReplicationFactor(v int64) *Decre
 }
 
 // SetNodeIdsToRemove sets the NodeIdsToRemove field's value.
-func (s *DecreaseReplicationFactorInput) SetNodeIdsToRemove(v []*string) *DecreaseReplicationFactorInput {
+func (s *DecreaseReplicationFactorInput) SetNodeIdsToRemove(v []string) *DecreaseReplicationFactorInput {
 	s.NodeIdsToRemove = v
 	return s
 }
@@ -1877,7 +1877,7 @@ type DescribeClustersInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the DAX clusters being described.
-	ClusterNames []*string `type:"list"`
+	ClusterNames []string `type:"list"`
 
 	// The maximum number of results to include in the response. If more results
 	// exist than the specified MaxResults value, a token is included in the response
@@ -1903,7 +1903,7 @@ func (s DescribeClustersInput) GoString() string {
 }
 
 // SetClusterNames sets the ClusterNames field's value.
-func (s *DescribeClustersInput) SetClusterNames(v []*string) *DescribeClustersInput {
+func (s *DescribeClustersInput) SetClusterNames(v []string) *DescribeClustersInput {
 	s.ClusterNames = v
 	return s
 }
@@ -1926,7 +1926,7 @@ type DescribeClustersOutput struct {
 
 	// The descriptions of your DAX clusters, in response to a DescribeClusters
 	// request.
-	Clusters []*Cluster `type:"list"`
+	Clusters []Cluster `type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string `type:"string"`
@@ -1943,7 +1943,7 @@ func (s DescribeClustersOutput) GoString() string {
 }
 
 // SetClusters sets the Clusters field's value.
-func (s *DescribeClustersOutput) SetClusters(v []*Cluster) *DescribeClustersOutput {
+func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutput {
 	s.Clusters = v
 	return s
 }
@@ -2001,7 +2001,7 @@ type DescribeDefaultParametersOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of parameters. Each element in the list represents one parameter.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 }
 
 // String returns the string representation
@@ -2021,7 +2021,7 @@ func (s *DescribeDefaultParametersOutput) SetNextToken(v string) *DescribeDefaul
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeDefaultParametersOutput) SetParameters(v []*Parameter) *DescribeDefaultParametersOutput {
+func (s *DescribeDefaultParametersOutput) SetParameters(v []Parameter) *DescribeDefaultParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -2119,7 +2119,7 @@ type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of events. Each element in the array represents one event.
-	Events []*Event `type:"list"`
+	Events []Event `type:"list"`
 
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string `type:"string"`
@@ -2136,7 +2136,7 @@ func (s DescribeEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []*Event) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 	s.Events = v
 	return s
 }
@@ -2164,7 +2164,7 @@ type DescribeParameterGroupsInput struct {
 	NextToken *string `type:"string"`
 
 	// The names of the parameter groups.
-	ParameterGroupNames []*string `type:"list"`
+	ParameterGroupNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2190,7 +2190,7 @@ func (s *DescribeParameterGroupsInput) SetNextToken(v string) *DescribeParameter
 }
 
 // SetParameterGroupNames sets the ParameterGroupNames field's value.
-func (s *DescribeParameterGroupsInput) SetParameterGroupNames(v []*string) *DescribeParameterGroupsInput {
+func (s *DescribeParameterGroupsInput) SetParameterGroupNames(v []string) *DescribeParameterGroupsInput {
 	s.ParameterGroupNames = v
 	return s
 }
@@ -2204,7 +2204,7 @@ type DescribeParameterGroupsOutput struct {
 
 	// An array of parameter groups. Each element in the array represents one parameter
 	// group.
-	ParameterGroups []*ParameterGroup `type:"list"`
+	ParameterGroups []ParameterGroup `type:"list"`
 }
 
 // String returns the string representation
@@ -2224,7 +2224,7 @@ func (s *DescribeParameterGroupsOutput) SetNextToken(v string) *DescribeParamete
 }
 
 // SetParameterGroups sets the ParameterGroups field's value.
-func (s *DescribeParameterGroupsOutput) SetParameterGroups(v []*ParameterGroup) *DescribeParameterGroupsOutput {
+func (s *DescribeParameterGroupsOutput) SetParameterGroups(v []ParameterGroup) *DescribeParameterGroupsOutput {
 	s.ParameterGroups = v
 	return s
 }
@@ -2312,7 +2312,7 @@ type DescribeParametersOutput struct {
 
 	// A list of parameters within a parameter group. Each element in the list represents
 	// one parameter.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 }
 
 // String returns the string representation
@@ -2332,7 +2332,7 @@ func (s *DescribeParametersOutput) SetNextToken(v string) *DescribeParametersOut
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeParametersOutput) SetParameters(v []*Parameter) *DescribeParametersOutput {
+func (s *DescribeParametersOutput) SetParameters(v []Parameter) *DescribeParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -2354,7 +2354,7 @@ type DescribeSubnetGroupsInput struct {
 	NextToken *string `type:"string"`
 
 	// The name of the subnet group.
-	SubnetGroupNames []*string `type:"list"`
+	SubnetGroupNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2380,7 +2380,7 @@ func (s *DescribeSubnetGroupsInput) SetNextToken(v string) *DescribeSubnetGroups
 }
 
 // SetSubnetGroupNames sets the SubnetGroupNames field's value.
-func (s *DescribeSubnetGroupsInput) SetSubnetGroupNames(v []*string) *DescribeSubnetGroupsInput {
+func (s *DescribeSubnetGroupsInput) SetSubnetGroupNames(v []string) *DescribeSubnetGroupsInput {
 	s.SubnetGroupNames = v
 	return s
 }
@@ -2394,7 +2394,7 @@ type DescribeSubnetGroupsOutput struct {
 
 	// An array of subnet groups. Each element in the array represents a single
 	// subnet group.
-	SubnetGroups []*SubnetGroup `type:"list"`
+	SubnetGroups []SubnetGroup `type:"list"`
 }
 
 // String returns the string representation
@@ -2414,7 +2414,7 @@ func (s *DescribeSubnetGroupsOutput) SetNextToken(v string) *DescribeSubnetGroup
 }
 
 // SetSubnetGroups sets the SubnetGroups field's value.
-func (s *DescribeSubnetGroupsOutput) SetSubnetGroups(v []*SubnetGroup) *DescribeSubnetGroupsOutput {
+func (s *DescribeSubnetGroupsOutput) SetSubnetGroups(v []SubnetGroup) *DescribeSubnetGroupsOutput {
 	s.SubnetGroups = v
 	return s
 }
@@ -2518,7 +2518,7 @@ type IncreaseReplicationFactorInput struct {
 	// The Availability Zones (AZs) in which the cluster nodes will be created.
 	// All nodes belonging to the cluster are placed in these Availability Zones.
 	// Use this parameter if you want to distribute the nodes across multiple AZs.
-	AvailabilityZones []*string `type:"list"`
+	AvailabilityZones []string `type:"list"`
 
 	// The name of the DAX cluster that will receive additional nodes.
 	//
@@ -2560,7 +2560,7 @@ func (s *IncreaseReplicationFactorInput) Validate() error {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *IncreaseReplicationFactorInput) SetAvailabilityZones(v []*string) *IncreaseReplicationFactorInput {
+func (s *IncreaseReplicationFactorInput) SetAvailabilityZones(v []string) *IncreaseReplicationFactorInput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -2661,7 +2661,7 @@ type ListTagsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of tags currently associated with the DAX cluster.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -2681,7 +2681,7 @@ func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v []*Tag) *ListTagsOutput {
+func (s *ListTagsOutput) SetTags(v []Tag) *ListTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -2853,7 +2853,7 @@ type Parameter struct {
 	IsModifiable IsModifiable `type:"string"`
 
 	// A list of node types, and specific parameter values for each node.
-	NodeTypeSpecificValues []*NodeTypeSpecificValue `type:"list"`
+	NodeTypeSpecificValues []NodeTypeSpecificValue `type:"list"`
 
 	// The name of the parameter.
 	ParameterName *string `type:"string"`
@@ -2911,7 +2911,7 @@ func (s *Parameter) SetIsModifiable(v IsModifiable) *Parameter {
 }
 
 // SetNodeTypeSpecificValues sets the NodeTypeSpecificValues field's value.
-func (s *Parameter) SetNodeTypeSpecificValues(v []*NodeTypeSpecificValue) *Parameter {
+func (s *Parameter) SetNodeTypeSpecificValues(v []NodeTypeSpecificValue) *Parameter {
 	s.NodeTypeSpecificValues = v
 	return s
 }
@@ -2980,7 +2980,7 @@ type ParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The node IDs of one or more nodes to be rebooted.
-	NodeIdsToReboot []*string `type:"list"`
+	NodeIdsToReboot []string `type:"list"`
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string `type:"string"`
@@ -3000,7 +3000,7 @@ func (s ParameterGroupStatus) GoString() string {
 }
 
 // SetNodeIdsToReboot sets the NodeIdsToReboot field's value.
-func (s *ParameterGroupStatus) SetNodeIdsToReboot(v []*string) *ParameterGroupStatus {
+func (s *ParameterGroupStatus) SetNodeIdsToReboot(v []string) *ParameterGroupStatus {
 	s.NodeIdsToReboot = v
 	return s
 }
@@ -3216,7 +3216,7 @@ type SubnetGroup struct {
 	SubnetGroupName *string `type:"string"`
 
 	// A list of subnets associated with the subnet group.
-	Subnets []*Subnet `type:"list"`
+	Subnets []Subnet `type:"list"`
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
 	VpcId *string `type:"string"`
@@ -3245,7 +3245,7 @@ func (s *SubnetGroup) SetSubnetGroupName(v string) *SubnetGroup {
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *SubnetGroup) SetSubnets(v []*Subnet) *SubnetGroup {
+func (s *SubnetGroup) SetSubnets(v []Subnet) *SubnetGroup {
 	s.Subnets = v
 	return s
 }
@@ -3311,7 +3311,7 @@ type TagResourceInput struct {
 	// The tags to be assigned to the DAX resource.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3349,7 +3349,7 @@ func (s *TagResourceInput) SetResourceName(v string) *TagResourceInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 	s.Tags = v
 	return s
 }
@@ -3359,7 +3359,7 @@ type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of tags that are associated with the DAX resource.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -3373,7 +3373,7 @@ func (s TagResourceOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceOutput) SetTags(v []*Tag) *TagResourceOutput {
+func (s *TagResourceOutput) SetTags(v []Tag) *TagResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -3391,7 +3391,7 @@ type UntagResourceInput struct {
 	// the tags are removed from the cluster.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3429,7 +3429,7 @@ func (s *UntagResourceInput) SetResourceName(v string) *UntagResourceInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -3439,7 +3439,7 @@ type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The tag keys that have been removed from the cluster.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -3453,7 +3453,7 @@ func (s UntagResourceOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *UntagResourceOutput) SetTags(v []*Tag) *UntagResourceOutput {
+func (s *UntagResourceOutput) SetTags(v []Tag) *UntagResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -3487,7 +3487,7 @@ type UpdateClusterInput struct {
 	// A list of user-specified security group IDs to be assigned to each node in
 	// the DAX cluster. If this parameter is not specified, DAX assigns the default
 	// VPC security group to each node.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3551,7 +3551,7 @@ func (s *UpdateClusterInput) SetPreferredMaintenanceWindow(v string) *UpdateClus
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *UpdateClusterInput) SetSecurityGroupIds(v []*string) *UpdateClusterInput {
+func (s *UpdateClusterInput) SetSecurityGroupIds(v []string) *UpdateClusterInput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -3593,7 +3593,7 @@ type UpdateParameterGroupInput struct {
 	// in the array represents a single parameter.
 	//
 	// ParameterNameValues is a required field
-	ParameterNameValues []*ParameterNameValue `type:"list" required:"true"`
+	ParameterNameValues []ParameterNameValue `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3631,7 +3631,7 @@ func (s *UpdateParameterGroupInput) SetParameterGroupName(v string) *UpdateParam
 }
 
 // SetParameterNameValues sets the ParameterNameValues field's value.
-func (s *UpdateParameterGroupInput) SetParameterNameValues(v []*ParameterNameValue) *UpdateParameterGroupInput {
+func (s *UpdateParameterGroupInput) SetParameterNameValues(v []ParameterNameValue) *UpdateParameterGroupInput {
 	s.ParameterNameValues = v
 	return s
 }
@@ -3673,7 +3673,7 @@ type UpdateSubnetGroupInput struct {
 	SubnetGroupName *string `type:"string" required:"true"`
 
 	// A list of subnet IDs in the subnet group.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3713,7 +3713,7 @@ func (s *UpdateSubnetGroupInput) SetSubnetGroupName(v string) *UpdateSubnetGroup
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *UpdateSubnetGroupInput) SetSubnetIds(v []*string) *UpdateSubnetGroupInput {
+func (s *UpdateSubnetGroupInput) SetSubnetIds(v []string) *UpdateSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }

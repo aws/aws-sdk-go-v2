@@ -1736,11 +1736,11 @@ type Captions struct {
 
 	// The array of file formats for the output captions. If you leave this value
 	// blank, Elastic Transcoder returns an error.
-	CaptionFormats []*CaptionFormat `type:"list"`
+	CaptionFormats []CaptionFormat `type:"list"`
 
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
-	CaptionSources []*CaptionSource `deprecated:"true" type:"list"`
+	CaptionSources []CaptionSource `deprecated:"true" type:"list"`
 
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple captions.
@@ -1779,9 +1779,6 @@ func (s *Captions) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Captions"}
 	if s.CaptionSources != nil {
 		for i, v := range s.CaptionSources {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSources", i), err.(aws.ErrInvalidParams))
 			}
@@ -1795,13 +1792,13 @@ func (s *Captions) Validate() error {
 }
 
 // SetCaptionFormats sets the CaptionFormats field's value.
-func (s *Captions) SetCaptionFormats(v []*CaptionFormat) *Captions {
+func (s *Captions) SetCaptionFormats(v []CaptionFormat) *Captions {
 	s.CaptionFormats = v
 	return s
 }
 
 // SetCaptionSources sets the CaptionSources field's value.
-func (s *Captions) SetCaptionSources(v []*CaptionSource) *Captions {
+func (s *Captions) SetCaptionSources(v []CaptionSource) *Captions {
 	s.CaptionSources = v
 	return s
 }
@@ -1847,7 +1844,7 @@ type CreateJobInput struct {
 
 	// A section of the request body that provides information about the files that
 	// are being transcoded.
-	Inputs []*JobInput `type:"list"`
+	Inputs []JobInput `type:"list"`
 
 	// A section of the request body that provides information about the transcoded
 	// (target) file. We strongly recommend that you use the Outputs syntax instead
@@ -1862,7 +1859,7 @@ type CreateJobInput struct {
 	// A section of the request body that provides information about the transcoded
 	// (target) files. We recommend that you use the Outputs syntax instead of the
 	// Output syntax.
-	Outputs []*CreateJobOutput `type:"list"`
+	Outputs []CreateJobOutput `type:"list"`
 
 	// The Id of the pipeline that you want Elastic Transcoder to use for transcoding.
 	// The pipeline determines several settings, including the Amazon S3 bucket
@@ -1877,13 +1874,13 @@ type CreateJobInput struct {
 	// master playlists that you want Elastic Transcoder to create.
 	//
 	// The maximum number of master playlists in a job is 30.
-	Playlists []*CreateJobPlaylist `type:"list"`
+	Playlists []CreateJobPlaylist `type:"list"`
 
 	// User-defined metadata that you want to associate with an Elastic Transcoder
 	// job. You specify metadata in key/value pairs, and you can add up to 10 key/value
 	// pairs per job. Elastic Transcoder does not guarantee that key/value pairs
 	// are returned in the same order in which you specify them.
-	UserMetadata map[string]*string `type:"map"`
+	UserMetadata map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1913,9 +1910,6 @@ func (s *CreateJobInput) Validate() error {
 	}
 	if s.Inputs != nil {
 		for i, v := range s.Inputs {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Inputs", i), err.(aws.ErrInvalidParams))
 			}
@@ -1928,9 +1922,6 @@ func (s *CreateJobInput) Validate() error {
 	}
 	if s.Outputs != nil {
 		for i, v := range s.Outputs {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
 			}
@@ -1938,9 +1929,6 @@ func (s *CreateJobInput) Validate() error {
 	}
 	if s.Playlists != nil {
 		for i, v := range s.Playlists {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Playlists", i), err.(aws.ErrInvalidParams))
 			}
@@ -1960,7 +1948,7 @@ func (s *CreateJobInput) SetInput(v *JobInput) *CreateJobInput {
 }
 
 // SetInputs sets the Inputs field's value.
-func (s *CreateJobInput) SetInputs(v []*JobInput) *CreateJobInput {
+func (s *CreateJobInput) SetInputs(v []JobInput) *CreateJobInput {
 	s.Inputs = v
 	return s
 }
@@ -1978,7 +1966,7 @@ func (s *CreateJobInput) SetOutputKeyPrefix(v string) *CreateJobInput {
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *CreateJobInput) SetOutputs(v []*CreateJobOutput) *CreateJobInput {
+func (s *CreateJobInput) SetOutputs(v []CreateJobOutput) *CreateJobInput {
 	s.Outputs = v
 	return s
 }
@@ -1990,13 +1978,13 @@ func (s *CreateJobInput) SetPipelineId(v string) *CreateJobInput {
 }
 
 // SetPlaylists sets the Playlists field's value.
-func (s *CreateJobInput) SetPlaylists(v []*CreateJobPlaylist) *CreateJobInput {
+func (s *CreateJobInput) SetPlaylists(v []CreateJobPlaylist) *CreateJobInput {
 	s.Playlists = v
 	return s
 }
 
 // SetUserMetadata sets the UserMetadata field's value.
-func (s *CreateJobInput) SetUserMetadata(v map[string]*string) *CreateJobInput {
+func (s *CreateJobInput) SetUserMetadata(v map[string]string) *CreateJobInput {
 	s.UserMetadata = v
 	return s
 }
@@ -2060,7 +2048,7 @@ type CreateJobOutput struct {
 	// of the file. The Composition object contains settings for the clips that
 	// make up an output file. For the current release, you can only specify settings
 	// for a single clip per output file. The Composition object cannot be null.
-	Composition []*Clip `deprecated:"true" type:"list"`
+	Composition []Clip `deprecated:"true" type:"list"`
 
 	// You can specify encryption settings for any output files that you want to
 	// use for a transcoding job. This includes the output file and any watermarks,
@@ -2144,7 +2132,7 @@ type CreateJobOutput struct {
 	// to the video during transcoding. You can specify up to four watermarks for
 	// each output. Settings for each watermark must be defined in the preset for
 	// the current output.
-	Watermarks []*JobWatermark `type:"list"`
+	Watermarks []JobWatermark `type:"list"`
 }
 
 // String returns the string representation
@@ -2175,9 +2163,6 @@ func (s *CreateJobOutput) Validate() error {
 	}
 	if s.Watermarks != nil {
 		for i, v := range s.Watermarks {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Watermarks", i), err.(aws.ErrInvalidParams))
 			}
@@ -2203,7 +2188,7 @@ func (s *CreateJobOutput) SetCaptions(v *Captions) *CreateJobOutput {
 }
 
 // SetComposition sets the Composition field's value.
-func (s *CreateJobOutput) SetComposition(v []*Clip) *CreateJobOutput {
+func (s *CreateJobOutput) SetComposition(v []Clip) *CreateJobOutput {
 	s.Composition = v
 	return s
 }
@@ -2251,7 +2236,7 @@ func (s *CreateJobOutput) SetThumbnailPattern(v string) *CreateJobOutput {
 }
 
 // SetWatermarks sets the Watermarks field's value.
-func (s *CreateJobOutput) SetWatermarks(v []*JobWatermark) *CreateJobOutput {
+func (s *CreateJobOutput) SetWatermarks(v []JobWatermark) *CreateJobOutput {
 	s.Watermarks = v
 	return s
 }
@@ -2316,7 +2301,7 @@ type CreateJobPlaylist struct {
 	// clip settings, or caption settings must be the same for all outputs in the
 	// playlist. For Smooth playlists, the Audio:Profile, Video:Profile, and Video:FrameRate
 	// to Video:KeyframesMaxDist ratio must be the same for all outputs.
-	OutputKeys []*string `type:"list"`
+	OutputKeys []string `type:"list"`
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
@@ -2370,7 +2355,7 @@ func (s *CreateJobPlaylist) SetName(v string) *CreateJobPlaylist {
 }
 
 // SetOutputKeys sets the OutputKeys field's value.
-func (s *CreateJobPlaylist) SetOutputKeys(v []*string) *CreateJobPlaylist {
+func (s *CreateJobPlaylist) SetOutputKeys(v []string) *CreateJobPlaylist {
 	s.OutputKeys = v
 	return s
 }
@@ -2731,7 +2716,7 @@ type CreatePipelineOutput struct {
 	// Using resources in the same region, such as your Amazon S3 buckets, Amazon
 	// SNS notification topics, and AWS KMS key, reduces processing time and prevents
 	// cross-regional charges.
-	Warnings []*Warning `type:"list"`
+	Warnings []Warning `type:"list"`
 }
 
 // String returns the string representation
@@ -2751,7 +2736,7 @@ func (s *CreatePipelineOutput) SetPipeline(v *Pipeline) *CreatePipelineOutput {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *CreatePipelineOutput) SetWarnings(v []*Warning) *CreatePipelineOutput {
+func (s *CreatePipelineOutput) SetWarnings(v []Warning) *CreatePipelineOutput {
 	s.Warnings = v
 	return s
 }
@@ -3272,7 +3257,7 @@ type InputCaptions struct {
 
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
-	CaptionSources []*CaptionSource `type:"list"`
+	CaptionSources []CaptionSource `type:"list"`
 
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple captions.
@@ -3311,9 +3296,6 @@ func (s *InputCaptions) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputCaptions"}
 	if s.CaptionSources != nil {
 		for i, v := range s.CaptionSources {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSources", i), err.(aws.ErrInvalidParams))
 			}
@@ -3327,7 +3309,7 @@ func (s *InputCaptions) Validate() error {
 }
 
 // SetCaptionSources sets the CaptionSources field's value.
-func (s *InputCaptions) SetCaptionSources(v []*CaptionSource) *InputCaptions {
+func (s *InputCaptions) SetCaptionSources(v []CaptionSource) *InputCaptions {
 	s.CaptionSources = v
 	return s
 }
@@ -3357,7 +3339,7 @@ type Job struct {
 	// Information about the files that you're transcoding. If you specified multiple
 	// files for this job, Elastic Transcoder stitches the files together to make
 	// one output.
-	Inputs []*JobInput `type:"list"`
+	Inputs []JobInput `type:"list"`
 
 	// If you specified one output for a job, information about that output. If
 	// you specified multiple outputs for a job, the Output object lists information
@@ -3383,7 +3365,7 @@ type Job struct {
 	//
 	// If you specify more than one output for a job, Elastic Transcoder creates
 	// the files for each output in the order in which you specify them in the job.
-	Outputs []*JobOutput `type:"list"`
+	Outputs []JobOutput `type:"list"`
 
 	// The Id of the pipeline that you want Elastic Transcoder to use for transcoding.
 	// The pipeline determines several settings, including the Amazon S3 bucket
@@ -3398,7 +3380,7 @@ type Job struct {
 	// master playlists that you want Elastic Transcoder to create.
 	//
 	// The maximum number of master playlists in a job is 30.
-	Playlists []*Playlist `type:"list"`
+	Playlists []Playlist `type:"list"`
 
 	// The status of the job: Submitted, Progressing, Complete, Canceled, or Error.
 	Status *string `type:"string"`
@@ -3420,7 +3402,7 @@ type Job struct {
 	//    * Space
 	//
 	//    * The following symbols: _.:/=+-%@
-	UserMetadata map[string]*string `type:"map"`
+	UserMetadata map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -3452,7 +3434,7 @@ func (s *Job) SetInput(v *JobInput) *Job {
 }
 
 // SetInputs sets the Inputs field's value.
-func (s *Job) SetInputs(v []*JobInput) *Job {
+func (s *Job) SetInputs(v []JobInput) *Job {
 	s.Inputs = v
 	return s
 }
@@ -3470,7 +3452,7 @@ func (s *Job) SetOutputKeyPrefix(v string) *Job {
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *Job) SetOutputs(v []*JobOutput) *Job {
+func (s *Job) SetOutputs(v []JobOutput) *Job {
 	s.Outputs = v
 	return s
 }
@@ -3482,7 +3464,7 @@ func (s *Job) SetPipelineId(v string) *Job {
 }
 
 // SetPlaylists sets the Playlists field's value.
-func (s *Job) SetPlaylists(v []*Playlist) *Job {
+func (s *Job) SetPlaylists(v []Playlist) *Job {
 	s.Playlists = v
 	return s
 }
@@ -3500,7 +3482,7 @@ func (s *Job) SetTiming(v *Timing) *Job {
 }
 
 // SetUserMetadata sets the UserMetadata field's value.
-func (s *Job) SetUserMetadata(v map[string]*string) *Job {
+func (s *Job) SetUserMetadata(v map[string]string) *Job {
 	s.UserMetadata = v
 	return s
 }
@@ -3511,7 +3493,7 @@ type JobAlbumArt struct {
 
 	// The file to be used as album art. There can be multiple artworks associated
 	// with an audio file, to a maximum of 20. Valid formats are .jpg and .png
-	Artwork []*Artwork `type:"list"`
+	Artwork []Artwork `type:"list"`
 
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple album artwork files.
@@ -3544,9 +3526,6 @@ func (s *JobAlbumArt) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "JobAlbumArt"}
 	if s.Artwork != nil {
 		for i, v := range s.Artwork {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Artwork", i), err.(aws.ErrInvalidParams))
 			}
@@ -3560,7 +3539,7 @@ func (s *JobAlbumArt) Validate() error {
 }
 
 // SetArtwork sets the Artwork field's value.
-func (s *JobAlbumArt) SetArtwork(v []*Artwork) *JobAlbumArt {
+func (s *JobAlbumArt) SetArtwork(v []Artwork) *JobAlbumArt {
 	s.Artwork = v
 	return s
 }
@@ -3840,7 +3819,7 @@ type JobOutput struct {
 	// of the file. The Composition object contains settings for the clips that
 	// make up an output file. For the current release, you can only specify settings
 	// for a single clip per output file. The Composition object cannot be null.
-	Composition []*Clip `deprecated:"true" type:"list"`
+	Composition []Clip `deprecated:"true" type:"list"`
 
 	// Duration of the output file, in seconds.
 	Duration *int64 `type:"long"`
@@ -3985,7 +3964,7 @@ type JobOutput struct {
 	// watermarks in the same location, the second watermark that you add covers
 	// the first one, the third one covers the second, and the fourth one covers
 	// the third.
-	Watermarks []*JobWatermark `type:"list"`
+	Watermarks []JobWatermark `type:"list"`
 
 	// Specifies the width of the output file in pixels.
 	Width *int64 `type:"integer"`
@@ -4020,7 +3999,7 @@ func (s *JobOutput) SetCaptions(v *Captions) *JobOutput {
 }
 
 // SetComposition sets the Composition field's value.
-func (s *JobOutput) SetComposition(v []*Clip) *JobOutput {
+func (s *JobOutput) SetComposition(v []Clip) *JobOutput {
 	s.Composition = v
 	return s
 }
@@ -4116,7 +4095,7 @@ func (s *JobOutput) SetThumbnailPattern(v string) *JobOutput {
 }
 
 // SetWatermarks sets the Watermarks field's value.
-func (s *JobOutput) SetWatermarks(v []*JobWatermark) *JobOutput {
+func (s *JobOutput) SetWatermarks(v []JobWatermark) *JobOutput {
 	s.Watermarks = v
 	return s
 }
@@ -4262,7 +4241,7 @@ type ListJobsByPipelineOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Job objects that are in the specified pipeline.
-	Jobs []*Job `type:"list"`
+	Jobs []Job `type:"list"`
 
 	// A value that you use to access the second and subsequent pages of results,
 	// if any. When the jobs in the specified pipeline fit on one page or when you've
@@ -4281,7 +4260,7 @@ func (s ListJobsByPipelineOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *ListJobsByPipelineOutput) SetJobs(v []*Job) *ListJobsByPipelineOutput {
+func (s *ListJobsByPipelineOutput) SetJobs(v []Job) *ListJobsByPipelineOutput {
 	s.Jobs = v
 	return s
 }
@@ -4359,7 +4338,7 @@ type ListJobsByStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Job objects that have the specified status.
-	Jobs []*Job `type:"list"`
+	Jobs []Job `type:"list"`
 
 	// A value that you use to access the second and subsequent pages of results,
 	// if any. When the jobs in the specified pipeline fit on one page or when you've
@@ -4378,7 +4357,7 @@ func (s ListJobsByStatusOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *ListJobsByStatusOutput) SetJobs(v []*Job) *ListJobsByStatusOutput {
+func (s *ListJobsByStatusOutput) SetJobs(v []Job) *ListJobsByStatusOutput {
 	s.Jobs = v
 	return s
 }
@@ -4435,7 +4414,7 @@ type ListPipelinesOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// An array of Pipeline objects.
-	Pipelines []*Pipeline `type:"list"`
+	Pipelines []Pipeline `type:"list"`
 }
 
 // String returns the string representation
@@ -4455,7 +4434,7 @@ func (s *ListPipelinesOutput) SetNextPageToken(v string) *ListPipelinesOutput {
 }
 
 // SetPipelines sets the Pipelines field's value.
-func (s *ListPipelinesOutput) SetPipelines(v []*Pipeline) *ListPipelinesOutput {
+func (s *ListPipelinesOutput) SetPipelines(v []Pipeline) *ListPipelinesOutput {
 	s.Pipelines = v
 	return s
 }
@@ -4506,7 +4485,7 @@ type ListPresetsOutput struct {
 	NextPageToken *string `type:"string"`
 
 	// An array of Preset objects.
-	Presets []*Preset `type:"list"`
+	Presets []Preset `type:"list"`
 }
 
 // String returns the string representation
@@ -4526,7 +4505,7 @@ func (s *ListPresetsOutput) SetNextPageToken(v string) *ListPresetsOutput {
 }
 
 // SetPresets sets the Presets field's value.
-func (s *ListPresetsOutput) SetPresets(v []*Preset) *ListPresetsOutput {
+func (s *ListPresetsOutput) SetPresets(v []Preset) *ListPresetsOutput {
 	s.Presets = v
 	return s
 }
@@ -4608,7 +4587,7 @@ type Permission struct {
 	//
 	//    * FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions
 	//    for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-	Access []*string `type:"list"`
+	Access []string `type:"list"`
 
 	// The AWS user or group that you want to have access to transcoded files and
 	// playlists. To identify the user or group, you can specify the canonical user
@@ -4655,7 +4634,7 @@ func (s *Permission) Validate() error {
 }
 
 // SetAccess sets the Access field's value.
-func (s *Permission) SetAccess(v []*string) *Permission {
+func (s *Permission) SetAccess(v []string) *Permission {
 	s.Access = v
 	return s
 }
@@ -4945,7 +4924,7 @@ type PipelineOutputConfig struct {
 	// If you omit Permissions, Elastic Transcoder grants full control over the
 	// transcoded files and playlists to the owner of the role specified by Role,
 	// and grants no other permissions to any other user or group.
-	Permissions []*Permission `type:"list"`
+	Permissions []Permission `type:"list"`
 
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want
 	// Elastic Transcoder to assign to the video files and playlists that it stores
@@ -4968,9 +4947,6 @@ func (s *PipelineOutputConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PipelineOutputConfig"}
 	if s.Permissions != nil {
 		for i, v := range s.Permissions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Permissions", i), err.(aws.ErrInvalidParams))
 			}
@@ -4990,7 +4966,7 @@ func (s *PipelineOutputConfig) SetBucket(v string) *PipelineOutputConfig {
 }
 
 // SetPermissions sets the Permissions field's value.
-func (s *PipelineOutputConfig) SetPermissions(v []*Permission) *PipelineOutputConfig {
+func (s *PipelineOutputConfig) SetPermissions(v []Permission) *PipelineOutputConfig {
 	s.Permissions = v
 	return s
 }
@@ -5176,7 +5152,7 @@ type Playlist struct {
 	// clip settings, or caption settings must be the same for all outputs in the
 	// playlist. For Smooth playlists, the Audio:Profile, Video:Profile, and Video:FrameRate
 	// to Video:KeyframesMaxDist ratio must be the same for all outputs.
-	OutputKeys []*string `type:"list"`
+	OutputKeys []string `type:"list"`
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
@@ -5218,7 +5194,7 @@ func (s *Playlist) SetName(v string) *Playlist {
 }
 
 // SetOutputKeys sets the OutputKeys field's value.
-func (s *Playlist) SetOutputKeys(v []*string) *Playlist {
+func (s *Playlist) SetOutputKeys(v []string) *Playlist {
 	s.OutputKeys = v
 	return s
 }
@@ -5713,7 +5689,7 @@ type ReadPipelineOutput struct {
 	// Using resources in the same region, such as your Amazon S3 buckets, Amazon
 	// SNS notification topics, and AWS KMS key, reduces processing time and prevents
 	// cross-regional charges.
-	Warnings []*Warning `type:"list"`
+	Warnings []Warning `type:"list"`
 }
 
 // String returns the string representation
@@ -5733,7 +5709,7 @@ func (s *ReadPipelineOutput) SetPipeline(v *Pipeline) *ReadPipelineOutput {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *ReadPipelineOutput) SetWarnings(v []*Warning) *ReadPipelineOutput {
+func (s *ReadPipelineOutput) SetWarnings(v []Warning) *ReadPipelineOutput {
 	s.Warnings = v
 	return s
 }
@@ -5828,7 +5804,7 @@ type TestRoleInput struct {
 	// that you want the action to send a test notification to.
 	//
 	// Topics is a required field
-	Topics []*string `type:"list" required:"true"`
+	Topics []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5886,7 +5862,7 @@ func (s *TestRoleInput) SetRole(v string) *TestRoleInput {
 }
 
 // SetTopics sets the Topics field's value.
-func (s *TestRoleInput) SetTopics(v []*string) *TestRoleInput {
+func (s *TestRoleInput) SetTopics(v []string) *TestRoleInput {
 	s.Topics = v
 	return s
 }
@@ -5897,7 +5873,7 @@ type TestRoleOutput struct {
 
 	// If the Success element contains false, this value is an array of one or more
 	// error messages that were generated during the test process.
-	Messages []*string `type:"list"`
+	Messages []string `type:"list"`
 
 	// If the operation is successful, this value is true; otherwise, the value
 	// is false.
@@ -5915,7 +5891,7 @@ func (s TestRoleOutput) GoString() string {
 }
 
 // SetMessages sets the Messages field's value.
-func (s *TestRoleOutput) SetMessages(v []*string) *TestRoleOutput {
+func (s *TestRoleOutput) SetMessages(v []string) *TestRoleOutput {
 	s.Messages = v
 	return s
 }
@@ -6539,7 +6515,7 @@ type UpdatePipelineOutput struct {
 	// Using resources in the same region, such as your Amazon S3 buckets, Amazon
 	// SNS notification topics, and AWS KMS key, reduces processing time and prevents
 	// cross-regional charges.
-	Warnings []*Warning `type:"list"`
+	Warnings []Warning `type:"list"`
 }
 
 // String returns the string representation
@@ -6559,7 +6535,7 @@ func (s *UpdatePipelineOutput) SetPipeline(v *Pipeline) *UpdatePipelineOutput {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *UpdatePipelineOutput) SetWarnings(v []*Warning) *UpdatePipelineOutput {
+func (s *UpdatePipelineOutput) SetWarnings(v []Warning) *UpdatePipelineOutput {
 	s.Warnings = v
 	return s
 }
@@ -6845,7 +6821,7 @@ type VideoParameters struct {
 	//
 	// The number of times you want the output gif to loop. Valid values include
 	// Infinite and integers between 0 and 100, inclusive.
-	CodecOptions map[string]*string `type:"map"`
+	CodecOptions map[string]string `type:"map"`
 
 	// The value that Elastic Transcoder adds to the metadata in the output file.
 	DisplayAspectRatio *string `type:"string"`
@@ -7062,7 +7038,7 @@ type VideoParameters struct {
 	// You can specify fewer graphics in the job than you specify watermark settings
 	// in the preset, which allows you to use the same preset for up to four watermarks
 	// that have different dimensions.
-	Watermarks []*PresetWatermark `type:"list"`
+	Watermarks []PresetWatermark `type:"list"`
 }
 
 // String returns the string representation
@@ -7080,9 +7056,6 @@ func (s *VideoParameters) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VideoParameters"}
 	if s.Watermarks != nil {
 		for i, v := range s.Watermarks {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Watermarks", i), err.(aws.ErrInvalidParams))
 			}
@@ -7114,7 +7087,7 @@ func (s *VideoParameters) SetCodec(v string) *VideoParameters {
 }
 
 // SetCodecOptions sets the CodecOptions field's value.
-func (s *VideoParameters) SetCodecOptions(v map[string]*string) *VideoParameters {
+func (s *VideoParameters) SetCodecOptions(v map[string]string) *VideoParameters {
 	s.CodecOptions = v
 	return s
 }
@@ -7180,7 +7153,7 @@ func (s *VideoParameters) SetSizingPolicy(v string) *VideoParameters {
 }
 
 // SetWatermarks sets the Watermarks field's value.
-func (s *VideoParameters) SetWatermarks(v []*PresetWatermark) *VideoParameters {
+func (s *VideoParameters) SetWatermarks(v []PresetWatermark) *VideoParameters {
 	s.Watermarks = v
 	return s
 }

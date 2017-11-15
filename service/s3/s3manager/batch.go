@@ -129,7 +129,7 @@ type BatchDeleteIterator interface {
 type DeleteListIterator struct {
 	Bucket    *string
 	Paginator request.Pagination
-	objects   []*s3.Object
+	objects   []s3.Object
 }
 
 // NewDeleteListIterator will return a new DeleteListIterator.
@@ -162,7 +162,7 @@ func (iter *DeleteListIterator) Next() bool {
 	}
 
 	if len(iter.objects) == 0 && iter.Paginator.Next() {
-		iter.objects = iter.Paginator.Page().(*s3.ListObjectsOutput).Contents
+		iter.objects = iter.Paginator.Page().(s3.ListObjectsOutput).Contents
 	}
 
 	return len(iter.objects) > 0
@@ -303,7 +303,7 @@ func (d *BatchDelete) Delete(ctx aws.Context, iter BatchDeleteIterator) error {
 
 		parity := hasParity(input, o)
 		if parity {
-			input.Delete.Objects = append(input.Delete.Objects, &s3.ObjectIdentifier{
+			input.Delete.Objects = append(input.Delete.Objects, s3.ObjectIdentifier{
 				Key:       o.Object.Key,
 				VersionId: o.Object.VersionId,
 			})
@@ -321,7 +321,7 @@ func (d *BatchDelete) Delete(ctx aws.Context, iter BatchDeleteIterator) error {
 			if !parity {
 				objects = append(objects, o)
 				input = initDeleteObjectsInput(o.Object)
-				input.Delete.Objects = append(input.Delete.Objects, &s3.ObjectIdentifier{
+				input.Delete.Objects = append(input.Delete.Objects, s3.ObjectIdentifier{
 					Key:       o.Object.Key,
 					VersionId: o.Object.VersionId,
 				})

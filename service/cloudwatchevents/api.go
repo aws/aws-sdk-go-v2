@@ -1284,7 +1284,7 @@ type InputTransformer struct {
 	// Map of JSON paths to be extracted from the event. These are key-value pairs,
 	// where each value is a JSON path. You must use JSON dot notation, not bracket
 	// notation.
-	InputPathsMap map[string]*string `type:"map"`
+	InputPathsMap map[string]string `type:"map"`
 
 	// Input template where you can use the values of the keys from InputPathsMap
 	// to customize the data sent to the target.
@@ -1321,7 +1321,7 @@ func (s *InputTransformer) Validate() error {
 }
 
 // SetInputPathsMap sets the InputPathsMap field's value.
-func (s *InputTransformer) SetInputPathsMap(v map[string]*string) *InputTransformer {
+func (s *InputTransformer) SetInputPathsMap(v map[string]string) *InputTransformer {
 	s.InputPathsMap = v
 	return s
 }
@@ -1454,7 +1454,7 @@ type ListRuleNamesByTargetOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The names of the rules that can invoke the given target.
-	RuleNames []*string `type:"list"`
+	RuleNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1474,7 +1474,7 @@ func (s *ListRuleNamesByTargetOutput) SetNextToken(v string) *ListRuleNamesByTar
 }
 
 // SetRuleNames sets the RuleNames field's value.
-func (s *ListRuleNamesByTargetOutput) SetRuleNames(v []*string) *ListRuleNamesByTargetOutput {
+func (s *ListRuleNamesByTargetOutput) SetRuleNames(v []string) *ListRuleNamesByTargetOutput {
 	s.RuleNames = v
 	return s
 }
@@ -1549,7 +1549,7 @@ type ListRulesOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The rules that match the specified criteria.
-	Rules []*Rule `type:"list"`
+	Rules []Rule `type:"list"`
 }
 
 // String returns the string representation
@@ -1569,7 +1569,7 @@ func (s *ListRulesOutput) SetNextToken(v string) *ListRulesOutput {
 }
 
 // SetRules sets the Rules field's value.
-func (s *ListRulesOutput) SetRules(v []*Rule) *ListRulesOutput {
+func (s *ListRulesOutput) SetRules(v []Rule) *ListRulesOutput {
 	s.Rules = v
 	return s
 }
@@ -1650,7 +1650,7 @@ type ListTargetsByRuleOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The targets assigned to the rule.
-	Targets []*Target `min:"1" type:"list"`
+	Targets []Target `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1670,7 +1670,7 @@ func (s *ListTargetsByRuleOutput) SetNextToken(v string) *ListTargetsByRuleOutpu
 }
 
 // SetTargets sets the Targets field's value.
-func (s *ListTargetsByRuleOutput) SetTargets(v []*Target) *ListTargetsByRuleOutput {
+func (s *ListTargetsByRuleOutput) SetTargets(v []Target) *ListTargetsByRuleOutput {
 	s.Targets = v
 	return s
 }
@@ -1684,7 +1684,7 @@ type PutEventsInput struct {
 	// with the event, and so on.
 	//
 	// Entries is a required field
-	Entries []*PutEventsRequestEntry `min:"1" type:"list" required:"true"`
+	Entries []PutEventsRequestEntry `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1715,7 +1715,7 @@ func (s *PutEventsInput) Validate() error {
 }
 
 // SetEntries sets the Entries field's value.
-func (s *PutEventsInput) SetEntries(v []*PutEventsRequestEntry) *PutEventsInput {
+func (s *PutEventsInput) SetEntries(v []PutEventsRequestEntry) *PutEventsInput {
 	s.Entries = v
 	return s
 }
@@ -1727,7 +1727,7 @@ type PutEventsOutput struct {
 	// The successfully and unsuccessfully ingested events results. If the ingestion
 	// was successful, the entry has the event ID in it. Otherwise, you can use
 	// the error code and error message to identify the problem with the entry.
-	Entries []*PutEventsResultEntry `type:"list"`
+	Entries []PutEventsResultEntry `type:"list"`
 
 	// The number of failed entries.
 	FailedEntryCount *int64 `type:"integer"`
@@ -1744,7 +1744,7 @@ func (s PutEventsOutput) GoString() string {
 }
 
 // SetEntries sets the Entries field's value.
-func (s *PutEventsOutput) SetEntries(v []*PutEventsResultEntry) *PutEventsOutput {
+func (s *PutEventsOutput) SetEntries(v []PutEventsResultEntry) *PutEventsOutput {
 	s.Entries = v
 	return s
 }
@@ -1769,7 +1769,7 @@ type PutEventsRequestEntry struct {
 
 	// AWS resources, identified by Amazon Resource Name (ARN), which the event
 	// primarily concerns. Any number, including zero, may be present.
-	Resources []*string `type:"list"`
+	Resources []string `type:"list"`
 
 	// The source of the event.
 	Source *string `type:"string"`
@@ -1802,7 +1802,7 @@ func (s *PutEventsRequestEntry) SetDetailType(v string) *PutEventsRequestEntry {
 }
 
 // SetResources sets the Resources field's value.
-func (s *PutEventsRequestEntry) SetResources(v []*string) *PutEventsRequestEntry {
+func (s *PutEventsRequestEntry) SetResources(v []string) *PutEventsRequestEntry {
 	s.Resources = v
 	return s
 }
@@ -2095,7 +2095,7 @@ type PutTargetsInput struct {
 	// The targets to update or add to the rule.
 	//
 	// Targets is a required field
-	Targets []*Target `min:"1" type:"list" required:"true"`
+	Targets []Target `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2127,9 +2127,6 @@ func (s *PutTargetsInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -2149,7 +2146,7 @@ func (s *PutTargetsInput) SetRule(v string) *PutTargetsInput {
 }
 
 // SetTargets sets the Targets field's value.
-func (s *PutTargetsInput) SetTargets(v []*Target) *PutTargetsInput {
+func (s *PutTargetsInput) SetTargets(v []Target) *PutTargetsInput {
 	s.Targets = v
 	return s
 }
@@ -2159,7 +2156,7 @@ type PutTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The failed target entries.
-	FailedEntries []*PutTargetsResultEntry `type:"list"`
+	FailedEntries []PutTargetsResultEntry `type:"list"`
 
 	// The number of failed entries.
 	FailedEntryCount *int64 `type:"integer"`
@@ -2176,7 +2173,7 @@ func (s PutTargetsOutput) GoString() string {
 }
 
 // SetFailedEntries sets the FailedEntries field's value.
-func (s *PutTargetsOutput) SetFailedEntries(v []*PutTargetsResultEntry) *PutTargetsOutput {
+func (s *PutTargetsOutput) SetFailedEntries(v []PutTargetsResultEntry) *PutTargetsOutput {
 	s.FailedEntries = v
 	return s
 }
@@ -2298,7 +2295,7 @@ type RemoveTargetsInput struct {
 	// The IDs of the targets to remove from the rule.
 	//
 	// Ids is a required field
-	Ids []*string `min:"1" type:"list" required:"true"`
+	Ids []string `min:"1" type:"list" required:"true"`
 
 	// The name of the rule.
 	//
@@ -2341,7 +2338,7 @@ func (s *RemoveTargetsInput) Validate() error {
 }
 
 // SetIds sets the Ids field's value.
-func (s *RemoveTargetsInput) SetIds(v []*string) *RemoveTargetsInput {
+func (s *RemoveTargetsInput) SetIds(v []string) *RemoveTargetsInput {
 	s.Ids = v
 	return s
 }
@@ -2357,7 +2354,7 @@ type RemoveTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The failed target entries.
-	FailedEntries []*RemoveTargetsResultEntry `type:"list"`
+	FailedEntries []RemoveTargetsResultEntry `type:"list"`
 
 	// The number of failed entries.
 	FailedEntryCount *int64 `type:"integer"`
@@ -2374,7 +2371,7 @@ func (s RemoveTargetsOutput) GoString() string {
 }
 
 // SetFailedEntries sets the FailedEntries field's value.
-func (s *RemoveTargetsOutput) SetFailedEntries(v []*RemoveTargetsResultEntry) *RemoveTargetsOutput {
+func (s *RemoveTargetsOutput) SetFailedEntries(v []RemoveTargetsResultEntry) *RemoveTargetsOutput {
 	s.FailedEntries = v
 	return s
 }
@@ -2521,7 +2518,7 @@ type RunCommandParameters struct {
 	// either an array of InstanceIds or a tag.
 	//
 	// RunCommandTargets is a required field
-	RunCommandTargets []*RunCommandTarget `min:"1" type:"list" required:"true"`
+	RunCommandTargets []RunCommandTarget `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2546,9 +2543,6 @@ func (s *RunCommandParameters) Validate() error {
 	}
 	if s.RunCommandTargets != nil {
 		for i, v := range s.RunCommandTargets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RunCommandTargets", i), err.(aws.ErrInvalidParams))
 			}
@@ -2562,7 +2556,7 @@ func (s *RunCommandParameters) Validate() error {
 }
 
 // SetRunCommandTargets sets the RunCommandTargets field's value.
-func (s *RunCommandParameters) SetRunCommandTargets(v []*RunCommandTarget) *RunCommandParameters {
+func (s *RunCommandParameters) SetRunCommandTargets(v []RunCommandTarget) *RunCommandParameters {
 	s.RunCommandTargets = v
 	return s
 }
@@ -2583,7 +2577,7 @@ type RunCommandTarget struct {
 	// Values is a list of Amazon EC2 instance IDs.
 	//
 	// Values is a required field
-	Values []*string `min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2627,7 +2621,7 @@ func (s *RunCommandTarget) SetKey(v string) *RunCommandTarget {
 }
 
 // SetValues sets the Values field's value.
-func (s *RunCommandTarget) SetValues(v []*string) *RunCommandTarget {
+func (s *RunCommandTarget) SetValues(v []string) *RunCommandTarget {
 	s.Values = v
 	return s
 }

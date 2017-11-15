@@ -735,11 +735,11 @@ type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Resources which were deleted.
-	DeletedResources []*Resource `locationName:"deletedResources" type:"list"`
+	DeletedResources []Resource `locationName:"deletedResources" type:"list"`
 
 	// Resources which were not deleted, due to a risk of losing potentially important
 	// data or files.
-	OrphanedResources []*Resource `locationName:"orphanedResources" type:"list"`
+	OrphanedResources []Resource `locationName:"orphanedResources" type:"list"`
 }
 
 // String returns the string representation
@@ -753,13 +753,13 @@ func (s DeleteProjectOutput) GoString() string {
 }
 
 // SetDeletedResources sets the DeletedResources field's value.
-func (s *DeleteProjectOutput) SetDeletedResources(v []*Resource) *DeleteProjectOutput {
+func (s *DeleteProjectOutput) SetDeletedResources(v []Resource) *DeleteProjectOutput {
 	s.DeletedResources = v
 	return s
 }
 
 // SetOrphanedResources sets the OrphanedResources field's value.
-func (s *DeleteProjectOutput) SetOrphanedResources(v []*Resource) *DeleteProjectOutput {
+func (s *DeleteProjectOutput) SetOrphanedResources(v []Resource) *DeleteProjectOutput {
 	s.OrphanedResources = v
 	return s
 }
@@ -1128,7 +1128,7 @@ type ListBundlesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of bundles.
-	BundleList []*BundleDetails `locationName:"bundleList" type:"list"`
+	BundleList []BundleDetails `locationName:"bundleList" type:"list"`
 
 	// Pagination token. If non-null pagination token is returned in a result, then
 	// pass its value in another request to fetch more entries.
@@ -1146,7 +1146,7 @@ func (s ListBundlesOutput) GoString() string {
 }
 
 // SetBundleList sets the BundleList field's value.
-func (s *ListBundlesOutput) SetBundleList(v []*BundleDetails) *ListBundlesOutput {
+func (s *ListBundlesOutput) SetBundleList(v []BundleDetails) *ListBundlesOutput {
 	s.BundleList = v
 	return s
 }
@@ -1204,7 +1204,7 @@ type ListProjectsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// List of projects.
-	Projects []*ProjectSummary `locationName:"projects" type:"list"`
+	Projects []ProjectSummary `locationName:"projects" type:"list"`
 }
 
 // String returns the string representation
@@ -1224,7 +1224,7 @@ func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
 }
 
 // SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []*ProjectSummary) *ListProjectsOutput {
+func (s *ListProjectsOutput) SetProjects(v []ProjectSummary) *ListProjectsOutput {
 	s.Projects = v
 	return s
 }
@@ -1253,7 +1253,7 @@ type ProjectDetails struct {
 	Region *string `locationName:"region" type:"string"`
 
 	// List of AWS resources associated with a project.
-	Resources []*Resource `locationName:"resources" type:"list"`
+	Resources []Resource `locationName:"resources" type:"list"`
 
 	// Synchronization state for a project.
 	State ProjectState `locationName:"state" type:"string"`
@@ -1306,7 +1306,7 @@ func (s *ProjectDetails) SetRegion(v string) *ProjectDetails {
 }
 
 // SetResources sets the Resources field's value.
-func (s *ProjectDetails) SetResources(v []*Resource) *ProjectDetails {
+func (s *ProjectDetails) SetResources(v []Resource) *ProjectDetails {
 	s.Resources = v
 	return s
 }
@@ -1360,7 +1360,7 @@ type Resource struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// Key-value attribute pairs.
-	Attributes map[string]*string `locationName:"attributes" type:"map"`
+	Attributes map[string]string `locationName:"attributes" type:"map"`
 
 	// Identifies which feature in AWS Mobile Hub is associated with this AWS resource.
 	Feature *string `locationName:"feature" type:"string"`
@@ -1390,7 +1390,7 @@ func (s *Resource) SetArn(v string) *Resource {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Resource) SetAttributes(v map[string]*string) *Resource {
+func (s *Resource) SetAttributes(v map[string]string) *Resource {
 	s.Attributes = v
 	return s
 }

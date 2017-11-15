@@ -510,7 +510,7 @@ type GetResourcesInput struct {
 	//
 	//    * For more information about ARNs, see Amazon Resource Names (ARNs) and
 	//    AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	ResourceTypeFilters []*string `type:"list"`
+	ResourceTypeFilters []string `type:"list"`
 
 	// A limit that restricts the number of resources returned by GetResources in
 	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and
@@ -527,7 +527,7 @@ type GetResourcesInput struct {
 	// If you specify multiple filters connected by an OR operator in a single request,
 	// the response returns all resources that are associated with at least one
 	// or possibly more of the specified filters.
-	TagFilters []*TagFilter `type:"list"`
+	TagFilters []TagFilter `type:"list"`
 
 	// A limit that restricts the number of tags (key and value pairs) returned
 	// by GetResources in paginated output. A resource with no tags is counted as
@@ -563,9 +563,6 @@ func (s *GetResourcesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
 	if s.TagFilters != nil {
 		for i, v := range s.TagFilters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagFilters", i), err.(aws.ErrInvalidParams))
 			}
@@ -585,7 +582,7 @@ func (s *GetResourcesInput) SetPaginationToken(v string) *GetResourcesInput {
 }
 
 // SetResourceTypeFilters sets the ResourceTypeFilters field's value.
-func (s *GetResourcesInput) SetResourceTypeFilters(v []*string) *GetResourcesInput {
+func (s *GetResourcesInput) SetResourceTypeFilters(v []string) *GetResourcesInput {
 	s.ResourceTypeFilters = v
 	return s
 }
@@ -597,7 +594,7 @@ func (s *GetResourcesInput) SetResourcesPerPage(v int64) *GetResourcesInput {
 }
 
 // SetTagFilters sets the TagFilters field's value.
-func (s *GetResourcesInput) SetTagFilters(v []*TagFilter) *GetResourcesInput {
+func (s *GetResourcesInput) SetTagFilters(v []TagFilter) *GetResourcesInput {
 	s.TagFilters = v
 	return s
 }
@@ -618,7 +615,7 @@ type GetResourcesOutput struct {
 	PaginationToken *string `type:"string"`
 
 	// A list of resource ARNs and the tags (keys and values) associated with each.
-	ResourceTagMappingList []*ResourceTagMapping `type:"list"`
+	ResourceTagMappingList []ResourceTagMapping `type:"list"`
 }
 
 // String returns the string representation
@@ -638,7 +635,7 @@ func (s *GetResourcesOutput) SetPaginationToken(v string) *GetResourcesOutput {
 }
 
 // SetResourceTagMappingList sets the ResourceTagMappingList field's value.
-func (s *GetResourcesOutput) SetResourceTagMappingList(v []*ResourceTagMapping) *GetResourcesOutput {
+func (s *GetResourcesOutput) SetResourceTagMappingList(v []ResourceTagMapping) *GetResourcesOutput {
 	s.ResourceTagMappingList = v
 	return s
 }
@@ -679,7 +676,7 @@ type GetTagKeysOutput struct {
 	PaginationToken *string `type:"string"`
 
 	// A list of all tag keys in the AWS account.
-	TagKeys []*string `type:"list"`
+	TagKeys []string `type:"list"`
 }
 
 // String returns the string representation
@@ -699,7 +696,7 @@ func (s *GetTagKeysOutput) SetPaginationToken(v string) *GetTagKeysOutput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *GetTagKeysOutput) SetTagKeys(v []*string) *GetTagKeysOutput {
+func (s *GetTagKeysOutput) SetTagKeys(v []string) *GetTagKeysOutput {
 	s.TagKeys = v
 	return s
 }
@@ -769,7 +766,7 @@ type GetTagValuesOutput struct {
 	PaginationToken *string `type:"string"`
 
 	// A list of all tag values for the specified key in the AWS account.
-	TagValues []*string `type:"list"`
+	TagValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -789,7 +786,7 @@ func (s *GetTagValuesOutput) SetPaginationToken(v string) *GetTagValuesOutput {
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *GetTagValuesOutput) SetTagValues(v []*string) *GetTagValuesOutput {
+func (s *GetTagValuesOutput) SetTagValues(v []string) *GetTagValuesOutput {
 	s.TagValues = v
 	return s
 }
@@ -804,7 +801,7 @@ type ResourceTagMapping struct {
 	ResourceARN *string `min:"1" type:"string"`
 
 	// The tags that have been applied to one or more AWS resources.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -824,7 +821,7 @@ func (s *ResourceTagMapping) SetResourceARN(v string) *ResourceTagMapping {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ResourceTagMapping) SetTags(v []*Tag) *ResourceTagMapping {
+func (s *ResourceTagMapping) SetTags(v []Tag) *ResourceTagMapping {
 	s.Tags = v
 	return s
 }
@@ -884,7 +881,7 @@ type TagFilter struct {
 
 	// The optional part of a key-value pair that make up a tag. A value acts as
 	// a descriptor within a tag category (key).
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -917,7 +914,7 @@ func (s *TagFilter) SetKey(v string) *TagFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *TagFilter) SetValues(v []*string) *TagFilter {
+func (s *TagFilter) SetValues(v []string) *TagFilter {
 	s.Values = v
 	return s
 }
@@ -933,13 +930,13 @@ type TagResourcesInput struct {
 	// in the AWS General Reference.
 	//
 	// ResourceARNList is a required field
-	ResourceARNList []*string `min:"1" type:"list" required:"true"`
+	ResourceARNList []string `min:"1" type:"list" required:"true"`
 
 	// The tags that you want to add to the specified resources. A tag consists
 	// of a key and a value that you define.
 	//
 	// Tags is a required field
-	Tags map[string]*string `min:"1" type:"map" required:"true"`
+	Tags map[string]string `min:"1" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -977,13 +974,13 @@ func (s *TagResourcesInput) Validate() error {
 }
 
 // SetResourceARNList sets the ResourceARNList field's value.
-func (s *TagResourcesInput) SetResourceARNList(v []*string) *TagResourcesInput {
+func (s *TagResourcesInput) SetResourceARNList(v []string) *TagResourcesInput {
 	s.ResourceARNList = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourcesInput) SetTags(v map[string]*string) *TagResourcesInput {
+func (s *TagResourcesInput) SetTags(v map[string]string) *TagResourcesInput {
 	s.Tags = v
 	return s
 }
@@ -994,7 +991,7 @@ type TagResourcesOutput struct {
 
 	// Details of resources that could not be tagged. An error code, status code,
 	// and error message are returned for each failed item.
-	FailedResourcesMap map[string]*FailureInfo `type:"map"`
+	FailedResourcesMap map[string]FailureInfo `type:"map"`
 }
 
 // String returns the string representation
@@ -1008,7 +1005,7 @@ func (s TagResourcesOutput) GoString() string {
 }
 
 // SetFailedResourcesMap sets the FailedResourcesMap field's value.
-func (s *TagResourcesOutput) SetFailedResourcesMap(v map[string]*FailureInfo) *TagResourcesOutput {
+func (s *TagResourcesOutput) SetFailedResourcesMap(v map[string]FailureInfo) *TagResourcesOutput {
 	s.FailedResourcesMap = v
 	return s
 }
@@ -1024,12 +1021,12 @@ type UntagResourcesInput struct {
 	// in the AWS General Reference.
 	//
 	// ResourceARNList is a required field
-	ResourceARNList []*string `min:"1" type:"list" required:"true"`
+	ResourceARNList []string `min:"1" type:"list" required:"true"`
 
 	// A list of the tag keys that you want to remove from the specified resources.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `min:"1" type:"list" required:"true"`
+	TagKeys []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1067,13 +1064,13 @@ func (s *UntagResourcesInput) Validate() error {
 }
 
 // SetResourceARNList sets the ResourceARNList field's value.
-func (s *UntagResourcesInput) SetResourceARNList(v []*string) *UntagResourcesInput {
+func (s *UntagResourcesInput) SetResourceARNList(v []string) *UntagResourcesInput {
 	s.ResourceARNList = v
 	return s
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourcesInput) SetTagKeys(v []*string) *UntagResourcesInput {
+func (s *UntagResourcesInput) SetTagKeys(v []string) *UntagResourcesInput {
 	s.TagKeys = v
 	return s
 }
@@ -1084,7 +1081,7 @@ type UntagResourcesOutput struct {
 
 	// Details of resources that could not be untagged. An error code, status code,
 	// and error message are returned for each failed item.
-	FailedResourcesMap map[string]*FailureInfo `type:"map"`
+	FailedResourcesMap map[string]FailureInfo `type:"map"`
 }
 
 // String returns the string representation
@@ -1098,7 +1095,7 @@ func (s UntagResourcesOutput) GoString() string {
 }
 
 // SetFailedResourcesMap sets the FailedResourcesMap field's value.
-func (s *UntagResourcesOutput) SetFailedResourcesMap(v map[string]*FailureInfo) *UntagResourcesOutput {
+func (s *UntagResourcesOutput) SetFailedResourcesMap(v map[string]FailureInfo) *UntagResourcesOutput {
 	s.FailedResourcesMap = v
 	return s
 }

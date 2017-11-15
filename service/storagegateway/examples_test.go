@@ -79,9 +79,9 @@ func ExampleStorageGateway_AddCacheRequest_shared00() {
 
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.AddCacheInput{
-		DiskIds: []*string{
-			aws.String("pci-0000:03:00.0-scsi-0:0:0:0"),
-			aws.String("pci-0000:03:00.0-scsi-0:0:1:0"),
+		DiskIds: []string{
+			"pci-0000:03:00.0-scsi-0:0:0:0",
+			"pci-0000:03:00.0-scsi-0:0:1:0",
 		},
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
@@ -121,7 +121,7 @@ func ExampleStorageGateway_AddTagsToResourceRequest_shared00() {
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.AddTagsToResourceInput{
 		ResourceARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B"),
-		Tags: []*storagegateway.Tag{
+		Tags: []storagegateway.Tag{
 			{
 				Key:   aws.String("Dev Gatgeway Region"),
 				Value: aws.String("East Coast"),
@@ -163,9 +163,9 @@ func ExampleStorageGateway_AddUploadBufferRequest_shared00() {
 
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.AddUploadBufferInput{
-		DiskIds: []*string{
-			aws.String("pci-0000:03:00.0-scsi-0:0:0:0"),
-			aws.String("pci-0000:03:00.0-scsi-0:0:1:0"),
+		DiskIds: []string{
+			"pci-0000:03:00.0-scsi-0:0:0:0",
+			"pci-0000:03:00.0-scsi-0:0:1:0",
 		},
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
@@ -205,9 +205,9 @@ func ExampleStorageGateway_AddWorkingStorageRequest_shared00() {
 
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.AddWorkingStorageInput{
-		DiskIds: []*string{
-			aws.String("pci-0000:03:00.0-scsi-0:0:0:0"),
-			aws.String("pci-0000:03:00.0-scsi-0:0:1:0"),
+		DiskIds: []string{
+			"pci-0000:03:00.0-scsi-0:0:0:0",
+			"pci-0000:03:00.0-scsi-0:0:1:0",
 		},
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
@@ -908,8 +908,8 @@ func ExampleStorageGateway_DescribeCachediSCSIVolumesRequest_shared00() {
 
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.DescribeCachediSCSIVolumesInput{
-		VolumeARNs: []*string{
-			aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
+		VolumeARNs: []string{
+			"arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB",
 		},
 	}
 
@@ -1100,8 +1100,8 @@ func ExampleStorageGateway_DescribeStorediSCSIVolumesRequest_shared00() {
 
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.DescribeStorediSCSIVolumesInput{
-		VolumeARNs: []*string{
-			aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
+		VolumeARNs: []string{
+			"arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB",
 		},
 	}
 
@@ -1141,9 +1141,9 @@ func ExampleStorageGateway_DescribeTapeArchivesRequest_shared00() {
 	input := &storagegateway.DescribeTapeArchivesInput{
 		Limit:  aws.Int64(123),
 		Marker: aws.String("1"),
-		TapeARNs: []*string{
-			aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/AM08A1AD"),
-			aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"),
+		TapeARNs: []string{
+			"arn:aws:storagegateway:us-east-1:999999999999:tape/AM08A1AD",
+			"arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4",
 		},
 	}
 
@@ -1225,9 +1225,9 @@ func ExampleStorageGateway_DescribeTapesRequest_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		Limit:      aws.Int64(2),
 		Marker:     aws.String("1"),
-		TapeARNs: []*string{
-			aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/TEST04A2A1"),
-			aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/TEST05A2A0"),
+		TapeARNs: []string{
+			"arn:aws:storagegateway:us-east-1:999999999999:tape/TEST04A2A1",
+			"arn:aws:storagegateway:us-east-1:999999999999:tape/TEST05A2A0",
 		},
 	}
 
@@ -1653,9 +1653,9 @@ func ExampleStorageGateway_RemoveTagsFromResourceRequest_shared00() {
 	svc := storagegateway.New(cfg)
 	input := &storagegateway.RemoveTagsFromResourceInput{
 		ResourceARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B"),
-		TagKeys: []*string{
-			aws.String("Dev Gatgeway Region"),
-			aws.String("East Coast"),
+		TagKeys: []string{
+			"Dev Gatgeway Region",
+			"East Coast",
 		},
 	}
 

@@ -4154,7 +4154,7 @@ func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunction
 type Action struct {
 	_ struct{} `type:"structure"`
 
-	Arguments map[string]*string `type:"map"`
+	Arguments map[string]string `type:"map"`
 
 	JobName *string `min:"1" type:"string"`
 }
@@ -4183,7 +4183,7 @@ func (s *Action) Validate() error {
 }
 
 // SetArguments sets the Arguments field's value.
-func (s *Action) SetArguments(v map[string]*string) *Action {
+func (s *Action) SetArguments(v map[string]string) *Action {
 	s.Arguments = v
 	return s
 }
@@ -4210,7 +4210,7 @@ type BatchCreatePartitionInput struct {
 	// A list of PartitionInput structures that define the partitions to be created.
 	//
 	// PartitionInputList is a required field
-	PartitionInputList []*PartitionInput `type:"list" required:"true"`
+	PartitionInputList []PartitionInput `type:"list" required:"true"`
 
 	// The name of the metadata table in which the partition is to be created.
 	//
@@ -4254,9 +4254,6 @@ func (s *BatchCreatePartitionInput) Validate() error {
 	}
 	if s.PartitionInputList != nil {
 		for i, v := range s.PartitionInputList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionInputList", i), err.(aws.ErrInvalidParams))
 			}
@@ -4282,7 +4279,7 @@ func (s *BatchCreatePartitionInput) SetDatabaseName(v string) *BatchCreatePartit
 }
 
 // SetPartitionInputList sets the PartitionInputList field's value.
-func (s *BatchCreatePartitionInput) SetPartitionInputList(v []*PartitionInput) *BatchCreatePartitionInput {
+func (s *BatchCreatePartitionInput) SetPartitionInputList(v []PartitionInput) *BatchCreatePartitionInput {
 	s.PartitionInputList = v
 	return s
 }
@@ -4298,7 +4295,7 @@ type BatchCreatePartitionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Errors encountered when trying to create the requested partitions.
-	Errors []*PartitionError `type:"list"`
+	Errors []PartitionError `type:"list"`
 }
 
 // String returns the string representation
@@ -4312,7 +4309,7 @@ func (s BatchCreatePartitionOutput) GoString() string {
 }
 
 // SetErrors sets the Errors field's value.
-func (s *BatchCreatePartitionOutput) SetErrors(v []*PartitionError) *BatchCreatePartitionOutput {
+func (s *BatchCreatePartitionOutput) SetErrors(v []PartitionError) *BatchCreatePartitionOutput {
 	s.Errors = v
 	return s
 }
@@ -4328,7 +4325,7 @@ type BatchDeleteConnectionInput struct {
 	// A list of names of the connections to delete.
 	//
 	// ConnectionNameList is a required field
-	ConnectionNameList []*string `type:"list" required:"true"`
+	ConnectionNameList []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4365,7 +4362,7 @@ func (s *BatchDeleteConnectionInput) SetCatalogId(v string) *BatchDeleteConnecti
 }
 
 // SetConnectionNameList sets the ConnectionNameList field's value.
-func (s *BatchDeleteConnectionInput) SetConnectionNameList(v []*string) *BatchDeleteConnectionInput {
+func (s *BatchDeleteConnectionInput) SetConnectionNameList(v []string) *BatchDeleteConnectionInput {
 	s.ConnectionNameList = v
 	return s
 }
@@ -4376,10 +4373,10 @@ type BatchDeleteConnectionOutput struct {
 
 	// A map of the names of connections that were not successfully deleted to error
 	// details.
-	Errors map[string]*ErrorDetail `type:"map"`
+	Errors map[string]ErrorDetail `type:"map"`
 
 	// A list of names of the connection definitions that were successfully deleted.
-	Succeeded []*string `type:"list"`
+	Succeeded []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4393,13 +4390,13 @@ func (s BatchDeleteConnectionOutput) GoString() string {
 }
 
 // SetErrors sets the Errors field's value.
-func (s *BatchDeleteConnectionOutput) SetErrors(v map[string]*ErrorDetail) *BatchDeleteConnectionOutput {
+func (s *BatchDeleteConnectionOutput) SetErrors(v map[string]ErrorDetail) *BatchDeleteConnectionOutput {
 	s.Errors = v
 	return s
 }
 
 // SetSucceeded sets the Succeeded field's value.
-func (s *BatchDeleteConnectionOutput) SetSucceeded(v []*string) *BatchDeleteConnectionOutput {
+func (s *BatchDeleteConnectionOutput) SetSucceeded(v []string) *BatchDeleteConnectionOutput {
 	s.Succeeded = v
 	return s
 }
@@ -4420,7 +4417,7 @@ type BatchDeletePartitionInput struct {
 	// A list of PartitionInput structures that define the partitions to be deleted.
 	//
 	// PartitionsToDelete is a required field
-	PartitionsToDelete []*PartitionValueList `type:"list" required:"true"`
+	PartitionsToDelete []PartitionValueList `type:"list" required:"true"`
 
 	// The name of the table where the partitions to be deleted is located.
 	//
@@ -4464,9 +4461,6 @@ func (s *BatchDeletePartitionInput) Validate() error {
 	}
 	if s.PartitionsToDelete != nil {
 		for i, v := range s.PartitionsToDelete {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToDelete", i), err.(aws.ErrInvalidParams))
 			}
@@ -4492,7 +4486,7 @@ func (s *BatchDeletePartitionInput) SetDatabaseName(v string) *BatchDeletePartit
 }
 
 // SetPartitionsToDelete sets the PartitionsToDelete field's value.
-func (s *BatchDeletePartitionInput) SetPartitionsToDelete(v []*PartitionValueList) *BatchDeletePartitionInput {
+func (s *BatchDeletePartitionInput) SetPartitionsToDelete(v []PartitionValueList) *BatchDeletePartitionInput {
 	s.PartitionsToDelete = v
 	return s
 }
@@ -4508,7 +4502,7 @@ type BatchDeletePartitionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Errors encountered when trying to delete the requested partitions.
-	Errors []*PartitionError `type:"list"`
+	Errors []PartitionError `type:"list"`
 }
 
 // String returns the string representation
@@ -4522,7 +4516,7 @@ func (s BatchDeletePartitionOutput) GoString() string {
 }
 
 // SetErrors sets the Errors field's value.
-func (s *BatchDeletePartitionOutput) SetErrors(v []*PartitionError) *BatchDeletePartitionOutput {
+func (s *BatchDeletePartitionOutput) SetErrors(v []PartitionError) *BatchDeletePartitionOutput {
 	s.Errors = v
 	return s
 }
@@ -4543,7 +4537,7 @@ type BatchDeleteTableInput struct {
 	// A list of the table to delete.
 	//
 	// TablesToDelete is a required field
-	TablesToDelete []*string `type:"list" required:"true"`
+	TablesToDelete []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4593,7 +4587,7 @@ func (s *BatchDeleteTableInput) SetDatabaseName(v string) *BatchDeleteTableInput
 }
 
 // SetTablesToDelete sets the TablesToDelete field's value.
-func (s *BatchDeleteTableInput) SetTablesToDelete(v []*string) *BatchDeleteTableInput {
+func (s *BatchDeleteTableInput) SetTablesToDelete(v []string) *BatchDeleteTableInput {
 	s.TablesToDelete = v
 	return s
 }
@@ -4603,7 +4597,7 @@ type BatchDeleteTableOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of errors encountered in attempting to delete the specified tables.
-	Errors []*TableError `type:"list"`
+	Errors []TableError `type:"list"`
 }
 
 // String returns the string representation
@@ -4617,7 +4611,7 @@ func (s BatchDeleteTableOutput) GoString() string {
 }
 
 // SetErrors sets the Errors field's value.
-func (s *BatchDeleteTableOutput) SetErrors(v []*TableError) *BatchDeleteTableOutput {
+func (s *BatchDeleteTableOutput) SetErrors(v []TableError) *BatchDeleteTableOutput {
 	s.Errors = v
 	return s
 }
@@ -4638,7 +4632,7 @@ type BatchGetPartitionInput struct {
 	// A list of partition values identifying the partitions to retrieve.
 	//
 	// PartitionsToGet is a required field
-	PartitionsToGet []*PartitionValueList `type:"list" required:"true"`
+	PartitionsToGet []PartitionValueList `type:"list" required:"true"`
 
 	// The name of the partitions' table.
 	//
@@ -4682,9 +4676,6 @@ func (s *BatchGetPartitionInput) Validate() error {
 	}
 	if s.PartitionsToGet != nil {
 		for i, v := range s.PartitionsToGet {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToGet", i), err.(aws.ErrInvalidParams))
 			}
@@ -4710,7 +4701,7 @@ func (s *BatchGetPartitionInput) SetDatabaseName(v string) *BatchGetPartitionInp
 }
 
 // SetPartitionsToGet sets the PartitionsToGet field's value.
-func (s *BatchGetPartitionInput) SetPartitionsToGet(v []*PartitionValueList) *BatchGetPartitionInput {
+func (s *BatchGetPartitionInput) SetPartitionsToGet(v []PartitionValueList) *BatchGetPartitionInput {
 	s.PartitionsToGet = v
 	return s
 }
@@ -4726,11 +4717,11 @@ type BatchGetPartitionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the requested partitions.
-	Partitions []*Partition `type:"list"`
+	Partitions []Partition `type:"list"`
 
 	// A list of the partition values in the request for which partions were not
 	// returned.
-	UnprocessedKeys []*PartitionValueList `type:"list"`
+	UnprocessedKeys []PartitionValueList `type:"list"`
 }
 
 // String returns the string representation
@@ -4744,13 +4735,13 @@ func (s BatchGetPartitionOutput) GoString() string {
 }
 
 // SetPartitions sets the Partitions field's value.
-func (s *BatchGetPartitionOutput) SetPartitions(v []*Partition) *BatchGetPartitionOutput {
+func (s *BatchGetPartitionOutput) SetPartitions(v []Partition) *BatchGetPartitionOutput {
 	s.Partitions = v
 	return s
 }
 
 // SetUnprocessedKeys sets the UnprocessedKeys field's value.
-func (s *BatchGetPartitionOutput) SetUnprocessedKeys(v []*PartitionValueList) *BatchGetPartitionOutput {
+func (s *BatchGetPartitionOutput) SetUnprocessedKeys(v []PartitionValueList) *BatchGetPartitionOutput {
 	s.UnprocessedKeys = v
 	return s
 }
@@ -4968,7 +4959,7 @@ type CodeGenNode struct {
 	// Properties of the node, in the form of name-value pairs.
 	//
 	// Args is a required field
-	Args []*CodeGenNodeArg `type:"list" required:"true"`
+	Args []CodeGenNodeArg `type:"list" required:"true"`
 
 	// A node identifier that is unique within the node's graph.
 	//
@@ -5014,9 +5005,6 @@ func (s *CodeGenNode) Validate() error {
 	}
 	if s.Args != nil {
 		for i, v := range s.Args {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Args", i), err.(aws.ErrInvalidParams))
 			}
@@ -5030,7 +5018,7 @@ func (s *CodeGenNode) Validate() error {
 }
 
 // SetArgs sets the Args field's value.
-func (s *CodeGenNode) SetArgs(v []*CodeGenNodeArg) *CodeGenNode {
+func (s *CodeGenNode) SetArgs(v []CodeGenNodeArg) *CodeGenNode {
 	s.Args = v
 	return s
 }
@@ -5238,7 +5226,7 @@ type Connection struct {
 	_ struct{} `type:"structure"`
 
 	// A list of key-value pairs used as parameters for this connection.
-	ConnectionProperties map[string]*string `type:"map"`
+	ConnectionProperties map[string]string `type:"map"`
 
 	// The type of the connection.
 	ConnectionType ConnectionType `type:"string"`
@@ -5256,7 +5244,7 @@ type Connection struct {
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of criteria that can be used in selecting this connection.
-	MatchCriteria []*string `type:"list"`
+	MatchCriteria []string `type:"list"`
 
 	// The name of the connection definition.
 	Name *string `min:"1" type:"string"`
@@ -5277,7 +5265,7 @@ func (s Connection) GoString() string {
 }
 
 // SetConnectionProperties sets the ConnectionProperties field's value.
-func (s *Connection) SetConnectionProperties(v map[string]*string) *Connection {
+func (s *Connection) SetConnectionProperties(v map[string]string) *Connection {
 	s.ConnectionProperties = v
 	return s
 }
@@ -5313,7 +5301,7 @@ func (s *Connection) SetLastUpdatedTime(v time.Time) *Connection {
 }
 
 // SetMatchCriteria sets the MatchCriteria field's value.
-func (s *Connection) SetMatchCriteria(v []*string) *Connection {
+func (s *Connection) SetMatchCriteria(v []string) *Connection {
 	s.MatchCriteria = v
 	return s
 }
@@ -5336,7 +5324,7 @@ type ConnectionInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of key-value pairs used as parameters for this connection.
-	ConnectionProperties map[string]*string `type:"map"`
+	ConnectionProperties map[string]string `type:"map"`
 
 	// The type of the connection.
 	ConnectionType ConnectionType `type:"string"`
@@ -5345,7 +5333,7 @@ type ConnectionInput struct {
 	Description *string `type:"string"`
 
 	// A list of criteria that can be used in selecting this connection.
-	MatchCriteria []*string `type:"list"`
+	MatchCriteria []string `type:"list"`
 
 	// The name of the connection.
 	Name *string `min:"1" type:"string"`
@@ -5384,7 +5372,7 @@ func (s *ConnectionInput) Validate() error {
 }
 
 // SetConnectionProperties sets the ConnectionProperties field's value.
-func (s *ConnectionInput) SetConnectionProperties(v map[string]*string) *ConnectionInput {
+func (s *ConnectionInput) SetConnectionProperties(v map[string]string) *ConnectionInput {
 	s.ConnectionProperties = v
 	return s
 }
@@ -5402,7 +5390,7 @@ func (s *ConnectionInput) SetDescription(v string) *ConnectionInput {
 }
 
 // SetMatchCriteria sets the MatchCriteria field's value.
-func (s *ConnectionInput) SetMatchCriteria(v []*string) *ConnectionInput {
+func (s *ConnectionInput) SetMatchCriteria(v []string) *ConnectionInput {
 	s.MatchCriteria = v
 	return s
 }
@@ -5425,7 +5413,7 @@ type ConnectionsList struct {
 	_ struct{} `type:"structure"`
 
 	// A list of connections used by the job.
-	Connections []*string `type:"list"`
+	Connections []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5439,7 +5427,7 @@ func (s ConnectionsList) GoString() string {
 }
 
 // SetConnections sets the Connections field's value.
-func (s *ConnectionsList) SetConnections(v []*string) *ConnectionsList {
+func (s *ConnectionsList) SetConnections(v []string) *ConnectionsList {
 	s.Connections = v
 	return s
 }
@@ -5452,7 +5440,7 @@ type Crawler struct {
 	_ struct{} `type:"structure"`
 
 	// A list of custom Classifiers associated with this Crawler.
-	Classifiers []*string `type:"list"`
+	Classifiers []string `type:"list"`
 
 	// If this Crawler is running, contains the total time elapsed since the last
 	// crawl began.
@@ -5512,7 +5500,7 @@ func (s Crawler) GoString() string {
 }
 
 // SetClassifiers sets the Classifiers field's value.
-func (s *Crawler) SetClassifiers(v []*string) *Crawler {
+func (s *Crawler) SetClassifiers(v []string) *Crawler {
 	s.Classifiers = v
 	return s
 }
@@ -5695,10 +5683,10 @@ type CrawlerTargets struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies JDBC targets.
-	JdbcTargets []*JdbcTarget `type:"list"`
+	JdbcTargets []JdbcTarget `type:"list"`
 
 	// Specifies targets in AWS S3.
-	S3Targets []*S3Target `type:"list"`
+	S3Targets []S3Target `type:"list"`
 }
 
 // String returns the string representation
@@ -5712,13 +5700,13 @@ func (s CrawlerTargets) GoString() string {
 }
 
 // SetJdbcTargets sets the JdbcTargets field's value.
-func (s *CrawlerTargets) SetJdbcTargets(v []*JdbcTarget) *CrawlerTargets {
+func (s *CrawlerTargets) SetJdbcTargets(v []JdbcTarget) *CrawlerTargets {
 	s.JdbcTargets = v
 	return s
 }
 
 // SetS3Targets sets the S3Targets field's value.
-func (s *CrawlerTargets) SetS3Targets(v []*S3Target) *CrawlerTargets {
+func (s *CrawlerTargets) SetS3Targets(v []S3Target) *CrawlerTargets {
 	s.S3Targets = v
 	return s
 }
@@ -5857,7 +5845,7 @@ type CreateCrawlerInput struct {
 	// A list of custom Classifier names that the user has registered. By default,
 	// all AWS classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
-	Classifiers []*string `type:"list"`
+	Classifiers []string `type:"list"`
 
 	// The Glue Database where results will be stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
 	//
@@ -5934,7 +5922,7 @@ func (s *CreateCrawlerInput) Validate() error {
 }
 
 // SetClassifiers sets the Classifiers field's value.
-func (s *CreateCrawlerInput) SetClassifiers(v []*string) *CreateCrawlerInput {
+func (s *CreateCrawlerInput) SetClassifiers(v []string) *CreateCrawlerInput {
 	s.Classifiers = v
 	return s
 }
@@ -6106,7 +6094,7 @@ type CreateDevEndpointInput struct {
 	// Security group IDs for the security groups to be used by the new DevEndpoint.
 	//
 	// SecurityGroupIds is a required field
-	SecurityGroupIds []*string `type:"list" required:"true"`
+	SecurityGroupIds []string `type:"list" required:"true"`
 
 	// The subnet ID for the new DevEndpoint to use.
 	//
@@ -6187,7 +6175,7 @@ func (s *CreateDevEndpointInput) SetRoleArn(v string) *CreateDevEndpointInput {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateDevEndpointInput) SetSecurityGroupIds(v []*string) *CreateDevEndpointInput {
+func (s *CreateDevEndpointInput) SetSecurityGroupIds(v []string) *CreateDevEndpointInput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -6229,7 +6217,7 @@ type CreateDevEndpointOutput struct {
 	RoleArn *string `type:"string"`
 
 	// The security groups assigned to the new DevEndpoint.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The current status of the new DevEndpoint.
 	Status *string `type:"string"`
@@ -6303,7 +6291,7 @@ func (s *CreateDevEndpointOutput) SetRoleArn(v string) *CreateDevEndpointOutput 
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateDevEndpointOutput) SetSecurityGroupIds(v []*string) *CreateDevEndpointOutput {
+func (s *CreateDevEndpointOutput) SetSecurityGroupIds(v []string) *CreateDevEndpointOutput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -6435,7 +6423,7 @@ type CreateJobInput struct {
 	Connections *ConnectionsList `type:"structure"`
 
 	// The default parameters for this job.
-	DefaultArguments map[string]*string `type:"map"`
+	DefaultArguments map[string]string `type:"map"`
 
 	// Description of the job.
 	Description *string `type:"string"`
@@ -6515,7 +6503,7 @@ func (s *CreateJobInput) SetConnections(v *ConnectionsList) *CreateJobInput {
 }
 
 // SetDefaultArguments sets the DefaultArguments field's value.
-func (s *CreateJobInput) SetDefaultArguments(v map[string]*string) *CreateJobInput {
+func (s *CreateJobInput) SetDefaultArguments(v map[string]string) *CreateJobInput {
 	s.DefaultArguments = v
 	return s
 }
@@ -6694,10 +6682,10 @@ type CreateScriptInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the edges in the DAG.
-	DagEdges []*CodeGenEdge `type:"list"`
+	DagEdges []CodeGenEdge `type:"list"`
 
 	// A list of the nodes in the DAG.
-	DagNodes []*CodeGenNode `type:"list"`
+	DagNodes []CodeGenNode `type:"list"`
 }
 
 // String returns the string representation
@@ -6715,9 +6703,6 @@ func (s *CreateScriptInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateScriptInput"}
 	if s.DagEdges != nil {
 		for i, v := range s.DagEdges {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagEdges", i), err.(aws.ErrInvalidParams))
 			}
@@ -6725,9 +6710,6 @@ func (s *CreateScriptInput) Validate() error {
 	}
 	if s.DagNodes != nil {
 		for i, v := range s.DagNodes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagNodes", i), err.(aws.ErrInvalidParams))
 			}
@@ -6741,13 +6723,13 @@ func (s *CreateScriptInput) Validate() error {
 }
 
 // SetDagEdges sets the DagEdges field's value.
-func (s *CreateScriptInput) SetDagEdges(v []*CodeGenEdge) *CreateScriptInput {
+func (s *CreateScriptInput) SetDagEdges(v []CodeGenEdge) *CreateScriptInput {
 	s.DagEdges = v
 	return s
 }
 
 // SetDagNodes sets the DagNodes field's value.
-func (s *CreateScriptInput) SetDagNodes(v []*CodeGenNode) *CreateScriptInput {
+func (s *CreateScriptInput) SetDagNodes(v []CodeGenNode) *CreateScriptInput {
 	s.DagNodes = v
 	return s
 }
@@ -6874,7 +6856,7 @@ type CreateTriggerInput struct {
 	// The actions initiated by this trigger when it fires.
 	//
 	// Actions is a required field
-	Actions []*Action `type:"list" required:"true"`
+	Actions []Action `type:"list" required:"true"`
 
 	// A description of the new trigger.
 	Description *string `type:"string"`
@@ -6925,9 +6907,6 @@ func (s *CreateTriggerInput) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -6946,7 +6925,7 @@ func (s *CreateTriggerInput) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *CreateTriggerInput) SetActions(v []*Action) *CreateTriggerInput {
+func (s *CreateTriggerInput) SetActions(v []Action) *CreateTriggerInput {
 	s.Actions = v
 	return s
 }
@@ -7117,7 +7096,7 @@ type Database struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A list of key-value pairs that define parameters and properties of the database.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -7155,7 +7134,7 @@ func (s *Database) SetName(v string) *Database {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *Database) SetParameters(v map[string]*string) *Database {
+func (s *Database) SetParameters(v map[string]string) *Database {
 	s.Parameters = v
 	return s
 }
@@ -7177,7 +7156,7 @@ type DatabaseInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A list of key-value pairs that define parameters and properties of the database.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -7229,7 +7208,7 @@ func (s *DatabaseInput) SetName(v string) *DatabaseInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DatabaseInput) SetParameters(v map[string]*string) *DatabaseInput {
+func (s *DatabaseInput) SetParameters(v map[string]string) *DatabaseInput {
 	s.Parameters = v
 	return s
 }
@@ -7630,7 +7609,7 @@ type DeletePartitionInput struct {
 	// The values that define the partition.
 	//
 	// PartitionValues is a required field
-	PartitionValues []*string `type:"list" required:"true"`
+	PartitionValues []string `type:"list" required:"true"`
 
 	// The name of the table where the partition to be deleted is located.
 	//
@@ -7692,7 +7671,7 @@ func (s *DeletePartitionInput) SetDatabaseName(v string) *DeletePartitionInput {
 }
 
 // SetPartitionValues sets the PartitionValues field's value.
-func (s *DeletePartitionInput) SetPartitionValues(v []*string) *DeletePartitionInput {
+func (s *DeletePartitionInput) SetPartitionValues(v []string) *DeletePartitionInput {
 	s.PartitionValues = v
 	return s
 }
@@ -8007,7 +7986,7 @@ type DevEndpoint struct {
 	RoleArn *string `type:"string"`
 
 	// A list of security group identifiers used in this DevEndpoint.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The current status of this DevEndpoint.
 	Status *string `type:"string"`
@@ -8105,7 +8084,7 @@ func (s *DevEndpoint) SetRoleArn(v string) *DevEndpoint {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *DevEndpoint) SetSecurityGroupIds(v []*string) *DevEndpoint {
+func (s *DevEndpoint) SetSecurityGroupIds(v []string) *DevEndpoint {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -8409,7 +8388,7 @@ type GetClassifiersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The requested list of Classifier objects.
-	Classifiers []*Classifier `type:"list"`
+	Classifiers []Classifier `type:"list"`
 
 	// A continuation token.
 	NextToken *string `type:"string"`
@@ -8426,7 +8405,7 @@ func (s GetClassifiersOutput) GoString() string {
 }
 
 // SetClassifiers sets the Classifiers field's value.
-func (s *GetClassifiersOutput) SetClassifiers(v []*Classifier) *GetClassifiersOutput {
+func (s *GetClassifiersOutput) SetClassifiers(v []Classifier) *GetClassifiersOutput {
 	s.Classifiers = v
 	return s
 }
@@ -8527,7 +8506,7 @@ type GetConnectionsFilter struct {
 
 	// A criteria string that must match the criteria recorded in the connection
 	// definition for that connection definition to be returned.
-	MatchCriteria []*string `type:"list"`
+	MatchCriteria []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8547,7 +8526,7 @@ func (s *GetConnectionsFilter) SetConnectionType(v ConnectionType) *GetConnectio
 }
 
 // SetMatchCriteria sets the MatchCriteria field's value.
-func (s *GetConnectionsFilter) SetMatchCriteria(v []*string) *GetConnectionsFilter {
+func (s *GetConnectionsFilter) SetMatchCriteria(v []string) *GetConnectionsFilter {
 	s.MatchCriteria = v
 	return s
 }
@@ -8625,7 +8604,7 @@ type GetConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of requested connection definitions.
-	ConnectionList []*Connection `type:"list"`
+	ConnectionList []Connection `type:"list"`
 
 	// A continuation token, if the list of connections returned does not include
 	// the last of the filtered connections.
@@ -8643,7 +8622,7 @@ func (s GetConnectionsOutput) GoString() string {
 }
 
 // SetConnectionList sets the ConnectionList field's value.
-func (s *GetConnectionsOutput) SetConnectionList(v []*Connection) *GetConnectionsOutput {
+func (s *GetConnectionsOutput) SetConnectionList(v []Connection) *GetConnectionsOutput {
 	s.ConnectionList = v
 	return s
 }
@@ -8702,7 +8681,7 @@ type GetCrawlerMetricsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the names of crawlers about which to retrieve metrics.
-	CrawlerNameList []*string `type:"list"`
+	CrawlerNameList []string `type:"list"`
 
 	// The maximum size of a list to return.
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -8735,7 +8714,7 @@ func (s *GetCrawlerMetricsInput) Validate() error {
 }
 
 // SetCrawlerNameList sets the CrawlerNameList field's value.
-func (s *GetCrawlerMetricsInput) SetCrawlerNameList(v []*string) *GetCrawlerMetricsInput {
+func (s *GetCrawlerMetricsInput) SetCrawlerNameList(v []string) *GetCrawlerMetricsInput {
 	s.CrawlerNameList = v
 	return s
 }
@@ -8757,7 +8736,7 @@ type GetCrawlerMetricsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of metrics for the specified crawler.
-	CrawlerMetricsList []*CrawlerMetrics `type:"list"`
+	CrawlerMetricsList []CrawlerMetrics `type:"list"`
 
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
@@ -8775,7 +8754,7 @@ func (s GetCrawlerMetricsOutput) GoString() string {
 }
 
 // SetCrawlerMetricsList sets the CrawlerMetricsList field's value.
-func (s *GetCrawlerMetricsOutput) SetCrawlerMetricsList(v []*CrawlerMetrics) *GetCrawlerMetricsOutput {
+func (s *GetCrawlerMetricsOutput) SetCrawlerMetricsList(v []CrawlerMetrics) *GetCrawlerMetricsOutput {
 	s.CrawlerMetricsList = v
 	return s
 }
@@ -8861,7 +8840,7 @@ type GetCrawlersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Crawler metadata.
-	Crawlers []*Crawler `type:"list"`
+	Crawlers []Crawler `type:"list"`
 
 	// A continuation token, if the returned list has not reached the end of those
 	// defined in this customer account.
@@ -8879,7 +8858,7 @@ func (s GetCrawlersOutput) GoString() string {
 }
 
 // SetCrawlers sets the Crawlers field's value.
-func (s *GetCrawlersOutput) SetCrawlers(v []*Crawler) *GetCrawlersOutput {
+func (s *GetCrawlersOutput) SetCrawlers(v []Crawler) *GetCrawlersOutput {
 	s.Crawlers = v
 	return s
 }
@@ -9036,7 +9015,7 @@ type GetDatabasesOutput struct {
 	// A list of Database objects from the specified catalog.
 	//
 	// DatabaseList is a required field
-	DatabaseList []*Database `type:"list" required:"true"`
+	DatabaseList []Database `type:"list" required:"true"`
 
 	// A continuation token for paginating the returned list of tokens, returned
 	// if the current segment of the list is not the last.
@@ -9054,7 +9033,7 @@ func (s GetDatabasesOutput) GoString() string {
 }
 
 // SetDatabaseList sets the DatabaseList field's value.
-func (s *GetDatabasesOutput) SetDatabaseList(v []*Database) *GetDatabasesOutput {
+func (s *GetDatabasesOutput) SetDatabaseList(v []Database) *GetDatabasesOutput {
 	s.DatabaseList = v
 	return s
 }
@@ -9094,10 +9073,10 @@ type GetDataflowGraphOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the edges in the resulting DAG.
-	DagEdges []*CodeGenEdge `type:"list"`
+	DagEdges []CodeGenEdge `type:"list"`
 
 	// A list of the nodes in the resulting DAG.
-	DagNodes []*CodeGenNode `type:"list"`
+	DagNodes []CodeGenNode `type:"list"`
 }
 
 // String returns the string representation
@@ -9111,13 +9090,13 @@ func (s GetDataflowGraphOutput) GoString() string {
 }
 
 // SetDagEdges sets the DagEdges field's value.
-func (s *GetDataflowGraphOutput) SetDagEdges(v []*CodeGenEdge) *GetDataflowGraphOutput {
+func (s *GetDataflowGraphOutput) SetDagEdges(v []CodeGenEdge) *GetDataflowGraphOutput {
 	s.DagEdges = v
 	return s
 }
 
 // SetDagNodes sets the DagNodes field's value.
-func (s *GetDataflowGraphOutput) SetDagNodes(v []*CodeGenNode) *GetDataflowGraphOutput {
+func (s *GetDataflowGraphOutput) SetDagNodes(v []CodeGenNode) *GetDataflowGraphOutput {
 	s.DagNodes = v
 	return s
 }
@@ -9237,7 +9216,7 @@ type GetDevEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of DevEndpoint definitions.
-	DevEndpoints []*DevEndpoint `type:"list"`
+	DevEndpoints []DevEndpoint `type:"list"`
 
 	// A continuation token, if not all DevEndpoint definitions have yet been returned.
 	NextToken *string `type:"string"`
@@ -9254,7 +9233,7 @@ func (s GetDevEndpointsOutput) GoString() string {
 }
 
 // SetDevEndpoints sets the DevEndpoints field's value.
-func (s *GetDevEndpointsOutput) SetDevEndpoints(v []*DevEndpoint) *GetDevEndpointsOutput {
+func (s *GetDevEndpointsOutput) SetDevEndpoints(v []DevEndpoint) *GetDevEndpointsOutput {
 	s.DevEndpoints = v
 	return s
 }
@@ -9495,7 +9474,7 @@ type GetJobRunsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of job-run metatdata objects.
-	JobRuns []*JobRun `type:"list"`
+	JobRuns []JobRun `type:"list"`
 
 	// A continuation token, if not all reequested job runs have been returned.
 	NextToken *string `type:"string"`
@@ -9512,7 +9491,7 @@ func (s GetJobRunsOutput) GoString() string {
 }
 
 // SetJobRuns sets the JobRuns field's value.
-func (s *GetJobRunsOutput) SetJobRuns(v []*JobRun) *GetJobRunsOutput {
+func (s *GetJobRunsOutput) SetJobRuns(v []JobRun) *GetJobRunsOutput {
 	s.JobRuns = v
 	return s
 }
@@ -9574,7 +9553,7 @@ type GetJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of jobs.
-	Jobs []*Job `type:"list"`
+	Jobs []Job `type:"list"`
 
 	// A continuation token, if not all jobs have yet been returned.
 	NextToken *string `type:"string"`
@@ -9591,7 +9570,7 @@ func (s GetJobsOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *GetJobsOutput) SetJobs(v []*Job) *GetJobsOutput {
+func (s *GetJobsOutput) SetJobs(v []Job) *GetJobsOutput {
 	s.Jobs = v
 	return s
 }
@@ -9610,7 +9589,7 @@ type GetMappingInput struct {
 	Location *Location `type:"structure"`
 
 	// A list of target tables.
-	Sinks []*CatalogEntry `type:"list"`
+	Sinks []CatalogEntry `type:"list"`
 
 	// Specifies the source table.
 	//
@@ -9642,9 +9621,6 @@ func (s *GetMappingInput) Validate() error {
 	}
 	if s.Sinks != nil {
 		for i, v := range s.Sinks {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(aws.ErrInvalidParams))
 			}
@@ -9669,7 +9645,7 @@ func (s *GetMappingInput) SetLocation(v *Location) *GetMappingInput {
 }
 
 // SetSinks sets the Sinks field's value.
-func (s *GetMappingInput) SetSinks(v []*CatalogEntry) *GetMappingInput {
+func (s *GetMappingInput) SetSinks(v []CatalogEntry) *GetMappingInput {
 	s.Sinks = v
 	return s
 }
@@ -9687,7 +9663,7 @@ type GetMappingOutput struct {
 	// A list of mappings to the specified targets.
 	//
 	// Mapping is a required field
-	Mapping []*MappingEntry `type:"list" required:"true"`
+	Mapping []MappingEntry `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9701,7 +9677,7 @@ func (s GetMappingOutput) GoString() string {
 }
 
 // SetMapping sets the Mapping field's value.
-func (s *GetMappingOutput) SetMapping(v []*MappingEntry) *GetMappingOutput {
+func (s *GetMappingOutput) SetMapping(v []MappingEntry) *GetMappingOutput {
 	s.Mapping = v
 	return s
 }
@@ -9722,7 +9698,7 @@ type GetPartitionInput struct {
 	// The values that define the partition.
 	//
 	// PartitionValues is a required field
-	PartitionValues []*string `type:"list" required:"true"`
+	PartitionValues []string `type:"list" required:"true"`
 
 	// The name of the partition's table.
 	//
@@ -9784,7 +9760,7 @@ func (s *GetPartitionInput) SetDatabaseName(v string) *GetPartitionInput {
 }
 
 // SetPartitionValues sets the PartitionValues field's value.
-func (s *GetPartitionInput) SetPartitionValues(v []*string) *GetPartitionInput {
+func (s *GetPartitionInput) SetPartitionValues(v []string) *GetPartitionInput {
 	s.PartitionValues = v
 	return s
 }
@@ -9946,7 +9922,7 @@ type GetPartitionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of requested partitions.
-	Partitions []*Partition `type:"list"`
+	Partitions []Partition `type:"list"`
 }
 
 // String returns the string representation
@@ -9966,7 +9942,7 @@ func (s *GetPartitionsOutput) SetNextToken(v string) *GetPartitionsOutput {
 }
 
 // SetPartitions sets the Partitions field's value.
-func (s *GetPartitionsOutput) SetPartitions(v []*Partition) *GetPartitionsOutput {
+func (s *GetPartitionsOutput) SetPartitions(v []Partition) *GetPartitionsOutput {
 	s.Partitions = v
 	return s
 }
@@ -9981,10 +9957,10 @@ type GetPlanInput struct {
 	// The list of mappings from a source table to target tables.
 	//
 	// Mapping is a required field
-	Mapping []*MappingEntry `type:"list" required:"true"`
+	Mapping []MappingEntry `type:"list" required:"true"`
 
 	// The target tables.
-	Sinks []*CatalogEntry `type:"list"`
+	Sinks []CatalogEntry `type:"list"`
 
 	// The source table.
 	//
@@ -10020,9 +9996,6 @@ func (s *GetPlanInput) Validate() error {
 	}
 	if s.Sinks != nil {
 		for i, v := range s.Sinks {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(aws.ErrInvalidParams))
 			}
@@ -10047,13 +10020,13 @@ func (s *GetPlanInput) SetLocation(v *Location) *GetPlanInput {
 }
 
 // SetMapping sets the Mapping field's value.
-func (s *GetPlanInput) SetMapping(v []*MappingEntry) *GetPlanInput {
+func (s *GetPlanInput) SetMapping(v []MappingEntry) *GetPlanInput {
 	s.Mapping = v
 	return s
 }
 
 // SetSinks sets the Sinks field's value.
-func (s *GetPlanInput) SetSinks(v []*CatalogEntry) *GetPlanInput {
+func (s *GetPlanInput) SetSinks(v []CatalogEntry) *GetPlanInput {
 	s.Sinks = v
 	return s
 }
@@ -10290,7 +10263,7 @@ type GetTableVersionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of strings identifying available versions of the specified table.
-	TableVersions []*TableVersion `type:"list"`
+	TableVersions []TableVersion `type:"list"`
 }
 
 // String returns the string representation
@@ -10310,7 +10283,7 @@ func (s *GetTableVersionsOutput) SetNextToken(v string) *GetTableVersionsOutput 
 }
 
 // SetTableVersions sets the TableVersions field's value.
-func (s *GetTableVersionsOutput) SetTableVersions(v []*TableVersion) *GetTableVersionsOutput {
+func (s *GetTableVersionsOutput) SetTableVersions(v []TableVersion) *GetTableVersionsOutput {
 	s.TableVersions = v
 	return s
 }
@@ -10410,7 +10383,7 @@ type GetTablesOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of the requested Table objects.
-	TableList []*Table `type:"list"`
+	TableList []Table `type:"list"`
 }
 
 // String returns the string representation
@@ -10430,7 +10403,7 @@ func (s *GetTablesOutput) SetNextToken(v string) *GetTablesOutput {
 }
 
 // SetTableList sets the TableList field's value.
-func (s *GetTablesOutput) SetTableList(v []*Table) *GetTablesOutput {
+func (s *GetTablesOutput) SetTableList(v []Table) *GetTablesOutput {
 	s.TableList = v
 	return s
 }
@@ -10568,7 +10541,7 @@ type GetTriggersOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of triggers for the specified job.
-	Triggers []*Trigger `type:"list"`
+	Triggers []Trigger `type:"list"`
 }
 
 // String returns the string representation
@@ -10588,7 +10561,7 @@ func (s *GetTriggersOutput) SetNextToken(v string) *GetTriggersOutput {
 }
 
 // SetTriggers sets the Triggers field's value.
-func (s *GetTriggersOutput) SetTriggers(v []*Trigger) *GetTriggersOutput {
+func (s *GetTriggersOutput) SetTriggers(v []Trigger) *GetTriggersOutput {
 	s.Triggers = v
 	return s
 }
@@ -10796,7 +10769,7 @@ type GetUserDefinedFunctionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of requested function definitions.
-	UserDefinedFunctions []*UserDefinedFunction `type:"list"`
+	UserDefinedFunctions []UserDefinedFunction `type:"list"`
 }
 
 // String returns the string representation
@@ -10816,7 +10789,7 @@ func (s *GetUserDefinedFunctionsOutput) SetNextToken(v string) *GetUserDefinedFu
 }
 
 // SetUserDefinedFunctions sets the UserDefinedFunctions field's value.
-func (s *GetUserDefinedFunctionsOutput) SetUserDefinedFunctions(v []*UserDefinedFunction) *GetUserDefinedFunctionsOutput {
+func (s *GetUserDefinedFunctionsOutput) SetUserDefinedFunctions(v []UserDefinedFunction) *GetUserDefinedFunctionsOutput {
 	s.UserDefinedFunctions = v
 	return s
 }
@@ -10969,7 +10942,7 @@ type JdbcTarget struct {
 	ConnectionName *string `type:"string"`
 
 	// A list of items to exclude from the crawl.
-	Exclusions []*string `type:"list"`
+	Exclusions []string `type:"list"`
 
 	// The path of the JDBC target.
 	Path *string `type:"string"`
@@ -10992,7 +10965,7 @@ func (s *JdbcTarget) SetConnectionName(v string) *JdbcTarget {
 }
 
 // SetExclusions sets the Exclusions field's value.
-func (s *JdbcTarget) SetExclusions(v []*string) *JdbcTarget {
+func (s *JdbcTarget) SetExclusions(v []string) *JdbcTarget {
 	s.Exclusions = v
 	return s
 }
@@ -11021,7 +10994,7 @@ type Job struct {
 	CreatedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The default parameters for this job.
-	DefaultArguments map[string]*string `type:"map"`
+	DefaultArguments map[string]string `type:"map"`
 
 	// Description of this job.
 	Description *string `type:"string"`
@@ -11081,7 +11054,7 @@ func (s *Job) SetCreatedOn(v time.Time) *Job {
 }
 
 // SetDefaultArguments sets the DefaultArguments field's value.
-func (s *Job) SetDefaultArguments(v map[string]*string) *Job {
+func (s *Job) SetDefaultArguments(v map[string]string) *Job {
 	s.DefaultArguments = v
 	return s
 }
@@ -11232,7 +11205,7 @@ type JobRun struct {
 	AllocatedCapacity *int64 `type:"integer"`
 
 	// The job arguments associated with this run.
-	Arguments map[string]*string `type:"map"`
+	Arguments map[string]string `type:"map"`
 
 	// The number or the attempt to run this job.
 	Attempt *int64 `type:"integer"`
@@ -11256,7 +11229,7 @@ type JobRun struct {
 	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of predecessors to this job run.
-	PredecessorRuns []*Predecessor `type:"list"`
+	PredecessorRuns []Predecessor `type:"list"`
 
 	// The ID of the previous run of this job.
 	PreviousRunId *string `min:"1" type:"string"`
@@ -11285,7 +11258,7 @@ func (s *JobRun) SetAllocatedCapacity(v int64) *JobRun {
 }
 
 // SetArguments sets the Arguments field's value.
-func (s *JobRun) SetArguments(v map[string]*string) *JobRun {
+func (s *JobRun) SetArguments(v map[string]string) *JobRun {
 	s.Arguments = v
 	return s
 }
@@ -11333,7 +11306,7 @@ func (s *JobRun) SetLastModifiedOn(v time.Time) *JobRun {
 }
 
 // SetPredecessorRuns sets the PredecessorRuns field's value.
-func (s *JobRun) SetPredecessorRuns(v []*Predecessor) *JobRun {
+func (s *JobRun) SetPredecessorRuns(v []Predecessor) *JobRun {
 	s.PredecessorRuns = v
 	return s
 }
@@ -11371,7 +11344,7 @@ type JobUpdate struct {
 	Connections *ConnectionsList `type:"structure"`
 
 	// The default parameters for this job.
-	DefaultArguments map[string]*string `type:"map"`
+	DefaultArguments map[string]string `type:"map"`
 
 	// Description of the job.
 	Description *string `type:"string"`
@@ -11419,7 +11392,7 @@ func (s *JobUpdate) SetConnections(v *ConnectionsList) *JobUpdate {
 }
 
 // SetDefaultArguments sets the DefaultArguments field's value.
-func (s *JobUpdate) SetDefaultArguments(v map[string]*string) *JobUpdate {
+func (s *JobUpdate) SetDefaultArguments(v map[string]string) *JobUpdate {
 	s.DefaultArguments = v
 	return s
 }
@@ -11530,10 +11503,10 @@ type Location struct {
 	_ struct{} `type:"structure"`
 
 	// A JDBC location.
-	Jdbc []*CodeGenNodeArg `type:"list"`
+	Jdbc []CodeGenNodeArg `type:"list"`
 
 	// An AWS S3 location.
-	S3 []*CodeGenNodeArg `type:"list"`
+	S3 []CodeGenNodeArg `type:"list"`
 }
 
 // String returns the string representation
@@ -11551,9 +11524,6 @@ func (s *Location) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Location"}
 	if s.Jdbc != nil {
 		for i, v := range s.Jdbc {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Jdbc", i), err.(aws.ErrInvalidParams))
 			}
@@ -11561,9 +11531,6 @@ func (s *Location) Validate() error {
 	}
 	if s.S3 != nil {
 		for i, v := range s.S3 {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3", i), err.(aws.ErrInvalidParams))
 			}
@@ -11577,13 +11544,13 @@ func (s *Location) Validate() error {
 }
 
 // SetJdbc sets the Jdbc field's value.
-func (s *Location) SetJdbc(v []*CodeGenNodeArg) *Location {
+func (s *Location) SetJdbc(v []CodeGenNodeArg) *Location {
 	s.Jdbc = v
 	return s
 }
 
 // SetS3 sets the S3 field's value.
-func (s *Location) SetS3(v []*CodeGenNodeArg) *Location {
+func (s *Location) SetS3(v []CodeGenNodeArg) *Location {
 	s.S3 = v
 	return s
 }
@@ -11736,7 +11703,7 @@ type Partition struct {
 	LastAnalyzedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Partition parameters, in the form of a list of key-value pairs.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// Provides information about the physical location where the partition is stored.
 	StorageDescriptor *StorageDescriptor `type:"structure"`
@@ -11745,7 +11712,7 @@ type Partition struct {
 	TableName *string `min:"1" type:"string"`
 
 	// The values of the partition.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -11783,7 +11750,7 @@ func (s *Partition) SetLastAnalyzedTime(v time.Time) *Partition {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *Partition) SetParameters(v map[string]*string) *Partition {
+func (s *Partition) SetParameters(v map[string]string) *Partition {
 	s.Parameters = v
 	return s
 }
@@ -11801,7 +11768,7 @@ func (s *Partition) SetTableName(v string) *Partition {
 }
 
 // SetValues sets the Values field's value.
-func (s *Partition) SetValues(v []*string) *Partition {
+func (s *Partition) SetValues(v []string) *Partition {
 	s.Values = v
 	return s
 }
@@ -11815,7 +11782,7 @@ type PartitionError struct {
 	ErrorDetail *ErrorDetail `type:"structure"`
 
 	// The values that define the partition.
-	PartitionValues []*string `type:"list"`
+	PartitionValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -11835,7 +11802,7 @@ func (s *PartitionError) SetErrorDetail(v *ErrorDetail) *PartitionError {
 }
 
 // SetPartitionValues sets the PartitionValues field's value.
-func (s *PartitionError) SetPartitionValues(v []*string) *PartitionError {
+func (s *PartitionError) SetPartitionValues(v []string) *PartitionError {
 	s.PartitionValues = v
 	return s
 }
@@ -11852,13 +11819,13 @@ type PartitionInput struct {
 	LastAnalyzedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Partition parameters, in the form of a list of key-value pairs.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// Provides information about the physical location where the partition is stored.
 	StorageDescriptor *StorageDescriptor `type:"structure"`
 
 	// The values of the partition.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -11899,7 +11866,7 @@ func (s *PartitionInput) SetLastAnalyzedTime(v time.Time) *PartitionInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *PartitionInput) SetParameters(v map[string]*string) *PartitionInput {
+func (s *PartitionInput) SetParameters(v map[string]string) *PartitionInput {
 	s.Parameters = v
 	return s
 }
@@ -11911,7 +11878,7 @@ func (s *PartitionInput) SetStorageDescriptor(v *StorageDescriptor) *PartitionIn
 }
 
 // SetValues sets the Values field's value.
-func (s *PartitionInput) SetValues(v []*string) *PartitionInput {
+func (s *PartitionInput) SetValues(v []string) *PartitionInput {
 	s.Values = v
 	return s
 }
@@ -11921,7 +11888,7 @@ type PartitionValueList struct {
 	_ struct{} `type:"structure"`
 
 	// Values is a required field
-	Values []*string `type:"list" required:"true"`
+	Values []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -11949,7 +11916,7 @@ func (s *PartitionValueList) Validate() error {
 }
 
 // SetValues sets the Values field's value.
-func (s *PartitionValueList) SetValues(v []*string) *PartitionValueList {
+func (s *PartitionValueList) SetValues(v []string) *PartitionValueList {
 	s.Values = v
 	return s
 }
@@ -11963,7 +11930,7 @@ type PhysicalConnectionRequirements struct {
 	AvailabilityZone *string `min:"1" type:"string"`
 
 	// The security group ID list used by the connection.
-	SecurityGroupIdList []*string `type:"list"`
+	SecurityGroupIdList []string `type:"list"`
 
 	// The subnet ID used by the connection.
 	SubnetId *string `min:"1" type:"string"`
@@ -12002,7 +11969,7 @@ func (s *PhysicalConnectionRequirements) SetAvailabilityZone(v string) *Physical
 }
 
 // SetSecurityGroupIdList sets the SecurityGroupIdList field's value.
-func (s *PhysicalConnectionRequirements) SetSecurityGroupIdList(v []*string) *PhysicalConnectionRequirements {
+func (s *PhysicalConnectionRequirements) SetSecurityGroupIdList(v []string) *PhysicalConnectionRequirements {
 	s.SecurityGroupIdList = v
 	return s
 }
@@ -12053,7 +12020,7 @@ type Predicate struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the conditions that determine when the trigger will fire.
-	Conditions []*Condition `type:"list"`
+	Conditions []Condition `type:"list"`
 
 	// Currently "OR" is not supported.
 	Logical Logical `type:"string"`
@@ -12074,9 +12041,6 @@ func (s *Predicate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Predicate"}
 	if s.Conditions != nil {
 		for i, v := range s.Conditions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Conditions", i), err.(aws.ErrInvalidParams))
 			}
@@ -12090,7 +12054,7 @@ func (s *Predicate) Validate() error {
 }
 
 // SetConditions sets the Conditions field's value.
-func (s *Predicate) SetConditions(v []*Condition) *Predicate {
+func (s *Predicate) SetConditions(v []Condition) *Predicate {
 	s.Conditions = v
 	return s
 }
@@ -12218,7 +12182,7 @@ type S3Target struct {
 	_ struct{} `type:"structure"`
 
 	// A list of S3 objects to exclude from the crawl.
-	Exclusions []*string `type:"list"`
+	Exclusions []string `type:"list"`
 
 	// The path to the S3 target.
 	Path *string `type:"string"`
@@ -12235,7 +12199,7 @@ func (s S3Target) GoString() string {
 }
 
 // SetExclusions sets the Exclusions field's value.
-func (s *S3Target) SetExclusions(v []*string) *S3Target {
+func (s *S3Target) SetExclusions(v []string) *S3Target {
 	s.Exclusions = v
 	return s
 }
@@ -12389,7 +12353,7 @@ type SerDeInfo struct {
 	Name *string `min:"1" type:"string"`
 
 	// A list of initialization parameters for the SerDe, in key-value form.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// Usually the class that implements the SerDe. An example is: org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
 	SerializationLibrary *string `min:"1" type:"string"`
@@ -12428,7 +12392,7 @@ func (s *SerDeInfo) SetName(v string) *SerDeInfo {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *SerDeInfo) SetParameters(v map[string]*string) *SerDeInfo {
+func (s *SerDeInfo) SetParameters(v map[string]string) *SerDeInfo {
 	s.Parameters = v
 	return s
 }
@@ -12446,13 +12410,13 @@ type SkewedInfo struct {
 	_ struct{} `type:"structure"`
 
 	// A list of names of columns that contain skewed values.
-	SkewedColumnNames []*string `type:"list"`
+	SkewedColumnNames []string `type:"list"`
 
 	// A mapping of skewed values to the columns that contain them.
-	SkewedColumnValueLocationMaps map[string]*string `type:"map"`
+	SkewedColumnValueLocationMaps map[string]string `type:"map"`
 
 	// A list of values that appear so frequently as to be considered skewed.
-	SkewedColumnValues []*string `type:"list"`
+	SkewedColumnValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -12466,19 +12430,19 @@ func (s SkewedInfo) GoString() string {
 }
 
 // SetSkewedColumnNames sets the SkewedColumnNames field's value.
-func (s *SkewedInfo) SetSkewedColumnNames(v []*string) *SkewedInfo {
+func (s *SkewedInfo) SetSkewedColumnNames(v []string) *SkewedInfo {
 	s.SkewedColumnNames = v
 	return s
 }
 
 // SetSkewedColumnValueLocationMaps sets the SkewedColumnValueLocationMaps field's value.
-func (s *SkewedInfo) SetSkewedColumnValueLocationMaps(v map[string]*string) *SkewedInfo {
+func (s *SkewedInfo) SetSkewedColumnValueLocationMaps(v map[string]string) *SkewedInfo {
 	s.SkewedColumnValueLocationMaps = v
 	return s
 }
 
 // SetSkewedColumnValues sets the SkewedColumnValues field's value.
-func (s *SkewedInfo) SetSkewedColumnValues(v []*string) *SkewedInfo {
+func (s *SkewedInfo) SetSkewedColumnValues(v []string) *SkewedInfo {
 	s.SkewedColumnValues = v
 	return s
 }
@@ -12607,7 +12571,7 @@ type StartJobRunInput struct {
 	AllocatedCapacity *int64 `type:"integer"`
 
 	// Specific arguments for this job run.
-	Arguments map[string]*string `type:"map"`
+	Arguments map[string]string `type:"map"`
 
 	// The name of the job to start.
 	//
@@ -12655,7 +12619,7 @@ func (s *StartJobRunInput) SetAllocatedCapacity(v int64) *StartJobRunInput {
 }
 
 // SetArguments sets the Arguments field's value.
-func (s *StartJobRunInput) SetArguments(v map[string]*string) *StartJobRunInput {
+func (s *StartJobRunInput) SetArguments(v map[string]string) *StartJobRunInput {
 	s.Arguments = v
 	return s
 }
@@ -12953,10 +12917,10 @@ type StorageDescriptor struct {
 
 	// A list of reducer grouping columns, clustering columns, and bucketing columns
 	// in the table.
-	BucketColumns []*string `type:"list"`
+	BucketColumns []string `type:"list"`
 
 	// A list of the Columns in the table.
-	Columns []*Column `type:"list"`
+	Columns []Column `type:"list"`
 
 	// True if the data in the table is compressed, or False if not.
 	Compressed *bool `type:"boolean"`
@@ -12978,7 +12942,7 @@ type StorageDescriptor struct {
 	OutputFormat *string `type:"string"`
 
 	// User-supplied properties in key-value form.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// Serialization/deserialization (SerDe) information.
 	SerdeInfo *SerDeInfo `type:"structure"`
@@ -12988,7 +12952,7 @@ type StorageDescriptor struct {
 	SkewedInfo *SkewedInfo `type:"structure"`
 
 	// A list specifying the sort order of each bucket in the table.
-	SortColumns []*Order `type:"list"`
+	SortColumns []Order `type:"list"`
 
 	// True if the table data is stored in subdirectories, or False if not.
 	StoredAsSubDirectories *bool `type:"boolean"`
@@ -13009,9 +12973,6 @@ func (s *StorageDescriptor) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StorageDescriptor"}
 	if s.Columns != nil {
 		for i, v := range s.Columns {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Columns", i), err.(aws.ErrInvalidParams))
 			}
@@ -13024,9 +12985,6 @@ func (s *StorageDescriptor) Validate() error {
 	}
 	if s.SortColumns != nil {
 		for i, v := range s.SortColumns {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortColumns", i), err.(aws.ErrInvalidParams))
 			}
@@ -13040,13 +12998,13 @@ func (s *StorageDescriptor) Validate() error {
 }
 
 // SetBucketColumns sets the BucketColumns field's value.
-func (s *StorageDescriptor) SetBucketColumns(v []*string) *StorageDescriptor {
+func (s *StorageDescriptor) SetBucketColumns(v []string) *StorageDescriptor {
 	s.BucketColumns = v
 	return s
 }
 
 // SetColumns sets the Columns field's value.
-func (s *StorageDescriptor) SetColumns(v []*Column) *StorageDescriptor {
+func (s *StorageDescriptor) SetColumns(v []Column) *StorageDescriptor {
 	s.Columns = v
 	return s
 }
@@ -13082,7 +13040,7 @@ func (s *StorageDescriptor) SetOutputFormat(v string) *StorageDescriptor {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *StorageDescriptor) SetParameters(v map[string]*string) *StorageDescriptor {
+func (s *StorageDescriptor) SetParameters(v map[string]string) *StorageDescriptor {
 	s.Parameters = v
 	return s
 }
@@ -13100,7 +13058,7 @@ func (s *StorageDescriptor) SetSkewedInfo(v *SkewedInfo) *StorageDescriptor {
 }
 
 // SetSortColumns sets the SortColumns field's value.
-func (s *StorageDescriptor) SetSortColumns(v []*Order) *StorageDescriptor {
+func (s *StorageDescriptor) SetSortColumns(v []Order) *StorageDescriptor {
 	s.SortColumns = v
 	return s
 }
@@ -13144,11 +13102,11 @@ type Table struct {
 	Owner *string `min:"1" type:"string"`
 
 	// Properties associated with this table, as a list of key-value pairs.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// A list of columns by which the table is partitioned. Only primitive types
 	// are supported as partition keys.
-	PartitionKeys []*Column `type:"list"`
+	PartitionKeys []Column `type:"list"`
 
 	// Retention time for this table.
 	Retention *int64 `type:"integer"`
@@ -13229,13 +13187,13 @@ func (s *Table) SetOwner(v string) *Table {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *Table) SetParameters(v map[string]*string) *Table {
+func (s *Table) SetParameters(v map[string]string) *Table {
 	s.Parameters = v
 	return s
 }
 
 // SetPartitionKeys sets the PartitionKeys field's value.
-func (s *Table) SetPartitionKeys(v []*Column) *Table {
+func (s *Table) SetPartitionKeys(v []Column) *Table {
 	s.PartitionKeys = v
 	return s
 }
@@ -13333,11 +13291,11 @@ type TableInput struct {
 	Owner *string `min:"1" type:"string"`
 
 	// Properties associated with this table, as a list of key-value pairs.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// A list of columns by which the table is partitioned. Only primitive types
 	// are supported as partition keys.
-	PartitionKeys []*Column `type:"list"`
+	PartitionKeys []Column `type:"list"`
 
 	// Retention time for this table.
 	Retention *int64 `type:"integer"`
@@ -13381,9 +13339,6 @@ func (s *TableInput) Validate() error {
 	}
 	if s.PartitionKeys != nil {
 		for i, v := range s.PartitionKeys {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionKeys", i), err.(aws.ErrInvalidParams))
 			}
@@ -13432,13 +13387,13 @@ func (s *TableInput) SetOwner(v string) *TableInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *TableInput) SetParameters(v map[string]*string) *TableInput {
+func (s *TableInput) SetParameters(v map[string]string) *TableInput {
 	s.Parameters = v
 	return s
 }
 
 // SetPartitionKeys sets the PartitionKeys field's value.
-func (s *TableInput) SetPartitionKeys(v []*Column) *TableInput {
+func (s *TableInput) SetPartitionKeys(v []Column) *TableInput {
 	s.PartitionKeys = v
 	return s
 }
@@ -13511,7 +13466,7 @@ type Trigger struct {
 	_ struct{} `type:"structure"`
 
 	// The actions initiated by this trigger.
-	Actions []*Action `type:"list"`
+	Actions []Action `type:"list"`
 
 	// A description of this trigger.
 	Description *string `type:"string"`
@@ -13546,7 +13501,7 @@ func (s Trigger) GoString() string {
 }
 
 // SetActions sets the Actions field's value.
-func (s *Trigger) SetActions(v []*Action) *Trigger {
+func (s *Trigger) SetActions(v []Action) *Trigger {
 	s.Actions = v
 	return s
 }
@@ -13599,7 +13554,7 @@ type TriggerUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// The actions initiated by this trigger.
-	Actions []*Action `type:"list"`
+	Actions []Action `type:"list"`
 
 	// A description of this trigger.
 	Description *string `type:"string"`
@@ -13632,9 +13587,6 @@ func (s *TriggerUpdate) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -13653,7 +13605,7 @@ func (s *TriggerUpdate) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *TriggerUpdate) SetActions(v []*Action) *TriggerUpdate {
+func (s *TriggerUpdate) SetActions(v []Action) *TriggerUpdate {
 	s.Actions = v
 	return s
 }
@@ -13834,7 +13786,7 @@ type UpdateCrawlerInput struct {
 	// A list of custom Classifier names that the user has registered. By default,
 	// all AWS classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
-	Classifiers []*string `type:"list"`
+	Classifiers []string `type:"list"`
 
 	// The Glue Database where results will be stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
 	DatabaseName *string `type:"string"`
@@ -13893,7 +13845,7 @@ func (s *UpdateCrawlerInput) Validate() error {
 }
 
 // SetClassifiers sets the Classifiers field's value.
-func (s *UpdateCrawlerInput) SetClassifiers(v []*string) *UpdateCrawlerInput {
+func (s *UpdateCrawlerInput) SetClassifiers(v []string) *UpdateCrawlerInput {
 	s.Classifiers = v
 	return s
 }
@@ -14371,7 +14323,7 @@ type UpdatePartitionInput struct {
 	// A list of the values defining the partition.
 	//
 	// PartitionValueList is a required field
-	PartitionValueList []*string `type:"list" required:"true"`
+	PartitionValueList []string `type:"list" required:"true"`
 
 	// The name of the table where the partition to be updated is located.
 	//
@@ -14448,7 +14400,7 @@ func (s *UpdatePartitionInput) SetPartitionInput(v *PartitionInput) *UpdateParti
 }
 
 // SetPartitionValueList sets the PartitionValueList field's value.
-func (s *UpdatePartitionInput) SetPartitionValueList(v []*string) *UpdatePartitionInput {
+func (s *UpdatePartitionInput) SetPartitionValueList(v []string) *UpdatePartitionInput {
 	s.PartitionValueList = v
 	return s
 }
@@ -14782,7 +14734,7 @@ type UserDefinedFunction struct {
 	OwnerType PrincipalType `type:"string"`
 
 	// The resource URIs for the function.
-	ResourceUris []*ResourceUri `type:"list"`
+	ResourceUris []ResourceUri `type:"list"`
 }
 
 // String returns the string representation
@@ -14826,7 +14778,7 @@ func (s *UserDefinedFunction) SetOwnerType(v PrincipalType) *UserDefinedFunction
 }
 
 // SetResourceUris sets the ResourceUris field's value.
-func (s *UserDefinedFunction) SetResourceUris(v []*ResourceUri) *UserDefinedFunction {
+func (s *UserDefinedFunction) SetResourceUris(v []ResourceUri) *UserDefinedFunction {
 	s.ResourceUris = v
 	return s
 }
@@ -14849,7 +14801,7 @@ type UserDefinedFunctionInput struct {
 	OwnerType PrincipalType `type:"string"`
 
 	// The resource URIs for the function.
-	ResourceUris []*ResourceUri `type:"list"`
+	ResourceUris []ResourceUri `type:"list"`
 }
 
 // String returns the string representation
@@ -14876,9 +14828,6 @@ func (s *UserDefinedFunctionInput) Validate() error {
 	}
 	if s.ResourceUris != nil {
 		for i, v := range s.ResourceUris {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceUris", i), err.(aws.ErrInvalidParams))
 			}
@@ -14916,7 +14865,7 @@ func (s *UserDefinedFunctionInput) SetOwnerType(v PrincipalType) *UserDefinedFun
 }
 
 // SetResourceUris sets the ResourceUris field's value.
-func (s *UserDefinedFunctionInput) SetResourceUris(v []*ResourceUri) *UserDefinedFunctionInput {
+func (s *UserDefinedFunctionInput) SetResourceUris(v []ResourceUri) *UserDefinedFunctionInput {
 	s.ResourceUris = v
 	return s
 }

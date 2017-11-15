@@ -3256,7 +3256,7 @@ type CoreDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
 	// Cores in the definition version.
-	Cores []*Core `type:"list"`
+	Cores []Core `type:"list"`
 }
 
 // String returns the string representation
@@ -3270,7 +3270,7 @@ func (s CoreDefinitionVersion) GoString() string {
 }
 
 // SetCores sets the Cores field's value.
-func (s *CoreDefinitionVersion) SetCores(v []*Core) *CoreDefinitionVersion {
+func (s *CoreDefinitionVersion) SetCores(v []Core) *CoreDefinitionVersion {
 	s.Cores = v
 	return s
 }
@@ -3395,7 +3395,7 @@ type CreateCoreDefinitionVersionInput struct {
 	// CoreDefinitionId is a required field
 	CoreDefinitionId *string `location:"uri" locationName:"CoreDefinitionId" type:"string" required:"true"`
 
-	Cores []*Core `type:"list"`
+	Cores []Core `type:"list"`
 }
 
 // String returns the string representation
@@ -3435,7 +3435,7 @@ func (s *CreateCoreDefinitionVersionInput) SetCoreDefinitionId(v string) *Create
 }
 
 // SetCores sets the Cores field's value.
-func (s *CreateCoreDefinitionVersionInput) SetCores(v []*Core) *CreateCoreDefinitionVersionInput {
+func (s *CreateCoreDefinitionVersionInput) SetCores(v []Core) *CreateCoreDefinitionVersionInput {
 	s.Cores = v
 	return s
 }
@@ -3715,7 +3715,7 @@ type CreateDeviceDefinitionVersionInput struct {
 	// DeviceDefinitionId is a required field
 	DeviceDefinitionId *string `location:"uri" locationName:"DeviceDefinitionId" type:"string" required:"true"`
 
-	Devices []*Device `type:"list"`
+	Devices []Device `type:"list"`
 }
 
 // String returns the string representation
@@ -3755,7 +3755,7 @@ func (s *CreateDeviceDefinitionVersionInput) SetDeviceDefinitionId(v string) *Cr
 }
 
 // SetDevices sets the Devices field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetDevices(v []*Device) *CreateDeviceDefinitionVersionInput {
+func (s *CreateDeviceDefinitionVersionInput) SetDevices(v []Device) *CreateDeviceDefinitionVersionInput {
 	s.Devices = v
 	return s
 }
@@ -3927,7 +3927,7 @@ type CreateFunctionDefinitionVersionInput struct {
 	// FunctionDefinitionId is a required field
 	FunctionDefinitionId *string `location:"uri" locationName:"FunctionDefinitionId" type:"string" required:"true"`
 
-	Functions []*Function `type:"list"`
+	Functions []Function `type:"list"`
 }
 
 // String returns the string representation
@@ -3967,7 +3967,7 @@ func (s *CreateFunctionDefinitionVersionInput) SetFunctionDefinitionId(v string)
 }
 
 // SetFunctions sets the Functions field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetFunctions(v []*Function) *CreateFunctionDefinitionVersionInput {
+func (s *CreateFunctionDefinitionVersionInput) SetFunctions(v []Function) *CreateFunctionDefinitionVersionInput {
 	s.Functions = v
 	return s
 }
@@ -4453,7 +4453,7 @@ type CreateLoggerDefinitionVersionInput struct {
 	// LoggerDefinitionId is a required field
 	LoggerDefinitionId *string `location:"uri" locationName:"LoggerDefinitionId" type:"string" required:"true"`
 
-	Loggers []*Logger `type:"list"`
+	Loggers []Logger `type:"list"`
 }
 
 // String returns the string representation
@@ -4493,7 +4493,7 @@ func (s *CreateLoggerDefinitionVersionInput) SetLoggerDefinitionId(v string) *Cr
 }
 
 // SetLoggers sets the Loggers field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetLoggers(v []*Logger) *CreateLoggerDefinitionVersionInput {
+func (s *CreateLoggerDefinitionVersionInput) SetLoggers(v []Logger) *CreateLoggerDefinitionVersionInput {
 	s.Loggers = v
 	return s
 }
@@ -4665,7 +4665,7 @@ type CreateSubscriptionDefinitionVersionInput struct {
 	// SubscriptionDefinitionId is a required field
 	SubscriptionDefinitionId *string `location:"uri" locationName:"SubscriptionDefinitionId" type:"string" required:"true"`
 
-	Subscriptions []*Subscription `type:"list"`
+	Subscriptions []Subscription `type:"list"`
 }
 
 // String returns the string representation
@@ -4705,7 +4705,7 @@ func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionId(v
 }
 
 // SetSubscriptions sets the Subscriptions field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptions(v []*Subscription) *CreateSubscriptionDefinitionVersionInput {
+func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptions(v []Subscription) *CreateSubscriptionDefinitionVersionInput {
 	s.Subscriptions = v
 	return s
 }
@@ -5274,7 +5274,7 @@ type DeviceDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
 	// Devices in the definition version.
-	Devices []*Device `type:"list"`
+	Devices []Device `type:"list"`
 }
 
 // String returns the string representation
@@ -5288,7 +5288,7 @@ func (s DeviceDefinitionVersion) GoString() string {
 }
 
 // SetDevices sets the Devices field's value.
-func (s *DeviceDefinitionVersion) SetDevices(v []*Device) *DeviceDefinitionVersion {
+func (s *DeviceDefinitionVersion) SetDevices(v []Device) *DeviceDefinitionVersion {
 	s.Devices = v
 	return s
 }
@@ -5548,7 +5548,7 @@ func (s *FunctionConfiguration) SetTimeout(v int64) *FunctionConfiguration {
 type FunctionConfigurationEnvironment struct {
 	_ struct{} `type:"structure"`
 
-	Variables map[string]*string `type:"map"`
+	Variables map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5562,7 +5562,7 @@ func (s FunctionConfigurationEnvironment) GoString() string {
 }
 
 // SetVariables sets the Variables field's value.
-func (s *FunctionConfigurationEnvironment) SetVariables(v map[string]*string) *FunctionConfigurationEnvironment {
+func (s *FunctionConfigurationEnvironment) SetVariables(v map[string]string) *FunctionConfigurationEnvironment {
 	s.Variables = v
 	return s
 }
@@ -5573,7 +5573,7 @@ type FunctionDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
 	// Lambda functions in this function definition version.
-	Functions []*Function `type:"list"`
+	Functions []Function `type:"list"`
 }
 
 // String returns the string representation
@@ -5587,7 +5587,7 @@ func (s FunctionDefinitionVersion) GoString() string {
 }
 
 // SetFunctions sets the Functions field's value.
-func (s *FunctionDefinitionVersion) SetFunctions(v []*Function) *FunctionDefinitionVersion {
+func (s *FunctionDefinitionVersion) SetFunctions(v []Function) *FunctionDefinitionVersion {
 	s.Functions = v
 	return s
 }
@@ -5707,7 +5707,7 @@ type GetConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Connectivity info list
-	ConnectivityInfo []*ConnectivityInfo `type:"list"`
+	ConnectivityInfo []ConnectivityInfo `type:"list"`
 
 	Message *string `locationName:"message" type:"string"`
 }
@@ -5723,7 +5723,7 @@ func (s GetConnectivityInfoOutput) GoString() string {
 }
 
 // SetConnectivityInfo sets the ConnectivityInfo field's value.
-func (s *GetConnectivityInfoOutput) SetConnectivityInfo(v []*ConnectivityInfo) *GetConnectivityInfoOutput {
+func (s *GetConnectivityInfoOutput) SetConnectivityInfo(v []ConnectivityInfo) *GetConnectivityInfoOutput {
 	s.ConnectivityInfo = v
 	return s
 }
@@ -6017,7 +6017,7 @@ type GetDeploymentStatusOutput struct {
 	DeploymentType DeploymentType `type:"string"`
 
 	// The error Details
-	ErrorDetails []*ErrorDetail `type:"list"`
+	ErrorDetails []ErrorDetail `type:"list"`
 
 	// Error Message
 	ErrorMessage *string `type:"string"`
@@ -6049,7 +6049,7 @@ func (s *GetDeploymentStatusOutput) SetDeploymentType(v DeploymentType) *GetDepl
 }
 
 // SetErrorDetails sets the ErrorDetails field's value.
-func (s *GetDeploymentStatusOutput) SetErrorDetails(v []*ErrorDetail) *GetDeploymentStatusOutput {
+func (s *GetDeploymentStatusOutput) SetErrorDetails(v []ErrorDetail) *GetDeploymentStatusOutput {
 	s.ErrorDetails = v
 	return s
 }
@@ -7623,7 +7623,7 @@ type ListCoreDefinitionVersionsOutput struct {
 
 	NextToken *string `type:"string"`
 
-	Versions []*VersionInformation `type:"list"`
+	Versions []VersionInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -7643,7 +7643,7 @@ func (s *ListCoreDefinitionVersionsOutput) SetNextToken(v string) *ListCoreDefin
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListCoreDefinitionVersionsOutput) SetVersions(v []*VersionInformation) *ListCoreDefinitionVersionsOutput {
+func (s *ListCoreDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListCoreDefinitionVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -7683,7 +7683,7 @@ func (s *ListCoreDefinitionsInput) SetNextToken(v string) *ListCoreDefinitionsIn
 type ListCoreDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Definitions []*DefinitionInformation `type:"list"`
+	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
 }
@@ -7699,7 +7699,7 @@ func (s ListCoreDefinitionsOutput) GoString() string {
 }
 
 // SetDefinitions sets the Definitions field's value.
-func (s *ListCoreDefinitionsOutput) SetDefinitions(v []*DefinitionInformation) *ListCoreDefinitionsOutput {
+func (s *ListCoreDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListCoreDefinitionsOutput {
 	s.Definitions = v
 	return s
 }
@@ -7769,7 +7769,7 @@ type ListDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of deployments for the requested groups
-	Deployments []*Deployment `type:"list"`
+	Deployments []Deployment `type:"list"`
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
@@ -7787,7 +7787,7 @@ func (s ListDeploymentsOutput) GoString() string {
 }
 
 // SetDeployments sets the Deployments field's value.
-func (s *ListDeploymentsOutput) SetDeployments(v []*Deployment) *ListDeploymentsOutput {
+func (s *ListDeploymentsOutput) SetDeployments(v []Deployment) *ListDeploymentsOutput {
 	s.Deployments = v
 	return s
 }
@@ -7858,7 +7858,7 @@ type ListDeviceDefinitionVersionsOutput struct {
 
 	NextToken *string `type:"string"`
 
-	Versions []*VersionInformation `type:"list"`
+	Versions []VersionInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -7878,7 +7878,7 @@ func (s *ListDeviceDefinitionVersionsOutput) SetNextToken(v string) *ListDeviceD
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListDeviceDefinitionVersionsOutput) SetVersions(v []*VersionInformation) *ListDeviceDefinitionVersionsOutput {
+func (s *ListDeviceDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListDeviceDefinitionVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -7918,7 +7918,7 @@ func (s *ListDeviceDefinitionsInput) SetNextToken(v string) *ListDeviceDefinitio
 type ListDeviceDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Definitions []*DefinitionInformation `type:"list"`
+	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
 }
@@ -7934,7 +7934,7 @@ func (s ListDeviceDefinitionsOutput) GoString() string {
 }
 
 // SetDefinitions sets the Definitions field's value.
-func (s *ListDeviceDefinitionsOutput) SetDefinitions(v []*DefinitionInformation) *ListDeviceDefinitionsOutput {
+func (s *ListDeviceDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListDeviceDefinitionsOutput {
 	s.Definitions = v
 	return s
 }
@@ -8005,7 +8005,7 @@ type ListFunctionDefinitionVersionsOutput struct {
 
 	NextToken *string `type:"string"`
 
-	Versions []*VersionInformation `type:"list"`
+	Versions []VersionInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -8025,7 +8025,7 @@ func (s *ListFunctionDefinitionVersionsOutput) SetNextToken(v string) *ListFunct
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListFunctionDefinitionVersionsOutput) SetVersions(v []*VersionInformation) *ListFunctionDefinitionVersionsOutput {
+func (s *ListFunctionDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListFunctionDefinitionVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -8065,7 +8065,7 @@ func (s *ListFunctionDefinitionsInput) SetNextToken(v string) *ListFunctionDefin
 type ListFunctionDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Definitions []*DefinitionInformation `type:"list"`
+	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
 }
@@ -8081,7 +8081,7 @@ func (s ListFunctionDefinitionsOutput) GoString() string {
 }
 
 // SetDefinitions sets the Definitions field's value.
-func (s *ListFunctionDefinitionsOutput) SetDefinitions(v []*DefinitionInformation) *ListFunctionDefinitionsOutput {
+func (s *ListFunctionDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListFunctionDefinitionsOutput {
 	s.Definitions = v
 	return s
 }
@@ -8135,7 +8135,7 @@ type ListGroupCertificateAuthoritiesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of certificate authorities associated with the group.
-	GroupCertificateAuthorities []*GroupCertificateAuthorityProperties `type:"list"`
+	GroupCertificateAuthorities []GroupCertificateAuthorityProperties `type:"list"`
 }
 
 // String returns the string representation
@@ -8149,7 +8149,7 @@ func (s ListGroupCertificateAuthoritiesOutput) GoString() string {
 }
 
 // SetGroupCertificateAuthorities sets the GroupCertificateAuthorities field's value.
-func (s *ListGroupCertificateAuthoritiesOutput) SetGroupCertificateAuthorities(v []*GroupCertificateAuthorityProperties) *ListGroupCertificateAuthoritiesOutput {
+func (s *ListGroupCertificateAuthoritiesOutput) SetGroupCertificateAuthorities(v []GroupCertificateAuthorityProperties) *ListGroupCertificateAuthoritiesOutput {
 	s.GroupCertificateAuthorities = v
 	return s
 }
@@ -8214,7 +8214,7 @@ type ListGroupVersionsOutput struct {
 
 	NextToken *string `type:"string"`
 
-	Versions []*VersionInformation `type:"list"`
+	Versions []VersionInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -8234,7 +8234,7 @@ func (s *ListGroupVersionsOutput) SetNextToken(v string) *ListGroupVersionsOutpu
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListGroupVersionsOutput) SetVersions(v []*VersionInformation) *ListGroupVersionsOutput {
+func (s *ListGroupVersionsOutput) SetVersions(v []VersionInformation) *ListGroupVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -8275,7 +8275,7 @@ type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Groups
-	Groups []*GroupInformation `type:"list"`
+	Groups []GroupInformation `type:"list"`
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
@@ -8293,7 +8293,7 @@ func (s ListGroupsOutput) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []*GroupInformation) *ListGroupsOutput {
+func (s *ListGroupsOutput) SetGroups(v []GroupInformation) *ListGroupsOutput {
 	s.Groups = v
 	return s
 }
@@ -8364,7 +8364,7 @@ type ListLoggerDefinitionVersionsOutput struct {
 
 	NextToken *string `type:"string"`
 
-	Versions []*VersionInformation `type:"list"`
+	Versions []VersionInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -8384,7 +8384,7 @@ func (s *ListLoggerDefinitionVersionsOutput) SetNextToken(v string) *ListLoggerD
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListLoggerDefinitionVersionsOutput) SetVersions(v []*VersionInformation) *ListLoggerDefinitionVersionsOutput {
+func (s *ListLoggerDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListLoggerDefinitionVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -8424,7 +8424,7 @@ func (s *ListLoggerDefinitionsInput) SetNextToken(v string) *ListLoggerDefinitio
 type ListLoggerDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Definitions []*DefinitionInformation `type:"list"`
+	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
 }
@@ -8440,7 +8440,7 @@ func (s ListLoggerDefinitionsOutput) GoString() string {
 }
 
 // SetDefinitions sets the Definitions field's value.
-func (s *ListLoggerDefinitionsOutput) SetDefinitions(v []*DefinitionInformation) *ListLoggerDefinitionsOutput {
+func (s *ListLoggerDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListLoggerDefinitionsOutput {
 	s.Definitions = v
 	return s
 }
@@ -8511,7 +8511,7 @@ type ListSubscriptionDefinitionVersionsOutput struct {
 
 	NextToken *string `type:"string"`
 
-	Versions []*VersionInformation `type:"list"`
+	Versions []VersionInformation `type:"list"`
 }
 
 // String returns the string representation
@@ -8531,7 +8531,7 @@ func (s *ListSubscriptionDefinitionVersionsOutput) SetNextToken(v string) *ListS
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListSubscriptionDefinitionVersionsOutput) SetVersions(v []*VersionInformation) *ListSubscriptionDefinitionVersionsOutput {
+func (s *ListSubscriptionDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListSubscriptionDefinitionVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -8571,7 +8571,7 @@ func (s *ListSubscriptionDefinitionsInput) SetNextToken(v string) *ListSubscript
 type ListSubscriptionDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	Definitions []*DefinitionInformation `type:"list"`
+	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
 }
@@ -8587,7 +8587,7 @@ func (s ListSubscriptionDefinitionsOutput) GoString() string {
 }
 
 // SetDefinitions sets the Definitions field's value.
-func (s *ListSubscriptionDefinitionsOutput) SetDefinitions(v []*DefinitionInformation) *ListSubscriptionDefinitionsOutput {
+func (s *ListSubscriptionDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListSubscriptionDefinitionsOutput {
 	s.Definitions = v
 	return s
 }
@@ -8666,7 +8666,7 @@ type LoggerDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
 	// List of loggers.
-	Loggers []*Logger `type:"list"`
+	Loggers []Logger `type:"list"`
 }
 
 // String returns the string representation
@@ -8680,7 +8680,7 @@ func (s LoggerDefinitionVersion) GoString() string {
 }
 
 // SetLoggers sets the Loggers field's value.
-func (s *LoggerDefinitionVersion) SetLoggers(v []*Logger) *LoggerDefinitionVersion {
+func (s *LoggerDefinitionVersion) SetLoggers(v []Logger) *LoggerDefinitionVersion {
 	s.Loggers = v
 	return s
 }
@@ -8832,7 +8832,7 @@ type SubscriptionDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
 	// Subscriptions in the version.
-	Subscriptions []*Subscription `type:"list"`
+	Subscriptions []Subscription `type:"list"`
 }
 
 // String returns the string representation
@@ -8846,7 +8846,7 @@ func (s SubscriptionDefinitionVersion) GoString() string {
 }
 
 // SetSubscriptions sets the Subscriptions field's value.
-func (s *SubscriptionDefinitionVersion) SetSubscriptions(v []*Subscription) *SubscriptionDefinitionVersion {
+func (s *SubscriptionDefinitionVersion) SetSubscriptions(v []Subscription) *SubscriptionDefinitionVersion {
 	s.Subscriptions = v
 	return s
 }
@@ -8857,7 +8857,7 @@ type UpdateConnectivityInfoInput struct {
 	_ struct{} `type:"structure"`
 
 	// Connectivity info list
-	ConnectivityInfo []*ConnectivityInfo `type:"list"`
+	ConnectivityInfo []ConnectivityInfo `type:"list"`
 
 	// ThingName is a required field
 	ThingName *string `location:"uri" locationName:"ThingName" type:"string" required:"true"`
@@ -8888,7 +8888,7 @@ func (s *UpdateConnectivityInfoInput) Validate() error {
 }
 
 // SetConnectivityInfo sets the ConnectivityInfo field's value.
-func (s *UpdateConnectivityInfoInput) SetConnectivityInfo(v []*ConnectivityInfo) *UpdateConnectivityInfoInput {
+func (s *UpdateConnectivityInfoInput) SetConnectivityInfo(v []ConnectivityInfo) *UpdateConnectivityInfoInput {
 	s.ConnectivityInfo = v
 	return s
 }

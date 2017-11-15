@@ -37,30 +37,30 @@ func ExampleDynamoDB_BatchGetItemRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.BatchGetItemInput{
-		RequestItems: map[string]*dynamodb.KeysAndAttributes{
+		RequestItems: map[string]dynamodb.KeysAndAttributes{
 			"Music": {
-				Keys: []map[string]*dynamodb.AttributeValue{
+				Keys: []map[string]dynamodb.AttributeValue{
 					{
-						"Artist": &dynamodb.AttributeValue{
+						"Artist": dynamodb.AttributeValue{
 							S: aws.String("No One You Know"),
 						},
-						"SongTitle": &dynamodb.AttributeValue{
+						"SongTitle": dynamodb.AttributeValue{
 							S: aws.String("Call Me Today"),
 						},
 					},
 					{
-						"Artist": &dynamodb.AttributeValue{
+						"Artist": dynamodb.AttributeValue{
 							S: aws.String("Acme Band"),
 						},
-						"SongTitle": &dynamodb.AttributeValue{
+						"SongTitle": dynamodb.AttributeValue{
 							S: aws.String("Happy Day"),
 						},
 					},
 					{
-						"Artist": &dynamodb.AttributeValue{
+						"Artist": dynamodb.AttributeValue{
 							S: aws.String("No One You Know"),
 						},
-						"SongTitle": &dynamodb.AttributeValue{
+						"SongTitle": dynamodb.AttributeValue{
 							S: aws.String("Scared of My Shadow"),
 						},
 					},
@@ -107,11 +107,11 @@ func ExampleDynamoDB_BatchWriteItemRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.BatchWriteItemInput{
-		RequestItems: map[string][]*dynamodb.WriteRequest{
+		RequestItems: map[string][]dynamodb.WriteRequest{
 			"Music": {
 				{
 					PutRequest: &dynamodb.PutRequest{
-						Item: map[string]*dynamodb.AttributeValue{
+						Item: map[string]dynamodb.AttributeValue{
 							"AlbumTitle": {
 								S: aws.String("Somewhat Famous"),
 							},
@@ -126,7 +126,7 @@ func ExampleDynamoDB_BatchWriteItemRequest_shared00() {
 				},
 				{
 					PutRequest: &dynamodb.PutRequest{
-						Item: map[string]*dynamodb.AttributeValue{
+						Item: map[string]dynamodb.AttributeValue{
 							"AlbumTitle": {
 								S: aws.String("Songs About Life"),
 							},
@@ -141,7 +141,7 @@ func ExampleDynamoDB_BatchWriteItemRequest_shared00() {
 				},
 				{
 					PutRequest: &dynamodb.PutRequest{
-						Item: map[string]*dynamodb.AttributeValue{
+						Item: map[string]dynamodb.AttributeValue{
 							"AlbumTitle": {
 								S: aws.String("Blue Sky Blues"),
 							},
@@ -196,7 +196,7 @@ func ExampleDynamoDB_CreateTableRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.CreateTableInput{
-		AttributeDefinitions: []*dynamodb.AttributeDefinition{
+		AttributeDefinitions: []dynamodb.AttributeDefinition{
 			{
 				AttributeName: aws.String("Artist"),
 				AttributeType: dynamodb.ScalarAttributeTypeS,
@@ -206,7 +206,7 @@ func ExampleDynamoDB_CreateTableRequest_shared00() {
 				AttributeType: dynamodb.ScalarAttributeTypeS,
 			},
 		},
-		KeySchema: []*dynamodb.KeySchemaElement{
+		KeySchema: []dynamodb.KeySchemaElement{
 			{
 				AttributeName: aws.String("Artist"),
 				KeyType:       dynamodb.KeyTypeHash,
@@ -259,7 +259,7 @@ func ExampleDynamoDB_DeleteItemRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.DeleteItemInput{
-		Key: map[string]*dynamodb.AttributeValue{
+		Key: map[string]dynamodb.AttributeValue{
 			"Artist": {
 				S: aws.String("No One You Know"),
 			},
@@ -423,7 +423,7 @@ func ExampleDynamoDB_GetItemRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.GetItemInput{
-		Key: map[string]*dynamodb.AttributeValue{
+		Key: map[string]dynamodb.AttributeValue{
 			"Artist": {
 				S: aws.String("Acme Band"),
 			},
@@ -504,7 +504,7 @@ func ExampleDynamoDB_PutItemRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.PutItemInput{
-		Item: map[string]*dynamodb.AttributeValue{
+		Item: map[string]dynamodb.AttributeValue{
 			"AlbumTitle": {
 				S: aws.String("Somewhat Famous"),
 			},
@@ -561,7 +561,7 @@ func ExampleDynamoDB_QueryRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.QueryInput{
-		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
 			":v1": {
 				S: aws.String("No One You Know"),
 			},
@@ -609,11 +609,11 @@ func ExampleDynamoDB_ScanRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.ScanInput{
-		ExpressionAttributeNames: map[string]*string{
-			"AT": aws.String("AlbumTitle"),
-			"ST": aws.String("SongTitle"),
+		ExpressionAttributeNames: map[string]string{
+			"AT": "AlbumTitle",
+			"ST": "SongTitle",
 		},
-		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
 			":a": {
 				S: aws.String("No One You Know"),
 			},
@@ -661,11 +661,11 @@ func ExampleDynamoDB_UpdateItemRequest_shared00() {
 
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.UpdateItemInput{
-		ExpressionAttributeNames: map[string]*string{
-			"#AT": aws.String("AlbumTitle"),
-			"#Y":  aws.String("Year"),
+		ExpressionAttributeNames: map[string]string{
+			"#AT": "AlbumTitle",
+			"#Y":  "Year",
 		},
-		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
 			":t": {
 				S: aws.String("Louder Than Ever"),
 			},
@@ -673,7 +673,7 @@ func ExampleDynamoDB_UpdateItemRequest_shared00() {
 				N: aws.String("2015"),
 			},
 		},
-		Key: map[string]*dynamodb.AttributeValue{
+		Key: map[string]dynamodb.AttributeValue{
 			"Artist": {
 				S: aws.String("Acme Band"),
 			},

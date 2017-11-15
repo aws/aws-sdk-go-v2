@@ -1036,7 +1036,7 @@ type CreateMountTargetInput struct {
 
 	// Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be
 	// for the same VPC as subnet specified.
-	SecurityGroups []*string `type:"list"`
+	SecurityGroups []string `type:"list"`
 
 	// ID of the subnet to add the mount target in.
 	//
@@ -1085,7 +1085,7 @@ func (s *CreateMountTargetInput) SetIpAddress(v string) *CreateMountTargetInput 
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *CreateMountTargetInput) SetSecurityGroups(v []*string) *CreateMountTargetInput {
+func (s *CreateMountTargetInput) SetSecurityGroups(v []string) *CreateMountTargetInput {
 	s.SecurityGroups = v
 	return s
 }
@@ -1197,7 +1197,7 @@ type CreateTagsInput struct {
 	// Array of Tag objects to add. Each Tag object is a key-value pair.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1223,9 +1223,6 @@ func (s *CreateTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1245,7 +1242,7 @@ func (s *CreateTagsInput) SetFileSystemId(v string) *CreateTagsInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateTagsInput) SetTags(v []*Tag) *CreateTagsInput {
+func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	s.Tags = v
 	return s
 }
@@ -1387,7 +1384,7 @@ type DeleteTagsInput struct {
 	// List of tag keys to delete.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1425,7 +1422,7 @@ func (s *DeleteTagsInput) SetFileSystemId(v string) *DeleteTagsInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DeleteTagsInput) SetTagKeys(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -1525,7 +1522,7 @@ type DescribeFileSystemsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Array of file system descriptions.
-	FileSystems []*CreateFileSystemOutput `type:"list"`
+	FileSystems []CreateFileSystemOutput `type:"list"`
 
 	// Present if provided by caller in the request (String).
 	Marker *string `type:"string"`
@@ -1546,7 +1543,7 @@ func (s DescribeFileSystemsOutput) GoString() string {
 }
 
 // SetFileSystems sets the FileSystems field's value.
-func (s *DescribeFileSystemsOutput) SetFileSystems(v []*CreateFileSystemOutput) *DescribeFileSystemsOutput {
+func (s *DescribeFileSystemsOutput) SetFileSystems(v []CreateFileSystemOutput) *DescribeFileSystemsOutput {
 	s.FileSystems = v
 	return s
 }
@@ -1610,7 +1607,7 @@ type DescribeMountTargetSecurityGroupsOutput struct {
 	// Array of security groups.
 	//
 	// SecurityGroups is a required field
-	SecurityGroups []*string `type:"list" required:"true"`
+	SecurityGroups []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1624,7 +1621,7 @@ func (s DescribeMountTargetSecurityGroupsOutput) GoString() string {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *DescribeMountTargetSecurityGroupsOutput) SetSecurityGroups(v []*string) *DescribeMountTargetSecurityGroupsOutput {
+func (s *DescribeMountTargetSecurityGroupsOutput) SetSecurityGroups(v []string) *DescribeMountTargetSecurityGroupsOutput {
 	s.SecurityGroups = v
 	return s
 }
@@ -1708,7 +1705,7 @@ type DescribeMountTargetsOutput struct {
 
 	// Returns the file system's mount targets as an array of MountTargetDescription
 	// objects.
-	MountTargets []*CreateMountTargetOutput `type:"list"`
+	MountTargets []CreateMountTargetOutput `type:"list"`
 
 	// If a value is present, there are more mount targets to return. In a subsequent
 	// request, you can provide Marker in your request with this value to retrieve
@@ -1733,7 +1730,7 @@ func (s *DescribeMountTargetsOutput) SetMarker(v string) *DescribeMountTargetsOu
 }
 
 // SetMountTargets sets the MountTargets field's value.
-func (s *DescribeMountTargetsOutput) SetMountTargets(v []*CreateMountTargetOutput) *DescribeMountTargetsOutput {
+func (s *DescribeMountTargetsOutput) SetMountTargets(v []CreateMountTargetOutput) *DescribeMountTargetsOutput {
 	s.MountTargets = v
 	return s
 }
@@ -1824,7 +1821,7 @@ type DescribeTagsOutput struct {
 	// Returns tags associated with the file system as an array of Tag objects.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1850,7 +1847,7 @@ func (s *DescribeTagsOutput) SetNextMarker(v string) *DescribeTagsOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []*Tag) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTags(v []Tag) *DescribeTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -1909,7 +1906,7 @@ type ModifyMountTargetSecurityGroupsInput struct {
 	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
 
 	// Array of up to five VPC security group IDs.
-	SecurityGroups []*string `type:"list"`
+	SecurityGroups []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1943,7 +1940,7 @@ func (s *ModifyMountTargetSecurityGroupsInput) SetMountTargetId(v string) *Modif
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *ModifyMountTargetSecurityGroupsInput) SetSecurityGroups(v []*string) *ModifyMountTargetSecurityGroupsInput {
+func (s *ModifyMountTargetSecurityGroupsInput) SetSecurityGroups(v []string) *ModifyMountTargetSecurityGroupsInput {
 	s.SecurityGroups = v
 	return s
 }

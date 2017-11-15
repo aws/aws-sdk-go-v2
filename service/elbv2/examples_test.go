@@ -36,10 +36,10 @@ func ExampleELBV2_AddTagsRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.AddTagsInput{
-		ResourceArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
+		ResourceArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
-		Tags: []*elbv2.Tag{
+		Tags: []elbv2.Tag{
 			{
 				Key:   aws.String("project"),
 				Value: aws.String("lima"),
@@ -90,7 +90,7 @@ func ExampleELBV2_CreateListenerRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.CreateListenerInput{
-		DefaultActions: []*elbv2.Action{
+		DefaultActions: []elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 				Type:           elbv2.ActionTypeEnumForward,
@@ -162,12 +162,12 @@ func ExampleELBV2_CreateListenerRequest_shared01() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.CreateListenerInput{
-		Certificates: []*elbv2.Certificate{
+		Certificates: []elbv2.Certificate{
 			{
 				CertificateArn: aws.String("arn:aws:iam::123456789012:server-certificate/my-server-cert"),
 			},
 		},
-		DefaultActions: []*elbv2.Action{
+		DefaultActions: []elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 				Type:           elbv2.ActionTypeEnumForward,
@@ -237,9 +237,9 @@ func ExampleELBV2_CreateLoadBalancerRequest_shared00() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.CreateLoadBalancerInput{
 		Name: aws.String("my-load-balancer"),
-		Subnets: []*string{
-			aws.String("subnet-b7d581c0"),
-			aws.String("subnet-8360a9e7"),
+		Subnets: []string{
+			"subnet-b7d581c0",
+			"subnet-8360a9e7",
 		},
 	}
 
@@ -300,9 +300,9 @@ func ExampleELBV2_CreateLoadBalancerRequest_shared01() {
 	input := &elbv2.CreateLoadBalancerInput{
 		Name:   aws.String("my-internal-load-balancer"),
 		Scheme: elbv2.LoadBalancerSchemeEnumInternal,
-		Subnets: []*string{
-			aws.String("subnet-b7d581c0"),
-			aws.String("subnet-8360a9e7"),
+		Subnets: []string{
+			"subnet-b7d581c0",
+			"subnet-8360a9e7",
 		},
 	}
 
@@ -361,17 +361,17 @@ func ExampleELBV2_CreateRuleRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.CreateRuleInput{
-		Actions: []*elbv2.Action{
+		Actions: []elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 				Type:           elbv2.ActionTypeEnumForward,
 			},
 		},
-		Conditions: []*elbv2.RuleCondition{
+		Conditions: []elbv2.RuleCondition{
 			{
 				Field: aws.String("path-pattern"),
-				Values: []*string{
-					aws.String("/img/*"),
+				Values: []string{
+					"/img/*",
 				},
 			},
 		},
@@ -617,7 +617,7 @@ func ExampleELBV2_DeregisterTargetsRequest_shared00() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.DeregisterTargetsInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-		Targets: []*elbv2.TargetDescription{
+		Targets: []elbv2.TargetDescription{
 			{
 				Id: aws.String("i-0f76fade"),
 			},
@@ -658,8 +658,8 @@ func ExampleELBV2_DescribeListenersRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeListenersInput{
-		ListenerArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"),
+		ListenerArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2",
 		},
 	}
 
@@ -732,8 +732,8 @@ func ExampleELBV2_DescribeLoadBalancersRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeLoadBalancersInput{
-		LoadBalancerArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
+		LoadBalancerArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
 	}
 
@@ -769,8 +769,8 @@ func ExampleELBV2_DescribeRulesRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeRulesInput{
-		RuleArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee"),
+		RuleArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee",
 		},
 	}
 
@@ -808,8 +808,8 @@ func ExampleELBV2_DescribeSSLPoliciesRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeSSLPoliciesInput{
-		Names: []*string{
-			aws.String("ELBSecurityPolicy-2015-05"),
+		Names: []string{
+			"ELBSecurityPolicy-2015-05",
 		},
 	}
 
@@ -845,8 +845,8 @@ func ExampleELBV2_DescribeTagsRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeTagsInput{
-		ResourceArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
+		ResourceArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
 	}
 
@@ -923,8 +923,8 @@ func ExampleELBV2_DescribeTargetGroupsRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeTargetGroupsInput{
-		TargetGroupArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
+		TargetGroupArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
 		},
 	}
 
@@ -1004,7 +1004,7 @@ func ExampleELBV2_DescribeTargetHealthRequest_shared01() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.DescribeTargetHealthInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-		Targets: []*elbv2.TargetDescription{
+		Targets: []elbv2.TargetDescription{
 			{
 				Id:   aws.String("i-0f76fade"),
 				Port: aws.Int64(80),
@@ -1048,7 +1048,7 @@ func ExampleELBV2_ModifyListenerRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyListenerInput{
-		DefaultActions: []*elbv2.Action{
+		DefaultActions: []elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f"),
 				Type:           elbv2.ActionTypeEnumForward,
@@ -1113,7 +1113,7 @@ func ExampleELBV2_ModifyListenerRequest_shared01() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyListenerInput{
-		Certificates: []*elbv2.Certificate{
+		Certificates: []elbv2.Certificate{
 			{
 				CertificateArn: aws.String("arn:aws:iam::123456789012:server-certificate/my-new-server-cert"),
 			},
@@ -1177,7 +1177,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyLoadBalancerAttributesInput{
-		Attributes: []*elbv2.LoadBalancerAttribute{
+		Attributes: []elbv2.LoadBalancerAttribute{
 			{
 				Key:   aws.String("deletion_protection.enabled"),
 				Value: aws.String("true"),
@@ -1220,7 +1220,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared01() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyLoadBalancerAttributesInput{
-		Attributes: []*elbv2.LoadBalancerAttribute{
+		Attributes: []elbv2.LoadBalancerAttribute{
 			{
 				Key:   aws.String("idle_timeout.timeout_seconds"),
 				Value: aws.String("30"),
@@ -1265,7 +1265,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared02() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyLoadBalancerAttributesInput{
-		Attributes: []*elbv2.LoadBalancerAttribute{
+		Attributes: []elbv2.LoadBalancerAttribute{
 			{
 				Key:   aws.String("access_logs.s3.enabled"),
 				Value: aws.String("true"),
@@ -1316,11 +1316,11 @@ func ExampleELBV2_ModifyRuleRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyRuleInput{
-		Conditions: []*elbv2.RuleCondition{
+		Conditions: []elbv2.RuleCondition{
 			{
 				Field: aws.String("path-pattern"),
-				Values: []*string{
-					aws.String("/images/*"),
+				Values: []string{
+					"/images/*",
 				},
 			},
 		},
@@ -1412,7 +1412,7 @@ func ExampleELBV2_ModifyTargetGroupAttributesRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyTargetGroupAttributesInput{
-		Attributes: []*elbv2.TargetGroupAttribute{
+		Attributes: []elbv2.TargetGroupAttribute{
 			{
 				Key:   aws.String("deregistration_delay.timeout_seconds"),
 				Value: aws.String("600"),
@@ -1456,7 +1456,7 @@ func ExampleELBV2_RegisterTargetsRequest_shared00() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.RegisterTargetsInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-		Targets: []*elbv2.TargetDescription{
+		Targets: []elbv2.TargetDescription{
 			{
 				Id: aws.String("i-80c8dd94"),
 			},
@@ -1507,7 +1507,7 @@ func ExampleELBV2_RegisterTargetsRequest_shared01() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.RegisterTargetsInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9"),
-		Targets: []*elbv2.TargetDescription{
+		Targets: []elbv2.TargetDescription{
 			{
 				Id:   aws.String("i-80c8dd94"),
 				Port: aws.Int64(80),
@@ -1557,12 +1557,12 @@ func ExampleELBV2_RemoveTagsRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.RemoveTagsInput{
-		ResourceArns: []*string{
-			aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
+		ResourceArns: []string{
+			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
-		TagKeys: []*string{
-			aws.String("project"),
-			aws.String("department"),
+		TagKeys: []string{
+			"project",
+			"department",
 		},
 	}
 
@@ -1606,7 +1606,7 @@ func ExampleELBV2_SetRulePrioritiesRequest_shared00() {
 
 	svc := elbv2.New(cfg)
 	input := &elbv2.SetRulePrioritiesInput{
-		RulePriorities: []*elbv2.RulePriorityPair{
+		RulePriorities: []elbv2.RulePriorityPair{
 			{
 				Priority: aws.Int64(5),
 				RuleArn:  aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3"),
@@ -1651,8 +1651,8 @@ func ExampleELBV2_SetSecurityGroupsRequest_shared00() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.SetSecurityGroupsInput{
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
-		SecurityGroups: []*string{
-			aws.String("sg-5943793c"),
+		SecurityGroups: []string{
+			"sg-5943793c",
 		},
 	}
 
@@ -1694,9 +1694,9 @@ func ExampleELBV2_SetSubnetsRequest_shared00() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.SetSubnetsInput{
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
-		Subnets: []*string{
-			aws.String("subnet-8360a9e7"),
-			aws.String("subnet-b7d581c0"),
+		Subnets: []string{
+			"subnet-8360a9e7",
+			"subnet-b7d581c0",
 		},
 	}
 

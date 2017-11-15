@@ -76,7 +76,7 @@ func ExampleS3_CompleteMultipartUploadRequest_shared00() {
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("bigobject"),
 		MultipartUpload: &s3.CompletedMultipartUpload{
-			Parts: []*s3.CompletedPart{
+			Parts: []s3.CompletedPart{
 				{
 					ETag:       aws.String("\"d8c2eafd90c266e19ab9dcacc479f8af\""),
 					PartNumber: aws.Int64(1),
@@ -644,7 +644,7 @@ func ExampleS3_DeleteObjectsRequest_shared00() {
 	input := &s3.DeleteObjectsInput{
 		Bucket: aws.String("examplebucket"),
 		Delete: &s3.Delete{
-			Objects: []*s3.ObjectIdentifier{
+			Objects: []s3.ObjectIdentifier{
 				{
 					Key:       aws.String("HappyFace.jpg"),
 					VersionId: aws.String("2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b"),
@@ -692,7 +692,7 @@ func ExampleS3_DeleteObjectsRequest_shared01() {
 	input := &s3.DeleteObjectsInput{
 		Bucket: aws.String("examplebucket"),
 		Delete: &s3.Delete{
-			Objects: []*s3.ObjectIdentifier{
+			Objects: []s3.ObjectIdentifier{
 				{
 					Key: aws.String("objectkey1"),
 				},
@@ -1704,33 +1704,33 @@ func ExampleS3_PutBucketCorsRequest_shared00() {
 	input := &s3.PutBucketCorsInput{
 		Bucket: aws.String(""),
 		CORSConfiguration: &s3.CORSConfiguration{
-			CORSRules: []*s3.CORSRule{
+			CORSRules: []s3.CORSRule{
 				{
-					AllowedHeaders: []*string{
-						aws.String("*"),
+					AllowedHeaders: []string{
+						"*",
 					},
-					AllowedMethods: []*string{
-						aws.String("PUT"),
-						aws.String("POST"),
-						aws.String("DELETE"),
+					AllowedMethods: []string{
+						"PUT",
+						"POST",
+						"DELETE",
 					},
-					AllowedOrigins: []*string{
-						aws.String("http://www.example.com"),
+					AllowedOrigins: []string{
+						"http://www.example.com",
 					},
-					ExposeHeaders: []*string{
-						aws.String("x-amz-server-side-encryption"),
+					ExposeHeaders: []string{
+						"x-amz-server-side-encryption",
 					},
 					MaxAgeSeconds: aws.Int64(3000),
 				},
 				{
-					AllowedHeaders: []*string{
-						aws.String("Authorization"),
+					AllowedHeaders: []string{
+						"Authorization",
 					},
-					AllowedMethods: []*string{
-						aws.String("GET"),
+					AllowedMethods: []string{
+						"GET",
 					},
-					AllowedOrigins: []*string{
-						aws.String("*"),
+					AllowedOrigins: []string{
+						"*",
 					},
 					MaxAgeSeconds: aws.Int64(3000),
 				},
@@ -1771,11 +1771,11 @@ func ExampleS3_PutBucketLifecycleConfigurationRequest_shared00() {
 	input := &s3.PutBucketLifecycleConfigurationInput{
 		Bucket: aws.String("examplebucket"),
 		LifecycleConfiguration: &s3.BucketLifecycleConfiguration{
-			Rules: []*s3.LifecycleRule{
+			Rules: []s3.LifecycleRule{
 				{
 					ID:     aws.String("TestOnly"),
 					Status: s3.ExpirationStatusEnabled,
-					Transitions: []*s3.Transition{
+					Transitions: []s3.Transition{
 						{
 							Days:         aws.Int64(365),
 							StorageClass: s3.TransitionStorageClassGlacier,
@@ -1822,7 +1822,7 @@ func ExampleS3_PutBucketLoggingRequest_shared00() {
 		BucketLoggingStatus: &s3.BucketLoggingStatus{
 			LoggingEnabled: &s3.LoggingEnabled{
 				TargetBucket: aws.String("targetbucket"),
-				TargetGrants: []*s3.TargetGrant{
+				TargetGrants: []s3.TargetGrant{
 					{
 						Permission: s3.BucketLogsPermissionRead,
 					},
@@ -1865,7 +1865,7 @@ func ExampleS3_PutBucketNotificationConfigurationRequest_shared00() {
 	input := &s3.PutBucketNotificationConfigurationInput{
 		Bucket: aws.String("examplebucket"),
 		NotificationConfiguration: &s3.GetBucketNotificationConfigurationOutput{
-			TopicConfigurations: []*s3.TopicConfiguration{
+			TopicConfigurations: []s3.TopicConfiguration{
 				{
 					Events: []s3.Event{
 						s3.EventS3ObjectCreated,
@@ -1943,7 +1943,7 @@ func ExampleS3_PutBucketReplicationRequest_shared00() {
 		Bucket: aws.String("examplebucket"),
 		ReplicationConfiguration: &s3.ReplicationConfiguration{
 			Role: aws.String("arn:aws:iam::123456789012:role/examplerole"),
-			Rules: []*s3.ReplicationRule{
+			Rules: []s3.ReplicationRule{
 				{
 					Prefix: aws.String(""),
 					Status: s3.ReplicationRuleStatusEnabled,
@@ -2021,7 +2021,7 @@ func ExampleS3_PutBucketTaggingRequest_shared00() {
 	input := &s3.PutBucketTaggingInput{
 		Bucket: aws.String("examplebucket"),
 		Tagging: &s3.Tagging{
-			TagSet: []*s3.Tag{
+			TagSet: []s3.Tag{
 				{
 					Key:   aws.String("Key1"),
 					Value: aws.String("Value1"),
@@ -2334,9 +2334,9 @@ func ExampleS3_PutObjectRequest_shared05() {
 		Body:   aws.ReadSeekCloser(strings.NewReader("filetoupload")),
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("exampleobject"),
-		Metadata: map[string]*string{
-			"metadata1": aws.String("value1"),
-			"metadata2": aws.String("value2"),
+		Metadata: map[string]string{
+			"metadata1": "value1",
+			"metadata2": "value2",
 		},
 	}
 
@@ -2451,7 +2451,7 @@ func ExampleS3_PutObjectTaggingRequest_shared00() {
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("HappyFace.jpg"),
 		Tagging: &s3.Tagging{
-			TagSet: []*s3.Tag{
+			TagSet: []s3.Tag{
 				{
 					Key:   aws.String("Key3"),
 					Value: aws.String("Value3"),

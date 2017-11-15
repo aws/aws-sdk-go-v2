@@ -595,7 +595,7 @@ type chunk struct {
 
 // completedParts is a wrapper to make parts sortable by their part number,
 // since S3 required this list to be sent in sorted order.
-type completedParts []*s3.CompletedPart
+type completedParts []s3.CompletedPart
 
 func (a completedParts) Len() int           { return len(a) }
 func (a completedParts) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
@@ -728,7 +728,7 @@ func (u *multiuploader) send(c chunk) error {
 	}
 
 	n := c.num
-	completed := &s3.CompletedPart{ETag: resp.ETag, PartNumber: &n}
+	completed := s3.CompletedPart{ETag: resp.ETag, PartNumber: &n}
 
 	u.m.Lock()
 	u.parts = append(u.parts, completed)

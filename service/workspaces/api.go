@@ -921,7 +921,7 @@ type CreateTagsInput struct {
 	// The tags of the request.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -950,9 +950,6 @@ func (s *CreateTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -972,7 +969,7 @@ func (s *CreateTagsInput) SetResourceId(v string) *CreateTagsInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateTagsInput) SetTags(v []*Tag) *CreateTagsInput {
+func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	s.Tags = v
 	return s
 }
@@ -1001,7 +998,7 @@ type CreateWorkspacesInput struct {
 	// An array of structures that specify the WorkSpaces to create.
 	//
 	// Workspaces is a required field
-	Workspaces []*WorkspaceRequest `min:"1" type:"list" required:"true"`
+	Workspaces []WorkspaceRequest `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1026,9 +1023,6 @@ func (s *CreateWorkspacesInput) Validate() error {
 	}
 	if s.Workspaces != nil {
 		for i, v := range s.Workspaces {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Workspaces", i), err.(aws.ErrInvalidParams))
 			}
@@ -1042,7 +1036,7 @@ func (s *CreateWorkspacesInput) Validate() error {
 }
 
 // SetWorkspaces sets the Workspaces field's value.
-func (s *CreateWorkspacesInput) SetWorkspaces(v []*WorkspaceRequest) *CreateWorkspacesInput {
+func (s *CreateWorkspacesInput) SetWorkspaces(v []WorkspaceRequest) *CreateWorkspacesInput {
 	s.Workspaces = v
 	return s
 }
@@ -1053,14 +1047,14 @@ type CreateWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of structures that represent the WorkSpaces that could not be created.
-	FailedRequests []*FailedCreateWorkspaceRequest `type:"list"`
+	FailedRequests []FailedCreateWorkspaceRequest `type:"list"`
 
 	// An array of structures that represent the WorkSpaces that were created.
 	//
 	// Because this operation is asynchronous, the identifier in WorkspaceId is
 	// not immediately available. If you immediately call DescribeWorkspaces with
 	// this identifier, no information will be returned.
-	PendingRequests []*Workspace `type:"list"`
+	PendingRequests []Workspace `type:"list"`
 }
 
 // String returns the string representation
@@ -1074,13 +1068,13 @@ func (s CreateWorkspacesOutput) GoString() string {
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
-func (s *CreateWorkspacesOutput) SetFailedRequests(v []*FailedCreateWorkspaceRequest) *CreateWorkspacesOutput {
+func (s *CreateWorkspacesOutput) SetFailedRequests(v []FailedCreateWorkspaceRequest) *CreateWorkspacesOutput {
 	s.FailedRequests = v
 	return s
 }
 
 // SetPendingRequests sets the PendingRequests field's value.
-func (s *CreateWorkspacesOutput) SetPendingRequests(v []*Workspace) *CreateWorkspacesOutput {
+func (s *CreateWorkspacesOutput) SetPendingRequests(v []Workspace) *CreateWorkspacesOutput {
 	s.PendingRequests = v
 	return s
 }
@@ -1162,7 +1156,7 @@ type DeleteTagsInput struct {
 	// The tag keys of the request.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1203,7 +1197,7 @@ func (s *DeleteTagsInput) SetResourceId(v string) *DeleteTagsInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DeleteTagsInput) SetTagKeys(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -1274,7 +1268,7 @@ type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of tags.
-	TagList []*Tag `type:"list"`
+	TagList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -1288,7 +1282,7 @@ func (s DescribeTagsOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *DescribeTagsOutput) SetTagList(v []*Tag) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTagList(v []Tag) *DescribeTagsOutput {
 	s.TagList = v
 	return s
 }
@@ -1300,7 +1294,7 @@ type DescribeWorkspaceBundlesInput struct {
 
 	// An array of strings that contains the identifiers of the bundles to retrieve.
 	// This parameter cannot be combined with any other filter parameter.
-	BundleIds []*string `min:"1" type:"list"`
+	BundleIds []string `min:"1" type:"list"`
 
 	// The NextToken value from a previous call to this operation. Pass null if
 	// this is the first call.
@@ -1344,7 +1338,7 @@ func (s *DescribeWorkspaceBundlesInput) Validate() error {
 }
 
 // SetBundleIds sets the BundleIds field's value.
-func (s *DescribeWorkspaceBundlesInput) SetBundleIds(v []*string) *DescribeWorkspaceBundlesInput {
+func (s *DescribeWorkspaceBundlesInput) SetBundleIds(v []string) *DescribeWorkspaceBundlesInput {
 	s.BundleIds = v
 	return s
 }
@@ -1367,7 +1361,7 @@ type DescribeWorkspaceBundlesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of structures that contain information about the bundles.
-	Bundles []*WorkspaceBundle `type:"list"`
+	Bundles []WorkspaceBundle `type:"list"`
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to this operation to retrieve the next set
@@ -1387,7 +1381,7 @@ func (s DescribeWorkspaceBundlesOutput) GoString() string {
 }
 
 // SetBundles sets the Bundles field's value.
-func (s *DescribeWorkspaceBundlesOutput) SetBundles(v []*WorkspaceBundle) *DescribeWorkspaceBundlesOutput {
+func (s *DescribeWorkspaceBundlesOutput) SetBundles(v []WorkspaceBundle) *DescribeWorkspaceBundlesOutput {
 	s.Bundles = v
 	return s
 }
@@ -1405,7 +1399,7 @@ type DescribeWorkspaceDirectoriesInput struct {
 
 	// An array of strings that contains the directory identifiers to retrieve information
 	// for. If this member is null, all directories are retrieved.
-	DirectoryIds []*string `min:"1" type:"list"`
+	DirectoryIds []string `min:"1" type:"list"`
 
 	// The NextToken value from a previous call to this operation. Pass null if
 	// this is the first call.
@@ -1439,7 +1433,7 @@ func (s *DescribeWorkspaceDirectoriesInput) Validate() error {
 }
 
 // SetDirectoryIds sets the DirectoryIds field's value.
-func (s *DescribeWorkspaceDirectoriesInput) SetDirectoryIds(v []*string) *DescribeWorkspaceDirectoriesInput {
+func (s *DescribeWorkspaceDirectoriesInput) SetDirectoryIds(v []string) *DescribeWorkspaceDirectoriesInput {
 	s.DirectoryIds = v
 	return s
 }
@@ -1456,7 +1450,7 @@ type DescribeWorkspaceDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of structures that contain information about the directories.
-	Directories []*WorkspaceDirectory `type:"list"`
+	Directories []WorkspaceDirectory `type:"list"`
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to this operation to retrieve the next set
@@ -1476,7 +1470,7 @@ func (s DescribeWorkspaceDirectoriesOutput) GoString() string {
 }
 
 // SetDirectories sets the Directories field's value.
-func (s *DescribeWorkspaceDirectoriesOutput) SetDirectories(v []*WorkspaceDirectory) *DescribeWorkspaceDirectoriesOutput {
+func (s *DescribeWorkspaceDirectoriesOutput) SetDirectories(v []WorkspaceDirectory) *DescribeWorkspaceDirectoriesOutput {
 	s.Directories = v
 	return s
 }
@@ -1495,7 +1489,7 @@ type DescribeWorkspacesConnectionStatusInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// An array of strings that contain the identifiers of the WorkSpaces.
-	WorkspaceIds []*string `min:"1" type:"list"`
+	WorkspaceIds []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1531,7 +1525,7 @@ func (s *DescribeWorkspacesConnectionStatusInput) SetNextToken(v string) *Descri
 }
 
 // SetWorkspaceIds sets the WorkspaceIds field's value.
-func (s *DescribeWorkspacesConnectionStatusInput) SetWorkspaceIds(v []*string) *DescribeWorkspacesConnectionStatusInput {
+func (s *DescribeWorkspacesConnectionStatusInput) SetWorkspaceIds(v []string) *DescribeWorkspacesConnectionStatusInput {
 	s.WorkspaceIds = v
 	return s
 }
@@ -1544,7 +1538,7 @@ type DescribeWorkspacesConnectionStatusOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The connection status of the WorkSpace.
-	WorkspacesConnectionStatus []*WorkspaceConnectionStatus `type:"list"`
+	WorkspacesConnectionStatus []WorkspaceConnectionStatus `type:"list"`
 }
 
 // String returns the string representation
@@ -1564,7 +1558,7 @@ func (s *DescribeWorkspacesConnectionStatusOutput) SetNextToken(v string) *Descr
 }
 
 // SetWorkspacesConnectionStatus sets the WorkspacesConnectionStatus field's value.
-func (s *DescribeWorkspacesConnectionStatusOutput) SetWorkspacesConnectionStatus(v []*WorkspaceConnectionStatus) *DescribeWorkspacesConnectionStatusOutput {
+func (s *DescribeWorkspacesConnectionStatusOutput) SetWorkspacesConnectionStatus(v []WorkspaceConnectionStatus) *DescribeWorkspacesConnectionStatusOutput {
 	s.WorkspacesConnectionStatus = v
 	return s
 }
@@ -1602,7 +1596,7 @@ type DescribeWorkspacesInput struct {
 	// Because the CreateWorkspaces operation is asynchronous, the identifier it
 	// returns is not immediately available. If you immediately call DescribeWorkspaces
 	// with this identifier, no information is returned.
-	WorkspaceIds []*string `min:"1" type:"list"`
+	WorkspaceIds []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1668,7 +1662,7 @@ func (s *DescribeWorkspacesInput) SetUserName(v string) *DescribeWorkspacesInput
 }
 
 // SetWorkspaceIds sets the WorkspaceIds field's value.
-func (s *DescribeWorkspacesInput) SetWorkspaceIds(v []*string) *DescribeWorkspacesInput {
+func (s *DescribeWorkspacesInput) SetWorkspaceIds(v []string) *DescribeWorkspacesInput {
 	s.WorkspaceIds = v
 	return s
 }
@@ -1688,7 +1682,7 @@ type DescribeWorkspacesOutput struct {
 	//
 	// Because the CreateWorkspaces operation is asynchronous, some of this information
 	// may be incomplete for a newly-created WorkSpace.
-	Workspaces []*Workspace `type:"list"`
+	Workspaces []Workspace `type:"list"`
 }
 
 // String returns the string representation
@@ -1708,7 +1702,7 @@ func (s *DescribeWorkspacesOutput) SetNextToken(v string) *DescribeWorkspacesOut
 }
 
 // SetWorkspaces sets the Workspaces field's value.
-func (s *DescribeWorkspacesOutput) SetWorkspaces(v []*Workspace) *DescribeWorkspacesOutput {
+func (s *DescribeWorkspacesOutput) SetWorkspaces(v []Workspace) *DescribeWorkspacesOutput {
 	s.Workspaces = v
 	return s
 }
@@ -1922,7 +1916,7 @@ type RebootWorkspacesInput struct {
 	// An array of structures that specify the WorkSpaces to reboot.
 	//
 	// RebootWorkspaceRequests is a required field
-	RebootWorkspaceRequests []*RebootRequest `min:"1" type:"list" required:"true"`
+	RebootWorkspaceRequests []RebootRequest `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1947,9 +1941,6 @@ func (s *RebootWorkspacesInput) Validate() error {
 	}
 	if s.RebootWorkspaceRequests != nil {
 		for i, v := range s.RebootWorkspaceRequests {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebootWorkspaceRequests", i), err.(aws.ErrInvalidParams))
 			}
@@ -1963,7 +1954,7 @@ func (s *RebootWorkspacesInput) Validate() error {
 }
 
 // SetRebootWorkspaceRequests sets the RebootWorkspaceRequests field's value.
-func (s *RebootWorkspacesInput) SetRebootWorkspaceRequests(v []*RebootRequest) *RebootWorkspacesInput {
+func (s *RebootWorkspacesInput) SetRebootWorkspaceRequests(v []RebootRequest) *RebootWorkspacesInput {
 	s.RebootWorkspaceRequests = v
 	return s
 }
@@ -1974,7 +1965,7 @@ type RebootWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of structures representing any WorkSpaces that could not be rebooted.
-	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
+	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
 
 // String returns the string representation
@@ -1988,7 +1979,7 @@ func (s RebootWorkspacesOutput) GoString() string {
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
-func (s *RebootWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *RebootWorkspacesOutput {
+func (s *RebootWorkspacesOutput) SetFailedRequests(v []FailedWorkspaceChangeRequest) *RebootWorkspacesOutput {
 	s.FailedRequests = v
 	return s
 }
@@ -2043,7 +2034,7 @@ type RebuildWorkspacesInput struct {
 	// An array of structures that specify the WorkSpaces to rebuild.
 	//
 	// RebuildWorkspaceRequests is a required field
-	RebuildWorkspaceRequests []*RebuildRequest `min:"1" type:"list" required:"true"`
+	RebuildWorkspaceRequests []RebuildRequest `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2068,9 +2059,6 @@ func (s *RebuildWorkspacesInput) Validate() error {
 	}
 	if s.RebuildWorkspaceRequests != nil {
 		for i, v := range s.RebuildWorkspaceRequests {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebuildWorkspaceRequests", i), err.(aws.ErrInvalidParams))
 			}
@@ -2084,7 +2072,7 @@ func (s *RebuildWorkspacesInput) Validate() error {
 }
 
 // SetRebuildWorkspaceRequests sets the RebuildWorkspaceRequests field's value.
-func (s *RebuildWorkspacesInput) SetRebuildWorkspaceRequests(v []*RebuildRequest) *RebuildWorkspacesInput {
+func (s *RebuildWorkspacesInput) SetRebuildWorkspaceRequests(v []RebuildRequest) *RebuildWorkspacesInput {
 	s.RebuildWorkspaceRequests = v
 	return s
 }
@@ -2095,7 +2083,7 @@ type RebuildWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of structures representing any WorkSpaces that could not be rebuilt.
-	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
+	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
 
 // String returns the string representation
@@ -2109,7 +2097,7 @@ func (s RebuildWorkspacesOutput) GoString() string {
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
-func (s *RebuildWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *RebuildWorkspacesOutput {
+func (s *RebuildWorkspacesOutput) SetFailedRequests(v []FailedWorkspaceChangeRequest) *RebuildWorkspacesOutput {
 	s.FailedRequests = v
 	return s
 }
@@ -2146,7 +2134,7 @@ type StartWorkspacesInput struct {
 	// The requests.
 	//
 	// StartWorkspaceRequests is a required field
-	StartWorkspaceRequests []*StartRequest `min:"1" type:"list" required:"true"`
+	StartWorkspaceRequests []StartRequest `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2177,7 +2165,7 @@ func (s *StartWorkspacesInput) Validate() error {
 }
 
 // SetStartWorkspaceRequests sets the StartWorkspaceRequests field's value.
-func (s *StartWorkspacesInput) SetStartWorkspaceRequests(v []*StartRequest) *StartWorkspacesInput {
+func (s *StartWorkspacesInput) SetStartWorkspaceRequests(v []StartRequest) *StartWorkspacesInput {
 	s.StartWorkspaceRequests = v
 	return s
 }
@@ -2187,7 +2175,7 @@ type StartWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The failed requests.
-	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
+	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
 
 // String returns the string representation
@@ -2201,7 +2189,7 @@ func (s StartWorkspacesOutput) GoString() string {
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
-func (s *StartWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *StartWorkspacesOutput {
+func (s *StartWorkspacesOutput) SetFailedRequests(v []FailedWorkspaceChangeRequest) *StartWorkspacesOutput {
 	s.FailedRequests = v
 	return s
 }
@@ -2238,7 +2226,7 @@ type StopWorkspacesInput struct {
 	// The requests.
 	//
 	// StopWorkspaceRequests is a required field
-	StopWorkspaceRequests []*StopRequest `min:"1" type:"list" required:"true"`
+	StopWorkspaceRequests []StopRequest `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2269,7 +2257,7 @@ func (s *StopWorkspacesInput) Validate() error {
 }
 
 // SetStopWorkspaceRequests sets the StopWorkspaceRequests field's value.
-func (s *StopWorkspacesInput) SetStopWorkspaceRequests(v []*StopRequest) *StopWorkspacesInput {
+func (s *StopWorkspacesInput) SetStopWorkspaceRequests(v []StopRequest) *StopWorkspacesInput {
 	s.StopWorkspaceRequests = v
 	return s
 }
@@ -2279,7 +2267,7 @@ type StopWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The failed requests.
-	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
+	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
 
 // String returns the string representation
@@ -2293,7 +2281,7 @@ func (s StopWorkspacesOutput) GoString() string {
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
-func (s *StopWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *StopWorkspacesOutput {
+func (s *StopWorkspacesOutput) SetFailedRequests(v []FailedWorkspaceChangeRequest) *StopWorkspacesOutput {
 	s.FailedRequests = v
 	return s
 }
@@ -2401,7 +2389,7 @@ type TerminateWorkspacesInput struct {
 	// An array of structures that specify the WorkSpaces to terminate.
 	//
 	// TerminateWorkspaceRequests is a required field
-	TerminateWorkspaceRequests []*TerminateRequest `min:"1" type:"list" required:"true"`
+	TerminateWorkspaceRequests []TerminateRequest `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2426,9 +2414,6 @@ func (s *TerminateWorkspacesInput) Validate() error {
 	}
 	if s.TerminateWorkspaceRequests != nil {
 		for i, v := range s.TerminateWorkspaceRequests {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TerminateWorkspaceRequests", i), err.(aws.ErrInvalidParams))
 			}
@@ -2442,7 +2427,7 @@ func (s *TerminateWorkspacesInput) Validate() error {
 }
 
 // SetTerminateWorkspaceRequests sets the TerminateWorkspaceRequests field's value.
-func (s *TerminateWorkspacesInput) SetTerminateWorkspaceRequests(v []*TerminateRequest) *TerminateWorkspacesInput {
+func (s *TerminateWorkspacesInput) SetTerminateWorkspaceRequests(v []TerminateRequest) *TerminateWorkspacesInput {
 	s.TerminateWorkspaceRequests = v
 	return s
 }
@@ -2453,7 +2438,7 @@ type TerminateWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of structures representing any WorkSpaces that could not be terminated.
-	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
+	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
 
 // String returns the string representation
@@ -2467,7 +2452,7 @@ func (s TerminateWorkspacesOutput) GoString() string {
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
-func (s *TerminateWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *TerminateWorkspacesOutput {
+func (s *TerminateWorkspacesOutput) SetFailedRequests(v []FailedWorkspaceChangeRequest) *TerminateWorkspacesOutput {
 	s.FailedRequests = v
 	return s
 }
@@ -2789,7 +2774,7 @@ type WorkspaceDirectory struct {
 
 	// An array of strings that contains the IP addresses of the DNS servers for
 	// the directory.
-	DnsIpAddresses []*string `type:"list"`
+	DnsIpAddresses []string `type:"list"`
 
 	// The identifier of the IAM role. This is the role that allows Amazon WorkSpaces
 	// to make calls to other services, such as Amazon EC2, on your behalf.
@@ -2804,7 +2789,7 @@ type WorkspaceDirectory struct {
 
 	// An array of strings that contains the identifiers of the subnets used with
 	// the directory.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 
 	// A structure that specifies the default creation properties for all WorkSpaces
 	// in the directory.
@@ -2855,7 +2840,7 @@ func (s *WorkspaceDirectory) SetDirectoryType(v WorkspaceDirectoryType) *Workspa
 }
 
 // SetDnsIpAddresses sets the DnsIpAddresses field's value.
-func (s *WorkspaceDirectory) SetDnsIpAddresses(v []*string) *WorkspaceDirectory {
+func (s *WorkspaceDirectory) SetDnsIpAddresses(v []string) *WorkspaceDirectory {
 	s.DnsIpAddresses = v
 	return s
 }
@@ -2879,7 +2864,7 @@ func (s *WorkspaceDirectory) SetState(v WorkspaceDirectoryState) *WorkspaceDirec
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *WorkspaceDirectory) SetSubnetIds(v []*string) *WorkspaceDirectory {
+func (s *WorkspaceDirectory) SetSubnetIds(v []string) *WorkspaceDirectory {
 	s.SubnetIds = v
 	return s
 }
@@ -2956,7 +2941,7 @@ type WorkspaceRequest struct {
 	RootVolumeEncryptionEnabled *bool `type:"boolean"`
 
 	// The tags of the WorkSpace request.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The username that the WorkSpace is assigned to. This username must exist
 	// in the AWS Directory Service directory specified by the DirectoryId member.
@@ -3004,9 +2989,6 @@ func (s *WorkspaceRequest) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3038,7 +3020,7 @@ func (s *WorkspaceRequest) SetRootVolumeEncryptionEnabled(v bool) *WorkspaceRequ
 }
 
 // SetTags sets the Tags field's value.
-func (s *WorkspaceRequest) SetTags(v []*Tag) *WorkspaceRequest {
+func (s *WorkspaceRequest) SetTags(v []Tag) *WorkspaceRequest {
 	s.Tags = v
 	return s
 }

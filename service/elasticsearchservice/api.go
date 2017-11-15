@@ -768,7 +768,7 @@ type AddTagsInput struct {
 	// List of Tag that need to be added for the Elasticsearch domain.
 	//
 	// TagList is a required field
-	TagList []*Tag `type:"list" required:"true"`
+	TagList []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -794,9 +794,6 @@ func (s *AddTagsInput) Validate() error {
 	}
 	if s.TagList != nil {
 		for i, v := range s.TagList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
 			}
@@ -816,7 +813,7 @@ func (s *AddTagsInput) SetARN(v string) *AddTagsInput {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *AddTagsInput) SetTagList(v []*Tag) *AddTagsInput {
+func (s *AddTagsInput) SetTagList(v []Tag) *AddTagsInput {
 	s.TagList = v
 	return s
 }
@@ -849,7 +846,7 @@ type AdditionalLimit struct {
 	LimitName *string `type:"string"`
 
 	// Value for given AdditionalLimit$LimitName .
-	LimitValues []*string `type:"list"`
+	LimitValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -869,7 +866,7 @@ func (s *AdditionalLimit) SetLimitName(v string) *AdditionalLimit {
 }
 
 // SetLimitValues sets the LimitValues field's value.
-func (s *AdditionalLimit) SetLimitValues(v []*string) *AdditionalLimit {
+func (s *AdditionalLimit) SetLimitValues(v []string) *AdditionalLimit {
 	s.LimitValues = v
 	return s
 }
@@ -891,7 +888,7 @@ type AdvancedOptionsStatus struct {
 	// domain.
 	//
 	// Options is a required field
-	Options map[string]*string `type:"map" required:"true"`
+	Options map[string]string `type:"map" required:"true"`
 
 	// Specifies the status of OptionStatus for advanced options for the specified
 	// Elasticsearch domain.
@@ -911,7 +908,7 @@ func (s AdvancedOptionsStatus) GoString() string {
 }
 
 // SetOptions sets the Options field's value.
-func (s *AdvancedOptionsStatus) SetOptions(v map[string]*string) *AdvancedOptionsStatus {
+func (s *AdvancedOptionsStatus) SetOptions(v map[string]string) *AdvancedOptionsStatus {
 	s.Options = v
 	return s
 }
@@ -932,7 +929,7 @@ type CreateElasticsearchDomainInput struct {
 	// when configuring access to individual sub-resources. By default, the value
 	// is true. See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
-	AdvancedOptions map[string]*string `type:"map"`
+	AdvancedOptions map[string]string `type:"map"`
 
 	// The name of the Elasticsearch domain that you are creating. Domain names
 	// are unique across the domains owned by an account within an AWS region. Domain
@@ -994,7 +991,7 @@ func (s *CreateElasticsearchDomainInput) SetAccessPolicies(v string) *CreateElas
 }
 
 // SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetAdvancedOptions(v map[string]*string) *CreateElasticsearchDomainInput {
+func (s *CreateElasticsearchDomainInput) SetAdvancedOptions(v map[string]string) *CreateElasticsearchDomainInput {
 	s.AdvancedOptions = v
 	return s
 }
@@ -1274,7 +1271,7 @@ type DescribeElasticsearchDomainsInput struct {
 	// The Elasticsearch domains for which you want information.
 	//
 	// DomainNames is a required field
-	DomainNames []*string `type:"list" required:"true"`
+	DomainNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1302,7 +1299,7 @@ func (s *DescribeElasticsearchDomainsInput) Validate() error {
 }
 
 // SetDomainNames sets the DomainNames field's value.
-func (s *DescribeElasticsearchDomainsInput) SetDomainNames(v []*string) *DescribeElasticsearchDomainsInput {
+func (s *DescribeElasticsearchDomainsInput) SetDomainNames(v []string) *DescribeElasticsearchDomainsInput {
 	s.DomainNames = v
 	return s
 }
@@ -1315,7 +1312,7 @@ type DescribeElasticsearchDomainsOutput struct {
 	// The status of the domains requested in the DescribeElasticsearchDomains request.
 	//
 	// DomainStatusList is a required field
-	DomainStatusList []*ElasticsearchDomainStatus `type:"list" required:"true"`
+	DomainStatusList []ElasticsearchDomainStatus `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1329,7 +1326,7 @@ func (s DescribeElasticsearchDomainsOutput) GoString() string {
 }
 
 // SetDomainStatusList sets the DomainStatusList field's value.
-func (s *DescribeElasticsearchDomainsOutput) SetDomainStatusList(v []*ElasticsearchDomainStatus) *DescribeElasticsearchDomainsOutput {
+func (s *DescribeElasticsearchDomainsOutput) SetDomainStatusList(v []ElasticsearchDomainStatus) *DescribeElasticsearchDomainsOutput {
 	s.DomainStatusList = v
 	return s
 }
@@ -1412,7 +1409,7 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 	// by given Instance in Elasticsearch can be one of the following: Data: If
 	// the given InstanceType is used as Data node
 	// Master: If the given InstanceType is used as Master node
-	LimitsByRole map[string]*Limits `type:"map"`
+	LimitsByRole map[string]Limits `type:"map"`
 }
 
 // String returns the string representation
@@ -1426,7 +1423,7 @@ func (s DescribeElasticsearchInstanceTypeLimitsOutput) GoString() string {
 }
 
 // SetLimitsByRole sets the LimitsByRole field's value.
-func (s *DescribeElasticsearchInstanceTypeLimitsOutput) SetLimitsByRole(v map[string]*Limits) *DescribeElasticsearchInstanceTypeLimitsOutput {
+func (s *DescribeElasticsearchInstanceTypeLimitsOutput) SetLimitsByRole(v map[string]Limits) *DescribeElasticsearchInstanceTypeLimitsOutput {
 	s.LimitsByRole = v
 	return s
 }
@@ -1741,7 +1738,7 @@ type ElasticsearchDomainStatus struct {
 	AccessPolicies *string `type:"string"`
 
 	// Specifies the status of the AdvancedOptions
-	AdvancedOptions map[string]*string `type:"map"`
+	AdvancedOptions map[string]string `type:"map"`
 
 	// The domain creation status. True if the creation of an Elasticsearch domain
 	// is complete. False if domain creation is still in progress.
@@ -1814,7 +1811,7 @@ func (s *ElasticsearchDomainStatus) SetAccessPolicies(v string) *ElasticsearchDo
 }
 
 // SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *ElasticsearchDomainStatus) SetAdvancedOptions(v map[string]*string) *ElasticsearchDomainStatus {
+func (s *ElasticsearchDomainStatus) SetAdvancedOptions(v map[string]string) *ElasticsearchDomainStatus {
 	s.AdvancedOptions = v
 	return s
 }
@@ -1984,7 +1981,7 @@ type Limits struct {
 
 	// List of additional limits that are specific to a given InstanceType and for
 	// each of it's InstanceRole .
-	AdditionalLimits []*AdditionalLimit `type:"list"`
+	AdditionalLimits []AdditionalLimit `type:"list"`
 
 	// InstanceLimits represents the list of instance related attributes that are
 	// available for given InstanceType.
@@ -1992,7 +1989,7 @@ type Limits struct {
 
 	// StorageType represents the list of storage related types and attributes that
 	// are available for given InstanceType.
-	StorageTypes []*StorageType `type:"list"`
+	StorageTypes []StorageType `type:"list"`
 }
 
 // String returns the string representation
@@ -2006,7 +2003,7 @@ func (s Limits) GoString() string {
 }
 
 // SetAdditionalLimits sets the AdditionalLimits field's value.
-func (s *Limits) SetAdditionalLimits(v []*AdditionalLimit) *Limits {
+func (s *Limits) SetAdditionalLimits(v []AdditionalLimit) *Limits {
 	s.AdditionalLimits = v
 	return s
 }
@@ -2018,7 +2015,7 @@ func (s *Limits) SetInstanceLimits(v *InstanceLimits) *Limits {
 }
 
 // SetStorageTypes sets the StorageTypes field's value.
-func (s *Limits) SetStorageTypes(v []*StorageType) *Limits {
+func (s *Limits) SetStorageTypes(v []StorageType) *Limits {
 	s.StorageTypes = v
 	return s
 }
@@ -2043,7 +2040,7 @@ type ListDomainNamesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of Elasticsearch domain names.
-	DomainNames []*DomainInfo `type:"list"`
+	DomainNames []DomainInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -2057,7 +2054,7 @@ func (s ListDomainNamesOutput) GoString() string {
 }
 
 // SetDomainNames sets the DomainNames field's value.
-func (s *ListDomainNamesOutput) SetDomainNames(v []*DomainInfo) *ListDomainNamesOutput {
+func (s *ListDomainNamesOutput) SetDomainNames(v []DomainInfo) *ListDomainNamesOutput {
 	s.DomainNames = v
 	return s
 }
@@ -2220,7 +2217,7 @@ type ListElasticsearchVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of supported elastic search versions.
-	ElasticsearchVersions []*string `type:"list"`
+	ElasticsearchVersions []string `type:"list"`
 
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
@@ -2239,7 +2236,7 @@ func (s ListElasticsearchVersionsOutput) GoString() string {
 }
 
 // SetElasticsearchVersions sets the ElasticsearchVersions field's value.
-func (s *ListElasticsearchVersionsOutput) SetElasticsearchVersions(v []*string) *ListElasticsearchVersionsOutput {
+func (s *ListElasticsearchVersionsOutput) SetElasticsearchVersions(v []string) *ListElasticsearchVersionsOutput {
 	s.ElasticsearchVersions = v
 	return s
 }
@@ -2299,7 +2296,7 @@ type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of Tag for the requested Elasticsearch domain.
-	TagList []*Tag `type:"list"`
+	TagList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -2313,7 +2310,7 @@ func (s ListTagsOutput) GoString() string {
 }
 
 // SetTagList sets the TagList field's value.
-func (s *ListTagsOutput) SetTagList(v []*Tag) *ListTagsOutput {
+func (s *ListTagsOutput) SetTagList(v []Tag) *ListTagsOutput {
 	s.TagList = v
 	return s
 }
@@ -2400,7 +2397,7 @@ type RemoveTagsInput struct {
 	// domain.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2438,7 +2435,7 @@ func (s *RemoveTagsInput) SetARN(v string) *RemoveTagsInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsInput) SetTagKeys(v []*string) *RemoveTagsInput {
+func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -2534,7 +2531,7 @@ type StorageType struct {
 	StorageSubTypeName *string `type:"string"`
 
 	// List of limits that are applicable for given storage type.
-	StorageTypeLimits []*StorageTypeLimit `type:"list"`
+	StorageTypeLimits []StorageTypeLimit `type:"list"`
 
 	// Type of the storage. List of available storage options: instance
 	//  Inbuilt storage available for the given Instance ebs
@@ -2559,7 +2556,7 @@ func (s *StorageType) SetStorageSubTypeName(v string) *StorageType {
 }
 
 // SetStorageTypeLimits sets the StorageTypeLimits field's value.
-func (s *StorageType) SetStorageTypeLimits(v []*StorageTypeLimit) *StorageType {
+func (s *StorageType) SetStorageTypeLimits(v []StorageTypeLimit) *StorageType {
 	s.StorageTypeLimits = v
 	return s
 }
@@ -2587,7 +2584,7 @@ type StorageTypeLimit struct {
 	LimitName *string `type:"string"`
 
 	// Values for the StorageTypeLimit$LimitName .
-	LimitValues []*string `type:"list"`
+	LimitValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2607,7 +2604,7 @@ func (s *StorageTypeLimit) SetLimitName(v string) *StorageTypeLimit {
 }
 
 // SetLimitValues sets the LimitValues field's value.
-func (s *StorageTypeLimit) SetLimitValues(v []*string) *StorageTypeLimit {
+func (s *StorageTypeLimit) SetLimitValues(v []string) *StorageTypeLimit {
 	s.LimitValues = v
 	return s
 }
@@ -2686,7 +2683,7 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// body. Must be false when configuring access to individual sub-resources.
 	// By default, the value is true. See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
-	AdvancedOptions map[string]*string `type:"map"`
+	AdvancedOptions map[string]string `type:"map"`
 
 	// The name of the Elasticsearch domain that you are updating.
 	//
@@ -2738,7 +2735,7 @@ func (s *UpdateElasticsearchDomainConfigInput) SetAccessPolicies(v string) *Upda
 }
 
 // SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetAdvancedOptions(v map[string]*string) *UpdateElasticsearchDomainConfigInput {
+func (s *UpdateElasticsearchDomainConfigInput) SetAdvancedOptions(v map[string]string) *UpdateElasticsearchDomainConfigInput {
 	s.AdvancedOptions = v
 	return s
 }

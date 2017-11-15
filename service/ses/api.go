@@ -3333,7 +3333,7 @@ type CloudWatchDestination struct {
 	// email sending events to Amazon CloudWatch.
 	//
 	// DimensionConfigurations is a required field
-	DimensionConfigurations []*CloudWatchDimensionConfiguration `type:"list" required:"true"`
+	DimensionConfigurations []CloudWatchDimensionConfiguration `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3355,9 +3355,6 @@ func (s *CloudWatchDestination) Validate() error {
 	}
 	if s.DimensionConfigurations != nil {
 		for i, v := range s.DimensionConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DimensionConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -3371,7 +3368,7 @@ func (s *CloudWatchDestination) Validate() error {
 }
 
 // SetDimensionConfigurations sets the DimensionConfigurations field's value.
-func (s *CloudWatchDestination) SetDimensionConfigurations(v []*CloudWatchDimensionConfiguration) *CloudWatchDestination {
+func (s *CloudWatchDestination) SetDimensionConfigurations(v []CloudWatchDimensionConfiguration) *CloudWatchDestination {
 	s.DimensionConfigurations = v
 	return s
 }
@@ -4633,7 +4630,7 @@ type DescribeActiveReceiptRuleSetOutput struct {
 	Metadata *ReceiptRuleSetMetadata `type:"structure"`
 
 	// The receipt rules that belong to the active rule set.
-	Rules []*ReceiptRule `type:"list"`
+	Rules []ReceiptRule `type:"list"`
 }
 
 // String returns the string representation
@@ -4653,7 +4650,7 @@ func (s *DescribeActiveReceiptRuleSetOutput) SetMetadata(v *ReceiptRuleSetMetada
 }
 
 // SetRules sets the Rules field's value.
-func (s *DescribeActiveReceiptRuleSetOutput) SetRules(v []*ReceiptRule) *DescribeActiveReceiptRuleSetOutput {
+func (s *DescribeActiveReceiptRuleSetOutput) SetRules(v []ReceiptRule) *DescribeActiveReceiptRuleSetOutput {
 	s.Rules = v
 	return s
 }
@@ -4722,7 +4719,7 @@ type DescribeConfigurationSetOutput struct {
 	ConfigurationSet *ConfigurationSet `type:"structure"`
 
 	// A list of event destinations associated with the configuration set.
-	EventDestinations []*EventDestination `type:"list"`
+	EventDestinations []EventDestination `type:"list"`
 
 	// The name of the custom open and click tracking domain associated with the
 	// configuration set.
@@ -4746,7 +4743,7 @@ func (s *DescribeConfigurationSetOutput) SetConfigurationSet(v *ConfigurationSet
 }
 
 // SetEventDestinations sets the EventDestinations field's value.
-func (s *DescribeConfigurationSetOutput) SetEventDestinations(v []*EventDestination) *DescribeConfigurationSetOutput {
+func (s *DescribeConfigurationSetOutput) SetEventDestinations(v []EventDestination) *DescribeConfigurationSetOutput {
 	s.EventDestinations = v
 	return s
 }
@@ -4895,7 +4892,7 @@ type DescribeReceiptRuleSetOutput struct {
 	Metadata *ReceiptRuleSetMetadata `type:"structure"`
 
 	// A list of the receipt rules that belong to the specified receipt rule set.
-	Rules []*ReceiptRule `type:"list"`
+	Rules []ReceiptRule `type:"list"`
 }
 
 // String returns the string representation
@@ -4915,7 +4912,7 @@ func (s *DescribeReceiptRuleSetOutput) SetMetadata(v *ReceiptRuleSetMetadata) *D
 }
 
 // SetRules sets the Rules field's value.
-func (s *DescribeReceiptRuleSetOutput) SetRules(v []*ReceiptRule) *DescribeReceiptRuleSetOutput {
+func (s *DescribeReceiptRuleSetOutput) SetRules(v []ReceiptRule) *DescribeReceiptRuleSetOutput {
 	s.Rules = v
 	return s
 }
@@ -4932,13 +4929,13 @@ type Destination struct {
 	_ struct{} `type:"structure"`
 
 	// The BCC: field(s) of the message.
-	BccAddresses []*string `type:"list"`
+	BccAddresses []string `type:"list"`
 
 	// The CC: field(s) of the message.
-	CcAddresses []*string `type:"list"`
+	CcAddresses []string `type:"list"`
 
 	// The To: field(s) of the message.
-	ToAddresses []*string `type:"list"`
+	ToAddresses []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4952,19 +4949,19 @@ func (s Destination) GoString() string {
 }
 
 // SetBccAddresses sets the BccAddresses field's value.
-func (s *Destination) SetBccAddresses(v []*string) *Destination {
+func (s *Destination) SetBccAddresses(v []string) *Destination {
 	s.BccAddresses = v
 	return s
 }
 
 // SetCcAddresses sets the CcAddresses field's value.
-func (s *Destination) SetCcAddresses(v []*string) *Destination {
+func (s *Destination) SetCcAddresses(v []string) *Destination {
 	s.CcAddresses = v
 	return s
 }
 
 // SetToAddresses sets the ToAddresses field's value.
-func (s *Destination) SetToAddresses(v []*string) *Destination {
+func (s *Destination) SetToAddresses(v []string) *Destination {
 	s.ToAddresses = v
 	return s
 }
@@ -5172,7 +5169,7 @@ type GetIdentityDkimAttributesInput struct {
 	// both.
 	//
 	// Identities is a required field
-	Identities []*string `type:"list" required:"true"`
+	Identities []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5200,7 +5197,7 @@ func (s *GetIdentityDkimAttributesInput) Validate() error {
 }
 
 // SetIdentities sets the Identities field's value.
-func (s *GetIdentityDkimAttributesInput) SetIdentities(v []*string) *GetIdentityDkimAttributesInput {
+func (s *GetIdentityDkimAttributesInput) SetIdentities(v []string) *GetIdentityDkimAttributesInput {
 	s.Identities = v
 	return s
 }
@@ -5216,7 +5213,7 @@ type GetIdentityDkimAttributesOutput struct {
 	// The DKIM attributes for an email address or a domain.
 	//
 	// DkimAttributes is a required field
-	DkimAttributes map[string]*IdentityDkimAttributes `type:"map" required:"true"`
+	DkimAttributes map[string]IdentityDkimAttributes `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5230,7 +5227,7 @@ func (s GetIdentityDkimAttributesOutput) GoString() string {
 }
 
 // SetDkimAttributes sets the DkimAttributes field's value.
-func (s *GetIdentityDkimAttributesOutput) SetDkimAttributes(v map[string]*IdentityDkimAttributes) *GetIdentityDkimAttributesOutput {
+func (s *GetIdentityDkimAttributesOutput) SetDkimAttributes(v map[string]IdentityDkimAttributes) *GetIdentityDkimAttributesOutput {
 	s.DkimAttributes = v
 	return s
 }
@@ -5245,7 +5242,7 @@ type GetIdentityMailFromDomainAttributesInput struct {
 	// A list of one or more identities.
 	//
 	// Identities is a required field
-	Identities []*string `type:"list" required:"true"`
+	Identities []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5273,7 +5270,7 @@ func (s *GetIdentityMailFromDomainAttributesInput) Validate() error {
 }
 
 // SetIdentities sets the Identities field's value.
-func (s *GetIdentityMailFromDomainAttributesInput) SetIdentities(v []*string) *GetIdentityMailFromDomainAttributesInput {
+func (s *GetIdentityMailFromDomainAttributesInput) SetIdentities(v []string) *GetIdentityMailFromDomainAttributesInput {
 	s.Identities = v
 	return s
 }
@@ -5286,7 +5283,7 @@ type GetIdentityMailFromDomainAttributesOutput struct {
 	// A map of identities to custom MAIL FROM attributes.
 	//
 	// MailFromDomainAttributes is a required field
-	MailFromDomainAttributes map[string]*IdentityMailFromDomainAttributes `type:"map" required:"true"`
+	MailFromDomainAttributes map[string]IdentityMailFromDomainAttributes `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5300,7 +5297,7 @@ func (s GetIdentityMailFromDomainAttributesOutput) GoString() string {
 }
 
 // SetMailFromDomainAttributes sets the MailFromDomainAttributes field's value.
-func (s *GetIdentityMailFromDomainAttributesOutput) SetMailFromDomainAttributes(v map[string]*IdentityMailFromDomainAttributes) *GetIdentityMailFromDomainAttributesOutput {
+func (s *GetIdentityMailFromDomainAttributesOutput) SetMailFromDomainAttributes(v map[string]IdentityMailFromDomainAttributes) *GetIdentityMailFromDomainAttributesOutput {
 	s.MailFromDomainAttributes = v
 	return s
 }
@@ -5317,7 +5314,7 @@ type GetIdentityNotificationAttributesInput struct {
 	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
 	//
 	// Identities is a required field
-	Identities []*string `type:"list" required:"true"`
+	Identities []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5345,7 +5342,7 @@ func (s *GetIdentityNotificationAttributesInput) Validate() error {
 }
 
 // SetIdentities sets the Identities field's value.
-func (s *GetIdentityNotificationAttributesInput) SetIdentities(v []*string) *GetIdentityNotificationAttributesInput {
+func (s *GetIdentityNotificationAttributesInput) SetIdentities(v []string) *GetIdentityNotificationAttributesInput {
 	s.Identities = v
 	return s
 }
@@ -5358,7 +5355,7 @@ type GetIdentityNotificationAttributesOutput struct {
 	// A map of Identity to IdentityNotificationAttributes.
 	//
 	// NotificationAttributes is a required field
-	NotificationAttributes map[string]*IdentityNotificationAttributes `type:"map" required:"true"`
+	NotificationAttributes map[string]IdentityNotificationAttributes `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5372,7 +5369,7 @@ func (s GetIdentityNotificationAttributesOutput) GoString() string {
 }
 
 // SetNotificationAttributes sets the NotificationAttributes field's value.
-func (s *GetIdentityNotificationAttributesOutput) SetNotificationAttributes(v map[string]*IdentityNotificationAttributes) *GetIdentityNotificationAttributesOutput {
+func (s *GetIdentityNotificationAttributesOutput) SetNotificationAttributes(v map[string]IdentityNotificationAttributes) *GetIdentityNotificationAttributesOutput {
 	s.NotificationAttributes = v
 	return s
 }
@@ -5399,7 +5396,7 @@ type GetIdentityPoliciesInput struct {
 	// are attached to the identity, you can use ListIdentityPolicies.
 	//
 	// PolicyNames is a required field
-	PolicyNames []*string `type:"list" required:"true"`
+	PolicyNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5437,7 +5434,7 @@ func (s *GetIdentityPoliciesInput) SetIdentity(v string) *GetIdentityPoliciesInp
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *GetIdentityPoliciesInput) SetPolicyNames(v []*string) *GetIdentityPoliciesInput {
+func (s *GetIdentityPoliciesInput) SetPolicyNames(v []string) *GetIdentityPoliciesInput {
 	s.PolicyNames = v
 	return s
 }
@@ -5450,7 +5447,7 @@ type GetIdentityPoliciesOutput struct {
 	// A map of policy names to policies.
 	//
 	// Policies is a required field
-	Policies map[string]*string `type:"map" required:"true"`
+	Policies map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5464,7 +5461,7 @@ func (s GetIdentityPoliciesOutput) GoString() string {
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *GetIdentityPoliciesOutput) SetPolicies(v map[string]*string) *GetIdentityPoliciesOutput {
+func (s *GetIdentityPoliciesOutput) SetPolicies(v map[string]string) *GetIdentityPoliciesOutput {
 	s.Policies = v
 	return s
 }
@@ -5480,7 +5477,7 @@ type GetIdentityVerificationAttributesInput struct {
 	// A list of identities.
 	//
 	// Identities is a required field
-	Identities []*string `type:"list" required:"true"`
+	Identities []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5508,7 +5505,7 @@ func (s *GetIdentityVerificationAttributesInput) Validate() error {
 }
 
 // SetIdentities sets the Identities field's value.
-func (s *GetIdentityVerificationAttributesInput) SetIdentities(v []*string) *GetIdentityVerificationAttributesInput {
+func (s *GetIdentityVerificationAttributesInput) SetIdentities(v []string) *GetIdentityVerificationAttributesInput {
 	s.Identities = v
 	return s
 }
@@ -5522,7 +5519,7 @@ type GetIdentityVerificationAttributesOutput struct {
 	// A map of Identities to IdentityVerificationAttributes objects.
 	//
 	// VerificationAttributes is a required field
-	VerificationAttributes map[string]*IdentityVerificationAttributes `type:"map" required:"true"`
+	VerificationAttributes map[string]IdentityVerificationAttributes `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5536,7 +5533,7 @@ func (s GetIdentityVerificationAttributesOutput) GoString() string {
 }
 
 // SetVerificationAttributes sets the VerificationAttributes field's value.
-func (s *GetIdentityVerificationAttributesOutput) SetVerificationAttributes(v map[string]*IdentityVerificationAttributes) *GetIdentityVerificationAttributesOutput {
+func (s *GetIdentityVerificationAttributesOutput) SetVerificationAttributes(v map[string]IdentityVerificationAttributes) *GetIdentityVerificationAttributesOutput {
 	s.VerificationAttributes = v
 	return s
 }
@@ -5627,7 +5624,7 @@ type GetSendStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of data points, each of which represents 15 minutes of activity.
-	SendDataPoints []*SendDataPoint `type:"list"`
+	SendDataPoints []SendDataPoint `type:"list"`
 }
 
 // String returns the string representation
@@ -5641,7 +5638,7 @@ func (s GetSendStatisticsOutput) GoString() string {
 }
 
 // SetSendDataPoints sets the SendDataPoints field's value.
-func (s *GetSendStatisticsOutput) SetSendDataPoints(v []*SendDataPoint) *GetSendStatisticsOutput {
+func (s *GetSendStatisticsOutput) SetSendDataPoints(v []SendDataPoint) *GetSendStatisticsOutput {
 	s.SendDataPoints = v
 	return s
 }
@@ -5667,7 +5664,7 @@ type IdentityDkimAttributes struct {
 	//
 	// For more information about creating DNS records using DKIM tokens, go to
 	// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
-	DkimTokens []*string `type:"list"`
+	DkimTokens []string `type:"list"`
 
 	// Describes whether Amazon SES has successfully verified the DKIM DNS records
 	// (tokens) published in the domain name's DNS. (This only applies to domain
@@ -5694,7 +5691,7 @@ func (s *IdentityDkimAttributes) SetDkimEnabled(v bool) *IdentityDkimAttributes 
 }
 
 // SetDkimTokens sets the DkimTokens field's value.
-func (s *IdentityDkimAttributes) SetDkimTokens(v []*string) *IdentityDkimAttributes {
+func (s *IdentityDkimAttributes) SetDkimTokens(v []string) *IdentityDkimAttributes {
 	s.DkimTokens = v
 	return s
 }
@@ -6103,7 +6100,7 @@ type ListConfigurationSetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of configuration sets.
-	ConfigurationSets []*ConfigurationSet `type:"list"`
+	ConfigurationSets []ConfigurationSet `type:"list"`
 
 	// A token indicating that there are additional configuration sets available
 	// to be listed. Pass this token to successive calls of ListConfigurationSets.
@@ -6121,7 +6118,7 @@ func (s ListConfigurationSetsOutput) GoString() string {
 }
 
 // SetConfigurationSets sets the ConfigurationSets field's value.
-func (s *ListConfigurationSetsOutput) SetConfigurationSets(v []*ConfigurationSet) *ListConfigurationSetsOutput {
+func (s *ListConfigurationSetsOutput) SetConfigurationSets(v []ConfigurationSet) *ListConfigurationSetsOutput {
 	s.ConfigurationSets = v
 	return s
 }
@@ -6187,7 +6184,7 @@ type ListIdentitiesOutput struct {
 	// A list of identities.
 	//
 	// Identities is a required field
-	Identities []*string `type:"list" required:"true"`
+	Identities []string `type:"list" required:"true"`
 
 	// The token used for pagination.
 	NextToken *string `type:"string"`
@@ -6204,7 +6201,7 @@ func (s ListIdentitiesOutput) GoString() string {
 }
 
 // SetIdentities sets the Identities field's value.
-func (s *ListIdentitiesOutput) SetIdentities(v []*string) *ListIdentitiesOutput {
+func (s *ListIdentitiesOutput) SetIdentities(v []string) *ListIdentitiesOutput {
 	s.Identities = v
 	return s
 }
@@ -6271,7 +6268,7 @@ type ListIdentityPoliciesOutput struct {
 	// A list of names of policies that apply to the specified identity.
 	//
 	// PolicyNames is a required field
-	PolicyNames []*string `type:"list" required:"true"`
+	PolicyNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6285,7 +6282,7 @@ func (s ListIdentityPoliciesOutput) GoString() string {
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *ListIdentityPoliciesOutput) SetPolicyNames(v []*string) *ListIdentityPoliciesOutput {
+func (s *ListIdentityPoliciesOutput) SetPolicyNames(v []string) *ListIdentityPoliciesOutput {
 	s.PolicyNames = v
 	return s
 }
@@ -6315,7 +6312,7 @@ type ListReceiptFiltersOutput struct {
 
 	// A list of IP address filter data structures, which each consist of a name,
 	// an IP address range, and whether to allow or block mail from it.
-	Filters []*ReceiptFilter `type:"list"`
+	Filters []ReceiptFilter `type:"list"`
 }
 
 // String returns the string representation
@@ -6329,7 +6326,7 @@ func (s ListReceiptFiltersOutput) GoString() string {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListReceiptFiltersOutput) SetFilters(v []*ReceiptFilter) *ListReceiptFiltersOutput {
+func (s *ListReceiptFiltersOutput) SetFilters(v []ReceiptFilter) *ListReceiptFiltersOutput {
 	s.Filters = v
 	return s
 }
@@ -6374,7 +6371,7 @@ type ListReceiptRuleSetsOutput struct {
 
 	// The metadata for the currently active receipt rule set. The metadata consists
 	// of the rule set name and the timestamp of when the rule set was created.
-	RuleSets []*ReceiptRuleSetMetadata `type:"list"`
+	RuleSets []ReceiptRuleSetMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -6394,7 +6391,7 @@ func (s *ListReceiptRuleSetsOutput) SetNextToken(v string) *ListReceiptRuleSetsO
 }
 
 // SetRuleSets sets the RuleSets field's value.
-func (s *ListReceiptRuleSetsOutput) SetRuleSets(v []*ReceiptRuleSetMetadata) *ListReceiptRuleSetsOutput {
+func (s *ListReceiptRuleSetsOutput) SetRuleSets(v []ReceiptRuleSetMetadata) *ListReceiptRuleSetsOutput {
 	s.RuleSets = v
 	return s
 }
@@ -6421,7 +6418,7 @@ type ListVerifiedEmailAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of email addresses that have been verified.
-	VerifiedEmailAddresses []*string `type:"list"`
+	VerifiedEmailAddresses []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6435,7 +6432,7 @@ func (s ListVerifiedEmailAddressesOutput) GoString() string {
 }
 
 // SetVerifiedEmailAddresses sets the VerifiedEmailAddresses field's value.
-func (s *ListVerifiedEmailAddressesOutput) SetVerifiedEmailAddresses(v []*string) *ListVerifiedEmailAddressesOutput {
+func (s *ListVerifiedEmailAddressesOutput) SetVerifiedEmailAddresses(v []string) *ListVerifiedEmailAddressesOutput {
 	s.VerifiedEmailAddresses = v
 	return s
 }
@@ -6521,7 +6518,7 @@ type MessageDsn struct {
 	ArrivalDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// Additional X-headers to include in the DSN.
-	ExtensionFields []*ExtensionField `type:"list"`
+	ExtensionFields []ExtensionField `type:"list"`
 
 	// The reporting MTA that attempted to deliver the message, formatted as specified
 	// in RFC 3464 (https://tools.ietf.org/html/rfc3464) (mta-name-type; mta-name).
@@ -6550,9 +6547,6 @@ func (s *MessageDsn) Validate() error {
 	}
 	if s.ExtensionFields != nil {
 		for i, v := range s.ExtensionFields {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtensionFields", i), err.(aws.ErrInvalidParams))
 			}
@@ -6572,7 +6566,7 @@ func (s *MessageDsn) SetArrivalDate(v time.Time) *MessageDsn {
 }
 
 // SetExtensionFields sets the ExtensionFields field's value.
-func (s *MessageDsn) SetExtensionFields(v []*ExtensionField) *MessageDsn {
+func (s *MessageDsn) SetExtensionFields(v []ExtensionField) *MessageDsn {
 	s.ExtensionFields = v
 	return s
 }
@@ -7106,7 +7100,7 @@ type ReceiptRule struct {
 
 	// An ordered list of actions to perform on messages that match at least one
 	// of the recipient email addresses or domains specified in the receipt rule.
-	Actions []*ReceiptAction `type:"list"`
+	Actions []ReceiptAction `type:"list"`
 
 	// If true, the receipt rule is active. The default value is false.
 	Enabled *bool `type:"boolean"`
@@ -7126,7 +7120,7 @@ type ReceiptRule struct {
 	// The recipient domains and email addresses that the receipt rule applies to.
 	// If this field is not specified, this rule will match all recipients under
 	// all verified domains.
-	Recipients []*string `type:"list"`
+	Recipients []string `type:"list"`
 
 	// If true, then messages that this receipt rule applies to are scanned for
 	// spam and viruses. The default value is false.
@@ -7158,9 +7152,6 @@ func (s *ReceiptRule) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -7174,7 +7165,7 @@ func (s *ReceiptRule) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *ReceiptRule) SetActions(v []*ReceiptAction) *ReceiptRule {
+func (s *ReceiptRule) SetActions(v []ReceiptAction) *ReceiptRule {
 	s.Actions = v
 	return s
 }
@@ -7192,7 +7183,7 @@ func (s *ReceiptRule) SetName(v string) *ReceiptRule {
 }
 
 // SetRecipients sets the Recipients field's value.
-func (s *ReceiptRule) SetRecipients(v []*string) *ReceiptRule {
+func (s *ReceiptRule) SetRecipients(v []string) *ReceiptRule {
 	s.Recipients = v
 	return s
 }
@@ -7278,7 +7269,7 @@ type RecipientDsnFields struct {
 	DiagnosticCode *string `type:"string"`
 
 	// Additional X-headers to include in the DSN.
-	ExtensionFields []*ExtensionField `type:"list"`
+	ExtensionFields []ExtensionField `type:"list"`
 
 	// The email address that the message was ultimately delivered to. This corresponds
 	// to the Final-Recipient in the DSN. If not specified, FinalRecipient will
@@ -7329,9 +7320,6 @@ func (s *RecipientDsnFields) Validate() error {
 	}
 	if s.ExtensionFields != nil {
 		for i, v := range s.ExtensionFields {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtensionFields", i), err.(aws.ErrInvalidParams))
 			}
@@ -7357,7 +7345,7 @@ func (s *RecipientDsnFields) SetDiagnosticCode(v string) *RecipientDsnFields {
 }
 
 // SetExtensionFields sets the ExtensionFields field's value.
-func (s *RecipientDsnFields) SetExtensionFields(v []*ExtensionField) *RecipientDsnFields {
+func (s *RecipientDsnFields) SetExtensionFields(v []ExtensionField) *RecipientDsnFields {
 	s.ExtensionFields = v
 	return s
 }
@@ -7397,7 +7385,7 @@ type ReorderReceiptRuleSetInput struct {
 	// you want to put them.
 	//
 	// RuleNames is a required field
-	RuleNames []*string `type:"list" required:"true"`
+	RuleNames []string `type:"list" required:"true"`
 
 	// The name of the receipt rule set to reorder.
 	//
@@ -7434,7 +7422,7 @@ func (s *ReorderReceiptRuleSetInput) Validate() error {
 }
 
 // SetRuleNames sets the RuleNames field's value.
-func (s *ReorderReceiptRuleSetInput) SetRuleNames(v []*string) *ReorderReceiptRuleSetInput {
+func (s *ReorderReceiptRuleSetInput) SetRuleNames(v []string) *ReorderReceiptRuleSetInput {
 	s.RuleNames = v
 	return s
 }
@@ -7720,7 +7708,7 @@ type SendBounceInput struct {
 	// must specify at least one BouncedRecipientInfo in the list.
 	//
 	// BouncedRecipientInfoList is a required field
-	BouncedRecipientInfoList []*BouncedRecipientInfo `type:"list" required:"true"`
+	BouncedRecipientInfoList []BouncedRecipientInfo `type:"list" required:"true"`
 
 	// Human-readable text for the bounce message to explain the failure. If not
 	// specified, the text will be auto-generated based on the bounced recipient
@@ -7764,9 +7752,6 @@ func (s *SendBounceInput) Validate() error {
 	}
 	if s.BouncedRecipientInfoList != nil {
 		for i, v := range s.BouncedRecipientInfoList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BouncedRecipientInfoList", i), err.(aws.ErrInvalidParams))
 			}
@@ -7797,7 +7782,7 @@ func (s *SendBounceInput) SetBounceSenderArn(v string) *SendBounceInput {
 }
 
 // SetBouncedRecipientInfoList sets the BouncedRecipientInfoList field's value.
-func (s *SendBounceInput) SetBouncedRecipientInfoList(v []*BouncedRecipientInfo) *SendBounceInput {
+func (s *SendBounceInput) SetBouncedRecipientInfoList(v []BouncedRecipientInfo) *SendBounceInput {
 	s.BouncedRecipientInfoList = v
 	return s
 }
@@ -7928,7 +7913,7 @@ type SendEmailInput struct {
 
 	// The reply-to email address(es) for the message. If the recipient replies
 	// to the message, each reply-to address will receive the reply.
-	ReplyToAddresses []*string `type:"list"`
+	ReplyToAddresses []string `type:"list"`
 
 	// The email address that bounces and complaints will be forwarded to when feedback
 	// forwarding is enabled. If the message cannot be delivered to the recipient,
@@ -7987,7 +7972,7 @@ type SendEmailInput struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that
 	// you send using SendEmail. Tags correspond to characteristics of the email
 	// that you define, so that you can publish email sending events.
-	Tags []*MessageTag `type:"list"`
+	Tags []MessageTag `type:"list"`
 }
 
 // String returns the string representation
@@ -8022,9 +8007,6 @@ func (s *SendEmailInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -8056,7 +8038,7 @@ func (s *SendEmailInput) SetMessage(v *Message) *SendEmailInput {
 }
 
 // SetReplyToAddresses sets the ReplyToAddresses field's value.
-func (s *SendEmailInput) SetReplyToAddresses(v []*string) *SendEmailInput {
+func (s *SendEmailInput) SetReplyToAddresses(v []string) *SendEmailInput {
 	s.ReplyToAddresses = v
 	return s
 }
@@ -8086,7 +8068,7 @@ func (s *SendEmailInput) SetSourceArn(v string) *SendEmailInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *SendEmailInput) SetTags(v []*MessageTag) *SendEmailInput {
+func (s *SendEmailInput) SetTags(v []MessageTag) *SendEmailInput {
 	s.Tags = v
 	return s
 }
@@ -8129,7 +8111,7 @@ type SendRawEmailInput struct {
 
 	// A list of destinations for the message, consisting of To:, CC:, and BCC:
 	// addresses.
-	Destinations []*string `type:"list"`
+	Destinations []string `type:"list"`
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
@@ -8217,7 +8199,7 @@ type SendRawEmailInput struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that
 	// you send using SendRawEmail. Tags correspond to characteristics of the email
 	// that you define, so that you can publish email sending events.
-	Tags []*MessageTag `type:"list"`
+	Tags []MessageTag `type:"list"`
 }
 
 // String returns the string representation
@@ -8244,9 +8226,6 @@ func (s *SendRawEmailInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -8266,7 +8245,7 @@ func (s *SendRawEmailInput) SetConfigurationSetName(v string) *SendRawEmailInput
 }
 
 // SetDestinations sets the Destinations field's value.
-func (s *SendRawEmailInput) SetDestinations(v []*string) *SendRawEmailInput {
+func (s *SendRawEmailInput) SetDestinations(v []string) *SendRawEmailInput {
 	s.Destinations = v
 	return s
 }
@@ -8302,7 +8281,7 @@ func (s *SendRawEmailInput) SetSourceArn(v string) *SendRawEmailInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *SendRawEmailInput) SetTags(v []*MessageTag) *SendRawEmailInput {
+func (s *SendRawEmailInput) SetTags(v []MessageTag) *SendRawEmailInput {
 	s.Tags = v
 	return s
 }
@@ -9280,7 +9259,7 @@ type VerifyDomainDkimOutput struct {
 	// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
 	//
 	// DkimTokens is a required field
-	DkimTokens []*string `type:"list" required:"true"`
+	DkimTokens []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9294,7 +9273,7 @@ func (s VerifyDomainDkimOutput) GoString() string {
 }
 
 // SetDkimTokens sets the DkimTokens field's value.
-func (s *VerifyDomainDkimOutput) SetDkimTokens(v []*string) *VerifyDomainDkimOutput {
+func (s *VerifyDomainDkimOutput) SetDkimTokens(v []string) *VerifyDomainDkimOutput {
 	s.DkimTokens = v
 	return s
 }

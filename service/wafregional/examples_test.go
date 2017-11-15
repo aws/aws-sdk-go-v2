@@ -1254,7 +1254,7 @@ func ExampleWAFRegional_UpdateByteMatchSetRequest_shared00() {
 	input := &waf.UpdateByteMatchSetInput{
 		ByteMatchSetId: aws.String("exampleIDs3t-46da-4fdb-b8d5-abc321j569j5"),
 		ChangeToken:    aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
-		Updates: []*waf.ByteMatchSetUpdate{
+		Updates: []waf.ByteMatchSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},
@@ -1310,7 +1310,7 @@ func ExampleWAFRegional_UpdateIPSetRequest_shared00() {
 	input := &waf.UpdateIPSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		IPSetId:     aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []*waf.IPSetUpdate{
+		Updates: []waf.IPSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},
@@ -1367,7 +1367,7 @@ func ExampleWAFRegional_UpdateRuleRequest_shared00() {
 	input := &waf.UpdateRuleInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		RuleId:      aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []*waf.RuleUpdate{
+		Updates: []waf.RuleUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},
@@ -1425,7 +1425,7 @@ func ExampleWAFRegional_UpdateSizeConstraintSetRequest_shared00() {
 	input := &waf.UpdateSizeConstraintSetInput{
 		ChangeToken:         aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []*waf.SizeConstraintSetUpdate{
+		Updates: []waf.SizeConstraintSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},
@@ -1483,7 +1483,7 @@ func ExampleWAFRegional_UpdateSqlInjectionMatchSetRequest_shared00() {
 	input := &waf.UpdateSqlInjectionMatchSetInput{
 		ChangeToken:            aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []*waf.SqlInjectionMatchSetUpdate{
+		Updates: []waf.SqlInjectionMatchSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},
@@ -1540,7 +1540,7 @@ func ExampleWAFRegional_UpdateWebACLRequest_shared00() {
 		DefaultAction: &waf.WafAction{
 			Type: waf.WafActionTypeAllow,
 		},
-		Updates: []*waf.WebACLUpdate{
+		Updates: []waf.WebACLUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},
@@ -1598,7 +1598,7 @@ func ExampleWAFRegional_UpdateXssMatchSetRequest_shared00() {
 	svc := wafregional.New(cfg)
 	input := &waf.UpdateXssMatchSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
-		Updates: []*waf.XssMatchSetUpdate{
+		Updates: []waf.XssMatchSetUpdate{
 			{
 				Action: waf.ChangeActionDelete,
 			},

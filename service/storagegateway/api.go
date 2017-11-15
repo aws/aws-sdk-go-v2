@@ -3846,7 +3846,7 @@ type AddCacheInput struct {
 	_ struct{} `type:"structure"`
 
 	// DiskIds is a required field
-	DiskIds []*string `type:"list" required:"true"`
+	DiskIds []string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -3887,7 +3887,7 @@ func (s *AddCacheInput) Validate() error {
 }
 
 // SetDiskIds sets the DiskIds field's value.
-func (s *AddCacheInput) SetDiskIds(v []*string) *AddCacheInput {
+func (s *AddCacheInput) SetDiskIds(v []string) *AddCacheInput {
 	s.DiskIds = v
 	return s
 }
@@ -3940,7 +3940,7 @@ type AddTagsToResourceInput struct {
 	// in UTF-8 format, and the following special characters: + - = . _ : / @.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3969,9 +3969,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3991,7 +3988,7 @@ func (s *AddTagsToResourceInput) SetResourceARN(v string) *AddTagsToResourceInpu
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []*Tag) *AddTagsToResourceInput {
+func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	s.Tags = v
 	return s
 }
@@ -4026,7 +4023,7 @@ type AddUploadBufferInput struct {
 	_ struct{} `type:"structure"`
 
 	// DiskIds is a required field
-	DiskIds []*string `type:"list" required:"true"`
+	DiskIds []string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -4067,7 +4064,7 @@ func (s *AddUploadBufferInput) Validate() error {
 }
 
 // SetDiskIds sets the DiskIds field's value.
-func (s *AddUploadBufferInput) SetDiskIds(v []*string) *AddUploadBufferInput {
+func (s *AddUploadBufferInput) SetDiskIds(v []string) *AddUploadBufferInput {
 	s.DiskIds = v
 	return s
 }
@@ -4115,7 +4112,7 @@ type AddWorkingStorageInput struct {
 	// You can get the disk IDs from the ListLocalDisks API.
 	//
 	// DiskIds is a required field
-	DiskIds []*string `type:"list" required:"true"`
+	DiskIds []string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -4156,7 +4153,7 @@ func (s *AddWorkingStorageInput) Validate() error {
 }
 
 // SetDiskIds sets the DiskIds field's value.
-func (s *AddWorkingStorageInput) SetDiskIds(v []*string) *AddWorkingStorageInput {
+func (s *AddWorkingStorageInput) SetDiskIds(v []string) *AddWorkingStorageInput {
 	s.DiskIds = v
 	return s
 }
@@ -4697,7 +4694,7 @@ type CreateNFSFileShareInput struct {
 
 	// The list of clients that are allowed to access the file gateway. The list
 	// must contain either valid IP addresses or valid CIDR blocks.
-	ClientList []*string `min:"1" type:"list"`
+	ClientList []string `min:"1" type:"list"`
 
 	// A unique string value that you supply that is used by file gateway to ensure
 	// idempotent file share creation.
@@ -4818,7 +4815,7 @@ func (s *CreateNFSFileShareInput) Validate() error {
 }
 
 // SetClientList sets the ClientList field's value.
-func (s *CreateNFSFileShareInput) SetClientList(v []*string) *CreateNFSFileShareInput {
+func (s *CreateNFSFileShareInput) SetClientList(v []string) *CreateNFSFileShareInput {
 	s.ClientList = v
 	return s
 }
@@ -5540,7 +5537,7 @@ type CreateTapesOutput struct {
 
 	// A list of unique Amazon Resource Names (ARNs) that represents the virtual
 	// tapes that were created.
-	TapeARNs []*string `type:"list"`
+	TapeARNs []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5554,7 +5551,7 @@ func (s CreateTapesOutput) GoString() string {
 }
 
 // SetTapeARNs sets the TapeARNs field's value.
-func (s *CreateTapesOutput) SetTapeARNs(v []*string) *CreateTapesOutput {
+func (s *CreateTapesOutput) SetTapeARNs(v []string) *CreateTapesOutput {
 	s.TapeARNs = v
 	return s
 }
@@ -6351,7 +6348,7 @@ type DescribeCacheOutput struct {
 
 	CacheUsedPercentage *float64 `type:"double"`
 
-	DiskIds []*string `type:"list"`
+	DiskIds []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -6399,7 +6396,7 @@ func (s *DescribeCacheOutput) SetCacheUsedPercentage(v float64) *DescribeCacheOu
 }
 
 // SetDiskIds sets the DiskIds field's value.
-func (s *DescribeCacheOutput) SetDiskIds(v []*string) *DescribeCacheOutput {
+func (s *DescribeCacheOutput) SetDiskIds(v []string) *DescribeCacheOutput {
 	s.DiskIds = v
 	return s
 }
@@ -6415,7 +6412,7 @@ type DescribeCachediSCSIVolumesInput struct {
 	_ struct{} `type:"structure"`
 
 	// VolumeARNs is a required field
-	VolumeARNs []*string `type:"list" required:"true"`
+	VolumeARNs []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6443,7 +6440,7 @@ func (s *DescribeCachediSCSIVolumesInput) Validate() error {
 }
 
 // SetVolumeARNs sets the VolumeARNs field's value.
-func (s *DescribeCachediSCSIVolumesInput) SetVolumeARNs(v []*string) *DescribeCachediSCSIVolumesInput {
+func (s *DescribeCachediSCSIVolumesInput) SetVolumeARNs(v []string) *DescribeCachediSCSIVolumesInput {
 	s.VolumeARNs = v
 	return s
 }
@@ -6455,7 +6452,7 @@ type DescribeCachediSCSIVolumesOutput struct {
 
 	// An array of objects where each object contains metadata about one cached
 	// volume.
-	CachediSCSIVolumes []*CachediSCSIVolume `type:"list"`
+	CachediSCSIVolumes []CachediSCSIVolume `type:"list"`
 }
 
 // String returns the string representation
@@ -6469,7 +6466,7 @@ func (s DescribeCachediSCSIVolumesOutput) GoString() string {
 }
 
 // SetCachediSCSIVolumes sets the CachediSCSIVolumes field's value.
-func (s *DescribeCachediSCSIVolumesOutput) SetCachediSCSIVolumes(v []*CachediSCSIVolume) *DescribeCachediSCSIVolumesOutput {
+func (s *DescribeCachediSCSIVolumesOutput) SetCachediSCSIVolumes(v []CachediSCSIVolume) *DescribeCachediSCSIVolumesOutput {
 	s.CachediSCSIVolumes = v
 	return s
 }
@@ -6540,7 +6537,7 @@ type DescribeChapCredentialsOutput struct {
 	//    to participate in mutual CHAP with the initiator (e.g. Windows client).
 	//
 	//    * TargetARN: The Amazon Resource Name (ARN) of the storage volume.
-	ChapCredentials []*ChapInfo `type:"list"`
+	ChapCredentials []ChapInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -6554,7 +6551,7 @@ func (s DescribeChapCredentialsOutput) GoString() string {
 }
 
 // SetChapCredentials sets the ChapCredentials field's value.
-func (s *DescribeChapCredentialsOutput) SetChapCredentials(v []*ChapInfo) *DescribeChapCredentialsOutput {
+func (s *DescribeChapCredentialsOutput) SetChapCredentials(v []ChapInfo) *DescribeChapCredentialsOutput {
 	s.ChapCredentials = v
 	return s
 }
@@ -6623,7 +6620,7 @@ type DescribeGatewayInformationOutput struct {
 
 	// A NetworkInterface array that contains descriptions of the gateway network
 	// interfaces.
-	GatewayNetworkInterfaces []*NetworkInterface `type:"list"`
+	GatewayNetworkInterfaces []NetworkInterface `type:"list"`
 
 	// A value that indicates the operating state of the gateway.
 	GatewayState *string `min:"2" type:"string"`
@@ -6674,7 +6671,7 @@ func (s *DescribeGatewayInformationOutput) SetGatewayName(v string) *DescribeGat
 }
 
 // SetGatewayNetworkInterfaces sets the GatewayNetworkInterfaces field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayNetworkInterfaces(v []*NetworkInterface) *DescribeGatewayInformationOutput {
+func (s *DescribeGatewayInformationOutput) SetGatewayNetworkInterfaces(v []NetworkInterface) *DescribeGatewayInformationOutput {
 	s.GatewayNetworkInterfaces = v
 	return s
 }
@@ -6838,7 +6835,7 @@ type DescribeNFSFileSharesInput struct {
 	// be described.
 	//
 	// FileShareARNList is a required field
-	FileShareARNList []*string `min:"1" type:"list" required:"true"`
+	FileShareARNList []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6869,7 +6866,7 @@ func (s *DescribeNFSFileSharesInput) Validate() error {
 }
 
 // SetFileShareARNList sets the FileShareARNList field's value.
-func (s *DescribeNFSFileSharesInput) SetFileShareARNList(v []*string) *DescribeNFSFileSharesInput {
+func (s *DescribeNFSFileSharesInput) SetFileShareARNList(v []string) *DescribeNFSFileSharesInput {
 	s.FileShareARNList = v
 	return s
 }
@@ -6880,7 +6877,7 @@ type DescribeNFSFileSharesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array containing a description for each requested file share.
-	NFSFileShareInfoList []*NFSFileShareInfo `type:"list"`
+	NFSFileShareInfoList []NFSFileShareInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -6894,7 +6891,7 @@ func (s DescribeNFSFileSharesOutput) GoString() string {
 }
 
 // SetNFSFileShareInfoList sets the NFSFileShareInfoList field's value.
-func (s *DescribeNFSFileSharesOutput) SetNFSFileShareInfoList(v []*NFSFileShareInfo) *DescribeNFSFileSharesOutput {
+func (s *DescribeNFSFileSharesOutput) SetNFSFileShareInfoList(v []NFSFileShareInfo) *DescribeNFSFileSharesOutput {
 	s.NFSFileShareInfoList = v
 	return s
 }
@@ -7010,7 +7007,7 @@ type DescribeStorediSCSIVolumesInput struct {
 	// same gateway. Use ListVolumes to get volume ARNs for a gateway.
 	//
 	// VolumeARNs is a required field
-	VolumeARNs []*string `type:"list" required:"true"`
+	VolumeARNs []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7038,7 +7035,7 @@ func (s *DescribeStorediSCSIVolumesInput) Validate() error {
 }
 
 // SetVolumeARNs sets the VolumeARNs field's value.
-func (s *DescribeStorediSCSIVolumesInput) SetVolumeARNs(v []*string) *DescribeStorediSCSIVolumesInput {
+func (s *DescribeStorediSCSIVolumesInput) SetVolumeARNs(v []string) *DescribeStorediSCSIVolumesInput {
 	s.VolumeARNs = v
 	return s
 }
@@ -7047,7 +7044,7 @@ func (s *DescribeStorediSCSIVolumesInput) SetVolumeARNs(v []*string) *DescribeSt
 type DescribeStorediSCSIVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
-	StorediSCSIVolumes []*StorediSCSIVolume `type:"list"`
+	StorediSCSIVolumes []StorediSCSIVolume `type:"list"`
 }
 
 // String returns the string representation
@@ -7061,7 +7058,7 @@ func (s DescribeStorediSCSIVolumesOutput) GoString() string {
 }
 
 // SetStorediSCSIVolumes sets the StorediSCSIVolumes field's value.
-func (s *DescribeStorediSCSIVolumesOutput) SetStorediSCSIVolumes(v []*StorediSCSIVolume) *DescribeStorediSCSIVolumesOutput {
+func (s *DescribeStorediSCSIVolumesOutput) SetStorediSCSIVolumes(v []StorediSCSIVolume) *DescribeStorediSCSIVolumesOutput {
 	s.StorediSCSIVolumes = v
 	return s
 }
@@ -7081,7 +7078,7 @@ type DescribeTapeArchivesInput struct {
 
 	// Specifies one or more unique Amazon Resource Names (ARNs) that represent
 	// the virtual tapes you want to describe.
-	TapeARNs []*string `type:"list"`
+	TapeARNs []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7123,7 +7120,7 @@ func (s *DescribeTapeArchivesInput) SetMarker(v string) *DescribeTapeArchivesInp
 }
 
 // SetTapeARNs sets the TapeARNs field's value.
-func (s *DescribeTapeArchivesInput) SetTapeARNs(v []*string) *DescribeTapeArchivesInput {
+func (s *DescribeTapeArchivesInput) SetTapeARNs(v []string) *DescribeTapeArchivesInput {
 	s.TapeARNs = v
 	return s
 }
@@ -7144,7 +7141,7 @@ type DescribeTapeArchivesOutput struct {
 	// includes of the Amazon Resource Name(ARN) of the virtual tapes. The information
 	// returned includes the Amazon Resource Names (ARNs) of the tapes, size of
 	// the tapes, status of the tapes, progress of the description and tape barcode.
-	TapeArchives []*TapeArchive `type:"list"`
+	TapeArchives []TapeArchive `type:"list"`
 }
 
 // String returns the string representation
@@ -7164,7 +7161,7 @@ func (s *DescribeTapeArchivesOutput) SetMarker(v string) *DescribeTapeArchivesOu
 }
 
 // SetTapeArchives sets the TapeArchives field's value.
-func (s *DescribeTapeArchivesOutput) SetTapeArchives(v []*TapeArchive) *DescribeTapeArchivesOutput {
+func (s *DescribeTapeArchivesOutput) SetTapeArchives(v []TapeArchive) *DescribeTapeArchivesOutput {
 	s.TapeArchives = v
 	return s
 }
@@ -7258,7 +7255,7 @@ type DescribeTapeRecoveryPointsOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// An array of TapeRecoveryPointInfos that are available for the specified gateway.
-	TapeRecoveryPointInfos []*TapeRecoveryPointInfo `type:"list"`
+	TapeRecoveryPointInfos []TapeRecoveryPointInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -7284,7 +7281,7 @@ func (s *DescribeTapeRecoveryPointsOutput) SetMarker(v string) *DescribeTapeReco
 }
 
 // SetTapeRecoveryPointInfos sets the TapeRecoveryPointInfos field's value.
-func (s *DescribeTapeRecoveryPointsOutput) SetTapeRecoveryPointInfos(v []*TapeRecoveryPointInfo) *DescribeTapeRecoveryPointsOutput {
+func (s *DescribeTapeRecoveryPointsOutput) SetTapeRecoveryPointInfos(v []TapeRecoveryPointInfo) *DescribeTapeRecoveryPointsOutput {
 	s.TapeRecoveryPointInfos = v
 	return s
 }
@@ -7316,7 +7313,7 @@ type DescribeTapesInput struct {
 	// the virtual tapes you want to describe. If this parameter is not specified,
 	// Tape gateway returns a description of all virtual tapes associated with the
 	// specified gateway.
-	TapeARNs []*string `type:"list"`
+	TapeARNs []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7371,7 +7368,7 @@ func (s *DescribeTapesInput) SetMarker(v string) *DescribeTapesInput {
 }
 
 // SetTapeARNs sets the TapeARNs field's value.
-func (s *DescribeTapesInput) SetTapeARNs(v []*string) *DescribeTapesInput {
+func (s *DescribeTapesInput) SetTapeARNs(v []string) *DescribeTapesInput {
 	s.TapeARNs = v
 	return s
 }
@@ -7389,7 +7386,7 @@ type DescribeTapesOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// An array of virtual tape descriptions.
-	Tapes []*Tape `type:"list"`
+	Tapes []Tape `type:"list"`
 }
 
 // String returns the string representation
@@ -7409,7 +7406,7 @@ func (s *DescribeTapesOutput) SetMarker(v string) *DescribeTapesOutput {
 }
 
 // SetTapes sets the Tapes field's value.
-func (s *DescribeTapesOutput) SetTapes(v []*Tape) *DescribeTapesOutput {
+func (s *DescribeTapesOutput) SetTapes(v []Tape) *DescribeTapesOutput {
 	s.Tapes = v
 	return s
 }
@@ -7462,7 +7459,7 @@ func (s *DescribeUploadBufferInput) SetGatewayARN(v string) *DescribeUploadBuffe
 type DescribeUploadBufferOutput struct {
 	_ struct{} `type:"structure"`
 
-	DiskIds []*string `type:"list"`
+	DiskIds []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -7484,7 +7481,7 @@ func (s DescribeUploadBufferOutput) GoString() string {
 }
 
 // SetDiskIds sets the DiskIds field's value.
-func (s *DescribeUploadBufferOutput) SetDiskIds(v []*string) *DescribeUploadBufferOutput {
+func (s *DescribeUploadBufferOutput) SetDiskIds(v []string) *DescribeUploadBufferOutput {
 	s.DiskIds = v
 	return s
 }
@@ -7532,7 +7529,7 @@ type DescribeVTLDevicesInput struct {
 	// All of the specified VTL devices must be from the same gateway. If no VTL
 	// devices are specified, the result will contain all devices on the specified
 	// gateway.
-	VTLDeviceARNs []*string `type:"list"`
+	VTLDeviceARNs []string `type:"list"`
 }
 
 // String returns the string representation
@@ -7587,7 +7584,7 @@ func (s *DescribeVTLDevicesInput) SetMarker(v string) *DescribeVTLDevicesInput {
 }
 
 // SetVTLDeviceARNs sets the VTLDeviceARNs field's value.
-func (s *DescribeVTLDevicesInput) SetVTLDeviceARNs(v []*string) *DescribeVTLDevicesInput {
+func (s *DescribeVTLDevicesInput) SetVTLDeviceARNs(v []string) *DescribeVTLDevicesInput {
 	s.VTLDeviceARNs = v
 	return s
 }
@@ -7609,7 +7606,7 @@ type DescribeVTLDevicesOutput struct {
 
 	// An array of VTL device objects composed of the Amazon Resource Name(ARN)
 	// of the VTL devices.
-	VTLDevices []*VTLDevice `type:"list"`
+	VTLDevices []VTLDevice `type:"list"`
 }
 
 // String returns the string representation
@@ -7635,7 +7632,7 @@ func (s *DescribeVTLDevicesOutput) SetMarker(v string) *DescribeVTLDevicesOutput
 }
 
 // SetVTLDevices sets the VTLDevices field's value.
-func (s *DescribeVTLDevicesOutput) SetVTLDevices(v []*VTLDevice) *DescribeVTLDevicesOutput {
+func (s *DescribeVTLDevicesOutput) SetVTLDevices(v []VTLDevice) *DescribeVTLDevicesOutput {
 	s.VTLDevices = v
 	return s
 }
@@ -7694,7 +7691,7 @@ type DescribeWorkingStorageOutput struct {
 	// Each local disk ID is specified as a string (minimum length of 1 and maximum
 	// length of 300). If no local disks are configured as working storage, then
 	// the DiskIds array is empty.
-	DiskIds []*string `type:"list"`
+	DiskIds []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -7720,7 +7717,7 @@ func (s DescribeWorkingStorageOutput) GoString() string {
 }
 
 // SetDiskIds sets the DiskIds field's value.
-func (s *DescribeWorkingStorageOutput) SetDiskIds(v []*string) *DescribeWorkingStorageOutput {
+func (s *DescribeWorkingStorageOutput) SetDiskIds(v []string) *DescribeWorkingStorageOutput {
 	s.DiskIds = v
 	return s
 }
@@ -7948,7 +7945,7 @@ type Error struct {
 	ErrorCode ErrorCode `locationName:"errorCode" type:"string"`
 
 	// Human-readable text that provides detail about the error that occurred.
-	ErrorDetails map[string]*string `locationName:"errorDetails" type:"map"`
+	ErrorDetails map[string]string `locationName:"errorDetails" type:"map"`
 }
 
 // String returns the string representation
@@ -7968,7 +7965,7 @@ func (s *Error) SetErrorCode(v ErrorCode) *Error {
 }
 
 // SetErrorDetails sets the ErrorDetails field's value.
-func (s *Error) SetErrorDetails(v map[string]*string) *Error {
+func (s *Error) SetErrorDetails(v map[string]string) *Error {
 	s.ErrorDetails = v
 	return s
 }
@@ -8166,7 +8163,7 @@ type ListFileSharesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of information about the file gateway's file shares.
-	FileShareInfoList []*FileShareInfo `type:"list"`
+	FileShareInfoList []FileShareInfo `type:"list"`
 
 	// If the request includes Marker, the response returns that value in this field.
 	Marker *string `min:"1" type:"string"`
@@ -8188,7 +8185,7 @@ func (s ListFileSharesOutput) GoString() string {
 }
 
 // SetFileShareInfoList sets the FileShareInfoList field's value.
-func (s *ListFileSharesOutput) SetFileShareInfoList(v []*FileShareInfo) *ListFileSharesOutput {
+func (s *ListFileSharesOutput) SetFileShareInfoList(v []FileShareInfo) *ListFileSharesOutput {
 	s.FileShareInfoList = v
 	return s
 }
@@ -8265,7 +8262,7 @@ func (s *ListGatewaysInput) SetMarker(v string) *ListGatewaysInput {
 type ListGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
-	Gateways []*GatewayInfo `type:"list"`
+	Gateways []GatewayInfo `type:"list"`
 
 	Marker *string `min:"1" type:"string"`
 }
@@ -8281,7 +8278,7 @@ func (s ListGatewaysOutput) GoString() string {
 }
 
 // SetGateways sets the Gateways field's value.
-func (s *ListGatewaysOutput) SetGateways(v []*GatewayInfo) *ListGatewaysOutput {
+func (s *ListGatewaysOutput) SetGateways(v []GatewayInfo) *ListGatewaysOutput {
 	s.Gateways = v
 	return s
 }
@@ -8341,7 +8338,7 @@ func (s *ListLocalDisksInput) SetGatewayARN(v string) *ListLocalDisksInput {
 type ListLocalDisksOutput struct {
 	_ struct{} `type:"structure"`
 
-	Disks []*Disk `type:"list"`
+	Disks []Disk `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -8359,7 +8356,7 @@ func (s ListLocalDisksOutput) GoString() string {
 }
 
 // SetDisks sets the Disks field's value.
-func (s *ListLocalDisksOutput) SetDisks(v []*Disk) *ListLocalDisksOutput {
+func (s *ListLocalDisksOutput) SetDisks(v []Disk) *ListLocalDisksOutput {
 	s.Disks = v
 	return s
 }
@@ -8455,7 +8452,7 @@ type ListTagsForResourceOutput struct {
 	ResourceARN *string `min:"50" type:"string"`
 
 	// An array that contains the tags for the specified resource.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -8481,7 +8478,7 @@ func (s *ListTagsForResourceOutput) SetResourceARN(v string) *ListTagsForResourc
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -8507,7 +8504,7 @@ type ListTapesInput struct {
 	// The Amazon Resource Name (ARN) of each of the tapes you want to list. If
 	// you don't specify a tape ARN, the response lists all tapes in both your VTL
 	// and VTS.
-	TapeARNs []*string `type:"list"`
+	TapeARNs []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8549,7 +8546,7 @@ func (s *ListTapesInput) SetMarker(v string) *ListTapesInput {
 }
 
 // SetTapeARNs sets the TapeARNs field's value.
-func (s *ListTapesInput) SetTapeARNs(v []*string) *ListTapesInput {
+func (s *ListTapesInput) SetTapeARNs(v []string) *ListTapesInput {
 	s.TapeARNs = v
 	return s
 }
@@ -8572,7 +8569,7 @@ type ListTapesOutput struct {
 	// An array of TapeInfo objects, where each object describes an a single tape.
 	// If there not tapes in the tape library or VTS, then the TapeInfos is an empty
 	// array.
-	TapeInfos []*TapeInfo `type:"list"`
+	TapeInfos []TapeInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -8592,7 +8589,7 @@ func (s *ListTapesOutput) SetMarker(v string) *ListTapesOutput {
 }
 
 // SetTapeInfos sets the TapeInfos field's value.
-func (s *ListTapesOutput) SetTapeInfos(v []*TapeInfo) *ListTapesOutput {
+func (s *ListTapesOutput) SetTapeInfos(v []TapeInfo) *ListTapesOutput {
 	s.TapeInfos = v
 	return s
 }
@@ -8649,7 +8646,7 @@ type ListVolumeInitiatorsOutput struct {
 
 	// The host names and port numbers of all iSCSI initiators that are connected
 	// to the gateway.
-	Initiators []*string `type:"list"`
+	Initiators []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8663,7 +8660,7 @@ func (s ListVolumeInitiatorsOutput) GoString() string {
 }
 
 // SetInitiators sets the Initiators field's value.
-func (s *ListVolumeInitiatorsOutput) SetInitiators(v []*string) *ListVolumeInitiatorsOutput {
+func (s *ListVolumeInitiatorsOutput) SetInitiators(v []string) *ListVolumeInitiatorsOutput {
 	s.Initiators = v
 	return s
 }
@@ -8720,7 +8717,7 @@ type ListVolumeRecoveryPointsOutput struct {
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
 
-	VolumeRecoveryPointInfos []*VolumeRecoveryPointInfo `type:"list"`
+	VolumeRecoveryPointInfos []VolumeRecoveryPointInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -8740,7 +8737,7 @@ func (s *ListVolumeRecoveryPointsOutput) SetGatewayARN(v string) *ListVolumeReco
 }
 
 // SetVolumeRecoveryPointInfos sets the VolumeRecoveryPointInfos field's value.
-func (s *ListVolumeRecoveryPointsOutput) SetVolumeRecoveryPointInfos(v []*VolumeRecoveryPointInfo) *ListVolumeRecoveryPointsOutput {
+func (s *ListVolumeRecoveryPointsOutput) SetVolumeRecoveryPointInfos(v []VolumeRecoveryPointInfo) *ListVolumeRecoveryPointsOutput {
 	s.VolumeRecoveryPointInfos = v
 	return s
 }
@@ -8825,7 +8822,7 @@ type ListVolumesOutput struct {
 
 	Marker *string `min:"1" type:"string"`
 
-	VolumeInfos []*VolumeInfo `type:"list"`
+	VolumeInfos []VolumeInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -8851,7 +8848,7 @@ func (s *ListVolumesOutput) SetMarker(v string) *ListVolumesOutput {
 }
 
 // SetVolumeInfos sets the VolumeInfos field's value.
-func (s *ListVolumesOutput) SetVolumeInfos(v []*VolumeInfo) *ListVolumesOutput {
+func (s *ListVolumesOutput) SetVolumeInfos(v []VolumeInfo) *ListVolumesOutput {
 	s.VolumeInfos = v
 	return s
 }
@@ -8942,7 +8939,7 @@ type NFSFileShareInfo struct {
 
 	// The list of clients that are allowed to access the file gateway. The list
 	// must contain either valid IP addresses or valid CIDR blocks.
-	ClientList []*string `min:"1" type:"list"`
+	ClientList []string `min:"1" type:"list"`
 
 	// The default storage class for objects put into an Amazon S3 bucket by file
 	// gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field
@@ -9012,7 +9009,7 @@ func (s NFSFileShareInfo) GoString() string {
 }
 
 // SetClientList sets the ClientList field's value.
-func (s *NFSFileShareInfo) SetClientList(v []*string) *NFSFileShareInfo {
+func (s *NFSFileShareInfo) SetClientList(v []string) *NFSFileShareInfo {
 	s.ClientList = v
 	return s
 }
@@ -9223,7 +9220,7 @@ type RemoveTagsFromResourceInput struct {
 	// is composed of a key/value pair.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9264,7 +9261,7 @@ func (s *RemoveTagsFromResourceInput) SetResourceARN(v string) *RemoveTagsFromRe
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []*string) *RemoveTagsFromResourceInput {
+func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -10813,7 +10810,7 @@ type UpdateNFSFileShareInput struct {
 
 	// The list of clients that are allowed to access the file gateway. The list
 	// must contain either valid IP addresses or valid CIDR blocks.
-	ClientList []*string `min:"1" type:"list"`
+	ClientList []string `min:"1" type:"list"`
 
 	// The default storage class for objects put into an Amazon S3 bucket by a file
 	// gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field
@@ -10895,7 +10892,7 @@ func (s *UpdateNFSFileShareInput) Validate() error {
 }
 
 // SetClientList sets the ClientList field's value.
-func (s *UpdateNFSFileShareInput) SetClientList(v []*string) *UpdateNFSFileShareInput {
+func (s *UpdateNFSFileShareInput) SetClientList(v []string) *UpdateNFSFileShareInput {
 	s.ClientList = v
 	return s
 }

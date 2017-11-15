@@ -289,7 +289,7 @@ func ExampleLexModelBuildingService_PutBotRequest_shared00() {
 	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.PutBotInput{
 		AbortStatement: &lexmodelbuildingservice.Statement{
-			Messages: []*lexmodelbuildingservice.Message{
+			Messages: []lexmodelbuildingservice.Message{
 				{
 					Content:     aws.String("I don't understand. Can you try again?"),
 					ContentType: lexmodelbuildingservice.ContentTypePlainText,
@@ -303,7 +303,7 @@ func ExampleLexModelBuildingService_PutBotRequest_shared00() {
 		ChildDirected: aws.Bool(true),
 		ClarificationPrompt: &lexmodelbuildingservice.Prompt{
 			MaxAttempts: aws.Int64(1),
-			Messages: []*lexmodelbuildingservice.Message{
+			Messages: []lexmodelbuildingservice.Message{
 				{
 					Content:     aws.String("I'm sorry, I didn't hear that. Can you repeate what you just said?"),
 					ContentType: lexmodelbuildingservice.ContentTypePlainText,
@@ -316,7 +316,7 @@ func ExampleLexModelBuildingService_PutBotRequest_shared00() {
 		},
 		Description:             aws.String("Orders a pizza from a local pizzeria."),
 		IdleSessionTTLInSeconds: aws.Int64(300),
-		Intents: []*lexmodelbuildingservice.Intent{
+		Intents: []lexmodelbuildingservice.Intent{
 			{
 				IntentName:    aws.String("DocOrderPizza"),
 				IntentVersion: aws.String("$LATEST"),
@@ -368,7 +368,7 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.PutIntentInput{
 		ConclusionStatement: &lexmodelbuildingservice.Statement{
-			Messages: []*lexmodelbuildingservice.Message{
+			Messages: []lexmodelbuildingservice.Message{
 				{
 					Content:     aws.String("All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce."),
 					ContentType: lexmodelbuildingservice.ContentTypePlainText,
@@ -382,7 +382,7 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 		},
 		ConfirmationPrompt: &lexmodelbuildingservice.Prompt{
 			MaxAttempts: aws.Int64(1),
-			Messages: []*lexmodelbuildingservice.Message{
+			Messages: []lexmodelbuildingservice.Message{
 				{
 					Content:     aws.String("Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?"),
 					ContentType: lexmodelbuildingservice.ContentTypePlainText,
@@ -395,7 +395,7 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 		},
 		Name: aws.String("DocOrderPizza"),
 		RejectionStatement: &lexmodelbuildingservice.Statement{
-			Messages: []*lexmodelbuildingservice.Message{
+			Messages: []lexmodelbuildingservice.Message{
 				{
 					Content:     aws.String("Ok, I'll cancel your order."),
 					ContentType: lexmodelbuildingservice.ContentTypePlainText,
@@ -406,21 +406,21 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 				},
 			},
 		},
-		SampleUtterances: []*string{
-			aws.String("Order me a pizza."),
-			aws.String("Order me a {Type} pizza."),
-			aws.String("I want a {Crust} crust {Type} pizza"),
-			aws.String("I want a {Crust} crust {Type} pizza with {Sauce} sauce."),
+		SampleUtterances: []string{
+			"Order me a pizza.",
+			"Order me a {Type} pizza.",
+			"I want a {Crust} crust {Type} pizza",
+			"I want a {Crust} crust {Type} pizza with {Sauce} sauce.",
 		},
-		Slots: []*lexmodelbuildingservice.Slot{
+		Slots: []lexmodelbuildingservice.Slot{
 			{
 				Description: aws.String("The type of pizza to order."),
 				Name:        aws.String("Type"),
 				Priority:    aws.Int64(1),
-				SampleUtterances: []*string{
-					aws.String("Get me a {Type} pizza."),
-					aws.String("A {Type} pizza please."),
-					aws.String("I'd like a {Type} pizza."),
+				SampleUtterances: []string{
+					"Get me a {Type} pizza.",
+					"A {Type} pizza please.",
+					"I'd like a {Type} pizza.",
 				},
 				SlotConstraint:  lexmodelbuildingservice.SlotConstraintRequired,
 				SlotType:        aws.String("DocPizzaType"),
@@ -430,9 +430,9 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 				Description: aws.String("The type of pizza crust to order."),
 				Name:        aws.String("Crust"),
 				Priority:    aws.Int64(2),
-				SampleUtterances: []*string{
-					aws.String("Make it a {Crust} crust."),
-					aws.String("I'd like a {Crust} crust."),
+				SampleUtterances: []string{
+					"Make it a {Crust} crust.",
+					"I'd like a {Crust} crust.",
 				},
 				SlotConstraint:  lexmodelbuildingservice.SlotConstraintRequired,
 				SlotType:        aws.String("DocPizzaCrustType"),
@@ -442,9 +442,9 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 				Description: aws.String("The type of sauce to use on the pizza."),
 				Name:        aws.String("Sauce"),
 				Priority:    aws.Int64(3),
-				SampleUtterances: []*string{
-					aws.String("Make it {Sauce} sauce."),
-					aws.String("I'd like {Sauce} sauce."),
+				SampleUtterances: []string{
+					"Make it {Sauce} sauce.",
+					"I'd like {Sauce} sauce.",
 				},
 				SlotConstraint:  lexmodelbuildingservice.SlotConstraintRequired,
 				SlotType:        aws.String("DocPizzaSauceType"),
@@ -494,7 +494,7 @@ func ExampleLexModelBuildingService_PutSlotTypeRequest_shared00() {
 	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.PutSlotTypeInput{
 		Description: aws.String("Available pizza sauces"),
-		EnumerationValues: []*lexmodelbuildingservice.EnumerationValue{
+		EnumerationValues: []lexmodelbuildingservice.EnumerationValue{
 			{
 				Value: aws.String("red"),
 			},
