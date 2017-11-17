@@ -19,6 +19,10 @@ type BuildSuggestersRequest struct {
 
 // Send marshals and sends the BuildSuggesters API request.
 func (r BuildSuggestersRequest) Send() (*BuildSuggestersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,6 +69,10 @@ type CreateDomainRequest struct {
 
 // Send marshals and sends the CreateDomain API request.
 func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,6 +119,10 @@ type DefineAnalysisSchemeRequest struct {
 
 // Send marshals and sends the DefineAnalysisScheme API request.
 func (r DefineAnalysisSchemeRequest) Send() (*DefineAnalysisSchemeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,6 +170,10 @@ type DefineExpressionRequest struct {
 
 // Send marshals and sends the DefineExpression API request.
 func (r DefineExpressionRequest) Send() (*DefineExpressionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -205,6 +221,10 @@ type DefineIndexFieldRequest struct {
 
 // Send marshals and sends the DefineIndexField API request.
 func (r DefineIndexFieldRequest) Send() (*DefineIndexFieldOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -256,6 +276,10 @@ type DefineSuggesterRequest struct {
 
 // Send marshals and sends the DefineSuggester API request.
 func (r DefineSuggesterRequest) Send() (*DefineSuggesterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -305,6 +329,10 @@ type DeleteAnalysisSchemeRequest struct {
 
 // Send marshals and sends the DeleteAnalysisScheme API request.
 func (r DeleteAnalysisSchemeRequest) Send() (*DeleteAnalysisSchemeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -351,6 +379,10 @@ type DeleteDomainRequest struct {
 
 // Send marshals and sends the DeleteDomain API request.
 func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,6 +430,10 @@ type DeleteExpressionRequest struct {
 
 // Send marshals and sends the DeleteExpression API request.
 func (r DeleteExpressionRequest) Send() (*DeleteExpressionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -444,6 +480,10 @@ type DeleteIndexFieldRequest struct {
 
 // Send marshals and sends the DeleteIndexField API request.
 func (r DeleteIndexFieldRequest) Send() (*DeleteIndexFieldOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -490,6 +530,10 @@ type DeleteSuggesterRequest struct {
 
 // Send marshals and sends the DeleteSuggester API request.
 func (r DeleteSuggesterRequest) Send() (*DeleteSuggesterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -536,6 +580,10 @@ type DescribeAnalysisSchemesRequest struct {
 
 // Send marshals and sends the DescribeAnalysisSchemes API request.
 func (r DescribeAnalysisSchemesRequest) Send() (*DescribeAnalysisSchemesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -586,6 +634,10 @@ type DescribeAvailabilityOptionsRequest struct {
 
 // Send marshals and sends the DescribeAvailabilityOptions API request.
 func (r DescribeAvailabilityOptionsRequest) Send() (*DescribeAvailabilityOptionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -683,6 +735,10 @@ type DescribeExpressionsRequest struct {
 
 // Send marshals and sends the DescribeExpressions API request.
 func (r DescribeExpressionsRequest) Send() (*DescribeExpressionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -732,6 +788,10 @@ type DescribeIndexFieldsRequest struct {
 
 // Send marshals and sends the DescribeIndexFields API request.
 func (r DescribeIndexFieldsRequest) Send() (*DescribeIndexFieldsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -781,6 +841,10 @@ type DescribeScalingParametersRequest struct {
 
 // Send marshals and sends the DescribeScalingParameters API request.
 func (r DescribeScalingParametersRequest) Send() (*DescribeScalingParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -828,6 +892,10 @@ type DescribeServiceAccessPoliciesRequest struct {
 
 // Send marshals and sends the DescribeServiceAccessPolicies API request.
 func (r DescribeServiceAccessPoliciesRequest) Send() (*DescribeServiceAccessPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -877,6 +945,10 @@ type DescribeSuggestersRequest struct {
 
 // Send marshals and sends the DescribeSuggesters API request.
 func (r DescribeSuggestersRequest) Send() (*DescribeSuggestersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -927,6 +999,10 @@ type IndexDocumentsRequest struct {
 
 // Send marshals and sends the IndexDocuments API request.
 func (r IndexDocumentsRequest) Send() (*IndexDocumentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1017,6 +1093,10 @@ type UpdateAvailabilityOptionsRequest struct {
 
 // Send marshals and sends the UpdateAvailabilityOptions API request.
 func (r UpdateAvailabilityOptionsRequest) Send() (*UpdateAvailabilityOptionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1066,6 +1146,10 @@ type UpdateScalingParametersRequest struct {
 
 // Send marshals and sends the UpdateScalingParameters API request.
 func (r UpdateScalingParametersRequest) Send() (*UpdateScalingParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1117,6 +1201,10 @@ type UpdateServiceAccessPoliciesRequest struct {
 
 // Send marshals and sends the UpdateServiceAccessPolicies API request.
 func (r UpdateServiceAccessPoliciesRequest) Send() (*UpdateServiceAccessPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -19,6 +19,10 @@ type AssumeRoleRequest struct {
 
 // Send marshals and sends the AssumeRole API request.
 func (r AssumeRoleRequest) Send() (*AssumeRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -153,6 +157,10 @@ type AssumeRoleWithSAMLRequest struct {
 
 // Send marshals and sends the AssumeRoleWithSAML API request.
 func (r AssumeRoleWithSAMLRequest) Send() (*AssumeRoleWithSAMLOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -265,6 +273,10 @@ type AssumeRoleWithWebIdentityRequest struct {
 
 // Send marshals and sends the AssumeRoleWithWebIdentity API request.
 func (r AssumeRoleWithWebIdentityRequest) Send() (*AssumeRoleWithWebIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,6 +411,10 @@ type DecodeAuthorizationMessageRequest struct {
 
 // Send marshals and sends the DecodeAuthorizationMessage API request.
 func (r DecodeAuthorizationMessageRequest) Send() (*DecodeAuthorizationMessageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -523,6 +539,10 @@ type GetFederationTokenRequest struct {
 
 // Send marshals and sends the GetFederationToken API request.
 func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -646,6 +666,10 @@ type GetSessionTokenRequest struct {
 
 // Send marshals and sends the GetSessionToken API request.
 func (r GetSessionTokenRequest) Send() (*GetSessionTokenOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

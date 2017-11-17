@@ -22,6 +22,10 @@ type AddTagsToCertificateRequest struct {
 
 // Send marshals and sends the AddTagsToCertificate API request.
 func (r AddTagsToCertificateRequest) Send() (*AddTagsToCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,6 +90,10 @@ type DeleteCertificateRequest struct {
 
 // Send marshals and sends the DeleteCertificate API request.
 func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,6 +150,10 @@ type DescribeCertificateRequest struct {
 
 // Send marshals and sends the DescribeCertificate API request.
 func (r DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -188,6 +200,10 @@ type GetCertificateRequest struct {
 
 // Send marshals and sends the GetCertificate API request.
 func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,6 +258,10 @@ type ImportCertificateRequest struct {
 
 // Send marshals and sends the ImportCertificate API request.
 func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -313,6 +333,10 @@ type ListCertificatesRequest struct {
 
 // Send marshals and sends the ListCertificates API request.
 func (r ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -417,6 +441,10 @@ type ListTagsForCertificateRequest struct {
 
 // Send marshals and sends the ListTagsForCertificate API request.
 func (r ListTagsForCertificateRequest) Send() (*ListTagsForCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -466,6 +494,10 @@ type RemoveTagsFromCertificateRequest struct {
 
 // Send marshals and sends the RemoveTagsFromCertificate API request.
 func (r RemoveTagsFromCertificateRequest) Send() (*RemoveTagsFromCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -521,6 +553,10 @@ type RequestCertificateRequest struct {
 
 // Send marshals and sends the RequestCertificate API request.
 func (r RequestCertificateRequest) Send() (*RequestCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -573,6 +609,10 @@ type ResendValidationEmailRequest struct {
 
 // Send marshals and sends the ResendValidationEmail API request.
 func (r ResendValidationEmailRequest) Send() (*ResendValidationEmailOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -20,6 +20,10 @@ type AcceptPortfolioShareRequest struct {
 
 // Send marshals and sends the AcceptPortfolioShare API request.
 func (r AcceptPortfolioShareRequest) Send() (*AcceptPortfolioShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,6 +70,10 @@ type AssociatePrincipalWithPortfolioRequest struct {
 
 // Send marshals and sends the AssociatePrincipalWithPortfolio API request.
 func (r AssociatePrincipalWithPortfolioRequest) Send() (*AssociatePrincipalWithPortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,6 +120,10 @@ type AssociateProductWithPortfolioRequest struct {
 
 // Send marshals and sends the AssociateProductWithPortfolio API request.
 func (r AssociateProductWithPortfolioRequest) Send() (*AssociateProductWithPortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,6 +170,10 @@ type AssociateTagOptionWithResourceRequest struct {
 
 // Send marshals and sends the AssociateTagOptionWithResource API request.
 func (r AssociateTagOptionWithResourceRequest) Send() (*AssociateTagOptionWithResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -204,6 +220,10 @@ type CopyProductRequest struct {
 
 // Send marshals and sends the CopyProduct API request.
 func (r CopyProductRequest) Send() (*CopyProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -257,6 +277,10 @@ type CreateConstraintRequest struct {
 
 // Send marshals and sends the CreateConstraint API request.
 func (r CreateConstraintRequest) Send() (*CreateConstraintOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -303,6 +327,10 @@ type CreatePortfolioRequest struct {
 
 // Send marshals and sends the CreatePortfolio API request.
 func (r CreatePortfolioRequest) Send() (*CreatePortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -349,6 +377,10 @@ type CreatePortfolioShareRequest struct {
 
 // Send marshals and sends the CreatePortfolioShare API request.
 func (r CreatePortfolioShareRequest) Send() (*CreatePortfolioShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -395,6 +427,10 @@ type CreateProductRequest struct {
 
 // Send marshals and sends the CreateProduct API request.
 func (r CreateProductRequest) Send() (*CreateProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -441,6 +477,10 @@ type CreateProvisioningArtifactRequest struct {
 
 // Send marshals and sends the CreateProvisioningArtifact API request.
 func (r CreateProvisioningArtifactRequest) Send() (*CreateProvisioningArtifactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,6 +528,10 @@ type CreateTagOptionRequest struct {
 
 // Send marshals and sends the CreateTagOption API request.
 func (r CreateTagOptionRequest) Send() (*CreateTagOptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -534,6 +578,10 @@ type DeleteConstraintRequest struct {
 
 // Send marshals and sends the DeleteConstraint API request.
 func (r DeleteConstraintRequest) Send() (*DeleteConstraintOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -580,6 +628,10 @@ type DeletePortfolioRequest struct {
 
 // Send marshals and sends the DeletePortfolio API request.
 func (r DeletePortfolioRequest) Send() (*DeletePortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -628,6 +680,10 @@ type DeletePortfolioShareRequest struct {
 
 // Send marshals and sends the DeletePortfolioShare API request.
 func (r DeletePortfolioShareRequest) Send() (*DeletePortfolioShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -674,6 +730,10 @@ type DeleteProductRequest struct {
 
 // Send marshals and sends the DeleteProduct API request.
 func (r DeleteProductRequest) Send() (*DeleteProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -721,6 +781,10 @@ type DeleteProvisioningArtifactRequest struct {
 
 // Send marshals and sends the DeleteProvisioningArtifact API request.
 func (r DeleteProvisioningArtifactRequest) Send() (*DeleteProvisioningArtifactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -770,6 +834,10 @@ type DescribeConstraintRequest struct {
 
 // Send marshals and sends the DescribeConstraint API request.
 func (r DescribeConstraintRequest) Send() (*DescribeConstraintOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -816,6 +884,10 @@ type DescribeCopyProductStatusRequest struct {
 
 // Send marshals and sends the DescribeCopyProductStatus API request.
 func (r DescribeCopyProductStatusRequest) Send() (*DescribeCopyProductStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -862,6 +934,10 @@ type DescribePortfolioRequest struct {
 
 // Send marshals and sends the DescribePortfolio API request.
 func (r DescribePortfolioRequest) Send() (*DescribePortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -909,6 +985,10 @@ type DescribeProductRequest struct {
 
 // Send marshals and sends the DescribeProduct API request.
 func (r DescribeProductRequest) Send() (*DescribeProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -958,6 +1038,10 @@ type DescribeProductAsAdminRequest struct {
 
 // Send marshals and sends the DescribeProductAsAdmin API request.
 func (r DescribeProductAsAdminRequest) Send() (*DescribeProductAsAdminOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1004,6 +1088,10 @@ type DescribeProductViewRequest struct {
 
 // Send marshals and sends the DescribeProductView API request.
 func (r DescribeProductViewRequest) Send() (*DescribeProductViewOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1053,6 +1141,10 @@ type DescribeProvisionedProductRequest struct {
 
 // Send marshals and sends the DescribeProvisionedProduct API request.
 func (r DescribeProvisionedProductRequest) Send() (*DescribeProvisionedProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1099,6 +1191,10 @@ type DescribeProvisioningArtifactRequest struct {
 
 // Send marshals and sends the DescribeProvisioningArtifact API request.
 func (r DescribeProvisioningArtifactRequest) Send() (*DescribeProvisioningArtifactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1145,6 +1241,10 @@ type DescribeProvisioningParametersRequest struct {
 
 // Send marshals and sends the DescribeProvisioningParameters API request.
 func (r DescribeProvisioningParametersRequest) Send() (*DescribeProvisioningParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1203,6 +1303,10 @@ type DescribeRecordRequest struct {
 
 // Send marshals and sends the DescribeRecord API request.
 func (r DescribeRecordRequest) Send() (*DescribeRecordOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1251,6 +1355,10 @@ type DescribeTagOptionRequest struct {
 
 // Send marshals and sends the DescribeTagOption API request.
 func (r DescribeTagOptionRequest) Send() (*DescribeTagOptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1297,6 +1405,10 @@ type DisassociatePrincipalFromPortfolioRequest struct {
 
 // Send marshals and sends the DisassociatePrincipalFromPortfolio API request.
 func (r DisassociatePrincipalFromPortfolioRequest) Send() (*DisassociatePrincipalFromPortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1343,6 +1455,10 @@ type DisassociateProductFromPortfolioRequest struct {
 
 // Send marshals and sends the DisassociateProductFromPortfolio API request.
 func (r DisassociateProductFromPortfolioRequest) Send() (*DisassociateProductFromPortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1389,6 +1505,10 @@ type DisassociateTagOptionFromResourceRequest struct {
 
 // Send marshals and sends the DisassociateTagOptionFromResource API request.
 func (r DisassociateTagOptionFromResourceRequest) Send() (*DisassociateTagOptionFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1537,6 +1657,10 @@ type ListConstraintsForPortfolioRequest struct {
 
 // Send marshals and sends the ListConstraintsForPortfolio API request.
 func (r ListConstraintsForPortfolioRequest) Send() (*ListConstraintsForPortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1640,6 +1764,10 @@ type ListLaunchPathsRequest struct {
 
 // Send marshals and sends the ListLaunchPaths API request.
 func (r ListLaunchPathsRequest) Send() (*ListLaunchPathsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1744,6 +1872,10 @@ type ListPortfolioAccessRequest struct {
 
 // Send marshals and sends the ListPortfolioAccess API request.
 func (r ListPortfolioAccessRequest) Send() (*ListPortfolioAccessOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1893,6 +2025,10 @@ type ListPortfoliosForProductRequest struct {
 
 // Send marshals and sends the ListPortfoliosForProduct API request.
 func (r ListPortfoliosForProductRequest) Send() (*ListPortfoliosForProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1995,6 +2131,10 @@ type ListPrincipalsForPortfolioRequest struct {
 
 // Send marshals and sends the ListPrincipalsForPortfolio API request.
 func (r ListPrincipalsForPortfolioRequest) Send() (*ListPrincipalsForPortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2097,6 +2237,10 @@ type ListProvisioningArtifactsRequest struct {
 
 // Send marshals and sends the ListProvisioningArtifacts API request.
 func (r ListProvisioningArtifactsRequest) Send() (*ListProvisioningArtifactsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2190,6 +2334,10 @@ type ListResourcesForTagOptionRequest struct {
 
 // Send marshals and sends the ListResourcesForTagOption API request.
 func (r ListResourcesForTagOptionRequest) Send() (*ListResourcesForTagOptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2292,6 +2440,10 @@ type ListTagOptionsRequest struct {
 
 // Send marshals and sends the ListTagOptions API request.
 func (r ListTagOptionsRequest) Send() (*ListTagOptionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2394,6 +2546,10 @@ type ProvisionProductRequest struct {
 
 // Send marshals and sends the ProvisionProduct API request.
 func (r ProvisionProductRequest) Send() (*ProvisionProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2451,6 +2607,10 @@ type RejectPortfolioShareRequest struct {
 
 // Send marshals and sends the RejectPortfolioShare API request.
 func (r RejectPortfolioShareRequest) Send() (*RejectPortfolioShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2650,6 +2810,10 @@ type SearchProductsAsAdminRequest struct {
 
 // Send marshals and sends the SearchProductsAsAdmin API request.
 func (r SearchProductsAsAdminRequest) Send() (*SearchProductsAsAdminOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2755,6 +2919,10 @@ type TerminateProvisionedProductRequest struct {
 
 // Send marshals and sends the TerminateProvisionedProduct API request.
 func (r TerminateProvisionedProductRequest) Send() (*TerminateProvisionedProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2808,6 +2976,10 @@ type UpdateConstraintRequest struct {
 
 // Send marshals and sends the UpdateConstraint API request.
 func (r UpdateConstraintRequest) Send() (*UpdateConstraintOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2854,6 +3026,10 @@ type UpdatePortfolioRequest struct {
 
 // Send marshals and sends the UpdatePortfolio API request.
 func (r UpdatePortfolioRequest) Send() (*UpdatePortfolioOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2901,6 +3077,10 @@ type UpdateProductRequest struct {
 
 // Send marshals and sends the UpdateProduct API request.
 func (r UpdateProductRequest) Send() (*UpdateProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2947,6 +3127,10 @@ type UpdateProvisionedProductRequest struct {
 
 // Send marshals and sends the UpdateProvisionedProduct API request.
 func (r UpdateProvisionedProductRequest) Send() (*UpdateProvisionedProductOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2999,6 +3183,10 @@ type UpdateProvisioningArtifactRequest struct {
 
 // Send marshals and sends the UpdateProvisioningArtifact API request.
 func (r UpdateProvisioningArtifactRequest) Send() (*UpdateProvisioningArtifactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3047,6 +3235,10 @@ type UpdateTagOptionRequest struct {
 
 // Send marshals and sends the UpdateTagOption API request.
 func (r UpdateTagOptionRequest) Send() (*UpdateTagOptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

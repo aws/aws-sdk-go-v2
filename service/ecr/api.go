@@ -19,6 +19,10 @@ type BatchCheckLayerAvailabilityRequest struct {
 
 // Send marshals and sends the BatchCheckLayerAvailability API request.
 func (r BatchCheckLayerAvailabilityRequest) Send() (*BatchCheckLayerAvailabilityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -70,6 +74,10 @@ type BatchDeleteImageRequest struct {
 
 // Send marshals and sends the BatchDeleteImage API request.
 func (r BatchDeleteImageRequest) Send() (*BatchDeleteImageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -124,6 +132,10 @@ type BatchGetImageRequest struct {
 
 // Send marshals and sends the BatchGetImage API request.
 func (r BatchGetImageRequest) Send() (*BatchGetImageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,6 +183,10 @@ type CompleteLayerUploadRequest struct {
 
 // Send marshals and sends the CompleteLayerUpload API request.
 func (r CompleteLayerUploadRequest) Send() (*CompleteLayerUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -223,6 +239,10 @@ type CreateRepositoryRequest struct {
 
 // Send marshals and sends the CreateRepository API request.
 func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -269,6 +289,10 @@ type DeleteRepositoryRequest struct {
 
 // Send marshals and sends the DeleteRepository API request.
 func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -316,6 +340,10 @@ type DeleteRepositoryPolicyRequest struct {
 
 // Send marshals and sends the DeleteRepositoryPolicy API request.
 func (r DeleteRepositoryPolicyRequest) Send() (*DeleteRepositoryPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -362,6 +390,10 @@ type DescribeImagesRequest struct {
 
 // Send marshals and sends the DescribeImages API request.
 func (r DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -470,6 +502,10 @@ type DescribeRepositoriesRequest struct {
 
 // Send marshals and sends the DescribeRepositories API request.
 func (r DescribeRepositoriesRequest) Send() (*DescribeRepositoriesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -572,6 +608,10 @@ type GetAuthorizationTokenRequest struct {
 
 // Send marshals and sends the GetAuthorizationToken API request.
 func (r GetAuthorizationTokenRequest) Send() (*GetAuthorizationTokenOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -625,6 +665,10 @@ type GetDownloadUrlForLayerRequest struct {
 
 // Send marshals and sends the GetDownloadUrlForLayer API request.
 func (r GetDownloadUrlForLayerRequest) Send() (*GetDownloadUrlForLayerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -676,6 +720,10 @@ type GetRepositoryPolicyRequest struct {
 
 // Send marshals and sends the GetRepositoryPolicy API request.
 func (r GetRepositoryPolicyRequest) Send() (*GetRepositoryPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -722,6 +770,10 @@ type InitiateLayerUploadRequest struct {
 
 // Send marshals and sends the InitiateLayerUpload API request.
 func (r InitiateLayerUploadRequest) Send() (*InitiateLayerUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -772,6 +824,10 @@ type ListImagesRequest struct {
 
 // Send marshals and sends the ListImages API request.
 func (r ListImagesRequest) Send() (*ListImagesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -880,6 +936,10 @@ type PutImageRequest struct {
 
 // Send marshals and sends the PutImage API request.
 func (r PutImageRequest) Send() (*PutImageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -930,6 +990,10 @@ type SetRepositoryPolicyRequest struct {
 
 // Send marshals and sends the SetRepositoryPolicy API request.
 func (r SetRepositoryPolicyRequest) Send() (*SetRepositoryPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -976,6 +1040,10 @@ type UploadLayerPartRequest struct {
 
 // Send marshals and sends the UploadLayerPart API request.
 func (r UploadLayerPartRequest) Send() (*UploadLayerPartOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

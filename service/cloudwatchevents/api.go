@@ -22,6 +22,10 @@ type DeleteRuleRequest struct {
 
 // Send marshals and sends the DeleteRule API request.
 func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -124,6 +128,10 @@ type DescribeRuleRequest struct {
 
 // Send marshals and sends the DescribeRule API request.
 func (r DescribeRuleRequest) Send() (*DescribeRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -170,6 +178,10 @@ type DisableRuleRequest struct {
 
 // Send marshals and sends the DisableRule API request.
 func (r DisableRuleRequest) Send() (*DisableRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -222,6 +234,10 @@ type EnableRuleRequest struct {
 
 // Send marshals and sends the EnableRule API request.
 func (r EnableRuleRequest) Send() (*EnableRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -274,6 +290,10 @@ type ListRuleNamesByTargetRequest struct {
 
 // Send marshals and sends the ListRuleNamesByTarget API request.
 func (r ListRuleNamesByTargetRequest) Send() (*ListRuleNamesByTargetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -321,6 +341,10 @@ type ListRulesRequest struct {
 
 // Send marshals and sends the ListRules API request.
 func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -368,6 +392,10 @@ type ListTargetsByRuleRequest struct {
 
 // Send marshals and sends the ListTargetsByRule API request.
 func (r ListTargetsByRuleRequest) Send() (*ListTargetsByRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -414,6 +442,10 @@ type PutEventsRequest struct {
 
 // Send marshals and sends the PutEvents API request.
 func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,6 +493,10 @@ type PutPermissionRequest struct {
 
 // Send marshals and sends the PutPermission API request.
 func (r PutPermissionRequest) Send() (*PutPermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,6 +556,10 @@ type PutRuleRequest struct {
 
 // Send marshals and sends the PutRule API request.
 func (r PutRuleRequest) Send() (*PutRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -582,6 +622,10 @@ type PutTargetsRequest struct {
 
 // Send marshals and sends the PutTargets API request.
 func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -715,6 +759,10 @@ type RemovePermissionRequest struct {
 
 // Send marshals and sends the RemovePermission API request.
 func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -766,6 +814,10 @@ type RemoveTargetsRequest struct {
 
 // Send marshals and sends the RemoveTargets API request.
 func (r RemoveTargetsRequest) Send() (*RemoveTargetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -822,6 +874,10 @@ type TestEventPatternRequest struct {
 
 // Send marshals and sends the TestEventPattern API request.
 func (r TestEventPatternRequest) Send() (*TestEventPatternOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -19,6 +19,10 @@ type CreateDevicePoolRequest struct {
 
 // Send marshals and sends the CreateDevicePool API request.
 func (r CreateDevicePoolRequest) Send() (*CreateDevicePoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,6 +69,10 @@ type CreateNetworkProfileRequest struct {
 
 // Send marshals and sends the CreateNetworkProfile API request.
 func (r CreateNetworkProfileRequest) Send() (*CreateNetworkProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,6 +119,10 @@ type CreateProjectRequest struct {
 
 // Send marshals and sends the CreateProject API request.
 func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -157,6 +169,10 @@ type CreateRemoteAccessSessionRequest struct {
 
 // Send marshals and sends the CreateRemoteAccessSession API request.
 func (r CreateRemoteAccessSessionRequest) Send() (*CreateRemoteAccessSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,6 +219,10 @@ type CreateUploadRequest struct {
 
 // Send marshals and sends the CreateUpload API request.
 func (r CreateUploadRequest) Send() (*CreateUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,6 +269,10 @@ type DeleteDevicePoolRequest struct {
 
 // Send marshals and sends the DeleteDevicePool API request.
 func (r DeleteDevicePoolRequest) Send() (*DeleteDevicePoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,6 +320,10 @@ type DeleteNetworkProfileRequest struct {
 
 // Send marshals and sends the DeleteNetworkProfile API request.
 func (r DeleteNetworkProfileRequest) Send() (*DeleteNetworkProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,6 +370,10 @@ type DeleteProjectRequest struct {
 
 // Send marshals and sends the DeleteProject API request.
 func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,6 +422,10 @@ type DeleteRemoteAccessSessionRequest struct {
 
 // Send marshals and sends the DeleteRemoteAccessSession API request.
 func (r DeleteRemoteAccessSessionRequest) Send() (*DeleteRemoteAccessSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -436,6 +472,10 @@ type DeleteRunRequest struct {
 
 // Send marshals and sends the DeleteRun API request.
 func (r DeleteRunRequest) Send() (*DeleteRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -484,6 +524,10 @@ type DeleteUploadRequest struct {
 
 // Send marshals and sends the DeleteUpload API request.
 func (r DeleteUploadRequest) Send() (*DeleteUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -577,6 +621,10 @@ type GetDeviceRequest struct {
 
 // Send marshals and sends the GetDevice API request.
 func (r GetDeviceRequest) Send() (*GetDeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -623,6 +671,10 @@ type GetDevicePoolRequest struct {
 
 // Send marshals and sends the GetDevicePool API request.
 func (r GetDevicePoolRequest) Send() (*GetDevicePoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -669,6 +721,10 @@ type GetDevicePoolCompatibilityRequest struct {
 
 // Send marshals and sends the GetDevicePoolCompatibility API request.
 func (r GetDevicePoolCompatibilityRequest) Send() (*GetDevicePoolCompatibilityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -715,6 +771,10 @@ type GetJobRequest struct {
 
 // Send marshals and sends the GetJob API request.
 func (r GetJobRequest) Send() (*GetJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -761,6 +821,10 @@ type GetNetworkProfileRequest struct {
 
 // Send marshals and sends the GetNetworkProfile API request.
 func (r GetNetworkProfileRequest) Send() (*GetNetworkProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -807,6 +871,10 @@ type GetOfferingStatusRequest struct {
 
 // Send marshals and sends the GetOfferingStatus API request.
 func (r GetOfferingStatusRequest) Send() (*GetOfferingStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -914,6 +982,10 @@ type GetProjectRequest struct {
 
 // Send marshals and sends the GetProject API request.
 func (r GetProjectRequest) Send() (*GetProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -960,6 +1032,10 @@ type GetRemoteAccessSessionRequest struct {
 
 // Send marshals and sends the GetRemoteAccessSession API request.
 func (r GetRemoteAccessSessionRequest) Send() (*GetRemoteAccessSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,6 +1082,10 @@ type GetRunRequest struct {
 
 // Send marshals and sends the GetRun API request.
 func (r GetRunRequest) Send() (*GetRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1052,6 +1132,10 @@ type GetSuiteRequest struct {
 
 // Send marshals and sends the GetSuite API request.
 func (r GetSuiteRequest) Send() (*GetSuiteOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1098,6 +1182,10 @@ type GetTestRequest struct {
 
 // Send marshals and sends the GetTest API request.
 func (r GetTestRequest) Send() (*GetTestOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1144,6 +1232,10 @@ type GetUploadRequest struct {
 
 // Send marshals and sends the GetUpload API request.
 func (r GetUploadRequest) Send() (*GetUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1190,6 +1282,10 @@ type InstallToRemoteAccessSessionRequest struct {
 
 // Send marshals and sends the InstallToRemoteAccessSession API request.
 func (r InstallToRemoteAccessSessionRequest) Send() (*InstallToRemoteAccessSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1238,6 +1334,10 @@ type ListArtifactsRequest struct {
 
 // Send marshals and sends the ListArtifacts API request.
 func (r ListArtifactsRequest) Send() (*ListArtifactsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1340,6 +1440,10 @@ type ListDevicePoolsRequest struct {
 
 // Send marshals and sends the ListDevicePools API request.
 func (r ListDevicePoolsRequest) Send() (*ListDevicePoolsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1442,6 +1546,10 @@ type ListDevicesRequest struct {
 
 // Send marshals and sends the ListDevices API request.
 func (r ListDevicesRequest) Send() (*ListDevicesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1544,6 +1652,10 @@ type ListJobsRequest struct {
 
 // Send marshals and sends the ListJobs API request.
 func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1646,6 +1758,10 @@ type ListNetworkProfilesRequest struct {
 
 // Send marshals and sends the ListNetworkProfiles API request.
 func (r ListNetworkProfilesRequest) Send() (*ListNetworkProfilesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1692,6 +1808,10 @@ type ListOfferingPromotionsRequest struct {
 
 // Send marshals and sends the ListOfferingPromotions API request.
 func (r ListOfferingPromotionsRequest) Send() (*ListOfferingPromotionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1742,6 +1862,10 @@ type ListOfferingTransactionsRequest struct {
 
 // Send marshals and sends the ListOfferingTransactions API request.
 func (r ListOfferingTransactionsRequest) Send() (*ListOfferingTransactionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1849,6 +1973,10 @@ type ListOfferingsRequest struct {
 
 // Send marshals and sends the ListOfferings API request.
 func (r ListOfferingsRequest) Send() (*ListOfferingsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1956,6 +2084,10 @@ type ListProjectsRequest struct {
 
 // Send marshals and sends the ListProjects API request.
 func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2058,6 +2190,10 @@ type ListRemoteAccessSessionsRequest struct {
 
 // Send marshals and sends the ListRemoteAccessSessions API request.
 func (r ListRemoteAccessSessionsRequest) Send() (*ListRemoteAccessSessionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2104,6 +2240,10 @@ type ListRunsRequest struct {
 
 // Send marshals and sends the ListRuns API request.
 func (r ListRunsRequest) Send() (*ListRunsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2206,6 +2346,10 @@ type ListSamplesRequest struct {
 
 // Send marshals and sends the ListSamples API request.
 func (r ListSamplesRequest) Send() (*ListSamplesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,6 +2452,10 @@ type ListSuitesRequest struct {
 
 // Send marshals and sends the ListSuites API request.
 func (r ListSuitesRequest) Send() (*ListSuitesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2410,6 +2558,10 @@ type ListTestsRequest struct {
 
 // Send marshals and sends the ListTests API request.
 func (r ListTestsRequest) Send() (*ListTestsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2512,6 +2664,10 @@ type ListUniqueProblemsRequest struct {
 
 // Send marshals and sends the ListUniqueProblems API request.
 func (r ListUniqueProblemsRequest) Send() (*ListUniqueProblemsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2614,6 +2770,10 @@ type ListUploadsRequest struct {
 
 // Send marshals and sends the ListUploads API request.
 func (r ListUploadsRequest) Send() (*ListUploadsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2716,6 +2876,10 @@ type PurchaseOfferingRequest struct {
 
 // Send marshals and sends the PurchaseOffering API request.
 func (r PurchaseOfferingRequest) Send() (*PurchaseOfferingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2767,6 +2931,10 @@ type RenewOfferingRequest struct {
 
 // Send marshals and sends the RenewOffering API request.
 func (r RenewOfferingRequest) Send() (*RenewOfferingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2817,6 +2985,10 @@ type ScheduleRunRequest struct {
 
 // Send marshals and sends the ScheduleRun API request.
 func (r ScheduleRunRequest) Send() (*ScheduleRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2863,6 +3035,10 @@ type StopRemoteAccessSessionRequest struct {
 
 // Send marshals and sends the StopRemoteAccessSession API request.
 func (r StopRemoteAccessSessionRequest) Send() (*StopRemoteAccessSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2909,6 +3085,10 @@ type StopRunRequest struct {
 
 // Send marshals and sends the StopRun API request.
 func (r StopRunRequest) Send() (*StopRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2960,6 +3140,10 @@ type UpdateDevicePoolRequest struct {
 
 // Send marshals and sends the UpdateDevicePool API request.
 func (r UpdateDevicePoolRequest) Send() (*UpdateDevicePoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3008,6 +3192,10 @@ type UpdateNetworkProfileRequest struct {
 
 // Send marshals and sends the UpdateNetworkProfile API request.
 func (r UpdateNetworkProfileRequest) Send() (*UpdateNetworkProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3054,6 +3242,10 @@ type UpdateProjectRequest struct {
 
 // Send marshals and sends the UpdateProject API request.
 func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

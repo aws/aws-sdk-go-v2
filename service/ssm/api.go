@@ -20,6 +20,10 @@ type AddTagsToResourceRequest struct {
 
 // Send marshals and sends the AddTagsToResource API request.
 func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -85,6 +89,10 @@ type CancelCommandRequest struct {
 
 // Send marshals and sends the CancelCommand API request.
 func (r CancelCommandRequest) Send() (*CancelCommandOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -132,6 +140,10 @@ type CreateActivationRequest struct {
 
 // Send marshals and sends the CreateActivation API request.
 func (r CreateActivationRequest) Send() (*CreateActivationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -182,6 +194,10 @@ type CreateAssociationRequest struct {
 
 // Send marshals and sends the CreateAssociation API request.
 func (r CreateAssociationRequest) Send() (*CreateAssociationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,6 +252,10 @@ type CreateAssociationBatchRequest struct {
 
 // Send marshals and sends the CreateAssociationBatch API request.
 func (r CreateAssociationBatchRequest) Send() (*CreateAssociationBatchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,6 +310,10 @@ type CreateDocumentRequest struct {
 
 // Send marshals and sends the CreateDocument API request.
 func (r CreateDocumentRequest) Send() (*CreateDocumentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -339,6 +363,10 @@ type CreateMaintenanceWindowRequest struct {
 
 // Send marshals and sends the CreateMaintenanceWindow API request.
 func (r CreateMaintenanceWindowRequest) Send() (*CreateMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -385,6 +413,10 @@ type CreatePatchBaselineRequest struct {
 
 // Send marshals and sends the CreatePatchBaseline API request.
 func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -431,6 +463,10 @@ type CreateResourceDataSyncRequest struct {
 
 // Send marshals and sends the CreateResourceDataSync API request.
 func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,6 +524,10 @@ type DeleteActivationRequest struct {
 
 // Send marshals and sends the DeleteActivation API request.
 func (r DeleteActivationRequest) Send() (*DeleteActivationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -588,6 +628,10 @@ type DeleteDocumentRequest struct {
 
 // Send marshals and sends the DeleteDocument API request.
 func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -638,6 +682,10 @@ type DeleteMaintenanceWindowRequest struct {
 
 // Send marshals and sends the DeleteMaintenanceWindow API request.
 func (r DeleteMaintenanceWindowRequest) Send() (*DeleteMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,6 +732,10 @@ type DeleteParameterRequest struct {
 
 // Send marshals and sends the DeleteParameter API request.
 func (r DeleteParameterRequest) Send() (*DeleteParameterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -730,6 +782,10 @@ type DeleteParametersRequest struct {
 
 // Send marshals and sends the DeleteParameters API request.
 func (r DeleteParametersRequest) Send() (*DeleteParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -777,6 +833,10 @@ type DeletePatchBaselineRequest struct {
 
 // Send marshals and sends the DeletePatchBaseline API request.
 func (r DeletePatchBaselineRequest) Send() (*DeletePatchBaselineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -823,6 +883,10 @@ type DeleteResourceDataSyncRequest struct {
 
 // Send marshals and sends the DeleteResourceDataSync API request.
 func (r DeleteResourceDataSyncRequest) Send() (*DeleteResourceDataSyncOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -872,6 +936,10 @@ type DeregisterManagedInstanceRequest struct {
 
 // Send marshals and sends the DeregisterManagedInstance API request.
 func (r DeregisterManagedInstanceRequest) Send() (*DeregisterManagedInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -920,6 +988,10 @@ type DeregisterPatchBaselineForPatchGroupRequest struct {
 
 // Send marshals and sends the DeregisterPatchBaselineForPatchGroup API request.
 func (r DeregisterPatchBaselineForPatchGroupRequest) Send() (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -966,6 +1038,10 @@ type DeregisterTargetFromMaintenanceWindowRequest struct {
 
 // Send marshals and sends the DeregisterTargetFromMaintenanceWindow API request.
 func (r DeregisterTargetFromMaintenanceWindowRequest) Send() (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1012,6 +1088,10 @@ type DeregisterTaskFromMaintenanceWindowRequest struct {
 
 // Send marshals and sends the DeregisterTaskFromMaintenanceWindow API request.
 func (r DeregisterTaskFromMaintenanceWindowRequest) Send() (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1058,6 +1138,10 @@ type DescribeActivationsRequest struct {
 
 // Send marshals and sends the DescribeActivations API request.
 func (r DescribeActivationsRequest) Send() (*DescribeActivationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1209,6 +1293,10 @@ type DescribeAutomationExecutionsRequest struct {
 
 // Send marshals and sends the DescribeAutomationExecutions API request.
 func (r DescribeAutomationExecutionsRequest) Send() (*DescribeAutomationExecutionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1255,6 +1343,10 @@ type DescribeAvailablePatchesRequest struct {
 
 // Send marshals and sends the DescribeAvailablePatches API request.
 func (r DescribeAvailablePatchesRequest) Send() (*DescribeAvailablePatchesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1301,6 +1393,10 @@ type DescribeDocumentRequest struct {
 
 // Send marshals and sends the DescribeDocument API request.
 func (r DescribeDocumentRequest) Send() (*DescribeDocumentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1347,6 +1443,10 @@ type DescribeDocumentPermissionRequest struct {
 
 // Send marshals and sends the DescribeDocumentPermission API request.
 func (r DescribeDocumentPermissionRequest) Send() (*DescribeDocumentPermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1395,6 +1495,10 @@ type DescribeEffectiveInstanceAssociationsRequest struct {
 
 // Send marshals and sends the DescribeEffectiveInstanceAssociations API request.
 func (r DescribeEffectiveInstanceAssociationsRequest) Send() (*DescribeEffectiveInstanceAssociationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1441,6 +1545,10 @@ type DescribeEffectivePatchesForPatchBaselineRequest struct {
 
 // Send marshals and sends the DescribeEffectivePatchesForPatchBaseline API request.
 func (r DescribeEffectivePatchesForPatchBaselineRequest) Send() (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1489,6 +1597,10 @@ type DescribeInstanceAssociationsStatusRequest struct {
 
 // Send marshals and sends the DescribeInstanceAssociationsStatus API request.
 func (r DescribeInstanceAssociationsStatusRequest) Send() (*DescribeInstanceAssociationsStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1535,6 +1647,10 @@ type DescribeInstanceInformationRequest struct {
 
 // Send marshals and sends the DescribeInstanceInformation API request.
 func (r DescribeInstanceInformationRequest) Send() (*DescribeInstanceInformationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1642,6 +1758,10 @@ type DescribeInstancePatchStatesRequest struct {
 
 // Send marshals and sends the DescribeInstancePatchStates API request.
 func (r DescribeInstancePatchStatesRequest) Send() (*DescribeInstancePatchStatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1688,6 +1808,10 @@ type DescribeInstancePatchStatesForPatchGroupRequest struct {
 
 // Send marshals and sends the DescribeInstancePatchStatesForPatchGroup API request.
 func (r DescribeInstancePatchStatesForPatchGroupRequest) Send() (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1735,6 +1859,10 @@ type DescribeInstancePatchesRequest struct {
 
 // Send marshals and sends the DescribeInstancePatches API request.
 func (r DescribeInstancePatchesRequest) Send() (*DescribeInstancePatchesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1782,6 +1910,10 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTaskInvocations API request.
 func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send() (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1829,6 +1961,10 @@ type DescribeMaintenanceWindowExecutionTasksRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTasks API request.
 func (r DescribeMaintenanceWindowExecutionTasksRequest) Send() (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1875,6 +2011,10 @@ type DescribeMaintenanceWindowExecutionsRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutions API request.
 func (r DescribeMaintenanceWindowExecutionsRequest) Send() (*DescribeMaintenanceWindowExecutionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1923,6 +2063,10 @@ type DescribeMaintenanceWindowTargetsRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceWindowTargets API request.
 func (r DescribeMaintenanceWindowTargetsRequest) Send() (*DescribeMaintenanceWindowTargetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1969,6 +2113,10 @@ type DescribeMaintenanceWindowTasksRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceWindowTasks API request.
 func (r DescribeMaintenanceWindowTasksRequest) Send() (*DescribeMaintenanceWindowTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2015,6 +2163,10 @@ type DescribeMaintenanceWindowsRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceWindows API request.
 func (r DescribeMaintenanceWindowsRequest) Send() (*DescribeMaintenanceWindowsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2061,6 +2213,10 @@ type DescribeParametersRequest struct {
 
 // Send marshals and sends the DescribeParameters API request.
 func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2171,6 +2327,10 @@ type DescribePatchBaselinesRequest struct {
 
 // Send marshals and sends the DescribePatchBaselines API request.
 func (r DescribePatchBaselinesRequest) Send() (*DescribePatchBaselinesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2217,6 +2377,10 @@ type DescribePatchGroupStateRequest struct {
 
 // Send marshals and sends the DescribePatchGroupState API request.
 func (r DescribePatchGroupStateRequest) Send() (*DescribePatchGroupStateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2263,6 +2427,10 @@ type DescribePatchGroupsRequest struct {
 
 // Send marshals and sends the DescribePatchGroups API request.
 func (r DescribePatchGroupsRequest) Send() (*DescribePatchGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2309,6 +2477,10 @@ type GetAutomationExecutionRequest struct {
 
 // Send marshals and sends the GetAutomationExecution API request.
 func (r GetAutomationExecutionRequest) Send() (*GetAutomationExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2355,6 +2527,10 @@ type GetCommandInvocationRequest struct {
 
 // Send marshals and sends the GetCommandInvocation API request.
 func (r GetCommandInvocationRequest) Send() (*GetCommandInvocationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2450,6 +2626,10 @@ type GetDeployablePatchSnapshotForInstanceRequest struct {
 
 // Send marshals and sends the GetDeployablePatchSnapshotForInstance API request.
 func (r GetDeployablePatchSnapshotForInstanceRequest) Send() (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2497,6 +2677,10 @@ type GetDocumentRequest struct {
 
 // Send marshals and sends the GetDocument API request.
 func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2543,6 +2727,10 @@ type GetInventoryRequest struct {
 
 // Send marshals and sends the GetInventory API request.
 func (r GetInventoryRequest) Send() (*GetInventoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2589,6 +2777,10 @@ type GetInventorySchemaRequest struct {
 
 // Send marshals and sends the GetInventorySchema API request.
 func (r GetInventorySchemaRequest) Send() (*GetInventorySchemaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2636,6 +2828,10 @@ type GetMaintenanceWindowRequest struct {
 
 // Send marshals and sends the GetMaintenanceWindow API request.
 func (r GetMaintenanceWindowRequest) Send() (*GetMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2682,6 +2878,10 @@ type GetMaintenanceWindowExecutionRequest struct {
 
 // Send marshals and sends the GetMaintenanceWindowExecution API request.
 func (r GetMaintenanceWindowExecutionRequest) Send() (*GetMaintenanceWindowExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2729,6 +2929,10 @@ type GetMaintenanceWindowExecutionTaskRequest struct {
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTask API request.
 func (r GetMaintenanceWindowExecutionTaskRequest) Send() (*GetMaintenanceWindowExecutionTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2776,6 +2980,10 @@ type GetMaintenanceWindowExecutionTaskInvocationRequest struct {
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTaskInvocation API request.
 func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send() (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2823,6 +3031,10 @@ type GetMaintenanceWindowTaskRequest struct {
 
 // Send marshals and sends the GetMaintenanceWindowTask API request.
 func (r GetMaintenanceWindowTaskRequest) Send() (*GetMaintenanceWindowTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2869,6 +3081,10 @@ type GetParameterRequest struct {
 
 // Send marshals and sends the GetParameter API request.
 func (r GetParameterRequest) Send() (*GetParameterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2915,6 +3131,10 @@ type GetParameterHistoryRequest struct {
 
 // Send marshals and sends the GetParameterHistory API request.
 func (r GetParameterHistoryRequest) Send() (*GetParameterHistoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3017,6 +3237,10 @@ type GetParametersRequest struct {
 
 // Send marshals and sends the GetParameters API request.
 func (r GetParametersRequest) Send() (*GetParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3063,6 +3287,10 @@ type GetParametersByPathRequest struct {
 
 // Send marshals and sends the GetParametersByPath API request.
 func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3174,6 +3402,10 @@ type GetPatchBaselineRequest struct {
 
 // Send marshals and sends the GetPatchBaseline API request.
 func (r GetPatchBaselineRequest) Send() (*GetPatchBaselineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3220,6 +3452,10 @@ type GetPatchBaselineForPatchGroupRequest struct {
 
 // Send marshals and sends the GetPatchBaselineForPatchGroup API request.
 func (r GetPatchBaselineForPatchGroupRequest) Send() (*GetPatchBaselineForPatchGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3267,6 +3503,10 @@ type ListAssociationVersionsRequest struct {
 
 // Send marshals and sends the ListAssociationVersions API request.
 func (r ListAssociationVersionsRequest) Send() (*ListAssociationVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3313,6 +3553,10 @@ type ListAssociationsRequest struct {
 
 // Send marshals and sends the ListAssociations API request.
 func (r ListAssociationsRequest) Send() (*ListAssociationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3415,6 +3659,10 @@ type ListCommandInvocationsRequest struct {
 
 // Send marshals and sends the ListCommandInvocations API request.
 func (r ListCommandInvocationsRequest) Send() (*ListCommandInvocationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3521,6 +3769,10 @@ type ListCommandsRequest struct {
 
 // Send marshals and sends the ListCommands API request.
 func (r ListCommandsRequest) Send() (*ListCommandsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3623,6 +3875,10 @@ type ListComplianceItemsRequest struct {
 
 // Send marshals and sends the ListComplianceItems API request.
 func (r ListComplianceItemsRequest) Send() (*ListComplianceItemsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3672,6 +3928,10 @@ type ListComplianceSummariesRequest struct {
 
 // Send marshals and sends the ListComplianceSummaries API request.
 func (r ListComplianceSummariesRequest) Send() (*ListComplianceSummariesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3720,6 +3980,10 @@ type ListDocumentVersionsRequest struct {
 
 // Send marshals and sends the ListDocumentVersions API request.
 func (r ListDocumentVersionsRequest) Send() (*ListDocumentVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3766,6 +4030,10 @@ type ListDocumentsRequest struct {
 
 // Send marshals and sends the ListDocuments API request.
 func (r ListDocumentsRequest) Send() (*ListDocumentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3868,6 +4136,10 @@ type ListInventoryEntriesRequest struct {
 
 // Send marshals and sends the ListInventoryEntries API request.
 func (r ListInventoryEntriesRequest) Send() (*ListInventoryEntriesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3914,6 +4186,10 @@ type ListResourceComplianceSummariesRequest struct {
 
 // Send marshals and sends the ListResourceComplianceSummaries API request.
 func (r ListResourceComplianceSummariesRequest) Send() (*ListResourceComplianceSummariesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3962,6 +4238,10 @@ type ListResourceDataSyncRequest struct {
 
 // Send marshals and sends the ListResourceDataSync API request.
 func (r ListResourceDataSyncRequest) Send() (*ListResourceDataSyncOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4017,6 +4297,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4063,6 +4347,10 @@ type ModifyDocumentPermissionRequest struct {
 
 // Send marshals and sends the ModifyDocumentPermission API request.
 func (r ModifyDocumentPermissionRequest) Send() (*ModifyDocumentPermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4112,6 +4400,10 @@ type PutComplianceItemsRequest struct {
 
 // Send marshals and sends the PutComplianceItems API request.
 func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4162,6 +4454,10 @@ type PutInventoryRequest struct {
 
 // Send marshals and sends the PutInventory API request.
 func (r PutInventoryRequest) Send() (*PutInventoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4210,6 +4506,10 @@ type PutParameterRequest struct {
 
 // Send marshals and sends the PutParameter API request.
 func (r PutParameterRequest) Send() (*PutParameterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4256,6 +4556,10 @@ type RegisterDefaultPatchBaselineRequest struct {
 
 // Send marshals and sends the RegisterDefaultPatchBaseline API request.
 func (r RegisterDefaultPatchBaselineRequest) Send() (*RegisterDefaultPatchBaselineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4302,6 +4606,10 @@ type RegisterPatchBaselineForPatchGroupRequest struct {
 
 // Send marshals and sends the RegisterPatchBaselineForPatchGroup API request.
 func (r RegisterPatchBaselineForPatchGroupRequest) Send() (*RegisterPatchBaselineForPatchGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4348,6 +4656,10 @@ type RegisterTargetWithMaintenanceWindowRequest struct {
 
 // Send marshals and sends the RegisterTargetWithMaintenanceWindow API request.
 func (r RegisterTargetWithMaintenanceWindowRequest) Send() (*RegisterTargetWithMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4394,6 +4706,10 @@ type RegisterTaskWithMaintenanceWindowRequest struct {
 
 // Send marshals and sends the RegisterTaskWithMaintenanceWindow API request.
 func (r RegisterTaskWithMaintenanceWindowRequest) Send() (*RegisterTaskWithMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4440,6 +4756,10 @@ type RemoveTagsFromResourceRequest struct {
 
 // Send marshals and sends the RemoveTagsFromResource API request.
 func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4486,6 +4806,10 @@ type SendAutomationSignalRequest struct {
 
 // Send marshals and sends the SendAutomationSignal API request.
 func (r SendAutomationSignalRequest) Send() (*SendAutomationSignalOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4533,6 +4857,10 @@ type SendCommandRequest struct {
 
 // Send marshals and sends the SendCommand API request.
 func (r SendCommandRequest) Send() (*SendCommandOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4579,6 +4907,10 @@ type StartAutomationExecutionRequest struct {
 
 // Send marshals and sends the StartAutomationExecution API request.
 func (r StartAutomationExecutionRequest) Send() (*StartAutomationExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4625,6 +4957,10 @@ type StopAutomationExecutionRequest struct {
 
 // Send marshals and sends the StopAutomationExecution API request.
 func (r StopAutomationExecutionRequest) Send() (*StopAutomationExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4671,6 +5007,10 @@ type UpdateAssociationRequest struct {
 
 // Send marshals and sends the UpdateAssociation API request.
 func (r UpdateAssociationRequest) Send() (*UpdateAssociationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4718,6 +5058,10 @@ type UpdateAssociationStatusRequest struct {
 
 // Send marshals and sends the UpdateAssociationStatus API request.
 func (r UpdateAssociationStatusRequest) Send() (*UpdateAssociationStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4765,6 +5109,10 @@ type UpdateDocumentRequest struct {
 
 // Send marshals and sends the UpdateDocument API request.
 func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4811,6 +5159,10 @@ type UpdateDocumentDefaultVersionRequest struct {
 
 // Send marshals and sends the UpdateDocumentDefaultVersion API request.
 func (r UpdateDocumentDefaultVersionRequest) Send() (*UpdateDocumentDefaultVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4857,6 +5209,10 @@ type UpdateMaintenanceWindowRequest struct {
 
 // Send marshals and sends the UpdateMaintenanceWindow API request.
 func (r UpdateMaintenanceWindowRequest) Send() (*UpdateMaintenanceWindowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4903,6 +5259,10 @@ type UpdateMaintenanceWindowTargetRequest struct {
 
 // Send marshals and sends the UpdateMaintenanceWindowTarget API request.
 func (r UpdateMaintenanceWindowTargetRequest) Send() (*UpdateMaintenanceWindowTargetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4965,6 +5325,10 @@ type UpdateMaintenanceWindowTaskRequest struct {
 
 // Send marshals and sends the UpdateMaintenanceWindowTask API request.
 func (r UpdateMaintenanceWindowTaskRequest) Send() (*UpdateMaintenanceWindowTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5030,6 +5394,10 @@ type UpdateManagedInstanceRoleRequest struct {
 
 // Send marshals and sends the UpdateManagedInstanceRole API request.
 func (r UpdateManagedInstanceRoleRequest) Send() (*UpdateManagedInstanceRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5077,6 +5445,10 @@ type UpdatePatchBaselineRequest struct {
 
 // Send marshals and sends the UpdatePatchBaseline API request.
 func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

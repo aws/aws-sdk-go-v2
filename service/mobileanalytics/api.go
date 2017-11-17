@@ -21,6 +21,10 @@ type PutEventsRequest struct {
 
 // Send marshals and sends the PutEvents API request.
 func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

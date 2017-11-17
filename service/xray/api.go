@@ -19,6 +19,10 @@ type BatchGetTracesRequest struct {
 
 // Send marshals and sends the BatchGetTraces API request.
 func (r BatchGetTracesRequest) Send() (*BatchGetTracesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,6 +71,10 @@ type GetServiceGraphRequest struct {
 
 // Send marshals and sends the GetServiceGraph API request.
 func (r GetServiceGraphRequest) Send() (*GetServiceGraphOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,6 +125,10 @@ type GetTraceGraphRequest struct {
 
 // Send marshals and sends the GetTraceGraph API request.
 func (r GetTraceGraphRequest) Send() (*GetTraceGraphOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -163,6 +175,10 @@ type GetTraceSummariesRequest struct {
 
 // Send marshals and sends the GetTraceSummaries API request.
 func (r GetTraceSummariesRequest) Send() (*GetTraceSummariesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -225,6 +241,10 @@ type PutTelemetryRecordsRequest struct {
 
 // Send marshals and sends the PutTelemetryRecords API request.
 func (r PutTelemetryRecordsRequest) Send() (*PutTelemetryRecordsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -271,6 +291,10 @@ type PutTraceSegmentsRequest struct {
 
 // Send marshals and sends the PutTraceSegments API request.
 func (r PutTraceSegmentsRequest) Send() (*PutTraceSegmentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

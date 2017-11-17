@@ -22,6 +22,10 @@ type CountClosedWorkflowExecutionsRequest struct {
 
 // Send marshals and sends the CountClosedWorkflowExecutions API request.
 func (r CountClosedWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -96,6 +100,10 @@ type CountOpenWorkflowExecutionsRequest struct {
 
 // Send marshals and sends the CountOpenWorkflowExecutions API request.
 func (r CountOpenWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -170,6 +178,10 @@ type CountPendingActivityTasksRequest struct {
 
 // Send marshals and sends the CountPendingActivityTasks API request.
 func (r CountPendingActivityTasksRequest) Send() (*CountPendingDecisionTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,6 +250,10 @@ type CountPendingDecisionTasksRequest struct {
 
 // Send marshals and sends the CountPendingDecisionTasks API request.
 func (r CountPendingDecisionTasksRequest) Send() (*CountPendingDecisionTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,6 +322,10 @@ type DeprecateActivityTypeRequest struct {
 
 // Send marshals and sends the DeprecateActivityType API request.
 func (r DeprecateActivityTypeRequest) Send() (*DeprecateActivityTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -381,6 +401,10 @@ type DeprecateDomainRequest struct {
 
 // Send marshals and sends the DeprecateDomain API request.
 func (r DeprecateDomainRequest) Send() (*DeprecateDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -454,6 +478,10 @@ type DeprecateWorkflowTypeRequest struct {
 
 // Send marshals and sends the DeprecateWorkflowType API request.
 func (r DeprecateWorkflowTypeRequest) Send() (*DeprecateWorkflowTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -530,6 +558,10 @@ type DescribeActivityTypeRequest struct {
 
 // Send marshals and sends the DescribeActivityType API request.
 func (r DescribeActivityTypeRequest) Send() (*DescribeActivityTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -600,6 +632,10 @@ type DescribeDomainRequest struct {
 
 // Send marshals and sends the DescribeDomain API request.
 func (r DescribeDomainRequest) Send() (*DescribeDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -664,6 +700,10 @@ type DescribeWorkflowExecutionRequest struct {
 
 // Send marshals and sends the DescribeWorkflowExecution API request.
 func (r DescribeWorkflowExecutionRequest) Send() (*DescribeWorkflowExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -731,6 +771,10 @@ type DescribeWorkflowTypeRequest struct {
 
 // Send marshals and sends the DescribeWorkflowType API request.
 func (r DescribeWorkflowTypeRequest) Send() (*DescribeWorkflowTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -801,6 +845,10 @@ type GetWorkflowExecutionHistoryRequest struct {
 
 // Send marshals and sends the GetWorkflowExecutionHistory API request.
 func (r GetWorkflowExecutionHistoryRequest) Send() (*GetWorkflowExecutionHistoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -925,6 +973,10 @@ type ListActivityTypesRequest struct {
 
 // Send marshals and sends the ListActivityTypes API request.
 func (r ListActivityTypesRequest) Send() (*ListActivityTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1048,6 +1100,10 @@ type ListClosedWorkflowExecutionsRequest struct {
 
 // Send marshals and sends the ListClosedWorkflowExecutions API request.
 func (r ListClosedWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1180,6 +1236,10 @@ type ListDomainsRequest struct {
 
 // Send marshals and sends the ListDomains API request.
 func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1305,6 +1365,10 @@ type ListOpenWorkflowExecutionsRequest struct {
 
 // Send marshals and sends the ListOpenWorkflowExecutions API request.
 func (r ListOpenWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1437,6 +1501,10 @@ type ListWorkflowTypesRequest struct {
 
 // Send marshals and sends the ListWorkflowTypes API request.
 func (r ListWorkflowTypesRequest) Send() (*ListWorkflowTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1558,6 +1626,10 @@ type PollForActivityTaskRequest struct {
 
 // Send marshals and sends the PollForActivityTask API request.
 func (r PollForActivityTaskRequest) Send() (*PollForActivityTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1633,6 +1705,10 @@ type PollForDecisionTaskRequest struct {
 
 // Send marshals and sends the PollForDecisionTask API request.
 func (r PollForDecisionTaskRequest) Send() (*PollForDecisionTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1774,6 +1850,10 @@ type RecordActivityTaskHeartbeatRequest struct {
 
 // Send marshals and sends the RecordActivityTaskHeartbeat API request.
 func (r RecordActivityTaskHeartbeatRequest) Send() (*RecordActivityTaskHeartbeatOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1862,6 +1942,10 @@ type RegisterActivityTypeRequest struct {
 
 // Send marshals and sends the RegisterActivityType API request.
 func (r RegisterActivityTypeRequest) Send() (*RegisterActivityTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1939,6 +2023,10 @@ type RegisterDomainRequest struct {
 
 // Send marshals and sends the RegisterDomain API request.
 func (r RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2005,6 +2093,10 @@ type RegisterWorkflowTypeRequest struct {
 
 // Send marshals and sends the RegisterWorkflowType API request.
 func (r RegisterWorkflowTypeRequest) Send() (*RegisterWorkflowTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2085,6 +2177,10 @@ type RequestCancelWorkflowExecutionRequest struct {
 
 // Send marshals and sends the RequestCancelWorkflowExecution API request.
 func (r RequestCancelWorkflowExecutionRequest) Send() (*RequestCancelWorkflowExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2161,6 +2257,10 @@ type RespondActivityTaskCanceledRequest struct {
 
 // Send marshals and sends the RespondActivityTaskCanceled API request.
 func (r RespondActivityTaskCanceledRequest) Send() (*RespondActivityTaskCanceledOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2240,6 +2340,10 @@ type RespondActivityTaskCompletedRequest struct {
 
 // Send marshals and sends the RespondActivityTaskCompleted API request.
 func (r RespondActivityTaskCompletedRequest) Send() (*RespondActivityTaskCompletedOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2318,6 +2422,10 @@ type RespondActivityTaskFailedRequest struct {
 
 // Send marshals and sends the RespondActivityTaskFailed API request.
 func (r RespondActivityTaskFailedRequest) Send() (*RespondActivityTaskFailedOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2391,6 +2499,10 @@ type RespondDecisionTaskCompletedRequest struct {
 
 // Send marshals and sends the RespondDecisionTaskCompleted API request.
 func (r RespondDecisionTaskCompletedRequest) Send() (*RespondDecisionTaskCompletedOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2453,6 +2565,10 @@ type SignalWorkflowExecutionRequest struct {
 
 // Send marshals and sends the SignalWorkflowExecution API request.
 func (r SignalWorkflowExecutionRequest) Send() (*SignalWorkflowExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2527,6 +2643,10 @@ type StartWorkflowExecutionRequest struct {
 
 // Send marshals and sends the StartWorkflowExecution API request.
 func (r StartWorkflowExecutionRequest) Send() (*StartWorkflowExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2610,6 +2730,10 @@ type TerminateWorkflowExecutionRequest struct {
 
 // Send marshals and sends the TerminateWorkflowExecution API request.
 func (r TerminateWorkflowExecutionRequest) Send() (*TerminateWorkflowExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

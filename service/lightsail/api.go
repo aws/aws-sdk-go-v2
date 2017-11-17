@@ -19,6 +19,10 @@ type AllocateStaticIpRequest struct {
 
 // Send marshals and sends the AllocateStaticIp API request.
 func (r AllocateStaticIpRequest) Send() (*AllocateStaticIpOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,6 +69,10 @@ type AttachStaticIpRequest struct {
 
 // Send marshals and sends the AttachStaticIp API request.
 func (r AttachStaticIpRequest) Send() (*AttachStaticIpOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,6 +119,10 @@ type CloseInstancePublicPortsRequest struct {
 
 // Send marshals and sends the CloseInstancePublicPorts API request.
 func (r CloseInstancePublicPortsRequest) Send() (*CloseInstancePublicPortsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -157,6 +169,10 @@ type CreateDomainRequest struct {
 
 // Send marshals and sends the CreateDomain API request.
 func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,6 +219,10 @@ type CreateDomainEntryRequest struct {
 
 // Send marshals and sends the CreateDomainEntry API request.
 func (r CreateDomainEntryRequest) Send() (*CreateDomainEntryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,6 +270,10 @@ type CreateInstanceSnapshotRequest struct {
 
 // Send marshals and sends the CreateInstanceSnapshot API request.
 func (r CreateInstanceSnapshotRequest) Send() (*CreateInstanceSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,6 +321,10 @@ type CreateInstancesRequest struct {
 
 // Send marshals and sends the CreateInstances API request.
 func (r CreateInstancesRequest) Send() (*CreateInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -343,6 +371,10 @@ type CreateInstancesFromSnapshotRequest struct {
 
 // Send marshals and sends the CreateInstancesFromSnapshot API request.
 func (r CreateInstancesFromSnapshotRequest) Send() (*CreateInstancesFromSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,6 +422,10 @@ type CreateKeyPairRequest struct {
 
 // Send marshals and sends the CreateKeyPair API request.
 func (r CreateKeyPairRequest) Send() (*CreateKeyPairOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -436,6 +472,10 @@ type DeleteDomainRequest struct {
 
 // Send marshals and sends the DeleteDomain API request.
 func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -482,6 +522,10 @@ type DeleteDomainEntryRequest struct {
 
 // Send marshals and sends the DeleteDomainEntry API request.
 func (r DeleteDomainEntryRequest) Send() (*DeleteDomainEntryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -528,6 +572,10 @@ type DeleteInstanceRequest struct {
 
 // Send marshals and sends the DeleteInstance API request.
 func (r DeleteInstanceRequest) Send() (*DeleteInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -574,6 +622,10 @@ type DeleteInstanceSnapshotRequest struct {
 
 // Send marshals and sends the DeleteInstanceSnapshot API request.
 func (r DeleteInstanceSnapshotRequest) Send() (*DeleteInstanceSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,6 +672,10 @@ type DeleteKeyPairRequest struct {
 
 // Send marshals and sends the DeleteKeyPair API request.
 func (r DeleteKeyPairRequest) Send() (*DeleteKeyPairOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,6 +722,10 @@ type DetachStaticIpRequest struct {
 
 // Send marshals and sends the DetachStaticIp API request.
 func (r DetachStaticIpRequest) Send() (*DetachStaticIpOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -900,6 +960,10 @@ type GetDomainRequest struct {
 
 // Send marshals and sends the GetDomain API request.
 func (r GetDomainRequest) Send() (*GetDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,6 +1056,10 @@ type GetInstanceRequest struct {
 
 // Send marshals and sends the GetInstance API request.
 func (r GetInstanceRequest) Send() (*GetInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1039,6 +1107,10 @@ type GetInstanceAccessDetailsRequest struct {
 
 // Send marshals and sends the GetInstanceAccessDetails API request.
 func (r GetInstanceAccessDetailsRequest) Send() (*GetInstanceAccessDetailsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1086,6 +1158,10 @@ type GetInstanceMetricDataRequest struct {
 
 // Send marshals and sends the GetInstanceMetricData API request.
 func (r GetInstanceMetricDataRequest) Send() (*GetInstanceMetricDataOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1133,6 +1209,10 @@ type GetInstancePortStatesRequest struct {
 
 // Send marshals and sends the GetInstancePortStates API request.
 func (r GetInstancePortStatesRequest) Send() (*GetInstancePortStatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1179,6 +1259,10 @@ type GetInstanceSnapshotRequest struct {
 
 // Send marshals and sends the GetInstanceSnapshot API request.
 func (r GetInstanceSnapshotRequest) Send() (*GetInstanceSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1271,6 +1355,10 @@ type GetInstanceStateRequest struct {
 
 // Send marshals and sends the GetInstanceState API request.
 func (r GetInstanceStateRequest) Send() (*GetInstanceStateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1364,6 +1452,10 @@ type GetKeyPairRequest struct {
 
 // Send marshals and sends the GetKeyPair API request.
 func (r GetKeyPairRequest) Send() (*GetKeyPairOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1456,6 +1548,10 @@ type GetOperationRequest struct {
 
 // Send marshals and sends the GetOperation API request.
 func (r GetOperationRequest) Send() (*GetOperationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1554,6 +1650,10 @@ type GetOperationsForResourceRequest struct {
 
 // Send marshals and sends the GetOperationsForResource API request.
 func (r GetOperationsForResourceRequest) Send() (*GetOperationsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1647,6 +1747,10 @@ type GetStaticIpRequest struct {
 
 // Send marshals and sends the GetStaticIp API request.
 func (r GetStaticIpRequest) Send() (*GetStaticIpOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1739,6 +1843,10 @@ type ImportKeyPairRequest struct {
 
 // Send marshals and sends the ImportKeyPair API request.
 func (r ImportKeyPairRequest) Send() (*ImportKeyPairOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1831,6 +1939,10 @@ type OpenInstancePublicPortsRequest struct {
 
 // Send marshals and sends the OpenInstancePublicPorts API request.
 func (r OpenInstancePublicPortsRequest) Send() (*OpenInstancePublicPortsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1923,6 +2035,10 @@ type PutInstancePublicPortsRequest struct {
 
 // Send marshals and sends the PutInstancePublicPorts API request.
 func (r PutInstancePublicPortsRequest) Send() (*PutInstancePublicPortsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1970,6 +2086,10 @@ type RebootInstanceRequest struct {
 
 // Send marshals and sends the RebootInstance API request.
 func (r RebootInstanceRequest) Send() (*RebootInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2019,6 +2139,10 @@ type ReleaseStaticIpRequest struct {
 
 // Send marshals and sends the ReleaseStaticIp API request.
 func (r ReleaseStaticIpRequest) Send() (*ReleaseStaticIpOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2065,6 +2189,10 @@ type StartInstanceRequest struct {
 
 // Send marshals and sends the StartInstance API request.
 func (r StartInstanceRequest) Send() (*StartInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2112,6 +2240,10 @@ type StopInstanceRequest struct {
 
 // Send marshals and sends the StopInstance API request.
 func (r StopInstanceRequest) Send() (*StopInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2204,6 +2336,10 @@ type UpdateDomainEntryRequest struct {
 
 // Send marshals and sends the UpdateDomainEntry API request.
 func (r UpdateDomainEntryRequest) Send() (*UpdateDomainEntryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

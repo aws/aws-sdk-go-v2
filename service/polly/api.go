@@ -20,6 +20,10 @@ type DeleteLexiconRequest struct {
 
 // Send marshals and sends the DeleteLexicon API request.
 func (r DeleteLexiconRequest) Send() (*DeleteLexiconOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -132,6 +136,10 @@ type GetLexiconRequest struct {
 
 // Send marshals and sends the GetLexicon API request.
 func (r GetLexiconRequest) Send() (*GetLexiconOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -226,6 +234,10 @@ type PutLexiconRequest struct {
 
 // Send marshals and sends the PutLexicon API request.
 func (r PutLexiconRequest) Send() (*PutLexiconOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -277,6 +289,10 @@ type SynthesizeSpeechRequest struct {
 
 // Send marshals and sends the SynthesizeSpeech API request.
 func (r SynthesizeSpeechRequest) Send() (*SynthesizeSpeechOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

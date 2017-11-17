@@ -20,6 +20,10 @@ type AddListenerCertificatesRequest struct {
 
 // Send marshals and sends the AddListenerCertificates API request.
 func (r AddListenerCertificatesRequest) Send() (*AddListenerCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -72,6 +76,10 @@ type AddTagsRequest struct {
 
 // Send marshals and sends the AddTags API request.
 func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -126,6 +134,10 @@ type CreateListenerRequest struct {
 
 // Send marshals and sends the CreateListener API request.
 func (r CreateListenerRequest) Send() (*CreateListenerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -184,6 +196,10 @@ type CreateLoadBalancerRequest struct {
 
 // Send marshals and sends the CreateLoadBalancer API request.
 func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,6 +265,10 @@ type CreateRuleRequest struct {
 
 // Send marshals and sends the CreateRule API request.
 func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,6 +326,10 @@ type CreateTargetGroupRequest struct {
 
 // Send marshals and sends the CreateTargetGroup API request.
 func (r CreateTargetGroupRequest) Send() (*CreateTargetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -367,6 +391,10 @@ type DeleteListenerRequest struct {
 
 // Send marshals and sends the DeleteListener API request.
 func (r DeleteListenerRequest) Send() (*DeleteListenerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -416,6 +444,10 @@ type DeleteLoadBalancerRequest struct {
 
 // Send marshals and sends the DeleteLoadBalancer API request.
 func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -471,6 +503,10 @@ type DeleteRuleRequest struct {
 
 // Send marshals and sends the DeleteRule API request.
 func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -517,6 +553,10 @@ type DeleteTargetGroupRequest struct {
 
 // Send marshals and sends the DeleteTargetGroup API request.
 func (r DeleteTargetGroupRequest) Send() (*DeleteTargetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -566,6 +606,10 @@ type DeregisterTargetsRequest struct {
 
 // Send marshals and sends the DeregisterTargets API request.
 func (r DeregisterTargetsRequest) Send() (*DeregisterTargetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -614,6 +658,10 @@ type DescribeAccountLimitsRequest struct {
 
 // Send marshals and sends the DescribeAccountLimits API request.
 func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,6 +714,10 @@ type DescribeListenerCertificatesRequest struct {
 
 // Send marshals and sends the DescribeListenerCertificates API request.
 func (r DescribeListenerCertificatesRequest) Send() (*DescribeListenerCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -712,6 +764,10 @@ type DescribeListenersRequest struct {
 
 // Send marshals and sends the DescribeListeners API request.
 func (r DescribeListenersRequest) Send() (*DescribeListenersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -816,6 +872,10 @@ type DescribeLoadBalancerAttributesRequest struct {
 
 // Send marshals and sends the DescribeLoadBalancerAttributes API request.
 func (r DescribeLoadBalancerAttributesRequest) Send() (*DescribeLoadBalancerAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -863,6 +923,10 @@ type DescribeLoadBalancersRequest struct {
 
 // Send marshals and sends the DescribeLoadBalancers API request.
 func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -968,6 +1032,10 @@ type DescribeRulesRequest struct {
 
 // Send marshals and sends the DescribeRules API request.
 func (r DescribeRulesRequest) Send() (*DescribeRulesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1015,6 +1083,10 @@ type DescribeSSLPoliciesRequest struct {
 
 // Send marshals and sends the DescribeSSLPolicies API request.
 func (r DescribeSSLPoliciesRequest) Send() (*DescribeSSLPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1064,6 +1136,10 @@ type DescribeTagsRequest struct {
 
 // Send marshals and sends the DescribeTags API request.
 func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1112,6 +1188,10 @@ type DescribeTargetGroupAttributesRequest struct {
 
 // Send marshals and sends the DescribeTargetGroupAttributes API request.
 func (r DescribeTargetGroupAttributesRequest) Send() (*DescribeTargetGroupAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1158,6 +1238,10 @@ type DescribeTargetGroupsRequest struct {
 
 // Send marshals and sends the DescribeTargetGroups API request.
 func (r DescribeTargetGroupsRequest) Send() (*DescribeTargetGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1266,6 +1350,10 @@ type DescribeTargetHealthRequest struct {
 
 // Send marshals and sends the DescribeTargetHealth API request.
 func (r DescribeTargetHealthRequest) Send() (*DescribeTargetHealthOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1312,6 +1400,10 @@ type ModifyListenerRequest struct {
 
 // Send marshals and sends the ModifyListener API request.
 func (r ModifyListenerRequest) Send() (*ModifyListenerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1363,6 +1455,10 @@ type ModifyLoadBalancerAttributesRequest struct {
 
 // Send marshals and sends the ModifyLoadBalancerAttributes API request.
 func (r ModifyLoadBalancerAttributesRequest) Send() (*ModifyLoadBalancerAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1414,6 +1510,10 @@ type ModifyRuleRequest struct {
 
 // Send marshals and sends the ModifyRule API request.
 func (r ModifyRuleRequest) Send() (*ModifyRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1464,6 +1564,10 @@ type ModifyTargetGroupRequest struct {
 
 // Send marshals and sends the ModifyTargetGroup API request.
 func (r ModifyTargetGroupRequest) Send() (*ModifyTargetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1513,6 +1617,10 @@ type ModifyTargetGroupAttributesRequest struct {
 
 // Send marshals and sends the ModifyTargetGroupAttributes API request.
 func (r ModifyTargetGroupAttributesRequest) Send() (*ModifyTargetGroupAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1559,6 +1667,10 @@ type RegisterTargetsRequest struct {
 
 // Send marshals and sends the RegisterTargets API request.
 func (r RegisterTargetsRequest) Send() (*RegisterTargetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1620,6 +1732,10 @@ type RemoveListenerCertificatesRequest struct {
 
 // Send marshals and sends the RemoveListenerCertificates API request.
 func (r RemoveListenerCertificatesRequest) Send() (*RemoveListenerCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1671,6 +1787,10 @@ type RemoveTagsRequest struct {
 
 // Send marshals and sends the RemoveTags API request.
 func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1719,6 +1839,10 @@ type SetIpAddressTypeRequest struct {
 
 // Send marshals and sends the SetIpAddressType API request.
 func (r SetIpAddressTypeRequest) Send() (*SetIpAddressTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1768,6 +1892,10 @@ type SetRulePrioritiesRequest struct {
 
 // Send marshals and sends the SetRulePriorities API request.
 func (r SetRulePrioritiesRequest) Send() (*SetRulePrioritiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1818,6 +1946,10 @@ type SetSecurityGroupsRequest struct {
 
 // Send marshals and sends the SetSecurityGroups API request.
 func (r SetSecurityGroupsRequest) Send() (*SetSecurityGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1868,6 +2000,10 @@ type SetSubnetsRequest struct {
 
 // Send marshals and sends the SetSubnets API request.
 func (r SetSubnetsRequest) Send() (*SetSubnetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

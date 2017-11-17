@@ -20,6 +20,10 @@ type DeleteScalingPolicyRequest struct {
 
 // Send marshals and sends the DeleteScalingPolicy API request.
 func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -72,6 +76,10 @@ type DeregisterScalableTargetRequest struct {
 
 // Send marshals and sends the DeregisterScalableTarget API request.
 func (r DeregisterScalableTargetRequest) Send() (*DeregisterScalableTargetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -123,6 +131,10 @@ type DescribeScalableTargetsRequest struct {
 
 // Send marshals and sends the DescribeScalableTargets API request.
 func (r DescribeScalableTargetsRequest) Send() (*DescribeScalableTargetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -232,6 +244,10 @@ type DescribeScalingActivitiesRequest struct {
 
 // Send marshals and sends the DescribeScalingActivities API request.
 func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,6 +358,10 @@ type DescribeScalingPoliciesRequest struct {
 
 // Send marshals and sends the DescribeScalingPolicies API request.
 func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -451,6 +471,10 @@ type PutScalingPolicyRequest struct {
 
 // Send marshals and sends the PutScalingPolicy API request.
 func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,6 +533,10 @@ type RegisterScalableTargetRequest struct {
 
 // Send marshals and sends the RegisterScalableTarget API request.
 func (r RegisterScalableTargetRequest) Send() (*RegisterScalableTargetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -17,6 +17,10 @@ type AddAttachmentsToSetRequest struct {
 
 // Send marshals and sends the AddAttachmentsToSet API request.
 func (r AddAttachmentsToSetRequest) Send() (*AddAttachmentsToSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -72,6 +76,10 @@ type AddCommunicationToCaseRequest struct {
 
 // Send marshals and sends the AddCommunicationToCase API request.
 func (r AddCommunicationToCaseRequest) Send() (*AddCommunicationToCaseOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,6 +133,10 @@ type CreateCaseRequest struct {
 
 // Send marshals and sends the CreateCase API request.
 func (r CreateCaseRequest) Send() (*CreateCaseOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -214,6 +226,10 @@ type DescribeAttachmentRequest struct {
 
 // Send marshals and sends the DescribeAttachment API request.
 func (r DescribeAttachmentRequest) Send() (*DescribeAttachmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -263,6 +279,10 @@ type DescribeCasesRequest struct {
 
 // Send marshals and sends the DescribeCases API request.
 func (r DescribeCasesRequest) Send() (*DescribeCasesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,6 +399,10 @@ type DescribeCommunicationsRequest struct {
 
 // Send marshals and sends the DescribeCommunications API request.
 func (r DescribeCommunicationsRequest) Send() (*DescribeCommunicationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -594,6 +618,10 @@ type DescribeTrustedAdvisorCheckRefreshStatusesRequest struct {
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckRefreshStatuses API request.
 func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send() (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,6 +673,10 @@ type DescribeTrustedAdvisorCheckResultRequest struct {
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckResult API request.
 func (r DescribeTrustedAdvisorCheckResultRequest) Send() (*DescribeTrustedAdvisorCheckResultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,6 +742,10 @@ type DescribeTrustedAdvisorCheckSummariesRequest struct {
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckSummaries API request.
 func (r DescribeTrustedAdvisorCheckSummariesRequest) Send() (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -759,6 +795,10 @@ type DescribeTrustedAdvisorChecksRequest struct {
 
 // Send marshals and sends the DescribeTrustedAdvisorChecks API request.
 func (r DescribeTrustedAdvisorChecksRequest) Send() (*DescribeTrustedAdvisorChecksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -808,6 +848,10 @@ type RefreshTrustedAdvisorCheckRequest struct {
 
 // Send marshals and sends the RefreshTrustedAdvisorCheck API request.
 func (r RefreshTrustedAdvisorCheckRequest) Send() (*RefreshTrustedAdvisorCheckOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

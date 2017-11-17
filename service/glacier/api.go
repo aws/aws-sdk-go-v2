@@ -21,6 +21,10 @@ type AbortMultipartUploadRequest struct {
 
 // Send marshals and sends the AbortMultipartUpload API request.
 func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,6 +90,10 @@ type AbortVaultLockRequest struct {
 
 // Send marshals and sends the AbortVaultLock API request.
 func (r AbortVaultLockRequest) Send() (*AbortVaultLockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -147,6 +155,10 @@ type AddTagsToVaultRequest struct {
 
 // Send marshals and sends the AddTagsToVault API request.
 func (r AddTagsToVaultRequest) Send() (*AddTagsToVaultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -198,6 +210,10 @@ type CompleteMultipartUploadRequest struct {
 
 // Send marshals and sends the CompleteMultipartUpload API request.
 func (r CompleteMultipartUploadRequest) Send() (*UploadArchiveOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -285,6 +301,10 @@ type CompleteVaultLockRequest struct {
 
 // Send marshals and sends the CompleteVaultLock API request.
 func (r CompleteVaultLockRequest) Send() (*CompleteVaultLockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -345,6 +365,10 @@ type CreateVaultRequest struct {
 
 // Send marshals and sends the CreateVault API request.
 func (r CreateVaultRequest) Send() (*CreateVaultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -412,6 +436,10 @@ type DeleteArchiveRequest struct {
 
 // Send marshals and sends the DeleteArchive API request.
 func (r DeleteArchiveRequest) Send() (*DeleteArchiveOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -482,6 +510,10 @@ type DeleteVaultRequest struct {
 
 // Send marshals and sends the DeleteVault API request.
 func (r DeleteVaultRequest) Send() (*DeleteVaultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -550,6 +582,10 @@ type DeleteVaultAccessPolicyRequest struct {
 
 // Send marshals and sends the DeleteVaultAccessPolicy API request.
 func (r DeleteVaultAccessPolicyRequest) Send() (*DeleteVaultAccessPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -605,6 +641,10 @@ type DeleteVaultNotificationsRequest struct {
 
 // Send marshals and sends the DeleteVaultNotifications API request.
 func (r DeleteVaultNotificationsRequest) Send() (*DeleteVaultNotificationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -665,6 +705,10 @@ type DescribeJobRequest struct {
 
 // Send marshals and sends the DescribeJob API request.
 func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -730,6 +774,10 @@ type DescribeVaultRequest struct {
 
 // Send marshals and sends the DescribeVault API request.
 func (r DescribeVaultRequest) Send() (*DescribeVaultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,6 +841,10 @@ type GetDataRetrievalPolicyRequest struct {
 
 // Send marshals and sends the GetDataRetrievalPolicy API request.
 func (r GetDataRetrievalPolicyRequest) Send() (*GetDataRetrievalPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -839,6 +891,10 @@ type GetJobOutputRequest struct {
 
 // Send marshals and sends the GetJobOutput API request.
 func (r GetJobOutputRequest) Send() (*GetJobOutputOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -926,6 +982,10 @@ type GetVaultAccessPolicyRequest struct {
 
 // Send marshals and sends the GetVaultAccessPolicy API request.
 func (r GetVaultAccessPolicyRequest) Send() (*GetVaultAccessPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -975,6 +1035,10 @@ type GetVaultLockRequest struct {
 
 // Send marshals and sends the GetVaultLock API request.
 func (r GetVaultLockRequest) Send() (*GetVaultLockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1038,6 +1102,10 @@ type GetVaultNotificationsRequest struct {
 
 // Send marshals and sends the GetVaultNotifications API request.
 func (r GetVaultNotificationsRequest) Send() (*GetVaultNotificationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1100,6 +1168,10 @@ type InitiateJobRequest struct {
 
 // Send marshals and sends the InitiateJob API request.
 func (r InitiateJobRequest) Send() (*InitiateJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1279,6 +1351,10 @@ type InitiateMultipartUploadRequest struct {
 
 // Send marshals and sends the InitiateMultipartUpload API request.
 func (r InitiateMultipartUploadRequest) Send() (*InitiateMultipartUploadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1357,6 +1433,10 @@ type InitiateVaultLockRequest struct {
 
 // Send marshals and sends the InitiateVaultLock API request.
 func (r InitiateVaultLockRequest) Send() (*InitiateVaultLockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1429,6 +1509,10 @@ type ListJobsRequest struct {
 
 // Send marshals and sends the ListJobs API request.
 func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1568,6 +1652,10 @@ type ListMultipartUploadsRequest struct {
 
 // Send marshals and sends the ListMultipartUploads API request.
 func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1697,6 +1785,10 @@ type ListPartsRequest struct {
 
 // Send marshals and sends the ListParts API request.
 func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1820,6 +1912,10 @@ type ListProvisionedCapacityRequest struct {
 
 // Send marshals and sends the ListProvisionedCapacity API request.
 func (r ListProvisionedCapacityRequest) Send() (*ListProvisionedCapacityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1864,6 +1960,10 @@ type ListTagsForVaultRequest struct {
 
 // Send marshals and sends the ListTagsForVault API request.
 func (r ListTagsForVaultRequest) Send() (*ListTagsForVaultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1910,6 +2010,10 @@ type ListVaultsRequest struct {
 
 // Send marshals and sends the ListVaults API request.
 func (r ListVaultsRequest) Send() (*ListVaultsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2030,6 +2134,10 @@ type PurchaseProvisionedCapacityRequest struct {
 
 // Send marshals and sends the PurchaseProvisionedCapacity API request.
 func (r PurchaseProvisionedCapacityRequest) Send() (*PurchaseProvisionedCapacityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2074,6 +2182,10 @@ type RemoveTagsFromVaultRequest struct {
 
 // Send marshals and sends the RemoveTagsFromVault API request.
 func (r RemoveTagsFromVaultRequest) Send() (*RemoveTagsFromVaultOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2124,6 +2236,10 @@ type SetDataRetrievalPolicyRequest struct {
 
 // Send marshals and sends the SetDataRetrievalPolicy API request.
 func (r SetDataRetrievalPolicyRequest) Send() (*SetDataRetrievalPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2176,6 +2292,10 @@ type SetVaultAccessPolicyRequest struct {
 
 // Send marshals and sends the SetVaultAccessPolicy API request.
 func (r SetVaultAccessPolicyRequest) Send() (*SetVaultAccessPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2228,6 +2348,10 @@ type SetVaultNotificationsRequest struct {
 
 // Send marshals and sends the SetVaultNotifications API request.
 func (r SetVaultNotificationsRequest) Send() (*SetVaultNotificationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2305,6 +2429,10 @@ type UploadArchiveRequest struct {
 
 // Send marshals and sends the UploadArchive API request.
 func (r UploadArchiveRequest) Send() (*UploadArchiveOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2384,6 +2512,10 @@ type UploadMultipartPartRequest struct {
 
 // Send marshals and sends the UploadMultipartPart API request.
 func (r UploadMultipartPartRequest) Send() (*UploadMultipartPartOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -19,6 +19,10 @@ type GetEntitlementsRequest struct {
 
 // Send marshals and sends the GetEntitlements API request.
 func (r GetEntitlementsRequest) Send() (*GetEntitlementsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

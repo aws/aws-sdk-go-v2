@@ -19,6 +19,10 @@ type GetResourcesRequest struct {
 
 // Send marshals and sends the GetResources API request.
 func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -228,6 +232,10 @@ type GetTagValuesRequest struct {
 
 // Send marshals and sends the GetTagValues API request.
 func (r GetTagValuesRequest) Send() (*GetTagValuesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -331,6 +339,10 @@ type TagResourcesRequest struct {
 
 // Send marshals and sends the TagResources API request.
 func (r TagResourcesRequest) Send() (*TagResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,6 +405,10 @@ type UntagResourcesRequest struct {
 
 // Send marshals and sends the UntagResources API request.
 func (r UntagResourcesRequest) Send() (*UntagResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

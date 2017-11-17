@@ -20,6 +20,10 @@ type BatchCreatePartitionRequest struct {
 
 // Send marshals and sends the BatchCreatePartition API request.
 func (r BatchCreatePartitionRequest) Send() (*BatchCreatePartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,6 +70,10 @@ type BatchDeleteConnectionRequest struct {
 
 // Send marshals and sends the BatchDeleteConnection API request.
 func (r BatchDeleteConnectionRequest) Send() (*BatchDeleteConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,6 +120,10 @@ type BatchDeletePartitionRequest struct {
 
 // Send marshals and sends the BatchDeletePartition API request.
 func (r BatchDeletePartitionRequest) Send() (*BatchDeletePartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,6 +170,10 @@ type BatchDeleteTableRequest struct {
 
 // Send marshals and sends the BatchDeleteTable API request.
 func (r BatchDeleteTableRequest) Send() (*BatchDeleteTableOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -204,6 +220,10 @@ type BatchGetPartitionRequest struct {
 
 // Send marshals and sends the BatchGetPartition API request.
 func (r BatchGetPartitionRequest) Send() (*BatchGetPartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,6 +270,10 @@ type CreateClassifierRequest struct {
 
 // Send marshals and sends the CreateClassifier API request.
 func (r CreateClassifierRequest) Send() (*CreateClassifierOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,6 +320,10 @@ type CreateConnectionRequest struct {
 
 // Send marshals and sends the CreateConnection API request.
 func (r CreateConnectionRequest) Send() (*CreateConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,6 +370,10 @@ type CreateCrawlerRequest struct {
 
 // Send marshals and sends the CreateCrawler API request.
 func (r CreateCrawlerRequest) Send() (*CreateCrawlerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,6 +422,10 @@ type CreateDatabaseRequest struct {
 
 // Send marshals and sends the CreateDatabase API request.
 func (r CreateDatabaseRequest) Send() (*CreateDatabaseOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -436,6 +472,10 @@ type CreateDevEndpointRequest struct {
 
 // Send marshals and sends the CreateDevEndpoint API request.
 func (r CreateDevEndpointRequest) Send() (*CreateDevEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -482,6 +522,10 @@ type CreateJobRequest struct {
 
 // Send marshals and sends the CreateJob API request.
 func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -528,6 +572,10 @@ type CreatePartitionRequest struct {
 
 // Send marshals and sends the CreatePartition API request.
 func (r CreatePartitionRequest) Send() (*CreatePartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -574,6 +622,10 @@ type CreateScriptRequest struct {
 
 // Send marshals and sends the CreateScript API request.
 func (r CreateScriptRequest) Send() (*CreateScriptOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,6 +672,10 @@ type CreateTableRequest struct {
 
 // Send marshals and sends the CreateTable API request.
 func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,6 +722,10 @@ type CreateTriggerRequest struct {
 
 // Send marshals and sends the CreateTrigger API request.
 func (r CreateTriggerRequest) Send() (*CreateTriggerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -712,6 +772,10 @@ type CreateUserDefinedFunctionRequest struct {
 
 // Send marshals and sends the CreateUserDefinedFunction API request.
 func (r CreateUserDefinedFunctionRequest) Send() (*CreateUserDefinedFunctionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,6 +822,10 @@ type DeleteClassifierRequest struct {
 
 // Send marshals and sends the DeleteClassifier API request.
 func (r DeleteClassifierRequest) Send() (*DeleteClassifierOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -804,6 +872,10 @@ type DeleteConnectionRequest struct {
 
 // Send marshals and sends the DeleteConnection API request.
 func (r DeleteConnectionRequest) Send() (*DeleteConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -850,6 +922,10 @@ type DeleteCrawlerRequest struct {
 
 // Send marshals and sends the DeleteCrawler API request.
 func (r DeleteCrawlerRequest) Send() (*DeleteCrawlerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -897,6 +973,10 @@ type DeleteDatabaseRequest struct {
 
 // Send marshals and sends the DeleteDatabase API request.
 func (r DeleteDatabaseRequest) Send() (*DeleteDatabaseOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -943,6 +1023,10 @@ type DeleteDevEndpointRequest struct {
 
 // Send marshals and sends the DeleteDevEndpoint API request.
 func (r DeleteDevEndpointRequest) Send() (*DeleteDevEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -989,6 +1073,10 @@ type DeleteJobRequest struct {
 
 // Send marshals and sends the DeleteJob API request.
 func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1035,6 +1123,10 @@ type DeletePartitionRequest struct {
 
 // Send marshals and sends the DeletePartition API request.
 func (r DeletePartitionRequest) Send() (*DeletePartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1081,6 +1173,10 @@ type DeleteTableRequest struct {
 
 // Send marshals and sends the DeleteTable API request.
 func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1127,6 +1223,10 @@ type DeleteTriggerRequest struct {
 
 // Send marshals and sends the DeleteTrigger API request.
 func (r DeleteTriggerRequest) Send() (*DeleteTriggerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1173,6 +1273,10 @@ type DeleteUserDefinedFunctionRequest struct {
 
 // Send marshals and sends the DeleteUserDefinedFunction API request.
 func (r DeleteUserDefinedFunctionRequest) Send() (*DeleteUserDefinedFunctionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1219,6 +1323,10 @@ type GetCatalogImportStatusRequest struct {
 
 // Send marshals and sends the GetCatalogImportStatus API request.
 func (r GetCatalogImportStatusRequest) Send() (*GetCatalogImportStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1265,6 +1373,10 @@ type GetClassifierRequest struct {
 
 // Send marshals and sends the GetClassifier API request.
 func (r GetClassifierRequest) Send() (*GetClassifierOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1311,6 +1423,10 @@ type GetClassifiersRequest struct {
 
 // Send marshals and sends the GetClassifiers API request.
 func (r GetClassifiersRequest) Send() (*GetClassifiersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1413,6 +1529,10 @@ type GetConnectionRequest struct {
 
 // Send marshals and sends the GetConnection API request.
 func (r GetConnectionRequest) Send() (*GetConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1459,6 +1579,10 @@ type GetConnectionsRequest struct {
 
 // Send marshals and sends the GetConnections API request.
 func (r GetConnectionsRequest) Send() (*GetConnectionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1561,6 +1685,10 @@ type GetCrawlerRequest struct {
 
 // Send marshals and sends the GetCrawler API request.
 func (r GetCrawlerRequest) Send() (*GetCrawlerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1607,6 +1735,10 @@ type GetCrawlerMetricsRequest struct {
 
 // Send marshals and sends the GetCrawlerMetrics API request.
 func (r GetCrawlerMetricsRequest) Send() (*GetCrawlerMetricsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1709,6 +1841,10 @@ type GetCrawlersRequest struct {
 
 // Send marshals and sends the GetCrawlers API request.
 func (r GetCrawlersRequest) Send() (*GetCrawlersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1811,6 +1947,10 @@ type GetDatabaseRequest struct {
 
 // Send marshals and sends the GetDatabase API request.
 func (r GetDatabaseRequest) Send() (*GetDatabaseOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1857,6 +1997,10 @@ type GetDatabasesRequest struct {
 
 // Send marshals and sends the GetDatabases API request.
 func (r GetDatabasesRequest) Send() (*GetDatabasesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2005,6 +2149,10 @@ type GetDevEndpointRequest struct {
 
 // Send marshals and sends the GetDevEndpoint API request.
 func (r GetDevEndpointRequest) Send() (*GetDevEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2051,6 +2199,10 @@ type GetDevEndpointsRequest struct {
 
 // Send marshals and sends the GetDevEndpoints API request.
 func (r GetDevEndpointsRequest) Send() (*GetDevEndpointsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2153,6 +2305,10 @@ type GetJobRequest struct {
 
 // Send marshals and sends the GetJob API request.
 func (r GetJobRequest) Send() (*GetJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2199,6 +2355,10 @@ type GetJobRunRequest struct {
 
 // Send marshals and sends the GetJobRun API request.
 func (r GetJobRunRequest) Send() (*GetJobRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2245,6 +2405,10 @@ type GetJobRunsRequest struct {
 
 // Send marshals and sends the GetJobRuns API request.
 func (r GetJobRunsRequest) Send() (*GetJobRunsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2347,6 +2511,10 @@ type GetJobsRequest struct {
 
 // Send marshals and sends the GetJobs API request.
 func (r GetJobsRequest) Send() (*GetJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2449,6 +2617,10 @@ type GetMappingRequest struct {
 
 // Send marshals and sends the GetMapping API request.
 func (r GetMappingRequest) Send() (*GetMappingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2495,6 +2667,10 @@ type GetPartitionRequest struct {
 
 // Send marshals and sends the GetPartition API request.
 func (r GetPartitionRequest) Send() (*GetPartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2541,6 +2717,10 @@ type GetPartitionsRequest struct {
 
 // Send marshals and sends the GetPartitions API request.
 func (r GetPartitionsRequest) Send() (*GetPartitionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2643,6 +2823,10 @@ type GetPlanRequest struct {
 
 // Send marshals and sends the GetPlan API request.
 func (r GetPlanRequest) Send() (*GetPlanOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2689,6 +2873,10 @@ type GetTableRequest struct {
 
 // Send marshals and sends the GetTable API request.
 func (r GetTableRequest) Send() (*GetTableOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2735,6 +2923,10 @@ type GetTableVersionsRequest struct {
 
 // Send marshals and sends the GetTableVersions API request.
 func (r GetTableVersionsRequest) Send() (*GetTableVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2838,6 +3030,10 @@ type GetTablesRequest struct {
 
 // Send marshals and sends the GetTables API request.
 func (r GetTablesRequest) Send() (*GetTablesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2940,6 +3136,10 @@ type GetTriggerRequest struct {
 
 // Send marshals and sends the GetTrigger API request.
 func (r GetTriggerRequest) Send() (*GetTriggerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2986,6 +3186,10 @@ type GetTriggersRequest struct {
 
 // Send marshals and sends the GetTriggers API request.
 func (r GetTriggersRequest) Send() (*GetTriggersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3088,6 +3292,10 @@ type GetUserDefinedFunctionRequest struct {
 
 // Send marshals and sends the GetUserDefinedFunction API request.
 func (r GetUserDefinedFunctionRequest) Send() (*GetUserDefinedFunctionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3134,6 +3342,10 @@ type GetUserDefinedFunctionsRequest struct {
 
 // Send marshals and sends the GetUserDefinedFunctions API request.
 func (r GetUserDefinedFunctionsRequest) Send() (*GetUserDefinedFunctionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3236,6 +3448,10 @@ type ImportCatalogToGlueRequest struct {
 
 // Send marshals and sends the ImportCatalogToGlue API request.
 func (r ImportCatalogToGlueRequest) Send() (*ImportCatalogToGlueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3282,6 +3498,10 @@ type ResetJobBookmarkRequest struct {
 
 // Send marshals and sends the ResetJobBookmark API request.
 func (r ResetJobBookmarkRequest) Send() (*ResetJobBookmarkOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3328,6 +3548,10 @@ type StartCrawlerRequest struct {
 
 // Send marshals and sends the StartCrawler API request.
 func (r StartCrawlerRequest) Send() (*StartCrawlerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3375,6 +3599,10 @@ type StartCrawlerScheduleRequest struct {
 
 // Send marshals and sends the StartCrawlerSchedule API request.
 func (r StartCrawlerScheduleRequest) Send() (*StartCrawlerScheduleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3422,6 +3650,10 @@ type StartJobRunRequest struct {
 
 // Send marshals and sends the StartJobRun API request.
 func (r StartJobRunRequest) Send() (*StartJobRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3468,6 +3700,10 @@ type StartTriggerRequest struct {
 
 // Send marshals and sends the StartTrigger API request.
 func (r StartTriggerRequest) Send() (*StartTriggerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3514,6 +3750,10 @@ type StopCrawlerRequest struct {
 
 // Send marshals and sends the StopCrawler API request.
 func (r StopCrawlerRequest) Send() (*StopCrawlerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3560,6 +3800,10 @@ type StopCrawlerScheduleRequest struct {
 
 // Send marshals and sends the StopCrawlerSchedule API request.
 func (r StopCrawlerScheduleRequest) Send() (*StopCrawlerScheduleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3607,6 +3851,10 @@ type StopTriggerRequest struct {
 
 // Send marshals and sends the StopTrigger API request.
 func (r StopTriggerRequest) Send() (*StopTriggerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3653,6 +3901,10 @@ type UpdateClassifierRequest struct {
 
 // Send marshals and sends the UpdateClassifier API request.
 func (r UpdateClassifierRequest) Send() (*UpdateClassifierOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3699,6 +3951,10 @@ type UpdateConnectionRequest struct {
 
 // Send marshals and sends the UpdateConnection API request.
 func (r UpdateConnectionRequest) Send() (*UpdateConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3745,6 +4001,10 @@ type UpdateCrawlerRequest struct {
 
 // Send marshals and sends the UpdateCrawler API request.
 func (r UpdateCrawlerRequest) Send() (*UpdateCrawlerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3792,6 +4052,10 @@ type UpdateCrawlerScheduleRequest struct {
 
 // Send marshals and sends the UpdateCrawlerSchedule API request.
 func (r UpdateCrawlerScheduleRequest) Send() (*UpdateCrawlerScheduleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3838,6 +4102,10 @@ type UpdateDatabaseRequest struct {
 
 // Send marshals and sends the UpdateDatabase API request.
 func (r UpdateDatabaseRequest) Send() (*UpdateDatabaseOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3884,6 +4152,10 @@ type UpdateDevEndpointRequest struct {
 
 // Send marshals and sends the UpdateDevEndpoint API request.
 func (r UpdateDevEndpointRequest) Send() (*UpdateDevEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3930,6 +4202,10 @@ type UpdateJobRequest struct {
 
 // Send marshals and sends the UpdateJob API request.
 func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3976,6 +4252,10 @@ type UpdatePartitionRequest struct {
 
 // Send marshals and sends the UpdatePartition API request.
 func (r UpdatePartitionRequest) Send() (*UpdatePartitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4022,6 +4302,10 @@ type UpdateTableRequest struct {
 
 // Send marshals and sends the UpdateTable API request.
 func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4068,6 +4352,10 @@ type UpdateTriggerRequest struct {
 
 // Send marshals and sends the UpdateTrigger API request.
 func (r UpdateTriggerRequest) Send() (*UpdateTriggerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4114,6 +4402,10 @@ type UpdateUserDefinedFunctionRequest struct {
 
 // Send marshals and sends the UpdateUserDefinedFunction API request.
 func (r UpdateUserDefinedFunctionRequest) Send() (*UpdateUserDefinedFunctionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

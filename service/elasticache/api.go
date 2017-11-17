@@ -21,6 +21,10 @@ type AddTagsToResourceRequest struct {
 
 // Send marshals and sends the AddTagsToResource API request.
 func (r AddTagsToResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -77,6 +81,10 @@ type AuthorizeCacheSecurityGroupIngressRequest struct {
 
 // Send marshals and sends the AuthorizeCacheSecurityGroupIngress API request.
 func (r AuthorizeCacheSecurityGroupIngressRequest) Send() (*AuthorizeCacheSecurityGroupIngressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -128,6 +136,10 @@ type CopySnapshotRequest struct {
 
 // Send marshals and sends the CopySnapshot API request.
 func (r CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,6 +250,10 @@ type CreateCacheClusterRequest struct {
 
 // Send marshals and sends the CreateCacheCluster API request.
 func (r CreateCacheClusterRequest) Send() (*CreateCacheClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -289,6 +305,10 @@ type CreateCacheParameterGroupRequest struct {
 
 // Send marshals and sends the CreateCacheParameterGroup API request.
 func (r CreateCacheParameterGroupRequest) Send() (*CreateCacheParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -348,6 +368,10 @@ type CreateCacheSecurityGroupRequest struct {
 
 // Send marshals and sends the CreateCacheSecurityGroup API request.
 func (r CreateCacheSecurityGroupRequest) Send() (*CreateCacheSecurityGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,6 +424,10 @@ type CreateCacheSubnetGroupRequest struct {
 
 // Send marshals and sends the CreateCacheSubnetGroup API request.
 func (r CreateCacheSubnetGroupRequest) Send() (*CreateCacheSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -449,6 +477,10 @@ type CreateReplicationGroupRequest struct {
 
 // Send marshals and sends the CreateReplicationGroup API request.
 func (r CreateReplicationGroupRequest) Send() (*CreateReplicationGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -518,6 +550,10 @@ type CreateSnapshotRequest struct {
 
 // Send marshals and sends the CreateSnapshot API request.
 func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -567,6 +603,10 @@ type DeleteCacheClusterRequest struct {
 
 // Send marshals and sends the DeleteCacheCluster API request.
 func (r DeleteCacheClusterRequest) Send() (*DeleteCacheClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -626,6 +666,10 @@ type DeleteCacheParameterGroupRequest struct {
 
 // Send marshals and sends the DeleteCacheParameterGroup API request.
 func (r DeleteCacheParameterGroupRequest) Send() (*DeleteCacheParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -675,6 +719,10 @@ type DeleteCacheSecurityGroupRequest struct {
 
 // Send marshals and sends the DeleteCacheSecurityGroup API request.
 func (r DeleteCacheSecurityGroupRequest) Send() (*DeleteCacheSecurityGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -726,6 +774,10 @@ type DeleteCacheSubnetGroupRequest struct {
 
 // Send marshals and sends the DeleteCacheSubnetGroup API request.
 func (r DeleteCacheSubnetGroupRequest) Send() (*DeleteCacheSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -777,6 +829,10 @@ type DeleteReplicationGroupRequest struct {
 
 // Send marshals and sends the DeleteReplicationGroup API request.
 func (r DeleteReplicationGroupRequest) Send() (*DeleteReplicationGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -833,6 +889,10 @@ type DeleteSnapshotRequest struct {
 
 // Send marshals and sends the DeleteSnapshot API request.
 func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,6 +1272,10 @@ type DescribeCacheParametersRequest struct {
 
 // Send marshals and sends the DescribeCacheParameters API request.
 func (r DescribeCacheParametersRequest) Send() (*DescribeCacheParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1520,6 +1584,10 @@ type DescribeEngineDefaultParametersRequest struct {
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
 func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2200,6 +2268,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2253,6 +2325,10 @@ type ModifyCacheClusterRequest struct {
 
 // Send marshals and sends the ModifyCacheCluster API request.
 func (r ModifyCacheClusterRequest) Send() (*ModifyCacheClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2301,6 +2377,10 @@ type ModifyCacheParameterGroupRequest struct {
 
 // Send marshals and sends the ModifyCacheParameterGroup API request.
 func (r ModifyCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2349,6 +2429,10 @@ type ModifyCacheSubnetGroupRequest struct {
 
 // Send marshals and sends the ModifyCacheSubnetGroup API request.
 func (r ModifyCacheSubnetGroupRequest) Send() (*ModifyCacheSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2395,6 +2479,10 @@ type ModifyReplicationGroupRequest struct {
 
 // Send marshals and sends the ModifyReplicationGroup API request.
 func (r ModifyReplicationGroupRequest) Send() (*ModifyReplicationGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2447,6 +2535,10 @@ type PurchaseReservedCacheNodesOfferingRequest struct {
 
 // Send marshals and sends the PurchaseReservedCacheNodesOffering API request.
 func (r PurchaseReservedCacheNodesOfferingRequest) Send() (*PurchaseReservedCacheNodesOfferingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2493,6 +2585,10 @@ type RebootCacheClusterRequest struct {
 
 // Send marshals and sends the RebootCacheCluster API request.
 func (r RebootCacheClusterRequest) Send() (*RebootCacheClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2548,6 +2644,10 @@ type RemoveTagsFromResourceRequest struct {
 
 // Send marshals and sends the RemoveTagsFromResource API request.
 func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2594,6 +2694,10 @@ type ResetCacheParameterGroupRequest struct {
 
 // Send marshals and sends the ResetCacheParameterGroup API request.
 func (r ResetCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2643,6 +2747,10 @@ type RevokeCacheSecurityGroupIngressRequest struct {
 
 // Send marshals and sends the RevokeCacheSecurityGroupIngress API request.
 func (r RevokeCacheSecurityGroupIngressRequest) Send() (*RevokeCacheSecurityGroupIngressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2690,6 +2798,10 @@ type TestFailoverRequest struct {
 
 // Send marshals and sends the TestFailover API request.
 func (r TestFailoverRequest) Send() (*TestFailoverOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -22,6 +22,10 @@ type CancelUpdateStackRequest struct {
 
 // Send marshals and sends the CancelUpdateStack API request.
 func (r CancelUpdateStackRequest) Send() (*CancelUpdateStackOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,6 +77,10 @@ type ContinueUpdateRollbackRequest struct {
 
 // Send marshals and sends the ContinueUpdateRollback API request.
 func (r ContinueUpdateRollbackRequest) Send() (*ContinueUpdateRollbackOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -131,6 +139,10 @@ type CreateChangeSetRequest struct {
 
 // Send marshals and sends the CreateChangeSet API request.
 func (r CreateChangeSetRequest) Send() (*CreateChangeSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -197,6 +209,10 @@ type CreateStackRequest struct {
 
 // Send marshals and sends the CreateStack API request.
 func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -245,6 +261,10 @@ type CreateStackInstancesRequest struct {
 
 // Send marshals and sends the CreateStackInstances API request.
 func (r CreateStackInstancesRequest) Send() (*CreateStackInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,6 +314,10 @@ type CreateStackSetRequest struct {
 
 // Send marshals and sends the CreateStackSet API request.
 func (r CreateStackSetRequest) Send() (*CreateStackSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,6 +364,10 @@ type DeleteChangeSetRequest struct {
 
 // Send marshals and sends the DeleteChangeSet API request.
 func (r DeleteChangeSetRequest) Send() (*DeleteChangeSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,6 +418,10 @@ type DeleteStackRequest struct {
 
 // Send marshals and sends the DeleteStack API request.
 func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -440,6 +472,10 @@ type DeleteStackInstancesRequest struct {
 
 // Send marshals and sends the DeleteStackInstances API request.
 func (r DeleteStackInstancesRequest) Send() (*DeleteStackInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -486,6 +522,10 @@ type DeleteStackSetRequest struct {
 
 // Send marshals and sends the DeleteStackSet API request.
 func (r DeleteStackSetRequest) Send() (*DeleteStackSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -534,6 +574,10 @@ type DescribeAccountLimitsRequest struct {
 
 // Send marshals and sends the DescribeAccountLimits API request.
 func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -581,6 +625,10 @@ type DescribeChangeSetRequest struct {
 
 // Send marshals and sends the DescribeChangeSet API request.
 func (r DescribeChangeSetRequest) Send() (*DescribeChangeSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -630,6 +678,10 @@ type DescribeStackEventsRequest struct {
 
 // Send marshals and sends the DescribeStackEvents API request.
 func (r DescribeStackEventsRequest) Send() (*DescribeStackEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -737,6 +789,10 @@ type DescribeStackInstanceRequest struct {
 
 // Send marshals and sends the DescribeStackInstance API request.
 func (r DescribeStackInstanceRequest) Send() (*DescribeStackInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,6 +843,10 @@ type DescribeStackResourceRequest struct {
 
 // Send marshals and sends the DescribeStackResource API request.
 func (r DescribeStackResourceRequest) Send() (*DescribeStackResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -899,6 +959,10 @@ type DescribeStackSetRequest struct {
 
 // Send marshals and sends the DescribeStackSet API request.
 func (r DescribeStackSetRequest) Send() (*DescribeStackSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -945,6 +1009,10 @@ type DescribeStackSetOperationRequest struct {
 
 // Send marshals and sends the DescribeStackSetOperation API request.
 func (r DescribeStackSetOperationRequest) Send() (*DescribeStackSetOperationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -991,6 +1059,10 @@ type DescribeStacksRequest struct {
 
 // Send marshals and sends the DescribeStacks API request.
 func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1096,6 +1168,10 @@ type EstimateTemplateCostRequest struct {
 
 // Send marshals and sends the EstimateTemplateCost API request.
 func (r EstimateTemplateCostRequest) Send() (*EstimateTemplateCostOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1144,6 +1220,10 @@ type ExecuteChangeSetRequest struct {
 
 // Send marshals and sends the ExecuteChangeSet API request.
 func (r ExecuteChangeSetRequest) Send() (*ExecuteChangeSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1201,6 +1281,10 @@ type GetStackPolicyRequest struct {
 
 // Send marshals and sends the GetStackPolicy API request.
 func (r GetStackPolicyRequest) Send() (*GetStackPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1248,6 +1332,10 @@ type GetTemplateRequest struct {
 
 // Send marshals and sends the GetTemplate API request.
 func (r GetTemplateRequest) Send() (*GetTemplateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1300,6 +1388,10 @@ type GetTemplateSummaryRequest struct {
 
 // Send marshals and sends the GetTemplateSummary API request.
 func (r GetTemplateSummaryRequest) Send() (*GetTemplateSummaryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1357,6 +1449,10 @@ type ListChangeSetsRequest struct {
 
 // Send marshals and sends the ListChangeSets API request.
 func (r ListChangeSetsRequest) Send() (*ListChangeSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1405,6 +1501,10 @@ type ListExportsRequest struct {
 
 // Send marshals and sends the ListExports API request.
 func (r ListExportsRequest) Send() (*ListExportsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1513,6 +1613,10 @@ type ListImportsRequest struct {
 
 // Send marshals and sends the ListImports API request.
 func (r ListImportsRequest) Send() (*ListImportsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1621,6 +1725,10 @@ type ListStackInstancesRequest struct {
 
 // Send marshals and sends the ListStackInstances API request.
 func (r ListStackInstancesRequest) Send() (*ListStackInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1669,6 +1777,10 @@ type ListStackResourcesRequest struct {
 
 // Send marshals and sends the ListStackResources API request.
 func (r ListStackResourcesRequest) Send() (*ListStackResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1774,6 +1886,10 @@ type ListStackSetOperationResultsRequest struct {
 
 // Send marshals and sends the ListStackSetOperationResults API request.
 func (r ListStackSetOperationResultsRequest) Send() (*ListStackSetOperationResultsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1820,6 +1936,10 @@ type ListStackSetOperationsRequest struct {
 
 // Send marshals and sends the ListStackSetOperations API request.
 func (r ListStackSetOperationsRequest) Send() (*ListStackSetOperationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1866,6 +1986,10 @@ type ListStackSetsRequest struct {
 
 // Send marshals and sends the ListStackSets API request.
 func (r ListStackSetsRequest) Send() (*ListStackSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1913,6 +2037,10 @@ type ListStacksRequest struct {
 
 // Send marshals and sends the ListStacks API request.
 func (r ListStacksRequest) Send() (*ListStacksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2019,6 +2147,10 @@ type SetStackPolicyRequest struct {
 
 // Send marshals and sends the SetStackPolicy API request.
 func (r SetStackPolicyRequest) Send() (*SetStackPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2067,6 +2199,10 @@ type SignalResourceRequest struct {
 
 // Send marshals and sends the SignalResource API request.
 func (r SignalResourceRequest) Send() (*SignalResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2120,6 +2256,10 @@ type StopStackSetOperationRequest struct {
 
 // Send marshals and sends the StopStackSetOperation API request.
 func (r StopStackSetOperationRequest) Send() (*StopStackSetOperationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2166,6 +2306,10 @@ type UpdateStackRequest struct {
 
 // Send marshals and sends the UpdateStack API request.
 func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2220,6 +2364,10 @@ type UpdateStackSetRequest struct {
 
 // Send marshals and sends the UpdateStackSet API request.
 func (r UpdateStackSetRequest) Send() (*UpdateStackSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2271,6 +2419,10 @@ type UpdateTerminationProtectionRequest struct {
 
 // Send marshals and sends the UpdateTerminationProtection API request.
 func (r UpdateTerminationProtectionRequest) Send() (*UpdateTerminationProtectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2325,6 +2477,10 @@ type ValidateTemplateRequest struct {
 
 // Send marshals and sends the ValidateTemplate API request.
 func (r ValidateTemplateRequest) Send() (*ValidateTemplateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

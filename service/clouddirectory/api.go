@@ -22,6 +22,10 @@ type AddFacetToObjectRequest struct {
 
 // Send marshals and sends the AddFacetToObject API request.
 func (r AddFacetToObjectRequest) Send() (*AddFacetToObjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,6 +72,10 @@ type ApplySchemaRequest struct {
 
 // Send marshals and sends the ApplySchema API request.
 func (r ApplySchemaRequest) Send() (*ApplySchemaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -115,6 +123,10 @@ type AttachObjectRequest struct {
 
 // Send marshals and sends the AttachObject API request.
 func (r AttachObjectRequest) Send() (*AttachObjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -166,6 +178,10 @@ type AttachPolicyRequest struct {
 
 // Send marshals and sends the AttachPolicy API request.
 func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,6 +229,10 @@ type AttachToIndexRequest struct {
 
 // Send marshals and sends the AttachToIndex API request.
 func (r AttachToIndexRequest) Send() (*AttachToIndexOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -259,6 +279,10 @@ type AttachTypedLinkRequest struct {
 
 // Send marshals and sends the AttachTypedLink API request.
 func (r AttachTypedLinkRequest) Send() (*AttachTypedLinkOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,6 +330,10 @@ type BatchReadRequest struct {
 
 // Send marshals and sends the BatchRead API request.
 func (r BatchReadRequest) Send() (*BatchReadOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -352,6 +380,10 @@ type BatchWriteRequest struct {
 
 // Send marshals and sends the BatchWrite API request.
 func (r BatchWriteRequest) Send() (*BatchWriteOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,6 +431,10 @@ type CreateDirectoryRequest struct {
 
 // Send marshals and sends the CreateDirectory API request.
 func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -446,6 +482,10 @@ type CreateFacetRequest struct {
 
 // Send marshals and sends the CreateFacet API request.
 func (r CreateFacetRequest) Send() (*CreateFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,6 +533,10 @@ type CreateIndexRequest struct {
 
 // Send marshals and sends the CreateIndex API request.
 func (r CreateIndexRequest) Send() (*CreateIndexOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,6 +584,10 @@ type CreateObjectRequest struct {
 
 // Send marshals and sends the CreateObject API request.
 func (r CreateObjectRequest) Send() (*CreateObjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -589,6 +637,10 @@ type CreateSchemaRequest struct {
 
 // Send marshals and sends the CreateSchema API request.
 func (r CreateSchemaRequest) Send() (*CreateSchemaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,6 +699,10 @@ type CreateTypedLinkFacetRequest struct {
 
 // Send marshals and sends the CreateTypedLinkFacet API request.
 func (r CreateTypedLinkFacetRequest) Send() (*CreateTypedLinkFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -693,6 +749,10 @@ type DeleteDirectoryRequest struct {
 
 // Send marshals and sends the DeleteDirectory API request.
 func (r DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -740,6 +800,10 @@ type DeleteFacetRequest struct {
 
 // Send marshals and sends the DeleteFacet API request.
 func (r DeleteFacetRequest) Send() (*DeleteFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,6 +851,10 @@ type DeleteObjectRequest struct {
 
 // Send marshals and sends the DeleteObject API request.
 func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -834,6 +902,10 @@ type DeleteSchemaRequest struct {
 
 // Send marshals and sends the DeleteSchema API request.
 func (r DeleteSchemaRequest) Send() (*DeleteSchemaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -881,6 +953,10 @@ type DeleteTypedLinkFacetRequest struct {
 
 // Send marshals and sends the DeleteTypedLinkFacet API request.
 func (r DeleteTypedLinkFacetRequest) Send() (*DeleteTypedLinkFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -927,6 +1003,10 @@ type DetachFromIndexRequest struct {
 
 // Send marshals and sends the DetachFromIndex API request.
 func (r DetachFromIndexRequest) Send() (*DetachFromIndexOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -973,6 +1053,10 @@ type DetachObjectRequest struct {
 
 // Send marshals and sends the DetachObject API request.
 func (r DetachObjectRequest) Send() (*DetachObjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1020,6 +1104,10 @@ type DetachPolicyRequest struct {
 
 // Send marshals and sends the DetachPolicy API request.
 func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1066,6 +1154,10 @@ type DetachTypedLinkRequest struct {
 
 // Send marshals and sends the DetachTypedLink API request.
 func (r DetachTypedLinkRequest) Send() (*DetachTypedLinkOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1115,6 +1207,10 @@ type DisableDirectoryRequest struct {
 
 // Send marshals and sends the DisableDirectory API request.
 func (r DisableDirectoryRequest) Send() (*DisableDirectoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1163,6 +1259,10 @@ type EnableDirectoryRequest struct {
 
 // Send marshals and sends the EnableDirectory API request.
 func (r EnableDirectoryRequest) Send() (*EnableDirectoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1210,6 +1310,10 @@ type GetDirectoryRequest struct {
 
 // Send marshals and sends the GetDirectory API request.
 func (r GetDirectoryRequest) Send() (*GetDirectoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1256,6 +1360,10 @@ type GetFacetRequest struct {
 
 // Send marshals and sends the GetFacet API request.
 func (r GetFacetRequest) Send() (*GetFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1304,6 +1412,10 @@ type GetObjectInformationRequest struct {
 
 // Send marshals and sends the GetObjectInformation API request.
 func (r GetObjectInformationRequest) Send() (*GetObjectInformationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1350,6 +1462,10 @@ type GetSchemaAsJsonRequest struct {
 
 // Send marshals and sends the GetSchemaAsJson API request.
 func (r GetSchemaAsJsonRequest) Send() (*GetSchemaAsJsonOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1397,6 +1513,10 @@ type GetTypedLinkFacetInformationRequest struct {
 
 // Send marshals and sends the GetTypedLinkFacetInformation API request.
 func (r GetTypedLinkFacetInformationRequest) Send() (*GetTypedLinkFacetInformationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1444,6 +1564,10 @@ type ListAppliedSchemaArnsRequest struct {
 
 // Send marshals and sends the ListAppliedSchemaArns API request.
 func (r ListAppliedSchemaArnsRequest) Send() (*ListAppliedSchemaArnsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1546,6 +1670,10 @@ type ListAttachedIndicesRequest struct {
 
 // Send marshals and sends the ListAttachedIndices API request.
 func (r ListAttachedIndicesRequest) Send() (*ListAttachedIndicesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1648,6 +1776,10 @@ type ListDevelopmentSchemaArnsRequest struct {
 
 // Send marshals and sends the ListDevelopmentSchemaArns API request.
 func (r ListDevelopmentSchemaArnsRequest) Send() (*ListDevelopmentSchemaArnsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1750,6 +1882,10 @@ type ListDirectoriesRequest struct {
 
 // Send marshals and sends the ListDirectories API request.
 func (r ListDirectoriesRequest) Send() (*ListDirectoriesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1852,6 +1988,10 @@ type ListFacetAttributesRequest struct {
 
 // Send marshals and sends the ListFacetAttributes API request.
 func (r ListFacetAttributesRequest) Send() (*ListFacetAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1954,6 +2094,10 @@ type ListFacetNamesRequest struct {
 
 // Send marshals and sends the ListFacetNames API request.
 func (r ListFacetNamesRequest) Send() (*ListFacetNamesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2056,6 +2200,10 @@ type ListIncomingTypedLinksRequest struct {
 
 // Send marshals and sends the ListIncomingTypedLinks API request.
 func (r ListIncomingTypedLinksRequest) Send() (*ListIncomingTypedLinksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2104,6 +2252,10 @@ type ListIndexRequest struct {
 
 // Send marshals and sends the ListIndex API request.
 func (r ListIndexRequest) Send() (*ListIndexOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2206,6 +2358,10 @@ type ListObjectAttributesRequest struct {
 
 // Send marshals and sends the ListObjectAttributes API request.
 func (r ListObjectAttributesRequest) Send() (*ListObjectAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,6 +2464,10 @@ type ListObjectChildrenRequest struct {
 
 // Send marshals and sends the ListObjectChildren API request.
 func (r ListObjectChildrenRequest) Send() (*ListObjectChildrenOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2411,6 +2571,10 @@ type ListObjectParentPathsRequest struct {
 
 // Send marshals and sends the ListObjectParentPaths API request.
 func (r ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2523,6 +2687,10 @@ type ListObjectParentsRequest struct {
 
 // Send marshals and sends the ListObjectParents API request.
 func (r ListObjectParentsRequest) Send() (*ListObjectParentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2626,6 +2794,10 @@ type ListObjectPoliciesRequest struct {
 
 // Send marshals and sends the ListObjectPolicies API request.
 func (r ListObjectPoliciesRequest) Send() (*ListObjectPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2728,6 +2900,10 @@ type ListOutgoingTypedLinksRequest struct {
 
 // Send marshals and sends the ListOutgoingTypedLinks API request.
 func (r ListOutgoingTypedLinksRequest) Send() (*ListOutgoingTypedLinksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2776,6 +2952,10 @@ type ListPolicyAttachmentsRequest struct {
 
 // Send marshals and sends the ListPolicyAttachments API request.
 func (r ListPolicyAttachmentsRequest) Send() (*ListPolicyAttachmentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2878,6 +3058,10 @@ type ListPublishedSchemaArnsRequest struct {
 
 // Send marshals and sends the ListPublishedSchemaArns API request.
 func (r ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2980,6 +3164,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3084,6 +3272,10 @@ type ListTypedLinkFacetAttributesRequest struct {
 
 // Send marshals and sends the ListTypedLinkFacetAttributes API request.
 func (r ListTypedLinkFacetAttributesRequest) Send() (*ListTypedLinkFacetAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3187,6 +3379,10 @@ type ListTypedLinkFacetNamesRequest struct {
 
 // Send marshals and sends the ListTypedLinkFacetNames API request.
 func (r ListTypedLinkFacetNamesRequest) Send() (*ListTypedLinkFacetNamesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3290,6 +3486,10 @@ type LookupPolicyRequest struct {
 
 // Send marshals and sends the LookupPolicy API request.
 func (r LookupPolicyRequest) Send() (*LookupPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3398,6 +3598,10 @@ type PublishSchemaRequest struct {
 
 // Send marshals and sends the PublishSchema API request.
 func (r PublishSchemaRequest) Send() (*PublishSchemaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3447,6 +3651,10 @@ type PutSchemaFromJsonRequest struct {
 
 // Send marshals and sends the PutSchemaFromJson API request.
 func (r PutSchemaFromJsonRequest) Send() (*PutSchemaFromJsonOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3495,6 +3703,10 @@ type RemoveFacetFromObjectRequest struct {
 
 // Send marshals and sends the RemoveFacetFromObject API request.
 func (r RemoveFacetFromObjectRequest) Send() (*RemoveFacetFromObjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3541,6 +3753,10 @@ type TagResourceRequest struct {
 
 // Send marshals and sends the TagResource API request.
 func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3587,6 +3803,10 @@ type UntagResourceRequest struct {
 
 // Send marshals and sends the UntagResource API request.
 func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3633,6 +3853,10 @@ type UpdateFacetRequest struct {
 
 // Send marshals and sends the UpdateFacet API request.
 func (r UpdateFacetRequest) Send() (*UpdateFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3685,6 +3909,10 @@ type UpdateObjectAttributesRequest struct {
 
 // Send marshals and sends the UpdateObjectAttributes API request.
 func (r UpdateObjectAttributesRequest) Send() (*UpdateObjectAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3731,6 +3959,10 @@ type UpdateSchemaRequest struct {
 
 // Send marshals and sends the UpdateSchema API request.
 func (r UpdateSchemaRequest) Send() (*UpdateSchemaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3778,6 +4010,10 @@ type UpdateTypedLinkFacetRequest struct {
 
 // Send marshals and sends the UpdateTypedLinkFacet API request.
 func (r UpdateTypedLinkFacetRequest) Send() (*UpdateTypedLinkFacetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

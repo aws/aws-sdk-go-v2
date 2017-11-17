@@ -20,6 +20,10 @@ type AllocateConnectionOnInterconnectRequest struct {
 
 // Send marshals and sends the AllocateConnectionOnInterconnect API request.
 func (r AllocateConnectionOnInterconnectRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -76,6 +80,10 @@ type AllocateHostedConnectionRequest struct {
 
 // Send marshals and sends the AllocateHostedConnection API request.
 func (r AllocateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -128,6 +136,10 @@ type AllocatePrivateVirtualInterfaceRequest struct {
 
 // Send marshals and sends the AllocatePrivateVirtualInterface API request.
 func (r AllocatePrivateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -179,6 +191,10 @@ type AllocatePublicVirtualInterfaceRequest struct {
 
 // Send marshals and sends the AllocatePublicVirtualInterface API request.
 func (r AllocatePublicVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,6 +253,10 @@ type AssociateConnectionWithLagRequest struct {
 
 // Send marshals and sends the AssociateConnectionWithLag API request.
 func (r AssociateConnectionWithLagRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -299,6 +319,10 @@ type AssociateHostedConnectionRequest struct {
 
 // Send marshals and sends the AssociateHostedConnection API request.
 func (r AssociateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -351,6 +375,10 @@ type AssociateVirtualInterfaceRequest struct {
 
 // Send marshals and sends the AssociateVirtualInterface API request.
 func (r AssociateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -409,6 +437,10 @@ type ConfirmConnectionRequest struct {
 
 // Send marshals and sends the ConfirmConnection API request.
 func (r ConfirmConnectionRequest) Send() (*ConfirmConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -459,6 +491,10 @@ type ConfirmPrivateVirtualInterfaceRequest struct {
 
 // Send marshals and sends the ConfirmPrivateVirtualInterface API request.
 func (r ConfirmPrivateVirtualInterfaceRequest) Send() (*ConfirmPrivateVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,6 +545,10 @@ type ConfirmPublicVirtualInterfaceRequest struct {
 
 // Send marshals and sends the ConfirmPublicVirtualInterface API request.
 func (r ConfirmPublicVirtualInterfaceRequest) Send() (*ConfirmPublicVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -616,6 +656,10 @@ type CreateConnectionRequest struct {
 
 // Send marshals and sends the CreateConnection API request.
 func (r CreateConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -677,6 +721,10 @@ type CreateInterconnectRequest struct {
 
 // Send marshals and sends the CreateInterconnect API request.
 func (r CreateInterconnectRequest) Send() (*CreateInterconnectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -746,6 +794,10 @@ type CreateLagRequest struct {
 
 // Send marshals and sends the CreateLag API request.
 func (r CreateLagRequest) Send() (*UpdateLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -816,6 +868,10 @@ type CreatePrivateVirtualInterfaceRequest struct {
 
 // Send marshals and sends the CreatePrivateVirtualInterface API request.
 func (r CreatePrivateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -864,6 +920,10 @@ type CreatePublicVirtualInterfaceRequest struct {
 
 // Send marshals and sends the CreatePublicVirtualInterface API request.
 func (r CreatePublicVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -965,6 +1025,10 @@ type DeleteConnectionRequest struct {
 
 // Send marshals and sends the DeleteConnection API request.
 func (r DeleteConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1016,6 +1080,10 @@ type DeleteInterconnectRequest struct {
 
 // Send marshals and sends the DeleteInterconnect API request.
 func (r DeleteInterconnectRequest) Send() (*DeleteInterconnectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1064,6 +1132,10 @@ type DeleteLagRequest struct {
 
 // Send marshals and sends the DeleteLag API request.
 func (r DeleteLagRequest) Send() (*UpdateLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1111,6 +1183,10 @@ type DeleteVirtualInterfaceRequest struct {
 
 // Send marshals and sends the DeleteVirtualInterface API request.
 func (r DeleteVirtualInterfaceRequest) Send() (*DeleteVirtualInterfaceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1157,6 +1233,10 @@ type DescribeConnectionLoaRequest struct {
 
 // Send marshals and sends the DescribeConnectionLoa API request.
 func (r DescribeConnectionLoaRequest) Send() (*DescribeConnectionLoaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1262,6 +1342,10 @@ type DescribeConnectionsOnInterconnectRequest struct {
 
 // Send marshals and sends the DescribeConnectionsOnInterconnect API request.
 func (r DescribeConnectionsOnInterconnectRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1315,6 +1399,10 @@ type DescribeHostedConnectionsRequest struct {
 
 // Send marshals and sends the DescribeHostedConnections API request.
 func (r DescribeHostedConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1364,6 +1452,10 @@ type DescribeInterconnectLoaRequest struct {
 
 // Send marshals and sends the DescribeInterconnectLoa API request.
 func (r DescribeInterconnectLoaRequest) Send() (*DescribeInterconnectLoaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1517,6 +1609,10 @@ type DescribeLoaRequest struct {
 
 // Send marshals and sends the DescribeLoa API request.
 func (r DescribeLoaRequest) Send() (*DescribeLoaOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1618,6 +1714,10 @@ type DescribeTagsRequest struct {
 
 // Send marshals and sends the DescribeTags API request.
 func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1769,6 +1869,10 @@ type DisassociateConnectionFromLagRequest struct {
 
 // Send marshals and sends the DisassociateConnectionFromLag API request.
 func (r DisassociateConnectionFromLagRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1825,6 +1929,10 @@ type TagResourceRequest struct {
 
 // Send marshals and sends the TagResource API request.
 func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1876,6 +1984,10 @@ type UntagResourceRequest struct {
 
 // Send marshals and sends the UntagResource API request.
 func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1922,6 +2034,10 @@ type UpdateLagRequest struct {
 
 // Send marshals and sends the UpdateLag API request.
 func (r UpdateLagRequest) Send() (*UpdateLagOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

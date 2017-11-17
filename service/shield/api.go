@@ -19,6 +19,10 @@ type CreateProtectionRequest struct {
 
 // Send marshals and sends the CreateProtection API request.
 func (r CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -113,6 +117,10 @@ type DeleteProtectionRequest struct {
 
 // Send marshals and sends the DeleteProtection API request.
 func (r DeleteProtectionRequest) Send() (*DeleteProtectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -205,6 +213,10 @@ type DescribeAttackRequest struct {
 
 // Send marshals and sends the DescribeAttack API request.
 func (r DescribeAttackRequest) Send() (*DescribeAttackOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -251,6 +263,10 @@ type DescribeProtectionRequest struct {
 
 // Send marshals and sends the DescribeProtection API request.
 func (r DescribeProtectionRequest) Send() (*DescribeProtectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -343,6 +359,10 @@ type ListAttacksRequest struct {
 
 // Send marshals and sends the ListAttacks API request.
 func (r ListAttacksRequest) Send() (*ListAttacksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,6 +410,10 @@ type ListProtectionsRequest struct {
 
 // Send marshals and sends the ListProtections API request.
 func (r ListProtectionsRequest) Send() (*ListProtectionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

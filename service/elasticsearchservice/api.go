@@ -22,6 +22,10 @@ type AddTagsRequest struct {
 
 // Send marshals and sends the AddTags API request.
 func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -70,6 +74,10 @@ type CreateElasticsearchDomainRequest struct {
 
 // Send marshals and sends the CreateElasticsearchDomain API request.
 func (r CreateElasticsearchDomainRequest) Send() (*CreateElasticsearchDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,6 +124,10 @@ type DeleteElasticsearchDomainRequest struct {
 
 // Send marshals and sends the DeleteElasticsearchDomain API request.
 func (r DeleteElasticsearchDomainRequest) Send() (*DeleteElasticsearchDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,6 +173,10 @@ type DescribeElasticsearchDomainRequest struct {
 
 // Send marshals and sends the DescribeElasticsearchDomain API request.
 func (r DescribeElasticsearchDomainRequest) Send() (*DescribeElasticsearchDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -206,6 +222,10 @@ type DescribeElasticsearchDomainConfigRequest struct {
 
 // Send marshals and sends the DescribeElasticsearchDomainConfig API request.
 func (r DescribeElasticsearchDomainConfigRequest) Send() (*DescribeElasticsearchDomainConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -252,6 +272,10 @@ type DescribeElasticsearchDomainsRequest struct {
 
 // Send marshals and sends the DescribeElasticsearchDomains API request.
 func (r DescribeElasticsearchDomainsRequest) Send() (*DescribeElasticsearchDomainsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,6 +321,10 @@ type DescribeElasticsearchInstanceTypeLimitsRequest struct {
 
 // Send marshals and sends the DescribeElasticsearchInstanceTypeLimits API request.
 func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send() (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -388,6 +416,10 @@ type ListElasticsearchInstanceTypesRequest struct {
 
 // Send marshals and sends the ListElasticsearchInstanceTypes API request.
 func (r ListElasticsearchInstanceTypesRequest) Send() (*ListElasticsearchInstanceTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -588,6 +620,10 @@ type ListTagsRequest struct {
 
 // Send marshals and sends the ListTags API request.
 func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,6 +668,10 @@ type RemoveTagsRequest struct {
 
 // Send marshals and sends the RemoveTags API request.
 func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -678,6 +718,10 @@ type UpdateElasticsearchDomainConfigRequest struct {
 
 // Send marshals and sends the UpdateElasticsearchDomainConfig API request.
 func (r UpdateElasticsearchDomainConfigRequest) Send() (*UpdateElasticsearchDomainConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

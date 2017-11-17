@@ -80,6 +80,12 @@ type {{ $reqType}} struct {
 
 // Send marshals and sends the {{ .ExportedName }} API request. 
 func (r {{ $reqType }}) Send() ({{ .OutputRef.GoType }}, error) {
+	{{ if gt (len .InputRef.Shape.Validations) 0 -}}
+	if err := r.Input.Validate(); err != nil {
+	return nil, err
+	}
+
+  {{ end -}}
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

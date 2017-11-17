@@ -19,6 +19,10 @@ type SearchRequest struct {
 
 // Send marshals and sends the Search API request.
 func (r SearchRequest) Send() (*SearchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -83,6 +87,10 @@ type SuggestRequest struct {
 
 // Send marshals and sends the Suggest API request.
 func (r SuggestRequest) Send() (*SuggestOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,6 +151,10 @@ type UploadDocumentsRequest struct {
 
 // Send marshals and sends the UploadDocuments API request.
 func (r UploadDocumentsRequest) Send() (*UploadDocumentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

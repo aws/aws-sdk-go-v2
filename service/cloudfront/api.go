@@ -22,6 +22,10 @@ type CreateCloudFrontOriginAccessIdentityRequest struct {
 
 // Send marshals and sends the CreateCloudFrontOriginAccessIdentity API request.
 func (r CreateCloudFrontOriginAccessIdentityRequest) Send() (*CreateCloudFrontOriginAccessIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,6 +77,10 @@ type CreateDistributionRequest struct {
 
 // Send marshals and sends the CreateDistribution API request.
 func (r CreateDistributionRequest) Send() (*CreateDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -120,6 +128,10 @@ type CreateDistributionWithTagsRequest struct {
 
 // Send marshals and sends the CreateDistributionWithTags API request.
 func (r CreateDistributionWithTagsRequest) Send() (*CreateDistributionWithTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -166,6 +178,10 @@ type CreateInvalidationRequest struct {
 
 // Send marshals and sends the CreateInvalidation API request.
 func (r CreateInvalidationRequest) Send() (*CreateInvalidationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -212,6 +228,10 @@ type CreateStreamingDistributionRequest struct {
 
 // Send marshals and sends the CreateStreamingDistribution API request.
 func (r CreateStreamingDistributionRequest) Send() (*CreateStreamingDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -285,6 +305,10 @@ type CreateStreamingDistributionWithTagsRequest struct {
 
 // Send marshals and sends the CreateStreamingDistributionWithTags API request.
 func (r CreateStreamingDistributionWithTagsRequest) Send() (*CreateStreamingDistributionWithTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -331,6 +355,10 @@ type DeleteCloudFrontOriginAccessIdentityRequest struct {
 
 // Send marshals and sends the DeleteCloudFrontOriginAccessIdentity API request.
 func (r DeleteCloudFrontOriginAccessIdentityRequest) Send() (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,6 +407,10 @@ type DeleteDistributionRequest struct {
 
 // Send marshals and sends the DeleteDistribution API request.
 func (r DeleteDistributionRequest) Send() (*DeleteDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -427,6 +459,10 @@ type DeleteStreamingDistributionRequest struct {
 
 // Send marshals and sends the DeleteStreamingDistribution API request.
 func (r DeleteStreamingDistributionRequest) Send() (*DeleteStreamingDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -510,6 +546,10 @@ type GetCloudFrontOriginAccessIdentityRequest struct {
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentity API request.
 func (r GetCloudFrontOriginAccessIdentityRequest) Send() (*GetCloudFrontOriginAccessIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -556,6 +596,10 @@ type GetCloudFrontOriginAccessIdentityConfigRequest struct {
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentityConfig API request.
 func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send() (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,6 +646,10 @@ type GetDistributionRequest struct {
 
 // Send marshals and sends the GetDistribution API request.
 func (r GetDistributionRequest) Send() (*GetDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,6 +696,10 @@ type GetDistributionConfigRequest struct {
 
 // Send marshals and sends the GetDistributionConfig API request.
 func (r GetDistributionConfigRequest) Send() (*GetDistributionConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -694,6 +746,10 @@ type GetInvalidationRequest struct {
 
 // Send marshals and sends the GetInvalidation API request.
 func (r GetInvalidationRequest) Send() (*GetInvalidationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -740,6 +796,10 @@ type GetStreamingDistributionRequest struct {
 
 // Send marshals and sends the GetStreamingDistribution API request.
 func (r GetStreamingDistributionRequest) Send() (*GetStreamingDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,6 +847,10 @@ type GetStreamingDistributionConfigRequest struct {
 
 // Send marshals and sends the GetStreamingDistributionConfig API request.
 func (r GetStreamingDistributionConfigRequest) Send() (*GetStreamingDistributionConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1037,6 +1101,10 @@ type ListDistributionsByWebACLIdRequest struct {
 
 // Send marshals and sends the ListDistributionsByWebACLId API request.
 func (r ListDistributionsByWebACLIdRequest) Send() (*ListDistributionsByWebACLIdOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1083,6 +1151,10 @@ type ListInvalidationsRequest struct {
 
 // Send marshals and sends the ListInvalidations API request.
 func (r ListInvalidationsRequest) Send() (*ListInvalidationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1287,6 +1359,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1333,6 +1409,10 @@ type TagResourceRequest struct {
 
 // Send marshals and sends the TagResource API request.
 func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1381,6 +1461,10 @@ type UntagResourceRequest struct {
 
 // Send marshals and sends the UntagResource API request.
 func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1429,6 +1513,10 @@ type UpdateCloudFrontOriginAccessIdentityRequest struct {
 
 // Send marshals and sends the UpdateCloudFrontOriginAccessIdentity API request.
 func (r UpdateCloudFrontOriginAccessIdentityRequest) Send() (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1475,6 +1563,10 @@ type UpdateDistributionRequest struct {
 
 // Send marshals and sends the UpdateDistribution API request.
 func (r UpdateDistributionRequest) Send() (*UpdateDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1570,6 +1662,10 @@ type UpdateStreamingDistributionRequest struct {
 
 // Send marshals and sends the UpdateStreamingDistribution API request.
 func (r UpdateStreamingDistributionRequest) Send() (*UpdateStreamingDistributionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

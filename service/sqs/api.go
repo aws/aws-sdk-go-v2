@@ -21,6 +21,10 @@ type AddPermissionRequest struct {
 
 // Send marshals and sends the AddPermission API request.
 func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,6 +92,10 @@ type ChangeMessageVisibilityRequest struct {
 
 // Send marshals and sends the ChangeMessageVisibility API request.
 func (r ChangeMessageVisibilityRequest) Send() (*ChangeMessageVisibilityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,6 +179,10 @@ type ChangeMessageVisibilityBatchRequest struct {
 
 // Send marshals and sends the ChangeMessageVisibilityBatch API request.
 func (r ChangeMessageVisibilityBatchRequest) Send() (*ChangeMessageVisibilityBatchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -232,6 +244,10 @@ type CreateQueueRequest struct {
 
 // Send marshals and sends the CreateQueue API request.
 func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -317,6 +333,10 @@ type DeleteMessageRequest struct {
 
 // Send marshals and sends the DeleteMessage API request.
 func (r DeleteMessageRequest) Send() (*DeleteMessageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,6 +404,10 @@ type DeleteMessageBatchRequest struct {
 
 // Send marshals and sends the DeleteMessageBatch API request.
 func (r DeleteMessageBatchRequest) Send() (*DeleteMessageBatchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -444,6 +468,10 @@ type DeleteQueueRequest struct {
 
 // Send marshals and sends the DeleteQueue API request.
 func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -504,6 +532,10 @@ type GetQueueAttributesRequest struct {
 
 // Send marshals and sends the GetQueueAttributes API request.
 func (r GetQueueAttributesRequest) Send() (*GetQueueAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -561,6 +593,10 @@ type GetQueueUrlRequest struct {
 
 // Send marshals and sends the GetQueueUrl API request.
 func (r GetQueueUrlRequest) Send() (*GetQueueUrlOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -614,6 +650,10 @@ type ListDeadLetterSourceQueuesRequest struct {
 
 // Send marshals and sends the ListDeadLetterSourceQueues API request.
 func (r ListDeadLetterSourceQueuesRequest) Send() (*ListDeadLetterSourceQueuesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -713,6 +753,10 @@ type PurgeQueueRequest struct {
 
 // Send marshals and sends the PurgeQueue API request.
 func (r PurgeQueueRequest) Send() (*PurgeQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -770,6 +814,10 @@ type ReceiveMessageRequest struct {
 
 // Send marshals and sends the ReceiveMessage API request.
 func (r ReceiveMessageRequest) Send() (*ReceiveMessageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -862,6 +910,10 @@ type RemovePermissionRequest struct {
 
 // Send marshals and sends the RemovePermission API request.
 func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -911,6 +963,10 @@ type SendMessageRequest struct {
 
 // Send marshals and sends the SendMessage API request.
 func (r SendMessageRequest) Send() (*SendMessageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -965,6 +1021,10 @@ type SendMessageBatchRequest struct {
 
 // Send marshals and sends the SendMessageBatch API request.
 func (r SendMessageBatchRequest) Send() (*SendMessageBatchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1041,6 +1101,10 @@ type SetQueueAttributesRequest struct {
 
 // Send marshals and sends the SetQueueAttributes API request.
 func (r SetQueueAttributesRequest) Send() (*SetQueueAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

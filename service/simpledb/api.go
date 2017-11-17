@@ -21,6 +21,10 @@ type BatchDeleteAttributesRequest struct {
 
 // Send marshals and sends the BatchDeleteAttributes API request.
 func (r BatchDeleteAttributesRequest) Send() (*BatchDeleteAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -90,6 +94,10 @@ type BatchPutAttributesRequest struct {
 
 // Send marshals and sends the BatchPutAttributes API request.
 func (r BatchPutAttributesRequest) Send() (*BatchPutAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -178,6 +186,10 @@ type CreateDomainRequest struct {
 
 // Send marshals and sends the CreateDomain API request.
 func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -232,6 +244,10 @@ type DeleteAttributesRequest struct {
 
 // Send marshals and sends the DeleteAttributes API request.
 func (r DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -288,6 +304,10 @@ type DeleteDomainRequest struct {
 
 // Send marshals and sends the DeleteDomain API request.
 func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -339,6 +359,10 @@ type DomainMetadataRequest struct {
 
 // Send marshals and sends the DomainMetadata API request.
 func (r DomainMetadataRequest) Send() (*DomainMetadataOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -385,6 +409,10 @@ type GetAttributesRequest struct {
 
 // Send marshals and sends the GetAttributes API request.
 func (r GetAttributesRequest) Send() (*GetAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -543,6 +571,10 @@ type PutAttributesRequest struct {
 
 // Send marshals and sends the PutAttributes API request.
 func (r PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,6 +651,10 @@ type SelectRequest struct {
 
 // Send marshals and sends the Select API request.
 func (r SelectRequest) Send() (*SelectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

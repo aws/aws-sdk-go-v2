@@ -20,6 +20,10 @@ type CheckDomainAvailabilityRequest struct {
 
 // Send marshals and sends the CheckDomainAvailability API request.
 func (r CheckDomainAvailabilityRequest) Send() (*CheckDomainAvailabilityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,6 +72,10 @@ type CheckDomainTransferabilityRequest struct {
 
 // Send marshals and sends the CheckDomainTransferability API request.
 func (r CheckDomainTransferabilityRequest) Send() (*CheckDomainTransferabilityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -114,6 +122,10 @@ type DeleteTagsForDomainRequest struct {
 
 // Send marshals and sends the DeleteTagsForDomain API request.
 func (r DeleteTagsForDomainRequest) Send() (*DeleteTagsForDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -163,6 +175,10 @@ type DisableDomainAutoRenewRequest struct {
 
 // Send marshals and sends the DisableDomainAutoRenew API request.
 func (r DisableDomainAutoRenewRequest) Send() (*DisableDomainAutoRenewOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -210,6 +226,10 @@ type DisableDomainTransferLockRequest struct {
 
 // Send marshals and sends the DisableDomainTransferLock API request.
 func (r DisableDomainTransferLockRequest) Send() (*DisableDomainTransferLockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -262,6 +282,10 @@ type EnableDomainAutoRenewRequest struct {
 
 // Send marshals and sends the EnableDomainAutoRenew API request.
 func (r EnableDomainAutoRenewRequest) Send() (*EnableDomainAutoRenewOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -317,6 +341,10 @@ type EnableDomainTransferLockRequest struct {
 
 // Send marshals and sends the EnableDomainTransferLock API request.
 func (r EnableDomainTransferLockRequest) Send() (*EnableDomainTransferLockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -418,6 +446,10 @@ type GetDomainDetailRequest struct {
 
 // Send marshals and sends the GetDomainDetail API request.
 func (r GetDomainDetailRequest) Send() (*GetDomainDetailOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -466,6 +498,10 @@ type GetDomainSuggestionsRequest struct {
 
 // Send marshals and sends the GetDomainSuggestions API request.
 func (r GetDomainSuggestionsRequest) Send() (*GetDomainSuggestionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -514,6 +550,10 @@ type GetOperationDetailRequest struct {
 
 // Send marshals and sends the GetOperationDetail API request.
 func (r GetOperationDetailRequest) Send() (*GetOperationDetailOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -765,6 +805,10 @@ type ListTagsForDomainRequest struct {
 
 // Send marshals and sends the ListTagsForDomain API request.
 func (r ListTagsForDomainRequest) Send() (*ListTagsForDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,6 +859,10 @@ type RegisterDomainRequest struct {
 
 // Send marshals and sends the RegisterDomain API request.
 func (r RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -885,6 +933,10 @@ type RenewDomainRequest struct {
 
 // Send marshals and sends the RenewDomain API request.
 func (r RenewDomainRequest) Send() (*RenewDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -986,6 +1038,10 @@ type RetrieveDomainAuthCodeRequest struct {
 
 // Send marshals and sends the RetrieveDomainAuthCode API request.
 func (r RetrieveDomainAuthCodeRequest) Send() (*RetrieveDomainAuthCodeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1033,6 +1089,10 @@ type TransferDomainRequest struct {
 
 // Send marshals and sends the TransferDomain API request.
 func (r TransferDomainRequest) Send() (*TransferDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1103,6 +1163,10 @@ type UpdateDomainContactRequest struct {
 
 // Send marshals and sends the UpdateDomainContact API request.
 func (r UpdateDomainContactRequest) Send() (*UpdateDomainContactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1156,6 +1220,10 @@ type UpdateDomainContactPrivacyRequest struct {
 
 // Send marshals and sends the UpdateDomainContactPrivacy API request.
 func (r UpdateDomainContactPrivacyRequest) Send() (*UpdateDomainContactPrivacyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,6 +1280,10 @@ type UpdateDomainNameserversRequest struct {
 
 // Send marshals and sends the UpdateDomainNameservers API request.
 func (r UpdateDomainNameserversRequest) Send() (*UpdateDomainNameserversOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1265,6 +1337,10 @@ type UpdateTagsForDomainRequest struct {
 
 // Send marshals and sends the UpdateTagsForDomain API request.
 func (r UpdateTagsForDomainRequest) Send() (*UpdateTagsForDomainOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
