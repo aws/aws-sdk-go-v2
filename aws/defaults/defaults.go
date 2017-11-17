@@ -79,6 +79,7 @@ func Handlers() aws.Handlers {
 	var handlers aws.Handlers
 
 	handlers.Validate.PushBackNamed(ValidateEndpointHandler)
+	handlers.Validate.PushBackNamed(ValidateParametersHandler)
 	handlers.Validate.AfterEachFn = aws.HandlerListStopOnError
 	handlers.Build.PushBackNamed(SDKVersionUserAgentHandler)
 	handlers.Build.AfterEachFn = aws.HandlerListStopOnError

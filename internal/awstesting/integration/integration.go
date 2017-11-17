@@ -11,6 +11,7 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 )
 
@@ -20,6 +21,9 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
+	// Disable parameter validation for integration tests.
+	config.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 
 	logLevel := config.LogLevel
 	if os.Getenv("DEBUG") != "" {

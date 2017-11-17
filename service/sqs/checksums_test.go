@@ -10,13 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
 var svc = func() *sqs.SQS {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = true
+	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 
 	s := sqs.New(cfg)
 	s.Handlers.Send.Clear()
@@ -68,7 +69,7 @@ func TestSendMessageChecksumInvalid(t *testing.T) {
 
 func TestSendMessageChecksumInvalidNoValidation(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = true
+	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	cfg.DisableComputeChecksums = true
 
 	s := sqs.New(cfg)
