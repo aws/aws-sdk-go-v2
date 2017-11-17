@@ -4,13 +4,14 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 )
 
 func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = true
+	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := iotdataplane.New(cfg)
@@ -30,7 +31,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 
 func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = true
+	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := iotdataplane.New(cfg)
@@ -51,7 +52,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 
 func TestRequireEndpointUsed(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = true
+	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 
 	svc := iotdataplane.New(cfg)

@@ -63,10 +63,6 @@ type Config struct {
 	// Proper handling of the request.Retryable field is important when setting this field.
 	EnforceShouldRetryCheck bool
 
-	// Disables semantic parameter validation, which validates input for
-	// missing required fields and/or other semantic request input errors.
-	DisableParamValidation bool
-
 	// Disables the computation of request and response checksums, e.g.,
 	// CRC32 checksums in Amazon DynamoDB.
 	DisableComputeChecksums bool
