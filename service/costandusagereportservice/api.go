@@ -63,6 +63,10 @@ type DescribeReportDefinitionsRequest struct {
 
 // Send marshals and sends the DescribeReportDefinitions API request.
 func (r DescribeReportDefinitionsRequest) Send() (*DescribeReportDefinitionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -165,6 +169,10 @@ type PutReportDefinitionRequest struct {
 
 // Send marshals and sends the PutReportDefinition API request.
 func (r PutReportDefinitionRequest) Send() (*PutReportDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

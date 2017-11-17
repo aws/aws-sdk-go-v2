@@ -21,6 +21,10 @@ type AuthorizeClusterSecurityGroupIngressRequest struct {
 
 // Send marshals and sends the AuthorizeClusterSecurityGroupIngress API request.
 func (r AuthorizeClusterSecurityGroupIngressRequest) Send() (*AuthorizeClusterSecurityGroupIngressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,6 +90,10 @@ type AuthorizeSnapshotAccessRequest struct {
 
 // Send marshals and sends the AuthorizeSnapshotAccess API request.
 func (r AuthorizeSnapshotAccessRequest) Send() (*AuthorizeSnapshotAccessOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,6 +144,10 @@ type CopyClusterSnapshotRequest struct {
 
 // Send marshals and sends the CopyClusterSnapshot API request.
 func (r CopyClusterSnapshotRequest) Send() (*CopyClusterSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,6 +206,10 @@ type CreateClusterRequest struct {
 
 // Send marshals and sends the CreateCluster API request.
 func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,6 +262,10 @@ type CreateClusterParameterGroupRequest struct {
 
 // Send marshals and sends the CreateClusterParameterGroup API request.
 func (r CreateClusterParameterGroupRequest) Send() (*CreateClusterParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -302,6 +322,10 @@ type CreateClusterSecurityGroupRequest struct {
 
 // Send marshals and sends the CreateClusterSecurityGroup API request.
 func (r CreateClusterSecurityGroupRequest) Send() (*CreateClusterSecurityGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -353,6 +377,10 @@ type CreateClusterSnapshotRequest struct {
 
 // Send marshals and sends the CreateClusterSnapshot API request.
 func (r CreateClusterSnapshotRequest) Send() (*CreateClusterSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -404,6 +432,10 @@ type CreateClusterSubnetGroupRequest struct {
 
 // Send marshals and sends the CreateClusterSubnetGroup API request.
 func (r CreateClusterSubnetGroupRequest) Send() (*CreateClusterSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -456,6 +488,10 @@ type CreateEventSubscriptionRequest struct {
 
 // Send marshals and sends the CreateEventSubscription API request.
 func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -523,6 +559,10 @@ type CreateHsmClientCertificateRequest struct {
 
 // Send marshals and sends the CreateHsmClientCertificate API request.
 func (r CreateHsmClientCertificateRequest) Send() (*CreateHsmClientCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -577,6 +617,10 @@ type CreateHsmConfigurationRequest struct {
 
 // Send marshals and sends the CreateHsmConfiguration API request.
 func (r CreateHsmConfigurationRequest) Send() (*CreateHsmConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,6 +676,10 @@ type CreateSnapshotCopyGrantRequest struct {
 
 // Send marshals and sends the CreateSnapshotCopyGrant API request.
 func (r CreateSnapshotCopyGrantRequest) Send() (*CreateSnapshotCopyGrantOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,6 +732,10 @@ type CreateTagsRequest struct {
 
 // Send marshals and sends the CreateTags API request.
 func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -738,6 +790,10 @@ type DeleteClusterRequest struct {
 
 // Send marshals and sends the DeleteCluster API request.
 func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -800,6 +856,10 @@ type DeleteClusterParameterGroupRequest struct {
 
 // Send marshals and sends the DeleteClusterParameterGroup API request.
 func (r DeleteClusterParameterGroupRequest) Send() (*DeleteClusterParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -850,6 +910,10 @@ type DeleteClusterSecurityGroupRequest struct {
 
 // Send marshals and sends the DeleteClusterSecurityGroup API request.
 func (r DeleteClusterSecurityGroupRequest) Send() (*DeleteClusterSecurityGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -905,6 +969,10 @@ type DeleteClusterSnapshotRequest struct {
 
 // Send marshals and sends the DeleteClusterSnapshot API request.
 func (r DeleteClusterSnapshotRequest) Send() (*DeleteClusterSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -958,6 +1026,10 @@ type DeleteClusterSubnetGroupRequest struct {
 
 // Send marshals and sends the DeleteClusterSubnetGroup API request.
 func (r DeleteClusterSubnetGroupRequest) Send() (*DeleteClusterSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,6 +1078,10 @@ type DeleteEventSubscriptionRequest struct {
 
 // Send marshals and sends the DeleteEventSubscription API request.
 func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1054,6 +1130,10 @@ type DeleteHsmClientCertificateRequest struct {
 
 // Send marshals and sends the DeleteHsmClientCertificate API request.
 func (r DeleteHsmClientCertificateRequest) Send() (*DeleteHsmClientCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1102,6 +1182,10 @@ type DeleteHsmConfigurationRequest struct {
 
 // Send marshals and sends the DeleteHsmConfiguration API request.
 func (r DeleteHsmConfigurationRequest) Send() (*DeleteHsmConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1150,6 +1234,10 @@ type DeleteSnapshotCopyGrantRequest struct {
 
 // Send marshals and sends the DeleteSnapshotCopyGrant API request.
 func (r DeleteSnapshotCopyGrantRequest) Send() (*DeleteSnapshotCopyGrantOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1198,6 +1286,10 @@ type DeleteTagsRequest struct {
 
 // Send marshals and sends the DeleteTags API request.
 func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1367,6 +1459,10 @@ type DescribeClusterParametersRequest struct {
 
 // Send marshals and sends the DescribeClusterParameters API request.
 func (r DescribeClusterParametersRequest) Send() (*DescribeClusterParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2049,6 +2145,10 @@ type DescribeDefaultClusterParametersRequest struct {
 
 // Send marshals and sends the DescribeDefaultClusterParameters API request.
 func (r DescribeDefaultClusterParametersRequest) Send() (*DescribeDefaultClusterParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2650,6 +2750,10 @@ type DescribeLoggingStatusRequest struct {
 
 // Send marshals and sends the DescribeLoggingStatus API request.
 func (r DescribeLoggingStatusRequest) Send() (*EnableLoggingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3020,6 +3124,10 @@ type DescribeResizeRequest struct {
 
 // Send marshals and sends the DescribeResize API request.
 func (r DescribeResizeRequest) Send() (*DescribeResizeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3241,6 +3349,10 @@ type DisableLoggingRequest struct {
 
 // Send marshals and sends the DisableLogging API request.
 func (r DisableLoggingRequest) Send() (*EnableLoggingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3288,6 +3400,10 @@ type DisableSnapshotCopyRequest struct {
 
 // Send marshals and sends the DisableSnapshotCopy API request.
 func (r DisableSnapshotCopyRequest) Send() (*DisableSnapshotCopyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3339,6 +3455,10 @@ type EnableLoggingRequest struct {
 
 // Send marshals and sends the EnableLogging API request.
 func (r EnableLoggingRequest) Send() (*EnableLoggingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3386,6 +3506,10 @@ type EnableSnapshotCopyRequest struct {
 
 // Send marshals and sends the EnableSnapshotCopy API request.
 func (r EnableSnapshotCopyRequest) Send() (*EnableSnapshotCopyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3433,6 +3557,10 @@ type GetClusterCredentialsRequest struct {
 
 // Send marshals and sends the GetClusterCredentials API request.
 func (r GetClusterCredentialsRequest) Send() (*GetClusterCredentialsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3502,6 +3630,10 @@ type ModifyClusterRequest struct {
 
 // Send marshals and sends the ModifyCluster API request.
 func (r ModifyClusterRequest) Send() (*ModifyClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3558,6 +3690,10 @@ type ModifyClusterIamRolesRequest struct {
 
 // Send marshals and sends the ModifyClusterIamRoles API request.
 func (r ModifyClusterIamRolesRequest) Send() (*ModifyClusterIamRolesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3607,6 +3743,10 @@ type ModifyClusterParameterGroupRequest struct {
 
 // Send marshals and sends the ModifyClusterParameterGroup API request.
 func (r ModifyClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3657,6 +3797,10 @@ type ModifyClusterSubnetGroupRequest struct {
 
 // Send marshals and sends the ModifyClusterSubnetGroup API request.
 func (r ModifyClusterSubnetGroupRequest) Send() (*ModifyClusterSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3705,6 +3849,10 @@ type ModifyEventSubscriptionRequest struct {
 
 // Send marshals and sends the ModifyEventSubscription API request.
 func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3751,6 +3899,10 @@ type ModifySnapshotCopyRetentionPeriodRequest struct {
 
 // Send marshals and sends the ModifySnapshotCopyRetentionPeriod API request.
 func (r ModifySnapshotCopyRetentionPeriodRequest) Send() (*ModifySnapshotCopyRetentionPeriodOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3798,6 +3950,10 @@ type PurchaseReservedNodeOfferingRequest struct {
 
 // Send marshals and sends the PurchaseReservedNodeOffering API request.
 func (r PurchaseReservedNodeOfferingRequest) Send() (*PurchaseReservedNodeOfferingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3852,6 +4008,10 @@ type RebootClusterRequest struct {
 
 // Send marshals and sends the RebootCluster API request.
 func (r RebootClusterRequest) Send() (*RebootClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3904,6 +4064,10 @@ type ResetClusterParameterGroupRequest struct {
 
 // Send marshals and sends the ResetClusterParameterGroup API request.
 func (r ResetClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3953,6 +4117,10 @@ type RestoreFromClusterSnapshotRequest struct {
 
 // Send marshals and sends the RestoreFromClusterSnapshot API request.
 func (r RestoreFromClusterSnapshotRequest) Send() (*RestoreFromClusterSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4013,6 +4181,10 @@ type RestoreTableFromClusterSnapshotRequest struct {
 
 // Send marshals and sends the RestoreTableFromClusterSnapshot API request.
 func (r RestoreTableFromClusterSnapshotRequest) Send() (*RestoreTableFromClusterSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4071,6 +4243,10 @@ type RevokeClusterSecurityGroupIngressRequest struct {
 
 // Send marshals and sends the RevokeClusterSecurityGroupIngress API request.
 func (r RevokeClusterSecurityGroupIngressRequest) Send() (*RevokeClusterSecurityGroupIngressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4121,6 +4297,10 @@ type RevokeSnapshotAccessRequest struct {
 
 // Send marshals and sends the RevokeSnapshotAccess API request.
 func (r RevokeSnapshotAccessRequest) Send() (*RevokeSnapshotAccessOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4173,6 +4353,10 @@ type RotateEncryptionKeyRequest struct {
 
 // Send marshals and sends the RotateEncryptionKey API request.
 func (r RotateEncryptionKeyRequest) Send() (*RotateEncryptionKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

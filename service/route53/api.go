@@ -20,6 +20,10 @@ type AssociateVPCWithHostedZoneRequest struct {
 
 // Send marshals and sends the AssociateVPCWithHostedZone API request.
 func (r AssociateVPCWithHostedZoneRequest) Send() (*AssociateVPCWithHostedZoneOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -75,6 +79,10 @@ type ChangeResourceRecordSetsRequest struct {
 
 // Send marshals and sends the ChangeResourceRecordSets API request.
 func (r ChangeResourceRecordSetsRequest) Send() (*ChangeResourceRecordSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -199,6 +207,10 @@ type ChangeTagsForResourceRequest struct {
 
 // Send marshals and sends the ChangeTagsForResource API request.
 func (r ChangeTagsForResourceRequest) Send() (*ChangeTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,6 +261,10 @@ type CreateHealthCheckRequest struct {
 
 // Send marshals and sends the CreateHealthCheck API request.
 func (r CreateHealthCheckRequest) Send() (*CreateHealthCheckOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,6 +342,10 @@ type CreateHostedZoneRequest struct {
 
 // Send marshals and sends the CreateHostedZone API request.
 func (r CreateHostedZoneRequest) Send() (*CreateHostedZoneOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,6 +426,10 @@ type CreateQueryLoggingConfigRequest struct {
 
 // Send marshals and sends the CreateQueryLoggingConfig API request.
 func (r CreateQueryLoggingConfigRequest) Send() (*CreateQueryLoggingConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -548,6 +572,10 @@ type CreateReusableDelegationSetRequest struct {
 
 // Send marshals and sends the CreateReusableDelegationSet API request.
 func (r CreateReusableDelegationSetRequest) Send() (*CreateReusableDelegationSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -601,6 +629,10 @@ type CreateTrafficPolicyRequest struct {
 
 // Send marshals and sends the CreateTrafficPolicy API request.
 func (r CreateTrafficPolicyRequest) Send() (*CreateTrafficPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -649,6 +681,10 @@ type CreateTrafficPolicyInstanceRequest struct {
 
 // Send marshals and sends the CreateTrafficPolicyInstance API request.
 func (r CreateTrafficPolicyInstanceRequest) Send() (*CreateTrafficPolicyInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -700,6 +736,10 @@ type CreateTrafficPolicyVersionRequest struct {
 
 // Send marshals and sends the CreateTrafficPolicyVersion API request.
 func (r CreateTrafficPolicyVersionRequest) Send() (*CreateTrafficPolicyVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -753,6 +793,10 @@ type CreateVPCAssociationAuthorizationRequest struct {
 
 // Send marshals and sends the CreateVPCAssociationAuthorization API request.
 func (r CreateVPCAssociationAuthorizationRequest) Send() (*CreateVPCAssociationAuthorizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -808,6 +852,10 @@ type DeleteHealthCheckRequest struct {
 
 // Send marshals and sends the DeleteHealthCheck API request.
 func (r DeleteHealthCheckRequest) Send() (*DeleteHealthCheckOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -862,6 +910,10 @@ type DeleteHostedZoneRequest struct {
 
 // Send marshals and sends the DeleteHostedZone API request.
 func (r DeleteHostedZoneRequest) Send() (*DeleteHostedZoneOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -937,6 +989,10 @@ type DeleteQueryLoggingConfigRequest struct {
 
 // Send marshals and sends the DeleteQueryLoggingConfig API request.
 func (r DeleteQueryLoggingConfigRequest) Send() (*DeleteQueryLoggingConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -987,6 +1043,10 @@ type DeleteReusableDelegationSetRequest struct {
 
 // Send marshals and sends the DeleteReusableDelegationSet API request.
 func (r DeleteReusableDelegationSetRequest) Send() (*DeleteReusableDelegationSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1040,6 +1100,10 @@ type DeleteTrafficPolicyRequest struct {
 
 // Send marshals and sends the DeleteTrafficPolicy API request.
 func (r DeleteTrafficPolicyRequest) Send() (*DeleteTrafficPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1086,6 +1150,10 @@ type DeleteTrafficPolicyInstanceRequest struct {
 
 // Send marshals and sends the DeleteTrafficPolicyInstance API request.
 func (r DeleteTrafficPolicyInstanceRequest) Send() (*DeleteTrafficPolicyInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1136,6 +1204,10 @@ type DeleteVPCAssociationAuthorizationRequest struct {
 
 // Send marshals and sends the DeleteVPCAssociationAuthorization API request.
 func (r DeleteVPCAssociationAuthorizationRequest) Send() (*DeleteVPCAssociationAuthorizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1191,6 +1263,10 @@ type DisassociateVPCFromHostedZoneRequest struct {
 
 // Send marshals and sends the DisassociateVPCFromHostedZone API request.
 func (r DisassociateVPCFromHostedZoneRequest) Send() (*DisassociateVPCFromHostedZoneOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1243,6 +1319,10 @@ type GetChangeRequest struct {
 
 // Send marshals and sends the GetChange API request.
 func (r GetChangeRequest) Send() (*GetChangeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1346,6 +1426,10 @@ type GetGeoLocationRequest struct {
 
 // Send marshals and sends the GetGeoLocation API request.
 func (r GetGeoLocationRequest) Send() (*GetGeoLocationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1409,6 +1493,10 @@ type GetHealthCheckRequest struct {
 
 // Send marshals and sends the GetHealthCheck API request.
 func (r GetHealthCheckRequest) Send() (*GetHealthCheckOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1502,6 +1590,10 @@ type GetHealthCheckLastFailureReasonRequest struct {
 
 // Send marshals and sends the GetHealthCheckLastFailureReason API request.
 func (r GetHealthCheckLastFailureReasonRequest) Send() (*GetHealthCheckLastFailureReasonOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1548,6 +1640,10 @@ type GetHealthCheckStatusRequest struct {
 
 // Send marshals and sends the GetHealthCheckStatus API request.
 func (r GetHealthCheckStatusRequest) Send() (*GetHealthCheckStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1594,6 +1690,10 @@ type GetHostedZoneRequest struct {
 
 // Send marshals and sends the GetHostedZone API request.
 func (r GetHostedZoneRequest) Send() (*GetHostedZoneOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1688,6 +1788,10 @@ type GetQueryLoggingConfigRequest struct {
 
 // Send marshals and sends the GetQueryLoggingConfig API request.
 func (r GetQueryLoggingConfigRequest) Send() (*GetQueryLoggingConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1737,6 +1841,10 @@ type GetReusableDelegationSetRequest struct {
 
 // Send marshals and sends the GetReusableDelegationSet API request.
 func (r GetReusableDelegationSetRequest) Send() (*GetReusableDelegationSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1784,6 +1892,10 @@ type GetTrafficPolicyRequest struct {
 
 // Send marshals and sends the GetTrafficPolicy API request.
 func (r GetTrafficPolicyRequest) Send() (*GetTrafficPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1830,6 +1942,10 @@ type GetTrafficPolicyInstanceRequest struct {
 
 // Send marshals and sends the GetTrafficPolicyInstance API request.
 func (r GetTrafficPolicyInstanceRequest) Send() (*GetTrafficPolicyInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1931,6 +2047,10 @@ type ListGeoLocationsRequest struct {
 
 // Send marshals and sends the ListGeoLocations API request.
 func (r ListGeoLocationsRequest) Send() (*ListGeoLocationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2341,6 +2461,10 @@ type ListResourceRecordSetsRequest struct {
 
 // Send marshals and sends the ListResourceRecordSets API request.
 func (r ListResourceRecordSetsRequest) Send() (*ListResourceRecordSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2528,6 +2652,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2578,6 +2706,10 @@ type ListTagsForResourcesRequest struct {
 
 // Send marshals and sends the ListTagsForResources API request.
 func (r ListTagsForResourcesRequest) Send() (*ListTagsForResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2628,6 +2760,10 @@ type ListTrafficPoliciesRequest struct {
 
 // Send marshals and sends the ListTrafficPolicies API request.
 func (r ListTrafficPoliciesRequest) Send() (*ListTrafficPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2732,6 +2868,10 @@ type ListTrafficPolicyInstancesByHostedZoneRequest struct {
 
 // Send marshals and sends the ListTrafficPolicyInstancesByHostedZone API request.
 func (r ListTrafficPolicyInstancesByHostedZoneRequest) Send() (*ListTrafficPolicyInstancesByHostedZoneOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2788,6 +2928,10 @@ type ListTrafficPolicyInstancesByPolicyRequest struct {
 
 // Send marshals and sends the ListTrafficPolicyInstancesByPolicy API request.
 func (r ListTrafficPolicyInstancesByPolicyRequest) Send() (*ListTrafficPolicyInstancesByPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2844,6 +2988,10 @@ type ListTrafficPolicyVersionsRequest struct {
 
 // Send marshals and sends the ListTrafficPolicyVersions API request.
 func (r ListTrafficPolicyVersionsRequest) Send() (*ListTrafficPolicyVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2892,6 +3040,10 @@ type ListVPCAssociationAuthorizationsRequest struct {
 
 // Send marshals and sends the ListVPCAssociationAuthorizations API request.
 func (r ListVPCAssociationAuthorizationsRequest) Send() (*ListVPCAssociationAuthorizationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2943,6 +3095,10 @@ type TestDNSAnswerRequest struct {
 
 // Send marshals and sends the TestDNSAnswer API request.
 func (r TestDNSAnswerRequest) Send() (*TestDNSAnswerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2991,6 +3147,10 @@ type UpdateHealthCheckRequest struct {
 
 // Send marshals and sends the UpdateHealthCheck API request.
 func (r UpdateHealthCheckRequest) Send() (*UpdateHealthCheckOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3041,6 +3201,10 @@ type UpdateHostedZoneCommentRequest struct {
 
 // Send marshals and sends the UpdateHostedZoneComment API request.
 func (r UpdateHostedZoneCommentRequest) Send() (*UpdateHostedZoneCommentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3087,6 +3251,10 @@ type UpdateTrafficPolicyCommentRequest struct {
 
 // Send marshals and sends the UpdateTrafficPolicyComment API request.
 func (r UpdateTrafficPolicyCommentRequest) Send() (*UpdateTrafficPolicyCommentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3133,6 +3301,10 @@ type UpdateTrafficPolicyInstanceRequest struct {
 
 // Send marshals and sends the UpdateTrafficPolicyInstance API request.
 func (r UpdateTrafficPolicyInstanceRequest) Send() (*UpdateTrafficPolicyInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

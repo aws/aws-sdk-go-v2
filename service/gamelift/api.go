@@ -22,6 +22,10 @@ type AcceptMatchRequest struct {
 
 // Send marshals and sends the AcceptMatch API request.
 func (r AcceptMatchRequest) Send() (*AcceptMatchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,6 +103,10 @@ type CreateAliasRequest struct {
 
 // Send marshals and sends the CreateAlias API request.
 func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,6 +185,10 @@ type CreateBuildRequest struct {
 
 // Send marshals and sends the CreateBuild API request.
 func (r CreateBuildRequest) Send() (*CreateBuildOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -252,6 +264,10 @@ type CreateFleetRequest struct {
 
 // Send marshals and sends the CreateFleet API request.
 func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -391,6 +407,10 @@ type CreateGameSessionRequest struct {
 
 // Send marshals and sends the CreateGameSession API request.
 func (r CreateGameSessionRequest) Send() (*CreateGameSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,6 +508,10 @@ type CreateGameSessionQueueRequest struct {
 
 // Send marshals and sends the CreateGameSessionQueue API request.
 func (r CreateGameSessionQueueRequest) Send() (*CreateGameSessionQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -573,6 +597,10 @@ type CreateMatchmakingConfigurationRequest struct {
 
 // Send marshals and sends the CreateMatchmakingConfiguration API request.
 func (r CreateMatchmakingConfigurationRequest) Send() (*CreateMatchmakingConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -662,6 +690,10 @@ type CreateMatchmakingRuleSetRequest struct {
 
 // Send marshals and sends the CreateMatchmakingRuleSet API request.
 func (r CreateMatchmakingRuleSetRequest) Send() (*CreateMatchmakingRuleSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -744,6 +776,10 @@ type CreatePlayerSessionRequest struct {
 
 // Send marshals and sends the CreatePlayerSession API request.
 func (r CreatePlayerSessionRequest) Send() (*CreatePlayerSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,6 +851,10 @@ type CreatePlayerSessionsRequest struct {
 
 // Send marshals and sends the CreatePlayerSessions API request.
 func (r CreatePlayerSessionsRequest) Send() (*CreatePlayerSessionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -887,6 +927,10 @@ type CreateVpcPeeringAuthorizationRequest struct {
 
 // Send marshals and sends the CreateVpcPeeringAuthorization API request.
 func (r CreateVpcPeeringAuthorizationRequest) Send() (*CreateVpcPeeringAuthorizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -974,6 +1018,10 @@ type CreateVpcPeeringConnectionRequest struct {
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
 func (r CreateVpcPeeringConnectionRequest) Send() (*CreateVpcPeeringConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1056,6 +1104,10 @@ type DeleteAliasRequest struct {
 
 // Send marshals and sends the DeleteAlias API request.
 func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1120,6 +1172,10 @@ type DeleteBuildRequest struct {
 
 // Send marshals and sends the DeleteBuild API request.
 func (r DeleteBuildRequest) Send() (*DeleteBuildOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1185,6 +1241,10 @@ type DeleteFleetRequest struct {
 
 // Send marshals and sends the DeleteFleet API request.
 func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1281,6 +1341,10 @@ type DeleteGameSessionQueueRequest struct {
 
 // Send marshals and sends the DeleteGameSessionQueue API request.
 func (r DeleteGameSessionQueueRequest) Send() (*DeleteGameSessionQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1339,6 +1403,10 @@ type DeleteMatchmakingConfigurationRequest struct {
 
 // Send marshals and sends the DeleteMatchmakingConfiguration API request.
 func (r DeleteMatchmakingConfigurationRequest) Send() (*DeleteMatchmakingConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1403,6 +1471,10 @@ type DeleteScalingPolicyRequest struct {
 
 // Send marshals and sends the DeleteScalingPolicy API request.
 func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1497,6 +1569,10 @@ type DeleteVpcPeeringAuthorizationRequest struct {
 
 // Send marshals and sends the DeleteVpcPeeringAuthorization API request.
 func (r DeleteVpcPeeringAuthorizationRequest) Send() (*DeleteVpcPeeringAuthorizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1559,6 +1635,10 @@ type DeleteVpcPeeringConnectionRequest struct {
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
 func (r DeleteVpcPeeringConnectionRequest) Send() (*DeleteVpcPeeringConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1627,6 +1707,10 @@ type DescribeAliasRequest struct {
 
 // Send marshals and sends the DescribeAlias API request.
 func (r DescribeAliasRequest) Send() (*DescribeAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1691,6 +1775,10 @@ type DescribeBuildRequest struct {
 
 // Send marshals and sends the DescribeBuild API request.
 func (r DescribeBuildRequest) Send() (*DescribeBuildOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1848,6 +1936,10 @@ type DescribeFleetAttributesRequest struct {
 
 // Send marshals and sends the DescribeFleetAttributes API request.
 func (r DescribeFleetAttributesRequest) Send() (*DescribeFleetAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1948,6 +2040,10 @@ type DescribeFleetCapacityRequest struct {
 
 // Send marshals and sends the DescribeFleetCapacity API request.
 func (r DescribeFleetCapacityRequest) Send() (*DescribeFleetCapacityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2049,6 +2145,10 @@ type DescribeFleetEventsRequest struct {
 
 // Send marshals and sends the DescribeFleetEvents API request.
 func (r DescribeFleetEventsRequest) Send() (*DescribeFleetEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2142,6 +2242,10 @@ type DescribeFleetPortSettingsRequest struct {
 
 // Send marshals and sends the DescribeFleetPortSettings API request.
 func (r DescribeFleetPortSettingsRequest) Send() (*DescribeFleetPortSettingsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2237,6 +2341,10 @@ type DescribeFleetUtilizationRequest struct {
 
 // Send marshals and sends the DescribeFleetUtilization API request.
 func (r DescribeFleetUtilizationRequest) Send() (*DescribeFleetUtilizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2336,6 +2444,10 @@ type DescribeGameSessionDetailsRequest struct {
 
 // Send marshals and sends the DescribeGameSessionDetails API request.
 func (r DescribeGameSessionDetailsRequest) Send() (*DescribeGameSessionDetailsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2414,6 +2526,10 @@ type DescribeGameSessionPlacementRequest struct {
 
 // Send marshals and sends the DescribeGameSessionPlacement API request.
 func (r DescribeGameSessionPlacementRequest) Send() (*DescribeGameSessionPlacementOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2484,6 +2600,10 @@ type DescribeGameSessionQueuesRequest struct {
 
 // Send marshals and sends the DescribeGameSessionQueues API request.
 func (r DescribeGameSessionQueuesRequest) Send() (*DescribeGameSessionQueuesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2544,6 +2664,10 @@ type DescribeGameSessionsRequest struct {
 
 // Send marshals and sends the DescribeGameSessions API request.
 func (r DescribeGameSessionsRequest) Send() (*DescribeGameSessionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2623,6 +2747,10 @@ type DescribeInstancesRequest struct {
 
 // Send marshals and sends the DescribeInstances API request.
 func (r DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2676,6 +2804,10 @@ type DescribeMatchmakingRequest struct {
 
 // Send marshals and sends the DescribeMatchmaking API request.
 func (r DescribeMatchmakingRequest) Send() (*DescribeMatchmakingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2744,6 +2876,10 @@ type DescribeMatchmakingConfigurationsRequest struct {
 
 // Send marshals and sends the DescribeMatchmakingConfigurations API request.
 func (r DescribeMatchmakingConfigurationsRequest) Send() (*DescribeMatchmakingConfigurationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2813,6 +2949,10 @@ type DescribeMatchmakingRuleSetsRequest struct {
 
 // Send marshals and sends the DescribeMatchmakingRuleSets API request.
 func (r DescribeMatchmakingRuleSetsRequest) Send() (*DescribeMatchmakingRuleSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2879,6 +3019,10 @@ type DescribePlayerSessionsRequest struct {
 
 // Send marshals and sends the DescribePlayerSessions API request.
 func (r DescribePlayerSessionsRequest) Send() (*DescribePlayerSessionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2953,6 +3097,10 @@ type DescribeRuntimeConfigurationRequest struct {
 
 // Send marshals and sends the DescribeRuntimeConfiguration API request.
 func (r DescribeRuntimeConfigurationRequest) Send() (*DescribeRuntimeConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3045,6 +3193,10 @@ type DescribeScalingPoliciesRequest struct {
 
 // Send marshals and sends the DescribeScalingPolicies API request.
 func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3269,6 +3421,10 @@ type GetGameSessionLogUrlRequest struct {
 
 // Send marshals and sends the GetGameSessionLogUrl API request.
 func (r GetGameSessionLogUrlRequest) Send() (*GetGameSessionLogUrlOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3344,6 +3500,10 @@ type GetInstanceAccessRequest struct {
 
 // Send marshals and sends the GetInstanceAccess API request.
 func (r GetInstanceAccessRequest) Send() (*GetInstanceAccessOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3405,6 +3565,10 @@ type ListAliasesRequest struct {
 
 // Send marshals and sends the ListAliases API request.
 func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3469,6 +3633,10 @@ type ListBuildsRequest struct {
 
 // Send marshals and sends the ListBuilds API request.
 func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3532,6 +3700,10 @@ type ListFleetsRequest struct {
 
 // Send marshals and sends the ListFleets API request.
 func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3626,6 +3798,10 @@ type PutScalingPolicyRequest struct {
 
 // Send marshals and sends the PutScalingPolicy API request.
 func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3737,6 +3913,10 @@ type RequestUploadCredentialsRequest struct {
 
 // Send marshals and sends the RequestUploadCredentials API request.
 func (r RequestUploadCredentialsRequest) Send() (*RequestUploadCredentialsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3785,6 +3965,10 @@ type ResolveAliasRequest struct {
 
 // Send marshals and sends the ResolveAlias API request.
 func (r ResolveAliasRequest) Send() (*ResolveAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3845,6 +4029,10 @@ type SearchGameSessionsRequest struct {
 
 // Send marshals and sends the SearchGameSessions API request.
 func (r SearchGameSessionsRequest) Send() (*SearchGameSessionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3955,6 +4143,10 @@ type StartGameSessionPlacementRequest struct {
 
 // Send marshals and sends the StartGameSessionPlacement API request.
 func (r StartGameSessionPlacementRequest) Send() (*StartGameSessionPlacementOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4063,6 +4255,10 @@ type StartMatchmakingRequest struct {
 
 // Send marshals and sends the StartMatchmaking API request.
 func (r StartMatchmakingRequest) Send() (*StartMatchmakingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4179,6 +4375,10 @@ type StopGameSessionPlacementRequest struct {
 
 // Send marshals and sends the StopGameSessionPlacement API request.
 func (r StopGameSessionPlacementRequest) Send() (*StopGameSessionPlacementOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4249,6 +4449,10 @@ type StopMatchmakingRequest struct {
 
 // Send marshals and sends the StopMatchmaking API request.
 func (r StopMatchmakingRequest) Send() (*StopMatchmakingOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4307,6 +4511,10 @@ type UpdateAliasRequest struct {
 
 // Send marshals and sends the UpdateAlias API request.
 func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4370,6 +4578,10 @@ type UpdateBuildRequest struct {
 
 // Send marshals and sends the UpdateBuild API request.
 func (r UpdateBuildRequest) Send() (*UpdateBuildOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4431,6 +4643,10 @@ type UpdateFleetAttributesRequest struct {
 
 // Send marshals and sends the UpdateFleetAttributes API request.
 func (r UpdateFleetAttributesRequest) Send() (*UpdateFleetAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4523,6 +4739,10 @@ type UpdateFleetCapacityRequest struct {
 
 // Send marshals and sends the UpdateFleetCapacity API request.
 func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4627,6 +4847,10 @@ type UpdateFleetPortSettingsRequest struct {
 
 // Send marshals and sends the UpdateFleetPortSettings API request.
 func (r UpdateFleetPortSettingsRequest) Send() (*UpdateFleetPortSettingsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4722,6 +4946,10 @@ type UpdateGameSessionRequest struct {
 
 // Send marshals and sends the UpdateGameSession API request.
 func (r UpdateGameSessionRequest) Send() (*UpdateGameSessionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4796,6 +5024,10 @@ type UpdateGameSessionQueueRequest struct {
 
 // Send marshals and sends the UpdateGameSessionQueue API request.
 func (r UpdateGameSessionQueueRequest) Send() (*UpdateGameSessionQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4855,6 +5087,10 @@ type UpdateMatchmakingConfigurationRequest struct {
 
 // Send marshals and sends the UpdateMatchmakingConfiguration API request.
 func (r UpdateMatchmakingConfigurationRequest) Send() (*UpdateMatchmakingConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4918,6 +5154,10 @@ type UpdateRuntimeConfigurationRequest struct {
 
 // Send marshals and sends the UpdateRuntimeConfiguration API request.
 func (r UpdateRuntimeConfigurationRequest) Send() (*UpdateRuntimeConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5023,6 +5263,10 @@ type ValidateMatchmakingRuleSetRequest struct {
 
 // Send marshals and sends the ValidateMatchmakingRuleSet API request.
 func (r ValidateMatchmakingRuleSetRequest) Send() (*ValidateMatchmakingRuleSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -21,6 +21,10 @@ type AcceptHandshakeRequest struct {
 
 // Send marshals and sends the AcceptHandshake API request.
 func (r AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,6 +91,10 @@ type AttachPolicyRequest struct {
 
 // Send marshals and sends the AttachPolicy API request.
 func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -173,6 +181,10 @@ type CancelHandshakeRequest struct {
 
 // Send marshals and sends the CancelHandshake API request.
 func (r CancelHandshakeRequest) Send() (*CancelHandshakeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -227,6 +239,10 @@ type CreateAccountRequest struct {
 
 // Send marshals and sends the CreateAccount API request.
 func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -369,6 +385,10 @@ type CreateOrganizationalUnitRequest struct {
 
 // Send marshals and sends the CreateOrganizationalUnit API request.
 func (r CreateOrganizationalUnitRequest) Send() (*CreateOrganizationalUnitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -424,6 +444,10 @@ type CreatePolicyRequest struct {
 
 // Send marshals and sends the CreatePolicy API request.
 func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -476,6 +500,10 @@ type DeclineHandshakeRequest struct {
 
 // Send marshals and sends the DeclineHandshake API request.
 func (r DeclineHandshakeRequest) Send() (*DeclineHandshakeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -581,6 +609,10 @@ type DeleteOrganizationalUnitRequest struct {
 
 // Send marshals and sends the DeleteOrganizationalUnit API request.
 func (r DeleteOrganizationalUnitRequest) Send() (*DeleteOrganizationalUnitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,6 +664,10 @@ type DeletePolicyRequest struct {
 
 // Send marshals and sends the DeletePolicy API request.
 func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -683,6 +719,10 @@ type DescribeAccountRequest struct {
 
 // Send marshals and sends the DescribeAccount API request.
 func (r DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -731,6 +771,10 @@ type DescribeCreateAccountStatusRequest struct {
 
 // Send marshals and sends the DescribeCreateAccountStatus API request.
 func (r DescribeCreateAccountStatusRequest) Send() (*DescribeCreateAccountStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,6 +823,10 @@ type DescribeHandshakeRequest struct {
 
 // Send marshals and sends the DescribeHandshake API request.
 func (r DescribeHandshakeRequest) Send() (*DescribeHandshakeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -882,6 +930,10 @@ type DescribeOrganizationalUnitRequest struct {
 
 // Send marshals and sends the DescribeOrganizationalUnit API request.
 func (r DescribeOrganizationalUnitRequest) Send() (*DescribeOrganizationalUnitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -930,6 +982,10 @@ type DescribePolicyRequest struct {
 
 // Send marshals and sends the DescribePolicy API request.
 func (r DescribePolicyRequest) Send() (*DescribePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -978,6 +1034,10 @@ type DetachPolicyRequest struct {
 
 // Send marshals and sends the DetachPolicy API request.
 func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1040,6 +1100,10 @@ type DisablePolicyTypeRequest struct {
 
 // Send marshals and sends the DisablePolicyType API request.
 func (r DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1164,6 +1228,10 @@ type EnablePolicyTypeRequest struct {
 
 // Send marshals and sends the EnablePolicyType API request.
 func (r EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1214,6 +1282,10 @@ type InviteAccountToOrganizationRequest struct {
 
 // Send marshals and sends the InviteAccountToOrganization API request.
 func (r InviteAccountToOrganizationRequest) Send() (*InviteAccountToOrganizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1352,6 +1424,10 @@ type ListAccountsRequest struct {
 
 // Send marshals and sends the ListAccounts API request.
 func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1457,6 +1533,10 @@ type ListAccountsForParentRequest struct {
 
 // Send marshals and sends the ListAccountsForParent API request.
 func (r ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1564,6 +1644,10 @@ type ListChildrenRequest struct {
 
 // Send marshals and sends the ListChildren API request.
 func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1668,6 +1752,10 @@ type ListCreateAccountStatusRequest struct {
 
 // Send marshals and sends the ListCreateAccountStatus API request.
 func (r ListCreateAccountStatusRequest) Send() (*ListCreateAccountStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1773,6 +1861,10 @@ type ListHandshakesForAccountRequest struct {
 
 // Send marshals and sends the ListHandshakesForAccount API request.
 func (r ListHandshakesForAccountRequest) Send() (*ListHandshakesForAccountOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1882,6 +1974,10 @@ type ListHandshakesForOrganizationRequest struct {
 
 // Send marshals and sends the ListHandshakesForOrganization API request.
 func (r ListHandshakesForOrganizationRequest) Send() (*ListHandshakesForOrganizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1993,6 +2089,10 @@ type ListOrganizationalUnitsForParentRequest struct {
 
 // Send marshals and sends the ListOrganizationalUnitsForParent API request.
 func (r ListOrganizationalUnitsForParentRequest) Send() (*ListOrganizationalUnitsForParentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2097,6 +2197,10 @@ type ListParentsRequest struct {
 
 // Send marshals and sends the ListParents API request.
 func (r ListParentsRequest) Send() (*ListParentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2205,6 +2309,10 @@ type ListPoliciesRequest struct {
 
 // Send marshals and sends the ListPolicies API request.
 func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2309,6 +2417,10 @@ type ListPoliciesForTargetRequest struct {
 
 // Send marshals and sends the ListPoliciesForTarget API request.
 func (r ListPoliciesForTargetRequest) Send() (*ListPoliciesForTargetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2415,6 +2527,10 @@ type ListRootsRequest struct {
 
 // Send marshals and sends the ListRoots API request.
 func (r ListRootsRequest) Send() (*ListRootsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2519,6 +2635,10 @@ type ListTargetsForPolicyRequest struct {
 
 // Send marshals and sends the ListTargetsForPolicy API request.
 func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2623,6 +2743,10 @@ type MoveAccountRequest struct {
 
 // Send marshals and sends the MoveAccount API request.
 func (r MoveAccountRequest) Send() (*MoveAccountOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2674,6 +2798,10 @@ type RemoveAccountFromOrganizationRequest struct {
 
 // Send marshals and sends the RemoveAccountFromOrganization API request.
 func (r RemoveAccountFromOrganizationRequest) Send() (*RemoveAccountFromOrganizationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2751,6 +2879,10 @@ type UpdateOrganizationalUnitRequest struct {
 
 // Send marshals and sends the UpdateOrganizationalUnit API request.
 func (r UpdateOrganizationalUnitRequest) Send() (*UpdateOrganizationalUnitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2801,6 +2933,10 @@ type UpdatePolicyRequest struct {
 
 // Send marshals and sends the UpdatePolicy API request.
 func (r UpdatePolicyRequest) Send() (*UpdatePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -20,6 +20,10 @@ type BatchMeterUsageRequest struct {
 
 // Send marshals and sends the BatchMeterUsage API request.
 func (r BatchMeterUsageRequest) Send() (*BatchMeterUsageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -75,6 +79,10 @@ type MeterUsageRequest struct {
 
 // Send marshals and sends the MeterUsage API request.
 func (r MeterUsageRequest) Send() (*MeterUsageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,6 +133,10 @@ type ResolveCustomerRequest struct {
 
 // Send marshals and sends the ResolveCustomer API request.
 func (r ResolveCustomerRequest) Send() (*ResolveCustomerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

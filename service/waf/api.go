@@ -20,6 +20,10 @@ type CreateByteMatchSetRequest struct {
 
 // Send marshals and sends the CreateByteMatchSet API request.
 func (r CreateByteMatchSetRequest) Send() (*CreateByteMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,6 +91,10 @@ type CreateIPSetRequest struct {
 
 // Send marshals and sends the CreateIPSet API request.
 func (r CreateIPSetRequest) Send() (*CreateIPSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -154,6 +162,10 @@ type CreateRateBasedRuleRequest struct {
 
 // Send marshals and sends the CreateRateBasedRule API request.
 func (r CreateRateBasedRuleRequest) Send() (*CreateRateBasedRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -260,6 +272,10 @@ type CreateRuleRequest struct {
 
 // Send marshals and sends the CreateRule API request.
 func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,6 +357,10 @@ type CreateSizeConstraintSetRequest struct {
 
 // Send marshals and sends the CreateSizeConstraintSet API request.
 func (r CreateSizeConstraintSetRequest) Send() (*CreateSizeConstraintSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -409,6 +429,10 @@ type CreateSqlInjectionMatchSetRequest struct {
 
 // Send marshals and sends the CreateSqlInjectionMatchSet API request.
 func (r CreateSqlInjectionMatchSetRequest) Send() (*CreateSqlInjectionMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -473,6 +497,10 @@ type CreateWebACLRequest struct {
 
 // Send marshals and sends the CreateWebACL API request.
 func (r CreateWebACLRequest) Send() (*CreateWebACLOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -549,6 +577,10 @@ type CreateXssMatchSetRequest struct {
 
 // Send marshals and sends the CreateXssMatchSet API request.
 func (r CreateXssMatchSetRequest) Send() (*CreateXssMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -614,6 +646,10 @@ type DeleteByteMatchSetRequest struct {
 
 // Send marshals and sends the DeleteByteMatchSet API request.
 func (r DeleteByteMatchSetRequest) Send() (*DeleteByteMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -674,6 +710,10 @@ type DeleteIPSetRequest struct {
 
 // Send marshals and sends the DeleteIPSet API request.
 func (r DeleteIPSetRequest) Send() (*DeleteIPSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -733,6 +773,10 @@ type DeleteRateBasedRuleRequest struct {
 
 // Send marshals and sends the DeleteRateBasedRule API request.
 func (r DeleteRateBasedRuleRequest) Send() (*DeleteRateBasedRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,6 +838,10 @@ type DeleteRuleRequest struct {
 
 // Send marshals and sends the DeleteRule API request.
 func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -853,6 +901,10 @@ type DeleteSizeConstraintSetRequest struct {
 
 // Send marshals and sends the DeleteSizeConstraintSet API request.
 func (r DeleteSizeConstraintSetRequest) Send() (*DeleteSizeConstraintSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -913,6 +965,10 @@ type DeleteSqlInjectionMatchSetRequest struct {
 
 // Send marshals and sends the DeleteSqlInjectionMatchSet API request.
 func (r DeleteSqlInjectionMatchSetRequest) Send() (*DeleteSqlInjectionMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -974,6 +1030,10 @@ type DeleteWebACLRequest struct {
 
 // Send marshals and sends the DeleteWebACL API request.
 func (r DeleteWebACLRequest) Send() (*DeleteWebACLOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1030,6 +1090,10 @@ type DeleteXssMatchSetRequest struct {
 
 // Send marshals and sends the DeleteXssMatchSet API request.
 func (r DeleteXssMatchSetRequest) Send() (*DeleteXssMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1090,6 +1154,10 @@ type GetByteMatchSetRequest struct {
 
 // Send marshals and sends the GetByteMatchSet API request.
 func (r GetByteMatchSetRequest) Send() (*GetByteMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1196,6 +1264,10 @@ type GetChangeTokenStatusRequest struct {
 
 // Send marshals and sends the GetChangeTokenStatus API request.
 func (r GetChangeTokenStatusRequest) Send() (*GetChangeTokenStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1252,6 +1324,10 @@ type GetIPSetRequest struct {
 
 // Send marshals and sends the GetIPSet API request.
 func (r GetIPSetRequest) Send() (*GetIPSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1298,6 +1374,10 @@ type GetRateBasedRuleRequest struct {
 
 // Send marshals and sends the GetRateBasedRule API request.
 func (r GetRateBasedRuleRequest) Send() (*GetRateBasedRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1345,6 +1425,10 @@ type GetRateBasedRuleManagedKeysRequest struct {
 
 // Send marshals and sends the GetRateBasedRuleManagedKeys API request.
 func (r GetRateBasedRuleManagedKeysRequest) Send() (*GetRateBasedRuleManagedKeysOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1394,6 +1478,10 @@ type GetRuleRequest struct {
 
 // Send marshals and sends the GetRule API request.
 func (r GetRuleRequest) Send() (*GetRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1441,6 +1529,10 @@ type GetSampledRequestsRequest struct {
 
 // Send marshals and sends the GetSampledRequests API request.
 func (r GetSampledRequestsRequest) Send() (*GetSampledRequestsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1497,6 +1589,10 @@ type GetSizeConstraintSetRequest struct {
 
 // Send marshals and sends the GetSizeConstraintSet API request.
 func (r GetSizeConstraintSetRequest) Send() (*GetSizeConstraintSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1543,6 +1639,10 @@ type GetSqlInjectionMatchSetRequest struct {
 
 // Send marshals and sends the GetSqlInjectionMatchSet API request.
 func (r GetSqlInjectionMatchSetRequest) Send() (*GetSqlInjectionMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1589,6 +1689,10 @@ type GetWebACLRequest struct {
 
 // Send marshals and sends the GetWebACL API request.
 func (r GetWebACLRequest) Send() (*GetWebACLOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1635,6 +1739,10 @@ type GetXssMatchSetRequest struct {
 
 // Send marshals and sends the GetXssMatchSet API request.
 func (r GetXssMatchSetRequest) Send() (*GetXssMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1681,6 +1789,10 @@ type ListByteMatchSetsRequest struct {
 
 // Send marshals and sends the ListByteMatchSets API request.
 func (r ListByteMatchSetsRequest) Send() (*ListByteMatchSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1727,6 +1839,10 @@ type ListIPSetsRequest struct {
 
 // Send marshals and sends the ListIPSets API request.
 func (r ListIPSetsRequest) Send() (*ListIPSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1773,6 +1889,10 @@ type ListRateBasedRulesRequest struct {
 
 // Send marshals and sends the ListRateBasedRules API request.
 func (r ListRateBasedRulesRequest) Send() (*ListRateBasedRulesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1819,6 +1939,10 @@ type ListRulesRequest struct {
 
 // Send marshals and sends the ListRules API request.
 func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1865,6 +1989,10 @@ type ListSizeConstraintSetsRequest struct {
 
 // Send marshals and sends the ListSizeConstraintSets API request.
 func (r ListSizeConstraintSetsRequest) Send() (*ListSizeConstraintSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1911,6 +2039,10 @@ type ListSqlInjectionMatchSetsRequest struct {
 
 // Send marshals and sends the ListSqlInjectionMatchSets API request.
 func (r ListSqlInjectionMatchSetsRequest) Send() (*ListSqlInjectionMatchSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1957,6 +2089,10 @@ type ListWebACLsRequest struct {
 
 // Send marshals and sends the ListWebACLs API request.
 func (r ListWebACLsRequest) Send() (*ListWebACLsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2003,6 +2139,10 @@ type ListXssMatchSetsRequest struct {
 
 // Send marshals and sends the ListXssMatchSets API request.
 func (r ListXssMatchSetsRequest) Send() (*ListXssMatchSetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2049,6 +2189,10 @@ type UpdateByteMatchSetRequest struct {
 
 // Send marshals and sends the UpdateByteMatchSet API request.
 func (r UpdateByteMatchSetRequest) Send() (*UpdateByteMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2131,6 +2275,10 @@ type UpdateIPSetRequest struct {
 
 // Send marshals and sends the UpdateIPSet API request.
 func (r UpdateIPSetRequest) Send() (*UpdateIPSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2225,6 +2373,10 @@ type UpdateRateBasedRuleRequest struct {
 
 // Send marshals and sends the UpdateRateBasedRule API request.
 func (r UpdateRateBasedRuleRequest) Send() (*UpdateRateBasedRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,6 +2460,10 @@ type UpdateRuleRequest struct {
 
 // Send marshals and sends the UpdateRule API request.
 func (r UpdateRuleRequest) Send() (*UpdateRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2386,6 +2542,10 @@ type UpdateSizeConstraintSetRequest struct {
 
 // Send marshals and sends the UpdateSizeConstraintSet API request.
 func (r UpdateSizeConstraintSetRequest) Send() (*UpdateSizeConstraintSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2470,6 +2630,10 @@ type UpdateSqlInjectionMatchSetRequest struct {
 
 // Send marshals and sends the UpdateSqlInjectionMatchSet API request.
 func (r UpdateSqlInjectionMatchSetRequest) Send() (*UpdateSqlInjectionMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2547,6 +2711,10 @@ type UpdateWebACLRequest struct {
 
 // Send marshals and sends the UpdateWebACL API request.
 func (r UpdateWebACLRequest) Send() (*UpdateWebACLOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2640,6 +2808,10 @@ type UpdateXssMatchSetRequest struct {
 
 // Send marshals and sends the UpdateXssMatchSet API request.
 func (r UpdateXssMatchSetRequest) Send() (*UpdateXssMatchSetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

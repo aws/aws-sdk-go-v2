@@ -20,6 +20,10 @@ type AcceptQualificationRequestRequest struct {
 
 // Send marshals and sends the AcceptQualificationRequest API request.
 func (r AcceptQualificationRequestRequest) Send() (*AcceptQualificationRequestOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,6 +77,10 @@ type ApproveAssignmentRequest struct {
 
 // Send marshals and sends the ApproveAssignment API request.
 func (r ApproveAssignmentRequest) Send() (*ApproveAssignmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,6 +145,10 @@ type AssociateQualificationWithWorkerRequest struct {
 
 // Send marshals and sends the AssociateQualificationWithWorker API request.
 func (r AssociateQualificationWithWorkerRequest) Send() (*AssociateQualificationWithWorkerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -195,6 +207,10 @@ type CreateAdditionalAssignmentsForHITRequest struct {
 
 // Send marshals and sends the CreateAdditionalAssignmentsForHIT API request.
 func (r CreateAdditionalAssignmentsForHITRequest) Send() (*CreateAdditionalAssignmentsForHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -255,6 +271,10 @@ type CreateHITRequest struct {
 
 // Send marshals and sends the CreateHIT API request.
 func (r CreateHITRequest) Send() (*CreateHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -322,6 +342,10 @@ type CreateHITTypeRequest struct {
 
 // Send marshals and sends the CreateHITType API request.
 func (r CreateHITTypeRequest) Send() (*CreateHITTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -371,6 +395,10 @@ type CreateHITWithHITTypeRequest struct {
 
 // Send marshals and sends the CreateHITWithHITType API request.
 func (r CreateHITWithHITTypeRequest) Send() (*CreateHITWithHITTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -429,6 +457,10 @@ type CreateQualificationTypeRequest struct {
 
 // Send marshals and sends the CreateQualificationType API request.
 func (r CreateQualificationTypeRequest) Send() (*CreateQualificationTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -476,6 +508,10 @@ type CreateWorkerBlockRequest struct {
 
 // Send marshals and sends the CreateWorkerBlock API request.
 func (r CreateWorkerBlockRequest) Send() (*CreateWorkerBlockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -524,6 +560,10 @@ type DeleteHITRequest struct {
 
 // Send marshals and sends the DeleteHIT API request.
 func (r DeleteHITRequest) Send() (*DeleteHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -588,6 +628,10 @@ type DeleteQualificationTypeRequest struct {
 
 // Send marshals and sends the DeleteQualificationType API request.
 func (r DeleteQualificationTypeRequest) Send() (*DeleteQualificationTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -646,6 +690,10 @@ type DeleteWorkerBlockRequest struct {
 
 // Send marshals and sends the DeleteWorkerBlock API request.
 func (r DeleteWorkerBlockRequest) Send() (*DeleteWorkerBlockOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -697,6 +745,10 @@ type DisassociateQualificationFromWorkerRequest struct {
 
 // Send marshals and sends the DisassociateQualificationFromWorker API request.
 func (r DisassociateQualificationFromWorkerRequest) Send() (*DisassociateQualificationFromWorkerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,6 +846,10 @@ type GetAssignmentRequest struct {
 
 // Send marshals and sends the GetAssignment API request.
 func (r GetAssignmentRequest) Send() (*GetAssignmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -840,6 +896,10 @@ type GetFileUploadURLRequest struct {
 
 // Send marshals and sends the GetFileUploadURL API request.
 func (r GetFileUploadURLRequest) Send() (*GetFileUploadURLOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -892,6 +952,10 @@ type GetHITRequest struct {
 
 // Send marshals and sends the GetHIT API request.
 func (r GetHITRequest) Send() (*GetHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -938,6 +1002,10 @@ type GetQualificationScoreRequest struct {
 
 // Send marshals and sends the GetQualificationScore API request.
 func (r GetQualificationScoreRequest) Send() (*GetQualificationScoreOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,6 +1060,10 @@ type GetQualificationTypeRequest struct {
 
 // Send marshals and sends the GetQualificationType API request.
 func (r GetQualificationTypeRequest) Send() (*GetQualificationTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1039,6 +1111,10 @@ type ListAssignmentsForHITRequest struct {
 
 // Send marshals and sends the ListAssignmentsForHIT API request.
 func (r ListAssignmentsForHITRequest) Send() (*ListAssignmentsForHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,6 +1237,10 @@ type ListBonusPaymentsRequest struct {
 
 // Send marshals and sends the ListBonusPayments API request.
 func (r ListBonusPaymentsRequest) Send() (*ListBonusPaymentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1264,6 +1344,10 @@ type ListHITsRequest struct {
 
 // Send marshals and sends the ListHITs API request.
 func (r ListHITsRequest) Send() (*ListHITsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1368,6 +1452,10 @@ type ListHITsForQualificationTypeRequest struct {
 
 // Send marshals and sends the ListHITsForQualificationType API request.
 func (r ListHITsForQualificationTypeRequest) Send() (*ListHITsForQualificationTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1473,6 +1561,10 @@ type ListQualificationRequestsRequest struct {
 
 // Send marshals and sends the ListQualificationRequests API request.
 func (r ListQualificationRequestsRequest) Send() (*ListQualificationRequestsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1578,6 +1670,10 @@ type ListQualificationTypesRequest struct {
 
 // Send marshals and sends the ListQualificationTypes API request.
 func (r ListQualificationTypesRequest) Send() (*ListQualificationTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1683,6 +1779,10 @@ type ListReviewPolicyResultsForHITRequest struct {
 
 // Send marshals and sends the ListReviewPolicyResultsForHIT API request.
 func (r ListReviewPolicyResultsForHITRequest) Send() (*ListReviewPolicyResultsForHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1789,6 +1889,10 @@ type ListReviewableHITsRequest struct {
 
 // Send marshals and sends the ListReviewableHITs API request.
 func (r ListReviewableHITsRequest) Send() (*ListReviewableHITsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1893,6 +1997,10 @@ type ListWorkerBlocksRequest struct {
 
 // Send marshals and sends the ListWorkerBlocks API request.
 func (r ListWorkerBlocksRequest) Send() (*ListWorkerBlocksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1996,6 +2104,10 @@ type ListWorkersWithQualificationTypeRequest struct {
 
 // Send marshals and sends the ListWorkersWithQualificationType API request.
 func (r ListWorkersWithQualificationTypeRequest) Send() (*ListWorkersWithQualificationTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2099,6 +2211,10 @@ type NotifyWorkersRequest struct {
 
 // Send marshals and sends the NotifyWorkers API request.
 func (r NotifyWorkersRequest) Send() (*NotifyWorkersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2149,6 +2265,10 @@ type RejectAssignmentRequest struct {
 
 // Send marshals and sends the RejectAssignment API request.
 func (r RejectAssignmentRequest) Send() (*RejectAssignmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2203,6 +2323,10 @@ type RejectQualificationRequestRequest struct {
 
 // Send marshals and sends the RejectQualificationRequest API request.
 func (r RejectQualificationRequestRequest) Send() (*RejectQualificationRequestOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2252,6 +2376,10 @@ type SendBonusRequest struct {
 
 // Send marshals and sends the SendBonus API request.
 func (r SendBonusRequest) Send() (*SendBonusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2306,6 +2434,10 @@ type SendTestEventNotificationRequest struct {
 
 // Send marshals and sends the SendTestEventNotification API request.
 func (r SendTestEventNotificationRequest) Send() (*SendTestEventNotificationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2357,6 +2489,10 @@ type UpdateExpirationForHITRequest struct {
 
 // Send marshals and sends the UpdateExpirationForHIT API request.
 func (r UpdateExpirationForHITRequest) Send() (*UpdateExpirationForHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2405,6 +2541,10 @@ type UpdateHITReviewStatusRequest struct {
 
 // Send marshals and sends the UpdateHITReviewStatus API request.
 func (r UpdateHITReviewStatusRequest) Send() (*UpdateHITReviewStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2453,6 +2593,10 @@ type UpdateHITTypeOfHITRequest struct {
 
 // Send marshals and sends the UpdateHITTypeOfHIT API request.
 func (r UpdateHITTypeOfHITRequest) Send() (*UpdateHITTypeOfHITOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2502,6 +2646,10 @@ type UpdateNotificationSettingsRequest struct {
 
 // Send marshals and sends the UpdateNotificationSettings API request.
 func (r UpdateNotificationSettingsRequest) Send() (*UpdateNotificationSettingsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2557,6 +2705,10 @@ type UpdateQualificationTypeRequest struct {
 
 // Send marshals and sends the UpdateQualificationType API request.
 func (r UpdateQualificationTypeRequest) Send() (*UpdateQualificationTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

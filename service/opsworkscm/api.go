@@ -19,6 +19,10 @@ type AssociateNodeRequest struct {
 
 // Send marshals and sends the AssociateNode API request.
 func (r AssociateNodeRequest) Send() (*AssociateNodeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -77,6 +81,10 @@ type CreateBackupRequest struct {
 
 // Send marshals and sends the CreateBackup API request.
 func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,6 +144,10 @@ type CreateServerRequest struct {
 
 // Send marshals and sends the CreateServer API request.
 func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -202,6 +214,10 @@ type DeleteBackupRequest struct {
 
 // Send marshals and sends the DeleteBackup API request.
 func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -253,6 +269,10 @@ type DeleteServerRequest struct {
 
 // Send marshals and sends the DeleteServer API request.
 func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -358,6 +378,10 @@ type DescribeBackupsRequest struct {
 
 // Send marshals and sends the DescribeBackups API request.
 func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -410,6 +434,10 @@ type DescribeEventsRequest struct {
 
 // Send marshals and sends the DescribeEvents API request.
 func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,6 +490,10 @@ type DescribeNodeAssociationStatusRequest struct {
 
 // Send marshals and sends the DescribeNodeAssociationStatus API request.
 func (r DescribeNodeAssociationStatusRequest) Send() (*DescribeNodeAssociationStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -512,6 +544,10 @@ type DescribeServersRequest struct {
 
 // Send marshals and sends the DescribeServers API request.
 func (r DescribeServersRequest) Send() (*DescribeServersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -565,6 +601,10 @@ type DisassociateNodeRequest struct {
 
 // Send marshals and sends the DisassociateNode API request.
 func (r DisassociateNodeRequest) Send() (*DisassociateNodeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,6 +659,10 @@ type RestoreServerRequest struct {
 
 // Send marshals and sends the RestoreServer API request.
 func (r RestoreServerRequest) Send() (*RestoreServerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -675,6 +719,10 @@ type StartMaintenanceRequest struct {
 
 // Send marshals and sends the StartMaintenance API request.
 func (r StartMaintenanceRequest) Send() (*StartMaintenanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -729,6 +777,10 @@ type UpdateServerRequest struct {
 
 // Send marshals and sends the UpdateServer API request.
 func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -777,6 +829,10 @@ type UpdateServerEngineAttributesRequest struct {
 
 // Send marshals and sends the UpdateServerEngineAttributes API request.
 func (r UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

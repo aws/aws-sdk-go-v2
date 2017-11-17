@@ -22,6 +22,10 @@ type AddTagsToStreamRequest struct {
 
 // Send marshals and sends the AddTagsToStream API request.
 func (r AddTagsToStreamRequest) Send() (*AddTagsToStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,6 +78,10 @@ type CreateStreamRequest struct {
 
 // Send marshals and sends the CreateStream API request.
 func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -159,6 +167,10 @@ type DecreaseStreamRetentionPeriodRequest struct {
 
 // Send marshals and sends the DecreaseStreamRetentionPeriod API request.
 func (r DecreaseStreamRetentionPeriodRequest) Send() (*DecreaseStreamRetentionPeriodOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,6 +225,10 @@ type DeleteStreamRequest struct {
 
 // Send marshals and sends the DeleteStream API request.
 func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -331,6 +347,10 @@ type DescribeStreamRequest struct {
 
 // Send marshals and sends the DescribeStream API request.
 func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -451,6 +471,10 @@ type DisableEnhancedMonitoringRequest struct {
 
 // Send marshals and sends the DisableEnhancedMonitoring API request.
 func (r DisableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -497,6 +521,10 @@ type EnableEnhancedMonitoringRequest struct {
 
 // Send marshals and sends the EnableEnhancedMonitoring API request.
 func (r EnableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -543,6 +571,10 @@ type GetRecordsRequest struct {
 
 // Send marshals and sends the GetRecords API request.
 func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -641,6 +673,10 @@ type GetShardIteratorRequest struct {
 
 // Send marshals and sends the GetShardIterator API request.
 func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -724,6 +760,10 @@ type IncreaseStreamRetentionPeriodRequest struct {
 
 // Send marshals and sends the IncreaseStreamRetentionPeriod API request.
 func (r IncreaseStreamRetentionPeriodRequest) Send() (*IncreaseStreamRetentionPeriodOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -782,6 +822,10 @@ type ListStreamsRequest struct {
 
 // Send marshals and sends the ListStreams API request.
 func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -899,6 +943,10 @@ type ListTagsForStreamRequest struct {
 
 // Send marshals and sends the ListTagsForStream API request.
 func (r ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -945,6 +993,10 @@ type MergeShardsRequest struct {
 
 // Send marshals and sends the MergeShards API request.
 func (r MergeShardsRequest) Send() (*MergeShardsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1028,6 +1080,10 @@ type PutRecordRequest struct {
 
 // Send marshals and sends the PutRecord API request.
 func (r PutRecordRequest) Send() (*PutRecordOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1112,6 +1168,10 @@ type PutRecordsRequest struct {
 
 // Send marshals and sends the PutRecords API request.
 func (r PutRecordsRequest) Send() (*PutRecordsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1216,6 +1276,10 @@ type RemoveTagsFromStreamRequest struct {
 
 // Send marshals and sends the RemoveTagsFromStream API request.
 func (r RemoveTagsFromStreamRequest) Send() (*RemoveTagsFromStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1267,6 +1331,10 @@ type SplitShardRequest struct {
 
 // Send marshals and sends the SplitShard API request.
 func (r SplitShardRequest) Send() (*SplitShardOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1359,6 +1427,10 @@ type StartStreamEncryptionRequest struct {
 
 // Send marshals and sends the StartStreamEncryption API request.
 func (r StartStreamEncryptionRequest) Send() (*StartStreamEncryptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1424,6 +1496,10 @@ type StopStreamEncryptionRequest struct {
 
 // Send marshals and sends the StopStreamEncryption API request.
 func (r StopStreamEncryptionRequest) Send() (*StopStreamEncryptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1489,6 +1565,10 @@ type UpdateShardCountRequest struct {
 
 // Send marshals and sends the UpdateShardCount API request.
 func (r UpdateShardCountRequest) Send() (*UpdateShardCountOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

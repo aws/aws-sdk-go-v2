@@ -22,6 +22,10 @@ type BulkPublishRequest struct {
 
 // Send marshals and sends the BulkPublish API request.
 func (r BulkPublishRequest) Send() (*BulkPublishOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,6 +78,10 @@ type DeleteDatasetRequest struct {
 
 // Send marshals and sends the DeleteDataset API request.
 func (r DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -126,6 +134,10 @@ type DescribeDatasetRequest struct {
 
 // Send marshals and sends the DescribeDataset API request.
 func (r DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -178,6 +190,10 @@ type DescribeIdentityPoolUsageRequest struct {
 
 // Send marshals and sends the DescribeIdentityPoolUsage API request.
 func (r DescribeIdentityPoolUsageRequest) Send() (*DescribeIdentityPoolUsageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -228,6 +244,10 @@ type DescribeIdentityUsageRequest struct {
 
 // Send marshals and sends the DescribeIdentityUsage API request.
 func (r DescribeIdentityUsageRequest) Send() (*DescribeIdentityUsageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -278,6 +298,10 @@ type GetBulkPublishDetailsRequest struct {
 
 // Send marshals and sends the GetBulkPublishDetails API request.
 func (r GetBulkPublishDetailsRequest) Send() (*GetBulkPublishDetailsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -327,6 +351,10 @@ type GetCognitoEventsRequest struct {
 
 // Send marshals and sends the GetCognitoEvents API request.
 func (r GetCognitoEventsRequest) Send() (*GetCognitoEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -377,6 +405,10 @@ type GetIdentityPoolConfigurationRequest struct {
 
 // Send marshals and sends the GetIdentityPoolConfiguration API request.
 func (r GetIdentityPoolConfigurationRequest) Send() (*GetIdentityPoolConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -426,6 +458,10 @@ type ListDatasetsRequest struct {
 
 // Send marshals and sends the ListDatasets API request.
 func (r ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -528,6 +564,10 @@ type ListRecordsRequest struct {
 
 // Send marshals and sends the ListRecords API request.
 func (r ListRecordsRequest) Send() (*ListRecordsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -581,6 +621,10 @@ type RegisterDeviceRequest struct {
 
 // Send marshals and sends the RegisterDevice API request.
 func (r RegisterDeviceRequest) Send() (*RegisterDeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -630,6 +674,10 @@ type SetCognitoEventsRequest struct {
 
 // Send marshals and sends the SetCognitoEvents API request.
 func (r SetCognitoEventsRequest) Send() (*SetCognitoEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,6 +732,10 @@ type SetIdentityPoolConfigurationRequest struct {
 
 // Send marshals and sends the SetIdentityPoolConfiguration API request.
 func (r SetIdentityPoolConfigurationRequest) Send() (*SetIdentityPoolConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -733,6 +785,10 @@ type SubscribeToDatasetRequest struct {
 
 // Send marshals and sends the SubscribeToDataset API request.
 func (r SubscribeToDatasetRequest) Send() (*SubscribeToDatasetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -783,6 +839,10 @@ type UnsubscribeFromDatasetRequest struct {
 
 // Send marshals and sends the UnsubscribeFromDataset API request.
 func (r UnsubscribeFromDatasetRequest) Send() (*UnsubscribeFromDatasetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -833,6 +893,10 @@ type UpdateRecordsRequest struct {
 
 // Send marshals and sends the UpdateRecords API request.
 func (r UpdateRecordsRequest) Send() (*UpdateRecordsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -20,6 +20,10 @@ type AssociateConfigurationItemsToApplicationRequest struct {
 
 // Send marshals and sends the AssociateConfigurationItemsToApplication API request.
 func (r AssociateConfigurationItemsToApplicationRequest) Send() (*AssociateConfigurationItemsToApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,6 +70,10 @@ type CreateApplicationRequest struct {
 
 // Send marshals and sends the CreateApplication API request.
 func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,6 +120,10 @@ type CreateTagsRequest struct {
 
 // Send marshals and sends the CreateTags API request.
 func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,6 +172,10 @@ type DeleteApplicationsRequest struct {
 
 // Send marshals and sends the DeleteApplications API request.
 func (r DeleteApplicationsRequest) Send() (*DeleteApplicationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -207,6 +223,10 @@ type DeleteTagsRequest struct {
 
 // Send marshals and sends the DeleteTags API request.
 func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -254,6 +274,10 @@ type DescribeAgentsRequest struct {
 
 // Send marshals and sends the DescribeAgents API request.
 func (r DescribeAgentsRequest) Send() (*DescribeAgentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -301,6 +325,10 @@ type DescribeConfigurationsRequest struct {
 
 // Send marshals and sends the DescribeConfigurations API request.
 func (r DescribeConfigurationsRequest) Send() (*DescribeConfigurationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,6 +434,10 @@ type DescribeExportTasksRequest struct {
 
 // Send marshals and sends the DescribeExportTasks API request.
 func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -453,6 +485,10 @@ type DescribeTagsRequest struct {
 
 // Send marshals and sends the DescribeTags API request.
 func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -500,6 +536,10 @@ type DisassociateConfigurationItemsFromApplicationRequest struct {
 
 // Send marshals and sends the DisassociateConfigurationItemsFromApplication API request.
 func (r DisassociateConfigurationItemsFromApplicationRequest) Send() (*DisassociateConfigurationItemsFromApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,6 +687,10 @@ type ListConfigurationsRequest struct {
 
 // Send marshals and sends the ListConfigurations API request.
 func (r ListConfigurationsRequest) Send() (*ListConfigurationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -694,6 +738,10 @@ type ListServerNeighborsRequest struct {
 
 // Send marshals and sends the ListServerNeighbors API request.
 func (r ListServerNeighborsRequest) Send() (*ListServerNeighborsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -741,6 +789,10 @@ type StartDataCollectionByAgentIdsRequest struct {
 
 // Send marshals and sends the StartDataCollectionByAgentIds API request.
 func (r StartDataCollectionByAgentIdsRequest) Send() (*StartDataCollectionByAgentIdsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,6 +839,10 @@ type StartExportTaskRequest struct {
 
 // Send marshals and sends the StartExportTask API request.
 func (r StartExportTaskRequest) Send() (*StartExportTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -843,6 +899,10 @@ type StopDataCollectionByAgentIdsRequest struct {
 
 // Send marshals and sends the StopDataCollectionByAgentIds API request.
 func (r StopDataCollectionByAgentIdsRequest) Send() (*StopDataCollectionByAgentIdsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -889,6 +949,10 @@ type UpdateApplicationRequest struct {
 
 // Send marshals and sends the UpdateApplication API request.
 func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

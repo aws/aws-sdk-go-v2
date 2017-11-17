@@ -22,6 +22,10 @@ type AddClientIDToOpenIDConnectProviderRequest struct {
 
 // Send marshals and sends the AddClientIDToOpenIDConnectProvider API request.
 func (r AddClientIDToOpenIDConnectProviderRequest) Send() (*AddClientIDToOpenIDConnectProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,6 +78,10 @@ type AddRoleToInstanceProfileRequest struct {
 
 // Send marshals and sends the AddRoleToInstanceProfile API request.
 func (r AddRoleToInstanceProfileRequest) Send() (*AddRoleToInstanceProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -130,6 +138,10 @@ type AddUserToGroupRequest struct {
 
 // Send marshals and sends the AddUserToGroup API request.
 func (r AddUserToGroupRequest) Send() (*AddUserToGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -178,6 +190,10 @@ type AttachGroupPolicyRequest struct {
 
 // Send marshals and sends the AttachGroupPolicy API request.
 func (r AttachGroupPolicyRequest) Send() (*AttachGroupPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -233,6 +249,10 @@ type AttachRolePolicyRequest struct {
 
 // Send marshals and sends the AttachRolePolicy API request.
 func (r AttachRolePolicyRequest) Send() (*AttachRolePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -292,6 +312,10 @@ type AttachUserPolicyRequest struct {
 
 // Send marshals and sends the AttachUserPolicy API request.
 func (r AttachUserPolicyRequest) Send() (*AttachUserPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,6 +371,10 @@ type ChangePasswordRequest struct {
 
 // Send marshals and sends the ChangePassword API request.
 func (r ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,6 +428,10 @@ type CreateAccessKeyRequest struct {
 
 // Send marshals and sends the CreateAccessKey API request.
 func (r CreateAccessKeyRequest) Send() (*CreateAccessKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,6 +494,10 @@ type CreateAccountAliasRequest struct {
 
 // Send marshals and sends the CreateAccountAlias API request.
 func (r CreateAccountAliasRequest) Send() (*CreateAccountAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -512,6 +548,10 @@ type CreateGroupRequest struct {
 
 // Send marshals and sends the CreateGroup API request.
 func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -562,6 +602,10 @@ type CreateInstanceProfileRequest struct {
 
 // Send marshals and sends the CreateInstanceProfile API request.
 func (r CreateInstanceProfileRequest) Send() (*CreateInstanceProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -613,6 +657,10 @@ type CreateLoginProfileRequest struct {
 
 // Send marshals and sends the CreateLoginProfile API request.
 func (r CreateLoginProfileRequest) Send() (*CreateLoginProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -662,6 +710,10 @@ type CreateOpenIDConnectProviderRequest struct {
 
 // Send marshals and sends the CreateOpenIDConnectProvider API request.
 func (r CreateOpenIDConnectProviderRequest) Send() (*CreateOpenIDConnectProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -724,6 +776,10 @@ type CreatePolicyRequest struct {
 
 // Send marshals and sends the CreatePolicy API request.
 func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,6 +835,10 @@ type CreatePolicyVersionRequest struct {
 
 // Send marshals and sends the CreatePolicyVersion API request.
 func (r CreatePolicyVersionRequest) Send() (*CreatePolicyVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -836,6 +896,10 @@ type CreateRoleRequest struct {
 
 // Send marshals and sends the CreateRole API request.
 func (r CreateRoleRequest) Send() (*CreateRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -886,6 +950,10 @@ type CreateSAMLProviderRequest struct {
 
 // Send marshals and sends the CreateSAMLProvider API request.
 func (r CreateSAMLProviderRequest) Send() (*CreateSAMLProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -953,6 +1021,10 @@ type CreateServiceLinkedRoleRequest struct {
 
 // Send marshals and sends the CreateServiceLinkedRole API request.
 func (r CreateServiceLinkedRoleRequest) Send() (*CreateServiceLinkedRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1012,6 +1084,10 @@ type CreateServiceSpecificCredentialRequest struct {
 
 // Send marshals and sends the CreateServiceSpecificCredential API request.
 func (r CreateServiceSpecificCredentialRequest) Send() (*CreateServiceSpecificCredentialOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1071,6 +1147,10 @@ type CreateUserRequest struct {
 
 // Send marshals and sends the CreateUser API request.
 func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1121,6 +1201,10 @@ type CreateVirtualMFADeviceRequest struct {
 
 // Send marshals and sends the CreateVirtualMFADevice API request.
 func (r CreateVirtualMFADeviceRequest) Send() (*CreateVirtualMFADeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1180,6 +1264,10 @@ type DeactivateMFADeviceRequest struct {
 
 // Send marshals and sends the DeactivateMFADevice API request.
 func (r DeactivateMFADeviceRequest) Send() (*DeactivateMFADeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1233,6 +1321,10 @@ type DeleteAccessKeyRequest struct {
 
 // Send marshals and sends the DeleteAccessKey API request.
 func (r DeleteAccessKeyRequest) Send() (*DeleteAccessKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1286,6 +1378,10 @@ type DeleteAccountAliasRequest struct {
 
 // Send marshals and sends the DeleteAccountAlias API request.
 func (r DeleteAccountAliasRequest) Send() (*DeleteAccountAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1384,6 +1480,10 @@ type DeleteGroupRequest struct {
 
 // Send marshals and sends the DeleteGroup API request.
 func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1433,6 +1533,10 @@ type DeleteGroupPolicyRequest struct {
 
 // Send marshals and sends the DeleteGroupPolicy API request.
 func (r DeleteGroupPolicyRequest) Send() (*DeleteGroupPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1487,6 +1591,10 @@ type DeleteInstanceProfileRequest struct {
 
 // Send marshals and sends the DeleteInstanceProfile API request.
 func (r DeleteInstanceProfileRequest) Send() (*DeleteInstanceProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1544,6 +1652,10 @@ type DeleteLoginProfileRequest struct {
 
 // Send marshals and sends the DeleteLoginProfile API request.
 func (r DeleteLoginProfileRequest) Send() (*DeleteLoginProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1598,6 +1710,10 @@ type DeleteOpenIDConnectProviderRequest struct {
 
 // Send marshals and sends the DeleteOpenIDConnectProvider API request.
 func (r DeleteOpenIDConnectProviderRequest) Send() (*DeleteOpenIDConnectProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1653,6 +1769,10 @@ type DeletePolicyRequest struct {
 
 // Send marshals and sends the DeletePolicy API request.
 func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1723,6 +1843,10 @@ type DeletePolicyVersionRequest struct {
 
 // Send marshals and sends the DeletePolicyVersion API request.
 func (r DeletePolicyVersionRequest) Send() (*DeletePolicyVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1779,6 +1903,10 @@ type DeleteRoleRequest struct {
 
 // Send marshals and sends the DeleteRole API request.
 func (r DeleteRoleRequest) Send() (*DeleteRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1832,6 +1960,10 @@ type DeleteRolePolicyRequest struct {
 
 // Send marshals and sends the DeleteRolePolicy API request.
 func (r DeleteRolePolicyRequest) Send() (*DeleteRolePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1886,6 +2018,10 @@ type DeleteSAMLProviderRequest struct {
 
 // Send marshals and sends the DeleteSAMLProvider API request.
 func (r DeleteSAMLProviderRequest) Send() (*DeleteSAMLProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1941,6 +2077,10 @@ type DeleteSSHPublicKeyRequest struct {
 
 // Send marshals and sends the DeleteSSHPublicKey API request.
 func (r DeleteSSHPublicKeyRequest) Send() (*DeleteSSHPublicKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1995,6 +2135,10 @@ type DeleteServerCertificateRequest struct {
 
 // Send marshals and sends the DeleteServerCertificate API request.
 func (r DeleteServerCertificateRequest) Send() (*DeleteServerCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2058,6 +2202,10 @@ type DeleteServiceLinkedRoleRequest struct {
 
 // Send marshals and sends the DeleteServiceLinkedRole API request.
 func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2123,6 +2271,10 @@ type DeleteServiceSpecificCredentialRequest struct {
 
 // Send marshals and sends the DeleteServiceSpecificCredential API request.
 func (r DeleteServiceSpecificCredentialRequest) Send() (*DeleteServiceSpecificCredentialOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2171,6 +2323,10 @@ type DeleteSigningCertificateRequest struct {
 
 // Send marshals and sends the DeleteSigningCertificate API request.
 func (r DeleteSigningCertificateRequest) Send() (*DeleteSigningCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2224,6 +2380,10 @@ type DeleteUserRequest struct {
 
 // Send marshals and sends the DeleteUser API request.
 func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2273,6 +2433,10 @@ type DeleteUserPolicyRequest struct {
 
 // Send marshals and sends the DeleteUserPolicy API request.
 func (r DeleteUserPolicyRequest) Send() (*DeleteUserPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2327,6 +2491,10 @@ type DeleteVirtualMFADeviceRequest struct {
 
 // Send marshals and sends the DeleteVirtualMFADevice API request.
 func (r DeleteVirtualMFADeviceRequest) Send() (*DeleteVirtualMFADeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2378,6 +2546,10 @@ type DetachGroupPolicyRequest struct {
 
 // Send marshals and sends the DetachGroupPolicy API request.
 func (r DetachGroupPolicyRequest) Send() (*DetachGroupPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2431,6 +2603,10 @@ type DetachRolePolicyRequest struct {
 
 // Send marshals and sends the DetachRolePolicy API request.
 func (r DetachRolePolicyRequest) Send() (*DetachRolePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2484,6 +2660,10 @@ type DetachUserPolicyRequest struct {
 
 // Send marshals and sends the DetachUserPolicy API request.
 func (r DetachUserPolicyRequest) Send() (*DetachUserPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2537,6 +2717,10 @@ type EnableMFADeviceRequest struct {
 
 // Send marshals and sends the EnableMFADevice API request.
 func (r EnableMFADeviceRequest) Send() (*EnableMFADeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2635,6 +2819,10 @@ type GetAccessKeyLastUsedRequest struct {
 
 // Send marshals and sends the GetAccessKeyLastUsed API request.
 func (r GetAccessKeyLastUsedRequest) Send() (*GetAccessKeyLastUsedOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2684,6 +2872,10 @@ type GetAccountAuthorizationDetailsRequest struct {
 
 // Send marshals and sends the GetAccountAuthorizationDetails API request.
 func (r GetAccountAuthorizationDetailsRequest) Send() (*GetAccountAuthorizationDetailsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2889,6 +3081,10 @@ type GetContextKeysForCustomPolicyRequest struct {
 
 // Send marshals and sends the GetContextKeysForCustomPolicy API request.
 func (r GetContextKeysForCustomPolicyRequest) Send() (*GetContextKeysForPrincipalPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2944,6 +3140,10 @@ type GetContextKeysForPrincipalPolicyRequest struct {
 
 // Send marshals and sends the GetContextKeysForPrincipalPolicy API request.
 func (r GetContextKeysForPrincipalPolicyRequest) Send() (*GetContextKeysForPrincipalPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3054,6 +3254,10 @@ type GetGroupRequest struct {
 
 // Send marshals and sends the GetGroup API request.
 func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3157,6 +3361,10 @@ type GetGroupPolicyRequest struct {
 
 // Send marshals and sends the GetGroupPolicy API request.
 func (r GetGroupPolicyRequest) Send() (*GetGroupPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3219,6 +3427,10 @@ type GetInstanceProfileRequest struct {
 
 // Send marshals and sends the GetInstanceProfile API request.
 func (r GetInstanceProfileRequest) Send() (*GetInstanceProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3268,6 +3480,10 @@ type GetLoginProfileRequest struct {
 
 // Send marshals and sends the GetLoginProfile API request.
 func (r GetLoginProfileRequest) Send() (*GetLoginProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3316,6 +3532,10 @@ type GetOpenIDConnectProviderRequest struct {
 
 // Send marshals and sends the GetOpenIDConnectProvider API request.
 func (r GetOpenIDConnectProviderRequest) Send() (*GetOpenIDConnectProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3363,6 +3583,10 @@ type GetPolicyRequest struct {
 
 // Send marshals and sends the GetPolicy API request.
 func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3422,6 +3646,10 @@ type GetPolicyVersionRequest struct {
 
 // Send marshals and sends the GetPolicyVersion API request.
 func (r GetPolicyVersionRequest) Send() (*GetPolicyVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3489,6 +3717,10 @@ type GetRoleRequest struct {
 
 // Send marshals and sends the GetRole API request.
 func (r GetRoleRequest) Send() (*GetRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3543,6 +3775,10 @@ type GetRolePolicyRequest struct {
 
 // Send marshals and sends the GetRolePolicy API request.
 func (r GetRolePolicyRequest) Send() (*GetRolePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3608,6 +3844,10 @@ type GetSAMLProviderRequest struct {
 
 // Send marshals and sends the GetSAMLProvider API request.
 func (r GetSAMLProviderRequest) Send() (*GetSAMLProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3657,6 +3897,10 @@ type GetSSHPublicKeyRequest struct {
 
 // Send marshals and sends the GetSSHPublicKey API request.
 func (r GetSSHPublicKeyRequest) Send() (*GetSSHPublicKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3709,6 +3953,10 @@ type GetServerCertificateRequest struct {
 
 // Send marshals and sends the GetServerCertificate API request.
 func (r GetServerCertificateRequest) Send() (*GetServerCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3760,6 +4008,10 @@ type GetServiceLinkedRoleDeletionStatusRequest struct {
 
 // Send marshals and sends the GetServiceLinkedRoleDeletionStatus API request.
 func (r GetServiceLinkedRoleDeletionStatusRequest) Send() (*GetServiceLinkedRoleDeletionStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3810,6 +4062,10 @@ type GetUserRequest struct {
 
 // Send marshals and sends the GetUser API request.
 func (r GetUserRequest) Send() (*GetUserOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3860,6 +4116,10 @@ type GetUserPolicyRequest struct {
 
 // Send marshals and sends the GetUserPolicy API request.
 func (r GetUserPolicyRequest) Send() (*GetUserPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3922,6 +4182,10 @@ type ListAccessKeysRequest struct {
 
 // Send marshals and sends the ListAccessKeys API request.
 func (r ListAccessKeysRequest) Send() (*ListAccessKeysOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4036,6 +4300,10 @@ type ListAccountAliasesRequest struct {
 
 // Send marshals and sends the ListAccountAliases API request.
 func (r ListAccountAliasesRequest) Send() (*ListAccountAliasesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4141,6 +4409,10 @@ type ListAttachedGroupPoliciesRequest struct {
 
 // Send marshals and sends the ListAttachedGroupPolicies API request.
 func (r ListAttachedGroupPoliciesRequest) Send() (*ListAttachedGroupPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4254,6 +4526,10 @@ type ListAttachedRolePoliciesRequest struct {
 
 // Send marshals and sends the ListAttachedRolePolicies API request.
 func (r ListAttachedRolePoliciesRequest) Send() (*ListAttachedRolePoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4367,6 +4643,10 @@ type ListAttachedUserPoliciesRequest struct {
 
 // Send marshals and sends the ListAttachedUserPolicies API request.
 func (r ListAttachedUserPoliciesRequest) Send() (*ListAttachedUserPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4480,6 +4760,10 @@ type ListEntitiesForPolicyRequest struct {
 
 // Send marshals and sends the ListEntitiesForPolicy API request.
 func (r ListEntitiesForPolicyRequest) Send() (*ListEntitiesForPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4590,6 +4874,10 @@ type ListGroupPoliciesRequest struct {
 
 // Send marshals and sends the ListGroupPolicies API request.
 func (r ListGroupPoliciesRequest) Send() (*ListGroupPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4703,6 +4991,10 @@ type ListGroupsRequest struct {
 
 // Send marshals and sends the ListGroups API request.
 func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4807,6 +5099,10 @@ type ListGroupsForUserRequest struct {
 
 // Send marshals and sends the ListGroupsForUser API request.
 func (r ListGroupsForUserRequest) Send() (*ListGroupsForUserOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4911,6 +5207,10 @@ type ListInstanceProfilesRequest struct {
 
 // Send marshals and sends the ListInstanceProfiles API request.
 func (r ListInstanceProfilesRequest) Send() (*ListInstanceProfilesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5017,6 +5317,10 @@ type ListInstanceProfilesForRoleRequest struct {
 
 // Send marshals and sends the ListInstanceProfilesForRole API request.
 func (r ListInstanceProfilesForRoleRequest) Send() (*ListInstanceProfilesForRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5123,6 +5427,10 @@ type ListMFADevicesRequest struct {
 
 // Send marshals and sends the ListMFADevices API request.
 func (r ListMFADevicesRequest) Send() (*ListMFADevicesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5277,6 +5585,10 @@ type ListPoliciesRequest struct {
 
 // Send marshals and sends the ListPolicies API request.
 func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5391,6 +5703,10 @@ type ListPolicyVersionsRequest struct {
 
 // Send marshals and sends the ListPolicyVersions API request.
 func (r ListPolicyVersionsRequest) Send() (*ListPolicyVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5498,6 +5814,10 @@ type ListRolePoliciesRequest struct {
 
 // Send marshals and sends the ListRolePolicies API request.
 func (r ListRolePoliciesRequest) Send() (*ListRolePoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5610,6 +5930,10 @@ type ListRolesRequest struct {
 
 // Send marshals and sends the ListRoles API request.
 func (r ListRolesRequest) Send() (*ListRolesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5764,6 +6088,10 @@ type ListSSHPublicKeysRequest struct {
 
 // Send marshals and sends the ListSSHPublicKeys API request.
 func (r ListSSHPublicKeysRequest) Send() (*ListSSHPublicKeysOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5876,6 +6204,10 @@ type ListServerCertificatesRequest struct {
 
 // Send marshals and sends the ListServerCertificates API request.
 func (r ListServerCertificatesRequest) Send() (*ListServerCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5986,6 +6318,10 @@ type ListServiceSpecificCredentialsRequest struct {
 
 // Send marshals and sends the ListServiceSpecificCredentials API request.
 func (r ListServiceSpecificCredentialsRequest) Send() (*ListServiceSpecificCredentialsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6038,6 +6374,10 @@ type ListSigningCertificatesRequest struct {
 
 // Send marshals and sends the ListSigningCertificates API request.
 func (r ListSigningCertificatesRequest) Send() (*ListSigningCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6150,6 +6490,10 @@ type ListUserPoliciesRequest struct {
 
 // Send marshals and sends the ListUserPolicies API request.
 func (r ListUserPoliciesRequest) Send() (*ListUserPoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6261,6 +6605,10 @@ type ListUsersRequest struct {
 
 // Send marshals and sends the ListUsers API request.
 func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6367,6 +6715,10 @@ type ListVirtualMFADevicesRequest struct {
 
 // Send marshals and sends the ListVirtualMFADevices API request.
 func (r ListVirtualMFADevicesRequest) Send() (*ListVirtualMFADevicesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6474,6 +6826,10 @@ type PutGroupPolicyRequest struct {
 
 // Send marshals and sends the PutGroupPolicy API request.
 func (r PutGroupPolicyRequest) Send() (*PutGroupPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6538,6 +6894,10 @@ type PutRolePolicyRequest struct {
 
 // Send marshals and sends the PutRolePolicy API request.
 func (r PutRolePolicyRequest) Send() (*PutRolePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6608,6 +6968,10 @@ type PutUserPolicyRequest struct {
 
 // Send marshals and sends the PutUserPolicy API request.
 func (r PutUserPolicyRequest) Send() (*PutUserPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6672,6 +7036,10 @@ type RemoveClientIDFromOpenIDConnectProviderRequest struct {
 
 // Send marshals and sends the RemoveClientIDFromOpenIDConnectProvider API request.
 func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send() (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6725,6 +7093,10 @@ type RemoveRoleFromInstanceProfileRequest struct {
 
 // Send marshals and sends the RemoveRoleFromInstanceProfile API request.
 func (r RemoveRoleFromInstanceProfileRequest) Send() (*RemoveRoleFromInstanceProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6782,6 +7154,10 @@ type RemoveUserFromGroupRequest struct {
 
 // Send marshals and sends the RemoveUserFromGroup API request.
 func (r RemoveUserFromGroupRequest) Send() (*RemoveUserFromGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6830,6 +7206,10 @@ type ResetServiceSpecificCredentialRequest struct {
 
 // Send marshals and sends the ResetServiceSpecificCredential API request.
 func (r ResetServiceSpecificCredentialRequest) Send() (*ResetServiceSpecificCredentialOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6879,6 +7259,10 @@ type ResyncMFADeviceRequest struct {
 
 // Send marshals and sends the ResyncMFADevice API request.
 func (r ResyncMFADeviceRequest) Send() (*ResyncMFADeviceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6932,6 +7316,10 @@ type SetDefaultPolicyVersionRequest struct {
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
 func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6989,6 +7377,10 @@ type SimulateCustomPolicyRequest struct {
 
 // Send marshals and sends the SimulateCustomPolicy API request.
 func (r SimulateCustomPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7107,6 +7499,10 @@ type SimulatePrincipalPolicyRequest struct {
 
 // Send marshals and sends the SimulatePrincipalPolicy API request.
 func (r SimulatePrincipalPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7235,6 +7631,10 @@ type UpdateAccessKeyRequest struct {
 
 // Send marshals and sends the UpdateAccessKey API request.
 func (r UpdateAccessKeyRequest) Send() (*UpdateAccessKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7293,6 +7693,10 @@ type UpdateAccountPasswordPolicyRequest struct {
 
 // Send marshals and sends the UpdateAccountPasswordPolicy API request.
 func (r UpdateAccountPasswordPolicyRequest) Send() (*UpdateAccountPasswordPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7350,6 +7754,10 @@ type UpdateAssumeRolePolicyRequest struct {
 
 // Send marshals and sends the UpdateAssumeRolePolicy API request.
 func (r UpdateAssumeRolePolicyRequest) Send() (*UpdateAssumeRolePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7401,6 +7809,10 @@ type UpdateGroupRequest struct {
 
 // Send marshals and sends the UpdateGroup API request.
 func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7459,6 +7871,10 @@ type UpdateLoginProfileRequest struct {
 
 // Send marshals and sends the UpdateLoginProfile API request.
 func (r UpdateLoginProfileRequest) Send() (*UpdateLoginProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7511,6 +7927,10 @@ type UpdateOpenIDConnectProviderThumbprintRequest struct {
 
 // Send marshals and sends the UpdateOpenIDConnectProviderThumbprint API request.
 func (r UpdateOpenIDConnectProviderThumbprintRequest) Send() (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7573,6 +7993,10 @@ type UpdateRoleDescriptionRequest struct {
 
 // Send marshals and sends the UpdateRoleDescription API request.
 func (r UpdateRoleDescriptionRequest) Send() (*UpdateRoleDescriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7619,6 +8043,10 @@ type UpdateSAMLProviderRequest struct {
 
 // Send marshals and sends the UpdateSAMLProvider API request.
 func (r UpdateSAMLProviderRequest) Send() (*UpdateSAMLProviderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7667,6 +8095,10 @@ type UpdateSSHPublicKeyRequest struct {
 
 // Send marshals and sends the UpdateSSHPublicKey API request.
 func (r UpdateSSHPublicKeyRequest) Send() (*UpdateSSHPublicKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7724,6 +8156,10 @@ type UpdateServerCertificateRequest struct {
 
 // Send marshals and sends the UpdateServerCertificate API request.
 func (r UpdateServerCertificateRequest) Send() (*UpdateServerCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7790,6 +8226,10 @@ type UpdateServiceSpecificCredentialRequest struct {
 
 // Send marshals and sends the UpdateServiceSpecificCredential API request.
 func (r UpdateServiceSpecificCredentialRequest) Send() (*UpdateServiceSpecificCredentialOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7841,6 +8281,10 @@ type UpdateSigningCertificateRequest struct {
 
 // Send marshals and sends the UpdateSigningCertificate API request.
 func (r UpdateSigningCertificateRequest) Send() (*UpdateSigningCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7896,6 +8340,10 @@ type UpdateUserRequest struct {
 
 // Send marshals and sends the UpdateUser API request.
 func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7955,6 +8403,10 @@ type UploadSSHPublicKeyRequest struct {
 
 // Send marshals and sends the UploadSSHPublicKey API request.
 func (r UploadSSHPublicKeyRequest) Send() (*UploadSSHPublicKeyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8007,6 +8459,10 @@ type UploadServerCertificateRequest struct {
 
 // Send marshals and sends the UploadServerCertificate API request.
 func (r UploadServerCertificateRequest) Send() (*UploadServerCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8078,6 +8534,10 @@ type UploadSigningCertificateRequest struct {
 
 // Send marshals and sends the UploadSigningCertificate API request.
 func (r UploadSigningCertificateRequest) Send() (*UploadSigningCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

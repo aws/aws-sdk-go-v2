@@ -65,6 +65,10 @@ type DeleteProjectRequest struct {
 
 // Send marshals and sends the DeleteProject API request.
 func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,6 +115,10 @@ type DescribeBundleRequest struct {
 
 // Send marshals and sends the DescribeBundle API request.
 func (r DescribeBundleRequest) Send() (*DescribeBundleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -157,6 +165,10 @@ type DescribeProjectRequest struct {
 
 // Send marshals and sends the DescribeProject API request.
 func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,6 +215,10 @@ type ExportBundleRequest struct {
 
 // Send marshals and sends the ExportBundle API request.
 func (r ExportBundleRequest) Send() (*ExportBundleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,6 +266,10 @@ type ExportProjectRequest struct {
 
 // Send marshals and sends the ExportProject API request.
 func (r ExportProjectRequest) Send() (*ExportProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -502,6 +522,10 @@ type UpdateProjectRequest struct {
 
 // Send marshals and sends the UpdateProject API request.
 func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

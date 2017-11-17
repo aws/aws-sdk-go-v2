@@ -1413,6 +1413,10 @@ type InputService11TestCaseOperation1Request struct {
 
 // Send marshals and sends the InputService11TestCaseOperation1 API request.
 func (r InputService11TestCaseOperation1Request) Send() (*InputService11TestShapeInputService11TestCaseOperation1Output, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1558,6 +1562,10 @@ type InputService12TestCaseOperation1Request struct {
 
 // Send marshals and sends the InputService12TestCaseOperation1 API request.
 func (r InputService12TestCaseOperation1Request) Send() (*InputService12TestShapeInputService12TestCaseOperation1Output, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -22,6 +22,10 @@ type BatchGetRepositoriesRequest struct {
 
 // Send marshals and sends the BatchGetRepositories API request.
 func (r BatchGetRepositoriesRequest) Send() (*BatchGetRepositoriesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,6 +78,10 @@ type CreateBranchRequest struct {
 
 // Send marshals and sends the CreateBranch API request.
 func (r CreateBranchRequest) Send() (*CreateBranchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,6 +133,10 @@ type CreateRepositoryRequest struct {
 
 // Send marshals and sends the CreateRepository API request.
 func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,6 +183,10 @@ type DeleteRepositoryRequest struct {
 
 // Send marshals and sends the DeleteRepository API request.
 func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -222,6 +238,10 @@ type GetBlobRequest struct {
 
 // Send marshals and sends the GetBlob API request.
 func (r GetBlobRequest) Send() (*GetBlobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -268,6 +288,10 @@ type GetBranchRequest struct {
 
 // Send marshals and sends the GetBranch API request.
 func (r GetBranchRequest) Send() (*GetBranchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -315,6 +339,10 @@ type GetCommitRequest struct {
 
 // Send marshals and sends the GetCommit API request.
 func (r GetCommitRequest) Send() (*GetCommitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -362,6 +390,10 @@ type GetDifferencesRequest struct {
 
 // Send marshals and sends the GetDifferences API request.
 func (r GetDifferencesRequest) Send() (*GetDifferencesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -466,6 +498,10 @@ type GetRepositoryRequest struct {
 
 // Send marshals and sends the GetRepository API request.
 func (r GetRepositoryRequest) Send() (*GetRepositoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -518,6 +554,10 @@ type GetRepositoryTriggersRequest struct {
 
 // Send marshals and sends the GetRepositoryTriggers API request.
 func (r GetRepositoryTriggersRequest) Send() (*GetRepositoryTriggersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -564,6 +604,10 @@ type ListBranchesRequest struct {
 
 // Send marshals and sends the ListBranches API request.
 func (r ListBranchesRequest) Send() (*ListBranchesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -768,6 +812,10 @@ type PutRepositoryTriggersRequest struct {
 
 // Send marshals and sends the PutRepositoryTriggers API request.
 func (r PutRepositoryTriggersRequest) Send() (*PutRepositoryTriggersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,6 +863,10 @@ type TestRepositoryTriggersRequest struct {
 
 // Send marshals and sends the TestRepositoryTriggers API request.
 func (r TestRepositoryTriggersRequest) Send() (*TestRepositoryTriggersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -864,6 +916,10 @@ type UpdateDefaultBranchRequest struct {
 
 // Send marshals and sends the UpdateDefaultBranch API request.
 func (r UpdateDefaultBranchRequest) Send() (*UpdateDefaultBranchOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -916,6 +972,10 @@ type UpdateRepositoryDescriptionRequest struct {
 
 // Send marshals and sends the UpdateRepositoryDescription API request.
 func (r UpdateRepositoryDescriptionRequest) Send() (*UpdateRepositoryDescriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -970,6 +1030,10 @@ type UpdateRepositoryNameRequest struct {
 
 // Send marshals and sends the UpdateRepositoryName API request.
 func (r UpdateRepositoryNameRequest) Send() (*UpdateRepositoryNameOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

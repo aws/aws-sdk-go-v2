@@ -19,6 +19,10 @@ type BatchGetNamedQueryRequest struct {
 
 // Send marshals and sends the BatchGetNamedQuery API request.
 func (r BatchGetNamedQueryRequest) Send() (*BatchGetNamedQueryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,6 +75,10 @@ type BatchGetQueryExecutionRequest struct {
 
 // Send marshals and sends the BatchGetQueryExecution API request.
 func (r BatchGetQueryExecutionRequest) Send() (*BatchGetQueryExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -121,6 +129,10 @@ type CreateNamedQueryRequest struct {
 
 // Send marshals and sends the CreateNamedQuery API request.
 func (r CreateNamedQueryRequest) Send() (*CreateNamedQueryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,6 +183,10 @@ type DeleteNamedQueryRequest struct {
 
 // Send marshals and sends the DeleteNamedQuery API request.
 func (r DeleteNamedQueryRequest) Send() (*DeleteNamedQueryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -221,6 +237,10 @@ type GetNamedQueryRequest struct {
 
 // Send marshals and sends the GetNamedQuery API request.
 func (r GetNamedQueryRequest) Send() (*GetNamedQueryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -267,6 +287,10 @@ type GetQueryExecutionRequest struct {
 
 // Send marshals and sends the GetQueryExecution API request.
 func (r GetQueryExecutionRequest) Send() (*GetQueryExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -314,6 +338,10 @@ type GetQueryResultsRequest struct {
 
 // Send marshals and sends the GetQueryResults API request.
 func (r GetQueryResultsRequest) Send() (*GetQueryResultsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -630,6 +658,10 @@ type StartQueryExecutionRequest struct {
 
 // Send marshals and sends the StartQueryExecution API request.
 func (r StartQueryExecutionRequest) Send() (*StartQueryExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -680,6 +712,10 @@ type StopQueryExecutionRequest struct {
 
 // Send marshals and sends the StopQueryExecution API request.
 func (r StopQueryExecutionRequest) Send() (*StopQueryExecutionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

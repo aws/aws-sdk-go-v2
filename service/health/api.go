@@ -19,6 +19,10 @@ type DescribeAffectedEntitiesRequest struct {
 
 // Send marshals and sends the DescribeAffectedEntities API request.
 func (r DescribeAffectedEntitiesRequest) Send() (*DescribeAffectedEntitiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -129,6 +133,10 @@ type DescribeEntityAggregatesRequest struct {
 
 // Send marshals and sends the DescribeEntityAggregates API request.
 func (r DescribeEntityAggregatesRequest) Send() (*DescribeEntityAggregatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,6 +185,10 @@ type DescribeEventAggregatesRequest struct {
 
 // Send marshals and sends the DescribeEventAggregates API request.
 func (r DescribeEventAggregatesRequest) Send() (*DescribeEventAggregatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -281,6 +293,10 @@ type DescribeEventDetailsRequest struct {
 
 // Send marshals and sends the DescribeEventDetails API request.
 func (r DescribeEventDetailsRequest) Send() (*DescribeEventDetailsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -334,6 +350,10 @@ type DescribeEventTypesRequest struct {
 
 // Send marshals and sends the DescribeEventTypes API request.
 func (r DescribeEventTypesRequest) Send() (*DescribeEventTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,6 +457,10 @@ type DescribeEventsRequest struct {
 
 // Send marshals and sends the DescribeEvents API request.
 func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

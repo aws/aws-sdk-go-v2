@@ -21,6 +21,10 @@ type AddTagsToOnPremisesInstancesRequest struct {
 
 // Send marshals and sends the AddTagsToOnPremisesInstances API request.
 func (r AddTagsToOnPremisesInstancesRequest) Send() (*AddTagsToOnPremisesInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -69,6 +73,10 @@ type BatchGetApplicationRevisionsRequest struct {
 
 // Send marshals and sends the BatchGetApplicationRevisions API request.
 func (r BatchGetApplicationRevisionsRequest) Send() (*BatchGetApplicationRevisionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,6 +169,10 @@ type BatchGetDeploymentGroupsRequest struct {
 
 // Send marshals and sends the BatchGetDeploymentGroups API request.
 func (r BatchGetDeploymentGroupsRequest) Send() (*BatchGetDeploymentGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -207,6 +219,10 @@ type BatchGetDeploymentInstancesRequest struct {
 
 // Send marshals and sends the BatchGetDeploymentInstances API request.
 func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,6 +415,10 @@ type CreateApplicationRequest struct {
 
 // Send marshals and sends the CreateApplication API request.
 func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -445,6 +465,10 @@ type CreateDeploymentRequest struct {
 
 // Send marshals and sends the CreateDeployment API request.
 func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,6 +515,10 @@ type CreateDeploymentConfigRequest struct {
 
 // Send marshals and sends the CreateDeploymentConfig API request.
 func (r CreateDeploymentConfigRequest) Send() (*CreateDeploymentConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -537,6 +565,10 @@ type CreateDeploymentGroupRequest struct {
 
 // Send marshals and sends the CreateDeploymentGroup API request.
 func (r CreateDeploymentGroupRequest) Send() (*CreateDeploymentGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -583,6 +615,10 @@ type DeleteApplicationRequest struct {
 
 // Send marshals and sends the DeleteApplication API request.
 func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -631,6 +667,10 @@ type DeleteDeploymentConfigRequest struct {
 
 // Send marshals and sends the DeleteDeploymentConfig API request.
 func (r DeleteDeploymentConfigRequest) Send() (*DeleteDeploymentConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -682,6 +722,10 @@ type DeleteDeploymentGroupRequest struct {
 
 // Send marshals and sends the DeleteDeploymentGroup API request.
 func (r DeleteDeploymentGroupRequest) Send() (*DeleteDeploymentGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -728,6 +772,10 @@ type DeregisterOnPremisesInstanceRequest struct {
 
 // Send marshals and sends the DeregisterOnPremisesInstance API request.
 func (r DeregisterOnPremisesInstanceRequest) Send() (*DeregisterOnPremisesInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -776,6 +824,10 @@ type GetApplicationRequest struct {
 
 // Send marshals and sends the GetApplication API request.
 func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -822,6 +874,10 @@ type GetApplicationRevisionRequest struct {
 
 // Send marshals and sends the GetApplicationRevision API request.
 func (r GetApplicationRevisionRequest) Send() (*GetApplicationRevisionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -868,6 +924,10 @@ type GetDeploymentRequest struct {
 
 // Send marshals and sends the GetDeployment API request.
 func (r GetDeploymentRequest) Send() (*GetDeploymentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -914,6 +974,10 @@ type GetDeploymentConfigRequest struct {
 
 // Send marshals and sends the GetDeploymentConfig API request.
 func (r GetDeploymentConfigRequest) Send() (*GetDeploymentConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -960,6 +1024,10 @@ type GetDeploymentGroupRequest struct {
 
 // Send marshals and sends the GetDeploymentGroup API request.
 func (r GetDeploymentGroupRequest) Send() (*GetDeploymentGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,6 +1074,10 @@ type GetDeploymentInstanceRequest struct {
 
 // Send marshals and sends the GetDeploymentInstance API request.
 func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1052,6 +1124,10 @@ type GetOnPremisesInstanceRequest struct {
 
 // Send marshals and sends the GetOnPremisesInstance API request.
 func (r GetOnPremisesInstanceRequest) Send() (*GetOnPremisesInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1098,6 +1174,10 @@ type ListApplicationRevisionsRequest struct {
 
 // Send marshals and sends the ListApplicationRevisions API request.
 func (r ListApplicationRevisionsRequest) Send() (*ListApplicationRevisionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1404,6 +1484,10 @@ type ListDeploymentGroupsRequest struct {
 
 // Send marshals and sends the ListDeploymentGroups API request.
 func (r ListDeploymentGroupsRequest) Send() (*ListDeploymentGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1507,6 +1591,10 @@ type ListDeploymentInstancesRequest struct {
 
 // Send marshals and sends the ListDeploymentInstances API request.
 func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1610,6 +1698,10 @@ type ListDeploymentsRequest struct {
 
 // Send marshals and sends the ListDeployments API request.
 func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1809,6 +1901,10 @@ type RegisterApplicationRevisionRequest struct {
 
 // Send marshals and sends the RegisterApplicationRevision API request.
 func (r RegisterApplicationRevisionRequest) Send() (*RegisterApplicationRevisionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1857,6 +1953,10 @@ type RegisterOnPremisesInstanceRequest struct {
 
 // Send marshals and sends the RegisterOnPremisesInstance API request.
 func (r RegisterOnPremisesInstanceRequest) Send() (*RegisterOnPremisesInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1908,6 +2008,10 @@ type RemoveTagsFromOnPremisesInstancesRequest struct {
 
 // Send marshals and sends the RemoveTagsFromOnPremisesInstances API request.
 func (r RemoveTagsFromOnPremisesInstancesRequest) Send() (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2005,6 +2109,10 @@ type StopDeploymentRequest struct {
 
 // Send marshals and sends the StopDeployment API request.
 func (r StopDeploymentRequest) Send() (*StopDeploymentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2051,6 +2159,10 @@ type UpdateApplicationRequest struct {
 
 // Send marshals and sends the UpdateApplication API request.
 func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2099,6 +2211,10 @@ type UpdateDeploymentGroupRequest struct {
 
 // Send marshals and sends the UpdateDeploymentGroup API request.
 func (r UpdateDeploymentGroupRequest) Send() (*UpdateDeploymentGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

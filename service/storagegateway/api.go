@@ -20,6 +20,10 @@ type ActivateGatewayRequest struct {
 
 // Send marshals and sends the ActivateGateway API request.
 func (r ActivateGatewayRequest) Send() (*ActivateGatewayOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,6 +78,10 @@ type AddCacheRequest struct {
 
 // Send marshals and sends the AddCache API request.
 func (r AddCacheRequest) Send() (*AddCacheOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -126,6 +134,10 @@ type AddTagsToResourceRequest struct {
 
 // Send marshals and sends the AddTagsToResource API request.
 func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -185,6 +197,10 @@ type AddUploadBufferRequest struct {
 
 // Send marshals and sends the AddUploadBuffer API request.
 func (r AddUploadBufferRequest) Send() (*AddUploadBufferOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,6 +253,10 @@ type AddWorkingStorageRequest struct {
 
 // Send marshals and sends the AddWorkingStorage API request.
 func (r AddWorkingStorageRequest) Send() (*AddWorkingStorageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -293,6 +313,10 @@ type CancelArchivalRequest struct {
 
 // Send marshals and sends the CancelArchival API request.
 func (r CancelArchivalRequest) Send() (*CancelArchivalOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,6 +365,10 @@ type CancelRetrievalRequest struct {
 
 // Send marshals and sends the CancelRetrieval API request.
 func (r CancelRetrievalRequest) Send() (*CancelRetrievalOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -389,6 +417,10 @@ type CreateCachediSCSIVolumeRequest struct {
 
 // Send marshals and sends the CreateCachediSCSIVolume API request.
 func (r CreateCachediSCSIVolumeRequest) Send() (*CreateCachediSCSIVolumeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -451,6 +483,10 @@ type CreateNFSFileShareRequest struct {
 
 // Send marshals and sends the CreateNFSFileShare API request.
 func (r CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,6 +545,10 @@ type CreateSnapshotRequest struct {
 
 // Send marshals and sends the CreateSnapshot API request.
 func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -578,6 +618,10 @@ type CreateSnapshotFromVolumeRecoveryPointRequest struct {
 
 // Send marshals and sends the CreateSnapshotFromVolumeRecoveryPoint API request.
 func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send() (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -640,6 +684,10 @@ type CreateStorediSCSIVolumeRequest struct {
 
 // Send marshals and sends the CreateStorediSCSIVolume API request.
 func (r CreateStorediSCSIVolumeRequest) Send() (*CreateStorediSCSIVolumeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -698,6 +746,10 @@ type CreateTapeWithBarcodeRequest struct {
 
 // Send marshals and sends the CreateTapeWithBarcode API request.
 func (r CreateTapeWithBarcodeRequest) Send() (*CreateTapeWithBarcodeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -750,6 +802,10 @@ type CreateTapesRequest struct {
 
 // Send marshals and sends the CreateTapes API request.
 func (r CreateTapesRequest) Send() (*CreateTapesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -801,6 +857,10 @@ type DeleteBandwidthRateLimitRequest struct {
 
 // Send marshals and sends the DeleteBandwidthRateLimit API request.
 func (r DeleteBandwidthRateLimitRequest) Send() (*DeleteBandwidthRateLimitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -851,6 +911,10 @@ type DeleteChapCredentialsRequest struct {
 
 // Send marshals and sends the DeleteChapCredentials API request.
 func (r DeleteChapCredentialsRequest) Send() (*DeleteChapCredentialsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -898,6 +962,10 @@ type DeleteFileShareRequest struct {
 
 // Send marshals and sends the DeleteFileShare API request.
 func (r DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -945,6 +1013,10 @@ type DeleteGatewayRequest struct {
 
 // Send marshals and sends the DeleteGateway API request.
 func (r DeleteGatewayRequest) Send() (*DeleteGatewayOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,6 +1078,10 @@ type DeleteSnapshotScheduleRequest struct {
 
 // Send marshals and sends the DeleteSnapshotSchedule API request.
 func (r DeleteSnapshotScheduleRequest) Send() (*DeleteSnapshotScheduleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1061,6 +1137,10 @@ type DeleteTapeRequest struct {
 
 // Send marshals and sends the DeleteTape API request.
 func (r DeleteTapeRequest) Send() (*DeleteTapeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1108,6 +1188,10 @@ type DeleteTapeArchiveRequest struct {
 
 // Send marshals and sends the DeleteTapeArchive API request.
 func (r DeleteTapeArchiveRequest) Send() (*DeleteTapeArchiveOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1155,6 +1239,10 @@ type DeleteVolumeRequest struct {
 
 // Send marshals and sends the DeleteVolume API request.
 func (r DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1216,6 +1304,10 @@ type DescribeBandwidthRateLimitRequest struct {
 
 // Send marshals and sends the DescribeBandwidthRateLimit API request.
 func (r DescribeBandwidthRateLimitRequest) Send() (*DescribeBandwidthRateLimitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1268,6 +1360,10 @@ type DescribeCacheRequest struct {
 
 // Send marshals and sends the DescribeCache API request.
 func (r DescribeCacheRequest) Send() (*DescribeCacheOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1318,6 +1414,10 @@ type DescribeCachediSCSIVolumesRequest struct {
 
 // Send marshals and sends the DescribeCachediSCSIVolumes API request.
 func (r DescribeCachediSCSIVolumesRequest) Send() (*DescribeCachediSCSIVolumesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1369,6 +1469,10 @@ type DescribeChapCredentialsRequest struct {
 
 // Send marshals and sends the DescribeChapCredentials API request.
 func (r DescribeChapCredentialsRequest) Send() (*DescribeChapCredentialsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1416,6 +1520,10 @@ type DescribeGatewayInformationRequest struct {
 
 // Send marshals and sends the DescribeGatewayInformation API request.
 func (r DescribeGatewayInformationRequest) Send() (*DescribeGatewayInformationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1465,6 +1573,10 @@ type DescribeMaintenanceStartTimeRequest struct {
 
 // Send marshals and sends the DescribeMaintenanceStartTime API request.
 func (r DescribeMaintenanceStartTimeRequest) Send() (*DescribeMaintenanceStartTimeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1512,6 +1624,10 @@ type DescribeNFSFileSharesRequest struct {
 
 // Send marshals and sends the DescribeNFSFileShares API request.
 func (r DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1559,6 +1675,10 @@ type DescribeSnapshotScheduleRequest struct {
 
 // Send marshals and sends the DescribeSnapshotSchedule API request.
 func (r DescribeSnapshotScheduleRequest) Send() (*DescribeSnapshotScheduleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1608,6 +1728,10 @@ type DescribeStorediSCSIVolumesRequest struct {
 
 // Send marshals and sends the DescribeStorediSCSIVolumes API request.
 func (r DescribeStorediSCSIVolumesRequest) Send() (*DescribeStorediSCSIVolumesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1657,6 +1781,10 @@ type DescribeTapeArchivesRequest struct {
 
 // Send marshals and sends the DescribeTapeArchives API request.
 func (r DescribeTapeArchivesRequest) Send() (*DescribeTapeArchivesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1763,6 +1891,10 @@ type DescribeTapeRecoveryPointsRequest struct {
 
 // Send marshals and sends the DescribeTapeRecoveryPoints API request.
 func (r DescribeTapeRecoveryPointsRequest) Send() (*DescribeTapeRecoveryPointsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1871,6 +2003,10 @@ type DescribeTapesRequest struct {
 
 // Send marshals and sends the DescribeTapes API request.
 func (r DescribeTapesRequest) Send() (*DescribeTapesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1976,6 +2112,10 @@ type DescribeUploadBufferRequest struct {
 
 // Send marshals and sends the DescribeUploadBuffer API request.
 func (r DescribeUploadBufferRequest) Send() (*DescribeUploadBufferOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2026,6 +2166,10 @@ type DescribeVTLDevicesRequest struct {
 
 // Send marshals and sends the DescribeVTLDevices API request.
 func (r DescribeVTLDevicesRequest) Send() (*DescribeVTLDevicesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2131,6 +2275,10 @@ type DescribeWorkingStorageRequest struct {
 
 // Send marshals and sends the DescribeWorkingStorage API request.
 func (r DescribeWorkingStorageRequest) Send() (*DescribeWorkingStorageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2186,6 +2334,10 @@ type DisableGatewayRequest struct {
 
 // Send marshals and sends the DisableGateway API request.
 func (r DisableGatewayRequest) Send() (*DisableGatewayOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2239,6 +2391,10 @@ type ListFileSharesRequest struct {
 
 // Send marshals and sends the ListFileShares API request.
 func (r ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2287,6 +2443,10 @@ type ListGatewaysRequest struct {
 
 // Send marshals and sends the ListGateways API request.
 func (r ListGatewaysRequest) Send() (*ListGatewaysOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2399,6 +2559,10 @@ type ListLocalDisksRequest struct {
 
 // Send marshals and sends the ListLocalDisks API request.
 func (r ListLocalDisksRequest) Send() (*ListLocalDisksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2454,6 +2618,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2501,6 +2669,10 @@ type ListTapesRequest struct {
 
 // Send marshals and sends the ListTapes API request.
 func (r ListTapesRequest) Send() (*ListTapesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2557,6 +2729,10 @@ type ListVolumeInitiatorsRequest struct {
 
 // Send marshals and sends the ListVolumeInitiators API request.
 func (r ListVolumeInitiatorsRequest) Send() (*ListVolumeInitiatorsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2605,6 +2781,10 @@ type ListVolumeRecoveryPointsRequest struct {
 
 // Send marshals and sends the ListVolumeRecoveryPoints API request.
 func (r ListVolumeRecoveryPointsRequest) Send() (*ListVolumeRecoveryPointsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2658,6 +2838,10 @@ type ListVolumesRequest struct {
 
 // Send marshals and sends the ListVolumes API request.
 func (r ListVolumesRequest) Send() (*ListVolumesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2771,6 +2955,10 @@ type RefreshCacheRequest struct {
 
 // Send marshals and sends the RefreshCache API request.
 func (r RefreshCacheRequest) Send() (*RefreshCacheOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2819,6 +3007,10 @@ type RemoveTagsFromResourceRequest struct {
 
 // Send marshals and sends the RemoveTagsFromResource API request.
 func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2866,6 +3058,10 @@ type ResetCacheRequest struct {
 
 // Send marshals and sends the ResetCache API request.
 func (r ResetCacheRequest) Send() (*ResetCacheOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2924,6 +3120,10 @@ type RetrieveTapeArchiveRequest struct {
 
 // Send marshals and sends the RetrieveTapeArchive API request.
 func (r RetrieveTapeArchiveRequest) Send() (*RetrieveTapeArchiveOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2979,6 +3179,10 @@ type RetrieveTapeRecoveryPointRequest struct {
 
 // Send marshals and sends the RetrieveTapeRecoveryPoint API request.
 func (r RetrieveTapeRecoveryPointRequest) Send() (*RetrieveTapeRecoveryPointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3034,6 +3238,10 @@ type SetLocalConsolePasswordRequest struct {
 
 // Send marshals and sends the SetLocalConsolePassword API request.
 func (r SetLocalConsolePasswordRequest) Send() (*SetLocalConsolePasswordOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3083,6 +3291,10 @@ type ShutdownGatewayRequest struct {
 
 // Send marshals and sends the ShutdownGateway API request.
 func (r ShutdownGatewayRequest) Send() (*ShutdownGatewayOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3149,6 +3361,10 @@ type StartGatewayRequest struct {
 
 // Send marshals and sends the StartGateway API request.
 func (r StartGatewayRequest) Send() (*StartGatewayOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3206,6 +3422,10 @@ type UpdateBandwidthRateLimitRequest struct {
 
 // Send marshals and sends the UpdateBandwidthRateLimit API request.
 func (r UpdateBandwidthRateLimitRequest) Send() (*UpdateBandwidthRateLimitOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3261,6 +3481,10 @@ type UpdateChapCredentialsRequest struct {
 
 // Send marshals and sends the UpdateChapCredentials API request.
 func (r UpdateChapCredentialsRequest) Send() (*UpdateChapCredentialsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3312,6 +3536,10 @@ type UpdateGatewayInformationRequest struct {
 
 // Send marshals and sends the UpdateGatewayInformation API request.
 func (r UpdateGatewayInformationRequest) Send() (*UpdateGatewayInformationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3364,6 +3592,10 @@ type UpdateGatewaySoftwareNowRequest struct {
 
 // Send marshals and sends the UpdateGatewaySoftwareNow API request.
 func (r UpdateGatewaySoftwareNowRequest) Send() (*UpdateGatewaySoftwareNowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3424,6 +3656,10 @@ type UpdateMaintenanceStartTimeRequest struct {
 
 // Send marshals and sends the UpdateMaintenanceStartTime API request.
 func (r UpdateMaintenanceStartTimeRequest) Send() (*UpdateMaintenanceStartTimeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3472,6 +3708,10 @@ type UpdateNFSFileShareRequest struct {
 
 // Send marshals and sends the UpdateNFSFileShare API request.
 func (r UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3537,6 +3777,10 @@ type UpdateSnapshotScheduleRequest struct {
 
 // Send marshals and sends the UpdateSnapshotSchedule API request.
 func (r UpdateSnapshotScheduleRequest) Send() (*UpdateSnapshotScheduleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3592,6 +3836,10 @@ type UpdateVTLDeviceTypeRequest struct {
 
 // Send marshals and sends the UpdateVTLDeviceType API request.
 func (r UpdateVTLDeviceTypeRequest) Send() (*UpdateVTLDeviceTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

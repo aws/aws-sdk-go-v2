@@ -17,6 +17,10 @@ type AssociateRoleToGroupRequest struct {
 
 // Send marshals and sends the AssociateRoleToGroup API request.
 func (r AssociateRoleToGroupRequest) Send() (*AssociateRoleToGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -162,6 +166,10 @@ type CreateCoreDefinitionVersionRequest struct {
 
 // Send marshals and sends the CreateCoreDefinitionVersion API request.
 func (r CreateCoreDefinitionVersionRequest) Send() (*CreateCoreDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -209,6 +217,10 @@ type CreateDeploymentRequest struct {
 
 // Send marshals and sends the CreateDeployment API request.
 func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -303,6 +315,10 @@ type CreateDeviceDefinitionVersionRequest struct {
 
 // Send marshals and sends the CreateDeviceDefinitionVersion API request.
 func (r CreateDeviceDefinitionVersionRequest) Send() (*CreateDeviceDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,6 +414,10 @@ type CreateFunctionDefinitionVersionRequest struct {
 
 // Send marshals and sends the CreateFunctionDefinitionVersion API request.
 func (r CreateFunctionDefinitionVersionRequest) Send() (*CreateFunctionDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,6 +511,10 @@ type CreateGroupCertificateAuthorityRequest struct {
 
 // Send marshals and sends the CreateGroupCertificateAuthority API request.
 func (r CreateGroupCertificateAuthorityRequest) Send() (*CreateGroupCertificateAuthorityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -538,6 +562,10 @@ type CreateGroupVersionRequest struct {
 
 // Send marshals and sends the CreateGroupVersion API request.
 func (r CreateGroupVersionRequest) Send() (*CreateGroupVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,6 +660,10 @@ type CreateLoggerDefinitionVersionRequest struct {
 
 // Send marshals and sends the CreateLoggerDefinitionVersion API request.
 func (r CreateLoggerDefinitionVersionRequest) Send() (*CreateLoggerDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -726,6 +758,10 @@ type CreateSubscriptionDefinitionVersionRequest struct {
 
 // Send marshals and sends the CreateSubscriptionDefinitionVersion API request.
 func (r CreateSubscriptionDefinitionVersionRequest) Send() (*CreateSubscriptionDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -772,6 +808,10 @@ type DeleteCoreDefinitionRequest struct {
 
 // Send marshals and sends the DeleteCoreDefinition API request.
 func (r DeleteCoreDefinitionRequest) Send() (*DeleteCoreDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -819,6 +859,10 @@ type DeleteDeviceDefinitionRequest struct {
 
 // Send marshals and sends the DeleteDeviceDefinition API request.
 func (r DeleteDeviceDefinitionRequest) Send() (*DeleteDeviceDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -866,6 +910,10 @@ type DeleteFunctionDefinitionRequest struct {
 
 // Send marshals and sends the DeleteFunctionDefinition API request.
 func (r DeleteFunctionDefinitionRequest) Send() (*DeleteFunctionDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -913,6 +961,10 @@ type DeleteGroupRequest struct {
 
 // Send marshals and sends the DeleteGroup API request.
 func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -959,6 +1011,10 @@ type DeleteLoggerDefinitionRequest struct {
 
 // Send marshals and sends the DeleteLoggerDefinition API request.
 func (r DeleteLoggerDefinitionRequest) Send() (*DeleteLoggerDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,6 +1062,10 @@ type DeleteSubscriptionDefinitionRequest struct {
 
 // Send marshals and sends the DeleteSubscriptionDefinition API request.
 func (r DeleteSubscriptionDefinitionRequest) Send() (*DeleteSubscriptionDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1053,6 +1113,10 @@ type DisassociateRoleFromGroupRequest struct {
 
 // Send marshals and sends the DisassociateRoleFromGroup API request.
 func (r DisassociateRoleFromGroupRequest) Send() (*DisassociateRoleFromGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1146,6 +1210,10 @@ type GetAssociatedRoleRequest struct {
 
 // Send marshals and sends the GetAssociatedRole API request.
 func (r GetAssociatedRoleRequest) Send() (*GetAssociatedRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1192,6 +1260,10 @@ type GetConnectivityInfoRequest struct {
 
 // Send marshals and sends the GetConnectivityInfo API request.
 func (r GetConnectivityInfoRequest) Send() (*GetConnectivityInfoOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1238,6 +1310,10 @@ type GetCoreDefinitionRequest struct {
 
 // Send marshals and sends the GetCoreDefinition API request.
 func (r GetCoreDefinitionRequest) Send() (*GetCoreDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1284,6 +1360,10 @@ type GetCoreDefinitionVersionRequest struct {
 
 // Send marshals and sends the GetCoreDefinitionVersion API request.
 func (r GetCoreDefinitionVersionRequest) Send() (*GetCoreDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1330,6 +1410,10 @@ type GetDeploymentStatusRequest struct {
 
 // Send marshals and sends the GetDeploymentStatus API request.
 func (r GetDeploymentStatusRequest) Send() (*GetDeploymentStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1376,6 +1460,10 @@ type GetDeviceDefinitionRequest struct {
 
 // Send marshals and sends the GetDeviceDefinition API request.
 func (r GetDeviceDefinitionRequest) Send() (*GetDeviceDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1422,6 +1510,10 @@ type GetDeviceDefinitionVersionRequest struct {
 
 // Send marshals and sends the GetDeviceDefinitionVersion API request.
 func (r GetDeviceDefinitionVersionRequest) Send() (*GetDeviceDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1468,6 +1560,10 @@ type GetFunctionDefinitionRequest struct {
 
 // Send marshals and sends the GetFunctionDefinition API request.
 func (r GetFunctionDefinitionRequest) Send() (*GetFunctionDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1515,6 +1611,10 @@ type GetFunctionDefinitionVersionRequest struct {
 
 // Send marshals and sends the GetFunctionDefinitionVersion API request.
 func (r GetFunctionDefinitionVersionRequest) Send() (*GetFunctionDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1562,6 +1662,10 @@ type GetGroupRequest struct {
 
 // Send marshals and sends the GetGroup API request.
 func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1608,6 +1712,10 @@ type GetGroupCertificateAuthorityRequest struct {
 
 // Send marshals and sends the GetGroupCertificateAuthority API request.
 func (r GetGroupCertificateAuthorityRequest) Send() (*GetGroupCertificateAuthorityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1654,6 +1762,10 @@ type GetGroupCertificateConfigurationRequest struct {
 
 // Send marshals and sends the GetGroupCertificateConfiguration API request.
 func (r GetGroupCertificateConfigurationRequest) Send() (*GetGroupCertificateConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1700,6 +1812,10 @@ type GetGroupVersionRequest struct {
 
 // Send marshals and sends the GetGroupVersion API request.
 func (r GetGroupVersionRequest) Send() (*GetGroupVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1746,6 +1862,10 @@ type GetLoggerDefinitionRequest struct {
 
 // Send marshals and sends the GetLoggerDefinition API request.
 func (r GetLoggerDefinitionRequest) Send() (*GetLoggerDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1792,6 +1912,10 @@ type GetLoggerDefinitionVersionRequest struct {
 
 // Send marshals and sends the GetLoggerDefinitionVersion API request.
 func (r GetLoggerDefinitionVersionRequest) Send() (*GetLoggerDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1884,6 +2008,10 @@ type GetSubscriptionDefinitionRequest struct {
 
 // Send marshals and sends the GetSubscriptionDefinition API request.
 func (r GetSubscriptionDefinitionRequest) Send() (*GetSubscriptionDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1930,6 +2058,10 @@ type GetSubscriptionDefinitionVersionRequest struct {
 
 // Send marshals and sends the GetSubscriptionDefinitionVersion API request.
 func (r GetSubscriptionDefinitionVersionRequest) Send() (*GetSubscriptionDefinitionVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1976,6 +2108,10 @@ type ListCoreDefinitionVersionsRequest struct {
 
 // Send marshals and sends the ListCoreDefinitionVersions API request.
 func (r ListCoreDefinitionVersionsRequest) Send() (*ListCoreDefinitionVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2068,6 +2204,10 @@ type ListDeploymentsRequest struct {
 
 // Send marshals and sends the ListDeployments API request.
 func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2114,6 +2254,10 @@ type ListDeviceDefinitionVersionsRequest struct {
 
 // Send marshals and sends the ListDeviceDefinitionVersions API request.
 func (r ListDeviceDefinitionVersionsRequest) Send() (*ListDeviceDefinitionVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2206,6 +2350,10 @@ type ListFunctionDefinitionVersionsRequest struct {
 
 // Send marshals and sends the ListFunctionDefinitionVersions API request.
 func (r ListFunctionDefinitionVersionsRequest) Send() (*ListFunctionDefinitionVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2298,6 +2446,10 @@ type ListGroupCertificateAuthoritiesRequest struct {
 
 // Send marshals and sends the ListGroupCertificateAuthorities API request.
 func (r ListGroupCertificateAuthoritiesRequest) Send() (*ListGroupCertificateAuthoritiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2344,6 +2496,10 @@ type ListGroupVersionsRequest struct {
 
 // Send marshals and sends the ListGroupVersions API request.
 func (r ListGroupVersionsRequest) Send() (*ListGroupVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2436,6 +2592,10 @@ type ListLoggerDefinitionVersionsRequest struct {
 
 // Send marshals and sends the ListLoggerDefinitionVersions API request.
 func (r ListLoggerDefinitionVersionsRequest) Send() (*ListLoggerDefinitionVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2528,6 +2688,10 @@ type ListSubscriptionDefinitionVersionsRequest struct {
 
 // Send marshals and sends the ListSubscriptionDefinitionVersions API request.
 func (r ListSubscriptionDefinitionVersionsRequest) Send() (*ListSubscriptionDefinitionVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2620,6 +2784,10 @@ type ResetDeploymentsRequest struct {
 
 // Send marshals and sends the ResetDeployments API request.
 func (r ResetDeploymentsRequest) Send() (*ResetDeploymentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2666,6 +2834,10 @@ type UpdateConnectivityInfoRequest struct {
 
 // Send marshals and sends the UpdateConnectivityInfo API request.
 func (r UpdateConnectivityInfoRequest) Send() (*UpdateConnectivityInfoOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2714,6 +2886,10 @@ type UpdateCoreDefinitionRequest struct {
 
 // Send marshals and sends the UpdateCoreDefinition API request.
 func (r UpdateCoreDefinitionRequest) Send() (*UpdateCoreDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2760,6 +2936,10 @@ type UpdateDeviceDefinitionRequest struct {
 
 // Send marshals and sends the UpdateDeviceDefinition API request.
 func (r UpdateDeviceDefinitionRequest) Send() (*UpdateDeviceDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2806,6 +2986,10 @@ type UpdateFunctionDefinitionRequest struct {
 
 // Send marshals and sends the UpdateFunctionDefinition API request.
 func (r UpdateFunctionDefinitionRequest) Send() (*UpdateFunctionDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2852,6 +3036,10 @@ type UpdateGroupRequest struct {
 
 // Send marshals and sends the UpdateGroup API request.
 func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2898,6 +3086,10 @@ type UpdateGroupCertificateConfigurationRequest struct {
 
 // Send marshals and sends the UpdateGroupCertificateConfiguration API request.
 func (r UpdateGroupCertificateConfigurationRequest) Send() (*UpdateGroupCertificateConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2944,6 +3136,10 @@ type UpdateLoggerDefinitionRequest struct {
 
 // Send marshals and sends the UpdateLoggerDefinition API request.
 func (r UpdateLoggerDefinitionRequest) Send() (*UpdateLoggerDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2990,6 +3186,10 @@ type UpdateSubscriptionDefinitionRequest struct {
 
 // Send marshals and sends the UpdateSubscriptionDefinition API request.
 func (r UpdateSubscriptionDefinitionRequest) Send() (*UpdateSubscriptionDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

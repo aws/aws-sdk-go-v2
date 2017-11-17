@@ -19,6 +19,10 @@ type CancelJobRequest struct {
 
 // Send marshals and sends the CancelJob API request.
 func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,6 +71,10 @@ type CreateJobRequest struct {
 
 // Send marshals and sends the CreateJob API request.
 func (r CreateJobRequest) Send() (*CreateJobResponse, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,6 +125,10 @@ type CreatePipelineRequest struct {
 
 // Send marshals and sends the CreatePipeline API request.
 func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,6 +173,10 @@ type CreatePresetRequest struct {
 
 // Send marshals and sends the CreatePreset API request.
 func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -219,6 +235,10 @@ type DeletePipelineRequest struct {
 
 // Send marshals and sends the DeletePipeline API request.
 func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -267,6 +287,10 @@ type DeletePresetRequest struct {
 
 // Send marshals and sends the DeletePreset API request.
 func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -313,6 +337,10 @@ type ListJobsByPipelineRequest struct {
 
 // Send marshals and sends the ListJobsByPipeline API request.
 func (r ListJobsByPipelineRequest) Send() (*ListJobsByPipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -417,6 +445,10 @@ type ListJobsByStatusRequest struct {
 
 // Send marshals and sends the ListJobsByStatus API request.
 func (r ListJobsByStatusRequest) Send() (*ListJobsByStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -721,6 +753,10 @@ type ReadJobRequest struct {
 
 // Send marshals and sends the ReadJob API request.
 func (r ReadJobRequest) Send() (*ReadJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -765,6 +801,10 @@ type ReadPipelineRequest struct {
 
 // Send marshals and sends the ReadPipeline API request.
 func (r ReadPipelineRequest) Send() (*ReadPipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -809,6 +849,10 @@ type ReadPresetRequest struct {
 
 // Send marshals and sends the ReadPreset API request.
 func (r ReadPresetRequest) Send() (*ReadPresetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -853,6 +897,10 @@ type TestRoleRequest struct {
 
 // Send marshals and sends the TestRole API request.
 func (r TestRoleRequest) Send() (*TestRoleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -906,6 +954,10 @@ type UpdatePipelineRequest struct {
 
 // Send marshals and sends the UpdatePipeline API request.
 func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -955,6 +1007,10 @@ type UpdatePipelineNotificationsRequest struct {
 
 // Send marshals and sends the UpdatePipelineNotifications API request.
 func (r UpdatePipelineNotificationsRequest) Send() (*UpdatePipelineNotificationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1003,6 +1059,10 @@ type UpdatePipelineStatusRequest struct {
 
 // Send marshals and sends the UpdatePipelineStatus API request.
 func (r UpdatePipelineStatusRequest) Send() (*UpdatePipelineStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

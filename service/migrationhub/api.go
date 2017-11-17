@@ -20,6 +20,10 @@ type AssociateCreatedArtifactRequest struct {
 
 // Send marshals and sends the AssociateCreatedArtifact API request.
 func (r AssociateCreatedArtifactRequest) Send() (*AssociateCreatedArtifactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -78,6 +82,10 @@ type AssociateDiscoveredResourceRequest struct {
 
 // Send marshals and sends the AssociateDiscoveredResource API request.
 func (r AssociateDiscoveredResourceRequest) Send() (*AssociateDiscoveredResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,6 +133,10 @@ type CreateProgressUpdateStreamRequest struct {
 
 // Send marshals and sends the CreateProgressUpdateStream API request.
 func (r CreateProgressUpdateStreamRequest) Send() (*CreateProgressUpdateStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -175,6 +187,10 @@ type DeleteProgressUpdateStreamRequest struct {
 
 // Send marshals and sends the DeleteProgressUpdateStream API request.
 func (r DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,6 +259,10 @@ type DescribeApplicationStateRequest struct {
 
 // Send marshals and sends the DescribeApplicationState API request.
 func (r DescribeApplicationStateRequest) Send() (*DescribeApplicationStateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -289,6 +309,10 @@ type DescribeMigrationTaskRequest struct {
 
 // Send marshals and sends the DescribeMigrationTask API request.
 func (r DescribeMigrationTaskRequest) Send() (*DescribeMigrationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -335,6 +359,10 @@ type DisassociateCreatedArtifactRequest struct {
 
 // Send marshals and sends the DisassociateCreatedArtifact API request.
 func (r DisassociateCreatedArtifactRequest) Send() (*DisassociateCreatedArtifactOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,6 +421,10 @@ type DisassociateDiscoveredResourceRequest struct {
 
 // Send marshals and sends the DisassociateDiscoveredResource API request.
 func (r DisassociateDiscoveredResourceRequest) Send() (*DisassociateDiscoveredResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -440,6 +472,10 @@ type ImportMigrationTaskRequest struct {
 
 // Send marshals and sends the ImportMigrationTask API request.
 func (r ImportMigrationTaskRequest) Send() (*ImportMigrationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,6 +527,10 @@ type ListCreatedArtifactsRequest struct {
 
 // Send marshals and sends the ListCreatedArtifacts API request.
 func (r ListCreatedArtifactsRequest) Send() (*ListCreatedArtifactsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -545,6 +585,10 @@ type ListDiscoveredResourcesRequest struct {
 
 // Send marshals and sends the ListDiscoveredResources API request.
 func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,6 +635,10 @@ type ListMigrationTasksRequest struct {
 
 // Send marshals and sends the ListMigrationTasks API request.
 func (r ListMigrationTasksRequest) Send() (*ListMigrationTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,6 +693,10 @@ type ListProgressUpdateStreamsRequest struct {
 
 // Send marshals and sends the ListProgressUpdateStreams API request.
 func (r ListProgressUpdateStreamsRequest) Send() (*ListProgressUpdateStreamsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -692,6 +744,10 @@ type NotifyApplicationStateRequest struct {
 
 // Send marshals and sends the NotifyApplicationState API request.
 func (r NotifyApplicationStateRequest) Send() (*NotifyApplicationStateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -740,6 +796,10 @@ type NotifyMigrationTaskStateRequest struct {
 
 // Send marshals and sends the NotifyMigrationTaskState API request.
 func (r NotifyMigrationTaskStateRequest) Send() (*NotifyMigrationTaskStateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -795,6 +855,10 @@ type PutResourceAttributesRequest struct {
 
 // Send marshals and sends the PutResourceAttributes API request.
 func (r PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

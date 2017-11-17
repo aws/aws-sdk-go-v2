@@ -20,6 +20,10 @@ type AddTagsToResourceRequest struct {
 
 // Send marshals and sends the AddTagsToResource API request.
 func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -69,6 +73,10 @@ type CreateEndpointRequest struct {
 
 // Send marshals and sends the CreateEndpoint API request.
 func (r CreateEndpointRequest) Send() (*CreateEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -115,6 +123,10 @@ type CreateEventSubscriptionRequest struct {
 
 // Send marshals and sends the CreateEventSubscription API request.
 func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,6 +189,10 @@ type CreateReplicationInstanceRequest struct {
 
 // Send marshals and sends the CreateReplicationInstance API request.
 func (r CreateReplicationInstanceRequest) Send() (*CreateReplicationInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -223,6 +239,10 @@ type CreateReplicationSubnetGroupRequest struct {
 
 // Send marshals and sends the CreateReplicationSubnetGroup API request.
 func (r CreateReplicationSubnetGroupRequest) Send() (*CreateReplicationSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -269,6 +289,10 @@ type CreateReplicationTaskRequest struct {
 
 // Send marshals and sends the CreateReplicationTask API request.
 func (r CreateReplicationTaskRequest) Send() (*CreateReplicationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -315,6 +339,10 @@ type DeleteCertificateRequest struct {
 
 // Send marshals and sends the DeleteCertificate API request.
 func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -361,6 +389,10 @@ type DeleteEndpointRequest struct {
 
 // Send marshals and sends the DeleteEndpoint API request.
 func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -410,6 +442,10 @@ type DeleteEventSubscriptionRequest struct {
 
 // Send marshals and sends the DeleteEventSubscription API request.
 func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -456,6 +492,10 @@ type DeleteReplicationInstanceRequest struct {
 
 // Send marshals and sends the DeleteReplicationInstance API request.
 func (r DeleteReplicationInstanceRequest) Send() (*DeleteReplicationInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -505,6 +545,10 @@ type DeleteReplicationSubnetGroupRequest struct {
 
 // Send marshals and sends the DeleteReplicationSubnetGroup API request.
 func (r DeleteReplicationSubnetGroupRequest) Send() (*DeleteReplicationSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -551,6 +595,10 @@ type DeleteReplicationTaskRequest struct {
 
 // Send marshals and sends the DeleteReplicationTask API request.
 func (r DeleteReplicationTaskRequest) Send() (*DeleteReplicationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,6 +696,10 @@ type DescribeCertificatesRequest struct {
 
 // Send marshals and sends the DescribeCertificates API request.
 func (r DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -750,6 +802,10 @@ type DescribeConnectionsRequest struct {
 
 // Send marshals and sends the DescribeConnections API request.
 func (r DescribeConnectionsRequest) Send() (*DescribeConnectionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -853,6 +909,10 @@ type DescribeEndpointTypesRequest struct {
 
 // Send marshals and sends the DescribeEndpointTypes API request.
 func (r DescribeEndpointTypesRequest) Send() (*DescribeEndpointTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -955,6 +1015,10 @@ type DescribeEndpointsRequest struct {
 
 // Send marshals and sends the DescribeEndpoints API request.
 func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1057,6 +1121,10 @@ type DescribeEventCategoriesRequest struct {
 
 // Send marshals and sends the DescribeEventCategories API request.
 func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1106,6 +1174,10 @@ type DescribeEventSubscriptionsRequest struct {
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
 func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1213,6 +1285,10 @@ type DescribeEventsRequest struct {
 
 // Send marshals and sends the DescribeEvents API request.
 func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1420,6 +1496,10 @@ type DescribeRefreshSchemasStatusRequest struct {
 
 // Send marshals and sends the DescribeRefreshSchemasStatus API request.
 func (r DescribeRefreshSchemasStatusRequest) Send() (*DescribeRefreshSchemasStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1466,6 +1546,10 @@ type DescribeReplicationInstancesRequest struct {
 
 // Send marshals and sends the DescribeReplicationInstances API request.
 func (r DescribeReplicationInstancesRequest) Send() (*DescribeReplicationInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1569,6 +1653,10 @@ type DescribeReplicationSubnetGroupsRequest struct {
 
 // Send marshals and sends the DescribeReplicationSubnetGroups API request.
 func (r DescribeReplicationSubnetGroupsRequest) Send() (*DescribeReplicationSubnetGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1671,6 +1759,10 @@ type DescribeReplicationTasksRequest struct {
 
 // Send marshals and sends the DescribeReplicationTasks API request.
 func (r DescribeReplicationTasksRequest) Send() (*DescribeReplicationTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1774,6 +1866,10 @@ type DescribeSchemasRequest struct {
 
 // Send marshals and sends the DescribeSchemas API request.
 func (r DescribeSchemasRequest) Send() (*DescribeSchemasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1876,6 +1972,10 @@ type DescribeTableStatisticsRequest struct {
 
 // Send marshals and sends the DescribeTableStatistics API request.
 func (r DescribeTableStatisticsRequest) Send() (*DescribeTableStatisticsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1979,6 +2079,10 @@ type ImportCertificateRequest struct {
 
 // Send marshals and sends the ImportCertificate API request.
 func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2025,6 +2129,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2071,6 +2179,10 @@ type ModifyEndpointRequest struct {
 
 // Send marshals and sends the ModifyEndpoint API request.
 func (r ModifyEndpointRequest) Send() (*ModifyEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2117,6 +2229,10 @@ type ModifyEventSubscriptionRequest struct {
 
 // Send marshals and sends the ModifyEventSubscription API request.
 func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2163,6 +2279,10 @@ type ModifyReplicationInstanceRequest struct {
 
 // Send marshals and sends the ModifyReplicationInstance API request.
 func (r ModifyReplicationInstanceRequest) Send() (*ModifyReplicationInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2213,6 +2333,10 @@ type ModifyReplicationSubnetGroupRequest struct {
 
 // Send marshals and sends the ModifyReplicationSubnetGroup API request.
 func (r ModifyReplicationSubnetGroupRequest) Send() (*ModifyReplicationSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2259,6 +2383,10 @@ type ModifyReplicationTaskRequest struct {
 
 // Send marshals and sends the ModifyReplicationTask API request.
 func (r ModifyReplicationTaskRequest) Send() (*ModifyReplicationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2311,6 +2439,10 @@ type RefreshSchemasRequest struct {
 
 // Send marshals and sends the RefreshSchemas API request.
 func (r RefreshSchemasRequest) Send() (*RefreshSchemasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2359,6 +2491,10 @@ type ReloadTablesRequest struct {
 
 // Send marshals and sends the ReloadTables API request.
 func (r ReloadTablesRequest) Send() (*ReloadTablesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2405,6 +2541,10 @@ type RemoveTagsFromResourceRequest struct {
 
 // Send marshals and sends the RemoveTagsFromResource API request.
 func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2451,6 +2591,10 @@ type StartReplicationTaskRequest struct {
 
 // Send marshals and sends the StartReplicationTask API request.
 func (r StartReplicationTaskRequest) Send() (*StartReplicationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2500,6 +2644,10 @@ type StopReplicationTaskRequest struct {
 
 // Send marshals and sends the StopReplicationTask API request.
 func (r StopReplicationTaskRequest) Send() (*StopReplicationTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2546,6 +2694,10 @@ type TestConnectionRequest struct {
 
 // Send marshals and sends the TestConnection API request.
 func (r TestConnectionRequest) Send() (*TestConnectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

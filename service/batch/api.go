@@ -19,6 +19,10 @@ type CancelJobRequest struct {
 
 // Send marshals and sends the CancelJob API request.
 func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -69,6 +73,10 @@ type CreateComputeEnvironmentRequest struct {
 
 // Send marshals and sends the CreateComputeEnvironment API request.
 func (r CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,6 +144,10 @@ type CreateJobQueueRequest struct {
 
 // Send marshals and sends the CreateJobQueue API request.
 func (r CreateJobQueueRequest) Send() (*CreateJobQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -190,6 +202,10 @@ type DeleteComputeEnvironmentRequest struct {
 
 // Send marshals and sends the DeleteComputeEnvironment API request.
 func (r DeleteComputeEnvironmentRequest) Send() (*DeleteComputeEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -240,6 +256,10 @@ type DeleteJobQueueRequest struct {
 
 // Send marshals and sends the DeleteJobQueue API request.
 func (r DeleteJobQueueRequest) Send() (*DeleteJobQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -291,6 +311,10 @@ type DeregisterJobDefinitionRequest struct {
 
 // Send marshals and sends the DeregisterJobDefinition API request.
 func (r DeregisterJobDefinitionRequest) Send() (*DeregisterJobDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -480,6 +504,10 @@ type DescribeJobsRequest struct {
 
 // Send marshals and sends the DescribeJobs API request.
 func (r DescribeJobsRequest) Send() (*DescribeJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -526,6 +554,10 @@ type ListJobsRequest struct {
 
 // Send marshals and sends the ListJobs API request.
 func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -574,6 +606,10 @@ type RegisterJobDefinitionRequest struct {
 
 // Send marshals and sends the RegisterJobDefinition API request.
 func (r RegisterJobDefinitionRequest) Send() (*RegisterJobDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,6 +656,10 @@ type SubmitJobRequest struct {
 
 // Send marshals and sends the SubmitJob API request.
 func (r SubmitJobRequest) Send() (*SubmitJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -667,6 +707,10 @@ type TerminateJobRequest struct {
 
 // Send marshals and sends the TerminateJob API request.
 func (r TerminateJobRequest) Send() (*TerminateJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -715,6 +759,10 @@ type UpdateComputeEnvironmentRequest struct {
 
 // Send marshals and sends the UpdateComputeEnvironment API request.
 func (r UpdateComputeEnvironmentRequest) Send() (*UpdateComputeEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -761,6 +809,10 @@ type UpdateJobQueueRequest struct {
 
 // Send marshals and sends the UpdateJobQueue API request.
 func (r UpdateJobQueueRequest) Send() (*UpdateJobQueueOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

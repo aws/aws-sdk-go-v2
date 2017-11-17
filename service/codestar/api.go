@@ -19,6 +19,10 @@ type AssociateTeamMemberRequest struct {
 
 // Send marshals and sends the AssociateTeamMember API request.
 func (r AssociateTeamMemberRequest) Send() (*AssociateTeamMemberOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,6 +69,10 @@ type CreateProjectRequest struct {
 
 // Send marshals and sends the CreateProject API request.
 func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,6 +119,10 @@ type CreateUserProfileRequest struct {
 
 // Send marshals and sends the CreateUserProfile API request.
 func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,6 +173,10 @@ type DeleteProjectRequest struct {
 
 // Send marshals and sends the DeleteProject API request.
 func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -209,6 +225,10 @@ type DeleteUserProfileRequest struct {
 
 // Send marshals and sends the DeleteUserProfile API request.
 func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -258,6 +278,10 @@ type DescribeProjectRequest struct {
 
 // Send marshals and sends the DescribeProject API request.
 func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -304,6 +328,10 @@ type DescribeUserProfileRequest struct {
 
 // Send marshals and sends the DescribeUserProfile API request.
 func (r DescribeUserProfileRequest) Send() (*DescribeUserProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -350,6 +378,10 @@ type DisassociateTeamMemberRequest struct {
 
 // Send marshals and sends the DisassociateTeamMember API request.
 func (r DisassociateTeamMemberRequest) Send() (*DisassociateTeamMemberOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,6 +431,10 @@ type ListProjectsRequest struct {
 
 // Send marshals and sends the ListProjects API request.
 func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -445,6 +481,10 @@ type ListResourcesRequest struct {
 
 // Send marshals and sends the ListResources API request.
 func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,6 +531,10 @@ type ListTagsForProjectRequest struct {
 
 // Send marshals and sends the ListTagsForProject API request.
 func (r ListTagsForProjectRequest) Send() (*ListTagsForProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -537,6 +581,10 @@ type ListTeamMembersRequest struct {
 
 // Send marshals and sends the ListTeamMembers API request.
 func (r ListTeamMembersRequest) Send() (*ListTeamMembersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -583,6 +631,10 @@ type ListUserProfilesRequest struct {
 
 // Send marshals and sends the ListUserProfiles API request.
 func (r ListUserProfilesRequest) Send() (*ListUserProfilesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -629,6 +681,10 @@ type TagProjectRequest struct {
 
 // Send marshals and sends the TagProject API request.
 func (r TagProjectRequest) Send() (*TagProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -675,6 +731,10 @@ type UntagProjectRequest struct {
 
 // Send marshals and sends the UntagProject API request.
 func (r UntagProjectRequest) Send() (*UntagProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -721,6 +781,10 @@ type UpdateProjectRequest struct {
 
 // Send marshals and sends the UpdateProject API request.
 func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -767,6 +831,10 @@ type UpdateTeamMemberRequest struct {
 
 // Send marshals and sends the UpdateTeamMember API request.
 func (r UpdateTeamMemberRequest) Send() (*UpdateTeamMemberOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,6 +883,10 @@ type UpdateUserProfileRequest struct {
 
 // Send marshals and sends the UpdateUserProfile API request.
 func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

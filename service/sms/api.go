@@ -19,6 +19,10 @@ type CreateReplicationJobRequest struct {
 
 // Send marshals and sends the CreateReplicationJob API request.
 func (r CreateReplicationJobRequest) Send() (*CreateReplicationJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,6 +72,10 @@ type DeleteReplicationJobRequest struct {
 
 // Send marshals and sends the DeleteReplicationJob API request.
 func (r DeleteReplicationJobRequest) Send() (*DeleteReplicationJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -165,6 +173,10 @@ type DisassociateConnectorRequest struct {
 
 // Send marshals and sends the DisassociateConnector API request.
 func (r DisassociateConnectorRequest) Send() (*DisassociateConnectorOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -419,6 +431,10 @@ type GetReplicationRunsRequest struct {
 
 // Send marshals and sends the GetReplicationRuns API request.
 func (r GetReplicationRunsRequest) Send() (*GetReplicationRunsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -675,6 +691,10 @@ type StartOnDemandReplicationRunRequest struct {
 
 // Send marshals and sends the StartOnDemandReplicationRun API request.
 func (r StartOnDemandReplicationRunRequest) Send() (*StartOnDemandReplicationRunOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -725,6 +745,10 @@ type UpdateReplicationJobRequest struct {
 
 // Send marshals and sends the UpdateReplicationJob API request.
 func (r UpdateReplicationJobRequest) Send() (*UpdateReplicationJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

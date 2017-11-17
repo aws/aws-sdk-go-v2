@@ -22,6 +22,10 @@ type AttachInstancesRequest struct {
 
 // Send marshals and sends the AttachInstances API request.
 func (r AttachInstancesRequest) Send() (*AttachInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -84,6 +88,10 @@ type AttachLoadBalancerTargetGroupsRequest struct {
 
 // Send marshals and sends the AttachLoadBalancerTargetGroups API request.
 func (r AttachLoadBalancerTargetGroupsRequest) Send() (*AttachLoadBalancerTargetGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,6 +145,10 @@ type AttachLoadBalancersRequest struct {
 
 // Send marshals and sends the AttachLoadBalancers API request.
 func (r AttachLoadBalancersRequest) Send() (*AttachLoadBalancersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,6 +205,10 @@ type CompleteLifecycleActionRequest struct {
 
 // Send marshals and sends the CompleteLifecycleAction API request.
 func (r CompleteLifecycleActionRequest) Send() (*CompleteLifecycleActionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -261,6 +277,10 @@ type CreateAutoScalingGroupRequest struct {
 
 // Send marshals and sends the CreateAutoScalingGroup API request.
 func (r CreateAutoScalingGroupRequest) Send() (*CreateAutoScalingGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -316,6 +336,10 @@ type CreateLaunchConfigurationRequest struct {
 
 // Send marshals and sends the CreateLaunchConfiguration API request.
 func (r CreateLaunchConfigurationRequest) Send() (*CreateLaunchConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -371,6 +395,10 @@ type CreateOrUpdateTagsRequest struct {
 
 // Send marshals and sends the CreateOrUpdateTags API request.
 func (r CreateOrUpdateTagsRequest) Send() (*CreateOrUpdateTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -425,6 +453,10 @@ type DeleteAutoScalingGroupRequest struct {
 
 // Send marshals and sends the DeleteAutoScalingGroup API request.
 func (r DeleteAutoScalingGroupRequest) Send() (*DeleteAutoScalingGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -487,6 +519,10 @@ type DeleteLaunchConfigurationRequest struct {
 
 // Send marshals and sends the DeleteLaunchConfiguration API request.
 func (r DeleteLaunchConfigurationRequest) Send() (*DeleteLaunchConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -539,6 +575,10 @@ type DeleteLifecycleHookRequest struct {
 
 // Send marshals and sends the DeleteLifecycleHook API request.
 func (r DeleteLifecycleHookRequest) Send() (*DeleteLifecycleHookOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -588,6 +628,10 @@ type DeleteNotificationConfigurationRequest struct {
 
 // Send marshals and sends the DeleteNotificationConfiguration API request.
 func (r DeleteNotificationConfigurationRequest) Send() (*DeleteNotificationConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -636,6 +680,10 @@ type DeletePolicyRequest struct {
 
 // Send marshals and sends the DeletePolicy API request.
 func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -687,6 +735,10 @@ type DeleteScheduledActionRequest struct {
 
 // Send marshals and sends the DeleteScheduledAction API request.
 func (r DeleteScheduledActionRequest) Send() (*DeleteScheduledActionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -735,6 +787,10 @@ type DeleteTagsRequest struct {
 
 // Send marshals and sends the DeleteTags API request.
 func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1277,6 +1333,10 @@ type DescribeLifecycleHooksRequest struct {
 
 // Send marshals and sends the DescribeLifecycleHooks API request.
 func (r DescribeLifecycleHooksRequest) Send() (*DescribeLifecycleHooksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1323,6 +1383,10 @@ type DescribeLoadBalancerTargetGroupsRequest struct {
 
 // Send marshals and sends the DescribeLoadBalancerTargetGroups API request.
 func (r DescribeLoadBalancerTargetGroupsRequest) Send() (*DescribeLoadBalancerTargetGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1369,6 +1433,10 @@ type DescribeLoadBalancersRequest struct {
 
 // Send marshals and sends the DescribeLoadBalancers API request.
 func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1570,6 +1638,10 @@ type DescribePoliciesRequest struct {
 
 // Send marshals and sends the DescribePolicies API request.
 func (r DescribePoliciesRequest) Send() (*DescribePoliciesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1672,6 +1744,10 @@ type DescribeScalingActivitiesRequest struct {
 
 // Send marshals and sends the DescribeScalingActivities API request.
 func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1820,6 +1896,10 @@ type DescribeScheduledActionsRequest struct {
 
 // Send marshals and sends the DescribeScheduledActions API request.
 func (r DescribeScheduledActionsRequest) Send() (*DescribeScheduledActionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2080,6 +2160,10 @@ type DetachInstancesRequest struct {
 
 // Send marshals and sends the DetachInstances API request.
 func (r DetachInstancesRequest) Send() (*DetachInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2141,6 +2225,10 @@ type DetachLoadBalancerTargetGroupsRequest struct {
 
 // Send marshals and sends the DetachLoadBalancerTargetGroups API request.
 func (r DetachLoadBalancerTargetGroupsRequest) Send() (*DetachLoadBalancerTargetGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2187,6 +2275,10 @@ type DetachLoadBalancersRequest struct {
 
 // Send marshals and sends the DetachLoadBalancers API request.
 func (r DetachLoadBalancersRequest) Send() (*DetachLoadBalancersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2242,6 +2334,10 @@ type DisableMetricsCollectionRequest struct {
 
 // Send marshals and sends the DisableMetricsCollection API request.
 func (r DisableMetricsCollectionRequest) Send() (*DisableMetricsCollectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2290,6 +2386,10 @@ type EnableMetricsCollectionRequest struct {
 
 // Send marshals and sends the EnableMetricsCollection API request.
 func (r EnableMetricsCollectionRequest) Send() (*EnableMetricsCollectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2340,6 +2440,10 @@ type EnterStandbyRequest struct {
 
 // Send marshals and sends the EnterStandby API request.
 func (r EnterStandbyRequest) Send() (*EnterStandbyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2390,6 +2494,10 @@ type ExecutePolicyRequest struct {
 
 // Send marshals and sends the ExecutePolicy API request.
 func (r ExecutePolicyRequest) Send() (*ExecutePolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2438,6 +2546,10 @@ type ExitStandbyRequest struct {
 
 // Send marshals and sends the ExitStandby API request.
 func (r ExitStandbyRequest) Send() (*ExitStandbyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2488,6 +2600,10 @@ type PutLifecycleHookRequest struct {
 
 // Send marshals and sends the PutLifecycleHook API request.
 func (r PutLifecycleHookRequest) Send() (*PutLifecycleHookOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2564,6 +2680,10 @@ type PutNotificationConfigurationRequest struct {
 
 // Send marshals and sends the PutNotificationConfiguration API request.
 func (r PutNotificationConfigurationRequest) Send() (*PutNotificationConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2620,6 +2740,10 @@ type PutScalingPolicyRequest struct {
 
 // Send marshals and sends the PutScalingPolicy API request.
 func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2674,6 +2798,10 @@ type PutScheduledUpdateGroupActionRequest struct {
 
 // Send marshals and sends the PutScheduledUpdateGroupAction API request.
 func (r PutScheduledUpdateGroupActionRequest) Send() (*PutScheduledUpdateGroupActionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2727,6 +2855,10 @@ type RecordLifecycleActionHeartbeatRequest struct {
 
 // Send marshals and sends the RecordLifecycleActionHeartbeat API request.
 func (r RecordLifecycleActionHeartbeatRequest) Send() (*RecordLifecycleActionHeartbeatOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2796,6 +2928,10 @@ type ResumeProcessesRequest struct {
 
 // Send marshals and sends the ResumeProcesses API request.
 func (r ResumeProcessesRequest) Send() (*ResumeProcessesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2849,6 +2985,10 @@ type SetDesiredCapacityRequest struct {
 
 // Send marshals and sends the SetDesiredCapacity API request.
 func (r SetDesiredCapacityRequest) Send() (*SetDesiredCapacityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2900,6 +3040,10 @@ type SetInstanceHealthRequest struct {
 
 // Send marshals and sends the SetInstanceHealth API request.
 func (r SetInstanceHealthRequest) Send() (*SetInstanceHealthOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2951,6 +3095,10 @@ type SetInstanceProtectionRequest struct {
 
 // Send marshals and sends the SetInstanceProtection API request.
 func (r SetInstanceProtectionRequest) Send() (*SetInstanceProtectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3000,6 +3148,10 @@ type SuspendProcessesRequest struct {
 
 // Send marshals and sends the SuspendProcesses API request.
 func (r SuspendProcessesRequest) Send() (*SuspendProcessesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3058,6 +3210,10 @@ type TerminateInstanceInAutoScalingGroupRequest struct {
 
 // Send marshals and sends the TerminateInstanceInAutoScalingGroup API request.
 func (r TerminateInstanceInAutoScalingGroupRequest) Send() (*TerminateInstanceInAutoScalingGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3108,6 +3264,10 @@ type UpdateAutoScalingGroupRequest struct {
 
 // Send marshals and sends the UpdateAutoScalingGroup API request.
 func (r UpdateAutoScalingGroupRequest) Send() (*UpdateAutoScalingGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

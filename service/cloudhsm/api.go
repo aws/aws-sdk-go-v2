@@ -19,6 +19,10 @@ type AddTagsToResourceRequest struct {
 
 // Send marshals and sends the AddTagsToResource API request.
 func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,6 +71,10 @@ type CreateHapgRequest struct {
 
 // Send marshals and sends the CreateHapg API request.
 func (r CreateHapgRequest) Send() (*CreateHapgOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -114,6 +122,10 @@ type CreateHsmRequest struct {
 
 // Send marshals and sends the CreateHsm API request.
 func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -170,6 +182,10 @@ type CreateLunaClientRequest struct {
 
 // Send marshals and sends the CreateLunaClient API request.
 func (r CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -216,6 +232,10 @@ type DeleteHapgRequest struct {
 
 // Send marshals and sends the DeleteHapg API request.
 func (r DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -262,6 +282,10 @@ type DeleteHsmRequest struct {
 
 // Send marshals and sends the DeleteHsm API request.
 func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -309,6 +333,10 @@ type DeleteLunaClientRequest struct {
 
 // Send marshals and sends the DeleteLunaClient API request.
 func (r DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -355,6 +383,10 @@ type DescribeHapgRequest struct {
 
 // Send marshals and sends the DescribeHapg API request.
 func (r DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -494,6 +526,10 @@ type GetConfigRequest struct {
 
 // Send marshals and sends the GetConfig API request.
 func (r GetConfigRequest) Send() (*GetConfigOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -741,6 +777,10 @@ type ListTagsForResourceRequest struct {
 
 // Send marshals and sends the ListTagsForResource API request.
 func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,6 +827,10 @@ type ModifyHapgRequest struct {
 
 // Send marshals and sends the ModifyHapg API request.
 func (r ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -833,6 +877,10 @@ type ModifyHsmRequest struct {
 
 // Send marshals and sends the ModifyHsm API request.
 func (r ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -885,6 +933,10 @@ type ModifyLunaClientRequest struct {
 
 // Send marshals and sends the ModifyLunaClient API request.
 func (r ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -934,6 +986,10 @@ type RemoveTagsFromResourceRequest struct {
 
 // Send marshals and sends the RemoveTagsFromResource API request.
 func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

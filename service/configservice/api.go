@@ -22,6 +22,10 @@ type DeleteConfigRuleRequest struct {
 
 // Send marshals and sends the DeleteConfigRule API request.
 func (r DeleteConfigRuleRequest) Send() (*DeleteConfigRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -76,6 +80,10 @@ type DeleteConfigurationRecorderRequest struct {
 
 // Send marshals and sends the DeleteConfigurationRecorder API request.
 func (r DeleteConfigurationRecorderRequest) Send() (*DeleteConfigurationRecorderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -133,6 +141,10 @@ type DeleteDeliveryChannelRequest struct {
 
 // Send marshals and sends the DeleteDeliveryChannel API request.
 func (r DeleteDeliveryChannelRequest) Send() (*DeleteDeliveryChannelOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -184,6 +196,10 @@ type DeleteEvaluationResultsRequest struct {
 
 // Send marshals and sends the DeleteEvaluationResults API request.
 func (r DeleteEvaluationResultsRequest) Send() (*DeleteEvaluationResultsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -233,6 +249,10 @@ type DeliverConfigSnapshotRequest struct {
 
 // Send marshals and sends the DeliverConfigSnapshot API request.
 func (r DeliverConfigSnapshotRequest) Send() (*DeliverConfigSnapshotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,6 +376,10 @@ type DescribeComplianceByResourceRequest struct {
 
 // Send marshals and sends the DescribeComplianceByResource API request.
 func (r DescribeComplianceByResourceRequest) Send() (*DescribeComplianceByResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -723,6 +747,10 @@ type GetComplianceDetailsByConfigRuleRequest struct {
 
 // Send marshals and sends the GetComplianceDetailsByConfigRule API request.
 func (r GetComplianceDetailsByConfigRuleRequest) Send() (*GetComplianceDetailsByConfigRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -771,6 +799,10 @@ type GetComplianceDetailsByResourceRequest struct {
 
 // Send marshals and sends the GetComplianceDetailsByResource API request.
 func (r GetComplianceDetailsByResourceRequest) Send() (*GetComplianceDetailsByResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -993,6 +1025,10 @@ type GetResourceConfigHistoryRequest struct {
 
 // Send marshals and sends the GetResourceConfigHistory API request.
 func (r GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1106,6 +1142,10 @@ type ListDiscoveredResourcesRequest struct {
 
 // Send marshals and sends the ListDiscoveredResources API request.
 func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1165,6 +1205,10 @@ type PutConfigRuleRequest struct {
 
 // Send marshals and sends the PutConfigRule API request.
 func (r PutConfigRuleRequest) Send() (*PutConfigRuleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1247,6 +1291,10 @@ type PutConfigurationRecorderRequest struct {
 
 // Send marshals and sends the PutConfigurationRecorder API request.
 func (r PutConfigurationRecorderRequest) Send() (*PutConfigurationRecorderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1305,6 +1353,10 @@ type PutDeliveryChannelRequest struct {
 
 // Send marshals and sends the PutDeliveryChannel API request.
 func (r PutDeliveryChannelRequest) Send() (*PutDeliveryChannelOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1366,6 +1418,10 @@ type PutEvaluationsRequest struct {
 
 // Send marshals and sends the PutEvaluations API request.
 func (r PutEvaluationsRequest) Send() (*PutEvaluationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1414,6 +1470,10 @@ type StartConfigRulesEvaluationRequest struct {
 
 // Send marshals and sends the StartConfigRulesEvaluation API request.
 func (r StartConfigRulesEvaluationRequest) Send() (*StartConfigRulesEvaluationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1489,6 +1549,10 @@ type StartConfigurationRecorderRequest struct {
 
 // Send marshals and sends the StartConfigurationRecorder API request.
 func (r StartConfigurationRecorderRequest) Send() (*StartConfigurationRecorderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1541,6 +1605,10 @@ type StopConfigurationRecorderRequest struct {
 
 // Send marshals and sends the StopConfigurationRecorder API request.
 func (r StopConfigurationRecorderRequest) Send() (*StopConfigurationRecorderOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -22,6 +22,10 @@ type AddInstanceFleetRequest struct {
 
 // Send marshals and sends the AddInstanceFleet API request.
 func (r AddInstanceFleetRequest) Send() (*AddInstanceFleetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,6 +75,10 @@ type AddInstanceGroupsRequest struct {
 
 // Send marshals and sends the AddInstanceGroups API request.
 func (r AddInstanceGroupsRequest) Send() (*AddInstanceGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,6 +125,10 @@ type AddJobFlowStepsRequest struct {
 
 // Send marshals and sends the AddJobFlowSteps API request.
 func (r AddJobFlowStepsRequest) Send() (*AddJobFlowStepsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -185,6 +197,10 @@ type AddTagsRequest struct {
 
 // Send marshals and sends the AddTags API request.
 func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -284,6 +300,10 @@ type CreateSecurityConfigurationRequest struct {
 
 // Send marshals and sends the CreateSecurityConfiguration API request.
 func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -331,6 +351,10 @@ type DeleteSecurityConfigurationRequest struct {
 
 // Send marshals and sends the DeleteSecurityConfiguration API request.
 func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -377,6 +401,10 @@ type DescribeClusterRequest struct {
 
 // Send marshals and sends the DescribeCluster API request.
 func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -492,6 +520,10 @@ type DescribeSecurityConfigurationRequest struct {
 
 // Send marshals and sends the DescribeSecurityConfiguration API request.
 func (r DescribeSecurityConfigurationRequest) Send() (*DescribeSecurityConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -539,6 +571,10 @@ type DescribeStepRequest struct {
 
 // Send marshals and sends the DescribeStep API request.
 func (r DescribeStepRequest) Send() (*DescribeStepOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -585,6 +621,10 @@ type ListBootstrapActionsRequest struct {
 
 // Send marshals and sends the ListBootstrapActions API request.
 func (r ListBootstrapActionsRequest) Send() (*ListBootstrapActionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,6 +833,10 @@ type ListInstanceFleetsRequest struct {
 
 // Send marshals and sends the ListInstanceFleets API request.
 func (r ListInstanceFleetsRequest) Send() (*ListInstanceFleetsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -898,6 +942,10 @@ type ListInstanceGroupsRequest struct {
 
 // Send marshals and sends the ListInstanceGroups API request.
 func (r ListInstanceGroupsRequest) Send() (*ListInstanceGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1000,6 +1048,10 @@ type ListInstancesRequest struct {
 
 // Send marshals and sends the ListInstances API request.
 func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1154,6 +1206,10 @@ type ListStepsRequest struct {
 
 // Send marshals and sends the ListSteps API request.
 func (r ListStepsRequest) Send() (*ListStepsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1257,6 +1313,10 @@ type ModifyInstanceFleetRequest struct {
 
 // Send marshals and sends the ModifyInstanceFleet API request.
 func (r ModifyInstanceFleetRequest) Send() (*ModifyInstanceFleetOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1310,6 +1370,10 @@ type ModifyInstanceGroupsRequest struct {
 
 // Send marshals and sends the ModifyInstanceGroups API request.
 func (r ModifyInstanceGroupsRequest) Send() (*ModifyInstanceGroupsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1361,6 +1425,10 @@ type PutAutoScalingPolicyRequest struct {
 
 // Send marshals and sends the PutAutoScalingPolicy API request.
 func (r PutAutoScalingPolicyRequest) Send() (*PutAutoScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1410,6 +1478,10 @@ type RemoveAutoScalingPolicyRequest struct {
 
 // Send marshals and sends the RemoveAutoScalingPolicy API request.
 func (r RemoveAutoScalingPolicyRequest) Send() (*RemoveAutoScalingPolicyOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1457,6 +1529,10 @@ type RemoveTagsRequest struct {
 
 // Send marshals and sends the RemoveTags API request.
 func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1508,6 +1584,10 @@ type RunJobFlowRequest struct {
 
 // Send marshals and sends the RunJobFlow API request.
 func (r RunJobFlowRequest) Send() (*RunJobFlowOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1580,6 +1660,10 @@ type SetTerminationProtectionRequest struct {
 
 // Send marshals and sends the SetTerminationProtection API request.
 func (r SetTerminationProtectionRequest) Send() (*SetTerminationProtectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1644,6 +1728,10 @@ type SetVisibleToAllUsersRequest struct {
 
 // Send marshals and sends the SetVisibleToAllUsers API request.
 func (r SetVisibleToAllUsersRequest) Send() (*SetVisibleToAllUsersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1697,6 +1785,10 @@ type TerminateJobFlowsRequest struct {
 
 // Send marshals and sends the TerminateJobFlows API request.
 func (r TerminateJobFlowsRequest) Send() (*TerminateJobFlowsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -22,6 +22,10 @@ type AbortEnvironmentUpdateRequest struct {
 
 // Send marshals and sends the AbortEnvironmentUpdate API request.
 func (r AbortEnvironmentUpdateRequest) Send() (*AbortEnvironmentUpdateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,6 +75,10 @@ type ApplyEnvironmentManagedActionRequest struct {
 
 // Send marshals and sends the ApplyEnvironmentManagedAction API request.
 func (r ApplyEnvironmentManagedActionRequest) Send() (*ApplyEnvironmentManagedActionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -119,6 +127,10 @@ type CheckDNSAvailabilityRequest struct {
 
 // Send marshals and sends the CheckDNSAvailability API request.
 func (r CheckDNSAvailabilityRequest) Send() (*CheckDNSAvailabilityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -165,6 +177,10 @@ type ComposeEnvironmentsRequest struct {
 
 // Send marshals and sends the ComposeEnvironments API request.
 func (r ComposeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -217,6 +233,10 @@ type CreateApplicationRequest struct {
 
 // Send marshals and sends the CreateApplication API request.
 func (r CreateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -264,6 +284,10 @@ type CreateApplicationVersionRequest struct {
 
 // Send marshals and sends the CreateApplicationVersion API request.
 func (r CreateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,6 +350,10 @@ type CreateConfigurationTemplateRequest struct {
 
 // Send marshals and sends the CreateConfigurationTemplate API request.
 func (r CreateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -382,6 +410,10 @@ type CreateEnvironmentRequest struct {
 
 // Send marshals and sends the CreateEnvironment API request.
 func (r CreateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -429,6 +461,10 @@ type CreatePlatformVersionRequest struct {
 
 // Send marshals and sends the CreatePlatformVersion API request.
 func (r CreatePlatformVersionRequest) Send() (*CreatePlatformVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -523,6 +559,10 @@ type DeleteApplicationRequest struct {
 
 // Send marshals and sends the DeleteApplication API request.
 func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -575,6 +615,10 @@ type DeleteApplicationVersionRequest struct {
 
 // Send marshals and sends the DeleteApplicationVersion API request.
 func (r DeleteApplicationVersionRequest) Send() (*DeleteApplicationVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -626,6 +670,10 @@ type DeleteConfigurationTemplateRequest struct {
 
 // Send marshals and sends the DeleteConfigurationTemplate API request.
 func (r DeleteConfigurationTemplateRequest) Send() (*DeleteConfigurationTemplateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -678,6 +726,10 @@ type DeleteEnvironmentConfigurationRequest struct {
 
 // Send marshals and sends the DeleteEnvironmentConfiguration API request.
 func (r DeleteEnvironmentConfigurationRequest) Send() (*DeleteEnvironmentConfigurationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,6 +831,10 @@ type DescribeApplicationVersionsRequest struct {
 
 // Send marshals and sends the DescribeApplicationVersions API request.
 func (r DescribeApplicationVersionsRequest) Send() (*DescribeApplicationVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -871,6 +927,10 @@ type DescribeConfigurationOptionsRequest struct {
 
 // Send marshals and sends the DescribeConfigurationOptions API request.
 func (r DescribeConfigurationOptionsRequest) Send() (*DescribeConfigurationOptionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -921,6 +981,10 @@ type DescribeConfigurationSettingsRequest struct {
 
 // Send marshals and sends the DescribeConfigurationSettings API request.
 func (r DescribeConfigurationSettingsRequest) Send() (*DescribeConfigurationSettingsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -979,6 +1043,10 @@ type DescribeEnvironmentHealthRequest struct {
 
 // Send marshals and sends the DescribeEnvironmentHealth API request.
 func (r DescribeEnvironmentHealthRequest) Send() (*DescribeEnvironmentHealthOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1027,6 +1095,10 @@ type DescribeEnvironmentManagedActionHistoryRequest struct {
 
 // Send marshals and sends the DescribeEnvironmentManagedActionHistory API request.
 func (r DescribeEnvironmentManagedActionHistoryRequest) Send() (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1119,6 +1191,10 @@ type DescribeEnvironmentResourcesRequest struct {
 
 // Send marshals and sends the DescribeEnvironmentResources API request.
 func (r DescribeEnvironmentResourcesRequest) Send() (*DescribeEnvironmentResourcesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1165,6 +1241,10 @@ type DescribeEnvironmentsRequest struct {
 
 // Send marshals and sends the DescribeEnvironments API request.
 func (r DescribeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1211,6 +1291,10 @@ type DescribeEventsRequest struct {
 
 // Send marshals and sends the DescribeEvents API request.
 func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1315,6 +1399,10 @@ type DescribeInstancesHealthRequest struct {
 
 // Send marshals and sends the DescribeInstancesHealth API request.
 func (r DescribeInstancesHealthRequest) Send() (*DescribeInstancesHealthOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1455,6 +1543,10 @@ type ListPlatformVersionsRequest struct {
 
 // Send marshals and sends the ListPlatformVersions API request.
 func (r ListPlatformVersionsRequest) Send() (*ListPlatformVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1501,6 +1593,10 @@ type RebuildEnvironmentRequest struct {
 
 // Send marshals and sends the RebuildEnvironment API request.
 func (r RebuildEnvironmentRequest) Send() (*RebuildEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1550,6 +1646,10 @@ type RequestEnvironmentInfoRequest struct {
 
 // Send marshals and sends the RequestEnvironmentInfo API request.
 func (r RequestEnvironmentInfoRequest) Send() (*RequestEnvironmentInfoOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1612,6 +1712,10 @@ type RestartAppServerRequest struct {
 
 // Send marshals and sends the RestartAppServer API request.
 func (r RestartAppServerRequest) Send() (*RestartAppServerOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1661,6 +1765,10 @@ type RetrieveEnvironmentInfoRequest struct {
 
 // Send marshals and sends the RetrieveEnvironmentInfo API request.
 func (r RetrieveEnvironmentInfoRequest) Send() (*RetrieveEnvironmentInfoOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1711,6 +1819,10 @@ type SwapEnvironmentCNAMEsRequest struct {
 
 // Send marshals and sends the SwapEnvironmentCNAMEs API request.
 func (r SwapEnvironmentCNAMEsRequest) Send() (*SwapEnvironmentCNAMEsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1759,6 +1871,10 @@ type TerminateEnvironmentRequest struct {
 
 // Send marshals and sends the TerminateEnvironment API request.
 func (r TerminateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1805,6 +1921,10 @@ type UpdateApplicationRequest struct {
 
 // Send marshals and sends the UpdateApplication API request.
 func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1854,6 +1974,10 @@ type UpdateApplicationResourceLifecycleRequest struct {
 
 // Send marshals and sends the UpdateApplicationResourceLifecycle API request.
 func (r UpdateApplicationResourceLifecycleRequest) Send() (*UpdateApplicationResourceLifecycleOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1900,6 +2024,10 @@ type UpdateApplicationVersionRequest struct {
 
 // Send marshals and sends the UpdateApplicationVersion API request.
 func (r UpdateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1949,6 +2077,10 @@ type UpdateConfigurationTemplateRequest struct {
 
 // Send marshals and sends the UpdateConfigurationTemplate API request.
 func (r UpdateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2003,6 +2135,10 @@ type UpdateEnvironmentRequest struct {
 
 // Send marshals and sends the UpdateEnvironment API request.
 func (r UpdateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2059,6 +2195,10 @@ type ValidateConfigurationSettingsRequest struct {
 
 // Send marshals and sends the ValidateConfigurationSettings API request.
 func (r ValidateConfigurationSettingsRequest) Send() (*ValidateConfigurationSettingsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

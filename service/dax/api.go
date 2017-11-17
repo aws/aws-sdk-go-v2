@@ -19,6 +19,10 @@ type CreateClusterRequest struct {
 
 // Send marshals and sends the CreateCluster API request.
 func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,6 +70,10 @@ type CreateParameterGroupRequest struct {
 
 // Send marshals and sends the CreateParameterGroup API request.
 func (r CreateParameterGroupRequest) Send() (*CreateParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -113,6 +121,10 @@ type CreateSubnetGroupRequest struct {
 
 // Send marshals and sends the CreateSubnetGroup API request.
 func (r CreateSubnetGroupRequest) Send() (*CreateSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -159,6 +171,10 @@ type DecreaseReplicationFactorRequest struct {
 
 // Send marshals and sends the DecreaseReplicationFactor API request.
 func (r DecreaseReplicationFactorRequest) Send() (*DecreaseReplicationFactorOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -208,6 +224,10 @@ type DeleteClusterRequest struct {
 
 // Send marshals and sends the DeleteCluster API request.
 func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -257,6 +277,10 @@ type DeleteParameterGroupRequest struct {
 
 // Send marshals and sends the DeleteParameterGroup API request.
 func (r DeleteParameterGroupRequest) Send() (*DeleteParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -304,6 +328,10 @@ type DeleteSubnetGroupRequest struct {
 
 // Send marshals and sends the DeleteSubnetGroup API request.
 func (r DeleteSubnetGroupRequest) Send() (*DeleteSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -558,6 +586,10 @@ type DescribeParametersRequest struct {
 
 // Send marshals and sends the DescribeParameters API request.
 func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,6 +683,10 @@ type IncreaseReplicationFactorRequest struct {
 
 // Send marshals and sends the IncreaseReplicationFactor API request.
 func (r IncreaseReplicationFactorRequest) Send() (*IncreaseReplicationFactorOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -697,6 +733,10 @@ type ListTagsRequest struct {
 
 // Send marshals and sends the ListTags API request.
 func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -744,6 +784,10 @@ type RebootNodeRequest struct {
 
 // Send marshals and sends the RebootNode API request.
 func (r RebootNodeRequest) Send() (*RebootNodeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -791,6 +835,10 @@ type TagResourceRequest struct {
 
 // Send marshals and sends the TagResource API request.
 func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,6 +886,10 @@ type UntagResourceRequest struct {
 
 // Send marshals and sends the UntagResource API request.
 func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -885,6 +937,10 @@ type UpdateClusterRequest struct {
 
 // Send marshals and sends the UpdateCluster API request.
 func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -933,6 +989,10 @@ type UpdateParameterGroupRequest struct {
 
 // Send marshals and sends the UpdateParameterGroup API request.
 func (r UpdateParameterGroupRequest) Send() (*UpdateParameterGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -980,6 +1040,10 @@ type UpdateSubnetGroupRequest struct {
 
 // Send marshals and sends the UpdateSubnetGroup API request.
 func (r UpdateSubnetGroupRequest) Send() (*UpdateSubnetGroupOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

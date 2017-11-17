@@ -22,6 +22,10 @@ type CreateIdentityPoolRequest struct {
 
 // Send marshals and sends the CreateIdentityPool API request.
 func (r CreateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -82,6 +86,10 @@ type DeleteIdentitiesRequest struct {
 
 // Send marshals and sends the DeleteIdentities API request.
 func (r DeleteIdentitiesRequest) Send() (*DeleteIdentitiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -131,6 +139,10 @@ type DeleteIdentityPoolRequest struct {
 
 // Send marshals and sends the DeleteIdentityPool API request.
 func (r DeleteIdentityPoolRequest) Send() (*DeleteIdentityPoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -182,6 +194,10 @@ type DescribeIdentityRequest struct {
 
 // Send marshals and sends the DescribeIdentity API request.
 func (r DescribeIdentityRequest) Send() (*DescribeIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -231,6 +247,10 @@ type DescribeIdentityPoolRequest struct {
 
 // Send marshals and sends the DescribeIdentityPool API request.
 func (r DescribeIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -280,6 +300,10 @@ type GetCredentialsForIdentityRequest struct {
 
 // Send marshals and sends the GetCredentialsForIdentity API request.
 func (r GetCredentialsForIdentityRequest) Send() (*GetCredentialsForIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -331,6 +355,10 @@ type GetIdRequest struct {
 
 // Send marshals and sends the GetId API request.
 func (r GetIdRequest) Send() (*GetIdOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -380,6 +408,10 @@ type GetIdentityPoolRolesRequest struct {
 
 // Send marshals and sends the GetIdentityPoolRoles API request.
 func (r GetIdentityPoolRolesRequest) Send() (*GetIdentityPoolRolesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -428,6 +460,10 @@ type GetOpenIdTokenRequest struct {
 
 // Send marshals and sends the GetOpenIdToken API request.
 func (r GetOpenIdTokenRequest) Send() (*GetOpenIdTokenOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -480,6 +516,10 @@ type GetOpenIdTokenForDeveloperIdentityRequest struct {
 
 // Send marshals and sends the GetOpenIdTokenForDeveloperIdentity API request.
 func (r GetOpenIdTokenForDeveloperIdentityRequest) Send() (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -541,6 +581,10 @@ type ListIdentitiesRequest struct {
 
 // Send marshals and sends the ListIdentities API request.
 func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -589,6 +633,10 @@ type ListIdentityPoolsRequest struct {
 
 // Send marshals and sends the ListIdentityPools API request.
 func (r ListIdentityPoolsRequest) Send() (*ListIdentityPoolsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,6 +685,10 @@ type LookupDeveloperIdentityRequest struct {
 
 // Send marshals and sends the LookupDeveloperIdentity API request.
 func (r LookupDeveloperIdentityRequest) Send() (*LookupDeveloperIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -692,6 +744,10 @@ type MergeDeveloperIdentitiesRequest struct {
 
 // Send marshals and sends the MergeDeveloperIdentities API request.
 func (r MergeDeveloperIdentitiesRequest) Send() (*MergeDeveloperIdentitiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -746,6 +802,10 @@ type SetIdentityPoolRolesRequest struct {
 
 // Send marshals and sends the SetIdentityPoolRoles API request.
 func (r SetIdentityPoolRolesRequest) Send() (*SetIdentityPoolRolesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -797,6 +857,10 @@ type UnlinkDeveloperIdentityRequest struct {
 
 // Send marshals and sends the UnlinkDeveloperIdentity API request.
 func (r UnlinkDeveloperIdentityRequest) Send() (*UnlinkDeveloperIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -850,6 +914,10 @@ type UnlinkIdentityRequest struct {
 
 // Send marshals and sends the UnlinkIdentity API request.
 func (r UnlinkIdentityRequest) Send() (*UnlinkIdentityOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -902,6 +970,10 @@ type UpdateIdentityPoolRequest struct {
 
 // Send marshals and sends the UpdateIdentityPool API request.
 func (r UpdateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

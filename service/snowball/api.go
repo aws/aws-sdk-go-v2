@@ -20,6 +20,10 @@ type CancelClusterRequest struct {
 
 // Send marshals and sends the CancelCluster API request.
 func (r CancelClusterRequest) Send() (*CancelClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,6 +72,10 @@ type CancelJobRequest struct {
 
 // Send marshals and sends the CancelJob API request.
 func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,6 +125,10 @@ type CreateAddressRequest struct {
 
 // Send marshals and sends the CreateAddress API request.
 func (r CreateAddressRequest) Send() (*CreateAddressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -166,6 +178,10 @@ type CreateClusterRequest struct {
 
 // Send marshals and sends the CreateCluster API request.
 func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -214,6 +230,10 @@ type CreateJobRequest struct {
 
 // Send marshals and sends the CreateJob API request.
 func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -264,6 +284,10 @@ type DescribeAddressRequest struct {
 
 // Send marshals and sends the DescribeAddress API request.
 func (r DescribeAddressRequest) Send() (*DescribeAddressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -311,6 +335,10 @@ type DescribeAddressesRequest struct {
 
 // Send marshals and sends the DescribeAddresses API request.
 func (r DescribeAddressesRequest) Send() (*DescribeAddressesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -415,6 +443,10 @@ type DescribeClusterRequest struct {
 
 // Send marshals and sends the DescribeCluster API request.
 func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,6 +494,10 @@ type DescribeJobRequest struct {
 
 // Send marshals and sends the DescribeJob API request.
 func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,6 +545,10 @@ type GetJobManifestRequest struct {
 
 // Send marshals and sends the GetJobManifest API request.
 func (r GetJobManifestRequest) Send() (*GetJobManifestOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -572,6 +612,10 @@ type GetJobUnlockCodeRequest struct {
 
 // Send marshals and sends the GetJobUnlockCode API request.
 func (r GetJobUnlockCodeRequest) Send() (*GetJobUnlockCodeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -680,6 +724,10 @@ type ListClusterJobsRequest struct {
 
 // Send marshals and sends the ListClusterJobs API request.
 func (r ListClusterJobsRequest) Send() (*ListClusterJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -728,6 +776,10 @@ type ListClustersRequest struct {
 
 // Send marshals and sends the ListClusters API request.
 func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -776,6 +828,10 @@ type ListJobsRequest struct {
 
 // Send marshals and sends the ListJobs API request.
 func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -882,6 +938,10 @@ type UpdateClusterRequest struct {
 
 // Send marshals and sends the UpdateCluster API request.
 func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -931,6 +991,10 @@ type UpdateJobRequest struct {
 
 // Send marshals and sends the UpdateJob API request.
 func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

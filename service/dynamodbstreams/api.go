@@ -20,6 +20,10 @@ type DescribeStreamRequest struct {
 
 // Send marshals and sends the DescribeStream API request.
 func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -76,6 +80,10 @@ type GetRecordsRequest struct {
 
 // Send marshals and sends the GetRecords API request.
 func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -132,6 +140,10 @@ type GetShardIteratorRequest struct {
 
 // Send marshals and sends the GetShardIterator API request.
 func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -182,6 +194,10 @@ type ListStreamsRequest struct {
 
 // Send marshals and sends the ListStreams API request.
 func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

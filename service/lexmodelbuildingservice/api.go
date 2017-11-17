@@ -22,6 +22,10 @@ type CreateBotVersionRequest struct {
 
 // Send marshals and sends the CreateBotVersion API request.
 func (r CreateBotVersionRequest) Send() (*CreateBotVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -78,6 +82,10 @@ type CreateIntentVersionRequest struct {
 
 // Send marshals and sends the CreateIntentVersion API request.
 func (r CreateIntentVersionRequest) Send() (*CreateIntentVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,6 +144,10 @@ type CreateSlotTypeVersionRequest struct {
 
 // Send marshals and sends the CreateSlotTypeVersion API request.
 func (r CreateSlotTypeVersionRequest) Send() (*CreateSlotTypeVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,6 +205,10 @@ type DeleteBotRequest struct {
 
 // Send marshals and sends the DeleteBot API request.
 func (r DeleteBotRequest) Send() (*DeleteBotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,6 +266,10 @@ type DeleteBotAliasRequest struct {
 
 // Send marshals and sends the DeleteBotAlias API request.
 func (r DeleteBotAliasRequest) Send() (*DeleteBotAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,6 +326,10 @@ type DeleteBotChannelAssociationRequest struct {
 
 // Send marshals and sends the DeleteBotChannelAssociation API request.
 func (r DeleteBotChannelAssociationRequest) Send() (*DeleteBotChannelAssociationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -357,6 +381,10 @@ type DeleteBotVersionRequest struct {
 
 // Send marshals and sends the DeleteBotVersion API request.
 func (r DeleteBotVersionRequest) Send() (*DeleteBotVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -408,6 +436,10 @@ type DeleteIntentRequest struct {
 
 // Send marshals and sends the DeleteIntent API request.
 func (r DeleteIntentRequest) Send() (*DeleteIntentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -469,6 +501,10 @@ type DeleteIntentVersionRequest struct {
 
 // Send marshals and sends the DeleteIntentVersion API request.
 func (r DeleteIntentVersionRequest) Send() (*DeleteIntentVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,6 +556,10 @@ type DeleteSlotTypeRequest struct {
 
 // Send marshals and sends the DeleteSlotType API request.
 func (r DeleteSlotTypeRequest) Send() (*DeleteSlotTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -583,6 +623,10 @@ type DeleteSlotTypeVersionRequest struct {
 
 // Send marshals and sends the DeleteSlotTypeVersion API request.
 func (r DeleteSlotTypeVersionRequest) Send() (*DeleteSlotTypeVersionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -634,6 +678,10 @@ type DeleteUtterancesRequest struct {
 
 // Send marshals and sends the DeleteUtterances API request.
 func (r DeleteUtterancesRequest) Send() (*DeleteUtterancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -692,6 +740,10 @@ type GetBotRequest struct {
 
 // Send marshals and sends the GetBot API request.
 func (r GetBotRequest) Send() (*GetBotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -741,6 +793,10 @@ type GetBotAliasRequest struct {
 
 // Send marshals and sends the GetBotAlias API request.
 func (r GetBotAliasRequest) Send() (*GetBotAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -790,6 +846,10 @@ type GetBotAliasesRequest struct {
 
 // Send marshals and sends the GetBotAliases API request.
 func (r GetBotAliasesRequest) Send() (*GetBotAliasesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -894,6 +954,10 @@ type GetBotChannelAssociationRequest struct {
 
 // Send marshals and sends the GetBotChannelAssociation API request.
 func (r GetBotChannelAssociationRequest) Send() (*GetBotChannelAssociationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,6 +1008,10 @@ type GetBotChannelAssociationsRequest struct {
 
 // Send marshals and sends the GetBotChannelAssociations API request.
 func (r GetBotChannelAssociationsRequest) Send() (*GetBotChannelAssociationsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1049,6 +1117,10 @@ type GetBotVersionsRequest struct {
 
 // Send marshals and sends the GetBotVersions API request.
 func (r GetBotVersionsRequest) Send() (*GetBotVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,6 +1233,10 @@ type GetBotsRequest struct {
 
 // Send marshals and sends the GetBots API request.
 func (r GetBotsRequest) Send() (*GetBotsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1272,6 +1348,10 @@ type GetBuiltinIntentRequest struct {
 
 // Send marshals and sends the GetBuiltinIntent API request.
 func (r GetBuiltinIntentRequest) Send() (*GetBuiltinIntentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1320,6 +1400,10 @@ type GetBuiltinIntentsRequest struct {
 
 // Send marshals and sends the GetBuiltinIntents API request.
 func (r GetBuiltinIntentsRequest) Send() (*GetBuiltinIntentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1424,6 +1508,10 @@ type GetBuiltinSlotTypesRequest struct {
 
 // Send marshals and sends the GetBuiltinSlotTypes API request.
 func (r GetBuiltinSlotTypesRequest) Send() (*GetBuiltinSlotTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1531,6 +1619,10 @@ type GetExportRequest struct {
 
 // Send marshals and sends the GetExport API request.
 func (r GetExportRequest) Send() (*GetExportOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1577,6 +1669,10 @@ type GetIntentRequest struct {
 
 // Send marshals and sends the GetIntent API request.
 func (r GetIntentRequest) Send() (*GetIntentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1626,6 +1722,10 @@ type GetIntentVersionsRequest struct {
 
 // Send marshals and sends the GetIntentVersions API request.
 func (r GetIntentVersionsRequest) Send() (*GetIntentVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1738,6 +1838,10 @@ type GetIntentsRequest struct {
 
 // Send marshals and sends the GetIntents API request.
 func (r GetIntentsRequest) Send() (*GetIntentsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1848,6 +1952,10 @@ type GetSlotTypeRequest struct {
 
 // Send marshals and sends the GetSlotType API request.
 func (r GetSlotTypeRequest) Send() (*GetSlotTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1897,6 +2005,10 @@ type GetSlotTypeVersionsRequest struct {
 
 // Send marshals and sends the GetSlotTypeVersions API request.
 func (r GetSlotTypeVersionsRequest) Send() (*GetSlotTypeVersionsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2009,6 +2121,10 @@ type GetSlotTypesRequest struct {
 
 // Send marshals and sends the GetSlotTypes API request.
 func (r GetSlotTypesRequest) Send() (*GetSlotTypesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2119,6 +2235,10 @@ type GetUtterancesViewRequest struct {
 
 // Send marshals and sends the GetUtterancesView API request.
 func (r GetUtterancesViewRequest) Send() (*GetUtterancesViewOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2188,6 +2308,10 @@ type PutBotRequest struct {
 
 // Send marshals and sends the PutBot API request.
 func (r PutBotRequest) Send() (*PutBotOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2246,6 +2370,10 @@ type PutBotAliasRequest struct {
 
 // Send marshals and sends the PutBotAlias API request.
 func (r PutBotAliasRequest) Send() (*PutBotAliasOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2296,6 +2424,10 @@ type PutIntentRequest struct {
 
 // Send marshals and sends the PutIntent API request.
 func (r PutIntentRequest) Send() (*PutIntentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2385,6 +2517,10 @@ type PutSlotTypeRequest struct {
 
 // Send marshals and sends the PutSlotType API request.
 func (r PutSlotTypeRequest) Send() (*PutSlotTypeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

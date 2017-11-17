@@ -21,6 +21,10 @@ type AddPermissionRequest struct {
 
 // Send marshals and sends the AddPermission API request.
 func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -70,6 +74,10 @@ type CheckIfPhoneNumberIsOptedOutRequest struct {
 
 // Send marshals and sends the CheckIfPhoneNumberIsOptedOut API request.
 func (r CheckIfPhoneNumberIsOptedOutRequest) Send() (*CheckIfPhoneNumberIsOptedOutOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -121,6 +129,10 @@ type ConfirmSubscriptionRequest struct {
 
 // Send marshals and sends the ConfirmSubscription API request.
 func (r ConfirmSubscriptionRequest) Send() (*ConfirmSubscriptionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,6 +183,10 @@ type CreatePlatformApplicationRequest struct {
 
 // Send marshals and sends the CreatePlatformApplication API request.
 func (r CreatePlatformApplicationRequest) Send() (*CreatePlatformApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,6 +258,10 @@ type CreatePlatformEndpointRequest struct {
 
 // Send marshals and sends the CreatePlatformEndpoint API request.
 func (r CreatePlatformEndpointRequest) Send() (*CreatePlatformEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -301,6 +321,10 @@ type CreateTopicRequest struct {
 
 // Send marshals and sends the CreateTopic API request.
 func (r CreateTopicRequest) Send() (*CreateTopicOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -351,6 +375,10 @@ type DeleteEndpointRequest struct {
 
 // Send marshals and sends the DeleteEndpoint API request.
 func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -404,6 +432,10 @@ type DeletePlatformApplicationRequest struct {
 
 // Send marshals and sends the DeletePlatformApplication API request.
 func (r DeletePlatformApplicationRequest) Send() (*DeletePlatformApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -454,6 +486,10 @@ type DeleteTopicRequest struct {
 
 // Send marshals and sends the DeleteTopic API request.
 func (r DeleteTopicRequest) Send() (*DeleteTopicOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -505,6 +541,10 @@ type GetEndpointAttributesRequest struct {
 
 // Send marshals and sends the GetEndpointAttributes API request.
 func (r GetEndpointAttributesRequest) Send() (*GetEndpointAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -553,6 +593,10 @@ type GetPlatformApplicationAttributesRequest struct {
 
 // Send marshals and sends the GetPlatformApplicationAttributes API request.
 func (r GetPlatformApplicationAttributesRequest) Send() (*GetPlatformApplicationAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -649,6 +693,10 @@ type GetSubscriptionAttributesRequest struct {
 
 // Send marshals and sends the GetSubscriptionAttributes API request.
 func (r GetSubscriptionAttributesRequest) Send() (*GetSubscriptionAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -695,6 +743,10 @@ type GetTopicAttributesRequest struct {
 
 // Send marshals and sends the GetTopicAttributes API request.
 func (r GetTopicAttributesRequest) Send() (*GetTopicAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -742,6 +794,10 @@ type ListEndpointsByPlatformApplicationRequest struct {
 
 // Send marshals and sends the ListEndpointsByPlatformApplication API request.
 func (r ListEndpointsByPlatformApplicationRequest) Send() (*ListEndpointsByPlatformApplicationOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1119,6 +1175,10 @@ type ListSubscriptionsByTopicRequest struct {
 
 // Send marshals and sends the ListSubscriptionsByTopic API request.
 func (r ListSubscriptionsByTopicRequest) Send() (*ListSubscriptionsByTopicOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1328,6 +1388,10 @@ type OptInPhoneNumberRequest struct {
 
 // Send marshals and sends the OptInPhoneNumber API request.
 func (r OptInPhoneNumberRequest) Send() (*OptInPhoneNumberOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1377,6 +1441,10 @@ type PublishRequest struct {
 
 // Send marshals and sends the Publish API request.
 func (r PublishRequest) Send() (*PublishOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1434,6 +1502,10 @@ type RemovePermissionRequest struct {
 
 // Send marshals and sends the RemovePermission API request.
 func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1482,6 +1554,10 @@ type SetEndpointAttributesRequest struct {
 
 // Send marshals and sends the SetEndpointAttributes API request.
 func (r SetEndpointAttributesRequest) Send() (*SetEndpointAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1532,6 +1608,10 @@ type SetPlatformApplicationAttributesRequest struct {
 
 // Send marshals and sends the SetPlatformApplicationAttributes API request.
 func (r SetPlatformApplicationAttributesRequest) Send() (*SetPlatformApplicationAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1584,6 +1664,10 @@ type SetSMSAttributesRequest struct {
 
 // Send marshals and sends the SetSMSAttributes API request.
 func (r SetSMSAttributesRequest) Send() (*SetSMSAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1636,6 +1720,10 @@ type SetSubscriptionAttributesRequest struct {
 
 // Send marshals and sends the SetSubscriptionAttributes API request.
 func (r SetSubscriptionAttributesRequest) Send() (*SetSubscriptionAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1684,6 +1772,10 @@ type SetTopicAttributesRequest struct {
 
 // Send marshals and sends the SetTopicAttributes API request.
 func (r SetTopicAttributesRequest) Send() (*SetTopicAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1732,6 +1824,10 @@ type SubscribeRequest struct {
 
 // Send marshals and sends the Subscribe API request.
 func (r SubscribeRequest) Send() (*SubscribeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1781,6 +1877,10 @@ type UnsubscribeRequest struct {
 
 // Send marshals and sends the Unsubscribe API request.
 func (r UnsubscribeRequest) Send() (*UnsubscribeOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

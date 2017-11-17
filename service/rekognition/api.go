@@ -17,6 +17,10 @@ type CompareFacesRequest struct {
 
 // Send marshals and sends the CompareFaces API request.
 func (r CompareFacesRequest) Send() (*CompareFacesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -94,6 +98,10 @@ type CreateCollectionRequest struct {
 
 // Send marshals and sends the CreateCollection API request.
 func (r CreateCollectionRequest) Send() (*CreateCollectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -151,6 +159,10 @@ type DeleteCollectionRequest struct {
 
 // Send marshals and sends the DeleteCollection API request.
 func (r DeleteCollectionRequest) Send() (*DeleteCollectionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -199,6 +211,10 @@ type DeleteFacesRequest struct {
 
 // Send marshals and sends the DeleteFaces API request.
 func (r DeleteFacesRequest) Send() (*DeleteFacesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -247,6 +263,10 @@ type DetectFacesRequest struct {
 
 // Send marshals and sends the DetectFaces API request.
 func (r DetectFacesRequest) Send() (*DetectFacesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,6 +328,10 @@ type DetectLabelsRequest struct {
 
 // Send marshals and sends the DetectLabels API request.
 func (r DetectLabelsRequest) Send() (*DetectLabelsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -397,6 +421,10 @@ type DetectModerationLabelsRequest struct {
 
 // Send marshals and sends the DetectModerationLabels API request.
 func (r DetectModerationLabelsRequest) Send() (*DetectModerationLabelsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,6 +476,10 @@ type GetCelebrityInfoRequest struct {
 
 // Send marshals and sends the GetCelebrityInfo API request.
 func (r GetCelebrityInfoRequest) Send() (*GetCelebrityInfoOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -498,6 +530,10 @@ type IndexFacesRequest struct {
 
 // Send marshals and sends the IndexFaces API request.
 func (r IndexFacesRequest) Send() (*IndexFacesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -677,6 +713,10 @@ type ListFacesRequest struct {
 
 // Send marshals and sends the ListFaces API request.
 func (r ListFacesRequest) Send() (*ListFacesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -782,6 +822,10 @@ type RecognizeCelebritiesRequest struct {
 
 // Send marshals and sends the RecognizeCelebrities API request.
 func (r RecognizeCelebritiesRequest) Send() (*RecognizeCelebritiesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -851,6 +895,10 @@ type SearchFacesRequest struct {
 
 // Send marshals and sends the SearchFaces API request.
 func (r SearchFacesRequest) Send() (*SearchFacesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -912,6 +960,10 @@ type SearchFacesByImageRequest struct {
 
 // Send marshals and sends the SearchFacesByImage API request.
 func (r SearchFacesByImageRequest) Send() (*SearchFacesByImageOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

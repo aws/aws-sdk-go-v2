@@ -22,6 +22,10 @@ type ActivatePipelineRequest struct {
 
 // Send marshals and sends the ActivatePipeline API request.
 func (r ActivatePipelineRequest) Send() (*ActivatePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -75,6 +79,10 @@ type AddTagsRequest struct {
 
 // Send marshals and sends the AddTags API request.
 func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -121,6 +129,10 @@ type CreatePipelineRequest struct {
 
 // Send marshals and sends the CreatePipeline API request.
 func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -168,6 +180,10 @@ type DeactivatePipelineRequest struct {
 
 // Send marshals and sends the DeactivatePipeline API request.
 func (r DeactivatePipelineRequest) Send() (*DeactivatePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -219,6 +235,10 @@ type DeletePipelineRequest struct {
 
 // Send marshals and sends the DeletePipeline API request.
 func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -274,6 +294,10 @@ type DescribeObjectsRequest struct {
 
 // Send marshals and sends the DescribeObjects API request.
 func (r DescribeObjectsRequest) Send() (*DescribeObjectsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -378,6 +402,10 @@ type DescribePipelinesRequest struct {
 
 // Send marshals and sends the DescribePipelines API request.
 func (r DescribePipelinesRequest) Send() (*DescribePipelinesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -432,6 +460,10 @@ type EvaluateExpressionRequest struct {
 
 // Send marshals and sends the EvaluateExpression API request.
 func (r EvaluateExpressionRequest) Send() (*EvaluateExpressionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -480,6 +512,10 @@ type GetPipelineDefinitionRequest struct {
 
 // Send marshals and sends the GetPipelineDefinition API request.
 func (r GetPipelineDefinitionRequest) Send() (*GetPipelineDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -630,6 +666,10 @@ type PollForTaskRequest struct {
 
 // Send marshals and sends the PollForTask API request.
 func (r PollForTaskRequest) Send() (*PollForTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -689,6 +729,10 @@ type PutPipelineDefinitionRequest struct {
 
 // Send marshals and sends the PutPipelineDefinition API request.
 func (r PutPipelineDefinitionRequest) Send() (*PutPipelineDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -748,6 +792,10 @@ type QueryObjectsRequest struct {
 
 // Send marshals and sends the QueryObjects API request.
 func (r QueryObjectsRequest) Send() (*QueryObjectsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -851,6 +899,10 @@ type RemoveTagsRequest struct {
 
 // Send marshals and sends the RemoveTags API request.
 func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -897,6 +949,10 @@ type ReportTaskProgressRequest struct {
 
 // Send marshals and sends the ReportTaskProgress API request.
 func (r ReportTaskProgressRequest) Send() (*ReportTaskProgressOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,6 +1010,10 @@ type ReportTaskRunnerHeartbeatRequest struct {
 
 // Send marshals and sends the ReportTaskRunnerHeartbeat API request.
 func (r ReportTaskRunnerHeartbeatRequest) Send() (*ReportTaskRunnerHeartbeatOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1004,6 +1064,10 @@ type SetStatusRequest struct {
 
 // Send marshals and sends the SetStatus API request.
 func (r SetStatusRequest) Send() (*SetStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1056,6 +1120,10 @@ type SetTaskStatusRequest struct {
 
 // Send marshals and sends the SetTaskStatus API request.
 func (r SetTaskStatusRequest) Send() (*SetTaskStatusOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1106,6 +1174,10 @@ type ValidatePipelineDefinitionRequest struct {
 
 // Send marshals and sends the ValidatePipelineDefinition API request.
 func (r ValidatePipelineDefinitionRequest) Send() (*ValidatePipelineDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

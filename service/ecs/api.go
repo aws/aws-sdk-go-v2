@@ -68,6 +68,10 @@ type CreateServiceRequest struct {
 
 // Send marshals and sends the CreateService API request.
 func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -172,6 +176,10 @@ type DeleteAttributesRequest struct {
 
 // Send marshals and sends the DeleteAttributes API request.
 func (r DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -218,6 +226,10 @@ type DeleteClusterRequest struct {
 
 // Send marshals and sends the DeleteCluster API request.
 func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,6 +278,10 @@ type DeleteServiceRequest struct {
 
 // Send marshals and sends the DeleteService API request.
 func (r DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -325,6 +341,10 @@ type DeregisterContainerInstanceRequest struct {
 
 // Send marshals and sends the DeregisterContainerInstance API request.
 func (r DeregisterContainerInstanceRequest) Send() (*DeregisterContainerInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -385,6 +405,10 @@ type DeregisterTaskDefinitionRequest struct {
 
 // Send marshals and sends the DeregisterTaskDefinition API request.
 func (r DeregisterTaskDefinitionRequest) Send() (*DeregisterTaskDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,6 +515,10 @@ type DescribeContainerInstancesRequest struct {
 
 // Send marshals and sends the DescribeContainerInstances API request.
 func (r DescribeContainerInstancesRequest) Send() (*DescribeContainerInstancesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -538,6 +566,10 @@ type DescribeServicesRequest struct {
 
 // Send marshals and sends the DescribeServices API request.
 func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -584,6 +616,10 @@ type DescribeTaskDefinitionRequest struct {
 
 // Send marshals and sends the DescribeTaskDefinition API request.
 func (r DescribeTaskDefinitionRequest) Send() (*DescribeTaskDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -635,6 +671,10 @@ type DescribeTasksRequest struct {
 
 // Send marshals and sends the DescribeTasks API request.
 func (r DescribeTasksRequest) Send() (*DescribeTasksOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -731,6 +771,10 @@ type ListAttributesRequest struct {
 
 // Send marshals and sends the ListAttributes API request.
 func (r ListAttributesRequest) Send() (*ListAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1412,6 +1456,10 @@ type PutAttributesRequest struct {
 
 // Send marshals and sends the PutAttributes API request.
 func (r PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1462,6 +1510,10 @@ type RegisterContainerInstanceRequest struct {
 
 // Send marshals and sends the RegisterContainerInstance API request.
 func (r RegisterContainerInstanceRequest) Send() (*RegisterContainerInstanceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1512,6 +1564,10 @@ type RegisterTaskDefinitionRequest struct {
 
 // Send marshals and sends the RegisterTaskDefinition API request.
 func (r RegisterTaskDefinitionRequest) Send() (*RegisterTaskDefinitionOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1574,6 +1630,10 @@ type RunTaskRequest struct {
 
 // Send marshals and sends the RunTask API request.
 func (r RunTaskRequest) Send() (*RunTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1628,6 +1688,10 @@ type StartTaskRequest struct {
 
 // Send marshals and sends the StartTask API request.
 func (r StartTaskRequest) Send() (*StartTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1679,6 +1743,10 @@ type StopTaskRequest struct {
 
 // Send marshals and sends the StopTask API request.
 func (r StopTaskRequest) Send() (*StopTaskOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1834,6 +1902,10 @@ type UpdateContainerAgentRequest struct {
 
 // Send marshals and sends the UpdateContainerAgent API request.
 func (r UpdateContainerAgentRequest) Send() (*UpdateContainerAgentOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1890,6 +1962,10 @@ type UpdateContainerInstancesStateRequest struct {
 
 // Send marshals and sends the UpdateContainerInstancesState API request.
 func (r UpdateContainerInstancesStateRequest) Send() (*UpdateContainerInstancesStateOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1979,6 +2055,10 @@ type UpdateServiceRequest struct {
 
 // Send marshals and sends the UpdateService API request.
 func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
+	if err := r.Input.Validate(); err != nil {
+		return nil, err
+	}
+
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
