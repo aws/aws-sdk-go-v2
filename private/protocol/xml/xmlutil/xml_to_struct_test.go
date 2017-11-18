@@ -36,9 +36,9 @@ func TestUnmarshal(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
 
 	req := svc.GetBucketAclRequest(&s3.GetBucketAclInput{
 		Bucket: aws.String("foo"),

@@ -10,7 +10,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -22,13 +21,13 @@ import (
 func TestDefaultConfigValues(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	svc := kms.New(cfg)
 	handler := s3crypto.NewKMSKeyGenerator(svc, "testid")
 
 	c := s3crypto.NewEncryptionClient(cfg, s3crypto.AESGCMContentCipherBuilder(handler))
+	c.S3Client.(*s3.S3).ForcePathStyle = true
 
 	if c == nil {
 		t.Error("expected non-vil client value")
@@ -50,10 +49,11 @@ func TestPutObject(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewEncryptionClient(cfg, cb)
+	c.S3Client.(*s3.S3).ForcePathStyle = true
+
 	if c == nil {
 		t.Error("expected non-vil client value")
 	}
@@ -64,7 +64,7 @@ func TestPutObject(t *testing.T) {
 	}
 	req := c.PutObjectRequest(input)
 	req.Handlers.Send.Clear()
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		r.Error = errors.New("stop")
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
@@ -103,7 +103,7 @@ func TestPutObjectWithContext(t *testing.T) {
 		t.Fatalf("expected error, did not get one")
 	}
 	aerr := err.(awserr.Error)
-	if e, a := request.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
 		t.Errorf("expected error code %q, got %q", e, a)
 	}
 	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {

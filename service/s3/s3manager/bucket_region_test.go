@@ -76,6 +76,7 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 		svc := s3.New(cfg)
+		svc.ForcePathStyle = true
 
 		ctx := aws.BackgroundContext()
 

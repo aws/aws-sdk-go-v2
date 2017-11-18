@@ -404,6 +404,15 @@ var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 
 		return "EndpointsID"
 	},
+	"ServiceSpecificConfig": func(svcName string) string {
+		// TODO need unique way to refer to service.
+		cfgs := serviceSpecificConfigs[svcName]
+		if len(cfgs) == 0 {
+			return ""
+		}
+
+		return cfgs.GoCode()
+	},
 }).Parse(`
 // {{ .StructName }} provides the API operation methods for making requests to
 // {{ .Metadata.ServiceFullName }}. See this package's package overview docs
@@ -413,13 +422,15 @@ var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 // modify mutate any of the struct's properties though.
 type {{ .StructName }} struct {
 	*aws.Client
+	{{ ServiceSpecificConfig .StructName -}}
 }
 
-{{ if .UseInitMethods }}// Used for custom client initialization logic
-var initClient func(*aws.Client)
+{{ if .UseInitMethods -}}
+// Used for custom client initialization logic
+var initClient func(*{{ .StructName }})
 
 // Used for custom request initialization logic
-var initRequest func(*aws.Request)
+var initRequest func(*{{ .StructName }}, *aws.Request)
 {{ end }}
 
 
@@ -432,8 +443,8 @@ const (
 {{- end }}
 
 // New creates a new instance of the {{ .StructName }} client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a {{ .StructName }} client from just a config.
@@ -478,7 +489,7 @@ func New(config aws.Config) *{{ .StructName }} {
 
 	{{ if .UseInitMethods }}// Run custom client initialization if present
 	if initClient != nil {
-		initClient(svc.Client)
+		initClient(svc)
 	}
 	{{ end  }}
 
@@ -492,7 +503,7 @@ func (c *{{ .StructName }}) newRequest(op *aws.Operation, params, data interface
 
 	{{ if .UseInitMethods }}// Run custom request initialization if present
 	if initRequest != nil {
-		initRequest(req)
+		initRequest(c, req)
 	}
 	{{ end }}
 

@@ -167,7 +167,9 @@ func newCopyTestSvc(errMsg string) *s3.S3 {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-	cfg.S3ForcePathStyle = true
 
-	return s3.New(cfg)
+	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
+
+	return svc
 }

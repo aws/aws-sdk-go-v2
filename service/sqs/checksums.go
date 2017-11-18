@@ -17,10 +17,6 @@ var (
 )
 
 func setupChecksumValidation(r *request.Request) {
-	if r.Config.DisableComputeChecksums {
-		return
-	}
-
 	switch r.Operation.Name {
 	case opSendMessage:
 		r.Handlers.Unmarshal.PushBack(verifySendMessage)

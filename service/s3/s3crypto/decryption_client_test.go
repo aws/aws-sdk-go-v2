@@ -12,7 +12,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -32,10 +31,11 @@ func TestGetObjectGCM(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
+	c.S3Client.(*s3.S3).ForcePathStyle = true
+
 	if c == nil {
 		t.Error("expected non-nil value")
 	}
@@ -46,7 +46,7 @@ func TestGetObjectGCM(t *testing.T) {
 	req := c.GetObjectRequest(input)
 	out := req.Data.(*s3.GetObjectOutput)
 	req.Handlers.Send.Clear()
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		iv, err := hex.DecodeString("0d18e06c7c725ac9e362e1ce")
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
@@ -102,10 +102,11 @@ func TestGetObjectCBC(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
+	c.S3Client.(*s3.S3).ForcePathStyle = true
+
 	if c == nil {
 		t.Error("expected non-nil value")
 	}
@@ -116,7 +117,7 @@ func TestGetObjectCBC(t *testing.T) {
 	req := c.GetObjectRequest(input)
 	out := req.Data.(*s3.GetObjectOutput)
 	req.Handlers.Send.Clear()
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		iv, err := hex.DecodeString("9dea7621945988f96491083849b068df")
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
@@ -170,10 +171,11 @@ func TestGetObjectCBC2(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
+	c.S3Client.(*s3.S3).ForcePathStyle = true
+
 	if c == nil {
 		t.Error("expected non-nil value")
 	}
@@ -184,7 +186,7 @@ func TestGetObjectCBC2(t *testing.T) {
 	req := c.GetObjectRequest(input)
 	out := req.Data.(*s3.GetObjectOutput)
 	req.Handlers.Send.Clear()
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		b, err := hex.DecodeString("fd0c71ecb7ed16a9bf42ea5f75501d416df608f190890c3b4d8897f24744cd7f9ea4a0b212e60634302450e1c5378f047ff753ccefe365d411c36339bf22e301fae4c3a6226719a4b93dc74c1af79d0296659b5d56c0892315f2c7cc30190220db1eaafae3920d6d9c65d0aa366499afc17af493454e141c6e0fbdeb6a990cb4")
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
@@ -238,7 +240,7 @@ func TestGetObjectWithContext(t *testing.T) {
 		t.Fatalf("expected error, did not get one")
 	}
 	aerr := err.(awserr.Error)
-	if e, a := request.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
 		t.Errorf("expected error code %q, got %q", e, a)
 	}
 	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {

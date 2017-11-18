@@ -51,7 +51,6 @@ func TestKMSGenerateCipherData(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	svc := kms.New(cfg)
@@ -82,7 +81,6 @@ func TestKMSDecrypt(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	handler, err := (kmsKeyHandler{kms: kms.New(cfg)}).decryptHandler(Envelope{MatDesc: `{"kms_cmk_id":"test"}`})
@@ -110,7 +108,6 @@ func TestKMSDecryptBadJSON(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	_, err := (kmsKeyHandler{kms: kms.New(cfg)}).decryptHandler(Envelope{MatDesc: `{"kms_cmk_id":"test"`})

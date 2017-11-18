@@ -1,8 +1,7 @@
 package s3
 
 import (
-	client "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 func init() {
@@ -10,10 +9,7 @@ func init() {
 	initRequest = defaultInitRequestFn
 }
 
-func defaultInitClientFn(c *client.Client) {
-	// Support building custom endpoints based on config
-	c.Handlers.Build.PushFront(updateEndpointForS3Config)
-
+func defaultInitClientFn(c *S3) {
 	// Require SSL when using SSE keys
 	c.Handlers.Validate.PushBack(validateSSERequiresSSL)
 	c.Handlers.Build.PushBack(computeSSEKeys)
@@ -23,10 +19,13 @@ func defaultInitClientFn(c *client.Client) {
 	c.Handlers.UnmarshalError.PushBack(unmarshalError)
 }
 
-func defaultInitRequestFn(r *request.Request) {
+func defaultInitRequestFn(c *S3, r *aws.Request) {
 	// Add reuest handlers for specific platforms.
 	// e.g. 100-continue support for PUT requests using Go 1.6
-	platformRequestHandlers(r)
+	platformRequestHandlers(c, r)
+
+	// Support building custom endpoints based on config
+	r.Handlers.Build.PushFront(buildUpdateEndpointForS3Config(c))
 
 	switch r.Operation.Name {
 	case opPutBucketCors, opPutBucketLifecycle, opPutBucketPolicy,
