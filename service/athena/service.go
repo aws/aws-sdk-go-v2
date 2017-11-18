@@ -19,10 +19,10 @@ type Athena struct {
 }
 
 // Used for custom client initialization logic
-var initClient func(*aws.Client)
+var initClient func(*Athena)
 
 // Used for custom request initialization logic
-var initRequest func(*aws.Request)
+var initRequest func(*Athena, *aws.Request)
 
 // Service information constants
 const (
@@ -31,8 +31,8 @@ const (
 )
 
 // New creates a new instance of the Athena client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Athena client from just a config.
@@ -67,7 +67,7 @@ func New(config aws.Config) *Athena {
 
 	// Run custom client initialization if present
 	if initClient != nil {
-		initClient(svc.Client)
+		initClient(svc)
 	}
 
 	return svc
@@ -80,7 +80,7 @@ func (c *Athena) newRequest(op *aws.Operation, params, data interface{}) *aws.Re
 
 	// Run custom request initialization if present
 	if initRequest != nil {
-		initRequest(req)
+		initRequest(c, req)
 	}
 
 	return req

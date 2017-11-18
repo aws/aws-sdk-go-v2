@@ -16,13 +16,18 @@ import (
 // modify mutate any of the struct's properties though.
 type SQS struct {
 	*aws.Client
+
+	// Service specific configurations. (codegen: service_specific_config.go)
+
+	// Disables the computation and validation of request and response checksums.
+	DisableComputeChecksums bool
 }
 
 // Used for custom client initialization logic
-var initClient func(*aws.Client)
+var initClient func(*SQS)
 
 // Used for custom request initialization logic
-var initRequest func(*aws.Request)
+var initRequest func(*SQS, *aws.Request)
 
 // Service information constants
 const (
@@ -31,8 +36,8 @@ const (
 )
 
 // New creates a new instance of the SQS client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SQS client from just a config.
@@ -65,7 +70,7 @@ func New(config aws.Config) *SQS {
 
 	// Run custom client initialization if present
 	if initClient != nil {
-		initClient(svc.Client)
+		initClient(svc)
 	}
 
 	return svc
@@ -78,7 +83,7 @@ func (c *SQS) newRequest(op *aws.Operation, params, data interface{}) *aws.Reque
 
 	// Run custom request initialization if present
 	if initRequest != nil {
-		initRequest(req)
+		initRequest(c, req)
 	}
 
 	return req
