@@ -16298,6 +16298,14 @@ func (s VerifyUserAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+func encodeAliasAttributeTypeList(vs []AliasAttributeType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type AliasAttributeType string
 
 // Enum values for AliasAttributeType
@@ -16306,6 +16314,15 @@ const (
 	AliasAttributeTypeEmail             AliasAttributeType = "email"
 	AliasAttributeTypePreferredUsername AliasAttributeType = "preferred_username"
 )
+
+func (enum AliasAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AliasAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AttributeDataType string
 
@@ -16317,6 +16334,15 @@ const (
 	AttributeDataTypeBoolean  AttributeDataType = "Boolean"
 )
 
+func (enum AttributeDataType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttributeDataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AuthFlowType string
 
 // Enum values for AuthFlowType
@@ -16327,6 +16353,15 @@ const (
 	AuthFlowTypeCustomAuth       AuthFlowType = "CUSTOM_AUTH"
 	AuthFlowTypeAdminNoSrpAuth   AuthFlowType = "ADMIN_NO_SRP_AUTH"
 )
+
+func (enum AuthFlowType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthFlowType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChallengeNameType string
 
@@ -16341,6 +16376,15 @@ const (
 	ChallengeNameTypeNewPasswordRequired    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
 )
 
+func (enum ChallengeNameType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChallengeNameType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DefaultEmailOptionType string
 
 // Enum values for DefaultEmailOptionType
@@ -16348,6 +16392,23 @@ const (
 	DefaultEmailOptionTypeConfirmWithLink DefaultEmailOptionType = "CONFIRM_WITH_LINK"
 	DefaultEmailOptionTypeConfirmWithCode DefaultEmailOptionType = "CONFIRM_WITH_CODE"
 )
+
+func (enum DefaultEmailOptionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DefaultEmailOptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeDeliveryMediumTypeList(vs []DeliveryMediumType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type DeliveryMediumType string
 
@@ -16357,6 +16418,15 @@ const (
 	DeliveryMediumTypeEmail DeliveryMediumType = "EMAIL"
 )
 
+func (enum DeliveryMediumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryMediumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceRememberedStatusType string
 
 // Enum values for DeviceRememberedStatusType
@@ -16364,6 +16434,15 @@ const (
 	DeviceRememberedStatusTypeRemembered    DeviceRememberedStatusType = "remembered"
 	DeviceRememberedStatusTypeNotRemembered DeviceRememberedStatusType = "not_remembered"
 )
+
+func (enum DeviceRememberedStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceRememberedStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DomainStatusType string
 
@@ -16376,6 +16455,23 @@ const (
 	DomainStatusTypeFailed   DomainStatusType = "FAILED"
 )
 
+func (enum DomainStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeExplicitAuthFlowsTypeList(vs []ExplicitAuthFlowsType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type ExplicitAuthFlowsType string
 
 // Enum values for ExplicitAuthFlowsType
@@ -16383,6 +16479,15 @@ const (
 	ExplicitAuthFlowsTypeAdminNoSrpAuth     ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
 	ExplicitAuthFlowsTypeCustomAuthFlowOnly ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
 )
+
+func (enum ExplicitAuthFlowsType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExplicitAuthFlowsType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type IdentityProviderTypeType string
 
@@ -16394,6 +16499,15 @@ const (
 	IdentityProviderTypeTypeLoginWithAmazon IdentityProviderTypeType = "LoginWithAmazon"
 )
 
+func (enum IdentityProviderTypeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IdentityProviderTypeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MessageActionType string
 
 // Enum values for MessageActionType
@@ -16401,6 +16515,23 @@ const (
 	MessageActionTypeResend   MessageActionType = "RESEND"
 	MessageActionTypeSuppress MessageActionType = "SUPPRESS"
 )
+
+func (enum MessageActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeOAuthFlowTypeList(vs []OAuthFlowType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type OAuthFlowType string
 
@@ -16411,6 +16542,15 @@ const (
 	OAuthFlowTypeClientCredentials OAuthFlowType = "client_credentials"
 )
 
+func (enum OAuthFlowType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OAuthFlowType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -16418,6 +16558,15 @@ const (
 	StatusTypeEnabled  StatusType = "Enabled"
 	StatusTypeDisabled StatusType = "Disabled"
 )
+
+func (enum StatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type UserImportJobStatusType string
 
@@ -16433,6 +16582,15 @@ const (
 	UserImportJobStatusTypeSucceeded  UserImportJobStatusType = "Succeeded"
 )
 
+func (enum UserImportJobStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserImportJobStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UserPoolMfaType string
 
 // Enum values for UserPoolMfaType
@@ -16441,6 +16599,15 @@ const (
 	UserPoolMfaTypeOn       UserPoolMfaType = "ON"
 	UserPoolMfaTypeOptional UserPoolMfaType = "OPTIONAL"
 )
+
+func (enum UserPoolMfaType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserPoolMfaType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type UserStatusType string
 
@@ -16455,6 +16622,23 @@ const (
 	UserStatusTypeForceChangePassword UserStatusType = "FORCE_CHANGE_PASSWORD"
 )
 
+func (enum UserStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeUsernameAttributeTypeList(vs []UsernameAttributeType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type UsernameAttributeType string
 
 // Enum values for UsernameAttributeType
@@ -16463,6 +16647,23 @@ const (
 	UsernameAttributeTypeEmail       UsernameAttributeType = "email"
 )
 
+func (enum UsernameAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsernameAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeVerifiedAttributeTypeList(vs []VerifiedAttributeType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type VerifiedAttributeType string
 
 // Enum values for VerifiedAttributeType
@@ -16470,3 +16671,12 @@ const (
 	VerifiedAttributeTypePhoneNumber VerifiedAttributeType = "phone_number"
 	VerifiedAttributeTypeEmail       VerifiedAttributeType = "email"
 )
+
+func (enum VerifiedAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VerifiedAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

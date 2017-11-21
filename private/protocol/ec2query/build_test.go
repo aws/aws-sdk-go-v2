@@ -1466,6 +1466,14 @@ func (s InputService10TestShapeInputService10TestCaseOperation2Output) SDKRespon
 	return s.responseMetadata
 }
 
+func encodeInputService10TestShapeEnumTypeList(vs []InputService10TestShapeEnumType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type InputService10TestShapeEnumType string
 
 // Enum values for InputService10TestShapeEnumType
@@ -1473,6 +1481,15 @@ const (
 	EnumTypeFoo InputService10TestShapeEnumType = "foo"
 	EnumTypeBar InputService10TestShapeEnumType = "bar"
 )
+
+func (enum InputService10TestShapeEnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputService10TestShapeEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 //
 // Tests begin here

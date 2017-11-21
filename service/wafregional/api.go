@@ -7911,6 +7911,15 @@ const (
 	ChangeActionDelete ChangeAction = "DELETE"
 )
 
+func (enum ChangeAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeTokenStatus string
 
 // Enum values for ChangeTokenStatus
@@ -7919,6 +7928,15 @@ const (
 	ChangeTokenStatusPending     ChangeTokenStatus = "PENDING"
 	ChangeTokenStatusInsync      ChangeTokenStatus = "INSYNC"
 )
+
+func (enum ChangeTokenStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeTokenStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ComparisonOperator string
 
@@ -7932,6 +7950,15 @@ const (
 	ComparisonOperatorGt ComparisonOperator = "GT"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IPSetDescriptorType string
 
 // Enum values for IPSetDescriptorType
@@ -7939,6 +7966,15 @@ const (
 	IPSetDescriptorTypeIpv4 IPSetDescriptorType = "IPV4"
 	IPSetDescriptorTypeIpv6 IPSetDescriptorType = "IPV6"
 )
+
+func (enum IPSetDescriptorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IPSetDescriptorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MatchFieldType string
 
@@ -7950,6 +7986,15 @@ const (
 	MatchFieldTypeMethod      MatchFieldType = "METHOD"
 	MatchFieldTypeBody        MatchFieldType = "BODY"
 )
+
+func (enum MatchFieldType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MatchFieldType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ParameterExceptionField string
 
@@ -7969,6 +8014,15 @@ const (
 	ParameterExceptionFieldNextMarker                       ParameterExceptionField = "NEXT_MARKER"
 )
 
+func (enum ParameterExceptionField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterExceptionField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParameterExceptionReason string
 
 // Enum values for ParameterExceptionReason
@@ -7976,6 +8030,15 @@ const (
 	ParameterExceptionReasonInvalidOption      ParameterExceptionReason = "INVALID_OPTION"
 	ParameterExceptionReasonIllegalCombination ParameterExceptionReason = "ILLEGAL_COMBINATION"
 )
+
+func (enum ParameterExceptionReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterExceptionReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PositionalConstraint string
 
@@ -7988,6 +8051,15 @@ const (
 	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
+func (enum PositionalConstraint) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PositionalConstraint) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PredicateType string
 
 // Enum values for PredicateType
@@ -7999,12 +8071,30 @@ const (
 	PredicateTypeXssMatch          PredicateType = "XssMatch"
 )
 
+func (enum PredicateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PredicateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RateKey string
 
 // Enum values for RateKey
 const (
 	RateKeyIp RateKey = "IP"
 )
+
+func (enum RateKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RateKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TextTransformation string
 
@@ -8018,6 +8108,15 @@ const (
 	TextTransformationUrlDecode          TextTransformation = "URL_DECODE"
 )
 
+func (enum TextTransformation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TextTransformation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WafActionType string
 
 // Enum values for WafActionType
@@ -8027,6 +8126,15 @@ const (
 	WafActionTypeCount WafActionType = "COUNT"
 )
 
+func (enum WafActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WafActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WafRuleType string
 
 // Enum values for WafRuleType
@@ -8034,3 +8142,12 @@ const (
 	WafRuleTypeRegular   WafRuleType = "REGULAR"
 	WafRuleTypeRateBased WafRuleType = "RATE_BASED"
 )
+
+func (enum WafRuleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WafRuleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

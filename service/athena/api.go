@@ -2403,6 +2403,15 @@ const (
 	ColumnNullableUnknown  ColumnNullable = "UNKNOWN"
 )
 
+func (enum ColumnNullable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ColumnNullable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncryptionOption string
 
 // Enum values for EncryptionOption
@@ -2411,6 +2420,15 @@ const (
 	EncryptionOptionSseKms EncryptionOption = "SSE_KMS"
 	EncryptionOptionCseKms EncryptionOption = "CSE_KMS"
 )
+
+func (enum EncryptionOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type QueryExecutionState string
 
@@ -2423,9 +2441,27 @@ const (
 	QueryExecutionStateCancelled QueryExecutionState = "CANCELLED"
 )
 
+func (enum QueryExecutionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueryExecutionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ThrottleReason string
 
 // Enum values for ThrottleReason
 const (
 	ThrottleReasonConcurrentQueryLimitExceeded ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
 )
+
+func (enum ThrottleReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThrottleReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

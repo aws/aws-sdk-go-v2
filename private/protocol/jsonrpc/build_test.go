@@ -1562,6 +1562,14 @@ func (s InputService8TestShapeInputService8TestCaseOperation2Output) SDKResponse
 	return s.responseMetadata
 }
 
+func encodeInputService8TestShapeEnumTypeList(vs []InputService8TestShapeEnumType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type InputService8TestShapeEnumType string
 
 // Enum values for InputService8TestShapeEnumType
@@ -1569,6 +1577,15 @@ const (
 	EnumTypeFoo InputService8TestShapeEnumType = "foo"
 	EnumTypeBar InputService8TestShapeEnumType = "bar"
 )
+
+func (enum InputService8TestShapeEnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputService8TestShapeEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 //
 // Tests begin here

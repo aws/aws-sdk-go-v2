@@ -5,6 +5,7 @@ package rekognition
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCompareFaces = "CompareFaces"
@@ -3739,6 +3740,14 @@ func (s *Sunglasses) SetValue(v bool) *Sunglasses {
 	return s
 }
 
+func encodeAttributeList(vs []Attribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type Attribute string
 
 // Enum values for Attribute
@@ -3746,6 +3755,15 @@ const (
 	AttributeDefault Attribute = "DEFAULT"
 	AttributeAll     Attribute = "ALL"
 )
+
+func (enum Attribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Attribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EmotionName string
 
@@ -3761,6 +3779,15 @@ const (
 	EmotionNameUnknown   EmotionName = "UNKNOWN"
 )
 
+func (enum EmotionName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EmotionName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GenderType string
 
 // Enum values for GenderType
@@ -3768,6 +3795,15 @@ const (
 	GenderTypeMale   GenderType = "Male"
 	GenderTypeFemale GenderType = "Female"
 )
+
+func (enum GenderType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GenderType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LandmarkType string
 
@@ -3800,6 +3836,15 @@ const (
 	LandmarkTypeRightPupil        LandmarkType = "rightPupil"
 )
 
+func (enum LandmarkType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LandmarkType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrientationCorrection string
 
 // Enum values for OrientationCorrection
@@ -3809,3 +3854,12 @@ const (
 	OrientationCorrectionRotate180 OrientationCorrection = "ROTATE_180"
 	OrientationCorrectionRotate270 OrientationCorrection = "ROTATE_270"
 )
+
+func (enum OrientationCorrection) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrientationCorrection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

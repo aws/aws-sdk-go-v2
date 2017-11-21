@@ -1338,6 +1338,14 @@ func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetLis
 	return s
 }
 
+func encodeOutputService10TestShapeEC2EnumTypeList(vs []OutputService10TestShapeEC2EnumType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type OutputService10TestShapeEC2EnumType string
 
 // Enum values for OutputService10TestShapeEC2EnumType
@@ -1345,6 +1353,15 @@ const (
 	EC2EnumTypeFoo OutputService10TestShapeEC2EnumType = "foo"
 	EC2EnumTypeBar OutputService10TestShapeEC2EnumType = "bar"
 )
+
+func (enum OutputService10TestShapeEC2EnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputService10TestShapeEC2EnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 //
 // Tests begin here

@@ -15627,6 +15627,15 @@ const (
 	ConnectionPropertyKeyJdbcConnectionUrl   ConnectionPropertyKey = "JDBC_CONNECTION_URL"
 )
 
+func (enum ConnectionPropertyKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectionPropertyKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConnectionType string
 
 // Enum values for ConnectionType
@@ -15634,6 +15643,15 @@ const (
 	ConnectionTypeJdbc ConnectionType = "JDBC"
 	ConnectionTypeSftp ConnectionType = "SFTP"
 )
+
+func (enum ConnectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CrawlerState string
 
@@ -15644,6 +15662,15 @@ const (
 	CrawlerStateStopping CrawlerState = "STOPPING"
 )
 
+func (enum CrawlerState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CrawlerState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeleteBehavior string
 
 // Enum values for DeleteBehavior
@@ -15652,6 +15679,15 @@ const (
 	DeleteBehaviorDeleteFromDatabase  DeleteBehavior = "DELETE_FROM_DATABASE"
 	DeleteBehaviorDeprecateInDatabase DeleteBehavior = "DEPRECATE_IN_DATABASE"
 )
+
+func (enum DeleteBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeleteBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type JobRunState string
 
@@ -15665,6 +15701,15 @@ const (
 	JobRunStateFailed    JobRunState = "FAILED"
 )
 
+func (enum JobRunState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobRunState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LastCrawlStatus string
 
 // Enum values for LastCrawlStatus
@@ -15674,6 +15719,15 @@ const (
 	LastCrawlStatusFailed    LastCrawlStatus = "FAILED"
 )
 
+func (enum LastCrawlStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LastCrawlStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Logical string
 
 // Enum values for Logical
@@ -15681,12 +15735,30 @@ const (
 	LogicalAnd Logical = "AND"
 )
 
+func (enum Logical) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Logical) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LogicalOperator string
 
 // Enum values for LogicalOperator
 const (
 	LogicalOperatorEquals LogicalOperator = "EQUALS"
 )
+
+func (enum LogicalOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LogicalOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PrincipalType string
 
@@ -15697,6 +15769,15 @@ const (
 	PrincipalTypeGroup PrincipalType = "GROUP"
 )
 
+func (enum PrincipalType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PrincipalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -15706,6 +15787,15 @@ const (
 	ResourceTypeArchive ResourceType = "ARCHIVE"
 )
 
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScheduleState string
 
 // Enum values for ScheduleState
@@ -15714,6 +15804,15 @@ const (
 	ScheduleStateNotScheduled  ScheduleState = "NOT_SCHEDULED"
 	ScheduleStateTransitioning ScheduleState = "TRANSITIONING"
 )
+
+func (enum ScheduleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScheduleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TriggerState string
 
@@ -15729,6 +15828,15 @@ const (
 	TriggerStateUpdating     TriggerState = "UPDATING"
 )
 
+func (enum TriggerState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TriggerState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TriggerType string
 
 // Enum values for TriggerType
@@ -15738,6 +15846,15 @@ const (
 	TriggerTypeOnDemand    TriggerType = "ON_DEMAND"
 )
 
+func (enum TriggerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TriggerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UpdateBehavior string
 
 // Enum values for UpdateBehavior
@@ -15745,3 +15862,12 @@ const (
 	UpdateBehaviorLog              UpdateBehavior = "LOG"
 	UpdateBehaviorUpdateInDatabase UpdateBehavior = "UPDATE_IN_DATABASE"
 )
+
+func (enum UpdateBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

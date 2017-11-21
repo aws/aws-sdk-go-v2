@@ -78,6 +78,9 @@ type Shape struct {
 
 	OrigShapeName string `json:"-"`
 
+	UsedInMap  bool
+	UsedInList bool
+
 	// Defines if the shape is a placeholder and should not be used directly
 	Placeholder bool
 
@@ -190,6 +193,14 @@ func (s *Shape) GoStructValueType(name string, ref *ShapeRef) string {
 	}
 
 	return v
+}
+
+func (s *Shape) IsRefPayload(name string) bool {
+	return s.Payload == name
+}
+
+func (s *Shape) IsRefPayloadReader(name string, ref *ShapeRef) bool {
+	return (ref.Streaming || ref.Shape.Streaming) && s.IsRefPayload(name)
 }
 
 // GoStructType returns the type of a struct field based on the API
@@ -545,7 +556,9 @@ func (s *Shape) NestedShape() *Shape {
 }
 
 var structShapeTmpl = template.Must(template.New("StructShape").Funcs(template.FuncMap{
-	"GetCrosslinkURL": GetCrosslinkURL,
+	"GetCrosslinkURL":      GetCrosslinkURL,
+	"MarshalShapeGoCode":   MarshalShapeGoCode,
+	"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
 }).Parse(`
 {{ .Docstring }}
 {{ if ne $.OrigShapeName "" -}}
@@ -640,9 +653,18 @@ func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $context.GoStructValueT
 
 {{ end }}
 {{ end }}
+
+{{ if not $.API.NoGenMarshalers -}}
+{{ MarshalShapeGoCode $ }}
+{{- end }}
+{{ if not $.API.NoGenUnmarshalers -}}
+{{ UnmarshalShapeGoCode $ }}
+{{- end }}
 `))
 
-var enumShapeTmpl = template.Must(template.New("EnumShape").Parse(`
+var enumShapeTmpl = template.Must(template.New("EnumShape").Funcs(template.FuncMap{
+	"MarshalEnumGoCode": marshalEnumGoCode,
+}).Parse(`
 {{ .Docstring }}
 type {{ $.EnumType }} string
 
@@ -654,6 +676,14 @@ const (
 		{{ $name }} {{ $.EnumType }} = "{{ $elem }}"
 	{{ end -}}
 )
+
+{{ MarshalEnumGoCode $ }}
+`))
+
+var listEnumShapeTmpl = template.Must(template.New("ListEnumShape").Funcs(template.FuncMap{
+	"MarshalListEnumGoCode": marshalListEnumGoCode,
+}).Parse(`
+{{ MarshalListEnumGoCode $ }}
 `))
 
 // GoCode returns the rendered Go code for the Shape.
@@ -666,6 +696,11 @@ func (s *Shape) GoCode() string {
 			panic(fmt.Sprintf("Failed to generate struct shape %s, %v\n", s.ShapeName, err))
 		}
 	case s.IsEnum():
+		if s.UsedInList {
+			if err := listEnumShapeTmpl.Execute(b, s); err != nil {
+				panic(fmt.Sprintf("Failed to generate struct shape %s, %v\n", s.ShapeName, err))
+			}
+		}
 		if err := enumShapeTmpl.Execute(b, s); err != nil {
 			panic(fmt.Sprintf("Failed to generate enum shape %s, %v\n", s.ShapeName, err))
 		}

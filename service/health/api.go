@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opDescribeAffectedEntities = "DescribeAffectedEntities"
@@ -2022,6 +2023,14 @@ func (s *EventTypeFilter) SetServices(v []string) *EventTypeFilter {
 	return s
 }
 
+func encodeEntityStatusCodeList(vs []EntityStatusCode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type EntityStatusCode string
 
 // Enum values for EntityStatusCode
@@ -2031,12 +2040,38 @@ const (
 	EntityStatusCodeUnknown    EntityStatusCode = "UNKNOWN"
 )
 
+func (enum EntityStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventAggregateField string
 
 // Enum values for EventAggregateField
 const (
 	EventAggregateFieldEventTypeCategory EventAggregateField = "eventTypeCategory"
 )
+
+func (enum EventAggregateField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventAggregateField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeEventStatusCodeList(vs []EventStatusCode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type EventStatusCode string
 
@@ -2047,6 +2082,23 @@ const (
 	EventStatusCodeUpcoming EventStatusCode = "upcoming"
 )
 
+func (enum EventStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeEventTypeCategoryList(vs []EventTypeCategory) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type EventTypeCategory string
 
 // Enum values for EventTypeCategory
@@ -2055,3 +2107,12 @@ const (
 	EventTypeCategoryAccountNotification EventTypeCategory = "accountNotification"
 	EventTypeCategoryScheduledChange     EventTypeCategory = "scheduledChange"
 )
+
+func (enum EventTypeCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventTypeCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

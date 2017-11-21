@@ -2003,6 +2003,32 @@ func (s *AddPermissionInput) SetTopicArn(v string) *AddPermissionInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddPermissionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AWSAccountId) > 0 {
+		v := s.AWSAccountId
+
+		e.SetList(protocol.BodyTarget, "AWSAccountId", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ActionName) > 0 {
+		v := s.ActionName
+
+		e.SetList(protocol.BodyTarget, "ActionName", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Label != nil {
+		v := *s.Label
+
+		e.SetValue(protocol.BodyTarget, "Label", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionOutput
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2023,6 +2049,12 @@ func (s AddPermissionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddPermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddPermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The input for the CheckIfPhoneNumberIsOptedOut action.
@@ -2066,6 +2098,17 @@ func (s *CheckIfPhoneNumberIsOptedOutInput) SetPhoneNumber(v string) *CheckIfPho
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CheckIfPhoneNumberIsOptedOutInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PhoneNumber != nil {
+		v := *s.PhoneNumber
+
+		e.SetValue(protocol.BodyTarget, "phoneNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The response from the CheckIfPhoneNumberIsOptedOut action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOutResponse
 type CheckIfPhoneNumberIsOptedOutOutput struct {
@@ -2102,6 +2145,17 @@ func (s CheckIfPhoneNumberIsOptedOutOutput) SDKResponseMetadata() aws.Response {
 func (s *CheckIfPhoneNumberIsOptedOutOutput) SetIsOptedOut(v bool) *CheckIfPhoneNumberIsOptedOutOutput {
 	s.IsOptedOut = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CheckIfPhoneNumberIsOptedOutOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsOptedOut != nil {
+		v := *s.IsOptedOut
+
+		e.SetValue(protocol.BodyTarget, "isOptedOut", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for ConfirmSubscription action.
@@ -2172,6 +2226,27 @@ func (s *ConfirmSubscriptionInput) SetTopicArn(v string) *ConfirmSubscriptionInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfirmSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AuthenticateOnUnsubscribe != nil {
+		v := *s.AuthenticateOnUnsubscribe
+
+		e.SetValue(protocol.BodyTarget, "AuthenticateOnUnsubscribe", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Token != nil {
+		v := *s.Token
+
+		e.SetValue(protocol.BodyTarget, "Token", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response for ConfirmSubscriptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionResponse
 type ConfirmSubscriptionOutput struct {
@@ -2202,6 +2277,17 @@ func (s ConfirmSubscriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *ConfirmSubscriptionOutput) SetSubscriptionArn(v string) *ConfirmSubscriptionOutput {
 	s.SubscriptionArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfirmSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubscriptionArn != nil {
+		v := *s.SubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for CreatePlatformApplication action.
@@ -2278,6 +2364,27 @@ func (s *CreatePlatformApplicationInput) SetPlatform(v string) *CreatePlatformAp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePlatformApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Platform != nil {
+		v := *s.Platform
+
+		e.SetValue(protocol.BodyTarget, "Platform", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response from CreatePlatformApplication action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationResponse
 type CreatePlatformApplicationOutput struct {
@@ -2308,6 +2415,17 @@ func (s CreatePlatformApplicationOutput) SDKResponseMetadata() aws.Response {
 func (s *CreatePlatformApplicationOutput) SetPlatformApplicationArn(v string) *CreatePlatformApplicationOutput {
 	s.PlatformApplicationArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePlatformApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for CreatePlatformEndpoint action.
@@ -2390,6 +2508,32 @@ func (s *CreatePlatformEndpointInput) SetToken(v string) *CreatePlatformEndpoint
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePlatformEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.CustomUserData != nil {
+		v := *s.CustomUserData
+
+		e.SetValue(protocol.BodyTarget, "CustomUserData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Token != nil {
+		v := *s.Token
+
+		e.SetValue(protocol.BodyTarget, "Token", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response from CreateEndpoint action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateEndpointResponse
 type CreatePlatformEndpointOutput struct {
@@ -2420,6 +2564,17 @@ func (s CreatePlatformEndpointOutput) SDKResponseMetadata() aws.Response {
 func (s *CreatePlatformEndpointOutput) SetEndpointArn(v string) *CreatePlatformEndpointOutput {
 	s.EndpointArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePlatformEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EndpointArn != nil {
+		v := *s.EndpointArn
+
+		e.SetValue(protocol.BodyTarget, "EndpointArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for CreateTopic action.
@@ -2467,6 +2622,17 @@ func (s *CreateTopicInput) SetName(v string) *CreateTopicInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateTopicInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response from CreateTopic action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicResponse
 type CreateTopicOutput struct {
@@ -2497,6 +2663,17 @@ func (s CreateTopicOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateTopicOutput) SetTopicArn(v string) *CreateTopicOutput {
 	s.TopicArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateTopicOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for DeleteEndpoint action.
@@ -2540,6 +2717,17 @@ func (s *DeleteEndpointInput) SetEndpointArn(v string) *DeleteEndpointInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EndpointArn != nil {
+		v := *s.EndpointArn
+
+		e.SetValue(protocol.BodyTarget, "EndpointArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpointOutput
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -2560,6 +2748,12 @@ func (s DeleteEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Input for DeletePlatformApplication action.
@@ -2603,6 +2797,17 @@ func (s *DeletePlatformApplicationInput) SetPlatformApplicationArn(v string) *De
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePlatformApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationOutput
 type DeletePlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2623,6 +2828,12 @@ func (s DeletePlatformApplicationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePlatformApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePlatformApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopicInput
@@ -2665,6 +2876,17 @@ func (s *DeleteTopicInput) SetTopicArn(v string) *DeleteTopicInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTopicInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopicOutput
 type DeleteTopicOutput struct {
 	_ struct{} `type:"structure"`
@@ -2685,6 +2907,12 @@ func (s DeleteTopicOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTopicOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTopicOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Endpoint for mobile app and device.
@@ -2719,6 +2947,30 @@ func (s *Endpoint) SetAttributes(v map[string]string) *Endpoint {
 func (s *Endpoint) SetEndpointArn(v string) *Endpoint {
 	s.EndpointArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Endpoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.EndpointArn != nil {
+		v := *s.EndpointArn
+
+		e.SetValue(protocol.BodyTarget, "EndpointArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEndpointList(vs []Endpoint) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Input for GetEndpointAttributes action.
@@ -2760,6 +3012,17 @@ func (s *GetEndpointAttributesInput) Validate() error {
 func (s *GetEndpointAttributesInput) SetEndpointArn(v string) *GetEndpointAttributesInput {
 	s.EndpointArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetEndpointAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EndpointArn != nil {
+		v := *s.EndpointArn
+
+		e.SetValue(protocol.BodyTarget, "EndpointArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response from GetEndpointAttributes of the EndpointArn.
@@ -2807,6 +3070,17 @@ func (s *GetEndpointAttributesOutput) SetAttributes(v map[string]string) *GetEnd
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetEndpointAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Input for GetPlatformApplicationAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesInput
 type GetPlatformApplicationAttributesInput struct {
@@ -2846,6 +3120,17 @@ func (s *GetPlatformApplicationAttributesInput) Validate() error {
 func (s *GetPlatformApplicationAttributesInput) SetPlatformApplicationArn(v string) *GetPlatformApplicationAttributesInput {
 	s.PlatformApplicationArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetPlatformApplicationAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response for GetPlatformApplicationAttributes action.
@@ -2893,6 +3178,17 @@ func (s *GetPlatformApplicationAttributesOutput) SetAttributes(v map[string]stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetPlatformApplicationAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The input for the GetSMSAttributes request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesInput
 type GetSMSAttributesInput struct {
@@ -2921,6 +3217,17 @@ func (s GetSMSAttributesInput) GoString() string {
 func (s *GetSMSAttributesInput) SetAttributes(v []string) *GetSMSAttributesInput {
 	s.Attributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSMSAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "attributes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The response from the GetSMSAttributes request.
@@ -2953,6 +3260,17 @@ func (s GetSMSAttributesOutput) SDKResponseMetadata() aws.Response {
 func (s *GetSMSAttributesOutput) SetAttributes(v map[string]string) *GetSMSAttributesOutput {
 	s.Attributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSMSAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for GetSubscriptionAttributes.
@@ -2994,6 +3312,17 @@ func (s *GetSubscriptionAttributesInput) Validate() error {
 func (s *GetSubscriptionAttributesInput) SetSubscriptionArn(v string) *GetSubscriptionAttributesInput {
 	s.SubscriptionArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSubscriptionAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubscriptionArn != nil {
+		v := *s.SubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response for GetSubscriptionAttributes action.
@@ -3045,6 +3374,17 @@ func (s *GetSubscriptionAttributesOutput) SetAttributes(v map[string]string) *Ge
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSubscriptionAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Input for GetTopicAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesInput
 type GetTopicAttributesInput struct {
@@ -3084,6 +3424,17 @@ func (s *GetTopicAttributesInput) Validate() error {
 func (s *GetTopicAttributesInput) SetTopicArn(v string) *GetTopicAttributesInput {
 	s.TopicArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetTopicAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response for GetTopicAttributes action.
@@ -3141,6 +3492,17 @@ func (s *GetTopicAttributesOutput) SetAttributes(v map[string]string) *GetTopicA
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetTopicAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Input for ListEndpointsByPlatformApplication action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationInput
 type ListEndpointsByPlatformApplicationInput struct {
@@ -3193,6 +3555,22 @@ func (s *ListEndpointsByPlatformApplicationInput) SetPlatformApplicationArn(v st
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListEndpointsByPlatformApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response for ListEndpointsByPlatformApplication action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationResponse
 type ListEndpointsByPlatformApplicationOutput struct {
@@ -3235,6 +3613,22 @@ func (s *ListEndpointsByPlatformApplicationOutput) SetNextToken(v string) *ListE
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListEndpointsByPlatformApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Endpoints) > 0 {
+		v := s.Endpoints
+
+		e.SetList(protocol.BodyTarget, "Endpoints", encodeEndpointList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The input for the ListPhoneNumbersOptedOut action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOutInput
 type ListPhoneNumbersOptedOutInput struct {
@@ -3260,6 +3654,17 @@ func (s ListPhoneNumbersOptedOutInput) GoString() string {
 func (s *ListPhoneNumbersOptedOutInput) SetNextToken(v string) *ListPhoneNumbersOptedOutInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPhoneNumbersOptedOutInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The response from the ListPhoneNumbersOptedOut action.
@@ -3305,6 +3710,22 @@ func (s *ListPhoneNumbersOptedOutOutput) SetPhoneNumbers(v []string) *ListPhoneN
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPhoneNumbersOptedOutOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PhoneNumbers) > 0 {
+		v := s.PhoneNumbers
+
+		e.SetList(protocol.BodyTarget, "phoneNumbers", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Input for ListPlatformApplications action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsInput
 type ListPlatformApplicationsInput struct {
@@ -3329,6 +3750,17 @@ func (s ListPlatformApplicationsInput) GoString() string {
 func (s *ListPlatformApplicationsInput) SetNextToken(v string) *ListPlatformApplicationsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPlatformApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response for ListPlatformApplications action.
@@ -3371,6 +3803,22 @@ func (s *ListPlatformApplicationsOutput) SetNextToken(v string) *ListPlatformApp
 func (s *ListPlatformApplicationsOutput) SetPlatformApplications(v []PlatformApplication) *ListPlatformApplicationsOutput {
 	s.PlatformApplications = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPlatformApplicationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PlatformApplications) > 0 {
+		v := s.PlatformApplications
+
+		e.SetList(protocol.BodyTarget, "PlatformApplications", encodePlatformApplicationList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for ListSubscriptionsByTopic action.
@@ -3423,6 +3871,22 @@ func (s *ListSubscriptionsByTopicInput) SetTopicArn(v string) *ListSubscriptions
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSubscriptionsByTopicInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response for ListSubscriptionsByTopic action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopicResponse
 type ListSubscriptionsByTopicOutput struct {
@@ -3465,6 +3929,22 @@ func (s *ListSubscriptionsByTopicOutput) SetSubscriptions(v []Subscription) *Lis
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSubscriptionsByTopicOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subscriptions) > 0 {
+		v := s.Subscriptions
+
+		e.SetList(protocol.BodyTarget, "Subscriptions", encodeSubscriptionList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Input for ListSubscriptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsInput
 type ListSubscriptionsInput struct {
@@ -3488,6 +3968,17 @@ func (s ListSubscriptionsInput) GoString() string {
 func (s *ListSubscriptionsInput) SetNextToken(v string) *ListSubscriptionsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSubscriptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response for ListSubscriptions action
@@ -3532,6 +4023,22 @@ func (s *ListSubscriptionsOutput) SetSubscriptions(v []Subscription) *ListSubscr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSubscriptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subscriptions) > 0 {
+		v := s.Subscriptions
+
+		e.SetList(protocol.BodyTarget, "Subscriptions", encodeSubscriptionList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopicsInput
 type ListTopicsInput struct {
 	_ struct{} `type:"structure"`
@@ -3554,6 +4061,17 @@ func (s ListTopicsInput) GoString() string {
 func (s *ListTopicsInput) SetNextToken(v string) *ListTopicsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListTopicsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Response for ListTopics action.
@@ -3596,6 +4114,22 @@ func (s *ListTopicsOutput) SetNextToken(v string) *ListTopicsOutput {
 func (s *ListTopicsOutput) SetTopics(v []Topic) *ListTopicsOutput {
 	s.Topics = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListTopicsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Topics) > 0 {
+		v := s.Topics
+
+		e.SetList(protocol.BodyTarget, "Topics", encodeTopicList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The user-specified message attribute value. For string data types, the value
@@ -3670,6 +4204,35 @@ func (s *MessageAttributeValue) SetStringValue(v string) *MessageAttributeValue 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MessageAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BinaryValue != nil {
+		v := s.BinaryValue
+
+		e.SetValue(protocol.BodyTarget, "BinaryValue", protocol.BytesValue(v), protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StringValue != nil {
+		v := *s.StringValue
+
+		e.SetValue(protocol.BodyTarget, "StringValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMessageAttributeValueMap(vs map[string]MessageAttributeValue) func(protocol.MapEncoder) {
+	return func(me protocol.MapEncoder) {
+		for k, v := range vs {
+			me.MapSetFields(k, &v)
+		}
+	}
+}
+
 // Input for the OptInPhoneNumber action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberInput
 type OptInPhoneNumberInput struct {
@@ -3711,6 +4274,17 @@ func (s *OptInPhoneNumberInput) SetPhoneNumber(v string) *OptInPhoneNumberInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptInPhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PhoneNumber != nil {
+		v := *s.PhoneNumber
+
+		e.SetValue(protocol.BodyTarget, "phoneNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The response for the OptInPhoneNumber action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberResponse
 type OptInPhoneNumberOutput struct {
@@ -3732,6 +4306,12 @@ func (s OptInPhoneNumberOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s OptInPhoneNumberOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptInPhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Platform application object.
@@ -3766,6 +4346,30 @@ func (s *PlatformApplication) SetAttributes(v map[string]string) *PlatformApplic
 func (s *PlatformApplication) SetPlatformApplicationArn(v string) *PlatformApplication {
 	s.PlatformApplicationArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PlatformApplication) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePlatformApplicationList(vs []PlatformApplication) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Input for Publish action.
@@ -3938,6 +4542,47 @@ func (s *PublishInput) SetTopicArn(v string) *PublishInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PublishInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MessageAttributes) > 0 {
+		v := s.MessageAttributes
+
+		e.SetMap(protocol.BodyTarget, "MessageAttributes", encodeMessageAttributeValueMap(v), protocol.Metadata{MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.MessageStructure != nil {
+		v := *s.MessageStructure
+
+		e.SetValue(protocol.BodyTarget, "MessageStructure", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhoneNumber != nil {
+		v := *s.PhoneNumber
+
+		e.SetValue(protocol.BodyTarget, "PhoneNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Subject != nil {
+		v := *s.Subject
+
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetArn != nil {
+		v := *s.TargetArn
+
+		e.SetValue(protocol.BodyTarget, "TargetArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response for Publish action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishResponse
 type PublishOutput struct {
@@ -3970,6 +4615,17 @@ func (s PublishOutput) SDKResponseMetadata() aws.Response {
 func (s *PublishOutput) SetMessageId(v string) *PublishOutput {
 	s.MessageId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PublishOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Input for RemovePermission action.
@@ -4028,6 +4684,22 @@ func (s *RemovePermissionInput) SetTopicArn(v string) *RemovePermissionInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemovePermissionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Label != nil {
+		v := *s.Label
+
+		e.SetValue(protocol.BodyTarget, "Label", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4048,6 +4720,12 @@ func (s RemovePermissionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemovePermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Input for SetEndpointAttributes action.
@@ -4119,6 +4797,22 @@ func (s *SetEndpointAttributesInput) SetEndpointArn(v string) *SetEndpointAttrib
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetEndpointAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.EndpointArn != nil {
+		v := *s.EndpointArn
+
+		e.SetValue(protocol.BodyTarget, "EndpointArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributesOutput
 type SetEndpointAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4139,6 +4833,12 @@ func (s SetEndpointAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetEndpointAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetEndpointAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Input for SetPlatformApplicationAttributes action.
@@ -4230,6 +4930,22 @@ func (s *SetPlatformApplicationAttributesInput) SetPlatformApplicationArn(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetPlatformApplicationAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.PlatformApplicationArn != nil {
+		v := *s.PlatformApplicationArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformApplicationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributesOutput
 type SetPlatformApplicationAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4250,6 +4966,12 @@ func (s SetPlatformApplicationAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetPlatformApplicationAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetPlatformApplicationAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The input for the SetSMSAttributes action.
@@ -4364,6 +5086,17 @@ func (s *SetSMSAttributesInput) SetAttributes(v map[string]string) *SetSMSAttrib
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetSMSAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The response for the SetSMSAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesResponse
 type SetSMSAttributesOutput struct {
@@ -4385,6 +5118,12 @@ func (s SetSMSAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetSMSAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetSMSAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Input for SetSubscriptionAttributes action.
@@ -4455,6 +5194,27 @@ func (s *SetSubscriptionAttributesInput) SetSubscriptionArn(v string) *SetSubscr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetSubscriptionAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttributeValue != nil {
+		v := *s.AttributeValue
+
+		e.SetValue(protocol.BodyTarget, "AttributeValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionArn != nil {
+		v := *s.SubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributesOutput
 type SetSubscriptionAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4475,6 +5235,12 @@ func (s SetSubscriptionAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetSubscriptionAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetSubscriptionAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Input for SetTopicAttributes action.
@@ -4545,6 +5311,27 @@ func (s *SetTopicAttributesInput) SetTopicArn(v string) *SetTopicAttributesInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetTopicAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttributeValue != nil {
+		v := *s.AttributeValue
+
+		e.SetValue(protocol.BodyTarget, "AttributeValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributesOutput
 type SetTopicAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4565,6 +5352,12 @@ func (s SetTopicAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetTopicAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetTopicAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Input for Subscribe action.
@@ -4667,6 +5460,27 @@ func (s *SubscribeInput) SetTopicArn(v string) *SubscribeInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SubscribeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Protocol != nil {
+		v := *s.Protocol
+
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Response for Subscribe action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeResponse
 type SubscribeOutput struct {
@@ -4698,6 +5512,17 @@ func (s SubscribeOutput) SDKResponseMetadata() aws.Response {
 func (s *SubscribeOutput) SetSubscriptionArn(v string) *SubscribeOutput {
 	s.SubscriptionArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SubscribeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubscriptionArn != nil {
+		v := *s.SubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
@@ -4761,6 +5586,45 @@ func (s *Subscription) SetTopicArn(v string) *Subscription {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Subscription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Owner != nil {
+		v := *s.Owner
+
+		e.SetValue(protocol.BodyTarget, "Owner", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Protocol != nil {
+		v := *s.Protocol
+
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionArn != nil {
+		v := *s.SubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSubscriptionList(vs []Subscription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a
 // topic's attributes, use GetTopicAttributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Topic
@@ -4785,6 +5649,25 @@ func (s Topic) GoString() string {
 func (s *Topic) SetTopicArn(v string) *Topic {
 	s.TopicArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Topic) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTopicList(vs []Topic) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Input for Unsubscribe action.
@@ -4828,6 +5711,17 @@ func (s *UnsubscribeInput) SetSubscriptionArn(v string) *UnsubscribeInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UnsubscribeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubscriptionArn != nil {
+		v := *s.SubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UnsubscribeOutput
 type UnsubscribeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4848,4 +5742,10 @@ func (s UnsubscribeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UnsubscribeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UnsubscribeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }

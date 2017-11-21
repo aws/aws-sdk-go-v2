@@ -155,15 +155,6 @@ func unmarshalHeaderMap(r reflect.Value, headers http.Header, prefix string) err
 			}
 		}
 		r.Set(reflect.ValueOf(out))
-	case map[string]string: // we only support string map value types
-		out := map[string]string{}
-		for k, v := range headers {
-			k = http.CanonicalHeaderKey(k)
-			if strings.HasPrefix(strings.ToLower(k), strings.ToLower(prefix)) {
-				out[k[len(prefix):]] = v[0]
-			}
-		}
-		r.Set(reflect.ValueOf(out))
 	}
 	return nil
 }

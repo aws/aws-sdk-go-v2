@@ -2833,6 +2833,15 @@ const (
 	AdjustmentTypeExactCapacity           AdjustmentType = "ExactCapacity"
 )
 
+func (enum AdjustmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdjustmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricAggregationType string
 
 // Enum values for MetricAggregationType
@@ -2841,6 +2850,15 @@ const (
 	MetricAggregationTypeMinimum MetricAggregationType = "Minimum"
 	MetricAggregationTypeMaximum MetricAggregationType = "Maximum"
 )
+
+func (enum MetricAggregationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricAggregationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MetricStatistic string
 
@@ -2853,6 +2871,15 @@ const (
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
+func (enum MetricStatistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricStatistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricType string
 
 // Enum values for MetricType
@@ -2861,6 +2888,15 @@ const (
 	MetricTypeDynamoDbwriteCapacityUtilization MetricType = "DynamoDBWriteCapacityUtilization"
 )
 
+func (enum MetricType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PolicyType string
 
 // Enum values for PolicyType
@@ -2868,6 +2904,15 @@ const (
 	PolicyTypeStepScaling           PolicyType = "StepScaling"
 	PolicyTypeTargetTrackingScaling PolicyType = "TargetTrackingScaling"
 )
+
+func (enum PolicyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ScalableDimension string
 
@@ -2883,6 +2928,15 @@ const (
 	ScalableDimensionDynamodbIndexWriteCapacityUnits            ScalableDimension = "dynamodb:index:WriteCapacityUnits"
 )
 
+func (enum ScalableDimension) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalableDimension) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScalingActivityStatusCode string
 
 // Enum values for ScalingActivityStatusCode
@@ -2895,6 +2949,15 @@ const (
 	ScalingActivityStatusCodeFailed      ScalingActivityStatusCode = "Failed"
 )
 
+func (enum ScalingActivityStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalingActivityStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ServiceNamespace string
 
 // Enum values for ServiceNamespace
@@ -2905,3 +2968,12 @@ const (
 	ServiceNamespaceAppstream        ServiceNamespace = "appstream"
 	ServiceNamespaceDynamodb         ServiceNamespace = "dynamodb"
 )
+
+func (enum ServiceNamespace) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceNamespace) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

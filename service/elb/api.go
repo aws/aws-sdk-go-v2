@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAddTags = "AddTags"
@@ -1770,6 +1771,32 @@ func (s *AccessLog) SetS3BucketPrefix(v string) *AccessLog {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccessLog) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EmitInterval != nil {
+		v := *s.EmitInterval
+
+		e.SetValue(protocol.BodyTarget, "EmitInterval", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.S3BucketName != nil {
+		v := *s.S3BucketName
+
+		e.SetValue(protocol.BodyTarget, "S3BucketName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.S3BucketPrefix != nil {
+		v := *s.S3BucketPrefix
+
+		e.SetValue(protocol.BodyTarget, "S3BucketPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the parameters for AddTags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTagsInput
 type AddTagsInput struct {
@@ -1836,6 +1863,22 @@ func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of AddTags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTagsOutput
 type AddTagsOutput struct {
@@ -1857,6 +1900,12 @@ func (s AddTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // This data type is reserved.
@@ -1893,6 +1942,30 @@ func (s *AdditionalAttribute) SetValue(v string) *AdditionalAttribute {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AdditionalAttribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAdditionalAttributeList(vs []AdditionalAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Information about a policy for application-controlled session stickiness.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AppCookieStickinessPolicy
 type AppCookieStickinessPolicy struct {
@@ -1926,6 +1999,30 @@ func (s *AppCookieStickinessPolicy) SetCookieName(v string) *AppCookieStickiness
 func (s *AppCookieStickinessPolicy) SetPolicyName(v string) *AppCookieStickinessPolicy {
 	s.PolicyName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AppCookieStickinessPolicy) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CookieName != nil {
+		v := *s.CookieName
+
+		e.SetValue(protocol.BodyTarget, "CookieName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAppCookieStickinessPolicyList(vs []AppCookieStickinessPolicy) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the parameters for ApplySecurityGroupsToLoadBalancer.
@@ -1985,6 +2082,22 @@ func (s *ApplySecurityGroupsToLoadBalancerInput) SetSecurityGroups(v []string) *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplySecurityGroupsToLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of ApplySecurityGroupsToLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancerOutput
 type ApplySecurityGroupsToLoadBalancerOutput struct {
@@ -2015,6 +2128,17 @@ func (s ApplySecurityGroupsToLoadBalancerOutput) SDKResponseMetadata() aws.Respo
 func (s *ApplySecurityGroupsToLoadBalancerOutput) SetSecurityGroups(v []string) *ApplySecurityGroupsToLoadBalancerOutput {
 	s.SecurityGroups = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplySecurityGroupsToLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for AttachLoaBalancerToSubnets.
@@ -2074,6 +2198,22 @@ func (s *AttachLoadBalancerToSubnetsInput) SetSubnets(v []string) *AttachLoadBal
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachLoadBalancerToSubnetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of AttachLoadBalancerToSubnets.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnetsOutput
 type AttachLoadBalancerToSubnetsOutput struct {
@@ -2104,6 +2244,17 @@ func (s AttachLoadBalancerToSubnetsOutput) SDKResponseMetadata() aws.Response {
 func (s *AttachLoadBalancerToSubnetsOutput) SetSubnets(v []string) *AttachLoadBalancerToSubnetsOutput {
 	s.Subnets = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachLoadBalancerToSubnetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Information about the configuration of an EC2 instance.
@@ -2138,6 +2289,30 @@ func (s *BackendServerDescription) SetInstancePort(v int64) *BackendServerDescri
 func (s *BackendServerDescription) SetPolicyNames(v []string) *BackendServerDescription {
 	s.PolicyNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BackendServerDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstancePort != nil {
+		v := *s.InstancePort
+
+		e.SetValue(protocol.BodyTarget, "InstancePort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeBackendServerDescriptionList(vs []BackendServerDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the parameters for ConfigureHealthCheck.
@@ -2201,6 +2376,22 @@ func (s *ConfigureHealthCheckInput) SetLoadBalancerName(v string) *ConfigureHeal
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfigureHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HealthCheck != nil {
+		v := s.HealthCheck
+
+		e.SetFields(protocol.BodyTarget, "HealthCheck", v, protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of ConfigureHealthCheck.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheckOutput
 type ConfigureHealthCheckOutput struct {
@@ -2231,6 +2422,17 @@ func (s ConfigureHealthCheckOutput) SDKResponseMetadata() aws.Response {
 func (s *ConfigureHealthCheckOutput) SetHealthCheck(v *HealthCheck) *ConfigureHealthCheckOutput {
 	s.HealthCheck = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfigureHealthCheckOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HealthCheck != nil {
+		v := s.HealthCheck
+
+		e.SetFields(protocol.BodyTarget, "HealthCheck", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Information about the ConnectionDraining attribute.
@@ -2284,6 +2486,22 @@ func (s *ConnectionDraining) SetTimeout(v int64) *ConnectionDraining {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConnectionDraining) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Timeout != nil {
+		v := *s.Timeout
+
+		e.SetValue(protocol.BodyTarget, "Timeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Information about the ConnectionSettings attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConnectionSettings
 type ConnectionSettings struct {
@@ -2327,6 +2545,17 @@ func (s *ConnectionSettings) Validate() error {
 func (s *ConnectionSettings) SetIdleTimeout(v int64) *ConnectionSettings {
 	s.IdleTimeout = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConnectionSettings) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IdleTimeout != nil {
+		v := *s.IdleTimeout
+
+		e.SetValue(protocol.BodyTarget, "IdleTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for CreateAppCookieStickinessPolicy.
@@ -2402,6 +2631,27 @@ func (s *CreateAppCookieStickinessPolicyInput) SetPolicyName(v string) *CreateAp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAppCookieStickinessPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CookieName != nil {
+		v := *s.CookieName
+
+		e.SetValue(protocol.BodyTarget, "CookieName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output for CreateAppCookieStickinessPolicy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicyOutput
 type CreateAppCookieStickinessPolicyOutput struct {
@@ -2423,6 +2673,12 @@ func (s CreateAppCookieStickinessPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAppCookieStickinessPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAppCookieStickinessPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for CreateLBCookieStickinessPolicy.
@@ -2495,6 +2751,27 @@ func (s *CreateLBCookieStickinessPolicyInput) SetPolicyName(v string) *CreateLBC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLBCookieStickinessPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CookieExpirationPeriod != nil {
+		v := *s.CookieExpirationPeriod
+
+		e.SetValue(protocol.BodyTarget, "CookieExpirationPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output for CreateLBCookieStickinessPolicy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicyOutput
 type CreateLBCookieStickinessPolicyOutput struct {
@@ -2516,6 +2793,12 @@ func (s CreateLBCookieStickinessPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLBCookieStickinessPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLBCookieStickinessPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for CreateLoadBalancer.
@@ -2662,6 +2945,47 @@ func (s *CreateLoadBalancerInput) SetTags(v []Tag) *CreateLoadBalancerInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Listeners) > 0 {
+		v := s.Listeners
+
+		e.SetList(protocol.BodyTarget, "Listeners", encodeListenerList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Scheme != nil {
+		v := *s.Scheme
+
+		e.SetValue(protocol.BodyTarget, "Scheme", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the parameters for CreateLoadBalancerListeners.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListenerInput
 type CreateLoadBalancerListenersInput struct {
@@ -2725,6 +3049,22 @@ func (s *CreateLoadBalancerListenersInput) SetLoadBalancerName(v string) *Create
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoadBalancerListenersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Listeners) > 0 {
+		v := s.Listeners
+
+		e.SetList(protocol.BodyTarget, "Listeners", encodeListenerList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the parameters for CreateLoadBalancerListener.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListenerOutput
 type CreateLoadBalancerListenersOutput struct {
@@ -2746,6 +3086,12 @@ func (s CreateLoadBalancerListenersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLoadBalancerListenersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoadBalancerListenersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the output for CreateLoadBalancer.
@@ -2778,6 +3124,17 @@ func (s CreateLoadBalancerOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateLoadBalancerOutput) SetDNSName(v string) *CreateLoadBalancerOutput {
 	s.DNSName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DNSName != nil {
+		v := *s.DNSName
+
+		e.SetValue(protocol.BodyTarget, "DNSName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for CreateLoadBalancerPolicy.
@@ -2861,6 +3218,32 @@ func (s *CreateLoadBalancerPolicyInput) SetPolicyTypeName(v string) *CreateLoadB
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoadBalancerPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyAttributes) > 0 {
+		v := s.PolicyAttributes
+
+		e.SetList(protocol.BodyTarget, "PolicyAttributes", encodePolicyAttributeList(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyTypeName != nil {
+		v := *s.PolicyTypeName
+
+		e.SetValue(protocol.BodyTarget, "PolicyTypeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of CreateLoadBalancerPolicy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicyOutput
 type CreateLoadBalancerPolicyOutput struct {
@@ -2882,6 +3265,12 @@ func (s CreateLoadBalancerPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLoadBalancerPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoadBalancerPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Information about the CrossZoneLoadBalancing attribute.
@@ -2925,6 +3314,17 @@ func (s *CrossZoneLoadBalancing) SetEnabled(v bool) *CrossZoneLoadBalancing {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CrossZoneLoadBalancing) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the parameters for DeleteLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteAccessPointInput
 type DeleteLoadBalancerInput struct {
@@ -2964,6 +3364,17 @@ func (s *DeleteLoadBalancerInput) Validate() error {
 func (s *DeleteLoadBalancerInput) SetLoadBalancerName(v string) *DeleteLoadBalancerInput {
 	s.LoadBalancerName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DeleteLoadBalancerListeners.
@@ -3022,6 +3433,22 @@ func (s *DeleteLoadBalancerListenersInput) SetLoadBalancerPorts(v []int64) *Dele
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoadBalancerListenersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LoadBalancerPorts) > 0 {
+		v := s.LoadBalancerPorts
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerPorts", protocol.EncodeInt64List(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of DeleteLoadBalancerListeners.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListenerOutput
 type DeleteLoadBalancerListenersOutput struct {
@@ -3045,6 +3472,12 @@ func (s DeleteLoadBalancerListenersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoadBalancerListenersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 // Contains the output of DeleteLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteAccessPointOutput
 type DeleteLoadBalancerOutput struct {
@@ -3066,6 +3499,12 @@ func (s DeleteLoadBalancerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLoadBalancerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for DeleteLoadBalancerPolicy.
@@ -3124,6 +3563,22 @@ func (s *DeleteLoadBalancerPolicyInput) SetPolicyName(v string) *DeleteLoadBalan
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoadBalancerPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of DeleteLoadBalancerPolicy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicyOutput
 type DeleteLoadBalancerPolicyOutput struct {
@@ -3145,6 +3600,12 @@ func (s DeleteLoadBalancerPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLoadBalancerPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoadBalancerPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for DeregisterInstancesFromLoadBalancer.
@@ -3203,6 +3664,22 @@ func (s *DeregisterInstancesFromLoadBalancerInput) SetLoadBalancerName(v string)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeregisterInstancesFromLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of DeregisterInstancesFromLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterEndPointsOutput
 type DeregisterInstancesFromLoadBalancerOutput struct {
@@ -3233,6 +3710,17 @@ func (s DeregisterInstancesFromLoadBalancerOutput) SDKResponseMetadata() aws.Res
 func (s *DeregisterInstancesFromLoadBalancerOutput) SetInstances(v []Instance) *DeregisterInstancesFromLoadBalancerOutput {
 	s.Instances = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeregisterInstancesFromLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimitsInput
@@ -3282,6 +3770,22 @@ func (s *DescribeAccountLimitsInput) SetPageSize(v int64) *DescribeAccountLimits
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountLimitsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PageSize != nil {
+		v := *s.PageSize
+
+		e.SetValue(protocol.BodyTarget, "PageSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimitsOutput
 type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3321,6 +3825,22 @@ func (s *DescribeAccountLimitsOutput) SetLimits(v []Limit) *DescribeAccountLimit
 func (s *DescribeAccountLimitsOutput) SetNextMarker(v string) *DescribeAccountLimitsOutput {
 	s.NextMarker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountLimitsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Limits) > 0 {
+		v := s.Limits
+
+		e.SetList(protocol.BodyTarget, "Limits", encodeLimitList(v), protocol.Metadata{})
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DescribeInstanceHealth.
@@ -3373,6 +3893,22 @@ func (s *DescribeInstanceHealthInput) SetLoadBalancerName(v string) *DescribeIns
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeInstanceHealthInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output for DescribeInstanceHealth.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeEndPointStateOutput
 type DescribeInstanceHealthOutput struct {
@@ -3403,6 +3939,17 @@ func (s DescribeInstanceHealthOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeInstanceHealthOutput) SetInstanceStates(v []InstanceState) *DescribeInstanceHealthOutput {
 	s.InstanceStates = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeInstanceHealthOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.InstanceStates) > 0 {
+		v := s.InstanceStates
+
+		e.SetList(protocol.BodyTarget, "InstanceStates", encodeInstanceStateList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DescribeLoadBalancerAttributes.
@@ -3446,6 +3993,17 @@ func (s *DescribeLoadBalancerAttributesInput) SetLoadBalancerName(v string) *Des
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of DescribeLoadBalancerAttributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributesOutput
 type DescribeLoadBalancerAttributesOutput struct {
@@ -3476,6 +4034,17 @@ func (s DescribeLoadBalancerAttributesOutput) SDKResponseMetadata() aws.Response
 func (s *DescribeLoadBalancerAttributesOutput) SetLoadBalancerAttributes(v *LoadBalancerAttributes) *DescribeLoadBalancerAttributesOutput {
 	s.LoadBalancerAttributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerAttributes != nil {
+		v := s.LoadBalancerAttributes
+
+		e.SetFields(protocol.BodyTarget, "LoadBalancerAttributes", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DescribeLoadBalancerPolicies.
@@ -3512,6 +4081,22 @@ func (s *DescribeLoadBalancerPoliciesInput) SetPolicyNames(v []string) *Describe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of DescribeLoadBalancerPolicies.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPoliciesOutput
 type DescribeLoadBalancerPoliciesOutput struct {
@@ -3544,6 +4129,17 @@ func (s *DescribeLoadBalancerPoliciesOutput) SetPolicyDescriptions(v []PolicyDes
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyDescriptions) > 0 {
+		v := s.PolicyDescriptions
+
+		e.SetList(protocol.BodyTarget, "PolicyDescriptions", encodePolicyDescriptionList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the parameters for DescribeLoadBalancerPolicyTypes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypesInput
 type DescribeLoadBalancerPolicyTypesInput struct {
@@ -3568,6 +4164,17 @@ func (s DescribeLoadBalancerPolicyTypesInput) GoString() string {
 func (s *DescribeLoadBalancerPolicyTypesInput) SetPolicyTypeNames(v []string) *DescribeLoadBalancerPolicyTypesInput {
 	s.PolicyTypeNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerPolicyTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyTypeNames) > 0 {
+		v := s.PolicyTypeNames
+
+		e.SetList(protocol.BodyTarget, "PolicyTypeNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the output of DescribeLoadBalancerPolicyTypes.
@@ -3600,6 +4207,17 @@ func (s DescribeLoadBalancerPolicyTypesOutput) SDKResponseMetadata() aws.Respons
 func (s *DescribeLoadBalancerPolicyTypesOutput) SetPolicyTypeDescriptions(v []PolicyTypeDescription) *DescribeLoadBalancerPolicyTypesOutput {
 	s.PolicyTypeDescriptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerPolicyTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyTypeDescriptions) > 0 {
+		v := s.PolicyTypeDescriptions
+
+		e.SetList(protocol.BodyTarget, "PolicyTypeDescriptions", encodePolicyTypeDescriptionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DescribeLoadBalancers.
@@ -3660,6 +4278,27 @@ func (s *DescribeLoadBalancersInput) SetPageSize(v int64) *DescribeLoadBalancers
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PageSize != nil {
+		v := *s.PageSize
+
+		e.SetValue(protocol.BodyTarget, "PageSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the parameters for DescribeLoadBalancers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccessPointsOutput
 type DescribeLoadBalancersOutput struct {
@@ -3700,6 +4339,22 @@ func (s *DescribeLoadBalancersOutput) SetLoadBalancerDescriptions(v []LoadBalanc
 func (s *DescribeLoadBalancersOutput) SetNextMarker(v string) *DescribeLoadBalancersOutput {
 	s.NextMarker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancerDescriptions) > 0 {
+		v := s.LoadBalancerDescriptions
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerDescriptions", encodeLoadBalancerDescriptionList(v), protocol.Metadata{})
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DescribeTags.
@@ -3746,6 +4401,17 @@ func (s *DescribeTagsInput) SetLoadBalancerNames(v []string) *DescribeTagsInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output for DescribeTags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTagsOutput
 type DescribeTagsOutput struct {
@@ -3776,6 +4442,17 @@ func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeTagsOutput) SetTagDescriptions(v []TagDescription) *DescribeTagsOutput {
 	s.TagDescriptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.TagDescriptions) > 0 {
+		v := s.TagDescriptions
+
+		e.SetList(protocol.BodyTarget, "TagDescriptions", encodeTagDescriptionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DetachLoadBalancerFromSubnets.
@@ -3834,6 +4511,22 @@ func (s *DetachLoadBalancerFromSubnetsInput) SetSubnets(v []string) *DetachLoadB
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachLoadBalancerFromSubnetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of DetachLoadBalancerFromSubnets.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnetsOutput
 type DetachLoadBalancerFromSubnetsOutput struct {
@@ -3864,6 +4557,17 @@ func (s DetachLoadBalancerFromSubnetsOutput) SDKResponseMetadata() aws.Response 
 func (s *DetachLoadBalancerFromSubnetsOutput) SetSubnets(v []string) *DetachLoadBalancerFromSubnetsOutput {
 	s.Subnets = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachLoadBalancerFromSubnetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
@@ -3922,6 +4626,22 @@ func (s *DisableAvailabilityZonesForLoadBalancerInput) SetLoadBalancerName(v str
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableAvailabilityZonesForLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output for DisableAvailabilityZonesForLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveAvailabilityZonesOutput
 type DisableAvailabilityZonesForLoadBalancerOutput struct {
@@ -3952,6 +4672,17 @@ func (s DisableAvailabilityZonesForLoadBalancerOutput) SDKResponseMetadata() aws
 func (s *DisableAvailabilityZonesForLoadBalancerOutput) SetAvailabilityZones(v []string) *DisableAvailabilityZonesForLoadBalancerOutput {
 	s.AvailabilityZones = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableAvailabilityZonesForLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
@@ -4010,6 +4741,22 @@ func (s *EnableAvailabilityZonesForLoadBalancerInput) SetLoadBalancerName(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableAvailabilityZonesForLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of EnableAvailabilityZonesForLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddAvailabilityZonesOutput
 type EnableAvailabilityZonesForLoadBalancerOutput struct {
@@ -4040,6 +4787,17 @@ func (s EnableAvailabilityZonesForLoadBalancerOutput) SDKResponseMetadata() aws.
 func (s *EnableAvailabilityZonesForLoadBalancerOutput) SetAvailabilityZones(v []string) *EnableAvailabilityZonesForLoadBalancerOutput {
 	s.AvailabilityZones = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableAvailabilityZonesForLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Information about a health check.
@@ -4178,6 +4936,37 @@ func (s *HealthCheck) SetUnhealthyThreshold(v int64) *HealthCheck {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *HealthCheck) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HealthyThreshold != nil {
+		v := *s.HealthyThreshold
+
+		e.SetValue(protocol.BodyTarget, "HealthyThreshold", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Interval != nil {
+		v := *s.Interval
+
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Target != nil {
+		v := *s.Target
+
+		e.SetValue(protocol.BodyTarget, "Target", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timeout != nil {
+		v := *s.Timeout
+
+		e.SetValue(protocol.BodyTarget, "Timeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UnhealthyThreshold != nil {
+		v := *s.UnhealthyThreshold
+
+		e.SetValue(protocol.BodyTarget, "UnhealthyThreshold", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The ID of an EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Instance
 type Instance struct {
@@ -4201,6 +4990,25 @@ func (s Instance) GoString() string {
 func (s *Instance) SetInstanceId(v string) *Instance {
 	s.InstanceId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Instance) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeInstanceList(vs []Instance) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Information about the state of an EC2 instance.
@@ -4288,6 +5096,40 @@ func (s *InstanceState) SetState(v string) *InstanceState {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *InstanceState) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReasonCode != nil {
+		v := *s.ReasonCode
+
+		e.SetValue(protocol.BodyTarget, "ReasonCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.State != nil {
+		v := *s.State
+
+		e.SetValue(protocol.BodyTarget, "State", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeInstanceStateList(vs []InstanceState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Information about a policy for duration-based session stickiness.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LBCookieStickinessPolicy
 type LBCookieStickinessPolicy struct {
@@ -4323,6 +5165,30 @@ func (s *LBCookieStickinessPolicy) SetCookieExpirationPeriod(v int64) *LBCookieS
 func (s *LBCookieStickinessPolicy) SetPolicyName(v string) *LBCookieStickinessPolicy {
 	s.PolicyName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LBCookieStickinessPolicy) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CookieExpirationPeriod != nil {
+		v := *s.CookieExpirationPeriod
+
+		e.SetValue(protocol.BodyTarget, "CookieExpirationPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLBCookieStickinessPolicyList(vs []LBCookieStickinessPolicy) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
@@ -4361,6 +5227,30 @@ func (s *Limit) SetMax(v string) *Limit {
 func (s *Limit) SetName(v string) *Limit {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Limit) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Max != nil {
+		v := *s.Max
+
+		e.SetValue(protocol.BodyTarget, "Max", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLimitList(vs []Limit) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Information about a listener.
@@ -4472,6 +5362,45 @@ func (s *Listener) SetSSLCertificateId(v string) *Listener {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Listener) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstancePort != nil {
+		v := *s.InstancePort
+
+		e.SetValue(protocol.BodyTarget, "InstancePort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.InstanceProtocol != nil {
+		v := *s.InstanceProtocol
+
+		e.SetValue(protocol.BodyTarget, "InstanceProtocol", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerPort != nil {
+		v := *s.LoadBalancerPort
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerPort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Protocol != nil {
+		v := *s.Protocol
+
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SSLCertificateId != nil {
+		v := *s.SSLCertificateId
+
+		e.SetValue(protocol.BodyTarget, "SSLCertificateId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeListenerList(vs []Listener) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The policies enabled for a listener.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ListenerDescription
 type ListenerDescription struct {
@@ -4504,6 +5433,30 @@ func (s *ListenerDescription) SetListener(v *Listener) *ListenerDescription {
 func (s *ListenerDescription) SetPolicyNames(v []string) *ListenerDescription {
 	s.PolicyNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListenerDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Listener != nil {
+		v := s.Listener
+
+		e.SetFields(protocol.BodyTarget, "Listener", v, protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeListenerDescriptionList(vs []ListenerDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The attributes for a load balancer.
@@ -4613,6 +5566,37 @@ func (s *LoadBalancerAttributes) SetConnectionSettings(v *ConnectionSettings) *L
 func (s *LoadBalancerAttributes) SetCrossZoneLoadBalancing(v *CrossZoneLoadBalancing) *LoadBalancerAttributes {
 	s.CrossZoneLoadBalancing = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoadBalancerAttributes) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessLog != nil {
+		v := s.AccessLog
+
+		e.SetFields(protocol.BodyTarget, "AccessLog", v, protocol.Metadata{})
+	}
+	if len(s.AdditionalAttributes) > 0 {
+		v := s.AdditionalAttributes
+
+		e.SetList(protocol.BodyTarget, "AdditionalAttributes", encodeAdditionalAttributeList(v), protocol.Metadata{})
+	}
+	if s.ConnectionDraining != nil {
+		v := s.ConnectionDraining
+
+		e.SetFields(protocol.BodyTarget, "ConnectionDraining", v, protocol.Metadata{})
+	}
+	if s.ConnectionSettings != nil {
+		v := s.ConnectionSettings
+
+		e.SetFields(protocol.BodyTarget, "ConnectionSettings", v, protocol.Metadata{})
+	}
+	if s.CrossZoneLoadBalancing != nil {
+		v := s.CrossZoneLoadBalancing
+
+		e.SetFields(protocol.BodyTarget, "CrossZoneLoadBalancing", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Information about a load balancer.
@@ -4788,6 +5772,100 @@ func (s *LoadBalancerDescription) SetVPCId(v string) *LoadBalancerDescription {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoadBalancerDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.BackendServerDescriptions) > 0 {
+		v := s.BackendServerDescriptions
+
+		e.SetList(protocol.BodyTarget, "BackendServerDescriptions", encodeBackendServerDescriptionList(v), protocol.Metadata{})
+	}
+	if s.CanonicalHostedZoneName != nil {
+		v := *s.CanonicalHostedZoneName
+
+		e.SetValue(protocol.BodyTarget, "CanonicalHostedZoneName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CanonicalHostedZoneNameID != nil {
+		v := *s.CanonicalHostedZoneNameID
+
+		e.SetValue(protocol.BodyTarget, "CanonicalHostedZoneNameID", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DNSName != nil {
+		v := *s.DNSName
+
+		e.SetValue(protocol.BodyTarget, "DNSName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HealthCheck != nil {
+		v := s.HealthCheck
+
+		e.SetFields(protocol.BodyTarget, "HealthCheck", v, protocol.Metadata{})
+	}
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	if len(s.ListenerDescriptions) > 0 {
+		v := s.ListenerDescriptions
+
+		e.SetList(protocol.BodyTarget, "ListenerDescriptions", encodeListenerDescriptionList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Policies != nil {
+		v := s.Policies
+
+		e.SetFields(protocol.BodyTarget, "Policies", v, protocol.Metadata{})
+	}
+	if s.Scheme != nil {
+		v := *s.Scheme
+
+		e.SetValue(protocol.BodyTarget, "Scheme", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.SourceSecurityGroup != nil {
+		v := s.SourceSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "SourceSecurityGroup", v, protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.VPCId != nil {
+		v := *s.VPCId
+
+		e.SetValue(protocol.BodyTarget, "VPCId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLoadBalancerDescriptionList(vs []LoadBalancerDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the parameters for ModifyLoadBalancerAttributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributesInput
 type ModifyLoadBalancerAttributesInput struct {
@@ -4849,6 +5927,22 @@ func (s *ModifyLoadBalancerAttributesInput) SetLoadBalancerName(v string) *Modif
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyLoadBalancerAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerAttributes != nil {
+		v := s.LoadBalancerAttributes
+
+		e.SetFields(protocol.BodyTarget, "LoadBalancerAttributes", v, protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of ModifyLoadBalancerAttributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributesOutput
 type ModifyLoadBalancerAttributesOutput struct {
@@ -4888,6 +5982,22 @@ func (s *ModifyLoadBalancerAttributesOutput) SetLoadBalancerAttributes(v *LoadBa
 func (s *ModifyLoadBalancerAttributesOutput) SetLoadBalancerName(v string) *ModifyLoadBalancerAttributesOutput {
 	s.LoadBalancerName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyLoadBalancerAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerAttributes != nil {
+		v := s.LoadBalancerAttributes
+
+		e.SetFields(protocol.BodyTarget, "LoadBalancerAttributes", v, protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The policies for a load balancer.
@@ -4933,6 +6043,27 @@ func (s *Policies) SetOtherPolicies(v []string) *Policies {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Policies) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AppCookieStickinessPolicies) > 0 {
+		v := s.AppCookieStickinessPolicies
+
+		e.SetList(protocol.BodyTarget, "AppCookieStickinessPolicies", encodeAppCookieStickinessPolicyList(v), protocol.Metadata{})
+	}
+	if len(s.LBCookieStickinessPolicies) > 0 {
+		v := s.LBCookieStickinessPolicies
+
+		e.SetList(protocol.BodyTarget, "LBCookieStickinessPolicies", encodeLBCookieStickinessPolicyList(v), protocol.Metadata{})
+	}
+	if len(s.OtherPolicies) > 0 {
+		v := s.OtherPolicies
+
+		e.SetList(protocol.BodyTarget, "OtherPolicies", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Information about a policy attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttribute
 type PolicyAttribute struct {
@@ -4967,6 +6098,30 @@ func (s *PolicyAttribute) SetAttributeValue(v string) *PolicyAttribute {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyAttribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttributeValue != nil {
+		v := *s.AttributeValue
+
+		e.SetValue(protocol.BodyTarget, "AttributeValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyAttributeList(vs []PolicyAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Information about a policy attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttributeDescription
 type PolicyAttributeDescription struct {
@@ -4999,6 +6154,30 @@ func (s *PolicyAttributeDescription) SetAttributeName(v string) *PolicyAttribute
 func (s *PolicyAttributeDescription) SetAttributeValue(v string) *PolicyAttributeDescription {
 	s.AttributeValue = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyAttributeDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttributeValue != nil {
+		v := *s.AttributeValue
+
+		e.SetValue(protocol.BodyTarget, "AttributeValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyAttributeDescriptionList(vs []PolicyAttributeDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Information about a policy attribute type.
@@ -5072,6 +6251,45 @@ func (s *PolicyAttributeTypeDescription) SetDescription(v string) *PolicyAttribu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyAttributeTypeDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttributeType != nil {
+		v := *s.AttributeType
+
+		e.SetValue(protocol.BodyTarget, "AttributeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Cardinality != nil {
+		v := *s.Cardinality
+
+		e.SetValue(protocol.BodyTarget, "Cardinality", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyAttributeTypeDescriptionList(vs []PolicyAttributeTypeDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Information about a policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyDescription
 type PolicyDescription struct {
@@ -5113,6 +6331,35 @@ func (s *PolicyDescription) SetPolicyName(v string) *PolicyDescription {
 func (s *PolicyDescription) SetPolicyTypeName(v string) *PolicyDescription {
 	s.PolicyTypeName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyAttributeDescriptions) > 0 {
+		v := s.PolicyAttributeDescriptions
+
+		e.SetList(protocol.BodyTarget, "PolicyAttributeDescriptions", encodePolicyAttributeDescriptionList(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyTypeName != nil {
+		v := *s.PolicyTypeName
+
+		e.SetValue(protocol.BodyTarget, "PolicyTypeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyDescriptionList(vs []PolicyDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Information about a policy type.
@@ -5157,6 +6404,35 @@ func (s *PolicyTypeDescription) SetPolicyAttributeTypeDescriptions(v []PolicyAtt
 func (s *PolicyTypeDescription) SetPolicyTypeName(v string) *PolicyTypeDescription {
 	s.PolicyTypeName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyTypeDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyAttributeTypeDescriptions) > 0 {
+		v := s.PolicyAttributeTypeDescriptions
+
+		e.SetList(protocol.BodyTarget, "PolicyAttributeTypeDescriptions", encodePolicyAttributeTypeDescriptionList(v), protocol.Metadata{})
+	}
+	if s.PolicyTypeName != nil {
+		v := *s.PolicyTypeName
+
+		e.SetValue(protocol.BodyTarget, "PolicyTypeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyTypeDescriptionList(vs []PolicyTypeDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the parameters for RegisterInstancesWithLoadBalancer.
@@ -5215,6 +6491,22 @@ func (s *RegisterInstancesWithLoadBalancerInput) SetLoadBalancerName(v string) *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RegisterInstancesWithLoadBalancerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of RegisterInstancesWithLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterEndPointsOutput
 type RegisterInstancesWithLoadBalancerOutput struct {
@@ -5245,6 +6537,17 @@ func (s RegisterInstancesWithLoadBalancerOutput) SDKResponseMetadata() aws.Respo
 func (s *RegisterInstancesWithLoadBalancerOutput) SetInstances(v []Instance) *RegisterInstancesWithLoadBalancerOutput {
 	s.Instances = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RegisterInstancesWithLoadBalancerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the parameters for RemoveTags.
@@ -5314,6 +6617,22 @@ func (s *RemoveTagsInput) SetTags(v []TagKeyOnly) *RemoveTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagKeyOnlyList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of RemoveTags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTagsOutput
 type RemoveTagsOutput struct {
@@ -5335,6 +6654,12 @@ func (s RemoveTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for SetLoadBalancerListenerSSLCertificate.
@@ -5408,6 +6733,27 @@ func (s *SetLoadBalancerListenerSSLCertificateInput) SetSSLCertificateId(v strin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetLoadBalancerListenerSSLCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerPort != nil {
+		v := *s.LoadBalancerPort
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerPort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SSLCertificateId != nil {
+		v := *s.SSLCertificateId
+
+		e.SetValue(protocol.BodyTarget, "SSLCertificateId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of SetLoadBalancerListenerSSLCertificate.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificateOutput
 type SetLoadBalancerListenerSSLCertificateOutput struct {
@@ -5429,6 +6775,12 @@ func (s SetLoadBalancerListenerSSLCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetLoadBalancerListenerSSLCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetLoadBalancerListenerSSLCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
@@ -5503,6 +6855,27 @@ func (s *SetLoadBalancerPoliciesForBackendServerInput) SetPolicyNames(v []string
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetLoadBalancerPoliciesForBackendServerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstancePort != nil {
+		v := *s.InstancePort
+
+		e.SetValue(protocol.BodyTarget, "InstancePort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of SetLoadBalancerPoliciesForBackendServer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServerOutput
 type SetLoadBalancerPoliciesForBackendServerOutput struct {
@@ -5524,6 +6897,12 @@ func (s SetLoadBalancerPoliciesForBackendServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetLoadBalancerPoliciesForBackendServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetLoadBalancerPoliciesForBackendServerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the parameters for SetLoadBalancePoliciesOfListener.
@@ -5599,6 +6978,27 @@ func (s *SetLoadBalancerPoliciesOfListenerInput) SetPolicyNames(v []string) *Set
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetLoadBalancerPoliciesOfListenerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerPort != nil {
+		v := *s.LoadBalancerPort
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerPort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of SetLoadBalancePoliciesOfListener.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListenerOutput
 type SetLoadBalancerPoliciesOfListenerOutput struct {
@@ -5620,6 +7020,12 @@ func (s SetLoadBalancerPoliciesOfListenerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetLoadBalancerPoliciesOfListenerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetLoadBalancerPoliciesOfListenerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Information about a source security group.
@@ -5654,6 +7060,22 @@ func (s *SourceSecurityGroup) SetGroupName(v string) *SourceSecurityGroup {
 func (s *SourceSecurityGroup) SetOwnerAlias(v string) *SourceSecurityGroup {
 	s.OwnerAlias = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SourceSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OwnerAlias != nil {
+		v := *s.OwnerAlias
+
+		e.SetValue(protocol.BodyTarget, "OwnerAlias", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Information about a tag.
@@ -5709,6 +7131,30 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The tags associated with a load balancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TagDescription
 type TagDescription struct {
@@ -5741,6 +7187,30 @@ func (s *TagDescription) SetLoadBalancerName(v string) *TagDescription {
 func (s *TagDescription) SetTags(v []Tag) *TagDescription {
 	s.Tags = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TagDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagDescriptionList(vs []TagDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The key of a tag.
@@ -5779,4 +7249,23 @@ func (s *TagKeyOnly) Validate() error {
 func (s *TagKeyOnly) SetKey(v string) *TagKeyOnly {
 	s.Key = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TagKeyOnly) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagKeyOnlyList(vs []TagKeyOnly) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
