@@ -3139,7 +3139,7 @@ const opInputService21TestCaseOperation1 = "OperationName"
 // InputService21TestCaseOperation1Request is a API request type for the InputService21TestCaseOperation1 API operation.
 type InputService21TestCaseOperation1Request struct {
 	*aws.Request
-	Input *InputService21TestShapeInputService21TestCaseOperation2Input
+	Input *InputService21TestShapeInputService21TestCaseOperation3Input
 }
 
 // Send marshals and sends the InputService21TestCaseOperation1 API request.
@@ -3161,7 +3161,7 @@ func (r InputService21TestCaseOperation1Request) Send() (*InputService21TestShap
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService21ProtocolTest) InputService21TestCaseOperation1Request(input *InputService21TestShapeInputService21TestCaseOperation2Input) InputService21TestCaseOperation1Request {
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation1Request(input *InputService21TestShapeInputService21TestCaseOperation3Input) InputService21TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService21TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -3169,7 +3169,7 @@ func (c *InputService21ProtocolTest) InputService21TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &InputService21TestShapeInputService21TestCaseOperation2Input{}
+		input = &InputService21TestShapeInputService21TestCaseOperation3Input{}
 	}
 
 	req := c.newRequest(op, input, &InputService21TestShapeInputService21TestCaseOperation1Output{})
@@ -3183,7 +3183,7 @@ const opInputService21TestCaseOperation2 = "OperationName"
 // InputService21TestCaseOperation2Request is a API request type for the InputService21TestCaseOperation2 API operation.
 type InputService21TestCaseOperation2Request struct {
 	*aws.Request
-	Input *InputService21TestShapeInputService21TestCaseOperation2Input
+	Input *InputService21TestShapeInputService21TestCaseOperation3Input
 }
 
 // Send marshals and sends the InputService21TestCaseOperation2 API request.
@@ -3205,7 +3205,7 @@ func (r InputService21TestCaseOperation2Request) Send() (*InputService21TestShap
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService21ProtocolTest) InputService21TestCaseOperation2Request(input *InputService21TestShapeInputService21TestCaseOperation2Input) InputService21TestCaseOperation2Request {
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation2Request(input *InputService21TestShapeInputService21TestCaseOperation3Input) InputService21TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name:       opInputService21TestCaseOperation2,
 		HTTPMethod: "POST",
@@ -3213,7 +3213,7 @@ func (c *InputService21ProtocolTest) InputService21TestCaseOperation2Request(inp
 	}
 
 	if input == nil {
-		input = &InputService21TestShapeInputService21TestCaseOperation2Input{}
+		input = &InputService21TestShapeInputService21TestCaseOperation3Input{}
 	}
 
 	req := c.newRequest(op, input, &InputService21TestShapeInputService21TestCaseOperation2Output{})
@@ -3222,23 +3222,107 @@ func (c *InputService21ProtocolTest) InputService21TestCaseOperation2Request(inp
 	return InputService21TestCaseOperation2Request{Request: req, Input: input}
 }
 
+const opInputService21TestCaseOperation3 = "OperationName"
+
+// InputService21TestCaseOperation3Request is a API request type for the InputService21TestCaseOperation3 API operation.
+type InputService21TestCaseOperation3Request struct {
+	*aws.Request
+	Input *InputService21TestShapeInputService21TestCaseOperation3Input
+}
+
+// Send marshals and sends the InputService21TestCaseOperation3 API request.
+func (r InputService21TestCaseOperation3Request) Send() (*InputService21TestShapeInputService21TestCaseOperation3Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService21TestShapeInputService21TestCaseOperation3Output), nil
+}
+
+// InputService21TestCaseOperation3Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService21TestCaseOperation3Request method.
+//    req := client.InputService21TestCaseOperation3Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation3Request(input *InputService21TestShapeInputService21TestCaseOperation3Input) InputService21TestCaseOperation3Request {
+	op := &aws.Operation{
+		Name:       opInputService21TestCaseOperation3,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService21TestShapeInputService21TestCaseOperation3Input{}
+	}
+
+	req := c.newRequest(op, input, &InputService21TestShapeInputService21TestCaseOperation3Output{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return InputService21TestCaseOperation3Request{Request: req, Input: input}
+}
+
+type InputService21TestShapeBodyStructure struct {
+	_ struct{} `type:"structure"`
+
+	BodyField aws.JSONValue `type:"jsonvalue"`
+
+	BodyListField []aws.JSONValue `type:"list"`
+}
+
+// SetBodyField sets the BodyField field's value.
+func (s *InputService21TestShapeBodyStructure) SetBodyField(v aws.JSONValue) *InputService21TestShapeBodyStructure {
+	s.BodyField = v
+	return s
+}
+
+// SetBodyListField sets the BodyListField field's value.
+func (s *InputService21TestShapeBodyStructure) SetBodyListField(v []aws.JSONValue) *InputService21TestShapeBodyStructure {
+	s.BodyListField = v
+	return s
+}
+
 type InputService21TestShapeInputService21TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 }
 
-type InputService21TestShapeInputService21TestCaseOperation2Input struct {
+type InputService21TestShapeInputService21TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
-
-	Attr aws.JSONValue `location:"header" locationName:"X-Amz-Foo" type:"jsonvalue"`
 }
 
-// SetAttr sets the Attr field's value.
-func (s *InputService21TestShapeInputService21TestCaseOperation2Input) SetAttr(v aws.JSONValue) *InputService21TestShapeInputService21TestCaseOperation2Input {
-	s.Attr = v
+type InputService21TestShapeInputService21TestCaseOperation3Input struct {
+	_ struct{} `type:"structure" payload:"Body"`
+
+	Body *InputService21TestShapeBodyStructure `type:"structure"`
+
+	HeaderField aws.JSONValue `location:"header" locationName:"X-Amz-Foo" type:"jsonvalue"`
+
+	QueryField aws.JSONValue `location:"querystring" locationName:"Bar" type:"jsonvalue"`
+}
+
+// SetBody sets the Body field's value.
+func (s *InputService21TestShapeInputService21TestCaseOperation3Input) SetBody(v *InputService21TestShapeBodyStructure) *InputService21TestShapeInputService21TestCaseOperation3Input {
+	s.Body = v
 	return s
 }
 
-type InputService21TestShapeInputService21TestCaseOperation2Output struct {
+// SetHeaderField sets the HeaderField field's value.
+func (s *InputService21TestShapeInputService21TestCaseOperation3Input) SetHeaderField(v aws.JSONValue) *InputService21TestShapeInputService21TestCaseOperation3Input {
+	s.HeaderField = v
+	return s
+}
+
+// SetQueryField sets the QueryField field's value.
+func (s *InputService21TestShapeInputService21TestCaseOperation3Input) SetQueryField(v aws.JSONValue) *InputService21TestShapeInputService21TestCaseOperation3Input {
+	s.QueryField = v
+	return s
+}
+
+type InputService21TestShapeInputService21TestCaseOperation3Output struct {
 	_ struct{} `type:"structure"`
 }
 
@@ -4433,8 +4517,20 @@ func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
 
 	svc := NewInputService21ProtocolTest(cfg)
-	input := &InputService21TestShapeInputService21TestCaseOperation2Input{}
-	input.Attr = aws.JSONValue{"Foo": "Bar"}
+	input := &InputService21TestShapeInputService21TestCaseOperation3Input{
+		Body: &InputService21TestShapeBodyStructure{
+			BodyField: func() aws.JSONValue {
+				var m aws.JSONValue
+				if err := json.Unmarshal([]byte("{\"Foo\":\"Bar\"}"), &m); err != nil {
+					panic("failed to unmarshal JSONValue, " + err.Error())
+				}
+				return m
+			}(),
+		},
+	}
+	input.HeaderField = aws.JSONValue{"Foo": "Bar"}
+	input.QueryField = aws.JSONValue{"Foo": "Bar"}
+
 	req := svc.InputService21TestCaseOperation1Request(input)
 	r := req.HTTPRequest
 
@@ -4444,8 +4540,15 @@ func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
 
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"BodyField":"{\"Foo\":\"Bar\"}"}`, util.Trim(string(body)))
+
 	// assert URL
-	awstesting.AssertURL(t, "https://test/", r.URL.String())
+	awstesting.AssertURL(t, "https://test/?Bar=%7B%22Foo%22%3A%22Bar%22%7D", r.URL.String())
 
 	// assert headers
 	if e, a := "eyJGb28iOiJCYXIifQ==", r.Header.Get("X-Amz-Foo"); e != a {
@@ -4459,9 +4562,51 @@ func TestInputService21ProtocolTestJSONValueTraitCase2(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
 
 	svc := NewInputService21ProtocolTest(cfg)
-	input := &InputService21TestShapeInputService21TestCaseOperation2Input{}
+	input := &InputService21TestShapeInputService21TestCaseOperation3Input{
+		Body: &InputService21TestShapeBodyStructure{
+			BodyListField: []aws.JSONValue{
+				func() aws.JSONValue {
+					var m aws.JSONValue
+					if err := json.Unmarshal([]byte("{\"Foo\":\"Bar\"}"), &m); err != nil {
+						panic("failed to unmarshal JSONValue, " + err.Error())
+					}
+					return m
+				}(),
+			},
+		},
+	}
 
 	req := svc.InputService21TestCaseOperation2Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	restjson.Build(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"BodyListField":["{\"Foo\":\"Bar\"}"]}`, util.Trim(string(body)))
+
+	// assert URL
+	awstesting.AssertURL(t, "https://test/", r.URL.String())
+
+	// assert headers
+
+}
+
+func TestInputService21ProtocolTestJSONValueTraitCase3(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewInputService21ProtocolTest(cfg)
+	input := &InputService21TestShapeInputService21TestCaseOperation3Input{}
+
+	req := svc.InputService21TestCaseOperation3Request(input)
 	r := req.HTTPRequest
 
 	// build request
