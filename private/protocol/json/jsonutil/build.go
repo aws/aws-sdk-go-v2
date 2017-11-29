@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -49,7 +50,10 @@ func buildAny(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, par
 				t = "list"
 			}
 		case reflect.Map:
-			t = "map"
+			// cannot be a JSONValue map
+			if _, ok := value.Interface().(aws.JSONValue); !ok {
+				t = "map"
+			}
 		}
 	}
 
@@ -217,14 +221,11 @@ func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, pare
 		}
 		buf.Write(strconv.AppendFloat(scratch[:0], f, 'f', -1, 64))
 	default:
-		switch value.Type() {
-		case timeType:
-			converted := v.Interface().(*time.Time)
-
+		switch converted := value.Interface().(type) {
+		case time.Time:
 			buf.Write(strconv.AppendInt(scratch[:0], converted.UTC().Unix(), 10))
-		case byteSliceType:
+		case []byte:
 			if !value.IsNil() {
-				converted := value.Interface().([]byte)
 				buf.WriteByte('"')
 				if len(converted) < 1024 {
 					// for small buffers, using Encode directly is much faster.
@@ -240,6 +241,12 @@ func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, pare
 				}
 				buf.WriteByte('"')
 			}
+		case aws.JSONValue:
+			str, err := protocol.EncodeJSONValue(converted, protocol.QuotedEscape)
+			if err != nil {
+				return fmt.Errorf("unable to encode JSONValue, %v", err)
+			}
+			buf.WriteString(str)
 		default:
 			return fmt.Errorf("unsupported JSON value %v (%s)", value.Interface(), value.Type())
 		}

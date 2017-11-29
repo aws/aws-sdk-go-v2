@@ -3,6 +3,7 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"strings"
@@ -97,6 +98,19 @@ func (f paramFiller) paramsStructAny(value interface{}, shape *Shape, parentColl
 			}
 			return fmt.Sprintf("time.Unix(%d, 0)", int(v.Float()))
 		}
+	case "jsonvalue":
+		v, err := json.Marshal(value)
+		if err != nil {
+			panic("failed to marshal JSONValue, " + err.Error())
+		}
+		const tmpl = `func() aws.JSONValue {
+			var m aws.JSONValue
+			if err := json.Unmarshal([]byte(%q), &m); err != nil {
+				panic("failed to unmarshal JSONValue, "+err.Error())
+			}
+			return m
+		}()`
+		return fmt.Sprintf(tmpl, string(v))
 	default:
 		panic("Unhandled type " + shape.Type)
 	}
