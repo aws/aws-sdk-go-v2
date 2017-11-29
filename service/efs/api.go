@@ -821,7 +821,7 @@ type CreateFileSystemInput struct {
 	// can scale to higher levels of aggregate throughput and operations per second
 	// with a tradeoff of slightly higher latencies for most file operations. This
 	// can't be changed after the file system has been created.
-	PerformanceMode PerformanceMode `type:"string"`
+	PerformanceMode PerformanceMode `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -908,7 +908,7 @@ type CreateFileSystemOutput struct {
 	// Lifecycle phase of the file system.
 	//
 	// LifeCycleState is a required field
-	LifeCycleState LifeCycleState `type:"string" required:"true"`
+	LifeCycleState LifeCycleState `type:"string" required:"true" enum:"true"`
 
 	// You can add tags to a file system, including a Name tag. For more information,
 	// see CreateTags. If the file system has a Name tag, Amazon EFS returns the
@@ -930,7 +930,7 @@ type CreateFileSystemOutput struct {
 	// The PerformanceMode of the file system.
 	//
 	// PerformanceMode is a required field
-	PerformanceMode PerformanceMode `type:"string" required:"true"`
+	PerformanceMode PerformanceMode `type:"string" required:"true" enum:"true"`
 
 	// Latest known metered size (in bytes) of data stored in the file system, in
 	// bytes, in its Value field, and the time at which that size was determined
@@ -1112,7 +1112,7 @@ type CreateMountTargetOutput struct {
 	// Lifecycle state of the mount target.
 	//
 	// LifeCycleState is a required field
-	LifeCycleState LifeCycleState `type:"string" required:"true"`
+	LifeCycleState LifeCycleState `type:"string" required:"true" enum:"true"`
 
 	// System-assigned mount target ID.
 	//

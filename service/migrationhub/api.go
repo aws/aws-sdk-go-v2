@@ -1295,7 +1295,7 @@ type DescribeApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Status of the application - Not Started, In-Progress, Complete.
-	ApplicationStatus ApplicationStatus `type:"string"`
+	ApplicationStatus ApplicationStatus `type:"string" enum:"true"`
 
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2249,7 +2249,7 @@ type MigrationTaskSummary struct {
 	ProgressUpdateStream *string `min:"1" type:"string"`
 
 	// Status of the task.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 
 	// Detail information of what is being done within the overall status state.
 	StatusDetail *string `type:"string"`
@@ -2320,7 +2320,7 @@ type NotifyApplicationStateInput struct {
 	// Status of the application - Not Started, In-Progress, Complete.
 	//
 	// Status is a required field
-	Status ApplicationStatus `type:"string" required:"true"`
+	Status ApplicationStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2671,7 +2671,7 @@ type ResourceAttribute struct {
 	// Type of resource.
 	//
 	// Type is a required field
-	Type ResourceAttributeType `type:"string" required:"true"`
+	Type ResourceAttributeType `type:"string" required:"true" enum:"true"`
 
 	// Value of the resource type.
 	//
@@ -2732,7 +2732,7 @@ type Task struct {
 	// Status of the task - Not Started, In-Progress, Complete.
 	//
 	// Status is a required field
-	Status Status `type:"string" required:"true"`
+	Status Status `type:"string" required:"true" enum:"true"`
 
 	// Details of task status as notified by a migration tool. A tool might use
 	// this field to provide clarifying information about the status that is unique

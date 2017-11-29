@@ -1370,7 +1370,7 @@ type BillingRecord struct {
 	InvoiceId *string `type:"string"`
 
 	// The operation that you were charged for.
-	Operation OperationType `type:"string"`
+	Operation OperationType `type:"string" enum:"true"`
 
 	// The price that you were charged for the operation, in US dollars.
 	//
@@ -1507,7 +1507,7 @@ type CheckDomainAvailabilityOutput struct {
 	// UNAVAILABLE_RESTRICTEDThe domain name is forbidden.
 	//
 	// Availability is a required field
-	Availability DomainAvailability `type:"string" required:"true"`
+	Availability DomainAvailability `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1627,10 +1627,10 @@ type ContactDetail struct {
 	// Indicates whether the contact is a person, company, association, or public
 	// organization. If you choose an option other than PERSON, you must enter an
 	// organization name, and you can't enable privacy protection for the contact.
-	ContactType ContactType `type:"string"`
+	ContactType ContactType `type:"string" enum:"true"`
 
 	// Code for the country of the contact's address.
-	CountryCode CountryCode `type:"string"`
+	CountryCode CountryCode `type:"string" enum:"true"`
 
 	// Email address of the contact.
 	Email *string `type:"string"`
@@ -2105,7 +2105,7 @@ type DomainTransferability struct {
 	// UNTRANSFERRABLEThe domain name can't be transferred to Amazon Route 53.
 	//
 	// DONT_KNOWReserved for future use.
-	Transferable Transferable `type:"string"`
+	Transferable Transferable `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2256,7 +2256,7 @@ type ExtraParam struct {
 	// Name of the additional parameter required by the top-level domain.
 	//
 	// Name is a required field
-	Name ExtraParamName `type:"string" required:"true"`
+	Name ExtraParamName `type:"string" required:"true" enum:"true"`
 
 	// Values corresponding to the additional parameter names required by some top-level
 	// domains.
@@ -2343,7 +2343,7 @@ type GetContactReachabilityStatusOutput struct {
 	// DONEWe sent the email and got confirmation from the registrant contact.
 	//
 	// EXPIREDThe time limit expired before the registrant contact responded.
-	Status ReachabilityStatus `locationName:"status" type:"string"`
+	Status ReachabilityStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2814,13 +2814,13 @@ type GetOperationDetailOutput struct {
 	OperationId *string `type:"string"`
 
 	// The current status of the requested operation in the system.
-	Status OperationStatus `type:"string"`
+	Status OperationStatus `type:"string" enum:"true"`
 
 	// The date when the request was submitted.
 	SubmittedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The type of operation that was requested.
-	Type OperationType `type:"string"`
+	Type OperationType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3167,7 +3167,7 @@ type OperationSummary struct {
 	// The current status of the requested operation in the system.
 	//
 	// Status is a required field
-	Status OperationStatus `type:"string" required:"true"`
+	Status OperationStatus `type:"string" required:"true" enum:"true"`
 
 	// The date when the request was submitted.
 	//
@@ -3177,7 +3177,7 @@ type OperationSummary struct {
 	// Type of the action requested.
 	//
 	// Type is a required field
-	Type OperationType `type:"string" required:"true"`
+	Type OperationType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

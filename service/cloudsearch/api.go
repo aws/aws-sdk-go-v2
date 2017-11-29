@@ -1203,7 +1203,7 @@ type AnalysisOptions struct {
 	// The available levels vary depending on the language. For more information,
 	// see Language Specific Text Processing Settings (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings)
 	// in the Amazon CloudSearch Developer Guide
-	AlgorithmicStemming AlgorithmicStemming `type:"string"`
+	AlgorithmicStemming AlgorithmicStemming `type:"string" enum:"true"`
 
 	// A JSON array that contains a collection of terms, tokens, readings and part
 	// of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary
@@ -1291,7 +1291,7 @@ type AnalysisScheme struct {
 	// for multiple languages.
 	//
 	// AnalysisSchemeLanguage is a required field
-	AnalysisSchemeLanguage AnalysisSchemeLanguage `type:"string" required:"true"`
+	AnalysisSchemeLanguage AnalysisSchemeLanguage `type:"string" required:"true" enum:"true"`
 
 	// Names must begin with a letter and can contain the following characters:
 	// a-z (lowercase), 0-9, and _ (underscore).
@@ -3225,7 +3225,7 @@ type DocumentSuggesterOptions struct {
 	// With low, suggestions must differ from the specified string by no more than
 	// one character. With high, suggestions can differ by up to two characters.
 	// The default is none.
-	FuzzyMatching SuggesterFuzzyMatching `type:"string"`
+	FuzzyMatching SuggesterFuzzyMatching `type:"string" enum:"true"`
 
 	// An expression that computes a score for each suggestion to control how they
 	// are sorted. The scores are rounded to the nearest integer, with a floor of
@@ -3807,7 +3807,7 @@ type IndexField struct {
 	// in the Amazon CloudSearch Developer Guide.
 	//
 	// IndexFieldType is a required field
-	IndexFieldType IndexFieldType `type:"string" required:"true"`
+	IndexFieldType IndexFieldType `type:"string" required:"true" enum:"true"`
 
 	// Options for a field that contains an array of 64-bit signed integers. Present
 	// if IndexFieldType specifies the field is of type int-array. All options are
@@ -4516,7 +4516,7 @@ type OptionStatus struct {
 	//    option value or update or remove the incompatible documents.
 	//
 	// State is a required field
-	State OptionState `type:"string" required:"true"`
+	State OptionState `type:"string" required:"true" enum:"true"`
 
 	// A timestamp for when this option was last updated.
 	//
@@ -4573,7 +4573,7 @@ type ScalingParameters struct {
 
 	// The instance type that you want to preconfigure for your domain. For example,
 	// search.m1.small.
-	DesiredInstanceType PartitionInstanceType `type:"string"`
+	DesiredInstanceType PartitionInstanceType `type:"string" enum:"true"`
 
 	// The number of partitions you want to preconfigure for your domain. Only valid
 	// when you select m2.2xlarge as the desired instance type.

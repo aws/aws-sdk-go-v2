@@ -6920,7 +6920,7 @@ type BatchReadException struct {
 	Message *string `type:"string"`
 
 	// A type of exception, such as InvalidArnException.
-	Type BatchReadExceptionType `type:"string"`
+	Type BatchReadExceptionType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6951,7 +6951,7 @@ type BatchReadInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory. For
 	// more information, see arns.
@@ -8167,7 +8167,7 @@ type CreateFacetInput struct {
 	//    * Index: Can be created with the Index API.
 	//
 	// ObjectType is a required field
-	ObjectType ObjectType `type:"string" required:"true"`
+	ObjectType ObjectType `type:"string" required:"true" enum:"true"`
 
 	// The schema ARN in which the new Facet will be created. For more information,
 	// see arns.
@@ -9371,7 +9371,7 @@ type Directory struct {
 	Name *string `min:"1" type:"string"`
 
 	// The state of the directory. Can be either Enabled, Disabled, or Deleted.
-	State DirectoryState `type:"string"`
+	State DirectoryState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9550,7 +9550,7 @@ type Facet struct {
 
 	// The object type that is associated with the facet. See CreateFacetRequest$ObjectType
 	// for more details.
-	ObjectType ObjectType `type:"string"`
+	ObjectType ObjectType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9596,7 +9596,7 @@ type FacetAttribute struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The required behavior of the FacetAttribute.
-	RequiredBehavior RequiredAttributeBehavior `type:"string"`
+	RequiredBehavior RequiredAttributeBehavior `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9678,7 +9678,7 @@ type FacetAttributeDefinition struct {
 	// The type of the attribute.
 	//
 	// Type is a required field
-	Type FacetAttributeType `type:"string" required:"true"`
+	Type FacetAttributeType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9801,7 +9801,7 @@ type FacetAttributeUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// The action to perform when updating the attribute.
-	Action UpdateActionType `type:"string"`
+	Action UpdateActionType `type:"string" enum:"true"`
 
 	// The attribute to update.
 	Attribute *FacetAttribute `type:"structure"`
@@ -9998,7 +9998,7 @@ type GetObjectInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level at which to retrieve the object information.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The ARN of the directory being retrieved.
 	//
@@ -10383,7 +10383,7 @@ type ListAttachedIndicesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to use for this operation.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The ARN of the directory.
 	//
@@ -10587,7 +10587,7 @@ type ListDirectoriesInput struct {
 
 	// The state of the directories in the list. Can be either Enabled, Disabled,
 	// or Deleted.
-	State DirectoryState `locationName:"state" type:"string"`
+	State DirectoryState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10878,7 +10878,7 @@ type ListIncomingTypedLinksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to execute the request at.
-	ConsistencyLevel ConsistencyLevel `type:"string"`
+	ConsistencyLevel ConsistencyLevel `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the directory where you want to list the
 	// typed links.
@@ -11031,7 +11031,7 @@ type ListIndexInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to execute the request at.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The ARN of the directory that the index exists in.
 	//
@@ -11166,7 +11166,7 @@ type ListObjectAttributesInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -11303,7 +11303,7 @@ type ListObjectChildrenInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -11536,7 +11536,7 @@ type ListObjectParentsInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -11659,7 +11659,7 @@ type ListObjectPoliciesInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// objects reside. For more information, see arns.
@@ -11779,7 +11779,7 @@ type ListOutgoingTypedLinksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to execute the request at.
-	ConsistencyLevel ConsistencyLevel `type:"string"`
+	ConsistencyLevel ConsistencyLevel `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the directory where you want to list the
 	// typed links.
@@ -11933,7 +11933,7 @@ type ListPolicyAttachmentsInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// objects reside. For more information, see arns.
@@ -12548,7 +12548,7 @@ type ObjectAttributeAction struct {
 	_ struct{} `type:"structure"`
 
 	// A type that can be either Update or Delete.
-	ObjectAttributeActionType UpdateActionType `type:"string"`
+	ObjectAttributeActionType UpdateActionType `type:"string" enum:"true"`
 
 	// The value that you want to update to.
 	ObjectAttributeUpdateValue *TypedAttributeValue `type:"structure"`
@@ -13109,7 +13109,7 @@ type Rule struct {
 	Parameters map[string]string `type:"map"`
 
 	// The type of attribute validation rule.
-	Type RuleType `type:"string"`
+	Type RuleType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13359,7 +13359,7 @@ type TypedAttributeValueRange struct {
 	// The inclusive or exclusive range end.
 	//
 	// EndMode is a required field
-	EndMode RangeMode `type:"string" required:"true"`
+	EndMode RangeMode `type:"string" required:"true" enum:"true"`
 
 	// The attribute value to terminate the range at.
 	EndValue *TypedAttributeValue `type:"structure"`
@@ -13367,7 +13367,7 @@ type TypedAttributeValueRange struct {
 	// The inclusive or exclusive range start.
 	//
 	// StartMode is a required field
-	StartMode RangeMode `type:"string" required:"true"`
+	StartMode RangeMode `type:"string" required:"true" enum:"true"`
 
 	// The value to start the range at.
 	StartValue *TypedAttributeValue `type:"structure"`
@@ -13442,7 +13442,7 @@ type TypedLinkAttributeDefinition struct {
 	// The required behavior of the TypedLinkAttributeDefinition.
 	//
 	// RequiredBehavior is a required field
-	RequiredBehavior RequiredAttributeBehavior `type:"string" required:"true"`
+	RequiredBehavior RequiredAttributeBehavior `type:"string" required:"true" enum:"true"`
 
 	// Validation rules that are attached to the attribute definition.
 	Rules map[string]Rule `type:"map"`
@@ -13450,7 +13450,7 @@ type TypedLinkAttributeDefinition struct {
 	// The type of the attribute.
 	//
 	// Type is a required field
-	Type FacetAttributeType `type:"string" required:"true"`
+	Type FacetAttributeType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -13673,7 +13673,7 @@ type TypedLinkFacetAttributeUpdate struct {
 	// The action to perform when updating the attribute.
 	//
 	// Action is a required field
-	Action UpdateActionType `type:"string" required:"true"`
+	Action UpdateActionType `type:"string" required:"true" enum:"true"`
 
 	// The attribute to update.
 	//
@@ -13973,7 +13973,7 @@ type UpdateFacetInput struct {
 
 	// The object type that is associated with the facet. See CreateFacetRequest$ObjectType
 	// for more details.
-	ObjectType ObjectType `type:"string"`
+	ObjectType ObjectType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
 	// information, see arns.

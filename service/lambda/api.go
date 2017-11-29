@@ -2072,7 +2072,7 @@ type CreateEventSourceMappingInput struct {
 	// in the Amazon Kinesis API Reference.
 	//
 	// StartingPosition is a required field
-	StartingPosition EventSourcePosition `type:"string" required:"true"`
+	StartingPosition EventSourcePosition `type:"string" required:"true" enum:"true"`
 
 	// The timestamp of the data record from which to start reading. Used with shard
 	// iterator type (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType)
@@ -2233,7 +2233,7 @@ type CreateFunctionInput struct {
 	// that contains functions written in the Node v0.10.42 runtime.
 	//
 	// Runtime is a required field
-	Runtime Runtime `type:"string" required:"true"`
+	Runtime Runtime `type:"string" required:"true" enum:"true"`
 
 	// The list of tags (key-value pairs) assigned to the new function.
 	Tags map[string]string `type:"map"`
@@ -3388,13 +3388,13 @@ type InvokeInput struct {
 	// invoke the function and if the inputs are valid. You request this by specifying
 	// DryRun as the InvocationType. This is useful in a cross-account scenario
 	// when you want to verify access to a function without running it.
-	InvocationType InvocationType `location:"header" locationName:"X-Amz-Invocation-Type" type:"string"`
+	InvocationType InvocationType `location:"header" locationName:"X-Amz-Invocation-Type" type:"string" enum:"true"`
 
 	// You can set this optional parameter to Tail in the request only if you specify
 	// the InvocationType parameter with value RequestResponse. In this case, AWS
 	// Lambda returns the base64-encoded last 4 KB of log data produced by your
 	// Lambda function in the x-amz-log-result header.
-	LogType LogType `location:"header" locationName:"X-Amz-Log-Type" type:"string"`
+	LogType LogType `location:"header" locationName:"X-Amz-Log-Type" type:"string" enum:"true"`
 
 	// JSON that you want to provide to your Lambda function as input.
 	Payload []byte `type:"blob"`
@@ -3783,7 +3783,7 @@ type ListFunctionsInput struct {
 	//
 	// ALL _ Will return all versions, including $LATEST which will have fully qualified
 	// ARNs (Amazon Resource Names).
-	FunctionVersion FunctionVersion `location:"querystring" locationName:"FunctionVersion" type:"string"`
+	FunctionVersion FunctionVersion `location:"querystring" locationName:"FunctionVersion" type:"string" enum:"true"`
 
 	// Optional string. An opaque pagination token returned from a previous ListFunctions
 	// operation. If present, indicates where to continue the listing.
@@ -4302,7 +4302,7 @@ type TracingConfig struct {
 	// "sampled=1". If Active, Lambda will respect any tracing header it receives
 	// from an upstream service. If no tracing header is received, Lambda will call
 	// X-Ray for a tracing decision.
-	Mode TracingMode `type:"string"`
+	Mode TracingMode `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4327,7 +4327,7 @@ type TracingConfigResponse struct {
 	_ struct{} `type:"structure"`
 
 	// The tracing mode associated with your Lambda function.
-	Mode TracingMode `type:"string"`
+	Mode TracingMode `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4926,7 +4926,7 @@ type UpdateFunctionConfigurationInput struct {
 	// provided. Failure to do so will result in an invalid parameter error being
 	// returned. Note that you will have to follow this procedure for each region
 	// that contains functions written in the Node v0.10.42 runtime.
-	Runtime Runtime `type:"string"`
+	Runtime Runtime `type:"string" enum:"true"`
 
 	// The function execution time at which AWS Lambda should terminate the function.
 	// Because the execution time has cost implications, we recommend you set this
@@ -5103,7 +5103,7 @@ type UpdateFunctionConfigurationOutput struct {
 	Role *string `type:"string"`
 
 	// The runtime environment for the Lambda function.
-	Runtime Runtime `type:"string"`
+	Runtime Runtime `type:"string" enum:"true"`
 
 	// The function execution time at which Lambda should terminate the function.
 	// Because the execution time has cost implications, we recommend you set this

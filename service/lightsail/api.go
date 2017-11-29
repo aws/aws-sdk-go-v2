@@ -2451,7 +2451,7 @@ type Blueprint struct {
 	ProductUrl *string `locationName:"productUrl" type:"string"`
 
 	// The type of the blueprint (e.g., os or app).
-	Type BlueprintType `locationName:"type" type:"string"`
+	Type BlueprintType `locationName:"type" type:"string" enum:"true"`
 
 	// The version number of the operating system, application, or stack (e.g.,
 	// 2016.03.0).
@@ -3787,7 +3787,7 @@ type Disk struct {
 	Path *string `locationName:"path" type:"string"`
 
 	// The resource type of the disk.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The size of the disk in GB.
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
@@ -3913,7 +3913,7 @@ type Domain struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The resource type.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -4414,7 +4414,7 @@ type GetInstanceAccessDetailsInput struct {
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 
 	// The protocol to use to connect to your instance. Defaults to ssh.
-	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string"`
+	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4535,7 +4535,7 @@ type GetInstanceMetricDataInput struct {
 	// The metric name to get data about.
 	//
 	// MetricName is a required field
-	MetricName InstanceMetricName `locationName:"metricName" type:"string" required:"true"`
+	MetricName InstanceMetricName `locationName:"metricName" type:"string" required:"true" enum:"true"`
 
 	// The time period for which you are requesting data.
 	//
@@ -4555,7 +4555,7 @@ type GetInstanceMetricDataInput struct {
 	// The unit. The list of valid values is below.
 	//
 	// Unit is a required field
-	Unit MetricUnit `locationName:"unit" type:"string" required:"true"`
+	Unit MetricUnit `locationName:"unit" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4658,7 +4658,7 @@ type GetInstanceMetricDataOutput struct {
 	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
 
 	// The metric name to return data for.
-	MetricName InstanceMetricName `locationName:"metricName" type:"string"`
+	MetricName InstanceMetricName `locationName:"metricName" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5666,7 +5666,7 @@ type Instance struct {
 	PublicIpAddress *string `locationName:"publicIpAddress" type:"string"`
 
 	// The type of resource (usually Instance).
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The name of the SSH key being used to connect to the instance (e.g., LightsailDefaultKeyPair).
 	SshKeyName *string `locationName:"sshKeyName" type:"string"`
@@ -5828,7 +5828,7 @@ type InstanceAccessDetails struct {
 	PrivateKey *string `locationName:"privateKey" type:"string"`
 
 	// The protocol for these Amazon Lightsail instance access details.
-	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string"`
+	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string" enum:"true"`
 
 	// The user name to use when logging in to the Amazon Lightsail instance.
 	Username *string `locationName:"username" type:"string"`
@@ -5976,13 +5976,13 @@ type InstancePortInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The access direction (inbound or outbound).
-	AccessDirection AccessDirection `locationName:"accessDirection" type:"string"`
+	AccessDirection AccessDirection `locationName:"accessDirection" type:"string" enum:"true"`
 
 	// The location from which access is allowed (e.g., Anywhere (0.0.0.0/0)).
 	AccessFrom *string `locationName:"accessFrom" type:"string"`
 
 	// The type of access (Public or Private).
-	AccessType PortAccessType `locationName:"accessType" type:"string"`
+	AccessType PortAccessType `locationName:"accessType" type:"string" enum:"true"`
 
 	// The common name.
 	CommonName *string `locationName:"commonName" type:"string"`
@@ -6008,7 +6008,7 @@ type InstancePortInfo struct {
 	//    can use UDP, which provides a connectionless datagram service that emphasizes
 	//    reduced latency over reliability. If you do require reliable data stream
 	//    service, use TCP instead.
-	Protocol NetworkProtocol `locationName:"protocol" type:"string"`
+	Protocol NetworkProtocol `locationName:"protocol" type:"string" enum:"true"`
 
 	// The last port in the range.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
@@ -6092,10 +6092,10 @@ type InstancePortState struct {
 	//    can use UDP, which provides a connectionless datagram service that emphasizes
 	//    reduced latency over reliability. If you do require reliable data stream
 	//    service, use TCP instead.
-	Protocol NetworkProtocol `locationName:"protocol" type:"string"`
+	Protocol NetworkProtocol `locationName:"protocol" type:"string" enum:"true"`
 
 	// Specifies whether the instance port is open or closed.
-	State PortState `locationName:"state" type:"string"`
+	State PortState `locationName:"state" type:"string" enum:"true"`
 
 	// The last port in the range.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
@@ -6171,13 +6171,13 @@ type InstanceSnapshot struct {
 	Progress *string `locationName:"progress" type:"string"`
 
 	// The type of resource (usually InstanceSnapshot).
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The size in GB of the SSD.
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
 
 	// The state the snapshot is in.
-	State InstanceSnapshotState `locationName:"state" type:"string"`
+	State InstanceSnapshotState `locationName:"state" type:"string" enum:"true"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -6367,7 +6367,7 @@ type KeyPair struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The resource type (usually KeyPair).
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -6451,7 +6451,7 @@ type MetricDatapoint struct {
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix"`
 
 	// The unit.
-	Unit MetricUnit `locationName:"unit" type:"string"`
+	Unit MetricUnit `locationName:"unit" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6638,16 +6638,16 @@ type Operation struct {
 	OperationDetails *string `locationName:"operationDetails" type:"string"`
 
 	// The type of operation.
-	OperationType OperationType `locationName:"operationType" type:"string"`
+	OperationType OperationType `locationName:"operationType" type:"string" enum:"true"`
 
 	// The resource name.
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The resource type.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The status of the operation.
-	Status OperationStatus `locationName:"status" type:"string"`
+	Status OperationStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The timestamp when the status was changed (e.g., 1479816991.349).
 	StatusChangedAt *time.Time `locationName:"statusChangedAt" type:"timestamp" timestampFormat:"unix"`
@@ -6784,7 +6784,7 @@ type PortInfo struct {
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
 	// The protocol.
-	Protocol NetworkProtocol `locationName:"protocol" type:"string"`
+	Protocol NetworkProtocol `locationName:"protocol" type:"string" enum:"true"`
 
 	// The last port in the range.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
@@ -6980,7 +6980,7 @@ type Region struct {
 	DisplayName *string `locationName:"displayName" type:"string"`
 
 	// The region name (e.g., us-east-1).
-	Name RegionName `locationName:"name" type:"string"`
+	Name RegionName `locationName:"name" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7096,7 +7096,7 @@ type ResourceLocation struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The AWS Region name.
-	RegionName RegionName `locationName:"regionName" type:"string"`
+	RegionName RegionName `locationName:"regionName" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7212,7 +7212,7 @@ type StaticIp struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The resource type (usually StaticIp).
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables

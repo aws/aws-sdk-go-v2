@@ -996,7 +996,7 @@ type AgentInfo struct {
 	ConnectorId *string `locationName:"connectorId" type:"string"`
 
 	// The health of the agent or connector.
-	Health AgentStatus `locationName:"health" type:"string"`
+	Health AgentStatus `locationName:"health" type:"string" enum:"true"`
 
 	// The name of the host where the agent or connector resides. The host can be
 	// a server or virtual machine.
@@ -1197,7 +1197,7 @@ type ConfigurationTag struct {
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
 	// A type of IT asset to tag.
-	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string"`
+	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" enum:"true"`
 
 	// A type of tag on which to filter. For example, serverType.
 	Key *string `locationName:"key" type:"string"`
@@ -2399,7 +2399,7 @@ type ExportInfo struct {
 	// The status of the data export job.
 	//
 	// ExportStatus is a required field
-	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" required:"true"`
+	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" required:"true" enum:"true"`
 
 	// If true, the export of agent information exceeded the size limit for a single
 	// export and the exported data is incomplete for the requested time range.
@@ -2650,7 +2650,7 @@ type ListConfigurationsInput struct {
 	// A valid configuration identified by Application Discovery Service.
 	//
 	// ConfigurationType is a required field
-	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" required:"true"`
+	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" required:"true" enum:"true"`
 
 	// You can filter the request using various logical operators and a key-value
 	// format. For example:
@@ -2986,7 +2986,7 @@ type OrderByElement struct {
 	FieldName *string `locationName:"fieldName" type:"string" required:"true"`
 
 	// Ordering direction.
-	SortOrder OrderString `locationName:"sortOrder" type:"string"`
+	SortOrder OrderString `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation

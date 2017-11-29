@@ -3459,7 +3459,7 @@ type CacheNodeTypeSpecificParameter struct {
 	// a reboot for the change to be applied. You can force a reboot or wait until
 	// the next maintenance window's reboot. For more information, see Rebooting
 	// a Cluster (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html).
-	ChangeType ChangeType `type:"string"`
+	ChangeType ChangeType `type:"string" enum:"true"`
 
 	// The valid data type for the parameter.
 	DataType *string `type:"string"`
@@ -3936,7 +3936,7 @@ type CreateCacheClusterInput struct {
 	//
 	// If the AZMode and PreferredAvailabilityZones are not specified, ElastiCache
 	// assumes single-az mode.
-	AZMode AZMode `type:"string"`
+	AZMode AZMode `type:"string" enum:"true"`
 
 	// Reserved parameter. The password used to access a password protected server.
 	//
@@ -6390,7 +6390,7 @@ type DescribeEventsInput struct {
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format.
@@ -7209,7 +7209,7 @@ type Event struct {
 
 	// Specifies the origin of this event - a cache cluster, a parameter group,
 	// a security group, etc.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7387,7 +7387,7 @@ type ModifyCacheClusterInput struct {
 	// instructions on how to move existing Memcached nodes to different Availability
 	// Zones, see the Availability Zone Considerations section of Cache Node Considerations
 	// for Memcached (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html).
-	AZMode AZMode `type:"string"`
+	AZMode AZMode `type:"string" enum:"true"`
 
 	// If true, this parameter causes the modifications in this request and any
 	// pending modifications to be applied, asynchronously and as soon as possible,
@@ -8533,7 +8533,7 @@ type Parameter struct {
 	// a reboot for the change to be applied. You can force a reboot or wait until
 	// the next maintenance window's reboot. For more information, see Rebooting
 	// a Cluster (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html).
-	ChangeType ChangeType `type:"string"`
+	ChangeType ChangeType `type:"string" enum:"true"`
 
 	// The valid data type for the parameter.
 	DataType *string `type:"string"`
@@ -9026,7 +9026,7 @@ type ReplicationGroup struct {
 	// Redis (cluster mode disabled):T1 and T2 cache node types.
 	//
 	// Redis (cluster mode enabled): T1 node types.
-	AutomaticFailover AutomaticFailoverStatus `type:"string"`
+	AutomaticFailover AutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The name of the compute and memory capacity node type for each node in the
 	// replication group.
@@ -9192,7 +9192,7 @@ type ReplicationGroupPendingModifiedValues struct {
 	// Redis (cluster mode disabled):T1 and T2 cache node types.
 	//
 	// Redis (cluster mode enabled): T1 node types.
-	AutomaticFailoverStatus PendingAutomaticFailoverStatus `type:"string"`
+	AutomaticFailoverStatus PendingAutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The primary cluster ID that is applied immediately (if --apply-immediately
 	// was specified), or during the next maintenance window.
@@ -9758,7 +9758,7 @@ type Snapshot struct {
 	// Redis (cluster mode disabled):T1 and T2 cache node types.
 	//
 	// Redis (cluster mode enabled): T1 node types.
-	AutomaticFailover AutomaticFailoverStatus `type:"string"`
+	AutomaticFailover AutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The date and time when the source cache cluster was created.
 	CacheClusterCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`

@@ -2390,7 +2390,7 @@ type ConditionalForwarder struct {
 	// The replication scope of the conditional forwarder. The only allowed value
 	// is Domain, which will replicate the conditional forwarder to all of the domain
 	// controllers for your AWS directory.
-	ReplicationScope ReplicationScope `type:"string"`
+	ReplicationScope ReplicationScope `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2451,7 +2451,7 @@ type ConnectDirectoryInput struct {
 	// The size of the directory.
 	//
 	// Size is a required field
-	Size DirectorySize `type:"string" required:"true"`
+	Size DirectorySize `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2904,7 +2904,7 @@ type CreateDirectoryInput struct {
 	// The size of the directory.
 	//
 	// Size is a required field
-	Size DirectorySize `type:"string" required:"true"`
+	Size DirectorySize `type:"string" required:"true" enum:"true"`
 
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
@@ -3237,7 +3237,7 @@ type CreateTrustInput struct {
 	// The direction of the trust relationship.
 	//
 	// TrustDirection is a required field
-	TrustDirection TrustDirection `type:"string" required:"true"`
+	TrustDirection TrustDirection `type:"string" required:"true" enum:"true"`
 
 	// The trust password. The must be the same password that was used when creating
 	// the trust relationship on the external domain.
@@ -3246,7 +3246,7 @@ type CreateTrustInput struct {
 	TrustPassword *string `min:"1" type:"string" required:"true"`
 
 	// The trust relationship type.
-	TrustType TrustType `type:"string"`
+	TrustType TrustType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4451,20 +4451,20 @@ type DirectoryDescription struct {
 	RadiusSettings *RadiusSettings `type:"structure"`
 
 	// The status of the RADIUS MFA server connection.
-	RadiusStatus RadiusStatus `type:"string"`
+	RadiusStatus RadiusStatus `type:"string" enum:"true"`
 
 	// The short name of the directory.
 	ShortName *string `type:"string"`
 
 	// The directory size.
-	Size DirectorySize `type:"string"`
+	Size DirectorySize `type:"string" enum:"true"`
 
 	// Indicates if single-sign on is enabled for the directory. For more information,
 	// see EnableSso and DisableSso.
 	SsoEnabled *bool `type:"boolean"`
 
 	// The current stage of the directory.
-	Stage DirectoryStage `type:"string"`
+	Stage DirectoryStage `type:"string" enum:"true"`
 
 	// The date and time that the stage was last updated.
 	StageLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -4473,7 +4473,7 @@ type DirectoryDescription struct {
 	StageReason *string `type:"string"`
 
 	// The directory size.
-	Type DirectoryType `type:"string"`
+	Type DirectoryType `type:"string" enum:"true"`
 
 	// A DirectoryVpcSettingsDescription object that contains additional information
 	// about a directory. This member is only present if the directory is a Simple
@@ -4984,7 +4984,7 @@ type DomainController struct {
 	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the domain controller.
-	Status DomainControllerStatus `type:"string"`
+	Status DomainControllerStatus `type:"string" enum:"true"`
 
 	// The date and time that the status was last updated.
 	StatusLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -5250,7 +5250,7 @@ type EventTopic struct {
 	DirectoryId *string `type:"string"`
 
 	// The topic registration status.
-	Status TopicStatus `type:"string"`
+	Status TopicStatus `type:"string" enum:"true"`
 
 	// The SNS topic ARN (Amazon Resource Name).
 	TopicArn *string `type:"string"`
@@ -5463,7 +5463,7 @@ type IpRouteInfo struct {
 	DirectoryId *string `type:"string"`
 
 	// The status of the IP address block.
-	IpRouteStatusMsg IpRouteStatusMsg `type:"string"`
+	IpRouteStatusMsg IpRouteStatusMsg `type:"string" enum:"true"`
 
 	// The reason for the IpRouteStatusMsg.
 	IpRouteStatusReason *string `type:"string"`
@@ -5803,7 +5803,7 @@ type RadiusSettings struct {
 	_ struct{} `type:"structure"`
 
 	// The protocol specified for your RADIUS endpoints.
-	AuthenticationProtocol RadiusAuthenticationProtocol `type:"string"`
+	AuthenticationProtocol RadiusAuthenticationProtocol `type:"string" enum:"true"`
 
 	// Not currently used.
 	DisplayLabel *string `min:"1" type:"string"`
@@ -6202,7 +6202,7 @@ type SchemaExtensionInfo struct {
 	SchemaExtensionId *string `type:"string"`
 
 	// The current status of the schema extension.
-	SchemaExtensionStatus SchemaExtensionStatus `type:"string"`
+	SchemaExtensionStatus SchemaExtensionStatus `type:"string" enum:"true"`
 
 	// The reason for the SchemaExtensionStatus.
 	SchemaExtensionStatusReason *string `type:"string"`
@@ -6282,10 +6282,10 @@ type Snapshot struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The snapshot status.
-	Status SnapshotStatus `type:"string"`
+	Status SnapshotStatus `type:"string" enum:"true"`
 
 	// The snapshot type.
-	Type SnapshotType `type:"string"`
+	Type SnapshotType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6579,19 +6579,19 @@ type Trust struct {
 	StateLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The trust relationship direction.
-	TrustDirection TrustDirection `type:"string"`
+	TrustDirection TrustDirection `type:"string" enum:"true"`
 
 	// The unique ID of the trust relationship.
 	TrustId *string `type:"string"`
 
 	// The trust relationship state.
-	TrustState TrustState `type:"string"`
+	TrustState TrustState `type:"string" enum:"true"`
 
 	// The reason for the TrustState.
 	TrustStateReason *string `type:"string"`
 
 	// The trust relationship type.
-	TrustType TrustType `type:"string"`
+	TrustType TrustType `type:"string" enum:"true"`
 }
 
 // String returns the string representation

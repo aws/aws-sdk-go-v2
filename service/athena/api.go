@@ -892,7 +892,7 @@ type ColumnInfo struct {
 	Name *string `type:"string" required:"true"`
 
 	// Indicates the column's nullable status.
-	Nullable ColumnNullable `type:"string"`
+	Nullable ColumnNullable `type:"string" enum:"true"`
 
 	// For DECIMAL data types, specifies the total number of digits, up to 38. For
 	// performance reasons, we recommend up to 18 digits.
@@ -1209,7 +1209,7 @@ type EncryptionConfiguration struct {
 	// client-side encryption with KMS-managed keys (CSE-KMS) is used.
 	//
 	// EncryptionOption is a required field
-	EncryptionOption EncryptionOption `type:"string" required:"true"`
+	EncryptionOption EncryptionOption `type:"string" required:"true" enum:"true"`
 
 	// For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 	KmsKey *string `type:"string"`
@@ -1832,7 +1832,7 @@ type QueryExecutionStatus struct {
 	// results. SUCCEEDED indicates that the query completed without error. FAILED
 	// indicates that the query experienced an error and did not complete processing.
 	// CANCELLED indicates that user input interrupted query execution.
-	State QueryExecutionState `type:"string"`
+	State QueryExecutionState `type:"string" enum:"true"`
 
 	// Further detail about the status of the query.
 	StateChangeReason *string `type:"string"`

@@ -1307,7 +1307,7 @@ type CompareFacesOutput struct {
 	// is null and the SourceImageFace bounding box coordinates represent the location
 	// of the face after Exif metadata is used to correct the orientation. Images
 	// in .png format don't contain Exif metadata.
-	SourceImageOrientationCorrection OrientationCorrection `type:"string"`
+	SourceImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// The orientation of the target image (in counterclockwise direction). If your
 	// application displays the target image, you can use this value to correct
@@ -1321,7 +1321,7 @@ type CompareFacesOutput struct {
 	// is null and the bounding box coordinates in FaceMatches and UnmatchedFaces
 	// represent the location of the face after Exif metadata is used to correct
 	// the orientation. Images in .png format don't contain Exif metadata.
-	TargetImageOrientationCorrection OrientationCorrection `type:"string"`
+	TargetImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// An array of faces in the target image that did not match the source image
 	// face.
@@ -1767,7 +1767,7 @@ type DetectFacesOutput struct {
 	// OrientationCorrection is null and the FaceDetails bounding box coordinates
 	// represent face locations after Exif metadata is used to correct the image
 	// orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1873,7 +1873,7 @@ type DetectLabelsOutput struct {
 	// If the input image Exif metadata populates the orientation field, Amazon
 	// Rekognition does not perform orientation correction and the value of OrientationCorrection
 	// will be null.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1990,7 +1990,7 @@ type Emotion struct {
 	Confidence *float64 `type:"float"`
 
 	// Type of emotion detected.
-	Type EmotionName `type:"string"`
+	Type EmotionName `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2383,7 +2383,7 @@ type Gender struct {
 	Confidence *float64 `type:"float"`
 
 	// Gender of the face.
-	Value GenderType `type:"string"`
+	Value GenderType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2699,7 +2699,7 @@ type IndexFacesOutput struct {
 	// the value of OrientationCorrection is null and the bounding box coordinates
 	// in FaceRecords represent face locations after Exif metadata is used to correct
 	// the image orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2763,7 +2763,7 @@ type Landmark struct {
 	_ struct{} `type:"structure"`
 
 	// Type of the landmark.
-	Type LandmarkType `type:"string"`
+	Type LandmarkType `type:"string" enum:"true"`
 
 	// x-coordinate from the top left of the landmark expressed as the ratio of
 	// the width of the image. For example, if the images is 700x200 and the x-coordinate
@@ -3187,7 +3187,7 @@ type RecognizeCelebritiesOutput struct {
 	// bounding box coordinates represent face locations after Exif metadata is
 	// used to correct the image orientation. Images in .png format don't contain
 	// Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// Details about each unrecognized face in the image.
 	UnrecognizedFaces []ComparedFace `type:"list"`

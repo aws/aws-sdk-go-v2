@@ -1430,7 +1430,7 @@ type AcknowledgeJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Whether the job worker has received the specified job.
-	Status JobStatus `locationName:"status" type:"string"`
+	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1535,7 +1535,7 @@ type AcknowledgeThirdPartyJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status information for the third party job, if any.
-	Status JobStatus `locationName:"status" type:"string"`
+	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1625,7 +1625,7 @@ type ActionConfigurationProperty struct {
 	Secret *bool `locationName:"secret" type:"boolean" required:"true"`
 
 	// The type of the configuration property.
-	Type ActionConfigurationPropertyType `locationName:"type" type:"string"`
+	Type ActionConfigurationPropertyType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1893,7 +1893,7 @@ type ActionExecution struct {
 
 	// The status of the action, or for a completed action, the last status of the
 	// action.
-	Status ActionExecutionStatus `locationName:"status" type:"string"`
+	Status ActionExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A summary of the run of the action.
 	Summary *string `locationName:"summary" type:"string"`
@@ -2189,12 +2189,12 @@ type ActionTypeId struct {
 	// the values below.
 	//
 	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
 
 	// The creator of the action being called.
 	//
 	// Owner is a required field
-	Owner ActionOwner `locationName:"owner" type:"string" required:"true"`
+	Owner ActionOwner `locationName:"owner" type:"string" required:"true" enum:"true"`
 
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
@@ -2366,7 +2366,7 @@ type ApprovalResult struct {
 	// The response submitted by a reviewer assigned to an approval action request.
 	//
 	// Status is a required field
-	Status ApprovalStatus `locationName:"status" type:"string" required:"true"`
+	Status ApprovalStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// The summary of the current status of the approval request.
 	//
@@ -2523,7 +2523,7 @@ type ArtifactLocation struct {
 	S3Location *S3ArtifactLocation `locationName:"s3Location" type:"structure"`
 
 	// The type of artifact in the location.
-	Type ArtifactLocationType `locationName:"type" type:"string"`
+	Type ArtifactLocationType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2648,7 +2648,7 @@ type ArtifactStore struct {
 	// The type of the artifact store, such as S3.
 	//
 	// Type is a required field
-	Type ArtifactStoreType `locationName:"type" type:"string" required:"true"`
+	Type ArtifactStoreType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2717,7 +2717,7 @@ type BlockerDeclaration struct {
 	// Reserved for future use.
 	//
 	// Type is a required field
-	Type BlockerType `locationName:"type" type:"string" required:"true"`
+	Type BlockerType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2773,7 +2773,7 @@ type CreateCustomActionTypeInput struct {
 	// functional. These values are reserved for future use.
 	//
 	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
 
 	// The configuration properties for the custom action.
 	//
@@ -3108,7 +3108,7 @@ type DeleteCustomActionTypeInput struct {
 	// or deploy.
 	//
 	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
 
 	// The provider of the service used in the custom action, such as AWS CodeDeploy.
 	//
@@ -3280,7 +3280,7 @@ type DisableStageTransitionInput struct {
 	// in that stage (outbound).
 	//
 	// TransitionType is a required field
-	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true"`
+	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3388,7 +3388,7 @@ type EnableStageTransitionInput struct {
 	// will be allowed to transition to the next stage (outbound).
 	//
 	// TransitionType is a required field
-	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true"`
+	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3477,7 +3477,7 @@ type EncryptionKey struct {
 	// key. When creating or updating a pipeline, the value must be set to 'KMS'.
 	//
 	// Type is a required field
-	Type EncryptionKeyType `locationName:"type" type:"string" required:"true"`
+	Type EncryptionKeyType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3631,7 +3631,7 @@ type FailureDetails struct {
 	// The type of the failure.
 	//
 	// Type is a required field
-	Type FailureType `locationName:"type" type:"string" required:"true"`
+	Type FailureType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4373,7 +4373,7 @@ type ListActionTypesInput struct {
 	_ struct{} `type:"structure"`
 
 	// Filters the list of action types to those created by a specified entity.
-	ActionOwnerFilter ActionOwner `locationName:"actionOwnerFilter" type:"string"`
+	ActionOwnerFilter ActionOwner `locationName:"actionOwnerFilter" type:"string" enum:"true"`
 
 	// An identifier that was returned from the previous list action types call,
 	// which can be used to return the next set of action types in the list.
@@ -4877,7 +4877,7 @@ type PipelineExecution struct {
 	//    the pipeline instead.
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
-	Status PipelineExecutionStatus `locationName:"status" type:"string"`
+	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4946,7 +4946,7 @@ type PipelineExecutionSummary struct {
 	//    the pipeline instead.
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
-	Status PipelineExecutionStatus `locationName:"status" type:"string"`
+	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5952,7 +5952,7 @@ type RetryStageExecutionInput struct {
 	// The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.
 	//
 	// RetryMode is a required field
-	RetryMode StageRetryMode `locationName:"retryMode" type:"string" required:"true"`
+	RetryMode StageRetryMode `locationName:"retryMode" type:"string" required:"true" enum:"true"`
 
 	// The name of the failed stage to be retried.
 	//
@@ -6210,7 +6210,7 @@ type StageExecution struct {
 	// stage.
 	//
 	// Status is a required field
-	Status StageExecutionStatus `locationName:"status" type:"string" required:"true"`
+	Status StageExecutionStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

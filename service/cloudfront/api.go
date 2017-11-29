@@ -1997,7 +1997,7 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
-	ViewerProtocolPolicy ViewerProtocolPolicy `type:"string" required:"true"`
+	ViewerProtocolPolicy ViewerProtocolPolicy `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2334,7 +2334,7 @@ type CookiePreference struct {
 	// requests to an Amazon S3 origin, specify none for the Forward element.
 	//
 	// Forward is a required field
-	Forward ItemSelection `type:"string" required:"true"`
+	Forward ItemSelection `type:"string" required:"true" enum:"true"`
 
 	// Required if you specify whitelist for the value of Forward:. A complex type
 	// that specifies how many different cookies you want CloudFront to forward
@@ -3222,7 +3222,7 @@ type CustomOriginConfig struct {
 	// The origin protocol policy to apply to your origin.
 	//
 	// OriginProtocolPolicy is a required field
-	OriginProtocolPolicy OriginProtocolPolicy `type:"string" required:"true"`
+	OriginProtocolPolicy OriginProtocolPolicy `type:"string" required:"true" enum:"true"`
 
 	// You can create a custom origin read timeout. All timeout units are in seconds.
 	// The default origin read timeout is 30 seconds, but you can configure custom
@@ -3434,7 +3434,7 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
-	ViewerProtocolPolicy ViewerProtocolPolicy `type:"string" required:"true"`
+	ViewerProtocolPolicy ViewerProtocolPolicy `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4012,7 +4012,7 @@ type DistributionConfig struct {
 	// In general, configuring CloudFront to communicate with viewers using HTTP/2
 	// reduces latency. You can improve performance by optimizing for HTTP/2. For
 	// more information, do an Internet search for "http/2 optimization."
-	HttpVersion HttpVersion `type:"string"`
+	HttpVersion HttpVersion `type:"string" enum:"true"`
 
 	// If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address
 	// for your distribution, specify true. If you specify false, CloudFront responds
@@ -4074,7 +4074,7 @@ type DistributionConfig struct {
 	// in the Amazon CloudFront Developer Guide. For information about CloudFront
 	// pricing, including how price classes map to CloudFront regions, see Amazon
 	// CloudFront Pricing (https://aws.amazon.com/cloudfront/pricing/).
-	PriceClass PriceClass `type:"string"`
+	PriceClass PriceClass `type:"string" enum:"true"`
 
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
@@ -4486,7 +4486,7 @@ type DistributionSummary struct {
 	// that don't support HTTP/2 will automatically use an earlier version.
 	//
 	// HttpVersion is a required field
-	HttpVersion HttpVersion `type:"string" required:"true"`
+	HttpVersion HttpVersion `type:"string" required:"true" enum:"true"`
 
 	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
 	//
@@ -4510,7 +4510,7 @@ type DistributionSummary struct {
 	Origins *Origins `type:"structure" required:"true"`
 
 	// PriceClass is a required field
-	PriceClass PriceClass `type:"string" required:"true"`
+	PriceClass PriceClass `type:"string" required:"true" enum:"true"`
 
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
@@ -4824,7 +4824,7 @@ type GeoRestriction struct {
 	//    want CloudFront to distribute your content.
 	//
 	// RestrictionType is a required field
-	RestrictionType GeoRestrictionType `type:"string" required:"true"`
+	RestrictionType GeoRestrictionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5822,7 +5822,7 @@ type LambdaFunctionAssociation struct {
 	//    * viewer-response
 	//
 	//    * origin-response
-	EventType EventType `type:"string"`
+	EventType EventType `type:"string" enum:"true"`
 
 	// The ARN of the Lambda function.
 	LambdaFunctionARN *string `type:"string"`
@@ -7528,7 +7528,7 @@ type StreamingDistributionConfig struct {
 
 	// A complex type that contains information about price class for this streaming
 	// distribution.
-	PriceClass PriceClass `type:"string"`
+	PriceClass PriceClass `type:"string" enum:"true"`
 
 	// A complex type that contains information about the Amazon S3 bucket from
 	// which you want CloudFront to get your media files for distribution.
@@ -7851,7 +7851,7 @@ type StreamingDistributionSummary struct {
 	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// PriceClass is a required field
-	PriceClass PriceClass `type:"string" required:"true"`
+	PriceClass PriceClass `type:"string" required:"true" enum:"true"`
 
 	// A complex type that contains information about the Amazon S3 bucket from
 	// which you want CloudFront to get your media files for distribution.
@@ -8812,7 +8812,7 @@ type ViewerCertificate struct {
 
 	// This field is deprecated. You can use one of the following: [ACMCertificateArn,
 	// IAMCertificateId, or CloudFrontDefaultCertificate].
-	CertificateSource CertificateSource `deprecated:"true" type:"string"`
+	CertificateSource CertificateSource `deprecated:"true" type:"string" enum:"true"`
 
 	CloudFrontDefaultCertificate *bool `type:"boolean"`
 
@@ -8831,7 +8831,7 @@ type ViewerCertificate struct {
 	//    * If you're using a custom certificate (if you specify a value for ACMCertificateArn
 	//    or for IAMCertificateId) and if you're using SNI (if you specify sni-only
 	//    for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.
-	MinimumProtocolVersion MinimumProtocolVersion `type:"string"`
+	MinimumProtocolVersion MinimumProtocolVersion `type:"string" enum:"true"`
 
 	// If you specify a value for ACMCertificateArn or for IAMCertificateId, you
 	// must also specify how you want CloudFront to serve HTTPS requests: using
@@ -8861,7 +8861,7 @@ type ViewerCertificate struct {
 	//
 	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html)
 	// in the Amazon CloudFront Developer Guide.
-	SSLSupportMethod SSLSupportMethod `type:"string"`
+	SSLSupportMethod SSLSupportMethod `type:"string" enum:"true"`
 }
 
 // String returns the string representation

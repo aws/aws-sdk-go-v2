@@ -32,7 +32,7 @@ func setupChecksumValidation(r *request.Request) {
 }
 
 func verifySendMessage(r *request.Request) {
-	if r.DataFilled() && r.ParamsFilled() {
+	if r.ParamsFilled() {
 		in := r.Params.(*SendMessageInput)
 		out := r.Data.(*SendMessageOutput)
 		err := checksumsMatch(in.MessageBody, out.MD5OfMessageBody)
@@ -43,7 +43,7 @@ func verifySendMessage(r *request.Request) {
 }
 
 func verifySendMessageBatch(r *request.Request) {
-	if r.DataFilled() && r.ParamsFilled() {
+	if r.ParamsFilled() {
 		entries := map[string]SendMessageBatchResultEntry{}
 		ids := []string{}
 
@@ -67,7 +67,7 @@ func verifySendMessageBatch(r *request.Request) {
 }
 
 func verifyReceiveMessage(r *request.Request) {
-	if r.DataFilled() && r.ParamsFilled() {
+	if r.ParamsFilled() {
 		ids := []string{}
 		out := r.Data.(*ReceiveMessageOutput)
 		for i, msg := range out.Messages {

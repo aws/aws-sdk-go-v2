@@ -3090,7 +3090,7 @@ type ActivityTaskTimedOutEventAttributes struct {
 	// The type of the timeout that caused this event.
 	//
 	// TimeoutType is a required field
-	TimeoutType ActivityTaskTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
+	TimeoutType ActivityTaskTimeoutType `locationName:"timeoutType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3324,7 +3324,7 @@ type ActivityTypeInfo struct {
 	// The current status of the activity type.
 	//
 	// Status is a required field
-	Status RegistrationStatus `locationName:"status" type:"string" required:"true"`
+	Status RegistrationStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3442,7 +3442,7 @@ type CancelTimerFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause CancelTimerFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause CancelTimerFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CancelTimer decision to cancel this timer. This information
@@ -3542,7 +3542,7 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause CancelWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause CancelWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CancelWorkflowExecution decision for this cancellation
@@ -3941,7 +3941,7 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	// out.
 	//
 	// TimeoutType is a required field
-	TimeoutType WorkflowExecutionTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
+	TimeoutType WorkflowExecutionTimeoutType `locationName:"timeoutType" type:"string" required:"true" enum:"true"`
 
 	// The child workflow execution that timed out.
 	//
@@ -4003,7 +4003,7 @@ type CloseStatusFilter struct {
 	// to meet the criteria of this filter.
 	//
 	// Status is a required field
-	Status CloseStatus `locationName:"status" type:"string" required:"true"`
+	Status CloseStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4092,7 +4092,7 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause CompleteWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause CompleteWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CompleteWorkflowExecution decision to complete this
@@ -4175,7 +4175,7 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" enum:"true"`
 
 	// If set, specifies the total duration for this workflow execution. This overrides
 	// the defaultExecutionStartToCloseTimeout specified when registering the workflow
@@ -4331,7 +4331,7 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause ContinueAsNewWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause ContinueAsNewWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the ContinueAsNewWorkflowExecution decision that started
@@ -5015,7 +5015,7 @@ type Decision struct {
 	// Specifies the type of the decision.
 	//
 	// DecisionType is a required field
-	DecisionType DecisionType `locationName:"decisionType" type:"string" required:"true"`
+	DecisionType DecisionType `locationName:"decisionType" type:"string" required:"true" enum:"true"`
 
 	// Provides the details of the FailWorkflowExecution decision. It isn't set
 	// for other decision types.
@@ -5374,7 +5374,7 @@ type DecisionTaskTimedOutEventAttributes struct {
 	// The type of timeout that expired before the decision task could be completed.
 	//
 	// TimeoutType is a required field
-	TimeoutType DecisionTaskTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
+	TimeoutType DecisionTaskTimeoutType `locationName:"timeoutType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6094,7 +6094,7 @@ type DomainInfo struct {
 	//    still in use. You should not create new workflow executions in this domain.
 	//
 	// Status is a required field
-	Status RegistrationStatus `locationName:"status" type:"string" required:"true"`
+	Status RegistrationStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6323,7 +6323,7 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause FailWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause FailWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the FailWorkflowExecution decision to fail this execution.
@@ -6756,7 +6756,7 @@ type HistoryEvent struct {
 	// The type of the history event.
 	//
 	// EventType is a required field
-	EventType EventType `locationName:"eventType" type:"string" required:"true"`
+	EventType EventType `locationName:"eventType" type:"string" required:"true" enum:"true"`
 
 	// If the event is of type ExternalWorkflowExecutionCancelRequested then this
 	// member is set and provides detailed information about the event. It isn't
@@ -7502,7 +7502,7 @@ type LambdaFunctionTimedOutEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 
 	// The type of the timeout that caused this event.
-	TimeoutType LambdaFunctionTimeoutType `locationName:"timeoutType" type:"string"`
+	TimeoutType LambdaFunctionTimeoutType `locationName:"timeoutType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7564,7 +7564,7 @@ type ListActivityTypesInput struct {
 	// Specifies the registration status of the activity types to list.
 	//
 	// RegistrationStatus is a required field
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true" enum:"true"`
 
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the activity types.
@@ -7895,7 +7895,7 @@ type ListDomainsInput struct {
 	// Specifies the registration status of the domains to list.
 	//
 	// RegistrationStatus is a required field
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true" enum:"true"`
 
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the domains.
@@ -8214,7 +8214,7 @@ type ListWorkflowTypesInput struct {
 	// Specifies the registration status of the workflow types to list.
 	//
 	// RegistrationStatus is a required field
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true" enum:"true"`
 
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in ascending alphabetical order of the name of the workflow
@@ -8925,7 +8925,7 @@ type RecordMarkerFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause RecordMarkerFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause RecordMarkerFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RecordMarkerFailed decision for this cancellation request.
@@ -9291,7 +9291,7 @@ type RegisterWorkflowTypeInput struct {
 	//    execution history with this event.
 	//
 	//    * ABANDON – No action is taken. The child executions continue to run.
-	DefaultChildPolicy ChildPolicy `locationName:"defaultChildPolicy" type:"string"`
+	DefaultChildPolicy ChildPolicy `locationName:"defaultChildPolicy" type:"string" enum:"true"`
 
 	// If set, specifies the default maximum duration for executions of this workflow
 	// type. You can override this default when starting an execution through the
@@ -9571,7 +9571,7 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause RequestCancelActivityTaskFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause RequestCancelActivityTaskFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RequestCancelActivityTask decision for this cancellation
@@ -9705,7 +9705,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause RequestCancelExternalWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause RequestCancelExternalWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the workflow execution.
@@ -10479,7 +10479,7 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause ScheduleActivityTaskFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause ScheduleActivityTaskFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision that
 	// resulted in the scheduling of this activity task. This information can be
@@ -10630,7 +10630,7 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause ScheduleLambdaFunctionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause ScheduleLambdaFunctionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the LambdaFunctionCompleted event corresponding to the decision
 	// that resulted in scheduling this Lambda task. To help diagnose issues, use
@@ -10807,7 +10807,7 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause SignalExternalWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause SignalExternalWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the workflow execution.
@@ -11129,7 +11129,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" enum:"true"`
 
 	// The data attached to the event that can be used by the decider in subsequent
 	// workflow tasks. This data isn't sent to the child workflow execution.
@@ -11334,7 +11334,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause StartChildWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause StartChildWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the child workflow execution.
@@ -11437,7 +11437,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true" enum:"true"`
 
 	// Data attached to the event that can be used by the decider in subsequent
 	// decision tasks. This data isn't sent to the activity.
@@ -11593,7 +11593,7 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	// IAM role attached to the execution lacked sufficient permissions. For details
 	// and example IAM policies, see Lambda Tasks (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
-	Cause StartLambdaFunctionFailedCause `locationName:"cause" type:"string"`
+	Cause StartLambdaFunctionFailedCause `locationName:"cause" type:"string" enum:"true"`
 
 	// A description that can help diagnose the cause of the fault.
 	Message *string `locationName:"message" type:"string"`
@@ -11742,7 +11742,7 @@ type StartTimerFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause StartTimerFailedCause `locationName:"cause" type:"string" required:"true"`
+	Cause StartTimerFailedCause `locationName:"cause" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the StartTimer decision for this activity task. This information
@@ -11809,7 +11809,7 @@ type StartWorkflowExecutionInput struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" enum:"true"`
 
 	// The name of the domain in which the workflow execution is created.
 	//
@@ -12158,7 +12158,7 @@ type TerminateWorkflowExecutionInput struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" enum:"true"`
 
 	// Details for terminating the workflow execution.
 	Details *string `locationName:"details" type:"string"`
@@ -12488,7 +12488,7 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 	// If set, indicates that the request to cancel the workflow execution was automatically
 	// generated, and specifies the cause. This happens if the parent workflow execution
 	// times out or is terminated, and the child policy is set to cancel child executions.
-	Cause WorkflowExecutionCancelRequestedCause `locationName:"cause" type:"string"`
+	Cause WorkflowExecutionCancelRequestedCause `locationName:"cause" type:"string" enum:"true"`
 
 	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event corresponding
 	// to the RequestCancelExternalWorkflowExecution decision to cancel this workflow
@@ -12628,7 +12628,7 @@ type WorkflowExecutionConfiguration struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true" enum:"true"`
 
 	// The total duration for this workflow execution.
 	//
@@ -12730,7 +12730,7 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true" enum:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the ContinueAsNewWorkflowExecution decision that started
@@ -12972,7 +12972,7 @@ type WorkflowExecutionInfo struct {
 	//    * CONTINUED_AS_NEW – the execution is logically continued. This means
 	//    the current execution was completed and a new execution was started to
 	//    carry on the workflow.
-	CloseStatus CloseStatus `locationName:"closeStatus" type:"string"`
+	CloseStatus CloseStatus `locationName:"closeStatus" type:"string" enum:"true"`
 
 	// The time when the workflow execution was closed. Set only if the execution
 	// status is CLOSED.
@@ -12986,7 +12986,7 @@ type WorkflowExecutionInfo struct {
 	// The current status of the execution.
 	//
 	// ExecutionStatus is a required field
-	ExecutionStatus ExecutionStatus `locationName:"executionStatus" type:"string" required:"true"`
+	ExecutionStatus ExecutionStatus `locationName:"executionStatus" type:"string" required:"true" enum:"true"`
 
 	// If this workflow execution is a child of another execution then contains
 	// the workflow execution that started this execution.
@@ -13224,7 +13224,7 @@ type WorkflowExecutionStartedEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true" enum:"true"`
 
 	// If this workflow execution was started due to a ContinueAsNewWorkflowExecution
 	// decision, then it contains the runId of the previous workflow execution that
@@ -13368,7 +13368,7 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	// If set, indicates that the workflow execution was automatically terminated,
 	// and specifies the cause. This happens if the parent workflow execution times
 	// out or is terminated and the child policy is set to terminate child executions.
-	Cause WorkflowExecutionTerminatedCause `locationName:"cause" type:"string"`
+	Cause WorkflowExecutionTerminatedCause `locationName:"cause" type:"string" enum:"true"`
 
 	// The policy used for the child workflow executions of this workflow execution.
 	//
@@ -13384,7 +13384,7 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true" enum:"true"`
 
 	// The details provided for the termination.
 	Details *string `locationName:"details" type:"string"`
@@ -13445,12 +13445,12 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true" enum:"true"`
 
 	// The type of timeout that caused this event.
 	//
 	// TimeoutType is a required field
-	TimeoutType WorkflowExecutionTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
+	TimeoutType WorkflowExecutionTimeoutType `locationName:"timeoutType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -13562,7 +13562,7 @@ type WorkflowTypeConfiguration struct {
 	//    execution history with this event.
 	//
 	//    * ABANDON – No action is taken. The child executions continue to run.
-	DefaultChildPolicy ChildPolicy `locationName:"defaultChildPolicy" type:"string"`
+	DefaultChildPolicy ChildPolicy `locationName:"defaultChildPolicy" type:"string" enum:"true"`
 
 	// The default maximum duration, specified when registering the workflow type,
 	// for executions of this workflow type. This default can be overridden when
@@ -13732,7 +13732,7 @@ type WorkflowTypeInfo struct {
 	// The current status of the workflow type.
 	//
 	// Status is a required field
-	Status RegistrationStatus `locationName:"status" type:"string" required:"true"`
+	Status RegistrationStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// The workflow type this information is about.
 	//

@@ -1325,7 +1325,7 @@ type InputService10TestShapeInputService10TestCaseOperation1Output struct {
 type InputService10TestShapeInputService10TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService10TestShapeEnumType `type:"string"`
+	FooEnum InputService10TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService10TestShapeEnumType `type:"list"`
 }

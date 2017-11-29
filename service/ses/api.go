@@ -3166,7 +3166,7 @@ type BouncedRecipientInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The reason for the bounce. You must provide either this parameter or RecipientDsnFields.
-	BounceType BounceType `type:"string"`
+	BounceType BounceType `type:"string" enum:"true"`
 
 	// The email address of the recipient of the bounced email.
 	//
@@ -3412,7 +3412,7 @@ type CloudWatchDimensionConfiguration struct {
 	// choose emailHeader.
 	//
 	// DimensionValueSource is a required field
-	DimensionValueSource DimensionValueSource `type:"string" required:"true"`
+	DimensionValueSource DimensionValueSource `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5671,7 +5671,7 @@ type IdentityDkimAttributes struct {
 	// identities, not email address identities.)
 	//
 	// DkimVerificationStatus is a required field
-	DkimVerificationStatus VerificationStatus `type:"string" required:"true"`
+	DkimVerificationStatus VerificationStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5719,7 +5719,7 @@ type IdentityMailFromDomainAttributes struct {
 	// Failed, and TemporaryFailure.
 	//
 	// BehaviorOnMXFailure is a required field
-	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string" required:"true"`
+	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string" required:"true" enum:"true"`
 
 	// The custom MAIL FROM domain that the identity is configured to use.
 	//
@@ -5733,7 +5733,7 @@ type IdentityMailFromDomainAttributes struct {
 	// described by BehaviorOnMXFailure.
 	//
 	// MailFromDomainStatus is a required field
-	MailFromDomainStatus CustomMailFromStatus `type:"string" required:"true"`
+	MailFromDomainStatus CustomMailFromStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5878,7 +5878,7 @@ type IdentityVerificationAttributes struct {
 	// or "TemporaryFailure".
 	//
 	// VerificationStatus is a required field
-	VerificationStatus VerificationStatus `type:"string" required:"true"`
+	VerificationStatus VerificationStatus `type:"string" required:"true" enum:"true"`
 
 	// The verification token for a domain identity. Null for email address identities.
 	VerificationToken *string `type:"string"`
@@ -6003,7 +6003,7 @@ type LambdaAction struct {
 	// Event invocation in most cases. Use RequestResponse only when you want to
 	// make a mail flow decision, such as whether to stop the receipt rule or the
 	// receipt rule set.
-	InvocationType InvocationType `type:"string"`
+	InvocationType InvocationType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
 	// Lambda action is taken. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic.
@@ -6138,7 +6138,7 @@ type ListIdentitiesInput struct {
 
 	// The type of the identities to list. Possible values are "EmailAddress" and
 	// "Domain". If this parameter is omitted, then all identities will be listed.
-	IdentityType IdentityType `type:"string"`
+	IdentityType IdentityType `type:"string" enum:"true"`
 
 	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
 	MaxItems *int64 `type:"integer"`
@@ -7041,7 +7041,7 @@ type ReceiptIpFilter struct {
 	// Indicates whether to block or allow incoming mail from the specified IP addresses.
 	//
 	// Policy is a required field
-	Policy ReceiptFilterPolicy `type:"string" required:"true"`
+	Policy ReceiptFilterPolicy `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7130,7 +7130,7 @@ type ReceiptRule struct {
 	// over a connection encrypted with Transport Layer Security (TLS). If this
 	// parameter is set to Require, Amazon SES will bounce emails that are not received
 	// over TLS. The default is Optional.
-	TlsPolicy TlsPolicy `type:"string"`
+	TlsPolicy TlsPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7261,7 +7261,7 @@ type RecipientDsnFields struct {
 	// by RFC 3464 (https://tools.ietf.org/html/rfc3464).
 	//
 	// Action is a required field
-	Action DsnAction `type:"string" required:"true"`
+	Action DsnAction `type:"string" required:"true" enum:"true"`
 
 	// An extended explanation of what went wrong; this is usually an SMTP response.
 	// See RFC 3463 (https://tools.ietf.org/html/rfc3463) for the correct formatting
@@ -7589,7 +7589,7 @@ type SNSAction struct {
 	// is easier to use, but may not preserve all special characters when a message
 	// was encoded with a different encoding format. Base64 preserves all special
 	// characters. The default value is UTF-8.
-	Encoding SNSActionEncoding `type:"string"`
+	Encoding SNSActionEncoding `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example
 	// of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic.
@@ -8539,7 +8539,7 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	// The notification type for which to enable or disable headers in notifications.
 	//
 	// NotificationType is a required field
-	NotificationType NotificationType `type:"string" required:"true"`
+	NotificationType NotificationType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8622,7 +8622,7 @@ type SetIdentityMailFromDomainInput struct {
 	//
 	// The action specified in BehaviorOnMXFailure is taken when the custom MAIL
 	// FROM domain setup is in the Pending, Failed, and TemporaryFailure states.
-	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string"`
+	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string" enum:"true"`
 
 	// The verified identity for which you want to enable or disable the specified
 	// custom MAIL FROM domain.
@@ -8717,7 +8717,7 @@ type SetIdentityNotificationTopicInput struct {
 	// SNS topic.
 	//
 	// NotificationType is a required field
-	NotificationType NotificationType `type:"string" required:"true"`
+	NotificationType NotificationType `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter
 	// is omitted from the request or a null value is passed, SnsTopic is cleared
@@ -8882,7 +8882,7 @@ type StopAction struct {
 	// The name of the RuleSet that is being stopped.
 	//
 	// Scope is a required field
-	Scope StopScope `type:"string" required:"true"`
+	Scope StopScope `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
 	// stop action is taken. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic.

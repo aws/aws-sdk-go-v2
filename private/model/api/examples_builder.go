@@ -202,7 +202,7 @@ func (builder defaultExamplesBuilder) BuildScalar(name, memName string, ref *Sha
 	return ""
 }
 
-func (builder defaultExamplesBuilder) BuildComplex(name, memName string, ref *ShapeRef, v map[string]interface{}, dereference bool) string {
+func (builder defaultExamplesBuilder) BuildComplex(name, memName string, ref *ShapeRef, v map[string]interface{}, asValue bool) string {
 	t := ""
 	if ref == nil {
 		return builder.BuildShape(nil, v, true, false)
@@ -227,7 +227,7 @@ func (builder defaultExamplesBuilder) BuildComplex(name, memName string, ref *Sh
 		}
 
 		mem := "&"
-		if dereference {
+		if asValue {
 			mem = ""
 		}
 

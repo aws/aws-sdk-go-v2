@@ -1494,7 +1494,7 @@ type ApplicationDetail struct {
 	// Status of the application.
 	//
 	// ApplicationStatus is a required field
-	ApplicationStatus ApplicationStatus `type:"string" required:"true"`
+	ApplicationStatus ApplicationStatus `type:"string" required:"true" enum:"true"`
 
 	// Provides the current application version.
 	//
@@ -1626,7 +1626,7 @@ type ApplicationSummary struct {
 	// Status of the application.
 	//
 	// ApplicationStatus is a required field
-	ApplicationStatus ApplicationStatus `type:"string" required:"true"`
+	ApplicationStatus ApplicationStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2736,7 +2736,7 @@ type DestinationSchema struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the format of the records on the output stream.
-	RecordFormatType RecordFormatType `type:"string"`
+	RecordFormatType RecordFormatType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3654,7 +3654,7 @@ type InputStartingPositionConfiguration struct {
 	//
 	//    * LAST_STOPPED_POINT - Resume reading from where the application last
 	//    stopped reading.
-	InputStartingPosition InputStartingPosition `type:"string"`
+	InputStartingPosition InputStartingPosition `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4967,7 +4967,7 @@ type RecordFormat struct {
 	// The type of record format.
 	//
 	// RecordFormatType is a required field
-	RecordFormatType RecordFormatType `type:"string" required:"true"`
+	RecordFormatType RecordFormatType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

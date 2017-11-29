@@ -919,7 +919,7 @@ type ExportBundleInput struct {
 	BundleId *string `location:"uri" locationName:"bundleId" type:"string" required:"true"`
 
 	// Developer desktop or target application platform.
-	Platform Platform `location:"querystring" locationName:"platform" type:"string"`
+	Platform Platform `location:"querystring" locationName:"platform" type:"string" enum:"true"`
 
 	// Unique project identifier.
 	ProjectId *string `location:"querystring" locationName:"projectId" type:"string"`
@@ -1256,7 +1256,7 @@ type ProjectDetails struct {
 	Resources []Resource `locationName:"resources" type:"list"`
 
 	// Synchronization state for a project.
-	State ProjectState `locationName:"state" type:"string"`
+	State ProjectState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation

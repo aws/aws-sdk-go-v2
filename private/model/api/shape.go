@@ -419,6 +419,9 @@ func (ref *ShapeRef) GoTags(toplevel bool, isRequired bool) string {
 	if isRequired {
 		tags = append(tags, ShapeTag{"required", "true"})
 	}
+	if ref.Shape.IsEnum() {
+		tags = append(tags, ShapeTag{"enum", "true"})
+	}
 
 	if toplevel {
 		if ref.Shape.Payload != "" {

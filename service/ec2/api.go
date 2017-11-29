@@ -13780,7 +13780,7 @@ type ActiveInstance struct {
 	// The health status of the instance. If the status of either the instance status
 	// check or the system status check is impaired, the health status of the instance
 	// is unhealthy. Otherwise, the health status is healthy.
-	InstanceHealth InstanceHealthStatus `locationName:"instanceHealth" type:"string"`
+	InstanceHealth InstanceHealthStatus `locationName:"instanceHealth" type:"string" enum:"true"`
 
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
@@ -13840,7 +13840,7 @@ type Address struct {
 
 	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
 	// (standard) or instances in a VPC (vpc).
-	Domain DomainType `locationName:"domain" type:"string"`
+	Domain DomainType `locationName:"domain" type:"string" enum:"true"`
 
 	// The ID of the instance that the address is associated with (if any).
 	InstanceId *string `locationName:"instanceId" type:"string"`
@@ -13927,7 +13927,7 @@ type AllocateAddressInput struct {
 	// Set to vpc to allocate the address for use with instances in a VPC.
 	//
 	// Default: The address is for use with instances in EC2-Classic.
-	Domain DomainType `type:"string"`
+	Domain DomainType `type:"string" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -13975,7 +13975,7 @@ type AllocateAddressOutput struct {
 
 	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
 	// (standard) or instances in a VPC (vpc).
-	Domain DomainType `locationName:"domain" type:"string"`
+	Domain DomainType `locationName:"domain" type:"string" enum:"true"`
 
 	// The Elastic IP address.
 	PublicIp *string `locationName:"publicIp" type:"string"`
@@ -14019,7 +14019,7 @@ type AllocateHostsInput struct {
 	// specifying a host ID.
 	//
 	// Default: Enabled
-	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" enum:"true"`
 
 	// The Availability Zone for the Dedicated Hosts.
 	//
@@ -15705,7 +15705,7 @@ type AvailabilityZone struct {
 	RegionName *string `locationName:"regionName" type:"string"`
 
 	// The state of the Availability Zone.
-	State AvailabilityZoneState `locationName:"zoneState" type:"string"`
+	State AvailabilityZoneState `locationName:"zoneState" type:"string" enum:"true"`
 
 	// The name of the Availability Zone.
 	ZoneName *string `locationName:"zoneName" type:"string"`
@@ -16013,7 +16013,7 @@ type BundleTask struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the task.
-	State BundleTaskState `locationName:"state" type:"string"`
+	State BundleTaskState `locationName:"state" type:"string" enum:"true"`
 
 	// The Amazon S3 storage locations.
 	Storage *Storage `locationName:"storage" type:"structure"`
@@ -16488,7 +16488,7 @@ type CancelSpotFleetRequestsError struct {
 	// The error code.
 	//
 	// Code is a required field
-	Code CancelBatchErrorCode `locationName:"code" type:"string" required:"true"`
+	Code CancelBatchErrorCode `locationName:"code" type:"string" required:"true" enum:"true"`
 
 	// The description for the error code.
 	//
@@ -16667,12 +16667,12 @@ type CancelSpotFleetRequestsSuccessItem struct {
 	// The current state of the Spot fleet request.
 	//
 	// CurrentSpotFleetRequestState is a required field
-	CurrentSpotFleetRequestState BatchState `locationName:"currentSpotFleetRequestState" type:"string" required:"true"`
+	CurrentSpotFleetRequestState BatchState `locationName:"currentSpotFleetRequestState" type:"string" required:"true" enum:"true"`
 
 	// The previous state of the Spot fleet request.
 	//
 	// PreviousSpotFleetRequestState is a required field
-	PreviousSpotFleetRequestState BatchState `locationName:"previousSpotFleetRequestState" type:"string" required:"true"`
+	PreviousSpotFleetRequestState BatchState `locationName:"previousSpotFleetRequestState" type:"string" required:"true" enum:"true"`
 
 	// The ID of the Spot fleet request.
 	//
@@ -16795,7 +16795,7 @@ type CancelledSpotInstanceRequest struct {
 	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
 
 	// The state of the Spot instance request.
-	State CancelSpotInstanceRequestState `locationName:"state" type:"string"`
+	State CancelSpotInstanceRequestState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -17112,7 +17112,7 @@ type ConversionTask struct {
 	// The state of the conversion task.
 	//
 	// State is a required field
-	State ConversionTaskState `locationName:"state" type:"string" required:"true"`
+	State ConversionTaskState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The status message related to the conversion task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -17645,7 +17645,7 @@ type CreateCustomerGatewayInput struct {
 	// The type of VPN connection that this customer gateway supports (ipsec.1).
 	//
 	// Type is a required field
-	Type GatewayType `type:"string" required:"true"`
+	Type GatewayType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -17985,12 +17985,12 @@ type CreateFlowLogsInput struct {
 	// The type of resource on which to create the flow log.
 	//
 	// ResourceType is a required field
-	ResourceType FlowLogsResourceType `type:"string" required:"true"`
+	ResourceType FlowLogsResourceType `type:"string" required:"true" enum:"true"`
 
 	// The type of traffic to log.
 	//
 	// TrafficType is a required field
-	TrafficType TrafficType `type:"string" required:"true"`
+	TrafficType TrafficType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -18379,7 +18379,7 @@ type CreateInstanceExportTaskInput struct {
 	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The target virtualization environment.
-	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string"`
+	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -18760,7 +18760,7 @@ type CreateNetworkAclEntryInput struct {
 	// Indicates whether to allow or deny the traffic that matches the rule.
 	//
 	// RuleAction is a required field
-	RuleAction RuleAction `locationName:"ruleAction" type:"string" required:"true"`
+	RuleAction RuleAction `locationName:"ruleAction" type:"string" required:"true" enum:"true"`
 
 	// The rule number for the entry (for example, 100). ACL entries are processed
 	// in ascending order by rule number.
@@ -19154,7 +19154,7 @@ type CreateNetworkInterfacePermissionInput struct {
 	// The type of permission to grant.
 	//
 	// Permission is a required field
-	Permission InterfacePermissionType `type:"string" required:"true"`
+	Permission InterfacePermissionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -19260,7 +19260,7 @@ type CreatePlacementGroupInput struct {
 	// The placement strategy.
 	//
 	// Strategy is a required field
-	Strategy PlacementStrategy `locationName:"strategy" type:"string" required:"true"`
+	Strategy PlacementStrategy `locationName:"strategy" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -19891,7 +19891,7 @@ type CreateSnapshotOutput struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The snapshot state.
-	State SnapshotState `locationName:"status" type:"string"`
+	State SnapshotState `locationName:"status" type:"string" enum:"true"`
 
 	// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
 	// operation fails (for example, if the proper AWS Key Management Service (AWS
@@ -20356,7 +20356,7 @@ type CreateVolumeInput struct {
 	// for Magnetic volumes.
 	//
 	// Default: standard
-	VolumeType VolumeType `type:"string"`
+	VolumeType VolumeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -20480,7 +20480,7 @@ type CreateVolumeOutput struct {
 	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// The volume state.
-	State VolumeState `locationName:"status" type:"string"`
+	State VolumeState `locationName:"status" type:"string" enum:"true"`
 
 	// Any tags assigned to the volume.
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -20491,7 +20491,7 @@ type CreateVolumeOutput struct {
 	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
 	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard
 	// for Magnetic volumes.
-	VolumeType VolumeType `locationName:"volumeType" type:"string"`
+	VolumeType VolumeType `locationName:"volumeType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -20584,7 +20584,7 @@ type CreateVolumePermission struct {
 
 	// The specific group that is to be added or removed from a volume's list of
 	// create volume permissions.
-	Group PermissionGroup `locationName:"group" type:"string"`
+	Group PermissionGroup `locationName:"group" type:"string" enum:"true"`
 
 	// The specific AWS account ID that is to be added or removed from a volume's
 	// list of create volume permissions.
@@ -20814,7 +20814,7 @@ type CreateVpcInput struct {
 	// or dedicated values only.
 	//
 	// Default: default
-	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -21184,7 +21184,7 @@ type CreateVpnGatewayInput struct {
 	// The type of VPN connection this virtual private gateway supports.
 	//
 	// Type is a required field
-	Type GatewayType `type:"string" required:"true"`
+	Type GatewayType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -24419,7 +24419,7 @@ type DescribeFpgaImageAttributeInput struct {
 	// The AFI attribute.
 	//
 	// Attribute is a required field
-	Attribute FpgaImageAttributeName `type:"string" required:"true"`
+	Attribute FpgaImageAttributeName `type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -25225,7 +25225,7 @@ type DescribeImageAttributeInput struct {
 	// to get information about the block device mapping for the AMI.
 	//
 	// Attribute is a required field
-	Attribute ImageAttributeName `type:"string" required:"true"`
+	Attribute ImageAttributeName `type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -25760,7 +25760,7 @@ type DescribeInstanceAttributeInput struct {
 	// Note: The enaSupport attribute is not supported at this time.
 	//
 	// Attribute is a required field
-	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true"`
+	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -26999,7 +26999,7 @@ type DescribeNetworkInterfaceAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute of the network interface. This parameter is required.
-	Attribute NetworkInterfaceAttribute `locationName:"attribute" type:"string"`
+	Attribute NetworkInterfaceAttribute `locationName:"attribute" type:"string" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -27731,12 +27731,12 @@ type DescribeReservedInstancesInput struct {
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// Describes whether the Reserved Instance is Standard or Convertible.
-	OfferingClass OfferingClassType `type:"string"`
+	OfferingClass OfferingClassType `type:"string" enum:"true"`
 
 	// The Reserved Instance offering type. If you are using tools that predate
 	// the 2011-11-01 API version, you only have access to the Medium Utilization
 	// Reserved Instance offering type.
-	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string" enum:"true"`
 
 	// One or more Reserved Instance IDs.
 	//
@@ -28034,12 +28034,12 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// or dedicated values only.
 	//
 	// Default: default
-	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string" enum:"true"`
 
 	// The instance type that the reservation will cover (for example, m1.small).
 	// For more information, see Instance Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	InstanceType InstanceType `type:"string"`
+	InstanceType InstanceType `type:"string" enum:"true"`
 
 	// The maximum duration (in seconds) to filter when searching for offerings.
 	//
@@ -28067,16 +28067,16 @@ type DescribeReservedInstancesOfferingsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The offering class of the Reserved Instance. Can be standard or convertible.
-	OfferingClass OfferingClassType `type:"string"`
+	OfferingClass OfferingClassType `type:"string" enum:"true"`
 
 	// The Reserved Instance offering type. If you are using tools that predate
 	// the 2011-11-01 API version, you only have access to the Medium Utilization
 	// Reserved Instance offering type.
-	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string" enum:"true"`
 
 	// The Reserved Instance product platform description. Instances that include
 	// (Amazon VPC) in the description are for use with Amazon VPC.
-	ProductDescription RIProductDescription `type:"string"`
+	ProductDescription RIProductDescription `type:"string" enum:"true"`
 
 	// One or more Reserved Instances offering IDs.
 	ReservedInstancesOfferingIds []string `locationName:"ReservedInstancesOfferingId" type:"list"`
@@ -28880,7 +28880,7 @@ type DescribeSnapshotAttributeInput struct {
 	// The snapshot attribute you would like to view.
 	//
 	// Attribute is a required field
-	Attribute SnapshotAttributeName `type:"string" required:"true"`
+	Attribute SnapshotAttributeName `type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -29340,7 +29340,7 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The type of events to describe. By default, all events are described.
-	EventType EventType `locationName:"eventType" type:"string"`
+	EventType EventType `locationName:"eventType" type:"string" enum:"true"`
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
@@ -30267,7 +30267,7 @@ type DescribeVolumeAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute of the volume. This parameter is required.
-	Attribute VolumeAttributeName `type:"string"`
+	Attribute VolumeAttributeName `type:"string" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -30775,7 +30775,7 @@ type DescribeVpcAttributeInput struct {
 	// The VPC attribute.
 	//
 	// Attribute is a required field
-	Attribute VpcAttributeName `type:"string" required:"true"`
+	Attribute VpcAttributeName `type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -32081,7 +32081,7 @@ type DetachVolumeOutput struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The attachment state of the volume.
-	State VolumeAttachmentState `locationName:"status" type:"string"`
+	State VolumeAttachmentState `locationName:"status" type:"string" enum:"true"`
 
 	// The ID of the volume.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -32915,7 +32915,7 @@ type DiskImageDescription struct {
 	// The disk image format.
 	//
 	// Format is a required field
-	Format DiskImageFormat `locationName:"format" type:"string" required:"true"`
+	Format DiskImageFormat `locationName:"format" type:"string" required:"true" enum:"true"`
 
 	// A presigned URL for the import manifest stored in Amazon S3. For information
 	// about creating a presigned URL for an Amazon S3 object, read the "Query String
@@ -32982,7 +32982,7 @@ type DiskImageDetail struct {
 	// The disk image format.
 	//
 	// Format is a required field
-	Format DiskImageFormat `locationName:"format" type:"string" required:"true"`
+	Format DiskImageFormat `locationName:"format" type:"string" required:"true" enum:"true"`
 
 	// A presigned URL for the import manifest stored in Amazon S3 and presented
 	// here as an Amazon S3 presigned URL. For information about creating a presigned
@@ -33127,7 +33127,7 @@ type EbsBlockDevice struct {
 	// The volume type: gp2, io1, st1, sc1, or standard.
 	//
 	// Default: standard
-	VolumeType VolumeType `locationName:"volumeType" type:"string"`
+	VolumeType VolumeType `locationName:"volumeType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -33188,7 +33188,7 @@ type EbsInstanceBlockDevice struct {
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
 	// The attachment state.
-	Status AttachmentStatus `locationName:"status" type:"string"`
+	Status AttachmentStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The ID of the EBS volume.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -33355,7 +33355,7 @@ type ElasticGpuHealth struct {
 	_ struct{} `type:"structure"`
 
 	// The health status.
-	Status ElasticGpuStatus `locationName:"status" type:"string"`
+	Status ElasticGpuStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -33430,7 +33430,7 @@ type ElasticGpus struct {
 	ElasticGpuId *string `locationName:"elasticGpuId" type:"string"`
 
 	// The state of the Elastic GPU.
-	ElasticGpuState ElasticGpuState `locationName:"elasticGpuState" type:"string"`
+	ElasticGpuState ElasticGpuState `locationName:"elasticGpuState" type:"string" enum:"true"`
 
 	// The type of Elastic GPU.
 	ElasticGpuType *string `locationName:"elasticGpuType" type:"string"`
@@ -33865,7 +33865,7 @@ type ExportTask struct {
 	InstanceExportDetails *InstanceExportDetails `locationName:"instanceExport" type:"structure"`
 
 	// The state of the export task.
-	State ExportTaskState `locationName:"state" type:"string"`
+	State ExportTaskState `locationName:"state" type:"string" enum:"true"`
 
 	// The status message related to the export task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -33924,10 +33924,10 @@ type ExportToS3Task struct {
 
 	// The container format used to combine disk images with metadata (such as OVF).
 	// If absent, only the disk image is exported.
-	ContainerFormat ContainerFormat `locationName:"containerFormat" type:"string"`
+	ContainerFormat ContainerFormat `locationName:"containerFormat" type:"string" enum:"true"`
 
 	// The format for the exported image.
-	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string"`
+	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string" enum:"true"`
 
 	// The S3 bucket for the destination image. The destination bucket must exist
 	// and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
@@ -33978,10 +33978,10 @@ type ExportToS3TaskSpecification struct {
 
 	// The container format used to combine disk images with metadata (such as OVF).
 	// If absent, only the disk image is exported.
-	ContainerFormat ContainerFormat `locationName:"containerFormat" type:"string"`
+	ContainerFormat ContainerFormat `locationName:"containerFormat" type:"string" enum:"true"`
 
 	// The format for the exported image.
-	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string"`
+	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string" enum:"true"`
 
 	// The S3 bucket for the destination image. The destination bucket must exist
 	// and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
@@ -34097,7 +34097,7 @@ type FlowLog struct {
 	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The type of traffic captured for the flow log.
-	TrafficType TrafficType `locationName:"trafficType" type:"string"`
+	TrafficType TrafficType `locationName:"trafficType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -34382,7 +34382,7 @@ type FpgaImageState struct {
 	//    * failed - AFI bitstream generation failed.
 	//
 	//    * unavailable - The AFI is no longer available for use.
-	Code FpgaImageStateCode `locationName:"code" type:"string"`
+	Code FpgaImageStateCode `locationName:"code" type:"string" enum:"true"`
 
 	// If the state is failed, this is the error message.
 	Message *string `locationName:"message" type:"string"`
@@ -34666,7 +34666,7 @@ type GetHostReservationPurchasePreviewOutput struct {
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts
 	// are specified. At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The purchase information of the Dedicated Host Reservation and the Dedicated
 	// Hosts associated with it.
@@ -35031,7 +35031,7 @@ type HistoryRecord struct {
 	//    * instanceChange - Indicates that an instance was launched or terminated.
 	//
 	// EventType is a required field
-	EventType EventType `locationName:"eventType" type:"string" required:"true"`
+	EventType EventType `locationName:"eventType" type:"string" required:"true" enum:"true"`
 
 	// The date and time of the event, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	//
@@ -35073,7 +35073,7 @@ type Host struct {
 	_ struct{} `type:"structure"`
 
 	// Whether auto-placement is on or off.
-	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" enum:"true"`
 
 	// The Availability Zone of the Dedicated Host.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
@@ -35100,7 +35100,7 @@ type Host struct {
 	Instances []HostInstance `locationName:"instances" locationNameList:"item" type:"list"`
 
 	// The Dedicated Host's state.
-	State AllocationState `locationName:"state" type:"string"`
+	State AllocationState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -35207,7 +35207,7 @@ type HostOffering struct {
 	_ struct{} `type:"structure"`
 
 	// The currency of the offering.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The duration of the offering (in seconds).
 	Duration *int64 `locationName:"duration" type:"integer"`
@@ -35222,7 +35222,7 @@ type HostOffering struct {
 	OfferingId *string `locationName:"offeringId" type:"string"`
 
 	// The available payment option.
-	PaymentOption PaymentOption `locationName:"paymentOption" type:"string"`
+	PaymentOption PaymentOption `locationName:"paymentOption" type:"string" enum:"true"`
 
 	// The upfront price of the offering. Does not apply to No Upfront offerings.
 	UpfrontPrice *string `locationName:"upfrontPrice" type:"string"`
@@ -35342,7 +35342,7 @@ type HostReservation struct {
 
 	// The currency in which the upfrontPrice and hourlyPrice amounts are specified.
 	// At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The length of the reservation's term, specified in seconds. Can be 31536000
 	// (1 year) | 94608000 (3 years).
@@ -35370,13 +35370,13 @@ type HostReservation struct {
 	OfferingId *string `locationName:"offeringId" type:"string"`
 
 	// The payment option selected for this reservation.
-	PaymentOption PaymentOption `locationName:"paymentOption" type:"string"`
+	PaymentOption PaymentOption `locationName:"paymentOption" type:"string" enum:"true"`
 
 	// The date and time that the reservation started.
 	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the reservation.
-	State ReservationState `locationName:"state" type:"string"`
+	State ReservationState `locationName:"state" type:"string" enum:"true"`
 
 	// The upfront price of the reservation.
 	UpfrontPrice *string `locationName:"upfrontPrice" type:"string"`
@@ -35519,7 +35519,7 @@ type IamInstanceProfileAssociation struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The state of the association.
-	State IamInstanceProfileAssociationState `locationName:"state" type:"string"`
+	State IamInstanceProfileAssociationState `locationName:"state" type:"string" enum:"true"`
 
 	// The time the IAM instance profile was associated with the instance.
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"iso8601"`
@@ -35684,7 +35684,7 @@ type Image struct {
 	_ struct{} `type:"structure"`
 
 	// The architecture of the image.
-	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string" enum:"true"`
 
 	// Any block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
@@ -35699,7 +35699,7 @@ type Image struct {
 	EnaSupport *bool `locationName:"enaSupport" type:"boolean"`
 
 	// The hypervisor type of the image.
-	Hypervisor HypervisorType `locationName:"hypervisor" type:"string"`
+	Hypervisor HypervisorType `locationName:"hypervisor" type:"string" enum:"true"`
 
 	// The ID of the AMI.
 	ImageId *string `locationName:"imageId" type:"string"`
@@ -35712,7 +35712,7 @@ type Image struct {
 	ImageOwnerAlias *string `locationName:"imageOwnerAlias" type:"string"`
 
 	// The type of image.
-	ImageType ImageTypeValues `locationName:"imageType" type:"string"`
+	ImageType ImageTypeValues `locationName:"imageType" type:"string" enum:"true"`
 
 	// The kernel associated with the image, if any. Only applicable for machine
 	// images.
@@ -35725,7 +35725,7 @@ type Image struct {
 	OwnerId *string `locationName:"imageOwnerId" type:"string"`
 
 	// The value is Windows for Windows AMIs; otherwise blank.
-	Platform PlatformValues `locationName:"platform" type:"string"`
+	Platform PlatformValues `locationName:"platform" type:"string" enum:"true"`
 
 	// Any product codes associated with the AMI.
 	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
@@ -35744,7 +35744,7 @@ type Image struct {
 
 	// The type of root device used by the AMI. The AMI can use an EBS volume or
 	// an instance store volume.
-	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string"`
+	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string" enum:"true"`
 
 	// Specifies whether enhanced networking with the Intel 82599 Virtual Function
 	// interface is enabled.
@@ -35752,7 +35752,7 @@ type Image struct {
 
 	// The current state of the AMI. If the state is available, the image is successfully
 	// registered and can be used to launch an instance.
-	State ImageState `locationName:"imageState" type:"string"`
+	State ImageState `locationName:"imageState" type:"string" enum:"true"`
 
 	// The reason for the state change.
 	StateReason *StateReason `locationName:"stateReason" type:"structure"`
@@ -35761,7 +35761,7 @@ type Image struct {
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of virtualization of the AMI.
-	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string"`
+	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -36370,7 +36370,7 @@ type ImportInstanceInput struct {
 	// The instance operating system.
 	//
 	// Platform is a required field
-	Platform PlatformValues `locationName:"platform" type:"string" required:"true"`
+	Platform PlatformValues `locationName:"platform" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -36442,7 +36442,7 @@ type ImportInstanceLaunchSpecification struct {
 	AdditionalInfo *string `locationName:"additionalInfo" type:"string"`
 
 	// The architecture of the instance.
-	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string" enum:"true"`
 
 	// One or more security group IDs.
 	GroupIds []string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
@@ -36452,12 +36452,12 @@ type ImportInstanceLaunchSpecification struct {
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
-	InstanceInitiatedShutdownBehavior ShutdownBehavior `locationName:"instanceInitiatedShutdownBehavior" type:"string"`
+	InstanceInitiatedShutdownBehavior ShutdownBehavior `locationName:"instanceInitiatedShutdownBehavior" type:"string" enum:"true"`
 
 	// The instance type. For more information about the instance types that you
 	// can import, see Instance Types (http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#vmimport-instance-types)
 	// in the VM Import/Export User Guide.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// Indicates whether monitoring is enabled.
 	Monitoring *bool `locationName:"monitoring" type:"boolean"`
@@ -36590,7 +36590,7 @@ type ImportInstanceTaskDetails struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The instance operating system.
-	Platform PlatformValues `locationName:"platform" type:"string"`
+	Platform PlatformValues `locationName:"platform" type:"string" enum:"true"`
 
 	// One or more volumes.
 	//
@@ -37191,7 +37191,7 @@ type Instance struct {
 	AmiLaunchIndex *int64 `locationName:"amiLaunchIndex" type:"integer"`
 
 	// The architecture of the image.
-	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string" enum:"true"`
 
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
@@ -37213,7 +37213,7 @@ type Instance struct {
 	EnaSupport *bool `locationName:"enaSupport" type:"boolean"`
 
 	// The hypervisor type of the instance.
-	Hypervisor HypervisorType `locationName:"hypervisor" type:"string"`
+	Hypervisor HypervisorType `locationName:"hypervisor" type:"string" enum:"true"`
 
 	// The IAM instance profile associated with the instance, if applicable.
 	IamInstanceProfile *IamInstanceProfile `locationName:"iamInstanceProfile" type:"structure"`
@@ -37225,10 +37225,10 @@ type Instance struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Indicates whether this is a Spot Instance or a Scheduled Instance.
-	InstanceLifecycle InstanceLifecycleType `locationName:"instanceLifecycle" type:"string"`
+	InstanceLifecycle InstanceLifecycleType `locationName:"instanceLifecycle" type:"string" enum:"true"`
 
 	// The instance type.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// The kernel associated with this instance, if applicable.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -37250,7 +37250,7 @@ type Instance struct {
 	Placement *Placement `locationName:"placement" type:"structure"`
 
 	// The value is Windows for Windows instances; otherwise blank.
-	Platform PlatformValues `locationName:"platform" type:"string"`
+	Platform PlatformValues `locationName:"platform" type:"string" enum:"true"`
 
 	// (IPv4 only) The private DNS hostname name assigned to the instance. This
 	// DNS hostname can only be used inside the Amazon EC2 network. This name is
@@ -37284,7 +37284,7 @@ type Instance struct {
 
 	// The root device type used by the AMI. The AMI can use an EBS volume or an
 	// instance store volume.
-	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string"`
+	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string" enum:"true"`
 
 	// One or more security groups for the instance.
 	SecurityGroups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
@@ -37320,7 +37320,7 @@ type Instance struct {
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The virtualization type of the instance.
-	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string"`
+	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string" enum:"true"`
 
 	// [EC2-VPC] The ID of the VPC in which the instance is running.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -37710,7 +37710,7 @@ type InstanceCount struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The states of the listed Reserved Instances.
-	State ListingState `locationName:"state" type:"string"`
+	State ListingState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -37744,7 +37744,7 @@ type InstanceExportDetails struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The target virtualization environment.
-	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string"`
+	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -37871,7 +37871,7 @@ type InstanceNetworkInterface struct {
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The status of the network interface.
-	Status NetworkInterfaceStatus `locationName:"status" type:"string"`
+	Status NetworkInterfaceStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The ID of the subnet.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -38041,7 +38041,7 @@ type InstanceNetworkInterfaceAttachment struct {
 	DeviceIndex *int64 `locationName:"deviceIndex" type:"integer"`
 
 	// The attachment state.
-	Status AttachmentStatus `locationName:"status" type:"string"`
+	Status AttachmentStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -38326,7 +38326,7 @@ type InstanceState struct {
 	Code *int64 `locationName:"code" type:"integer"`
 
 	// The current state of the instance.
-	Name InstanceStateName `locationName:"name" type:"string"`
+	Name InstanceStateName `locationName:"name" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -38478,10 +38478,10 @@ type InstanceStatusDetails struct {
 	ImpairedSince *time.Time `locationName:"impairedSince" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The type of instance status.
-	Name StatusName `locationName:"name" type:"string"`
+	Name StatusName `locationName:"name" type:"string" enum:"true"`
 
 	// The status.
-	Status StatusType `locationName:"status" type:"string"`
+	Status StatusType `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -38518,7 +38518,7 @@ type InstanceStatusEvent struct {
 	_ struct{} `type:"structure"`
 
 	// The event code.
-	Code EventCode `locationName:"code" type:"string"`
+	Code EventCode `locationName:"code" type:"string" enum:"true"`
 
 	// A description of the event.
 	//
@@ -38577,7 +38577,7 @@ type InstanceStatusSummary struct {
 	Details []InstanceStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status.
-	Status SummaryStatus `locationName:"status" type:"string"`
+	Status SummaryStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -38652,7 +38652,7 @@ type InternetGatewayAttachment struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the attachment.
-	State AttachmentStatus `locationName:"state" type:"string"`
+	State AttachmentStatus `locationName:"state" type:"string" enum:"true"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -38919,7 +38919,7 @@ type LaunchPermission struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	Group PermissionGroup `locationName:"group" type:"string"`
+	Group PermissionGroup `locationName:"group" type:"string" enum:"true"`
 
 	// The AWS account ID.
 	UserId *string `locationName:"userId" type:"string"`
@@ -39012,7 +39012,7 @@ type LaunchSpecification struct {
 	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// The ID of the kernel.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -39153,7 +39153,7 @@ type LoadPermission struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	Group PermissionGroup `locationName:"group" type:"string"`
+	Group PermissionGroup `locationName:"group" type:"string" enum:"true"`
 
 	// The AWS account ID.
 	UserId *string `locationName:"userId" type:"string"`
@@ -39221,7 +39221,7 @@ type LoadPermissionRequest struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	Group PermissionGroup `type:"string"`
+	Group PermissionGroup `type:"string" enum:"true"`
 
 	// The AWS account ID.
 	UserId *string `type:"string"`
@@ -39254,7 +39254,7 @@ type ModifyFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the attribute.
-	Attribute FpgaImageAttributeName `type:"string"`
+	Attribute FpgaImageAttributeName `type:"string" enum:"true"`
 
 	// A description for the AFI.
 	Description *string `type:"string"`
@@ -39277,7 +39277,7 @@ type ModifyFpgaImageAttributeInput struct {
 	Name *string `type:"string"`
 
 	// The operation type.
-	OperationType OperationType `type:"string"`
+	OperationType OperationType `type:"string" enum:"true"`
 
 	// One or more product codes. After you add a product code to an AFI, it can't
 	// be removed. This parameter is valid only when modifying the productCodes
@@ -39409,7 +39409,7 @@ type ModifyHostsInput struct {
 	// Specify whether to enable or disable auto-placement.
 	//
 	// AutoPlacement is a required field
-	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" required:"true"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" required:"true" enum:"true"`
 
 	// The host IDs of the Dedicated Hosts you want to modify.
 	//
@@ -39678,7 +39678,7 @@ type ModifyImageAttributeInput struct {
 
 	// The operation type. This parameter can be used only when the Attribute parameter
 	// is launchPermission.
-	OperationType OperationType `type:"string"`
+	OperationType OperationType `type:"string" enum:"true"`
 
 	// One or more DevPay product codes. After you add a product code to an AMI,
 	// it can't be removed.
@@ -39802,7 +39802,7 @@ type ModifyInstanceAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the attribute.
-	Attribute InstanceAttributeName `locationName:"attribute" type:"string"`
+	Attribute InstanceAttributeName `locationName:"attribute" type:"string" enum:"true"`
 
 	// Modifies the DeleteOnTermination attribute for volumes that are currently
 	// attached. The volume must be owned by the caller. If no value is specified
@@ -40035,7 +40035,7 @@ type ModifyInstancePlacementInput struct {
 	_ struct{} `type:"structure"`
 
 	// The new affinity setting for the instance.
-	Affinity Affinity `locationName:"affinity" type:"string"`
+	Affinity Affinity `locationName:"affinity" type:"string" enum:"true"`
 
 	// The ID of the Dedicated Host that the instance will have affinity with.
 	HostId *string `locationName:"hostId" type:"string"`
@@ -40046,7 +40046,7 @@ type ModifyInstancePlacementInput struct {
 	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The tenancy of the instance that you are modifying.
-	Tenancy HostTenancy `locationName:"tenancy" type:"string"`
+	Tenancy HostTenancy `locationName:"tenancy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -40333,7 +40333,7 @@ type ModifySnapshotAttributeInput struct {
 	// The snapshot attribute to modify.
 	//
 	// Only volume creation permissions may be modified at the customer level.
-	Attribute SnapshotAttributeName `type:"string"`
+	Attribute SnapshotAttributeName `type:"string" enum:"true"`
 
 	// A JSON representation of the snapshot attribute modification.
 	CreateVolumePermission *CreateVolumePermissionModifications `type:"structure"`
@@ -40348,7 +40348,7 @@ type ModifySnapshotAttributeInput struct {
 	GroupNames []string `locationName:"UserGroup" locationNameList:"GroupName" type:"list"`
 
 	// The type of operation to perform to the attribute.
-	OperationType OperationType `type:"string"`
+	OperationType OperationType `type:"string" enum:"true"`
 
 	// The ID of the snapshot.
 	//
@@ -40448,7 +40448,7 @@ type ModifySpotFleetRequestInput struct {
 	// Indicates whether running Spot instances should be terminated if the target
 	// capacity of the Spot fleet request is decreased below the current size of
 	// the Spot fleet.
-	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string"`
+	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"true"`
 
 	// The ID of the Spot fleet request.
 	//
@@ -40723,7 +40723,7 @@ type ModifyVolumeInput struct {
 	// cannot change the type of a volume to standard.
 	//
 	// Default: If no type is specified, the existing type is retained.
-	VolumeType VolumeType `type:"string"`
+	VolumeType VolumeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -41194,7 +41194,7 @@ type Monitoring struct {
 
 	// Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring
 	// is enabled.
-	State MonitoringState `locationName:"state" type:"string"`
+	State MonitoringState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -41275,7 +41275,7 @@ type MoveAddressToVpcOutput struct {
 	AllocationId *string `locationName:"allocationId" type:"string"`
 
 	// The status of the move of the IP address.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -41307,7 +41307,7 @@ type MovingAddressStatus struct {
 
 	// The status of the Elastic IP address that's being moved to the EC2-VPC platform,
 	// or restored to the EC2-Classic platform.
-	MoveStatus MoveStatus `locationName:"moveStatus" type:"string"`
+	MoveStatus MoveStatus `locationName:"moveStatus" type:"string" enum:"true"`
 
 	// The Elastic IP address.
 	PublicIp *string `locationName:"publicIp" type:"string"`
@@ -41402,7 +41402,7 @@ type NatGateway struct {
 	//
 	//    * deleted: The NAT gateway has been terminated and is no longer processing
 	//    traffic.
-	State NatGatewayState `locationName:"state" type:"string"`
+	State NatGatewayState `locationName:"state" type:"string" enum:"true"`
 
 	// The ID of the subnet in which the NAT gateway is located.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -41681,7 +41681,7 @@ type NetworkAclEntry struct {
 	Protocol *string `locationName:"protocol" type:"string"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule.
-	RuleAction RuleAction `locationName:"ruleAction" type:"string"`
+	RuleAction RuleAction `locationName:"ruleAction" type:"string" enum:"true"`
 
 	// The rule number for the entry. ACL entries are processed in ascending order
 	// by rule number.
@@ -41768,7 +41768,7 @@ type NetworkInterface struct {
 	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The type of interface.
-	InterfaceType NetworkInterfaceType `locationName:"interfaceType" type:"string"`
+	InterfaceType NetworkInterfaceType `locationName:"interfaceType" type:"string" enum:"true"`
 
 	// The IPv6 addresses associated with the network interface.
 	Ipv6Addresses []NetworkInterfaceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
@@ -41802,7 +41802,7 @@ type NetworkInterface struct {
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The status of the network interface.
-	Status NetworkInterfaceStatus `locationName:"status" type:"string"`
+	Status NetworkInterfaceStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The ID of the subnet.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -42029,7 +42029,7 @@ type NetworkInterfaceAttachment struct {
 	InstanceOwnerId *string `locationName:"instanceOwnerId" type:"string"`
 
 	// The attachment state.
-	Status AttachmentStatus `locationName:"status" type:"string"`
+	Status AttachmentStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -42161,7 +42161,7 @@ type NetworkInterfacePermission struct {
 	NetworkInterfacePermissionId *string `locationName:"networkInterfacePermissionId" type:"string"`
 
 	// The type of permission.
-	Permission InterfacePermissionType `locationName:"permission" type:"string"`
+	Permission InterfacePermissionType `locationName:"permission" type:"string" enum:"true"`
 
 	// Information about the state of the permission.
 	PermissionState *NetworkInterfacePermissionState `locationName:"permissionState" type:"structure"`
@@ -42219,7 +42219,7 @@ type NetworkInterfacePermissionState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of the permission.
-	State NetworkInterfacePermissionStateCode `locationName:"state" type:"string"`
+	State NetworkInterfacePermissionStateCode `locationName:"state" type:"string" enum:"true"`
 
 	// A status message, if applicable.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -42502,7 +42502,7 @@ type Placement struct {
 	// The tenancy of the instance (if the instance is running in a VPC). An instance
 	// with a tenancy of dedicated runs on single-tenant hardware. The host tenancy
 	// is not supported for the ImportInstance command.
-	Tenancy Tenancy `locationName:"tenancy" type:"string"`
+	Tenancy Tenancy `locationName:"tenancy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -42560,10 +42560,10 @@ type PlacementGroup struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// The state of the placement group.
-	State PlacementGroupState `locationName:"state" type:"string"`
+	State PlacementGroupState `locationName:"state" type:"string" enum:"true"`
 
 	// The placement strategy.
-	Strategy PlacementStrategy `locationName:"strategy" type:"string"`
+	Strategy PlacementStrategy `locationName:"strategy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -42728,7 +42728,7 @@ type PriceSchedule struct {
 
 	// The currency for transacting the Reserved Instance resale. At this time,
 	// the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The fixed price for the term.
 	Price *float64 `locationName:"price" type:"double"`
@@ -42779,7 +42779,7 @@ type PriceScheduleSpecification struct {
 
 	// The currency for transacting the Reserved Instance resale. At this time,
 	// the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The fixed price for the term.
 	Price *float64 `locationName:"price" type:"double"`
@@ -42911,7 +42911,7 @@ type ProductCode struct {
 	ProductCodeId *string `locationName:"productCode" type:"string"`
 
 	// The type of product code.
-	ProductCodeType ProductCodeValues `locationName:"type" type:"string"`
+	ProductCodeType ProductCodeValues `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -43041,7 +43041,7 @@ type Purchase struct {
 
 	// The currency in which the UpfrontPrice and HourlyPrice amounts are specified.
 	// At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The duration of the reservation's term in seconds.
 	Duration *int64 `locationName:"duration" type:"integer"`
@@ -43060,7 +43060,7 @@ type Purchase struct {
 	InstanceFamily *string `locationName:"instanceFamily" type:"string"`
 
 	// The payment option for the reservation.
-	PaymentOption PaymentOption `locationName:"paymentOption" type:"string"`
+	PaymentOption PaymentOption `locationName:"paymentOption" type:"string" enum:"true"`
 
 	// The upfront price of the reservation.
 	UpfrontPrice *string `locationName:"upfrontPrice" type:"string"`
@@ -43135,7 +43135,7 @@ type PurchaseHostReservationInput struct {
 
 	// The currency in which the totalUpfrontPrice, LimitPrice, and totalHourlyPrice
 	// amounts are specified. At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `type:"string"`
+	CurrencyCode CurrencyCodeValues `type:"string" enum:"true"`
 
 	// The ID/s of the Dedicated Host/s that the reservation will be associated
 	// with.
@@ -43227,7 +43227,7 @@ type PurchaseHostReservationOutput struct {
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts
 	// are specified. At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// Describes the details of the purchase.
 	Purchase []Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
@@ -43615,7 +43615,7 @@ type RecurringCharge struct {
 	Amount *float64 `locationName:"amount" type:"double"`
 
 	// The frequency of the recurring charge.
-	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string"`
+	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -43683,7 +43683,7 @@ type RegisterImageInput struct {
 	//
 	// Default: For Amazon EBS-backed AMIs, i386. For instance store-backed AMIs,
 	// the architecture specified in the manifest file.
-	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string" enum:"true"`
 
 	// The billing product codes. Your account must be authorized to specify billing
 	// product codes. Otherwise, you can use the AWS Marketplace to bill for the
@@ -44312,7 +44312,7 @@ type ReplaceNetworkAclEntryInput struct {
 	// Indicates whether to allow or deny the traffic that matches the rule.
 	//
 	// RuleAction is a required field
-	RuleAction RuleAction `locationName:"ruleAction" type:"string" required:"true"`
+	RuleAction RuleAction `locationName:"ruleAction" type:"string" required:"true" enum:"true"`
 
 	// The rule number of the entry to replace.
 	//
@@ -44723,7 +44723,7 @@ type ReportInstanceStatusInput struct {
 	// The status of all instances listed.
 	//
 	// Status is a required field
-	Status ReportStatusType `locationName:"status" type:"string" required:"true"`
+	Status ReportStatusType `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -44955,7 +44955,7 @@ type RequestSpotInstancesInput struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// Indicates whether a Spot instance stops or terminates when it is interrupted.
-	InstanceInterruptionBehavior InstanceInterruptionBehavior `type:"string"`
+	InstanceInterruptionBehavior InstanceInterruptionBehavior `type:"string" enum:"true"`
 
 	// The instance launch group. Launch groups are Spot instances that launch together
 	// and terminate together.
@@ -44975,7 +44975,7 @@ type RequestSpotInstancesInput struct {
 	// The Spot instance request type.
 	//
 	// Default: one-time
-	Type SpotInstanceType `locationName:"type" type:"string"`
+	Type SpotInstanceType `locationName:"type" type:"string" enum:"true"`
 
 	// The start date of the request. If this is a one-time request, the request
 	// becomes active at this date and time and remains active until all instances
@@ -45151,7 +45151,7 @@ type RequestSpotLaunchSpecification struct {
 	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// The ID of the kernel.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -45374,7 +45374,7 @@ type ReservedInstanceLimitPrice struct {
 
 	// The currency in which the limitPrice amount is specified. At this time, the
 	// only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -45443,7 +45443,7 @@ type ReservedInstances struct {
 
 	// The currency of the Reserved Instance. It's specified using ISO 4217 standard
 	// currency codes. At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The duration of the Reserved Instance, in seconds.
 	Duration *int64 `locationName:"duration" type:"long"`
@@ -45458,19 +45458,19 @@ type ReservedInstances struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The tenancy of the instance.
-	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string" enum:"true"`
 
 	// The instance type on which the Reserved Instance can be used.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// The offering class of the Reserved Instance.
-	OfferingClass OfferingClassType `locationName:"offeringClass" type:"string"`
+	OfferingClass OfferingClassType `locationName:"offeringClass" type:"string" enum:"true"`
 
 	// The Reserved Instance offering type.
-	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string" enum:"true"`
 
 	// The Reserved Instance product platform description.
-	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string" enum:"true"`
 
 	// The recurring charge tag assigned to the resource.
 	RecurringCharges []RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
@@ -45479,13 +45479,13 @@ type ReservedInstances struct {
 	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	// The scope of the Reserved Instance.
-	Scope Scope `locationName:"scope" type:"string"`
+	Scope Scope `locationName:"scope" type:"string" enum:"true"`
 
 	// The date and time the Reserved Instance started.
 	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the Reserved Instance purchase.
-	State ReservedInstanceState `locationName:"state" type:"string"`
+	State ReservedInstanceState `locationName:"state" type:"string" enum:"true"`
 
 	// Any tags assigned to the resource.
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -45624,7 +45624,7 @@ type ReservedInstancesConfiguration struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The instance type for the modified Reserved Instances.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// The network platform of the modified Reserved Instances, which is either
 	// EC2-Classic or EC2-VPC.
@@ -45632,7 +45632,7 @@ type ReservedInstancesConfiguration struct {
 
 	// Whether the Reserved Instance is applied to instances in a region or instances
 	// in a specific Availability Zone.
-	Scope Scope `locationName:"scope" type:"string"`
+	Scope Scope `locationName:"scope" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -45725,7 +45725,7 @@ type ReservedInstancesListing struct {
 	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string"`
 
 	// The status of the Reserved Instance listing.
-	Status ListingStatus `locationName:"status" type:"string"`
+	Status ListingStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The reason for the current status of the Reserved Instance listing. The response
 	// can be blank.
@@ -45954,7 +45954,7 @@ type ReservedInstancesOffering struct {
 	// The currency of the Reserved Instance offering you are purchasing. It's specified
 	// using ISO 4217 standard currency codes. At this time, the only supported
 	// currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
 
 	// The duration of the Reserved Instance, in seconds.
 	Duration *int64 `locationName:"duration" type:"long"`
@@ -45963,10 +45963,10 @@ type ReservedInstancesOffering struct {
 	FixedPrice *float64 `locationName:"fixedPrice" type:"float"`
 
 	// The tenancy of the instance.
-	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string" enum:"true"`
 
 	// The instance type on which the Reserved Instance can be used.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// Indicates whether the offering is available through the Reserved Instance
 	// Marketplace (resale) or AWS. If it's a Reserved Instance Marketplace offering,
@@ -45976,16 +45976,16 @@ type ReservedInstancesOffering struct {
 	// If convertible it can be exchanged for Reserved Instances of the same or
 	// higher monetary value, with different configurations. If standard, it is
 	// not possible to perform an exchange.
-	OfferingClass OfferingClassType `locationName:"offeringClass" type:"string"`
+	OfferingClass OfferingClassType `locationName:"offeringClass" type:"string" enum:"true"`
 
 	// The Reserved Instance offering type.
-	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string" enum:"true"`
 
 	// The pricing details of the Reserved Instance offering.
 	PricingDetails []PricingDetail `locationName:"pricingDetailsSet" locationNameList:"item" type:"list"`
 
 	// The Reserved Instance product platform description.
-	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string" enum:"true"`
 
 	// The recurring charge tag assigned to the resource.
 	RecurringCharges []RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
@@ -45996,7 +45996,7 @@ type ReservedInstancesOffering struct {
 
 	// Whether the Reserved Instance is applied to instances in a region or an Availability
 	// Zone.
-	Scope Scope `locationName:"scope" type:"string"`
+	Scope Scope `locationName:"scope" type:"string" enum:"true"`
 
 	// The usage price of the Reserved Instance, per hour.
 	UsagePrice *float64 `locationName:"usagePrice" type:"float"`
@@ -46107,7 +46107,7 @@ type ResetFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute.
-	Attribute ResetFpgaImageAttributeName `type:"string"`
+	Attribute ResetFpgaImageAttributeName `type:"string" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -46196,7 +46196,7 @@ type ResetImageAttributeInput struct {
 	// attribute).
 	//
 	// Attribute is a required field
-	Attribute ResetImageAttributeName `type:"string" required:"true"`
+	Attribute ResetImageAttributeName `type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -46281,7 +46281,7 @@ type ResetInstanceAttributeInput struct {
 	// To change an instance attribute, use ModifyInstanceAttribute.
 	//
 	// Attribute is a required field
-	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true"`
+	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -46441,7 +46441,7 @@ type ResetSnapshotAttributeInput struct {
 	// volumes can be reset.
 	//
 	// Attribute is a required field
-	Attribute SnapshotAttributeName `type:"string" required:"true"`
+	Attribute SnapshotAttributeName `type:"string" required:"true" enum:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -46577,7 +46577,7 @@ type RestoreAddressToClassicOutput struct {
 	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	// The move status for the IP address.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -46919,12 +46919,12 @@ type Route struct {
 	//    * CreateRoute - The route was manually added to the route table.
 	//
 	//    * EnableVgwRoutePropagation - The route was propagated by route propagation.
-	Origin RouteOrigin `locationName:"origin" type:"string"`
+	Origin RouteOrigin `locationName:"origin" type:"string" enum:"true"`
 
 	// The state of the route. The blackhole state indicates that the route's target
 	// isn't available (for example, the specified gateway isn't attached to the
 	// VPC, or the specified NAT instance has been terminated).
-	State RouteState `locationName:"state" type:"string"`
+	State RouteState `locationName:"state" type:"string" enum:"true"`
 
 	// The ID of the VPC peering connection.
 	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
@@ -47196,13 +47196,13 @@ type RunInstancesInput struct {
 	// from the instance (using the operating system command for system shutdown).
 	//
 	// Default: stop
-	InstanceInitiatedShutdownBehavior ShutdownBehavior `locationName:"instanceInitiatedShutdownBehavior" type:"string"`
+	InstanceInitiatedShutdownBehavior ShutdownBehavior `locationName:"instanceInitiatedShutdownBehavior" type:"string" enum:"true"`
 
 	// The instance type. For more information, see Instance Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// Default: m1.small
-	InstanceType InstanceType `type:"string"`
+	InstanceType InstanceType `type:"string" enum:"true"`
 
 	// [EC2-VPC] A number of IPv6 addresses to associate with the primary network
 	// interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
@@ -49339,7 +49339,7 @@ type SpotDatafeedSubscription struct {
 	Prefix *string `locationName:"prefix" type:"string"`
 
 	// The state of the Spot instance data feed subscription.
-	State DatafeedSubscriptionState `locationName:"state" type:"string"`
+	State DatafeedSubscriptionState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -49409,7 +49409,7 @@ type SpotFleetLaunchSpecification struct {
 	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type. Note that T2 and HS1 instance types are not supported.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// The ID of the kernel.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -49635,7 +49635,7 @@ type SpotFleetRequestConfig struct {
 	// the size of the fleet is equal to or greater than its target capacity, the
 	// status is fulfilled. If the size of the fleet is decreased, the status is
 	// pending_termination while Spot instances are terminating.
-	ActivityStatus ActivityStatus `locationName:"activityStatus" type:"string"`
+	ActivityStatus ActivityStatus `locationName:"activityStatus" type:"string" enum:"true"`
 
 	// The creation date and time of the request.
 	//
@@ -49655,7 +49655,7 @@ type SpotFleetRequestConfig struct {
 	// The state of the Spot fleet request.
 	//
 	// SpotFleetRequestState is a required field
-	SpotFleetRequestState BatchState `locationName:"spotFleetRequestState" type:"string" required:"true"`
+	SpotFleetRequestState BatchState `locationName:"spotFleetRequestState" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -49705,7 +49705,7 @@ type SpotFleetRequestConfigData struct {
 
 	// Indicates how to allocate the target capacity across the Spot pools specified
 	// by the Spot fleet request. The default is lowestPrice.
-	AllocationStrategy AllocationStrategy `locationName:"allocationStrategy" type:"string"`
+	AllocationStrategy AllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
 	// A unique, case-sensitive identifier you provide to ensure idempotency of
 	// your listings. This helps avoid duplicate listings. For more information,
@@ -49715,7 +49715,7 @@ type SpotFleetRequestConfigData struct {
 	// Indicates whether running Spot instances should be terminated if the target
 	// capacity of the Spot fleet request is decreased below the current size of
 	// the Spot fleet.
-	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string"`
+	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"true"`
 
 	// The number of units fulfilled by this request compared to the set target
 	// capacity.
@@ -49729,7 +49729,7 @@ type SpotFleetRequestConfigData struct {
 	IamFleetRole *string `locationName:"iamFleetRole" type:"string" required:"true"`
 
 	// Indicates whether a Spot instance stops or terminates when it is interrupted.
-	InstanceInterruptionBehavior InstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string"`
+	InstanceInterruptionBehavior InstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string" enum:"true"`
 
 	// Information about the launch specifications for the Spot fleet request.
 	//
@@ -49763,7 +49763,7 @@ type SpotFleetRequestConfigData struct {
 	// to maintain a certain target capacity, fleet will place the required bids
 	// to meet this target capacity. It will also automatically replenish any interrupted
 	// instances. Default: maintain.
-	Type FleetType `locationName:"type" type:"string"`
+	Type FleetType `locationName:"type" type:"string" enum:"true"`
 
 	// The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	// The default is to start fulfilling the request immediately.
@@ -49912,7 +49912,7 @@ type SpotFleetTagSpecification struct {
 
 	// The type of resource. Currently, the only resource type that is supported
 	// is instance.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tags.
 	Tags []Tag `locationName:"tag" locationNameList:"item" type:"list"`
@@ -49969,7 +49969,7 @@ type SpotInstanceRequest struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Indicates whether a Spot instance stops or terminates when it is interrupted.
-	InstanceInterruptionBehavior InstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string"`
+	InstanceInterruptionBehavior InstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string" enum:"true"`
 
 	// The instance launch group. Launch groups are Spot instances that launch together
 	// and terminate together.
@@ -49982,7 +49982,7 @@ type SpotInstanceRequest struct {
 	LaunchedAvailabilityZone *string `locationName:"launchedAvailabilityZone" type:"string"`
 
 	// The product description associated with the Spot instance.
-	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string" enum:"true"`
 
 	// The ID of the Spot instance request.
 	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
@@ -49995,7 +49995,7 @@ type SpotInstanceRequest struct {
 	// you track your Spot instance requests. For more information, see Spot Bid
 	// Status (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	State SpotInstanceState `locationName:"state" type:"string"`
+	State SpotInstanceState `locationName:"state" type:"string" enum:"true"`
 
 	// The status code and status message describing the Spot instance request.
 	Status *SpotInstanceStatus `locationName:"status" type:"structure"`
@@ -50004,7 +50004,7 @@ type SpotInstanceRequest struct {
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The Spot instance request type.
-	Type SpotInstanceType `locationName:"type" type:"string"`
+	Type SpotInstanceType `locationName:"type" type:"string" enum:"true"`
 
 	// The start date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	// The request becomes active at this date and time.
@@ -50237,7 +50237,7 @@ type SpotPlacement struct {
 	// The tenancy of the instance (if the instance is running in a VPC). An instance
 	// with a tenancy of dedicated runs on single-tenant hardware. The host tenancy
 	// is not supported for Spot instances.
-	Tenancy Tenancy `locationName:"tenancy" type:"string"`
+	Tenancy Tenancy `locationName:"tenancy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -50278,10 +50278,10 @@ type SpotPrice struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The instance type. Note that T2 and HS1 instance types are not supported.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// A general description of the AMI.
-	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string" enum:"true"`
 
 	// The maximum price (bid) that you are willing to pay for a Spot instance.
 	SpotPrice *string `locationName:"spotPrice" type:"string"`
@@ -50808,7 +50808,7 @@ type Subnet struct {
 	MapPublicIpOnLaunch *bool `locationName:"mapPublicIpOnLaunch" type:"boolean"`
 
 	// The current state of the subnet.
-	State SubnetState `locationName:"state" type:"string"`
+	State SubnetState `locationName:"state" type:"string" enum:"true"`
 
 	// The ID of the subnet.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -50902,7 +50902,7 @@ type SubnetCidrBlockState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of a CIDR block.
-	State SubnetCidrBlockStateCode `locationName:"state" type:"string"`
+	State SubnetCidrBlockStateCode `locationName:"state" type:"string" enum:"true"`
 
 	// A message about the status of the CIDR block, if applicable.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -51025,7 +51025,7 @@ type TagDescription struct {
 	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The resource type.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tag value.
 	Value *string `locationName:"value" type:"string"`
@@ -51072,7 +51072,7 @@ type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are instance and volume.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tags to apply to the resource.
 	Tags []Tag `locationName:"Tag" locationNameList:"item" type:"list"`
@@ -52015,7 +52015,7 @@ type VgwTelemetry struct {
 	OutsideIpAddress *string `locationName:"outsideIpAddress" type:"string"`
 
 	// The status of the VPN tunnel.
-	Status TelemetryStatus `locationName:"status" type:"string"`
+	Status TelemetryStatus `locationName:"status" type:"string" enum:"true"`
 
 	// If an error occurs, a description of the error.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -52114,7 +52114,7 @@ type VolumeModification struct {
 
 	// Current state of modification. Modification state is null for unmodified
 	// volumes.
-	ModificationState VolumeModificationState `locationName:"modificationState" type:"string"`
+	ModificationState VolumeModificationState `locationName:"modificationState" type:"string" enum:"true"`
 
 	// Original IOPS rate of the volume being modified.
 	OriginalIops *int64 `locationName:"originalIops" type:"integer"`
@@ -52123,7 +52123,7 @@ type VolumeModification struct {
 	OriginalSize *int64 `locationName:"originalSize" type:"integer"`
 
 	// Original EBS volume type of the volume being modified.
-	OriginalVolumeType VolumeType `locationName:"originalVolumeType" type:"string"`
+	OriginalVolumeType VolumeType `locationName:"originalVolumeType" type:"string" enum:"true"`
 
 	// Modification progress from 0 to 100%.
 	Progress *int64 `locationName:"progress" type:"long"`
@@ -52141,7 +52141,7 @@ type VolumeModification struct {
 	TargetSize *int64 `locationName:"targetSize" type:"integer"`
 
 	// Target EBS volume type of the volume being modified.
-	TargetVolumeType VolumeType `locationName:"targetVolumeType" type:"string"`
+	TargetVolumeType VolumeType `locationName:"targetVolumeType" type:"string" enum:"true"`
 
 	// ID of the volume being modified.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -52287,7 +52287,7 @@ type VolumeStatusDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the volume status.
-	Name VolumeStatusName `locationName:"name" type:"string"`
+	Name VolumeStatusName `locationName:"name" type:"string" enum:"true"`
 
 	// The intended status of the volume status.
 	Status *string `locationName:"status" type:"string"`
@@ -52385,7 +52385,7 @@ type VolumeStatusInfo struct {
 	Details []VolumeStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status of the volume.
-	Status VolumeStatusInfoStatus `locationName:"status" type:"string"`
+	Status VolumeStatusInfoStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -52487,7 +52487,7 @@ type Vpc struct {
 	DhcpOptionsId *string `locationName:"dhcpOptionsId" type:"string"`
 
 	// The allowed tenancy of instances launched into the VPC.
-	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string" enum:"true"`
 
 	// Information about the IPv6 CIDR blocks associated with the VPC.
 	Ipv6CidrBlockAssociationSet []VpcIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
@@ -52496,7 +52496,7 @@ type Vpc struct {
 	IsDefault *bool `locationName:"isDefault" type:"boolean"`
 
 	// The current state of the VPC.
-	State VpcState `locationName:"state" type:"string"`
+	State VpcState `locationName:"state" type:"string" enum:"true"`
 
 	// Any tags assigned to the VPC.
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -52575,7 +52575,7 @@ type VpcAttachment struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the attachment.
-	State AttachmentStatus `locationName:"state" type:"string"`
+	State AttachmentStatus `locationName:"state" type:"string" enum:"true"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -52652,7 +52652,7 @@ type VpcCidrBlockState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of the CIDR block.
-	State VpcCidrBlockStateCode `locationName:"state" type:"string"`
+	State VpcCidrBlockStateCode `locationName:"state" type:"string" enum:"true"`
 
 	// A message about the status of the CIDR block, if applicable.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -52741,7 +52741,7 @@ type VpcEndpoint struct {
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
 	// The state of the VPC endpoint.
-	State State `locationName:"state" type:"string"`
+	State State `locationName:"state" type:"string" enum:"true"`
 
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string `locationName:"vpcEndpointId" type:"string"`
@@ -52969,7 +52969,7 @@ type VpcPeeringConnectionStateReason struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the VPC peering connection.
-	Code VpcPeeringConnectionStateReasonCode `locationName:"code" type:"string"`
+	Code VpcPeeringConnectionStateReasonCode `locationName:"code" type:"string" enum:"true"`
 
 	// A message that provides more information about the status, if applicable.
 	Message *string `locationName:"message" type:"string"`
@@ -53095,13 +53095,13 @@ type VpnConnection struct {
 	Routes []VpnStaticRoute `locationName:"routes" locationNameList:"item" type:"list"`
 
 	// The current state of the VPN connection.
-	State VpnState `locationName:"state" type:"string"`
+	State VpnState `locationName:"state" type:"string" enum:"true"`
 
 	// Any tags assigned to the VPN connection.
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection.
-	Type GatewayType `locationName:"type" type:"string"`
+	Type GatewayType `locationName:"type" type:"string" enum:"true"`
 
 	// Information about the VPN tunnel.
 	VgwTelemetry []VgwTelemetry `locationName:"vgwTelemetry" locationNameList:"item" type:"list"`
@@ -53266,13 +53266,13 @@ type VpnGateway struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The current state of the virtual private gateway.
-	State VpnState `locationName:"state" type:"string"`
+	State VpnState `locationName:"state" type:"string" enum:"true"`
 
 	// Any tags assigned to the virtual private gateway.
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection the virtual private gateway supports.
-	Type GatewayType `locationName:"type" type:"string"`
+	Type GatewayType `locationName:"type" type:"string" enum:"true"`
 
 	// Any VPCs attached to the virtual private gateway.
 	VpcAttachments []VpcAttachment `locationName:"attachments" locationNameList:"item" type:"list"`
@@ -53342,10 +53342,10 @@ type VpnStaticRoute struct {
 	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
 
 	// Indicates how the routes were provided.
-	Source VpnStaticRouteSource `locationName:"source" type:"string"`
+	Source VpnStaticRouteSource `locationName:"source" type:"string" enum:"true"`
 
 	// The current state of the static route.
-	State VpnState `locationName:"state" type:"string"`
+	State VpnState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation

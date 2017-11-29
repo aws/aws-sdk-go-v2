@@ -379,7 +379,7 @@ type DescribeVoicesInput struct {
 	// The language identification tag (ISO 639 code for the language name-ISO 3166
 	// country code) for filtering the list of voices returned. If you don't specify
 	// this optional parameter, all available voices are returned.
-	LanguageCode LanguageCode `location:"querystring" locationName:"LanguageCode" type:"string"`
+	LanguageCode LanguageCode `location:"querystring" locationName:"LanguageCode" type:"string" enum:"true"`
 
 	// An opaque pagination token returned from the previous DescribeVoices operation.
 	// If present, this indicates where to continue the listing.
@@ -565,7 +565,7 @@ type LexiconAttributes struct {
 	// Language code that the lexicon applies to. A lexicon with a language code
 	// such as "en" would be applied to all English languages (en-GB, en-US, en-AUS,
 	// en-WLS, and so on.
-	LanguageCode LanguageCode `type:"string"`
+	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// Date lexicon was last modified (a timestamp value).
 	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -805,7 +805,7 @@ type SynthesizeSpeechInput struct {
 	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
 	//
 	// OutputFormat is a required field
-	OutputFormat OutputFormat `type:"string" required:"true"`
+	OutputFormat OutputFormat `type:"string" required:"true" enum:"true"`
 
 	// The audio frequency specified in Hz.
 	//
@@ -826,14 +826,14 @@ type SynthesizeSpeechInput struct {
 
 	// Specifies whether the input text is plain text or SSML. The default value
 	// is plain text. For more information, see Using SSML (http://docs.aws.amazon.com/polly/latest/dg/ssml.html).
-	TextType TextType `type:"string"`
+	TextType TextType `type:"string" enum:"true"`
 
 	// Voice ID to use for the synthesis. You can get a list of available voice
 	// IDs by calling the DescribeVoices (http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
 	// operation.
 	//
 	// VoiceId is a required field
-	VoiceId VoiceId `type:"string" required:"true"`
+	VoiceId VoiceId `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -970,14 +970,14 @@ type Voice struct {
 	_ struct{} `type:"structure"`
 
 	// Gender of the voice.
-	Gender Gender `type:"string"`
+	Gender Gender `type:"string" enum:"true"`
 
 	// Amazon Polly assigned voice ID. This is the ID that you specify when calling
 	// the SynthesizeSpeech operation.
-	Id VoiceId `type:"string"`
+	Id VoiceId `type:"string" enum:"true"`
 
 	// Language code of the voice.
-	LanguageCode LanguageCode `type:"string"`
+	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// Human readable name of the language in English.
 	LanguageName *string `type:"string"`

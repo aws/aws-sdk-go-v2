@@ -2584,7 +2584,7 @@ type BGPPeer struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -2615,14 +2615,14 @@ type BGPPeer struct {
 	//    * Deleting: The BGP peer is in the process of being deleted.
 	//
 	//    * Deleted: The BGP peer has been deleted and cannot be established.
-	BgpPeerState BGPPeerState `locationName:"bgpPeerState" type:"string"`
+	BgpPeerState BGPPeerState `locationName:"bgpPeerState" type:"string" enum:"true"`
 
 	// The Up/Down state of the BGP peer.
 	//
 	//    * Up: The BGP peer is established.
 	//
 	//    * Down: The BGP peer is down.
-	BgpStatus BGPStatus `locationName:"bgpStatus" type:"string"`
+	BgpStatus BGPStatus `locationName:"bgpStatus" type:"string" enum:"true"`
 
 	// IP address assigned to the customer interface.
 	//
@@ -2755,7 +2755,7 @@ type ConfirmConnectionOutput struct {
 	//
 	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
 	//    'Rejected' state if it is deleted by the end customer.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string"`
+	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2873,7 +2873,7 @@ type ConfirmPrivateVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2970,7 +2970,7 @@ type ConfirmPublicVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3297,7 +3297,7 @@ type CreateInterconnectOutput struct {
 	//    * Deleting: The interconnect is in the process of being deleted.
 	//
 	//    * Deleted: The interconnect has been deleted.
-	InterconnectState InterconnectState `locationName:"interconnectState" type:"string"`
+	InterconnectState InterconnectState `locationName:"interconnectState" type:"string" enum:"true"`
 
 	// The ID of the LAG.
 	//
@@ -3645,7 +3645,7 @@ type CreatePublicVirtualInterfaceOutput struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -3741,7 +3741,7 @@ type CreatePublicVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 
 	// The type of virtual interface.
 	//
@@ -4054,7 +4054,7 @@ type DeleteInterconnectOutput struct {
 	//    * Deleting: The interconnect is in the process of being deleted.
 	//
 	//    * Deleted: The interconnect has been deleted.
-	InterconnectState InterconnectState `locationName:"interconnectState" type:"string"`
+	InterconnectState InterconnectState `locationName:"interconnectState" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4196,7 +4196,7 @@ type DeleteVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4234,7 +4234,7 @@ type DescribeConnectionLoaInput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 
 	// The name of the APN partner or service provider who establishes connectivity
 	// on your behalf. If you supply this parameter, the LOA-CFA lists the provider
@@ -4473,7 +4473,7 @@ type DescribeInterconnectLoaInput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 
 	// The name of the service provider who establishes connectivity on your behalf.
 	// If you supply this parameter, the LOA-CFA lists the provider name alongside
@@ -4676,7 +4676,7 @@ type DescribeLoaInput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 
 	// The name of the service provider who establishes connectivity on your behalf.
 	// If you supply this parameter, the LOA-CFA lists the provider name alongside
@@ -4743,7 +4743,7 @@ type DescribeLoaOutput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5103,7 +5103,7 @@ type DisassociateConnectionFromLagOutput struct {
 	//
 	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
 	//    'Rejected' state if it is deleted by the end customer.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string"`
+	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
 
 	// The ID of the LAG.
 	//
@@ -5267,7 +5267,7 @@ type NewBGPPeer struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -5340,7 +5340,7 @@ type NewPrivateVirtualInterface struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -5482,7 +5482,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -5605,7 +5605,7 @@ type NewPublicVirtualInterface struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -5739,7 +5739,7 @@ type NewPublicVirtualInterfaceAllocation struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -6254,7 +6254,7 @@ type UpdateLagOutput struct {
 	//    * Deleting: The LAG is in the process of being deleted.
 	//
 	//    * Deleted: The LAG has been deleted.
-	LagState LagState `locationName:"lagState" type:"string"`
+	LagState LagState `locationName:"lagState" type:"string" enum:"true"`
 
 	// Where the connection is located.
 	//

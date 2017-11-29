@@ -992,7 +992,7 @@ type Backup struct {
 	BackupId *string `type:"string"`
 
 	// The backup type. Valid values are automated or manual.
-	BackupType BackupType `type:"string"`
+	BackupType BackupType `type:"string" enum:"true"`
 
 	// The time stamp when the backup was created in the database. Example: 2016-07-29T13:38:47.520Z
 	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1050,7 +1050,7 @@ type Backup struct {
 	ServiceRoleArn *string `type:"string"`
 
 	// The status of a backup while in progress.
-	Status BackupStatus `type:"string"`
+	Status BackupStatus `type:"string" enum:"true"`
 
 	// An informational message about backup status.
 	StatusDescription *string `type:"string"`
@@ -2066,7 +2066,7 @@ type DescribeNodeAssociationStatusOutput struct {
 	//    * FAILED: The association or disassociation failed.
 	//
 	//    * IN_PROGRESS: The association or disassociation is still in progress.
-	NodeAssociationStatus NodeAssociationStatus `type:"string"`
+	NodeAssociationStatus NodeAssociationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2489,7 +2489,7 @@ type Server struct {
 	KeyPair *string `type:"string"`
 
 	// The status of the most recent server maintenance run. Shows SUCCESS or FAILED.
-	MaintenanceStatus MaintenanceStatus `type:"string"`
+	MaintenanceStatus MaintenanceStatus `type:"string" enum:"true"`
 
 	// The preferred backup period specified for the server.
 	PreferredBackupWindow *string `type:"string"`
@@ -2514,7 +2514,7 @@ type Server struct {
 	// The server's status. This field displays the states of actions in progress,
 	// such as creating, running, or backing up the server, as well as the server's
 	// health state.
-	Status ServerStatus `type:"string"`
+	Status ServerStatus `type:"string" enum:"true"`
 
 	// Depending on the server status, this field has either a human-readable message
 	// (such as a create or backup error), or an escaped block of JSON (used for

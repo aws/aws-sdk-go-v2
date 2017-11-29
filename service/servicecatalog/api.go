@@ -3168,7 +3168,7 @@ type AccessLevelFilter struct {
 	// Role allows results based on the federated role of the specified user.
 	//
 	// User allows results limited to the specified user.
-	Key AccessLevelFilterKey `type:"string"`
+	Key AccessLevelFilterKey `type:"string" enum:"true"`
 
 	// Specifies the user to which the access level applies. A value of Self is
 	// currently supported.
@@ -3223,7 +3223,7 @@ type AssociatePrincipalWithPortfolioInput struct {
 	// The principal type. Must be IAM
 	//
 	// PrincipalType is a required field
-	PrincipalType PrincipalType `type:"string" required:"true"`
+	PrincipalType PrincipalType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3865,7 +3865,7 @@ type CreateConstraintOutput struct {
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4177,7 +4177,7 @@ type CreateProductInput struct {
 	// The type of the product to create.
 	//
 	// ProductType is a required field
-	ProductType ProductType `type:"string" required:"true"`
+	ProductType ProductType `type:"string" required:"true" enum:"true"`
 
 	// Parameters for the provisioning artifact.
 	//
@@ -4474,7 +4474,7 @@ type CreateProvisioningArtifactOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5058,7 +5058,7 @@ type DescribeConstraintOutput struct {
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5152,7 +5152,7 @@ type DescribeCopyProductStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the copy product operation.
-	CopyProductStatus CopyProductStatus `type:"string"`
+	CopyProductStatus CopyProductStatus `type:"string" enum:"true"`
 
 	// The status message.
 	StatusDetail *string `type:"string"`
@@ -5761,7 +5761,7 @@ type DescribeProvisioningArtifactOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7759,7 +7759,7 @@ type Principal struct {
 	PrincipalARN *string `min:"1" type:"string"`
 
 	// The principal type. Must be IAM
-	PrincipalType PrincipalType `type:"string"`
+	PrincipalType PrincipalType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7840,7 +7840,7 @@ type ProductViewDetail struct {
 	// CREATING - Creation of product started, not ready for use.
 	//
 	// FAILED - Action on product failed.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7921,7 +7921,7 @@ type ProductViewSummary struct {
 	// The product type. Contact the product administrator for the significance
 	// of this value. If this value is MARKETPLACE, the product was created by AWS
 	// Marketplace.
-	Type ProductType `type:"string"`
+	Type ProductType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8241,7 +8241,7 @@ type ProvisionedProductDetail struct {
 	// ERROR - Something unexpected happened such that the provisioned product exists
 	// but the stack is not running. For example, CloudFormation received an invalid
 	// parameter value and could not launch the stack.
-	Status ProvisionedProductStatus `type:"string"`
+	Status ProvisionedProductStatus `type:"string" enum:"true"`
 
 	// The current status message of the ProvisionedProduct.
 	StatusMessage *string `type:"string"`
@@ -8391,7 +8391,7 @@ type ProvisioningArtifactDetail struct {
 	// MARKETPLACE_AMI - AMI products.
 	//
 	// MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
-	Type ProvisioningArtifactType `type:"string"`
+	Type ProvisioningArtifactType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8531,7 +8531,7 @@ type ProvisioningArtifactProperties struct {
 	// MARKETPLACE_AMI - AMI products.
 	//
 	// MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
-	Type ProvisioningArtifactType `type:"string"`
+	Type ProvisioningArtifactType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8747,7 +8747,7 @@ type RecordDetail struct {
 	//
 	// FAILED - The requested operation has completed but has failed. Investigate
 	// using the error messages returned.
-	Status RecordStatus `type:"string"`
+	Status RecordStatus `type:"string" enum:"true"`
 
 	// The time when the record for the ProvisionedProduct object was last updated.
 	UpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -9214,13 +9214,13 @@ type SearchProductsAsAdminInput struct {
 	PortfolioId *string `min:"1" type:"string"`
 
 	// Access level of the source of the product.
-	ProductSource ProductSource `type:"string"`
+	ProductSource ProductSource `type:"string" enum:"true"`
 
 	// The sort field specifier. If no value is specified, results are not sorted.
-	SortBy ProductViewSortBy `type:"string"`
+	SortBy ProductViewSortBy `type:"string" enum:"true"`
 
 	// The sort order specifier. If no value is specified, results are not sorted.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9356,10 +9356,10 @@ type SearchProductsInput struct {
 	PageToken *string `type:"string"`
 
 	// The sort field specifier. If no value is specified, results are not sorted.
-	SortBy ProductViewSortBy `type:"string"`
+	SortBy ProductViewSortBy `type:"string" enum:"true"`
 
 	// The sort order specifier. If no value is specified, results are not sorted.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9802,7 +9802,7 @@ type UpdateConstraintOutput struct {
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10434,7 +10434,7 @@ type UpdateProvisioningArtifactOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 }
 
 // String returns the string representation

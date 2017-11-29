@@ -974,7 +974,7 @@ type CognitoStreams struct {
 	//
 	// DISABLED - Streaming of updates to identity pool is disabled. Bulk publish
 	// will also fail if StreamingStatus is DISABLED.
-	StreamingStatus StreamingStatus `type:"string"`
+	StreamingStatus StreamingStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1557,7 +1557,7 @@ type GetBulkPublishDetailsOutput struct {
 	//
 	// FAILED - Some portion of the data has failed to publish, check FailureMessage
 	// for the cause.
-	BulkPublishStatus BulkPublishStatus `type:"string"`
+	BulkPublishStatus BulkPublishStatus `type:"string" enum:"true"`
 
 	// If BulkPublishStatus is FAILED this field will contain the error message
 	// that caused the bulk publish to fail.
@@ -2443,7 +2443,7 @@ type RecordPatch struct {
 	// An operation, either replace or remove.
 	//
 	// Op is a required field
-	Op Operation `type:"string" required:"true"`
+	Op Operation `type:"string" required:"true" enum:"true"`
 
 	// Last known server sync count for this record. Set to 0 if unknown.
 	//
@@ -2538,7 +2538,7 @@ type RegisterDeviceInput struct {
 	// The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).
 	//
 	// Platform is a required field
-	Platform Platform `type:"string" required:"true"`
+	Platform Platform `type:"string" required:"true" enum:"true"`
 
 	// The push token.
 	//

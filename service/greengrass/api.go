@@ -3499,7 +3499,7 @@ type CreateDeploymentInput struct {
 
 	// Type of deployment. When used in CreateDeployment, only NewDeployment and
 	// Redeployment are valid.
-	DeploymentType DeploymentType `type:"string"`
+	DeploymentType DeploymentType `type:"string" enum:"true"`
 
 	// GroupId is a required field
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
@@ -5169,7 +5169,7 @@ type Deployment struct {
 	DeploymentId *string `type:"string"`
 
 	// The type of deployment.
-	DeploymentType DeploymentType `type:"string"`
+	DeploymentType DeploymentType `type:"string" enum:"true"`
 
 	// Arn of the group for this deployment.
 	GroupArn *string `type:"string"`
@@ -6014,7 +6014,7 @@ type GetDeploymentStatusOutput struct {
 	DeploymentStatus *string `type:"string"`
 
 	// The type of the deployment.
-	DeploymentType DeploymentType `type:"string"`
+	DeploymentType DeploymentType `type:"string" enum:"true"`
 
 	// The error Details
 	ErrorDetails []ErrorDetail `type:"list"`
@@ -8604,20 +8604,20 @@ type Logger struct {
 	_ struct{} `type:"structure"`
 
 	// The component that will be subject to logs
-	Component LoggerComponent `type:"string"`
+	Component LoggerComponent `type:"string" enum:"true"`
 
 	// Element Id for this entry in the list.
 	Id *string `type:"string"`
 
 	// The level of the logs
-	Level LoggerLevel `type:"string"`
+	Level LoggerLevel `type:"string" enum:"true"`
 
 	// Amount of hardware space, in KB, to use if file system is used for logging
 	// purposes.
 	Space *int64 `type:"integer"`
 
 	// The type which will be use for log output
-	Type LoggerType `type:"string"`
+	Type LoggerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation

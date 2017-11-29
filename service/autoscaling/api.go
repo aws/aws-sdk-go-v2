@@ -3210,7 +3210,7 @@ type Activity struct {
 	// The current status of the activity.
 	//
 	// StatusCode is a required field
-	StatusCode ScalingActivityStatusCode `type:"string" required:"true"`
+	StatusCode ScalingActivityStatusCode `type:"string" required:"true" enum:"true"`
 
 	// A friendly, more verbose description of the activity status.
 	StatusMessage *string `min:"1" type:"string"`
@@ -4491,7 +4491,7 @@ type CustomizedMetricSpecification struct {
 	// The statistic of the metric.
 	//
 	// Statistic is a required field
-	Statistic MetricStatistic `type:"string" required:"true"`
+	Statistic MetricStatistic `type:"string" required:"true" enum:"true"`
 
 	// The unit of the metric.
 	Unit *string `type:"string"`
@@ -7561,7 +7561,7 @@ type Instance struct {
 	// is not used.
 	//
 	// LifecycleState is a required field
-	LifecycleState LifecycleState `type:"string" required:"true"`
+	LifecycleState LifecycleState `type:"string" required:"true" enum:"true"`
 
 	// Indicates whether the instance is protected from termination by Auto Scaling
 	// when scaling in.
@@ -8473,7 +8473,7 @@ type PredefinedMetricSpecification struct {
 	// The metric type.
 	//
 	// PredefinedMetricType is a required field
-	PredefinedMetricType MetricType `type:"string" required:"true"`
+	PredefinedMetricType MetricType `type:"string" required:"true" enum:"true"`
 
 	// Identifies the resource associated with the metric type. The following predefined
 	// metrics are available:

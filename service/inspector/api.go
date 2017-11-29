@@ -2325,7 +2325,7 @@ type AssessmentRun struct {
 	// The state of the assessment run.
 	//
 	// State is a required field
-	State AssessmentRunState `locationName:"state" type:"string" required:"true"`
+	State AssessmentRunState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The last time when the assessment run's state changed.
 	//
@@ -2452,12 +2452,12 @@ type AssessmentRunAgent struct {
 	// The current health state of the agent.
 	//
 	// AgentHealth is a required field
-	AgentHealth AgentHealth `locationName:"agentHealth" type:"string" required:"true"`
+	AgentHealth AgentHealth `locationName:"agentHealth" type:"string" required:"true" enum:"true"`
 
 	// The detailed health state of the agent.
 	//
 	// AgentHealthCode is a required field
-	AgentHealthCode AgentHealthCode `locationName:"agentHealthCode" type:"string" required:"true"`
+	AgentHealthCode AgentHealthCode `locationName:"agentHealthCode" type:"string" required:"true" enum:"true"`
 
 	// The description for the agent health code.
 	AgentHealthDetails *string `locationName:"agentHealthDetails" type:"string"`
@@ -2665,13 +2665,13 @@ type AssessmentRunNotification struct {
 	// The event for which a notification is sent.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The message included in the notification.
 	Message *string `locationName:"message" type:"string"`
 
 	// The status code of the SNS notification.
-	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode `locationName:"snsPublishStatusCode" type:"string"`
+	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode `locationName:"snsPublishStatusCode" type:"string" enum:"true"`
 
 	// The SNS topic to which the SNS notification is sent.
 	SnsTopicArn *string `locationName:"snsTopicArn" min:"1" type:"string"`
@@ -2731,7 +2731,7 @@ type AssessmentRunStateChange struct {
 	// The assessment run state.
 	//
 	// State is a required field
-	State AssessmentRunState `locationName:"state" type:"string" required:"true"`
+	State AssessmentRunState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The last time the assessment run state changed.
 	//
@@ -3973,7 +3973,7 @@ type DescribeFindingsInput struct {
 
 	// The locale into which you want to translate a finding description, recommendation,
 	// and the short description that identifies the finding.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4139,7 +4139,7 @@ type DescribeRulesPackagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The locale that you want to translate a rules package description into.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The ARN that specifies the rules package that you want to describe.
 	//
@@ -4284,7 +4284,7 @@ type EventSubscription struct {
 	// are sent.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The time at which SubscribeToEvent is called.
 	//
@@ -4322,7 +4322,7 @@ type FailedItemDetails struct {
 	// The status code of a failed item.
 	//
 	// FailureCode is a required field
-	FailureCode FailedItemErrorCode `locationName:"failureCode" type:"string" required:"true"`
+	FailureCode FailedItemErrorCode `locationName:"failureCode" type:"string" required:"true" enum:"true"`
 
 	// Indicates whether you can immediately retry a request for this item for a
 	// specified resource.
@@ -4368,7 +4368,7 @@ type Finding struct {
 	AssetAttributes *AssetAttributes `locationName:"assetAttributes" type:"structure"`
 
 	// The type of the host from which the finding is generated.
-	AssetType AssetType `locationName:"assetType" type:"string"`
+	AssetType AssetType `locationName:"assetType" type:"string" enum:"true"`
 
 	// The system-defined attributes for the finding.
 	//
@@ -4408,7 +4408,7 @@ type Finding struct {
 	ServiceAttributes *ServiceAttributes `locationName:"serviceAttributes" type:"structure"`
 
 	// The finding severity. Values can be set to High, Medium, Low, and Informational.
-	Severity Severity `locationName:"severity" type:"string"`
+	Severity Severity `locationName:"severity" type:"string" enum:"true"`
 
 	// The name of the finding.
 	Title *string `locationName:"title" type:"string"`
@@ -4682,14 +4682,14 @@ type GetAssessmentReportInput struct {
 	// want to generate.
 	//
 	// ReportFileFormat is a required field
-	ReportFileFormat ReportFileFormat `locationName:"reportFileFormat" type:"string" required:"true"`
+	ReportFileFormat ReportFileFormat `locationName:"reportFileFormat" type:"string" required:"true" enum:"true"`
 
 	// Specifies the type of the assessment report that you want to generate. There
 	// are two types of assessment reports: a finding report and a full report.
 	// For more information, see Assessment Reports (http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
 	//
 	// ReportType is a required field
-	ReportType ReportType `locationName:"reportType" type:"string" required:"true"`
+	ReportType ReportType `locationName:"reportType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4750,7 +4750,7 @@ type GetAssessmentReportOutput struct {
 	// Specifies the status of the request to generate an assessment report.
 	//
 	// Status is a required field
-	Status ReportStatus `locationName:"status" type:"string" required:"true"`
+	Status ReportStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// Specifies the URL where you can find the generated assessment report. This
 	// parameter is only returned if the report is successfully generated.
@@ -6338,7 +6338,7 @@ type StopAssessmentRunInput struct {
 	// data and begins the results evaluation and the findings generation process.
 	// SKIP_EVALUATION cancels the assessment run immediately, after which no findings
 	// are generated.
-	StopAction StopAction `locationName:"stopAction" type:"string"`
+	StopAction StopAction `locationName:"stopAction" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6402,7 +6402,7 @@ type SubscribeToEventInput struct {
 	// The event for which you want to receive SNS notifications.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// you want to receive SNS notifications.
@@ -6686,7 +6686,7 @@ type UnsubscribeFromEventInput struct {
 	// The event for which you want to stop receiving SNS notifications.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// you want to stop receiving SNS notifications.

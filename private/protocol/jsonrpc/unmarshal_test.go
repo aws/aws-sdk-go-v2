@@ -980,7 +980,7 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
 type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService7TestShapeJSONEnumType `type:"string"`
+	FooEnum OutputService7TestShapeJSONEnumType `type:"string" enum:"true"`
 
 	ListEnums []OutputService7TestShapeJSONEnumType `type:"list"`
 }

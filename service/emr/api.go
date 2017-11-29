@@ -2299,7 +2299,7 @@ type AutoScalingPolicyStateChangeReason struct {
 	// that the scaling policy status was changed by a user. PROVISION_FAILURE indicates
 	// that the status change was because the policy failed to provision. CLEANUP_FAILURE
 	// indicates an error.
-	Code AutoScalingPolicyStateChangeReasonCode `type:"string"`
+	Code AutoScalingPolicyStateChangeReasonCode `type:"string" enum:"true"`
 
 	// A friendly, more verbose message that accompanies an automatic scaling policy
 	// state change.
@@ -2334,7 +2334,7 @@ type AutoScalingPolicyStatus struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates the status of the automatic scaling policy.
-	State AutoScalingPolicyState `type:"string"`
+	State AutoScalingPolicyState `type:"string" enum:"true"`
 
 	// The reason for a change in status.
 	StateChangeReason *AutoScalingPolicyStateChangeReason `type:"structure"`
@@ -2458,7 +2458,7 @@ type CancelStepsInfo struct {
 	Reason *string `type:"string"`
 
 	// The status of a CancelSteps Request. The value may be SUBMITTED or FAILED.
-	Status CancelStepsRequestStatus `type:"string"`
+	Status CancelStepsRequestStatus `type:"string" enum:"true"`
 
 	// The encrypted StepId of a step.
 	StepId *string `type:"string"`
@@ -2565,7 +2565,7 @@ type CloudWatchAlarmDefinition struct {
 	// specified by Threshold.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// A CloudWatch metric dimension.
 	Dimensions []MetricDimension `type:"list"`
@@ -2592,7 +2592,7 @@ type CloudWatchAlarmDefinition struct {
 
 	// The statistic to apply to the metric associated with the alarm. The default
 	// is AVERAGE.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The value against which the specified statistic is compared.
 	//
@@ -2602,7 +2602,7 @@ type CloudWatchAlarmDefinition struct {
 	// The unit of measure associated with the CloudWatch metric being watched.
 	// The value specified for Unit must correspond to the units specified in the
 	// CloudWatch metric.
-	Unit Unit `type:"string"`
+	Unit Unit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2735,7 +2735,7 @@ type Cluster struct {
 	// The instance group configuration of the cluster. A value of INSTANCE_GROUP
 	// indicates a uniform instance group configuration. A value of INSTANCE_FLEET
 	// indicates an instance fleets configuration.
-	InstanceCollectionType InstanceCollectionType `type:"string"`
+	InstanceCollectionType InstanceCollectionType `type:"string" enum:"true"`
 
 	// The path to the Amazon S3 location where logs for this cluster are stored.
 	LogUri *string `type:"string"`
@@ -2760,7 +2760,7 @@ type Cluster struct {
 	// Applies only when CustomAmiID is used. Specifies the type of updates that
 	// are applied from the Amazon Linux AMI package repositories when an instance
 	// boots using the AMI.
-	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string"`
+	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string" enum:"true"`
 
 	// The AMI version requested for this cluster.
 	RequestedAmiVersion *string `type:"string"`
@@ -2780,7 +2780,7 @@ type Cluster struct {
 	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
 	// is available only in Amazon EMR version 4.1.0 and later, and is the default
 	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior ScaleDownBehavior `type:"string"`
+	ScaleDownBehavior ScaleDownBehavior `type:"string" enum:"true"`
 
 	// The name of the security configuration applied to the cluster.
 	SecurityConfiguration *string `type:"string"`
@@ -2969,7 +2969,7 @@ type ClusterStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The programmatic code for the state change reason.
-	Code ClusterStateChangeReasonCode `type:"string"`
+	Code ClusterStateChangeReasonCode `type:"string" enum:"true"`
 
 	// The descriptive message for the state change reason.
 	Message *string `type:"string"`
@@ -3003,7 +3003,7 @@ type ClusterStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the cluster.
-	State ClusterState `type:"string"`
+	State ClusterState `type:"string" enum:"true"`
 
 	// The reason for the cluster status change.
 	StateChangeReason *ClusterStateChangeReason `type:"structure"`
@@ -4211,7 +4211,7 @@ type Instance struct {
 	InstanceType *string `min:"1" type:"string"`
 
 	// The instance purchasing option. Valid values are ON_DEMAND or SPOT.
-	Market MarketType `type:"string"`
+	Market MarketType `type:"string" enum:"true"`
 
 	// The private DNS name of the instance.
 	PrivateDnsName *string `type:"string"`
@@ -4327,7 +4327,7 @@ type InstanceFleet struct {
 
 	// The node type that the instance fleet hosts. Valid values are MASTER, CORE,
 	// or TASK.
-	InstanceFleetType InstanceFleetType `type:"string"`
+	InstanceFleetType InstanceFleetType `type:"string" enum:"true"`
 
 	// The specification for the instance types that comprise an instance fleet.
 	// Up to five unique instance specifications may be defined for each instance
@@ -4475,7 +4475,7 @@ type InstanceFleetConfig struct {
 	// TASK.
 	//
 	// InstanceFleetType is a required field
-	InstanceFleetType InstanceFleetType `type:"string" required:"true"`
+	InstanceFleetType InstanceFleetType `type:"string" required:"true" enum:"true"`
 
 	// The instance type configurations that define the EC2 instances in the instance
 	// fleet.
@@ -4718,7 +4718,7 @@ type InstanceFleetStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// A code corresponding to the reason the state change occurred.
-	Code InstanceFleetStateChangeReasonCode `type:"string"`
+	Code InstanceFleetStateChangeReasonCode `type:"string" enum:"true"`
 
 	// An explanatory message.
 	Message *string `type:"string"`
@@ -4755,7 +4755,7 @@ type InstanceFleetStatus struct {
 	_ struct{} `type:"structure"`
 
 	// A code representing the instance fleet status.
-	State InstanceFleetState `type:"string"`
+	State InstanceFleetState `type:"string" enum:"true"`
 
 	// Provides status change reason details for the instance fleet.
 	StateChangeReason *InstanceFleetStateChangeReason `type:"structure"`
@@ -4875,14 +4875,14 @@ type InstanceGroup struct {
 	Id *string `type:"string"`
 
 	// The type of the instance group. Valid values are MASTER, CORE or TASK.
-	InstanceGroupType InstanceGroupType `type:"string"`
+	InstanceGroupType InstanceGroupType `type:"string" enum:"true"`
 
 	// The EC2 instance type for all instances in the instance group.
 	InstanceType *string `min:"1" type:"string"`
 
 	// The marketplace to provision instances for this group. Valid values are ON_DEMAND
 	// or SPOT.
-	Market MarketType `type:"string"`
+	Market MarketType `type:"string" enum:"true"`
 
 	// The name of the instance group.
 	Name *string `type:"string"`
@@ -5028,7 +5028,7 @@ type InstanceGroupConfig struct {
 	// The role of the instance group in the cluster.
 	//
 	// InstanceRole is a required field
-	InstanceRole InstanceRoleType `type:"string" required:"true"`
+	InstanceRole InstanceRoleType `type:"string" required:"true" enum:"true"`
 
 	// The EC2 instance type for all instances in the instance group.
 	//
@@ -5036,7 +5036,7 @@ type InstanceGroupConfig struct {
 	InstanceType *string `min:"1" type:"string" required:"true"`
 
 	// Market type of the EC2 instances used to create a cluster node.
-	Market MarketType `type:"string"`
+	Market MarketType `type:"string" enum:"true"`
 
 	// Friendly name given to the instance group.
 	Name *string `type:"string"`
@@ -5168,7 +5168,7 @@ type InstanceGroupDetail struct {
 	// Instance group role in the cluster
 	//
 	// InstanceRole is a required field
-	InstanceRole InstanceRoleType `type:"string" required:"true"`
+	InstanceRole InstanceRoleType `type:"string" required:"true" enum:"true"`
 
 	// Actual count of running instances.
 	//
@@ -5186,7 +5186,7 @@ type InstanceGroupDetail struct {
 	// Market type of the EC2 instances used to create a cluster node.
 	//
 	// Market is a required field
-	Market MarketType `type:"string" required:"true"`
+	Market MarketType `type:"string" required:"true" enum:"true"`
 
 	// Friendly name for the instance group.
 	Name *string `type:"string"`
@@ -5201,7 +5201,7 @@ type InstanceGroupDetail struct {
 	// and FAILED.
 	//
 	// State is a required field
-	State InstanceGroupState `type:"string" required:"true"`
+	State InstanceGroupState `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5373,7 +5373,7 @@ type InstanceGroupStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The programmable code for the state change reason.
-	Code InstanceGroupStateChangeReasonCode `type:"string"`
+	Code InstanceGroupStateChangeReasonCode `type:"string" enum:"true"`
 
 	// The status change reason description.
 	Message *string `type:"string"`
@@ -5407,7 +5407,7 @@ type InstanceGroupStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the instance group.
-	State InstanceGroupState `type:"string"`
+	State InstanceGroupState `type:"string" enum:"true"`
 
 	// The status change reason details for the instance group.
 	StateChangeReason *InstanceGroupStateChangeReason `type:"structure"`
@@ -5538,7 +5538,7 @@ type InstanceStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The programmable code for the state change reason.
-	Code InstanceStateChangeReasonCode `type:"string"`
+	Code InstanceStateChangeReasonCode `type:"string" enum:"true"`
 
 	// The status change reason description.
 	Message *string `type:"string"`
@@ -5572,7 +5572,7 @@ type InstanceStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the instance.
-	State InstanceState `type:"string"`
+	State InstanceState `type:"string" enum:"true"`
 
 	// The details of the status change reason for the instance.
 	StateChangeReason *InstanceStateChangeReason `type:"structure"`
@@ -5913,7 +5913,7 @@ type JobFlowDetail struct {
 	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
 	// available only in Amazon EMR version 4.1.0 and later, and is the default
 	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior ScaleDownBehavior `type:"string"`
+	ScaleDownBehavior ScaleDownBehavior `type:"string" enum:"true"`
 
 	// The IAM role that will be assumed by the Amazon EMR service to access AWS
 	// resources on your behalf.
@@ -6056,7 +6056,7 @@ type JobFlowExecutionStatusDetail struct {
 	// The state of the job flow.
 	//
 	// State is a required field
-	State JobFlowExecutionState `type:"string" required:"true"`
+	State JobFlowExecutionState `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6874,7 +6874,7 @@ type ListInstancesInput struct {
 	InstanceFleetId *string `type:"string"`
 
 	// The node type of the instance fleet. For example MASTER, CORE, or TASK.
-	InstanceFleetType InstanceFleetType `type:"string"`
+	InstanceFleetType InstanceFleetType `type:"string" enum:"true"`
 
 	// The identifier of the instance group for which to list the instances.
 	InstanceGroupId *string `type:"string"`
@@ -7755,7 +7755,7 @@ type RunJobFlowInput struct {
 	// using the AMI. If omitted, the default is SECURITY, which indicates that
 	// only security updates are applied. If NONE is specified, no updates are applied,
 	// and all updates must be applied manually.
-	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string"`
+	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string" enum:"true"`
 
 	// Specifies the way that individual Amazon EC2 instances terminate when an
 	// automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR
@@ -7769,7 +7769,7 @@ type RunJobFlowInput struct {
 	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
 	// available only in Amazon EMR version 4.1.0 and later, and is the default
 	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior ScaleDownBehavior `type:"string"`
+	ScaleDownBehavior ScaleDownBehavior `type:"string" enum:"true"`
 
 	// The name of a security configuration to apply to the cluster.
 	SecurityConfiguration *string `type:"string"`
@@ -8016,7 +8016,7 @@ type ScalingAction struct {
 
 	// Not available for instance groups. Instance groups use the market type specified
 	// for the group.
-	Market MarketType `type:"string"`
+	Market MarketType `type:"string" enum:"true"`
 
 	// The type of adjustment the automatic scaling activity makes when triggered,
 	// and the periodicity of the adjustment.
@@ -8560,7 +8560,7 @@ type SimpleScalingPolicyConfiguration struct {
 	// indicates the scaling activity results in an instance group with the number
 	// of EC2 instances specified by ScalingAdjustment, which should be expressed
 	// as a positive integer.
-	AdjustmentType AdjustmentType `type:"string"`
+	AdjustmentType AdjustmentType `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// any further trigger-related scaling activities can start. The default value
@@ -8647,7 +8647,7 @@ type SpotProvisioningSpecification struct {
 	// Instances should be provisioned to fulfill any remaining Spot capacity.
 	//
 	// TimeoutAction is a required field
-	TimeoutAction SpotProvisioningTimeoutAction `type:"string" required:"true"`
+	TimeoutAction SpotProvisioningTimeoutAction `type:"string" required:"true" enum:"true"`
 
 	// The spot provisioning timeout period in minutes. If Spot instances are not
 	// provisioned within this time period, the TimeOutAction is taken. Minimum
@@ -8710,7 +8710,7 @@ type Step struct {
 
 	// This specifies what action to take when the cluster step fails. Possible
 	// values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
-	ActionOnFailure ActionOnFailure `type:"string"`
+	ActionOnFailure ActionOnFailure `type:"string" enum:"true"`
 
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig `type:"structure"`
@@ -8771,7 +8771,7 @@ type StepConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The action to take if the step fails.
-	ActionOnFailure ActionOnFailure `type:"string"`
+	ActionOnFailure ActionOnFailure `type:"string" enum:"true"`
 
 	// The JAR file used for the step.
 	//
@@ -8895,7 +8895,7 @@ type StepExecutionStatusDetail struct {
 	// The state of the step.
 	//
 	// State is a required field
-	State StepExecutionState `type:"string" required:"true"`
+	State StepExecutionState `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8945,7 +8945,7 @@ type StepStateChangeReason struct {
 
 	// The programmable code for the state change reason. Note: Currently, the service
 	// provides no code for the state change.
-	Code StepStateChangeReasonCode `type:"string"`
+	Code StepStateChangeReasonCode `type:"string" enum:"true"`
 
 	// The descriptive message for the state change reason.
 	Message *string `type:"string"`
@@ -8983,7 +8983,7 @@ type StepStatus struct {
 	FailureDetails *FailureDetails `type:"structure"`
 
 	// The execution state of the cluster step.
-	State StepState `type:"string"`
+	State StepState `type:"string" enum:"true"`
 
 	// The reason for the step execution status change.
 	StateChangeReason *StepStateChangeReason `type:"structure"`
@@ -9033,7 +9033,7 @@ type StepSummary struct {
 
 	// This specifies what action to take when the cluster step fails. Possible
 	// values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
-	ActionOnFailure ActionOnFailure `type:"string"`
+	ActionOnFailure ActionOnFailure `type:"string" enum:"true"`
 
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig `type:"structure"`

@@ -1381,7 +1381,7 @@ type InputService8TestShapeInputService8TestCaseOperation1Output struct {
 type InputService8TestShapeInputService8TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService8TestShapeEnumType `type:"string"`
+	FooEnum InputService8TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService8TestShapeEnumType `type:"list"`
 }

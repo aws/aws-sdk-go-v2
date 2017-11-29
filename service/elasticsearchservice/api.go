@@ -1349,7 +1349,7 @@ type DescribeElasticsearchInstanceTypeLimitsInput struct {
 	// are needed.
 	//
 	// InstanceType is a required field
-	InstanceType ESPartitionInstanceType `location:"uri" locationName:"InstanceType" type:"string" required:"true"`
+	InstanceType ESPartitionInstanceType `location:"uri" locationName:"InstanceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1466,7 +1466,7 @@ type EBSOptions struct {
 	VolumeSize *int64 `type:"integer"`
 
 	// Specifies the volume type for EBS-based storage.
-	VolumeType VolumeType `type:"string"`
+	VolumeType VolumeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1554,13 +1554,13 @@ type ElasticsearchClusterConfig struct {
 	DedicatedMasterEnabled *bool `type:"boolean"`
 
 	// The instance type for a dedicated master node.
-	DedicatedMasterType ESPartitionInstanceType `type:"string"`
+	DedicatedMasterType ESPartitionInstanceType `type:"string" enum:"true"`
 
 	// The number of instances in the specified domain cluster.
 	InstanceCount *int64 `type:"integer"`
 
 	// The instance type for an Elasticsearch cluster.
-	InstanceType ESPartitionInstanceType `type:"string"`
+	InstanceType ESPartitionInstanceType `type:"string" enum:"true"`
 
 	// A boolean value to indicate whether zone awareness is enabled. See About
 	// Zone Awareness (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
@@ -2330,7 +2330,7 @@ type OptionStatus struct {
 	// Provides the OptionState for the Elasticsearch domain.
 	//
 	// State is a required field
-	State OptionState `type:"string" required:"true"`
+	State OptionState `type:"string" required:"true" enum:"true"`
 
 	// Timestamp which tells the last updated time for the entity.
 	//

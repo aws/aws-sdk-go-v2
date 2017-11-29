@@ -560,7 +560,7 @@ type AffectedEntity struct {
 
 	// The most recent status of the entity affected by the event. The possible
 	// values are IMPAIRED, UNIMPAIRED, and UNKNOWN.
-	StatusCode EntityStatusCode `locationName:"statusCode" type:"string"`
+	StatusCode EntityStatusCode `locationName:"statusCode" type:"string" enum:"true"`
 
 	// A map of entity tags attached to the affected entity.
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -846,7 +846,7 @@ type DescribeEventAggregatesInput struct {
 	// The only currently supported value is eventTypeCategory.
 	//
 	// AggregateField is a required field
-	AggregateField EventAggregateField `locationName:"aggregateField" type:"string" required:"true"`
+	AggregateField EventAggregateField `locationName:"aggregateField" type:"string" required:"true" enum:"true"`
 
 	// Values to narrow the results returned.
 	Filter *EventFilter `locationName:"filter" type:"structure"`
@@ -1431,7 +1431,7 @@ type Event struct {
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The
-	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string"`
+	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string" enum:"true"`
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION;
 	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
@@ -1451,7 +1451,7 @@ type Event struct {
 
 	// The most recent status of the event. Possible values are open, closed, and
 	// upcoming.
-	StatusCode EventStatusCode `locationName:"statusCode" type:"string"`
+	StatusCode EventStatusCode `locationName:"statusCode" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1862,7 +1862,7 @@ type EventType struct {
 	_ struct{} `type:"structure"`
 
 	// A list of event type category codes (issue, scheduledChange, or accountNotification).
-	Category EventTypeCategory `locationName:"category" min:"3" type:"string"`
+	Category EventTypeCategory `locationName:"category" min:"3" type:"string" enum:"true"`
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION;
 	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.

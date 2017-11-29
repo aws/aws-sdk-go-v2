@@ -2794,7 +2794,7 @@ type Assignment struct {
 	AssignmentId *string `min:"1" type:"string"`
 
 	// The status of the assignment.
-	AssignmentStatus AssignmentStatus `type:"string"`
+	AssignmentStatus AssignmentStatus `type:"string" enum:"true"`
 
 	// If results have been submitted, AutoApprovalTime is the date and time the
 	// results of the assignment results are considered Approved automatically if
@@ -3886,7 +3886,7 @@ type CreateQualificationTypeInput struct {
 	// Constraints: Valid values are: Active | Inactive
 	//
 	// QualificationTypeStatus is a required field
-	QualificationTypeStatus QualificationTypeStatus `type:"string" required:"true"`
+	QualificationTypeStatus QualificationTypeStatus `type:"string" required:"true" enum:"true"`
 
 	// The number of seconds that a Worker must wait after requesting a Qualification
 	// of the Qualification type before the worker can retry the Qualification request.
@@ -4838,11 +4838,11 @@ type HIT struct {
 
 	// Indicates the review status of the HIT. Valid Values are NotReviewed | MarkedForReview
 	// | ReviewedAppropriate | ReviewedInappropriate.
-	HITReviewStatus HITReviewStatus `type:"string"`
+	HITReviewStatus HITReviewStatus `type:"string" enum:"true"`
 
 	// The status of the HIT and its assignments. Valid Values are Assignable |
 	// Unassignable | Reviewable | Reviewing | Disposed.
-	HITStatus HITStatus `type:"string"`
+	HITStatus HITStatus `type:"string" enum:"true"`
 
 	// The ID of the HIT type of this HIT
 	HITTypeId *string `min:"1" type:"string"`
@@ -5960,7 +5960,7 @@ type ListReviewableHITsInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// Can be either Reviewable or Reviewing. Reviewable is the default value.
-	Status ReviewableHITStatus `type:"string"`
+	Status ReviewableHITStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6171,7 +6171,7 @@ type ListWorkersWithQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 
 	// The status of the Qualifications to return. Can be Granted | Revoked.
-	Status QualificationStatus `type:"string"`
+	Status QualificationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6365,7 +6365,7 @@ type NotificationSpecification struct {
 	// Email | SQS | SNS.
 	//
 	// Transport is a required field
-	Transport NotificationTransport `type:"string" required:"true"`
+	Transport NotificationTransport `type:"string" required:"true" enum:"true"`
 
 	// The version of the Notification API to use. Valid value is 2006-05-05.
 	//
@@ -6439,7 +6439,7 @@ type NotifyWorkersFailureStatus struct {
 	_ struct{} `type:"structure"`
 
 	// Encoded value for the failure type.
-	NotifyWorkersFailureCode NotifyWorkersFailureCode `type:"string"`
+	NotifyWorkersFailureCode NotifyWorkersFailureCode `type:"string" enum:"true"`
 
 	// A message detailing the reason the Worker could not be notified.
 	NotifyWorkersFailureMessage *string `type:"string"`
@@ -6676,7 +6676,7 @@ type Qualification struct {
 	QualificationTypeId *string `min:"1" type:"string"`
 
 	// The status of the Qualification. Valid values are Granted | Revoked.
-	Status QualificationStatus `type:"string"`
+	Status QualificationStatus `type:"string" enum:"true"`
 
 	// The ID of the Worker who possesses the Qualification.
 	WorkerId *string `min:"1" type:"string"`
@@ -6827,7 +6827,7 @@ type QualificationRequirement struct {
 	// regardless of its value.
 	//
 	// Comparator is a required field
-	Comparator Comparator `type:"string" required:"true"`
+	Comparator Comparator `type:"string" required:"true" enum:"true"`
 
 	// The integer value to compare against the Qualification's value. IntegerValue
 	// must not be present if Comparator is Exists or DoesNotExist. IntegerValue
@@ -6976,7 +6976,7 @@ type QualificationType struct {
 	// if users can apply to receive a Qualification of this type, and if HITs can
 	// be created with requirements based on this type. Valid values are Active
 	// | Inactive.
-	QualificationTypeStatus QualificationTypeStatus `type:"string"`
+	QualificationTypeStatus QualificationTypeStatus `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, Workers must wait after taking the Qualification
 	// test before they can take it again. Workers can take a Qualification test
@@ -7251,7 +7251,7 @@ type ReviewActionDetail struct {
 	Result *string `type:"string"`
 
 	// The current disposition of the action: INTENDED, SUCCEEDED, FAILED, or CANCELLED.
-	Status ReviewActionStatus `type:"string"`
+	Status ReviewActionStatus `type:"string" enum:"true"`
 
 	// The specific HITId or AssignmentID targeted by the action.
 	TargetId *string `min:"1" type:"string"`
@@ -7625,7 +7625,7 @@ type SendTestEventNotificationInput struct {
 	// out the test event.
 	//
 	// TestEventType is a required field
-	TestEventType EventType `type:"string" required:"true"`
+	TestEventType EventType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8020,7 +8020,7 @@ type UpdateQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 
 	// The new status of the Qualification type - Active | Inactive
-	QualificationTypeStatus QualificationTypeStatus `type:"string"`
+	QualificationTypeStatus QualificationTypeStatus `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, that Workers must wait after requesting a
 	// Qualification of the specified Qualification type before they can retry the

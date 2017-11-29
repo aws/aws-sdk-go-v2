@@ -5800,7 +5800,7 @@ type CreateAuthorizerInput struct {
 	// for using an Amazon Cognito user pool.
 	//
 	// Type is a required field
-	Type AuthorizerType `locationName:"type" type:"string" required:"true"`
+	Type AuthorizerType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5981,7 +5981,7 @@ type CreateDeploymentInput struct {
 
 	// Specifies the cache cluster size for the Stage resource specified in the
 	// input, if a cache cluster is enabled.
-	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string"`
+	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string" enum:"true"`
 
 	// The description for the Deployment resource to create.
 	Description *string `locationName:"description" type:"string"`
@@ -6625,7 +6625,7 @@ type CreateStageInput struct {
 	CacheClusterEnabled *bool `locationName:"cacheClusterEnabled" type:"boolean"`
 
 	// The stage's cache cluster size.
-	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string"`
+	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string" enum:"true"`
 
 	// The identifier of the Deployment resource for the Stage resource.
 	//
@@ -7419,7 +7419,7 @@ type DeleteGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -8345,7 +8345,7 @@ type DocumentationPartLocation struct {
 	// or RESOURCE type.
 	//
 	// Type is a required field
-	Type DocumentationPartType `locationName:"type" type:"string" required:"true"`
+	Type DocumentationPartType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9391,7 +9391,7 @@ type GetDocumentationPartsInput struct {
 	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
 
 	// The type of API entities of the to-be-retrieved documentation parts.
-	Type DocumentationPartType `location:"querystring" locationName:"type" type:"string"`
+	Type DocumentationPartType `location:"querystring" locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9913,7 +9913,7 @@ type GetGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -12063,7 +12063,7 @@ type ImportApiKeysInput struct {
 	// only the csv format is supported.
 	//
 	// Format is a required field
-	Format ApiKeysFormat `location:"querystring" locationName:"format" type:"string" required:"true"`
+	Format ApiKeysFormat `location:"querystring" locationName:"format" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -12162,7 +12162,7 @@ type ImportDocumentationPartsInput struct {
 	// A query parameter to indicate whether to overwrite (OVERWRITE) any existing
 	// DocumentationParts definition or to merge (MERGE) the new definition into
 	// the existing one. The default value is MERGE.
-	Mode PutMode `location:"querystring" locationName:"mode" type:"string"`
+	Mode PutMode `location:"querystring" locationName:"mode" type:"string" enum:"true"`
 
 	// [Required] The string identifier of the associated RestApi.
 	//
@@ -12379,7 +12379,7 @@ type MethodSetting struct {
 	// PATCH path for this setting is /{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy,
 	// and the available values are FAIL_WITH_403, SUCCEED_WITH_RESPONSE_HEADER,
 	// SUCCEED_WITHOUT_RESPONSE_HEADER.
-	UnauthorizedCacheControlHeaderStrategy UnauthorizedCacheControlHeaderStrategy `locationName:"unauthorizedCacheControlHeaderStrategy" type:"string"`
+	UnauthorizedCacheControlHeaderStrategy UnauthorizedCacheControlHeaderStrategy `locationName:"unauthorizedCacheControlHeaderStrategy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12501,7 +12501,7 @@ type PatchOperation struct {
 	// for a given resource. Support of the operations depends on specific operational
 	// contexts. Attempts to apply an unsupported operation on a resource will return
 	// an error message.
-	Op Op `locationName:"op" type:"string"`
+	Op Op `locationName:"op" type:"string" enum:"true"`
 
 	// The op operation's target, as identified by a JSON Pointer (https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08)
 	// value that references a location within the targeted resource. For example,
@@ -12590,7 +12590,7 @@ type PutGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -12680,7 +12680,7 @@ type PutIntegrationInput struct {
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
 	// that the passthroughBehaviors is configured to support payload pass-through.
-	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies whether credentials are required for a put integration.
 	Credentials *string `locationName:"credentials" type:"string"`
@@ -12738,7 +12738,7 @@ type PutIntegrationInput struct {
 	// Specifies a put integration input's type.
 	//
 	// Type is a required field
-	Type IntegrationType `locationName:"type" type:"string" required:"true"`
+	Type IntegrationType `locationName:"type" type:"string" required:"true" enum:"true"`
 
 	// Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations,
 	// the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986
@@ -12880,7 +12880,7 @@ type PutIntegrationResponseInput struct {
 	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
-	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies a put integration response request's HTTP method.
 	//
@@ -13292,7 +13292,7 @@ type PutRestApiInput struct {
 
 	// The mode query parameter to specify the update mode. Valid values are "merge"
 	// and "overwrite". By default, the update mode is "merge".
-	Mode PutMode `location:"querystring" locationName:"mode" type:"string"`
+	Mode PutMode `location:"querystring" locationName:"mode" type:"string" enum:"true"`
 
 	// Custom header parameters as part of the request. For example, to exclude
 	// DocumentationParts from an imported API, set ignore=documentation as a parameters
@@ -13377,7 +13377,7 @@ type QuotaSettings struct {
 
 	// The time period in which the limit applies. Valid values are "DAY", "WEEK"
 	// or "MONTH".
-	Period QuotaPeriodType `locationName:"period" type:"string"`
+	Period QuotaPeriodType `locationName:"period" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -14309,7 +14309,7 @@ type UpdateAuthorizerOutput struct {
 	// using a single authorization token submitted in a custom header, REQUEST
 	// for a Lambda function using incoming request parameters, and COGNITO_USER_POOLS
 	// for using an Amazon Cognito user pool.
-	Type AuthorizerType `locationName:"type" type:"string"`
+	Type AuthorizerType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -15131,7 +15131,7 @@ type UpdateGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -15262,7 +15262,7 @@ type UpdateGatewayResponseOutput struct {
 	// THROTTLED
 	// UNAUTHORIZED
 	// UNSUPPORTED_MEDIA_TYPES
-	ResponseType GatewayResponseType `locationName:"responseType" type:"string"`
+	ResponseType GatewayResponseType `locationName:"responseType" type:"string" enum:"true"`
 
 	// The HTTP status code for this GatewayResponse.
 	StatusCode *string `locationName:"statusCode" type:"string"`
@@ -15414,7 +15414,7 @@ type UpdateIntegrationOutput struct {
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
 	// that the passthroughBehaviors is configured to support payload pass-through.
-	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies the credentials required for the integration, if any. For AWS integrations,
 	// three options are available. To specify an IAM Role for Amazon API Gateway
@@ -15493,7 +15493,7 @@ type UpdateIntegrationOutput struct {
 	// without actually invoking the back end, HTTP_PROXY for integrating with the
 	// HTTP proxy integration, or AWS_PROXY for integrating with the Lambda proxy
 	// integration type.
-	Type IntegrationType `locationName:"type" type:"string"`
+	Type IntegrationType `locationName:"type" type:"string" enum:"true"`
 
 	// Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations,
 	// the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986
@@ -15697,7 +15697,7 @@ type UpdateIntegrationResponseOutput struct {
 	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
-	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter
@@ -16939,10 +16939,10 @@ type UpdateStageOutput struct {
 	CacheClusterEnabled *bool `locationName:"cacheClusterEnabled" type:"boolean"`
 
 	// The size of the cache cluster for the stage, if enabled.
-	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string"`
+	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string" enum:"true"`
 
 	// The status of the cache cluster for the stage, if enabled.
-	CacheClusterStatus CacheClusterStatus `locationName:"cacheClusterStatus" type:"string"`
+	CacheClusterStatus CacheClusterStatus `locationName:"cacheClusterStatus" type:"string" enum:"true"`
 
 	// The identifier of a client certificate for an API stage.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`

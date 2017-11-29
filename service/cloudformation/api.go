@@ -2407,7 +2407,7 @@ type AccountGateResult struct {
 	//
 	// Either no action is necessary, or no action is possible, on the stack. AWS
 	//    CloudFormation skips the stack set operation in this account and region.
-	Status AccountGateStatus `type:"string"`
+	Status AccountGateStatus `type:"string" enum:"true"`
 
 	// The reason for the account gate status assigned to this account and region
 	// for the stack set operation.
@@ -2554,7 +2554,7 @@ type Change struct {
 
 	// The type of entity that AWS CloudFormation changes. Currently, the only entity
 	// type is Resource.
-	Type ChangeType `type:"string"`
+	Type ChangeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2602,7 +2602,7 @@ type ChangeSetSummary struct {
 	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
-	ExecutionStatus ExecutionStatus `type:"string"`
+	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`
 
 	// The ID of the stack with which the change set is associated.
 	StackId *string `type:"string"`
@@ -2612,7 +2612,7 @@ type ChangeSetSummary struct {
 
 	// The state of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
 	// or FAILED.
-	Status ChangeSetStatus `type:"string"`
+	Status ChangeSetStatus `type:"string" enum:"true"`
 
 	// A description of the change set's status. For example, if your change set
 	// is in the FAILED state, AWS CloudFormation shows the error message.
@@ -2879,7 +2879,7 @@ type CreateChangeSetInput struct {
 	// By default, AWS CloudFormation specifies UPDATE. You can't use the UPDATE
 	// type to create a change set for a new stack or the CREATE type to create
 	// a change set for an existing stack.
-	ChangeSetType ChangeSetType `type:"string"`
+	ChangeSetType ChangeSetType `type:"string" enum:"true"`
 
 	// A unique identifier for this CreateChangeSet request. Specify this token
 	// if you plan to retry requests so that AWS CloudFormation knows that you're
@@ -3224,7 +3224,7 @@ type CreateStackInput struct {
 	// or DisableRollback, but not both.
 	//
 	// Default: ROLLBACK
-	OnFailure OnFailure `type:"string"`
+	OnFailure OnFailure `type:"string" enum:"true"`
 
 	// A list of Parameter structures that specify input parameters for the stack.
 	// For more information, see the Parameter (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
@@ -4411,7 +4411,7 @@ type DescribeChangeSetOutput struct {
 	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
-	ExecutionStatus ExecutionStatus `type:"string"`
+	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`
 
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
 	// If there is no additional page, this value is null.
@@ -4439,7 +4439,7 @@ type DescribeChangeSetOutput struct {
 
 	// The current status of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
 	// or FAILED.
-	Status ChangeSetStatus `type:"string"`
+	Status ChangeSetStatus `type:"string" enum:"true"`
 
 	// A description of the change set's status. For example, if your attempt to
 	// create a change set failed, AWS CloudFormation shows the error message.
@@ -5491,7 +5491,7 @@ type GetTemplateInput struct {
 	//
 	// If the template doesn't include transforms, Original and Processed return
 	// the same template. By default, AWS CloudFormation specifies Original.
-	TemplateStage TemplateStage `type:"string"`
+	TemplateStage TemplateStage `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6504,7 +6504,7 @@ type ListStackSetsInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The status of the stack sets that you want to get summary information about.
-	Status StackSetStatus `type:"string"`
+	Status StackSetStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6878,7 +6878,7 @@ type ResourceChange struct {
 
 	// The action that AWS CloudFormation takes on the resource, such as Add (adds
 	// a new resource), Modify (changes a resource), or Remove (deletes a resource).
-	Action ChangeAction `type:"string"`
+	Action ChangeAction `type:"string" enum:"true"`
 
 	// For the Modify action, a list of ResourceChangeDetail structures that describes
 	// the changes that AWS CloudFormation will make to the resource.
@@ -6902,7 +6902,7 @@ type ResourceChange struct {
 	// Replacement value depends on the change with the most impact. A RequiresRecreation
 	// value of Always has the most impact, followed by Conditionally, and then
 	// Never.
-	Replacement Replacement `type:"string"`
+	Replacement Replacement `type:"string" enum:"true"`
 
 	// The type of AWS CloudFormation resource, such as AWS::S3::Bucket.
 	ResourceType *string `min:"1" type:"string"`
@@ -7001,7 +7001,7 @@ type ResourceChangeDetail struct {
 	//    the nested stack's template might have changed. Changes to a nested stack's
 	//    template aren't visible to AWS CloudFormation until you run an update
 	//    on the parent stack.
-	ChangeSource ChangeSource `type:"string"`
+	ChangeSource ChangeSource `type:"string" enum:"true"`
 
 	// Indicates whether AWS CloudFormation can determine the target value, and
 	// whether the target value will change before you execute a change set.
@@ -7018,7 +7018,7 @@ type ResourceChangeDetail struct {
 	// reference (the physical ID of the resource) might change, depending on if
 	// the resource is recreated. If the resource is recreated, it will have a new
 	// physical ID, so all references to that resource will also be updated.
-	Evaluation EvaluationType `type:"string"`
+	Evaluation EvaluationType `type:"string" enum:"true"`
 
 	// A ResourceTargetDefinition structure that describes the field that AWS CloudFormation
 	// will change and whether the resource will be recreated.
@@ -7067,7 +7067,7 @@ type ResourceTargetDefinition struct {
 
 	// Indicates which resource attribute is triggering this update, such as a change
 	// in the resource attribute's Metadata, Properties, or Tags.
-	Attribute ResourceAttribute `type:"string"`
+	Attribute ResourceAttribute `type:"string" enum:"true"`
 
 	// If the Attribute value is Properties, the name of the property. For all other
 	// attributes, the value is null.
@@ -7078,7 +7078,7 @@ type ResourceTargetDefinition struct {
 	// or Conditionally. To determine the conditions for a Conditionally recreation,
 	// see the update behavior for that property (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
-	RequiresRecreation RequiresRecreation `type:"string"`
+	RequiresRecreation RequiresRecreation `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7390,7 +7390,7 @@ type SignalResourceInput struct {
 	// causes AWS CloudFormation to immediately fail the stack creation or update.
 	//
 	// Status is a required field
-	Status ResourceSignalStatus `type:"string" required:"true"`
+	Status ResourceSignalStatus `type:"string" required:"true" enum:"true"`
 
 	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling
 	// groups, specify the instance ID that you are signaling as the unique ID.
@@ -7567,7 +7567,7 @@ type Stack struct {
 	// Current status of the stack.
 	//
 	// StackStatus is a required field
-	StackStatus StackStatus `type:"string" required:"true"`
+	StackStatus StackStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the stack status.
 	StackStatusReason *string `type:"string"`
@@ -7750,7 +7750,7 @@ type StackEvent struct {
 	ResourceProperties *string `type:"string"`
 
 	// Current status of the resource.
-	ResourceStatus ResourceStatus `type:"string"`
+	ResourceStatus ResourceStatus `type:"string" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -7894,7 +7894,7 @@ type StackInstance struct {
 	//    or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
-	Status StackInstanceStatus `type:"string"`
+	Status StackInstanceStatus `type:"string" enum:"true"`
 
 	// The explanation for the specific status code that is assigned to this stack
 	// instance.
@@ -7983,7 +7983,7 @@ type StackInstanceSummary struct {
 	//    or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
-	Status StackInstanceStatus `type:"string"`
+	Status StackInstanceStatus `type:"string" enum:"true"`
 
 	// The explanation for the specific status code assigned to this stack instance.
 	StatusReason *string `type:"string"`
@@ -8055,7 +8055,7 @@ type StackResource struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus ResourceStatus `type:"string" required:"true"`
+	ResourceStatus ResourceStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -8173,7 +8173,7 @@ type StackResourceDetail struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus ResourceStatus `type:"string" required:"true"`
+	ResourceStatus ResourceStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -8284,7 +8284,7 @@ type StackResourceSummary struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus ResourceStatus `type:"string" required:"true"`
+	ResourceStatus ResourceStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -8372,7 +8372,7 @@ type StackSet struct {
 	StackSetName *string `type:"string"`
 
 	// The status of the stack set.
-	Status StackSetStatus `type:"string"`
+	Status StackSetStatus `type:"string" enum:"true"`
 
 	// A list of tags that specify information about the stack set. A maximum number
 	// of 50 tags can be specified.
@@ -8450,7 +8450,7 @@ type StackSetOperation struct {
 	// operations affect only the specified stack set instances that are associated
 	// with the specified stack set. Update operations affect both the stack set
 	// itself, as well as all associated stack set instances.
-	Action StackSetOperationAction `type:"string"`
+	Action StackSetOperationAction `type:"string" enum:"true"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -8498,7 +8498,7 @@ type StackSetOperation struct {
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
-	Status StackSetOperationStatus `type:"string"`
+	Status StackSetOperationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8714,7 +8714,7 @@ type StackSetOperationResultSummary struct {
 	//
 	//    * SUCCEEDED: The operation in the specified account and region completed
 	//    successfully.
-	Status StackSetOperationResultStatus `type:"string"`
+	Status StackSetOperationResultStatus `type:"string" enum:"true"`
 
 	// The reason for the assigned result status.
 	StatusReason *string `type:"string"`
@@ -8769,7 +8769,7 @@ type StackSetOperationSummary struct {
 	// affect only the specified stack instances that are associated with the specified
 	// stack set. Update operations affect both the stack set itself as well as
 	// all associated stack set instances.
-	Action StackSetOperationAction `type:"string"`
+	Action StackSetOperationAction `type:"string" enum:"true"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -8805,7 +8805,7 @@ type StackSetOperationSummary struct {
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
-	Status StackSetOperationStatus `type:"string"`
+	Status StackSetOperationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8865,7 +8865,7 @@ type StackSetSummary struct {
 	StackSetName *string `type:"string"`
 
 	// The status of the stack set.
-	Status StackSetStatus `type:"string"`
+	Status StackSetStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8945,7 +8945,7 @@ type StackSummary struct {
 	// The current status of the stack.
 	//
 	// StackStatus is a required field
-	StackStatus StackStatus `type:"string" required:"true"`
+	StackStatus StackStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/Failure message associated with the stack status.
 	StackStatusReason *string `type:"string"`

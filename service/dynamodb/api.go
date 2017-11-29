@@ -1548,7 +1548,7 @@ type AttributeDefinition struct {
 	//    * B - the attribute is of type Binary
 	//
 	// AttributeType is a required field
-	AttributeType ScalarAttributeType `type:"string" required:"true"`
+	AttributeType ScalarAttributeType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1812,7 +1812,7 @@ type AttributeValueUpdate struct {
 	//    * ADD - DynamoDB creates an item with the supplied primary key and number
 	//    (or set of numbers) for the attribute value. The only data types allowed
 	//    are number and number set; no other data types can be specified.
-	Action AttributeAction `type:"string"`
+	Action AttributeAction `type:"string" enum:"true"`
 
 	// Represents the data for an attribute.
 	//
@@ -1936,7 +1936,7 @@ type BatchGetItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2105,13 +2105,13 @@ type BatchWriteItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2354,7 +2354,7 @@ type Condition struct {
 	// does not match. For example, {"S":"6"}does not equal {"N":"6"}. Also, {"N":"6"}does not compare to {"NS":["6", "2", "1"]}
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2938,7 +2938,7 @@ type DeleteItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator ConditionalOperator `type:"string"`
+	ConditionalOperator ConditionalOperator `type:"string" enum:"true"`
 
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
@@ -3030,13 +3030,13 @@ type DeleteItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string" enum:"true"`
 
 	// Use ReturnValues if you want to get the item attributes as they appeared
 	// before they were deleted. For DeleteItem, the valid values are:
@@ -3048,7 +3048,7 @@ type DeleteItemInput struct {
 	//
 	// The ReturnValues parameter is used by several DynamoDB operations; however,
 	// DeleteItem does not recognize any values other than NONE or ALL_OLD.
-	ReturnValues ReturnValue `type:"string"`
+	ReturnValues ReturnValue `type:"string" enum:"true"`
 
 	// The name of the table from which to delete the item.
 	//
@@ -3605,7 +3605,7 @@ type ExpectedAttributeValue struct {
 	// AttributeValueListcan contain only one AttributeValueof type String, Number, or Binary (not a set type). If an item contains an
 	// AttributeValueelement of a different type than the one provided in the request, the value
 	// does not match. For example, {"S":"6"}does not equal {"N":"6"}. Also, {"N":"6"}does not compare to {"NS":["6", "2", "1"]}
-	ComparisonOperator ComparisonOperator `type:"string"`
+	ComparisonOperator ComparisonOperator `type:"string" enum:"true"`
 
 	// Causes DynamoDB to evaluate the value before attempting a conditional operation:
 	//
@@ -3765,7 +3765,7 @@ type GetItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// The name of the table containing the requested item.
 	//
@@ -4055,7 +4055,7 @@ type GlobalSecondaryIndexDescription struct {
 	//    * DELETING - The index is being deleted.
 	//
 	//    * ACTIVE - The index is ready for use.
-	IndexStatus IndexStatus `type:"string"`
+	IndexStatus IndexStatus `type:"string" enum:"true"`
 
 	// The number of items in the specified index. DynamoDB updates this value approximately
 	// every six hours. Recent changes might not be reflected in this value.
@@ -4325,7 +4325,7 @@ type KeySchemaElement struct {
 	// key physically close together, in sorted order by the sort key value.
 	//
 	// KeyType is a required field
-	KeyType KeyType `type:"string" required:"true"`
+	KeyType KeyType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4911,7 +4911,7 @@ type Projection struct {
 	//    index. The list of projected attributes are in NonKeyAttributes.
 	//
 	//    * ALL - All of the table attributes are projected into the index.
-	ProjectionType ProjectionType `type:"string"`
+	ProjectionType ProjectionType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5118,7 +5118,7 @@ type PutItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator ConditionalOperator `type:"string"`
+	ConditionalOperator ConditionalOperator `type:"string" enum:"true"`
 
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
@@ -5220,13 +5220,13 @@ type PutItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string" enum:"true"`
 
 	// Use ReturnValues if you want to get the item attributes as they appeared
 	// before they were updated with the PutItem request. For PutItem, the valid
@@ -5240,7 +5240,7 @@ type PutItemInput struct {
 	//
 	// The ReturnValues parameter is used by several DynamoDB operations; however,
 	// PutItem does not recognize any values other than NONE or ALL_OLD.
-	ReturnValues ReturnValue `type:"string"`
+	ReturnValues ReturnValue `type:"string" enum:"true"`
 
 	// The name of the table to contain the item.
 	//
@@ -5451,7 +5451,7 @@ type QueryInput struct {
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator ConditionalOperator `type:"string"`
+	ConditionalOperator ConditionalOperator `type:"string" enum:"true"`
 
 	// Determines the read consistency model: If set to true, then the operation
 	// uses strongly consistent reads; otherwise, the operation uses eventually
@@ -5664,7 +5664,7 @@ type QueryInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// Specifies the order for index traversal: If true (default), the traversal
 	// is performed in ascending order; if false, the traversal is performed in
@@ -5726,7 +5726,7 @@ type QueryInput struct {
 	// If you use the ProjectionExpression parameter, then the value for Select
 	// can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an
 	// error.
-	Select Select `type:"string"`
+	Select Select `type:"string" enum:"true"`
 
 	// The name of the table containing the requested items.
 	//
@@ -5988,7 +5988,7 @@ type ScanInput struct {
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator ConditionalOperator `type:"string"`
+	ConditionalOperator ConditionalOperator `type:"string" enum:"true"`
 
 	// A Boolean value that determines the read consistency model during the scan:
 	//
@@ -6131,7 +6131,7 @@ type ScanInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ScanFilter (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html)
@@ -6200,7 +6200,7 @@ type ScanInput struct {
 	// If you use the ProjectionExpression parameter, then the value for Select
 	// can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an
 	// error.
-	Select Select `type:"string"`
+	Select Select `type:"string" enum:"true"`
 
 	// The name of the table containing the requested items; or, if you provide
 	// IndexName, the name of the table to which that index belongs.
@@ -6476,7 +6476,7 @@ type StreamSpecification struct {
 	//
 	//    * NEW_AND_OLD_IMAGES - Both the new and the old item images of the item
 	//    are written to the stream.
-	StreamViewType StreamViewType `type:"string"`
+	StreamViewType StreamViewType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6697,7 +6697,7 @@ type TableDescription struct {
 	//    * DELETING - The table is being deleted.
 	//
 	//    * ACTIVE - The table is ready for use.
-	TableStatus TableStatus `type:"string"`
+	TableStatus TableStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6954,7 +6954,7 @@ type TimeToLiveDescription struct {
 	AttributeName *string `min:"1" type:"string"`
 
 	// The Time to Live status for the table.
-	TimeToLiveStatus TimeToLiveStatus `type:"string"`
+	TimeToLiveStatus TimeToLiveStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7217,7 +7217,7 @@ type UpdateItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator ConditionalOperator `type:"string"`
+	ConditionalOperator ConditionalOperator `type:"string" enum:"true"`
 
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
@@ -7309,13 +7309,13 @@ type UpdateItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string" enum:"true"`
 
 	// Use ReturnValues if you want to get the item attributes as they appear before
 	// or after they are updated. For UpdateItem, the valid values are:
@@ -7340,7 +7340,7 @@ type UpdateItemInput struct {
 	// No read capacity units are consumed.
 	//
 	// The values returned are strongly consistent.
-	ReturnValues ReturnValue `type:"string"`
+	ReturnValues ReturnValue `type:"string" enum:"true"`
 
 	// The name of the table containing the item to update.
 	//

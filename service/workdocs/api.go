@@ -2253,7 +2253,7 @@ type Activity struct {
 	TimeStamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The activity type.
-	Type ActivityType `type:"string"`
+	Type ActivityType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2440,7 +2440,7 @@ type Comment struct {
 	RecipientId *string `min:"1" type:"string"`
 
 	// The status of the comment.
-	Status CommentStatusType `type:"string"`
+	Status CommentStatusType `type:"string" enum:"true"`
 
 	// The text of the comment.
 	Text *string `min:"1" type:"string"`
@@ -2451,7 +2451,7 @@ type Comment struct {
 	// The visibility of the comment. Options are either PRIVATE, where the comment
 	// is visible only to the comment author and document owner and co-owners, or
 	// PUBLIC, where the comment is visible to document owners, co-owners, and contributors.
-	Visibility CommentVisibilityType `type:"string"`
+	Visibility CommentVisibilityType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2526,7 +2526,7 @@ type CommentMetadata struct {
 	// The ID of the comment.
 	CommentId *string `min:"1" type:"string"`
 
-	CommentStatus CommentStatusType `type:"string"`
+	CommentStatus CommentStatusType `type:"string" enum:"true"`
 
 	// The user who made the comment.
 	Contributor *User `type:"structure"`
@@ -2613,7 +2613,7 @@ type CreateCommentInput struct {
 	// The visibility of the comment. Options are either PRIVATE, where the comment
 	// is visible only to the comment author and document owner and co-owners, or
 	// PUBLIC, where the comment is visible to document owners, co-owners, and contributors.
-	Visibility CommentVisibilityType `type:"string"`
+	Visibility CommentVisibilityType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3037,12 +3037,12 @@ type CreateNotificationSubscriptionInput struct {
 	// messasges using HTTPS POST.
 	//
 	// Protocol is a required field
-	Protocol SubscriptionProtocolType `type:"string" required:"true"`
+	Protocol SubscriptionProtocolType `type:"string" required:"true" enum:"true"`
 
 	// The notification type.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType SubscriptionType `type:"string" required:"true"`
+	SubscriptionType SubscriptionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4483,13 +4483,13 @@ type DescribeFolderContentsInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 
 	// The order for the contents of the folder.
-	Order OrderType `location:"querystring" locationName:"order" type:"string"`
+	Order OrderType `location:"querystring" locationName:"order" type:"string" enum:"true"`
 
 	// The sorting criteria.
-	Sort ResourceSortType `location:"querystring" locationName:"sort" type:"string"`
+	Sort ResourceSortType `location:"querystring" locationName:"sort" type:"string" enum:"true"`
 
 	// The type of items.
-	Type FolderContentType `location:"querystring" locationName:"type" type:"string"`
+	Type FolderContentType `location:"querystring" locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4954,7 +4954,7 @@ type DescribeUsersInput struct {
 	Fields *string `location:"querystring" locationName:"fields" min:"1" type:"string"`
 
 	// The state of the users. Specify "ALL" to include inactive users.
-	Include UserFilterType `location:"querystring" locationName:"include" type:"string"`
+	Include UserFilterType `location:"querystring" locationName:"include" type:"string" enum:"true"`
 
 	// The maximum number of items to return.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
@@ -4964,7 +4964,7 @@ type DescribeUsersInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 
 	// The order for the results.
-	Order OrderType `location:"querystring" locationName:"order" type:"string"`
+	Order OrderType `location:"querystring" locationName:"order" type:"string" enum:"true"`
 
 	// The ID of the organization.
 	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
@@ -4973,7 +4973,7 @@ type DescribeUsersInput struct {
 	Query *string `location:"querystring" locationName:"query" min:"1" type:"string"`
 
 	// The sorting criteria.
-	Sort UserSortType `location:"querystring" locationName:"sort" type:"string"`
+	Sort UserSortType `location:"querystring" locationName:"sort" type:"string" enum:"true"`
 
 	// The IDs of the users.
 	UserIds *string `location:"querystring" locationName:"userIds" min:"1" type:"string"`
@@ -5150,7 +5150,7 @@ type DocumentMetadata struct {
 	ParentFolderId *string `min:"1" type:"string"`
 
 	// The resource state.
-	ResourceState ResourceStateType `type:"string"`
+	ResourceState ResourceStateType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5250,7 +5250,7 @@ type DocumentVersionMetadata struct {
 	Source map[string]string `type:"map"`
 
 	// The status of the document.
-	Status DocumentStatusType `type:"string"`
+	Status DocumentStatusType `type:"string" enum:"true"`
 
 	// The thumbnail of the document.
 	Thumbnail map[string]string `type:"map"`
@@ -5374,7 +5374,7 @@ type FolderMetadata struct {
 	ParentFolderId *string `min:"1" type:"string"`
 
 	// The resource state of the folder.
-	ResourceState ResourceStateType `type:"string"`
+	ResourceState ResourceStateType `type:"string" enum:"true"`
 
 	// The unique identifier created from the subfolders and documents of the folder.
 	Signature *string `type:"string"`
@@ -6311,10 +6311,10 @@ type PermissionInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The role of the user.
-	Role RoleType `type:"string"`
+	Role RoleType `type:"string" enum:"true"`
 
 	// The type of permissions.
-	Type RolePermissionType `type:"string"`
+	Type RolePermissionType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6351,7 +6351,7 @@ type Principal struct {
 	Roles []PermissionInfo `type:"list"`
 
 	// The type of resource.
-	Type PrincipalType `type:"string"`
+	Type PrincipalType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6467,7 +6467,7 @@ type RemoveResourcePermissionInput struct {
 	PrincipalId *string `location:"uri" locationName:"PrincipalId" min:"1" type:"string" required:"true"`
 
 	// The principal type of the resource.
-	PrincipalType PrincipalType `location:"querystring" locationName:"type" type:"string"`
+	PrincipalType PrincipalType `location:"querystring" locationName:"type" type:"string" enum:"true"`
 
 	// The ID of the resource.
 	//
@@ -6572,7 +6572,7 @@ type ResourceMetadata struct {
 	ParentId *string `min:"1" type:"string"`
 
 	// The type of resource.
-	Type ResourceType `type:"string"`
+	Type ResourceType `type:"string" enum:"true"`
 
 	// The version ID of the resource. This is an optional field and is filled for
 	// action on document version.
@@ -6703,12 +6703,12 @@ type SharePrincipal struct {
 	// The role of the recipient.
 	//
 	// Role is a required field
-	Role RoleType `type:"string" required:"true"`
+	Role RoleType `type:"string" required:"true" enum:"true"`
 
 	// The type of the recipient.
 	//
 	// Type is a required field
-	Type PrincipalType `type:"string" required:"true"`
+	Type PrincipalType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6771,13 +6771,13 @@ type ShareResult struct {
 	PrincipalId *string `min:"1" type:"string"`
 
 	// The role.
-	Role RoleType `type:"string"`
+	Role RoleType `type:"string" enum:"true"`
 
 	// The ID of the resource that was shared.
 	ShareId *string `min:"1" type:"string"`
 
 	// The status.
-	Status ShareStatusType `type:"string"`
+	Status ShareStatusType `type:"string" enum:"true"`
 
 	// The status message.
 	StatusMessage *string `type:"string"`
@@ -6832,7 +6832,7 @@ type StorageRuleType struct {
 	StorageAllocatedInBytes *int64 `type:"long"`
 
 	// The type of storage.
-	StorageType StorageType `type:"string"`
+	StorageType StorageType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6866,7 +6866,7 @@ type Subscription struct {
 	EndPoint *string `min:"1" type:"string"`
 
 	// The protocol of the subscription.
-	Protocol SubscriptionProtocolType `type:"string"`
+	Protocol SubscriptionProtocolType `type:"string" enum:"true"`
 
 	// The ID of the subscription.
 	SubscriptionId *string `min:"1" type:"string"`
@@ -6921,7 +6921,7 @@ type UpdateDocumentInput struct {
 
 	// The resource state of the document. Note that only ACTIVE and RECYCLED are
 	// supported.
-	ResourceState ResourceStateType `type:"string"`
+	ResourceState ResourceStateType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7024,7 +7024,7 @@ type UpdateDocumentVersionInput struct {
 	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
 
 	// The status of the version.
-	VersionStatus DocumentVersionStatus `type:"string"`
+	VersionStatus DocumentVersionStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7124,7 +7124,7 @@ type UpdateFolderInput struct {
 
 	// The resource state of the folder. Note that only ACTIVE and RECYCLED are
 	// accepted values from the API.
-	ResourceState ResourceStateType `type:"string"`
+	ResourceState ResourceStateType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7220,7 +7220,7 @@ type UpdateUserInput struct {
 	GivenName *string `min:"1" type:"string"`
 
 	// The locale of the user.
-	Locale LocaleType `type:"string"`
+	Locale LocaleType `type:"string" enum:"true"`
 
 	// The amount of storage for the user.
 	StorageRule *StorageRuleType `type:"structure"`
@@ -7232,7 +7232,7 @@ type UpdateUserInput struct {
 	TimeZoneId *string `min:"1" type:"string"`
 
 	// The type of the user.
-	Type UserType `type:"string"`
+	Type UserType `type:"string" enum:"true"`
 
 	// The ID of the user.
 	//
@@ -7403,7 +7403,7 @@ type User struct {
 	Id *string `min:"1" type:"string"`
 
 	// The locale of the user.
-	Locale LocaleType `type:"string"`
+	Locale LocaleType `type:"string" enum:"true"`
 
 	// The time when the user was modified.
 	ModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -7418,7 +7418,7 @@ type User struct {
 	RootFolderId *string `min:"1" type:"string"`
 
 	// The status of the user.
-	Status UserStatusType `type:"string"`
+	Status UserStatusType `type:"string" enum:"true"`
 
 	// The storage for the user.
 	Storage *UserStorageMetadata `type:"structure"`
@@ -7430,7 +7430,7 @@ type User struct {
 	TimeZoneId *string `min:"1" type:"string"`
 
 	// The type of user.
-	Type UserType `type:"string"`
+	Type UserType `type:"string" enum:"true"`
 
 	// The login name of the user.
 	Username *string `min:"1" type:"string"`

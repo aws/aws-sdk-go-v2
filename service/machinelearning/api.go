@@ -1647,7 +1647,7 @@ type AddTagsInput struct {
 	// The type of the ML object to tag.
 	//
 	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true"`
+	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
 
 	// The key-value pairs to use to create tags. If you specify a key without specifying
 	// a value, Amazon ML creates a tag with the specified key and a value of null.
@@ -1723,7 +1723,7 @@ type AddTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the ML object that was tagged.
-	ResourceType TaggableResourceType `type:"string"`
+	ResourceType TaggableResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1817,7 +1817,7 @@ type BatchPrediction struct {
 	//    It is not usable.
 	//    * COMPLETED - The batch prediction process completed successfully.
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// Long integer type that is a 64-bit signed number.
 	TotalRecordCount *int64 `type:"long"`
@@ -2633,7 +2633,7 @@ type CreateMLModelInput struct {
 	// For more information, see the Amazon Machine Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
 	//
 	// MLModelType is a required field
-	MLModelType MLModelType `type:"string" required:"true"`
+	MLModelType MLModelType `type:"string" required:"true" enum:"true"`
 
 	// A list of the training parameters in the MLModel. The list is implemented
 	// as a map of key-value pairs.
@@ -2957,7 +2957,7 @@ type DataSource struct {
 	//    It is not usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3445,7 +3445,7 @@ type DeleteTagsInput struct {
 	// The type of the tagged ML object.
 	//
 	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true"`
+	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
 
 	// One or more tags to delete.
 	//
@@ -3513,7 +3513,7 @@ type DeleteTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the ML object from which tags were deleted.
-	ResourceType TaggableResourceType `type:"string"`
+	ResourceType TaggableResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3561,7 +3561,7 @@ type DescribeBatchPredictionsInput struct {
 	//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
-	FilterVariable BatchPredictionFilterVariable `type:"string"`
+	FilterVariable BatchPredictionFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The BatchPrediction results will have
 	// FilterVariable values that are greater than or equal to the value specified
@@ -3611,7 +3611,7 @@ type DescribeBatchPredictionsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3755,7 +3755,7 @@ type DescribeDataSourcesInput struct {
 	//    Simple Storage Service (Amazon S3) bucket or directory.
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the DataSource creation.
-	FilterVariable DataSourceFilterVariable `type:"string"`
+	FilterVariable DataSourceFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The DataSource results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -3802,7 +3802,7 @@ type DescribeDataSourcesInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3951,7 +3951,7 @@ type DescribeEvaluationsInput struct {
 	//    * DataUri - Sets the search criteria to the data file(s) used in Evaluation.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
-	FilterVariable EvaluationFilterVariable `type:"string"`
+	FilterVariable EvaluationFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The Evaluation results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -3998,7 +3998,7 @@ type DescribeEvaluationsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4150,7 +4150,7 @@ type DescribeMLModelsInput struct {
 	//    * TrainingDataURI - Sets the search criteria to the data file(s) used
 	//    in training a MLModel. The URL can identify either a file or an Amazon
 	//    Simple Storage Service (Amazon S3) bucket or directory.
-	FilterVariable MLModelFilterVariable `type:"string"`
+	FilterVariable MLModelFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The MLModel results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -4198,7 +4198,7 @@ type DescribeMLModelsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4336,7 +4336,7 @@ type DescribeTagsInput struct {
 	// The type of the ML object.
 	//
 	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true"`
+	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4389,7 +4389,7 @@ type DescribeTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the tagged ML object.
-	ResourceType TaggableResourceType `type:"string"`
+	ResourceType TaggableResourceType `type:"string" enum:"true"`
 
 	// A list of tags associated with the ML object.
 	Tags []Tag `type:"list"`
@@ -4499,7 +4499,7 @@ type Evaluation struct {
 	//    It is not usable.
 	//    * COMPLETED - The evaluation process completed successfully.
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4713,7 +4713,7 @@ type GetBatchPredictionOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The batch prediction process completed successfully.
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// The number of total records that Amazon Machine Learning saw while processing
 	// the BatchPrediction.
@@ -4975,7 +4975,7 @@ type GetDataSourceOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5232,7 +5232,7 @@ type GetEvaluationOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The evaluation process completed successfully.
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5438,7 +5438,7 @@ type GetMLModelOutput struct {
 	//    an e-commerce website?"
 	//    * MULTICLASS -- Produces one of several possible results. For example,
 	//    "Is this a HIGH, LOW or MEDIUM risk trade?"
-	MLModelType MLModelType `type:"string"`
+	MLModelType MLModelType `type:"string" enum:"true"`
 
 	// A description of the most recent details about accessing the MLModel.
 	Message *string `type:"string"`
@@ -5487,7 +5487,7 @@ type GetMLModelOutput struct {
 	//
 	//    * COMPLETED - The request completed successfully.
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// The ID of the training DataSource.
 	TrainingDataSourceId *string `min:"1" type:"string"`
@@ -5680,7 +5680,7 @@ type MLModel struct {
 	//
 	//    * SGD -- Stochastic gradient descent. The goal of SGD is to minimize the
 	//    gradient of the loss function.
-	Algorithm Algorithm `type:"string"`
+	Algorithm Algorithm `type:"string" enum:"true"`
 
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64 `type:"long"`
@@ -5718,7 +5718,7 @@ type MLModel struct {
 	//    a child-friendly web site?".
 	//    * MULTICLASS - Produces one of several possible results. For example,
 	//    "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
-	MLModelType MLModelType `type:"string"`
+	MLModelType MLModelType `type:"string" enum:"true"`
 
 	// A description of the most recent details about accessing the MLModel.
 	Message *string `type:"string"`
@@ -5748,7 +5748,7 @@ type MLModel struct {
 	//    The model isn't usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// The ID of the training DataSource. The CreateMLModel operation uses the TrainingDataSourceId.
 	TrainingDataSourceId *string `min:"1" type:"string"`
@@ -6658,7 +6658,7 @@ type RealtimeEndpointInfo struct {
 	//    * NONE - Endpoint does not exist or was previously deleted.
 	//    * READY - Endpoint is ready to be used for real-time predictions.
 	//    * UPDATING - Updating/creating the endpoint.
-	EndpointStatus RealtimeEndpointStatus `type:"string"`
+	EndpointStatus RealtimeEndpointStatus `type:"string" enum:"true"`
 
 	// The URI that specifies where to send real-time prediction requests for the
 	// MLModel.

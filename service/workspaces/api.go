@@ -889,7 +889,7 @@ type ComputeType struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the compute type for the bundle.
-	Name Compute `type:"string"`
+	Name Compute `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2511,7 +2511,7 @@ type Workspace struct {
 	RootVolumeEncryptionEnabled *bool `type:"boolean"`
 
 	// The operational state of the WorkSpace.
-	State WorkspaceState `type:"string"`
+	State WorkspaceState `type:"string" enum:"true"`
 
 	// The identifier of the subnet that the WorkSpace is in.
 	SubnetId *string `type:"string"`
@@ -2705,7 +2705,7 @@ type WorkspaceConnectionStatus struct {
 
 	// The connection state of the WorkSpace. Returns UNKOWN if the WorkSpace is
 	// in a Stopped state.
-	ConnectionState ConnectionState `type:"string"`
+	ConnectionState ConnectionState `type:"string" enum:"true"`
 
 	// The timestamp of the connection state check.
 	ConnectionStateCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2770,7 +2770,7 @@ type WorkspaceDirectory struct {
 	DirectoryName *string `type:"string"`
 
 	// The directory type.
-	DirectoryType WorkspaceDirectoryType `type:"string"`
+	DirectoryType WorkspaceDirectoryType `type:"string" enum:"true"`
 
 	// An array of strings that contains the IP addresses of the DNS servers for
 	// the directory.
@@ -2785,7 +2785,7 @@ type WorkspaceDirectory struct {
 	RegistrationCode *string `min:"1" type:"string"`
 
 	// The state of the directory's registration with Amazon WorkSpaces
-	State WorkspaceDirectoryState `type:"string"`
+	State WorkspaceDirectoryState `type:"string" enum:"true"`
 
 	// An array of strings that contains the identifiers of the subnets used with
 	// the directory.
@@ -2889,7 +2889,7 @@ type WorkspaceProperties struct {
 	// The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly.
 	// AutoStop WorkSpaces are billed by the hour and stopped when no longer being
 	// used in order to save on costs.
-	RunningMode RunningMode `type:"string"`
+	RunningMode RunningMode `type:"string" enum:"true"`
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
 	// Configured in 60 minute intervals.

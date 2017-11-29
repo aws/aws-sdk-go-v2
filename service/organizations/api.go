@@ -2933,7 +2933,7 @@ type Account struct {
 	Id *string `type:"string"`
 
 	// The method by which the account joined the organization.
-	JoinedMethod AccountJoinedMethod `type:"string"`
+	JoinedMethod AccountJoinedMethod `type:"string" enum:"true"`
 
 	// The date the account became a part of the organization.
 	JoinedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2946,7 +2946,7 @@ type Account struct {
 	Name *string `min:"1" type:"string"`
 
 	// The status of the account in the organization.
-	Status AccountStatus `type:"string"`
+	Status AccountStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3177,7 +3177,7 @@ type Child struct {
 	Id *string `type:"string"`
 
 	// The type of this child entity.
-	Type ChildType `type:"string"`
+	Type ChildType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3230,7 +3230,7 @@ type CreateAccountInput struct {
 	// If you do not specify this parameter, the value defaults to ALLOW, and IAM
 	// users and roles with the required permissions can access billing information
 	// for the new account.
-	IamUserAccessToBilling IAMUserAccessToBilling `type:"string"`
+	IamUserAccessToBilling IAMUserAccessToBilling `type:"string" enum:"true"`
 
 	// (Optional)
 	//
@@ -3376,7 +3376,7 @@ type CreateAccountStatus struct {
 	//
 	//    * INTERNAL_FAILURE: The account could not be created because of an internal
 	//    failure. Try again later. If the problem persists, contact Customer Support.
-	FailureReason CreateAccountFailureReason `type:"string"`
+	FailureReason CreateAccountFailureReason `type:"string" enum:"true"`
 
 	// The unique identifier (ID) that references this request. You get this value
 	// from the response of the initial CreateAccount request to create the account.
@@ -3390,7 +3390,7 @@ type CreateAccountStatus struct {
 	RequestedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the request.
-	State CreateAccountState `type:"string"`
+	State CreateAccountState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3462,7 +3462,7 @@ type CreateOrganizationInput struct {
 	//    member account in the organization. For more information, see All features
 	//    (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
 	//    in the AWS Organizations User Guide.
-	FeatureSet OrganizationFeatureSet `type:"string"`
+	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3634,7 +3634,7 @@ type CreatePolicyInput struct {
 	// service control policy (SCP).
 	//
 	// Type is a required field
-	Type PolicyType `type:"string" required:"true"`
+	Type PolicyType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4425,7 +4425,7 @@ type DisablePolicyTypeInput struct {
 	// The policy type that you want to disable in this root.
 	//
 	// PolicyType is a required field
-	PolicyType PolicyType `type:"string" required:"true"`
+	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
 
 	// The unique identifier (ID) of the root in which you want to disable a policy
 	// type. You can get the ID from the ListRoots operation.
@@ -4547,7 +4547,7 @@ type EnablePolicyTypeInput struct {
 	// The policy type that you want to enable.
 	//
 	// PolicyType is a required field
-	PolicyType PolicyType `type:"string" required:"true"`
+	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
 
 	// The unique identifier (ID) of the root in which you want to enable a policy
 	// type. You can get the ID from the ListRoots operation.
@@ -4636,7 +4636,7 @@ type Handshake struct {
 
 	// The type of handshake, indicating what action occurs when the recipient accepts
 	// the handshake.
-	Action ActionType `type:"string"`
+	Action ActionType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of a handshake.
 	//
@@ -4690,7 +4690,7 @@ type Handshake struct {
 	//    * EXPIRED: This handshake is no longer active because the originator did
 	//    not receive a response of any kind from the recipient before the expiration
 	//    time (15 days).
-	State HandshakeState `type:"string"`
+	State HandshakeState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4759,7 +4759,7 @@ type HandshakeFilter struct {
 	// Specifies the type of handshake action.
 	//
 	// If you specify ActionType, you cannot also specify ParentHandshakeId.
-	ActionType ActionType `type:"string"`
+	ActionType ActionType `type:"string" enum:"true"`
 
 	// Specifies the parent handshake. Only used for handshake types that are a
 	// child of another type.
@@ -4809,7 +4809,7 @@ type HandshakeParty struct {
 	// The type of party.
 	//
 	// Type is a required field
-	Type HandshakePartyType `type:"string" required:"true"`
+	Type HandshakePartyType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4880,7 +4880,7 @@ type HandshakeResource struct {
 	//
 	//    * NOTES - Additional text provided by the handshake initiator and intended
 	//    for the recipient to read.
-	Type HandshakeResourceType `type:"string"`
+	Type HandshakeResourceType `type:"string" enum:"true"`
 
 	// The information that is passed to the other party in the handshake. The format
 	// of the value string must match the requirements of the specified type.
@@ -5250,7 +5250,7 @@ type ListChildrenInput struct {
 	// Filters the output to include only the specified child type.
 	//
 	// ChildType is a required field
-	ChildType ChildType `type:"string" required:"true"`
+	ChildType ChildType `type:"string" required:"true" enum:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -5950,7 +5950,7 @@ type ListPoliciesForTargetInput struct {
 	// The type of policy that you want to include in the returned list.
 	//
 	// Filter is a required field
-	Filter PolicyType `type:"string" required:"true"`
+	Filter PolicyType `type:"string" required:"true" enum:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -6087,7 +6087,7 @@ type ListPoliciesInput struct {
 	// Specifies the type of policy that you want to include in the response.
 	//
 	// Filter is a required field
-	Filter PolicyType `type:"string" required:"true"`
+	Filter PolicyType `type:"string" required:"true" enum:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -6535,7 +6535,7 @@ type Organization struct {
 	// consolidated billing functionality is available. For more information, see
 	// Enabling All Features in Your Organization (http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html)
 	// in the AWS Organizations User Guide.
-	FeatureSet OrganizationFeatureSet `type:"string"`
+	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
 
 	// The unique identifier (ID) of an organization.
 	//
@@ -6693,7 +6693,7 @@ type Parent struct {
 	Id *string `type:"string"`
 
 	// The type of the parent entity.
-	Type ParentType `type:"string"`
+	Type ParentType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6789,7 +6789,7 @@ type PolicySummary struct {
 	Name *string `min:"1" type:"string"`
 
 	// The type of policy.
-	Type PolicyType `type:"string"`
+	Type PolicyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6875,7 +6875,7 @@ type PolicyTargetSummary struct {
 	TargetId *string `type:"string"`
 
 	// The type of the policy target.
-	Type TargetType `type:"string"`
+	Type TargetType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6921,10 +6921,10 @@ type PolicyTypeSummary struct {
 	// The status of the policy type as it relates to the associated root. To attach
 	// a policy of the specified type to a root or to an OU or account in that root,
 	// it must be available in the organization and enabled for that root.
-	Status PolicyTypeStatus `type:"string"`
+	Status PolicyTypeStatus `type:"string" enum:"true"`
 
 	// The name of the policy type.
-	Type PolicyType `type:"string"`
+	Type PolicyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation

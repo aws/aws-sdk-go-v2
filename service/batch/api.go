@@ -1021,17 +1021,17 @@ type ComputeEnvironmentDetail struct {
 	// The state of the compute environment. The valid values are ENABLED or DISABLED.
 	// An ENABLED state indicates that you can register instances with the compute
 	// environment and that the associated instances can accept jobs.
-	State CEState `locationName:"state" type:"string"`
+	State CEState `locationName:"state" type:"string" enum:"true"`
 
 	// The current status of the compute environment (for example, CREATING or VALID).
-	Status CEStatus `locationName:"status" type:"string"`
+	Status CEStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the compute environment.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
 	// The type of the compute environment.
-	Type CEType `locationName:"type" type:"string"`
+	Type CEType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1224,7 +1224,7 @@ type ComputeResource struct {
 	// The type of compute environment.
 	//
 	// Type is a required field
-	Type CRType `locationName:"type" type:"string" required:"true"`
+	Type CRType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1881,12 +1881,12 @@ type CreateComputeEnvironmentInput struct {
 	// The state of the compute environment. If the state is ENABLED, then the compute
 	// environment accepts jobs from a queue and can scale out automatically based
 	// on queues.
-	State CEState `locationName:"state" type:"string"`
+	State CEState `locationName:"state" type:"string" enum:"true"`
 
 	// The type of the compute environment.
 	//
 	// Type is a required field
-	Type CEType `locationName:"type" type:"string" required:"true"`
+	Type CEType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2017,7 +2017,7 @@ type CreateJobQueueInput struct {
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able
 	// to accept jobs.
-	State JQState `locationName:"state" type:"string"`
+	State JQState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2861,7 +2861,7 @@ type JobDetail struct {
 	// The current status for the job.
 	//
 	// Status is a required field
-	Status JobStatus `locationName:"status" type:"string" required:"true"`
+	Status JobStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job.
@@ -2996,10 +2996,10 @@ type JobQueueDetail struct {
 	// Describes the ability of the queue to accept new jobs.
 	//
 	// State is a required field
-	State JQState `locationName:"state" type:"string" required:"true"`
+	State JQState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The status of the job queue (for example, CREATING or VALID).
-	Status JQStatus `locationName:"status" type:"string"`
+	Status JQStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job queue.
@@ -3144,7 +3144,7 @@ type ListJobsInput struct {
 
 	// The job status with which to filter jobs in the specified queue. If you do
 	// not specify a status, only RUNNING jobs are returned.
-	JobStatus JobStatus `locationName:"jobStatus" type:"string"`
+	JobStatus JobStatus `locationName:"jobStatus" type:"string" enum:"true"`
 
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
@@ -3323,7 +3323,7 @@ type RegisterJobDefinitionInput struct {
 	// The type of job definition.
 	//
 	// Type is a required field
-	Type JobDefinitionType `locationName:"type" type:"string" required:"true"`
+	Type JobDefinitionType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3796,7 +3796,7 @@ type UpdateComputeEnvironmentInput struct {
 	// The state of the compute environment. Compute environments in the ENABLED
 	// state can accept jobs from a queue and scale in or out automatically based
 	// on the workload demand of its associated queues.
-	State CEState `locationName:"state" type:"string"`
+	State CEState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3902,7 +3902,7 @@ type UpdateJobQueueInput struct {
 	Priority *int64 `locationName:"priority" type:"integer"`
 
 	// Describes the queue's ability to accept new jobs.
-	State JQState `locationName:"state" type:"string"`
+	State JQState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation

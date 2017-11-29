@@ -1250,7 +1250,7 @@ type SubResourceSummary struct {
 	Id *string `type:"string"`
 
 	// The SubResource type.
-	Type SubResourceType `type:"string"`
+	Type SubResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation

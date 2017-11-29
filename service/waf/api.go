@@ -2755,7 +2755,7 @@ type ActivatedRule struct {
 	// be aware that if you try to add a RATE_BASED rule to a web ACL without setting
 	// the type, the UpdateWebACL request will fail because the request tries to
 	// add a REGULAR rule with the specified ID, which does not exist.
-	Type WafRuleType `type:"string"`
+	Type WafRuleType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2938,7 +2938,7 @@ type ByteMatchSetUpdate struct {
 	// Specifies whether to insert or delete a ByteMatchTuple.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// Information about the part of a web request that you want AWS WAF to inspect
 	// and the value that you want AWS WAF to search for. If you specify DELETE
@@ -3053,7 +3053,7 @@ type ByteMatchTuple struct {
 	// the web request.
 	//
 	// PositionalConstraint is a required field
-	PositionalConstraint PositionalConstraint `type:"string" required:"true"`
+	PositionalConstraint PositionalConstraint `type:"string" required:"true" enum:"true"`
 
 	// The value that you want AWS WAF to search for. AWS WAF searches for the specified
 	// string in the part of web requests that you specified in FieldToMatch. The
@@ -3178,7 +3178,7 @@ type ByteMatchTuple struct {
 	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// TextTransformation is a required field
-	TextTransformation TextTransformation `type:"string" required:"true"`
+	TextTransformation TextTransformation `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3469,7 +3469,7 @@ type CreateRateBasedRuleInput struct {
 	// same IP address are subject to the RateLimit that is specified in the RateBasedRule.
 	//
 	// RateKey is a required field
-	RateKey RateKey `type:"string" required:"true"`
+	RateKey RateKey `type:"string" required:"true" enum:"true"`
 
 	// The maximum number of requests, which have an identical value in the field
 	// that is specified by RateKey, allowed in a five-minute period. If the number
@@ -4886,7 +4886,7 @@ type FieldToMatch struct {
 	//    see CreateSizeConstraintSet.
 	//
 	// Type is a required field
-	Type MatchFieldType `type:"string" required:"true"`
+	Type MatchFieldType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5090,7 +5090,7 @@ type GetChangeTokenStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the change token.
-	ChangeTokenStatus ChangeTokenStatus `type:"string"`
+	ChangeTokenStatus ChangeTokenStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6085,7 +6085,7 @@ type IPSetDescriptor struct {
 	// Specify IPV4 or IPV6.
 	//
 	// Type is a required field
-	Type IPSetDescriptorType `type:"string" required:"true"`
+	Type IPSetDescriptorType `type:"string" required:"true" enum:"true"`
 
 	// Specify an IPv4 address by using CIDR notation. For example:
 	//
@@ -6198,7 +6198,7 @@ type IPSetUpdate struct {
 	// Specifies whether to insert or delete an IP address with UpdateIPSet.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// The IP address type (IPV4 or IPV6) and the IP address range (in CIDR notation)
 	// that web requests originate from.
@@ -7003,7 +7003,7 @@ type Predicate struct {
 	// The type of predicate in a Rule, such as ByteMatchSet or IPSet.
 	//
 	// Type is a required field
-	Type PredicateType `type:"string" required:"true"`
+	Type PredicateType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7099,7 +7099,7 @@ type RateBasedRule struct {
 	// are subject to the RateLimit that is specified in the RateBasedRule.
 	//
 	// RateKey is a required field
-	RateKey RateKey `type:"string" required:"true"`
+	RateKey RateKey `type:"string" required:"true" enum:"true"`
 
 	// The maximum number of requests, which have an identical value in the field
 	// specified by the RateKey, allowed in a five-minute period. If the number
@@ -7296,7 +7296,7 @@ type RuleUpdate struct {
 	// from a Rule.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// The ID of the Predicate (such as an IPSet) that you want to add to a Rule.
 	//
@@ -7438,7 +7438,7 @@ type SizeConstraint struct {
 	// GT: Used to test if the Size is strictly greater than the size of the FieldToMatch
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// Specifies where in a web request to look for the size constraint.
 	//
@@ -7535,7 +7535,7 @@ type SizeConstraint struct {
 	// Use this option to decode a URL-encoded value.
 	//
 	// TextTransformation is a required field
-	TextTransformation TextTransformation `type:"string" required:"true"`
+	TextTransformation TextTransformation `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7712,7 +7712,7 @@ type SizeConstraintSetUpdate struct {
 	// DELETE to remove a SizeConstraintSetUpdate from a SizeConstraintSet.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// Specifies a constraint on the size of a part of the web request. AWS WAF
 	// uses the Size, ComparisonOperator, and FieldToMatch to build an expression
@@ -7881,7 +7881,7 @@ type SqlInjectionMatchSetUpdate struct {
 	// Use DELETE to remove a SqlInjectionMatchSetUpdate from a SqlInjectionMatchSet.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// Specifies the part of a web request that you want AWS WAF to inspect for
 	// snippets of malicious SQL code and, if you want AWS WAF to inspect a header,
@@ -8019,7 +8019,7 @@ type SqlInjectionMatchTuple struct {
 	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// TextTransformation is a required field
-	TextTransformation TextTransformation `type:"string" required:"true"`
+	TextTransformation TextTransformation `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9129,7 +9129,7 @@ type WafAction struct {
 	//    COUNT for the default action for a WebACL.
 	//
 	// Type is a required field
-	Type WafActionType `type:"string" required:"true"`
+	Type WafActionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9295,7 +9295,7 @@ type WebACLUpdate struct {
 	// Specifies whether to insert a Rule into or delete a Rule from a WebACL.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// The ActivatedRule object in an UpdateWebACL request specifies a Rule that
 	// you want to insert or delete, the priority of the Rule in the WebACL, and
@@ -9462,7 +9462,7 @@ type XssMatchSetUpdate struct {
 	// remove a XssMatchSetUpdate from an XssMatchSet.
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// Specifies the part of a web request that you want AWS WAF to inspect for
 	// cross-site scripting attacks and, if you want AWS WAF to inspect a header,
@@ -9600,7 +9600,7 @@ type XssMatchTuple struct {
 	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// TextTransformation is a required field
-	TextTransformation TextTransformation `type:"string" required:"true"`
+	TextTransformation TextTransformation `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

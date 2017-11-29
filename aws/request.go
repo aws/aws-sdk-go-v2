@@ -237,17 +237,6 @@ func (r *Request) ParamsFilled() bool {
 	return r.Params != nil && reflect.ValueOf(r.Params).Elem().IsValid()
 }
 
-// DataFilled returns true if the request's data for response deserialization
-// target has been set and is a valid. False is returned if data is not
-// set, or is invalid.
-func (r *Request) DataFilled() bool {
-	v := reflect.ValueOf(r.Data)
-	if v.Kind() == reflect.Ptr {
-		return r.Data != nil && reflect.ValueOf(r.Data).Elem().IsValid()
-	}
-	return r.Data != nil && reflect.ValueOf(r.Data).IsValid()
-}
-
 // SetBufferBody will set the request's body bytes that will be sent to
 // the service API.
 func (r *Request) SetBufferBody(buf []byte) {

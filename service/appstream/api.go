@@ -1719,7 +1719,7 @@ type CreateFleetInput struct {
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
-	FleetType FleetType `type:"string"`
+	FleetType FleetType `type:"string" enum:"true"`
 
 	// The name of the image used by the fleet.
 	//
@@ -2993,7 +2993,7 @@ type DescribeSessionsInput struct {
 	// The authentication method. Specify API for a user authenticated using a streaming
 	// URL or SAML for a SAML federated user. The default is to authenticate users
 	// using a streaming URL.
-	AuthenticationType AuthenticationType `type:"string"`
+	AuthenticationType AuthenticationType `type:"string" enum:"true"`
 
 	// The name of the fleet.
 	//
@@ -3470,7 +3470,7 @@ type Fleet struct {
 	// The fleet errors.
 	FleetErrors []FleetError `type:"list"`
 
-	FleetType FleetType `type:"string"`
+	FleetType FleetType `type:"string" enum:"true"`
 
 	// The image used by the fleet.
 	//
@@ -3494,7 +3494,7 @@ type Fleet struct {
 	// The current state for the fleet.
 	//
 	// State is a required field
-	State FleetState `type:"string" required:"true"`
+	State FleetState `type:"string" required:"true" enum:"true"`
 
 	// The VPC configuration for the fleet.
 	VpcConfig *VpcConfig `type:"structure"`
@@ -3612,7 +3612,7 @@ type FleetError struct {
 	_ struct{} `type:"structure"`
 
 	// The error code.
-	ErrorCode FleetErrorCode `type:"string"`
+	ErrorCode FleetErrorCode `type:"string" enum:"true"`
 
 	// The error message.
 	ErrorMessage *string `min:"1" type:"string"`
@@ -3672,7 +3672,7 @@ type Image struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The operating system platform of the image.
-	Platform PlatformType `type:"string"`
+	Platform PlatformType `type:"string" enum:"true"`
 
 	// The release date of the public base image. For private images, this date
 	// is the release date of the base image from which the image was created.
@@ -3680,13 +3680,13 @@ type Image struct {
 
 	// The image starts in the PENDING state. If image creation succeeds, the state
 	// is AVAILABLE. If image creation fails, the state is FAILED.
-	State ImageState `type:"string"`
+	State ImageState `type:"string" enum:"true"`
 
 	// The reason why the last state change occurred.
 	StateChangeReason *ImageStateChangeReason `type:"structure"`
 
 	// Indicates whether the image is public or private.
-	Visibility VisibilityType `type:"string"`
+	Visibility VisibilityType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3803,9 +3803,9 @@ type ImageBuilder struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	Platform PlatformType `type:"string"`
+	Platform PlatformType `type:"string" enum:"true"`
 
-	State ImageBuilderState `type:"string"`
+	State ImageBuilderState `type:"string" enum:"true"`
 
 	StateChangeReason *ImageBuilderStateChangeReason `type:"structure"`
 
@@ -3911,7 +3911,7 @@ func (s *ImageBuilder) SetVpcConfig(v *VpcConfig) *ImageBuilder {
 type ImageBuilderStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
-	Code ImageBuilderStateChangeReasonCode `type:"string"`
+	Code ImageBuilderStateChangeReasonCode `type:"string" enum:"true"`
 
 	Message *string `min:"1" type:"string"`
 }
@@ -3944,7 +3944,7 @@ type ImageStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The state change reason code.
-	Code ImageStateChangeReasonCode `type:"string"`
+	Code ImageStateChangeReasonCode `type:"string" enum:"true"`
 
 	// The state change reason message.
 	Message *string `min:"1" type:"string"`
@@ -4156,7 +4156,7 @@ func (s *ListAssociatedStacksOutput) SetNextToken(v string) *ListAssociatedStack
 type ResourceError struct {
 	_ struct{} `type:"structure"`
 
-	ErrorCode FleetErrorCode `type:"string"`
+	ErrorCode FleetErrorCode `type:"string" enum:"true"`
 
 	ErrorMessage *string `min:"1" type:"string"`
 
@@ -4263,7 +4263,7 @@ type Session struct {
 
 	// The authentication method. The user is authenticated using a streaming URL
 	// (API) or SAML federation (SAML).
-	AuthenticationType AuthenticationType `type:"string"`
+	AuthenticationType AuthenticationType `type:"string" enum:"true"`
 
 	// The name of the fleet for the streaming session.
 	//
@@ -4283,7 +4283,7 @@ type Session struct {
 	// The current state of the streaming session.
 	//
 	// State is a required field
-	State SessionState `type:"string" required:"true"`
+	State SessionState `type:"string" required:"true" enum:"true"`
 
 	// The identifier of the user for whom the session was created.
 	//
@@ -4424,7 +4424,7 @@ type StackError struct {
 	_ struct{} `type:"structure"`
 
 	// The error code.
-	ErrorCode StackErrorCode `type:"string"`
+	ErrorCode StackErrorCode `type:"string" enum:"true"`
 
 	// The error message.
 	ErrorMessage *string `min:"1" type:"string"`
@@ -4704,7 +4704,7 @@ type StorageConnector struct {
 	// The type of storage connector.
 	//
 	// ConnectorType is a required field
-	ConnectorType StorageConnectorType `type:"string" required:"true"`
+	ConnectorType StorageConnectorType `type:"string" required:"true" enum:"true"`
 
 	// The ARN of the storage connector.
 	ResourceIdentifier *string `min:"1" type:"string"`

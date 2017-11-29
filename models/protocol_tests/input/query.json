@@ -864,7 +864,7 @@
       },
       "EnumList":{
         "type":"list",
-				"member": {"shape": "EnumType"}
+        "member": {"shape": "EnumType"}
       }
     },
     "cases": [

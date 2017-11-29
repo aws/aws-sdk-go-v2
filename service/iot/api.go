@@ -3176,7 +3176,7 @@ type CACertificate struct {
 	// The status of the CA certificate.
 	//
 	// The status value REGISTER_INACTIVE is deprecated and should not be used.
-	Status CACertificateStatus `locationName:"status" type:"string"`
+	Status CACertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3219,7 +3219,7 @@ type CACertificateDescription struct {
 
 	// Whether the CA certificate configured for auto registration of device certificates.
 	// Valid values are "ENABLE" and "DISABLE"
-	AutoRegistrationStatus AutoRegistrationStatus `locationName:"autoRegistrationStatus" type:"string"`
+	AutoRegistrationStatus AutoRegistrationStatus `locationName:"autoRegistrationStatus" type:"string" enum:"true"`
 
 	// The CA certificate ARN.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
@@ -3237,7 +3237,7 @@ type CACertificateDescription struct {
 	OwnedBy *string `locationName:"ownedBy" type:"string"`
 
 	// The status of a CA certificate.
-	Status CACertificateStatus `locationName:"status" type:"string"`
+	Status CACertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3365,7 +3365,7 @@ type Certificate struct {
 	// The status of the certificate.
 	//
 	// The status value REGISTER_INACTIVE is deprecated and should not be used.
-	Status CertificateStatus `locationName:"status" type:"string"`
+	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3431,7 +3431,7 @@ type CertificateDescription struct {
 	PreviousOwnedBy *string `locationName:"previousOwnedBy" type:"string"`
 
 	// The status of the certificate.
-	Status CertificateStatus `locationName:"status" type:"string"`
+	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The transfer data.
 	TransferData *TransferData `locationName:"transferData" type:"structure"`
@@ -5496,7 +5496,7 @@ type DynamoDBAction struct {
 	HashKeyField *string `locationName:"hashKeyField" type:"string" required:"true"`
 
 	// The hash key type. Valid values are "STRING" or "NUMBER"
-	HashKeyType DynamoKeyType `locationName:"hashKeyType" type:"string"`
+	HashKeyType DynamoKeyType `locationName:"hashKeyType" type:"string" enum:"true"`
 
 	// The hash key value.
 	//
@@ -5515,7 +5515,7 @@ type DynamoDBAction struct {
 	RangeKeyField *string `locationName:"rangeKeyField" type:"string"`
 
 	// The range key type. Valid values are "STRING" or "NUMBER"
-	RangeKeyType DynamoKeyType `locationName:"rangeKeyType" type:"string"`
+	RangeKeyType DynamoKeyType `locationName:"rangeKeyType" type:"string" enum:"true"`
 
 	// The range key value.
 	RangeKeyValue *string `locationName:"rangeKeyValue" type:"string"`
@@ -5928,7 +5928,7 @@ type GetLoggingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The logging level.
-	LogLevel LogLevel `locationName:"logLevel" type:"string"`
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
 
 	// The ARN of the IAM role that grants access.
 	RoleArn *string `locationName:"roleArn" type:"string"`
@@ -7635,7 +7635,7 @@ type LoggingOptionsPayload struct {
 	_ struct{} `type:"structure"`
 
 	// The logging level.
-	LogLevel LogLevel `locationName:"logLevel" type:"string"`
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -7992,7 +7992,7 @@ type RegisterCertificateInput struct {
 	SetAsActive *bool `location:"querystring" locationName:"setAsActive" deprecated:"true" type:"boolean"`
 
 	// The status of the register certificate request.
-	Status CertificateStatus `locationName:"status" type:"string"`
+	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8291,7 +8291,7 @@ type S3Action struct {
 
 	// The Amazon S3 canned ACL that controls access to the object identified by
 	// the object key. For more information, see S3 canned ACLs (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
-	CannedAcl CannedAccessControlList `locationName:"cannedAcl" type:"string"`
+	CannedAcl CannedAccessControlList `locationName:"cannedAcl" type:"string" enum:"true"`
 
 	// The object key.
 	//
@@ -8562,7 +8562,7 @@ type SnsAction struct {
 	// bits of the payload should be extracted. To read more about SNS message formats,
 	// see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html (http://docs.aws.amazon.com/sns/latest/dg/json-formats.html)
 	// refer to their official documentation.
-	MessageFormat MessageFormat `locationName:"messageFormat" type:"string"`
+	MessageFormat MessageFormat `locationName:"messageFormat" type:"string" enum:"true"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -9252,13 +9252,13 @@ type UpdateCACertificateInput struct {
 
 	// The new value for the auto registration status. Valid values are: "ENABLE"
 	// or "DISABLE".
-	NewAutoRegistrationStatus AutoRegistrationStatus `location:"querystring" locationName:"newAutoRegistrationStatus" type:"string"`
+	NewAutoRegistrationStatus AutoRegistrationStatus `location:"querystring" locationName:"newAutoRegistrationStatus" type:"string" enum:"true"`
 
 	// The updated status of the CA certificate.
 	//
 	// Note: The status value REGISTER_INACTIVE is deprecated and should not be
 	// used.
-	NewStatus CACertificateStatus `location:"querystring" locationName:"newStatus" type:"string"`
+	NewStatus CACertificateStatus `location:"querystring" locationName:"newStatus" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9339,7 +9339,7 @@ type UpdateCertificateInput struct {
 	// used.
 	//
 	// NewStatus is a required field
-	NewStatus CertificateStatus `location:"querystring" locationName:"newStatus" type:"string" required:"true"`
+	NewStatus CertificateStatus `location:"querystring" locationName:"newStatus" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

@@ -415,12 +415,12 @@ type ReportDefinition struct {
 	// Preferred compression format for report.
 	//
 	// Compression is a required field
-	Compression CompressionFormat `type:"string" required:"true"`
+	Compression CompressionFormat `type:"string" required:"true" enum:"true"`
 
 	// Preferred format for report.
 	//
 	// Format is a required field
-	Format ReportFormat `type:"string" required:"true"`
+	Format ReportFormat `type:"string" required:"true" enum:"true"`
 
 	// Preferred name for a report, it has to be unique. Must starts with a number/letter,
 	// case sensitive. Limited to 256 characters.
@@ -441,12 +441,12 @@ type ReportDefinition struct {
 	// Region of customer S3 bucket.
 	//
 	// S3Region is a required field
-	S3Region AWSRegion `type:"string" required:"true"`
+	S3Region AWSRegion `type:"string" required:"true" enum:"true"`
 
 	// The frequency on which report data are measured and displayed.
 	//
 	// TimeUnit is a required field
-	TimeUnit TimeUnit `type:"string" required:"true"`
+	TimeUnit TimeUnit `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

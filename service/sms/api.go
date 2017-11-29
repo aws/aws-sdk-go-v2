@@ -784,7 +784,7 @@ type Connector struct {
 	MacAddress *string `locationName:"macAddress" type:"string"`
 
 	// Status of on-premise Connector
-	Status ConnectorStatus `locationName:"status" type:"string"`
+	Status ConnectorStatus `locationName:"status" type:"string" enum:"true"`
 
 	// Connector version string
 	Version *string `locationName:"version" type:"string"`
@@ -796,7 +796,7 @@ type Connector struct {
 	VmManagerName *string `locationName:"vmManagerName" type:"string"`
 
 	// VM Management Product
-	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string"`
+	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -884,7 +884,7 @@ type CreateReplicationJobInput struct {
 
 	// The license type to be used for the Amazon Machine Image (AMI) created after
 	// a successful ReplicationRun.
-	LicenseType LicenseType `locationName:"licenseType" type:"string"`
+	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
 	// Name of service role in customer's account to be used by SMS service.
 	RoleName *string `locationName:"roleName" type:"string"`
@@ -1421,7 +1421,7 @@ type GetServersOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Status of Server catalog
-	ServerCatalogStatus ServerCatalogStatus `locationName:"serverCatalogStatus" type:"string"`
+	ServerCatalogStatus ServerCatalogStatus `locationName:"serverCatalogStatus" type:"string" enum:"true"`
 
 	// List of servers from catalog
 	ServerList []Server `locationName:"serverList" locationNameList:"item" type:"list"`
@@ -1508,7 +1508,7 @@ type ReplicationJob struct {
 
 	// The license type to be used for the Amazon Machine Image (AMI) created after
 	// a successful ReplicationRun.
-	LicenseType LicenseType `locationName:"licenseType" type:"string"`
+	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
 	// Timestamp of an operation
 	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
@@ -1529,10 +1529,10 @@ type ReplicationJob struct {
 	ServerId *string `locationName:"serverId" type:"string"`
 
 	// Type of server.
-	ServerType ServerType `locationName:"serverType" type:"string"`
+	ServerType ServerType `locationName:"serverType" type:"string" enum:"true"`
 
 	// Current state of Replication Job
-	State ReplicationJobState `locationName:"state" type:"string"`
+	State ReplicationJobState `locationName:"state" type:"string" enum:"true"`
 
 	// String describing current status of Replication Job
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -1656,13 +1656,13 @@ type ReplicationRun struct {
 	ScheduledStartTime *time.Time `locationName:"scheduledStartTime" type:"timestamp" timestampFormat:"unix"`
 
 	// Current state of Replication Run
-	State ReplicationRunState `locationName:"state" type:"string"`
+	State ReplicationRunState `locationName:"state" type:"string" enum:"true"`
 
 	// String describing current status of Replication Run
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Type of Replication Run
-	Type ReplicationRunType `locationName:"type" type:"string"`
+	Type ReplicationRunType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1738,7 +1738,7 @@ type Server struct {
 	ServerId *string `locationName:"serverId" type:"string"`
 
 	// Type of server.
-	ServerType ServerType `locationName:"serverType" type:"string"`
+	ServerType ServerType `locationName:"serverType" type:"string" enum:"true"`
 
 	// Object representing a VM server
 	VmServer *VmServer `locationName:"vmServer" type:"structure"`
@@ -1870,7 +1870,7 @@ type UpdateReplicationJobInput struct {
 
 	// The license type to be used for the Amazon Machine Image (AMI) created after
 	// a successful ReplicationRun.
-	LicenseType LicenseType `locationName:"licenseType" type:"string"`
+	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
 	// Timestamp of an operation
 	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
@@ -1968,7 +1968,7 @@ type VmServer struct {
 	VmManagerName *string `locationName:"vmManagerName" type:"string"`
 
 	// VM Management Product
-	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string"`
+	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string" enum:"true"`
 
 	// Name of Virtual Machine
 	VmName *string `locationName:"vmName" type:"string"`

@@ -15617,7 +15617,7 @@ type DescribeEventsInput struct {
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
@@ -17135,7 +17135,7 @@ type Event struct {
 	SourceIdentifier *string `type:"string"`
 
 	// Specifies the source type for this event.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -20298,7 +20298,7 @@ type Parameter struct {
 	AllowedValues *string `type:"string"`
 
 	// Indicates when to apply parameter updates.
-	ApplyMethod ApplyMethod `type:"string"`
+	ApplyMethod ApplyMethod `type:"string" enum:"true"`
 
 	// Specifies the engine specific parameters type.
 	ApplyType *string `type:"string"`

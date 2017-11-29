@@ -1694,9 +1694,9 @@ type OutputService13TestShapeOutputService13TestCaseOperation1Input struct {
 type OutputService13TestShapeOutputService13TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService13TestShapeRESTJSONEnumType `type:"string"`
+	FooEnum OutputService13TestShapeRESTJSONEnumType `type:"string" enum:"true"`
 
-	HeaderEnum OutputService13TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string"`
+	HeaderEnum OutputService13TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
 
 	ListEnums []OutputService13TestShapeRESTJSONEnumType `type:"list"`
 }

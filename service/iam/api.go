@@ -8160,7 +8160,7 @@ type AccessKey struct {
 	// while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user that the access key is associated with.
 	//
@@ -8302,7 +8302,7 @@ type AccessKeyMetadata struct {
 
 	// The status of the access key. Active means the key is valid for API calls;
 	// Inactive means it is not.
-	Status StatusType `type:"string"`
+	Status StatusType `type:"string" enum:"true"`
 
 	// The name of the IAM user that the key is associated with.
 	UserName *string `min:"1" type:"string"`
@@ -8991,7 +8991,7 @@ type ContextEntry struct {
 
 	// The data type of the value (or values) specified in the ContextKeyValues
 	// parameter.
-	ContextKeyType ContextKeyTypeEnum `type:"string"`
+	ContextKeyType ContextKeyTypeEnum `type:"string" enum:"true"`
 
 	// The value (or values, if the condition context key supports multiple values)
 	// to provide to the simulation for use when the key is referenced by a Condition
@@ -12448,7 +12448,7 @@ type EvaluationResult struct {
 	// The result of the simulation.
 	//
 	// EvalDecision is a required field
-	EvalDecision PolicyEvaluationDecisionType `type:"string" required:"true"`
+	EvalDecision PolicyEvaluationDecisionType `type:"string" required:"true" enum:"true"`
 
 	// Additional details about the results of the evaluation decision. When there
 	// are both IAM policies and resource policies, this parameter explains how
@@ -12569,7 +12569,7 @@ type GenerateCredentialReportOutput struct {
 	Description *string `type:"string"`
 
 	// Information about the state of the credential report.
-	State ReportStateType `type:"string"`
+	State ReportStateType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13086,7 +13086,7 @@ type GetCredentialReportOutput struct {
 	GeneratedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The format (MIME type) of the credential report.
-	ReportFormat ReportFormatType `type:"string"`
+	ReportFormat ReportFormatType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -14090,7 +14090,7 @@ type GetSSHPublicKeyInput struct {
 	// PEM format, use PEM.
 	//
 	// Encoding is a required field
-	Encoding EncodingType `type:"string" required:"true"`
+	Encoding EncodingType `type:"string" required:"true" enum:"true"`
 
 	// The unique identifier for the SSH public key.
 	//
@@ -14319,7 +14319,7 @@ type GetServiceLinkedRoleDeletionStatusOutput struct {
 	// The status of the deletion.
 	//
 	// Status is a required field
-	Status DeletionTaskStatusType `type:"string" required:"true"`
+	Status DeletionTaskStatusType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -15498,7 +15498,7 @@ type ListEntitiesForPolicyInput struct {
 	// to the specified policy are returned. This parameter is optional. If it is
 	// not included, all attached entities (users, groups, and roles) are returned.
 	// The argument for this parameter must be one of the valid values listed below.
-	EntityFilter EntityType `type:"string"`
+	EntityFilter EntityType `type:"string" enum:"true"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -16547,7 +16547,7 @@ type ListPoliciesInput struct {
 	//
 	// This parameter is optional. If it is not included, or if it is set to All,
 	// all policies are returned.
-	Scope PolicyScopeType `type:"string"`
+	Scope PolicyScopeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -17829,7 +17829,7 @@ type ListVirtualMFADevicesInput struct {
 	// The status (Unassigned or Assigned) of the devices to list. If you do not
 	// specify an AssignmentStatus, the action defaults to Any which lists both
 	// assigned and unassigned virtual MFA devices.
-	AssignmentStatus AssignmentStatusType `type:"string"`
+	AssignmentStatus AssignmentStatusType `type:"string" enum:"true"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -19458,7 +19458,7 @@ type ResourceSpecificResult struct {
 	// specified in EvalResourceName.
 	//
 	// EvalResourceDecision is a required field
-	EvalResourceDecision PolicyEvaluationDecisionType `type:"string" required:"true"`
+	EvalResourceDecision PolicyEvaluationDecisionType `type:"string" required:"true" enum:"true"`
 
 	// The name of the simulated resource, in Amazon Resource Name (ARN) format.
 	//
@@ -19962,7 +19962,7 @@ type SSHPublicKey struct {
 	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the SSH public key was uploaded.
@@ -20036,7 +20036,7 @@ type SSHPublicKeyMetadata struct {
 	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the SSH public key was uploaded.
@@ -20262,7 +20262,7 @@ type ServiceSpecificCredential struct {
 	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	//
@@ -20352,7 +20352,7 @@ type ServiceSpecificCredentialMetadata struct {
 	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	//
@@ -20510,7 +20510,7 @@ type SigningCertificate struct {
 	// API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The date when the signing certificate was uploaded.
 	UploadDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -21162,7 +21162,7 @@ type Statement struct {
 	SourcePolicyId *string `type:"string"`
 
 	// The type of the policy.
-	SourcePolicyType PolicySourceType `type:"string"`
+	SourcePolicyType PolicySourceType `type:"string" enum:"true"`
 
 	// The row and column of the beginning of the Statement in an IAM policy.
 	StartPosition *Position `type:"structure"`
@@ -21220,7 +21220,7 @@ type UpdateAccessKeyInput struct {
 	// be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the user whose key you want to update.
 	//
@@ -22007,7 +22007,7 @@ type UpdateSSHPublicKeyInput struct {
 	// key cannot be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the SSH public key.
 	//
@@ -22204,7 +22204,7 @@ type UpdateServiceSpecificCredentialInput struct {
 	// The status to be assigned to the service-specific credential.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	// If you do not specify this value, then the operation assumes the user whose
@@ -22300,7 +22300,7 @@ type UpdateSigningCertificateInput struct {
 	// be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user the signing certificate belongs to.
 	//

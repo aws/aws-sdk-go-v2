@@ -5227,7 +5227,7 @@ type AddTagsToResourceInput struct {
 	// Specifies the type of resource you are tagging.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceTypeForTagging `type:"string" required:"true"`
+	ResourceType ResourceTypeForTagging `type:"string" required:"true" enum:"true"`
 
 	// One or more tags. The value parameter is required, but if you don't want
 	// the tag to have a value, specify the parameter with no value, and we set
@@ -5583,7 +5583,7 @@ type AssociationFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key AssociationFilterKey `locationName:"key" type:"string" required:"true"`
+	Key AssociationFilterKey `locationName:"key" type:"string" required:"true" enum:"true"`
 
 	// The filter value.
 	//
@@ -5699,7 +5699,7 @@ type AssociationStatus struct {
 	// The status.
 	//
 	// Name is a required field
-	Name AssociationStatusName `type:"string" required:"true"`
+	Name AssociationStatusName `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5881,7 +5881,7 @@ type AutomationExecution struct {
 	AutomationExecutionId *string `min:"36" type:"string"`
 
 	// The execution status of the Automation.
-	AutomationExecutionStatus AutomationExecutionStatus `type:"string"`
+	AutomationExecutionStatus AutomationExecutionStatus `type:"string" enum:"true"`
 
 	// The name of the Automation document used during the execution.
 	DocumentName *string `type:"string"`
@@ -5990,7 +5990,7 @@ type AutomationExecutionFilter struct {
 	// The aspect of the Automation execution information that should be limited.
 	//
 	// Key is a required field
-	Key AutomationExecutionFilterKey `type:"string" required:"true"`
+	Key AutomationExecutionFilterKey `type:"string" required:"true" enum:"true"`
 
 	// The values used to limit the execution information associated with the filter's
 	// key.
@@ -6051,7 +6051,7 @@ type AutomationExecutionMetadata struct {
 
 	// The status of the execution. Valid values include: Running, Succeeded, Failed,
 	// Timed out, or Cancelled.
-	AutomationExecutionStatus AutomationExecutionStatus `type:"string"`
+	AutomationExecutionStatus AutomationExecutionStatus `type:"string" enum:"true"`
 
 	// The name of the Automation document used during execution.
 	DocumentName *string `type:"string"`
@@ -6283,7 +6283,7 @@ type Command struct {
 	ServiceRole *string `type:"string"`
 
 	// The status of the command.
-	Status CommandStatus `type:"string"`
+	Status CommandStatus `type:"string" enum:"true"`
 
 	// A detailed status of the command execution. StatusDetails includes more information
 	// than Status because it includes states resulting from error and concurrency
@@ -6467,7 +6467,7 @@ type CommandFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key CommandFilterKey `locationName:"key" type:"string" required:"true"`
+	Key CommandFilterKey `locationName:"key" type:"string" required:"true" enum:"true"`
 
 	// The filter value.
 	//
@@ -6570,7 +6570,7 @@ type CommandInvocation struct {
 	StandardOutputUrl *string `type:"string"`
 
 	// Whether or not the invocation succeeded, failed, or is pending.
-	Status CommandInvocationStatus `type:"string"`
+	Status CommandInvocationStatus `type:"string" enum:"true"`
 
 	// A detailed status of the command execution for each invocation (each instance
 	// targeted by the command). StatusDetails includes more information than Status
@@ -6782,7 +6782,7 @@ type CommandPlugin struct {
 	StandardOutputUrl *string `type:"string"`
 
 	// The status of this plugin. You can execute a document with multiple plugins.
-	Status CommandPluginStatus `type:"string"`
+	Status CommandPluginStatus `type:"string" enum:"true"`
 
 	// A detailed status of the plugin execution. StatusDetails includes more information
 	// than Status because it includes states resulting from error and concurrency
@@ -7004,10 +7004,10 @@ type ComplianceItem struct {
 
 	// The severity of the compliance status. Severity can be one of the following:
 	// Critical, High, Medium, Low, Informational, Unspecified.
-	Severity ComplianceSeverity `type:"string"`
+	Severity ComplianceSeverity `type:"string" enum:"true"`
 
 	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
-	Status ComplianceStatus `type:"string"`
+	Status ComplianceStatus `type:"string" enum:"true"`
 
 	// A title for the compliance item. For example, if the compliance item is a
 	// Windows patch, the title could be the title of the KB article for the patch.
@@ -7095,12 +7095,12 @@ type ComplianceItemEntry struct {
 	// Critical, High, Medium, Low, Informational, Unspecified.
 	//
 	// Severity is a required field
-	Severity ComplianceSeverity `type:"string" required:"true"`
+	Severity ComplianceSeverity `type:"string" required:"true" enum:"true"`
 
 	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
 	//
 	// Status is a required field
-	Status ComplianceStatus `type:"string" required:"true"`
+	Status ComplianceStatus `type:"string" required:"true" enum:"true"`
 
 	// The title of the compliance item. For example, if the compliance item is
 	// a Windows patch, the title could be the title of the KB article for the patch.
@@ -7177,7 +7177,7 @@ type ComplianceStringFilter struct {
 
 	// The type of comparison that should be performed for the value: Equal, NotEqual,
 	// BeginWith, LessThan, or GreaterThan.
-	Type ComplianceQueryOperatorType `type:"string"`
+	Type ComplianceQueryOperatorType `type:"string" enum:"true"`
 
 	// The value for which to search.
 	Values []string `locationNameList:"FilterValue" min:"1" type:"list"`
@@ -7781,7 +7781,7 @@ type CreateDocumentInput struct {
 
 	// The type of document to create. Valid document types include: Policy, Automation,
 	// and Command.
-	DocumentType DocumentType `type:"string"`
+	DocumentType DocumentType `type:"string" enum:"true"`
 
 	// A name for the Systems Manager document.
 	//
@@ -8041,7 +8041,7 @@ type CreatePatchBaselineInput struct {
 	// approved patch is reported as missing, this is the severity of the compliance
 	// violation. Valid compliance severity levels include the following: CRITICAL,
 	// HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
-	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
 	// User-provided idempotency token.
 	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
@@ -8060,7 +8060,7 @@ type CreatePatchBaselineInput struct {
 	// Defines the operating system the patch baseline applies to. Supported operating
 	// systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX.
 	// The Default value is WINDOWS.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
@@ -9114,7 +9114,7 @@ type DescribeActivationsFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the filter.
-	FilterKey DescribeActivationsFilterKeys `type:"string"`
+	FilterKey DescribeActivationsFilterKeys `type:"string" enum:"true"`
 
 	// The filter values.
 	FilterValues []string `type:"list"`
@@ -9597,7 +9597,7 @@ type DescribeDocumentPermissionInput struct {
 	// The permission type for the document. The permission type can be Share.
 	//
 	// PermissionType is a required field
-	PermissionType DocumentPermissionType `type:"string" required:"true"`
+	PermissionType DocumentPermissionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -11621,7 +11621,7 @@ type DocumentDescription struct {
 	Description *string `type:"string"`
 
 	// The type of document.
-	DocumentType DocumentType `type:"string"`
+	DocumentType DocumentType `type:"string" enum:"true"`
 
 	// The document version.
 	DocumentVersion *string `type:"string"`
@@ -11634,7 +11634,7 @@ type DocumentDescription struct {
 	// Sha256 or Sha1.
 	//
 	// Sha1 hashes have been deprecated.
-	HashType DocumentHashType `type:"string"`
+	HashType DocumentHashType `type:"string" enum:"true"`
 
 	// The latest version of the document.
 	LatestVersion *string `type:"string"`
@@ -11658,7 +11658,7 @@ type DocumentDescription struct {
 	Sha1 *string `type:"string"`
 
 	// The status of the Systems Manager document.
-	Status DocumentStatus `type:"string"`
+	Status DocumentStatus `type:"string" enum:"true"`
 
 	// The tags, or metadata, that have been applied to the document.
 	Tags []Tag `type:"list"`
@@ -11778,7 +11778,7 @@ type DocumentFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key DocumentFilterKey `locationName:"key" type:"string" required:"true"`
+	Key DocumentFilterKey `locationName:"key" type:"string" required:"true" enum:"true"`
 
 	// The value of the filter.
 	//
@@ -11834,7 +11834,7 @@ type DocumentIdentifier struct {
 	_ struct{} `type:"structure"`
 
 	// The document type.
-	DocumentType DocumentType `type:"string"`
+	DocumentType DocumentType `type:"string" enum:"true"`
 
 	// The document version.
 	DocumentVersion *string `type:"string"`
@@ -11996,7 +11996,7 @@ type DocumentParameter struct {
 	Name *string `type:"string"`
 
 	// The type of parameter. The type can be either String or StringList.
-	Type DocumentParameterType `type:"string"`
+	Type DocumentParameterType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12136,7 +12136,7 @@ type FailedCreateAssociation struct {
 	Entry *CreateAssociationBatchRequestEntry `type:"structure"`
 
 	// The source of the failure.
-	Fault Fault `type:"string"`
+	Fault Fault `type:"string" enum:"true"`
 
 	// A description of the failure.
 	Message *string `type:"string"`
@@ -12425,7 +12425,7 @@ type GetCommandInvocationOutput struct {
 
 	// The status of the parent command for this invocation. This status can be
 	// different than StatusDetails.
-	Status CommandInvocationStatus `type:"string"`
+	Status CommandInvocationStatus `type:"string" enum:"true"`
 
 	// A detailed status of the command execution for an invocation. StatusDetails
 	// includes more information than Status because it includes states resulting
@@ -12582,7 +12582,7 @@ type GetDefaultPatchBaselineInput struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the default patch baseline for the specified operating system.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12609,7 +12609,7 @@ type GetDefaultPatchBaselineOutput struct {
 	BaselineId *string `min:"20" type:"string"`
 
 	// The operating system for the returned patch baseline.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12802,7 +12802,7 @@ type GetDocumentOutput struct {
 	Content *string `min:"1" type:"string"`
 
 	// The document type.
-	DocumentType DocumentType `type:"string"`
+	DocumentType DocumentType `type:"string" enum:"true"`
 
 	// The document version.
 	DocumentVersion *string `type:"string"`
@@ -13121,7 +13121,7 @@ type GetMaintenanceWindowExecutionOutput struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the Maintenance Window execution.
-	Status MaintenanceWindowExecutionStatus `type:"string"`
+	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
@@ -13345,7 +13345,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The task status for an invocation.
-	Status MaintenanceWindowExecutionStatus `type:"string"`
+	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the status. Details are only available for certain
 	// status values.
@@ -13356,7 +13356,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 
 	// Retrieves the task type for a Maintenance Window. Task types include the
 	// following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.
-	TaskType MaintenanceWindowTaskType `type:"string"`
+	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
 	// The Maintenance Window execution ID.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -13471,7 +13471,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the task.
-	Status MaintenanceWindowExecutionStatus `type:"string"`
+	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
@@ -13492,7 +13492,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	TaskParameters []map[string]MaintenanceWindowTaskParameterValueExpression `type:"list"`
 
 	// The type of task executed.
-	Type MaintenanceWindowTaskType `type:"string"`
+	Type MaintenanceWindowTaskType `type:"string" enum:"true"`
 
 	// The ID of the Maintenance Window execution that includes the task.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -13839,7 +13839,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task to execute.
-	TaskType MaintenanceWindowTaskType `type:"string"`
+	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
 	// The retrieved Maintenance Window ID.
 	WindowId *string `min:"20" type:"string"`
@@ -14362,7 +14362,7 @@ type GetPatchBaselineForPatchGroupInput struct {
 
 	// Returns he operating system rule specified for patch groups using the patch
 	// baseline.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// The name of the patch group whose patch baseline should be retrieved.
 	//
@@ -14417,7 +14417,7 @@ type GetPatchBaselineForPatchGroupOutput struct {
 	BaselineId *string `min:"20" type:"string"`
 
 	// The operating system rule specified for patch groups using the patch baseline.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// The name of the patch group.
 	PatchGroup *string `min:"1" type:"string"`
@@ -14506,7 +14506,7 @@ type GetPatchBaselineOutput struct {
 
 	// Returns the specified compliance severity level for approved patches in the
 	// patch baseline.
-	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
 	// The ID of the retrieved patch baseline.
 	BaselineId *string `min:"20" type:"string"`
@@ -14527,7 +14527,7 @@ type GetPatchBaselineOutput struct {
 	Name *string `min:"3" type:"string"`
 
 	// Returns the operating system specified for the patch baseline.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Patch groups included in the patch baseline.
 	PatchGroups []string `type:"list"`
@@ -14940,13 +14940,13 @@ type InstanceInformation struct {
 	Name *string `type:"string"`
 
 	// Connection status of the SSM Agent.
-	PingStatus PingStatus `type:"string"`
+	PingStatus PingStatus `type:"string" enum:"true"`
 
 	// The name of the operating system platform running on your instance.
 	PlatformName *string `type:"string"`
 
 	// The operating system platform type.
-	PlatformType PlatformType `type:"string"`
+	PlatformType PlatformType `type:"string" enum:"true"`
 
 	// The version of the OS platform running on your instance.
 	PlatformVersion *string `type:"string"`
@@ -14955,7 +14955,7 @@ type InstanceInformation struct {
 	RegistrationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The type of instance. Instances are either EC2 instances or managed instances.
-	ResourceType ResourceType `type:"string"`
+	ResourceType ResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -15090,7 +15090,7 @@ type InstanceInformationFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key InstanceInformationFilterKey `locationName:"key" type:"string" required:"true"`
+	Key InstanceInformationFilterKey `locationName:"key" type:"string" required:"true" enum:"true"`
 
 	// The filter values.
 	//
@@ -15247,7 +15247,7 @@ type InstancePatchState struct {
 	// state) or INSTALL (install missing patches).
 	//
 	// Operation is a required field
-	Operation PatchOperationType `type:"string" required:"true"`
+	Operation PatchOperationType `type:"string" required:"true" enum:"true"`
 
 	// The time the most recent patching operation completed on the instance.
 	//
@@ -15377,7 +15377,7 @@ type InstancePatchStateFilter struct {
 	// LessThan or GreaterThan.
 	//
 	// Type is a required field
-	Type InstancePatchStateOperatorType `type:"string" required:"true"`
+	Type InstancePatchStateOperatorType `type:"string" required:"true" enum:"true"`
 
 	// The value for the filter, must be an integer greater than or equal to 0.
 	//
@@ -15451,7 +15451,7 @@ type InventoryFilter struct {
 	Key *string `min:"1" type:"string" required:"true"`
 
 	// The type of filter. Valid values include the following: "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"
-	Type InventoryQueryOperatorType `type:"string"`
+	Type InventoryQueryOperatorType `type:"string" enum:"true"`
 
 	// Inventory filter values. Example: inventory filter where instance IDs are
 	// specified as values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g,
@@ -15632,7 +15632,7 @@ type InventoryItemAttribute struct {
 	// The data type of the inventory item attribute.
 	//
 	// DataType is a required field
-	DataType InventoryAttributeDataType `type:"string" required:"true"`
+	DataType InventoryAttributeDataType `type:"string" required:"true" enum:"true"`
 
 	// Name of the inventory item attribute.
 	//
@@ -17086,7 +17086,7 @@ type ListTagsForResourceInput struct {
 	// Returns a list of tags for a specific resource type.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceTypeForTagging `type:"string" required:"true"`
+	ResourceType ResourceTypeForTagging `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -17282,7 +17282,7 @@ type MaintenanceWindowExecution struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the execution.
-	Status MaintenanceWindowExecutionStatus `type:"string"`
+	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
@@ -17353,7 +17353,7 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the task execution.
-	Status MaintenanceWindowExecutionStatus `type:"string"`
+	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the status of the task execution. Only available for
 	// certain status values.
@@ -17366,7 +17366,7 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 	TaskExecutionId *string `min:"36" type:"string"`
 
 	// The type of executed task.
-	TaskType MaintenanceWindowTaskType `type:"string"`
+	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
 	// The ID of the Maintenance Window execution that ran the task.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -17458,7 +17458,7 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the task invocation.
-	Status MaintenanceWindowExecutionStatus `type:"string"`
+	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the status of the task invocation. Only available
 	// for certain Status values.
@@ -17468,7 +17468,7 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	TaskExecutionId *string `min:"36" type:"string"`
 
 	// The task type.
-	TaskType MaintenanceWindowTaskType `type:"string"`
+	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
 	// The ID of the Maintenance Window execution that ran the task.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -17757,7 +17757,7 @@ type MaintenanceWindowRunCommandParameters struct {
 	DocumentHash *string `type:"string"`
 
 	// SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
-	DocumentHashType DocumentHashType `type:"string"`
+	DocumentHashType DocumentHashType `type:"string" enum:"true"`
 
 	// Configurations for sending notifications about command status changes on
 	// a per-instance basis.
@@ -17923,7 +17923,7 @@ type MaintenanceWindowTarget struct {
 	OwnerInformation *string `min:"1" type:"string"`
 
 	// The type of target.
-	ResourceType MaintenanceWindowResourceType `type:"string"`
+	ResourceType MaintenanceWindowResourceType `type:"string" enum:"true"`
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
@@ -18031,7 +18031,7 @@ type MaintenanceWindowTask struct {
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
 	// LAMBDA, or STEP_FUNCTION.
-	Type MaintenanceWindowTaskType `type:"string"`
+	Type MaintenanceWindowTaskType `type:"string" enum:"true"`
 
 	// The Maintenance Window ID where the task is registered.
 	WindowId *string `min:"20" type:"string"`
@@ -18258,7 +18258,7 @@ type ModifyDocumentPermissionInput struct {
 	// The permission type for the document. The permission type can be Share.
 	//
 	// PermissionType is a required field
-	PermissionType DocumentPermissionType `type:"string" required:"true"`
+	PermissionType DocumentPermissionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -18381,7 +18381,7 @@ type NotificationConfig struct {
 	// Command: Receive notification when the status of a command changes. Invocation:
 	// For commands sent to multiple instances, receive notification on a per-instance
 	// basis when the status of a command changes.
-	NotificationType NotificationType `type:"string"`
+	NotificationType NotificationType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -18422,7 +18422,7 @@ type Parameter struct {
 
 	// The type of parameter. Valid values include the following: String, String
 	// list, Secure string.
-	Type ParameterType `type:"string"`
+	Type ParameterType `type:"string" enum:"true"`
 
 	// The parameter value.
 	Value *string `min:"1" type:"string"`
@@ -18482,7 +18482,7 @@ type ParameterHistory struct {
 	Name *string `min:"1" type:"string"`
 
 	// The type of parameter used.
-	Type ParameterType `type:"string"`
+	Type ParameterType `type:"string" enum:"true"`
 
 	// The parameter value.
 	Value *string `min:"1" type:"string"`
@@ -18574,7 +18574,7 @@ type ParameterMetadata struct {
 
 	// The type of parameter. Valid parameter types include the following: String,
 	// String list, Secure string.
-	Type ParameterType `type:"string"`
+	Type ParameterType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -18706,7 +18706,7 @@ type ParametersFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key ParametersFilterKey `type:"string" required:"true"`
+	Key ParametersFilterKey `type:"string" required:"true" enum:"true"`
 
 	// The filter values.
 	//
@@ -18912,7 +18912,7 @@ type PatchBaselineIdentity struct {
 	// Defines the operating system the patch baseline applies to. Supported operating
 	// systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX.
 	// The Default value is WINDOWS.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -18986,7 +18986,7 @@ type PatchComplianceData struct {
 	// NOT_APPLICABLE or FAILED).
 	//
 	// State is a required field
-	State PatchComplianceDataState `type:"string" required:"true"`
+	State PatchComplianceDataState `type:"string" required:"true" enum:"true"`
 
 	// The title of the patch.
 	//
@@ -19048,7 +19048,7 @@ type PatchFilter struct {
 	// The key for the filter (PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID)
 	//
 	// Key is a required field
-	Key PatchFilterKey `type:"string" required:"true"`
+	Key PatchFilterKey `type:"string" required:"true" enum:"true"`
 
 	// The value for the filter key.
 	//
@@ -19242,7 +19242,7 @@ type PatchRule struct {
 	// A compliance severity level for all approved patches in a patch baseline.
 	// Valid compliance severity levels include the following: Unspecified, Critical,
 	// High, Medium, Low, and Informational.
-	ComplianceLevel PatchComplianceLevel `type:"string"`
+	ComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
 	// The patch filter group that defines the criteria for the rule.
 	//
@@ -19358,11 +19358,11 @@ type PatchStatus struct {
 	ApprovalDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The compliance severity level for a patch.
-	ComplianceLevel PatchComplianceLevel `type:"string"`
+	ComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
 	// The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED,
 	// EXPLICIT_REJECTED).
-	DeploymentStatus PatchDeploymentStatus `type:"string"`
+	DeploymentStatus PatchDeploymentStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -19655,7 +19655,7 @@ type PutParameterInput struct {
 	// The type of parameter that you want to add to the system.
 	//
 	// Type is a required field
-	Type ParameterType `type:"string" required:"true"`
+	Type ParameterType `type:"string" required:"true" enum:"true"`
 
 	// The parameter value that you want to add to the system.
 	//
@@ -19944,7 +19944,7 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// The type of target being registered with the Maintenance Window.
 	//
 	// ResourceType is a required field
-	ResourceType MaintenanceWindowResourceType `type:"string" required:"true"`
+	ResourceType MaintenanceWindowResourceType `type:"string" required:"true" enum:"true"`
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
@@ -20135,7 +20135,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// The type of task being registered.
 	//
 	// TaskType is a required field
-	TaskType MaintenanceWindowTaskType `type:"string" required:"true"`
+	TaskType MaintenanceWindowTaskType `type:"string" required:"true" enum:"true"`
 
 	// The id of the Maintenance Window the task should be added to.
 	//
@@ -20348,7 +20348,7 @@ type RemoveTagsFromResourceInput struct {
 	// The type of resource of which you want to remove a tag.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceTypeForTagging `type:"string" required:"true"`
+	ResourceType ResourceTypeForTagging `type:"string" required:"true" enum:"true"`
 
 	// Tag keys that you want to remove from the specified resource.
 	//
@@ -20439,7 +20439,7 @@ type ResourceComplianceSummaryItem struct {
 
 	// The highest severity item found for the resource. The resource is compliant
 	// for this item.
-	OverallSeverity ComplianceSeverity `type:"string"`
+	OverallSeverity ComplianceSeverity `type:"string" enum:"true"`
 
 	// The resource ID.
 	ResourceId *string `min:"1" type:"string"`
@@ -20448,7 +20448,7 @@ type ResourceComplianceSummaryItem struct {
 	ResourceType *string `min:"1" type:"string"`
 
 	// The compliance status for the resource.
-	Status ComplianceStatus `type:"string"`
+	Status ComplianceStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -20516,7 +20516,7 @@ type ResourceDataSyncItem struct {
 	_ struct{} `type:"structure"`
 
 	// The status reported by the last sync.
-	LastStatus LastResourceDataSyncStatus `type:"string"`
+	LastStatus LastResourceDataSyncStatus `type:"string" enum:"true"`
 
 	// The last time the sync operations returned a status of SUCCESSFUL (UTC).
 	LastSuccessfulSyncTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -20605,7 +20605,7 @@ type ResourceDataSyncS3Destination struct {
 	// A supported sync format. The following format is currently supported: JsonSerDe
 	//
 	// SyncFormat is a required field
-	SyncFormat ResourceDataSyncS3Format `type:"string" required:"true"`
+	SyncFormat ResourceDataSyncS3Format `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -20832,7 +20832,7 @@ type SendAutomationSignalInput struct {
 	// Reject
 	//
 	// SignalType is a required field
-	SignalType SignalType `type:"string" required:"true"`
+	SignalType SignalType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -20917,7 +20917,7 @@ type SendCommandInput struct {
 	// Sha256 or Sha1.
 	//
 	// Sha1 hashes have been deprecated.
-	DocumentHashType DocumentHashType `type:"string"`
+	DocumentHashType DocumentHashType `type:"string" enum:"true"`
 
 	// Required. The name of the Systems Manager document to execute. This can be
 	// a public document or a custom document.
@@ -21360,7 +21360,7 @@ type StepExecution struct {
 
 	// The execution status for this step. Valid values include: Pending, InProgress,
 	// Success, Cancelled, Failed, and TimedOut.
-	StepStatus AutomationExecutionStatus `type:"string"`
+	StepStatus AutomationExecutionStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -22883,7 +22883,7 @@ type UpdatePatchBaselineInput struct {
 	ApprovedPatches []string `type:"list"`
 
 	// Assigns a new compliance severity level to an existing patch baseline.
-	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
 	// The ID of the patch baseline to update.
 	//
@@ -23006,7 +23006,7 @@ type UpdatePatchBaselineOutput struct {
 
 	// The compliance severity level assigned to the patch baseline after the update
 	// completed.
-	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
 	// The ID of the deleted patch baseline.
 	BaselineId *string `min:"20" type:"string"`
@@ -23027,7 +23027,7 @@ type UpdatePatchBaselineOutput struct {
 	Name *string `min:"3" type:"string"`
 
 	// The operating system rule used by the updated patch baseline.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`

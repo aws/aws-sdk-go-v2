@@ -3391,13 +3391,13 @@ type InputService22TestShapeInputService22TestCaseOperation1Output struct {
 type InputService22TestShapeInputService22TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService22TestShapeEnumType `type:"string"`
+	FooEnum InputService22TestShapeEnumType `type:"string" enum:"true"`
 
-	HeaderEnum InputService22TestShapeEnumType `location:"header" locationName:"x-amz-enum" type:"string"`
+	HeaderEnum InputService22TestShapeEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
 
 	ListEnums []InputService22TestShapeEnumType `type:"list"`
 
-	QueryFooEnum InputService22TestShapeEnumType `location:"querystring" locationName:"Enum" type:"string"`
+	QueryFooEnum InputService22TestShapeEnumType `location:"querystring" locationName:"Enum" type:"string" enum:"true"`
 
 	QueryListEnums []InputService22TestShapeEnumType `location:"querystring" locationName:"List" type:"list"`
 }

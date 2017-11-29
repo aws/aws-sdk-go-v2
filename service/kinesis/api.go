@@ -2409,7 +2409,7 @@ type GetShardIteratorInput struct {
 	//    so that you always read the most recent data in the shard.
 	//
 	// ShardIteratorType is a required field
-	ShardIteratorType ShardIteratorType `type:"string" required:"true"`
+	ShardIteratorType ShardIteratorType `type:"string" required:"true" enum:"true"`
 
 	// The sequence number of the data record in the shard from which to start reading.
 	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
@@ -3060,7 +3060,7 @@ type PutRecordOutput struct {
 	//
 	//    * KMS: Use server-side encryption on the records in the stream using a
 	//    customer-managed KMS key.
-	EncryptionType EncryptionType `type:"string"`
+	EncryptionType EncryptionType `type:"string" enum:"true"`
 
 	// The sequence number identifier that was assigned to the put data record.
 	// The sequence number for the record is unique across all records in the stream.
@@ -3185,7 +3185,7 @@ type PutRecordsOutput struct {
 	//
 	//    * KMS: Use server-side encryption on the records using a customer-managed
 	//    KMS key.
-	EncryptionType EncryptionType `type:"string"`
+	EncryptionType EncryptionType `type:"string" enum:"true"`
 
 	// The number of unsuccessfully processed records in a PutRecords request.
 	FailedRecordCount *int64 `min:"1" type:"integer"`
@@ -3395,7 +3395,7 @@ type Record struct {
 	//
 	//    * KMS: Use server-side encryption on the records in the stream using a
 	//    customer-managed KMS key.
-	EncryptionType EncryptionType `type:"string"`
+	EncryptionType EncryptionType `type:"string" enum:"true"`
 
 	// Identifies which shard in the stream the data record is assigned to.
 	//
@@ -3741,7 +3741,7 @@ type StartStreamEncryptionInput struct {
 	//    customer-managed KMS key.
 	//
 	// EncryptionType is a required field
-	EncryptionType EncryptionType `type:"string" required:"true"`
+	EncryptionType EncryptionType `type:"string" required:"true" enum:"true"`
 
 	// The GUID for the customer-managed KMS key to use for encryption. You can
 	// also use a Kinesis-owned master key by specifying the alias aws/kinesis.
@@ -3838,7 +3838,7 @@ type StopStreamEncryptionInput struct {
 	//    customer-managed KMS key.
 	//
 	// EncryptionType is a required field
-	EncryptionType EncryptionType `type:"string" required:"true"`
+	EncryptionType EncryptionType `type:"string" required:"true" enum:"true"`
 
 	// The GUID for the customer-managed key that was used for encryption.
 	//
@@ -3933,7 +3933,7 @@ type StreamDescription struct {
 	//
 	//    * KMS: Use server-side encryption on the records in the stream using a
 	//    customer-managed KMS key.
-	EncryptionType EncryptionType `type:"string"`
+	EncryptionType EncryptionType `type:"string" enum:"true"`
 
 	// Represents the current enhanced monitoring settings of the stream.
 	//
@@ -3991,7 +3991,7 @@ type StreamDescription struct {
 	//    state.
 	//
 	// StreamStatus is a required field
-	StreamStatus StreamStatus `type:"string" required:"true"`
+	StreamStatus StreamStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4110,7 +4110,7 @@ type UpdateShardCountInput struct {
 	// The scaling type. Uniform scaling creates shards of equal size.
 	//
 	// ScalingType is a required field
-	ScalingType ScalingType `type:"string" required:"true"`
+	ScalingType ScalingType `type:"string" required:"true" enum:"true"`
 
 	// The name of the stream.
 	//

@@ -1046,7 +1046,7 @@ type DescribeRuleOutput struct {
 	ScheduleExpression *string `type:"string"`
 
 	// Specifies whether the rule is enabled or disabled.
-	State RuleState `type:"string"`
+	State RuleState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1990,7 +1990,7 @@ type PutRuleInput struct {
 	ScheduleExpression *string `type:"string"`
 
 	// Indicates whether the rule is enabled or disabled.
-	State RuleState `type:"string"`
+	State RuleState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2453,7 +2453,7 @@ type Rule struct {
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the rule.
-	State RuleState `type:"string"`
+	State RuleState `type:"string" enum:"true"`
 }
 
 // String returns the string representation

@@ -584,7 +584,7 @@ type PostContentOutput struct {
 	//    an appropriate response to prompts from the service (you can configure
 	//    how many times Amazon Lex can prompt a user for specific information),
 	//    or if the Lambda function fails to fulfill the intent.
-	DialogState DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string"`
+	DialogState DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"true"`
 
 	// The text used to process the request.
 	//
@@ -880,7 +880,7 @@ type PostTextOutput struct {
 	//    an appropriate response to prompts from the service (you can configure
 	//    how many times Amazon Lex can prompt a user for specific information),
 	//    or the Lambda function failed to fulfill the intent.
-	DialogState DialogState `locationName:"dialogState" type:"string"`
+	DialogState DialogState `locationName:"dialogState" type:"string" enum:"true"`
 
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string `locationName:"intentName" type:"string"`
@@ -985,7 +985,7 @@ type ResponseCard struct {
 	_ struct{} `type:"structure"`
 
 	// The content type of the response.
-	ContentType ContentType `locationName:"contentType" type:"string"`
+	ContentType ContentType `locationName:"contentType" type:"string" enum:"true"`
 
 	// An array of attachment objects representing options.
 	GenericAttachments []GenericAttachment `locationName:"genericAttachments" type:"list"`

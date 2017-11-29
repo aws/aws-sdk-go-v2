@@ -2192,7 +2192,7 @@ type Operator struct {
 	// only alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.
 	// User-defined fields that you add to a pipeline should prefix their name with
 	// the string "my".
-	Type OperatorType `locationName:"type" type:"string"`
+	Type OperatorType `locationName:"type" type:"string" enum:"true"`
 
 	// The value that the actual field value will be compared with.
 	Values []string `locationName:"values" type:"list"`
@@ -3436,7 +3436,7 @@ type SetTaskStatusInput struct {
 	// Preconditions use false.
 	//
 	// TaskStatus is a required field
-	TaskStatus TaskStatus `locationName:"taskStatus" type:"string" required:"true"`
+	TaskStatus TaskStatus `locationName:"taskStatus" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

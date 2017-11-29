@@ -198,7 +198,8 @@ func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, pare
 	switch value := reflect.Indirect(v); value.Kind() {
 	case reflect.String:
 		str := value.String()
-		if parentCollection || len(str) > 0 {
+		isEnum := len(tag.Get("enum")) != 0
+		if parentCollection || (len(str) > 0 && isEnum) || !isEnum {
 			writeString(str, buf)
 		}
 	case reflect.Bool:

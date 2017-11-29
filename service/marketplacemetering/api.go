@@ -613,7 +613,7 @@ type UsageRecordResult struct {
 	//    * DuplicateRecord- Indicates that the UsageRecord was invalid and not
 	//    honored. A previously metered UsageRecord had the same customer, dimension,
 	//    and time, but a different quantity.
-	Status UsageRecordResultStatus `type:"string"`
+	Status UsageRecordResultStatus `type:"string" enum:"true"`
 
 	// The UsageRecord that was part of the BatchMeterUsage request.
 	UsageRecord *UsageRecord `type:"structure"`

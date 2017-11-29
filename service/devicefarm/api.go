@@ -3237,7 +3237,7 @@ type Artifact struct {
 	//    * APPLICATION_CRASH_REPORT: The application crash report output type.
 	//
 	//    * XCTEST_LOG: The XCode test output type.
-	Type ArtifactType `locationName:"type" type:"string"`
+	Type ArtifactType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
 	// to download the artifact's file.
@@ -3550,7 +3550,7 @@ type CreateNetworkProfileInput struct {
 	ProjectArn *string `locationName:"projectArn" min:"32" type:"string" required:"true"`
 
 	// The type of network profile you wish to create. Valid values are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -3778,7 +3778,7 @@ type CreateRemoteAccessSessionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the billing method for purposes of configuring a remote access session.
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4002,7 +4002,7 @@ type CreateUploadInput struct {
 	// an ArgumentException error.
 	//
 	// Type is a required field
-	Type UploadType `locationName:"type" type:"string" required:"true"`
+	Type UploadType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4530,7 +4530,7 @@ type Device struct {
 	//    * PHONE: The phone form factor.
 	//
 	//    * TABLET: The tablet form factor.
-	FormFactor DeviceFormFactor `locationName:"formFactor" type:"string"`
+	FormFactor DeviceFormFactor `locationName:"formFactor" type:"string" enum:"true"`
 
 	// The device's heap size, expressed in bytes.
 	HeapSize *int64 `locationName:"heapSize" type:"long"`
@@ -4560,7 +4560,7 @@ type Device struct {
 	//    * ANDROID: The Android platform.
 	//
 	//    * IOS: The iOS platform.
-	Platform DevicePlatform `locationName:"platform" type:"string"`
+	Platform DevicePlatform `locationName:"platform" type:"string" enum:"true"`
 
 	// The device's radio.
 	Radio *string `locationName:"radio" type:"string"`
@@ -4765,7 +4765,7 @@ type DevicePool struct {
 	//
 	//    * PRIVATE: A device pool that is created and managed by the device pool
 	//    developer.
-	Type DevicePoolType `locationName:"type" type:"string"`
+	Type DevicePoolType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5057,7 +5057,7 @@ type GetDevicePoolCompatibilityInput struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	TestType TestType `locationName:"testType" type:"string"`
+	TestType TestType `locationName:"testType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5883,7 +5883,7 @@ type IncompatibilityMessage struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
-	Type DeviceAttribute `locationName:"type" type:"string"`
+	Type DeviceAttribute `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6042,7 +6042,7 @@ type Job struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The job's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -6068,7 +6068,7 @@ type Job struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The job's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -6106,7 +6106,7 @@ type Job struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6216,7 +6216,7 @@ type ListArtifactsInput struct {
 	//    * SCREENSHOT: The artifacts are screenshots.
 	//
 	// Type is a required field
-	Type ArtifactCategory `locationName:"type" type:"string" required:"true"`
+	Type ArtifactCategory `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6328,7 +6328,7 @@ type ListDevicePoolsInput struct {
 	//
 	//    * PRIVATE: A device pool that is created and managed by the device pool
 	//    developer.
-	Type DevicePoolType `locationName:"type" type:"string"`
+	Type DevicePoolType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6611,7 +6611,7 @@ type ListNetworkProfilesInput struct {
 
 	// The type of network profile you wish to return information about. Valid values
 	// are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7746,7 +7746,7 @@ type MonetaryAmount struct {
 	Amount *float64 `locationName:"amount" type:"double"`
 
 	// The currency code of a monetary amount. For example, USD means "U.S. dollars."
-	CurrencyCode CurrencyCode `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCode `locationName:"currencyCode" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7800,7 +7800,7 @@ type NetworkProfile struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The type of network profile. Valid values are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -7911,13 +7911,13 @@ type Offering struct {
 	Id *string `locationName:"id" min:"32" type:"string"`
 
 	// The platform of the device (e.g., ANDROID or IOS).
-	Platform DevicePlatform `locationName:"platform" type:"string"`
+	Platform DevicePlatform `locationName:"platform" type:"string" enum:"true"`
 
 	// Specifies whether there are recurring charges for the offering.
 	RecurringCharges []RecurringCharge `locationName:"recurringCharges" type:"list"`
 
 	// The type of offering (e.g., "RECURRING") for a device.
-	Type OfferingType `locationName:"type" type:"string"`
+	Type OfferingType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8009,7 +8009,7 @@ type OfferingStatus struct {
 	Quantity *int64 `locationName:"quantity" type:"integer"`
 
 	// The type specified for the offering status.
-	Type OfferingTransactionType `locationName:"type" type:"string"`
+	Type OfferingTransactionType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8138,7 +8138,7 @@ type Problem struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// Information about the associated run.
 	Run *ProblemDetail `locationName:"run" type:"structure"`
@@ -8436,7 +8436,7 @@ type RecurringCharge struct {
 	Cost *MonetaryAmount `locationName:"cost" type:"structure"`
 
 	// The frequency in which charges will recur.
-	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string"`
+	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8472,7 +8472,7 @@ type RemoteAccessSession struct {
 	// The billing method of the remote access session. Possible values include
 	// METERED or UNMETERED. For more information about metered devices, see AWS
 	// Device Farm terminology (http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology)."
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// Unique identifier of your client for the remote access session. Only returned
 	// if remote debugging is enabled for the remote access session.
@@ -8524,7 +8524,7 @@ type RemoteAccessSession struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The date and time the remote access session was started.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -8548,7 +8548,7 @@ type RemoteAccessSession struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The date and time the remote access session was stopped.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -8787,7 +8787,7 @@ type Rule struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
-	Attribute DeviceAttribute `locationName:"attribute" type:"string"`
+	Attribute DeviceAttribute `locationName:"attribute" type:"string" enum:"true"`
 
 	// The rule's operator.
 	//
@@ -8802,7 +8802,7 @@ type Rule struct {
 	//    * NOT_IN: The not-in operator.
 	//
 	//    * CONTAINS: The contains operator.
-	Operator RuleOperator `locationName:"operator" type:"string"`
+	Operator RuleOperator `locationName:"operator" type:"string" enum:"true"`
 
 	// The rule's value.
 	Value *string `locationName:"value" type:"string"`
@@ -8847,7 +8847,7 @@ type Run struct {
 
 	// Specifies the billing method for a test run: metered or unmetered. If the
 	// parameter is not specified, the default value is metered.
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// The total number of completed jobs.
 	CompletedJobs *int64 `locationName:"completedJobs" type:"integer"`
@@ -8885,7 +8885,7 @@ type Run struct {
 	//    * ANDROID: The Android platform.
 	//
 	//    * IOS: The iOS platform.
-	Platform DevicePlatform `locationName:"platform" type:"string"`
+	Platform DevicePlatform `locationName:"platform" type:"string" enum:"true"`
 
 	// The run's result.
 	//
@@ -8904,11 +8904,11 @@ type Run struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// Supporting field for the result field. Set only if result is SKIPPED. PARSING_FAILED
 	// if the result is skipped because of test package parsing failure.
-	ResultCode ExecutionResultCode `locationName:"resultCode" type:"string"`
+	ResultCode ExecutionResultCode `locationName:"resultCode" type:"string" enum:"true"`
 
 	// The run's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -8934,7 +8934,7 @@ type Run struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The run's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -8975,7 +8975,7 @@ type Run struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9152,7 +9152,7 @@ type Sample struct {
 	//
 	//    * TX_RATE: The total number of bytes per second (TCP and UDP) that are
 	//    received, by app process.
-	Type SampleType `locationName:"type" type:"string"`
+	Type SampleType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
 	// to download the sample's file.
@@ -9198,7 +9198,7 @@ type ScheduleRunConfiguration struct {
 
 	// Specifies the billing method for a test run: metered or unmetered. If the
 	// parameter is not specified, the default value is metered.
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// Input CustomerArtifactPaths object for the scheduled run configuration.
 	CustomerArtifactPaths *CustomerArtifactPaths `locationName:"customerArtifactPaths" type:"structure"`
@@ -9573,7 +9573,7 @@ type ScheduleRunTest struct {
 	//    * XCTEST_UI: The XCode UI test type.
 	//
 	// Type is a required field
-	Type TestType `locationName:"type" type:"string" required:"true"`
+	Type TestType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9807,7 +9807,7 @@ type Suite struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The suite's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -9833,7 +9833,7 @@ type Suite struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The suite's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -9871,7 +9871,7 @@ type Suite struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9990,7 +9990,7 @@ type Test struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The test's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -10016,7 +10016,7 @@ type Test struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The test's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -10054,7 +10054,7 @@ type Test struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10332,7 +10332,7 @@ type UpdateNetworkProfileInput struct {
 
 	// The type of network profile you wish to return information about. Valid values
 	// are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -10596,7 +10596,7 @@ type Upload struct {
 	//    * PROCESSING: A processing status.
 	//
 	//    * SUCCEEDED: A succeeded status.
-	Status UploadStatus `locationName:"status" type:"string"`
+	Status UploadStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The upload's type.
 	//
@@ -10636,7 +10636,7 @@ type Upload struct {
 	//    * XCTEST_TEST_PACKAGE: An XCode test package upload.
 	//
 	//    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.
-	Type UploadType `locationName:"type" type:"string"`
+	Type UploadType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that was used to store a file through a corresponding
 	// PUT request.

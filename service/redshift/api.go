@@ -8905,7 +8905,7 @@ type DescribeEventsInput struct {
 	//
 	//    * Specify cluster-snapshot when SourceIdentifier is a cluster snapshot
 	//    identifier.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
@@ -10667,7 +10667,7 @@ type Event struct {
 	SourceIdentifier *string `type:"string"`
 
 	// The source type for this event.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12245,7 +12245,7 @@ type Parameter struct {
 	// information about parameters and parameter groups, go to Amazon Redshift
 	// Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
-	ApplyType ParameterApplyType `type:"string"`
+	ApplyType ParameterApplyType `type:"string" enum:"true"`
 
 	// The data type of the parameter.
 	DataType *string `type:"string"`
@@ -14227,7 +14227,7 @@ type TableRestoreStatus struct {
 	// A value that describes the current state of the table restore request.
 	//
 	// Valid Values: SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS
-	Status TableRestoreStatusType `type:"string"`
+	Status TableRestoreStatusType `type:"string" enum:"true"`
 
 	// The unique identifier for the table restore request.
 	TableRestoreRequestId *string `type:"string"`

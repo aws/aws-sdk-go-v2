@@ -3436,7 +3436,7 @@ type DescribeJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The job type. It is either ArchiveRetrieval or InventoryRetrieval.
-	Action ActionCode `type:"string"`
+	Action ActionCode `type:"string" enum:"true"`
 
 	// For an ArchiveRetrieval job, this is the archive ID requested for download.
 	// Otherwise, this field is null.
@@ -3505,7 +3505,7 @@ type DescribeJobOutput struct {
 
 	// The status code can be InProgress, Succeeded, or Failed, and indicates the
 	// status of the job.
-	StatusCode StatusCode `type:"string"`
+	StatusCode StatusCode `type:"string" enum:"true"`
 
 	// A friendly message that describes the job status.
 	StatusMessage *string `type:"string"`

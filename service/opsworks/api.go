@@ -4052,7 +4052,7 @@ type App struct {
 	StackId *string `type:"string"`
 
 	// The app type.
-	Type AppType `type:"string"`
+	Type AppType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4727,7 +4727,7 @@ type CloneStackInput struct {
 	// The default root device type. This value is used by default for all instances
 	// in the cloned stack, but you can override it when you create an instance.
 	// For more information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
@@ -5105,7 +5105,7 @@ type CloudWatchLogsLogStream struct {
 	// Specifies the encoding of the log file so that the file can be read correctly.
 	// The default is utf_8. Encodings supported by Python codecs.decode() can be
 	// used here.
-	Encoding CloudWatchLogsEncoding `type:"string"`
+	Encoding CloudWatchLogsEncoding `type:"string" enum:"true"`
 
 	// Specifies log files that you want to push to CloudWatch Logs.
 	//
@@ -5132,7 +5132,7 @@ type CloudWatchLogsLogStream struct {
 	// Specifies where to start to read data (start_of_file or end_of_file). The
 	// default is start_of_file. This setting is only used if there is no state
 	// persisted for that log stream.
-	InitialPosition CloudWatchLogsInitialPosition `type:"string"`
+	InitialPosition CloudWatchLogsInitialPosition `type:"string" enum:"true"`
 
 	// Specifies the destination log group. A log group is created automatically
 	// if it doesn't already exist. Log group names can be between 1 and 512 characters
@@ -5144,7 +5144,7 @@ type CloudWatchLogsLogStream struct {
 	MultiLineStartPattern *string `type:"string"`
 
 	// Specifies the time zone of log event time stamps.
-	TimeZone CloudWatchLogsTimeZone `type:"string"`
+	TimeZone CloudWatchLogsTimeZone `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5423,7 +5423,7 @@ type CreateAppInput struct {
 	// prefer to implement your own Deploy recipes, specify other.
 	//
 	// Type is a required field
-	Type AppType `type:"string" required:"true"`
+	Type AppType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5736,11 +5736,11 @@ type CreateInstanceInput struct {
 	// not necessarily support both architectures. For a list of the architectures
 	// that are supported by the different instance types, see Instance Families
 	// and Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-	Architecture Architecture `type:"string"`
+	Architecture Architecture `type:"string" enum:"true"`
 
 	// For load-based or time-based instances, the type. Windows stacks can use
 	// only time-based instances.
-	AutoScalingType AutoScalingType `type:"string"`
+	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
@@ -5816,7 +5816,7 @@ type CreateInstanceInput struct {
 
 	// The instance root device type. For more information, see Storage for the
 	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	RootDeviceType RootDeviceType `type:"string"`
+	RootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// The instance's Amazon EC2 key-pair name.
 	SshKeyName *string `type:"string"`
@@ -6099,7 +6099,7 @@ type CreateLayerInput struct {
 	// in Chef 12 stacks.
 	//
 	// Type is a required field
-	Type LayerType `type:"string" required:"true"`
+	Type LayerType `type:"string" required:"true" enum:"true"`
 
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool `type:"boolean"`
@@ -6381,7 +6381,7 @@ type CreateStackInput struct {
 	// in the stack, but you can override it when you create an instance. The default
 	// option is instance-store. For more information, see Storage for the Root
 	// Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
@@ -7317,7 +7317,7 @@ type DeploymentCommand struct {
 	//    * undeploy: Undeploy the app.
 	//
 	// Name is a required field
-	Name DeploymentCommandName `type:"string" required:"true"`
+	Name DeploymentCommandName `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9177,7 +9177,7 @@ type EbsBlockDevice struct {
 
 	// The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned
 	// IOPS (SSD) volumes, and standard for Magnetic volumes.
-	VolumeType VolumeType `type:"string"`
+	VolumeType VolumeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9673,12 +9673,12 @@ type Instance struct {
 	AmiId *string `type:"string"`
 
 	// The instance architecture: "i386" or "x86_64".
-	Architecture Architecture `type:"string"`
+	Architecture Architecture `type:"string" enum:"true"`
 
 	Arn *string `type:"string"`
 
 	// For load-based or time-based instances, the type.
-	AutoScalingType AutoScalingType `type:"string"`
+	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
@@ -9767,7 +9767,7 @@ type Instance struct {
 
 	// The instance's root device type. For more information, see Storage for the
 	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	RootDeviceType RootDeviceType `type:"string"`
+	RootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// The root device volume ID.
 	RootDeviceVolumeId *string `type:"string"`
@@ -9827,7 +9827,7 @@ type Instance struct {
 	Tenancy *string `type:"string"`
 
 	// The instance's virtualization type: paravirtual or hvm.
-	VirtualizationType VirtualizationType `type:"string"`
+	VirtualizationType VirtualizationType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10402,7 +10402,7 @@ type Layer struct {
 	StackId *string `type:"string"`
 
 	// The layer type.
-	Type LayerType `type:"string"`
+	Type LayerType `type:"string" enum:"true"`
 
 	// Whether the layer uses Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool `type:"boolean"`
@@ -12132,7 +12132,7 @@ type Source struct {
 	SshKey *string `type:"string"`
 
 	// The repository type.
-	Type SourceType `type:"string"`
+	Type SourceType `type:"string" enum:"true"`
 
 	// The source URL. The following is an example of an Amazon S3 source URL: https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz.
 	Url *string `type:"string"`
@@ -12315,7 +12315,7 @@ type Stack struct {
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair for the stack's instances. You can override
 	// this value when you create or update an instance.
@@ -13226,7 +13226,7 @@ type UpdateAppInput struct {
 	SslConfiguration *SslConfiguration `type:"structure"`
 
 	// The app type.
-	Type AppType `type:"string"`
+	Type AppType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13439,11 +13439,11 @@ type UpdateInstanceInput struct {
 	// The instance architecture. Instance types do not necessarily support both
 	// architectures. For a list of the architectures that are supported by the
 	// different instance types, see Instance Families and Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-	Architecture Architecture `type:"string"`
+	Architecture Architecture `type:"string" enum:"true"`
 
 	// For load-based or time-based instances, the type. Windows stacks can use
 	// only time-based instances.
-	AutoScalingType AutoScalingType `type:"string"`
+	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// This property cannot be updated.
 	EbsOptimized *bool `type:"boolean"`
@@ -14058,7 +14058,7 @@ type UpdateStackInput struct {
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key-pair name. The default value is none. If you specify
 	// a key-pair name, AWS OpsWorks Stacks installs the public key on the instance

@@ -2550,7 +2550,7 @@ type CreateKeyInput struct {
 	// The intended use of the CMK.
 	//
 	// You can use CMKs only for symmetric encryption and decryption.
-	KeyUsage KeyUsageType `type:"string"`
+	KeyUsage KeyUsageType `type:"string" enum:"true"`
 
 	// The source of the CMK's key material.
 	//
@@ -2562,7 +2562,7 @@ type CreateKeyInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// The CMK's Origin is immutable and is set when the CMK is created.
-	Origin OriginType `type:"string"`
+	Origin OriginType `type:"string" enum:"true"`
 
 	// The key policy to attach to the CMK.
 	//
@@ -3429,7 +3429,7 @@ type GenerateDataKeyInput struct {
 
 	// The length of the data encryption key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key.
-	KeySpec DataKeySpec `type:"string"`
+	KeySpec DataKeySpec `type:"string" enum:"true"`
 
 	// The length of the data encryption key in bytes. For example, use the value
 	// 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key
@@ -3582,7 +3582,7 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 
 	// The length of the data encryption key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key.
-	KeySpec DataKeySpec `type:"string"`
+	KeySpec DataKeySpec `type:"string" enum:"true"`
 
 	// The length of the data encryption key in bytes. For example, use the value
 	// 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key
@@ -3936,13 +3936,13 @@ type GetParametersForImportInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// WrappingAlgorithm is a required field
-	WrappingAlgorithm AlgorithmSpec `type:"string" required:"true"`
+	WrappingAlgorithm AlgorithmSpec `type:"string" required:"true" enum:"true"`
 
 	// The type of wrapping key (public key) to return in the response. Only 2048-bit
 	// RSA public keys are supported.
 	//
 	// WrappingKeySpec is a required field
-	WrappingKeySpec WrappingKeySpec `type:"string" required:"true"`
+	WrappingKeySpec WrappingKeySpec `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4224,7 +4224,7 @@ type ImportKeyMaterialInput struct {
 	// Specifies whether the key material expires. The default is KEY_MATERIAL_EXPIRES,
 	// in which case you must include the ValidTo parameter. When this parameter
 	// is set to KEY_MATERIAL_DOES_NOT_EXPIRE, you must omit the ValidTo parameter.
-	ExpirationModel ExpirationModelType `type:"string"`
+	ExpirationModel ExpirationModelType `type:"string" enum:"true"`
 
 	// The import token that you received in the response to a previous GetParametersForImport
 	// request. It must be from the same response that contained the public key
@@ -4407,7 +4407,7 @@ type KeyMetadata struct {
 
 	// Specifies whether the CMK's key material expires. This value is present only
 	// when Origin is EXTERNAL, otherwise this value is omitted.
-	ExpirationModel ExpirationModelType `type:"string"`
+	ExpirationModel ExpirationModelType `type:"string" enum:"true"`
 
 	// The globally unique identifier for the CMK.
 	//
@@ -4417,25 +4417,25 @@ type KeyMetadata struct {
 	// The CMK's manager. CMKs are either customer-managed or AWS-managed. For more
 	// information about the difference, see Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 	// in the AWS Key Management Service Developer Guide.
-	KeyManager KeyManagerType `type:"string"`
+	KeyManager KeyManagerType `type:"string" enum:"true"`
 
 	// The state of the CMK.
 	//
 	// For more information about how key state affects the use of a CMK, see How
 	// Key State Affects the Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 	// in the AWS Key Management Service Developer Guide.
-	KeyState KeyState `type:"string"`
+	KeyState KeyState `type:"string" enum:"true"`
 
 	// The cryptographic operations for which you can use the CMK. Currently the
 	// only allowed value is ENCRYPT_DECRYPT, which means you can use the CMK for
 	// the Encrypt and Decrypt operations.
-	KeyUsage KeyUsageType `type:"string"`
+	KeyUsage KeyUsageType `type:"string" enum:"true"`
 
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
 	// created the key material. When this value is EXTERNAL, the key material was
 	// imported from your existing key management infrastructure or the CMK lacks
 	// key material.
-	Origin OriginType `type:"string"`
+	Origin OriginType `type:"string" enum:"true"`
 
 	// The time at which the imported key material expires. When the key material
 	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This

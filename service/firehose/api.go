@@ -768,7 +768,7 @@ type CreateDeliveryStreamInput struct {
 	//
 	//    * KinesisStreamAsSource: The delivery stream uses a Kinesis stream as
 	//    a source.
-	DeliveryStreamType DeliveryStreamType `type:"string"`
+	DeliveryStreamType DeliveryStreamType `type:"string" enum:"true"`
 
 	// The destination in Amazon ES. You can specify only one destination.
 	ElasticsearchDestinationConfiguration *ElasticsearchDestinationConfiguration `type:"structure"`
@@ -984,7 +984,7 @@ type DeliveryStreamDescription struct {
 	// The status of the delivery stream.
 	//
 	// DeliveryStreamStatus is a required field
-	DeliveryStreamStatus DeliveryStreamStatus `type:"string" required:"true"`
+	DeliveryStreamStatus DeliveryStreamStatus `type:"string" required:"true" enum:"true"`
 
 	// The delivery stream type. This can be one of the following values:
 	//
@@ -994,7 +994,7 @@ type DeliveryStreamDescription struct {
 	//    a source.
 	//
 	// DeliveryStreamType is a required field
-	DeliveryStreamType DeliveryStreamType `type:"string" required:"true"`
+	DeliveryStreamType DeliveryStreamType `type:"string" required:"true" enum:"true"`
 
 	// The destinations.
 	//
@@ -1335,7 +1335,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// to the IndexName to facilitate the expiration of old data. For more information,
 	// see Index Rotation for Amazon Elasticsearch Service Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// The default value is OneDay.
-	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string"`
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string" enum:"true"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1359,7 +1359,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// appended to the prefix. For more information, see Amazon S3 Backup for Amazon
 	// Elasticsearch Service Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
 	// Default value is FailedDocumentsOnly.
-	S3BackupMode ElasticsearchS3BackupMode `type:"string"`
+	S3BackupMode ElasticsearchS3BackupMode `type:"string" enum:"true"`
 
 	// The configuration for the backup Amazon S3 location.
 	//
@@ -1523,7 +1523,7 @@ type ElasticsearchDestinationDescription struct {
 	IndexName *string `min:"1" type:"string"`
 
 	// The Elasticsearch index rotation period
-	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string"`
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string" enum:"true"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1535,7 +1535,7 @@ type ElasticsearchDestinationDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode ElasticsearchS3BackupMode `type:"string"`
+	S3BackupMode ElasticsearchS3BackupMode `type:"string" enum:"true"`
 
 	// The Amazon S3 destination.
 	S3DestinationDescription *S3DestinationDescription `type:"structure"`
@@ -1644,7 +1644,7 @@ type ElasticsearchDestinationUpdate struct {
 	// to IndexName to facilitate the expiration of old data. For more information,
 	// see Index Rotation for Amazon Elasticsearch Service Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// Default value is OneDay.
-	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string"`
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string" enum:"true"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1812,7 +1812,7 @@ type EncryptionConfiguration struct {
 
 	// Specifically override existing encryption information to ensure that no encryption
 	// is used.
-	NoEncryptionConfig NoEncryptionConfig `type:"string"`
+	NoEncryptionConfig NoEncryptionConfig `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1869,7 +1869,7 @@ type ExtendedS3DestinationConfiguration struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	CompressionFormat CompressionFormat `type:"string"`
+	CompressionFormat CompressionFormat `type:"string" enum:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -1894,7 +1894,7 @@ type ExtendedS3DestinationConfiguration struct {
 	S3BackupConfiguration *S3DestinationConfiguration `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode S3BackupMode `type:"string"`
+	S3BackupMode S3BackupMode `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2032,7 +2032,7 @@ type ExtendedS3DestinationDescription struct {
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
 	//
 	// CompressionFormat is a required field
-	CompressionFormat CompressionFormat `type:"string" required:"true"`
+	CompressionFormat CompressionFormat `type:"string" required:"true" enum:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -2059,7 +2059,7 @@ type ExtendedS3DestinationDescription struct {
 	S3BackupDescription *S3DestinationDescription `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode S3BackupMode `type:"string"`
+	S3BackupMode S3BackupMode `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2147,7 +2147,7 @@ type ExtendedS3DestinationUpdate struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	CompressionFormat CompressionFormat `type:"string"`
+	CompressionFormat CompressionFormat `type:"string" enum:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -2167,7 +2167,7 @@ type ExtendedS3DestinationUpdate struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// Enables or disables Amazon S3 backup mode.
-	S3BackupMode S3BackupMode `type:"string"`
+	S3BackupMode S3BackupMode `type:"string" enum:"true"`
 
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate `type:"structure"`
@@ -2517,7 +2517,7 @@ type ListDeliveryStreamsInput struct {
 	//
 	// This parameter is optional. If this parameter is omitted, delivery streams
 	// of all types are returned.
-	DeliveryStreamType DeliveryStreamType `type:"string"`
+	DeliveryStreamType DeliveryStreamType `type:"string" enum:"true"`
 
 	// The name of the delivery stream to start the list with.
 	ExclusiveStartDeliveryStreamName *string `min:"1" type:"string"`
@@ -2669,7 +2669,7 @@ type Processor struct {
 	// The type of processor.
 	//
 	// Type is a required field
-	Type ProcessorType `type:"string" required:"true"`
+	Type ProcessorType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2722,7 +2722,7 @@ type ProcessorParameter struct {
 	// The name of the parameter.
 	//
 	// ParameterName is a required field
-	ParameterName ProcessorParameterName `type:"string" required:"true"`
+	ParameterName ProcessorParameterName `type:"string" required:"true" enum:"true"`
 
 	// The parameter value.
 	//
@@ -3096,7 +3096,7 @@ type RedshiftDestinationConfiguration struct {
 	S3BackupConfiguration *S3DestinationConfiguration `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode RedshiftS3BackupMode `type:"string"`
+	S3BackupMode RedshiftS3BackupMode `type:"string" enum:"true"`
 
 	// The configuration for the intermediate Amazon S3 location from which Amazon
 	// Redshift obtains data. Restrictions are described in the topic for CreateDeliveryStream.
@@ -3290,7 +3290,7 @@ type RedshiftDestinationDescription struct {
 	S3BackupDescription *S3DestinationDescription `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode RedshiftS3BackupMode `type:"string"`
+	S3BackupMode RedshiftS3BackupMode `type:"string" enum:"true"`
 
 	// The Amazon S3 destination.
 	//
@@ -3401,7 +3401,7 @@ type RedshiftDestinationUpdate struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode RedshiftS3BackupMode `type:"string"`
+	S3BackupMode RedshiftS3BackupMode `type:"string" enum:"true"`
 
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate `type:"structure"`
@@ -3587,7 +3587,7 @@ type S3DestinationConfiguration struct {
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
 	// destinations because they are not supported by the Amazon Redshift COPY operation
 	// that reads from the S3 bucket.
-	CompressionFormat CompressionFormat `type:"string"`
+	CompressionFormat CompressionFormat `type:"string" enum:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -3714,7 +3714,7 @@ type S3DestinationDescription struct {
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
 	//
 	// CompressionFormat is a required field
-	CompressionFormat CompressionFormat `type:"string" required:"true"`
+	CompressionFormat CompressionFormat `type:"string" required:"true" enum:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -3807,7 +3807,7 @@ type S3DestinationUpdate struct {
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
 	// destinations because they are not supported by the Amazon Redshift COPY operation
 	// that reads from the S3 bucket.
-	CompressionFormat CompressionFormat `type:"string"`
+	CompressionFormat CompressionFormat `type:"string" enum:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.

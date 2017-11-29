@@ -151,7 +151,7 @@ func generateTypes(ex Example) string {
 // This is due to the json decoder choosing numbers to be floats, but the shape may
 // actually be an int. To counter this, we pass the shape's type and properly do the
 // casting here.
-func correctType(memName string, t string, value interface{}, dereference bool) string {
+func correctType(memName string, t string, value interface{}, asValue bool) string {
 	if value == nil {
 		return ""
 	}
@@ -172,19 +172,19 @@ func correctType(memName string, t string, value interface{}, dereference bool) 
 		v = fmt.Sprintf("%t", value.(bool))
 	}
 
-	return convertToCorrectType(memName, t, v, dereference)
+	return convertToCorrectType(memName, t, v, asValue)
 }
 
-func convertToCorrectType(memName, t, v string, dereference bool) string {
-	return fmt.Sprintf("%s: %s,\n", memName, getValue(t, v, dereference))
+func convertToCorrectType(memName, t, v string, asValue bool) string {
+	return fmt.Sprintf("%s: %s,\n", memName, getValue(t, v, asValue))
 }
 
-func getValue(t, v string, dereference bool) string {
+func getValue(t, v string, asValue bool) string {
 	if t[0] == '*' {
 		t = t[1:]
 	}
 
-	if dereference {
+	if asValue {
 		switch t {
 		case "string":
 			return fmt.Sprintf("%q", v)

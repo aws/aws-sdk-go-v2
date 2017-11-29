@@ -1518,7 +1518,7 @@ type Difference struct {
 
 	// Whether the change type of the difference is an addition (A), deletion (D),
 	// or modification (M).
-	ChangeType ChangeTypeEnum `locationName:"changeType" type:"string"`
+	ChangeType ChangeTypeEnum `locationName:"changeType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2194,10 +2194,10 @@ type ListRepositoriesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The order in which to sort the results of a list repositories operation.
-	Order OrderEnum `locationName:"order" type:"string"`
+	Order OrderEnum `locationName:"order" type:"string" enum:"true"`
 
 	// The criteria used to sort the results of a list repositories operation.
-	SortBy SortByEnum `locationName:"sortBy" type:"string"`
+	SortBy SortByEnum `locationName:"sortBy" type:"string" enum:"true"`
 }
 
 // String returns the string representation

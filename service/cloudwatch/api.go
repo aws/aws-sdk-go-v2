@@ -1059,7 +1059,7 @@ type AlarmHistoryItem struct {
 	HistoryData *string `min:"1" type:"string"`
 
 	// The type of alarm history item.
-	HistoryItemType HistoryItemType `type:"string"`
+	HistoryItemType HistoryItemType `type:"string" enum:"true"`
 
 	// A summary of the alarm history, in text format.
 	HistorySummary *string `min:"1" type:"string"`
@@ -1224,7 +1224,7 @@ type Datapoint struct {
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The standard unit for the data point.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1390,7 +1390,7 @@ type DescribeAlarmHistoryInput struct {
 	EndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The type of alarm histories to retrieve.
-	HistoryItemType HistoryItemType `type:"string"`
+	HistoryItemType HistoryItemType `type:"string" enum:"true"`
 
 	// The maximum number of alarm history records to retrieve.
 	MaxRecords *int64 `min:"1" type:"integer"`
@@ -1525,10 +1525,10 @@ type DescribeAlarmsForMetricInput struct {
 
 	// The statistic for the metric, other than percentiles. For percentile statistics,
 	// use ExtendedStatistics.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The unit for the metric.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1663,7 +1663,7 @@ type DescribeAlarmsInput struct {
 	NextToken *string `type:"string"`
 
 	// The state value to be used in matching alarms.
-	StateValue StateValue `type:"string"`
+	StateValue StateValue `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2157,7 +2157,7 @@ type GetMetricStatisticsInput struct {
 	// The unit for a given metric. Metrics may be reported in multiple units. Not
 	// supplying a unit results in all units being returned. If the metric only
 	// ever reports one unit, specifying a unit has no effect.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2556,7 +2556,7 @@ type MetricAlarm struct {
 
 	// The arithmetic operation to use when comparing the specified statistic and
 	// threshold. The specified statistic value is used as the first operand.
-	ComparisonOperator ComparisonOperator `type:"string"`
+	ComparisonOperator ComparisonOperator `type:"string" enum:"true"`
 
 	// The dimensions for the metric associated with the alarm.
 	Dimensions []Dimension `type:"list"`
@@ -2602,11 +2602,11 @@ type MetricAlarm struct {
 	StateUpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state value for the alarm.
-	StateValue StateValue `type:"string"`
+	StateValue StateValue `type:"string" enum:"true"`
 
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The value to compare with the specified statistic.
 	Threshold *float64 `type:"double"`
@@ -2616,7 +2616,7 @@ type MetricAlarm struct {
 	TreatMissingData *string `min:"1" type:"string"`
 
 	// The unit of the metric associated with the alarm.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2806,7 +2806,7 @@ type MetricDatum struct {
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unit of the metric.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 
 	// The value for the metric.
 	//
@@ -3004,7 +3004,7 @@ type PutMetricAlarmInput struct {
 	// threshold. The specified statistic value is used as the first operand.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// The dimensions for the metric associated with the alarm.
 	Dimensions []Dimension `type:"list"`
@@ -3084,7 +3084,7 @@ type PutMetricAlarmInput struct {
 
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The value against which the specified statistic is compared.
 	//
@@ -3107,7 +3107,7 @@ type PutMetricAlarmInput struct {
 	//
 	// If you specify a unit, you must use a unit that is appropriate for the metric.
 	// Otherwise, the CloudWatch alarm can get stuck in the INSUFFICIENT DATA state.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3412,7 +3412,7 @@ type SetAlarmStateInput struct {
 	// The value of the state.
 	//
 	// StateValue is a required field
-	StateValue StateValue `type:"string" required:"true"`
+	StateValue StateValue `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

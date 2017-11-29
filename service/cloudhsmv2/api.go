@@ -678,7 +678,7 @@ type Backup struct {
 	BackupId *string `type:"string" required:"true"`
 
 	// The state of the backup.
-	BackupState BackupState `type:"string"`
+	BackupState BackupState `type:"string" enum:"true"`
 
 	// The identifier (ID) of the cluster that was backed up.
 	ClusterId *string `type:"string"`
@@ -790,7 +790,7 @@ type Cluster struct {
 	_ struct{} `type:"structure"`
 
 	// The cluster's backup policy.
-	BackupPolicy BackupPolicy `type:"string"`
+	BackupPolicy BackupPolicy `type:"string" enum:"true"`
 
 	// Contains one or more certificates or a certificate signing request (CSR).
 	Certificates *Certificates `type:"structure"`
@@ -818,7 +818,7 @@ type Cluster struct {
 	SourceBackupId *string `type:"string"`
 
 	// The cluster's state.
-	State ClusterState `type:"string"`
+	State ClusterState `type:"string" enum:"true"`
 
 	// A description of the cluster's state.
 	StateMessage *string `type:"string"`
@@ -1494,7 +1494,7 @@ type Hsm struct {
 	HsmId *string `type:"string" required:"true"`
 
 	// The HSM's state.
-	State HsmState `type:"string"`
+	State HsmState `type:"string" enum:"true"`
 
 	// A description of the HSM's state.
 	StateMessage *string `type:"string"`
@@ -1642,7 +1642,7 @@ type InitializeClusterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The cluster's state.
-	State ClusterState `type:"string"`
+	State ClusterState `type:"string" enum:"true"`
 
 	// A description of the cluster's state.
 	StateMessage *string `type:"string"`

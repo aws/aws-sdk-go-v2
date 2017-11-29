@@ -2102,7 +2102,7 @@ type Attribute struct {
 	// The type of the target with which to attach the attribute. This parameter
 	// is required if you use the short form ID for a resource instead of the full
 	// Amazon Resource Name (ARN).
-	TargetType TargetType `locationName:"targetType" type:"string"`
+	TargetType TargetType `locationName:"targetType" type:"string" enum:"true"`
 
 	// The value of the attribute. Up to 128 letters (uppercase and lowercase),
 	// numbers, hyphens, underscores, periods, at signs (@), forward slashes, colons,
@@ -2877,7 +2877,7 @@ type ContainerInstance struct {
 
 	// The status of the most recent agent update. If an update has never been requested,
 	// this value is NULL.
-	AgentUpdateStatus AgentUpdateStatus `locationName:"agentUpdateStatus" type:"string"`
+	AgentUpdateStatus AgentUpdateStatus `locationName:"agentUpdateStatus" type:"string" enum:"true"`
 
 	// The attributes set for the container instance, either by the Amazon ECS container
 	// agent at instance registration or manually with the PutAttributes operation.
@@ -4592,7 +4592,7 @@ type ListAttributesInput struct {
 	// The type of the target with which to list attributes.
 	//
 	// TargetType is a required field
-	TargetType TargetType `locationName:"targetType" type:"string" required:"true"`
+	TargetType TargetType `locationName:"targetType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4812,7 +4812,7 @@ type ListContainerInstancesInput struct {
 	// set to DRAINING using UpdateContainerInstancesState. If you do not specify
 	// this parameter, the default is to include container instances set to ACTIVE
 	// and DRAINING.
-	Status ContainerInstanceStatus `locationName:"status" type:"string"`
+	Status ContainerInstanceStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5021,7 +5021,7 @@ type ListTaskDefinitionFamiliesInput struct {
 	// is set to INACTIVE, only task definition families that do not have any ACTIVE
 	// task definition revisions are returned. If you paginate the resulting output,
 	// be sure to keep the status value constant in each subsequent request.
-	Status TaskDefinitionFamilyStatus `locationName:"status" type:"string"`
+	Status TaskDefinitionFamilyStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5129,14 +5129,14 @@ type ListTaskDefinitionsInput struct {
 	// in a family are listed last. Setting this parameter to DESC reverses the
 	// sort order on family name and revision so that the newest task definitions
 	// in a family are listed first.
-	Sort SortOrder `locationName:"sort" type:"string"`
+	Sort SortOrder `locationName:"sort" type:"string" enum:"true"`
 
 	// The task definition status with which to filter the ListTaskDefinitions results.
 	// By default, only ACTIVE task definitions are listed. By setting this parameter
 	// to INACTIVE, you can view task definitions that are INACTIVE as long as an
 	// active task or service still references them. If you paginate the resulting
 	// output, be sure to keep the status value constant in each subsequent request.
-	Status TaskDefinitionStatus `locationName:"status" type:"string"`
+	Status TaskDefinitionStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5239,7 +5239,7 @@ type ListTasksInput struct {
 	// Although you can filter results based on a desired status of PENDING, this
 	// will not return any results because ECS never sets the desired status of
 	// a task to that value (only a task's lastStatus may have a value of PENDING).
-	DesiredStatus DesiredStatus `locationName:"desiredStatus" type:"string"`
+	DesiredStatus DesiredStatus `locationName:"desiredStatus" type:"string" enum:"true"`
 
 	// The name of the family with which to filter the ListTasks results. Specifying
 	// a family limits the results to tasks that belong to that family.
@@ -5446,7 +5446,7 @@ type LogConfiguration struct {
 	// command: sudo docker version | grep "Server API version"
 	//
 	// LogDriver is a required field
-	LogDriver LogDriver `locationName:"logDriver" type:"string" required:"true"`
+	LogDriver LogDriver `locationName:"logDriver" type:"string" required:"true" enum:"true"`
 
 	// The configuration options to send to the log driver. This parameter requires
 	// version 1.19 of the Docker Remote API or greater on your container instance.
@@ -5554,7 +5554,7 @@ type NetworkBinding struct {
 	HostPort *int64 `locationName:"hostPort" type:"integer"`
 
 	// The protocol used for the network binding.
-	Protocol TransportProtocol `locationName:"protocol" type:"string"`
+	Protocol TransportProtocol `locationName:"protocol" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5608,7 +5608,7 @@ type PlacementConstraint struct {
 	// a particular group is running on a different container instance. Use memberOf
 	// to restrict selection to a group of valid candidates. Note that distinctInstance
 	// is not supported in task definitions.
-	Type PlacementConstraintType `locationName:"type" type:"string"`
+	Type PlacementConstraintType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5655,7 +5655,7 @@ type PlacementStrategy struct {
 	// amount of the resource that is specified with the field parameter. For example,
 	// if you binpack on memory, a task is placed on the instance with the least
 	// amount of remaining memory (but still enough to run the task).
-	Type PlacementStrategyType `locationName:"type" type:"string"`
+	Type PlacementStrategyType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5725,7 +5725,7 @@ type PortMapping struct {
 
 	// The protocol used for the port mapping. Valid values are tcp and udp. The
 	// default is tcp.
-	Protocol TransportProtocol `locationName:"protocol" type:"string"`
+	Protocol TransportProtocol `locationName:"protocol" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5999,7 +5999,7 @@ type RegisterTaskDefinitionInput struct {
 	//
 	// For more information, see Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
 	// in the Docker run reference.
-	NetworkMode NetworkMode `locationName:"networkMode" type:"string"`
+	NetworkMode NetworkMode `locationName:"networkMode" type:"string" enum:"true"`
 
 	// An array of placement constraint objects to use for the task. You can specify
 	// a maximum of 10 constraints per task (this limit includes constraints in
@@ -7170,7 +7170,7 @@ type TaskDefinition struct {
 	//
 	// For more information, see Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
 	// in the Docker run reference.
-	NetworkMode NetworkMode `locationName:"networkMode" type:"string"`
+	NetworkMode NetworkMode `locationName:"networkMode" type:"string" enum:"true"`
 
 	// An array of placement constraint objects to use for tasks.
 	PlacementConstraints []TaskDefinitionPlacementConstraint `locationName:"placementConstraints" type:"list"`
@@ -7186,7 +7186,7 @@ type TaskDefinition struct {
 	Revision *int64 `locationName:"revision" type:"integer"`
 
 	// The status of the task definition.
-	Status TaskDefinitionStatus `locationName:"status" type:"string"`
+	Status TaskDefinitionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The full Amazon Resource Name (ARN) of the task definition.
 	TaskDefinitionArn *string `locationName:"taskDefinitionArn" type:"string"`
@@ -7287,7 +7287,7 @@ type TaskDefinitionPlacementConstraint struct {
 	// The type of constraint. The DistinctInstance constraint ensures that each
 	// task in a particular group is running on a different container instance.
 	// The MemberOf constraint restricts selection to be from a group of valid candidates.
-	Type TaskDefinitionPlacementConstraintType `locationName:"type" type:"string"`
+	Type TaskDefinitionPlacementConstraintType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7361,7 +7361,7 @@ type Ulimit struct {
 	// The type of the ulimit.
 	//
 	// Name is a required field
-	Name UlimitName `locationName:"name" type:"string" required:"true"`
+	Name UlimitName `locationName:"name" type:"string" required:"true" enum:"true"`
 
 	// The soft limit for the ulimit type.
 	//
@@ -7512,7 +7512,7 @@ type UpdateContainerInstancesStateInput struct {
 	// The container instance state with which to update the container instance.
 	//
 	// Status is a required field
-	Status ContainerInstanceStatus `locationName:"status" type:"string" required:"true"`
+	Status ContainerInstanceStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

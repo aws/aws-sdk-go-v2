@@ -1168,7 +1168,7 @@ type CreateHsmInput struct {
 	//    * TRIAL - The HSM is being used in a product trial.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType SubscriptionType `locationName:"SubscriptionType" type:"string" required:"true"`
+	SubscriptionType SubscriptionType `locationName:"SubscriptionType" type:"string" required:"true" enum:"true"`
 
 	// The IP address for the syslog monitoring server. The AWS CloudHSM service
 	// only supports one syslog monitoring server.
@@ -1636,7 +1636,7 @@ type DescribeHapgOutput struct {
 	PartitionSerialList []string `type:"list"`
 
 	// The state of the high-availability partition group.
-	State CloudHsmObjectState `type:"string"`
+	State CloudHsmObjectState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1784,7 +1784,7 @@ type DescribeHsmOutput struct {
 	SshPublicKey *string `type:"string"`
 
 	// The status of the HSM.
-	Status HsmStatus `type:"string"`
+	Status HsmStatus `type:"string" enum:"true"`
 
 	// Contains additional information about the status of the HSM.
 	StatusDetails *string `type:"string"`
@@ -1803,7 +1803,7 @@ type DescribeHsmOutput struct {
 	//    * PRODUCTION - The HSM is being used in a production environment.
 	//
 	//    * TRIAL - The HSM is being used in a product trial.
-	SubscriptionType SubscriptionType `type:"string"`
+	SubscriptionType SubscriptionType `type:"string" enum:"true"`
 
 	// The name of the HSM vendor.
 	VendorName *string `type:"string"`
@@ -2053,7 +2053,7 @@ type GetConfigInput struct {
 	// The client version.
 	//
 	// ClientVersion is a required field
-	ClientVersion ClientVersion `type:"string" required:"true"`
+	ClientVersion ClientVersion `type:"string" required:"true" enum:"true"`
 
 	// A list of ARNs that identify the high-availability partition groups that
 	// are associated with the client.

@@ -2055,7 +2055,7 @@ type DescribeEventsInput struct {
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format.
@@ -2474,7 +2474,7 @@ type Event struct {
 
 	// Specifies the origin of this event - a cluster, a parameter group, a node
 	// ID, etc.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2841,7 +2841,7 @@ type Parameter struct {
 	// The conditions under which changes to this parameter can be applied. For
 	// example, requires-reboot indicates that a new value for this parameter will
 	// only take effect if a node is rebooted.
-	ChangeType ChangeType `type:"string"`
+	ChangeType ChangeType `type:"string" enum:"true"`
 
 	// The data type of the parameter. For example, integer:
 	DataType *string `type:"string"`
@@ -2850,7 +2850,7 @@ type Parameter struct {
 	Description *string `type:"string"`
 
 	// Whether the customer is allowed to modify the parameter.
-	IsModifiable IsModifiable `type:"string"`
+	IsModifiable IsModifiable `type:"string" enum:"true"`
 
 	// A list of node types, and specific parameter values for each node.
 	NodeTypeSpecificValues []NodeTypeSpecificValue `type:"list"`
@@ -2860,7 +2860,7 @@ type Parameter struct {
 
 	// Determines whether the parameter can be applied to any nodes, or only nodes
 	// of a particular type.
-	ParameterType ParameterType `type:"string"`
+	ParameterType ParameterType `type:"string" enum:"true"`
 
 	// The value for the parameter.
 	ParameterValue *string `type:"string"`

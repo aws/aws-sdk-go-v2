@@ -215,17 +215,17 @@
           "ListBools": [
             true,
             false,
-						false
+            false
           ],
           "ListFloats": [
             1.1,
             2.718,
-						3.14
+            3.14
           ],
           "ListIntegers": [
-						0,
-						1,
-						2
+            0,
+            1,
+            2
           ]
         },
         "serialized": {
@@ -489,7 +489,7 @@
       },
       "EnumList":{
         "type":"list",
-				"member": {"shape": "EnumType"}
+        "member": {"shape": "EnumType"}
       }
     },
     "cases": [

@@ -1921,7 +1921,7 @@ type Action struct {
 	// The type of action.
 	//
 	// Type is a required field
-	Type ActionTypeEnum `type:"string" required:"true"`
+	Type ActionTypeEnum `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2263,7 +2263,7 @@ type CreateListenerInput struct {
 	// Balancers, the supported protocol is TCP.
 	//
 	// Protocol is a required field
-	Protocol ProtocolEnum `type:"string" required:"true"`
+	Protocol ProtocolEnum `type:"string" required:"true" enum:"true"`
 
 	// [HTTPS listeners] The security policy that defines which ciphers and protocols
 	// are supported. The default is the current predefined security policy.
@@ -2383,7 +2383,7 @@ type CreateLoadBalancerInput struct {
 	// for your load balancer. The possible values are ipv4 (for IPv4 addresses)
 	// and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must
 	// use ipv4.
-	IpAddressType IpAddressType `type:"string"`
+	IpAddressType IpAddressType `type:"string" enum:"true"`
 
 	// The name of the load balancer.
 	//
@@ -2405,7 +2405,7 @@ type CreateLoadBalancerInput struct {
 	// requests from clients with access to the VPC for the load balancer.
 	//
 	// The default is an Internet-facing load balancer.
-	Scheme LoadBalancerSchemeEnum `type:"string"`
+	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
 	// [Application Load Balancers] The IDs of the security groups to assign to
 	// the load balancer.
@@ -2433,7 +2433,7 @@ type CreateLoadBalancerInput struct {
 	Tags []Tag `min:"1" type:"list"`
 
 	// The type of load balancer to create. The default is application.
-	Type LoadBalancerTypeEnum `type:"string"`
+	Type LoadBalancerTypeEnum `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2713,7 +2713,7 @@ type CreateTargetGroupInput struct {
 	// The TCP protocol is supported only if the protocol of the target group is
 	// TCP. For Application Load Balancers, the default is HTTP. For Network Load
 	// Balancers, the default is TCP.
-	HealthCheckProtocol ProtocolEnum `type:"string"`
+	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, during which no response from a target means
 	// a failed health check. For Application Load Balancers, the range is 2 to
@@ -2751,7 +2751,7 @@ type CreateTargetGroupInput struct {
 	// the supported protocol is TCP.
 	//
 	// Protocol is a required field
-	Protocol ProtocolEnum `type:"string" required:"true"`
+	Protocol ProtocolEnum `type:"string" required:"true" enum:"true"`
 
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (targets are specified by
@@ -2763,7 +2763,7 @@ type CreateTargetGroupInput struct {
 	// private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8,
 	// 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10).
 	// You can't specify publicly routable IP addresses.
-	TargetType TargetTypeEnum `type:"string"`
+	TargetType TargetTypeEnum `type:"string" enum:"true"`
 
 	// The number of consecutive health check failures required before considering
 	// a target unhealthy. For Application Load Balancers, the default is 2. For
@@ -4250,7 +4250,7 @@ type Listener struct {
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol for connections from clients to the load balancer.
-	Protocol ProtocolEnum `type:"string"`
+	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The security policy that defines which ciphers and protocols are supported.
 	// The default is the current predefined security policy.
@@ -4329,7 +4329,7 @@ type LoadBalancer struct {
 	// The type of IP addresses used by the subnets for your load balancer. The
 	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and
 	// IPv6 addresses).
-	IpAddressType IpAddressType `type:"string"`
+	IpAddressType IpAddressType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string `type:"string"`
@@ -4346,7 +4346,7 @@ type LoadBalancer struct {
 	// DNS name of an internal load balancer is publicly resolvable to the private
 	// IP addresses of the nodes. Therefore, internal load balancers can only route
 	// requests from clients with access to the VPC for the load balancer.
-	Scheme LoadBalancerSchemeEnum `type:"string"`
+	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
 	// The IDs of the security groups for the load balancer.
 	SecurityGroups []string `type:"list"`
@@ -4355,7 +4355,7 @@ type LoadBalancer struct {
 	State *LoadBalancerState `type:"structure"`
 
 	// The type of load balancer.
-	Type LoadBalancerTypeEnum `type:"string"`
+	Type LoadBalancerTypeEnum `type:"string" enum:"true"`
 
 	// The ID of the VPC for the load balancer.
 	VpcId *string `type:"string"`
@@ -4539,7 +4539,7 @@ type LoadBalancerState struct {
 	// The state code. The initial state of the load balancer is provisioning. After
 	// the load balancer is fully set up and ready to route traffic, its state is
 	// active. If the load balancer could not be set up, its state is failed.
-	Code LoadBalancerStateEnum `type:"string"`
+	Code LoadBalancerStateEnum `type:"string" enum:"true"`
 
 	// A description of the state.
 	Reason *string `type:"string"`
@@ -4637,7 +4637,7 @@ type ModifyListenerInput struct {
 	// The protocol for connections from clients to the load balancer. Application
 	// Load Balancers support HTTP and HTTPS and Network Load Balancers support
 	// TCP.
-	Protocol ProtocolEnum `type:"string"`
+	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The security policy that defines which protocols and ciphers are supported.
 	// For more information, see Security Policies (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
@@ -5005,7 +5005,7 @@ type ModifyTargetGroupInput struct {
 	// The protocol the load balancer uses when performing health checks on targets.
 	// The TCP protocol is supported only if the protocol of the target group is
 	// TCP.
-	HealthCheckProtocol ProtocolEnum `type:"string"`
+	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no
 	// response means a failed health check.
@@ -5548,7 +5548,7 @@ type SetIpAddressTypeInput struct {
 	// ipv4.
 	//
 	// IpAddressType is a required field
-	IpAddressType IpAddressType `type:"string" required:"true"`
+	IpAddressType IpAddressType `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -5600,7 +5600,7 @@ type SetIpAddressTypeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IP address type.
-	IpAddressType IpAddressType `type:"string"`
+	IpAddressType IpAddressType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6117,7 +6117,7 @@ type TargetGroup struct {
 	HealthCheckPort *string `type:"string"`
 
 	// The protocol to use to connect with the target.
-	HealthCheckProtocol ProtocolEnum `type:"string"`
+	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, during which no response means a failed health
 	// check.
@@ -6138,7 +6138,7 @@ type TargetGroup struct {
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol to use for routing traffic to the targets.
-	Protocol ProtocolEnum `type:"string"`
+	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the target group.
 	TargetGroupArn *string `type:"string"`
@@ -6149,7 +6149,7 @@ type TargetGroup struct {
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (targets are specified by
 	// instance ID) or ip (targets are specified by IP address).
-	TargetType TargetTypeEnum `type:"string"`
+	TargetType TargetTypeEnum `type:"string" enum:"true"`
 
 	// The number of consecutive health check failures required before considering
 	// the target unhealthy.
@@ -6363,10 +6363,10 @@ type TargetHealth struct {
 	//
 	//    * Target.DeregistrationInProgress - The target is in the process of being
 	//    deregistered and the deregistration delay period has not expired.
-	Reason TargetHealthReasonEnum `type:"string"`
+	Reason TargetHealthReasonEnum `type:"string" enum:"true"`
 
 	// The state of the target.
-	State TargetHealthStateEnum `type:"string"`
+	State TargetHealthStateEnum `type:"string" enum:"true"`
 }
 
 // String returns the string representation

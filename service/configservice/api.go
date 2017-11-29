@@ -1605,7 +1605,7 @@ type Compliance struct {
 	// For the Compliance data type, AWS Config supports only COMPLIANT, NON_COMPLIANT,
 	// and INSUFFICIENT_DATA values. AWS Config does not support the NOT_APPLICABLE
 	// value for the Compliance data type.
-	ComplianceType ComplianceType `type:"string"`
+	ComplianceType ComplianceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1847,7 +1847,7 @@ type ConfigExportDeliveryInfo struct {
 	LastErrorMessage *string `locationName:"lastErrorMessage" type:"string"`
 
 	// Status of the last attempted delivery.
-	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string"`
+	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time of the last successful delivery.
 	LastSuccessfulTime *time.Time `locationName:"lastSuccessfulTime" type:"timestamp" timestampFormat:"unix"`
@@ -1946,7 +1946,7 @@ type ConfigRule struct {
 	// the DeleteConfigRule request to delete the rule. After AWS Config deletes
 	// the rule, the rule and all of its evaluations are erased and are no longer
 	// available.
-	ConfigRuleState ConfigRuleState `type:"string"`
+	ConfigRuleState ConfigRuleState `type:"string" enum:"true"`
 
 	// The description that you provide for the AWS Config rule.
 	Description *string `type:"string"`
@@ -1965,7 +1965,7 @@ type ConfigRule struct {
 	// By default, rules with a periodic trigger are evaluated every 24 hours. To
 	// change the frequency, specify a valid value for the MaximumExecutionFrequency
 	// parameter.
-	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string"`
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
 
 	// Defines which resources can trigger an evaluation for the rule. The scope
 	// can include one or more resource types, a combination of one resource type
@@ -2250,7 +2250,7 @@ type ConfigSnapshotDeliveryProperties struct {
 	_ struct{} `type:"structure"`
 
 	// The frequency with which AWS Config delivers configuration snapshots.
-	DeliveryFrequency MaximumExecutionFrequency `locationName:"deliveryFrequency" type:"string"`
+	DeliveryFrequency MaximumExecutionFrequency `locationName:"deliveryFrequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2286,7 +2286,7 @@ type ConfigStreamDeliveryInfo struct {
 	// Note Providing an SNS topic on a DeliveryChannel (http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html)
 	// for AWS Config is optional. If the SNS delivery is turned off, the last status
 	// will be Not_Applicable.
-	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string"`
+	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time from the last status change.
 	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
@@ -2356,7 +2356,7 @@ type ConfigurationItem struct {
 	ConfigurationItemMD5Hash *string `locationName:"configurationItemMD5Hash" type:"string"`
 
 	// The configuration item status.
-	ConfigurationItemStatus ConfigurationItemStatus `locationName:"configurationItemStatus" type:"string"`
+	ConfigurationItemStatus ConfigurationItemStatus `locationName:"configurationItemStatus" type:"string" enum:"true"`
 
 	// An identifier that indicates the ordering of the configuration items of a
 	// resource.
@@ -2385,7 +2385,7 @@ type ConfigurationItem struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The type of AWS resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// Configuration attributes that AWS Config returns for certain resource types
 	// to supplement the information returned for the configuration parameter.
@@ -2592,7 +2592,7 @@ type ConfigurationRecorderStatus struct {
 	LastStartTime *time.Time `locationName:"lastStartTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The last (previous) status of the recorder.
-	LastStatus RecorderStatus `locationName:"lastStatus" type:"string"`
+	LastStatus RecorderStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time when the status was last changed.
 	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
@@ -3710,7 +3710,7 @@ type Evaluation struct {
 	// to AWS Config.
 	//
 	// ComplianceType is a required field
-	ComplianceType ComplianceType `type:"string" required:"true"`
+	ComplianceType ComplianceType `type:"string" required:"true" enum:"true"`
 
 	// The time of the event in AWS Config that triggered the evaluation. For event-based
 	// evaluations, the time indicates when AWS Config created the configuration
@@ -3812,7 +3812,7 @@ type EvaluationResult struct {
 	// For the EvaluationResult data type, AWS Config supports only the COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support the
 	// INSUFFICIENT_DATA value for the EvaluationResult data type.
-	ComplianceType ComplianceType `type:"string"`
+	ComplianceType ComplianceType `type:"string" enum:"true"`
 
 	// The time when the AWS Config rule evaluated the AWS resource.
 	ConfigRuleInvokedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -4396,7 +4396,7 @@ type GetResourceConfigHistoryInput struct {
 
 	// The chronological order for configuration items listed. By default the results
 	// are listed in reverse chronological order.
-	ChronologicalOrder ChronologicalOrder `locationName:"chronologicalOrder" type:"string"`
+	ChronologicalOrder ChronologicalOrder `locationName:"chronologicalOrder" type:"string" enum:"true"`
 
 	// The time stamp that indicates an earlier time. If not specified, the action
 	// returns paginated results that contain configuration items that start from
@@ -4424,7 +4424,7 @@ type GetResourceConfigHistoryInput struct {
 	// The resource type.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4561,7 +4561,7 @@ type ListDiscoveredResourcesInput struct {
 	// The type of resources that you want AWS Config to list in the response.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5057,7 +5057,7 @@ type Relationship struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The resource type of the related resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5103,7 +5103,7 @@ type ResourceCount struct {
 	Count *int64 `locationName:"count" type:"long"`
 
 	// The resource type, for example "AWS::EC2::Instance".
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5144,7 +5144,7 @@ type ResourceIdentifier struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The type of resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5273,7 +5273,7 @@ type Source struct {
 	// Indicates whether AWS or the customer owns and manages the AWS Config rule.
 	//
 	// Owner is a required field
-	Owner Owner `type:"string" required:"true"`
+	Owner Owner `type:"string" required:"true" enum:"true"`
 
 	// Provides the source and type of the event that causes AWS Config to evaluate
 	// your AWS resources.
@@ -5349,7 +5349,7 @@ type SourceDetail struct {
 
 	// The source of the event, such as an AWS service, that triggers AWS Config
 	// to evaluate your AWS resources.
-	EventSource EventSource `type:"string"`
+	EventSource EventSource `type:"string" enum:"true"`
 
 	// The frequency that you want AWS Config to run evaluations for a custom rule
 	// with a periodic trigger. If you specify a value for MaximumExecutionFrequency,
@@ -5358,7 +5358,7 @@ type SourceDetail struct {
 	// By default, rules with a periodic trigger are evaluated every 24 hours. To
 	// change the frequency, specify a valid value for the MaximumExecutionFrequency
 	// parameter.
-	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string"`
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
 
 	// The type of notification that triggers AWS Config to run an evaluation for
 	// a rule. You can specify the following notification types:
@@ -5379,7 +5379,7 @@ type SourceDetail struct {
 	//
 	// If you want your custom rule to be triggered by configuration changes, specify
 	// both ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification.
-	MessageType MessageType `type:"string"`
+	MessageType MessageType `type:"string" enum:"true"`
 }
 
 // String returns the string representation

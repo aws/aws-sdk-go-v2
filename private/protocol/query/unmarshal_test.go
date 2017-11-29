@@ -1965,7 +1965,7 @@ type OutputService16TestShapeOutputService16TestCaseOperation1Input struct {
 type OutputService16TestShapeOutputService16TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService16TestShapeEC2EnumType `type:"string"`
+	FooEnum OutputService16TestShapeEC2EnumType `type:"string" enum:"true"`
 
 	ListEnums []OutputService16TestShapeEC2EnumType `type:"list"`
 }

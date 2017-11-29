@@ -1778,7 +1778,7 @@ type DescribeExecutionOutput struct {
 	// The current status of the execution.
 	//
 	// Status is a required field
-	Status ExecutionStatus `locationName:"status" type:"string" required:"true"`
+	Status ExecutionStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// If the execution has already ended, the date the execution stopped.
 	StopDate *time.Time `locationName:"stopDate" type:"timestamp" timestampFormat:"unix"`
@@ -1916,7 +1916,7 @@ type DescribeStateMachineOutput struct {
 	StateMachineArn *string `locationName:"stateMachineArn" min:"1" type:"string" required:"true"`
 
 	// The current status of the state machine.
-	Status StateMachineStatus `locationName:"status" type:"string"`
+	Status StateMachineStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2058,7 +2058,7 @@ type ExecutionListItem struct {
 	// The current status of the execution.
 	//
 	// Status is a required field
-	Status ExecutionStatus `locationName:"status" type:"string" required:"true"`
+	Status ExecutionStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// If the execution already ended, the date the execution stopped.
 	StopDate *time.Time `locationName:"stopDate" type:"timestamp" timestampFormat:"unix"`
@@ -2474,7 +2474,7 @@ type HistoryEvent struct {
 	// The type of the event.
 	//
 	// Type is a required field
-	Type HistoryEventType `locationName:"type" type:"string" required:"true"`
+	Type HistoryEventType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2949,7 +2949,7 @@ type ListExecutionsInput struct {
 
 	// If specified, only list the executions whose current execution status matches
 	// the given filter.
-	StatusFilter ExecutionStatus `locationName:"statusFilter" type:"string"`
+	StatusFilter ExecutionStatus `locationName:"statusFilter" type:"string" enum:"true"`
 }
 
 // String returns the string representation

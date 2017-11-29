@@ -2543,7 +2543,7 @@ type BotChannelAssociation struct {
 
 	// Specifies the type of association by indicating the type of channel being
 	// established between the Amazon Lex bot and the external messaging platform.
-	Type ChannelType `locationName:"type" type:"string"`
+	Type ChannelType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2617,7 +2617,7 @@ type BotMetadata struct {
 	Name *string `locationName:"name" min:"2" type:"string"`
 
 	// The status of the bot.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -2948,7 +2948,7 @@ type CreateBotVersionOutput struct {
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// Specifies the target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -2957,7 +2957,7 @@ type CreateBotVersionOutput struct {
 	// response element to BUILDING. After Amazon Lex builds the bot, it sets status
 	// to READY. If Amazon Lex can't build the bot, it sets status to FAILED. Amazon
 	// Lex returns the reason for the failure in the failureReason response element.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -3362,7 +3362,7 @@ type CreateSlotTypeVersionOutput struct {
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 
 	// The version assigned to the new slot type version.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -4243,7 +4243,7 @@ type FulfillmentActivity struct {
 	// by returning the slot data to the client application.
 	//
 	// Type is a required field
-	Type FulfillmentActivityType `locationName:"type" type:"string" required:"true"`
+	Type FulfillmentActivityType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4650,7 +4650,7 @@ type GetBotChannelAssociationOutput struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The type of the messaging platform.
-	Type ChannelType `locationName:"type" type:"string"`
+	Type ChannelType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4964,7 +4964,7 @@ type GetBotOutput struct {
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -4973,7 +4973,7 @@ type GetBotOutput struct {
 	// there was a problem with building the bot, the status is FAILED and the failureReason
 	// explains why the bot did not build. If the bot was saved but not built, the
 	// status is NOT BUILT.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -5376,7 +5376,7 @@ type GetBuiltinIntentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of locales that the intent supports.
-	Locale Locale `location:"querystring" locationName:"locale" type:"string"`
+	Locale Locale `location:"querystring" locationName:"locale" type:"string" enum:"true"`
 
 	// The maximum number of intents to return in the response. The default is 10.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
@@ -5482,7 +5482,7 @@ type GetBuiltinSlotTypesInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of locales that the slot type supports.
-	Locale Locale `location:"querystring" locationName:"locale" type:"string"`
+	Locale Locale `location:"querystring" locationName:"locale" type:"string" enum:"true"`
 
 	// The maximum number of slot types to return in the response. The default is
 	// 10.
@@ -5589,7 +5589,7 @@ type GetExportInput struct {
 	// The format of the exported data.
 	//
 	// ExportType is a required field
-	ExportType ExportType `location:"querystring" locationName:"exportType" type:"string" required:"true"`
+	ExportType ExportType `location:"querystring" locationName:"exportType" type:"string" required:"true" enum:"true"`
 
 	// The name of the bot to export.
 	//
@@ -5599,7 +5599,7 @@ type GetExportInput struct {
 	// The type of resource to export.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceType `location:"querystring" locationName:"resourceType" type:"string" required:"true"`
+	ResourceType ResourceType `location:"querystring" locationName:"resourceType" type:"string" required:"true" enum:"true"`
 
 	// The version of the bot to export.
 	//
@@ -5682,10 +5682,10 @@ type GetExportOutput struct {
 	//    * READY - The export is complete.
 	//
 	//    * FAILED - The export could not be completed.
-	ExportStatus ExportStatus `locationName:"exportStatus" type:"string"`
+	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" enum:"true"`
 
 	// The format of the exported data.
-	ExportType ExportType `locationName:"exportType" type:"string"`
+	ExportType ExportType `locationName:"exportType" type:"string" enum:"true"`
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to export
 	// the resource.
@@ -5695,7 +5695,7 @@ type GetExportOutput struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The type of the exported resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// An S3 pre-signed URL that provides the location of the exported resource.
 	// The exported resource is a ZIP archive that contains the exported resource
@@ -6265,7 +6265,7 @@ type GetSlotTypeOutput struct {
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 
 	// The version of the slot type.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -6552,7 +6552,7 @@ type GetUtterancesViewInput struct {
 	// utterances that were not recognized, use Missed.
 	//
 	// StatusType is a required field
-	StatusType StatusType `location:"querystring" locationName:"status_type" type:"string" required:"true"`
+	StatusType StatusType `location:"querystring" locationName:"status_type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6782,7 +6782,7 @@ type Message struct {
 	// The content type of the message string.
 	//
 	// ContentType is a required field
-	ContentType ContentType `locationName:"contentType" type:"string" required:"true"`
+	ContentType ContentType `locationName:"contentType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7201,7 +7201,7 @@ type PutBotInput struct {
 	// The default is en-US.
 	//
 	// Locale is a required field
-	Locale Locale `locationName:"locale" type:"string" required:"true"`
+	Locale Locale `locationName:"locale" type:"string" required:"true" enum:"true"`
 
 	// The name of the bot. The name is not case sensitive.
 	//
@@ -7213,7 +7213,7 @@ type PutBotInput struct {
 	// bot, but doesn't build it.
 	//
 	// If you don't specify this value, the default value is Save.
-	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string"`
+	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string" enum:"true"`
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
 	// with the user. The locale configured for the voice must match the locale
@@ -7404,7 +7404,7 @@ type PutBotOutput struct {
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -7417,7 +7417,7 @@ type PutBotOutput struct {
 	//
 	// When you set processBehaviorto SAVE, Amazon Lex sets the status code to NOT
 	// BUILT.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -7995,7 +7995,7 @@ type PutSlotTypeInput struct {
 	//    is no resolution list, null is returned.
 	//
 	// If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8091,7 +8091,7 @@ type PutSlotTypeOutput struct {
 
 	// The slot resolution strategy that Amazon Lex uses to determine the value
 	// of the slot. For more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 
 	// The version of the slot type. For a new slot type, the version is always
 	// $LATEST.
@@ -8229,7 +8229,7 @@ type Slot struct {
 	// Specifies whether the slot is required or optional.
 	//
 	// SlotConstraint is a required field
-	SlotConstraint SlotConstraint `locationName:"slotConstraint" type:"string" required:"true"`
+	SlotConstraint SlotConstraint `locationName:"slotConstraint" type:"string" required:"true" enum:"true"`
 
 	// The type of the slot, either a custom slot type that you defined or one of
 	// the built-in slot types.

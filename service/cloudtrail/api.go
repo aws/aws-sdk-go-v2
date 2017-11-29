@@ -1512,7 +1512,7 @@ type EventSelector struct {
 	// and RunInstances is a write-only API operation.
 	//
 	// By default, the value is All.
-	ReadWriteType ReadWriteType `type:"string"`
+	ReadWriteType ReadWriteType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2052,7 +2052,7 @@ type LookupAttribute struct {
 	// Specifies an attribute on which to filter the events returned.
 	//
 	// AttributeKey is a required field
-	AttributeKey LookupAttributeKey `type:"string" required:"true"`
+	AttributeKey LookupAttributeKey `type:"string" required:"true" enum:"true"`
 
 	// Specifies a value for the specified AttributeKey.
 	//

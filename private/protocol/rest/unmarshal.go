@@ -26,10 +26,8 @@ var UnmarshalMetaHandler = request.NamedHandler{Name: "awssdk.rest.UnmarshalMeta
 
 // Unmarshal unmarshals the REST component of a response in a REST service.
 func Unmarshal(r *request.Request) {
-	if r.DataFilled() {
-		v := reflect.Indirect(reflect.ValueOf(r.Data))
-		unmarshalBody(r, v)
-	}
+	v := reflect.Indirect(reflect.ValueOf(r.Data))
+	unmarshalBody(r, v)
 }
 
 // UnmarshalMeta unmarshals the REST metadata of a response in a REST service
@@ -39,10 +37,8 @@ func UnmarshalMeta(r *request.Request) {
 		// Alternative version of request id in the header
 		r.RequestID = r.HTTPResponse.Header.Get("X-Amz-Request-Id")
 	}
-	if r.DataFilled() {
-		v := reflect.Indirect(reflect.ValueOf(r.Data))
-		unmarshalLocationElements(r, v)
-	}
+	v := reflect.Indirect(reflect.ValueOf(r.Data))
+	unmarshalLocationElements(r, v)
 }
 
 func unmarshalBody(r *request.Request, v reflect.Value) {
@@ -150,15 +146,6 @@ func unmarshalStatusCode(v reflect.Value, statusCode int) {
 
 func unmarshalHeaderMap(r reflect.Value, headers http.Header, prefix string) error {
 	switch r.Interface().(type) {
-	case map[string]*string: // we only support string map value types
-		out := map[string]*string{}
-		for k, v := range headers {
-			k = http.CanonicalHeaderKey(k)
-			if strings.HasPrefix(strings.ToLower(k), strings.ToLower(prefix)) {
-				out[k[len(prefix):]] = &v[0]
-			}
-		}
-		r.Set(reflect.ValueOf(out))
 	case map[string]string: // we only support string map value types
 		out := map[string]string{}
 		for k, v := range headers {

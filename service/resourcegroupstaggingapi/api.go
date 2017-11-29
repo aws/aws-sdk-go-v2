@@ -448,7 +448,7 @@ type FailureInfo struct {
 	// The code of the common error. Valid values include InternalServiceException,
 	// InvalidParameterException, and any valid error code returned by the AWS service
 	// that hosts the resource that you want to tag.
-	ErrorCode ErrorCode `type:"string"`
+	ErrorCode ErrorCode `type:"string" enum:"true"`
 
 	// The message of the common error.
 	ErrorMessage *string `type:"string"`

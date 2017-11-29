@@ -2914,7 +2914,7 @@ type BlueInstanceTerminationOption struct {
 	//
 	//    * KEEP_ALIVE: Instances are left running after they are deregistered from
 	//    the load balancer and removed from the deployment group.
-	Action InstanceAction `locationName:"action" type:"string"`
+	Action InstanceAction `locationName:"action" type:"string" enum:"true"`
 
 	// The number of minutes to wait after a successful blue/green deployment before
 	// terminating instances from the original environment.
@@ -3437,7 +3437,7 @@ type CreateDeploymentInput struct {
 	//
 	//    * RETAIN: The version of the file already on the instance is kept and
 	//    used as part of the new deployment.
-	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string"`
+	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string" enum:"true"`
 
 	// If set to true, then if the deployment causes the ApplicationStop deployment
 	// lifecycle event to an instance to fail, the deployment to that instance will
@@ -4075,7 +4075,7 @@ type DeploymentInfo struct {
 	//    * autoscaling: Auto Scaling created the deployment.
 	//
 	//    * codeDeployRollback: A rollback process created the deployment.
-	Creator DeploymentCreator `locationName:"creator" type:"string"`
+	Creator DeploymentCreator `locationName:"creator" type:"string" enum:"true"`
 
 	// The deployment configuration name.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
@@ -4111,7 +4111,7 @@ type DeploymentInfo struct {
 	//
 	//    * RETAIN: The version of the file already on the instance is kept and
 	//    used as part of the new deployment.
-	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string"`
+	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string" enum:"true"`
 
 	// If true, then if the deployment causes the ApplicationStop deployment lifecycle
 	// event to an instance to fail, the deployment to that instance will not be
@@ -4153,7 +4153,7 @@ type DeploymentInfo struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The current state of the deployment as a whole.
-	Status DeploymentStatus `locationName:"status" type:"string"`
+	Status DeploymentStatus `locationName:"status" type:"string" enum:"true"`
 
 	// Information about the instances that belong to the replacement environment
 	// in a blue/green deployment.
@@ -4413,7 +4413,7 @@ type DeploymentReadyOption struct {
 	//    traffic is rerouted manually. If traffic is not rerouted manually before
 	//    the end of the specified wait period, the deployment status is changed
 	//    to Stopped.
-	ActionOnTimeout DeploymentReadyAction `locationName:"actionOnTimeout" type:"string"`
+	ActionOnTimeout DeploymentReadyAction `locationName:"actionOnTimeout" type:"string" enum:"true"`
 
 	// The number of minutes to wait before the status of a blue/green deployment
 	// changed to Stopped if rerouting is not started manually. Applies only to
@@ -4450,10 +4450,10 @@ type DeploymentStyle struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates whether to route deployment traffic behind a load balancer.
-	DeploymentOption DeploymentOption `locationName:"deploymentOption" type:"string"`
+	DeploymentOption DeploymentOption `locationName:"deploymentOption" type:"string" enum:"true"`
 
 	// Indicates whether to run an in-place deployment or a blue/green deployment.
-	DeploymentType DeploymentType `locationName:"deploymentType" type:"string"`
+	DeploymentType DeploymentType `locationName:"deploymentType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4554,7 +4554,7 @@ type Diagnostics struct {
 	//    * ScriptFailed: The specified script failed to run as expected.
 	//
 	//    * UnknownError: The specified script did not run for an unknown reason.
-	ErrorCode LifecycleErrorCode `locationName:"errorCode" type:"string"`
+	ErrorCode LifecycleErrorCode `locationName:"errorCode" type:"string" enum:"true"`
 
 	// The last portion of the diagnostic log.
 	//
@@ -4618,7 +4618,7 @@ type EC2TagFilter struct {
 	//    * VALUE_ONLY: Value only.
 	//
 	//    * KEY_AND_VALUE: Key and value.
-	Type EC2TagFilterType `type:"string"`
+	Type EC2TagFilterType `type:"string" enum:"true"`
 
 	// The tag filter value.
 	Value *string `type:"string"`
@@ -4756,7 +4756,7 @@ type ErrorInformation struct {
 	//    * REVISION_MISSING: The revision ID was missing. This error code will
 	//    most likely be raised if the revision is deleted after the deployment
 	//    is created but before it is started.
-	Code ErrorCode `locationName:"code" type:"string"`
+	Code ErrorCode `locationName:"code" type:"string" enum:"true"`
 
 	// An accompanying error message.
 	Message *string `locationName:"message" type:"string"`
@@ -5439,7 +5439,7 @@ type GreenFleetProvisioningOption struct {
 	//
 	//    * COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling
 	//    group to define and create instances in a new Auto Scaling group.
-	Action GreenFleetProvisioningAction `locationName:"action" type:"string"`
+	Action GreenFleetProvisioningAction `locationName:"action" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5555,7 +5555,7 @@ type InstanceSummary struct {
 	//    * BLUE: The instance is part of the original environment.
 	//
 	//    * GREEN: The instance is part of the replacement environment.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// A timestamp indicating when the instance information was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
@@ -5576,7 +5576,7 @@ type InstanceSummary struct {
 	//    * Skipped: The deployment has been skipped for this instance.
 	//
 	//    * Unknown: The deployment status is unknown for this instance.
-	Status InstanceStatus `locationName:"status" type:"string"`
+	Status InstanceStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5643,7 +5643,7 @@ type LastDeploymentInfo struct {
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the most recent deployment.
-	Status DeploymentStatus `locationName:"status" type:"string"`
+	Status DeploymentStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5711,7 +5711,7 @@ type LifecycleEvent struct {
 	//    * Skipped: The deployment lifecycle event has been skipped.
 	//
 	//    * Unknown: The deployment lifecycle event is unknown.
-	Status LifecycleEventStatus `locationName:"status" type:"string"`
+	Status LifecycleEventStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5774,7 +5774,7 @@ type ListApplicationRevisionsInput struct {
 	//    group.
 	//
 	//    * ignore: List all revisions.
-	Deployed ListStateFilterAction `locationName:"deployed" type:"string"`
+	Deployed ListStateFilterAction `locationName:"deployed" type:"string" enum:"true"`
 
 	// An identifier returned from the previous list application revisions call.
 	// It can be used to return the next set of applications in the list.
@@ -5799,7 +5799,7 @@ type ListApplicationRevisionsInput struct {
 	//
 	// If not specified or set to null, the results will be returned in an arbitrary
 	// order.
-	SortBy ApplicationRevisionSortBy `locationName:"sortBy" type:"string"`
+	SortBy ApplicationRevisionSortBy `locationName:"sortBy" type:"string" enum:"true"`
 
 	// The order in which to sort the list results:
 	//
@@ -5810,7 +5810,7 @@ type ListApplicationRevisionsInput struct {
 	// If not specified, the results will be sorted in ascending order.
 	//
 	// If set to null, the results will be sorted in an arbitrary order.
-	SortOrder SortOrder `locationName:"sortOrder" type:"string"`
+	SortOrder SortOrder `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6468,7 +6468,7 @@ type ListOnPremisesInstancesInput struct {
 	//
 	//    * Registered: Include registered on-premises instances in the resulting
 	//    list.
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" enum:"true"`
 
 	// The on-premises instance tags that will be used to restrict the corresponding
 	// on-premises instance names returned.
@@ -6609,7 +6609,7 @@ type MinimumHealthyHosts struct {
 	//
 	// For more information, see AWS CodeDeploy Instance Health (http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
 	// in the AWS CodeDeploy User Guide.
-	Type MinimumHealthyHostsType `locationName:"type" type:"string"`
+	Type MinimumHealthyHostsType `locationName:"type" type:"string" enum:"true"`
 
 	// The minimum healthy instance value.
 	Value *int64 `locationName:"value" type:"integer"`
@@ -6942,7 +6942,7 @@ type RevisionLocation struct {
 	//    * S3: An application revision stored in Amazon S3.
 	//
 	//    * GitHub: An application revision stored in GitHub.
-	RevisionType RevisionLocationType `locationName:"revisionType" type:"string"`
+	RevisionType RevisionLocationType `locationName:"revisionType" type:"string" enum:"true"`
 
 	// Information about the location of application artifacts stored in Amazon
 	// S3.
@@ -7038,7 +7038,7 @@ type S3Location struct {
 	//    * tgz: A compressed tar archive file.
 	//
 	//    * zip: A zip archive file.
-	BundleType BundleType `locationName:"bundleType" type:"string"`
+	BundleType BundleType `locationName:"bundleType" type:"string" enum:"true"`
 
 	// The ETag of the Amazon S3 object that represents the bundled artifacts for
 	// the application revision.
@@ -7201,7 +7201,7 @@ type StopDeploymentOutput struct {
 	//    * Pending: The stop operation is pending.
 	//
 	//    * Succeeded: The stop operation was successful.
-	Status StopStatus `locationName:"status" type:"string"`
+	Status StopStatus `locationName:"status" type:"string" enum:"true"`
 
 	// An accompanying status message.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -7278,7 +7278,7 @@ type TagFilter struct {
 	//    * VALUE_ONLY: Value only.
 	//
 	//    * KEY_AND_VALUE: Key and value.
-	Type TagFilterType `type:"string"`
+	Type TagFilterType `type:"string" enum:"true"`
 
 	// The on-premises instance tag filter value.
 	Value *string `type:"string"`

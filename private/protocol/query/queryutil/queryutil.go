@@ -222,7 +222,13 @@ func (q *queryParser) parseMap(v url.Values, value reflect.Value, prefix string,
 func (q *queryParser) parseScalar(v url.Values, r reflect.Value, name string, tag reflect.StructTag, parentCollection bool) error {
 	if r.Kind() == reflect.String {
 		val, err := protocol.GetValue(r)
-		if _, ok := err.(*protocol.ErrValueNotSet); err == nil || (ok && parentCollection) {
+		isEnum := len(tag.Get("enum")) != 0
+
+		if err == nil || parentCollection {
+			v.Set(name, val)
+		} else if isEnum && len(val) > 0 {
+			v.Set(name, val)
+		} else if !isEnum {
 			v.Set(name, val)
 		}
 		return err

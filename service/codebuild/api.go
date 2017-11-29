@@ -924,7 +924,7 @@ type Build struct {
 	//    * SUCCEEDED: The build succeeded.
 	//
 	//    * TIMED_OUT: The build timed out.
-	BuildStatus StatusType `locationName:"buildStatus" type:"string"`
+	BuildStatus StatusType `locationName:"buildStatus" type:"string" enum:"true"`
 
 	// The current build phase.
 	CurrentPhase *string `locationName:"currentPhase" type:"string"`
@@ -1198,7 +1198,7 @@ type BuildPhase struct {
 	//    * SUCCEEDED: The build phase succeeded.
 	//
 	//    * TIMED_OUT: The build phase timed out.
-	PhaseStatus StatusType `locationName:"phaseStatus" type:"string"`
+	PhaseStatus StatusType `locationName:"phaseStatus" type:"string" enum:"true"`
 
 	// The name of the build phase. Valid values include:
 	//
@@ -1222,7 +1222,7 @@ type BuildPhase struct {
 	//
 	//    * UPLOAD_ARTIFACTS: Build output artifacts are being uploaded to the output
 	//    location.
-	PhaseType BuildPhaseType `locationName:"phaseType" type:"string"`
+	PhaseType BuildPhaseType `locationName:"phaseType" type:"string" enum:"true"`
 
 	// When the build phase started, expressed in Unix time format.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
@@ -1701,7 +1701,7 @@ type EnvironmentLanguage struct {
 	Images []EnvironmentImage `locationName:"images" type:"list"`
 
 	// The programming language for the Docker images.
-	Language LanguageType `locationName:"language" type:"string"`
+	Language LanguageType `locationName:"language" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1736,7 +1736,7 @@ type EnvironmentPlatform struct {
 	Languages []EnvironmentLanguage `locationName:"languages" type:"list"`
 
 	// The platform's name.
-	Platform PlatformType `locationName:"platform" type:"string"`
+	Platform PlatformType `locationName:"platform" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1777,7 +1777,7 @@ type EnvironmentVariable struct {
 	//    Manager Parameter Store.
 	//
 	//    * PLAINTEXT: An environment variable in plaintext format.
-	Type EnvironmentVariableType `locationName:"type" type:"string"`
+	Type EnvironmentVariableType `locationName:"type" type:"string" enum:"true"`
 
 	// The value of the environment variable.
 	//
@@ -1861,7 +1861,7 @@ type ListBuildsForProjectInput struct {
 	//    * ASCENDING: List the build IDs in ascending order by build ID.
 	//
 	//    * DESCENDING: List the build IDs in descending order by build ID.
-	SortOrder SortOrderType `locationName:"sortOrder" type:"string"`
+	SortOrder SortOrderType `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1963,7 +1963,7 @@ type ListBuildsInput struct {
 	//    * ASCENDING: List the build IDs in ascending order by build ID.
 	//
 	//    * DESCENDING: List the build IDs in descending order by build ID.
-	SortOrder SortOrderType `locationName:"sortOrder" type:"string"`
+	SortOrder SortOrderType `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2088,7 +2088,7 @@ type ListProjectsInput struct {
 	//
 	// Use sortOrder to specify in what order to list the build project names based
 	// on the preceding criteria.
-	SortBy ProjectSortByType `locationName:"sortBy" type:"string"`
+	SortBy ProjectSortByType `locationName:"sortBy" type:"string" enum:"true"`
 
 	// The order in which to list build projects. Valid values include:
 	//
@@ -2097,7 +2097,7 @@ type ListProjectsInput struct {
 	//    * DESCENDING: List the build project names in descending order.
 	//
 	// Use sortBy to specify the criterion to be used to list build project names.
-	SortOrder SortOrderType `locationName:"sortOrder" type:"string"`
+	SortOrder SortOrderType `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2457,7 +2457,7 @@ type ProjectArtifacts struct {
 	// For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID,
 	// and name is set to MyArtifact.zip, then the output artifact would be stored
 	// in MyArtifacts/build-ID/MyArtifact.zip.
-	NamespaceType ArtifactNamespace `locationName:"namespaceType" type:"string"`
+	NamespaceType ArtifactNamespace `locationName:"namespaceType" type:"string" enum:"true"`
 
 	// The type of build output artifact to create, as follows:
 	//
@@ -2475,7 +2475,7 @@ type ProjectArtifacts struct {
 	//
 	// ZIP: AWS CodeBuild will create in the output bucket a ZIP file containing
 	//    the build output.
-	Packaging ArtifactPackaging `locationName:"packaging" type:"string"`
+	Packaging ArtifactPackaging `locationName:"packaging" type:"string" enum:"true"`
 
 	// Along with namespaceType and name, the pattern that AWS CodeBuild will use
 	// to name and store the output artifact, as follows:
@@ -2506,7 +2506,7 @@ type ProjectArtifacts struct {
 	//    Service (Amazon S3).
 	//
 	// Type is a required field
-	Type ArtifactsType `locationName:"type" type:"string" required:"true"`
+	Type ArtifactsType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2583,7 +2583,7 @@ type ProjectEnvironment struct {
 	//    * BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds.
 	//
 	// ComputeType is a required field
-	ComputeType ComputeType `locationName:"computeType" type:"string" required:"true"`
+	ComputeType ComputeType `locationName:"computeType" type:"string" required:"true" enum:"true"`
 
 	// A set of environment variables to make available to builds for this build
 	// project.
@@ -2614,7 +2614,7 @@ type ProjectEnvironment struct {
 	// The type of build environment to use for related builds.
 	//
 	// Type is a required field
-	Type EnvironmentType `locationName:"type" type:"string" required:"true"`
+	Type EnvironmentType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2763,7 +2763,7 @@ type ProjectSource struct {
 	//    input bucket.
 	//
 	// Type is a required field
-	Type SourceType `locationName:"type" type:"string" required:"true"`
+	Type SourceType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2835,7 +2835,7 @@ type SourceAuth struct {
 	// the OAuth authorization type.
 	//
 	// Type is a required field
-	Type SourceAuthType `locationName:"type" type:"string" required:"true"`
+	Type SourceAuthType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

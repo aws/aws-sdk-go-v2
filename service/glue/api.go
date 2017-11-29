@@ -5174,9 +5174,9 @@ type Condition struct {
 
 	JobName *string `min:"1" type:"string"`
 
-	LogicalOperator LogicalOperator `type:"string"`
+	LogicalOperator LogicalOperator `type:"string" enum:"true"`
 
-	State JobRunState `type:"string"`
+	State JobRunState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5229,7 +5229,7 @@ type Connection struct {
 	ConnectionProperties map[string]string `type:"map"`
 
 	// The type of the connection.
-	ConnectionType ConnectionType `type:"string"`
+	ConnectionType ConnectionType `type:"string" enum:"true"`
 
 	// The time this connection definition was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -5327,7 +5327,7 @@ type ConnectionInput struct {
 	ConnectionProperties map[string]string `type:"map"`
 
 	// The type of the connection.
-	ConnectionType ConnectionType `type:"string"`
+	ConnectionType ConnectionType `type:"string" enum:"true"`
 
 	// Description of the connection.
 	Description *string `type:"string"`
@@ -5477,7 +5477,7 @@ type Crawler struct {
 	SchemaChangePolicy *SchemaChangePolicy `type:"structure"`
 
 	// Indicates whether this Crawler is running, or whether a run is pending.
-	State CrawlerState `type:"string"`
+	State CrawlerState `type:"string" enum:"true"`
 
 	// The table prefix used for catalog tables created.
 	TablePrefix *string `type:"string"`
@@ -6875,7 +6875,7 @@ type CreateTriggerInput struct {
 	// The type of the new trigger.
 	//
 	// Type is a required field
-	Type TriggerType `type:"string" required:"true"`
+	Type TriggerType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8502,7 +8502,7 @@ type GetConnectionsFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The type of connections to return.
-	ConnectionType ConnectionType `type:"string"`
+	ConnectionType ConnectionType `type:"string" enum:"true"`
 
 	// A criteria string that must match the criteria recorded in the connection
 	// definition for that connection definition to be returned.
@@ -11223,7 +11223,7 @@ type JobRun struct {
 	JobName *string `min:"1" type:"string"`
 
 	// The current state of the job run.
-	JobRunState JobRunState `type:"string"`
+	JobRunState JobRunState `type:"string" enum:"true"`
 
 	// The last time this job run was modified.
 	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -11448,7 +11448,7 @@ type LastCrawlInfo struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Status of the last crawl.
-	Status LastCrawlStatus `type:"string"`
+	Status LastCrawlStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12023,7 +12023,7 @@ type Predicate struct {
 	Conditions []Condition `type:"list"`
 
 	// Currently "OR" is not supported.
-	Logical Logical `type:"string"`
+	Logical Logical `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12135,7 +12135,7 @@ type ResourceUri struct {
 	_ struct{} `type:"structure"`
 
 	// The type of the resource.
-	ResourceType ResourceType `type:"string"`
+	ResourceType ResourceType `type:"string" enum:"true"`
 
 	// The URI for accessing the resource.
 	Uri *string `min:"1" type:"string"`
@@ -12222,7 +12222,7 @@ type Schedule struct {
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the schedule.
-	State ScheduleState `type:"string"`
+	State ScheduleState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12253,10 +12253,10 @@ type SchemaChangePolicy struct {
 	_ struct{} `type:"structure"`
 
 	// The deletion behavior.
-	DeleteBehavior DeleteBehavior `type:"string"`
+	DeleteBehavior DeleteBehavior `type:"string" enum:"true"`
 
 	// The update behavior.
-	UpdateBehavior UpdateBehavior `type:"string"`
+	UpdateBehavior UpdateBehavior `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13484,10 +13484,10 @@ type Trigger struct {
 	Schedule *string `type:"string"`
 
 	// The current state of the trigger.
-	State TriggerState `type:"string"`
+	State TriggerState `type:"string" enum:"true"`
 
 	// The type of trigger that this is.
-	Type TriggerType `type:"string"`
+	Type TriggerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -14731,7 +14731,7 @@ type UserDefinedFunction struct {
 	OwnerName *string `min:"1" type:"string"`
 
 	// The owner type.
-	OwnerType PrincipalType `type:"string"`
+	OwnerType PrincipalType `type:"string" enum:"true"`
 
 	// The resource URIs for the function.
 	ResourceUris []ResourceUri `type:"list"`
@@ -14798,7 +14798,7 @@ type UserDefinedFunctionInput struct {
 	OwnerName *string `min:"1" type:"string"`
 
 	// The owner type.
-	OwnerType PrincipalType `type:"string"`
+	OwnerType PrincipalType `type:"string" enum:"true"`
 
 	// The resource URIs for the function.
 	ResourceUris []ResourceUri `type:"list"`

@@ -2643,7 +2643,7 @@ type ADMMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action Action `type:"string"`
+	Action Action `type:"string" enum:"true"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -3014,7 +3014,7 @@ type APNSMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action Action `type:"string"`
+	Action Action `type:"string" enum:"true"`
 
 	// Include this key when you want the system to modify the badge of your app
 	// icon. If this key is not included in the dictionary, the badge is not changed.
@@ -3525,7 +3525,7 @@ type AddressConfiguration struct {
 	BodyOverride *string `type:"string"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType ChannelType `type:"string"`
+	ChannelType ChannelType `type:"string" enum:"true"`
 
 	Context map[string]string `type:"map"`
 
@@ -3718,7 +3718,7 @@ type AttributeDimension struct {
 	// The type of dimension:INCLUSIVE - Endpoints that match the criteria are included
 	// in the segment.EXCLUSIVE - Endpoints that match the criteria are excluded
 	// from the segment.
-	AttributeType AttributeType `type:"string"`
+	AttributeType AttributeType `type:"string" enum:"true"`
 
 	Values []string `type:"list"`
 }
@@ -3906,7 +3906,7 @@ type BaiduMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action Action `type:"string"`
+	Action Action `type:"string" enum:"true"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -4357,7 +4357,7 @@ type CampaignSmsMessage struct {
 	Body *string `type:"string"`
 
 	// Is this is a transactional SMS message, otherwise a promotional message.
-	MessageType MessageType `type:"string"`
+	MessageType MessageType `type:"string" enum:"true"`
 
 	// Sender ID of sent message.
 	SenderId *string `type:"string"`
@@ -4399,7 +4399,7 @@ type CampaignState struct {
 	// The status of the campaign, or the status of a treatment that belongs to
 	// an A/B test campaign.Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN,
 	// COMPLETED, PAUSED
-	CampaignStatus CampaignStatus `type:"string"`
+	CampaignStatus CampaignStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4822,7 +4822,7 @@ type DefaultPushNotificationMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action Action `type:"string"`
+	Action Action `type:"string" enum:"true"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -5984,7 +5984,7 @@ type EndpointBatchItem struct {
 	Attributes map[string][]string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType ChannelType `type:"string"`
+	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// The endpoint demographic attributes.
 	Demographic *EndpointDemographic `type:"structure"`
@@ -6294,7 +6294,7 @@ type EndpointMessageResult struct {
 	Address *string `type:"string"`
 
 	// Delivery status of message.
-	DeliveryStatus DeliveryStatus `type:"string"`
+	DeliveryStatus DeliveryStatus `type:"string" enum:"true"`
 
 	// Downstream service status code.
 	StatusCode *int64 `type:"integer"`
@@ -6358,7 +6358,7 @@ type EndpointRequest struct {
 	Attributes map[string][]string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType ChannelType `type:"string"`
+	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// The endpoint demographic attributes.
 	Demographic *EndpointDemographic `type:"structure"`
@@ -6478,7 +6478,7 @@ type EndpointResponse struct {
 	Attributes map[string][]string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType ChannelType `type:"string"`
+	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// A number from 0 - 99 that represents the cohort the endpoint is assigned
 	// to. Endpoints are grouped into cohorts randomly, and each cohort contains
@@ -6949,7 +6949,7 @@ type GCMMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action Action `type:"string"`
+	Action Action `type:"string" enum:"true"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -8922,7 +8922,7 @@ type ImportJobRequest struct {
 
 	// The format of the files that contain the endpoint definitions.Valid values:
 	// CSV, JSON
-	Format Format `type:"string"`
+	Format Format `type:"string" enum:"true"`
 
 	// Sets whether the endpoints are registered with Amazon Pinpoint when they
 	// are imported.
@@ -9018,7 +9018,7 @@ type ImportJobResource struct {
 
 	// The format of the files that contain the endpoint definitions.Valid values:
 	// CSV, JSON
-	Format Format `type:"string"`
+	Format Format `type:"string" enum:"true"`
 
 	// Sets whether the endpoints are registered with Amazon Pinpoint when they
 	// are imported.
@@ -9132,7 +9132,7 @@ type ImportJobResponse struct {
 	// The status of the import job.Valid values: CREATED, INITIALIZING, PROCESSING,
 	// COMPLETING, COMPLETED, FAILING, FAILEDThe job status is FAILED if one or
 	// more pieces failed to import.
-	JobStatus JobStatus `type:"string"`
+	JobStatus JobStatus `type:"string" enum:"true"`
 
 	// The number of endpoints that failed to import; for example, because of syntax
 	// errors.
@@ -9282,7 +9282,7 @@ type Message struct {
 	// - Uses deep linking features in iOS and Android to open your app and display
 	// a designated user interface within the app.URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
-	Action Action `type:"string"`
+	Action Action `type:"string" enum:"true"`
 
 	// The message body. Can include up to 140 characters.
 	Body *string `type:"string"`
@@ -9624,7 +9624,7 @@ type MessageResult struct {
 	_ struct{} `type:"structure"`
 
 	// Delivery status of message.
-	DeliveryStatus DeliveryStatus `type:"string"`
+	DeliveryStatus DeliveryStatus `type:"string" enum:"true"`
 
 	// Downstream service status code.
 	StatusCode *int64 `type:"integer"`
@@ -9790,12 +9790,12 @@ type RecencyDimension struct {
 
 	// The length of time during which users have been active or inactive with your
 	// app.Valid values: HR_24, DAY_7, DAY_14, DAY_30
-	Duration Duration `type:"string"`
+	Duration Duration `type:"string" enum:"true"`
 
 	// The recency dimension type:ACTIVE - Users who have used your app within the
 	// specified duration are included in the segment.INACTIVE - Users who have
 	// not used your app within the specified duration are included in the segment.
-	RecencyType RecencyType `type:"string"`
+	RecencyType RecencyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9987,7 +9987,7 @@ type SMSMessage struct {
 	Body *string `type:"string"`
 
 	// Is this a transaction priority message or lower priority.
-	MessageType MessageType `type:"string"`
+	MessageType MessageType `type:"string" enum:"true"`
 
 	// Sender ID of sent message.
 	SenderId *string `type:"string"`
@@ -10039,7 +10039,7 @@ type Schedule struct {
 
 	// How often the campaign delivers messages.Valid values: ONCE, HOURLY, DAILY,
 	// WEEKLY, MONTHLY
-	Frequency Frequency `type:"string"`
+	Frequency Frequency `type:"string" enum:"true"`
 
 	// Indicates whether the campaign schedule takes effect according to each user's
 	// local time.
@@ -10271,7 +10271,7 @@ type SegmentImportResource struct {
 
 	// The format of the endpoint files that were imported to create this segment.Valid
 	// values: CSV, JSON
-	Format Format `type:"string"`
+	Format Format `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint
 	// access to the endpoints in Amazon S3.
@@ -10389,7 +10389,7 @@ type SegmentResponse struct {
 	// an imported set of endpoint definitions. You create this type of segment
 	// by importing a segment in the Amazon Pinpoint console or by making a POST
 	// request to the jobs/import resource.
-	SegmentType SegmentType `type:"string"`
+	SegmentType SegmentType `type:"string" enum:"true"`
 
 	// The segment version number.
 	Version *int64 `type:"integer"`
@@ -10755,7 +10755,7 @@ type SetDimension struct {
 	// The type of dimension:INCLUSIVE - Endpoints that match the criteria are included
 	// in the segment.EXCLUSIVE - Endpoints that match the criteria are excluded
 	// from the segment.
-	DimensionType DimensionType `type:"string"`
+	DimensionType DimensionType `type:"string" enum:"true"`
 
 	Values []string `type:"list"`
 }

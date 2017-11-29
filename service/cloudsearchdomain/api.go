@@ -755,7 +755,7 @@ type SearchInput struct {
 	//    * dismax: search using the simplified subset of the Apache Lucene query
 	//    parser syntax defined by the DisMax query parser. For more information,
 	//    see DisMax Query Parser Syntax (http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax).
-	QueryParser QueryParser `location:"querystring" locationName:"q.parser" type:"string"`
+	QueryParser QueryParser `location:"querystring" locationName:"q.parser" type:"string" enum:"true"`
 
 	// Specifies the field and expression values to include in the response. Multiple
 	// fields or expressions are specified as a comma-separated list. By default,
@@ -1217,7 +1217,7 @@ type UploadDocumentsInput struct {
 	//    * application/xml
 	//
 	// ContentType is a required field
-	ContentType ContentType `location:"header" locationName:"Content-Type" type:"string" required:"true"`
+	ContentType ContentType `location:"header" locationName:"Content-Type" type:"string" required:"true" enum:"true"`
 
 	// A batch of documents formatted in JSON or HTML.
 	//

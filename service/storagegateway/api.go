@@ -7942,7 +7942,7 @@ type Error struct {
 	_ struct{} `type:"structure"`
 
 	// Additional information about the error.
-	ErrorCode ErrorCode `locationName:"errorCode" type:"string"`
+	ErrorCode ErrorCode `locationName:"errorCode" type:"string" enum:"true"`
 
 	// Human-readable text that provides detail about the error that occurred.
 	ErrorDetails map[string]string `locationName:"errorDetails" type:"map"`

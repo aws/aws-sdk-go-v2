@@ -5085,7 +5085,7 @@ type AcceptMatchInput struct {
 	// Player response to the proposed match.
 	//
 	// AcceptanceType is a required field
-	AcceptanceType AcceptanceType `type:"string" required:"true"`
+	AcceptanceType AcceptanceType `type:"string" required:"true" enum:"true"`
 
 	// Unique identifier for a player delivering the response. This parameter can
 	// include one or multiple player IDs.
@@ -5410,7 +5410,7 @@ type Build struct {
 
 	// Operating system that the game server binaries are built to run on. This
 	// value determines the type of fleet resources that you can use for this build.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// File size of the uploaded game build, expressed in bytes. When the build
 	// status is INITIALIZED, this value is 0.
@@ -5430,7 +5430,7 @@ type Build struct {
 	//
 	//    * FAILED -- The game build upload failed. You cannot create new fleets
 	//    for this build.
-	Status BuildStatus `type:"string"`
+	Status BuildStatus `type:"string" enum:"true"`
 
 	// Version that is associated with this build. Version strings do not need to
 	// be unique. This value can be set using CreateBuild or UpdateBuild.
@@ -5599,7 +5599,7 @@ type CreateBuildInput struct {
 	// value determines the type of fleet resources that you can use for this build.
 	// If your game build contains multiple executables, they all must run on the
 	// same operating system.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Amazon S3 location of the game build files to be uploaded. The S3 bucket
 	// must be owned by the same AWS account that you're using to manage Amazon
@@ -5741,7 +5741,7 @@ type CreateFleetInput struct {
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
 	//
 	// EC2InstanceType is a required field
-	EC2InstanceType EC2InstanceType `type:"string" required:"true"`
+	EC2InstanceType EC2InstanceType `type:"string" required:"true" enum:"true"`
 
 	// This parameter is no longer used. Instead, to specify where Amazon GameLift
 	// should store log files once a server process shuts down, use the Amazon GameLift
@@ -5771,7 +5771,7 @@ type CreateFleetInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 
 	// Unique identifier for the AWS account with the VPC that you want to peer
 	// your Amazon GameLift fleet with. You can find your Account ID in the AWS
@@ -7666,7 +7666,7 @@ type DescribeEC2InstanceLimitsInput struct {
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions. Leave
 	// this parameter blank to retrieve limits for all types.
-	EC2InstanceType EC2InstanceType `type:"string"`
+	EC2InstanceType EC2InstanceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9310,7 +9310,7 @@ type DescribeScalingPoliciesInput struct {
 	//
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
-	StatusFilter ScalingStatusType `type:"string"`
+	StatusFilter ScalingStatusType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9689,7 +9689,7 @@ type EC2InstanceLimit struct {
 	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	EC2InstanceType EC2InstanceType `type:"string"`
+	EC2InstanceType EC2InstanceType `type:"string" enum:"true"`
 
 	// Number of instances allowed.
 	InstanceLimit *int64 `type:"integer"`
@@ -9822,7 +9822,7 @@ type Event struct {
 	//    includes both the old and new policy setting.
 	//
 	//    * FLEET_DELETED -- A request to delete a fleet was initiated.
-	EventCode EventCode `type:"string"`
+	EventCode EventCode `type:"string" enum:"true"`
 
 	// Unique identifier for a fleet event.
 	EventId *string `min:"1" type:"string"`
@@ -9982,12 +9982,12 @@ type FleetAttributes struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 
 	// Operating system of the fleet's computing resources. A fleet's operating
 	// system depends on the OS specified for the build that is deployed on this
 	// fleet.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Fleet policy to limit the number of game sessions an individual player can
 	// create over a span of time.
@@ -10022,7 +10022,7 @@ type FleetAttributes struct {
 	//    * DELETING -- Hosts are responding to a delete fleet request.
 	//
 	//    * TERMINATED -- The fleet no longer exists.
-	Status FleetStatus `type:"string"`
+	Status FleetStatus `type:"string" enum:"true"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -10192,7 +10192,7 @@ type FleetCapacity struct {
 	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	InstanceType EC2InstanceType `type:"string"`
+	InstanceType EC2InstanceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10474,7 +10474,7 @@ type GameSession struct {
 	Name *string `min:"1" type:"string"`
 
 	// Indicates whether or not the game session is accepting new players.
-	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string"`
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string" enum:"true"`
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number.
@@ -10482,7 +10482,7 @@ type GameSession struct {
 
 	// Current status of the game session. A game session must have an ACTIVE status
 	// to have player sessions.
-	Status GameSessionStatus `type:"string"`
+	Status GameSessionStatus `type:"string" enum:"true"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -10659,7 +10659,7 @@ type GameSessionDetail struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	ProtectionPolicy ProtectionPolicy `type:"string"`
+	ProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10784,7 +10784,7 @@ type GameSessionPlacement struct {
 	//
 	//    * TIMED_OUT -- A new game session was not successfully created before
 	//    the time limit expired. You can resubmit the placement request as needed.
-	Status GameSessionPlacementState `type:"string"`
+	Status GameSessionPlacementState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11220,7 +11220,7 @@ type Instance struct {
 	IpAddress *string `type:"string"`
 
 	// Operating system that is running on this instance.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Current status of the instance. Possible statuses include the following:
 	//
@@ -11235,10 +11235,10 @@ type Instance struct {
 	//    * TERMINATING -- The instance is in the process of shutting down. This
 	//    may happen to reduce capacity during a scaling down event or to recycle
 	//    resources in the event of a problem.
-	Status InstanceStatus `type:"string"`
+	Status InstanceStatus `type:"string" enum:"true"`
 
 	// EC2 instance type that defines the computing resources of this instance.
-	Type EC2InstanceType `type:"string"`
+	Type EC2InstanceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11312,7 +11312,7 @@ type InstanceAccess struct {
 	IpAddress *string `type:"string"`
 
 	// Operating system that is running on the instance.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11417,7 +11417,7 @@ type IpPermission struct {
 	// Network communication protocol used by the fleet.
 	//
 	// Protocol is a required field
-	Protocol IpProtocol `type:"string" required:"true"`
+	Protocol IpProtocol `type:"string" required:"true" enum:"true"`
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive.
 	// This value must be higher than FromPort.
@@ -11521,7 +11521,7 @@ type ListAliasesInput struct {
 	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
 	//    with the RoutingStrategy message embedded.
-	RoutingStrategyType RoutingStrategyType `type:"string"`
+	RoutingStrategyType RoutingStrategyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11642,7 +11642,7 @@ type ListBuildsInput struct {
 	//
 	//    * FAILED -- The game build upload failed. You cannot create new fleets
 	//    for this build.
-	Status BuildStatus `type:"string"`
+	Status BuildStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12167,7 +12167,7 @@ type MatchmakingTicket struct {
 	//    * TIMED_OUT -- The matchmaking request was not completed within the duration
 	//    specified in the matchmaking configuration. Matchmaking requests that
 	//    time out can be resubmitted.
-	Status MatchmakingConfigurationStatus `type:"string"`
+	Status MatchmakingConfigurationStatus `type:"string" enum:"true"`
 
 	// Additional information about the current status.
 	StatusMessage *string `type:"string"`
@@ -12583,7 +12583,7 @@ type PlayerSession struct {
 	//
 	//    * TIMEDOUT -- A player session request was received, but the player did
 	//    not connect and/or was not validated within the timeout limit (60 seconds).
-	Status PlayerSessionStatus `type:"string"`
+	Status PlayerSessionStatus `type:"string" enum:"true"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -12669,7 +12669,7 @@ type PutScalingPolicyInput struct {
 	// value.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperatorType `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperatorType `type:"string" required:"true" enum:"true"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
@@ -12704,7 +12704,7 @@ type PutScalingPolicyInput struct {
 	//    * IdleInstances -- number of instances not currently running a game session.
 	//
 	// MetricName is a required field
-	MetricName MetricName `type:"string" required:"true"`
+	MetricName MetricName `type:"string" required:"true" enum:"true"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique. A fleet can have only one scaling policy with the
@@ -12732,7 +12732,7 @@ type PutScalingPolicyInput struct {
 	//    the fleet down by 10%.
 	//
 	// ScalingAdjustmentType is a required field
-	ScalingAdjustmentType ScalingAdjustmentType `type:"string" required:"true"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string" required:"true" enum:"true"`
 
 	// Metric value used to trigger a scaling event.
 	//
@@ -13122,7 +13122,7 @@ type RoutingStrategy struct {
 	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
 	//    with the RoutingStrategy message embedded.
-	Type RoutingStrategyType `type:"string"`
+	Type RoutingStrategyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13409,7 +13409,7 @@ type ScalingPolicy struct {
 
 	// Comparison operator to use when measuring a metric against the threshold
 	// value.
-	ComparisonOperator ComparisonOperatorType `type:"string"`
+	ComparisonOperator ComparisonOperatorType `type:"string" enum:"true"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
@@ -13438,7 +13438,7 @@ type ScalingPolicy struct {
 	//    * ActiveInstances -- number of instances currently running a game session.
 	//
 	//    * IdleInstances -- number of instances not currently running a game session.
-	MetricName MetricName `type:"string"`
+	MetricName MetricName `type:"string" enum:"true"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
@@ -13458,7 +13458,7 @@ type ScalingPolicy struct {
 	//    * PercentChangeInCapacity -- increase or reduce the current instance count
 	//    by the scaling adjustment, read as a percentage. Positive values scale
 	//    up while negative values scale down.
-	ScalingAdjustmentType ScalingAdjustmentType `type:"string"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string" enum:"true"`
 
 	// Current status of the scaling policy. The scaling policy is only in force
 	// when in an ACTIVE status.
@@ -13479,7 +13479,7 @@ type ScalingPolicy struct {
 	//
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
-	Status ScalingStatusType `type:"string"`
+	Status ScalingStatusType `type:"string" enum:"true"`
 
 	// Metric value used to trigger a scaling event.
 	Threshold *float64 `type:"double"`
@@ -14472,7 +14472,7 @@ type UpdateFleetAttributesInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 
 	// Policy that limits the number of game sessions an individual player can create
 	// over a span of time.
@@ -14782,7 +14782,7 @@ type UpdateGameSessionInput struct {
 	Name *string `min:"1" type:"string"`
 
 	// Policy determining whether or not the game session accepts new players.
-	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string"`
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string" enum:"true"`
 
 	// Game session protection policy to apply to this game session only.
 	//
@@ -14791,7 +14791,7 @@ type UpdateGameSessionInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	ProtectionPolicy ProtectionPolicy `type:"string"`
+	ProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation

@@ -2930,7 +2930,7 @@ type CreateEndpointInput struct {
 	// The type of endpoint.
 	//
 	// EndpointType is a required field
-	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true"`
+	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
 	// include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
@@ -2974,7 +2974,7 @@ type CreateEndpointInput struct {
 	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
 	//
 	// The default value is none.
-	SslMode DmsSslModeValue `type:"string"`
+	SslMode DmsSslModeValue `type:"string" enum:"true"`
 
 	// Tags to be added to the endpoint.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
@@ -3619,7 +3619,7 @@ type CreateReplicationTaskInput struct {
 	// The migration type.
 	//
 	// MigrationType is a required field
-	MigrationType MigrationTypeValue `type:"string" required:"true"`
+	MigrationType MigrationTypeValue `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	//
@@ -4838,7 +4838,7 @@ type DescribeEventsInput struct {
 	// The type of AWS DMS resource that generates events.
 	//
 	// Valid values: replication-instance | migration-task
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 
 	// The start time for the events to be listed.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -5686,7 +5686,7 @@ type Endpoint struct {
 	EndpointIdentifier *string `type:"string"`
 
 	// The type of endpoint.
-	EndpointType ReplicationEndpointTypeValue `type:"string"`
+	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The database engine name. Valid values, depending on the EndPointType, include
 	// MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
@@ -5727,7 +5727,7 @@ type Endpoint struct {
 	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
 	//
 	// The default value is none.
-	SslMode DmsSslModeValue `type:"string"`
+	SslMode DmsSslModeValue `type:"string" enum:"true"`
 
 	// The status of the endpoint.
 	Status *string `type:"string"`
@@ -5871,7 +5871,7 @@ type Event struct {
 	// The type of AWS DMS resource that generates events.
 	//
 	// Valid values: replication-instance | endpoint | migration-task
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6299,7 +6299,7 @@ type ModifyEndpointInput struct {
 	EndpointIdentifier *string `type:"string"`
 
 	// The type of endpoint.
-	EndpointType ReplicationEndpointTypeValue `type:"string"`
+	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
 	// include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB,
@@ -6334,7 +6334,7 @@ type ModifyEndpointInput struct {
 	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
 	//
 	// The default value is none.
-	SslMode DmsSslModeValue `type:"string"`
+	SslMode DmsSslModeValue `type:"string" enum:"true"`
 
 	// The user name to be used to login to the endpoint database.
 	Username *string `type:"string"`
@@ -6875,7 +6875,7 @@ type ModifyReplicationTaskInput struct {
 	// The migration type.
 	//
 	// Valid values: full-load | cdc | full-load-and-cdc
-	MigrationType MigrationTypeValue `type:"string"`
+	MigrationType MigrationTypeValue `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the replication task.
 	//
@@ -6998,7 +6998,7 @@ type MongoDbSettings struct {
 	//
 	// DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x,
 	// use SCRAM_SHA_1. This attribute is not used when authType=No.
-	AuthMechanism AuthMechanismValue `type:"string"`
+	AuthMechanism AuthMechanismValue `type:"string" enum:"true"`
 
 	// The MongoDB database name. This attribute is not used when authType=NO.
 	//
@@ -7011,7 +7011,7 @@ type MongoDbSettings struct {
 	//
 	// When NO is selected, user name and password parameters are not used and can
 	// be empty.
-	AuthType AuthTypeValue `type:"string"`
+	AuthType AuthTypeValue `type:"string" enum:"true"`
 
 	// The database name on the MongoDB source endpoint.
 	DatabaseName *string `type:"string"`
@@ -7034,7 +7034,7 @@ type MongoDbSettings struct {
 	//
 	// Default value is NONE. Specify NONE to use document mode. Specify ONE to
 	// use table mode.
-	NestingLevel NestingLevelValue `type:"string"`
+	NestingLevel NestingLevelValue `type:"string" enum:"true"`
 
 	// The password for the user account you use to access the MongoDB source endpoint.
 	Password *string `type:"string"`
@@ -7306,7 +7306,7 @@ type RefreshSchemasStatus struct {
 	ReplicationInstanceArn *string `type:"string"`
 
 	// The status of the schema.
-	Status RefreshSchemasStatusTypeValue `type:"string"`
+	Status RefreshSchemasStatusTypeValue `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7850,7 +7850,7 @@ type ReplicationTask struct {
 	LastFailureMessage *string `type:"string"`
 
 	// The type of migration.
-	MigrationType MigrationTypeValue `type:"string"`
+	MigrationType MigrationTypeValue `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string `type:"string"`
@@ -8076,7 +8076,7 @@ type S3Settings struct {
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP
 	// to compress the target files. Set to NONE (the default) or do not use to
 	// leave the files uncompressed.
-	CompressionType CompressionTypeValue `type:"string"`
+	CompressionType CompressionTypeValue `type:"string" enum:"true"`
 
 	// The delimiter used to separate columns in the source files. The default is
 	// a comma.
@@ -8159,7 +8159,7 @@ type StartReplicationTaskInput struct {
 	// The type of replication task.
 	//
 	// StartReplicationTaskType is a required field
-	StartReplicationTaskType StartReplicationTaskTypeValue `type:"string" required:"true"`
+	StartReplicationTaskType StartReplicationTaskTypeValue `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8342,7 +8342,7 @@ type SupportedEndpointType struct {
 	_ struct{} `type:"structure"`
 
 	// The type of endpoint.
-	EndpointType ReplicationEndpointTypeValue `type:"string"`
+	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The database engine name. Valid values, depending on the EndPointType, include
 	// MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,

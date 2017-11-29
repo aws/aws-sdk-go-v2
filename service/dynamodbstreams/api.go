@@ -445,7 +445,7 @@ type GetShardIteratorInput struct {
 	//    shard, so that you always read the most recent data in the shard.
 	//
 	// ShardIteratorType is a required field
-	ShardIteratorType ShardIteratorType `type:"string" required:"true"`
+	ShardIteratorType ShardIteratorType `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) for the stream.
 	//
@@ -710,7 +710,7 @@ type Record struct {
 	//    * MODIFY - one or more of an existing item's attributes were modified.
 	//
 	//    * REMOVE - the item was deleted from the table
-	EventName OperationType `locationName:"eventName" type:"string"`
+	EventName OperationType `locationName:"eventName" type:"string" enum:"true"`
 
 	// The AWS service from which the stream record originated. For DynamoDB Streams,
 	// this is aws:dynamodb.
@@ -973,7 +973,7 @@ type StreamDescription struct {
 	//    * DISABLING - Streams is currently being disabled on the DynamoDB table.
 	//
 	//    * DISABLED - the stream is disabled.
-	StreamStatus StreamStatus `type:"string"`
+	StreamStatus StreamStatus `type:"string" enum:"true"`
 
 	// Indicates the format of the records within this stream:
 	//
@@ -988,7 +988,7 @@ type StreamDescription struct {
 	//
 	//    * NEW_AND_OLD_IMAGES - both the new and the old images of the items from
 	//    the table.
-	StreamViewType StreamViewType `type:"string"`
+	StreamViewType StreamViewType `type:"string" enum:"true"`
 
 	// The DynamoDB table with which the stream is associated.
 	TableName *string `min:"3" type:"string"`
@@ -1093,7 +1093,7 @@ type StreamRecord struct {
 	//    * OLD_IMAGE - the entire item, as it appeared before it was modified.
 	//
 	//    * NEW_AND_OLD_IMAGES - both the new and the old item images of the item.
-	StreamViewType StreamViewType `type:"string"`
+	StreamViewType StreamViewType `type:"string" enum:"true"`
 }
 
 // String returns the string representation

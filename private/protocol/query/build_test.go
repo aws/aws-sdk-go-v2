@@ -2289,7 +2289,7 @@ type InputService14TestShapeInputService14TestCaseOperation2Output struct {
 type InputService14TestShapeInputService14TestCaseOperation3Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService14TestShapeEnumType `type:"string"`
+	FooEnum InputService14TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService14TestShapeEnumType `type:"list"`
 }

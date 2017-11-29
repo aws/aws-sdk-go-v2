@@ -233,7 +233,7 @@ type GenerateDataSetInput struct {
 	// on the 15th day of the month by 5:00 PM Pacific Time.
 	//
 	// DataSetType is a required field
-	DataSetType DataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true"`
+	DataSetType DataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The name (friendly name, not ARN) of the destination S3 bucket.
 	//
@@ -404,7 +404,7 @@ type StartSupportDataExportInput struct {
 	// test data in the same format as customer_support_contacts_data
 	//
 	// DataSetType is a required field
-	DataSetType SupportDataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true"`
+	DataSetType SupportDataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The name (friendly name, not ARN) of the destination S3 bucket.
 	//

@@ -3134,7 +3134,7 @@ type DescribeExportTasksInput struct {
 
 	// The status code of the export task. Specifying a status code filters the
 	// results to zero or more export tasks.
-	StatusCode ExportTaskStatusCode `locationName:"statusCode" type:"string"`
+	StatusCode ExportTaskStatusCode `locationName:"statusCode" type:"string" enum:"true"`
 
 	// The ID of the export task. Specifying a task ID filters the results to zero
 	// or one export tasks.
@@ -3364,7 +3364,7 @@ type DescribeLogStreamsInput struct {
 	// milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on
 	// an eventual consistency basis. It typically updates in less than an hour
 	// from ingestion, but may take longer in some rare situations.
-	OrderBy OrderBy `locationName:"orderBy" type:"string"`
+	OrderBy OrderBy `locationName:"orderBy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4073,7 +4073,7 @@ type ExportTaskStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The status code of the export task.
-	Code ExportTaskStatusCode `locationName:"code" type:"string"`
+	Code ExportTaskStatusCode `locationName:"code" type:"string" enum:"true"`
 
 	// The status message related to the status code.
 	Message *string `locationName:"message" type:"string"`
@@ -5653,7 +5653,7 @@ type PutSubscriptionFilterInput struct {
 	// data is grouped by log stream, but the grouping can be set to random for
 	// a more even distribution. This property is only applicable when the destination
 	// is an Amazon Kinesis stream.
-	Distribution Distribution `locationName:"distribution" type:"string"`
+	Distribution Distribution `locationName:"distribution" type:"string" enum:"true"`
 
 	// A name for the subscription filter. If you are updating an existing filter,
 	// you must specify the correct name in filterName. Otherwise, the call fails
@@ -5915,7 +5915,7 @@ type SubscriptionFilter struct {
 
 	// The method used to distribute log data to the destination, which can be either
 	// random or grouped by log stream.
-	Distribution Distribution `locationName:"distribution" type:"string"`
+	Distribution Distribution `locationName:"distribution" type:"string" enum:"true"`
 
 	// The name of the subscription filter.
 	FilterName *string `locationName:"filterName" min:"1" type:"string"`

@@ -3209,7 +3209,7 @@ type AlarmIdentifier struct {
 	// Reference.
 	//
 	// Region is a required field
-	Region CloudWatchRegion `min:"1" type:"string" required:"true"`
+	Region CloudWatchRegion `min:"1" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3661,7 +3661,7 @@ type Change struct {
 	//    record sets)
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// Information about the resource record set to create, delete, or update.
 	//
@@ -3795,7 +3795,7 @@ type ChangeInfo struct {
 	// not yet been applied to all Amazon Route 53 DNS servers.
 	//
 	// Status is a required field
-	Status ChangeStatus `type:"string" required:"true"`
+	Status ChangeStatus `type:"string" required:"true" enum:"true"`
 
 	// The date and time that the change request was submitted in ISO 8601 format
 	// (https://en.wikipedia.org/wiki/ISO_8601) and Coordinated Universal Time (UTC).
@@ -3962,7 +3962,7 @@ type ChangeTagsForResourceInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4048,7 +4048,7 @@ type CloudWatchAlarmConfiguration struct {
 	// operation that is used for the comparison.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// For the metric that the CloudWatch alarm is associated with, a complex type
 	// that contains information about the dimensions for the metric. For information,
@@ -4084,7 +4084,7 @@ type CloudWatchAlarmConfiguration struct {
 	// that is applied to the metric.
 	//
 	// Statistic is a required field
-	Statistic Statistic `type:"string" required:"true"`
+	Statistic Statistic `type:"string" required:"true" enum:"true"`
 
 	// For the metric that the CloudWatch alarm is associated with, the value the
 	// metric is compared with.
@@ -7142,7 +7142,7 @@ type HealthCheckConfig struct {
 	//    from the last time that CloudWatch had sufficient data to determine the
 	//    alarm state. For new health checks that have no last known status, the
 	//    default status for the health check is healthy.
-	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string"`
+	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string" enum:"true"`
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health
 	// check, for example, to consider a health check unhealthy when it otherwise
@@ -7244,7 +7244,7 @@ type HealthCheckConfig struct {
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Type is a required field
-	Type HealthCheckType `type:"string" required:"true"`
+	Type HealthCheckType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7395,7 +7395,7 @@ type HealthCheckObservation struct {
 
 	// The region of the Amazon Route 53 health checker that provided the status
 	// in StatusReport.
-	Region HealthCheckRegion `min:"1" type:"string"`
+	Region HealthCheckRegion `min:"1" type:"string" enum:"true"`
 
 	// A complex type that contains the last failure reason as reported by one Amazon
 	// Route 53 health checker and the time of the failed health check.
@@ -8301,7 +8301,7 @@ type ListResourceRecordSetsInput struct {
 	//
 	// Constraint: Specifying type without specifying name returns an InvalidInput
 	// error.
-	StartRecordType RRType `location:"querystring" locationName:"type" type:"string"`
+	StartRecordType RRType `location:"querystring" locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8391,7 +8391,7 @@ type ListResourceRecordSetsOutput struct {
 	// If the results were truncated, the type of the next record in the list.
 	//
 	// This element is present only if IsTruncated is true.
-	NextRecordType RRType `type:"string"`
+	NextRecordType RRType `type:"string" enum:"true"`
 
 	// Information about multiple resource record sets.
 	//
@@ -8586,7 +8586,7 @@ type ListTagsForResourceInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8675,7 +8675,7 @@ type ListTagsForResourcesInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8912,7 +8912,7 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8990,7 +8990,7 @@ type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of
 	// the resource record sets that are associated with the first traffic policy
 	// instance in the next group of traffic policy instances.
-	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string" enum:"true"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
@@ -9092,7 +9092,7 @@ type ListTrafficPolicyInstancesByPolicyInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"true"`
 
 	// The version of the traffic policy for which you want to list traffic policy
 	// instances. The version must be associated with the traffic policy that is
@@ -9205,7 +9205,7 @@ type ListTrafficPolicyInstancesByPolicyOutput struct {
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of
 	// the resource record sets that are associated with the first traffic policy
 	// instance in the next group of MaxItems traffic policy instances.
-	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string" enum:"true"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
@@ -9305,7 +9305,7 @@ type ListTrafficPolicyInstancesInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9376,7 +9376,7 @@ type ListTrafficPolicyInstancesOutput struct {
 	// the resource record sets that are associated with the first traffic policy
 	// instance that Amazon Route 53 will return if you submit another ListTrafficPolicyInstances
 	// request.
-	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string" enum:"true"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
@@ -9863,7 +9863,7 @@ type ResourceRecordSet struct {
 	//    * Amazon Route 53 Health Checks and DNS Failover (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html)
 	//
 	//    * Configuring Failover in a Private Hosted Zone (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
-	Failover ResourceRecordSetFailover `type:"string"`
+	Failover ResourceRecordSetFailover `type:"string" enum:"true"`
 
 	// Geo location resource record sets only: A complex type that lets you control
 	// how Amazon Route 53 responds to DNS queries based on the geographic origin
@@ -10066,7 +10066,7 @@ type ResourceRecordSet struct {
 	//
 	//    * You can't create non-latency resource record sets that have the same
 	//    values for the Name and Type elements as latency resource record sets.
-	Region ResourceRecordSetRegion `min:"1" type:"string"`
+	Region ResourceRecordSetRegion `min:"1" type:"string" enum:"true"`
 
 	// Information about the resource records to act upon.
 	//
@@ -10157,7 +10157,7 @@ type ResourceRecordSet struct {
 	//    are supported except NS and SOA.
 	//
 	// Type is a required field
-	Type RRType `type:"string" required:"true"`
+	Type RRType `type:"string" required:"true" enum:"true"`
 
 	// Weighted resource record sets only: Among resource record sets that have
 	// the same combination of DNS name and type, a value that determines the proportion
@@ -10340,7 +10340,7 @@ type ResourceTagSet struct {
 	//    * The resource type for health checks is healthcheck.
 	//
 	//    * The resource type for hosted zones is hostedzone.
-	ResourceType TagResourceType `type:"string"`
+	ResourceType TagResourceType `type:"string" enum:"true"`
 
 	// The tags associated with the specified resource.
 	Tags []Tag `locationNameList:"Tag" min:"1" type:"list"`
@@ -10500,7 +10500,7 @@ type TestDNSAnswerInput struct {
 	// The type of the resource record set.
 	//
 	// RecordType is a required field
-	RecordType RRType `location:"querystring" locationName:"recordtype" type:"string" required:"true"`
+	RecordType RRType `location:"querystring" locationName:"recordtype" type:"string" required:"true" enum:"true"`
 
 	// If you want to simulate a request from a specific DNS resolver, specify the
 	// IP address for that resolver. If you omit this value, TestDnsAnswer uses
@@ -10606,7 +10606,7 @@ type TestDNSAnswerOutput struct {
 	// The type of the resource record set that you submitted a request for.
 	//
 	// RecordType is a required field
-	RecordType RRType `type:"string" required:"true"`
+	RecordType RRType `type:"string" required:"true" enum:"true"`
 
 	// A code that indicates whether the request is valid or not. The most common
 	// response code is NOERROR, meaning that the request is valid. If the response
@@ -10694,7 +10694,7 @@ type TrafficPolicy struct {
 	// you use a traffic policy to create a traffic policy instance.
 	//
 	// Type is a required field
-	Type RRType `type:"string" required:"true"`
+	Type RRType `type:"string" required:"true" enum:"true"`
 
 	// The version number that Amazon Route 53 assigns to a traffic policy. For
 	// a new traffic policy, the value of Version is always 1.
@@ -10809,7 +10809,7 @@ type TrafficPolicyInstance struct {
 	// sets that it created for this traffic policy instance.
 	//
 	// TrafficPolicyType is a required field
-	TrafficPolicyType RRType `type:"string" required:"true"`
+	TrafficPolicyType RRType `type:"string" required:"true" enum:"true"`
 
 	// The version of the traffic policy that Amazon Route 53 used to create resource
 	// record sets in the specified hosted zone.
@@ -10913,7 +10913,7 @@ type TrafficPolicySummary struct {
 	// you use a traffic policy to create a traffic policy instance.
 	//
 	// Type is a required field
-	Type RRType `type:"string" required:"true"`
+	Type RRType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -11163,7 +11163,7 @@ type UpdateHealthCheckInput struct {
 	//    from the last time CloudWatch had sufficient data to determine the alarm
 	//    state. For new health checks that have no last known status, the default
 	//    status for the health check is healthy.
-	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string"`
+	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string" enum:"true"`
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health
 	// check, for example, to consider a health check unhealthy when it otherwise
@@ -11698,7 +11698,7 @@ type VPC struct {
 	VPCId *string `type:"string"`
 
 	// (Private hosted zones only) The region in which you created an Amazon VPC.
-	VPCRegion VPCRegion `min:"1" type:"string"`
+	VPCRegion VPCRegion `min:"1" type:"string" enum:"true"`
 }
 
 // String returns the string representation

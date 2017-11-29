@@ -600,7 +600,7 @@ type Budget struct {
 	// The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.
 	//
 	// BudgetType is a required field
-	BudgetType BudgetType `type:"string" required:"true"`
+	BudgetType BudgetType `type:"string" required:"true" enum:"true"`
 
 	// A structure that holds the actual and forecasted spend for a budget.
 	CalculatedSpend *CalculatedSpend `type:"structure"`
@@ -621,7 +621,7 @@ type Budget struct {
 	// The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
 	//
 	// TimeUnit is a required field
-	TimeUnit TimeUnit `type:"string" required:"true"`
+	TimeUnit TimeUnit `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1911,12 +1911,12 @@ type Notification struct {
 	// equal to and greater than.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// The type of a notification. It should be ACTUAL or FORECASTED.
 	//
 	// NotificationType is a required field
-	NotificationType NotificationType `type:"string" required:"true"`
+	NotificationType NotificationType `type:"string" required:"true" enum:"true"`
 
 	// The threshold of a notification. It should be a number between 0 and 1,000,000,000.
 	//
@@ -1924,7 +1924,7 @@ type Notification struct {
 	Threshold *float64 `min:"0.1" type:"double" required:"true"`
 
 	// The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
-	ThresholdType ThresholdType `type:"string"`
+	ThresholdType ThresholdType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2128,7 +2128,7 @@ type Subscriber struct {
 	// The subscription type of the subscriber. It can be SMS or EMAIL.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType SubscriptionType `type:"string" required:"true"`
+	SubscriptionType SubscriptionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

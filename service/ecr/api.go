@@ -1793,7 +1793,7 @@ type DescribeImagesFilter struct {
 
 	// The tag status with which to filter your DescribeImages results. You can
 	// filter results based on whether they are TAGGED or UNTAGGED.
-	TagStatus TagStatus `locationName:"tagStatus" type:"string"`
+	TagStatus TagStatus `locationName:"tagStatus" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2467,7 +2467,7 @@ type ImageFailure struct {
 	_ struct{} `type:"structure"`
 
 	// The code associated with the failure.
-	FailureCode ImageFailureCode `locationName:"failureCode" type:"string"`
+	FailureCode ImageFailureCode `locationName:"failureCode" type:"string" enum:"true"`
 
 	// The reason for the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
@@ -2632,7 +2632,7 @@ type Layer struct {
 	_ struct{} `type:"structure"`
 
 	// The availability status of the image layer.
-	LayerAvailability LayerAvailability `locationName:"layerAvailability" type:"string"`
+	LayerAvailability LayerAvailability `locationName:"layerAvailability" type:"string" enum:"true"`
 
 	// The sha256 digest of the image layer.
 	LayerDigest *string `locationName:"layerDigest" type:"string"`
@@ -2685,7 +2685,7 @@ type LayerFailure struct {
 	_ struct{} `type:"structure"`
 
 	// The failure code associated with the failure.
-	FailureCode LayerFailureCode `locationName:"failureCode" type:"string"`
+	FailureCode LayerFailureCode `locationName:"failureCode" type:"string" enum:"true"`
 
 	// The reason for the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
@@ -2729,7 +2729,7 @@ type ListImagesFilter struct {
 
 	// The tag status with which to filter your ListImages results. You can filter
 	// results based on whether they are TAGGED or UNTAGGED.
-	TagStatus TagStatus `locationName:"tagStatus" type:"string"`
+	TagStatus TagStatus `locationName:"tagStatus" type:"string" enum:"true"`
 }
 
 // String returns the string representation

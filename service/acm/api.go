@@ -738,7 +738,7 @@ type CertificateDetail struct {
 	// certificate status is FAILED. For more information, see Certificate Request
 	// Failed (http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
 	// in the AWS Certificate Manager User Guide.
-	FailureReason FailureReason `type:"string"`
+	FailureReason FailureReason `type:"string" enum:"true"`
 
 	// The date and time at which the certificate was imported. This value exists
 	// only when the certificate type is IMPORTED.
@@ -757,7 +757,7 @@ type CertificateDetail struct {
 
 	// The algorithm that was used to generate the key pair (the public and private
 	// key).
-	KeyAlgorithm KeyAlgorithm `type:"string"`
+	KeyAlgorithm KeyAlgorithm `type:"string" enum:"true"`
 
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -772,7 +772,7 @@ type CertificateDetail struct {
 
 	// The reason the certificate was revoked. This value exists only when the certificate
 	// status is REVOKED.
-	RevocationReason RevocationReason `type:"string"`
+	RevocationReason RevocationReason `type:"string" enum:"true"`
 
 	// The time at which the certificate was revoked. This value exists only when
 	// the certificate status is REVOKED.
@@ -785,7 +785,7 @@ type CertificateDetail struct {
 	SignatureAlgorithm *string `type:"string"`
 
 	// The status of the certificate.
-	Status CertificateStatus `type:"string"`
+	Status CertificateStatus `type:"string" enum:"true"`
 
 	// The name of the entity that is associated with the public key contained in
 	// the certificate.
@@ -805,7 +805,7 @@ type CertificateDetail struct {
 	// certificates that you import and those that ACM provides, see Importing Certificates
 	// (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
 	// in the AWS Certificate Manager User Guide.
-	Type CertificateType `type:"string"`
+	Type CertificateType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1139,7 +1139,7 @@ type DomainValidation struct {
 	ValidationEmails []string `type:"list"`
 
 	// The validation status of the domain name.
-	ValidationStatus DomainStatus `type:"string"`
+	ValidationStatus DomainStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1748,7 +1748,7 @@ type RenewalSummary struct {
 	// of the certificate.
 	//
 	// RenewalStatus is a required field
-	RenewalStatus RenewalStatus `type:"string" required:"true"`
+	RenewalStatus RenewalStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

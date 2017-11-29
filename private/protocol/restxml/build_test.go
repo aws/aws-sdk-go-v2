@@ -3875,13 +3875,13 @@ type InputService25TestShapeInputService25TestCaseOperation1Output struct {
 type InputService25TestShapeInputService25TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService25TestShapeEnumType `type:"string"`
+	FooEnum InputService25TestShapeEnumType `type:"string" enum:"true"`
 
-	HeaderEnum InputService25TestShapeEnumType `location:"header" locationName:"x-amz-enum" type:"string"`
+	HeaderEnum InputService25TestShapeEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
 
 	ListEnums []InputService25TestShapeEnumType `type:"list"`
 
-	URIFooEnum InputService25TestShapeEnumType `location:"uri" locationName:"URIEnum" type:"string"`
+	URIFooEnum InputService25TestShapeEnumType `location:"uri" locationName:"URIEnum" type:"string" enum:"true"`
 
 	URIListEnums []InputService25TestShapeEnumType `location:"querystring" locationName:"ListEnums" type:"list"`
 }

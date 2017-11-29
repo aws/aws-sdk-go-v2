@@ -4366,7 +4366,7 @@ type AdminCreateUserInput struct {
 	// Set to "RESEND" to resend the invitation message to a user that already exists
 	// and reset the expiration limit on the user's account. Set to "SUPPRESS" to
 	// suppress sending the message. Only one value can be specified.
-	MessageAction MessageActionType `type:"string"`
+	MessageAction MessageActionType `type:"string" enum:"true"`
 
 	// The user's temporary password. This password must conform to the password
 	// policy that you specified when you created the user pool.
@@ -5269,7 +5269,7 @@ type AdminGetUserOutput struct {
 	//    * COMPROMISED - User is disabled due to a potential security threat.
 	//
 	//    * UNKNOWN - User status is not known.
-	UserStatus UserStatusType `type:"string"`
+	UserStatus UserStatusType `type:"string" enum:"true"`
 
 	// The user name of the user about whom you are receiving information.
 	//
@@ -5358,7 +5358,7 @@ type AdminInitiateAuthInput struct {
 	//    app client.
 	//
 	// AuthFlow is a required field
-	AuthFlow AuthFlowType `type:"string" required:"true"`
+	AuthFlow AuthFlowType `type:"string" required:"true" enum:"true"`
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
@@ -5499,7 +5499,7 @@ type AdminInitiateAuthOutput struct {
 	//    * NEW_PASSWORD_REQUIRED: For users which are required to change their
 	//    passwords after successful first login. This challenge should be passed
 	//    with NEW_PASSWORD and any other required attributes.
-	ChallengeName ChallengeNameType `type:"string"`
+	ChallengeName ChallengeNameType `type:"string" enum:"true"`
 
 	// The challenge parameters. These are returned to you in the AdminInitiateAuth
 	// response if you need to pass another challenge. The responses in this parameter
@@ -6087,7 +6087,7 @@ type AdminRespondToAuthChallengeInput struct {
 	// The challenge name. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
 	//
 	// ChallengeName is a required field
-	ChallengeName ChallengeNameType `type:"string" required:"true"`
+	ChallengeName ChallengeNameType `type:"string" required:"true" enum:"true"`
 
 	// The challenge responses. These are inputs corresponding to the value of ChallengeName,
 	// for example:
@@ -6209,7 +6209,7 @@ type AdminRespondToAuthChallengeOutput struct {
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
 	// The name of the challenge. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
-	ChallengeName ChallengeNameType `type:"string"`
+	ChallengeName ChallengeNameType `type:"string" enum:"true"`
 
 	// The challenge parameters. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
 	ChallengeParameters map[string]string `type:"map"`
@@ -6369,7 +6369,7 @@ type AdminUpdateDeviceStatusInput struct {
 	DeviceKey *string `min:"1" type:"string" required:"true"`
 
 	// The status indicating whether a device has been remembered or not.
-	DeviceRememberedStatus DeviceRememberedStatusType `type:"string"`
+	DeviceRememberedStatus DeviceRememberedStatusType `type:"string" enum:"true"`
 
 	// The user pool ID.
 	//
@@ -6870,7 +6870,7 @@ type CodeDeliveryDetailsType struct {
 	AttributeName *string `min:"1" type:"string"`
 
 	// The delivery medium (email message or phone number).
-	DeliveryMedium DeliveryMediumType `type:"string"`
+	DeliveryMedium DeliveryMediumType `type:"string" enum:"true"`
 
 	// The destination for the code delivery details.
 	Destination *string `type:"string"`
@@ -7416,7 +7416,7 @@ type CreateIdentityProviderInput struct {
 	// The identity provider type.
 	//
 	// ProviderType is a required field
-	ProviderType IdentityProviderTypeType `type:"string" required:"true"`
+	ProviderType IdentityProviderTypeType `type:"string" required:"true" enum:"true"`
 
 	// The user pool ID.
 	//
@@ -8070,7 +8070,7 @@ type CreateUserPoolInput struct {
 	LambdaConfig *LambdaConfigType `type:"structure"`
 
 	// Specifies MFA configuration details.
-	MfaConfiguration UserPoolMfaType `type:"string"`
+	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
 
 	// The policies associated with the new user pool.
 	Policies *UserPoolPolicyType `type:"structure"`
@@ -9524,7 +9524,7 @@ type DomainDescriptionType struct {
 	S3Bucket *string `min:"3" type:"string"`
 
 	// The domain status.
-	Status DomainStatusType `type:"string"`
+	Status DomainStatusType `type:"string" enum:"true"`
 
 	// The user pool ID.
 	UserPoolId *string `min:"1" type:"string"`
@@ -10571,7 +10571,7 @@ type IdentityProviderType struct {
 	ProviderName *string `min:"1" type:"string"`
 
 	// The identity provider type.
-	ProviderType IdentityProviderTypeType `type:"string"`
+	ProviderType IdentityProviderTypeType `type:"string" enum:"true"`
 
 	// The user pool ID.
 	UserPoolId *string `min:"1" type:"string"`
@@ -10662,7 +10662,7 @@ type InitiateAuthInput struct {
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
 	// AuthFlow is a required field
-	AuthFlow AuthFlowType `type:"string" required:"true"`
+	AuthFlow AuthFlowType `type:"string" required:"true" enum:"true"`
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
@@ -10781,7 +10781,7 @@ type InitiateAuthOutput struct {
 	//    * NEW_PASSWORD_REQUIRED: For users which are required to change their
 	//    passwords after successful first login. This challenge should be passed
 	//    with NEW_PASSWORD and any other required attributes.
-	ChallengeName ChallengeNameType `type:"string"`
+	ChallengeName ChallengeNameType `type:"string" enum:"true"`
 
 	// The challenge parameters. These are returned to you in the InitiateAuth response
 	// if you need to pass another challenge. The responses in this parameter should
@@ -11949,7 +11949,7 @@ type MFAOptionType struct {
 	AttributeName *string `min:"1" type:"string"`
 
 	// The delivery medium (email message or SMS message) to send the MFA code.
-	DeliveryMedium DeliveryMediumType `type:"string"`
+	DeliveryMedium DeliveryMediumType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12212,7 +12212,7 @@ type ProviderDescription struct {
 	ProviderName *string `min:"1" type:"string"`
 
 	// The identity provider type.
-	ProviderType IdentityProviderTypeType `type:"string"`
+	ProviderType IdentityProviderTypeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12531,7 +12531,7 @@ type RespondToAuthChallengeInput struct {
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
 	// ChallengeName is a required field
-	ChallengeName ChallengeNameType `type:"string" required:"true"`
+	ChallengeName ChallengeNameType `type:"string" required:"true" enum:"true"`
 
 	// The challenge responses. These are inputs corresponding to the value of ChallengeName,
 	// for example:
@@ -12627,7 +12627,7 @@ type RespondToAuthChallengeOutput struct {
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
 	// The challenge name. For more information, see InitiateAuth (API_InitiateAuth.html).
-	ChallengeName ChallengeNameType `type:"string"`
+	ChallengeName ChallengeNameType `type:"string" enum:"true"`
 
 	// The challenge parameters. For more information, see InitiateAuth (API_InitiateAuth.html).
 	ChallengeParameters map[string]string `type:"map"`
@@ -12681,7 +12681,7 @@ type SchemaAttributeType struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute data type.
-	AttributeDataType AttributeDataType `type:"string"`
+	AttributeDataType AttributeDataType `type:"string" enum:"true"`
 
 	// Specifies whether the attribute type is developer only.
 	DeveloperOnlyAttribute *bool `type:"boolean"`
@@ -13485,7 +13485,7 @@ type UpdateDeviceStatusInput struct {
 	DeviceKey *string `min:"1" type:"string" required:"true"`
 
 	// The status of whether a device is remembered.
-	DeviceRememberedStatus DeviceRememberedStatusType `type:"string"`
+	DeviceRememberedStatus DeviceRememberedStatusType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -14247,7 +14247,7 @@ type UpdateUserPoolInput struct {
 	//    specify required when you are initially creating a user pool.
 	//
 	//    * OPTIONAL - Users have the option when registering to create an MFA token.
-	MfaConfiguration UserPoolMfaType `type:"string"`
+	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
 
 	// A container with the policies you wish to update in a user pool.
 	Policies *UserPoolPolicyType `type:"structure"`
@@ -14512,7 +14512,7 @@ type UserImportJobType struct {
 	//    * Expired - You created a job, but did not start the job within 24-48
 	//    hours. All data associated with the job was deleted, and the job cannot
 	//    be started.
-	Status UserImportJobStatusType `type:"string"`
+	Status UserImportJobStatusType `type:"string" enum:"true"`
 
 	// The user pool ID for the user pool that the users are being imported into.
 	UserPoolId *string `min:"1" type:"string"`
@@ -14849,7 +14849,7 @@ type UserPoolDescriptionType struct {
 	Name *string `min:"1" type:"string"`
 
 	// The user pool status in a user pool description.
-	Status StatusType `type:"string"`
+	Status StatusType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -14991,7 +14991,7 @@ type UserPoolType struct {
 	//    specify required when you are initially creating a user pool.
 	//
 	//    * OPTIONAL - Users have the option when registering to create an MFA token.
-	MfaConfiguration UserPoolMfaType `type:"string"`
+	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
 
 	// The name of the user pool.
 	Name *string `min:"1" type:"string"`
@@ -15015,7 +15015,7 @@ type UserPoolType struct {
 	SmsVerificationMessage *string `min:"6" type:"string"`
 
 	// The status of a user pool.
-	Status StatusType `type:"string"`
+	Status StatusType `type:"string" enum:"true"`
 
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
@@ -15220,7 +15220,7 @@ type UserType struct {
 	//    * COMPROMISED - User is disabled due to a potential security threat.
 	//
 	//    * UNKNOWN - User status is not known.
-	UserStatus UserStatusType `type:"string"`
+	UserStatus UserStatusType `type:"string" enum:"true"`
 
 	// The user name of the user you wish to describe.
 	Username *string `min:"1" type:"string"`
@@ -15284,7 +15284,7 @@ type VerificationMessageTemplateType struct {
 	_ struct{} `type:"structure"`
 
 	// The default email option.
-	DefaultEmailOption DefaultEmailOptionType `type:"string"`
+	DefaultEmailOption DefaultEmailOptionType `type:"string" enum:"true"`
 
 	// The email message template.
 	EmailMessage *string `min:"6" type:"string"`

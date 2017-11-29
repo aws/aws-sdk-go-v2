@@ -2380,7 +2380,7 @@ type ApplicationVersionDescription struct {
 	SourceBundle *S3Location `type:"structure"`
 
 	// The processing status of the application version.
-	Status ApplicationVersionStatus `type:"string"`
+	Status ApplicationVersionStatus `type:"string" enum:"true"`
 
 	// A unique identifier for the application version.
 	VersionLabel *string `min:"1" type:"string"`
@@ -2583,7 +2583,7 @@ type ApplyEnvironmentManagedActionOutput struct {
 	ActionId *string `type:"string"`
 
 	// The type of managed action.
-	ActionType ActionType `type:"string"`
+	ActionType ActionType `type:"string" enum:"true"`
 
 	// The status of the managed action.
 	Status *string `type:"string"`
@@ -2673,7 +2673,7 @@ type BuildConfiguration struct {
 	//    * BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds
 	//
 	//    * BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds
-	ComputeType ComputeType `type:"string"`
+	ComputeType ComputeType `type:"string" enum:"true"`
 
 	// The ID of the Docker image to use for this build project.
 	//
@@ -3080,7 +3080,7 @@ type ConfigurationOptionDescription struct {
 	//    * Boolean : Values for this option are either true or false .
 	//
 	//    * Json : Values for this option are a JSON representation of a ConfigDocument.
-	ValueType ConfigurationOptionValueType `type:"string"`
+	ValueType ConfigurationOptionValueType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4944,7 +4944,7 @@ type DescribeEnvironmentHealthOutput struct {
 
 	// The environment's operational status. Ready, Launching, Updating, Terminating,
 	// or Terminated.
-	Status EnvironmentHealth `type:"string"`
+	Status EnvironmentHealth `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5117,7 +5117,7 @@ type DescribeEnvironmentManagedActionsInput struct {
 	EnvironmentName *string `type:"string"`
 
 	// To show only actions with a particular status, specify a status.
-	Status ActionStatus `type:"string"`
+	Status ActionStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5450,7 +5450,7 @@ type DescribeEventsInput struct {
 
 	// If specified, limits the events returned from this call to include only those
 	// with the specified severity or higher.
-	Severity EventSeverity `type:"string"`
+	Severity EventSeverity `type:"string" enum:"true"`
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// those that occur on or after this time.
@@ -5777,7 +5777,7 @@ type EnvironmentInfoDescription struct {
 	Ec2InstanceId *string `type:"string"`
 
 	// The type of information retrieved.
-	InfoType EnvironmentInfoType `type:"string"`
+	InfoType EnvironmentInfoType `type:"string" enum:"true"`
 
 	// The retrieved information.
 	Message *string `type:"string"`
@@ -6030,7 +6030,7 @@ type EventDescription struct {
 	RequestId *string `type:"string"`
 
 	// The severity level of this event.
-	Severity EventSeverity `type:"string"`
+	Severity EventSeverity `type:"string" enum:"true"`
 
 	// The name of the configuration associated with this event.
 	TemplateName *string `min:"1" type:"string"`
@@ -6599,11 +6599,11 @@ type ManagedAction struct {
 	ActionId *string `type:"string"`
 
 	// The type of managed action.
-	ActionType ActionType `type:"string"`
+	ActionType ActionType `type:"string" enum:"true"`
 
 	// The status of the managed action. If the action is Scheduled, you can apply
 	// it immediately with ApplyEnvironmentManagedAction.
-	Status ActionStatus `type:"string"`
+	Status ActionStatus `type:"string" enum:"true"`
 
 	// The start time of the maintenance window in which the managed action will
 	// execute.
@@ -6662,7 +6662,7 @@ type ManagedActionHistoryItem struct {
 	ActionId *string `type:"string"`
 
 	// The type of the managed action.
-	ActionType ActionType `type:"string"`
+	ActionType ActionType `type:"string" enum:"true"`
 
 	// The date and time that the action started executing.
 	ExecutedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -6671,13 +6671,13 @@ type ManagedActionHistoryItem struct {
 	FailureDescription *string `type:"string"`
 
 	// If the action failed, the type of failure.
-	FailureType FailureType `type:"string"`
+	FailureType FailureType `type:"string" enum:"true"`
 
 	// The date and time that the action finished executing.
 	FinishedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The status of the action.
-	Status ActionHistoryStatus `type:"string"`
+	Status ActionHistoryStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6994,7 +6994,7 @@ type PlatformDescription struct {
 	PlatformOwner *string `type:"string"`
 
 	// The status of the platform.
-	PlatformStatus PlatformStatus `type:"string"`
+	PlatformStatus PlatformStatus `type:"string" enum:"true"`
 
 	// The version of the platform.
 	PlatformVersion *string `type:"string"`
@@ -7273,7 +7273,7 @@ type PlatformSummary struct {
 
 	// The status of the platform. You can create an environment from the platform
 	// once it is ready.
-	PlatformStatus PlatformStatus `type:"string"`
+	PlatformStatus PlatformStatus `type:"string" enum:"true"`
 
 	// The additions associated with the platform.
 	SupportedAddonList []string `type:"list"`
@@ -7472,7 +7472,7 @@ type RequestEnvironmentInfoInput struct {
 	// The type of information to request.
 	//
 	// InfoType is a required field
-	InfoType EnvironmentInfoType `type:"string" required:"true"`
+	InfoType EnvironmentInfoType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7629,7 +7629,7 @@ type RetrieveEnvironmentInfoInput struct {
 	// The type of information to retrieve.
 	//
 	// InfoType is a required field
-	InfoType EnvironmentInfoType `type:"string" required:"true"`
+	InfoType EnvironmentInfoType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7904,7 +7904,7 @@ type SourceBuildInformation struct {
 	//    * S3
 	//
 	// SourceRepository is a required field
-	SourceRepository SourceRepository `type:"string" required:"true"`
+	SourceRepository SourceRepository `type:"string" required:"true" enum:"true"`
 
 	// The type of repository.
 	//
@@ -7913,7 +7913,7 @@ type SourceBuildInformation struct {
 	//    * Zip
 	//
 	// SourceType is a required field
-	SourceType SourceType `type:"string" required:"true"`
+	SourceType SourceType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8788,7 +8788,7 @@ type UpdateConfigurationTemplateOutput struct {
 	//    associated running environment.
 	//
 	//    * failed: This is a draft configuration that failed to successfully deploy.
-	DeploymentStatus ConfigurationDeploymentStatus `type:"string"`
+	DeploymentStatus ConfigurationDeploymentStatus `type:"string" enum:"true"`
 
 	// Describes this configuration set.
 	Description *string `type:"string"`
@@ -9133,11 +9133,11 @@ type UpdateEnvironmentOutput struct {
 	//    during an UpdateEnvironment or RestartEnvironement request.
 	//
 	// Default: Grey
-	Health EnvironmentHealth `type:"string"`
+	Health EnvironmentHealth `type:"string" enum:"true"`
 
 	// Returns the health status of the application running in your environment.
 	// For more information, see Health Colors and Statuses (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-	HealthStatus EnvironmentHealthStatus `type:"string"`
+	HealthStatus EnvironmentHealthStatus `type:"string" enum:"true"`
 
 	// The ARN of the platform.
 	PlatformArn *string `type:"string"`
@@ -9161,7 +9161,7 @@ type UpdateEnvironmentOutput struct {
 	//    * Terminating: Environment is in the shut-down process.
 	//
 	//    * Terminated: Environment is not running.
-	Status EnvironmentStatus `type:"string"`
+	Status EnvironmentStatus `type:"string" enum:"true"`
 
 	// The name of the configuration template used to originally launch this environment.
 	TemplateName *string `min:"1" type:"string"`
@@ -9444,7 +9444,7 @@ type ValidationMessage struct {
 	//
 	//    * warning: This message is providing information you should take into
 	//    account.
-	Severity ValidationSeverity `type:"string"`
+	Severity ValidationSeverity `type:"string" enum:"true"`
 }
 
 // String returns the string representation

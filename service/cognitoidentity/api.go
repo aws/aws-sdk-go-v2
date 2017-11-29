@@ -2318,7 +2318,7 @@ type MappingRule struct {
 	// token must match Value.
 	//
 	// MatchType is a required field
-	MatchType MappingRuleMatchType `type:"string" required:"true"`
+	MatchType MappingRuleMatchType `type:"string" required:"true" enum:"true"`
 
 	// The role ARN.
 	//
@@ -2598,7 +2598,7 @@ type RoleMapping struct {
 	// Specifies the action to be taken if either no rules match the claim value
 	// for the Rules type, or there is no cognito:preferred_role claim and there
 	// are multiple cognito:roles matches for the Token type.
-	AmbiguousRoleResolution AmbiguousRoleResolutionType `type:"string"`
+	AmbiguousRoleResolution AmbiguousRoleResolutionType `type:"string" enum:"true"`
 
 	// The rules to be used for mapping users to roles.
 	//
@@ -2610,7 +2610,7 @@ type RoleMapping struct {
 	// will attempt to match claims from the token to map to a role.
 	//
 	// Type is a required field
-	Type RoleMappingType `type:"string" required:"true"`
+	Type RoleMappingType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3017,7 +3017,7 @@ type UnprocessedIdentityId struct {
 	_ struct{} `type:"structure"`
 
 	// The error code indicating the type of error that occurred.
-	ErrorCode ErrorCode `type:"string"`
+	ErrorCode ErrorCode `type:"string" enum:"true"`
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string `min:"1" type:"string"`
