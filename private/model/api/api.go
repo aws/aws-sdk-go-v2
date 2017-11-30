@@ -607,65 +607,13 @@ func (a *API) ExampleGoCode() string {
 
 // A tplInterface defines the template for the service interface type.
 var tplInterface = template.Must(template.New("interface").Parse(`
-// {{ .StructName }}API provides an interface to enable mocking the
-// {{ .PackageName }}.{{ .StructName }} service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // {{.Metadata.ServiceFullName}}. {{ $opts := .OperationList }}{{ $opt := index $opts 0 }}
-//    func myFunc(svc {{ .InterfacePackageName }}.{{ .StructName }}API) bool {
-//        // Make svc.{{ $opt.ExportedName }} request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := {{ .PackageName }}.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mock{{ .StructName }}Client struct {
-//        {{ .InterfacePackageName }}.{{ .StructName }}API
-//    }
-//    func (m *mock{{ .StructName }}Client) {{ $opt.ExportedName }}(input {{ $opt.InputRef.GoTypeWithPkgName }}) ({{ $opt.OutputRef.GoTypeWithPkgName }}, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mock{{ .StructName }}Client{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using 
-// tooling to generate mocks to satisfy the interfaces.
-type {{ .StructName }}API interface {
-    {{ range $_, $o := .OperationList }}
-        {{ $o.InterfaceSignature }}
-    {{ end }}
-    {{ range $_, $w := .Waiters }}
-        {{ $w.InterfaceSignature }}
-    {{ end }}
-}
+{{ range $_, $o := .OperationList }}
+    {{ $o.InterfaceSignature }}
+{{ end }}
 
-var _ {{ .StructName }}API = (*{{ .PackageName }}.{{ .StructName }})(nil)
+{{ range $_, $w := .Waiters }}
+    {{ $w.InterfaceSignature }}
+{{ end }}
 `))
 
 // InterfaceGoCode returns the go code for the service's API operations as an
