@@ -213,14 +213,22 @@ func (o *Operation) GoCode() string {
 	return strings.TrimSpace(buf.String())
 }
 
+//// tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
+//var tplInfSig = template.Must(template.New("opsig").Parse(`
+//{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
+//
+//{{ if .Paginator -}}
+//{{ .ExportedName }}Pages({{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool) error
+//{{ .ExportedName }}PagesWithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool, ...aws.Option) error
+//{{- end }}
+//`))
+
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
 var tplInfSig = template.Must(template.New("opsig").Parse(`
-{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
-
-{{ if .Paginator -}}
-{{ .ExportedName }}Pages({{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool) error
-{{ .ExportedName }}PagesWithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool, ...aws.Option) error
-{{- end }}
+// {{ .ExportedName }}Requester provides the interface for the {{ .ExportedName }}Request API operation.
+type {{ .ExportedName }}Requester interface {
+	{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
+}
 `))
 
 // InterfaceSignature returns a string representing the Operation's interface{}
