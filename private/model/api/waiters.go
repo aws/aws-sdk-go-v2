@@ -162,8 +162,11 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}WithContext(` +
 {{- end }}
 
 {{ define "waiter interface" }}
-WaitUntil{{ .Name }}({{ .Operation.InputRef.GoTypeWithPkgName }}) error
-WaitUntil{{ .Name }}WithContext(aws.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...aws.WaiterOption) error
+// {{ .Name }}Waiter provides the interface for the WaitUntil{{ .Name }} waiter.
+type {{ .Name }}Waiter interface {
+	WaitUntil{{ .Name }}({{ .Operation.InputRef.GoTypeWithPkgName }}) error
+	WaitUntil{{ .Name }}WithContext(aws.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...aws.WaiterOption) error
+}
 {{- end }}
 `))
 
