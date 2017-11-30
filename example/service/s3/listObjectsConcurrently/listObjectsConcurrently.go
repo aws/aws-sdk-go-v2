@@ -28,7 +28,7 @@ func main() {
 	accounts := []string{"default", "default2", "otherprofile"}
 
 	// Spin off a worker for each account to retrieve that account's
-	bucketCh := make(chan *Bucket, 5)
+	bucketCh := make(chan Bucket, 5)
 	var wg sync.WaitGroup
 	for _, acc := range accounts {
 		wg.Add(1)
@@ -56,7 +56,7 @@ func main() {
 
 	// Receive from the bucket channel printing the information for each bucket to the console
 	// when the bucketCh channel is drained.
-	buckets := []*Bucket{}
+	buckets := []Bucket{}
 	for b := range bucketCh {
 		buckets = append(buckets, b)
 	}
@@ -79,12 +79,12 @@ func main() {
 	}
 }
 
-func sortBuckets(buckets []*Bucket) {
+func sortBuckets(buckets []Bucket) {
 	s := sortalbeBuckets(buckets)
 	sort.Sort(s)
 }
 
-type sortalbeBuckets []*Bucket
+type sortalbeBuckets []Bucket
 
 func (s sortalbeBuckets) Len() int      { return len(s) }
 func (s sortalbeBuckets) Swap(a, b int) { s[a], s[b] = s[b], s[a] }
@@ -100,7 +100,7 @@ func (s sortalbeBuckets) Less(a, b int) bool {
 	return false
 }
 
-func getAccountBuckets(cfg aws.Config, bucketCh chan<- *Bucket, owner string) error {
+func getAccountBuckets(cfg aws.Config, bucketCh chan<- Bucket, owner string) error {
 	svc := s3.New(cfg)
 	buckets, err := listBuckets(svc)
 	if err != nil {
@@ -123,7 +123,7 @@ func getAccountBuckets(cfg aws.Config, bucketCh chan<- *Bucket, owner string) er
 	return nil
 }
 
-func bucketDetails(svc *s3.S3, bucket *Bucket) {
+func bucketDetails(svc *s3.S3, bucket Bucket) {
 	objs, errObjs, err := listBucketObjects(svc, bucket.Name)
 	if err != nil {
 		bucket.Error = err
@@ -170,16 +170,16 @@ func (b *Bucket) encryptedObjects() []Object {
 	return encObjs
 }
 
-func listBuckets(svc *s3.S3) ([]*Bucket, error) {
+func listBuckets(svc *s3.S3) ([]Bucket, error) {
 	listReq := svc.ListBucketsRequest(&s3.ListBucketsInput{})
 	res, err := listReq.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	buckets := make([]*Bucket, len(res.Buckets))
+	buckets := make([]Bucket, len(res.Buckets))
 	for i, b := range res.Buckets {
-		buckets[i] = &Bucket{
+		buckets[i] = Bucket{
 			Name:         *b.Name,
 			CreationDate: *b.CreationDate,
 		}

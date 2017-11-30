@@ -160,10 +160,10 @@ func Marshal(in interface{}) (*dynamodb.AttributeValue, error) {
 // type to a map of AttributeValues.
 //
 // This is useful for DynamoDB APIs such as PutItem.
-func MarshalMap(in interface{}) (map[string]*dynamodb.AttributeValue, error) {
+func MarshalMap(in interface{}) (map[string]dynamodb.AttributeValue, error) {
 	av, err := NewEncoder().Encode(in)
 	if err != nil || av == nil || av.M == nil {
-		return map[string]*dynamodb.AttributeValue{}, err
+		return map[string]dynamodb.AttributeValue{}, err
 	}
 
 	return av.M, nil
@@ -171,10 +171,10 @@ func MarshalMap(in interface{}) (map[string]*dynamodb.AttributeValue, error) {
 
 // MarshalList is an alias for Marshal func which marshals Go value
 // type to a slice of AttributeValues.
-func MarshalList(in interface{}) ([]*dynamodb.AttributeValue, error) {
+func MarshalList(in interface{}) ([]dynamodb.AttributeValue, error) {
 	av, err := NewEncoder().Encode(in)
 	if err != nil || av == nil || av.L == nil {
-		return []*dynamodb.AttributeValue{}, err
+		return []dynamodb.AttributeValue{}, err
 	}
 
 	return av.L, nil
@@ -296,7 +296,7 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 		return nil
 	}
 
-	av.M = map[string]*dynamodb.AttributeValue{}
+	av.M = map[string]dynamodb.AttributeValue{}
 	fields := unionStructFields(v.Type(), e.MarshalOptions)
 	for _, f := range fields {
 		if f.Name == "" {
@@ -311,8 +311,8 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 		if !found {
 			continue
 		}
-		elem := &dynamodb.AttributeValue{}
-		err := e.encode(elem, fv, f.tag)
+		elem := dynamodb.AttributeValue{}
+		err := e.encode(&elem, fv, f.tag)
 		if err != nil {
 			return err
 		}
@@ -333,7 +333,7 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 }
 
 func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
-	av.M = map[string]*dynamodb.AttributeValue{}
+	av.M = map[string]dynamodb.AttributeValue{}
 	for _, key := range v.MapKeys() {
 		keyName := fmt.Sprint(key.Interface())
 		if keyName == "" {
@@ -341,8 +341,8 @@ func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldT
 		}
 
 		elemVal := v.MapIndex(key)
-		elem := &dynamodb.AttributeValue{}
-		err := e.encode(elem, elemVal, tag{})
+		elem := dynamodb.AttributeValue{}
+		err := e.encode(&elem, elemVal, tag{})
 		skip, err := keepOrOmitEmpty(fieldTag.OmitEmptyElem, elem, err)
 		if err != nil {
 			return err
@@ -381,27 +381,27 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 				return nil
 			}
 		} else if fieldTag.AsNumSet { // Number Set
-			av.NS = make([]*string, 0, v.Len())
+			av.NS = make([]string, 0, v.Len())
 			elemFn = func(elem dynamodb.AttributeValue) error {
 				if elem.N == nil {
 					return &InvalidMarshalError{msg: "number set must only contain non-nil string numbers"}
 				}
-				av.NS = append(av.NS, elem.N)
+				av.NS = append(av.NS, *elem.N)
 				return nil
 			}
 		} else if fieldTag.AsStrSet { // String Set
-			av.SS = make([]*string, 0, v.Len())
+			av.SS = make([]string, 0, v.Len())
 			elemFn = func(elem dynamodb.AttributeValue) error {
 				if elem.S == nil {
 					return &InvalidMarshalError{msg: "string set must only contain non-nil strings"}
 				}
-				av.SS = append(av.SS, elem.S)
+				av.SS = append(av.SS, *elem.S)
 				return nil
 			}
 		} else { // List
-			av.L = make([]*dynamodb.AttributeValue, 0, v.Len())
+			av.L = make([]dynamodb.AttributeValue, 0, v.Len())
 			elemFn = func(elem dynamodb.AttributeValue) error {
-				av.L = append(av.L, &elem)
+				av.L = append(av.L, elem)
 				return nil
 			}
 		}
@@ -421,7 +421,7 @@ func (e *Encoder) encodeList(v reflect.Value, fieldTag tag, elemFn func(dynamodb
 	for i := 0; i < v.Len(); i++ {
 		elem := dynamodb.AttributeValue{}
 		err := e.encode(&elem, v.Index(i), tag{OmitEmpty: fieldTag.OmitEmptyElem})
-		skip, err := keepOrOmitEmpty(fieldTag.OmitEmptyElem, &elem, err)
+		skip, err := keepOrOmitEmpty(fieldTag.OmitEmptyElem, elem, err)
 		if err != nil {
 			return 0, err
 		} else if skip {
@@ -571,7 +571,7 @@ func tryMarshaler(av *dynamodb.AttributeValue, v reflect.Value) (bool, error) {
 	return false, nil
 }
 
-func keepOrOmitEmpty(omitEmpty bool, av *dynamodb.AttributeValue, err error) (bool, error) {
+func keepOrOmitEmpty(omitEmpty bool, av dynamodb.AttributeValue, err error) (bool, error) {
 	if err != nil {
 		if _, ok := err.(*unsupportedMarshalTypeError); ok {
 			return true, nil

@@ -26,7 +26,7 @@ func TestBuildKMSEncryptHandler(t *testing.T) {
 func TestBuildKMSEncryptHandlerWithMatDesc(t *testing.T) {
 	svc := kms.New(unit.Config())
 	handler := NewKMSKeyGeneratorWithMatDesc(svc, "testid", MaterialDescription{
-		"Testing": aws.String("123"),
+		"Testing": "123",
 	})
 	if handler == nil {
 		t.Error("expected non-nil handler")
@@ -34,8 +34,8 @@ func TestBuildKMSEncryptHandlerWithMatDesc(t *testing.T) {
 
 	kmsHandler := handler.(*kmsKeyHandler)
 	expected := MaterialDescription{
-		"kms_cmk_id": aws.String("testid"),
-		"Testing":    aws.String("123"),
+		"kms_cmk_id": "testid",
+		"Testing":    "123",
 	}
 
 	if !reflect.DeepEqual(expected, kmsHandler.CipherData.MaterialDescription) {

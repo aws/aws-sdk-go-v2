@@ -782,7 +782,7 @@ type BatchDeleteAttributesInput struct {
 	// A list of items on which to perform the operation.
 	//
 	// Items is a required field
-	Items []*DeletableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
+	Items []DeletableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -808,9 +808,6 @@ func (s *BatchDeleteAttributesInput) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -830,7 +827,7 @@ func (s *BatchDeleteAttributesInput) SetDomainName(v string) *BatchDeleteAttribu
 }
 
 // SetItems sets the Items field's value.
-func (s *BatchDeleteAttributesInput) SetItems(v []*DeletableItem) *BatchDeleteAttributesInput {
+func (s *BatchDeleteAttributesInput) SetItems(v []DeletableItem) *BatchDeleteAttributesInput {
 	s.Items = v
 	return s
 }
@@ -860,7 +857,7 @@ type BatchPutAttributesInput struct {
 	// A list of items on which to perform the operation.
 	//
 	// Items is a required field
-	Items []*ReplaceableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
+	Items []ReplaceableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -886,9 +883,6 @@ func (s *BatchPutAttributesInput) Validate() error {
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
@@ -908,7 +902,7 @@ func (s *BatchPutAttributesInput) SetDomainName(v string) *BatchPutAttributesInp
 }
 
 // SetItems sets the Items field's value.
-func (s *BatchPutAttributesInput) SetItems(v []*ReplaceableItem) *BatchPutAttributesInput {
+func (s *BatchPutAttributesInput) SetItems(v []ReplaceableItem) *BatchPutAttributesInput {
 	s.Items = v
 	return s
 }
@@ -1032,7 +1026,7 @@ func (s *DeletableAttribute) SetValue(v string) *DeletableAttribute {
 type DeletableItem struct {
 	_ struct{} `type:"structure"`
 
-	Attributes []*DeletableAttribute `locationNameList:"Attribute" type:"list" flattened:"true"`
+	Attributes []DeletableAttribute `locationNameList:"Attribute" type:"list" flattened:"true"`
 
 	// Name is a required field
 	Name *string `locationName:"ItemName" type:"string" required:"true"`
@@ -1057,9 +1051,6 @@ func (s *DeletableItem) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -1073,7 +1064,7 @@ func (s *DeletableItem) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DeletableItem) SetAttributes(v []*DeletableAttribute) *DeletableItem {
+func (s *DeletableItem) SetAttributes(v []DeletableAttribute) *DeletableItem {
 	s.Attributes = v
 	return s
 }
@@ -1089,7 +1080,7 @@ type DeleteAttributesInput struct {
 
 	// A list of Attributes. Similar to columns on a spreadsheet, attributes represent
 	// categories of data that can be assigned to items.
-	Attributes []*DeletableAttribute `locationNameList:"Attribute" type:"list" flattened:"true"`
+	Attributes []DeletableAttribute `locationNameList:"Attribute" type:"list" flattened:"true"`
 
 	// The name of the domain in which to perform the operation.
 	//
@@ -1131,9 +1122,6 @@ func (s *DeleteAttributesInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -1147,7 +1135,7 @@ func (s *DeleteAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DeleteAttributesInput) SetAttributes(v []*DeletableAttribute) *DeleteAttributesInput {
+func (s *DeleteAttributesInput) SetAttributes(v []DeletableAttribute) *DeleteAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -1357,7 +1345,7 @@ type GetAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the attributes.
-	AttributeNames []*string `locationNameList:"AttributeName" type:"list" flattened:"true"`
+	AttributeNames []string `locationNameList:"AttributeName" type:"list" flattened:"true"`
 
 	// Determines whether or not strong consistency should be enforced when data
 	// is read from SimpleDB. If true
@@ -1403,7 +1391,7 @@ func (s *GetAttributesInput) Validate() error {
 }
 
 // SetAttributeNames sets the AttributeNames field's value.
-func (s *GetAttributesInput) SetAttributeNames(v []*string) *GetAttributesInput {
+func (s *GetAttributesInput) SetAttributeNames(v []string) *GetAttributesInput {
 	s.AttributeNames = v
 	return s
 }
@@ -1430,7 +1418,7 @@ type GetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of attributes returned by the operation.
-	Attributes []*Attribute `locationNameList:"Attribute" type:"list" flattened:"true"`
+	Attributes []Attribute `locationNameList:"Attribute" type:"list" flattened:"true"`
 }
 
 // String returns the string representation
@@ -1444,7 +1432,7 @@ func (s GetAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *GetAttributesOutput) SetAttributes(v []*Attribute) *GetAttributesOutput {
+func (s *GetAttributesOutput) SetAttributes(v []Attribute) *GetAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -1457,7 +1445,7 @@ type Item struct {
 	// A list of attributes.
 	//
 	// Attributes is a required field
-	Attributes []*Attribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
+	Attributes []Attribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
 
 	// The name of the item.
 	//
@@ -1482,7 +1470,7 @@ func (s *Item) SetAlternateNameEncoding(v string) *Item {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Item) SetAttributes(v []*Attribute) *Item {
+func (s *Item) SetAttributes(v []Attribute) *Item {
 	s.Attributes = v
 	return s
 }
@@ -1531,7 +1519,7 @@ type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of domain names that match the expression.
-	DomainNames []*string `locationNameList:"DomainName" type:"list" flattened:"true"`
+	DomainNames []string `locationNameList:"DomainName" type:"list" flattened:"true"`
 
 	// An opaque token indicating that there are more domains than the specified
 	// MaxNumberOfDomains
@@ -1549,7 +1537,7 @@ func (s ListDomainsOutput) GoString() string {
 }
 
 // SetDomainNames sets the DomainNames field's value.
-func (s *ListDomainsOutput) SetDomainNames(v []*string) *ListDomainsOutput {
+func (s *ListDomainsOutput) SetDomainNames(v []string) *ListDomainsOutput {
 	s.DomainNames = v
 	return s
 }
@@ -1566,7 +1554,7 @@ type PutAttributesInput struct {
 	// The list of attributes.
 	//
 	// Attributes is a required field
-	Attributes []*ReplaceableAttribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
+	Attributes []ReplaceableAttribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
 
 	// The name of the domain in which to perform the operation.
 	//
@@ -1611,9 +1599,6 @@ func (s *PutAttributesInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -1627,7 +1612,7 @@ func (s *PutAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *PutAttributesInput) SetAttributes(v []*ReplaceableAttribute) *PutAttributesInput {
+func (s *PutAttributesInput) SetAttributes(v []ReplaceableAttribute) *PutAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -1734,7 +1719,7 @@ type ReplaceableItem struct {
 	// The list of attributes for a replaceable item.
 	//
 	// Attributes is a required field
-	Attributes []*ReplaceableAttribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
+	Attributes []ReplaceableAttribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
 
 	// The name of the replaceable item.
 	//
@@ -1765,9 +1750,6 @@ func (s *ReplaceableItem) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -1781,7 +1763,7 @@ func (s *ReplaceableItem) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ReplaceableItem) SetAttributes(v []*ReplaceableAttribute) *ReplaceableItem {
+func (s *ReplaceableItem) SetAttributes(v []ReplaceableAttribute) *ReplaceableItem {
 	s.Attributes = v
 	return s
 }
@@ -1854,7 +1836,7 @@ type SelectOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of items that match the select expression.
-	Items []*Item `locationNameList:"Item" type:"list" flattened:"true"`
+	Items []Item `locationNameList:"Item" type:"list" flattened:"true"`
 
 	// An opaque token indicating that more items than MaxNumberOfItems
 	NextToken *string `type:"string"`
@@ -1871,7 +1853,7 @@ func (s SelectOutput) GoString() string {
 }
 
 // SetItems sets the Items field's value.
-func (s *SelectOutput) SetItems(v []*Item) *SelectOutput {
+func (s *SelectOutput) SetItems(v []Item) *SelectOutput {
 	s.Items = v
 	return s
 }

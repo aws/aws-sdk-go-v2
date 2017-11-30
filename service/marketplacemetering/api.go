@@ -181,7 +181,7 @@ type BatchMeterUsageInput struct {
 	// at a time.
 	//
 	// UsageRecords is a required field
-	UsageRecords []*UsageRecord `type:"list" required:"true"`
+	UsageRecords []UsageRecord `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -210,9 +210,6 @@ func (s *BatchMeterUsageInput) Validate() error {
 	}
 	if s.UsageRecords != nil {
 		for i, v := range s.UsageRecords {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UsageRecords", i), err.(aws.ErrInvalidParams))
 			}
@@ -232,7 +229,7 @@ func (s *BatchMeterUsageInput) SetProductCode(v string) *BatchMeterUsageInput {
 }
 
 // SetUsageRecords sets the UsageRecords field's value.
-func (s *BatchMeterUsageInput) SetUsageRecords(v []*UsageRecord) *BatchMeterUsageInput {
+func (s *BatchMeterUsageInput) SetUsageRecords(v []UsageRecord) *BatchMeterUsageInput {
 	s.UsageRecords = v
 	return s
 }
@@ -245,12 +242,12 @@ type BatchMeterUsageOutput struct {
 
 	// Contains all UsageRecords processed by BatchMeterUsage. These records were
 	// either honored by AWS Marketplace Metering Service or were invalid.
-	Results []*UsageRecordResult `type:"list"`
+	Results []UsageRecordResult `type:"list"`
 
 	// Contains all UsageRecords that were not processed by BatchMeterUsage. This
 	// is a list of UsageRecords. You can retry the failed request by making another
 	// BatchMeterUsage call with this list as input in the BatchMeterUsageRequest.
-	UnprocessedRecords []*UsageRecord `type:"list"`
+	UnprocessedRecords []UsageRecord `type:"list"`
 }
 
 // String returns the string representation
@@ -264,13 +261,13 @@ func (s BatchMeterUsageOutput) GoString() string {
 }
 
 // SetResults sets the Results field's value.
-func (s *BatchMeterUsageOutput) SetResults(v []*UsageRecordResult) *BatchMeterUsageOutput {
+func (s *BatchMeterUsageOutput) SetResults(v []UsageRecordResult) *BatchMeterUsageOutput {
 	s.Results = v
 	return s
 }
 
 // SetUnprocessedRecords sets the UnprocessedRecords field's value.
-func (s *BatchMeterUsageOutput) SetUnprocessedRecords(v []*UsageRecord) *BatchMeterUsageOutput {
+func (s *BatchMeterUsageOutput) SetUnprocessedRecords(v []UsageRecord) *BatchMeterUsageOutput {
 	s.UnprocessedRecords = v
 	return s
 }
@@ -616,7 +613,7 @@ type UsageRecordResult struct {
 	//    * DuplicateRecord- Indicates that the UsageRecord was invalid and not
 	//    honored. A previously metered UsageRecord had the same customer, dimension,
 	//    and time, but a different quantity.
-	Status UsageRecordResultStatus `type:"string"`
+	Status UsageRecordResultStatus `type:"string" enum:"true"`
 
 	// The UsageRecord that was part of the BatchMeterUsage request.
 	UsageRecord *UsageRecord `type:"structure"`

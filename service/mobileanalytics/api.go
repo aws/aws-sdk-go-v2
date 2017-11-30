@@ -67,7 +67,7 @@ type Event struct {
 	// The key-value pairs are specified by the developer.
 	//
 	// This collection can be empty or the attribute object can be omitted.
-	Attributes map[string]*string `locationName:"attributes" type:"map"`
+	Attributes map[string]string `locationName:"attributes" type:"map"`
 
 	// A name signifying an event that occurred in your app. This is used for grouping
 	// and aggregating like events together for reporting purposes.
@@ -79,7 +79,7 @@ type Event struct {
 	// to the event. The key-value pairs are specified by the developer.
 	//
 	// This collection can be empty or the attribute object can be omitted.
-	Metrics map[string]*float64 `locationName:"metrics" type:"map"`
+	Metrics map[string]float64 `locationName:"metrics" type:"map"`
 
 	// The session the event occured within.
 	Session *Session `locationName:"session" type:"structure"`
@@ -134,7 +134,7 @@ func (s *Event) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Event) SetAttributes(v map[string]*string) *Event {
+func (s *Event) SetAttributes(v map[string]string) *Event {
 	s.Attributes = v
 	return s
 }
@@ -146,7 +146,7 @@ func (s *Event) SetEventType(v string) *Event {
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *Event) SetMetrics(v map[string]*float64) *Event {
+func (s *Event) SetMetrics(v map[string]float64) *Event {
 	s.Metrics = v
 	return s
 }
@@ -185,7 +185,7 @@ type PutEventsInput struct {
 	// An array of Event JSON objects
 	//
 	// Events is a required field
-	Events []*Event `locationName:"events" type:"list" required:"true"`
+	Events []Event `locationName:"events" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -211,9 +211,6 @@ func (s *PutEventsInput) Validate() error {
 	}
 	if s.Events != nil {
 		for i, v := range s.Events {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Events", i), err.(aws.ErrInvalidParams))
 			}
@@ -239,7 +236,7 @@ func (s *PutEventsInput) SetClientContextEncoding(v string) *PutEventsInput {
 }
 
 // SetEvents sets the Events field's value.
-func (s *PutEventsInput) SetEvents(v []*Event) *PutEventsInput {
+func (s *PutEventsInput) SetEvents(v []Event) *PutEventsInput {
 	s.Events = v
 	return s
 }

@@ -69,7 +69,6 @@ var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").
 {{ define "nestedMapList" -}}
     if s.{{ .Name }} != nil { 
 		for i, v := range s.{{ .Name }} {
-			if v == nil { continue }
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "{{ .Name }}", i), err.(aws.ErrInvalidParams))
 			}

@@ -2143,7 +2143,7 @@ type AddTagsToOnPremisesInstancesInput struct {
 	// The names of the on-premises instances to which to add tags.
 	//
 	// InstanceNames is a required field
-	InstanceNames []*string `locationName:"instanceNames" type:"list" required:"true"`
+	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
 
 	// The tag key-value pairs to add to the on-premises instances.
 	//
@@ -2151,7 +2151,7 @@ type AddTagsToOnPremisesInstancesInput struct {
 	// Value-only tags are not allowed.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2183,13 +2183,13 @@ func (s *AddTagsToOnPremisesInstancesInput) Validate() error {
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
-func (s *AddTagsToOnPremisesInstancesInput) SetInstanceNames(v []*string) *AddTagsToOnPremisesInstancesInput {
+func (s *AddTagsToOnPremisesInstancesInput) SetInstanceNames(v []string) *AddTagsToOnPremisesInstancesInput {
 	s.InstanceNames = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToOnPremisesInstancesInput) SetTags(v []*Tag) *AddTagsToOnPremisesInstancesInput {
+func (s *AddTagsToOnPremisesInstancesInput) SetTags(v []Tag) *AddTagsToOnPremisesInstancesInput {
 	s.Tags = v
 	return s
 }
@@ -2242,7 +2242,7 @@ type AlarmConfiguration struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms
 	// can be added to a deployment group.
-	Alarms []*Alarm `locationName:"alarms" type:"list"`
+	Alarms []Alarm `locationName:"alarms" type:"list"`
 
 	// Indicates whether the alarm configuration is enabled.
 	Enabled *bool `locationName:"enabled" type:"boolean"`
@@ -2270,7 +2270,7 @@ func (s AlarmConfiguration) GoString() string {
 }
 
 // SetAlarms sets the Alarms field's value.
-func (s *AlarmConfiguration) SetAlarms(v []*Alarm) *AlarmConfiguration {
+func (s *AlarmConfiguration) SetAlarms(v []Alarm) *AlarmConfiguration {
 	s.Alarms = v
 	return s
 }
@@ -2432,7 +2432,7 @@ type BatchGetApplicationRevisionsInput struct {
 	// Information to get about the application revisions, including type and location.
 	//
 	// Revisions is a required field
-	Revisions []*RevisionLocation `locationName:"revisions" type:"list" required:"true"`
+	Revisions []RevisionLocation `locationName:"revisions" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2473,7 +2473,7 @@ func (s *BatchGetApplicationRevisionsInput) SetApplicationName(v string) *BatchG
 }
 
 // SetRevisions sets the Revisions field's value.
-func (s *BatchGetApplicationRevisionsInput) SetRevisions(v []*RevisionLocation) *BatchGetApplicationRevisionsInput {
+func (s *BatchGetApplicationRevisionsInput) SetRevisions(v []RevisionLocation) *BatchGetApplicationRevisionsInput {
 	s.Revisions = v
 	return s
 }
@@ -2490,7 +2490,7 @@ type BatchGetApplicationRevisionsOutput struct {
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 
 	// Additional information about the revisions, including the type and location.
-	Revisions []*RevisionInfo `locationName:"revisions" type:"list"`
+	Revisions []RevisionInfo `locationName:"revisions" type:"list"`
 }
 
 // String returns the string representation
@@ -2516,7 +2516,7 @@ func (s *BatchGetApplicationRevisionsOutput) SetErrorMessage(v string) *BatchGet
 }
 
 // SetRevisions sets the Revisions field's value.
-func (s *BatchGetApplicationRevisionsOutput) SetRevisions(v []*RevisionInfo) *BatchGetApplicationRevisionsOutput {
+func (s *BatchGetApplicationRevisionsOutput) SetRevisions(v []RevisionInfo) *BatchGetApplicationRevisionsOutput {
 	s.Revisions = v
 	return s
 }
@@ -2527,7 +2527,7 @@ type BatchGetApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of application names separated by spaces.
-	ApplicationNames []*string `locationName:"applicationNames" type:"list"`
+	ApplicationNames []string `locationName:"applicationNames" type:"list"`
 }
 
 // String returns the string representation
@@ -2541,7 +2541,7 @@ func (s BatchGetApplicationsInput) GoString() string {
 }
 
 // SetApplicationNames sets the ApplicationNames field's value.
-func (s *BatchGetApplicationsInput) SetApplicationNames(v []*string) *BatchGetApplicationsInput {
+func (s *BatchGetApplicationsInput) SetApplicationNames(v []string) *BatchGetApplicationsInput {
 	s.ApplicationNames = v
 	return s
 }
@@ -2552,7 +2552,7 @@ type BatchGetApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the applications.
-	ApplicationsInfo []*ApplicationInfo `locationName:"applicationsInfo" type:"list"`
+	ApplicationsInfo []ApplicationInfo `locationName:"applicationsInfo" type:"list"`
 }
 
 // String returns the string representation
@@ -2566,7 +2566,7 @@ func (s BatchGetApplicationsOutput) GoString() string {
 }
 
 // SetApplicationsInfo sets the ApplicationsInfo field's value.
-func (s *BatchGetApplicationsOutput) SetApplicationsInfo(v []*ApplicationInfo) *BatchGetApplicationsOutput {
+func (s *BatchGetApplicationsOutput) SetApplicationsInfo(v []ApplicationInfo) *BatchGetApplicationsOutput {
 	s.ApplicationsInfo = v
 	return s
 }
@@ -2585,7 +2585,7 @@ type BatchGetDeploymentGroupsInput struct {
 	// The deployment groups' names.
 	//
 	// DeploymentGroupNames is a required field
-	DeploymentGroupNames []*string `locationName:"deploymentGroupNames" type:"list" required:"true"`
+	DeploymentGroupNames []string `locationName:"deploymentGroupNames" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2626,7 +2626,7 @@ func (s *BatchGetDeploymentGroupsInput) SetApplicationName(v string) *BatchGetDe
 }
 
 // SetDeploymentGroupNames sets the DeploymentGroupNames field's value.
-func (s *BatchGetDeploymentGroupsInput) SetDeploymentGroupNames(v []*string) *BatchGetDeploymentGroupsInput {
+func (s *BatchGetDeploymentGroupsInput) SetDeploymentGroupNames(v []string) *BatchGetDeploymentGroupsInput {
 	s.DeploymentGroupNames = v
 	return s
 }
@@ -2637,7 +2637,7 @@ type BatchGetDeploymentGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the deployment groups.
-	DeploymentGroupsInfo []*DeploymentGroupInfo `locationName:"deploymentGroupsInfo" type:"list"`
+	DeploymentGroupsInfo []DeploymentGroupInfo `locationName:"deploymentGroupsInfo" type:"list"`
 
 	// Information about errors that may have occurred during the API call.
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
@@ -2654,7 +2654,7 @@ func (s BatchGetDeploymentGroupsOutput) GoString() string {
 }
 
 // SetDeploymentGroupsInfo sets the DeploymentGroupsInfo field's value.
-func (s *BatchGetDeploymentGroupsOutput) SetDeploymentGroupsInfo(v []*DeploymentGroupInfo) *BatchGetDeploymentGroupsOutput {
+func (s *BatchGetDeploymentGroupsOutput) SetDeploymentGroupsInfo(v []DeploymentGroupInfo) *BatchGetDeploymentGroupsOutput {
 	s.DeploymentGroupsInfo = v
 	return s
 }
@@ -2678,7 +2678,7 @@ type BatchGetDeploymentInstancesInput struct {
 	// The unique IDs of instances in the deployment group.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `locationName:"instanceIds" type:"list" required:"true"`
+	InstanceIds []string `locationName:"instanceIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2716,7 +2716,7 @@ func (s *BatchGetDeploymentInstancesInput) SetDeploymentId(v string) *BatchGetDe
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *BatchGetDeploymentInstancesInput) SetInstanceIds(v []*string) *BatchGetDeploymentInstancesInput {
+func (s *BatchGetDeploymentInstancesInput) SetInstanceIds(v []string) *BatchGetDeploymentInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -2730,7 +2730,7 @@ type BatchGetDeploymentInstancesOutput struct {
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 
 	// Information about the instance.
-	InstancesSummary []*InstanceSummary `locationName:"instancesSummary" type:"list"`
+	InstancesSummary []InstanceSummary `locationName:"instancesSummary" type:"list"`
 }
 
 // String returns the string representation
@@ -2750,7 +2750,7 @@ func (s *BatchGetDeploymentInstancesOutput) SetErrorMessage(v string) *BatchGetD
 }
 
 // SetInstancesSummary sets the InstancesSummary field's value.
-func (s *BatchGetDeploymentInstancesOutput) SetInstancesSummary(v []*InstanceSummary) *BatchGetDeploymentInstancesOutput {
+func (s *BatchGetDeploymentInstancesOutput) SetInstancesSummary(v []InstanceSummary) *BatchGetDeploymentInstancesOutput {
 	s.InstancesSummary = v
 	return s
 }
@@ -2761,7 +2761,7 @@ type BatchGetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of deployment IDs, separated by spaces.
-	DeploymentIds []*string `locationName:"deploymentIds" type:"list"`
+	DeploymentIds []string `locationName:"deploymentIds" type:"list"`
 }
 
 // String returns the string representation
@@ -2775,7 +2775,7 @@ func (s BatchGetDeploymentsInput) GoString() string {
 }
 
 // SetDeploymentIds sets the DeploymentIds field's value.
-func (s *BatchGetDeploymentsInput) SetDeploymentIds(v []*string) *BatchGetDeploymentsInput {
+func (s *BatchGetDeploymentsInput) SetDeploymentIds(v []string) *BatchGetDeploymentsInput {
 	s.DeploymentIds = v
 	return s
 }
@@ -2786,7 +2786,7 @@ type BatchGetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the deployments.
-	DeploymentsInfo []*DeploymentInfo `locationName:"deploymentsInfo" type:"list"`
+	DeploymentsInfo []DeploymentInfo `locationName:"deploymentsInfo" type:"list"`
 }
 
 // String returns the string representation
@@ -2800,7 +2800,7 @@ func (s BatchGetDeploymentsOutput) GoString() string {
 }
 
 // SetDeploymentsInfo sets the DeploymentsInfo field's value.
-func (s *BatchGetDeploymentsOutput) SetDeploymentsInfo(v []*DeploymentInfo) *BatchGetDeploymentsOutput {
+func (s *BatchGetDeploymentsOutput) SetDeploymentsInfo(v []DeploymentInfo) *BatchGetDeploymentsOutput {
 	s.DeploymentsInfo = v
 	return s
 }
@@ -2811,7 +2811,7 @@ type BatchGetOnPremisesInstancesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the on-premises instances about which to get information.
-	InstanceNames []*string `locationName:"instanceNames" type:"list"`
+	InstanceNames []string `locationName:"instanceNames" type:"list"`
 }
 
 // String returns the string representation
@@ -2825,7 +2825,7 @@ func (s BatchGetOnPremisesInstancesInput) GoString() string {
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
-func (s *BatchGetOnPremisesInstancesInput) SetInstanceNames(v []*string) *BatchGetOnPremisesInstancesInput {
+func (s *BatchGetOnPremisesInstancesInput) SetInstanceNames(v []string) *BatchGetOnPremisesInstancesInput {
 	s.InstanceNames = v
 	return s
 }
@@ -2836,7 +2836,7 @@ type BatchGetOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the on-premises instances.
-	InstanceInfos []*InstanceInfo `locationName:"instanceInfos" type:"list"`
+	InstanceInfos []InstanceInfo `locationName:"instanceInfos" type:"list"`
 }
 
 // String returns the string representation
@@ -2850,7 +2850,7 @@ func (s BatchGetOnPremisesInstancesOutput) GoString() string {
 }
 
 // SetInstanceInfos sets the InstanceInfos field's value.
-func (s *BatchGetOnPremisesInstancesOutput) SetInstanceInfos(v []*InstanceInfo) *BatchGetOnPremisesInstancesOutput {
+func (s *BatchGetOnPremisesInstancesOutput) SetInstanceInfos(v []InstanceInfo) *BatchGetOnPremisesInstancesOutput {
 	s.InstanceInfos = v
 	return s
 }
@@ -2914,7 +2914,7 @@ type BlueInstanceTerminationOption struct {
 	//
 	//    * KEEP_ALIVE: Instances are left running after they are deregistered from
 	//    the load balancer and removed from the deployment group.
-	Action InstanceAction `locationName:"action" type:"string"`
+	Action InstanceAction `locationName:"action" type:"string" enum:"true"`
 
 	// The number of minutes to wait after a successful blue/green deployment before
 	// terminating instances from the original environment.
@@ -3175,7 +3175,7 @@ type CreateDeploymentGroupInput struct {
 	AutoRollbackConfiguration *AutoRollbackConfiguration `locationName:"autoRollbackConfiguration" type:"structure"`
 
 	// A list of associated Auto Scaling groups.
-	AutoScalingGroups []*string `locationName:"autoScalingGroups" type:"list"`
+	AutoScalingGroups []string `locationName:"autoScalingGroups" type:"list"`
 
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
@@ -3206,7 +3206,7 @@ type CreateDeploymentGroupInput struct {
 	// The Amazon EC2 tags on which to filter. The deployment group will include
 	// EC2 instances with any of the specified tags. Cannot be used in the same
 	// call as ec2TagSet.
-	Ec2TagFilters []*EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
+	Ec2TagFilters []EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
 
 	// Information about groups of tags applied to EC2 instances. The deployment
 	// group will include only EC2 instances identified by all the tag groups. Cannot
@@ -3219,7 +3219,7 @@ type CreateDeploymentGroupInput struct {
 	// The on-premises instance tags on which to filter. The deployment group will
 	// include on-premises instances with any of the specified tags. Cannot be used
 	// in the same call as OnPremisesTagSet.
-	OnPremisesInstanceTagFilters []*TagFilter `locationName:"onPremisesInstanceTagFilters" type:"list"`
+	OnPremisesInstanceTagFilters []TagFilter `locationName:"onPremisesInstanceTagFilters" type:"list"`
 
 	// Information about groups of tags applied to on-premises instances. The deployment
 	// group will include only on-premises instances identified by all the tag groups.
@@ -3235,7 +3235,7 @@ type CreateDeploymentGroupInput struct {
 	// Information about triggers to create when the deployment group is created.
 	// For examples, see Create a Trigger for an AWS CodeDeploy Event (http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 	// in the AWS CodeDeploy User Guide.
-	TriggerConfigurations []*TriggerConfig `locationName:"triggerConfigurations" type:"list"`
+	TriggerConfigurations []TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
 
 // String returns the string representation
@@ -3298,7 +3298,7 @@ func (s *CreateDeploymentGroupInput) SetAutoRollbackConfiguration(v *AutoRollbac
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *CreateDeploymentGroupInput) SetAutoScalingGroups(v []*string) *CreateDeploymentGroupInput {
+func (s *CreateDeploymentGroupInput) SetAutoScalingGroups(v []string) *CreateDeploymentGroupInput {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -3328,7 +3328,7 @@ func (s *CreateDeploymentGroupInput) SetDeploymentStyle(v *DeploymentStyle) *Cre
 }
 
 // SetEc2TagFilters sets the Ec2TagFilters field's value.
-func (s *CreateDeploymentGroupInput) SetEc2TagFilters(v []*EC2TagFilter) *CreateDeploymentGroupInput {
+func (s *CreateDeploymentGroupInput) SetEc2TagFilters(v []EC2TagFilter) *CreateDeploymentGroupInput {
 	s.Ec2TagFilters = v
 	return s
 }
@@ -3346,7 +3346,7 @@ func (s *CreateDeploymentGroupInput) SetLoadBalancerInfo(v *LoadBalancerInfo) *C
 }
 
 // SetOnPremisesInstanceTagFilters sets the OnPremisesInstanceTagFilters field's value.
-func (s *CreateDeploymentGroupInput) SetOnPremisesInstanceTagFilters(v []*TagFilter) *CreateDeploymentGroupInput {
+func (s *CreateDeploymentGroupInput) SetOnPremisesInstanceTagFilters(v []TagFilter) *CreateDeploymentGroupInput {
 	s.OnPremisesInstanceTagFilters = v
 	return s
 }
@@ -3364,7 +3364,7 @@ func (s *CreateDeploymentGroupInput) SetServiceRoleArn(v string) *CreateDeployme
 }
 
 // SetTriggerConfigurations sets the TriggerConfigurations field's value.
-func (s *CreateDeploymentGroupInput) SetTriggerConfigurations(v []*TriggerConfig) *CreateDeploymentGroupInput {
+func (s *CreateDeploymentGroupInput) SetTriggerConfigurations(v []TriggerConfig) *CreateDeploymentGroupInput {
 	s.TriggerConfigurations = v
 	return s
 }
@@ -3437,7 +3437,7 @@ type CreateDeploymentInput struct {
 	//
 	//    * RETAIN: The version of the file already on the instance is kept and
 	//    used as part of the new deployment.
-	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string"`
+	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string" enum:"true"`
 
 	// If set to true, then if the deployment causes the ApplicationStop deployment
 	// lifecycle event to an instance to fail, the deployment to that instance will
@@ -3774,7 +3774,7 @@ type DeleteDeploymentGroupOutput struct {
 	// in the Auto Scaling group. If the output contains data, AWS CodeDeploy could
 	// not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances
 	// in the Auto Scaling group.
-	HooksNotCleanedUp []*AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
+	HooksNotCleanedUp []AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
 }
 
 // String returns the string representation
@@ -3788,7 +3788,7 @@ func (s DeleteDeploymentGroupOutput) GoString() string {
 }
 
 // SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.
-func (s *DeleteDeploymentGroupOutput) SetHooksNotCleanedUp(v []*AutoScalingGroup) *DeleteDeploymentGroupOutput {
+func (s *DeleteDeploymentGroupOutput) SetHooksNotCleanedUp(v []AutoScalingGroup) *DeleteDeploymentGroupOutput {
 	s.HooksNotCleanedUp = v
 	return s
 }
@@ -3861,7 +3861,7 @@ type DeploymentGroupInfo struct {
 	AutoRollbackConfiguration *AutoRollbackConfiguration `locationName:"autoRollbackConfiguration" type:"structure"`
 
 	// A list of associated Auto Scaling groups.
-	AutoScalingGroups []*AutoScalingGroup `locationName:"autoScalingGroups" type:"list"`
+	AutoScalingGroups []AutoScalingGroup `locationName:"autoScalingGroups" type:"list"`
 
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
@@ -3881,7 +3881,7 @@ type DeploymentGroupInfo struct {
 
 	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
 	// instances with any of the specified tags.
-	Ec2TagFilters []*EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
+	Ec2TagFilters []EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
 
 	// Information about groups of tags applied to an EC2 instance. The deployment
 	// group includes only EC2 instances identified by all the tag groups. Cannot
@@ -3901,7 +3901,7 @@ type DeploymentGroupInfo struct {
 
 	// The on-premises instance tags on which to filter. The deployment group includes
 	// on-premises instances with any of the specified tags.
-	OnPremisesInstanceTagFilters []*TagFilter `locationName:"onPremisesInstanceTagFilters" type:"list"`
+	OnPremisesInstanceTagFilters []TagFilter `locationName:"onPremisesInstanceTagFilters" type:"list"`
 
 	// Information about groups of tags applied to an on-premises instance. The
 	// deployment group includes only on-premises instances identified by all the
@@ -3916,7 +3916,7 @@ type DeploymentGroupInfo struct {
 	TargetRevision *RevisionLocation `locationName:"targetRevision" type:"structure"`
 
 	// Information about triggers associated with the deployment group.
-	TriggerConfigurations []*TriggerConfig `locationName:"triggerConfigurations" type:"list"`
+	TriggerConfigurations []TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
 
 // String returns the string representation
@@ -3948,7 +3948,7 @@ func (s *DeploymentGroupInfo) SetAutoRollbackConfiguration(v *AutoRollbackConfig
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *DeploymentGroupInfo) SetAutoScalingGroups(v []*AutoScalingGroup) *DeploymentGroupInfo {
+func (s *DeploymentGroupInfo) SetAutoScalingGroups(v []AutoScalingGroup) *DeploymentGroupInfo {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -3984,7 +3984,7 @@ func (s *DeploymentGroupInfo) SetDeploymentStyle(v *DeploymentStyle) *Deployment
 }
 
 // SetEc2TagFilters sets the Ec2TagFilters field's value.
-func (s *DeploymentGroupInfo) SetEc2TagFilters(v []*EC2TagFilter) *DeploymentGroupInfo {
+func (s *DeploymentGroupInfo) SetEc2TagFilters(v []EC2TagFilter) *DeploymentGroupInfo {
 	s.Ec2TagFilters = v
 	return s
 }
@@ -4014,7 +4014,7 @@ func (s *DeploymentGroupInfo) SetLoadBalancerInfo(v *LoadBalancerInfo) *Deployme
 }
 
 // SetOnPremisesInstanceTagFilters sets the OnPremisesInstanceTagFilters field's value.
-func (s *DeploymentGroupInfo) SetOnPremisesInstanceTagFilters(v []*TagFilter) *DeploymentGroupInfo {
+func (s *DeploymentGroupInfo) SetOnPremisesInstanceTagFilters(v []TagFilter) *DeploymentGroupInfo {
 	s.OnPremisesInstanceTagFilters = v
 	return s
 }
@@ -4038,7 +4038,7 @@ func (s *DeploymentGroupInfo) SetTargetRevision(v *RevisionLocation) *Deployment
 }
 
 // SetTriggerConfigurations sets the TriggerConfigurations field's value.
-func (s *DeploymentGroupInfo) SetTriggerConfigurations(v []*TriggerConfig) *DeploymentGroupInfo {
+func (s *DeploymentGroupInfo) SetTriggerConfigurations(v []TriggerConfig) *DeploymentGroupInfo {
 	s.TriggerConfigurations = v
 	return s
 }
@@ -4075,7 +4075,7 @@ type DeploymentInfo struct {
 	//    * autoscaling: Auto Scaling created the deployment.
 	//
 	//    * codeDeployRollback: A rollback process created the deployment.
-	Creator DeploymentCreator `locationName:"creator" type:"string"`
+	Creator DeploymentCreator `locationName:"creator" type:"string" enum:"true"`
 
 	// The deployment configuration name.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
@@ -4111,7 +4111,7 @@ type DeploymentInfo struct {
 	//
 	//    * RETAIN: The version of the file already on the instance is kept and
 	//    used as part of the new deployment.
-	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string"`
+	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string" enum:"true"`
 
 	// If true, then if the deployment causes the ApplicationStop deployment lifecycle
 	// event to an instance to fail, the deployment to that instance will not be
@@ -4153,7 +4153,7 @@ type DeploymentInfo struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The current state of the deployment as a whole.
-	Status DeploymentStatus `locationName:"status" type:"string"`
+	Status DeploymentStatus `locationName:"status" type:"string" enum:"true"`
 
 	// Information about the instances that belong to the replacement environment
 	// in a blue/green deployment.
@@ -4413,7 +4413,7 @@ type DeploymentReadyOption struct {
 	//    traffic is rerouted manually. If traffic is not rerouted manually before
 	//    the end of the specified wait period, the deployment status is changed
 	//    to Stopped.
-	ActionOnTimeout DeploymentReadyAction `locationName:"actionOnTimeout" type:"string"`
+	ActionOnTimeout DeploymentReadyAction `locationName:"actionOnTimeout" type:"string" enum:"true"`
 
 	// The number of minutes to wait before the status of a blue/green deployment
 	// changed to Stopped if rerouting is not started manually. Applies only to
@@ -4450,10 +4450,10 @@ type DeploymentStyle struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates whether to route deployment traffic behind a load balancer.
-	DeploymentOption DeploymentOption `locationName:"deploymentOption" type:"string"`
+	DeploymentOption DeploymentOption `locationName:"deploymentOption" type:"string" enum:"true"`
 
 	// Indicates whether to run an in-place deployment or a blue/green deployment.
-	DeploymentType DeploymentType `locationName:"deploymentType" type:"string"`
+	DeploymentType DeploymentType `locationName:"deploymentType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4554,7 +4554,7 @@ type Diagnostics struct {
 	//    * ScriptFailed: The specified script failed to run as expected.
 	//
 	//    * UnknownError: The specified script did not run for an unknown reason.
-	ErrorCode LifecycleErrorCode `locationName:"errorCode" type:"string"`
+	ErrorCode LifecycleErrorCode `locationName:"errorCode" type:"string" enum:"true"`
 
 	// The last portion of the diagnostic log.
 	//
@@ -4618,7 +4618,7 @@ type EC2TagFilter struct {
 	//    * VALUE_ONLY: Value only.
 	//
 	//    * KEY_AND_VALUE: Key and value.
-	Type EC2TagFilterType `type:"string"`
+	Type EC2TagFilterType `type:"string" enum:"true"`
 
 	// The tag filter value.
 	Value *string `type:"string"`
@@ -4660,7 +4660,7 @@ type EC2TagSet struct {
 	// A list containing other lists of EC2 instance tag groups. In order for an
 	// instance to be included in the deployment group, it must be identified by
 	// all the tag groups in the list.
-	Ec2TagSetList [][]*EC2TagFilter `locationName:"ec2TagSetList" type:"list"`
+	Ec2TagSetList [][]EC2TagFilter `locationName:"ec2TagSetList" type:"list"`
 }
 
 // String returns the string representation
@@ -4674,7 +4674,7 @@ func (s EC2TagSet) GoString() string {
 }
 
 // SetEc2TagSetList sets the Ec2TagSetList field's value.
-func (s *EC2TagSet) SetEc2TagSetList(v [][]*EC2TagFilter) *EC2TagSet {
+func (s *EC2TagSet) SetEc2TagSetList(v [][]EC2TagFilter) *EC2TagSet {
 	s.Ec2TagSetList = v
 	return s
 }
@@ -4756,7 +4756,7 @@ type ErrorInformation struct {
 	//    * REVISION_MISSING: The revision ID was missing. This error code will
 	//    most likely be raised if the revision is deleted after the deployment
 	//    is created but before it is started.
-	Code ErrorCode `locationName:"code" type:"string"`
+	Code ErrorCode `locationName:"code" type:"string" enum:"true"`
 
 	// An accompanying error message.
 	Message *string `locationName:"message" type:"string"`
@@ -4790,7 +4790,7 @@ type GenericRevisionInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The deployment groups for which this is the current target revision.
-	DeploymentGroups []*string `locationName:"deploymentGroups" type:"list"`
+	DeploymentGroups []string `locationName:"deploymentGroups" type:"list"`
 
 	// A comment about the revision.
 	Description *string `locationName:"description" type:"string"`
@@ -4816,7 +4816,7 @@ func (s GenericRevisionInfo) GoString() string {
 }
 
 // SetDeploymentGroups sets the DeploymentGroups field's value.
-func (s *GenericRevisionInfo) SetDeploymentGroups(v []*string) *GenericRevisionInfo {
+func (s *GenericRevisionInfo) SetDeploymentGroups(v []string) *GenericRevisionInfo {
 	s.DeploymentGroups = v
 	return s
 }
@@ -5439,7 +5439,7 @@ type GreenFleetProvisioningOption struct {
 	//
 	//    * COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling
 	//    group to define and create instances in a new Auto Scaling group.
-	Action GreenFleetProvisioningAction `locationName:"action" type:"string"`
+	Action GreenFleetProvisioningAction `locationName:"action" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5483,7 +5483,7 @@ type InstanceInfo struct {
 	RegisterTime *time.Time `locationName:"registerTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The tags currently associated with the on-premises instance.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -5533,7 +5533,7 @@ func (s *InstanceInfo) SetRegisterTime(v time.Time) *InstanceInfo {
 }
 
 // SetTags sets the Tags field's value.
-func (s *InstanceInfo) SetTags(v []*Tag) *InstanceInfo {
+func (s *InstanceInfo) SetTags(v []Tag) *InstanceInfo {
 	s.Tags = v
 	return s
 }
@@ -5555,13 +5555,13 @@ type InstanceSummary struct {
 	//    * BLUE: The instance is part of the original environment.
 	//
 	//    * GREEN: The instance is part of the replacement environment.
-	InstanceType InstanceType `locationName:"instanceType" type:"string"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// A timestamp indicating when the instance information was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// A list of lifecycle events for this instance.
-	LifecycleEvents []*LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
 
 	// The deployment status for this instance:
 	//
@@ -5576,7 +5576,7 @@ type InstanceSummary struct {
 	//    * Skipped: The deployment has been skipped for this instance.
 	//
 	//    * Unknown: The deployment status is unknown for this instance.
-	Status InstanceStatus `locationName:"status" type:"string"`
+	Status InstanceStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5614,7 +5614,7 @@ func (s *InstanceSummary) SetLastUpdatedAt(v time.Time) *InstanceSummary {
 }
 
 // SetLifecycleEvents sets the LifecycleEvents field's value.
-func (s *InstanceSummary) SetLifecycleEvents(v []*LifecycleEvent) *InstanceSummary {
+func (s *InstanceSummary) SetLifecycleEvents(v []LifecycleEvent) *InstanceSummary {
 	s.LifecycleEvents = v
 	return s
 }
@@ -5643,7 +5643,7 @@ type LastDeploymentInfo struct {
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the most recent deployment.
-	Status DeploymentStatus `locationName:"status" type:"string"`
+	Status DeploymentStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5711,7 +5711,7 @@ type LifecycleEvent struct {
 	//    * Skipped: The deployment lifecycle event has been skipped.
 	//
 	//    * Unknown: The deployment lifecycle event is unknown.
-	Status LifecycleEventStatus `locationName:"status" type:"string"`
+	Status LifecycleEventStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5774,7 +5774,7 @@ type ListApplicationRevisionsInput struct {
 	//    group.
 	//
 	//    * ignore: List all revisions.
-	Deployed ListStateFilterAction `locationName:"deployed" type:"string"`
+	Deployed ListStateFilterAction `locationName:"deployed" type:"string" enum:"true"`
 
 	// An identifier returned from the previous list application revisions call.
 	// It can be used to return the next set of applications in the list.
@@ -5799,7 +5799,7 @@ type ListApplicationRevisionsInput struct {
 	//
 	// If not specified or set to null, the results will be returned in an arbitrary
 	// order.
-	SortBy ApplicationRevisionSortBy `locationName:"sortBy" type:"string"`
+	SortBy ApplicationRevisionSortBy `locationName:"sortBy" type:"string" enum:"true"`
 
 	// The order in which to sort the list results:
 	//
@@ -5810,7 +5810,7 @@ type ListApplicationRevisionsInput struct {
 	// If not specified, the results will be sorted in ascending order.
 	//
 	// If set to null, the results will be sorted in an arbitrary order.
-	SortOrder SortOrder `locationName:"sortOrder" type:"string"`
+	SortOrder SortOrder `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5893,7 +5893,7 @@ type ListApplicationRevisionsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of locations that contain the matching revisions.
-	Revisions []*RevisionLocation `locationName:"revisions" type:"list"`
+	Revisions []RevisionLocation `locationName:"revisions" type:"list"`
 }
 
 // String returns the string representation
@@ -5913,7 +5913,7 @@ func (s *ListApplicationRevisionsOutput) SetNextToken(v string) *ListApplication
 }
 
 // SetRevisions sets the Revisions field's value.
-func (s *ListApplicationRevisionsOutput) SetRevisions(v []*RevisionLocation) *ListApplicationRevisionsOutput {
+func (s *ListApplicationRevisionsOutput) SetRevisions(v []RevisionLocation) *ListApplicationRevisionsOutput {
 	s.Revisions = v
 	return s
 }
@@ -5950,7 +5950,7 @@ type ListApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of application names.
-	Applications []*string `locationName:"applications" type:"list"`
+	Applications []string `locationName:"applications" type:"list"`
 
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent list applications call to return the next
@@ -5969,7 +5969,7 @@ func (s ListApplicationsOutput) GoString() string {
 }
 
 // SetApplications sets the Applications field's value.
-func (s *ListApplicationsOutput) SetApplications(v []*string) *ListApplicationsOutput {
+func (s *ListApplicationsOutput) SetApplications(v []string) *ListApplicationsOutput {
 	s.Applications = v
 	return s
 }
@@ -6014,7 +6014,7 @@ type ListDeploymentConfigsOutput struct {
 
 	// A list of deployment configurations, including built-in configurations such
 	// as CodeDeployDefault.OneAtATime.
-	DeploymentConfigsList []*string `locationName:"deploymentConfigsList" type:"list"`
+	DeploymentConfigsList []string `locationName:"deploymentConfigsList" type:"list"`
 
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent list deployment configurations call to return
@@ -6033,7 +6033,7 @@ func (s ListDeploymentConfigsOutput) GoString() string {
 }
 
 // SetDeploymentConfigsList sets the DeploymentConfigsList field's value.
-func (s *ListDeploymentConfigsOutput) SetDeploymentConfigsList(v []*string) *ListDeploymentConfigsOutput {
+func (s *ListDeploymentConfigsOutput) SetDeploymentConfigsList(v []string) *ListDeploymentConfigsOutput {
 	s.DeploymentConfigsList = v
 	return s
 }
@@ -6108,7 +6108,7 @@ type ListDeploymentGroupsOutput struct {
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
 
 	// A list of corresponding deployment group names.
-	DeploymentGroups []*string `locationName:"deploymentGroups" type:"list"`
+	DeploymentGroups []string `locationName:"deploymentGroups" type:"list"`
 
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent list deployment groups call to return the
@@ -6133,7 +6133,7 @@ func (s *ListDeploymentGroupsOutput) SetApplicationName(v string) *ListDeploymen
 }
 
 // SetDeploymentGroups sets the DeploymentGroups field's value.
-func (s *ListDeploymentGroupsOutput) SetDeploymentGroups(v []*string) *ListDeploymentGroupsOutput {
+func (s *ListDeploymentGroupsOutput) SetDeploymentGroups(v []string) *ListDeploymentGroupsOutput {
 	s.DeploymentGroups = v
 	return s
 }
@@ -6233,7 +6233,7 @@ type ListDeploymentInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of instance IDs.
-	InstancesList []*string `locationName:"instancesList" type:"list"`
+	InstancesList []string `locationName:"instancesList" type:"list"`
 
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent list deployment instances call to return the
@@ -6252,7 +6252,7 @@ func (s ListDeploymentInstancesOutput) GoString() string {
 }
 
 // SetInstancesList sets the InstancesList field's value.
-func (s *ListDeploymentInstancesOutput) SetInstancesList(v []*string) *ListDeploymentInstancesOutput {
+func (s *ListDeploymentInstancesOutput) SetInstancesList(v []string) *ListDeploymentInstancesOutput {
 	s.InstancesList = v
 	return s
 }
@@ -6360,7 +6360,7 @@ type ListDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of deployment IDs.
-	Deployments []*string `locationName:"deployments" type:"list"`
+	Deployments []string `locationName:"deployments" type:"list"`
 
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent list deployments call to return the next set
@@ -6379,7 +6379,7 @@ func (s ListDeploymentsOutput) GoString() string {
 }
 
 // SetDeployments sets the Deployments field's value.
-func (s *ListDeploymentsOutput) SetDeployments(v []*string) *ListDeploymentsOutput {
+func (s *ListDeploymentsOutput) SetDeployments(v []string) *ListDeploymentsOutput {
 	s.Deployments = v
 	return s
 }
@@ -6427,7 +6427,7 @@ type ListGitHubAccountTokenNamesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// A list of names of connections to GitHub accounts.
-	TokenNameList []*string `locationName:"tokenNameList" type:"list"`
+	TokenNameList []string `locationName:"tokenNameList" type:"list"`
 }
 
 // String returns the string representation
@@ -6447,7 +6447,7 @@ func (s *ListGitHubAccountTokenNamesOutput) SetNextToken(v string) *ListGitHubAc
 }
 
 // SetTokenNameList sets the TokenNameList field's value.
-func (s *ListGitHubAccountTokenNamesOutput) SetTokenNameList(v []*string) *ListGitHubAccountTokenNamesOutput {
+func (s *ListGitHubAccountTokenNamesOutput) SetTokenNameList(v []string) *ListGitHubAccountTokenNamesOutput {
 	s.TokenNameList = v
 	return s
 }
@@ -6468,11 +6468,11 @@ type ListOnPremisesInstancesInput struct {
 	//
 	//    * Registered: Include registered on-premises instances in the resulting
 	//    list.
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" enum:"true"`
 
 	// The on-premises instance tags that will be used to restrict the corresponding
 	// on-premises instance names returned.
-	TagFilters []*TagFilter `locationName:"tagFilters" type:"list"`
+	TagFilters []TagFilter `locationName:"tagFilters" type:"list"`
 }
 
 // String returns the string representation
@@ -6498,7 +6498,7 @@ func (s *ListOnPremisesInstancesInput) SetRegistrationStatus(v RegistrationStatu
 }
 
 // SetTagFilters sets the TagFilters field's value.
-func (s *ListOnPremisesInstancesInput) SetTagFilters(v []*TagFilter) *ListOnPremisesInstancesInput {
+func (s *ListOnPremisesInstancesInput) SetTagFilters(v []TagFilter) *ListOnPremisesInstancesInput {
 	s.TagFilters = v
 	return s
 }
@@ -6509,7 +6509,7 @@ type ListOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of matching on-premises instance names.
-	InstanceNames []*string `locationName:"instanceNames" type:"list"`
+	InstanceNames []string `locationName:"instanceNames" type:"list"`
 
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent list on-premises instances call to return
@@ -6528,7 +6528,7 @@ func (s ListOnPremisesInstancesOutput) GoString() string {
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
-func (s *ListOnPremisesInstancesOutput) SetInstanceNames(v []*string) *ListOnPremisesInstancesOutput {
+func (s *ListOnPremisesInstancesOutput) SetInstanceNames(v []string) *ListOnPremisesInstancesOutput {
 	s.InstanceNames = v
 	return s
 }
@@ -6548,12 +6548,12 @@ type LoadBalancerInfo struct {
 	// An array containing information about the load balancer to use for load balancing
 	// in a deployment. In Elastic Load Balancing, load balancers are used with
 	// Classic Load Balancers.
-	ElbInfoList []*ELBInfo `locationName:"elbInfoList" type:"list"`
+	ElbInfoList []ELBInfo `locationName:"elbInfoList" type:"list"`
 
 	// An array containing information about the target group to use for load balancing
 	// in a deployment. In Elastic Load Balancing, target groups are used with Application
 	// Load Balancers.
-	TargetGroupInfoList []*TargetGroupInfo `locationName:"targetGroupInfoList" type:"list"`
+	TargetGroupInfoList []TargetGroupInfo `locationName:"targetGroupInfoList" type:"list"`
 }
 
 // String returns the string representation
@@ -6567,13 +6567,13 @@ func (s LoadBalancerInfo) GoString() string {
 }
 
 // SetElbInfoList sets the ElbInfoList field's value.
-func (s *LoadBalancerInfo) SetElbInfoList(v []*ELBInfo) *LoadBalancerInfo {
+func (s *LoadBalancerInfo) SetElbInfoList(v []ELBInfo) *LoadBalancerInfo {
 	s.ElbInfoList = v
 	return s
 }
 
 // SetTargetGroupInfoList sets the TargetGroupInfoList field's value.
-func (s *LoadBalancerInfo) SetTargetGroupInfoList(v []*TargetGroupInfo) *LoadBalancerInfo {
+func (s *LoadBalancerInfo) SetTargetGroupInfoList(v []TargetGroupInfo) *LoadBalancerInfo {
 	s.TargetGroupInfoList = v
 	return s
 }
@@ -6609,7 +6609,7 @@ type MinimumHealthyHosts struct {
 	//
 	// For more information, see AWS CodeDeploy Instance Health (http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
 	// in the AWS CodeDeploy User Guide.
-	Type MinimumHealthyHostsType `locationName:"type" type:"string"`
+	Type MinimumHealthyHostsType `locationName:"type" type:"string" enum:"true"`
 
 	// The minimum healthy instance value.
 	Value *int64 `locationName:"value" type:"integer"`
@@ -6645,7 +6645,7 @@ type OnPremisesTagSet struct {
 	// A list containing other lists of on-premises instance tag groups. In order
 	// for an instance to be included in the deployment group, it must be identified
 	// by all the tag groups in the list.
-	OnPremisesTagSetList [][]*TagFilter `locationName:"onPremisesTagSetList" type:"list"`
+	OnPremisesTagSetList [][]TagFilter `locationName:"onPremisesTagSetList" type:"list"`
 }
 
 // String returns the string representation
@@ -6659,7 +6659,7 @@ func (s OnPremisesTagSet) GoString() string {
 }
 
 // SetOnPremisesTagSetList sets the OnPremisesTagSetList field's value.
-func (s *OnPremisesTagSet) SetOnPremisesTagSetList(v [][]*TagFilter) *OnPremisesTagSet {
+func (s *OnPremisesTagSet) SetOnPremisesTagSetList(v [][]TagFilter) *OnPremisesTagSet {
 	s.OnPremisesTagSetList = v
 	return s
 }
@@ -6831,12 +6831,12 @@ type RemoveTagsFromOnPremisesInstancesInput struct {
 	// The names of the on-premises instances from which to remove tags.
 	//
 	// InstanceNames is a required field
-	InstanceNames []*string `locationName:"instanceNames" type:"list" required:"true"`
+	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
 
 	// The tag key-value pairs to remove from the on-premises instances.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6868,13 +6868,13 @@ func (s *RemoveTagsFromOnPremisesInstancesInput) Validate() error {
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
-func (s *RemoveTagsFromOnPremisesInstancesInput) SetInstanceNames(v []*string) *RemoveTagsFromOnPremisesInstancesInput {
+func (s *RemoveTagsFromOnPremisesInstancesInput) SetInstanceNames(v []string) *RemoveTagsFromOnPremisesInstancesInput {
 	s.InstanceNames = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *RemoveTagsFromOnPremisesInstancesInput) SetTags(v []*Tag) *RemoveTagsFromOnPremisesInstancesInput {
+func (s *RemoveTagsFromOnPremisesInstancesInput) SetTags(v []Tag) *RemoveTagsFromOnPremisesInstancesInput {
 	s.Tags = v
 	return s
 }
@@ -6942,7 +6942,7 @@ type RevisionLocation struct {
 	//    * S3: An application revision stored in Amazon S3.
 	//
 	//    * GitHub: An application revision stored in GitHub.
-	RevisionType RevisionLocationType `locationName:"revisionType" type:"string"`
+	RevisionType RevisionLocationType `locationName:"revisionType" type:"string" enum:"true"`
 
 	// Information about the location of application artifacts stored in Amazon
 	// S3.
@@ -7038,7 +7038,7 @@ type S3Location struct {
 	//    * tgz: A compressed tar archive file.
 	//
 	//    * zip: A zip archive file.
-	BundleType BundleType `locationName:"bundleType" type:"string"`
+	BundleType BundleType `locationName:"bundleType" type:"string" enum:"true"`
 
 	// The ETag of the Amazon S3 object that represents the bundled artifacts for
 	// the application revision.
@@ -7201,7 +7201,7 @@ type StopDeploymentOutput struct {
 	//    * Pending: The stop operation is pending.
 	//
 	//    * Succeeded: The stop operation was successful.
-	Status StopStatus `locationName:"status" type:"string"`
+	Status StopStatus `locationName:"status" type:"string" enum:"true"`
 
 	// An accompanying status message.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -7278,7 +7278,7 @@ type TagFilter struct {
 	//    * VALUE_ONLY: Value only.
 	//
 	//    * KEY_AND_VALUE: Key and value.
-	Type TagFilterType `type:"string"`
+	Type TagFilterType `type:"string" enum:"true"`
 
 	// The on-premises instance tag filter value.
 	Value *string `type:"string"`
@@ -7351,7 +7351,7 @@ type TargetInstances struct {
 
 	// The names of one or more Auto Scaling groups to identify a replacement environment
 	// for a blue/green deployment.
-	AutoScalingGroups []*string `locationName:"autoScalingGroups" type:"list"`
+	AutoScalingGroups []string `locationName:"autoScalingGroups" type:"list"`
 
 	// Information about the groups of EC2 instance tags that an instance must be
 	// identified by in order for it to be included in the replacement environment
@@ -7361,7 +7361,7 @@ type TargetInstances struct {
 	// The tag filter key, type, and value used to identify Amazon EC2 instances
 	// in a replacement environment for a blue/green deployment. Cannot be used
 	// in the same call as ec2TagSet.
-	TagFilters []*EC2TagFilter `locationName:"tagFilters" type:"list"`
+	TagFilters []EC2TagFilter `locationName:"tagFilters" type:"list"`
 }
 
 // String returns the string representation
@@ -7375,7 +7375,7 @@ func (s TargetInstances) GoString() string {
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *TargetInstances) SetAutoScalingGroups(v []*string) *TargetInstances {
+func (s *TargetInstances) SetAutoScalingGroups(v []string) *TargetInstances {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -7387,7 +7387,7 @@ func (s *TargetInstances) SetEc2TagSet(v *EC2TagSet) *TargetInstances {
 }
 
 // SetTagFilters sets the TagFilters field's value.
-func (s *TargetInstances) SetTagFilters(v []*EC2TagFilter) *TargetInstances {
+func (s *TargetInstances) SetTagFilters(v []EC2TagFilter) *TargetInstances {
 	s.TagFilters = v
 	return s
 }
@@ -7561,7 +7561,7 @@ type UpdateDeploymentGroupInput struct {
 	// group, if you want to change them. To keep the Auto Scaling groups, enter
 	// their names. To remove Auto Scaling groups, do not enter any Auto Scaling
 	// group names.
-	AutoScalingGroups []*string `locationName:"autoScalingGroups" type:"list"`
+	AutoScalingGroups []string `locationName:"autoScalingGroups" type:"list"`
 
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
@@ -7582,7 +7582,7 @@ type UpdateDeploymentGroupInput struct {
 	// The replacement set of Amazon EC2 tags on which to filter, if you want to
 	// change them. To keep the existing tags, enter their names. To remove tags,
 	// do not enter any tag names.
-	Ec2TagFilters []*EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
+	Ec2TagFilters []EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
 
 	// Information about groups of tags applied to on-premises instances. The deployment
 	// group will include only EC2 instances identified by all the tag groups.
@@ -7597,7 +7597,7 @@ type UpdateDeploymentGroupInput struct {
 	// The replacement set of on-premises instance tags on which to filter, if you
 	// want to change them. To keep the existing tags, enter their names. To remove
 	// tags, do not enter any tag names.
-	OnPremisesInstanceTagFilters []*TagFilter `locationName:"onPremisesInstanceTagFilters" type:"list"`
+	OnPremisesInstanceTagFilters []TagFilter `locationName:"onPremisesInstanceTagFilters" type:"list"`
 
 	// Information about an on-premises instance tag set. The deployment group will
 	// include only on-premises instances identified by all the tag groups.
@@ -7609,7 +7609,7 @@ type UpdateDeploymentGroupInput struct {
 	// Information about triggers to change when the deployment group is updated.
 	// For examples, see Modify Triggers in an AWS CodeDeploy Deployment Group (http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
 	// in the AWS CodeDeploy User Guide.
-	TriggerConfigurations []*TriggerConfig `locationName:"triggerConfigurations" type:"list"`
+	TriggerConfigurations []TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
 
 // String returns the string representation
@@ -7671,7 +7671,7 @@ func (s *UpdateDeploymentGroupInput) SetAutoRollbackConfiguration(v *AutoRollbac
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *UpdateDeploymentGroupInput) SetAutoScalingGroups(v []*string) *UpdateDeploymentGroupInput {
+func (s *UpdateDeploymentGroupInput) SetAutoScalingGroups(v []string) *UpdateDeploymentGroupInput {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -7701,7 +7701,7 @@ func (s *UpdateDeploymentGroupInput) SetDeploymentStyle(v *DeploymentStyle) *Upd
 }
 
 // SetEc2TagFilters sets the Ec2TagFilters field's value.
-func (s *UpdateDeploymentGroupInput) SetEc2TagFilters(v []*EC2TagFilter) *UpdateDeploymentGroupInput {
+func (s *UpdateDeploymentGroupInput) SetEc2TagFilters(v []EC2TagFilter) *UpdateDeploymentGroupInput {
 	s.Ec2TagFilters = v
 	return s
 }
@@ -7725,7 +7725,7 @@ func (s *UpdateDeploymentGroupInput) SetNewDeploymentGroupName(v string) *Update
 }
 
 // SetOnPremisesInstanceTagFilters sets the OnPremisesInstanceTagFilters field's value.
-func (s *UpdateDeploymentGroupInput) SetOnPremisesInstanceTagFilters(v []*TagFilter) *UpdateDeploymentGroupInput {
+func (s *UpdateDeploymentGroupInput) SetOnPremisesInstanceTagFilters(v []TagFilter) *UpdateDeploymentGroupInput {
 	s.OnPremisesInstanceTagFilters = v
 	return s
 }
@@ -7743,7 +7743,7 @@ func (s *UpdateDeploymentGroupInput) SetServiceRoleArn(v string) *UpdateDeployme
 }
 
 // SetTriggerConfigurations sets the TriggerConfigurations field's value.
-func (s *UpdateDeploymentGroupInput) SetTriggerConfigurations(v []*TriggerConfig) *UpdateDeploymentGroupInput {
+func (s *UpdateDeploymentGroupInput) SetTriggerConfigurations(v []TriggerConfig) *UpdateDeploymentGroupInput {
 	s.TriggerConfigurations = v
 	return s
 }
@@ -7758,7 +7758,7 @@ type UpdateDeploymentGroupOutput struct {
 	// corresponding Auto Scaling lifecycle event hooks from the AWS account. If
 	// the output contains data, AWS CodeDeploy could not remove some Auto Scaling
 	// lifecycle event hooks from the AWS account.
-	HooksNotCleanedUp []*AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
+	HooksNotCleanedUp []AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
 }
 
 // String returns the string representation
@@ -7772,7 +7772,7 @@ func (s UpdateDeploymentGroupOutput) GoString() string {
 }
 
 // SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.
-func (s *UpdateDeploymentGroupOutput) SetHooksNotCleanedUp(v []*AutoScalingGroup) *UpdateDeploymentGroupOutput {
+func (s *UpdateDeploymentGroupOutput) SetHooksNotCleanedUp(v []AutoScalingGroup) *UpdateDeploymentGroupOutput {
 	s.HooksNotCleanedUp = v
 	return s
 }

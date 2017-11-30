@@ -554,11 +554,11 @@ func ExampleIAM_CreateOpenIDConnectProviderRequest_shared00() {
 
 	svc := iam.New(cfg)
 	input := &iam.CreateOpenIDConnectProviderInput{
-		ClientIDList: []*string{
-			aws.String("my-application-id"),
+		ClientIDList: []string{
+			"my-application-id",
 		},
-		ThumbprintList: []*string{
-			aws.String("3768084dfb3d2b68b7897bf5f565da8efEXAMPLE"),
+		ThumbprintList: []string{
+			"3768084dfb3d2b68b7897bf5f565da8efEXAMPLE",
 		},
 		Url: aws.String("https://server.example.com"),
 	}

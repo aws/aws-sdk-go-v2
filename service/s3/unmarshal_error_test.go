@@ -201,7 +201,7 @@ func Test200NoErrorUnmarshalError(t *testing.T) {
 	req := s.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
 		Bucket: aws.String("bucket"), Key: aws.String("key"),
 		UploadId: aws.String("id"),
-		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []*s3.CompletedPart{
+		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []s3.CompletedPart{
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})
@@ -232,7 +232,7 @@ func Test200WithErrorUnmarshalError(t *testing.T) {
 	req := s.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
 		Bucket: aws.String("bucket"), Key: aws.String("key"),
 		UploadId: aws.String("id"),
-		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []*s3.CompletedPart{
+		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []s3.CompletedPart{
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})

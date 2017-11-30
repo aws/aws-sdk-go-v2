@@ -32,7 +32,7 @@ func setupChecksumValidation(r *request.Request) {
 }
 
 func verifySendMessage(r *request.Request) {
-	if r.DataFilled() && r.ParamsFilled() {
+	if r.ParamsFilled() {
 		in := r.Params.(*SendMessageInput)
 		out := r.Data.(*SendMessageOutput)
 		err := checksumsMatch(in.MessageBody, out.MD5OfMessageBody)
@@ -43,8 +43,8 @@ func verifySendMessage(r *request.Request) {
 }
 
 func verifySendMessageBatch(r *request.Request) {
-	if r.DataFilled() && r.ParamsFilled() {
-		entries := map[string]*SendMessageBatchResultEntry{}
+	if r.ParamsFilled() {
+		entries := map[string]SendMessageBatchResultEntry{}
 		ids := []string{}
 
 		out := r.Data.(*SendMessageBatchOutput)
@@ -54,11 +54,10 @@ func verifySendMessageBatch(r *request.Request) {
 
 		in := r.Params.(*SendMessageBatchInput)
 		for _, entry := range in.Entries {
-			if e := entries[*entry.Id]; e != nil {
-				err := checksumsMatch(entry.MessageBody, e.MD5OfMessageBody)
-				if err != nil {
-					ids = append(ids, *e.MessageId)
-				}
+			e := entries[*entry.Id]
+			err := checksumsMatch(entry.MessageBody, e.MD5OfMessageBody)
+			if err != nil {
+				ids = append(ids, *e.MessageId)
 			}
 		}
 		if len(ids) > 0 {
@@ -68,7 +67,7 @@ func verifySendMessageBatch(r *request.Request) {
 }
 
 func verifyReceiveMessage(r *request.Request) {
-	if r.DataFilled() && r.ParamsFilled() {
+	if r.ParamsFilled() {
 		ids := []string{}
 		out := r.Data.(*ReceiveMessageOutput)
 		for i, msg := range out.Messages {

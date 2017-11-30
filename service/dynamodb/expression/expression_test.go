@@ -45,10 +45,10 @@ func TestBuild(t *testing.T) {
 				expressionMap: map[expressionType]string{
 					condition: "#0 = :0",
 				},
-				namesMap: map[string]*string{
-					"#0": aws.String("foo"),
+				namesMap: map[string]string{
+					"#0": "foo",
 				},
-				valuesMap: map[string]*dynamodb.AttributeValue{
+				valuesMap: map[string]dynamodb.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -62,10 +62,10 @@ func TestBuild(t *testing.T) {
 				expressionMap: map[expressionType]string{
 					projection: "#0, #1, #2",
 				},
-				namesMap: map[string]*string{
-					"#0": aws.String("foo"),
-					"#1": aws.String("bar"),
-					"#2": aws.String("baz"),
+				namesMap: map[string]string{
+					"#0": "foo",
+					"#1": "bar",
+					"#2": "baz",
 				},
 			},
 		},
@@ -76,10 +76,10 @@ func TestBuild(t *testing.T) {
 				expressionMap: map[expressionType]string{
 					keyCondition: "#0 = :0",
 				},
-				namesMap: map[string]*string{
-					"#0": aws.String("foo"),
+				namesMap: map[string]string{
+					"#0": "foo",
 				},
-				valuesMap: map[string]*dynamodb.AttributeValue{
+				valuesMap: map[string]dynamodb.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -93,10 +93,10 @@ func TestBuild(t *testing.T) {
 				expressionMap: map[expressionType]string{
 					filter: "#0 = :0",
 				},
-				namesMap: map[string]*string{
-					"#0": aws.String("foo"),
+				namesMap: map[string]string{
+					"#0": "foo",
 				},
-				valuesMap: map[string]*dynamodb.AttributeValue{
+				valuesMap: map[string]dynamodb.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -110,10 +110,10 @@ func TestBuild(t *testing.T) {
 				expressionMap: map[expressionType]string{
 					update: "SET #0 = :0\n",
 				},
-				namesMap: map[string]*string{
-					"#0": aws.String("foo"),
+				namesMap: map[string]string{
+					"#0": "foo",
 				},
-				valuesMap: map[string]*dynamodb.AttributeValue{
+				valuesMap: map[string]dynamodb.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -136,12 +136,12 @@ func TestBuild(t *testing.T) {
 					keyCondition: "#0 = :2",
 					update:       "SET #0 = :3\n",
 				},
-				namesMap: map[string]*string{
-					"#0": aws.String("foo"),
-					"#1": aws.String("bar"),
-					"#2": aws.String("baz"),
+				namesMap: map[string]string{
+					"#0": "foo",
+					"#1": "bar",
+					"#2": "baz",
 				},
-				valuesMap: map[string]*dynamodb.AttributeValue{
+				valuesMap: map[string]dynamodb.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -491,7 +491,7 @@ func TestNames(t *testing.T) {
 	cases := []struct {
 		name     string
 		input    Builder
-		expected map[string]*string
+		expected map[string]string
 		err      exprErrorMode
 	}{
 		{
@@ -501,10 +501,10 @@ func TestNames(t *testing.T) {
 					projection: NamesList(Name("foo"), Name("bar"), Name("baz")),
 				},
 			},
-			expected: map[string]*string{
-				"#0": aws.String("foo"),
-				"#1": aws.String("bar"),
-				"#2": aws.String("baz"),
+			expected: map[string]string{
+				"#0": "foo",
+				"#1": "bar",
+				"#2": "baz",
 			},
 		},
 		{
@@ -548,10 +548,10 @@ func TestNames(t *testing.T) {
 					},
 				},
 			},
-			expected: map[string]*string{
-				"#0": aws.String("foo"),
-				"#1": aws.String("bar"),
-				"#2": aws.String("baz"),
+			expected: map[string]string{
+				"#0": "foo",
+				"#1": "bar",
+				"#2": "baz",
 			},
 		},
 		{
@@ -593,7 +593,7 @@ func TestValues(t *testing.T) {
 	cases := []struct {
 		name     string
 		input    Builder
-		expected map[string]*dynamodb.AttributeValue
+		expected map[string]dynamodb.AttributeValue
 		err      exprErrorMode
 	}{
 		{
@@ -603,7 +603,7 @@ func TestValues(t *testing.T) {
 					condition: Name("foo").Equal(Value(5)),
 				},
 			},
-			expected: map[string]*dynamodb.AttributeValue{
+			expected: map[string]dynamodb.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -650,7 +650,7 @@ func TestValues(t *testing.T) {
 					},
 				},
 			},
-			expected: map[string]*dynamodb.AttributeValue{
+			expected: map[string]dynamodb.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -792,8 +792,8 @@ func TestBuildExpressionString(t *testing.T) {
 	cases := []struct {
 		name               string
 		input              exprNode
-		expectedNames      map[string]*string
-		expectedValues     map[string]*dynamodb.AttributeValue
+		expectedNames      map[string]string
+		expectedValues     map[string]dynamodb.AttributeValue
 		expectedExpression string
 		err                exprErrorMode
 	}{
@@ -804,9 +804,9 @@ func TestBuildExpressionString(t *testing.T) {
 				fmtExpr: "$n",
 			},
 
-			expectedValues: map[string]*dynamodb.AttributeValue{},
-			expectedNames: map[string]*string{
-				"#0": aws.String("foo"),
+			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedNames: map[string]string{
+				"#0": "foo",
 			},
 			expectedExpression: "#0",
 		},
@@ -820,8 +820,8 @@ func TestBuildExpressionString(t *testing.T) {
 				},
 				fmtExpr: "$v",
 			},
-			expectedNames: map[string]*string{},
-			expectedValues: map[string]*dynamodb.AttributeValue{
+			expectedNames: map[string]string{},
+			expectedValues: map[string]dynamodb.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -835,10 +835,10 @@ func TestBuildExpressionString(t *testing.T) {
 				fmtExpr: "$n.$n",
 			},
 
-			expectedValues: map[string]*dynamodb.AttributeValue{},
-			expectedNames: map[string]*string{
-				"#0": aws.String("foo"),
-				"#1": aws.String("bar"),
+			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedNames: map[string]string{
+				"#0": "foo",
+				"#1": "bar",
 			},
 			expectedExpression: "#0.#1",
 		},
@@ -848,11 +848,11 @@ func TestBuildExpressionString(t *testing.T) {
 				names:   []string{"foo", "bar", "baz"},
 				fmtExpr: "$n.$n[0].$n",
 			},
-			expectedValues: map[string]*dynamodb.AttributeValue{},
-			expectedNames: map[string]*string{
-				"#0": aws.String("foo"),
-				"#1": aws.String("bar"),
-				"#2": aws.String("baz"),
+			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedNames: map[string]string{
+				"#0": "foo",
+				"#1": "bar",
+				"#2": "baz",
 			},
 			expectedExpression: "#0.#1[0].#2",
 		},
@@ -862,9 +862,9 @@ func TestBuildExpressionString(t *testing.T) {
 				names:   []string{"foo"},
 				fmtExpr: "size ($n)",
 			},
-			expectedValues: map[string]*dynamodb.AttributeValue{},
-			expectedNames: map[string]*string{
-				"#0": aws.String("foo"),
+			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedNames: map[string]string{
+				"#0": "foo",
 			},
 			expectedExpression: "size (#0)",
 		},
@@ -874,9 +874,9 @@ func TestBuildExpressionString(t *testing.T) {
 				names:   []string{"foo", "foo"},
 				fmtExpr: "$n.$n",
 			},
-			expectedValues: map[string]*dynamodb.AttributeValue{},
-			expectedNames: map[string]*string{
-				"#0": aws.String("foo"),
+			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedNames: map[string]string{
+				"#0": "foo",
 			},
 			expectedExpression: "#0.#0",
 		},
@@ -900,10 +900,10 @@ func TestBuildExpressionString(t *testing.T) {
 				fmtExpr: "$c = $c",
 			},
 
-			expectedNames: map[string]*string{
-				"#0": aws.String("foo"),
+			expectedNames: map[string]string{
+				"#0": "foo",
 			},
-			expectedValues: map[string]*dynamodb.AttributeValue{
+			expectedValues: map[string]dynamodb.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},

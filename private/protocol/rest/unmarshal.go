@@ -26,10 +26,8 @@ var UnmarshalMetaHandler = request.NamedHandler{Name: "awssdk.rest.UnmarshalMeta
 
 // Unmarshal unmarshals the REST component of a response in a REST service.
 func Unmarshal(r *request.Request) {
-	if r.DataFilled() {
-		v := reflect.Indirect(reflect.ValueOf(r.Data))
-		unmarshalBody(r, v)
-	}
+	v := reflect.Indirect(reflect.ValueOf(r.Data))
+	unmarshalBody(r, v)
 }
 
 // UnmarshalMeta unmarshals the REST metadata of a response in a REST service
@@ -39,10 +37,8 @@ func UnmarshalMeta(r *request.Request) {
 		// Alternative version of request id in the header
 		r.RequestID = r.HTTPResponse.Header.Get("X-Amz-Request-Id")
 	}
-	if r.DataFilled() {
-		v := reflect.Indirect(reflect.ValueOf(r.Data))
-		unmarshalLocationElements(r, v)
-	}
+	v := reflect.Indirect(reflect.ValueOf(r.Data))
+	unmarshalLocationElements(r, v)
 }
 
 func unmarshalBody(r *request.Request, v reflect.Value) {
@@ -142,17 +138,20 @@ func unmarshalStatusCode(v reflect.Value, statusCode int) {
 	case *int64:
 		s := int64(statusCode)
 		v.Set(reflect.ValueOf(&s))
+	case int64:
+		s := int64(statusCode)
+		v.Set(reflect.ValueOf(s))
 	}
 }
 
 func unmarshalHeaderMap(r reflect.Value, headers http.Header, prefix string) error {
 	switch r.Interface().(type) {
-	case map[string]*string: // we only support string map value types
-		out := map[string]*string{}
+	case map[string]string: // we only support string map value types
+		out := map[string]string{}
 		for k, v := range headers {
 			k = http.CanonicalHeaderKey(k)
 			if strings.HasPrefix(strings.ToLower(k), strings.ToLower(prefix)) {
-				out[k[len(prefix):]] = &v[0]
+				out[k[len(prefix):]] = v[0]
 			}
 		}
 		r.Set(reflect.ValueOf(out))
@@ -178,6 +177,8 @@ func unmarshalHeader(v reflect.Value, header string, tag reflect.StructTag) erro
 	switch v.Interface().(type) {
 	case *string:
 		v.Set(reflect.ValueOf(&header))
+	case string:
+		v.Set(reflect.ValueOf(header))
 	case []byte:
 		b, err := base64.StdEncoding.DecodeString(header)
 		if err != nil {
@@ -190,24 +191,48 @@ func unmarshalHeader(v reflect.Value, header string, tag reflect.StructTag) erro
 			return err
 		}
 		v.Set(reflect.ValueOf(&b))
+	case bool:
+		b, err := strconv.ParseBool(header)
+		if err != nil {
+			return err
+		}
+		v.Set(reflect.ValueOf(b))
 	case *int64:
 		i, err := strconv.ParseInt(header, 10, 64)
 		if err != nil {
 			return err
 		}
 		v.Set(reflect.ValueOf(&i))
+	case int64:
+		i, err := strconv.ParseInt(header, 10, 64)
+		if err != nil {
+			return err
+		}
+		v.Set(reflect.ValueOf(i))
 	case *float64:
 		f, err := strconv.ParseFloat(header, 64)
 		if err != nil {
 			return err
 		}
 		v.Set(reflect.ValueOf(&f))
+	case float64:
+		f, err := strconv.ParseFloat(header, 64)
+		if err != nil {
+			return err
+		}
+		v.Set(reflect.ValueOf(f))
 	case *time.Time:
 		t, err := time.Parse(RFC822, header)
 		if err != nil {
 			return err
 		}
 		v.Set(reflect.ValueOf(&t))
+	case time.Time:
+		t, err := time.Parse(RFC822, header)
+		if err != nil {
+			return err
+		}
+		v.Set(reflect.ValueOf(t))
 	case aws.JSONValue:
 		b := []byte(header)
 		var err error

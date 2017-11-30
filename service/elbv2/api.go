@@ -1921,7 +1921,7 @@ type Action struct {
 	// The type of action.
 	//
 	// Type is a required field
-	Type ActionTypeEnum `type:"string" required:"true"`
+	Type ActionTypeEnum `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1970,7 +1970,7 @@ type AddListenerCertificatesInput struct {
 	// The certificate to add. You can specify one certificate per call.
 	//
 	// Certificates is a required field
-	Certificates []*Certificate `type:"list" required:"true"`
+	Certificates []Certificate `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//
@@ -2007,7 +2007,7 @@ func (s *AddListenerCertificatesInput) Validate() error {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *AddListenerCertificatesInput) SetCertificates(v []*Certificate) *AddListenerCertificatesInput {
+func (s *AddListenerCertificatesInput) SetCertificates(v []Certificate) *AddListenerCertificatesInput {
 	s.Certificates = v
 	return s
 }
@@ -2023,7 +2023,7 @@ type AddListenerCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the certificates.
-	Certificates []*Certificate `type:"list"`
+	Certificates []Certificate `type:"list"`
 }
 
 // String returns the string representation
@@ -2037,7 +2037,7 @@ func (s AddListenerCertificatesOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *AddListenerCertificatesOutput) SetCertificates(v []*Certificate) *AddListenerCertificatesOutput {
+func (s *AddListenerCertificatesOutput) SetCertificates(v []Certificate) *AddListenerCertificatesOutput {
 	s.Certificates = v
 	return s
 }
@@ -2049,12 +2049,12 @@ type AddTagsInput struct {
 	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// ResourceArns is a required field
-	ResourceArns []*string `type:"list" required:"true"`
+	ResourceArns []string `type:"list" required:"true"`
 
 	// The tags. Each resource can have a maximum of 10 tags.
 	//
 	// Tags is a required field
-	Tags []*Tag `min:"1" type:"list" required:"true"`
+	Tags []Tag `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2083,9 +2083,6 @@ func (s *AddTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -2099,13 +2096,13 @@ func (s *AddTagsInput) Validate() error {
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *AddTagsInput) SetResourceArns(v []*string) *AddTagsInput {
+func (s *AddTagsInput) SetResourceArns(v []string) *AddTagsInput {
 	s.ResourceArns = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsInput) SetTags(v []*Tag) *AddTagsInput {
+func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 	s.Tags = v
 	return s
 }
@@ -2131,7 +2128,7 @@ type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
 	// [Network Load Balancers] The static IP address.
-	LoadBalancerAddresses []*LoadBalancerAddress `type:"list"`
+	LoadBalancerAddresses []LoadBalancerAddress `type:"list"`
 
 	// The ID of the subnet.
 	SubnetId *string `type:"string"`
@@ -2151,7 +2148,7 @@ func (s AvailabilityZone) GoString() string {
 }
 
 // SetLoadBalancerAddresses sets the LoadBalancerAddresses field's value.
-func (s *AvailabilityZone) SetLoadBalancerAddresses(v []*LoadBalancerAddress) *AvailabilityZone {
+func (s *AvailabilityZone) SetLoadBalancerAddresses(v []LoadBalancerAddress) *AvailabilityZone {
 	s.LoadBalancerAddresses = v
 	return s
 }
@@ -2242,14 +2239,14 @@ type CreateListenerInput struct {
 
 	// [HTTPS listeners] The SSL server certificate. You must provide exactly one
 	// certificate.
-	Certificates []*Certificate `type:"list"`
+	Certificates []Certificate `type:"list"`
 
 	// The default action for the listener. For Application Load Balancers, the
 	// protocol of the specified target group must be HTTP or HTTPS. For Network
 	// Load Balancers, the protocol of the specified target group must be TCP.
 	//
 	// DefaultActions is a required field
-	DefaultActions []*Action `type:"list" required:"true"`
+	DefaultActions []Action `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -2266,7 +2263,7 @@ type CreateListenerInput struct {
 	// Balancers, the supported protocol is TCP.
 	//
 	// Protocol is a required field
-	Protocol ProtocolEnum `type:"string" required:"true"`
+	Protocol ProtocolEnum `type:"string" required:"true" enum:"true"`
 
 	// [HTTPS listeners] The security policy that defines which ciphers and protocols
 	// are supported. The default is the current predefined security policy.
@@ -2306,9 +2303,6 @@ func (s *CreateListenerInput) Validate() error {
 	}
 	if s.DefaultActions != nil {
 		for i, v := range s.DefaultActions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2322,13 +2316,13 @@ func (s *CreateListenerInput) Validate() error {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *CreateListenerInput) SetCertificates(v []*Certificate) *CreateListenerInput {
+func (s *CreateListenerInput) SetCertificates(v []Certificate) *CreateListenerInput {
 	s.Certificates = v
 	return s
 }
 
 // SetDefaultActions sets the DefaultActions field's value.
-func (s *CreateListenerInput) SetDefaultActions(v []*Action) *CreateListenerInput {
+func (s *CreateListenerInput) SetDefaultActions(v []Action) *CreateListenerInput {
 	s.DefaultActions = v
 	return s
 }
@@ -2362,7 +2356,7 @@ type CreateListenerOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the listener.
-	Listeners []*Listener `type:"list"`
+	Listeners []Listener `type:"list"`
 }
 
 // String returns the string representation
@@ -2376,7 +2370,7 @@ func (s CreateListenerOutput) GoString() string {
 }
 
 // SetListeners sets the Listeners field's value.
-func (s *CreateListenerOutput) SetListeners(v []*Listener) *CreateListenerOutput {
+func (s *CreateListenerOutput) SetListeners(v []Listener) *CreateListenerOutput {
 	s.Listeners = v
 	return s
 }
@@ -2389,7 +2383,7 @@ type CreateLoadBalancerInput struct {
 	// for your load balancer. The possible values are ipv4 (for IPv4 addresses)
 	// and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must
 	// use ipv4.
-	IpAddressType IpAddressType `type:"string"`
+	IpAddressType IpAddressType `type:"string" enum:"true"`
 
 	// The name of the load balancer.
 	//
@@ -2411,11 +2405,11 @@ type CreateLoadBalancerInput struct {
 	// requests from clients with access to the VPC for the load balancer.
 	//
 	// The default is an Internet-facing load balancer.
-	Scheme LoadBalancerSchemeEnum `type:"string"`
+	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
 	// [Application Load Balancers] The IDs of the security groups to assign to
 	// the load balancer.
-	SecurityGroups []*string `type:"list"`
+	SecurityGroups []string `type:"list"`
 
 	// The IDs of the subnets to attach to the load balancer. You can specify only
 	// one subnet per Availability Zone. You must specify either subnets or subnet
@@ -2425,7 +2419,7 @@ type CreateLoadBalancerInput struct {
 	//
 	// [Application Load Balancers] You cannot specify Elastic IP addresses for
 	// your subnets.
-	SubnetMappings []*SubnetMapping `type:"list"`
+	SubnetMappings []SubnetMapping `type:"list"`
 
 	// The IDs of the subnets to attach to the load balancer. You can specify only
 	// one subnet per Availability Zone. You must specify either subnets or subnet
@@ -2433,13 +2427,13 @@ type CreateLoadBalancerInput struct {
 	//
 	// [Application Load Balancers] You must specify subnets from at least two Availability
 	// Zones.
-	Subnets []*string `type:"list"`
+	Subnets []string `type:"list"`
 
 	// One or more tags to assign to the load balancer.
-	Tags []*Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 
 	// The type of load balancer to create. The default is application.
-	Type LoadBalancerTypeEnum `type:"string"`
+	Type LoadBalancerTypeEnum `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2464,9 +2458,6 @@ func (s *CreateLoadBalancerInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -2498,25 +2489,25 @@ func (s *CreateLoadBalancerInput) SetScheme(v LoadBalancerSchemeEnum) *CreateLoa
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *CreateLoadBalancerInput) SetSecurityGroups(v []*string) *CreateLoadBalancerInput {
+func (s *CreateLoadBalancerInput) SetSecurityGroups(v []string) *CreateLoadBalancerInput {
 	s.SecurityGroups = v
 	return s
 }
 
 // SetSubnetMappings sets the SubnetMappings field's value.
-func (s *CreateLoadBalancerInput) SetSubnetMappings(v []*SubnetMapping) *CreateLoadBalancerInput {
+func (s *CreateLoadBalancerInput) SetSubnetMappings(v []SubnetMapping) *CreateLoadBalancerInput {
 	s.SubnetMappings = v
 	return s
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *CreateLoadBalancerInput) SetSubnets(v []*string) *CreateLoadBalancerInput {
+func (s *CreateLoadBalancerInput) SetSubnets(v []string) *CreateLoadBalancerInput {
 	s.Subnets = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateLoadBalancerInput) SetTags(v []*Tag) *CreateLoadBalancerInput {
+func (s *CreateLoadBalancerInput) SetTags(v []Tag) *CreateLoadBalancerInput {
 	s.Tags = v
 	return s
 }
@@ -2532,7 +2523,7 @@ type CreateLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the load balancer.
-	LoadBalancers []*LoadBalancer `type:"list"`
+	LoadBalancers []LoadBalancer `type:"list"`
 }
 
 // String returns the string representation
@@ -2546,7 +2537,7 @@ func (s CreateLoadBalancerOutput) GoString() string {
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
-func (s *CreateLoadBalancerOutput) SetLoadBalancers(v []*LoadBalancer) *CreateLoadBalancerOutput {
+func (s *CreateLoadBalancerOutput) SetLoadBalancers(v []LoadBalancer) *CreateLoadBalancerOutput {
 	s.LoadBalancers = v
 	return s
 }
@@ -2558,7 +2549,7 @@ type CreateRuleInput struct {
 	// An action. Each action has the type forward and specifies a target group.
 	//
 	// Actions is a required field
-	Actions []*Action `type:"list" required:"true"`
+	Actions []Action `type:"list" required:"true"`
 
 	// The conditions. Each condition specifies a field name and a single value.
 	//
@@ -2591,7 +2582,7 @@ type CreateRuleInput struct {
 	//    * ? (matches exactly 1 character)
 	//
 	// Conditions is a required field
-	Conditions []*RuleCondition `type:"list" required:"true"`
+	Conditions []RuleCondition `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//
@@ -2639,9 +2630,6 @@ func (s *CreateRuleInput) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2655,13 +2643,13 @@ func (s *CreateRuleInput) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *CreateRuleInput) SetActions(v []*Action) *CreateRuleInput {
+func (s *CreateRuleInput) SetActions(v []Action) *CreateRuleInput {
 	s.Actions = v
 	return s
 }
 
 // SetConditions sets the Conditions field's value.
-func (s *CreateRuleInput) SetConditions(v []*RuleCondition) *CreateRuleInput {
+func (s *CreateRuleInput) SetConditions(v []RuleCondition) *CreateRuleInput {
 	s.Conditions = v
 	return s
 }
@@ -2683,7 +2671,7 @@ type CreateRuleOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the rule.
-	Rules []*Rule `type:"list"`
+	Rules []Rule `type:"list"`
 }
 
 // String returns the string representation
@@ -2697,7 +2685,7 @@ func (s CreateRuleOutput) GoString() string {
 }
 
 // SetRules sets the Rules field's value.
-func (s *CreateRuleOutput) SetRules(v []*Rule) *CreateRuleOutput {
+func (s *CreateRuleOutput) SetRules(v []Rule) *CreateRuleOutput {
 	s.Rules = v
 	return s
 }
@@ -2725,7 +2713,7 @@ type CreateTargetGroupInput struct {
 	// The TCP protocol is supported only if the protocol of the target group is
 	// TCP. For Application Load Balancers, the default is HTTP. For Network Load
 	// Balancers, the default is TCP.
-	HealthCheckProtocol ProtocolEnum `type:"string"`
+	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, during which no response from a target means
 	// a failed health check. For Application Load Balancers, the range is 2 to
@@ -2763,7 +2751,7 @@ type CreateTargetGroupInput struct {
 	// the supported protocol is TCP.
 	//
 	// Protocol is a required field
-	Protocol ProtocolEnum `type:"string" required:"true"`
+	Protocol ProtocolEnum `type:"string" required:"true" enum:"true"`
 
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (targets are specified by
@@ -2775,7 +2763,7 @@ type CreateTargetGroupInput struct {
 	// private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8,
 	// 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10).
 	// You can't specify publicly routable IP addresses.
-	TargetType TargetTypeEnum `type:"string"`
+	TargetType TargetTypeEnum `type:"string" enum:"true"`
 
 	// The number of consecutive health check failures required before considering
 	// a target unhealthy. For Application Load Balancers, the default is 2. For
@@ -2930,7 +2918,7 @@ type CreateTargetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the target group.
-	TargetGroups []*TargetGroup `type:"list"`
+	TargetGroups []TargetGroup `type:"list"`
 }
 
 // String returns the string representation
@@ -2944,7 +2932,7 @@ func (s CreateTargetGroupOutput) GoString() string {
 }
 
 // SetTargetGroups sets the TargetGroups field's value.
-func (s *CreateTargetGroupOutput) SetTargetGroups(v []*TargetGroup) *CreateTargetGroupOutput {
+func (s *CreateTargetGroupOutput) SetTargetGroups(v []TargetGroup) *CreateTargetGroupOutput {
 	s.TargetGroups = v
 	return s
 }
@@ -3182,7 +3170,7 @@ type DeregisterTargetsInput struct {
 	// you must specify both the target ID and the port when you deregister it.
 	//
 	// Targets is a required field
-	Targets []*TargetDescription `type:"list" required:"true"`
+	Targets []TargetDescription `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3208,9 +3196,6 @@ func (s *DeregisterTargetsInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -3230,7 +3215,7 @@ func (s *DeregisterTargetsInput) SetTargetGroupArn(v string) *DeregisterTargetsI
 }
 
 // SetTargets sets the Targets field's value.
-func (s *DeregisterTargetsInput) SetTargets(v []*TargetDescription) *DeregisterTargetsInput {
+func (s *DeregisterTargetsInput) SetTargets(v []TargetDescription) *DeregisterTargetsInput {
 	s.Targets = v
 	return s
 }
@@ -3302,7 +3287,7 @@ type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the limits.
-	Limits []*Limit `type:"list"`
+	Limits []Limit `type:"list"`
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -3320,7 +3305,7 @@ func (s DescribeAccountLimitsOutput) GoString() string {
 }
 
 // SetLimits sets the Limits field's value.
-func (s *DescribeAccountLimitsOutput) SetLimits(v []*Limit) *DescribeAccountLimitsOutput {
+func (s *DescribeAccountLimitsOutput) SetLimits(v []Limit) *DescribeAccountLimitsOutput {
 	s.Limits = v
 	return s
 }
@@ -3398,7 +3383,7 @@ type DescribeListenerCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the certificates.
-	Certificates []*Certificate `type:"list"`
+	Certificates []Certificate `type:"list"`
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -3416,7 +3401,7 @@ func (s DescribeListenerCertificatesOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *DescribeListenerCertificatesOutput) SetCertificates(v []*Certificate) *DescribeListenerCertificatesOutput {
+func (s *DescribeListenerCertificatesOutput) SetCertificates(v []Certificate) *DescribeListenerCertificatesOutput {
 	s.Certificates = v
 	return s
 }
@@ -3432,7 +3417,7 @@ type DescribeListenersInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Names (ARN) of the listeners.
-	ListenerArns []*string `type:"list"`
+	ListenerArns []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string `type:"string"`
@@ -3469,7 +3454,7 @@ func (s *DescribeListenersInput) Validate() error {
 }
 
 // SetListenerArns sets the ListenerArns field's value.
-func (s *DescribeListenersInput) SetListenerArns(v []*string) *DescribeListenersInput {
+func (s *DescribeListenersInput) SetListenerArns(v []string) *DescribeListenersInput {
 	s.ListenerArns = v
 	return s
 }
@@ -3497,7 +3482,7 @@ type DescribeListenersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the listeners.
-	Listeners []*Listener `type:"list"`
+	Listeners []Listener `type:"list"`
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -3515,7 +3500,7 @@ func (s DescribeListenersOutput) GoString() string {
 }
 
 // SetListeners sets the Listeners field's value.
-func (s *DescribeListenersOutput) SetListeners(v []*Listener) *DescribeListenersOutput {
+func (s *DescribeListenersOutput) SetListeners(v []Listener) *DescribeListenersOutput {
 	s.Listeners = v
 	return s
 }
@@ -3571,7 +3556,7 @@ type DescribeLoadBalancerAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the load balancer attributes.
-	Attributes []*LoadBalancerAttribute `type:"list"`
+	Attributes []LoadBalancerAttribute `type:"list"`
 }
 
 // String returns the string representation
@@ -3585,7 +3570,7 @@ func (s DescribeLoadBalancerAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DescribeLoadBalancerAttributesOutput) SetAttributes(v []*LoadBalancerAttribute) *DescribeLoadBalancerAttributesOutput {
+func (s *DescribeLoadBalancerAttributesOutput) SetAttributes(v []LoadBalancerAttribute) *DescribeLoadBalancerAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -3596,14 +3581,14 @@ type DescribeLoadBalancersInput struct {
 
 	// The Amazon Resource Names (ARN) of the load balancers. You can specify up
 	// to 20 load balancers in a single call.
-	LoadBalancerArns []*string `type:"list"`
+	LoadBalancerArns []string `type:"list"`
 
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string `type:"string"`
 
 	// The names of the load balancers.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The maximum number of results to return with this call.
 	PageSize *int64 `min:"1" type:"integer"`
@@ -3633,7 +3618,7 @@ func (s *DescribeLoadBalancersInput) Validate() error {
 }
 
 // SetLoadBalancerArns sets the LoadBalancerArns field's value.
-func (s *DescribeLoadBalancersInput) SetLoadBalancerArns(v []*string) *DescribeLoadBalancersInput {
+func (s *DescribeLoadBalancersInput) SetLoadBalancerArns(v []string) *DescribeLoadBalancersInput {
 	s.LoadBalancerArns = v
 	return s
 }
@@ -3645,7 +3630,7 @@ func (s *DescribeLoadBalancersInput) SetMarker(v string) *DescribeLoadBalancersI
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeLoadBalancersInput) SetNames(v []*string) *DescribeLoadBalancersInput {
+func (s *DescribeLoadBalancersInput) SetNames(v []string) *DescribeLoadBalancersInput {
 	s.Names = v
 	return s
 }
@@ -3661,7 +3646,7 @@ type DescribeLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the load balancers.
-	LoadBalancers []*LoadBalancer `type:"list"`
+	LoadBalancers []LoadBalancer `type:"list"`
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -3679,7 +3664,7 @@ func (s DescribeLoadBalancersOutput) GoString() string {
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
-func (s *DescribeLoadBalancersOutput) SetLoadBalancers(v []*LoadBalancer) *DescribeLoadBalancersOutput {
+func (s *DescribeLoadBalancersOutput) SetLoadBalancers(v []LoadBalancer) *DescribeLoadBalancersOutput {
 	s.LoadBalancers = v
 	return s
 }
@@ -3705,7 +3690,7 @@ type DescribeRulesInput struct {
 	PageSize *int64 `min:"1" type:"integer"`
 
 	// The Amazon Resource Names (ARN) of the rules.
-	RuleArns []*string `type:"list"`
+	RuleArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3750,7 +3735,7 @@ func (s *DescribeRulesInput) SetPageSize(v int64) *DescribeRulesInput {
 }
 
 // SetRuleArns sets the RuleArns field's value.
-func (s *DescribeRulesInput) SetRuleArns(v []*string) *DescribeRulesInput {
+func (s *DescribeRulesInput) SetRuleArns(v []string) *DescribeRulesInput {
 	s.RuleArns = v
 	return s
 }
@@ -3764,7 +3749,7 @@ type DescribeRulesOutput struct {
 	NextMarker *string `type:"string"`
 
 	// Information about the rules.
-	Rules []*Rule `type:"list"`
+	Rules []Rule `type:"list"`
 }
 
 // String returns the string representation
@@ -3784,7 +3769,7 @@ func (s *DescribeRulesOutput) SetNextMarker(v string) *DescribeRulesOutput {
 }
 
 // SetRules sets the Rules field's value.
-func (s *DescribeRulesOutput) SetRules(v []*Rule) *DescribeRulesOutput {
+func (s *DescribeRulesOutput) SetRules(v []Rule) *DescribeRulesOutput {
 	s.Rules = v
 	return s
 }
@@ -3798,7 +3783,7 @@ type DescribeSSLPoliciesInput struct {
 	Marker *string `type:"string"`
 
 	// The names of the policies.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The maximum number of results to return with this call.
 	PageSize *int64 `min:"1" type:"integer"`
@@ -3834,7 +3819,7 @@ func (s *DescribeSSLPoliciesInput) SetMarker(v string) *DescribeSSLPoliciesInput
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeSSLPoliciesInput) SetNames(v []*string) *DescribeSSLPoliciesInput {
+func (s *DescribeSSLPoliciesInput) SetNames(v []string) *DescribeSSLPoliciesInput {
 	s.Names = v
 	return s
 }
@@ -3854,7 +3839,7 @@ type DescribeSSLPoliciesOutput struct {
 	NextMarker *string `type:"string"`
 
 	// Information about the policies.
-	SslPolicies []*SslPolicy `type:"list"`
+	SslPolicies []SslPolicy `type:"list"`
 }
 
 // String returns the string representation
@@ -3874,7 +3859,7 @@ func (s *DescribeSSLPoliciesOutput) SetNextMarker(v string) *DescribeSSLPolicies
 }
 
 // SetSslPolicies sets the SslPolicies field's value.
-func (s *DescribeSSLPoliciesOutput) SetSslPolicies(v []*SslPolicy) *DescribeSSLPoliciesOutput {
+func (s *DescribeSSLPoliciesOutput) SetSslPolicies(v []SslPolicy) *DescribeSSLPoliciesOutput {
 	s.SslPolicies = v
 	return s
 }
@@ -3886,7 +3871,7 @@ type DescribeTagsInput struct {
 	// The Amazon Resource Names (ARN) of the resources.
 	//
 	// ResourceArns is a required field
-	ResourceArns []*string `type:"list" required:"true"`
+	ResourceArns []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3914,7 +3899,7 @@ func (s *DescribeTagsInput) Validate() error {
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *DescribeTagsInput) SetResourceArns(v []*string) *DescribeTagsInput {
+func (s *DescribeTagsInput) SetResourceArns(v []string) *DescribeTagsInput {
 	s.ResourceArns = v
 	return s
 }
@@ -3924,7 +3909,7 @@ type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the tags.
-	TagDescriptions []*TagDescription `type:"list"`
+	TagDescriptions []TagDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -3938,7 +3923,7 @@ func (s DescribeTagsOutput) GoString() string {
 }
 
 // SetTagDescriptions sets the TagDescriptions field's value.
-func (s *DescribeTagsOutput) SetTagDescriptions(v []*TagDescription) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTagDescriptions(v []TagDescription) *DescribeTagsOutput {
 	s.TagDescriptions = v
 	return s
 }
@@ -3988,7 +3973,7 @@ type DescribeTargetGroupAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the target group attributes
-	Attributes []*TargetGroupAttribute `type:"list"`
+	Attributes []TargetGroupAttribute `type:"list"`
 }
 
 // String returns the string representation
@@ -4002,7 +3987,7 @@ func (s DescribeTargetGroupAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DescribeTargetGroupAttributesOutput) SetAttributes(v []*TargetGroupAttribute) *DescribeTargetGroupAttributesOutput {
+func (s *DescribeTargetGroupAttributesOutput) SetAttributes(v []TargetGroupAttribute) *DescribeTargetGroupAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -4019,13 +4004,13 @@ type DescribeTargetGroupsInput struct {
 	Marker *string `type:"string"`
 
 	// The names of the target groups.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The maximum number of results to return with this call.
 	PageSize *int64 `min:"1" type:"integer"`
 
 	// The Amazon Resource Names (ARN) of the target groups.
-	TargetGroupArns []*string `type:"list"`
+	TargetGroupArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4064,7 +4049,7 @@ func (s *DescribeTargetGroupsInput) SetMarker(v string) *DescribeTargetGroupsInp
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeTargetGroupsInput) SetNames(v []*string) *DescribeTargetGroupsInput {
+func (s *DescribeTargetGroupsInput) SetNames(v []string) *DescribeTargetGroupsInput {
 	s.Names = v
 	return s
 }
@@ -4076,7 +4061,7 @@ func (s *DescribeTargetGroupsInput) SetPageSize(v int64) *DescribeTargetGroupsIn
 }
 
 // SetTargetGroupArns sets the TargetGroupArns field's value.
-func (s *DescribeTargetGroupsInput) SetTargetGroupArns(v []*string) *DescribeTargetGroupsInput {
+func (s *DescribeTargetGroupsInput) SetTargetGroupArns(v []string) *DescribeTargetGroupsInput {
 	s.TargetGroupArns = v
 	return s
 }
@@ -4090,7 +4075,7 @@ type DescribeTargetGroupsOutput struct {
 	NextMarker *string `type:"string"`
 
 	// Information about the target groups.
-	TargetGroups []*TargetGroup `type:"list"`
+	TargetGroups []TargetGroup `type:"list"`
 }
 
 // String returns the string representation
@@ -4110,7 +4095,7 @@ func (s *DescribeTargetGroupsOutput) SetNextMarker(v string) *DescribeTargetGrou
 }
 
 // SetTargetGroups sets the TargetGroups field's value.
-func (s *DescribeTargetGroupsOutput) SetTargetGroups(v []*TargetGroup) *DescribeTargetGroupsOutput {
+func (s *DescribeTargetGroupsOutput) SetTargetGroups(v []TargetGroup) *DescribeTargetGroupsOutput {
 	s.TargetGroups = v
 	return s
 }
@@ -4125,7 +4110,7 @@ type DescribeTargetHealthInput struct {
 	TargetGroupArn *string `type:"string" required:"true"`
 
 	// The targets.
-	Targets []*TargetDescription `type:"list"`
+	Targets []TargetDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -4147,9 +4132,6 @@ func (s *DescribeTargetHealthInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -4169,7 +4151,7 @@ func (s *DescribeTargetHealthInput) SetTargetGroupArn(v string) *DescribeTargetH
 }
 
 // SetTargets sets the Targets field's value.
-func (s *DescribeTargetHealthInput) SetTargets(v []*TargetDescription) *DescribeTargetHealthInput {
+func (s *DescribeTargetHealthInput) SetTargets(v []TargetDescription) *DescribeTargetHealthInput {
 	s.Targets = v
 	return s
 }
@@ -4179,7 +4161,7 @@ type DescribeTargetHealthOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the health of the targets.
-	TargetHealthDescriptions []*TargetHealthDescription `type:"list"`
+	TargetHealthDescriptions []TargetHealthDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -4193,7 +4175,7 @@ func (s DescribeTargetHealthOutput) GoString() string {
 }
 
 // SetTargetHealthDescriptions sets the TargetHealthDescriptions field's value.
-func (s *DescribeTargetHealthOutput) SetTargetHealthDescriptions(v []*TargetHealthDescription) *DescribeTargetHealthOutput {
+func (s *DescribeTargetHealthOutput) SetTargetHealthDescriptions(v []TargetHealthDescription) *DescribeTargetHealthOutput {
 	s.TargetHealthDescriptions = v
 	return s
 }
@@ -4253,10 +4235,10 @@ type Listener struct {
 
 	// The SSL server certificate. You must provide a certificate if the protocol
 	// is HTTPS.
-	Certificates []*Certificate `type:"list"`
+	Certificates []Certificate `type:"list"`
 
 	// The default actions for the listener.
-	DefaultActions []*Action `type:"list"`
+	DefaultActions []Action `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the listener.
 	ListenerArn *string `type:"string"`
@@ -4268,7 +4250,7 @@ type Listener struct {
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol for connections from clients to the load balancer.
-	Protocol ProtocolEnum `type:"string"`
+	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The security policy that defines which ciphers and protocols are supported.
 	// The default is the current predefined security policy.
@@ -4286,13 +4268,13 @@ func (s Listener) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *Listener) SetCertificates(v []*Certificate) *Listener {
+func (s *Listener) SetCertificates(v []Certificate) *Listener {
 	s.Certificates = v
 	return s
 }
 
 // SetDefaultActions sets the DefaultActions field's value.
-func (s *Listener) SetDefaultActions(v []*Action) *Listener {
+func (s *Listener) SetDefaultActions(v []Action) *Listener {
 	s.DefaultActions = v
 	return s
 }
@@ -4333,7 +4315,7 @@ type LoadBalancer struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zones for the load balancer.
-	AvailabilityZones []*AvailabilityZone `type:"list"`
+	AvailabilityZones []AvailabilityZone `type:"list"`
 
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string `type:"string"`
@@ -4347,7 +4329,7 @@ type LoadBalancer struct {
 	// The type of IP addresses used by the subnets for your load balancer. The
 	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and
 	// IPv6 addresses).
-	IpAddressType IpAddressType `type:"string"`
+	IpAddressType IpAddressType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string `type:"string"`
@@ -4364,16 +4346,16 @@ type LoadBalancer struct {
 	// DNS name of an internal load balancer is publicly resolvable to the private
 	// IP addresses of the nodes. Therefore, internal load balancers can only route
 	// requests from clients with access to the VPC for the load balancer.
-	Scheme LoadBalancerSchemeEnum `type:"string"`
+	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
 	// The IDs of the security groups for the load balancer.
-	SecurityGroups []*string `type:"list"`
+	SecurityGroups []string `type:"list"`
 
 	// The state of the load balancer.
 	State *LoadBalancerState `type:"structure"`
 
 	// The type of load balancer.
-	Type LoadBalancerTypeEnum `type:"string"`
+	Type LoadBalancerTypeEnum `type:"string" enum:"true"`
 
 	// The ID of the VPC for the load balancer.
 	VpcId *string `type:"string"`
@@ -4390,7 +4372,7 @@ func (s LoadBalancer) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *LoadBalancer) SetAvailabilityZones(v []*AvailabilityZone) *LoadBalancer {
+func (s *LoadBalancer) SetAvailabilityZones(v []AvailabilityZone) *LoadBalancer {
 	s.AvailabilityZones = v
 	return s
 }
@@ -4438,7 +4420,7 @@ func (s *LoadBalancer) SetScheme(v LoadBalancerSchemeEnum) *LoadBalancer {
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *LoadBalancer) SetSecurityGroups(v []*string) *LoadBalancer {
+func (s *LoadBalancer) SetSecurityGroups(v []string) *LoadBalancer {
 	s.SecurityGroups = v
 	return s
 }
@@ -4557,7 +4539,7 @@ type LoadBalancerState struct {
 	// The state code. The initial state of the load balancer is provisioning. After
 	// the load balancer is fully set up and ready to route traffic, its state is
 	// active. If the load balancer could not be set up, its state is failed.
-	Code LoadBalancerStateEnum `type:"string"`
+	Code LoadBalancerStateEnum `type:"string" enum:"true"`
 
 	// A description of the state.
 	Reason *string `type:"string"`
@@ -4637,12 +4619,12 @@ type ModifyListenerInput struct {
 	_ struct{} `type:"structure"`
 
 	// The default SSL server certificate.
-	Certificates []*Certificate `type:"list"`
+	Certificates []Certificate `type:"list"`
 
 	// The default action. For Application Load Balancers, the protocol of the specified
 	// target group must be HTTP or HTTPS. For Network Load Balancers, the protocol
 	// of the specified target group must be TCP.
-	DefaultActions []*Action `type:"list"`
+	DefaultActions []Action `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//
@@ -4655,7 +4637,7 @@ type ModifyListenerInput struct {
 	// The protocol for connections from clients to the load balancer. Application
 	// Load Balancers support HTTP and HTTPS and Network Load Balancers support
 	// TCP.
-	Protocol ProtocolEnum `type:"string"`
+	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The security policy that defines which protocols and ciphers are supported.
 	// For more information, see Security Policies (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
@@ -4685,9 +4667,6 @@ func (s *ModifyListenerInput) Validate() error {
 	}
 	if s.DefaultActions != nil {
 		for i, v := range s.DefaultActions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(aws.ErrInvalidParams))
 			}
@@ -4701,13 +4680,13 @@ func (s *ModifyListenerInput) Validate() error {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *ModifyListenerInput) SetCertificates(v []*Certificate) *ModifyListenerInput {
+func (s *ModifyListenerInput) SetCertificates(v []Certificate) *ModifyListenerInput {
 	s.Certificates = v
 	return s
 }
 
 // SetDefaultActions sets the DefaultActions field's value.
-func (s *ModifyListenerInput) SetDefaultActions(v []*Action) *ModifyListenerInput {
+func (s *ModifyListenerInput) SetDefaultActions(v []Action) *ModifyListenerInput {
 	s.DefaultActions = v
 	return s
 }
@@ -4741,7 +4720,7 @@ type ModifyListenerOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the modified listeners.
-	Listeners []*Listener `type:"list"`
+	Listeners []Listener `type:"list"`
 }
 
 // String returns the string representation
@@ -4755,7 +4734,7 @@ func (s ModifyListenerOutput) GoString() string {
 }
 
 // SetListeners sets the Listeners field's value.
-func (s *ModifyListenerOutput) SetListeners(v []*Listener) *ModifyListenerOutput {
+func (s *ModifyListenerOutput) SetListeners(v []Listener) *ModifyListenerOutput {
 	s.Listeners = v
 	return s
 }
@@ -4767,7 +4746,7 @@ type ModifyLoadBalancerAttributesInput struct {
 	// The load balancer attributes.
 	//
 	// Attributes is a required field
-	Attributes []*LoadBalancerAttribute `type:"list" required:"true"`
+	Attributes []LoadBalancerAttribute `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -4804,7 +4783,7 @@ func (s *ModifyLoadBalancerAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ModifyLoadBalancerAttributesInput) SetAttributes(v []*LoadBalancerAttribute) *ModifyLoadBalancerAttributesInput {
+func (s *ModifyLoadBalancerAttributesInput) SetAttributes(v []LoadBalancerAttribute) *ModifyLoadBalancerAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -4820,7 +4799,7 @@ type ModifyLoadBalancerAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the load balancer attributes.
-	Attributes []*LoadBalancerAttribute `type:"list"`
+	Attributes []LoadBalancerAttribute `type:"list"`
 }
 
 // String returns the string representation
@@ -4834,7 +4813,7 @@ func (s ModifyLoadBalancerAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ModifyLoadBalancerAttributesOutput) SetAttributes(v []*LoadBalancerAttribute) *ModifyLoadBalancerAttributesOutput {
+func (s *ModifyLoadBalancerAttributesOutput) SetAttributes(v []LoadBalancerAttribute) *ModifyLoadBalancerAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -4844,10 +4823,10 @@ type ModifyRuleInput struct {
 	_ struct{} `type:"structure"`
 
 	// The actions. The target group must use the HTTP or HTTPS protocol.
-	Actions []*Action `type:"list"`
+	Actions []Action `type:"list"`
 
 	// The conditions.
-	Conditions []*RuleCondition `type:"list"`
+	Conditions []RuleCondition `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the rule.
 	//
@@ -4874,9 +4853,6 @@ func (s *ModifyRuleInput) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -4890,13 +4866,13 @@ func (s *ModifyRuleInput) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *ModifyRuleInput) SetActions(v []*Action) *ModifyRuleInput {
+func (s *ModifyRuleInput) SetActions(v []Action) *ModifyRuleInput {
 	s.Actions = v
 	return s
 }
 
 // SetConditions sets the Conditions field's value.
-func (s *ModifyRuleInput) SetConditions(v []*RuleCondition) *ModifyRuleInput {
+func (s *ModifyRuleInput) SetConditions(v []RuleCondition) *ModifyRuleInput {
 	s.Conditions = v
 	return s
 }
@@ -4912,7 +4888,7 @@ type ModifyRuleOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the rule.
-	Rules []*Rule `type:"list"`
+	Rules []Rule `type:"list"`
 }
 
 // String returns the string representation
@@ -4926,7 +4902,7 @@ func (s ModifyRuleOutput) GoString() string {
 }
 
 // SetRules sets the Rules field's value.
-func (s *ModifyRuleOutput) SetRules(v []*Rule) *ModifyRuleOutput {
+func (s *ModifyRuleOutput) SetRules(v []Rule) *ModifyRuleOutput {
 	s.Rules = v
 	return s
 }
@@ -4938,7 +4914,7 @@ type ModifyTargetGroupAttributesInput struct {
 	// The attributes.
 	//
 	// Attributes is a required field
-	Attributes []*TargetGroupAttribute `type:"list" required:"true"`
+	Attributes []TargetGroupAttribute `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the target group.
 	//
@@ -4975,7 +4951,7 @@ func (s *ModifyTargetGroupAttributesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ModifyTargetGroupAttributesInput) SetAttributes(v []*TargetGroupAttribute) *ModifyTargetGroupAttributesInput {
+func (s *ModifyTargetGroupAttributesInput) SetAttributes(v []TargetGroupAttribute) *ModifyTargetGroupAttributesInput {
 	s.Attributes = v
 	return s
 }
@@ -4991,7 +4967,7 @@ type ModifyTargetGroupAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the attributes.
-	Attributes []*TargetGroupAttribute `type:"list"`
+	Attributes []TargetGroupAttribute `type:"list"`
 }
 
 // String returns the string representation
@@ -5005,7 +4981,7 @@ func (s ModifyTargetGroupAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ModifyTargetGroupAttributesOutput) SetAttributes(v []*TargetGroupAttribute) *ModifyTargetGroupAttributesOutput {
+func (s *ModifyTargetGroupAttributesOutput) SetAttributes(v []TargetGroupAttribute) *ModifyTargetGroupAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -5029,7 +5005,7 @@ type ModifyTargetGroupInput struct {
 	// The protocol the load balancer uses when performing health checks on targets.
 	// The TCP protocol is supported only if the protocol of the target group is
 	// TCP.
-	HealthCheckProtocol ProtocolEnum `type:"string"`
+	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no
 	// response means a failed health check.
@@ -5157,7 +5133,7 @@ type ModifyTargetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the target group.
-	TargetGroups []*TargetGroup `type:"list"`
+	TargetGroups []TargetGroup `type:"list"`
 }
 
 // String returns the string representation
@@ -5171,7 +5147,7 @@ func (s ModifyTargetGroupOutput) GoString() string {
 }
 
 // SetTargetGroups sets the TargetGroups field's value.
-func (s *ModifyTargetGroupOutput) SetTargetGroups(v []*TargetGroup) *ModifyTargetGroupOutput {
+func (s *ModifyTargetGroupOutput) SetTargetGroups(v []TargetGroup) *ModifyTargetGroupOutput {
 	s.TargetGroups = v
 	return s
 }
@@ -5188,7 +5164,7 @@ type RegisterTargetsInput struct {
 	// The targets.
 	//
 	// Targets is a required field
-	Targets []*TargetDescription `type:"list" required:"true"`
+	Targets []TargetDescription `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5214,9 +5190,6 @@ func (s *RegisterTargetsInput) Validate() error {
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
@@ -5236,7 +5209,7 @@ func (s *RegisterTargetsInput) SetTargetGroupArn(v string) *RegisterTargetsInput
 }
 
 // SetTargets sets the Targets field's value.
-func (s *RegisterTargetsInput) SetTargets(v []*TargetDescription) *RegisterTargetsInput {
+func (s *RegisterTargetsInput) SetTargets(v []TargetDescription) *RegisterTargetsInput {
 	s.Targets = v
 	return s
 }
@@ -5263,7 +5236,7 @@ type RemoveListenerCertificatesInput struct {
 	// The certificate to remove. You can specify one certificate per call.
 	//
 	// Certificates is a required field
-	Certificates []*Certificate `type:"list" required:"true"`
+	Certificates []Certificate `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//
@@ -5300,7 +5273,7 @@ func (s *RemoveListenerCertificatesInput) Validate() error {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *RemoveListenerCertificatesInput) SetCertificates(v []*Certificate) *RemoveListenerCertificatesInput {
+func (s *RemoveListenerCertificatesInput) SetCertificates(v []Certificate) *RemoveListenerCertificatesInput {
 	s.Certificates = v
 	return s
 }
@@ -5333,12 +5306,12 @@ type RemoveTagsInput struct {
 	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// ResourceArns is a required field
-	ResourceArns []*string `type:"list" required:"true"`
+	ResourceArns []string `type:"list" required:"true"`
 
 	// The tag keys for the tags to remove.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5370,13 +5343,13 @@ func (s *RemoveTagsInput) Validate() error {
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *RemoveTagsInput) SetResourceArns(v []*string) *RemoveTagsInput {
+func (s *RemoveTagsInput) SetResourceArns(v []string) *RemoveTagsInput {
 	s.ResourceArns = v
 	return s
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsInput) SetTagKeys(v []*string) *RemoveTagsInput {
+func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -5402,10 +5375,10 @@ type Rule struct {
 	_ struct{} `type:"structure"`
 
 	// The actions.
-	Actions []*Action `type:"list"`
+	Actions []Action `type:"list"`
 
 	// The conditions.
-	Conditions []*RuleCondition `type:"list"`
+	Conditions []RuleCondition `type:"list"`
 
 	// Indicates whether this is the default rule.
 	IsDefault *bool `type:"boolean"`
@@ -5428,13 +5401,13 @@ func (s Rule) GoString() string {
 }
 
 // SetActions sets the Actions field's value.
-func (s *Rule) SetActions(v []*Action) *Rule {
+func (s *Rule) SetActions(v []Action) *Rule {
 	s.Actions = v
 	return s
 }
 
 // SetConditions sets the Conditions field's value.
-func (s *Rule) SetConditions(v []*RuleCondition) *Rule {
+func (s *Rule) SetConditions(v []RuleCondition) *Rule {
 	s.Conditions = v
 	return s
 }
@@ -5494,7 +5467,7 @@ type RuleCondition struct {
 	//    * * (matches 0 or more characters)
 	//
 	//    * ? (matches exactly 1 character)
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5514,7 +5487,7 @@ func (s *RuleCondition) SetField(v string) *RuleCondition {
 }
 
 // SetValues sets the Values field's value.
-func (s *RuleCondition) SetValues(v []*string) *RuleCondition {
+func (s *RuleCondition) SetValues(v []string) *RuleCondition {
 	s.Values = v
 	return s
 }
@@ -5575,7 +5548,7 @@ type SetIpAddressTypeInput struct {
 	// ipv4.
 	//
 	// IpAddressType is a required field
-	IpAddressType IpAddressType `type:"string" required:"true"`
+	IpAddressType IpAddressType `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -5627,7 +5600,7 @@ type SetIpAddressTypeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IP address type.
-	IpAddressType IpAddressType `type:"string"`
+	IpAddressType IpAddressType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5653,7 +5626,7 @@ type SetRulePrioritiesInput struct {
 	// The rule priorities.
 	//
 	// RulePriorities is a required field
-	RulePriorities []*RulePriorityPair `type:"list" required:"true"`
+	RulePriorities []RulePriorityPair `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5675,9 +5648,6 @@ func (s *SetRulePrioritiesInput) Validate() error {
 	}
 	if s.RulePriorities != nil {
 		for i, v := range s.RulePriorities {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RulePriorities", i), err.(aws.ErrInvalidParams))
 			}
@@ -5691,7 +5661,7 @@ func (s *SetRulePrioritiesInput) Validate() error {
 }
 
 // SetRulePriorities sets the RulePriorities field's value.
-func (s *SetRulePrioritiesInput) SetRulePriorities(v []*RulePriorityPair) *SetRulePrioritiesInput {
+func (s *SetRulePrioritiesInput) SetRulePriorities(v []RulePriorityPair) *SetRulePrioritiesInput {
 	s.RulePriorities = v
 	return s
 }
@@ -5701,7 +5671,7 @@ type SetRulePrioritiesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the rules.
-	Rules []*Rule `type:"list"`
+	Rules []Rule `type:"list"`
 }
 
 // String returns the string representation
@@ -5715,7 +5685,7 @@ func (s SetRulePrioritiesOutput) GoString() string {
 }
 
 // SetRules sets the Rules field's value.
-func (s *SetRulePrioritiesOutput) SetRules(v []*Rule) *SetRulePrioritiesOutput {
+func (s *SetRulePrioritiesOutput) SetRules(v []Rule) *SetRulePrioritiesOutput {
 	s.Rules = v
 	return s
 }
@@ -5732,7 +5702,7 @@ type SetSecurityGroupsInput struct {
 	// The IDs of the security groups.
 	//
 	// SecurityGroups is a required field
-	SecurityGroups []*string `type:"list" required:"true"`
+	SecurityGroups []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5770,7 +5740,7 @@ func (s *SetSecurityGroupsInput) SetLoadBalancerArn(v string) *SetSecurityGroups
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
-func (s *SetSecurityGroupsInput) SetSecurityGroups(v []*string) *SetSecurityGroupsInput {
+func (s *SetSecurityGroupsInput) SetSecurityGroups(v []string) *SetSecurityGroupsInput {
 	s.SecurityGroups = v
 	return s
 }
@@ -5780,7 +5750,7 @@ type SetSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IDs of the security groups associated with the load balancer.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5794,7 +5764,7 @@ func (s SetSecurityGroupsOutput) GoString() string {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *SetSecurityGroupsOutput) SetSecurityGroupIds(v []*string) *SetSecurityGroupsOutput {
+func (s *SetSecurityGroupsOutput) SetSecurityGroupIds(v []string) *SetSecurityGroupsOutput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -5814,14 +5784,14 @@ type SetSubnetsInput struct {
 	//
 	// The load balancer is allocated one static IP address per subnet. You cannot
 	// specify your own Elastic IP addresses.
-	SubnetMappings []*SubnetMapping `type:"list"`
+	SubnetMappings []SubnetMapping `type:"list"`
 
 	// The IDs of the subnets. You must specify subnets from at least two Availability
 	// Zones. You can specify only one subnet per Availability Zone. You must specify
 	// either subnets or subnet mappings.
 	//
 	// Subnets is a required field
-	Subnets []*string `type:"list" required:"true"`
+	Subnets []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5859,13 +5829,13 @@ func (s *SetSubnetsInput) SetLoadBalancerArn(v string) *SetSubnetsInput {
 }
 
 // SetSubnetMappings sets the SubnetMappings field's value.
-func (s *SetSubnetsInput) SetSubnetMappings(v []*SubnetMapping) *SetSubnetsInput {
+func (s *SetSubnetsInput) SetSubnetMappings(v []SubnetMapping) *SetSubnetsInput {
 	s.SubnetMappings = v
 	return s
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *SetSubnetsInput) SetSubnets(v []*string) *SetSubnetsInput {
+func (s *SetSubnetsInput) SetSubnets(v []string) *SetSubnetsInput {
 	s.Subnets = v
 	return s
 }
@@ -5875,7 +5845,7 @@ type SetSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the subnet and Availability Zone.
-	AvailabilityZones []*AvailabilityZone `type:"list"`
+	AvailabilityZones []AvailabilityZone `type:"list"`
 }
 
 // String returns the string representation
@@ -5889,7 +5859,7 @@ func (s SetSubnetsOutput) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *SetSubnetsOutput) SetAvailabilityZones(v []*AvailabilityZone) *SetSubnetsOutput {
+func (s *SetSubnetsOutput) SetAvailabilityZones(v []AvailabilityZone) *SetSubnetsOutput {
 	s.AvailabilityZones = v
 	return s
 }
@@ -5900,13 +5870,13 @@ type SslPolicy struct {
 	_ struct{} `type:"structure"`
 
 	// The ciphers.
-	Ciphers []*Cipher `type:"list"`
+	Ciphers []Cipher `type:"list"`
 
 	// The name of the policy.
 	Name *string `type:"string"`
 
 	// The protocols.
-	SslProtocols []*string `type:"list"`
+	SslProtocols []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5920,7 +5890,7 @@ func (s SslPolicy) GoString() string {
 }
 
 // SetCiphers sets the Ciphers field's value.
-func (s *SslPolicy) SetCiphers(v []*Cipher) *SslPolicy {
+func (s *SslPolicy) SetCiphers(v []Cipher) *SslPolicy {
 	s.Ciphers = v
 	return s
 }
@@ -5932,7 +5902,7 @@ func (s *SslPolicy) SetName(v string) *SslPolicy {
 }
 
 // SetSslProtocols sets the SslProtocols field's value.
-func (s *SslPolicy) SetSslProtocols(v []*string) *SslPolicy {
+func (s *SslPolicy) SetSslProtocols(v []string) *SslPolicy {
 	s.SslProtocols = v
 	return s
 }
@@ -6033,7 +6003,7 @@ type TagDescription struct {
 	ResourceArn *string `type:"string"`
 
 	// Information about the tags.
-	Tags []*Tag `min:"1" type:"list"`
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -6053,7 +6023,7 @@ func (s *TagDescription) SetResourceArn(v string) *TagDescription {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagDescription) SetTags(v []*Tag) *TagDescription {
+func (s *TagDescription) SetTags(v []Tag) *TagDescription {
 	s.Tags = v
 	return s
 }
@@ -6147,7 +6117,7 @@ type TargetGroup struct {
 	HealthCheckPort *string `type:"string"`
 
 	// The protocol to use to connect with the target.
-	HealthCheckProtocol ProtocolEnum `type:"string"`
+	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The amount of time, in seconds, during which no response means a failed health
 	// check.
@@ -6159,7 +6129,7 @@ type TargetGroup struct {
 
 	// The Amazon Resource Names (ARN) of the load balancers that route traffic
 	// to this target group.
-	LoadBalancerArns []*string `type:"list"`
+	LoadBalancerArns []string `type:"list"`
 
 	// The HTTP codes to use when checking for a successful response from a target.
 	Matcher *Matcher `type:"structure"`
@@ -6168,7 +6138,7 @@ type TargetGroup struct {
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol to use for routing traffic to the targets.
-	Protocol ProtocolEnum `type:"string"`
+	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the target group.
 	TargetGroupArn *string `type:"string"`
@@ -6179,7 +6149,7 @@ type TargetGroup struct {
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (targets are specified by
 	// instance ID) or ip (targets are specified by IP address).
-	TargetType TargetTypeEnum `type:"string"`
+	TargetType TargetTypeEnum `type:"string" enum:"true"`
 
 	// The number of consecutive health check failures required before considering
 	// the target unhealthy.
@@ -6236,7 +6206,7 @@ func (s *TargetGroup) SetHealthyThresholdCount(v int64) *TargetGroup {
 }
 
 // SetLoadBalancerArns sets the LoadBalancerArns field's value.
-func (s *TargetGroup) SetLoadBalancerArns(v []*string) *TargetGroup {
+func (s *TargetGroup) SetLoadBalancerArns(v []string) *TargetGroup {
 	s.LoadBalancerArns = v
 	return s
 }
@@ -6393,10 +6363,10 @@ type TargetHealth struct {
 	//
 	//    * Target.DeregistrationInProgress - The target is in the process of being
 	//    deregistered and the deregistration delay period has not expired.
-	Reason TargetHealthReasonEnum `type:"string"`
+	Reason TargetHealthReasonEnum `type:"string" enum:"true"`
 
 	// The state of the target.
-	State TargetHealthStateEnum `type:"string"`
+	State TargetHealthStateEnum `type:"string" enum:"true"`
 }
 
 // String returns the string representation

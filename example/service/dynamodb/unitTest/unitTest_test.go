@@ -23,10 +23,10 @@ type fakeDynamoDB struct {
 // Mock GetItem such that the output returned carries values identical to input.
 func (fd *fakeDynamoDB) GetItemRequest(input *dynamodb.GetItemInput) dynamodb.GetItemRequest {
 	output := &dynamodb.GetItemOutput{
-		Item: map[string]*dynamodb.AttributeValue{},
+		Item: map[string]dynamodb.AttributeValue{},
 	}
 	for key, value := range fd.payload {
-		output.Item[key] = &dynamodb.AttributeValue{
+		output.Item[key] = dynamodb.AttributeValue{
 			S: aws.String(value),
 		}
 	}

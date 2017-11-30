@@ -2933,7 +2933,7 @@ type Account struct {
 	Id *string `type:"string"`
 
 	// The method by which the account joined the organization.
-	JoinedMethod AccountJoinedMethod `type:"string"`
+	JoinedMethod AccountJoinedMethod `type:"string" enum:"true"`
 
 	// The date the account became a part of the organization.
 	JoinedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2946,7 +2946,7 @@ type Account struct {
 	Name *string `min:"1" type:"string"`
 
 	// The status of the account in the organization.
-	Status AccountStatus `type:"string"`
+	Status AccountStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3177,7 +3177,7 @@ type Child struct {
 	Id *string `type:"string"`
 
 	// The type of this child entity.
-	Type ChildType `type:"string"`
+	Type ChildType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3230,7 +3230,7 @@ type CreateAccountInput struct {
 	// If you do not specify this parameter, the value defaults to ALLOW, and IAM
 	// users and roles with the required permissions can access billing information
 	// for the new account.
-	IamUserAccessToBilling IAMUserAccessToBilling `type:"string"`
+	IamUserAccessToBilling IAMUserAccessToBilling `type:"string" enum:"true"`
 
 	// (Optional)
 	//
@@ -3376,7 +3376,7 @@ type CreateAccountStatus struct {
 	//
 	//    * INTERNAL_FAILURE: The account could not be created because of an internal
 	//    failure. Try again later. If the problem persists, contact Customer Support.
-	FailureReason CreateAccountFailureReason `type:"string"`
+	FailureReason CreateAccountFailureReason `type:"string" enum:"true"`
 
 	// The unique identifier (ID) that references this request. You get this value
 	// from the response of the initial CreateAccount request to create the account.
@@ -3390,7 +3390,7 @@ type CreateAccountStatus struct {
 	RequestedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the request.
-	State CreateAccountState `type:"string"`
+	State CreateAccountState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3462,7 +3462,7 @@ type CreateOrganizationInput struct {
 	//    member account in the organization. For more information, see All features
 	//    (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
 	//    in the AWS Organizations User Guide.
-	FeatureSet OrganizationFeatureSet `type:"string"`
+	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3634,7 +3634,7 @@ type CreatePolicyInput struct {
 	// service control policy (SCP).
 	//
 	// Type is a required field
-	Type PolicyType `type:"string" required:"true"`
+	Type PolicyType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4425,7 +4425,7 @@ type DisablePolicyTypeInput struct {
 	// The policy type that you want to disable in this root.
 	//
 	// PolicyType is a required field
-	PolicyType PolicyType `type:"string" required:"true"`
+	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
 
 	// The unique identifier (ID) of the root in which you want to disable a policy
 	// type. You can get the ID from the ListRoots operation.
@@ -4547,7 +4547,7 @@ type EnablePolicyTypeInput struct {
 	// The policy type that you want to enable.
 	//
 	// PolicyType is a required field
-	PolicyType PolicyType `type:"string" required:"true"`
+	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
 
 	// The unique identifier (ID) of the root in which you want to enable a policy
 	// type. You can get the ID from the ListRoots operation.
@@ -4636,7 +4636,7 @@ type Handshake struct {
 
 	// The type of handshake, indicating what action occurs when the recipient accepts
 	// the handshake.
-	Action ActionType `type:"string"`
+	Action ActionType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of a handshake.
 	//
@@ -4658,13 +4658,13 @@ type Handshake struct {
 	Id *string `type:"string"`
 
 	// Information about the two accounts that are participating in the handshake.
-	Parties []*HandshakeParty `type:"list"`
+	Parties []HandshakeParty `type:"list"`
 
 	// The date and time that the handshake request was made.
 	RequestedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Additional information that is needed to process the handshake.
-	Resources []*HandshakeResource `type:"list"`
+	Resources []HandshakeResource `type:"list"`
 
 	// The current state of the handshake. Use the state to trace the flow of the
 	// handshake through the process from its creation to its acceptance. The meaning
@@ -4690,7 +4690,7 @@ type Handshake struct {
 	//    * EXPIRED: This handshake is no longer active because the originator did
 	//    not receive a response of any kind from the recipient before the expiration
 	//    time (15 days).
-	State HandshakeState `type:"string"`
+	State HandshakeState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4728,7 +4728,7 @@ func (s *Handshake) SetId(v string) *Handshake {
 }
 
 // SetParties sets the Parties field's value.
-func (s *Handshake) SetParties(v []*HandshakeParty) *Handshake {
+func (s *Handshake) SetParties(v []HandshakeParty) *Handshake {
 	s.Parties = v
 	return s
 }
@@ -4740,7 +4740,7 @@ func (s *Handshake) SetRequestedTimestamp(v time.Time) *Handshake {
 }
 
 // SetResources sets the Resources field's value.
-func (s *Handshake) SetResources(v []*HandshakeResource) *Handshake {
+func (s *Handshake) SetResources(v []HandshakeResource) *Handshake {
 	s.Resources = v
 	return s
 }
@@ -4759,7 +4759,7 @@ type HandshakeFilter struct {
 	// Specifies the type of handshake action.
 	//
 	// If you specify ActionType, you cannot also specify ParentHandshakeId.
-	ActionType ActionType `type:"string"`
+	ActionType ActionType `type:"string" enum:"true"`
 
 	// Specifies the parent handshake. Only used for handshake types that are a
 	// child of another type.
@@ -4809,7 +4809,7 @@ type HandshakeParty struct {
 	// The type of party.
 	//
 	// Type is a required field
-	Type HandshakePartyType `type:"string" required:"true"`
+	Type HandshakePartyType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4860,7 +4860,7 @@ type HandshakeResource struct {
 	_ struct{} `type:"structure"`
 
 	// When needed, contains an additional array of HandshakeResource objects.
-	Resources []*HandshakeResource `type:"list"`
+	Resources []HandshakeResource `type:"list"`
 
 	// The type of information being passed, specifying how the value is to be interpreted
 	// by the other party:
@@ -4880,7 +4880,7 @@ type HandshakeResource struct {
 	//
 	//    * NOTES - Additional text provided by the handshake initiator and intended
 	//    for the recipient to read.
-	Type HandshakeResourceType `type:"string"`
+	Type HandshakeResourceType `type:"string" enum:"true"`
 
 	// The information that is passed to the other party in the handshake. The format
 	// of the value string must match the requirements of the specified type.
@@ -4898,7 +4898,7 @@ func (s HandshakeResource) GoString() string {
 }
 
 // SetResources sets the Resources field's value.
-func (s *HandshakeResource) SetResources(v []*HandshakeResource) *HandshakeResource {
+func (s *HandshakeResource) SetResources(v []HandshakeResource) *HandshakeResource {
 	s.Resources = v
 	return s
 }
@@ -5117,7 +5117,7 @@ type ListAccountsForParentOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the accounts in the specified root or OU.
-	Accounts []*Account `type:"list"`
+	Accounts []Account `type:"list"`
 
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
@@ -5138,7 +5138,7 @@ func (s ListAccountsForParentOutput) GoString() string {
 }
 
 // SetAccounts sets the Accounts field's value.
-func (s *ListAccountsForParentOutput) SetAccounts(v []*Account) *ListAccountsForParentOutput {
+func (s *ListAccountsForParentOutput) SetAccounts(v []Account) *ListAccountsForParentOutput {
 	s.Accounts = v
 	return s
 }
@@ -5211,7 +5211,7 @@ type ListAccountsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of objects in the organization.
-	Accounts []*Account `type:"list"`
+	Accounts []Account `type:"list"`
 
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
@@ -5232,7 +5232,7 @@ func (s ListAccountsOutput) GoString() string {
 }
 
 // SetAccounts sets the Accounts field's value.
-func (s *ListAccountsOutput) SetAccounts(v []*Account) *ListAccountsOutput {
+func (s *ListAccountsOutput) SetAccounts(v []Account) *ListAccountsOutput {
 	s.Accounts = v
 	return s
 }
@@ -5250,7 +5250,7 @@ type ListChildrenInput struct {
 	// Filters the output to include only the specified child type.
 	//
 	// ChildType is a required field
-	ChildType ChildType `type:"string" required:"true"`
+	ChildType ChildType `type:"string" required:"true" enum:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -5346,7 +5346,7 @@ type ListChildrenOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of children of the specified parent container.
-	Children []*Child `type:"list"`
+	Children []Child `type:"list"`
 
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
@@ -5367,7 +5367,7 @@ func (s ListChildrenOutput) GoString() string {
 }
 
 // SetChildren sets the Children field's value.
-func (s *ListChildrenOutput) SetChildren(v []*Child) *ListChildrenOutput {
+func (s *ListChildrenOutput) SetChildren(v []Child) *ListChildrenOutput {
 	s.Children = v
 	return s
 }
@@ -5452,7 +5452,7 @@ type ListCreateAccountStatusOutput struct {
 	// A list of objects with details about the requests. Certain elements, such
 	// as the accountId number, are present in the output only after the account
 	// has been successfully created.
-	CreateAccountStatuses []*CreateAccountStatus `type:"list"`
+	CreateAccountStatuses []CreateAccountStatus `type:"list"`
 
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
@@ -5473,7 +5473,7 @@ func (s ListCreateAccountStatusOutput) GoString() string {
 }
 
 // SetCreateAccountStatuses sets the CreateAccountStatuses field's value.
-func (s *ListCreateAccountStatusOutput) SetCreateAccountStatuses(v []*CreateAccountStatus) *ListCreateAccountStatusOutput {
+func (s *ListCreateAccountStatusOutput) SetCreateAccountStatuses(v []CreateAccountStatus) *ListCreateAccountStatusOutput {
 	s.CreateAccountStatuses = v
 	return s
 }
@@ -5561,7 +5561,7 @@ type ListHandshakesForAccountOutput struct {
 
 	// A list of Handshake objects with details about each of the handshakes that
 	// is associated with the specified account.
-	Handshakes []*Handshake `type:"list"`
+	Handshakes []Handshake `type:"list"`
 
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
@@ -5582,7 +5582,7 @@ func (s ListHandshakesForAccountOutput) GoString() string {
 }
 
 // SetHandshakes sets the Handshakes field's value.
-func (s *ListHandshakesForAccountOutput) SetHandshakes(v []*Handshake) *ListHandshakesForAccountOutput {
+func (s *ListHandshakesForAccountOutput) SetHandshakes(v []Handshake) *ListHandshakesForAccountOutput {
 	s.Handshakes = v
 	return s
 }
@@ -5670,7 +5670,7 @@ type ListHandshakesForOrganizationOutput struct {
 
 	// A list of Handshake objects with details about each of the handshakes that
 	// are associated with an organization.
-	Handshakes []*Handshake `type:"list"`
+	Handshakes []Handshake `type:"list"`
 
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
@@ -5691,7 +5691,7 @@ func (s ListHandshakesForOrganizationOutput) GoString() string {
 }
 
 // SetHandshakes sets the Handshakes field's value.
-func (s *ListHandshakesForOrganizationOutput) SetHandshakes(v []*Handshake) *ListHandshakesForOrganizationOutput {
+func (s *ListHandshakesForOrganizationOutput) SetHandshakes(v []Handshake) *ListHandshakesForOrganizationOutput {
 	s.Handshakes = v
 	return s
 }
@@ -5798,7 +5798,7 @@ type ListOrganizationalUnitsForParentOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of the OUs in the specified root or parent OU.
-	OrganizationalUnits []*OrganizationalUnit `type:"list"`
+	OrganizationalUnits []OrganizationalUnit `type:"list"`
 }
 
 // String returns the string representation
@@ -5818,7 +5818,7 @@ func (s *ListOrganizationalUnitsForParentOutput) SetNextToken(v string) *ListOrg
 }
 
 // SetOrganizationalUnits sets the OrganizationalUnits field's value.
-func (s *ListOrganizationalUnitsForParentOutput) SetOrganizationalUnits(v []*OrganizationalUnit) *ListOrganizationalUnitsForParentOutput {
+func (s *ListOrganizationalUnitsForParentOutput) SetOrganizationalUnits(v []OrganizationalUnit) *ListOrganizationalUnitsForParentOutput {
 	s.OrganizationalUnits = v
 	return s
 }
@@ -5918,7 +5918,7 @@ type ListParentsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of parents for the specified child account or OU.
-	Parents []*Parent `type:"list"`
+	Parents []Parent `type:"list"`
 }
 
 // String returns the string representation
@@ -5938,7 +5938,7 @@ func (s *ListParentsOutput) SetNextToken(v string) *ListParentsOutput {
 }
 
 // SetParents sets the Parents field's value.
-func (s *ListParentsOutput) SetParents(v []*Parent) *ListParentsOutput {
+func (s *ListParentsOutput) SetParents(v []Parent) *ListParentsOutput {
 	s.Parents = v
 	return s
 }
@@ -5950,7 +5950,7 @@ type ListPoliciesForTargetInput struct {
 	// The type of policy that you want to include in the returned list.
 	//
 	// Filter is a required field
-	Filter PolicyType `type:"string" required:"true"`
+	Filter PolicyType `type:"string" required:"true" enum:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -6055,7 +6055,7 @@ type ListPoliciesForTargetOutput struct {
 	NextToken *string `type:"string"`
 
 	// The list of policies that match the criteria in the request.
-	Policies []*PolicySummary `type:"list"`
+	Policies []PolicySummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6075,7 +6075,7 @@ func (s *ListPoliciesForTargetOutput) SetNextToken(v string) *ListPoliciesForTar
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *ListPoliciesForTargetOutput) SetPolicies(v []*PolicySummary) *ListPoliciesForTargetOutput {
+func (s *ListPoliciesForTargetOutput) SetPolicies(v []PolicySummary) *ListPoliciesForTargetOutput {
 	s.Policies = v
 	return s
 }
@@ -6087,7 +6087,7 @@ type ListPoliciesInput struct {
 	// Specifies the type of policy that you want to include in the response.
 	//
 	// Filter is a required field
-	Filter PolicyType `type:"string" required:"true"`
+	Filter PolicyType `type:"string" required:"true" enum:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -6165,7 +6165,7 @@ type ListPoliciesOutput struct {
 	// A list of policies that match the filter criteria in the request. The output
 	// list does not include the policy contents. To see the content for a policy,
 	// see DescribePolicy.
-	Policies []*PolicySummary `type:"list"`
+	Policies []PolicySummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6185,7 +6185,7 @@ func (s *ListPoliciesOutput) SetNextToken(v string) *ListPoliciesOutput {
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *ListPoliciesOutput) SetPolicies(v []*PolicySummary) *ListPoliciesOutput {
+func (s *ListPoliciesOutput) SetPolicies(v []PolicySummary) *ListPoliciesOutput {
 	s.Policies = v
 	return s
 }
@@ -6259,7 +6259,7 @@ type ListRootsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of roots that are defined in an organization.
-	Roots []*Root `type:"list"`
+	Roots []Root `type:"list"`
 }
 
 // String returns the string representation
@@ -6279,7 +6279,7 @@ func (s *ListRootsOutput) SetNextToken(v string) *ListRootsOutput {
 }
 
 // SetRoots sets the Roots field's value.
-func (s *ListRootsOutput) SetRoots(v []*Root) *ListRootsOutput {
+func (s *ListRootsOutput) SetRoots(v []Root) *ListRootsOutput {
 	s.Roots = v
 	return s
 }
@@ -6372,7 +6372,7 @@ type ListTargetsForPolicyOutput struct {
 
 	// A list of structures, each of which contains details about one of the entities
 	// to which the specified policy is attached.
-	Targets []*PolicyTargetSummary `type:"list"`
+	Targets []PolicyTargetSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6392,7 +6392,7 @@ func (s *ListTargetsForPolicyOutput) SetNextToken(v string) *ListTargetsForPolic
 }
 
 // SetTargets sets the Targets field's value.
-func (s *ListTargetsForPolicyOutput) SetTargets(v []*PolicyTargetSummary) *ListTargetsForPolicyOutput {
+func (s *ListTargetsForPolicyOutput) SetTargets(v []PolicyTargetSummary) *ListTargetsForPolicyOutput {
 	s.Targets = v
 	return s
 }
@@ -6527,7 +6527,7 @@ type Organization struct {
 	// A list of policy types that are enabled for this organization. For example,
 	// if your organization has all features enabled, then service control policies
 	// (SCPs) are included in the list.
-	AvailablePolicyTypes []*PolicyTypeSummary `type:"list"`
+	AvailablePolicyTypes []PolicyTypeSummary `type:"list"`
 
 	// Specifies the functionality that currently is available to the organization.
 	// If set to "ALL", then all features are enabled and policies can be applied
@@ -6535,7 +6535,7 @@ type Organization struct {
 	// consolidated billing functionality is available. For more information, see
 	// Enabling All Features in Your Organization (http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html)
 	// in the AWS Organizations User Guide.
-	FeatureSet OrganizationFeatureSet `type:"string"`
+	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
 
 	// The unique identifier (ID) of an organization.
 	//
@@ -6579,7 +6579,7 @@ func (s *Organization) SetArn(v string) *Organization {
 }
 
 // SetAvailablePolicyTypes sets the AvailablePolicyTypes field's value.
-func (s *Organization) SetAvailablePolicyTypes(v []*PolicyTypeSummary) *Organization {
+func (s *Organization) SetAvailablePolicyTypes(v []PolicyTypeSummary) *Organization {
 	s.AvailablePolicyTypes = v
 	return s
 }
@@ -6693,7 +6693,7 @@ type Parent struct {
 	Id *string `type:"string"`
 
 	// The type of the parent entity.
-	Type ParentType `type:"string"`
+	Type ParentType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6789,7 +6789,7 @@ type PolicySummary struct {
 	Name *string `min:"1" type:"string"`
 
 	// The type of policy.
-	Type PolicyType `type:"string"`
+	Type PolicyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6875,7 +6875,7 @@ type PolicyTargetSummary struct {
 	TargetId *string `type:"string"`
 
 	// The type of the policy target.
-	Type TargetType `type:"string"`
+	Type TargetType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6921,10 +6921,10 @@ type PolicyTypeSummary struct {
 	// The status of the policy type as it relates to the associated root. To attach
 	// a policy of the specified type to a root or to an OU or account in that root,
 	// it must be available in the organization and enabled for that root.
-	Status PolicyTypeStatus `type:"string"`
+	Status PolicyTypeStatus `type:"string" enum:"true"`
 
 	// The name of the policy type.
-	Type PolicyType `type:"string"`
+	Type PolicyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7039,7 +7039,7 @@ type Root struct {
 
 	// The types of policies that are currently enabled for the root and therefore
 	// can be attached to the root or to its OUs or accounts.
-	PolicyTypes []*PolicyTypeSummary `type:"list"`
+	PolicyTypes []PolicyTypeSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -7071,7 +7071,7 @@ func (s *Root) SetName(v string) *Root {
 }
 
 // SetPolicyTypes sets the PolicyTypes field's value.
-func (s *Root) SetPolicyTypes(v []*PolicyTypeSummary) *Root {
+func (s *Root) SetPolicyTypes(v []PolicyTypeSummary) *Root {
 	s.PolicyTypes = v
 	return s
 }

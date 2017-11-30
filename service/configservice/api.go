@@ -1605,7 +1605,7 @@ type Compliance struct {
 	// For the Compliance data type, AWS Config supports only COMPLIANT, NON_COMPLIANT,
 	// and INSUFFICIENT_DATA values. AWS Config does not support the NOT_APPLICABLE
 	// value for the Compliance data type.
-	ComplianceType ComplianceType `type:"string"`
+	ComplianceType ComplianceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1847,7 +1847,7 @@ type ConfigExportDeliveryInfo struct {
 	LastErrorMessage *string `locationName:"lastErrorMessage" type:"string"`
 
 	// Status of the last attempted delivery.
-	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string"`
+	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time of the last successful delivery.
 	LastSuccessfulTime *time.Time `locationName:"lastSuccessfulTime" type:"timestamp" timestampFormat:"unix"`
@@ -1946,7 +1946,7 @@ type ConfigRule struct {
 	// the DeleteConfigRule request to delete the rule. After AWS Config deletes
 	// the rule, the rule and all of its evaluations are erased and are no longer
 	// available.
-	ConfigRuleState ConfigRuleState `type:"string"`
+	ConfigRuleState ConfigRuleState `type:"string" enum:"true"`
 
 	// The description that you provide for the AWS Config rule.
 	Description *string `type:"string"`
@@ -1965,7 +1965,7 @@ type ConfigRule struct {
 	// By default, rules with a periodic trigger are evaluated every 24 hours. To
 	// change the frequency, specify a valid value for the MaximumExecutionFrequency
 	// parameter.
-	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string"`
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
 
 	// Defines which resources can trigger an evaluation for the rule. The scope
 	// can include one or more resource types, a combination of one resource type
@@ -2250,7 +2250,7 @@ type ConfigSnapshotDeliveryProperties struct {
 	_ struct{} `type:"structure"`
 
 	// The frequency with which AWS Config delivers configuration snapshots.
-	DeliveryFrequency MaximumExecutionFrequency `locationName:"deliveryFrequency" type:"string"`
+	DeliveryFrequency MaximumExecutionFrequency `locationName:"deliveryFrequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2286,7 +2286,7 @@ type ConfigStreamDeliveryInfo struct {
 	// Note Providing an SNS topic on a DeliveryChannel (http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html)
 	// for AWS Config is optional. If the SNS delivery is turned off, the last status
 	// will be Not_Applicable.
-	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string"`
+	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time from the last status change.
 	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
@@ -2356,7 +2356,7 @@ type ConfigurationItem struct {
 	ConfigurationItemMD5Hash *string `locationName:"configurationItemMD5Hash" type:"string"`
 
 	// The configuration item status.
-	ConfigurationItemStatus ConfigurationItemStatus `locationName:"configurationItemStatus" type:"string"`
+	ConfigurationItemStatus ConfigurationItemStatus `locationName:"configurationItemStatus" type:"string" enum:"true"`
 
 	// An identifier that indicates the ordering of the configuration items of a
 	// resource.
@@ -2370,10 +2370,10 @@ type ConfigurationItem struct {
 	//
 	// An empty field indicates that the current configuration was not initiated
 	// by any event.
-	RelatedEvents []*string `locationName:"relatedEvents" type:"list"`
+	RelatedEvents []string `locationName:"relatedEvents" type:"list"`
 
 	// A list of related AWS resources.
-	Relationships []*Relationship `locationName:"relationships" type:"list"`
+	Relationships []Relationship `locationName:"relationships" type:"list"`
 
 	// The time stamp when the resource was created.
 	ResourceCreationTime *time.Time `locationName:"resourceCreationTime" type:"timestamp" timestampFormat:"unix"`
@@ -2385,14 +2385,14 @@ type ConfigurationItem struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The type of AWS resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// Configuration attributes that AWS Config returns for certain resource types
 	// to supplement the information returned for the configuration parameter.
-	SupplementaryConfiguration map[string]*string `locationName:"supplementaryConfiguration" type:"map"`
+	SupplementaryConfiguration map[string]string `locationName:"supplementaryConfiguration" type:"map"`
 
 	// A mapping of key value tags associated with the resource.
-	Tags map[string]*string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// The version number of the resource configuration.
 	Version *string `locationName:"version" type:"string"`
@@ -2463,13 +2463,13 @@ func (s *ConfigurationItem) SetConfigurationStateId(v string) *ConfigurationItem
 }
 
 // SetRelatedEvents sets the RelatedEvents field's value.
-func (s *ConfigurationItem) SetRelatedEvents(v []*string) *ConfigurationItem {
+func (s *ConfigurationItem) SetRelatedEvents(v []string) *ConfigurationItem {
 	s.RelatedEvents = v
 	return s
 }
 
 // SetRelationships sets the Relationships field's value.
-func (s *ConfigurationItem) SetRelationships(v []*Relationship) *ConfigurationItem {
+func (s *ConfigurationItem) SetRelationships(v []Relationship) *ConfigurationItem {
 	s.Relationships = v
 	return s
 }
@@ -2499,13 +2499,13 @@ func (s *ConfigurationItem) SetResourceType(v ResourceType) *ConfigurationItem {
 }
 
 // SetSupplementaryConfiguration sets the SupplementaryConfiguration field's value.
-func (s *ConfigurationItem) SetSupplementaryConfiguration(v map[string]*string) *ConfigurationItem {
+func (s *ConfigurationItem) SetSupplementaryConfiguration(v map[string]string) *ConfigurationItem {
 	s.SupplementaryConfiguration = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *ConfigurationItem) SetTags(v map[string]*string) *ConfigurationItem {
+func (s *ConfigurationItem) SetTags(v map[string]string) *ConfigurationItem {
 	s.Tags = v
 	return s
 }
@@ -2592,7 +2592,7 @@ type ConfigurationRecorderStatus struct {
 	LastStartTime *time.Time `locationName:"lastStartTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The last (previous) status of the recorder.
-	LastStatus RecorderStatus `locationName:"lastStatus" type:"string"`
+	LastStatus RecorderStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time when the status was last changed.
 	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
@@ -3132,7 +3132,7 @@ type DescribeComplianceByConfigRuleInput struct {
 	ComplianceTypes []ComplianceType `type:"list"`
 
 	// Specify one or more AWS Config rule names to filter the results by rule.
-	ConfigRuleNames []*string `type:"list"`
+	ConfigRuleNames []string `type:"list"`
 
 	// The NextToken string returned on a previous page that you use to get the
 	// next page of results in a paginated response.
@@ -3156,7 +3156,7 @@ func (s *DescribeComplianceByConfigRuleInput) SetComplianceTypes(v []ComplianceT
 }
 
 // SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *DescribeComplianceByConfigRuleInput) SetConfigRuleNames(v []*string) *DescribeComplianceByConfigRuleInput {
+func (s *DescribeComplianceByConfigRuleInput) SetConfigRuleNames(v []string) *DescribeComplianceByConfigRuleInput {
 	s.ConfigRuleNames = v
 	return s
 }
@@ -3172,7 +3172,7 @@ type DescribeComplianceByConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates whether each of the specified AWS Config rules is compliant.
-	ComplianceByConfigRules []*ComplianceByConfigRule `type:"list"`
+	ComplianceByConfigRules []ComplianceByConfigRule `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -3190,7 +3190,7 @@ func (s DescribeComplianceByConfigRuleOutput) GoString() string {
 }
 
 // SetComplianceByConfigRules sets the ComplianceByConfigRules field's value.
-func (s *DescribeComplianceByConfigRuleOutput) SetComplianceByConfigRules(v []*ComplianceByConfigRule) *DescribeComplianceByConfigRuleOutput {
+func (s *DescribeComplianceByConfigRuleOutput) SetComplianceByConfigRules(v []ComplianceByConfigRule) *DescribeComplianceByConfigRuleOutput {
 	s.ComplianceByConfigRules = v
 	return s
 }
@@ -3292,7 +3292,7 @@ type DescribeComplianceByResourceOutput struct {
 
 	// Indicates whether the specified AWS resource complies with all of the AWS
 	// Config rules that evaluate it.
-	ComplianceByResources []*ComplianceByResource `type:"list"`
+	ComplianceByResources []ComplianceByResource `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -3310,7 +3310,7 @@ func (s DescribeComplianceByResourceOutput) GoString() string {
 }
 
 // SetComplianceByResources sets the ComplianceByResources field's value.
-func (s *DescribeComplianceByResourceOutput) SetComplianceByResources(v []*ComplianceByResource) *DescribeComplianceByResourceOutput {
+func (s *DescribeComplianceByResourceOutput) SetComplianceByResources(v []ComplianceByResource) *DescribeComplianceByResourceOutput {
 	s.ComplianceByResources = v
 	return s
 }
@@ -3328,7 +3328,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	// The name of the AWS managed Config rules for which you want status information.
 	// If you do not specify any names, AWS Config returns status information for
 	// all AWS managed Config rules that you use.
-	ConfigRuleNames []*string `type:"list"`
+	ConfigRuleNames []string `type:"list"`
 
 	// The number of rule evaluation results that you want returned.
 	//
@@ -3356,7 +3356,7 @@ func (s DescribeConfigRuleEvaluationStatusInput) GoString() string {
 }
 
 // SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *DescribeConfigRuleEvaluationStatusInput) SetConfigRuleNames(v []*string) *DescribeConfigRuleEvaluationStatusInput {
+func (s *DescribeConfigRuleEvaluationStatusInput) SetConfigRuleNames(v []string) *DescribeConfigRuleEvaluationStatusInput {
 	s.ConfigRuleNames = v
 	return s
 }
@@ -3378,7 +3378,7 @@ type DescribeConfigRuleEvaluationStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Status information about your AWS managed Config rules.
-	ConfigRulesEvaluationStatus []*ConfigRuleEvaluationStatus `type:"list"`
+	ConfigRulesEvaluationStatus []ConfigRuleEvaluationStatus `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -3396,7 +3396,7 @@ func (s DescribeConfigRuleEvaluationStatusOutput) GoString() string {
 }
 
 // SetConfigRulesEvaluationStatus sets the ConfigRulesEvaluationStatus field's value.
-func (s *DescribeConfigRuleEvaluationStatusOutput) SetConfigRulesEvaluationStatus(v []*ConfigRuleEvaluationStatus) *DescribeConfigRuleEvaluationStatusOutput {
+func (s *DescribeConfigRuleEvaluationStatusOutput) SetConfigRulesEvaluationStatus(v []ConfigRuleEvaluationStatus) *DescribeConfigRuleEvaluationStatusOutput {
 	s.ConfigRulesEvaluationStatus = v
 	return s
 }
@@ -3413,7 +3413,7 @@ type DescribeConfigRulesInput struct {
 
 	// The names of the AWS Config rules for which you want details. If you do not
 	// specify any names, AWS Config returns details for all your rules.
-	ConfigRuleNames []*string `type:"list"`
+	ConfigRuleNames []string `type:"list"`
 
 	// The NextToken string returned on a previous page that you use to get the
 	// next page of results in a paginated response.
@@ -3431,7 +3431,7 @@ func (s DescribeConfigRulesInput) GoString() string {
 }
 
 // SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *DescribeConfigRulesInput) SetConfigRuleNames(v []*string) *DescribeConfigRulesInput {
+func (s *DescribeConfigRulesInput) SetConfigRuleNames(v []string) *DescribeConfigRulesInput {
 	s.ConfigRuleNames = v
 	return s
 }
@@ -3447,7 +3447,7 @@ type DescribeConfigRulesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The details about your AWS Config rules.
-	ConfigRules []*ConfigRule `type:"list"`
+	ConfigRules []ConfigRule `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -3465,7 +3465,7 @@ func (s DescribeConfigRulesOutput) GoString() string {
 }
 
 // SetConfigRules sets the ConfigRules field's value.
-func (s *DescribeConfigRulesOutput) SetConfigRules(v []*ConfigRule) *DescribeConfigRulesOutput {
+func (s *DescribeConfigRulesOutput) SetConfigRules(v []ConfigRule) *DescribeConfigRulesOutput {
 	s.ConfigRules = v
 	return s
 }
@@ -3484,7 +3484,7 @@ type DescribeConfigurationRecorderStatusInput struct {
 	// The name(s) of the configuration recorder. If the name is not specified,
 	// the action returns the current status of all the configuration recorders
 	// associated with the account.
-	ConfigurationRecorderNames []*string `type:"list"`
+	ConfigurationRecorderNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3498,7 +3498,7 @@ func (s DescribeConfigurationRecorderStatusInput) GoString() string {
 }
 
 // SetConfigurationRecorderNames sets the ConfigurationRecorderNames field's value.
-func (s *DescribeConfigurationRecorderStatusInput) SetConfigurationRecorderNames(v []*string) *DescribeConfigurationRecorderStatusInput {
+func (s *DescribeConfigurationRecorderStatusInput) SetConfigurationRecorderNames(v []string) *DescribeConfigurationRecorderStatusInput {
 	s.ConfigurationRecorderNames = v
 	return s
 }
@@ -3509,7 +3509,7 @@ type DescribeConfigurationRecorderStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list that contains status of the specified recorders.
-	ConfigurationRecordersStatus []*ConfigurationRecorderStatus `type:"list"`
+	ConfigurationRecordersStatus []ConfigurationRecorderStatus `type:"list"`
 }
 
 // String returns the string representation
@@ -3523,7 +3523,7 @@ func (s DescribeConfigurationRecorderStatusOutput) GoString() string {
 }
 
 // SetConfigurationRecordersStatus sets the ConfigurationRecordersStatus field's value.
-func (s *DescribeConfigurationRecorderStatusOutput) SetConfigurationRecordersStatus(v []*ConfigurationRecorderStatus) *DescribeConfigurationRecorderStatusOutput {
+func (s *DescribeConfigurationRecorderStatusOutput) SetConfigurationRecordersStatus(v []ConfigurationRecorderStatus) *DescribeConfigurationRecorderStatusOutput {
 	s.ConfigurationRecordersStatus = v
 	return s
 }
@@ -3534,7 +3534,7 @@ type DescribeConfigurationRecordersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of configuration recorder names.
-	ConfigurationRecorderNames []*string `type:"list"`
+	ConfigurationRecorderNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3548,7 +3548,7 @@ func (s DescribeConfigurationRecordersInput) GoString() string {
 }
 
 // SetConfigurationRecorderNames sets the ConfigurationRecorderNames field's value.
-func (s *DescribeConfigurationRecordersInput) SetConfigurationRecorderNames(v []*string) *DescribeConfigurationRecordersInput {
+func (s *DescribeConfigurationRecordersInput) SetConfigurationRecorderNames(v []string) *DescribeConfigurationRecordersInput {
 	s.ConfigurationRecorderNames = v
 	return s
 }
@@ -3559,7 +3559,7 @@ type DescribeConfigurationRecordersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list that contains the descriptions of the specified configuration recorders.
-	ConfigurationRecorders []*ConfigurationRecorder `type:"list"`
+	ConfigurationRecorders []ConfigurationRecorder `type:"list"`
 }
 
 // String returns the string representation
@@ -3573,7 +3573,7 @@ func (s DescribeConfigurationRecordersOutput) GoString() string {
 }
 
 // SetConfigurationRecorders sets the ConfigurationRecorders field's value.
-func (s *DescribeConfigurationRecordersOutput) SetConfigurationRecorders(v []*ConfigurationRecorder) *DescribeConfigurationRecordersOutput {
+func (s *DescribeConfigurationRecordersOutput) SetConfigurationRecorders(v []ConfigurationRecorder) *DescribeConfigurationRecordersOutput {
 	s.ConfigurationRecorders = v
 	return s
 }
@@ -3584,7 +3584,7 @@ type DescribeDeliveryChannelStatusInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of delivery channel names.
-	DeliveryChannelNames []*string `type:"list"`
+	DeliveryChannelNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3598,7 +3598,7 @@ func (s DescribeDeliveryChannelStatusInput) GoString() string {
 }
 
 // SetDeliveryChannelNames sets the DeliveryChannelNames field's value.
-func (s *DescribeDeliveryChannelStatusInput) SetDeliveryChannelNames(v []*string) *DescribeDeliveryChannelStatusInput {
+func (s *DescribeDeliveryChannelStatusInput) SetDeliveryChannelNames(v []string) *DescribeDeliveryChannelStatusInput {
 	s.DeliveryChannelNames = v
 	return s
 }
@@ -3609,7 +3609,7 @@ type DescribeDeliveryChannelStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list that contains the status of a specified delivery channel.
-	DeliveryChannelsStatus []*DeliveryChannelStatus `type:"list"`
+	DeliveryChannelsStatus []DeliveryChannelStatus `type:"list"`
 }
 
 // String returns the string representation
@@ -3623,7 +3623,7 @@ func (s DescribeDeliveryChannelStatusOutput) GoString() string {
 }
 
 // SetDeliveryChannelsStatus sets the DeliveryChannelsStatus field's value.
-func (s *DescribeDeliveryChannelStatusOutput) SetDeliveryChannelsStatus(v []*DeliveryChannelStatus) *DescribeDeliveryChannelStatusOutput {
+func (s *DescribeDeliveryChannelStatusOutput) SetDeliveryChannelsStatus(v []DeliveryChannelStatus) *DescribeDeliveryChannelStatusOutput {
 	s.DeliveryChannelsStatus = v
 	return s
 }
@@ -3634,7 +3634,7 @@ type DescribeDeliveryChannelsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of delivery channel names.
-	DeliveryChannelNames []*string `type:"list"`
+	DeliveryChannelNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3648,7 +3648,7 @@ func (s DescribeDeliveryChannelsInput) GoString() string {
 }
 
 // SetDeliveryChannelNames sets the DeliveryChannelNames field's value.
-func (s *DescribeDeliveryChannelsInput) SetDeliveryChannelNames(v []*string) *DescribeDeliveryChannelsInput {
+func (s *DescribeDeliveryChannelsInput) SetDeliveryChannelNames(v []string) *DescribeDeliveryChannelsInput {
 	s.DeliveryChannelNames = v
 	return s
 }
@@ -3659,7 +3659,7 @@ type DescribeDeliveryChannelsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list that contains the descriptions of the specified delivery channel.
-	DeliveryChannels []*DeliveryChannel `type:"list"`
+	DeliveryChannels []DeliveryChannel `type:"list"`
 }
 
 // String returns the string representation
@@ -3673,7 +3673,7 @@ func (s DescribeDeliveryChannelsOutput) GoString() string {
 }
 
 // SetDeliveryChannels sets the DeliveryChannels field's value.
-func (s *DescribeDeliveryChannelsOutput) SetDeliveryChannels(v []*DeliveryChannel) *DescribeDeliveryChannelsOutput {
+func (s *DescribeDeliveryChannelsOutput) SetDeliveryChannels(v []DeliveryChannel) *DescribeDeliveryChannelsOutput {
 	s.DeliveryChannels = v
 	return s
 }
@@ -3710,7 +3710,7 @@ type Evaluation struct {
 	// to AWS Config.
 	//
 	// ComplianceType is a required field
-	ComplianceType ComplianceType `type:"string" required:"true"`
+	ComplianceType ComplianceType `type:"string" required:"true" enum:"true"`
 
 	// The time of the event in AWS Config that triggered the evaluation. For event-based
 	// evaluations, the time indicates when AWS Config created the configuration
@@ -3812,7 +3812,7 @@ type EvaluationResult struct {
 	// For the EvaluationResult data type, AWS Config supports only the COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support the
 	// INSUFFICIENT_DATA value for the EvaluationResult data type.
-	ComplianceType ComplianceType `type:"string"`
+	ComplianceType ComplianceType `type:"string" enum:"true"`
 
 	// The time when the AWS Config rule evaluated the AWS resource.
 	ConfigRuleInvokedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -4038,7 +4038,7 @@ type GetComplianceDetailsByConfigRuleOutput struct {
 
 	// Indicates whether the AWS resource complies with the specified AWS Config
 	// rule.
-	EvaluationResults []*EvaluationResult `type:"list"`
+	EvaluationResults []EvaluationResult `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -4056,7 +4056,7 @@ func (s GetComplianceDetailsByConfigRuleOutput) GoString() string {
 }
 
 // SetEvaluationResults sets the EvaluationResults field's value.
-func (s *GetComplianceDetailsByConfigRuleOutput) SetEvaluationResults(v []*EvaluationResult) *GetComplianceDetailsByConfigRuleOutput {
+func (s *GetComplianceDetailsByConfigRuleOutput) SetEvaluationResults(v []EvaluationResult) *GetComplianceDetailsByConfigRuleOutput {
 	s.EvaluationResults = v
 	return s
 }
@@ -4154,7 +4154,7 @@ type GetComplianceDetailsByResourceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates whether the specified AWS resource complies each AWS Config rule.
-	EvaluationResults []*EvaluationResult `type:"list"`
+	EvaluationResults []EvaluationResult `type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -4172,7 +4172,7 @@ func (s GetComplianceDetailsByResourceOutput) GoString() string {
 }
 
 // SetEvaluationResults sets the EvaluationResults field's value.
-func (s *GetComplianceDetailsByResourceOutput) SetEvaluationResults(v []*EvaluationResult) *GetComplianceDetailsByResourceOutput {
+func (s *GetComplianceDetailsByResourceOutput) SetEvaluationResults(v []EvaluationResult) *GetComplianceDetailsByResourceOutput {
 	s.EvaluationResults = v
 	return s
 }
@@ -4233,7 +4233,7 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	// For this request, you can specify an AWS resource type such as AWS::EC2::Instance,
 	// and you can specify that the resource type is an AWS account by specifying
 	// AWS::::Account.
-	ResourceTypes []*string `type:"list"`
+	ResourceTypes []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4247,7 +4247,7 @@ func (s GetComplianceSummaryByResourceTypeInput) GoString() string {
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *GetComplianceSummaryByResourceTypeInput) SetResourceTypes(v []*string) *GetComplianceSummaryByResourceTypeInput {
+func (s *GetComplianceSummaryByResourceTypeInput) SetResourceTypes(v []string) *GetComplianceSummaryByResourceTypeInput {
 	s.ResourceTypes = v
 	return s
 }
@@ -4259,7 +4259,7 @@ type GetComplianceSummaryByResourceTypeOutput struct {
 	// The number of resources that are compliant and the number that are noncompliant.
 	// If one or more resource types were provided with the request, the numbers
 	// are returned for each resource type. The maximum number returned is 100.
-	ComplianceSummariesByResourceType []*ComplianceSummaryByResourceType `type:"list"`
+	ComplianceSummariesByResourceType []ComplianceSummaryByResourceType `type:"list"`
 }
 
 // String returns the string representation
@@ -4273,7 +4273,7 @@ func (s GetComplianceSummaryByResourceTypeOutput) GoString() string {
 }
 
 // SetComplianceSummariesByResourceType sets the ComplianceSummariesByResourceType field's value.
-func (s *GetComplianceSummaryByResourceTypeOutput) SetComplianceSummariesByResourceType(v []*ComplianceSummaryByResourceType) *GetComplianceSummaryByResourceTypeOutput {
+func (s *GetComplianceSummaryByResourceTypeOutput) SetComplianceSummariesByResourceType(v []ComplianceSummaryByResourceType) *GetComplianceSummaryByResourceTypeOutput {
 	s.ComplianceSummariesByResourceType = v
 	return s
 }
@@ -4301,7 +4301,7 @@ type GetDiscoveredResourceCountsInput struct {
 	// list of ResourceCount objects. If the configuration recorder is not recording
 	// a specific resource type (for example, S3 buckets), that resource type is
 	// not returned in the list of ResourceCount objects.
-	ResourceTypes []*string `locationName:"resourceTypes" type:"list"`
+	ResourceTypes []string `locationName:"resourceTypes" type:"list"`
 }
 
 // String returns the string representation
@@ -4327,7 +4327,7 @@ func (s *GetDiscoveredResourceCountsInput) SetNextToken(v string) *GetDiscovered
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *GetDiscoveredResourceCountsInput) SetResourceTypes(v []*string) *GetDiscoveredResourceCountsInput {
+func (s *GetDiscoveredResourceCountsInput) SetResourceTypes(v []string) *GetDiscoveredResourceCountsInput {
 	s.ResourceTypes = v
 	return s
 }
@@ -4342,7 +4342,7 @@ type GetDiscoveredResourceCountsOutput struct {
 
 	// The list of ResourceCount objects. Each object is listed in descending order
 	// by the number of resources.
-	ResourceCounts []*ResourceCount `locationName:"resourceCounts" type:"list"`
+	ResourceCounts []ResourceCount `locationName:"resourceCounts" type:"list"`
 
 	// The total number of resources that AWS Config is recording in the region
 	// for your account. If you specify resource types in the request, AWS Config
@@ -4378,7 +4378,7 @@ func (s *GetDiscoveredResourceCountsOutput) SetNextToken(v string) *GetDiscovere
 }
 
 // SetResourceCounts sets the ResourceCounts field's value.
-func (s *GetDiscoveredResourceCountsOutput) SetResourceCounts(v []*ResourceCount) *GetDiscoveredResourceCountsOutput {
+func (s *GetDiscoveredResourceCountsOutput) SetResourceCounts(v []ResourceCount) *GetDiscoveredResourceCountsOutput {
 	s.ResourceCounts = v
 	return s
 }
@@ -4396,7 +4396,7 @@ type GetResourceConfigHistoryInput struct {
 
 	// The chronological order for configuration items listed. By default the results
 	// are listed in reverse chronological order.
-	ChronologicalOrder ChronologicalOrder `locationName:"chronologicalOrder" type:"string"`
+	ChronologicalOrder ChronologicalOrder `locationName:"chronologicalOrder" type:"string" enum:"true"`
 
 	// The time stamp that indicates an earlier time. If not specified, the action
 	// returns paginated results that contain configuration items that start from
@@ -4424,7 +4424,7 @@ type GetResourceConfigHistoryInput struct {
 	// The resource type.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4502,7 +4502,7 @@ type GetResourceConfigHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list that contains the configuration history of one or more resources.
-	ConfigurationItems []*ConfigurationItem `locationName:"configurationItems" type:"list"`
+	ConfigurationItems []ConfigurationItem `locationName:"configurationItems" type:"list"`
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
@@ -4520,7 +4520,7 @@ func (s GetResourceConfigHistoryOutput) GoString() string {
 }
 
 // SetConfigurationItems sets the ConfigurationItems field's value.
-func (s *GetResourceConfigHistoryOutput) SetConfigurationItems(v []*ConfigurationItem) *GetResourceConfigHistoryOutput {
+func (s *GetResourceConfigHistoryOutput) SetConfigurationItems(v []ConfigurationItem) *GetResourceConfigHistoryOutput {
 	s.ConfigurationItems = v
 	return s
 }
@@ -4551,7 +4551,7 @@ type ListDiscoveredResourcesInput struct {
 	// The IDs of only those resources that you want AWS Config to list in the response.
 	// If you do not specify this parameter, AWS Config lists all resources of the
 	// specified type that it has discovered.
-	ResourceIds []*string `locationName:"resourceIds" type:"list"`
+	ResourceIds []string `locationName:"resourceIds" type:"list"`
 
 	// The custom name of only those resources that you want AWS Config to list
 	// in the response. If you do not specify this parameter, AWS Config lists all
@@ -4561,7 +4561,7 @@ type ListDiscoveredResourcesInput struct {
 	// The type of resources that you want AWS Config to list in the response.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4606,7 +4606,7 @@ func (s *ListDiscoveredResourcesInput) SetNextToken(v string) *ListDiscoveredRes
 }
 
 // SetResourceIds sets the ResourceIds field's value.
-func (s *ListDiscoveredResourcesInput) SetResourceIds(v []*string) *ListDiscoveredResourcesInput {
+func (s *ListDiscoveredResourcesInput) SetResourceIds(v []string) *ListDiscoveredResourcesInput {
 	s.ResourceIds = v
 	return s
 }
@@ -4633,7 +4633,7 @@ type ListDiscoveredResourcesOutput struct {
 
 	// The details that identify a resource that is discovered by AWS Config, including
 	// the resource type, ID, and (if available) the custom resource name.
-	ResourceIdentifiers []*ResourceIdentifier `locationName:"resourceIdentifiers" type:"list"`
+	ResourceIdentifiers []ResourceIdentifier `locationName:"resourceIdentifiers" type:"list"`
 }
 
 // String returns the string representation
@@ -4653,7 +4653,7 @@ func (s *ListDiscoveredResourcesOutput) SetNextToken(v string) *ListDiscoveredRe
 }
 
 // SetResourceIdentifiers sets the ResourceIdentifiers field's value.
-func (s *ListDiscoveredResourcesOutput) SetResourceIdentifiers(v []*ResourceIdentifier) *ListDiscoveredResourcesOutput {
+func (s *ListDiscoveredResourcesOutput) SetResourceIdentifiers(v []ResourceIdentifier) *ListDiscoveredResourcesOutput {
 	s.ResourceIdentifiers = v
 	return s
 }
@@ -4849,7 +4849,7 @@ type PutEvaluationsInput struct {
 	// The assessments that the AWS Lambda function performs. Each evaluation identifies
 	// an AWS resource and indicates whether it complies with the AWS Config rule
 	// that invokes the AWS Lambda function.
-	Evaluations []*Evaluation `type:"list"`
+	Evaluations []Evaluation `type:"list"`
 
 	// An encrypted token that associates an evaluation with an AWS Config rule.
 	// Identifies the rule and the event that triggered the evaluation
@@ -4886,9 +4886,6 @@ func (s *PutEvaluationsInput) Validate() error {
 	}
 	if s.Evaluations != nil {
 		for i, v := range s.Evaluations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Evaluations", i), err.(aws.ErrInvalidParams))
 			}
@@ -4902,7 +4899,7 @@ func (s *PutEvaluationsInput) Validate() error {
 }
 
 // SetEvaluations sets the Evaluations field's value.
-func (s *PutEvaluationsInput) SetEvaluations(v []*Evaluation) *PutEvaluationsInput {
+func (s *PutEvaluationsInput) SetEvaluations(v []Evaluation) *PutEvaluationsInput {
 	s.Evaluations = v
 	return s
 }
@@ -4924,7 +4921,7 @@ type PutEvaluationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Requests that failed because of a client or server error.
-	FailedEvaluations []*Evaluation `type:"list"`
+	FailedEvaluations []Evaluation `type:"list"`
 }
 
 // String returns the string representation
@@ -4938,7 +4935,7 @@ func (s PutEvaluationsOutput) GoString() string {
 }
 
 // SetFailedEvaluations sets the FailedEvaluations field's value.
-func (s *PutEvaluationsOutput) SetFailedEvaluations(v []*Evaluation) *PutEvaluationsOutput {
+func (s *PutEvaluationsOutput) SetFailedEvaluations(v []Evaluation) *PutEvaluationsOutput {
 	s.FailedEvaluations = v
 	return s
 }
@@ -5060,7 +5057,7 @@ type Relationship struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The resource type of the related resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5106,7 +5103,7 @@ type ResourceCount struct {
 	Count *int64 `locationName:"count" type:"long"`
 
 	// The resource type, for example "AWS::EC2::Instance".
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5147,7 +5144,7 @@ type ResourceIdentifier struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The type of resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5202,7 +5199,7 @@ type Scope struct {
 	// The resource types of only those AWS resources that you want to trigger an
 	// evaluation for the rule. You can only specify one type if you also specify
 	// a resource ID for ComplianceResourceId.
-	ComplianceResourceTypes []*string `type:"list"`
+	ComplianceResourceTypes []string `type:"list"`
 
 	// The tag key that is applied to only those AWS resources that you want to
 	// trigger an evaluation for the rule.
@@ -5250,7 +5247,7 @@ func (s *Scope) SetComplianceResourceId(v string) *Scope {
 }
 
 // SetComplianceResourceTypes sets the ComplianceResourceTypes field's value.
-func (s *Scope) SetComplianceResourceTypes(v []*string) *Scope {
+func (s *Scope) SetComplianceResourceTypes(v []string) *Scope {
 	s.ComplianceResourceTypes = v
 	return s
 }
@@ -5276,11 +5273,11 @@ type Source struct {
 	// Indicates whether AWS or the customer owns and manages the AWS Config rule.
 	//
 	// Owner is a required field
-	Owner Owner `type:"string" required:"true"`
+	Owner Owner `type:"string" required:"true" enum:"true"`
 
 	// Provides the source and type of the event that causes AWS Config to evaluate
 	// your AWS resources.
-	SourceDetails []*SourceDetail `type:"list"`
+	SourceDetails []SourceDetail `type:"list"`
 
 	// For AWS Config managed rules, a predefined identifier from a list. For example,
 	// IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using
@@ -5330,7 +5327,7 @@ func (s *Source) SetOwner(v Owner) *Source {
 }
 
 // SetSourceDetails sets the SourceDetails field's value.
-func (s *Source) SetSourceDetails(v []*SourceDetail) *Source {
+func (s *Source) SetSourceDetails(v []SourceDetail) *Source {
 	s.SourceDetails = v
 	return s
 }
@@ -5352,7 +5349,7 @@ type SourceDetail struct {
 
 	// The source of the event, such as an AWS service, that triggers AWS Config
 	// to evaluate your AWS resources.
-	EventSource EventSource `type:"string"`
+	EventSource EventSource `type:"string" enum:"true"`
 
 	// The frequency that you want AWS Config to run evaluations for a custom rule
 	// with a periodic trigger. If you specify a value for MaximumExecutionFrequency,
@@ -5361,7 +5358,7 @@ type SourceDetail struct {
 	// By default, rules with a periodic trigger are evaluated every 24 hours. To
 	// change the frequency, specify a valid value for the MaximumExecutionFrequency
 	// parameter.
-	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string"`
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
 
 	// The type of notification that triggers AWS Config to run an evaluation for
 	// a rule. You can specify the following notification types:
@@ -5382,7 +5379,7 @@ type SourceDetail struct {
 	//
 	// If you want your custom rule to be triggered by configuration changes, specify
 	// both ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification.
-	MessageType MessageType `type:"string"`
+	MessageType MessageType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5418,7 +5415,7 @@ type StartConfigRulesEvaluationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of names of Config rules that you want to run evaluations for.
-	ConfigRuleNames []*string `min:"1" type:"list"`
+	ConfigRuleNames []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -5445,7 +5442,7 @@ func (s *StartConfigRulesEvaluationInput) Validate() error {
 }
 
 // SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *StartConfigRulesEvaluationInput) SetConfigRuleNames(v []*string) *StartConfigRulesEvaluationInput {
+func (s *StartConfigRulesEvaluationInput) SetConfigRuleNames(v []string) *StartConfigRulesEvaluationInput {
 	s.ConfigRuleNames = v
 	return s
 }

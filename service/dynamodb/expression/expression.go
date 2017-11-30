@@ -113,17 +113,17 @@ func (b Builder) Build() (Expression, error) {
 	}
 
 	if len(aliasList.namesList) != 0 {
-		namesMap := map[string]*string{}
+		namesMap := map[string]string{}
 		for ind, val := range aliasList.namesList {
-			namesMap[fmt.Sprintf("#%v", ind)] = aws.String(val)
+			namesMap[fmt.Sprintf("#%v", ind)] = val
 		}
 		expression.namesMap = namesMap
 	}
 
 	if len(aliasList.valuesList) != 0 {
-		valuesMap := map[string]*dynamodb.AttributeValue{}
+		valuesMap := map[string]dynamodb.AttributeValue{}
 		for i := 0; i < len(aliasList.valuesList); i++ {
-			valuesMap[fmt.Sprintf(":%v", i)] = &aliasList.valuesList[i]
+			valuesMap[fmt.Sprintf(":%v", i)] = aliasList.valuesList[i]
 		}
 		expression.valuesMap = valuesMap
 	}
@@ -307,8 +307,8 @@ func (b Builder) WithUpdate(updateBuilder UpdateBuilder) Builder {
 //     }
 type Expression struct {
 	expressionMap map[expressionType]string
-	namesMap      map[string]*string
-	valuesMap     map[string]*dynamodb.AttributeValue
+	namesMap      map[string]string
+	valuesMap     map[string]dynamodb.AttributeValue
 }
 
 // treeBuilder interface is fulfilled by builder structs that represent
@@ -334,7 +334,7 @@ type treeBuilder interface {
 //       ConditionExpression:       expression.Condition(),
 //       ExpressionAttributeNames:  expression.Names(),
 //       ExpressionAttributeValues: expression.Values(),
-//       Key: map[string]*dynamodb.AttributeValue{
+//       Key: map[string]dynamodb.AttributeValue{
 //         "PartitionKey": &dynamodb.AttributeValue{
 //           S: aws.String("SomeKey"),
 //         },
@@ -415,7 +415,7 @@ func (e Expression) KeyCondition() *string {
 //     // let expression be an instance of Expression{}
 //
 //     updateInput := dynamodb.UpdateInput{
-//       Key: map[string]*dynamodb.AttributeValue{
+//       Key: map[string]dynamodb.AttributeValue{
 //         "PartitionKey": {
 //           S: aws.String("someKey"),
 //         },
@@ -429,7 +429,7 @@ func (e Expression) Update() *string {
 	return e.returnExpression(update)
 }
 
-// Names returns the map[string]*string corresponding to the
+// Names returns the map[string]string corresponding to the
 // ExpressionAttributeNames of the argument Expression. This method is used to
 // satisfy the members of DynamoDB input structs. If Expression does not use
 // ExpressionAttributeNames, this method returns nil. The
@@ -451,11 +451,11 @@ func (e Expression) Update() *string {
 //       ExpressionAttributeValues: expression.Values(),
 //       TableName: aws.String("SomeTable"),
 //     }
-func (e Expression) Names() map[string]*string {
+func (e Expression) Names() map[string]string {
 	return e.namesMap
 }
 
-// Values returns the map[string]*dynamodb.AttributeValue corresponding to
+// Values returns the map[string]dynamodb.AttributeValue corresponding to
 // the ExpressionAttributeValues of the argument Expression. This method is used
 // to satisfy the members of DynamoDB input structs. If Expression does not use
 // ExpressionAttributeValues, this method returns nil. The
@@ -477,7 +477,7 @@ func (e Expression) Names() map[string]*string {
 //       ExpressionAttributeValues: expression.Values(),
 //       TableName: aws.String("SomeTable"),
 //     }
-func (e Expression) Values() map[string]*dynamodb.AttributeValue {
+func (e Expression) Values() map[string]dynamodb.AttributeValue {
 	return e.valuesMap
 }
 

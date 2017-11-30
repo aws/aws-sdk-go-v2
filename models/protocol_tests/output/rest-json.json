@@ -673,13 +673,13 @@
         "enum":[
           "foo",
           "bar",
-					"0",
-					"1"
+          "0",
+          "1"
         ]
       },
       "EnumList":{
         "type":"list",
-				"member": {"shape": "RESTJSONEnumType"}
+        "member": {"shape": "RESTJSONEnumType"}
       }
     },
     "cases": [
@@ -695,9 +695,9 @@
           "name": "OperationName"
         },
         "result": {
-					"HeaderEnum": "baz",
+          "HeaderEnum": "baz",
           "FooEnum": "foo",
-					"ListEnums": ["foo", "bar"]
+          "ListEnums": ["foo", "bar"]
         },
         "response": {
           "status_code": 200,

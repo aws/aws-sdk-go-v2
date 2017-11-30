@@ -824,7 +824,7 @@ type AddTagsInput struct {
 	ResourceId *string `type:"string" required:"true"`
 
 	// Contains a list of CloudTrail tags, up to a limit of 50
-	TagsList []*Tag `type:"list"`
+	TagsList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -846,9 +846,6 @@ func (s *AddTagsInput) Validate() error {
 	}
 	if s.TagsList != nil {
 		for i, v := range s.TagsList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(aws.ErrInvalidParams))
 			}
@@ -868,7 +865,7 @@ func (s *AddTagsInput) SetResourceId(v string) *AddTagsInput {
 }
 
 // SetTagsList sets the TagsList field's value.
-func (s *AddTagsInput) SetTagsList(v []*Tag) *AddTagsInput {
+func (s *AddTagsInput) SetTagsList(v []Tag) *AddTagsInput {
 	s.TagsList = v
 	return s
 }
@@ -1238,7 +1235,7 @@ type DataResource struct {
 	// To log data events for specific objects, specify the S3 bucket and object
 	// prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data
 	// events for objects in this S3 bucket that match the prefix.
-	Values []*string `type:"list"`
+	Values []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1258,7 +1255,7 @@ func (s *DataResource) SetType(v string) *DataResource {
 }
 
 // SetValues sets the Values field's value.
-func (s *DataResource) SetValues(v []*string) *DataResource {
+func (s *DataResource) SetValues(v []string) *DataResource {
 	s.Values = v
 	return s
 }
@@ -1351,7 +1348,7 @@ type DescribeTrailsInput struct {
 	// the names match the names of trails belonging only to the current region.
 	// To return information about a trail in another region, you must specify its
 	// trail ARN.
-	TrailNameList []*string `locationName:"trailNameList" type:"list"`
+	TrailNameList []string `locationName:"trailNameList" type:"list"`
 }
 
 // String returns the string representation
@@ -1371,7 +1368,7 @@ func (s *DescribeTrailsInput) SetIncludeShadowTrails(v bool) *DescribeTrailsInpu
 }
 
 // SetTrailNameList sets the TrailNameList field's value.
-func (s *DescribeTrailsInput) SetTrailNameList(v []*string) *DescribeTrailsInput {
+func (s *DescribeTrailsInput) SetTrailNameList(v []string) *DescribeTrailsInput {
 	s.TrailNameList = v
 	return s
 }
@@ -1383,7 +1380,7 @@ type DescribeTrailsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of trail objects.
-	TrailList []*Trail `locationName:"trailList" type:"list"`
+	TrailList []Trail `locationName:"trailList" type:"list"`
 }
 
 // String returns the string representation
@@ -1397,7 +1394,7 @@ func (s DescribeTrailsOutput) GoString() string {
 }
 
 // SetTrailList sets the TrailList field's value.
-func (s *DescribeTrailsOutput) SetTrailList(v []*Trail) *DescribeTrailsOutput {
+func (s *DescribeTrailsOutput) SetTrailList(v []Trail) *DescribeTrailsOutput {
 	s.TrailList = v
 	return s
 }
@@ -1424,7 +1421,7 @@ type Event struct {
 	EventTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of resources referenced by the event returned.
-	Resources []*Resource `type:"list"`
+	Resources []Resource `type:"list"`
 
 	// A user name or role name of the requester that called the API in the event
 	// returned.
@@ -1472,7 +1469,7 @@ func (s *Event) SetEventTime(v time.Time) *Event {
 }
 
 // SetResources sets the Resources field's value.
-func (s *Event) SetResources(v []*Resource) *Event {
+func (s *Event) SetResources(v []Resource) *Event {
 	s.Resources = v
 	return s
 }
@@ -1499,7 +1496,7 @@ type EventSelector struct {
 	//
 	// For more information, see Data Events (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events)
 	// in the AWS CloudTrail User Guide.
-	DataResources []*DataResource `type:"list"`
+	DataResources []DataResource `type:"list"`
 
 	// Specify if you want your event selector to include management events for
 	// your trail.
@@ -1515,7 +1512,7 @@ type EventSelector struct {
 	// and RunInstances is a write-only API operation.
 	//
 	// By default, the value is All.
-	ReadWriteType ReadWriteType `type:"string"`
+	ReadWriteType ReadWriteType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1529,7 +1526,7 @@ func (s EventSelector) GoString() string {
 }
 
 // SetDataResources sets the DataResources field's value.
-func (s *EventSelector) SetDataResources(v []*DataResource) *EventSelector {
+func (s *EventSelector) SetDataResources(v []DataResource) *EventSelector {
 	s.DataResources = v
 	return s
 }
@@ -1608,7 +1605,7 @@ type GetEventSelectorsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The event selectors that are configured for the trail.
-	EventSelectors []*EventSelector `type:"list"`
+	EventSelectors []EventSelector `type:"list"`
 
 	// The specified trail ARN that has the event selectors.
 	TrailARN *string `type:"string"`
@@ -1625,7 +1622,7 @@ func (s GetEventSelectorsOutput) GoString() string {
 }
 
 // SetEventSelectors sets the EventSelectors field's value.
-func (s *GetEventSelectorsOutput) SetEventSelectors(v []*EventSelector) *GetEventSelectorsOutput {
+func (s *GetEventSelectorsOutput) SetEventSelectors(v []EventSelector) *GetEventSelectorsOutput {
 	s.EventSelectors = v
 	return s
 }
@@ -1934,7 +1931,7 @@ type ListPublicKeysOutput struct {
 	// Contains an array of PublicKey objects.
 	//
 	// The returned public keys may have validity time ranges that overlap.
-	PublicKeyList []*PublicKey `type:"list"`
+	PublicKeyList []PublicKey `type:"list"`
 }
 
 // String returns the string representation
@@ -1954,7 +1951,7 @@ func (s *ListPublicKeysOutput) SetNextToken(v string) *ListPublicKeysOutput {
 }
 
 // SetPublicKeyList sets the PublicKeyList field's value.
-func (s *ListPublicKeysOutput) SetPublicKeyList(v []*PublicKey) *ListPublicKeysOutput {
+func (s *ListPublicKeysOutput) SetPublicKeyList(v []PublicKey) *ListPublicKeysOutput {
 	s.PublicKeyList = v
 	return s
 }
@@ -1973,7 +1970,7 @@ type ListTagsInput struct {
 	// arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail
 	//
 	// ResourceIdList is a required field
-	ResourceIdList []*string `type:"list" required:"true"`
+	ResourceIdList []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2007,7 +2004,7 @@ func (s *ListTagsInput) SetNextToken(v string) *ListTagsInput {
 }
 
 // SetResourceIdList sets the ResourceIdList field's value.
-func (s *ListTagsInput) SetResourceIdList(v []*string) *ListTagsInput {
+func (s *ListTagsInput) SetResourceIdList(v []string) *ListTagsInput {
 	s.ResourceIdList = v
 	return s
 }
@@ -2022,7 +2019,7 @@ type ListTagsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of resource tags.
-	ResourceTagList []*ResourceTag `type:"list"`
+	ResourceTagList []ResourceTag `type:"list"`
 }
 
 // String returns the string representation
@@ -2042,7 +2039,7 @@ func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
 }
 
 // SetResourceTagList sets the ResourceTagList field's value.
-func (s *ListTagsOutput) SetResourceTagList(v []*ResourceTag) *ListTagsOutput {
+func (s *ListTagsOutput) SetResourceTagList(v []ResourceTag) *ListTagsOutput {
 	s.ResourceTagList = v
 	return s
 }
@@ -2055,7 +2052,7 @@ type LookupAttribute struct {
 	// Specifies an attribute on which to filter the events returned.
 	//
 	// AttributeKey is a required field
-	AttributeKey LookupAttributeKey `type:"string" required:"true"`
+	AttributeKey LookupAttributeKey `type:"string" required:"true" enum:"true"`
 
 	// Specifies a value for the specified AttributeKey.
 	//
@@ -2114,7 +2111,7 @@ type LookupEventsInput struct {
 
 	// Contains a list of lookup attributes. Currently the list can contain only
 	// one item.
-	LookupAttributes []*LookupAttribute `type:"list"`
+	LookupAttributes []LookupAttribute `type:"list"`
 
 	// The number of events to return. Possible values are 1 through 50. The default
 	// is 10.
@@ -2151,9 +2148,6 @@ func (s *LookupEventsInput) Validate() error {
 	}
 	if s.LookupAttributes != nil {
 		for i, v := range s.LookupAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LookupAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -2173,7 +2167,7 @@ func (s *LookupEventsInput) SetEndTime(v time.Time) *LookupEventsInput {
 }
 
 // SetLookupAttributes sets the LookupAttributes field's value.
-func (s *LookupEventsInput) SetLookupAttributes(v []*LookupAttribute) *LookupEventsInput {
+func (s *LookupEventsInput) SetLookupAttributes(v []LookupAttribute) *LookupEventsInput {
 	s.LookupAttributes = v
 	return s
 }
@@ -2204,7 +2198,7 @@ type LookupEventsOutput struct {
 	// A list of events returned based on the lookup attributes specified and the
 	// CloudTrail event. The events list is sorted by time. The most recent event
 	// is listed first.
-	Events []*Event `type:"list"`
+	Events []Event `type:"list"`
 
 	// The token to use to get the next page of results after a previous API call.
 	// If the token does not appear, there are no more results to return. The token
@@ -2225,7 +2219,7 @@ func (s LookupEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *LookupEventsOutput) SetEvents(v []*Event) *LookupEventsOutput {
+func (s *LookupEventsOutput) SetEvents(v []Event) *LookupEventsOutput {
 	s.Events = v
 	return s
 }
@@ -2298,7 +2292,7 @@ type PutEventSelectorsInput struct {
 	// five event selectors for a trail.
 	//
 	// EventSelectors is a required field
-	EventSelectors []*EventSelector `type:"list" required:"true"`
+	EventSelectors []EventSelector `type:"list" required:"true"`
 
 	// Specifies the name of the trail or trail ARN. If you specify a trail name,
 	// the string must meet the following requirements:
@@ -2352,7 +2346,7 @@ func (s *PutEventSelectorsInput) Validate() error {
 }
 
 // SetEventSelectors sets the EventSelectors field's value.
-func (s *PutEventSelectorsInput) SetEventSelectors(v []*EventSelector) *PutEventSelectorsInput {
+func (s *PutEventSelectorsInput) SetEventSelectors(v []EventSelector) *PutEventSelectorsInput {
 	s.EventSelectors = v
 	return s
 }
@@ -2368,7 +2362,7 @@ type PutEventSelectorsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the event selectors configured for your trail.
-	EventSelectors []*EventSelector `type:"list"`
+	EventSelectors []EventSelector `type:"list"`
 
 	// Specifies the ARN of the trail that was updated with event selectors. The
 	// format of a trail ARN is:
@@ -2388,7 +2382,7 @@ func (s PutEventSelectorsOutput) GoString() string {
 }
 
 // SetEventSelectors sets the EventSelectors field's value.
-func (s *PutEventSelectorsOutput) SetEventSelectors(v []*EventSelector) *PutEventSelectorsOutput {
+func (s *PutEventSelectorsOutput) SetEventSelectors(v []EventSelector) *PutEventSelectorsOutput {
 	s.EventSelectors = v
 	return s
 }
@@ -2413,7 +2407,7 @@ type RemoveTagsInput struct {
 	ResourceId *string `type:"string" required:"true"`
 
 	// Specifies a list of tags to be removed.
-	TagsList []*Tag `type:"list"`
+	TagsList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -2435,9 +2429,6 @@ func (s *RemoveTagsInput) Validate() error {
 	}
 	if s.TagsList != nil {
 		for i, v := range s.TagsList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(aws.ErrInvalidParams))
 			}
@@ -2457,7 +2448,7 @@ func (s *RemoveTagsInput) SetResourceId(v string) *RemoveTagsInput {
 }
 
 // SetTagsList sets the TagsList field's value.
-func (s *RemoveTagsInput) SetTagsList(v []*Tag) *RemoveTagsInput {
+func (s *RemoveTagsInput) SetTagsList(v []Tag) *RemoveTagsInput {
 	s.TagsList = v
 	return s
 }
@@ -2529,7 +2520,7 @@ type ResourceTag struct {
 	ResourceId *string `type:"string"`
 
 	// A list of tags.
-	TagsList []*Tag `type:"list"`
+	TagsList []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -2549,7 +2540,7 @@ func (s *ResourceTag) SetResourceId(v string) *ResourceTag {
 }
 
 // SetTagsList sets the TagsList field's value.
-func (s *ResourceTag) SetTagsList(v []*Tag) *ResourceTag {
+func (s *ResourceTag) SetTagsList(v []Tag) *ResourceTag {
 	s.TagsList = v
 	return s
 }

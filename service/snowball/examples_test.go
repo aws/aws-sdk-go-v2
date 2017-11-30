@@ -174,7 +174,7 @@ func ExampleSnowball_CreateClusterRequest_shared00() {
 			NotifyAll: aws.Bool(false),
 		},
 		Resources: &snowball.JobResource{
-			S3Resources: []*snowball.S3Resource{
+			S3Resources: []snowball.S3Resource{
 				{
 					BucketArn: aws.String("arn:aws:s3:::MyBucket"),
 				},
@@ -233,7 +233,7 @@ func ExampleSnowball_CreateJobRequest_shared00() {
 			NotifyAll: aws.Bool(false),
 		},
 		Resources: &snowball.JobResource{
-			S3Resources: []*snowball.S3Resource{
+			S3Resources: []snowball.S3Resource{
 				{
 					BucketArn: aws.String("arn:aws:s3:::MyBucket"),
 				},

@@ -388,7 +388,7 @@ type GetRecordsOutput struct {
 	NextShardIterator *string `min:"1" type:"string"`
 
 	// The stream records from the shard, which were retrieved using the shard iterator.
-	Records []*Record `type:"list"`
+	Records []Record `type:"list"`
 }
 
 // String returns the string representation
@@ -408,7 +408,7 @@ func (s *GetRecordsOutput) SetNextShardIterator(v string) *GetRecordsOutput {
 }
 
 // SetRecords sets the Records field's value.
-func (s *GetRecordsOutput) SetRecords(v []*Record) *GetRecordsOutput {
+func (s *GetRecordsOutput) SetRecords(v []Record) *GetRecordsOutput {
 	s.Records = v
 	return s
 }
@@ -445,7 +445,7 @@ type GetShardIteratorInput struct {
 	//    shard, so that you always read the most recent data in the shard.
 	//
 	// ShardIteratorType is a required field
-	ShardIteratorType ShardIteratorType `type:"string" required:"true"`
+	ShardIteratorType ShardIteratorType `type:"string" required:"true" enum:"true"`
 
 	// The Amazon Resource Name (ARN) for the stream.
 	//
@@ -662,7 +662,7 @@ type ListStreamsOutput struct {
 	LastEvaluatedStreamArn *string `min:"37" type:"string"`
 
 	// A list of stream descriptors associated with the current account and endpoint.
-	Streams []*Stream `type:"list"`
+	Streams []Stream `type:"list"`
 }
 
 // String returns the string representation
@@ -682,7 +682,7 @@ func (s *ListStreamsOutput) SetLastEvaluatedStreamArn(v string) *ListStreamsOutp
 }
 
 // SetStreams sets the Streams field's value.
-func (s *ListStreamsOutput) SetStreams(v []*Stream) *ListStreamsOutput {
+func (s *ListStreamsOutput) SetStreams(v []Stream) *ListStreamsOutput {
 	s.Streams = v
 	return s
 }
@@ -710,7 +710,7 @@ type Record struct {
 	//    * MODIFY - one or more of an existing item's attributes were modified.
 	//
 	//    * REMOVE - the item was deleted from the table
-	EventName OperationType `locationName:"eventName" type:"string"`
+	EventName OperationType `locationName:"eventName" type:"string" enum:"true"`
 
 	// The AWS service from which the stream record originated. For DynamoDB Streams,
 	// this is aws:dynamodb.
@@ -930,7 +930,7 @@ type StreamDescription struct {
 	CreationRequestDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The key attribute(s) of the stream's DynamoDB table.
-	KeySchema []*dynamodb.KeySchemaElement `min:"1" type:"list"`
+	KeySchema []dynamodb.KeySchemaElement `min:"1" type:"list"`
 
 	// The shard ID of the item where the operation stopped, inclusive of the previous
 	// result set. Use this value to start a new operation, excluding this value
@@ -945,7 +945,7 @@ type StreamDescription struct {
 	LastEvaluatedShardId *string `min:"28" type:"string"`
 
 	// The shards that comprise the stream.
-	Shards []*Shard `type:"list"`
+	Shards []Shard `type:"list"`
 
 	// The Amazon Resource Name (ARN) for the stream.
 	StreamArn *string `min:"37" type:"string"`
@@ -973,7 +973,7 @@ type StreamDescription struct {
 	//    * DISABLING - Streams is currently being disabled on the DynamoDB table.
 	//
 	//    * DISABLED - the stream is disabled.
-	StreamStatus StreamStatus `type:"string"`
+	StreamStatus StreamStatus `type:"string" enum:"true"`
 
 	// Indicates the format of the records within this stream:
 	//
@@ -988,7 +988,7 @@ type StreamDescription struct {
 	//
 	//    * NEW_AND_OLD_IMAGES - both the new and the old images of the items from
 	//    the table.
-	StreamViewType StreamViewType `type:"string"`
+	StreamViewType StreamViewType `type:"string" enum:"true"`
 
 	// The DynamoDB table with which the stream is associated.
 	TableName *string `min:"3" type:"string"`
@@ -1011,7 +1011,7 @@ func (s *StreamDescription) SetCreationRequestDateTime(v time.Time) *StreamDescr
 }
 
 // SetKeySchema sets the KeySchema field's value.
-func (s *StreamDescription) SetKeySchema(v []*dynamodb.KeySchemaElement) *StreamDescription {
+func (s *StreamDescription) SetKeySchema(v []dynamodb.KeySchemaElement) *StreamDescription {
 	s.KeySchema = v
 	return s
 }
@@ -1023,7 +1023,7 @@ func (s *StreamDescription) SetLastEvaluatedShardId(v string) *StreamDescription
 }
 
 // SetShards sets the Shards field's value.
-func (s *StreamDescription) SetShards(v []*Shard) *StreamDescription {
+func (s *StreamDescription) SetShards(v []Shard) *StreamDescription {
 	s.Shards = v
 	return s
 }
@@ -1069,13 +1069,13 @@ type StreamRecord struct {
 	ApproximateCreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The primary key attribute(s) for the DynamoDB item that was modified.
-	Keys map[string]*dynamodb.AttributeValue `type:"map"`
+	Keys map[string]dynamodb.AttributeValue `type:"map"`
 
 	// The item in the DynamoDB table as it appeared after it was modified.
-	NewImage map[string]*dynamodb.AttributeValue `type:"map"`
+	NewImage map[string]dynamodb.AttributeValue `type:"map"`
 
 	// The item in the DynamoDB table as it appeared before it was modified.
-	OldImage map[string]*dynamodb.AttributeValue `type:"map"`
+	OldImage map[string]dynamodb.AttributeValue `type:"map"`
 
 	// The sequence number of the stream record.
 	SequenceNumber *string `min:"21" type:"string"`
@@ -1093,7 +1093,7 @@ type StreamRecord struct {
 	//    * OLD_IMAGE - the entire item, as it appeared before it was modified.
 	//
 	//    * NEW_AND_OLD_IMAGES - both the new and the old item images of the item.
-	StreamViewType StreamViewType `type:"string"`
+	StreamViewType StreamViewType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1113,19 +1113,19 @@ func (s *StreamRecord) SetApproximateCreationDateTime(v time.Time) *StreamRecord
 }
 
 // SetKeys sets the Keys field's value.
-func (s *StreamRecord) SetKeys(v map[string]*dynamodb.AttributeValue) *StreamRecord {
+func (s *StreamRecord) SetKeys(v map[string]dynamodb.AttributeValue) *StreamRecord {
 	s.Keys = v
 	return s
 }
 
 // SetNewImage sets the NewImage field's value.
-func (s *StreamRecord) SetNewImage(v map[string]*dynamodb.AttributeValue) *StreamRecord {
+func (s *StreamRecord) SetNewImage(v map[string]dynamodb.AttributeValue) *StreamRecord {
 	s.NewImage = v
 	return s
 }
 
 // SetOldImage sets the OldImage field's value.
-func (s *StreamRecord) SetOldImage(v map[string]*dynamodb.AttributeValue) *StreamRecord {
+func (s *StreamRecord) SetOldImage(v map[string]dynamodb.AttributeValue) *StreamRecord {
 	s.OldImage = v
 	return s
 }

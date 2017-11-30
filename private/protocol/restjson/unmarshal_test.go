@@ -602,11 +602,11 @@ type OutputService4TestShapeOutputService4TestCaseOperation1Input struct {
 type OutputService4TestShapeOutputService4TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*string `type:"list"`
+	ListMember []string `type:"list"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) SetListMember(v []*string) *OutputService4TestShapeOutputService4TestCaseOperation1Output {
+func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) SetListMember(v []string) *OutputService4TestShapeOutputService4TestCaseOperation1Output {
 	s.ListMember = v
 	return s
 }
@@ -714,11 +714,11 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
 type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*OutputService5TestShapeSingleStruct `type:"list"`
+	ListMember []OutputService5TestShapeSingleStruct `type:"list"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetListMember(v []*OutputService5TestShapeSingleStruct) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
+func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetListMember(v []OutputService5TestShapeSingleStruct) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
 	s.ListMember = v
 	return s
 }
@@ -838,11 +838,11 @@ type OutputService6TestShapeOutputService6TestCaseOperation1Input struct {
 type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	MapMember map[string][]*int64 `type:"map"`
+	MapMember map[string][]int64 `type:"map"`
 }
 
 // SetMapMember sets the MapMember field's value.
-func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetMapMember(v map[string][]*int64) *OutputService6TestShapeOutputService6TestCaseOperation1Output {
+func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetMapMember(v map[string][]int64) *OutputService6TestShapeOutputService6TestCaseOperation1Output {
 	s.MapMember = v
 	return s
 }
@@ -950,11 +950,11 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
 type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	MapMember map[string]*time.Time `type:"map"`
+	MapMember map[string]time.Time `type:"map"`
 }
 
 // SetMapMember sets the MapMember field's value.
-func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetMapMember(v map[string]*time.Time) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
+func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetMapMember(v map[string]time.Time) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
 	s.MapMember = v
 	return s
 }
@@ -1174,19 +1174,19 @@ type OutputService9TestShapeOutputService9TestCaseOperation1Input struct {
 type OutputService9TestShapeOutputService9TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	AllHeaders map[string]*string `location:"headers" type:"map"`
+	AllHeaders map[string]string `location:"headers" type:"map"`
 
-	PrefixedHeaders map[string]*string `location:"headers" locationName:"X-" type:"map"`
+	PrefixedHeaders map[string]string `location:"headers" locationName:"X-" type:"map"`
 }
 
 // SetAllHeaders sets the AllHeaders field's value.
-func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetAllHeaders(v map[string]*string) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
+func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetAllHeaders(v map[string]string) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
 	s.AllHeaders = v
 	return s
 }
 
 // SetPrefixedHeaders sets the PrefixedHeaders field's value.
-func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetPrefixedHeaders(v map[string]*string) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
+func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetPrefixedHeaders(v map[string]string) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
 	s.PrefixedHeaders = v
 	return s
 }
@@ -1694,9 +1694,9 @@ type OutputService13TestShapeOutputService13TestCaseOperation1Input struct {
 type OutputService13TestShapeOutputService13TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService13TestShapeRESTJSONEnumType `type:"string"`
+	FooEnum OutputService13TestShapeRESTJSONEnumType `type:"string" enum:"true"`
 
-	HeaderEnum OutputService13TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string"`
+	HeaderEnum OutputService13TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
 
 	ListEnums []OutputService13TestShapeRESTJSONEnumType `type:"list"`
 }
@@ -1775,10 +1775,10 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	if e, a := 1.2, *out.Float; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "test", *out.ImaHeader; e != a {
+	if e, a := string("test"), *out.ImaHeader; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "abc", *out.ImaHeaderLocation; e != a {
+	if e, a := string("abc"), *out.ImaHeaderLocation; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := int64(200), *out.Long; e != a {
@@ -1790,7 +1790,7 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	if e, a := int64(200), *out.Status; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "myname", *out.Str; e != a {
+	if e, a := string("myname"), *out.Str; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := true, *out.TrueBool; e != a {
@@ -1889,10 +1889,10 @@ func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "a", *out.ListMember[0]; e != a {
+	if e, a := string("a"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "b", *out.ListMember[1]; e != a {
+	if e, a := string("b"), out.ListMember[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -1922,10 +1922,10 @@ func TestOutputService5ProtocolTestListsWithStructureMemberCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "a", *out.ListMember[0].Foo; e != a {
+	if e, a := string("a"), *out.ListMember[0].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "b", *out.ListMember[1].Foo; e != a {
+	if e, a := string("b"), *out.ListMember[1].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -1955,16 +1955,16 @@ func TestOutputService6ProtocolTestMapsCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := int64(1), *out.MapMember["a"][0]; e != a {
+	if e, a := int64(1), out.MapMember["a"][0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := int64(2), *out.MapMember["a"][1]; e != a {
+	if e, a := int64(2), out.MapMember["a"][1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := int64(3), *out.MapMember["b"][0]; e != a {
+	if e, a := int64(3), out.MapMember["b"][0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := int64(4), *out.MapMember["b"][1]; e != a {
+	if e, a := int64(4), out.MapMember["b"][1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2057,19 +2057,19 @@ func TestOutputService9ProtocolTestSupportsHeaderMapsCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "10", *out.AllHeaders["Content-Length"]; e != a {
+	if e, a := string("10"), out.AllHeaders["Content-Length"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "boo", *out.AllHeaders["X-Bam"]; e != a {
+	if e, a := string("boo"), out.AllHeaders["X-Bam"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "bar", *out.AllHeaders["X-Foo"]; e != a {
+	if e, a := string("bar"), out.AllHeaders["X-Foo"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "boo", *out.PrefixedHeaders["Bam"]; e != a {
+	if e, a := string("boo"), out.PrefixedHeaders["Bam"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "bar", *out.PrefixedHeaders["Foo"]; e != a {
+	if e, a := string("bar"), out.PrefixedHeaders["Foo"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2100,10 +2100,10 @@ func TestOutputService10ProtocolTestJSONPayloadCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "abc", *out.Data.Foo; e != a {
+	if e, a := string("abc"), *out.Data.Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "baz", *out.Header; e != a {
+	if e, a := string("baz"), *out.Header; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

@@ -1059,7 +1059,7 @@ type AlarmHistoryItem struct {
 	HistoryData *string `min:"1" type:"string"`
 
 	// The type of alarm history item.
-	HistoryItemType HistoryItemType `type:"string"`
+	HistoryItemType HistoryItemType `type:"string" enum:"true"`
 
 	// A summary of the alarm history, in text format.
 	HistorySummary *string `min:"1" type:"string"`
@@ -1205,7 +1205,7 @@ type Datapoint struct {
 	Average *float64 `type:"double"`
 
 	// The percentile statistic for the data point.
-	ExtendedStatistics map[string]*float64 `type:"map"`
+	ExtendedStatistics map[string]float64 `type:"map"`
 
 	// The maximum metric value for the data point.
 	Maximum *float64 `type:"double"`
@@ -1224,7 +1224,7 @@ type Datapoint struct {
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The standard unit for the data point.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1244,7 +1244,7 @@ func (s *Datapoint) SetAverage(v float64) *Datapoint {
 }
 
 // SetExtendedStatistics sets the ExtendedStatistics field's value.
-func (s *Datapoint) SetExtendedStatistics(v map[string]*float64) *Datapoint {
+func (s *Datapoint) SetExtendedStatistics(v map[string]float64) *Datapoint {
 	s.ExtendedStatistics = v
 	return s
 }
@@ -1292,7 +1292,7 @@ type DeleteAlarmsInput struct {
 	// The alarms to be deleted.
 	//
 	// AlarmNames is a required field
-	AlarmNames []*string `type:"list" required:"true"`
+	AlarmNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1320,7 +1320,7 @@ func (s *DeleteAlarmsInput) Validate() error {
 }
 
 // SetAlarmNames sets the AlarmNames field's value.
-func (s *DeleteAlarmsInput) SetAlarmNames(v []*string) *DeleteAlarmsInput {
+func (s *DeleteAlarmsInput) SetAlarmNames(v []string) *DeleteAlarmsInput {
 	s.AlarmNames = v
 	return s
 }
@@ -1345,7 +1345,7 @@ type DeleteDashboardsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The dashboards to be deleted.
-	DashboardNames []*string `type:"list"`
+	DashboardNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1359,7 +1359,7 @@ func (s DeleteDashboardsInput) GoString() string {
 }
 
 // SetDashboardNames sets the DashboardNames field's value.
-func (s *DeleteDashboardsInput) SetDashboardNames(v []*string) *DeleteDashboardsInput {
+func (s *DeleteDashboardsInput) SetDashboardNames(v []string) *DeleteDashboardsInput {
 	s.DashboardNames = v
 	return s
 }
@@ -1390,7 +1390,7 @@ type DescribeAlarmHistoryInput struct {
 	EndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The type of alarm histories to retrieve.
-	HistoryItemType HistoryItemType `type:"string"`
+	HistoryItemType HistoryItemType `type:"string" enum:"true"`
 
 	// The maximum number of alarm history records to retrieve.
 	MaxRecords *int64 `min:"1" type:"integer"`
@@ -1470,7 +1470,7 @@ type DescribeAlarmHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The alarm histories, in JSON format.
-	AlarmHistoryItems []*AlarmHistoryItem `type:"list"`
+	AlarmHistoryItems []AlarmHistoryItem `type:"list"`
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string `type:"string"`
@@ -1487,7 +1487,7 @@ func (s DescribeAlarmHistoryOutput) GoString() string {
 }
 
 // SetAlarmHistoryItems sets the AlarmHistoryItems field's value.
-func (s *DescribeAlarmHistoryOutput) SetAlarmHistoryItems(v []*AlarmHistoryItem) *DescribeAlarmHistoryOutput {
+func (s *DescribeAlarmHistoryOutput) SetAlarmHistoryItems(v []AlarmHistoryItem) *DescribeAlarmHistoryOutput {
 	s.AlarmHistoryItems = v
 	return s
 }
@@ -1504,7 +1504,7 @@ type DescribeAlarmsForMetricInput struct {
 
 	// The dimensions associated with the metric. If the metric has any associated
 	// dimensions, you must specify them in order for the call to succeed.
-	Dimensions []*Dimension `type:"list"`
+	Dimensions []Dimension `type:"list"`
 
 	// The percentile statistic for the metric. Specify a value between p0.0 and
 	// p100.
@@ -1525,10 +1525,10 @@ type DescribeAlarmsForMetricInput struct {
 
 	// The statistic for the metric, other than percentiles. For percentile statistics,
 	// use ExtendedStatistics.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The unit for the metric.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1563,9 +1563,6 @@ func (s *DescribeAlarmsForMetricInput) Validate() error {
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
@@ -1579,7 +1576,7 @@ func (s *DescribeAlarmsForMetricInput) Validate() error {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *DescribeAlarmsForMetricInput) SetDimensions(v []*Dimension) *DescribeAlarmsForMetricInput {
+func (s *DescribeAlarmsForMetricInput) SetDimensions(v []Dimension) *DescribeAlarmsForMetricInput {
 	s.Dimensions = v
 	return s
 }
@@ -1625,7 +1622,7 @@ type DescribeAlarmsForMetricOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The information for each alarm with the specified metric.
-	MetricAlarms []*MetricAlarm `type:"list"`
+	MetricAlarms []MetricAlarm `type:"list"`
 }
 
 // String returns the string representation
@@ -1639,7 +1636,7 @@ func (s DescribeAlarmsForMetricOutput) GoString() string {
 }
 
 // SetMetricAlarms sets the MetricAlarms field's value.
-func (s *DescribeAlarmsForMetricOutput) SetMetricAlarms(v []*MetricAlarm) *DescribeAlarmsForMetricOutput {
+func (s *DescribeAlarmsForMetricOutput) SetMetricAlarms(v []MetricAlarm) *DescribeAlarmsForMetricOutput {
 	s.MetricAlarms = v
 	return s
 }
@@ -1656,7 +1653,7 @@ type DescribeAlarmsInput struct {
 	AlarmNamePrefix *string `min:"1" type:"string"`
 
 	// The names of the alarms.
-	AlarmNames []*string `type:"list"`
+	AlarmNames []string `type:"list"`
 
 	// The maximum number of alarm descriptions to retrieve.
 	MaxRecords *int64 `min:"1" type:"integer"`
@@ -1666,7 +1663,7 @@ type DescribeAlarmsInput struct {
 	NextToken *string `type:"string"`
 
 	// The state value to be used in matching alarms.
-	StateValue StateValue `type:"string"`
+	StateValue StateValue `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1711,7 +1708,7 @@ func (s *DescribeAlarmsInput) SetAlarmNamePrefix(v string) *DescribeAlarmsInput 
 }
 
 // SetAlarmNames sets the AlarmNames field's value.
-func (s *DescribeAlarmsInput) SetAlarmNames(v []*string) *DescribeAlarmsInput {
+func (s *DescribeAlarmsInput) SetAlarmNames(v []string) *DescribeAlarmsInput {
 	s.AlarmNames = v
 	return s
 }
@@ -1739,7 +1736,7 @@ type DescribeAlarmsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The information for the specified alarms.
-	MetricAlarms []*MetricAlarm `type:"list"`
+	MetricAlarms []MetricAlarm `type:"list"`
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string `type:"string"`
@@ -1756,7 +1753,7 @@ func (s DescribeAlarmsOutput) GoString() string {
 }
 
 // SetMetricAlarms sets the MetricAlarms field's value.
-func (s *DescribeAlarmsOutput) SetMetricAlarms(v []*MetricAlarm) *DescribeAlarmsOutput {
+func (s *DescribeAlarmsOutput) SetMetricAlarms(v []MetricAlarm) *DescribeAlarmsOutput {
 	s.MetricAlarms = v
 	return s
 }
@@ -1892,7 +1889,7 @@ type DisableAlarmActionsInput struct {
 	// The names of the alarms.
 	//
 	// AlarmNames is a required field
-	AlarmNames []*string `type:"list" required:"true"`
+	AlarmNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1920,7 +1917,7 @@ func (s *DisableAlarmActionsInput) Validate() error {
 }
 
 // SetAlarmNames sets the AlarmNames field's value.
-func (s *DisableAlarmActionsInput) SetAlarmNames(v []*string) *DisableAlarmActionsInput {
+func (s *DisableAlarmActionsInput) SetAlarmNames(v []string) *DisableAlarmActionsInput {
 	s.AlarmNames = v
 	return s
 }
@@ -1947,7 +1944,7 @@ type EnableAlarmActionsInput struct {
 	// The names of the alarms.
 	//
 	// AlarmNames is a required field
-	AlarmNames []*string `type:"list" required:"true"`
+	AlarmNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1975,7 +1972,7 @@ func (s *EnableAlarmActionsInput) Validate() error {
 }
 
 // SetAlarmNames sets the AlarmNames field's value.
-func (s *EnableAlarmActionsInput) SetAlarmNames(v []*string) *EnableAlarmActionsInput {
+func (s *EnableAlarmActionsInput) SetAlarmNames(v []string) *EnableAlarmActionsInput {
 	s.AlarmNames = v
 	return s
 }
@@ -2076,7 +2073,7 @@ type GetMetricStatisticsInput struct {
 	// in the Amazon CloudWatch User Guide. For more information about specifying
 	// dimensions, see Publishing Metrics (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 	// in the Amazon CloudWatch User Guide.
-	Dimensions []*Dimension `type:"list"`
+	Dimensions []Dimension `type:"list"`
 
 	// The time stamp that determines the last data point to return.
 	//
@@ -2089,7 +2086,7 @@ type GetMetricStatisticsInput struct {
 	// The percentile statistics. Specify values between p0.0 and p100. When calling
 	// GetMetricStatistics, you must specify either Statistics or ExtendedStatistics,
 	// but not both.
-	ExtendedStatistics []*string `min:"1" type:"list"`
+	ExtendedStatistics []string `min:"1" type:"list"`
 
 	// The name of the metric, with or without spaces.
 	//
@@ -2160,7 +2157,7 @@ type GetMetricStatisticsInput struct {
 	// The unit for a given metric. Metrics may be reported in multiple units. Not
 	// supplying a unit results in all units being returned. If the metric only
 	// ever reports one unit, specifying a unit has no effect.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2213,9 +2210,6 @@ func (s *GetMetricStatisticsInput) Validate() error {
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2229,7 +2223,7 @@ func (s *GetMetricStatisticsInput) Validate() error {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *GetMetricStatisticsInput) SetDimensions(v []*Dimension) *GetMetricStatisticsInput {
+func (s *GetMetricStatisticsInput) SetDimensions(v []Dimension) *GetMetricStatisticsInput {
 	s.Dimensions = v
 	return s
 }
@@ -2241,7 +2235,7 @@ func (s *GetMetricStatisticsInput) SetEndTime(v time.Time) *GetMetricStatisticsI
 }
 
 // SetExtendedStatistics sets the ExtendedStatistics field's value.
-func (s *GetMetricStatisticsInput) SetExtendedStatistics(v []*string) *GetMetricStatisticsInput {
+func (s *GetMetricStatisticsInput) SetExtendedStatistics(v []string) *GetMetricStatisticsInput {
 	s.ExtendedStatistics = v
 	return s
 }
@@ -2287,7 +2281,7 @@ type GetMetricStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The data points for the specified metric.
-	Datapoints []*Datapoint `type:"list"`
+	Datapoints []Datapoint `type:"list"`
 
 	// A label for the specified metric.
 	Label *string `type:"string"`
@@ -2304,7 +2298,7 @@ func (s GetMetricStatisticsOutput) GoString() string {
 }
 
 // SetDatapoints sets the Datapoints field's value.
-func (s *GetMetricStatisticsOutput) SetDatapoints(v []*Datapoint) *GetMetricStatisticsOutput {
+func (s *GetMetricStatisticsOutput) SetDatapoints(v []Datapoint) *GetMetricStatisticsOutput {
 	s.Datapoints = v
 	return s
 }
@@ -2356,7 +2350,7 @@ type ListDashboardsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of matching dashboards.
-	DashboardEntries []*DashboardEntry `type:"list"`
+	DashboardEntries []DashboardEntry `type:"list"`
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string `type:"string"`
@@ -2373,7 +2367,7 @@ func (s ListDashboardsOutput) GoString() string {
 }
 
 // SetDashboardEntries sets the DashboardEntries field's value.
-func (s *ListDashboardsOutput) SetDashboardEntries(v []*DashboardEntry) *ListDashboardsOutput {
+func (s *ListDashboardsOutput) SetDashboardEntries(v []DashboardEntry) *ListDashboardsOutput {
 	s.DashboardEntries = v
 	return s
 }
@@ -2389,7 +2383,7 @@ type ListMetricsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The dimensions to filter against.
-	Dimensions []*DimensionFilter `type:"list"`
+	Dimensions []DimensionFilter `type:"list"`
 
 	// The name of the metric to filter against.
 	MetricName *string `min:"1" type:"string"`
@@ -2423,9 +2417,6 @@ func (s *ListMetricsInput) Validate() error {
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2439,7 +2430,7 @@ func (s *ListMetricsInput) Validate() error {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *ListMetricsInput) SetDimensions(v []*DimensionFilter) *ListMetricsInput {
+func (s *ListMetricsInput) SetDimensions(v []DimensionFilter) *ListMetricsInput {
 	s.Dimensions = v
 	return s
 }
@@ -2467,7 +2458,7 @@ type ListMetricsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The metrics.
-	Metrics []*Metric `type:"list"`
+	Metrics []Metric `type:"list"`
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string `type:"string"`
@@ -2484,7 +2475,7 @@ func (s ListMetricsOutput) GoString() string {
 }
 
 // SetMetrics sets the Metrics field's value.
-func (s *ListMetricsOutput) SetMetrics(v []*Metric) *ListMetricsOutput {
+func (s *ListMetricsOutput) SetMetrics(v []Metric) *ListMetricsOutput {
 	s.Metrics = v
 	return s
 }
@@ -2501,7 +2492,7 @@ type Metric struct {
 	_ struct{} `type:"structure"`
 
 	// The dimensions for the metric.
-	Dimensions []*Dimension `type:"list"`
+	Dimensions []Dimension `type:"list"`
 
 	// The name of the metric.
 	MetricName *string `min:"1" type:"string"`
@@ -2521,7 +2512,7 @@ func (s Metric) GoString() string {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *Metric) SetDimensions(v []*Dimension) *Metric {
+func (s *Metric) SetDimensions(v []Dimension) *Metric {
 	s.Dimensions = v
 	return s
 }
@@ -2549,7 +2540,7 @@ type MetricAlarm struct {
 
 	// The actions to execute when this alarm transitions to the ALARM state from
 	// any other state. Each action is specified as an Amazon Resource Name (ARN).
-	AlarmActions []*string `type:"list"`
+	AlarmActions []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the alarm.
 	AlarmArn *string `min:"1" type:"string"`
@@ -2565,10 +2556,10 @@ type MetricAlarm struct {
 
 	// The arithmetic operation to use when comparing the specified statistic and
 	// threshold. The specified statistic value is used as the first operand.
-	ComparisonOperator ComparisonOperator `type:"string"`
+	ComparisonOperator ComparisonOperator `type:"string" enum:"true"`
 
 	// The dimensions for the metric associated with the alarm.
-	Dimensions []*Dimension `type:"list"`
+	Dimensions []Dimension `type:"list"`
 
 	// Used only for alarms based on percentiles. If ignore, the alarm state does
 	// not change during periods with too few data points to be statistically significant.
@@ -2586,7 +2577,7 @@ type MetricAlarm struct {
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource
 	// Name (ARN).
-	InsufficientDataActions []*string `type:"list"`
+	InsufficientDataActions []string `type:"list"`
 
 	// The name of the metric associated with the alarm.
 	MetricName *string `min:"1" type:"string"`
@@ -2596,7 +2587,7 @@ type MetricAlarm struct {
 
 	// The actions to execute when this alarm transitions to the OK state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN).
-	OKActions []*string `type:"list"`
+	OKActions []string `type:"list"`
 
 	// The period, in seconds, over which the statistic is applied.
 	Period *int64 `min:"1" type:"integer"`
@@ -2611,11 +2602,11 @@ type MetricAlarm struct {
 	StateUpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state value for the alarm.
-	StateValue StateValue `type:"string"`
+	StateValue StateValue `type:"string" enum:"true"`
 
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The value to compare with the specified statistic.
 	Threshold *float64 `type:"double"`
@@ -2625,7 +2616,7 @@ type MetricAlarm struct {
 	TreatMissingData *string `min:"1" type:"string"`
 
 	// The unit of the metric associated with the alarm.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2645,7 +2636,7 @@ func (s *MetricAlarm) SetActionsEnabled(v bool) *MetricAlarm {
 }
 
 // SetAlarmActions sets the AlarmActions field's value.
-func (s *MetricAlarm) SetAlarmActions(v []*string) *MetricAlarm {
+func (s *MetricAlarm) SetAlarmActions(v []string) *MetricAlarm {
 	s.AlarmActions = v
 	return s
 }
@@ -2681,7 +2672,7 @@ func (s *MetricAlarm) SetComparisonOperator(v ComparisonOperator) *MetricAlarm {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *MetricAlarm) SetDimensions(v []*Dimension) *MetricAlarm {
+func (s *MetricAlarm) SetDimensions(v []Dimension) *MetricAlarm {
 	s.Dimensions = v
 	return s
 }
@@ -2705,7 +2696,7 @@ func (s *MetricAlarm) SetExtendedStatistic(v string) *MetricAlarm {
 }
 
 // SetInsufficientDataActions sets the InsufficientDataActions field's value.
-func (s *MetricAlarm) SetInsufficientDataActions(v []*string) *MetricAlarm {
+func (s *MetricAlarm) SetInsufficientDataActions(v []string) *MetricAlarm {
 	s.InsufficientDataActions = v
 	return s
 }
@@ -2723,7 +2714,7 @@ func (s *MetricAlarm) SetNamespace(v string) *MetricAlarm {
 }
 
 // SetOKActions sets the OKActions field's value.
-func (s *MetricAlarm) SetOKActions(v []*string) *MetricAlarm {
+func (s *MetricAlarm) SetOKActions(v []string) *MetricAlarm {
 	s.OKActions = v
 	return s
 }
@@ -2789,7 +2780,7 @@ type MetricDatum struct {
 	_ struct{} `type:"structure"`
 
 	// The dimensions associated with the metric.
-	Dimensions []*Dimension `type:"list"`
+	Dimensions []Dimension `type:"list"`
 
 	// The name of the metric.
 	//
@@ -2815,7 +2806,7 @@ type MetricDatum struct {
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unit of the metric.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 
 	// The value for the metric.
 	//
@@ -2852,9 +2843,6 @@ func (s *MetricDatum) Validate() error {
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2873,7 +2861,7 @@ func (s *MetricDatum) Validate() error {
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *MetricDatum) SetDimensions(v []*Dimension) *MetricDatum {
+func (s *MetricDatum) SetDimensions(v []Dimension) *MetricDatum {
 	s.Dimensions = v
 	return s
 }
@@ -2966,7 +2954,7 @@ type PutDashboardOutput struct {
 	//
 	// If this result includes error messages, the input was not valid and the operation
 	// failed.
-	DashboardValidationMessages []*DashboardValidationMessage `type:"list"`
+	DashboardValidationMessages []DashboardValidationMessage `type:"list"`
 }
 
 // String returns the string representation
@@ -2980,7 +2968,7 @@ func (s PutDashboardOutput) GoString() string {
 }
 
 // SetDashboardValidationMessages sets the DashboardValidationMessages field's value.
-func (s *PutDashboardOutput) SetDashboardValidationMessages(v []*DashboardValidationMessage) *PutDashboardOutput {
+func (s *PutDashboardOutput) SetDashboardValidationMessages(v []DashboardValidationMessage) *PutDashboardOutput {
 	s.DashboardValidationMessages = v
 	return s
 }
@@ -3002,7 +2990,7 @@ type PutMetricAlarmInput struct {
 	// Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Stop/1.0
 	// | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Terminate/1.0
 	// | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	AlarmActions []*string `type:"list"`
+	AlarmActions []string `type:"list"`
 
 	// The description for the alarm.
 	AlarmDescription *string `type:"string"`
@@ -3016,10 +3004,10 @@ type PutMetricAlarmInput struct {
 	// threshold. The specified statistic value is used as the first operand.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// The dimensions for the metric associated with the alarm.
-	Dimensions []*Dimension `type:"list"`
+	Dimensions []Dimension `type:"list"`
 
 	// Used only for alarms based on percentiles. If you specify ignore, the alarm
 	// state does not change during periods with too few data points to be statistically
@@ -3052,7 +3040,7 @@ type PutMetricAlarmInput struct {
 	// Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Stop/1.0
 	// | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Terminate/1.0
 	// | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	InsufficientDataActions []*string `type:"list"`
+	InsufficientDataActions []string `type:"list"`
 
 	// The name for the metric associated with the alarm.
 	//
@@ -3073,7 +3061,7 @@ type PutMetricAlarmInput struct {
 	// Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Stop/1.0
 	// | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Terminate/1.0
 	// | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	OKActions []*string `type:"list"`
+	OKActions []string `type:"list"`
 
 	// The period, in seconds, over which the specified statistic is applied. Valid
 	// values are 10, 30, and any multiple of 60.
@@ -3096,7 +3084,7 @@ type PutMetricAlarmInput struct {
 
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
-	Statistic Statistic `type:"string"`
+	Statistic Statistic `type:"string" enum:"true"`
 
 	// The value against which the specified statistic is compared.
 	//
@@ -3119,7 +3107,7 @@ type PutMetricAlarmInput struct {
 	//
 	// If you specify a unit, you must use a unit that is appropriate for the metric.
 	// Otherwise, the CloudWatch alarm can get stuck in the INSUFFICIENT DATA state.
-	Unit StandardUnit `type:"string"`
+	Unit StandardUnit `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3185,9 +3173,6 @@ func (s *PutMetricAlarmInput) Validate() error {
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
@@ -3207,7 +3192,7 @@ func (s *PutMetricAlarmInput) SetActionsEnabled(v bool) *PutMetricAlarmInput {
 }
 
 // SetAlarmActions sets the AlarmActions field's value.
-func (s *PutMetricAlarmInput) SetAlarmActions(v []*string) *PutMetricAlarmInput {
+func (s *PutMetricAlarmInput) SetAlarmActions(v []string) *PutMetricAlarmInput {
 	s.AlarmActions = v
 	return s
 }
@@ -3231,7 +3216,7 @@ func (s *PutMetricAlarmInput) SetComparisonOperator(v ComparisonOperator) *PutMe
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *PutMetricAlarmInput) SetDimensions(v []*Dimension) *PutMetricAlarmInput {
+func (s *PutMetricAlarmInput) SetDimensions(v []Dimension) *PutMetricAlarmInput {
 	s.Dimensions = v
 	return s
 }
@@ -3255,7 +3240,7 @@ func (s *PutMetricAlarmInput) SetExtendedStatistic(v string) *PutMetricAlarmInpu
 }
 
 // SetInsufficientDataActions sets the InsufficientDataActions field's value.
-func (s *PutMetricAlarmInput) SetInsufficientDataActions(v []*string) *PutMetricAlarmInput {
+func (s *PutMetricAlarmInput) SetInsufficientDataActions(v []string) *PutMetricAlarmInput {
 	s.InsufficientDataActions = v
 	return s
 }
@@ -3273,7 +3258,7 @@ func (s *PutMetricAlarmInput) SetNamespace(v string) *PutMetricAlarmInput {
 }
 
 // SetOKActions sets the OKActions field's value.
-func (s *PutMetricAlarmInput) SetOKActions(v []*string) *PutMetricAlarmInput {
+func (s *PutMetricAlarmInput) SetOKActions(v []string) *PutMetricAlarmInput {
 	s.OKActions = v
 	return s
 }
@@ -3330,7 +3315,7 @@ type PutMetricDataInput struct {
 	// The data for the metric.
 	//
 	// MetricData is a required field
-	MetricData []*MetricDatum `type:"list" required:"true"`
+	MetricData []MetricDatum `type:"list" required:"true"`
 
 	// The namespace for the metric data.
 	//
@@ -3367,9 +3352,6 @@ func (s *PutMetricDataInput) Validate() error {
 	}
 	if s.MetricData != nil {
 		for i, v := range s.MetricData {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricData", i), err.(aws.ErrInvalidParams))
 			}
@@ -3383,7 +3365,7 @@ func (s *PutMetricDataInput) Validate() error {
 }
 
 // SetMetricData sets the MetricData field's value.
-func (s *PutMetricDataInput) SetMetricData(v []*MetricDatum) *PutMetricDataInput {
+func (s *PutMetricDataInput) SetMetricData(v []MetricDatum) *PutMetricDataInput {
 	s.MetricData = v
 	return s
 }
@@ -3430,7 +3412,7 @@ type SetAlarmStateInput struct {
 	// The value of the state.
 	//
 	// StateValue is a required field
-	StateValue StateValue `type:"string" required:"true"`
+	StateValue StateValue `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

@@ -1130,7 +1130,7 @@ type Celebrity struct {
 
 	// An array of URLs pointing to additional information about the celebrity.
 	// If there is no additional information about the celebrity, this list is empty.
-	Urls []*string `type:"list"`
+	Urls []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1168,7 +1168,7 @@ func (s *Celebrity) SetName(v string) *Celebrity {
 }
 
 // SetUrls sets the Urls field's value.
-func (s *Celebrity) SetUrls(v []*string) *Celebrity {
+func (s *Celebrity) SetUrls(v []string) *Celebrity {
 	s.Urls = v
 	return s
 }
@@ -1291,7 +1291,7 @@ type CompareFacesOutput struct {
 	// CompareFacesMatch object provides the bounding box, the confidence level
 	// that the bounding box contains a face, and the similarity score for the face
 	// in the bounding box and the face in the source image.
-	FaceMatches []*CompareFacesMatch `type:"list"`
+	FaceMatches []CompareFacesMatch `type:"list"`
 
 	// The face in the source image that was used for comparison.
 	SourceImageFace *ComparedSourceImageFace `type:"structure"`
@@ -1307,7 +1307,7 @@ type CompareFacesOutput struct {
 	// is null and the SourceImageFace bounding box coordinates represent the location
 	// of the face after Exif metadata is used to correct the orientation. Images
 	// in .png format don't contain Exif metadata.
-	SourceImageOrientationCorrection OrientationCorrection `type:"string"`
+	SourceImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// The orientation of the target image (in counterclockwise direction). If your
 	// application displays the target image, you can use this value to correct
@@ -1321,11 +1321,11 @@ type CompareFacesOutput struct {
 	// is null and the bounding box coordinates in FaceMatches and UnmatchedFaces
 	// represent the location of the face after Exif metadata is used to correct
 	// the orientation. Images in .png format don't contain Exif metadata.
-	TargetImageOrientationCorrection OrientationCorrection `type:"string"`
+	TargetImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// An array of faces in the target image that did not match the source image
 	// face.
-	UnmatchedFaces []*ComparedFace `type:"list"`
+	UnmatchedFaces []ComparedFace `type:"list"`
 }
 
 // String returns the string representation
@@ -1339,7 +1339,7 @@ func (s CompareFacesOutput) GoString() string {
 }
 
 // SetFaceMatches sets the FaceMatches field's value.
-func (s *CompareFacesOutput) SetFaceMatches(v []*CompareFacesMatch) *CompareFacesOutput {
+func (s *CompareFacesOutput) SetFaceMatches(v []CompareFacesMatch) *CompareFacesOutput {
 	s.FaceMatches = v
 	return s
 }
@@ -1363,7 +1363,7 @@ func (s *CompareFacesOutput) SetTargetImageOrientationCorrection(v OrientationCo
 }
 
 // SetUnmatchedFaces sets the UnmatchedFaces field's value.
-func (s *CompareFacesOutput) SetUnmatchedFaces(v []*ComparedFace) *CompareFacesOutput {
+func (s *CompareFacesOutput) SetUnmatchedFaces(v []ComparedFace) *CompareFacesOutput {
 	s.UnmatchedFaces = v
 	return s
 }
@@ -1380,7 +1380,7 @@ type ComparedFace struct {
 	Confidence *float64 `type:"float"`
 
 	// An array of facial landmarks.
-	Landmarks []*Landmark `type:"list"`
+	Landmarks []Landmark `type:"list"`
 
 	// Indicates the pose of the face as determined by its pitch, roll, and yaw.
 	Pose *Pose `type:"structure"`
@@ -1412,7 +1412,7 @@ func (s *ComparedFace) SetConfidence(v float64) *ComparedFace {
 }
 
 // SetLandmarks sets the Landmarks field's value.
-func (s *ComparedFace) SetLandmarks(v []*Landmark) *ComparedFace {
+func (s *ComparedFace) SetLandmarks(v []Landmark) *ComparedFace {
 	s.Landmarks = v
 	return s
 }
@@ -1616,7 +1616,7 @@ type DeleteFacesInput struct {
 	// An array of face IDs to delete.
 	//
 	// FaceIds is a required field
-	FaceIds []*string `min:"1" type:"list" required:"true"`
+	FaceIds []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1660,7 +1660,7 @@ func (s *DeleteFacesInput) SetCollectionId(v string) *DeleteFacesInput {
 }
 
 // SetFaceIds sets the FaceIds field's value.
-func (s *DeleteFacesInput) SetFaceIds(v []*string) *DeleteFacesInput {
+func (s *DeleteFacesInput) SetFaceIds(v []string) *DeleteFacesInput {
 	s.FaceIds = v
 	return s
 }
@@ -1669,7 +1669,7 @@ type DeleteFacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of strings (face IDs) of the faces that were deleted.
-	DeletedFaces []*string `min:"1" type:"list"`
+	DeletedFaces []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1683,7 +1683,7 @@ func (s DeleteFacesOutput) GoString() string {
 }
 
 // SetDeletedFaces sets the DeletedFaces field's value.
-func (s *DeleteFacesOutput) SetDeletedFaces(v []*string) *DeleteFacesOutput {
+func (s *DeleteFacesOutput) SetDeletedFaces(v []string) *DeleteFacesOutput {
 	s.DeletedFaces = v
 	return s
 }
@@ -1754,7 +1754,7 @@ type DetectFacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Details of each face found in the image.
-	FaceDetails []*FaceDetail `type:"list"`
+	FaceDetails []FaceDetail `type:"list"`
 
 	// The orientation of the input image (counter-clockwise direction). If your
 	// application displays the image, you can use this value to correct image orientation.
@@ -1767,7 +1767,7 @@ type DetectFacesOutput struct {
 	// OrientationCorrection is null and the FaceDetails bounding box coordinates
 	// represent face locations after Exif metadata is used to correct the image
 	// orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1781,7 +1781,7 @@ func (s DetectFacesOutput) GoString() string {
 }
 
 // SetFaceDetails sets the FaceDetails field's value.
-func (s *DetectFacesOutput) SetFaceDetails(v []*FaceDetail) *DetectFacesOutput {
+func (s *DetectFacesOutput) SetFaceDetails(v []FaceDetail) *DetectFacesOutput {
 	s.FaceDetails = v
 	return s
 }
@@ -1863,7 +1863,7 @@ type DetectLabelsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of labels for the real-world objects detected.
-	Labels []*Label `type:"list"`
+	Labels []Label `type:"list"`
 
 	// The orientation of the input image (counter-clockwise direction). If your
 	// application displays the image, you can use this value to correct the orientation.
@@ -1873,7 +1873,7 @@ type DetectLabelsOutput struct {
 	// If the input image Exif metadata populates the orientation field, Amazon
 	// Rekognition does not perform orientation correction and the value of OrientationCorrection
 	// will be null.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1887,7 +1887,7 @@ func (s DetectLabelsOutput) GoString() string {
 }
 
 // SetLabels sets the Labels field's value.
-func (s *DetectLabelsOutput) SetLabels(v []*Label) *DetectLabelsOutput {
+func (s *DetectLabelsOutput) SetLabels(v []Label) *DetectLabelsOutput {
 	s.Labels = v
 	return s
 }
@@ -1962,7 +1962,7 @@ type DetectModerationLabelsOutput struct {
 	// An array of labels for explicit or suggestive adult content found in the
 	// image. The list includes the top-level label and each child label detected
 	// in the image. This is useful for filtering specific categories of content.
-	ModerationLabels []*ModerationLabel `type:"list"`
+	ModerationLabels []ModerationLabel `type:"list"`
 }
 
 // String returns the string representation
@@ -1976,7 +1976,7 @@ func (s DetectModerationLabelsOutput) GoString() string {
 }
 
 // SetModerationLabels sets the ModerationLabels field's value.
-func (s *DetectModerationLabelsOutput) SetModerationLabels(v []*ModerationLabel) *DetectModerationLabelsOutput {
+func (s *DetectModerationLabelsOutput) SetModerationLabels(v []ModerationLabel) *DetectModerationLabelsOutput {
 	s.ModerationLabels = v
 	return s
 }
@@ -1990,7 +1990,7 @@ type Emotion struct {
 	Confidence *float64 `type:"float"`
 
 	// Type of emotion detected.
-	Type EmotionName `type:"string"`
+	Type EmotionName `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2166,7 +2166,7 @@ type FaceDetail struct {
 
 	// The emotions detected on the face, and the confidence level in the determination.
 	// For example, HAPPY, SAD, and ANGRY.
-	Emotions []*Emotion `type:"list"`
+	Emotions []Emotion `type:"list"`
 
 	// Indicates whether or not the face is wearing eye glasses, and the confidence
 	// level in the determination.
@@ -2180,7 +2180,7 @@ type FaceDetail struct {
 	Gender *Gender `type:"structure"`
 
 	// Indicates the location of landmarks on the face.
-	Landmarks []*Landmark `type:"list"`
+	Landmarks []Landmark `type:"list"`
 
 	// Indicates whether or not the mouth on the face is open, and the confidence
 	// level in the determination.
@@ -2240,7 +2240,7 @@ func (s *FaceDetail) SetConfidence(v float64) *FaceDetail {
 }
 
 // SetEmotions sets the Emotions field's value.
-func (s *FaceDetail) SetEmotions(v []*Emotion) *FaceDetail {
+func (s *FaceDetail) SetEmotions(v []Emotion) *FaceDetail {
 	s.Emotions = v
 	return s
 }
@@ -2264,7 +2264,7 @@ func (s *FaceDetail) SetGender(v *Gender) *FaceDetail {
 }
 
 // SetLandmarks sets the Landmarks field's value.
-func (s *FaceDetail) SetLandmarks(v []*Landmark) *FaceDetail {
+func (s *FaceDetail) SetLandmarks(v []Landmark) *FaceDetail {
 	s.Landmarks = v
 	return s
 }
@@ -2383,7 +2383,7 @@ type Gender struct {
 	Confidence *float64 `type:"float"`
 
 	// Gender of the face.
-	Value GenderType `type:"string"`
+	Value GenderType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2455,7 +2455,7 @@ type GetCelebrityInfoOutput struct {
 	Name *string `type:"string"`
 
 	// An array of URLs pointing to additional celebrity information.
-	Urls []*string `type:"list"`
+	Urls []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2475,7 +2475,7 @@ func (s *GetCelebrityInfoOutput) SetName(v string) *GetCelebrityInfoOutput {
 }
 
 // SetUrls sets the Urls field's value.
-func (s *GetCelebrityInfoOutput) SetUrls(v []*string) *GetCelebrityInfoOutput {
+func (s *GetCelebrityInfoOutput) SetUrls(v []string) *GetCelebrityInfoOutput {
 	s.Urls = v
 	return s
 }
@@ -2687,7 +2687,7 @@ type IndexFacesOutput struct {
 
 	// An array of faces detected and added to the collection. For more information,
 	// see howitworks-index-faces.
-	FaceRecords []*FaceRecord `type:"list"`
+	FaceRecords []FaceRecord `type:"list"`
 
 	// The orientation of the input image (counterclockwise direction). If your
 	// application displays the image, you can use this value to correct image orientation.
@@ -2699,7 +2699,7 @@ type IndexFacesOutput struct {
 	// the value of OrientationCorrection is null and the bounding box coordinates
 	// in FaceRecords represent face locations after Exif metadata is used to correct
 	// the image orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2713,7 +2713,7 @@ func (s IndexFacesOutput) GoString() string {
 }
 
 // SetFaceRecords sets the FaceRecords field's value.
-func (s *IndexFacesOutput) SetFaceRecords(v []*FaceRecord) *IndexFacesOutput {
+func (s *IndexFacesOutput) SetFaceRecords(v []FaceRecord) *IndexFacesOutput {
 	s.FaceRecords = v
 	return s
 }
@@ -2763,7 +2763,7 @@ type Landmark struct {
 	_ struct{} `type:"structure"`
 
 	// Type of the landmark.
-	Type LandmarkType `type:"string"`
+	Type LandmarkType `type:"string" enum:"true"`
 
 	// x-coordinate from the top left of the landmark expressed as the ratio of
 	// the width of the image. For example, if the images is 700x200 and the x-coordinate
@@ -2840,7 +2840,7 @@ type ListCollectionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of collection IDs.
-	CollectionIds []*string `type:"list"`
+	CollectionIds []string `type:"list"`
 
 	// If the result is truncated, the response provides a NextToken that you can
 	// use in the subsequent request to fetch the next set of collection IDs.
@@ -2858,7 +2858,7 @@ func (s ListCollectionsOutput) GoString() string {
 }
 
 // SetCollectionIds sets the CollectionIds field's value.
-func (s *ListCollectionsOutput) SetCollectionIds(v []*string) *ListCollectionsOutput {
+func (s *ListCollectionsOutput) SetCollectionIds(v []string) *ListCollectionsOutput {
 	s.CollectionIds = v
 	return s
 }
@@ -2935,7 +2935,7 @@ type ListFacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Face objects.
-	Faces []*Face `type:"list"`
+	Faces []Face `type:"list"`
 
 	// If the response is truncated, Amazon Rekognition returns this token that
 	// you can use in the subsequent request to retrieve the next set of faces.
@@ -2953,7 +2953,7 @@ func (s ListFacesOutput) GoString() string {
 }
 
 // SetFaces sets the Faces field's value.
-func (s *ListFacesOutput) SetFaces(v []*Face) *ListFacesOutput {
+func (s *ListFacesOutput) SetFaces(v []Face) *ListFacesOutput {
 	s.Faces = v
 	return s
 }
@@ -3173,7 +3173,7 @@ type RecognizeCelebritiesOutput struct {
 
 	// Details about each celebrity found in the image. Amazon Rekognition can detect
 	// a maximum of 15 celebrities in an image.
-	CelebrityFaces []*Celebrity `type:"list"`
+	CelebrityFaces []Celebrity `type:"list"`
 
 	// The orientation of the input image (counterclockwise direction). If your
 	// application displays the image, you can use this value to correct the orientation.
@@ -3187,10 +3187,10 @@ type RecognizeCelebritiesOutput struct {
 	// bounding box coordinates represent face locations after Exif metadata is
 	// used to correct the image orientation. Images in .png format don't contain
 	// Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string"`
+	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// Details about each unrecognized face in the image.
-	UnrecognizedFaces []*ComparedFace `type:"list"`
+	UnrecognizedFaces []ComparedFace `type:"list"`
 }
 
 // String returns the string representation
@@ -3204,7 +3204,7 @@ func (s RecognizeCelebritiesOutput) GoString() string {
 }
 
 // SetCelebrityFaces sets the CelebrityFaces field's value.
-func (s *RecognizeCelebritiesOutput) SetCelebrityFaces(v []*Celebrity) *RecognizeCelebritiesOutput {
+func (s *RecognizeCelebritiesOutput) SetCelebrityFaces(v []Celebrity) *RecognizeCelebritiesOutput {
 	s.CelebrityFaces = v
 	return s
 }
@@ -3216,7 +3216,7 @@ func (s *RecognizeCelebritiesOutput) SetOrientationCorrection(v OrientationCorre
 }
 
 // SetUnrecognizedFaces sets the UnrecognizedFaces field's value.
-func (s *RecognizeCelebritiesOutput) SetUnrecognizedFaces(v []*ComparedFace) *RecognizeCelebritiesOutput {
+func (s *RecognizeCelebritiesOutput) SetUnrecognizedFaces(v []ComparedFace) *RecognizeCelebritiesOutput {
 	s.UnrecognizedFaces = v
 	return s
 }
@@ -3379,7 +3379,7 @@ type SearchFacesByImageOutput struct {
 
 	// An array of faces that match the input face, along with the confidence in
 	// the match.
-	FaceMatches []*FaceMatch `type:"list"`
+	FaceMatches []FaceMatch `type:"list"`
 
 	// The bounding box around the face in the input image that Amazon Rekognition
 	// used for the search.
@@ -3400,7 +3400,7 @@ func (s SearchFacesByImageOutput) GoString() string {
 }
 
 // SetFaceMatches sets the FaceMatches field's value.
-func (s *SearchFacesByImageOutput) SetFaceMatches(v []*FaceMatch) *SearchFacesByImageOutput {
+func (s *SearchFacesByImageOutput) SetFaceMatches(v []FaceMatch) *SearchFacesByImageOutput {
 	s.FaceMatches = v
 	return s
 }
@@ -3503,7 +3503,7 @@ type SearchFacesOutput struct {
 
 	// An array of faces that matched the input face, along with the confidence
 	// in the match.
-	FaceMatches []*FaceMatch `type:"list"`
+	FaceMatches []FaceMatch `type:"list"`
 
 	// ID of the face that was searched for matches in a collection.
 	SearchedFaceId *string `type:"string"`
@@ -3520,7 +3520,7 @@ func (s SearchFacesOutput) GoString() string {
 }
 
 // SetFaceMatches sets the FaceMatches field's value.
-func (s *SearchFacesOutput) SetFaceMatches(v []*FaceMatch) *SearchFacesOutput {
+func (s *SearchFacesOutput) SetFaceMatches(v []FaceMatch) *SearchFacesOutput {
 	s.FaceMatches = v
 	return s
 }

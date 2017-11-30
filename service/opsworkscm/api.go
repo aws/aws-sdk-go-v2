@@ -889,7 +889,7 @@ type AssociateNodeInput struct {
 	//    for the chef-client agent to access the Chef API.
 	//
 	// EngineAttributes is a required field
-	EngineAttributes []*EngineAttribute `type:"list" required:"true"`
+	EngineAttributes []EngineAttribute `type:"list" required:"true"`
 
 	// The name of the Chef client node.
 	//
@@ -938,7 +938,7 @@ func (s *AssociateNodeInput) Validate() error {
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
-func (s *AssociateNodeInput) SetEngineAttributes(v []*EngineAttribute) *AssociateNodeInput {
+func (s *AssociateNodeInput) SetEngineAttributes(v []EngineAttribute) *AssociateNodeInput {
 	s.EngineAttributes = v
 	return s
 }
@@ -992,7 +992,7 @@ type Backup struct {
 	BackupId *string `type:"string"`
 
 	// The backup type. Valid values are automated or manual.
-	BackupType BackupType `type:"string"`
+	BackupType BackupType `type:"string" enum:"true"`
 
 	// The time stamp when the backup was created in the database. Example: 2016-07-29T13:38:47.520Z
 	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1040,7 +1040,7 @@ type Backup struct {
 
 	// The security group IDs that are obtained from the server when the backup
 	// is created.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The name of the server from which the backup was made.
 	ServerName *string `min:"1" type:"string"`
@@ -1050,13 +1050,13 @@ type Backup struct {
 	ServiceRoleArn *string `type:"string"`
 
 	// The status of a backup while in progress.
-	Status BackupStatus `type:"string"`
+	Status BackupStatus `type:"string" enum:"true"`
 
 	// An informational message about backup status.
 	StatusDescription *string `type:"string"`
 
 	// The subnet IDs that are obtained from the server when the backup is created.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 
 	// The version of AWS OpsWorks for Chef Automate-specific tools that is obtained
 	// from the server when the backup is created.
@@ -1174,7 +1174,7 @@ func (s *Backup) SetS3LogUrl(v string) *Backup {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *Backup) SetSecurityGroupIds(v []*string) *Backup {
+func (s *Backup) SetSecurityGroupIds(v []string) *Backup {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -1204,7 +1204,7 @@ func (s *Backup) SetStatusDescription(v string) *Backup {
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *Backup) SetSubnetIds(v []*string) *Backup {
+func (s *Backup) SetSubnetIds(v []string) *Backup {
 	s.SubnetIds = v
 	return s
 }
@@ -1337,7 +1337,7 @@ type CreateServerInput struct {
 	//    case letter, one upper case letter, one number, and one special character.
 	//    When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned
 	//    in the response.
-	EngineAttributes []*EngineAttribute `type:"list"`
+	EngineAttributes []EngineAttribute `type:"list"`
 
 	// The engine model, or option. Valid values include Single.
 	EngineModel *string `type:"string"`
@@ -1403,7 +1403,7 @@ type CreateServerInput struct {
 	// If you do not specify this parameter, AWS OpsWorks for Chef Automate creates
 	// one new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
 	// (everyone).
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The name of the server. The server name must be unique within your AWS account,
 	// within each region. Server names must start with a letter; then letters,
@@ -1435,7 +1435,7 @@ type CreateServerInput struct {
 	//
 	// For more information about supported Amazon EC2 platforms, see Supported
 	// Platforms (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1511,7 +1511,7 @@ func (s *CreateServerInput) SetEngine(v string) *CreateServerInput {
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
-func (s *CreateServerInput) SetEngineAttributes(v []*EngineAttribute) *CreateServerInput {
+func (s *CreateServerInput) SetEngineAttributes(v []EngineAttribute) *CreateServerInput {
 	s.EngineAttributes = v
 	return s
 }
@@ -1559,7 +1559,7 @@ func (s *CreateServerInput) SetPreferredMaintenanceWindow(v string) *CreateServe
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateServerInput) SetSecurityGroupIds(v []*string) *CreateServerInput {
+func (s *CreateServerInput) SetSecurityGroupIds(v []string) *CreateServerInput {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -1577,7 +1577,7 @@ func (s *CreateServerInput) SetServiceRoleArn(v string) *CreateServerInput {
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateServerInput) SetSubnetIds(v []*string) *CreateServerInput {
+func (s *CreateServerInput) SetSubnetIds(v []string) *CreateServerInput {
 	s.SubnetIds = v
 	return s
 }
@@ -1740,7 +1740,7 @@ type DescribeAccountAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The attributes that are currently set for the account.
-	Attributes []*AccountAttribute `type:"list"`
+	Attributes []AccountAttribute `type:"list"`
 }
 
 // String returns the string representation
@@ -1754,7 +1754,7 @@ func (s DescribeAccountAttributesOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DescribeAccountAttributesOutput) SetAttributes(v []*AccountAttribute) *DescribeAccountAttributesOutput {
+func (s *DescribeAccountAttributesOutput) SetAttributes(v []AccountAttribute) *DescribeAccountAttributesOutput {
 	s.Attributes = v
 	return s
 }
@@ -1842,7 +1842,7 @@ type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Contains the response to a DescribeBackups request.
-	Backups []*Backup `type:"list"`
+	Backups []Backup `type:"list"`
 
 	// NextToken is a string that is returned in some command responses. It indicates
 	// that not all entries have been returned, and that you must run at least one
@@ -1866,7 +1866,7 @@ func (s DescribeBackupsOutput) GoString() string {
 }
 
 // SetBackups sets the Backups field's value.
-func (s *DescribeBackupsOutput) SetBackups(v []*Backup) *DescribeBackupsOutput {
+func (s *DescribeBackupsOutput) SetBackups(v []Backup) *DescribeBackupsOutput {
 	s.Backups = v
 	return s
 }
@@ -1967,7 +1967,7 @@ type DescribeEventsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Contains the response to a DescribeEvents request.
-	ServerEvents []*ServerEvent `type:"list"`
+	ServerEvents []ServerEvent `type:"list"`
 }
 
 // String returns the string representation
@@ -1987,7 +1987,7 @@ func (s *DescribeEventsOutput) SetNextToken(v string) *DescribeEventsOutput {
 }
 
 // SetServerEvents sets the ServerEvents field's value.
-func (s *DescribeEventsOutput) SetServerEvents(v []*ServerEvent) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetServerEvents(v []ServerEvent) *DescribeEventsOutput {
 	s.ServerEvents = v
 	return s
 }
@@ -2055,7 +2055,7 @@ type DescribeNodeAssociationStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Attributes specific to the node association.
-	EngineAttributes []*EngineAttribute `type:"list"`
+	EngineAttributes []EngineAttribute `type:"list"`
 
 	// The status of the association or disassociation request.
 	//
@@ -2066,7 +2066,7 @@ type DescribeNodeAssociationStatusOutput struct {
 	//    * FAILED: The association or disassociation failed.
 	//
 	//    * IN_PROGRESS: The association or disassociation is still in progress.
-	NodeAssociationStatus NodeAssociationStatus `type:"string"`
+	NodeAssociationStatus NodeAssociationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2080,7 +2080,7 @@ func (s DescribeNodeAssociationStatusOutput) GoString() string {
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
-func (s *DescribeNodeAssociationStatusOutput) SetEngineAttributes(v []*EngineAttribute) *DescribeNodeAssociationStatusOutput {
+func (s *DescribeNodeAssociationStatusOutput) SetEngineAttributes(v []EngineAttribute) *DescribeNodeAssociationStatusOutput {
 	s.EngineAttributes = v
 	return s
 }
@@ -2175,7 +2175,7 @@ type DescribeServersOutput struct {
 	NextToken *string `type:"string"`
 
 	// Contains the response to a DescribeServers request.
-	Servers []*Server `type:"list"`
+	Servers []Server `type:"list"`
 }
 
 // String returns the string representation
@@ -2195,7 +2195,7 @@ func (s *DescribeServersOutput) SetNextToken(v string) *DescribeServersOutput {
 }
 
 // SetServers sets the Servers field's value.
-func (s *DescribeServersOutput) SetServers(v []*Server) *DescribeServersOutput {
+func (s *DescribeServersOutput) SetServers(v []Server) *DescribeServersOutput {
 	s.Servers = v
 	return s
 }
@@ -2210,7 +2210,7 @@ type DisassociateNodeInput struct {
 	//
 	//    * CHEF_ORGANIZATION: The Chef organization with which the node was associated.
 	//    By default only one organization named default can exist.
-	EngineAttributes []*EngineAttribute `type:"list"`
+	EngineAttributes []EngineAttribute `type:"list"`
 
 	// The name of the Chef client node.
 	//
@@ -2255,7 +2255,7 @@ func (s *DisassociateNodeInput) Validate() error {
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
-func (s *DisassociateNodeInput) SetEngineAttributes(v []*EngineAttribute) *DisassociateNodeInput {
+func (s *DisassociateNodeInput) SetEngineAttributes(v []EngineAttribute) *DisassociateNodeInput {
 	s.EngineAttributes = v
 	return s
 }
@@ -2469,7 +2469,7 @@ type Server struct {
 	//    required RSA private key. Save this file, unzip it, and then change to
 	//    the directory where you've unzipped the file contents. From this directory,
 	//    you can run Knife commands.
-	EngineAttributes []*EngineAttribute `type:"list"`
+	EngineAttributes []EngineAttribute `type:"list"`
 
 	// The engine model of the server. The valid value in this release is Single.
 	EngineModel *string `type:"string"`
@@ -2489,7 +2489,7 @@ type Server struct {
 	KeyPair *string `type:"string"`
 
 	// The status of the most recent server maintenance run. Shows SUCCESS or FAILED.
-	MaintenanceStatus MaintenanceStatus `type:"string"`
+	MaintenanceStatus MaintenanceStatus `type:"string" enum:"true"`
 
 	// The preferred backup period specified for the server.
 	PreferredBackupWindow *string `type:"string"`
@@ -2500,7 +2500,7 @@ type Server struct {
 	// The security group IDs for the server, as specified in the CloudFormation
 	// stack. These might not be the same security groups that are shown in the
 	// EC2 console.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The ARN of the server.
 	ServerArn *string `type:"string"`
@@ -2514,7 +2514,7 @@ type Server struct {
 	// The server's status. This field displays the states of actions in progress,
 	// such as creating, running, or backing up the server, as well as the server's
 	// health state.
-	Status ServerStatus `type:"string"`
+	Status ServerStatus `type:"string" enum:"true"`
 
 	// Depending on the server status, this field has either a human-readable message
 	// (such as a create or backup error), or an escaped block of JSON (used for
@@ -2522,7 +2522,7 @@ type Server struct {
 	StatusReason *string `type:"string"`
 
 	// The subnet IDs specified in a CreateServer request.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2578,7 +2578,7 @@ func (s *Server) SetEngine(v string) *Server {
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
-func (s *Server) SetEngineAttributes(v []*EngineAttribute) *Server {
+func (s *Server) SetEngineAttributes(v []EngineAttribute) *Server {
 	s.EngineAttributes = v
 	return s
 }
@@ -2632,7 +2632,7 @@ func (s *Server) SetPreferredMaintenanceWindow(v string) *Server {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *Server) SetSecurityGroupIds(v []*string) *Server {
+func (s *Server) SetSecurityGroupIds(v []string) *Server {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -2668,7 +2668,7 @@ func (s *Server) SetStatusReason(v string) *Server {
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *Server) SetSubnetIds(v []*string) *Server {
+func (s *Server) SetSubnetIds(v []string) *Server {
 	s.SubnetIds = v
 	return s
 }
@@ -2732,7 +2732,7 @@ type StartMaintenanceInput struct {
 
 	// Engine attributes that are specific to the server on which you want to run
 	// maintenance.
-	EngineAttributes []*EngineAttribute `type:"list"`
+	EngineAttributes []EngineAttribute `type:"list"`
 
 	// The name of the server on which to run maintenance.
 	//
@@ -2768,7 +2768,7 @@ func (s *StartMaintenanceInput) Validate() error {
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
-func (s *StartMaintenanceInput) SetEngineAttributes(v []*EngineAttribute) *StartMaintenanceInput {
+func (s *StartMaintenanceInput) SetEngineAttributes(v []EngineAttribute) *StartMaintenanceInput {
 	s.EngineAttributes = v
 	return s
 }

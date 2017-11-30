@@ -2523,7 +2523,7 @@ type BotChannelAssociation struct {
 	BotAlias *string `locationName:"botAlias" min:"1" type:"string"`
 
 	// Provides information necessary to communicate with the messaging platform.
-	BotConfiguration map[string]*string `locationName:"botConfiguration" min:"1" type:"map"`
+	BotConfiguration map[string]string `locationName:"botConfiguration" min:"1" type:"map"`
 
 	// The name of the Amazon Lex bot to which this association is being made.
 	//
@@ -2543,7 +2543,7 @@ type BotChannelAssociation struct {
 
 	// Specifies the type of association by indicating the type of channel being
 	// established between the Amazon Lex bot and the external messaging platform.
-	Type ChannelType `locationName:"type" type:"string"`
+	Type ChannelType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2563,7 +2563,7 @@ func (s *BotChannelAssociation) SetBotAlias(v string) *BotChannelAssociation {
 }
 
 // SetBotConfiguration sets the BotConfiguration field's value.
-func (s *BotChannelAssociation) SetBotConfiguration(v map[string]*string) *BotChannelAssociation {
+func (s *BotChannelAssociation) SetBotConfiguration(v map[string]string) *BotChannelAssociation {
 	s.BotConfiguration = v
 	return s
 }
@@ -2617,7 +2617,7 @@ type BotMetadata struct {
 	Name *string `locationName:"name" min:"2" type:"string"`
 
 	// The status of the bot.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -2942,13 +2942,13 @@ type CreateBotVersionOutput struct {
 	IdleSessionTTLInSeconds *int64 `locationName:"idleSessionTTLInSeconds" min:"60" type:"integer"`
 
 	// An array of Intent objects. For more information, see PutBot.
-	Intents []*Intent `locationName:"intents" type:"list"`
+	Intents []Intent `locationName:"intents" type:"list"`
 
 	// The date when the $LATEST version of this bot was updated.
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// Specifies the target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -2957,7 +2957,7 @@ type CreateBotVersionOutput struct {
 	// response element to BUILDING. After Amazon Lex builds the bot, it sets status
 	// to READY. If Amazon Lex can't build the bot, it sets status to FAILED. Amazon
 	// Lex returns the reason for the failure in the failureReason response element.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -3026,7 +3026,7 @@ func (s *CreateBotVersionOutput) SetIdleSessionTTLInSeconds(v int64) *CreateBotV
 }
 
 // SetIntents sets the Intents field's value.
-func (s *CreateBotVersionOutput) SetIntents(v []*Intent) *CreateBotVersionOutput {
+func (s *CreateBotVersionOutput) SetIntents(v []Intent) *CreateBotVersionOutput {
 	s.Intents = v
 	return s
 }
@@ -3169,11 +3169,11 @@ type CreateIntentVersionOutput struct {
 	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
 
 	// An array of sample utterances configured for the intent.
-	SampleUtterances []*string `locationName:"sampleUtterances" type:"list"`
+	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
 
 	// An array of slot types that defines the information required to fulfill the
 	// intent.
-	Slots []*Slot `locationName:"slots" type:"list"`
+	Slots []Slot `locationName:"slots" type:"list"`
 
 	// The version number assigned to the new version of the intent.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -3262,13 +3262,13 @@ func (s *CreateIntentVersionOutput) SetRejectionStatement(v *Statement) *CreateI
 }
 
 // SetSampleUtterances sets the SampleUtterances field's value.
-func (s *CreateIntentVersionOutput) SetSampleUtterances(v []*string) *CreateIntentVersionOutput {
+func (s *CreateIntentVersionOutput) SetSampleUtterances(v []string) *CreateIntentVersionOutput {
 	s.SampleUtterances = v
 	return s
 }
 
 // SetSlots sets the Slots field's value.
-func (s *CreateIntentVersionOutput) SetSlots(v []*Slot) *CreateIntentVersionOutput {
+func (s *CreateIntentVersionOutput) SetSlots(v []Slot) *CreateIntentVersionOutput {
 	s.Slots = v
 	return s
 }
@@ -3351,7 +3351,7 @@ type CreateSlotTypeVersionOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot
 	// type can take.
-	EnumerationValues []*EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
 
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last update date are the same.
@@ -3362,7 +3362,7 @@ type CreateSlotTypeVersionOutput struct {
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 
 	// The version assigned to the new slot type version.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -3397,7 +3397,7 @@ func (s *CreateSlotTypeVersionOutput) SetDescription(v string) *CreateSlotTypeVe
 }
 
 // SetEnumerationValues sets the EnumerationValues field's value.
-func (s *CreateSlotTypeVersionOutput) SetEnumerationValues(v []*EnumerationValue) *CreateSlotTypeVersionOutput {
+func (s *CreateSlotTypeVersionOutput) SetEnumerationValues(v []EnumerationValue) *CreateSlotTypeVersionOutput {
 	s.EnumerationValues = v
 	return s
 }
@@ -4098,7 +4098,7 @@ type EnumerationValue struct {
 	_ struct{} `type:"structure"`
 
 	// Additional values related to the slot type value.
-	Synonyms []*string `locationName:"synonyms" type:"list"`
+	Synonyms []string `locationName:"synonyms" type:"list"`
 
 	// The value of the slot type.
 	//
@@ -4134,7 +4134,7 @@ func (s *EnumerationValue) Validate() error {
 }
 
 // SetSynonyms sets the Synonyms field's value.
-func (s *EnumerationValue) SetSynonyms(v []*string) *EnumerationValue {
+func (s *EnumerationValue) SetSynonyms(v []string) *EnumerationValue {
 	s.Synonyms = v
 	return s
 }
@@ -4243,7 +4243,7 @@ type FulfillmentActivity struct {
 	// by returning the slot data to the client application.
 	//
 	// Type is a required field
-	Type FulfillmentActivityType `locationName:"type" type:"string" required:"true"`
+	Type FulfillmentActivityType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4513,7 +4513,7 @@ type GetBotAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of BotAliasMetadata objects, each describing a bot alias.
-	BotAliases []*BotAliasMetadata `type:"list"`
+	BotAliases []BotAliasMetadata `type:"list"`
 
 	// A pagination token for fetching next page of aliases. If the response to
 	// this call is truncated, Amazon Lex returns a pagination token in the response.
@@ -4533,7 +4533,7 @@ func (s GetBotAliasesOutput) GoString() string {
 }
 
 // SetBotAliases sets the BotAliases field's value.
-func (s *GetBotAliasesOutput) SetBotAliases(v []*BotAliasMetadata) *GetBotAliasesOutput {
+func (s *GetBotAliasesOutput) SetBotAliases(v []BotAliasMetadata) *GetBotAliasesOutput {
 	s.BotAliases = v
 	return s
 }
@@ -4635,7 +4635,7 @@ type GetBotChannelAssociationOutput struct {
 
 	// Provides information that the messaging platform needs to communicate with
 	// the Amazon Lex bot.
-	BotConfiguration map[string]*string `locationName:"botConfiguration" min:"1" type:"map"`
+	BotConfiguration map[string]string `locationName:"botConfiguration" min:"1" type:"map"`
 
 	// The name of the Amazon Lex bot.
 	BotName *string `locationName:"botName" min:"2" type:"string"`
@@ -4650,7 +4650,7 @@ type GetBotChannelAssociationOutput struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The type of the messaging platform.
-	Type ChannelType `locationName:"type" type:"string"`
+	Type ChannelType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4670,7 +4670,7 @@ func (s *GetBotChannelAssociationOutput) SetBotAlias(v string) *GetBotChannelAss
 }
 
 // SetBotConfiguration sets the BotConfiguration field's value.
-func (s *GetBotChannelAssociationOutput) SetBotConfiguration(v map[string]*string) *GetBotChannelAssociationOutput {
+func (s *GetBotChannelAssociationOutput) SetBotConfiguration(v map[string]string) *GetBotChannelAssociationOutput {
 	s.BotConfiguration = v
 	return s
 }
@@ -4813,7 +4813,7 @@ type GetBotChannelAssociationsOutput struct {
 
 	// An array of objects, one for each association, that provides information
 	// about the Amazon Lex bot and its association with the channel.
-	BotChannelAssociations []*BotChannelAssociation `locationName:"botChannelAssociations" type:"list"`
+	BotChannelAssociations []BotChannelAssociation `locationName:"botChannelAssociations" type:"list"`
 
 	// A pagination token that fetches the next page of associations. If the response
 	// to this call is truncated, Amazon Lex returns a pagination token in the response.
@@ -4833,7 +4833,7 @@ func (s GetBotChannelAssociationsOutput) GoString() string {
 }
 
 // SetBotChannelAssociations sets the BotChannelAssociations field's value.
-func (s *GetBotChannelAssociationsOutput) SetBotChannelAssociations(v []*BotChannelAssociation) *GetBotChannelAssociationsOutput {
+func (s *GetBotChannelAssociationsOutput) SetBotChannelAssociations(v []BotChannelAssociation) *GetBotChannelAssociationsOutput {
 	s.BotChannelAssociations = v
 	return s
 }
@@ -4957,14 +4957,14 @@ type GetBotOutput struct {
 	IdleSessionTTLInSeconds *int64 `locationName:"idleSessionTTLInSeconds" min:"60" type:"integer"`
 
 	// An array of intent objects. For more information, see PutBot.
-	Intents []*Intent `locationName:"intents" type:"list"`
+	Intents []Intent `locationName:"intents" type:"list"`
 
 	// The date that the bot was updated. When you create a resource, the creation
 	// date and last updated date are the same.
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -4973,7 +4973,7 @@ type GetBotOutput struct {
 	// there was a problem with building the bot, the status is FAILED and the failureReason
 	// explains why the bot did not build. If the bot was saved but not built, the
 	// status is NOT BUILT.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -5042,7 +5042,7 @@ func (s *GetBotOutput) SetIdleSessionTTLInSeconds(v int64) *GetBotOutput {
 }
 
 // SetIntents sets the Intents field's value.
-func (s *GetBotOutput) SetIntents(v []*Intent) *GetBotOutput {
+func (s *GetBotOutput) SetIntents(v []Intent) *GetBotOutput {
 	s.Intents = v
 	return s
 }
@@ -5157,7 +5157,7 @@ type GetBotVersionsOutput struct {
 
 	// An array of BotMetadata objects, one for each numbered version of the bot
 	// plus one for the $LATEST version.
-	Bots []*BotMetadata `locationName:"bots" type:"list"`
+	Bots []BotMetadata `locationName:"bots" type:"list"`
 
 	// A pagination token for fetching the next page of bot versions. If the response
 	// to this call is truncated, Amazon Lex returns a pagination token in the response.
@@ -5177,7 +5177,7 @@ func (s GetBotVersionsOutput) GoString() string {
 }
 
 // SetBots sets the Bots field's value.
-func (s *GetBotVersionsOutput) SetBots(v []*BotMetadata) *GetBotVersionsOutput {
+func (s *GetBotVersionsOutput) SetBots(v []BotMetadata) *GetBotVersionsOutput {
 	s.Bots = v
 	return s
 }
@@ -5257,7 +5257,7 @@ type GetBotsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of botMetadata objects, with one entry for each bot.
-	Bots []*BotMetadata `locationName:"bots" type:"list"`
+	Bots []BotMetadata `locationName:"bots" type:"list"`
 
 	// If the response is truncated, it includes a pagination token that you can
 	// specify in your next request to fetch the next page of bots.
@@ -5275,7 +5275,7 @@ func (s GetBotsOutput) GoString() string {
 }
 
 // SetBots sets the Bots field's value.
-func (s *GetBotsOutput) SetBots(v []*BotMetadata) *GetBotsOutput {
+func (s *GetBotsOutput) SetBots(v []BotMetadata) *GetBotsOutput {
 	s.Bots = v
 	return s
 }
@@ -5337,7 +5337,7 @@ type GetBuiltinIntentOutput struct {
 
 	// An array of BuiltinIntentSlot objects, one entry for each slot type in the
 	// intent.
-	Slots []*BuiltinIntentSlot `locationName:"slots" type:"list"`
+	Slots []BuiltinIntentSlot `locationName:"slots" type:"list"`
 
 	// A list of locales that the intent supports.
 	SupportedLocales []Locale `locationName:"supportedLocales" type:"list"`
@@ -5360,7 +5360,7 @@ func (s *GetBuiltinIntentOutput) SetSignature(v string) *GetBuiltinIntentOutput 
 }
 
 // SetSlots sets the Slots field's value.
-func (s *GetBuiltinIntentOutput) SetSlots(v []*BuiltinIntentSlot) *GetBuiltinIntentOutput {
+func (s *GetBuiltinIntentOutput) SetSlots(v []BuiltinIntentSlot) *GetBuiltinIntentOutput {
 	s.Slots = v
 	return s
 }
@@ -5376,7 +5376,7 @@ type GetBuiltinIntentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of locales that the intent supports.
-	Locale Locale `location:"querystring" locationName:"locale" type:"string"`
+	Locale Locale `location:"querystring" locationName:"locale" type:"string" enum:"true"`
 
 	// The maximum number of intents to return in the response. The default is 10.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
@@ -5446,7 +5446,7 @@ type GetBuiltinIntentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of builtinIntentMetadata objects, one for each intent in the response.
-	Intents []*BuiltinIntentMetadata `locationName:"intents" type:"list"`
+	Intents []BuiltinIntentMetadata `locationName:"intents" type:"list"`
 
 	// A pagination token that fetches the next page of intents. If the response
 	// to this API call is truncated, Amazon Lex returns a pagination token in the
@@ -5466,7 +5466,7 @@ func (s GetBuiltinIntentsOutput) GoString() string {
 }
 
 // SetIntents sets the Intents field's value.
-func (s *GetBuiltinIntentsOutput) SetIntents(v []*BuiltinIntentMetadata) *GetBuiltinIntentsOutput {
+func (s *GetBuiltinIntentsOutput) SetIntents(v []BuiltinIntentMetadata) *GetBuiltinIntentsOutput {
 	s.Intents = v
 	return s
 }
@@ -5482,7 +5482,7 @@ type GetBuiltinSlotTypesInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of locales that the slot type supports.
-	Locale Locale `location:"querystring" locationName:"locale" type:"string"`
+	Locale Locale `location:"querystring" locationName:"locale" type:"string" enum:"true"`
 
 	// The maximum number of slot types to return in the response. The default is
 	// 10.
@@ -5557,7 +5557,7 @@ type GetBuiltinSlotTypesOutput struct {
 
 	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
 	// returned.
-	SlotTypes []*BuiltinSlotTypeMetadata `locationName:"slotTypes" type:"list"`
+	SlotTypes []BuiltinSlotTypeMetadata `locationName:"slotTypes" type:"list"`
 }
 
 // String returns the string representation
@@ -5577,7 +5577,7 @@ func (s *GetBuiltinSlotTypesOutput) SetNextToken(v string) *GetBuiltinSlotTypesO
 }
 
 // SetSlotTypes sets the SlotTypes field's value.
-func (s *GetBuiltinSlotTypesOutput) SetSlotTypes(v []*BuiltinSlotTypeMetadata) *GetBuiltinSlotTypesOutput {
+func (s *GetBuiltinSlotTypesOutput) SetSlotTypes(v []BuiltinSlotTypeMetadata) *GetBuiltinSlotTypesOutput {
 	s.SlotTypes = v
 	return s
 }
@@ -5589,7 +5589,7 @@ type GetExportInput struct {
 	// The format of the exported data.
 	//
 	// ExportType is a required field
-	ExportType ExportType `location:"querystring" locationName:"exportType" type:"string" required:"true"`
+	ExportType ExportType `location:"querystring" locationName:"exportType" type:"string" required:"true" enum:"true"`
 
 	// The name of the bot to export.
 	//
@@ -5599,7 +5599,7 @@ type GetExportInput struct {
 	// The type of resource to export.
 	//
 	// ResourceType is a required field
-	ResourceType ResourceType `location:"querystring" locationName:"resourceType" type:"string" required:"true"`
+	ResourceType ResourceType `location:"querystring" locationName:"resourceType" type:"string" required:"true" enum:"true"`
 
 	// The version of the bot to export.
 	//
@@ -5682,10 +5682,10 @@ type GetExportOutput struct {
 	//    * READY - The export is complete.
 	//
 	//    * FAILED - The export could not be completed.
-	ExportStatus ExportStatus `locationName:"exportStatus" type:"string"`
+	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" enum:"true"`
 
 	// The format of the exported data.
-	ExportType ExportType `locationName:"exportType" type:"string"`
+	ExportType ExportType `locationName:"exportType" type:"string" enum:"true"`
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to export
 	// the resource.
@@ -5695,7 +5695,7 @@ type GetExportOutput struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The type of the exported resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// An S3 pre-signed URL that provides the location of the exported resource.
 	// The exported resource is a ZIP archive that contains the exported resource
@@ -5867,10 +5867,10 @@ type GetIntentOutput struct {
 	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
 
 	// An array of sample utterances configured for the intent.
-	SampleUtterances []*string `locationName:"sampleUtterances" type:"list"`
+	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
 
 	// An array of intent slots configured for the intent.
-	Slots []*Slot `locationName:"slots" type:"list"`
+	Slots []Slot `locationName:"slots" type:"list"`
 
 	// The version of the intent.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -5959,13 +5959,13 @@ func (s *GetIntentOutput) SetRejectionStatement(v *Statement) *GetIntentOutput {
 }
 
 // SetSampleUtterances sets the SampleUtterances field's value.
-func (s *GetIntentOutput) SetSampleUtterances(v []*string) *GetIntentOutput {
+func (s *GetIntentOutput) SetSampleUtterances(v []string) *GetIntentOutput {
 	s.SampleUtterances = v
 	return s
 }
 
 // SetSlots sets the Slots field's value.
-func (s *GetIntentOutput) SetSlots(v []*Slot) *GetIntentOutput {
+func (s *GetIntentOutput) SetSlots(v []Slot) *GetIntentOutput {
 	s.Slots = v
 	return s
 }
@@ -6050,7 +6050,7 @@ type GetIntentVersionsOutput struct {
 
 	// An array of IntentMetadata objects, one for each numbered version of the
 	// intent plus one for the $LATEST version.
-	Intents []*IntentMetadata `locationName:"intents" type:"list"`
+	Intents []IntentMetadata `locationName:"intents" type:"list"`
 
 	// A pagination token for fetching the next page of intent versions. If the
 	// response to this call is truncated, Amazon Lex returns a pagination token
@@ -6070,7 +6070,7 @@ func (s GetIntentVersionsOutput) GoString() string {
 }
 
 // SetIntents sets the Intents field's value.
-func (s *GetIntentVersionsOutput) SetIntents(v []*IntentMetadata) *GetIntentVersionsOutput {
+func (s *GetIntentVersionsOutput) SetIntents(v []IntentMetadata) *GetIntentVersionsOutput {
 	s.Intents = v
 	return s
 }
@@ -6149,7 +6149,7 @@ type GetIntentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Intent objects. For more information, see PutBot.
-	Intents []*IntentMetadata `locationName:"intents" type:"list"`
+	Intents []IntentMetadata `locationName:"intents" type:"list"`
 
 	// If the response is truncated, the response includes a pagination token that
 	// you can specify in your next request to fetch the next page of intents.
@@ -6167,7 +6167,7 @@ func (s GetIntentsOutput) GoString() string {
 }
 
 // SetIntents sets the Intents field's value.
-func (s *GetIntentsOutput) SetIntents(v []*IntentMetadata) *GetIntentsOutput {
+func (s *GetIntentsOutput) SetIntents(v []IntentMetadata) *GetIntentsOutput {
 	s.Intents = v
 	return s
 }
@@ -6254,7 +6254,7 @@ type GetSlotTypeOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot
 	// type can take.
-	EnumerationValues []*EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
 
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last update date are the same.
@@ -6265,7 +6265,7 @@ type GetSlotTypeOutput struct {
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 
 	// The version of the slot type.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -6300,7 +6300,7 @@ func (s *GetSlotTypeOutput) SetDescription(v string) *GetSlotTypeOutput {
 }
 
 // SetEnumerationValues sets the EnumerationValues field's value.
-func (s *GetSlotTypeOutput) SetEnumerationValues(v []*EnumerationValue) *GetSlotTypeOutput {
+func (s *GetSlotTypeOutput) SetEnumerationValues(v []EnumerationValue) *GetSlotTypeOutput {
 	s.EnumerationValues = v
 	return s
 }
@@ -6409,7 +6409,7 @@ type GetSlotTypeVersionsOutput struct {
 
 	// An array of SlotTypeMetadata objects, one for each numbered version of the
 	// slot type plus one for the $LATEST version.
-	SlotTypes []*SlotTypeMetadata `locationName:"slotTypes" type:"list"`
+	SlotTypes []SlotTypeMetadata `locationName:"slotTypes" type:"list"`
 }
 
 // String returns the string representation
@@ -6429,7 +6429,7 @@ func (s *GetSlotTypeVersionsOutput) SetNextToken(v string) *GetSlotTypeVersionsO
 }
 
 // SetSlotTypes sets the SlotTypes field's value.
-func (s *GetSlotTypeVersionsOutput) SetSlotTypes(v []*SlotTypeMetadata) *GetSlotTypeVersionsOutput {
+func (s *GetSlotTypeVersionsOutput) SetSlotTypes(v []SlotTypeMetadata) *GetSlotTypeVersionsOutput {
 	s.SlotTypes = v
 	return s
 }
@@ -6508,7 +6508,7 @@ type GetSlotTypesOutput struct {
 
 	// An array of objects, one for each slot type, that provides information such
 	// as the name of the slot type, the version, and a description.
-	SlotTypes []*SlotTypeMetadata `locationName:"slotTypes" type:"list"`
+	SlotTypes []SlotTypeMetadata `locationName:"slotTypes" type:"list"`
 }
 
 // String returns the string representation
@@ -6528,7 +6528,7 @@ func (s *GetSlotTypesOutput) SetNextToken(v string) *GetSlotTypesOutput {
 }
 
 // SetSlotTypes sets the SlotTypes field's value.
-func (s *GetSlotTypesOutput) SetSlotTypes(v []*SlotTypeMetadata) *GetSlotTypesOutput {
+func (s *GetSlotTypesOutput) SetSlotTypes(v []SlotTypeMetadata) *GetSlotTypesOutput {
 	s.SlotTypes = v
 	return s
 }
@@ -6546,13 +6546,13 @@ type GetUtterancesViewInput struct {
 	// The limit is 5 versions per request.
 	//
 	// BotVersions is a required field
-	BotVersions []*string `location:"querystring" locationName:"bot_versions" min:"1" type:"list" required:"true"`
+	BotVersions []string `location:"querystring" locationName:"bot_versions" min:"1" type:"list" required:"true"`
 
 	// To return utterances that were recognized and handled, useDetected. To return
 	// utterances that were not recognized, use Missed.
 	//
 	// StatusType is a required field
-	StatusType StatusType `location:"querystring" locationName:"status_type" type:"string" required:"true"`
+	StatusType StatusType `location:"querystring" locationName:"status_type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6599,7 +6599,7 @@ func (s *GetUtterancesViewInput) SetBotName(v string) *GetUtterancesViewInput {
 }
 
 // SetBotVersions sets the BotVersions field's value.
-func (s *GetUtterancesViewInput) SetBotVersions(v []*string) *GetUtterancesViewInput {
+func (s *GetUtterancesViewInput) SetBotVersions(v []string) *GetUtterancesViewInput {
 	s.BotVersions = v
 	return s
 }
@@ -6620,7 +6620,7 @@ type GetUtterancesViewOutput struct {
 	// An array of UtteranceList objects, each containing a list of UtteranceData
 	// objects describing the utterances that were processed by your bot. The response
 	// contains a maximum of 100 UtteranceData objects for each version.
-	Utterances []*UtteranceList `locationName:"utterances" type:"list"`
+	Utterances []UtteranceList `locationName:"utterances" type:"list"`
 }
 
 // String returns the string representation
@@ -6640,7 +6640,7 @@ func (s *GetUtterancesViewOutput) SetBotName(v string) *GetUtterancesViewOutput 
 }
 
 // SetUtterances sets the Utterances field's value.
-func (s *GetUtterancesViewOutput) SetUtterances(v []*UtteranceList) *GetUtterancesViewOutput {
+func (s *GetUtterancesViewOutput) SetUtterances(v []UtteranceList) *GetUtterancesViewOutput {
 	s.Utterances = v
 	return s
 }
@@ -6782,7 +6782,7 @@ type Message struct {
 	// The content type of the message string.
 	//
 	// ContentType is a required field
-	ContentType ContentType `locationName:"contentType" type:"string" required:"true"`
+	ContentType ContentType `locationName:"contentType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6845,7 +6845,7 @@ type Prompt struct {
 	// Language (SSML).
 	//
 	// Messages is a required field
-	Messages []*Message `locationName:"messages" min:"1" type:"list" required:"true"`
+	Messages []Message `locationName:"messages" min:"1" type:"list" required:"true"`
 
 	// A response card. Amazon Lex uses this prompt at runtime, in the PostText
 	// API response. It substitutes session attributes and slot values for placeholders
@@ -6885,9 +6885,6 @@ func (s *Prompt) Validate() error {
 	}
 	if s.Messages != nil {
 		for i, v := range s.Messages {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Messages", i), err.(aws.ErrInvalidParams))
 			}
@@ -6907,7 +6904,7 @@ func (s *Prompt) SetMaxAttempts(v int64) *Prompt {
 }
 
 // SetMessages sets the Messages field's value.
-func (s *Prompt) SetMessages(v []*Message) *Prompt {
+func (s *Prompt) SetMessages(v []Message) *Prompt {
 	s.Messages = v
 	return s
 }
@@ -7196,7 +7193,7 @@ type PutBotInput struct {
 	// An array of Intent objects. Each intent represents a command that a user
 	// can express. For example, a pizza ordering bot might support an OrderPizza
 	// intent. For more information, see how-it-works.
-	Intents []*Intent `locationName:"intents" type:"list"`
+	Intents []Intent `locationName:"intents" type:"list"`
 
 	// Specifies the target locale for the bot. Any intent used in the bot must
 	// be compatible with the locale of the bot.
@@ -7204,7 +7201,7 @@ type PutBotInput struct {
 	// The default is en-US.
 	//
 	// Locale is a required field
-	Locale Locale `locationName:"locale" type:"string" required:"true"`
+	Locale Locale `locationName:"locale" type:"string" required:"true" enum:"true"`
 
 	// The name of the bot. The name is not case sensitive.
 	//
@@ -7216,7 +7213,7 @@ type PutBotInput struct {
 	// bot, but doesn't build it.
 	//
 	// If you don't specify this value, the default value is Save.
-	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string"`
+	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string" enum:"true"`
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
 	// with the user. The locale configured for the voice must match the locale
@@ -7267,9 +7264,6 @@ func (s *PutBotInput) Validate() error {
 	}
 	if s.Intents != nil {
 		for i, v := range s.Intents {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Intents", i), err.(aws.ErrInvalidParams))
 			}
@@ -7319,7 +7313,7 @@ func (s *PutBotInput) SetIdleSessionTTLInSeconds(v int64) *PutBotInput {
 }
 
 // SetIntents sets the Intents field's value.
-func (s *PutBotInput) SetIntents(v []*Intent) *PutBotInput {
+func (s *PutBotInput) SetIntents(v []Intent) *PutBotInput {
 	s.Intents = v
 	return s
 }
@@ -7403,14 +7397,14 @@ type PutBotOutput struct {
 	IdleSessionTTLInSeconds *int64 `locationName:"idleSessionTTLInSeconds" min:"60" type:"integer"`
 
 	// An array of Intent objects. For more information, see PutBot.
-	Intents []*Intent `locationName:"intents" type:"list"`
+	Intents []Intent `locationName:"intents" type:"list"`
 
 	// The date that the bot was updated. When you create a resource, the creation
 	// date and last updated date are the same.
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -7423,7 +7417,7 @@ type PutBotOutput struct {
 	//
 	// When you set processBehaviorto SAVE, Amazon Lex sets the status code to NOT
 	// BUILT.
-	Status Status `locationName:"status" type:"string"`
+	Status Status `locationName:"status" type:"string" enum:"true"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -7492,7 +7486,7 @@ func (s *PutBotOutput) SetIdleSessionTTLInSeconds(v int64) *PutBotOutput {
 }
 
 // SetIntents sets the Intents field's value.
-func (s *PutBotOutput) SetIntents(v []*Intent) *PutBotOutput {
+func (s *PutBotOutput) SetIntents(v []Intent) *PutBotOutput {
 	s.Intents = v
 	return s
 }
@@ -7645,12 +7639,12 @@ type PutIntentInput struct {
 	// For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
 	//
 	// In each utterance, a slot name is enclosed in curly braces.
-	SampleUtterances []*string `locationName:"sampleUtterances" type:"list"`
+	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
 
 	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
 	// from the user using prompts defined in the slots. For more information, see
 	// how-it-works.
-	Slots []*Slot `locationName:"slots" type:"list"`
+	Slots []Slot `locationName:"slots" type:"list"`
 }
 
 // String returns the string representation
@@ -7705,9 +7699,6 @@ func (s *PutIntentInput) Validate() error {
 	}
 	if s.Slots != nil {
 		for i, v := range s.Slots {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Slots", i), err.(aws.ErrInvalidParams))
 			}
@@ -7781,13 +7772,13 @@ func (s *PutIntentInput) SetRejectionStatement(v *Statement) *PutIntentInput {
 }
 
 // SetSampleUtterances sets the SampleUtterances field's value.
-func (s *PutIntentInput) SetSampleUtterances(v []*string) *PutIntentInput {
+func (s *PutIntentInput) SetSampleUtterances(v []string) *PutIntentInput {
 	s.SampleUtterances = v
 	return s
 }
 
 // SetSlots sets the Slots field's value.
-func (s *PutIntentInput) SetSlots(v []*Slot) *PutIntentInput {
+func (s *PutIntentInput) SetSlots(v []Slot) *PutIntentInput {
 	s.Slots = v
 	return s
 }
@@ -7841,10 +7832,10 @@ type PutIntentOutput struct {
 	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
 
 	// An array of sample utterances that are configured for the intent.
-	SampleUtterances []*string `locationName:"sampleUtterances" type:"list"`
+	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
 
 	// An array of intent slots that are configured for the intent.
-	Slots []*Slot `locationName:"slots" type:"list"`
+	Slots []Slot `locationName:"slots" type:"list"`
 
 	// The version of the intent. For a new intent, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -7933,13 +7924,13 @@ func (s *PutIntentOutput) SetRejectionStatement(v *Statement) *PutIntentOutput {
 }
 
 // SetSampleUtterances sets the SampleUtterances field's value.
-func (s *PutIntentOutput) SetSampleUtterances(v []*string) *PutIntentOutput {
+func (s *PutIntentOutput) SetSampleUtterances(v []string) *PutIntentOutput {
 	s.SampleUtterances = v
 	return s
 }
 
 // SetSlots sets the Slots field's value.
-func (s *PutIntentOutput) SetSlots(v []*Slot) *PutIntentOutput {
+func (s *PutIntentOutput) SetSlots(v []Slot) *PutIntentOutput {
 	s.Slots = v
 	return s
 }
@@ -7979,7 +7970,7 @@ type PutSlotTypeInput struct {
 	// using a Lambda function you can choose to return the value that the user
 	// entered or the first value in the resolution list as the slot value. The
 	// valueSelectionStrategy field indicates the option to use.
-	EnumerationValues []*EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
 
 	// The name of the slot type. The name is not case sensitive.
 	//
@@ -8004,7 +7995,7 @@ type PutSlotTypeInput struct {
 	//    is no resolution list, null is returned.
 	//
 	// If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8032,9 +8023,6 @@ func (s *PutSlotTypeInput) Validate() error {
 	}
 	if s.EnumerationValues != nil {
 		for i, v := range s.EnumerationValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnumerationValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -8060,7 +8048,7 @@ func (s *PutSlotTypeInput) SetDescription(v string) *PutSlotTypeInput {
 }
 
 // SetEnumerationValues sets the EnumerationValues field's value.
-func (s *PutSlotTypeInput) SetEnumerationValues(v []*EnumerationValue) *PutSlotTypeInput {
+func (s *PutSlotTypeInput) SetEnumerationValues(v []EnumerationValue) *PutSlotTypeInput {
 	s.EnumerationValues = v
 	return s
 }
@@ -8092,7 +8080,7 @@ type PutSlotTypeOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot
 	// type can take.
-	EnumerationValues []*EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
+	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
 
 	// The date that the slot type was updated. When you create a slot type, the
 	// creation date and last update date are the same.
@@ -8103,7 +8091,7 @@ type PutSlotTypeOutput struct {
 
 	// The slot resolution strategy that Amazon Lex uses to determine the value
 	// of the slot. For more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
 
 	// The version of the slot type. For a new slot type, the version is always
 	// $LATEST.
@@ -8139,7 +8127,7 @@ func (s *PutSlotTypeOutput) SetDescription(v string) *PutSlotTypeOutput {
 }
 
 // SetEnumerationValues sets the EnumerationValues field's value.
-func (s *PutSlotTypeOutput) SetEnumerationValues(v []*EnumerationValue) *PutSlotTypeOutput {
+func (s *PutSlotTypeOutput) SetEnumerationValues(v []EnumerationValue) *PutSlotTypeOutput {
 	s.EnumerationValues = v
 	return s
 }
@@ -8236,12 +8224,12 @@ type Slot struct {
 	// Lex request for a slot value, you can provide those utterances to improve
 	// accuracy. This is optional. In most cases, Amazon Lex is capable of understanding
 	// user utterances.
-	SampleUtterances []*string `locationName:"sampleUtterances" type:"list"`
+	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
 
 	// Specifies whether the slot is required or optional.
 	//
 	// SlotConstraint is a required field
-	SlotConstraint SlotConstraint `locationName:"slotConstraint" type:"string" required:"true"`
+	SlotConstraint SlotConstraint `locationName:"slotConstraint" type:"string" required:"true" enum:"true"`
 
 	// The type of the slot, either a custom slot type that you defined or one of
 	// the built-in slot types.
@@ -8323,7 +8311,7 @@ func (s *Slot) SetResponseCard(v string) *Slot {
 }
 
 // SetSampleUtterances sets the SampleUtterances field's value.
-func (s *Slot) SetSampleUtterances(v []*string) *Slot {
+func (s *Slot) SetSampleUtterances(v []string) *Slot {
 	s.SampleUtterances = v
 	return s
 }
@@ -8423,7 +8411,7 @@ type Statement struct {
 	// A collection of message objects.
 	//
 	// Messages is a required field
-	Messages []*Message `locationName:"messages" min:"1" type:"list" required:"true"`
+	Messages []Message `locationName:"messages" min:"1" type:"list" required:"true"`
 
 	// At runtime, if the client is using the PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
 	// API, Amazon Lex includes the response card in the response. It substitutes
@@ -8457,9 +8445,6 @@ func (s *Statement) Validate() error {
 	}
 	if s.Messages != nil {
 		for i, v := range s.Messages {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Messages", i), err.(aws.ErrInvalidParams))
 			}
@@ -8473,7 +8458,7 @@ func (s *Statement) Validate() error {
 }
 
 // SetMessages sets the Messages field's value.
-func (s *Statement) SetMessages(v []*Message) *Statement {
+func (s *Statement) SetMessages(v []Message) *Statement {
 	s.Messages = v
 	return s
 }
@@ -8557,7 +8542,7 @@ type UtteranceList struct {
 
 	// One or more UtteranceData objects that contain information about the utterances
 	// that have been made to a bot. The maximum number of object is 100.
-	Utterances []*UtteranceData `locationName:"utterances" type:"list"`
+	Utterances []UtteranceData `locationName:"utterances" type:"list"`
 }
 
 // String returns the string representation
@@ -8577,7 +8562,7 @@ func (s *UtteranceList) SetBotVersion(v string) *UtteranceList {
 }
 
 // SetUtterances sets the Utterances field's value.
-func (s *UtteranceList) SetUtterances(v []*UtteranceData) *UtteranceList {
+func (s *UtteranceList) SetUtterances(v []UtteranceData) *UtteranceList {
 	s.Utterances = v
 	return s
 }

@@ -432,7 +432,7 @@ type AttackDetail struct {
 	_ struct{} `type:"structure"`
 
 	// List of counters that describe the attack for the specified time period.
-	AttackCounters []*SummarizedCounter `type:"list"`
+	AttackCounters []SummarizedCounter `type:"list"`
 
 	// The unique identifier (ID) of the attack.
 	AttackId *string `min:"1" type:"string"`
@@ -441,7 +441,7 @@ type AttackDetail struct {
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// List of mitigation actions taken for the attack.
-	Mitigations []*Mitigation `type:"list"`
+	Mitigations []Mitigation `type:"list"`
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string `min:"1" type:"string"`
@@ -451,7 +451,7 @@ type AttackDetail struct {
 
 	// If applicable, additional detail about the resource being attacked, for example,
 	// IP address or URL.
-	SubResources []*SubResourceSummary `type:"list"`
+	SubResources []SubResourceSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -465,7 +465,7 @@ func (s AttackDetail) GoString() string {
 }
 
 // SetAttackCounters sets the AttackCounters field's value.
-func (s *AttackDetail) SetAttackCounters(v []*SummarizedCounter) *AttackDetail {
+func (s *AttackDetail) SetAttackCounters(v []SummarizedCounter) *AttackDetail {
 	s.AttackCounters = v
 	return s
 }
@@ -483,7 +483,7 @@ func (s *AttackDetail) SetEndTime(v time.Time) *AttackDetail {
 }
 
 // SetMitigations sets the Mitigations field's value.
-func (s *AttackDetail) SetMitigations(v []*Mitigation) *AttackDetail {
+func (s *AttackDetail) SetMitigations(v []Mitigation) *AttackDetail {
 	s.Mitigations = v
 	return s
 }
@@ -501,7 +501,7 @@ func (s *AttackDetail) SetStartTime(v time.Time) *AttackDetail {
 }
 
 // SetSubResources sets the SubResources field's value.
-func (s *AttackDetail) SetSubResources(v []*SubResourceSummary) *AttackDetail {
+func (s *AttackDetail) SetSubResources(v []SubResourceSummary) *AttackDetail {
 	s.SubResources = v
 	return s
 }
@@ -515,7 +515,7 @@ type AttackSummary struct {
 	AttackId *string `type:"string"`
 
 	// The list of attacks for a specified time period.
-	AttackVectors []*AttackVectorDescription `type:"list"`
+	AttackVectors []AttackVectorDescription `type:"list"`
 
 	// The end time of the attack, in the format 2016-12-16T13:50Z.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -544,7 +544,7 @@ func (s *AttackSummary) SetAttackId(v string) *AttackSummary {
 }
 
 // SetAttackVectors sets the AttackVectors field's value.
-func (s *AttackSummary) SetAttackVectors(v []*AttackVectorDescription) *AttackSummary {
+func (s *AttackSummary) SetAttackVectors(v []AttackVectorDescription) *AttackSummary {
 	s.AttackVectors = v
 	return s
 }
@@ -987,7 +987,7 @@ type ListAttacksInput struct {
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked. If this
 	// is left blank, all applicable resources for this account will be included.
-	ResourceArns []*string `type:"list"`
+	ResourceArns []string `type:"list"`
 
 	// The time period for the attacks.
 	StartTime *TimeRange `type:"structure"`
@@ -1035,7 +1035,7 @@ func (s *ListAttacksInput) SetNextToken(v string) *ListAttacksInput {
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *ListAttacksInput) SetResourceArns(v []*string) *ListAttacksInput {
+func (s *ListAttacksInput) SetResourceArns(v []string) *ListAttacksInput {
 	s.ResourceArns = v
 	return s
 }
@@ -1051,7 +1051,7 @@ type ListAttacksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The attack information for the specified time range.
-	AttackSummaries []*AttackSummary `type:"list"`
+	AttackSummaries []AttackSummary `type:"list"`
 
 	// The token returned by a previous call to indicate that there is more data
 	// available. If not null, more results are available. Pass this value for the
@@ -1071,7 +1071,7 @@ func (s ListAttacksOutput) GoString() string {
 }
 
 // SetAttackSummaries sets the AttackSummaries field's value.
-func (s *ListAttacksOutput) SetAttackSummaries(v []*AttackSummary) *ListAttacksOutput {
+func (s *ListAttacksOutput) SetAttackSummaries(v []AttackSummary) *ListAttacksOutput {
 	s.AttackSummaries = v
 	return s
 }
@@ -1142,7 +1142,7 @@ type ListProtectionsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The array of enabled Protection objects.
-	Protections []*Protection `type:"list"`
+	Protections []Protection `type:"list"`
 }
 
 // String returns the string representation
@@ -1162,7 +1162,7 @@ func (s *ListProtectionsOutput) SetNextToken(v string) *ListProtectionsOutput {
 }
 
 // SetProtections sets the Protections field's value.
-func (s *ListProtectionsOutput) SetProtections(v []*Protection) *ListProtectionsOutput {
+func (s *ListProtectionsOutput) SetProtections(v []Protection) *ListProtectionsOutput {
 	s.Protections = v
 	return s
 }
@@ -1241,16 +1241,16 @@ type SubResourceSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The list of attack types and associated counters.
-	AttackVectors []*SummarizedAttackVector `type:"list"`
+	AttackVectors []SummarizedAttackVector `type:"list"`
 
 	// The counters that describe the details of the attack.
-	Counters []*SummarizedCounter `type:"list"`
+	Counters []SummarizedCounter `type:"list"`
 
 	// The unique identifier (ID) of the SubResource.
 	Id *string `type:"string"`
 
 	// The SubResource type.
-	Type SubResourceType `type:"string"`
+	Type SubResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1264,13 +1264,13 @@ func (s SubResourceSummary) GoString() string {
 }
 
 // SetAttackVectors sets the AttackVectors field's value.
-func (s *SubResourceSummary) SetAttackVectors(v []*SummarizedAttackVector) *SubResourceSummary {
+func (s *SubResourceSummary) SetAttackVectors(v []SummarizedAttackVector) *SubResourceSummary {
 	s.AttackVectors = v
 	return s
 }
 
 // SetCounters sets the Counters field's value.
-func (s *SubResourceSummary) SetCounters(v []*SummarizedCounter) *SubResourceSummary {
+func (s *SubResourceSummary) SetCounters(v []SummarizedCounter) *SubResourceSummary {
 	s.Counters = v
 	return s
 }
@@ -1327,7 +1327,7 @@ type SummarizedAttackVector struct {
 	_ struct{} `type:"structure"`
 
 	// The list of counters that describe the details of the attack.
-	VectorCounters []*SummarizedCounter `type:"list"`
+	VectorCounters []SummarizedCounter `type:"list"`
 
 	// The attack type, for example, SNMP reflection or SYN flood.
 	//
@@ -1346,7 +1346,7 @@ func (s SummarizedAttackVector) GoString() string {
 }
 
 // SetVectorCounters sets the VectorCounters field's value.
-func (s *SummarizedAttackVector) SetVectorCounters(v []*SummarizedCounter) *SummarizedAttackVector {
+func (s *SummarizedAttackVector) SetVectorCounters(v []SummarizedCounter) *SummarizedAttackVector {
 	s.VectorCounters = v
 	return s
 }

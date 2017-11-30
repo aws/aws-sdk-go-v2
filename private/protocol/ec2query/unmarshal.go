@@ -23,13 +23,11 @@ var UnmarshalErrorHandler = request.NamedHandler{Name: "awssdk.ec2query.Unmarsha
 // Unmarshal unmarshals a response body for the EC2 protocol.
 func Unmarshal(r *request.Request) {
 	defer r.HTTPResponse.Body.Close()
-	if r.DataFilled() {
-		decoder := xml.NewDecoder(r.HTTPResponse.Body)
-		err := xmlutil.UnmarshalXML(r.Data, decoder, "")
-		if err != nil {
-			r.Error = awserr.New("SerializationError", "failed decoding EC2 Query response", err)
-			return
-		}
+	decoder := xml.NewDecoder(r.HTTPResponse.Body)
+	err := xmlutil.UnmarshalXML(r.Data, decoder, "")
+	if err != nil {
+		r.Error = awserr.New("SerializationError", "failed decoding EC2 Query response", err)
+		return
 	}
 }
 

@@ -4008,20 +4008,20 @@ type App struct {
 	AppSource *Source `type:"structure"`
 
 	// The stack attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// When the app was created.
 	CreatedAt *string `type:"string"`
 
 	// The app's data sources.
-	DataSources []*DataSource `type:"list"`
+	DataSources []DataSource `type:"list"`
 
 	// A description of the app.
 	Description *string `type:"string"`
 
 	// The app vhost settings with multiple domains separated by commas. For example:
 	// 'www.example.com, example.com'
-	Domains []*string `type:"list"`
+	Domains []string `type:"list"`
 
 	// Whether to enable SSL for the app.
 	EnableSsl *bool `type:"boolean"`
@@ -4037,7 +4037,7 @@ type App struct {
 	// limit should accommodate most if not all use cases, but if you do exceed
 	// it, you will cause an exception (API) with an "Environment: is too large
 	// (maximum is 10KB)" message.
-	Environment []*EnvironmentVariable `type:"list"`
+	Environment []EnvironmentVariable `type:"list"`
 
 	// The app name.
 	Name *string `type:"string"`
@@ -4052,7 +4052,7 @@ type App struct {
 	StackId *string `type:"string"`
 
 	// The app type.
-	Type AppType `type:"string"`
+	Type AppType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4078,7 +4078,7 @@ func (s *App) SetAppSource(v *Source) *App {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *App) SetAttributes(v map[string]*string) *App {
+func (s *App) SetAttributes(v map[string]string) *App {
 	s.Attributes = v
 	return s
 }
@@ -4090,7 +4090,7 @@ func (s *App) SetCreatedAt(v string) *App {
 }
 
 // SetDataSources sets the DataSources field's value.
-func (s *App) SetDataSources(v []*DataSource) *App {
+func (s *App) SetDataSources(v []DataSource) *App {
 	s.DataSources = v
 	return s
 }
@@ -4102,7 +4102,7 @@ func (s *App) SetDescription(v string) *App {
 }
 
 // SetDomains sets the Domains field's value.
-func (s *App) SetDomains(v []*string) *App {
+func (s *App) SetDomains(v []string) *App {
 	s.Domains = v
 	return s
 }
@@ -4114,7 +4114,7 @@ func (s *App) SetEnableSsl(v bool) *App {
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *App) SetEnvironment(v []*EnvironmentVariable) *App {
+func (s *App) SetEnvironment(v []EnvironmentVariable) *App {
 	s.Environment = v
 	return s
 }
@@ -4162,7 +4162,7 @@ type AssignInstanceInput struct {
 	// a registered instance to a built-in layer.
 	//
 	// LayerIds is a required field
-	LayerIds []*string `type:"list" required:"true"`
+	LayerIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4200,7 +4200,7 @@ func (s *AssignInstanceInput) SetInstanceId(v string) *AssignInstanceInput {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *AssignInstanceInput) SetLayerIds(v []*string) *AssignInstanceInput {
+func (s *AssignInstanceInput) SetLayerIds(v []string) *AssignInstanceInput {
 	s.LayerIds = v
 	return s
 }
@@ -4433,7 +4433,7 @@ type AutoScalingThresholds struct {
 	// You can either have AWS OpsWorks Stacks update the role for you when you
 	// first use this feature or you can edit the role manually. For more information,
 	// see Allowing AWS OpsWorks Stacks to Act on Your Behalf (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html).
-	Alarms []*string `type:"list"`
+	Alarms []string `type:"list"`
 
 	// The CPU utilization threshold, as a percent of the available CPU. A value
 	// of -1 disables the threshold.
@@ -4492,7 +4492,7 @@ func (s *AutoScalingThresholds) Validate() error {
 }
 
 // SetAlarms sets the Alarms field's value.
-func (s *AutoScalingThresholds) SetAlarms(v []*string) *AutoScalingThresholds {
+func (s *AutoScalingThresholds) SetAlarms(v []string) *AutoScalingThresholds {
 	s.Alarms = v
 	return s
 }
@@ -4650,7 +4650,7 @@ type CloneStackInput struct {
 
 	// A list of stack attributes and values as key/value pairs to be added to the
 	// cloned stack.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and
 	// the Berkshelf version on Chef 11.10 stacks. For more information, see Create
@@ -4658,7 +4658,7 @@ type CloneStackInput struct {
 	ChefConfiguration *ChefConfiguration `type:"structure"`
 
 	// A list of source stack app IDs to be included in the cloned stack.
-	CloneAppIds []*string `type:"list"`
+	CloneAppIds []string `type:"list"`
 
 	// Whether to clone the source stack's permissions.
 	ClonePermissions *bool `type:"boolean"`
@@ -4727,7 +4727,7 @@ type CloneStackInput struct {
 	// The default root device type. This value is used by default for all instances
 	// in the cloned stack, but you can override it when you create an instance.
 	// For more information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
@@ -4894,7 +4894,7 @@ func (s *CloneStackInput) SetAgentVersion(v string) *CloneStackInput {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CloneStackInput) SetAttributes(v map[string]*string) *CloneStackInput {
+func (s *CloneStackInput) SetAttributes(v map[string]string) *CloneStackInput {
 	s.Attributes = v
 	return s
 }
@@ -4906,7 +4906,7 @@ func (s *CloneStackInput) SetChefConfiguration(v *ChefConfiguration) *CloneStack
 }
 
 // SetCloneAppIds sets the CloneAppIds field's value.
-func (s *CloneStackInput) SetCloneAppIds(v []*string) *CloneStackInput {
+func (s *CloneStackInput) SetCloneAppIds(v []string) *CloneStackInput {
 	s.CloneAppIds = v
 	return s
 }
@@ -5053,7 +5053,7 @@ type CloudWatchLogsConfiguration struct {
 	Enabled *bool `type:"boolean"`
 
 	// A list of configuration options for CloudWatch Logs.
-	LogStreams []*CloudWatchLogsLogStream `type:"list"`
+	LogStreams []CloudWatchLogsLogStream `type:"list"`
 }
 
 // String returns the string representation
@@ -5073,7 +5073,7 @@ func (s *CloudWatchLogsConfiguration) SetEnabled(v bool) *CloudWatchLogsConfigur
 }
 
 // SetLogStreams sets the LogStreams field's value.
-func (s *CloudWatchLogsConfiguration) SetLogStreams(v []*CloudWatchLogsLogStream) *CloudWatchLogsConfiguration {
+func (s *CloudWatchLogsConfiguration) SetLogStreams(v []CloudWatchLogsLogStream) *CloudWatchLogsConfiguration {
 	s.LogStreams = v
 	return s
 }
@@ -5105,7 +5105,7 @@ type CloudWatchLogsLogStream struct {
 	// Specifies the encoding of the log file so that the file can be read correctly.
 	// The default is utf_8. Encodings supported by Python codecs.decode() can be
 	// used here.
-	Encoding CloudWatchLogsEncoding `type:"string"`
+	Encoding CloudWatchLogsEncoding `type:"string" enum:"true"`
 
 	// Specifies log files that you want to push to CloudWatch Logs.
 	//
@@ -5132,7 +5132,7 @@ type CloudWatchLogsLogStream struct {
 	// Specifies where to start to read data (start_of_file or end_of_file). The
 	// default is start_of_file. This setting is only used if there is no state
 	// persisted for that log stream.
-	InitialPosition CloudWatchLogsInitialPosition `type:"string"`
+	InitialPosition CloudWatchLogsInitialPosition `type:"string" enum:"true"`
 
 	// Specifies the destination log group. A log group is created automatically
 	// if it doesn't already exist. Log group names can be between 1 and 512 characters
@@ -5144,7 +5144,7 @@ type CloudWatchLogsLogStream struct {
 	MultiLineStartPattern *string `type:"string"`
 
 	// Specifies the time zone of log event time stamps.
-	TimeZone CloudWatchLogsTimeZone `type:"string"`
+	TimeZone CloudWatchLogsTimeZone `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5369,17 +5369,17 @@ type CreateAppInput struct {
 	AppSource *Source `type:"structure"`
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// The app's data source.
-	DataSources []*DataSource `type:"list"`
+	DataSources []DataSource `type:"list"`
 
 	// A description of the app.
 	Description *string `type:"string"`
 
 	// The app virtual host settings, with multiple domains separated by commas.
 	// For example: 'www.example.com, example.com'
-	Domains []*string `type:"list"`
+	Domains []string `type:"list"`
 
 	// Whether to enable SSL for the app.
 	EnableSsl *bool `type:"boolean"`
@@ -5398,7 +5398,7 @@ type CreateAppInput struct {
 	//
 	// This parameter is supported only by Chef 11.10 stacks. If you have specified
 	// one or more environment variables, you cannot modify the stack's Chef version.
-	Environment []*EnvironmentVariable `type:"list"`
+	Environment []EnvironmentVariable `type:"list"`
 
 	// The app name.
 	//
@@ -5423,7 +5423,7 @@ type CreateAppInput struct {
 	// prefer to implement your own Deploy recipes, specify other.
 	//
 	// Type is a required field
-	Type AppType `type:"string" required:"true"`
+	Type AppType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5452,9 +5452,6 @@ func (s *CreateAppInput) Validate() error {
 	}
 	if s.Environment != nil {
 		for i, v := range s.Environment {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Environment", i), err.(aws.ErrInvalidParams))
 			}
@@ -5479,13 +5476,13 @@ func (s *CreateAppInput) SetAppSource(v *Source) *CreateAppInput {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreateAppInput) SetAttributes(v map[string]*string) *CreateAppInput {
+func (s *CreateAppInput) SetAttributes(v map[string]string) *CreateAppInput {
 	s.Attributes = v
 	return s
 }
 
 // SetDataSources sets the DataSources field's value.
-func (s *CreateAppInput) SetDataSources(v []*DataSource) *CreateAppInput {
+func (s *CreateAppInput) SetDataSources(v []DataSource) *CreateAppInput {
 	s.DataSources = v
 	return s
 }
@@ -5497,7 +5494,7 @@ func (s *CreateAppInput) SetDescription(v string) *CreateAppInput {
 }
 
 // SetDomains sets the Domains field's value.
-func (s *CreateAppInput) SetDomains(v []*string) *CreateAppInput {
+func (s *CreateAppInput) SetDomains(v []string) *CreateAppInput {
 	s.Domains = v
 	return s
 }
@@ -5509,7 +5506,7 @@ func (s *CreateAppInput) SetEnableSsl(v bool) *CreateAppInput {
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *CreateAppInput) SetEnvironment(v []*EnvironmentVariable) *CreateAppInput {
+func (s *CreateAppInput) SetEnvironment(v []EnvironmentVariable) *CreateAppInput {
 	s.Environment = v
 	return s
 }
@@ -5597,10 +5594,10 @@ type CreateDeploymentInput struct {
 	CustomJson *string `type:"string"`
 
 	// The instance IDs for the deployment targets.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// The layer IDs for the deployment targets.
-	LayerIds []*string `type:"list"`
+	LayerIds []string `type:"list"`
 
 	// The stack ID.
 	//
@@ -5666,13 +5663,13 @@ func (s *CreateDeploymentInput) SetCustomJson(v string) *CreateDeploymentInput {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *CreateDeploymentInput) SetInstanceIds(v []*string) *CreateDeploymentInput {
+func (s *CreateDeploymentInput) SetInstanceIds(v []string) *CreateDeploymentInput {
 	s.InstanceIds = v
 	return s
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *CreateDeploymentInput) SetLayerIds(v []*string) *CreateDeploymentInput {
+func (s *CreateDeploymentInput) SetLayerIds(v []string) *CreateDeploymentInput {
 	s.LayerIds = v
 	return s
 }
@@ -5739,11 +5736,11 @@ type CreateInstanceInput struct {
 	// not necessarily support both architectures. For a list of the architectures
 	// that are supported by the different instance types, see Instance Families
 	// and Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-	Architecture Architecture `type:"string"`
+	Architecture Architecture `type:"string" enum:"true"`
 
 	// For load-based or time-based instances, the type. Windows stacks can use
 	// only time-based instances.
-	AutoScalingType AutoScalingType `type:"string"`
+	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
@@ -5752,7 +5749,7 @@ type CreateInstanceInput struct {
 	// An array of BlockDeviceMapping objects that specify the instance's block
 	// devices. For more information, see Block Device Mapping (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html).
 	// Note that block device mappings are not supported for custom AMIs.
-	BlockDeviceMappings []*BlockDeviceMapping `type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `type:"list"`
 
 	// Whether to create an Amazon EBS-optimized instance.
 	EbsOptimized *bool `type:"boolean"`
@@ -5783,7 +5780,7 @@ type CreateInstanceInput struct {
 	// An array that contains the instance's layer IDs.
 	//
 	// LayerIds is a required field
-	LayerIds []*string `type:"list" required:"true"`
+	LayerIds []string `type:"list" required:"true"`
 
 	// The instance's operating system, which must be set to one of the following.
 	//
@@ -5819,7 +5816,7 @@ type CreateInstanceInput struct {
 
 	// The instance root device type. For more information, see Storage for the
 	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	RootDeviceType RootDeviceType `type:"string"`
+	RootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// The instance's Amazon EC2 key-pair name.
 	SshKeyName *string `type:"string"`
@@ -5913,7 +5910,7 @@ func (s *CreateInstanceInput) SetAvailabilityZone(v string) *CreateInstanceInput
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *CreateInstanceInput) SetBlockDeviceMappings(v []*BlockDeviceMapping) *CreateInstanceInput {
+func (s *CreateInstanceInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *CreateInstanceInput {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -5943,7 +5940,7 @@ func (s *CreateInstanceInput) SetInstanceType(v string) *CreateInstanceInput {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *CreateInstanceInput) SetLayerIds(v []*string) *CreateInstanceInput {
+func (s *CreateInstanceInput) SetLayerIds(v []string) *CreateInstanceInput {
 	s.LayerIds = v
 	return s
 }
@@ -6023,7 +6020,7 @@ type CreateLayerInput struct {
 	//
 	// To create a cluster layer, set the EcsClusterArn attribute to the cluster's
 	// ARN.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// Whether to automatically assign an Elastic IP address (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// to the layer's instances. For more information, see How to Edit a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
@@ -6052,7 +6049,7 @@ type CreateLayerInput struct {
 	CustomRecipes *Recipes `type:"structure"`
 
 	// An array containing the layer custom security group IDs.
-	CustomSecurityGroupIds []*string `type:"list"`
+	CustomSecurityGroupIds []string `type:"list"`
 
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool `type:"boolean"`
@@ -6078,7 +6075,7 @@ type CreateLayerInput struct {
 	Name *string `type:"string" required:"true"`
 
 	// An array of Package objects that describes the layer packages.
-	Packages []*string `type:"list"`
+	Packages []string `type:"list"`
 
 	// For custom layers only, use this parameter to specify the layer's short name,
 	// which is used internally by AWS OpsWorks Stacks and by Chef recipes. The
@@ -6102,13 +6099,13 @@ type CreateLayerInput struct {
 	// in Chef 12 stacks.
 	//
 	// Type is a required field
-	Type LayerType `type:"string" required:"true"`
+	Type LayerType `type:"string" required:"true" enum:"true"`
 
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool `type:"boolean"`
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []*VolumeConfiguration `type:"list"`
+	VolumeConfigurations []VolumeConfiguration `type:"list"`
 }
 
 // String returns the string representation
@@ -6141,9 +6138,6 @@ func (s *CreateLayerInput) Validate() error {
 	}
 	if s.VolumeConfigurations != nil {
 		for i, v := range s.VolumeConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -6157,7 +6151,7 @@ func (s *CreateLayerInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreateLayerInput) SetAttributes(v map[string]*string) *CreateLayerInput {
+func (s *CreateLayerInput) SetAttributes(v map[string]string) *CreateLayerInput {
 	s.Attributes = v
 	return s
 }
@@ -6199,7 +6193,7 @@ func (s *CreateLayerInput) SetCustomRecipes(v *Recipes) *CreateLayerInput {
 }
 
 // SetCustomSecurityGroupIds sets the CustomSecurityGroupIds field's value.
-func (s *CreateLayerInput) SetCustomSecurityGroupIds(v []*string) *CreateLayerInput {
+func (s *CreateLayerInput) SetCustomSecurityGroupIds(v []string) *CreateLayerInput {
 	s.CustomSecurityGroupIds = v
 	return s
 }
@@ -6229,7 +6223,7 @@ func (s *CreateLayerInput) SetName(v string) *CreateLayerInput {
 }
 
 // SetPackages sets the Packages field's value.
-func (s *CreateLayerInput) SetPackages(v []*string) *CreateLayerInput {
+func (s *CreateLayerInput) SetPackages(v []string) *CreateLayerInput {
 	s.Packages = v
 	return s
 }
@@ -6259,7 +6253,7 @@ func (s *CreateLayerInput) SetUseEbsOptimizedInstances(v bool) *CreateLayerInput
 }
 
 // SetVolumeConfigurations sets the VolumeConfigurations field's value.
-func (s *CreateLayerInput) SetVolumeConfigurations(v []*VolumeConfiguration) *CreateLayerInput {
+func (s *CreateLayerInput) SetVolumeConfigurations(v []VolumeConfiguration) *CreateLayerInput {
 	s.VolumeConfigurations = v
 	return s
 }
@@ -6314,7 +6308,7 @@ type CreateStackInput struct {
 	AgentVersion *string `type:"string"`
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and
 	// the Berkshelf version on Chef 11.10 stacks. For more information, see Create
@@ -6387,7 +6381,7 @@ type CreateStackInput struct {
 	// in the stack, but you can override it when you create an instance. The default
 	// option is instance-store. For more information, see Storage for the Root
 	// Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
@@ -6554,7 +6548,7 @@ func (s *CreateStackInput) SetAgentVersion(v string) *CreateStackInput {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *CreateStackInput) SetAttributes(v map[string]*string) *CreateStackInput {
+func (s *CreateStackInput) SetAttributes(v map[string]string) *CreateStackInput {
 	s.Attributes = v
 	return s
 }
@@ -7161,7 +7155,7 @@ type Deployment struct {
 	IamUserArn *string `type:"string"`
 
 	// The IDs of the target instances.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// The stack ID.
 	StackId *string `type:"string"`
@@ -7241,7 +7235,7 @@ func (s *Deployment) SetIamUserArn(v string) *Deployment {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *Deployment) SetInstanceIds(v []*string) *Deployment {
+func (s *Deployment) SetInstanceIds(v []string) *Deployment {
 	s.InstanceIds = v
 	return s
 }
@@ -7283,7 +7277,7 @@ type DeploymentCommand struct {
 	// the following.
 	//
 	// { "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"] }
-	Args map[string][]*string `type:"map"`
+	Args map[string][]string `type:"map"`
 
 	// Specifies the operation. You can specify only one command.
 	//
@@ -7323,7 +7317,7 @@ type DeploymentCommand struct {
 	//    * undeploy: Undeploy the app.
 	//
 	// Name is a required field
-	Name DeploymentCommandName `type:"string" required:"true"`
+	Name DeploymentCommandName `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7350,7 +7344,7 @@ func (s *DeploymentCommand) Validate() error {
 }
 
 // SetArgs sets the Args field's value.
-func (s *DeploymentCommand) SetArgs(v map[string][]*string) *DeploymentCommand {
+func (s *DeploymentCommand) SetArgs(v map[string][]string) *DeploymentCommand {
 	s.Args = v
 	return s
 }
@@ -7679,7 +7673,7 @@ type DescribeAgentVersionsOutput struct {
 	// The agent versions for the specified stack or configuration manager. Note
 	// that this value is the complete version number, not the abbreviated number
 	// used by the console.
-	AgentVersions []*AgentVersion `type:"list"`
+	AgentVersions []AgentVersion `type:"list"`
 }
 
 // String returns the string representation
@@ -7693,7 +7687,7 @@ func (s DescribeAgentVersionsOutput) GoString() string {
 }
 
 // SetAgentVersions sets the AgentVersions field's value.
-func (s *DescribeAgentVersionsOutput) SetAgentVersions(v []*AgentVersion) *DescribeAgentVersionsOutput {
+func (s *DescribeAgentVersionsOutput) SetAgentVersions(v []AgentVersion) *DescribeAgentVersionsOutput {
 	s.AgentVersions = v
 	return s
 }
@@ -7705,7 +7699,7 @@ type DescribeAppsInput struct {
 	// An array of app IDs for the apps to be described. If you use this parameter,
 	// DescribeApps returns a description of the specified apps. Otherwise, it returns
 	// a description of every app.
-	AppIds []*string `type:"list"`
+	AppIds []string `type:"list"`
 
 	// The app stack ID. If you use this parameter, DescribeApps returns a description
 	// of the apps in the specified stack.
@@ -7723,7 +7717,7 @@ func (s DescribeAppsInput) GoString() string {
 }
 
 // SetAppIds sets the AppIds field's value.
-func (s *DescribeAppsInput) SetAppIds(v []*string) *DescribeAppsInput {
+func (s *DescribeAppsInput) SetAppIds(v []string) *DescribeAppsInput {
 	s.AppIds = v
 	return s
 }
@@ -7740,7 +7734,7 @@ type DescribeAppsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of App objects that describe the specified apps.
-	Apps []*App `type:"list"`
+	Apps []App `type:"list"`
 }
 
 // String returns the string representation
@@ -7754,7 +7748,7 @@ func (s DescribeAppsOutput) GoString() string {
 }
 
 // SetApps sets the Apps field's value.
-func (s *DescribeAppsOutput) SetApps(v []*App) *DescribeAppsOutput {
+func (s *DescribeAppsOutput) SetApps(v []App) *DescribeAppsOutput {
 	s.Apps = v
 	return s
 }
@@ -7766,7 +7760,7 @@ type DescribeCommandsInput struct {
 	// An array of command IDs. If you include this parameter, DescribeCommands
 	// returns a description of the specified commands. Otherwise, it returns a
 	// description of every command.
-	CommandIds []*string `type:"list"`
+	CommandIds []string `type:"list"`
 
 	// The deployment ID. If you include this parameter, DescribeCommands returns
 	// a description of the commands associated with the specified deployment.
@@ -7788,7 +7782,7 @@ func (s DescribeCommandsInput) GoString() string {
 }
 
 // SetCommandIds sets the CommandIds field's value.
-func (s *DescribeCommandsInput) SetCommandIds(v []*string) *DescribeCommandsInput {
+func (s *DescribeCommandsInput) SetCommandIds(v []string) *DescribeCommandsInput {
 	s.CommandIds = v
 	return s
 }
@@ -7811,7 +7805,7 @@ type DescribeCommandsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Command objects that describe each of the specified commands.
-	Commands []*Command `type:"list"`
+	Commands []Command `type:"list"`
 }
 
 // String returns the string representation
@@ -7825,7 +7819,7 @@ func (s DescribeCommandsOutput) GoString() string {
 }
 
 // SetCommands sets the Commands field's value.
-func (s *DescribeCommandsOutput) SetCommands(v []*Command) *DescribeCommandsOutput {
+func (s *DescribeCommandsOutput) SetCommands(v []Command) *DescribeCommandsOutput {
 	s.Commands = v
 	return s
 }
@@ -7841,7 +7835,7 @@ type DescribeDeploymentsInput struct {
 	// An array of deployment IDs to be described. If you include this parameter,
 	// DescribeDeployments returns a description of the specified deployments. Otherwise,
 	// it returns a description of every deployment.
-	DeploymentIds []*string `type:"list"`
+	DeploymentIds []string `type:"list"`
 
 	// The stack ID. If you include this parameter, DescribeDeployments returns
 	// a description of the commands associated with the specified stack.
@@ -7865,7 +7859,7 @@ func (s *DescribeDeploymentsInput) SetAppId(v string) *DescribeDeploymentsInput 
 }
 
 // SetDeploymentIds sets the DeploymentIds field's value.
-func (s *DescribeDeploymentsInput) SetDeploymentIds(v []*string) *DescribeDeploymentsInput {
+func (s *DescribeDeploymentsInput) SetDeploymentIds(v []string) *DescribeDeploymentsInput {
 	s.DeploymentIds = v
 	return s
 }
@@ -7882,7 +7876,7 @@ type DescribeDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Deployment objects that describe the deployments.
-	Deployments []*Deployment `type:"list"`
+	Deployments []Deployment `type:"list"`
 }
 
 // String returns the string representation
@@ -7896,7 +7890,7 @@ func (s DescribeDeploymentsOutput) GoString() string {
 }
 
 // SetDeployments sets the Deployments field's value.
-func (s *DescribeDeploymentsOutput) SetDeployments(v []*Deployment) *DescribeDeploymentsOutput {
+func (s *DescribeDeploymentsOutput) SetDeployments(v []Deployment) *DescribeDeploymentsOutput {
 	s.Deployments = v
 	return s
 }
@@ -7906,7 +7900,7 @@ type DescribeEcsClustersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ARNs, one for each cluster to be described.
-	EcsClusterArns []*string `type:"list"`
+	EcsClusterArns []string `type:"list"`
 
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
@@ -7938,7 +7932,7 @@ func (s DescribeEcsClustersInput) GoString() string {
 }
 
 // SetEcsClusterArns sets the EcsClusterArns field's value.
-func (s *DescribeEcsClustersInput) SetEcsClusterArns(v []*string) *DescribeEcsClustersInput {
+func (s *DescribeEcsClustersInput) SetEcsClusterArns(v []string) *DescribeEcsClustersInput {
 	s.EcsClusterArns = v
 	return s
 }
@@ -7967,7 +7961,7 @@ type DescribeEcsClustersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of EcsCluster objects containing the cluster descriptions.
-	EcsClusters []*EcsCluster `type:"list"`
+	EcsClusters []EcsCluster `type:"list"`
 
 	// If a paginated request does not return all of the remaining results, this
 	// parameter is set to a token that you can assign to the request object's NextToken
@@ -7987,7 +7981,7 @@ func (s DescribeEcsClustersOutput) GoString() string {
 }
 
 // SetEcsClusters sets the EcsClusters field's value.
-func (s *DescribeEcsClustersOutput) SetEcsClusters(v []*EcsCluster) *DescribeEcsClustersOutput {
+func (s *DescribeEcsClustersOutput) SetEcsClusters(v []EcsCluster) *DescribeEcsClustersOutput {
 	s.EcsClusters = v
 	return s
 }
@@ -8009,7 +8003,7 @@ type DescribeElasticIpsInput struct {
 	// An array of Elastic IP addresses to be described. If you include this parameter,
 	// DescribeElasticIps returns a description of the specified Elastic IP addresses.
 	// Otherwise, it returns a description of every Elastic IP address.
-	Ips []*string `type:"list"`
+	Ips []string `type:"list"`
 
 	// A stack ID. If you include this parameter, DescribeElasticIps returns a description
 	// of the Elastic IP addresses that are registered with the specified stack.
@@ -8033,7 +8027,7 @@ func (s *DescribeElasticIpsInput) SetInstanceId(v string) *DescribeElasticIpsInp
 }
 
 // SetIps sets the Ips field's value.
-func (s *DescribeElasticIpsInput) SetIps(v []*string) *DescribeElasticIpsInput {
+func (s *DescribeElasticIpsInput) SetIps(v []string) *DescribeElasticIpsInput {
 	s.Ips = v
 	return s
 }
@@ -8050,7 +8044,7 @@ type DescribeElasticIpsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An ElasticIps object that describes the specified Elastic IP addresses.
-	ElasticIps []*ElasticIp `type:"list"`
+	ElasticIps []ElasticIp `type:"list"`
 }
 
 // String returns the string representation
@@ -8064,7 +8058,7 @@ func (s DescribeElasticIpsOutput) GoString() string {
 }
 
 // SetElasticIps sets the ElasticIps field's value.
-func (s *DescribeElasticIpsOutput) SetElasticIps(v []*ElasticIp) *DescribeElasticIpsOutput {
+func (s *DescribeElasticIpsOutput) SetElasticIps(v []ElasticIp) *DescribeElasticIpsOutput {
 	s.ElasticIps = v
 	return s
 }
@@ -8075,7 +8069,7 @@ type DescribeElasticLoadBalancersInput struct {
 
 	// A list of layer IDs. The action describes the Elastic Load Balancing instances
 	// for the specified layers.
-	LayerIds []*string `type:"list"`
+	LayerIds []string `type:"list"`
 
 	// A stack ID. The action describes the stack's Elastic Load Balancing instances.
 	StackId *string `type:"string"`
@@ -8092,7 +8086,7 @@ func (s DescribeElasticLoadBalancersInput) GoString() string {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *DescribeElasticLoadBalancersInput) SetLayerIds(v []*string) *DescribeElasticLoadBalancersInput {
+func (s *DescribeElasticLoadBalancersInput) SetLayerIds(v []string) *DescribeElasticLoadBalancersInput {
 	s.LayerIds = v
 	return s
 }
@@ -8110,7 +8104,7 @@ type DescribeElasticLoadBalancersOutput struct {
 
 	// A list of ElasticLoadBalancer objects that describe the specified Elastic
 	// Load Balancing instances.
-	ElasticLoadBalancers []*ElasticLoadBalancer `type:"list"`
+	ElasticLoadBalancers []ElasticLoadBalancer `type:"list"`
 }
 
 // String returns the string representation
@@ -8124,7 +8118,7 @@ func (s DescribeElasticLoadBalancersOutput) GoString() string {
 }
 
 // SetElasticLoadBalancers sets the ElasticLoadBalancers field's value.
-func (s *DescribeElasticLoadBalancersOutput) SetElasticLoadBalancers(v []*ElasticLoadBalancer) *DescribeElasticLoadBalancersOutput {
+func (s *DescribeElasticLoadBalancersOutput) SetElasticLoadBalancers(v []ElasticLoadBalancer) *DescribeElasticLoadBalancersOutput {
 	s.ElasticLoadBalancers = v
 	return s
 }
@@ -8136,7 +8130,7 @@ type DescribeInstancesInput struct {
 	// An array of instance IDs to be described. If you use this parameter, DescribeInstances
 	// returns a description of the specified instances. Otherwise, it returns a
 	// description of every instance.
-	InstanceIds []*string `type:"list"`
+	InstanceIds []string `type:"list"`
 
 	// A layer ID. If you use this parameter, DescribeInstances returns descriptions
 	// of the instances associated with the specified layer.
@@ -8158,7 +8152,7 @@ func (s DescribeInstancesInput) GoString() string {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstancesInput) SetInstanceIds(v []*string) *DescribeInstancesInput {
+func (s *DescribeInstancesInput) SetInstanceIds(v []string) *DescribeInstancesInput {
 	s.InstanceIds = v
 	return s
 }
@@ -8181,7 +8175,7 @@ type DescribeInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Instance objects that describe the instances.
-	Instances []*Instance `type:"list"`
+	Instances []Instance `type:"list"`
 }
 
 // String returns the string representation
@@ -8195,7 +8189,7 @@ func (s DescribeInstancesOutput) GoString() string {
 }
 
 // SetInstances sets the Instances field's value.
-func (s *DescribeInstancesOutput) SetInstances(v []*Instance) *DescribeInstancesOutput {
+func (s *DescribeInstancesOutput) SetInstances(v []Instance) *DescribeInstancesOutput {
 	s.Instances = v
 	return s
 }
@@ -8207,7 +8201,7 @@ type DescribeLayersInput struct {
 	// An array of layer IDs that specify the layers to be described. If you omit
 	// this parameter, DescribeLayers returns a description of every layer in the
 	// specified stack.
-	LayerIds []*string `type:"list"`
+	LayerIds []string `type:"list"`
 
 	// The stack ID.
 	StackId *string `type:"string"`
@@ -8224,7 +8218,7 @@ func (s DescribeLayersInput) GoString() string {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *DescribeLayersInput) SetLayerIds(v []*string) *DescribeLayersInput {
+func (s *DescribeLayersInput) SetLayerIds(v []string) *DescribeLayersInput {
 	s.LayerIds = v
 	return s
 }
@@ -8241,7 +8235,7 @@ type DescribeLayersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Layer objects that describe the layers.
-	Layers []*Layer `type:"list"`
+	Layers []Layer `type:"list"`
 }
 
 // String returns the string representation
@@ -8255,7 +8249,7 @@ func (s DescribeLayersOutput) GoString() string {
 }
 
 // SetLayers sets the Layers field's value.
-func (s *DescribeLayersOutput) SetLayers(v []*Layer) *DescribeLayersOutput {
+func (s *DescribeLayersOutput) SetLayers(v []Layer) *DescribeLayersOutput {
 	s.Layers = v
 	return s
 }
@@ -8267,7 +8261,7 @@ type DescribeLoadBasedAutoScalingInput struct {
 	// An array of layer IDs.
 	//
 	// LayerIds is a required field
-	LayerIds []*string `type:"list" required:"true"`
+	LayerIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8295,7 +8289,7 @@ func (s *DescribeLoadBasedAutoScalingInput) Validate() error {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *DescribeLoadBasedAutoScalingInput) SetLayerIds(v []*string) *DescribeLoadBasedAutoScalingInput {
+func (s *DescribeLoadBasedAutoScalingInput) SetLayerIds(v []string) *DescribeLoadBasedAutoScalingInput {
 	s.LayerIds = v
 	return s
 }
@@ -8307,7 +8301,7 @@ type DescribeLoadBasedAutoScalingOutput struct {
 
 	// An array of LoadBasedAutoScalingConfiguration objects that describe each
 	// layer's configuration.
-	LoadBasedAutoScalingConfigurations []*LoadBasedAutoScalingConfiguration `type:"list"`
+	LoadBasedAutoScalingConfigurations []LoadBasedAutoScalingConfiguration `type:"list"`
 }
 
 // String returns the string representation
@@ -8321,7 +8315,7 @@ func (s DescribeLoadBasedAutoScalingOutput) GoString() string {
 }
 
 // SetLoadBasedAutoScalingConfigurations sets the LoadBasedAutoScalingConfigurations field's value.
-func (s *DescribeLoadBasedAutoScalingOutput) SetLoadBasedAutoScalingConfigurations(v []*LoadBasedAutoScalingConfiguration) *DescribeLoadBasedAutoScalingOutput {
+func (s *DescribeLoadBasedAutoScalingOutput) SetLoadBasedAutoScalingConfigurations(v []LoadBasedAutoScalingConfiguration) *DescribeLoadBasedAutoScalingOutput {
 	s.LoadBasedAutoScalingConfigurations = v
 	return s
 }
@@ -8416,7 +8410,7 @@ type DescribePermissionsOutput struct {
 	//    * If the request contains a stack ID and an IAM ARN, the array contains
 	//    a single Permission object with permissions for the specified stack and
 	//    IAM ARN.
-	Permissions []*Permission `type:"list"`
+	Permissions []Permission `type:"list"`
 }
 
 // String returns the string representation
@@ -8430,7 +8424,7 @@ func (s DescribePermissionsOutput) GoString() string {
 }
 
 // SetPermissions sets the Permissions field's value.
-func (s *DescribePermissionsOutput) SetPermissions(v []*Permission) *DescribePermissionsOutput {
+func (s *DescribePermissionsOutput) SetPermissions(v []Permission) *DescribePermissionsOutput {
 	s.Permissions = v
 	return s
 }
@@ -8446,7 +8440,7 @@ type DescribeRaidArraysInput struct {
 	// An array of RAID array IDs. If you use this parameter, DescribeRaidArrays
 	// returns descriptions of the specified arrays. Otherwise, it returns a description
 	// of every array.
-	RaidArrayIds []*string `type:"list"`
+	RaidArrayIds []string `type:"list"`
 
 	// The stack ID.
 	StackId *string `type:"string"`
@@ -8469,7 +8463,7 @@ func (s *DescribeRaidArraysInput) SetInstanceId(v string) *DescribeRaidArraysInp
 }
 
 // SetRaidArrayIds sets the RaidArrayIds field's value.
-func (s *DescribeRaidArraysInput) SetRaidArrayIds(v []*string) *DescribeRaidArraysInput {
+func (s *DescribeRaidArraysInput) SetRaidArrayIds(v []string) *DescribeRaidArraysInput {
 	s.RaidArrayIds = v
 	return s
 }
@@ -8486,7 +8480,7 @@ type DescribeRaidArraysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A RaidArrays object that describes the specified RAID arrays.
-	RaidArrays []*RaidArray `type:"list"`
+	RaidArrays []RaidArray `type:"list"`
 }
 
 // String returns the string representation
@@ -8500,7 +8494,7 @@ func (s DescribeRaidArraysOutput) GoString() string {
 }
 
 // SetRaidArrays sets the RaidArrays field's value.
-func (s *DescribeRaidArraysOutput) SetRaidArrays(v []*RaidArray) *DescribeRaidArraysOutput {
+func (s *DescribeRaidArraysOutput) SetRaidArrays(v []RaidArray) *DescribeRaidArraysOutput {
 	s.RaidArrays = v
 	return s
 }
@@ -8510,7 +8504,7 @@ type DescribeRdsDbInstancesInput struct {
 	_ struct{} `type:"structure"`
 
 	// An array containing the ARNs of the instances to be described.
-	RdsDbInstanceArns []*string `type:"list"`
+	RdsDbInstanceArns []string `type:"list"`
 
 	// The stack ID that the instances are registered with. The operation returns
 	// descriptions of all registered Amazon RDS instances.
@@ -8544,7 +8538,7 @@ func (s *DescribeRdsDbInstancesInput) Validate() error {
 }
 
 // SetRdsDbInstanceArns sets the RdsDbInstanceArns field's value.
-func (s *DescribeRdsDbInstancesInput) SetRdsDbInstanceArns(v []*string) *DescribeRdsDbInstancesInput {
+func (s *DescribeRdsDbInstancesInput) SetRdsDbInstanceArns(v []string) *DescribeRdsDbInstancesInput {
 	s.RdsDbInstanceArns = v
 	return s
 }
@@ -8561,7 +8555,7 @@ type DescribeRdsDbInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An a array of RdsDbInstance objects that describe the instances.
-	RdsDbInstances []*RdsDbInstance `type:"list"`
+	RdsDbInstances []RdsDbInstance `type:"list"`
 }
 
 // String returns the string representation
@@ -8575,7 +8569,7 @@ func (s DescribeRdsDbInstancesOutput) GoString() string {
 }
 
 // SetRdsDbInstances sets the RdsDbInstances field's value.
-func (s *DescribeRdsDbInstancesOutput) SetRdsDbInstances(v []*RdsDbInstance) *DescribeRdsDbInstancesOutput {
+func (s *DescribeRdsDbInstancesOutput) SetRdsDbInstances(v []RdsDbInstance) *DescribeRdsDbInstancesOutput {
 	s.RdsDbInstances = v
 	return s
 }
@@ -8591,7 +8585,7 @@ type DescribeServiceErrorsInput struct {
 	// An array of service error IDs. If you use this parameter, DescribeServiceErrors
 	// returns descriptions of the specified errors. Otherwise, it returns a description
 	// of every error.
-	ServiceErrorIds []*string `type:"list"`
+	ServiceErrorIds []string `type:"list"`
 
 	// The stack ID. If you use this parameter, DescribeServiceErrors returns descriptions
 	// of the errors associated with the specified stack.
@@ -8615,7 +8609,7 @@ func (s *DescribeServiceErrorsInput) SetInstanceId(v string) *DescribeServiceErr
 }
 
 // SetServiceErrorIds sets the ServiceErrorIds field's value.
-func (s *DescribeServiceErrorsInput) SetServiceErrorIds(v []*string) *DescribeServiceErrorsInput {
+func (s *DescribeServiceErrorsInput) SetServiceErrorIds(v []string) *DescribeServiceErrorsInput {
 	s.ServiceErrorIds = v
 	return s
 }
@@ -8632,7 +8626,7 @@ type DescribeServiceErrorsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of ServiceError objects that describe the specified service errors.
-	ServiceErrors []*ServiceError `type:"list"`
+	ServiceErrors []ServiceError `type:"list"`
 }
 
 // String returns the string representation
@@ -8646,7 +8640,7 @@ func (s DescribeServiceErrorsOutput) GoString() string {
 }
 
 // SetServiceErrors sets the ServiceErrors field's value.
-func (s *DescribeServiceErrorsOutput) SetServiceErrors(v []*ServiceError) *DescribeServiceErrorsOutput {
+func (s *DescribeServiceErrorsOutput) SetServiceErrors(v []ServiceError) *DescribeServiceErrorsOutput {
 	s.ServiceErrors = v
 	return s
 }
@@ -8700,7 +8694,7 @@ type DescribeStackProvisioningParametersOutput struct {
 	AgentInstallerUrl *string `type:"string"`
 
 	// An embedded object that contains the provisioning parameters.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -8720,7 +8714,7 @@ func (s *DescribeStackProvisioningParametersOutput) SetAgentInstallerUrl(v strin
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeStackProvisioningParametersOutput) SetParameters(v map[string]*string) *DescribeStackProvisioningParametersOutput {
+func (s *DescribeStackProvisioningParametersOutput) SetParameters(v map[string]string) *DescribeStackProvisioningParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -8796,7 +8790,7 @@ type DescribeStacksInput struct {
 
 	// An array of stack IDs that specify the stacks to be described. If you omit
 	// this parameter, DescribeStacks returns a description of every stack.
-	StackIds []*string `type:"list"`
+	StackIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8810,7 +8804,7 @@ func (s DescribeStacksInput) GoString() string {
 }
 
 // SetStackIds sets the StackIds field's value.
-func (s *DescribeStacksInput) SetStackIds(v []*string) *DescribeStacksInput {
+func (s *DescribeStacksInput) SetStackIds(v []string) *DescribeStacksInput {
 	s.StackIds = v
 	return s
 }
@@ -8821,7 +8815,7 @@ type DescribeStacksOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of Stack objects that describe the stacks.
-	Stacks []*Stack `type:"list"`
+	Stacks []Stack `type:"list"`
 }
 
 // String returns the string representation
@@ -8835,7 +8829,7 @@ func (s DescribeStacksOutput) GoString() string {
 }
 
 // SetStacks sets the Stacks field's value.
-func (s *DescribeStacksOutput) SetStacks(v []*Stack) *DescribeStacksOutput {
+func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
 	s.Stacks = v
 	return s
 }
@@ -8847,7 +8841,7 @@ type DescribeTimeBasedAutoScalingInput struct {
 	// An array of instance IDs.
 	//
 	// InstanceIds is a required field
-	InstanceIds []*string `type:"list" required:"true"`
+	InstanceIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8875,7 +8869,7 @@ func (s *DescribeTimeBasedAutoScalingInput) Validate() error {
 }
 
 // SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeTimeBasedAutoScalingInput) SetInstanceIds(v []*string) *DescribeTimeBasedAutoScalingInput {
+func (s *DescribeTimeBasedAutoScalingInput) SetInstanceIds(v []string) *DescribeTimeBasedAutoScalingInput {
 	s.InstanceIds = v
 	return s
 }
@@ -8887,7 +8881,7 @@ type DescribeTimeBasedAutoScalingOutput struct {
 
 	// An array of TimeBasedAutoScalingConfiguration objects that describe the configuration
 	// for the specified instances.
-	TimeBasedAutoScalingConfigurations []*TimeBasedAutoScalingConfiguration `type:"list"`
+	TimeBasedAutoScalingConfigurations []TimeBasedAutoScalingConfiguration `type:"list"`
 }
 
 // String returns the string representation
@@ -8901,7 +8895,7 @@ func (s DescribeTimeBasedAutoScalingOutput) GoString() string {
 }
 
 // SetTimeBasedAutoScalingConfigurations sets the TimeBasedAutoScalingConfigurations field's value.
-func (s *DescribeTimeBasedAutoScalingOutput) SetTimeBasedAutoScalingConfigurations(v []*TimeBasedAutoScalingConfiguration) *DescribeTimeBasedAutoScalingOutput {
+func (s *DescribeTimeBasedAutoScalingOutput) SetTimeBasedAutoScalingConfigurations(v []TimeBasedAutoScalingConfiguration) *DescribeTimeBasedAutoScalingOutput {
 	s.TimeBasedAutoScalingConfigurations = v
 	return s
 }
@@ -8911,7 +8905,7 @@ type DescribeUserProfilesInput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of IAM or federated user ARNs that identify the users to be described.
-	IamUserArns []*string `type:"list"`
+	IamUserArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8925,7 +8919,7 @@ func (s DescribeUserProfilesInput) GoString() string {
 }
 
 // SetIamUserArns sets the IamUserArns field's value.
-func (s *DescribeUserProfilesInput) SetIamUserArns(v []*string) *DescribeUserProfilesInput {
+func (s *DescribeUserProfilesInput) SetIamUserArns(v []string) *DescribeUserProfilesInput {
 	s.IamUserArns = v
 	return s
 }
@@ -8936,7 +8930,7 @@ type DescribeUserProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A Users object that describes the specified users.
-	UserProfiles []*UserProfile `type:"list"`
+	UserProfiles []UserProfile `type:"list"`
 }
 
 // String returns the string representation
@@ -8950,7 +8944,7 @@ func (s DescribeUserProfilesOutput) GoString() string {
 }
 
 // SetUserProfiles sets the UserProfiles field's value.
-func (s *DescribeUserProfilesOutput) SetUserProfiles(v []*UserProfile) *DescribeUserProfilesOutput {
+func (s *DescribeUserProfilesOutput) SetUserProfiles(v []UserProfile) *DescribeUserProfilesOutput {
 	s.UserProfiles = v
 	return s
 }
@@ -8973,7 +8967,7 @@ type DescribeVolumesInput struct {
 	// Am array of volume IDs. If you use this parameter, DescribeVolumes returns
 	// descriptions of the specified volumes. Otherwise, it returns a description
 	// of every volume.
-	VolumeIds []*string `type:"list"`
+	VolumeIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -9005,7 +8999,7 @@ func (s *DescribeVolumesInput) SetStackId(v string) *DescribeVolumesInput {
 }
 
 // SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumesInput) SetVolumeIds(v []*string) *DescribeVolumesInput {
+func (s *DescribeVolumesInput) SetVolumeIds(v []string) *DescribeVolumesInput {
 	s.VolumeIds = v
 	return s
 }
@@ -9016,7 +9010,7 @@ type DescribeVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of volume IDs.
-	Volumes []*Volume `type:"list"`
+	Volumes []Volume `type:"list"`
 }
 
 // String returns the string representation
@@ -9030,7 +9024,7 @@ func (s DescribeVolumesOutput) GoString() string {
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *DescribeVolumesOutput) SetVolumes(v []*Volume) *DescribeVolumesOutput {
+func (s *DescribeVolumesOutput) SetVolumes(v []Volume) *DescribeVolumesOutput {
 	s.Volumes = v
 	return s
 }
@@ -9183,7 +9177,7 @@ type EbsBlockDevice struct {
 
 	// The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned
 	// IOPS (SSD) volumes, and standard for Magnetic volumes.
-	VolumeType VolumeType `type:"string"`
+	VolumeType VolumeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9345,14 +9339,14 @@ type ElasticLoadBalancer struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Availability Zones.
-	AvailabilityZones []*string `type:"list"`
+	AvailabilityZones []string `type:"list"`
 
 	// The instance's public DNS name.
 	DnsName *string `type:"string"`
 
 	// A list of the EC2 instances that the Elastic Load Balancing instance is managing
 	// traffic for.
-	Ec2InstanceIds []*string `type:"list"`
+	Ec2InstanceIds []string `type:"list"`
 
 	// The Elastic Load Balancing instance's name.
 	ElasticLoadBalancerName *string `type:"string"`
@@ -9367,7 +9361,7 @@ type ElasticLoadBalancer struct {
 	StackId *string `type:"string"`
 
 	// A list of subnet IDs, if the stack is running in a VPC.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 
 	// The VPC ID.
 	VpcId *string `type:"string"`
@@ -9384,7 +9378,7 @@ func (s ElasticLoadBalancer) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *ElasticLoadBalancer) SetAvailabilityZones(v []*string) *ElasticLoadBalancer {
+func (s *ElasticLoadBalancer) SetAvailabilityZones(v []string) *ElasticLoadBalancer {
 	s.AvailabilityZones = v
 	return s
 }
@@ -9396,7 +9390,7 @@ func (s *ElasticLoadBalancer) SetDnsName(v string) *ElasticLoadBalancer {
 }
 
 // SetEc2InstanceIds sets the Ec2InstanceIds field's value.
-func (s *ElasticLoadBalancer) SetEc2InstanceIds(v []*string) *ElasticLoadBalancer {
+func (s *ElasticLoadBalancer) SetEc2InstanceIds(v []string) *ElasticLoadBalancer {
 	s.Ec2InstanceIds = v
 	return s
 }
@@ -9426,7 +9420,7 @@ func (s *ElasticLoadBalancer) SetStackId(v string) *ElasticLoadBalancer {
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *ElasticLoadBalancer) SetSubnetIds(v []*string) *ElasticLoadBalancer {
+func (s *ElasticLoadBalancer) SetSubnetIds(v []string) *ElasticLoadBalancer {
 	s.SubnetIds = v
 	return s
 }
@@ -9679,12 +9673,12 @@ type Instance struct {
 	AmiId *string `type:"string"`
 
 	// The instance architecture: "i386" or "x86_64".
-	Architecture Architecture `type:"string"`
+	Architecture Architecture `type:"string" enum:"true"`
 
 	Arn *string `type:"string"`
 
 	// For load-based or time-based instances, the type.
-	AutoScalingType AutoScalingType `type:"string"`
+	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
@@ -9692,7 +9686,7 @@ type Instance struct {
 
 	// An array of BlockDeviceMapping objects that specify the instance's block
 	// device mappings.
-	BlockDeviceMappings []*BlockDeviceMapping `type:"list"`
+	BlockDeviceMappings []BlockDeviceMapping `type:"list"`
 
 	// The time that the instance was created.
 	CreatedAt *string `type:"string"`
@@ -9742,7 +9736,7 @@ type Instance struct {
 	LastServiceErrorId *string `type:"string"`
 
 	// An array containing the instance layer IDs.
-	LayerIds []*string `type:"list"`
+	LayerIds []string `type:"list"`
 
 	// The instance's operating system.
 	Os *string `type:"string"`
@@ -9773,13 +9767,13 @@ type Instance struct {
 
 	// The instance's root device type. For more information, see Storage for the
 	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	RootDeviceType RootDeviceType `type:"string"`
+	RootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// The root device volume ID.
 	RootDeviceVolumeId *string `type:"string"`
 
 	// An array containing the instance security group IDs.
-	SecurityGroupIds []*string `type:"list"`
+	SecurityGroupIds []string `type:"list"`
 
 	// The SSH key's Deep Security Agent (DSA) fingerprint.
 	SshHostDsaKeyFingerprint *string `type:"string"`
@@ -9833,7 +9827,7 @@ type Instance struct {
 	Tenancy *string `type:"string"`
 
 	// The instance's virtualization type: paravirtual or hvm.
-	VirtualizationType VirtualizationType `type:"string"`
+	VirtualizationType VirtualizationType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9883,7 +9877,7 @@ func (s *Instance) SetAvailabilityZone(v string) *Instance {
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *Instance) SetBlockDeviceMappings(v []*BlockDeviceMapping) *Instance {
+func (s *Instance) SetBlockDeviceMappings(v []BlockDeviceMapping) *Instance {
 	s.BlockDeviceMappings = v
 	return s
 }
@@ -9967,7 +9961,7 @@ func (s *Instance) SetLastServiceErrorId(v string) *Instance {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *Instance) SetLayerIds(v []*string) *Instance {
+func (s *Instance) SetLayerIds(v []string) *Instance {
 	s.LayerIds = v
 	return s
 }
@@ -10039,7 +10033,7 @@ func (s *Instance) SetRootDeviceVolumeId(v string) *Instance {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *Instance) SetSecurityGroupIds(v []*string) *Instance {
+func (s *Instance) SetSecurityGroupIds(v []string) *Instance {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -10328,7 +10322,7 @@ type Layer struct {
 	//
 	// For an ECS Cluster layer, AWS OpsWorks Stacks the EcsClusterArn attribute
 	// is set to the cluster's ARN.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// Whether to automatically assign an Elastic IP address (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// to the layer's instances. For more information, see How to Edit a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
@@ -10357,7 +10351,7 @@ type Layer struct {
 	CustomRecipes *Recipes `type:"structure"`
 
 	// An array containing the layer's custom security group IDs.
-	CustomSecurityGroupIds []*string `type:"list"`
+	CustomSecurityGroupIds []string `type:"list"`
 
 	// AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
 	// deploy, undeploy, and shutdown. For each layer, AWS OpsWorks Stacks runs
@@ -10374,7 +10368,7 @@ type Layer struct {
 	DefaultRecipes *Recipes `type:"structure"`
 
 	// An array containing the layer's security group names.
-	DefaultSecurityGroupNames []*string `type:"list"`
+	DefaultSecurityGroupNames []string `type:"list"`
 
 	// Whether auto healing is disabled for the layer.
 	EnableAutoHealing *bool `type:"boolean"`
@@ -10399,7 +10393,7 @@ type Layer struct {
 	Name *string `type:"string"`
 
 	// An array of Package objects that describe the layer's packages.
-	Packages []*string `type:"list"`
+	Packages []string `type:"list"`
 
 	// The layer short name.
 	Shortname *string `type:"string"`
@@ -10408,13 +10402,13 @@ type Layer struct {
 	StackId *string `type:"string"`
 
 	// The layer type.
-	Type LayerType `type:"string"`
+	Type LayerType `type:"string" enum:"true"`
 
 	// Whether the layer uses Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool `type:"boolean"`
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []*VolumeConfiguration `type:"list"`
+	VolumeConfigurations []VolumeConfiguration `type:"list"`
 }
 
 // String returns the string representation
@@ -10434,7 +10428,7 @@ func (s *Layer) SetArn(v string) *Layer {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Layer) SetAttributes(v map[string]*string) *Layer {
+func (s *Layer) SetAttributes(v map[string]string) *Layer {
 	s.Attributes = v
 	return s
 }
@@ -10482,7 +10476,7 @@ func (s *Layer) SetCustomRecipes(v *Recipes) *Layer {
 }
 
 // SetCustomSecurityGroupIds sets the CustomSecurityGroupIds field's value.
-func (s *Layer) SetCustomSecurityGroupIds(v []*string) *Layer {
+func (s *Layer) SetCustomSecurityGroupIds(v []string) *Layer {
 	s.CustomSecurityGroupIds = v
 	return s
 }
@@ -10494,7 +10488,7 @@ func (s *Layer) SetDefaultRecipes(v *Recipes) *Layer {
 }
 
 // SetDefaultSecurityGroupNames sets the DefaultSecurityGroupNames field's value.
-func (s *Layer) SetDefaultSecurityGroupNames(v []*string) *Layer {
+func (s *Layer) SetDefaultSecurityGroupNames(v []string) *Layer {
 	s.DefaultSecurityGroupNames = v
 	return s
 }
@@ -10530,7 +10524,7 @@ func (s *Layer) SetName(v string) *Layer {
 }
 
 // SetPackages sets the Packages field's value.
-func (s *Layer) SetPackages(v []*string) *Layer {
+func (s *Layer) SetPackages(v []string) *Layer {
 	s.Packages = v
 	return s
 }
@@ -10560,7 +10554,7 @@ func (s *Layer) SetUseEbsOptimizedInstances(v bool) *Layer {
 }
 
 // SetVolumeConfigurations sets the VolumeConfigurations field's value.
-func (s *Layer) SetVolumeConfigurations(v []*VolumeConfiguration) *Layer {
+func (s *Layer) SetVolumeConfigurations(v []VolumeConfiguration) *Layer {
 	s.VolumeConfigurations = v
 	return s
 }
@@ -10663,7 +10657,7 @@ type ListTagsOutput struct {
 
 	// A set of key-value pairs that contain tag keys and tag values that are attached
 	// to a stack or layer.
-	Tags map[string]*string `type:"map"`
+	Tags map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -10683,7 +10677,7 @@ func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v map[string]*string) *ListTagsOutput {
+func (s *ListTagsOutput) SetTags(v map[string]string) *ListTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -11123,19 +11117,19 @@ type Recipes struct {
 	_ struct{} `type:"structure"`
 
 	// An array of custom recipe names to be run following a configure event.
-	Configure []*string `type:"list"`
+	Configure []string `type:"list"`
 
 	// An array of custom recipe names to be run following a deploy event.
-	Deploy []*string `type:"list"`
+	Deploy []string `type:"list"`
 
 	// An array of custom recipe names to be run following a setup event.
-	Setup []*string `type:"list"`
+	Setup []string `type:"list"`
 
 	// An array of custom recipe names to be run following a shutdown event.
-	Shutdown []*string `type:"list"`
+	Shutdown []string `type:"list"`
 
 	// An array of custom recipe names to be run following a undeploy event.
-	Undeploy []*string `type:"list"`
+	Undeploy []string `type:"list"`
 }
 
 // String returns the string representation
@@ -11149,31 +11143,31 @@ func (s Recipes) GoString() string {
 }
 
 // SetConfigure sets the Configure field's value.
-func (s *Recipes) SetConfigure(v []*string) *Recipes {
+func (s *Recipes) SetConfigure(v []string) *Recipes {
 	s.Configure = v
 	return s
 }
 
 // SetDeploy sets the Deploy field's value.
-func (s *Recipes) SetDeploy(v []*string) *Recipes {
+func (s *Recipes) SetDeploy(v []string) *Recipes {
 	s.Deploy = v
 	return s
 }
 
 // SetSetup sets the Setup field's value.
-func (s *Recipes) SetSetup(v []*string) *Recipes {
+func (s *Recipes) SetSetup(v []string) *Recipes {
 	s.Setup = v
 	return s
 }
 
 // SetShutdown sets the Shutdown field's value.
-func (s *Recipes) SetShutdown(v []*string) *Recipes {
+func (s *Recipes) SetShutdown(v []string) *Recipes {
 	s.Shutdown = v
 	return s
 }
 
 // SetUndeploy sets the Undeploy field's value.
-func (s *Recipes) SetUndeploy(v []*string) *Recipes {
+func (s *Recipes) SetUndeploy(v []string) *Recipes {
 	s.Undeploy = v
 	return s
 }
@@ -12138,7 +12132,7 @@ type Source struct {
 	SshKey *string `type:"string"`
 
 	// The repository type.
-	Type SourceType `type:"string"`
+	Type SourceType `type:"string" enum:"true"`
 
 	// The source URL. The following is an example of an Amazon S3 source URL: https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz.
 	Url *string `type:"string"`
@@ -12278,7 +12272,7 @@ type Stack struct {
 	Arn *string `type:"string"`
 
 	// The stack's attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and
 	// the Berkshelf version. For more information, see Create a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
@@ -12321,7 +12315,7 @@ type Stack struct {
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair for the stack's instances. You can override
 	// this value when you create or update an instance.
@@ -12380,7 +12374,7 @@ func (s *Stack) SetArn(v string) *Stack {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Stack) SetAttributes(v map[string]*string) *Stack {
+func (s *Stack) SetAttributes(v map[string]string) *Stack {
 	s.Attributes = v
 	return s
 }
@@ -12853,7 +12847,7 @@ type TagResourceInput struct {
 	//    * A maximum of 40 tags is allowed for any resource.
 	//
 	// Tags is a required field
-	Tags map[string]*string `type:"map" required:"true"`
+	Tags map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -12891,7 +12885,7 @@ func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v map[string]*string) *TagResourceInput {
+func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
 	s.Tags = v
 	return s
 }
@@ -13123,7 +13117,7 @@ type UntagResourceInput struct {
 	// A list of the keys of tags to be removed from a stack or layer.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -13161,7 +13155,7 @@ func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -13194,17 +13188,17 @@ type UpdateAppInput struct {
 	AppSource *Source `type:"structure"`
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// The app's data sources.
-	DataSources []*DataSource `type:"list"`
+	DataSources []DataSource `type:"list"`
 
 	// A description of the app.
 	Description *string `type:"string"`
 
 	// The app's virtual host settings, with multiple domains separated by commas.
 	// For example: 'www.example.com, example.com'
-	Domains []*string `type:"list"`
+	Domains []string `type:"list"`
 
 	// Whether SSL is enabled for the app.
 	EnableSsl *bool `type:"boolean"`
@@ -13223,7 +13217,7 @@ type UpdateAppInput struct {
 	//
 	// This parameter is supported only by Chef 11.10 stacks. If you have specified
 	// one or more environment variables, you cannot modify the stack's Chef version.
-	Environment []*EnvironmentVariable `type:"list"`
+	Environment []EnvironmentVariable `type:"list"`
 
 	// The app name.
 	Name *string `type:"string"`
@@ -13232,7 +13226,7 @@ type UpdateAppInput struct {
 	SslConfiguration *SslConfiguration `type:"structure"`
 
 	// The app type.
-	Type AppType `type:"string"`
+	Type AppType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13254,9 +13248,6 @@ func (s *UpdateAppInput) Validate() error {
 	}
 	if s.Environment != nil {
 		for i, v := range s.Environment {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Environment", i), err.(aws.ErrInvalidParams))
 			}
@@ -13287,13 +13278,13 @@ func (s *UpdateAppInput) SetAppSource(v *Source) *UpdateAppInput {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *UpdateAppInput) SetAttributes(v map[string]*string) *UpdateAppInput {
+func (s *UpdateAppInput) SetAttributes(v map[string]string) *UpdateAppInput {
 	s.Attributes = v
 	return s
 }
 
 // SetDataSources sets the DataSources field's value.
-func (s *UpdateAppInput) SetDataSources(v []*DataSource) *UpdateAppInput {
+func (s *UpdateAppInput) SetDataSources(v []DataSource) *UpdateAppInput {
 	s.DataSources = v
 	return s
 }
@@ -13305,7 +13296,7 @@ func (s *UpdateAppInput) SetDescription(v string) *UpdateAppInput {
 }
 
 // SetDomains sets the Domains field's value.
-func (s *UpdateAppInput) SetDomains(v []*string) *UpdateAppInput {
+func (s *UpdateAppInput) SetDomains(v []string) *UpdateAppInput {
 	s.Domains = v
 	return s
 }
@@ -13317,7 +13308,7 @@ func (s *UpdateAppInput) SetEnableSsl(v bool) *UpdateAppInput {
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *UpdateAppInput) SetEnvironment(v []*EnvironmentVariable) *UpdateAppInput {
+func (s *UpdateAppInput) SetEnvironment(v []EnvironmentVariable) *UpdateAppInput {
 	s.Environment = v
 	return s
 }
@@ -13448,11 +13439,11 @@ type UpdateInstanceInput struct {
 	// The instance architecture. Instance types do not necessarily support both
 	// architectures. For a list of the architectures that are supported by the
 	// different instance types, see Instance Families and Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-	Architecture Architecture `type:"string"`
+	Architecture Architecture `type:"string" enum:"true"`
 
 	// For load-based or time-based instances, the type. Windows stacks can use
 	// only time-based instances.
-	AutoScalingType AutoScalingType `type:"string"`
+	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// This property cannot be updated.
 	EbsOptimized *bool `type:"boolean"`
@@ -13484,7 +13475,7 @@ type UpdateInstanceInput struct {
 	InstanceType *string `type:"string"`
 
 	// The instance's layer IDs.
-	LayerIds []*string `type:"list"`
+	LayerIds []string `type:"list"`
 
 	// The instance's operating system, which must be set to one of the following.
 	// You cannot update an instance that is using a custom AMI.
@@ -13602,7 +13593,7 @@ func (s *UpdateInstanceInput) SetInstanceType(v string) *UpdateInstanceInput {
 }
 
 // SetLayerIds sets the LayerIds field's value.
-func (s *UpdateInstanceInput) SetLayerIds(v []*string) *UpdateInstanceInput {
+func (s *UpdateInstanceInput) SetLayerIds(v []string) *UpdateInstanceInput {
 	s.LayerIds = v
 	return s
 }
@@ -13639,7 +13630,7 @@ type UpdateLayerInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// Whether to automatically assign an Elastic IP address (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// to the layer's instances. For more information, see How to Edit a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
@@ -13667,7 +13658,7 @@ type UpdateLayerInput struct {
 	CustomRecipes *Recipes `type:"structure"`
 
 	// An array containing the layer's custom security group IDs.
-	CustomSecurityGroupIds []*string `type:"list"`
+	CustomSecurityGroupIds []string `type:"list"`
 
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool `type:"boolean"`
@@ -13694,7 +13685,7 @@ type UpdateLayerInput struct {
 	Name *string `type:"string"`
 
 	// An array of Package objects that describe the layer's packages.
-	Packages []*string `type:"list"`
+	Packages []string `type:"list"`
 
 	// For custom layers only, use this parameter to specify the layer's short name,
 	// which is used internally by AWS OpsWorks Stacks and by Chef. The short name
@@ -13710,7 +13701,7 @@ type UpdateLayerInput struct {
 	UseEbsOptimizedInstances *bool `type:"boolean"`
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []*VolumeConfiguration `type:"list"`
+	VolumeConfigurations []VolumeConfiguration `type:"list"`
 }
 
 // String returns the string representation
@@ -13732,9 +13723,6 @@ func (s *UpdateLayerInput) Validate() error {
 	}
 	if s.VolumeConfigurations != nil {
 		for i, v := range s.VolumeConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -13748,7 +13736,7 @@ func (s *UpdateLayerInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *UpdateLayerInput) SetAttributes(v map[string]*string) *UpdateLayerInput {
+func (s *UpdateLayerInput) SetAttributes(v map[string]string) *UpdateLayerInput {
 	s.Attributes = v
 	return s
 }
@@ -13790,7 +13778,7 @@ func (s *UpdateLayerInput) SetCustomRecipes(v *Recipes) *UpdateLayerInput {
 }
 
 // SetCustomSecurityGroupIds sets the CustomSecurityGroupIds field's value.
-func (s *UpdateLayerInput) SetCustomSecurityGroupIds(v []*string) *UpdateLayerInput {
+func (s *UpdateLayerInput) SetCustomSecurityGroupIds(v []string) *UpdateLayerInput {
 	s.CustomSecurityGroupIds = v
 	return s
 }
@@ -13826,7 +13814,7 @@ func (s *UpdateLayerInput) SetName(v string) *UpdateLayerInput {
 }
 
 // SetPackages sets the Packages field's value.
-func (s *UpdateLayerInput) SetPackages(v []*string) *UpdateLayerInput {
+func (s *UpdateLayerInput) SetPackages(v []string) *UpdateLayerInput {
 	s.Packages = v
 	return s
 }
@@ -13844,7 +13832,7 @@ func (s *UpdateLayerInput) SetUseEbsOptimizedInstances(v bool) *UpdateLayerInput
 }
 
 // SetVolumeConfigurations sets the VolumeConfigurations field's value.
-func (s *UpdateLayerInput) SetVolumeConfigurations(v []*VolumeConfiguration) *UpdateLayerInput {
+func (s *UpdateLayerInput) SetVolumeConfigurations(v []VolumeConfiguration) *UpdateLayerInput {
 	s.VolumeConfigurations = v
 	return s
 }
@@ -14001,7 +13989,7 @@ type UpdateStackInput struct {
 	AgentVersion *string `type:"string"`
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
-	Attributes map[string]*string `type:"map"`
+	Attributes map[string]string `type:"map"`
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and
 	// the Berkshelf version on Chef 11.10 stacks. For more information, see Create
@@ -14070,7 +14058,7 @@ type UpdateStackInput struct {
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType RootDeviceType `type:"string"`
+	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key-pair name. The default value is none. If you specify
 	// a key-pair name, AWS OpsWorks Stacks installs the public key on the instance
@@ -14188,7 +14176,7 @@ func (s *UpdateStackInput) SetAgentVersion(v string) *UpdateStackInput {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *UpdateStackInput) SetAttributes(v map[string]*string) *UpdateStackInput {
+func (s *UpdateStackInput) SetAttributes(v map[string]string) *UpdateStackInput {
 	s.Attributes = v
 	return s
 }
@@ -14788,25 +14776,25 @@ type WeeklyAutoScalingSchedule struct {
 	_ struct{} `type:"structure"`
 
 	// The schedule for Friday.
-	Friday map[string]*string `type:"map"`
+	Friday map[string]string `type:"map"`
 
 	// The schedule for Monday.
-	Monday map[string]*string `type:"map"`
+	Monday map[string]string `type:"map"`
 
 	// The schedule for Saturday.
-	Saturday map[string]*string `type:"map"`
+	Saturday map[string]string `type:"map"`
 
 	// The schedule for Sunday.
-	Sunday map[string]*string `type:"map"`
+	Sunday map[string]string `type:"map"`
 
 	// The schedule for Thursday.
-	Thursday map[string]*string `type:"map"`
+	Thursday map[string]string `type:"map"`
 
 	// The schedule for Tuesday.
-	Tuesday map[string]*string `type:"map"`
+	Tuesday map[string]string `type:"map"`
 
 	// The schedule for Wednesday.
-	Wednesday map[string]*string `type:"map"`
+	Wednesday map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -14820,43 +14808,43 @@ func (s WeeklyAutoScalingSchedule) GoString() string {
 }
 
 // SetFriday sets the Friday field's value.
-func (s *WeeklyAutoScalingSchedule) SetFriday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetFriday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Friday = v
 	return s
 }
 
 // SetMonday sets the Monday field's value.
-func (s *WeeklyAutoScalingSchedule) SetMonday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetMonday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Monday = v
 	return s
 }
 
 // SetSaturday sets the Saturday field's value.
-func (s *WeeklyAutoScalingSchedule) SetSaturday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetSaturday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Saturday = v
 	return s
 }
 
 // SetSunday sets the Sunday field's value.
-func (s *WeeklyAutoScalingSchedule) SetSunday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetSunday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Sunday = v
 	return s
 }
 
 // SetThursday sets the Thursday field's value.
-func (s *WeeklyAutoScalingSchedule) SetThursday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetThursday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Thursday = v
 	return s
 }
 
 // SetTuesday sets the Tuesday field's value.
-func (s *WeeklyAutoScalingSchedule) SetTuesday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetTuesday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Tuesday = v
 	return s
 }
 
 // SetWednesday sets the Wednesday field's value.
-func (s *WeeklyAutoScalingSchedule) SetWednesday(v map[string]*string) *WeeklyAutoScalingSchedule {
+func (s *WeeklyAutoScalingSchedule) SetWednesday(v map[string]string) *WeeklyAutoScalingSchedule {
 	s.Wednesday = v
 	return s
 }

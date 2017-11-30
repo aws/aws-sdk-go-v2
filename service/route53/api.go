@@ -3209,7 +3209,7 @@ type AlarmIdentifier struct {
 	// Reference.
 	//
 	// Region is a required field
-	Region CloudWatchRegion `min:"1" type:"string" required:"true"`
+	Region CloudWatchRegion `min:"1" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3661,7 +3661,7 @@ type Change struct {
 	//    record sets)
 	//
 	// Action is a required field
-	Action ChangeAction `type:"string" required:"true"`
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
 
 	// Information about the resource record set to create, delete, or update.
 	//
@@ -3721,7 +3721,7 @@ type ChangeBatch struct {
 	// Information about the changes to make to the record sets.
 	//
 	// Changes is a required field
-	Changes []*Change `locationNameList:"Change" min:"1" type:"list" required:"true"`
+	Changes []Change `locationNameList:"Change" min:"1" type:"list" required:"true"`
 
 	// Optional: Any comments you want to include about a change batch request.
 	Comment *string `type:"string"`
@@ -3749,9 +3749,6 @@ func (s *ChangeBatch) Validate() error {
 	}
 	if s.Changes != nil {
 		for i, v := range s.Changes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Changes", i), err.(aws.ErrInvalidParams))
 			}
@@ -3765,7 +3762,7 @@ func (s *ChangeBatch) Validate() error {
 }
 
 // SetChanges sets the Changes field's value.
-func (s *ChangeBatch) SetChanges(v []*Change) *ChangeBatch {
+func (s *ChangeBatch) SetChanges(v []Change) *ChangeBatch {
 	s.Changes = v
 	return s
 }
@@ -3798,7 +3795,7 @@ type ChangeInfo struct {
 	// not yet been applied to all Amazon Route 53 DNS servers.
 	//
 	// Status is a required field
-	Status ChangeStatus `type:"string" required:"true"`
+	Status ChangeStatus `type:"string" required:"true" enum:"true"`
 
 	// The date and time that the change request was submitted in ISO 8601 format
 	// (https://en.wikipedia.org/wiki/ISO_8601) and Coordinated Universal Time (UTC).
@@ -3947,11 +3944,11 @@ type ChangeTagsForResourceInput struct {
 	// Value for.
 	//
 	// You can add a maximum of 10 tags to a health check or a hosted zone.
-	AddTags []*Tag `locationNameList:"Tag" min:"1" type:"list"`
+	AddTags []Tag `locationNameList:"Tag" min:"1" type:"list"`
 
 	// A complex type that contains a list of the tags that you want to delete from
 	// the specified health check or hosted zone. You can specify up to 10 keys.
-	RemoveTagKeys []*string `locationNameList:"Key" min:"1" type:"list"`
+	RemoveTagKeys []string `locationNameList:"Key" min:"1" type:"list"`
 
 	// The ID of the resource for which you want to add, change, or delete tags.
 	//
@@ -3965,7 +3962,7 @@ type ChangeTagsForResourceInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4002,13 +3999,13 @@ func (s *ChangeTagsForResourceInput) Validate() error {
 }
 
 // SetAddTags sets the AddTags field's value.
-func (s *ChangeTagsForResourceInput) SetAddTags(v []*Tag) *ChangeTagsForResourceInput {
+func (s *ChangeTagsForResourceInput) SetAddTags(v []Tag) *ChangeTagsForResourceInput {
 	s.AddTags = v
 	return s
 }
 
 // SetRemoveTagKeys sets the RemoveTagKeys field's value.
-func (s *ChangeTagsForResourceInput) SetRemoveTagKeys(v []*string) *ChangeTagsForResourceInput {
+func (s *ChangeTagsForResourceInput) SetRemoveTagKeys(v []string) *ChangeTagsForResourceInput {
 	s.RemoveTagKeys = v
 	return s
 }
@@ -4051,13 +4048,13 @@ type CloudWatchAlarmConfiguration struct {
 	// operation that is used for the comparison.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// For the metric that the CloudWatch alarm is associated with, a complex type
 	// that contains information about the dimensions for the metric. For information,
 	// see Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
 	// in the Amazon CloudWatch User Guide.
-	Dimensions []*Dimension `locationNameList:"Dimension" type:"list"`
+	Dimensions []Dimension `locationNameList:"Dimension" type:"list"`
 
 	// For the metric that the CloudWatch alarm is associated with, the number of
 	// periods that the metric is compared to the threshold.
@@ -4087,7 +4084,7 @@ type CloudWatchAlarmConfiguration struct {
 	// that is applied to the metric.
 	//
 	// Statistic is a required field
-	Statistic Statistic `type:"string" required:"true"`
+	Statistic Statistic `type:"string" required:"true" enum:"true"`
 
 	// For the metric that the CloudWatch alarm is associated with, the value the
 	// metric is compared with.
@@ -4113,7 +4110,7 @@ func (s *CloudWatchAlarmConfiguration) SetComparisonOperator(v ComparisonOperato
 }
 
 // SetDimensions sets the Dimensions field's value.
-func (s *CloudWatchAlarmConfiguration) SetDimensions(v []*Dimension) *CloudWatchAlarmConfiguration {
+func (s *CloudWatchAlarmConfiguration) SetDimensions(v []Dimension) *CloudWatchAlarmConfiguration {
 	s.Dimensions = v
 	return s
 }
@@ -5154,7 +5151,7 @@ type DelegationSet struct {
 	// a hosted zone or for a reusable delegation set.
 	//
 	// NameServers is a required field
-	NameServers []*string `locationNameList:"NameServer" min:"1" type:"list" required:"true"`
+	NameServers []string `locationNameList:"NameServer" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5180,7 +5177,7 @@ func (s *DelegationSet) SetId(v string) *DelegationSet {
 }
 
 // SetNameServers sets the NameServers field's value.
-func (s *DelegationSet) SetNameServers(v []*string) *DelegationSet {
+func (s *DelegationSet) SetNameServers(v []string) *DelegationSet {
 	s.NameServers = v
 	return s
 }
@@ -6024,7 +6021,7 @@ type GetCheckerIpRangesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// CheckerIpRanges is a required field
-	CheckerIpRanges []*string `type:"list" required:"true"`
+	CheckerIpRanges []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6038,7 +6035,7 @@ func (s GetCheckerIpRangesOutput) GoString() string {
 }
 
 // SetCheckerIpRanges sets the CheckerIpRanges field's value.
-func (s *GetCheckerIpRangesOutput) SetCheckerIpRanges(v []*string) *GetCheckerIpRangesOutput {
+func (s *GetCheckerIpRangesOutput) SetCheckerIpRanges(v []string) *GetCheckerIpRangesOutput {
 	s.CheckerIpRanges = v
 	return s
 }
@@ -6294,7 +6291,7 @@ type GetHealthCheckLastFailureReasonOutput struct {
 	// checker that is reporting a last failure reason.
 	//
 	// HealthCheckObservations is a required field
-	HealthCheckObservations []*HealthCheckObservation `locationNameList:"HealthCheckObservation" type:"list" required:"true"`
+	HealthCheckObservations []HealthCheckObservation `locationNameList:"HealthCheckObservation" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6308,7 +6305,7 @@ func (s GetHealthCheckLastFailureReasonOutput) GoString() string {
 }
 
 // SetHealthCheckObservations sets the HealthCheckObservations field's value.
-func (s *GetHealthCheckLastFailureReasonOutput) SetHealthCheckObservations(v []*HealthCheckObservation) *GetHealthCheckLastFailureReasonOutput {
+func (s *GetHealthCheckLastFailureReasonOutput) SetHealthCheckObservations(v []HealthCheckObservation) *GetHealthCheckLastFailureReasonOutput {
 	s.HealthCheckObservations = v
 	return s
 }
@@ -6397,7 +6394,7 @@ type GetHealthCheckStatusOutput struct {
 	// 53 health checker that is reporting a status about the health check endpoint.
 	//
 	// HealthCheckObservations is a required field
-	HealthCheckObservations []*HealthCheckObservation `locationNameList:"HealthCheckObservation" type:"list" required:"true"`
+	HealthCheckObservations []HealthCheckObservation `locationNameList:"HealthCheckObservation" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6411,7 +6408,7 @@ func (s GetHealthCheckStatusOutput) GoString() string {
 }
 
 // SetHealthCheckObservations sets the HealthCheckObservations field's value.
-func (s *GetHealthCheckStatusOutput) SetHealthCheckObservations(v []*HealthCheckObservation) *GetHealthCheckStatusOutput {
+func (s *GetHealthCheckStatusOutput) SetHealthCheckObservations(v []HealthCheckObservation) *GetHealthCheckStatusOutput {
 	s.HealthCheckObservations = v
 	return s
 }
@@ -6519,7 +6516,7 @@ type GetHostedZoneOutput struct {
 
 	// A complex type that contains information about the VPCs that are associated
 	// with the specified hosted zone.
-	VPCs []*VPC `locationNameList:"VPC" min:"1" type:"list"`
+	VPCs []VPC `locationNameList:"VPC" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -6545,7 +6542,7 @@ func (s *GetHostedZoneOutput) SetHostedZone(v *HostedZone) *GetHostedZoneOutput 
 }
 
 // SetVPCs sets the VPCs field's value.
-func (s *GetHostedZoneOutput) SetVPCs(v []*VPC) *GetHostedZoneOutput {
+func (s *GetHostedZoneOutput) SetVPCs(v []VPC) *GetHostedZoneOutput {
 	s.VPCs = v
 	return s
 }
@@ -6988,7 +6985,7 @@ type HealthCheckConfig struct {
 	// (CALCULATED Health Checks Only) A complex type that contains one ChildHealthCheck
 	// element for each health check that you want to associate with a CALCULATED
 	// health check.
-	ChildHealthChecks []*string `locationNameList:"ChildHealthCheck" type:"list"`
+	ChildHealthChecks []string `locationNameList:"ChildHealthCheck" type:"list"`
 
 	// Specify whether you want Amazon Route 53 to send the value of FullyQualifiedDomainName
 	// to the endpoint in the client_hello message during TLS negotiation. This
@@ -7145,7 +7142,7 @@ type HealthCheckConfig struct {
 	//    from the last time that CloudWatch had sufficient data to determine the
 	//    alarm state. For new health checks that have no last known status, the
 	//    default status for the health check is healthy.
-	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string"`
+	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string" enum:"true"`
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health
 	// check, for example, to consider a health check unhealthy when it otherwise
@@ -7247,7 +7244,7 @@ type HealthCheckConfig struct {
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Type is a required field
-	Type HealthCheckType `type:"string" required:"true"`
+	Type HealthCheckType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -7297,7 +7294,7 @@ func (s *HealthCheckConfig) SetAlarmIdentifier(v *AlarmIdentifier) *HealthCheckC
 }
 
 // SetChildHealthChecks sets the ChildHealthChecks field's value.
-func (s *HealthCheckConfig) SetChildHealthChecks(v []*string) *HealthCheckConfig {
+func (s *HealthCheckConfig) SetChildHealthChecks(v []string) *HealthCheckConfig {
 	s.ChildHealthChecks = v
 	return s
 }
@@ -7398,7 +7395,7 @@ type HealthCheckObservation struct {
 
 	// The region of the Amazon Route 53 health checker that provided the status
 	// in StatusReport.
-	Region HealthCheckRegion `min:"1" type:"string"`
+	Region HealthCheckRegion `min:"1" type:"string" enum:"true"`
 
 	// A complex type that contains the last failure reason as reported by one Amazon
 	// Route 53 health checker and the time of the failed health check.
@@ -7649,7 +7646,7 @@ type ListGeoLocationsOutput struct {
 	// that Amazon Route 53 supports for geolocation.
 	//
 	// GeoLocationDetailsList is a required field
-	GeoLocationDetailsList []*GeoLocationDetails `locationNameList:"GeoLocationDetails" type:"list" required:"true"`
+	GeoLocationDetailsList []GeoLocationDetails `locationNameList:"GeoLocationDetails" type:"list" required:"true"`
 
 	// A value that indicates whether more locations remain to be listed after the
 	// last location in this response. If so, the value of IsTruncated is true.
@@ -7692,7 +7689,7 @@ func (s ListGeoLocationsOutput) GoString() string {
 }
 
 // SetGeoLocationDetailsList sets the GeoLocationDetailsList field's value.
-func (s *ListGeoLocationsOutput) SetGeoLocationDetailsList(v []*GeoLocationDetails) *ListGeoLocationsOutput {
+func (s *ListGeoLocationsOutput) SetGeoLocationDetailsList(v []GeoLocationDetails) *ListGeoLocationsOutput {
 	s.GeoLocationDetailsList = v
 	return s
 }
@@ -7782,7 +7779,7 @@ type ListHealthChecksOutput struct {
 	// that is associated with the current AWS account.
 	//
 	// HealthChecks is a required field
-	HealthChecks []*HealthCheck `locationNameList:"HealthCheck" type:"list" required:"true"`
+	HealthChecks []HealthCheck `locationNameList:"HealthCheck" type:"list" required:"true"`
 
 	// A flag that indicates whether there are more health checks to be listed.
 	// If the response was truncated, you can get the next group of health checks
@@ -7821,7 +7818,7 @@ func (s ListHealthChecksOutput) GoString() string {
 }
 
 // SetHealthChecks sets the HealthChecks field's value.
-func (s *ListHealthChecksOutput) SetHealthChecks(v []*HealthCheck) *ListHealthChecksOutput {
+func (s *ListHealthChecksOutput) SetHealthChecks(v []HealthCheck) *ListHealthChecksOutput {
 	s.HealthChecks = v
 	return s
 }
@@ -7928,7 +7925,7 @@ type ListHostedZonesByNameOutput struct {
 	// A complex type that contains general information about the hosted zone.
 	//
 	// HostedZones is a required field
-	HostedZones []*HostedZone `locationNameList:"HostedZone" type:"list" required:"true"`
+	HostedZones []HostedZone `locationNameList:"HostedZone" type:"list" required:"true"`
 
 	// A flag that indicates whether there are more hosted zones to be listed. If
 	// the response was truncated, you can get the next group of maxitems hosted
@@ -7985,7 +7982,7 @@ func (s *ListHostedZonesByNameOutput) SetHostedZoneId(v string) *ListHostedZones
 }
 
 // SetHostedZones sets the HostedZones field's value.
-func (s *ListHostedZonesByNameOutput) SetHostedZones(v []*HostedZone) *ListHostedZonesByNameOutput {
+func (s *ListHostedZonesByNameOutput) SetHostedZones(v []HostedZone) *ListHostedZonesByNameOutput {
 	s.HostedZones = v
 	return s
 }
@@ -8079,7 +8076,7 @@ type ListHostedZonesOutput struct {
 	// A complex type that contains general information about the hosted zone.
 	//
 	// HostedZones is a required field
-	HostedZones []*HostedZone `locationNameList:"HostedZone" type:"list" required:"true"`
+	HostedZones []HostedZone `locationNameList:"HostedZone" type:"list" required:"true"`
 
 	// A flag indicating whether there are more hosted zones to be listed. If the
 	// response was truncated, you can get more hosted zones by submitting another
@@ -8121,7 +8118,7 @@ func (s ListHostedZonesOutput) GoString() string {
 }
 
 // SetHostedZones sets the HostedZones field's value.
-func (s *ListHostedZonesOutput) SetHostedZones(v []*HostedZone) *ListHostedZonesOutput {
+func (s *ListHostedZonesOutput) SetHostedZones(v []HostedZone) *ListHostedZonesOutput {
 	s.HostedZones = v
 	return s
 }
@@ -8226,7 +8223,7 @@ type ListQueryLoggingConfigsOutput struct {
 	// for DNS query logging that is associated with the current AWS account.
 	//
 	// QueryLoggingConfigs is a required field
-	QueryLoggingConfigs []*QueryLoggingConfig `locationNameList:"QueryLoggingConfig" type:"list" required:"true"`
+	QueryLoggingConfigs []QueryLoggingConfig `locationNameList:"QueryLoggingConfig" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8246,7 +8243,7 @@ func (s *ListQueryLoggingConfigsOutput) SetNextToken(v string) *ListQueryLogging
 }
 
 // SetQueryLoggingConfigs sets the QueryLoggingConfigs field's value.
-func (s *ListQueryLoggingConfigsOutput) SetQueryLoggingConfigs(v []*QueryLoggingConfig) *ListQueryLoggingConfigsOutput {
+func (s *ListQueryLoggingConfigsOutput) SetQueryLoggingConfigs(v []QueryLoggingConfig) *ListQueryLoggingConfigsOutput {
 	s.QueryLoggingConfigs = v
 	return s
 }
@@ -8304,7 +8301,7 @@ type ListResourceRecordSetsInput struct {
 	//
 	// Constraint: Specifying type without specifying name returns an InvalidInput
 	// error.
-	StartRecordType RRType `location:"querystring" locationName:"type" type:"string"`
+	StartRecordType RRType `location:"querystring" locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8394,12 +8391,12 @@ type ListResourceRecordSetsOutput struct {
 	// If the results were truncated, the type of the next record in the list.
 	//
 	// This element is present only if IsTruncated is true.
-	NextRecordType RRType `type:"string"`
+	NextRecordType RRType `type:"string" enum:"true"`
 
 	// Information about multiple resource record sets.
 	//
 	// ResourceRecordSets is a required field
-	ResourceRecordSets []*ResourceRecordSet `locationNameList:"ResourceRecordSet" type:"list" required:"true"`
+	ResourceRecordSets []ResourceRecordSet `locationNameList:"ResourceRecordSet" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8443,7 +8440,7 @@ func (s *ListResourceRecordSetsOutput) SetNextRecordType(v RRType) *ListResource
 }
 
 // SetResourceRecordSets sets the ResourceRecordSets field's value.
-func (s *ListResourceRecordSetsOutput) SetResourceRecordSets(v []*ResourceRecordSet) *ListResourceRecordSetsOutput {
+func (s *ListResourceRecordSetsOutput) SetResourceRecordSets(v []ResourceRecordSet) *ListResourceRecordSetsOutput {
 	s.ResourceRecordSets = v
 	return s
 }
@@ -8504,7 +8501,7 @@ type ListReusableDelegationSetsOutput struct {
 	// delegation set that was created by the current AWS account.
 	//
 	// DelegationSets is a required field
-	DelegationSets []*DelegationSet `locationNameList:"DelegationSet" type:"list" required:"true"`
+	DelegationSets []DelegationSet `locationNameList:"DelegationSet" type:"list" required:"true"`
 
 	// A flag that indicates whether there are more reusable delegation sets to
 	// be listed.
@@ -8542,7 +8539,7 @@ func (s ListReusableDelegationSetsOutput) GoString() string {
 }
 
 // SetDelegationSets sets the DelegationSets field's value.
-func (s *ListReusableDelegationSetsOutput) SetDelegationSets(v []*DelegationSet) *ListReusableDelegationSetsOutput {
+func (s *ListReusableDelegationSetsOutput) SetDelegationSets(v []DelegationSet) *ListReusableDelegationSetsOutput {
 	s.DelegationSets = v
 	return s
 }
@@ -8589,7 +8586,7 @@ type ListTagsForResourceInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8669,7 +8666,7 @@ type ListTagsForResourcesInput struct {
 	// which you want to get a list of tags.
 	//
 	// ResourceIds is a required field
-	ResourceIds []*string `locationNameList:"ResourceId" min:"1" type:"list" required:"true"`
+	ResourceIds []string `locationNameList:"ResourceId" min:"1" type:"list" required:"true"`
 
 	// The type of the resources.
 	//
@@ -8678,7 +8675,7 @@ type ListTagsForResourcesInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -8712,7 +8709,7 @@ func (s *ListTagsForResourcesInput) Validate() error {
 }
 
 // SetResourceIds sets the ResourceIds field's value.
-func (s *ListTagsForResourcesInput) SetResourceIds(v []*string) *ListTagsForResourcesInput {
+func (s *ListTagsForResourcesInput) SetResourceIds(v []string) *ListTagsForResourcesInput {
 	s.ResourceIds = v
 	return s
 }
@@ -8731,7 +8728,7 @@ type ListTagsForResourcesOutput struct {
 	// A list of ResourceTagSets containing tags associated with the specified resources.
 	//
 	// ResourceTagSets is a required field
-	ResourceTagSets []*ResourceTagSet `locationNameList:"ResourceTagSet" type:"list" required:"true"`
+	ResourceTagSets []ResourceTagSet `locationNameList:"ResourceTagSet" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8745,7 +8742,7 @@ func (s ListTagsForResourcesOutput) GoString() string {
 }
 
 // SetResourceTagSets sets the ResourceTagSets field's value.
-func (s *ListTagsForResourcesOutput) SetResourceTagSets(v []*ResourceTagSet) *ListTagsForResourcesOutput {
+func (s *ListTagsForResourcesOutput) SetResourceTagSets(v []ResourceTagSet) *ListTagsForResourcesOutput {
 	s.ResourceTagSets = v
 	return s
 }
@@ -8838,7 +8835,7 @@ type ListTrafficPoliciesOutput struct {
 	// that was created by the current AWS account.
 	//
 	// TrafficPolicySummaries is a required field
-	TrafficPolicySummaries []*TrafficPolicySummary `locationNameList:"TrafficPolicySummary" type:"list" required:"true"`
+	TrafficPolicySummaries []TrafficPolicySummary `locationNameList:"TrafficPolicySummary" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8870,7 +8867,7 @@ func (s *ListTrafficPoliciesOutput) SetTrafficPolicyIdMarker(v string) *ListTraf
 }
 
 // SetTrafficPolicySummaries sets the TrafficPolicySummaries field's value.
-func (s *ListTrafficPoliciesOutput) SetTrafficPolicySummaries(v []*TrafficPolicySummary) *ListTrafficPoliciesOutput {
+func (s *ListTrafficPoliciesOutput) SetTrafficPolicySummaries(v []TrafficPolicySummary) *ListTrafficPoliciesOutput {
 	s.TrafficPolicySummaries = v
 	return s
 }
@@ -8915,7 +8912,7 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8993,13 +8990,13 @@ type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of
 	// the resource record sets that are associated with the first traffic policy
 	// instance in the next group of traffic policy instances.
-	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string" enum:"true"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
 	//
 	// TrafficPolicyInstances is a required field
-	TrafficPolicyInstances []*TrafficPolicyInstance `locationNameList:"TrafficPolicyInstance" type:"list" required:"true"`
+	TrafficPolicyInstances []TrafficPolicyInstance `locationNameList:"TrafficPolicyInstance" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9037,7 +9034,7 @@ func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstanceT
 }
 
 // SetTrafficPolicyInstances sets the TrafficPolicyInstances field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstances(v []*TrafficPolicyInstance) *ListTrafficPolicyInstancesByHostedZoneOutput {
+func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstances(v []TrafficPolicyInstance) *ListTrafficPolicyInstancesByHostedZoneOutput {
 	s.TrafficPolicyInstances = v
 	return s
 }
@@ -9095,7 +9092,7 @@ type ListTrafficPolicyInstancesByPolicyInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"true"`
 
 	// The version of the traffic policy for which you want to list traffic policy
 	// instances. The version must be associated with the traffic policy that is
@@ -9208,13 +9205,13 @@ type ListTrafficPolicyInstancesByPolicyOutput struct {
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of
 	// the resource record sets that are associated with the first traffic policy
 	// instance in the next group of MaxItems traffic policy instances.
-	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string" enum:"true"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
 	//
 	// TrafficPolicyInstances is a required field
-	TrafficPolicyInstances []*TrafficPolicyInstance `locationNameList:"TrafficPolicyInstance" type:"list" required:"true"`
+	TrafficPolicyInstances []TrafficPolicyInstance `locationNameList:"TrafficPolicyInstance" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9258,7 +9255,7 @@ func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstanceTypeM
 }
 
 // SetTrafficPolicyInstances sets the TrafficPolicyInstances field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstances(v []*TrafficPolicyInstance) *ListTrafficPolicyInstancesByPolicyOutput {
+func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstances(v []TrafficPolicyInstance) *ListTrafficPolicyInstancesByPolicyOutput {
 	s.TrafficPolicyInstances = v
 	return s
 }
@@ -9308,7 +9305,7 @@ type ListTrafficPolicyInstancesInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9379,13 +9376,13 @@ type ListTrafficPolicyInstancesOutput struct {
 	// the resource record sets that are associated with the first traffic policy
 	// instance that Amazon Route 53 will return if you submit another ListTrafficPolicyInstances
 	// request.
-	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string" enum:"true"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
 	//
 	// TrafficPolicyInstances is a required field
-	TrafficPolicyInstances []*TrafficPolicyInstance `locationNameList:"TrafficPolicyInstance" type:"list" required:"true"`
+	TrafficPolicyInstances []TrafficPolicyInstance `locationNameList:"TrafficPolicyInstance" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9429,7 +9426,7 @@ func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstanceTypeMarker(v 
 }
 
 // SetTrafficPolicyInstances sets the TrafficPolicyInstances field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstances(v []*TrafficPolicyInstance) *ListTrafficPolicyInstancesOutput {
+func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstances(v []TrafficPolicyInstance) *ListTrafficPolicyInstancesOutput {
 	s.TrafficPolicyInstances = v
 	return s
 }
@@ -9533,7 +9530,7 @@ type ListTrafficPolicyVersionsOutput struct {
 	// that is associated with the specified traffic policy.
 	//
 	// TrafficPolicies is a required field
-	TrafficPolicies []*TrafficPolicy `locationNameList:"TrafficPolicy" type:"list" required:"true"`
+	TrafficPolicies []TrafficPolicy `locationNameList:"TrafficPolicy" type:"list" required:"true"`
 
 	// If IsTruncated is true, the value of TrafficPolicyVersionMarker identifies
 	// the first traffic policy that Amazon Route 53 will return if you submit another
@@ -9569,7 +9566,7 @@ func (s *ListTrafficPolicyVersionsOutput) SetMaxItems(v string) *ListTrafficPoli
 }
 
 // SetTrafficPolicies sets the TrafficPolicies field's value.
-func (s *ListTrafficPolicyVersionsOutput) SetTrafficPolicies(v []*TrafficPolicy) *ListTrafficPolicyVersionsOutput {
+func (s *ListTrafficPolicyVersionsOutput) SetTrafficPolicies(v []TrafficPolicy) *ListTrafficPolicyVersionsOutput {
 	s.TrafficPolicies = v
 	return s
 }
@@ -9668,7 +9665,7 @@ type ListVPCAssociationAuthorizationsOutput struct {
 	// hosted zone.
 	//
 	// VPCs is a required field
-	VPCs []*VPC `locationNameList:"VPC" min:"1" type:"list" required:"true"`
+	VPCs []VPC `locationNameList:"VPC" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9694,7 +9691,7 @@ func (s *ListVPCAssociationAuthorizationsOutput) SetNextToken(v string) *ListVPC
 }
 
 // SetVPCs sets the VPCs field's value.
-func (s *ListVPCAssociationAuthorizationsOutput) SetVPCs(v []*VPC) *ListVPCAssociationAuthorizationsOutput {
+func (s *ListVPCAssociationAuthorizationsOutput) SetVPCs(v []VPC) *ListVPCAssociationAuthorizationsOutput {
 	s.VPCs = v
 	return s
 }
@@ -9866,7 +9863,7 @@ type ResourceRecordSet struct {
 	//    * Amazon Route 53 Health Checks and DNS Failover (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html)
 	//
 	//    * Configuring Failover in a Private Hosted Zone (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
-	Failover ResourceRecordSetFailover `type:"string"`
+	Failover ResourceRecordSetFailover `type:"string" enum:"true"`
 
 	// Geo location resource record sets only: A complex type that lets you control
 	// how Amazon Route 53 responds to DNS queries based on the geographic origin
@@ -10069,12 +10066,12 @@ type ResourceRecordSet struct {
 	//
 	//    * You can't create non-latency resource record sets that have the same
 	//    values for the Name and Type elements as latency resource record sets.
-	Region ResourceRecordSetRegion `min:"1" type:"string"`
+	Region ResourceRecordSetRegion `min:"1" type:"string" enum:"true"`
 
 	// Information about the resource records to act upon.
 	//
 	// If you're creating an alias resource record set, omit ResourceRecords.
-	ResourceRecords []*ResourceRecord `locationNameList:"ResourceRecord" min:"1" type:"list"`
+	ResourceRecords []ResourceRecord `locationNameList:"ResourceRecord" min:"1" type:"list"`
 
 	// Weighted, Latency, Geo, and Failover resource record sets only: An identifier
 	// that differentiates among multiple resource record sets that have the same
@@ -10160,7 +10157,7 @@ type ResourceRecordSet struct {
 	//    are supported except NS and SOA.
 	//
 	// Type is a required field
-	Type RRType `type:"string" required:"true"`
+	Type RRType `type:"string" required:"true" enum:"true"`
 
 	// Weighted resource record sets only: Among resource record sets that have
 	// the same combination of DNS name and type, a value that determines the proportion
@@ -10240,9 +10237,6 @@ func (s *ResourceRecordSet) Validate() error {
 	}
 	if s.ResourceRecords != nil {
 		for i, v := range s.ResourceRecords {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceRecords", i), err.(aws.ErrInvalidParams))
 			}
@@ -10298,7 +10292,7 @@ func (s *ResourceRecordSet) SetRegion(v ResourceRecordSetRegion) *ResourceRecord
 }
 
 // SetResourceRecords sets the ResourceRecords field's value.
-func (s *ResourceRecordSet) SetResourceRecords(v []*ResourceRecord) *ResourceRecordSet {
+func (s *ResourceRecordSet) SetResourceRecords(v []ResourceRecord) *ResourceRecordSet {
 	s.ResourceRecords = v
 	return s
 }
@@ -10346,10 +10340,10 @@ type ResourceTagSet struct {
 	//    * The resource type for health checks is healthcheck.
 	//
 	//    * The resource type for hosted zones is hostedzone.
-	ResourceType TagResourceType `type:"string"`
+	ResourceType TagResourceType `type:"string" enum:"true"`
 
 	// The tags associated with the specified resource.
-	Tags []*Tag `locationNameList:"Tag" min:"1" type:"list"`
+	Tags []Tag `locationNameList:"Tag" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -10375,7 +10369,7 @@ func (s *ResourceTagSet) SetResourceType(v TagResourceType) *ResourceTagSet {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ResourceTagSet) SetTags(v []*Tag) *ResourceTagSet {
+func (s *ResourceTagSet) SetTags(v []Tag) *ResourceTagSet {
 	s.Tags = v
 	return s
 }
@@ -10506,7 +10500,7 @@ type TestDNSAnswerInput struct {
 	// The type of the resource record set.
 	//
 	// RecordType is a required field
-	RecordType RRType `location:"querystring" locationName:"recordtype" type:"string" required:"true"`
+	RecordType RRType `location:"querystring" locationName:"recordtype" type:"string" required:"true" enum:"true"`
 
 	// If you want to simulate a request from a specific DNS resolver, specify the
 	// IP address for that resolver. If you omit this value, TestDnsAnswer uses
@@ -10602,7 +10596,7 @@ type TestDNSAnswerOutput struct {
 	// record set.
 	//
 	// RecordData is a required field
-	RecordData []*string `locationNameList:"RecordDataEntry" type:"list" required:"true"`
+	RecordData []string `locationNameList:"RecordDataEntry" type:"list" required:"true"`
 
 	// The name of the resource record set that you submitted a request for.
 	//
@@ -10612,7 +10606,7 @@ type TestDNSAnswerOutput struct {
 	// The type of the resource record set that you submitted a request for.
 	//
 	// RecordType is a required field
-	RecordType RRType `type:"string" required:"true"`
+	RecordType RRType `type:"string" required:"true" enum:"true"`
 
 	// A code that indicates whether the request is valid or not. The most common
 	// response code is NOERROR, meaning that the request is valid. If the response
@@ -10647,7 +10641,7 @@ func (s *TestDNSAnswerOutput) SetProtocol(v string) *TestDNSAnswerOutput {
 }
 
 // SetRecordData sets the RecordData field's value.
-func (s *TestDNSAnswerOutput) SetRecordData(v []*string) *TestDNSAnswerOutput {
+func (s *TestDNSAnswerOutput) SetRecordData(v []string) *TestDNSAnswerOutput {
 	s.RecordData = v
 	return s
 }
@@ -10700,7 +10694,7 @@ type TrafficPolicy struct {
 	// you use a traffic policy to create a traffic policy instance.
 	//
 	// Type is a required field
-	Type RRType `type:"string" required:"true"`
+	Type RRType `type:"string" required:"true" enum:"true"`
 
 	// The version number that Amazon Route 53 assigns to a traffic policy. For
 	// a new traffic policy, the value of Version is always 1.
@@ -10815,7 +10809,7 @@ type TrafficPolicyInstance struct {
 	// sets that it created for this traffic policy instance.
 	//
 	// TrafficPolicyType is a required field
-	TrafficPolicyType RRType `type:"string" required:"true"`
+	TrafficPolicyType RRType `type:"string" required:"true" enum:"true"`
 
 	// The version of the traffic policy that Amazon Route 53 used to create resource
 	// record sets in the specified hosted zone.
@@ -10919,7 +10913,7 @@ type TrafficPolicySummary struct {
 	// you use a traffic policy to create a traffic policy instance.
 	//
 	// Type is a required field
-	Type RRType `type:"string" required:"true"`
+	Type RRType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -10975,7 +10969,7 @@ type UpdateHealthCheckInput struct {
 
 	// A complex type that contains one ChildHealthCheck element for each health
 	// check that you want to associate with a CALCULATED health check.
-	ChildHealthChecks []*string `locationNameList:"ChildHealthCheck" type:"list"`
+	ChildHealthChecks []string `locationNameList:"ChildHealthCheck" type:"list"`
 
 	// Specify whether you want Amazon Route 53 to send the value of FullyQualifiedDomainName
 	// to the endpoint in the client_hello message during TLS negotiation. This
@@ -11169,7 +11163,7 @@ type UpdateHealthCheckInput struct {
 	//    from the last time CloudWatch had sufficient data to determine the alarm
 	//    state. For new health checks that have no last known status, the default
 	//    status for the health check is healthy.
-	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string"`
+	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string" enum:"true"`
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health
 	// check, for example, to consider a health check unhealthy when it otherwise
@@ -11265,7 +11259,7 @@ func (s *UpdateHealthCheckInput) SetAlarmIdentifier(v *AlarmIdentifier) *UpdateH
 }
 
 // SetChildHealthChecks sets the ChildHealthChecks field's value.
-func (s *UpdateHealthCheckInput) SetChildHealthChecks(v []*string) *UpdateHealthCheckInput {
+func (s *UpdateHealthCheckInput) SetChildHealthChecks(v []string) *UpdateHealthCheckInput {
 	s.ChildHealthChecks = v
 	return s
 }
@@ -11704,7 +11698,7 @@ type VPC struct {
 	VPCId *string `type:"string"`
 
 	// (Private hosted zones only) The region in which you created an Amazon VPC.
-	VPCRegion VPCRegion `min:"1" type:"string"`
+	VPCRegion VPCRegion `min:"1" type:"string" enum:"true"`
 }
 
 // String returns the string representation

@@ -4,7 +4,6 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3crypto"
@@ -31,15 +30,15 @@ func TestHeaderV2SaveStrategy(t *testing.T) {
 		t.Errorf("expected no error, but received %v", err)
 	}
 
-	expected := map[string]*string{
-		"X-Amz-Key-V2":                     aws.String("Foo"),
-		"X-Amz-Iv":                         aws.String("Bar"),
-		"X-Amz-Matdesc":                    aws.String("{}"),
-		"X-Amz-Wrap-Alg":                   aws.String(s3crypto.KMSWrap),
-		"X-Amz-Cek-Alg":                    aws.String(s3crypto.AESGCMNoPadding),
-		"X-Amz-Tag-Len":                    aws.String("128"),
-		"X-Amz-Unencrypted-Content-Md5":    aws.String("hello"),
-		"X-Amz-Unencrypted-Content-Length": aws.String("0"),
+	expected := map[string]string{
+		"X-Amz-Key-V2":                     "Foo",
+		"X-Amz-Iv":                         "Bar",
+		"X-Amz-Matdesc":                    "{}",
+		"X-Amz-Wrap-Alg":                   s3crypto.KMSWrap,
+		"X-Amz-Cek-Alg":                    s3crypto.AESGCMNoPadding,
+		"X-Amz-Tag-Len":                    "128",
+		"X-Amz-Unencrypted-Content-Md5":    "hello",
+		"X-Amz-Unencrypted-Content-Length": "0",
 	}
 
 	if !reflect.DeepEqual(expected, params.Metadata) {

@@ -921,7 +921,7 @@ type AddAttachmentsToSetInput struct {
 	// set, and the size limit is 5 MB per attachment.
 	//
 	// Attachments is a required field
-	Attachments []*Attachment `locationName:"attachments" type:"list" required:"true"`
+	Attachments []Attachment `locationName:"attachments" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -955,7 +955,7 @@ func (s *AddAttachmentsToSetInput) SetAttachmentSetId(v string) *AddAttachmentsT
 }
 
 // SetAttachments sets the Attachments field's value.
-func (s *AddAttachmentsToSetInput) SetAttachments(v []*Attachment) *AddAttachmentsToSetInput {
+func (s *AddAttachmentsToSetInput) SetAttachments(v []Attachment) *AddAttachmentsToSetInput {
 	s.Attachments = v
 	return s
 }
@@ -1013,7 +1013,7 @@ type AddCommunicationToCaseInput struct {
 
 	// The email addresses in the CC line of an email to be added to the support
 	// case.
-	CcEmailAddresses []*string `locationName:"ccEmailAddresses" type:"list"`
+	CcEmailAddresses []string `locationName:"ccEmailAddresses" type:"list"`
 
 	// The body of an email communication to add to the support case.
 	//
@@ -1061,7 +1061,7 @@ func (s *AddCommunicationToCaseInput) SetCaseId(v string) *AddCommunicationToCas
 }
 
 // SetCcEmailAddresses sets the CcEmailAddresses field's value.
-func (s *AddCommunicationToCaseInput) SetCcEmailAddresses(v []*string) *AddCommunicationToCaseInput {
+func (s *AddCommunicationToCaseInput) SetCcEmailAddresses(v []string) *AddCommunicationToCaseInput {
 	s.CcEmailAddresses = v
 	return s
 }
@@ -1217,7 +1217,7 @@ type CaseDetails struct {
 	CategoryCode *string `locationName:"categoryCode" type:"string"`
 
 	// The email addresses that receive copies of communication about the case.
-	CcEmailAddresses []*string `locationName:"ccEmailAddresses" type:"list"`
+	CcEmailAddresses []string `locationName:"ccEmailAddresses" type:"list"`
 
 	// The ID displayed for the case in the AWS Support Center. This is a numeric
 	// string.
@@ -1275,7 +1275,7 @@ func (s *CaseDetails) SetCategoryCode(v string) *CaseDetails {
 }
 
 // SetCcEmailAddresses sets the CcEmailAddresses field's value.
-func (s *CaseDetails) SetCcEmailAddresses(v []*string) *CaseDetails {
+func (s *CaseDetails) SetCcEmailAddresses(v []string) *CaseDetails {
 	s.CcEmailAddresses = v
 	return s
 }
@@ -1378,7 +1378,7 @@ type Communication struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the attachments to the case communication.
-	AttachmentSet []*AttachmentDetails `locationName:"attachmentSet" type:"list"`
+	AttachmentSet []AttachmentDetails `locationName:"attachmentSet" type:"list"`
 
 	// The text of the communication between the customer and AWS Support.
 	Body *string `locationName:"body" min:"1" type:"string"`
@@ -1405,7 +1405,7 @@ func (s Communication) GoString() string {
 }
 
 // SetAttachmentSet sets the AttachmentSet field's value.
-func (s *Communication) SetAttachmentSet(v []*AttachmentDetails) *Communication {
+func (s *Communication) SetAttachmentSet(v []AttachmentDetails) *Communication {
 	s.AttachmentSet = v
 	return s
 }
@@ -1446,7 +1446,7 @@ type CreateCaseInput struct {
 	CategoryCode *string `locationName:"categoryCode" type:"string"`
 
 	// A list of email addresses that AWS Support copies on case correspondence.
-	CcEmailAddresses []*string `locationName:"ccEmailAddresses" type:"list"`
+	CcEmailAddresses []string `locationName:"ccEmailAddresses" type:"list"`
 
 	// The communication body text when you create an AWS Support case by calling
 	// CreateCase.
@@ -1523,7 +1523,7 @@ func (s *CreateCaseInput) SetCategoryCode(v string) *CreateCaseInput {
 }
 
 // SetCcEmailAddresses sets the CcEmailAddresses field's value.
-func (s *CreateCaseInput) SetCcEmailAddresses(v []*string) *CreateCaseInput {
+func (s *CreateCaseInput) SetCcEmailAddresses(v []string) *CreateCaseInput {
 	s.CcEmailAddresses = v
 	return s
 }
@@ -1672,7 +1672,7 @@ type DescribeCasesInput struct {
 
 	// A list of ID numbers of the support cases you want returned. The maximum
 	// number of cases is 100.
-	CaseIdList []*string `locationName:"caseIdList" type:"list"`
+	CaseIdList []string `locationName:"caseIdList" type:"list"`
 
 	// The ID displayed for a case in the AWS Support Center user interface.
 	DisplayId *string `locationName:"displayId" type:"string"`
@@ -1733,7 +1733,7 @@ func (s *DescribeCasesInput) SetBeforeTime(v string) *DescribeCasesInput {
 }
 
 // SetCaseIdList sets the CaseIdList field's value.
-func (s *DescribeCasesInput) SetCaseIdList(v []*string) *DescribeCasesInput {
+func (s *DescribeCasesInput) SetCaseIdList(v []string) *DescribeCasesInput {
 	s.CaseIdList = v
 	return s
 }
@@ -1781,7 +1781,7 @@ type DescribeCasesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The details for the cases that match the request.
-	Cases []*CaseDetails `locationName:"cases" type:"list"`
+	Cases []CaseDetails `locationName:"cases" type:"list"`
 
 	// A resumption point for pagination.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -1798,7 +1798,7 @@ func (s DescribeCasesOutput) GoString() string {
 }
 
 // SetCases sets the Cases field's value.
-func (s *DescribeCasesOutput) SetCases(v []*CaseDetails) *DescribeCasesOutput {
+func (s *DescribeCasesOutput) SetCases(v []CaseDetails) *DescribeCasesOutput {
 	s.Cases = v
 	return s
 }
@@ -1897,7 +1897,7 @@ type DescribeCommunicationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The communications for the case.
-	Communications []*Communication `locationName:"communications" type:"list"`
+	Communications []Communication `locationName:"communications" type:"list"`
 
 	// A resumption point for pagination.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -1914,7 +1914,7 @@ func (s DescribeCommunicationsOutput) GoString() string {
 }
 
 // SetCommunications sets the Communications field's value.
-func (s *DescribeCommunicationsOutput) SetCommunications(v []*Communication) *DescribeCommunicationsOutput {
+func (s *DescribeCommunicationsOutput) SetCommunications(v []Communication) *DescribeCommunicationsOutput {
 	s.Communications = v
 	return s
 }
@@ -1935,7 +1935,7 @@ type DescribeServicesInput struct {
 	Language *string `locationName:"language" type:"string"`
 
 	// A JSON-formatted list of service codes available for AWS services.
-	ServiceCodeList []*string `locationName:"serviceCodeList" type:"list"`
+	ServiceCodeList []string `locationName:"serviceCodeList" type:"list"`
 }
 
 // String returns the string representation
@@ -1955,7 +1955,7 @@ func (s *DescribeServicesInput) SetLanguage(v string) *DescribeServicesInput {
 }
 
 // SetServiceCodeList sets the ServiceCodeList field's value.
-func (s *DescribeServicesInput) SetServiceCodeList(v []*string) *DescribeServicesInput {
+func (s *DescribeServicesInput) SetServiceCodeList(v []string) *DescribeServicesInput {
 	s.ServiceCodeList = v
 	return s
 }
@@ -1966,7 +1966,7 @@ type DescribeServicesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A JSON-formatted list of AWS services.
-	Services []*Service `locationName:"services" type:"list"`
+	Services []Service `locationName:"services" type:"list"`
 }
 
 // String returns the string representation
@@ -1980,7 +1980,7 @@ func (s DescribeServicesOutput) GoString() string {
 }
 
 // SetServices sets the Services field's value.
-func (s *DescribeServicesOutput) SetServices(v []*Service) *DescribeServicesOutput {
+func (s *DescribeServicesOutput) SetServices(v []Service) *DescribeServicesOutput {
 	s.Services = v
 	return s
 }
@@ -2018,7 +2018,7 @@ type DescribeSeverityLevelsOutput struct {
 
 	// The available severity levels for the support case. Available severity levels
 	// are defined by your service level agreement with AWS.
-	SeverityLevels []*SeverityLevel `locationName:"severityLevels" type:"list"`
+	SeverityLevels []SeverityLevel `locationName:"severityLevels" type:"list"`
 }
 
 // String returns the string representation
@@ -2032,7 +2032,7 @@ func (s DescribeSeverityLevelsOutput) GoString() string {
 }
 
 // SetSeverityLevels sets the SeverityLevels field's value.
-func (s *DescribeSeverityLevelsOutput) SetSeverityLevels(v []*SeverityLevel) *DescribeSeverityLevelsOutput {
+func (s *DescribeSeverityLevelsOutput) SetSeverityLevels(v []SeverityLevel) *DescribeSeverityLevelsOutput {
 	s.SeverityLevels = v
 	return s
 }
@@ -2046,7 +2046,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	// error.
 	//
 	// CheckIds is a required field
-	CheckIds []*string `locationName:"checkIds" type:"list" required:"true"`
+	CheckIds []string `locationName:"checkIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2074,7 +2074,7 @@ func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) Validate() error {
 }
 
 // SetCheckIds sets the CheckIds field's value.
-func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) SetCheckIds(v []*string) *DescribeTrustedAdvisorCheckRefreshStatusesInput {
+func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) SetCheckIds(v []string) *DescribeTrustedAdvisorCheckRefreshStatusesInput {
 	s.CheckIds = v
 	return s
 }
@@ -2088,7 +2088,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 	// The refresh status of the specified Trusted Advisor checks.
 	//
 	// Statuses is a required field
-	Statuses []*TrustedAdvisorCheckRefreshStatus `locationName:"statuses" type:"list" required:"true"`
+	Statuses []TrustedAdvisorCheckRefreshStatus `locationName:"statuses" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2102,7 +2102,7 @@ func (s DescribeTrustedAdvisorCheckRefreshStatusesOutput) GoString() string {
 }
 
 // SetStatuses sets the Statuses field's value.
-func (s *DescribeTrustedAdvisorCheckRefreshStatusesOutput) SetStatuses(v []*TrustedAdvisorCheckRefreshStatus) *DescribeTrustedAdvisorCheckRefreshStatusesOutput {
+func (s *DescribeTrustedAdvisorCheckRefreshStatusesOutput) SetStatuses(v []TrustedAdvisorCheckRefreshStatus) *DescribeTrustedAdvisorCheckRefreshStatusesOutput {
 	s.Statuses = v
 	return s
 }
@@ -2191,7 +2191,7 @@ type DescribeTrustedAdvisorCheckSummariesInput struct {
 	// The IDs of the Trusted Advisor checks.
 	//
 	// CheckIds is a required field
-	CheckIds []*string `locationName:"checkIds" type:"list" required:"true"`
+	CheckIds []string `locationName:"checkIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2219,7 +2219,7 @@ func (s *DescribeTrustedAdvisorCheckSummariesInput) Validate() error {
 }
 
 // SetCheckIds sets the CheckIds field's value.
-func (s *DescribeTrustedAdvisorCheckSummariesInput) SetCheckIds(v []*string) *DescribeTrustedAdvisorCheckSummariesInput {
+func (s *DescribeTrustedAdvisorCheckSummariesInput) SetCheckIds(v []string) *DescribeTrustedAdvisorCheckSummariesInput {
 	s.CheckIds = v
 	return s
 }
@@ -2233,7 +2233,7 @@ type DescribeTrustedAdvisorCheckSummariesOutput struct {
 	// The summary information for the requested Trusted Advisor checks.
 	//
 	// Summaries is a required field
-	Summaries []*TrustedAdvisorCheckSummary `locationName:"summaries" type:"list" required:"true"`
+	Summaries []TrustedAdvisorCheckSummary `locationName:"summaries" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2247,7 +2247,7 @@ func (s DescribeTrustedAdvisorCheckSummariesOutput) GoString() string {
 }
 
 // SetSummaries sets the Summaries field's value.
-func (s *DescribeTrustedAdvisorCheckSummariesOutput) SetSummaries(v []*TrustedAdvisorCheckSummary) *DescribeTrustedAdvisorCheckSummariesOutput {
+func (s *DescribeTrustedAdvisorCheckSummariesOutput) SetSummaries(v []TrustedAdvisorCheckSummary) *DescribeTrustedAdvisorCheckSummariesOutput {
 	s.Summaries = v
 	return s
 }
@@ -2303,7 +2303,7 @@ type DescribeTrustedAdvisorChecksOutput struct {
 	// Information about all available Trusted Advisor checks.
 	//
 	// Checks is a required field
-	Checks []*TrustedAdvisorCheckDescription `locationName:"checks" type:"list" required:"true"`
+	Checks []TrustedAdvisorCheckDescription `locationName:"checks" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2317,7 +2317,7 @@ func (s DescribeTrustedAdvisorChecksOutput) GoString() string {
 }
 
 // SetChecks sets the Checks field's value.
-func (s *DescribeTrustedAdvisorChecksOutput) SetChecks(v []*TrustedAdvisorCheckDescription) *DescribeTrustedAdvisorChecksOutput {
+func (s *DescribeTrustedAdvisorChecksOutput) SetChecks(v []TrustedAdvisorCheckDescription) *DescribeTrustedAdvisorChecksOutput {
 	s.Checks = v
 	return s
 }
@@ -2328,7 +2328,7 @@ type RecentCaseCommunications struct {
 	_ struct{} `type:"structure"`
 
 	// The five most recent communications associated with the case.
-	Communications []*Communication `locationName:"communications" type:"list"`
+	Communications []Communication `locationName:"communications" type:"list"`
 
 	// A resumption point for pagination.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -2345,7 +2345,7 @@ func (s RecentCaseCommunications) GoString() string {
 }
 
 // SetCommunications sets the Communications field's value.
-func (s *RecentCaseCommunications) SetCommunications(v []*Communication) *RecentCaseCommunications {
+func (s *RecentCaseCommunications) SetCommunications(v []Communication) *RecentCaseCommunications {
 	s.Communications = v
 	return s
 }
@@ -2493,7 +2493,7 @@ type Service struct {
 	// A list of categories that describe the type of support issue a case describes.
 	// Categories consist of a category name and a category code. Category names
 	// and codes are passed to AWS Support when you call CreateCase.
-	Categories []*Category `locationName:"categories" type:"list"`
+	Categories []Category `locationName:"categories" type:"list"`
 
 	// The code for an AWS service returned by the DescribeServices response. The
 	// name element contains the corresponding friendly name.
@@ -2515,7 +2515,7 @@ func (s Service) GoString() string {
 }
 
 // SetCategories sets the Categories field's value.
-func (s *Service) SetCategories(v []*Category) *Service {
+func (s *Service) SetCategories(v []Category) *Service {
 	s.Categories = v
 	return s
 }
@@ -2623,7 +2623,7 @@ type TrustedAdvisorCheckDescription struct {
 	// the UI shows just summary data.
 	//
 	// Metadata is a required field
-	Metadata []*string `locationName:"metadata" type:"list" required:"true"`
+	Metadata []string `locationName:"metadata" type:"list" required:"true"`
 
 	// The display name for the Trusted Advisor check.
 	//
@@ -2660,7 +2660,7 @@ func (s *TrustedAdvisorCheckDescription) SetId(v string) *TrustedAdvisorCheckDes
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *TrustedAdvisorCheckDescription) SetMetadata(v []*string) *TrustedAdvisorCheckDescription {
+func (s *TrustedAdvisorCheckDescription) SetMetadata(v []string) *TrustedAdvisorCheckDescription {
 	s.Metadata = v
 	return s
 }
@@ -2741,7 +2741,7 @@ type TrustedAdvisorCheckResult struct {
 	// The details about each resource listed in the check result.
 	//
 	// FlaggedResources is a required field
-	FlaggedResources []*TrustedAdvisorResourceDetail `locationName:"flaggedResources" type:"list" required:"true"`
+	FlaggedResources []TrustedAdvisorResourceDetail `locationName:"flaggedResources" type:"list" required:"true"`
 
 	// Details about AWS resources that were analyzed in a call to Trusted Advisor
 	// DescribeTrustedAdvisorCheckSummaries.
@@ -2784,7 +2784,7 @@ func (s *TrustedAdvisorCheckResult) SetCheckId(v string) *TrustedAdvisorCheckRes
 }
 
 // SetFlaggedResources sets the FlaggedResources field's value.
-func (s *TrustedAdvisorCheckResult) SetFlaggedResources(v []*TrustedAdvisorResourceDetail) *TrustedAdvisorCheckResult {
+func (s *TrustedAdvisorCheckResult) SetFlaggedResources(v []TrustedAdvisorResourceDetail) *TrustedAdvisorCheckResult {
 	s.FlaggedResources = v
 	return s
 }
@@ -2948,7 +2948,7 @@ type TrustedAdvisorResourceDetail struct {
 	// the UI shows just summary data.
 	//
 	// Metadata is a required field
-	Metadata []*string `locationName:"metadata" type:"list" required:"true"`
+	Metadata []string `locationName:"metadata" type:"list" required:"true"`
 
 	// The AWS region in which the identified resource is located.
 	Region *string `locationName:"region" type:"string"`
@@ -2981,7 +2981,7 @@ func (s *TrustedAdvisorResourceDetail) SetIsSuppressed(v bool) *TrustedAdvisorRe
 }
 
 // SetMetadata sets the Metadata field's value.
-func (s *TrustedAdvisorResourceDetail) SetMetadata(v []*string) *TrustedAdvisorResourceDetail {
+func (s *TrustedAdvisorResourceDetail) SetMetadata(v []string) *TrustedAdvisorResourceDetail {
 	s.Metadata = v
 	return s
 }

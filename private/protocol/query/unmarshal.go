@@ -19,13 +19,11 @@ var UnmarshalMetaHandler = request.NamedHandler{Name: "awssdk.query.UnmarshalMet
 // Unmarshal unmarshals a response for an AWS Query service.
 func Unmarshal(r *request.Request) {
 	defer r.HTTPResponse.Body.Close()
-	if r.DataFilled() {
-		decoder := xml.NewDecoder(r.HTTPResponse.Body)
-		err := xmlutil.UnmarshalXML(r.Data, decoder, r.Operation.Name+"Result")
-		if err != nil {
-			r.Error = awserr.New("SerializationError", "failed decoding Query response", err)
-			return
-		}
+	decoder := xml.NewDecoder(r.HTTPResponse.Body)
+	err := xmlutil.UnmarshalXML(r.Data, decoder, r.Operation.Name+"Result")
+	if err != nil {
+		r.Error = awserr.New("SerializationError", "failed decoding Query response", err)
+		return
 	}
 }
 

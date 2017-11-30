@@ -2644,7 +2644,7 @@ type AddTagsToVaultInput struct {
 
 	// The tags to add to the vault. Each tag is composed of a key and a value.
 	// The value can be an empty string.
-	Tags map[string]*string `type:"map"`
+	Tags map[string]string `type:"map"`
 
 	// The name of the vault.
 	//
@@ -2687,7 +2687,7 @@ func (s *AddTagsToVaultInput) SetAccountId(v string) *AddTagsToVaultInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToVaultInput) SetTags(v map[string]*string) *AddTagsToVaultInput {
+func (s *AddTagsToVaultInput) SetTags(v map[string]string) *AddTagsToVaultInput {
 	s.Tags = v
 	return s
 }
@@ -2991,7 +2991,7 @@ type DataRetrievalPolicy struct {
 
 	// The policy rule. Although this is a list type, currently there must be only
 	// one rule, which contains a Strategy field and optionally a BytesPerHour field.
-	Rules []*DataRetrievalRule `type:"list"`
+	Rules []DataRetrievalRule `type:"list"`
 }
 
 // String returns the string representation
@@ -3005,7 +3005,7 @@ func (s DataRetrievalPolicy) GoString() string {
 }
 
 // SetRules sets the Rules field's value.
-func (s *DataRetrievalPolicy) SetRules(v []*DataRetrievalRule) *DataRetrievalPolicy {
+func (s *DataRetrievalPolicy) SetRules(v []DataRetrievalRule) *DataRetrievalPolicy {
 	s.Rules = v
 	return s
 }
@@ -3436,7 +3436,7 @@ type DescribeJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The job type. It is either ArchiveRetrieval or InventoryRetrieval.
-	Action ActionCode `type:"string"`
+	Action ActionCode `type:"string" enum:"true"`
 
 	// For an ArchiveRetrieval job, this is the archive ID requested for download.
 	// Otherwise, this field is null.
@@ -3505,7 +3505,7 @@ type DescribeJobOutput struct {
 
 	// The status code can be InProgress, Succeeded, or Failed, and indicates the
 	// status of the job.
-	StatusCode StatusCode `type:"string"`
+	StatusCode StatusCode `type:"string" enum:"true"`
 
 	// A friendly message that describes the job status.
 	StatusMessage *string `type:"string"`
@@ -4986,7 +4986,7 @@ type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of job objects. Each job object contains metadata describing the job.
-	JobList []*DescribeJobOutput `type:"list"`
+	JobList []DescribeJobOutput `type:"list"`
 
 	// An opaque string used for pagination that specifies the job at which the
 	// listing of jobs should begin. You get the marker value from a previous List
@@ -5006,7 +5006,7 @@ func (s ListJobsOutput) GoString() string {
 }
 
 // SetJobList sets the JobList field's value.
-func (s *ListJobsOutput) SetJobList(v []*DescribeJobOutput) *ListJobsOutput {
+func (s *ListJobsOutput) SetJobList(v []DescribeJobOutput) *ListJobsOutput {
 	s.JobList = v
 	return s
 }
@@ -5110,7 +5110,7 @@ type ListMultipartUploadsOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of in-progress multipart uploads.
-	UploadsList []*UploadListElement `type:"list"`
+	UploadsList []UploadListElement `type:"list"`
 }
 
 // String returns the string representation
@@ -5130,7 +5130,7 @@ func (s *ListMultipartUploadsOutput) SetMarker(v string) *ListMultipartUploadsOu
 }
 
 // SetUploadsList sets the UploadsList field's value.
-func (s *ListMultipartUploadsOutput) SetUploadsList(v []*UploadListElement) *ListMultipartUploadsOutput {
+func (s *ListMultipartUploadsOutput) SetUploadsList(v []UploadListElement) *ListMultipartUploadsOutput {
 	s.UploadsList = v
 	return s
 }
@@ -5259,7 +5259,7 @@ type ListPartsOutput struct {
 
 	// A list of the part sizes of the multipart upload. Each object in the array
 	// contains a RangeBytes and sha256-tree-hash name/value pair.
-	Parts []*PartListElement `type:"list"`
+	Parts []PartListElement `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the vault to which the multipart upload
 	// was initiated.
@@ -5307,7 +5307,7 @@ func (s *ListPartsOutput) SetPartSizeInBytes(v int64) *ListPartsOutput {
 }
 
 // SetParts sets the Parts field's value.
-func (s *ListPartsOutput) SetParts(v []*PartListElement) *ListPartsOutput {
+func (s *ListPartsOutput) SetParts(v []PartListElement) *ListPartsOutput {
 	s.Parts = v
 	return s
 }
@@ -5365,7 +5365,7 @@ type ListProvisionedCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The response body contains the following JSON fields.
-	ProvisionedCapacityList []*ProvisionedCapacityDescription `type:"list"`
+	ProvisionedCapacityList []ProvisionedCapacityDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -5379,7 +5379,7 @@ func (s ListProvisionedCapacityOutput) GoString() string {
 }
 
 // SetProvisionedCapacityList sets the ProvisionedCapacityList field's value.
-func (s *ListProvisionedCapacityOutput) SetProvisionedCapacityList(v []*ProvisionedCapacityDescription) *ListProvisionedCapacityOutput {
+func (s *ListProvisionedCapacityOutput) SetProvisionedCapacityList(v []ProvisionedCapacityDescription) *ListProvisionedCapacityOutput {
 	s.ProvisionedCapacityList = v
 	return s
 }
@@ -5448,7 +5448,7 @@ type ListTagsForVaultOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The tags attached to the vault. Each tag is composed of a key and a value.
-	Tags map[string]*string `type:"map"`
+	Tags map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5462,7 +5462,7 @@ func (s ListTagsForVaultOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForVaultOutput) SetTags(v map[string]*string) *ListTagsForVaultOutput {
+func (s *ListTagsForVaultOutput) SetTags(v map[string]string) *ListTagsForVaultOutput {
 	s.Tags = v
 	return s
 }
@@ -5543,7 +5543,7 @@ type ListVaultsOutput struct {
 	Marker *string `type:"string"`
 
 	// List of vaults.
-	VaultList []*DescribeVaultOutput `type:"list"`
+	VaultList []DescribeVaultOutput `type:"list"`
 }
 
 // String returns the string representation
@@ -5563,7 +5563,7 @@ func (s *ListVaultsOutput) SetMarker(v string) *ListVaultsOutput {
 }
 
 // SetVaultList sets the VaultList field's value.
-func (s *ListVaultsOutput) SetVaultList(v []*DescribeVaultOutput) *ListVaultsOutput {
+func (s *ListVaultsOutput) SetVaultList(v []DescribeVaultOutput) *ListVaultsOutput {
 	s.VaultList = v
 	return s
 }
@@ -5726,7 +5726,7 @@ type RemoveTagsFromVaultInput struct {
 	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
 
 	// A list of tag keys. Each corresponding tag is removed from the vault.
-	TagKeys []*string `type:"list"`
+	TagKeys []string `type:"list"`
 
 	// The name of the vault.
 	//
@@ -5769,7 +5769,7 @@ func (s *RemoveTagsFromVaultInput) SetAccountId(v string) *RemoveTagsFromVaultIn
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromVaultInput) SetTagKeys(v []*string) *RemoveTagsFromVaultInput {
+func (s *RemoveTagsFromVaultInput) SetTagKeys(v []string) *RemoveTagsFromVaultInput {
 	s.TagKeys = v
 	return s
 }
@@ -6403,7 +6403,7 @@ type VaultNotificationConfig struct {
 
 	// A list of one or more events for which Amazon Glacier will send a notification
 	// to the specified Amazon SNS topic.
-	Events []*string `type:"list"`
+	Events []string `type:"list"`
 
 	// The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource
 	// Name (ARN).
@@ -6421,7 +6421,7 @@ func (s VaultNotificationConfig) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *VaultNotificationConfig) SetEvents(v []*string) *VaultNotificationConfig {
+func (s *VaultNotificationConfig) SetEvents(v []string) *VaultNotificationConfig {
 	s.Events = v
 	return s
 }

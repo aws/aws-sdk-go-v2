@@ -1430,7 +1430,7 @@ type AcknowledgeJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Whether the job worker has received the specified job.
-	Status JobStatus `locationName:"status" type:"string"`
+	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1535,7 +1535,7 @@ type AcknowledgeThirdPartyJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status information for the third party job, if any.
-	Status JobStatus `locationName:"status" type:"string"`
+	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1560,7 +1560,7 @@ type ActionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The configuration data for the action.
-	Configuration map[string]*string `locationName:"configuration" type:"map"`
+	Configuration map[string]string `locationName:"configuration" type:"map"`
 }
 
 // String returns the string representation
@@ -1574,7 +1574,7 @@ func (s ActionConfiguration) GoString() string {
 }
 
 // SetConfiguration sets the Configuration field's value.
-func (s *ActionConfiguration) SetConfiguration(v map[string]*string) *ActionConfiguration {
+func (s *ActionConfiguration) SetConfiguration(v map[string]string) *ActionConfiguration {
 	s.Configuration = v
 	return s
 }
@@ -1625,7 +1625,7 @@ type ActionConfigurationProperty struct {
 	Secret *bool `locationName:"secret" type:"boolean" required:"true"`
 
 	// The type of the configuration property.
-	Type ActionConfigurationPropertyType `locationName:"type" type:"string"`
+	Type ActionConfigurationPropertyType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1749,11 +1749,11 @@ type ActionDeclaration struct {
 	ActionTypeId *ActionTypeId `locationName:"actionTypeId" type:"structure" required:"true"`
 
 	// The action declaration's configuration.
-	Configuration map[string]*string `locationName:"configuration" type:"map"`
+	Configuration map[string]string `locationName:"configuration" type:"map"`
 
 	// The name or ID of the artifact consumed by the action, such as a test or
 	// build artifact.
-	InputArtifacts []*InputArtifact `locationName:"inputArtifacts" type:"list"`
+	InputArtifacts []InputArtifact `locationName:"inputArtifacts" type:"list"`
 
 	// The action declaration's name.
 	//
@@ -1762,7 +1762,7 @@ type ActionDeclaration struct {
 
 	// The name or ID of the result of the action declaration, such as a test or
 	// build artifact.
-	OutputArtifacts []*OutputArtifact `locationName:"outputArtifacts" type:"list"`
+	OutputArtifacts []OutputArtifact `locationName:"outputArtifacts" type:"list"`
 
 	// The ARN of the IAM service role that will perform the declared action. This
 	// is assumed through the roleArn for the pipeline.
@@ -1806,9 +1806,6 @@ func (s *ActionDeclaration) Validate() error {
 	}
 	if s.InputArtifacts != nil {
 		for i, v := range s.InputArtifacts {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputArtifacts", i), err.(aws.ErrInvalidParams))
 			}
@@ -1816,9 +1813,6 @@ func (s *ActionDeclaration) Validate() error {
 	}
 	if s.OutputArtifacts != nil {
 		for i, v := range s.OutputArtifacts {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputArtifacts", i), err.(aws.ErrInvalidParams))
 			}
@@ -1838,13 +1832,13 @@ func (s *ActionDeclaration) SetActionTypeId(v *ActionTypeId) *ActionDeclaration 
 }
 
 // SetConfiguration sets the Configuration field's value.
-func (s *ActionDeclaration) SetConfiguration(v map[string]*string) *ActionDeclaration {
+func (s *ActionDeclaration) SetConfiguration(v map[string]string) *ActionDeclaration {
 	s.Configuration = v
 	return s
 }
 
 // SetInputArtifacts sets the InputArtifacts field's value.
-func (s *ActionDeclaration) SetInputArtifacts(v []*InputArtifact) *ActionDeclaration {
+func (s *ActionDeclaration) SetInputArtifacts(v []InputArtifact) *ActionDeclaration {
 	s.InputArtifacts = v
 	return s
 }
@@ -1856,7 +1850,7 @@ func (s *ActionDeclaration) SetName(v string) *ActionDeclaration {
 }
 
 // SetOutputArtifacts sets the OutputArtifacts field's value.
-func (s *ActionDeclaration) SetOutputArtifacts(v []*OutputArtifact) *ActionDeclaration {
+func (s *ActionDeclaration) SetOutputArtifacts(v []OutputArtifact) *ActionDeclaration {
 	s.OutputArtifacts = v
 	return s
 }
@@ -1899,7 +1893,7 @@ type ActionExecution struct {
 
 	// The status of the action, or for a completed action, the last status of the
 	// action.
-	Status ActionExecutionStatus `locationName:"status" type:"string"`
+	Status ActionExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A summary of the run of the action.
 	Summary *string `locationName:"summary" type:"string"`
@@ -2124,7 +2118,7 @@ type ActionType struct {
 	_ struct{} `type:"structure"`
 
 	// The configuration properties for the action type.
-	ActionConfigurationProperties []*ActionConfigurationProperty `locationName:"actionConfigurationProperties" type:"list"`
+	ActionConfigurationProperties []ActionConfigurationProperty `locationName:"actionConfigurationProperties" type:"list"`
 
 	// Represents information about an action type.
 	//
@@ -2156,7 +2150,7 @@ func (s ActionType) GoString() string {
 }
 
 // SetActionConfigurationProperties sets the ActionConfigurationProperties field's value.
-func (s *ActionType) SetActionConfigurationProperties(v []*ActionConfigurationProperty) *ActionType {
+func (s *ActionType) SetActionConfigurationProperties(v []ActionConfigurationProperty) *ActionType {
 	s.ActionConfigurationProperties = v
 	return s
 }
@@ -2195,12 +2189,12 @@ type ActionTypeId struct {
 	// the values below.
 	//
 	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
 
 	// The creator of the action being called.
 	//
 	// Owner is a required field
-	Owner ActionOwner `locationName:"owner" type:"string" required:"true"`
+	Owner ActionOwner `locationName:"owner" type:"string" required:"true" enum:"true"`
 
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
@@ -2372,7 +2366,7 @@ type ApprovalResult struct {
 	// The response submitted by a reviewer assigned to an approval action request.
 	//
 	// Status is a required field
-	Status ApprovalStatus `locationName:"status" type:"string" required:"true"`
+	Status ApprovalStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// The summary of the current status of the approval request.
 	//
@@ -2529,7 +2523,7 @@ type ArtifactLocation struct {
 	S3Location *S3ArtifactLocation `locationName:"s3Location" type:"structure"`
 
 	// The type of artifact in the location.
-	Type ArtifactLocationType `locationName:"type" type:"string"`
+	Type ArtifactLocationType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2654,7 +2648,7 @@ type ArtifactStore struct {
 	// The type of the artifact store, such as S3.
 	//
 	// Type is a required field
-	Type ArtifactStoreType `locationName:"type" type:"string" required:"true"`
+	Type ArtifactStoreType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2723,7 +2717,7 @@ type BlockerDeclaration struct {
 	// Reserved for future use.
 	//
 	// Type is a required field
-	Type BlockerType `locationName:"type" type:"string" required:"true"`
+	Type BlockerType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2779,7 +2773,7 @@ type CreateCustomActionTypeInput struct {
 	// functional. These values are reserved for future use.
 	//
 	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
 
 	// The configuration properties for the custom action.
 	//
@@ -2787,7 +2781,7 @@ type CreateCustomActionTypeInput struct {
 	// within the URL templates by following the format of {Config:name}, as long
 	// as the configuration property is both required and not secret. For more information,
 	// see Create a Custom Action for a Pipeline (http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html).
-	ConfigurationProperties []*ActionConfigurationProperty `locationName:"configurationProperties" type:"list"`
+	ConfigurationProperties []ActionConfigurationProperty `locationName:"configurationProperties" type:"list"`
 
 	// The details of the input artifact for the action, such as its commit ID.
 	//
@@ -2853,9 +2847,6 @@ func (s *CreateCustomActionTypeInput) Validate() error {
 	}
 	if s.ConfigurationProperties != nil {
 		for i, v := range s.ConfigurationProperties {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ConfigurationProperties", i), err.(aws.ErrInvalidParams))
 			}
@@ -2890,7 +2881,7 @@ func (s *CreateCustomActionTypeInput) SetCategory(v ActionCategory) *CreateCusto
 }
 
 // SetConfigurationProperties sets the ConfigurationProperties field's value.
-func (s *CreateCustomActionTypeInput) SetConfigurationProperties(v []*ActionConfigurationProperty) *CreateCustomActionTypeInput {
+func (s *CreateCustomActionTypeInput) SetConfigurationProperties(v []ActionConfigurationProperty) *CreateCustomActionTypeInput {
 	s.ConfigurationProperties = v
 	return s
 }
@@ -3117,7 +3108,7 @@ type DeleteCustomActionTypeInput struct {
 	// or deploy.
 	//
 	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
 
 	// The provider of the service used in the custom action, such as AWS CodeDeploy.
 	//
@@ -3289,7 +3280,7 @@ type DisableStageTransitionInput struct {
 	// in that stage (outbound).
 	//
 	// TransitionType is a required field
-	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true"`
+	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3397,7 +3388,7 @@ type EnableStageTransitionInput struct {
 	// will be allowed to transition to the next stage (outbound).
 	//
 	// TransitionType is a required field
-	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true"`
+	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3486,7 +3477,7 @@ type EncryptionKey struct {
 	// key. When creating or updating a pipeline, the value must be set to 'KMS'.
 	//
 	// Type is a required field
-	Type EncryptionKeyType `locationName:"type" type:"string" required:"true"`
+	Type EncryptionKeyType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3640,7 +3631,7 @@ type FailureDetails struct {
 	// The type of the failure.
 	//
 	// Type is a required field
-	Type FailureType `locationName:"type" type:"string" required:"true"`
+	Type FailureType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3999,7 +3990,7 @@ type GetPipelineStateOutput struct {
 
 	// A list of the pipeline stage output information, including stage name, state,
 	// most recent run details, whether the stage is disabled, and other data.
-	StageStates []*StageState `locationName:"stageStates" type:"list"`
+	StageStates []StageState `locationName:"stageStates" type:"list"`
 
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time `locationName:"updated" type:"timestamp" timestampFormat:"unix"`
@@ -4034,7 +4025,7 @@ func (s *GetPipelineStateOutput) SetPipelineVersion(v int64) *GetPipelineStateOu
 }
 
 // SetStageStates sets the StageStates field's value.
-func (s *GetPipelineStateOutput) SetStageStates(v []*StageState) *GetPipelineStateOutput {
+func (s *GetPipelineStateOutput) SetStageStates(v []StageState) *GetPipelineStateOutput {
 	s.StageStates = v
 	return s
 }
@@ -4265,10 +4256,10 @@ type JobData struct {
 	EncryptionKey *EncryptionKey `locationName:"encryptionKey" type:"structure"`
 
 	// The artifact supplied to the job.
-	InputArtifacts []*Artifact `locationName:"inputArtifacts" type:"list"`
+	InputArtifacts []Artifact `locationName:"inputArtifacts" type:"list"`
 
 	// The output of the job.
-	OutputArtifacts []*Artifact `locationName:"outputArtifacts" type:"list"`
+	OutputArtifacts []Artifact `locationName:"outputArtifacts" type:"list"`
 
 	// Represents information about a pipeline to a job worker.
 	PipelineContext *PipelineContext `locationName:"pipelineContext" type:"structure"`
@@ -4315,13 +4306,13 @@ func (s *JobData) SetEncryptionKey(v *EncryptionKey) *JobData {
 }
 
 // SetInputArtifacts sets the InputArtifacts field's value.
-func (s *JobData) SetInputArtifacts(v []*Artifact) *JobData {
+func (s *JobData) SetInputArtifacts(v []Artifact) *JobData {
 	s.InputArtifacts = v
 	return s
 }
 
 // SetOutputArtifacts sets the OutputArtifacts field's value.
-func (s *JobData) SetOutputArtifacts(v []*Artifact) *JobData {
+func (s *JobData) SetOutputArtifacts(v []Artifact) *JobData {
 	s.OutputArtifacts = v
 	return s
 }
@@ -4382,7 +4373,7 @@ type ListActionTypesInput struct {
 	_ struct{} `type:"structure"`
 
 	// Filters the list of action types to those created by a specified entity.
-	ActionOwnerFilter ActionOwner `locationName:"actionOwnerFilter" type:"string"`
+	ActionOwnerFilter ActionOwner `locationName:"actionOwnerFilter" type:"string" enum:"true"`
 
 	// An identifier that was returned from the previous list action types call,
 	// which can be used to return the next set of action types in the list.
@@ -4432,7 +4423,7 @@ type ListActionTypesOutput struct {
 	// Provides details of the action types.
 	//
 	// ActionTypes is a required field
-	ActionTypes []*ActionType `locationName:"actionTypes" type:"list" required:"true"`
+	ActionTypes []ActionType `locationName:"actionTypes" type:"list" required:"true"`
 
 	// If the amount of returned information is significantly large, an identifier
 	// is also returned which can be used in a subsequent list action types call
@@ -4451,7 +4442,7 @@ func (s ListActionTypesOutput) GoString() string {
 }
 
 // SetActionTypes sets the ActionTypes field's value.
-func (s *ListActionTypesOutput) SetActionTypes(v []*ActionType) *ListActionTypesOutput {
+func (s *ListActionTypesOutput) SetActionTypes(v []ActionType) *ListActionTypesOutput {
 	s.ActionTypes = v
 	return s
 }
@@ -4545,7 +4536,7 @@ type ListPipelineExecutionsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// A list of executions in the history of a pipeline.
-	PipelineExecutionSummaries []*PipelineExecutionSummary `locationName:"pipelineExecutionSummaries" type:"list"`
+	PipelineExecutionSummaries []PipelineExecutionSummary `locationName:"pipelineExecutionSummaries" type:"list"`
 }
 
 // String returns the string representation
@@ -4565,7 +4556,7 @@ func (s *ListPipelineExecutionsOutput) SetNextToken(v string) *ListPipelineExecu
 }
 
 // SetPipelineExecutionSummaries sets the PipelineExecutionSummaries field's value.
-func (s *ListPipelineExecutionsOutput) SetPipelineExecutionSummaries(v []*PipelineExecutionSummary) *ListPipelineExecutionsOutput {
+func (s *ListPipelineExecutionsOutput) SetPipelineExecutionSummaries(v []PipelineExecutionSummary) *ListPipelineExecutionsOutput {
 	s.PipelineExecutionSummaries = v
 	return s
 }
@@ -4620,7 +4611,7 @@ type ListPipelinesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The list of pipelines.
-	Pipelines []*PipelineSummary `locationName:"pipelines" type:"list"`
+	Pipelines []PipelineSummary `locationName:"pipelines" type:"list"`
 }
 
 // String returns the string representation
@@ -4640,7 +4631,7 @@ func (s *ListPipelinesOutput) SetNextToken(v string) *ListPipelinesOutput {
 }
 
 // SetPipelines sets the Pipelines field's value.
-func (s *ListPipelinesOutput) SetPipelines(v []*PipelineSummary) *ListPipelinesOutput {
+func (s *ListPipelinesOutput) SetPipelines(v []PipelineSummary) *ListPipelinesOutput {
 	s.Pipelines = v
 	return s
 }
@@ -4767,7 +4758,7 @@ type PipelineDeclaration struct {
 	// The stage in which to perform the action.
 	//
 	// Stages is a required field
-	Stages []*StageDeclaration `locationName:"stages" type:"list" required:"true"`
+	Stages []StageDeclaration `locationName:"stages" type:"list" required:"true"`
 
 	// The version number of the pipeline. A new pipeline always has a version number
 	// of 1. This number is automatically incremented when a pipeline is updated.
@@ -4816,9 +4807,6 @@ func (s *PipelineDeclaration) Validate() error {
 	}
 	if s.Stages != nil {
 		for i, v := range s.Stages {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Stages", i), err.(aws.ErrInvalidParams))
 			}
@@ -4850,7 +4838,7 @@ func (s *PipelineDeclaration) SetRoleArn(v string) *PipelineDeclaration {
 }
 
 // SetStages sets the Stages field's value.
-func (s *PipelineDeclaration) SetStages(v []*StageDeclaration) *PipelineDeclaration {
+func (s *PipelineDeclaration) SetStages(v []StageDeclaration) *PipelineDeclaration {
 	s.Stages = v
 	return s
 }
@@ -4867,7 +4855,7 @@ type PipelineExecution struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ArtifactRevision objects included in a pipeline execution.
-	ArtifactRevisions []*ArtifactRevision `locationName:"artifactRevisions" type:"list"`
+	ArtifactRevisions []ArtifactRevision `locationName:"artifactRevisions" type:"list"`
 
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
@@ -4889,7 +4877,7 @@ type PipelineExecution struct {
 	//    the pipeline instead.
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
-	Status PipelineExecutionStatus `locationName:"status" type:"string"`
+	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4903,7 +4891,7 @@ func (s PipelineExecution) GoString() string {
 }
 
 // SetArtifactRevisions sets the ArtifactRevisions field's value.
-func (s *PipelineExecution) SetArtifactRevisions(v []*ArtifactRevision) *PipelineExecution {
+func (s *PipelineExecution) SetArtifactRevisions(v []ArtifactRevision) *PipelineExecution {
 	s.ArtifactRevisions = v
 	return s
 }
@@ -4958,7 +4946,7 @@ type PipelineExecutionSummary struct {
 	//    the pipeline instead.
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
-	Status PipelineExecutionStatus `locationName:"status" type:"string"`
+	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5107,7 +5095,7 @@ type PollForJobsInput struct {
 	// properties, this value must be null or an empty map. For an action type with
 	// a queryable property, you must supply that property as a key in the map.
 	// Only jobs whose action configuration matches the mapped value will be returned.
-	QueryParam map[string]*string `locationName:"queryParam" type:"map"`
+	QueryParam map[string]string `locationName:"queryParam" type:"map"`
 }
 
 // String returns the string representation
@@ -5155,7 +5143,7 @@ func (s *PollForJobsInput) SetMaxBatchSize(v int64) *PollForJobsInput {
 }
 
 // SetQueryParam sets the QueryParam field's value.
-func (s *PollForJobsInput) SetQueryParam(v map[string]*string) *PollForJobsInput {
+func (s *PollForJobsInput) SetQueryParam(v map[string]string) *PollForJobsInput {
 	s.QueryParam = v
 	return s
 }
@@ -5166,7 +5154,7 @@ type PollForJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the jobs to take action on.
-	Jobs []*Job `locationName:"jobs" type:"list"`
+	Jobs []Job `locationName:"jobs" type:"list"`
 }
 
 // String returns the string representation
@@ -5180,7 +5168,7 @@ func (s PollForJobsOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *PollForJobsOutput) SetJobs(v []*Job) *PollForJobsOutput {
+func (s *PollForJobsOutput) SetJobs(v []Job) *PollForJobsOutput {
 	s.Jobs = v
 	return s
 }
@@ -5249,7 +5237,7 @@ type PollForThirdPartyJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the jobs to take action on.
-	Jobs []*ThirdPartyJob `locationName:"jobs" type:"list"`
+	Jobs []ThirdPartyJob `locationName:"jobs" type:"list"`
 }
 
 // String returns the string representation
@@ -5263,7 +5251,7 @@ func (s PollForThirdPartyJobsOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *PollForThirdPartyJobsOutput) SetJobs(v []*ThirdPartyJob) *PollForThirdPartyJobsOutput {
+func (s *PollForThirdPartyJobsOutput) SetJobs(v []ThirdPartyJob) *PollForThirdPartyJobsOutput {
 	s.Jobs = v
 	return s
 }
@@ -5964,7 +5952,7 @@ type RetryStageExecutionInput struct {
 	// The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.
 	//
 	// RetryMode is a required field
-	RetryMode StageRetryMode `locationName:"retryMode" type:"string" required:"true"`
+	RetryMode StageRetryMode `locationName:"retryMode" type:"string" required:"true" enum:"true"`
 
 	// The name of the failed stage to be retried.
 	//
@@ -6134,10 +6122,10 @@ type StageDeclaration struct {
 	// The actions included in a stage.
 	//
 	// Actions is a required field
-	Actions []*ActionDeclaration `locationName:"actions" type:"list" required:"true"`
+	Actions []ActionDeclaration `locationName:"actions" type:"list" required:"true"`
 
 	// Reserved for future use.
-	Blockers []*BlockerDeclaration `locationName:"blockers" type:"list"`
+	Blockers []BlockerDeclaration `locationName:"blockers" type:"list"`
 
 	// The name of the stage.
 	//
@@ -6171,9 +6159,6 @@ func (s *StageDeclaration) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -6181,9 +6166,6 @@ func (s *StageDeclaration) Validate() error {
 	}
 	if s.Blockers != nil {
 		for i, v := range s.Blockers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Blockers", i), err.(aws.ErrInvalidParams))
 			}
@@ -6197,13 +6179,13 @@ func (s *StageDeclaration) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *StageDeclaration) SetActions(v []*ActionDeclaration) *StageDeclaration {
+func (s *StageDeclaration) SetActions(v []ActionDeclaration) *StageDeclaration {
 	s.Actions = v
 	return s
 }
 
 // SetBlockers sets the Blockers field's value.
-func (s *StageDeclaration) SetBlockers(v []*BlockerDeclaration) *StageDeclaration {
+func (s *StageDeclaration) SetBlockers(v []BlockerDeclaration) *StageDeclaration {
 	s.Blockers = v
 	return s
 }
@@ -6228,7 +6210,7 @@ type StageExecution struct {
 	// stage.
 	//
 	// Status is a required field
-	Status StageExecutionStatus `locationName:"status" type:"string" required:"true"`
+	Status StageExecutionStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6259,7 +6241,7 @@ type StageState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of the stage.
-	ActionStates []*ActionState `locationName:"actionStates" type:"list"`
+	ActionStates []ActionState `locationName:"actionStates" type:"list"`
 
 	// The state of the inbound transition, which is either enabled or disabled.
 	InboundTransitionState *TransitionState `locationName:"inboundTransitionState" type:"structure"`
@@ -6283,7 +6265,7 @@ func (s StageState) GoString() string {
 }
 
 // SetActionStates sets the ActionStates field's value.
-func (s *StageState) SetActionStates(v []*ActionState) *StageState {
+func (s *StageState) SetActionStates(v []ActionState) *StageState {
 	s.ActionStates = v
 	return s
 }
@@ -6442,12 +6424,12 @@ type ThirdPartyJobData struct {
 	// by the user when the action is created. The input artifact name must match
 	// the name of an output artifact generated by an action in an earlier action
 	// or stage of the pipeline.
-	InputArtifacts []*Artifact `locationName:"inputArtifacts" type:"list"`
+	InputArtifacts []Artifact `locationName:"inputArtifacts" type:"list"`
 
 	// The name of the artifact that will be the result of the action, if any. This
 	// name might be system-generated, such as "MyBuiltApp", or might be defined
 	// by the user when the action is created.
-	OutputArtifacts []*Artifact `locationName:"outputArtifacts" type:"list"`
+	OutputArtifacts []Artifact `locationName:"outputArtifacts" type:"list"`
 
 	// Represents information about a pipeline to a job worker.
 	PipelineContext *PipelineContext `locationName:"pipelineContext" type:"structure"`
@@ -6494,13 +6476,13 @@ func (s *ThirdPartyJobData) SetEncryptionKey(v *EncryptionKey) *ThirdPartyJobDat
 }
 
 // SetInputArtifacts sets the InputArtifacts field's value.
-func (s *ThirdPartyJobData) SetInputArtifacts(v []*Artifact) *ThirdPartyJobData {
+func (s *ThirdPartyJobData) SetInputArtifacts(v []Artifact) *ThirdPartyJobData {
 	s.InputArtifacts = v
 	return s
 }
 
 // SetOutputArtifacts sets the OutputArtifacts field's value.
-func (s *ThirdPartyJobData) SetOutputArtifacts(v []*Artifact) *ThirdPartyJobData {
+func (s *ThirdPartyJobData) SetOutputArtifacts(v []Artifact) *ThirdPartyJobData {
 	s.OutputArtifacts = v
 	return s
 }

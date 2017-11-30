@@ -6,7 +6,7 @@ import (
 
 // MaterialDescription is used to identify how and what master
 // key has been used.
-type MaterialDescription map[string]*string
+type MaterialDescription map[string]string
 
 func (md *MaterialDescription) encodeDescription() ([]byte, error) {
 	v, err := json.Marshal(&md)

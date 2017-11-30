@@ -75,19 +75,17 @@ func WithNormalizeBucketLocation(r *aws.Request) {
 }
 
 func buildGetBucketLocation(r *aws.Request) {
-	if r.DataFilled() {
-		out := r.Data.(*GetBucketLocationOutput)
-		b, err := ioutil.ReadAll(r.HTTPResponse.Body)
-		if err != nil {
-			r.Error = awserr.New("SerializationError", "failed reading response body", err)
-			return
-		}
+	out := r.Data.(*GetBucketLocationOutput)
+	b, err := ioutil.ReadAll(r.HTTPResponse.Body)
+	if err != nil {
+		r.Error = awserr.New("SerializationError", "failed reading response body", err)
+		return
+	}
 
-		match := reBucketLocation.FindSubmatch(b)
-		if len(match) > 1 {
-			loc := BucketLocationConstraint(match[1])
-			out.LocationConstraint = loc
-		}
+	match := reBucketLocation.FindSubmatch(b)
+	if len(match) > 1 {
+		loc := BucketLocationConstraint(match[1])
+		out.LocationConstraint = loc
 	}
 }
 

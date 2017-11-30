@@ -136,7 +136,7 @@ func (ex Example) GoCode() string {
 
 func generateExampleInput(ex Example) string {
 	if ex.Operation.HasInput() {
-		return ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false)
+		return ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false, false)
 	}
 	return ""
 }
@@ -151,7 +151,7 @@ func generateTypes(ex Example) string {
 // This is due to the json decoder choosing numbers to be floats, but the shape may
 // actually be an int. To counter this, we pass the shape's type and properly do the
 // casting here.
-func correctType(memName string, t string, value interface{}) string {
+func correctType(memName string, t string, value interface{}, asValue bool) string {
 	if value == nil {
 		return ""
 	}
@@ -172,17 +172,29 @@ func correctType(memName string, t string, value interface{}) string {
 		v = fmt.Sprintf("%t", value.(bool))
 	}
 
-	return convertToCorrectType(memName, t, v)
+	return convertToCorrectType(memName, t, v, asValue)
 }
 
-func convertToCorrectType(memName, t, v string) string {
-	return fmt.Sprintf("%s: %s,\n", memName, getValue(t, v))
+func convertToCorrectType(memName, t, v string, asValue bool) string {
+	return fmt.Sprintf("%s: %s,\n", memName, getValue(t, v, asValue))
 }
 
-func getValue(t, v string) string {
+func getValue(t, v string, asValue bool) string {
 	if t[0] == '*' {
 		t = t[1:]
 	}
+
+	if asValue {
+		switch t {
+		case "string":
+			return fmt.Sprintf("%q", v)
+		case "integer", "long", "int64", "float", "float64", "double", "boolean":
+			return fmt.Sprintf("%s", v)
+		default:
+			panic("Unsupported type: " + t)
+		}
+	}
+
 	switch t {
 	case "string":
 		return fmt.Sprintf("aws.String(%q)", v)

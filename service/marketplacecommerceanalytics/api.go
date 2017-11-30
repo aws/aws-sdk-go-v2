@@ -129,7 +129,7 @@ type GenerateDataSetInput struct {
 	// SNS notification message and the data set metadata file. These key-value
 	// pairs can be used to correlated responses with tracking information from
 	// other systems.
-	CustomerDefinedValues map[string]*string `locationName:"customerDefinedValues" min:"1" type:"map"`
+	CustomerDefinedValues map[string]string `locationName:"customerDefinedValues" min:"1" type:"map"`
 
 	// The date a data set was published. For daily data sets, provide a date with
 	// day-level granularity for the desired day. For weekly data sets, provide
@@ -233,7 +233,7 @@ type GenerateDataSetInput struct {
 	// on the 15th day of the month by 5:00 PM Pacific Time.
 	//
 	// DataSetType is a required field
-	DataSetType DataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true"`
+	DataSetType DataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The name (friendly name, not ARN) of the destination S3 bucket.
 	//
@@ -313,7 +313,7 @@ func (s *GenerateDataSetInput) Validate() error {
 }
 
 // SetCustomerDefinedValues sets the CustomerDefinedValues field's value.
-func (s *GenerateDataSetInput) SetCustomerDefinedValues(v map[string]*string) *GenerateDataSetInput {
+func (s *GenerateDataSetInput) SetCustomerDefinedValues(v map[string]string) *GenerateDataSetInput {
 	s.CustomerDefinedValues = v
 	return s
 }
@@ -388,7 +388,7 @@ type StartSupportDataExportInput struct {
 
 	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon
 	// SNS notification message and the data set metadata file.
-	CustomerDefinedValues map[string]*string `locationName:"customerDefinedValues" min:"1" type:"map"`
+	CustomerDefinedValues map[string]string `locationName:"customerDefinedValues" min:"1" type:"map"`
 
 	// Specifies the data set type to be written to the output csv file. The data
 	// set types customer_support_contacts_data and test_customer_support_contacts_data
@@ -404,7 +404,7 @@ type StartSupportDataExportInput struct {
 	// test data in the same format as customer_support_contacts_data
 	//
 	// DataSetType is a required field
-	DataSetType SupportDataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true"`
+	DataSetType SupportDataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The name (friendly name, not ARN) of the destination S3 bucket.
 	//
@@ -490,7 +490,7 @@ func (s *StartSupportDataExportInput) Validate() error {
 }
 
 // SetCustomerDefinedValues sets the CustomerDefinedValues field's value.
-func (s *StartSupportDataExportInput) SetCustomerDefinedValues(v map[string]*string) *StartSupportDataExportInput {
+func (s *StartSupportDataExportInput) SetCustomerDefinedValues(v map[string]string) *StartSupportDataExportInput {
 	s.CustomerDefinedValues = v
 	return s
 }

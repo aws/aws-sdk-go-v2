@@ -61,11 +61,9 @@ func Build(req *request.Request) {
 // Unmarshal unmarshals a response for a JSON RPC service.
 func Unmarshal(req *request.Request) {
 	defer req.HTTPResponse.Body.Close()
-	if req.DataFilled() {
-		err := jsonutil.UnmarshalJSON(req.Data, req.HTTPResponse.Body)
-		if err != nil {
-			req.Error = awserr.New("SerializationError", "failed decoding JSON RPC response", err)
-		}
+	err := jsonutil.UnmarshalJSON(req.Data, req.HTTPResponse.Body)
+	if err != nil {
+		req.Error = awserr.New("SerializationError", "failed decoding JSON RPC response", err)
 	}
 	return
 }

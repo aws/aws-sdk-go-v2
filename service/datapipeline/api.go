@@ -1149,7 +1149,7 @@ type ActivatePipelineInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of parameter values to pass to the pipeline at activation.
-	ParameterValues []*ParameterValue `locationName:"parameterValues" type:"list"`
+	ParameterValues []ParameterValue `locationName:"parameterValues" type:"list"`
 
 	// The ID of the pipeline.
 	//
@@ -1183,9 +1183,6 @@ func (s *ActivatePipelineInput) Validate() error {
 	}
 	if s.ParameterValues != nil {
 		for i, v := range s.ParameterValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -1199,7 +1196,7 @@ func (s *ActivatePipelineInput) Validate() error {
 }
 
 // SetParameterValues sets the ParameterValues field's value.
-func (s *ActivatePipelineInput) SetParameterValues(v []*ParameterValue) *ActivatePipelineInput {
+func (s *ActivatePipelineInput) SetParameterValues(v []ParameterValue) *ActivatePipelineInput {
 	s.ParameterValues = v
 	return s
 }
@@ -1245,7 +1242,7 @@ type AddTagsInput struct {
 	// The tags to add, as key/value pairs.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1274,9 +1271,6 @@ func (s *AddTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1296,7 +1290,7 @@ func (s *AddTagsInput) SetPipelineId(v string) *AddTagsInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsInput) SetTags(v []*Tag) *AddTagsInput {
+func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 	s.Tags = v
 	return s
 }
@@ -1336,7 +1330,7 @@ type CreatePipelineInput struct {
 	// access to pipelines. For more information, see Controlling User Access to
 	// Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// A unique identifier. This identifier is not the same as the pipeline identifier
 	// assigned by AWS Data Pipeline. You are responsible for defining the format
@@ -1383,9 +1377,6 @@ func (s *CreatePipelineInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1411,7 +1402,7 @@ func (s *CreatePipelineInput) SetName(v string) *CreatePipelineInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreatePipelineInput) SetTags(v []*Tag) *CreatePipelineInput {
+func (s *CreatePipelineInput) SetTags(v []Tag) *CreatePipelineInput {
 	s.Tags = v
 	return s
 }
@@ -1599,7 +1590,7 @@ type DescribeObjectsInput struct {
 	// You can pass as many as 25 identifiers in a single call to DescribeObjects.
 	//
 	// ObjectIds is a required field
-	ObjectIds []*string `locationName:"objectIds" type:"list" required:"true"`
+	ObjectIds []string `locationName:"objectIds" type:"list" required:"true"`
 
 	// The ID of the pipeline that contains the object definitions.
 	//
@@ -1651,7 +1642,7 @@ func (s *DescribeObjectsInput) SetMarker(v string) *DescribeObjectsInput {
 }
 
 // SetObjectIds sets the ObjectIds field's value.
-func (s *DescribeObjectsInput) SetObjectIds(v []*string) *DescribeObjectsInput {
+func (s *DescribeObjectsInput) SetObjectIds(v []string) *DescribeObjectsInput {
 	s.ObjectIds = v
 	return s
 }
@@ -1678,7 +1669,7 @@ type DescribeObjectsOutput struct {
 	// An array of object definitions.
 	//
 	// PipelineObjects is a required field
-	PipelineObjects []*PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
+	PipelineObjects []PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1704,7 +1695,7 @@ func (s *DescribeObjectsOutput) SetMarker(v string) *DescribeObjectsOutput {
 }
 
 // SetPipelineObjects sets the PipelineObjects field's value.
-func (s *DescribeObjectsOutput) SetPipelineObjects(v []*PipelineObject) *DescribeObjectsOutput {
+func (s *DescribeObjectsOutput) SetPipelineObjects(v []PipelineObject) *DescribeObjectsOutput {
 	s.PipelineObjects = v
 	return s
 }
@@ -1718,7 +1709,7 @@ type DescribePipelinesInput struct {
 	// in a single call. To obtain pipeline IDs, call ListPipelines.
 	//
 	// PipelineIds is a required field
-	PipelineIds []*string `locationName:"pipelineIds" type:"list" required:"true"`
+	PipelineIds []string `locationName:"pipelineIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1746,7 +1737,7 @@ func (s *DescribePipelinesInput) Validate() error {
 }
 
 // SetPipelineIds sets the PipelineIds field's value.
-func (s *DescribePipelinesInput) SetPipelineIds(v []*string) *DescribePipelinesInput {
+func (s *DescribePipelinesInput) SetPipelineIds(v []string) *DescribePipelinesInput {
 	s.PipelineIds = v
 	return s
 }
@@ -1759,7 +1750,7 @@ type DescribePipelinesOutput struct {
 	// An array of descriptions for the specified pipelines.
 	//
 	// PipelineDescriptionList is a required field
-	PipelineDescriptionList []*PipelineDescription `locationName:"pipelineDescriptionList" type:"list" required:"true"`
+	PipelineDescriptionList []PipelineDescription `locationName:"pipelineDescriptionList" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1773,7 +1764,7 @@ func (s DescribePipelinesOutput) GoString() string {
 }
 
 // SetPipelineDescriptionList sets the PipelineDescriptionList field's value.
-func (s *DescribePipelinesOutput) SetPipelineDescriptionList(v []*PipelineDescription) *DescribePipelinesOutput {
+func (s *DescribePipelinesOutput) SetPipelineDescriptionList(v []PipelineDescription) *DescribePipelinesOutput {
 	s.PipelineDescriptionList = v
 	return s
 }
@@ -2010,13 +2001,13 @@ type GetPipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The parameter objects used in the pipeline definition.
-	ParameterObjects []*ParameterObject `locationName:"parameterObjects" type:"list"`
+	ParameterObjects []ParameterObject `locationName:"parameterObjects" type:"list"`
 
 	// The parameter values used in the pipeline definition.
-	ParameterValues []*ParameterValue `locationName:"parameterValues" type:"list"`
+	ParameterValues []ParameterValue `locationName:"parameterValues" type:"list"`
 
 	// The objects defined in the pipeline.
-	PipelineObjects []*PipelineObject `locationName:"pipelineObjects" type:"list"`
+	PipelineObjects []PipelineObject `locationName:"pipelineObjects" type:"list"`
 }
 
 // String returns the string representation
@@ -2030,19 +2021,19 @@ func (s GetPipelineDefinitionOutput) GoString() string {
 }
 
 // SetParameterObjects sets the ParameterObjects field's value.
-func (s *GetPipelineDefinitionOutput) SetParameterObjects(v []*ParameterObject) *GetPipelineDefinitionOutput {
+func (s *GetPipelineDefinitionOutput) SetParameterObjects(v []ParameterObject) *GetPipelineDefinitionOutput {
 	s.ParameterObjects = v
 	return s
 }
 
 // SetParameterValues sets the ParameterValues field's value.
-func (s *GetPipelineDefinitionOutput) SetParameterValues(v []*ParameterValue) *GetPipelineDefinitionOutput {
+func (s *GetPipelineDefinitionOutput) SetParameterValues(v []ParameterValue) *GetPipelineDefinitionOutput {
 	s.ParameterValues = v
 	return s
 }
 
 // SetPipelineObjects sets the PipelineObjects field's value.
-func (s *GetPipelineDefinitionOutput) SetPipelineObjects(v []*PipelineObject) *GetPipelineDefinitionOutput {
+func (s *GetPipelineDefinitionOutput) SetPipelineObjects(v []PipelineObject) *GetPipelineDefinitionOutput {
 	s.PipelineObjects = v
 	return s
 }
@@ -2135,7 +2126,7 @@ type ListPipelinesOutput struct {
 	// pipelines, you can use these identifiers to call DescribePipelines and GetPipelineDefinition.
 	//
 	// PipelineIdList is a required field
-	PipelineIdList []*PipelineIdName `locationName:"pipelineIdList" type:"list" required:"true"`
+	PipelineIdList []PipelineIdName `locationName:"pipelineIdList" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2161,7 +2152,7 @@ func (s *ListPipelinesOutput) SetMarker(v string) *ListPipelinesOutput {
 }
 
 // SetPipelineIdList sets the PipelineIdList field's value.
-func (s *ListPipelinesOutput) SetPipelineIdList(v []*PipelineIdName) *ListPipelinesOutput {
+func (s *ListPipelinesOutput) SetPipelineIdList(v []PipelineIdName) *ListPipelinesOutput {
 	s.PipelineIdList = v
 	return s
 }
@@ -2201,10 +2192,10 @@ type Operator struct {
 	// only alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.
 	// User-defined fields that you add to a pipeline should prefix their name with
 	// the string "my".
-	Type OperatorType `locationName:"type" type:"string"`
+	Type OperatorType `locationName:"type" type:"string" enum:"true"`
 
 	// The value that the actual field value will be compared with.
-	Values []*string `locationName:"values" type:"list"`
+	Values []string `locationName:"values" type:"list"`
 }
 
 // String returns the string representation
@@ -2224,7 +2215,7 @@ func (s *Operator) SetType(v OperatorType) *Operator {
 }
 
 // SetValues sets the Values field's value.
-func (s *Operator) SetValues(v []*string) *Operator {
+func (s *Operator) SetValues(v []string) *Operator {
 	s.Values = v
 	return s
 }
@@ -2296,7 +2287,7 @@ type ParameterObject struct {
 	// The attributes of the parameter object.
 	//
 	// Attributes is a required field
-	Attributes []*ParameterAttribute `locationName:"attributes" type:"list" required:"true"`
+	Attributes []ParameterAttribute `locationName:"attributes" type:"list" required:"true"`
 
 	// The ID of the parameter object.
 	//
@@ -2330,9 +2321,6 @@ func (s *ParameterObject) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -2346,7 +2334,7 @@ func (s *ParameterObject) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ParameterObject) SetAttributes(v []*ParameterAttribute) *ParameterObject {
+func (s *ParameterObject) SetAttributes(v []ParameterAttribute) *ParameterObject {
 	s.Attributes = v
 	return s
 }
@@ -2428,7 +2416,7 @@ type PipelineDescription struct {
 	// @accountId, and @pipelineState.
 	//
 	// Fields is a required field
-	Fields []*Field `locationName:"fields" type:"list" required:"true"`
+	Fields []Field `locationName:"fields" type:"list" required:"true"`
 
 	// The name of the pipeline.
 	//
@@ -2445,7 +2433,7 @@ type PipelineDescription struct {
 	// to pipelines. For more information, see Controlling User Access to Pipelines
 	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -2465,7 +2453,7 @@ func (s *PipelineDescription) SetDescription(v string) *PipelineDescription {
 }
 
 // SetFields sets the Fields field's value.
-func (s *PipelineDescription) SetFields(v []*Field) *PipelineDescription {
+func (s *PipelineDescription) SetFields(v []Field) *PipelineDescription {
 	s.Fields = v
 	return s
 }
@@ -2483,7 +2471,7 @@ func (s *PipelineDescription) SetPipelineId(v string) *PipelineDescription {
 }
 
 // SetTags sets the Tags field's value.
-func (s *PipelineDescription) SetTags(v []*Tag) *PipelineDescription {
+func (s *PipelineDescription) SetTags(v []Tag) *PipelineDescription {
 	s.Tags = v
 	return s
 }
@@ -2533,7 +2521,7 @@ type PipelineObject struct {
 	// Key-value pairs that define the properties of the object.
 	//
 	// Fields is a required field
-	Fields []*Field `locationName:"fields" type:"list" required:"true"`
+	Fields []Field `locationName:"fields" type:"list" required:"true"`
 
 	// The ID of the object.
 	//
@@ -2579,9 +2567,6 @@ func (s *PipelineObject) Validate() error {
 	}
 	if s.Fields != nil {
 		for i, v := range s.Fields {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(aws.ErrInvalidParams))
 			}
@@ -2595,7 +2580,7 @@ func (s *PipelineObject) Validate() error {
 }
 
 // SetFields sets the Fields field's value.
-func (s *PipelineObject) SetFields(v []*Field) *PipelineObject {
+func (s *PipelineObject) SetFields(v []Field) *PipelineObject {
 	s.Fields = v
 	return s
 }
@@ -2717,10 +2702,10 @@ type PutPipelineDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The parameter objects used with the pipeline.
-	ParameterObjects []*ParameterObject `locationName:"parameterObjects" type:"list"`
+	ParameterObjects []ParameterObject `locationName:"parameterObjects" type:"list"`
 
 	// The parameter values used with the pipeline.
-	ParameterValues []*ParameterValue `locationName:"parameterValues" type:"list"`
+	ParameterValues []ParameterValue `locationName:"parameterValues" type:"list"`
 
 	// The ID of the pipeline.
 	//
@@ -2731,7 +2716,7 @@ type PutPipelineDefinitionInput struct {
 	// pipeline definition.
 	//
 	// PipelineObjects is a required field
-	PipelineObjects []*PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
+	PipelineObjects []PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2760,9 +2745,6 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 	}
 	if s.ParameterObjects != nil {
 		for i, v := range s.ParameterObjects {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterObjects", i), err.(aws.ErrInvalidParams))
 			}
@@ -2770,9 +2752,6 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 	}
 	if s.ParameterValues != nil {
 		for i, v := range s.ParameterValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -2780,9 +2759,6 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 	}
 	if s.PipelineObjects != nil {
 		for i, v := range s.PipelineObjects {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineObjects", i), err.(aws.ErrInvalidParams))
 			}
@@ -2796,13 +2772,13 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 }
 
 // SetParameterObjects sets the ParameterObjects field's value.
-func (s *PutPipelineDefinitionInput) SetParameterObjects(v []*ParameterObject) *PutPipelineDefinitionInput {
+func (s *PutPipelineDefinitionInput) SetParameterObjects(v []ParameterObject) *PutPipelineDefinitionInput {
 	s.ParameterObjects = v
 	return s
 }
 
 // SetParameterValues sets the ParameterValues field's value.
-func (s *PutPipelineDefinitionInput) SetParameterValues(v []*ParameterValue) *PutPipelineDefinitionInput {
+func (s *PutPipelineDefinitionInput) SetParameterValues(v []ParameterValue) *PutPipelineDefinitionInput {
 	s.ParameterValues = v
 	return s
 }
@@ -2814,7 +2790,7 @@ func (s *PutPipelineDefinitionInput) SetPipelineId(v string) *PutPipelineDefinit
 }
 
 // SetPipelineObjects sets the PipelineObjects field's value.
-func (s *PutPipelineDefinitionInput) SetPipelineObjects(v []*PipelineObject) *PutPipelineDefinitionInput {
+func (s *PutPipelineDefinitionInput) SetPipelineObjects(v []PipelineObject) *PutPipelineDefinitionInput {
 	s.PipelineObjects = v
 	return s
 }
@@ -2832,10 +2808,10 @@ type PutPipelineDefinitionOutput struct {
 	Errored *bool `locationName:"errored" type:"boolean" required:"true"`
 
 	// The validation errors that are associated with the objects defined in pipelineObjects.
-	ValidationErrors []*ValidationError `locationName:"validationErrors" type:"list"`
+	ValidationErrors []ValidationError `locationName:"validationErrors" type:"list"`
 
 	// The validation warnings that are associated with the objects defined in pipelineObjects.
-	ValidationWarnings []*ValidationWarning `locationName:"validationWarnings" type:"list"`
+	ValidationWarnings []ValidationWarning `locationName:"validationWarnings" type:"list"`
 }
 
 // String returns the string representation
@@ -2855,13 +2831,13 @@ func (s *PutPipelineDefinitionOutput) SetErrored(v bool) *PutPipelineDefinitionO
 }
 
 // SetValidationErrors sets the ValidationErrors field's value.
-func (s *PutPipelineDefinitionOutput) SetValidationErrors(v []*ValidationError) *PutPipelineDefinitionOutput {
+func (s *PutPipelineDefinitionOutput) SetValidationErrors(v []ValidationError) *PutPipelineDefinitionOutput {
 	s.ValidationErrors = v
 	return s
 }
 
 // SetValidationWarnings sets the ValidationWarnings field's value.
-func (s *PutPipelineDefinitionOutput) SetValidationWarnings(v []*ValidationWarning) *PutPipelineDefinitionOutput {
+func (s *PutPipelineDefinitionOutput) SetValidationWarnings(v []ValidationWarning) *PutPipelineDefinitionOutput {
 	s.ValidationWarnings = v
 	return s
 }
@@ -2873,7 +2849,7 @@ type Query struct {
 
 	// List of selectors that define the query. An object must satisfy all of the
 	// selectors to match the query.
-	Selectors []*Selector `locationName:"selectors" type:"list"`
+	Selectors []Selector `locationName:"selectors" type:"list"`
 }
 
 // String returns the string representation
@@ -2887,7 +2863,7 @@ func (s Query) GoString() string {
 }
 
 // SetSelectors sets the Selectors field's value.
-func (s *Query) SetSelectors(v []*Selector) *Query {
+func (s *Query) SetSelectors(v []Selector) *Query {
 	s.Selectors = v
 	return s
 }
@@ -2996,7 +2972,7 @@ type QueryObjectsOutput struct {
 	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
 
 	// The identifiers that match the query selectors.
-	Ids []*string `locationName:"ids" type:"list"`
+	Ids []string `locationName:"ids" type:"list"`
 
 	// The starting point for the next page of results. To view the next page of
 	// results, call QueryObjects again with this marker value. If the value is
@@ -3021,7 +2997,7 @@ func (s *QueryObjectsOutput) SetHasMoreResults(v bool) *QueryObjectsOutput {
 }
 
 // SetIds sets the Ids field's value.
-func (s *QueryObjectsOutput) SetIds(v []*string) *QueryObjectsOutput {
+func (s *QueryObjectsOutput) SetIds(v []string) *QueryObjectsOutput {
 	s.Ids = v
 	return s
 }
@@ -3045,7 +3021,7 @@ type RemoveTagsInput struct {
 	// The keys of the tags to remove.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `locationName:"tagKeys" type:"list" required:"true"`
+	TagKeys []string `locationName:"tagKeys" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3086,7 +3062,7 @@ func (s *RemoveTagsInput) SetPipelineId(v string) *RemoveTagsInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsInput) SetTagKeys(v []*string) *RemoveTagsInput {
+func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -3114,7 +3090,7 @@ type ReportTaskProgressInput struct {
 
 	// Key-value pairs that define the properties of the ReportTaskProgressInput
 	// object.
-	Fields []*Field `locationName:"fields" type:"list"`
+	Fields []Field `locationName:"fields" type:"list"`
 
 	// The ID of the task assigned to the task runner. This value is provided in
 	// the response for PollForTask.
@@ -3145,9 +3121,6 @@ func (s *ReportTaskProgressInput) Validate() error {
 	}
 	if s.Fields != nil {
 		for i, v := range s.Fields {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(aws.ErrInvalidParams))
 			}
@@ -3161,7 +3134,7 @@ func (s *ReportTaskProgressInput) Validate() error {
 }
 
 // SetFields sets the Fields field's value.
-func (s *ReportTaskProgressInput) SetFields(v []*Field) *ReportTaskProgressInput {
+func (s *ReportTaskProgressInput) SetFields(v []Field) *ReportTaskProgressInput {
 	s.Fields = v
 	return s
 }
@@ -3348,7 +3321,7 @@ type SetStatusInput struct {
 	// or components, but not a mix of both types.
 	//
 	// ObjectIds is a required field
-	ObjectIds []*string `locationName:"objectIds" type:"list" required:"true"`
+	ObjectIds []string `locationName:"objectIds" type:"list" required:"true"`
 
 	// The ID of the pipeline that contains the objects.
 	//
@@ -3398,7 +3371,7 @@ func (s *SetStatusInput) Validate() error {
 }
 
 // SetObjectIds sets the ObjectIds field's value.
-func (s *SetStatusInput) SetObjectIds(v []*string) *SetStatusInput {
+func (s *SetStatusInput) SetObjectIds(v []string) *SetStatusInput {
 	s.ObjectIds = v
 	return s
 }
@@ -3463,7 +3436,7 @@ type SetTaskStatusInput struct {
 	// Preconditions use false.
 	//
 	// TaskStatus is a required field
-	TaskStatus TaskStatus `locationName:"taskStatus" type:"string" required:"true"`
+	TaskStatus TaskStatus `locationName:"taskStatus" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3620,7 +3593,7 @@ type TaskObject struct {
 
 	// Connection information for the location where the task runner will publish
 	// the output of the task.
-	Objects map[string]*PipelineObject `locationName:"objects" type:"map"`
+	Objects map[string]PipelineObject `locationName:"objects" type:"map"`
 
 	// The ID of the pipeline that provided the task.
 	PipelineId *string `locationName:"pipelineId" min:"1" type:"string"`
@@ -3647,7 +3620,7 @@ func (s *TaskObject) SetAttemptId(v string) *TaskObject {
 }
 
 // SetObjects sets the Objects field's value.
-func (s *TaskObject) SetObjects(v map[string]*PipelineObject) *TaskObject {
+func (s *TaskObject) SetObjects(v map[string]PipelineObject) *TaskObject {
 	s.Objects = v
 	return s
 }
@@ -3670,10 +3643,10 @@ type ValidatePipelineDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The parameter objects used with the pipeline.
-	ParameterObjects []*ParameterObject `locationName:"parameterObjects" type:"list"`
+	ParameterObjects []ParameterObject `locationName:"parameterObjects" type:"list"`
 
 	// The parameter values used with the pipeline.
-	ParameterValues []*ParameterValue `locationName:"parameterValues" type:"list"`
+	ParameterValues []ParameterValue `locationName:"parameterValues" type:"list"`
 
 	// The ID of the pipeline.
 	//
@@ -3683,7 +3656,7 @@ type ValidatePipelineDefinitionInput struct {
 	// The objects that define the pipeline changes to validate against the pipeline.
 	//
 	// PipelineObjects is a required field
-	PipelineObjects []*PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
+	PipelineObjects []PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3712,9 +3685,6 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 	}
 	if s.ParameterObjects != nil {
 		for i, v := range s.ParameterObjects {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterObjects", i), err.(aws.ErrInvalidParams))
 			}
@@ -3722,9 +3692,6 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 	}
 	if s.ParameterValues != nil {
 		for i, v := range s.ParameterValues {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
 			}
@@ -3732,9 +3699,6 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 	}
 	if s.PipelineObjects != nil {
 		for i, v := range s.PipelineObjects {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineObjects", i), err.(aws.ErrInvalidParams))
 			}
@@ -3748,13 +3712,13 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 }
 
 // SetParameterObjects sets the ParameterObjects field's value.
-func (s *ValidatePipelineDefinitionInput) SetParameterObjects(v []*ParameterObject) *ValidatePipelineDefinitionInput {
+func (s *ValidatePipelineDefinitionInput) SetParameterObjects(v []ParameterObject) *ValidatePipelineDefinitionInput {
 	s.ParameterObjects = v
 	return s
 }
 
 // SetParameterValues sets the ParameterValues field's value.
-func (s *ValidatePipelineDefinitionInput) SetParameterValues(v []*ParameterValue) *ValidatePipelineDefinitionInput {
+func (s *ValidatePipelineDefinitionInput) SetParameterValues(v []ParameterValue) *ValidatePipelineDefinitionInput {
 	s.ParameterValues = v
 	return s
 }
@@ -3766,7 +3730,7 @@ func (s *ValidatePipelineDefinitionInput) SetPipelineId(v string) *ValidatePipel
 }
 
 // SetPipelineObjects sets the PipelineObjects field's value.
-func (s *ValidatePipelineDefinitionInput) SetPipelineObjects(v []*PipelineObject) *ValidatePipelineDefinitionInput {
+func (s *ValidatePipelineDefinitionInput) SetPipelineObjects(v []PipelineObject) *ValidatePipelineDefinitionInput {
 	s.PipelineObjects = v
 	return s
 }
@@ -3782,10 +3746,10 @@ type ValidatePipelineDefinitionOutput struct {
 	Errored *bool `locationName:"errored" type:"boolean" required:"true"`
 
 	// Any validation errors that were found.
-	ValidationErrors []*ValidationError `locationName:"validationErrors" type:"list"`
+	ValidationErrors []ValidationError `locationName:"validationErrors" type:"list"`
 
 	// Any validation warnings that were found.
-	ValidationWarnings []*ValidationWarning `locationName:"validationWarnings" type:"list"`
+	ValidationWarnings []ValidationWarning `locationName:"validationWarnings" type:"list"`
 }
 
 // String returns the string representation
@@ -3805,13 +3769,13 @@ func (s *ValidatePipelineDefinitionOutput) SetErrored(v bool) *ValidatePipelineD
 }
 
 // SetValidationErrors sets the ValidationErrors field's value.
-func (s *ValidatePipelineDefinitionOutput) SetValidationErrors(v []*ValidationError) *ValidatePipelineDefinitionOutput {
+func (s *ValidatePipelineDefinitionOutput) SetValidationErrors(v []ValidationError) *ValidatePipelineDefinitionOutput {
 	s.ValidationErrors = v
 	return s
 }
 
 // SetValidationWarnings sets the ValidationWarnings field's value.
-func (s *ValidatePipelineDefinitionOutput) SetValidationWarnings(v []*ValidationWarning) *ValidatePipelineDefinitionOutput {
+func (s *ValidatePipelineDefinitionOutput) SetValidationWarnings(v []ValidationWarning) *ValidatePipelineDefinitionOutput {
 	s.ValidationWarnings = v
 	return s
 }
@@ -3824,7 +3788,7 @@ type ValidationError struct {
 	_ struct{} `type:"structure"`
 
 	// A description of the validation error.
-	Errors []*string `locationName:"errors" type:"list"`
+	Errors []string `locationName:"errors" type:"list"`
 
 	// The identifier of the object that contains the validation error.
 	Id *string `locationName:"id" min:"1" type:"string"`
@@ -3841,7 +3805,7 @@ func (s ValidationError) GoString() string {
 }
 
 // SetErrors sets the Errors field's value.
-func (s *ValidationError) SetErrors(v []*string) *ValidationError {
+func (s *ValidationError) SetErrors(v []string) *ValidationError {
 	s.Errors = v
 	return s
 }
@@ -3863,7 +3827,7 @@ type ValidationWarning struct {
 	Id *string `locationName:"id" min:"1" type:"string"`
 
 	// A description of the validation warning.
-	Warnings []*string `locationName:"warnings" type:"list"`
+	Warnings []string `locationName:"warnings" type:"list"`
 }
 
 // String returns the string representation
@@ -3883,7 +3847,7 @@ func (s *ValidationWarning) SetId(v string) *ValidationWarning {
 }
 
 // SetWarnings sets the Warnings field's value.
-func (s *ValidationWarning) SetWarnings(v []*string) *ValidationWarning {
+func (s *ValidationWarning) SetWarnings(v []string) *ValidationWarning {
 	s.Warnings = v
 	return s
 }

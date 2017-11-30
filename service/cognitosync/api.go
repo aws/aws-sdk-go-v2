@@ -974,7 +974,7 @@ type CognitoStreams struct {
 	//
 	// DISABLED - Streaming of updates to identity pool is disabled. Bulk publish
 	// will also fail if StreamingStatus is DISABLED.
-	StreamingStatus StreamingStatus `type:"string"`
+	StreamingStatus StreamingStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1557,7 +1557,7 @@ type GetBulkPublishDetailsOutput struct {
 	//
 	// FAILED - Some portion of the data has failed to publish, check FailureMessage
 	// for the cause.
-	BulkPublishStatus BulkPublishStatus `type:"string"`
+	BulkPublishStatus BulkPublishStatus `type:"string" enum:"true"`
 
 	// If BulkPublishStatus is FAILED this field will contain the error message
 	// that caused the bulk publish to fail.
@@ -1658,7 +1658,7 @@ type GetCognitoEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Cognito Events returned from the GetCognitoEvents request
-	Events map[string]*string `type:"map"`
+	Events map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -1672,7 +1672,7 @@ func (s GetCognitoEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *GetCognitoEventsOutput) SetEvents(v map[string]*string) *GetCognitoEventsOutput {
+func (s *GetCognitoEventsOutput) SetEvents(v map[string]string) *GetCognitoEventsOutput {
 	s.Events = v
 	return s
 }
@@ -1974,7 +1974,7 @@ type ListDatasetsOutput struct {
 	Count *int64 `type:"integer"`
 
 	// A set of datasets.
-	Datasets []*Dataset `type:"list"`
+	Datasets []Dataset `type:"list"`
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string `type:"string"`
@@ -1997,7 +1997,7 @@ func (s *ListDatasetsOutput) SetCount(v int64) *ListDatasetsOutput {
 }
 
 // SetDatasets sets the Datasets field's value.
-func (s *ListDatasetsOutput) SetDatasets(v []*Dataset) *ListDatasetsOutput {
+func (s *ListDatasetsOutput) SetDatasets(v []Dataset) *ListDatasetsOutput {
 	s.Datasets = v
 	return s
 }
@@ -2051,7 +2051,7 @@ type ListIdentityPoolUsageOutput struct {
 	Count *int64 `type:"integer"`
 
 	// Usage information for the identity pools.
-	IdentityPoolUsages []*IdentityPoolUsage `type:"list"`
+	IdentityPoolUsages []IdentityPoolUsage `type:"list"`
 
 	// The maximum number of results to be returned.
 	MaxResults *int64 `type:"integer"`
@@ -2077,7 +2077,7 @@ func (s *ListIdentityPoolUsageOutput) SetCount(v int64) *ListIdentityPoolUsageOu
 }
 
 // SetIdentityPoolUsages sets the IdentityPoolUsages field's value.
-func (s *ListIdentityPoolUsageOutput) SetIdentityPoolUsages(v []*IdentityPoolUsage) *ListIdentityPoolUsageOutput {
+func (s *ListIdentityPoolUsageOutput) SetIdentityPoolUsages(v []IdentityPoolUsage) *ListIdentityPoolUsageOutput {
 	s.IdentityPoolUsages = v
 	return s
 }
@@ -2234,13 +2234,13 @@ type ListRecordsOutput struct {
 	LastModifiedBy *string `type:"string"`
 
 	// Names of merged datasets.
-	MergedDatasetNames []*string `type:"list"`
+	MergedDatasetNames []string `type:"list"`
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string `type:"string"`
 
 	// A list of all records.
-	Records []*Record `type:"list"`
+	Records []Record `type:"list"`
 
 	// A token containing a session ID, identity ID, and expiration.
 	SyncSessionToken *string `type:"string"`
@@ -2287,7 +2287,7 @@ func (s *ListRecordsOutput) SetLastModifiedBy(v string) *ListRecordsOutput {
 }
 
 // SetMergedDatasetNames sets the MergedDatasetNames field's value.
-func (s *ListRecordsOutput) SetMergedDatasetNames(v []*string) *ListRecordsOutput {
+func (s *ListRecordsOutput) SetMergedDatasetNames(v []string) *ListRecordsOutput {
 	s.MergedDatasetNames = v
 	return s
 }
@@ -2299,7 +2299,7 @@ func (s *ListRecordsOutput) SetNextToken(v string) *ListRecordsOutput {
 }
 
 // SetRecords sets the Records field's value.
-func (s *ListRecordsOutput) SetRecords(v []*Record) *ListRecordsOutput {
+func (s *ListRecordsOutput) SetRecords(v []Record) *ListRecordsOutput {
 	s.Records = v
 	return s
 }
@@ -2316,7 +2316,7 @@ type PushSync struct {
 	_ struct{} `type:"structure"`
 
 	// List of SNS platform application ARNs that could be used by clients.
-	ApplicationArns []*string `type:"list"`
+	ApplicationArns []string `type:"list"`
 
 	// A role configured to allow Cognito to call SNS on behalf of the developer.
 	RoleArn *string `min:"20" type:"string"`
@@ -2346,7 +2346,7 @@ func (s *PushSync) Validate() error {
 }
 
 // SetApplicationArns sets the ApplicationArns field's value.
-func (s *PushSync) SetApplicationArns(v []*string) *PushSync {
+func (s *PushSync) SetApplicationArns(v []string) *PushSync {
 	s.ApplicationArns = v
 	return s
 }
@@ -2443,7 +2443,7 @@ type RecordPatch struct {
 	// An operation, either replace or remove.
 	//
 	// Op is a required field
-	Op Operation `type:"string" required:"true"`
+	Op Operation `type:"string" required:"true" enum:"true"`
 
 	// Last known server sync count for this record. Set to 0 if unknown.
 	//
@@ -2538,7 +2538,7 @@ type RegisterDeviceInput struct {
 	// The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).
 	//
 	// Platform is a required field
-	Platform Platform `type:"string" required:"true"`
+	Platform Platform `type:"string" required:"true" enum:"true"`
 
 	// The push token.
 	//
@@ -2644,7 +2644,7 @@ type SetCognitoEventsInput struct {
 	// The events to configure
 	//
 	// Events is a required field
-	Events map[string]*string `type:"map" required:"true"`
+	Events map[string]string `type:"map" required:"true"`
 
 	// The Cognito Identity Pool to use when configuring Cognito Events
 	//
@@ -2684,7 +2684,7 @@ func (s *SetCognitoEventsInput) Validate() error {
 }
 
 // SetEvents sets the Events field's value.
-func (s *SetCognitoEventsInput) SetEvents(v map[string]*string) *SetCognitoEventsInput {
+func (s *SetCognitoEventsInput) SetEvents(v map[string]string) *SetCognitoEventsInput {
 	s.Events = v
 	return s
 }
@@ -3089,7 +3089,7 @@ type UpdateRecordsInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 
 	// A list of patch operations.
-	RecordPatches []*RecordPatch `type:"list"`
+	RecordPatches []RecordPatch `type:"list"`
 
 	// The SyncSessionToken returned by a previous call to ListRecords for this
 	// dataset and identity.
@@ -3141,9 +3141,6 @@ func (s *UpdateRecordsInput) Validate() error {
 	}
 	if s.RecordPatches != nil {
 		for i, v := range s.RecordPatches {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordPatches", i), err.(aws.ErrInvalidParams))
 			}
@@ -3187,7 +3184,7 @@ func (s *UpdateRecordsInput) SetIdentityPoolId(v string) *UpdateRecordsInput {
 }
 
 // SetRecordPatches sets the RecordPatches field's value.
-func (s *UpdateRecordsInput) SetRecordPatches(v []*RecordPatch) *UpdateRecordsInput {
+func (s *UpdateRecordsInput) SetRecordPatches(v []RecordPatch) *UpdateRecordsInput {
 	s.RecordPatches = v
 	return s
 }
@@ -3204,7 +3201,7 @@ type UpdateRecordsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of records that have been updated.
-	Records []*Record `type:"list"`
+	Records []Record `type:"list"`
 }
 
 // String returns the string representation
@@ -3218,7 +3215,7 @@ func (s UpdateRecordsOutput) GoString() string {
 }
 
 // SetRecords sets the Records field's value.
-func (s *UpdateRecordsOutput) SetRecords(v []*Record) *UpdateRecordsOutput {
+func (s *UpdateRecordsOutput) SetRecords(v []Record) *UpdateRecordsOutput {
 	s.Records = v
 	return s
 }

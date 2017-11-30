@@ -80,25 +80,25 @@ func ExampleBatch_CreateComputeEnvironmentRequest_shared00() {
 			DesiredvCpus: aws.Int64(48),
 			Ec2KeyPair:   aws.String("id_rsa"),
 			InstanceRole: aws.String("ecsInstanceRole"),
-			InstanceTypes: []*string{
-				aws.String("c4.large"),
-				aws.String("c4.xlarge"),
-				aws.String("c4.2xlarge"),
-				aws.String("c4.4xlarge"),
-				aws.String("c4.8xlarge"),
+			InstanceTypes: []string{
+				"c4.large",
+				"c4.xlarge",
+				"c4.2xlarge",
+				"c4.4xlarge",
+				"c4.8xlarge",
 			},
 			MaxvCpus: aws.Int64(128),
 			MinvCpus: aws.Int64(0),
-			SecurityGroupIds: []*string{
-				aws.String("sg-cf5093b2"),
+			SecurityGroupIds: []string{
+				"sg-cf5093b2",
 			},
-			Subnets: []*string{
-				aws.String("subnet-220c0e0a"),
-				aws.String("subnet-1a95556d"),
-				aws.String("subnet-978f6dce"),
+			Subnets: []string{
+				"subnet-220c0e0a",
+				"subnet-1a95556d",
+				"subnet-978f6dce",
 			},
-			Tags: map[string]*string{
-				"Name": aws.String("Batch Instance - C4OnDemand"),
+			Tags: map[string]string{
+				"Name": "Batch Instance - C4OnDemand",
 			},
 			Type: batch.CRTypeEc2,
 		},
@@ -149,22 +149,22 @@ func ExampleBatch_CreateComputeEnvironmentRequest_shared01() {
 			DesiredvCpus:  aws.Int64(4),
 			Ec2KeyPair:    aws.String("id_rsa"),
 			InstanceRole:  aws.String("ecsInstanceRole"),
-			InstanceTypes: []*string{
-				aws.String("m4"),
+			InstanceTypes: []string{
+				"m4",
 			},
 			MaxvCpus: aws.Int64(128),
 			MinvCpus: aws.Int64(0),
-			SecurityGroupIds: []*string{
-				aws.String("sg-cf5093b2"),
+			SecurityGroupIds: []string{
+				"sg-cf5093b2",
 			},
 			SpotIamFleetRole: aws.String("arn:aws:iam::012345678910:role/aws-ec2-spot-fleet-role"),
-			Subnets: []*string{
-				aws.String("subnet-220c0e0a"),
-				aws.String("subnet-1a95556d"),
-				aws.String("subnet-978f6dce"),
+			Subnets: []string{
+				"subnet-220c0e0a",
+				"subnet-1a95556d",
+				"subnet-978f6dce",
 			},
-			Tags: map[string]*string{
-				"Name": aws.String("Batch Instance - M4Spot"),
+			Tags: map[string]string{
+				"Name": "Batch Instance - M4Spot",
 			},
 			Type: batch.CRTypeSpot,
 		},
@@ -208,7 +208,7 @@ func ExampleBatch_CreateJobQueueRequest_shared00() {
 
 	svc := batch.New(cfg)
 	input := &batch.CreateJobQueueInput{
-		ComputeEnvironmentOrder: []*batch.ComputeEnvironmentOrder{
+		ComputeEnvironmentOrder: []batch.ComputeEnvironmentOrder{
 			{
 				ComputeEnvironment: aws.String("M4Spot"),
 				Order:              aws.Int64(1),
@@ -255,7 +255,7 @@ func ExampleBatch_CreateJobQueueRequest_shared01() {
 
 	svc := batch.New(cfg)
 	input := &batch.CreateJobQueueInput{
-		ComputeEnvironmentOrder: []*batch.ComputeEnvironmentOrder{
+		ComputeEnvironmentOrder: []batch.ComputeEnvironmentOrder{
 			{
 				ComputeEnvironment: aws.String("C4OnDemand"),
 				Order:              aws.Int64(1),
@@ -415,8 +415,8 @@ func ExampleBatch_DescribeComputeEnvironmentsRequest_shared00() {
 
 	svc := batch.New(cfg)
 	input := &batch.DescribeComputeEnvironmentsInput{
-		ComputeEnvironments: []*string{
-			aws.String("P2OnDemand"),
+		ComputeEnvironments: []string{
+			"P2OnDemand",
 		},
 	}
 
@@ -491,8 +491,8 @@ func ExampleBatch_DescribeJobQueuesRequest_shared00() {
 
 	svc := batch.New(cfg)
 	input := &batch.DescribeJobQueuesInput{
-		JobQueues: []*string{
-			aws.String("HighPriority"),
+		JobQueues: []string{
+			"HighPriority",
 		},
 	}
 
@@ -530,8 +530,8 @@ func ExampleBatch_DescribeJobsRequest_shared00() {
 
 	svc := batch.New(cfg)
 	input := &batch.DescribeJobsInput{
-		Jobs: []*string{
-			aws.String("24fa2d7a-64c4-49d2-8b47-f8da4fbde8e9"),
+		Jobs: []string{
+			"24fa2d7a-64c4-49d2-8b47-f8da4fbde8e9",
 		},
 	}
 
@@ -646,9 +646,9 @@ func ExampleBatch_RegisterJobDefinitionRequest_shared00() {
 	svc := batch.New(cfg)
 	input := &batch.RegisterJobDefinitionInput{
 		ContainerProperties: &batch.ContainerProperties{
-			Command: []*string{
-				aws.String("sleep"),
-				aws.String("10"),
+			Command: []string{
+				"sleep",
+				"10",
 			},
 			Image:  aws.String("busybox"),
 			Memory: aws.Int64(128),

@@ -923,9 +923,9 @@ type InputService5TestShapeRecursiveStructType struct {
 
 	NoRecurse *string `type:"string"`
 
-	RecursiveList []*InputService5TestShapeRecursiveStructType `type:"list"`
+	RecursiveList []InputService5TestShapeRecursiveStructType `type:"list"`
 
-	RecursiveMap map[string]*InputService5TestShapeRecursiveStructType `type:"map"`
+	RecursiveMap map[string]InputService5TestShapeRecursiveStructType `type:"map"`
 
 	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
 }
@@ -937,13 +937,13 @@ func (s *InputService5TestShapeRecursiveStructType) SetNoRecurse(v string) *Inpu
 }
 
 // SetRecursiveList sets the RecursiveList field's value.
-func (s *InputService5TestShapeRecursiveStructType) SetRecursiveList(v []*InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
+func (s *InputService5TestShapeRecursiveStructType) SetRecursiveList(v []InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
 	s.RecursiveList = v
 	return s
 }
 
 // SetRecursiveMap sets the RecursiveMap field's value.
-func (s *InputService5TestShapeRecursiveStructType) SetRecursiveMap(v map[string]*InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
+func (s *InputService5TestShapeRecursiveStructType) SetRecursiveMap(v map[string]InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
 	s.RecursiveMap = v
 	return s
 }
@@ -1057,11 +1057,11 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	Map map[string]*string `type:"map"`
+	Map map[string]string `type:"map"`
 }
 
 // SetMap sets the Map field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetMap(v map[string]*string) *InputService6TestShapeInputService6TestCaseOperation1Input {
+func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetMap(v map[string]string) *InputService6TestShapeInputService6TestCaseOperation1Input {
 	s.Map = v
 	return s
 }
@@ -1381,7 +1381,7 @@ type InputService8TestShapeInputService8TestCaseOperation1Output struct {
 type InputService8TestShapeInputService8TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService8TestShapeEnumType `type:"string"`
+	FooEnum InputService8TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService8TestShapeEnumType `type:"list"`
 }
@@ -1745,7 +1745,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation6Input{
 		RecursiveStruct: &InputService5TestShapeRecursiveStructType{
-			RecursiveList: []*InputService5TestShapeRecursiveStructType{
+			RecursiveList: []InputService5TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -1792,7 +1792,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation6Input{
 		RecursiveStruct: &InputService5TestShapeRecursiveStructType{
-			RecursiveList: []*InputService5TestShapeRecursiveStructType{
+			RecursiveList: []InputService5TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -1841,7 +1841,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation6Input{
 		RecursiveStruct: &InputService5TestShapeRecursiveStructType{
-			RecursiveMap: map[string]*InputService5TestShapeRecursiveStructType{
+			RecursiveMap: map[string]InputService5TestShapeRecursiveStructType{
 				"bar": {
 					NoRecurse: aws.String("bar"),
 				},
@@ -1887,7 +1887,7 @@ func TestInputService6ProtocolTestEmptyMapsCase1(t *testing.T) {
 
 	svc := NewInputService6ProtocolTest(cfg)
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
-		Map: map[string]*string{},
+		Map: map[string]string{},
 	}
 
 	req := svc.InputService6TestCaseOperation1Request(input)

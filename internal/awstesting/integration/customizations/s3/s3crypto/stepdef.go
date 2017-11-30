@@ -80,7 +80,7 @@ func init() {
 			}
 
 			// We don't support wrap, so skip it
-			if ctObj.Metadata["X-Amz-Wrap-Alg"] == nil || *ctObj.Metadata["X-Amz-Wrap-Alg"] != "kms" {
+			if ctObj.Metadata["X-Amz-Wrap-Alg"] == "" || ctObj.Metadata["X-Amz-Wrap-Alg"] != "kms" {
 				continue
 			}
 
@@ -170,8 +170,8 @@ func init() {
 				Bucket: &bucket,
 				Key:    aws.String("crypto_tests/" + cek + "/" + folder + "/language_" + language + "/ciphertext_test_case_" + caseKey),
 				Body:   bytes.NewReader(plaintext),
-				Metadata: map[string]*string{
-					"Masterkey": &key,
+				Metadata: map[string]string{
+					"Masterkey": key,
 				},
 			}
 

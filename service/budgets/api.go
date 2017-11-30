@@ -600,13 +600,13 @@ type Budget struct {
 	// The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.
 	//
 	// BudgetType is a required field
-	BudgetType BudgetType `type:"string" required:"true"`
+	BudgetType BudgetType `type:"string" required:"true" enum:"true"`
 
 	// A structure that holds the actual and forecasted spend for a budget.
 	CalculatedSpend *CalculatedSpend `type:"structure"`
 
 	// A map that represents the cost filters applied to the budget.
-	CostFilters map[string][]*string `type:"map"`
+	CostFilters map[string][]string `type:"map"`
 
 	// This includes the options for getting the cost of a budget.
 	//
@@ -621,7 +621,7 @@ type Budget struct {
 	// The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
 	//
 	// TimeUnit is a required field
-	TimeUnit TimeUnit `type:"string" required:"true"`
+	TimeUnit TimeUnit `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -711,7 +711,7 @@ func (s *Budget) SetCalculatedSpend(v *CalculatedSpend) *Budget {
 }
 
 // SetCostFilters sets the CostFilters field's value.
-func (s *Budget) SetCostFilters(v map[string][]*string) *Budget {
+func (s *Budget) SetCostFilters(v map[string][]string) *Budget {
 	s.CostFilters = v
 	return s
 }
@@ -880,7 +880,7 @@ type CreateBudgetInput struct {
 	Budget *Budget `type:"structure" required:"true"`
 
 	// A list of Notifications, each with a list of subscribers.
-	NotificationsWithSubscribers []*NotificationWithSubscribers `type:"list"`
+	NotificationsWithSubscribers []NotificationWithSubscribers `type:"list"`
 }
 
 // String returns the string representation
@@ -914,9 +914,6 @@ func (s *CreateBudgetInput) Validate() error {
 	}
 	if s.NotificationsWithSubscribers != nil {
 		for i, v := range s.NotificationsWithSubscribers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NotificationsWithSubscribers", i), err.(aws.ErrInvalidParams))
 			}
@@ -942,7 +939,7 @@ func (s *CreateBudgetInput) SetBudget(v *Budget) *CreateBudgetInput {
 }
 
 // SetNotificationsWithSubscribers sets the NotificationsWithSubscribers field's value.
-func (s *CreateBudgetInput) SetNotificationsWithSubscribers(v []*NotificationWithSubscribers) *CreateBudgetInput {
+func (s *CreateBudgetInput) SetNotificationsWithSubscribers(v []NotificationWithSubscribers) *CreateBudgetInput {
 	s.NotificationsWithSubscribers = v
 	return s
 }
@@ -985,7 +982,7 @@ type CreateNotificationInput struct {
 	// A list of subscribers.
 	//
 	// Subscribers is a required field
-	Subscribers []*Subscriber `min:"1" type:"list" required:"true"`
+	Subscribers []Subscriber `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1030,9 +1027,6 @@ func (s *CreateNotificationInput) Validate() error {
 	}
 	if s.Subscribers != nil {
 		for i, v := range s.Subscribers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(aws.ErrInvalidParams))
 			}
@@ -1064,7 +1058,7 @@ func (s *CreateNotificationInput) SetNotification(v *Notification) *CreateNotifi
 }
 
 // SetSubscribers sets the Subscribers field's value.
-func (s *CreateNotificationInput) SetSubscribers(v []*Subscriber) *CreateNotificationInput {
+func (s *CreateNotificationInput) SetSubscribers(v []Subscriber) *CreateNotificationInput {
 	s.Subscribers = v
 	return s
 }
@@ -1633,7 +1627,7 @@ type DescribeBudgetsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of budgets
-	Budgets []*Budget `type:"list"`
+	Budgets []Budget `type:"list"`
 
 	// A generic String.
 	NextToken *string `type:"string"`
@@ -1650,7 +1644,7 @@ func (s DescribeBudgetsOutput) GoString() string {
 }
 
 // SetBudgets sets the Budgets field's value.
-func (s *DescribeBudgetsOutput) SetBudgets(v []*Budget) *DescribeBudgetsOutput {
+func (s *DescribeBudgetsOutput) SetBudgets(v []Budget) *DescribeBudgetsOutput {
 	s.Budgets = v
 	return s
 }
@@ -1749,7 +1743,7 @@ type DescribeNotificationsForBudgetOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of notifications.
-	Notifications []*Notification `type:"list"`
+	Notifications []Notification `type:"list"`
 }
 
 // String returns the string representation
@@ -1769,7 +1763,7 @@ func (s *DescribeNotificationsForBudgetOutput) SetNextToken(v string) *DescribeN
 }
 
 // SetNotifications sets the Notifications field's value.
-func (s *DescribeNotificationsForBudgetOutput) SetNotifications(v []*Notification) *DescribeNotificationsForBudgetOutput {
+func (s *DescribeNotificationsForBudgetOutput) SetNotifications(v []Notification) *DescribeNotificationsForBudgetOutput {
 	s.Notifications = v
 	return s
 }
@@ -1883,7 +1877,7 @@ type DescribeSubscribersForNotificationOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of subscribers.
-	Subscribers []*Subscriber `min:"1" type:"list"`
+	Subscribers []Subscriber `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1903,7 +1897,7 @@ func (s *DescribeSubscribersForNotificationOutput) SetNextToken(v string) *Descr
 }
 
 // SetSubscribers sets the Subscribers field's value.
-func (s *DescribeSubscribersForNotificationOutput) SetSubscribers(v []*Subscriber) *DescribeSubscribersForNotificationOutput {
+func (s *DescribeSubscribersForNotificationOutput) SetSubscribers(v []Subscriber) *DescribeSubscribersForNotificationOutput {
 	s.Subscribers = v
 	return s
 }
@@ -1917,12 +1911,12 @@ type Notification struct {
 	// equal to and greater than.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
 	// The type of a notification. It should be ACTUAL or FORECASTED.
 	//
 	// NotificationType is a required field
-	NotificationType NotificationType `type:"string" required:"true"`
+	NotificationType NotificationType `type:"string" required:"true" enum:"true"`
 
 	// The threshold of a notification. It should be a number between 0 and 1,000,000,000.
 	//
@@ -1930,7 +1924,7 @@ type Notification struct {
 	Threshold *float64 `min:"0.1" type:"double" required:"true"`
 
 	// The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
-	ThresholdType ThresholdType `type:"string"`
+	ThresholdType ThresholdType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2004,7 +1998,7 @@ type NotificationWithSubscribers struct {
 	// A list of subscribers.
 	//
 	// Subscribers is a required field
-	Subscribers []*Subscriber `min:"1" type:"list" required:"true"`
+	Subscribers []Subscriber `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2038,9 +2032,6 @@ func (s *NotificationWithSubscribers) Validate() error {
 	}
 	if s.Subscribers != nil {
 		for i, v := range s.Subscribers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(aws.ErrInvalidParams))
 			}
@@ -2060,7 +2051,7 @@ func (s *NotificationWithSubscribers) SetNotification(v *Notification) *Notifica
 }
 
 // SetSubscribers sets the Subscribers field's value.
-func (s *NotificationWithSubscribers) SetSubscribers(v []*Subscriber) *NotificationWithSubscribers {
+func (s *NotificationWithSubscribers) SetSubscribers(v []Subscriber) *NotificationWithSubscribers {
 	s.Subscribers = v
 	return s
 }
@@ -2137,7 +2128,7 @@ type Subscriber struct {
 	// The subscription type of the subscriber. It can be SMS or EMAIL.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType SubscriptionType `type:"string" required:"true"`
+	SubscriptionType SubscriptionType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

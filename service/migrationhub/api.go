@@ -1295,7 +1295,7 @@ type DescribeApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Status of the application - Not Started, In-Progress, Complete.
-	ApplicationStatus ApplicationStatus `type:"string"`
+	ApplicationStatus ApplicationStatus `type:"string" enum:"true"`
 
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1848,7 +1848,7 @@ type ListCreatedArtifactsOutput struct {
 
 	// List of created artifacts up to the maximum number of results specified in
 	// the request.
-	CreatedArtifactList []*CreatedArtifact `type:"list"`
+	CreatedArtifactList []CreatedArtifact `type:"list"`
 
 	// If there are more created artifacts than the max result, return the next
 	// token to be passed to the next call as a bookmark of where to start from.
@@ -1866,7 +1866,7 @@ func (s ListCreatedArtifactsOutput) GoString() string {
 }
 
 // SetCreatedArtifactList sets the CreatedArtifactList field's value.
-func (s *ListCreatedArtifactsOutput) SetCreatedArtifactList(v []*CreatedArtifact) *ListCreatedArtifactsOutput {
+func (s *ListCreatedArtifactsOutput) SetCreatedArtifactList(v []CreatedArtifact) *ListCreatedArtifactsOutput {
 	s.CreatedArtifactList = v
 	return s
 }
@@ -1966,7 +1966,7 @@ type ListDiscoveredResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Returned list of discovered resources associated with the given MigrationTask.
-	DiscoveredResourceList []*DiscoveredResource `type:"list"`
+	DiscoveredResourceList []DiscoveredResource `type:"list"`
 
 	// If there are more discovered resources than the max result, return the next
 	// token to be passed to the next call as a bookmark of where to start from.
@@ -1984,7 +1984,7 @@ func (s ListDiscoveredResourcesOutput) GoString() string {
 }
 
 // SetDiscoveredResourceList sets the DiscoveredResourceList field's value.
-func (s *ListDiscoveredResourcesOutput) SetDiscoveredResourceList(v []*DiscoveredResource) *ListDiscoveredResourcesOutput {
+func (s *ListDiscoveredResourcesOutput) SetDiscoveredResourceList(v []DiscoveredResource) *ListDiscoveredResourcesOutput {
 	s.DiscoveredResourceList = v
 	return s
 }
@@ -2061,7 +2061,7 @@ type ListMigrationTasksOutput struct {
 
 	// Lists the migration task's summary which includes: MigrationTaskName, ProgressPercent,
 	// ProgressUpdateStream, Status, and the UpdateDateTime for each task.
-	MigrationTaskSummaryList []*MigrationTaskSummary `type:"list"`
+	MigrationTaskSummaryList []MigrationTaskSummary `type:"list"`
 
 	// If there are more migration tasks than the max result, return the next token
 	// to be passed to the next call as a bookmark of where to start from.
@@ -2079,7 +2079,7 @@ func (s ListMigrationTasksOutput) GoString() string {
 }
 
 // SetMigrationTaskSummaryList sets the MigrationTaskSummaryList field's value.
-func (s *ListMigrationTasksOutput) SetMigrationTaskSummaryList(v []*MigrationTaskSummary) *ListMigrationTasksOutput {
+func (s *ListMigrationTasksOutput) SetMigrationTaskSummaryList(v []MigrationTaskSummary) *ListMigrationTasksOutput {
 	s.MigrationTaskSummaryList = v
 	return s
 }
@@ -2148,7 +2148,7 @@ type ListProgressUpdateStreamsOutput struct {
 
 	// List of progress update streams up to the max number of results passed in
 	// the input.
-	ProgressUpdateStreamSummaryList []*ProgressUpdateStreamSummary `type:"list"`
+	ProgressUpdateStreamSummaryList []ProgressUpdateStreamSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -2168,7 +2168,7 @@ func (s *ListProgressUpdateStreamsOutput) SetNextToken(v string) *ListProgressUp
 }
 
 // SetProgressUpdateStreamSummaryList sets the ProgressUpdateStreamSummaryList field's value.
-func (s *ListProgressUpdateStreamsOutput) SetProgressUpdateStreamSummaryList(v []*ProgressUpdateStreamSummary) *ListProgressUpdateStreamsOutput {
+func (s *ListProgressUpdateStreamsOutput) SetProgressUpdateStreamSummaryList(v []ProgressUpdateStreamSummary) *ListProgressUpdateStreamsOutput {
 	s.ProgressUpdateStreamSummaryList = v
 	return s
 }
@@ -2184,7 +2184,7 @@ type MigrationTask struct {
 	// A name that identifies the vendor of the migration tool being used.
 	ProgressUpdateStream *string `min:"1" type:"string"`
 
-	ResourceAttributeList []*ResourceAttribute `type:"list"`
+	ResourceAttributeList []ResourceAttribute `type:"list"`
 
 	// Task object encapsulating task information.
 	Task *Task `type:"structure"`
@@ -2216,7 +2216,7 @@ func (s *MigrationTask) SetProgressUpdateStream(v string) *MigrationTask {
 }
 
 // SetResourceAttributeList sets the ResourceAttributeList field's value.
-func (s *MigrationTask) SetResourceAttributeList(v []*ResourceAttribute) *MigrationTask {
+func (s *MigrationTask) SetResourceAttributeList(v []ResourceAttribute) *MigrationTask {
 	s.ResourceAttributeList = v
 	return s
 }
@@ -2249,7 +2249,7 @@ type MigrationTaskSummary struct {
 	ProgressUpdateStream *string `min:"1" type:"string"`
 
 	// Status of the task.
-	Status Status `type:"string"`
+	Status Status `type:"string" enum:"true"`
 
 	// Detail information of what is being done within the overall status state.
 	StatusDetail *string `type:"string"`
@@ -2320,7 +2320,7 @@ type NotifyApplicationStateInput struct {
 	// Status of the application - Not Started, In-Progress, Complete.
 	//
 	// Status is a required field
-	Status ApplicationStatus `type:"string" required:"true"`
+	Status ApplicationStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2573,7 +2573,7 @@ type PutResourceAttributesInput struct {
 	// repository.
 	//
 	// ResourceAttributeList is a required field
-	ResourceAttributeList []*ResourceAttribute `min:"1" type:"list" required:"true"`
+	ResourceAttributeList []ResourceAttribute `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2612,9 +2612,6 @@ func (s *PutResourceAttributesInput) Validate() error {
 	}
 	if s.ResourceAttributeList != nil {
 		for i, v := range s.ResourceAttributeList {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceAttributeList", i), err.(aws.ErrInvalidParams))
 			}
@@ -2646,7 +2643,7 @@ func (s *PutResourceAttributesInput) SetProgressUpdateStream(v string) *PutResou
 }
 
 // SetResourceAttributeList sets the ResourceAttributeList field's value.
-func (s *PutResourceAttributesInput) SetResourceAttributeList(v []*ResourceAttribute) *PutResourceAttributesInput {
+func (s *PutResourceAttributesInput) SetResourceAttributeList(v []ResourceAttribute) *PutResourceAttributesInput {
 	s.ResourceAttributeList = v
 	return s
 }
@@ -2674,7 +2671,7 @@ type ResourceAttribute struct {
 	// Type of resource.
 	//
 	// Type is a required field
-	Type ResourceAttributeType `type:"string" required:"true"`
+	Type ResourceAttributeType `type:"string" required:"true" enum:"true"`
 
 	// Value of the resource type.
 	//
@@ -2735,7 +2732,7 @@ type Task struct {
 	// Status of the task - Not Started, In-Progress, Complete.
 	//
 	// Status is a required field
-	Status Status `type:"string" required:"true"`
+	Status Status `type:"string" required:"true" enum:"true"`
 
 	// Details of task status as notified by a migration tool. A tool might use
 	// this field to provide clarifying information about the status that is unique

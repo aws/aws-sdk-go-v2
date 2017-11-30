@@ -361,7 +361,7 @@ type Alias struct {
 	Name *string `type:"string"`
 
 	// A list of names for the alias, including the canonical name.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// The type of the alias.
 	Type *string `type:"string"`
@@ -384,7 +384,7 @@ func (s *Alias) SetName(v string) *Alias {
 }
 
 // SetNames sets the Names field's value.
-func (s *Alias) SetNames(v []*string) *Alias {
+func (s *Alias) SetNames(v []string) *Alias {
 	s.Names = v
 	return s
 }
@@ -512,7 +512,7 @@ type BatchGetTracesInput struct {
 	// Specify the trace IDs of requests for which to retrieve segments.
 	//
 	// TraceIds is a required field
-	TraceIds []*string `type:"list" required:"true"`
+	TraceIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -546,7 +546,7 @@ func (s *BatchGetTracesInput) SetNextToken(v string) *BatchGetTracesInput {
 }
 
 // SetTraceIds sets the TraceIds field's value.
-func (s *BatchGetTracesInput) SetTraceIds(v []*string) *BatchGetTracesInput {
+func (s *BatchGetTracesInput) SetTraceIds(v []string) *BatchGetTracesInput {
 	s.TraceIds = v
 	return s
 }
@@ -559,10 +559,10 @@ type BatchGetTracesOutput struct {
 	NextToken *string `type:"string"`
 
 	// Full traces for the specified requests.
-	Traces []*Trace `type:"list"`
+	Traces []Trace `type:"list"`
 
 	// Trace IDs of requests that haven't been processed.
-	UnprocessedTraceIds []*string `type:"list"`
+	UnprocessedTraceIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -582,13 +582,13 @@ func (s *BatchGetTracesOutput) SetNextToken(v string) *BatchGetTracesOutput {
 }
 
 // SetTraces sets the Traces field's value.
-func (s *BatchGetTracesOutput) SetTraces(v []*Trace) *BatchGetTracesOutput {
+func (s *BatchGetTracesOutput) SetTraces(v []Trace) *BatchGetTracesOutput {
 	s.Traces = v
 	return s
 }
 
 // SetUnprocessedTraceIds sets the UnprocessedTraceIds field's value.
-func (s *BatchGetTracesOutput) SetUnprocessedTraceIds(v []*string) *BatchGetTracesOutput {
+func (s *BatchGetTracesOutput) SetUnprocessedTraceIds(v []string) *BatchGetTracesOutput {
 	s.UnprocessedTraceIds = v
 	return s
 }
@@ -599,7 +599,7 @@ type Edge struct {
 	_ struct{} `type:"structure"`
 
 	// Aliases for the edge.
-	Aliases []*Alias `type:"list"`
+	Aliases []Alias `type:"list"`
 
 	// The end time of the last segment on the edge.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -608,7 +608,7 @@ type Edge struct {
 	ReferenceId *int64 `type:"integer"`
 
 	// A histogram that maps the spread of client response times on an edge.
-	ResponseTimeHistogram []*HistogramEntry `type:"list"`
+	ResponseTimeHistogram []HistogramEntry `type:"list"`
 
 	// The start time of the first segment on the edge.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -628,7 +628,7 @@ func (s Edge) GoString() string {
 }
 
 // SetAliases sets the Aliases field's value.
-func (s *Edge) SetAliases(v []*Alias) *Edge {
+func (s *Edge) SetAliases(v []Alias) *Edge {
 	s.Aliases = v
 	return s
 }
@@ -646,7 +646,7 @@ func (s *Edge) SetReferenceId(v int64) *Edge {
 }
 
 // SetResponseTimeHistogram sets the ResponseTimeHistogram field's value.
-func (s *Edge) SetResponseTimeHistogram(v []*HistogramEntry) *Edge {
+func (s *Edge) SetResponseTimeHistogram(v []HistogramEntry) *Edge {
 	s.ResponseTimeHistogram = v
 	return s
 }
@@ -879,7 +879,7 @@ type GetServiceGraphOutput struct {
 
 	// The services that have processed a traced request during the specified time
 	// frame.
-	Services []*Service `type:"list"`
+	Services []Service `type:"list"`
 
 	// The start of the time frame for which the graph was generated.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -908,7 +908,7 @@ func (s *GetServiceGraphOutput) SetNextToken(v string) *GetServiceGraphOutput {
 }
 
 // SetServices sets the Services field's value.
-func (s *GetServiceGraphOutput) SetServices(v []*Service) *GetServiceGraphOutput {
+func (s *GetServiceGraphOutput) SetServices(v []Service) *GetServiceGraphOutput {
 	s.Services = v
 	return s
 }
@@ -929,7 +929,7 @@ type GetTraceGraphInput struct {
 	// Trace IDs of requests for which to generate a service graph.
 	//
 	// TraceIds is a required field
-	TraceIds []*string `type:"list" required:"true"`
+	TraceIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -963,7 +963,7 @@ func (s *GetTraceGraphInput) SetNextToken(v string) *GetTraceGraphInput {
 }
 
 // SetTraceIds sets the TraceIds field's value.
-func (s *GetTraceGraphInput) SetTraceIds(v []*string) *GetTraceGraphInput {
+func (s *GetTraceGraphInput) SetTraceIds(v []string) *GetTraceGraphInput {
 	s.TraceIds = v
 	return s
 }
@@ -976,7 +976,7 @@ type GetTraceGraphOutput struct {
 	NextToken *string `type:"string"`
 
 	// The services that have processed one of the specified requests.
-	Services []*Service `type:"list"`
+	Services []Service `type:"list"`
 }
 
 // String returns the string representation
@@ -996,7 +996,7 @@ func (s *GetTraceGraphOutput) SetNextToken(v string) *GetTraceGraphOutput {
 }
 
 // SetServices sets the Services field's value.
-func (s *GetTraceGraphOutput) SetServices(v []*Service) *GetTraceGraphOutput {
+func (s *GetTraceGraphOutput) SetServices(v []Service) *GetTraceGraphOutput {
 	s.Services = v
 	return s
 }
@@ -1098,7 +1098,7 @@ type GetTraceSummariesOutput struct {
 	NextToken *string `type:"string"`
 
 	// Trace IDs and metadata for traces that were found in the specified time frame.
-	TraceSummaries []*TraceSummary `type:"list"`
+	TraceSummaries []TraceSummary `type:"list"`
 
 	// The number of traces that were processed to get this set of summaries.
 	TracesProcessedCount *int64 `type:"long"`
@@ -1127,7 +1127,7 @@ func (s *GetTraceSummariesOutput) SetNextToken(v string) *GetTraceSummariesOutpu
 }
 
 // SetTraceSummaries sets the TraceSummaries field's value.
-func (s *GetTraceSummariesOutput) SetTraceSummaries(v []*TraceSummary) *GetTraceSummariesOutput {
+func (s *GetTraceSummariesOutput) SetTraceSummaries(v []TraceSummary) *GetTraceSummariesOutput {
 	s.TraceSummaries = v
 	return s
 }
@@ -1245,7 +1245,7 @@ type PutTelemetryRecordsInput struct {
 	ResourceARN *string `type:"string"`
 
 	// TelemetryRecords is a required field
-	TelemetryRecords []*TelemetryRecord `type:"list" required:"true"`
+	TelemetryRecords []TelemetryRecord `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1291,7 +1291,7 @@ func (s *PutTelemetryRecordsInput) SetResourceARN(v string) *PutTelemetryRecords
 }
 
 // SetTelemetryRecords sets the TelemetryRecords field's value.
-func (s *PutTelemetryRecordsInput) SetTelemetryRecords(v []*TelemetryRecord) *PutTelemetryRecordsInput {
+func (s *PutTelemetryRecordsInput) SetTelemetryRecords(v []TelemetryRecord) *PutTelemetryRecordsInput {
 	s.TelemetryRecords = v
 	return s
 }
@@ -1318,7 +1318,7 @@ type PutTraceSegmentsInput struct {
 	// A string containing a JSON document defining one or more segments or subsegments.
 	//
 	// TraceSegmentDocuments is a required field
-	TraceSegmentDocuments []*string `type:"list" required:"true"`
+	TraceSegmentDocuments []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1346,7 +1346,7 @@ func (s *PutTraceSegmentsInput) Validate() error {
 }
 
 // SetTraceSegmentDocuments sets the TraceSegmentDocuments field's value.
-func (s *PutTraceSegmentsInput) SetTraceSegmentDocuments(v []*string) *PutTraceSegmentsInput {
+func (s *PutTraceSegmentsInput) SetTraceSegmentDocuments(v []string) *PutTraceSegmentsInput {
 	s.TraceSegmentDocuments = v
 	return s
 }
@@ -1356,7 +1356,7 @@ type PutTraceSegmentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Segments that failed processing.
-	UnprocessedTraceSegments []*UnprocessedTraceSegment `type:"list"`
+	UnprocessedTraceSegments []UnprocessedTraceSegment `type:"list"`
 }
 
 // String returns the string representation
@@ -1370,7 +1370,7 @@ func (s PutTraceSegmentsOutput) GoString() string {
 }
 
 // SetUnprocessedTraceSegments sets the UnprocessedTraceSegments field's value.
-func (s *PutTraceSegmentsOutput) SetUnprocessedTraceSegments(v []*UnprocessedTraceSegment) *PutTraceSegmentsOutput {
+func (s *PutTraceSegmentsOutput) SetUnprocessedTraceSegments(v []UnprocessedTraceSegment) *PutTraceSegmentsOutput {
 	s.UnprocessedTraceSegments = v
 	return s
 }
@@ -1423,10 +1423,10 @@ type Service struct {
 	AccountId *string `type:"string"`
 
 	// A histogram that maps the spread of service durations.
-	DurationHistogram []*HistogramEntry `type:"list"`
+	DurationHistogram []HistogramEntry `type:"list"`
 
 	// Connections to downstream services.
-	Edges []*Edge `type:"list"`
+	Edges []Edge `type:"list"`
 
 	// The end time of the last segment that the service generated.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1435,13 +1435,13 @@ type Service struct {
 	Name *string `type:"string"`
 
 	// A list of names for the service, including the canonical name.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// Identifier for the service. Unique within the service map.
 	ReferenceId *int64 `type:"integer"`
 
 	// A histogram that maps the spread of service response times.
-	ResponseTimeHistogram []*HistogramEntry `type:"list"`
+	ResponseTimeHistogram []HistogramEntry `type:"list"`
 
 	// Indicates that the service was the first service to process a request.
 	Root *bool `type:"boolean"`
@@ -1488,13 +1488,13 @@ func (s *Service) SetAccountId(v string) *Service {
 }
 
 // SetDurationHistogram sets the DurationHistogram field's value.
-func (s *Service) SetDurationHistogram(v []*HistogramEntry) *Service {
+func (s *Service) SetDurationHistogram(v []HistogramEntry) *Service {
 	s.DurationHistogram = v
 	return s
 }
 
 // SetEdges sets the Edges field's value.
-func (s *Service) SetEdges(v []*Edge) *Service {
+func (s *Service) SetEdges(v []Edge) *Service {
 	s.Edges = v
 	return s
 }
@@ -1512,7 +1512,7 @@ func (s *Service) SetName(v string) *Service {
 }
 
 // SetNames sets the Names field's value.
-func (s *Service) SetNames(v []*string) *Service {
+func (s *Service) SetNames(v []string) *Service {
 	s.Names = v
 	return s
 }
@@ -1524,7 +1524,7 @@ func (s *Service) SetReferenceId(v int64) *Service {
 }
 
 // SetResponseTimeHistogram sets the ResponseTimeHistogram field's value.
-func (s *Service) SetResponseTimeHistogram(v []*HistogramEntry) *Service {
+func (s *Service) SetResponseTimeHistogram(v []HistogramEntry) *Service {
 	s.ResponseTimeHistogram = v
 	return s
 }
@@ -1567,7 +1567,7 @@ type ServiceId struct {
 
 	Name *string `type:"string"`
 
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	Type *string `type:"string"`
 }
@@ -1595,7 +1595,7 @@ func (s *ServiceId) SetName(v string) *ServiceId {
 }
 
 // SetNames sets the Names field's value.
-func (s *ServiceId) SetNames(v []*string) *ServiceId {
+func (s *ServiceId) SetNames(v []string) *ServiceId {
 	s.Names = v
 	return s
 }
@@ -1744,7 +1744,7 @@ type Trace struct {
 	Id *string `min:"35" type:"string"`
 
 	// Segment documents for the segments and subsegments that comprise the trace.
-	Segments []*Segment `type:"list"`
+	Segments []Segment `type:"list"`
 }
 
 // String returns the string representation
@@ -1770,7 +1770,7 @@ func (s *Trace) SetId(v string) *Trace {
 }
 
 // SetSegments sets the Segments field's value.
-func (s *Trace) SetSegments(v []*Segment) *Trace {
+func (s *Trace) SetSegments(v []Segment) *Trace {
 	s.Segments = v
 	return s
 }
@@ -1781,7 +1781,7 @@ type TraceSummary struct {
 	_ struct{} `type:"structure"`
 
 	// Annotations from the trace's segment documents.
-	Annotations map[string][]*ValueWithServiceIds `type:"map"`
+	Annotations map[string][]ValueWithServiceIds `type:"map"`
 
 	// The length of time in seconds between the start time of the root segment
 	// and the end time of the last segment that completed.
@@ -1813,10 +1813,10 @@ type TraceSummary struct {
 	ResponseTime *float64 `type:"double"`
 
 	// Service IDs from the trace's segment documents.
-	ServiceIds []*ServiceId `type:"list"`
+	ServiceIds []ServiceId `type:"list"`
 
 	// Users from the trace's segment documents.
-	Users []*TraceUser `type:"list"`
+	Users []TraceUser `type:"list"`
 }
 
 // String returns the string representation
@@ -1830,7 +1830,7 @@ func (s TraceSummary) GoString() string {
 }
 
 // SetAnnotations sets the Annotations field's value.
-func (s *TraceSummary) SetAnnotations(v map[string][]*ValueWithServiceIds) *TraceSummary {
+func (s *TraceSummary) SetAnnotations(v map[string][]ValueWithServiceIds) *TraceSummary {
 	s.Annotations = v
 	return s
 }
@@ -1884,13 +1884,13 @@ func (s *TraceSummary) SetResponseTime(v float64) *TraceSummary {
 }
 
 // SetServiceIds sets the ServiceIds field's value.
-func (s *TraceSummary) SetServiceIds(v []*ServiceId) *TraceSummary {
+func (s *TraceSummary) SetServiceIds(v []ServiceId) *TraceSummary {
 	s.ServiceIds = v
 	return s
 }
 
 // SetUsers sets the Users field's value.
-func (s *TraceSummary) SetUsers(v []*TraceUser) *TraceSummary {
+func (s *TraceSummary) SetUsers(v []TraceUser) *TraceSummary {
 	s.Users = v
 	return s
 }
@@ -1901,7 +1901,7 @@ type TraceUser struct {
 	_ struct{} `type:"structure"`
 
 	// Services that the user's request hit.
-	ServiceIds []*ServiceId `type:"list"`
+	ServiceIds []ServiceId `type:"list"`
 
 	// The user's name.
 	UserName *string `type:"string"`
@@ -1918,7 +1918,7 @@ func (s TraceUser) GoString() string {
 }
 
 // SetServiceIds sets the ServiceIds field's value.
-func (s *TraceUser) SetServiceIds(v []*ServiceId) *TraceUser {
+func (s *TraceUser) SetServiceIds(v []ServiceId) *TraceUser {
 	s.ServiceIds = v
 	return s
 }
@@ -1981,7 +1981,7 @@ type ValueWithServiceIds struct {
 	AnnotationValue *AnnotationValue `type:"structure"`
 
 	// Services to which the annotation applies.
-	ServiceIds []*ServiceId `type:"list"`
+	ServiceIds []ServiceId `type:"list"`
 }
 
 // String returns the string representation
@@ -2001,7 +2001,7 @@ func (s *ValueWithServiceIds) SetAnnotationValue(v *AnnotationValue) *ValueWithS
 }
 
 // SetServiceIds sets the ServiceIds field's value.
-func (s *ValueWithServiceIds) SetServiceIds(v []*ServiceId) *ValueWithServiceIds {
+func (s *ValueWithServiceIds) SetServiceIds(v []ServiceId) *ValueWithServiceIds {
 	s.ServiceIds = v
 	return s
 }

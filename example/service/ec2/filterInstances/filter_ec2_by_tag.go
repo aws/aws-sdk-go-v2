@@ -30,11 +30,11 @@ func main() {
 
 	fmt.Printf("listing instances with tag %v in: %v\n", nameFilter, awsRegion)
 	params := &ec2.DescribeInstancesInput{
-		Filters: []*ec2.Filter{
+		Filters: []ec2.Filter{
 			{
 				Name: aws.String("tag:Name"),
-				Values: []*string{
-					aws.String(strings.Join([]string{"*", nameFilter, "*"}, "")),
+				Values: []string{
+					strings.Join([]string{"*", nameFilter, "*"}, ""),
 				},
 			},
 		},

@@ -36,9 +36,9 @@ func ExampleCodeBuild_BatchGetBuildsRequest_shared00() {
 
 	svc := codebuild.New(cfg)
 	input := &codebuild.BatchGetBuildsInput{
-		Ids: []*string{
-			aws.String("codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX"),
-			aws.String("codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX"),
+		Ids: []string{
+			"codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX",
+			"codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX",
 		},
 	}
 

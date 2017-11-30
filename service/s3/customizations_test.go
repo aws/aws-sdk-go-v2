@@ -36,10 +36,10 @@ func TestMD5InPutBucketCors(t *testing.T) {
 	req := svc.PutBucketCorsRequest(&s3.PutBucketCorsInput{
 		Bucket: aws.String("bucketname"),
 		CORSConfiguration: &s3.CORSConfiguration{
-			CORSRules: []*s3.CORSRule{
+			CORSRules: []s3.CORSRule{
 				{
-					AllowedMethods: []*string{aws.String("GET")},
-					AllowedOrigins: []*string{aws.String("*")},
+					AllowedMethods: []string{"GET"},
+					AllowedOrigins: []string{"*"},
 				},
 			},
 		},
@@ -52,7 +52,7 @@ func TestMD5InPutBucketLifecycle(t *testing.T) {
 	req := svc.PutBucketLifecycleRequest(&s3.PutBucketLifecycleInput{
 		Bucket: aws.String("bucketname"),
 		LifecycleConfiguration: &s3.LifecycleConfiguration{
-			Rules: []*s3.Rule{
+			Rules: []s3.Rule{
 				{
 					ID:     aws.String("ID"),
 					Prefix: aws.String("Prefix"),
@@ -78,7 +78,7 @@ func TestMD5InPutBucketTagging(t *testing.T) {
 	req := svc.PutBucketTaggingRequest(&s3.PutBucketTaggingInput{
 		Bucket: aws.String("bucketname"),
 		Tagging: &s3.Tagging{
-			TagSet: []*s3.Tag{
+			TagSet: []s3.Tag{
 				{Key: aws.String("KEY"), Value: aws.String("VALUE")},
 			},
 		},
@@ -91,7 +91,7 @@ func TestMD5InDeleteObjects(t *testing.T) {
 	req := svc.DeleteObjectsRequest(&s3.DeleteObjectsInput{
 		Bucket: aws.String("bucketname"),
 		Delete: &s3.Delete{
-			Objects: []*s3.ObjectIdentifier{
+			Objects: []s3.ObjectIdentifier{
 				{Key: aws.String("key")},
 			},
 		},
@@ -104,7 +104,7 @@ func TestMD5InPutBucketLifecycleConfiguration(t *testing.T) {
 	req := svc.PutBucketLifecycleConfigurationRequest(&s3.PutBucketLifecycleConfigurationInput{
 		Bucket: aws.String("bucketname"),
 		LifecycleConfiguration: &s3.BucketLifecycleConfiguration{
-			Rules: []*s3.LifecycleRule{
+			Rules: []s3.LifecycleRule{
 				{Prefix: aws.String("prefix"), Status: s3.ExpirationStatusEnabled},
 			},
 		},
@@ -134,19 +134,14 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 		Bucket: aws.String("my_bucket"),
 		Key:    aws.String("my_key"),
 		Body:   strings.NewReader(""),
-		Metadata: func() map[string]*string {
-			v := map[string]*string{}
-			v[utf8KeySuffix] = aws.String(utf8Value)
+		Metadata: func() map[string]string {
+			v := map[string]string{}
+			v[utf8KeySuffix] = utf8Value
 			return v
 		}(),
 	})
+
 	_, err := req.Send()
-
-	req.Handlers.UnmarshalMeta.PushBack(func(r *request.Request) {
-		t.Log("WEE")
-	})
-
-	_, err = req.Send()
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -172,7 +167,7 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 	}
 	resp.Body.Close()
 
-	if e, a := utf8Value, *resp.Metadata[utf8KeySuffix]; e != a {
+	if e, a := utf8Value, resp.Metadata[utf8KeySuffix]; e != a {
 		t.Errorf("expected %s, but received %s", e, a)
 	}
 

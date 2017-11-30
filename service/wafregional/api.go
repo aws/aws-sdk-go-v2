@@ -3143,7 +3143,7 @@ type ListResourcesForWebACLOutput struct {
 	// An array of ARNs (Amazon Resource Names) of the resources associated with
 	// the specified web ACL. An array with zero elements is returned if there are
 	// no resources associated with the web ACL.
-	ResourceArns []*string `type:"list"`
+	ResourceArns []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3157,7 +3157,7 @@ func (s ListResourcesForWebACLOutput) GoString() string {
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *ListResourcesForWebACLOutput) SetResourceArns(v []*string) *ListResourcesForWebACLOutput {
+func (s *ListResourcesForWebACLOutput) SetResourceArns(v []string) *ListResourcesForWebACLOutput {
 	s.ResourceArns = v
 	return s
 }

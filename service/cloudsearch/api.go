@@ -1203,7 +1203,7 @@ type AnalysisOptions struct {
 	// The available levels vary depending on the language. For more information,
 	// see Language Specific Text Processing Settings (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings)
 	// in the Amazon CloudSearch Developer Guide
-	AlgorithmicStemming AlgorithmicStemming `type:"string"`
+	AlgorithmicStemming AlgorithmicStemming `type:"string" enum:"true"`
 
 	// A JSON array that contains a collection of terms, tokens, readings and part
 	// of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary
@@ -1291,7 +1291,7 @@ type AnalysisScheme struct {
 	// for multiple languages.
 	//
 	// AnalysisSchemeLanguage is a required field
-	AnalysisSchemeLanguage AnalysisSchemeLanguage `type:"string" required:"true"`
+	AnalysisSchemeLanguage AnalysisSchemeLanguage `type:"string" required:"true" enum:"true"`
 
 	// Names must begin with a letter and can contain the following characters:
 	// a-z (lowercase), 0-9, and _ (underscore).
@@ -1478,7 +1478,7 @@ type BuildSuggestersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of field names.
-	FieldNames []*string `type:"list"`
+	FieldNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -1492,7 +1492,7 @@ func (s BuildSuggestersOutput) GoString() string {
 }
 
 // SetFieldNames sets the FieldNames field's value.
-func (s *BuildSuggestersOutput) SetFieldNames(v []*string) *BuildSuggestersOutput {
+func (s *BuildSuggestersOutput) SetFieldNames(v []string) *BuildSuggestersOutput {
 	s.FieldNames = v
 	return s
 }
@@ -2561,7 +2561,7 @@ type DescribeAnalysisSchemesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The analysis schemes you want to describe.
-	AnalysisSchemeNames []*string `type:"list"`
+	AnalysisSchemeNames []string `type:"list"`
 
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
@@ -2601,7 +2601,7 @@ func (s *DescribeAnalysisSchemesInput) Validate() error {
 }
 
 // SetAnalysisSchemeNames sets the AnalysisSchemeNames field's value.
-func (s *DescribeAnalysisSchemesInput) SetAnalysisSchemeNames(v []*string) *DescribeAnalysisSchemesInput {
+func (s *DescribeAnalysisSchemesInput) SetAnalysisSchemeNames(v []string) *DescribeAnalysisSchemesInput {
 	s.AnalysisSchemeNames = v
 	return s
 }
@@ -2626,7 +2626,7 @@ type DescribeAnalysisSchemesOutput struct {
 	// The analysis scheme descriptions.
 	//
 	// AnalysisSchemes is a required field
-	AnalysisSchemes []*AnalysisSchemeStatus `type:"list" required:"true"`
+	AnalysisSchemes []AnalysisSchemeStatus `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2640,7 +2640,7 @@ func (s DescribeAnalysisSchemesOutput) GoString() string {
 }
 
 // SetAnalysisSchemes sets the AnalysisSchemes field's value.
-func (s *DescribeAnalysisSchemesOutput) SetAnalysisSchemes(v []*AnalysisSchemeStatus) *DescribeAnalysisSchemesOutput {
+func (s *DescribeAnalysisSchemesOutput) SetAnalysisSchemes(v []AnalysisSchemeStatus) *DescribeAnalysisSchemesOutput {
 	s.AnalysisSchemes = v
 	return s
 }
@@ -2734,7 +2734,7 @@ type DescribeDomainsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the domains you want to include in the response.
-	DomainNames []*string `type:"list"`
+	DomainNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2748,7 +2748,7 @@ func (s DescribeDomainsInput) GoString() string {
 }
 
 // SetDomainNames sets the DomainNames field's value.
-func (s *DescribeDomainsInput) SetDomainNames(v []*string) *DescribeDomainsInput {
+func (s *DescribeDomainsInput) SetDomainNames(v []string) *DescribeDomainsInput {
 	s.DomainNames = v
 	return s
 }
@@ -2761,7 +2761,7 @@ type DescribeDomainsOutput struct {
 	// A list that contains the status of each requested domain.
 	//
 	// DomainStatusList is a required field
-	DomainStatusList []*DomainStatus `type:"list" required:"true"`
+	DomainStatusList []DomainStatus `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2775,7 +2775,7 @@ func (s DescribeDomainsOutput) GoString() string {
 }
 
 // SetDomainStatusList sets the DomainStatusList field's value.
-func (s *DescribeDomainsOutput) SetDomainStatusList(v []*DomainStatus) *DescribeDomainsOutput {
+func (s *DescribeDomainsOutput) SetDomainStatusList(v []DomainStatus) *DescribeDomainsOutput {
 	s.DomainStatusList = v
 	return s
 }
@@ -2799,7 +2799,7 @@ type DescribeExpressionsInput struct {
 
 	// Limits the DescribeExpressions response to the specified expressions. If
 	// not specified, all expressions are shown.
-	ExpressionNames []*string `type:"list"`
+	ExpressionNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2842,7 +2842,7 @@ func (s *DescribeExpressionsInput) SetDomainName(v string) *DescribeExpressionsI
 }
 
 // SetExpressionNames sets the ExpressionNames field's value.
-func (s *DescribeExpressionsInput) SetExpressionNames(v []*string) *DescribeExpressionsInput {
+func (s *DescribeExpressionsInput) SetExpressionNames(v []string) *DescribeExpressionsInput {
 	s.ExpressionNames = v
 	return s
 }
@@ -2855,7 +2855,7 @@ type DescribeExpressionsOutput struct {
 	// The expressions configured for the domain.
 	//
 	// Expressions is a required field
-	Expressions []*ExpressionStatus `type:"list" required:"true"`
+	Expressions []ExpressionStatus `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2869,7 +2869,7 @@ func (s DescribeExpressionsOutput) GoString() string {
 }
 
 // SetExpressions sets the Expressions field's value.
-func (s *DescribeExpressionsOutput) SetExpressions(v []*ExpressionStatus) *DescribeExpressionsOutput {
+func (s *DescribeExpressionsOutput) SetExpressions(v []ExpressionStatus) *DescribeExpressionsOutput {
 	s.Expressions = v
 	return s
 }
@@ -2893,7 +2893,7 @@ type DescribeIndexFieldsInput struct {
 
 	// A list of the index fields you want to describe. If not specified, information
 	// is returned for all configured index fields.
-	FieldNames []*string `type:"list"`
+	FieldNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2936,7 +2936,7 @@ func (s *DescribeIndexFieldsInput) SetDomainName(v string) *DescribeIndexFieldsI
 }
 
 // SetFieldNames sets the FieldNames field's value.
-func (s *DescribeIndexFieldsInput) SetFieldNames(v []*string) *DescribeIndexFieldsInput {
+func (s *DescribeIndexFieldsInput) SetFieldNames(v []string) *DescribeIndexFieldsInput {
 	s.FieldNames = v
 	return s
 }
@@ -2949,7 +2949,7 @@ type DescribeIndexFieldsOutput struct {
 	// The index fields configured for the domain.
 	//
 	// IndexFields is a required field
-	IndexFields []*IndexFieldStatus `type:"list" required:"true"`
+	IndexFields []IndexFieldStatus `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2963,7 +2963,7 @@ func (s DescribeIndexFieldsOutput) GoString() string {
 }
 
 // SetIndexFields sets the IndexFields field's value.
-func (s *DescribeIndexFieldsOutput) SetIndexFields(v []*IndexFieldStatus) *DescribeIndexFieldsOutput {
+func (s *DescribeIndexFieldsOutput) SetIndexFields(v []IndexFieldStatus) *DescribeIndexFieldsOutput {
 	s.IndexFields = v
 	return s
 }
@@ -3142,7 +3142,7 @@ type DescribeSuggestersInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 
 	// The suggesters you want to describe.
-	SuggesterNames []*string `type:"list"`
+	SuggesterNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3185,7 +3185,7 @@ func (s *DescribeSuggestersInput) SetDomainName(v string) *DescribeSuggestersInp
 }
 
 // SetSuggesterNames sets the SuggesterNames field's value.
-func (s *DescribeSuggestersInput) SetSuggesterNames(v []*string) *DescribeSuggestersInput {
+func (s *DescribeSuggestersInput) SetSuggesterNames(v []string) *DescribeSuggestersInput {
 	s.SuggesterNames = v
 	return s
 }
@@ -3197,7 +3197,7 @@ type DescribeSuggestersOutput struct {
 	// The suggesters configured for the domain specified in the request.
 	//
 	// Suggesters is a required field
-	Suggesters []*SuggesterStatus `type:"list" required:"true"`
+	Suggesters []SuggesterStatus `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3211,7 +3211,7 @@ func (s DescribeSuggestersOutput) GoString() string {
 }
 
 // SetSuggesters sets the Suggesters field's value.
-func (s *DescribeSuggestersOutput) SetSuggesters(v []*SuggesterStatus) *DescribeSuggestersOutput {
+func (s *DescribeSuggestersOutput) SetSuggesters(v []SuggesterStatus) *DescribeSuggestersOutput {
 	s.Suggesters = v
 	return s
 }
@@ -3225,7 +3225,7 @@ type DocumentSuggesterOptions struct {
 	// With low, suggestions must differ from the specified string by no more than
 	// one character. With high, suggestions can differ by up to two characters.
 	// The default is none.
-	FuzzyMatching SuggesterFuzzyMatching `type:"string"`
+	FuzzyMatching SuggesterFuzzyMatching `type:"string" enum:"true"`
 
 	// An expression that computes a score for each suggestion to control how they
 	// are sorted. The scores are rounded to the nearest integer, with a floor of
@@ -3740,7 +3740,7 @@ type IndexDocumentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the fields that are currently being indexed.
-	FieldNames []*string `type:"list"`
+	FieldNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3754,7 +3754,7 @@ func (s IndexDocumentsOutput) GoString() string {
 }
 
 // SetFieldNames sets the FieldNames field's value.
-func (s *IndexDocumentsOutput) SetFieldNames(v []*string) *IndexDocumentsOutput {
+func (s *IndexDocumentsOutput) SetFieldNames(v []string) *IndexDocumentsOutput {
 	s.FieldNames = v
 	return s
 }
@@ -3807,7 +3807,7 @@ type IndexField struct {
 	// in the Amazon CloudSearch Developer Guide.
 	//
 	// IndexFieldType is a required field
-	IndexFieldType IndexFieldType `type:"string" required:"true"`
+	IndexFieldType IndexFieldType `type:"string" required:"true" enum:"true"`
 
 	// Options for a field that contains an array of 64-bit signed integers. Present
 	// if IndexFieldType specifies the field is of type int-array. All options are
@@ -4315,7 +4315,7 @@ type ListDomainNamesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the search domains owned by an account.
-	DomainNames map[string]*string `type:"map"`
+	DomainNames map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -4329,7 +4329,7 @@ func (s ListDomainNamesOutput) GoString() string {
 }
 
 // SetDomainNames sets the DomainNames field's value.
-func (s *ListDomainNamesOutput) SetDomainNames(v map[string]*string) *ListDomainNamesOutput {
+func (s *ListDomainNamesOutput) SetDomainNames(v map[string]string) *ListDomainNamesOutput {
 	s.DomainNames = v
 	return s
 }
@@ -4516,7 +4516,7 @@ type OptionStatus struct {
 	//    option value or update or remove the incompatible documents.
 	//
 	// State is a required field
-	State OptionState `type:"string" required:"true"`
+	State OptionState `type:"string" required:"true" enum:"true"`
 
 	// A timestamp for when this option was last updated.
 	//
@@ -4573,7 +4573,7 @@ type ScalingParameters struct {
 
 	// The instance type that you want to preconfigure for your domain. For example,
 	// search.m1.small.
-	DesiredInstanceType PartitionInstanceType `type:"string"`
+	DesiredInstanceType PartitionInstanceType `type:"string" enum:"true"`
 
 	// The number of partitions you want to preconfigure for your domain. Only valid
 	// when you select m2.2xlarge as the desired instance type.

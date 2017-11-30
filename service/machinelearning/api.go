@@ -1647,13 +1647,13 @@ type AddTagsInput struct {
 	// The type of the ML object to tag.
 	//
 	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true"`
+	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
 
 	// The key-value pairs to use to create tags. If you specify a key without specifying
 	// a value, Amazon ML creates a tag with the specified key and a value of null.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1685,9 +1685,6 @@ func (s *AddTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1713,7 +1710,7 @@ func (s *AddTagsInput) SetResourceType(v TaggableResourceType) *AddTagsInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsInput) SetTags(v []*Tag) *AddTagsInput {
+func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 	s.Tags = v
 	return s
 }
@@ -1726,7 +1723,7 @@ type AddTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the ML object that was tagged.
-	ResourceType TaggableResourceType `type:"string"`
+	ResourceType TaggableResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1820,7 +1817,7 @@ type BatchPrediction struct {
 	//    It is not usable.
 	//    * COMPLETED - The batch prediction process completed successfully.
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// Long integer type that is a 64-bit signed number.
 	TotalRecordCount *int64 `type:"long"`
@@ -2636,7 +2633,7 @@ type CreateMLModelInput struct {
 	// For more information, see the Amazon Machine Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
 	//
 	// MLModelType is a required field
-	MLModelType MLModelType `type:"string" required:"true"`
+	MLModelType MLModelType `type:"string" required:"true" enum:"true"`
 
 	// A list of the training parameters in the MLModel. The list is implemented
 	// as a map of key-value pairs.
@@ -2676,7 +2673,7 @@ type CreateMLModelInput struct {
 	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
-	Parameters map[string]*string `type:"map"`
+	Parameters map[string]string `type:"map"`
 
 	// The data recipe for creating the MLModel. You must specify either the recipe
 	// or its URI. If you don't specify a recipe or its URI, Amazon ML creates a
@@ -2750,7 +2747,7 @@ func (s *CreateMLModelInput) SetMLModelType(v MLModelType) *CreateMLModelInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateMLModelInput) SetParameters(v map[string]*string) *CreateMLModelInput {
+func (s *CreateMLModelInput) SetParameters(v map[string]string) *CreateMLModelInput {
 	s.Parameters = v
 	return s
 }
@@ -2960,7 +2957,7 @@ type DataSource struct {
 	//    It is not usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3448,12 +3445,12 @@ type DeleteTagsInput struct {
 	// The type of the tagged ML object.
 	//
 	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true"`
+	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
 
 	// One or more tags to delete.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3503,7 +3500,7 @@ func (s *DeleteTagsInput) SetResourceType(v TaggableResourceType) *DeleteTagsInp
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DeleteTagsInput) SetTagKeys(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -3516,7 +3513,7 @@ type DeleteTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the ML object from which tags were deleted.
-	ResourceType TaggableResourceType `type:"string"`
+	ResourceType TaggableResourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3564,7 +3561,7 @@ type DescribeBatchPredictionsInput struct {
 	//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
-	FilterVariable BatchPredictionFilterVariable `type:"string"`
+	FilterVariable BatchPredictionFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The BatchPrediction results will have
 	// FilterVariable values that are greater than or equal to the value specified
@@ -3614,7 +3611,7 @@ type DescribeBatchPredictionsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3716,7 +3713,7 @@ type DescribeBatchPredictionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of BatchPrediction objects that meet the search criteria.
-	Results []*BatchPrediction `type:"list"`
+	Results []BatchPrediction `type:"list"`
 }
 
 // String returns the string representation
@@ -3736,7 +3733,7 @@ func (s *DescribeBatchPredictionsOutput) SetNextToken(v string) *DescribeBatchPr
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeBatchPredictionsOutput) SetResults(v []*BatchPrediction) *DescribeBatchPredictionsOutput {
+func (s *DescribeBatchPredictionsOutput) SetResults(v []BatchPrediction) *DescribeBatchPredictionsOutput {
 	s.Results = v
 	return s
 }
@@ -3758,7 +3755,7 @@ type DescribeDataSourcesInput struct {
 	//    Simple Storage Service (Amazon S3) bucket or directory.
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the DataSource creation.
-	FilterVariable DataSourceFilterVariable `type:"string"`
+	FilterVariable DataSourceFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The DataSource results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -3805,7 +3802,7 @@ type DescribeDataSourcesInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3907,7 +3904,7 @@ type DescribeDataSourcesOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of DataSource that meet the search criteria.
-	Results []*DataSource `type:"list"`
+	Results []DataSource `type:"list"`
 }
 
 // String returns the string representation
@@ -3927,7 +3924,7 @@ func (s *DescribeDataSourcesOutput) SetNextToken(v string) *DescribeDataSourcesO
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeDataSourcesOutput) SetResults(v []*DataSource) *DescribeDataSourcesOutput {
+func (s *DescribeDataSourcesOutput) SetResults(v []DataSource) *DescribeDataSourcesOutput {
 	s.Results = v
 	return s
 }
@@ -3954,7 +3951,7 @@ type DescribeEvaluationsInput struct {
 	//    * DataUri - Sets the search criteria to the data file(s) used in Evaluation.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
-	FilterVariable EvaluationFilterVariable `type:"string"`
+	FilterVariable EvaluationFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The Evaluation results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -4001,7 +3998,7 @@ type DescribeEvaluationsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4103,7 +4100,7 @@ type DescribeEvaluationsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of Evaluation that meet the search criteria.
-	Results []*Evaluation `type:"list"`
+	Results []Evaluation `type:"list"`
 }
 
 // String returns the string representation
@@ -4123,7 +4120,7 @@ func (s *DescribeEvaluationsOutput) SetNextToken(v string) *DescribeEvaluationsO
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeEvaluationsOutput) SetResults(v []*Evaluation) *DescribeEvaluationsOutput {
+func (s *DescribeEvaluationsOutput) SetResults(v []Evaluation) *DescribeEvaluationsOutput {
 	s.Results = v
 	return s
 }
@@ -4153,7 +4150,7 @@ type DescribeMLModelsInput struct {
 	//    * TrainingDataURI - Sets the search criteria to the data file(s) used
 	//    in training a MLModel. The URL can identify either a file or an Amazon
 	//    Simple Storage Service (Amazon S3) bucket or directory.
-	FilterVariable MLModelFilterVariable `type:"string"`
+	FilterVariable MLModelFilterVariable `type:"string" enum:"true"`
 
 	// The greater than or equal to operator. The MLModel results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -4201,7 +4198,7 @@ type DescribeMLModelsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string"`
+	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4303,7 +4300,7 @@ type DescribeMLModelsOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of MLModel that meet the search criteria.
-	Results []*MLModel `type:"list"`
+	Results []MLModel `type:"list"`
 }
 
 // String returns the string representation
@@ -4323,7 +4320,7 @@ func (s *DescribeMLModelsOutput) SetNextToken(v string) *DescribeMLModelsOutput 
 }
 
 // SetResults sets the Results field's value.
-func (s *DescribeMLModelsOutput) SetResults(v []*MLModel) *DescribeMLModelsOutput {
+func (s *DescribeMLModelsOutput) SetResults(v []MLModel) *DescribeMLModelsOutput {
 	s.Results = v
 	return s
 }
@@ -4339,7 +4336,7 @@ type DescribeTagsInput struct {
 	// The type of the ML object.
 	//
 	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true"`
+	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4392,10 +4389,10 @@ type DescribeTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the tagged ML object.
-	ResourceType TaggableResourceType `type:"string"`
+	ResourceType TaggableResourceType `type:"string" enum:"true"`
 
 	// A list of tags associated with the ML object.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4421,7 +4418,7 @@ func (s *DescribeTagsOutput) SetResourceType(v TaggableResourceType) *DescribeTa
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []*Tag) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTags(v []Tag) *DescribeTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -4502,7 +4499,7 @@ type Evaluation struct {
 	//    It is not usable.
 	//    * COMPLETED - The evaluation process completed successfully.
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4716,7 +4713,7 @@ type GetBatchPredictionOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The batch prediction process completed successfully.
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// The number of total records that Amazon Machine Learning saw while processing
 	// the BatchPrediction.
@@ -4978,7 +4975,7 @@ type GetDataSourceOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5235,7 +5232,7 @@ type GetEvaluationOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The evaluation process completed successfully.
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5441,7 +5438,7 @@ type GetMLModelOutput struct {
 	//    an e-commerce website?"
 	//    * MULTICLASS -- Produces one of several possible results. For example,
 	//    "Is this a HIGH, LOW or MEDIUM risk trade?"
-	MLModelType MLModelType `type:"string"`
+	MLModelType MLModelType `type:"string" enum:"true"`
 
 	// A description of the most recent details about accessing the MLModel.
 	Message *string `type:"string"`
@@ -5490,7 +5487,7 @@ type GetMLModelOutput struct {
 	//
 	//    * COMPLETED - The request completed successfully.
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// The ID of the training DataSource.
 	TrainingDataSourceId *string `min:"1" type:"string"`
@@ -5533,7 +5530,7 @@ type GetMLModelOutput struct {
 	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
-	TrainingParameters map[string]*string `type:"map"`
+	TrainingParameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5667,7 +5664,7 @@ func (s *GetMLModelOutput) SetTrainingDataSourceId(v string) *GetMLModelOutput {
 }
 
 // SetTrainingParameters sets the TrainingParameters field's value.
-func (s *GetMLModelOutput) SetTrainingParameters(v map[string]*string) *GetMLModelOutput {
+func (s *GetMLModelOutput) SetTrainingParameters(v map[string]string) *GetMLModelOutput {
 	s.TrainingParameters = v
 	return s
 }
@@ -5683,7 +5680,7 @@ type MLModel struct {
 	//
 	//    * SGD -- Stochastic gradient descent. The goal of SGD is to minimize the
 	//    gradient of the loss function.
-	Algorithm Algorithm `type:"string"`
+	Algorithm Algorithm `type:"string" enum:"true"`
 
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64 `type:"long"`
@@ -5721,7 +5718,7 @@ type MLModel struct {
 	//    a child-friendly web site?".
 	//    * MULTICLASS - Produces one of several possible results. For example,
 	//    "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
-	MLModelType MLModelType `type:"string"`
+	MLModelType MLModelType `type:"string" enum:"true"`
 
 	// A description of the most recent details about accessing the MLModel.
 	Message *string `type:"string"`
@@ -5751,7 +5748,7 @@ type MLModel struct {
 	//    The model isn't usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
-	Status EntityStatus `type:"string"`
+	Status EntityStatus `type:"string" enum:"true"`
 
 	// The ID of the training DataSource. The CreateMLModel operation uses the TrainingDataSourceId.
 	TrainingDataSourceId *string `min:"1" type:"string"`
@@ -5794,7 +5791,7 @@ type MLModel struct {
 	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
-	TrainingParameters map[string]*string `type:"map"`
+	TrainingParameters map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5916,7 +5913,7 @@ func (s *MLModel) SetTrainingDataSourceId(v string) *MLModel {
 }
 
 // SetTrainingParameters sets the TrainingParameters field's value.
-func (s *MLModel) SetTrainingParameters(v map[string]*string) *MLModel {
+func (s *MLModel) SetTrainingParameters(v map[string]string) *MLModel {
 	s.TrainingParameters = v
 	return s
 }
@@ -5939,7 +5936,7 @@ func (s *MLModel) SetTrainingParameters(v map[string]*string) *MLModel {
 type PerformanceMetrics struct {
 	_ struct{} `type:"structure"`
 
-	Properties map[string]*string `type:"map"`
+	Properties map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5953,7 +5950,7 @@ func (s PerformanceMetrics) GoString() string {
 }
 
 // SetProperties sets the Properties field's value.
-func (s *PerformanceMetrics) SetProperties(v map[string]*string) *PerformanceMetrics {
+func (s *PerformanceMetrics) SetProperties(v map[string]string) *PerformanceMetrics {
 	s.Properties = v
 	return s
 }
@@ -5972,7 +5969,7 @@ type PredictInput struct {
 	// A map of variable name-value pairs that represent an observation.
 	//
 	// Record is a required field
-	Record map[string]*string `type:"map" required:"true"`
+	Record map[string]string `type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -6023,7 +6020,7 @@ func (s *PredictInput) SetPredictEndpoint(v string) *PredictInput {
 }
 
 // SetRecord sets the Record field's value.
-func (s *PredictInput) SetRecord(v map[string]*string) *PredictInput {
+func (s *PredictInput) SetRecord(v map[string]string) *PredictInput {
 	s.Record = v
 	return s
 }
@@ -6078,13 +6075,13 @@ type Prediction struct {
 	_ struct{} `type:"structure"`
 
 	// Provides any additional details regarding the prediction.
-	Details map[string]*string `locationName:"details" type:"map"`
+	Details map[string]string `locationName:"details" type:"map"`
 
 	// The prediction label for either a BINARY or MULTICLASSMLModel.
 	PredictedLabel *string `locationName:"predictedLabel" min:"1" type:"string"`
 
 	// Provides the raw classification score corresponding to each label.
-	PredictedScores map[string]*float64 `locationName:"predictedScores" type:"map"`
+	PredictedScores map[string]float64 `locationName:"predictedScores" type:"map"`
 
 	// The prediction value for REGRESSIONMLModel
 	PredictedValue *float64 `locationName:"predictedValue" type:"float"`
@@ -6101,7 +6098,7 @@ func (s Prediction) GoString() string {
 }
 
 // SetDetails sets the Details field's value.
-func (s *Prediction) SetDetails(v map[string]*string) *Prediction {
+func (s *Prediction) SetDetails(v map[string]string) *Prediction {
 	s.Details = v
 	return s
 }
@@ -6113,7 +6110,7 @@ func (s *Prediction) SetPredictedLabel(v string) *Prediction {
 }
 
 // SetPredictedScores sets the PredictedScores field's value.
-func (s *Prediction) SetPredictedScores(v map[string]*float64) *Prediction {
+func (s *Prediction) SetPredictedScores(v map[string]float64) *Prediction {
 	s.PredictedScores = v
 	return s
 }
@@ -6278,7 +6275,7 @@ type RDSDataSpec struct {
 	// the copy operation from Amazon RDS to an Amazon S3 task.
 	//
 	// SecurityGroupIds is a required field
-	SecurityGroupIds []*string `type:"list" required:"true"`
+	SecurityGroupIds []string `type:"list" required:"true"`
 
 	// The query that is used to retrieve the observation data for the DataSource.
 	//
@@ -6418,7 +6415,7 @@ func (s *RDSDataSpec) SetS3StagingLocation(v string) *RDSDataSpec {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RDSDataSpec) SetSecurityGroupIds(v []*string) *RDSDataSpec {
+func (s *RDSDataSpec) SetSecurityGroupIds(v []string) *RDSDataSpec {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -6661,7 +6658,7 @@ type RealtimeEndpointInfo struct {
 	//    * NONE - Endpoint does not exist or was previously deleted.
 	//    * READY - Endpoint is ready to be used for real-time predictions.
 	//    * UPDATING - Updating/creating the endpoint.
-	EndpointStatus RealtimeEndpointStatus `type:"string"`
+	EndpointStatus RealtimeEndpointStatus `type:"string" enum:"true"`
 
 	// The URI that specifies where to send real-time prediction requests for the
 	// MLModel.

@@ -2039,12 +2039,12 @@ type AddAttributesToFindingsInput struct {
 	// The array of attributes that you want to assign to specified findings.
 	//
 	// Attributes is a required field
-	Attributes []*Attribute `locationName:"attributes" type:"list" required:"true"`
+	Attributes []Attribute `locationName:"attributes" type:"list" required:"true"`
 
 	// The ARNs that specify the findings that you want to assign attributes to.
 	//
 	// FindingArns is a required field
-	FindingArns []*string `locationName:"findingArns" min:"1" type:"list" required:"true"`
+	FindingArns []string `locationName:"findingArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2073,9 +2073,6 @@ func (s *AddAttributesToFindingsInput) Validate() error {
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -2089,13 +2086,13 @@ func (s *AddAttributesToFindingsInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *AddAttributesToFindingsInput) SetAttributes(v []*Attribute) *AddAttributesToFindingsInput {
+func (s *AddAttributesToFindingsInput) SetAttributes(v []Attribute) *AddAttributesToFindingsInput {
 	s.Attributes = v
 	return s
 }
 
 // SetFindingArns sets the FindingArns field's value.
-func (s *AddAttributesToFindingsInput) SetFindingArns(v []*string) *AddAttributesToFindingsInput {
+func (s *AddAttributesToFindingsInput) SetFindingArns(v []string) *AddAttributesToFindingsInput {
 	s.FindingArns = v
 	return s
 }
@@ -2108,7 +2105,7 @@ type AddAttributesToFindingsOutput struct {
 	// each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -2122,7 +2119,7 @@ func (s AddAttributesToFindingsOutput) GoString() string {
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *AddAttributesToFindingsOutput) SetFailedItems(v map[string]*FailedItemDetails) *AddAttributesToFindingsOutput {
+func (s *AddAttributesToFindingsOutput) SetFailedItems(v map[string]FailedItemDetails) *AddAttributesToFindingsOutput {
 	s.FailedItems = v
 	return s
 }
@@ -2304,7 +2301,7 @@ type AssessmentRun struct {
 	// Provides a total count of generated findings per severity.
 	//
 	// FindingCounts is a required field
-	FindingCounts map[string]*int64 `locationName:"findingCounts" type:"map" required:"true"`
+	FindingCounts map[string]int64 `locationName:"findingCounts" type:"map" required:"true"`
 
 	// The auto-generated name for the assessment run.
 	//
@@ -2315,12 +2312,12 @@ type AssessmentRun struct {
 	// a particular generated finding is added to this list only once.
 	//
 	// Notifications is a required field
-	Notifications []*AssessmentRunNotification `locationName:"notifications" type:"list" required:"true"`
+	Notifications []AssessmentRunNotification `locationName:"notifications" type:"list" required:"true"`
 
 	// The rules packages selected for the assessment run.
 	//
 	// RulesPackageArns is a required field
-	RulesPackageArns []*string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
 
 	// The time when StartAssessmentRun was called.
 	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
@@ -2328,7 +2325,7 @@ type AssessmentRun struct {
 	// The state of the assessment run.
 	//
 	// State is a required field
-	State AssessmentRunState `locationName:"state" type:"string" required:"true"`
+	State AssessmentRunState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The last time when the assessment run's state changed.
 	//
@@ -2338,12 +2335,12 @@ type AssessmentRun struct {
 	// A list of the assessment run state changes.
 	//
 	// StateChanges is a required field
-	StateChanges []*AssessmentRunStateChange `locationName:"stateChanges" type:"list" required:"true"`
+	StateChanges []AssessmentRunStateChange `locationName:"stateChanges" type:"list" required:"true"`
 
 	// The user-defined attributes that are assigned to every generated finding.
 	//
 	// UserAttributesForFindings is a required field
-	UserAttributesForFindings []*Attribute `locationName:"userAttributesForFindings" type:"list" required:"true"`
+	UserAttributesForFindings []Attribute `locationName:"userAttributesForFindings" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2393,7 +2390,7 @@ func (s *AssessmentRun) SetDurationInSeconds(v int64) *AssessmentRun {
 }
 
 // SetFindingCounts sets the FindingCounts field's value.
-func (s *AssessmentRun) SetFindingCounts(v map[string]*int64) *AssessmentRun {
+func (s *AssessmentRun) SetFindingCounts(v map[string]int64) *AssessmentRun {
 	s.FindingCounts = v
 	return s
 }
@@ -2405,13 +2402,13 @@ func (s *AssessmentRun) SetName(v string) *AssessmentRun {
 }
 
 // SetNotifications sets the Notifications field's value.
-func (s *AssessmentRun) SetNotifications(v []*AssessmentRunNotification) *AssessmentRun {
+func (s *AssessmentRun) SetNotifications(v []AssessmentRunNotification) *AssessmentRun {
 	s.Notifications = v
 	return s
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentRun) SetRulesPackageArns(v []*string) *AssessmentRun {
+func (s *AssessmentRun) SetRulesPackageArns(v []string) *AssessmentRun {
 	s.RulesPackageArns = v
 	return s
 }
@@ -2435,13 +2432,13 @@ func (s *AssessmentRun) SetStateChangedAt(v time.Time) *AssessmentRun {
 }
 
 // SetStateChanges sets the StateChanges field's value.
-func (s *AssessmentRun) SetStateChanges(v []*AssessmentRunStateChange) *AssessmentRun {
+func (s *AssessmentRun) SetStateChanges(v []AssessmentRunStateChange) *AssessmentRun {
 	s.StateChanges = v
 	return s
 }
 
 // SetUserAttributesForFindings sets the UserAttributesForFindings field's value.
-func (s *AssessmentRun) SetUserAttributesForFindings(v []*Attribute) *AssessmentRun {
+func (s *AssessmentRun) SetUserAttributesForFindings(v []Attribute) *AssessmentRun {
 	s.UserAttributesForFindings = v
 	return s
 }
@@ -2455,12 +2452,12 @@ type AssessmentRunAgent struct {
 	// The current health state of the agent.
 	//
 	// AgentHealth is a required field
-	AgentHealth AgentHealth `locationName:"agentHealth" type:"string" required:"true"`
+	AgentHealth AgentHealth `locationName:"agentHealth" type:"string" required:"true" enum:"true"`
 
 	// The detailed health state of the agent.
 	//
 	// AgentHealthCode is a required field
-	AgentHealthCode AgentHealthCode `locationName:"agentHealthCode" type:"string" required:"true"`
+	AgentHealthCode AgentHealthCode `locationName:"agentHealthCode" type:"string" required:"true" enum:"true"`
 
 	// The description for the agent health code.
 	AgentHealthDetails *string `locationName:"agentHealthDetails" type:"string"`
@@ -2482,7 +2479,7 @@ type AssessmentRunAgent struct {
 	// The Amazon Inspector application data metrics that are collected by the agent.
 	//
 	// TelemetryMetadata is a required field
-	TelemetryMetadata []*TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
+	TelemetryMetadata []TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2532,7 +2529,7 @@ func (s *AssessmentRunAgent) SetAutoScalingGroup(v string) *AssessmentRunAgent {
 }
 
 // SetTelemetryMetadata sets the TelemetryMetadata field's value.
-func (s *AssessmentRunAgent) SetTelemetryMetadata(v []*TelemetryMetadata) *AssessmentRunAgent {
+func (s *AssessmentRunAgent) SetTelemetryMetadata(v []TelemetryMetadata) *AssessmentRunAgent {
 	s.TelemetryMetadata = v
 	return s
 }
@@ -2562,7 +2559,7 @@ type AssessmentRunFilter struct {
 	// For a record to match a filter, the value that is specified for this data
 	// type property must be contained in the list of values of the rulesPackages
 	// property of the AssessmentRun data type.
-	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" type:"list"`
 
 	// For a record to match a filter, the value that is specified for this data
 	// type property must inclusively match any value between the specified minimum
@@ -2627,7 +2624,7 @@ func (s *AssessmentRunFilter) SetNamePattern(v string) *AssessmentRunFilter {
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentRunFilter) SetRulesPackageArns(v []*string) *AssessmentRunFilter {
+func (s *AssessmentRunFilter) SetRulesPackageArns(v []string) *AssessmentRunFilter {
 	s.RulesPackageArns = v
 	return s
 }
@@ -2668,13 +2665,13 @@ type AssessmentRunNotification struct {
 	// The event for which a notification is sent.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The message included in the notification.
 	Message *string `locationName:"message" type:"string"`
 
 	// The status code of the SNS notification.
-	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode `locationName:"snsPublishStatusCode" type:"string"`
+	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode `locationName:"snsPublishStatusCode" type:"string" enum:"true"`
 
 	// The SNS topic to which the SNS notification is sent.
 	SnsTopicArn *string `locationName:"snsTopicArn" min:"1" type:"string"`
@@ -2734,7 +2731,7 @@ type AssessmentRunStateChange struct {
 	// The assessment run state.
 	//
 	// State is a required field
-	State AssessmentRunState `locationName:"state" type:"string" required:"true"`
+	State AssessmentRunState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The last time the assessment run state changed.
 	//
@@ -2914,13 +2911,13 @@ type AssessmentTemplate struct {
 	// The rules packages that are specified for this assessment template.
 	//
 	// RulesPackageArns is a required field
-	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list" required:"true"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" type:"list" required:"true"`
 
 	// The user-defined attributes that are assigned to every generated finding
 	// from the assessment run that uses this assessment template.
 	//
 	// UserAttributesForFindings is a required field
-	UserAttributesForFindings []*Attribute `locationName:"userAttributesForFindings" type:"list" required:"true"`
+	UserAttributesForFindings []Attribute `locationName:"userAttributesForFindings" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2964,13 +2961,13 @@ func (s *AssessmentTemplate) SetName(v string) *AssessmentTemplate {
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentTemplate) SetRulesPackageArns(v []*string) *AssessmentTemplate {
+func (s *AssessmentTemplate) SetRulesPackageArns(v []string) *AssessmentTemplate {
 	s.RulesPackageArns = v
 	return s
 }
 
 // SetUserAttributesForFindings sets the UserAttributesForFindings field's value.
-func (s *AssessmentTemplate) SetUserAttributesForFindings(v []*Attribute) *AssessmentTemplate {
+func (s *AssessmentTemplate) SetUserAttributesForFindings(v []Attribute) *AssessmentTemplate {
 	s.UserAttributesForFindings = v
 	return s
 }
@@ -2993,7 +2990,7 @@ type AssessmentTemplateFilter struct {
 	// For a record to match a filter, the values that are specified for this data
 	// type property must be contained in the list of values of the rulesPackageArns
 	// property of the AssessmentTemplate data type.
-	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" type:"list"`
 }
 
 // String returns the string representation
@@ -3037,7 +3034,7 @@ func (s *AssessmentTemplateFilter) SetNamePattern(v string) *AssessmentTemplateF
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentTemplateFilter) SetRulesPackageArns(v []*string) *AssessmentTemplateFilter {
+func (s *AssessmentTemplateFilter) SetRulesPackageArns(v []string) *AssessmentTemplateFilter {
 	s.RulesPackageArns = v
 	return s
 }
@@ -3062,7 +3059,7 @@ type AssetAttributes struct {
 	Hostname *string `locationName:"hostname" type:"string"`
 
 	// The list of IP v4 addresses of the EC2 instance where the finding is generated.
-	Ipv4Addresses []*string `locationName:"ipv4Addresses" type:"list"`
+	Ipv4Addresses []string `locationName:"ipv4Addresses" type:"list"`
 
 	// The schema version of this data type.
 	//
@@ -3105,7 +3102,7 @@ func (s *AssetAttributes) SetHostname(v string) *AssetAttributes {
 }
 
 // SetIpv4Addresses sets the Ipv4Addresses field's value.
-func (s *AssetAttributes) SetIpv4Addresses(v []*string) *AssetAttributes {
+func (s *AssetAttributes) SetIpv4Addresses(v []string) *AssetAttributes {
 	s.Ipv4Addresses = v
 	return s
 }
@@ -3290,13 +3287,13 @@ type CreateAssessmentTemplateInput struct {
 	// template.
 	//
 	// RulesPackageArns is a required field
-	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list" required:"true"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" type:"list" required:"true"`
 
 	// The user-defined attributes that are assigned to every finding that is generated
 	// by the assessment run that uses this assessment template. An attribute is
 	// a key and value pair (an Attribute object). Within an assessment template,
 	// each key must be unique.
-	UserAttributesForFindings []*Attribute `locationName:"userAttributesForFindings" type:"list"`
+	UserAttributesForFindings []Attribute `locationName:"userAttributesForFindings" type:"list"`
 }
 
 // String returns the string representation
@@ -3339,9 +3336,6 @@ func (s *CreateAssessmentTemplateInput) Validate() error {
 	}
 	if s.UserAttributesForFindings != nil {
 		for i, v := range s.UserAttributesForFindings {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributesForFindings", i), err.(aws.ErrInvalidParams))
 			}
@@ -3373,13 +3367,13 @@ func (s *CreateAssessmentTemplateInput) SetDurationInSeconds(v int64) *CreateAss
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *CreateAssessmentTemplateInput) SetRulesPackageArns(v []*string) *CreateAssessmentTemplateInput {
+func (s *CreateAssessmentTemplateInput) SetRulesPackageArns(v []string) *CreateAssessmentTemplateInput {
 	s.RulesPackageArns = v
 	return s
 }
 
 // SetUserAttributesForFindings sets the UserAttributesForFindings field's value.
-func (s *CreateAssessmentTemplateInput) SetUserAttributesForFindings(v []*Attribute) *CreateAssessmentTemplateInput {
+func (s *CreateAssessmentTemplateInput) SetUserAttributesForFindings(v []Attribute) *CreateAssessmentTemplateInput {
 	s.UserAttributesForFindings = v
 	return s
 }
@@ -3419,7 +3413,7 @@ type CreateResourceGroupInput struct {
 	// For example,'[{"key":"Name","values":["TestEC2Instance"]}]'.
 	//
 	// ResourceGroupTags is a required field
-	ResourceGroupTags []*ResourceGroupTag `locationName:"resourceGroupTags" min:"1" type:"list" required:"true"`
+	ResourceGroupTags []ResourceGroupTag `locationName:"resourceGroupTags" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3444,9 +3438,6 @@ func (s *CreateResourceGroupInput) Validate() error {
 	}
 	if s.ResourceGroupTags != nil {
 		for i, v := range s.ResourceGroupTags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceGroupTags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3460,7 +3451,7 @@ func (s *CreateResourceGroupInput) Validate() error {
 }
 
 // SetResourceGroupTags sets the ResourceGroupTags field's value.
-func (s *CreateResourceGroupInput) SetResourceGroupTags(v []*ResourceGroupTag) *CreateResourceGroupInput {
+func (s *CreateResourceGroupInput) SetResourceGroupTags(v []ResourceGroupTag) *CreateResourceGroupInput {
 	s.ResourceGroupTags = v
 	return s
 }
@@ -3672,7 +3663,7 @@ type DescribeAssessmentRunsInput struct {
 	// The ARN that specifies the assessment run that you want to describe.
 	//
 	// AssessmentRunArns is a required field
-	AssessmentRunArns []*string `locationName:"assessmentRunArns" min:"1" type:"list" required:"true"`
+	AssessmentRunArns []string `locationName:"assessmentRunArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3703,7 +3694,7 @@ func (s *DescribeAssessmentRunsInput) Validate() error {
 }
 
 // SetAssessmentRunArns sets the AssessmentRunArns field's value.
-func (s *DescribeAssessmentRunsInput) SetAssessmentRunArns(v []*string) *DescribeAssessmentRunsInput {
+func (s *DescribeAssessmentRunsInput) SetAssessmentRunArns(v []string) *DescribeAssessmentRunsInput {
 	s.AssessmentRunArns = v
 	return s
 }
@@ -3715,13 +3706,13 @@ type DescribeAssessmentRunsOutput struct {
 	// Information about the assessment run.
 	//
 	// AssessmentRuns is a required field
-	AssessmentRuns []*AssessmentRun `locationName:"assessmentRuns" type:"list" required:"true"`
+	AssessmentRuns []AssessmentRun `locationName:"assessmentRuns" type:"list" required:"true"`
 
 	// Assessment run details that cannot be described. An error code is provided
 	// for each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -3735,13 +3726,13 @@ func (s DescribeAssessmentRunsOutput) GoString() string {
 }
 
 // SetAssessmentRuns sets the AssessmentRuns field's value.
-func (s *DescribeAssessmentRunsOutput) SetAssessmentRuns(v []*AssessmentRun) *DescribeAssessmentRunsOutput {
+func (s *DescribeAssessmentRunsOutput) SetAssessmentRuns(v []AssessmentRun) *DescribeAssessmentRunsOutput {
 	s.AssessmentRuns = v
 	return s
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *DescribeAssessmentRunsOutput) SetFailedItems(v map[string]*FailedItemDetails) *DescribeAssessmentRunsOutput {
+func (s *DescribeAssessmentRunsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeAssessmentRunsOutput {
 	s.FailedItems = v
 	return s
 }
@@ -3753,7 +3744,7 @@ type DescribeAssessmentTargetsInput struct {
 	// The ARNs that specifies the assessment targets that you want to describe.
 	//
 	// AssessmentTargetArns is a required field
-	AssessmentTargetArns []*string `locationName:"assessmentTargetArns" min:"1" type:"list" required:"true"`
+	AssessmentTargetArns []string `locationName:"assessmentTargetArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3784,7 +3775,7 @@ func (s *DescribeAssessmentTargetsInput) Validate() error {
 }
 
 // SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
-func (s *DescribeAssessmentTargetsInput) SetAssessmentTargetArns(v []*string) *DescribeAssessmentTargetsInput {
+func (s *DescribeAssessmentTargetsInput) SetAssessmentTargetArns(v []string) *DescribeAssessmentTargetsInput {
 	s.AssessmentTargetArns = v
 	return s
 }
@@ -3796,13 +3787,13 @@ type DescribeAssessmentTargetsOutput struct {
 	// Information about the assessment targets.
 	//
 	// AssessmentTargets is a required field
-	AssessmentTargets []*AssessmentTarget `locationName:"assessmentTargets" type:"list" required:"true"`
+	AssessmentTargets []AssessmentTarget `locationName:"assessmentTargets" type:"list" required:"true"`
 
 	// Assessment target details that cannot be described. An error code is provided
 	// for each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -3816,13 +3807,13 @@ func (s DescribeAssessmentTargetsOutput) GoString() string {
 }
 
 // SetAssessmentTargets sets the AssessmentTargets field's value.
-func (s *DescribeAssessmentTargetsOutput) SetAssessmentTargets(v []*AssessmentTarget) *DescribeAssessmentTargetsOutput {
+func (s *DescribeAssessmentTargetsOutput) SetAssessmentTargets(v []AssessmentTarget) *DescribeAssessmentTargetsOutput {
 	s.AssessmentTargets = v
 	return s
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *DescribeAssessmentTargetsOutput) SetFailedItems(v map[string]*FailedItemDetails) *DescribeAssessmentTargetsOutput {
+func (s *DescribeAssessmentTargetsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeAssessmentTargetsOutput {
 	s.FailedItems = v
 	return s
 }
@@ -3832,7 +3823,7 @@ type DescribeAssessmentTemplatesInput struct {
 	_ struct{} `type:"structure"`
 
 	// AssessmentTemplateArns is a required field
-	AssessmentTemplateArns []*string `locationName:"assessmentTemplateArns" min:"1" type:"list" required:"true"`
+	AssessmentTemplateArns []string `locationName:"assessmentTemplateArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3863,7 +3854,7 @@ func (s *DescribeAssessmentTemplatesInput) Validate() error {
 }
 
 // SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
-func (s *DescribeAssessmentTemplatesInput) SetAssessmentTemplateArns(v []*string) *DescribeAssessmentTemplatesInput {
+func (s *DescribeAssessmentTemplatesInput) SetAssessmentTemplateArns(v []string) *DescribeAssessmentTemplatesInput {
 	s.AssessmentTemplateArns = v
 	return s
 }
@@ -3875,13 +3866,13 @@ type DescribeAssessmentTemplatesOutput struct {
 	// Information about the assessment templates.
 	//
 	// AssessmentTemplates is a required field
-	AssessmentTemplates []*AssessmentTemplate `locationName:"assessmentTemplates" type:"list" required:"true"`
+	AssessmentTemplates []AssessmentTemplate `locationName:"assessmentTemplates" type:"list" required:"true"`
 
 	// Assessment template details that cannot be described. An error code is provided
 	// for each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -3895,13 +3886,13 @@ func (s DescribeAssessmentTemplatesOutput) GoString() string {
 }
 
 // SetAssessmentTemplates sets the AssessmentTemplates field's value.
-func (s *DescribeAssessmentTemplatesOutput) SetAssessmentTemplates(v []*AssessmentTemplate) *DescribeAssessmentTemplatesOutput {
+func (s *DescribeAssessmentTemplatesOutput) SetAssessmentTemplates(v []AssessmentTemplate) *DescribeAssessmentTemplatesOutput {
 	s.AssessmentTemplates = v
 	return s
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *DescribeAssessmentTemplatesOutput) SetFailedItems(v map[string]*FailedItemDetails) *DescribeAssessmentTemplatesOutput {
+func (s *DescribeAssessmentTemplatesOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeAssessmentTemplatesOutput {
 	s.FailedItems = v
 	return s
 }
@@ -3978,11 +3969,11 @@ type DescribeFindingsInput struct {
 	// The ARN that specifies the finding that you want to describe.
 	//
 	// FindingArns is a required field
-	FindingArns []*string `locationName:"findingArns" min:"1" type:"list" required:"true"`
+	FindingArns []string `locationName:"findingArns" min:"1" type:"list" required:"true"`
 
 	// The locale into which you want to translate a finding description, recommendation,
 	// and the short description that identifies the finding.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4013,7 +4004,7 @@ func (s *DescribeFindingsInput) Validate() error {
 }
 
 // SetFindingArns sets the FindingArns field's value.
-func (s *DescribeFindingsInput) SetFindingArns(v []*string) *DescribeFindingsInput {
+func (s *DescribeFindingsInput) SetFindingArns(v []string) *DescribeFindingsInput {
 	s.FindingArns = v
 	return s
 }
@@ -4032,12 +4023,12 @@ type DescribeFindingsOutput struct {
 	// failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 
 	// Information about the finding.
 	//
 	// Findings is a required field
-	Findings []*Finding `locationName:"findings" type:"list" required:"true"`
+	Findings []Finding `locationName:"findings" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4051,13 +4042,13 @@ func (s DescribeFindingsOutput) GoString() string {
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *DescribeFindingsOutput) SetFailedItems(v map[string]*FailedItemDetails) *DescribeFindingsOutput {
+func (s *DescribeFindingsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeFindingsOutput {
 	s.FailedItems = v
 	return s
 }
 
 // SetFindings sets the Findings field's value.
-func (s *DescribeFindingsOutput) SetFindings(v []*Finding) *DescribeFindingsOutput {
+func (s *DescribeFindingsOutput) SetFindings(v []Finding) *DescribeFindingsOutput {
 	s.Findings = v
 	return s
 }
@@ -4069,7 +4060,7 @@ type DescribeResourceGroupsInput struct {
 	// The ARN that specifies the resource group that you want to describe.
 	//
 	// ResourceGroupArns is a required field
-	ResourceGroupArns []*string `locationName:"resourceGroupArns" min:"1" type:"list" required:"true"`
+	ResourceGroupArns []string `locationName:"resourceGroupArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4100,7 +4091,7 @@ func (s *DescribeResourceGroupsInput) Validate() error {
 }
 
 // SetResourceGroupArns sets the ResourceGroupArns field's value.
-func (s *DescribeResourceGroupsInput) SetResourceGroupArns(v []*string) *DescribeResourceGroupsInput {
+func (s *DescribeResourceGroupsInput) SetResourceGroupArns(v []string) *DescribeResourceGroupsInput {
 	s.ResourceGroupArns = v
 	return s
 }
@@ -4113,12 +4104,12 @@ type DescribeResourceGroupsOutput struct {
 	// for each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 
 	// Information about a resource group.
 	//
 	// ResourceGroups is a required field
-	ResourceGroups []*ResourceGroup `locationName:"resourceGroups" type:"list" required:"true"`
+	ResourceGroups []ResourceGroup `locationName:"resourceGroups" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4132,13 +4123,13 @@ func (s DescribeResourceGroupsOutput) GoString() string {
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *DescribeResourceGroupsOutput) SetFailedItems(v map[string]*FailedItemDetails) *DescribeResourceGroupsOutput {
+func (s *DescribeResourceGroupsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeResourceGroupsOutput {
 	s.FailedItems = v
 	return s
 }
 
 // SetResourceGroups sets the ResourceGroups field's value.
-func (s *DescribeResourceGroupsOutput) SetResourceGroups(v []*ResourceGroup) *DescribeResourceGroupsOutput {
+func (s *DescribeResourceGroupsOutput) SetResourceGroups(v []ResourceGroup) *DescribeResourceGroupsOutput {
 	s.ResourceGroups = v
 	return s
 }
@@ -4148,12 +4139,12 @@ type DescribeRulesPackagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The locale that you want to translate a rules package description into.
-	Locale Locale `locationName:"locale" type:"string"`
+	Locale Locale `locationName:"locale" type:"string" enum:"true"`
 
 	// The ARN that specifies the rules package that you want to describe.
 	//
 	// RulesPackageArns is a required field
-	RulesPackageArns []*string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4190,7 +4181,7 @@ func (s *DescribeRulesPackagesInput) SetLocale(v Locale) *DescribeRulesPackagesI
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *DescribeRulesPackagesInput) SetRulesPackageArns(v []*string) *DescribeRulesPackagesInput {
+func (s *DescribeRulesPackagesInput) SetRulesPackageArns(v []string) *DescribeRulesPackagesInput {
 	s.RulesPackageArns = v
 	return s
 }
@@ -4203,12 +4194,12 @@ type DescribeRulesPackagesOutput struct {
 	// for each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 
 	// Information about the rules package.
 	//
 	// RulesPackages is a required field
-	RulesPackages []*RulesPackage `locationName:"rulesPackages" type:"list" required:"true"`
+	RulesPackages []RulesPackage `locationName:"rulesPackages" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4222,13 +4213,13 @@ func (s DescribeRulesPackagesOutput) GoString() string {
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *DescribeRulesPackagesOutput) SetFailedItems(v map[string]*FailedItemDetails) *DescribeRulesPackagesOutput {
+func (s *DescribeRulesPackagesOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeRulesPackagesOutput {
 	s.FailedItems = v
 	return s
 }
 
 // SetRulesPackages sets the RulesPackages field's value.
-func (s *DescribeRulesPackagesOutput) SetRulesPackages(v []*RulesPackage) *DescribeRulesPackagesOutput {
+func (s *DescribeRulesPackagesOutput) SetRulesPackages(v []RulesPackage) *DescribeRulesPackagesOutput {
 	s.RulesPackages = v
 	return s
 }
@@ -4293,7 +4284,7 @@ type EventSubscription struct {
 	// are sent.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The time at which SubscribeToEvent is called.
 	//
@@ -4331,7 +4322,7 @@ type FailedItemDetails struct {
 	// The status code of a failed item.
 	//
 	// FailureCode is a required field
-	FailureCode FailedItemErrorCode `locationName:"failureCode" type:"string" required:"true"`
+	FailureCode FailedItemErrorCode `locationName:"failureCode" type:"string" required:"true" enum:"true"`
 
 	// Indicates whether you can immediately retry a request for this item for a
 	// specified resource.
@@ -4377,12 +4368,12 @@ type Finding struct {
 	AssetAttributes *AssetAttributes `locationName:"assetAttributes" type:"structure"`
 
 	// The type of the host from which the finding is generated.
-	AssetType AssetType `locationName:"assetType" type:"string"`
+	AssetType AssetType `locationName:"assetType" type:"string" enum:"true"`
 
 	// The system-defined attributes for the finding.
 	//
 	// Attributes is a required field
-	Attributes []*Attribute `locationName:"attributes" type:"list" required:"true"`
+	Attributes []Attribute `locationName:"attributes" type:"list" required:"true"`
 
 	// This data element is currently not used.
 	Confidence *int64 `locationName:"confidence" type:"integer"`
@@ -4417,7 +4408,7 @@ type Finding struct {
 	ServiceAttributes *ServiceAttributes `locationName:"serviceAttributes" type:"structure"`
 
 	// The finding severity. Values can be set to High, Medium, Low, and Informational.
-	Severity Severity `locationName:"severity" type:"string"`
+	Severity Severity `locationName:"severity" type:"string" enum:"true"`
 
 	// The name of the finding.
 	Title *string `locationName:"title" type:"string"`
@@ -4430,7 +4421,7 @@ type Finding struct {
 	// The user-defined attributes that are assigned to the finding.
 	//
 	// UserAttributes is a required field
-	UserAttributes []*Attribute `locationName:"userAttributes" type:"list" required:"true"`
+	UserAttributes []Attribute `locationName:"userAttributes" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4462,7 +4453,7 @@ func (s *Finding) SetAssetType(v AssetType) *Finding {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *Finding) SetAttributes(v []*Attribute) *Finding {
+func (s *Finding) SetAttributes(v []Attribute) *Finding {
 	s.Attributes = v
 	return s
 }
@@ -4546,7 +4537,7 @@ func (s *Finding) SetUpdatedAt(v time.Time) *Finding {
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *Finding) SetUserAttributes(v []*Attribute) *Finding {
+func (s *Finding) SetUserAttributes(v []Attribute) *Finding {
 	s.UserAttributes = v
 	return s
 }
@@ -4559,17 +4550,17 @@ type FindingFilter struct {
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the agentId property
 	// of the Finding data type.
-	AgentIds []*string `locationName:"agentIds" type:"list"`
+	AgentIds []string `locationName:"agentIds" type:"list"`
 
 	// For a record to match a filter, the list of values that are specified for
 	// this data type property must be contained in the list of values of the attributes
 	// property of the Finding data type.
-	Attributes []*Attribute `locationName:"attributes" type:"list"`
+	Attributes []Attribute `locationName:"attributes" type:"list"`
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the autoScalingGroup
 	// property of the Finding data type.
-	AutoScalingGroups []*string `locationName:"autoScalingGroups" type:"list"`
+	AutoScalingGroups []string `locationName:"autoScalingGroups" type:"list"`
 
 	// The time range during which the finding is generated.
 	CreationTimeRange *TimestampRange `locationName:"creationTimeRange" type:"structure"`
@@ -4577,12 +4568,12 @@ type FindingFilter struct {
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the ruleName property
 	// of the Finding data type.
-	RuleNames []*string `locationName:"ruleNames" type:"list"`
+	RuleNames []string `locationName:"ruleNames" type:"list"`
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the rulesPackageArn
 	// property of the Finding data type.
-	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" type:"list"`
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the severity property
@@ -4592,7 +4583,7 @@ type FindingFilter struct {
 	// For a record to match a filter, the value that is specified for this data
 	// type property must be contained in the list of values of the userAttributes
 	// property of the Finding data type.
-	UserAttributes []*Attribute `locationName:"userAttributes" type:"list"`
+	UserAttributes []Attribute `locationName:"userAttributes" type:"list"`
 }
 
 // String returns the string representation
@@ -4610,9 +4601,6 @@ func (s *FindingFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FindingFilter"}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -4620,9 +4608,6 @@ func (s *FindingFilter) Validate() error {
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -4636,19 +4621,19 @@ func (s *FindingFilter) Validate() error {
 }
 
 // SetAgentIds sets the AgentIds field's value.
-func (s *FindingFilter) SetAgentIds(v []*string) *FindingFilter {
+func (s *FindingFilter) SetAgentIds(v []string) *FindingFilter {
 	s.AgentIds = v
 	return s
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *FindingFilter) SetAttributes(v []*Attribute) *FindingFilter {
+func (s *FindingFilter) SetAttributes(v []Attribute) *FindingFilter {
 	s.Attributes = v
 	return s
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *FindingFilter) SetAutoScalingGroups(v []*string) *FindingFilter {
+func (s *FindingFilter) SetAutoScalingGroups(v []string) *FindingFilter {
 	s.AutoScalingGroups = v
 	return s
 }
@@ -4660,13 +4645,13 @@ func (s *FindingFilter) SetCreationTimeRange(v *TimestampRange) *FindingFilter {
 }
 
 // SetRuleNames sets the RuleNames field's value.
-func (s *FindingFilter) SetRuleNames(v []*string) *FindingFilter {
+func (s *FindingFilter) SetRuleNames(v []string) *FindingFilter {
 	s.RuleNames = v
 	return s
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *FindingFilter) SetRulesPackageArns(v []*string) *FindingFilter {
+func (s *FindingFilter) SetRulesPackageArns(v []string) *FindingFilter {
 	s.RulesPackageArns = v
 	return s
 }
@@ -4678,7 +4663,7 @@ func (s *FindingFilter) SetSeverities(v []Severity) *FindingFilter {
 }
 
 // SetUserAttributes sets the UserAttributes field's value.
-func (s *FindingFilter) SetUserAttributes(v []*Attribute) *FindingFilter {
+func (s *FindingFilter) SetUserAttributes(v []Attribute) *FindingFilter {
 	s.UserAttributes = v
 	return s
 }
@@ -4697,14 +4682,14 @@ type GetAssessmentReportInput struct {
 	// want to generate.
 	//
 	// ReportFileFormat is a required field
-	ReportFileFormat ReportFileFormat `locationName:"reportFileFormat" type:"string" required:"true"`
+	ReportFileFormat ReportFileFormat `locationName:"reportFileFormat" type:"string" required:"true" enum:"true"`
 
 	// Specifies the type of the assessment report that you want to generate. There
 	// are two types of assessment reports: a finding report and a full report.
 	// For more information, see Assessment Reports (http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
 	//
 	// ReportType is a required field
-	ReportType ReportType `locationName:"reportType" type:"string" required:"true"`
+	ReportType ReportType `locationName:"reportType" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4765,7 +4750,7 @@ type GetAssessmentReportOutput struct {
 	// Specifies the status of the request to generate an assessment report.
 	//
 	// Status is a required field
-	Status ReportStatus `locationName:"status" type:"string" required:"true"`
+	Status ReportStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// Specifies the URL where you can find the generated assessment report. This
 	// parameter is only returned if the report is successfully generated.
@@ -4845,7 +4830,7 @@ type GetTelemetryMetadataOutput struct {
 	// Telemetry details.
 	//
 	// TelemetryMetadata is a required field
-	TelemetryMetadata []*TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
+	TelemetryMetadata []TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4859,7 +4844,7 @@ func (s GetTelemetryMetadataOutput) GoString() string {
 }
 
 // SetTelemetryMetadata sets the TelemetryMetadata field's value.
-func (s *GetTelemetryMetadataOutput) SetTelemetryMetadata(v []*TelemetryMetadata) *GetTelemetryMetadataOutput {
+func (s *GetTelemetryMetadataOutput) SetTelemetryMetadata(v []TelemetryMetadata) *GetTelemetryMetadataOutput {
 	s.TelemetryMetadata = v
 	return s
 }
@@ -4958,7 +4943,7 @@ type ListAssessmentRunAgentsOutput struct {
 	// A list of ARNs that specifies the agents returned by the action.
 	//
 	// AssessmentRunAgents is a required field
-	AssessmentRunAgents []*AssessmentRunAgent `locationName:"assessmentRunAgents" type:"list" required:"true"`
+	AssessmentRunAgents []AssessmentRunAgent `locationName:"assessmentRunAgents" type:"list" required:"true"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
@@ -4978,7 +4963,7 @@ func (s ListAssessmentRunAgentsOutput) GoString() string {
 }
 
 // SetAssessmentRunAgents sets the AssessmentRunAgents field's value.
-func (s *ListAssessmentRunAgentsOutput) SetAssessmentRunAgents(v []*AssessmentRunAgent) *ListAssessmentRunAgentsOutput {
+func (s *ListAssessmentRunAgentsOutput) SetAssessmentRunAgents(v []AssessmentRunAgent) *ListAssessmentRunAgentsOutput {
 	s.AssessmentRunAgents = v
 	return s
 }
@@ -4995,7 +4980,7 @@ type ListAssessmentRunsInput struct {
 
 	// The ARNs that specify the assessment templates whose assessment runs you
 	// want to list.
-	AssessmentTemplateArns []*string `locationName:"assessmentTemplateArns" type:"list"`
+	AssessmentTemplateArns []string `locationName:"assessmentTemplateArns" type:"list"`
 
 	// You can use this parameter to specify a subset of data to be included in
 	// the action's response.
@@ -5045,7 +5030,7 @@ func (s *ListAssessmentRunsInput) Validate() error {
 }
 
 // SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
-func (s *ListAssessmentRunsInput) SetAssessmentTemplateArns(v []*string) *ListAssessmentRunsInput {
+func (s *ListAssessmentRunsInput) SetAssessmentTemplateArns(v []string) *ListAssessmentRunsInput {
 	s.AssessmentTemplateArns = v
 	return s
 }
@@ -5076,7 +5061,7 @@ type ListAssessmentRunsOutput struct {
 	// action.
 	//
 	// AssessmentRunArns is a required field
-	AssessmentRunArns []*string `locationName:"assessmentRunArns" type:"list" required:"true"`
+	AssessmentRunArns []string `locationName:"assessmentRunArns" type:"list" required:"true"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
@@ -5096,7 +5081,7 @@ func (s ListAssessmentRunsOutput) GoString() string {
 }
 
 // SetAssessmentRunArns sets the AssessmentRunArns field's value.
-func (s *ListAssessmentRunsOutput) SetAssessmentRunArns(v []*string) *ListAssessmentRunsOutput {
+func (s *ListAssessmentRunsOutput) SetAssessmentRunArns(v []string) *ListAssessmentRunsOutput {
 	s.AssessmentRunArns = v
 	return s
 }
@@ -5184,7 +5169,7 @@ type ListAssessmentTargetsOutput struct {
 	// the action.
 	//
 	// AssessmentTargetArns is a required field
-	AssessmentTargetArns []*string `locationName:"assessmentTargetArns" type:"list" required:"true"`
+	AssessmentTargetArns []string `locationName:"assessmentTargetArns" type:"list" required:"true"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
@@ -5204,7 +5189,7 @@ func (s ListAssessmentTargetsOutput) GoString() string {
 }
 
 // SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
-func (s *ListAssessmentTargetsOutput) SetAssessmentTargetArns(v []*string) *ListAssessmentTargetsOutput {
+func (s *ListAssessmentTargetsOutput) SetAssessmentTargetArns(v []string) *ListAssessmentTargetsOutput {
 	s.AssessmentTargetArns = v
 	return s
 }
@@ -5221,7 +5206,7 @@ type ListAssessmentTemplatesInput struct {
 
 	// A list of ARNs that specifies the assessment targets whose assessment templates
 	// you want to list.
-	AssessmentTargetArns []*string `locationName:"assessmentTargetArns" type:"list"`
+	AssessmentTargetArns []string `locationName:"assessmentTargetArns" type:"list"`
 
 	// You can use this parameter to specify a subset of data to be included in
 	// the action's response.
@@ -5271,7 +5256,7 @@ func (s *ListAssessmentTemplatesInput) Validate() error {
 }
 
 // SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
-func (s *ListAssessmentTemplatesInput) SetAssessmentTargetArns(v []*string) *ListAssessmentTemplatesInput {
+func (s *ListAssessmentTemplatesInput) SetAssessmentTargetArns(v []string) *ListAssessmentTemplatesInput {
 	s.AssessmentTargetArns = v
 	return s
 }
@@ -5301,7 +5286,7 @@ type ListAssessmentTemplatesOutput struct {
 	// A list of ARNs that specifies the assessment templates returned by the action.
 	//
 	// AssessmentTemplateArns is a required field
-	AssessmentTemplateArns []*string `locationName:"assessmentTemplateArns" type:"list" required:"true"`
+	AssessmentTemplateArns []string `locationName:"assessmentTemplateArns" type:"list" required:"true"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
@@ -5321,7 +5306,7 @@ func (s ListAssessmentTemplatesOutput) GoString() string {
 }
 
 // SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
-func (s *ListAssessmentTemplatesOutput) SetAssessmentTemplateArns(v []*string) *ListAssessmentTemplatesOutput {
+func (s *ListAssessmentTemplatesOutput) SetAssessmentTemplateArns(v []string) *ListAssessmentTemplatesOutput {
 	s.AssessmentTemplateArns = v
 	return s
 }
@@ -5408,7 +5393,7 @@ type ListEventSubscriptionsOutput struct {
 	// Details of the returned event subscriptions.
 	//
 	// Subscriptions is a required field
-	Subscriptions []*Subscription `locationName:"subscriptions" type:"list" required:"true"`
+	Subscriptions []Subscription `locationName:"subscriptions" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5428,7 +5413,7 @@ func (s *ListEventSubscriptionsOutput) SetNextToken(v string) *ListEventSubscrip
 }
 
 // SetSubscriptions sets the Subscriptions field's value.
-func (s *ListEventSubscriptionsOutput) SetSubscriptions(v []*Subscription) *ListEventSubscriptionsOutput {
+func (s *ListEventSubscriptionsOutput) SetSubscriptions(v []Subscription) *ListEventSubscriptionsOutput {
 	s.Subscriptions = v
 	return s
 }
@@ -5439,7 +5424,7 @@ type ListFindingsInput struct {
 
 	// The ARNs of the assessment runs that generate the findings that you want
 	// to list.
-	AssessmentRunArns []*string `locationName:"assessmentRunArns" type:"list"`
+	AssessmentRunArns []string `locationName:"assessmentRunArns" type:"list"`
 
 	// You can use this parameter to specify a subset of data to be included in
 	// the action's response.
@@ -5489,7 +5474,7 @@ func (s *ListFindingsInput) Validate() error {
 }
 
 // SetAssessmentRunArns sets the AssessmentRunArns field's value.
-func (s *ListFindingsInput) SetAssessmentRunArns(v []*string) *ListFindingsInput {
+func (s *ListFindingsInput) SetAssessmentRunArns(v []string) *ListFindingsInput {
 	s.AssessmentRunArns = v
 	return s
 }
@@ -5519,7 +5504,7 @@ type ListFindingsOutput struct {
 	// A list of ARNs that specifies the findings returned by the action.
 	//
 	// FindingArns is a required field
-	FindingArns []*string `locationName:"findingArns" type:"list" required:"true"`
+	FindingArns []string `locationName:"findingArns" type:"list" required:"true"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
@@ -5539,7 +5524,7 @@ func (s ListFindingsOutput) GoString() string {
 }
 
 // SetFindingArns sets the FindingArns field's value.
-func (s *ListFindingsOutput) SetFindingArns(v []*string) *ListFindingsOutput {
+func (s *ListFindingsOutput) SetFindingArns(v []string) *ListFindingsOutput {
 	s.FindingArns = v
 	return s
 }
@@ -5613,7 +5598,7 @@ type ListRulesPackagesOutput struct {
 	// The list of ARNs that specifies the rules packages returned by the action.
 	//
 	// RulesPackageArns is a required field
-	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list" required:"true"`
+	RulesPackageArns []string `locationName:"rulesPackageArns" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5633,7 +5618,7 @@ func (s *ListRulesPackagesOutput) SetNextToken(v string) *ListRulesPackagesOutpu
 }
 
 // SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *ListRulesPackagesOutput) SetRulesPackageArns(v []*string) *ListRulesPackagesOutput {
+func (s *ListRulesPackagesOutput) SetRulesPackageArns(v []string) *ListRulesPackagesOutput {
 	s.RulesPackageArns = v
 	return s
 }
@@ -5688,7 +5673,7 @@ type ListTagsForResourceOutput struct {
 	// A collection of key and value pairs.
 	//
 	// Tags is a required field
-	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5702,7 +5687,7 @@ func (s ListTagsForResourceOutput) GoString() string {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -5782,7 +5767,7 @@ type PreviewAgentsOutput struct {
 	// The resulting list of agents.
 	//
 	// AgentPreviews is a required field
-	AgentPreviews []*AgentPreview `locationName:"agentPreviews" type:"list" required:"true"`
+	AgentPreviews []AgentPreview `locationName:"agentPreviews" type:"list" required:"true"`
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
@@ -5802,7 +5787,7 @@ func (s PreviewAgentsOutput) GoString() string {
 }
 
 // SetAgentPreviews sets the AgentPreviews field's value.
-func (s *PreviewAgentsOutput) SetAgentPreviews(v []*AgentPreview) *PreviewAgentsOutput {
+func (s *PreviewAgentsOutput) SetAgentPreviews(v []AgentPreview) *PreviewAgentsOutput {
 	s.AgentPreviews = v
 	return s
 }
@@ -5879,12 +5864,12 @@ type RemoveAttributesFromFindingsInput struct {
 	// The array of attribute keys that you want to remove from specified findings.
 	//
 	// AttributeKeys is a required field
-	AttributeKeys []*string `locationName:"attributeKeys" type:"list" required:"true"`
+	AttributeKeys []string `locationName:"attributeKeys" type:"list" required:"true"`
 
 	// The ARNs that specify the findings that you want to remove attributes from.
 	//
 	// FindingArns is a required field
-	FindingArns []*string `locationName:"findingArns" min:"1" type:"list" required:"true"`
+	FindingArns []string `locationName:"findingArns" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5919,13 +5904,13 @@ func (s *RemoveAttributesFromFindingsInput) Validate() error {
 }
 
 // SetAttributeKeys sets the AttributeKeys field's value.
-func (s *RemoveAttributesFromFindingsInput) SetAttributeKeys(v []*string) *RemoveAttributesFromFindingsInput {
+func (s *RemoveAttributesFromFindingsInput) SetAttributeKeys(v []string) *RemoveAttributesFromFindingsInput {
 	s.AttributeKeys = v
 	return s
 }
 
 // SetFindingArns sets the FindingArns field's value.
-func (s *RemoveAttributesFromFindingsInput) SetFindingArns(v []*string) *RemoveAttributesFromFindingsInput {
+func (s *RemoveAttributesFromFindingsInput) SetFindingArns(v []string) *RemoveAttributesFromFindingsInput {
 	s.FindingArns = v
 	return s
 }
@@ -5938,7 +5923,7 @@ type RemoveAttributesFromFindingsOutput struct {
 	// each failed item.
 	//
 	// FailedItems is a required field
-	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
+	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
 // String returns the string representation
@@ -5952,7 +5937,7 @@ func (s RemoveAttributesFromFindingsOutput) GoString() string {
 }
 
 // SetFailedItems sets the FailedItems field's value.
-func (s *RemoveAttributesFromFindingsOutput) SetFailedItems(v map[string]*FailedItemDetails) *RemoveAttributesFromFindingsOutput {
+func (s *RemoveAttributesFromFindingsOutput) SetFailedItems(v map[string]FailedItemDetails) *RemoveAttributesFromFindingsOutput {
 	s.FailedItems = v
 	return s
 }
@@ -5979,7 +5964,7 @@ type ResourceGroup struct {
 	// is used in the CreateResourceGroup action.
 	//
 	// Tags is a required field
-	Tags []*ResourceGroupTag `locationName:"tags" min:"1" type:"list" required:"true"`
+	Tags []ResourceGroupTag `locationName:"tags" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6005,7 +5990,7 @@ func (s *ResourceGroup) SetCreatedAt(v time.Time) *ResourceGroup {
 }
 
 // SetTags sets the Tags field's value.
-func (s *ResourceGroup) SetTags(v []*ResourceGroupTag) *ResourceGroup {
+func (s *ResourceGroup) SetTags(v []ResourceGroupTag) *ResourceGroup {
 	s.Tags = v
 	return s
 }
@@ -6192,7 +6177,7 @@ type SetTagsForResourceInput struct {
 
 	// A collection of key and value pairs that you want to set to the assessment
 	// template.
-	Tags []*Tag `locationName:"tags" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -6217,9 +6202,6 @@ func (s *SetTagsForResourceInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -6239,7 +6221,7 @@ func (s *SetTagsForResourceInput) SetResourceArn(v string) *SetTagsForResourceIn
 }
 
 // SetTags sets the Tags field's value.
-func (s *SetTagsForResourceInput) SetTags(v []*Tag) *SetTagsForResourceInput {
+func (s *SetTagsForResourceInput) SetTags(v []Tag) *SetTagsForResourceInput {
 	s.Tags = v
 	return s
 }
@@ -6356,7 +6338,7 @@ type StopAssessmentRunInput struct {
 	// data and begins the results evaluation and the findings generation process.
 	// SKIP_EVALUATION cancels the assessment run immediately, after which no findings
 	// are generated.
-	StopAction StopAction `locationName:"stopAction" type:"string"`
+	StopAction StopAction `locationName:"stopAction" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6420,7 +6402,7 @@ type SubscribeToEventInput struct {
 	// The event for which you want to receive SNS notifications.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// you want to receive SNS notifications.
@@ -6513,7 +6495,7 @@ type Subscription struct {
 	// The list of existing event subscriptions.
 	//
 	// EventSubscriptions is a required field
-	EventSubscriptions []*EventSubscription `locationName:"eventSubscriptions" min:"1" type:"list" required:"true"`
+	EventSubscriptions []EventSubscription `locationName:"eventSubscriptions" min:"1" type:"list" required:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// the SNS notification is sent.
@@ -6539,7 +6521,7 @@ func (s Subscription) GoString() string {
 }
 
 // SetEventSubscriptions sets the EventSubscriptions field's value.
-func (s *Subscription) SetEventSubscriptions(v []*EventSubscription) *Subscription {
+func (s *Subscription) SetEventSubscriptions(v []EventSubscription) *Subscription {
 	s.EventSubscriptions = v
 	return s
 }
@@ -6704,7 +6686,7 @@ type UnsubscribeFromEventInput struct {
 	// The event for which you want to stop receiving SNS notifications.
 	//
 	// Event is a required field
-	Event Event `locationName:"event" type:"string" required:"true"`
+	Event Event `locationName:"event" type:"string" required:"true" enum:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// you want to stop receiving SNS notifications.

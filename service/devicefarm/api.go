@@ -3108,17 +3108,17 @@ type AccountSettings struct {
 	// The maximum number of device slots that the AWS account can purchase. Each
 	// maximum is expressed as an offering-id:number pair, where the offering-id
 	// represents one of the IDs returned by the ListOfferings command.
-	MaxSlots map[string]*int64 `locationName:"maxSlots" type:"map"`
+	MaxSlots map[string]int64 `locationName:"maxSlots" type:"map"`
 
 	// Information about an AWS account's usage of free trial device minutes.
 	TrialMinutes *TrialMinutes `locationName:"trialMinutes" type:"structure"`
 
 	// Returns the unmetered devices you have purchased or want to purchase.
-	UnmeteredDevices map[string]*int64 `locationName:"unmeteredDevices" type:"map"`
+	UnmeteredDevices map[string]int64 `locationName:"unmeteredDevices" type:"map"`
 
 	// Returns the unmetered remote access devices you have purchased or want to
 	// purchase.
-	UnmeteredRemoteAccessDevices map[string]*int64 `locationName:"unmeteredRemoteAccessDevices" type:"map"`
+	UnmeteredRemoteAccessDevices map[string]int64 `locationName:"unmeteredRemoteAccessDevices" type:"map"`
 }
 
 // String returns the string representation
@@ -3150,7 +3150,7 @@ func (s *AccountSettings) SetMaxJobTimeoutMinutes(v int64) *AccountSettings {
 }
 
 // SetMaxSlots sets the MaxSlots field's value.
-func (s *AccountSettings) SetMaxSlots(v map[string]*int64) *AccountSettings {
+func (s *AccountSettings) SetMaxSlots(v map[string]int64) *AccountSettings {
 	s.MaxSlots = v
 	return s
 }
@@ -3162,13 +3162,13 @@ func (s *AccountSettings) SetTrialMinutes(v *TrialMinutes) *AccountSettings {
 }
 
 // SetUnmeteredDevices sets the UnmeteredDevices field's value.
-func (s *AccountSettings) SetUnmeteredDevices(v map[string]*int64) *AccountSettings {
+func (s *AccountSettings) SetUnmeteredDevices(v map[string]int64) *AccountSettings {
 	s.UnmeteredDevices = v
 	return s
 }
 
 // SetUnmeteredRemoteAccessDevices sets the UnmeteredRemoteAccessDevices field's value.
-func (s *AccountSettings) SetUnmeteredRemoteAccessDevices(v map[string]*int64) *AccountSettings {
+func (s *AccountSettings) SetUnmeteredRemoteAccessDevices(v map[string]int64) *AccountSettings {
 	s.UnmeteredRemoteAccessDevices = v
 	return s
 }
@@ -3237,7 +3237,7 @@ type Artifact struct {
 	//    * APPLICATION_CRASH_REPORT: The application crash report output type.
 	//
 	//    * XCTEST_LOG: The XCode test output type.
-	Type ArtifactType `locationName:"type" type:"string"`
+	Type ArtifactType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
 	// to download the artifact's file.
@@ -3430,7 +3430,7 @@ type CreateDevicePoolInput struct {
 	// The device pool's rules.
 	//
 	// Rules is a required field
-	Rules []*Rule `locationName:"rules" type:"list" required:"true"`
+	Rules []Rule `locationName:"rules" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3487,7 +3487,7 @@ func (s *CreateDevicePoolInput) SetProjectArn(v string) *CreateDevicePoolInput {
 }
 
 // SetRules sets the Rules field's value.
-func (s *CreateDevicePoolInput) SetRules(v []*Rule) *CreateDevicePoolInput {
+func (s *CreateDevicePoolInput) SetRules(v []Rule) *CreateDevicePoolInput {
 	s.Rules = v
 	return s
 }
@@ -3550,7 +3550,7 @@ type CreateNetworkProfileInput struct {
 	ProjectArn *string `locationName:"projectArn" min:"32" type:"string" required:"true"`
 
 	// The type of network profile you wish to create. Valid values are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -3778,7 +3778,7 @@ type CreateRemoteAccessSessionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the billing method for purposes of configuring a remote access session.
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4002,7 +4002,7 @@ type CreateUploadInput struct {
 	// an ArgumentException error.
 	//
 	// Type is a required field
-	Type UploadType `locationName:"type" type:"string" required:"true"`
+	Type UploadType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4100,15 +4100,15 @@ type CustomerArtifactPaths struct {
 
 	// Comma-separated list of paths on the Android device where the artifacts generated
 	// by the customer's tests will be pulled from.
-	AndroidPaths []*string `locationName:"androidPaths" type:"list"`
+	AndroidPaths []string `locationName:"androidPaths" type:"list"`
 
 	// Comma-separated list of paths in the test execution environment where the
 	// artifacts generated by the customer's tests will be pulled from.
-	DeviceHostPaths []*string `locationName:"deviceHostPaths" type:"list"`
+	DeviceHostPaths []string `locationName:"deviceHostPaths" type:"list"`
 
 	// Comma-separated list of paths on the iOS device where the artifacts generated
 	// by the customer's tests will be pulled from.
-	IosPaths []*string `locationName:"iosPaths" type:"list"`
+	IosPaths []string `locationName:"iosPaths" type:"list"`
 }
 
 // String returns the string representation
@@ -4122,19 +4122,19 @@ func (s CustomerArtifactPaths) GoString() string {
 }
 
 // SetAndroidPaths sets the AndroidPaths field's value.
-func (s *CustomerArtifactPaths) SetAndroidPaths(v []*string) *CustomerArtifactPaths {
+func (s *CustomerArtifactPaths) SetAndroidPaths(v []string) *CustomerArtifactPaths {
 	s.AndroidPaths = v
 	return s
 }
 
 // SetDeviceHostPaths sets the DeviceHostPaths field's value.
-func (s *CustomerArtifactPaths) SetDeviceHostPaths(v []*string) *CustomerArtifactPaths {
+func (s *CustomerArtifactPaths) SetDeviceHostPaths(v []string) *CustomerArtifactPaths {
 	s.DeviceHostPaths = v
 	return s
 }
 
 // SetIosPaths sets the IosPaths field's value.
-func (s *CustomerArtifactPaths) SetIosPaths(v []*string) *CustomerArtifactPaths {
+func (s *CustomerArtifactPaths) SetIosPaths(v []string) *CustomerArtifactPaths {
 	s.IosPaths = v
 	return s
 }
@@ -4530,7 +4530,7 @@ type Device struct {
 	//    * PHONE: The phone form factor.
 	//
 	//    * TABLET: The tablet form factor.
-	FormFactor DeviceFormFactor `locationName:"formFactor" type:"string"`
+	FormFactor DeviceFormFactor `locationName:"formFactor" type:"string" enum:"true"`
 
 	// The device's heap size, expressed in bytes.
 	HeapSize *int64 `locationName:"heapSize" type:"long"`
@@ -4560,7 +4560,7 @@ type Device struct {
 	//    * ANDROID: The Android platform.
 	//
 	//    * IOS: The iOS platform.
-	Platform DevicePlatform `locationName:"platform" type:"string"`
+	Platform DevicePlatform `locationName:"platform" type:"string" enum:"true"`
 
 	// The device's radio.
 	Radio *string `locationName:"radio" type:"string"`
@@ -4755,7 +4755,7 @@ type DevicePool struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// Information about the device pool's rules.
-	Rules []*Rule `locationName:"rules" type:"list"`
+	Rules []Rule `locationName:"rules" type:"list"`
 
 	// The device pool's type.
 	//
@@ -4765,7 +4765,7 @@ type DevicePool struct {
 	//
 	//    * PRIVATE: A device pool that is created and managed by the device pool
 	//    developer.
-	Type DevicePoolType `locationName:"type" type:"string"`
+	Type DevicePoolType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4797,7 +4797,7 @@ func (s *DevicePool) SetName(v string) *DevicePool {
 }
 
 // SetRules sets the Rules field's value.
-func (s *DevicePool) SetRules(v []*Rule) *DevicePool {
+func (s *DevicePool) SetRules(v []Rule) *DevicePool {
 	s.Rules = v
 	return s
 }
@@ -4820,7 +4820,7 @@ type DevicePoolCompatibilityResult struct {
 	Device *Device `locationName:"device" type:"structure"`
 
 	// Information about the compatibility.
-	IncompatibilityMessages []*IncompatibilityMessage `locationName:"incompatibilityMessages" type:"list"`
+	IncompatibilityMessages []IncompatibilityMessage `locationName:"incompatibilityMessages" type:"list"`
 }
 
 // String returns the string representation
@@ -4846,7 +4846,7 @@ func (s *DevicePoolCompatibilityResult) SetDevice(v *Device) *DevicePoolCompatib
 }
 
 // SetIncompatibilityMessages sets the IncompatibilityMessages field's value.
-func (s *DevicePoolCompatibilityResult) SetIncompatibilityMessages(v []*IncompatibilityMessage) *DevicePoolCompatibilityResult {
+func (s *DevicePoolCompatibilityResult) SetIncompatibilityMessages(v []IncompatibilityMessage) *DevicePoolCompatibilityResult {
 	s.IncompatibilityMessages = v
 	return s
 }
@@ -5057,7 +5057,7 @@ type GetDevicePoolCompatibilityInput struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	TestType TestType `locationName:"testType" type:"string"`
+	TestType TestType `locationName:"testType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5125,10 +5125,10 @@ type GetDevicePoolCompatibilityOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about compatible devices.
-	CompatibleDevices []*DevicePoolCompatibilityResult `locationName:"compatibleDevices" type:"list"`
+	CompatibleDevices []DevicePoolCompatibilityResult `locationName:"compatibleDevices" type:"list"`
 
 	// Information about incompatible devices.
-	IncompatibleDevices []*DevicePoolCompatibilityResult `locationName:"incompatibleDevices" type:"list"`
+	IncompatibleDevices []DevicePoolCompatibilityResult `locationName:"incompatibleDevices" type:"list"`
 }
 
 // String returns the string representation
@@ -5142,13 +5142,13 @@ func (s GetDevicePoolCompatibilityOutput) GoString() string {
 }
 
 // SetCompatibleDevices sets the CompatibleDevices field's value.
-func (s *GetDevicePoolCompatibilityOutput) SetCompatibleDevices(v []*DevicePoolCompatibilityResult) *GetDevicePoolCompatibilityOutput {
+func (s *GetDevicePoolCompatibilityOutput) SetCompatibleDevices(v []DevicePoolCompatibilityResult) *GetDevicePoolCompatibilityOutput {
 	s.CompatibleDevices = v
 	return s
 }
 
 // SetIncompatibleDevices sets the IncompatibleDevices field's value.
-func (s *GetDevicePoolCompatibilityOutput) SetIncompatibleDevices(v []*DevicePoolCompatibilityResult) *GetDevicePoolCompatibilityOutput {
+func (s *GetDevicePoolCompatibilityOutput) SetIncompatibleDevices(v []DevicePoolCompatibilityResult) *GetDevicePoolCompatibilityOutput {
 	s.IncompatibleDevices = v
 	return s
 }
@@ -5405,10 +5405,10 @@ type GetOfferingStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// When specified, gets the offering status for the current period.
-	Current map[string]*OfferingStatus `locationName:"current" type:"map"`
+	Current map[string]OfferingStatus `locationName:"current" type:"map"`
 
 	// When specified, gets the offering status for the next period.
-	NextPeriod map[string]*OfferingStatus `locationName:"nextPeriod" type:"map"`
+	NextPeriod map[string]OfferingStatus `locationName:"nextPeriod" type:"map"`
 
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
@@ -5426,13 +5426,13 @@ func (s GetOfferingStatusOutput) GoString() string {
 }
 
 // SetCurrent sets the Current field's value.
-func (s *GetOfferingStatusOutput) SetCurrent(v map[string]*OfferingStatus) *GetOfferingStatusOutput {
+func (s *GetOfferingStatusOutput) SetCurrent(v map[string]OfferingStatus) *GetOfferingStatusOutput {
 	s.Current = v
 	return s
 }
 
 // SetNextPeriod sets the NextPeriod field's value.
-func (s *GetOfferingStatusOutput) SetNextPeriod(v map[string]*OfferingStatus) *GetOfferingStatusOutput {
+func (s *GetOfferingStatusOutput) SetNextPeriod(v map[string]OfferingStatus) *GetOfferingStatusOutput {
 	s.NextPeriod = v
 	return s
 }
@@ -5883,7 +5883,7 @@ type IncompatibilityMessage struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
-	Type DeviceAttribute `locationName:"type" type:"string"`
+	Type DeviceAttribute `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6042,7 +6042,7 @@ type Job struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The job's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -6068,7 +6068,7 @@ type Job struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The job's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -6106,7 +6106,7 @@ type Job struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6216,7 +6216,7 @@ type ListArtifactsInput struct {
 	//    * SCREENSHOT: The artifacts are screenshots.
 	//
 	// Type is a required field
-	Type ArtifactCategory `locationName:"type" type:"string" required:"true"`
+	Type ArtifactCategory `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -6276,7 +6276,7 @@ type ListArtifactsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the artifacts.
-	Artifacts []*Artifact `locationName:"artifacts" type:"list"`
+	Artifacts []Artifact `locationName:"artifacts" type:"list"`
 
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
@@ -6295,7 +6295,7 @@ func (s ListArtifactsOutput) GoString() string {
 }
 
 // SetArtifacts sets the Artifacts field's value.
-func (s *ListArtifactsOutput) SetArtifacts(v []*Artifact) *ListArtifactsOutput {
+func (s *ListArtifactsOutput) SetArtifacts(v []Artifact) *ListArtifactsOutput {
 	s.Artifacts = v
 	return s
 }
@@ -6328,7 +6328,7 @@ type ListDevicePoolsInput struct {
 	//
 	//    * PRIVATE: A device pool that is created and managed by the device pool
 	//    developer.
-	Type DevicePoolType `locationName:"type" type:"string"`
+	Type DevicePoolType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6385,7 +6385,7 @@ type ListDevicePoolsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the device pools.
-	DevicePools []*DevicePool `locationName:"devicePools" type:"list"`
+	DevicePools []DevicePool `locationName:"devicePools" type:"list"`
 
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
@@ -6404,7 +6404,7 @@ func (s ListDevicePoolsOutput) GoString() string {
 }
 
 // SetDevicePools sets the DevicePools field's value.
-func (s *ListDevicePoolsOutput) SetDevicePools(v []*DevicePool) *ListDevicePoolsOutput {
+func (s *ListDevicePoolsOutput) SetDevicePools(v []DevicePool) *ListDevicePoolsOutput {
 	s.DevicePools = v
 	return s
 }
@@ -6472,7 +6472,7 @@ type ListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the devices.
-	Devices []*Device `locationName:"devices" type:"list"`
+	Devices []Device `locationName:"devices" type:"list"`
 
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
@@ -6491,7 +6491,7 @@ func (s ListDevicesOutput) GoString() string {
 }
 
 // SetDevices sets the Devices field's value.
-func (s *ListDevicesOutput) SetDevices(v []*Device) *ListDevicesOutput {
+func (s *ListDevicesOutput) SetDevices(v []Device) *ListDevicesOutput {
 	s.Devices = v
 	return s
 }
@@ -6565,7 +6565,7 @@ type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the jobs.
-	Jobs []*Job `locationName:"jobs" type:"list"`
+	Jobs []Job `locationName:"jobs" type:"list"`
 
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
@@ -6584,7 +6584,7 @@ func (s ListJobsOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *ListJobsOutput) SetJobs(v []*Job) *ListJobsOutput {
+func (s *ListJobsOutput) SetJobs(v []Job) *ListJobsOutput {
 	s.Jobs = v
 	return s
 }
@@ -6611,7 +6611,7 @@ type ListNetworkProfilesInput struct {
 
 	// The type of network profile you wish to return information about. Valid values
 	// are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6667,7 +6667,7 @@ type ListNetworkProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the available network profiles.
-	NetworkProfiles []*NetworkProfile `locationName:"networkProfiles" type:"list"`
+	NetworkProfiles []NetworkProfile `locationName:"networkProfiles" type:"list"`
 
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
@@ -6685,7 +6685,7 @@ func (s ListNetworkProfilesOutput) GoString() string {
 }
 
 // SetNetworkProfiles sets the NetworkProfiles field's value.
-func (s *ListNetworkProfilesOutput) SetNetworkProfiles(v []*NetworkProfile) *ListNetworkProfilesOutput {
+func (s *ListNetworkProfilesOutput) SetNetworkProfiles(v []NetworkProfile) *ListNetworkProfilesOutput {
 	s.NetworkProfiles = v
 	return s
 }
@@ -6743,7 +6743,7 @@ type ListOfferingPromotionsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the offering promotions.
-	OfferingPromotions []*OfferingPromotion `locationName:"offeringPromotions" type:"list"`
+	OfferingPromotions []OfferingPromotion `locationName:"offeringPromotions" type:"list"`
 }
 
 // String returns the string representation
@@ -6763,7 +6763,7 @@ func (s *ListOfferingPromotionsOutput) SetNextToken(v string) *ListOfferingPromo
 }
 
 // SetOfferingPromotions sets the OfferingPromotions field's value.
-func (s *ListOfferingPromotionsOutput) SetOfferingPromotions(v []*OfferingPromotion) *ListOfferingPromotionsOutput {
+func (s *ListOfferingPromotionsOutput) SetOfferingPromotions(v []OfferingPromotion) *ListOfferingPromotionsOutput {
 	s.OfferingPromotions = v
 	return s
 }
@@ -6818,7 +6818,7 @@ type ListOfferingTransactionsOutput struct {
 
 	// The audit log of subscriptions you have purchased and modified through AWS
 	// Device Farm.
-	OfferingTransactions []*OfferingTransaction `locationName:"offeringTransactions" type:"list"`
+	OfferingTransactions []OfferingTransaction `locationName:"offeringTransactions" type:"list"`
 }
 
 // String returns the string representation
@@ -6838,7 +6838,7 @@ func (s *ListOfferingTransactionsOutput) SetNextToken(v string) *ListOfferingTra
 }
 
 // SetOfferingTransactions sets the OfferingTransactions field's value.
-func (s *ListOfferingTransactionsOutput) SetOfferingTransactions(v []*OfferingTransaction) *ListOfferingTransactionsOutput {
+func (s *ListOfferingTransactionsOutput) SetOfferingTransactions(v []OfferingTransaction) *ListOfferingTransactionsOutput {
 	s.OfferingTransactions = v
 	return s
 }
@@ -6892,7 +6892,7 @@ type ListOfferingsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// A value representing the list offering results.
-	Offerings []*Offering `locationName:"offerings" type:"list"`
+	Offerings []Offering `locationName:"offerings" type:"list"`
 }
 
 // String returns the string representation
@@ -6912,7 +6912,7 @@ func (s *ListOfferingsOutput) SetNextToken(v string) *ListOfferingsOutput {
 }
 
 // SetOfferings sets the Offerings field's value.
-func (s *ListOfferingsOutput) SetOfferings(v []*Offering) *ListOfferingsOutput {
+func (s *ListOfferingsOutput) SetOfferings(v []Offering) *ListOfferingsOutput {
 	s.Offerings = v
 	return s
 }
@@ -6981,7 +6981,7 @@ type ListProjectsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the projects.
-	Projects []*Project `locationName:"projects" type:"list"`
+	Projects []Project `locationName:"projects" type:"list"`
 }
 
 // String returns the string representation
@@ -7001,7 +7001,7 @@ func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
 }
 
 // SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []*Project) *ListProjectsOutput {
+func (s *ListProjectsOutput) SetProjects(v []Project) *ListProjectsOutput {
 	s.Projects = v
 	return s
 }
@@ -7076,7 +7076,7 @@ type ListRemoteAccessSessionsOutput struct {
 
 	// A container representing the metadata from the service about each remote
 	// access session you are requesting.
-	RemoteAccessSessions []*RemoteAccessSession `locationName:"remoteAccessSessions" type:"list"`
+	RemoteAccessSessions []RemoteAccessSession `locationName:"remoteAccessSessions" type:"list"`
 }
 
 // String returns the string representation
@@ -7096,7 +7096,7 @@ func (s *ListRemoteAccessSessionsOutput) SetNextToken(v string) *ListRemoteAcces
 }
 
 // SetRemoteAccessSessions sets the RemoteAccessSessions field's value.
-func (s *ListRemoteAccessSessionsOutput) SetRemoteAccessSessions(v []*RemoteAccessSession) *ListRemoteAccessSessionsOutput {
+func (s *ListRemoteAccessSessionsOutput) SetRemoteAccessSessions(v []RemoteAccessSession) *ListRemoteAccessSessionsOutput {
 	s.RemoteAccessSessions = v
 	return s
 }
@@ -7170,7 +7170,7 @@ type ListRunsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the runs.
-	Runs []*Run `locationName:"runs" type:"list"`
+	Runs []Run `locationName:"runs" type:"list"`
 }
 
 // String returns the string representation
@@ -7190,7 +7190,7 @@ func (s *ListRunsOutput) SetNextToken(v string) *ListRunsOutput {
 }
 
 // SetRuns sets the Runs field's value.
-func (s *ListRunsOutput) SetRuns(v []*Run) *ListRunsOutput {
+func (s *ListRunsOutput) SetRuns(v []Run) *ListRunsOutput {
 	s.Runs = v
 	return s
 }
@@ -7264,7 +7264,7 @@ type ListSamplesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the samples.
-	Samples []*Sample `locationName:"samples" type:"list"`
+	Samples []Sample `locationName:"samples" type:"list"`
 }
 
 // String returns the string representation
@@ -7284,7 +7284,7 @@ func (s *ListSamplesOutput) SetNextToken(v string) *ListSamplesOutput {
 }
 
 // SetSamples sets the Samples field's value.
-func (s *ListSamplesOutput) SetSamples(v []*Sample) *ListSamplesOutput {
+func (s *ListSamplesOutput) SetSamples(v []Sample) *ListSamplesOutput {
 	s.Samples = v
 	return s
 }
@@ -7357,7 +7357,7 @@ type ListSuitesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the suites.
-	Suites []*Suite `locationName:"suites" type:"list"`
+	Suites []Suite `locationName:"suites" type:"list"`
 }
 
 // String returns the string representation
@@ -7377,7 +7377,7 @@ func (s *ListSuitesOutput) SetNextToken(v string) *ListSuitesOutput {
 }
 
 // SetSuites sets the Suites field's value.
-func (s *ListSuitesOutput) SetSuites(v []*Suite) *ListSuitesOutput {
+func (s *ListSuitesOutput) SetSuites(v []Suite) *ListSuitesOutput {
 	s.Suites = v
 	return s
 }
@@ -7450,7 +7450,7 @@ type ListTestsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the tests.
-	Tests []*Test `locationName:"tests" type:"list"`
+	Tests []Test `locationName:"tests" type:"list"`
 }
 
 // String returns the string representation
@@ -7470,7 +7470,7 @@ func (s *ListTestsOutput) SetNextToken(v string) *ListTestsOutput {
 }
 
 // SetTests sets the Tests field's value.
-func (s *ListTestsOutput) SetTests(v []*Test) *ListTestsOutput {
+func (s *ListTestsOutput) SetTests(v []Test) *ListTestsOutput {
 	s.Tests = v
 	return s
 }
@@ -7559,7 +7559,7 @@ type ListUniqueProblemsOutput struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	UniqueProblems map[string][]*UniqueProblem `locationName:"uniqueProblems" type:"map"`
+	UniqueProblems map[string][]UniqueProblem `locationName:"uniqueProblems" type:"map"`
 }
 
 // String returns the string representation
@@ -7579,7 +7579,7 @@ func (s *ListUniqueProblemsOutput) SetNextToken(v string) *ListUniqueProblemsOut
 }
 
 // SetUniqueProblems sets the UniqueProblems field's value.
-func (s *ListUniqueProblemsOutput) SetUniqueProblems(v map[string][]*UniqueProblem) *ListUniqueProblemsOutput {
+func (s *ListUniqueProblemsOutput) SetUniqueProblems(v map[string][]UniqueProblem) *ListUniqueProblemsOutput {
 	s.UniqueProblems = v
 	return s
 }
@@ -7653,7 +7653,7 @@ type ListUploadsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
 
 	// Information about the uploads.
-	Uploads []*Upload `locationName:"uploads" type:"list"`
+	Uploads []Upload `locationName:"uploads" type:"list"`
 }
 
 // String returns the string representation
@@ -7673,7 +7673,7 @@ func (s *ListUploadsOutput) SetNextToken(v string) *ListUploadsOutput {
 }
 
 // SetUploads sets the Uploads field's value.
-func (s *ListUploadsOutput) SetUploads(v []*Upload) *ListUploadsOutput {
+func (s *ListUploadsOutput) SetUploads(v []Upload) *ListUploadsOutput {
 	s.Uploads = v
 	return s
 }
@@ -7746,7 +7746,7 @@ type MonetaryAmount struct {
 	Amount *float64 `locationName:"amount" type:"double"`
 
 	// The currency code of a monetary amount. For example, USD means "U.S. dollars."
-	CurrencyCode CurrencyCode `locationName:"currencyCode" type:"string"`
+	CurrencyCode CurrencyCode `locationName:"currencyCode" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7800,7 +7800,7 @@ type NetworkProfile struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The type of network profile. Valid values are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -7911,13 +7911,13 @@ type Offering struct {
 	Id *string `locationName:"id" min:"32" type:"string"`
 
 	// The platform of the device (e.g., ANDROID or IOS).
-	Platform DevicePlatform `locationName:"platform" type:"string"`
+	Platform DevicePlatform `locationName:"platform" type:"string" enum:"true"`
 
 	// Specifies whether there are recurring charges for the offering.
-	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" type:"list"`
+	RecurringCharges []RecurringCharge `locationName:"recurringCharges" type:"list"`
 
 	// The type of offering (e.g., "RECURRING") for a device.
-	Type OfferingType `locationName:"type" type:"string"`
+	Type OfferingType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7949,7 +7949,7 @@ func (s *Offering) SetPlatform(v DevicePlatform) *Offering {
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *Offering) SetRecurringCharges(v []*RecurringCharge) *Offering {
+func (s *Offering) SetRecurringCharges(v []RecurringCharge) *Offering {
 	s.RecurringCharges = v
 	return s
 }
@@ -8009,7 +8009,7 @@ type OfferingStatus struct {
 	Quantity *int64 `locationName:"quantity" type:"integer"`
 
 	// The type specified for the offering status.
-	Type OfferingTransactionType `locationName:"type" type:"string"`
+	Type OfferingTransactionType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8138,7 +8138,7 @@ type Problem struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// Information about the associated run.
 	Run *ProblemDetail `locationName:"run" type:"structure"`
@@ -8436,7 +8436,7 @@ type RecurringCharge struct {
 	Cost *MonetaryAmount `locationName:"cost" type:"structure"`
 
 	// The frequency in which charges will recur.
-	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string"`
+	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8472,7 +8472,7 @@ type RemoteAccessSession struct {
 	// The billing method of the remote access session. Possible values include
 	// METERED or UNMETERED. For more information about metered devices, see AWS
 	// Device Farm terminology (http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology)."
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// Unique identifier of your client for the remote access session. Only returned
 	// if remote debugging is enabled for the remote access session.
@@ -8524,7 +8524,7 @@ type RemoteAccessSession struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The date and time the remote access session was started.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -8548,7 +8548,7 @@ type RemoteAccessSession struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The date and time the remote access session was stopped.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -8787,7 +8787,7 @@ type Rule struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
-	Attribute DeviceAttribute `locationName:"attribute" type:"string"`
+	Attribute DeviceAttribute `locationName:"attribute" type:"string" enum:"true"`
 
 	// The rule's operator.
 	//
@@ -8802,7 +8802,7 @@ type Rule struct {
 	//    * NOT_IN: The not-in operator.
 	//
 	//    * CONTAINS: The contains operator.
-	Operator RuleOperator `locationName:"operator" type:"string"`
+	Operator RuleOperator `locationName:"operator" type:"string" enum:"true"`
 
 	// The rule's value.
 	Value *string `locationName:"value" type:"string"`
@@ -8847,7 +8847,7 @@ type Run struct {
 
 	// Specifies the billing method for a test run: metered or unmetered. If the
 	// parameter is not specified, the default value is metered.
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// The total number of completed jobs.
 	CompletedJobs *int64 `locationName:"completedJobs" type:"integer"`
@@ -8885,7 +8885,7 @@ type Run struct {
 	//    * ANDROID: The Android platform.
 	//
 	//    * IOS: The iOS platform.
-	Platform DevicePlatform `locationName:"platform" type:"string"`
+	Platform DevicePlatform `locationName:"platform" type:"string" enum:"true"`
 
 	// The run's result.
 	//
@@ -8904,11 +8904,11 @@ type Run struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// Supporting field for the result field. Set only if result is SKIPPED. PARSING_FAILED
 	// if the result is skipped because of test package parsing failure.
-	ResultCode ExecutionResultCode `locationName:"resultCode" type:"string"`
+	ResultCode ExecutionResultCode `locationName:"resultCode" type:"string" enum:"true"`
 
 	// The run's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -8934,7 +8934,7 @@ type Run struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The run's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -8975,7 +8975,7 @@ type Run struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9152,7 +9152,7 @@ type Sample struct {
 	//
 	//    * TX_RATE: The total number of bytes per second (TCP and UDP) that are
 	//    received, by app process.
-	Type SampleType `locationName:"type" type:"string"`
+	Type SampleType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
 	// to download the sample's file.
@@ -9194,11 +9194,11 @@ type ScheduleRunConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// A list of auxiliary apps for the run.
-	AuxiliaryApps []*string `locationName:"auxiliaryApps" type:"list"`
+	AuxiliaryApps []string `locationName:"auxiliaryApps" type:"list"`
 
 	// Specifies the billing method for a test run: metered or unmetered. If the
 	// parameter is not specified, the default value is metered.
-	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// Input CustomerArtifactPaths object for the scheduled run configuration.
 	CustomerArtifactPaths *CustomerArtifactPaths `locationName:"customerArtifactPaths" type:"structure"`
@@ -9253,7 +9253,7 @@ func (s *ScheduleRunConfiguration) Validate() error {
 }
 
 // SetAuxiliaryApps sets the AuxiliaryApps field's value.
-func (s *ScheduleRunConfiguration) SetAuxiliaryApps(v []*string) *ScheduleRunConfiguration {
+func (s *ScheduleRunConfiguration) SetAuxiliaryApps(v []string) *ScheduleRunConfiguration {
 	s.AuxiliaryApps = v
 	return s
 }
@@ -9533,7 +9533,7 @@ type ScheduleRunTest struct {
 	// Running a single test: "com.android.abc.Test1#smoke"
 	//
 	// Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"
-	Parameters map[string]*string `locationName:"parameters" type:"map"`
+	Parameters map[string]string `locationName:"parameters" type:"map"`
 
 	// The ARN of the uploaded test that will be run.
 	TestPackageArn *string `locationName:"testPackageArn" min:"32" type:"string"`
@@ -9573,7 +9573,7 @@ type ScheduleRunTest struct {
 	//    * XCTEST_UI: The XCode UI test type.
 	//
 	// Type is a required field
-	Type TestType `locationName:"type" type:"string" required:"true"`
+	Type TestType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -9609,7 +9609,7 @@ func (s *ScheduleRunTest) SetFilter(v string) *ScheduleRunTest {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ScheduleRunTest) SetParameters(v map[string]*string) *ScheduleRunTest {
+func (s *ScheduleRunTest) SetParameters(v map[string]string) *ScheduleRunTest {
 	s.Parameters = v
 	return s
 }
@@ -9807,7 +9807,7 @@ type Suite struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The suite's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -9833,7 +9833,7 @@ type Suite struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The suite's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -9871,7 +9871,7 @@ type Suite struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9990,7 +9990,7 @@ type Test struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result ExecutionResult `locationName:"result" type:"string"`
+	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
 
 	// The test's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -10016,7 +10016,7 @@ type Test struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status ExecutionStatus `locationName:"status" type:"string"`
+	Status ExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The test's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -10054,7 +10054,7 @@ type Test struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type TestType `locationName:"type" type:"string"`
+	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10176,7 +10176,7 @@ type UniqueProblem struct {
 	Message *string `locationName:"message" type:"string"`
 
 	// Information about the problems.
-	Problems []*Problem `locationName:"problems" type:"list"`
+	Problems []Problem `locationName:"problems" type:"list"`
 }
 
 // String returns the string representation
@@ -10196,7 +10196,7 @@ func (s *UniqueProblem) SetMessage(v string) *UniqueProblem {
 }
 
 // SetProblems sets the Problems field's value.
-func (s *UniqueProblem) SetProblems(v []*Problem) *UniqueProblem {
+func (s *UniqueProblem) SetProblems(v []Problem) *UniqueProblem {
 	s.Problems = v
 	return s
 }
@@ -10221,7 +10221,7 @@ type UpdateDevicePoolInput struct {
 	// Represents the rules you wish to modify for the device pool. Updating rules
 	// is optional; however, if you choose to update rules for your request, the
 	// update will replace the existing rules.
-	Rules []*Rule `locationName:"rules" type:"list"`
+	Rules []Rule `locationName:"rules" type:"list"`
 }
 
 // String returns the string representation
@@ -10270,7 +10270,7 @@ func (s *UpdateDevicePoolInput) SetName(v string) *UpdateDevicePoolInput {
 }
 
 // SetRules sets the Rules field's value.
-func (s *UpdateDevicePoolInput) SetRules(v []*Rule) *UpdateDevicePoolInput {
+func (s *UpdateDevicePoolInput) SetRules(v []Rule) *UpdateDevicePoolInput {
 	s.Rules = v
 	return s
 }
@@ -10332,7 +10332,7 @@ type UpdateNetworkProfileInput struct {
 
 	// The type of network profile you wish to return information about. Valid values
 	// are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string"`
+	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -10596,7 +10596,7 @@ type Upload struct {
 	//    * PROCESSING: A processing status.
 	//
 	//    * SUCCEEDED: A succeeded status.
-	Status UploadStatus `locationName:"status" type:"string"`
+	Status UploadStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The upload's type.
 	//
@@ -10636,7 +10636,7 @@ type Upload struct {
 	//    * XCTEST_TEST_PACKAGE: An XCode test package upload.
 	//
 	//    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.
-	Type UploadType `locationName:"type" type:"string"`
+	Type UploadType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that was used to store a file through a corresponding
 	// PUT request.

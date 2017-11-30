@@ -121,7 +121,7 @@ func ExampleSES_CreateReceiptRuleRequest_shared00() {
 	input := &ses.CreateReceiptRuleInput{
 		After: aws.String(""),
 		Rule: &ses.ReceiptRule{
-			Actions: []*ses.ReceiptAction{
+			Actions: []ses.ReceiptAction{
 				{},
 			},
 			Enabled:     aws.Bool(true),
@@ -525,9 +525,9 @@ func ExampleSES_GetIdentityDkimAttributesRequest_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.GetIdentityDkimAttributesInput{
-		Identities: []*string{
-			aws.String("example.com"),
-			aws.String("user@example.com"),
+		Identities: []string{
+			"example.com",
+			"user@example.com",
 		},
 	}
 
@@ -561,8 +561,8 @@ func ExampleSES_GetIdentityMailFromDomainAttributesRequest_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.GetIdentityMailFromDomainAttributesInput{
-		Identities: []*string{
-			aws.String("example.com"),
+		Identities: []string{
+			"example.com",
 		},
 	}
 
@@ -596,8 +596,8 @@ func ExampleSES_GetIdentityNotificationAttributesRequest_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.GetIdentityNotificationAttributesInput{
-		Identities: []*string{
-			aws.String("example.com"),
+		Identities: []string{
+			"example.com",
 		},
 	}
 
@@ -632,8 +632,8 @@ func ExampleSES_GetIdentityPoliciesRequest_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.GetIdentityPoliciesInput{
 		Identity: aws.String("example.com"),
-		PolicyNames: []*string{
-			aws.String("MyPolicy"),
+		PolicyNames: []string{
+			"MyPolicy",
 		},
 	}
 
@@ -668,8 +668,8 @@ func ExampleSES_GetIdentityVerificationAttributesRequest_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.GetIdentityVerificationAttributesInput{
-		Identities: []*string{
-			aws.String("example.com"),
+		Identities: []string{
+			"example.com",
 		},
 	}
 
@@ -969,9 +969,9 @@ func ExampleSES_ReorderReceiptRuleSetRequest_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.ReorderReceiptRuleSetInput{
-		RuleNames: []*string{
-			aws.String("MyRule"),
-			aws.String("MyOtherRule"),
+		RuleNames: []string{
+			"MyRule",
+			"MyOtherRule",
 		},
 		RuleSetName: aws.String("MyRuleSet"),
 	}
@@ -1011,12 +1011,12 @@ func ExampleSES_SendEmailRequest_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.SendEmailInput{
 		Destination: &ses.Destination{
-			CcAddresses: []*string{
-				aws.String("recipient3@example.com"),
+			CcAddresses: []string{
+				"recipient3@example.com",
 			},
-			ToAddresses: []*string{
-				aws.String("recipient1@example.com"),
-				aws.String("recipient2@example.com"),
+			ToAddresses: []string{
+				"recipient1@example.com",
+				"recipient2@example.com",
 			},
 		},
 		Message: &ses.Message{
@@ -1376,7 +1376,7 @@ func ExampleSES_UpdateReceiptRuleRequest_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.UpdateReceiptRuleInput{
 		Rule: &ses.ReceiptRule{
-			Actions: []*ses.ReceiptAction{
+			Actions: []ses.ReceiptAction{
 				{},
 			},
 			Enabled:     aws.Bool(true),

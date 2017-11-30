@@ -1294,7 +1294,7 @@ type ClusterListEntry struct {
 
 	// The current state of this cluster. For information about the state of a specific
 	// node, see JobListEntry$JobState.
-	ClusterState ClusterState `type:"string"`
+	ClusterState ClusterState `type:"string" enum:"true"`
 
 	// The creation date for this cluster.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1350,7 +1350,7 @@ type ClusterMetadata struct {
 	ClusterId *string `min:"1" type:"string"`
 
 	// The current status of the cluster.
-	ClusterState ClusterState `type:"string"`
+	ClusterState ClusterState `type:"string" enum:"true"`
 
 	// The creation date for this cluster.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1364,7 +1364,7 @@ type ClusterMetadata struct {
 
 	// The type of job for this cluster. Currently, the only job type supported
 	// for clusters is LOCAL_USE.
-	JobType JobType `type:"string"`
+	JobType JobType `type:"string" enum:"true"`
 
 	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This
 	// ARN was created using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -1400,11 +1400,11 @@ type ClusterMetadata struct {
 	//    * In India, Snowball Edges are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
-	ShippingOption ShippingOption `type:"string"`
+	ShippingOption ShippingOption `type:"string" enum:"true"`
 
 	// The type of AWS Snowball appliance to use for this cluster. Currently, the
 	// only supported appliance type for cluster jobs is EDGE.
-	SnowballType Type `type:"string"`
+	SnowballType Type `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1587,7 +1587,7 @@ type CreateClusterInput struct {
 	// for clusters is LOCAL_USE.
 	//
 	// JobType is a required field
-	JobType JobType `type:"string" required:"true"`
+	JobType JobType `type:"string" required:"true" enum:"true"`
 
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
 	// values are created by using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -1629,11 +1629,11 @@ type CreateClusterInput struct {
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// ShippingOption is a required field
-	ShippingOption ShippingOption `type:"string" required:"true"`
+	ShippingOption ShippingOption `type:"string" required:"true" enum:"true"`
 
 	// The type of AWS Snowball appliance to use for this cluster. Currently, the
 	// only supported appliance type for cluster jobs is EDGE.
-	SnowballType Type `type:"string"`
+	SnowballType Type `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1793,7 +1793,7 @@ type CreateJobInput struct {
 	ForwardingAddressId *string `min:"40" type:"string"`
 
 	// Defines the type of job that you're creating.
-	JobType JobType `type:"string"`
+	JobType JobType `type:"string" enum:"true"`
 
 	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
 	// using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -1836,16 +1836,16 @@ type CreateJobInput struct {
 	//    * In India, Snowballs are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
-	ShippingOption ShippingOption `type:"string"`
+	ShippingOption ShippingOption `type:"string" enum:"true"`
 
 	// If your job is being created in one of the US regions, you have the option
 	// of specifying what size Snowball you'd like for this job. In all other regions,
 	// Snowballs come with 80 TB in storage capacity.
-	SnowballCapacityPreference Capacity `type:"string"`
+	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 
 	// The type of AWS Snowball appliance to use for this job. Currently, the only
 	// supported appliance type for cluster jobs is EDGE.
-	SnowballType Type `type:"string"`
+	SnowballType Type `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2160,7 +2160,7 @@ type DescribeAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Snowball shipping addresses that were created for this account.
-	Addresses []*Address `type:"list"`
+	Addresses []Address `type:"list"`
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next DescribeAddresses call, your list of returned addresses
@@ -2179,7 +2179,7 @@ func (s DescribeAddressesOutput) GoString() string {
 }
 
 // SetAddresses sets the Addresses field's value.
-func (s *DescribeAddressesOutput) SetAddresses(v []*Address) *DescribeAddressesOutput {
+func (s *DescribeAddressesOutput) SetAddresses(v []Address) *DescribeAddressesOutput {
 	s.Addresses = v
 	return s
 }
@@ -2311,7 +2311,7 @@ type DescribeJobOutput struct {
 
 	// Information about a specific job part (in the case of an export job), including
 	// shipping information, job status, and other important metadata.
-	SubJobMetadata []*JobMetadata `type:"list"`
+	SubJobMetadata []JobMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -2331,7 +2331,7 @@ func (s *DescribeJobOutput) SetJobMetadata(v *JobMetadata) *DescribeJobOutput {
 }
 
 // SetSubJobMetadata sets the SubJobMetadata field's value.
-func (s *DescribeJobOutput) SetSubJobMetadata(v []*JobMetadata) *DescribeJobOutput {
+func (s *DescribeJobOutput) SetSubJobMetadata(v []JobMetadata) *DescribeJobOutput {
 	s.SubJobMetadata = v
 	return s
 }
@@ -2574,13 +2574,13 @@ type JobListEntry struct {
 	JobId *string `min:"1" type:"string"`
 
 	// The current state of this job.
-	JobState JobState `type:"string"`
+	JobState JobState `type:"string" enum:"true"`
 
 	// The type of job.
-	JobType JobType `type:"string"`
+	JobType JobType `type:"string" enum:"true"`
 
 	// The type of appliance used with this job.
-	SnowballType Type `type:"string"`
+	SnowballType Type `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2735,10 +2735,10 @@ type JobMetadata struct {
 	JobLogInfo *JobLogs `type:"structure"`
 
 	// The current status of the jobs.
-	JobState JobState `type:"string"`
+	JobState JobState `type:"string" enum:"true"`
 
 	// The type of job.
-	JobType JobType `type:"string"`
+	JobType JobType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS)
 	// key associated with this job. This ARN was created using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -2767,10 +2767,10 @@ type JobMetadata struct {
 	// The Snowball capacity preference for this job, specified at job creation.
 	// In US regions, you can choose between 50 TB and 80 TB Snowballs. All other
 	// regions use 80 TB capacity Snowballs.
-	SnowballCapacityPreference Capacity `type:"string"`
+	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 
 	// The type of appliance used with this job.
-	SnowballType Type `type:"string"`
+	SnowballType Type `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2893,10 +2893,10 @@ type JobResource struct {
 	_ struct{} `type:"structure"`
 
 	// The Python-language Lambda functions for this job.
-	LambdaResources []*LambdaResource `type:"list"`
+	LambdaResources []LambdaResource `type:"list"`
 
 	// An array of S3Resource objects.
-	S3Resources []*S3Resource `type:"list"`
+	S3Resources []S3Resource `type:"list"`
 }
 
 // String returns the string representation
@@ -2914,9 +2914,6 @@ func (s *JobResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "JobResource"}
 	if s.S3Resources != nil {
 		for i, v := range s.S3Resources {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3Resources", i), err.(aws.ErrInvalidParams))
 			}
@@ -2930,13 +2927,13 @@ func (s *JobResource) Validate() error {
 }
 
 // SetLambdaResources sets the LambdaResources field's value.
-func (s *JobResource) SetLambdaResources(v []*LambdaResource) *JobResource {
+func (s *JobResource) SetLambdaResources(v []LambdaResource) *JobResource {
 	s.LambdaResources = v
 	return s
 }
 
 // SetS3Resources sets the S3Resources field's value.
-func (s *JobResource) SetS3Resources(v []*S3Resource) *JobResource {
+func (s *JobResource) SetS3Resources(v []S3Resource) *JobResource {
 	s.S3Resources = v
 	return s
 }
@@ -3003,7 +3000,7 @@ type LambdaResource struct {
 
 	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects
 	// associated with this job.
-	EventTriggers []*EventTriggerDefinition `type:"list"`
+	EventTriggers []EventTriggerDefinition `type:"list"`
 
 	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
 	// triggered by PUT object actions on the associated local Amazon S3 resource.
@@ -3021,7 +3018,7 @@ func (s LambdaResource) GoString() string {
 }
 
 // SetEventTriggers sets the EventTriggers field's value.
-func (s *LambdaResource) SetEventTriggers(v []*EventTriggerDefinition) *LambdaResource {
+func (s *LambdaResource) SetEventTriggers(v []EventTriggerDefinition) *LambdaResource {
 	s.EventTriggers = v
 	return s
 }
@@ -3104,7 +3101,7 @@ type ListClusterJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value
 	// that indicates whether the job is a job part, in the case of export jobs.
-	JobListEntries []*JobListEntry `type:"list"`
+	JobListEntries []JobListEntry `type:"list"`
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ListClusterJobsResult call, your list of returned jobs
@@ -3123,7 +3120,7 @@ func (s ListClusterJobsOutput) GoString() string {
 }
 
 // SetJobListEntries sets the JobListEntries field's value.
-func (s *ListClusterJobsOutput) SetJobListEntries(v []*JobListEntry) *ListClusterJobsOutput {
+func (s *ListClusterJobsOutput) SetJobListEntries(v []JobListEntry) *ListClusterJobsOutput {
 	s.JobListEntries = v
 	return s
 }
@@ -3188,7 +3185,7 @@ type ListClustersOutput struct {
 
 	// Each ClusterListEntry object contains a cluster's state, a cluster's ID,
 	// and other important status information.
-	ClusterListEntries []*ClusterListEntry `type:"list"`
+	ClusterListEntries []ClusterListEntry `type:"list"`
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ClusterListEntry call, your list of returned clusters
@@ -3207,7 +3204,7 @@ func (s ListClustersOutput) GoString() string {
 }
 
 // SetClusterListEntries sets the ClusterListEntries field's value.
-func (s *ListClustersOutput) SetClusterListEntries(v []*ClusterListEntry) *ListClustersOutput {
+func (s *ListClustersOutput) SetClusterListEntries(v []ClusterListEntry) *ListClustersOutput {
 	s.ClusterListEntries = v
 	return s
 }
@@ -3272,7 +3269,7 @@ type ListJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value
 	// that indicates whether the job is a job part, in the case of export jobs.
-	JobListEntries []*JobListEntry `type:"list"`
+	JobListEntries []JobListEntry `type:"list"`
 
 	// HTTP requests are stateless. If you use this automatically generated NextToken
 	// value in your next ListJobs call, your returned JobListEntry objects will
@@ -3291,7 +3288,7 @@ func (s ListJobsOutput) GoString() string {
 }
 
 // SetJobListEntries sets the JobListEntries field's value.
-func (s *ListJobsOutput) SetJobListEntries(v []*JobListEntry) *ListJobsOutput {
+func (s *ListJobsOutput) SetJobListEntries(v []JobListEntry) *ListJobsOutput {
 	s.JobListEntries = v
 	return s
 }
@@ -3484,7 +3481,7 @@ type ShippingDetails struct {
 	//
 	//    * In the United States of America (US), you have access to one-day shipping
 	//    and two-day shipping.
-	ShippingOption ShippingOption `type:"string"`
+	ShippingOption ShippingOption `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3547,7 +3544,7 @@ type UpdateClusterInput struct {
 	RoleARN *string `type:"string"`
 
 	// The updated shipping option value of this cluster's ShippingDetails object.
-	ShippingOption ShippingOption `type:"string"`
+	ShippingOption ShippingOption `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3686,11 +3683,11 @@ type UpdateJobInput struct {
 	RoleARN *string `type:"string"`
 
 	// The updated shipping option value of this job's ShippingDetails object.
-	ShippingOption ShippingOption `type:"string"`
+	ShippingOption ShippingOption `type:"string" enum:"true"`
 
 	// The updated SnowballCapacityPreference of this job's JobMetadata object.
 	// The 50 TB Snowballs are only available in the US regions.
-	SnowballCapacityPreference Capacity `type:"string"`
+	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 }
 
 // String returns the string representation

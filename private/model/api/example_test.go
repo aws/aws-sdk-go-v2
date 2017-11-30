@@ -202,7 +202,7 @@ func TestBuildShape(t *testing.T) {
 
 	for _, c := range cases {
 		ref := a.Operations["Foo"].InputRef
-		shapeStr := defaultExamplesBuilder{}.BuildShape(&ref, c.defs, false)
+		shapeStr := defaultExamplesBuilder{}.BuildShape(&ref, c.defs, false, false)
 		if c.expected != shapeStr {
 			t.Errorf("Expected:\n%s\nReceived:\n%s", c.expected, shapeStr)
 		}

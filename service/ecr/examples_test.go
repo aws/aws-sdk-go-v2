@@ -37,7 +37,7 @@ func ExampleECR_BatchDeleteImageRequest_shared00() {
 
 	svc := ecr.New(cfg)
 	input := &ecr.BatchDeleteImageInput{
-		ImageIds: []*ecr.ImageIdentifier{
+		ImageIds: []ecr.ImageIdentifier{
 			{
 				ImageTag: aws.String("precise"),
 			},
@@ -82,7 +82,7 @@ func ExampleECR_BatchGetImageRequest_shared00() {
 
 	svc := ecr.New(cfg)
 	input := &ecr.BatchGetImageInput{
-		ImageIds: []*ecr.ImageIdentifier{
+		ImageIds: []ecr.ImageIdentifier{
 			{
 				ImageTag: aws.String("precise"),
 			},

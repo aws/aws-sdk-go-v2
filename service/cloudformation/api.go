@@ -2407,7 +2407,7 @@ type AccountGateResult struct {
 	//
 	// Either no action is necessary, or no action is possible, on the stack. AWS
 	//    CloudFormation skips the stack set operation in this account and region.
-	Status AccountGateStatus `type:"string"`
+	Status AccountGateStatus `type:"string" enum:"true"`
 
 	// The reason for the account gate status assigned to this account and region
 	// for the stack set operation.
@@ -2554,7 +2554,7 @@ type Change struct {
 
 	// The type of entity that AWS CloudFormation changes. Currently, the only entity
 	// type is Resource.
-	Type ChangeType `type:"string"`
+	Type ChangeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2602,7 +2602,7 @@ type ChangeSetSummary struct {
 	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
-	ExecutionStatus ExecutionStatus `type:"string"`
+	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`
 
 	// The ID of the stack with which the change set is associated.
 	StackId *string `type:"string"`
@@ -2612,7 +2612,7 @@ type ChangeSetSummary struct {
 
 	// The state of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
 	// or FAILED.
-	Status ChangeSetStatus `type:"string"`
+	Status ChangeSetStatus `type:"string" enum:"true"`
 
 	// A description of the change set's status. For example, if your change set
 	// is in the FAILED state, AWS CloudFormation shows the error message.
@@ -2727,7 +2727,7 @@ type ContinueUpdateRollbackInput struct {
 	// in the parent stack. For an example of a continue update rollback operation
 	// with nested stacks, see Using ResourcesToSkip to recover a nested stacks
 	// hierarchy (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks).
-	ResourcesToSkip []*string `type:"list"`
+	ResourcesToSkip []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to roll back the stack. AWS CloudFormation
@@ -2794,7 +2794,7 @@ func (s *ContinueUpdateRollbackInput) SetClientRequestToken(v string) *ContinueU
 }
 
 // SetResourcesToSkip sets the ResourcesToSkip field's value.
-func (s *ContinueUpdateRollbackInput) SetResourcesToSkip(v []*string) *ContinueUpdateRollbackInput {
+func (s *ContinueUpdateRollbackInput) SetResourcesToSkip(v []string) *ContinueUpdateRollbackInput {
 	s.ResourcesToSkip = v
 	return s
 }
@@ -2879,7 +2879,7 @@ type CreateChangeSetInput struct {
 	// By default, AWS CloudFormation specifies UPDATE. You can't use the UPDATE
 	// type to create a change set for a new stack or the CREATE type to create
 	// a change set for an existing stack.
-	ChangeSetType ChangeSetType `type:"string"`
+	ChangeSetType ChangeSetType `type:"string" enum:"true"`
 
 	// A unique identifier for this CreateChangeSet request. Specify this token
 	// if you plan to retry requests so that AWS CloudFormation knows that you're
@@ -2894,12 +2894,12 @@ type CreateChangeSetInput struct {
 	// The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon
 	// SNS) topics that AWS CloudFormation associates with the stack. To remove
 	// all associated notification topics, specify an empty list.
-	NotificationARNs []*string `type:"list"`
+	NotificationARNs []string `type:"list"`
 
 	// A list of Parameter structures that specify input parameters for the change
 	// set. For more information, see the Parameter (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The template resource types that you have permissions to work with if you
 	// execute this change set, such as AWS::EC2::Instance, AWS::EC2::*, or Custom::MyCustomInstance.
@@ -2911,7 +2911,7 @@ type CreateChangeSetInput struct {
 	// more information, see Controlling Access with AWS Identity and Access Management
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
 	// in the AWS CloudFormation User Guide.
-	ResourceTypes []*string `type:"list"`
+	ResourceTypes []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation
@@ -2940,7 +2940,7 @@ type CreateChangeSetInput struct {
 
 	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
 	// these tags to resources in the stack. You can specify a maximum of 50 tags.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// A structure that contains the body of the revised template, with a minimum
 	// length of 1 byte and a maximum length of 51,200 bytes. AWS CloudFormation
@@ -3012,9 +3012,6 @@ func (s *CreateChangeSetInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3058,19 +3055,19 @@ func (s *CreateChangeSetInput) SetDescription(v string) *CreateChangeSetInput {
 }
 
 // SetNotificationARNs sets the NotificationARNs field's value.
-func (s *CreateChangeSetInput) SetNotificationARNs(v []*string) *CreateChangeSetInput {
+func (s *CreateChangeSetInput) SetNotificationARNs(v []string) *CreateChangeSetInput {
 	s.NotificationARNs = v
 	return s
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateChangeSetInput) SetParameters(v []*Parameter) *CreateChangeSetInput {
+func (s *CreateChangeSetInput) SetParameters(v []Parameter) *CreateChangeSetInput {
 	s.Parameters = v
 	return s
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *CreateChangeSetInput) SetResourceTypes(v []*string) *CreateChangeSetInput {
+func (s *CreateChangeSetInput) SetResourceTypes(v []string) *CreateChangeSetInput {
 	s.ResourceTypes = v
 	return s
 }
@@ -3094,7 +3091,7 @@ func (s *CreateChangeSetInput) SetStackName(v string) *CreateChangeSetInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateChangeSetInput) SetTags(v []*Tag) *CreateChangeSetInput {
+func (s *CreateChangeSetInput) SetTags(v []Tag) *CreateChangeSetInput {
 	s.Tags = v
 	return s
 }
@@ -3220,19 +3217,19 @@ type CreateStackInput struct {
 	// The Simple Notification Service (SNS) topic ARNs to publish stack related
 	// events. You can find your SNS topic ARNs using the SNS console or your Command
 	// Line Interface (CLI).
-	NotificationARNs []*string `type:"list"`
+	NotificationARNs []string `type:"list"`
 
 	// Determines what action will be taken if stack creation fails. This must be
 	// one of: DO_NOTHING, ROLLBACK, or DELETE. You can specify either OnFailure
 	// or DisableRollback, but not both.
 	//
 	// Default: ROLLBACK
-	OnFailure OnFailure `type:"string"`
+	OnFailure OnFailure `type:"string" enum:"true"`
 
 	// A list of Parameter structures that specify input parameters for the stack.
 	// For more information, see the Parameter (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The template resource types that you have permissions to work with for this
 	// create stack action, such as AWS::EC2::Instance, AWS::EC2::*, or Custom::MyCustomInstance.
@@ -3248,7 +3245,7 @@ type CreateStackInput struct {
 	// parameter for AWS CloudFormation-specific condition keys in IAM policies.
 	// For more information, see Controlling Access with AWS Identity and Access
 	// Management (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
-	ResourceTypes []*string `type:"list"`
+	ResourceTypes []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to create the stack. AWS CloudFormation
@@ -3292,7 +3289,7 @@ type CreateStackInput struct {
 	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
 	// these tags to the resources created in the stack. A maximum number of 50
 	// tags can be specified.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// Structure containing the template body with a minimum length of 1 byte and
 	// a maximum length of 51,200 bytes. For more information, go to Template Anatomy
@@ -3363,9 +3360,6 @@ func (s *CreateStackInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3403,7 +3397,7 @@ func (s *CreateStackInput) SetEnableTerminationProtection(v bool) *CreateStackIn
 }
 
 // SetNotificationARNs sets the NotificationARNs field's value.
-func (s *CreateStackInput) SetNotificationARNs(v []*string) *CreateStackInput {
+func (s *CreateStackInput) SetNotificationARNs(v []string) *CreateStackInput {
 	s.NotificationARNs = v
 	return s
 }
@@ -3415,13 +3409,13 @@ func (s *CreateStackInput) SetOnFailure(v OnFailure) *CreateStackInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateStackInput) SetParameters(v []*Parameter) *CreateStackInput {
+func (s *CreateStackInput) SetParameters(v []Parameter) *CreateStackInput {
 	s.Parameters = v
 	return s
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *CreateStackInput) SetResourceTypes(v []*string) *CreateStackInput {
+func (s *CreateStackInput) SetResourceTypes(v []string) *CreateStackInput {
 	s.ResourceTypes = v
 	return s
 }
@@ -3457,7 +3451,7 @@ func (s *CreateStackInput) SetStackPolicyURL(v string) *CreateStackInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateStackInput) SetTags(v []*Tag) *CreateStackInput {
+func (s *CreateStackInput) SetTags(v []Tag) *CreateStackInput {
 	s.Tags = v
 	return s
 }
@@ -3488,7 +3482,7 @@ type CreateStackInstancesInput struct {
 	// in the specified region(s) for.
 	//
 	// Accounts is a required field
-	Accounts []*string `type:"list" required:"true"`
+	Accounts []string `type:"list" required:"true"`
 
 	// The unique identifier for this stack set operation.
 	//
@@ -3510,7 +3504,7 @@ type CreateStackInstancesInput struct {
 	// using the specified AWS account(s).
 	//
 	// Regions is a required field
-	Regions []*string `type:"list" required:"true"`
+	Regions []string `type:"list" required:"true"`
 
 	// The name or unique ID of the stack set that you want to create stack instances
 	// from.
@@ -3560,7 +3554,7 @@ func (s *CreateStackInstancesInput) Validate() error {
 }
 
 // SetAccounts sets the Accounts field's value.
-func (s *CreateStackInstancesInput) SetAccounts(v []*string) *CreateStackInstancesInput {
+func (s *CreateStackInstancesInput) SetAccounts(v []string) *CreateStackInstancesInput {
 	s.Accounts = v
 	return s
 }
@@ -3578,7 +3572,7 @@ func (s *CreateStackInstancesInput) SetOperationPreferences(v *StackSetOperation
 }
 
 // SetRegions sets the Regions field's value.
-func (s *CreateStackInstancesInput) SetRegions(v []*string) *CreateStackInstancesInput {
+func (s *CreateStackInstancesInput) SetRegions(v []string) *CreateStackInstancesInput {
 	s.Regions = v
 	return s
 }
@@ -3692,7 +3686,7 @@ type CreateStackSetInput struct {
 	Description *string `min:"1" type:"string"`
 
 	// The input parameters for the stack set template.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The name to associate with the stack set. The name must be unique in the
 	// region where you create your stack set.
@@ -3712,7 +3706,7 @@ type CreateStackSetInput struct {
 	// checks to see if you have the required IAM permission to tag resources. If
 	// you don't, the entire CreateStackSet action fails with an access denied error,
 	// and the stack set is not created.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The structure that contains the template body, with a minimum length of 1
 	// byte and a maximum length of 51,200 bytes. For more information, see Template
@@ -3764,9 +3758,6 @@ func (s *CreateStackSetInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -3798,7 +3789,7 @@ func (s *CreateStackSetInput) SetDescription(v string) *CreateStackSetInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *CreateStackSetInput) SetParameters(v []*Parameter) *CreateStackSetInput {
+func (s *CreateStackSetInput) SetParameters(v []Parameter) *CreateStackSetInput {
 	s.Parameters = v
 	return s
 }
@@ -3810,7 +3801,7 @@ func (s *CreateStackSetInput) SetStackSetName(v string) *CreateStackSetInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateStackSetInput) SetTags(v []*Tag) *CreateStackSetInput {
+func (s *CreateStackSetInput) SetTags(v []Tag) *CreateStackSetInput {
 	s.Tags = v
 	return s
 }
@@ -3953,7 +3944,7 @@ type DeleteStackInput struct {
 	//
 	// Retaining resources is useful when you cannot delete a resource, such as
 	// a non-empty S3 bucket, but you want to delete the stack.
-	RetainResources []*string `type:"list"`
+	RetainResources []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to delete the stack. AWS CloudFormation
@@ -4007,7 +3998,7 @@ func (s *DeleteStackInput) SetClientRequestToken(v string) *DeleteStackInput {
 }
 
 // SetRetainResources sets the RetainResources field's value.
-func (s *DeleteStackInput) SetRetainResources(v []*string) *DeleteStackInput {
+func (s *DeleteStackInput) SetRetainResources(v []string) *DeleteStackInput {
 	s.RetainResources = v
 	return s
 }
@@ -4031,7 +4022,7 @@ type DeleteStackInstancesInput struct {
 	// The names of the AWS accounts that you want to delete stack instances for.
 	//
 	// Accounts is a required field
-	Accounts []*string `type:"list" required:"true"`
+	Accounts []string `type:"list" required:"true"`
 
 	// The unique identifier for this stack set operation.
 	//
@@ -4052,7 +4043,7 @@ type DeleteStackInstancesInput struct {
 	// The regions where you want to delete stack set instances.
 	//
 	// Regions is a required field
-	Regions []*string `type:"list" required:"true"`
+	Regions []string `type:"list" required:"true"`
 
 	// Removes the stack instances from the specified stack set, but doesn't delete
 	// the stacks. You can't reassociate a retained stack or add an existing, saved
@@ -4115,7 +4106,7 @@ func (s *DeleteStackInstancesInput) Validate() error {
 }
 
 // SetAccounts sets the Accounts field's value.
-func (s *DeleteStackInstancesInput) SetAccounts(v []*string) *DeleteStackInstancesInput {
+func (s *DeleteStackInstancesInput) SetAccounts(v []string) *DeleteStackInstancesInput {
 	s.Accounts = v
 	return s
 }
@@ -4133,7 +4124,7 @@ func (s *DeleteStackInstancesInput) SetOperationPreferences(v *StackSetOperation
 }
 
 // SetRegions sets the Regions field's value.
-func (s *DeleteStackInstancesInput) SetRegions(v []*string) *DeleteStackInstancesInput {
+func (s *DeleteStackInstancesInput) SetRegions(v []string) *DeleteStackInstancesInput {
 	s.Regions = v
 	return s
 }
@@ -4290,7 +4281,7 @@ type DescribeAccountLimitsOutput struct {
 
 	// An account limit structure that contain a list of AWS CloudFormation account
 	// limits and their values.
-	AccountLimits []*AccountLimit `type:"list"`
+	AccountLimits []AccountLimit `type:"list"`
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page
 	// of limits. If no additional page exists, this value is null.
@@ -4308,7 +4299,7 @@ func (s DescribeAccountLimitsOutput) GoString() string {
 }
 
 // SetAccountLimits sets the AccountLimits field's value.
-func (s *DescribeAccountLimitsOutput) SetAccountLimits(v []*AccountLimit) *DescribeAccountLimitsOutput {
+func (s *DescribeAccountLimitsOutput) SetAccountLimits(v []AccountLimit) *DescribeAccountLimitsOutput {
 	s.AccountLimits = v
 	return s
 }
@@ -4407,7 +4398,7 @@ type DescribeChangeSetOutput struct {
 
 	// A list of Change structures that describes the resources AWS CloudFormation
 	// changes if you execute the change set.
-	Changes []*Change `type:"list"`
+	Changes []Change `type:"list"`
 
 	// The start time when the change set was created, in UTC.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -4420,7 +4411,7 @@ type DescribeChangeSetOutput struct {
 	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
-	ExecutionStatus ExecutionStatus `type:"string"`
+	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`
 
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
 	// If there is no additional page, this value is null.
@@ -4428,13 +4419,13 @@ type DescribeChangeSetOutput struct {
 
 	// The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that
 	// will be associated with the stack if you execute the change set.
-	NotificationARNs []*string `type:"list"`
+	NotificationARNs []string `type:"list"`
 
 	// A list of Parameter structures that describes the input parameters and their
 	// values used to create the change set. For more information, see the Parameter
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The rollback triggers for AWS CloudFormation to monitor during stack creation
 	// and updating operations, and for the specified monitoring period afterwards.
@@ -4448,7 +4439,7 @@ type DescribeChangeSetOutput struct {
 
 	// The current status of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
 	// or FAILED.
-	Status ChangeSetStatus `type:"string"`
+	Status ChangeSetStatus `type:"string" enum:"true"`
 
 	// A description of the change set's status. For example, if your attempt to
 	// create a change set failed, AWS CloudFormation shows the error message.
@@ -4456,7 +4447,7 @@ type DescribeChangeSetOutput struct {
 
 	// If you execute the change set, the tags that will be associated with the
 	// stack.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -4488,7 +4479,7 @@ func (s *DescribeChangeSetOutput) SetChangeSetName(v string) *DescribeChangeSetO
 }
 
 // SetChanges sets the Changes field's value.
-func (s *DescribeChangeSetOutput) SetChanges(v []*Change) *DescribeChangeSetOutput {
+func (s *DescribeChangeSetOutput) SetChanges(v []Change) *DescribeChangeSetOutput {
 	s.Changes = v
 	return s
 }
@@ -4518,13 +4509,13 @@ func (s *DescribeChangeSetOutput) SetNextToken(v string) *DescribeChangeSetOutpu
 }
 
 // SetNotificationARNs sets the NotificationARNs field's value.
-func (s *DescribeChangeSetOutput) SetNotificationARNs(v []*string) *DescribeChangeSetOutput {
+func (s *DescribeChangeSetOutput) SetNotificationARNs(v []string) *DescribeChangeSetOutput {
 	s.NotificationARNs = v
 	return s
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeChangeSetOutput) SetParameters(v []*Parameter) *DescribeChangeSetOutput {
+func (s *DescribeChangeSetOutput) SetParameters(v []Parameter) *DescribeChangeSetOutput {
 	s.Parameters = v
 	return s
 }
@@ -4560,7 +4551,7 @@ func (s *DescribeChangeSetOutput) SetStatusReason(v string) *DescribeChangeSetOu
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeChangeSetOutput) SetTags(v []*Tag) *DescribeChangeSetOutput {
+func (s *DescribeChangeSetOutput) SetTags(v []Tag) *DescribeChangeSetOutput {
 	s.Tags = v
 	return s
 }
@@ -4630,7 +4621,7 @@ type DescribeStackEventsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// A list of StackEvents structures.
-	StackEvents []*StackEvent `type:"list"`
+	StackEvents []StackEvent `type:"list"`
 }
 
 // String returns the string representation
@@ -4650,7 +4641,7 @@ func (s *DescribeStackEventsOutput) SetNextToken(v string) *DescribeStackEventsO
 }
 
 // SetStackEvents sets the StackEvents field's value.
-func (s *DescribeStackEventsOutput) SetStackEvents(v []*StackEvent) *DescribeStackEventsOutput {
+func (s *DescribeStackEventsOutput) SetStackEvents(v []StackEvent) *DescribeStackEventsOutput {
 	s.StackEvents = v
 	return s
 }
@@ -4915,7 +4906,7 @@ type DescribeStackResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of StackResource structures.
-	StackResources []*StackResource `type:"list"`
+	StackResources []StackResource `type:"list"`
 }
 
 // String returns the string representation
@@ -4929,7 +4920,7 @@ func (s DescribeStackResourcesOutput) GoString() string {
 }
 
 // SetStackResources sets the StackResources field's value.
-func (s *DescribeStackResourcesOutput) SetStackResources(v []*StackResource) *DescribeStackResourcesOutput {
+func (s *DescribeStackResourcesOutput) SetStackResources(v []StackResource) *DescribeStackResourcesOutput {
 	s.StackResources = v
 	return s
 }
@@ -5145,7 +5136,7 @@ type DescribeStacksOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// A list of stack structures.
-	Stacks []*Stack `type:"list"`
+	Stacks []Stack `type:"list"`
 }
 
 // String returns the string representation
@@ -5165,7 +5156,7 @@ func (s *DescribeStacksOutput) SetNextToken(v string) *DescribeStacksOutput {
 }
 
 // SetStacks sets the Stacks field's value.
-func (s *DescribeStacksOutput) SetStacks(v []*Stack) *DescribeStacksOutput {
+func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
 	s.Stacks = v
 	return s
 }
@@ -5176,7 +5167,7 @@ type EstimateTemplateCostInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Parameter structures that specify input parameters.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// Structure containing the template body with a minimum length of 1 byte and
 	// a maximum length of 51,200 bytes. (For more information, go to Template Anatomy
@@ -5224,7 +5215,7 @@ func (s *EstimateTemplateCostInput) Validate() error {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *EstimateTemplateCostInput) SetParameters(v []*Parameter) *EstimateTemplateCostInput {
+func (s *EstimateTemplateCostInput) SetParameters(v []Parameter) *EstimateTemplateCostInput {
 	s.Parameters = v
 	return s
 }
@@ -5500,7 +5491,7 @@ type GetTemplateInput struct {
 	//
 	// If the template doesn't include transforms, Original and Processed return
 	// the same template. By default, AWS CloudFormation specifies Original.
-	TemplateStage TemplateStage `type:"string"`
+	TemplateStage TemplateStage `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5701,7 +5692,7 @@ type GetTemplateSummaryOutput struct {
 	CapabilitiesReason *string `type:"string"`
 
 	// A list of the transforms that are declared in the template.
-	DeclaredTransforms []*string `type:"list"`
+	DeclaredTransforms []string `type:"list"`
 
 	// The value that is defined in the Description property of the template.
 	Description *string `min:"1" type:"string"`
@@ -5711,11 +5702,11 @@ type GetTemplateSummaryOutput struct {
 
 	// A list of parameter declarations that describe various properties for each
 	// parameter.
-	Parameters []*ParameterDeclaration `type:"list"`
+	Parameters []ParameterDeclaration `type:"list"`
 
 	// A list of all the template resource types that are defined in the template,
 	// such as AWS::EC2::Instance, AWS::Dynamo::Table, and Custom::MyCustomInstance.
-	ResourceTypes []*string `type:"list"`
+	ResourceTypes []string `type:"list"`
 
 	// The AWS template format version, which identifies the capabilities of the
 	// template.
@@ -5745,7 +5736,7 @@ func (s *GetTemplateSummaryOutput) SetCapabilitiesReason(v string) *GetTemplateS
 }
 
 // SetDeclaredTransforms sets the DeclaredTransforms field's value.
-func (s *GetTemplateSummaryOutput) SetDeclaredTransforms(v []*string) *GetTemplateSummaryOutput {
+func (s *GetTemplateSummaryOutput) SetDeclaredTransforms(v []string) *GetTemplateSummaryOutput {
 	s.DeclaredTransforms = v
 	return s
 }
@@ -5763,13 +5754,13 @@ func (s *GetTemplateSummaryOutput) SetMetadata(v string) *GetTemplateSummaryOutp
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *GetTemplateSummaryOutput) SetParameters(v []*ParameterDeclaration) *GetTemplateSummaryOutput {
+func (s *GetTemplateSummaryOutput) SetParameters(v []ParameterDeclaration) *GetTemplateSummaryOutput {
 	s.Parameters = v
 	return s
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *GetTemplateSummaryOutput) SetResourceTypes(v []*string) *GetTemplateSummaryOutput {
+func (s *GetTemplateSummaryOutput) SetResourceTypes(v []string) *GetTemplateSummaryOutput {
 	s.ResourceTypes = v
 	return s
 }
@@ -5849,7 +5840,7 @@ type ListChangeSetsOutput struct {
 
 	// A list of ChangeSetSummary structures that provides the ID and status of
 	// each change set for the specified stack.
-	Summaries []*ChangeSetSummary `type:"list"`
+	Summaries []ChangeSetSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -5869,7 +5860,7 @@ func (s *ListChangeSetsOutput) SetNextToken(v string) *ListChangeSetsOutput {
 }
 
 // SetSummaries sets the Summaries field's value.
-func (s *ListChangeSetsOutput) SetSummaries(v []*ChangeSetSummary) *ListChangeSetsOutput {
+func (s *ListChangeSetsOutput) SetSummaries(v []ChangeSetSummary) *ListChangeSetsOutput {
 	s.Summaries = v
 	return s
 }
@@ -5917,7 +5908,7 @@ type ListExportsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The output for the ListExports action.
-	Exports []*Export `type:"list"`
+	Exports []Export `type:"list"`
 
 	// If the output exceeds 100 exported output values, a string that identifies
 	// the next page of exports. If there is no additional page, this value is null.
@@ -5935,7 +5926,7 @@ func (s ListExportsOutput) GoString() string {
 }
 
 // SetExports sets the Exports field's value.
-func (s *ListExportsOutput) SetExports(v []*Export) *ListExportsOutput {
+func (s *ListExportsOutput) SetExports(v []Export) *ListExportsOutput {
 	s.Exports = v
 	return s
 }
@@ -6005,7 +5996,7 @@ type ListImportsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of stack names that are importing the specified exported output value.
-	Imports []*string `type:"list"`
+	Imports []string `type:"list"`
 
 	// A string that identifies the next page of exports. If there is no additional
 	// page, this value is null.
@@ -6023,7 +6014,7 @@ func (s ListImportsOutput) GoString() string {
 }
 
 // SetImports sets the Imports field's value.
-func (s *ListImportsOutput) SetImports(v []*string) *ListImportsOutput {
+func (s *ListImportsOutput) SetImports(v []string) *ListImportsOutput {
 	s.Imports = v
 	return s
 }
@@ -6136,7 +6127,7 @@ type ListStackInstancesOutput struct {
 
 	// A list of StackInstanceSummary structures that contain information about
 	// the specified stack instances.
-	Summaries []*StackInstanceSummary `type:"list"`
+	Summaries []StackInstanceSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6156,7 +6147,7 @@ func (s *ListStackInstancesOutput) SetNextToken(v string) *ListStackInstancesOut
 }
 
 // SetSummaries sets the Summaries field's value.
-func (s *ListStackInstancesOutput) SetSummaries(v []*StackInstanceSummary) *ListStackInstancesOutput {
+func (s *ListStackInstancesOutput) SetSummaries(v []StackInstanceSummary) *ListStackInstancesOutput {
 	s.Summaries = v
 	return s
 }
@@ -6233,7 +6224,7 @@ type ListStackResourcesOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// A list of StackResourceSummary structures.
-	StackResourceSummaries []*StackResourceSummary `type:"list"`
+	StackResourceSummaries []StackResourceSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6253,7 +6244,7 @@ func (s *ListStackResourcesOutput) SetNextToken(v string) *ListStackResourcesOut
 }
 
 // SetStackResourceSummaries sets the StackResourceSummaries field's value.
-func (s *ListStackResourcesOutput) SetStackResourceSummaries(v []*StackResourceSummary) *ListStackResourcesOutput {
+func (s *ListStackResourcesOutput) SetStackResourceSummaries(v []StackResourceSummary) *ListStackResourcesOutput {
 	s.StackResourceSummaries = v
 	return s
 }
@@ -6361,7 +6352,7 @@ type ListStackSetOperationResultsOutput struct {
 	// A list of StackSetOperationResultSummary structures that contain information
 	// about the specified operation results, for accounts and regions that are
 	// included in the operation.
-	Summaries []*StackSetOperationResultSummary `type:"list"`
+	Summaries []StackSetOperationResultSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6381,7 +6372,7 @@ func (s *ListStackSetOperationResultsOutput) SetNextToken(v string) *ListStackSe
 }
 
 // SetSummaries sets the Summaries field's value.
-func (s *ListStackSetOperationResultsOutput) SetSummaries(v []*StackSetOperationResultSummary) *ListStackSetOperationResultsOutput {
+func (s *ListStackSetOperationResultsOutput) SetSummaries(v []StackSetOperationResultSummary) *ListStackSetOperationResultsOutput {
 	s.Summaries = v
 	return s
 }
@@ -6470,7 +6461,7 @@ type ListStackSetOperationsOutput struct {
 
 	// A list of StackSetOperationSummary structures that contain summary information
 	// about operations for the specified stack set.
-	Summaries []*StackSetOperationSummary `type:"list"`
+	Summaries []StackSetOperationSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6490,7 +6481,7 @@ func (s *ListStackSetOperationsOutput) SetNextToken(v string) *ListStackSetOpera
 }
 
 // SetSummaries sets the Summaries field's value.
-func (s *ListStackSetOperationsOutput) SetSummaries(v []*StackSetOperationSummary) *ListStackSetOperationsOutput {
+func (s *ListStackSetOperationsOutput) SetSummaries(v []StackSetOperationSummary) *ListStackSetOperationsOutput {
 	s.Summaries = v
 	return s
 }
@@ -6513,7 +6504,7 @@ type ListStackSetsInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The status of the stack sets that you want to get summary information about.
-	Status StackSetStatus `type:"string"`
+	Status StackSetStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6572,7 +6563,7 @@ type ListStackSetsOutput struct {
 
 	// A list of StackSetSummary structures that contain information about the user's
 	// stack sets.
-	Summaries []*StackSetSummary `type:"list"`
+	Summaries []StackSetSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6592,7 +6583,7 @@ func (s *ListStackSetsOutput) SetNextToken(v string) *ListStackSetsOutput {
 }
 
 // SetSummaries sets the Summaries field's value.
-func (s *ListStackSetsOutput) SetSummaries(v []*StackSetSummary) *ListStackSetsOutput {
+func (s *ListStackSetsOutput) SetSummaries(v []StackSetSummary) *ListStackSetsOutput {
 	s.Summaries = v
 	return s
 }
@@ -6657,7 +6648,7 @@ type ListStacksOutput struct {
 
 	// A list of StackSummary structures containing information about the specified
 	// stacks.
-	StackSummaries []*StackSummary `type:"list"`
+	StackSummaries []StackSummary `type:"list"`
 }
 
 // String returns the string representation
@@ -6677,7 +6668,7 @@ func (s *ListStacksOutput) SetNextToken(v string) *ListStacksOutput {
 }
 
 // SetStackSummaries sets the StackSummaries field's value.
-func (s *ListStacksOutput) SetStackSummaries(v []*StackSummary) *ListStacksOutput {
+func (s *ListStacksOutput) SetStackSummaries(v []StackSummary) *ListStacksOutput {
 	s.StackSummaries = v
 	return s
 }
@@ -6789,7 +6780,7 @@ type ParameterConstraints struct {
 	_ struct{} `type:"structure"`
 
 	// A list of values that are permitted for a parameter.
-	AllowedValues []*string `type:"list"`
+	AllowedValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -6803,7 +6794,7 @@ func (s ParameterConstraints) GoString() string {
 }
 
 // SetAllowedValues sets the AllowedValues field's value.
-func (s *ParameterConstraints) SetAllowedValues(v []*string) *ParameterConstraints {
+func (s *ParameterConstraints) SetAllowedValues(v []string) *ParameterConstraints {
 	s.AllowedValues = v
 	return s
 }
@@ -6887,11 +6878,11 @@ type ResourceChange struct {
 
 	// The action that AWS CloudFormation takes on the resource, such as Add (adds
 	// a new resource), Modify (changes a resource), or Remove (deletes a resource).
-	Action ChangeAction `type:"string"`
+	Action ChangeAction `type:"string" enum:"true"`
 
 	// For the Modify action, a list of ResourceChangeDetail structures that describes
 	// the changes that AWS CloudFormation will make to the resource.
-	Details []*ResourceChangeDetail `type:"list"`
+	Details []ResourceChangeDetail `type:"list"`
 
 	// The resource's logical ID, which is defined in the stack's template.
 	LogicalResourceId *string `type:"string"`
@@ -6911,7 +6902,7 @@ type ResourceChange struct {
 	// Replacement value depends on the change with the most impact. A RequiresRecreation
 	// value of Always has the most impact, followed by Conditionally, and then
 	// Never.
-	Replacement Replacement `type:"string"`
+	Replacement Replacement `type:"string" enum:"true"`
 
 	// The type of AWS CloudFormation resource, such as AWS::S3::Bucket.
 	ResourceType *string `min:"1" type:"string"`
@@ -6939,7 +6930,7 @@ func (s *ResourceChange) SetAction(v ChangeAction) *ResourceChange {
 }
 
 // SetDetails sets the Details field's value.
-func (s *ResourceChange) SetDetails(v []*ResourceChangeDetail) *ResourceChange {
+func (s *ResourceChange) SetDetails(v []ResourceChangeDetail) *ResourceChange {
 	s.Details = v
 	return s
 }
@@ -7010,7 +7001,7 @@ type ResourceChangeDetail struct {
 	//    the nested stack's template might have changed. Changes to a nested stack's
 	//    template aren't visible to AWS CloudFormation until you run an update
 	//    on the parent stack.
-	ChangeSource ChangeSource `type:"string"`
+	ChangeSource ChangeSource `type:"string" enum:"true"`
 
 	// Indicates whether AWS CloudFormation can determine the target value, and
 	// whether the target value will change before you execute a change set.
@@ -7027,7 +7018,7 @@ type ResourceChangeDetail struct {
 	// reference (the physical ID of the resource) might change, depending on if
 	// the resource is recreated. If the resource is recreated, it will have a new
 	// physical ID, so all references to that resource will also be updated.
-	Evaluation EvaluationType `type:"string"`
+	Evaluation EvaluationType `type:"string" enum:"true"`
 
 	// A ResourceTargetDefinition structure that describes the field that AWS CloudFormation
 	// will change and whether the resource will be recreated.
@@ -7076,7 +7067,7 @@ type ResourceTargetDefinition struct {
 
 	// Indicates which resource attribute is triggering this update, such as a change
 	// in the resource attribute's Metadata, Properties, or Tags.
-	Attribute ResourceAttribute `type:"string"`
+	Attribute ResourceAttribute `type:"string" enum:"true"`
 
 	// If the Attribute value is Properties, the name of the property. For all other
 	// attributes, the value is null.
@@ -7087,7 +7078,7 @@ type ResourceTargetDefinition struct {
 	// or Conditionally. To determine the conditions for a Conditionally recreation,
 	// see the update behavior for that property (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
-	RequiresRecreation RequiresRecreation `type:"string"`
+	RequiresRecreation RequiresRecreation `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7189,7 +7180,7 @@ type RollbackConfiguration struct {
 	//
 	// If a specified Cloudwatch alarm is missing, the entire stack operation fails
 	// and is rolled back.
-	RollbackTriggers []*RollbackTrigger `type:"list"`
+	RollbackTriggers []RollbackTrigger `type:"list"`
 }
 
 // String returns the string representation
@@ -7207,9 +7198,6 @@ func (s *RollbackConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RollbackConfiguration"}
 	if s.RollbackTriggers != nil {
 		for i, v := range s.RollbackTriggers {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RollbackTriggers", i), err.(aws.ErrInvalidParams))
 			}
@@ -7229,7 +7217,7 @@ func (s *RollbackConfiguration) SetMonitoringTimeInMinutes(v int64) *RollbackCon
 }
 
 // SetRollbackTriggers sets the RollbackTriggers field's value.
-func (s *RollbackConfiguration) SetRollbackTriggers(v []*RollbackTrigger) *RollbackConfiguration {
+func (s *RollbackConfiguration) SetRollbackTriggers(v []RollbackTrigger) *RollbackConfiguration {
 	s.RollbackTriggers = v
 	return s
 }
@@ -7402,7 +7390,7 @@ type SignalResourceInput struct {
 	// causes AWS CloudFormation to immediately fail the stack creation or update.
 	//
 	// Status is a required field
-	Status ResourceSignalStatus `type:"string" required:"true"`
+	Status ResourceSignalStatus `type:"string" required:"true" enum:"true"`
 
 	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling
 	// groups, specify the instance ID that you are signaling as the unique ID.
@@ -7536,13 +7524,13 @@ type Stack struct {
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// SNS topic ARNs to which stack related events are published.
-	NotificationARNs []*string `type:"list"`
+	NotificationARNs []string `type:"list"`
 
 	// A list of output structures.
-	Outputs []*Output `type:"list"`
+	Outputs []Output `type:"list"`
 
 	// A list of Parameter structures.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// For nested stacks--stacks created as resources for another stack--the stack
 	// ID of the direct parent of this stack. For the first level of nested stacks,
@@ -7579,13 +7567,13 @@ type Stack struct {
 	// Current status of the stack.
 	//
 	// StackStatus is a required field
-	StackStatus StackStatus `type:"string" required:"true"`
+	StackStatus StackStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the stack status.
 	StackStatusReason *string `type:"string"`
 
 	// A list of Tags that specify information about the stack.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The amount of time within which stack creation should complete.
 	TimeoutInMinutes *int64 `min:"1" type:"integer"`
@@ -7650,19 +7638,19 @@ func (s *Stack) SetLastUpdatedTime(v time.Time) *Stack {
 }
 
 // SetNotificationARNs sets the NotificationARNs field's value.
-func (s *Stack) SetNotificationARNs(v []*string) *Stack {
+func (s *Stack) SetNotificationARNs(v []string) *Stack {
 	s.NotificationARNs = v
 	return s
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *Stack) SetOutputs(v []*Output) *Stack {
+func (s *Stack) SetOutputs(v []Output) *Stack {
 	s.Outputs = v
 	return s
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *Stack) SetParameters(v []*Parameter) *Stack {
+func (s *Stack) SetParameters(v []Parameter) *Stack {
 	s.Parameters = v
 	return s
 }
@@ -7716,7 +7704,7 @@ func (s *Stack) SetStackStatusReason(v string) *Stack {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Stack) SetTags(v []*Tag) *Stack {
+func (s *Stack) SetTags(v []Tag) *Stack {
 	s.Tags = v
 	return s
 }
@@ -7762,7 +7750,7 @@ type StackEvent struct {
 	ResourceProperties *string `type:"string"`
 
 	// Current status of the resource.
-	ResourceStatus ResourceStatus `type:"string"`
+	ResourceStatus ResourceStatus `type:"string" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -7906,7 +7894,7 @@ type StackInstance struct {
 	//    or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
-	Status StackInstanceStatus `type:"string"`
+	Status StackInstanceStatus `type:"string" enum:"true"`
 
 	// The explanation for the specific status code that is assigned to this stack
 	// instance.
@@ -7995,7 +7983,7 @@ type StackInstanceSummary struct {
 	//    or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
-	Status StackInstanceStatus `type:"string"`
+	Status StackInstanceStatus `type:"string" enum:"true"`
 
 	// The explanation for the specific status code assigned to this stack instance.
 	StatusReason *string `type:"string"`
@@ -8067,7 +8055,7 @@ type StackResource struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus ResourceStatus `type:"string" required:"true"`
+	ResourceStatus ResourceStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -8185,7 +8173,7 @@ type StackResourceDetail struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus ResourceStatus `type:"string" required:"true"`
+	ResourceStatus ResourceStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -8296,7 +8284,7 @@ type StackResourceSummary struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus ResourceStatus `type:"string" required:"true"`
+	ResourceStatus ResourceStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -8375,7 +8363,7 @@ type StackSet struct {
 	Description *string `min:"1" type:"string"`
 
 	// A list of input parameters for a stack set.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The ID of the stack set.
 	StackSetId *string `type:"string"`
@@ -8384,11 +8372,11 @@ type StackSet struct {
 	StackSetName *string `type:"string"`
 
 	// The status of the stack set.
-	Status StackSetStatus `type:"string"`
+	Status StackSetStatus `type:"string" enum:"true"`
 
 	// A list of tags that specify information about the stack set. A maximum number
 	// of 50 tags can be specified.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The structure that contains the body of the template that was used to create
 	// or update the stack set.
@@ -8418,7 +8406,7 @@ func (s *StackSet) SetDescription(v string) *StackSet {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *StackSet) SetParameters(v []*Parameter) *StackSet {
+func (s *StackSet) SetParameters(v []Parameter) *StackSet {
 	s.Parameters = v
 	return s
 }
@@ -8442,7 +8430,7 @@ func (s *StackSet) SetStatus(v StackSetStatus) *StackSet {
 }
 
 // SetTags sets the Tags field's value.
-func (s *StackSet) SetTags(v []*Tag) *StackSet {
+func (s *StackSet) SetTags(v []Tag) *StackSet {
 	s.Tags = v
 	return s
 }
@@ -8462,7 +8450,7 @@ type StackSetOperation struct {
 	// operations affect only the specified stack set instances that are associated
 	// with the specified stack set. Update operations affect both the stack set
 	// itself, as well as all associated stack set instances.
-	Action StackSetOperationAction `type:"string"`
+	Action StackSetOperationAction `type:"string" enum:"true"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -8510,7 +8498,7 @@ type StackSetOperation struct {
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
-	Status StackSetOperationStatus `type:"string"`
+	Status StackSetOperationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8630,7 +8618,7 @@ type StackSetOperationPreferences struct {
 	MaxConcurrentPercentage *int64 `min:"1" type:"integer"`
 
 	// The order of the regions in where you want to perform the stack operation.
-	RegionOrder []*string `type:"list"`
+	RegionOrder []string `type:"list"`
 }
 
 // String returns the string representation
@@ -8684,7 +8672,7 @@ func (s *StackSetOperationPreferences) SetMaxConcurrentPercentage(v int64) *Stac
 }
 
 // SetRegionOrder sets the RegionOrder field's value.
-func (s *StackSetOperationPreferences) SetRegionOrder(v []*string) *StackSetOperationPreferences {
+func (s *StackSetOperationPreferences) SetRegionOrder(v []string) *StackSetOperationPreferences {
 	s.RegionOrder = v
 	return s
 }
@@ -8726,7 +8714,7 @@ type StackSetOperationResultSummary struct {
 	//
 	//    * SUCCEEDED: The operation in the specified account and region completed
 	//    successfully.
-	Status StackSetOperationResultStatus `type:"string"`
+	Status StackSetOperationResultStatus `type:"string" enum:"true"`
 
 	// The reason for the assigned result status.
 	StatusReason *string `type:"string"`
@@ -8781,7 +8769,7 @@ type StackSetOperationSummary struct {
 	// affect only the specified stack instances that are associated with the specified
 	// stack set. Update operations affect both the stack set itself as well as
 	// all associated stack set instances.
-	Action StackSetOperationAction `type:"string"`
+	Action StackSetOperationAction `type:"string" enum:"true"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -8817,7 +8805,7 @@ type StackSetOperationSummary struct {
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
-	Status StackSetOperationStatus `type:"string"`
+	Status StackSetOperationStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8877,7 +8865,7 @@ type StackSetSummary struct {
 	StackSetName *string `type:"string"`
 
 	// The status of the stack set.
-	Status StackSetStatus `type:"string"`
+	Status StackSetStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8957,7 +8945,7 @@ type StackSummary struct {
 	// The current status of the stack.
 	//
 	// StackStatus is a required field
-	StackStatus StackStatus `type:"string" required:"true"`
+	StackStatus StackStatus `type:"string" required:"true" enum:"true"`
 
 	// Success/Failure message associated with the stack status.
 	StackStatusReason *string `type:"string"`
@@ -9280,12 +9268,12 @@ type UpdateStackInput struct {
 	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that
 	// AWS CloudFormation associates with the stack. Specify an empty list to remove
 	// all notification topics.
-	NotificationARNs []*string `type:"list"`
+	NotificationARNs []string `type:"list"`
 
 	// A list of Parameter structures that specify input parameters for the stack.
 	// For more information, see the Parameter (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The template resource types that you have permissions to work with for this
 	// update stack action, such as AWS::EC2::Instance, AWS::EC2::*, or Custom::MyCustomInstance.
@@ -9296,7 +9284,7 @@ type UpdateStackInput struct {
 	// parameter for AWS CloudFormation-specific condition keys in IAM policies.
 	// For more information, see Controlling Access with AWS Identity and Access
 	// Management (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
-	ResourceTypes []*string `type:"list"`
+	ResourceTypes []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to update the stack. AWS CloudFormation
@@ -9364,7 +9352,7 @@ type UpdateStackInput struct {
 	// If you don't specify this parameter, AWS CloudFormation doesn't modify the
 	// stack's tags. If you specify an empty value, AWS CloudFormation removes all
 	// associated tags.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// Structure containing the template body with a minimum length of 1 byte and
 	// a maximum length of 51,200 bytes. (For more information, go to Template Anatomy
@@ -9440,9 +9428,6 @@ func (s *UpdateStackInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -9468,19 +9453,19 @@ func (s *UpdateStackInput) SetClientRequestToken(v string) *UpdateStackInput {
 }
 
 // SetNotificationARNs sets the NotificationARNs field's value.
-func (s *UpdateStackInput) SetNotificationARNs(v []*string) *UpdateStackInput {
+func (s *UpdateStackInput) SetNotificationARNs(v []string) *UpdateStackInput {
 	s.NotificationARNs = v
 	return s
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *UpdateStackInput) SetParameters(v []*Parameter) *UpdateStackInput {
+func (s *UpdateStackInput) SetParameters(v []Parameter) *UpdateStackInput {
 	s.Parameters = v
 	return s
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *UpdateStackInput) SetResourceTypes(v []*string) *UpdateStackInput {
+func (s *UpdateStackInput) SetResourceTypes(v []string) *UpdateStackInput {
 	s.ResourceTypes = v
 	return s
 }
@@ -9528,7 +9513,7 @@ func (s *UpdateStackInput) SetStackPolicyURL(v string) *UpdateStackInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *UpdateStackInput) SetTags(v []*Tag) *UpdateStackInput {
+func (s *UpdateStackInput) SetTags(v []Tag) *UpdateStackInput {
 	s.Tags = v
 	return s
 }
@@ -9636,7 +9621,7 @@ type UpdateStackSetInput struct {
 	OperationPreferences *StackSetOperationPreferences `type:"structure"`
 
 	// A list of input parameters for the stack set template.
-	Parameters []*Parameter `type:"list"`
+	Parameters []Parameter `type:"list"`
 
 	// The name or unique ID of the stack set that you want to update.
 	//
@@ -9670,7 +9655,7 @@ type UpdateStackSetInput struct {
 	// tags from the stack set, and checks to see if you have permission to untag
 	// resources. If you don't have the necessary permission(s), the entire UpdateStackSet
 	// action fails with an access denied error, and the stack set is not updated.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// The structure that contains the template body, with a minimum length of 1
 	// byte and a maximum length of 51,200 bytes. For more information, see Template
@@ -9734,9 +9719,6 @@ func (s *UpdateStackSetInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -9774,7 +9756,7 @@ func (s *UpdateStackSetInput) SetOperationPreferences(v *StackSetOperationPrefer
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *UpdateStackSetInput) SetParameters(v []*Parameter) *UpdateStackSetInput {
+func (s *UpdateStackSetInput) SetParameters(v []Parameter) *UpdateStackSetInput {
 	s.Parameters = v
 	return s
 }
@@ -9786,7 +9768,7 @@ func (s *UpdateStackSetInput) SetStackSetName(v string) *UpdateStackSetInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *UpdateStackSetInput) SetTags(v []*Tag) *UpdateStackSetInput {
+func (s *UpdateStackSetInput) SetTags(v []Tag) *UpdateStackSetInput {
 	s.Tags = v
 	return s
 }
@@ -9998,13 +9980,13 @@ type ValidateTemplateOutput struct {
 	CapabilitiesReason *string `type:"string"`
 
 	// A list of the transforms that are declared in the template.
-	DeclaredTransforms []*string `type:"list"`
+	DeclaredTransforms []string `type:"list"`
 
 	// The description found within the template.
 	Description *string `min:"1" type:"string"`
 
 	// A list of TemplateParameter structures.
-	Parameters []*TemplateParameter `type:"list"`
+	Parameters []TemplateParameter `type:"list"`
 }
 
 // String returns the string representation
@@ -10030,7 +10012,7 @@ func (s *ValidateTemplateOutput) SetCapabilitiesReason(v string) *ValidateTempla
 }
 
 // SetDeclaredTransforms sets the DeclaredTransforms field's value.
-func (s *ValidateTemplateOutput) SetDeclaredTransforms(v []*string) *ValidateTemplateOutput {
+func (s *ValidateTemplateOutput) SetDeclaredTransforms(v []string) *ValidateTemplateOutput {
 	s.DeclaredTransforms = v
 	return s
 }
@@ -10042,7 +10024,7 @@ func (s *ValidateTemplateOutput) SetDescription(v string) *ValidateTemplateOutpu
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ValidateTemplateOutput) SetParameters(v []*TemplateParameter) *ValidateTemplateOutput {
+func (s *ValidateTemplateOutput) SetParameters(v []TemplateParameter) *ValidateTemplateOutput {
 	s.Parameters = v
 	return s
 }

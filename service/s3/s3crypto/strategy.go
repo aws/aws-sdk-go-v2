@@ -56,17 +56,17 @@ type HeaderV2SaveStrategy struct{}
 func (strat HeaderV2SaveStrategy) Save(env Envelope, req *request.Request) error {
 	input := req.Params.(*s3.PutObjectInput)
 	if input.Metadata == nil {
-		input.Metadata = map[string]*string{}
+		input.Metadata = map[string]string{}
 	}
 
-	input.Metadata[http.CanonicalHeaderKey(keyV2Header)] = &env.CipherKey
-	input.Metadata[http.CanonicalHeaderKey(ivHeader)] = &env.IV
-	input.Metadata[http.CanonicalHeaderKey(matDescHeader)] = &env.MatDesc
-	input.Metadata[http.CanonicalHeaderKey(wrapAlgorithmHeader)] = &env.WrapAlg
-	input.Metadata[http.CanonicalHeaderKey(cekAlgorithmHeader)] = &env.CEKAlg
-	input.Metadata[http.CanonicalHeaderKey(tagLengthHeader)] = &env.TagLen
-	input.Metadata[http.CanonicalHeaderKey(unencryptedMD5Header)] = &env.UnencryptedMD5
-	input.Metadata[http.CanonicalHeaderKey(unencryptedContentLengthHeader)] = &env.UnencryptedContentLen
+	input.Metadata[http.CanonicalHeaderKey(keyV2Header)] = env.CipherKey
+	input.Metadata[http.CanonicalHeaderKey(ivHeader)] = env.IV
+	input.Metadata[http.CanonicalHeaderKey(matDescHeader)] = env.MatDesc
+	input.Metadata[http.CanonicalHeaderKey(wrapAlgorithmHeader)] = env.WrapAlg
+	input.Metadata[http.CanonicalHeaderKey(cekAlgorithmHeader)] = env.CEKAlg
+	input.Metadata[http.CanonicalHeaderKey(tagLengthHeader)] = env.TagLen
+	input.Metadata[http.CanonicalHeaderKey(unencryptedMD5Header)] = env.UnencryptedMD5
+	input.Metadata[http.CanonicalHeaderKey(unencryptedContentLengthHeader)] = env.UnencryptedContentLen
 	return nil
 }
 

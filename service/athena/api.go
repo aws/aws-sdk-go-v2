@@ -727,7 +727,7 @@ type BatchGetNamedQueryInput struct {
 	// An array of query IDs.
 	//
 	// NamedQueryIds is a required field
-	NamedQueryIds []*string `min:"1" type:"list" required:"true"`
+	NamedQueryIds []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -758,7 +758,7 @@ func (s *BatchGetNamedQueryInput) Validate() error {
 }
 
 // SetNamedQueryIds sets the NamedQueryIds field's value.
-func (s *BatchGetNamedQueryInput) SetNamedQueryIds(v []*string) *BatchGetNamedQueryInput {
+func (s *BatchGetNamedQueryInput) SetNamedQueryIds(v []string) *BatchGetNamedQueryInput {
 	s.NamedQueryIds = v
 	return s
 }
@@ -768,10 +768,10 @@ type BatchGetNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the named query IDs submitted.
-	NamedQueries []*NamedQuery `type:"list"`
+	NamedQueries []NamedQuery `type:"list"`
 
 	// Information about provided query IDs.
-	UnprocessedNamedQueryIds []*UnprocessedNamedQueryId `type:"list"`
+	UnprocessedNamedQueryIds []UnprocessedNamedQueryId `type:"list"`
 }
 
 // String returns the string representation
@@ -785,13 +785,13 @@ func (s BatchGetNamedQueryOutput) GoString() string {
 }
 
 // SetNamedQueries sets the NamedQueries field's value.
-func (s *BatchGetNamedQueryOutput) SetNamedQueries(v []*NamedQuery) *BatchGetNamedQueryOutput {
+func (s *BatchGetNamedQueryOutput) SetNamedQueries(v []NamedQuery) *BatchGetNamedQueryOutput {
 	s.NamedQueries = v
 	return s
 }
 
 // SetUnprocessedNamedQueryIds sets the UnprocessedNamedQueryIds field's value.
-func (s *BatchGetNamedQueryOutput) SetUnprocessedNamedQueryIds(v []*UnprocessedNamedQueryId) *BatchGetNamedQueryOutput {
+func (s *BatchGetNamedQueryOutput) SetUnprocessedNamedQueryIds(v []UnprocessedNamedQueryId) *BatchGetNamedQueryOutput {
 	s.UnprocessedNamedQueryIds = v
 	return s
 }
@@ -803,7 +803,7 @@ type BatchGetQueryExecutionInput struct {
 	// An array of query execution IDs.
 	//
 	// QueryExecutionIds is a required field
-	QueryExecutionIds []*string `min:"1" type:"list" required:"true"`
+	QueryExecutionIds []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -834,7 +834,7 @@ func (s *BatchGetQueryExecutionInput) Validate() error {
 }
 
 // SetQueryExecutionIds sets the QueryExecutionIds field's value.
-func (s *BatchGetQueryExecutionInput) SetQueryExecutionIds(v []*string) *BatchGetQueryExecutionInput {
+func (s *BatchGetQueryExecutionInput) SetQueryExecutionIds(v []string) *BatchGetQueryExecutionInput {
 	s.QueryExecutionIds = v
 	return s
 }
@@ -844,10 +844,10 @@ type BatchGetQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about a query execution.
-	QueryExecutions []*QueryExecution `type:"list"`
+	QueryExecutions []QueryExecution `type:"list"`
 
 	// Information about the query executions that failed to run.
-	UnprocessedQueryExecutionIds []*UnprocessedQueryExecutionId `type:"list"`
+	UnprocessedQueryExecutionIds []UnprocessedQueryExecutionId `type:"list"`
 }
 
 // String returns the string representation
@@ -861,13 +861,13 @@ func (s BatchGetQueryExecutionOutput) GoString() string {
 }
 
 // SetQueryExecutions sets the QueryExecutions field's value.
-func (s *BatchGetQueryExecutionOutput) SetQueryExecutions(v []*QueryExecution) *BatchGetQueryExecutionOutput {
+func (s *BatchGetQueryExecutionOutput) SetQueryExecutions(v []QueryExecution) *BatchGetQueryExecutionOutput {
 	s.QueryExecutions = v
 	return s
 }
 
 // SetUnprocessedQueryExecutionIds sets the UnprocessedQueryExecutionIds field's value.
-func (s *BatchGetQueryExecutionOutput) SetUnprocessedQueryExecutionIds(v []*UnprocessedQueryExecutionId) *BatchGetQueryExecutionOutput {
+func (s *BatchGetQueryExecutionOutput) SetUnprocessedQueryExecutionIds(v []UnprocessedQueryExecutionId) *BatchGetQueryExecutionOutput {
 	s.UnprocessedQueryExecutionIds = v
 	return s
 }
@@ -892,7 +892,7 @@ type ColumnInfo struct {
 	Name *string `type:"string" required:"true"`
 
 	// Indicates the column's nullable status.
-	Nullable ColumnNullable `type:"string"`
+	Nullable ColumnNullable `type:"string" enum:"true"`
 
 	// For DECIMAL data types, specifies the total number of digits, up to 38. For
 	// performance reasons, we recommend up to 18 digits.
@@ -1209,7 +1209,7 @@ type EncryptionConfiguration struct {
 	// client-side encryption with KMS-managed keys (CSE-KMS) is used.
 	//
 	// EncryptionOption is a required field
-	EncryptionOption EncryptionOption `type:"string" required:"true"`
+	EncryptionOption EncryptionOption `type:"string" required:"true" enum:"true"`
 
 	// For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 	KmsKey *string `type:"string"`
@@ -1509,7 +1509,7 @@ type ListNamedQueriesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of unique query IDs.
-	NamedQueryIds []*string `min:"1" type:"list"`
+	NamedQueryIds []string `min:"1" type:"list"`
 
 	// A token to be used by the next request if this request is truncated.
 	NextToken *string `type:"string"`
@@ -1526,7 +1526,7 @@ func (s ListNamedQueriesOutput) GoString() string {
 }
 
 // SetNamedQueryIds sets the NamedQueryIds field's value.
-func (s *ListNamedQueriesOutput) SetNamedQueryIds(v []*string) *ListNamedQueriesOutput {
+func (s *ListNamedQueriesOutput) SetNamedQueryIds(v []string) *ListNamedQueriesOutput {
 	s.NamedQueryIds = v
 	return s
 }
@@ -1579,7 +1579,7 @@ type ListQueryExecutionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// The unique IDs of each query execution as an array of strings.
-	QueryExecutionIds []*string `min:"1" type:"list"`
+	QueryExecutionIds []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1599,7 +1599,7 @@ func (s *ListQueryExecutionsOutput) SetNextToken(v string) *ListQueryExecutionsO
 }
 
 // SetQueryExecutionIds sets the QueryExecutionIds field's value.
-func (s *ListQueryExecutionsOutput) SetQueryExecutionIds(v []*string) *ListQueryExecutionsOutput {
+func (s *ListQueryExecutionsOutput) SetQueryExecutionIds(v []string) *ListQueryExecutionsOutput {
 	s.QueryExecutionIds = v
 	return s
 }
@@ -1832,7 +1832,7 @@ type QueryExecutionStatus struct {
 	// results. SUCCEEDED indicates that the query completed without error. FAILED
 	// indicates that the query experienced an error and did not complete processing.
 	// CANCELLED indicates that user input interrupted query execution.
-	State QueryExecutionState `type:"string"`
+	State QueryExecutionState `type:"string" enum:"true"`
 
 	// Further detail about the status of the query.
 	StateChangeReason *string `type:"string"`
@@ -1943,7 +1943,7 @@ type ResultSet struct {
 	ResultSetMetadata *ResultSetMetadata `type:"structure"`
 
 	// The rows in the table.
-	Rows []*Row `type:"list"`
+	Rows []Row `type:"list"`
 }
 
 // String returns the string representation
@@ -1963,7 +1963,7 @@ func (s *ResultSet) SetResultSetMetadata(v *ResultSetMetadata) *ResultSet {
 }
 
 // SetRows sets the Rows field's value.
-func (s *ResultSet) SetRows(v []*Row) *ResultSet {
+func (s *ResultSet) SetRows(v []Row) *ResultSet {
 	s.Rows = v
 	return s
 }
@@ -1975,7 +1975,7 @@ type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the columns in a query execution result.
-	ColumnInfo []*ColumnInfo `type:"list"`
+	ColumnInfo []ColumnInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -1989,7 +1989,7 @@ func (s ResultSetMetadata) GoString() string {
 }
 
 // SetColumnInfo sets the ColumnInfo field's value.
-func (s *ResultSetMetadata) SetColumnInfo(v []*ColumnInfo) *ResultSetMetadata {
+func (s *ResultSetMetadata) SetColumnInfo(v []ColumnInfo) *ResultSetMetadata {
 	s.ColumnInfo = v
 	return s
 }
@@ -2000,7 +2000,7 @@ type Row struct {
 	_ struct{} `type:"structure"`
 
 	// The data that populates a row in a query result table.
-	Data []*Datum `type:"list"`
+	Data []Datum `type:"list"`
 }
 
 // String returns the string representation
@@ -2014,7 +2014,7 @@ func (s Row) GoString() string {
 }
 
 // SetData sets the Data field's value.
-func (s *Row) SetData(v []*Datum) *Row {
+func (s *Row) SetData(v []Datum) *Row {
 	s.Data = v
 	return s
 }

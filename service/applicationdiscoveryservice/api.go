@@ -984,7 +984,7 @@ type AgentInfo struct {
 	AgentId *string `locationName:"agentId" type:"string"`
 
 	// Network details about the host where the agent or connector resides.
-	AgentNetworkInfoList []*AgentNetworkInfo `locationName:"agentNetworkInfoList" type:"list"`
+	AgentNetworkInfoList []AgentNetworkInfo `locationName:"agentNetworkInfoList" type:"list"`
 
 	// Type of agent.
 	AgentType *string `locationName:"agentType" type:"string"`
@@ -996,7 +996,7 @@ type AgentInfo struct {
 	ConnectorId *string `locationName:"connectorId" type:"string"`
 
 	// The health of the agent or connector.
-	Health AgentStatus `locationName:"health" type:"string"`
+	Health AgentStatus `locationName:"health" type:"string" enum:"true"`
 
 	// The name of the host where the agent or connector resides. The host can be
 	// a server or virtual machine.
@@ -1029,7 +1029,7 @@ func (s *AgentInfo) SetAgentId(v string) *AgentInfo {
 }
 
 // SetAgentNetworkInfoList sets the AgentNetworkInfoList field's value.
-func (s *AgentInfo) SetAgentNetworkInfoList(v []*AgentNetworkInfo) *AgentInfo {
+func (s *AgentInfo) SetAgentNetworkInfoList(v []AgentNetworkInfo) *AgentInfo {
 	s.AgentNetworkInfoList = v
 	return s
 }
@@ -1128,7 +1128,7 @@ type AssociateConfigurationItemsToApplicationInput struct {
 	// The ID of each configuration item to be associated with an application.
 	//
 	// ConfigurationIds is a required field
-	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1166,7 +1166,7 @@ func (s *AssociateConfigurationItemsToApplicationInput) SetApplicationConfigurat
 }
 
 // SetConfigurationIds sets the ConfigurationIds field's value.
-func (s *AssociateConfigurationItemsToApplicationInput) SetConfigurationIds(v []*string) *AssociateConfigurationItemsToApplicationInput {
+func (s *AssociateConfigurationItemsToApplicationInput) SetConfigurationIds(v []string) *AssociateConfigurationItemsToApplicationInput {
 	s.ConfigurationIds = v
 	return s
 }
@@ -1197,7 +1197,7 @@ type ConfigurationTag struct {
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
 	// A type of IT asset to tag.
-	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string"`
+	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" enum:"true"`
 
 	// A type of tag on which to filter. For example, serverType.
 	Key *string `locationName:"key" type:"string"`
@@ -1331,7 +1331,7 @@ type CreateTagsInput struct {
 	// A list of configuration items that you want to tag.
 	//
 	// ConfigurationIds is a required field
-	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
 
 	// Tags that you want to associate with one or more configuration items. Specify
 	// the tags that you want to create in a key-value format. For example:
@@ -1339,7 +1339,7 @@ type CreateTagsInput struct {
 	// {"key": "serverType", "value": "webServer"}
 	//
 	// Tags is a required field
-	Tags []*Tag `locationName:"tags" locationNameList:"item" type:"list" required:"true"`
+	Tags []Tag `locationName:"tags" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1365,9 +1365,6 @@ func (s *CreateTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1381,13 +1378,13 @@ func (s *CreateTagsInput) Validate() error {
 }
 
 // SetConfigurationIds sets the ConfigurationIds field's value.
-func (s *CreateTagsInput) SetConfigurationIds(v []*string) *CreateTagsInput {
+func (s *CreateTagsInput) SetConfigurationIds(v []string) *CreateTagsInput {
 	s.ConfigurationIds = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateTagsInput) SetTags(v []*Tag) *CreateTagsInput {
+func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	s.Tags = v
 	return s
 }
@@ -1600,7 +1597,7 @@ type DeleteApplicationsInput struct {
 	// Configuration ID of an application to be deleted.
 	//
 	// ConfigurationIds is a required field
-	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1628,7 +1625,7 @@ func (s *DeleteApplicationsInput) Validate() error {
 }
 
 // SetConfigurationIds sets the ConfigurationIds field's value.
-func (s *DeleteApplicationsInput) SetConfigurationIds(v []*string) *DeleteApplicationsInput {
+func (s *DeleteApplicationsInput) SetConfigurationIds(v []string) *DeleteApplicationsInput {
 	s.ConfigurationIds = v
 	return s
 }
@@ -1655,13 +1652,13 @@ type DeleteTagsInput struct {
 	// A list of configuration items with tags that you want to delete.
 	//
 	// ConfigurationIds is a required field
-	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
 
 	// Tags that you want to delete from one or more configuration items. Specify
 	// the tags that you want to delete in a key-value format. For example:
 	//
 	// {"key": "serverType", "value": "webServer"}
-	Tags []*Tag `locationName:"tags" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tags" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -1683,9 +1680,6 @@ func (s *DeleteTagsInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -1699,13 +1693,13 @@ func (s *DeleteTagsInput) Validate() error {
 }
 
 // SetConfigurationIds sets the ConfigurationIds field's value.
-func (s *DeleteTagsInput) SetConfigurationIds(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetConfigurationIds(v []string) *DeleteTagsInput {
 	s.ConfigurationIds = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *DeleteTagsInput) SetTags(v []*Tag) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 	s.Tags = v
 	return s
 }
@@ -1732,13 +1726,13 @@ type DescribeAgentsInput struct {
 	// The agent or the Connector IDs for which you want information. If you specify
 	// no IDs, the system returns information about all agents/Connectors associated
 	// with your AWS user account.
-	AgentIds []*string `locationName:"agentIds" type:"list"`
+	AgentIds []string `locationName:"agentIds" type:"list"`
 
 	// You can filter the request using various logical operators and a key-value
 	// format. For example:
 	//
 	// {"key": "collectionStatus", "value": "STARTED"}
-	Filters []*Filter `locationName:"filters" type:"list"`
+	Filters []Filter `locationName:"filters" type:"list"`
 
 	// The total number of agents/Connectors to return in a single page of output.
 	// The maximum value is 100.
@@ -1766,9 +1760,6 @@ func (s *DescribeAgentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAgentsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -1782,13 +1773,13 @@ func (s *DescribeAgentsInput) Validate() error {
 }
 
 // SetAgentIds sets the AgentIds field's value.
-func (s *DescribeAgentsInput) SetAgentIds(v []*string) *DescribeAgentsInput {
+func (s *DescribeAgentsInput) SetAgentIds(v []string) *DescribeAgentsInput {
 	s.AgentIds = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeAgentsInput) SetFilters(v []*Filter) *DescribeAgentsInput {
+func (s *DescribeAgentsInput) SetFilters(v []Filter) *DescribeAgentsInput {
 	s.Filters = v
 	return s
 }
@@ -1814,7 +1805,7 @@ type DescribeAgentsOutput struct {
 	// output includes agent/Connector IDs, IP addresses, media access control (MAC)
 	// addresses, agent/Connector health, host name where the agent/Connector resides,
 	// and the version number of each agent/Connector.
-	AgentsInfo []*AgentInfo `locationName:"agentsInfo" type:"list"`
+	AgentsInfo []AgentInfo `locationName:"agentsInfo" type:"list"`
 
 	// Token to retrieve the next set of results. For example, if you specified
 	// 100 IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults
@@ -1834,7 +1825,7 @@ func (s DescribeAgentsOutput) GoString() string {
 }
 
 // SetAgentsInfo sets the AgentsInfo field's value.
-func (s *DescribeAgentsOutput) SetAgentsInfo(v []*AgentInfo) *DescribeAgentsOutput {
+func (s *DescribeAgentsOutput) SetAgentsInfo(v []AgentInfo) *DescribeAgentsOutput {
 	s.AgentsInfo = v
 	return s
 }
@@ -1852,7 +1843,7 @@ type DescribeConfigurationsInput struct {
 	// One or more configuration IDs.
 	//
 	// ConfigurationIds is a required field
-	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1880,7 +1871,7 @@ func (s *DescribeConfigurationsInput) Validate() error {
 }
 
 // SetConfigurationIds sets the ConfigurationIds field's value.
-func (s *DescribeConfigurationsInput) SetConfigurationIds(v []*string) *DescribeConfigurationsInput {
+func (s *DescribeConfigurationsInput) SetConfigurationIds(v []string) *DescribeConfigurationsInput {
 	s.ConfigurationIds = v
 	return s
 }
@@ -1890,7 +1881,7 @@ type DescribeConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A key in the response map. The value is an array of data.
-	Configurations []map[string]*string `locationName:"configurations" type:"list"`
+	Configurations []map[string]string `locationName:"configurations" type:"list"`
 }
 
 // String returns the string representation
@@ -1904,7 +1895,7 @@ func (s DescribeConfigurationsOutput) GoString() string {
 }
 
 // SetConfigurations sets the Configurations field's value.
-func (s *DescribeConfigurationsOutput) SetConfigurations(v []map[string]*string) *DescribeConfigurationsOutput {
+func (s *DescribeConfigurationsOutput) SetConfigurations(v []map[string]string) *DescribeConfigurationsOutput {
 	s.Configurations = v
 	return s
 }
@@ -1914,7 +1905,7 @@ type DescribeExportConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique identifier that you can use to query the export status.
-	ExportIds []*string `locationName:"exportIds" type:"list"`
+	ExportIds []string `locationName:"exportIds" type:"list"`
 
 	// The maximum number of results that you want to display as a part of the query.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
@@ -1937,7 +1928,7 @@ func (s DescribeExportConfigurationsInput) GoString() string {
 }
 
 // SetExportIds sets the ExportIds field's value.
-func (s *DescribeExportConfigurationsInput) SetExportIds(v []*string) *DescribeExportConfigurationsInput {
+func (s *DescribeExportConfigurationsInput) SetExportIds(v []string) *DescribeExportConfigurationsInput {
 	s.ExportIds = v
 	return s
 }
@@ -1960,7 +1951,7 @@ type DescribeExportConfigurationsOutput struct {
 
 	// Returns export details. When the status is complete, the response includes
 	// a URL for an Amazon S3 bucket where you can view the data in a CSV file.
-	ExportsInfo []*ExportInfo `locationName:"exportsInfo" type:"list"`
+	ExportsInfo []ExportInfo `locationName:"exportsInfo" type:"list"`
 
 	// A token to get the next set of results. For example, if you specify 100 IDs
 	// for DescribeExportConfigurationsRequest$exportIds but set DescribeExportConfigurationsRequest$maxResults
@@ -1980,7 +1971,7 @@ func (s DescribeExportConfigurationsOutput) GoString() string {
 }
 
 // SetExportsInfo sets the ExportsInfo field's value.
-func (s *DescribeExportConfigurationsOutput) SetExportsInfo(v []*ExportInfo) *DescribeExportConfigurationsOutput {
+func (s *DescribeExportConfigurationsOutput) SetExportsInfo(v []ExportInfo) *DescribeExportConfigurationsOutput {
 	s.ExportsInfo = v
 	return s
 }
@@ -1996,12 +1987,12 @@ type DescribeExportTasksInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more unique identifiers used to query the status of an export request.
-	ExportIds []*string `locationName:"exportIds" type:"list"`
+	ExportIds []string `locationName:"exportIds" type:"list"`
 
 	// One or more filters.
 	//
 	//    * AgentId - ID of the agent whose collected data will be exported
-	Filters []*ExportFilter `locationName:"filters" type:"list"`
+	Filters []ExportFilter `locationName:"filters" type:"list"`
 
 	// The maximum number of volume results returned by DescribeExportTasks in paginated
 	// output. When this parameter is used, DescribeExportTasks only returns maxResults
@@ -2031,9 +2022,6 @@ func (s *DescribeExportTasksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeExportTasksInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -2047,13 +2035,13 @@ func (s *DescribeExportTasksInput) Validate() error {
 }
 
 // SetExportIds sets the ExportIds field's value.
-func (s *DescribeExportTasksInput) SetExportIds(v []*string) *DescribeExportTasksInput {
+func (s *DescribeExportTasksInput) SetExportIds(v []string) *DescribeExportTasksInput {
 	s.ExportIds = v
 	return s
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeExportTasksInput) SetFilters(v []*ExportFilter) *DescribeExportTasksInput {
+func (s *DescribeExportTasksInput) SetFilters(v []ExportFilter) *DescribeExportTasksInput {
 	s.Filters = v
 	return s
 }
@@ -2077,7 +2065,7 @@ type DescribeExportTasksOutput struct {
 	// Contains one or more sets of export request details. When the status of a
 	// request is SUCCEEDED, the response includes a URL for an Amazon S3 bucket
 	// where you can view the data in a CSV file.
-	ExportsInfo []*ExportInfo `locationName:"exportsInfo" type:"list"`
+	ExportsInfo []ExportInfo `locationName:"exportsInfo" type:"list"`
 
 	// The nextToken value to include in a future DescribeExportTasks request. When
 	// the results of a DescribeExportTasks request exceed maxResults, this value
@@ -2097,7 +2085,7 @@ func (s DescribeExportTasksOutput) GoString() string {
 }
 
 // SetExportsInfo sets the ExportsInfo field's value.
-func (s *DescribeExportTasksOutput) SetExportsInfo(v []*ExportInfo) *DescribeExportTasksOutput {
+func (s *DescribeExportTasksOutput) SetExportsInfo(v []ExportInfo) *DescribeExportTasksOutput {
 	s.ExportsInfo = v
 	return s
 }
@@ -2115,7 +2103,7 @@ type DescribeTagsInput struct {
 	// You can filter the list using a key-value format. You can separate these
 	// items by using logical operators. Allowed filters include tagKey, tagValue,
 	// and configurationId.
-	Filters []*TagFilter `locationName:"filters" type:"list"`
+	Filters []TagFilter `locationName:"filters" type:"list"`
 
 	// The total number of items to return in a single page of output. The maximum
 	// value is 100.
@@ -2140,9 +2128,6 @@ func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -2156,7 +2141,7 @@ func (s *DescribeTagsInput) Validate() error {
 }
 
 // SetFilters sets the Filters field's value.
-func (s *DescribeTagsInput) SetFilters(v []*TagFilter) *DescribeTagsInput {
+func (s *DescribeTagsInput) SetFilters(v []TagFilter) *DescribeTagsInput {
 	s.Filters = v
 	return s
 }
@@ -2182,7 +2167,7 @@ type DescribeTagsOutput struct {
 
 	// Depending on the input, this is a list of configuration items tagged with
 	// a specific tag, or a list of tags for a specific configuration item.
-	Tags []*ConfigurationTag `locationName:"tags" locationNameList:"item" type:"list"`
+	Tags []ConfigurationTag `locationName:"tags" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -2202,7 +2187,7 @@ func (s *DescribeTagsOutput) SetNextToken(v string) *DescribeTagsOutput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []*ConfigurationTag) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTags(v []ConfigurationTag) *DescribeTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -2219,7 +2204,7 @@ type DisassociateConfigurationItemsFromApplicationInput struct {
 	// Configuration ID of each item to be disassociated from an application.
 	//
 	// ConfigurationIds is a required field
-	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2257,7 +2242,7 @@ func (s *DisassociateConfigurationItemsFromApplicationInput) SetApplicationConfi
 }
 
 // SetConfigurationIds sets the ConfigurationIds field's value.
-func (s *DisassociateConfigurationItemsFromApplicationInput) SetConfigurationIds(v []*string) *DisassociateConfigurationItemsFromApplicationInput {
+func (s *DisassociateConfigurationItemsFromApplicationInput) SetConfigurationIds(v []string) *DisassociateConfigurationItemsFromApplicationInput {
 	s.ConfigurationIds = v
 	return s
 }
@@ -2338,7 +2323,7 @@ type ExportFilter struct {
 	// action. Typically an ADS agentId is in the form o-0123456789abcdef0.
 	//
 	// Values is a required field
-	Values []*string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
+	Values []string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2386,7 +2371,7 @@ func (s *ExportFilter) SetName(v string) *ExportFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *ExportFilter) SetValues(v []*string) *ExportFilter {
+func (s *ExportFilter) SetValues(v []string) *ExportFilter {
 	s.Values = v
 	return s
 }
@@ -2414,7 +2399,7 @@ type ExportInfo struct {
 	// The status of the data export job.
 	//
 	// ExportStatus is a required field
-	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" required:"true"`
+	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" required:"true" enum:"true"`
 
 	// If true, the export of agent information exceeded the size limit for a single
 	// export and the exported data is incomplete for the requested time range.
@@ -2521,7 +2506,7 @@ type Filter struct {
 	// filter name, you could specify Ubuntu for the value.
 	//
 	// Values is a required field
-	Values []*string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
+	Values []string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2569,7 +2554,7 @@ func (s *Filter) SetName(v string) *Filter {
 }
 
 // SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []*string) *Filter {
+func (s *Filter) SetValues(v []string) *Filter {
 	s.Values = v
 	return s
 }
@@ -2665,7 +2650,7 @@ type ListConfigurationsInput struct {
 	// A valid configuration identified by Application Discovery Service.
 	//
 	// ConfigurationType is a required field
-	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" required:"true"`
+	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" required:"true" enum:"true"`
 
 	// You can filter the request using various logical operators and a key-value
 	// format. For example:
@@ -2674,7 +2659,7 @@ type ListConfigurationsInput struct {
 	//
 	// For a complete list of filter options and guidance about using them with
 	// this action, see Querying Discovered Configuration Items (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations).
-	Filters []*Filter `locationName:"filters" type:"list"`
+	Filters []Filter `locationName:"filters" type:"list"`
 
 	// The total number of items to return. The maximum value is 100.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
@@ -2688,7 +2673,7 @@ type ListConfigurationsInput struct {
 	// Certain filter criteria return output that can be sorted in ascending or
 	// descending order. For a list of output characteristics for each filter, see
 	// Using the ListConfigurations Action (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations).
-	OrderBy []*OrderByElement `locationName:"orderBy" type:"list"`
+	OrderBy []OrderByElement `locationName:"orderBy" type:"list"`
 }
 
 // String returns the string representation
@@ -2709,9 +2694,6 @@ func (s *ListConfigurationsInput) Validate() error {
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -2719,9 +2701,6 @@ func (s *ListConfigurationsInput) Validate() error {
 	}
 	if s.OrderBy != nil {
 		for i, v := range s.OrderBy {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderBy", i), err.(aws.ErrInvalidParams))
 			}
@@ -2741,7 +2720,7 @@ func (s *ListConfigurationsInput) SetConfigurationType(v ConfigurationItemType) 
 }
 
 // SetFilters sets the Filters field's value.
-func (s *ListConfigurationsInput) SetFilters(v []*Filter) *ListConfigurationsInput {
+func (s *ListConfigurationsInput) SetFilters(v []Filter) *ListConfigurationsInput {
 	s.Filters = v
 	return s
 }
@@ -2759,7 +2738,7 @@ func (s *ListConfigurationsInput) SetNextToken(v string) *ListConfigurationsInpu
 }
 
 // SetOrderBy sets the OrderBy field's value.
-func (s *ListConfigurationsInput) SetOrderBy(v []*OrderByElement) *ListConfigurationsInput {
+func (s *ListConfigurationsInput) SetOrderBy(v []OrderByElement) *ListConfigurationsInput {
 	s.OrderBy = v
 	return s
 }
@@ -2770,7 +2749,7 @@ type ListConfigurationsOutput struct {
 
 	// Returns configuration details, including the configuration ID, attribute
 	// names, and attribute values.
-	Configurations []map[string]*string `locationName:"configurations" type:"list"`
+	Configurations []map[string]string `locationName:"configurations" type:"list"`
 
 	// Token to retrieve the next set of results. For example, if your call to ListConfigurations
 	// returned 100 items, but you set ListConfigurationsRequest$maxResults to 10,
@@ -2790,7 +2769,7 @@ func (s ListConfigurationsOutput) GoString() string {
 }
 
 // SetConfigurations sets the Configurations field's value.
-func (s *ListConfigurationsOutput) SetConfigurations(v []map[string]*string) *ListConfigurationsOutput {
+func (s *ListConfigurationsOutput) SetConfigurations(v []map[string]string) *ListConfigurationsOutput {
 	s.Configurations = v
 	return s
 }
@@ -2814,7 +2793,7 @@ type ListServerNeighborsInput struct {
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// List of configuration IDs to test for one-hop-away.
-	NeighborConfigurationIds []*string `locationName:"neighborConfigurationIds" type:"list"`
+	NeighborConfigurationIds []string `locationName:"neighborConfigurationIds" type:"list"`
 
 	// Token to retrieve the next set of results. For example, if you previously
 	// specified 100 IDs for ListServerNeighborsRequest$neighborConfigurationIds
@@ -2865,7 +2844,7 @@ func (s *ListServerNeighborsInput) SetMaxResults(v int64) *ListServerNeighborsIn
 }
 
 // SetNeighborConfigurationIds sets the NeighborConfigurationIds field's value.
-func (s *ListServerNeighborsInput) SetNeighborConfigurationIds(v []*string) *ListServerNeighborsInput {
+func (s *ListServerNeighborsInput) SetNeighborConfigurationIds(v []string) *ListServerNeighborsInput {
 	s.NeighborConfigurationIds = v
 	return s
 }
@@ -2892,7 +2871,7 @@ type ListServerNeighborsOutput struct {
 	// List of distinct servers that are one hop away from the given server.
 	//
 	// Neighbors is a required field
-	Neighbors []*NeighborConnectionDetail `locationName:"neighbors" type:"list" required:"true"`
+	Neighbors []NeighborConnectionDetail `locationName:"neighbors" type:"list" required:"true"`
 
 	// Token to retrieve the next set of results. For example, if you specified
 	// 100 IDs for ListServerNeighborsRequest$neighborConfigurationIds but set ListServerNeighborsRequest$maxResults
@@ -2918,7 +2897,7 @@ func (s *ListServerNeighborsOutput) SetKnownDependencyCount(v int64) *ListServer
 }
 
 // SetNeighbors sets the Neighbors field's value.
-func (s *ListServerNeighborsOutput) SetNeighbors(v []*NeighborConnectionDetail) *ListServerNeighborsOutput {
+func (s *ListServerNeighborsOutput) SetNeighbors(v []NeighborConnectionDetail) *ListServerNeighborsOutput {
 	s.Neighbors = v
 	return s
 }
@@ -3007,7 +2986,7 @@ type OrderByElement struct {
 	FieldName *string `locationName:"fieldName" type:"string" required:"true"`
 
 	// Ordering direction.
-	SortOrder OrderString `locationName:"sortOrder" type:"string"`
+	SortOrder OrderString `locationName:"sortOrder" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3059,7 +3038,7 @@ type StartDataCollectionByAgentIdsInput struct {
 	// exception. Instead, the system shows Failed in the Description field.
 	//
 	// AgentIds is a required field
-	AgentIds []*string `locationName:"agentIds" type:"list" required:"true"`
+	AgentIds []string `locationName:"agentIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3087,7 +3066,7 @@ func (s *StartDataCollectionByAgentIdsInput) Validate() error {
 }
 
 // SetAgentIds sets the AgentIds field's value.
-func (s *StartDataCollectionByAgentIdsInput) SetAgentIds(v []*string) *StartDataCollectionByAgentIdsInput {
+func (s *StartDataCollectionByAgentIdsInput) SetAgentIds(v []string) *StartDataCollectionByAgentIdsInput {
 	s.AgentIds = v
 	return s
 }
@@ -3099,7 +3078,7 @@ type StartDataCollectionByAgentIdsOutput struct {
 	// Information about agents or the connector that were instructed to start collecting
 	// data. Information includes the agent/connector ID, a description of the operation
 	// performed, and whether the agent/connector configuration was updated.
-	AgentsConfigurationStatus []*AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
+	AgentsConfigurationStatus []AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
 }
 
 // String returns the string representation
@@ -3113,7 +3092,7 @@ func (s StartDataCollectionByAgentIdsOutput) GoString() string {
 }
 
 // SetAgentsConfigurationStatus sets the AgentsConfigurationStatus field's value.
-func (s *StartDataCollectionByAgentIdsOutput) SetAgentsConfigurationStatus(v []*AgentConfigurationStatus) *StartDataCollectionByAgentIdsOutput {
+func (s *StartDataCollectionByAgentIdsOutput) SetAgentsConfigurationStatus(v []AgentConfigurationStatus) *StartDataCollectionByAgentIdsOutput {
 	s.AgentsConfigurationStatus = v
 	return s
 }
@@ -3135,7 +3114,7 @@ type StartExportTaskInput struct {
 	// results of the DescribeAgents API or CLI. If no filter is present, startTime
 	// and endTime are ignored and exported data includes both Agentless Discovery
 	// Connector data and summary data from Application Discovery agents.
-	Filters []*ExportFilter `locationName:"filters" type:"list"`
+	Filters []ExportFilter `locationName:"filters" type:"list"`
 
 	// The start timestamp for exported data from the single Application Discovery
 	// Agent selected in the filters. If no value is specified, data is exported
@@ -3158,9 +3137,6 @@ func (s *StartExportTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartExportTaskInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
@@ -3186,7 +3162,7 @@ func (s *StartExportTaskInput) SetExportDataFormat(v []ExportDataFormat) *StartE
 }
 
 // SetFilters sets the Filters field's value.
-func (s *StartExportTaskInput) SetFilters(v []*ExportFilter) *StartExportTaskInput {
+func (s *StartExportTaskInput) SetFilters(v []ExportFilter) *StartExportTaskInput {
 	s.Filters = v
 	return s
 }
@@ -3228,7 +3204,7 @@ type StopDataCollectionByAgentIdsInput struct {
 	// The IDs of the agents or connectors from which to stop collecting data.
 	//
 	// AgentIds is a required field
-	AgentIds []*string `locationName:"agentIds" type:"list" required:"true"`
+	AgentIds []string `locationName:"agentIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3256,7 +3232,7 @@ func (s *StopDataCollectionByAgentIdsInput) Validate() error {
 }
 
 // SetAgentIds sets the AgentIds field's value.
-func (s *StopDataCollectionByAgentIdsInput) SetAgentIds(v []*string) *StopDataCollectionByAgentIdsInput {
+func (s *StopDataCollectionByAgentIdsInput) SetAgentIds(v []string) *StopDataCollectionByAgentIdsInput {
 	s.AgentIds = v
 	return s
 }
@@ -3268,7 +3244,7 @@ type StopDataCollectionByAgentIdsOutput struct {
 	// Information about the agents or connector that were instructed to stop collecting
 	// data. Information includes the agent/connector ID, a description of the operation
 	// performed, and whether the agent/connector configuration was updated.
-	AgentsConfigurationStatus []*AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
+	AgentsConfigurationStatus []AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
 }
 
 // String returns the string representation
@@ -3282,7 +3258,7 @@ func (s StopDataCollectionByAgentIdsOutput) GoString() string {
 }
 
 // SetAgentsConfigurationStatus sets the AgentsConfigurationStatus field's value.
-func (s *StopDataCollectionByAgentIdsOutput) SetAgentsConfigurationStatus(v []*AgentConfigurationStatus) *StopDataCollectionByAgentIdsOutput {
+func (s *StopDataCollectionByAgentIdsOutput) SetAgentsConfigurationStatus(v []AgentConfigurationStatus) *StopDataCollectionByAgentIdsOutput {
 	s.AgentsConfigurationStatus = v
 	return s
 }
@@ -3356,7 +3332,7 @@ type TagFilter struct {
 	// Values for the tag filter.
 	//
 	// Values is a required field
-	Values []*string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
+	Values []string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3394,7 +3370,7 @@ func (s *TagFilter) SetName(v string) *TagFilter {
 }
 
 // SetValues sets the Values field's value.
-func (s *TagFilter) SetValues(v []*string) *TagFilter {
+func (s *TagFilter) SetValues(v []string) *TagFilter {
 	s.Values = v
 	return s
 }

@@ -15,32 +15,32 @@ import (
 // Use DynamoDB methods for simplicity
 func TestPaginationQueryPage(t *testing.T) {
 	db := dynamodb.New(unit.Config())
-	tokens, pages, numPages, gotToEnd := []map[string]*dynamodb.AttributeValue{}, []map[string]*dynamodb.AttributeValue{}, 0, false
+	tokens, pages, numPages, gotToEnd := []map[string]dynamodb.AttributeValue{}, []map[string]dynamodb.AttributeValue{}, 0, false
 
 	reqNum := 0
 	resps := []*dynamodb.QueryOutput{
 		{
-			LastEvaluatedKey: map[string]*dynamodb.AttributeValue{"key": {S: aws.String("key1")}},
+			LastEvaluatedKey: map[string]dynamodb.AttributeValue{"key": {S: aws.String("key1")}},
 			Count:            aws.Int64(1),
-			Items: []map[string]*dynamodb.AttributeValue{
+			Items: []map[string]dynamodb.AttributeValue{
 				{
 					"key": {S: aws.String("key1")},
 				},
 			},
 		},
 		{
-			LastEvaluatedKey: map[string]*dynamodb.AttributeValue{"key": {S: aws.String("key2")}},
+			LastEvaluatedKey: map[string]dynamodb.AttributeValue{"key": {S: aws.String("key2")}},
 			Count:            aws.Int64(1),
-			Items: []map[string]*dynamodb.AttributeValue{
+			Items: []map[string]dynamodb.AttributeValue{
 				{
 					"key": {S: aws.String("key2")},
 				},
 			},
 		},
 		{
-			LastEvaluatedKey: map[string]*dynamodb.AttributeValue{},
+			LastEvaluatedKey: map[string]dynamodb.AttributeValue{},
 			Count:            aws.Int64(1),
-			Items: []map[string]*dynamodb.AttributeValue{
+			Items: []map[string]dynamodb.AttributeValue{
 				{
 					"key": {S: aws.String("key3")},
 				},
@@ -86,14 +86,14 @@ func TestPaginationQueryPage(t *testing.T) {
 		t.Errorf("expected no error, but received %v", err)
 	}
 
-	if e, a := []map[string]*dynamodb.AttributeValue{
+	if e, a := []map[string]dynamodb.AttributeValue{
 		{"key": {S: aws.String("key1")}},
 		{"key": {S: aws.String("key2")}},
 	}, tokens; !reflect.DeepEqual(e, a) {
 		t.Errorf("expected %v, but received %v", e, a)
 	}
 
-	if e, a := []map[string]*dynamodb.AttributeValue{
+	if e, a := []map[string]dynamodb.AttributeValue{
 		{"key": {S: aws.String("key1")}},
 		{"key": {S: aws.String("key2")}},
 		{"key": {S: aws.String("key3")}},
@@ -119,9 +119,9 @@ func TestPagination(t *testing.T) {
 
 	reqNum := 0
 	resps := []*dynamodb.ListTablesOutput{
-		{TableNames: []*string{aws.String("Table1"), aws.String("Table2")}, LastEvaluatedTableName: aws.String("Table2")},
-		{TableNames: []*string{aws.String("Table3"), aws.String("Table4")}, LastEvaluatedTableName: aws.String("Table4")},
-		{TableNames: []*string{aws.String("Table5")}},
+		{TableNames: []string{"Table1", "Table2"}, LastEvaluatedTableName: aws.String("Table2")},
+		{TableNames: []string{"Table3", "Table4"}, LastEvaluatedTableName: aws.String("Table4")},
+		{TableNames: []string{"Table5"}},
 	}
 
 	db.Handlers.Send.Clear() // mock sending
@@ -145,7 +145,7 @@ func TestPagination(t *testing.T) {
 	err := db.ListTablesPages(params, func(p *dynamodb.ListTablesOutput, last bool) bool {
 		numPages++
 		for _, t := range p.TableNames {
-			pages = append(pages, *t)
+			pages = append(pages, t)
 		}
 		if last {
 			if gotToEnd {
@@ -184,9 +184,9 @@ func TestPaginationEachPage(t *testing.T) {
 
 	reqNum := 0
 	resps := []*dynamodb.ListTablesOutput{
-		{TableNames: []*string{aws.String("Table1"), aws.String("Table2")}, LastEvaluatedTableName: aws.String("Table2")},
-		{TableNames: []*string{aws.String("Table3"), aws.String("Table4")}, LastEvaluatedTableName: aws.String("Table4")},
-		{TableNames: []*string{aws.String("Table5")}},
+		{TableNames: []string{"Table1", "Table2"}, LastEvaluatedTableName: aws.String("Table2")},
+		{TableNames: []string{"Table3", "Table4"}, LastEvaluatedTableName: aws.String("Table4")},
+		{TableNames: []string{"Table5"}},
 	}
 
 	db.Handlers.Send.Clear() // mock sending
@@ -211,7 +211,7 @@ func TestPaginationEachPage(t *testing.T) {
 	err := req.EachPage(func(p interface{}, last bool) bool {
 		numPages++
 		for _, t := range p.(*dynamodb.ListTablesOutput).TableNames {
-			pages = append(pages, *t)
+			pages = append(pages, t)
 		}
 		if last {
 			if gotToEnd {
@@ -247,9 +247,9 @@ func TestPaginationEarlyExit(t *testing.T) {
 
 	reqNum := 0
 	resps := []*dynamodb.ListTablesOutput{
-		{TableNames: []*string{aws.String("Table1"), aws.String("Table2")}, LastEvaluatedTableName: aws.String("Table2")},
-		{TableNames: []*string{aws.String("Table3"), aws.String("Table4")}, LastEvaluatedTableName: aws.String("Table4")},
-		{TableNames: []*string{aws.String("Table5")}},
+		{TableNames: []string{"Table1", "Table2"}, LastEvaluatedTableName: aws.String("Table2")},
+		{TableNames: []string{"Table3", "Table4"}, LastEvaluatedTableName: aws.String("Table4")},
+		{TableNames: []string{"Table5"}},
 	}
 
 	db.Handlers.Send.Clear() // mock sending
@@ -321,10 +321,10 @@ func TestPaginationTruncation(t *testing.T) {
 
 	reqNum := 0
 	resps := []*s3.ListObjectsOutput{
-		{IsTruncated: aws.Bool(true), Contents: []*s3.Object{{Key: aws.String("Key1")}}},
-		{IsTruncated: aws.Bool(true), Contents: []*s3.Object{{Key: aws.String("Key2")}}},
-		{IsTruncated: aws.Bool(false), Contents: []*s3.Object{{Key: aws.String("Key3")}}},
-		{IsTruncated: aws.Bool(true), Contents: []*s3.Object{{Key: aws.String("Key4")}}},
+		{IsTruncated: aws.Bool(true), Contents: []s3.Object{{Key: aws.String("Key1")}}},
+		{IsTruncated: aws.Bool(true), Contents: []s3.Object{{Key: aws.String("Key2")}}},
+		{IsTruncated: aws.Bool(false), Contents: []s3.Object{{Key: aws.String("Key3")}}},
+		{IsTruncated: aws.Bool(true), Contents: []s3.Object{{Key: aws.String("Key4")}}},
 	}
 
 	client.Handlers.Send.Clear() // mock sending
@@ -375,7 +375,7 @@ func TestPaginationNilToken(t *testing.T) {
 	reqNum := 0
 	resps := []*route53.ListResourceRecordSetsOutput{
 		{
-			ResourceRecordSets: []*route53.ResourceRecordSet{
+			ResourceRecordSets: []route53.ResourceRecordSet{
 				{Name: aws.String("first.example.com.")},
 			},
 			IsTruncated:          aws.Bool(true),
@@ -385,7 +385,7 @@ func TestPaginationNilToken(t *testing.T) {
 			MaxItems:             aws.String("1"),
 		},
 		{
-			ResourceRecordSets: []*route53.ResourceRecordSet{
+			ResourceRecordSets: []route53.ResourceRecordSet{
 				{Name: aws.String("second.example.com.")},
 			},
 			IsTruncated:    aws.Bool(true),
@@ -394,7 +394,7 @@ func TestPaginationNilToken(t *testing.T) {
 			MaxItems:       aws.String("1"),
 		},
 		{
-			ResourceRecordSets: []*route53.ResourceRecordSet{
+			ResourceRecordSets: []route53.ResourceRecordSet{
 				{Name: aws.String("third.example.com.")},
 			},
 			IsTruncated: aws.Bool(false),
@@ -587,21 +587,21 @@ func TestPagination_Standalone(t *testing.T) {
 }
 
 // Benchmarks
-var benchResps = []*dynamodb.ListTablesOutput{
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE"), aws.String("NXT")}, LastEvaluatedTableName: aws.String("NXT")},
-	{TableNames: []*string{aws.String("TABLE")}},
+var benchResps = []dynamodb.ListTablesOutput{
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE", "NXT"}, LastEvaluatedTableName: aws.String("NXT")},
+	{TableNames: []string{"TABLE"}},
 }
 
 var benchDb = func() *dynamodb.DynamoDB {

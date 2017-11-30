@@ -1494,7 +1494,7 @@ type ApplicationDetail struct {
 	// Status of the application.
 	//
 	// ApplicationStatus is a required field
-	ApplicationStatus ApplicationStatus `type:"string" required:"true"`
+	ApplicationStatus ApplicationStatus `type:"string" required:"true" enum:"true"`
 
 	// Provides the current application version.
 	//
@@ -1504,25 +1504,25 @@ type ApplicationDetail struct {
 	// Describes the CloudWatch log streams that are configured to receive application
 	// messages. For more information about using CloudWatch log streams with Amazon
 	// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription `type:"list"`
+	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `type:"list"`
 
 	// Timestamp when the application version was created.
 	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Describes the application input configuration. For more information, see
 	// Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-	InputDescriptions []*InputDescription `type:"list"`
+	InputDescriptions []InputDescription `type:"list"`
 
 	// Timestamp when the application was last updated.
 	LastUpdateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Describes the application output configuration. For more information, see
 	// Configuring Application Output (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-	OutputDescriptions []*OutputDescription `type:"list"`
+	OutputDescriptions []OutputDescription `type:"list"`
 
 	// Describes reference data sources configured for the application. For more
 	// information, see Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription `type:"list"`
+	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -1572,7 +1572,7 @@ func (s *ApplicationDetail) SetApplicationVersionId(v int64) *ApplicationDetail 
 }
 
 // SetCloudWatchLoggingOptionDescriptions sets the CloudWatchLoggingOptionDescriptions field's value.
-func (s *ApplicationDetail) SetCloudWatchLoggingOptionDescriptions(v []*CloudWatchLoggingOptionDescription) *ApplicationDetail {
+func (s *ApplicationDetail) SetCloudWatchLoggingOptionDescriptions(v []CloudWatchLoggingOptionDescription) *ApplicationDetail {
 	s.CloudWatchLoggingOptionDescriptions = v
 	return s
 }
@@ -1584,7 +1584,7 @@ func (s *ApplicationDetail) SetCreateTimestamp(v time.Time) *ApplicationDetail {
 }
 
 // SetInputDescriptions sets the InputDescriptions field's value.
-func (s *ApplicationDetail) SetInputDescriptions(v []*InputDescription) *ApplicationDetail {
+func (s *ApplicationDetail) SetInputDescriptions(v []InputDescription) *ApplicationDetail {
 	s.InputDescriptions = v
 	return s
 }
@@ -1596,13 +1596,13 @@ func (s *ApplicationDetail) SetLastUpdateTimestamp(v time.Time) *ApplicationDeta
 }
 
 // SetOutputDescriptions sets the OutputDescriptions field's value.
-func (s *ApplicationDetail) SetOutputDescriptions(v []*OutputDescription) *ApplicationDetail {
+func (s *ApplicationDetail) SetOutputDescriptions(v []OutputDescription) *ApplicationDetail {
 	s.OutputDescriptions = v
 	return s
 }
 
 // SetReferenceDataSourceDescriptions sets the ReferenceDataSourceDescriptions field's value.
-func (s *ApplicationDetail) SetReferenceDataSourceDescriptions(v []*ReferenceDataSourceDescription) *ApplicationDetail {
+func (s *ApplicationDetail) SetReferenceDataSourceDescriptions(v []ReferenceDataSourceDescription) *ApplicationDetail {
 	s.ReferenceDataSourceDescriptions = v
 	return s
 }
@@ -1626,7 +1626,7 @@ type ApplicationSummary struct {
 	// Status of the application.
 	//
 	// ApplicationStatus is a required field
-	ApplicationStatus ApplicationStatus `type:"string" required:"true"`
+	ApplicationStatus ApplicationStatus `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1666,16 +1666,16 @@ type ApplicationUpdate struct {
 	ApplicationCodeUpdate *string `type:"string"`
 
 	// Describes application CloudWatch logging option updates.
-	CloudWatchLoggingOptionUpdates []*CloudWatchLoggingOptionUpdate `type:"list"`
+	CloudWatchLoggingOptionUpdates []CloudWatchLoggingOptionUpdate `type:"list"`
 
 	// Describes application input configuration updates.
-	InputUpdates []*InputUpdate `type:"list"`
+	InputUpdates []InputUpdate `type:"list"`
 
 	// Describes application output configuration updates.
-	OutputUpdates []*OutputUpdate `type:"list"`
+	OutputUpdates []OutputUpdate `type:"list"`
 
 	// Describes application reference data source updates.
-	ReferenceDataSourceUpdates []*ReferenceDataSourceUpdate `type:"list"`
+	ReferenceDataSourceUpdates []ReferenceDataSourceUpdate `type:"list"`
 }
 
 // String returns the string representation
@@ -1693,9 +1693,6 @@ func (s *ApplicationUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApplicationUpdate"}
 	if s.CloudWatchLoggingOptionUpdates != nil {
 		for i, v := range s.CloudWatchLoggingOptionUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptionUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -1703,9 +1700,6 @@ func (s *ApplicationUpdate) Validate() error {
 	}
 	if s.InputUpdates != nil {
 		for i, v := range s.InputUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -1713,9 +1707,6 @@ func (s *ApplicationUpdate) Validate() error {
 	}
 	if s.OutputUpdates != nil {
 		for i, v := range s.OutputUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -1723,9 +1714,6 @@ func (s *ApplicationUpdate) Validate() error {
 	}
 	if s.ReferenceDataSourceUpdates != nil {
 		for i, v := range s.ReferenceDataSourceUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReferenceDataSourceUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -1745,25 +1733,25 @@ func (s *ApplicationUpdate) SetApplicationCodeUpdate(v string) *ApplicationUpdat
 }
 
 // SetCloudWatchLoggingOptionUpdates sets the CloudWatchLoggingOptionUpdates field's value.
-func (s *ApplicationUpdate) SetCloudWatchLoggingOptionUpdates(v []*CloudWatchLoggingOptionUpdate) *ApplicationUpdate {
+func (s *ApplicationUpdate) SetCloudWatchLoggingOptionUpdates(v []CloudWatchLoggingOptionUpdate) *ApplicationUpdate {
 	s.CloudWatchLoggingOptionUpdates = v
 	return s
 }
 
 // SetInputUpdates sets the InputUpdates field's value.
-func (s *ApplicationUpdate) SetInputUpdates(v []*InputUpdate) *ApplicationUpdate {
+func (s *ApplicationUpdate) SetInputUpdates(v []InputUpdate) *ApplicationUpdate {
 	s.InputUpdates = v
 	return s
 }
 
 // SetOutputUpdates sets the OutputUpdates field's value.
-func (s *ApplicationUpdate) SetOutputUpdates(v []*OutputUpdate) *ApplicationUpdate {
+func (s *ApplicationUpdate) SetOutputUpdates(v []OutputUpdate) *ApplicationUpdate {
 	s.OutputUpdates = v
 	return s
 }
 
 // SetReferenceDataSourceUpdates sets the ReferenceDataSourceUpdates field's value.
-func (s *ApplicationUpdate) SetReferenceDataSourceUpdates(v []*ReferenceDataSourceUpdate) *ApplicationUpdate {
+func (s *ApplicationUpdate) SetReferenceDataSourceUpdates(v []ReferenceDataSourceUpdate) *ApplicationUpdate {
 	s.ReferenceDataSourceUpdates = v
 	return s
 }
@@ -2055,7 +2043,7 @@ type CreateApplicationInput struct {
 	// Use this parameter to configure a CloudWatch log stream to monitor application
 	// configuration errors. For more information, see Working with Amazon CloudWatch
 	// Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-	CloudWatchLoggingOptions []*CloudWatchLoggingOption `type:"list"`
+	CloudWatchLoggingOptions []CloudWatchLoggingOption `type:"list"`
 
 	// Use this parameter to configure the application input.
 	//
@@ -2073,7 +2061,7 @@ type CreateApplicationInput struct {
 	// your data into a schematized version used in SQL. In the schema, you provide
 	// the necessary mapping of the data elements in the streaming source to record
 	// columns in the in-app stream.
-	Inputs []*Input `type:"list"`
+	Inputs []Input `type:"list"`
 
 	// You can configure application output to write data from any of the in-application
 	// streams to up to five destinations.
@@ -2090,7 +2078,7 @@ type CreateApplicationInput struct {
 	// Name (ARN) and the format of data in the stream (for example, JSON, CSV).
 	// You also must provide an IAM role that Amazon Kinesis Analytics can assume
 	// to write to this stream on your behalf.
-	Outputs []*Output `type:"list"`
+	Outputs []Output `type:"list"`
 }
 
 // String returns the string representation
@@ -2115,9 +2103,6 @@ func (s *CreateApplicationInput) Validate() error {
 	}
 	if s.CloudWatchLoggingOptions != nil {
 		for i, v := range s.CloudWatchLoggingOptions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptions", i), err.(aws.ErrInvalidParams))
 			}
@@ -2125,9 +2110,6 @@ func (s *CreateApplicationInput) Validate() error {
 	}
 	if s.Inputs != nil {
 		for i, v := range s.Inputs {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Inputs", i), err.(aws.ErrInvalidParams))
 			}
@@ -2135,9 +2117,6 @@ func (s *CreateApplicationInput) Validate() error {
 	}
 	if s.Outputs != nil {
 		for i, v := range s.Outputs {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
 			}
@@ -2169,19 +2148,19 @@ func (s *CreateApplicationInput) SetApplicationName(v string) *CreateApplication
 }
 
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *CreateApplicationInput) SetCloudWatchLoggingOptions(v []*CloudWatchLoggingOption) *CreateApplicationInput {
+func (s *CreateApplicationInput) SetCloudWatchLoggingOptions(v []CloudWatchLoggingOption) *CreateApplicationInput {
 	s.CloudWatchLoggingOptions = v
 	return s
 }
 
 // SetInputs sets the Inputs field's value.
-func (s *CreateApplicationInput) SetInputs(v []*Input) *CreateApplicationInput {
+func (s *CreateApplicationInput) SetInputs(v []Input) *CreateApplicationInput {
 	s.Inputs = v
 	return s
 }
 
 // SetOutputs sets the Outputs field's value.
-func (s *CreateApplicationInput) SetOutputs(v []*Output) *CreateApplicationInput {
+func (s *CreateApplicationInput) SetOutputs(v []Output) *CreateApplicationInput {
 	s.Outputs = v
 	return s
 }
@@ -2757,7 +2736,7 @@ type DestinationSchema struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the format of the records on the output stream.
-	RecordFormatType RecordFormatType `type:"string"`
+	RecordFormatType RecordFormatType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2875,14 +2854,14 @@ type DiscoverInputSchemaOutput struct {
 
 	// An array of elements, where each element corresponds to a row in a stream
 	// record (a stream record can have more than one row).
-	ParsedInputRecords [][]*string `type:"list"`
+	ParsedInputRecords [][]string `type:"list"`
 
 	// Stream data that was modified by the processor specified in the InputProcessingConfiguration
 	// parameter.
-	ProcessedInputRecords []*string `type:"list"`
+	ProcessedInputRecords []string `type:"list"`
 
 	// Raw stream data that was sampled to infer the schema.
-	RawInputRecords []*string `type:"list"`
+	RawInputRecords []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2902,19 +2881,19 @@ func (s *DiscoverInputSchemaOutput) SetInputSchema(v *SourceSchema) *DiscoverInp
 }
 
 // SetParsedInputRecords sets the ParsedInputRecords field's value.
-func (s *DiscoverInputSchemaOutput) SetParsedInputRecords(v [][]*string) *DiscoverInputSchemaOutput {
+func (s *DiscoverInputSchemaOutput) SetParsedInputRecords(v [][]string) *DiscoverInputSchemaOutput {
 	s.ParsedInputRecords = v
 	return s
 }
 
 // SetProcessedInputRecords sets the ProcessedInputRecords field's value.
-func (s *DiscoverInputSchemaOutput) SetProcessedInputRecords(v []*string) *DiscoverInputSchemaOutput {
+func (s *DiscoverInputSchemaOutput) SetProcessedInputRecords(v []string) *DiscoverInputSchemaOutput {
 	s.ProcessedInputRecords = v
 	return s
 }
 
 // SetRawInputRecords sets the RawInputRecords field's value.
-func (s *DiscoverInputSchemaOutput) SetRawInputRecords(v []*string) *DiscoverInputSchemaOutput {
+func (s *DiscoverInputSchemaOutput) SetRawInputRecords(v []string) *DiscoverInputSchemaOutput {
 	s.RawInputRecords = v
 	return s
 }
@@ -3133,7 +3112,7 @@ type InputDescription struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the in-application stream names that are mapped to the stream source.
-	InAppStreamNames []*string `type:"list"`
+	InAppStreamNames []string `type:"list"`
 
 	// Input ID associated with the application input. This is the ID that Amazon
 	// Kinesis Analytics assigns to each input configuration you add to your application.
@@ -3181,7 +3160,7 @@ func (s InputDescription) GoString() string {
 }
 
 // SetInAppStreamNames sets the InAppStreamNames field's value.
-func (s *InputDescription) SetInAppStreamNames(v []*string) *InputDescription {
+func (s *InputDescription) SetInAppStreamNames(v []string) *InputDescription {
 	s.InAppStreamNames = v
 	return s
 }
@@ -3596,7 +3575,7 @@ type InputSchemaUpdate struct {
 	// A list of RecordColumn objects. Each object describes the mapping of the
 	// streaming source element to the corresponding column in the in-application
 	// stream.
-	RecordColumnUpdates []*RecordColumn `min:"1" type:"list"`
+	RecordColumnUpdates []RecordColumn `min:"1" type:"list"`
 
 	// Specifies the encoding of the records in the streaming source. For example,
 	// UTF-8.
@@ -3624,9 +3603,6 @@ func (s *InputSchemaUpdate) Validate() error {
 	}
 	if s.RecordColumnUpdates != nil {
 		for i, v := range s.RecordColumnUpdates {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordColumnUpdates", i), err.(aws.ErrInvalidParams))
 			}
@@ -3645,7 +3621,7 @@ func (s *InputSchemaUpdate) Validate() error {
 }
 
 // SetRecordColumnUpdates sets the RecordColumnUpdates field's value.
-func (s *InputSchemaUpdate) SetRecordColumnUpdates(v []*RecordColumn) *InputSchemaUpdate {
+func (s *InputSchemaUpdate) SetRecordColumnUpdates(v []RecordColumn) *InputSchemaUpdate {
 	s.RecordColumnUpdates = v
 	return s
 }
@@ -3678,7 +3654,7 @@ type InputStartingPositionConfiguration struct {
 	//
 	//    * LAST_STOPPED_POINT - Resume reading from where the application last
 	//    stopped reading.
-	InputStartingPosition InputStartingPosition `type:"string"`
+	InputStartingPosition InputStartingPosition `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4559,7 +4535,7 @@ type ListApplicationsOutput struct {
 	// List of ApplicationSummary objects.
 	//
 	// ApplicationSummaries is a required field
-	ApplicationSummaries []*ApplicationSummary `type:"list" required:"true"`
+	ApplicationSummaries []ApplicationSummary `type:"list" required:"true"`
 
 	// Returns true if there are more applications to retrieve.
 	//
@@ -4578,7 +4554,7 @@ func (s ListApplicationsOutput) GoString() string {
 }
 
 // SetApplicationSummaries sets the ApplicationSummaries field's value.
-func (s *ListApplicationsOutput) SetApplicationSummaries(v []*ApplicationSummary) *ListApplicationsOutput {
+func (s *ListApplicationsOutput) SetApplicationSummaries(v []ApplicationSummary) *ListApplicationsOutput {
 	s.ApplicationSummaries = v
 	return s
 }
@@ -4991,7 +4967,7 @@ type RecordFormat struct {
 	// The type of record format.
 	//
 	// RecordFormatType is a required field
-	RecordFormatType RecordFormatType `type:"string" required:"true"`
+	RecordFormatType RecordFormatType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -5566,7 +5542,7 @@ type SourceSchema struct {
 	// A list of RecordColumn objects.
 	//
 	// RecordColumns is a required field
-	RecordColumns []*RecordColumn `min:"1" type:"list" required:"true"`
+	RecordColumns []RecordColumn `min:"1" type:"list" required:"true"`
 
 	// Specifies the encoding of the records in the streaming source. For example,
 	// UTF-8.
@@ -5604,9 +5580,6 @@ func (s *SourceSchema) Validate() error {
 	}
 	if s.RecordColumns != nil {
 		for i, v := range s.RecordColumns {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordColumns", i), err.(aws.ErrInvalidParams))
 			}
@@ -5625,7 +5598,7 @@ func (s *SourceSchema) Validate() error {
 }
 
 // SetRecordColumns sets the RecordColumns field's value.
-func (s *SourceSchema) SetRecordColumns(v []*RecordColumn) *SourceSchema {
+func (s *SourceSchema) SetRecordColumns(v []RecordColumn) *SourceSchema {
 	s.RecordColumns = v
 	return s
 }
@@ -5657,7 +5630,7 @@ type StartApplicationInput struct {
 	// Kinesis Analytics to start reading.
 	//
 	// InputConfigurations is a required field
-	InputConfigurations []*InputConfiguration `type:"list" required:"true"`
+	InputConfigurations []InputConfiguration `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5686,9 +5659,6 @@ func (s *StartApplicationInput) Validate() error {
 	}
 	if s.InputConfigurations != nil {
 		for i, v := range s.InputConfigurations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputConfigurations", i), err.(aws.ErrInvalidParams))
 			}
@@ -5708,7 +5678,7 @@ func (s *StartApplicationInput) SetApplicationName(v string) *StartApplicationIn
 }
 
 // SetInputConfigurations sets the InputConfigurations field's value.
-func (s *StartApplicationInput) SetInputConfigurations(v []*InputConfiguration) *StartApplicationInput {
+func (s *StartApplicationInput) SetInputConfigurations(v []InputConfiguration) *StartApplicationInput {
 	s.InputConfigurations = v
 	return s
 }

@@ -233,7 +233,7 @@ func ExampleBuilder_WithUpdate() {
 	input := &dynamodb.UpdateItemInput{
 		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
-		Key: map[string]*dynamodb.AttributeValue{
+		Key: map[string]dynamodb.AttributeValue{
 			"Artist": {
 				S: aws.String("Acme Band"),
 			},
@@ -301,7 +301,7 @@ func ExampleBuilder_WithCondition() {
 	// Use the built expression to populate the DeleteItem API operation with the
 	// condition expression.
 	input := &dynamodb.DeleteItemInput{
-		Key: map[string]*dynamodb.AttributeValue{
+		Key: map[string]dynamodb.AttributeValue{
 			"Artist": {
 				S: aws.String("No One You Know"),
 			},

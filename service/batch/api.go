@@ -1021,17 +1021,17 @@ type ComputeEnvironmentDetail struct {
 	// The state of the compute environment. The valid values are ENABLED or DISABLED.
 	// An ENABLED state indicates that you can register instances with the compute
 	// environment and that the associated instances can accept jobs.
-	State CEState `locationName:"state" type:"string"`
+	State CEState `locationName:"state" type:"string" enum:"true"`
 
 	// The current status of the compute environment (for example, CREATING or VALID).
-	Status CEStatus `locationName:"status" type:"string"`
+	Status CEStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the compute environment.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
 	// The type of the compute environment.
-	Type CEType `locationName:"type" type:"string"`
+	Type CEType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1190,7 +1190,7 @@ type ComputeResource struct {
 	// The instances types that may launched.
 	//
 	// InstanceTypes is a required field
-	InstanceTypes []*string `locationName:"instanceTypes" type:"list" required:"true"`
+	InstanceTypes []string `locationName:"instanceTypes" type:"list" required:"true"`
 
 	// The maximum number of EC2 vCPUs that an environment can reach.
 	//
@@ -1206,7 +1206,7 @@ type ComputeResource struct {
 	// compute environment.
 	//
 	// SecurityGroupIds is a required field
-	SecurityGroupIds []*string `locationName:"securityGroupIds" type:"list" required:"true"`
+	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied
 	// to a SPOT compute environment.
@@ -1215,16 +1215,16 @@ type ComputeResource struct {
 	// The VPC subnets into which the compute resources are launched.
 	//
 	// Subnets is a required field
-	Subnets []*string `locationName:"subnets" type:"list" required:"true"`
+	Subnets []string `locationName:"subnets" type:"list" required:"true"`
 
 	// Key-value pair tags to be applied to resources that are launched in the compute
 	// environment.
-	Tags map[string]*string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// The type of compute environment.
 	//
 	// Type is a required field
-	Type CRType `locationName:"type" type:"string" required:"true"`
+	Type CRType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -1305,7 +1305,7 @@ func (s *ComputeResource) SetInstanceRole(v string) *ComputeResource {
 }
 
 // SetInstanceTypes sets the InstanceTypes field's value.
-func (s *ComputeResource) SetInstanceTypes(v []*string) *ComputeResource {
+func (s *ComputeResource) SetInstanceTypes(v []string) *ComputeResource {
 	s.InstanceTypes = v
 	return s
 }
@@ -1323,7 +1323,7 @@ func (s *ComputeResource) SetMinvCpus(v int64) *ComputeResource {
 }
 
 // SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ComputeResource) SetSecurityGroupIds(v []*string) *ComputeResource {
+func (s *ComputeResource) SetSecurityGroupIds(v []string) *ComputeResource {
 	s.SecurityGroupIds = v
 	return s
 }
@@ -1335,13 +1335,13 @@ func (s *ComputeResource) SetSpotIamFleetRole(v string) *ComputeResource {
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *ComputeResource) SetSubnets(v []*string) *ComputeResource {
+func (s *ComputeResource) SetSubnets(v []string) *ComputeResource {
 	s.Subnets = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *ComputeResource) SetTags(v map[string]*string) *ComputeResource {
+func (s *ComputeResource) SetTags(v map[string]string) *ComputeResource {
 	s.Tags = v
 	return s
 }
@@ -1402,14 +1402,14 @@ type ContainerDetail struct {
 	_ struct{} `type:"structure"`
 
 	// The command that is passed to the container.
-	Command []*string `locationName:"command" type:"list"`
+	Command []string `locationName:"command" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the container instance on which the container
 	// is running.
 	ContainerInstanceArn *string `locationName:"containerInstanceArn" type:"string"`
 
 	// The environment variables to pass to a container.
-	Environment []*KeyValuePair `locationName:"environment" type:"list"`
+	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
 	// The exit code to return upon completion.
 	ExitCode *int64 `locationName:"exitCode" type:"integer"`
@@ -1429,7 +1429,7 @@ type ContainerDetail struct {
 	Memory *int64 `locationName:"memory" type:"integer"`
 
 	// The mount points for data volumes in your container.
-	MountPoints []*MountPoint `locationName:"mountPoints" type:"list"`
+	MountPoints []MountPoint `locationName:"mountPoints" type:"list"`
 
 	// When this parameter is true, the container is given elevated privileges on
 	// the host container instance (similar to the root user).
@@ -1448,7 +1448,7 @@ type ContainerDetail struct {
 	TaskArn *string `locationName:"taskArn" type:"string"`
 
 	// A list of ulimit values to set in the container.
-	Ulimits []*Ulimit `locationName:"ulimits" type:"list"`
+	Ulimits []Ulimit `locationName:"ulimits" type:"list"`
 
 	// The user name to use inside the container.
 	User *string `locationName:"user" type:"string"`
@@ -1457,7 +1457,7 @@ type ContainerDetail struct {
 	Vcpus *int64 `locationName:"vcpus" type:"integer"`
 
 	// A list of volumes associated with the job.
-	Volumes []*Volume `locationName:"volumes" type:"list"`
+	Volumes []Volume `locationName:"volumes" type:"list"`
 }
 
 // String returns the string representation
@@ -1471,7 +1471,7 @@ func (s ContainerDetail) GoString() string {
 }
 
 // SetCommand sets the Command field's value.
-func (s *ContainerDetail) SetCommand(v []*string) *ContainerDetail {
+func (s *ContainerDetail) SetCommand(v []string) *ContainerDetail {
 	s.Command = v
 	return s
 }
@@ -1483,7 +1483,7 @@ func (s *ContainerDetail) SetContainerInstanceArn(v string) *ContainerDetail {
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *ContainerDetail) SetEnvironment(v []*KeyValuePair) *ContainerDetail {
+func (s *ContainerDetail) SetEnvironment(v []KeyValuePair) *ContainerDetail {
 	s.Environment = v
 	return s
 }
@@ -1519,7 +1519,7 @@ func (s *ContainerDetail) SetMemory(v int64) *ContainerDetail {
 }
 
 // SetMountPoints sets the MountPoints field's value.
-func (s *ContainerDetail) SetMountPoints(v []*MountPoint) *ContainerDetail {
+func (s *ContainerDetail) SetMountPoints(v []MountPoint) *ContainerDetail {
 	s.MountPoints = v
 	return s
 }
@@ -1549,7 +1549,7 @@ func (s *ContainerDetail) SetTaskArn(v string) *ContainerDetail {
 }
 
 // SetUlimits sets the Ulimits field's value.
-func (s *ContainerDetail) SetUlimits(v []*Ulimit) *ContainerDetail {
+func (s *ContainerDetail) SetUlimits(v []Ulimit) *ContainerDetail {
 	s.Ulimits = v
 	return s
 }
@@ -1567,7 +1567,7 @@ func (s *ContainerDetail) SetVcpus(v int64) *ContainerDetail {
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *ContainerDetail) SetVolumes(v []*Volume) *ContainerDetail {
+func (s *ContainerDetail) SetVolumes(v []Volume) *ContainerDetail {
 	s.Volumes = v
 	return s
 }
@@ -1579,12 +1579,12 @@ type ContainerOverrides struct {
 
 	// The command to send to the container that overrides the default command from
 	// the Docker image or the job definition.
-	Command []*string `locationName:"command" type:"list"`
+	Command []string `locationName:"command" type:"list"`
 
 	// The environment variables to send to the container. You can add new environment
 	// variables, which are added to the container at launch, or you can override
 	// the existing environment variables from the Docker image or the job definition.
-	Environment []*KeyValuePair `locationName:"environment" type:"list"`
+	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
 	// The number of MiB of memory reserved for the job. This value overrides the
 	// value set in the job definition.
@@ -1606,13 +1606,13 @@ func (s ContainerOverrides) GoString() string {
 }
 
 // SetCommand sets the Command field's value.
-func (s *ContainerOverrides) SetCommand(v []*string) *ContainerOverrides {
+func (s *ContainerOverrides) SetCommand(v []string) *ContainerOverrides {
 	s.Command = v
 	return s
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *ContainerOverrides) SetEnvironment(v []*KeyValuePair) *ContainerOverrides {
+func (s *ContainerOverrides) SetEnvironment(v []KeyValuePair) *ContainerOverrides {
 	s.Environment = v
 	return s
 }
@@ -1641,7 +1641,7 @@ type ContainerProperties struct {
 	// and the COMMAND parameter to docker run (https://docs.docker.com/engine/reference/run/).
 	// For more information, see https://docs.docker.com/engine/reference/builder/#cmd
 	// (https://docs.docker.com/engine/reference/builder/#cmd).
-	Command []*string `locationName:"command" type:"list"`
+	Command []string `locationName:"command" type:"list"`
 
 	// The environment variables to pass to a container. This parameter maps to
 	// Env in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -1650,7 +1650,7 @@ type ContainerProperties struct {
 	//
 	// We do not recommend using plain text environment variables for sensitive
 	// information, such as credential data.
-	Environment []*KeyValuePair `locationName:"environment" type:"list"`
+	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
 	// The image used to start a container. This string is passed directly to the
 	// Docker daemon. Images in the Docker Hub registry are available by default.
@@ -1695,7 +1695,7 @@ type ContainerProperties struct {
 	// to Volumes in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --volume option to docker run (https://docs.docker.com/engine/reference/run/).
-	MountPoints []*MountPoint `locationName:"mountPoints" type:"list"`
+	MountPoints []MountPoint `locationName:"mountPoints" type:"list"`
 
 	// When this parameter is true, the container is given elevated privileges on
 	// the host container instance (similar to the root user). This parameter maps
@@ -1715,7 +1715,7 @@ type ContainerProperties struct {
 	// in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/)
 	// and the --ulimit option to docker run (https://docs.docker.com/engine/reference/run/).
-	Ulimits []*Ulimit `locationName:"ulimits" type:"list"`
+	Ulimits []Ulimit `locationName:"ulimits" type:"list"`
 
 	// The user name to use inside the container. This parameter maps to User in
 	// the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -1734,7 +1734,7 @@ type ContainerProperties struct {
 	Vcpus *int64 `locationName:"vcpus" type:"integer" required:"true"`
 
 	// A list of data volumes used in a job.
-	Volumes []*Volume `locationName:"volumes" type:"list"`
+	Volumes []Volume `locationName:"volumes" type:"list"`
 }
 
 // String returns the string representation
@@ -1764,9 +1764,6 @@ func (s *ContainerProperties) Validate() error {
 	}
 	if s.Ulimits != nil {
 		for i, v := range s.Ulimits {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ulimits", i), err.(aws.ErrInvalidParams))
 			}
@@ -1780,13 +1777,13 @@ func (s *ContainerProperties) Validate() error {
 }
 
 // SetCommand sets the Command field's value.
-func (s *ContainerProperties) SetCommand(v []*string) *ContainerProperties {
+func (s *ContainerProperties) SetCommand(v []string) *ContainerProperties {
 	s.Command = v
 	return s
 }
 
 // SetEnvironment sets the Environment field's value.
-func (s *ContainerProperties) SetEnvironment(v []*KeyValuePair) *ContainerProperties {
+func (s *ContainerProperties) SetEnvironment(v []KeyValuePair) *ContainerProperties {
 	s.Environment = v
 	return s
 }
@@ -1810,7 +1807,7 @@ func (s *ContainerProperties) SetMemory(v int64) *ContainerProperties {
 }
 
 // SetMountPoints sets the MountPoints field's value.
-func (s *ContainerProperties) SetMountPoints(v []*MountPoint) *ContainerProperties {
+func (s *ContainerProperties) SetMountPoints(v []MountPoint) *ContainerProperties {
 	s.MountPoints = v
 	return s
 }
@@ -1828,7 +1825,7 @@ func (s *ContainerProperties) SetReadonlyRootFilesystem(v bool) *ContainerProper
 }
 
 // SetUlimits sets the Ulimits field's value.
-func (s *ContainerProperties) SetUlimits(v []*Ulimit) *ContainerProperties {
+func (s *ContainerProperties) SetUlimits(v []Ulimit) *ContainerProperties {
 	s.Ulimits = v
 	return s
 }
@@ -1846,7 +1843,7 @@ func (s *ContainerProperties) SetVcpus(v int64) *ContainerProperties {
 }
 
 // SetVolumes sets the Volumes field's value.
-func (s *ContainerProperties) SetVolumes(v []*Volume) *ContainerProperties {
+func (s *ContainerProperties) SetVolumes(v []Volume) *ContainerProperties {
 	s.Volumes = v
 	return s
 }
@@ -1884,12 +1881,12 @@ type CreateComputeEnvironmentInput struct {
 	// The state of the compute environment. If the state is ENABLED, then the compute
 	// environment accepts jobs from a queue and can scale out automatically based
 	// on queues.
-	State CEState `locationName:"state" type:"string"`
+	State CEState `locationName:"state" type:"string" enum:"true"`
 
 	// The type of the compute environment.
 	//
 	// Type is a required field
-	Type CEType `locationName:"type" type:"string" required:"true"`
+	Type CEType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2002,7 +1999,7 @@ type CreateJobQueueInput struct {
 	// up to 3 compute environments with a job queue.
 	//
 	// ComputeEnvironmentOrder is a required field
-	ComputeEnvironmentOrder []*ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list" required:"true"`
+	ComputeEnvironmentOrder []ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list" required:"true"`
 
 	// The name of the job queue.
 	//
@@ -2020,7 +2017,7 @@ type CreateJobQueueInput struct {
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able
 	// to accept jobs.
-	State JQState `locationName:"state" type:"string"`
+	State JQState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2050,9 +2047,6 @@ func (s *CreateJobQueueInput) Validate() error {
 	}
 	if s.ComputeEnvironmentOrder != nil {
 		for i, v := range s.ComputeEnvironmentOrder {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(aws.ErrInvalidParams))
 			}
@@ -2066,7 +2060,7 @@ func (s *CreateJobQueueInput) Validate() error {
 }
 
 // SetComputeEnvironmentOrder sets the ComputeEnvironmentOrder field's value.
-func (s *CreateJobQueueInput) SetComputeEnvironmentOrder(v []*ComputeEnvironmentOrder) *CreateJobQueueInput {
+func (s *CreateJobQueueInput) SetComputeEnvironmentOrder(v []ComputeEnvironmentOrder) *CreateJobQueueInput {
 	s.ComputeEnvironmentOrder = v
 	return s
 }
@@ -2298,7 +2292,7 @@ type DescribeComputeEnvironmentsInput struct {
 
 	// A list of up to 100 compute environment names or full Amazon Resource Name
 	// (ARN) entries.
-	ComputeEnvironments []*string `locationName:"computeEnvironments" type:"list"`
+	ComputeEnvironments []string `locationName:"computeEnvironments" type:"list"`
 
 	// The maximum number of cluster results returned by DescribeComputeEnvironments
 	// in paginated output. When this parameter is used, DescribeComputeEnvironments
@@ -2332,7 +2326,7 @@ func (s DescribeComputeEnvironmentsInput) GoString() string {
 }
 
 // SetComputeEnvironments sets the ComputeEnvironments field's value.
-func (s *DescribeComputeEnvironmentsInput) SetComputeEnvironments(v []*string) *DescribeComputeEnvironmentsInput {
+func (s *DescribeComputeEnvironmentsInput) SetComputeEnvironments(v []string) *DescribeComputeEnvironmentsInput {
 	s.ComputeEnvironments = v
 	return s
 }
@@ -2354,7 +2348,7 @@ type DescribeComputeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of compute environments.
-	ComputeEnvironments []*ComputeEnvironmentDetail `locationName:"computeEnvironments" type:"list"`
+	ComputeEnvironments []ComputeEnvironmentDetail `locationName:"computeEnvironments" type:"list"`
 
 	// The nextToken value to include in a future DescribeComputeEnvironments request.
 	// When the results of a DescribeJobDefinitions request exceed maxResults, this
@@ -2374,7 +2368,7 @@ func (s DescribeComputeEnvironmentsOutput) GoString() string {
 }
 
 // SetComputeEnvironments sets the ComputeEnvironments field's value.
-func (s *DescribeComputeEnvironmentsOutput) SetComputeEnvironments(v []*ComputeEnvironmentDetail) *DescribeComputeEnvironmentsOutput {
+func (s *DescribeComputeEnvironmentsOutput) SetComputeEnvironments(v []ComputeEnvironmentDetail) *DescribeComputeEnvironmentsOutput {
 	s.ComputeEnvironments = v
 	return s
 }
@@ -2394,7 +2388,7 @@ type DescribeJobDefinitionsInput struct {
 
 	// A space-separated list of up to 100 job definition names or full Amazon Resource
 	// Name (ARN) entries.
-	JobDefinitions []*string `locationName:"jobDefinitions" type:"list"`
+	JobDefinitions []string `locationName:"jobDefinitions" type:"list"`
 
 	// The maximum number of results returned by DescribeJobDefinitions in paginated
 	// output. When this parameter is used, DescribeJobDefinitions only returns
@@ -2436,7 +2430,7 @@ func (s *DescribeJobDefinitionsInput) SetJobDefinitionName(v string) *DescribeJo
 }
 
 // SetJobDefinitions sets the JobDefinitions field's value.
-func (s *DescribeJobDefinitionsInput) SetJobDefinitions(v []*string) *DescribeJobDefinitionsInput {
+func (s *DescribeJobDefinitionsInput) SetJobDefinitions(v []string) *DescribeJobDefinitionsInput {
 	s.JobDefinitions = v
 	return s
 }
@@ -2464,7 +2458,7 @@ type DescribeJobDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of job definitions.
-	JobDefinitions []*JobDefinition `locationName:"jobDefinitions" type:"list"`
+	JobDefinitions []JobDefinition `locationName:"jobDefinitions" type:"list"`
 
 	// The nextToken value to include in a future DescribeJobDefinitions request.
 	// When the results of a DescribeJobDefinitions request exceed maxResults, this
@@ -2484,7 +2478,7 @@ func (s DescribeJobDefinitionsOutput) GoString() string {
 }
 
 // SetJobDefinitions sets the JobDefinitions field's value.
-func (s *DescribeJobDefinitionsOutput) SetJobDefinitions(v []*JobDefinition) *DescribeJobDefinitionsOutput {
+func (s *DescribeJobDefinitionsOutput) SetJobDefinitions(v []JobDefinition) *DescribeJobDefinitionsOutput {
 	s.JobDefinitions = v
 	return s
 }
@@ -2501,7 +2495,7 @@ type DescribeJobQueuesInput struct {
 
 	// A list of up to 100 queue names or full queue Amazon Resource Name (ARN)
 	// entries.
-	JobQueues []*string `locationName:"jobQueues" type:"list"`
+	JobQueues []string `locationName:"jobQueues" type:"list"`
 
 	// The maximum number of results returned by DescribeJobQueues in paginated
 	// output. When this parameter is used, DescribeJobQueues only returns maxResults
@@ -2534,7 +2528,7 @@ func (s DescribeJobQueuesInput) GoString() string {
 }
 
 // SetJobQueues sets the JobQueues field's value.
-func (s *DescribeJobQueuesInput) SetJobQueues(v []*string) *DescribeJobQueuesInput {
+func (s *DescribeJobQueuesInput) SetJobQueues(v []string) *DescribeJobQueuesInput {
 	s.JobQueues = v
 	return s
 }
@@ -2556,7 +2550,7 @@ type DescribeJobQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of job queues.
-	JobQueues []*JobQueueDetail `locationName:"jobQueues" type:"list"`
+	JobQueues []JobQueueDetail `locationName:"jobQueues" type:"list"`
 
 	// The nextToken value to include in a future DescribeJobQueues request. When
 	// the results of a DescribeJobQueues request exceed maxResults, this value
@@ -2576,7 +2570,7 @@ func (s DescribeJobQueuesOutput) GoString() string {
 }
 
 // SetJobQueues sets the JobQueues field's value.
-func (s *DescribeJobQueuesOutput) SetJobQueues(v []*JobQueueDetail) *DescribeJobQueuesOutput {
+func (s *DescribeJobQueuesOutput) SetJobQueues(v []JobQueueDetail) *DescribeJobQueuesOutput {
 	s.JobQueues = v
 	return s
 }
@@ -2594,7 +2588,7 @@ type DescribeJobsInput struct {
 	// A space-separated list of up to 100 job IDs.
 	//
 	// Jobs is a required field
-	Jobs []*string `locationName:"jobs" type:"list" required:"true"`
+	Jobs []string `locationName:"jobs" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2622,7 +2616,7 @@ func (s *DescribeJobsInput) Validate() error {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *DescribeJobsInput) SetJobs(v []*string) *DescribeJobsInput {
+func (s *DescribeJobsInput) SetJobs(v []string) *DescribeJobsInput {
 	s.Jobs = v
 	return s
 }
@@ -2632,7 +2626,7 @@ type DescribeJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of jobs.
-	Jobs []*JobDetail `locationName:"jobs" type:"list"`
+	Jobs []JobDetail `locationName:"jobs" type:"list"`
 }
 
 // String returns the string representation
@@ -2646,7 +2640,7 @@ func (s DescribeJobsOutput) GoString() string {
 }
 
 // SetJobs sets the Jobs field's value.
-func (s *DescribeJobsOutput) SetJobs(v []*JobDetail) *DescribeJobsOutput {
+func (s *DescribeJobsOutput) SetJobs(v []JobDetail) *DescribeJobsOutput {
 	s.Jobs = v
 	return s
 }
@@ -2708,7 +2702,7 @@ type JobDefinition struct {
 	// the job definition. Parameters are specified as a key-value pair mapping.
 	// Parameters in a SubmitJob request override any corresponding parameter defaults
 	// from the job definition.
-	Parameters map[string]*string `locationName:"parameters" type:"map"`
+	Parameters map[string]string `locationName:"parameters" type:"map"`
 
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition.
@@ -2757,7 +2751,7 @@ func (s *JobDefinition) SetJobDefinitionName(v string) *JobDefinition {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *JobDefinition) SetParameters(v map[string]*string) *JobDefinition {
+func (s *JobDefinition) SetParameters(v map[string]string) *JobDefinition {
 	s.Parameters = v
 	return s
 }
@@ -2817,7 +2811,7 @@ type JobDetail struct {
 	_ struct{} `type:"structure"`
 
 	// A list of job attempts associated with this job.
-	Attempts []*AttemptDetail `locationName:"attempts" type:"list"`
+	Attempts []AttemptDetail `locationName:"attempts" type:"list"`
 
 	// An object representing the details of the container that is associated with
 	// the job.
@@ -2828,7 +2822,7 @@ type JobDetail struct {
 	CreatedAt *int64 `locationName:"createdAt" type:"long"`
 
 	// A list of job names or IDs on which this job depends.
-	DependsOn []*JobDependency `locationName:"dependsOn" type:"list"`
+	DependsOn []JobDependency `locationName:"dependsOn" type:"list"`
 
 	// The job definition that is used by this job.
 	//
@@ -2853,7 +2847,7 @@ type JobDetail struct {
 	// Additional parameters passed to the job that replace parameter substitution
 	// placeholders or override any corresponding parameter defaults from the job
 	// definition.
-	Parameters map[string]*string `locationName:"parameters" type:"map"`
+	Parameters map[string]string `locationName:"parameters" type:"map"`
 
 	// The retry strategy to use for this job if an attempt fails.
 	RetryStrategy *RetryStrategy `locationName:"retryStrategy" type:"structure"`
@@ -2867,7 +2861,7 @@ type JobDetail struct {
 	// The current status for the job.
 	//
 	// Status is a required field
-	Status JobStatus `locationName:"status" type:"string" required:"true"`
+	Status JobStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job.
@@ -2889,7 +2883,7 @@ func (s JobDetail) GoString() string {
 }
 
 // SetAttempts sets the Attempts field's value.
-func (s *JobDetail) SetAttempts(v []*AttemptDetail) *JobDetail {
+func (s *JobDetail) SetAttempts(v []AttemptDetail) *JobDetail {
 	s.Attempts = v
 	return s
 }
@@ -2907,7 +2901,7 @@ func (s *JobDetail) SetCreatedAt(v int64) *JobDetail {
 }
 
 // SetDependsOn sets the DependsOn field's value.
-func (s *JobDetail) SetDependsOn(v []*JobDependency) *JobDetail {
+func (s *JobDetail) SetDependsOn(v []JobDependency) *JobDetail {
 	s.DependsOn = v
 	return s
 }
@@ -2937,7 +2931,7 @@ func (s *JobDetail) SetJobQueue(v string) *JobDetail {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *JobDetail) SetParameters(v map[string]*string) *JobDetail {
+func (s *JobDetail) SetParameters(v map[string]string) *JobDetail {
 	s.Parameters = v
 	return s
 }
@@ -2982,7 +2976,7 @@ type JobQueueDetail struct {
 	// job placement in ascending order.
 	//
 	// ComputeEnvironmentOrder is a required field
-	ComputeEnvironmentOrder []*ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list" required:"true"`
+	ComputeEnvironmentOrder []ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the job queue.
 	//
@@ -3002,10 +2996,10 @@ type JobQueueDetail struct {
 	// Describes the ability of the queue to accept new jobs.
 	//
 	// State is a required field
-	State JQState `locationName:"state" type:"string" required:"true"`
+	State JQState `locationName:"state" type:"string" required:"true" enum:"true"`
 
 	// The status of the job queue (for example, CREATING or VALID).
-	Status JQStatus `locationName:"status" type:"string"`
+	Status JQStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job queue.
@@ -3023,7 +3017,7 @@ func (s JobQueueDetail) GoString() string {
 }
 
 // SetComputeEnvironmentOrder sets the ComputeEnvironmentOrder field's value.
-func (s *JobQueueDetail) SetComputeEnvironmentOrder(v []*ComputeEnvironmentOrder) *JobQueueDetail {
+func (s *JobQueueDetail) SetComputeEnvironmentOrder(v []ComputeEnvironmentOrder) *JobQueueDetail {
 	s.ComputeEnvironmentOrder = v
 	return s
 }
@@ -3150,7 +3144,7 @@ type ListJobsInput struct {
 
 	// The job status with which to filter jobs in the specified queue. If you do
 	// not specify a status, only RUNNING jobs are returned.
-	JobStatus JobStatus `locationName:"jobStatus" type:"string"`
+	JobStatus JobStatus `locationName:"jobStatus" type:"string" enum:"true"`
 
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
@@ -3226,7 +3220,7 @@ type ListJobsOutput struct {
 	// A list of job summaries that match the request.
 	//
 	// JobSummaryList is a required field
-	JobSummaryList []*JobSummary `locationName:"jobSummaryList" type:"list" required:"true"`
+	JobSummaryList []JobSummary `locationName:"jobSummaryList" type:"list" required:"true"`
 
 	// The nextToken value to include in a future ListJobs request. When the results
 	// of a ListJobs request exceed maxResults, this value can be used to retrieve
@@ -3246,7 +3240,7 @@ func (s ListJobsOutput) GoString() string {
 }
 
 // SetJobSummaryList sets the JobSummaryList field's value.
-func (s *ListJobsOutput) SetJobSummaryList(v []*JobSummary) *ListJobsOutput {
+func (s *ListJobsOutput) SetJobSummaryList(v []JobSummary) *ListJobsOutput {
 	s.JobSummaryList = v
 	return s
 }
@@ -3319,7 +3313,7 @@ type RegisterJobDefinitionInput struct {
 	// Default parameter substitution placeholders to set in the job definition.
 	// Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob
 	// request override any corresponding parameter defaults from the job definition.
-	Parameters map[string]*string `locationName:"parameters" type:"map"`
+	Parameters map[string]string `locationName:"parameters" type:"map"`
 
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition. Any retry strategy that is specified during a SubmitJob operation
@@ -3329,7 +3323,7 @@ type RegisterJobDefinitionInput struct {
 	// The type of job definition.
 	//
 	// Type is a required field
-	Type JobDefinitionType `locationName:"type" type:"string" required:"true"`
+	Type JobDefinitionType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3377,7 +3371,7 @@ func (s *RegisterJobDefinitionInput) SetJobDefinitionName(v string) *RegisterJob
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *RegisterJobDefinitionInput) SetParameters(v map[string]*string) *RegisterJobDefinitionInput {
+func (s *RegisterJobDefinitionInput) SetParameters(v map[string]string) *RegisterJobDefinitionInput {
 	s.Parameters = v
 	return s
 }
@@ -3484,7 +3478,7 @@ type SubmitJobInput struct {
 
 	// A list of job IDs on which this job depends. A job can depend upon a maximum
 	// of 20 jobs.
-	DependsOn []*JobDependency `locationName:"dependsOn" type:"list"`
+	DependsOn []JobDependency `locationName:"dependsOn" type:"list"`
 
 	// The job definition used by this job. This value can be either a name:revision
 	// or the Amazon Resource Name (ARN) for the job definition.
@@ -3509,7 +3503,7 @@ type SubmitJobInput struct {
 	// placeholders that are set in the job definition. Parameters are specified
 	// as a key and value pair mapping. Parameters in a SubmitJob request override
 	// any corresponding parameter defaults from the job definition.
-	Parameters map[string]*string `locationName:"parameters" type:"map"`
+	Parameters map[string]string `locationName:"parameters" type:"map"`
 
 	// The retry strategy to use for failed jobs from this SubmitJob operation.
 	// When a retry strategy is specified here, it overrides the retry strategy
@@ -3556,7 +3550,7 @@ func (s *SubmitJobInput) SetContainerOverrides(v *ContainerOverrides) *SubmitJob
 }
 
 // SetDependsOn sets the DependsOn field's value.
-func (s *SubmitJobInput) SetDependsOn(v []*JobDependency) *SubmitJobInput {
+func (s *SubmitJobInput) SetDependsOn(v []JobDependency) *SubmitJobInput {
 	s.DependsOn = v
 	return s
 }
@@ -3580,7 +3574,7 @@ func (s *SubmitJobInput) SetJobQueue(v string) *SubmitJobInput {
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *SubmitJobInput) SetParameters(v map[string]*string) *SubmitJobInput {
+func (s *SubmitJobInput) SetParameters(v map[string]string) *SubmitJobInput {
 	s.Parameters = v
 	return s
 }
@@ -3802,7 +3796,7 @@ type UpdateComputeEnvironmentInput struct {
 	// The state of the compute environment. Compute environments in the ENABLED
 	// state can accept jobs from a queue and scale in or out automatically based
 	// on the workload demand of its associated queues.
-	State CEState `locationName:"state" type:"string"`
+	State CEState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3893,7 +3887,7 @@ type UpdateJobQueueInput struct {
 	// Details the set of compute environments mapped to a job queue and their order
 	// relative to each other. This is one of the parameters used by the job scheduler
 	// to determine which compute environment should execute a given job.
-	ComputeEnvironmentOrder []*ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list"`
+	ComputeEnvironmentOrder []ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list"`
 
 	// The name or the Amazon Resource Name (ARN) of the job queue.
 	//
@@ -3908,7 +3902,7 @@ type UpdateJobQueueInput struct {
 	Priority *int64 `locationName:"priority" type:"integer"`
 
 	// Describes the queue's ability to accept new jobs.
-	State JQState `locationName:"state" type:"string"`
+	State JQState `locationName:"state" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3930,9 +3924,6 @@ func (s *UpdateJobQueueInput) Validate() error {
 	}
 	if s.ComputeEnvironmentOrder != nil {
 		for i, v := range s.ComputeEnvironmentOrder {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(aws.ErrInvalidParams))
 			}
@@ -3946,7 +3937,7 @@ func (s *UpdateJobQueueInput) Validate() error {
 }
 
 // SetComputeEnvironmentOrder sets the ComputeEnvironmentOrder field's value.
-func (s *UpdateJobQueueInput) SetComputeEnvironmentOrder(v []*ComputeEnvironmentOrder) *UpdateJobQueueInput {
+func (s *UpdateJobQueueInput) SetComputeEnvironmentOrder(v []ComputeEnvironmentOrder) *UpdateJobQueueInput {
 	s.ComputeEnvironmentOrder = v
 	return s
 }

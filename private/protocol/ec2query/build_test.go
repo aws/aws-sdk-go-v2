@@ -520,12 +520,36 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 type InputService4TestShapeInputService4TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `type:"list"`
+	ListBools []bool `type:"list"`
+
+	ListFloats []float64 `type:"list"`
+
+	ListIntegers []int64 `type:"list"`
+
+	ListStrings []string `type:"list"`
 }
 
-// SetListArg sets the ListArg field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListArg(v []*string) *InputService4TestShapeInputService4TestCaseOperation1Input {
-	s.ListArg = v
+// SetListBools sets the ListBools field's value.
+func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListBools(v []bool) *InputService4TestShapeInputService4TestCaseOperation1Input {
+	s.ListBools = v
+	return s
+}
+
+// SetListFloats sets the ListFloats field's value.
+func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListFloats(v []float64) *InputService4TestShapeInputService4TestCaseOperation1Input {
+	s.ListFloats = v
+	return s
+}
+
+// SetListIntegers sets the ListIntegers field's value.
+func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListIntegers(v []int64) *InputService4TestShapeInputService4TestCaseOperation1Input {
+	s.ListIntegers = v
+	return s
+}
+
+// SetListStrings sets the ListStrings field's value.
+func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListStrings(v []string) *InputService4TestShapeInputService4TestCaseOperation1Input {
+	s.ListStrings = v
 	return s
 }
 
@@ -634,11 +658,11 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `locationName:"ListMemberName" locationNameList:"item" type:"list"`
+	ListArg []string `locationName:"ListMemberName" locationNameList:"item" type:"list"`
 }
 
 // SetListArg sets the ListArg field's value.
-func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetListArg(v []*string) *InputService5TestShapeInputService5TestCaseOperation1Input {
+func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetListArg(v []string) *InputService5TestShapeInputService5TestCaseOperation1Input {
 	s.ListArg = v
 	return s
 }
@@ -748,11 +772,11 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `locationName:"ListMemberName" queryName:"ListQueryName" locationNameList:"item" type:"list"`
+	ListArg []string `locationName:"ListMemberName" queryName:"ListQueryName" locationNameList:"item" type:"list"`
 }
 
 // SetListArg sets the ListArg field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListArg(v []*string) *InputService6TestShapeInputService6TestCaseOperation1Input {
+func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListArg(v []string) *InputService6TestShapeInputService6TestCaseOperation1Input {
 	s.ListArg = v
 	return s
 }
@@ -1301,7 +1325,7 @@ type InputService10TestShapeInputService10TestCaseOperation1Output struct {
 type InputService10TestShapeInputService10TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService10TestShapeEnumType `type:"string"`
+	FooEnum InputService10TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService10TestShapeEnumType `type:"list"`
 }
@@ -1441,10 +1465,25 @@ func TestInputService4ProtocolTestListTypesCase1(t *testing.T) {
 
 	svc := NewInputService4ProtocolTest(cfg)
 	input := &InputService4TestShapeInputService4TestCaseOperation1Input{
-		ListArg: []*string{
-			aws.String("foo"),
-			aws.String("bar"),
-			aws.String("baz"),
+		ListBools: []bool{
+			true,
+			false,
+			false,
+		},
+		ListFloats: []float64{
+			1.1,
+			2.718,
+			3.14,
+		},
+		ListIntegers: []int64{
+			0,
+			1,
+			2,
+		},
+		ListStrings: []string{
+			"foo",
+			"bar",
+			"baz",
 		},
 	}
 
@@ -1462,7 +1501,7 @@ func TestInputService4ProtocolTestListTypesCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertQuery(t, `Action=OperationName&ListArg.1=foo&ListArg.2=bar&ListArg.3=baz&Version=2014-01-01`, util.Trim(string(body)))
+	awstesting.AssertQuery(t, `Action=OperationName&ListBools.1=true&ListBools.2=false&ListBools.3=false&ListFloats.1=1.1&ListFloats.2=2.718&ListFloats.3=3.14&ListIntegers.1=0&ListIntegers.2=1&ListIntegers.3=2&ListStrings.1=foo&ListStrings.2=bar&ListStrings.3=baz&Version=2014-01-01`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/", r.URL.String())
@@ -1477,10 +1516,10 @@ func TestInputService5ProtocolTestListWithLocationNameAppliedToMemberCase1(t *te
 
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation1Input{
-		ListArg: []*string{
-			aws.String("a"),
-			aws.String("b"),
-			aws.String("c"),
+		ListArg: []string{
+			"a",
+			"b",
+			"c",
 		},
 	}
 
@@ -1513,10 +1552,10 @@ func TestInputService6ProtocolTestListWithLocationNameAndQueryNameCase1(t *testi
 
 	svc := NewInputService6ProtocolTest(cfg)
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
-		ListArg: []*string{
-			aws.String("a"),
-			aws.String("b"),
-			aws.String("c"),
+		ListArg: []string{
+			"a",
+			"b",
+			"c",
 		},
 	}
 

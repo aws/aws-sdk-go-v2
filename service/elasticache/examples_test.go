@@ -37,7 +37,7 @@ func ExampleElastiCache_AddTagsToResourceRequest_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.AddTagsToResourceInput{
 		ResourceName: aws.String("arn:aws:elasticache:us-east-1:1234567890:cluster:my-mem-cluster"),
-		Tags: []*elasticache.Tag{
+		Tags: []elasticache.Tag{
 			{
 				Key:   aws.String("APIVersion"),
 				Value: aws.String("20150202"),
@@ -409,10 +409,10 @@ func ExampleElastiCache_CreateCacheSubnetGroupRequest_shared00() {
 	input := &elasticache.CreateCacheSubnetGroupInput{
 		CacheSubnetGroupDescription: aws.String("Sample subnet group"),
 		CacheSubnetGroupName:        aws.String("my-sn-grp2"),
-		SubnetIds: []*string{
-			aws.String("subnet-6f28c982"),
-			aws.String("subnet-bcd382f3"),
-			aws.String("subnet-845b3e7c0"),
+		SubnetIds: []string{
+			"subnet-6f28c982",
+			"subnet-bcd382f3",
+			"subnet-845b3e7c0",
 		},
 	}
 
@@ -530,20 +530,20 @@ func ExampleElastiCache_CreateReplicationGroupRequest_shared01() {
 		CacheParameterGroupName: aws.String("default.redis3.2.cluster.on"),
 		Engine:                  aws.String("redis"),
 		EngineVersion:           aws.String("3.2.4"),
-		NodeGroupConfiguration: []*elasticache.NodeGroupConfiguration{
+		NodeGroupConfiguration: []elasticache.NodeGroupConfiguration{
 			{
 				PrimaryAvailabilityZone: aws.String("us-east-1c"),
-				ReplicaAvailabilityZones: []*string{
-					aws.String("us-east-1b"),
+				ReplicaAvailabilityZones: []string{
+					"us-east-1b",
 				},
 				ReplicaCount: aws.Int64(1),
 				Slots:        aws.String("0-8999"),
 			},
 			{
 				PrimaryAvailabilityZone: aws.String("us-east-1a"),
-				ReplicaAvailabilityZones: []*string{
-					aws.String("us-east-1a"),
-					aws.String("us-east-1c"),
+				ReplicaAvailabilityZones: []string{
+					"us-east-1a",
+					"us-east-1c",
 				},
 				ReplicaCount: aws.Int64(2),
 				Slots:        aws.String("9000-16383"),
@@ -1874,7 +1874,7 @@ func ExampleElastiCache_ModifyCacheParameterGroupRequest_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.ModifyCacheParameterGroupInput{
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
-		ParameterNameValues: []*elasticache.ParameterNameValue{
+		ParameterNameValues: []elasticache.ParameterNameValue{
 			{
 				ParameterName:  aws.String("binding_protocol"),
 				ParameterValue: aws.String("ascii"),
@@ -1925,8 +1925,8 @@ func ExampleElastiCache_ModifyCacheSubnetGroupRequest_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.ModifyCacheSubnetGroupInput{
 		CacheSubnetGroupName: aws.String("my-sn-grp"),
-		SubnetIds: []*string{
-			aws.String("subnet-bcde2345"),
+		SubnetIds: []string{
+			"subnet-bcde2345",
 		},
 	}
 
@@ -2075,9 +2075,9 @@ func ExampleElastiCache_RebootCacheClusterRequest_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.RebootCacheClusterInput{
 		CacheClusterId: aws.String("custom-mem1-4  "),
-		CacheNodeIdsToReboot: []*string{
-			aws.String("0001"),
-			aws.String("0002"),
+		CacheNodeIdsToReboot: []string{
+			"0001",
+			"0002",
 		},
 	}
 
@@ -2117,10 +2117,10 @@ func ExampleElastiCache_RemoveTagsFromResourceRequest_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.RemoveTagsFromResourceInput{
 		ResourceName: aws.String("arn:aws:elasticache:us-east-1:1234567890:cluster:my-mem-cluster"),
-		TagKeys: []*string{
-			aws.String("A"),
-			aws.String("C"),
-			aws.String("E"),
+		TagKeys: []string{
+			"A",
+			"C",
+			"E",
 		},
 	}
 

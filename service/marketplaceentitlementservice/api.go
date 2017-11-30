@@ -195,7 +195,7 @@ type GetEntitlementsInput struct {
 	// dimension. Filters are described as keys mapped to a lists of values. Filtered
 	// requests are unioned for each value in the value list, and then intersected
 	// for each filter key.
-	Filter map[string][]*string `type:"map"`
+	Filter map[string][]string `type:"map"`
 
 	// The maximum number of items to retrieve from the GetEntitlements operation.
 	// For pagination, use the NextToken field in subsequent calls to GetEntitlements.
@@ -241,7 +241,7 @@ func (s *GetEntitlementsInput) Validate() error {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *GetEntitlementsInput) SetFilter(v map[string][]*string) *GetEntitlementsInput {
+func (s *GetEntitlementsInput) SetFilter(v map[string][]string) *GetEntitlementsInput {
 	s.Filter = v
 	return s
 }
@@ -272,7 +272,7 @@ type GetEntitlementsOutput struct {
 	// The set of entitlements found through the GetEntitlements operation. If the
 	// result contains an empty set of entitlements, NextToken might still be present
 	// and should be used.
-	Entitlements []*Entitlement `type:"list"`
+	Entitlements []Entitlement `type:"list"`
 
 	// For paginated results, use NextToken in subsequent calls to GetEntitlements.
 	// If the result contains an empty set of entitlements, NextToken might still
@@ -291,7 +291,7 @@ func (s GetEntitlementsOutput) GoString() string {
 }
 
 // SetEntitlements sets the Entitlements field's value.
-func (s *GetEntitlementsOutput) SetEntitlements(v []*Entitlement) *GetEntitlementsOutput {
+func (s *GetEntitlementsOutput) SetEntitlements(v []Entitlement) *GetEntitlementsOutput {
 	s.Entitlements = v
 	return s
 }

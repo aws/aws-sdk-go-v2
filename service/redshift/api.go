@@ -4479,11 +4479,11 @@ type Cluster struct {
 	ClusterIdentifier *string `type:"string"`
 
 	// The nodes in the cluster.
-	ClusterNodes []*ClusterNode `type:"list"`
+	ClusterNodes []ClusterNode `type:"list"`
 
 	// The list of cluster parameter groups that are associated with this cluster.
 	// Each parameter group in the list is returned with its status.
-	ClusterParameterGroups []*ClusterParameterGroupStatus `locationNameList:"ClusterParameterGroup" type:"list"`
+	ClusterParameterGroups []ClusterParameterGroupStatus `locationNameList:"ClusterParameterGroup" type:"list"`
 
 	// The public key for the cluster.
 	ClusterPublicKey *string `type:"string"`
@@ -4498,7 +4498,7 @@ type Cluster struct {
 	// Cluster security groups are used when the cluster is not created in an Amazon
 	// Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security
 	// groups, which are listed by the VpcSecurityGroups parameter.
-	ClusterSecurityGroups []*ClusterSecurityGroupMembership `locationNameList:"ClusterSecurityGroup" type:"list"`
+	ClusterSecurityGroups []ClusterSecurityGroupMembership `locationNameList:"ClusterSecurityGroup" type:"list"`
 
 	// A value that returns the destination region and retention period that are
 	// configured for cross-region snapshot copy.
@@ -4581,7 +4581,7 @@ type Cluster struct {
 
 	// A list of AWS Identity and Access Management (IAM) roles that can be used
 	// by the cluster to access other AWS services.
-	IamRoles []*ClusterIamRole `locationNameList:"ClusterIamRole" type:"list"`
+	IamRoles []ClusterIamRole `locationNameList:"ClusterIamRole" type:"list"`
 
 	// The AWS Key Management Service (AWS KMS) key ID of the encryption key used
 	// to encrypt data in the cluster.
@@ -4617,7 +4617,7 @@ type Cluster struct {
 	RestoreStatus *RestoreStatus `type:"structure"`
 
 	// The list of tags for the cluster.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The identifier of the VPC the cluster is in, if the cluster is in a VPC.
 	VpcId *string `type:"string"`
@@ -4625,7 +4625,7 @@ type Cluster struct {
 	// A list of Amazon Virtual Private Cloud (Amazon VPC) security groups that
 	// are associated with the cluster. This parameter is returned only if the cluster
 	// is in a VPC.
-	VpcSecurityGroups []*VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroup" type:"list"`
+	VpcSecurityGroups []VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroup" type:"list"`
 }
 
 // String returns the string representation
@@ -4669,13 +4669,13 @@ func (s *Cluster) SetClusterIdentifier(v string) *Cluster {
 }
 
 // SetClusterNodes sets the ClusterNodes field's value.
-func (s *Cluster) SetClusterNodes(v []*ClusterNode) *Cluster {
+func (s *Cluster) SetClusterNodes(v []ClusterNode) *Cluster {
 	s.ClusterNodes = v
 	return s
 }
 
 // SetClusterParameterGroups sets the ClusterParameterGroups field's value.
-func (s *Cluster) SetClusterParameterGroups(v []*ClusterParameterGroupStatus) *Cluster {
+func (s *Cluster) SetClusterParameterGroups(v []ClusterParameterGroupStatus) *Cluster {
 	s.ClusterParameterGroups = v
 	return s
 }
@@ -4693,7 +4693,7 @@ func (s *Cluster) SetClusterRevisionNumber(v string) *Cluster {
 }
 
 // SetClusterSecurityGroups sets the ClusterSecurityGroups field's value.
-func (s *Cluster) SetClusterSecurityGroups(v []*ClusterSecurityGroupMembership) *Cluster {
+func (s *Cluster) SetClusterSecurityGroups(v []ClusterSecurityGroupMembership) *Cluster {
 	s.ClusterSecurityGroups = v
 	return s
 }
@@ -4759,7 +4759,7 @@ func (s *Cluster) SetHsmStatus(v *HsmStatus) *Cluster {
 }
 
 // SetIamRoles sets the IamRoles field's value.
-func (s *Cluster) SetIamRoles(v []*ClusterIamRole) *Cluster {
+func (s *Cluster) SetIamRoles(v []ClusterIamRole) *Cluster {
 	s.IamRoles = v
 	return s
 }
@@ -4819,7 +4819,7 @@ func (s *Cluster) SetRestoreStatus(v *RestoreStatus) *Cluster {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Cluster) SetTags(v []*Tag) *Cluster {
+func (s *Cluster) SetTags(v []Tag) *Cluster {
 	s.Tags = v
 	return s
 }
@@ -4831,7 +4831,7 @@ func (s *Cluster) SetVpcId(v string) *Cluster {
 }
 
 // SetVpcSecurityGroups sets the VpcSecurityGroups field's value.
-func (s *Cluster) SetVpcSecurityGroups(v []*VpcSecurityGroupMembership) *Cluster {
+func (s *Cluster) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *Cluster {
 	s.VpcSecurityGroups = v
 	return s
 }
@@ -4940,7 +4940,7 @@ type ClusterParameterGroup struct {
 	ParameterGroupName *string `type:"string"`
 
 	// The list of tags for the cluster parameter group.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -4972,7 +4972,7 @@ func (s *ClusterParameterGroup) SetParameterGroupName(v string) *ClusterParamete
 }
 
 // SetTags sets the Tags field's value.
-func (s *ClusterParameterGroup) SetTags(v []*Tag) *ClusterParameterGroup {
+func (s *ClusterParameterGroup) SetTags(v []Tag) *ClusterParameterGroup {
 	s.Tags = v
 	return s
 }
@@ -4987,7 +4987,7 @@ type ClusterParameterGroupStatus struct {
 	// For more information about parameters and parameter groups, go to Amazon
 	// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
-	ClusterParameterStatusList []*ClusterParameterStatus `type:"list"`
+	ClusterParameterStatusList []ClusterParameterStatus `type:"list"`
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string `type:"string"`
@@ -5007,7 +5007,7 @@ func (s ClusterParameterGroupStatus) GoString() string {
 }
 
 // SetClusterParameterStatusList sets the ClusterParameterStatusList field's value.
-func (s *ClusterParameterGroupStatus) SetClusterParameterStatusList(v []*ClusterParameterStatus) *ClusterParameterGroupStatus {
+func (s *ClusterParameterGroupStatus) SetClusterParameterStatusList(v []ClusterParameterStatus) *ClusterParameterGroupStatus {
 	s.ClusterParameterStatusList = v
 	return s
 }
@@ -5103,14 +5103,14 @@ type ClusterSecurityGroup struct {
 
 	// A list of EC2 security groups that are permitted to access clusters associated
 	// with this cluster security group.
-	EC2SecurityGroups []*EC2SecurityGroup `locationNameList:"EC2SecurityGroup" type:"list"`
+	EC2SecurityGroups []EC2SecurityGroup `locationNameList:"EC2SecurityGroup" type:"list"`
 
 	// A list of IP ranges (CIDR blocks) that are permitted to access clusters associated
 	// with this cluster security group.
-	IPRanges []*IPRange `locationNameList:"IPRange" type:"list"`
+	IPRanges []IPRange `locationNameList:"IPRange" type:"list"`
 
 	// The list of tags for the cluster security group.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -5136,19 +5136,19 @@ func (s *ClusterSecurityGroup) SetDescription(v string) *ClusterSecurityGroup {
 }
 
 // SetEC2SecurityGroups sets the EC2SecurityGroups field's value.
-func (s *ClusterSecurityGroup) SetEC2SecurityGroups(v []*EC2SecurityGroup) *ClusterSecurityGroup {
+func (s *ClusterSecurityGroup) SetEC2SecurityGroups(v []EC2SecurityGroup) *ClusterSecurityGroup {
 	s.EC2SecurityGroups = v
 	return s
 }
 
 // SetIPRanges sets the IPRanges field's value.
-func (s *ClusterSecurityGroup) SetIPRanges(v []*IPRange) *ClusterSecurityGroup {
+func (s *ClusterSecurityGroup) SetIPRanges(v []IPRange) *ClusterSecurityGroup {
 	s.IPRanges = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *ClusterSecurityGroup) SetTags(v []*Tag) *ClusterSecurityGroup {
+func (s *ClusterSecurityGroup) SetTags(v []Tag) *ClusterSecurityGroup {
 	s.Tags = v
 	return s
 }
@@ -5249,10 +5249,10 @@ type ClusterSubnetGroup struct {
 	SubnetGroupStatus *string `type:"string"`
 
 	// A list of the VPC Subnet elements.
-	Subnets []*Subnet `locationNameList:"Subnet" type:"list"`
+	Subnets []Subnet `locationNameList:"Subnet" type:"list"`
 
 	// The list of tags for the cluster subnet group.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The VPC ID of the cluster subnet group.
 	VpcId *string `type:"string"`
@@ -5287,13 +5287,13 @@ func (s *ClusterSubnetGroup) SetSubnetGroupStatus(v string) *ClusterSubnetGroup 
 }
 
 // SetSubnets sets the Subnets field's value.
-func (s *ClusterSubnetGroup) SetSubnets(v []*Subnet) *ClusterSubnetGroup {
+func (s *ClusterSubnetGroup) SetSubnets(v []Subnet) *ClusterSubnetGroup {
 	s.Subnets = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *ClusterSubnetGroup) SetTags(v []*Tag) *ClusterSubnetGroup {
+func (s *ClusterSubnetGroup) SetTags(v []Tag) *ClusterSubnetGroup {
 	s.Tags = v
 	return s
 }
@@ -5538,7 +5538,7 @@ type CreateClusterInput struct {
 	// A list of security groups to be associated with this cluster.
 	//
 	// Default: The default cluster security group for Amazon Redshift.
-	ClusterSecurityGroups []*string `locationNameList:"ClusterSecurityGroupName" type:"list"`
+	ClusterSecurityGroups []string `locationNameList:"ClusterSecurityGroupName" type:"list"`
 
 	// The name of a cluster subnet group to be associated with this cluster.
 	//
@@ -5625,7 +5625,7 @@ type CreateClusterInput struct {
 	// in a single request.
 	//
 	// A cluster can have up to 10 IAM roles associated with it at any time.
-	IamRoles []*string `locationNameList:"IamRoleArn" type:"list"`
+	IamRoles []string `locationNameList:"IamRoleArn" type:"list"`
 
 	// The AWS Key Management Service (KMS) key ID of the encryption key that you
 	// want to use to encrypt data in the cluster.
@@ -5722,13 +5722,13 @@ type CreateClusterInput struct {
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with
 	// the cluster.
 	//
 	// Default: The default VPC security group is associated with the cluster.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -5804,7 +5804,7 @@ func (s *CreateClusterInput) SetClusterParameterGroupName(v string) *CreateClust
 }
 
 // SetClusterSecurityGroups sets the ClusterSecurityGroups field's value.
-func (s *CreateClusterInput) SetClusterSecurityGroups(v []*string) *CreateClusterInput {
+func (s *CreateClusterInput) SetClusterSecurityGroups(v []string) *CreateClusterInput {
 	s.ClusterSecurityGroups = v
 	return s
 }
@@ -5864,7 +5864,7 @@ func (s *CreateClusterInput) SetHsmConfigurationIdentifier(v string) *CreateClus
 }
 
 // SetIamRoles sets the IamRoles field's value.
-func (s *CreateClusterInput) SetIamRoles(v []*string) *CreateClusterInput {
+func (s *CreateClusterInput) SetIamRoles(v []string) *CreateClusterInput {
 	s.IamRoles = v
 	return s
 }
@@ -5918,13 +5918,13 @@ func (s *CreateClusterInput) SetPubliclyAccessible(v bool) *CreateClusterInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateClusterInput) SetTags(v []*Tag) *CreateClusterInput {
+func (s *CreateClusterInput) SetTags(v []Tag) *CreateClusterInput {
 	s.Tags = v
 	return s
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *CreateClusterInput) SetVpcSecurityGroupIds(v []*string) *CreateClusterInput {
+func (s *CreateClusterInput) SetVpcSecurityGroupIds(v []string) *CreateClusterInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -5993,7 +5993,7 @@ type CreateClusterParameterGroupInput struct {
 	ParameterGroupName *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6047,7 +6047,7 @@ func (s *CreateClusterParameterGroupInput) SetParameterGroupName(v string) *Crea
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateClusterParameterGroupInput) SetTags(v []*Tag) *CreateClusterParameterGroupInput {
+func (s *CreateClusterParameterGroupInput) SetTags(v []Tag) *CreateClusterParameterGroupInput {
 	s.Tags = v
 	return s
 }
@@ -6103,7 +6103,7 @@ type CreateClusterSecurityGroupInput struct {
 	Description *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6147,7 +6147,7 @@ func (s *CreateClusterSecurityGroupInput) SetDescription(v string) *CreateCluste
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateClusterSecurityGroupInput) SetTags(v []*Tag) *CreateClusterSecurityGroupInput {
+func (s *CreateClusterSecurityGroupInput) SetTags(v []Tag) *CreateClusterSecurityGroupInput {
 	s.Tags = v
 	return s
 }
@@ -6204,7 +6204,7 @@ type CreateClusterSnapshotInput struct {
 	SnapshotIdentifier *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6248,7 +6248,7 @@ func (s *CreateClusterSnapshotInput) SetSnapshotIdentifier(v string) *CreateClus
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateClusterSnapshotInput) SetTags(v []*Tag) *CreateClusterSnapshotInput {
+func (s *CreateClusterSnapshotInput) SetTags(v []Tag) *CreateClusterSnapshotInput {
 	s.Tags = v
 	return s
 }
@@ -6306,10 +6306,10 @@ type CreateClusterSubnetGroupInput struct {
 	// single request.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
+	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6357,13 +6357,13 @@ func (s *CreateClusterSubnetGroupInput) SetDescription(v string) *CreateClusterS
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateClusterSubnetGroupInput) SetSubnetIds(v []*string) *CreateClusterSubnetGroupInput {
+func (s *CreateClusterSubnetGroupInput) SetSubnetIds(v []string) *CreateClusterSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateClusterSubnetGroupInput) SetTags(v []*Tag) *CreateClusterSubnetGroupInput {
+func (s *CreateClusterSubnetGroupInput) SetTags(v []Tag) *CreateClusterSubnetGroupInput {
 	s.Tags = v
 	return s
 }
@@ -6404,7 +6404,7 @@ type CreateEventSubscriptionInput struct {
 	// notification subscription.
 	//
 	// Values: Configuration, Management, Monitoring, Security
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// Specifies the Amazon Redshift event severity to be published by the event
 	// notification subscription.
@@ -6428,7 +6428,7 @@ type CreateEventSubscriptionInput struct {
 	// Example: my-cluster-1, my-cluster-2
 	//
 	// Example: my-snapshot-20131010
-	SourceIds []*string `locationNameList:"SourceId" type:"list"`
+	SourceIds []string `locationNameList:"SourceId" type:"list"`
 
 	// The type of source that will be generating the events. For example, if you
 	// want to be notified of events generated by a cluster, you would set this
@@ -6456,7 +6456,7 @@ type CreateEventSubscriptionInput struct {
 	SubscriptionName *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6494,7 +6494,7 @@ func (s *CreateEventSubscriptionInput) SetEnabled(v bool) *CreateEventSubscripti
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *CreateEventSubscriptionInput) SetEventCategories(v []*string) *CreateEventSubscriptionInput {
+func (s *CreateEventSubscriptionInput) SetEventCategories(v []string) *CreateEventSubscriptionInput {
 	s.EventCategories = v
 	return s
 }
@@ -6512,7 +6512,7 @@ func (s *CreateEventSubscriptionInput) SetSnsTopicArn(v string) *CreateEventSubs
 }
 
 // SetSourceIds sets the SourceIds field's value.
-func (s *CreateEventSubscriptionInput) SetSourceIds(v []*string) *CreateEventSubscriptionInput {
+func (s *CreateEventSubscriptionInput) SetSourceIds(v []string) *CreateEventSubscriptionInput {
 	s.SourceIds = v
 	return s
 }
@@ -6530,7 +6530,7 @@ func (s *CreateEventSubscriptionInput) SetSubscriptionName(v string) *CreateEven
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateEventSubscriptionInput) SetTags(v []*Tag) *CreateEventSubscriptionInput {
+func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscriptionInput {
 	s.Tags = v
 	return s
 }
@@ -6570,7 +6570,7 @@ type CreateHsmClientCertificateInput struct {
 	HsmClientCertificateIdentifier *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6604,7 +6604,7 @@ func (s *CreateHsmClientCertificateInput) SetHsmClientCertificateIdentifier(v st
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateHsmClientCertificateInput) SetTags(v []*Tag) *CreateHsmClientCertificateInput {
+func (s *CreateHsmClientCertificateInput) SetTags(v []Tag) *CreateHsmClientCertificateInput {
 	s.Tags = v
 	return s
 }
@@ -6672,7 +6672,7 @@ type CreateHsmConfigurationInput struct {
 	HsmServerPublicCertificate *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6756,7 +6756,7 @@ func (s *CreateHsmConfigurationInput) SetHsmServerPublicCertificate(v string) *C
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateHsmConfigurationInput) SetTags(v []*Tag) *CreateHsmConfigurationInput {
+func (s *CreateHsmConfigurationInput) SetTags(v []Tag) *CreateHsmConfigurationInput {
 	s.Tags = v
 	return s
 }
@@ -6815,7 +6815,7 @@ type CreateSnapshotCopyGrantInput struct {
 	SnapshotCopyGrantName *string `type:"string" required:"true"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -6855,7 +6855,7 @@ func (s *CreateSnapshotCopyGrantInput) SetSnapshotCopyGrantName(v string) *Creat
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateSnapshotCopyGrantInput) SetTags(v []*Tag) *CreateSnapshotCopyGrantInput {
+func (s *CreateSnapshotCopyGrantInput) SetTags(v []Tag) *CreateSnapshotCopyGrantInput {
 	s.Tags = v
 	return s
 }
@@ -6908,7 +6908,7 @@ type CreateTagsInput struct {
 	// "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0".
 	//
 	// Tags is a required field
-	Tags []*Tag `locationNameList:"Tag" type:"list" required:"true"`
+	Tags []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6946,7 +6946,7 @@ func (s *CreateTagsInput) SetResourceName(v string) *CreateTagsInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateTagsInput) SetTags(v []*Tag) *CreateTagsInput {
+func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	s.Tags = v
 	return s
 }
@@ -6983,7 +6983,7 @@ type DefaultClusterParameters struct {
 	ParameterGroupFamily *string `type:"string"`
 
 	// The list of cluster default parameters.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -7009,7 +7009,7 @@ func (s *DefaultClusterParameters) SetParameterGroupFamily(v string) *DefaultClu
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DefaultClusterParameters) SetParameters(v []*Parameter) *DefaultClusterParameters {
+func (s *DefaultClusterParameters) SetParameters(v []Parameter) *DefaultClusterParameters {
 	s.Parameters = v
 	return s
 }
@@ -7609,7 +7609,7 @@ type DeleteTagsInput struct {
 	// The tag key that you want to delete.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `locationNameList:"TagKey" type:"list" required:"true"`
+	TagKeys []string `locationNameList:"TagKey" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7647,7 +7647,7 @@ func (s *DeleteTagsInput) SetResourceName(v string) *DeleteTagsInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DeleteTagsInput) SetTagKeys(v []*string) *DeleteTagsInput {
+func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	s.TagKeys = v
 	return s
 }
@@ -7699,7 +7699,7 @@ type DescribeClusterParameterGroupsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the parameter groups that have either or
 	// both of these tag keys associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching cluster parameter
 	// groups that are associated with the specified tag value or values. For example,
@@ -7707,7 +7707,7 @@ type DescribeClusterParameterGroupsInput struct {
 	// admin and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the parameter groups that have either or
 	// both of these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -7739,13 +7739,13 @@ func (s *DescribeClusterParameterGroupsInput) SetParameterGroupName(v string) *D
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeClusterParameterGroupsInput) SetTagKeys(v []*string) *DescribeClusterParameterGroupsInput {
+func (s *DescribeClusterParameterGroupsInput) SetTagKeys(v []string) *DescribeClusterParameterGroupsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeClusterParameterGroupsInput) SetTagValues(v []*string) *DescribeClusterParameterGroupsInput {
+func (s *DescribeClusterParameterGroupsInput) SetTagValues(v []string) *DescribeClusterParameterGroupsInput {
 	s.TagValues = v
 	return s
 }
@@ -7764,7 +7764,7 @@ type DescribeClusterParameterGroupsOutput struct {
 
 	// A list of ClusterParameterGroup instances. Each instance describes one cluster
 	// parameter group.
-	ParameterGroups []*ClusterParameterGroup `locationNameList:"ClusterParameterGroup" type:"list"`
+	ParameterGroups []ClusterParameterGroup `locationNameList:"ClusterParameterGroup" type:"list"`
 }
 
 // String returns the string representation
@@ -7784,7 +7784,7 @@ func (s *DescribeClusterParameterGroupsOutput) SetMarker(v string) *DescribeClus
 }
 
 // SetParameterGroups sets the ParameterGroups field's value.
-func (s *DescribeClusterParameterGroupsOutput) SetParameterGroups(v []*ClusterParameterGroup) *DescribeClusterParameterGroupsOutput {
+func (s *DescribeClusterParameterGroupsOutput) SetParameterGroups(v []ClusterParameterGroup) *DescribeClusterParameterGroupsOutput {
 	s.ParameterGroups = v
 	return s
 }
@@ -7888,7 +7888,7 @@ type DescribeClusterParametersOutput struct {
 
 	// A list of Parameter instances. Each instance lists the parameters of one
 	// cluster parameter group.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 }
 
 // String returns the string representation
@@ -7908,7 +7908,7 @@ func (s *DescribeClusterParametersOutput) SetMarker(v string) *DescribeClusterPa
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *DescribeClusterParametersOutput) SetParameters(v []*Parameter) *DescribeClusterParametersOutput {
+func (s *DescribeClusterParametersOutput) SetParameters(v []Parameter) *DescribeClusterParametersOutput {
 	s.Parameters = v
 	return s
 }
@@ -7951,7 +7951,7 @@ type DescribeClusterSecurityGroupsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the security groups that have either or
 	// both of these tag keys associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching cluster security
 	// groups that are associated with the specified tag value or values. For example,
@@ -7959,7 +7959,7 @@ type DescribeClusterSecurityGroupsInput struct {
 	// admin and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the security groups that have either or
 	// both of these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -7991,13 +7991,13 @@ func (s *DescribeClusterSecurityGroupsInput) SetMaxRecords(v int64) *DescribeClu
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeClusterSecurityGroupsInput) SetTagKeys(v []*string) *DescribeClusterSecurityGroupsInput {
+func (s *DescribeClusterSecurityGroupsInput) SetTagKeys(v []string) *DescribeClusterSecurityGroupsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeClusterSecurityGroupsInput) SetTagValues(v []*string) *DescribeClusterSecurityGroupsInput {
+func (s *DescribeClusterSecurityGroupsInput) SetTagValues(v []string) *DescribeClusterSecurityGroupsInput {
 	s.TagValues = v
 	return s
 }
@@ -8007,7 +8007,7 @@ type DescribeClusterSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ClusterSecurityGroup instances.
-	ClusterSecurityGroups []*ClusterSecurityGroup `locationNameList:"ClusterSecurityGroup" type:"list"`
+	ClusterSecurityGroups []ClusterSecurityGroup `locationNameList:"ClusterSecurityGroup" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -8028,7 +8028,7 @@ func (s DescribeClusterSecurityGroupsOutput) GoString() string {
 }
 
 // SetClusterSecurityGroups sets the ClusterSecurityGroups field's value.
-func (s *DescribeClusterSecurityGroupsOutput) SetClusterSecurityGroups(v []*ClusterSecurityGroup) *DescribeClusterSecurityGroupsOutput {
+func (s *DescribeClusterSecurityGroupsOutput) SetClusterSecurityGroups(v []ClusterSecurityGroup) *DescribeClusterSecurityGroupsOutput {
 	s.ClusterSecurityGroups = v
 	return s
 }
@@ -8099,7 +8099,7 @@ type DescribeClusterSnapshotsInput struct {
 	// If you specify both of these tag keys in the request, Amazon Redshift returns
 	// a response with the snapshots that have either or both of these tag keys
 	// associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching cluster snapshots
 	// that are associated with the specified tag value or values. For example,
@@ -8107,7 +8107,7 @@ type DescribeClusterSnapshotsInput struct {
 	// and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the snapshots that have either or both of
 	// these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -8169,13 +8169,13 @@ func (s *DescribeClusterSnapshotsInput) SetStartTime(v time.Time) *DescribeClust
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeClusterSnapshotsInput) SetTagKeys(v []*string) *DescribeClusterSnapshotsInput {
+func (s *DescribeClusterSnapshotsInput) SetTagKeys(v []string) *DescribeClusterSnapshotsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeClusterSnapshotsInput) SetTagValues(v []*string) *DescribeClusterSnapshotsInput {
+func (s *DescribeClusterSnapshotsInput) SetTagValues(v []string) *DescribeClusterSnapshotsInput {
 	s.TagValues = v
 	return s
 }
@@ -8193,7 +8193,7 @@ type DescribeClusterSnapshotsOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of Snapshot instances.
-	Snapshots []*Snapshot `locationNameList:"Snapshot" type:"list"`
+	Snapshots []Snapshot `locationNameList:"Snapshot" type:"list"`
 }
 
 // String returns the string representation
@@ -8213,7 +8213,7 @@ func (s *DescribeClusterSnapshotsOutput) SetMarker(v string) *DescribeClusterSna
 }
 
 // SetSnapshots sets the Snapshots field's value.
-func (s *DescribeClusterSnapshotsOutput) SetSnapshots(v []*Snapshot) *DescribeClusterSnapshotsOutput {
+func (s *DescribeClusterSnapshotsOutput) SetSnapshots(v []Snapshot) *DescribeClusterSnapshotsOutput {
 	s.Snapshots = v
 	return s
 }
@@ -8249,7 +8249,7 @@ type DescribeClusterSubnetGroupsInput struct {
 	// If you specify both of these tag keys in the request, Amazon Redshift returns
 	// a response with the subnet groups that have either or both of these tag keys
 	// associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching cluster subnet
 	// groups that are associated with the specified tag value or values. For example,
@@ -8257,7 +8257,7 @@ type DescribeClusterSubnetGroupsInput struct {
 	// and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the subnet groups that have either or both
 	// of these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -8289,13 +8289,13 @@ func (s *DescribeClusterSubnetGroupsInput) SetMaxRecords(v int64) *DescribeClust
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeClusterSubnetGroupsInput) SetTagKeys(v []*string) *DescribeClusterSubnetGroupsInput {
+func (s *DescribeClusterSubnetGroupsInput) SetTagKeys(v []string) *DescribeClusterSubnetGroupsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeClusterSubnetGroupsInput) SetTagValues(v []*string) *DescribeClusterSubnetGroupsInput {
+func (s *DescribeClusterSubnetGroupsInput) SetTagValues(v []string) *DescribeClusterSubnetGroupsInput {
 	s.TagValues = v
 	return s
 }
@@ -8306,7 +8306,7 @@ type DescribeClusterSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ClusterSubnetGroup instances.
-	ClusterSubnetGroups []*ClusterSubnetGroup `locationNameList:"ClusterSubnetGroup" type:"list"`
+	ClusterSubnetGroups []ClusterSubnetGroup `locationNameList:"ClusterSubnetGroup" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -8327,7 +8327,7 @@ func (s DescribeClusterSubnetGroupsOutput) GoString() string {
 }
 
 // SetClusterSubnetGroups sets the ClusterSubnetGroups field's value.
-func (s *DescribeClusterSubnetGroupsOutput) SetClusterSubnetGroups(v []*ClusterSubnetGroup) *DescribeClusterSubnetGroupsOutput {
+func (s *DescribeClusterSubnetGroupsOutput) SetClusterSubnetGroups(v []ClusterSubnetGroup) *DescribeClusterSubnetGroupsOutput {
 	s.ClusterSubnetGroups = v
 	return s
 }
@@ -8416,7 +8416,7 @@ type DescribeClusterVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Version elements.
-	ClusterVersions []*ClusterVersion `locationNameList:"ClusterVersion" type:"list"`
+	ClusterVersions []ClusterVersion `locationNameList:"ClusterVersion" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -8437,7 +8437,7 @@ func (s DescribeClusterVersionsOutput) GoString() string {
 }
 
 // SetClusterVersions sets the ClusterVersions field's value.
-func (s *DescribeClusterVersionsOutput) SetClusterVersions(v []*ClusterVersion) *DescribeClusterVersionsOutput {
+func (s *DescribeClusterVersionsOutput) SetClusterVersions(v []ClusterVersion) *DescribeClusterVersionsOutput {
 	s.ClusterVersions = v
 	return s
 }
@@ -8484,7 +8484,7 @@ type DescribeClustersInput struct {
 	// If you specify both of these tag keys in the request, Amazon Redshift returns
 	// a response with the clusters that have either or both of these tag keys associated
 	// with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching clusters
 	// that are associated with the specified tag value or values. For example,
@@ -8492,7 +8492,7 @@ type DescribeClustersInput struct {
 	// test. If you specify both of these tag values in the request, Amazon Redshift
 	// returns a response with the clusters that have either or both of these tag
 	// values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -8524,13 +8524,13 @@ func (s *DescribeClustersInput) SetMaxRecords(v int64) *DescribeClustersInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeClustersInput) SetTagKeys(v []*string) *DescribeClustersInput {
+func (s *DescribeClustersInput) SetTagKeys(v []string) *DescribeClustersInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeClustersInput) SetTagValues(v []*string) *DescribeClustersInput {
+func (s *DescribeClustersInput) SetTagValues(v []string) *DescribeClustersInput {
 	s.TagValues = v
 	return s
 }
@@ -8541,7 +8541,7 @@ type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Cluster objects, where each object describes one cluster.
-	Clusters []*Cluster `locationNameList:"Cluster" type:"list"`
+	Clusters []Cluster `locationNameList:"Cluster" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -8562,7 +8562,7 @@ func (s DescribeClustersOutput) GoString() string {
 }
 
 // SetClusters sets the Clusters field's value.
-func (s *DescribeClustersOutput) SetClusters(v []*Cluster) *DescribeClustersOutput {
+func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutput {
 	s.Clusters = v
 	return s
 }
@@ -8699,7 +8699,7 @@ type DescribeEventCategoriesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of event categories descriptions.
-	EventCategoriesMapList []*EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
+	EventCategoriesMapList []EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
 }
 
 // String returns the string representation
@@ -8713,7 +8713,7 @@ func (s DescribeEventCategoriesOutput) GoString() string {
 }
 
 // SetEventCategoriesMapList sets the EventCategoriesMapList field's value.
-func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []*EventCategoriesMap) *DescribeEventCategoriesOutput {
+func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []EventCategoriesMap) *DescribeEventCategoriesOutput {
 	s.EventCategoriesMapList = v
 	return s
 }
@@ -8749,7 +8749,7 @@ type DescribeEventSubscriptionsInput struct {
 	// and environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the subscriptions that have either or both
 	// of these tag keys associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching event notification
 	// subscriptions that are associated with the specified tag value or values.
@@ -8757,7 +8757,7 @@ type DescribeEventSubscriptionsInput struct {
 	// called admin and test. If you specify both of these tag values in the request,
 	// Amazon Redshift returns a response with the subscriptions that have either
 	// or both of these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -8789,13 +8789,13 @@ func (s *DescribeEventSubscriptionsInput) SetSubscriptionName(v string) *Describ
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeEventSubscriptionsInput) SetTagKeys(v []*string) *DescribeEventSubscriptionsInput {
+func (s *DescribeEventSubscriptionsInput) SetTagKeys(v []string) *DescribeEventSubscriptionsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeEventSubscriptionsInput) SetTagValues(v []*string) *DescribeEventSubscriptionsInput {
+func (s *DescribeEventSubscriptionsInput) SetTagValues(v []string) *DescribeEventSubscriptionsInput {
 	s.TagValues = v
 	return s
 }
@@ -8805,7 +8805,7 @@ type DescribeEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of event subscriptions.
-	EventSubscriptionsList []*EventSubscription `locationNameList:"EventSubscription" type:"list"`
+	EventSubscriptionsList []EventSubscription `locationNameList:"EventSubscription" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -8826,7 +8826,7 @@ func (s DescribeEventSubscriptionsOutput) GoString() string {
 }
 
 // SetEventSubscriptionsList sets the EventSubscriptionsList field's value.
-func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []*EventSubscription) *DescribeEventSubscriptionsOutput {
+func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []EventSubscription) *DescribeEventSubscriptionsOutput {
 	s.EventSubscriptionsList = v
 	return s
 }
@@ -8905,7 +8905,7 @@ type DescribeEventsInput struct {
 	//
 	//    * Specify cluster-snapshot when SourceIdentifier is a cluster snapshot
 	//    identifier.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
@@ -8972,7 +8972,7 @@ type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Event instances.
-	Events []*Event `locationNameList:"Event" type:"list"`
+	Events []Event `locationNameList:"Event" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -8993,7 +8993,7 @@ func (s DescribeEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []*Event) *DescribeEventsOutput {
+func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 	s.Events = v
 	return s
 }
@@ -9037,7 +9037,7 @@ type DescribeHsmClientCertificatesInput struct {
 	// and environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the HSM client certificates that have either
 	// or both of these tag keys associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching HSM client
 	// certificates that are associated with the specified tag value or values.
@@ -9045,7 +9045,7 @@ type DescribeHsmClientCertificatesInput struct {
 	// with values called admin and test. If you specify both of these tag values
 	// in the request, Amazon Redshift returns a response with the HSM client certificates
 	// that have either or both of these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -9077,13 +9077,13 @@ func (s *DescribeHsmClientCertificatesInput) SetMaxRecords(v int64) *DescribeHsm
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeHsmClientCertificatesInput) SetTagKeys(v []*string) *DescribeHsmClientCertificatesInput {
+func (s *DescribeHsmClientCertificatesInput) SetTagKeys(v []string) *DescribeHsmClientCertificatesInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeHsmClientCertificatesInput) SetTagValues(v []*string) *DescribeHsmClientCertificatesInput {
+func (s *DescribeHsmClientCertificatesInput) SetTagValues(v []string) *DescribeHsmClientCertificatesInput {
 	s.TagValues = v
 	return s
 }
@@ -9095,7 +9095,7 @@ type DescribeHsmClientCertificatesOutput struct {
 	// A list of the identifiers for one or more HSM client certificates used by
 	// Amazon Redshift clusters to store and retrieve database encryption keys in
 	// an HSM.
-	HsmClientCertificates []*HsmClientCertificate `locationNameList:"HsmClientCertificate" type:"list"`
+	HsmClientCertificates []HsmClientCertificate `locationNameList:"HsmClientCertificate" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -9116,7 +9116,7 @@ func (s DescribeHsmClientCertificatesOutput) GoString() string {
 }
 
 // SetHsmClientCertificates sets the HsmClientCertificates field's value.
-func (s *DescribeHsmClientCertificatesOutput) SetHsmClientCertificates(v []*HsmClientCertificate) *DescribeHsmClientCertificatesOutput {
+func (s *DescribeHsmClientCertificatesOutput) SetHsmClientCertificates(v []HsmClientCertificate) *DescribeHsmClientCertificatesOutput {
 	s.HsmClientCertificates = v
 	return s
 }
@@ -9160,7 +9160,7 @@ type DescribeHsmConfigurationsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the HSM configurations that have either
 	// or both of these tag keys associated with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching HSM configurations
 	// that are associated with the specified tag value or values. For example,
@@ -9168,7 +9168,7 @@ type DescribeHsmConfigurationsInput struct {
 	// admin and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the HSM configurations that have either
 	// or both of these tag values associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -9200,13 +9200,13 @@ func (s *DescribeHsmConfigurationsInput) SetMaxRecords(v int64) *DescribeHsmConf
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeHsmConfigurationsInput) SetTagKeys(v []*string) *DescribeHsmConfigurationsInput {
+func (s *DescribeHsmConfigurationsInput) SetTagKeys(v []string) *DescribeHsmConfigurationsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeHsmConfigurationsInput) SetTagValues(v []*string) *DescribeHsmConfigurationsInput {
+func (s *DescribeHsmConfigurationsInput) SetTagValues(v []string) *DescribeHsmConfigurationsInput {
 	s.TagValues = v
 	return s
 }
@@ -9216,7 +9216,7 @@ type DescribeHsmConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of HsmConfiguration objects.
-	HsmConfigurations []*HsmConfiguration `locationNameList:"HsmConfiguration" type:"list"`
+	HsmConfigurations []HsmConfiguration `locationNameList:"HsmConfiguration" type:"list"`
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -9237,7 +9237,7 @@ func (s DescribeHsmConfigurationsOutput) GoString() string {
 }
 
 // SetHsmConfigurations sets the HsmConfigurations field's value.
-func (s *DescribeHsmConfigurationsOutput) SetHsmConfigurations(v []*HsmConfiguration) *DescribeHsmConfigurationsOutput {
+func (s *DescribeHsmConfigurationsOutput) SetHsmConfigurations(v []HsmConfiguration) *DescribeHsmConfigurationsOutput {
 	s.HsmConfigurations = v
 	return s
 }
@@ -9373,7 +9373,7 @@ type DescribeOrderableClusterOptionsOutput struct {
 
 	// An OrderableClusterOption structure containing information about orderable
 	// options for the cluster.
-	OrderableClusterOptions []*OrderableClusterOption `locationNameList:"OrderableClusterOption" type:"list"`
+	OrderableClusterOptions []OrderableClusterOption `locationNameList:"OrderableClusterOption" type:"list"`
 }
 
 // String returns the string representation
@@ -9393,7 +9393,7 @@ func (s *DescribeOrderableClusterOptionsOutput) SetMarker(v string) *DescribeOrd
 }
 
 // SetOrderableClusterOptions sets the OrderableClusterOptions field's value.
-func (s *DescribeOrderableClusterOptionsOutput) SetOrderableClusterOptions(v []*OrderableClusterOption) *DescribeOrderableClusterOptionsOutput {
+func (s *DescribeOrderableClusterOptionsOutput) SetOrderableClusterOptions(v []OrderableClusterOption) *DescribeOrderableClusterOptionsOutput {
 	s.OrderableClusterOptions = v
 	return s
 }
@@ -9464,7 +9464,7 @@ type DescribeReservedNodeOfferingsOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of ReservedNodeOffering objects.
-	ReservedNodeOfferings []*ReservedNodeOffering `locationNameList:"ReservedNodeOffering" type:"list"`
+	ReservedNodeOfferings []ReservedNodeOffering `locationNameList:"ReservedNodeOffering" type:"list"`
 }
 
 // String returns the string representation
@@ -9484,7 +9484,7 @@ func (s *DescribeReservedNodeOfferingsOutput) SetMarker(v string) *DescribeReser
 }
 
 // SetReservedNodeOfferings sets the ReservedNodeOfferings field's value.
-func (s *DescribeReservedNodeOfferingsOutput) SetReservedNodeOfferings(v []*ReservedNodeOffering) *DescribeReservedNodeOfferingsOutput {
+func (s *DescribeReservedNodeOfferingsOutput) SetReservedNodeOfferings(v []ReservedNodeOffering) *DescribeReservedNodeOfferingsOutput {
 	s.ReservedNodeOfferings = v
 	return s
 }
@@ -9554,7 +9554,7 @@ type DescribeReservedNodesOutput struct {
 	Marker *string `type:"string"`
 
 	// The list of ReservedNode objects.
-	ReservedNodes []*ReservedNode `locationNameList:"ReservedNode" type:"list"`
+	ReservedNodes []ReservedNode `locationNameList:"ReservedNode" type:"list"`
 }
 
 // String returns the string representation
@@ -9574,7 +9574,7 @@ func (s *DescribeReservedNodesOutput) SetMarker(v string) *DescribeReservedNodes
 }
 
 // SetReservedNodes sets the ReservedNodes field's value.
-func (s *DescribeReservedNodesOutput) SetReservedNodes(v []*ReservedNode) *DescribeReservedNodesOutput {
+func (s *DescribeReservedNodesOutput) SetReservedNodes(v []ReservedNode) *DescribeReservedNodesOutput {
 	s.ReservedNodes = v
 	return s
 }
@@ -9647,17 +9647,17 @@ type DescribeResizeOutput struct {
 	// The names of tables that have been completely imported .
 	//
 	// Valid Values: List of table names.
-	ImportTablesCompleted []*string `type:"list"`
+	ImportTablesCompleted []string `type:"list"`
 
 	// The names of tables that are being currently imported.
 	//
 	// Valid Values: List of table names.
-	ImportTablesInProgress []*string `type:"list"`
+	ImportTablesInProgress []string `type:"list"`
 
 	// The names of tables that have not been yet imported.
 	//
 	// Valid Values: List of table names
-	ImportTablesNotStarted []*string `type:"list"`
+	ImportTablesNotStarted []string `type:"list"`
 
 	// While the resize operation is in progress, this value shows the current amount
 	// of data, in megabytes, that has been processed so far. When the resize operation
@@ -9717,19 +9717,19 @@ func (s *DescribeResizeOutput) SetEstimatedTimeToCompletionInSeconds(v int64) *D
 }
 
 // SetImportTablesCompleted sets the ImportTablesCompleted field's value.
-func (s *DescribeResizeOutput) SetImportTablesCompleted(v []*string) *DescribeResizeOutput {
+func (s *DescribeResizeOutput) SetImportTablesCompleted(v []string) *DescribeResizeOutput {
 	s.ImportTablesCompleted = v
 	return s
 }
 
 // SetImportTablesInProgress sets the ImportTablesInProgress field's value.
-func (s *DescribeResizeOutput) SetImportTablesInProgress(v []*string) *DescribeResizeOutput {
+func (s *DescribeResizeOutput) SetImportTablesInProgress(v []string) *DescribeResizeOutput {
 	s.ImportTablesInProgress = v
 	return s
 }
 
 // SetImportTablesNotStarted sets the ImportTablesNotStarted field's value.
-func (s *DescribeResizeOutput) SetImportTablesNotStarted(v []*string) *DescribeResizeOutput {
+func (s *DescribeResizeOutput) SetImportTablesNotStarted(v []string) *DescribeResizeOutput {
 	s.ImportTablesNotStarted = v
 	return s
 }
@@ -9805,7 +9805,7 @@ type DescribeSnapshotCopyGrantsInput struct {
 	// specify both of these tag keys in the request, Amazon Redshift returns a
 	// response with all resources that have either or both of these tag keys associated
 	// with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching resources
 	// that are associated with the specified value or values. For example, suppose
@@ -9813,7 +9813,7 @@ type DescribeSnapshotCopyGrantsInput struct {
 	// specify both of these tag values in the request, Amazon Redshift returns
 	// a response with all resources that have either or both of these tag values
 	// associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -9845,13 +9845,13 @@ func (s *DescribeSnapshotCopyGrantsInput) SetSnapshotCopyGrantName(v string) *De
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeSnapshotCopyGrantsInput) SetTagKeys(v []*string) *DescribeSnapshotCopyGrantsInput {
+func (s *DescribeSnapshotCopyGrantsInput) SetTagKeys(v []string) *DescribeSnapshotCopyGrantsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeSnapshotCopyGrantsInput) SetTagValues(v []*string) *DescribeSnapshotCopyGrantsInput {
+func (s *DescribeSnapshotCopyGrantsInput) SetTagValues(v []string) *DescribeSnapshotCopyGrantsInput {
 	s.TagValues = v
 	return s
 }
@@ -9872,7 +9872,7 @@ type DescribeSnapshotCopyGrantsOutput struct {
 	Marker *string `type:"string"`
 
 	// The list of SnapshotCopyGrant objects.
-	SnapshotCopyGrants []*SnapshotCopyGrant `locationNameList:"SnapshotCopyGrant" type:"list"`
+	SnapshotCopyGrants []SnapshotCopyGrant `locationNameList:"SnapshotCopyGrant" type:"list"`
 }
 
 // String returns the string representation
@@ -9892,7 +9892,7 @@ func (s *DescribeSnapshotCopyGrantsOutput) SetMarker(v string) *DescribeSnapshot
 }
 
 // SetSnapshotCopyGrants sets the SnapshotCopyGrants field's value.
-func (s *DescribeSnapshotCopyGrantsOutput) SetSnapshotCopyGrants(v []*SnapshotCopyGrant) *DescribeSnapshotCopyGrantsOutput {
+func (s *DescribeSnapshotCopyGrantsOutput) SetSnapshotCopyGrants(v []SnapshotCopyGrant) *DescribeSnapshotCopyGrantsOutput {
 	s.SnapshotCopyGrants = v
 	return s
 }
@@ -9963,7 +9963,7 @@ type DescribeTableRestoreStatusOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of status details for one or more table restore requests.
-	TableRestoreStatusDetails []*TableRestoreStatus `locationNameList:"TableRestoreStatus" type:"list"`
+	TableRestoreStatusDetails []TableRestoreStatus `locationNameList:"TableRestoreStatus" type:"list"`
 }
 
 // String returns the string representation
@@ -9983,7 +9983,7 @@ func (s *DescribeTableRestoreStatusOutput) SetMarker(v string) *DescribeTableRes
 }
 
 // SetTableRestoreStatusDetails sets the TableRestoreStatusDetails field's value.
-func (s *DescribeTableRestoreStatusOutput) SetTableRestoreStatusDetails(v []*TableRestoreStatus) *DescribeTableRestoreStatusOutput {
+func (s *DescribeTableRestoreStatusOutput) SetTableRestoreStatusDetails(v []TableRestoreStatus) *DescribeTableRestoreStatusOutput {
 	s.TableRestoreStatusDetails = v
 	return s
 }
@@ -10044,7 +10044,7 @@ type DescribeTagsInput struct {
 	// specify both of these tag keys in the request, Amazon Redshift returns a
 	// response with all resources that have either or both of these tag keys associated
 	// with them.
-	TagKeys []*string `locationNameList:"TagKey" type:"list"`
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
 
 	// A tag value or values for which you want to return all matching resources
 	// that are associated with the specified value or values. For example, suppose
@@ -10052,7 +10052,7 @@ type DescribeTagsInput struct {
 	// specify both of these tag values in the request, Amazon Redshift returns
 	// a response with all resources that have either or both of these tag values
 	// associated with them.
-	TagValues []*string `locationNameList:"TagValue" type:"list"`
+	TagValues []string `locationNameList:"TagValue" type:"list"`
 }
 
 // String returns the string representation
@@ -10090,13 +10090,13 @@ func (s *DescribeTagsInput) SetResourceType(v string) *DescribeTagsInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *DescribeTagsInput) SetTagKeys(v []*string) *DescribeTagsInput {
+func (s *DescribeTagsInput) SetTagKeys(v []string) *DescribeTagsInput {
 	s.TagKeys = v
 	return s
 }
 
 // SetTagValues sets the TagValues field's value.
-func (s *DescribeTagsInput) SetTagValues(v []*string) *DescribeTagsInput {
+func (s *DescribeTagsInput) SetTagValues(v []string) *DescribeTagsInput {
 	s.TagValues = v
 	return s
 }
@@ -10113,7 +10113,7 @@ type DescribeTagsOutput struct {
 	Marker *string `type:"string"`
 
 	// A list of tags with their associated resources.
-	TaggedResources []*TaggedResource `locationNameList:"TaggedResource" type:"list"`
+	TaggedResources []TaggedResource `locationNameList:"TaggedResource" type:"list"`
 }
 
 // String returns the string representation
@@ -10133,7 +10133,7 @@ func (s *DescribeTagsOutput) SetMarker(v string) *DescribeTagsOutput {
 }
 
 // SetTaggedResources sets the TaggedResources field's value.
-func (s *DescribeTagsOutput) SetTaggedResources(v []*TaggedResource) *DescribeTagsOutput {
+func (s *DescribeTagsOutput) SetTaggedResources(v []TaggedResource) *DescribeTagsOutput {
 	s.TaggedResources = v
 	return s
 }
@@ -10264,7 +10264,7 @@ type EC2SecurityGroup struct {
 	Status *string `type:"string"`
 
 	// The list of tags for the EC2 security group.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -10296,7 +10296,7 @@ func (s *EC2SecurityGroup) SetStatus(v string) *EC2SecurityGroup {
 }
 
 // SetTags sets the Tags field's value.
-func (s *EC2SecurityGroup) SetTags(v []*Tag) *EC2SecurityGroup {
+func (s *EC2SecurityGroup) SetTags(v []Tag) *EC2SecurityGroup {
 	s.Tags = v
 	return s
 }
@@ -10650,7 +10650,7 @@ type Event struct {
 	// A list of the event categories.
 	//
 	// Values: Configuration, Management, Monitoring, Security
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// The identifier of the event.
 	EventId *string `type:"string"`
@@ -10667,7 +10667,7 @@ type Event struct {
 	SourceIdentifier *string `type:"string"`
 
 	// The source type for this event.
-	SourceType SourceType `type:"string"`
+	SourceType SourceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10687,7 +10687,7 @@ func (s *Event) SetDate(v time.Time) *Event {
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *Event) SetEventCategories(v []*string) *Event {
+func (s *Event) SetEventCategories(v []string) *Event {
 	s.EventCategories = v
 	return s
 }
@@ -10728,7 +10728,7 @@ type EventCategoriesMap struct {
 	_ struct{} `type:"structure"`
 
 	// The events in the event category.
-	Events []*EventInfoMap `locationNameList:"EventInfoMap" type:"list"`
+	Events []EventInfoMap `locationNameList:"EventInfoMap" type:"list"`
 
 	// The source type, such as cluster or cluster-snapshot, that the returned categories
 	// belong to.
@@ -10746,7 +10746,7 @@ func (s EventCategoriesMap) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *EventCategoriesMap) SetEvents(v []*EventInfoMap) *EventCategoriesMap {
+func (s *EventCategoriesMap) SetEvents(v []EventInfoMap) *EventCategoriesMap {
 	s.Events = v
 	return s
 }
@@ -10763,7 +10763,7 @@ type EventInfoMap struct {
 	_ struct{} `type:"structure"`
 
 	// The category of an Amazon Redshift event.
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// The description of an Amazon Redshift event.
 	EventDescription *string `type:"string"`
@@ -10788,7 +10788,7 @@ func (s EventInfoMap) GoString() string {
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *EventInfoMap) SetEventCategories(v []*string) *EventInfoMap {
+func (s *EventInfoMap) SetEventCategories(v []string) *EventInfoMap {
 	s.EventCategories = v
 	return s
 }
@@ -10831,7 +10831,7 @@ type EventSubscription struct {
 	// subscription.
 	//
 	// Values: Configuration, Management, Monitoring, Security
-	EventCategoriesList []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategoriesList []string `locationNameList:"EventCategory" type:"list"`
 
 	// The event severity specified in the Amazon Redshift event notification subscription.
 	//
@@ -10844,7 +10844,7 @@ type EventSubscription struct {
 
 	// A list of the sources that publish events to the Amazon Redshift event notification
 	// subscription.
-	SourceIdsList []*string `locationNameList:"SourceId" type:"list"`
+	SourceIdsList []string `locationNameList:"SourceId" type:"list"`
 
 	// The source type of the events returned the Amazon Redshift event notification,
 	// such as cluster, or cluster-snapshot.
@@ -10866,7 +10866,7 @@ type EventSubscription struct {
 	SubscriptionCreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The list of tags for the event subscription.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -10898,7 +10898,7 @@ func (s *EventSubscription) SetEnabled(v bool) *EventSubscription {
 }
 
 // SetEventCategoriesList sets the EventCategoriesList field's value.
-func (s *EventSubscription) SetEventCategoriesList(v []*string) *EventSubscription {
+func (s *EventSubscription) SetEventCategoriesList(v []string) *EventSubscription {
 	s.EventCategoriesList = v
 	return s
 }
@@ -10916,7 +10916,7 @@ func (s *EventSubscription) SetSnsTopicArn(v string) *EventSubscription {
 }
 
 // SetSourceIdsList sets the SourceIdsList field's value.
-func (s *EventSubscription) SetSourceIdsList(v []*string) *EventSubscription {
+func (s *EventSubscription) SetSourceIdsList(v []string) *EventSubscription {
 	s.SourceIdsList = v
 	return s
 }
@@ -10940,7 +10940,7 @@ func (s *EventSubscription) SetSubscriptionCreationTime(v time.Time) *EventSubsc
 }
 
 // SetTags sets the Tags field's value.
-func (s *EventSubscription) SetTags(v []*Tag) *EventSubscription {
+func (s *EventSubscription) SetTags(v []Tag) *EventSubscription {
 	s.Tags = v
 	return s
 }
@@ -10978,7 +10978,7 @@ type GetClusterCredentialsInput struct {
 	//    * Cannot be a reserved word. A list of reserved words can be found in
 	//    Reserved Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 	//    in the Amazon Redshift Database Developer Guide.
-	DbGroups []*string `locationNameList:"DbGroup" type:"list"`
+	DbGroups []string `locationNameList:"DbGroup" type:"list"`
 
 	// The name of a database that DbUser is authorized to log on to. If DbName
 	// is not specified, DbUser can log on to any existing database.
@@ -11077,7 +11077,7 @@ func (s *GetClusterCredentialsInput) SetClusterIdentifier(v string) *GetClusterC
 }
 
 // SetDbGroups sets the DbGroups field's value.
-func (s *GetClusterCredentialsInput) SetDbGroups(v []*string) *GetClusterCredentialsInput {
+func (s *GetClusterCredentialsInput) SetDbGroups(v []string) *GetClusterCredentialsInput {
 	s.DbGroups = v
 	return s
 }
@@ -11165,7 +11165,7 @@ type HsmClientCertificate struct {
 	HsmClientCertificatePublicKey *string `type:"string"`
 
 	// The list of tags for the HSM client certificate.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -11191,7 +11191,7 @@ func (s *HsmClientCertificate) SetHsmClientCertificatePublicKey(v string) *HsmCl
 }
 
 // SetTags sets the Tags field's value.
-func (s *HsmClientCertificate) SetTags(v []*Tag) *HsmClientCertificate {
+func (s *HsmClientCertificate) SetTags(v []Tag) *HsmClientCertificate {
 	s.Tags = v
 	return s
 }
@@ -11217,7 +11217,7 @@ type HsmConfiguration struct {
 	HsmPartitionName *string `type:"string"`
 
 	// The list of tags for the HSM configuration.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -11255,7 +11255,7 @@ func (s *HsmConfiguration) SetHsmPartitionName(v string) *HsmConfiguration {
 }
 
 // SetTags sets the Tags field's value.
-func (s *HsmConfiguration) SetTags(v []*Tag) *HsmConfiguration {
+func (s *HsmConfiguration) SetTags(v []Tag) *HsmConfiguration {
 	s.Tags = v
 	return s
 }
@@ -11320,7 +11320,7 @@ type IPRange struct {
 	Status *string `type:"string"`
 
 	// The list of tags for the IP range.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -11346,7 +11346,7 @@ func (s *IPRange) SetStatus(v string) *IPRange {
 }
 
 // SetTags sets the Tags field's value.
-func (s *IPRange) SetTags(v []*Tag) *IPRange {
+func (s *IPRange) SetTags(v []Tag) *IPRange {
 	s.Tags = v
 	return s
 }
@@ -11358,7 +11358,7 @@ type ModifyClusterIamRolesInput struct {
 	// Zero or more IAM roles to associate with the cluster. The roles must be in
 	// their Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles
 	// with a single cluster in a single request.
-	AddIamRoles []*string `locationNameList:"IamRoleArn" type:"list"`
+	AddIamRoles []string `locationNameList:"IamRoleArn" type:"list"`
 
 	// The unique identifier of the cluster for which you want to associate or disassociate
 	// IAM roles.
@@ -11368,7 +11368,7 @@ type ModifyClusterIamRolesInput struct {
 
 	// Zero or more IAM roles in ARN format to disassociate from the cluster. You
 	// can disassociate up to 10 IAM roles from a single cluster in a single request.
-	RemoveIamRoles []*string `locationNameList:"IamRoleArn" type:"list"`
+	RemoveIamRoles []string `locationNameList:"IamRoleArn" type:"list"`
 }
 
 // String returns the string representation
@@ -11396,7 +11396,7 @@ func (s *ModifyClusterIamRolesInput) Validate() error {
 }
 
 // SetAddIamRoles sets the AddIamRoles field's value.
-func (s *ModifyClusterIamRolesInput) SetAddIamRoles(v []*string) *ModifyClusterIamRolesInput {
+func (s *ModifyClusterIamRolesInput) SetAddIamRoles(v []string) *ModifyClusterIamRolesInput {
 	s.AddIamRoles = v
 	return s
 }
@@ -11408,7 +11408,7 @@ func (s *ModifyClusterIamRolesInput) SetClusterIdentifier(v string) *ModifyClust
 }
 
 // SetRemoveIamRoles sets the RemoveIamRoles field's value.
-func (s *ModifyClusterIamRolesInput) SetRemoveIamRoles(v []*string) *ModifyClusterIamRolesInput {
+func (s *ModifyClusterIamRolesInput) SetRemoveIamRoles(v []string) *ModifyClusterIamRolesInput {
 	s.RemoveIamRoles = v
 	return s
 }
@@ -11489,7 +11489,7 @@ type ModifyClusterInput struct {
 	//    * First character must be a letter
 	//
 	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	ClusterSecurityGroups []*string `locationNameList:"ClusterSecurityGroupName" type:"list"`
+	ClusterSecurityGroups []string `locationNameList:"ClusterSecurityGroupName" type:"list"`
 
 	// The new cluster type.
 	//
@@ -11637,7 +11637,7 @@ type ModifyClusterInput struct {
 
 	// A list of virtual private cloud (VPC) security groups to be associated with
 	// the cluster.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -11689,7 +11689,7 @@ func (s *ModifyClusterInput) SetClusterParameterGroupName(v string) *ModifyClust
 }
 
 // SetClusterSecurityGroups sets the ClusterSecurityGroups field's value.
-func (s *ModifyClusterInput) SetClusterSecurityGroups(v []*string) *ModifyClusterInput {
+func (s *ModifyClusterInput) SetClusterSecurityGroups(v []string) *ModifyClusterInput {
 	s.ClusterSecurityGroups = v
 	return s
 }
@@ -11767,7 +11767,7 @@ func (s *ModifyClusterInput) SetPubliclyAccessible(v bool) *ModifyClusterInput {
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *ModifyClusterInput) SetVpcSecurityGroupIds(v []*string) *ModifyClusterInput {
+func (s *ModifyClusterInput) SetVpcSecurityGroupIds(v []string) *ModifyClusterInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -11815,7 +11815,7 @@ type ModifyClusterParameterGroupInput struct {
 	// name-value pairs in the wlm_json_configuration parameter.
 	//
 	// Parameters is a required field
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list" required:"true"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -11853,7 +11853,7 @@ func (s *ModifyClusterParameterGroupInput) SetParameterGroupName(v string) *Modi
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ModifyClusterParameterGroupInput) SetParameters(v []*Parameter) *ModifyClusterParameterGroupInput {
+func (s *ModifyClusterParameterGroupInput) SetParameters(v []Parameter) *ModifyClusterParameterGroupInput {
 	s.Parameters = v
 	return s
 }
@@ -11874,7 +11874,7 @@ type ModifyClusterSubnetGroupInput struct {
 	// single request.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
+	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -11918,7 +11918,7 @@ func (s *ModifyClusterSubnetGroupInput) SetDescription(v string) *ModifyClusterS
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *ModifyClusterSubnetGroupInput) SetSubnetIds(v []*string) *ModifyClusterSubnetGroupInput {
+func (s *ModifyClusterSubnetGroupInput) SetSubnetIds(v []string) *ModifyClusterSubnetGroupInput {
 	s.SubnetIds = v
 	return s
 }
@@ -11959,7 +11959,7 @@ type ModifyEventSubscriptionInput struct {
 	// notification subscription.
 	//
 	// Values: Configuration, Management, Monitoring, Security
-	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// Specifies the Amazon Redshift event severity to be published by the event
 	// notification subscription.
@@ -11980,7 +11980,7 @@ type ModifyEventSubscriptionInput struct {
 	// Example: my-cluster-1, my-cluster-2
 	//
 	// Example: my-snapshot-20131010
-	SourceIds []*string `locationNameList:"SourceId" type:"list"`
+	SourceIds []string `locationNameList:"SourceId" type:"list"`
 
 	// The type of source that will be generating the events. For example, if you
 	// want to be notified of events generated by a cluster, you would set this
@@ -12029,7 +12029,7 @@ func (s *ModifyEventSubscriptionInput) SetEnabled(v bool) *ModifyEventSubscripti
 }
 
 // SetEventCategories sets the EventCategories field's value.
-func (s *ModifyEventSubscriptionInput) SetEventCategories(v []*string) *ModifyEventSubscriptionInput {
+func (s *ModifyEventSubscriptionInput) SetEventCategories(v []string) *ModifyEventSubscriptionInput {
 	s.EventCategories = v
 	return s
 }
@@ -12047,7 +12047,7 @@ func (s *ModifyEventSubscriptionInput) SetSnsTopicArn(v string) *ModifyEventSubs
 }
 
 // SetSourceIds sets the SourceIds field's value.
-func (s *ModifyEventSubscriptionInput) SetSourceIds(v []*string) *ModifyEventSubscriptionInput {
+func (s *ModifyEventSubscriptionInput) SetSourceIds(v []string) *ModifyEventSubscriptionInput {
 	s.SourceIds = v
 	return s
 }
@@ -12185,7 +12185,7 @@ type OrderableClusterOption struct {
 	_ struct{} `type:"structure"`
 
 	// A list of availability zones for the orderable cluster.
-	AvailabilityZones []*AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
+	AvailabilityZones []AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The cluster type, for example multi-node.
 	ClusterType *string `type:"string"`
@@ -12208,7 +12208,7 @@ func (s OrderableClusterOption) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *OrderableClusterOption) SetAvailabilityZones(v []*AvailabilityZone) *OrderableClusterOption {
+func (s *OrderableClusterOption) SetAvailabilityZones(v []AvailabilityZone) *OrderableClusterOption {
 	s.AvailabilityZones = v
 	return s
 }
@@ -12245,7 +12245,7 @@ type Parameter struct {
 	// information about parameters and parameter groups, go to Amazon Redshift
 	// Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
-	ApplyType ParameterApplyType `type:"string"`
+	ApplyType ParameterApplyType `type:"string" enum:"true"`
 
 	// The data type of the parameter.
 	DataType *string `type:"string"`
@@ -12642,7 +12642,7 @@ type ReservedNode struct {
 	OfferingType *string `type:"string"`
 
 	// The recurring charges for the reserved node.
-	RecurringCharges []*RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
+	RecurringCharges []RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
 
 	// The unique identifier for the reservation.
 	ReservedNodeId *string `type:"string"`
@@ -12718,7 +12718,7 @@ func (s *ReservedNode) SetOfferingType(v string) *ReservedNode {
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedNode) SetRecurringCharges(v []*RecurringCharge) *ReservedNode {
+func (s *ReservedNode) SetRecurringCharges(v []RecurringCharge) *ReservedNode {
 	s.RecurringCharges = v
 	return s
 }
@@ -12778,7 +12778,7 @@ type ReservedNodeOffering struct {
 	// The charge to your account regardless of whether you are creating any clusters
 	// using the node offering. Recurring charges are only in effect for heavy-utilization
 	// reserved nodes.
-	RecurringCharges []*RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
+	RecurringCharges []RecurringCharge `locationNameList:"RecurringCharge" type:"list"`
 
 	// The offering identifier.
 	ReservedNodeOfferingId *string `type:"string"`
@@ -12829,7 +12829,7 @@ func (s *ReservedNodeOffering) SetOfferingType(v string) *ReservedNodeOffering {
 }
 
 // SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedNodeOffering) SetRecurringCharges(v []*RecurringCharge) *ReservedNodeOffering {
+func (s *ReservedNodeOffering) SetRecurringCharges(v []RecurringCharge) *ReservedNodeOffering {
 	s.RecurringCharges = v
 	return s
 }
@@ -12859,7 +12859,7 @@ type ResetClusterParameterGroupInput struct {
 	// is not used, then at least one parameter name must be supplied.
 	//
 	// Constraints: A maximum of 20 parameters can be reset in a single request.
-	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
+	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
 
 	// If true, all parameters in the specified parameter group will be reset to
 	// their default values.
@@ -12899,7 +12899,7 @@ func (s *ResetClusterParameterGroupInput) SetParameterGroupName(v string) *Reset
 }
 
 // SetParameters sets the Parameters field's value.
-func (s *ResetClusterParameterGroupInput) SetParameters(v []*Parameter) *ResetClusterParameterGroupInput {
+func (s *ResetClusterParameterGroupInput) SetParameters(v []Parameter) *ResetClusterParameterGroupInput {
 	s.Parameters = v
 	return s
 }
@@ -13011,7 +13011,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// Default: The default cluster security group for Amazon Redshift.
 	//
 	// Cluster security groups only apply to clusters outside of VPCs.
-	ClusterSecurityGroups []*string `locationNameList:"ClusterSecurityGroupName" type:"list"`
+	ClusterSecurityGroups []string `locationNameList:"ClusterSecurityGroupName" type:"list"`
 
 	// The name of the subnet group where you want to cluster restored.
 	//
@@ -13047,7 +13047,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// in a single request.
 	//
 	// A cluster can have up to 10 IAM roles associated at any time.
-	IamRoles []*string `locationNameList:"IamRoleArn" type:"list"`
+	IamRoles []string `locationNameList:"IamRoleArn" type:"list"`
 
 	// The AWS Key Management Service (KMS) key ID of the encryption key that you
 	// want to use to encrypt data in the cluster that you restore from a shared
@@ -13115,7 +13115,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// Default: The default VPC security group is associated with the cluster.
 	//
 	// VPC security groups only apply to clusters in VPCs.
-	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
+	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
 // String returns the string representation
@@ -13183,7 +13183,7 @@ func (s *RestoreFromClusterSnapshotInput) SetClusterParameterGroupName(v string)
 }
 
 // SetClusterSecurityGroups sets the ClusterSecurityGroups field's value.
-func (s *RestoreFromClusterSnapshotInput) SetClusterSecurityGroups(v []*string) *RestoreFromClusterSnapshotInput {
+func (s *RestoreFromClusterSnapshotInput) SetClusterSecurityGroups(v []string) *RestoreFromClusterSnapshotInput {
 	s.ClusterSecurityGroups = v
 	return s
 }
@@ -13219,7 +13219,7 @@ func (s *RestoreFromClusterSnapshotInput) SetHsmConfigurationIdentifier(v string
 }
 
 // SetIamRoles sets the IamRoles field's value.
-func (s *RestoreFromClusterSnapshotInput) SetIamRoles(v []*string) *RestoreFromClusterSnapshotInput {
+func (s *RestoreFromClusterSnapshotInput) SetIamRoles(v []string) *RestoreFromClusterSnapshotInput {
 	s.IamRoles = v
 	return s
 }
@@ -13273,7 +13273,7 @@ func (s *RestoreFromClusterSnapshotInput) SetSnapshotIdentifier(v string) *Resto
 }
 
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *RestoreFromClusterSnapshotInput) SetVpcSecurityGroupIds(v []*string) *RestoreFromClusterSnapshotInput {
+func (s *RestoreFromClusterSnapshotInput) SetVpcSecurityGroupIds(v []string) *RestoreFromClusterSnapshotInput {
 	s.VpcSecurityGroupIds = v
 	return s
 }
@@ -13796,7 +13796,7 @@ type Snapshot struct {
 
 	// A list of the AWS customer accounts authorized to restore the snapshot. Returns
 	// null if no accounts are authorized. Visible only to the snapshot owner.
-	AccountsWithRestoreAccess []*AccountWithRestoreAccess `locationNameList:"AccountWithRestoreAccess" type:"list"`
+	AccountsWithRestoreAccess []AccountWithRestoreAccess `locationNameList:"AccountWithRestoreAccess" type:"list"`
 
 	// The size of the incremental backup.
 	ActualIncrementalBackupSizeInMegaBytes *float64 `type:"double"`
@@ -13872,7 +13872,7 @@ type Snapshot struct {
 	Port *int64 `type:"integer"`
 
 	// The list of node types that this cluster snapshot is able to restore into.
-	RestorableNodeTypes []*string `locationNameList:"NodeType" type:"list"`
+	RestorableNodeTypes []string `locationNameList:"NodeType" type:"list"`
 
 	// The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains
 	// a copy of the cluster data as of this exact time.
@@ -13901,7 +13901,7 @@ type Snapshot struct {
 	Status *string `type:"string"`
 
 	// The list of tags for the cluster snapshot.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The size of the complete set of backup data that would be used to restore
 	// the cluster.
@@ -13923,7 +13923,7 @@ func (s Snapshot) GoString() string {
 }
 
 // SetAccountsWithRestoreAccess sets the AccountsWithRestoreAccess field's value.
-func (s *Snapshot) SetAccountsWithRestoreAccess(v []*AccountWithRestoreAccess) *Snapshot {
+func (s *Snapshot) SetAccountsWithRestoreAccess(v []AccountWithRestoreAccess) *Snapshot {
 	s.AccountsWithRestoreAccess = v
 	return s
 }
@@ -14043,7 +14043,7 @@ func (s *Snapshot) SetPort(v int64) *Snapshot {
 }
 
 // SetRestorableNodeTypes sets the RestorableNodeTypes field's value.
-func (s *Snapshot) SetRestorableNodeTypes(v []*string) *Snapshot {
+func (s *Snapshot) SetRestorableNodeTypes(v []string) *Snapshot {
 	s.RestorableNodeTypes = v
 	return s
 }
@@ -14079,7 +14079,7 @@ func (s *Snapshot) SetStatus(v string) *Snapshot {
 }
 
 // SetTags sets the Tags field's value.
-func (s *Snapshot) SetTags(v []*Tag) *Snapshot {
+func (s *Snapshot) SetTags(v []Tag) *Snapshot {
 	s.Tags = v
 	return s
 }
@@ -14115,7 +14115,7 @@ type SnapshotCopyGrant struct {
 	SnapshotCopyGrantName *string `type:"string"`
 
 	// A list of tag instances.
-	Tags []*Tag `locationNameList:"Tag" type:"list"`
+	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
 // String returns the string representation
@@ -14141,7 +14141,7 @@ func (s *SnapshotCopyGrant) SetSnapshotCopyGrantName(v string) *SnapshotCopyGran
 }
 
 // SetTags sets the Tags field's value.
-func (s *SnapshotCopyGrant) SetTags(v []*Tag) *SnapshotCopyGrant {
+func (s *SnapshotCopyGrant) SetTags(v []Tag) *SnapshotCopyGrant {
 	s.Tags = v
 	return s
 }
@@ -14227,7 +14227,7 @@ type TableRestoreStatus struct {
 	// A value that describes the current state of the table restore request.
 	//
 	// Valid Values: SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS
-	Status TableRestoreStatusType `type:"string"`
+	Status TableRestoreStatusType `type:"string" enum:"true"`
 
 	// The unique identifier for the table restore request.
 	TableRestoreRequestId *string `type:"string"`

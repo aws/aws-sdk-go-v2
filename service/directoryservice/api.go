@@ -2024,7 +2024,7 @@ type AddIpRoutesInput struct {
 	// the IP address block of the DNS server used for your on-premises domain.
 	//
 	// IpRoutes is a required field
-	IpRoutes []*IpRoute `type:"list" required:"true"`
+	IpRoutes []IpRoute `type:"list" required:"true"`
 
 	// If set to true, updates the inbound and outbound rules of the security group
 	// that has the description: "AWS created security group for directory ID directory
@@ -2107,7 +2107,7 @@ func (s *AddIpRoutesInput) SetDirectoryId(v string) *AddIpRoutesInput {
 }
 
 // SetIpRoutes sets the IpRoutes field's value.
-func (s *AddIpRoutesInput) SetIpRoutes(v []*IpRoute) *AddIpRoutesInput {
+func (s *AddIpRoutesInput) SetIpRoutes(v []IpRoute) *AddIpRoutesInput {
 	s.IpRoutes = v
 	return s
 }
@@ -2145,7 +2145,7 @@ type AddTagsToResourceInput struct {
 	// The tags to be assigned to the directory.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2171,9 +2171,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -2193,7 +2190,7 @@ func (s *AddTagsToResourceInput) SetResourceId(v string) *AddTagsToResourceInput
 }
 
 // SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []*Tag) *AddTagsToResourceInput {
+func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	s.Tags = v
 	return s
 }
@@ -2337,7 +2334,7 @@ type Computer struct {
 
 	// An array of Attribute objects containing the LDAP attributes that belong
 	// to the computer account.
-	ComputerAttributes []*Attribute `type:"list"`
+	ComputerAttributes []Attribute `type:"list"`
 
 	// The identifier of the computer.
 	ComputerId *string `min:"1" type:"string"`
@@ -2357,7 +2354,7 @@ func (s Computer) GoString() string {
 }
 
 // SetComputerAttributes sets the ComputerAttributes field's value.
-func (s *Computer) SetComputerAttributes(v []*Attribute) *Computer {
+func (s *Computer) SetComputerAttributes(v []Attribute) *Computer {
 	s.ComputerAttributes = v
 	return s
 }
@@ -2384,7 +2381,7 @@ type ConditionalForwarder struct {
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
 	// This is the IP address of the DNS server that your conditional forwarder
 	// points to.
-	DnsIpAddrs []*string `type:"list"`
+	DnsIpAddrs []string `type:"list"`
 
 	// The fully qualified domain name (FQDN) of the remote domains pointed to by
 	// the conditional forwarder.
@@ -2393,7 +2390,7 @@ type ConditionalForwarder struct {
 	// The replication scope of the conditional forwarder. The only allowed value
 	// is Domain, which will replicate the conditional forwarder to all of the domain
 	// controllers for your AWS directory.
-	ReplicationScope ReplicationScope `type:"string"`
+	ReplicationScope ReplicationScope `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2407,7 +2404,7 @@ func (s ConditionalForwarder) GoString() string {
 }
 
 // SetDnsIpAddrs sets the DnsIpAddrs field's value.
-func (s *ConditionalForwarder) SetDnsIpAddrs(v []*string) *ConditionalForwarder {
+func (s *ConditionalForwarder) SetDnsIpAddrs(v []string) *ConditionalForwarder {
 	s.DnsIpAddrs = v
 	return s
 }
@@ -2454,7 +2451,7 @@ type ConnectDirectoryInput struct {
 	// The size of the directory.
 	//
 	// Size is a required field
-	Size DirectorySize `type:"string" required:"true"`
+	Size DirectorySize `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2664,7 +2661,7 @@ type CreateComputerInput struct {
 
 	// An array of Attribute objects that contain any LDAP attributes to apply to
 	// the computer account.
-	ComputerAttributes []*Attribute `type:"list"`
+	ComputerAttributes []Attribute `type:"list"`
 
 	// The name of the computer account.
 	//
@@ -2723,9 +2720,6 @@ func (s *CreateComputerInput) Validate() error {
 	}
 	if s.ComputerAttributes != nil {
 		for i, v := range s.ComputerAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputerAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -2739,7 +2733,7 @@ func (s *CreateComputerInput) Validate() error {
 }
 
 // SetComputerAttributes sets the ComputerAttributes field's value.
-func (s *CreateComputerInput) SetComputerAttributes(v []*Attribute) *CreateComputerInput {
+func (s *CreateComputerInput) SetComputerAttributes(v []Attribute) *CreateComputerInput {
 	s.ComputerAttributes = v
 	return s
 }
@@ -2809,7 +2803,7 @@ type CreateConditionalForwarderInput struct {
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
 	//
 	// DnsIpAddrs is a required field
-	DnsIpAddrs []*string `type:"list" required:"true"`
+	DnsIpAddrs []string `type:"list" required:"true"`
 
 	// The fully qualified domain name (FQDN) of the remote domain with which you
 	// will set up a trust relationship.
@@ -2857,7 +2851,7 @@ func (s *CreateConditionalForwarderInput) SetDirectoryId(v string) *CreateCondit
 }
 
 // SetDnsIpAddrs sets the DnsIpAddrs field's value.
-func (s *CreateConditionalForwarderInput) SetDnsIpAddrs(v []*string) *CreateConditionalForwarderInput {
+func (s *CreateConditionalForwarderInput) SetDnsIpAddrs(v []string) *CreateConditionalForwarderInput {
 	s.DnsIpAddrs = v
 	return s
 }
@@ -2910,7 +2904,7 @@ type CreateDirectoryInput struct {
 	// The size of the directory.
 	//
 	// Size is a required field
-	Size DirectorySize `type:"string" required:"true"`
+	Size DirectorySize `type:"string" required:"true" enum:"true"`
 
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
@@ -3226,7 +3220,7 @@ type CreateTrustInput struct {
 	_ struct{} `type:"structure"`
 
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
-	ConditionalForwarderIpAddrs []*string `type:"list"`
+	ConditionalForwarderIpAddrs []string `type:"list"`
 
 	// The Directory ID of the Microsoft AD in the AWS cloud for which to establish
 	// the trust relationship.
@@ -3243,7 +3237,7 @@ type CreateTrustInput struct {
 	// The direction of the trust relationship.
 	//
 	// TrustDirection is a required field
-	TrustDirection TrustDirection `type:"string" required:"true"`
+	TrustDirection TrustDirection `type:"string" required:"true" enum:"true"`
 
 	// The trust password. The must be the same password that was used when creating
 	// the trust relationship on the external domain.
@@ -3252,7 +3246,7 @@ type CreateTrustInput struct {
 	TrustPassword *string `min:"1" type:"string" required:"true"`
 
 	// The trust relationship type.
-	TrustType TrustType `type:"string"`
+	TrustType TrustType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3294,7 +3288,7 @@ func (s *CreateTrustInput) Validate() error {
 }
 
 // SetConditionalForwarderIpAddrs sets the ConditionalForwarderIpAddrs field's value.
-func (s *CreateTrustInput) SetConditionalForwarderIpAddrs(v []*string) *CreateTrustInput {
+func (s *CreateTrustInput) SetConditionalForwarderIpAddrs(v []string) *CreateTrustInput {
 	s.ConditionalForwarderIpAddrs = v
 	return s
 }
@@ -3724,7 +3718,7 @@ type DescribeConditionalForwardersInput struct {
 	// The fully qualified domain names (FQDN) of the remote domains for which to
 	// get the list of associated conditional forwarders. If this member is null,
 	// all conditional forwarders are returned.
-	RemoteDomainNames []*string `type:"list"`
+	RemoteDomainNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -3758,7 +3752,7 @@ func (s *DescribeConditionalForwardersInput) SetDirectoryId(v string) *DescribeC
 }
 
 // SetRemoteDomainNames sets the RemoteDomainNames field's value.
-func (s *DescribeConditionalForwardersInput) SetRemoteDomainNames(v []*string) *DescribeConditionalForwardersInput {
+func (s *DescribeConditionalForwardersInput) SetRemoteDomainNames(v []string) *DescribeConditionalForwardersInput {
 	s.RemoteDomainNames = v
 	return s
 }
@@ -3769,7 +3763,7 @@ type DescribeConditionalForwardersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of conditional forwarders that have been created.
-	ConditionalForwarders []*ConditionalForwarder `type:"list"`
+	ConditionalForwarders []ConditionalForwarder `type:"list"`
 }
 
 // String returns the string representation
@@ -3783,7 +3777,7 @@ func (s DescribeConditionalForwardersOutput) GoString() string {
 }
 
 // SetConditionalForwarders sets the ConditionalForwarders field's value.
-func (s *DescribeConditionalForwardersOutput) SetConditionalForwarders(v []*ConditionalForwarder) *DescribeConditionalForwardersOutput {
+func (s *DescribeConditionalForwardersOutput) SetConditionalForwarders(v []ConditionalForwarder) *DescribeConditionalForwardersOutput {
 	s.ConditionalForwarders = v
 	return s
 }
@@ -3798,7 +3792,7 @@ type DescribeDirectoriesInput struct {
 	// are returned.
 	//
 	// An empty list results in an InvalidParameterException being thrown.
-	DirectoryIds []*string `type:"list"`
+	DirectoryIds []string `type:"list"`
 
 	// The maximum number of items to return. If this value is zero, the maximum
 	// number of items is specified by the limitations of the operation.
@@ -3820,7 +3814,7 @@ func (s DescribeDirectoriesInput) GoString() string {
 }
 
 // SetDirectoryIds sets the DirectoryIds field's value.
-func (s *DescribeDirectoriesInput) SetDirectoryIds(v []*string) *DescribeDirectoriesInput {
+func (s *DescribeDirectoriesInput) SetDirectoryIds(v []string) *DescribeDirectoriesInput {
 	s.DirectoryIds = v
 	return s
 }
@@ -3848,7 +3842,7 @@ type DescribeDirectoriesOutput struct {
 	// in the Limit member of the request. This occurs if there are less than the
 	// requested number of items left to retrieve, or if the limitations of the
 	// operation have been exceeded.
-	DirectoryDescriptions []*DirectoryDescription `type:"list"`
+	DirectoryDescriptions []DirectoryDescription `type:"list"`
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeDirectories to retrieve the next
@@ -3867,7 +3861,7 @@ func (s DescribeDirectoriesOutput) GoString() string {
 }
 
 // SetDirectoryDescriptions sets the DirectoryDescriptions field's value.
-func (s *DescribeDirectoriesOutput) SetDirectoryDescriptions(v []*DirectoryDescription) *DescribeDirectoriesOutput {
+func (s *DescribeDirectoriesOutput) SetDirectoryDescriptions(v []DirectoryDescription) *DescribeDirectoriesOutput {
 	s.DirectoryDescriptions = v
 	return s
 }
@@ -3889,7 +3883,7 @@ type DescribeDomainControllersInput struct {
 
 	// A list of identifiers for the domain controllers whose information will be
 	// provided.
-	DomainControllerIds []*string `type:"list"`
+	DomainControllerIds []string `type:"list"`
 
 	// The maximum number of items to return.
 	Limit *int64 `type:"integer"`
@@ -3930,7 +3924,7 @@ func (s *DescribeDomainControllersInput) SetDirectoryId(v string) *DescribeDomai
 }
 
 // SetDomainControllerIds sets the DomainControllerIds field's value.
-func (s *DescribeDomainControllersInput) SetDomainControllerIds(v []*string) *DescribeDomainControllersInput {
+func (s *DescribeDomainControllersInput) SetDomainControllerIds(v []string) *DescribeDomainControllersInput {
 	s.DomainControllerIds = v
 	return s
 }
@@ -3952,7 +3946,7 @@ type DescribeDomainControllersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// List of the DomainController objects that were retrieved.
-	DomainControllers []*DomainController `type:"list"`
+	DomainControllers []DomainController `type:"list"`
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeDomainControllers retrieve the
@@ -3971,7 +3965,7 @@ func (s DescribeDomainControllersOutput) GoString() string {
 }
 
 // SetDomainControllers sets the DomainControllers field's value.
-func (s *DescribeDomainControllersOutput) SetDomainControllers(v []*DomainController) *DescribeDomainControllersOutput {
+func (s *DescribeDomainControllersOutput) SetDomainControllers(v []DomainController) *DescribeDomainControllersOutput {
 	s.DomainControllers = v
 	return s
 }
@@ -3995,7 +3989,7 @@ type DescribeEventTopicsInput struct {
 	// is null, all associations for the specified Directory ID are returned.
 	//
 	// An empty list results in an InvalidParameterException being thrown.
-	TopicNames []*string `type:"list"`
+	TopicNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4015,7 +4009,7 @@ func (s *DescribeEventTopicsInput) SetDirectoryId(v string) *DescribeEventTopics
 }
 
 // SetTopicNames sets the TopicNames field's value.
-func (s *DescribeEventTopicsInput) SetTopicNames(v []*string) *DescribeEventTopicsInput {
+func (s *DescribeEventTopicsInput) SetTopicNames(v []string) *DescribeEventTopicsInput {
 	s.TopicNames = v
 	return s
 }
@@ -4027,7 +4021,7 @@ type DescribeEventTopicsOutput struct {
 
 	// A list of SNS topic names that receive status messages from the specified
 	// Directory ID.
-	EventTopics []*EventTopic `type:"list"`
+	EventTopics []EventTopic `type:"list"`
 }
 
 // String returns the string representation
@@ -4041,7 +4035,7 @@ func (s DescribeEventTopicsOutput) GoString() string {
 }
 
 // SetEventTopics sets the EventTopics field's value.
-func (s *DescribeEventTopicsOutput) SetEventTopics(v []*EventTopic) *DescribeEventTopicsOutput {
+func (s *DescribeEventTopicsOutput) SetEventTopics(v []EventTopic) *DescribeEventTopicsOutput {
 	s.EventTopics = v
 	return s
 }
@@ -4064,7 +4058,7 @@ type DescribeSnapshotsInput struct {
 	// A list of identifiers of the snapshots to obtain the information for. If
 	// this member is null or empty, all snapshots are returned using the Limit
 	// and NextToken members.
-	SnapshotIds []*string `type:"list"`
+	SnapshotIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4096,7 +4090,7 @@ func (s *DescribeSnapshotsInput) SetNextToken(v string) *DescribeSnapshotsInput 
 }
 
 // SetSnapshotIds sets the SnapshotIds field's value.
-func (s *DescribeSnapshotsInput) SetSnapshotIds(v []*string) *DescribeSnapshotsInput {
+func (s *DescribeSnapshotsInput) SetSnapshotIds(v []string) *DescribeSnapshotsInput {
 	s.SnapshotIds = v
 	return s
 }
@@ -4116,7 +4110,7 @@ type DescribeSnapshotsOutput struct {
 	// in the Limit member of the request. This occurs if there are less than the
 	// requested number of items left to retrieve, or if the limitations of the
 	// operation have been exceeded.
-	Snapshots []*Snapshot `type:"list"`
+	Snapshots []Snapshot `type:"list"`
 }
 
 // String returns the string representation
@@ -4136,7 +4130,7 @@ func (s *DescribeSnapshotsOutput) SetNextToken(v string) *DescribeSnapshotsOutpu
 }
 
 // SetSnapshots sets the Snapshots field's value.
-func (s *DescribeSnapshotsOutput) SetSnapshots(v []*Snapshot) *DescribeSnapshotsOutput {
+func (s *DescribeSnapshotsOutput) SetSnapshots(v []Snapshot) *DescribeSnapshotsOutput {
 	s.Snapshots = v
 	return s
 }
@@ -4164,7 +4158,7 @@ type DescribeTrustsInput struct {
 	// to the current account are returned.
 	//
 	// An empty list results in an InvalidParameterException being thrown.
-	TrustIds []*string `type:"list"`
+	TrustIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -4196,7 +4190,7 @@ func (s *DescribeTrustsInput) SetNextToken(v string) *DescribeTrustsInput {
 }
 
 // SetTrustIds sets the TrustIds field's value.
-func (s *DescribeTrustsInput) SetTrustIds(v []*string) *DescribeTrustsInput {
+func (s *DescribeTrustsInput) SetTrustIds(v []string) *DescribeTrustsInput {
 	s.TrustIds = v
 	return s
 }
@@ -4217,7 +4211,7 @@ type DescribeTrustsOutput struct {
 	// in the Limit member of the request. This occurs if there are less than the
 	// requested number of items left to retrieve, or if the limitations of the
 	// operation have been exceeded.
-	Trusts []*Trust `type:"list"`
+	Trusts []Trust `type:"list"`
 }
 
 // String returns the string representation
@@ -4237,7 +4231,7 @@ func (s *DescribeTrustsOutput) SetNextToken(v string) *DescribeTrustsOutput {
 }
 
 // SetTrusts sets the Trusts field's value.
-func (s *DescribeTrustsOutput) SetTrusts(v []*Trust) *DescribeTrustsOutput {
+func (s *DescribeTrustsOutput) SetTrusts(v []Trust) *DescribeTrustsOutput {
 	s.Trusts = v
 	return s
 }
@@ -4252,7 +4246,7 @@ type DirectoryConnectSettings struct {
 	// the on-premises directory.
 	//
 	// CustomerDnsIps is a required field
-	CustomerDnsIps []*string `type:"list" required:"true"`
+	CustomerDnsIps []string `type:"list" required:"true"`
 
 	// The username of an account in the on-premises directory that is used to connect
 	// to the directory. This account must have the following privileges:
@@ -4269,7 +4263,7 @@ type DirectoryConnectSettings struct {
 	// A list of subnet identifiers in the VPC in which the AD Connector is created.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `type:"list" required:"true"`
+	SubnetIds []string `type:"list" required:"true"`
 
 	// The identifier of the VPC in which the AD Connector is created.
 	//
@@ -4317,7 +4311,7 @@ func (s *DirectoryConnectSettings) Validate() error {
 }
 
 // SetCustomerDnsIps sets the CustomerDnsIps field's value.
-func (s *DirectoryConnectSettings) SetCustomerDnsIps(v []*string) *DirectoryConnectSettings {
+func (s *DirectoryConnectSettings) SetCustomerDnsIps(v []string) *DirectoryConnectSettings {
 	s.CustomerDnsIps = v
 	return s
 }
@@ -4329,7 +4323,7 @@ func (s *DirectoryConnectSettings) SetCustomerUserName(v string) *DirectoryConne
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *DirectoryConnectSettings) SetSubnetIds(v []*string) *DirectoryConnectSettings {
+func (s *DirectoryConnectSettings) SetSubnetIds(v []string) *DirectoryConnectSettings {
 	s.SubnetIds = v
 	return s
 }
@@ -4346,10 +4340,10 @@ type DirectoryConnectSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the Availability Zones that the directory is in.
-	AvailabilityZones []*string `type:"list"`
+	AvailabilityZones []string `type:"list"`
 
 	// The IP addresses of the AD Connector servers.
-	ConnectIps []*string `type:"list"`
+	ConnectIps []string `type:"list"`
 
 	// The username of the service account in the on-premises directory.
 	CustomerUserName *string `min:"1" type:"string"`
@@ -4358,7 +4352,7 @@ type DirectoryConnectSettingsDescription struct {
 	SecurityGroupId *string `type:"string"`
 
 	// A list of subnet identifiers in the VPC that the AD connector is in.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 
 	// The identifier of the VPC that the AD Connector is in.
 	VpcId *string `type:"string"`
@@ -4375,13 +4369,13 @@ func (s DirectoryConnectSettingsDescription) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DirectoryConnectSettingsDescription) SetAvailabilityZones(v []*string) *DirectoryConnectSettingsDescription {
+func (s *DirectoryConnectSettingsDescription) SetAvailabilityZones(v []string) *DirectoryConnectSettingsDescription {
 	s.AvailabilityZones = v
 	return s
 }
 
 // SetConnectIps sets the ConnectIps field's value.
-func (s *DirectoryConnectSettingsDescription) SetConnectIps(v []*string) *DirectoryConnectSettingsDescription {
+func (s *DirectoryConnectSettingsDescription) SetConnectIps(v []string) *DirectoryConnectSettingsDescription {
 	s.ConnectIps = v
 	return s
 }
@@ -4399,7 +4393,7 @@ func (s *DirectoryConnectSettingsDescription) SetSecurityGroupId(v string) *Dire
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *DirectoryConnectSettingsDescription) SetSubnetIds(v []*string) *DirectoryConnectSettingsDescription {
+func (s *DirectoryConnectSettingsDescription) SetSubnetIds(v []string) *DirectoryConnectSettingsDescription {
 	s.SubnetIds = v
 	return s
 }
@@ -4444,7 +4438,7 @@ type DirectoryDescription struct {
 	// AD directory servers. For an AD Connector directory, these are the IP addresses
 	// of the DNS servers or domain controllers in the on-premises directory to
 	// which the AD Connector is connected.
-	DnsIpAddrs []*string `type:"list"`
+	DnsIpAddrs []string `type:"list"`
 
 	// Specifies when the directory was created.
 	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -4457,20 +4451,20 @@ type DirectoryDescription struct {
 	RadiusSettings *RadiusSettings `type:"structure"`
 
 	// The status of the RADIUS MFA server connection.
-	RadiusStatus RadiusStatus `type:"string"`
+	RadiusStatus RadiusStatus `type:"string" enum:"true"`
 
 	// The short name of the directory.
 	ShortName *string `type:"string"`
 
 	// The directory size.
-	Size DirectorySize `type:"string"`
+	Size DirectorySize `type:"string" enum:"true"`
 
 	// Indicates if single-sign on is enabled for the directory. For more information,
 	// see EnableSso and DisableSso.
 	SsoEnabled *bool `type:"boolean"`
 
 	// The current stage of the directory.
-	Stage DirectoryStage `type:"string"`
+	Stage DirectoryStage `type:"string" enum:"true"`
 
 	// The date and time that the stage was last updated.
 	StageLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -4479,7 +4473,7 @@ type DirectoryDescription struct {
 	StageReason *string `type:"string"`
 
 	// The directory size.
-	Type DirectoryType `type:"string"`
+	Type DirectoryType `type:"string" enum:"true"`
 
 	// A DirectoryVpcSettingsDescription object that contains additional information
 	// about a directory. This member is only present if the directory is a Simple
@@ -4534,7 +4528,7 @@ func (s *DirectoryDescription) SetDirectoryId(v string) *DirectoryDescription {
 }
 
 // SetDnsIpAddrs sets the DnsIpAddrs field's value.
-func (s *DirectoryDescription) SetDnsIpAddrs(v []*string) *DirectoryDescription {
+func (s *DirectoryDescription) SetDnsIpAddrs(v []string) *DirectoryDescription {
 	s.DnsIpAddrs = v
 	return s
 }
@@ -4718,7 +4712,7 @@ type DirectoryVpcSettings struct {
 	// directory server and a DNS server in each of these subnets.
 	//
 	// SubnetIds is a required field
-	SubnetIds []*string `type:"list" required:"true"`
+	SubnetIds []string `type:"list" required:"true"`
 
 	// The identifier of the VPC in which to create the directory.
 	//
@@ -4755,7 +4749,7 @@ func (s *DirectoryVpcSettings) Validate() error {
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *DirectoryVpcSettings) SetSubnetIds(v []*string) *DirectoryVpcSettings {
+func (s *DirectoryVpcSettings) SetSubnetIds(v []string) *DirectoryVpcSettings {
 	s.SubnetIds = v
 	return s
 }
@@ -4772,7 +4766,7 @@ type DirectoryVpcSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The list of Availability Zones that the directory is in.
-	AvailabilityZones []*string `type:"list"`
+	AvailabilityZones []string `type:"list"`
 
 	// The security group identifier for the directory. If the directory was created
 	// before 8/1/2014, this is the identifier of the directory members security
@@ -4781,7 +4775,7 @@ type DirectoryVpcSettingsDescription struct {
 	SecurityGroupId *string `type:"string"`
 
 	// The identifiers of the subnets for the directory servers.
-	SubnetIds []*string `type:"list"`
+	SubnetIds []string `type:"list"`
 
 	// The identifier of the VPC that the directory is in.
 	VpcId *string `type:"string"`
@@ -4798,7 +4792,7 @@ func (s DirectoryVpcSettingsDescription) GoString() string {
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DirectoryVpcSettingsDescription) SetAvailabilityZones(v []*string) *DirectoryVpcSettingsDescription {
+func (s *DirectoryVpcSettingsDescription) SetAvailabilityZones(v []string) *DirectoryVpcSettingsDescription {
 	s.AvailabilityZones = v
 	return s
 }
@@ -4810,7 +4804,7 @@ func (s *DirectoryVpcSettingsDescription) SetSecurityGroupId(v string) *Director
 }
 
 // SetSubnetIds sets the SubnetIds field's value.
-func (s *DirectoryVpcSettingsDescription) SetSubnetIds(v []*string) *DirectoryVpcSettingsDescription {
+func (s *DirectoryVpcSettingsDescription) SetSubnetIds(v []string) *DirectoryVpcSettingsDescription {
 	s.SubnetIds = v
 	return s
 }
@@ -4990,7 +4984,7 @@ type DomainController struct {
 	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the domain controller.
-	Status DomainControllerStatus `type:"string"`
+	Status DomainControllerStatus `type:"string" enum:"true"`
 
 	// The date and time that the status was last updated.
 	StatusLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -5256,7 +5250,7 @@ type EventTopic struct {
 	DirectoryId *string `type:"string"`
 
 	// The topic registration status.
-	Status TopicStatus `type:"string"`
+	Status TopicStatus `type:"string" enum:"true"`
 
 	// The SNS topic ARN (Amazon Resource Name).
 	TopicArn *string `type:"string"`
@@ -5469,7 +5463,7 @@ type IpRouteInfo struct {
 	DirectoryId *string `type:"string"`
 
 	// The status of the IP address block.
-	IpRouteStatusMsg IpRouteStatusMsg `type:"string"`
+	IpRouteStatusMsg IpRouteStatusMsg `type:"string" enum:"true"`
 
 	// The reason for the IpRouteStatusMsg.
 	IpRouteStatusReason *string `type:"string"`
@@ -5586,7 +5580,7 @@ type ListIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of IpRoutes.
-	IpRoutesInfo []*IpRouteInfo `type:"list"`
+	IpRoutesInfo []IpRouteInfo `type:"list"`
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to ListIpRoutes to retrieve the next set of
@@ -5605,7 +5599,7 @@ func (s ListIpRoutesOutput) GoString() string {
 }
 
 // SetIpRoutesInfo sets the IpRoutesInfo field's value.
-func (s *ListIpRoutesOutput) SetIpRoutesInfo(v []*IpRouteInfo) *ListIpRoutesOutput {
+func (s *ListIpRoutesOutput) SetIpRoutesInfo(v []IpRouteInfo) *ListIpRoutesOutput {
 	s.IpRoutesInfo = v
 	return s
 }
@@ -5686,7 +5680,7 @@ type ListSchemaExtensionsOutput struct {
 	NextToken *string `type:"string"`
 
 	// Information about the schema extensions applied to the directory.
-	SchemaExtensionsInfo []*SchemaExtensionInfo `type:"list"`
+	SchemaExtensionsInfo []SchemaExtensionInfo `type:"list"`
 }
 
 // String returns the string representation
@@ -5706,7 +5700,7 @@ func (s *ListSchemaExtensionsOutput) SetNextToken(v string) *ListSchemaExtension
 }
 
 // SetSchemaExtensionsInfo sets the SchemaExtensionsInfo field's value.
-func (s *ListSchemaExtensionsOutput) SetSchemaExtensionsInfo(v []*SchemaExtensionInfo) *ListSchemaExtensionsOutput {
+func (s *ListSchemaExtensionsOutput) SetSchemaExtensionsInfo(v []SchemaExtensionInfo) *ListSchemaExtensionsOutput {
 	s.SchemaExtensionsInfo = v
 	return s
 }
@@ -5777,7 +5771,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string `type:"string"`
 
 	// List of tags returned by the ListTagsForResource operation.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -5797,7 +5791,7 @@ func (s *ListTagsForResourceOutput) SetNextToken(v string) *ListTagsForResourceO
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
 	s.Tags = v
 	return s
 }
@@ -5809,7 +5803,7 @@ type RadiusSettings struct {
 	_ struct{} `type:"structure"`
 
 	// The protocol specified for your RADIUS endpoints.
-	AuthenticationProtocol RadiusAuthenticationProtocol `type:"string"`
+	AuthenticationProtocol RadiusAuthenticationProtocol `type:"string" enum:"true"`
 
 	// Not currently used.
 	DisplayLabel *string `min:"1" type:"string"`
@@ -5825,7 +5819,7 @@ type RadiusSettings struct {
 
 	// An array of strings that contains the IP addresses of the RADIUS server endpoints,
 	// or the IP addresses of your RADIUS server load balancer.
-	RadiusServers []*string `type:"list"`
+	RadiusServers []string `type:"list"`
 
 	// The amount of time, in seconds, to wait for the RADIUS server to respond.
 	RadiusTimeout *int64 `min:"1" type:"integer"`
@@ -5894,7 +5888,7 @@ func (s *RadiusSettings) SetRadiusRetries(v int64) *RadiusSettings {
 }
 
 // SetRadiusServers sets the RadiusServers field's value.
-func (s *RadiusSettings) SetRadiusServers(v []*string) *RadiusSettings {
+func (s *RadiusSettings) SetRadiusServers(v []string) *RadiusSettings {
 	s.RadiusServers = v
 	return s
 }
@@ -6000,7 +5994,7 @@ type RemoveIpRoutesInput struct {
 	// IP address blocks that you want to remove.
 	//
 	// CidrIps is a required field
-	CidrIps []*string `type:"list" required:"true"`
+	CidrIps []string `type:"list" required:"true"`
 
 	// Identifier (ID) of the directory from which you want to remove the IP addresses.
 	//
@@ -6037,7 +6031,7 @@ func (s *RemoveIpRoutesInput) Validate() error {
 }
 
 // SetCidrIps sets the CidrIps field's value.
-func (s *RemoveIpRoutesInput) SetCidrIps(v []*string) *RemoveIpRoutesInput {
+func (s *RemoveIpRoutesInput) SetCidrIps(v []string) *RemoveIpRoutesInput {
 	s.CidrIps = v
 	return s
 }
@@ -6075,7 +6069,7 @@ type RemoveTagsFromResourceInput struct {
 	// The tag key (name) of the tag to be removed.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6113,7 +6107,7 @@ func (s *RemoveTagsFromResourceInput) SetResourceId(v string) *RemoveTagsFromRes
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []*string) *RemoveTagsFromResourceInput {
+func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
 	s.TagKeys = v
 	return s
 }
@@ -6208,7 +6202,7 @@ type SchemaExtensionInfo struct {
 	SchemaExtensionId *string `type:"string"`
 
 	// The current status of the schema extension.
-	SchemaExtensionStatus SchemaExtensionStatus `type:"string"`
+	SchemaExtensionStatus SchemaExtensionStatus `type:"string" enum:"true"`
 
 	// The reason for the SchemaExtensionStatus.
 	SchemaExtensionStatusReason *string `type:"string"`
@@ -6288,10 +6282,10 @@ type Snapshot struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The snapshot status.
-	Status SnapshotStatus `type:"string"`
+	Status SnapshotStatus `type:"string" enum:"true"`
 
 	// The snapshot type.
-	Type SnapshotType `type:"string"`
+	Type SnapshotType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6585,19 +6579,19 @@ type Trust struct {
 	StateLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The trust relationship direction.
-	TrustDirection TrustDirection `type:"string"`
+	TrustDirection TrustDirection `type:"string" enum:"true"`
 
 	// The unique ID of the trust relationship.
 	TrustId *string `type:"string"`
 
 	// The trust relationship state.
-	TrustState TrustState `type:"string"`
+	TrustState TrustState `type:"string" enum:"true"`
 
 	// The reason for the TrustState.
 	TrustStateReason *string `type:"string"`
 
 	// The trust relationship type.
-	TrustType TrustType `type:"string"`
+	TrustType TrustType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -6685,7 +6679,7 @@ type UpdateConditionalForwarderInput struct {
 	// forwarder.
 	//
 	// DnsIpAddrs is a required field
-	DnsIpAddrs []*string `type:"list" required:"true"`
+	DnsIpAddrs []string `type:"list" required:"true"`
 
 	// The fully qualified domain name (FQDN) of the remote domain with which you
 	// will set up a trust relationship.
@@ -6733,7 +6727,7 @@ func (s *UpdateConditionalForwarderInput) SetDirectoryId(v string) *UpdateCondit
 }
 
 // SetDnsIpAddrs sets the DnsIpAddrs field's value.
-func (s *UpdateConditionalForwarderInput) SetDnsIpAddrs(v []*string) *UpdateConditionalForwarderInput {
+func (s *UpdateConditionalForwarderInput) SetDnsIpAddrs(v []string) *UpdateConditionalForwarderInput {
 	s.DnsIpAddrs = v
 	return s
 }

@@ -2345,7 +2345,7 @@ type CreateGrantInput struct {
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 
 	// The principal that is given permission to perform the operations that the
 	// grant permits.
@@ -2449,7 +2449,7 @@ func (s *CreateGrantInput) SetConstraints(v *GrantConstraints) *CreateGrantInput
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *CreateGrantInput) SetGrantTokens(v []*string) *CreateGrantInput {
+func (s *CreateGrantInput) SetGrantTokens(v []string) *CreateGrantInput {
 	s.GrantTokens = v
 	return s
 }
@@ -2550,7 +2550,7 @@ type CreateKeyInput struct {
 	// The intended use of the CMK.
 	//
 	// You can use CMKs only for symmetric encryption and decryption.
-	KeyUsage KeyUsageType `type:"string"`
+	KeyUsage KeyUsageType `type:"string" enum:"true"`
 
 	// The source of the CMK's key material.
 	//
@@ -2562,7 +2562,7 @@ type CreateKeyInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// The CMK's Origin is immutable and is set when the CMK is created.
-	Origin OriginType `type:"string"`
+	Origin OriginType `type:"string" enum:"true"`
 
 	// The key policy to attach to the CMK.
 	//
@@ -2595,7 +2595,7 @@ type CreateKeyInput struct {
 	//
 	// Use this parameter to tag the CMK when it is created. Alternately, you can
 	// omit this parameter and instead tag the CMK after it is created using TagResource.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -2616,9 +2616,6 @@ func (s *CreateKeyInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -2662,7 +2659,7 @@ func (s *CreateKeyInput) SetPolicy(v string) *CreateKeyInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *CreateKeyInput) SetTags(v []*Tag) *CreateKeyInput {
+func (s *CreateKeyInput) SetTags(v []Tag) *CreateKeyInput {
 	s.Tags = v
 	return s
 }
@@ -2705,13 +2702,13 @@ type DecryptInput struct {
 	// The encryption context. If this was specified in the Encrypt function, it
 	// must be specified here or the decryption operation will fail. For more information,
 	// see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html).
-	EncryptionContext map[string]*string `type:"map"`
+	EncryptionContext map[string]string `type:"map"`
 
 	// A list of grant tokens.
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 }
 
 // String returns the string representation
@@ -2748,13 +2745,13 @@ func (s *DecryptInput) SetCiphertextBlob(v []byte) *DecryptInput {
 }
 
 // SetEncryptionContext sets the EncryptionContext field's value.
-func (s *DecryptInput) SetEncryptionContext(v map[string]*string) *DecryptInput {
+func (s *DecryptInput) SetEncryptionContext(v map[string]string) *DecryptInput {
 	s.EncryptionContext = v
 	return s
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *DecryptInput) SetGrantTokens(v []*string) *DecryptInput {
+func (s *DecryptInput) SetGrantTokens(v []string) *DecryptInput {
 	s.GrantTokens = v
 	return s
 }
@@ -2929,7 +2926,7 @@ type DescribeKeyInput struct {
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 
 	// A unique identifier for the customer master key. This value can be a globally
 	// unique identifier, a fully specified ARN to either an alias or a key, or
@@ -2975,7 +2972,7 @@ func (s *DescribeKeyInput) Validate() error {
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *DescribeKeyInput) SetGrantTokens(v []*string) *DescribeKeyInput {
+func (s *DescribeKeyInput) SetGrantTokens(v []string) *DescribeKeyInput {
 	s.GrantTokens = v
 	return s
 }
@@ -3271,13 +3268,13 @@ type EncryptInput struct {
 	// encryption. If used here, the same value must be supplied to the Decrypt
 	// API or decryption will fail. For more information, see Encryption Context
 	// (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html).
-	EncryptionContext map[string]*string `type:"map"`
+	EncryptionContext map[string]string `type:"map"`
 
 	// A list of grant tokens.
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 
 	// A unique identifier for the customer master key. This value can be a globally
 	// unique identifier, a fully specified ARN to either an alias or a key, or
@@ -3337,13 +3334,13 @@ func (s *EncryptInput) Validate() error {
 }
 
 // SetEncryptionContext sets the EncryptionContext field's value.
-func (s *EncryptInput) SetEncryptionContext(v map[string]*string) *EncryptInput {
+func (s *EncryptInput) SetEncryptionContext(v map[string]string) *EncryptInput {
 	s.EncryptionContext = v
 	return s
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *EncryptInput) SetGrantTokens(v []*string) *EncryptInput {
+func (s *EncryptInput) SetGrantTokens(v []string) *EncryptInput {
 	s.GrantTokens = v
 	return s
 }
@@ -3404,13 +3401,13 @@ type GenerateDataKeyInput struct {
 	//
 	// For more information, see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
 	// in the AWS Key Management Service Developer Guide.
-	EncryptionContext map[string]*string `type:"map"`
+	EncryptionContext map[string]string `type:"map"`
 
 	// A list of grant tokens.
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 
 	// The identifier of the CMK under which to generate and encrypt the data encryption
 	// key.
@@ -3432,7 +3429,7 @@ type GenerateDataKeyInput struct {
 
 	// The length of the data encryption key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key.
-	KeySpec DataKeySpec `type:"string"`
+	KeySpec DataKeySpec `type:"string" enum:"true"`
 
 	// The length of the data encryption key in bytes. For example, use the value
 	// 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key
@@ -3472,13 +3469,13 @@ func (s *GenerateDataKeyInput) Validate() error {
 }
 
 // SetEncryptionContext sets the EncryptionContext field's value.
-func (s *GenerateDataKeyInput) SetEncryptionContext(v map[string]*string) *GenerateDataKeyInput {
+func (s *GenerateDataKeyInput) SetEncryptionContext(v map[string]string) *GenerateDataKeyInput {
 	s.EncryptionContext = v
 	return s
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *GenerateDataKeyInput) SetGrantTokens(v []*string) *GenerateDataKeyInput {
+func (s *GenerateDataKeyInput) SetGrantTokens(v []string) *GenerateDataKeyInput {
 	s.GrantTokens = v
 	return s
 }
@@ -3557,13 +3554,13 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	//
 	// For more information, see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
 	// in the AWS Key Management Service Developer Guide.
-	EncryptionContext map[string]*string `type:"map"`
+	EncryptionContext map[string]string `type:"map"`
 
 	// A list of grant tokens.
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 
 	// The identifier of the CMK under which to generate and encrypt the data encryption
 	// key.
@@ -3585,7 +3582,7 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 
 	// The length of the data encryption key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key.
-	KeySpec DataKeySpec `type:"string"`
+	KeySpec DataKeySpec `type:"string" enum:"true"`
 
 	// The length of the data encryption key in bytes. For example, use the value
 	// 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key
@@ -3625,13 +3622,13 @@ func (s *GenerateDataKeyWithoutPlaintextInput) Validate() error {
 }
 
 // SetEncryptionContext sets the EncryptionContext field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetEncryptionContext(v map[string]*string) *GenerateDataKeyWithoutPlaintextInput {
+func (s *GenerateDataKeyWithoutPlaintextInput) SetEncryptionContext(v map[string]string) *GenerateDataKeyWithoutPlaintextInput {
 	s.EncryptionContext = v
 	return s
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetGrantTokens(v []*string) *GenerateDataKeyWithoutPlaintextInput {
+func (s *GenerateDataKeyWithoutPlaintextInput) SetGrantTokens(v []string) *GenerateDataKeyWithoutPlaintextInput {
 	s.GrantTokens = v
 	return s
 }
@@ -3939,13 +3936,13 @@ type GetParametersForImportInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// WrappingAlgorithm is a required field
-	WrappingAlgorithm AlgorithmSpec `type:"string" required:"true"`
+	WrappingAlgorithm AlgorithmSpec `type:"string" required:"true" enum:"true"`
 
 	// The type of wrapping key (public key) to return in the response. Only 2048-bit
 	// RSA public keys are supported.
 	//
 	// WrappingKeySpec is a required field
-	WrappingKeySpec WrappingKeySpec `type:"string" required:"true"`
+	WrappingKeySpec WrappingKeySpec `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4079,14 +4076,14 @@ type GrantConstraints struct {
 	// operations allowed by the grant include encryption context that matches this
 	// list, the grant allows the operation. Otherwise, the grant does not allow
 	// the operation.
-	EncryptionContextEquals map[string]*string `type:"map"`
+	EncryptionContextEquals map[string]string `type:"map"`
 
 	// A list of key-value pairs, all of which must be present in the encryption
 	// context of certain subsequent operations that the grant allows. When certain
 	// subsequent operations allowed by the grant include encryption context that
 	// matches this list or is a superset of this list, the grant allows the operation.
 	// Otherwise, the grant does not allow the operation.
-	EncryptionContextSubset map[string]*string `type:"map"`
+	EncryptionContextSubset map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -4100,13 +4097,13 @@ func (s GrantConstraints) GoString() string {
 }
 
 // SetEncryptionContextEquals sets the EncryptionContextEquals field's value.
-func (s *GrantConstraints) SetEncryptionContextEquals(v map[string]*string) *GrantConstraints {
+func (s *GrantConstraints) SetEncryptionContextEquals(v map[string]string) *GrantConstraints {
 	s.EncryptionContextEquals = v
 	return s
 }
 
 // SetEncryptionContextSubset sets the EncryptionContextSubset field's value.
-func (s *GrantConstraints) SetEncryptionContextSubset(v map[string]*string) *GrantConstraints {
+func (s *GrantConstraints) SetEncryptionContextSubset(v map[string]string) *GrantConstraints {
 	s.EncryptionContextSubset = v
 	return s
 }
@@ -4227,7 +4224,7 @@ type ImportKeyMaterialInput struct {
 	// Specifies whether the key material expires. The default is KEY_MATERIAL_EXPIRES,
 	// in which case you must include the ValidTo parameter. When this parameter
 	// is set to KEY_MATERIAL_DOES_NOT_EXPIRE, you must omit the ValidTo parameter.
-	ExpirationModel ExpirationModelType `type:"string"`
+	ExpirationModel ExpirationModelType `type:"string" enum:"true"`
 
 	// The import token that you received in the response to a previous GetParametersForImport
 	// request. It must be from the same response that contained the public key
@@ -4410,7 +4407,7 @@ type KeyMetadata struct {
 
 	// Specifies whether the CMK's key material expires. This value is present only
 	// when Origin is EXTERNAL, otherwise this value is omitted.
-	ExpirationModel ExpirationModelType `type:"string"`
+	ExpirationModel ExpirationModelType `type:"string" enum:"true"`
 
 	// The globally unique identifier for the CMK.
 	//
@@ -4420,25 +4417,25 @@ type KeyMetadata struct {
 	// The CMK's manager. CMKs are either customer-managed or AWS-managed. For more
 	// information about the difference, see Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 	// in the AWS Key Management Service Developer Guide.
-	KeyManager KeyManagerType `type:"string"`
+	KeyManager KeyManagerType `type:"string" enum:"true"`
 
 	// The state of the CMK.
 	//
 	// For more information about how key state affects the use of a CMK, see How
 	// Key State Affects the Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 	// in the AWS Key Management Service Developer Guide.
-	KeyState KeyState `type:"string"`
+	KeyState KeyState `type:"string" enum:"true"`
 
 	// The cryptographic operations for which you can use the CMK. Currently the
 	// only allowed value is ENCRYPT_DECRYPT, which means you can use the CMK for
 	// the Encrypt and Decrypt operations.
-	KeyUsage KeyUsageType `type:"string"`
+	KeyUsage KeyUsageType `type:"string" enum:"true"`
 
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
 	// created the key material. When this value is EXTERNAL, the key material was
 	// imported from your existing key management infrastructure or the CMK lacks
 	// key material.
-	Origin OriginType `type:"string"`
+	Origin OriginType `type:"string" enum:"true"`
 
 	// The time at which the imported key material expires. When the key material
 	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This
@@ -4596,7 +4593,7 @@ type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of key aliases in the user's account.
-	Aliases []*AliasListEntry `type:"list"`
+	Aliases []AliasListEntry `type:"list"`
 
 	// When Truncated is true, this element is present and contains the value to
 	// use for the Marker parameter in a subsequent request.
@@ -4620,7 +4617,7 @@ func (s ListAliasesOutput) GoString() string {
 }
 
 // SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []*AliasListEntry) *ListAliasesOutput {
+func (s *ListAliasesOutput) SetAliases(v []AliasListEntry) *ListAliasesOutput {
 	s.Aliases = v
 	return s
 }
@@ -4807,7 +4804,7 @@ type ListKeyPoliciesOutput struct {
 
 	// A list of policy names. Currently, there is only one policy and it is named
 	// "Default".
-	PolicyNames []*string `type:"list"`
+	PolicyNames []string `type:"list"`
 
 	// A flag that indicates whether there are more items in the list. When this
 	// value is true, the list in this response is truncated. To retrieve more items,
@@ -4833,7 +4830,7 @@ func (s *ListKeyPoliciesOutput) SetNextMarker(v string) *ListKeyPoliciesOutput {
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *ListKeyPoliciesOutput) SetPolicyNames(v []*string) *ListKeyPoliciesOutput {
+func (s *ListKeyPoliciesOutput) SetPolicyNames(v []string) *ListKeyPoliciesOutput {
 	s.PolicyNames = v
 	return s
 }
@@ -4905,7 +4902,7 @@ type ListKeysOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of keys.
-	Keys []*KeyListEntry `type:"list"`
+	Keys []KeyListEntry `type:"list"`
 
 	// When Truncated is true, this element is present and contains the value to
 	// use for the Marker parameter in a subsequent request.
@@ -4929,7 +4926,7 @@ func (s ListKeysOutput) GoString() string {
 }
 
 // SetKeys sets the Keys field's value.
-func (s *ListKeysOutput) SetKeys(v []*KeyListEntry) *ListKeysOutput {
+func (s *ListKeysOutput) SetKeys(v []KeyListEntry) *ListKeysOutput {
 	s.Keys = v
 	return s
 }
@@ -5039,7 +5036,7 @@ type ListResourceTagsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// A list of tags. Each tag consists of a tag key and a tag value.
-	Tags []*Tag `type:"list"`
+	Tags []Tag `type:"list"`
 
 	// A flag that indicates whether there are more items in the list. When this
 	// value is true, the list in this response is truncated. To retrieve more items,
@@ -5065,7 +5062,7 @@ func (s *ListResourceTagsOutput) SetNextMarker(v string) *ListResourceTagsOutput
 }
 
 // SetTags sets the Tags field's value.
-func (s *ListResourceTagsOutput) SetTags(v []*Tag) *ListResourceTagsOutput {
+func (s *ListResourceTagsOutput) SetTags(v []Tag) *ListResourceTagsOutput {
 	s.Tags = v
 	return s
 }
@@ -5162,7 +5159,7 @@ type ListRetirableGrantsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of grants.
-	Grants []*GrantListEntry `type:"list"`
+	Grants []GrantListEntry `type:"list"`
 
 	// When Truncated is true, this element is present and contains the value to
 	// use for the Marker parameter in a subsequent request.
@@ -5186,7 +5183,7 @@ func (s ListRetirableGrantsOutput) GoString() string {
 }
 
 // SetGrants sets the Grants field's value.
-func (s *ListRetirableGrantsOutput) SetGrants(v []*GrantListEntry) *ListRetirableGrantsOutput {
+func (s *ListRetirableGrantsOutput) SetGrants(v []GrantListEntry) *ListRetirableGrantsOutput {
 	s.Grants = v
 	return s
 }
@@ -5356,7 +5353,7 @@ type ReEncryptInput struct {
 	CiphertextBlob []byte `min:"1" type:"blob" required:"true"`
 
 	// Encryption context to use when the data is reencrypted.
-	DestinationEncryptionContext map[string]*string `type:"map"`
+	DestinationEncryptionContext map[string]string `type:"map"`
 
 	// A unique identifier for the CMK to use to reencrypt the data. This value
 	// can be a globally unique identifier, a fully specified ARN to either an alias
@@ -5377,11 +5374,11 @@ type ReEncryptInput struct {
 	//
 	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string `type:"list"`
+	GrantTokens []string `type:"list"`
 
 	// Encryption context used to encrypt and decrypt the data specified in the
 	// CiphertextBlob parameter.
-	SourceEncryptionContext map[string]*string `type:"map"`
+	SourceEncryptionContext map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -5425,7 +5422,7 @@ func (s *ReEncryptInput) SetCiphertextBlob(v []byte) *ReEncryptInput {
 }
 
 // SetDestinationEncryptionContext sets the DestinationEncryptionContext field's value.
-func (s *ReEncryptInput) SetDestinationEncryptionContext(v map[string]*string) *ReEncryptInput {
+func (s *ReEncryptInput) SetDestinationEncryptionContext(v map[string]string) *ReEncryptInput {
 	s.DestinationEncryptionContext = v
 	return s
 }
@@ -5437,13 +5434,13 @@ func (s *ReEncryptInput) SetDestinationKeyId(v string) *ReEncryptInput {
 }
 
 // SetGrantTokens sets the GrantTokens field's value.
-func (s *ReEncryptInput) SetGrantTokens(v []*string) *ReEncryptInput {
+func (s *ReEncryptInput) SetGrantTokens(v []string) *ReEncryptInput {
 	s.GrantTokens = v
 	return s
 }
 
 // SetSourceEncryptionContext sets the SourceEncryptionContext field's value.
-func (s *ReEncryptInput) SetSourceEncryptionContext(v map[string]*string) *ReEncryptInput {
+func (s *ReEncryptInput) SetSourceEncryptionContext(v map[string]string) *ReEncryptInput {
 	s.SourceEncryptionContext = v
 	return s
 }
@@ -5835,7 +5832,7 @@ type TagResourceInput struct {
 	// One or more tags. Each tag consists of a tag key and a tag value.
 	//
 	// Tags is a required field
-	Tags []*Tag `type:"list" required:"true"`
+	Tags []Tag `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5864,9 +5861,6 @@ func (s *TagResourceInput) Validate() error {
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
@@ -5886,7 +5880,7 @@ func (s *TagResourceInput) SetKeyId(v string) *TagResourceInput {
 }
 
 // SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 	s.Tags = v
 	return s
 }
@@ -5923,7 +5917,7 @@ type UntagResourceInput struct {
 	// One or more tag keys. Specify only the tag keys, not the tag values.
 	//
 	// TagKeys is a required field
-	TagKeys []*string `type:"list" required:"true"`
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5964,7 +5958,7 @@ func (s *UntagResourceInput) SetKeyId(v string) *UntagResourceInput {
 }
 
 // SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 	s.TagKeys = v
 	return s
 }

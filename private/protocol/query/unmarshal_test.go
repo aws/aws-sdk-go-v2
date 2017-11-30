@@ -553,11 +553,11 @@ type OutputService4TestShapeOutputService4TestCaseOperation1Input struct {
 type OutputService4TestShapeOutputService4TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*string `type:"list"`
+	ListMember []string `type:"list"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) SetListMember(v []*string) *OutputService4TestShapeOutputService4TestCaseOperation1Output {
+func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) SetListMember(v []string) *OutputService4TestShapeOutputService4TestCaseOperation1Output {
 	s.ListMember = v
 	return s
 }
@@ -665,11 +665,11 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
 type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*string `locationNameList:"item" type:"list"`
+	ListMember []string `locationNameList:"item" type:"list"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetListMember(v []*string) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
+func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetListMember(v []string) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
 	s.ListMember = v
 	return s
 }
@@ -777,11 +777,11 @@ type OutputService6TestShapeOutputService6TestCaseOperation1Input struct {
 type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*string `type:"list" flattened:"true"`
+	ListMember []string `type:"list" flattened:"true"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetListMember(v []*string) *OutputService6TestShapeOutputService6TestCaseOperation1Output {
+func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetListMember(v []string) *OutputService6TestShapeOutputService6TestCaseOperation1Output {
 	s.ListMember = v
 	return s
 }
@@ -889,11 +889,11 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
 type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*string `type:"list" flattened:"true"`
+	ListMember []string `type:"list" flattened:"true"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetListMember(v []*string) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
+func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetListMember(v []string) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
 	s.ListMember = v
 	return s
 }
@@ -1001,11 +1001,11 @@ type OutputService8TestShapeOutputService8TestCaseOperation1Input struct {
 type OutputService8TestShapeOutputService8TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	List []*OutputService8TestShapeStructureShape `type:"list"`
+	List []OutputService8TestShapeStructureShape `type:"list"`
 }
 
 // SetList sets the List field's value.
-func (s *OutputService8TestShapeOutputService8TestCaseOperation1Output) SetList(v []*OutputService8TestShapeStructureShape) *OutputService8TestShapeOutputService8TestCaseOperation1Output {
+func (s *OutputService8TestShapeOutputService8TestCaseOperation1Output) SetList(v []OutputService8TestShapeStructureShape) *OutputService8TestShapeOutputService8TestCaseOperation1Output {
 	s.List = v
 	return s
 }
@@ -1141,11 +1141,11 @@ type OutputService9TestShapeOutputService9TestCaseOperation1Input struct {
 type OutputService9TestShapeOutputService9TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	List []*OutputService9TestShapeStructureShape `type:"list" flattened:"true"`
+	List []OutputService9TestShapeStructureShape `type:"list" flattened:"true"`
 }
 
 // SetList sets the List field's value.
-func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetList(v []*OutputService9TestShapeStructureShape) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
+func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetList(v []OutputService9TestShapeStructureShape) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
 	s.List = v
 	return s
 }
@@ -1281,11 +1281,11 @@ type OutputService10TestShapeOutputService10TestCaseOperation1Input struct {
 type OutputService10TestShapeOutputService10TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	List []*string `locationNameList:"NamedList" type:"list" flattened:"true"`
+	List []string `locationNameList:"NamedList" type:"list" flattened:"true"`
 }
 
 // SetList sets the List field's value.
-func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetList(v []*string) *OutputService10TestShapeOutputService10TestCaseOperation1Output {
+func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetList(v []string) *OutputService10TestShapeOutputService10TestCaseOperation1Output {
 	s.List = v
 	return s
 }
@@ -1393,11 +1393,11 @@ type OutputService11TestShapeOutputService11TestCaseOperation1Input struct {
 type OutputService11TestShapeOutputService11TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	Map map[string]*OutputService11TestShapeStructType `type:"map"`
+	Map map[string]OutputService11TestShapeStructType `type:"map"`
 }
 
 // SetMap sets the Map field's value.
-func (s *OutputService11TestShapeOutputService11TestCaseOperation1Output) SetMap(v map[string]*OutputService11TestShapeStructType) *OutputService11TestShapeOutputService11TestCaseOperation1Output {
+func (s *OutputService11TestShapeOutputService11TestCaseOperation1Output) SetMap(v map[string]OutputService11TestShapeStructType) *OutputService11TestShapeOutputService11TestCaseOperation1Output {
 	s.Map = v
 	return s
 }
@@ -1517,11 +1517,11 @@ type OutputService12TestShapeOutputService12TestCaseOperation1Input struct {
 type OutputService12TestShapeOutputService12TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	Map map[string]*string `type:"map" flattened:"true"`
+	Map map[string]string `type:"map" flattened:"true"`
 }
 
 // SetMap sets the Map field's value.
-func (s *OutputService12TestShapeOutputService12TestCaseOperation1Output) SetMap(v map[string]*string) *OutputService12TestShapeOutputService12TestCaseOperation1Output {
+func (s *OutputService12TestShapeOutputService12TestCaseOperation1Output) SetMap(v map[string]string) *OutputService12TestShapeOutputService12TestCaseOperation1Output {
 	s.Map = v
 	return s
 }
@@ -1629,11 +1629,11 @@ type OutputService13TestShapeOutputService13TestCaseOperation1Input struct {
 type OutputService13TestShapeOutputService13TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	Map map[string]*string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+	Map map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 }
 
 // SetMap sets the Map field's value.
-func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) SetMap(v map[string]*string) *OutputService13TestShapeOutputService13TestCaseOperation1Output {
+func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) SetMap(v map[string]string) *OutputService13TestShapeOutputService13TestCaseOperation1Output {
 	s.Map = v
 	return s
 }
@@ -1741,11 +1741,11 @@ type OutputService14TestShapeOutputService14TestCaseOperation1Input struct {
 type OutputService14TestShapeOutputService14TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	Map map[string]*string `locationNameKey:"foo" locationNameValue:"bar" type:"map" flattened:"true"`
+	Map map[string]string `locationNameKey:"foo" locationNameValue:"bar" type:"map" flattened:"true"`
 }
 
 // SetMap sets the Map field's value.
-func (s *OutputService14TestShapeOutputService14TestCaseOperation1Output) SetMap(v map[string]*string) *OutputService14TestShapeOutputService14TestCaseOperation1Output {
+func (s *OutputService14TestShapeOutputService14TestCaseOperation1Output) SetMap(v map[string]string) *OutputService14TestShapeOutputService14TestCaseOperation1Output {
 	s.Map = v
 	return s
 }
@@ -1965,7 +1965,7 @@ type OutputService16TestShapeOutputService16TestCaseOperation1Input struct {
 type OutputService16TestShapeOutputService16TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService16TestShapeEC2EnumType `type:"string"`
+	FooEnum OutputService16TestShapeEC2EnumType `type:"string" enum:"true"`
 
 	ListEnums []OutputService16TestShapeEC2EnumType `type:"list"`
 }
@@ -2036,7 +2036,7 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	if e, a := int64(123), *out.Num; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "myname", *out.Str; e != a {
+	if e, a := string("myname"), *out.Str; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := time.Unix(1.4221728e+09, 0).UTC().String(), out.Timestamp.String(); e != a {
@@ -2072,7 +2072,7 @@ func TestOutputService2ProtocolTestNotAllMembersInResponseCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "myname", *out.Str; e != a {
+	if e, a := string("myname"), *out.Str; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2132,10 +2132,10 @@ func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "abc", *out.ListMember[0]; e != a {
+	if e, a := string("abc"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "123", *out.ListMember[1]; e != a {
+	if e, a := string("123"), out.ListMember[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2165,10 +2165,10 @@ func TestOutputService5ProtocolTestListWithCustomMemberNameCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "abc", *out.ListMember[0]; e != a {
+	if e, a := string("abc"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "123", *out.ListMember[1]; e != a {
+	if e, a := string("123"), out.ListMember[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2198,10 +2198,10 @@ func TestOutputService6ProtocolTestFlattenedListCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "abc", *out.ListMember[0]; e != a {
+	if e, a := string("abc"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "123", *out.ListMember[1]; e != a {
+	if e, a := string("123"), out.ListMember[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2231,7 +2231,7 @@ func TestOutputService7ProtocolTestFlattenedSingleElementListCase1(t *testing.T)
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "abc", *out.ListMember[0]; e != a {
+	if e, a := string("abc"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2261,22 +2261,22 @@ func TestOutputService8ProtocolTestListOfStructuresCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "firstbar", *out.List[0].Bar; e != a {
+	if e, a := string("firstbar"), *out.List[0].Bar; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "firstbaz", *out.List[0].Baz; e != a {
+	if e, a := string("firstbaz"), *out.List[0].Baz; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "firstfoo", *out.List[0].Foo; e != a {
+	if e, a := string("firstfoo"), *out.List[0].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "secondbar", *out.List[1].Bar; e != a {
+	if e, a := string("secondbar"), *out.List[1].Bar; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "secondbaz", *out.List[1].Baz; e != a {
+	if e, a := string("secondbaz"), *out.List[1].Baz; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "secondfoo", *out.List[1].Foo; e != a {
+	if e, a := string("secondfoo"), *out.List[1].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2306,22 +2306,22 @@ func TestOutputService9ProtocolTestFlattenedListOfStructuresCase1(t *testing.T) 
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "firstbar", *out.List[0].Bar; e != a {
+	if e, a := string("firstbar"), *out.List[0].Bar; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "firstbaz", *out.List[0].Baz; e != a {
+	if e, a := string("firstbaz"), *out.List[0].Baz; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "firstfoo", *out.List[0].Foo; e != a {
+	if e, a := string("firstfoo"), *out.List[0].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "secondbar", *out.List[1].Bar; e != a {
+	if e, a := string("secondbar"), *out.List[1].Bar; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "secondbaz", *out.List[1].Baz; e != a {
+	if e, a := string("secondbaz"), *out.List[1].Baz; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "secondfoo", *out.List[1].Foo; e != a {
+	if e, a := string("secondfoo"), *out.List[1].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2351,10 +2351,10 @@ func TestOutputService10ProtocolTestFlattenedListWithLocationNameCase1(t *testin
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "a", *out.List[0]; e != a {
+	if e, a := string("a"), out.List[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "b", *out.List[1]; e != a {
+	if e, a := string("b"), out.List[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2384,10 +2384,10 @@ func TestOutputService11ProtocolTestNormalMapCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "bam", *out.Map["baz"].Foo; e != a {
+	if e, a := string("bam"), *out.Map["baz"].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "bar", *out.Map["qux"].Foo; e != a {
+	if e, a := string("bar"), *out.Map["qux"].Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2417,10 +2417,10 @@ func TestOutputService12ProtocolTestFlattenedMapCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "bam", *out.Map["baz"]; e != a {
+	if e, a := string("bam"), out.Map["baz"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "bar", *out.Map["qux"]; e != a {
+	if e, a := string("bar"), out.Map["qux"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2450,7 +2450,7 @@ func TestOutputService13ProtocolTestFlattenedMapInShapeDefinitionCase1(t *testin
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "bar", *out.Map["qux"]; e != a {
+	if e, a := string("bar"), out.Map["qux"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2480,10 +2480,10 @@ func TestOutputService14ProtocolTestNamedMapCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "bam", *out.Map["baz"]; e != a {
+	if e, a := string("bam"), out.Map["baz"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "bar", *out.Map["qux"]; e != a {
+	if e, a := string("bar"), out.Map["qux"]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2513,7 +2513,7 @@ func TestOutputService15ProtocolTestEmptyStringCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "", *out.Foo; e != a {
+	if e, a := string(""), *out.Foo; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

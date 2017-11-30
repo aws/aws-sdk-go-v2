@@ -542,11 +542,11 @@ type InputService3TestShapeInputService3TestCaseOperation1Output struct {
 type InputService3TestShapeInputService3TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `type:"list"`
+	ListArg []string `type:"list"`
 }
 
 // SetListArg sets the ListArg field's value.
-func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetListArg(v []*string) *InputService3TestShapeInputService3TestCaseOperation2Input {
+func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetListArg(v []string) *InputService3TestShapeInputService3TestCaseOperation2Input {
 	s.ListArg = v
 	return s
 }
@@ -704,21 +704,21 @@ type InputService4TestShapeInputService4TestCaseOperation1Output struct {
 type InputService4TestShapeInputService4TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `type:"list" flattened:"true"`
+	ListArg []string `type:"list" flattened:"true"`
 
-	NamedListArg []*string `locationNameList:"Foo" type:"list" flattened:"true"`
+	NamedListArg []string `locationNameList:"Foo" type:"list" flattened:"true"`
 
 	ScalarArg *string `type:"string"`
 }
 
 // SetListArg sets the ListArg field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation2Input) SetListArg(v []*string) *InputService4TestShapeInputService4TestCaseOperation2Input {
+func (s *InputService4TestShapeInputService4TestCaseOperation2Input) SetListArg(v []string) *InputService4TestShapeInputService4TestCaseOperation2Input {
 	s.ListArg = v
 	return s
 }
 
 // SetNamedListArg sets the NamedListArg field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation2Input) SetNamedListArg(v []*string) *InputService4TestShapeInputService4TestCaseOperation2Input {
+func (s *InputService4TestShapeInputService4TestCaseOperation2Input) SetNamedListArg(v []string) *InputService4TestShapeInputService4TestCaseOperation2Input {
 	s.NamedListArg = v
 	return s
 }
@@ -834,11 +834,11 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	MapArg map[string]*string `type:"map" flattened:"true"`
+	MapArg map[string]string `type:"map" flattened:"true"`
 }
 
 // SetMapArg sets the MapArg field's value.
-func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetMapArg(v map[string]*string) *InputService5TestShapeInputService5TestCaseOperation1Input {
+func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetMapArg(v map[string]string) *InputService5TestShapeInputService5TestCaseOperation1Input {
 	s.MapArg = v
 	return s
 }
@@ -948,11 +948,11 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `locationNameList:"item" type:"list"`
+	ListArg []string `locationNameList:"item" type:"list"`
 }
 
 // SetListArg sets the ListArg field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListArg(v []*string) *InputService6TestShapeInputService6TestCaseOperation1Input {
+func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListArg(v []string) *InputService6TestShapeInputService6TestCaseOperation1Input {
 	s.ListArg = v
 	return s
 }
@@ -1062,13 +1062,13 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 type InputService7TestShapeInputService7TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	ListArg []*string `locationNameList:"ListArgLocation" type:"list" flattened:"true"`
+	ListArg []string `locationNameList:"ListArgLocation" type:"list" flattened:"true"`
 
 	ScalarArg *string `type:"string"`
 }
 
 // SetListArg sets the ListArg field's value.
-func (s *InputService7TestShapeInputService7TestCaseOperation1Input) SetListArg(v []*string) *InputService7TestShapeInputService7TestCaseOperation1Input {
+func (s *InputService7TestShapeInputService7TestCaseOperation1Input) SetListArg(v []string) *InputService7TestShapeInputService7TestCaseOperation1Input {
 	s.ListArg = v
 	return s
 }
@@ -1184,11 +1184,11 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 type InputService8TestShapeInputService8TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	MapArg map[string]*string `type:"map"`
+	MapArg map[string]string `type:"map"`
 }
 
 // SetMapArg sets the MapArg field's value.
-func (s *InputService8TestShapeInputService8TestCaseOperation1Input) SetMapArg(v map[string]*string) *InputService8TestShapeInputService8TestCaseOperation1Input {
+func (s *InputService8TestShapeInputService8TestCaseOperation1Input) SetMapArg(v map[string]string) *InputService8TestShapeInputService8TestCaseOperation1Input {
 	s.MapArg = v
 	return s
 }
@@ -1298,11 +1298,11 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 type InputService9TestShapeInputService9TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	MapArg map[string]*string `locationNameKey:"TheKey" locationNameValue:"TheValue" type:"map"`
+	MapArg map[string]string `locationNameKey:"TheKey" locationNameValue:"TheValue" type:"map"`
 }
 
 // SetMapArg sets the MapArg field's value.
-func (s *InputService9TestShapeInputService9TestCaseOperation1Input) SetMapArg(v map[string]*string) *InputService9TestShapeInputService9TestCaseOperation1Input {
+func (s *InputService9TestShapeInputService9TestCaseOperation1Input) SetMapArg(v map[string]string) *InputService9TestShapeInputService9TestCaseOperation1Input {
 	s.MapArg = v
 	return s
 }
@@ -1899,9 +1899,9 @@ type InputService12TestShapeRecursiveStructType struct {
 
 	NoRecurse *string `type:"string"`
 
-	RecursiveList []*InputService12TestShapeRecursiveStructType `type:"list"`
+	RecursiveList []InputService12TestShapeRecursiveStructType `type:"list"`
 
-	RecursiveMap map[string]*InputService12TestShapeRecursiveStructType `type:"map"`
+	RecursiveMap map[string]InputService12TestShapeRecursiveStructType `type:"map"`
 
 	RecursiveStruct *InputService12TestShapeRecursiveStructType `type:"structure"`
 }
@@ -1913,13 +1913,13 @@ func (s *InputService12TestShapeRecursiveStructType) SetNoRecurse(v string) *Inp
 }
 
 // SetRecursiveList sets the RecursiveList field's value.
-func (s *InputService12TestShapeRecursiveStructType) SetRecursiveList(v []*InputService12TestShapeRecursiveStructType) *InputService12TestShapeRecursiveStructType {
+func (s *InputService12TestShapeRecursiveStructType) SetRecursiveList(v []InputService12TestShapeRecursiveStructType) *InputService12TestShapeRecursiveStructType {
 	s.RecursiveList = v
 	return s
 }
 
 // SetRecursiveMap sets the RecursiveMap field's value.
-func (s *InputService12TestShapeRecursiveStructType) SetRecursiveMap(v map[string]*InputService12TestShapeRecursiveStructType) *InputService12TestShapeRecursiveStructType {
+func (s *InputService12TestShapeRecursiveStructType) SetRecursiveMap(v map[string]InputService12TestShapeRecursiveStructType) *InputService12TestShapeRecursiveStructType {
 	s.RecursiveMap = v
 	return s
 }
@@ -2289,7 +2289,7 @@ type InputService14TestShapeInputService14TestCaseOperation2Output struct {
 type InputService14TestShapeInputService14TestCaseOperation3Input struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum InputService14TestShapeEnumType `type:"string"`
+	FooEnum InputService14TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService14TestShapeEnumType `type:"list"`
 }
@@ -2459,10 +2459,10 @@ func TestInputService3ProtocolTestListTypesCase1(t *testing.T) {
 
 	svc := NewInputService3ProtocolTest(cfg)
 	input := &InputService3TestShapeInputService3TestCaseOperation2Input{
-		ListArg: []*string{
-			aws.String("foo"),
-			aws.String("bar"),
-			aws.String("baz"),
+		ListArg: []string{
+			"foo",
+			"bar",
+			"baz",
 		},
 	}
 
@@ -2495,7 +2495,7 @@ func TestInputService3ProtocolTestListTypesCase2(t *testing.T) {
 
 	svc := NewInputService3ProtocolTest(cfg)
 	input := &InputService3TestShapeInputService3TestCaseOperation2Input{
-		ListArg: []*string{},
+		ListArg: []string{},
 	}
 
 	req := svc.InputService3TestCaseOperation2Request(input)
@@ -2527,10 +2527,10 @@ func TestInputService4ProtocolTestFlattenedListCase1(t *testing.T) {
 
 	svc := NewInputService4ProtocolTest(cfg)
 	input := &InputService4TestShapeInputService4TestCaseOperation2Input{
-		ListArg: []*string{
-			aws.String("a"),
-			aws.String("b"),
-			aws.String("c"),
+		ListArg: []string{
+			"a",
+			"b",
+			"c",
 		},
 		ScalarArg: aws.String("foo"),
 	}
@@ -2564,8 +2564,8 @@ func TestInputService4ProtocolTestFlattenedListCase2(t *testing.T) {
 
 	svc := NewInputService4ProtocolTest(cfg)
 	input := &InputService4TestShapeInputService4TestCaseOperation2Input{
-		NamedListArg: []*string{
-			aws.String("a"),
+		NamedListArg: []string{
+			"a",
 		},
 	}
 
@@ -2598,9 +2598,9 @@ func TestInputService5ProtocolTestSerializeFlattenedMapTypeCase1(t *testing.T) {
 
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation1Input{
-		MapArg: map[string]*string{
-			"key1": aws.String("val1"),
-			"key2": aws.String("val2"),
+		MapArg: map[string]string{
+			"key1": "val1",
+			"key2": "val2",
 		},
 	}
 
@@ -2633,10 +2633,10 @@ func TestInputService6ProtocolTestNonFlattenedListWithLocationNameCase1(t *testi
 
 	svc := NewInputService6ProtocolTest(cfg)
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
-		ListArg: []*string{
-			aws.String("a"),
-			aws.String("b"),
-			aws.String("c"),
+		ListArg: []string{
+			"a",
+			"b",
+			"c",
 		},
 	}
 
@@ -2669,10 +2669,10 @@ func TestInputService7ProtocolTestFlattenedListWithLocationNameCase1(t *testing.
 
 	svc := NewInputService7ProtocolTest(cfg)
 	input := &InputService7TestShapeInputService7TestCaseOperation1Input{
-		ListArg: []*string{
-			aws.String("a"),
-			aws.String("b"),
-			aws.String("c"),
+		ListArg: []string{
+			"a",
+			"b",
+			"c",
 		},
 		ScalarArg: aws.String("foo"),
 	}
@@ -2706,9 +2706,9 @@ func TestInputService8ProtocolTestSerializeMapTypeCase1(t *testing.T) {
 
 	svc := NewInputService8ProtocolTest(cfg)
 	input := &InputService8TestShapeInputService8TestCaseOperation1Input{
-		MapArg: map[string]*string{
-			"key1": aws.String("val1"),
-			"key2": aws.String("val2"),
+		MapArg: map[string]string{
+			"key1": "val1",
+			"key2": "val2",
 		},
 	}
 
@@ -2741,9 +2741,9 @@ func TestInputService9ProtocolTestSerializeMapTypeWithLocationNameCase1(t *testi
 
 	svc := NewInputService9ProtocolTest(cfg)
 	input := &InputService9TestShapeInputService9TestCaseOperation1Input{
-		MapArg: map[string]*string{
-			"key1": aws.String("val1"),
-			"key2": aws.String("val2"),
+		MapArg: map[string]string{
+			"key1": "val1",
+			"key2": "val2",
 		},
 	}
 
@@ -2951,7 +2951,7 @@ func TestInputService12ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	svc := NewInputService12ProtocolTest(cfg)
 	input := &InputService12TestShapeInputService12TestCaseOperation6Input{
 		RecursiveStruct: &InputService12TestShapeRecursiveStructType{
-			RecursiveList: []*InputService12TestShapeRecursiveStructType{
+			RecursiveList: []InputService12TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -2992,7 +2992,7 @@ func TestInputService12ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	svc := NewInputService12ProtocolTest(cfg)
 	input := &InputService12TestShapeInputService12TestCaseOperation6Input{
 		RecursiveStruct: &InputService12TestShapeRecursiveStructType{
-			RecursiveList: []*InputService12TestShapeRecursiveStructType{
+			RecursiveList: []InputService12TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -3035,7 +3035,7 @@ func TestInputService12ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	svc := NewInputService12ProtocolTest(cfg)
 	input := &InputService12TestShapeInputService12TestCaseOperation6Input{
 		RecursiveStruct: &InputService12TestShapeRecursiveStructType{
-			RecursiveMap: map[string]*InputService12TestShapeRecursiveStructType{
+			RecursiveMap: map[string]InputService12TestShapeRecursiveStructType{
 				"bar": {
 					NoRecurse: aws.String("bar"),
 				},

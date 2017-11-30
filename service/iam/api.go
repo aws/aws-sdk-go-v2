@@ -8160,7 +8160,7 @@ type AccessKey struct {
 	// while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user that the access key is associated with.
 	//
@@ -8302,7 +8302,7 @@ type AccessKeyMetadata struct {
 
 	// The status of the access key. Active means the key is valid for API calls;
 	// Inactive means it is not.
-	Status StatusType `type:"string"`
+	Status StatusType `type:"string" enum:"true"`
 
 	// The name of the IAM user that the key is associated with.
 	UserName *string `min:"1" type:"string"`
@@ -8991,12 +8991,12 @@ type ContextEntry struct {
 
 	// The data type of the value (or values) specified in the ContextKeyValues
 	// parameter.
-	ContextKeyType ContextKeyTypeEnum `type:"string"`
+	ContextKeyType ContextKeyTypeEnum `type:"string" enum:"true"`
 
 	// The value (or values, if the condition context key supports multiple values)
 	// to provide to the simulation for use when the key is referenced by a Condition
 	// element in an input policy.
-	ContextKeyValues []*string `type:"list"`
+	ContextKeyValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -9035,7 +9035,7 @@ func (s *ContextEntry) SetContextKeyType(v ContextKeyTypeEnum) *ContextEntry {
 }
 
 // SetContextKeyValues sets the ContextKeyValues field's value.
-func (s *ContextEntry) SetContextKeyValues(v []*string) *ContextEntry {
+func (s *ContextEntry) SetContextKeyValues(v []string) *ContextEntry {
 	s.ContextKeyValues = v
 	return s
 }
@@ -9493,7 +9493,7 @@ type CreateOpenIDConnectProviderInput struct {
 	//
 	// There is no defined format for a client ID. The CreateOpenIDConnectProviderRequest
 	// action accepts client IDs up to 255 characters long.
-	ClientIDList []*string `type:"list"`
+	ClientIDList []string `type:"list"`
 
 	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity
 	// provider's server certificate(s). Typically this list includes only one entry.
@@ -9516,7 +9516,7 @@ type CreateOpenIDConnectProviderInput struct {
 	// in the IAM User Guide.
 	//
 	// ThumbprintList is a required field
-	ThumbprintList []*string `type:"list" required:"true"`
+	ThumbprintList []string `type:"list" required:"true"`
 
 	// The URL of the identity provider. The URL must begin with "https://" and
 	// should correspond to the iss claim in the provider's OpenID Connect ID tokens.
@@ -9564,13 +9564,13 @@ func (s *CreateOpenIDConnectProviderInput) Validate() error {
 }
 
 // SetClientIDList sets the ClientIDList field's value.
-func (s *CreateOpenIDConnectProviderInput) SetClientIDList(v []*string) *CreateOpenIDConnectProviderInput {
+func (s *CreateOpenIDConnectProviderInput) SetClientIDList(v []string) *CreateOpenIDConnectProviderInput {
 	s.ClientIDList = v
 	return s
 }
 
 // SetThumbprintList sets the ThumbprintList field's value.
-func (s *CreateOpenIDConnectProviderInput) SetThumbprintList(v []*string) *CreateOpenIDConnectProviderInput {
+func (s *CreateOpenIDConnectProviderInput) SetThumbprintList(v []string) *CreateOpenIDConnectProviderInput {
 	s.ThumbprintList = v
 	return s
 }
@@ -12016,7 +12016,7 @@ type DeletionTaskFailureReasonType struct {
 	// the role can't be deleted. This parameter includes a list of the resources
 	// that are associated with the role and the region in which the resources are
 	// being used.
-	RoleUsageList []*RoleUsageType `type:"list"`
+	RoleUsageList []RoleUsageType `type:"list"`
 }
 
 // String returns the string representation
@@ -12036,7 +12036,7 @@ func (s *DeletionTaskFailureReasonType) SetReason(v string) *DeletionTaskFailure
 }
 
 // SetRoleUsageList sets the RoleUsageList field's value.
-func (s *DeletionTaskFailureReasonType) SetRoleUsageList(v []*RoleUsageType) *DeletionTaskFailureReasonType {
+func (s *DeletionTaskFailureReasonType) SetRoleUsageList(v []RoleUsageType) *DeletionTaskFailureReasonType {
 	s.RoleUsageList = v
 	return s
 }
@@ -12448,7 +12448,7 @@ type EvaluationResult struct {
 	// The result of the simulation.
 	//
 	// EvalDecision is a required field
-	EvalDecision PolicyEvaluationDecisionType `type:"string" required:"true"`
+	EvalDecision PolicyEvaluationDecisionType `type:"string" required:"true" enum:"true"`
 
 	// Additional details about the results of the evaluation decision. When there
 	// are both IAM policies and resource policies, this parameter explains how
@@ -12466,7 +12466,7 @@ type EvaluationResult struct {
 	// on the resource, if only one statement denies that action, then the explicit
 	// deny overrides any allow, and the deny statement is the only entry included
 	// in the result.
-	MatchedStatements []*Statement `type:"list"`
+	MatchedStatements []Statement `type:"list"`
 
 	// A list of context keys that are required by the included input policies but
 	// that were not provided by one of the input parameters. This list is used
@@ -12475,7 +12475,7 @@ type EvaluationResult struct {
 	// missing context values are instead included under the ResourceSpecificResults
 	// section. To discover the context keys used by a set of policies, you can
 	// call GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy.
-	MissingContextValues []*string `type:"list"`
+	MissingContextValues []string `type:"list"`
 
 	// A structure that details how AWS Organizations and its service control policies
 	// affect the results of the simulation. Only applies if the simulated user's
@@ -12484,7 +12484,7 @@ type EvaluationResult struct {
 
 	// The individual results of the simulation of the API action specified in EvalActionName
 	// on each resource.
-	ResourceSpecificResults []*ResourceSpecificResult `type:"list"`
+	ResourceSpecificResults []ResourceSpecificResult `type:"list"`
 }
 
 // String returns the string representation
@@ -12522,13 +12522,13 @@ func (s *EvaluationResult) SetEvalResourceName(v string) *EvaluationResult {
 }
 
 // SetMatchedStatements sets the MatchedStatements field's value.
-func (s *EvaluationResult) SetMatchedStatements(v []*Statement) *EvaluationResult {
+func (s *EvaluationResult) SetMatchedStatements(v []Statement) *EvaluationResult {
 	s.MatchedStatements = v
 	return s
 }
 
 // SetMissingContextValues sets the MissingContextValues field's value.
-func (s *EvaluationResult) SetMissingContextValues(v []*string) *EvaluationResult {
+func (s *EvaluationResult) SetMissingContextValues(v []string) *EvaluationResult {
 	s.MissingContextValues = v
 	return s
 }
@@ -12540,7 +12540,7 @@ func (s *EvaluationResult) SetOrganizationsDecisionDetail(v *OrganizationsDecisi
 }
 
 // SetResourceSpecificResults sets the ResourceSpecificResults field's value.
-func (s *EvaluationResult) SetResourceSpecificResults(v []*ResourceSpecificResult) *EvaluationResult {
+func (s *EvaluationResult) SetResourceSpecificResults(v []ResourceSpecificResult) *EvaluationResult {
 	s.ResourceSpecificResults = v
 	return s
 }
@@ -12569,7 +12569,7 @@ type GenerateCredentialReportOutput struct {
 	Description *string `type:"string"`
 
 	// Information about the state of the credential report.
-	State ReportStateType `type:"string"`
+	State ReportStateType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12758,7 +12758,7 @@ type GetAccountAuthorizationDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list containing information about IAM groups.
-	GroupDetailList []*GroupDetail `type:"list"`
+	GroupDetailList []GroupDetail `type:"list"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -12773,13 +12773,13 @@ type GetAccountAuthorizationDetailsOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// A list containing information about managed policies.
-	Policies []*ManagedPolicyDetail `type:"list"`
+	Policies []ManagedPolicyDetail `type:"list"`
 
 	// A list containing information about IAM roles.
-	RoleDetailList []*RoleDetail `type:"list"`
+	RoleDetailList []RoleDetail `type:"list"`
 
 	// A list containing information about IAM users.
-	UserDetailList []*UserDetail `type:"list"`
+	UserDetailList []UserDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -12793,7 +12793,7 @@ func (s GetAccountAuthorizationDetailsOutput) GoString() string {
 }
 
 // SetGroupDetailList sets the GroupDetailList field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetGroupDetailList(v []*GroupDetail) *GetAccountAuthorizationDetailsOutput {
+func (s *GetAccountAuthorizationDetailsOutput) SetGroupDetailList(v []GroupDetail) *GetAccountAuthorizationDetailsOutput {
 	s.GroupDetailList = v
 	return s
 }
@@ -12811,19 +12811,19 @@ func (s *GetAccountAuthorizationDetailsOutput) SetMarker(v string) *GetAccountAu
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetPolicies(v []*ManagedPolicyDetail) *GetAccountAuthorizationDetailsOutput {
+func (s *GetAccountAuthorizationDetailsOutput) SetPolicies(v []ManagedPolicyDetail) *GetAccountAuthorizationDetailsOutput {
 	s.Policies = v
 	return s
 }
 
 // SetRoleDetailList sets the RoleDetailList field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetRoleDetailList(v []*RoleDetail) *GetAccountAuthorizationDetailsOutput {
+func (s *GetAccountAuthorizationDetailsOutput) SetRoleDetailList(v []RoleDetail) *GetAccountAuthorizationDetailsOutput {
 	s.RoleDetailList = v
 	return s
 }
 
 // SetUserDetailList sets the UserDetailList field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetUserDetailList(v []*UserDetail) *GetAccountAuthorizationDetailsOutput {
+func (s *GetAccountAuthorizationDetailsOutput) SetUserDetailList(v []UserDetail) *GetAccountAuthorizationDetailsOutput {
 	s.UserDetailList = v
 	return s
 }
@@ -12892,7 +12892,7 @@ type GetAccountSummaryOutput struct {
 
 	// A set of key value pairs containing information about IAM entity usage and
 	// IAM quotas.
-	SummaryMap map[string]*int64 `type:"map"`
+	SummaryMap map[string]int64 `type:"map"`
 }
 
 // String returns the string representation
@@ -12906,7 +12906,7 @@ func (s GetAccountSummaryOutput) GoString() string {
 }
 
 // SetSummaryMap sets the SummaryMap field's value.
-func (s *GetAccountSummaryOutput) SetSummaryMap(v map[string]*int64) *GetAccountSummaryOutput {
+func (s *GetAccountSummaryOutput) SetSummaryMap(v map[string]int64) *GetAccountSummaryOutput {
 	s.SummaryMap = v
 	return s
 }
@@ -12927,7 +12927,7 @@ type GetContextKeysForCustomPolicyInput struct {
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
 	//
 	// PolicyInputList is a required field
-	PolicyInputList []*string `type:"list" required:"true"`
+	PolicyInputList []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -12955,7 +12955,7 @@ func (s *GetContextKeysForCustomPolicyInput) Validate() error {
 }
 
 // SetPolicyInputList sets the PolicyInputList field's value.
-func (s *GetContextKeysForCustomPolicyInput) SetPolicyInputList(v []*string) *GetContextKeysForCustomPolicyInput {
+func (s *GetContextKeysForCustomPolicyInput) SetPolicyInputList(v []string) *GetContextKeysForCustomPolicyInput {
 	s.PolicyInputList = v
 	return s
 }
@@ -12973,7 +12973,7 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// range as well as the printable characters in the Basic Latin and Latin-1
 	// Supplement character set (through \u00FF). It also includes the special characters
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
-	PolicyInputList []*string `type:"list"`
+	PolicyInputList []string `type:"list"`
 
 	// The ARN of a user, group, or role whose policies contain the context keys
 	// that you want listed. If you specify a user, the list includes context keys
@@ -13019,7 +13019,7 @@ func (s *GetContextKeysForPrincipalPolicyInput) Validate() error {
 }
 
 // SetPolicyInputList sets the PolicyInputList field's value.
-func (s *GetContextKeysForPrincipalPolicyInput) SetPolicyInputList(v []*string) *GetContextKeysForPrincipalPolicyInput {
+func (s *GetContextKeysForPrincipalPolicyInput) SetPolicyInputList(v []string) *GetContextKeysForPrincipalPolicyInput {
 	s.PolicyInputList = v
 	return s
 }
@@ -13037,7 +13037,7 @@ type GetContextKeysForPrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of context keys that are referenced in the input policies.
-	ContextKeyNames []*string `type:"list"`
+	ContextKeyNames []string `type:"list"`
 }
 
 // String returns the string representation
@@ -13051,7 +13051,7 @@ func (s GetContextKeysForPrincipalPolicyOutput) GoString() string {
 }
 
 // SetContextKeyNames sets the ContextKeyNames field's value.
-func (s *GetContextKeysForPrincipalPolicyOutput) SetContextKeyNames(v []*string) *GetContextKeysForPrincipalPolicyOutput {
+func (s *GetContextKeysForPrincipalPolicyOutput) SetContextKeyNames(v []string) *GetContextKeysForPrincipalPolicyOutput {
 	s.ContextKeyNames = v
 	return s
 }
@@ -13086,7 +13086,7 @@ type GetCredentialReportOutput struct {
 	GeneratedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The format (MIME type) of the credential report.
-	ReportFormat ReportFormatType `type:"string"`
+	ReportFormat ReportFormatType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13224,7 +13224,7 @@ type GetGroupOutput struct {
 	// A list of users in the group.
 	//
 	// Users is a required field
-	Users []*User `type:"list" required:"true"`
+	Users []User `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -13256,7 +13256,7 @@ func (s *GetGroupOutput) SetMarker(v string) *GetGroupOutput {
 }
 
 // SetUsers sets the Users field's value.
-func (s *GetGroupOutput) SetUsers(v []*User) *GetGroupOutput {
+func (s *GetGroupOutput) SetUsers(v []User) *GetGroupOutput {
 	s.Users = v
 	return s
 }
@@ -13583,7 +13583,7 @@ type GetOpenIDConnectProviderOutput struct {
 
 	// A list of client IDs (also known as audiences) that are associated with the
 	// specified IAM OIDC provider resource object. For more information, see CreateOpenIDConnectProvider.
-	ClientIDList []*string `type:"list"`
+	ClientIDList []string `type:"list"`
 
 	// The date and time when the IAM OIDC provider resource object was created
 	// in the AWS account.
@@ -13591,7 +13591,7 @@ type GetOpenIDConnectProviderOutput struct {
 
 	// A list of certificate thumbprints that are associated with the specified
 	// IAM OIDC provider resource object. For more information, see CreateOpenIDConnectProvider.
-	ThumbprintList []*string `type:"list"`
+	ThumbprintList []string `type:"list"`
 
 	// The URL that the IAM OIDC provider resource object is associated with. For
 	// more information, see CreateOpenIDConnectProvider.
@@ -13609,7 +13609,7 @@ func (s GetOpenIDConnectProviderOutput) GoString() string {
 }
 
 // SetClientIDList sets the ClientIDList field's value.
-func (s *GetOpenIDConnectProviderOutput) SetClientIDList(v []*string) *GetOpenIDConnectProviderOutput {
+func (s *GetOpenIDConnectProviderOutput) SetClientIDList(v []string) *GetOpenIDConnectProviderOutput {
 	s.ClientIDList = v
 	return s
 }
@@ -13621,7 +13621,7 @@ func (s *GetOpenIDConnectProviderOutput) SetCreateDate(v time.Time) *GetOpenIDCo
 }
 
 // SetThumbprintList sets the ThumbprintList field's value.
-func (s *GetOpenIDConnectProviderOutput) SetThumbprintList(v []*string) *GetOpenIDConnectProviderOutput {
+func (s *GetOpenIDConnectProviderOutput) SetThumbprintList(v []string) *GetOpenIDConnectProviderOutput {
 	s.ThumbprintList = v
 	return s
 }
@@ -14090,7 +14090,7 @@ type GetSSHPublicKeyInput struct {
 	// PEM format, use PEM.
 	//
 	// Encoding is a required field
-	Encoding EncodingType `type:"string" required:"true"`
+	Encoding EncodingType `type:"string" required:"true" enum:"true"`
 
 	// The unique identifier for the SSH public key.
 	//
@@ -14319,7 +14319,7 @@ type GetServiceLinkedRoleDeletionStatusOutput struct {
 	// The status of the deletion.
 	//
 	// Status is a required field
-	Status DeletionTaskStatusType `type:"string" required:"true"`
+	Status DeletionTaskStatusType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -14633,7 +14633,7 @@ type GroupDetail struct {
 	Arn *string `min:"20" type:"string"`
 
 	// A list of the managed policies attached to the group.
-	AttachedManagedPolicies []*AttachedPolicy `type:"list"`
+	AttachedManagedPolicies []AttachedPolicy `type:"list"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the group was created.
@@ -14648,7 +14648,7 @@ type GroupDetail struct {
 	GroupName *string `min:"1" type:"string"`
 
 	// A list of the inline policies embedded in the group.
-	GroupPolicyList []*PolicyDetail `type:"list"`
+	GroupPolicyList []PolicyDetail `type:"list"`
 
 	// The path to the group. For more information about paths, see IAM Identifiers
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -14673,7 +14673,7 @@ func (s *GroupDetail) SetArn(v string) *GroupDetail {
 }
 
 // SetAttachedManagedPolicies sets the AttachedManagedPolicies field's value.
-func (s *GroupDetail) SetAttachedManagedPolicies(v []*AttachedPolicy) *GroupDetail {
+func (s *GroupDetail) SetAttachedManagedPolicies(v []AttachedPolicy) *GroupDetail {
 	s.AttachedManagedPolicies = v
 	return s
 }
@@ -14697,7 +14697,7 @@ func (s *GroupDetail) SetGroupName(v string) *GroupDetail {
 }
 
 // SetGroupPolicyList sets the GroupPolicyList field's value.
-func (s *GroupDetail) SetGroupPolicyList(v []*PolicyDetail) *GroupDetail {
+func (s *GroupDetail) SetGroupPolicyList(v []PolicyDetail) *GroupDetail {
 	s.GroupPolicyList = v
 	return s
 }
@@ -14758,7 +14758,7 @@ type InstanceProfile struct {
 	// The role associated with the instance profile.
 	//
 	// Roles is a required field
-	Roles []*Role `type:"list" required:"true"`
+	Roles []Role `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -14802,7 +14802,7 @@ func (s *InstanceProfile) SetPath(v string) *InstanceProfile {
 }
 
 // SetRoles sets the Roles field's value.
-func (s *InstanceProfile) SetRoles(v []*Role) *InstanceProfile {
+func (s *InstanceProfile) SetRoles(v []Role) *InstanceProfile {
 	s.Roles = v
 	return s
 }
@@ -14891,7 +14891,7 @@ type ListAccessKeysOutput struct {
 	// A list of objects containing metadata about the access keys.
 	//
 	// AccessKeyMetadata is a required field
-	AccessKeyMetadata []*AccessKeyMetadata `type:"list" required:"true"`
+	AccessKeyMetadata []AccessKeyMetadata `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -14917,7 +14917,7 @@ func (s ListAccessKeysOutput) GoString() string {
 }
 
 // SetAccessKeyMetadata sets the AccessKeyMetadata field's value.
-func (s *ListAccessKeysOutput) SetAccessKeyMetadata(v []*AccessKeyMetadata) *ListAccessKeysOutput {
+func (s *ListAccessKeysOutput) SetAccessKeyMetadata(v []AccessKeyMetadata) *ListAccessKeysOutput {
 	s.AccessKeyMetadata = v
 	return s
 }
@@ -15003,7 +15003,7 @@ type ListAccountAliasesOutput struct {
 	// per account.
 	//
 	// AccountAliases is a required field
-	AccountAliases []*string `type:"list" required:"true"`
+	AccountAliases []string `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -15029,7 +15029,7 @@ func (s ListAccountAliasesOutput) GoString() string {
 }
 
 // SetAccountAliases sets the AccountAliases field's value.
-func (s *ListAccountAliasesOutput) SetAccountAliases(v []*string) *ListAccountAliasesOutput {
+func (s *ListAccountAliasesOutput) SetAccountAliases(v []string) *ListAccountAliasesOutput {
 	s.AccountAliases = v
 	return s
 }
@@ -15151,7 +15151,7 @@ type ListAttachedGroupPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the attached policies.
-	AttachedPolicies []*AttachedPolicy `type:"list"`
+	AttachedPolicies []AttachedPolicy `type:"list"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -15177,7 +15177,7 @@ func (s ListAttachedGroupPoliciesOutput) GoString() string {
 }
 
 // SetAttachedPolicies sets the AttachedPolicies field's value.
-func (s *ListAttachedGroupPoliciesOutput) SetAttachedPolicies(v []*AttachedPolicy) *ListAttachedGroupPoliciesOutput {
+func (s *ListAttachedGroupPoliciesOutput) SetAttachedPolicies(v []AttachedPolicy) *ListAttachedGroupPoliciesOutput {
 	s.AttachedPolicies = v
 	return s
 }
@@ -15298,7 +15298,7 @@ type ListAttachedRolePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the attached policies.
-	AttachedPolicies []*AttachedPolicy `type:"list"`
+	AttachedPolicies []AttachedPolicy `type:"list"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -15324,7 +15324,7 @@ func (s ListAttachedRolePoliciesOutput) GoString() string {
 }
 
 // SetAttachedPolicies sets the AttachedPolicies field's value.
-func (s *ListAttachedRolePoliciesOutput) SetAttachedPolicies(v []*AttachedPolicy) *ListAttachedRolePoliciesOutput {
+func (s *ListAttachedRolePoliciesOutput) SetAttachedPolicies(v []AttachedPolicy) *ListAttachedRolePoliciesOutput {
 	s.AttachedPolicies = v
 	return s
 }
@@ -15445,7 +15445,7 @@ type ListAttachedUserPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the attached policies.
-	AttachedPolicies []*AttachedPolicy `type:"list"`
+	AttachedPolicies []AttachedPolicy `type:"list"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -15471,7 +15471,7 @@ func (s ListAttachedUserPoliciesOutput) GoString() string {
 }
 
 // SetAttachedPolicies sets the AttachedPolicies field's value.
-func (s *ListAttachedUserPoliciesOutput) SetAttachedPolicies(v []*AttachedPolicy) *ListAttachedUserPoliciesOutput {
+func (s *ListAttachedUserPoliciesOutput) SetAttachedPolicies(v []AttachedPolicy) *ListAttachedUserPoliciesOutput {
 	s.AttachedPolicies = v
 	return s
 }
@@ -15498,7 +15498,7 @@ type ListEntitiesForPolicyInput struct {
 	// to the specified policy are returned. This parameter is optional. If it is
 	// not included, all attached entities (users, groups, and roles) are returned.
 	// The argument for this parameter must be one of the valid values listed below.
-	EntityFilter EntityType `type:"string"`
+	EntityFilter EntityType `type:"string" enum:"true"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -15621,13 +15621,13 @@ type ListEntitiesForPolicyOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// A list of IAM groups that the policy is attached to.
-	PolicyGroups []*PolicyGroup `type:"list"`
+	PolicyGroups []PolicyGroup `type:"list"`
 
 	// A list of IAM roles that the policy is attached to.
-	PolicyRoles []*PolicyRole `type:"list"`
+	PolicyRoles []PolicyRole `type:"list"`
 
 	// A list of IAM users that the policy is attached to.
-	PolicyUsers []*PolicyUser `type:"list"`
+	PolicyUsers []PolicyUser `type:"list"`
 }
 
 // String returns the string representation
@@ -15653,19 +15653,19 @@ func (s *ListEntitiesForPolicyOutput) SetMarker(v string) *ListEntitiesForPolicy
 }
 
 // SetPolicyGroups sets the PolicyGroups field's value.
-func (s *ListEntitiesForPolicyOutput) SetPolicyGroups(v []*PolicyGroup) *ListEntitiesForPolicyOutput {
+func (s *ListEntitiesForPolicyOutput) SetPolicyGroups(v []PolicyGroup) *ListEntitiesForPolicyOutput {
 	s.PolicyGroups = v
 	return s
 }
 
 // SetPolicyRoles sets the PolicyRoles field's value.
-func (s *ListEntitiesForPolicyOutput) SetPolicyRoles(v []*PolicyRole) *ListEntitiesForPolicyOutput {
+func (s *ListEntitiesForPolicyOutput) SetPolicyRoles(v []PolicyRole) *ListEntitiesForPolicyOutput {
 	s.PolicyRoles = v
 	return s
 }
 
 // SetPolicyUsers sets the PolicyUsers field's value.
-func (s *ListEntitiesForPolicyOutput) SetPolicyUsers(v []*PolicyUser) *ListEntitiesForPolicyOutput {
+func (s *ListEntitiesForPolicyOutput) SetPolicyUsers(v []PolicyUser) *ListEntitiesForPolicyOutput {
 	s.PolicyUsers = v
 	return s
 }
@@ -15776,7 +15776,7 @@ type ListGroupPoliciesOutput struct {
 	// with no spaces. You can also include any of the following characters: =,.@-+
 	//
 	// PolicyNames is a required field
-	PolicyNames []*string `type:"list" required:"true"`
+	PolicyNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -15802,7 +15802,7 @@ func (s *ListGroupPoliciesOutput) SetMarker(v string) *ListGroupPoliciesOutput {
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *ListGroupPoliciesOutput) SetPolicyNames(v []*string) *ListGroupPoliciesOutput {
+func (s *ListGroupPoliciesOutput) SetPolicyNames(v []string) *ListGroupPoliciesOutput {
 	s.PolicyNames = v
 	return s
 }
@@ -15897,7 +15897,7 @@ type ListGroupsForUserOutput struct {
 	// A list of groups.
 	//
 	// Groups is a required field
-	Groups []*Group `type:"list" required:"true"`
+	Groups []Group `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -15923,7 +15923,7 @@ func (s ListGroupsForUserOutput) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ListGroupsForUserOutput) SetGroups(v []*Group) *ListGroupsForUserOutput {
+func (s *ListGroupsForUserOutput) SetGroups(v []Group) *ListGroupsForUserOutput {
 	s.Groups = v
 	return s
 }
@@ -16028,7 +16028,7 @@ type ListGroupsOutput struct {
 	// A list of groups.
 	//
 	// Groups is a required field
-	Groups []*Group `type:"list" required:"true"`
+	Groups []Group `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -16054,7 +16054,7 @@ func (s ListGroupsOutput) GoString() string {
 }
 
 // SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []*Group) *ListGroupsOutput {
+func (s *ListGroupsOutput) SetGroups(v []Group) *ListGroupsOutput {
 	s.Groups = v
 	return s
 }
@@ -16161,7 +16161,7 @@ type ListInstanceProfilesForRoleOutput struct {
 	// A list of instance profiles.
 	//
 	// InstanceProfiles is a required field
-	InstanceProfiles []*InstanceProfile `type:"list" required:"true"`
+	InstanceProfiles []InstanceProfile `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -16187,7 +16187,7 @@ func (s ListInstanceProfilesForRoleOutput) GoString() string {
 }
 
 // SetInstanceProfiles sets the InstanceProfiles field's value.
-func (s *ListInstanceProfilesForRoleOutput) SetInstanceProfiles(v []*InstanceProfile) *ListInstanceProfilesForRoleOutput {
+func (s *ListInstanceProfilesForRoleOutput) SetInstanceProfiles(v []InstanceProfile) *ListInstanceProfilesForRoleOutput {
 	s.InstanceProfiles = v
 	return s
 }
@@ -16293,7 +16293,7 @@ type ListInstanceProfilesOutput struct {
 	// A list of instance profiles.
 	//
 	// InstanceProfiles is a required field
-	InstanceProfiles []*InstanceProfile `type:"list" required:"true"`
+	InstanceProfiles []InstanceProfile `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -16319,7 +16319,7 @@ func (s ListInstanceProfilesOutput) GoString() string {
 }
 
 // SetInstanceProfiles sets the InstanceProfiles field's value.
-func (s *ListInstanceProfilesOutput) SetInstanceProfiles(v []*InstanceProfile) *ListInstanceProfilesOutput {
+func (s *ListInstanceProfilesOutput) SetInstanceProfiles(v []InstanceProfile) *ListInstanceProfilesOutput {
 	s.InstanceProfiles = v
 	return s
 }
@@ -16428,7 +16428,7 @@ type ListMFADevicesOutput struct {
 	// A list of MFA devices.
 	//
 	// MFADevices is a required field
-	MFADevices []*MFADevice `type:"list" required:"true"`
+	MFADevices []MFADevice `type:"list" required:"true"`
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
@@ -16452,7 +16452,7 @@ func (s *ListMFADevicesOutput) SetIsTruncated(v bool) *ListMFADevicesOutput {
 }
 
 // SetMFADevices sets the MFADevices field's value.
-func (s *ListMFADevicesOutput) SetMFADevices(v []*MFADevice) *ListMFADevicesOutput {
+func (s *ListMFADevicesOutput) SetMFADevices(v []MFADevice) *ListMFADevicesOutput {
 	s.MFADevices = v
 	return s
 }
@@ -16484,7 +16484,7 @@ type ListOpenIDConnectProvidersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of IAM OIDC provider resource objects defined in the AWS account.
-	OpenIDConnectProviderList []*OpenIDConnectProviderListEntry `type:"list"`
+	OpenIDConnectProviderList []OpenIDConnectProviderListEntry `type:"list"`
 }
 
 // String returns the string representation
@@ -16498,7 +16498,7 @@ func (s ListOpenIDConnectProvidersOutput) GoString() string {
 }
 
 // SetOpenIDConnectProviderList sets the OpenIDConnectProviderList field's value.
-func (s *ListOpenIDConnectProvidersOutput) SetOpenIDConnectProviderList(v []*OpenIDConnectProviderListEntry) *ListOpenIDConnectProvidersOutput {
+func (s *ListOpenIDConnectProvidersOutput) SetOpenIDConnectProviderList(v []OpenIDConnectProviderListEntry) *ListOpenIDConnectProvidersOutput {
 	s.OpenIDConnectProviderList = v
 	return s
 }
@@ -16547,7 +16547,7 @@ type ListPoliciesInput struct {
 	//
 	// This parameter is optional. If it is not included, or if it is set to All,
 	// all policies are returned.
-	Scope PolicyScopeType `type:"string"`
+	Scope PolicyScopeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -16624,7 +16624,7 @@ type ListPoliciesOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// A list of policies.
-	Policies []*Policy `type:"list"`
+	Policies []Policy `type:"list"`
 }
 
 // String returns the string representation
@@ -16650,7 +16650,7 @@ func (s *ListPoliciesOutput) SetMarker(v string) *ListPoliciesOutput {
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *ListPoliciesOutput) SetPolicies(v []*Policy) *ListPoliciesOutput {
+func (s *ListPoliciesOutput) SetPolicies(v []Policy) *ListPoliciesOutput {
 	s.Policies = v
 	return s
 }
@@ -16759,7 +16759,7 @@ type ListPolicyVersionsOutput struct {
 	// For more information about managed policy versions, see Versioning for Managed
 	// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
-	Versions []*PolicyVersion `type:"list"`
+	Versions []PolicyVersion `type:"list"`
 }
 
 // String returns the string representation
@@ -16785,7 +16785,7 @@ func (s *ListPolicyVersionsOutput) SetMarker(v string) *ListPolicyVersionsOutput
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListPolicyVersionsOutput) SetVersions(v []*PolicyVersion) *ListPolicyVersionsOutput {
+func (s *ListPolicyVersionsOutput) SetVersions(v []PolicyVersion) *ListPolicyVersionsOutput {
 	s.Versions = v
 	return s
 }
@@ -16892,7 +16892,7 @@ type ListRolePoliciesOutput struct {
 	// A list of policy names.
 	//
 	// PolicyNames is a required field
-	PolicyNames []*string `type:"list" required:"true"`
+	PolicyNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -16918,7 +16918,7 @@ func (s *ListRolePoliciesOutput) SetMarker(v string) *ListRolePoliciesOutput {
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *ListRolePoliciesOutput) SetPolicyNames(v []*string) *ListRolePoliciesOutput {
+func (s *ListRolePoliciesOutput) SetPolicyNames(v []string) *ListRolePoliciesOutput {
 	s.PolicyNames = v
 	return s
 }
@@ -17023,7 +17023,7 @@ type ListRolesOutput struct {
 	// A list of roles.
 	//
 	// Roles is a required field
-	Roles []*Role `type:"list" required:"true"`
+	Roles []Role `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17049,7 +17049,7 @@ func (s *ListRolesOutput) SetMarker(v string) *ListRolesOutput {
 }
 
 // SetRoles sets the Roles field's value.
-func (s *ListRolesOutput) SetRoles(v []*Role) *ListRolesOutput {
+func (s *ListRolesOutput) SetRoles(v []Role) *ListRolesOutput {
 	s.Roles = v
 	return s
 }
@@ -17075,7 +17075,7 @@ type ListSAMLProvidersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of SAML provider resource objects defined in IAM for this AWS account.
-	SAMLProviderList []*SAMLProviderListEntry `type:"list"`
+	SAMLProviderList []SAMLProviderListEntry `type:"list"`
 }
 
 // String returns the string representation
@@ -17089,7 +17089,7 @@ func (s ListSAMLProvidersOutput) GoString() string {
 }
 
 // SetSAMLProviderList sets the SAMLProviderList field's value.
-func (s *ListSAMLProvidersOutput) SetSAMLProviderList(v []*SAMLProviderListEntry) *ListSAMLProvidersOutput {
+func (s *ListSAMLProvidersOutput) SetSAMLProviderList(v []SAMLProviderListEntry) *ListSAMLProvidersOutput {
 	s.SAMLProviderList = v
 	return s
 }
@@ -17190,7 +17190,7 @@ type ListSSHPublicKeysOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// A list of the SSH public keys assigned to IAM user.
-	SSHPublicKeys []*SSHPublicKeyMetadata `type:"list"`
+	SSHPublicKeys []SSHPublicKeyMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -17216,7 +17216,7 @@ func (s *ListSSHPublicKeysOutput) SetMarker(v string) *ListSSHPublicKeysOutput {
 }
 
 // SetSSHPublicKeys sets the SSHPublicKeys field's value.
-func (s *ListSSHPublicKeysOutput) SetSSHPublicKeys(v []*SSHPublicKeyMetadata) *ListSSHPublicKeysOutput {
+func (s *ListSSHPublicKeysOutput) SetSSHPublicKeys(v []SSHPublicKeyMetadata) *ListSSHPublicKeysOutput {
 	s.SSHPublicKeys = v
 	return s
 }
@@ -17322,7 +17322,7 @@ type ListServerCertificatesOutput struct {
 	// A list of server certificates.
 	//
 	// ServerCertificateMetadataList is a required field
-	ServerCertificateMetadataList []*ServerCertificateMetadata `type:"list" required:"true"`
+	ServerCertificateMetadataList []ServerCertificateMetadata `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17348,7 +17348,7 @@ func (s *ListServerCertificatesOutput) SetMarker(v string) *ListServerCertificat
 }
 
 // SetServerCertificateMetadataList sets the ServerCertificateMetadataList field's value.
-func (s *ListServerCertificatesOutput) SetServerCertificateMetadataList(v []*ServerCertificateMetadata) *ListServerCertificatesOutput {
+func (s *ListServerCertificatesOutput) SetServerCertificateMetadataList(v []ServerCertificateMetadata) *ListServerCertificatesOutput {
 	s.ServerCertificateMetadataList = v
 	return s
 }
@@ -17411,7 +17411,7 @@ type ListServiceSpecificCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of structures that each contain details about a service-specific credential.
-	ServiceSpecificCredentials []*ServiceSpecificCredentialMetadata `type:"list"`
+	ServiceSpecificCredentials []ServiceSpecificCredentialMetadata `type:"list"`
 }
 
 // String returns the string representation
@@ -17425,7 +17425,7 @@ func (s ListServiceSpecificCredentialsOutput) GoString() string {
 }
 
 // SetServiceSpecificCredentials sets the ServiceSpecificCredentials field's value.
-func (s *ListServiceSpecificCredentialsOutput) SetServiceSpecificCredentials(v []*ServiceSpecificCredentialMetadata) *ListServiceSpecificCredentialsOutput {
+func (s *ListServiceSpecificCredentialsOutput) SetServiceSpecificCredentials(v []ServiceSpecificCredentialMetadata) *ListServiceSpecificCredentialsOutput {
 	s.ServiceSpecificCredentials = v
 	return s
 }
@@ -17514,7 +17514,7 @@ type ListSigningCertificatesOutput struct {
 	// A list of the user's signing certificate information.
 	//
 	// Certificates is a required field
-	Certificates []*SigningCertificate `type:"list" required:"true"`
+	Certificates []SigningCertificate `type:"list" required:"true"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -17540,7 +17540,7 @@ func (s ListSigningCertificatesOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *ListSigningCertificatesOutput) SetCertificates(v []*SigningCertificate) *ListSigningCertificatesOutput {
+func (s *ListSigningCertificatesOutput) SetCertificates(v []SigningCertificate) *ListSigningCertificatesOutput {
 	s.Certificates = v
 	return s
 }
@@ -17659,7 +17659,7 @@ type ListUserPoliciesOutput struct {
 	// A list of policy names.
 	//
 	// PolicyNames is a required field
-	PolicyNames []*string `type:"list" required:"true"`
+	PolicyNames []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17685,7 +17685,7 @@ func (s *ListUserPoliciesOutput) SetMarker(v string) *ListUserPoliciesOutput {
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
-func (s *ListUserPoliciesOutput) SetPolicyNames(v []*string) *ListUserPoliciesOutput {
+func (s *ListUserPoliciesOutput) SetPolicyNames(v []string) *ListUserPoliciesOutput {
 	s.PolicyNames = v
 	return s
 }
@@ -17791,7 +17791,7 @@ type ListUsersOutput struct {
 	// A list of users.
 	//
 	// Users is a required field
-	Users []*User `type:"list" required:"true"`
+	Users []User `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17817,7 +17817,7 @@ func (s *ListUsersOutput) SetMarker(v string) *ListUsersOutput {
 }
 
 // SetUsers sets the Users field's value.
-func (s *ListUsersOutput) SetUsers(v []*User) *ListUsersOutput {
+func (s *ListUsersOutput) SetUsers(v []User) *ListUsersOutput {
 	s.Users = v
 	return s
 }
@@ -17829,7 +17829,7 @@ type ListVirtualMFADevicesInput struct {
 	// The status (Unassigned or Assigned) of the devices to list. If you do not
 	// specify an AssignmentStatus, the action defaults to Any which lists both
 	// assigned and unassigned virtual MFA devices.
-	AssignmentStatus AssignmentStatusType `type:"string"`
+	AssignmentStatus AssignmentStatusType `type:"string" enum:"true"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -17914,7 +17914,7 @@ type ListVirtualMFADevicesOutput struct {
 	// value that was passed in the request.
 	//
 	// VirtualMFADevices is a required field
-	VirtualMFADevices []*VirtualMFADevice `type:"list" required:"true"`
+	VirtualMFADevices []VirtualMFADevice `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -17940,7 +17940,7 @@ func (s *ListVirtualMFADevicesOutput) SetMarker(v string) *ListVirtualMFADevices
 }
 
 // SetVirtualMFADevices sets the VirtualMFADevices field's value.
-func (s *ListVirtualMFADevicesOutput) SetVirtualMFADevices(v []*VirtualMFADevice) *ListVirtualMFADevicesOutput {
+func (s *ListVirtualMFADevicesOutput) SetVirtualMFADevices(v []VirtualMFADevice) *ListVirtualMFADevicesOutput {
 	s.VirtualMFADevices = v
 	return s
 }
@@ -18107,7 +18107,7 @@ type ManagedPolicyDetail struct {
 	PolicyName *string `min:"1" type:"string"`
 
 	// A list containing information about the versions of the policy.
-	PolicyVersionList []*PolicyVersion `type:"list"`
+	PolicyVersionList []PolicyVersion `type:"list"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the policy was last updated.
@@ -18184,7 +18184,7 @@ func (s *ManagedPolicyDetail) SetPolicyName(v string) *ManagedPolicyDetail {
 }
 
 // SetPolicyVersionList sets the PolicyVersionList field's value.
-func (s *ManagedPolicyDetail) SetPolicyVersionList(v []*PolicyVersion) *ManagedPolicyDetail {
+func (s *ManagedPolicyDetail) SetPolicyVersionList(v []PolicyVersion) *ManagedPolicyDetail {
 	s.PolicyVersionList = v
 	return s
 }
@@ -19458,7 +19458,7 @@ type ResourceSpecificResult struct {
 	// specified in EvalResourceName.
 	//
 	// EvalResourceDecision is a required field
-	EvalResourceDecision PolicyEvaluationDecisionType `type:"string" required:"true"`
+	EvalResourceDecision PolicyEvaluationDecisionType `type:"string" required:"true" enum:"true"`
 
 	// The name of the simulated resource, in Amazon Resource Name (ARN) format.
 	//
@@ -19470,7 +19470,7 @@ type ResourceSpecificResult struct {
 	// allow the action on the resource, if any statement denies that action, then
 	// the explicit deny overrides any allow, and the deny statement is the only
 	// entry included in the result.
-	MatchedStatements []*Statement `type:"list"`
+	MatchedStatements []Statement `type:"list"`
 
 	// A list of context keys that are required by the included input policies but
 	// that were not provided by one of the input parameters. This list is used
@@ -19480,7 +19480,7 @@ type ResourceSpecificResult struct {
 	// values are instead included under the EvaluationResults section. To discover
 	// the context keys used by a set of policies, you can call GetContextKeysForCustomPolicy
 	// or GetContextKeysForPrincipalPolicy.
-	MissingContextValues []*string `type:"list"`
+	MissingContextValues []string `type:"list"`
 }
 
 // String returns the string representation
@@ -19512,13 +19512,13 @@ func (s *ResourceSpecificResult) SetEvalResourceName(v string) *ResourceSpecific
 }
 
 // SetMatchedStatements sets the MatchedStatements field's value.
-func (s *ResourceSpecificResult) SetMatchedStatements(v []*Statement) *ResourceSpecificResult {
+func (s *ResourceSpecificResult) SetMatchedStatements(v []Statement) *ResourceSpecificResult {
 	s.MatchedStatements = v
 	return s
 }
 
 // SetMissingContextValues sets the MissingContextValues field's value.
-func (s *ResourceSpecificResult) SetMissingContextValues(v []*string) *ResourceSpecificResult {
+func (s *ResourceSpecificResult) SetMissingContextValues(v []string) *ResourceSpecificResult {
 	s.MissingContextValues = v
 	return s
 }
@@ -19764,14 +19764,14 @@ type RoleDetail struct {
 
 	// A list of managed policies attached to the role. These policies are the role's
 	// access (permissions) policies.
-	AttachedManagedPolicies []*AttachedPolicy `type:"list"`
+	AttachedManagedPolicies []AttachedPolicy `type:"list"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the role was created.
 	CreateDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// A list of instance profiles that contain this role.
-	InstanceProfileList []*InstanceProfile `type:"list"`
+	InstanceProfileList []InstanceProfile `type:"list"`
 
 	// The path to the role. For more information about paths, see IAM Identifiers
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -19788,7 +19788,7 @@ type RoleDetail struct {
 
 	// A list of inline policies embedded in the role. These policies are the role's
 	// access (permissions) policies.
-	RolePolicyList []*PolicyDetail `type:"list"`
+	RolePolicyList []PolicyDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -19814,7 +19814,7 @@ func (s *RoleDetail) SetAssumeRolePolicyDocument(v string) *RoleDetail {
 }
 
 // SetAttachedManagedPolicies sets the AttachedManagedPolicies field's value.
-func (s *RoleDetail) SetAttachedManagedPolicies(v []*AttachedPolicy) *RoleDetail {
+func (s *RoleDetail) SetAttachedManagedPolicies(v []AttachedPolicy) *RoleDetail {
 	s.AttachedManagedPolicies = v
 	return s
 }
@@ -19826,7 +19826,7 @@ func (s *RoleDetail) SetCreateDate(v time.Time) *RoleDetail {
 }
 
 // SetInstanceProfileList sets the InstanceProfileList field's value.
-func (s *RoleDetail) SetInstanceProfileList(v []*InstanceProfile) *RoleDetail {
+func (s *RoleDetail) SetInstanceProfileList(v []InstanceProfile) *RoleDetail {
 	s.InstanceProfileList = v
 	return s
 }
@@ -19850,7 +19850,7 @@ func (s *RoleDetail) SetRoleName(v string) *RoleDetail {
 }
 
 // SetRolePolicyList sets the RolePolicyList field's value.
-func (s *RoleDetail) SetRolePolicyList(v []*PolicyDetail) *RoleDetail {
+func (s *RoleDetail) SetRolePolicyList(v []PolicyDetail) *RoleDetail {
 	s.RolePolicyList = v
 	return s
 }
@@ -19867,7 +19867,7 @@ type RoleUsageType struct {
 	Region *string `min:"1" type:"string"`
 
 	// The name of the resource that is using the service-linked role.
-	Resources []*string `type:"list"`
+	Resources []string `type:"list"`
 }
 
 // String returns the string representation
@@ -19887,7 +19887,7 @@ func (s *RoleUsageType) SetRegion(v string) *RoleUsageType {
 }
 
 // SetResources sets the Resources field's value.
-func (s *RoleUsageType) SetResources(v []*string) *RoleUsageType {
+func (s *RoleUsageType) SetResources(v []string) *RoleUsageType {
 	s.Resources = v
 	return s
 }
@@ -19962,7 +19962,7 @@ type SSHPublicKey struct {
 	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the SSH public key was uploaded.
@@ -20036,7 +20036,7 @@ type SSHPublicKeyMetadata struct {
 	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the SSH public key was uploaded.
@@ -20262,7 +20262,7 @@ type ServiceSpecificCredential struct {
 	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	//
@@ -20352,7 +20352,7 @@ type ServiceSpecificCredentialMetadata struct {
 	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	//
@@ -20510,7 +20510,7 @@ type SigningCertificate struct {
 	// API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The date when the signing certificate was uploaded.
 	UploadDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -20570,7 +20570,7 @@ type SimulateCustomPolicyInput struct {
 	// identifier, such as iam:CreateUser.
 	//
 	// ActionNames is a required field
-	ActionNames []*string `type:"list" required:"true"`
+	ActionNames []string `type:"list" required:"true"`
 
 	// The ARN of the IAM user that you want to use as the simulated caller of the
 	// APIs. CallerArn is required if you include a ResourcePolicy so that the policy's
@@ -20583,7 +20583,7 @@ type SimulateCustomPolicyInput struct {
 	// A list of context keys and corresponding values for the simulation to use.
 	// Whenever a context key is evaluated in one of the simulated IAM permission
 	// policies, the corresponding value is supplied.
-	ContextEntries []*ContextEntry `type:"list"`
+	ContextEntries []ContextEntry `type:"list"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -20619,7 +20619,7 @@ type SimulateCustomPolicyInput struct {
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
 	//
 	// PolicyInputList is a required field
-	PolicyInputList []*string `type:"list" required:"true"`
+	PolicyInputList []string `type:"list" required:"true"`
 
 	// A list of ARNs of AWS resources to include in the simulation. If this parameter
 	// is not provided then the value defaults to * (all resources). Each API in
@@ -20637,7 +20637,7 @@ type SimulateCustomPolicyInput struct {
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference.
-	ResourceArns []*string `type:"list"`
+	ResourceArns []string `type:"list"`
 
 	// Specifies the type of simulation to run. Different APIs that support resource-based
 	// policies require different combinations of resources. By specifying the type
@@ -20745,9 +20745,6 @@ func (s *SimulateCustomPolicyInput) Validate() error {
 	}
 	if s.ContextEntries != nil {
 		for i, v := range s.ContextEntries {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContextEntries", i), err.(aws.ErrInvalidParams))
 			}
@@ -20761,7 +20758,7 @@ func (s *SimulateCustomPolicyInput) Validate() error {
 }
 
 // SetActionNames sets the ActionNames field's value.
-func (s *SimulateCustomPolicyInput) SetActionNames(v []*string) *SimulateCustomPolicyInput {
+func (s *SimulateCustomPolicyInput) SetActionNames(v []string) *SimulateCustomPolicyInput {
 	s.ActionNames = v
 	return s
 }
@@ -20773,7 +20770,7 @@ func (s *SimulateCustomPolicyInput) SetCallerArn(v string) *SimulateCustomPolicy
 }
 
 // SetContextEntries sets the ContextEntries field's value.
-func (s *SimulateCustomPolicyInput) SetContextEntries(v []*ContextEntry) *SimulateCustomPolicyInput {
+func (s *SimulateCustomPolicyInput) SetContextEntries(v []ContextEntry) *SimulateCustomPolicyInput {
 	s.ContextEntries = v
 	return s
 }
@@ -20791,13 +20788,13 @@ func (s *SimulateCustomPolicyInput) SetMaxItems(v int64) *SimulateCustomPolicyIn
 }
 
 // SetPolicyInputList sets the PolicyInputList field's value.
-func (s *SimulateCustomPolicyInput) SetPolicyInputList(v []*string) *SimulateCustomPolicyInput {
+func (s *SimulateCustomPolicyInput) SetPolicyInputList(v []string) *SimulateCustomPolicyInput {
 	s.PolicyInputList = v
 	return s
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *SimulateCustomPolicyInput) SetResourceArns(v []*string) *SimulateCustomPolicyInput {
+func (s *SimulateCustomPolicyInput) SetResourceArns(v []string) *SimulateCustomPolicyInput {
 	s.ResourceArns = v
 	return s
 }
@@ -20829,7 +20826,7 @@ type SimulatePrincipalPolicyInput struct {
 	// such as iam:CreateUser.
 	//
 	// ActionNames is a required field
-	ActionNames []*string `type:"list" required:"true"`
+	ActionNames []string `type:"list" required:"true"`
 
 	// The ARN of the IAM user that you want to specify as the simulated caller
 	// of the APIs. If you do not specify a CallerArn, it defaults to the ARN of
@@ -20853,7 +20850,7 @@ type SimulatePrincipalPolicyInput struct {
 	// A list of context keys and corresponding values for the simulation to use.
 	// Whenever a context key is evaluated in one of the simulated IAM permission
 	// policies, the corresponding value is supplied.
-	ContextEntries []*ContextEntry `type:"list"`
+	ContextEntries []ContextEntry `type:"list"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -20882,7 +20879,7 @@ type SimulatePrincipalPolicyInput struct {
 	// range as well as the printable characters in the Basic Latin and Latin-1
 	// Supplement character set (through \u00FF). It also includes the special characters
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
-	PolicyInputList []*string `type:"list"`
+	PolicyInputList []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of a user, group, or role whose policies you
 	// want to include in the simulation. If you specify a user, group, or role,
@@ -20910,7 +20907,7 @@ type SimulatePrincipalPolicyInput struct {
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference.
-	ResourceArns []*string `type:"list"`
+	ResourceArns []string `type:"list"`
 
 	// Specifies the type of simulation to run. Different APIs that support resource-based
 	// policies require different combinations of resources. By specifying the type
@@ -21021,9 +21018,6 @@ func (s *SimulatePrincipalPolicyInput) Validate() error {
 	}
 	if s.ContextEntries != nil {
 		for i, v := range s.ContextEntries {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContextEntries", i), err.(aws.ErrInvalidParams))
 			}
@@ -21037,7 +21031,7 @@ func (s *SimulatePrincipalPolicyInput) Validate() error {
 }
 
 // SetActionNames sets the ActionNames field's value.
-func (s *SimulatePrincipalPolicyInput) SetActionNames(v []*string) *SimulatePrincipalPolicyInput {
+func (s *SimulatePrincipalPolicyInput) SetActionNames(v []string) *SimulatePrincipalPolicyInput {
 	s.ActionNames = v
 	return s
 }
@@ -21049,7 +21043,7 @@ func (s *SimulatePrincipalPolicyInput) SetCallerArn(v string) *SimulatePrincipal
 }
 
 // SetContextEntries sets the ContextEntries field's value.
-func (s *SimulatePrincipalPolicyInput) SetContextEntries(v []*ContextEntry) *SimulatePrincipalPolicyInput {
+func (s *SimulatePrincipalPolicyInput) SetContextEntries(v []ContextEntry) *SimulatePrincipalPolicyInput {
 	s.ContextEntries = v
 	return s
 }
@@ -21067,7 +21061,7 @@ func (s *SimulatePrincipalPolicyInput) SetMaxItems(v int64) *SimulatePrincipalPo
 }
 
 // SetPolicyInputList sets the PolicyInputList field's value.
-func (s *SimulatePrincipalPolicyInput) SetPolicyInputList(v []*string) *SimulatePrincipalPolicyInput {
+func (s *SimulatePrincipalPolicyInput) SetPolicyInputList(v []string) *SimulatePrincipalPolicyInput {
 	s.PolicyInputList = v
 	return s
 }
@@ -21079,7 +21073,7 @@ func (s *SimulatePrincipalPolicyInput) SetPolicySourceArn(v string) *SimulatePri
 }
 
 // SetResourceArns sets the ResourceArns field's value.
-func (s *SimulatePrincipalPolicyInput) SetResourceArns(v []*string) *SimulatePrincipalPolicyInput {
+func (s *SimulatePrincipalPolicyInput) SetResourceArns(v []string) *SimulatePrincipalPolicyInput {
 	s.ResourceArns = v
 	return s
 }
@@ -21109,7 +21103,7 @@ type SimulatePrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The results of the simulation.
-	EvaluationResults []*EvaluationResult `type:"list"`
+	EvaluationResults []EvaluationResult `type:"list"`
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -21135,7 +21129,7 @@ func (s SimulatePrincipalPolicyOutput) GoString() string {
 }
 
 // SetEvaluationResults sets the EvaluationResults field's value.
-func (s *SimulatePrincipalPolicyOutput) SetEvaluationResults(v []*EvaluationResult) *SimulatePrincipalPolicyOutput {
+func (s *SimulatePrincipalPolicyOutput) SetEvaluationResults(v []EvaluationResult) *SimulatePrincipalPolicyOutput {
 	s.EvaluationResults = v
 	return s
 }
@@ -21168,7 +21162,7 @@ type Statement struct {
 	SourcePolicyId *string `type:"string"`
 
 	// The type of the policy.
-	SourcePolicyType PolicySourceType `type:"string"`
+	SourcePolicyType PolicySourceType `type:"string" enum:"true"`
 
 	// The row and column of the beginning of the Statement in an IAM policy.
 	StartPosition *Position `type:"structure"`
@@ -21226,7 +21220,7 @@ type UpdateAccessKeyInput struct {
 	// be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the user whose key you want to update.
 	//
@@ -21758,7 +21752,7 @@ type UpdateOpenIDConnectProviderThumbprintInput struct {
 	// IAM OpenID Connect provider. For more information, see CreateOpenIDConnectProvider.
 	//
 	// ThumbprintList is a required field
-	ThumbprintList []*string `type:"list" required:"true"`
+	ThumbprintList []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -21799,7 +21793,7 @@ func (s *UpdateOpenIDConnectProviderThumbprintInput) SetOpenIDConnectProviderArn
 }
 
 // SetThumbprintList sets the ThumbprintList field's value.
-func (s *UpdateOpenIDConnectProviderThumbprintInput) SetThumbprintList(v []*string) *UpdateOpenIDConnectProviderThumbprintInput {
+func (s *UpdateOpenIDConnectProviderThumbprintInput) SetThumbprintList(v []string) *UpdateOpenIDConnectProviderThumbprintInput {
 	s.ThumbprintList = v
 	return s
 }
@@ -22013,7 +22007,7 @@ type UpdateSSHPublicKeyInput struct {
 	// key cannot be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the SSH public key.
 	//
@@ -22210,7 +22204,7 @@ type UpdateServiceSpecificCredentialInput struct {
 	// The status to be assigned to the service-specific credential.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	// If you do not specify this value, then the operation assumes the user whose
@@ -22306,7 +22300,7 @@ type UpdateSigningCertificateInput struct {
 	// be used.
 	//
 	// Status is a required field
-	Status StatusType `type:"string" required:"true"`
+	Status StatusType `type:"string" required:"true" enum:"true"`
 
 	// The name of the IAM user the signing certificate belongs to.
 	//
@@ -22972,14 +22966,14 @@ type UserDetail struct {
 	Arn *string `min:"20" type:"string"`
 
 	// A list of the managed policies attached to the user.
-	AttachedManagedPolicies []*AttachedPolicy `type:"list"`
+	AttachedManagedPolicies []AttachedPolicy `type:"list"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the user was created.
 	CreateDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// A list of IAM groups that the user is in.
-	GroupList []*string `type:"list"`
+	GroupList []string `type:"list"`
 
 	// The path to the user. For more information about paths, see IAM Identifiers
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -22995,7 +22989,7 @@ type UserDetail struct {
 	UserName *string `min:"1" type:"string"`
 
 	// A list of the inline policies embedded in the user.
-	UserPolicyList []*PolicyDetail `type:"list"`
+	UserPolicyList []PolicyDetail `type:"list"`
 }
 
 // String returns the string representation
@@ -23015,7 +23009,7 @@ func (s *UserDetail) SetArn(v string) *UserDetail {
 }
 
 // SetAttachedManagedPolicies sets the AttachedManagedPolicies field's value.
-func (s *UserDetail) SetAttachedManagedPolicies(v []*AttachedPolicy) *UserDetail {
+func (s *UserDetail) SetAttachedManagedPolicies(v []AttachedPolicy) *UserDetail {
 	s.AttachedManagedPolicies = v
 	return s
 }
@@ -23027,7 +23021,7 @@ func (s *UserDetail) SetCreateDate(v time.Time) *UserDetail {
 }
 
 // SetGroupList sets the GroupList field's value.
-func (s *UserDetail) SetGroupList(v []*string) *UserDetail {
+func (s *UserDetail) SetGroupList(v []string) *UserDetail {
 	s.GroupList = v
 	return s
 }
@@ -23051,7 +23045,7 @@ func (s *UserDetail) SetUserName(v string) *UserDetail {
 }
 
 // SetUserPolicyList sets the UserPolicyList field's value.
-func (s *UserDetail) SetUserPolicyList(v []*PolicyDetail) *UserDetail {
+func (s *UserDetail) SetUserPolicyList(v []PolicyDetail) *UserDetail {
 	s.UserPolicyList = v
 	return s
 }

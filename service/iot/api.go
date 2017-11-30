@@ -3126,7 +3126,7 @@ type AttributePayload struct {
 	// A JSON string containing up to three key-value pair in JSON format. For example:
 	//
 	// {\"attributes\":{\"string1\":\"string2\"}}
-	Attributes map[string]*string `locationName:"attributes" type:"map"`
+	Attributes map[string]string `locationName:"attributes" type:"map"`
 
 	// Specifies whether the list of attributes provided in the AttributePayload
 	// is merged with the attributes stored in the registry, instead of overwriting
@@ -3149,7 +3149,7 @@ func (s AttributePayload) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *AttributePayload) SetAttributes(v map[string]*string) *AttributePayload {
+func (s *AttributePayload) SetAttributes(v map[string]string) *AttributePayload {
 	s.Attributes = v
 	return s
 }
@@ -3176,7 +3176,7 @@ type CACertificate struct {
 	// The status of the CA certificate.
 	//
 	// The status value REGISTER_INACTIVE is deprecated and should not be used.
-	Status CACertificateStatus `locationName:"status" type:"string"`
+	Status CACertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3219,7 +3219,7 @@ type CACertificateDescription struct {
 
 	// Whether the CA certificate configured for auto registration of device certificates.
 	// Valid values are "ENABLE" and "DISABLE"
-	AutoRegistrationStatus AutoRegistrationStatus `locationName:"autoRegistrationStatus" type:"string"`
+	AutoRegistrationStatus AutoRegistrationStatus `locationName:"autoRegistrationStatus" type:"string" enum:"true"`
 
 	// The CA certificate ARN.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
@@ -3237,7 +3237,7 @@ type CACertificateDescription struct {
 	OwnedBy *string `locationName:"ownedBy" type:"string"`
 
 	// The status of a CA certificate.
-	Status CACertificateStatus `locationName:"status" type:"string"`
+	Status CACertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3365,7 +3365,7 @@ type Certificate struct {
 	// The status of the certificate.
 	//
 	// The status value REGISTER_INACTIVE is deprecated and should not be used.
-	Status CertificateStatus `locationName:"status" type:"string"`
+	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3431,7 +3431,7 @@ type CertificateDescription struct {
 	PreviousOwnedBy *string `locationName:"previousOwnedBy" type:"string"`
 
 	// The status of the certificate.
-	Status CertificateStatus `locationName:"status" type:"string"`
+	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The transfer data.
 	TransferData *TransferData `locationName:"transferData" type:"structure"`
@@ -5116,7 +5116,7 @@ type DescribeThingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The thing attributes.
-	Attributes map[string]*string `locationName:"attributes" type:"map"`
+	Attributes map[string]string `locationName:"attributes" type:"map"`
 
 	// The default client ID.
 	DefaultClientId *string `locationName:"defaultClientId" type:"string"`
@@ -5146,7 +5146,7 @@ func (s DescribeThingOutput) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DescribeThingOutput) SetAttributes(v map[string]*string) *DescribeThingOutput {
+func (s *DescribeThingOutput) SetAttributes(v map[string]string) *DescribeThingOutput {
 	s.Attributes = v
 	return s
 }
@@ -5496,7 +5496,7 @@ type DynamoDBAction struct {
 	HashKeyField *string `locationName:"hashKeyField" type:"string" required:"true"`
 
 	// The hash key type. Valid values are "STRING" or "NUMBER"
-	HashKeyType DynamoKeyType `locationName:"hashKeyType" type:"string"`
+	HashKeyType DynamoKeyType `locationName:"hashKeyType" type:"string" enum:"true"`
 
 	// The hash key value.
 	//
@@ -5515,7 +5515,7 @@ type DynamoDBAction struct {
 	RangeKeyField *string `locationName:"rangeKeyField" type:"string"`
 
 	// The range key type. Valid values are "STRING" or "NUMBER"
-	RangeKeyType DynamoKeyType `locationName:"rangeKeyType" type:"string"`
+	RangeKeyType DynamoKeyType `locationName:"rangeKeyType" type:"string" enum:"true"`
 
 	// The range key value.
 	RangeKeyValue *string `locationName:"rangeKeyValue" type:"string"`
@@ -5928,7 +5928,7 @@ type GetLoggingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The logging level.
-	LogLevel LogLevel `locationName:"logLevel" type:"string"`
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
 
 	// The ARN of the IAM role that grants access.
 	RoleArn *string `locationName:"roleArn" type:"string"`
@@ -6480,7 +6480,7 @@ type ListCACertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The CA certificates registered in your AWS account.
-	Certificates []*CACertificate `locationName:"certificates" type:"list"`
+	Certificates []CACertificate `locationName:"certificates" type:"list"`
 
 	// The current position within the list of CA certificates.
 	NextMarker *string `locationName:"nextMarker" type:"string"`
@@ -6497,7 +6497,7 @@ func (s ListCACertificatesOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *ListCACertificatesOutput) SetCertificates(v []*CACertificate) *ListCACertificatesOutput {
+func (s *ListCACertificatesOutput) SetCertificates(v []CACertificate) *ListCACertificatesOutput {
 	s.Certificates = v
 	return s
 }
@@ -6588,7 +6588,7 @@ type ListCertificatesByCAOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The device certificates signed by the specified CA certificate.
-	Certificates []*Certificate `locationName:"certificates" type:"list"`
+	Certificates []Certificate `locationName:"certificates" type:"list"`
 
 	// The marker for the next set of results, or null if there are no additional
 	// results.
@@ -6606,7 +6606,7 @@ func (s ListCertificatesByCAOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *ListCertificatesByCAOutput) SetCertificates(v []*Certificate) *ListCertificatesByCAOutput {
+func (s *ListCertificatesByCAOutput) SetCertificates(v []Certificate) *ListCertificatesByCAOutput {
 	s.Certificates = v
 	return s
 }
@@ -6678,7 +6678,7 @@ type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The descriptions of the certificates.
-	Certificates []*Certificate `locationName:"certificates" type:"list"`
+	Certificates []Certificate `locationName:"certificates" type:"list"`
 
 	// The marker for the next set of results, or null if there are no additional
 	// results.
@@ -6696,7 +6696,7 @@ func (s ListCertificatesOutput) GoString() string {
 }
 
 // SetCertificates sets the Certificates field's value.
-func (s *ListCertificatesOutput) SetCertificates(v []*Certificate) *ListCertificatesOutput {
+func (s *ListCertificatesOutput) SetCertificates(v []Certificate) *ListCertificatesOutput {
 	s.Certificates = v
 	return s
 }
@@ -6771,7 +6771,7 @@ type ListOutgoingCertificatesOutput struct {
 	NextMarker *string `locationName:"nextMarker" type:"string"`
 
 	// The certificates that are being transfered but not yet accepted.
-	OutgoingCertificates []*OutgoingCertificate `locationName:"outgoingCertificates" type:"list"`
+	OutgoingCertificates []OutgoingCertificate `locationName:"outgoingCertificates" type:"list"`
 }
 
 // String returns the string representation
@@ -6791,7 +6791,7 @@ func (s *ListOutgoingCertificatesOutput) SetNextMarker(v string) *ListOutgoingCe
 }
 
 // SetOutgoingCertificates sets the OutgoingCertificates field's value.
-func (s *ListOutgoingCertificatesOutput) SetOutgoingCertificates(v []*OutgoingCertificate) *ListOutgoingCertificatesOutput {
+func (s *ListOutgoingCertificatesOutput) SetOutgoingCertificates(v []OutgoingCertificate) *ListOutgoingCertificatesOutput {
 	s.OutgoingCertificates = v
 	return s
 }
@@ -6861,7 +6861,7 @@ type ListPoliciesOutput struct {
 	NextMarker *string `locationName:"nextMarker" type:"string"`
 
 	// The descriptions of the policies.
-	Policies []*Policy `locationName:"policies" type:"list"`
+	Policies []Policy `locationName:"policies" type:"list"`
 }
 
 // String returns the string representation
@@ -6881,7 +6881,7 @@ func (s *ListPoliciesOutput) SetNextMarker(v string) *ListPoliciesOutput {
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *ListPoliciesOutput) SetPolicies(v []*Policy) *ListPoliciesOutput {
+func (s *ListPoliciesOutput) SetPolicies(v []Policy) *ListPoliciesOutput {
 	s.Policies = v
 	return s
 }
@@ -6969,7 +6969,7 @@ type ListPolicyPrincipalsOutput struct {
 	NextMarker *string `locationName:"nextMarker" type:"string"`
 
 	// The descriptions of the principals.
-	Principals []*string `locationName:"principals" type:"list"`
+	Principals []string `locationName:"principals" type:"list"`
 }
 
 // String returns the string representation
@@ -6989,7 +6989,7 @@ func (s *ListPolicyPrincipalsOutput) SetNextMarker(v string) *ListPolicyPrincipa
 }
 
 // SetPrincipals sets the Principals field's value.
-func (s *ListPolicyPrincipalsOutput) SetPrincipals(v []*string) *ListPolicyPrincipalsOutput {
+func (s *ListPolicyPrincipalsOutput) SetPrincipals(v []string) *ListPolicyPrincipalsOutput {
 	s.Principals = v
 	return s
 }
@@ -7042,7 +7042,7 @@ type ListPolicyVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The policy versions.
-	PolicyVersions []*PolicyVersion `locationName:"policyVersions" type:"list"`
+	PolicyVersions []PolicyVersion `locationName:"policyVersions" type:"list"`
 }
 
 // String returns the string representation
@@ -7056,7 +7056,7 @@ func (s ListPolicyVersionsOutput) GoString() string {
 }
 
 // SetPolicyVersions sets the PolicyVersions field's value.
-func (s *ListPolicyVersionsOutput) SetPolicyVersions(v []*PolicyVersion) *ListPolicyVersionsOutput {
+func (s *ListPolicyVersionsOutput) SetPolicyVersions(v []PolicyVersion) *ListPolicyVersionsOutput {
 	s.PolicyVersions = v
 	return s
 }
@@ -7141,7 +7141,7 @@ type ListPrincipalPoliciesOutput struct {
 	NextMarker *string `locationName:"nextMarker" type:"string"`
 
 	// The policies.
-	Policies []*Policy `locationName:"policies" type:"list"`
+	Policies []Policy `locationName:"policies" type:"list"`
 }
 
 // String returns the string representation
@@ -7161,7 +7161,7 @@ func (s *ListPrincipalPoliciesOutput) SetNextMarker(v string) *ListPrincipalPoli
 }
 
 // SetPolicies sets the Policies field's value.
-func (s *ListPrincipalPoliciesOutput) SetPolicies(v []*Policy) *ListPrincipalPoliciesOutput {
+func (s *ListPrincipalPoliciesOutput) SetPolicies(v []Policy) *ListPrincipalPoliciesOutput {
 	s.Policies = v
 	return s
 }
@@ -7237,7 +7237,7 @@ type ListPrincipalThingsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The things.
-	Things []*string `locationName:"things" type:"list"`
+	Things []string `locationName:"things" type:"list"`
 }
 
 // String returns the string representation
@@ -7257,7 +7257,7 @@ func (s *ListPrincipalThingsOutput) SetNextToken(v string) *ListPrincipalThingsO
 }
 
 // SetThings sets the Things field's value.
-func (s *ListPrincipalThingsOutput) SetThings(v []*string) *ListPrincipalThingsOutput {
+func (s *ListPrincipalThingsOutput) SetThings(v []string) *ListPrincipalThingsOutput {
 	s.Things = v
 	return s
 }
@@ -7310,7 +7310,7 @@ type ListThingPrincipalsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The principals associated with the thing.
-	Principals []*string `locationName:"principals" type:"list"`
+	Principals []string `locationName:"principals" type:"list"`
 }
 
 // String returns the string representation
@@ -7324,7 +7324,7 @@ func (s ListThingPrincipalsOutput) GoString() string {
 }
 
 // SetPrincipals sets the Principals field's value.
-func (s *ListThingPrincipalsOutput) SetPrincipals(v []*string) *ListThingPrincipalsOutput {
+func (s *ListThingPrincipalsOutput) SetPrincipals(v []string) *ListThingPrincipalsOutput {
 	s.Principals = v
 	return s
 }
@@ -7397,7 +7397,7 @@ type ListThingTypesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The thing types.
-	ThingTypes []*ThingTypeDefinition `locationName:"thingTypes" type:"list"`
+	ThingTypes []ThingTypeDefinition `locationName:"thingTypes" type:"list"`
 }
 
 // String returns the string representation
@@ -7417,7 +7417,7 @@ func (s *ListThingTypesOutput) SetNextToken(v string) *ListThingTypesOutput {
 }
 
 // SetThingTypes sets the ThingTypes field's value.
-func (s *ListThingTypesOutput) SetThingTypes(v []*ThingTypeDefinition) *ListThingTypesOutput {
+func (s *ListThingTypesOutput) SetThingTypes(v []ThingTypeDefinition) *ListThingTypesOutput {
 	s.ThingTypes = v
 	return s
 }
@@ -7508,7 +7508,7 @@ type ListThingsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The things.
-	Things []*ThingAttribute `locationName:"things" type:"list"`
+	Things []ThingAttribute `locationName:"things" type:"list"`
 }
 
 // String returns the string representation
@@ -7528,7 +7528,7 @@ func (s *ListThingsOutput) SetNextToken(v string) *ListThingsOutput {
 }
 
 // SetThings sets the Things field's value.
-func (s *ListThingsOutput) SetThings(v []*ThingAttribute) *ListThingsOutput {
+func (s *ListThingsOutput) SetThings(v []ThingAttribute) *ListThingsOutput {
 	s.Things = v
 	return s
 }
@@ -7605,7 +7605,7 @@ type ListTopicRulesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The rules.
-	Rules []*TopicRuleListItem `locationName:"rules" type:"list"`
+	Rules []TopicRuleListItem `locationName:"rules" type:"list"`
 }
 
 // String returns the string representation
@@ -7625,7 +7625,7 @@ func (s *ListTopicRulesOutput) SetNextToken(v string) *ListTopicRulesOutput {
 }
 
 // SetRules sets the Rules field's value.
-func (s *ListTopicRulesOutput) SetRules(v []*TopicRuleListItem) *ListTopicRulesOutput {
+func (s *ListTopicRulesOutput) SetRules(v []TopicRuleListItem) *ListTopicRulesOutput {
 	s.Rules = v
 	return s
 }
@@ -7635,7 +7635,7 @@ type LoggingOptionsPayload struct {
 	_ struct{} `type:"structure"`
 
 	// The logging level.
-	LogLevel LogLevel `locationName:"logLevel" type:"string"`
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -7992,7 +7992,7 @@ type RegisterCertificateInput struct {
 	SetAsActive *bool `location:"querystring" locationName:"setAsActive" deprecated:"true" type:"boolean"`
 
 	// The status of the register certificate request.
-	Status CertificateStatus `locationName:"status" type:"string"`
+	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8291,7 +8291,7 @@ type S3Action struct {
 
 	// The Amazon S3 canned ACL that controls access to the object identified by
 	// the object key. For more information, see S3 canned ACLs (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
-	CannedAcl CannedAccessControlList `locationName:"cannedAcl" type:"string"`
+	CannedAcl CannedAccessControlList `locationName:"cannedAcl" type:"string" enum:"true"`
 
 	// The object key.
 	//
@@ -8562,7 +8562,7 @@ type SnsAction struct {
 	// bits of the payload should be extracted. To read more about SNS message formats,
 	// see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html (http://docs.aws.amazon.com/sns/latest/dg/json-formats.html)
 	// refer to their official documentation.
-	MessageFormat MessageFormat `locationName:"messageFormat" type:"string"`
+	MessageFormat MessageFormat `locationName:"messageFormat" type:"string" enum:"true"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -8691,7 +8691,7 @@ type ThingAttribute struct {
 	_ struct{} `type:"structure"`
 
 	// A list of thing attributes which are name-value pairs.
-	Attributes map[string]*string `locationName:"attributes" type:"map"`
+	Attributes map[string]string `locationName:"attributes" type:"map"`
 
 	// The name of the thing.
 	ThingName *string `locationName:"thingName" min:"1" type:"string"`
@@ -8714,7 +8714,7 @@ func (s ThingAttribute) GoString() string {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *ThingAttribute) SetAttributes(v map[string]*string) *ThingAttribute {
+func (s *ThingAttribute) SetAttributes(v map[string]string) *ThingAttribute {
 	s.Attributes = v
 	return s
 }
@@ -8832,7 +8832,7 @@ type ThingTypeProperties struct {
 	_ struct{} `type:"structure"`
 
 	// A list of searchable thing attribute names.
-	SearchableAttributes []*string `locationName:"searchableAttributes" type:"list"`
+	SearchableAttributes []string `locationName:"searchableAttributes" type:"list"`
 
 	// The description of the thing type.
 	ThingTypeDescription *string `locationName:"thingTypeDescription" type:"string"`
@@ -8849,7 +8849,7 @@ func (s ThingTypeProperties) GoString() string {
 }
 
 // SetSearchableAttributes sets the SearchableAttributes field's value.
-func (s *ThingTypeProperties) SetSearchableAttributes(v []*string) *ThingTypeProperties {
+func (s *ThingTypeProperties) SetSearchableAttributes(v []string) *ThingTypeProperties {
 	s.SearchableAttributes = v
 	return s
 }
@@ -8865,7 +8865,7 @@ type TopicRule struct {
 	_ struct{} `type:"structure"`
 
 	// The actions associated with the rule.
-	Actions []*Action `locationName:"actions" type:"list"`
+	Actions []Action `locationName:"actions" type:"list"`
 
 	// The version of the SQL rules engine to use when evaluating the rule.
 	AwsIotSqlVersion *string `locationName:"awsIotSqlVersion" type:"string"`
@@ -8898,7 +8898,7 @@ func (s TopicRule) GoString() string {
 }
 
 // SetActions sets the Actions field's value.
-func (s *TopicRule) SetActions(v []*Action) *TopicRule {
+func (s *TopicRule) SetActions(v []Action) *TopicRule {
 	s.Actions = v
 	return s
 }
@@ -9006,7 +9006,7 @@ type TopicRulePayload struct {
 	// The actions associated with the rule.
 	//
 	// Actions is a required field
-	Actions []*Action `locationName:"actions" type:"list" required:"true"`
+	Actions []Action `locationName:"actions" type:"list" required:"true"`
 
 	// The version of the SQL rules engine to use when evaluating the rule.
 	AwsIotSqlVersion *string `locationName:"awsIotSqlVersion" type:"string"`
@@ -9048,9 +9048,6 @@ func (s *TopicRulePayload) Validate() error {
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
@@ -9064,7 +9061,7 @@ func (s *TopicRulePayload) Validate() error {
 }
 
 // SetActions sets the Actions field's value.
-func (s *TopicRulePayload) SetActions(v []*Action) *TopicRulePayload {
+func (s *TopicRulePayload) SetActions(v []Action) *TopicRulePayload {
 	s.Actions = v
 	return s
 }
@@ -9255,13 +9252,13 @@ type UpdateCACertificateInput struct {
 
 	// The new value for the auto registration status. Valid values are: "ENABLE"
 	// or "DISABLE".
-	NewAutoRegistrationStatus AutoRegistrationStatus `location:"querystring" locationName:"newAutoRegistrationStatus" type:"string"`
+	NewAutoRegistrationStatus AutoRegistrationStatus `location:"querystring" locationName:"newAutoRegistrationStatus" type:"string" enum:"true"`
 
 	// The updated status of the CA certificate.
 	//
 	// Note: The status value REGISTER_INACTIVE is deprecated and should not be
 	// used.
-	NewStatus CACertificateStatus `location:"querystring" locationName:"newStatus" type:"string"`
+	NewStatus CACertificateStatus `location:"querystring" locationName:"newStatus" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9342,7 +9339,7 @@ type UpdateCertificateInput struct {
 	// used.
 	//
 	// NewStatus is a required field
-	NewStatus CertificateStatus `location:"querystring" locationName:"newStatus" type:"string" required:"true"`
+	NewStatus CertificateStatus `location:"querystring" locationName:"newStatus" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation

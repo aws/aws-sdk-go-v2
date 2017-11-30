@@ -232,8 +232,8 @@ func ExamplePolly_SynthesizeSpeechRequest_shared00() {
 
 	svc := polly.New(cfg)
 	input := &polly.SynthesizeSpeechInput{
-		LexiconNames: []*string{
-			aws.String("example"),
+		LexiconNames: []string{
+			"example",
 		},
 		OutputFormat: polly.OutputFormatMp3,
 		SampleRate:   aws.String("8000"),

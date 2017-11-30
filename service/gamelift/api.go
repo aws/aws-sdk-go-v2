@@ -5085,13 +5085,13 @@ type AcceptMatchInput struct {
 	// Player response to the proposed match.
 	//
 	// AcceptanceType is a required field
-	AcceptanceType AcceptanceType `type:"string" required:"true"`
+	AcceptanceType AcceptanceType `type:"string" required:"true" enum:"true"`
 
 	// Unique identifier for a player delivering the response. This parameter can
 	// include one or multiple player IDs.
 	//
 	// PlayerIds is a required field
-	PlayerIds []*string `type:"list" required:"true"`
+	PlayerIds []string `type:"list" required:"true"`
 
 	// Unique identifier for a matchmaking ticket. The ticket must be in status
 	// REQUIRES_ACCEPTANCE; otherwise this request will fail.
@@ -5141,7 +5141,7 @@ func (s *AcceptMatchInput) SetAcceptanceType(v AcceptanceType) *AcceptMatchInput
 }
 
 // SetPlayerIds sets the PlayerIds field's value.
-func (s *AcceptMatchInput) SetPlayerIds(v []*string) *AcceptMatchInput {
+func (s *AcceptMatchInput) SetPlayerIds(v []string) *AcceptMatchInput {
 	s.PlayerIds = v
 	return s
 }
@@ -5279,12 +5279,12 @@ type AttributeValue struct {
 
 	// For a map of up to 10 type:value pairs. Maximum length for each string value
 	// is 100 characters.
-	SDM map[string]*float64 `type:"map"`
+	SDM map[string]float64 `type:"map"`
 
 	// For a list of up to 10 strings. Maximum length for each string is 100 characters.
 	// Duplicate values are not recognized; all occurrences of the repeated value
 	// after the first of a repeated value are ignored.
-	SL []*string `type:"list"`
+	SL []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5323,13 +5323,13 @@ func (s *AttributeValue) SetS(v string) *AttributeValue {
 }
 
 // SetSDM sets the SDM field's value.
-func (s *AttributeValue) SetSDM(v map[string]*float64) *AttributeValue {
+func (s *AttributeValue) SetSDM(v map[string]float64) *AttributeValue {
 	s.SDM = v
 	return s
 }
 
 // SetSL sets the SL field's value.
-func (s *AttributeValue) SetSL(v []*string) *AttributeValue {
+func (s *AttributeValue) SetSL(v []string) *AttributeValue {
 	s.SL = v
 	return s
 }
@@ -5410,7 +5410,7 @@ type Build struct {
 
 	// Operating system that the game server binaries are built to run on. This
 	// value determines the type of fleet resources that you can use for this build.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// File size of the uploaded game build, expressed in bytes. When the build
 	// status is INITIALIZED, this value is 0.
@@ -5430,7 +5430,7 @@ type Build struct {
 	//
 	//    * FAILED -- The game build upload failed. You cannot create new fleets
 	//    for this build.
-	Status BuildStatus `type:"string"`
+	Status BuildStatus `type:"string" enum:"true"`
 
 	// Version that is associated with this build. Version strings do not need to
 	// be unique. This value can be set using CreateBuild or UpdateBuild.
@@ -5599,7 +5599,7 @@ type CreateBuildInput struct {
 	// value determines the type of fleet resources that you can use for this build.
 	// If your game build contains multiple executables, they all must run on the
 	// same operating system.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Amazon S3 location of the game build files to be uploaded. The S3 bucket
 	// must be owned by the same AWS account that you're using to manage Amazon
@@ -5732,7 +5732,7 @@ type CreateFleetInput struct {
 	// including both IP address range and port range, the server processes in the
 	// fleet cannot accept connections. You can specify one or more sets of permissions
 	// for a fleet.
-	EC2InboundPermissions []*IpPermission `type:"list"`
+	EC2InboundPermissions []IpPermission `type:"list"`
 
 	// Name of an EC2 instance type that is supported in Amazon GameLift. A fleet
 	// instance type determines the computing resources of each instance in the
@@ -5741,18 +5741,18 @@ type CreateFleetInput struct {
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
 	//
 	// EC2InstanceType is a required field
-	EC2InstanceType EC2InstanceType `type:"string" required:"true"`
+	EC2InstanceType EC2InstanceType `type:"string" required:"true" enum:"true"`
 
 	// This parameter is no longer used. Instead, to specify where Amazon GameLift
 	// should store log files once a server process shuts down, use the Amazon GameLift
 	// server API ProcessReady() and specify one or more directory paths in logParameters.
 	// See more information in the Server API Reference (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process).
-	LogPaths []*string `type:"list"`
+	LogPaths []string `type:"list"`
 
 	// Names of metric groups to add this fleet to. Use an existing metric group
 	// name to add this fleet to the group. Or use a new name to create a new metric
 	// group. A fleet can only be included in one metric group at a time.
-	MetricGroups []*string `type:"list"`
+	MetricGroups []string `type:"list"`
 
 	// Descriptive label that is associated with a fleet. Fleet names do not need
 	// to be unique.
@@ -5771,7 +5771,7 @@ type CreateFleetInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 
 	// Unique identifier for the AWS account with the VPC that you want to peer
 	// your Amazon GameLift fleet with. You can find your Account ID in the AWS
@@ -5858,9 +5858,6 @@ func (s *CreateFleetInput) Validate() error {
 	}
 	if s.EC2InboundPermissions != nil {
 		for i, v := range s.EC2InboundPermissions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EC2InboundPermissions", i), err.(aws.ErrInvalidParams))
 			}
@@ -5891,7 +5888,7 @@ func (s *CreateFleetInput) SetDescription(v string) *CreateFleetInput {
 }
 
 // SetEC2InboundPermissions sets the EC2InboundPermissions field's value.
-func (s *CreateFleetInput) SetEC2InboundPermissions(v []*IpPermission) *CreateFleetInput {
+func (s *CreateFleetInput) SetEC2InboundPermissions(v []IpPermission) *CreateFleetInput {
 	s.EC2InboundPermissions = v
 	return s
 }
@@ -5903,13 +5900,13 @@ func (s *CreateFleetInput) SetEC2InstanceType(v EC2InstanceType) *CreateFleetInp
 }
 
 // SetLogPaths sets the LogPaths field's value.
-func (s *CreateFleetInput) SetLogPaths(v []*string) *CreateFleetInput {
+func (s *CreateFleetInput) SetLogPaths(v []string) *CreateFleetInput {
 	s.LogPaths = v
 	return s
 }
 
 // SetMetricGroups sets the MetricGroups field's value.
-func (s *CreateFleetInput) SetMetricGroups(v []*string) *CreateFleetInput {
+func (s *CreateFleetInput) SetMetricGroups(v []string) *CreateFleetInput {
 	s.MetricGroups = v
 	return s
 }
@@ -6010,7 +6007,7 @@ type CreateGameSessionInput struct {
 	// of type:value pairs. These properties are included in the GameSession object,
 	// which is passed to the game server with a request to start a new game session
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Set of developer-defined game session properties, formatted as a single string
 	// value. This data is included in the GameSession object, which is passed to
@@ -6080,9 +6077,6 @@ func (s *CreateGameSessionInput) Validate() error {
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
@@ -6114,7 +6108,7 @@ func (s *CreateGameSessionInput) SetFleetId(v string) *CreateGameSessionInput {
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *CreateGameSessionInput) SetGameProperties(v []*GameProperty) *CreateGameSessionInput {
+func (s *CreateGameSessionInput) SetGameProperties(v []GameProperty) *CreateGameSessionInput {
 	s.GameProperties = v
 	return s
 }
@@ -6182,7 +6176,7 @@ type CreateGameSessionQueueInput struct {
 	// List of fleets that can be used to fulfill game session placement requests
 	// in the queue. Fleets are identified by either a fleet ARN or a fleet alias
 	// ARN. Destinations are listed in default preference order.
-	Destinations []*GameSessionQueueDestination `type:"list"`
+	Destinations []GameSessionQueueDestination `type:"list"`
 
 	// Descriptive label that is associated with game session queue. Queue names
 	// must be unique within each region.
@@ -6200,7 +6194,7 @@ type CreateGameSessionQueueInput struct {
 	// the remainder of the placement. A player latency policy must set a value
 	// for MaximumIndividualPlayerLatencyMilliseconds; if none is set, this API
 	// requests will fail.
-	PlayerLatencyPolicies []*PlayerLatencyPolicy `type:"list"`
+	PlayerLatencyPolicies []PlayerLatencyPolicy `type:"list"`
 
 	// Maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
@@ -6230,9 +6224,6 @@ func (s *CreateGameSessionQueueInput) Validate() error {
 	}
 	if s.Destinations != nil {
 		for i, v := range s.Destinations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
 			}
@@ -6246,7 +6237,7 @@ func (s *CreateGameSessionQueueInput) Validate() error {
 }
 
 // SetDestinations sets the Destinations field's value.
-func (s *CreateGameSessionQueueInput) SetDestinations(v []*GameSessionQueueDestination) *CreateGameSessionQueueInput {
+func (s *CreateGameSessionQueueInput) SetDestinations(v []GameSessionQueueDestination) *CreateGameSessionQueueInput {
 	s.Destinations = v
 	return s
 }
@@ -6258,7 +6249,7 @@ func (s *CreateGameSessionQueueInput) SetName(v string) *CreateGameSessionQueueI
 }
 
 // SetPlayerLatencyPolicies sets the PlayerLatencyPolicies field's value.
-func (s *CreateGameSessionQueueInput) SetPlayerLatencyPolicies(v []*PlayerLatencyPolicy) *CreateGameSessionQueueInput {
+func (s *CreateGameSessionQueueInput) SetPlayerLatencyPolicies(v []PlayerLatencyPolicy) *CreateGameSessionQueueInput {
 	s.PlayerLatencyPolicies = v
 	return s
 }
@@ -6328,7 +6319,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for
 	// a successful match.
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Set of developer-defined game session properties, formatted as a single string
 	// value. This data is included in the GameSession object, which is passed to
@@ -6345,7 +6336,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// with this matchmaking configuration. Queues can be located in any region.
 	//
 	// GameSessionQueueArns is a required field
-	GameSessionQueueArns []*string `type:"list" required:"true"`
+	GameSessionQueueArns []string `type:"list" required:"true"`
 
 	// Unique identifier for a matchmaking configuration. This name is used to identify
 	// the configuration associated with a matchmaking request or ticket.
@@ -6423,9 +6414,6 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
@@ -6469,7 +6457,7 @@ func (s *CreateMatchmakingConfigurationInput) SetDescription(v string) *CreateMa
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *CreateMatchmakingConfigurationInput) SetGameProperties(v []*GameProperty) *CreateMatchmakingConfigurationInput {
+func (s *CreateMatchmakingConfigurationInput) SetGameProperties(v []GameProperty) *CreateMatchmakingConfigurationInput {
 	s.GameProperties = v
 	return s
 }
@@ -6481,7 +6469,7 @@ func (s *CreateMatchmakingConfigurationInput) SetGameSessionData(v string) *Crea
 }
 
 // SetGameSessionQueueArns sets the GameSessionQueueArns field's value.
-func (s *CreateMatchmakingConfigurationInput) SetGameSessionQueueArns(v []*string) *CreateMatchmakingConfigurationInput {
+func (s *CreateMatchmakingConfigurationInput) SetGameSessionQueueArns(v []string) *CreateMatchmakingConfigurationInput {
 	s.GameSessionQueueArns = v
 	return s
 }
@@ -6740,12 +6728,12 @@ type CreatePlayerSessionsInput struct {
 	// information related to the player. Amazon GameLift does not use this data,
 	// so it can be formatted as needed for use in the game. Player data strings
 	// for player IDs not included in the PlayerIds parameter are ignored.
-	PlayerDataMap map[string]*string `type:"map"`
+	PlayerDataMap map[string]string `type:"map"`
 
 	// List of unique identifiers for the players to be added.
 	//
 	// PlayerIds is a required field
-	PlayerIds []*string `min:"1" type:"list" required:"true"`
+	PlayerIds []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -6789,13 +6777,13 @@ func (s *CreatePlayerSessionsInput) SetGameSessionId(v string) *CreatePlayerSess
 }
 
 // SetPlayerDataMap sets the PlayerDataMap field's value.
-func (s *CreatePlayerSessionsInput) SetPlayerDataMap(v map[string]*string) *CreatePlayerSessionsInput {
+func (s *CreatePlayerSessionsInput) SetPlayerDataMap(v map[string]string) *CreatePlayerSessionsInput {
 	s.PlayerDataMap = v
 	return s
 }
 
 // SetPlayerIds sets the PlayerIds field's value.
-func (s *CreatePlayerSessionsInput) SetPlayerIds(v []*string) *CreatePlayerSessionsInput {
+func (s *CreatePlayerSessionsInput) SetPlayerIds(v []string) *CreatePlayerSessionsInput {
 	s.PlayerIds = v
 	return s
 }
@@ -6806,7 +6794,7 @@ type CreatePlayerSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of player session objects created for the added players.
-	PlayerSessions []*PlayerSession `type:"list"`
+	PlayerSessions []PlayerSession `type:"list"`
 }
 
 // String returns the string representation
@@ -6820,7 +6808,7 @@ func (s CreatePlayerSessionsOutput) GoString() string {
 }
 
 // SetPlayerSessions sets the PlayerSessions field's value.
-func (s *CreatePlayerSessionsOutput) SetPlayerSessions(v []*PlayerSession) *CreatePlayerSessionsOutput {
+func (s *CreatePlayerSessionsOutput) SetPlayerSessions(v []PlayerSession) *CreatePlayerSessionsOutput {
 	s.PlayerSessions = v
 	return s
 }
@@ -7678,7 +7666,7 @@ type DescribeEC2InstanceLimitsInput struct {
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions. Leave
 	// this parameter blank to retrieve limits for all types.
-	EC2InstanceType EC2InstanceType `type:"string"`
+	EC2InstanceType EC2InstanceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7704,7 +7692,7 @@ type DescribeEC2InstanceLimitsOutput struct {
 
 	// Object that contains the maximum number of instances for the specified instance
 	// type.
-	EC2InstanceLimits []*EC2InstanceLimit `type:"list"`
+	EC2InstanceLimits []EC2InstanceLimit `type:"list"`
 }
 
 // String returns the string representation
@@ -7718,7 +7706,7 @@ func (s DescribeEC2InstanceLimitsOutput) GoString() string {
 }
 
 // SetEC2InstanceLimits sets the EC2InstanceLimits field's value.
-func (s *DescribeEC2InstanceLimitsOutput) SetEC2InstanceLimits(v []*EC2InstanceLimit) *DescribeEC2InstanceLimitsOutput {
+func (s *DescribeEC2InstanceLimitsOutput) SetEC2InstanceLimits(v []EC2InstanceLimit) *DescribeEC2InstanceLimitsOutput {
 	s.EC2InstanceLimits = v
 	return s
 }
@@ -7730,7 +7718,7 @@ type DescribeFleetAttributesInput struct {
 
 	// Unique identifier for a fleet(s) to retrieve attributes for. To request attributes
 	// for all fleets, leave this parameter empty.
-	FleetIds []*string `min:"1" type:"list"`
+	FleetIds []string `min:"1" type:"list"`
 
 	// Maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when
@@ -7774,7 +7762,7 @@ func (s *DescribeFleetAttributesInput) Validate() error {
 }
 
 // SetFleetIds sets the FleetIds field's value.
-func (s *DescribeFleetAttributesInput) SetFleetIds(v []*string) *DescribeFleetAttributesInput {
+func (s *DescribeFleetAttributesInput) SetFleetIds(v []string) *DescribeFleetAttributesInput {
 	s.FleetIds = v
 	return s
 }
@@ -7798,7 +7786,7 @@ type DescribeFleetAttributesOutput struct {
 
 	// Collection of objects containing attribute metadata for each requested fleet
 	// ID.
-	FleetAttributes []*FleetAttributes `type:"list"`
+	FleetAttributes []FleetAttributes `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -7817,7 +7805,7 @@ func (s DescribeFleetAttributesOutput) GoString() string {
 }
 
 // SetFleetAttributes sets the FleetAttributes field's value.
-func (s *DescribeFleetAttributesOutput) SetFleetAttributes(v []*FleetAttributes) *DescribeFleetAttributesOutput {
+func (s *DescribeFleetAttributesOutput) SetFleetAttributes(v []FleetAttributes) *DescribeFleetAttributesOutput {
 	s.FleetAttributes = v
 	return s
 }
@@ -7835,7 +7823,7 @@ type DescribeFleetCapacityInput struct {
 
 	// Unique identifier for a fleet(s) to retrieve capacity information for. To
 	// request capacity information for all fleets, leave this parameter empty.
-	FleetIds []*string `min:"1" type:"list"`
+	FleetIds []string `min:"1" type:"list"`
 
 	// Maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when
@@ -7879,7 +7867,7 @@ func (s *DescribeFleetCapacityInput) Validate() error {
 }
 
 // SetFleetIds sets the FleetIds field's value.
-func (s *DescribeFleetCapacityInput) SetFleetIds(v []*string) *DescribeFleetCapacityInput {
+func (s *DescribeFleetCapacityInput) SetFleetIds(v []string) *DescribeFleetCapacityInput {
 	s.FleetIds = v
 	return s
 }
@@ -7904,7 +7892,7 @@ type DescribeFleetCapacityOutput struct {
 	// Collection of objects containing capacity information for each requested
 	// fleet ID. Leave this parameter empty to retrieve capacity information for
 	// all fleets.
-	FleetCapacity []*FleetCapacity `type:"list"`
+	FleetCapacity []FleetCapacity `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -7923,7 +7911,7 @@ func (s DescribeFleetCapacityOutput) GoString() string {
 }
 
 // SetFleetCapacity sets the FleetCapacity field's value.
-func (s *DescribeFleetCapacityOutput) SetFleetCapacity(v []*FleetCapacity) *DescribeFleetCapacityOutput {
+func (s *DescribeFleetCapacityOutput) SetFleetCapacity(v []FleetCapacity) *DescribeFleetCapacityOutput {
 	s.FleetCapacity = v
 	return s
 }
@@ -8031,7 +8019,7 @@ type DescribeFleetEventsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of objects containing event log entries for the specified fleet.
-	Events []*Event `type:"list"`
+	Events []Event `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8050,7 +8038,7 @@ func (s DescribeFleetEventsOutput) GoString() string {
 }
 
 // SetEvents sets the Events field's value.
-func (s *DescribeFleetEventsOutput) SetEvents(v []*Event) *DescribeFleetEventsOutput {
+func (s *DescribeFleetEventsOutput) SetEvents(v []Event) *DescribeFleetEventsOutput {
 	s.Events = v
 	return s
 }
@@ -8108,7 +8096,7 @@ type DescribeFleetPortSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Object that contains port settings for the requested fleet ID.
-	InboundPermissions []*IpPermission `type:"list"`
+	InboundPermissions []IpPermission `type:"list"`
 }
 
 // String returns the string representation
@@ -8122,7 +8110,7 @@ func (s DescribeFleetPortSettingsOutput) GoString() string {
 }
 
 // SetInboundPermissions sets the InboundPermissions field's value.
-func (s *DescribeFleetPortSettingsOutput) SetInboundPermissions(v []*IpPermission) *DescribeFleetPortSettingsOutput {
+func (s *DescribeFleetPortSettingsOutput) SetInboundPermissions(v []IpPermission) *DescribeFleetPortSettingsOutput {
 	s.InboundPermissions = v
 	return s
 }
@@ -8134,7 +8122,7 @@ type DescribeFleetUtilizationInput struct {
 
 	// Unique identifier for a fleet(s) to retrieve utilization data for. To request
 	// utilization data for all fleets, leave this parameter empty.
-	FleetIds []*string `min:"1" type:"list"`
+	FleetIds []string `min:"1" type:"list"`
 
 	// Maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when
@@ -8178,7 +8166,7 @@ func (s *DescribeFleetUtilizationInput) Validate() error {
 }
 
 // SetFleetIds sets the FleetIds field's value.
-func (s *DescribeFleetUtilizationInput) SetFleetIds(v []*string) *DescribeFleetUtilizationInput {
+func (s *DescribeFleetUtilizationInput) SetFleetIds(v []string) *DescribeFleetUtilizationInput {
 	s.FleetIds = v
 	return s
 }
@@ -8202,7 +8190,7 @@ type DescribeFleetUtilizationOutput struct {
 
 	// Collection of objects containing utilization information for each requested
 	// fleet ID.
-	FleetUtilization []*FleetUtilization `type:"list"`
+	FleetUtilization []FleetUtilization `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8221,7 +8209,7 @@ func (s DescribeFleetUtilizationOutput) GoString() string {
 }
 
 // SetFleetUtilization sets the FleetUtilization field's value.
-func (s *DescribeFleetUtilizationOutput) SetFleetUtilization(v []*FleetUtilization) *DescribeFleetUtilizationOutput {
+func (s *DescribeFleetUtilizationOutput) SetFleetUtilization(v []FleetUtilization) *DescribeFleetUtilizationOutput {
 	s.FleetUtilization = v
 	return s
 }
@@ -8338,7 +8326,7 @@ type DescribeGameSessionDetailsOutput struct {
 
 	// Collection of objects containing game session properties and the protection
 	// policy currently in force for each session matching the request.
-	GameSessionDetails []*GameSessionDetail `type:"list"`
+	GameSessionDetails []GameSessionDetail `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8357,7 +8345,7 @@ func (s DescribeGameSessionDetailsOutput) GoString() string {
 }
 
 // SetGameSessionDetails sets the GameSessionDetails field's value.
-func (s *DescribeGameSessionDetailsOutput) SetGameSessionDetails(v []*GameSessionDetail) *DescribeGameSessionDetailsOutput {
+func (s *DescribeGameSessionDetailsOutput) SetGameSessionDetails(v []GameSessionDetail) *DescribeGameSessionDetailsOutput {
 	s.GameSessionDetails = v
 	return s
 }
@@ -8448,7 +8436,7 @@ type DescribeGameSessionQueuesInput struct {
 
 	// List of queue names to retrieve information for. To request settings for
 	// all queues, leave this parameter empty.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// Token that indicates the start of the next sequential page of results. Use
 	// the token that is returned with a previous call to this action. To start
@@ -8489,7 +8477,7 @@ func (s *DescribeGameSessionQueuesInput) SetLimit(v int64) *DescribeGameSessionQ
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeGameSessionQueuesInput) SetNames(v []*string) *DescribeGameSessionQueuesInput {
+func (s *DescribeGameSessionQueuesInput) SetNames(v []string) *DescribeGameSessionQueuesInput {
 	s.Names = v
 	return s
 }
@@ -8506,7 +8494,7 @@ type DescribeGameSessionQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of objects that describes the requested game session queues.
-	GameSessionQueues []*GameSessionQueue `type:"list"`
+	GameSessionQueues []GameSessionQueue `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8525,7 +8513,7 @@ func (s DescribeGameSessionQueuesOutput) GoString() string {
 }
 
 // SetGameSessionQueues sets the GameSessionQueues field's value.
-func (s *DescribeGameSessionQueuesOutput) SetGameSessionQueues(v []*GameSessionQueue) *DescribeGameSessionQueuesOutput {
+func (s *DescribeGameSessionQueuesOutput) SetGameSessionQueues(v []GameSessionQueue) *DescribeGameSessionQueuesOutput {
 	s.GameSessionQueues = v
 	return s
 }
@@ -8642,7 +8630,7 @@ type DescribeGameSessionsOutput struct {
 
 	// Collection of objects containing game session properties for each session
 	// matching the request.
-	GameSessions []*GameSession `type:"list"`
+	GameSessions []GameSession `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8661,7 +8649,7 @@ func (s DescribeGameSessionsOutput) GoString() string {
 }
 
 // SetGameSessions sets the GameSessions field's value.
-func (s *DescribeGameSessionsOutput) SetGameSessions(v []*GameSession) *DescribeGameSessionsOutput {
+func (s *DescribeGameSessionsOutput) SetGameSessions(v []GameSession) *DescribeGameSessionsOutput {
 	s.GameSessions = v
 	return s
 }
@@ -8756,7 +8744,7 @@ type DescribeInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of objects containing properties for each instance returned.
-	Instances []*Instance `type:"list"`
+	Instances []Instance `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8775,7 +8763,7 @@ func (s DescribeInstancesOutput) GoString() string {
 }
 
 // SetInstances sets the Instances field's value.
-func (s *DescribeInstancesOutput) SetInstances(v []*Instance) *DescribeInstancesOutput {
+func (s *DescribeInstancesOutput) SetInstances(v []Instance) *DescribeInstancesOutput {
 	s.Instances = v
 	return s
 }
@@ -8797,7 +8785,7 @@ type DescribeMatchmakingConfigurationsInput struct {
 
 	// Unique identifier for a matchmaking configuration(s) to retrieve. To request
 	// all existing configurations, leave this parameter empty.
-	Names []*string `type:"list"`
+	Names []string `type:"list"`
 
 	// Token that indicates the start of the next sequential page of results. Use
 	// the token that is returned with a previous call to this action. To start
@@ -8845,7 +8833,7 @@ func (s *DescribeMatchmakingConfigurationsInput) SetLimit(v int64) *DescribeMatc
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeMatchmakingConfigurationsInput) SetNames(v []*string) *DescribeMatchmakingConfigurationsInput {
+func (s *DescribeMatchmakingConfigurationsInput) SetNames(v []string) *DescribeMatchmakingConfigurationsInput {
 	s.Names = v
 	return s
 }
@@ -8868,7 +8856,7 @@ type DescribeMatchmakingConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of requested matchmaking configuration objects.
-	Configurations []*MatchmakingConfiguration `type:"list"`
+	Configurations []MatchmakingConfiguration `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -8887,7 +8875,7 @@ func (s DescribeMatchmakingConfigurationsOutput) GoString() string {
 }
 
 // SetConfigurations sets the Configurations field's value.
-func (s *DescribeMatchmakingConfigurationsOutput) SetConfigurations(v []*MatchmakingConfiguration) *DescribeMatchmakingConfigurationsOutput {
+func (s *DescribeMatchmakingConfigurationsOutput) SetConfigurations(v []MatchmakingConfiguration) *DescribeMatchmakingConfigurationsOutput {
 	s.Configurations = v
 	return s
 }
@@ -8907,7 +8895,7 @@ type DescribeMatchmakingInput struct {
 	// leave this parameter empty.
 	//
 	// TicketIds is a required field
-	TicketIds []*string `type:"list" required:"true"`
+	TicketIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8935,7 +8923,7 @@ func (s *DescribeMatchmakingInput) Validate() error {
 }
 
 // SetTicketIds sets the TicketIds field's value.
-func (s *DescribeMatchmakingInput) SetTicketIds(v []*string) *DescribeMatchmakingInput {
+func (s *DescribeMatchmakingInput) SetTicketIds(v []string) *DescribeMatchmakingInput {
 	s.TicketIds = v
 	return s
 }
@@ -8946,7 +8934,7 @@ type DescribeMatchmakingOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of existing matchmaking ticket objects matching the request.
-	TicketList []*MatchmakingTicket `type:"list"`
+	TicketList []MatchmakingTicket `type:"list"`
 }
 
 // String returns the string representation
@@ -8960,7 +8948,7 @@ func (s DescribeMatchmakingOutput) GoString() string {
 }
 
 // SetTicketList sets the TicketList field's value.
-func (s *DescribeMatchmakingOutput) SetTicketList(v []*MatchmakingTicket) *DescribeMatchmakingOutput {
+func (s *DescribeMatchmakingOutput) SetTicketList(v []MatchmakingTicket) *DescribeMatchmakingOutput {
 	s.TicketList = v
 	return s
 }
@@ -8976,7 +8964,7 @@ type DescribeMatchmakingRuleSetsInput struct {
 
 	// Unique identifier for a matchmaking rule set. This name is used to identify
 	// the rule set associated with a matchmaking configuration.
-	Names []*string `min:"1" type:"list"`
+	Names []string `min:"1" type:"list"`
 
 	// Token that indicates the start of the next sequential page of results. Use
 	// the token that is returned with a previous call to this action. To start
@@ -9020,7 +9008,7 @@ func (s *DescribeMatchmakingRuleSetsInput) SetLimit(v int64) *DescribeMatchmakin
 }
 
 // SetNames sets the Names field's value.
-func (s *DescribeMatchmakingRuleSetsInput) SetNames(v []*string) *DescribeMatchmakingRuleSetsInput {
+func (s *DescribeMatchmakingRuleSetsInput) SetNames(v []string) *DescribeMatchmakingRuleSetsInput {
 	s.Names = v
 	return s
 }
@@ -9044,7 +9032,7 @@ type DescribeMatchmakingRuleSetsOutput struct {
 	// Collection of requested matchmaking rule set objects.
 	//
 	// RuleSets is a required field
-	RuleSets []*MatchmakingRuleSet `type:"list" required:"true"`
+	RuleSets []MatchmakingRuleSet `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9064,7 +9052,7 @@ func (s *DescribeMatchmakingRuleSetsOutput) SetNextToken(v string) *DescribeMatc
 }
 
 // SetRuleSets sets the RuleSets field's value.
-func (s *DescribeMatchmakingRuleSetsOutput) SetRuleSets(v []*MatchmakingRuleSet) *DescribeMatchmakingRuleSetsOutput {
+func (s *DescribeMatchmakingRuleSetsOutput) SetRuleSets(v []MatchmakingRuleSet) *DescribeMatchmakingRuleSetsOutput {
 	s.RuleSets = v
 	return s
 }
@@ -9194,7 +9182,7 @@ type DescribePlayerSessionsOutput struct {
 
 	// Collection of objects containing properties for each player session that
 	// matches the request.
-	PlayerSessions []*PlayerSession `type:"list"`
+	PlayerSessions []PlayerSession `type:"list"`
 }
 
 // String returns the string representation
@@ -9214,7 +9202,7 @@ func (s *DescribePlayerSessionsOutput) SetNextToken(v string) *DescribePlayerSes
 }
 
 // SetPlayerSessions sets the PlayerSessions field's value.
-func (s *DescribePlayerSessionsOutput) SetPlayerSessions(v []*PlayerSession) *DescribePlayerSessionsOutput {
+func (s *DescribePlayerSessionsOutput) SetPlayerSessions(v []PlayerSession) *DescribePlayerSessionsOutput {
 	s.PlayerSessions = v
 	return s
 }
@@ -9322,7 +9310,7 @@ type DescribeScalingPoliciesInput struct {
 	//
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
-	StatusFilter ScalingStatusType `type:"string"`
+	StatusFilter ScalingStatusType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9390,7 +9378,7 @@ type DescribeScalingPoliciesOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// Collection of objects containing the scaling policies matching the request.
-	ScalingPolicies []*ScalingPolicy `type:"list"`
+	ScalingPolicies []ScalingPolicy `type:"list"`
 }
 
 // String returns the string representation
@@ -9410,7 +9398,7 @@ func (s *DescribeScalingPoliciesOutput) SetNextToken(v string) *DescribeScalingP
 }
 
 // SetScalingPolicies sets the ScalingPolicies field's value.
-func (s *DescribeScalingPoliciesOutput) SetScalingPolicies(v []*ScalingPolicy) *DescribeScalingPoliciesOutput {
+func (s *DescribeScalingPoliciesOutput) SetScalingPolicies(v []ScalingPolicy) *DescribeScalingPoliciesOutput {
 	s.ScalingPolicies = v
 	return s
 }
@@ -9436,7 +9424,7 @@ type DescribeVpcPeeringAuthorizationsOutput struct {
 
 	// Collection of objects that describe all valid VPC peering operations for
 	// the current AWS account.
-	VpcPeeringAuthorizations []*VpcPeeringAuthorization `type:"list"`
+	VpcPeeringAuthorizations []VpcPeeringAuthorization `type:"list"`
 }
 
 // String returns the string representation
@@ -9450,7 +9438,7 @@ func (s DescribeVpcPeeringAuthorizationsOutput) GoString() string {
 }
 
 // SetVpcPeeringAuthorizations sets the VpcPeeringAuthorizations field's value.
-func (s *DescribeVpcPeeringAuthorizationsOutput) SetVpcPeeringAuthorizations(v []*VpcPeeringAuthorization) *DescribeVpcPeeringAuthorizationsOutput {
+func (s *DescribeVpcPeeringAuthorizationsOutput) SetVpcPeeringAuthorizations(v []VpcPeeringAuthorization) *DescribeVpcPeeringAuthorizationsOutput {
 	s.VpcPeeringAuthorizations = v
 	return s
 }
@@ -9486,7 +9474,7 @@ type DescribeVpcPeeringConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of VPC peering connection records that match the request.
-	VpcPeeringConnections []*VpcPeeringConnection `type:"list"`
+	VpcPeeringConnections []VpcPeeringConnection `type:"list"`
 }
 
 // String returns the string representation
@@ -9500,7 +9488,7 @@ func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
 }
 
 // SetVpcPeeringConnections sets the VpcPeeringConnections field's value.
-func (s *DescribeVpcPeeringConnectionsOutput) SetVpcPeeringConnections(v []*VpcPeeringConnection) *DescribeVpcPeeringConnectionsOutput {
+func (s *DescribeVpcPeeringConnectionsOutput) SetVpcPeeringConnections(v []VpcPeeringConnection) *DescribeVpcPeeringConnectionsOutput {
 	s.VpcPeeringConnections = v
 	return s
 }
@@ -9701,7 +9689,7 @@ type EC2InstanceLimit struct {
 	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	EC2InstanceType EC2InstanceType `type:"string"`
+	EC2InstanceType EC2InstanceType `type:"string" enum:"true"`
 
 	// Number of instances allowed.
 	InstanceLimit *int64 `type:"integer"`
@@ -9834,7 +9822,7 @@ type Event struct {
 	//    includes both the old and new policy setting.
 	//
 	//    * FLEET_DELETED -- A request to delete a fleet was initiated.
-	EventCode EventCode `type:"string"`
+	EventCode EventCode `type:"string" enum:"true"`
 
 	// Unique identifier for a fleet event.
 	EventId *string `min:"1" type:"string"`
@@ -9974,13 +9962,13 @@ type FleetAttributes struct {
 	// uploads logs that are stored on each instance at C:\game\logs (for Windows)
 	// or /local/game/logs (for Linux). Use the Amazon GameLift console to access
 	// stored logs.
-	LogPaths []*string `type:"list"`
+	LogPaths []string `type:"list"`
 
 	// Names of metric groups that this fleet is included in. In Amazon CloudWatch,
 	// you can view metrics for an individual fleet or aggregated metrics for fleets
 	// that are in a fleet metric group. A fleet can be included in only one metric
 	// group at a time.
-	MetricGroups []*string `type:"list"`
+	MetricGroups []string `type:"list"`
 
 	// Descriptive label that is associated with a fleet. Fleet names do not need
 	// to be unique.
@@ -9994,12 +9982,12 @@ type FleetAttributes struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 
 	// Operating system of the fleet's computing resources. A fleet's operating
 	// system depends on the OS specified for the build that is deployed on this
 	// fleet.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Fleet policy to limit the number of game sessions an individual player can
 	// create over a span of time.
@@ -10034,7 +10022,7 @@ type FleetAttributes struct {
 	//    * DELETING -- Hosts are responding to a delete fleet request.
 	//
 	//    * TERMINATED -- The fleet no longer exists.
-	Status FleetStatus `type:"string"`
+	Status FleetStatus `type:"string" enum:"true"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -10082,13 +10070,13 @@ func (s *FleetAttributes) SetFleetId(v string) *FleetAttributes {
 }
 
 // SetLogPaths sets the LogPaths field's value.
-func (s *FleetAttributes) SetLogPaths(v []*string) *FleetAttributes {
+func (s *FleetAttributes) SetLogPaths(v []string) *FleetAttributes {
 	s.LogPaths = v
 	return s
 }
 
 // SetMetricGroups sets the MetricGroups field's value.
-func (s *FleetAttributes) SetMetricGroups(v []*string) *FleetAttributes {
+func (s *FleetAttributes) SetMetricGroups(v []string) *FleetAttributes {
 	s.MetricGroups = v
 	return s
 }
@@ -10204,7 +10192,7 @@ type FleetCapacity struct {
 	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	InstanceType EC2InstanceType `type:"string"`
+	InstanceType EC2InstanceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10460,7 +10448,7 @@ type GameSession struct {
 	// of type:value pairs. These properties are included in the GameSession object,
 	// which is passed to the game server with a request to start a new game session
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Set of developer-defined game session properties, formatted as a single string
 	// value. This data is included in the GameSession object, which is passed to
@@ -10486,7 +10474,7 @@ type GameSession struct {
 	Name *string `min:"1" type:"string"`
 
 	// Indicates whether or not the game session is accepting new players.
-	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string"`
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string" enum:"true"`
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number.
@@ -10494,7 +10482,7 @@ type GameSession struct {
 
 	// Current status of the game session. A game session must have an ACTIVE status
 	// to have player sessions.
-	Status GameSessionStatus `type:"string"`
+	Status GameSessionStatus `type:"string" enum:"true"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -10536,7 +10524,7 @@ func (s *GameSession) SetFleetId(v string) *GameSession {
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *GameSession) SetGameProperties(v []*GameProperty) *GameSession {
+func (s *GameSession) SetGameProperties(v []GameProperty) *GameSession {
 	s.GameProperties = v
 	return s
 }
@@ -10615,7 +10603,7 @@ type GameSessionConnectionInfo struct {
 
 	// Collection of player session IDs, one for each player ID that was included
 	// in the original matchmaking request.
-	MatchedPlayerSessions []*MatchedPlayerSession `type:"list"`
+	MatchedPlayerSessions []MatchedPlayerSession `type:"list"`
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number.
@@ -10645,7 +10633,7 @@ func (s *GameSessionConnectionInfo) SetIpAddress(v string) *GameSessionConnectio
 }
 
 // SetMatchedPlayerSessions sets the MatchedPlayerSessions field's value.
-func (s *GameSessionConnectionInfo) SetMatchedPlayerSessions(v []*MatchedPlayerSession) *GameSessionConnectionInfo {
+func (s *GameSessionConnectionInfo) SetMatchedPlayerSessions(v []MatchedPlayerSession) *GameSessionConnectionInfo {
 	s.MatchedPlayerSessions = v
 	return s
 }
@@ -10671,7 +10659,7 @@ type GameSessionDetail struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	ProtectionPolicy ProtectionPolicy `type:"string"`
+	ProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10719,7 +10707,7 @@ type GameSessionPlacement struct {
 	// of type:value pairs. These properties are included in the GameSession object,
 	// which is passed to the game server with a request to start a new game session
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Identifier for the game session created by this placement request. This value
 	// is set once the new game session is placed (placement status is FULFILLED).
@@ -10765,14 +10753,14 @@ type GameSessionPlacement struct {
 	// This information includes the player ID (as provided in the placement request)
 	// and the corresponding player session ID. Retrieve full player sessions by
 	// calling DescribePlayerSessions with the player session ID.
-	PlacedPlayerSessions []*PlacedPlayerSession `type:"list"`
+	PlacedPlayerSessions []PlacedPlayerSession `type:"list"`
 
 	// Unique identifier for a game session placement.
 	PlacementId *string `min:"1" type:"string"`
 
 	// Set of values, expressed in milliseconds, indicating the amount of latency
 	// that a player experiences when connected to AWS regions.
-	PlayerLatencies []*PlayerLatency `type:"list"`
+	PlayerLatencies []PlayerLatency `type:"list"`
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number. This value is set once
@@ -10796,7 +10784,7 @@ type GameSessionPlacement struct {
 	//
 	//    * TIMED_OUT -- A new game session was not successfully created before
 	//    the time limit expired. You can resubmit the placement request as needed.
-	Status GameSessionPlacementState `type:"string"`
+	Status GameSessionPlacementState `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10816,7 +10804,7 @@ func (s *GameSessionPlacement) SetEndTime(v time.Time) *GameSessionPlacement {
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *GameSessionPlacement) SetGameProperties(v []*GameProperty) *GameSessionPlacement {
+func (s *GameSessionPlacement) SetGameProperties(v []GameProperty) *GameSessionPlacement {
 	s.GameProperties = v
 	return s
 }
@@ -10870,7 +10858,7 @@ func (s *GameSessionPlacement) SetMaximumPlayerSessionCount(v int64) *GameSessio
 }
 
 // SetPlacedPlayerSessions sets the PlacedPlayerSessions field's value.
-func (s *GameSessionPlacement) SetPlacedPlayerSessions(v []*PlacedPlayerSession) *GameSessionPlacement {
+func (s *GameSessionPlacement) SetPlacedPlayerSessions(v []PlacedPlayerSession) *GameSessionPlacement {
 	s.PlacedPlayerSessions = v
 	return s
 }
@@ -10882,7 +10870,7 @@ func (s *GameSessionPlacement) SetPlacementId(v string) *GameSessionPlacement {
 }
 
 // SetPlayerLatencies sets the PlayerLatencies field's value.
-func (s *GameSessionPlacement) SetPlayerLatencies(v []*PlayerLatency) *GameSessionPlacement {
+func (s *GameSessionPlacement) SetPlayerLatencies(v []PlayerLatency) *GameSessionPlacement {
 	s.PlayerLatencies = v
 	return s
 }
@@ -10938,7 +10926,7 @@ type GameSessionQueue struct {
 	// List of fleets that can be used to fulfill game session placement requests
 	// in the queue. Fleets are identified by either a fleet ARN or a fleet alias
 	// ARN. Destinations are listed in default preference order.
-	Destinations []*GameSessionQueueDestination `type:"list"`
+	Destinations []GameSessionQueueDestination `type:"list"`
 
 	// Amazon Resource Name (ARN (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session queue and uniquely identifies it. Format
@@ -10957,7 +10945,7 @@ type GameSessionQueue struct {
 	// consecutively for its duration period. For example, a queue might enforce
 	// a 60-second policy followed by a 120-second policy, and then no policy for
 	// the remainder of the placement.
-	PlayerLatencyPolicies []*PlayerLatencyPolicy `type:"list"`
+	PlayerLatencyPolicies []PlayerLatencyPolicy `type:"list"`
 
 	// Maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
@@ -10976,7 +10964,7 @@ func (s GameSessionQueue) GoString() string {
 }
 
 // SetDestinations sets the Destinations field's value.
-func (s *GameSessionQueue) SetDestinations(v []*GameSessionQueueDestination) *GameSessionQueue {
+func (s *GameSessionQueue) SetDestinations(v []GameSessionQueueDestination) *GameSessionQueue {
 	s.Destinations = v
 	return s
 }
@@ -10994,7 +10982,7 @@ func (s *GameSessionQueue) SetName(v string) *GameSessionQueue {
 }
 
 // SetPlayerLatencyPolicies sets the PlayerLatencyPolicies field's value.
-func (s *GameSessionQueue) SetPlayerLatencyPolicies(v []*PlayerLatencyPolicy) *GameSessionQueue {
+func (s *GameSessionQueue) SetPlayerLatencyPolicies(v []PlayerLatencyPolicy) *GameSessionQueue {
 	s.PlayerLatencyPolicies = v
 	return s
 }
@@ -11232,7 +11220,7 @@ type Instance struct {
 	IpAddress *string `type:"string"`
 
 	// Operating system that is running on this instance.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// Current status of the instance. Possible statuses include the following:
 	//
@@ -11247,10 +11235,10 @@ type Instance struct {
 	//    * TERMINATING -- The instance is in the process of shutting down. This
 	//    may happen to reduce capacity during a scaling down event or to recycle
 	//    resources in the event of a problem.
-	Status InstanceStatus `type:"string"`
+	Status InstanceStatus `type:"string" enum:"true"`
 
 	// EC2 instance type that defines the computing resources of this instance.
-	Type EC2InstanceType `type:"string"`
+	Type EC2InstanceType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11324,7 +11312,7 @@ type InstanceAccess struct {
 	IpAddress *string `type:"string"`
 
 	// Operating system that is running on the instance.
-	OperatingSystem OperatingSystem `type:"string"`
+	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11429,7 +11417,7 @@ type IpPermission struct {
 	// Network communication protocol used by the fleet.
 	//
 	// Protocol is a required field
-	Protocol IpProtocol `type:"string" required:"true"`
+	Protocol IpProtocol `type:"string" required:"true" enum:"true"`
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive.
 	// This value must be higher than FromPort.
@@ -11533,7 +11521,7 @@ type ListAliasesInput struct {
 	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
 	//    with the RoutingStrategy message embedded.
-	RoutingStrategyType RoutingStrategyType `type:"string"`
+	RoutingStrategyType RoutingStrategyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11595,7 +11583,7 @@ type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of alias records that match the list request.
-	Aliases []*Alias `type:"list"`
+	Aliases []Alias `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -11614,7 +11602,7 @@ func (s ListAliasesOutput) GoString() string {
 }
 
 // SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []*Alias) *ListAliasesOutput {
+func (s *ListAliasesOutput) SetAliases(v []Alias) *ListAliasesOutput {
 	s.Aliases = v
 	return s
 }
@@ -11654,7 +11642,7 @@ type ListBuildsInput struct {
 	//
 	//    * FAILED -- The game build upload failed. You cannot create new fleets
 	//    for this build.
-	Status BuildStatus `type:"string"`
+	Status BuildStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11707,7 +11695,7 @@ type ListBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Collection of build records that match the request.
-	Builds []*Build `type:"list"`
+	Builds []Build `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -11726,7 +11714,7 @@ func (s ListBuildsOutput) GoString() string {
 }
 
 // SetBuilds sets the Builds field's value.
-func (s *ListBuildsOutput) SetBuilds(v []*Build) *ListBuildsOutput {
+func (s *ListBuildsOutput) SetBuilds(v []Build) *ListBuildsOutput {
 	s.Builds = v
 	return s
 }
@@ -11809,7 +11797,7 @@ type ListFleetsOutput struct {
 	// Set of fleet IDs matching the list request. You can retrieve additional information
 	// about all returned fleets by passing this result set to a call to DescribeFleetAttributes,
 	// DescribeFleetCapacity, or DescribeFleetUtilization.
-	FleetIds []*string `min:"1" type:"list"`
+	FleetIds []string `min:"1" type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -11828,7 +11816,7 @@ func (s ListFleetsOutput) GoString() string {
 }
 
 // SetFleetIds sets the FleetIds field's value.
-func (s *ListFleetsOutput) SetFleetIds(v []*string) *ListFleetsOutput {
+func (s *ListFleetsOutput) SetFleetIds(v []string) *ListFleetsOutput {
 	s.FleetIds = v
 	return s
 }
@@ -11915,7 +11903,7 @@ type MatchmakingConfiguration struct {
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for
 	// a successful match.
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Set of developer-defined game session properties, formatted as a single string
 	// value. This data is included in the GameSession object, which is passed to
@@ -11930,7 +11918,7 @@ type MatchmakingConfiguration struct {
 	// is arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
 	// These queues are used when placing game sessions for matches that are created
 	// with this matchmaking configuration. Queues can be located in any region.
-	GameSessionQueueArns []*string `type:"list"`
+	GameSessionQueueArns []string `type:"list"`
 
 	// Unique identifier for a matchmaking configuration. This name is used to identify
 	// the configuration associated with a matchmaking request or ticket.
@@ -11996,7 +11984,7 @@ func (s *MatchmakingConfiguration) SetDescription(v string) *MatchmakingConfigur
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *MatchmakingConfiguration) SetGameProperties(v []*GameProperty) *MatchmakingConfiguration {
+func (s *MatchmakingConfiguration) SetGameProperties(v []GameProperty) *MatchmakingConfiguration {
 	s.GameProperties = v
 	return s
 }
@@ -12008,7 +11996,7 @@ func (s *MatchmakingConfiguration) SetGameSessionData(v string) *MatchmakingConf
 }
 
 // SetGameSessionQueueArns sets the GameSessionQueueArns field's value.
-func (s *MatchmakingConfiguration) SetGameSessionQueueArns(v []*string) *MatchmakingConfiguration {
+func (s *MatchmakingConfiguration) SetGameSessionQueueArns(v []string) *MatchmakingConfiguration {
 	s.GameSessionQueueArns = v
 	return s
 }
@@ -12146,7 +12134,7 @@ type MatchmakingTicket struct {
 	// Players are identified by a unique player ID and may include latency data
 	// for use during matchmaking. If the ticket is in status COMPLETED, the Player
 	// objects include the team the players were assigned to in the resulting match.
-	Players []*Player `type:"list"`
+	Players []Player `type:"list"`
 
 	// Time stamp indicating when this matchmaking request was received. Format
 	// is a number expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -12179,7 +12167,7 @@ type MatchmakingTicket struct {
 	//    * TIMED_OUT -- The matchmaking request was not completed within the duration
 	//    specified in the matchmaking configuration. Matchmaking requests that
 	//    time out can be resubmitted.
-	Status MatchmakingConfigurationStatus `type:"string"`
+	Status MatchmakingConfigurationStatus `type:"string" enum:"true"`
 
 	// Additional information about the current status.
 	StatusMessage *string `type:"string"`
@@ -12228,7 +12216,7 @@ func (s *MatchmakingTicket) SetGameSessionConnectionInfo(v *GameSessionConnectio
 }
 
 // SetPlayers sets the Players field's value.
-func (s *MatchmakingTicket) SetPlayers(v []*Player) *MatchmakingTicket {
+func (s *MatchmakingTicket) SetPlayers(v []Player) *MatchmakingTicket {
 	s.Players = v
 	return s
 }
@@ -12332,13 +12320,13 @@ type Player struct {
 	// latency in order to be matched. If no latency is reported in this scenario,
 	// FlexMatch assumes that no regions are available to the player and the ticket
 	// is not matchable.
-	LatencyInMs map[string]*int64 `type:"map"`
+	LatencyInMs map[string]int64 `type:"map"`
 
 	// Collection of name:value pairs containing player information for use in matchmaking.
 	// Player attribute names need to match playerAttributes names in the rule set
 	// being used. Example: "PlayerAttributes": {"skill": {"N": "23"}, "gameMode":
 	// {"S": "deathmatch"}}.
-	PlayerAttributes map[string]*AttributeValue `type:"map"`
+	PlayerAttributes map[string]AttributeValue `type:"map"`
 
 	// Unique identifier for a player
 	PlayerId *string `min:"1" type:"string"`
@@ -12369,9 +12357,6 @@ func (s *Player) Validate() error {
 	}
 	if s.PlayerAttributes != nil {
 		for i, v := range s.PlayerAttributes {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlayerAttributes", i), err.(aws.ErrInvalidParams))
 			}
@@ -12385,13 +12370,13 @@ func (s *Player) Validate() error {
 }
 
 // SetLatencyInMs sets the LatencyInMs field's value.
-func (s *Player) SetLatencyInMs(v map[string]*int64) *Player {
+func (s *Player) SetLatencyInMs(v map[string]int64) *Player {
 	s.LatencyInMs = v
 	return s
 }
 
 // SetPlayerAttributes sets the PlayerAttributes field's value.
-func (s *Player) SetPlayerAttributes(v map[string]*AttributeValue) *Player {
+func (s *Player) SetPlayerAttributes(v map[string]AttributeValue) *Player {
 	s.PlayerAttributes = v
 	return s
 }
@@ -12598,7 +12583,7 @@ type PlayerSession struct {
 	//
 	//    * TIMEDOUT -- A player session request was received, but the player did
 	//    not connect and/or was not validated within the timeout limit (60 seconds).
-	Status PlayerSessionStatus `type:"string"`
+	Status PlayerSessionStatus `type:"string" enum:"true"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -12684,7 +12669,7 @@ type PutScalingPolicyInput struct {
 	// value.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperatorType `type:"string" required:"true"`
+	ComparisonOperator ComparisonOperatorType `type:"string" required:"true" enum:"true"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
@@ -12719,7 +12704,7 @@ type PutScalingPolicyInput struct {
 	//    * IdleInstances -- number of instances not currently running a game session.
 	//
 	// MetricName is a required field
-	MetricName MetricName `type:"string" required:"true"`
+	MetricName MetricName `type:"string" required:"true" enum:"true"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique. A fleet can have only one scaling policy with the
@@ -12747,7 +12732,7 @@ type PutScalingPolicyInput struct {
 	//    the fleet down by 10%.
 	//
 	// ScalingAdjustmentType is a required field
-	ScalingAdjustmentType ScalingAdjustmentType `type:"string" required:"true"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string" required:"true" enum:"true"`
 
 	// Metric value used to trigger a scaling event.
 	//
@@ -13137,7 +13122,7 @@ type RoutingStrategy struct {
 	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
 	//    with the RoutingStrategy message embedded.
-	Type RoutingStrategyType `type:"string"`
+	Type RoutingStrategyType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13249,7 +13234,7 @@ type RuntimeConfiguration struct {
 
 	// Collection of server process configurations that describe which server processes
 	// to run on each instance in a fleet.
-	ServerProcesses []*ServerProcess `min:"1" type:"list"`
+	ServerProcesses []ServerProcess `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -13276,9 +13261,6 @@ func (s *RuntimeConfiguration) Validate() error {
 	}
 	if s.ServerProcesses != nil {
 		for i, v := range s.ServerProcesses {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ServerProcesses", i), err.(aws.ErrInvalidParams))
 			}
@@ -13304,7 +13286,7 @@ func (s *RuntimeConfiguration) SetMaxConcurrentGameSessionActivations(v int64) *
 }
 
 // SetServerProcesses sets the ServerProcesses field's value.
-func (s *RuntimeConfiguration) SetServerProcesses(v []*ServerProcess) *RuntimeConfiguration {
+func (s *RuntimeConfiguration) SetServerProcesses(v []ServerProcess) *RuntimeConfiguration {
 	s.ServerProcesses = v
 	return s
 }
@@ -13427,7 +13409,7 @@ type ScalingPolicy struct {
 
 	// Comparison operator to use when measuring a metric against the threshold
 	// value.
-	ComparisonOperator ComparisonOperatorType `type:"string"`
+	ComparisonOperator ComparisonOperatorType `type:"string" enum:"true"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
@@ -13456,7 +13438,7 @@ type ScalingPolicy struct {
 	//    * ActiveInstances -- number of instances currently running a game session.
 	//
 	//    * IdleInstances -- number of instances not currently running a game session.
-	MetricName MetricName `type:"string"`
+	MetricName MetricName `type:"string" enum:"true"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
@@ -13476,7 +13458,7 @@ type ScalingPolicy struct {
 	//    * PercentChangeInCapacity -- increase or reduce the current instance count
 	//    by the scaling adjustment, read as a percentage. Positive values scale
 	//    up while negative values scale down.
-	ScalingAdjustmentType ScalingAdjustmentType `type:"string"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string" enum:"true"`
 
 	// Current status of the scaling policy. The scaling policy is only in force
 	// when in an ACTIVE status.
@@ -13497,7 +13479,7 @@ type ScalingPolicy struct {
 	//
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
-	Status ScalingStatusType `type:"string"`
+	Status ScalingStatusType `type:"string" enum:"true"`
 
 	// Metric value used to trigger a scaling event.
 	Threshold *float64 `type:"double"`
@@ -13723,7 +13705,7 @@ type SearchGameSessionsOutput struct {
 
 	// Collection of objects containing game session properties for each session
 	// matching the request.
-	GameSessions []*GameSession `type:"list"`
+	GameSessions []GameSession `type:"list"`
 
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
@@ -13742,7 +13724,7 @@ func (s SearchGameSessionsOutput) GoString() string {
 }
 
 // SetGameSessions sets the GameSessions field's value.
-func (s *SearchGameSessionsOutput) SetGameSessions(v []*GameSession) *SearchGameSessionsOutput {
+func (s *SearchGameSessionsOutput) SetGameSessions(v []GameSession) *SearchGameSessionsOutput {
 	s.GameSessions = v
 	return s
 }
@@ -13843,13 +13825,13 @@ type StartGameSessionPlacementInput struct {
 	_ struct{} `type:"structure"`
 
 	// Set of information on each player to create a player session for.
-	DesiredPlayerSessions []*DesiredPlayerSession `type:"list"`
+	DesiredPlayerSessions []DesiredPlayerSession `type:"list"`
 
 	// Set of developer-defined properties for a game session, formatted as a set
 	// of type:value pairs. These properties are included in the GameSession object,
 	// which is passed to the game server with a request to start a new game session
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Set of developer-defined game session properties, formatted as a single string
 	// value. This data is included in the GameSession object, which is passed to
@@ -13883,7 +13865,7 @@ type StartGameSessionPlacementInput struct {
 	// that a player experiences when connected to AWS regions. This information
 	// is used to try to place the new game session where it can offer the best
 	// possible gameplay experience for the players.
-	PlayerLatencies []*PlayerLatency `type:"list"`
+	PlayerLatencies []PlayerLatency `type:"list"`
 }
 
 // String returns the string representation
@@ -13925,9 +13907,6 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 	}
 	if s.DesiredPlayerSessions != nil {
 		for i, v := range s.DesiredPlayerSessions {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DesiredPlayerSessions", i), err.(aws.ErrInvalidParams))
 			}
@@ -13935,9 +13914,6 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
@@ -13945,9 +13921,6 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 	}
 	if s.PlayerLatencies != nil {
 		for i, v := range s.PlayerLatencies {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlayerLatencies", i), err.(aws.ErrInvalidParams))
 			}
@@ -13961,13 +13934,13 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 }
 
 // SetDesiredPlayerSessions sets the DesiredPlayerSessions field's value.
-func (s *StartGameSessionPlacementInput) SetDesiredPlayerSessions(v []*DesiredPlayerSession) *StartGameSessionPlacementInput {
+func (s *StartGameSessionPlacementInput) SetDesiredPlayerSessions(v []DesiredPlayerSession) *StartGameSessionPlacementInput {
 	s.DesiredPlayerSessions = v
 	return s
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *StartGameSessionPlacementInput) SetGameProperties(v []*GameProperty) *StartGameSessionPlacementInput {
+func (s *StartGameSessionPlacementInput) SetGameProperties(v []GameProperty) *StartGameSessionPlacementInput {
 	s.GameProperties = v
 	return s
 }
@@ -14003,7 +13976,7 @@ func (s *StartGameSessionPlacementInput) SetPlacementId(v string) *StartGameSess
 }
 
 // SetPlayerLatencies sets the PlayerLatencies field's value.
-func (s *StartGameSessionPlacementInput) SetPlayerLatencies(v []*PlayerLatency) *StartGameSessionPlacementInput {
+func (s *StartGameSessionPlacementInput) SetPlayerLatencies(v []PlayerLatency) *StartGameSessionPlacementInput {
 	s.PlayerLatencies = v
 	return s
 }
@@ -14052,7 +14025,7 @@ type StartMatchmakingInput struct {
 	// the name of the team the player is assigned to.
 	//
 	// Players is a required field
-	Players []*Player `type:"list" required:"true"`
+	Players []Player `type:"list" required:"true"`
 
 	// Unique identifier for a matchmaking ticket. Use this identifier to track
 	// the matchmaking ticket status and retrieve match results.
@@ -14088,9 +14061,6 @@ func (s *StartMatchmakingInput) Validate() error {
 	}
 	if s.Players != nil {
 		for i, v := range s.Players {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Players", i), err.(aws.ErrInvalidParams))
 			}
@@ -14110,7 +14080,7 @@ func (s *StartMatchmakingInput) SetConfigurationName(v string) *StartMatchmaking
 }
 
 // SetPlayers sets the Players field's value.
-func (s *StartMatchmakingInput) SetPlayers(v []*Player) *StartMatchmakingInput {
+func (s *StartMatchmakingInput) SetPlayers(v []Player) *StartMatchmakingInput {
 	s.Players = v
 	return s
 }
@@ -14487,7 +14457,7 @@ type UpdateFleetAttributesInput struct {
 	// metric group name to add this fleet to the group. Or use a new name to create
 	// a new metric group. A fleet can only be included in one metric group at a
 	// time.
-	MetricGroups []*string `type:"list"`
+	MetricGroups []string `type:"list"`
 
 	// Descriptive label that is associated with a fleet. Fleet names do not need
 	// to be unique.
@@ -14502,7 +14472,7 @@ type UpdateFleetAttributesInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 
 	// Policy that limits the number of game sessions an individual player can create
 	// over a span of time.
@@ -14552,7 +14522,7 @@ func (s *UpdateFleetAttributesInput) SetFleetId(v string) *UpdateFleetAttributes
 }
 
 // SetMetricGroups sets the MetricGroups field's value.
-func (s *UpdateFleetAttributesInput) SetMetricGroups(v []*string) *UpdateFleetAttributesInput {
+func (s *UpdateFleetAttributesInput) SetMetricGroups(v []string) *UpdateFleetAttributesInput {
 	s.MetricGroups = v
 	return s
 }
@@ -14706,10 +14676,10 @@ type UpdateFleetPortSettingsInput struct {
 	FleetId *string `type:"string" required:"true"`
 
 	// Collection of port settings to be added to the fleet record.
-	InboundPermissionAuthorizations []*IpPermission `type:"list"`
+	InboundPermissionAuthorizations []IpPermission `type:"list"`
 
 	// Collection of port settings to be removed from the fleet record.
-	InboundPermissionRevocations []*IpPermission `type:"list"`
+	InboundPermissionRevocations []IpPermission `type:"list"`
 }
 
 // String returns the string representation
@@ -14731,9 +14701,6 @@ func (s *UpdateFleetPortSettingsInput) Validate() error {
 	}
 	if s.InboundPermissionAuthorizations != nil {
 		for i, v := range s.InboundPermissionAuthorizations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionAuthorizations", i), err.(aws.ErrInvalidParams))
 			}
@@ -14741,9 +14708,6 @@ func (s *UpdateFleetPortSettingsInput) Validate() error {
 	}
 	if s.InboundPermissionRevocations != nil {
 		for i, v := range s.InboundPermissionRevocations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionRevocations", i), err.(aws.ErrInvalidParams))
 			}
@@ -14763,13 +14727,13 @@ func (s *UpdateFleetPortSettingsInput) SetFleetId(v string) *UpdateFleetPortSett
 }
 
 // SetInboundPermissionAuthorizations sets the InboundPermissionAuthorizations field's value.
-func (s *UpdateFleetPortSettingsInput) SetInboundPermissionAuthorizations(v []*IpPermission) *UpdateFleetPortSettingsInput {
+func (s *UpdateFleetPortSettingsInput) SetInboundPermissionAuthorizations(v []IpPermission) *UpdateFleetPortSettingsInput {
 	s.InboundPermissionAuthorizations = v
 	return s
 }
 
 // SetInboundPermissionRevocations sets the InboundPermissionRevocations field's value.
-func (s *UpdateFleetPortSettingsInput) SetInboundPermissionRevocations(v []*IpPermission) *UpdateFleetPortSettingsInput {
+func (s *UpdateFleetPortSettingsInput) SetInboundPermissionRevocations(v []IpPermission) *UpdateFleetPortSettingsInput {
 	s.InboundPermissionRevocations = v
 	return s
 }
@@ -14818,7 +14782,7 @@ type UpdateGameSessionInput struct {
 	Name *string `min:"1" type:"string"`
 
 	// Policy determining whether or not the game session accepts new players.
-	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string"`
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string" enum:"true"`
 
 	// Game session protection policy to apply to this game session only.
 	//
@@ -14827,7 +14791,7 @@ type UpdateGameSessionInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	ProtectionPolicy ProtectionPolicy `type:"string"`
+	ProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -14924,7 +14888,7 @@ type UpdateGameSessionQueueInput struct {
 	// in the queue. Fleets are identified by either a fleet ARN or a fleet alias
 	// ARN. Destinations are listed in default preference order. When updating this
 	// list, provide a complete list of destinations.
-	Destinations []*GameSessionQueueDestination `type:"list"`
+	Destinations []GameSessionQueueDestination `type:"list"`
 
 	// Descriptive label that is associated with game session queue. Queue names
 	// must be unique within each region.
@@ -14941,7 +14905,7 @@ type UpdateGameSessionQueueInput struct {
 	// a 60-second policy followed by a 120-second policy, and then no policy for
 	// the remainder of the placement. When updating policies, provide a complete
 	// collection of policies.
-	PlayerLatencyPolicies []*PlayerLatencyPolicy `type:"list"`
+	PlayerLatencyPolicies []PlayerLatencyPolicy `type:"list"`
 
 	// Maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
@@ -14971,9 +14935,6 @@ func (s *UpdateGameSessionQueueInput) Validate() error {
 	}
 	if s.Destinations != nil {
 		for i, v := range s.Destinations {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
 			}
@@ -14987,7 +14948,7 @@ func (s *UpdateGameSessionQueueInput) Validate() error {
 }
 
 // SetDestinations sets the Destinations field's value.
-func (s *UpdateGameSessionQueueInput) SetDestinations(v []*GameSessionQueueDestination) *UpdateGameSessionQueueInput {
+func (s *UpdateGameSessionQueueInput) SetDestinations(v []GameSessionQueueDestination) *UpdateGameSessionQueueInput {
 	s.Destinations = v
 	return s
 }
@@ -14999,7 +14960,7 @@ func (s *UpdateGameSessionQueueInput) SetName(v string) *UpdateGameSessionQueueI
 }
 
 // SetPlayerLatencyPolicies sets the PlayerLatencyPolicies field's value.
-func (s *UpdateGameSessionQueueInput) SetPlayerLatencyPolicies(v []*PlayerLatencyPolicy) *UpdateGameSessionQueueInput {
+func (s *UpdateGameSessionQueueInput) SetPlayerLatencyPolicies(v []PlayerLatencyPolicy) *UpdateGameSessionQueueInput {
 	s.PlayerLatencyPolicies = v
 	return s
 }
@@ -15067,7 +15028,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// (see Start a Game Session (http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for
 	// a successful match.
-	GameProperties []*GameProperty `type:"list"`
+	GameProperties []GameProperty `type:"list"`
 
 	// Set of developer-defined game session properties, formatted as a single string
 	// value. This data is included in the GameSession object, which is passed to
@@ -15082,7 +15043,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// is arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
 	// These queues are used when placing game sessions for matches that are created
 	// with this matchmaking configuration. Queues can be located in any region.
-	GameSessionQueueArns []*string `type:"list"`
+	GameSessionQueueArns []string `type:"list"`
 
 	// Unique identifier for a matchmaking configuration to update.
 	//
@@ -15141,9 +15102,6 @@ func (s *UpdateMatchmakingConfigurationInput) Validate() error {
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
-			if v == nil {
-				continue
-			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
@@ -15187,7 +15145,7 @@ func (s *UpdateMatchmakingConfigurationInput) SetDescription(v string) *UpdateMa
 }
 
 // SetGameProperties sets the GameProperties field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetGameProperties(v []*GameProperty) *UpdateMatchmakingConfigurationInput {
+func (s *UpdateMatchmakingConfigurationInput) SetGameProperties(v []GameProperty) *UpdateMatchmakingConfigurationInput {
 	s.GameProperties = v
 	return s
 }
@@ -15199,7 +15157,7 @@ func (s *UpdateMatchmakingConfigurationInput) SetGameSessionData(v string) *Upda
 }
 
 // SetGameSessionQueueArns sets the GameSessionQueueArns field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetGameSessionQueueArns(v []*string) *UpdateMatchmakingConfigurationInput {
+func (s *UpdateMatchmakingConfigurationInput) SetGameSessionQueueArns(v []string) *UpdateMatchmakingConfigurationInput {
 	s.GameSessionQueueArns = v
 	return s
 }
