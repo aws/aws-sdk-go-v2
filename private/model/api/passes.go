@@ -30,7 +30,6 @@ func (a *API) updateTopLevelShapeReferences() {
 			o.InputRef.Shape.XMLNamespace.URI = o.InputRef.XMLNamespace.URI
 		}
 	}
-
 }
 
 // writeShapeNames sets each shape's API and shape name values. Binding the
@@ -240,9 +239,12 @@ func (a *API) createInputOutputShapes() {
 		if !op.HasInput() {
 			setAsPlacholderShape(&op.InputRef, op.ExportedName+"Input", a)
 		}
+		op.InputRef.Shape.UsedAsInput = true
+
 		if !op.HasOutput() {
 			setAsPlacholderShape(&op.OutputRef, op.ExportedName+"Output", a)
 		}
+		op.OutputRef.Shape.UsedAsOutput = true
 	}
 }
 
