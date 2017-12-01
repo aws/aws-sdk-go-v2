@@ -36,7 +36,7 @@ help:
 	@echo "  get-deps-tests          to get the SDK's test dependencies"
 	@echo "  get-deps-verify         to get the SDK's verification dependencies"
 
-generate: gen-test gen-endpoints gen-services
+generate: gen-test gen-endpoints gen-services gen-tools
 
 gen-test: gen-protocol-test
 
@@ -48,6 +48,9 @@ gen-protocol-test:
 
 gen-endpoints:
 	go generate ./models/endpoints/
+
+gen-tools:
+	go generate ./internal/awstesting/cmd/op_crawler/
 
 build:
 	@echo "go build SDK and vendor packages"
