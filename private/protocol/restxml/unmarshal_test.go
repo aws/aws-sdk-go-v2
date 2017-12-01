@@ -1794,6 +1794,160 @@ const (
 	RESTJSONEnumType1   OutputService13TestShapeRESTJSONEnumType = "1"
 )
 
+// OutputService14ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// OutputService14ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type OutputService14ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the OutputService14ProtocolTest client with a config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
+//
+// Example:
+//     // Create a OutputService14ProtocolTest client from just a config.
+//     svc := outputservice14protocoltest.New(myConfig)
+//
+//     // Create a OutputService14ProtocolTest client with additional configuration
+//     svc := outputservice14protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService14ProtocolTest(config aws.Config) *OutputService14ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &OutputService14ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "outputservice14protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restxml.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restxml.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restxml.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a OutputService14ProtocolTest operation and runs any
+// custom request initialization.
+func (c *OutputService14ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opOutputService14TestCaseOperation1 = "OperationName"
+
+// OutputService14TestCaseOperation1Request is a API request type for the OutputService14TestCaseOperation1 API operation.
+type OutputService14TestCaseOperation1Request struct {
+	*aws.Request
+	Input *OutputService14TestShapeOutputService14TestCaseOperation1Input
+}
+
+// Send marshals and sends the OutputService14TestCaseOperation1 API request.
+func (r OutputService14TestCaseOperation1Request) Send() (*OutputService14TestShapeOutputService14TestCaseOperation1Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*OutputService14TestShapeOutputService14TestCaseOperation1Output), nil
+}
+
+// OutputService14TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the OutputService14TestCaseOperation1Request method.
+//    req := client.OutputService14TestCaseOperation1Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService14ProtocolTest) OutputService14TestCaseOperation1Request(input *OutputService14TestShapeOutputService14TestCaseOperation1Input) OutputService14TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opOutputService14TestCaseOperation1,
+		HTTPMethod: "GET",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &OutputService14TestShapeOutputService14TestCaseOperation1Input{}
+	}
+
+	req := c.newRequest(op, input, &OutputService14TestShapeOutputService14TestCaseOperation1Output{})
+	return OutputService14TestCaseOperation1Request{Request: req, Input: input}
+}
+
+type OutputService14TestShapeItemDetailShape struct {
+	_ struct{} `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
+
+	ID *string `type:"string"`
+
+	// Type is a required field
+	Type OutputService14TestShapeItemType `locationName:"xsi:type" type:"string" xmlAttribute:"true" required:"true" enum:"true"`
+}
+
+// SetID sets the ID field's value.
+func (s *OutputService14TestShapeItemDetailShape) SetID(v string) *OutputService14TestShapeItemDetailShape {
+	s.ID = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *OutputService14TestShapeItemDetailShape) SetType(v OutputService14TestShapeItemType) *OutputService14TestShapeItemDetailShape {
+	s.Type = v
+	return s
+}
+
+type OutputService14TestShapeItemShape struct {
+	_ struct{} `type:"structure"`
+
+	ItemDetail *OutputService14TestShapeItemDetailShape `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
+}
+
+// SetItemDetail sets the ItemDetail field's value.
+func (s *OutputService14TestShapeItemShape) SetItemDetail(v *OutputService14TestShapeItemDetailShape) *OutputService14TestShapeItemShape {
+	s.ItemDetail = v
+	return s
+}
+
+type OutputService14TestShapeOutputService14TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+}
+
+type OutputService14TestShapeOutputService14TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	ListItems []OutputService14TestShapeItemShape `locationName:"ItemsList" locationNameList:"Item" type:"list"`
+}
+
+// SetListItems sets the ListItems field's value.
+func (s *OutputService14TestShapeOutputService14TestCaseOperation1Output) SetListItems(v []OutputService14TestShapeItemShape) *OutputService14TestShapeOutputService14TestCaseOperation1Output {
+	s.ListItems = v
+	return s
+}
+
+type OutputService14TestShapeItemType string
+
+// Enum values for OutputService14TestShapeItemType
+const (
+	ItemTypeType1 OutputService14TestShapeItemType = "Type1"
+	ItemTypeType2 OutputService14TestShapeItemType = "Type2"
+	ItemTypeType3 OutputService14TestShapeItemType = "Type3"
+)
+
 //
 // Tests begin here
 //
@@ -2370,6 +2524,51 @@ func TestOutputService13ProtocolTestEnumCase2(t *testing.T) {
 	// assert response
 	if out == nil {
 		t.Errorf("expect not to be nil")
+	}
+
+}
+
+func TestOutputService14ProtocolTestXMLAttributesCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService14ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("<SomeOutputDoc xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"><ItemsList><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type1\"><ID>id1</ID></ItemDetail></Item><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type2\"><ID>id2</ID></ItemDetail></Item><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type3\"><ID>id3</ID></ItemDetail></Item></ItemsList></SomeOutputDoc>"))
+	req := svc.OutputService14TestCaseOperation1Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	restxml.UnmarshalMeta(req.Request)
+	restxml.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService14TestShapeOutputService14TestCaseOperation1Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+	if e, a := string("id1"), *out.ListItems[0].ItemDetail.ID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService14TestShapeItemType("Type1"), out.ListItems[0].ItemDetail.Type; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := string("id2"), *out.ListItems[1].ItemDetail.ID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService14TestShapeItemType("Type2"), out.ListItems[1].ItemDetail.Type; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := string("id3"), *out.ListItems[2].ItemDetail.ID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService14TestShapeItemType("Type3"), out.ListItems[2].ItemDetail.Type; e != a {
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }

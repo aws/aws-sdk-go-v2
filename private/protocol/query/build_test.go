@@ -2217,8 +2217,8 @@ type InputService15ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService15ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService15ProtocolTest client from just a config.
