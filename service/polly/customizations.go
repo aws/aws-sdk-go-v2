@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	initRequest = func(r *request.Request) {
+	initRequest = func(c *Polly, r *request.Request) {
 		if r.Operation.Name == opSynthesizeSpeech {
 			r.Operation.BeforePresignFn = restGETPresignStrategy
 		}

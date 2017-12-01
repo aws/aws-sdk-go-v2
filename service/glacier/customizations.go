@@ -13,7 +13,7 @@ var (
 )
 
 func init() {
-	initRequest = func(r *request.Request) {
+	initRequest = func(c *Glacier, r *request.Request) {
 		r.Handlers.Validate.PushFront(addAccountID)
 		r.Handlers.Validate.PushFront(copyParams) // this happens first
 		r.Handlers.Build.PushBack(addChecksum)

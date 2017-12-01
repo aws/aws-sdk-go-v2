@@ -34,6 +34,8 @@ func GetBucketRegion(ctx aws.Context, cfg aws.Config, bucket, regionHint string,
 	cfg.Region = regionHint
 
 	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
+	svc.Credentials = aws.AnonymousCredentials
 	return GetBucketRegionWithClient(ctx, svc, bucket, opts...)
 }
 
@@ -48,8 +50,6 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
-	req.Config.S3ForcePathStyle = true
-	req.Config.Credentials = aws.AnonymousCredentials
 	req.SetContext(ctx)
 
 	// Disable HTTP redirects to prevent an invalid 301 from eating the response

@@ -70,9 +70,9 @@ func TestSendMessageChecksumInvalid(t *testing.T) {
 func TestSendMessageChecksumInvalidNoValidation(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
-	cfg.DisableComputeChecksums = true
 
 	s := sqs.New(cfg)
+	s.DisableComputeChecksums = true
 	s.Handlers.Send.Clear()
 
 	req := s.SendMessageRequest(&sqs.SendMessageInput{

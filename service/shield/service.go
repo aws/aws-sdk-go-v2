@@ -19,10 +19,10 @@ type Shield struct {
 }
 
 // Used for custom client initialization logic
-var initClient func(*aws.Client)
+var initClient func(*Shield)
 
 // Used for custom request initialization logic
-var initRequest func(*aws.Request)
+var initRequest func(*Shield, *aws.Request)
 
 // Service information constants
 const (
@@ -31,8 +31,8 @@ const (
 )
 
 // New creates a new instance of the Shield client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Shield client from just a config.
@@ -67,7 +67,7 @@ func New(config aws.Config) *Shield {
 
 	// Run custom client initialization if present
 	if initClient != nil {
-		initClient(svc.Client)
+		initClient(svc)
 	}
 
 	return svc
@@ -80,7 +80,7 @@ func (c *Shield) newRequest(op *aws.Operation, params, data interface{}) *aws.Re
 
 	// Run custom request initialization if present
 	if initRequest != nil {
-		initRequest(req)
+		initRequest(c, req)
 	}
 
 	return req

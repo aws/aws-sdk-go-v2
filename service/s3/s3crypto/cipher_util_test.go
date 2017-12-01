@@ -102,7 +102,6 @@ func TestCEKFactory(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := DecryptionClient{
@@ -159,7 +158,6 @@ func TestCEKFactoryNoCEK(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := DecryptionClient{
@@ -216,7 +214,6 @@ func TestCEKFactoryCustomEntry(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
 	c := DecryptionClient{

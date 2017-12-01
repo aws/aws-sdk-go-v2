@@ -31,9 +31,9 @@ func TestAdd100Continue_Added(t *testing.T) {
 
 func TestAdd100Continue_SkipDisabled(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3Disable100Continue = true
 
 	svc := s3.New(cfg)
+	svc.Disable100Continue = true
 	r := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),

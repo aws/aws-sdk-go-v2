@@ -63,15 +63,20 @@ func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
 	for i, test := range tests {
 		req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &test.bucket})
 		req.Build()
-		if e, a := test.url, req.HTTPRequest.URL.String(); e != a {
-			t.Errorf("%d, expect url %s, got %s", i, e, a)
-		}
+
 		if test.errCode != "" {
 			if err := req.Error; err == nil {
-				t.Fatalf("%d, expect no error", i)
+				t.Fatalf("%d, expect error, got none", i)
 			}
 			if a, e := req.Error.(awserr.Error).Code(), test.errCode; !strings.Contains(a, e) {
 				t.Errorf("%d, expect error code to contain %q, got %q", i, e, a)
+			}
+		} else {
+			if err := req.Error; err != nil {
+				t.Fatalf("%d, expect no error, got %v", i, err)
+			}
+			if e, a := test.url, req.HTTPRequest.URL.String(); e != a {
+				t.Errorf("%d, expect url %s, got %s", i, e, a)
 			}
 		}
 	}
@@ -79,32 +84,32 @@ func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
 
 func TestAccelerateBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3UseAccelerate = true
 	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
 
 	s := s3.New(cfg)
+	s.UseAccelerate = true
 	runTests(t, s, accelerateTests)
 }
 
 func TestAccelerateNoSSLBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3UseAccelerate = true
 	resolver := modeledendpoints.NewDefaultResolver()
 	resolver.DisableSSL = true
 	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
+	s.UseAccelerate = true
 	runTests(t, s, accelerateNoSSLTests)
 }
 
 func TestAccelerateDualstackBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3UseAccelerate = true
 	resolver := modeledendpoints.NewDefaultResolver()
 	resolver.UseDualStack = true
 	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
+	s.UseAccelerate = true
 	runTests(t, s, accelerateDualstack)
 }
 
@@ -128,10 +133,10 @@ func TestHostStyleBucketBuildNoSSL(t *testing.T) {
 
 func TestPathStyleBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3ForcePathStyle = true
 	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
 
 	s := s3.New(cfg)
+	s.ForcePathStyle = true
 	runTests(t, s, forcepathTests)
 }
 

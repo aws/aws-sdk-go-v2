@@ -4,18 +4,17 @@ import (
 	"net/url"
 	"regexp"
 
-	client "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
 func init() {
-	initClient = func(c *client.Client) {
+	initClient = func(c *Route53) {
 		c.Handlers.Build.PushBack(sanitizeURL)
 	}
 
-	initRequest = func(r *request.Request) {
+	initRequest = func(c *Route53, r *aws.Request) {
 		switch r.Operation.Name {
 		case opChangeResourceRecordSets:
 			r.Handlers.UnmarshalError.Remove(restxml.UnmarshalErrorHandler)
@@ -26,7 +25,7 @@ func init() {
 
 var reSanitizeURL = regexp.MustCompile(`\/%2F\w+%2F`)
 
-func sanitizeURL(r *request.Request) {
+func sanitizeURL(r *aws.Request) {
 	r.HTTPRequest.URL.RawPath =
 		reSanitizeURL.ReplaceAllString(r.HTTPRequest.URL.RawPath, "/")
 

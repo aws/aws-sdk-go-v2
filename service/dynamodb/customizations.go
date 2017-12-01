@@ -25,19 +25,26 @@ func (d retryer) RetryRules(r *request.Request) time.Duration {
 }
 
 func init() {
-	initClient = func(c *client.Client) {
+	initClient = func(c *DynamoDB) {
 		if c.Config.Retryer == nil {
 			// Only override the retryer with a custom one if the config
 			// does not already contain a retryer
 			setCustomRetryer(c)
 		}
 
-		c.Handlers.Build.PushBack(disableCompression)
-		c.Handlers.Unmarshal.PushFront(validateCRC32)
+		c.Handlers.Build.PushBackNamed(disableCompressionHandler)
+		c.Handlers.Unmarshal.PushFrontNamed(validateCRC32Handler)
+	}
+
+	initRequest = func(c *DynamoDB, req *aws.Request) {
+		if c.DisableComputeChecksums {
+			// Checksum validation is off, remove the validator.
+			req.Handlers.Unmarshal.Remove(validateCRC32Handler)
+		}
 	}
 }
 
-func setCustomRetryer(c *client.Client) {
+func setCustomRetryer(c *DynamoDB) {
 	c.Retryer = retryer{
 		DefaultRetryer: client.DefaultRetryer{
 			NumMaxRetries: 10,
@@ -60,18 +67,17 @@ func drainBody(b io.ReadCloser, length int64) (out *bytes.Buffer, err error) {
 	return buf, nil
 }
 
+var disableCompressionHandler = aws.NamedHandler{Name: "dynamodb.DisableCompression", Fn: disableCompression}
+
 func disableCompression(r *request.Request) {
 	r.HTTPRequest.Header.Set("Accept-Encoding", "identity")
 }
 
+var validateCRC32Handler = aws.NamedHandler{Name: "dynamodb.ValidateCRC32", Fn: validateCRC32}
+
 func validateCRC32(r *request.Request) {
 	if r.Error != nil {
 		return // already have an error, no need to verify CRC
-	}
-
-	// Checksum validation is off, skip
-	if r.Config.DisableComputeChecksums {
-		return
 	}
 
 	// Try to get CRC from response

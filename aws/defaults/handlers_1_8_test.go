@@ -20,9 +20,9 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 	cfg := defaults.Config()
 	cfg.Region = "mock-region"
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
 
 	req := svc.HeadObjectRequest(&s3.HeadObjectInput{
 		Bucket: aws.String("bucketname"),

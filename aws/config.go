@@ -11,8 +11,8 @@ type Config struct {
 	// noted. A full list of regions is found in the "Regions and Endpoints"
 	// document.
 	//
-	// @see http://docs.aws.amazon.com/general/latest/gr/rande.html
-	//   AWS Regions and Endpoints
+	// See http://docs.aws.amazon.com/general/latest/gr/rande.html for
+	// information on AWS regions.
 	Region string
 
 	// The credentials object to use when signing requests. Defaults to a
@@ -44,7 +44,6 @@ type Config struct {
 	// the request.WithRetryer helper function:
 	//
 	//   cfg := request.WithRetryer(aws.NewConfig(), myRetryer)
-	//
 	Retryer Retryer
 
 	// An integer value representing the logging level. The default log level
@@ -61,50 +60,13 @@ type Config struct {
 	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
 	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
 	// Proper handling of the request.Retryable field is important when setting this field.
+	//
+	// TODO this config field is depercated and needs removed.
 	EnforceShouldRetryCheck bool
 
-	// Disables the computation of request and response checksums, e.g.,
-	// CRC32 checksums in Amazon DynamoDB.
-	DisableComputeChecksums bool
-
-	// Set this to `true` to force the request to use path-style addressing,
-	// i.e., `http://s3.amazonaws.com/BUCKET/KEY`. By default, the S3 client
-	// will use virtual hosted bucket addressing when possible
-	// (`http://BUCKET.s3.amazonaws.com/KEY`).
-	//
-	// @note This configuration option is specific to the Amazon S3 service.
-	// @see http://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
-	//   Amazon S3: Virtual Hosting of Buckets
-	S3ForcePathStyle bool
-
-	// Set this to `true` to disable the SDK adding the `Expect: 100-Continue`
-	// header to PUT requests over 2MB of content. 100-Continue instructs the
-	// HTTP client not to send the body until the service responds with a
-	// `continue` status. This is useful to prevent sending the request body
-	// until after the request is authenticated, and validated.
-	//
-	// http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html
-	//
-	// 100-Continue is only enabled for Go 1.6 and above. See `http.Transport`'s
-	// `ExpectContinueTimeout` for information on adjusting the continue wait
-	// timeout. https://golang.org/pkg/net/http/#Transport
-	//
-	// You should use this flag to disble 100-Continue if you experience issues
-	// with proxies or third party S3 compatible services.
-	S3Disable100Continue bool
-
-	// Set this to `true` to enable S3 Accelerate feature. For all operations
-	// compatible with S3 Accelerate will use the accelerate endpoint for
-	// requests. Requests not compatible will fall back to normal S3 requests.
-	//
-	// The bucket must be enable for accelerate to be used with S3 client with
-	// accelerate enabled. If the bucket is not enabled for accelerate an error
-	// will be returned. The bucket name must be DNS compatible to also work
-	// with accelerate.
-	S3UseAccelerate bool
-
-	// DisableRestProtocolURICleaning will not clean the URL path when making rest protocol requests.
-	// Will default to false. This would only be used for empty directory names in s3 requests.
+	// DisableRestProtocolURICleaning will not clean the URL path when making
+	// rest protocol requests.  Will default to false. This would only be used
+	// for empty directory names in s3 requests.
 	//
 	// Example:
 	//    sess := session.Must(session.NewSession(&aws.Config{
@@ -116,6 +78,8 @@ type Config struct {
 	//    	Bucket: aws.String("bucketname"),
 	//    	Key: aws.String("//foo//bar//moo"),
 	//    })
+	//
+	// TODO need better way of representing support for this concept. Not on Config.
 	DisableRestProtocolURICleaning bool
 }
 

@@ -348,9 +348,9 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
 	req := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
@@ -366,9 +366,9 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
 	req := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
@@ -386,9 +386,9 @@ func TestBuildContentLength_WithBody(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
+	svc.ForcePathStyle = true
 	req := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),

@@ -9,7 +9,7 @@ import (
 )
 
 func init() {
-	initRequest = func(r *request.Request) {
+	initRequest = func(c *EC2, r *request.Request) {
 		if r.Operation.Name == opCopySnapshot { // fill the PresignedURL parameter
 			r.Handlers.Build.PushFront(fillPresignedURL)
 		}

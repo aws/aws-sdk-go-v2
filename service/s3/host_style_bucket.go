@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
@@ -16,7 +16,7 @@ type operationBlacklist []string
 
 // Continue will return true of the Request's operation name is not
 // in the blacklist. False otherwise.
-func (b operationBlacklist) Continue(r *request.Request) bool {
+func (b operationBlacklist) Continue(r *aws.Request) bool {
 	for i := 0; i < len(b); i++ {
 		if b[i] == r.Operation.Name {
 			return false
@@ -32,23 +32,25 @@ var accelerateOpBlacklist = operationBlacklist{
 // Request handler to automatically add the bucket name to the endpoint domain
 // if possible. This style of bucket is valid for all bucket names which are
 // DNS compatible and do not contain "."
-func updateEndpointForS3Config(r *request.Request) {
-	forceHostStyle := r.Config.S3ForcePathStyle
-	accelerate := r.Config.S3UseAccelerate
+func buildUpdateEndpointForS3Config(c *S3) func(*aws.Request) {
+	forceHostStyle := c.ForcePathStyle
+	accelerate := c.UseAccelerate
 
-	if accelerate && accelerateOpBlacklist.Continue(r) {
-		if forceHostStyle {
-			if r.Config.Logger != nil {
-				r.Config.Logger.Log("ERROR: aws.Config.S3UseAccelerate is not compatible with aws.Config.S3ForcePathStyle, ignoring S3ForcePathStyle.")
+	return func(r *aws.Request) {
+		if accelerate && accelerateOpBlacklist.Continue(r) {
+			if forceHostStyle {
+				if r.Config.Logger != nil {
+					r.Config.Logger.Log("ERROR: aws.Config.S3UseAccelerate is not compatible with aws.Config.S3ForcePathStyle, ignoring S3ForcePathStyle.")
+				}
 			}
+			updateEndpointForAccelerate(r)
+		} else if !forceHostStyle && r.Operation.Name != opGetBucketLocation {
+			updateEndpointForHostStyle(r)
 		}
-		updateEndpointForAccelerate(r)
-	} else if !forceHostStyle && r.Operation.Name != opGetBucketLocation {
-		updateEndpointForHostStyle(r)
 	}
 }
 
-func updateEndpointForHostStyle(r *request.Request) {
+func updateEndpointForHostStyle(r *aws.Request) {
 	bucket, ok := bucketNameFromReqParams(r.Params)
 	if !ok {
 		// Ignore operation requests if the bucketname was not provided
@@ -69,7 +71,7 @@ var (
 	accelElem = []byte("s3-accelerate.dualstack.")
 )
 
-func updateEndpointForAccelerate(r *request.Request) {
+func updateEndpointForAccelerate(r *aws.Request) {
 	bucket, ok := bucketNameFromReqParams(r.Params)
 	if !ok {
 		// Ignore operation requests if the bucketname was not provided

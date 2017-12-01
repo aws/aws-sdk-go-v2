@@ -52,8 +52,8 @@ type OutputService1ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService1ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService1ProtocolTest client from just a config.
@@ -220,8 +220,8 @@ type OutputService2ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService2ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService2ProtocolTest client from just a config.
@@ -333,8 +333,8 @@ type OutputService3ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService3ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService3ProtocolTest client from just a config.
@@ -445,8 +445,8 @@ type OutputService4ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService4ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService4ProtocolTest client from just a config.
@@ -557,8 +557,8 @@ type OutputService5ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService5ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService5ProtocolTest client from just a config.
@@ -669,8 +669,8 @@ type OutputService6ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService6ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService6ProtocolTest client from just a config.
@@ -793,8 +793,8 @@ type OutputService7ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService7ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService7ProtocolTest client from just a config.
@@ -905,8 +905,8 @@ type OutputService8ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService8ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService8ProtocolTest client from just a config.
@@ -1017,8 +1017,8 @@ type OutputService9ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService9ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService9ProtocolTest client from just a config.
@@ -1129,8 +1129,8 @@ type OutputService10ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService10ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the optional
-// aws.Config parameter to add your extra config.
+// If additional configuration is needed for the client instance use the
+// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService10ProtocolTest client from just a config.

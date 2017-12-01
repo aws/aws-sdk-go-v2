@@ -15,7 +15,7 @@ func init() {
 		opCopyDBClusterSnapshot,
 		opCreateDBCluster,
 	}
-	initRequest = func(r *request.Request) {
+	initRequest = func(c *RDS, r *request.Request) {
 		for _, operation := range ops {
 			if r.Operation.Name == operation {
 				r.Handlers.Build.PushFront(fillPresignedURL)
