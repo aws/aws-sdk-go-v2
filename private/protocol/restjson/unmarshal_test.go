@@ -1498,13 +1498,13 @@ type OutputService12TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService12TestCaseOperation1 API request.
-func (r OutputService12TestCaseOperation1Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation1Output, error) {
+func (r OutputService12TestCaseOperation1Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation3Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*OutputService12TestShapeOutputService12TestCaseOperation1Output), nil
+	return r.Request.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output), nil
 }
 
 // OutputService12TestCaseOperation1Request returns a request value for making API operation for
@@ -1527,23 +1527,131 @@ func (c *OutputService12ProtocolTest) OutputService12TestCaseOperation1Request(i
 		input = &OutputService12TestShapeOutputService12TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService12TestShapeOutputService12TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &OutputService12TestShapeOutputService12TestCaseOperation3Output{})
 	return OutputService12TestCaseOperation1Request{Request: req, Input: input}
+}
+
+const opOutputService12TestCaseOperation2 = "OperationName"
+
+// OutputService12TestCaseOperation2Request is a API request type for the OutputService12TestCaseOperation2 API operation.
+type OutputService12TestCaseOperation2Request struct {
+	*aws.Request
+	Input *OutputService12TestShapeOutputService12TestCaseOperation2Input
+}
+
+// Send marshals and sends the OutputService12TestCaseOperation2 API request.
+func (r OutputService12TestCaseOperation2Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation3Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output), nil
+}
+
+// OutputService12TestCaseOperation2Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the OutputService12TestCaseOperation2Request method.
+//    req := client.OutputService12TestCaseOperation2Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService12ProtocolTest) OutputService12TestCaseOperation2Request(input *OutputService12TestShapeOutputService12TestCaseOperation2Input) OutputService12TestCaseOperation2Request {
+	op := &aws.Operation{
+		Name: opOutputService12TestCaseOperation2,
+
+		HTTPPath: "/",
+	}
+
+	if input == nil {
+		input = &OutputService12TestShapeOutputService12TestCaseOperation2Input{}
+	}
+
+	req := c.newRequest(op, input, &OutputService12TestShapeOutputService12TestCaseOperation3Output{})
+	return OutputService12TestCaseOperation2Request{Request: req, Input: input}
+}
+
+const opOutputService12TestCaseOperation3 = "OperationName"
+
+// OutputService12TestCaseOperation3Request is a API request type for the OutputService12TestCaseOperation3 API operation.
+type OutputService12TestCaseOperation3Request struct {
+	*aws.Request
+	Input *OutputService12TestShapeOutputService12TestCaseOperation3Input
+}
+
+// Send marshals and sends the OutputService12TestCaseOperation3 API request.
+func (r OutputService12TestCaseOperation3Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation3Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output), nil
+}
+
+// OutputService12TestCaseOperation3Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the OutputService12TestCaseOperation3Request method.
+//    req := client.OutputService12TestCaseOperation3Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService12ProtocolTest) OutputService12TestCaseOperation3Request(input *OutputService12TestShapeOutputService12TestCaseOperation3Input) OutputService12TestCaseOperation3Request {
+	op := &aws.Operation{
+		Name: opOutputService12TestCaseOperation3,
+
+		HTTPPath: "/",
+	}
+
+	if input == nil {
+		input = &OutputService12TestShapeOutputService12TestCaseOperation3Input{}
+	}
+
+	req := c.newRequest(op, input, &OutputService12TestShapeOutputService12TestCaseOperation3Output{})
+	return OutputService12TestCaseOperation3Request{Request: req, Input: input}
 }
 
 type OutputService12TestShapeOutputService12TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 }
 
-type OutputService12TestShapeOutputService12TestCaseOperation1Output struct {
+type OutputService12TestShapeOutputService12TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
-
-	Attr aws.JSONValue `location:"header" locationName:"X-Amz-Foo" type:"jsonvalue"`
 }
 
-// SetAttr sets the Attr field's value.
-func (s *OutputService12TestShapeOutputService12TestCaseOperation1Output) SetAttr(v aws.JSONValue) *OutputService12TestShapeOutputService12TestCaseOperation1Output {
-	s.Attr = v
+type OutputService12TestShapeOutputService12TestCaseOperation3Input struct {
+	_ struct{} `type:"structure"`
+}
+
+type OutputService12TestShapeOutputService12TestCaseOperation3Output struct {
+	_ struct{} `type:"structure"`
+
+	BodyField aws.JSONValue `type:"jsonvalue"`
+
+	BodyListField []aws.JSONValue `type:"list"`
+
+	HeaderField aws.JSONValue `location:"header" locationName:"X-Amz-Foo" type:"jsonvalue"`
+}
+
+// SetBodyField sets the BodyField field's value.
+func (s *OutputService12TestShapeOutputService12TestCaseOperation3Output) SetBodyField(v aws.JSONValue) *OutputService12TestShapeOutputService12TestCaseOperation3Output {
+	s.BodyField = v
+	return s
+}
+
+// SetBodyListField sets the BodyListField field's value.
+func (s *OutputService12TestShapeOutputService12TestCaseOperation3Output) SetBodyListField(v []aws.JSONValue) *OutputService12TestShapeOutputService12TestCaseOperation3Output {
+	s.BodyListField = v
+	return s
+}
+
+// SetHeaderField sets the HeaderField field's value.
+func (s *OutputService12TestShapeOutputService12TestCaseOperation3Output) SetHeaderField(v aws.JSONValue) *OutputService12TestShapeOutputService12TestCaseOperation3Output {
+	s.HeaderField = v
 	return s
 }
 
@@ -2145,7 +2253,7 @@ func TestOutputService12ProtocolTestJSONValueTraitCase1(t *testing.T) {
 
 	svc := NewOutputService12ProtocolTest(cfg)
 
-	buf := bytes.NewReader([]byte(""))
+	buf := bytes.NewReader([]byte("{\"BodyField\":\"{\\\"Foo\\\":\\\"Bar\\\"}\"}"))
 	req := svc.OutputService12TestCaseOperation1Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 
@@ -2159,12 +2267,69 @@ func TestOutputService12ProtocolTestJSONValueTraitCase1(t *testing.T) {
 		t.Errorf("expect not error, got %v", req.Error)
 	}
 
-	out := req.Data.(*OutputService12TestShapeOutputService12TestCaseOperation1Output)
+	out := req.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output)
 	// assert response
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	reflect.DeepEqual(out.Attr, map[string]interface{}{"Foo": "Bar"})
+	reflect.DeepEqual(out.BodyField, map[string]interface{}{"Foo": "Bar"})
+	reflect.DeepEqual(out.HeaderField, map[string]interface{}{"Foo": "Bar"})
+
+}
+
+func TestOutputService12ProtocolTestJSONValueTraitCase2(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService12ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("{\"BodyListField\":[\"{\\\"Foo\\\":\\\"Bar\\\"}\"]}"))
+	req := svc.OutputService12TestCaseOperation2Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	restjson.UnmarshalMeta(req.Request)
+	restjson.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+	reflect.DeepEqual(out.BodyListField[0], map[string]interface{}{"Foo": "Bar"})
+
+}
+
+func TestOutputService12ProtocolTestJSONValueTraitCase3(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService12ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte(""))
+	req := svc.OutputService12TestCaseOperation3Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	restjson.UnmarshalMeta(req.Request)
+	restjson.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+
 }
 
 func TestOutputService13ProtocolTestEnumCase1(t *testing.T) {

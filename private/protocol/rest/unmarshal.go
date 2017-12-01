@@ -3,7 +3,6 @@ package rest
 import (
 	"bytes"
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -16,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 // UnmarshalHandler is a named request handler for unmarshaling rest protocol requests
@@ -234,17 +234,11 @@ func unmarshalHeader(v reflect.Value, header string, tag reflect.StructTag) erro
 		}
 		v.Set(reflect.ValueOf(t))
 	case aws.JSONValue:
-		b := []byte(header)
-		var err error
+		escaping := protocol.NoEscape
 		if tag.Get("location") == "header" {
-			b, err = base64.StdEncoding.DecodeString(header)
-			if err != nil {
-				return err
-			}
+			escaping = protocol.Base64Escape
 		}
-
-		m := aws.JSONValue{}
-		err = json.Unmarshal(b, &m)
+		m, err := protocol.DecodeJSONValue(header, escaping)
 		if err != nil {
 			return err
 		}
