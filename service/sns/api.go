@@ -54,9 +54,12 @@ func (c *SNS) AddPermissionRequest(input *AddPermissionInput) AddPermissionReque
 		input = &AddPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddPermissionOutput{})
+	output := &AddPermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddPermissionRequest{Request: req, Input: input}
 }
 
@@ -107,7 +110,10 @@ func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOpt
 		input = &CheckIfPhoneNumberIsOptedOutInput{}
 	}
 
-	req := c.newRequest(op, input, &CheckIfPhoneNumberIsOptedOutOutput{})
+	output := &CheckIfPhoneNumberIsOptedOutOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CheckIfPhoneNumberIsOptedOutRequest{Request: req, Input: input}
 }
 
@@ -157,7 +163,10 @@ func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) Confir
 		input = &ConfirmSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmSubscriptionOutput{})
+	output := &ConfirmSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfirmSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -228,7 +237,10 @@ func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationI
 		input = &CreatePlatformApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlatformApplicationOutput{})
+	output := &CreatePlatformApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePlatformApplicationRequest{Request: req, Input: input}
 }
 
@@ -287,7 +299,10 @@ func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) 
 		input = &CreatePlatformEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlatformEndpointOutput{})
+	output := &CreatePlatformEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePlatformEndpointRequest{Request: req, Input: input}
 }
 
@@ -337,7 +352,10 @@ func (c *SNS) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest {
 		input = &CreateTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTopicOutput{})
+	output := &CreateTopicOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTopicRequest{Request: req, Input: input}
 }
 
@@ -388,9 +406,12 @@ func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpointRe
 		input = &DeleteEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEndpointOutput{})
+	output := &DeleteEndpointOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEndpointRequest{Request: req, Input: input}
 }
 
@@ -438,9 +459,12 @@ func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationI
 		input = &DeletePlatformApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlatformApplicationOutput{})
+	output := &DeletePlatformApplicationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePlatformApplicationRequest{Request: req, Input: input}
 }
 
@@ -489,9 +513,12 @@ func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest {
 		input = &DeleteTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTopicOutput{})
+	output := &DeleteTopicOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTopicRequest{Request: req, Input: input}
 }
 
@@ -539,7 +566,10 @@ func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) Ge
 		input = &GetEndpointAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEndpointAttributesOutput{})
+	output := &GetEndpointAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEndpointAttributesRequest{Request: req, Input: input}
 }
 
@@ -587,7 +617,10 @@ func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicat
 		input = &GetPlatformApplicationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPlatformApplicationAttributesOutput{})
+	output := &GetPlatformApplicationAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPlatformApplicationAttributesRequest{Request: req, Input: input}
 }
 
@@ -635,7 +668,10 @@ func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAttrib
 		input = &GetSMSAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSMSAttributesOutput{})
+	output := &GetSMSAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSMSAttributesRequest{Request: req, Input: input}
 }
 
@@ -681,7 +717,10 @@ func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesI
 		input = &GetSubscriptionAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSubscriptionAttributesOutput{})
+	output := &GetSubscriptionAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSubscriptionAttributesRequest{Request: req, Input: input}
 }
 
@@ -728,7 +767,10 @@ func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTopic
 		input = &GetTopicAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTopicAttributesOutput{})
+	output := &GetTopicAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTopicAttributesRequest{Request: req, Input: input}
 }
 
@@ -787,7 +829,10 @@ func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPl
 		input = &ListEndpointsByPlatformApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEndpointsByPlatformApplicationOutput{})
+	output := &ListEndpointsByPlatformApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListEndpointsByPlatformApplicationRequest{Request: req, Input: input}
 }
 
@@ -891,7 +936,10 @@ func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInp
 		input = &ListPhoneNumbersOptedOutInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPhoneNumbersOptedOutOutput{})
+	output := &ListPhoneNumbersOptedOutOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPhoneNumbersOptedOutRequest{Request: req, Input: input}
 }
 
@@ -950,7 +998,10 @@ func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInp
 		input = &ListPlatformApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPlatformApplicationsOutput{})
+	output := &ListPlatformApplicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPlatformApplicationsRequest{Request: req, Input: input}
 }
 
@@ -1055,7 +1106,10 @@ func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSubscr
 		input = &ListSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionsOutput{})
+	output := &ListSubscriptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSubscriptionsRequest{Request: req, Input: input}
 }
 
@@ -1160,7 +1214,10 @@ func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInp
 		input = &ListSubscriptionsByTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionsByTopicOutput{})
+	output := &ListSubscriptionsByTopicOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSubscriptionsByTopicRequest{Request: req, Input: input}
 }
 
@@ -1264,7 +1321,10 @@ func (c *SNS) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 		input = &ListTopicsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTopicsOutput{})
+	output := &ListTopicsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTopicsRequest{Request: req, Input: input}
 }
 
@@ -1363,7 +1423,10 @@ func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhoneNu
 		input = &OptInPhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &OptInPhoneNumberOutput{})
+	output := &OptInPhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OptInPhoneNumberRequest{Request: req, Input: input}
 }
 
@@ -1420,7 +1483,10 @@ func (c *SNS) PublishRequest(input *PublishInput) PublishRequest {
 		input = &PublishInput{}
 	}
 
-	req := c.newRequest(op, input, &PublishOutput{})
+	output := &PublishOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PublishRequest{Request: req, Input: input}
 }
 
@@ -1466,9 +1532,12 @@ func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) RemovePermis
 		input = &RemovePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemovePermissionOutput{})
+	output := &RemovePermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemovePermissionRequest{Request: req, Input: input}
 }
 
@@ -1516,9 +1585,12 @@ func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) Se
 		input = &SetEndpointAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetEndpointAttributesOutput{})
+	output := &SetEndpointAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetEndpointAttributesRequest{Request: req, Input: input}
 }
 
@@ -1568,9 +1640,12 @@ func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicat
 		input = &SetPlatformApplicationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetPlatformApplicationAttributesOutput{})
+	output := &SetPlatformApplicationAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetPlatformApplicationAttributesRequest{Request: req, Input: input}
 }
 
@@ -1622,7 +1697,10 @@ func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) SetSMSAttrib
 		input = &SetSMSAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetSMSAttributesOutput{})
+	output := &SetSMSAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetSMSAttributesRequest{Request: req, Input: input}
 }
 
@@ -1668,9 +1746,12 @@ func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesI
 		input = &SetSubscriptionAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetSubscriptionAttributesOutput{})
+	output := &SetSubscriptionAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetSubscriptionAttributesRequest{Request: req, Input: input}
 }
 
@@ -1716,9 +1797,12 @@ func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTopic
 		input = &SetTopicAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTopicAttributesOutput{})
+	output := &SetTopicAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetTopicAttributesRequest{Request: req, Input: input}
 }
 
@@ -1767,7 +1851,10 @@ func (c *SNS) SubscribeRequest(input *SubscribeInput) SubscribeRequest {
 		input = &SubscribeInput{}
 	}
 
-	req := c.newRequest(op, input, &SubscribeOutput{})
+	output := &SubscribeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SubscribeRequest{Request: req, Input: input}
 }
 
@@ -1818,9 +1905,12 @@ func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest {
 		input = &UnsubscribeInput{}
 	}
 
-	req := c.newRequest(op, input, &UnsubscribeOutput{})
+	output := &UnsubscribeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnsubscribeRequest{Request: req, Input: input}
 }
 
@@ -1916,6 +2006,8 @@ func (s *AddPermissionInput) SetTopicArn(v string) *AddPermissionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionOutput
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1926,6 +2018,11 @@ func (s AddPermissionOutput) String() string {
 // GoString returns the string representation
 func (s AddPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the CheckIfPhoneNumberIsOptedOut action.
@@ -1974,6 +2071,8 @@ func (s *CheckIfPhoneNumberIsOptedOutInput) SetPhoneNumber(v string) *CheckIfPho
 type CheckIfPhoneNumberIsOptedOutOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the phone number is opted out:
 	//
 	//    * true – The phone number is opted out, meaning you cannot publish SMS
@@ -1992,6 +2091,11 @@ func (s CheckIfPhoneNumberIsOptedOutOutput) String() string {
 // GoString returns the string representation
 func (s CheckIfPhoneNumberIsOptedOutOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CheckIfPhoneNumberIsOptedOutOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsOptedOut sets the IsOptedOut field's value.
@@ -2073,6 +2177,8 @@ func (s *ConfirmSubscriptionInput) SetTopicArn(v string) *ConfirmSubscriptionInp
 type ConfirmSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the created subscription.
 	SubscriptionArn *string `type:"string"`
 }
@@ -2085,6 +2191,11 @@ func (s ConfirmSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubscriptionArn sets the SubscriptionArn field's value.
@@ -2172,6 +2283,8 @@ func (s *CreatePlatformApplicationInput) SetPlatform(v string) *CreatePlatformAp
 type CreatePlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// PlatformApplicationArn is returned.
 	PlatformApplicationArn *string `type:"string"`
 }
@@ -2184,6 +2297,11 @@ func (s CreatePlatformApplicationOutput) String() string {
 // GoString returns the string representation
 func (s CreatePlatformApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePlatformApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
@@ -2277,6 +2395,8 @@ func (s *CreatePlatformEndpointInput) SetToken(v string) *CreatePlatformEndpoint
 type CreatePlatformEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// EndpointArn returned from CreateEndpoint action.
 	EndpointArn *string `type:"string"`
 }
@@ -2289,6 +2409,11 @@ func (s CreatePlatformEndpointOutput) String() string {
 // GoString returns the string representation
 func (s CreatePlatformEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePlatformEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpointArn sets the EndpointArn field's value.
@@ -2347,6 +2472,8 @@ func (s *CreateTopicInput) SetName(v string) *CreateTopicInput {
 type CreateTopicOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) assigned to the created topic.
 	TopicArn *string `type:"string"`
 }
@@ -2359,6 +2486,11 @@ func (s CreateTopicOutput) String() string {
 // GoString returns the string representation
 func (s CreateTopicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTopicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTopicArn sets the TopicArn field's value.
@@ -2411,6 +2543,8 @@ func (s *DeleteEndpointInput) SetEndpointArn(v string) *DeleteEndpointInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpointOutput
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2421,6 +2555,11 @@ func (s DeleteEndpointOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for DeletePlatformApplication action.
@@ -2467,6 +2606,8 @@ func (s *DeletePlatformApplicationInput) SetPlatformApplicationArn(v string) *De
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationOutput
 type DeletePlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2477,6 +2618,11 @@ func (s DeletePlatformApplicationOutput) String() string {
 // GoString returns the string representation
 func (s DeletePlatformApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePlatformApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopicInput
@@ -2522,6 +2668,8 @@ func (s *DeleteTopicInput) SetTopicArn(v string) *DeleteTopicInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopicOutput
 type DeleteTopicOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2532,6 +2680,11 @@ func (s DeleteTopicOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTopicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTopicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Endpoint for mobile app and device.
@@ -2614,6 +2767,8 @@ func (s *GetEndpointAttributesInput) SetEndpointArn(v string) *GetEndpointAttrib
 type GetEndpointAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Attributes include the following:
 	//
 	//    * CustomUserData -- arbitrary user data to associate with the endpoint.
@@ -2639,6 +2794,11 @@ func (s GetEndpointAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetEndpointAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEndpointAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -2693,6 +2853,8 @@ func (s *GetPlatformApplicationAttributesInput) SetPlatformApplicationArn(v stri
 type GetPlatformApplicationAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Attributes include the following:
 	//
 	//    * EventEndpointCreated -- Topic ARN to which EndpointCreated event notifications
@@ -2718,6 +2880,11 @@ func (s GetPlatformApplicationAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetPlatformApplicationAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPlatformApplicationAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -2761,6 +2928,8 @@ func (s *GetSMSAttributesInput) SetAttributes(v []string) *GetSMSAttributesInput
 type GetSMSAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The SMS attribute names and their values.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
 }
@@ -2773,6 +2942,11 @@ func (s GetSMSAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetSMSAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSMSAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -2827,6 +3001,8 @@ func (s *GetSubscriptionAttributesInput) SetSubscriptionArn(v string) *GetSubscr
 type GetSubscriptionAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of the subscription's attributes. Attributes in this map include the
 	// following:
 	//
@@ -2856,6 +3032,11 @@ func (s GetSubscriptionAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetSubscriptionAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSubscriptionAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -2910,6 +3091,8 @@ func (s *GetTopicAttributesInput) SetTopicArn(v string) *GetTopicAttributesInput
 type GetTopicAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of the topic's attributes. Attributes in this map include the following:
 	//
 	//    * TopicArn -- the topic's ARN
@@ -2945,6 +3128,11 @@ func (s GetTopicAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetTopicAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTopicAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -3010,6 +3198,8 @@ func (s *ListEndpointsByPlatformApplicationInput) SetPlatformApplicationArn(v st
 type ListEndpointsByPlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Endpoints returned for ListEndpointsByPlatformApplication action.
 	Endpoints []Endpoint `type:"list"`
 
@@ -3026,6 +3216,11 @@ func (s ListEndpointsByPlatformApplicationOutput) String() string {
 // GoString returns the string representation
 func (s ListEndpointsByPlatformApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListEndpointsByPlatformApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpoints sets the Endpoints field's value.
@@ -3072,6 +3267,8 @@ func (s *ListPhoneNumbersOptedOutInput) SetNextToken(v string) *ListPhoneNumbers
 type ListPhoneNumbersOptedOutOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A NextToken string is returned when you call the ListPhoneNumbersOptedOut
 	// action if additional records are available after the first page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -3089,6 +3286,11 @@ func (s ListPhoneNumbersOptedOutOutput) String() string {
 // GoString returns the string representation
 func (s ListPhoneNumbersOptedOutOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPhoneNumbersOptedOutOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3134,6 +3336,8 @@ func (s *ListPlatformApplicationsInput) SetNextToken(v string) *ListPlatformAppl
 type ListPlatformApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// NextToken string is returned when calling ListPlatformApplications action
 	// if additional records are available after the first page results.
 	NextToken *string `type:"string"`
@@ -3150,6 +3354,11 @@ func (s ListPlatformApplicationsOutput) String() string {
 // GoString returns the string representation
 func (s ListPlatformApplicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPlatformApplicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3219,6 +3428,8 @@ func (s *ListSubscriptionsByTopicInput) SetTopicArn(v string) *ListSubscriptions
 type ListSubscriptionsByTopicOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token to pass along to the next ListSubscriptionsByTopic request. This element
 	// is returned if there are more subscriptions to retrieve.
 	NextToken *string `type:"string"`
@@ -3235,6 +3446,11 @@ func (s ListSubscriptionsByTopicOutput) String() string {
 // GoString returns the string representation
 func (s ListSubscriptionsByTopicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSubscriptionsByTopicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3279,6 +3495,8 @@ func (s *ListSubscriptionsInput) SetNextToken(v string) *ListSubscriptionsInput 
 type ListSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token to pass along to the next ListSubscriptions request. This element is
 	// returned if there are more subscriptions to retrieve.
 	NextToken *string `type:"string"`
@@ -3295,6 +3513,11 @@ func (s ListSubscriptionsOutput) String() string {
 // GoString returns the string representation
 func (s ListSubscriptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSubscriptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3338,6 +3561,8 @@ func (s *ListTopicsInput) SetNextToken(v string) *ListTopicsInput {
 type ListTopicsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token to pass along to the next ListTopics request. This element is returned
 	// if there are additional topics to retrieve.
 	NextToken *string `type:"string"`
@@ -3354,6 +3579,11 @@ func (s ListTopicsOutput) String() string {
 // GoString returns the string representation
 func (s ListTopicsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTopicsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3485,6 +3715,8 @@ func (s *OptInPhoneNumberInput) SetPhoneNumber(v string) *OptInPhoneNumberInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberResponse
 type OptInPhoneNumberOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3495,6 +3727,11 @@ func (s OptInPhoneNumberOutput) String() string {
 // GoString returns the string representation
 func (s OptInPhoneNumberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OptInPhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Platform application object.
@@ -3706,6 +3943,8 @@ func (s *PublishInput) SetTopicArn(v string) *PublishInput {
 type PublishOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique identifier assigned to the published message.
 	//
 	// Length Constraint: Maximum 100 characters
@@ -3720,6 +3959,11 @@ func (s PublishOutput) String() string {
 // GoString returns the string representation
 func (s PublishOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PublishOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageId sets the MessageId field's value.
@@ -3787,6 +4031,8 @@ func (s *RemovePermissionInput) SetTopicArn(v string) *RemovePermissionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3797,6 +4043,11 @@ func (s RemovePermissionOutput) String() string {
 // GoString returns the string representation
 func (s RemovePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for SetEndpointAttributes action.
@@ -3871,6 +4122,8 @@ func (s *SetEndpointAttributesInput) SetEndpointArn(v string) *SetEndpointAttrib
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributesOutput
 type SetEndpointAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3881,6 +4134,11 @@ func (s SetEndpointAttributesOutput) String() string {
 // GoString returns the string representation
 func (s SetEndpointAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetEndpointAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for SetPlatformApplicationAttributes action.
@@ -3975,6 +4233,8 @@ func (s *SetPlatformApplicationAttributesInput) SetPlatformApplicationArn(v stri
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributesOutput
 type SetPlatformApplicationAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3985,6 +4245,11 @@ func (s SetPlatformApplicationAttributesOutput) String() string {
 // GoString returns the string representation
 func (s SetPlatformApplicationAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetPlatformApplicationAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the SetSMSAttributes action.
@@ -4103,6 +4368,8 @@ func (s *SetSMSAttributesInput) SetAttributes(v map[string]string) *SetSMSAttrib
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesResponse
 type SetSMSAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4113,6 +4380,11 @@ func (s SetSMSAttributesOutput) String() string {
 // GoString returns the string representation
 func (s SetSMSAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetSMSAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for SetSubscriptionAttributes action.
@@ -4186,6 +4458,8 @@ func (s *SetSubscriptionAttributesInput) SetSubscriptionArn(v string) *SetSubscr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributesOutput
 type SetSubscriptionAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4196,6 +4470,11 @@ func (s SetSubscriptionAttributesOutput) String() string {
 // GoString returns the string representation
 func (s SetSubscriptionAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetSubscriptionAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for SetTopicAttributes action.
@@ -4269,6 +4548,8 @@ func (s *SetTopicAttributesInput) SetTopicArn(v string) *SetTopicAttributesInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributesOutput
 type SetTopicAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4279,6 +4560,11 @@ func (s SetTopicAttributesOutput) String() string {
 // GoString returns the string representation
 func (s SetTopicAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetTopicAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for Subscribe action.
@@ -4386,6 +4672,8 @@ func (s *SubscribeInput) SetTopicArn(v string) *SubscribeInput {
 type SubscribeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the subscription, if the service was able to create a subscription
 	// immediately (without requiring endpoint owner confirmation).
 	SubscriptionArn *string `type:"string"`
@@ -4399,6 +4687,11 @@ func (s SubscribeOutput) String() string {
 // GoString returns the string representation
 func (s SubscribeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SubscribeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubscriptionArn sets the SubscriptionArn field's value.
@@ -4538,6 +4831,8 @@ func (s *UnsubscribeInput) SetSubscriptionArn(v string) *UnsubscribeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UnsubscribeOutput
 type UnsubscribeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4548,4 +4843,9 @@ func (s UnsubscribeOutput) String() string {
 // GoString returns the string representation
 func (s UnsubscribeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnsubscribeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }

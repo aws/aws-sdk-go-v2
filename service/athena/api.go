@@ -57,7 +57,10 @@ func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) Batch
 		input = &BatchGetNamedQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetNamedQueryOutput{})
+	output := &BatchGetNamedQueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetNamedQueryRequest{Request: req, Input: input}
 }
 
@@ -107,7 +110,10 @@ func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInpu
 		input = &BatchGetQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetQueryExecutionOutput{})
+	output := &BatchGetQueryExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetQueryExecutionRequest{Request: req, Input: input}
 }
 
@@ -157,7 +163,10 @@ func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) CreateNam
 		input = &CreateNamedQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNamedQueryOutput{})
+	output := &CreateNamedQueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNamedQueryRequest{Request: req, Input: input}
 }
 
@@ -207,7 +216,10 @@ func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNam
 		input = &DeleteNamedQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNamedQueryOutput{})
+	output := &DeleteNamedQueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNamedQueryRequest{Request: req, Input: input}
 }
 
@@ -253,7 +265,10 @@ func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRe
 		input = &GetNamedQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNamedQueryOutput{})
+	output := &GetNamedQueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetNamedQueryRequest{Request: req, Input: input}
 }
 
@@ -300,7 +315,10 @@ func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQuer
 		input = &GetQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryExecutionOutput{})
+	output := &GetQueryExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQueryExecutionRequest{Request: req, Input: input}
 }
 
@@ -354,7 +372,10 @@ func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 		input = &GetQueryResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryResultsOutput{})
+	output := &GetQueryResultsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQueryResultsRequest{Request: req, Input: input}
 }
 
@@ -460,7 +481,10 @@ func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 		input = &ListNamedQueriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNamedQueriesOutput{})
+	output := &ListNamedQueriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListNamedQueriesRequest{Request: req, Input: input}
 }
 
@@ -566,7 +590,10 @@ func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 		input = &ListQueryExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueryExecutionsOutput{})
+	output := &ListQueryExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListQueryExecutionsRequest{Request: req, Input: input}
 }
 
@@ -666,7 +693,10 @@ func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) Sta
 		input = &StartQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartQueryExecutionOutput{})
+	output := &StartQueryExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartQueryExecutionRequest{Request: req, Input: input}
 }
 
@@ -716,7 +746,10 @@ func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) StopQ
 		input = &StopQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopQueryExecutionOutput{})
+	output := &StopQueryExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopQueryExecutionRequest{Request: req, Input: input}
 }
 
@@ -767,6 +800,8 @@ func (s *BatchGetNamedQueryInput) SetNamedQueryIds(v []string) *BatchGetNamedQue
 type BatchGetNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the named query IDs submitted.
 	NamedQueries []NamedQuery `type:"list"`
 
@@ -782,6 +817,11 @@ func (s BatchGetNamedQueryOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetNamedQueryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetNamedQueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNamedQueries sets the NamedQueries field's value.
@@ -843,6 +883,8 @@ func (s *BatchGetQueryExecutionInput) SetQueryExecutionIds(v []string) *BatchGet
 type BatchGetQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about a query execution.
 	QueryExecutions []QueryExecution `type:"list"`
 
@@ -858,6 +900,11 @@ func (s BatchGetQueryExecutionOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetQueryExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetQueryExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueryExecutions sets the QueryExecutions field's value.
@@ -1098,6 +1145,8 @@ func (s *CreateNamedQueryInput) SetQueryString(v string) *CreateNamedQueryInput 
 type CreateNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID of the query.
 	NamedQueryId *string `type:"string"`
 }
@@ -1110,6 +1159,11 @@ func (s CreateNamedQueryOutput) String() string {
 // GoString returns the string representation
 func (s CreateNamedQueryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNamedQueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNamedQueryId sets the NamedQueryId field's value.
@@ -1186,6 +1240,8 @@ func (s *DeleteNamedQueryInput) SetNamedQueryId(v string) *DeleteNamedQueryInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQueryOutput
 type DeleteNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1196,6 +1252,11 @@ func (s DeleteNamedQueryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNamedQueryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNamedQueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // If query results are encrypted in Amazon S3, indicates the Amazon S3 encryption
@@ -1294,6 +1355,8 @@ func (s *GetNamedQueryInput) SetNamedQueryId(v string) *GetNamedQueryInput {
 type GetNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the query.
 	NamedQuery *NamedQuery `type:"structure"`
 }
@@ -1306,6 +1369,11 @@ func (s GetNamedQueryOutput) String() string {
 // GoString returns the string representation
 func (s GetNamedQueryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetNamedQueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNamedQuery sets the NamedQuery field's value.
@@ -1358,6 +1426,8 @@ func (s *GetQueryExecutionInput) SetQueryExecutionId(v string) *GetQueryExecutio
 type GetQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the query execution.
 	QueryExecution *QueryExecution `type:"structure"`
 }
@@ -1370,6 +1440,11 @@ func (s GetQueryExecutionOutput) String() string {
 // GoString returns the string representation
 func (s GetQueryExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQueryExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueryExecution sets the QueryExecution field's value.
@@ -1441,6 +1516,8 @@ func (s *GetQueryResultsInput) SetQueryExecutionId(v string) *GetQueryResultsInp
 type GetQueryResultsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token to be used by the next request if this request is truncated.
 	NextToken *string `type:"string"`
 
@@ -1456,6 +1533,11 @@ func (s GetQueryResultsOutput) String() string {
 // GoString returns the string representation
 func (s GetQueryResultsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQueryResultsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1508,6 +1590,8 @@ func (s *ListNamedQueriesInput) SetNextToken(v string) *ListNamedQueriesInput {
 type ListNamedQueriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of unique query IDs.
 	NamedQueryIds []string `min:"1" type:"list"`
 
@@ -1523,6 +1607,11 @@ func (s ListNamedQueriesOutput) String() string {
 // GoString returns the string representation
 func (s ListNamedQueriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListNamedQueriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNamedQueryIds sets the NamedQueryIds field's value.
@@ -1575,6 +1664,8 @@ func (s *ListQueryExecutionsInput) SetNextToken(v string) *ListQueryExecutionsIn
 type ListQueryExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token to be used by the next request if this request is truncated.
 	NextToken *string `type:"string"`
 
@@ -1590,6 +1681,11 @@ func (s ListQueryExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s ListQueryExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListQueryExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2120,6 +2216,8 @@ func (s *StartQueryExecutionInput) SetResultConfiguration(v *ResultConfiguration
 type StartQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID of the query that ran as a result of this request.
 	QueryExecutionId *string `type:"string"`
 }
@@ -2132,6 +2230,11 @@ func (s StartQueryExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StartQueryExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartQueryExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueryExecutionId sets the QueryExecutionId field's value.
@@ -2183,6 +2286,8 @@ func (s *StopQueryExecutionInput) SetQueryExecutionId(v string) *StopQueryExecut
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecutionOutput
 type StopQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2193,6 +2298,11 @@ func (s StopQueryExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StopQueryExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopQueryExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about a named query ID that could not be processed.

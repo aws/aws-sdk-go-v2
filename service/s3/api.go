@@ -59,7 +59,10 @@ func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) Abort
 		input = &AbortMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortMultipartUploadOutput{})
+	output := &AbortMultipartUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AbortMultipartUploadRequest{Request: req, Input: input}
 }
 
@@ -105,7 +108,10 @@ func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput)
 		input = &CompleteMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteMultipartUploadOutput{})
+	output := &CompleteMultipartUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CompleteMultipartUploadRequest{Request: req, Input: input}
 }
 
@@ -151,7 +157,10 @@ func (c *S3) CopyObjectRequest(input *CopyObjectInput) CopyObjectRequest {
 		input = &CopyObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyObjectOutput{})
+	output := &CopyObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyObjectRequest{Request: req, Input: input}
 }
 
@@ -197,7 +206,10 @@ func (c *S3) CreateBucketRequest(input *CreateBucketInput) CreateBucketRequest {
 		input = &CreateBucketInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBucketOutput{})
+	output := &CreateBucketOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBucketRequest{Request: req, Input: input}
 }
 
@@ -249,7 +261,10 @@ func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) Cre
 		input = &CreateMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMultipartUploadOutput{})
+	output := &CreateMultipartUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMultipartUploadRequest{Request: req, Input: input}
 }
 
@@ -296,9 +311,12 @@ func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) DeleteBucketRequest {
 		input = &DeleteBucketInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketOutput{})
+	output := &DeleteBucketOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketRequest{Request: req, Input: input}
 }
 
@@ -345,9 +363,12 @@ func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyt
 		input = &DeleteBucketAnalyticsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketAnalyticsConfigurationOutput{})
+	output := &DeleteBucketAnalyticsConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketAnalyticsConfigurationRequest{Request: req, Input: input}
 }
 
@@ -393,9 +414,12 @@ func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) DeleteBucketC
 		input = &DeleteBucketCorsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketCorsOutput{})
+	output := &DeleteBucketCorsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketCorsRequest{Request: req, Input: input}
 }
 
@@ -442,9 +466,12 @@ func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInvent
 		input = &DeleteBucketInventoryConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketInventoryConfigurationOutput{})
+	output := &DeleteBucketInventoryConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketInventoryConfigurationRequest{Request: req, Input: input}
 }
 
@@ -490,9 +517,12 @@ func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) Del
 		input = &DeleteBucketLifecycleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketLifecycleOutput{})
+	output := &DeleteBucketLifecycleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketLifecycleRequest{Request: req, Input: input}
 }
 
@@ -539,9 +569,12 @@ func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsC
 		input = &DeleteBucketMetricsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketMetricsConfigurationOutput{})
+	output := &DeleteBucketMetricsConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketMetricsConfigurationRequest{Request: req, Input: input}
 }
 
@@ -587,9 +620,12 @@ func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) DeleteBuc
 		input = &DeleteBucketPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketPolicyOutput{})
+	output := &DeleteBucketPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketPolicyRequest{Request: req, Input: input}
 }
 
@@ -635,9 +671,12 @@ func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput)
 		input = &DeleteBucketReplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketReplicationOutput{})
+	output := &DeleteBucketReplicationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketReplicationRequest{Request: req, Input: input}
 }
 
@@ -683,9 +722,12 @@ func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) DeleteB
 		input = &DeleteBucketTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketTaggingOutput{})
+	output := &DeleteBucketTaggingOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketTaggingRequest{Request: req, Input: input}
 }
 
@@ -731,9 +773,12 @@ func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) DeleteB
 		input = &DeleteBucketWebsiteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketWebsiteOutput{})
+	output := &DeleteBucketWebsiteOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBucketWebsiteRequest{Request: req, Input: input}
 }
 
@@ -781,7 +826,10 @@ func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
 		input = &DeleteObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteObjectOutput{})
+	output := &DeleteObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteObjectRequest{Request: req, Input: input}
 }
 
@@ -827,7 +875,10 @@ func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) DeleteO
 		input = &DeleteObjectTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteObjectTaggingOutput{})
+	output := &DeleteObjectTaggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteObjectTaggingRequest{Request: req, Input: input}
 }
 
@@ -874,7 +925,10 @@ func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) DeleteObjectsReques
 		input = &DeleteObjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteObjectsOutput{})
+	output := &DeleteObjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteObjectsRequest{Request: req, Input: input}
 }
 
@@ -920,7 +974,10 @@ func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateC
 		input = &GetBucketAccelerateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketAccelerateConfigurationOutput{})
+	output := &GetBucketAccelerateConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketAccelerateConfigurationRequest{Request: req, Input: input}
 }
 
@@ -966,7 +1023,10 @@ func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclRequest {
 		input = &GetBucketAclInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketAclOutput{})
+	output := &GetBucketAclOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketAclRequest{Request: req, Input: input}
 }
 
@@ -1013,7 +1073,10 @@ func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsCon
 		input = &GetBucketAnalyticsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketAnalyticsConfigurationOutput{})
+	output := &GetBucketAnalyticsConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketAnalyticsConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1059,7 +1122,10 @@ func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsReques
 		input = &GetBucketCorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketCorsOutput{})
+	output := &GetBucketCorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketCorsRequest{Request: req, Input: input}
 }
 
@@ -1106,7 +1172,10 @@ func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryCon
 		input = &GetBucketInventoryConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketInventoryConfigurationOutput{})
+	output := &GetBucketInventoryConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketInventoryConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1155,7 +1224,10 @@ func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBucket
 		input = &GetBucketLifecycleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketLifecycleOutput{})
+	output := &GetBucketLifecycleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketLifecycleRequest{Request: req, Input: input}
 }
 
@@ -1201,7 +1273,10 @@ func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleCon
 		input = &GetBucketLifecycleConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketLifecycleConfigurationOutput{})
+	output := &GetBucketLifecycleConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketLifecycleConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1247,7 +1322,10 @@ func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) GetBucketLo
 		input = &GetBucketLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketLocationOutput{})
+	output := &GetBucketLocationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketLocationRequest{Request: req, Input: input}
 }
 
@@ -1294,7 +1372,10 @@ func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) GetBucketLogg
 		input = &GetBucketLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketLoggingOutput{})
+	output := &GetBucketLoggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketLoggingRequest{Request: req, Input: input}
 }
 
@@ -1341,7 +1422,10 @@ func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigu
 		input = &GetBucketMetricsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketMetricsConfigurationOutput{})
+	output := &GetBucketMetricsConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketMetricsConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1390,7 +1474,10 @@ func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurat
 		input = &GetBucketNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketNotificationOutput{})
+	output := &GetBucketNotificationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketNotificationRequest{Request: req, Input: input}
 }
 
@@ -1436,7 +1523,10 @@ func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificat
 		input = &GetBucketNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketNotificationConfigurationOutput{})
+	output := &GetBucketNotificationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketNotificationConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1482,7 +1572,10 @@ func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) GetBucketPolicy
 		input = &GetBucketPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketPolicyOutput{})
+	output := &GetBucketPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketPolicyRequest{Request: req, Input: input}
 }
 
@@ -1528,7 +1621,10 @@ func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) GetBu
 		input = &GetBucketReplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketReplicationOutput{})
+	output := &GetBucketReplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketReplicationRequest{Request: req, Input: input}
 }
 
@@ -1574,7 +1670,10 @@ func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput)
 		input = &GetBucketRequestPaymentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketRequestPaymentOutput{})
+	output := &GetBucketRequestPaymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketRequestPaymentRequest{Request: req, Input: input}
 }
 
@@ -1620,7 +1719,10 @@ func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) GetBucketTagg
 		input = &GetBucketTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketTaggingOutput{})
+	output := &GetBucketTaggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketTaggingRequest{Request: req, Input: input}
 }
 
@@ -1666,7 +1768,10 @@ func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) GetBuck
 		input = &GetBucketVersioningInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketVersioningOutput{})
+	output := &GetBucketVersioningOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketVersioningRequest{Request: req, Input: input}
 }
 
@@ -1712,7 +1817,10 @@ func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucketWebs
 		input = &GetBucketWebsiteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketWebsiteOutput{})
+	output := &GetBucketWebsiteOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBucketWebsiteRequest{Request: req, Input: input}
 }
 
@@ -1758,7 +1866,10 @@ func (c *S3) GetObjectRequest(input *GetObjectInput) GetObjectRequest {
 		input = &GetObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectOutput{})
+	output := &GetObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetObjectRequest{Request: req, Input: input}
 }
 
@@ -1804,7 +1915,10 @@ func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) GetObjectAclRequest {
 		input = &GetObjectAclInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectAclOutput{})
+	output := &GetObjectAclOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetObjectAclRequest{Request: req, Input: input}
 }
 
@@ -1850,7 +1964,10 @@ func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObjectTagg
 		input = &GetObjectTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectTaggingOutput{})
+	output := &GetObjectTaggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetObjectTaggingRequest{Request: req, Input: input}
 }
 
@@ -1896,7 +2013,10 @@ func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObjectTorr
 		input = &GetObjectTorrentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectTorrentOutput{})
+	output := &GetObjectTorrentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetObjectTorrentRequest{Request: req, Input: input}
 }
 
@@ -1943,9 +2063,12 @@ func (c *S3) HeadBucketRequest(input *HeadBucketInput) HeadBucketRequest {
 		input = &HeadBucketInput{}
 	}
 
-	req := c.newRequest(op, input, &HeadBucketOutput{})
+	output := &HeadBucketOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return HeadBucketRequest{Request: req, Input: input}
 }
 
@@ -1996,7 +2119,10 @@ func (c *S3) HeadObjectRequest(input *HeadObjectInput) HeadObjectRequest {
 		input = &HeadObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &HeadObjectOutput{})
+	output := &HeadObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return HeadObjectRequest{Request: req, Input: input}
 }
 
@@ -2042,7 +2168,10 @@ func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalytics
 		input = &ListBucketAnalyticsConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBucketAnalyticsConfigurationsOutput{})
+	output := &ListBucketAnalyticsConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBucketAnalyticsConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -2088,7 +2217,10 @@ func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventory
 		input = &ListBucketInventoryConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBucketInventoryConfigurationsOutput{})
+	output := &ListBucketInventoryConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBucketInventoryConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -2134,7 +2266,10 @@ func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConf
 		input = &ListBucketMetricsConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBucketMetricsConfigurationsOutput{})
+	output := &ListBucketMetricsConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBucketMetricsConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -2180,7 +2315,10 @@ func (c *S3) ListBucketsRequest(input *ListBucketsInput) ListBucketsRequest {
 		input = &ListBucketsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBucketsOutput{})
+	output := &ListBucketsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBucketsRequest{Request: req, Input: input}
 }
 
@@ -2232,7 +2370,10 @@ func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListM
 		input = &ListMultipartUploadsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMultipartUploadsOutput{})
+	output := &ListMultipartUploadsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListMultipartUploadsRequest{Request: req, Input: input}
 }
 
@@ -2334,7 +2475,10 @@ func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListObjec
 		input = &ListObjectVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectVersionsOutput{})
+	output := &ListObjectVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectVersionsRequest{Request: req, Input: input}
 }
 
@@ -2438,7 +2582,10 @@ func (c *S3) ListObjectsRequest(input *ListObjectsInput) ListObjectsRequest {
 		input = &ListObjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectsOutput{})
+	output := &ListObjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectsRequest{Request: req, Input: input}
 }
 
@@ -2543,7 +2690,10 @@ func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Reques
 		input = &ListObjectsV2Input{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectsV2Output{})
+	output := &ListObjectsV2Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectsV2Request{Request: req, Input: input}
 }
 
@@ -2645,7 +2795,10 @@ func (c *S3) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 		input = &ListPartsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPartsOutput{})
+	output := &ListPartsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPartsRequest{Request: req, Input: input}
 }
 
@@ -2741,9 +2894,12 @@ func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateC
 		input = &PutBucketAccelerateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketAccelerateConfigurationOutput{})
+	output := &PutBucketAccelerateConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketAccelerateConfigurationRequest{Request: req, Input: input}
 }
 
@@ -2789,9 +2945,12 @@ func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) PutBucketAclRequest {
 		input = &PutBucketAclInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketAclOutput{})
+	output := &PutBucketAclOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketAclRequest{Request: req, Input: input}
 }
 
@@ -2838,9 +2997,12 @@ func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsCon
 		input = &PutBucketAnalyticsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketAnalyticsConfigurationOutput{})
+	output := &PutBucketAnalyticsConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketAnalyticsConfigurationRequest{Request: req, Input: input}
 }
 
@@ -2886,9 +3048,12 @@ func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) PutBucketCorsReques
 		input = &PutBucketCorsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketCorsOutput{})
+	output := &PutBucketCorsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketCorsRequest{Request: req, Input: input}
 }
 
@@ -2935,9 +3100,12 @@ func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryCon
 		input = &PutBucketInventoryConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketInventoryConfigurationOutput{})
+	output := &PutBucketInventoryConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketInventoryConfigurationRequest{Request: req, Input: input}
 }
 
@@ -2986,9 +3154,12 @@ func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) PutBucket
 		input = &PutBucketLifecycleInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketLifecycleOutput{})
+	output := &PutBucketLifecycleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketLifecycleRequest{Request: req, Input: input}
 }
 
@@ -3035,9 +3206,12 @@ func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleCon
 		input = &PutBucketLifecycleConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketLifecycleConfigurationOutput{})
+	output := &PutBucketLifecycleConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketLifecycleConfigurationRequest{Request: req, Input: input}
 }
 
@@ -3085,9 +3259,12 @@ func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) PutBucketLogg
 		input = &PutBucketLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketLoggingOutput{})
+	output := &PutBucketLoggingOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketLoggingRequest{Request: req, Input: input}
 }
 
@@ -3134,9 +3311,12 @@ func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigu
 		input = &PutBucketMetricsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketMetricsConfigurationOutput{})
+	output := &PutBucketMetricsConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketMetricsConfigurationRequest{Request: req, Input: input}
 }
 
@@ -3185,9 +3365,12 @@ func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) Put
 		input = &PutBucketNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketNotificationOutput{})
+	output := &PutBucketNotificationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketNotificationRequest{Request: req, Input: input}
 }
 
@@ -3233,9 +3416,12 @@ func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificat
 		input = &PutBucketNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketNotificationConfigurationOutput{})
+	output := &PutBucketNotificationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketNotificationConfigurationRequest{Request: req, Input: input}
 }
 
@@ -3282,9 +3468,12 @@ func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) PutBucketPolicy
 		input = &PutBucketPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketPolicyOutput{})
+	output := &PutBucketPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketPolicyRequest{Request: req, Input: input}
 }
 
@@ -3331,9 +3520,12 @@ func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) PutBu
 		input = &PutBucketReplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketReplicationOutput{})
+	output := &PutBucketReplicationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketReplicationRequest{Request: req, Input: input}
 }
 
@@ -3383,9 +3575,12 @@ func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput)
 		input = &PutBucketRequestPaymentInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketRequestPaymentOutput{})
+	output := &PutBucketRequestPaymentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketRequestPaymentRequest{Request: req, Input: input}
 }
 
@@ -3431,9 +3626,12 @@ func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) PutBucketTagg
 		input = &PutBucketTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketTaggingOutput{})
+	output := &PutBucketTaggingOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketTaggingRequest{Request: req, Input: input}
 }
 
@@ -3480,9 +3678,12 @@ func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) PutBuck
 		input = &PutBucketVersioningInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketVersioningOutput{})
+	output := &PutBucketVersioningOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketVersioningRequest{Request: req, Input: input}
 }
 
@@ -3528,9 +3729,12 @@ func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucketWebs
 		input = &PutBucketWebsiteInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketWebsiteOutput{})
+	output := &PutBucketWebsiteOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBucketWebsiteRequest{Request: req, Input: input}
 }
 
@@ -3576,7 +3780,10 @@ func (c *S3) PutObjectRequest(input *PutObjectInput) PutObjectRequest {
 		input = &PutObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &PutObjectOutput{})
+	output := &PutObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutObjectRequest{Request: req, Input: input}
 }
 
@@ -3623,7 +3830,10 @@ func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) PutObjectAclRequest {
 		input = &PutObjectAclInput{}
 	}
 
-	req := c.newRequest(op, input, &PutObjectAclOutput{})
+	output := &PutObjectAclOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutObjectAclRequest{Request: req, Input: input}
 }
 
@@ -3669,7 +3879,10 @@ func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObjectTagg
 		input = &PutObjectTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &PutObjectTaggingOutput{})
+	output := &PutObjectTaggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutObjectTaggingRequest{Request: req, Input: input}
 }
 
@@ -3715,7 +3928,10 @@ func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) RestoreObjectReques
 		input = &RestoreObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreObjectOutput{})
+	output := &RestoreObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreObjectRequest{Request: req, Input: input}
 }
 
@@ -3767,7 +3983,10 @@ func (c *S3) UploadPartRequest(input *UploadPartInput) UploadPartRequest {
 		input = &UploadPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadPartOutput{})
+	output := &UploadPartOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadPartRequest{Request: req, Input: input}
 }
 
@@ -3813,7 +4032,10 @@ func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) UploadPartCopyReq
 		input = &UploadPartCopyInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadPartCopyOutput{})
+	output := &UploadPartCopyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadPartCopyRequest{Request: req, Input: input}
 }
 
@@ -3934,6 +4156,8 @@ func (s *AbortMultipartUploadInput) SetUploadId(v string) *AbortMultipartUploadI
 type AbortMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
@@ -3947,6 +4171,11 @@ func (s AbortMultipartUploadOutput) String() string {
 // GoString returns the string representation
 func (s AbortMultipartUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AbortMultipartUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
@@ -4770,6 +4999,8 @@ func (s *CompleteMultipartUploadInput) SetUploadId(v string) *CompleteMultipartU
 type CompleteMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Bucket *string `type:"string"`
 
 	// Entity tag of the object.
@@ -4807,6 +5038,11 @@ func (s CompleteMultipartUploadOutput) String() string {
 // GoString returns the string representation
 func (s CompleteMultipartUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CompleteMultipartUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBucket sets the Bucket field's value.
@@ -5361,6 +5597,8 @@ func (s *CopyObjectInput) SetWebsiteRedirectLocation(v string) *CopyObjectInput 
 type CopyObjectOutput struct {
 	_ struct{} `type:"structure" payload:"CopyObjectResult"`
 
+	responseMetadata aws.Response
+
 	CopyObjectResult *CopyObjectResult `type:"structure"`
 
 	CopySourceVersionId *string `location:"header" locationName:"x-amz-copy-source-version-id" type:"string"`
@@ -5402,6 +5640,11 @@ func (s CopyObjectOutput) String() string {
 // GoString returns the string representation
 func (s CopyObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCopyObjectResult sets the CopyObjectResult field's value.
@@ -5659,6 +5902,8 @@ func (s *CreateBucketInput) SetGrantWriteACP(v string) *CreateBucketInput {
 type CreateBucketOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -5670,6 +5915,11 @@ func (s CreateBucketOutput) String() string {
 // GoString returns the string representation
 func (s CreateBucketOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBucketOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocation sets the Location field's value.
@@ -5956,6 +6206,8 @@ func (s *CreateMultipartUploadInput) SetWebsiteRedirectLocation(v string) *Creat
 type CreateMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Date when multipart upload will become eligible for abort operation by lifecycle.
 	AbortDate *time.Time `location:"header" locationName:"x-amz-abort-date" type:"timestamp" timestampFormat:"rfc822"`
 
@@ -6003,6 +6255,11 @@ func (s CreateMultipartUploadOutput) String() string {
 // GoString returns the string representation
 func (s CreateMultipartUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMultipartUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbortDate sets the AbortDate field's value.
@@ -6192,6 +6449,8 @@ func (s *DeleteBucketAnalyticsConfigurationInput) SetId(v string) *DeleteBucketA
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfigurationOutput
 type DeleteBucketAnalyticsConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6202,6 +6461,11 @@ func (s DeleteBucketAnalyticsConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketAnalyticsConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketAnalyticsConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCorsRequest
@@ -6252,6 +6516,8 @@ func (s *DeleteBucketCorsInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCorsOutput
 type DeleteBucketCorsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6262,6 +6528,11 @@ func (s DeleteBucketCorsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketCorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketCorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketRequest
@@ -6374,6 +6645,8 @@ func (s *DeleteBucketInventoryConfigurationInput) SetId(v string) *DeleteBucketI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfigurationOutput
 type DeleteBucketInventoryConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6384,6 +6657,11 @@ func (s DeleteBucketInventoryConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketInventoryConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketInventoryConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycleRequest
@@ -6434,6 +6712,8 @@ func (s *DeleteBucketLifecycleInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycleOutput
 type DeleteBucketLifecycleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6444,6 +6724,11 @@ func (s DeleteBucketLifecycleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketLifecycleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketLifecycleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfigurationRequest
@@ -6511,6 +6796,8 @@ func (s *DeleteBucketMetricsConfigurationInput) SetId(v string) *DeleteBucketMet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfigurationOutput
 type DeleteBucketMetricsConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6523,9 +6810,16 @@ func (s DeleteBucketMetricsConfigurationOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketMetricsConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketOutput
 type DeleteBucketOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6536,6 +6830,11 @@ func (s DeleteBucketOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicyRequest
@@ -6586,6 +6885,8 @@ func (s *DeleteBucketPolicyInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicyOutput
 type DeleteBucketPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6596,6 +6897,11 @@ func (s DeleteBucketPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest
@@ -6646,6 +6952,8 @@ func (s *DeleteBucketReplicationInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationOutput
 type DeleteBucketReplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6656,6 +6964,11 @@ func (s DeleteBucketReplicationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketReplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketReplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTaggingRequest
@@ -6706,6 +7019,8 @@ func (s *DeleteBucketTaggingInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTaggingOutput
 type DeleteBucketTaggingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6716,6 +7031,11 @@ func (s DeleteBucketTaggingOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketTaggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketTaggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsiteRequest
@@ -6766,6 +7086,8 @@ func (s *DeleteBucketWebsiteInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsiteOutput
 type DeleteBucketWebsiteOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6776,6 +7098,11 @@ func (s DeleteBucketWebsiteOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBucketWebsiteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketWebsiteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerEntry
@@ -6934,6 +7261,8 @@ func (s *DeleteObjectInput) SetVersionId(v string) *DeleteObjectInput {
 type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies whether the versioned object that was permanently deleted was (true)
 	// or was not (false) a delete marker.
 	DeleteMarker *bool `location:"header" locationName:"x-amz-delete-marker" type:"boolean"`
@@ -6955,6 +7284,11 @@ func (s DeleteObjectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeleteMarker sets the DeleteMarker field's value.
@@ -7049,6 +7383,8 @@ func (s *DeleteObjectTaggingInput) SetVersionId(v string) *DeleteObjectTaggingIn
 type DeleteObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The versionId of the object the tag-set was removed from.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
 }
@@ -7061,6 +7397,11 @@ func (s DeleteObjectTaggingOutput) String() string {
 // GoString returns the string representation
 func (s DeleteObjectTaggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteObjectTaggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVersionId sets the VersionId field's value.
@@ -7158,6 +7499,8 @@ func (s *DeleteObjectsInput) SetRequestPayer(v RequestPayer) *DeleteObjectsInput
 type DeleteObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Deleted []DeletedObject `type:"list" flattened:"true"`
 
 	Errors []Error `locationName:"Error" type:"list" flattened:"true"`
@@ -7175,6 +7518,11 @@ func (s DeleteObjectsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteObjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteObjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeleted sets the Deleted field's value.
@@ -7476,6 +7824,8 @@ func (s *GetBucketAccelerateConfigurationInput) getBucket() (v string) {
 type GetBucketAccelerateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The accelerate configuration of the bucket.
 	Status BucketAccelerateStatus `type:"string" enum:"true"`
 }
@@ -7488,6 +7838,11 @@ func (s GetBucketAccelerateConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketAccelerateConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketAccelerateConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -7545,6 +7900,8 @@ func (s *GetBucketAclInput) getBucket() (v string) {
 type GetBucketAclOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of grants.
 	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
@@ -7559,6 +7916,11 @@ func (s GetBucketAclOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketAclOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketAclOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGrants sets the Grants field's value.
@@ -7639,6 +8001,8 @@ func (s *GetBucketAnalyticsConfigurationInput) SetId(v string) *GetBucketAnalyti
 type GetBucketAnalyticsConfigurationOutput struct {
 	_ struct{} `type:"structure" payload:"AnalyticsConfiguration"`
 
+	responseMetadata aws.Response
+
 	// The configuration and any analyses for the analytics filter.
 	AnalyticsConfiguration *AnalyticsConfiguration `type:"structure"`
 }
@@ -7651,6 +8015,11 @@ func (s GetBucketAnalyticsConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketAnalyticsConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketAnalyticsConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
@@ -7708,6 +8077,8 @@ func (s *GetBucketCorsInput) getBucket() (v string) {
 type GetBucketCorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true"`
 }
 
@@ -7719,6 +8090,11 @@ func (s GetBucketCorsOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketCorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketCorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCORSRules sets the CORSRules field's value.
@@ -7793,6 +8169,8 @@ func (s *GetBucketInventoryConfigurationInput) SetId(v string) *GetBucketInvento
 type GetBucketInventoryConfigurationOutput struct {
 	_ struct{} `type:"structure" payload:"InventoryConfiguration"`
 
+	responseMetadata aws.Response
+
 	// Specifies the inventory configuration.
 	InventoryConfiguration *InventoryConfiguration `type:"structure"`
 }
@@ -7805,6 +8183,11 @@ func (s GetBucketInventoryConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketInventoryConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketInventoryConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInventoryConfiguration sets the InventoryConfiguration field's value.
@@ -7862,6 +8245,8 @@ func (s *GetBucketLifecycleConfigurationInput) getBucket() (v string) {
 type GetBucketLifecycleConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Rules []LifecycleRule `locationName:"Rule" type:"list" flattened:"true"`
 }
 
@@ -7873,6 +8258,11 @@ func (s GetBucketLifecycleConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketLifecycleConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketLifecycleConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRules sets the Rules field's value.
@@ -7930,6 +8320,8 @@ func (s *GetBucketLifecycleInput) getBucket() (v string) {
 type GetBucketLifecycleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Rules []Rule `locationName:"Rule" type:"list" flattened:"true"`
 }
 
@@ -7941,6 +8333,11 @@ func (s GetBucketLifecycleOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketLifecycleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketLifecycleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRules sets the Rules field's value.
@@ -7998,6 +8395,8 @@ func (s *GetBucketLocationInput) getBucket() (v string) {
 type GetBucketLocationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	LocationConstraint BucketLocationConstraint `type:"string" enum:"true"`
 }
 
@@ -8009,6 +8408,11 @@ func (s GetBucketLocationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketLocationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketLocationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocationConstraint sets the LocationConstraint field's value.
@@ -8066,6 +8470,8 @@ func (s *GetBucketLoggingInput) getBucket() (v string) {
 type GetBucketLoggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	LoggingEnabled *LoggingEnabled `type:"structure"`
 }
 
@@ -8077,6 +8483,11 @@ func (s GetBucketLoggingOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketLoggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketLoggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoggingEnabled sets the LoggingEnabled field's value.
@@ -8151,6 +8562,8 @@ func (s *GetBucketMetricsConfigurationInput) SetId(v string) *GetBucketMetricsCo
 type GetBucketMetricsConfigurationOutput struct {
 	_ struct{} `type:"structure" payload:"MetricsConfiguration"`
 
+	responseMetadata aws.Response
+
 	// Specifies the metrics configuration.
 	MetricsConfiguration *MetricsConfiguration `type:"structure"`
 }
@@ -8163,6 +8576,11 @@ func (s GetBucketMetricsConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketMetricsConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketMetricsConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetricsConfiguration sets the MetricsConfiguration field's value.
@@ -8224,6 +8642,8 @@ func (s *GetBucketNotificationConfigurationInput) getBucket() (v string) {
 type GetBucketNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	LambdaFunctionConfigurations []LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
 
 	QueueConfigurations []QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
@@ -8272,6 +8692,11 @@ func (s *GetBucketNotificationConfigurationOutput) Validate() error {
 	return nil
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketNotificationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetLambdaFunctionConfigurations sets the LambdaFunctionConfigurations field's value.
 func (s *GetBucketNotificationConfigurationOutput) SetLambdaFunctionConfigurations(v []LambdaFunctionConfiguration) *GetBucketNotificationConfigurationOutput {
 	s.LambdaFunctionConfigurations = v
@@ -8294,6 +8719,8 @@ func (s *GetBucketNotificationConfigurationOutput) SetTopicConfigurations(v []To
 type GetBucketNotificationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CloudFunctionConfiguration *CloudFunctionConfiguration `type:"structure"`
 
 	QueueConfiguration *QueueConfigurationDeprecated `type:"structure"`
@@ -8309,6 +8736,11 @@ func (s GetBucketNotificationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudFunctionConfiguration sets the CloudFunctionConfiguration field's value.
@@ -8378,6 +8810,8 @@ func (s *GetBucketPolicyInput) getBucket() (v string) {
 type GetBucketPolicyOutput struct {
 	_ struct{} `type:"structure" payload:"Policy"`
 
+	responseMetadata aws.Response
+
 	// The bucket policy as a JSON document.
 	Policy *string `type:"string"`
 }
@@ -8390,6 +8824,11 @@ func (s GetBucketPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -8447,6 +8886,8 @@ func (s *GetBucketReplicationInput) getBucket() (v string) {
 type GetBucketReplicationOutput struct {
 	_ struct{} `type:"structure" payload:"ReplicationConfiguration"`
 
+	responseMetadata aws.Response
+
 	// Container for replication rules. You can add as many as 1,000 rules. Total
 	// replication configuration size can be up to 2 MB.
 	ReplicationConfiguration *ReplicationConfiguration `type:"structure"`
@@ -8460,6 +8901,11 @@ func (s GetBucketReplicationOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketReplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketReplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationConfiguration sets the ReplicationConfiguration field's value.
@@ -8517,6 +8963,8 @@ func (s *GetBucketRequestPaymentInput) getBucket() (v string) {
 type GetBucketRequestPaymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies who pays for the download and request fees.
 	Payer Payer `type:"string" enum:"true"`
 }
@@ -8529,6 +8977,11 @@ func (s GetBucketRequestPaymentOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketRequestPaymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketRequestPaymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPayer sets the Payer field's value.
@@ -8586,6 +9039,8 @@ func (s *GetBucketTaggingInput) getBucket() (v string) {
 type GetBucketTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// TagSet is a required field
 	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
@@ -8598,6 +9053,11 @@ func (s GetBucketTaggingOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketTaggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketTaggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagSet sets the TagSet field's value.
@@ -8655,6 +9115,8 @@ func (s *GetBucketVersioningInput) getBucket() (v string) {
 type GetBucketVersioningOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
 	// This element is only returned if the bucket has been configured with MFA
 	// delete. If the bucket has never been so configured, this element is not returned.
@@ -8672,6 +9134,11 @@ func (s GetBucketVersioningOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketVersioningOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketVersioningOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMFADelete sets the MFADelete field's value.
@@ -8735,6 +9202,8 @@ func (s *GetBucketWebsiteInput) getBucket() (v string) {
 type GetBucketWebsiteOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ErrorDocument *ErrorDocument `type:"structure"`
 
 	IndexDocument *IndexDocument `type:"structure"`
@@ -8752,6 +9221,11 @@ func (s GetBucketWebsiteOutput) String() string {
 // GoString returns the string representation
 func (s GetBucketWebsiteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketWebsiteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrorDocument sets the ErrorDocument field's value.
@@ -8864,6 +9338,8 @@ func (s *GetObjectAclInput) SetVersionId(v string) *GetObjectAclInput {
 type GetObjectAclOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of grants.
 	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
@@ -8882,6 +9358,11 @@ func (s GetObjectAclOutput) String() string {
 // GoString returns the string representation
 func (s GetObjectAclOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetObjectAclOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGrants sets the Grants field's value.
@@ -9143,6 +9624,8 @@ func (s *GetObjectInput) SetVersionId(v string) *GetObjectInput {
 type GetObjectOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
+	responseMetadata aws.Response
+
 	AcceptRanges *string `location:"header" locationName:"accept-ranges" type:"string"`
 
 	// Object data.
@@ -9253,6 +9736,11 @@ func (s GetObjectOutput) String() string {
 // GoString returns the string representation
 func (s GetObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAcceptRanges sets the AcceptRanges field's value.
@@ -9496,6 +9984,8 @@ func (s *GetObjectTaggingInput) SetVersionId(v string) *GetObjectTaggingInput {
 type GetObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// TagSet is a required field
 	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 
@@ -9510,6 +10000,11 @@ func (s GetObjectTaggingOutput) String() string {
 // GoString returns the string representation
 func (s GetObjectTaggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetObjectTaggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagSet sets the TagSet field's value.
@@ -9601,6 +10096,8 @@ func (s *GetObjectTorrentInput) SetRequestPayer(v RequestPayer) *GetObjectTorren
 type GetObjectTorrentOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
+	responseMetadata aws.Response
+
 	Body io.ReadCloser `type:"blob"`
 
 	// If present, indicates that the requester was successfully charged for the
@@ -9616,6 +10113,11 @@ func (s GetObjectTorrentOutput) String() string {
 // GoString returns the string representation
 func (s GetObjectTorrentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetObjectTorrentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBody sets the Body field's value.
@@ -9839,6 +10341,8 @@ func (s *HeadBucketInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucketOutput
 type HeadBucketOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9849,6 +10353,11 @@ func (s HeadBucketOutput) String() string {
 // GoString returns the string representation
 func (s HeadBucketOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s HeadBucketOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectRequest
@@ -10039,6 +10548,8 @@ func (s *HeadObjectInput) SetVersionId(v string) *HeadObjectInput {
 type HeadObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	AcceptRanges *string `location:"header" locationName:"accept-ranges" type:"string"`
 
 	// Specifies caching behavior along the request/reply chain.
@@ -10140,6 +10651,11 @@ func (s HeadObjectOutput) String() string {
 // GoString returns the string representation
 func (s HeadObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s HeadObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAcceptRanges sets the AcceptRanges field's value.
@@ -11201,6 +11717,8 @@ func (s *ListBucketAnalyticsConfigurationsInput) SetContinuationToken(v string) 
 type ListBucketAnalyticsConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of analytics configurations for a bucket.
 	AnalyticsConfigurationList []AnalyticsConfiguration `locationName:"AnalyticsConfiguration" type:"list" flattened:"true"`
 
@@ -11226,6 +11744,11 @@ func (s ListBucketAnalyticsConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s ListBucketAnalyticsConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBucketAnalyticsConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAnalyticsConfigurationList sets the AnalyticsConfigurationList field's value.
@@ -11315,6 +11838,8 @@ func (s *ListBucketInventoryConfigurationsInput) SetContinuationToken(v string) 
 type ListBucketInventoryConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If sent in the request, the marker that is used as a starting point for this
 	// inventory configuration list response.
 	ContinuationToken *string `type:"string"`
@@ -11340,6 +11865,11 @@ func (s ListBucketInventoryConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s ListBucketInventoryConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBucketInventoryConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContinuationToken sets the ContinuationToken field's value.
@@ -11429,6 +11959,8 @@ func (s *ListBucketMetricsConfigurationsInput) SetContinuationToken(v string) *L
 type ListBucketMetricsConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker that is used as a starting point for this metrics configuration
 	// list response. This value is present if it was sent in the request.
 	ContinuationToken *string `type:"string"`
@@ -11456,6 +11988,11 @@ func (s ListBucketMetricsConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s ListBucketMetricsConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBucketMetricsConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContinuationToken sets the ContinuationToken field's value.
@@ -11501,6 +12038,8 @@ func (s ListBucketsInput) GoString() string {
 type ListBucketsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Buckets []Bucket `locationNameList:"Bucket" type:"list"`
 
 	Owner *Owner `type:"structure"`
@@ -11514,6 +12053,11 @@ func (s ListBucketsOutput) String() string {
 // GoString returns the string representation
 func (s ListBucketsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBucketsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuckets sets the Buckets field's value.
@@ -11642,6 +12186,8 @@ func (s *ListMultipartUploadsInput) SetUploadIdMarker(v string) *ListMultipartUp
 type ListMultipartUploadsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Name of the bucket to which the multipart upload was initiated.
 	Bucket *string `type:"string"`
 
@@ -11691,6 +12237,11 @@ func (s ListMultipartUploadsOutput) String() string {
 // GoString returns the string representation
 func (s ListMultipartUploadsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMultipartUploadsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBucket sets the Bucket field's value.
@@ -11881,6 +12432,8 @@ func (s *ListObjectVersionsInput) SetVersionIdMarker(v string) *ListObjectVersio
 type ListObjectVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
 	DeleteMarkers []DeleteMarkerEntry `locationName:"DeleteMarker" type:"list" flattened:"true"`
@@ -11925,6 +12478,11 @@ func (s ListObjectVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
@@ -12116,6 +12674,8 @@ func (s *ListObjectsInput) SetRequestPayer(v RequestPayer) *ListObjectsInput {
 type ListObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
 	Contents []Object `type:"list" flattened:"true"`
@@ -12155,6 +12715,11 @@ func (s ListObjectsOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
@@ -12348,6 +12913,8 @@ func (s *ListObjectsV2Input) SetStartAfter(v string) *ListObjectsV2Input {
 type ListObjectsV2Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// CommonPrefixes contains all (if there are any) keys between Prefix and the
 	// next occurrence of the string specified by delimiter
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
@@ -12404,6 +12971,11 @@ func (s ListObjectsV2Output) String() string {
 // GoString returns the string representation
 func (s ListObjectsV2Output) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectsV2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommonPrefixes sets the CommonPrefixes field's value.
@@ -12589,6 +13161,8 @@ func (s *ListPartsInput) SetUploadId(v string) *ListPartsInput {
 type ListPartsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Date when multipart upload will become eligible for abort operation by lifecycle.
 	AbortDate *time.Time `location:"header" locationName:"x-amz-abort-date" type:"timestamp" timestampFormat:"rfc822"`
 
@@ -12642,6 +13216,11 @@ func (s ListPartsOutput) String() string {
 // GoString returns the string representation
 func (s ListPartsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPartsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbortDate sets the AbortDate field's value.
@@ -13486,6 +14065,8 @@ func (s *PutBucketAccelerateConfigurationInput) getBucket() (v string) {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfigurationOutput
 type PutBucketAccelerateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13496,6 +14077,11 @@ func (s PutBucketAccelerateConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketAccelerateConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketAccelerateConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAclRequest
@@ -13614,6 +14200,8 @@ func (s *PutBucketAclInput) SetGrantWriteACP(v string) *PutBucketAclInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAclOutput
 type PutBucketAclOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13624,6 +14212,11 @@ func (s PutBucketAclOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketAclOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketAclOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfigurationRequest
@@ -13711,6 +14304,8 @@ func (s *PutBucketAnalyticsConfigurationInput) SetId(v string) *PutBucketAnalyti
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfigurationOutput
 type PutBucketAnalyticsConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13721,6 +14316,11 @@ func (s PutBucketAnalyticsConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketAnalyticsConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketAnalyticsConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCorsRequest
@@ -13789,6 +14389,8 @@ func (s *PutBucketCorsInput) SetCORSConfiguration(v *CORSConfiguration) *PutBuck
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCorsOutput
 type PutBucketCorsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13799,6 +14401,11 @@ func (s PutBucketCorsOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketCorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketCorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfigurationRequest
@@ -13886,6 +14493,8 @@ func (s *PutBucketInventoryConfigurationInput) SetInventoryConfiguration(v *Inve
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfigurationOutput
 type PutBucketInventoryConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13896,6 +14505,11 @@ func (s PutBucketInventoryConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketInventoryConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketInventoryConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationRequest
@@ -13959,6 +14573,8 @@ func (s *PutBucketLifecycleConfigurationInput) SetLifecycleConfiguration(v *Buck
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationOutput
 type PutBucketLifecycleConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13969,6 +14585,11 @@ func (s PutBucketLifecycleConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketLifecycleConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketLifecycleConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleRequest
@@ -14032,6 +14653,8 @@ func (s *PutBucketLifecycleInput) SetLifecycleConfiguration(v *LifecycleConfigur
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleOutput
 type PutBucketLifecycleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14042,6 +14665,11 @@ func (s PutBucketLifecycleOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketLifecycleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketLifecycleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLoggingRequest
@@ -14110,6 +14738,8 @@ func (s *PutBucketLoggingInput) SetBucketLoggingStatus(v *BucketLoggingStatus) *
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLoggingOutput
 type PutBucketLoggingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14120,6 +14750,11 @@ func (s PutBucketLoggingOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketLoggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketLoggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationRequest
@@ -14207,6 +14842,8 @@ func (s *PutBucketMetricsConfigurationInput) SetMetricsConfiguration(v *MetricsC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationOutput
 type PutBucketMetricsConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14217,6 +14854,11 @@ func (s PutBucketMetricsConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketMetricsConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketMetricsConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationRequest
@@ -14288,6 +14930,8 @@ func (s *PutBucketNotificationConfigurationInput) SetNotificationConfiguration(v
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationOutput
 type PutBucketNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14298,6 +14942,11 @@ func (s PutBucketNotificationConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketNotificationConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketNotificationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationRequest
@@ -14361,6 +15010,8 @@ func (s *PutBucketNotificationInput) SetNotificationConfiguration(v *GetBucketNo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationOutput
 type PutBucketNotificationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14371,6 +15022,11 @@ func (s PutBucketNotificationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicyRequest
@@ -14436,6 +15092,8 @@ func (s *PutBucketPolicyInput) SetPolicy(v string) *PutBucketPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicyOutput
 type PutBucketPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14446,6 +15104,11 @@ func (s PutBucketPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationRequest
@@ -14517,6 +15180,8 @@ func (s *PutBucketReplicationInput) SetReplicationConfiguration(v *ReplicationCo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationOutput
 type PutBucketReplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14527,6 +15192,11 @@ func (s PutBucketReplicationOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketReplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketReplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPaymentRequest
@@ -14595,6 +15265,8 @@ func (s *PutBucketRequestPaymentInput) SetRequestPaymentConfiguration(v *Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPaymentOutput
 type PutBucketRequestPaymentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14605,6 +15277,11 @@ func (s PutBucketRequestPaymentOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketRequestPaymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketRequestPaymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTaggingRequest
@@ -14673,6 +15350,8 @@ func (s *PutBucketTaggingInput) SetTagging(v *Tagging) *PutBucketTaggingInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTaggingOutput
 type PutBucketTaggingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14683,6 +15362,11 @@ func (s PutBucketTaggingOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketTaggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketTaggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioningRequest
@@ -14756,6 +15440,8 @@ func (s *PutBucketVersioningInput) SetVersioningConfiguration(v *VersioningConfi
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioningOutput
 type PutBucketVersioningOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14766,6 +15452,11 @@ func (s PutBucketVersioningOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketVersioningOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketVersioningOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteRequest
@@ -14834,6 +15525,8 @@ func (s *PutBucketWebsiteInput) SetWebsiteConfiguration(v *WebsiteConfiguration)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteOutput
 type PutBucketWebsiteOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14844,6 +15537,11 @@ func (s PutBucketWebsiteOutput) String() string {
 // GoString returns the string representation
 func (s PutBucketWebsiteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketWebsiteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclRequest
@@ -15000,6 +15698,8 @@ func (s *PutObjectAclInput) SetVersionId(v string) *PutObjectAclInput {
 type PutObjectAclOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
@@ -15013,6 +15713,11 @@ func (s PutObjectAclOutput) String() string {
 // GoString returns the string representation
 func (s PutObjectAclOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutObjectAclOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
@@ -15331,6 +16036,8 @@ func (s *PutObjectInput) SetWebsiteRedirectLocation(v string) *PutObjectInput {
 type PutObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Entity tag for the uploaded object.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
@@ -15372,6 +16079,11 @@ func (s PutObjectOutput) String() string {
 // GoString returns the string representation
 func (s PutObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.
@@ -15513,6 +16225,8 @@ func (s *PutObjectTaggingInput) SetVersionId(v string) *PutObjectTaggingInput {
 type PutObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
 }
 
@@ -15524,6 +16238,11 @@ func (s PutObjectTaggingOutput) String() string {
 // GoString returns the string representation
 func (s PutObjectTaggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutObjectTaggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVersionId sets the VersionId field's value.
@@ -16063,6 +16782,8 @@ func (s *RestoreObjectInput) SetVersionId(v string) *RestoreObjectInput {
 type RestoreObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
@@ -16076,6 +16797,11 @@ func (s RestoreObjectOutput) String() string {
 // GoString returns the string representation
 func (s RestoreObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
@@ -16982,6 +17708,8 @@ func (s *UploadPartCopyInput) SetUploadId(v string) *UploadPartCopyInput {
 type UploadPartCopyOutput struct {
 	_ struct{} `type:"structure" payload:"CopyPartResult"`
 
+	responseMetadata aws.Response
+
 	CopyPartResult *CopyPartResult `type:"structure"`
 
 	// The version of the source object that was copied, if you have enabled versioning
@@ -17019,6 +17747,11 @@ func (s UploadPartCopyOutput) String() string {
 // GoString returns the string representation
 func (s UploadPartCopyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadPartCopyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCopyPartResult sets the CopyPartResult field's value.
@@ -17244,6 +17977,8 @@ func (s *UploadPartInput) SetUploadId(v string) *UploadPartInput {
 type UploadPartOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Entity tag for the uploaded object.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
@@ -17278,6 +18013,11 @@ func (s UploadPartOutput) String() string {
 // GoString returns the string representation
 func (s UploadPartOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadPartOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.

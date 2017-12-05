@@ -82,7 +82,10 @@ func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExe
 		input = &CountClosedWorkflowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CountOpenWorkflowExecutionsOutput{})
+	output := &CountOpenWorkflowExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CountClosedWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
@@ -156,7 +159,10 @@ func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecuti
 		input = &CountOpenWorkflowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CountOpenWorkflowExecutionsOutput{})
+	output := &CountOpenWorkflowExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CountOpenWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
@@ -224,7 +230,10 @@ func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksI
 		input = &CountPendingActivityTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &CountPendingDecisionTasksOutput{})
+	output := &CountPendingDecisionTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CountPendingActivityTasksRequest{Request: req, Input: input}
 }
 
@@ -292,7 +301,10 @@ func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksI
 		input = &CountPendingDecisionTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &CountPendingDecisionTasksOutput{})
+	output := &CountPendingDecisionTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CountPendingDecisionTasksRequest{Request: req, Input: input}
 }
 
@@ -365,9 +377,12 @@ func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) De
 		input = &DeprecateActivityTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateActivityTypeOutput{})
+	output := &DeprecateActivityTypeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeprecateActivityTypeRequest{Request: req, Input: input}
 }
 
@@ -438,9 +453,12 @@ func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) DeprecateDomai
 		input = &DeprecateDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateDomainOutput{})
+	output := &DeprecateDomainOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeprecateDomainRequest{Request: req, Input: input}
 }
 
@@ -514,9 +532,12 @@ func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) De
 		input = &DeprecateWorkflowTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateWorkflowTypeOutput{})
+	output := &DeprecateWorkflowTypeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeprecateWorkflowTypeRequest{Request: req, Input: input}
 }
 
@@ -586,7 +607,10 @@ func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) Desc
 		input = &DescribeActivityTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivityTypeOutput{})
+	output := &DescribeActivityTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeActivityTypeRequest{Request: req, Input: input}
 }
 
@@ -650,7 +674,10 @@ func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomainRe
 		input = &DescribeDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDomainOutput{})
+	output := &DescribeDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDomainRequest{Request: req, Input: input}
 }
 
@@ -717,7 +744,10 @@ func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionI
 		input = &DescribeWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkflowExecutionOutput{})
+	output := &DescribeWorkflowExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkflowExecutionRequest{Request: req, Input: input}
 }
 
@@ -787,7 +817,10 @@ func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) Desc
 		input = &DescribeWorkflowTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkflowTypeOutput{})
+	output := &DescribeWorkflowTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkflowTypeRequest{Request: req, Input: input}
 }
 
@@ -861,7 +894,10 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 		input = &GetWorkflowExecutionHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWorkflowExecutionHistoryOutput{})
+	output := &GetWorkflowExecutionHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetWorkflowExecutionHistoryRequest{Request: req, Input: input}
 }
 
@@ -984,7 +1020,10 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivi
 		input = &ListActivityTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActivityTypesOutput{})
+	output := &ListActivityTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListActivityTypesRequest{Request: req, Input: input}
 }
 
@@ -1116,7 +1155,10 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 		input = &ListClosedWorkflowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOpenWorkflowExecutionsOutput{})
+	output := &ListOpenWorkflowExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListClosedWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
@@ -1241,7 +1283,10 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
 		input = &ListDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainsOutput{})
+	output := &ListDomainsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDomainsRequest{Request: req, Input: input}
 }
 
@@ -1373,7 +1418,10 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 		input = &ListOpenWorkflowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOpenWorkflowExecutionsOutput{})
+	output := &ListOpenWorkflowExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOpenWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
@@ -1494,7 +1542,10 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkfl
 		input = &ListWorkflowTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkflowTypesOutput{})
+	output := &ListWorkflowTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListWorkflowTypesRequest{Request: req, Input: input}
 }
 
@@ -1619,7 +1670,10 @@ func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) PollFo
 		input = &PollForActivityTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForActivityTaskOutput{})
+	output := &PollForActivityTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PollForActivityTaskRequest{Request: req, Input: input}
 }
 
@@ -1710,7 +1764,10 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollFo
 		input = &PollForDecisionTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForDecisionTaskOutput{})
+	output := &PollForDecisionTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PollForDecisionTaskRequest{Request: req, Input: input}
 }
 
@@ -1848,7 +1905,10 @@ func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartb
 		input = &RecordActivityTaskHeartbeatInput{}
 	}
 
-	req := c.newRequest(op, input, &RecordActivityTaskHeartbeatOutput{})
+	output := &RecordActivityTaskHeartbeatOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RecordActivityTaskHeartbeatRequest{Request: req, Input: input}
 }
 
@@ -1923,9 +1983,12 @@ func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) Regi
 		input = &RegisterActivityTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterActivityTypeOutput{})
+	output := &RegisterActivityTypeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterActivityTypeRequest{Request: req, Input: input}
 }
 
@@ -1989,9 +2052,12 @@ func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) RegisterDomainRe
 		input = &RegisterDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterDomainOutput{})
+	output := &RegisterDomainOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterDomainRequest{Request: req, Input: input}
 }
 
@@ -2069,9 +2135,12 @@ func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) Regi
 		input = &RegisterWorkflowTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterWorkflowTypeOutput{})
+	output := &RegisterWorkflowTypeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterWorkflowTypeRequest{Request: req, Input: input}
 }
 
@@ -2145,9 +2214,12 @@ func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflow
 		input = &RequestCancelWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestCancelWorkflowExecutionOutput{})
+	output := &RequestCancelWorkflowExecutionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RequestCancelWorkflowExecutionRequest{Request: req, Input: input}
 }
 
@@ -2224,9 +2296,12 @@ func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCance
 		input = &RespondActivityTaskCanceledInput{}
 	}
 
-	req := c.newRequest(op, input, &RespondActivityTaskCanceledOutput{})
+	output := &RespondActivityTaskCanceledOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RespondActivityTaskCanceledRequest{Request: req, Input: input}
 }
 
@@ -2302,9 +2377,12 @@ func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskComp
 		input = &RespondActivityTaskCompletedInput{}
 	}
 
-	req := c.newRequest(op, input, &RespondActivityTaskCompletedOutput{})
+	output := &RespondActivityTaskCompletedOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RespondActivityTaskCompletedRequest{Request: req, Input: input}
 }
 
@@ -2375,9 +2453,12 @@ func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedI
 		input = &RespondActivityTaskFailedInput{}
 	}
 
-	req := c.newRequest(op, input, &RespondActivityTaskFailedOutput{})
+	output := &RespondActivityTaskFailedOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RespondActivityTaskFailedRequest{Request: req, Input: input}
 }
 
@@ -2437,9 +2518,12 @@ func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskComp
 		input = &RespondDecisionTaskCompletedInput{}
 	}
 
-	req := c.newRequest(op, input, &RespondDecisionTaskCompletedOutput{})
+	output := &RespondDecisionTaskCompletedOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RespondDecisionTaskCompletedRequest{Request: req, Input: input}
 }
 
@@ -2511,9 +2595,12 @@ func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput
 		input = &SignalWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &SignalWorkflowExecutionOutput{})
+	output := &SignalWorkflowExecutionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SignalWorkflowExecutionRequest{Request: req, Input: input}
 }
 
@@ -2596,7 +2683,10 @@ func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) 
 		input = &StartWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartWorkflowExecutionOutput{})
+	output := &StartWorkflowExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartWorkflowExecutionRequest{Request: req, Input: input}
 }
 
@@ -2673,9 +2763,12 @@ func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutio
 		input = &TerminateWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateWorkflowExecutionOutput{})
+	output := &TerminateWorkflowExecutionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateWorkflowExecutionRequest{Request: req, Input: input}
 }
 
@@ -4634,6 +4727,8 @@ func (s *CountOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) 
 type CountOpenWorkflowExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of workflow executions.
 	//
 	// Count is a required field
@@ -4652,6 +4747,11 @@ func (s CountOpenWorkflowExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s CountOpenWorkflowExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CountOpenWorkflowExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCount sets the Count field's value.
@@ -4794,6 +4894,8 @@ func (s *CountPendingDecisionTasksInput) SetTaskList(v *TaskList) *CountPendingD
 type CountPendingDecisionTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of tasks in the task list.
 	//
 	// Count is a required field
@@ -4812,6 +4914,11 @@ func (s CountPendingDecisionTasksOutput) String() string {
 // GoString returns the string representation
 func (s CountPendingDecisionTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CountPendingDecisionTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCount sets the Count field's value.
@@ -5469,6 +5576,8 @@ func (s *DeprecateActivityTypeInput) SetDomain(v string) *DeprecateActivityTypeI
 
 type DeprecateActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5479,6 +5588,11 @@ func (s DeprecateActivityTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeprecateActivityTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeprecateActivityTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type DeprecateDomainInput struct {
@@ -5525,6 +5639,8 @@ func (s *DeprecateDomainInput) SetName(v string) *DeprecateDomainInput {
 
 type DeprecateDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5535,6 +5651,11 @@ func (s DeprecateDomainOutput) String() string {
 // GoString returns the string representation
 func (s DeprecateDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeprecateDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type DeprecateWorkflowTypeInput struct {
@@ -5601,6 +5722,8 @@ func (s *DeprecateWorkflowTypeInput) SetWorkflowType(v *WorkflowType) *Deprecate
 
 type DeprecateWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5611,6 +5734,11 @@ func (s DeprecateWorkflowTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeprecateWorkflowTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeprecateWorkflowTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type DescribeActivityTypeInput struct {
@@ -5680,6 +5808,8 @@ func (s *DescribeActivityTypeInput) SetDomain(v string) *DescribeActivityTypeInp
 type DescribeActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The configuration settings registered with the activity type.
 	//
 	// Configuration is a required field
@@ -5709,6 +5839,11 @@ func (s DescribeActivityTypeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeActivityTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeActivityTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfiguration sets the Configuration field's value.
@@ -5769,6 +5904,8 @@ func (s *DescribeDomainInput) SetName(v string) *DescribeDomainInput {
 type DescribeDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The domain configuration. Currently, this includes only the domain's retention
 	// period.
 	//
@@ -5789,6 +5926,11 @@ func (s DescribeDomainOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfiguration sets the Configuration field's value.
@@ -5869,6 +6011,8 @@ func (s *DescribeWorkflowExecutionInput) SetExecution(v *WorkflowExecution) *Des
 type DescribeWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The configuration settings for this workflow execution including timeout
 	// values, tasklist etc.
 	//
@@ -5905,6 +6049,11 @@ func (s DescribeWorkflowExecutionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkflowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExecutionConfiguration sets the ExecutionConfiguration field's value.
@@ -6003,6 +6152,8 @@ func (s *DescribeWorkflowTypeInput) SetWorkflowType(v *WorkflowType) *DescribeWo
 type DescribeWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Configuration settings of the workflow type registered through RegisterWorkflowType
 	//
 	// Configuration is a required field
@@ -6032,6 +6183,11 @@ func (s DescribeWorkflowTypeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkflowTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkflowTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfiguration sets the Configuration field's value.
@@ -6463,6 +6619,8 @@ func (s *GetWorkflowExecutionHistoryInput) SetReverseOrder(v bool) *GetWorkflowE
 type GetWorkflowExecutionHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of history events.
 	//
 	// Events is a required field
@@ -6485,6 +6643,11 @@ func (s GetWorkflowExecutionHistoryOutput) String() string {
 // GoString returns the string representation
 func (s GetWorkflowExecutionHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetWorkflowExecutionHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -7644,6 +7807,8 @@ func (s *ListActivityTypesInput) SetReverseOrder(v bool) *ListActivityTypesInput
 type ListActivityTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using
 	// the returned token in nextPageToken. Keep all other arguments unchanged.
@@ -7666,6 +7831,11 @@ func (s ListActivityTypesOutput) String() string {
 // GoString returns the string representation
 func (s ListActivityTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListActivityTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -7953,6 +8123,8 @@ func (s *ListDomainsInput) SetReverseOrder(v bool) *ListDomainsInput {
 type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DomainInfo structures.
 	//
 	// DomainInfos is a required field
@@ -7975,6 +8147,11 @@ func (s ListDomainsOutput) String() string {
 // GoString returns the string representation
 func (s ListDomainsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDomainsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainInfos sets the DomainInfos field's value.
@@ -8147,6 +8324,8 @@ func (s *ListOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *
 type ListOpenWorkflowExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of workflow information structures.
 	//
 	// ExecutionInfos is a required field
@@ -8169,6 +8348,11 @@ func (s ListOpenWorkflowExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s ListOpenWorkflowExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOpenWorkflowExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExecutionInfos sets the ExecutionInfos field's value.
@@ -8295,6 +8479,8 @@ func (s *ListWorkflowTypesInput) SetReverseOrder(v bool) *ListWorkflowTypesInput
 type ListWorkflowTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using
 	// the returned token in nextPageToken. Keep all other arguments unchanged.
@@ -8317,6 +8503,11 @@ func (s ListWorkflowTypesOutput) String() string {
 // GoString returns the string representation
 func (s ListWorkflowTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWorkflowTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -8461,6 +8652,8 @@ func (s *PollForActivityTaskInput) SetTaskList(v *TaskList) *PollForActivityTask
 type PollForActivityTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID of the task.
 	//
 	// ActivityId is a required field
@@ -8501,6 +8694,11 @@ func (s PollForActivityTaskOutput) String() string {
 // GoString returns the string representation
 func (s PollForActivityTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PollForActivityTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivityId sets the ActivityId field's value.
@@ -8665,6 +8863,8 @@ func (s *PollForDecisionTaskInput) SetTaskList(v *TaskList) *PollForDecisionTask
 type PollForDecisionTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A paginated list of history events of the workflow execution. The decider
 	// uses this during the processing of the decision task.
 	//
@@ -8716,6 +8916,11 @@ func (s PollForDecisionTaskOutput) String() string {
 // GoString returns the string representation
 func (s PollForDecisionTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PollForDecisionTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -8819,6 +9024,8 @@ func (s *RecordActivityTaskHeartbeatInput) SetTaskToken(v string) *RecordActivit
 type RecordActivityTaskHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Set to true if cancellation of the task is requested.
 	//
 	// CancelRequested is a required field
@@ -8833,6 +9040,11 @@ func (s RecordActivityTaskHeartbeatOutput) String() string {
 // GoString returns the string representation
 func (s RecordActivityTaskHeartbeatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RecordActivityTaskHeartbeatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCancelRequested sets the CancelRequested field's value.
@@ -9162,6 +9374,8 @@ func (s *RegisterActivityTypeInput) SetVersion(v string) *RegisterActivityTypeIn
 
 type RegisterActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9172,6 +9386,11 @@ func (s RegisterActivityTypeOutput) String() string {
 // GoString returns the string representation
 func (s RegisterActivityTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterActivityTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type RegisterDomainInput struct {
@@ -9260,6 +9479,8 @@ func (s *RegisterDomainInput) SetWorkflowExecutionRetentionPeriodInDays(v string
 
 type RegisterDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9270,6 +9491,11 @@ func (s RegisterDomainOutput) String() string {
 // GoString returns the string representation
 func (s RegisterDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type RegisterWorkflowTypeInput struct {
@@ -9479,6 +9705,8 @@ func (s *RegisterWorkflowTypeInput) SetVersion(v string) *RegisterWorkflowTypeIn
 
 type RegisterWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9489,6 +9717,11 @@ func (s RegisterWorkflowTypeOutput) String() string {
 // GoString returns the string representation
 func (s RegisterWorkflowTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterWorkflowTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides the details of the RequestCancelActivityTask decision.
@@ -9914,6 +10147,8 @@ func (s *RequestCancelWorkflowExecutionInput) SetWorkflowId(v string) *RequestCa
 
 type RequestCancelWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9924,6 +10159,11 @@ func (s RequestCancelWorkflowExecutionOutput) String() string {
 // GoString returns the string representation
 func (s RequestCancelWorkflowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RequestCancelWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type RespondActivityTaskCanceledInput struct {
@@ -9983,6 +10223,8 @@ func (s *RespondActivityTaskCanceledInput) SetTaskToken(v string) *RespondActivi
 
 type RespondActivityTaskCanceledOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9993,6 +10235,11 @@ func (s RespondActivityTaskCanceledOutput) String() string {
 // GoString returns the string representation
 func (s RespondActivityTaskCanceledOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RespondActivityTaskCanceledOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type RespondActivityTaskCompletedInput struct {
@@ -10053,6 +10300,8 @@ func (s *RespondActivityTaskCompletedInput) SetTaskToken(v string) *RespondActiv
 
 type RespondActivityTaskCompletedOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10063,6 +10312,11 @@ func (s RespondActivityTaskCompletedOutput) String() string {
 // GoString returns the string representation
 func (s RespondActivityTaskCompletedOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RespondActivityTaskCompletedOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type RespondActivityTaskFailedInput struct {
@@ -10131,6 +10385,8 @@ func (s *RespondActivityTaskFailedInput) SetTaskToken(v string) *RespondActivity
 
 type RespondActivityTaskFailedOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10141,6 +10397,11 @@ func (s RespondActivityTaskFailedOutput) String() string {
 // GoString returns the string representation
 func (s RespondActivityTaskFailedOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RespondActivityTaskFailedOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input data for a TaskCompleted response to a decision task.
@@ -10218,6 +10479,8 @@ func (s *RespondDecisionTaskCompletedInput) SetTaskToken(v string) *RespondDecis
 
 type RespondDecisionTaskCompletedOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10228,6 +10491,11 @@ func (s RespondDecisionTaskCompletedOutput) String() string {
 // GoString returns the string representation
 func (s RespondDecisionTaskCompletedOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RespondDecisionTaskCompletedOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides the details of the ScheduleActivityTask decision.
@@ -11064,6 +11332,8 @@ func (s *SignalWorkflowExecutionInput) SetWorkflowId(v string) *SignalWorkflowEx
 
 type SignalWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11074,6 +11344,11 @@ func (s SignalWorkflowExecutionOutput) String() string {
 // GoString returns the string representation
 func (s SignalWorkflowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SignalWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides the details of the StartChildWorkflowExecution decision.
@@ -12030,6 +12305,8 @@ func (s *StartWorkflowExecutionInput) SetWorkflowType(v *WorkflowType) *StartWor
 type StartWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The runId of a workflow execution. This ID is generated by the service and
 	// can be used to uniquely identify the workflow execution within a domain.
 	RunId *string `locationName:"runId" min:"1" type:"string"`
@@ -12043,6 +12320,11 @@ func (s StartWorkflowExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StartWorkflowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRunId sets the RunId field's value.
@@ -12252,6 +12534,8 @@ func (s *TerminateWorkflowExecutionInput) SetWorkflowId(v string) *TerminateWork
 
 type TerminateWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12262,6 +12546,11 @@ func (s TerminateWorkflowExecutionOutput) String() string {
 // GoString returns the string representation
 func (s TerminateWorkflowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides the details of the TimerCanceled event.

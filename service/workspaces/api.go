@@ -52,7 +52,10 @@ func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest
 		input = &CreateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagsOutput{})
+	output := &CreateTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTagsRequest{Request: req, Input: input}
 }
 
@@ -100,7 +103,10 @@ func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) Creat
 		input = &CreateWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWorkspacesOutput{})
+	output := &CreateWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -146,7 +152,10 @@ func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest
 		input = &DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsRequest{Request: req, Input: input}
 }
 
@@ -192,7 +201,10 @@ func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsR
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -253,7 +265,10 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBun
 		input = &DescribeWorkspaceBundlesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspaceBundlesOutput{})
+	output := &DescribeWorkspaceBundlesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkspaceBundlesRequest{Request: req, Input: input}
 }
 
@@ -362,7 +377,10 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspac
 		input = &DescribeWorkspaceDirectoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspaceDirectoriesOutput{})
+	output := &DescribeWorkspaceDirectoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkspaceDirectoriesRequest{Request: req, Input: input}
 }
 
@@ -472,7 +490,10 @@ func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) D
 		input = &DescribeWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspacesOutput{})
+	output := &DescribeWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -568,7 +589,10 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWo
 		input = &DescribeWorkspacesConnectionStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspacesConnectionStatusOutput{})
+	output := &DescribeWorkspacesConnectionStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input}
 }
 
@@ -615,7 +639,10 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProp
 		input = &ModifyWorkspacePropertiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyWorkspacePropertiesOutput{})
+	output := &ModifyWorkspacePropertiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyWorkspacePropertiesRequest{Request: req, Input: input}
 }
 
@@ -666,7 +693,10 @@ func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) Reboo
 		input = &RebootWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootWorkspacesOutput{})
+	output := &RebootWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -730,7 +760,10 @@ func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) Reb
 		input = &RebuildWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &RebuildWorkspacesOutput{})
+	output := &RebuildWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebuildWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -777,7 +810,10 @@ func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) StartWo
 		input = &StartWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &StartWorkspacesOutput{})
+	output := &StartWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -824,7 +860,10 @@ func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorks
 		input = &StopWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &StopWorkspacesOutput{})
+	output := &StopWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -879,7 +918,10 @@ func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput)
 		input = &TerminateWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateWorkspacesOutput{})
+	output := &TerminateWorkspacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateWorkspacesRequest{Request: req, Input: input}
 }
 
@@ -978,6 +1020,8 @@ func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsResult
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -988,6 +1032,11 @@ func (s CreateTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the inputs for the CreateWorkspaces operation.
@@ -1046,6 +1095,8 @@ func (s *CreateWorkspacesInput) SetWorkspaces(v []WorkspaceRequest) *CreateWorks
 type CreateWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of structures that represent the WorkSpaces that could not be created.
 	FailedRequests []FailedCreateWorkspaceRequest `type:"list"`
 
@@ -1065,6 +1116,11 @@ func (s CreateWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s CreateWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
@@ -1206,6 +1262,8 @@ func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTagsResult
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1216,6 +1274,11 @@ func (s DeleteTagsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request of the DescribeTags operation.
@@ -1267,6 +1330,8 @@ func (s *DescribeTagsInput) SetResourceId(v string) *DescribeTagsInput {
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of tags.
 	TagList []Tag `type:"list"`
 }
@@ -1279,6 +1344,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -1360,6 +1430,8 @@ func (s *DescribeWorkspaceBundlesInput) SetOwner(v string) *DescribeWorkspaceBun
 type DescribeWorkspaceBundlesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of structures that contain information about the bundles.
 	Bundles []WorkspaceBundle `type:"list"`
 
@@ -1378,6 +1450,11 @@ func (s DescribeWorkspaceBundlesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkspaceBundlesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkspaceBundlesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBundles sets the Bundles field's value.
@@ -1449,6 +1526,8 @@ func (s *DescribeWorkspaceDirectoriesInput) SetNextToken(v string) *DescribeWork
 type DescribeWorkspaceDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of structures that contain information about the directories.
 	Directories []WorkspaceDirectory `type:"list"`
 
@@ -1467,6 +1546,11 @@ func (s DescribeWorkspaceDirectoriesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkspaceDirectoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkspaceDirectoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectories sets the Directories field's value.
@@ -1534,6 +1618,8 @@ func (s *DescribeWorkspacesConnectionStatusInput) SetWorkspaceIds(v []string) *D
 type DescribeWorkspacesConnectionStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The next token of the result.
 	NextToken *string `min:"1" type:"string"`
 
@@ -1549,6 +1635,11 @@ func (s DescribeWorkspacesConnectionStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkspacesConnectionStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkspacesConnectionStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1672,6 +1763,8 @@ func (s *DescribeWorkspacesInput) SetWorkspaceIds(v []string) *DescribeWorkspace
 type DescribeWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to this operation to retrieve the next set
 	// of items. This token is valid for one day and must be used within that time
@@ -1693,6 +1786,11 @@ func (s DescribeWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1854,6 +1952,8 @@ func (s *ModifyWorkspacePropertiesInput) SetWorkspaceProperties(v *WorkspaceProp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesResult
 type ModifyWorkspacePropertiesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1864,6 +1964,11 @@ func (s ModifyWorkspacePropertiesOutput) String() string {
 // GoString returns the string representation
 func (s ModifyWorkspacePropertiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyWorkspacePropertiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information used with the RebootWorkspaces operation to reboot a
@@ -1964,6 +2069,8 @@ func (s *RebootWorkspacesInput) SetRebootWorkspaceRequests(v []RebootRequest) *R
 type RebootWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of structures representing any WorkSpaces that could not be rebooted.
 	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
@@ -1976,6 +2083,11 @@ func (s RebootWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s RebootWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
@@ -2082,6 +2194,8 @@ func (s *RebuildWorkspacesInput) SetRebuildWorkspaceRequests(v []RebuildRequest)
 type RebuildWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of structures representing any WorkSpaces that could not be rebuilt.
 	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
@@ -2094,6 +2208,11 @@ func (s RebuildWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s RebuildWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebuildWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
@@ -2174,6 +2293,8 @@ func (s *StartWorkspacesInput) SetStartWorkspaceRequests(v []StartRequest) *Star
 type StartWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The failed requests.
 	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
@@ -2186,6 +2307,11 @@ func (s StartWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s StartWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
@@ -2266,6 +2392,8 @@ func (s *StopWorkspacesInput) SetStopWorkspaceRequests(v []StopRequest) *StopWor
 type StopWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The failed requests.
 	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
@@ -2278,6 +2406,11 @@ func (s StopWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s StopWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedRequests sets the FailedRequests field's value.
@@ -2437,6 +2570,8 @@ func (s *TerminateWorkspacesInput) SetTerminateWorkspaceRequests(v []TerminateRe
 type TerminateWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of structures representing any WorkSpaces that could not be terminated.
 	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
@@ -2449,6 +2584,11 @@ func (s TerminateWorkspacesOutput) String() string {
 // GoString returns the string representation
 func (s TerminateWorkspacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedRequests sets the FailedRequests field's value.

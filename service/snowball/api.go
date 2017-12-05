@@ -54,7 +54,10 @@ func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) CancelCluster
 		input = &CancelClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelClusterOutput{})
+	output := &CancelClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelClusterRequest{Request: req, Input: input}
 }
 
@@ -103,7 +106,10 @@ func (c *Snowball) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 		input = &CancelJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobOutput{})
+	output := &CancelJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelJobRequest{Request: req, Input: input}
 }
 
@@ -152,7 +158,10 @@ func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) CreateAddress
 		input = &CreateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAddressOutput{})
+	output := &CreateAddressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAddressRequest{Request: req, Input: input}
 }
 
@@ -200,7 +209,10 @@ func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) CreateCluster
 		input = &CreateClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterOutput{})
+	output := &CreateClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateClusterRequest{Request: req, Input: input}
 }
 
@@ -250,7 +262,10 @@ func (c *Snowball) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 		input = &CreateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobOutput{})
+	output := &CreateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateJobRequest{Request: req, Input: input}
 }
 
@@ -297,7 +312,10 @@ func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) DescribeA
 		input = &DescribeAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAddressOutput{})
+	output := &DescribeAddressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAddressRequest{Request: req, Input: input}
 }
 
@@ -351,7 +369,10 @@ func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) Descr
 		input = &DescribeAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAddressesOutput{})
+	output := &DescribeAddressesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAddressesRequest{Request: req, Input: input}
 }
 
@@ -448,7 +469,10 @@ func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) DescribeC
 		input = &DescribeClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterOutput{})
+	output := &DescribeClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeClusterRequest{Request: req, Input: input}
 }
 
@@ -495,7 +519,10 @@ func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) DescribeJobReques
 		input = &DescribeJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobOutput{})
+	output := &DescribeJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeJobRequest{Request: req, Input: input}
 }
 
@@ -558,7 +585,10 @@ func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) GetJobManif
 		input = &GetJobManifestInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobManifestOutput{})
+	output := &GetJobManifestOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobManifestRequest{Request: req, Input: input}
 }
 
@@ -616,7 +646,10 @@ func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobU
 		input = &GetJobUnlockCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobUnlockCodeOutput{})
+	output := &GetJobUnlockCodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobUnlockCodeRequest{Request: req, Input: input}
 }
 
@@ -666,7 +699,10 @@ func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnow
 		input = &GetSnowballUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSnowballUsageOutput{})
+	output := &GetSnowballUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSnowballUsageRequest{Request: req, Input: input}
 }
 
@@ -714,7 +750,10 @@ func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) ListClust
 		input = &ListClusterJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClusterJobsOutput{})
+	output := &ListClusterJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListClusterJobsRequest{Request: req, Input: input}
 }
 
@@ -762,7 +801,10 @@ func (c *Snowball) ListClustersRequest(input *ListClustersInput) ListClustersReq
 		input = &ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	output := &ListClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListClustersRequest{Request: req, Input: input}
 }
 
@@ -818,7 +860,10 @@ func (c *Snowball) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 		input = &ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	output := &ListJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListJobsRequest{Request: req, Input: input}
 }
 
@@ -917,7 +962,10 @@ func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) UpdateCluster
 		input = &UpdateClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClusterOutput{})
+	output := &UpdateClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateClusterRequest{Request: req, Input: input}
 }
 
@@ -965,7 +1013,10 @@ func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 		input = &UpdateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobOutput{})
+	output := &UpdateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateJobRequest{Request: req, Input: input}
 }
 
@@ -1213,6 +1264,8 @@ func (s *CancelClusterInput) SetClusterId(v string) *CancelClusterInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelClusterResult
 type CancelClusterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1223,6 +1276,11 @@ func (s CancelClusterOutput) String() string {
 // GoString returns the string representation
 func (s CancelClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobRequest
@@ -1272,6 +1330,8 @@ func (s *CancelJobInput) SetJobId(v string) *CancelJobInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobResult
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1282,6 +1342,11 @@ func (s CancelJobOutput) String() string {
 // GoString returns the string representation
 func (s CancelJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains a cluster's state, a cluster's ID, and other important information.
@@ -1544,6 +1609,8 @@ func (s *CreateAddressInput) SetAddress(v *Address) *CreateAddressInput {
 type CreateAddressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The automatically generated ID for a specific address. You'll use this ID
 	// when you create a job to specify which address you want the Snowball for
 	// that job shipped to.
@@ -1558,6 +1625,11 @@ func (s CreateAddressOutput) String() string {
 // GoString returns the string representation
 func (s CreateAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAddressId sets the AddressId field's value.
@@ -1752,6 +1824,8 @@ func (s *CreateClusterInput) SetSnowballType(v Type) *CreateClusterInput {
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The automatically generated ID for a cluster.
 	ClusterId *string `min:"39" type:"string"`
 }
@@ -1764,6 +1838,11 @@ func (s CreateClusterOutput) String() string {
 // GoString returns the string representation
 func (s CreateClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusterId sets the ClusterId field's value.
@@ -1961,6 +2040,8 @@ func (s *CreateJobInput) SetSnowballType(v Type) *CreateJobInput {
 type CreateJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The automatically generated ID for a job, for example JID123e4567-e89b-12d3-a456-426655440000.
 	JobId *string `min:"39" type:"string"`
 }
@@ -1973,6 +2054,11 @@ func (s CreateJobOutput) String() string {
 // GoString returns the string representation
 func (s CreateJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobId sets the JobId field's value.
@@ -2086,6 +2172,8 @@ func (s *DescribeAddressInput) SetAddressId(v string) *DescribeAddressInput {
 type DescribeAddressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The address that you want the Snowball or Snowballs associated with a specific
 	// job to be shipped to.
 	Address *Address `type:"structure"`
@@ -2099,6 +2187,11 @@ func (s DescribeAddressOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAddress sets the Address field's value.
@@ -2159,6 +2252,8 @@ func (s *DescribeAddressesInput) SetNextToken(v string) *DescribeAddressesInput 
 type DescribeAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Snowball shipping addresses that were created for this account.
 	Addresses []Address `type:"list"`
 
@@ -2176,6 +2271,11 @@ func (s DescribeAddressesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAddresses sets the Addresses field's value.
@@ -2237,6 +2337,8 @@ func (s *DescribeClusterInput) SetClusterId(v string) *DescribeClusterInput {
 type DescribeClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about a specific cluster, including shipping information, cluster
 	// status, and other important metadata.
 	ClusterMetadata *ClusterMetadata `type:"structure"`
@@ -2250,6 +2352,11 @@ func (s DescribeClusterOutput) String() string {
 // GoString returns the string representation
 func (s DescribeClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusterMetadata sets the ClusterMetadata field's value.
@@ -2305,6 +2412,8 @@ func (s *DescribeJobInput) SetJobId(v string) *DescribeJobInput {
 type DescribeJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about a specific job, including shipping information, job status,
 	// and other important metadata.
 	JobMetadata *JobMetadata `type:"structure"`
@@ -2322,6 +2431,11 @@ func (s DescribeJobOutput) String() string {
 // GoString returns the string representation
 func (s DescribeJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobMetadata sets the JobMetadata field's value.
@@ -2410,6 +2524,8 @@ func (s *GetJobManifestInput) SetJobId(v string) *GetJobManifestInput {
 type GetJobManifestOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon S3 presigned URL for the manifest file associated with the specified
 	// JobId value.
 	ManifestURI *string `min:"1" type:"string"`
@@ -2423,6 +2539,11 @@ func (s GetJobManifestOutput) String() string {
 // GoString returns the string representation
 func (s GetJobManifestOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobManifestOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetManifestURI sets the ManifestURI field's value.
@@ -2479,6 +2600,8 @@ func (s *GetJobUnlockCodeInput) SetJobId(v string) *GetJobUnlockCodeInput {
 type GetJobUnlockCodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The UnlockCode value for the specified job. The UnlockCode value can be accessed
 	// for up to 90 days after the job has been created.
 	UnlockCode *string `min:"1" type:"string"`
@@ -2492,6 +2615,11 @@ func (s GetJobUnlockCodeOutput) String() string {
 // GoString returns the string representation
 func (s GetJobUnlockCodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobUnlockCodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUnlockCode sets the UnlockCode field's value.
@@ -2519,6 +2647,8 @@ func (s GetSnowballUsageInput) GoString() string {
 type GetSnowballUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The service limit for number of Snowballs this account can have at once.
 	// The default service limit is 1 (one).
 	SnowballLimit *int64 `type:"integer"`
@@ -2535,6 +2665,11 @@ func (s GetSnowballUsageOutput) String() string {
 // GoString returns the string representation
 func (s GetSnowballUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSnowballUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnowballLimit sets the SnowballLimit field's value.
@@ -3099,6 +3234,8 @@ func (s *ListClusterJobsInput) SetNextToken(v string) *ListClusterJobsInput {
 type ListClusterJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Each JobListEntry object contains a job's state, a job's ID, and a value
 	// that indicates whether the job is a job part, in the case of export jobs.
 	JobListEntries []JobListEntry `type:"list"`
@@ -3117,6 +3254,11 @@ func (s ListClusterJobsOutput) String() string {
 // GoString returns the string representation
 func (s ListClusterJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListClusterJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobListEntries sets the JobListEntries field's value.
@@ -3183,6 +3325,8 @@ func (s *ListClustersInput) SetNextToken(v string) *ListClustersInput {
 type ListClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Each ClusterListEntry object contains a cluster's state, a cluster's ID,
 	// and other important status information.
 	ClusterListEntries []ClusterListEntry `type:"list"`
@@ -3201,6 +3345,11 @@ func (s ListClustersOutput) String() string {
 // GoString returns the string representation
 func (s ListClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusterListEntries sets the ClusterListEntries field's value.
@@ -3267,6 +3416,8 @@ func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Each JobListEntry object contains a job's state, a job's ID, and a value
 	// that indicates whether the job is a job part, in the case of export jobs.
 	JobListEntries []JobListEntry `type:"list"`
@@ -3285,6 +3436,11 @@ func (s ListJobsOutput) String() string {
 // GoString returns the string representation
 func (s ListJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobListEntries sets the JobListEntries field's value.
@@ -3639,6 +3795,8 @@ func (s *UpdateClusterInput) SetShippingOption(v ShippingOption) *UpdateClusterI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateClusterResult
 type UpdateClusterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3649,6 +3807,11 @@ func (s UpdateClusterOutput) String() string {
 // GoString returns the string representation
 func (s UpdateClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobRequest
@@ -3788,6 +3951,8 @@ func (s *UpdateJobInput) SetSnowballCapacityPreference(v Capacity) *UpdateJobInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobResult
 type UpdateJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3798,6 +3963,11 @@ func (s UpdateJobOutput) String() string {
 // GoString returns the string representation
 func (s UpdateJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type Capacity string

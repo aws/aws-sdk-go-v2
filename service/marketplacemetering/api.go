@@ -61,7 +61,10 @@ func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput
 		input = &BatchMeterUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchMeterUsageOutput{})
+	output := &BatchMeterUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchMeterUsageRequest{Request: req, Input: input}
 }
 
@@ -111,7 +114,10 @@ func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) MeterUsa
 		input = &MeterUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &MeterUsageOutput{})
+	output := &MeterUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return MeterUsageRequest{Request: req, Input: input}
 }
 
@@ -160,7 +166,10 @@ func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput
 		input = &ResolveCustomerInput{}
 	}
 
-	req := c.newRequest(op, input, &ResolveCustomerOutput{})
+	output := &ResolveCustomerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResolveCustomerRequest{Request: req, Input: input}
 }
 
@@ -240,6 +249,8 @@ func (s *BatchMeterUsageInput) SetUsageRecords(v []UsageRecord) *BatchMeterUsage
 type BatchMeterUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all UsageRecords processed by BatchMeterUsage. These records were
 	// either honored by AWS Marketplace Metering Service or were invalid.
 	Results []UsageRecordResult `type:"list"`
@@ -258,6 +269,11 @@ func (s BatchMeterUsageOutput) String() string {
 // GoString returns the string representation
 func (s BatchMeterUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchMeterUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResults sets the Results field's value.
@@ -388,6 +404,8 @@ func (s *MeterUsageInput) SetUsageQuantity(v int64) *MeterUsageInput {
 type MeterUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	MeteringRecordId *string `type:"string"`
 }
 
@@ -399,6 +417,11 @@ func (s MeterUsageOutput) String() string {
 // GoString returns the string representation
 func (s MeterUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s MeterUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMeteringRecordId sets the MeteringRecordId field's value.
@@ -456,6 +479,8 @@ func (s *ResolveCustomerInput) SetRegistrationToken(v string) *ResolveCustomerIn
 type ResolveCustomerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CustomerIdentifier is used to identify an individual customer in your
 	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
 	// UsageRecord.
@@ -475,6 +500,11 @@ func (s ResolveCustomerOutput) String() string {
 // GoString returns the string representation
 func (s ResolveCustomerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResolveCustomerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCustomerIdentifier sets the CustomerIdentifier field's value.

@@ -70,9 +70,12 @@ func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) 
 		input = &AbortMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortMultipartUploadOutput{})
+	output := &AbortMultipartUploadOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AbortMultipartUploadRequest{Request: req, Input: input}
 }
 
@@ -131,9 +134,12 @@ func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLo
 		input = &AbortVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortVaultLockOutput{})
+	output := &AbortVaultLockOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AbortVaultLockRequest{Request: req, Input: input}
 }
 
@@ -182,9 +188,12 @@ func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVau
 		input = &AddTagsToVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToVaultOutput{})
+	output := &AddTagsToVaultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToVaultRequest{Request: req, Input: input}
 }
 
@@ -271,7 +280,10 @@ func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadI
 		input = &CompleteMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadArchiveOutput{})
+	output := &UploadArchiveOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CompleteMultipartUploadRequest{Request: req, Input: input}
 }
 
@@ -329,9 +341,12 @@ func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) Comple
 		input = &CompleteVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteVaultLockOutput{})
+	output := &CompleteVaultLockOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CompleteVaultLockRequest{Request: req, Input: input}
 }
 
@@ -398,7 +413,10 @@ func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest
 		input = &CreateVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVaultOutput{})
+	output := &CreateVaultOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVaultRequest{Request: req, Input: input}
 }
 
@@ -466,9 +484,12 @@ func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) DeleteArchiveR
 		input = &DeleteArchiveInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteArchiveOutput{})
+	output := &DeleteArchiveOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteArchiveRequest{Request: req, Input: input}
 }
 
@@ -534,9 +555,12 @@ func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) DeleteVaultRequest
 		input = &DeleteVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVaultOutput{})
+	output := &DeleteVaultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVaultRequest{Request: req, Input: input}
 }
 
@@ -589,9 +613,12 @@ func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyI
 		input = &DeleteVaultAccessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVaultAccessPolicyOutput{})
+	output := &DeleteVaultAccessPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVaultAccessPolicyRequest{Request: req, Input: input}
 }
 
@@ -649,9 +676,12 @@ func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotification
 		input = &DeleteVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVaultNotificationsOutput{})
+	output := &DeleteVaultNotificationsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVaultNotificationsRequest{Request: req, Input: input}
 }
 
@@ -716,7 +746,10 @@ func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest
 		input = &DescribeJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobOutput{})
+	output := &DescribeJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeJobRequest{Request: req, Input: input}
 }
 
@@ -779,7 +812,10 @@ func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultR
 		input = &DescribeVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVaultOutput{})
+	output := &DescribeVaultOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVaultRequest{Request: req, Input: input}
 }
 
@@ -825,7 +861,10 @@ func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInp
 		input = &GetDataRetrievalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataRetrievalPolicyOutput{})
+	output := &GetDataRetrievalPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDataRetrievalPolicyRequest{Request: req, Input: input}
 }
 
@@ -912,7 +951,10 @@ func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) GetJobOutputRequ
 		input = &GetJobOutputInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobOutputOutput{})
+	output := &GetJobOutputOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobOutputRequest{Request: req, Input: input}
 }
 
@@ -961,7 +1003,10 @@ func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) 
 		input = &GetVaultAccessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVaultAccessPolicyOutput{})
+	output := &GetVaultAccessPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetVaultAccessPolicyRequest{Request: req, Input: input}
 }
 
@@ -1024,7 +1069,10 @@ func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockRequ
 		input = &GetVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVaultLockOutput{})
+	output := &GetVaultLockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetVaultLockRequest{Request: req, Input: input}
 }
 
@@ -1086,7 +1134,10 @@ func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput
 		input = &GetVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVaultNotificationsOutput{})
+	output := &GetVaultNotificationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetVaultNotificationsRequest{Request: req, Input: input}
 }
 
@@ -1265,7 +1316,10 @@ func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest
 		input = &InitiateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateJobOutput{})
+	output := &InitiateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitiateJobRequest{Request: req, Input: input}
 }
 
@@ -1343,7 +1397,10 @@ func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadI
 		input = &InitiateMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateMultipartUploadOutput{})
+	output := &InitiateMultipartUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitiateMultipartUploadRequest{Request: req, Input: input}
 }
 
@@ -1415,7 +1472,10 @@ func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) Initia
 		input = &InitiateVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateVaultLockOutput{})
+	output := &InitiateVaultLockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitiateVaultLockRequest{Request: req, Input: input}
 }
 
@@ -1504,7 +1564,10 @@ func (c *Glacier) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 		input = &ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	output := &ListJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListJobsRequest{Request: req, Input: input}
 }
 
@@ -1633,7 +1696,10 @@ func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) 
 		input = &ListMultipartUploadsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMultipartUploadsOutput{})
+	output := &ListMultipartUploadsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListMultipartUploadsRequest{Request: req, Input: input}
 }
 
@@ -1756,7 +1822,10 @@ func (c *Glacier) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 		input = &ListPartsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPartsOutput{})
+	output := &ListPartsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPartsRequest{Request: req, Input: input}
 }
 
@@ -1850,7 +1919,10 @@ func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityI
 		input = &ListProvisionedCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProvisionedCapacityOutput{})
+	output := &ListProvisionedCapacityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProvisionedCapacityRequest{Request: req, Input: input}
 }
 
@@ -1896,7 +1968,10 @@ func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) ListTags
 		input = &ListTagsForVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForVaultOutput{})
+	output := &ListTagsForVaultOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForVaultRequest{Request: req, Input: input}
 }
 
@@ -1966,7 +2041,10 @@ func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) ListVaultsRequest {
 		input = &ListVaultsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVaultsOutput{})
+	output := &ListVaultsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVaultsRequest{Request: req, Input: input}
 }
 
@@ -2060,7 +2138,10 @@ func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedC
 		input = &PurchaseProvisionedCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseProvisionedCapacityOutput{})
+	output := &PurchaseProvisionedCapacityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseProvisionedCapacityRequest{Request: req, Input: input}
 }
 
@@ -2108,9 +2189,12 @@ func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) Re
 		input = &RemoveTagsFromVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromVaultOutput{})
+	output := &RemoveTagsFromVaultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromVaultRequest{Request: req, Input: input}
 }
 
@@ -2160,9 +2244,12 @@ func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInp
 		input = &SetDataRetrievalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDataRetrievalPolicyOutput{})
+	output := &SetDataRetrievalPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetDataRetrievalPolicyRequest{Request: req, Input: input}
 }
 
@@ -2212,9 +2299,12 @@ func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) 
 		input = &SetVaultAccessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetVaultAccessPolicyOutput{})
+	output := &SetVaultAccessPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetVaultAccessPolicyRequest{Request: req, Input: input}
 }
 
@@ -2289,9 +2379,12 @@ func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput
 		input = &SetVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetVaultNotificationsOutput{})
+	output := &SetVaultNotificationsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetVaultNotificationsRequest{Request: req, Input: input}
 }
 
@@ -2370,7 +2463,10 @@ func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveR
 		input = &UploadArchiveInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadArchiveOutput{})
+	output := &UploadArchiveOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadArchiveRequest{Request: req, Input: input}
 }
 
@@ -2459,7 +2555,10 @@ func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) Up
 		input = &UploadMultipartPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadMultipartPartOutput{})
+	output := &UploadMultipartPartOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadMultipartPartRequest{Request: req, Input: input}
 }
 
@@ -2543,6 +2642,8 @@ func (s *AbortMultipartUploadInput) SetVaultName(v string) *AbortMultipartUpload
 
 type AbortMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2553,6 +2654,11 @@ func (s AbortMultipartUploadOutput) String() string {
 // GoString returns the string representation
 func (s AbortMultipartUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AbortMultipartUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input values for AbortVaultLock.
@@ -2617,6 +2723,8 @@ func (s *AbortVaultLockInput) SetVaultName(v string) *AbortVaultLockInput {
 
 type AbortVaultLockOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2627,6 +2735,11 @@ func (s AbortVaultLockOutput) String() string {
 // GoString returns the string representation
 func (s AbortVaultLockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AbortVaultLockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input values for AddTagsToVault.
@@ -2700,6 +2813,8 @@ func (s *AddTagsToVaultInput) SetVaultName(v string) *AddTagsToVaultInput {
 
 type AddTagsToVaultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2710,6 +2825,11 @@ func (s AddTagsToVaultOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToVaultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToVaultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides options to complete a multipart upload operation. This informs Amazon
@@ -2889,6 +3009,8 @@ func (s *CompleteVaultLockInput) SetVaultName(v string) *CompleteVaultLockInput 
 
 type CompleteVaultLockOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2899,6 +3021,11 @@ func (s CompleteVaultLockOutput) String() string {
 // GoString returns the string representation
 func (s CompleteVaultLockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CompleteVaultLockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides options to create a vault.
@@ -2965,6 +3092,8 @@ func (s *CreateVaultInput) SetVaultName(v string) *CreateVaultInput {
 type CreateVaultOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The URI of the vault that was created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
@@ -2977,6 +3106,11 @@ func (s CreateVaultOutput) String() string {
 // GoString returns the string representation
 func (s CreateVaultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVaultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocation sets the Location field's value.
@@ -3125,6 +3259,8 @@ func (s *DeleteArchiveInput) SetVaultName(v string) *DeleteArchiveInput {
 
 type DeleteArchiveOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3135,6 +3271,11 @@ func (s DeleteArchiveOutput) String() string {
 // GoString returns the string representation
 func (s DeleteArchiveOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteArchiveOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // DeleteVaultAccessPolicy input.
@@ -3198,6 +3339,8 @@ func (s *DeleteVaultAccessPolicyInput) SetVaultName(v string) *DeleteVaultAccess
 
 type DeleteVaultAccessPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3208,6 +3351,11 @@ func (s DeleteVaultAccessPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVaultAccessPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVaultAccessPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides options for deleting a vault from Amazon Glacier.
@@ -3331,6 +3479,8 @@ func (s *DeleteVaultNotificationsInput) SetVaultName(v string) *DeleteVaultNotif
 
 type DeleteVaultNotificationsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3343,8 +3493,15 @@ func (s DeleteVaultNotificationsOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVaultNotificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 type DeleteVaultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3355,6 +3512,11 @@ func (s DeleteVaultOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVaultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVaultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides options for retrieving a job description.
@@ -3434,6 +3596,8 @@ func (s *DescribeJobInput) SetVaultName(v string) *DescribeJobInput {
 // Describes an Amazon Glacier job.
 type DescribeJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The job type. It is either ArchiveRetrieval or InventoryRetrieval.
 	Action ActionCode `type:"string" enum:"true"`
@@ -3527,6 +3691,11 @@ func (s DescribeJobOutput) String() string {
 // GoString returns the string representation
 func (s DescribeJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAction sets the Action field's value.
@@ -3700,6 +3869,8 @@ func (s *DescribeVaultInput) SetVaultName(v string) *DescribeVaultInput {
 type DescribeVaultOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Universal Coordinated Time (UTC) date when the vault was created. This
 	// value should be a string in the ISO 8601 date format, for example 2012-03-20T17:03:43.221Z.
 	CreationDate *string `type:"string"`
@@ -3734,6 +3905,11 @@ func (s DescribeVaultOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVaultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVaultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -3821,6 +3997,8 @@ func (s *GetDataRetrievalPolicyInput) SetAccountId(v string) *GetDataRetrievalPo
 type GetDataRetrievalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the returned data retrieval policy in JSON format.
 	Policy *DataRetrievalPolicy `type:"structure"`
 }
@@ -3833,6 +4011,11 @@ func (s GetDataRetrievalPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetDataRetrievalPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDataRetrievalPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -3956,6 +4139,8 @@ func (s *GetJobOutputInput) SetVaultName(v string) *GetJobOutputInput {
 type GetJobOutputOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
+	responseMetadata aws.Response
+
 	// Indicates the range units accepted. For more information, see RFC2616 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 	AcceptRanges *string `location:"header" locationName:"Accept-Ranges" type:"string"`
 
@@ -4008,6 +4193,11 @@ func (s GetJobOutputOutput) String() string {
 // GoString returns the string representation
 func (s GetJobOutputOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobOutputOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAcceptRanges sets the AcceptRanges field's value.
@@ -4115,6 +4305,8 @@ func (s *GetVaultAccessPolicyInput) SetVaultName(v string) *GetVaultAccessPolicy
 type GetVaultAccessPolicyOutput struct {
 	_ struct{} `type:"structure" payload:"Policy"`
 
+	responseMetadata aws.Response
+
 	// Contains the returned vault access policy as a JSON string.
 	Policy *VaultAccessPolicy `locationName:"policy" type:"structure"`
 }
@@ -4127,6 +4319,11 @@ func (s GetVaultAccessPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetVaultAccessPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVaultAccessPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -4198,6 +4395,8 @@ func (s *GetVaultLockInput) SetVaultName(v string) *GetVaultLockInput {
 type GetVaultLockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The UTC date and time at which the vault lock was put into the InProgress
 	// state.
 	CreationDate *string `type:"string"`
@@ -4221,6 +4420,11 @@ func (s GetVaultLockOutput) String() string {
 // GoString returns the string representation
 func (s GetVaultLockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVaultLockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -4311,6 +4515,8 @@ func (s *GetVaultNotificationsInput) SetVaultName(v string) *GetVaultNotificatio
 type GetVaultNotificationsOutput struct {
 	_ struct{} `type:"structure" payload:"VaultNotificationConfig"`
 
+	responseMetadata aws.Response
+
 	// Returns the notification configuration set on the vault.
 	VaultNotificationConfig *VaultNotificationConfig `locationName:"vaultNotificationConfig" type:"structure"`
 }
@@ -4323,6 +4529,11 @@ func (s GetVaultNotificationsOutput) String() string {
 // GoString returns the string representation
 func (s GetVaultNotificationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVaultNotificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVaultNotificationConfig sets the VaultNotificationConfig field's value.
@@ -4403,6 +4614,8 @@ func (s *InitiateJobInput) SetVaultName(v string) *InitiateJobInput {
 type InitiateJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the job.
 	JobId *string `location:"header" locationName:"x-amz-job-id" type:"string"`
 
@@ -4418,6 +4631,11 @@ func (s InitiateJobOutput) String() string {
 // GoString returns the string representation
 func (s InitiateJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitiateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobId sets the JobId field's value.
@@ -4519,6 +4737,8 @@ func (s *InitiateMultipartUploadInput) SetVaultName(v string) *InitiateMultipart
 type InitiateMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The relative URI path of the multipart upload ID Amazon Glacier created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 
@@ -4535,6 +4755,11 @@ func (s InitiateMultipartUploadOutput) String() string {
 // GoString returns the string representation
 func (s InitiateMultipartUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitiateMultipartUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocation sets the Location field's value.
@@ -4622,6 +4847,8 @@ func (s *InitiateVaultLockInput) SetVaultName(v string) *InitiateVaultLockInput 
 type InitiateVaultLockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The lock ID, which is used to complete the vault locking process.
 	LockId *string `location:"header" locationName:"x-amz-lock-id" type:"string"`
 }
@@ -4634,6 +4861,11 @@ func (s InitiateVaultLockOutput) String() string {
 // GoString returns the string representation
 func (s InitiateVaultLockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitiateVaultLockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLockId sets the LockId field's value.
@@ -4985,6 +5217,8 @@ func (s *ListJobsInput) SetVaultName(v string) *ListJobsInput {
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of job objects. Each job object contains metadata describing the job.
 	JobList []DescribeJobOutput `type:"list"`
 
@@ -5003,6 +5237,11 @@ func (s ListJobsOutput) String() string {
 // GoString returns the string representation
 func (s ListJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobList sets the JobList field's value.
@@ -5104,6 +5343,8 @@ func (s *ListMultipartUploadsInput) SetVaultName(v string) *ListMultipartUploads
 type ListMultipartUploadsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An opaque string that represents where to continue pagination of the results.
 	// You use the marker in a new List Multipart Uploads request to obtain more
 	// uploads in the list. If there are no more uploads, this value is null.
@@ -5121,6 +5362,11 @@ func (s ListMultipartUploadsOutput) String() string {
 // GoString returns the string representation
 func (s ListMultipartUploadsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMultipartUploadsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5238,6 +5484,8 @@ func (s *ListPartsInput) SetVaultName(v string) *ListPartsInput {
 type ListPartsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The description of the archive that was specified in the Initiate Multipart
 	// Upload request.
 	ArchiveDescription *string `type:"string"`
@@ -5274,6 +5522,11 @@ func (s ListPartsOutput) String() string {
 // GoString returns the string representation
 func (s ListPartsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPartsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArchiveDescription sets the ArchiveDescription field's value.
@@ -5364,6 +5617,8 @@ func (s *ListProvisionedCapacityInput) SetAccountId(v string) *ListProvisionedCa
 type ListProvisionedCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The response body contains the following JSON fields.
 	ProvisionedCapacityList []ProvisionedCapacityDescription `type:"list"`
 }
@@ -5376,6 +5631,11 @@ func (s ListProvisionedCapacityOutput) String() string {
 // GoString returns the string representation
 func (s ListProvisionedCapacityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProvisionedCapacityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProvisionedCapacityList sets the ProvisionedCapacityList field's value.
@@ -5447,6 +5707,8 @@ func (s *ListTagsForVaultInput) SetVaultName(v string) *ListTagsForVaultInput {
 type ListTagsForVaultOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The tags attached to the vault. Each tag is composed of a key and a value.
 	Tags map[string]string `type:"map"`
 }
@@ -5459,6 +5721,11 @@ func (s ListTagsForVaultOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForVaultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForVaultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -5538,6 +5805,8 @@ func (s *ListVaultsInput) SetMarker(v string) *ListVaultsInput {
 type ListVaultsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The vault ARN at which to continue pagination of the results. You use the
 	// marker in another List Vaults request to obtain more vaults in the list.
 	Marker *string `type:"string"`
@@ -5554,6 +5823,11 @@ func (s ListVaultsOutput) String() string {
 // GoString returns the string representation
 func (s ListVaultsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVaultsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5692,6 +5966,8 @@ func (s *PurchaseProvisionedCapacityInput) SetAccountId(v string) *PurchaseProvi
 type PurchaseProvisionedCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID that identifies the provisioned capacity unit.
 	CapacityId *string `location:"header" locationName:"x-amz-capacity-id" type:"string"`
 }
@@ -5704,6 +5980,11 @@ func (s PurchaseProvisionedCapacityOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseProvisionedCapacityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseProvisionedCapacityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCapacityId sets the CapacityId field's value.
@@ -5782,6 +6063,8 @@ func (s *RemoveTagsFromVaultInput) SetVaultName(v string) *RemoveTagsFromVaultIn
 
 type RemoveTagsFromVaultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5792,6 +6075,11 @@ func (s RemoveTagsFromVaultOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromVaultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromVaultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataRetrievalPolicy input.
@@ -5850,6 +6138,8 @@ func (s *SetDataRetrievalPolicyInput) SetPolicy(v *DataRetrievalPolicy) *SetData
 
 type SetDataRetrievalPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5860,6 +6150,11 @@ func (s SetDataRetrievalPolicyOutput) String() string {
 // GoString returns the string representation
 func (s SetDataRetrievalPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetDataRetrievalPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVaultAccessPolicy input.
@@ -5932,6 +6227,8 @@ func (s *SetVaultAccessPolicyInput) SetVaultName(v string) *SetVaultAccessPolicy
 
 type SetVaultAccessPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5942,6 +6239,11 @@ func (s SetVaultAccessPolicyOutput) String() string {
 // GoString returns the string representation
 func (s SetVaultAccessPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetVaultAccessPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides options to configure notifications that will be sent when specific
@@ -6015,6 +6317,8 @@ func (s *SetVaultNotificationsInput) SetVaultNotificationConfig(v *VaultNotifica
 
 type SetVaultNotificationsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6025,6 +6329,11 @@ func (s SetVaultNotificationsOutput) String() string {
 // GoString returns the string representation
 func (s SetVaultNotificationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetVaultNotificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides options to add an archive to a vault.
@@ -6120,6 +6429,8 @@ func (s *UploadArchiveInput) SetVaultName(v string) *UploadArchiveInput {
 type UploadArchiveOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string `location:"header" locationName:"x-amz-archive-id" type:"string"`
 
@@ -6138,6 +6449,11 @@ func (s UploadArchiveOutput) String() string {
 // GoString returns the string representation
 func (s UploadArchiveOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadArchiveOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArchiveId sets the ArchiveId field's value.
@@ -6329,6 +6645,8 @@ func (s *UploadMultipartPartInput) SetVaultName(v string) *UploadMultipartPartIn
 type UploadMultipartPartOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The SHA256 tree hash that Amazon Glacier computed for the uploaded part.
 	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
 }
@@ -6341,6 +6659,11 @@ func (s UploadMultipartPartOutput) String() string {
 // GoString returns the string representation
 func (s UploadMultipartPartOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadMultipartPartOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.

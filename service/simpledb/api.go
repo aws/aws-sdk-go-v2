@@ -74,9 +74,12 @@ func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInpu
 		input = &BatchDeleteAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteAttributesOutput{})
+	output := &BatchDeleteAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchDeleteAttributesRequest{Request: req, Input: input}
 }
 
@@ -162,9 +165,12 @@ func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) Bat
 		input = &BatchPutAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchPutAttributesOutput{})
+	output := &BatchPutAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchPutAttributesRequest{Request: req, Input: input}
 }
 
@@ -216,9 +222,12 @@ func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) CreateDomainReq
 		input = &CreateDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDomainOutput{})
+	output := &CreateDomainOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDomainRequest{Request: req, Input: input}
 }
 
@@ -272,9 +281,12 @@ func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteA
 		input = &DeleteAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+	output := &DeleteAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAttributesRequest{Request: req, Input: input}
 }
 
@@ -323,9 +335,12 @@ func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReq
 		input = &DeleteDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDomainOutput{})
+	output := &DeleteDomainOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDomainRequest{Request: req, Input: input}
 }
 
@@ -371,7 +386,10 @@ func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) DomainMetad
 		input = &DomainMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &DomainMetadataOutput{})
+	output := &DomainMetadataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DomainMetadataRequest{Request: req, Input: input}
 }
 
@@ -424,7 +442,10 @@ func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) GetAttributes
 		input = &GetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAttributesOutput{})
+	output := &GetAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAttributesRequest{Request: req, Input: input}
 }
 
@@ -479,7 +500,10 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) ListDomainsReques
 		input = &ListDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainsOutput{})
+	output := &ListDomainsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDomainsRequest{Request: req, Input: input}
 }
 
@@ -603,9 +627,12 @@ func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) PutAttributes
 		input = &PutAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAttributesOutput{})
+	output := &PutAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutAttributesRequest{Request: req, Input: input}
 }
 
@@ -665,7 +692,10 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) SelectRequest {
 		input = &SelectInput{}
 	}
 
-	req := c.newRequest(op, input, &SelectOutput{})
+	output := &SelectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SelectRequest{Request: req, Input: input}
 }
 
@@ -834,6 +864,8 @@ func (s *BatchDeleteAttributesInput) SetItems(v []DeletableItem) *BatchDeleteAtt
 
 type BatchDeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -844,6 +876,11 @@ func (s BatchDeleteAttributesOutput) String() string {
 // GoString returns the string representation
 func (s BatchDeleteAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeleteAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type BatchPutAttributesInput struct {
@@ -909,6 +946,8 @@ func (s *BatchPutAttributesInput) SetItems(v []ReplaceableItem) *BatchPutAttribu
 
 type BatchPutAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -919,6 +958,11 @@ func (s BatchPutAttributesOutput) String() string {
 // GoString returns the string representation
 func (s BatchPutAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchPutAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type CreateDomainInput struct {
@@ -963,6 +1007,8 @@ func (s *CreateDomainInput) SetDomainName(v string) *CreateDomainInput {
 
 type CreateDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -973,6 +1019,11 @@ func (s CreateDomainOutput) String() string {
 // GoString returns the string representation
 func (s CreateDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type DeletableAttribute struct {
@@ -1160,6 +1211,8 @@ func (s *DeleteAttributesInput) SetItemName(v string) *DeleteAttributesInput {
 
 type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1170,6 +1223,11 @@ func (s DeleteAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type DeleteDomainInput struct {
@@ -1213,6 +1271,8 @@ func (s *DeleteDomainInput) SetDomainName(v string) *DeleteDomainInput {
 
 type DeleteDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1223,6 +1283,11 @@ func (s DeleteDomainOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type DomainMetadataInput struct {
@@ -1267,6 +1332,8 @@ func (s *DomainMetadataInput) SetDomainName(v string) *DomainMetadataInput {
 type DomainMetadataOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of unique attribute names in the domain.
 	AttributeNameCount *int64 `type:"integer"`
 
@@ -1297,6 +1364,11 @@ func (s DomainMetadataOutput) String() string {
 // GoString returns the string representation
 func (s DomainMetadataOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DomainMetadataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributeNameCount sets the AttributeNameCount field's value.
@@ -1417,6 +1489,8 @@ func (s *GetAttributesInput) SetItemName(v string) *GetAttributesInput {
 type GetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of attributes returned by the operation.
 	Attributes []Attribute `locationNameList:"Attribute" type:"list" flattened:"true"`
 }
@@ -1429,6 +1503,11 @@ func (s GetAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -1518,6 +1597,8 @@ func (s *ListDomainsInput) SetNextToken(v string) *ListDomainsInput {
 type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of domain names that match the expression.
 	DomainNames []string `locationNameList:"DomainName" type:"list" flattened:"true"`
 
@@ -1534,6 +1615,11 @@ func (s ListDomainsOutput) String() string {
 // GoString returns the string representation
 func (s ListDomainsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDomainsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainNames sets the DomainNames field's value.
@@ -1637,6 +1723,8 @@ func (s *PutAttributesInput) SetItemName(v string) *PutAttributesInput {
 
 type PutAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1647,6 +1735,11 @@ func (s PutAttributesOutput) String() string {
 // GoString returns the string representation
 func (s PutAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type ReplaceableAttribute struct {
@@ -1835,6 +1928,8 @@ func (s *SelectInput) SetSelectExpression(v string) *SelectInput {
 type SelectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of items that match the select expression.
 	Items []Item `locationNameList:"Item" type:"list" flattened:"true"`
 
@@ -1850,6 +1945,11 @@ func (s SelectOutput) String() string {
 // GoString returns the string representation
 func (s SelectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SelectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.

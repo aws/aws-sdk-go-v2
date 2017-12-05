@@ -133,7 +133,10 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(inp
 		input = &OutputService1TestShapeOutputService1TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService1TestShapeOutputService1TestCaseOperation1Output{})
+	output := &OutputService1TestShapeOutputService1TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService1TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -143,6 +146,8 @@ type OutputService1TestShapeOutputService1TestCaseOperation1Input struct {
 
 type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	Char *string `type:"character"`
 
@@ -159,6 +164,11 @@ type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
 	Str *string `type:"string"`
 
 	TrueBool *bool `type:"boolean"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChar sets the Char field's value.
@@ -301,7 +311,10 @@ func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(inp
 		input = &OutputService2TestShapeOutputService2TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService2TestShapeOutputService2TestCaseOperation1Output{})
+	output := &OutputService2TestShapeOutputService2TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService2TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -325,10 +338,17 @@ type OutputService2TestShapeOutputService2TestCaseOperation1Input struct {
 type OutputService2TestShapeOutputService2TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// BlobMember is automatically base64 encoded/decoded by the SDK.
 	BlobMember []byte `type:"blob"`
 
 	StructMember *OutputService2TestShapeBlobContainer `type:"structure"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService2TestShapeOutputService2TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBlobMember sets the BlobMember field's value.
@@ -435,7 +455,10 @@ func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(inp
 		input = &OutputService3TestShapeOutputService3TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService3TestShapeOutputService3TestCaseOperation1Output{})
+	output := &OutputService3TestShapeOutputService3TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService3TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -446,9 +469,16 @@ type OutputService3TestShapeOutputService3TestCaseOperation1Input struct {
 type OutputService3TestShapeOutputService3TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	StructMember *OutputService3TestShapeTimeContainer `type:"structure"`
 
 	TimeMember *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService3TestShapeOutputService3TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStructMember sets the StructMember field's value.
@@ -567,7 +597,10 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(inp
 		input = &OutputService4TestShapeOutputService4TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService4TestShapeOutputService4TestCaseOperation2Output{})
+	output := &OutputService4TestShapeOutputService4TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService4TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -609,7 +642,10 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(inp
 		input = &OutputService4TestShapeOutputService4TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService4TestShapeOutputService4TestCaseOperation2Output{})
+	output := &OutputService4TestShapeOutputService4TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService4TestCaseOperation2Request{Request: req, Input: input}
 }
 
@@ -624,11 +660,18 @@ type OutputService4TestShapeOutputService4TestCaseOperation2Input struct {
 type OutputService4TestShapeOutputService4TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ListMember []string `type:"list"`
 
 	ListMemberMap []map[string]string `type:"list"`
 
 	ListMemberStruct []OutputService4TestShapeStructType `type:"list"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService4TestShapeOutputService4TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetListMember sets the ListMember field's value.
@@ -745,7 +788,10 @@ func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(inp
 		input = &OutputService5TestShapeOutputService5TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService5TestShapeOutputService5TestCaseOperation1Output{})
+	output := &OutputService5TestShapeOutputService5TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService5TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -756,7 +802,14 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
 type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	MapMember map[string][]int64 `type:"map"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService5TestShapeOutputService5TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMapMember sets the MapMember field's value.
@@ -857,7 +910,10 @@ func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(inp
 		input = &OutputService6TestShapeOutputService6TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService6TestShapeOutputService6TestCaseOperation1Output{})
+	output := &OutputService6TestShapeOutputService6TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService6TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -868,7 +924,14 @@ type OutputService6TestShapeOutputService6TestCaseOperation1Input struct {
 type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	StrType *string `type:"string"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService6TestShapeOutputService6TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStrType sets the StrType field's value.
@@ -969,7 +1032,10 @@ func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(inp
 		input = &OutputService7TestShapeOutputService7TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService7TestShapeOutputService7TestCaseOperation1Output{})
+	output := &OutputService7TestShapeOutputService7TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OutputService7TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -980,9 +1046,16 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
 type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	FooEnum OutputService7TestShapeJSONEnumType `type:"string" enum:"true"`
 
 	ListEnums []OutputService7TestShapeJSONEnumType `type:"list"`
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OutputService7TestShapeOutputService7TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFooEnum sets the FooEnum field's value.

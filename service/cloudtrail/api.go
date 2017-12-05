@@ -57,7 +57,10 @@ func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 		input = &AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	output := &AddTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsRequest{Request: req, Input: input}
 }
 
@@ -105,7 +108,10 @@ func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) CreateTrailRequ
 		input = &CreateTrailInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrailOutput{})
+	output := &CreateTrailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTrailRequest{Request: req, Input: input}
 }
 
@@ -153,7 +159,10 @@ func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequ
 		input = &DeleteTrailInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrailOutput{})
+	output := &DeleteTrailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTrailRequest{Request: req, Input: input}
 }
 
@@ -200,7 +209,10 @@ func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeT
 		input = &DescribeTrailsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrailsOutput{})
+	output := &DescribeTrailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTrailsRequest{Request: req, Input: input}
 }
 
@@ -258,7 +270,10 @@ func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) Get
 		input = &GetEventSelectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEventSelectorsOutput{})
+	output := &GetEventSelectorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEventSelectorsRequest{Request: req, Input: input}
 }
 
@@ -308,7 +323,10 @@ func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) GetTrailS
 		input = &GetTrailStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTrailStatusOutput{})
+	output := &GetTrailStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTrailStatusRequest{Request: req, Input: input}
 }
 
@@ -361,7 +379,10 @@ func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) ListPubli
 		input = &ListPublicKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPublicKeysOutput{})
+	output := &ListPublicKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPublicKeysRequest{Request: req, Input: input}
 }
 
@@ -407,7 +428,10 @@ func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 		input = &ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsRequest{Request: req, Input: input}
 }
 
@@ -484,7 +508,10 @@ func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) LookupEventsR
 		input = &LookupEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &LookupEventsOutput{})
+	output := &LookupEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return LookupEventsRequest{Request: req, Input: input}
 }
 
@@ -607,7 +634,10 @@ func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) Put
 		input = &PutEventSelectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventSelectorsOutput{})
+	output := &PutEventSelectorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutEventSelectorsRequest{Request: req, Input: input}
 }
 
@@ -653,7 +683,10 @@ func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest
 		input = &RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	output := &RemoveTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsRequest{Request: req, Input: input}
 }
 
@@ -703,7 +736,10 @@ func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) StartLoggingR
 		input = &StartLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &StartLoggingOutput{})
+	output := &StartLoggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartLoggingRequest{Request: req, Input: input}
 }
 
@@ -755,7 +791,10 @@ func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequ
 		input = &StopLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &StopLoggingOutput{})
+	output := &StopLoggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopLoggingRequest{Request: req, Input: input}
 }
 
@@ -806,7 +845,10 @@ func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) UpdateTrailRequ
 		input = &UpdateTrailInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTrailOutput{})
+	output := &UpdateTrailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTrailRequest{Request: req, Input: input}
 }
 
@@ -875,6 +917,8 @@ func (s *AddTagsInput) SetTagsList(v []Tag) *AddTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTagsResponse
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -885,6 +929,11 @@ func (s AddTagsOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies the settings for each trail.
@@ -1065,6 +1114,8 @@ func (s *CreateTrailInput) SetSnsTopicName(v string) *CreateTrailInput {
 type CreateTrailOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail
 	// logs will be delivered.
 	CloudWatchLogsLogGroupArn *string `type:"string"`
@@ -1125,6 +1176,11 @@ func (s CreateTrailOutput) String() string {
 // GoString returns the string representation
 func (s CreateTrailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTrailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudWatchLogsLogGroupArn sets the CloudWatchLogsLogGroupArn field's value.
@@ -1307,6 +1363,8 @@ func (s *DeleteTrailInput) SetName(v string) *DeleteTrailInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailResponse
 type DeleteTrailOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1317,6 +1375,11 @@ func (s DeleteTrailOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTrailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTrailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Returns information about the trail.
@@ -1379,6 +1442,8 @@ func (s *DescribeTrailsInput) SetTrailNameList(v []string) *DescribeTrailsInput 
 type DescribeTrailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of trail objects.
 	TrailList []Trail `locationName:"trailList" type:"list"`
 }
@@ -1391,6 +1456,11 @@ func (s DescribeTrailsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTrailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTrailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrailList sets the TrailList field's value.
@@ -1604,6 +1674,8 @@ func (s *GetEventSelectorsInput) SetTrailName(v string) *GetEventSelectorsInput 
 type GetEventSelectorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The event selectors that are configured for the trail.
 	EventSelectors []EventSelector `type:"list"`
 
@@ -1619,6 +1691,11 @@ func (s GetEventSelectorsOutput) String() string {
 // GoString returns the string representation
 func (s GetEventSelectorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEventSelectorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSelectors sets the EventSelectors field's value.
@@ -1683,6 +1760,8 @@ func (s *GetTrailStatusInput) SetName(v string) *GetTrailStatusInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusResponse
 type GetTrailStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// Whether the CloudTrail is currently logging AWS API calls.
 	IsLogging *bool `type:"boolean"`
@@ -1769,6 +1848,11 @@ func (s GetTrailStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetTrailStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTrailStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsLogging sets the IsLogging field's value.
@@ -1925,6 +2009,8 @@ func (s *ListPublicKeysInput) SetStartTime(v time.Time) *ListPublicKeysInput {
 type ListPublicKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Reserved for future use.
 	NextToken *string `type:"string"`
 
@@ -1942,6 +2028,11 @@ func (s ListPublicKeysOutput) String() string {
 // GoString returns the string representation
 func (s ListPublicKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPublicKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2015,6 +2106,8 @@ func (s *ListTagsInput) SetResourceIdList(v []string) *ListTagsInput {
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Reserved for future use.
 	NextToken *string `type:"string"`
 
@@ -2030,6 +2123,11 @@ func (s ListTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2195,6 +2293,8 @@ func (s *LookupEventsInput) SetStartTime(v time.Time) *LookupEventsInput {
 type LookupEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of events returned based on the lookup attributes specified and the
 	// CloudTrail event. The events list is sorted by time. The most recent event
 	// is listed first.
@@ -2216,6 +2316,11 @@ func (s LookupEventsOutput) String() string {
 // GoString returns the string representation
 func (s LookupEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s LookupEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -2361,6 +2466,8 @@ func (s *PutEventSelectorsInput) SetTrailName(v string) *PutEventSelectorsInput 
 type PutEventSelectorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the event selectors configured for your trail.
 	EventSelectors []EventSelector `type:"list"`
 
@@ -2379,6 +2486,11 @@ func (s PutEventSelectorsOutput) String() string {
 // GoString returns the string representation
 func (s PutEventSelectorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutEventSelectorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSelectors sets the EventSelectors field's value.
@@ -2458,6 +2570,8 @@ func (s *RemoveTagsInput) SetTagsList(v []Tag) *RemoveTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTagsResponse
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2468,6 +2582,11 @@ func (s RemoveTagsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies the type and name of a resource referenced by an event.
@@ -2594,6 +2713,8 @@ func (s *StartLoggingInput) SetName(v string) *StartLoggingInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLoggingResponse
 type StartLoggingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2604,6 +2725,11 @@ func (s StartLoggingOutput) String() string {
 // GoString returns the string representation
 func (s StartLoggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartLoggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Passes the request to CloudTrail to stop logging AWS API calls for the specified
@@ -2656,6 +2782,8 @@ func (s *StopLoggingInput) SetName(v string) *StopLoggingInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLoggingResponse
 type StopLoggingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2666,6 +2794,11 @@ func (s StopLoggingOutput) String() string {
 // GoString returns the string representation
 func (s StopLoggingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopLoggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A custom key-value pair associated with a resource such as a CloudTrail trail.
@@ -3057,6 +3190,8 @@ func (s *UpdateTrailInput) SetSnsTopicName(v string) *UpdateTrailInput {
 type UpdateTrailOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail
 	// logs will be delivered.
 	CloudWatchLogsLogGroupArn *string `type:"string"`
@@ -3117,6 +3252,11 @@ func (s UpdateTrailOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTrailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTrailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudWatchLogsLogGroupArn sets the CloudWatchLogsLogGroupArn field's value.

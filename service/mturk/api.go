@@ -59,7 +59,10 @@ func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequ
 		input = &AcceptQualificationRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptQualificationRequestOutput{})
+	output := &AcceptQualificationRequestOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptQualificationRequestRequest{Request: req, Input: input}
 }
 
@@ -123,7 +126,10 @@ func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) ApproveA
 		input = &ApproveAssignmentInput{}
 	}
 
-	req := c.newRequest(op, input, &ApproveAssignmentOutput{})
+	output := &ApproveAssignmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ApproveAssignmentRequest{Request: req, Input: input}
 }
 
@@ -181,7 +187,10 @@ func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualific
 		input = &AssociateQualificationWithWorkerInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateQualificationWithWorkerOutput{})
+	output := &AssociateQualificationWithWorkerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateQualificationWithWorkerRequest{Request: req, Input: input}
 }
 
@@ -241,7 +250,10 @@ func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditional
 		input = &CreateAdditionalAssignmentsForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAdditionalAssignmentsForHITOutput{})
+	output := &CreateAdditionalAssignmentsForHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAdditionalAssignmentsForHITRequest{Request: req, Input: input}
 }
 
@@ -308,7 +320,10 @@ func (c *MTurk) CreateHITRequest(input *CreateHITInput) CreateHITRequest {
 		input = &CreateHITInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHITOutput{})
+	output := &CreateHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHITRequest{Request: req, Input: input}
 }
 
@@ -357,7 +372,10 @@ func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) CreateHITTypeReq
 		input = &CreateHITTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHITTypeOutput{})
+	output := &CreateHITTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHITTypeRequest{Request: req, Input: input}
 }
 
@@ -415,7 +433,10 @@ func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) Cr
 		input = &CreateHITWithHITTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHITWithHITTypeOutput{})
+	output := &CreateHITWithHITTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHITWithHITTypeRequest{Request: req, Input: input}
 }
 
@@ -462,7 +483,10 @@ func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInp
 		input = &CreateQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateQualificationTypeOutput{})
+	output := &CreateQualificationTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateQualificationTypeRequest{Request: req, Input: input}
 }
 
@@ -510,7 +534,10 @@ func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateWo
 		input = &CreateWorkerBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWorkerBlockOutput{})
+	output := &CreateWorkerBlockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateWorkerBlockRequest{Request: req, Input: input}
 }
 
@@ -574,7 +601,10 @@ func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
 		input = &DeleteHITInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHITOutput{})
+	output := &DeleteHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteHITRequest{Request: req, Input: input}
 }
 
@@ -632,7 +662,10 @@ func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInp
 		input = &DeleteQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQualificationTypeOutput{})
+	output := &DeleteQualificationTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteQualificationTypeRequest{Request: req, Input: input}
 }
 
@@ -683,7 +716,10 @@ func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteWo
 		input = &DeleteWorkerBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWorkerBlockOutput{})
+	output := &DeleteWorkerBlockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteWorkerBlockRequest{Request: req, Input: input}
 }
 
@@ -733,7 +769,10 @@ func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQu
 		input = &DisassociateQualificationFromWorkerInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateQualificationFromWorkerOutput{})
+	output := &DisassociateQualificationFromWorkerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateQualificationFromWorkerRequest{Request: req, Input: input}
 }
 
@@ -780,7 +819,10 @@ func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAccou
 		input = &GetAccountBalanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountBalanceOutput{})
+	output := &GetAccountBalanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountBalanceRequest{Request: req, Input: input}
 }
 
@@ -826,7 +868,10 @@ func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentReq
 		input = &GetAssignmentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAssignmentOutput{})
+	output := &GetAssignmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAssignmentRequest{Request: req, Input: input}
 }
 
@@ -878,7 +923,10 @@ func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUpl
 		input = &GetFileUploadURLInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFileUploadURLOutput{})
+	output := &GetFileUploadURLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFileUploadURLRequest{Request: req, Input: input}
 }
 
@@ -924,7 +972,10 @@ func (c *MTurk) GetHITRequest(input *GetHITInput) GetHITRequest {
 		input = &GetHITInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHITOutput{})
+	output := &GetHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHITRequest{Request: req, Input: input}
 }
 
@@ -978,7 +1029,10 @@ func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) 
 		input = &GetQualificationScoreInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQualificationScoreOutput{})
+	output := &GetQualificationScoreOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQualificationScoreRequest{Request: req, Input: input}
 }
 
@@ -1025,7 +1079,10 @@ func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) Ge
 		input = &GetQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQualificationTypeOutput{})
+	output := &GetQualificationTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQualificationTypeRequest{Request: req, Input: input}
 }
 
@@ -1097,7 +1154,10 @@ func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) 
 		input = &ListAssignmentsForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssignmentsForHITOutput{})
+	output := &ListAssignmentsForHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssignmentsForHITRequest{Request: req, Input: input}
 }
 
@@ -1200,7 +1260,10 @@ func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) ListBonu
 		input = &ListBonusPaymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBonusPaymentsOutput{})
+	output := &ListBonusPaymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBonusPaymentsRequest{Request: req, Input: input}
 }
 
@@ -1304,7 +1367,10 @@ func (c *MTurk) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 		input = &ListHITsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHITsOutput{})
+	output := &ListHITsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHITsRequest{Request: req, Input: input}
 }
 
@@ -1409,7 +1475,10 @@ func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificat
 		input = &ListHITsForQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHITsForQualificationTypeOutput{})
+	output := &ListHITsForQualificationTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHITsForQualificationTypeRequest{Request: req, Input: input}
 }
 
@@ -1514,7 +1583,10 @@ func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequest
 		input = &ListQualificationRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQualificationRequestsOutput{})
+	output := &ListQualificationRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListQualificationRequestsRequest{Request: req, Input: input}
 }
 
@@ -1619,7 +1691,10 @@ func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput
 		input = &ListQualificationTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQualificationTypesOutput{})
+	output := &ListQualificationTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListQualificationTypesRequest{Request: req, Input: input}
 }
 
@@ -1725,7 +1800,10 @@ func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResu
 		input = &ListReviewPolicyResultsForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReviewPolicyResultsForHITOutput{})
+	output := &ListReviewPolicyResultsForHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListReviewPolicyResultsForHITRequest{Request: req, Input: input}
 }
 
@@ -1829,7 +1907,10 @@ func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) ListRe
 		input = &ListReviewableHITsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReviewableHITsOutput{})
+	output := &ListReviewableHITsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListReviewableHITsRequest{Request: req, Input: input}
 }
 
@@ -1932,7 +2013,10 @@ func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorker
 		input = &ListWorkerBlocksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkerBlocksOutput{})
+	output := &ListWorkerBlocksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListWorkerBlocksRequest{Request: req, Input: input}
 }
 
@@ -2035,7 +2119,10 @@ func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQu
 		input = &ListWorkersWithQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkersWithQualificationTypeOutput{})
+	output := &ListWorkersWithQualificationTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListWorkersWithQualificationTypeRequest{Request: req, Input: input}
 }
 
@@ -2135,7 +2222,10 @@ func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) NotifyWorkersReq
 		input = &NotifyWorkersInput{}
 	}
 
-	req := c.newRequest(op, input, &NotifyWorkersOutput{})
+	output := &NotifyWorkersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return NotifyWorkersRequest{Request: req, Input: input}
 }
 
@@ -2189,7 +2279,10 @@ func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAssi
 		input = &RejectAssignmentInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectAssignmentOutput{})
+	output := &RejectAssignmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RejectAssignmentRequest{Request: req, Input: input}
 }
 
@@ -2238,7 +2331,10 @@ func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequ
 		input = &RejectQualificationRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectQualificationRequestOutput{})
+	output := &RejectQualificationRequestOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RejectQualificationRequestRequest{Request: req, Input: input}
 }
 
@@ -2292,7 +2388,10 @@ func (c *MTurk) SendBonusRequest(input *SendBonusInput) SendBonusRequest {
 		input = &SendBonusInput{}
 	}
 
-	req := c.newRequest(op, input, &SendBonusOutput{})
+	output := &SendBonusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendBonusRequest{Request: req, Input: input}
 }
 
@@ -2343,7 +2442,10 @@ func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificatio
 		input = &SendTestEventNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &SendTestEventNotificationOutput{})
+	output := &SendTestEventNotificationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendTestEventNotificationRequest{Request: req, Input: input}
 }
 
@@ -2391,7 +2493,10 @@ func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput
 		input = &UpdateExpirationForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateExpirationForHITOutput{})
+	output := &UpdateExpirationForHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateExpirationForHITRequest{Request: req, Input: input}
 }
 
@@ -2439,7 +2544,10 @@ func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) 
 		input = &UpdateHITReviewStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateHITReviewStatusOutput{})
+	output := &UpdateHITReviewStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateHITReviewStatusRequest{Request: req, Input: input}
 }
 
@@ -2488,7 +2596,10 @@ func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) Update
 		input = &UpdateHITTypeOfHITInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateHITTypeOfHITOutput{})
+	output := &UpdateHITTypeOfHITOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateHITTypeOfHITRequest{Request: req, Input: input}
 }
 
@@ -2543,7 +2654,10 @@ func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSetti
 		input = &UpdateNotificationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNotificationSettingsOutput{})
+	output := &UpdateNotificationSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateNotificationSettingsRequest{Request: req, Input: input}
 }
 
@@ -2619,7 +2733,10 @@ func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInp
 		input = &UpdateQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateQualificationTypeOutput{})
+	output := &UpdateQualificationTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateQualificationTypeRequest{Request: req, Input: input}
 }
 
@@ -2677,6 +2794,8 @@ func (s *AcceptQualificationRequestInput) SetQualificationRequestId(v string) *A
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequestResponse
 type AcceptQualificationRequestOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2687,6 +2806,11 @@ func (s AcceptQualificationRequestOutput) String() string {
 // GoString returns the string representation
 func (s AcceptQualificationRequestOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptQualificationRequestOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignmentRequest
@@ -2756,6 +2880,8 @@ func (s *ApproveAssignmentInput) SetRequesterFeedback(v string) *ApproveAssignme
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignmentResponse
 type ApproveAssignmentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2766,6 +2892,11 @@ func (s ApproveAssignmentOutput) String() string {
 // GoString returns the string representation
 func (s ApproveAssignmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ApproveAssignmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Assignment data structure represents a single assignment of a HIT to
@@ -2997,6 +3128,8 @@ func (s *AssociateQualificationWithWorkerInput) SetWorkerId(v string) *Associate
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorkerResponse
 type AssociateQualificationWithWorkerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3007,6 +3140,11 @@ func (s AssociateQualificationWithWorkerOutput) String() string {
 // GoString returns the string representation
 func (s AssociateQualificationWithWorkerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateQualificationWithWorkerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // An object representing a Bonus payment paid to a Worker.
@@ -3148,6 +3286,8 @@ func (s *CreateAdditionalAssignmentsForHITInput) SetUniqueRequestToken(v string)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHITResponse
 type CreateAdditionalAssignmentsForHITOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3158,6 +3298,11 @@ func (s CreateAdditionalAssignmentsForHITOutput) String() string {
 // GoString returns the string representation
 func (s CreateAdditionalAssignmentsForHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAdditionalAssignmentsForHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITRequest
@@ -3445,6 +3590,8 @@ func (s *CreateHITInput) SetUniqueRequestToken(v string) *CreateHITInput {
 type CreateHITOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the newly created HIT data. For a description of the HIT data structure
 	// as it appears in responses, see the HIT Data Structure documentation.
 	HIT *HIT `type:"structure"`
@@ -3458,6 +3605,11 @@ func (s CreateHITOutput) String() string {
 // GoString returns the string representation
 func (s CreateHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHIT sets the HIT field's value.
@@ -3604,6 +3756,8 @@ func (s *CreateHITTypeInput) SetTitle(v string) *CreateHITTypeInput {
 type CreateHITTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the newly registered HIT type.
 	HITTypeId *string `min:"1" type:"string"`
 }
@@ -3616,6 +3770,11 @@ func (s CreateHITTypeOutput) String() string {
 // GoString returns the string representation
 func (s CreateHITTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHITTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHITTypeId sets the HITTypeId field's value.
@@ -3818,6 +3977,8 @@ func (s *CreateHITWithHITTypeInput) SetUniqueRequestToken(v string) *CreateHITWi
 type CreateHITWithHITTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the newly created HIT data. For a description of the HIT data structure
 	// as it appears in responses, see the HIT Data Structure documentation.
 	HIT *HIT `type:"structure"`
@@ -3831,6 +3992,11 @@ func (s CreateHITWithHITTypeOutput) String() string {
 // GoString returns the string representation
 func (s CreateHITWithHITTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHITWithHITTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHIT sets the HIT field's value.
@@ -4010,6 +4176,8 @@ func (s *CreateQualificationTypeInput) SetTestDurationInSeconds(v int64) *Create
 type CreateQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The created Qualification type, returned as a QualificationType data structure.
 	QualificationType *QualificationType `type:"structure"`
 }
@@ -4022,6 +4190,11 @@ func (s CreateQualificationTypeOutput) String() string {
 // GoString returns the string representation
 func (s CreateQualificationTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateQualificationTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQualificationType sets the QualificationType field's value.
@@ -4092,6 +4265,8 @@ func (s *CreateWorkerBlockInput) SetWorkerId(v string) *CreateWorkerBlockInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlockResponse
 type CreateWorkerBlockOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4102,6 +4277,11 @@ func (s CreateWorkerBlockOutput) String() string {
 // GoString returns the string representation
 func (s CreateWorkerBlockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateWorkerBlockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHITRequest
@@ -4150,6 +4330,8 @@ func (s *DeleteHITInput) SetHITId(v string) *DeleteHITInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHITResponse
 type DeleteHITOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4160,6 +4342,11 @@ func (s DeleteHITOutput) String() string {
 // GoString returns the string representation
 func (s DeleteHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationTypeRequest
@@ -4208,6 +4395,8 @@ func (s *DeleteQualificationTypeInput) SetQualificationTypeId(v string) *DeleteQ
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationTypeResponse
 type DeleteQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4218,6 +4407,11 @@ func (s DeleteQualificationTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteQualificationTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteQualificationTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlockRequest
@@ -4276,6 +4470,8 @@ func (s *DeleteWorkerBlockInput) SetWorkerId(v string) *DeleteWorkerBlockInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlockResponse
 type DeleteWorkerBlockOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4286,6 +4482,11 @@ func (s DeleteWorkerBlockOutput) String() string {
 // GoString returns the string representation
 func (s DeleteWorkerBlockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteWorkerBlockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorkerRequest
@@ -4362,6 +4563,8 @@ func (s *DisassociateQualificationFromWorkerInput) SetWorkerId(v string) *Disass
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorkerResponse
 type DisassociateQualificationFromWorkerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4372,6 +4575,11 @@ func (s DisassociateQualificationFromWorkerOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateQualificationFromWorkerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateQualificationFromWorkerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalanceRequest
@@ -4393,6 +4601,8 @@ func (s GetAccountBalanceInput) GoString() string {
 type GetAccountBalanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string representing a currency amount.
 	AvailableBalance *string `type:"string"`
 
@@ -4408,6 +4618,11 @@ func (s GetAccountBalanceOutput) String() string {
 // GoString returns the string representation
 func (s GetAccountBalanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccountBalanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailableBalance sets the AvailableBalance field's value.
@@ -4469,6 +4684,8 @@ func (s *GetAssignmentInput) SetAssignmentId(v string) *GetAssignmentInput {
 type GetAssignmentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The assignment. The response includes one Assignment element.
 	Assignment *Assignment `type:"structure"`
 
@@ -4484,6 +4701,11 @@ func (s GetAssignmentOutput) String() string {
 // GoString returns the string representation
 func (s GetAssignmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAssignmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssignment sets the Assignment field's value.
@@ -4561,6 +4783,8 @@ func (s *GetFileUploadURLInput) SetQuestionIdentifier(v string) *GetFileUploadUR
 type GetFileUploadURLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A temporary URL for the file that the Worker uploaded for the answer.
 	FileUploadURL *string `type:"string"`
 }
@@ -4573,6 +4797,11 @@ func (s GetFileUploadURLOutput) String() string {
 // GoString returns the string representation
 func (s GetFileUploadURLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFileUploadURLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileUploadURL sets the FileUploadURL field's value.
@@ -4628,6 +4857,8 @@ func (s *GetHITInput) SetHITId(v string) *GetHITInput {
 type GetHITOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the requested HIT data.
 	HIT *HIT `type:"structure"`
 }
@@ -4640,6 +4871,11 @@ func (s GetHITOutput) String() string {
 // GoString returns the string representation
 func (s GetHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHIT sets the HIT field's value.
@@ -4713,6 +4949,8 @@ func (s *GetQualificationScoreInput) SetWorkerId(v string) *GetQualificationScor
 type GetQualificationScoreOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Qualification data structure of the Qualification assigned to a user,
 	// including the Qualification type and the value (score).
 	Qualification *Qualification `type:"structure"`
@@ -4726,6 +4964,11 @@ func (s GetQualificationScoreOutput) String() string {
 // GoString returns the string representation
 func (s GetQualificationScoreOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQualificationScoreOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQualification sets the Qualification field's value.
@@ -4781,6 +5024,8 @@ func (s *GetQualificationTypeInput) SetQualificationTypeId(v string) *GetQualifi
 type GetQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The returned Qualification Type
 	QualificationType *QualificationType `type:"structure"`
 }
@@ -4793,6 +5038,11 @@ func (s GetQualificationTypeOutput) String() string {
 // GoString returns the string representation
 func (s GetQualificationTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQualificationTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQualificationType sets the QualificationType field's value.
@@ -5161,6 +5411,8 @@ func (s *ListAssignmentsForHITInput) SetNextToken(v string) *ListAssignmentsForH
 type ListAssignmentsForHITOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The collection of Assignment data structures returned by this call.
 	Assignments []Assignment `type:"list"`
 
@@ -5182,6 +5434,11 @@ func (s ListAssignmentsForHITOutput) String() string {
 // GoString returns the string representation
 func (s ListAssignmentsForHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssignmentsForHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssignments sets the Assignments field's value.
@@ -5282,6 +5539,8 @@ func (s *ListBonusPaymentsInput) SetNextToken(v string) *ListBonusPaymentsInput 
 type ListBonusPaymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A successful request to the ListBonusPayments operation returns a list of
 	// BonusPayment objects.
 	BonusPayments []BonusPayment `type:"list"`
@@ -5304,6 +5563,11 @@ func (s ListBonusPaymentsOutput) String() string {
 // GoString returns the string representation
 func (s ListBonusPaymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBonusPaymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBonusPayments sets the BonusPayments field's value.
@@ -5395,6 +5659,8 @@ func (s *ListHITsForQualificationTypeInput) SetQualificationTypeId(v string) *Li
 type ListHITsForQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of HIT elements returned by the query.
 	HITs []HIT `type:"list"`
 
@@ -5416,6 +5682,11 @@ func (s ListHITsForQualificationTypeOutput) String() string {
 // GoString returns the string representation
 func (s ListHITsForQualificationTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHITsForQualificationTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHITs sets the HITs field's value.
@@ -5488,6 +5759,8 @@ func (s *ListHITsInput) SetNextToken(v string) *ListHITsInput {
 type ListHITsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of HIT elements returned by the query.
 	HITs []HIT `type:"list"`
 
@@ -5509,6 +5782,11 @@ func (s ListHITsOutput) String() string {
 // GoString returns the string representation
 func (s ListHITsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHITsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHITs sets the HITs field's value.
@@ -5596,6 +5874,8 @@ func (s *ListQualificationRequestsInput) SetQualificationTypeId(v string) *ListQ
 type ListQualificationRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of results.
@@ -5619,6 +5899,11 @@ func (s ListQualificationRequestsOutput) String() string {
 // GoString returns the string representation
 func (s ListQualificationRequestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListQualificationRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5733,6 +6018,8 @@ func (s *ListQualificationTypesInput) SetQuery(v string) *ListQualificationTypes
 type ListQualificationTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of results.
@@ -5754,6 +6041,11 @@ func (s ListQualificationTypesOutput) String() string {
 // GoString returns the string representation
 func (s ListQualificationTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListQualificationTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5876,6 +6168,8 @@ func (s *ListReviewPolicyResultsForHITInput) SetRetrieveResults(v bool) *ListRev
 type ListReviewPolicyResultsForHITOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the Assignment-level Review Policy. This contains only the PolicyName
 	// element.
 	AssignmentReviewPolicy *ReviewPolicy `type:"structure"`
@@ -5907,6 +6201,11 @@ func (s ListReviewPolicyResultsForHITOutput) String() string {
 // GoString returns the string representation
 func (s ListReviewPolicyResultsForHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListReviewPolicyResultsForHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssignmentReviewPolicy sets the AssignmentReviewPolicy field's value.
@@ -6020,6 +6319,8 @@ func (s *ListReviewableHITsInput) SetStatus(v ReviewableHITStatus) *ListReviewab
 type ListReviewableHITsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of HIT elements returned by the query.
 	HITs []HIT `type:"list"`
 
@@ -6041,6 +6342,11 @@ func (s ListReviewableHITsOutput) String() string {
 // GoString returns the string representation
 func (s ListReviewableHITsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListReviewableHITsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHITs sets the HITs field's value.
@@ -6113,6 +6419,8 @@ func (s *ListWorkerBlocksInput) SetNextToken(v string) *ListWorkerBlocksInput {
 type ListWorkerBlocksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of results.
@@ -6135,6 +6443,11 @@ func (s ListWorkerBlocksOutput) String() string {
 // GoString returns the string representation
 func (s ListWorkerBlocksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWorkerBlocksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6235,6 +6548,8 @@ func (s *ListWorkersWithQualificationTypeInput) SetStatus(v QualificationStatus)
 type ListWorkersWithQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Mechanical Turk returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of results.
@@ -6256,6 +6571,11 @@ func (s ListWorkersWithQualificationTypeOutput) String() string {
 // GoString returns the string representation
 func (s ListWorkersWithQualificationTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWorkersWithQualificationTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6551,6 +6871,8 @@ func (s *NotifyWorkersInput) SetWorkerIds(v []string) *NotifyWorkersInput {
 type NotifyWorkersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// When MTurk sends notifications to the list of Workers, it returns back any
 	// failures it encounters in this list of NotifyWorkersFailureStatus objects.
 	NotifyWorkersFailureStatuses []NotifyWorkersFailureStatus `type:"list"`
@@ -6564,6 +6886,11 @@ func (s NotifyWorkersOutput) String() string {
 // GoString returns the string representation
 func (s NotifyWorkersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s NotifyWorkersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNotifyWorkersFailureStatuses sets the NotifyWorkersFailureStatuses field's value.
@@ -7148,6 +7475,8 @@ func (s *RejectAssignmentInput) SetRequesterFeedback(v string) *RejectAssignment
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignmentResponse
 type RejectAssignmentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7158,6 +7487,11 @@ func (s RejectAssignmentOutput) String() string {
 // GoString returns the string representation
 func (s RejectAssignmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RejectAssignmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequestRequest
@@ -7214,6 +7548,8 @@ func (s *RejectQualificationRequestInput) SetReason(v string) *RejectQualificati
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequestResponse
 type RejectQualificationRequestOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7224,6 +7560,11 @@ func (s RejectQualificationRequestOutput) String() string {
 // GoString returns the string representation
 func (s RejectQualificationRequestOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RejectQualificationRequestOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Both the AssignmentReviewReport and the HITReviewReport elements contains
@@ -7596,6 +7937,8 @@ func (s *SendBonusInput) SetWorkerId(v string) *SendBonusInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonusResponse
 type SendBonusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7606,6 +7949,11 @@ func (s SendBonusOutput) String() string {
 // GoString returns the string representation
 func (s SendBonusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendBonusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotificationRequest
@@ -7675,6 +8023,8 @@ func (s *SendTestEventNotificationInput) SetTestEventType(v EventType) *SendTest
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotificationResponse
 type SendTestEventNotificationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7685,6 +8035,11 @@ func (s SendTestEventNotificationOutput) String() string {
 // GoString returns the string representation
 func (s SendTestEventNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendTestEventNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHITRequest
@@ -7748,6 +8103,8 @@ func (s *UpdateExpirationForHITInput) SetHITId(v string) *UpdateExpirationForHIT
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHITResponse
 type UpdateExpirationForHITOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7758,6 +8115,11 @@ func (s UpdateExpirationForHITOutput) String() string {
 // GoString returns the string representation
 func (s UpdateExpirationForHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateExpirationForHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatusRequest
@@ -7820,6 +8182,8 @@ func (s *UpdateHITReviewStatusInput) SetRevert(v bool) *UpdateHITReviewStatusInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatusResponse
 type UpdateHITReviewStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7830,6 +8194,11 @@ func (s UpdateHITReviewStatusOutput) String() string {
 // GoString returns the string representation
 func (s UpdateHITReviewStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateHITReviewStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHITRequest
@@ -7896,6 +8265,8 @@ func (s *UpdateHITTypeOfHITInput) SetHITTypeId(v string) *UpdateHITTypeOfHITInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHITResponse
 type UpdateHITTypeOfHITOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7906,6 +8277,11 @@ func (s UpdateHITTypeOfHITOutput) String() string {
 // GoString returns the string representation
 func (s UpdateHITTypeOfHITOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateHITTypeOfHITOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettingsRequest
@@ -7980,6 +8356,8 @@ func (s *UpdateNotificationSettingsInput) SetNotification(v *NotificationSpecifi
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettingsResponse
 type UpdateNotificationSettingsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7990,6 +8368,11 @@ func (s UpdateNotificationSettingsOutput) String() string {
 // GoString returns the string representation
 func (s UpdateNotificationSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateNotificationSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationTypeRequest
@@ -8132,6 +8515,8 @@ func (s *UpdateQualificationTypeInput) SetTestDurationInSeconds(v int64) *Update
 type UpdateQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains a QualificationType data structure.
 	QualificationType *QualificationType `type:"structure"`
 }
@@ -8144,6 +8529,11 @@ func (s UpdateQualificationTypeOutput) String() string {
 // GoString returns the string representation
 func (s UpdateQualificationTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateQualificationTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQualificationType sets the QualificationType field's value.

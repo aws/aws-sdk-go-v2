@@ -52,7 +52,10 @@ func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) Batc
 		input = &BatchDeleteBuildsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteBuildsOutput{})
+	output := &BatchDeleteBuildsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchDeleteBuildsRequest{Request: req, Input: input}
 }
 
@@ -98,7 +101,10 @@ func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBu
 		input = &BatchGetBuildsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetBuildsOutput{})
+	output := &BatchGetBuildsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetBuildsRequest{Request: req, Input: input}
 }
 
@@ -144,7 +150,10 @@ func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) BatchG
 		input = &BatchGetProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetProjectsOutput{})
+	output := &BatchGetProjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetProjectsRequest{Request: req, Input: input}
 }
 
@@ -190,7 +199,10 @@ func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) CreateProjec
 		input = &CreateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProjectOutput{})
+	output := &CreateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProjectRequest{Request: req, Input: input}
 }
 
@@ -247,7 +259,10 @@ func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) CreateWebhoo
 		input = &CreateWebhookInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWebhookOutput{})
+	output := &CreateWebhookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateWebhookRequest{Request: req, Input: input}
 }
 
@@ -293,7 +308,10 @@ func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjec
 		input = &DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	output := &DeleteProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProjectRequest{Request: req, Input: input}
 }
 
@@ -341,7 +359,10 @@ func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhoo
 		input = &DeleteWebhookInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWebhookOutput{})
+	output := &DeleteWebhookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteWebhookRequest{Request: req, Input: input}
 }
 
@@ -387,7 +408,10 @@ func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest 
 		input = &ListBuildsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBuildsOutput{})
+	output := &ListBuildsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBuildsRequest{Request: req, Input: input}
 }
 
@@ -434,7 +458,10 @@ func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput
 		input = &ListBuildsForProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBuildsForProjectOutput{})
+	output := &ListBuildsForProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBuildsForProjectRequest{Request: req, Input: input}
 }
 
@@ -480,7 +507,10 @@ func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnviro
 		input = &ListCuratedEnvironmentImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCuratedEnvironmentImagesOutput{})
+	output := &ListCuratedEnvironmentImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCuratedEnvironmentImagesRequest{Request: req, Input: input}
 }
 
@@ -527,7 +557,10 @@ func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) ListProjectsRe
 		input = &ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	output := &ListProjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProjectsRequest{Request: req, Input: input}
 }
 
@@ -573,7 +606,10 @@ func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) StartBuildRequest 
 		input = &StartBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &StartBuildOutput{})
+	output := &StartBuildOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartBuildRequest{Request: req, Input: input}
 }
 
@@ -619,7 +655,10 @@ func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
 		input = &StopBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &StopBuildOutput{})
+	output := &StopBuildOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopBuildRequest{Request: req, Input: input}
 }
 
@@ -665,7 +704,10 @@ func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjec
 		input = &UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	output := &UpdateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProjectRequest{Request: req, Input: input}
 }
 
@@ -716,6 +758,8 @@ func (s *BatchDeleteBuildsInput) SetIds(v []string) *BatchDeleteBuildsInput {
 type BatchDeleteBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the builds that were successfully deleted.
 	BuildsDeleted []string `locationName:"buildsDeleted" min:"1" type:"list"`
 
@@ -731,6 +775,11 @@ func (s BatchDeleteBuildsOutput) String() string {
 // GoString returns the string representation
 func (s BatchDeleteBuildsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeleteBuildsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuildsDeleted sets the BuildsDeleted field's value.
@@ -792,6 +841,8 @@ func (s *BatchGetBuildsInput) SetIds(v []string) *BatchGetBuildsInput {
 type BatchGetBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the requested builds.
 	Builds []Build `locationName:"builds" type:"list"`
 
@@ -807,6 +858,11 @@ func (s BatchGetBuildsOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetBuildsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetBuildsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuilds sets the Builds field's value.
@@ -868,6 +924,8 @@ func (s *BatchGetProjectsInput) SetNames(v []string) *BatchGetProjectsInput {
 type BatchGetProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the requested build projects.
 	Projects []Project `locationName:"projects" type:"list"`
 
@@ -883,6 +941,11 @@ func (s BatchGetProjectsOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetProjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetProjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProjects sets the Projects field's value.
@@ -1453,6 +1516,8 @@ func (s *CreateProjectInput) SetTimeoutInMinutes(v int64) *CreateProjectInput {
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the build project that was created.
 	Project *Project `locationName:"project" type:"structure"`
 }
@@ -1465,6 +1530,11 @@ func (s CreateProjectOutput) String() string {
 // GoString returns the string representation
 func (s CreateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProject sets the Project field's value.
@@ -1520,6 +1590,8 @@ func (s *CreateWebhookInput) SetProjectName(v string) *CreateWebhookInput {
 type CreateWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about a webhook in GitHub that connects repository events to
 	// a build project in AWS CodeBuild.
 	Webhook *Webhook `locationName:"webhook" type:"structure"`
@@ -1533,6 +1605,11 @@ func (s CreateWebhookOutput) String() string {
 // GoString returns the string representation
 func (s CreateWebhookOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateWebhookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWebhook sets the Webhook field's value.
@@ -1587,6 +1664,8 @@ func (s *DeleteProjectInput) SetName(v string) *DeleteProjectInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProjectOutput
 type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1597,6 +1676,11 @@ func (s DeleteProjectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookInput
@@ -1645,6 +1729,8 @@ func (s *DeleteWebhookInput) SetProjectName(v string) *DeleteWebhookInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookOutput
 type DeleteWebhookOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1655,6 +1741,11 @@ func (s DeleteWebhookOutput) String() string {
 // GoString returns the string representation
 func (s DeleteWebhookOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteWebhookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about a Docker image that is managed by AWS CodeBuild.
@@ -1913,6 +2004,8 @@ func (s *ListBuildsForProjectInput) SetSortOrder(v SortOrderType) *ListBuildsFor
 type ListBuildsForProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of build IDs for the specified build project, with each build ID representing
 	// a single build.
 	Ids []string `locationName:"ids" min:"1" type:"list"`
@@ -1932,6 +2025,11 @@ func (s ListBuildsForProjectOutput) String() string {
 // GoString returns the string representation
 func (s ListBuildsForProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBuildsForProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIds sets the Ids field's value.
@@ -1992,6 +2090,8 @@ func (s *ListBuildsInput) SetSortOrder(v SortOrderType) *ListBuildsInput {
 type ListBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of build IDs, with each build ID representing a single build.
 	Ids []string `locationName:"ids" min:"1" type:"list"`
 
@@ -2010,6 +2110,11 @@ func (s ListBuildsOutput) String() string {
 // GoString returns the string representation
 func (s ListBuildsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBuildsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIds sets the Ids field's value.
@@ -2043,6 +2148,8 @@ func (s ListCuratedEnvironmentImagesInput) GoString() string {
 type ListCuratedEnvironmentImagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about supported platforms for Docker images that are managed
 	// by AWS CodeBuild.
 	Platforms []EnvironmentPlatform `locationName:"platforms" type:"list"`
@@ -2056,6 +2163,11 @@ func (s ListCuratedEnvironmentImagesOutput) String() string {
 // GoString returns the string representation
 func (s ListCuratedEnvironmentImagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCuratedEnvironmentImagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlatforms sets the Platforms field's value.
@@ -2145,6 +2257,8 @@ func (s *ListProjectsInput) SetSortOrder(v SortOrderType) *ListProjectsInput {
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If there are more than 100 items in the list, only the first 100 items are
 	// returned, along with a unique string called a next token. To get the next
 	// batch of items in the list, call this operation again, adding the next token
@@ -2164,6 +2278,11 @@ func (s ListProjectsOutput) String() string {
 // GoString returns the string representation
 func (s ListProjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3002,6 +3121,8 @@ func (s *StartBuildInput) SetTimeoutInMinutesOverride(v int64) *StartBuildInput 
 type StartBuildOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the build to be run.
 	Build *Build `locationName:"build" type:"structure"`
 }
@@ -3014,6 +3135,11 @@ func (s StartBuildOutput) String() string {
 // GoString returns the string representation
 func (s StartBuildOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartBuildOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuild sets the Build field's value.
@@ -3069,6 +3195,8 @@ func (s *StopBuildInput) SetId(v string) *StopBuildInput {
 type StopBuildOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the build.
 	Build *Build `locationName:"build" type:"structure"`
 }
@@ -3081,6 +3209,11 @@ func (s StopBuildOutput) String() string {
 // GoString returns the string representation
 func (s StopBuildOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopBuildOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuild sets the Build field's value.
@@ -3305,6 +3438,8 @@ func (s *UpdateProjectInput) SetTimeoutInMinutes(v int64) *UpdateProjectInput {
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the build project that was changed.
 	Project *Project `locationName:"project" type:"structure"`
 }
@@ -3317,6 +3452,11 @@ func (s UpdateProjectOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProject sets the Project field's value.

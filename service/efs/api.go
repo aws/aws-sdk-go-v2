@@ -99,7 +99,10 @@ func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFileSy
 		input = &CreateFileSystemInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFileSystemOutput{})
+	output := &CreateFileSystemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFileSystemRequest{Request: req, Input: input}
 }
 
@@ -239,7 +242,10 @@ func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) CreateMoun
 		input = &CreateMountTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMountTargetOutput{})
+	output := &CreateMountTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMountTargetRequest{Request: req, Input: input}
 }
 
@@ -291,9 +297,12 @@ func (c *EFS) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 		input = &CreateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagsOutput{})
+	output := &CreateTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTagsRequest{Request: req, Input: input}
 }
 
@@ -354,9 +363,12 @@ func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFileSy
 		input = &DeleteFileSystemInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFileSystemOutput{})
+	output := &DeleteFileSystemOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFileSystemRequest{Request: req, Input: input}
 }
 
@@ -426,9 +438,12 @@ func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteMoun
 		input = &DeleteMountTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMountTargetOutput{})
+	output := &DeleteMountTargetOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMountTargetRequest{Request: req, Input: input}
 }
 
@@ -481,9 +496,12 @@ func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 		input = &DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsRequest{Request: req, Input: input}
 }
 
@@ -554,7 +572,10 @@ func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Descri
 		input = &DescribeFileSystemsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFileSystemsOutput{})
+	output := &DescribeFileSystemsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFileSystemsRequest{Request: req, Input: input}
 }
 
@@ -610,7 +631,10 @@ func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTarge
 		input = &DescribeMountTargetSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMountTargetSecurityGroupsOutput{})
+	output := &DescribeMountTargetSecurityGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMountTargetSecurityGroupsRequest{Request: req, Input: input}
 }
 
@@ -662,7 +686,10 @@ func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) Desc
 		input = &DescribeMountTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMountTargetsOutput{})
+	output := &DescribeMountTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMountTargetsRequest{Request: req, Input: input}
 }
 
@@ -713,7 +740,10 @@ func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -774,9 +804,12 @@ func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSec
 		input = &ModifyMountTargetSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyMountTargetSecurityGroupsOutput{})
+	output := &ModifyMountTargetSecurityGroupsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyMountTargetSecurityGroupsRequest{Request: req, Input: input}
 }
 
@@ -883,6 +916,8 @@ func (s *CreateFileSystemInput) SetPerformanceMode(v PerformanceMode) *CreateFil
 type CreateFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
 	//
 	// CreationTime is a required field
@@ -954,6 +989,11 @@ func (s CreateFileSystemOutput) String() string {
 // GoString returns the string representation
 func (s CreateFileSystemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFileSystemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationTime sets the CreationTime field's value.
@@ -1101,6 +1141,8 @@ func (s *CreateMountTargetInput) SetSubnetId(v string) *CreateMountTargetInput {
 type CreateMountTargetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// ID of the file system for which the mount target is intended.
 	//
 	// FileSystemId is a required field
@@ -1140,6 +1182,11 @@ func (s CreateMountTargetOutput) String() string {
 // GoString returns the string representation
 func (s CreateMountTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMountTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileSystemId sets the FileSystemId field's value.
@@ -1250,6 +1297,8 @@ func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTagsOutput
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1260,6 +1309,11 @@ func (s CreateTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemRequest
@@ -1305,6 +1359,8 @@ func (s *DeleteFileSystemInput) SetFileSystemId(v string) *DeleteFileSystemInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemOutput
 type DeleteFileSystemOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1315,6 +1371,11 @@ func (s DeleteFileSystemOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFileSystemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFileSystemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetRequest
@@ -1360,6 +1421,8 @@ func (s *DeleteMountTargetInput) SetMountTargetId(v string) *DeleteMountTargetIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetOutput
 type DeleteMountTargetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1370,6 +1433,11 @@ func (s DeleteMountTargetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMountTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMountTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTagsRequest
@@ -1430,6 +1498,8 @@ func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1440,6 +1510,11 @@ func (s DeleteTagsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsRequest
@@ -1521,6 +1596,8 @@ func (s *DescribeFileSystemsInput) SetMaxItems(v int64) *DescribeFileSystemsInpu
 type DescribeFileSystemsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Array of file system descriptions.
 	FileSystems []CreateFileSystemOutput `type:"list"`
 
@@ -1540,6 +1617,11 @@ func (s DescribeFileSystemsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFileSystemsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFileSystemsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileSystems sets the FileSystems field's value.
@@ -1604,6 +1686,8 @@ func (s *DescribeMountTargetSecurityGroupsInput) SetMountTargetId(v string) *Des
 type DescribeMountTargetSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Array of security groups.
 	//
 	// SecurityGroups is a required field
@@ -1618,6 +1702,11 @@ func (s DescribeMountTargetSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMountTargetSecurityGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMountTargetSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
@@ -1699,6 +1788,8 @@ func (s *DescribeMountTargetsInput) SetMountTargetId(v string) *DescribeMountTar
 type DescribeMountTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the request included the Marker, the response returns that value in this
 	// field.
 	Marker *string `type:"string"`
@@ -1721,6 +1812,11 @@ func (s DescribeMountTargetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMountTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMountTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -1809,6 +1905,8 @@ func (s *DescribeTagsInput) SetMaxItems(v int64) *DescribeTagsInput {
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the request included a Marker, the response returns that value in this
 	// field.
 	Marker *string `type:"string"`
@@ -1832,6 +1930,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -1948,6 +2051,8 @@ func (s *ModifyMountTargetSecurityGroupsInput) SetSecurityGroups(v []string) *Mo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroupsOutput
 type ModifyMountTargetSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1958,6 +2063,11 @@ func (s ModifyMountTargetSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ModifyMountTargetSecurityGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyMountTargetSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A tag is a key-value pair. Allowed characters: letters, whitespace, and numbers,

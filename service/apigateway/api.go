@@ -53,7 +53,10 @@ func (c *APIGateway) CreateApiKeyRequest(input *CreateApiKeyInput) CreateApiKeyR
 		input = &CreateApiKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApiKeyOutput{})
+	output := &UpdateApiKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateApiKeyRequest{Request: req, Input: input}
 }
 
@@ -99,7 +102,10 @@ func (c *APIGateway) CreateAuthorizerRequest(input *CreateAuthorizerInput) Creat
 		input = &CreateAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAuthorizerOutput{})
+	output := &UpdateAuthorizerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAuthorizerRequest{Request: req, Input: input}
 }
 
@@ -143,7 +149,10 @@ func (c *APIGateway) CreateBasePathMappingRequest(input *CreateBasePathMappingIn
 		input = &CreateBasePathMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBasePathMappingOutput{})
+	output := &UpdateBasePathMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBasePathMappingRequest{Request: req, Input: input}
 }
 
@@ -188,7 +197,10 @@ func (c *APIGateway) CreateDeploymentRequest(input *CreateDeploymentInput) Creat
 		input = &CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeploymentOutput{})
+	output := &UpdateDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
@@ -230,7 +242,10 @@ func (c *APIGateway) CreateDocumentationPartRequest(input *CreateDocumentationPa
 		input = &CreateDocumentationPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentationPartOutput{})
+	output := &UpdateDocumentationPartOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDocumentationPartRequest{Request: req, Input: input}
 }
 
@@ -272,7 +287,10 @@ func (c *APIGateway) CreateDocumentationVersionRequest(input *CreateDocumentatio
 		input = &CreateDocumentationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentationVersionOutput{})
+	output := &UpdateDocumentationVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDocumentationVersionRequest{Request: req, Input: input}
 }
 
@@ -316,7 +334,10 @@ func (c *APIGateway) CreateDomainNameRequest(input *CreateDomainNameInput) Creat
 		input = &CreateDomainNameInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainNameOutput{})
+	output := &UpdateDomainNameOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDomainNameRequest{Request: req, Input: input}
 }
 
@@ -360,7 +381,10 @@ func (c *APIGateway) CreateModelRequest(input *CreateModelInput) CreateModelRequ
 		input = &CreateModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateModelOutput{})
+	output := &UpdateModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateModelRequest{Request: req, Input: input}
 }
 
@@ -404,7 +428,10 @@ func (c *APIGateway) CreateRequestValidatorRequest(input *CreateRequestValidator
 		input = &CreateRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRequestValidatorOutput{})
+	output := &UpdateRequestValidatorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRequestValidatorRequest{Request: req, Input: input}
 }
 
@@ -448,7 +475,10 @@ func (c *APIGateway) CreateResourceRequest(input *CreateResourceInput) CreateRes
 		input = &CreateResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceOutput{})
+	output := &UpdateResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateResourceRequest{Request: req, Input: input}
 }
 
@@ -492,7 +522,10 @@ func (c *APIGateway) CreateRestApiRequest(input *CreateRestApiInput) CreateRestA
 		input = &CreateRestApiInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRestApiOutput{})
+	output := &UpdateRestApiOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRestApiRequest{Request: req, Input: input}
 }
 
@@ -537,7 +570,10 @@ func (c *APIGateway) CreateStageRequest(input *CreateStageInput) CreateStageRequ
 		input = &CreateStageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStageOutput{})
+	output := &UpdateStageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStageRequest{Request: req, Input: input}
 }
 
@@ -582,7 +618,10 @@ func (c *APIGateway) CreateUsagePlanRequest(input *CreateUsagePlanInput) CreateU
 		input = &CreateUsagePlanInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUsagePlanOutput{})
+	output := &UpdateUsagePlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUsagePlanRequest{Request: req, Input: input}
 }
 
@@ -626,7 +665,10 @@ func (c *APIGateway) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) C
 		input = &CreateUsagePlanKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsagePlanKeyOutput{})
+	output := &GetUsagePlanKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUsagePlanKeyRequest{Request: req, Input: input}
 }
 
@@ -670,9 +712,12 @@ func (c *APIGateway) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyR
 		input = &DeleteApiKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApiKeyOutput{})
+	output := &DeleteApiKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApiKeyRequest{Request: req, Input: input}
 }
 
@@ -718,9 +763,12 @@ func (c *APIGateway) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) Delet
 		input = &DeleteAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAuthorizerOutput{})
+	output := &DeleteAuthorizerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAuthorizerRequest{Request: req, Input: input}
 }
 
@@ -764,9 +812,12 @@ func (c *APIGateway) DeleteBasePathMappingRequest(input *DeleteBasePathMappingIn
 		input = &DeleteBasePathMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBasePathMappingOutput{})
+	output := &DeleteBasePathMappingOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBasePathMappingRequest{Request: req, Input: input}
 }
 
@@ -810,9 +861,12 @@ func (c *APIGateway) DeleteClientCertificateRequest(input *DeleteClientCertifica
 		input = &DeleteClientCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClientCertificateOutput{})
+	output := &DeleteClientCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteClientCertificateRequest{Request: req, Input: input}
 }
 
@@ -857,9 +911,12 @@ func (c *APIGateway) DeleteDeploymentRequest(input *DeleteDeploymentInput) Delet
 		input = &DeleteDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeploymentOutput{})
+	output := &DeleteDeploymentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDeploymentRequest{Request: req, Input: input}
 }
 
@@ -901,9 +958,12 @@ func (c *APIGateway) DeleteDocumentationPartRequest(input *DeleteDocumentationPa
 		input = &DeleteDocumentationPartInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentationPartOutput{})
+	output := &DeleteDocumentationPartOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDocumentationPartRequest{Request: req, Input: input}
 }
 
@@ -945,9 +1005,12 @@ func (c *APIGateway) DeleteDocumentationVersionRequest(input *DeleteDocumentatio
 		input = &DeleteDocumentationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentationVersionOutput{})
+	output := &DeleteDocumentationVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDocumentationVersionRequest{Request: req, Input: input}
 }
 
@@ -991,9 +1054,12 @@ func (c *APIGateway) DeleteDomainNameRequest(input *DeleteDomainNameInput) Delet
 		input = &DeleteDomainNameInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDomainNameOutput{})
+	output := &DeleteDomainNameOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDomainNameRequest{Request: req, Input: input}
 }
 
@@ -1038,9 +1104,12 @@ func (c *APIGateway) DeleteGatewayResponseRequest(input *DeleteGatewayResponseIn
 		input = &DeleteGatewayResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGatewayResponseOutput{})
+	output := &DeleteGatewayResponseOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGatewayResponseRequest{Request: req, Input: input}
 }
 
@@ -1084,9 +1153,12 @@ func (c *APIGateway) DeleteIntegrationRequest(input *DeleteIntegrationInput) Del
 		input = &DeleteIntegrationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntegrationOutput{})
+	output := &DeleteIntegrationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIntegrationRequest{Request: req, Input: input}
 }
 
@@ -1130,9 +1202,12 @@ func (c *APIGateway) DeleteIntegrationResponseRequest(input *DeleteIntegrationRe
 		input = &DeleteIntegrationResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntegrationResponseOutput{})
+	output := &DeleteIntegrationResponseOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIntegrationResponseRequest{Request: req, Input: input}
 }
 
@@ -1176,9 +1251,12 @@ func (c *APIGateway) DeleteMethodRequest(input *DeleteMethodInput) DeleteMethodR
 		input = &DeleteMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMethodOutput{})
+	output := &DeleteMethodOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMethodRequest{Request: req, Input: input}
 }
 
@@ -1222,9 +1300,12 @@ func (c *APIGateway) DeleteMethodResponseRequest(input *DeleteMethodResponseInpu
 		input = &DeleteMethodResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMethodResponseOutput{})
+	output := &DeleteMethodResponseOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMethodResponseRequest{Request: req, Input: input}
 }
 
@@ -1268,9 +1349,12 @@ func (c *APIGateway) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequ
 		input = &DeleteModelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteModelOutput{})
+	output := &DeleteModelOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteModelRequest{Request: req, Input: input}
 }
 
@@ -1314,9 +1398,12 @@ func (c *APIGateway) DeleteRequestValidatorRequest(input *DeleteRequestValidator
 		input = &DeleteRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRequestValidatorOutput{})
+	output := &DeleteRequestValidatorOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRequestValidatorRequest{Request: req, Input: input}
 }
 
@@ -1360,9 +1447,12 @@ func (c *APIGateway) DeleteResourceRequest(input *DeleteResourceInput) DeleteRes
 		input = &DeleteResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceOutput{})
+	output := &DeleteResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteResourceRequest{Request: req, Input: input}
 }
 
@@ -1406,9 +1496,12 @@ func (c *APIGateway) DeleteRestApiRequest(input *DeleteRestApiInput) DeleteRestA
 		input = &DeleteRestApiInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRestApiOutput{})
+	output := &DeleteRestApiOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRestApiRequest{Request: req, Input: input}
 }
 
@@ -1452,9 +1545,12 @@ func (c *APIGateway) DeleteStageRequest(input *DeleteStageInput) DeleteStageRequ
 		input = &DeleteStageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStageOutput{})
+	output := &DeleteStageOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStageRequest{Request: req, Input: input}
 }
 
@@ -1498,9 +1594,12 @@ func (c *APIGateway) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) DeleteU
 		input = &DeleteUsagePlanInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUsagePlanOutput{})
+	output := &DeleteUsagePlanOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUsagePlanRequest{Request: req, Input: input}
 }
 
@@ -1545,9 +1644,12 @@ func (c *APIGateway) DeleteUsagePlanKeyRequest(input *DeleteUsagePlanKeyInput) D
 		input = &DeleteUsagePlanKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUsagePlanKeyOutput{})
+	output := &DeleteUsagePlanKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUsagePlanKeyRequest{Request: req, Input: input}
 }
 
@@ -1591,9 +1693,12 @@ func (c *APIGateway) FlushStageAuthorizersCacheRequest(input *FlushStageAuthoriz
 		input = &FlushStageAuthorizersCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &FlushStageAuthorizersCacheOutput{})
+	output := &FlushStageAuthorizersCacheOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return FlushStageAuthorizersCacheRequest{Request: req, Input: input}
 }
 
@@ -1637,9 +1742,12 @@ func (c *APIGateway) FlushStageCacheRequest(input *FlushStageCacheInput) FlushSt
 		input = &FlushStageCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &FlushStageCacheOutput{})
+	output := &FlushStageCacheOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return FlushStageCacheRequest{Request: req, Input: input}
 }
 
@@ -1683,7 +1791,10 @@ func (c *APIGateway) GenerateClientCertificateRequest(input *GenerateClientCerti
 		input = &GenerateClientCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClientCertificateOutput{})
+	output := &UpdateClientCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GenerateClientCertificateRequest{Request: req, Input: input}
 }
 
@@ -1727,7 +1838,10 @@ func (c *APIGateway) GetAccountRequest(input *GetAccountInput) GetAccountRequest
 		input = &GetAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountOutput{})
+	output := &UpdateAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountRequest{Request: req, Input: input}
 }
 
@@ -1771,7 +1885,10 @@ func (c *APIGateway) GetApiKeyRequest(input *GetApiKeyInput) GetApiKeyRequest {
 		input = &GetApiKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApiKeyOutput{})
+	output := &UpdateApiKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApiKeyRequest{Request: req, Input: input}
 }
 
@@ -1821,7 +1938,10 @@ func (c *APIGateway) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest
 		input = &GetApiKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApiKeysOutput{})
+	output := &GetApiKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApiKeysRequest{Request: req, Input: input}
 }
 
@@ -1917,7 +2037,10 @@ func (c *APIGateway) GetAuthorizerRequest(input *GetAuthorizerInput) GetAuthoriz
 		input = &GetAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAuthorizerOutput{})
+	output := &UpdateAuthorizerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAuthorizerRequest{Request: req, Input: input}
 }
 
@@ -1963,7 +2086,10 @@ func (c *APIGateway) GetAuthorizersRequest(input *GetAuthorizersInput) GetAuthor
 		input = &GetAuthorizersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAuthorizersOutput{})
+	output := &GetAuthorizersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAuthorizersRequest{Request: req, Input: input}
 }
 
@@ -2007,7 +2133,10 @@ func (c *APIGateway) GetBasePathMappingRequest(input *GetBasePathMappingInput) G
 		input = &GetBasePathMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBasePathMappingOutput{})
+	output := &UpdateBasePathMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBasePathMappingRequest{Request: req, Input: input}
 }
 
@@ -2057,7 +2186,10 @@ func (c *APIGateway) GetBasePathMappingsRequest(input *GetBasePathMappingsInput)
 		input = &GetBasePathMappingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBasePathMappingsOutput{})
+	output := &GetBasePathMappingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBasePathMappingsRequest{Request: req, Input: input}
 }
 
@@ -2151,7 +2283,10 @@ func (c *APIGateway) GetClientCertificateRequest(input *GetClientCertificateInpu
 		input = &GetClientCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClientCertificateOutput{})
+	output := &UpdateClientCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetClientCertificateRequest{Request: req, Input: input}
 }
 
@@ -2201,7 +2336,10 @@ func (c *APIGateway) GetClientCertificatesRequest(input *GetClientCertificatesIn
 		input = &GetClientCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClientCertificatesOutput{})
+	output := &GetClientCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetClientCertificatesRequest{Request: req, Input: input}
 }
 
@@ -2295,7 +2433,10 @@ func (c *APIGateway) GetDeploymentRequest(input *GetDeploymentInput) GetDeployme
 		input = &GetDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeploymentOutput{})
+	output := &UpdateDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentRequest{Request: req, Input: input}
 }
 
@@ -2345,7 +2486,10 @@ func (c *APIGateway) GetDeploymentsRequest(input *GetDeploymentsInput) GetDeploy
 		input = &GetDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentsOutput{})
+	output := &GetDeploymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentsRequest{Request: req, Input: input}
 }
 
@@ -2437,7 +2581,10 @@ func (c *APIGateway) GetDocumentationPartRequest(input *GetDocumentationPartInpu
 		input = &GetDocumentationPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentationPartOutput{})
+	output := &UpdateDocumentationPartOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentationPartRequest{Request: req, Input: input}
 }
 
@@ -2479,7 +2626,10 @@ func (c *APIGateway) GetDocumentationPartsRequest(input *GetDocumentationPartsIn
 		input = &GetDocumentationPartsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentationPartsOutput{})
+	output := &GetDocumentationPartsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentationPartsRequest{Request: req, Input: input}
 }
 
@@ -2521,7 +2671,10 @@ func (c *APIGateway) GetDocumentationVersionRequest(input *GetDocumentationVersi
 		input = &GetDocumentationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentationVersionOutput{})
+	output := &UpdateDocumentationVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentationVersionRequest{Request: req, Input: input}
 }
 
@@ -2563,7 +2716,10 @@ func (c *APIGateway) GetDocumentationVersionsRequest(input *GetDocumentationVers
 		input = &GetDocumentationVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentationVersionsOutput{})
+	output := &GetDocumentationVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentationVersionsRequest{Request: req, Input: input}
 }
 
@@ -2608,7 +2764,10 @@ func (c *APIGateway) GetDomainNameRequest(input *GetDomainNameInput) GetDomainNa
 		input = &GetDomainNameInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainNameOutput{})
+	output := &UpdateDomainNameOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDomainNameRequest{Request: req, Input: input}
 }
 
@@ -2658,7 +2817,10 @@ func (c *APIGateway) GetDomainNamesRequest(input *GetDomainNamesInput) GetDomain
 		input = &GetDomainNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDomainNamesOutput{})
+	output := &GetDomainNamesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDomainNamesRequest{Request: req, Input: input}
 }
 
@@ -2752,7 +2914,10 @@ func (c *APIGateway) GetExportRequest(input *GetExportInput) GetExportRequest {
 		input = &GetExportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExportOutput{})
+	output := &GetExportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetExportRequest{Request: req, Input: input}
 }
 
@@ -2796,7 +2961,10 @@ func (c *APIGateway) GetGatewayResponseRequest(input *GetGatewayResponseInput) G
 		input = &GetGatewayResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayResponseOutput{})
+	output := &UpdateGatewayResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGatewayResponseRequest{Request: req, Input: input}
 }
 
@@ -2843,7 +3011,10 @@ func (c *APIGateway) GetGatewayResponsesRequest(input *GetGatewayResponsesInput)
 		input = &GetGatewayResponsesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGatewayResponsesOutput{})
+	output := &GetGatewayResponsesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGatewayResponsesRequest{Request: req, Input: input}
 }
 
@@ -2887,7 +3058,10 @@ func (c *APIGateway) GetIntegrationRequest(input *GetIntegrationInput) GetIntegr
 		input = &GetIntegrationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIntegrationOutput{})
+	output := &UpdateIntegrationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIntegrationRequest{Request: req, Input: input}
 }
 
@@ -2931,7 +3105,10 @@ func (c *APIGateway) GetIntegrationResponseRequest(input *GetIntegrationResponse
 		input = &GetIntegrationResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIntegrationResponseOutput{})
+	output := &UpdateIntegrationResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIntegrationResponseRequest{Request: req, Input: input}
 }
 
@@ -2975,7 +3152,10 @@ func (c *APIGateway) GetMethodRequest(input *GetMethodInput) GetMethodRequest {
 		input = &GetMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMethodOutput{})
+	output := &UpdateMethodOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMethodRequest{Request: req, Input: input}
 }
 
@@ -3019,7 +3199,10 @@ func (c *APIGateway) GetMethodResponseRequest(input *GetMethodResponseInput) Get
 		input = &GetMethodResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMethodResponseOutput{})
+	output := &UpdateMethodResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMethodResponseRequest{Request: req, Input: input}
 }
 
@@ -3063,7 +3246,10 @@ func (c *APIGateway) GetModelRequest(input *GetModelInput) GetModelRequest {
 		input = &GetModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateModelOutput{})
+	output := &UpdateModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetModelRequest{Request: req, Input: input}
 }
 
@@ -3108,7 +3294,10 @@ func (c *APIGateway) GetModelTemplateRequest(input *GetModelTemplateInput) GetMo
 		input = &GetModelTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetModelTemplateOutput{})
+	output := &GetModelTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetModelTemplateRequest{Request: req, Input: input}
 }
 
@@ -3158,7 +3347,10 @@ func (c *APIGateway) GetModelsRequest(input *GetModelsInput) GetModelsRequest {
 		input = &GetModelsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetModelsOutput{})
+	output := &GetModelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetModelsRequest{Request: req, Input: input}
 }
 
@@ -3252,7 +3444,10 @@ func (c *APIGateway) GetRequestValidatorRequest(input *GetRequestValidatorInput)
 		input = &GetRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRequestValidatorOutput{})
+	output := &UpdateRequestValidatorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRequestValidatorRequest{Request: req, Input: input}
 }
 
@@ -3296,7 +3491,10 @@ func (c *APIGateway) GetRequestValidatorsRequest(input *GetRequestValidatorsInpu
 		input = &GetRequestValidatorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRequestValidatorsOutput{})
+	output := &GetRequestValidatorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRequestValidatorsRequest{Request: req, Input: input}
 }
 
@@ -3340,7 +3538,10 @@ func (c *APIGateway) GetResourceRequest(input *GetResourceInput) GetResourceRequ
 		input = &GetResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceOutput{})
+	output := &UpdateResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetResourceRequest{Request: req, Input: input}
 }
 
@@ -3390,7 +3591,10 @@ func (c *APIGateway) GetResourcesRequest(input *GetResourcesInput) GetResourcesR
 		input = &GetResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourcesOutput{})
+	output := &GetResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetResourcesRequest{Request: req, Input: input}
 }
 
@@ -3484,7 +3688,10 @@ func (c *APIGateway) GetRestApiRequest(input *GetRestApiInput) GetRestApiRequest
 		input = &GetRestApiInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRestApiOutput{})
+	output := &UpdateRestApiOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRestApiRequest{Request: req, Input: input}
 }
 
@@ -3534,7 +3741,10 @@ func (c *APIGateway) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequ
 		input = &GetRestApisInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRestApisOutput{})
+	output := &GetRestApisOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRestApisRequest{Request: req, Input: input}
 }
 
@@ -3628,7 +3838,10 @@ func (c *APIGateway) GetSdkRequest(input *GetSdkInput) GetSdkRequest {
 		input = &GetSdkInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSdkOutput{})
+	output := &GetSdkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSdkRequest{Request: req, Input: input}
 }
 
@@ -3670,7 +3883,10 @@ func (c *APIGateway) GetSdkTypeRequest(input *GetSdkTypeInput) GetSdkTypeRequest
 		input = &GetSdkTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSdkTypeOutput{})
+	output := &GetSdkTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSdkTypeRequest{Request: req, Input: input}
 }
 
@@ -3712,7 +3928,10 @@ func (c *APIGateway) GetSdkTypesRequest(input *GetSdkTypesInput) GetSdkTypesRequ
 		input = &GetSdkTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSdkTypesOutput{})
+	output := &GetSdkTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSdkTypesRequest{Request: req, Input: input}
 }
 
@@ -3756,7 +3975,10 @@ func (c *APIGateway) GetStageRequest(input *GetStageInput) GetStageRequest {
 		input = &GetStageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStageOutput{})
+	output := &UpdateStageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStageRequest{Request: req, Input: input}
 }
 
@@ -3800,7 +4022,10 @@ func (c *APIGateway) GetStagesRequest(input *GetStagesInput) GetStagesRequest {
 		input = &GetStagesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStagesOutput{})
+	output := &GetStagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStagesRequest{Request: req, Input: input}
 }
 
@@ -3850,7 +4075,10 @@ func (c *APIGateway) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
 		input = &GetUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUsageOutput{})
+	output := &UpdateUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUsageRequest{Request: req, Input: input}
 }
 
@@ -3944,7 +4172,10 @@ func (c *APIGateway) GetUsagePlanRequest(input *GetUsagePlanInput) GetUsagePlanR
 		input = &GetUsagePlanInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUsagePlanOutput{})
+	output := &UpdateUsagePlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUsagePlanRequest{Request: req, Input: input}
 }
 
@@ -3988,7 +4219,10 @@ func (c *APIGateway) GetUsagePlanKeyRequest(input *GetUsagePlanKeyInput) GetUsag
 		input = &GetUsagePlanKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsagePlanKeyOutput{})
+	output := &GetUsagePlanKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUsagePlanKeyRequest{Request: req, Input: input}
 }
 
@@ -4039,7 +4273,10 @@ func (c *APIGateway) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUs
 		input = &GetUsagePlanKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsagePlanKeysOutput{})
+	output := &GetUsagePlanKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUsagePlanKeysRequest{Request: req, Input: input}
 }
 
@@ -4139,7 +4376,10 @@ func (c *APIGateway) GetUsagePlansRequest(input *GetUsagePlansInput) GetUsagePla
 		input = &GetUsagePlansInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsagePlansOutput{})
+	output := &GetUsagePlansOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUsagePlansRequest{Request: req, Input: input}
 }
 
@@ -4233,7 +4473,10 @@ func (c *APIGateway) ImportApiKeysRequest(input *ImportApiKeysInput) ImportApiKe
 		input = &ImportApiKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportApiKeysOutput{})
+	output := &ImportApiKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportApiKeysRequest{Request: req, Input: input}
 }
 
@@ -4275,7 +4518,10 @@ func (c *APIGateway) ImportDocumentationPartsRequest(input *ImportDocumentationP
 		input = &ImportDocumentationPartsInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportDocumentationPartsOutput{})
+	output := &ImportDocumentationPartsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportDocumentationPartsRequest{Request: req, Input: input}
 }
 
@@ -4320,7 +4566,10 @@ func (c *APIGateway) ImportRestApiRequest(input *ImportRestApiInput) ImportRestA
 		input = &ImportRestApiInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRestApiOutput{})
+	output := &UpdateRestApiOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportRestApiRequest{Request: req, Input: input}
 }
 
@@ -4365,7 +4614,10 @@ func (c *APIGateway) PutGatewayResponseRequest(input *PutGatewayResponseInput) P
 		input = &PutGatewayResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayResponseOutput{})
+	output := &UpdateGatewayResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutGatewayResponseRequest{Request: req, Input: input}
 }
 
@@ -4409,7 +4661,10 @@ func (c *APIGateway) PutIntegrationRequest(input *PutIntegrationInput) PutIntegr
 		input = &PutIntegrationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIntegrationOutput{})
+	output := &UpdateIntegrationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutIntegrationRequest{Request: req, Input: input}
 }
 
@@ -4453,7 +4708,10 @@ func (c *APIGateway) PutIntegrationResponseRequest(input *PutIntegrationResponse
 		input = &PutIntegrationResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIntegrationResponseOutput{})
+	output := &UpdateIntegrationResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutIntegrationResponseRequest{Request: req, Input: input}
 }
 
@@ -4497,7 +4755,10 @@ func (c *APIGateway) PutMethodRequest(input *PutMethodInput) PutMethodRequest {
 		input = &PutMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMethodOutput{})
+	output := &UpdateMethodOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutMethodRequest{Request: req, Input: input}
 }
 
@@ -4541,7 +4802,10 @@ func (c *APIGateway) PutMethodResponseRequest(input *PutMethodResponseInput) Put
 		input = &PutMethodResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMethodResponseOutput{})
+	output := &UpdateMethodResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutMethodResponseRequest{Request: req, Input: input}
 }
 
@@ -4588,7 +4852,10 @@ func (c *APIGateway) PutRestApiRequest(input *PutRestApiInput) PutRestApiRequest
 		input = &PutRestApiInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRestApiOutput{})
+	output := &UpdateRestApiOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRestApiRequest{Request: req, Input: input}
 }
 
@@ -4635,7 +4902,10 @@ func (c *APIGateway) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInpu
 		input = &TestInvokeAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &TestInvokeAuthorizerOutput{})
+	output := &TestInvokeAuthorizerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestInvokeAuthorizerRequest{Request: req, Input: input}
 }
 
@@ -4680,7 +4950,10 @@ func (c *APIGateway) TestInvokeMethodRequest(input *TestInvokeMethodInput) TestI
 		input = &TestInvokeMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &TestInvokeMethodOutput{})
+	output := &TestInvokeMethodOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestInvokeMethodRequest{Request: req, Input: input}
 }
 
@@ -4724,7 +4997,10 @@ func (c *APIGateway) UpdateAccountRequest(input *UpdateAccountInput) UpdateAccou
 		input = &UpdateAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountOutput{})
+	output := &UpdateAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAccountRequest{Request: req, Input: input}
 }
 
@@ -4768,7 +5044,10 @@ func (c *APIGateway) UpdateApiKeyRequest(input *UpdateApiKeyInput) UpdateApiKeyR
 		input = &UpdateApiKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApiKeyOutput{})
+	output := &UpdateApiKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApiKeyRequest{Request: req, Input: input}
 }
 
@@ -4814,7 +5093,10 @@ func (c *APIGateway) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) Updat
 		input = &UpdateAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAuthorizerOutput{})
+	output := &UpdateAuthorizerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAuthorizerRequest{Request: req, Input: input}
 }
 
@@ -4858,7 +5140,10 @@ func (c *APIGateway) UpdateBasePathMappingRequest(input *UpdateBasePathMappingIn
 		input = &UpdateBasePathMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBasePathMappingOutput{})
+	output := &UpdateBasePathMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateBasePathMappingRequest{Request: req, Input: input}
 }
 
@@ -4902,7 +5187,10 @@ func (c *APIGateway) UpdateClientCertificateRequest(input *UpdateClientCertifica
 		input = &UpdateClientCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClientCertificateOutput{})
+	output := &UpdateClientCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateClientCertificateRequest{Request: req, Input: input}
 }
 
@@ -4946,7 +5234,10 @@ func (c *APIGateway) UpdateDeploymentRequest(input *UpdateDeploymentInput) Updat
 		input = &UpdateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeploymentOutput{})
+	output := &UpdateDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDeploymentRequest{Request: req, Input: input}
 }
 
@@ -4988,7 +5279,10 @@ func (c *APIGateway) UpdateDocumentationPartRequest(input *UpdateDocumentationPa
 		input = &UpdateDocumentationPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentationPartOutput{})
+	output := &UpdateDocumentationPartOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDocumentationPartRequest{Request: req, Input: input}
 }
 
@@ -5030,7 +5324,10 @@ func (c *APIGateway) UpdateDocumentationVersionRequest(input *UpdateDocumentatio
 		input = &UpdateDocumentationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentationVersionOutput{})
+	output := &UpdateDocumentationVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDocumentationVersionRequest{Request: req, Input: input}
 }
 
@@ -5074,7 +5371,10 @@ func (c *APIGateway) UpdateDomainNameRequest(input *UpdateDomainNameInput) Updat
 		input = &UpdateDomainNameInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainNameOutput{})
+	output := &UpdateDomainNameOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDomainNameRequest{Request: req, Input: input}
 }
 
@@ -5118,7 +5418,10 @@ func (c *APIGateway) UpdateGatewayResponseRequest(input *UpdateGatewayResponseIn
 		input = &UpdateGatewayResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayResponseOutput{})
+	output := &UpdateGatewayResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGatewayResponseRequest{Request: req, Input: input}
 }
 
@@ -5162,7 +5465,10 @@ func (c *APIGateway) UpdateIntegrationRequest(input *UpdateIntegrationInput) Upd
 		input = &UpdateIntegrationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIntegrationOutput{})
+	output := &UpdateIntegrationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateIntegrationRequest{Request: req, Input: input}
 }
 
@@ -5206,7 +5512,10 @@ func (c *APIGateway) UpdateIntegrationResponseRequest(input *UpdateIntegrationRe
 		input = &UpdateIntegrationResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIntegrationResponseOutput{})
+	output := &UpdateIntegrationResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateIntegrationResponseRequest{Request: req, Input: input}
 }
 
@@ -5250,7 +5559,10 @@ func (c *APIGateway) UpdateMethodRequest(input *UpdateMethodInput) UpdateMethodR
 		input = &UpdateMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMethodOutput{})
+	output := &UpdateMethodOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMethodRequest{Request: req, Input: input}
 }
 
@@ -5294,7 +5606,10 @@ func (c *APIGateway) UpdateMethodResponseRequest(input *UpdateMethodResponseInpu
 		input = &UpdateMethodResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMethodResponseOutput{})
+	output := &UpdateMethodResponseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMethodResponseRequest{Request: req, Input: input}
 }
 
@@ -5338,7 +5653,10 @@ func (c *APIGateway) UpdateModelRequest(input *UpdateModelInput) UpdateModelRequ
 		input = &UpdateModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateModelOutput{})
+	output := &UpdateModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateModelRequest{Request: req, Input: input}
 }
 
@@ -5382,7 +5700,10 @@ func (c *APIGateway) UpdateRequestValidatorRequest(input *UpdateRequestValidator
 		input = &UpdateRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRequestValidatorOutput{})
+	output := &UpdateRequestValidatorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRequestValidatorRequest{Request: req, Input: input}
 }
 
@@ -5426,7 +5747,10 @@ func (c *APIGateway) UpdateResourceRequest(input *UpdateResourceInput) UpdateRes
 		input = &UpdateResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceOutput{})
+	output := &UpdateResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateResourceRequest{Request: req, Input: input}
 }
 
@@ -5470,7 +5794,10 @@ func (c *APIGateway) UpdateRestApiRequest(input *UpdateRestApiInput) UpdateRestA
 		input = &UpdateRestApiInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRestApiOutput{})
+	output := &UpdateRestApiOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRestApiRequest{Request: req, Input: input}
 }
 
@@ -5514,7 +5841,10 @@ func (c *APIGateway) UpdateStageRequest(input *UpdateStageInput) UpdateStageRequ
 		input = &UpdateStageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStageOutput{})
+	output := &UpdateStageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateStageRequest{Request: req, Input: input}
 }
 
@@ -5559,7 +5889,10 @@ func (c *APIGateway) UpdateUsageRequest(input *UpdateUsageInput) UpdateUsageRequ
 		input = &UpdateUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUsageOutput{})
+	output := &UpdateUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUsageRequest{Request: req, Input: input}
 }
 
@@ -5603,7 +5936,10 @@ func (c *APIGateway) UpdateUsagePlanRequest(input *UpdateUsagePlanInput) UpdateU
 		input = &UpdateUsagePlanInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUsagePlanOutput{})
+	output := &UpdateUsagePlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUsagePlanRequest{Request: req, Input: input}
 }
 
@@ -6926,6 +7262,8 @@ func (s *DeleteApiKeyInput) SetApiKey(v string) *DeleteApiKeyInput {
 
 type DeleteApiKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6936,6 +7274,11 @@ func (s DeleteApiKeyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApiKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApiKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete an existing Authorizer resource.
@@ -6995,6 +7338,8 @@ func (s *DeleteAuthorizerInput) SetRestApiId(v string) *DeleteAuthorizerInput {
 
 type DeleteAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7005,6 +7350,11 @@ func (s DeleteAuthorizerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAuthorizerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAuthorizerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete the BasePathMapping resource.
@@ -7064,6 +7414,8 @@ func (s *DeleteBasePathMappingInput) SetDomainName(v string) *DeleteBasePathMapp
 
 type DeleteBasePathMappingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7074,6 +7426,11 @@ func (s DeleteBasePathMappingOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBasePathMappingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBasePathMappingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete the ClientCertificate resource.
@@ -7118,6 +7475,8 @@ func (s *DeleteClientCertificateInput) SetClientCertificateId(v string) *DeleteC
 
 type DeleteClientCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7128,6 +7487,11 @@ func (s DeleteClientCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteClientCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteClientCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Requests Amazon API Gateway to delete a Deployment resource.
@@ -7187,6 +7551,8 @@ func (s *DeleteDeploymentInput) SetRestApiId(v string) *DeleteDeploymentInput {
 
 type DeleteDeploymentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7197,6 +7563,11 @@ func (s DeleteDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Deletes an existing documentation part of an API.
@@ -7256,6 +7627,8 @@ func (s *DeleteDocumentationPartInput) SetRestApiId(v string) *DeleteDocumentati
 
 type DeleteDocumentationPartOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7266,6 +7639,11 @@ func (s DeleteDocumentationPartOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDocumentationPartOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDocumentationPartOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Deletes an existing documentation version of an API.
@@ -7325,6 +7703,8 @@ func (s *DeleteDocumentationVersionInput) SetRestApiId(v string) *DeleteDocument
 
 type DeleteDocumentationVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7335,6 +7715,11 @@ func (s DeleteDocumentationVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDocumentationVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDocumentationVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete the DomainName resource.
@@ -7379,6 +7764,8 @@ func (s *DeleteDomainNameInput) SetDomainName(v string) *DeleteDomainNameInput {
 
 type DeleteDomainNameOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7389,6 +7776,11 @@ func (s DeleteDomainNameOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDomainNameOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDomainNameOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Clears any customization of a GatewayResponse of a specified response type
@@ -7468,6 +7860,8 @@ func (s *DeleteGatewayResponseInput) SetRestApiId(v string) *DeleteGatewayRespon
 
 type DeleteGatewayResponseOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7478,6 +7872,11 @@ func (s DeleteGatewayResponseOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGatewayResponseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGatewayResponseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a delete integration request.
@@ -7552,6 +7951,8 @@ func (s *DeleteIntegrationInput) SetRestApiId(v string) *DeleteIntegrationInput 
 
 type DeleteIntegrationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7562,6 +7963,11 @@ func (s DeleteIntegrationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIntegrationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIntegrationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a delete integration response request.
@@ -7651,6 +8057,8 @@ func (s *DeleteIntegrationResponseInput) SetStatusCode(v string) *DeleteIntegrat
 
 type DeleteIntegrationResponseOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7661,6 +8069,11 @@ func (s DeleteIntegrationResponseOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIntegrationResponseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIntegrationResponseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete an existing Method resource.
@@ -7735,6 +8148,8 @@ func (s *DeleteMethodInput) SetRestApiId(v string) *DeleteMethodInput {
 
 type DeleteMethodOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7745,6 +8160,11 @@ func (s DeleteMethodOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMethodOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMethodOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete an existing MethodResponse resource.
@@ -7834,6 +8254,8 @@ func (s *DeleteMethodResponseInput) SetStatusCode(v string) *DeleteMethodRespons
 
 type DeleteMethodResponseOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7844,6 +8266,11 @@ func (s DeleteMethodResponseOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMethodResponseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMethodResponseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete an existing model in an existing RestApi resource.
@@ -7903,6 +8330,8 @@ func (s *DeleteModelInput) SetRestApiId(v string) *DeleteModelInput {
 
 type DeleteModelOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7913,6 +8342,11 @@ func (s DeleteModelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteModelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Deletes a specified RequestValidator of a given RestApi.
@@ -7972,6 +8406,8 @@ func (s *DeleteRequestValidatorInput) SetRestApiId(v string) *DeleteRequestValid
 
 type DeleteRequestValidatorOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7982,6 +8418,11 @@ func (s DeleteRequestValidatorOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRequestValidatorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRequestValidatorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete a Resource.
@@ -8041,6 +8482,8 @@ func (s *DeleteResourceInput) SetRestApiId(v string) *DeleteResourceInput {
 
 type DeleteResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8051,6 +8494,11 @@ func (s DeleteResourceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete the specified API from your collection.
@@ -8095,6 +8543,8 @@ func (s *DeleteRestApiInput) SetRestApiId(v string) *DeleteRestApiInput {
 
 type DeleteRestApiOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8105,6 +8555,11 @@ func (s DeleteRestApiOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRestApiOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRestApiOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Requests Amazon API Gateway to delete a Stage resource.
@@ -8164,6 +8619,8 @@ func (s *DeleteStageInput) SetStageName(v string) *DeleteStageInput {
 
 type DeleteStageOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8174,6 +8631,11 @@ func (s DeleteStageOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The DELETE request to delete a usage plan of a given plan Id.
@@ -8275,6 +8737,8 @@ func (s *DeleteUsagePlanKeyInput) SetUsagePlanId(v string) *DeleteUsagePlanKeyIn
 
 type DeleteUsagePlanKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8287,8 +8751,15 @@ func (s DeleteUsagePlanKeyOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUsagePlanKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 type DeleteUsagePlanOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8299,6 +8770,11 @@ func (s DeleteUsagePlanOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUsagePlanOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUsagePlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies the target API entity to which the documentation applies.
@@ -8458,6 +8934,8 @@ func (s *FlushStageAuthorizersCacheInput) SetStageName(v string) *FlushStageAuth
 
 type FlushStageAuthorizersCacheOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8468,6 +8946,11 @@ func (s FlushStageAuthorizersCacheOutput) String() string {
 // GoString returns the string representation
 func (s FlushStageAuthorizersCacheOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s FlushStageAuthorizersCacheOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Requests Amazon API Gateway to flush a stage's cache.
@@ -8527,6 +9010,8 @@ func (s *FlushStageCacheInput) SetStageName(v string) *FlushStageCacheInput {
 
 type FlushStageCacheOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8537,6 +9022,11 @@ func (s FlushStageCacheOutput) String() string {
 // GoString returns the string representation
 func (s FlushStageCacheOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s FlushStageCacheOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to generate a ClientCertificate resource.
@@ -8697,6 +9187,8 @@ func (s *GetApiKeysInput) SetPosition(v string) *GetApiKeysInput {
 type GetApiKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateApiKeyOutput `locationName:"item" type:"list"`
 
@@ -8715,6 +9207,11 @@ func (s GetApiKeysOutput) String() string {
 // GoString returns the string representation
 func (s GetApiKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetApiKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -8854,6 +9351,8 @@ func (s *GetAuthorizersInput) SetRestApiId(v string) *GetAuthorizersInput {
 type GetAuthorizersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateAuthorizerOutput `locationName:"item" type:"list"`
 
@@ -8868,6 +9367,11 @@ func (s GetAuthorizersOutput) String() string {
 // GoString returns the string representation
 func (s GetAuthorizersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAuthorizersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9005,6 +9509,8 @@ func (s *GetBasePathMappingsInput) SetPosition(v string) *GetBasePathMappingsInp
 type GetBasePathMappingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateBasePathMappingOutput `locationName:"item" type:"list"`
 
@@ -9019,6 +9525,11 @@ func (s GetBasePathMappingsOutput) String() string {
 // GoString returns the string representation
 func (s GetBasePathMappingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBasePathMappingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9113,6 +9624,8 @@ func (s *GetClientCertificatesInput) SetPosition(v string) *GetClientCertificate
 type GetClientCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateClientCertificateOutput `locationName:"item" type:"list"`
 
@@ -9127,6 +9640,11 @@ func (s GetClientCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s GetClientCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetClientCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9285,6 +9803,8 @@ func (s *GetDeploymentsInput) SetRestApiId(v string) *GetDeploymentsInput {
 type GetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateDeploymentOutput `locationName:"item" type:"list"`
 
@@ -9299,6 +9819,11 @@ func (s GetDeploymentsOutput) String() string {
 // GoString returns the string representation
 func (s GetDeploymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9460,6 +9985,8 @@ func (s *GetDocumentationPartsInput) SetType(v DocumentationPartType) *GetDocume
 type GetDocumentationPartsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateDocumentationPartOutput `locationName:"item" type:"list"`
 
@@ -9474,6 +10001,11 @@ func (s GetDocumentationPartsOutput) String() string {
 // GoString returns the string representation
 func (s GetDocumentationPartsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDocumentationPartsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9611,6 +10143,8 @@ func (s *GetDocumentationVersionsInput) SetRestApiId(v string) *GetDocumentation
 type GetDocumentationVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateDocumentationVersionOutput `locationName:"item" type:"list"`
 
@@ -9625,6 +10159,11 @@ func (s GetDocumentationVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetDocumentationVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDocumentationVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9719,6 +10258,8 @@ func (s *GetDomainNamesInput) SetPosition(v string) *GetDomainNamesInput {
 type GetDomainNamesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateDomainNameOutput `locationName:"item" type:"list"`
 
@@ -9733,6 +10274,11 @@ func (s GetDomainNamesOutput) String() string {
 // GoString returns the string representation
 func (s GetDomainNamesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDomainNamesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -9847,6 +10393,8 @@ func (s *GetExportInput) SetStageName(v string) *GetExportInput {
 type GetExportOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
+	responseMetadata aws.Response
+
 	// The binary blob response to GetExport, which contains the export.
 	Body []byte `locationName:"body" type:"blob"`
 
@@ -9866,6 +10414,11 @@ func (s GetExportOutput) String() string {
 // GoString returns the string representation
 func (s GetExportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetExportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBody sets the Body field's value.
@@ -10186,6 +10739,8 @@ func (s *GetGatewayResponsesInput) SetRestApiId(v string) *GetGatewayResponsesIn
 type GetGatewayResponsesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns the entire collection, because of no pagination support.
 	Items []UpdateGatewayResponseOutput `locationName:"item" type:"list"`
 
@@ -10200,6 +10755,11 @@ func (s GetGatewayResponsesOutput) String() string {
 // GoString returns the string representation
 func (s GetGatewayResponsesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGatewayResponsesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -10651,6 +11211,8 @@ func (s *GetModelTemplateInput) SetRestApiId(v string) *GetModelTemplateInput {
 type GetModelTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Apache Velocity Template Language (VTL) (http://velocity.apache.org/engine/devel/vtl-reference-guide.html)
 	// template content used for the template resource.
 	Value *string `locationName:"value" type:"string"`
@@ -10664,6 +11226,11 @@ func (s GetModelTemplateOutput) String() string {
 // GoString returns the string representation
 func (s GetModelTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetModelTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetValue sets the Value field's value.
@@ -10737,6 +11304,8 @@ func (s *GetModelsInput) SetRestApiId(v string) *GetModelsInput {
 type GetModelsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateModelOutput `locationName:"item" type:"list"`
 
@@ -10751,6 +11320,11 @@ func (s GetModelsOutput) String() string {
 // GoString returns the string representation
 func (s GetModelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetModelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -10888,6 +11462,8 @@ func (s *GetRequestValidatorsInput) SetRestApiId(v string) *GetRequestValidators
 type GetRequestValidatorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateRequestValidatorOutput `locationName:"item" type:"list"`
 
@@ -10902,6 +11478,11 @@ func (s GetRequestValidatorsOutput) String() string {
 // GoString returns the string representation
 func (s GetRequestValidatorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRequestValidatorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -11064,6 +11645,8 @@ func (s *GetResourcesInput) SetRestApiId(v string) *GetResourcesInput {
 type GetResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateResourceOutput `locationName:"item" type:"list"`
 
@@ -11078,6 +11661,11 @@ func (s GetResourcesOutput) String() string {
 // GoString returns the string representation
 func (s GetResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -11173,6 +11761,8 @@ func (s *GetRestApisInput) SetPosition(v string) *GetRestApisInput {
 type GetRestApisOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateRestApiOutput `locationName:"item" type:"list"`
 
@@ -11187,6 +11777,11 @@ func (s GetRestApisOutput) String() string {
 // GoString returns the string representation
 func (s GetRestApisOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRestApisOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -11289,6 +11884,8 @@ func (s *GetSdkInput) SetStageName(v string) *GetSdkInput {
 type GetSdkOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
+	responseMetadata aws.Response
+
 	// The binary blob response to GetSdk, which contains the generated SDK.
 	Body []byte `locationName:"body" type:"blob"`
 
@@ -11307,6 +11904,11 @@ func (s GetSdkOutput) String() string {
 // GoString returns the string representation
 func (s GetSdkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSdkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBody sets the Body field's value.
@@ -11371,6 +11973,8 @@ func (s *GetSdkTypeInput) SetId(v string) *GetSdkTypeInput {
 type GetSdkTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of configuration properties of an SdkType.
 	ConfigurationProperties []SdkConfigurationProperty `locationName:"configurationProperties" type:"list"`
 
@@ -11392,6 +11996,11 @@ func (s GetSdkTypeOutput) String() string {
 // GoString returns the string representation
 func (s GetSdkTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSdkTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationProperties sets the ConfigurationProperties field's value.
@@ -11455,6 +12064,8 @@ func (s *GetSdkTypesInput) SetPosition(v string) *GetSdkTypesInput {
 type GetSdkTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []GetSdkTypeOutput `locationName:"item" type:"list"`
 
@@ -11469,6 +12080,11 @@ func (s GetSdkTypesOutput) String() string {
 // GoString returns the string representation
 func (s GetSdkTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSdkTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -11593,6 +12209,8 @@ func (s *GetStagesInput) SetRestApiId(v string) *GetStagesInput {
 type GetStagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Item []UpdateStageOutput `locationName:"item" type:"list"`
 }
@@ -11605,6 +12223,11 @@ func (s GetStagesOutput) String() string {
 // GoString returns the string representation
 func (s GetStagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItem sets the Item field's value.
@@ -11817,6 +12440,8 @@ func (s *GetUsagePlanKeyInput) SetUsagePlanId(v string) *GetUsagePlanKeyInput {
 type GetUsagePlanKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Id of a usage plan key.
 	Id *string `locationName:"id" type:"string"`
 
@@ -11838,6 +12463,11 @@ func (s GetUsagePlanKeyOutput) String() string {
 // GoString returns the string representation
 func (s GetUsagePlanKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUsagePlanKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetId sets the Id field's value.
@@ -11940,6 +12570,8 @@ func (s *GetUsagePlanKeysInput) SetUsagePlanId(v string) *GetUsagePlanKeysInput 
 type GetUsagePlanKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []GetUsagePlanKeyOutput `locationName:"item" type:"list"`
 
@@ -11954,6 +12586,11 @@ func (s GetUsagePlanKeysOutput) String() string {
 // GoString returns the string representation
 func (s GetUsagePlanKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUsagePlanKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -12016,6 +12653,8 @@ func (s *GetUsagePlansInput) SetPosition(v string) *GetUsagePlansInput {
 type GetUsagePlansOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current page of elements from this collection.
 	Items []UpdateUsagePlanOutput `locationName:"item" type:"list"`
 
@@ -12030,6 +12669,11 @@ func (s GetUsagePlansOutput) String() string {
 // GoString returns the string representation
 func (s GetUsagePlansOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUsagePlansOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetItems sets the Items field's value.
@@ -12115,6 +12759,8 @@ func (s *ImportApiKeysInput) SetFormat(v ApiKeysFormat) *ImportApiKeysInput {
 type ImportApiKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of all the ApiKey identifiers.
 	Ids []string `locationName:"ids" type:"list"`
 
@@ -12130,6 +12776,11 @@ func (s ImportApiKeysOutput) String() string {
 // GoString returns the string representation
 func (s ImportApiKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportApiKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIds sets the Ids field's value.
@@ -12232,6 +12883,8 @@ func (s *ImportDocumentationPartsInput) SetRestApiId(v string) *ImportDocumentat
 type ImportDocumentationPartsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the returned documentation part identifiers.
 	Ids []string `locationName:"ids" type:"list"`
 
@@ -12247,6 +12900,11 @@ func (s ImportDocumentationPartsOutput) String() string {
 // GoString returns the string representation
 func (s ImportDocumentationPartsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportDocumentationPartsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIds sets the Ids field's value.
@@ -13610,6 +14268,8 @@ func (s *TestInvokeAuthorizerInput) SetStageVariables(v map[string]string) *Test
 type TestInvokeAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Authorization map[string][]string `locationName:"authorization" type:"map"`
 
 	// The open identity claims (http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims),
@@ -13642,6 +14302,11 @@ func (s TestInvokeAuthorizerOutput) String() string {
 // GoString returns the string representation
 func (s TestInvokeAuthorizerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestInvokeAuthorizerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthorization sets the Authorization field's value.
@@ -13811,6 +14476,8 @@ func (s *TestInvokeMethodInput) SetStageVariables(v map[string]string) *TestInvo
 type TestInvokeMethodOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The body of the HTTP response.
 	Body *string `locationName:"body" type:"string"`
 
@@ -13835,6 +14502,11 @@ func (s TestInvokeMethodOutput) String() string {
 // GoString returns the string representation
 func (s TestInvokeMethodOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestInvokeMethodOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBody sets the Body field's value.
@@ -13967,6 +14639,8 @@ func (s *UpdateAccountInput) SetPatchOperations(v []PatchOperation) *UpdateAccou
 type UpdateAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The version of the API keys used for the account.
 	ApiKeyVersion *string `locationName:"apiKeyVersion" type:"string"`
 
@@ -13989,6 +14663,11 @@ func (s UpdateAccountOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApiKeyVersion sets the ApiKeyVersion field's value.
@@ -14074,6 +14753,8 @@ func (s *UpdateApiKeyInput) SetPatchOperations(v []PatchOperation) *UpdateApiKey
 type UpdateApiKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The timestamp when the API Key was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
 
@@ -14111,6 +14792,11 @@ func (s UpdateApiKeyOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApiKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApiKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreatedDate sets the CreatedDate field's value.
@@ -14239,6 +14925,8 @@ func (s *UpdateAuthorizerInput) SetRestApiId(v string) *UpdateAuthorizerInput {
 type UpdateAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Optional customer-defined field, used in Swagger imports and exports without
 	// functional impact.
 	AuthType *string `locationName:"authType" type:"string"`
@@ -14320,6 +15008,11 @@ func (s UpdateAuthorizerOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAuthorizerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAuthorizerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthType sets the AuthType field's value.
@@ -14456,6 +15149,8 @@ func (s *UpdateBasePathMappingInput) SetPatchOperations(v []PatchOperation) *Upd
 type UpdateBasePathMappingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The base path name that callers of the API must provide as part of the URL
 	// after the domain name.
 	BasePath *string `locationName:"basePath" type:"string"`
@@ -14475,6 +15170,11 @@ func (s UpdateBasePathMappingOutput) String() string {
 // GoString returns the string representation
 func (s UpdateBasePathMappingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBasePathMappingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBasePath sets the BasePath field's value.
@@ -14555,6 +15255,8 @@ func (s *UpdateClientCertificateInput) SetPatchOperations(v []PatchOperation) *U
 type UpdateClientCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the client certificate.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
@@ -14580,6 +15282,11 @@ func (s UpdateClientCertificateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateClientCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateClientCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientCertificateId sets the ClientCertificateId field's value.
@@ -14691,6 +15398,8 @@ func (s *UpdateDeploymentInput) SetRestApiId(v string) *UpdateDeploymentInput {
 type UpdateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A summary of the RestApi at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]MethodSnapshot `locationName:"apiSummary" type:"map"`
@@ -14713,6 +15422,11 @@ func (s UpdateDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApiSummary sets the ApiSummary field's value.
@@ -14823,6 +15537,8 @@ func (s *UpdateDocumentationPartInput) SetRestApiId(v string) *UpdateDocumentati
 type UpdateDocumentationPartOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The DocumentationPart identifier, generated by Amazon API Gateway when the
 	// DocumentationPart is created.
 	Id *string `locationName:"id" type:"string"`
@@ -14851,6 +15567,11 @@ func (s UpdateDocumentationPartOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDocumentationPartOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDocumentationPartOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetId sets the Id field's value.
@@ -14947,6 +15668,8 @@ func (s *UpdateDocumentationVersionInput) SetRestApiId(v string) *UpdateDocument
 type UpdateDocumentationVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
 
@@ -14965,6 +15688,11 @@ func (s UpdateDocumentationVersionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDocumentationVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDocumentationVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreatedDate sets the CreatedDate field's value.
@@ -15042,6 +15770,8 @@ func (s *UpdateDomainNameInput) SetPatchOperations(v []PatchOperation) *UpdateDo
 type UpdateDomainNameOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The reference to an AWS-managed certificate. AWS Certificate Manager is the
 	// only supported source.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
@@ -15068,6 +15798,11 @@ func (s UpdateDomainNameOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDomainNameOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDomainNameOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -15228,6 +15963,8 @@ func (s *UpdateGatewayResponseInput) SetRestApiId(v string) *UpdateGatewayRespon
 type UpdateGatewayResponseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A Boolean flag to indicate whether this GatewayResponse is the default gateway
 	// response (true) or not (false). A default gateway response is one generated
 	// by Amazon API Gateway without any customization by an API developer.
@@ -15276,6 +16013,11 @@ func (s UpdateGatewayResponseOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGatewayResponseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGatewayResponseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefaultResponse sets the DefaultResponse field's value.
@@ -15396,6 +16138,8 @@ func (s *UpdateIntegrationInput) SetRestApiId(v string) *UpdateIntegrationInput 
 type UpdateIntegrationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the integration's cache key parameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
@@ -15515,6 +16259,11 @@ func (s UpdateIntegrationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateIntegrationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateIntegrationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheKeyParameters sets the CacheKeyParameters field's value.
@@ -15686,6 +16435,8 @@ func (s *UpdateIntegrationResponseInput) SetStatusCode(v string) *UpdateIntegrat
 type UpdateIntegrationResponseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
 	//
@@ -15739,6 +16490,11 @@ func (s UpdateIntegrationResponseOutput) String() string {
 // GoString returns the string representation
 func (s UpdateIntegrationResponseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateIntegrationResponseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContentHandling sets the ContentHandling field's value.
@@ -15925,6 +16681,8 @@ func (s *UpdateMethodInput) SetRestApiId(v string) *UpdateMethodInput {
 type UpdateMethodOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A boolean flag specifying whether a valid ApiKey is required to invoke this
 	// method.
 	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
@@ -16045,6 +16803,11 @@ func (s UpdateMethodOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMethodOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMethodOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApiKeyRequired sets the ApiKeyRequired field's value.
@@ -16230,6 +16993,8 @@ func (s *UpdateMethodResponseInput) SetStatusCode(v string) *UpdateMethodRespons
 type UpdateMethodResponseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the Model resources used for the response's content-type. Response
 	// models are represented as a key/value map, with a content-type as the key
 	// and a Model name as the value.
@@ -16261,6 +17026,11 @@ func (s UpdateMethodResponseOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMethodResponseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMethodResponseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResponseModels sets the ResponseModels field's value.
@@ -16360,6 +17130,8 @@ func (s *UpdateModelInput) SetRestApiId(v string) *UpdateModelInput {
 type UpdateModelOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The content-type for the model.
 	ContentType *string `locationName:"contentType" type:"string"`
 
@@ -16389,6 +17161,11 @@ func (s UpdateModelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateModelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContentType sets the ContentType field's value.
@@ -16498,6 +17275,8 @@ func (s *UpdateRequestValidatorInput) SetRestApiId(v string) *UpdateRequestValid
 type UpdateRequestValidatorOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of this RequestValidator.
 	Id *string `locationName:"id" type:"string"`
 
@@ -16521,6 +17300,11 @@ func (s UpdateRequestValidatorOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRequestValidatorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRequestValidatorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetId sets the Id field's value.
@@ -16618,6 +17402,8 @@ func (s *UpdateResourceInput) SetRestApiId(v string) *UpdateResourceInput {
 type UpdateResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resource's identifier.
 	Id *string `locationName:"id" type:"string"`
 
@@ -16698,6 +17484,11 @@ func (s UpdateResourceOutput) String() string {
 // GoString returns the string representation
 func (s UpdateResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetId sets the Id field's value.
@@ -16786,6 +17577,8 @@ func (s *UpdateRestApiInput) SetRestApiId(v string) *UpdateRestApiInput {
 type UpdateRestApiOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string `locationName:"binaryMediaTypes" type:"list"`
@@ -16819,6 +17612,11 @@ func (s UpdateRestApiOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRestApiOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRestApiOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBinaryMediaTypes sets the BinaryMediaTypes field's value.
@@ -16935,6 +17733,8 @@ func (s *UpdateStageInput) SetStageName(v string) *UpdateStageInput {
 type UpdateStageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies whether a cache cluster is enabled for the stage.
 	CacheClusterEnabled *bool `locationName:"cacheClusterEnabled" type:"boolean"`
 
@@ -16986,6 +17786,11 @@ func (s UpdateStageOutput) String() string {
 // GoString returns the string representation
 func (s UpdateStageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateStageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheClusterEnabled sets the CacheClusterEnabled field's value.
@@ -17133,6 +17938,8 @@ func (s *UpdateUsageInput) SetUsagePlanId(v string) *UpdateUsageInput {
 type UpdateUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ending date of the usage data.
 	EndDate *string `locationName:"endDate" type:"string"`
 
@@ -17160,6 +17967,11 @@ func (s UpdateUsageOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndDate sets the EndDate field's value.
@@ -17253,6 +18065,8 @@ func (s *UpdateUsagePlanInput) SetUsagePlanId(v string) *UpdateUsagePlanInput {
 type UpdateUsagePlanOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The associated API stages of a usage plan.
 	ApiStages []ApiStage `locationName:"apiStages" type:"list"`
 
@@ -17284,6 +18098,11 @@ func (s UpdateUsagePlanOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUsagePlanOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUsagePlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApiStages sets the ApiStages field's value.

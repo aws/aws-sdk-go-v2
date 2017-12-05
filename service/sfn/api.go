@@ -51,7 +51,10 @@ func (c *SFN) CreateActivityRequest(input *CreateActivityInput) CreateActivityRe
 		input = &CreateActivityInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateActivityOutput{})
+	output := &CreateActivityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateActivityRequest{Request: req, Input: input}
 }
 
@@ -97,7 +100,10 @@ func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) CreateSt
 		input = &CreateStateMachineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStateMachineOutput{})
+	output := &CreateStateMachineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStateMachineRequest{Request: req, Input: input}
 }
 
@@ -143,7 +149,10 @@ func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivityRe
 		input = &DeleteActivityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteActivityOutput{})
+	output := &DeleteActivityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteActivityRequest{Request: req, Input: input}
 }
 
@@ -190,7 +199,10 @@ func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) DeleteSt
 		input = &DeleteStateMachineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStateMachineOutput{})
+	output := &DeleteStateMachineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStateMachineRequest{Request: req, Input: input}
 }
 
@@ -236,7 +248,10 @@ func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) DescribeActi
 		input = &DescribeActivityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivityOutput{})
+	output := &DescribeActivityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeActivityRequest{Request: req, Input: input}
 }
 
@@ -282,7 +297,10 @@ func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) DescribeEx
 		input = &DescribeExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExecutionOutput{})
+	output := &DescribeExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeExecutionRequest{Request: req, Input: input}
 }
 
@@ -328,7 +346,10 @@ func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) Desc
 		input = &DescribeStateMachineInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStateMachineOutput{})
+	output := &DescribeStateMachineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStateMachineRequest{Request: req, Input: input}
 }
 
@@ -383,7 +404,10 @@ func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivityTas
 		input = &GetActivityTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetActivityTaskOutput{})
+	output := &GetActivityTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetActivityTaskRequest{Request: req, Input: input}
 }
 
@@ -439,7 +463,10 @@ func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) GetExe
 		input = &GetExecutionHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExecutionHistoryOutput{})
+	output := &GetExecutionHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetExecutionHistoryRequest{Request: req, Input: input}
 }
 
@@ -543,7 +570,10 @@ func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) ListActivitiesRe
 		input = &ListActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActivitiesOutput{})
+	output := &ListActivitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListActivitiesRequest{Request: req, Input: input}
 }
 
@@ -647,7 +677,10 @@ func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) ListExecutionsRe
 		input = &ListExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListExecutionsOutput{})
+	output := &ListExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListExecutionsRequest{Request: req, Input: input}
 }
 
@@ -751,7 +784,10 @@ func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) ListStateM
 		input = &ListStateMachinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStateMachinesOutput{})
+	output := &ListStateMachinesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStateMachinesRequest{Request: req, Input: input}
 }
 
@@ -847,7 +883,10 @@ func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) SendTaskFailur
 		input = &SendTaskFailureInput{}
 	}
 
-	req := c.newRequest(op, input, &SendTaskFailureOutput{})
+	output := &SendTaskFailureOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendTaskFailureRequest{Request: req, Input: input}
 }
 
@@ -905,7 +944,10 @@ func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) SendTaskHe
 		input = &SendTaskHeartbeatInput{}
 	}
 
-	req := c.newRequest(op, input, &SendTaskHeartbeatOutput{})
+	output := &SendTaskHeartbeatOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendTaskHeartbeatRequest{Request: req, Input: input}
 }
 
@@ -952,7 +994,10 @@ func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) SendTaskSucces
 		input = &SendTaskSuccessInput{}
 	}
 
-	req := c.newRequest(op, input, &SendTaskSuccessOutput{})
+	output := &SendTaskSuccessOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendTaskSuccessRequest{Request: req, Input: input}
 }
 
@@ -998,7 +1043,10 @@ func (c *SFN) StartExecutionRequest(input *StartExecutionInput) StartExecutionRe
 		input = &StartExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartExecutionOutput{})
+	output := &StartExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartExecutionRequest{Request: req, Input: input}
 }
 
@@ -1044,7 +1092,10 @@ func (c *SFN) StopExecutionRequest(input *StopExecutionInput) StopExecutionReque
 		input = &StopExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopExecutionOutput{})
+	output := &StopExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopExecutionRequest{Request: req, Input: input}
 }
 
@@ -1345,6 +1396,8 @@ func (s *CreateActivityInput) SetName(v string) *CreateActivityInput {
 type CreateActivityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) that identifies the created activity.
 	//
 	// ActivityArn is a required field
@@ -1364,6 +1417,11 @@ func (s CreateActivityOutput) String() string {
 // GoString returns the string representation
 func (s CreateActivityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateActivityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivityArn sets the ActivityArn field's value.
@@ -1462,6 +1520,8 @@ func (s *CreateStateMachineInput) SetRoleArn(v string) *CreateStateMachineInput 
 type CreateStateMachineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date the state machine was created.
 	//
 	// CreationDate is a required field
@@ -1481,6 +1541,11 @@ func (s CreateStateMachineOutput) String() string {
 // GoString returns the string representation
 func (s CreateStateMachineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStateMachineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -1541,6 +1606,8 @@ func (s *DeleteActivityInput) SetActivityArn(v string) *DeleteActivityInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivityOutput
 type DeleteActivityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1551,6 +1618,11 @@ func (s DeleteActivityOutput) String() string {
 // GoString returns the string representation
 func (s DeleteActivityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteActivityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineInput
@@ -1599,6 +1671,8 @@ func (s *DeleteStateMachineInput) SetStateMachineArn(v string) *DeleteStateMachi
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineOutput
 type DeleteStateMachineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1609,6 +1683,11 @@ func (s DeleteStateMachineOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStateMachineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStateMachineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivityInput
@@ -1658,6 +1737,8 @@ func (s *DescribeActivityInput) SetActivityArn(v string) *DescribeActivityInput 
 type DescribeActivityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) that identifies the activity.
 	//
 	// ActivityArn is a required field
@@ -1682,6 +1763,11 @@ func (s DescribeActivityOutput) String() string {
 // GoString returns the string representation
 func (s DescribeActivityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeActivityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivityArn sets the ActivityArn field's value.
@@ -1749,6 +1835,8 @@ func (s *DescribeExecutionInput) SetExecutionArn(v string) *DescribeExecutionInp
 type DescribeExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) that identifies the execution.
 	//
 	// ExecutionArn is a required field
@@ -1792,6 +1880,11 @@ func (s DescribeExecutionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExecutionArn sets the ExecutionArn field's value.
@@ -1889,6 +1982,8 @@ func (s *DescribeStateMachineInput) SetStateMachineArn(v string) *DescribeStateM
 type DescribeStateMachineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date the state machine was created.
 	//
 	// CreationDate is a required field
@@ -1927,6 +2022,11 @@ func (s DescribeStateMachineOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStateMachineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStateMachineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -2262,6 +2362,8 @@ func (s *GetActivityTaskInput) SetWorkerName(v string) *GetActivityTaskInput {
 type GetActivityTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The JSON input data for the task.
 	Input *string `locationName:"input" type:"string"`
 
@@ -2279,6 +2381,11 @@ func (s GetActivityTaskOutput) String() string {
 // GoString returns the string representation
 func (s GetActivityTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetActivityTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInput sets the Input field's value.
@@ -2380,6 +2487,8 @@ func (s *GetExecutionHistoryInput) SetReverseOrder(v bool) *GetExecutionHistoryI
 type GetExecutionHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of events that occurred in the execution.
 	//
 	// Events is a required field
@@ -2402,6 +2511,11 @@ func (s GetExecutionHistoryOutput) String() string {
 // GoString returns the string representation
 func (s GetExecutionHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetExecutionHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -2885,6 +2999,8 @@ func (s *ListActivitiesInput) SetNextToken(v string) *ListActivitiesInput {
 type ListActivitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of activities.
 	//
 	// Activities is a required field
@@ -2907,6 +3023,11 @@ func (s ListActivitiesOutput) String() string {
 // GoString returns the string representation
 func (s ListActivitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListActivitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivities sets the Activities field's value.
@@ -3010,6 +3131,8 @@ func (s *ListExecutionsInput) SetStatusFilter(v ExecutionStatus) *ListExecutions
 type ListExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of matching executions.
 	//
 	// Executions is a required field
@@ -3032,6 +3155,11 @@ func (s ListExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s ListExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExecutions sets the Executions field's value.
@@ -3106,6 +3234,8 @@ func (s *ListStateMachinesInput) SetNextToken(v string) *ListStateMachinesInput 
 type ListStateMachinesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a nextToken is returned, there are more results available. To retrieve
 	// the next page of results, make the call again using the returned token in
 	// nextToken. Keep all other arguments unchanged.
@@ -3126,6 +3256,11 @@ func (s ListStateMachinesOutput) String() string {
 // GoString returns the string representation
 func (s ListStateMachinesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStateMachinesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3205,6 +3340,8 @@ func (s *SendTaskFailureInput) SetTaskToken(v string) *SendTaskFailureInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailureOutput
 type SendTaskFailureOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3215,6 +3352,11 @@ func (s SendTaskFailureOutput) String() string {
 // GoString returns the string representation
 func (s SendTaskFailureOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendTaskFailureOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatInput
@@ -3264,6 +3406,8 @@ func (s *SendTaskHeartbeatInput) SetTaskToken(v string) *SendTaskHeartbeatInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatOutput
 type SendTaskHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3274,6 +3418,11 @@ func (s SendTaskHeartbeatOutput) String() string {
 // GoString returns the string representation
 func (s SendTaskHeartbeatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendTaskHeartbeatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccessInput
@@ -3338,6 +3487,8 @@ func (s *SendTaskSuccessInput) SetTaskToken(v string) *SendTaskSuccessInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccessOutput
 type SendTaskSuccessOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3348,6 +3499,11 @@ func (s SendTaskSuccessOutput) String() string {
 // GoString returns the string representation
 func (s SendTaskSuccessOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendTaskSuccessOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput
@@ -3419,6 +3575,8 @@ func (s *StartExecutionInput) SetStateMachineArn(v string) *StartExecutionInput 
 type StartExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) that identifies the execution.
 	//
 	// ExecutionArn is a required field
@@ -3438,6 +3596,11 @@ func (s StartExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StartExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExecutionArn sets the ExecutionArn field's value.
@@ -3635,6 +3798,8 @@ func (s *StopExecutionInput) SetExecutionArn(v string) *StopExecutionInput {
 type StopExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date the execution was stopped.
 	//
 	// StopDate is a required field
@@ -3649,6 +3814,11 @@ func (s StopExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StopExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStopDate sets the StopDate field's value.

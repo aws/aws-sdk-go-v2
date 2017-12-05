@@ -54,7 +54,10 @@ func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) Crea
 		input = &CreateReplicationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReplicationJobOutput{})
+	output := &CreateReplicationJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReplicationJobRequest{Request: req, Input: input}
 }
 
@@ -103,7 +106,10 @@ func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) Dele
 		input = &DeleteReplicationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationJobOutput{})
+	output := &DeleteReplicationJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReplicationJobRequest{Request: req, Input: input}
 }
 
@@ -151,7 +157,10 @@ func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) Delete
 		input = &DeleteServerCatalogInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServerCatalogOutput{})
+	output := &DeleteServerCatalogOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteServerCatalogRequest{Request: req, Input: input}
 }
 
@@ -198,7 +207,10 @@ func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) Di
 		input = &DisassociateConnectorInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectorOutput{})
+	output := &DisassociateConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateConnectorRequest{Request: req, Input: input}
 }
 
@@ -251,7 +263,10 @@ func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsReque
 		input = &GetConnectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectorsOutput{})
+	output := &GetConnectorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConnectorsRequest{Request: req, Input: input}
 }
 
@@ -355,7 +370,10 @@ func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRepli
 		input = &GetReplicationJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReplicationJobsOutput{})
+	output := &GetReplicationJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetReplicationJobsRequest{Request: req, Input: input}
 }
 
@@ -459,7 +477,10 @@ func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRepli
 		input = &GetReplicationRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReplicationRunsOutput{})
+	output := &GetReplicationRunsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetReplicationRunsRequest{Request: req, Input: input}
 }
 
@@ -562,7 +583,10 @@ func (c *SMS) GetServersRequest(input *GetServersInput) GetServersRequest {
 		input = &GetServersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServersOutput{})
+	output := &GetServersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetServersRequest{Request: req, Input: input}
 }
 
@@ -661,7 +685,10 @@ func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) Import
 		input = &ImportServerCatalogInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportServerCatalogOutput{})
+	output := &ImportServerCatalogOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportServerCatalogRequest{Request: req, Input: input}
 }
 
@@ -711,7 +738,10 @@ func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplication
 		input = &StartOnDemandReplicationRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartOnDemandReplicationRunOutput{})
+	output := &StartOnDemandReplicationRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartOnDemandReplicationRunRequest{Request: req, Input: input}
 }
 
@@ -759,7 +789,10 @@ func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) Upda
 		input = &UpdateReplicationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateReplicationJobOutput{})
+	output := &UpdateReplicationJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateReplicationJobRequest{Request: req, Input: input}
 }
 
@@ -972,6 +1005,8 @@ func (s *CreateReplicationJobInput) SetServerId(v string) *CreateReplicationJobI
 type CreateReplicationJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for a Replication Job.
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
 }
@@ -984,6 +1019,11 @@ func (s CreateReplicationJobOutput) String() string {
 // GoString returns the string representation
 func (s CreateReplicationJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReplicationJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationJobId sets the ReplicationJobId field's value.
@@ -1035,6 +1075,8 @@ func (s *DeleteReplicationJobInput) SetReplicationJobId(v string) *DeleteReplica
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJobResponse
 type DeleteReplicationJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1045,6 +1087,11 @@ func (s DeleteReplicationJobOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReplicationJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReplicationJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalogRequest
@@ -1065,6 +1112,8 @@ func (s DeleteServerCatalogInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalogResponse
 type DeleteServerCatalogOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1075,6 +1124,11 @@ func (s DeleteServerCatalogOutput) String() string {
 // GoString returns the string representation
 func (s DeleteServerCatalogOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServerCatalogOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnectorRequest
@@ -1120,6 +1174,8 @@ func (s *DisassociateConnectorInput) SetConnectorId(v string) *DisassociateConne
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnectorResponse
 type DisassociateConnectorOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1130,6 +1186,11 @@ func (s DisassociateConnectorOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateConnectorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectorsRequest
@@ -1170,6 +1231,8 @@ func (s *GetConnectorsInput) SetNextToken(v string) *GetConnectorsInput {
 type GetConnectorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of connectors
 	ConnectorList []Connector `locationName:"connectorList" locationNameList:"item" type:"list"`
 
@@ -1185,6 +1248,11 @@ func (s GetConnectorsOutput) String() string {
 // GoString returns the string representation
 func (s GetConnectorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConnectorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnectorList sets the ConnectorList field's value.
@@ -1246,6 +1314,8 @@ func (s *GetReplicationJobsInput) SetReplicationJobId(v string) *GetReplicationJ
 type GetReplicationJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Pagination token to pass as input to API call
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -1261,6 +1331,11 @@ func (s GetReplicationJobsOutput) String() string {
 // GoString returns the string representation
 func (s GetReplicationJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetReplicationJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1338,6 +1413,8 @@ func (s *GetReplicationRunsInput) SetReplicationJobId(v string) *GetReplicationR
 type GetReplicationRunsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Pagination token to pass as input to API call
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -1356,6 +1433,11 @@ func (s GetReplicationRunsOutput) String() string {
 // GoString returns the string representation
 func (s GetReplicationRunsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetReplicationRunsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1414,6 +1496,8 @@ func (s *GetServersInput) SetNextToken(v string) *GetServersInput {
 type GetServersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Timestamp of an operation
 	LastModifiedOn *time.Time `locationName:"lastModifiedOn" type:"timestamp" timestampFormat:"unix"`
 
@@ -1435,6 +1519,11 @@ func (s GetServersOutput) String() string {
 // GoString returns the string representation
 func (s GetServersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetServersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLastModifiedOn sets the LastModifiedOn field's value.
@@ -1479,6 +1568,8 @@ func (s ImportServerCatalogInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalogResponse
 type ImportServerCatalogOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1489,6 +1580,11 @@ func (s ImportServerCatalogOutput) String() string {
 // GoString returns the string representation
 func (s ImportServerCatalogOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportServerCatalogOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Object representing a Replication Job
@@ -1837,6 +1933,8 @@ func (s *StartOnDemandReplicationRunInput) SetReplicationJobId(v string) *StartO
 type StartOnDemandReplicationRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for a Replication Run.
 	ReplicationRunId *string `locationName:"replicationRunId" type:"string"`
 }
@@ -1849,6 +1947,11 @@ func (s StartOnDemandReplicationRunOutput) String() string {
 // GoString returns the string representation
 func (s StartOnDemandReplicationRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartOnDemandReplicationRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationRunId sets the ReplicationRunId field's value.
@@ -1947,6 +2050,8 @@ func (s *UpdateReplicationJobInput) SetRoleName(v string) *UpdateReplicationJobI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJobResponse
 type UpdateReplicationJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1957,6 +2062,11 @@ func (s UpdateReplicationJobOutput) String() string {
 // GoString returns the string representation
 func (s UpdateReplicationJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateReplicationJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Object representing a VM server

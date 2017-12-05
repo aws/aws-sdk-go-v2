@@ -49,7 +49,10 @@ func (c *CostAndUsageReportService) DeleteReportDefinitionRequest(input *DeleteR
 		input = &DeleteReportDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReportDefinitionOutput{})
+	output := &DeleteReportDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReportDefinitionRequest{Request: req, Input: input}
 }
 
@@ -101,7 +104,10 @@ func (c *CostAndUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 		input = &DescribeReportDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReportDefinitionsOutput{})
+	output := &DescribeReportDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReportDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -197,7 +203,10 @@ func (c *CostAndUsageReportService) PutReportDefinitionRequest(input *PutReportD
 		input = &PutReportDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutReportDefinitionOutput{})
+	output := &PutReportDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutReportDefinitionRequest{Request: req, Input: input}
 }
 
@@ -232,6 +241,8 @@ func (s *DeleteReportDefinitionInput) SetReportName(v string) *DeleteReportDefin
 type DeleteReportDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A message indicates if the deletion is successful.
 	ResponseMessage *string `type:"string"`
 }
@@ -244,6 +255,11 @@ func (s DeleteReportDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReportDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReportDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResponseMessage sets the ResponseMessage field's value.
@@ -304,6 +320,8 @@ func (s *DescribeReportDefinitionsInput) SetNextToken(v string) *DescribeReportD
 type DescribeReportDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A generic string.
 	NextToken *string `type:"string"`
 
@@ -319,6 +337,11 @@ func (s DescribeReportDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReportDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReportDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -385,6 +408,8 @@ func (s *PutReportDefinitionInput) SetReportDefinition(v *ReportDefinition) *Put
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinitionResponse
 type PutReportDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -395,6 +420,11 @@ func (s PutReportDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s PutReportDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutReportDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The definition of AWS Cost and Usage Report. Customer can specify the report

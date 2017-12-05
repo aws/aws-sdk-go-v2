@@ -62,7 +62,10 @@ func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) Desc
 		input = &DescribeStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	output := &DescribeStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStreamRequest{Request: req, Input: input}
 }
 
@@ -118,7 +121,10 @@ func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) GetRecordsRe
 		input = &GetRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRecordsOutput{})
+	output := &GetRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRecordsRequest{Request: req, Input: input}
 }
 
@@ -168,7 +174,10 @@ func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) 
 		input = &GetShardIteratorInput{}
 	}
 
-	req := c.newRequest(op, input, &GetShardIteratorOutput{})
+	output := &GetShardIteratorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetShardIteratorRequest{Request: req, Input: input}
 }
 
@@ -218,7 +227,10 @@ func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) ListStream
 		input = &ListStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamsOutput{})
+	output := &ListStreamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStreamsRequest{Request: req, Input: input}
 }
 
@@ -296,6 +308,8 @@ func (s *DescribeStreamInput) SetStreamArn(v string) *DescribeStreamInput {
 type DescribeStreamOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complete description of the stream, including its creation date and time,
 	// the DynamoDB table associated with the stream, the shard IDs within the stream,
 	// and the beginning and ending sequence numbers of stream records within the
@@ -311,6 +325,11 @@ func (s DescribeStreamOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStreamDescription sets the StreamDescription field's value.
@@ -382,6 +401,8 @@ func (s *GetRecordsInput) SetShardIterator(v string) *GetRecordsInput {
 type GetRecordsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The next position in the shard from which to start sequentially reading stream
 	// records. If set to null, the shard has been closed and the requested iterator
 	// will not return any more data.
@@ -399,6 +420,11 @@ func (s GetRecordsOutput) String() string {
 // GoString returns the string representation
 func (s GetRecordsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextShardIterator sets the NextShardIterator field's value.
@@ -522,6 +548,8 @@ func (s *GetShardIteratorInput) SetStreamArn(v string) *GetShardIteratorInput {
 type GetShardIteratorOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The position in the shard from which to start reading stream records sequentially.
 	// A shard iterator specifies this position using the sequence number of a stream
 	// record in a shard.
@@ -536,6 +564,11 @@ func (s GetShardIteratorOutput) String() string {
 // GoString returns the string representation
 func (s GetShardIteratorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetShardIteratorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetShardIterator sets the ShardIterator field's value.
@@ -649,6 +682,8 @@ func (s *ListStreamsInput) SetTableName(v string) *ListStreamsInput {
 type ListStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The stream ARN of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
 	// value in the new request.
@@ -673,6 +708,11 @@ func (s ListStreamsOutput) String() string {
 // GoString returns the string representation
 func (s ListStreamsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStreamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLastEvaluatedStreamArn sets the LastEvaluatedStreamArn field's value.

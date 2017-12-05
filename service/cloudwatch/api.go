@@ -54,9 +54,12 @@ func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsR
 		input = &DeleteAlarmsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAlarmsOutput{})
+	output := &DeleteAlarmsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAlarmsRequest{Request: req, Input: input}
 }
 
@@ -103,7 +106,10 @@ func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) Delet
 		input = &DeleteDashboardsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDashboardsOutput{})
+	output := &DeleteDashboardsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDashboardsRequest{Request: req, Input: input}
 }
 
@@ -159,7 +165,10 @@ func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInpu
 		input = &DescribeAlarmHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlarmHistoryOutput{})
+	output := &DescribeAlarmHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAlarmHistoryRequest{Request: req, Input: input}
 }
 
@@ -263,7 +272,10 @@ func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeA
 		input = &DescribeAlarmsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlarmsOutput{})
+	output := &DescribeAlarmsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAlarmsRequest{Request: req, Input: input}
 }
 
@@ -360,7 +372,10 @@ func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetr
 		input = &DescribeAlarmsForMetricInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlarmsForMetricOutput{})
+	output := &DescribeAlarmsForMetricOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAlarmsForMetricRequest{Request: req, Input: input}
 }
 
@@ -407,9 +422,12 @@ func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput)
 		input = &DisableAlarmActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableAlarmActionsOutput{})
+	output := &DisableAlarmActionsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableAlarmActionsRequest{Request: req, Input: input}
 }
 
@@ -455,9 +473,12 @@ func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) E
 		input = &EnableAlarmActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAlarmActionsOutput{})
+	output := &EnableAlarmActionsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableAlarmActionsRequest{Request: req, Input: input}
 }
 
@@ -507,7 +528,10 @@ func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) GetDashboardR
 		input = &GetDashboardInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDashboardOutput{})
+	output := &GetDashboardOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDashboardRequest{Request: req, Input: input}
 }
 
@@ -603,7 +627,10 @@ func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput)
 		input = &GetMetricStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMetricStatisticsOutput{})
+	output := &GetMetricStatisticsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMetricStatisticsRequest{Request: req, Input: input}
 }
 
@@ -651,7 +678,10 @@ func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) ListDashb
 		input = &ListDashboardsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDashboardsOutput{})
+	output := &ListDashboardsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDashboardsRequest{Request: req, Input: input}
 }
 
@@ -711,7 +741,10 @@ func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequ
 		input = &ListMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMetricsOutput{})
+	output := &ListMetricsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListMetricsRequest{Request: req, Input: input}
 }
 
@@ -825,7 +858,10 @@ func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) PutDashboardR
 		input = &PutDashboardInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDashboardOutput{})
+	output := &PutDashboardOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutDashboardRequest{Request: req, Input: input}
 }
 
@@ -910,9 +946,12 @@ func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) PutMetric
 		input = &PutMetricAlarmInput{}
 	}
 
-	req := c.newRequest(op, input, &PutMetricAlarmOutput{})
+	output := &PutMetricAlarmOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutMetricAlarmRequest{Request: req, Input: input}
 }
 
@@ -986,9 +1025,12 @@ func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDa
 		input = &PutMetricDataInput{}
 	}
 
-	req := c.newRequest(op, input, &PutMetricDataOutput{})
+	output := &PutMetricDataOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutMetricDataRequest{Request: req, Input: input}
 }
 
@@ -1041,9 +1083,12 @@ func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmSta
 		input = &SetAlarmStateInput{}
 	}
 
-	req := c.newRequest(op, input, &SetAlarmStateOutput{})
+	output := &SetAlarmStateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetAlarmStateRequest{Request: req, Input: input}
 }
 
@@ -1328,6 +1373,8 @@ func (s *DeleteAlarmsInput) SetAlarmNames(v []string) *DeleteAlarmsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmsOutput
 type DeleteAlarmsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1338,6 +1385,11 @@ func (s DeleteAlarmsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAlarmsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAlarmsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsInput
@@ -1367,6 +1419,8 @@ func (s *DeleteDashboardsInput) SetDashboardNames(v []string) *DeleteDashboardsI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsOutput
 type DeleteDashboardsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1377,6 +1431,11 @@ func (s DeleteDashboardsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDashboardsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDashboardsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistoryInput
@@ -1469,6 +1528,8 @@ func (s *DescribeAlarmHistoryInput) SetStartDate(v time.Time) *DescribeAlarmHist
 type DescribeAlarmHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The alarm histories, in JSON format.
 	AlarmHistoryItems []AlarmHistoryItem `type:"list"`
 
@@ -1484,6 +1545,11 @@ func (s DescribeAlarmHistoryOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAlarmHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAlarmHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlarmHistoryItems sets the AlarmHistoryItems field's value.
@@ -1621,6 +1687,8 @@ func (s *DescribeAlarmsForMetricInput) SetUnit(v StandardUnit) *DescribeAlarmsFo
 type DescribeAlarmsForMetricOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The information for each alarm with the specified metric.
 	MetricAlarms []MetricAlarm `type:"list"`
 }
@@ -1633,6 +1701,11 @@ func (s DescribeAlarmsForMetricOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAlarmsForMetricOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAlarmsForMetricOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetricAlarms sets the MetricAlarms field's value.
@@ -1735,6 +1808,8 @@ func (s *DescribeAlarmsInput) SetStateValue(v StateValue) *DescribeAlarmsInput {
 type DescribeAlarmsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The information for the specified alarms.
 	MetricAlarms []MetricAlarm `type:"list"`
 
@@ -1750,6 +1825,11 @@ func (s DescribeAlarmsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAlarmsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAlarmsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetricAlarms sets the MetricAlarms field's value.
@@ -1925,6 +2005,8 @@ func (s *DisableAlarmActionsInput) SetAlarmNames(v []string) *DisableAlarmAction
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActionsOutput
 type DisableAlarmActionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1935,6 +2017,11 @@ func (s DisableAlarmActionsOutput) String() string {
 // GoString returns the string representation
 func (s DisableAlarmActionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableAlarmActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActionsInput
@@ -1980,6 +2067,8 @@ func (s *EnableAlarmActionsInput) SetAlarmNames(v []string) *EnableAlarmActionsI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActionsOutput
 type EnableAlarmActionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1990,6 +2079,11 @@ func (s EnableAlarmActionsOutput) String() string {
 // GoString returns the string representation
 func (s EnableAlarmActionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableAlarmActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboardInput
@@ -2020,6 +2114,8 @@ func (s *GetDashboardInput) SetDashboardName(v string) *GetDashboardInput {
 type GetDashboardOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string `type:"string"`
 
@@ -2040,6 +2136,11 @@ func (s GetDashboardOutput) String() string {
 // GoString returns the string representation
 func (s GetDashboardOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDashboardOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDashboardArn sets the DashboardArn field's value.
@@ -2280,6 +2381,8 @@ func (s *GetMetricStatisticsInput) SetUnit(v StandardUnit) *GetMetricStatisticsI
 type GetMetricStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The data points for the specified metric.
 	Datapoints []Datapoint `type:"list"`
 
@@ -2295,6 +2398,11 @@ func (s GetMetricStatisticsOutput) String() string {
 // GoString returns the string representation
 func (s GetMetricStatisticsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMetricStatisticsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDatapoints sets the Datapoints field's value.
@@ -2349,6 +2457,8 @@ func (s *ListDashboardsInput) SetNextToken(v string) *ListDashboardsInput {
 type ListDashboardsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of matching dashboards.
 	DashboardEntries []DashboardEntry `type:"list"`
 
@@ -2364,6 +2474,11 @@ func (s ListDashboardsOutput) String() string {
 // GoString returns the string representation
 func (s ListDashboardsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDashboardsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDashboardEntries sets the DashboardEntries field's value.
@@ -2457,6 +2572,8 @@ func (s *ListMetricsInput) SetNextToken(v string) *ListMetricsInput {
 type ListMetricsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The metrics.
 	Metrics []Metric `type:"list"`
 
@@ -2472,6 +2589,11 @@ func (s ListMetricsOutput) String() string {
 // GoString returns the string representation
 func (s ListMetricsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMetricsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetrics sets the Metrics field's value.
@@ -2945,6 +3067,8 @@ func (s *PutDashboardInput) SetDashboardName(v string) *PutDashboardInput {
 type PutDashboardOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the input for PutDashboard was correct and the dashboard was successfully
 	// created or modified, this result is empty.
 	//
@@ -2965,6 +3089,11 @@ func (s PutDashboardOutput) String() string {
 // GoString returns the string representation
 func (s PutDashboardOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutDashboardOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDashboardValidationMessages sets the DashboardValidationMessages field's value.
@@ -3296,6 +3425,8 @@ func (s *PutMetricAlarmInput) SetUnit(v StandardUnit) *PutMetricAlarmInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmOutput
 type PutMetricAlarmOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3306,6 +3437,11 @@ func (s PutMetricAlarmOutput) String() string {
 // GoString returns the string representation
 func (s PutMetricAlarmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutMetricAlarmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataInput
@@ -3379,6 +3515,8 @@ func (s *PutMetricDataInput) SetNamespace(v string) *PutMetricDataInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataOutput
 type PutMetricDataOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3389,6 +3527,11 @@ func (s PutMetricDataOutput) String() string {
 // GoString returns the string representation
 func (s PutMetricDataOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutMetricDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmStateInput
@@ -3476,6 +3619,8 @@ func (s *SetAlarmStateInput) SetStateValue(v StateValue) *SetAlarmStateInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmStateOutput
 type SetAlarmStateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3486,6 +3631,11 @@ func (s SetAlarmStateOutput) String() string {
 // GoString returns the string representation
 func (s SetAlarmStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetAlarmStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a set of statistics that describes a specific metric.

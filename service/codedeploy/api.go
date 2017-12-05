@@ -53,9 +53,12 @@ func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremi
 		input = &AddTagsToOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToOnPremisesInstancesOutput{})
+	output := &AddTagsToOnPremisesInstancesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
@@ -101,7 +104,10 @@ func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicat
 		input = &BatchGetApplicationRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetApplicationRevisionsOutput{})
+	output := &BatchGetApplicationRevisionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetApplicationRevisionsRequest{Request: req, Input: input}
 }
 
@@ -147,7 +153,10 @@ func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInpu
 		input = &BatchGetApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetApplicationsOutput{})
+	output := &BatchGetApplicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetApplicationsRequest{Request: req, Input: input}
 }
 
@@ -193,7 +202,10 @@ func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGr
 		input = &BatchGetDeploymentGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDeploymentGroupsOutput{})
+	output := &BatchGetDeploymentGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetDeploymentGroupsRequest{Request: req, Input: input}
 }
 
@@ -240,7 +252,10 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 		input = &BatchGetDeploymentInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDeploymentInstancesOutput{})
+	output := &BatchGetDeploymentInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetDeploymentInstancesRequest{Request: req, Input: input}
 }
 
@@ -286,7 +301,10 @@ func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput)
 		input = &BatchGetDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDeploymentsOutput{})
+	output := &BatchGetDeploymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetDeploymentsRequest{Request: req, Input: input}
 }
 
@@ -332,7 +350,10 @@ func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremise
 		input = &BatchGetOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetOnPremisesInstancesOutput{})
+	output := &BatchGetOnPremisesInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
@@ -383,9 +404,12 @@ func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) C
 		input = &ContinueDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &ContinueDeploymentOutput{})
+	output := &ContinueDeploymentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ContinueDeploymentRequest{Request: req, Input: input}
 }
 
@@ -431,7 +455,10 @@ func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) Cre
 		input = &CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	output := &CreateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateApplicationRequest{Request: req, Input: input}
 }
 
@@ -477,7 +504,10 @@ func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) Creat
 		input = &CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	output := &CreateDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
@@ -523,7 +553,10 @@ func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfig
 		input = &CreateDeploymentConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentConfigOutput{})
+	output := &CreateDeploymentConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeploymentConfigRequest{Request: req, Input: input}
 }
 
@@ -569,7 +602,10 @@ func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupIn
 		input = &CreateDeploymentGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentGroupOutput{})
+	output := &CreateDeploymentGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeploymentGroupRequest{Request: req, Input: input}
 }
 
@@ -615,9 +651,12 @@ func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) Del
 		input = &DeleteApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationOutput{})
+	output := &DeleteApplicationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationRequest{Request: req, Input: input}
 }
 
@@ -666,9 +705,12 @@ func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfig
 		input = &DeleteDeploymentConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeploymentConfigOutput{})
+	output := &DeleteDeploymentConfigOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDeploymentConfigRequest{Request: req, Input: input}
 }
 
@@ -714,7 +756,10 @@ func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupIn
 		input = &DeleteDeploymentGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeploymentGroupOutput{})
+	output := &DeleteDeploymentGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDeploymentGroupRequest{Request: req, Input: input}
 }
 
@@ -760,9 +805,12 @@ func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPrem
 		input = &DeregisterOnPremisesInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterOnPremisesInstanceOutput{})
+	output := &DeregisterOnPremisesInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterOnPremisesInstanceRequest{Request: req, Input: input}
 }
 
@@ -808,7 +856,10 @@ func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) GetApplic
 		input = &GetApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApplicationOutput{})
+	output := &GetApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApplicationRequest{Request: req, Input: input}
 }
 
@@ -854,7 +905,10 @@ func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevision
 		input = &GetApplicationRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApplicationRevisionOutput{})
+	output := &GetApplicationRevisionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApplicationRevisionRequest{Request: req, Input: input}
 }
 
@@ -900,7 +954,10 @@ func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) GetDeployme
 		input = &GetDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentOutput{})
+	output := &GetDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentRequest{Request: req, Input: input}
 }
 
@@ -946,7 +1003,10 @@ func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput)
 		input = &GetDeploymentConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentConfigOutput{})
+	output := &GetDeploymentConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentConfigRequest{Request: req, Input: input}
 }
 
@@ -992,7 +1052,10 @@ func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) G
 		input = &GetDeploymentGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentGroupOutput{})
+	output := &GetDeploymentGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentGroupRequest{Request: req, Input: input}
 }
 
@@ -1038,7 +1101,10 @@ func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceIn
 		input = &GetDeploymentInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentInstanceOutput{})
+	output := &GetDeploymentInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentInstanceRequest{Request: req, Input: input}
 }
 
@@ -1084,7 +1150,10 @@ func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceIn
 		input = &GetOnPremisesInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOnPremisesInstanceOutput{})
+	output := &GetOnPremisesInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOnPremisesInstanceRequest{Request: req, Input: input}
 }
 
@@ -1136,7 +1205,10 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 		input = &ListApplicationRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationRevisionsOutput{})
+	output := &ListApplicationRevisionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListApplicationRevisionsRequest{Request: req, Input: input}
 }
 
@@ -1238,7 +1310,10 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) ListA
 		input = &ListApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	output := &ListApplicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListApplicationsRequest{Request: req, Input: input}
 }
 
@@ -1340,7 +1415,10 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 		input = &ListDeploymentConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentConfigsOutput{})
+	output := &ListDeploymentConfigsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeploymentConfigsRequest{Request: req, Input: input}
 }
 
@@ -1443,7 +1521,10 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 		input = &ListDeploymentGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentGroupsOutput{})
+	output := &ListDeploymentGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeploymentGroupsRequest{Request: req, Input: input}
 }
 
@@ -1546,7 +1627,10 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 		input = &ListDeploymentInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentInstancesOutput{})
+	output := &ListDeploymentInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeploymentInstancesRequest{Request: req, Input: input}
 }
 
@@ -1649,7 +1733,10 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 		input = &ListDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentsOutput{})
+	output := &ListDeploymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeploymentsRequest{Request: req, Input: input}
 }
 
@@ -1745,7 +1832,10 @@ func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccount
 		input = &ListGitHubAccountTokenNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGitHubAccountTokenNamesOutput{})
+	output := &ListGitHubAccountTokenNamesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGitHubAccountTokenNamesRequest{Request: req, Input: input}
 }
 
@@ -1795,7 +1885,10 @@ func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstanc
 		input = &ListOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOnPremisesInstancesOutput{})
+	output := &ListOnPremisesInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
@@ -1841,9 +1934,12 @@ func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicati
 		input = &RegisterApplicationRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterApplicationRevisionOutput{})
+	output := &RegisterApplicationRevisionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterApplicationRevisionRequest{Request: req, Input: input}
 }
 
@@ -1892,9 +1988,12 @@ func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremises
 		input = &RegisterOnPremisesInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterOnPremisesInstanceOutput{})
+	output := &RegisterOnPremisesInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterOnPremisesInstanceRequest{Request: req, Input: input}
 }
 
@@ -1940,9 +2039,12 @@ func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsF
 		input = &RemoveTagsFromOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromOnPremisesInstancesOutput{})
+	output := &RemoveTagsFromOnPremisesInstancesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
@@ -1989,9 +2091,12 @@ func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTi
 		input = &SkipWaitTimeForInstanceTerminationInput{}
 	}
 
-	req := c.newRequest(op, input, &SkipWaitTimeForInstanceTerminationOutput{})
+	output := &SkipWaitTimeForInstanceTerminationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SkipWaitTimeForInstanceTerminationRequest{Request: req, Input: input}
 }
 
@@ -2037,7 +2142,10 @@ func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) StopDeplo
 		input = &StopDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDeploymentOutput{})
+	output := &StopDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopDeploymentRequest{Request: req, Input: input}
 }
 
@@ -2083,9 +2191,12 @@ func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) Upd
 		input = &UpdateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	output := &UpdateApplicationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
@@ -2131,7 +2242,10 @@ func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupIn
 		input = &UpdateDeploymentGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeploymentGroupOutput{})
+	output := &UpdateDeploymentGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDeploymentGroupRequest{Request: req, Input: input}
 }
 
@@ -2197,6 +2311,8 @@ func (s *AddTagsToOnPremisesInstancesInput) SetTags(v []Tag) *AddTagsToOnPremise
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstancesOutput
 type AddTagsToOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2207,6 +2323,11 @@ func (s AddTagsToOnPremisesInstancesOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToOnPremisesInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToOnPremisesInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about an alarm.
@@ -2483,6 +2604,8 @@ func (s *BatchGetApplicationRevisionsInput) SetRevisions(v []RevisionLocation) *
 type BatchGetApplicationRevisionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the application that corresponds to the revisions.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
 
@@ -2501,6 +2624,11 @@ func (s BatchGetApplicationRevisionsOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetApplicationRevisionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetApplicationRevisionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationName sets the ApplicationName field's value.
@@ -2551,6 +2679,8 @@ func (s *BatchGetApplicationsInput) SetApplicationNames(v []string) *BatchGetApp
 type BatchGetApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the applications.
 	ApplicationsInfo []ApplicationInfo `locationName:"applicationsInfo" type:"list"`
 }
@@ -2563,6 +2693,11 @@ func (s BatchGetApplicationsOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetApplicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetApplicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationsInfo sets the ApplicationsInfo field's value.
@@ -2636,6 +2771,8 @@ func (s *BatchGetDeploymentGroupsInput) SetDeploymentGroupNames(v []string) *Bat
 type BatchGetDeploymentGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the deployment groups.
 	DeploymentGroupsInfo []DeploymentGroupInfo `locationName:"deploymentGroupsInfo" type:"list"`
 
@@ -2651,6 +2788,11 @@ func (s BatchGetDeploymentGroupsOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetDeploymentGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetDeploymentGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentGroupsInfo sets the DeploymentGroupsInfo field's value.
@@ -2726,6 +2868,8 @@ func (s *BatchGetDeploymentInstancesInput) SetInstanceIds(v []string) *BatchGetD
 type BatchGetDeploymentInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about errors that may have occurred during the API call.
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 
@@ -2741,6 +2885,11 @@ func (s BatchGetDeploymentInstancesOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetDeploymentInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrorMessage sets the ErrorMessage field's value.
@@ -2785,6 +2934,8 @@ func (s *BatchGetDeploymentsInput) SetDeploymentIds(v []string) *BatchGetDeploym
 type BatchGetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the deployments.
 	DeploymentsInfo []DeploymentInfo `locationName:"deploymentsInfo" type:"list"`
 }
@@ -2797,6 +2948,11 @@ func (s BatchGetDeploymentsOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetDeploymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetDeploymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentsInfo sets the DeploymentsInfo field's value.
@@ -2835,6 +2991,8 @@ func (s *BatchGetOnPremisesInstancesInput) SetInstanceNames(v []string) *BatchGe
 type BatchGetOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the on-premises instances.
 	InstanceInfos []InstanceInfo `locationName:"instanceInfos" type:"list"`
 }
@@ -2847,6 +3005,11 @@ func (s BatchGetOnPremisesInstancesOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetOnPremisesInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetOnPremisesInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceInfos sets the InstanceInfos field's value.
@@ -2971,6 +3134,8 @@ func (s *ContinueDeploymentInput) SetDeploymentId(v string) *ContinueDeploymentI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeploymentOutput
 type ContinueDeploymentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2981,6 +3146,11 @@ func (s ContinueDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s ContinueDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ContinueDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a CreateApplication operation.
@@ -3033,6 +3203,8 @@ func (s *CreateApplicationInput) SetApplicationName(v string) *CreateApplication
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique application ID.
 	ApplicationId *string `locationName:"applicationId" type:"string"`
 }
@@ -3045,6 +3217,11 @@ func (s CreateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s CreateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationId sets the ApplicationId field's value.
@@ -3135,6 +3312,8 @@ func (s *CreateDeploymentConfigInput) SetMinimumHealthyHosts(v *MinimumHealthyHo
 type CreateDeploymentConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique deployment configuration ID.
 	DeploymentConfigId *string `locationName:"deploymentConfigId" type:"string"`
 }
@@ -3147,6 +3326,11 @@ func (s CreateDeploymentConfigOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeploymentConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeploymentConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentConfigId sets the DeploymentConfigId field's value.
@@ -3374,6 +3558,8 @@ func (s *CreateDeploymentGroupInput) SetTriggerConfigurations(v []TriggerConfig)
 type CreateDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique deployment group ID.
 	DeploymentGroupId *string `locationName:"deploymentGroupId" type:"string"`
 }
@@ -3386,6 +3572,11 @@ func (s CreateDeploymentGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeploymentGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentGroupId sets the DeploymentGroupId field's value.
@@ -3560,6 +3751,8 @@ func (s *CreateDeploymentInput) SetUpdateOutdatedInstancesOnly(v bool) *CreateDe
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique deployment ID.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
@@ -3572,6 +3765,11 @@ func (s CreateDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentId sets the DeploymentId field's value.
@@ -3628,6 +3826,8 @@ func (s *DeleteApplicationInput) SetApplicationName(v string) *DeleteApplication
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplicationOutput
 type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3638,6 +3838,11 @@ func (s DeleteApplicationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DeleteDeploymentConfig operation.
@@ -3688,6 +3893,8 @@ func (s *DeleteDeploymentConfigInput) SetDeploymentConfigName(v string) *DeleteD
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigOutput
 type DeleteDeploymentConfigOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3698,6 +3905,11 @@ func (s DeleteDeploymentConfigOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDeploymentConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeploymentConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DeleteDeploymentGroup operation.
@@ -3768,6 +3980,8 @@ func (s *DeleteDeploymentGroupInput) SetDeploymentGroupName(v string) *DeleteDep
 type DeleteDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output contains no data, and the corresponding deployment group contained
 	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
 	// corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances
@@ -3785,6 +3999,11 @@ func (s DeleteDeploymentGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDeploymentGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.
@@ -4522,6 +4741,8 @@ func (s *DeregisterOnPremisesInstanceInput) SetInstanceName(v string) *Deregiste
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstanceOutput
 type DeregisterOnPremisesInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4532,6 +4753,11 @@ func (s DeregisterOnPremisesInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterOnPremisesInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterOnPremisesInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Diagnostic information about executable scripts that are part of a deployment.
@@ -4895,6 +5121,8 @@ func (s *GetApplicationInput) SetApplicationName(v string) *GetApplicationInput 
 type GetApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the application.
 	Application *ApplicationInfo `locationName:"application" type:"structure"`
 }
@@ -4907,6 +5135,11 @@ func (s GetApplicationOutput) String() string {
 // GoString returns the string representation
 func (s GetApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplication sets the Application field's value.
@@ -4979,6 +5212,8 @@ func (s *GetApplicationRevisionInput) SetRevision(v *RevisionLocation) *GetAppli
 type GetApplicationRevisionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the application that corresponds to the revision.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
 
@@ -4997,6 +5232,11 @@ func (s GetApplicationRevisionOutput) String() string {
 // GoString returns the string representation
 func (s GetApplicationRevisionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetApplicationRevisionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationName sets the ApplicationName field's value.
@@ -5067,6 +5307,8 @@ func (s *GetDeploymentConfigInput) SetDeploymentConfigName(v string) *GetDeploym
 type GetDeploymentConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the deployment configuration.
 	DeploymentConfigInfo *DeploymentConfigInfo `locationName:"deploymentConfigInfo" type:"structure"`
 }
@@ -5079,6 +5321,11 @@ func (s GetDeploymentConfigOutput) String() string {
 // GoString returns the string representation
 func (s GetDeploymentConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentConfigInfo sets the DeploymentConfigInfo field's value.
@@ -5155,6 +5402,8 @@ func (s *GetDeploymentGroupInput) SetDeploymentGroupName(v string) *GetDeploymen
 type GetDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the deployment group.
 	DeploymentGroupInfo *DeploymentGroupInfo `locationName:"deploymentGroupInfo" type:"structure"`
 }
@@ -5167,6 +5416,11 @@ func (s GetDeploymentGroupOutput) String() string {
 // GoString returns the string representation
 func (s GetDeploymentGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentGroupInfo sets the DeploymentGroupInfo field's value.
@@ -5277,6 +5531,8 @@ func (s *GetDeploymentInstanceInput) SetInstanceId(v string) *GetDeploymentInsta
 type GetDeploymentInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the instance.
 	InstanceSummary *InstanceSummary `locationName:"instanceSummary" type:"structure"`
 }
@@ -5291,6 +5547,11 @@ func (s GetDeploymentInstanceOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetInstanceSummary sets the InstanceSummary field's value.
 func (s *GetDeploymentInstanceOutput) SetInstanceSummary(v *InstanceSummary) *GetDeploymentInstanceOutput {
 	s.InstanceSummary = v
@@ -5301,6 +5562,8 @@ func (s *GetDeploymentInstanceOutput) SetInstanceSummary(v *InstanceSummary) *Ge
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentOutput
 type GetDeploymentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// Information about the deployment.
 	DeploymentInfo *DeploymentInfo `locationName:"deploymentInfo" type:"structure"`
@@ -5314,6 +5577,11 @@ func (s GetDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s GetDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentInfo sets the DeploymentInfo field's value.
@@ -5368,6 +5636,8 @@ func (s *GetOnPremisesInstanceInput) SetInstanceName(v string) *GetOnPremisesIns
 type GetOnPremisesInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the on-premises instance.
 	InstanceInfo *InstanceInfo `locationName:"instanceInfo" type:"structure"`
 }
@@ -5380,6 +5650,11 @@ func (s GetOnPremisesInstanceOutput) String() string {
 // GoString returns the string representation
 func (s GetOnPremisesInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOnPremisesInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceInfo sets the InstanceInfo field's value.
@@ -5887,6 +6162,8 @@ func (s *ListApplicationRevisionsInput) SetSortOrder(v SortOrder) *ListApplicati
 type ListApplicationRevisionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a large amount of information is returned, an identifier will also be
 	// returned. It can be used in a subsequent list application revisions call
 	// to return the next set of application revisions in the list.
@@ -5904,6 +6181,11 @@ func (s ListApplicationRevisionsOutput) String() string {
 // GoString returns the string representation
 func (s ListApplicationRevisionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListApplicationRevisionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5949,6 +6231,8 @@ func (s *ListApplicationsInput) SetNextToken(v string) *ListApplicationsInput {
 type ListApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of application names.
 	Applications []string `locationName:"applications" type:"list"`
 
@@ -5966,6 +6250,11 @@ func (s ListApplicationsOutput) String() string {
 // GoString returns the string representation
 func (s ListApplicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplications sets the Applications field's value.
@@ -6012,6 +6301,8 @@ func (s *ListDeploymentConfigsInput) SetNextToken(v string) *ListDeploymentConfi
 type ListDeploymentConfigsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of deployment configurations, including built-in configurations such
 	// as CodeDeployDefault.OneAtATime.
 	DeploymentConfigsList []string `locationName:"deploymentConfigsList" type:"list"`
@@ -6030,6 +6321,11 @@ func (s ListDeploymentConfigsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeploymentConfigsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentConfigsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentConfigsList sets the DeploymentConfigsList field's value.
@@ -6104,6 +6400,8 @@ func (s *ListDeploymentGroupsInput) SetNextToken(v string) *ListDeploymentGroups
 type ListDeploymentGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The application name.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
 
@@ -6124,6 +6422,11 @@ func (s ListDeploymentGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeploymentGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationName sets the ApplicationName field's value.
@@ -6232,6 +6535,8 @@ func (s *ListDeploymentInstancesInput) SetNextToken(v string) *ListDeploymentIns
 type ListDeploymentInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of instance IDs.
 	InstancesList []string `locationName:"instancesList" type:"list"`
 
@@ -6249,6 +6554,11 @@ func (s ListDeploymentInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ListDeploymentInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstancesList sets the InstancesList field's value.
@@ -6359,6 +6669,8 @@ func (s *ListDeploymentsInput) SetNextToken(v string) *ListDeploymentsInput {
 type ListDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of deployment IDs.
 	Deployments []string `locationName:"deployments" type:"list"`
 
@@ -6376,6 +6688,11 @@ func (s ListDeploymentsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeploymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeployments sets the Deployments field's value.
@@ -6421,6 +6738,8 @@ func (s *ListGitHubAccountTokenNamesInput) SetNextToken(v string) *ListGitHubAcc
 type ListGitHubAccountTokenNamesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a large amount of information is returned, an identifier is also returned.
 	// It can be used in a subsequent ListGitHubAccountTokenNames call to return
 	// the next set of names in the list.
@@ -6438,6 +6757,11 @@ func (s ListGitHubAccountTokenNamesOutput) String() string {
 // GoString returns the string representation
 func (s ListGitHubAccountTokenNamesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGitHubAccountTokenNamesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6508,6 +6832,8 @@ func (s *ListOnPremisesInstancesInput) SetTagFilters(v []TagFilter) *ListOnPremi
 type ListOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of matching on-premises instance names.
 	InstanceNames []string `locationName:"instanceNames" type:"list"`
 
@@ -6525,6 +6851,11 @@ func (s ListOnPremisesInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ListOnPremisesInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOnPremisesInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceNames sets the InstanceNames field's value.
@@ -6737,6 +7068,8 @@ func (s *RegisterApplicationRevisionInput) SetRevision(v *RevisionLocation) *Reg
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevisionOutput
 type RegisterApplicationRevisionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6747,6 +7080,11 @@ func (s RegisterApplicationRevisionOutput) String() string {
 // GoString returns the string representation
 func (s RegisterApplicationRevisionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterApplicationRevisionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of the register on-premises instance operation.
@@ -6811,6 +7149,8 @@ func (s *RegisterOnPremisesInstanceInput) SetInstanceName(v string) *RegisterOnP
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstanceOutput
 type RegisterOnPremisesInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6821,6 +7161,11 @@ func (s RegisterOnPremisesInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RegisterOnPremisesInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterOnPremisesInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a RemoveTagsFromOnPremisesInstances operation.
@@ -6882,6 +7227,8 @@ func (s *RemoveTagsFromOnPremisesInstancesInput) SetTags(v []Tag) *RemoveTagsFro
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstancesOutput
 type RemoveTagsFromOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6892,6 +7239,11 @@ func (s RemoveTagsFromOnPremisesInstancesOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromOnPremisesInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromOnPremisesInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about an application revision.
@@ -7127,6 +7479,8 @@ func (s *SkipWaitTimeForInstanceTerminationInput) SetDeploymentId(v string) *Ski
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTerminationOutput
 type SkipWaitTimeForInstanceTerminationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7137,6 +7491,11 @@ func (s SkipWaitTimeForInstanceTerminationOutput) String() string {
 // GoString returns the string representation
 func (s SkipWaitTimeForInstanceTerminationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SkipWaitTimeForInstanceTerminationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a StopDeployment operation.
@@ -7196,6 +7555,8 @@ func (s *StopDeploymentInput) SetDeploymentId(v string) *StopDeploymentInput {
 type StopDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the stop deployment operation:
 	//
 	//    * Pending: The stop operation is pending.
@@ -7215,6 +7576,11 @@ func (s StopDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s StopDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -7527,6 +7893,8 @@ func (s *UpdateApplicationInput) SetNewApplicationName(v string) *UpdateApplicat
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplicationOutput
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7537,6 +7905,11 @@ func (s UpdateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of an UpdateDeploymentGroup operation.
@@ -7753,6 +8126,8 @@ func (s *UpdateDeploymentGroupInput) SetTriggerConfigurations(v []TriggerConfig)
 type UpdateDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output contains no data, and the corresponding deployment group contained
 	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
 	// corresponding Auto Scaling lifecycle event hooks from the AWS account. If
@@ -7769,6 +8144,11 @@ func (s UpdateDeploymentGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDeploymentGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.

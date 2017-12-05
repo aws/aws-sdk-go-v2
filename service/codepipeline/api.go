@@ -55,7 +55,10 @@ func (c *CodePipeline) AcknowledgeJobRequest(input *AcknowledgeJobInput) Acknowl
 		input = &AcknowledgeJobInput{}
 	}
 
-	req := c.newRequest(op, input, &AcknowledgeJobOutput{})
+	output := &AcknowledgeJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcknowledgeJobRequest{Request: req, Input: input}
 }
 
@@ -102,7 +105,10 @@ func (c *CodePipeline) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPa
 		input = &AcknowledgeThirdPartyJobInput{}
 	}
 
-	req := c.newRequest(op, input, &AcknowledgeThirdPartyJobOutput{})
+	output := &AcknowledgeThirdPartyJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcknowledgeThirdPartyJobRequest{Request: req, Input: input}
 }
 
@@ -149,7 +155,10 @@ func (c *CodePipeline) CreateCustomActionTypeRequest(input *CreateCustomActionTy
 		input = &CreateCustomActionTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCustomActionTypeOutput{})
+	output := &CreateCustomActionTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCustomActionTypeRequest{Request: req, Input: input}
 }
 
@@ -195,7 +204,10 @@ func (c *CodePipeline) CreatePipelineRequest(input *CreatePipelineInput) CreateP
 		input = &CreatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	output := &CreatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePipelineRequest{Request: req, Input: input}
 }
 
@@ -245,9 +257,12 @@ func (c *CodePipeline) DeleteCustomActionTypeRequest(input *DeleteCustomActionTy
 		input = &DeleteCustomActionTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomActionTypeOutput{})
+	output := &DeleteCustomActionTypeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCustomActionTypeRequest{Request: req, Input: input}
 }
 
@@ -293,9 +308,12 @@ func (c *CodePipeline) DeletePipelineRequest(input *DeletePipelineInput) DeleteP
 		input = &DeletePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	output := &DeletePipelineOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePipelineRequest{Request: req, Input: input}
 }
 
@@ -342,9 +360,12 @@ func (c *CodePipeline) DisableStageTransitionRequest(input *DisableStageTransiti
 		input = &DisableStageTransitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableStageTransitionOutput{})
+	output := &DisableStageTransitionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableStageTransitionRequest{Request: req, Input: input}
 }
 
@@ -390,9 +411,12 @@ func (c *CodePipeline) EnableStageTransitionRequest(input *EnableStageTransition
 		input = &EnableStageTransitionInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableStageTransitionOutput{})
+	output := &EnableStageTransitionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableStageTransitionRequest{Request: req, Input: input}
 }
 
@@ -443,7 +467,10 @@ func (c *CodePipeline) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDet
 		input = &GetJobDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobDetailsOutput{})
+	output := &GetJobDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobDetailsRequest{Request: req, Input: input}
 }
 
@@ -491,7 +518,10 @@ func (c *CodePipeline) GetPipelineRequest(input *GetPipelineInput) GetPipelineRe
 		input = &GetPipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineOutput{})
+	output := &GetPipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPipelineRequest{Request: req, Input: input}
 }
 
@@ -539,7 +569,10 @@ func (c *CodePipeline) GetPipelineExecutionRequest(input *GetPipelineExecutionIn
 		input = &GetPipelineExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineExecutionOutput{})
+	output := &GetPipelineExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPipelineExecutionRequest{Request: req, Input: input}
 }
 
@@ -586,7 +619,10 @@ func (c *CodePipeline) GetPipelineStateRequest(input *GetPipelineStateInput) Get
 		input = &GetPipelineStateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineStateOutput{})
+	output := &GetPipelineStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPipelineStateRequest{Request: req, Input: input}
 }
 
@@ -638,7 +674,10 @@ func (c *CodePipeline) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDet
 		input = &GetThirdPartyJobDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetThirdPartyJobDetailsOutput{})
+	output := &GetThirdPartyJobDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetThirdPartyJobDetailsRequest{Request: req, Input: input}
 }
 
@@ -685,7 +724,10 @@ func (c *CodePipeline) ListActionTypesRequest(input *ListActionTypesInput) ListA
 		input = &ListActionTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActionTypesOutput{})
+	output := &ListActionTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListActionTypesRequest{Request: req, Input: input}
 }
 
@@ -731,7 +773,10 @@ func (c *CodePipeline) ListPipelineExecutionsRequest(input *ListPipelineExecutio
 		input = &ListPipelineExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelineExecutionsOutput{})
+	output := &ListPipelineExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPipelineExecutionsRequest{Request: req, Input: input}
 }
 
@@ -777,7 +822,10 @@ func (c *CodePipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 		input = &ListPipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	output := &ListPipelinesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPipelinesRequest{Request: req, Input: input}
 }
 
@@ -828,7 +876,10 @@ func (c *CodePipeline) PollForJobsRequest(input *PollForJobsInput) PollForJobsRe
 		input = &PollForJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForJobsOutput{})
+	output := &PollForJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PollForJobsRequest{Request: req, Input: input}
 }
 
@@ -879,7 +930,10 @@ func (c *CodePipeline) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobs
 		input = &PollForThirdPartyJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForThirdPartyJobsOutput{})
+	output := &PollForThirdPartyJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PollForThirdPartyJobsRequest{Request: req, Input: input}
 }
 
@@ -925,7 +979,10 @@ func (c *CodePipeline) PutActionRevisionRequest(input *PutActionRevisionInput) P
 		input = &PutActionRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutActionRevisionOutput{})
+	output := &PutActionRevisionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutActionRevisionRequest{Request: req, Input: input}
 }
 
@@ -972,7 +1029,10 @@ func (c *CodePipeline) PutApprovalResultRequest(input *PutApprovalResultInput) P
 		input = &PutApprovalResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutApprovalResultOutput{})
+	output := &PutApprovalResultOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutApprovalResultRequest{Request: req, Input: input}
 }
 
@@ -1019,9 +1079,12 @@ func (c *CodePipeline) PutJobFailureResultRequest(input *PutJobFailureResultInpu
 		input = &PutJobFailureResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutJobFailureResultOutput{})
+	output := &PutJobFailureResultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutJobFailureResultRequest{Request: req, Input: input}
 }
 
@@ -1068,9 +1131,12 @@ func (c *CodePipeline) PutJobSuccessResultRequest(input *PutJobSuccessResultInpu
 		input = &PutJobSuccessResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutJobSuccessResultOutput{})
+	output := &PutJobSuccessResultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutJobSuccessResultRequest{Request: req, Input: input}
 }
 
@@ -1117,9 +1183,12 @@ func (c *CodePipeline) PutThirdPartyJobFailureResultRequest(input *PutThirdParty
 		input = &PutThirdPartyJobFailureResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutThirdPartyJobFailureResultOutput{})
+	output := &PutThirdPartyJobFailureResultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutThirdPartyJobFailureResultRequest{Request: req, Input: input}
 }
 
@@ -1166,9 +1235,12 @@ func (c *CodePipeline) PutThirdPartyJobSuccessResultRequest(input *PutThirdParty
 		input = &PutThirdPartyJobSuccessResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutThirdPartyJobSuccessResultOutput{})
+	output := &PutThirdPartyJobSuccessResultOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutThirdPartyJobSuccessResultRequest{Request: req, Input: input}
 }
 
@@ -1214,7 +1286,10 @@ func (c *CodePipeline) RetryStageExecutionRequest(input *RetryStageExecutionInpu
 		input = &RetryStageExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &RetryStageExecutionOutput{})
+	output := &RetryStageExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RetryStageExecutionRequest{Request: req, Input: input}
 }
 
@@ -1261,7 +1336,10 @@ func (c *CodePipeline) StartPipelineExecutionRequest(input *StartPipelineExecuti
 		input = &StartPipelineExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartPipelineExecutionOutput{})
+	output := &StartPipelineExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartPipelineExecutionRequest{Request: req, Input: input}
 }
 
@@ -1310,7 +1388,10 @@ func (c *CodePipeline) UpdatePipelineRequest(input *UpdatePipelineInput) UpdateP
 		input = &UpdatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	output := &UpdatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePipelineRequest{Request: req, Input: input}
 }
 
@@ -1429,6 +1510,8 @@ func (s *AcknowledgeJobInput) SetNonce(v string) *AcknowledgeJobInput {
 type AcknowledgeJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Whether the job worker has received the specified job.
 	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 }
@@ -1441,6 +1524,11 @@ func (s AcknowledgeJobOutput) String() string {
 // GoString returns the string representation
 func (s AcknowledgeJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcknowledgeJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -1534,6 +1622,8 @@ func (s *AcknowledgeThirdPartyJobInput) SetNonce(v string) *AcknowledgeThirdPart
 type AcknowledgeThirdPartyJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status information for the third party job, if any.
 	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 }
@@ -1546,6 +1636,11 @@ func (s AcknowledgeThirdPartyJobOutput) String() string {
 // GoString returns the string representation
 func (s AcknowledgeThirdPartyJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcknowledgeThirdPartyJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -2921,6 +3016,8 @@ func (s *CreateCustomActionTypeInput) SetVersion(v string) *CreateCustomActionTy
 type CreateCustomActionTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns information about the details of an action type.
 	//
 	// ActionType is a required field
@@ -2935,6 +3032,11 @@ func (s CreateCustomActionTypeOutput) String() string {
 // GoString returns the string representation
 func (s CreateCustomActionTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCustomActionTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActionType sets the ActionType field's value.
@@ -2994,6 +3096,8 @@ func (s *CreatePipelineInput) SetPipeline(v *PipelineDeclaration) *CreatePipelin
 type CreatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the structure of actions and stages to be performed in the pipeline.
 	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure"`
 }
@@ -3006,6 +3110,11 @@ func (s CreatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s CreatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipeline sets the Pipeline field's value.
@@ -3179,6 +3288,8 @@ func (s *DeleteCustomActionTypeInput) SetVersion(v string) *DeleteCustomActionTy
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionTypeOutput
 type DeleteCustomActionTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3189,6 +3300,11 @@ func (s DeleteCustomActionTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCustomActionTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCustomActionTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DeletePipeline action.
@@ -3238,6 +3354,8 @@ func (s *DeletePipelineInput) SetName(v string) *DeletePipelineInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeletePipelineOutput
 type DeletePipelineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3248,6 +3366,11 @@ func (s DeletePipelineOutput) String() string {
 // GoString returns the string representation
 func (s DeletePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DisableStageTransition action.
@@ -3354,6 +3477,8 @@ func (s *DisableStageTransitionInput) SetTransitionType(v StageTransitionType) *
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DisableStageTransitionOutput
 type DisableStageTransitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3364,6 +3489,11 @@ func (s DisableStageTransitionOutput) String() string {
 // GoString returns the string representation
 func (s DisableStageTransitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableStageTransitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of an EnableStageTransition action.
@@ -3449,6 +3579,8 @@ func (s *EnableStageTransitionInput) SetTransitionType(v StageTransitionType) *E
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransitionOutput
 type EnableStageTransitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3459,6 +3591,11 @@ func (s EnableStageTransitionOutput) String() string {
 // GoString returns the string representation
 func (s EnableStageTransitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableStageTransitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents information about the key used to encrypt data in the artifact
@@ -3728,6 +3865,8 @@ func (s *GetJobDetailsInput) SetJobId(v string) *GetJobDetailsInput {
 type GetJobDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The details of the job.
 	//
 	// If AWSSessionCredentials is used, a long-running job can call GetJobDetails
@@ -3743,6 +3882,11 @@ func (s GetJobDetailsOutput) String() string {
 // GoString returns the string representation
 func (s GetJobDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobDetails sets the JobDetails field's value.
@@ -3815,6 +3959,8 @@ func (s *GetPipelineExecutionInput) SetPipelineName(v string) *GetPipelineExecut
 type GetPipelineExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents information about the execution of a pipeline.
 	PipelineExecution *PipelineExecution `locationName:"pipelineExecution" type:"structure"`
 }
@@ -3827,6 +3973,11 @@ func (s GetPipelineExecutionOutput) String() string {
 // GoString returns the string representation
 func (s GetPipelineExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPipelineExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipelineExecution sets the PipelineExecution field's value.
@@ -3898,6 +4049,8 @@ func (s *GetPipelineInput) SetVersion(v int64) *GetPipelineInput {
 type GetPipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the pipeline metadata information returned as part of the output
 	// of a GetPipeline action.
 	Metadata *PipelineMetadata `locationName:"metadata" type:"structure"`
@@ -3914,6 +4067,11 @@ func (s GetPipelineOutput) String() string {
 // GoString returns the string representation
 func (s GetPipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetadata sets the Metadata field's value.
@@ -3977,6 +4135,8 @@ func (s *GetPipelineStateInput) SetName(v string) *GetPipelineStateInput {
 type GetPipelineStateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date and time the pipeline was created, in timestamp format.
 	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
 
@@ -4004,6 +4164,11 @@ func (s GetPipelineStateOutput) String() string {
 // GoString returns the string representation
 func (s GetPipelineStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPipelineStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreated sets the Created field's value.
@@ -4104,6 +4269,8 @@ func (s *GetThirdPartyJobDetailsInput) SetJobId(v string) *GetThirdPartyJobDetai
 type GetThirdPartyJobDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The details of the job, including any protected values defined for the job.
 	JobDetails *ThirdPartyJobDetails `locationName:"jobDetails" type:"structure"`
 }
@@ -4116,6 +4283,11 @@ func (s GetThirdPartyJobDetailsOutput) String() string {
 // GoString returns the string representation
 func (s GetThirdPartyJobDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetThirdPartyJobDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobDetails sets the JobDetails field's value.
@@ -4420,6 +4592,8 @@ func (s *ListActionTypesInput) SetNextToken(v string) *ListActionTypesInput {
 type ListActionTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides details of the action types.
 	//
 	// ActionTypes is a required field
@@ -4439,6 +4613,11 @@ func (s ListActionTypesOutput) String() string {
 // GoString returns the string representation
 func (s ListActionTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListActionTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActionTypes sets the ActionTypes field's value.
@@ -4530,6 +4709,8 @@ func (s *ListPipelineExecutionsInput) SetPipelineName(v string) *ListPipelineExe
 type ListPipelineExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token that can be used in the next ListPipelineExecutions call. To view
 	// all items in the list, continue to call this operation with each subsequent
 	// token until no more nextToken values are returned.
@@ -4547,6 +4728,11 @@ func (s ListPipelineExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s ListPipelineExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPipelineExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4605,6 +4791,8 @@ func (s *ListPipelinesInput) SetNextToken(v string) *ListPipelinesInput {
 type ListPipelinesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the amount of returned information is significantly large, an identifier
 	// is also returned which can be used in a subsequent list pipelines call to
 	// return the next set of pipelines in the list.
@@ -4622,6 +4810,11 @@ func (s ListPipelinesOutput) String() string {
 // GoString returns the string representation
 func (s ListPipelinesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPipelinesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5153,6 +5346,8 @@ func (s *PollForJobsInput) SetQueryParam(v map[string]string) *PollForJobsInput 
 type PollForJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the jobs to take action on.
 	Jobs []Job `locationName:"jobs" type:"list"`
 }
@@ -5165,6 +5360,11 @@ func (s PollForJobsOutput) String() string {
 // GoString returns the string representation
 func (s PollForJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PollForJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -5236,6 +5436,8 @@ func (s *PollForThirdPartyJobsInput) SetMaxBatchSize(v int64) *PollForThirdParty
 type PollForThirdPartyJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the jobs to take action on.
 	Jobs []ThirdPartyJob `locationName:"jobs" type:"list"`
 }
@@ -5248,6 +5450,11 @@ func (s PollForThirdPartyJobsOutput) String() string {
 // GoString returns the string representation
 func (s PollForThirdPartyJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PollForThirdPartyJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -5361,6 +5568,8 @@ func (s *PutActionRevisionInput) SetStageName(v string) *PutActionRevisionInput 
 type PutActionRevisionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the artifact revision was previously used in an execution
 	// of the specified pipeline.
 	NewRevision *bool `locationName:"newRevision" type:"boolean"`
@@ -5377,6 +5586,11 @@ func (s PutActionRevisionOutput) String() string {
 // GoString returns the string representation
 func (s PutActionRevisionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutActionRevisionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNewRevision sets the NewRevision field's value.
@@ -5514,6 +5728,8 @@ func (s *PutApprovalResultInput) SetToken(v string) *PutApprovalResultInput {
 type PutApprovalResultOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The timestamp showing when the approval or rejection was submitted.
 	ApprovedAt *time.Time `locationName:"approvedAt" type:"timestamp" timestampFormat:"unix"`
 }
@@ -5526,6 +5742,11 @@ func (s PutApprovalResultOutput) String() string {
 // GoString returns the string representation
 func (s PutApprovalResultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutApprovalResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApprovedAt sets the ApprovedAt field's value.
@@ -5599,6 +5820,8 @@ func (s *PutJobFailureResultInput) SetJobId(v string) *PutJobFailureResultInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobFailureResultOutput
 type PutJobFailureResultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5609,6 +5832,11 @@ func (s PutJobFailureResultOutput) String() string {
 // GoString returns the string representation
 func (s PutJobFailureResultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutJobFailureResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a PutJobSuccessResult action.
@@ -5700,6 +5928,8 @@ func (s *PutJobSuccessResultInput) SetJobId(v string) *PutJobSuccessResultInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResultOutput
 type PutJobSuccessResultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5710,6 +5940,11 @@ func (s PutJobSuccessResultOutput) String() string {
 // GoString returns the string representation
 func (s PutJobSuccessResultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutJobSuccessResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a PutThirdPartyJobFailureResult action.
@@ -5798,6 +6033,8 @@ func (s *PutThirdPartyJobFailureResultInput) SetJobId(v string) *PutThirdPartyJo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobFailureResultOutput
 type PutThirdPartyJobFailureResultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5808,6 +6045,11 @@ func (s PutThirdPartyJobFailureResultOutput) String() string {
 // GoString returns the string representation
 func (s PutThirdPartyJobFailureResultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutThirdPartyJobFailureResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a PutThirdPartyJobSuccessResult action.
@@ -5920,6 +6162,8 @@ func (s *PutThirdPartyJobSuccessResultInput) SetJobId(v string) *PutThirdPartyJo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobSuccessResultOutput
 type PutThirdPartyJobSuccessResultOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5930,6 +6174,11 @@ func (s PutThirdPartyJobSuccessResultOutput) String() string {
 // GoString returns the string representation
 func (s PutThirdPartyJobSuccessResultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutThirdPartyJobSuccessResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a RetryStageExecution action.
@@ -6030,6 +6279,8 @@ func (s *RetryStageExecutionInput) SetStageName(v string) *RetryStageExecutionIn
 type RetryStageExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the current workflow execution in the failed stage.
 	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
 }
@@ -6042,6 +6293,11 @@ func (s RetryStageExecutionOutput) String() string {
 // GoString returns the string representation
 func (s RetryStageExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RetryStageExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipelineExecutionId sets the PipelineExecutionId field's value.
@@ -6337,6 +6593,8 @@ func (s *StartPipelineExecutionInput) SetName(v string) *StartPipelineExecutionI
 type StartPipelineExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique system-generated ID of the pipeline execution that was started.
 	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
 }
@@ -6349,6 +6607,11 @@ func (s StartPipelineExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StartPipelineExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartPipelineExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipelineExecutionId sets the PipelineExecutionId field's value.
@@ -6643,6 +6906,8 @@ func (s *UpdatePipelineInput) SetPipeline(v *PipelineDeclaration) *UpdatePipelin
 type UpdatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The structure of the updated pipeline.
 	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure"`
 }
@@ -6655,6 +6920,11 @@ func (s UpdatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipeline sets the Pipeline field's value.

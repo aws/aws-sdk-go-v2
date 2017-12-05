@@ -139,7 +139,10 @@ func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) AssumeRoleRequest {
 		input = &AssumeRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &AssumeRoleOutput{})
+	output := &AssumeRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssumeRoleRequest{Request: req, Input: input}
 }
 
@@ -251,7 +254,10 @@ func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) AssumeRo
 		input = &AssumeRoleWithSAMLInput{}
 	}
 
-	req := c.newRequest(op, input, &AssumeRoleWithSAMLOutput{})
+	output := &AssumeRoleWithSAMLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssumeRoleWithSAMLRequest{Request: req, Input: input}
 }
 
@@ -385,7 +391,10 @@ func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityI
 		input = &AssumeRoleWithWebIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &AssumeRoleWithWebIdentityOutput{})
+	output := &AssumeRoleWithWebIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssumeRoleWithWebIdentityRequest{Request: req, Input: input}
 }
 
@@ -462,7 +471,10 @@ func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessag
 		input = &DecodeAuthorizationMessageInput{}
 	}
 
-	req := c.newRequest(op, input, &DecodeAuthorizationMessageOutput{})
+	output := &DecodeAuthorizationMessageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DecodeAuthorizationMessageRequest{Request: req, Input: input}
 }
 
@@ -509,7 +521,10 @@ func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) GetCallerI
 		input = &GetCallerIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCallerIdentityOutput{})
+	output := &GetCallerIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCallerIdentityRequest{Request: req, Input: input}
 }
 
@@ -632,7 +647,10 @@ func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) GetFeder
 		input = &GetFederationTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFederationTokenOutput{})
+	output := &GetFederationTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFederationTokenRequest{Request: req, Input: input}
 }
 
@@ -723,7 +741,10 @@ func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) GetSessionToke
 		input = &GetSessionTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSessionTokenOutput{})
+	output := &GetSessionTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSessionTokenRequest{Request: req, Input: input}
 }
 
@@ -925,6 +946,8 @@ func (s *AssumeRoleInput) SetTokenCode(v string) *AssumeRoleInput {
 type AssumeRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers
 	// that you can use to refer to the resulting temporary security credentials.
 	// For example, you can reference these credentials as a principal in a resource-based
@@ -955,6 +978,11 @@ func (s AssumeRoleOutput) String() string {
 // GoString returns the string representation
 func (s AssumeRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssumeRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssumedRoleUser sets the AssumedRoleUser field's value.
@@ -1123,6 +1151,8 @@ func (s *AssumeRoleWithSAMLInput) SetSAMLAssertion(v string) *AssumeRoleWithSAML
 type AssumeRoleWithSAMLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifiers for the temporary security credentials that the operation
 	// returns.
 	AssumedRoleUser *AssumedRoleUser `type:"structure"`
@@ -1181,6 +1211,11 @@ func (s AssumeRoleWithSAMLOutput) String() string {
 // GoString returns the string representation
 func (s AssumeRoleWithSAMLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssumeRoleWithSAMLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssumedRoleUser sets the AssumedRoleUser field's value.
@@ -1401,6 +1436,8 @@ func (s *AssumeRoleWithWebIdentityInput) SetWebIdentityToken(v string) *AssumeRo
 type AssumeRoleWithWebIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers
 	// that you can use to refer to the resulting temporary security credentials.
 	// For example, you can reference these credentials as a principal in a resource-based
@@ -1450,6 +1487,11 @@ func (s AssumeRoleWithWebIdentityOutput) String() string {
 // GoString returns the string representation
 func (s AssumeRoleWithWebIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssumeRoleWithWebIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssumedRoleUser sets the AssumedRoleUser field's value.
@@ -1642,6 +1684,8 @@ func (s *DecodeAuthorizationMessageInput) SetEncodedMessage(v string) *DecodeAut
 type DecodeAuthorizationMessageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An XML document that contains the decoded message.
 	DecodedMessage *string `type:"string"`
 }
@@ -1654,6 +1698,11 @@ func (s DecodeAuthorizationMessageOutput) String() string {
 // GoString returns the string representation
 func (s DecodeAuthorizationMessageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DecodeAuthorizationMessageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDecodedMessage sets the DecodedMessage field's value.
@@ -1725,6 +1774,8 @@ func (s GetCallerIdentityInput) GoString() string {
 type GetCallerIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The AWS account ID number of the account that owns or contains the calling
 	// entity.
 	Account *string `type:"string"`
@@ -1747,6 +1798,11 @@ func (s GetCallerIdentityOutput) String() string {
 // GoString returns the string representation
 func (s GetCallerIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCallerIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccount sets the Account field's value.
@@ -1881,6 +1937,8 @@ func (s *GetFederationTokenInput) SetPolicy(v string) *GetFederationTokenInput {
 type GetFederationTokenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security (or session) token.
 	//
@@ -1910,6 +1968,11 @@ func (s GetFederationTokenOutput) String() string {
 // GoString returns the string representation
 func (s GetFederationTokenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFederationTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCredentials sets the Credentials field's value.
@@ -2019,6 +2082,8 @@ func (s *GetSessionTokenInput) SetTokenCode(v string) *GetSessionTokenInput {
 type GetSessionTokenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security (or session) token.
 	//
@@ -2037,6 +2102,11 @@ func (s GetSessionTokenOutput) String() string {
 // GoString returns the string representation
 func (s GetSessionTokenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSessionTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCredentials sets the Credentials field's value.

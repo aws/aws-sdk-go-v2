@@ -52,7 +52,10 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRe
 		input = &AssociateConfigurationItemsToApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateConfigurationItemsToApplicationOutput{})
+	output := &AssociateConfigurationItemsToApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateConfigurationItemsToApplicationRequest{Request: req, Input: input}
 }
 
@@ -98,7 +101,10 @@ func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateAppl
 		input = &CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	output := &CreateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateApplicationRequest{Request: req, Input: input}
 }
 
@@ -146,7 +152,10 @@ func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) 
 		input = &CreateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagsOutput{})
+	output := &CreateTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTagsRequest{Request: req, Input: input}
 }
 
@@ -193,7 +202,10 @@ func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApp
 		input = &DeleteApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationsOutput{})
+	output := &DeleteApplicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationsRequest{Request: req, Input: input}
 }
 
@@ -240,7 +252,10 @@ func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) 
 		input = &DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsRequest{Request: req, Input: input}
 }
 
@@ -287,7 +302,10 @@ func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgent
 		input = &DescribeAgentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAgentsOutput{})
+	output := &DescribeAgentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAgentsRequest{Request: req, Input: input}
 }
 
@@ -340,7 +358,10 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *Descr
 		input = &DescribeConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationsOutput{})
+	output := &DescribeConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -392,7 +413,10 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input 
 		input = &DescribeExportConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportConfigurationsOutput{})
+	output := &DescribeExportConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeExportConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -439,7 +463,10 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *Describe
 		input = &DescribeExportTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	output := &DescribeExportTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeExportTasksRequest{Request: req, Input: input}
 }
 
@@ -486,7 +513,10 @@ func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInp
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -532,7 +562,10 @@ func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicat
 		input = &DisassociateConfigurationItemsFromApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConfigurationItemsFromApplicationOutput{})
+	output := &DisassociateConfigurationItemsFromApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateConfigurationItemsFromApplicationRequest{Request: req, Input: input}
 }
 
@@ -587,7 +620,10 @@ func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportC
 		input = &ExportConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportConfigurationsOutput{})
+	output := &ExportConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExportConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -633,7 +669,10 @@ func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDisco
 		input = &GetDiscoverySummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDiscoverySummaryOutput{})
+	output := &GetDiscoverySummaryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDiscoverySummaryRequest{Request: req, Input: input}
 }
 
@@ -680,7 +719,10 @@ func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfi
 		input = &ListConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigurationsOutput{})
+	output := &ListConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -727,7 +769,10 @@ func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServ
 		input = &ListServerNeighborsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServerNeighborsOutput{})
+	output := &ListServerNeighborsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListServerNeighborsRequest{Request: req, Input: input}
 }
 
@@ -773,7 +818,10 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input
 		input = &StartDataCollectionByAgentIdsInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDataCollectionByAgentIdsOutput{})
+	output := &StartDataCollectionByAgentIdsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartDataCollectionByAgentIdsRequest{Request: req, Input: input}
 }
 
@@ -829,7 +877,10 @@ func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportT
 		input = &StartExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartExportTaskOutput{})
+	output := &StartExportTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartExportTaskRequest{Request: req, Input: input}
 }
 
@@ -875,7 +926,10 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input 
 		input = &StopDataCollectionByAgentIdsInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDataCollectionByAgentIdsOutput{})
+	output := &StopDataCollectionByAgentIdsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopDataCollectionByAgentIdsRequest{Request: req, Input: input}
 }
 
@@ -921,7 +975,10 @@ func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateAppl
 		input = &UpdateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	output := &UpdateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
@@ -1174,6 +1231,8 @@ func (s *AssociateConfigurationItemsToApplicationInput) SetConfigurationIds(v []
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplicationResponse
 type AssociateConfigurationItemsToApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1184,6 +1243,11 @@ func (s AssociateConfigurationItemsToApplicationOutput) String() string {
 // GoString returns the string representation
 func (s AssociateConfigurationItemsToApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateConfigurationItemsToApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Tags for a configuration item. Tags are metadata that help you categorize
@@ -1304,6 +1368,8 @@ func (s *CreateApplicationInput) SetName(v string) *CreateApplicationInput {
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Configuration ID of an application to be created.
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 }
@@ -1316,6 +1382,11 @@ func (s CreateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s CreateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationId sets the ConfigurationId field's value.
@@ -1392,6 +1463,8 @@ func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTagsResponse
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1402,6 +1475,11 @@ func (s CreateTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Inventory data for installed discovery agents.
@@ -1633,6 +1711,8 @@ func (s *DeleteApplicationsInput) SetConfigurationIds(v []string) *DeleteApplica
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplicationsResponse
 type DeleteApplicationsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1643,6 +1723,11 @@ func (s DeleteApplicationsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTagsRequest
@@ -1707,6 +1792,8 @@ func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTagsResponse
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1717,6 +1804,11 @@ func (s DeleteTagsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgentsRequest
@@ -1800,6 +1892,8 @@ func (s *DescribeAgentsInput) SetNextToken(v string) *DescribeAgentsInput {
 type DescribeAgentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Lists agents or the Connector by ID or lists all agents/Connectors associated
 	// with your user account if you did not specify an agent/Connector ID. The
 	// output includes agent/Connector IDs, IP addresses, media access control (MAC)
@@ -1822,6 +1916,11 @@ func (s DescribeAgentsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAgentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAgentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentsInfo sets the AgentsInfo field's value.
@@ -1880,6 +1979,8 @@ func (s *DescribeConfigurationsInput) SetConfigurationIds(v []string) *DescribeC
 type DescribeConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A key in the response map. The value is an array of data.
 	Configurations []map[string]string `locationName:"configurations" type:"list"`
 }
@@ -1892,6 +1993,11 @@ func (s DescribeConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurations sets the Configurations field's value.
@@ -1949,6 +2055,8 @@ func (s *DescribeExportConfigurationsInput) SetNextToken(v string) *DescribeExpo
 type DescribeExportConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns export details. When the status is complete, the response includes
 	// a URL for an Amazon S3 bucket where you can view the data in a CSV file.
 	ExportsInfo []ExportInfo `locationName:"exportsInfo" type:"list"`
@@ -1968,6 +2076,11 @@ func (s DescribeExportConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeExportConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeExportConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportsInfo sets the ExportsInfo field's value.
@@ -2062,6 +2175,8 @@ func (s *DescribeExportTasksInput) SetNextToken(v string) *DescribeExportTasksIn
 type DescribeExportTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains one or more sets of export request details. When the status of a
 	// request is SUCCEEDED, the response includes a URL for an Amazon S3 bucket
 	// where you can view the data in a CSV file.
@@ -2082,6 +2197,11 @@ func (s DescribeExportTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeExportTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeExportTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportsInfo sets the ExportsInfo field's value.
@@ -2162,6 +2282,8 @@ func (s *DescribeTagsInput) SetNextToken(v string) *DescribeTagsInput {
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The call returns a token. Use this token to get the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -2178,6 +2300,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2250,6 +2377,8 @@ func (s *DisassociateConfigurationItemsFromApplicationInput) SetConfigurationIds
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplicationResponse
 type DisassociateConfigurationItemsFromApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2260,6 +2389,11 @@ func (s DisassociateConfigurationItemsFromApplicationOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateConfigurationItemsFromApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateConfigurationItemsFromApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurationsInput
@@ -2281,6 +2415,8 @@ func (s ExportConfigurationsInput) GoString() string {
 type ExportConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier that you can use to query the export status.
 	ExportId *string `locationName:"exportId" type:"string"`
 }
@@ -2293,6 +2429,11 @@ func (s ExportConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s ExportConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExportConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportId sets the ExportId field's value.
@@ -2578,6 +2719,8 @@ func (s GetDiscoverySummaryInput) GoString() string {
 type GetDiscoverySummaryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details about discovered agents, including agent status and health.
 	AgentSummary *CustomerAgentInfo `locationName:"agentSummary" type:"structure"`
 
@@ -2605,6 +2748,11 @@ func (s GetDiscoverySummaryOutput) String() string {
 // GoString returns the string representation
 func (s GetDiscoverySummaryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDiscoverySummaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentSummary sets the AgentSummary field's value.
@@ -2747,6 +2895,8 @@ func (s *ListConfigurationsInput) SetOrderBy(v []OrderByElement) *ListConfigurat
 type ListConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns configuration details, including the configuration ID, attribute
 	// names, and attribute values.
 	Configurations []map[string]string `locationName:"configurations" type:"list"`
@@ -2766,6 +2916,11 @@ func (s ListConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s ListConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurations sets the Configurations field's value.
@@ -2865,6 +3020,8 @@ func (s *ListServerNeighborsInput) SetPortInformationNeeded(v bool) *ListServerN
 type ListServerNeighborsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Count of distinct servers that are one hop away from the given server.
 	KnownDependencyCount *int64 `locationName:"knownDependencyCount" type:"long"`
 
@@ -2888,6 +3045,11 @@ func (s ListServerNeighborsOutput) String() string {
 // GoString returns the string representation
 func (s ListServerNeighborsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListServerNeighborsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKnownDependencyCount sets the KnownDependencyCount field's value.
@@ -3075,6 +3237,8 @@ func (s *StartDataCollectionByAgentIdsInput) SetAgentIds(v []string) *StartDataC
 type StartDataCollectionByAgentIdsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about agents or the connector that were instructed to start collecting
 	// data. Information includes the agent/connector ID, a description of the operation
 	// performed, and whether the agent/connector configuration was updated.
@@ -3089,6 +3253,11 @@ func (s StartDataCollectionByAgentIdsOutput) String() string {
 // GoString returns the string representation
 func (s StartDataCollectionByAgentIdsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartDataCollectionByAgentIdsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentsConfigurationStatus sets the AgentsConfigurationStatus field's value.
@@ -3177,6 +3346,8 @@ func (s *StartExportTaskInput) SetStartTime(v time.Time) *StartExportTaskInput {
 type StartExportTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier used to query the status of an export request.
 	ExportId *string `locationName:"exportId" type:"string"`
 }
@@ -3189,6 +3360,11 @@ func (s StartExportTaskOutput) String() string {
 // GoString returns the string representation
 func (s StartExportTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartExportTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportId sets the ExportId field's value.
@@ -3241,6 +3417,8 @@ func (s *StopDataCollectionByAgentIdsInput) SetAgentIds(v []string) *StopDataCol
 type StopDataCollectionByAgentIdsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the agents or connector that were instructed to stop collecting
 	// data. Information includes the agent/connector ID, a description of the operation
 	// performed, and whether the agent/connector configuration was updated.
@@ -3255,6 +3433,11 @@ func (s StopDataCollectionByAgentIdsOutput) String() string {
 // GoString returns the string representation
 func (s StopDataCollectionByAgentIdsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopDataCollectionByAgentIdsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentsConfigurationStatus sets the AgentsConfigurationStatus field's value.
@@ -3436,6 +3619,8 @@ func (s *UpdateApplicationInput) SetName(v string) *UpdateApplicationInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/UpdateApplicationResponse
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3446,6 +3631,11 @@ func (s UpdateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type AgentStatus string

@@ -135,9 +135,12 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input
 		input = &InputService1TestShapeInputService1TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService1TestShapeInputService1TestCaseOperation1Output{})
+	output := &InputService1TestShapeInputService1TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService1TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -155,6 +158,13 @@ func (s *InputService1TestShapeInputService1TestCaseOperation1Input) SetName(v s
 
 type InputService1TestShapeInputService1TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService1TestShapeInputService1TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // InputService2ProtocolTest provides the API operation methods for making requests to
@@ -251,9 +261,12 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input
 		input = &InputService2TestShapeInputService2TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService2TestShapeInputService2TestCaseOperation1Output{})
+	output := &InputService2TestShapeInputService2TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService2TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -271,6 +284,13 @@ func (s *InputService2TestShapeInputService2TestCaseOperation1Input) SetTimeArg(
 
 type InputService2TestShapeInputService2TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService2TestShapeInputService2TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // InputService3ProtocolTest provides the API operation methods for making requests to
@@ -367,9 +387,12 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input
 		input = &InputService3TestShapeInputService3TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation1Output{})
+	output := &InputService3TestShapeInputService3TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService3TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -411,14 +434,24 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input
 		input = &InputService3TestShapeInputService3TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation2Output{})
+	output := &InputService3TestShapeInputService3TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService3TestCaseOperation2Request{Request: req, Input: input}
 }
 
 type InputService3TestShapeInputService3TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService3TestShapeInputService3TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService3TestShapeInputService3TestCaseOperation2Input struct {
@@ -444,6 +477,13 @@ func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetBlobMap(
 
 type InputService3TestShapeInputService3TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService3TestShapeInputService3TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // InputService4ProtocolTest provides the API operation methods for making requests to
@@ -540,9 +580,12 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 		input = &InputService4TestShapeInputService4TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService4TestShapeInputService4TestCaseOperation1Output{})
+	output := &InputService4TestShapeInputService4TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService4TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -560,6 +603,13 @@ func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListPara
 
 type InputService4TestShapeInputService4TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService4TestShapeInputService4TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // InputService5ProtocolTest provides the API operation methods for making requests to
@@ -656,9 +706,12 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation1Output{})
+	output := &InputService5TestShapeInputService5TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService5TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -700,9 +753,12 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation2Request(input
 		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation2Output{})
+	output := &InputService5TestShapeInputService5TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService5TestCaseOperation2Request{Request: req, Input: input}
 }
 
@@ -744,9 +800,12 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation3Request(input
 		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation3Output{})
+	output := &InputService5TestShapeInputService5TestCaseOperation3Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService5TestCaseOperation3Request{Request: req, Input: input}
 }
 
@@ -788,9 +847,12 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation4Request(input
 		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation4Output{})
+	output := &InputService5TestShapeInputService5TestCaseOperation4Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService5TestCaseOperation4Request{Request: req, Input: input}
 }
 
@@ -832,9 +894,12 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation5Request(input
 		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation5Output{})
+	output := &InputService5TestShapeInputService5TestCaseOperation5Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService5TestCaseOperation5Request{Request: req, Input: input}
 }
 
@@ -876,30 +941,68 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation6Request(input
 		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation6Output{})
+	output := &InputService5TestShapeInputService5TestCaseOperation6Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService5TestCaseOperation6Request{Request: req, Input: input}
 }
 
 type InputService5TestShapeInputService5TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService5TestShapeInputService5TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService5TestShapeInputService5TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService5TestShapeInputService5TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService5TestShapeInputService5TestCaseOperation3Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService5TestShapeInputService5TestCaseOperation3Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService5TestShapeInputService5TestCaseOperation4Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService5TestShapeInputService5TestCaseOperation4Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService5TestShapeInputService5TestCaseOperation5Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService5TestShapeInputService5TestCaseOperation5Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService5TestShapeInputService5TestCaseOperation6Input struct {
@@ -916,6 +1019,13 @@ func (s *InputService5TestShapeInputService5TestCaseOperation6Input) SetRecursiv
 
 type InputService5TestShapeInputService5TestCaseOperation6Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService5TestShapeInputService5TestCaseOperation6Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService5TestShapeRecursiveStructType struct {
@@ -1048,9 +1158,12 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 		input = &InputService6TestShapeInputService6TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService6TestShapeInputService6TestCaseOperation1Output{})
+	output := &InputService6TestShapeInputService6TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService6TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -1068,6 +1181,13 @@ func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetMap(v ma
 
 type InputService6TestShapeInputService6TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService6TestShapeInputService6TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // InputService7ProtocolTest provides the API operation methods for making requests to
@@ -1162,9 +1282,12 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 		input = &InputService7TestShapeInputService7TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation1Output{})
+	output := &InputService7TestShapeInputService7TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService7TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -1206,14 +1329,24 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input
 		input = &InputService7TestShapeInputService7TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation2Output{})
+	output := &InputService7TestShapeInputService7TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService7TestCaseOperation2Request{Request: req, Input: input}
 }
 
 type InputService7TestShapeInputService7TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService7TestShapeInputService7TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService7TestShapeInputService7TestCaseOperation2Input struct {
@@ -1230,6 +1363,13 @@ func (s *InputService7TestShapeInputService7TestCaseOperation2Input) SetToken(v 
 
 type InputService7TestShapeInputService7TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService7TestShapeInputService7TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // InputService8ProtocolTest provides the API operation methods for making requests to
@@ -1324,9 +1464,12 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 		input = &InputService8TestShapeInputService8TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation1Output{})
+	output := &InputService8TestShapeInputService8TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService8TestCaseOperation1Request{Request: req, Input: input}
 }
 
@@ -1368,14 +1511,24 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation2Request(input
 		input = &InputService8TestShapeInputService8TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation2Output{})
+	output := &InputService8TestShapeInputService8TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InputService8TestCaseOperation2Request{Request: req, Input: input}
 }
 
 type InputService8TestShapeInputService8TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService8TestShapeInputService8TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService8TestShapeInputService8TestCaseOperation2Input struct {
@@ -1400,6 +1553,13 @@ func (s *InputService8TestShapeInputService8TestCaseOperation2Input) SetListEnum
 
 type InputService8TestShapeInputService8TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService8TestShapeInputService8TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type InputService8TestShapeEnumType string

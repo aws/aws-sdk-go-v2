@@ -60,7 +60,10 @@ func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) Act
 		input = &ActivateGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &ActivateGatewayOutput{})
+	output := &ActivateGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ActivateGatewayRequest{Request: req, Input: input}
 }
 
@@ -112,7 +115,10 @@ func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
 		input = &AddCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &AddCacheOutput{})
+	output := &AddCacheOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddCacheRequest{Request: req, Input: input}
 }
 
@@ -171,7 +177,10 @@ func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput)
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	output := &AddTagsToResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -223,7 +232,10 @@ func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) Add
 		input = &AddUploadBufferInput{}
 	}
 
-	req := c.newRequest(op, input, &AddUploadBufferOutput{})
+	output := &AddUploadBufferOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddUploadBufferRequest{Request: req, Input: input}
 }
 
@@ -279,7 +291,10 @@ func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput)
 		input = &AddWorkingStorageInput{}
 	}
 
-	req := c.newRequest(op, input, &AddWorkingStorageOutput{})
+	output := &AddWorkingStorageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddWorkingStorageRequest{Request: req, Input: input}
 }
 
@@ -327,7 +342,10 @@ func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) Cance
 		input = &CancelArchivalInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelArchivalOutput{})
+	output := &CancelArchivalOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelArchivalRequest{Request: req, Input: input}
 }
 
@@ -375,7 +393,10 @@ func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) Can
 		input = &CancelRetrievalInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelRetrievalOutput{})
+	output := &CancelRetrievalOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelRetrievalRequest{Request: req, Input: input}
 }
 
@@ -437,7 +458,10 @@ func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSI
 		input = &CreateCachediSCSIVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCachediSCSIVolumeOutput{})
+	output := &CreateCachediSCSIVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCachediSCSIVolumeRequest{Request: req, Input: input}
 }
 
@@ -495,7 +519,10 @@ func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInpu
 		input = &CreateNFSFileShareInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNFSFileShareOutput{})
+	output := &CreateNFSFileShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNFSFileShareRequest{Request: req, Input: input}
 }
 
@@ -564,7 +591,10 @@ func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) Creat
 		input = &CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	output := &CreateSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSnapshotRequest{Request: req, Input: input}
 }
 
@@ -626,7 +656,10 @@ func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *Cre
 		input = &CreateSnapshotFromVolumeRecoveryPointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotFromVolumeRecoveryPointOutput{})
+	output := &CreateSnapshotFromVolumeRecoveryPointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSnapshotFromVolumeRecoveryPointRequest{Request: req, Input: input}
 }
 
@@ -684,7 +717,10 @@ func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSI
 		input = &CreateStorediSCSIVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStorediSCSIVolumeOutput{})
+	output := &CreateStorediSCSIVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStorediSCSIVolumeRequest{Request: req, Input: input}
 }
 
@@ -736,7 +772,10 @@ func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarco
 		input = &CreateTapeWithBarcodeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTapeWithBarcodeOutput{})
+	output := &CreateTapeWithBarcodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTapeWithBarcodeRequest{Request: req, Input: input}
 }
 
@@ -787,7 +826,10 @@ func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) CreateTapes
 		input = &CreateTapesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTapesOutput{})
+	output := &CreateTapesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTapesRequest{Request: req, Input: input}
 }
 
@@ -837,7 +879,10 @@ func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthR
 		input = &DeleteBandwidthRateLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBandwidthRateLimitOutput{})
+	output := &DeleteBandwidthRateLimitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBandwidthRateLimitRequest{Request: req, Input: input}
 }
 
@@ -884,7 +929,10 @@ func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentia
 		input = &DeleteChapCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteChapCredentialsOutput{})
+	output := &DeleteChapCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteChapCredentialsRequest{Request: req, Input: input}
 }
 
@@ -931,7 +979,10 @@ func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) Del
 		input = &DeleteFileShareInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFileShareOutput{})
+	output := &DeleteFileShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFileShareRequest{Request: req, Input: input}
 }
 
@@ -992,7 +1043,10 @@ func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) DeleteG
 		input = &DeleteGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGatewayOutput{})
+	output := &DeleteGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGatewayRequest{Request: req, Input: input}
 }
 
@@ -1047,7 +1101,10 @@ func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotSche
 		input = &DeleteSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotScheduleOutput{})
+	output := &DeleteSnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSnapshotScheduleRequest{Request: req, Input: input}
 }
 
@@ -1094,7 +1151,10 @@ func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeReq
 		input = &DeleteTapeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTapeOutput{})
+	output := &DeleteTapeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTapeRequest{Request: req, Input: input}
 }
 
@@ -1141,7 +1201,10 @@ func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput)
 		input = &DeleteTapeArchiveInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTapeArchiveOutput{})
+	output := &DeleteTapeArchiveOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTapeArchiveRequest{Request: req, Input: input}
 }
 
@@ -1202,7 +1265,10 @@ func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVol
 		input = &DeleteVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVolumeOutput{})
+	output := &DeleteVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVolumeRequest{Request: req, Input: input}
 }
 
@@ -1254,7 +1320,10 @@ func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwi
 		input = &DescribeBandwidthRateLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBandwidthRateLimitOutput{})
+	output := &DescribeBandwidthRateLimitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBandwidthRateLimitRequest{Request: req, Input: input}
 }
 
@@ -1304,7 +1373,10 @@ func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) Describ
 		input = &DescribeCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheOutput{})
+	output := &DescribeCacheOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheRequest{Request: req, Input: input}
 }
 
@@ -1355,7 +1427,10 @@ func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCached
 		input = &DescribeCachediSCSIVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCachediSCSIVolumesOutput{})
+	output := &DescribeCachediSCSIVolumesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCachediSCSIVolumesRequest{Request: req, Input: input}
 }
 
@@ -1402,7 +1477,10 @@ func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCrede
 		input = &DescribeChapCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeChapCredentialsOutput{})
+	output := &DescribeChapCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeChapCredentialsRequest{Request: req, Input: input}
 }
 
@@ -1451,7 +1529,10 @@ func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewa
 		input = &DescribeGatewayInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGatewayInformationOutput{})
+	output := &DescribeGatewayInformationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeGatewayInformationRequest{Request: req, Input: input}
 }
 
@@ -1498,7 +1579,10 @@ func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMain
 		input = &DescribeMaintenanceStartTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceStartTimeOutput{})
+	output := &DescribeMaintenanceStartTimeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceStartTimeRequest{Request: req, Input: input}
 }
 
@@ -1545,7 +1629,10 @@ func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileShar
 		input = &DescribeNFSFileSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNFSFileSharesOutput{})
+	output := &DescribeNFSFileSharesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNFSFileSharesRequest{Request: req, Input: input}
 }
 
@@ -1594,7 +1681,10 @@ func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshot
 		input = &DescribeSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotScheduleOutput{})
+	output := &DescribeSnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSnapshotScheduleRequest{Request: req, Input: input}
 }
 
@@ -1643,7 +1733,10 @@ func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStored
 		input = &DescribeStorediSCSIVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStorediSCSIVolumesOutput{})
+	output := &DescribeStorediSCSIVolumesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStorediSCSIVolumesRequest{Request: req, Input: input}
 }
 
@@ -1699,7 +1792,10 @@ func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchives
 		input = &DescribeTapeArchivesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTapeArchivesOutput{})
+	output := &DescribeTapeArchivesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTapeArchivesRequest{Request: req, Input: input}
 }
 
@@ -1807,7 +1903,10 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRe
 		input = &DescribeTapeRecoveryPointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTapeRecoveryPointsOutput{})
+	output := &DescribeTapeRecoveryPointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTapeRecoveryPointsRequest{Request: req, Input: input}
 }
 
@@ -1912,7 +2011,10 @@ func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) Describ
 		input = &DescribeTapesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTapesOutput{})
+	output := &DescribeTapesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTapesRequest{Request: req, Input: input}
 }
 
@@ -2012,7 +2114,10 @@ func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBuffer
 		input = &DescribeUploadBufferInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUploadBufferOutput{})
+	output := &DescribeUploadBufferOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUploadBufferRequest{Request: req, Input: input}
 }
 
@@ -2067,7 +2172,10 @@ func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInpu
 		input = &DescribeVTLDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVTLDevicesOutput{})
+	output := &DescribeVTLDevicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVTLDevicesRequest{Request: req, Input: input}
 }
 
@@ -2172,7 +2280,10 @@ func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingSto
 		input = &DescribeWorkingStorageInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkingStorageOutput{})
+	output := &DescribeWorkingStorageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeWorkingStorageRequest{Request: req, Input: input}
 }
 
@@ -2225,7 +2336,10 @@ func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) Disab
 		input = &DisableGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableGatewayOutput{})
+	output := &DisableGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableGatewayRequest{Request: req, Input: input}
 }
 
@@ -2273,7 +2387,10 @@ func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) ListF
 		input = &ListFileSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFileSharesOutput{})
+	output := &ListFileSharesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFileSharesRequest{Request: req, Input: input}
 }
 
@@ -2335,7 +2452,10 @@ func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) ListGatew
 		input = &ListGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGatewaysOutput{})
+	output := &ListGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGatewaysRequest{Request: req, Input: input}
 }
 
@@ -2440,7 +2560,10 @@ func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) ListL
 		input = &ListLocalDisksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLocalDisksOutput{})
+	output := &ListLocalDisksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListLocalDisksRequest{Request: req, Input: input}
 }
 
@@ -2487,7 +2610,10 @@ func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceIn
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -2543,7 +2669,10 @@ func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) ListTapesReques
 		input = &ListTapesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTapesOutput{})
+	output := &ListTapesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTapesRequest{Request: req, Input: input}
 }
 
@@ -2591,7 +2720,10 @@ func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiators
 		input = &ListVolumeInitiatorsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVolumeInitiatorsOutput{})
+	output := &ListVolumeInitiatorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVolumeInitiatorsRequest{Request: req, Input: input}
 }
 
@@ -2644,7 +2776,10 @@ func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecove
 		input = &ListVolumeRecoveryPointsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVolumeRecoveryPointsOutput{})
+	output := &ListVolumeRecoveryPointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVolumeRecoveryPointsRequest{Request: req, Input: input}
 }
 
@@ -2707,7 +2842,10 @@ func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) ListVolumes
 		input = &ListVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVolumesOutput{})
+	output := &ListVolumesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVolumesRequest{Request: req, Input: input}
 }
 
@@ -2805,7 +2943,10 @@ func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) RefreshCa
 		input = &RefreshCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &RefreshCacheOutput{})
+	output := &RefreshCacheOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RefreshCacheRequest{Request: req, Input: input}
 }
 
@@ -2852,7 +2993,10 @@ func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromReso
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -2910,7 +3054,10 @@ func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) ResetCacheReq
 		input = &ResetCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetCacheOutput{})
+	output := &ResetCacheOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetCacheRequest{Request: req, Input: input}
 }
 
@@ -2965,7 +3112,10 @@ func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveIn
 		input = &RetrieveTapeArchiveInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveTapeArchiveOutput{})
+	output := &RetrieveTapeArchiveOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RetrieveTapeArchiveRequest{Request: req, Input: input}
 }
 
@@ -3020,7 +3170,10 @@ func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRec
 		input = &RetrieveTapeRecoveryPointInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveTapeRecoveryPointOutput{})
+	output := &RetrieveTapeRecoveryPointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RetrieveTapeRecoveryPointRequest{Request: req, Input: input}
 }
 
@@ -3069,7 +3222,10 @@ func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePa
 		input = &SetLocalConsolePasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLocalConsolePasswordOutput{})
+	output := &SetLocalConsolePasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetLocalConsolePasswordRequest{Request: req, Input: input}
 }
 
@@ -3135,7 +3291,10 @@ func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) Shu
 		input = &ShutdownGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &ShutdownGatewayOutput{})
+	output := &ShutdownGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ShutdownGatewayRequest{Request: req, Input: input}
 }
 
@@ -3192,7 +3351,10 @@ func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) StartGate
 		input = &StartGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &StartGatewayOutput{})
+	output := &StartGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartGatewayRequest{Request: req, Input: input}
 }
 
@@ -3247,7 +3409,10 @@ func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthR
 		input = &UpdateBandwidthRateLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBandwidthRateLimitOutput{})
+	output := &UpdateBandwidthRateLimitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateBandwidthRateLimitRequest{Request: req, Input: input}
 }
 
@@ -3298,7 +3463,10 @@ func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentia
 		input = &UpdateChapCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateChapCredentialsOutput{})
+	output := &UpdateChapCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateChapCredentialsRequest{Request: req, Input: input}
 }
 
@@ -3350,7 +3518,10 @@ func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInf
 		input = &UpdateGatewayInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayInformationOutput{})
+	output := &UpdateGatewayInformationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGatewayInformationRequest{Request: req, Input: input}
 }
 
@@ -3410,7 +3581,10 @@ func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySof
 		input = &UpdateGatewaySoftwareNowInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewaySoftwareNowOutput{})
+	output := &UpdateGatewaySoftwareNowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGatewaySoftwareNowRequest{Request: req, Input: input}
 }
 
@@ -3458,7 +3632,10 @@ func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintena
 		input = &UpdateMaintenanceStartTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMaintenanceStartTimeOutput{})
+	output := &UpdateMaintenanceStartTimeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMaintenanceStartTimeRequest{Request: req, Input: input}
 }
 
@@ -3523,7 +3700,10 @@ func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInpu
 		input = &UpdateNFSFileShareInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNFSFileShareOutput{})
+	output := &UpdateNFSFileShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateNFSFileShareRequest{Request: req, Input: input}
 }
 
@@ -3578,7 +3758,10 @@ func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotSche
 		input = &UpdateSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSnapshotScheduleOutput{})
+	output := &UpdateSnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSnapshotScheduleRequest{Request: req, Input: input}
 }
 
@@ -3628,7 +3811,10 @@ func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeIn
 		input = &UpdateVTLDeviceTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVTLDeviceTypeOutput{})
+	output := &UpdateVTLDeviceTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateVTLDeviceTypeRequest{Request: req, Input: input}
 }
 
@@ -3820,6 +4006,8 @@ func (s *ActivateGatewayInput) SetTapeDriveType(v string) *ActivateGatewayInput 
 type ActivateGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -3833,6 +4021,11 @@ func (s ActivateGatewayOutput) String() string {
 // GoString returns the string representation
 func (s ActivateGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ActivateGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -3902,6 +4095,8 @@ func (s *AddCacheInput) SetGatewayARN(v string) *AddCacheInput {
 type AddCacheOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -3915,6 +4110,11 @@ func (s AddCacheOutput) String() string {
 // GoString returns the string representation
 func (s AddCacheOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddCacheOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -3998,6 +4198,8 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
 	ResourceARN *string `min:"50" type:"string"`
 }
@@ -4010,6 +4212,11 @@ func (s AddTagsToResourceOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceARN sets the ResourceARN field's value.
@@ -4079,6 +4286,8 @@ func (s *AddUploadBufferInput) SetGatewayARN(v string) *AddUploadBufferInput {
 type AddUploadBufferOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -4092,6 +4301,11 @@ func (s AddUploadBufferOutput) String() string {
 // GoString returns the string representation
 func (s AddUploadBufferOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddUploadBufferOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -4170,6 +4384,8 @@ func (s *AddWorkingStorageInput) SetGatewayARN(v string) *AddWorkingStorageInput
 type AddWorkingStorageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -4183,6 +4399,11 @@ func (s AddWorkingStorageOutput) String() string {
 // GoString returns the string representation
 func (s AddWorkingStorageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddWorkingStorageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -4362,6 +4583,8 @@ func (s *CancelArchivalInput) SetTapeARN(v string) *CancelArchivalInput {
 type CancelArchivalOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the virtual tape for which archiving was
 	// canceled.
 	TapeARN *string `min:"50" type:"string"`
@@ -4375,6 +4598,11 @@ func (s CancelArchivalOutput) String() string {
 // GoString returns the string representation
 func (s CancelArchivalOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelArchivalOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -4452,6 +4680,8 @@ func (s *CancelRetrievalInput) SetTapeARN(v string) *CancelRetrievalInput {
 type CancelRetrievalOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the virtual tape for which retrieval was
 	// canceled.
 	TapeARN *string `min:"50" type:"string"`
@@ -4465,6 +4695,11 @@ func (s CancelRetrievalOutput) String() string {
 // GoString returns the string representation
 func (s CancelRetrievalOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelRetrievalOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -4660,6 +4895,8 @@ func (s *CreateCachediSCSIVolumeInput) SetVolumeSizeInBytes(v int64) *CreateCach
 type CreateCachediSCSIVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	TargetARN *string `min:"50" type:"string"`
 
 	VolumeARN *string `min:"50" type:"string"`
@@ -4673,6 +4910,11 @@ func (s CreateCachediSCSIVolumeOutput) String() string {
 // GoString returns the string representation
 func (s CreateCachediSCSIVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCachediSCSIVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTargetARN sets the TargetARN field's value.
@@ -4885,6 +5127,8 @@ func (s *CreateNFSFileShareInput) SetSquash(v string) *CreateNFSFileShareInput {
 type CreateNFSFileShareOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the newly created file share.
 	FileShareARN *string `min:"50" type:"string"`
 }
@@ -4897,6 +5141,11 @@ func (s CreateNFSFileShareOutput) String() string {
 // GoString returns the string representation
 func (s CreateNFSFileShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNFSFileShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileShareARN sets the FileShareARN field's value.
@@ -4966,6 +5215,8 @@ func (s *CreateSnapshotFromVolumeRecoveryPointInput) SetVolumeARN(v string) *Cre
 type CreateSnapshotFromVolumeRecoveryPointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	SnapshotId *string `type:"string"`
 
 	VolumeARN *string `min:"50" type:"string"`
@@ -4981,6 +5232,11 @@ func (s CreateSnapshotFromVolumeRecoveryPointOutput) String() string {
 // GoString returns the string representation
 func (s CreateSnapshotFromVolumeRecoveryPointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSnapshotFromVolumeRecoveryPointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshotId sets the SnapshotId field's value.
@@ -5075,6 +5331,8 @@ func (s *CreateSnapshotInput) SetVolumeARN(v string) *CreateSnapshotInput {
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The snapshot ID that is used to refer to the snapshot in future operations
 	// such as describing snapshots (Amazon Elastic Compute Cloud API DescribeSnapshots)
 	// or creating a volume from a snapshot (CreateStorediSCSIVolume).
@@ -5092,6 +5350,11 @@ func (s CreateSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshotId sets the SnapshotId field's value.
@@ -5257,6 +5520,8 @@ func (s *CreateStorediSCSIVolumeInput) SetTargetName(v string) *CreateStorediSCS
 type CreateStorediSCSIVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// he Amazon Resource Name (ARN) of the volume target that includes the iSCSI
 	// name that initiators can use to connect to the target.
 	TargetARN *string `min:"50" type:"string"`
@@ -5276,6 +5541,11 @@ func (s CreateStorediSCSIVolumeOutput) String() string {
 // GoString returns the string representation
 func (s CreateStorediSCSIVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStorediSCSIVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTargetARN sets the TargetARN field's value.
@@ -5385,6 +5655,8 @@ func (s *CreateTapeWithBarcodeInput) SetTapeSizeInBytes(v int64) *CreateTapeWith
 type CreateTapeWithBarcodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique Amazon Resource Name (ARN) that represents the virtual tape that
 	// was created.
 	TapeARN *string `min:"50" type:"string"`
@@ -5398,6 +5670,11 @@ func (s CreateTapeWithBarcodeOutput) String() string {
 // GoString returns the string representation
 func (s CreateTapeWithBarcodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTapeWithBarcodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -5535,6 +5812,8 @@ func (s *CreateTapesInput) SetTapeSizeInBytes(v int64) *CreateTapesInput {
 type CreateTapesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of unique Amazon Resource Names (ARNs) that represents the virtual
 	// tapes that were created.
 	TapeARNs []string `type:"list"`
@@ -5548,6 +5827,11 @@ func (s CreateTapesOutput) String() string {
 // GoString returns the string representation
 func (s CreateTapesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTapesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARNs sets the TapeARNs field's value.
@@ -5630,6 +5914,8 @@ func (s *DeleteBandwidthRateLimitInput) SetGatewayARN(v string) *DeleteBandwidth
 type DeleteBandwidthRateLimitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -5643,6 +5929,11 @@ func (s DeleteBandwidthRateLimitOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBandwidthRateLimitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBandwidthRateLimitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -5723,6 +6014,8 @@ func (s *DeleteChapCredentialsInput) SetTargetARN(v string) *DeleteChapCredentia
 type DeleteChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The iSCSI initiator that connects to the target.
 	InitiatorName *string `min:"1" type:"string"`
 
@@ -5738,6 +6031,11 @@ func (s DeleteChapCredentialsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteChapCredentialsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteChapCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInitiatorName sets the InitiatorName field's value.
@@ -5813,6 +6111,8 @@ func (s *DeleteFileShareInput) SetForceDelete(v bool) *DeleteFileShareInput {
 type DeleteFileShareOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the deleted file share.
 	FileShareARN *string `min:"50" type:"string"`
 }
@@ -5825,6 +6125,11 @@ func (s DeleteFileShareOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFileShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFileShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileShareARN sets the FileShareARN field's value.
@@ -5883,6 +6188,8 @@ func (s *DeleteGatewayInput) SetGatewayARN(v string) *DeleteGatewayInput {
 type DeleteGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -5896,6 +6203,11 @@ func (s DeleteGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -5949,6 +6261,8 @@ func (s *DeleteSnapshotScheduleInput) SetVolumeARN(v string) *DeleteSnapshotSche
 type DeleteSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	VolumeARN *string `min:"50" type:"string"`
 }
 
@@ -5960,6 +6274,11 @@ func (s DeleteSnapshotScheduleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSnapshotScheduleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVolumeARN sets the VolumeARN field's value.
@@ -6018,6 +6337,8 @@ func (s *DeleteTapeArchiveInput) SetTapeARN(v string) *DeleteTapeArchiveInput {
 type DeleteTapeArchiveOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the virtual tape that was deleted from
 	// the virtual tape shelf (VTS).
 	TapeARN *string `min:"50" type:"string"`
@@ -6031,6 +6352,11 @@ func (s DeleteTapeArchiveOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTapeArchiveOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTapeArchiveOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -6108,6 +6434,8 @@ func (s *DeleteTapeInput) SetTapeARN(v string) *DeleteTapeInput {
 type DeleteTapeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the deleted virtual tape.
 	TapeARN *string `min:"50" type:"string"`
 }
@@ -6120,6 +6448,11 @@ func (s DeleteTapeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTapeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTapeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -6178,6 +6511,8 @@ func (s *DeleteVolumeInput) SetVolumeARN(v string) *DeleteVolumeInput {
 type DeleteVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the storage volume that was deleted. It
 	// is the same ARN you provided in the request.
 	VolumeARN *string `min:"50" type:"string"`
@@ -6191,6 +6526,11 @@ func (s DeleteVolumeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVolumeARN sets the VolumeARN field's value.
@@ -6249,6 +6589,8 @@ func (s *DescribeBandwidthRateLimitInput) SetGatewayARN(v string) *DescribeBandw
 type DescribeBandwidthRateLimitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The average download bandwidth rate limit in bits per second. This field
 	// does not appear in the response if the download rate limit is not set.
 	AverageDownloadRateLimitInBitsPerSec *int64 `min:"102400" type:"long"`
@@ -6270,6 +6612,11 @@ func (s DescribeBandwidthRateLimitOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBandwidthRateLimitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBandwidthRateLimitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAverageDownloadRateLimitInBitsPerSec sets the AverageDownloadRateLimitInBitsPerSec field's value.
@@ -6338,6 +6685,8 @@ func (s *DescribeCacheInput) SetGatewayARN(v string) *DescribeCacheInput {
 type DescribeCacheOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CacheAllocatedInBytes *int64 `type:"long"`
 
 	CacheDirtyPercentage *float64 `type:"double"`
@@ -6363,6 +6712,11 @@ func (s DescribeCacheOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheAllocatedInBytes sets the CacheAllocatedInBytes field's value.
@@ -6450,6 +6804,8 @@ func (s *DescribeCachediSCSIVolumesInput) SetVolumeARNs(v []string) *DescribeCac
 type DescribeCachediSCSIVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of objects where each object contains metadata about one cached
 	// volume.
 	CachediSCSIVolumes []CachediSCSIVolume `type:"list"`
@@ -6463,6 +6819,11 @@ func (s DescribeCachediSCSIVolumesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCachediSCSIVolumesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCachediSCSIVolumesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCachediSCSIVolumes sets the CachediSCSIVolumes field's value.
@@ -6522,6 +6883,8 @@ func (s *DescribeChapCredentialsInput) SetTargetARN(v string) *DescribeChapCrede
 type DescribeChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of ChapInfo objects that represent CHAP credentials. Each object
 	// in the array contains CHAP credential information for one target-initiator
 	// pair. If no CHAP credentials are set, an empty array is returned. CHAP credential
@@ -6548,6 +6911,11 @@ func (s DescribeChapCredentialsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeChapCredentialsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeChapCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChapCredentials sets the ChapCredentials field's value.
@@ -6606,6 +6974,8 @@ func (s *DescribeGatewayInformationInput) SetGatewayARN(v string) *DescribeGatew
 type DescribeGatewayInformationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -6650,6 +7020,11 @@ func (s DescribeGatewayInformationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeGatewayInformationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeGatewayInformationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -6764,6 +7139,8 @@ func (s *DescribeMaintenanceStartTimeInput) SetGatewayARN(v string) *DescribeMai
 type DescribeMaintenanceStartTimeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An ordinal number between 0 and 6 that represents the day of the week, where
 	// 0 represents Sunday and 6 represents Saturday. The day of week is in the
 	// time zone of the gateway.
@@ -6794,6 +7171,11 @@ func (s DescribeMaintenanceStartTimeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMaintenanceStartTimeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceStartTimeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDayOfWeek sets the DayOfWeek field's value.
@@ -6876,6 +7258,8 @@ func (s *DescribeNFSFileSharesInput) SetFileShareARNList(v []string) *DescribeNF
 type DescribeNFSFileSharesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array containing a description for each requested file share.
 	NFSFileShareInfoList []NFSFileShareInfo `type:"list"`
 }
@@ -6888,6 +7272,11 @@ func (s DescribeNFSFileSharesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNFSFileSharesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNFSFileSharesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNFSFileShareInfoList sets the NFSFileShareInfoList field's value.
@@ -6946,6 +7335,8 @@ func (s *DescribeSnapshotScheduleInput) SetVolumeARN(v string) *DescribeSnapshot
 type DescribeSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Description *string `min:"1" type:"string"`
 
 	RecurrenceInHours *int64 `min:"1" type:"integer"`
@@ -6965,6 +7356,11 @@ func (s DescribeSnapshotScheduleOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSnapshotScheduleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -7044,6 +7440,8 @@ func (s *DescribeStorediSCSIVolumesInput) SetVolumeARNs(v []string) *DescribeSto
 type DescribeStorediSCSIVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	StorediSCSIVolumes []StorediSCSIVolume `type:"list"`
 }
 
@@ -7055,6 +7453,11 @@ func (s DescribeStorediSCSIVolumesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStorediSCSIVolumesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStorediSCSIVolumesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStorediSCSIVolumes sets the StorediSCSIVolumes field's value.
@@ -7130,6 +7533,8 @@ func (s *DescribeTapeArchivesInput) SetTapeARNs(v []string) *DescribeTapeArchive
 type DescribeTapeArchivesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An opaque string that indicates the position at which the virtual tapes that
 	// were fetched for description ended. Use this marker in your next request
 	// to fetch the next set of virtual tapes in the virtual tape shelf (VTS). If
@@ -7152,6 +7557,11 @@ func (s DescribeTapeArchivesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTapeArchivesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTapeArchivesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -7242,6 +7652,8 @@ func (s *DescribeTapeRecoveryPointsInput) SetMarker(v string) *DescribeTapeRecov
 type DescribeTapeRecoveryPointsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -7266,6 +7678,11 @@ func (s DescribeTapeRecoveryPointsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTapeRecoveryPointsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTapeRecoveryPointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -7378,6 +7795,8 @@ func (s *DescribeTapesInput) SetTapeARNs(v []string) *DescribeTapesInput {
 type DescribeTapesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An opaque string which can be used as part of a subsequent DescribeTapes
 	// call to retrieve the next page of results.
 	//
@@ -7397,6 +7816,11 @@ func (s DescribeTapesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTapesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTapesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -7459,6 +7883,8 @@ func (s *DescribeUploadBufferInput) SetGatewayARN(v string) *DescribeUploadBuffe
 type DescribeUploadBufferOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	DiskIds []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
@@ -7478,6 +7904,11 @@ func (s DescribeUploadBufferOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUploadBufferOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUploadBufferOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDiskIds sets the DiskIds field's value.
@@ -7594,6 +8025,8 @@ func (s *DescribeVTLDevicesInput) SetVTLDeviceARNs(v []string) *DescribeVTLDevic
 type DescribeVTLDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -7617,6 +8050,11 @@ func (s DescribeVTLDevicesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVTLDevicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVTLDevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -7687,6 +8125,8 @@ func (s *DescribeWorkingStorageInput) SetGatewayARN(v string) *DescribeWorkingSt
 type DescribeWorkingStorageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of the gateway's local disk IDs that are configured as working storage.
 	// Each local disk ID is specified as a string (minimum length of 1 and maximum
 	// length of 300). If no local disks are configured as working storage, then
@@ -7714,6 +8154,11 @@ func (s DescribeWorkingStorageOutput) String() string {
 // GoString returns the string representation
 func (s DescribeWorkingStorageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkingStorageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDiskIds sets the DiskIds field's value.
@@ -7843,6 +8288,8 @@ func (s *DisableGatewayInput) SetGatewayARN(v string) *DisableGatewayInput {
 type DisableGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique Amazon Resource Name of the disabled gateway.
 	GatewayARN *string `min:"50" type:"string"`
 }
@@ -7855,6 +8302,11 @@ func (s DisableGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DisableGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -8162,6 +8614,8 @@ func (s *ListFileSharesInput) SetMarker(v string) *ListFileSharesInput {
 type ListFileSharesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of information about the file gateway's file shares.
 	FileShareInfoList []FileShareInfo `type:"list"`
 
@@ -8182,6 +8636,11 @@ func (s ListFileSharesOutput) String() string {
 // GoString returns the string representation
 func (s ListFileSharesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFileSharesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileShareInfoList sets the FileShareInfoList field's value.
@@ -8262,6 +8721,8 @@ func (s *ListGatewaysInput) SetMarker(v string) *ListGatewaysInput {
 type ListGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Gateways []GatewayInfo `type:"list"`
 
 	Marker *string `min:"1" type:"string"`
@@ -8275,6 +8736,11 @@ func (s ListGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s ListGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGateways sets the Gateways field's value.
@@ -8338,6 +8804,8 @@ func (s *ListLocalDisksInput) SetGatewayARN(v string) *ListLocalDisksInput {
 type ListLocalDisksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Disks []Disk `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
@@ -8353,6 +8821,11 @@ func (s ListLocalDisksOutput) String() string {
 // GoString returns the string representation
 func (s ListLocalDisksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLocalDisksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDisks sets the Disks field's value.
@@ -8443,6 +8916,8 @@ func (s *ListTagsForResourceInput) SetResourceARN(v string) *ListTagsForResource
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An opaque string that indicates the position at which to stop returning the
 	// list of tags.
 	Marker *string `min:"1" type:"string"`
@@ -8463,6 +8938,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -8560,6 +9040,8 @@ func (s *ListTapesInput) SetTapeARNs(v []string) *ListTapesInput {
 type ListTapesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string that indicates the position at which to begin returning the next
 	// list of tapes. Use the marker in your next request to continue pagination
 	// of tapes. If there are no more tapes to list, this element does not appear
@@ -8580,6 +9062,11 @@ func (s ListTapesOutput) String() string {
 // GoString returns the string representation
 func (s ListTapesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTapesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -8644,6 +9131,8 @@ func (s *ListVolumeInitiatorsInput) SetVolumeARN(v string) *ListVolumeInitiators
 type ListVolumeInitiatorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The host names and port numbers of all iSCSI initiators that are connected
 	// to the gateway.
 	Initiators []string `type:"list"`
@@ -8657,6 +9146,11 @@ func (s ListVolumeInitiatorsOutput) String() string {
 // GoString returns the string representation
 func (s ListVolumeInitiatorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVolumeInitiatorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInitiators sets the Initiators field's value.
@@ -8713,6 +9207,8 @@ func (s *ListVolumeRecoveryPointsInput) SetGatewayARN(v string) *ListVolumeRecov
 type ListVolumeRecoveryPointsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -8728,6 +9224,11 @@ func (s ListVolumeRecoveryPointsOutput) String() string {
 // GoString returns the string representation
 func (s ListVolumeRecoveryPointsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVolumeRecoveryPointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -8816,6 +9317,8 @@ func (s *ListVolumesInput) SetMarker(v string) *ListVolumesInput {
 type ListVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -8833,6 +9336,11 @@ func (s ListVolumesOutput) String() string {
 // GoString returns the string representation
 func (s ListVolumesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVolumesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -9185,6 +9693,8 @@ func (s *RefreshCacheInput) SetFileShareARN(v string) *RefreshCacheInput {
 type RefreshCacheOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string `min:"50" type:"string"`
 }
@@ -9197,6 +9707,11 @@ func (s RefreshCacheOutput) String() string {
 // GoString returns the string representation
 func (s RefreshCacheOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RefreshCacheOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileShareARN sets the FileShareARN field's value.
@@ -9271,6 +9786,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the resource that the tags were removed
 	// from.
 	ResourceARN *string `min:"50" type:"string"`
@@ -9284,6 +9801,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceARN sets the ResourceARN field's value.
@@ -9340,6 +9862,8 @@ func (s *ResetCacheInput) SetGatewayARN(v string) *ResetCacheInput {
 type ResetCacheOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -9353,6 +9877,11 @@ func (s ResetCacheOutput) String() string {
 // GoString returns the string representation
 func (s ResetCacheOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetCacheOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -9434,6 +9963,8 @@ func (s *RetrieveTapeArchiveInput) SetTapeARN(v string) *RetrieveTapeArchiveInpu
 type RetrieveTapeArchiveOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the retrieved virtual tape.
 	TapeARN *string `min:"50" type:"string"`
 }
@@ -9446,6 +9977,11 @@ func (s RetrieveTapeArchiveOutput) String() string {
 // GoString returns the string representation
 func (s RetrieveTapeArchiveOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RetrieveTapeArchiveOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -9523,6 +10059,8 @@ func (s *RetrieveTapeRecoveryPointInput) SetTapeARN(v string) *RetrieveTapeRecov
 type RetrieveTapeRecoveryPointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the virtual tape for which the recovery
 	// point was retrieved.
 	TapeARN *string `min:"50" type:"string"`
@@ -9536,6 +10074,11 @@ func (s RetrieveTapeRecoveryPointOutput) String() string {
 // GoString returns the string representation
 func (s RetrieveTapeRecoveryPointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RetrieveTapeRecoveryPointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTapeARN sets the TapeARN field's value.
@@ -9611,6 +10154,8 @@ func (s *SetLocalConsolePasswordInput) SetLocalConsolePassword(v string) *SetLoc
 type SetLocalConsolePasswordOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -9624,6 +10169,11 @@ func (s SetLocalConsolePasswordOutput) String() string {
 // GoString returns the string representation
 func (s SetLocalConsolePasswordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetLocalConsolePasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -9682,6 +10232,8 @@ func (s *ShutdownGatewayInput) SetGatewayARN(v string) *ShutdownGatewayInput {
 type ShutdownGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -9695,6 +10247,11 @@ func (s ShutdownGatewayOutput) String() string {
 // GoString returns the string representation
 func (s ShutdownGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ShutdownGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -9753,6 +10310,8 @@ func (s *StartGatewayInput) SetGatewayARN(v string) *StartGatewayInput {
 type StartGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -9766,6 +10325,11 @@ func (s StartGatewayOutput) String() string {
 // GoString returns the string representation
 func (s StartGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -10337,6 +10901,8 @@ func (s *UpdateBandwidthRateLimitInput) SetGatewayARN(v string) *UpdateBandwidth
 type UpdateBandwidthRateLimitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -10350,6 +10916,11 @@ func (s UpdateBandwidthRateLimitOutput) String() string {
 // GoString returns the string representation
 func (s UpdateBandwidthRateLimitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBandwidthRateLimitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -10472,6 +11043,8 @@ func (s *UpdateChapCredentialsInput) SetTargetARN(v string) *UpdateChapCredentia
 type UpdateChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The iSCSI initiator that connects to the target. This is the same initiator
 	// name specified in the request.
 	InitiatorName *string `min:"1" type:"string"`
@@ -10489,6 +11062,11 @@ func (s UpdateChapCredentialsOutput) String() string {
 // GoString returns the string representation
 func (s UpdateChapCredentialsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateChapCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInitiatorName sets the InitiatorName field's value.
@@ -10575,6 +11153,8 @@ func (s *UpdateGatewayInformationInput) SetGatewayTimezone(v string) *UpdateGate
 type UpdateGatewayInformationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -10590,6 +11170,11 @@ func (s UpdateGatewayInformationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGatewayInformationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGatewayInformationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -10654,6 +11239,8 @@ func (s *UpdateGatewaySoftwareNowInput) SetGatewayARN(v string) *UpdateGatewaySo
 type UpdateGatewaySoftwareNowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -10667,6 +11254,11 @@ func (s UpdateGatewaySoftwareNowOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGatewaySoftwareNowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGatewaySoftwareNowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -10782,6 +11374,8 @@ func (s *UpdateMaintenanceStartTimeInput) SetMinuteOfHour(v int64) *UpdateMainte
 type UpdateMaintenanceStartTimeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -10795,6 +11389,11 @@ func (s UpdateMaintenanceStartTimeOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMaintenanceStartTimeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMaintenanceStartTimeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGatewayARN sets the GatewayARN field's value.
@@ -10944,6 +11543,8 @@ func (s *UpdateNFSFileShareInput) SetSquash(v string) *UpdateNFSFileShareInput {
 type UpdateNFSFileShareOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the updated file share.
 	FileShareARN *string `min:"50" type:"string"`
 }
@@ -10956,6 +11557,11 @@ func (s UpdateNFSFileShareOutput) String() string {
 // GoString returns the string representation
 func (s UpdateNFSFileShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateNFSFileShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFileShareARN sets the FileShareARN field's value.
@@ -11069,6 +11675,8 @@ func (s *UpdateSnapshotScheduleInput) SetVolumeARN(v string) *UpdateSnapshotSche
 type UpdateSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	VolumeARN *string `min:"50" type:"string"`
 }
 
@@ -11080,6 +11688,11 @@ func (s UpdateSnapshotScheduleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSnapshotScheduleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVolumeARN sets the VolumeARN field's value.
@@ -11156,6 +11769,8 @@ func (s *UpdateVTLDeviceTypeInput) SetVTLDeviceARN(v string) *UpdateVTLDeviceTyp
 type UpdateVTLDeviceTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the medium changer you have selected.
 	VTLDeviceARN *string `min:"50" type:"string"`
 }
@@ -11168,6 +11783,11 @@ func (s UpdateVTLDeviceTypeOutput) String() string {
 // GoString returns the string representation
 func (s UpdateVTLDeviceTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVTLDeviceTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVTLDeviceARN sets the VTLDeviceARN field's value.

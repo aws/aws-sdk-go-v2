@@ -54,7 +54,10 @@ func (c *ECS) CreateClusterRequest(input *CreateClusterInput) CreateClusterReque
 		input = &CreateClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterOutput{})
+	output := &CreateClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateClusterRequest{Request: req, Input: input}
 }
 
@@ -158,7 +161,10 @@ func (c *ECS) CreateServiceRequest(input *CreateServiceInput) CreateServiceReque
 		input = &CreateServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServiceOutput{})
+	output := &CreateServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateServiceRequest{Request: req, Input: input}
 }
 
@@ -204,7 +210,10 @@ func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAttrib
 		input = &DeleteAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+	output := &DeleteAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAttributesRequest{Request: req, Input: input}
 }
 
@@ -252,7 +261,10 @@ func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterReque
 		input = &DeleteClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	output := &DeleteClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteClusterRequest{Request: req, Input: input}
 }
 
@@ -311,7 +323,10 @@ func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceReque
 		input = &DeleteServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceOutput{})
+	output := &DeleteServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteServiceRequest{Request: req, Input: input}
 }
 
@@ -371,7 +386,10 @@ func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInsta
 		input = &DeregisterContainerInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterContainerInstanceOutput{})
+	output := &DeregisterContainerInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterContainerInstanceRequest{Request: req, Input: input}
 }
 
@@ -431,7 +449,10 @@ func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInp
 		input = &DeregisterTaskDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterTaskDefinitionOutput{})
+	output := &DeregisterTaskDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterTaskDefinitionRequest{Request: req, Input: input}
 }
 
@@ -477,7 +498,10 @@ func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) DescribeClus
 		input = &DescribeClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	output := &DescribeClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeClustersRequest{Request: req, Input: input}
 }
 
@@ -524,7 +548,10 @@ func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstance
 		input = &DescribeContainerInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeContainerInstancesOutput{})
+	output := &DescribeContainerInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeContainerInstancesRequest{Request: req, Input: input}
 }
 
@@ -570,7 +597,10 @@ func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) DescribeServ
 		input = &DescribeServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServicesOutput{})
+	output := &DescribeServicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeServicesRequest{Request: req, Input: input}
 }
 
@@ -621,7 +651,10 @@ func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) 
 		input = &DescribeTaskDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTaskDefinitionOutput{})
+	output := &DescribeTaskDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTaskDefinitionRequest{Request: req, Input: input}
 }
 
@@ -667,7 +700,10 @@ func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) DescribeTasksReque
 		input = &DescribeTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTasksOutput{})
+	output := &DescribeTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTasksRequest{Request: req, Input: input}
 }
 
@@ -717,7 +753,10 @@ func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) Disc
 		input = &DiscoverPollEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DiscoverPollEndpointOutput{})
+	output := &DiscoverPollEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DiscoverPollEndpointRequest{Request: req, Input: input}
 }
 
@@ -769,7 +808,10 @@ func (c *ECS) ListAttributesRequest(input *ListAttributesInput) ListAttributesRe
 		input = &ListAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttributesOutput{})
+	output := &ListAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAttributesRequest{Request: req, Input: input}
 }
 
@@ -821,7 +863,10 @@ func (c *ECS) ListClustersRequest(input *ListClustersInput) ListClustersRequest 
 		input = &ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	output := &ListClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListClustersRequest{Request: req, Input: input}
 }
 
@@ -927,7 +972,10 @@ func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) 
 		input = &ListContainerInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListContainerInstancesOutput{})
+	output := &ListContainerInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListContainerInstancesRequest{Request: req, Input: input}
 }
 
@@ -1029,7 +1077,10 @@ func (c *ECS) ListServicesRequest(input *ListServicesInput) ListServicesRequest 
 		input = &ListServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServicesOutput{})
+	output := &ListServicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListServicesRequest{Request: req, Input: input}
 }
 
@@ -1137,7 +1188,10 @@ func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamilie
 		input = &ListTaskDefinitionFamiliesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTaskDefinitionFamiliesOutput{})
+	output := &ListTaskDefinitionFamiliesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTaskDefinitionFamiliesRequest{Request: req, Input: input}
 }
 
@@ -1241,7 +1295,10 @@ func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) ListTa
 		input = &ListTaskDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTaskDefinitionsOutput{})
+	output := &ListTaskDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTaskDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -1348,7 +1405,10 @@ func (c *ECS) ListTasksRequest(input *ListTasksInput) ListTasksRequest {
 		input = &ListTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTasksOutput{})
+	output := &ListTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTasksRequest{Request: req, Input: input}
 }
 
@@ -1448,7 +1508,10 @@ func (c *ECS) PutAttributesRequest(input *PutAttributesInput) PutAttributesReque
 		input = &PutAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAttributesOutput{})
+	output := &PutAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutAttributesRequest{Request: req, Input: input}
 }
 
@@ -1498,7 +1561,10 @@ func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceI
 		input = &RegisterContainerInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterContainerInstanceOutput{})
+	output := &RegisterContainerInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterContainerInstanceRequest{Request: req, Input: input}
 }
 
@@ -1560,7 +1626,10 @@ func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) 
 		input = &RegisterTaskDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterTaskDefinitionOutput{})
+	output := &RegisterTaskDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterTaskDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1614,7 +1683,10 @@ func (c *ECS) RunTaskRequest(input *RunTaskInput) RunTaskRequest {
 		input = &RunTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &RunTaskOutput{})
+	output := &RunTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RunTaskRequest{Request: req, Input: input}
 }
 
@@ -1665,7 +1737,10 @@ func (c *ECS) StartTaskRequest(input *StartTaskInput) StartTaskRequest {
 		input = &StartTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartTaskOutput{})
+	output := &StartTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartTaskRequest{Request: req, Input: input}
 }
 
@@ -1722,7 +1797,10 @@ func (c *ECS) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
 		input = &StopTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTaskOutput{})
+	output := &StopTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopTaskRequest{Request: req, Input: input}
 }
 
@@ -1771,7 +1849,10 @@ func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChang
 		input = &SubmitContainerStateChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &SubmitContainerStateChangeOutput{})
+	output := &SubmitContainerStateChangeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SubmitContainerStateChangeRequest{Request: req, Input: input}
 }
 
@@ -1820,7 +1901,10 @@ func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) Su
 		input = &SubmitTaskStateChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &SubmitTaskStateChangeOutput{})
+	output := &SubmitTaskStateChangeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SubmitTaskStateChangeRequest{Request: req, Input: input}
 }
 
@@ -1876,7 +1960,10 @@ func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) Upda
 		input = &UpdateContainerAgentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateContainerAgentOutput{})
+	output := &UpdateContainerAgentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateContainerAgentRequest{Request: req, Input: input}
 }
 
@@ -1965,7 +2052,10 @@ func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstanc
 		input = &UpdateContainerInstancesStateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateContainerInstancesStateOutput{})
+	output := &UpdateContainerInstancesStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateContainerInstancesStateRequest{Request: req, Input: input}
 }
 
@@ -2077,7 +2167,10 @@ func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceReque
 		input = &UpdateServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceOutput{})
+	output := &UpdateServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateServiceRequest{Request: req, Input: input}
 }
 
@@ -3137,6 +3230,8 @@ func (s *CreateClusterInput) SetClusterName(v string) *CreateClusterInput {
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of your new cluster.
 	Cluster *Cluster `locationName:"cluster" type:"structure"`
 }
@@ -3149,6 +3244,11 @@ func (s CreateClusterOutput) String() string {
 // GoString returns the string representation
 func (s CreateClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -3334,6 +3434,8 @@ func (s *CreateServiceInput) SetTaskDefinition(v string) *CreateServiceInput {
 type CreateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of your service following the create call.
 	Service *Service `locationName:"service" type:"structure"`
 }
@@ -3346,6 +3448,11 @@ func (s CreateServiceOutput) String() string {
 // GoString returns the string representation
 func (s CreateServiceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetService sets the Service field's value.
@@ -3419,6 +3526,8 @@ func (s *DeleteAttributesInput) SetCluster(v string) *DeleteAttributesInput {
 type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of attribute objects that were successfully deleted from your resource.
 	Attributes []Attribute `locationName:"attributes" type:"list"`
 }
@@ -3431,6 +3540,11 @@ func (s DeleteAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -3483,6 +3597,8 @@ func (s *DeleteClusterInput) SetCluster(v string) *DeleteClusterInput {
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of the deleted cluster.
 	Cluster *Cluster `locationName:"cluster" type:"structure"`
 }
@@ -3495,6 +3611,11 @@ func (s DeleteClusterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -3558,6 +3679,8 @@ func (s *DeleteServiceInput) SetService(v string) *DeleteServiceInput {
 type DeleteServiceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of the deleted service.
 	Service *Service `locationName:"service" type:"structure"`
 }
@@ -3570,6 +3693,11 @@ func (s DeleteServiceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteServiceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetService sets the Service field's value.
@@ -3791,6 +3919,8 @@ func (s *DeregisterContainerInstanceInput) SetForce(v bool) *DeregisterContainer
 type DeregisterContainerInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The container instance that was deregistered.
 	ContainerInstance *ContainerInstance `locationName:"containerInstance" type:"structure"`
 }
@@ -3803,6 +3933,11 @@ func (s DeregisterContainerInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterContainerInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterContainerInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContainerInstance sets the ContainerInstance field's value.
@@ -3856,6 +3991,8 @@ func (s *DeregisterTaskDefinitionInput) SetTaskDefinition(v string) *DeregisterT
 type DeregisterTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of the deregistered task.
 	TaskDefinition *TaskDefinition `locationName:"taskDefinition" type:"structure"`
 }
@@ -3868,6 +4005,11 @@ func (s DeregisterTaskDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterTaskDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterTaskDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTaskDefinition sets the TaskDefinition field's value.
@@ -3905,6 +4047,8 @@ func (s *DescribeClustersInput) SetClusters(v []string) *DescribeClustersInput {
 type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of clusters.
 	Clusters []Cluster `locationName:"clusters" type:"list"`
 
@@ -3920,6 +4064,11 @@ func (s DescribeClustersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusters sets the Clusters field's value.
@@ -3989,6 +4138,8 @@ func (s *DescribeContainerInstancesInput) SetContainerInstances(v []string) *Des
 type DescribeContainerInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of container instances.
 	ContainerInstances []ContainerInstance `locationName:"containerInstances" type:"list"`
 
@@ -4004,6 +4155,11 @@ func (s DescribeContainerInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeContainerInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeContainerInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
@@ -4074,6 +4230,8 @@ func (s *DescribeServicesInput) SetServices(v []string) *DescribeServicesInput {
 type DescribeServicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []Failure `locationName:"failures" type:"list"`
 
@@ -4089,6 +4247,11 @@ func (s DescribeServicesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeServicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeServicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -4149,6 +4312,8 @@ func (s *DescribeTaskDefinitionInput) SetTaskDefinition(v string) *DescribeTaskD
 type DescribeTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full task definition description.
 	TaskDefinition *TaskDefinition `locationName:"taskDefinition" type:"structure"`
 }
@@ -4161,6 +4326,11 @@ func (s DescribeTaskDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTaskDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTaskDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTaskDefinition sets the TaskDefinition field's value.
@@ -4224,6 +4394,8 @@ func (s *DescribeTasksInput) SetTasks(v []string) *DescribeTasksInput {
 type DescribeTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []Failure `locationName:"failures" type:"list"`
 
@@ -4239,6 +4411,11 @@ func (s DescribeTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -4295,6 +4472,8 @@ func (s *DiscoverPollEndpointInput) SetContainerInstance(v string) *DiscoverPoll
 type DiscoverPollEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The endpoint for the Amazon ECS agent to poll.
 	Endpoint *string `locationName:"endpoint" type:"string"`
 
@@ -4310,6 +4489,11 @@ func (s DiscoverPollEndpointOutput) String() string {
 // GoString returns the string representation
 func (s DiscoverPollEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DiscoverPollEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpoint sets the Endpoint field's value.
@@ -4658,6 +4842,8 @@ func (s *ListAttributesInput) SetTargetType(v TargetType) *ListAttributesInput {
 type ListAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of attribute objects that meet the criteria of the request.
 	Attributes []Attribute `locationName:"attributes" type:"list"`
 
@@ -4676,6 +4862,11 @@ func (s ListAttributesOutput) String() string {
 // GoString returns the string representation
 func (s ListAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -4739,6 +4930,8 @@ func (s *ListClustersInput) SetNextToken(v string) *ListClustersInput {
 type ListClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of full Amazon Resource Name (ARN) entries for each cluster associated
 	// with your account.
 	ClusterArns []string `locationName:"clusterArns" type:"list"`
@@ -4758,6 +4951,11 @@ func (s ListClustersOutput) String() string {
 // GoString returns the string representation
 func (s ListClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusterArns sets the ClusterArns field's value.
@@ -4859,6 +5057,8 @@ func (s *ListContainerInstancesInput) SetStatus(v ContainerInstanceStatus) *List
 type ListContainerInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of container instances with full Amazon Resource Name (ARN) entries
 	// for each container instance associated with the specified cluster.
 	ContainerInstanceArns []string `locationName:"containerInstanceArns" type:"list"`
@@ -4878,6 +5078,11 @@ func (s ListContainerInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ListContainerInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListContainerInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContainerInstanceArns sets the ContainerInstanceArns field's value.
@@ -4952,6 +5157,8 @@ func (s *ListServicesInput) SetNextToken(v string) *ListServicesInput {
 type ListServicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The nextToken value to include in a future ListServices request. When the
 	// results of a ListServices request exceed maxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no
@@ -4971,6 +5178,11 @@ func (s ListServicesOutput) String() string {
 // GoString returns the string representation
 func (s ListServicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListServicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5062,6 +5274,8 @@ func (s *ListTaskDefinitionFamiliesInput) SetStatus(v TaskDefinitionFamilyStatus
 type ListTaskDefinitionFamiliesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of task definition family names that match the ListTaskDefinitionFamilies
 	// request.
 	Families []string `locationName:"families" type:"list"`
@@ -5081,6 +5295,11 @@ func (s ListTaskDefinitionFamiliesOutput) String() string {
 // GoString returns the string representation
 func (s ListTaskDefinitionFamiliesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTaskDefinitionFamiliesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFamilies sets the Families field's value.
@@ -5183,6 +5402,8 @@ func (s *ListTaskDefinitionsInput) SetStatus(v TaskDefinitionStatus) *ListTaskDe
 type ListTaskDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The nextToken value to include in a future ListTaskDefinitions request. When
 	// the results of a ListTaskDefinitions request exceed maxResults, this value
 	// can be used to retrieve the next page of results. This value is null when
@@ -5202,6 +5423,11 @@ func (s ListTaskDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s ListTaskDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTaskDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5334,6 +5560,8 @@ func (s *ListTasksInput) SetStartedBy(v string) *ListTasksInput {
 type ListTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The nextToken value to include in a future ListTasks request. When the results
 	// of a ListTasks request exceed maxResults, this value can be used to retrieve
 	// the next page of results. This value is null when there are no more results
@@ -5352,6 +5580,11 @@ func (s ListTasksOutput) String() string {
 // GoString returns the string representation
 func (s ListTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5820,6 +6053,8 @@ func (s *PutAttributesInput) SetCluster(v string) *PutAttributesInput {
 type PutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attributes applied to your resource.
 	Attributes []Attribute `locationName:"attributes" type:"list"`
 }
@@ -5832,6 +6067,11 @@ func (s PutAttributesOutput) String() string {
 // GoString returns the string representation
 func (s PutAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -5946,6 +6186,8 @@ func (s *RegisterContainerInstanceInput) SetVersionInfo(v *VersionInfo) *Registe
 type RegisterContainerInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The container instance that was registered.
 	ContainerInstance *ContainerInstance `locationName:"containerInstance" type:"structure"`
 }
@@ -5958,6 +6200,11 @@ func (s RegisterContainerInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RegisterContainerInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterContainerInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContainerInstance sets the ContainerInstance field's value.
@@ -6093,6 +6340,8 @@ func (s *RegisterTaskDefinitionInput) SetVolumes(v []Volume) *RegisterTaskDefini
 type RegisterTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of the registered task definition.
 	TaskDefinition *TaskDefinition `locationName:"taskDefinition" type:"structure"`
 }
@@ -6105,6 +6354,11 @@ func (s RegisterTaskDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s RegisterTaskDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterTaskDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTaskDefinition sets the TaskDefinition field's value.
@@ -6319,6 +6573,8 @@ func (s *RunTaskInput) SetTaskDefinition(v string) *RunTaskInput {
 type RunTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []Failure `locationName:"failures" type:"list"`
 
@@ -6335,6 +6591,11 @@ func (s RunTaskOutput) String() string {
 // GoString returns the string representation
 func (s RunTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RunTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -6687,6 +6948,8 @@ func (s *StartTaskInput) SetTaskDefinition(v string) *StartTaskInput {
 type StartTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []Failure `locationName:"failures" type:"list"`
 
@@ -6703,6 +6966,11 @@ func (s StartTaskOutput) String() string {
 // GoString returns the string representation
 func (s StartTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -6784,6 +7052,8 @@ func (s *StopTaskInput) SetTask(v string) *StopTaskInput {
 type StopTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The task that was stopped.
 	Task *Task `locationName:"task" type:"structure"`
 }
@@ -6796,6 +7066,11 @@ func (s StopTaskOutput) String() string {
 // GoString returns the string representation
 func (s StopTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTask sets the Task field's value.
@@ -6888,6 +7163,8 @@ func (s *SubmitContainerStateChangeInput) SetTask(v string) *SubmitContainerStat
 type SubmitContainerStateChangeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Acknowledgement of the state change.
 	Acknowledgment *string `locationName:"acknowledgment" type:"string"`
 }
@@ -6900,6 +7177,11 @@ func (s SubmitContainerStateChangeOutput) String() string {
 // GoString returns the string representation
 func (s SubmitContainerStateChangeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SubmitContainerStateChangeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAcknowledgment sets the Acknowledgment field's value.
@@ -6965,6 +7247,8 @@ func (s *SubmitTaskStateChangeInput) SetTask(v string) *SubmitTaskStateChangeInp
 type SubmitTaskStateChangeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Acknowledgement of the state change.
 	Acknowledgment *string `locationName:"acknowledgment" type:"string"`
 }
@@ -6977,6 +7261,11 @@ func (s SubmitTaskStateChangeOutput) String() string {
 // GoString returns the string representation
 func (s SubmitTaskStateChangeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SubmitTaskStateChangeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAcknowledgment sets the Acknowledgment field's value.
@@ -7475,6 +7764,8 @@ func (s *UpdateContainerAgentInput) SetContainerInstance(v string) *UpdateContai
 type UpdateContainerAgentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The container instance for which the container agent was updated.
 	ContainerInstance *ContainerInstance `locationName:"containerInstance" type:"structure"`
 }
@@ -7487,6 +7778,11 @@ func (s UpdateContainerAgentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateContainerAgentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateContainerAgentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContainerInstance sets the ContainerInstance field's value.
@@ -7564,6 +7860,8 @@ func (s *UpdateContainerInstancesStateInput) SetStatus(v ContainerInstanceStatus
 type UpdateContainerInstancesStateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of container instances.
 	ContainerInstances []ContainerInstance `locationName:"containerInstances" type:"list"`
 
@@ -7579,6 +7877,11 @@ func (s UpdateContainerInstancesStateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateContainerInstancesStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateContainerInstancesStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContainerInstances sets the ContainerInstances field's value.
@@ -7681,6 +7984,8 @@ func (s *UpdateServiceInput) SetTaskDefinition(v string) *UpdateServiceInput {
 type UpdateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The full description of your service following the update call.
 	Service *Service `locationName:"service" type:"structure"`
 }
@@ -7693,6 +7998,11 @@ func (s UpdateServiceOutput) String() string {
 // GoString returns the string representation
 func (s UpdateServiceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetService sets the Service field's value.

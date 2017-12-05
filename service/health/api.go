@@ -65,7 +65,10 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 		input = &DescribeAffectedEntitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAffectedEntitiesOutput{})
+	output := &DescribeAffectedEntitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAffectedEntitiesRequest{Request: req, Input: input}
 }
 
@@ -163,7 +166,10 @@ func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 		input = &DescribeEntityAggregatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEntityAggregatesOutput{})
+	output := &DescribeEntityAggregatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEntityAggregatesRequest{Request: req, Input: input}
 }
 
@@ -217,7 +223,10 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 		input = &DescribeEventAggregatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventAggregatesOutput{})
+	output := &DescribeEventAggregatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventAggregatesRequest{Request: req, Input: input}
 }
 
@@ -320,7 +329,10 @@ func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) D
 		input = &DescribeEventDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventDetailsOutput{})
+	output := &DescribeEventDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventDetailsRequest{Request: req, Input: input}
 }
 
@@ -373,7 +385,10 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 		input = &DescribeEventTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventTypesOutput{})
+	output := &DescribeEventTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventTypesRequest{Request: req, Input: input}
 }
 
@@ -482,7 +497,10 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -744,6 +762,8 @@ func (s *DescribeAffectedEntitiesInput) SetNextToken(v string) *DescribeAffected
 type DescribeAffectedEntitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The entities that match the filter criteria.
 	Entities []AffectedEntity `locationName:"entities" type:"list"`
 
@@ -763,6 +783,11 @@ func (s DescribeAffectedEntitiesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAffectedEntitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAffectedEntitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEntities sets the Entities field's value.
@@ -819,6 +844,8 @@ func (s *DescribeEntityAggregatesInput) SetEventArns(v []string) *DescribeEntity
 type DescribeEntityAggregatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of entities that are affected by each of the specified events.
 	EntityAggregates []EntityAggregate `locationName:"entityAggregates" type:"list"`
 }
@@ -831,6 +858,11 @@ func (s DescribeEntityAggregatesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEntityAggregatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEntityAggregatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEntityAggregates sets the EntityAggregates field's value.
@@ -921,6 +953,8 @@ func (s *DescribeEventAggregatesInput) SetNextToken(v string) *DescribeEventAggr
 type DescribeEventAggregatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of events in each category that meet the optional filter criteria.
 	EventAggregates []EventAggregate `locationName:"eventAggregates" type:"list"`
 
@@ -940,6 +974,11 @@ func (s DescribeEventAggregatesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventAggregatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventAggregatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventAggregates sets the EventAggregates field's value.
@@ -1015,6 +1054,8 @@ func (s *DescribeEventDetailsInput) SetLocale(v string) *DescribeEventDetailsInp
 type DescribeEventDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Error messages for any events that could not be retrieved.
 	FailedSet []EventDetailsErrorItem `locationName:"failedSet" type:"list"`
 
@@ -1030,6 +1071,11 @@ func (s DescribeEventDetailsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedSet sets the FailedSet field's value.
@@ -1125,6 +1171,8 @@ func (s *DescribeEventTypesInput) SetNextToken(v string) *DescribeEventTypesInpu
 type DescribeEventTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of event types that match the filter criteria. Event types have a
 	// category (issue, accountNotification, or scheduledChange), a service (for
 	// example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format AWS_SERVICE_DESCRIPTION;
@@ -1147,6 +1195,11 @@ func (s DescribeEventTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventTypes sets the EventTypes field's value.
@@ -1242,6 +1295,8 @@ func (s *DescribeEventsInput) SetNextToken(v string) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The events that match the specified filter criteria.
 	Events []Event `locationName:"events" type:"list"`
 
@@ -1261,6 +1316,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.

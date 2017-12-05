@@ -52,7 +52,10 @@ func (c *IoTDataPlane) DeleteThingShadowRequest(input *DeleteThingShadowInput) D
 		input = &DeleteThingShadowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteThingShadowOutput{})
+	output := &DeleteThingShadowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteThingShadowRequest{Request: req, Input: input}
 }
 
@@ -99,7 +102,10 @@ func (c *IoTDataPlane) GetThingShadowRequest(input *GetThingShadowInput) GetThin
 		input = &GetThingShadowInput{}
 	}
 
-	req := c.newRequest(op, input, &GetThingShadowOutput{})
+	output := &GetThingShadowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetThingShadowRequest{Request: req, Input: input}
 }
 
@@ -146,9 +152,12 @@ func (c *IoTDataPlane) PublishRequest(input *PublishInput) PublishRequest {
 		input = &PublishInput{}
 	}
 
-	req := c.newRequest(op, input, &PublishOutput{})
+	output := &PublishOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PublishRequest{Request: req, Input: input}
 }
 
@@ -195,7 +204,10 @@ func (c *IoTDataPlane) UpdateThingShadowRequest(input *UpdateThingShadowInput) U
 		input = &UpdateThingShadowInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateThingShadowOutput{})
+	output := &UpdateThingShadowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateThingShadowRequest{Request: req, Input: input}
 }
 
@@ -246,6 +258,8 @@ func (s *DeleteThingShadowInput) SetThingName(v string) *DeleteThingShadowInput 
 type DeleteThingShadowOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
+	responseMetadata aws.Response
+
 	// The state information, in JSON format.
 	//
 	// Payload is a required field
@@ -260,6 +274,11 @@ func (s DeleteThingShadowOutput) String() string {
 // GoString returns the string representation
 func (s DeleteThingShadowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteThingShadowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPayload sets the Payload field's value.
@@ -315,6 +334,8 @@ func (s *GetThingShadowInput) SetThingName(v string) *GetThingShadowInput {
 type GetThingShadowOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
+	responseMetadata aws.Response
+
 	// The state information, in JSON format.
 	Payload []byte `locationName:"payload" type:"blob"`
 }
@@ -327,6 +348,11 @@ func (s GetThingShadowOutput) String() string {
 // GoString returns the string representation
 func (s GetThingShadowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetThingShadowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPayload sets the Payload field's value.
@@ -395,6 +421,8 @@ func (s *PublishInput) SetTopic(v string) *PublishInput {
 
 type PublishOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -405,6 +433,11 @@ func (s PublishOutput) String() string {
 // GoString returns the string representation
 func (s PublishOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PublishOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the UpdateThingShadow operation.
@@ -469,6 +502,8 @@ func (s *UpdateThingShadowInput) SetThingName(v string) *UpdateThingShadowInput 
 type UpdateThingShadowOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
+	responseMetadata aws.Response
+
 	// The state information, in JSON format.
 	Payload []byte `locationName:"payload" type:"blob"`
 }
@@ -481,6 +516,11 @@ func (s UpdateThingShadowOutput) String() string {
 // GoString returns the string representation
 func (s UpdateThingShadowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateThingShadowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPayload sets the Payload field's value.

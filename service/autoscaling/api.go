@@ -68,9 +68,12 @@ func (c *AutoScaling) AttachInstancesRequest(input *AttachInstancesInput) Attach
 		input = &AttachInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachInstancesOutput{})
+	output := &AttachInstancesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachInstancesRequest{Request: req, Input: input}
 }
 
@@ -123,7 +126,10 @@ func (c *AutoScaling) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBal
 		input = &AttachLoadBalancerTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancerTargetGroupsOutput{})
+	output := &AttachLoadBalancerTargetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachLoadBalancerTargetGroupsRequest{Request: req, Input: input}
 }
 
@@ -179,7 +185,10 @@ func (c *AutoScaling) AttachLoadBalancersRequest(input *AttachLoadBalancersInput
 		input = &AttachLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancersOutput{})
+	output := &AttachLoadBalancersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachLoadBalancersRequest{Request: req, Input: input}
 }
 
@@ -247,7 +256,10 @@ func (c *AutoScaling) CompleteLifecycleActionRequest(input *CompleteLifecycleAct
 		input = &CompleteLifecycleActionInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteLifecycleActionOutput{})
+	output := &CompleteLifecycleActionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CompleteLifecycleActionRequest{Request: req, Input: input}
 }
 
@@ -300,9 +312,12 @@ func (c *AutoScaling) CreateAutoScalingGroupRequest(input *CreateAutoScalingGrou
 		input = &CreateAutoScalingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAutoScalingGroupOutput{})
+	output := &CreateAutoScalingGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAutoScalingGroupRequest{Request: req, Input: input}
 }
 
@@ -355,9 +370,12 @@ func (c *AutoScaling) CreateLaunchConfigurationRequest(input *CreateLaunchConfig
 		input = &CreateLaunchConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLaunchConfigurationOutput{})
+	output := &CreateLaunchConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLaunchConfigurationRequest{Request: req, Input: input}
 }
 
@@ -409,9 +427,12 @@ func (c *AutoScaling) CreateOrUpdateTagsRequest(input *CreateOrUpdateTagsInput) 
 		input = &CreateOrUpdateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOrUpdateTagsOutput{})
+	output := &CreateOrUpdateTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateOrUpdateTagsRequest{Request: req, Input: input}
 }
 
@@ -471,9 +492,12 @@ func (c *AutoScaling) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGrou
 		input = &DeleteAutoScalingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAutoScalingGroupOutput{})
+	output := &DeleteAutoScalingGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAutoScalingGroupRequest{Request: req, Input: input}
 }
 
@@ -523,9 +547,12 @@ func (c *AutoScaling) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfig
 		input = &DeleteLaunchConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLaunchConfigurationOutput{})
+	output := &DeleteLaunchConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLaunchConfigurationRequest{Request: req, Input: input}
 }
 
@@ -574,7 +601,10 @@ func (c *AutoScaling) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput
 		input = &DeleteLifecycleHookInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLifecycleHookOutput{})
+	output := &DeleteLifecycleHookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLifecycleHookRequest{Request: req, Input: input}
 }
 
@@ -620,9 +650,12 @@ func (c *AutoScaling) DeleteNotificationConfigurationRequest(input *DeleteNotifi
 		input = &DeleteNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotificationConfigurationOutput{})
+	output := &DeleteNotificationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNotificationConfigurationRequest{Request: req, Input: input}
 }
 
@@ -671,9 +704,12 @@ func (c *AutoScaling) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicy
 		input = &DeletePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyOutput{})
+	output := &DeletePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePolicyRequest{Request: req, Input: input}
 }
 
@@ -719,9 +755,12 @@ func (c *AutoScaling) DeleteScheduledActionRequest(input *DeleteScheduledActionI
 		input = &DeleteScheduledActionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScheduledActionOutput{})
+	output := &DeleteScheduledActionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteScheduledActionRequest{Request: req, Input: input}
 }
 
@@ -767,9 +806,12 @@ func (c *AutoScaling) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsReques
 		input = &DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsRequest{Request: req, Input: input}
 }
 
@@ -819,7 +861,10 @@ func (c *AutoScaling) DescribeAccountLimitsRequest(input *DescribeAccountLimitsI
 		input = &DescribeAccountLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	output := &DescribeAccountLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountLimitsRequest{Request: req, Input: input}
 }
 
@@ -865,7 +910,10 @@ func (c *AutoScaling) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTy
 		input = &DescribeAdjustmentTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAdjustmentTypesOutput{})
+	output := &DescribeAdjustmentTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAdjustmentTypesRequest{Request: req, Input: input}
 }
 
@@ -917,7 +965,10 @@ func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalin
 		input = &DescribeAutoScalingGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutoScalingGroupsOutput{})
+	output := &DescribeAutoScalingGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAutoScalingGroupsRequest{Request: req, Input: input}
 }
 
@@ -1019,7 +1070,10 @@ func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoSca
 		input = &DescribeAutoScalingInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutoScalingInstancesOutput{})
+	output := &DescribeAutoScalingInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAutoScalingInstancesRequest{Request: req, Input: input}
 }
 
@@ -1115,7 +1169,10 @@ func (c *AutoScaling) DescribeAutoScalingNotificationTypesRequest(input *Describ
 		input = &DescribeAutoScalingNotificationTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutoScalingNotificationTypesOutput{})
+	output := &DescribeAutoScalingNotificationTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAutoScalingNotificationTypesRequest{Request: req, Input: input}
 }
 
@@ -1167,7 +1224,10 @@ func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchC
 		input = &DescribeLaunchConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLaunchConfigurationsOutput{})
+	output := &DescribeLaunchConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLaunchConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -1263,7 +1323,10 @@ func (c *AutoScaling) DescribeLifecycleHookTypesRequest(input *DescribeLifecycle
 		input = &DescribeLifecycleHookTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLifecycleHookTypesOutput{})
+	output := &DescribeLifecycleHookTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLifecycleHookTypesRequest{Request: req, Input: input}
 }
 
@@ -1309,7 +1372,10 @@ func (c *AutoScaling) DescribeLifecycleHooksRequest(input *DescribeLifecycleHook
 		input = &DescribeLifecycleHooksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLifecycleHooksOutput{})
+	output := &DescribeLifecycleHooksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLifecycleHooksRequest{Request: req, Input: input}
 }
 
@@ -1355,7 +1421,10 @@ func (c *AutoScaling) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoa
 		input = &DescribeLoadBalancerTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerTargetGroupsOutput{})
+	output := &DescribeLoadBalancerTargetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBalancerTargetGroupsRequest{Request: req, Input: input}
 }
 
@@ -1404,7 +1473,10 @@ func (c *AutoScaling) DescribeLoadBalancersRequest(input *DescribeLoadBalancersI
 		input = &DescribeLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+	output := &DescribeLoadBalancersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBalancersRequest{Request: req, Input: input}
 }
 
@@ -1453,7 +1525,10 @@ func (c *AutoScaling) DescribeMetricCollectionTypesRequest(input *DescribeMetric
 		input = &DescribeMetricCollectionTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMetricCollectionTypesOutput{})
+	output := &DescribeMetricCollectionTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMetricCollectionTypesRequest{Request: req, Input: input}
 }
 
@@ -1506,7 +1581,10 @@ func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeN
 		input = &DescribeNotificationConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNotificationConfigurationsOutput{})
+	output := &DescribeNotificationConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNotificationConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -1608,7 +1686,10 @@ func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) Desc
 		input = &DescribePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePoliciesOutput{})
+	output := &DescribePoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePoliciesRequest{Request: req, Input: input}
 }
 
@@ -1710,7 +1791,10 @@ func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingAct
 		input = &DescribeScalingActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingActivitiesOutput{})
+	output := &DescribeScalingActivitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScalingActivitiesRequest{Request: req, Input: input}
 }
 
@@ -1806,7 +1890,10 @@ func (c *AutoScaling) DescribeScalingProcessTypesRequest(input *DescribeScalingP
 		input = &DescribeScalingProcessTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingProcessTypesOutput{})
+	output := &DescribeScalingProcessTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScalingProcessTypesRequest{Request: req, Input: input}
 }
 
@@ -1859,7 +1946,10 @@ func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledAc
 		input = &DescribeScheduledActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScheduledActionsOutput{})
+	output := &DescribeScheduledActionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScheduledActionsRequest{Request: req, Input: input}
 }
 
@@ -1970,7 +2060,10 @@ func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) DescribeTags
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -2066,7 +2159,10 @@ func (c *AutoScaling) DescribeTerminationPolicyTypesRequest(input *DescribeTermi
 		input = &DescribeTerminationPolicyTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTerminationPolicyTypesOutput{})
+	output := &DescribeTerminationPolicyTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTerminationPolicyTypesRequest{Request: req, Input: input}
 }
 
@@ -2127,7 +2223,10 @@ func (c *AutoScaling) DetachInstancesRequest(input *DetachInstancesInput) Detach
 		input = &DetachInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachInstancesOutput{})
+	output := &DetachInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachInstancesRequest{Request: req, Input: input}
 }
 
@@ -2173,7 +2272,10 @@ func (c *AutoScaling) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBal
 		input = &DetachLoadBalancerTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachLoadBalancerTargetGroupsOutput{})
+	output := &DetachLoadBalancerTargetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachLoadBalancerTargetGroupsRequest{Request: req, Input: input}
 }
 
@@ -2228,7 +2330,10 @@ func (c *AutoScaling) DetachLoadBalancersRequest(input *DetachLoadBalancersInput
 		input = &DetachLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachLoadBalancersOutput{})
+	output := &DetachLoadBalancersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachLoadBalancersRequest{Request: req, Input: input}
 }
 
@@ -2274,9 +2379,12 @@ func (c *AutoScaling) DisableMetricsCollectionRequest(input *DisableMetricsColle
 		input = &DisableMetricsCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableMetricsCollectionOutput{})
+	output := &DisableMetricsCollectionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableMetricsCollectionRequest{Request: req, Input: input}
 }
 
@@ -2324,9 +2432,12 @@ func (c *AutoScaling) EnableMetricsCollectionRequest(input *EnableMetricsCollect
 		input = &EnableMetricsCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableMetricsCollectionOutput{})
+	output := &EnableMetricsCollectionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableMetricsCollectionRequest{Request: req, Input: input}
 }
 
@@ -2376,7 +2487,10 @@ func (c *AutoScaling) EnterStandbyRequest(input *EnterStandbyInput) EnterStandby
 		input = &EnterStandbyInput{}
 	}
 
-	req := c.newRequest(op, input, &EnterStandbyOutput{})
+	output := &EnterStandbyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnterStandbyRequest{Request: req, Input: input}
 }
 
@@ -2422,9 +2536,12 @@ func (c *AutoScaling) ExecutePolicyRequest(input *ExecutePolicyInput) ExecutePol
 		input = &ExecutePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ExecutePolicyOutput{})
+	output := &ExecutePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExecutePolicyRequest{Request: req, Input: input}
 }
 
@@ -2474,7 +2591,10 @@ func (c *AutoScaling) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyReq
 		input = &ExitStandbyInput{}
 	}
 
-	req := c.newRequest(op, input, &ExitStandbyOutput{})
+	output := &ExitStandbyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExitStandbyRequest{Request: req, Input: input}
 }
 
@@ -2550,7 +2670,10 @@ func (c *AutoScaling) PutLifecycleHookRequest(input *PutLifecycleHookInput) PutL
 		input = &PutLifecycleHookInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLifecycleHookOutput{})
+	output := &PutLifecycleHookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutLifecycleHookRequest{Request: req, Input: input}
 }
 
@@ -2604,9 +2727,12 @@ func (c *AutoScaling) PutNotificationConfigurationRequest(input *PutNotification
 		input = &PutNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutNotificationConfigurationOutput{})
+	output := &PutNotificationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutNotificationConfigurationRequest{Request: req, Input: input}
 }
 
@@ -2660,7 +2786,10 @@ func (c *AutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutS
 		input = &PutScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+	output := &PutScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -2711,9 +2840,12 @@ func (c *AutoScaling) PutScheduledUpdateGroupActionRequest(input *PutScheduledUp
 		input = &PutScheduledUpdateGroupActionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutScheduledUpdateGroupActionOutput{})
+	output := &PutScheduledUpdateGroupActionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutScheduledUpdateGroupActionRequest{Request: req, Input: input}
 }
 
@@ -2782,7 +2914,10 @@ func (c *AutoScaling) RecordLifecycleActionHeartbeatRequest(input *RecordLifecyc
 		input = &RecordLifecycleActionHeartbeatInput{}
 	}
 
-	req := c.newRequest(op, input, &RecordLifecycleActionHeartbeatOutput{})
+	output := &RecordLifecycleActionHeartbeatOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RecordLifecycleActionHeartbeatRequest{Request: req, Input: input}
 }
 
@@ -2833,9 +2968,12 @@ func (c *AutoScaling) ResumeProcessesRequest(input *SuspendProcessesInput) Resum
 		input = &SuspendProcessesInput{}
 	}
 
-	req := c.newRequest(op, input, &ResumeProcessesOutput{})
+	output := &ResumeProcessesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResumeProcessesRequest{Request: req, Input: input}
 }
 
@@ -2884,9 +3022,12 @@ func (c *AutoScaling) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) 
 		input = &SetDesiredCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDesiredCapacityOutput{})
+	output := &SetDesiredCapacityOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetDesiredCapacityRequest{Request: req, Input: input}
 }
 
@@ -2935,9 +3076,12 @@ func (c *AutoScaling) SetInstanceHealthRequest(input *SetInstanceHealthInput) Se
 		input = &SetInstanceHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &SetInstanceHealthOutput{})
+	output := &SetInstanceHealthOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetInstanceHealthRequest{Request: req, Input: input}
 }
 
@@ -2986,7 +3130,10 @@ func (c *AutoScaling) SetInstanceProtectionRequest(input *SetInstanceProtectionI
 		input = &SetInstanceProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetInstanceProtectionOutput{})
+	output := &SetInstanceProtectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetInstanceProtectionRequest{Request: req, Input: input}
 }
 
@@ -3042,9 +3189,12 @@ func (c *AutoScaling) SuspendProcessesRequest(input *SuspendProcessesInput) Susp
 		input = &SuspendProcessesInput{}
 	}
 
-	req := c.newRequest(op, input, &SuspendProcessesOutput{})
+	output := &SuspendProcessesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SuspendProcessesRequest{Request: req, Input: input}
 }
 
@@ -3094,7 +3244,10 @@ func (c *AutoScaling) TerminateInstanceInAutoScalingGroupRequest(input *Terminat
 		input = &TerminateInstanceInAutoScalingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateInstanceInAutoScalingGroupOutput{})
+	output := &TerminateInstanceInAutoScalingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateInstanceInAutoScalingGroupRequest{Request: req, Input: input}
 }
 
@@ -3162,9 +3315,12 @@ func (c *AutoScaling) UpdateAutoScalingGroupRequest(input *UpdateAutoScalingGrou
 		input = &UpdateAutoScalingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAutoScalingGroupOutput{})
+	output := &UpdateAutoScalingGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAutoScalingGroupRequest{Request: req, Input: input}
 }
 
@@ -3404,6 +3560,8 @@ func (s *AttachInstancesInput) SetInstanceIds(v []string) *AttachInstancesInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstancesOutput
 type AttachInstancesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3414,6 +3572,11 @@ func (s AttachInstancesOutput) String() string {
 // GoString returns the string representation
 func (s AttachInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsType
@@ -3477,6 +3640,8 @@ func (s *AttachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []string) *At
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsResultType
 type AttachLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3487,6 +3652,11 @@ func (s AttachLoadBalancerTargetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s AttachLoadBalancerTargetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachLoadBalancerTargetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersType
@@ -3550,6 +3720,8 @@ func (s *AttachLoadBalancersInput) SetLoadBalancerNames(v []string) *AttachLoadB
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersResultType
 type AttachLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3560,6 +3732,11 @@ func (s AttachLoadBalancersOutput) String() string {
 // GoString returns the string representation
 func (s AttachLoadBalancersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachLoadBalancersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a block device mapping.
@@ -3751,6 +3928,8 @@ func (s *CompleteLifecycleActionInput) SetLifecycleHookName(v string) *CompleteL
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleActionAnswer
 type CompleteLifecycleActionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3761,6 +3940,11 @@ func (s CompleteLifecycleActionOutput) String() string {
 // GoString returns the string representation
 func (s CompleteLifecycleActionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CompleteLifecycleActionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType
@@ -4061,6 +4245,8 @@ func (s *CreateAutoScalingGroupInput) SetVPCZoneIdentifier(v string) *CreateAuto
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupOutput
 type CreateAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4071,6 +4257,11 @@ func (s CreateAutoScalingGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateAutoScalingGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationType
@@ -4396,6 +4587,8 @@ func (s *CreateLaunchConfigurationInput) SetUserData(v string) *CreateLaunchConf
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationOutput
 type CreateLaunchConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4406,6 +4599,11 @@ func (s CreateLaunchConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s CreateLaunchConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTagsType
@@ -4458,6 +4656,8 @@ func (s *CreateOrUpdateTagsInput) SetTags(v []Tag) *CreateOrUpdateTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTagsOutput
 type CreateOrUpdateTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4468,6 +4668,11 @@ func (s CreateOrUpdateTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateOrUpdateTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateOrUpdateTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Configures a customized metric for a target tracking policy.
@@ -4622,6 +4827,8 @@ func (s *DeleteAutoScalingGroupInput) SetForceDelete(v bool) *DeleteAutoScalingG
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroupOutput
 type DeleteAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4632,6 +4839,11 @@ func (s DeleteAutoScalingGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAutoScalingGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationNameType
@@ -4680,6 +4892,8 @@ func (s *DeleteLaunchConfigurationInput) SetLaunchConfigurationName(v string) *D
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLaunchConfigurationOutput
 type DeleteLaunchConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4690,6 +4904,11 @@ func (s DeleteLaunchConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLaunchConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookType
@@ -4756,6 +4975,8 @@ func (s *DeleteLifecycleHookInput) SetLifecycleHookName(v string) *DeleteLifecyc
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookAnswer
 type DeleteLifecycleHookOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4766,6 +4987,11 @@ func (s DeleteLifecycleHookOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLifecycleHookOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLifecycleHookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfigurationType
@@ -4833,6 +5059,8 @@ func (s *DeleteNotificationConfigurationInput) SetTopicARN(v string) *DeleteNoti
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfigurationOutput
 type DeleteNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4843,6 +5071,11 @@ func (s DeleteNotificationConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNotificationConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNotificationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicyType
@@ -4903,6 +5136,8 @@ func (s *DeletePolicyInput) SetPolicyName(v string) *DeletePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicyOutput
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4913,6 +5148,11 @@ func (s DeletePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeletePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledActionType
@@ -4979,6 +5219,8 @@ func (s *DeleteScheduledActionInput) SetScheduledActionName(v string) *DeleteSch
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledActionOutput
 type DeleteScheduledActionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4989,6 +5231,11 @@ func (s DeleteScheduledActionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteScheduledActionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteScheduledActionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTagsType
@@ -5041,6 +5288,8 @@ func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5051,6 +5300,11 @@ func (s DeleteTagsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimitsInput
@@ -5071,6 +5325,8 @@ func (s DescribeAccountLimitsInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimitsAnswer
 type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The maximum number of groups allowed for your AWS account. The default limit
 	// is 20 per region.
@@ -5095,6 +5351,11 @@ func (s DescribeAccountLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMaxNumberOfAutoScalingGroups sets the MaxNumberOfAutoScalingGroups field's value.
@@ -5140,6 +5401,8 @@ func (s DescribeAdjustmentTypesInput) GoString() string {
 type DescribeAdjustmentTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The policy adjustment types.
 	AdjustmentTypes []AdjustmentType `type:"list"`
 }
@@ -5152,6 +5415,11 @@ func (s DescribeAdjustmentTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAdjustmentTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAdjustmentTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAdjustmentTypes sets the AdjustmentTypes field's value.
@@ -5209,6 +5477,8 @@ func (s *DescribeAutoScalingGroupsInput) SetNextToken(v string) *DescribeAutoSca
 type DescribeAutoScalingGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The groups.
 	//
 	// AutoScalingGroups is a required field
@@ -5227,6 +5497,11 @@ func (s DescribeAutoScalingGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAutoScalingGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAutoScalingGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutoScalingGroups sets the AutoScalingGroups field's value.
@@ -5291,6 +5566,8 @@ func (s *DescribeAutoScalingInstancesInput) SetNextToken(v string) *DescribeAuto
 type DescribeAutoScalingInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The instances.
 	AutoScalingInstances []InstanceDetails `type:"list"`
 
@@ -5307,6 +5584,11 @@ func (s DescribeAutoScalingInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAutoScalingInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAutoScalingInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutoScalingInstances sets the AutoScalingInstances field's value.
@@ -5340,6 +5622,8 @@ func (s DescribeAutoScalingNotificationTypesInput) GoString() string {
 type DescribeAutoScalingNotificationTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The notification types.
 	AutoScalingNotificationTypes []string `type:"list"`
 }
@@ -5352,6 +5636,11 @@ func (s DescribeAutoScalingNotificationTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAutoScalingNotificationTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAutoScalingNotificationTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutoScalingNotificationTypes sets the AutoScalingNotificationTypes field's value.
@@ -5409,6 +5698,8 @@ func (s *DescribeLaunchConfigurationsInput) SetNextToken(v string) *DescribeLaun
 type DescribeLaunchConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The launch configurations.
 	//
 	// LaunchConfigurations is a required field
@@ -5427,6 +5718,11 @@ func (s DescribeLaunchConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLaunchConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLaunchConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLaunchConfigurations sets the LaunchConfigurations field's value.
@@ -5460,6 +5756,8 @@ func (s DescribeLifecycleHookTypesInput) GoString() string {
 type DescribeLifecycleHookTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The lifecycle hook types.
 	LifecycleHookTypes []string `type:"list"`
 }
@@ -5472,6 +5770,11 @@ func (s DescribeLifecycleHookTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLifecycleHookTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLifecycleHookTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLifecycleHookTypes sets the LifecycleHookTypes field's value.
@@ -5537,6 +5840,8 @@ func (s *DescribeLifecycleHooksInput) SetLifecycleHookNames(v []string) *Describ
 type DescribeLifecycleHooksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The lifecycle hooks for the specified group.
 	LifecycleHooks []LifecycleHook `type:"list"`
 }
@@ -5549,6 +5854,11 @@ func (s DescribeLifecycleHooksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLifecycleHooksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLifecycleHooksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLifecycleHooks sets the LifecycleHooks field's value.
@@ -5624,6 +5934,8 @@ func (s *DescribeLoadBalancerTargetGroupsInput) SetNextToken(v string) *Describe
 type DescribeLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the target groups.
 	LoadBalancerTargetGroups []LoadBalancerTargetGroupState `type:"list"`
 
@@ -5640,6 +5952,11 @@ func (s DescribeLoadBalancerTargetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBalancerTargetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBalancerTargetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoadBalancerTargetGroups sets the LoadBalancerTargetGroups field's value.
@@ -5721,6 +6038,8 @@ func (s *DescribeLoadBalancersInput) SetNextToken(v string) *DescribeLoadBalance
 type DescribeLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The load balancers.
 	LoadBalancers []LoadBalancerState `type:"list"`
 
@@ -5737,6 +6056,11 @@ func (s DescribeLoadBalancersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBalancersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBalancersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoadBalancers sets the LoadBalancers field's value.
@@ -5770,6 +6094,8 @@ func (s DescribeMetricCollectionTypesInput) GoString() string {
 type DescribeMetricCollectionTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The granularities for the metrics.
 	Granularities []MetricGranularityType `type:"list"`
 
@@ -5785,6 +6111,11 @@ func (s DescribeMetricCollectionTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMetricCollectionTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMetricCollectionTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGranularities sets the Granularities field's value.
@@ -5847,6 +6178,8 @@ func (s *DescribeNotificationConfigurationsInput) SetNextToken(v string) *Descri
 type DescribeNotificationConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -5865,6 +6198,11 @@ func (s DescribeNotificationConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNotificationConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNotificationConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5961,6 +6299,8 @@ func (s *DescribePoliciesInput) SetPolicyTypes(v []string) *DescribePoliciesInpu
 type DescribePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -5977,6 +6317,11 @@ func (s DescribePoliciesOutput) String() string {
 // GoString returns the string representation
 func (s DescribePoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6065,6 +6410,8 @@ func (s *DescribeScalingActivitiesInput) SetNextToken(v string) *DescribeScaling
 type DescribeScalingActivitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The scaling activities. Activities are sorted by start time. Activities still
 	// in progress are described first.
 	//
@@ -6084,6 +6431,11 @@ func (s DescribeScalingActivitiesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScalingActivitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScalingActivitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivities sets the Activities field's value.
@@ -6117,6 +6469,8 @@ func (s DescribeScalingProcessTypesInput) GoString() string {
 type DescribeScalingProcessTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of the process types.
 	Processes []ProcessType `type:"list"`
 }
@@ -6129,6 +6483,11 @@ func (s DescribeScalingProcessTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScalingProcessTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScalingProcessTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProcesses sets the Processes field's value.
@@ -6233,6 +6592,8 @@ func (s *DescribeScheduledActionsInput) SetStartTime(v time.Time) *DescribeSched
 type DescribeScheduledActionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -6249,6 +6610,11 @@ func (s DescribeScheduledActionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScheduledActionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScheduledActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6311,6 +6677,8 @@ func (s *DescribeTagsInput) SetNextToken(v string) *DescribeTagsInput {
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -6327,6 +6695,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6360,6 +6733,8 @@ func (s DescribeTerminationPolicyTypesInput) GoString() string {
 type DescribeTerminationPolicyTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The termination policies supported by Auto Scaling (OldestInstance, OldestLaunchConfiguration,
 	// NewestInstance, ClosestToNextInstanceHour, and Default).
 	TerminationPolicyTypes []string `type:"list"`
@@ -6373,6 +6748,11 @@ func (s DescribeTerminationPolicyTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTerminationPolicyTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTerminationPolicyTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTerminationPolicyTypes sets the TerminationPolicyTypes field's value.
@@ -6453,6 +6833,8 @@ func (s *DetachInstancesInput) SetShouldDecrementDesiredCapacity(v bool) *Detach
 type DetachInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The activities related to detaching the instances from the Auto Scaling group.
 	Activities []Activity `type:"list"`
 }
@@ -6465,6 +6847,11 @@ func (s DetachInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DetachInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivities sets the Activities field's value.
@@ -6534,6 +6921,8 @@ func (s *DetachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []string) *De
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroupsResultType
 type DetachLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6544,6 +6933,11 @@ func (s DetachLoadBalancerTargetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DetachLoadBalancerTargetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachLoadBalancerTargetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersType
@@ -6607,6 +7001,8 @@ func (s *DetachLoadBalancersInput) SetLoadBalancerNames(v []string) *DetachLoadB
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersResultType
 type DetachLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6617,6 +7013,11 @@ func (s DetachLoadBalancersOutput) String() string {
 // GoString returns the string representation
 func (s DetachLoadBalancersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachLoadBalancersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollectionQuery
@@ -6691,6 +7092,8 @@ func (s *DisableMetricsCollectionInput) SetMetrics(v []string) *DisableMetricsCo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollectionOutput
 type DisableMetricsCollectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6701,6 +7104,11 @@ func (s DisableMetricsCollectionOutput) String() string {
 // GoString returns the string representation
 func (s DisableMetricsCollectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableMetricsCollectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an Amazon EBS volume.
@@ -6907,6 +7315,8 @@ func (s *EnableMetricsCollectionInput) SetMetrics(v []string) *EnableMetricsColl
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollectionOutput
 type EnableMetricsCollectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6917,6 +7327,11 @@ func (s EnableMetricsCollectionOutput) String() string {
 // GoString returns the string representation
 func (s EnableMetricsCollectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableMetricsCollectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an enabled metric.
@@ -7044,6 +7459,8 @@ func (s *EnterStandbyInput) SetShouldDecrementDesiredCapacity(v bool) *EnterStan
 type EnterStandbyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The activities related to moving instances into Standby mode.
 	Activities []Activity `type:"list"`
 }
@@ -7056,6 +7473,11 @@ func (s EnterStandbyOutput) String() string {
 // GoString returns the string representation
 func (s EnterStandbyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnterStandbyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivities sets the Activities field's value.
@@ -7169,6 +7591,8 @@ func (s *ExecutePolicyInput) SetPolicyName(v string) *ExecutePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicyOutput
 type ExecutePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7179,6 +7603,11 @@ func (s ExecutePolicyOutput) String() string {
 // GoString returns the string representation
 func (s ExecutePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExecutePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandbyQuery
@@ -7237,6 +7666,8 @@ func (s *ExitStandbyInput) SetInstanceIds(v []string) *ExitStandbyInput {
 type ExitStandbyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The activities related to moving instances out of Standby mode.
 	Activities []Activity `type:"list"`
 }
@@ -7249,6 +7680,11 @@ func (s ExitStandbyOutput) String() string {
 // GoString returns the string representation
 func (s ExitStandbyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExitStandbyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivities sets the Activities field's value.
@@ -8738,6 +9174,8 @@ func (s *PutLifecycleHookInput) SetRoleARN(v string) *PutLifecycleHookInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHookAnswer
 type PutLifecycleHookOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8748,6 +9186,11 @@ func (s PutLifecycleHookOutput) String() string {
 // GoString returns the string representation
 func (s PutLifecycleHookOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutLifecycleHookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationType
@@ -8831,6 +9274,8 @@ func (s *PutNotificationConfigurationInput) SetTopicARN(v string) *PutNotificati
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationOutput
 type PutNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8841,6 +9286,11 @@ func (s PutNotificationConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s PutNotificationConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutNotificationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicyType
@@ -9059,6 +9509,8 @@ func (s *PutScalingPolicyInput) SetTargetTrackingConfiguration(v *TargetTracking
 type PutScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CloudWatch alarms created for the target tracking policy.
 	Alarms []Alarm `type:"list"`
 
@@ -9074,6 +9526,11 @@ func (s PutScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlarms sets the Alarms field's value.
@@ -9227,6 +9684,8 @@ func (s *PutScheduledUpdateGroupActionInput) SetTime(v time.Time) *PutScheduledU
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupActionOutput
 type PutScheduledUpdateGroupActionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9237,6 +9696,11 @@ func (s PutScheduledUpdateGroupActionOutput) String() string {
 // GoString returns the string representation
 func (s PutScheduledUpdateGroupActionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutScheduledUpdateGroupActionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatType
@@ -9329,6 +9793,8 @@ func (s *RecordLifecycleActionHeartbeatInput) SetLifecycleHookName(v string) *Re
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatAnswer
 type RecordLifecycleActionHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9341,9 +9807,16 @@ func (s RecordLifecycleActionHeartbeatOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RecordLifecycleActionHeartbeatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcessesOutput
 type ResumeProcessesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9354,6 +9827,11 @@ func (s ResumeProcessesOutput) String() string {
 // GoString returns the string representation
 func (s ResumeProcessesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResumeProcessesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a scaling policy.
@@ -9692,6 +10170,8 @@ func (s *SetDesiredCapacityInput) SetHonorCooldown(v bool) *SetDesiredCapacityIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityOutput
 type SetDesiredCapacityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9702,6 +10182,11 @@ func (s SetDesiredCapacityOutput) String() string {
 // GoString returns the string representation
 func (s SetDesiredCapacityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetDesiredCapacityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealthQuery
@@ -9785,6 +10270,8 @@ func (s *SetInstanceHealthInput) SetShouldRespectGracePeriod(v bool) *SetInstanc
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealthOutput
 type SetInstanceHealthOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9795,6 +10282,11 @@ func (s SetInstanceHealthOutput) String() string {
 // GoString returns the string representation
 func (s SetInstanceHealthOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetInstanceHealthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionQuery
@@ -9874,6 +10366,8 @@ func (s *SetInstanceProtectionInput) SetProtectedFromScaleIn(v bool) *SetInstanc
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionAnswer
 type SetInstanceProtectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9884,6 +10378,11 @@ func (s SetInstanceProtectionOutput) String() string {
 // GoString returns the string representation
 func (s SetInstanceProtectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetInstanceProtectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an adjustment based on the difference between the value of the
@@ -10057,6 +10556,8 @@ func (s *SuspendProcessesInput) SetScalingProcesses(v []string) *SuspendProcesse
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendProcessesOutput
 type SuspendProcessesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10067,6 +10568,11 @@ func (s SuspendProcessesOutput) String() string {
 // GoString returns the string representation
 func (s SuspendProcessesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SuspendProcessesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an Auto Scaling process that has been suspended. For more information,
@@ -10393,6 +10899,8 @@ func (s *TerminateInstanceInAutoScalingGroupInput) SetShouldDecrementDesiredCapa
 type TerminateInstanceInAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A scaling activity.
 	Activity *Activity `type:"structure"`
 }
@@ -10405,6 +10913,11 @@ func (s TerminateInstanceInAutoScalingGroupOutput) String() string {
 // GoString returns the string representation
 func (s TerminateInstanceInAutoScalingGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateInstanceInAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivity sets the Activity field's value.
@@ -10609,6 +11122,8 @@ func (s *UpdateAutoScalingGroupInput) SetVPCZoneIdentifier(v string) *UpdateAuto
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupOutput
 type UpdateAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10619,6 +11134,11 @@ func (s UpdateAutoScalingGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAutoScalingGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type LifecycleState string

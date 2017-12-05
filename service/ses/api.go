@@ -61,7 +61,10 @@ func (c *SES) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) CloneR
 		input = &CloneReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CloneReceiptRuleSetOutput{})
+	output := &CloneReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CloneReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -112,7 +115,10 @@ func (c *SES) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) 
 		input = &CreateConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetOutput{})
+	output := &CreateConfigurationSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConfigurationSetRequest{Request: req, Input: input}
 }
 
@@ -168,7 +174,10 @@ func (c *SES) CreateConfigurationSetEventDestinationRequest(input *CreateConfigu
 		input = &CreateConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetEventDestinationOutput{})
+	output := &CreateConfigurationSetEventDestinationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConfigurationSetEventDestinationRequest{Request: req, Input: input}
 }
 
@@ -222,7 +231,10 @@ func (c *SES) CreateConfigurationSetTrackingOptionsRequest(input *CreateConfigur
 		input = &CreateConfigurationSetTrackingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetTrackingOptionsOutput{})
+	output := &CreateConfigurationSetTrackingOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConfigurationSetTrackingOptionsRequest{Request: req, Input: input}
 }
 
@@ -273,7 +285,10 @@ func (c *SES) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) Create
 		input = &CreateReceiptFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReceiptFilterOutput{})
+	output := &CreateReceiptFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReceiptFilterRequest{Request: req, Input: input}
 }
 
@@ -324,7 +339,10 @@ func (c *SES) CreateReceiptRuleRequest(input *CreateReceiptRuleInput) CreateRece
 		input = &CreateReceiptRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReceiptRuleOutput{})
+	output := &CreateReceiptRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReceiptRuleRequest{Request: req, Input: input}
 }
 
@@ -375,7 +393,10 @@ func (c *SES) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) Crea
 		input = &CreateReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReceiptRuleSetOutput{})
+	output := &CreateReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -425,7 +446,10 @@ func (c *SES) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) 
 		input = &DeleteConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetOutput{})
+	output := &DeleteConfigurationSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConfigurationSetRequest{Request: req, Input: input}
 }
 
@@ -476,7 +500,10 @@ func (c *SES) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigu
 		input = &DeleteConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetEventDestinationOutput{})
+	output := &DeleteConfigurationSetEventDestinationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConfigurationSetEventDestinationRequest{Request: req, Input: input}
 }
 
@@ -534,7 +561,10 @@ func (c *SES) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfigur
 		input = &DeleteConfigurationSetTrackingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetTrackingOptionsOutput{})
+	output := &DeleteConfigurationSetTrackingOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConfigurationSetTrackingOptionsRequest{Request: req, Input: input}
 }
 
@@ -583,7 +613,10 @@ func (c *SES) DeleteIdentityRequest(input *DeleteIdentityInput) DeleteIdentityRe
 		input = &DeleteIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityOutput{})
+	output := &DeleteIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIdentityRequest{Request: req, Input: input}
 }
 
@@ -640,7 +673,10 @@ func (c *SES) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) Dele
 		input = &DeleteIdentityPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityPolicyOutput{})
+	output := &DeleteIdentityPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIdentityPolicyRequest{Request: req, Input: input}
 }
 
@@ -691,7 +727,10 @@ func (c *SES) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) Delete
 		input = &DeleteReceiptFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReceiptFilterOutput{})
+	output := &DeleteReceiptFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReceiptFilterRequest{Request: req, Input: input}
 }
 
@@ -742,7 +781,10 @@ func (c *SES) DeleteReceiptRuleRequest(input *DeleteReceiptRuleInput) DeleteRece
 		input = &DeleteReceiptRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReceiptRuleOutput{})
+	output := &DeleteReceiptRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReceiptRuleRequest{Request: req, Input: input}
 }
 
@@ -795,7 +837,10 @@ func (c *SES) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) Dele
 		input = &DeleteReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReceiptRuleSetOutput{})
+	output := &DeleteReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -842,9 +887,12 @@ func (c *SES) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddres
 		input = &DeleteVerifiedEmailAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVerifiedEmailAddressOutput{})
+	output := &DeleteVerifiedEmailAddressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVerifiedEmailAddressRequest{Request: req, Input: input}
 }
 
@@ -896,7 +944,10 @@ func (c *SES) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceiptRu
 		input = &DescribeActiveReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActiveReceiptRuleSetOutput{})
+	output := &DescribeActiveReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeActiveReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -945,7 +996,10 @@ func (c *SES) DescribeConfigurationSetRequest(input *DescribeConfigurationSetInp
 		input = &DescribeConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationSetOutput{})
+	output := &DescribeConfigurationSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigurationSetRequest{Request: req, Input: input}
 }
 
@@ -996,7 +1050,10 @@ func (c *SES) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) Descri
 		input = &DescribeReceiptRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReceiptRuleOutput{})
+	output := &DescribeReceiptRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReceiptRuleRequest{Request: req, Input: input}
 }
 
@@ -1047,7 +1104,10 @@ func (c *SES) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInput) 
 		input = &DescribeReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReceiptRuleSetOutput{})
+	output := &DescribeReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -1114,7 +1174,10 @@ func (c *SES) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttributesI
 		input = &GetIdentityDkimAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityDkimAttributesOutput{})
+	output := &GetIdentityDkimAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityDkimAttributesRequest{Request: req, Input: input}
 }
 
@@ -1164,7 +1227,10 @@ func (c *SES) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMailF
 		input = &GetIdentityMailFromDomainAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityMailFromDomainAttributesOutput{})
+	output := &GetIdentityMailFromDomainAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityMailFromDomainAttributesRequest{Request: req, Input: input}
 }
 
@@ -1217,7 +1283,10 @@ func (c *SES) GetIdentityNotificationAttributesRequest(input *GetIdentityNotific
 		input = &GetIdentityNotificationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityNotificationAttributesOutput{})
+	output := &GetIdentityNotificationAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityNotificationAttributesRequest{Request: req, Input: input}
 }
 
@@ -1275,7 +1344,10 @@ func (c *SES) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) GetIde
 		input = &GetIdentityPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityPoliciesOutput{})
+	output := &GetIdentityPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityPoliciesRequest{Request: req, Input: input}
 }
 
@@ -1342,7 +1414,10 @@ func (c *SES) GetIdentityVerificationAttributesRequest(input *GetIdentityVerific
 		input = &GetIdentityVerificationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityVerificationAttributesOutput{})
+	output := &GetIdentityVerificationAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityVerificationAttributesRequest{Request: req, Input: input}
 }
 
@@ -1390,7 +1465,10 @@ func (c *SES) GetSendQuotaRequest(input *GetSendQuotaInput) GetSendQuotaRequest 
 		input = &GetSendQuotaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSendQuotaOutput{})
+	output := &GetSendQuotaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSendQuotaRequest{Request: req, Input: input}
 }
 
@@ -1440,7 +1518,10 @@ func (c *SES) GetSendStatisticsRequest(input *GetSendStatisticsInput) GetSendSta
 		input = &GetSendStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSendStatisticsOutput{})
+	output := &GetSendStatisticsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSendStatisticsRequest{Request: req, Input: input}
 }
 
@@ -1496,7 +1577,10 @@ func (c *SES) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) Li
 		input = &ListConfigurationSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigurationSetsOutput{})
+	output := &ListConfigurationSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListConfigurationSetsRequest{Request: req, Input: input}
 }
 
@@ -1551,7 +1635,10 @@ func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRe
 		input = &ListIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentitiesOutput{})
+	output := &ListIdentitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIdentitiesRequest{Request: req, Input: input}
 }
 
@@ -1658,7 +1745,10 @@ func (c *SES) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) List
 		input = &ListIdentityPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityPoliciesOutput{})
+	output := &ListIdentityPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIdentityPoliciesRequest{Request: req, Input: input}
 }
 
@@ -1709,7 +1799,10 @@ func (c *SES) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) ListRece
 		input = &ListReceiptFiltersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReceiptFiltersOutput{})
+	output := &ListReceiptFiltersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListReceiptFiltersRequest{Request: req, Input: input}
 }
 
@@ -1763,7 +1856,10 @@ func (c *SES) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) ListRe
 		input = &ListReceiptRuleSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReceiptRuleSetsOutput{})
+	output := &ListReceiptRuleSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListReceiptRuleSetsRequest{Request: req, Input: input}
 }
 
@@ -1810,7 +1906,10 @@ func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddresse
 		input = &ListVerifiedEmailAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVerifiedEmailAddressesOutput{})
+	output := &ListVerifiedEmailAddressesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVerifiedEmailAddressesRequest{Request: req, Input: input}
 }
 
@@ -1866,7 +1965,10 @@ func (c *SES) PutIdentityPolicyRequest(input *PutIdentityPolicyInput) PutIdentit
 		input = &PutIdentityPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutIdentityPolicyOutput{})
+	output := &PutIdentityPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutIdentityPolicyRequest{Request: req, Input: input}
 }
 
@@ -1921,7 +2023,10 @@ func (c *SES) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput) Re
 		input = &ReorderReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &ReorderReceiptRuleSetOutput{})
+	output := &ReorderReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReorderReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -1977,7 +2082,10 @@ func (c *SES) SendBounceRequest(input *SendBounceInput) SendBounceRequest {
 		input = &SendBounceInput{}
 	}
 
-	req := c.newRequest(op, input, &SendBounceOutput{})
+	output := &SendBounceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendBounceRequest{Request: req, Input: input}
 }
 
@@ -2057,7 +2165,10 @@ func (c *SES) SendEmailRequest(input *SendEmailInput) SendEmailRequest {
 		input = &SendEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &SendEmailOutput{})
+	output := &SendEmailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendEmailRequest{Request: req, Input: input}
 }
 
@@ -2173,7 +2284,10 @@ func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) SendRawEmailRequest 
 		input = &SendRawEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &SendRawEmailOutput{})
+	output := &SendRawEmailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendRawEmailRequest{Request: req, Input: input}
 }
 
@@ -2227,7 +2341,10 @@ func (c *SES) SetActiveReceiptRuleSetRequest(input *SetActiveReceiptRuleSetInput
 		input = &SetActiveReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &SetActiveReceiptRuleSetOutput{})
+	output := &SetActiveReceiptRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetActiveReceiptRuleSetRequest{Request: req, Input: input}
 }
 
@@ -2290,7 +2407,10 @@ func (c *SES) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInput) 
 		input = &SetIdentityDkimEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityDkimEnabledOutput{})
+	output := &SetIdentityDkimEnabledOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityDkimEnabledRequest{Request: req, Input: input}
 }
 
@@ -2347,7 +2467,10 @@ func (c *SES) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeed
 		input = &SetIdentityFeedbackForwardingEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityFeedbackForwardingEnabledOutput{})
+	output := &SetIdentityFeedbackForwardingEnabledOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityFeedbackForwardingEnabledRequest{Request: req, Input: input}
 }
 
@@ -2400,7 +2523,10 @@ func (c *SES) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdentity
 		input = &SetIdentityHeadersInNotificationsEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityHeadersInNotificationsEnabledOutput{})
+	output := &SetIdentityHeadersInNotificationsEnabledOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityHeadersInNotificationsEnabledRequest{Request: req, Input: input}
 }
 
@@ -2454,7 +2580,10 @@ func (c *SES) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDomainI
 		input = &SetIdentityMailFromDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityMailFromDomainOutput{})
+	output := &SetIdentityMailFromDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityMailFromDomainRequest{Request: req, Input: input}
 }
 
@@ -2511,7 +2640,10 @@ func (c *SES) SetIdentityNotificationTopicRequest(input *SetIdentityNotification
 		input = &SetIdentityNotificationTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityNotificationTopicOutput{})
+	output := &SetIdentityNotificationTopicOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityNotificationTopicRequest{Request: req, Input: input}
 }
 
@@ -2562,7 +2694,10 @@ func (c *SES) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInput) 
 		input = &SetReceiptRulePositionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetReceiptRulePositionOutput{})
+	output := &SetReceiptRulePositionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetReceiptRulePositionRequest{Request: req, Input: input}
 }
 
@@ -2619,7 +2754,10 @@ func (c *SES) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigu
 		input = &UpdateConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationSetEventDestinationOutput{})
+	output := &UpdateConfigurationSetEventDestinationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input}
 }
 
@@ -2673,7 +2811,10 @@ func (c *SES) UpdateConfigurationSetTrackingOptionsRequest(input *UpdateConfigur
 		input = &UpdateConfigurationSetTrackingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationSetTrackingOptionsOutput{})
+	output := &UpdateConfigurationSetTrackingOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConfigurationSetTrackingOptionsRequest{Request: req, Input: input}
 }
 
@@ -2724,7 +2865,10 @@ func (c *SES) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) UpdateRece
 		input = &UpdateReceiptRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateReceiptRuleOutput{})
+	output := &UpdateReceiptRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateReceiptRuleRequest{Request: req, Input: input}
 }
 
@@ -2784,7 +2928,10 @@ func (c *SES) VerifyDomainDkimRequest(input *VerifyDomainDkimInput) VerifyDomain
 		input = &VerifyDomainDkimInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyDomainDkimOutput{})
+	output := &VerifyDomainDkimOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return VerifyDomainDkimRequest{Request: req, Input: input}
 }
 
@@ -2835,7 +2982,10 @@ func (c *SES) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) Veri
 		input = &VerifyDomainIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyDomainIdentityOutput{})
+	output := &VerifyDomainIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return VerifyDomainIdentityRequest{Request: req, Input: input}
 }
 
@@ -2881,9 +3031,12 @@ func (c *SES) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) VerifyEm
 		input = &VerifyEmailAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyEmailAddressOutput{})
+	output := &VerifyEmailAddressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return VerifyEmailAddressRequest{Request: req, Input: input}
 }
 
@@ -2933,7 +3086,10 @@ func (c *SES) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) Verify
 		input = &VerifyEmailIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyEmailIdentityOutput{})
+	output := &VerifyEmailIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return VerifyEmailIdentityRequest{Request: req, Input: input}
 }
 
@@ -3307,6 +3463,8 @@ func (s *CloneReceiptRuleSetInput) SetRuleSetName(v string) *CloneReceiptRuleSet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSetResponse
 type CloneReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3317,6 +3475,11 @@ func (s CloneReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s CloneReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CloneReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information associated with an Amazon CloudWatch event destination
@@ -3640,6 +3803,8 @@ func (s *CreateConfigurationSetEventDestinationInput) SetEventDestination(v *Eve
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestinationResponse
 type CreateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3650,6 +3815,11 @@ func (s CreateConfigurationSetEventDestinationOutput) String() string {
 // GoString returns the string representation
 func (s CreateConfigurationSetEventDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConfigurationSetEventDestinationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to create a configuration set. Configuration sets enable
@@ -3704,6 +3874,8 @@ func (s *CreateConfigurationSetInput) SetConfigurationSet(v *ConfigurationSet) *
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetResponse
 type CreateConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3714,6 +3886,11 @@ func (s CreateConfigurationSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateConfigurationSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConfigurationSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to create an open and click tracking option object in
@@ -3784,6 +3961,8 @@ func (s *CreateConfigurationSetTrackingOptionsInput) SetTrackingOptions(v *Track
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetTrackingOptionsResponse
 type CreateConfigurationSetTrackingOptionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3794,6 +3973,11 @@ func (s CreateConfigurationSetTrackingOptionsOutput) String() string {
 // GoString returns the string representation
 func (s CreateConfigurationSetTrackingOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConfigurationSetTrackingOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to create a new IP address filter. You use IP address
@@ -3849,6 +4033,8 @@ func (s *CreateReceiptFilterInput) SetFilter(v *ReceiptFilter) *CreateReceiptFil
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilterResponse
 type CreateReceiptFilterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3859,6 +4045,11 @@ func (s CreateReceiptFilterOutput) String() string {
 // GoString returns the string representation
 func (s CreateReceiptFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReceiptFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to create a receipt rule. You use receipt rules to receive
@@ -3940,6 +4131,8 @@ func (s *CreateReceiptRuleInput) SetRuleSetName(v string) *CreateReceiptRuleInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleResponse
 type CreateReceiptRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3950,6 +4143,11 @@ func (s CreateReceiptRuleOutput) String() string {
 // GoString returns the string representation
 func (s CreateReceiptRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReceiptRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to create an empty receipt rule set. You use receipt
@@ -4006,6 +4204,8 @@ func (s *CreateReceiptRuleSetInput) SetRuleSetName(v string) *CreateReceiptRuleS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetResponse
 type CreateReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4016,6 +4216,11 @@ func (s CreateReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete a configuration set event destination. Configuration
@@ -4081,6 +4286,8 @@ func (s *DeleteConfigurationSetEventDestinationInput) SetEventDestinationName(v 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestinationResponse
 type DeleteConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4091,6 +4298,11 @@ func (s DeleteConfigurationSetEventDestinationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConfigurationSetEventDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConfigurationSetEventDestinationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete a configuration set. Configuration sets enable
@@ -4140,6 +4352,8 @@ func (s *DeleteConfigurationSetInput) SetConfigurationSetName(v string) *DeleteC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetResponse
 type DeleteConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4150,6 +4364,11 @@ func (s DeleteConfigurationSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConfigurationSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConfigurationSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete open and click tracking options in a configuration
@@ -4199,6 +4418,8 @@ func (s *DeleteConfigurationSetTrackingOptionsInput) SetConfigurationSetName(v s
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsResponse
 type DeleteConfigurationSetTrackingOptionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4209,6 +4430,11 @@ func (s DeleteConfigurationSetTrackingOptionsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConfigurationSetTrackingOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConfigurationSetTrackingOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete one of your Amazon SES identities (an email
@@ -4257,6 +4483,8 @@ func (s *DeleteIdentityInput) SetIdentity(v string) *DeleteIdentityInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityResponse
 type DeleteIdentityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4267,6 +4495,11 @@ func (s DeleteIdentityOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete a sending authorization policy for an identity.
@@ -4339,6 +4572,8 @@ func (s *DeleteIdentityPolicyInput) SetPolicyName(v string) *DeleteIdentityPolic
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicyResponse
 type DeleteIdentityPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4349,6 +4584,11 @@ func (s DeleteIdentityPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIdentityPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIdentityPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete an IP address filter. You use IP address filters
@@ -4398,6 +4638,8 @@ func (s *DeleteReceiptFilterInput) SetFilterName(v string) *DeleteReceiptFilterI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilterResponse
 type DeleteReceiptFilterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4408,6 +4650,11 @@ func (s DeleteReceiptFilterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReceiptFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReceiptFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete a receipt rule. You use receipt rules to receive
@@ -4472,6 +4719,8 @@ func (s *DeleteReceiptRuleInput) SetRuleSetName(v string) *DeleteReceiptRuleInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleResponse
 type DeleteReceiptRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4482,6 +4731,11 @@ func (s DeleteReceiptRuleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReceiptRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReceiptRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete a receipt rule set and all of the receipt
@@ -4531,6 +4785,8 @@ func (s *DeleteReceiptRuleSetInput) SetRuleSetName(v string) *DeleteReceiptRuleS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSetResponse
 type DeleteReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4541,6 +4797,11 @@ func (s DeleteReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to delete an email address from the list of email addresses
@@ -4588,6 +4849,8 @@ func (s *DeleteVerifiedEmailAddressInput) SetEmailAddress(v string) *DeleteVerif
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddressOutput
 type DeleteVerifiedEmailAddressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4598,6 +4861,11 @@ func (s DeleteVerifiedEmailAddressOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVerifiedEmailAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVerifiedEmailAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to return the metadata and receipt rules for the receipt
@@ -4625,6 +4893,8 @@ func (s DescribeActiveReceiptRuleSetInput) GoString() string {
 type DescribeActiveReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The metadata for the currently active receipt rule set. The metadata consists
 	// of the rule set name and a timestamp of when the rule set was created.
 	Metadata *ReceiptRuleSetMetadata `type:"structure"`
@@ -4641,6 +4911,11 @@ func (s DescribeActiveReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeActiveReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeActiveReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetadata sets the Metadata field's value.
@@ -4714,6 +4989,8 @@ func (s *DescribeConfigurationSetInput) SetConfigurationSetName(v string) *Descr
 type DescribeConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The configuration set object associated with the specified configuration
 	// set.
 	ConfigurationSet *ConfigurationSet `type:"structure"`
@@ -4734,6 +5011,11 @@ func (s DescribeConfigurationSetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigurationSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationSet sets the ConfigurationSet field's value.
@@ -4817,6 +5099,8 @@ func (s *DescribeReceiptRuleInput) SetRuleSetName(v string) *DescribeReceiptRule
 type DescribeReceiptRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A data structure that contains the specified receipt rule's name, actions,
 	// recipients, domains, enabled status, scan status, and Transport Layer Security
 	// (TLS) policy.
@@ -4831,6 +5115,11 @@ func (s DescribeReceiptRuleOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReceiptRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReceiptRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRule sets the Rule field's value.
@@ -4887,6 +5176,8 @@ func (s *DescribeReceiptRuleSetInput) SetRuleSetName(v string) *DescribeReceiptR
 type DescribeReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The metadata for the receipt rule set, which consists of the rule set name
 	// and the timestamp of when the rule set was created.
 	Metadata *ReceiptRuleSetMetadata `type:"structure"`
@@ -4903,6 +5194,11 @@ func (s DescribeReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetadata sets the Metadata field's value.
@@ -5210,6 +5506,8 @@ func (s *GetIdentityDkimAttributesInput) SetIdentities(v []string) *GetIdentityD
 type GetIdentityDkimAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The DKIM attributes for an email address or a domain.
 	//
 	// DkimAttributes is a required field
@@ -5224,6 +5522,11 @@ func (s GetIdentityDkimAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityDkimAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityDkimAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDkimAttributes sets the DkimAttributes field's value.
@@ -5280,6 +5583,8 @@ func (s *GetIdentityMailFromDomainAttributesInput) SetIdentities(v []string) *Ge
 type GetIdentityMailFromDomainAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of identities to custom MAIL FROM attributes.
 	//
 	// MailFromDomainAttributes is a required field
@@ -5294,6 +5599,11 @@ func (s GetIdentityMailFromDomainAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityMailFromDomainAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityMailFromDomainAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMailFromDomainAttributes sets the MailFromDomainAttributes field's value.
@@ -5352,6 +5662,8 @@ func (s *GetIdentityNotificationAttributesInput) SetIdentities(v []string) *GetI
 type GetIdentityNotificationAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of Identity to IdentityNotificationAttributes.
 	//
 	// NotificationAttributes is a required field
@@ -5366,6 +5678,11 @@ func (s GetIdentityNotificationAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityNotificationAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityNotificationAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNotificationAttributes sets the NotificationAttributes field's value.
@@ -5444,6 +5761,8 @@ func (s *GetIdentityPoliciesInput) SetPolicyNames(v []string) *GetIdentityPolici
 type GetIdentityPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of policy names to policies.
 	//
 	// Policies is a required field
@@ -5458,6 +5777,11 @@ func (s GetIdentityPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicies sets the Policies field's value.
@@ -5516,6 +5840,8 @@ func (s *GetIdentityVerificationAttributesInput) SetIdentities(v []string) *GetI
 type GetIdentityVerificationAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of Identities to IdentityVerificationAttributes objects.
 	//
 	// VerificationAttributes is a required field
@@ -5530,6 +5856,11 @@ func (s GetIdentityVerificationAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityVerificationAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityVerificationAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVerificationAttributes sets the VerificationAttributes field's value.
@@ -5559,6 +5890,8 @@ func (s GetSendQuotaInput) GoString() string {
 type GetSendQuotaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The maximum number of emails the user is allowed to send in a 24-hour interval.
 	// A value of -1 signifies an unlimited quota.
 	Max24HourSend *float64 `type:"double"`
@@ -5582,6 +5915,11 @@ func (s GetSendQuotaOutput) String() string {
 // GoString returns the string representation
 func (s GetSendQuotaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSendQuotaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMax24HourSend sets the Max24HourSend field's value.
@@ -5623,6 +5961,8 @@ func (s GetSendStatisticsInput) GoString() string {
 type GetSendStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of data points, each of which represents 15 minutes of activity.
 	SendDataPoints []SendDataPoint `type:"list"`
 }
@@ -5635,6 +5975,11 @@ func (s GetSendStatisticsOutput) String() string {
 // GoString returns the string representation
 func (s GetSendStatisticsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSendStatisticsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSendDataPoints sets the SendDataPoints field's value.
@@ -6099,6 +6444,8 @@ func (s *ListConfigurationSetsInput) SetNextToken(v string) *ListConfigurationSe
 type ListConfigurationSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of configuration sets.
 	ConfigurationSets []ConfigurationSet `type:"list"`
 
@@ -6115,6 +6462,11 @@ func (s ListConfigurationSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListConfigurationSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListConfigurationSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationSets sets the ConfigurationSets field's value.
@@ -6181,6 +6533,8 @@ func (s *ListIdentitiesInput) SetNextToken(v string) *ListIdentitiesInput {
 type ListIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of identities.
 	//
 	// Identities is a required field
@@ -6198,6 +6552,11 @@ func (s ListIdentitiesOutput) String() string {
 // GoString returns the string representation
 func (s ListIdentitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIdentitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentities sets the Identities field's value.
@@ -6265,6 +6624,8 @@ func (s *ListIdentityPoliciesInput) SetIdentity(v string) *ListIdentityPoliciesI
 type ListIdentityPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of names of policies that apply to the specified identity.
 	//
 	// PolicyNames is a required field
@@ -6279,6 +6640,11 @@ func (s ListIdentityPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListIdentityPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIdentityPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyNames sets the PolicyNames field's value.
@@ -6310,6 +6676,8 @@ func (s ListReceiptFiltersInput) GoString() string {
 type ListReceiptFiltersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of IP address filter data structures, which each consist of a name,
 	// an IP address range, and whether to allow or block mail from it.
 	Filters []ReceiptFilter `type:"list"`
@@ -6323,6 +6691,11 @@ func (s ListReceiptFiltersOutput) String() string {
 // GoString returns the string representation
 func (s ListReceiptFiltersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListReceiptFiltersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFilters sets the Filters field's value.
@@ -6364,6 +6737,8 @@ func (s *ListReceiptRuleSetsInput) SetNextToken(v string) *ListReceiptRuleSetsIn
 type ListReceiptRuleSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token indicating that there are additional receipt rule sets available
 	// to be listed. Pass this token to successive calls of ListReceiptRuleSets
 	// to retrieve up to 100 receipt rule sets at a time.
@@ -6382,6 +6757,11 @@ func (s ListReceiptRuleSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListReceiptRuleSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListReceiptRuleSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6417,6 +6797,8 @@ func (s ListVerifiedEmailAddressesInput) GoString() string {
 type ListVerifiedEmailAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of email addresses that have been verified.
 	VerifiedEmailAddresses []string `type:"list"`
 }
@@ -6429,6 +6811,11 @@ func (s ListVerifiedEmailAddressesOutput) String() string {
 // GoString returns the string representation
 func (s ListVerifiedEmailAddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVerifiedEmailAddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVerifiedEmailAddresses sets the VerifiedEmailAddresses field's value.
@@ -6742,6 +7129,8 @@ func (s *PutIdentityPolicyInput) SetPolicyName(v string) *PutIdentityPolicyInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicyResponse
 type PutIdentityPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6752,6 +7141,11 @@ func (s PutIdentityPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutIdentityPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutIdentityPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the raw data of the message.
@@ -7437,6 +7831,8 @@ func (s *ReorderReceiptRuleSetInput) SetRuleSetName(v string) *ReorderReceiptRul
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSetResponse
 type ReorderReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7447,6 +7843,11 @@ func (s ReorderReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s ReorderReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReorderReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // When included in a receipt rule, this action saves the received message to
@@ -7810,6 +8211,8 @@ func (s *SendBounceInput) SetOriginalMessageId(v string) *SendBounceInput {
 type SendBounceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The message ID of the bounce message.
 	MessageId *string `type:"string"`
 }
@@ -7822,6 +8225,11 @@ func (s SendBounceOutput) String() string {
 // GoString returns the string representation
 func (s SendBounceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendBounceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageId sets the MessageId field's value.
@@ -8078,6 +8486,8 @@ func (s *SendEmailInput) SetTags(v []MessageTag) *SendEmailInput {
 type SendEmailOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique message identifier returned from the SendEmail action.
 	//
 	// MessageId is a required field
@@ -8092,6 +8502,11 @@ func (s SendEmailOutput) String() string {
 // GoString returns the string representation
 func (s SendEmailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendEmailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageId sets the MessageId field's value.
@@ -8291,6 +8706,8 @@ func (s *SendRawEmailInput) SetTags(v []MessageTag) *SendRawEmailInput {
 type SendRawEmailOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique message identifier returned from the SendRawEmail action.
 	//
 	// MessageId is a required field
@@ -8305,6 +8722,11 @@ func (s SendRawEmailOutput) String() string {
 // GoString returns the string representation
 func (s SendRawEmailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendRawEmailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageId sets the MessageId field's value.
@@ -8345,6 +8767,8 @@ func (s *SetActiveReceiptRuleSetInput) SetRuleSetName(v string) *SetActiveReceip
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSetResponse
 type SetActiveReceiptRuleSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8355,6 +8779,11 @@ func (s SetActiveReceiptRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s SetActiveReceiptRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetActiveReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to enable or disable Amazon SES Easy DKIM signing for
@@ -8420,6 +8849,8 @@ func (s *SetIdentityDkimEnabledInput) SetIdentity(v string) *SetIdentityDkimEnab
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabledResponse
 type SetIdentityDkimEnabledOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8430,6 +8861,11 @@ func (s SetIdentityDkimEnabledOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityDkimEnabledOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityDkimEnabledOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to enable or disable whether Amazon SES forwards you
@@ -8500,6 +8936,8 @@ func (s *SetIdentityFeedbackForwardingEnabledInput) SetIdentity(v string) *SetId
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledResponse
 type SetIdentityFeedbackForwardingEnabledOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8510,6 +8948,11 @@ func (s SetIdentityFeedbackForwardingEnabledOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityFeedbackForwardingEnabledOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityFeedbackForwardingEnabledOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to set whether Amazon SES includes the original email
@@ -8595,6 +9038,8 @@ func (s *SetIdentityHeadersInNotificationsEnabledInput) SetNotificationType(v No
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabledResponse
 type SetIdentityHeadersInNotificationsEnabledOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8605,6 +9050,11 @@ func (s SetIdentityHeadersInNotificationsEnabledOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityHeadersInNotificationsEnabledOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityHeadersInNotificationsEnabledOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to enable or disable the Amazon SES custom MAIL FROM
@@ -8686,6 +9136,8 @@ func (s *SetIdentityMailFromDomainInput) SetMailFromDomain(v string) *SetIdentit
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainResponse
 type SetIdentityMailFromDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8696,6 +9148,11 @@ func (s SetIdentityMailFromDomainOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityMailFromDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityMailFromDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to specify the Amazon SNS topic to which Amazon SES
@@ -8774,6 +9231,8 @@ func (s *SetIdentityNotificationTopicInput) SetSnsTopic(v string) *SetIdentityNo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicResponse
 type SetIdentityNotificationTopicOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8784,6 +9243,11 @@ func (s SetIdentityNotificationTopicOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityNotificationTopicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityNotificationTopicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to set the position of a receipt rule in a receipt rule
@@ -8857,6 +9321,8 @@ func (s *SetReceiptRulePositionInput) SetRuleSetName(v string) *SetReceiptRulePo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePositionResponse
 type SetReceiptRulePositionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8867,6 +9333,11 @@ func (s SetReceiptRulePositionOutput) String() string {
 // GoString returns the string representation
 func (s SetReceiptRulePositionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetReceiptRulePositionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // When included in a receipt rule, this action terminates the evaluation of
@@ -9027,6 +9498,8 @@ func (s *UpdateConfigurationSetEventDestinationInput) SetEventDestination(v *Eve
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationResponse
 type UpdateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9037,6 +9510,11 @@ func (s UpdateConfigurationSetEventDestinationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConfigurationSetEventDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConfigurationSetEventDestinationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to update the tracking options for a configuration set.
@@ -9106,6 +9584,8 @@ func (s *UpdateConfigurationSetTrackingOptionsInput) SetTrackingOptions(v *Track
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsResponse
 type UpdateConfigurationSetTrackingOptionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9116,6 +9596,11 @@ func (s UpdateConfigurationSetTrackingOptionsOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConfigurationSetTrackingOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConfigurationSetTrackingOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to update a receipt rule. You use receipt rules to receive
@@ -9185,6 +9670,8 @@ func (s *UpdateReceiptRuleInput) SetRuleSetName(v string) *UpdateReceiptRuleInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleResponse
 type UpdateReceiptRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9195,6 +9682,11 @@ func (s UpdateReceiptRuleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateReceiptRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateReceiptRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to generate the CNAME records needed to set up Easy
@@ -9246,6 +9738,8 @@ func (s *VerifyDomainDkimInput) SetDomain(v string) *VerifyDomainDkimInput {
 type VerifyDomainDkimOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A set of character strings that represent the domain's identity. If the identity
 	// is an email address, the tokens represent the domain of that address.
 	//
@@ -9270,6 +9764,11 @@ func (s VerifyDomainDkimOutput) String() string {
 // GoString returns the string representation
 func (s VerifyDomainDkimOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifyDomainDkimOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDkimTokens sets the DkimTokens field's value.
@@ -9328,6 +9827,8 @@ func (s *VerifyDomainIdentityInput) SetDomain(v string) *VerifyDomainIdentityInp
 type VerifyDomainIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A TXT record that you must place in the DNS settings of the domain to complete
 	// domain verification with Amazon SES.
 	//
@@ -9350,6 +9851,11 @@ func (s VerifyDomainIdentityOutput) String() string {
 // GoString returns the string representation
 func (s VerifyDomainIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifyDomainIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVerificationToken sets the VerificationToken field's value.
@@ -9404,6 +9910,8 @@ func (s *VerifyEmailAddressInput) SetEmailAddress(v string) *VerifyEmailAddressI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailAddressOutput
 type VerifyEmailAddressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9414,6 +9922,11 @@ func (s VerifyEmailAddressOutput) String() string {
 // GoString returns the string representation
 func (s VerifyEmailAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifyEmailAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to begin email address verification with Amazon SES.
@@ -9463,6 +9976,8 @@ func (s *VerifyEmailIdentityInput) SetEmailAddress(v string) *VerifyEmailIdentit
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentityResponse
 type VerifyEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9473,6 +9988,11 @@ func (s VerifyEmailIdentityOutput) String() string {
 // GoString returns the string representation
 func (s VerifyEmailIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifyEmailIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // When included in a receipt rule, this action calls Amazon WorkMail and, optionally,

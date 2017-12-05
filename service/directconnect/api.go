@@ -62,7 +62,10 @@ func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateC
 		input = &AllocateConnectionOnInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocateConnectionOnInterconnectRequest{Request: req, Input: input}
 }
 
@@ -114,7 +117,10 @@ func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedCon
 		input = &AllocateHostedConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocateHostedConnectionRequest{Request: req, Input: input}
 }
 
@@ -165,7 +171,10 @@ func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePr
 		input = &AllocatePrivateVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	output := &CreatePublicVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocatePrivateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -223,7 +232,10 @@ func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePub
 		input = &AllocatePublicVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	output := &CreatePublicVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocatePublicVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -285,7 +297,10 @@ func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnec
 		input = &AssociateConnectionWithLagInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateConnectionWithLagRequest{Request: req, Input: input}
 }
 
@@ -337,7 +352,10 @@ func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedC
 		input = &AssociateHostedConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateHostedConnectionRequest{Request: req, Input: input}
 }
 
@@ -395,7 +413,10 @@ func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtual
 		input = &AssociateVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	output := &CreatePublicVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -445,7 +466,10 @@ func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) 
 		input = &ConfirmConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmConnectionOutput{})
+	output := &ConfirmConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfirmConnectionRequest{Request: req, Input: input}
 }
 
@@ -495,7 +519,10 @@ func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPriv
 		input = &ConfirmPrivateVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmPrivateVirtualInterfaceOutput{})
+	output := &ConfirmPrivateVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfirmPrivateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -544,7 +571,10 @@ func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPubli
 		input = &ConfirmPublicVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmPublicVirtualInterfaceOutput{})
+	output := &ConfirmPublicVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfirmPublicVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -602,7 +632,10 @@ func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBG
 		input = &CreateBGPPeerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBGPPeerOutput{})
+	output := &CreateBGPPeerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBGPPeerRequest{Request: req, Input: input}
 }
 
@@ -663,7 +696,10 @@ func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) Cr
 		input = &CreateConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConnectionRequest{Request: req, Input: input}
 }
 
@@ -732,7 +768,10 @@ func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput
 		input = &CreateInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInterconnectOutput{})
+	output := &CreateInterconnectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInterconnectRequest{Request: req, Input: input}
 }
 
@@ -802,7 +841,10 @@ func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) CreateLagRequest
 		input = &CreateLagInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLagOutput{})
+	output := &UpdateLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLagRequest{Request: req, Input: input}
 }
 
@@ -850,7 +892,10 @@ func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivat
 		input = &CreatePrivateVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	output := &CreatePublicVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePrivateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -903,7 +948,10 @@ func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicV
 		input = &CreatePublicVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	output := &CreatePublicVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePublicVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -951,7 +999,10 @@ func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBG
 		input = &DeleteBGPPeerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBGPPeerOutput{})
+	output := &DeleteBGPPeerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBGPPeerRequest{Request: req, Input: input}
 }
 
@@ -1002,7 +1053,10 @@ func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) De
 		input = &DeleteConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConnectionRequest{Request: req, Input: input}
 }
 
@@ -1050,7 +1104,10 @@ func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput
 		input = &DeleteInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInterconnectOutput{})
+	output := &DeleteInterconnectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteInterconnectRequest{Request: req, Input: input}
 }
 
@@ -1097,7 +1154,10 @@ func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) DeleteLagRequest
 		input = &DeleteLagInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLagOutput{})
+	output := &UpdateLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLagRequest{Request: req, Input: input}
 }
 
@@ -1143,7 +1203,10 @@ func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterf
 		input = &DeleteVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVirtualInterfaceOutput{})
+	output := &DeleteVirtualInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVirtualInterfaceRequest{Request: req, Input: input}
 }
 
@@ -1200,7 +1263,10 @@ func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLo
 		input = &DescribeConnectionLoaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConnectionLoaOutput{})
+	output := &DescribeConnectionLoaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConnectionLoaRequest{Request: req, Input: input}
 }
 
@@ -1248,7 +1314,10 @@ func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInp
 		input = &DescribeConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	output := &DescribeHostedConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConnectionsRequest{Request: req, Input: input}
 }
 
@@ -1301,7 +1370,10 @@ func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *Describe
 		input = &DescribeConnectionsOnInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	output := &DescribeHostedConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConnectionsOnInterconnectRequest{Request: req, Input: input}
 }
 
@@ -1350,7 +1422,10 @@ func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedCo
 		input = &DescribeHostedConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	output := &DescribeHostedConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHostedConnectionsRequest{Request: req, Input: input}
 }
 
@@ -1407,7 +1482,10 @@ func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconne
 		input = &DescribeInterconnectLoaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInterconnectLoaOutput{})
+	output := &DescribeInterconnectLoaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInterconnectLoaRequest{Request: req, Input: input}
 }
 
@@ -1455,7 +1533,10 @@ func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnect
 		input = &DescribeInterconnectsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInterconnectsOutput{})
+	output := &DescribeInterconnectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInterconnectsRequest{Request: req, Input: input}
 }
 
@@ -1503,7 +1584,10 @@ func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) DescribeLa
 		input = &DescribeLagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLagsOutput{})
+	output := &DescribeLagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLagsRequest{Request: req, Input: input}
 }
 
@@ -1556,7 +1640,10 @@ func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaR
 		input = &DescribeLoaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoaOutput{})
+	output := &DescribeLoaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoaRequest{Request: req, Input: input}
 }
 
@@ -1604,7 +1691,10 @@ func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) 
 		input = &DescribeLocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLocationsOutput{})
+	output := &DescribeLocationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLocationsRequest{Request: req, Input: input}
 }
 
@@ -1650,7 +1740,10 @@ func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) DescribeTa
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -1702,7 +1795,10 @@ func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGat
 		input = &DescribeVirtualGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVirtualGatewaysOutput{})
+	output := &DescribeVirtualGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVirtualGatewaysRequest{Request: req, Input: input}
 }
 
@@ -1755,7 +1851,10 @@ func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualI
 		input = &DescribeVirtualInterfacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVirtualInterfacesOutput{})
+	output := &DescribeVirtualInterfacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVirtualInterfacesRequest{Request: req, Input: input}
 }
 
@@ -1811,7 +1910,10 @@ func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *Disassociate
 		input = &DisassociateConnectionFromLagInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	output := &DisassociateConnectionFromLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateConnectionFromLagRequest{Request: req, Input: input}
 }
 
@@ -1862,7 +1964,10 @@ func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) TagResourceR
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -1908,7 +2013,10 @@ func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) UntagRes
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -1968,7 +2076,10 @@ func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest
 		input = &UpdateLagInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLagOutput{})
+	output := &UpdateLagOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateLagRequest{Request: req, Input: input}
 }
 
@@ -2733,6 +2844,8 @@ func (s *ConfirmConnectionInput) SetConnectionId(v string) *ConfirmConnectionInp
 type ConfirmConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// State of the connection.
 	//
 	//    * Ordering: The initial state of a hosted connection provisioned on an
@@ -2766,6 +2879,11 @@ func (s ConfirmConnectionOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnectionState sets the ConnectionState field's value.
@@ -2845,6 +2963,8 @@ func (s *ConfirmPrivateVirtualInterfaceInput) SetVirtualInterfaceId(v string) *C
 type ConfirmPrivateVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// State of the virtual interface.
 	//
 	//    * Confirming: The creation of the virtual interface is pending confirmation
@@ -2884,6 +3004,11 @@ func (s ConfirmPrivateVirtualInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmPrivateVirtualInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmPrivateVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
@@ -2942,6 +3067,8 @@ func (s *ConfirmPublicVirtualInterfaceInput) SetVirtualInterfaceId(v string) *Co
 type ConfirmPublicVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// State of the virtual interface.
 	//
 	//    * Confirming: The creation of the virtual interface is pending confirmation
@@ -2981,6 +3108,11 @@ func (s ConfirmPublicVirtualInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmPublicVirtualInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmPublicVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
@@ -3034,6 +3166,8 @@ func (s *CreateBGPPeerInput) SetVirtualInterfaceId(v string) *CreateBGPPeerInput
 type CreateBGPPeerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
 	// location and the customer.
 	VirtualInterface *CreatePublicVirtualInterfaceOutput `locationName:"virtualInterface" type:"structure"`
@@ -3047,6 +3181,11 @@ func (s CreateBGPPeerOutput) String() string {
 // GoString returns the string representation
 func (s CreateBGPPeerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBGPPeerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualInterface sets the VirtualInterface field's value.
@@ -3261,6 +3400,8 @@ func (s *CreateInterconnectInput) SetLocation(v string) *CreateInterconnectInput
 type CreateInterconnectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Direct Connection endpoint which the physical connection terminates on.
 	AwsDevice *string `locationName:"awsDevice" type:"string"`
 
@@ -3330,6 +3471,11 @@ func (s CreateInterconnectOutput) String() string {
 // GoString returns the string representation
 func (s CreateInterconnectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInterconnectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAwsDevice sets the AwsDevice field's value.
@@ -3640,6 +3786,8 @@ func (s *CreatePublicVirtualInterfaceInput) SetNewPublicVirtualInterface(v *NewP
 type CreatePublicVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates the address family for the BGP peer.
 	//
 	//    * ipv4: IPv4 address family
@@ -3763,6 +3911,11 @@ func (s CreatePublicVirtualInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s CreatePublicVirtualInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePublicVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
@@ -3923,6 +4076,8 @@ func (s *DeleteBGPPeerInput) SetVirtualInterfaceId(v string) *DeleteBGPPeerInput
 type DeleteBGPPeerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
 	// location and the customer.
 	VirtualInterface *CreatePublicVirtualInterfaceOutput `locationName:"virtualInterface" type:"structure"`
@@ -3936,6 +4091,11 @@ func (s DeleteBGPPeerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBGPPeerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBGPPeerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualInterface sets the VirtualInterface field's value.
@@ -4038,6 +4198,8 @@ func (s *DeleteInterconnectInput) SetInterconnectId(v string) *DeleteInterconnec
 type DeleteInterconnectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// State of the interconnect.
 	//
 	//    * Requested: The initial state of an interconnect. The interconnect stays
@@ -4065,6 +4227,11 @@ func (s DeleteInterconnectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteInterconnectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInterconnectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInterconnectState sets the InterconnectState field's value.
@@ -4168,6 +4335,8 @@ func (s *DeleteVirtualInterfaceInput) SetVirtualInterfaceId(v string) *DeleteVir
 type DeleteVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// State of the virtual interface.
 	//
 	//    * Confirming: The creation of the virtual interface is pending confirmation
@@ -4207,6 +4376,11 @@ func (s DeleteVirtualInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVirtualInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
@@ -4291,6 +4465,8 @@ func (s *DescribeConnectionLoaInput) SetProviderName(v string) *DescribeConnecti
 type DescribeConnectionLoaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing the Letter of Authorization - Connecting Facility
 	// Assignment (LOA-CFA) for a connection.
 	Loa *DescribeLoaOutput `locationName:"loa" type:"structure"`
@@ -4304,6 +4480,11 @@ func (s DescribeConnectionLoaOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConnectionLoaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConnectionLoaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoa sets the Loa field's value.
@@ -4437,6 +4618,8 @@ func (s *DescribeHostedConnectionsInput) SetConnectionId(v string) *DescribeHost
 type DescribeHostedConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of connections.
 	Connections []DisassociateConnectionFromLagOutput `locationName:"connections" type:"list"`
 }
@@ -4449,6 +4632,11 @@ func (s DescribeHostedConnectionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHostedConnectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHostedConnectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnections sets the Connections field's value.
@@ -4530,6 +4718,8 @@ func (s *DescribeInterconnectLoaInput) SetProviderName(v string) *DescribeInterc
 type DescribeInterconnectLoaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing the Letter of Authorization - Connecting Facility
 	// Assignment (LOA-CFA) for a connection.
 	Loa *DescribeLoaOutput `locationName:"loa" type:"structure"`
@@ -4543,6 +4733,11 @@ func (s DescribeInterconnectLoaOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInterconnectLoaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInterconnectLoaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoa sets the Loa field's value.
@@ -4583,6 +4778,8 @@ func (s *DescribeInterconnectsInput) SetInterconnectId(v string) *DescribeInterc
 type DescribeInterconnectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of interconnects.
 	Interconnects []CreateInterconnectOutput `locationName:"interconnects" type:"list"`
 }
@@ -4595,6 +4792,11 @@ func (s DescribeInterconnectsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInterconnectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInterconnectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInterconnects sets the Interconnects field's value.
@@ -4637,6 +4839,8 @@ func (s *DescribeLagsInput) SetLagId(v string) *DescribeLagsInput {
 type DescribeLagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of LAGs.
 	Lags []UpdateLagOutput `locationName:"lags" type:"list"`
 }
@@ -4649,6 +4853,11 @@ func (s DescribeLagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLags sets the Lags field's value.
@@ -4734,6 +4943,8 @@ func (s *DescribeLoaInput) SetProviderName(v string) *DescribeLoaInput {
 type DescribeLoaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The binary contents of the LOA-CFA document.
 	//
 	// LoaContent is automatically base64 encoded/decoded by the SDK.
@@ -4754,6 +4965,11 @@ func (s DescribeLoaOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoaContent sets the LoaContent field's value.
@@ -4791,6 +5007,8 @@ func (s DescribeLocationsInput) GoString() string {
 type DescribeLocationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of colocation hubs where network providers have equipment. Most regions
 	// have multiple locations available.
 	Locations []Location `locationName:"locations" type:"list"`
@@ -4804,6 +5022,11 @@ func (s DescribeLocationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLocationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLocationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocations sets the Locations field's value.
@@ -4858,6 +5081,8 @@ func (s *DescribeTagsInput) SetResourceArns(v []string) *DescribeTagsInput {
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the tags.
 	ResourceTags []ResourceTag `locationName:"resourceTags" type:"list"`
 }
@@ -4870,6 +5095,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceTags sets the ResourceTags field's value.
@@ -4898,6 +5128,8 @@ func (s DescribeVirtualGatewaysInput) GoString() string {
 type DescribeVirtualGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of virtual private gateways.
 	VirtualGateways []VirtualGateway `locationName:"virtualGateways" type:"list"`
 }
@@ -4910,6 +5142,11 @@ func (s DescribeVirtualGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVirtualGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVirtualGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualGateways sets the VirtualGateways field's value.
@@ -4966,6 +5203,8 @@ func (s *DescribeVirtualInterfacesInput) SetVirtualInterfaceId(v string) *Descri
 type DescribeVirtualInterfacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of virtual interfaces.
 	VirtualInterfaces []CreatePublicVirtualInterfaceOutput `locationName:"virtualInterfaces" type:"list"`
 }
@@ -4978,6 +5217,11 @@ func (s DescribeVirtualInterfacesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVirtualInterfacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVirtualInterfacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualInterfaces sets the VirtualInterfaces field's value.
@@ -5055,6 +5299,8 @@ func (s *DisassociateConnectionFromLagInput) SetLagId(v string) *DisassociateCon
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnectionOutput
 type DisassociateConnectionFromLagOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The Direct Connection endpoint which the physical connection terminates on.
 	AwsDevice *string `locationName:"awsDevice" type:"string"`
@@ -5147,6 +5393,11 @@ func (s DisassociateConnectionFromLagOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateConnectionFromLagOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateConnectionFromLagOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAwsDevice sets the AwsDevice field's value.
@@ -6052,6 +6303,8 @@ func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6062,6 +6315,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Container for the parameters to the UntagResource operation.
@@ -6124,6 +6382,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6134,6 +6394,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Container for the parameters to the UpdateLag operation.
@@ -6215,6 +6480,8 @@ func (s *UpdateLagInput) SetMinimumLinks(v int64) *UpdateLagInput {
 type UpdateLagOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the LAG can host other connections.
 	//
 	// This is intended for use by AWS Direct Connect partners only.
@@ -6293,6 +6560,11 @@ func (s UpdateLagOutput) String() string {
 // GoString returns the string representation
 func (s UpdateLagOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateLagOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAllowsHostedConnections sets the AllowsHostedConnections field's value.

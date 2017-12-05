@@ -58,9 +58,12 @@ func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToS
 		input = &AddTagsToStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToStreamOutput{})
+	output := &AddTagsToStreamOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToStreamRequest{Request: req, Input: input}
 }
 
@@ -143,9 +146,12 @@ func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) CreateStreamRequ
 		input = &CreateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStreamOutput{})
+	output := &CreateStreamOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStreamRequest{Request: req, Input: input}
 }
 
@@ -197,9 +203,12 @@ func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRete
 		input = &DecreaseStreamRetentionPeriodInput{}
 	}
 
-	req := c.newRequest(op, input, &DecreaseStreamRetentionPeriodOutput{})
+	output := &DecreaseStreamRetentionPeriodOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DecreaseStreamRetentionPeriodRequest{Request: req, Input: input}
 }
 
@@ -264,9 +273,12 @@ func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequ
 		input = &DeleteStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStreamOutput{})
+	output := &DeleteStreamOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStreamRequest{Request: req, Input: input}
 }
 
@@ -317,7 +329,10 @@ func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimi
 		input = &DescribeLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+	output := &DescribeLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLimitsRequest{Request: req, Input: input}
 }
 
@@ -387,7 +402,10 @@ func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) DescribeStre
 		input = &DescribeStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	output := &DescribeStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStreamRequest{Request: req, Input: input}
 }
 
@@ -483,7 +501,10 @@ func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitor
 		input = &DisableEnhancedMonitoringInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableEnhancedMonitoringOutput{})
+	output := &EnableEnhancedMonitoringOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableEnhancedMonitoringRequest{Request: req, Input: input}
 }
 
@@ -529,7 +550,10 @@ func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitorin
 		input = &EnableEnhancedMonitoringInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableEnhancedMonitoringOutput{})
+	output := &EnableEnhancedMonitoringOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableEnhancedMonitoringRequest{Request: req, Input: input}
 }
 
@@ -627,7 +651,10 @@ func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) GetRecordsRequest {
 		input = &GetRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRecordsOutput{})
+	output := &GetRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRecordsRequest{Request: req, Input: input}
 }
 
@@ -710,7 +737,10 @@ func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) GetShard
 		input = &GetShardIteratorInput{}
 	}
 
-	req := c.newRequest(op, input, &GetShardIteratorOutput{})
+	output := &GetShardIteratorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetShardIteratorRequest{Request: req, Input: input}
 }
 
@@ -766,9 +796,12 @@ func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRete
 		input = &IncreaseStreamRetentionPeriodInput{}
 	}
 
-	req := c.newRequest(op, input, &IncreaseStreamRetentionPeriodOutput{})
+	output := &IncreaseStreamRetentionPeriodOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return IncreaseStreamRetentionPeriodRequest{Request: req, Input: input}
 }
 
@@ -835,7 +868,10 @@ func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest
 		input = &ListStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamsOutput{})
+	output := &ListStreamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStreamsRequest{Request: req, Input: input}
 }
 
@@ -931,7 +967,10 @@ func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTa
 		input = &ListTagsForStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForStreamOutput{})
+	output := &ListTagsForStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForStreamRequest{Request: req, Input: input}
 }
 
@@ -1012,9 +1051,12 @@ func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest
 		input = &MergeShardsInput{}
 	}
 
-	req := c.newRequest(op, input, &MergeShardsOutput{})
+	output := &MergeShardsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return MergeShardsRequest{Request: req, Input: input}
 }
 
@@ -1098,7 +1140,10 @@ func (c *Kinesis) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 		input = &PutRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordOutput{})
+	output := &PutRecordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRecordRequest{Request: req, Input: input}
 }
 
@@ -1202,7 +1247,10 @@ func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
 		input = &PutRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordsOutput{})
+	output := &PutRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRecordsRequest{Request: req, Input: input}
 }
 
@@ -1251,9 +1299,12 @@ func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) 
 		input = &RemoveTagsFromStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromStreamOutput{})
+	output := &RemoveTagsFromStreamOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromStreamRequest{Request: req, Input: input}
 }
 
@@ -1343,9 +1394,12 @@ func (c *Kinesis) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
 		input = &SplitShardInput{}
 	}
 
-	req := c.newRequest(op, input, &SplitShardOutput{})
+	output := &SplitShardOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SplitShardRequest{Request: req, Input: input}
 }
 
@@ -1408,9 +1462,12 @@ func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput
 		input = &StartStreamEncryptionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartStreamEncryptionOutput{})
+	output := &StartStreamEncryptionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartStreamEncryptionRequest{Request: req, Input: input}
 }
 
@@ -1473,9 +1530,12 @@ func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) 
 		input = &StopStreamEncryptionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopStreamEncryptionOutput{})
+	output := &StopStreamEncryptionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopStreamEncryptionRequest{Request: req, Input: input}
 }
 
@@ -1554,7 +1614,10 @@ func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateSh
 		input = &UpdateShardCountInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateShardCountOutput{})
+	output := &UpdateShardCountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateShardCountRequest{Request: req, Input: input}
 }
 
@@ -1623,6 +1686,8 @@ func (s *AddTagsToStreamInput) SetTags(v map[string]string) *AddTagsToStreamInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStreamOutput
 type AddTagsToStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1633,6 +1698,11 @@ func (s AddTagsToStreamOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for CreateStream.
@@ -1708,6 +1778,8 @@ func (s *CreateStreamInput) SetStreamName(v string) *CreateStreamInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamOutput
 type CreateStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1718,6 +1790,11 @@ func (s CreateStreamOutput) String() string {
 // GoString returns the string representation
 func (s CreateStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for DecreaseStreamRetentionPeriod.
@@ -1786,6 +1863,8 @@ func (s *DecreaseStreamRetentionPeriodInput) SetStreamName(v string) *DecreaseSt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriodOutput
 type DecreaseStreamRetentionPeriodOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1796,6 +1875,11 @@ func (s DecreaseStreamRetentionPeriodOutput) String() string {
 // GoString returns the string representation
 func (s DecreaseStreamRetentionPeriodOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DecreaseStreamRetentionPeriodOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for DeleteStream.
@@ -1845,6 +1929,8 @@ func (s *DeleteStreamInput) SetStreamName(v string) *DeleteStreamInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStreamOutput
 type DeleteStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1855,6 +1941,11 @@ func (s DeleteStreamOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsInput
@@ -1876,6 +1967,8 @@ func (s DescribeLimitsInput) GoString() string {
 type DescribeLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of open shards.
 	//
 	// OpenShardCount is a required field
@@ -1895,6 +1988,11 @@ func (s DescribeLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOpenShardCount sets the OpenShardCount field's value.
@@ -1983,6 +2081,8 @@ func (s *DescribeStreamInput) SetStreamName(v string) *DescribeStreamInput {
 type DescribeStreamOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current status of the stream, the stream ARN, an array of shard objects
 	// that comprise the stream, and whether there are more shards available.
 	//
@@ -1998,6 +2098,11 @@ func (s DescribeStreamOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStreamDescription sets the StreamDescription field's value.
@@ -2181,6 +2286,8 @@ func (s *EnableEnhancedMonitoringInput) SetStreamName(v string) *EnableEnhancedM
 type EnableEnhancedMonitoringOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the current state of the metrics that are in the enhanced state
 	// before the operation.
 	CurrentShardLevelMetrics []MetricsName `min:"1" type:"list"`
@@ -2201,6 +2308,11 @@ func (s EnableEnhancedMonitoringOutput) String() string {
 // GoString returns the string representation
 func (s EnableEnhancedMonitoringOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableEnhancedMonitoringOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCurrentShardLevelMetrics sets the CurrentShardLevelMetrics field's value.
@@ -2333,6 +2445,8 @@ func (s *GetRecordsInput) SetShardIterator(v string) *GetRecordsInput {
 type GetRecordsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of milliseconds the GetRecords response is from the tip of the
 	// stream, indicating how far behind current time the consumer is. A value of
 	// zero indicates record processing is caught up, and there are no new records
@@ -2358,6 +2472,11 @@ func (s GetRecordsOutput) String() string {
 // GoString returns the string representation
 func (s GetRecordsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMillisBehindLatest sets the MillisBehindLatest field's value.
@@ -2502,6 +2621,8 @@ func (s *GetShardIteratorInput) SetTimestamp(v time.Time) *GetShardIteratorInput
 type GetShardIteratorOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The position in the shard from which to start reading data records sequentially.
 	// A shard iterator specifies this position using the sequence number of a data
 	// record in a shard.
@@ -2516,6 +2637,11 @@ func (s GetShardIteratorOutput) String() string {
 // GoString returns the string representation
 func (s GetShardIteratorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetShardIteratorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetShardIterator sets the ShardIterator field's value.
@@ -2629,6 +2755,8 @@ func (s *IncreaseStreamRetentionPeriodInput) SetStreamName(v string) *IncreaseSt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriodOutput
 type IncreaseStreamRetentionPeriodOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2639,6 +2767,11 @@ func (s IncreaseStreamRetentionPeriodOutput) String() string {
 // GoString returns the string representation
 func (s IncreaseStreamRetentionPeriodOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s IncreaseStreamRetentionPeriodOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for ListStreams.
@@ -2696,6 +2829,8 @@ func (s *ListStreamsInput) SetLimit(v int64) *ListStreamsInput {
 type ListStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If set to true, there are more streams available to list.
 	//
 	// HasMoreStreams is a required field
@@ -2716,6 +2851,11 @@ func (s ListStreamsOutput) String() string {
 // GoString returns the string representation
 func (s ListStreamsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStreamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHasMoreStreams sets the HasMoreStreams field's value.
@@ -2806,6 +2946,8 @@ func (s *ListTagsForStreamInput) SetStreamName(v string) *ListTagsForStreamInput
 type ListTagsForStreamOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If set to true, more tags are available. To request additional tags, set
 	// ExclusiveStartTagKey to the key of the last tag returned.
 	//
@@ -2827,6 +2969,11 @@ func (s ListTagsForStreamOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHasMoreTags sets the HasMoreTags field's value.
@@ -2924,6 +3071,8 @@ func (s *MergeShardsInput) SetStreamName(v string) *MergeShardsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShardsOutput
 type MergeShardsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2934,6 +3083,11 @@ func (s MergeShardsOutput) String() string {
 // GoString returns the string representation
 func (s MergeShardsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s MergeShardsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for PutRecord.
@@ -3053,6 +3207,8 @@ func (s *PutRecordInput) SetStreamName(v string) *PutRecordInput {
 type PutRecordOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The encryption type to use on the record. This parameter can be one of the
 	// following values:
 	//
@@ -3084,6 +3240,11 @@ func (s PutRecordOutput) String() string {
 // GoString returns the string representation
 func (s PutRecordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRecordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
@@ -3178,6 +3339,8 @@ func (s *PutRecordsInput) SetStreamName(v string) *PutRecordsInput {
 type PutRecordsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The encryption type used on the records. This parameter can be one of the
 	// following values:
 	//
@@ -3208,6 +3371,11 @@ func (s PutRecordsOutput) String() string {
 // GoString returns the string representation
 func (s PutRecordsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
@@ -3513,6 +3681,8 @@ func (s *RemoveTagsFromStreamInput) SetTagKeys(v []string) *RemoveTagsFromStream
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStreamOutput
 type RemoveTagsFromStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3523,6 +3693,11 @@ func (s RemoveTagsFromStreamOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The range of possible sequence numbers for the shard.
@@ -3716,6 +3891,8 @@ func (s *SplitShardInput) SetStreamName(v string) *SplitShardInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShardOutput
 type SplitShardOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3726,6 +3903,11 @@ func (s SplitShardOutput) String() string {
 // GoString returns the string representation
 func (s SplitShardOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SplitShardOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryptionInput
@@ -3813,6 +3995,8 @@ func (s *StartStreamEncryptionInput) SetStreamName(v string) *StartStreamEncrypt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryptionOutput
 type StartStreamEncryptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3823,6 +4007,11 @@ func (s StartStreamEncryptionOutput) String() string {
 // GoString returns the string representation
 func (s StartStreamEncryptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartStreamEncryptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionInput
@@ -3909,6 +4098,8 @@ func (s *StopStreamEncryptionInput) SetStreamName(v string) *StopStreamEncryptio
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionOutput
 type StopStreamEncryptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3919,6 +4110,11 @@ func (s StopStreamEncryptionOutput) String() string {
 // GoString returns the string representation
 func (s StopStreamEncryptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopStreamEncryptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the output for DescribeStream.
@@ -4182,6 +4378,8 @@ func (s *UpdateShardCountInput) SetTargetShardCount(v int64) *UpdateShardCountIn
 type UpdateShardCountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current number of shards.
 	CurrentShardCount *int64 `min:"1" type:"integer"`
 
@@ -4200,6 +4398,11 @@ func (s UpdateShardCountOutput) String() string {
 // GoString returns the string representation
 func (s UpdateShardCountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateShardCountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCurrentShardCount sets the CurrentShardCount field's value.

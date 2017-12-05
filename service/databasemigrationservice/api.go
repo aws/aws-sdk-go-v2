@@ -55,7 +55,10 @@ func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToReso
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	output := &AddTagsToResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -101,7 +104,10 @@ func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointIn
 		input = &CreateEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEndpointOutput{})
+	output := &CreateEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEndpointRequest{Request: req, Input: input}
 }
 
@@ -163,7 +169,10 @@ func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateE
 		input = &CreateEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEventSubscriptionOutput{})
+	output := &CreateEventSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEventSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -209,7 +218,10 @@ func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *Creat
 		input = &CreateReplicationInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReplicationInstanceOutput{})
+	output := &CreateReplicationInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReplicationInstanceRequest{Request: req, Input: input}
 }
 
@@ -255,7 +267,10 @@ func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *Cr
 		input = &CreateReplicationSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReplicationSubnetGroupOutput{})
+	output := &CreateReplicationSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReplicationSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -301,7 +316,10 @@ func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateRep
 		input = &CreateReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReplicationTaskOutput{})
+	output := &CreateReplicationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReplicationTaskRequest{Request: req, Input: input}
 }
 
@@ -347,7 +365,10 @@ func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertifi
 		input = &DeleteCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCertificateOutput{})
+	output := &DeleteCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCertificateRequest{Request: req, Input: input}
 }
 
@@ -396,7 +417,10 @@ func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointIn
 		input = &DeleteEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEndpointOutput{})
+	output := &DeleteEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEndpointRequest{Request: req, Input: input}
 }
 
@@ -442,7 +466,10 @@ func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteE
 		input = &DeleteEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
+	output := &DeleteEventSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEventSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -491,7 +518,10 @@ func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *Delet
 		input = &DeleteReplicationInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationInstanceOutput{})
+	output := &DeleteReplicationInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReplicationInstanceRequest{Request: req, Input: input}
 }
 
@@ -537,7 +567,10 @@ func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *De
 		input = &DeleteReplicationSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationSubnetGroupOutput{})
+	output := &DeleteReplicationSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReplicationSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -583,7 +616,10 @@ func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteRep
 		input = &DeleteReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationTaskOutput{})
+	output := &DeleteReplicationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReplicationTaskRequest{Request: req, Input: input}
 }
 
@@ -634,7 +670,10 @@ func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *Descr
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	output := &DescribeAccountAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
@@ -686,7 +725,10 @@ func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCe
 		input = &DescribeCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificatesOutput{})
+	output := &DescribeCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCertificatesRequest{Request: req, Input: input}
 }
 
@@ -789,7 +831,10 @@ func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeCon
 		input = &DescribeConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConnectionsOutput{})
+	output := &DescribeConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConnectionsRequest{Request: req, Input: input}
 }
 
@@ -891,7 +936,10 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeE
 		input = &DescribeEndpointTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointTypesOutput{})
+	output := &DescribeEndpointTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEndpointTypesRequest{Request: req, Input: input}
 }
 
@@ -993,7 +1041,10 @@ func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpo
 		input = &DescribeEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointsOutput{})
+	output := &DescribeEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEndpointsRequest{Request: req, Input: input}
 }
 
@@ -1092,7 +1143,10 @@ func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *Describ
 		input = &DescribeEventCategoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	output := &DescribeEventCategoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventCategoriesRequest{Request: req, Input: input}
 }
 
@@ -1149,7 +1203,10 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *Desc
 		input = &DescribeEventSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+	output := &DescribeEventSubscriptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
 }
 
@@ -1253,7 +1310,10 @@ func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsIn
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -1356,7 +1416,10 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(
 		input = &DescribeOrderableReplicationInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrderableReplicationInstancesOutput{})
+	output := &DescribeOrderableReplicationInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeOrderableReplicationInstancesRequest{Request: req, Input: input}
 }
 
@@ -1452,7 +1515,10 @@ func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *De
 		input = &DescribeRefreshSchemasStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRefreshSchemasStatusOutput{})
+	output := &DescribeRefreshSchemasStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input}
 }
 
@@ -1505,7 +1571,10 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *De
 		input = &DescribeReplicationInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationInstancesOutput{})
+	output := &DescribeReplicationInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReplicationInstancesRequest{Request: req, Input: input}
 }
 
@@ -1607,7 +1676,10 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input 
 		input = &DescribeReplicationSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationSubnetGroupsOutput{})
+	output := &DescribeReplicationSubnetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReplicationSubnetGroupsRequest{Request: req, Input: input}
 }
 
@@ -1710,7 +1782,10 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *Descri
 		input = &DescribeReplicationTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationTasksOutput{})
+	output := &DescribeReplicationTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReplicationTasksRequest{Request: req, Input: input}
 }
 
@@ -1812,7 +1887,10 @@ func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemas
 		input = &DescribeSchemasInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSchemasOutput{})
+	output := &DescribeSchemasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSchemasRequest{Request: req, Input: input}
 }
 
@@ -1915,7 +1993,10 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *Describ
 		input = &DescribeTableStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTableStatisticsOutput{})
+	output := &DescribeTableStatisticsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTableStatisticsRequest{Request: req, Input: input}
 }
 
@@ -2011,7 +2092,10 @@ func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertifi
 		input = &ImportCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportCertificateOutput{})
+	output := &ImportCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportCertificateRequest{Request: req, Input: input}
 }
 
@@ -2057,7 +2141,10 @@ func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsFor
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -2103,7 +2190,10 @@ func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointIn
 		input = &ModifyEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyEndpointOutput{})
+	output := &ModifyEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyEndpointRequest{Request: req, Input: input}
 }
 
@@ -2149,7 +2239,10 @@ func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyE
 		input = &ModifyEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+	output := &ModifyEventSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyEventSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -2199,7 +2292,10 @@ func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *Modif
 		input = &ModifyReplicationInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReplicationInstanceOutput{})
+	output := &ModifyReplicationInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyReplicationInstanceRequest{Request: req, Input: input}
 }
 
@@ -2245,7 +2341,10 @@ func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *Mo
 		input = &ModifyReplicationSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReplicationSubnetGroupOutput{})
+	output := &ModifyReplicationSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyReplicationSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -2297,7 +2396,10 @@ func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyRep
 		input = &ModifyReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReplicationTaskOutput{})
+	output := &ModifyReplicationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyReplicationTaskRequest{Request: req, Input: input}
 }
 
@@ -2345,7 +2447,10 @@ func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasIn
 		input = &RefreshSchemasInput{}
 	}
 
-	req := c.newRequest(op, input, &RefreshSchemasOutput{})
+	output := &RefreshSchemasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RefreshSchemasRequest{Request: req, Input: input}
 }
 
@@ -2391,7 +2496,10 @@ func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput)
 		input = &ReloadTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &ReloadTablesOutput{})
+	output := &ReloadTablesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReloadTablesRequest{Request: req, Input: input}
 }
 
@@ -2437,7 +2545,10 @@ func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTa
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -2486,7 +2597,10 @@ func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartRepli
 		input = &StartReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartReplicationTaskOutput{})
+	output := &StartReplicationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartReplicationTaskRequest{Request: req, Input: input}
 }
 
@@ -2532,7 +2646,10 @@ func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplica
 		input = &StopReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StopReplicationTaskOutput{})
+	output := &StopReplicationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopReplicationTaskRequest{Request: req, Input: input}
 }
 
@@ -2578,7 +2695,10 @@ func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionIn
 		input = &TestConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &TestConnectionOutput{})
+	output := &TestConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestConnectionRequest{Request: req, Input: input}
 }
 
@@ -2686,6 +2806,8 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResourceResponse
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2696,6 +2818,11 @@ func (s AddTagsToResourceOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AvailabilityZone
@@ -3119,6 +3246,8 @@ func (s *CreateEndpointInput) SetUsername(v string) *CreateEndpointInput {
 type CreateEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The endpoint that was created.
 	Endpoint *Endpoint `type:"structure"`
 }
@@ -3131,6 +3260,11 @@ func (s CreateEndpointOutput) String() string {
 // GoString returns the string representation
 func (s CreateEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpoint sets the Endpoint field's value.
@@ -3260,6 +3394,8 @@ func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscription
 type CreateEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The event subscription that was created.
 	EventSubscription *EventSubscription `type:"structure"`
 }
@@ -3272,6 +3408,11 @@ func (s CreateEventSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s CreateEventSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -3480,6 +3621,8 @@ func (s *CreateReplicationInstanceInput) SetVpcSecurityGroupIds(v []string) *Cre
 type CreateReplicationInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication instance that was created.
 	ReplicationInstance *ReplicationInstance `type:"structure"`
 }
@@ -3492,6 +3635,11 @@ func (s CreateReplicationInstanceOutput) String() string {
 // GoString returns the string representation
 func (s CreateReplicationInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationInstance sets the ReplicationInstance field's value.
@@ -3589,6 +3737,8 @@ func (s *CreateReplicationSubnetGroupInput) SetTags(v []Tag) *CreateReplicationS
 type CreateReplicationSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication subnet group that was created.
 	ReplicationSubnetGroup *ReplicationSubnetGroup `type:"structure"`
 }
@@ -3601,6 +3751,11 @@ func (s CreateReplicationSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateReplicationSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationSubnetGroup sets the ReplicationSubnetGroup field's value.
@@ -3768,6 +3923,8 @@ func (s *CreateReplicationTaskInput) SetTargetEndpointArn(v string) *CreateRepli
 type CreateReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication task that was created.
 	ReplicationTask *ReplicationTask `type:"structure"`
 }
@@ -3780,6 +3937,11 @@ func (s CreateReplicationTaskOutput) String() string {
 // GoString returns the string representation
 func (s CreateReplicationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReplicationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationTask sets the ReplicationTask field's value.
@@ -3832,6 +3994,8 @@ func (s *DeleteCertificateInput) SetCertificateArn(v string) *DeleteCertificateI
 type DeleteCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Secure Sockets Layer (SSL) certificate.
 	Certificate *Certificate `type:"structure"`
 }
@@ -3844,6 +4008,11 @@ func (s DeleteCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificate sets the Certificate field's value.
@@ -3896,6 +4065,8 @@ func (s *DeleteEndpointInput) SetEndpointArn(v string) *DeleteEndpointInput {
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The endpoint that was deleted.
 	Endpoint *Endpoint `type:"structure"`
 }
@@ -3908,6 +4079,11 @@ func (s DeleteEndpointOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpoint sets the Endpoint field's value.
@@ -3960,6 +4136,8 @@ func (s *DeleteEventSubscriptionInput) SetSubscriptionName(v string) *DeleteEven
 type DeleteEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The event subscription that was deleted.
 	EventSubscription *EventSubscription `type:"structure"`
 }
@@ -3972,6 +4150,11 @@ func (s DeleteEventSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEventSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -4024,6 +4207,8 @@ func (s *DeleteReplicationInstanceInput) SetReplicationInstanceArn(v string) *De
 type DeleteReplicationInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication instance that was deleted.
 	ReplicationInstance *ReplicationInstance `type:"structure"`
 }
@@ -4036,6 +4221,11 @@ func (s DeleteReplicationInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReplicationInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationInstance sets the ReplicationInstance field's value.
@@ -4087,6 +4277,8 @@ func (s *DeleteReplicationSubnetGroupInput) SetReplicationSubnetGroupIdentifier(
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroupResponse
 type DeleteReplicationSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4097,6 +4289,11 @@ func (s DeleteReplicationSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReplicationSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskMessage
@@ -4143,6 +4340,8 @@ func (s *DeleteReplicationTaskInput) SetReplicationTaskArn(v string) *DeleteRepl
 type DeleteReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The deleted replication task.
 	ReplicationTask *ReplicationTask `type:"structure"`
 }
@@ -4155,6 +4354,11 @@ func (s DeleteReplicationTaskOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReplicationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReplicationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationTask sets the ReplicationTask field's value.
@@ -4182,6 +4386,8 @@ func (s DescribeAccountAttributesInput) GoString() string {
 type DescribeAccountAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Account quota information.
 	AccountQuotas []AccountQuota `locationNameList:"AccountQuota" type:"list"`
 }
@@ -4194,6 +4400,11 @@ func (s DescribeAccountAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountQuotas sets the AccountQuotas field's value.
@@ -4271,6 +4482,8 @@ func (s *DescribeCertificatesInput) SetMaxRecords(v int64) *DescribeCertificates
 type DescribeCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Secure Sockets Layer (SSL) certificates associated with the replication
 	// instance.
 	Certificates []Certificate `locationNameList:"Certificate" type:"list"`
@@ -4287,6 +4500,11 @@ func (s DescribeCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificates sets the Certificates field's value.
@@ -4374,6 +4592,8 @@ func (s *DescribeConnectionsInput) SetMaxRecords(v int64) *DescribeConnectionsIn
 type DescribeConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the connections.
 	Connections []Connection `locationNameList:"Connection" type:"list"`
 
@@ -4391,6 +4611,11 @@ func (s DescribeConnectionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConnectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConnectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnections sets the Connections field's value.
@@ -4478,6 +4703,8 @@ func (s *DescribeEndpointTypesInput) SetMaxRecords(v int64) *DescribeEndpointTyp
 type DescribeEndpointTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -4495,6 +4722,11 @@ func (s DescribeEndpointTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEndpointTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEndpointTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -4582,6 +4814,8 @@ func (s *DescribeEndpointsInput) SetMaxRecords(v int64) *DescribeEndpointsInput 
 type DescribeEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Endpoint description.
 	Endpoints []Endpoint `locationNameList:"Endpoint" type:"list"`
 
@@ -4599,6 +4833,11 @@ func (s DescribeEndpointsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEndpointsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEndpointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpoints sets the Endpoints field's value.
@@ -4669,6 +4908,8 @@ func (s *DescribeEventCategoriesInput) SetSourceType(v string) *DescribeEventCat
 type DescribeEventCategoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of event categories.
 	EventCategoryGroupList []EventCategoryGroup `locationNameList:"EventCategoryGroup" type:"list"`
 }
@@ -4681,6 +4922,11 @@ func (s DescribeEventCategoriesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventCategoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventCategoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventCategoryGroupList sets the EventCategoryGroupList field's value.
@@ -4769,6 +5015,8 @@ func (s *DescribeEventSubscriptionsInput) SetSubscriptionName(v string) *Describ
 type DescribeEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of event subscriptions.
 	EventSubscriptionsList []EventSubscription `locationNameList:"EventSubscription" type:"list"`
 
@@ -4786,6 +5034,11 @@ func (s DescribeEventSubscriptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventSubscriptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventSubscriptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscriptionsList sets the EventSubscriptionsList field's value.
@@ -4929,6 +5182,8 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The events described.
 	Events []Event `locationNameList:"Event" type:"list"`
 
@@ -4946,6 +5201,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -5005,6 +5265,8 @@ func (s *DescribeOrderableReplicationInstancesInput) SetMaxRecords(v int64) *Des
 type DescribeOrderableReplicationInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -5022,6 +5284,11 @@ func (s DescribeOrderableReplicationInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeOrderableReplicationInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeOrderableReplicationInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5080,6 +5347,8 @@ func (s *DescribeRefreshSchemasStatusInput) SetEndpointArn(v string) *DescribeRe
 type DescribeRefreshSchemasStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the schema.
 	RefreshSchemasStatus *RefreshSchemasStatus `type:"structure"`
 }
@@ -5092,6 +5361,11 @@ func (s DescribeRefreshSchemasStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRefreshSchemasStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRefreshSchemasStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRefreshSchemasStatus sets the RefreshSchemasStatus field's value.
@@ -5174,6 +5448,8 @@ func (s *DescribeReplicationInstancesInput) SetMaxRecords(v int64) *DescribeRepl
 type DescribeReplicationInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -5191,6 +5467,11 @@ func (s DescribeReplicationInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReplicationInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReplicationInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5276,6 +5557,8 @@ func (s *DescribeReplicationSubnetGroupsInput) SetMaxRecords(v int64) *DescribeR
 type DescribeReplicationSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -5293,6 +5576,11 @@ func (s DescribeReplicationSubnetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReplicationSubnetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReplicationSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5381,6 +5669,8 @@ func (s *DescribeReplicationTasksInput) SetMaxRecords(v int64) *DescribeReplicat
 type DescribeReplicationTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -5398,6 +5688,11 @@ func (s DescribeReplicationTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReplicationTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReplicationTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5482,6 +5777,8 @@ func (s *DescribeSchemasInput) SetMaxRecords(v int64) *DescribeSchemasInput {
 type DescribeSchemasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -5499,6 +5796,11 @@ func (s DescribeSchemasOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSchemasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSchemasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5583,6 +5885,8 @@ func (s *DescribeTableStatisticsInput) SetReplicationTaskArn(v string) *Describe
 type DescribeTableStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -5603,6 +5907,11 @@ func (s DescribeTableStatisticsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTableStatisticsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTableStatisticsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -6187,6 +6496,8 @@ func (s *ImportCertificateInput) SetTags(v []Tag) *ImportCertificateInput {
 type ImportCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The certificate to be uploaded.
 	Certificate *Certificate `type:"structure"`
 }
@@ -6199,6 +6510,11 @@ func (s ImportCertificateOutput) String() string {
 // GoString returns the string representation
 func (s ImportCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificate sets the Certificate field's value.
@@ -6252,6 +6568,8 @@ func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResource
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of tags for the resource.
 	TagList []Tag `locationNameList:"Tag" type:"list"`
 }
@@ -6264,6 +6582,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -6463,6 +6786,8 @@ func (s *ModifyEndpointInput) SetUsername(v string) *ModifyEndpointInput {
 type ModifyEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The modified endpoint.
 	Endpoint *Endpoint `type:"structure"`
 }
@@ -6475,6 +6800,11 @@ func (s ModifyEndpointOutput) String() string {
 // GoString returns the string representation
 func (s ModifyEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpoint sets the Endpoint field's value.
@@ -6569,6 +6899,8 @@ func (s *ModifyEventSubscriptionInput) SetSubscriptionName(v string) *ModifyEven
 type ModifyEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The modified event subscription.
 	EventSubscription *EventSubscription `type:"structure"`
 }
@@ -6581,6 +6913,11 @@ func (s ModifyEventSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s ModifyEventSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -6757,6 +7094,8 @@ func (s *ModifyReplicationInstanceInput) SetVpcSecurityGroupIds(v []string) *Mod
 type ModifyReplicationInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The modified replication instance.
 	ReplicationInstance *ReplicationInstance `type:"structure"`
 }
@@ -6769,6 +7108,11 @@ func (s ModifyReplicationInstanceOutput) String() string {
 // GoString returns the string representation
 func (s ModifyReplicationInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationInstance sets the ReplicationInstance field's value.
@@ -6845,6 +7189,8 @@ func (s *ModifyReplicationSubnetGroupInput) SetSubnetIds(v []string) *ModifyRepl
 type ModifyReplicationSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The modified replication subnet group.
 	ReplicationSubnetGroup *ReplicationSubnetGroup `type:"structure"`
 }
@@ -6857,6 +7203,11 @@ func (s ModifyReplicationSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s ModifyReplicationSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationSubnetGroup sets the ReplicationSubnetGroup field's value.
@@ -6968,6 +7319,8 @@ func (s *ModifyReplicationTaskInput) SetTableMappings(v string) *ModifyReplicati
 type ModifyReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication task that was modified.
 	ReplicationTask *ReplicationTask `type:"structure"`
 }
@@ -6980,6 +7333,11 @@ func (s ModifyReplicationTaskOutput) String() string {
 // GoString returns the string representation
 func (s ModifyReplicationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyReplicationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationTask sets the ReplicationTask field's value.
@@ -7269,6 +7627,8 @@ func (s *RefreshSchemasInput) SetReplicationInstanceArn(v string) *RefreshSchema
 type RefreshSchemasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the refreshed schema.
 	RefreshSchemasStatus *RefreshSchemasStatus `type:"structure"`
 }
@@ -7281,6 +7641,11 @@ func (s RefreshSchemasOutput) String() string {
 // GoString returns the string representation
 func (s RefreshSchemasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RefreshSchemasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRefreshSchemasStatus sets the RefreshSchemasStatus field's value.
@@ -7408,6 +7773,8 @@ func (s *ReloadTablesInput) SetTablesToReload(v []TableToReload) *ReloadTablesIn
 type ReloadTablesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the replication task.
 	ReplicationTaskArn *string `type:"string"`
 }
@@ -7420,6 +7787,11 @@ func (s ReloadTablesOutput) String() string {
 // GoString returns the string representation
 func (s ReloadTablesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReloadTablesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationTaskArn sets the ReplicationTaskArn field's value.
@@ -7487,6 +7859,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceResponse
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7497,6 +7871,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance
@@ -8211,6 +8590,8 @@ func (s *StartReplicationTaskInput) SetStartReplicationTaskType(v StartReplicati
 type StartReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication task started.
 	ReplicationTask *ReplicationTask `type:"structure"`
 }
@@ -8223,6 +8604,11 @@ func (s StartReplicationTaskOutput) String() string {
 // GoString returns the string representation
 func (s StartReplicationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartReplicationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationTask sets the ReplicationTask field's value.
@@ -8275,6 +8661,8 @@ func (s *StopReplicationTaskInput) SetReplicationTaskArn(v string) *StopReplicat
 type StopReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The replication task stopped.
 	ReplicationTask *ReplicationTask `type:"structure"`
 }
@@ -8287,6 +8675,11 @@ func (s StopReplicationTaskOutput) String() string {
 // GoString returns the string representation
 func (s StopReplicationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopReplicationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationTask sets the ReplicationTask field's value.
@@ -8629,6 +9022,8 @@ func (s *TestConnectionInput) SetReplicationInstanceArn(v string) *TestConnectio
 type TestConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The connection tested.
 	Connection *Connection `type:"structure"`
 }
@@ -8641,6 +9036,11 @@ func (s TestConnectionOutput) String() string {
 // GoString returns the string representation
 func (s TestConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnection sets the Connection field's value.

@@ -49,7 +49,10 @@ func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 		input = &CreateAppInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAppOutput{})
+	output := &CreateAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAppRequest{Request: req, Input: input}
 }
 
@@ -95,7 +98,10 @@ func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) CreateCampa
 		input = &CreateCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCampaignOutput{})
+	output := &CreateCampaignOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCampaignRequest{Request: req, Input: input}
 }
 
@@ -141,7 +147,10 @@ func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) CreateImp
 		input = &CreateImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImportJobOutput{})
+	output := &CreateImportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateImportJobRequest{Request: req, Input: input}
 }
 
@@ -187,7 +196,10 @@ func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) CreateSegment
 		input = &CreateSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSegmentOutput{})
+	output := &CreateSegmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSegmentRequest{Request: req, Input: input}
 }
 
@@ -233,7 +245,10 @@ func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteA
 		input = &DeleteAdmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAdmChannelOutput{})
+	output := &DeleteAdmChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAdmChannelRequest{Request: req, Input: input}
 }
 
@@ -279,7 +294,10 @@ func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) Delet
 		input = &DeleteApnsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApnsChannelOutput{})
+	output := &DeleteApnsChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApnsChannelRequest{Request: req, Input: input}
 }
 
@@ -325,7 +343,10 @@ func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChann
 		input = &DeleteApnsSandboxChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApnsSandboxChannelOutput{})
+	output := &DeleteApnsSandboxChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApnsSandboxChannelRequest{Request: req, Input: input}
 }
 
@@ -371,7 +392,10 @@ func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 		input = &DeleteAppInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAppOutput{})
+	output := &DeleteAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAppRequest{Request: req, Input: input}
 }
 
@@ -417,7 +441,10 @@ func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) Del
 		input = &DeleteBaiduChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBaiduChannelOutput{})
+	output := &DeleteBaiduChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBaiduChannelRequest{Request: req, Input: input}
 }
 
@@ -463,7 +490,10 @@ func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampa
 		input = &DeleteCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCampaignOutput{})
+	output := &DeleteCampaignOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCampaignRequest{Request: req, Input: input}
 }
 
@@ -509,7 +539,10 @@ func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) Del
 		input = &DeleteEmailChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEmailChannelOutput{})
+	output := &DeleteEmailChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEmailChannelRequest{Request: req, Input: input}
 }
 
@@ -555,7 +588,10 @@ func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) Delet
 		input = &DeleteEventStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEventStreamOutput{})
+	output := &DeleteEventStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEventStreamRequest{Request: req, Input: input}
 }
 
@@ -601,7 +637,10 @@ func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) DeleteG
 		input = &DeleteGcmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGcmChannelOutput{})
+	output := &DeleteGcmChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGcmChannelRequest{Request: req, Input: input}
 }
 
@@ -647,7 +686,10 @@ func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegment
 		input = &DeleteSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSegmentOutput{})
+	output := &DeleteSegmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSegmentRequest{Request: req, Input: input}
 }
 
@@ -693,7 +735,10 @@ func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteS
 		input = &DeleteSmsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSmsChannelOutput{})
+	output := &DeleteSmsChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSmsChannelRequest{Request: req, Input: input}
 }
 
@@ -739,7 +784,10 @@ func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannel
 		input = &GetAdmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAdmChannelOutput{})
+	output := &GetAdmChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAdmChannelRequest{Request: req, Input: input}
 }
 
@@ -785,7 +833,10 @@ func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) GetApnsChan
 		input = &GetApnsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApnsChannelOutput{})
+	output := &GetApnsChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApnsChannelRequest{Request: req, Input: input}
 }
 
@@ -831,7 +882,10 @@ func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInpu
 		input = &GetApnsSandboxChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApnsSandboxChannelOutput{})
+	output := &GetApnsSandboxChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApnsSandboxChannelRequest{Request: req, Input: input}
 }
 
@@ -877,7 +931,10 @@ func (c *Pinpoint) GetAppRequest(input *GetAppInput) GetAppRequest {
 		input = &GetAppInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppOutput{})
+	output := &GetAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAppRequest{Request: req, Input: input}
 }
 
@@ -923,7 +980,10 @@ func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsIn
 		input = &GetApplicationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApplicationSettingsOutput{})
+	output := &GetApplicationSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetApplicationSettingsRequest{Request: req, Input: input}
 }
 
@@ -969,7 +1029,10 @@ func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) GetAppsRequest {
 		input = &GetAppsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppsOutput{})
+	output := &GetAppsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAppsRequest{Request: req, Input: input}
 }
 
@@ -1015,7 +1078,10 @@ func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduC
 		input = &GetBaiduChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBaiduChannelOutput{})
+	output := &GetBaiduChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBaiduChannelRequest{Request: req, Input: input}
 }
 
@@ -1061,7 +1127,10 @@ func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) GetCampaignReques
 		input = &GetCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignOutput{})
+	output := &GetCampaignOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCampaignRequest{Request: req, Input: input}
 }
 
@@ -1107,7 +1176,10 @@ func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInpu
 		input = &GetCampaignActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignActivitiesOutput{})
+	output := &GetCampaignActivitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCampaignActivitiesRequest{Request: req, Input: input}
 }
 
@@ -1153,7 +1225,10 @@ func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) Get
 		input = &GetCampaignVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignVersionOutput{})
+	output := &GetCampaignVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCampaignVersionRequest{Request: req, Input: input}
 }
 
@@ -1199,7 +1274,10 @@ func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) G
 		input = &GetCampaignVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignVersionsOutput{})
+	output := &GetCampaignVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCampaignVersionsRequest{Request: req, Input: input}
 }
 
@@ -1245,7 +1323,10 @@ func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) GetCampaignsReq
 		input = &GetCampaignsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignsOutput{})
+	output := &GetCampaignsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCampaignsRequest{Request: req, Input: input}
 }
 
@@ -1291,7 +1372,10 @@ func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailC
 		input = &GetEmailChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEmailChannelOutput{})
+	output := &GetEmailChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEmailChannelRequest{Request: req, Input: input}
 }
 
@@ -1337,7 +1421,10 @@ func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) GetEndpointReques
 		input = &GetEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEndpointOutput{})
+	output := &GetEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEndpointRequest{Request: req, Input: input}
 }
 
@@ -1383,7 +1470,10 @@ func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) GetEventStr
 		input = &GetEventStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEventStreamOutput{})
+	output := &GetEventStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEventStreamRequest{Request: req, Input: input}
 }
 
@@ -1429,7 +1519,10 @@ func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannel
 		input = &GetGcmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGcmChannelOutput{})
+	output := &GetGcmChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGcmChannelRequest{Request: req, Input: input}
 }
 
@@ -1475,7 +1568,10 @@ func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) GetImportJobReq
 		input = &GetImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetImportJobOutput{})
+	output := &GetImportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetImportJobRequest{Request: req, Input: input}
 }
 
@@ -1521,7 +1617,10 @@ func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) GetImportJobs
 		input = &GetImportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetImportJobsOutput{})
+	output := &GetImportJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetImportJobsRequest{Request: req, Input: input}
 }
 
@@ -1567,7 +1666,10 @@ func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
 		input = &GetSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentOutput{})
+	output := &GetSegmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSegmentRequest{Request: req, Input: input}
 }
 
@@ -1613,7 +1715,10 @@ func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput)
 		input = &GetSegmentImportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentImportJobsOutput{})
+	output := &GetSegmentImportJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSegmentImportJobsRequest{Request: req, Input: input}
 }
 
@@ -1659,7 +1764,10 @@ func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSe
 		input = &GetSegmentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentVersionOutput{})
+	output := &GetSegmentVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSegmentVersionRequest{Request: req, Input: input}
 }
 
@@ -1705,7 +1813,10 @@ func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) Get
 		input = &GetSegmentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentVersionsOutput{})
+	output := &GetSegmentVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSegmentVersionsRequest{Request: req, Input: input}
 }
 
@@ -1751,7 +1862,10 @@ func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) GetSegmentsReques
 		input = &GetSegmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentsOutput{})
+	output := &GetSegmentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSegmentsRequest{Request: req, Input: input}
 }
 
@@ -1797,7 +1911,10 @@ func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannel
 		input = &GetSmsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSmsChannelOutput{})
+	output := &GetSmsChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSmsChannelRequest{Request: req, Input: input}
 }
 
@@ -1843,7 +1960,10 @@ func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) PutEventStr
 		input = &PutEventStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventStreamOutput{})
+	output := &PutEventStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutEventStreamRequest{Request: req, Input: input}
 }
 
@@ -1889,7 +2009,10 @@ func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) SendMessagesReq
 		input = &SendMessagesInput{}
 	}
 
-	req := c.newRequest(op, input, &SendMessagesOutput{})
+	output := &SendMessagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendMessagesRequest{Request: req, Input: input}
 }
 
@@ -1935,7 +2058,10 @@ func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendU
 		input = &SendUsersMessagesInput{}
 	}
 
-	req := c.newRequest(op, input, &SendUsersMessagesOutput{})
+	output := &SendUsersMessagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendUsersMessagesRequest{Request: req, Input: input}
 }
 
@@ -1981,7 +2107,10 @@ func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateA
 		input = &UpdateAdmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAdmChannelOutput{})
+	output := &UpdateAdmChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAdmChannelRequest{Request: req, Input: input}
 }
 
@@ -2027,7 +2156,10 @@ func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) Updat
 		input = &UpdateApnsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApnsChannelOutput{})
+	output := &UpdateApnsChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApnsChannelRequest{Request: req, Input: input}
 }
 
@@ -2073,7 +2205,10 @@ func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChann
 		input = &UpdateApnsSandboxChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApnsSandboxChannelOutput{})
+	output := &UpdateApnsSandboxChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApnsSandboxChannelRequest{Request: req, Input: input}
 }
 
@@ -2119,7 +2254,10 @@ func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSett
 		input = &UpdateApplicationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationSettingsOutput{})
+	output := &UpdateApplicationSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationSettingsRequest{Request: req, Input: input}
 }
 
@@ -2165,7 +2303,10 @@ func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) Upd
 		input = &UpdateBaiduChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBaiduChannelOutput{})
+	output := &UpdateBaiduChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateBaiduChannelRequest{Request: req, Input: input}
 }
 
@@ -2211,7 +2352,10 @@ func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampa
 		input = &UpdateCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCampaignOutput{})
+	output := &UpdateCampaignOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCampaignRequest{Request: req, Input: input}
 }
 
@@ -2257,7 +2401,10 @@ func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) Upd
 		input = &UpdateEmailChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEmailChannelOutput{})
+	output := &UpdateEmailChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateEmailChannelRequest{Request: req, Input: input}
 }
 
@@ -2303,7 +2450,10 @@ func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpo
 		input = &UpdateEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEndpointOutput{})
+	output := &UpdateEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateEndpointRequest{Request: req, Input: input}
 }
 
@@ -2349,7 +2499,10 @@ func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput)
 		input = &UpdateEndpointsBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEndpointsBatchOutput{})
+	output := &UpdateEndpointsBatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateEndpointsBatchRequest{Request: req, Input: input}
 }
 
@@ -2395,7 +2548,10 @@ func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateG
 		input = &UpdateGcmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGcmChannelOutput{})
+	output := &UpdateGcmChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGcmChannelRequest{Request: req, Input: input}
 }
 
@@ -2441,7 +2597,10 @@ func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegment
 		input = &UpdateSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSegmentOutput{})
+	output := &UpdateSegmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSegmentRequest{Request: req, Input: input}
 }
 
@@ -2487,7 +2646,10 @@ func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) UpdateS
 		input = &UpdateSmsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSmsChannelOutput{})
+	output := &UpdateSmsChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSmsChannelRequest{Request: req, Input: input}
 }
 
@@ -4497,6 +4659,8 @@ func (s *CreateAppInput) SetCreateApplicationRequest(v *CreateApplicationRequest
 type CreateAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
 
+	responseMetadata aws.Response
+
 	// Application Response.
 	//
 	// ApplicationResponse is a required field
@@ -4511,6 +4675,11 @@ func (s CreateAppOutput) String() string {
 // GoString returns the string representation
 func (s CreateAppOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationResponse sets the ApplicationResponse field's value.
@@ -4601,6 +4770,8 @@ func (s *CreateCampaignInput) SetWriteCampaignRequest(v *WriteCampaignRequest) *
 type CreateCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
+	responseMetadata aws.Response
+
 	// Campaign definition
 	//
 	// CampaignResponse is a required field
@@ -4615,6 +4786,11 @@ func (s CreateCampaignOutput) String() string {
 // GoString returns the string representation
 func (s CreateCampaignOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCampaignOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignResponse sets the CampaignResponse field's value.
@@ -4678,6 +4854,8 @@ func (s *CreateImportJobInput) SetImportJobRequest(v *ImportJobRequest) *CreateI
 type CreateImportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobResponse"`
 
+	responseMetadata aws.Response
+
 	// ImportJobResponse is a required field
 	ImportJobResponse *ImportJobResponse `type:"structure" required:"true"`
 }
@@ -4690,6 +4868,11 @@ func (s CreateImportJobOutput) String() string {
 // GoString returns the string representation
 func (s CreateImportJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateImportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportJobResponse sets the ImportJobResponse field's value.
@@ -4755,6 +4938,8 @@ func (s *CreateSegmentInput) SetWriteSegmentRequest(v *WriteSegmentRequest) *Cre
 type CreateSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
+	responseMetadata aws.Response
+
 	// Segment definition.
 	//
 	// SegmentResponse is a required field
@@ -4769,6 +4954,11 @@ func (s CreateSegmentOutput) String() string {
 // GoString returns the string representation
 func (s CreateSegmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSegmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentResponse sets the SegmentResponse field's value.
@@ -4947,6 +5137,8 @@ func (s *DeleteAdmChannelInput) SetApplicationId(v string) *DeleteAdmChannelInpu
 type DeleteAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Amazon Device Messaging channel definition.
 	//
 	// ADMChannelResponse is a required field
@@ -4961,6 +5153,11 @@ func (s DeleteAdmChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAdmChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAdmChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetADMChannelResponse sets the ADMChannelResponse field's value.
@@ -5011,6 +5208,8 @@ func (s *DeleteApnsChannelInput) SetApplicationId(v string) *DeleteApnsChannelIn
 type DeleteApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Apple Distribution Push Notification Service channel definition.
 	//
 	// APNSChannelResponse is a required field
@@ -5025,6 +5224,11 @@ func (s DeleteApnsChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApnsChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApnsChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAPNSChannelResponse sets the APNSChannelResponse field's value.
@@ -5075,6 +5279,8 @@ func (s *DeleteApnsSandboxChannelInput) SetApplicationId(v string) *DeleteApnsSa
 type DeleteApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Apple Development Push Notification Service channel definition.
 	//
 	// APNSSandboxChannelResponse is a required field
@@ -5089,6 +5295,11 @@ func (s DeleteApnsSandboxChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApnsSandboxChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApnsSandboxChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAPNSSandboxChannelResponse sets the APNSSandboxChannelResponse field's value.
@@ -5139,6 +5350,8 @@ func (s *DeleteAppInput) SetApplicationId(v string) *DeleteAppInput {
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
 
+	responseMetadata aws.Response
+
 	// Application Response.
 	//
 	// ApplicationResponse is a required field
@@ -5153,6 +5366,11 @@ func (s DeleteAppOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAppOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationResponse sets the ApplicationResponse field's value.
@@ -5203,6 +5421,8 @@ func (s *DeleteBaiduChannelInput) SetApplicationId(v string) *DeleteBaiduChannel
 type DeleteBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Baidu Cloud Messaging channel definition
 	//
 	// BaiduChannelResponse is a required field
@@ -5217,6 +5437,11 @@ func (s DeleteBaiduChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBaiduChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBaiduChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaiduChannelResponse sets the BaiduChannelResponse field's value.
@@ -5280,6 +5505,8 @@ func (s *DeleteCampaignInput) SetCampaignId(v string) *DeleteCampaignInput {
 type DeleteCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
+	responseMetadata aws.Response
+
 	// Campaign definition
 	//
 	// CampaignResponse is a required field
@@ -5294,6 +5521,11 @@ func (s DeleteCampaignOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCampaignOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCampaignOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignResponse sets the CampaignResponse field's value.
@@ -5344,6 +5576,8 @@ func (s *DeleteEmailChannelInput) SetApplicationId(v string) *DeleteEmailChannel
 type DeleteEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Email Channel Response.
 	//
 	// EmailChannelResponse is a required field
@@ -5358,6 +5592,11 @@ func (s DeleteEmailChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEmailChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEmailChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEmailChannelResponse sets the EmailChannelResponse field's value.
@@ -5408,6 +5647,8 @@ func (s *DeleteEventStreamInput) SetApplicationId(v string) *DeleteEventStreamIn
 type DeleteEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
 
+	responseMetadata aws.Response
+
 	// Model for an event publishing subscription export.
 	//
 	// EventStream is a required field
@@ -5422,6 +5663,11 @@ func (s DeleteEventStreamOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEventStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEventStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventStream sets the EventStream field's value.
@@ -5472,6 +5718,8 @@ func (s *DeleteGcmChannelInput) SetApplicationId(v string) *DeleteGcmChannelInpu
 type DeleteGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Google Cloud Messaging channel definition
 	//
 	// GCMChannelResponse is a required field
@@ -5486,6 +5734,11 @@ func (s DeleteGcmChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGcmChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGcmChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGCMChannelResponse sets the GCMChannelResponse field's value.
@@ -5549,6 +5802,8 @@ func (s *DeleteSegmentInput) SetSegmentId(v string) *DeleteSegmentInput {
 type DeleteSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
+	responseMetadata aws.Response
+
 	// Segment definition.
 	//
 	// SegmentResponse is a required field
@@ -5563,6 +5818,11 @@ func (s DeleteSegmentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSegmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSegmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentResponse sets the SegmentResponse field's value.
@@ -5613,6 +5873,8 @@ func (s *DeleteSmsChannelInput) SetApplicationId(v string) *DeleteSmsChannelInpu
 type DeleteSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// SMS Channel Response.
 	//
 	// SMSChannelResponse is a required field
@@ -5627,6 +5889,11 @@ func (s DeleteSmsChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSmsChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSmsChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSMSChannelResponse sets the SMSChannelResponse field's value.
@@ -7156,6 +7423,8 @@ func (s *GetAdmChannelInput) SetApplicationId(v string) *GetAdmChannelInput {
 type GetAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Amazon Device Messaging channel definition.
 	//
 	// ADMChannelResponse is a required field
@@ -7170,6 +7439,11 @@ func (s GetAdmChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetAdmChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAdmChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetADMChannelResponse sets the ADMChannelResponse field's value.
@@ -7220,6 +7494,8 @@ func (s *GetApnsChannelInput) SetApplicationId(v string) *GetApnsChannelInput {
 type GetApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Apple Distribution Push Notification Service channel definition.
 	//
 	// APNSChannelResponse is a required field
@@ -7234,6 +7510,11 @@ func (s GetApnsChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetApnsChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetApnsChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAPNSChannelResponse sets the APNSChannelResponse field's value.
@@ -7284,6 +7565,8 @@ func (s *GetApnsSandboxChannelInput) SetApplicationId(v string) *GetApnsSandboxC
 type GetApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Apple Development Push Notification Service channel definition.
 	//
 	// APNSSandboxChannelResponse is a required field
@@ -7298,6 +7581,11 @@ func (s GetApnsSandboxChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetApnsSandboxChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetApnsSandboxChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAPNSSandboxChannelResponse sets the APNSSandboxChannelResponse field's value.
@@ -7348,6 +7636,8 @@ func (s *GetAppInput) SetApplicationId(v string) *GetAppInput {
 type GetAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
 
+	responseMetadata aws.Response
+
 	// Application Response.
 	//
 	// ApplicationResponse is a required field
@@ -7362,6 +7652,11 @@ func (s GetAppOutput) String() string {
 // GoString returns the string representation
 func (s GetAppOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationResponse sets the ApplicationResponse field's value.
@@ -7412,6 +7707,8 @@ func (s *GetApplicationSettingsInput) SetApplicationId(v string) *GetApplication
 type GetApplicationSettingsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationSettingsResource"`
 
+	responseMetadata aws.Response
+
 	// Application settings.
 	//
 	// ApplicationSettingsResource is a required field
@@ -7426,6 +7723,11 @@ func (s GetApplicationSettingsOutput) String() string {
 // GoString returns the string representation
 func (s GetApplicationSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetApplicationSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationSettingsResource sets the ApplicationSettingsResource field's value.
@@ -7469,6 +7771,8 @@ func (s *GetAppsInput) SetToken(v string) *GetAppsInput {
 type GetAppsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationsResponse"`
 
+	responseMetadata aws.Response
+
 	// Get Applications Result.
 	//
 	// ApplicationsResponse is a required field
@@ -7483,6 +7787,11 @@ func (s GetAppsOutput) String() string {
 // GoString returns the string representation
 func (s GetAppsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAppsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationsResponse sets the ApplicationsResponse field's value.
@@ -7533,6 +7842,8 @@ func (s *GetBaiduChannelInput) SetApplicationId(v string) *GetBaiduChannelInput 
 type GetBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Baidu Cloud Messaging channel definition
 	//
 	// BaiduChannelResponse is a required field
@@ -7547,6 +7858,11 @@ func (s GetBaiduChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetBaiduChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBaiduChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaiduChannelResponse sets the BaiduChannelResponse field's value.
@@ -7626,6 +7942,8 @@ func (s *GetCampaignActivitiesInput) SetToken(v string) *GetCampaignActivitiesIn
 type GetCampaignActivitiesOutput struct {
 	_ struct{} `type:"structure" payload:"ActivitiesResponse"`
 
+	responseMetadata aws.Response
+
 	// Activities for campaign.
 	//
 	// ActivitiesResponse is a required field
@@ -7640,6 +7958,11 @@ func (s GetCampaignActivitiesOutput) String() string {
 // GoString returns the string representation
 func (s GetCampaignActivitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCampaignActivitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivitiesResponse sets the ActivitiesResponse field's value.
@@ -7703,6 +8026,8 @@ func (s *GetCampaignInput) SetCampaignId(v string) *GetCampaignInput {
 type GetCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
+	responseMetadata aws.Response
+
 	// Campaign definition
 	//
 	// CampaignResponse is a required field
@@ -7717,6 +8042,11 @@ func (s GetCampaignOutput) String() string {
 // GoString returns the string representation
 func (s GetCampaignOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCampaignOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignResponse sets the CampaignResponse field's value.
@@ -7793,6 +8123,8 @@ func (s *GetCampaignVersionInput) SetVersion(v string) *GetCampaignVersionInput 
 type GetCampaignVersionOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
+	responseMetadata aws.Response
+
 	// Campaign definition
 	//
 	// CampaignResponse is a required field
@@ -7807,6 +8139,11 @@ func (s GetCampaignVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetCampaignVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCampaignVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignResponse sets the CampaignResponse field's value.
@@ -7886,6 +8223,8 @@ func (s *GetCampaignVersionsInput) SetToken(v string) *GetCampaignVersionsInput 
 type GetCampaignVersionsOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignsResponse"`
 
+	responseMetadata aws.Response
+
 	// List of available campaigns.
 	//
 	// CampaignsResponse is a required field
@@ -7900,6 +8239,11 @@ func (s GetCampaignVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetCampaignVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCampaignVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignsResponse sets the CampaignsResponse field's value.
@@ -7966,6 +8310,8 @@ func (s *GetCampaignsInput) SetToken(v string) *GetCampaignsInput {
 type GetCampaignsOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignsResponse"`
 
+	responseMetadata aws.Response
+
 	// List of available campaigns.
 	//
 	// CampaignsResponse is a required field
@@ -7980,6 +8326,11 @@ func (s GetCampaignsOutput) String() string {
 // GoString returns the string representation
 func (s GetCampaignsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCampaignsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignsResponse sets the CampaignsResponse field's value.
@@ -8030,6 +8381,8 @@ func (s *GetEmailChannelInput) SetApplicationId(v string) *GetEmailChannelInput 
 type GetEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Email Channel Response.
 	//
 	// EmailChannelResponse is a required field
@@ -8044,6 +8397,11 @@ func (s GetEmailChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetEmailChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEmailChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEmailChannelResponse sets the EmailChannelResponse field's value.
@@ -8107,6 +8465,8 @@ func (s *GetEndpointInput) SetEndpointId(v string) *GetEndpointInput {
 type GetEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointResponse"`
 
+	responseMetadata aws.Response
+
 	// Endpoint response
 	//
 	// EndpointResponse is a required field
@@ -8121,6 +8481,11 @@ func (s GetEndpointOutput) String() string {
 // GoString returns the string representation
 func (s GetEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpointResponse sets the EndpointResponse field's value.
@@ -8171,6 +8536,8 @@ func (s *GetEventStreamInput) SetApplicationId(v string) *GetEventStreamInput {
 type GetEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
 
+	responseMetadata aws.Response
+
 	// Model for an event publishing subscription export.
 	//
 	// EventStream is a required field
@@ -8185,6 +8552,11 @@ func (s GetEventStreamOutput) String() string {
 // GoString returns the string representation
 func (s GetEventStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEventStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventStream sets the EventStream field's value.
@@ -8235,6 +8607,8 @@ func (s *GetGcmChannelInput) SetApplicationId(v string) *GetGcmChannelInput {
 type GetGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Google Cloud Messaging channel definition
 	//
 	// GCMChannelResponse is a required field
@@ -8249,6 +8623,11 @@ func (s GetGcmChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetGcmChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGcmChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGCMChannelResponse sets the GCMChannelResponse field's value.
@@ -8312,6 +8691,8 @@ func (s *GetImportJobInput) SetJobId(v string) *GetImportJobInput {
 type GetImportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobResponse"`
 
+	responseMetadata aws.Response
+
 	// ImportJobResponse is a required field
 	ImportJobResponse *ImportJobResponse `type:"structure" required:"true"`
 }
@@ -8324,6 +8705,11 @@ func (s GetImportJobOutput) String() string {
 // GoString returns the string representation
 func (s GetImportJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetImportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportJobResponse sets the ImportJobResponse field's value.
@@ -8390,6 +8776,8 @@ func (s *GetImportJobsInput) SetToken(v string) *GetImportJobsInput {
 type GetImportJobsOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobsResponse"`
 
+	responseMetadata aws.Response
+
 	// Import job list.
 	//
 	// ImportJobsResponse is a required field
@@ -8404,6 +8792,11 @@ func (s GetImportJobsOutput) String() string {
 // GoString returns the string representation
 func (s GetImportJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetImportJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportJobsResponse sets the ImportJobsResponse field's value.
@@ -8483,6 +8876,8 @@ func (s *GetSegmentImportJobsInput) SetToken(v string) *GetSegmentImportJobsInpu
 type GetSegmentImportJobsOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobsResponse"`
 
+	responseMetadata aws.Response
+
 	// Import job list.
 	//
 	// ImportJobsResponse is a required field
@@ -8497,6 +8892,11 @@ func (s GetSegmentImportJobsOutput) String() string {
 // GoString returns the string representation
 func (s GetSegmentImportJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSegmentImportJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportJobsResponse sets the ImportJobsResponse field's value.
@@ -8560,6 +8960,8 @@ func (s *GetSegmentInput) SetSegmentId(v string) *GetSegmentInput {
 type GetSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
+	responseMetadata aws.Response
+
 	// Segment definition.
 	//
 	// SegmentResponse is a required field
@@ -8574,6 +8976,11 @@ func (s GetSegmentOutput) String() string {
 // GoString returns the string representation
 func (s GetSegmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSegmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentResponse sets the SegmentResponse field's value.
@@ -8650,6 +9057,8 @@ func (s *GetSegmentVersionInput) SetVersion(v string) *GetSegmentVersionInput {
 type GetSegmentVersionOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
+	responseMetadata aws.Response
+
 	// Segment definition.
 	//
 	// SegmentResponse is a required field
@@ -8664,6 +9073,11 @@ func (s GetSegmentVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetSegmentVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSegmentVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentResponse sets the SegmentResponse field's value.
@@ -8743,6 +9157,8 @@ func (s *GetSegmentVersionsInput) SetToken(v string) *GetSegmentVersionsInput {
 type GetSegmentVersionsOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentsResponse"`
 
+	responseMetadata aws.Response
+
 	// Segments in your account.
 	//
 	// SegmentsResponse is a required field
@@ -8757,6 +9173,11 @@ func (s GetSegmentVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetSegmentVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSegmentVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentsResponse sets the SegmentsResponse field's value.
@@ -8823,6 +9244,8 @@ func (s *GetSegmentsInput) SetToken(v string) *GetSegmentsInput {
 type GetSegmentsOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentsResponse"`
 
+	responseMetadata aws.Response
+
 	// Segments in your account.
 	//
 	// SegmentsResponse is a required field
@@ -8837,6 +9260,11 @@ func (s GetSegmentsOutput) String() string {
 // GoString returns the string representation
 func (s GetSegmentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSegmentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentsResponse sets the SegmentsResponse field's value.
@@ -8887,6 +9315,8 @@ func (s *GetSmsChannelInput) SetApplicationId(v string) *GetSmsChannelInput {
 type GetSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// SMS Channel Response.
 	//
 	// SMSChannelResponse is a required field
@@ -8901,6 +9331,11 @@ func (s GetSmsChannelOutput) String() string {
 // GoString returns the string representation
 func (s GetSmsChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSmsChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSMSChannelResponse sets the SMSChannelResponse field's value.
@@ -9727,6 +10162,8 @@ func (s *PutEventStreamInput) SetWriteEventStream(v *WriteEventStream) *PutEvent
 type PutEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
 
+	responseMetadata aws.Response
+
 	// Model for an event publishing subscription export.
 	//
 	// EventStream is a required field
@@ -9741,6 +10178,11 @@ func (s PutEventStreamOutput) String() string {
 // GoString returns the string representation
 func (s PutEventStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutEventStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventStream sets the EventStream field's value.
@@ -10551,6 +10993,8 @@ func (s *SendMessagesInput) SetMessageRequest(v *MessageRequest) *SendMessagesIn
 type SendMessagesOutput struct {
 	_ struct{} `type:"structure" payload:"MessageResponse"`
 
+	responseMetadata aws.Response
+
 	// Send message response.
 	//
 	// MessageResponse is a required field
@@ -10565,6 +11009,11 @@ func (s SendMessagesOutput) String() string {
 // GoString returns the string representation
 func (s SendMessagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendMessagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageResponse sets the MessageResponse field's value.
@@ -10725,6 +11174,8 @@ func (s *SendUsersMessagesInput) SetSendUsersMessageRequest(v *SendUsersMessageR
 type SendUsersMessagesOutput struct {
 	_ struct{} `type:"structure" payload:"SendUsersMessageResponse"`
 
+	responseMetadata aws.Response
+
 	// User send message response.
 	//
 	// SendUsersMessageResponse is a required field
@@ -10739,6 +11190,11 @@ func (s SendUsersMessagesOutput) String() string {
 // GoString returns the string representation
 func (s SendUsersMessagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendUsersMessagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSendUsersMessageResponse sets the SendUsersMessageResponse field's value.
@@ -10918,6 +11374,8 @@ func (s *UpdateAdmChannelInput) SetApplicationId(v string) *UpdateAdmChannelInpu
 type UpdateAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Amazon Device Messaging channel definition.
 	//
 	// ADMChannelResponse is a required field
@@ -10932,6 +11390,11 @@ func (s UpdateAdmChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAdmChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAdmChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetADMChannelResponse sets the ADMChannelResponse field's value.
@@ -10997,6 +11460,8 @@ func (s *UpdateApnsChannelInput) SetApplicationId(v string) *UpdateApnsChannelIn
 type UpdateApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Apple Distribution Push Notification Service channel definition.
 	//
 	// APNSChannelResponse is a required field
@@ -11011,6 +11476,11 @@ func (s UpdateApnsChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApnsChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApnsChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAPNSChannelResponse sets the APNSChannelResponse field's value.
@@ -11076,6 +11546,8 @@ func (s *UpdateApnsSandboxChannelInput) SetApplicationId(v string) *UpdateApnsSa
 type UpdateApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Apple Development Push Notification Service channel definition.
 	//
 	// APNSSandboxChannelResponse is a required field
@@ -11090,6 +11562,11 @@ func (s UpdateApnsSandboxChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApnsSandboxChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApnsSandboxChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAPNSSandboxChannelResponse sets the APNSSandboxChannelResponse field's value.
@@ -11155,6 +11632,8 @@ func (s *UpdateApplicationSettingsInput) SetWriteApplicationSettingsRequest(v *W
 type UpdateApplicationSettingsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationSettingsResource"`
 
+	responseMetadata aws.Response
+
 	// Application settings.
 	//
 	// ApplicationSettingsResource is a required field
@@ -11169,6 +11648,11 @@ func (s UpdateApplicationSettingsOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationSettingsResource sets the ApplicationSettingsResource field's value.
@@ -11234,6 +11718,8 @@ func (s *UpdateBaiduChannelInput) SetBaiduChannelRequest(v *BaiduChannelRequest)
 type UpdateBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Baidu Cloud Messaging channel definition
 	//
 	// BaiduChannelResponse is a required field
@@ -11248,6 +11734,11 @@ func (s UpdateBaiduChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateBaiduChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBaiduChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaiduChannelResponse sets the BaiduChannelResponse field's value.
@@ -11326,6 +11817,8 @@ func (s *UpdateCampaignInput) SetWriteCampaignRequest(v *WriteCampaignRequest) *
 type UpdateCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
+	responseMetadata aws.Response
+
 	// Campaign definition
 	//
 	// CampaignResponse is a required field
@@ -11340,6 +11833,11 @@ func (s UpdateCampaignOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCampaignOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCampaignOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCampaignResponse sets the CampaignResponse field's value.
@@ -11405,6 +11903,8 @@ func (s *UpdateEmailChannelInput) SetEmailChannelRequest(v *EmailChannelRequest)
 type UpdateEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Email Channel Response.
 	//
 	// EmailChannelResponse is a required field
@@ -11419,6 +11919,11 @@ func (s UpdateEmailChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateEmailChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateEmailChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEmailChannelResponse sets the EmailChannelResponse field's value.
@@ -11497,6 +12002,8 @@ func (s *UpdateEndpointInput) SetEndpointRequest(v *EndpointRequest) *UpdateEndp
 type UpdateEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"MessageBody"`
 
+	responseMetadata aws.Response
+
 	// Simple message object.
 	//
 	// MessageBody is a required field
@@ -11511,6 +12018,11 @@ func (s UpdateEndpointOutput) String() string {
 // GoString returns the string representation
 func (s UpdateEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageBody sets the MessageBody field's value.
@@ -11576,6 +12088,8 @@ func (s *UpdateEndpointsBatchInput) SetEndpointBatchRequest(v *EndpointBatchRequ
 type UpdateEndpointsBatchOutput struct {
 	_ struct{} `type:"structure" payload:"MessageBody"`
 
+	responseMetadata aws.Response
+
 	// Simple message object.
 	//
 	// MessageBody is a required field
@@ -11590,6 +12104,11 @@ func (s UpdateEndpointsBatchOutput) String() string {
 // GoString returns the string representation
 func (s UpdateEndpointsBatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateEndpointsBatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessageBody sets the MessageBody field's value.
@@ -11655,6 +12174,8 @@ func (s *UpdateGcmChannelInput) SetGCMChannelRequest(v *GCMChannelRequest) *Upda
 type UpdateGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// Google Cloud Messaging channel definition
 	//
 	// GCMChannelResponse is a required field
@@ -11669,6 +12190,11 @@ func (s UpdateGcmChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGcmChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGcmChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGCMChannelResponse sets the GCMChannelResponse field's value.
@@ -11747,6 +12273,8 @@ func (s *UpdateSegmentInput) SetWriteSegmentRequest(v *WriteSegmentRequest) *Upd
 type UpdateSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
+	responseMetadata aws.Response
+
 	// Segment definition.
 	//
 	// SegmentResponse is a required field
@@ -11761,6 +12289,11 @@ func (s UpdateSegmentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSegmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSegmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSegmentResponse sets the SegmentResponse field's value.
@@ -11826,6 +12359,8 @@ func (s *UpdateSmsChannelInput) SetSMSChannelRequest(v *SMSChannelRequest) *Upda
 type UpdateSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 
+	responseMetadata aws.Response
+
 	// SMS Channel Response.
 	//
 	// SMSChannelResponse is a required field
@@ -11840,6 +12375,11 @@ func (s UpdateSmsChannelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSmsChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSmsChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSMSChannelResponse sets the SMSChannelResponse field's value.

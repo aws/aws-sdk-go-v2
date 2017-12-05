@@ -64,7 +64,10 @@ func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedAr
 		input = &AssociateCreatedArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateCreatedArtifactOutput{})
+	output := &AssociateCreatedArtifactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateCreatedArtifactRequest{Request: req, Input: input}
 }
 
@@ -111,7 +114,10 @@ func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscov
 		input = &AssociateDiscoveredResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDiscoveredResourceOutput{})
+	output := &AssociateDiscoveredResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateDiscoveredResourceRequest{Request: req, Input: input}
 }
 
@@ -161,7 +167,10 @@ func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUp
 		input = &CreateProgressUpdateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProgressUpdateStreamOutput{})
+	output := &CreateProgressUpdateStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProgressUpdateStreamRequest{Request: req, Input: input}
 }
 
@@ -229,7 +238,10 @@ func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUp
 		input = &DeleteProgressUpdateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProgressUpdateStreamOutput{})
+	output := &DeleteProgressUpdateStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProgressUpdateStreamRequest{Request: req, Input: input}
 }
 
@@ -275,7 +287,10 @@ func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicatio
 		input = &DescribeApplicationStateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationStateOutput{})
+	output := &DescribeApplicationStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeApplicationStateRequest{Request: req, Input: input}
 }
 
@@ -321,7 +336,10 @@ func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTask
 		input = &DescribeMigrationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMigrationTaskOutput{})
+	output := &DescribeMigrationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMigrationTaskRequest{Request: req, Input: input}
 }
 
@@ -379,7 +397,10 @@ func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCre
 		input = &DisassociateCreatedArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateCreatedArtifactOutput{})
+	output := &DisassociateCreatedArtifactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateCreatedArtifactRequest{Request: req, Input: input}
 }
 
@@ -426,7 +447,10 @@ func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *Disassociate
 		input = &DisassociateDiscoveredResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDiscoveredResourceOutput{})
+	output := &DisassociateDiscoveredResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateDiscoveredResourceRequest{Request: req, Input: input}
 }
 
@@ -477,7 +501,10 @@ func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInpu
 		input = &ImportMigrationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportMigrationTaskOutput{})
+	output := &ImportMigrationTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportMigrationTaskRequest{Request: req, Input: input}
 }
 
@@ -531,7 +558,10 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 		input = &ListCreatedArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCreatedArtifactsOutput{})
+	output := &ListCreatedArtifactsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCreatedArtifactsRequest{Request: req, Input: input}
 }
 
@@ -577,7 +607,10 @@ func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResou
 		input = &ListDiscoveredResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDiscoveredResourcesOutput{})
+	output := &ListDiscoveredResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDiscoveredResourcesRequest{Request: req, Input: input}
 }
 
@@ -631,7 +664,10 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 		input = &ListMigrationTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMigrationTasksOutput{})
+	output := &ListMigrationTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListMigrationTasksRequest{Request: req, Input: input}
 }
 
@@ -678,7 +714,10 @@ func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdat
 		input = &ListProgressUpdateStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProgressUpdateStreamsOutput{})
+	output := &ListProgressUpdateStreamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProgressUpdateStreamsRequest{Request: req, Input: input}
 }
 
@@ -726,7 +765,10 @@ func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationSta
 		input = &NotifyApplicationStateInput{}
 	}
 
-	req := c.newRequest(op, input, &NotifyApplicationStateOutput{})
+	output := &NotifyApplicationStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return NotifyApplicationStateRequest{Request: req, Input: input}
 }
 
@@ -781,7 +823,10 @@ func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTas
 		input = &NotifyMigrationTaskStateInput{}
 	}
 
-	req := c.newRequest(op, input, &NotifyMigrationTaskStateOutput{})
+	output := &NotifyMigrationTaskStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return NotifyMigrationTaskStateRequest{Request: req, Input: input}
 }
 
@@ -839,7 +884,10 @@ func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributes
 		input = &PutResourceAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutResourceAttributesOutput{})
+	output := &PutResourceAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutResourceAttributesRequest{Request: req, Input: input}
 }
 
@@ -938,6 +986,8 @@ func (s *AssociateCreatedArtifactInput) SetProgressUpdateStream(v string) *Assoc
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactResult
 type AssociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -948,6 +998,11 @@ func (s AssociateCreatedArtifactOutput) String() string {
 // GoString returns the string representation
 func (s AssociateCreatedArtifactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateCreatedArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceRequest
@@ -1044,6 +1099,8 @@ func (s *AssociateDiscoveredResourceInput) SetProgressUpdateStream(v string) *As
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceResult
 type AssociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1054,6 +1111,11 @@ func (s AssociateDiscoveredResourceOutput) String() string {
 // GoString returns the string representation
 func (s AssociateDiscoveredResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateDiscoveredResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamRequest
@@ -1112,6 +1174,8 @@ func (s *CreateProgressUpdateStreamInput) SetProgressUpdateStreamName(v string) 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamResult
 type CreateProgressUpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1122,6 +1186,11 @@ func (s CreateProgressUpdateStreamOutput) String() string {
 // GoString returns the string representation
 func (s CreateProgressUpdateStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProgressUpdateStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI,
@@ -1235,6 +1304,8 @@ func (s *DeleteProgressUpdateStreamInput) SetProgressUpdateStreamName(v string) 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamResult
 type DeleteProgressUpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1245,6 +1316,11 @@ func (s DeleteProgressUpdateStreamOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProgressUpdateStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProgressUpdateStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateRequest
@@ -1294,6 +1370,8 @@ func (s *DescribeApplicationStateInput) SetApplicationId(v string) *DescribeAppl
 type DescribeApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Status of the application - Not Started, In-Progress, Complete.
 	ApplicationStatus ApplicationStatus `type:"string" enum:"true"`
 
@@ -1309,6 +1387,11 @@ func (s DescribeApplicationStateOutput) String() string {
 // GoString returns the string representation
 func (s DescribeApplicationStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeApplicationStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationStatus sets the ApplicationStatus field's value.
@@ -1388,6 +1471,8 @@ func (s *DescribeMigrationTaskInput) SetProgressUpdateStream(v string) *Describe
 type DescribeMigrationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object encapsulating information about the migration task.
 	MigrationTask *MigrationTask `type:"structure"`
 }
@@ -1400,6 +1485,11 @@ func (s DescribeMigrationTaskOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMigrationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMigrationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMigrationTask sets the MigrationTask field's value.
@@ -1502,6 +1592,8 @@ func (s *DisassociateCreatedArtifactInput) SetProgressUpdateStream(v string) *Di
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactResult
 type DisassociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1512,6 +1604,11 @@ func (s DisassociateCreatedArtifactOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateCreatedArtifactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateCreatedArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceRequest
@@ -1606,6 +1703,8 @@ func (s *DisassociateDiscoveredResourceInput) SetProgressUpdateStream(v string) 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceResult
 type DisassociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1616,6 +1715,11 @@ func (s DisassociateDiscoveredResourceOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateDiscoveredResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateDiscoveredResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Object representing the on-premises resource being migrated.
@@ -1746,6 +1850,8 @@ func (s *ImportMigrationTaskInput) SetProgressUpdateStream(v string) *ImportMigr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskResult
 type ImportMigrationTaskOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1756,6 +1862,11 @@ func (s ImportMigrationTaskOutput) String() string {
 // GoString returns the string representation
 func (s ImportMigrationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportMigrationTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifactsRequest
@@ -1846,6 +1957,8 @@ func (s *ListCreatedArtifactsInput) SetProgressUpdateStream(v string) *ListCreat
 type ListCreatedArtifactsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of created artifacts up to the maximum number of results specified in
 	// the request.
 	CreatedArtifactList []CreatedArtifact `type:"list"`
@@ -1863,6 +1976,11 @@ func (s ListCreatedArtifactsOutput) String() string {
 // GoString returns the string representation
 func (s ListCreatedArtifactsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCreatedArtifactsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreatedArtifactList sets the CreatedArtifactList field's value.
@@ -1965,6 +2083,8 @@ func (s *ListDiscoveredResourcesInput) SetProgressUpdateStream(v string) *ListDi
 type ListDiscoveredResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returned list of discovered resources associated with the given MigrationTask.
 	DiscoveredResourceList []DiscoveredResource `type:"list"`
 
@@ -1981,6 +2101,11 @@ func (s ListDiscoveredResourcesOutput) String() string {
 // GoString returns the string representation
 func (s ListDiscoveredResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDiscoveredResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDiscoveredResourceList sets the DiscoveredResourceList field's value.
@@ -2059,6 +2184,8 @@ func (s *ListMigrationTasksInput) SetResourceName(v string) *ListMigrationTasksI
 type ListMigrationTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Lists the migration task's summary which includes: MigrationTaskName, ProgressPercent,
 	// ProgressUpdateStream, Status, and the UpdateDateTime for each task.
 	MigrationTaskSummaryList []MigrationTaskSummary `type:"list"`
@@ -2076,6 +2203,11 @@ func (s ListMigrationTasksOutput) String() string {
 // GoString returns the string representation
 func (s ListMigrationTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMigrationTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMigrationTaskSummaryList sets the MigrationTaskSummaryList field's value.
@@ -2142,6 +2274,8 @@ func (s *ListProgressUpdateStreamsInput) SetNextToken(v string) *ListProgressUpd
 type ListProgressUpdateStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If there are more streams created than the max result, return the next token
 	// to be passed to the next call as a bookmark of where to start from.
 	NextToken *string `type:"string"`
@@ -2159,6 +2293,11 @@ func (s ListProgressUpdateStreamsOutput) String() string {
 // GoString returns the string representation
 func (s ListProgressUpdateStreamsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProgressUpdateStreamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2374,6 +2513,8 @@ func (s *NotifyApplicationStateInput) SetStatus(v ApplicationStatus) *NotifyAppl
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateResult
 type NotifyApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2384,6 +2525,11 @@ func (s NotifyApplicationStateOutput) String() string {
 // GoString returns the string representation
 func (s NotifyApplicationStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s NotifyApplicationStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateRequest
@@ -2512,6 +2658,8 @@ func (s *NotifyMigrationTaskStateInput) SetUpdateDateTime(v time.Time) *NotifyMi
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateResult
 type NotifyMigrationTaskStateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2522,6 +2670,11 @@ func (s NotifyMigrationTaskStateOutput) String() string {
 // GoString returns the string representation
 func (s NotifyMigrationTaskStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s NotifyMigrationTaskStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Summary of the AWS resource used for access control that is implicitly linked
@@ -2651,6 +2804,8 @@ func (s *PutResourceAttributesInput) SetResourceAttributeList(v []ResourceAttrib
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesResult
 type PutResourceAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2661,6 +2816,11 @@ func (s PutResourceAttributesOutput) String() string {
 // GoString returns the string representation
 func (s PutResourceAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutResourceAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Attribute associated with a resource.

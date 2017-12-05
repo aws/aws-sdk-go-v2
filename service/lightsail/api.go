@@ -51,7 +51,10 @@ func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) Alloca
 		input = &AllocateStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &AllocateStaticIpOutput{})
+	output := &AllocateStaticIpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocateStaticIpRequest{Request: req, Input: input}
 }
 
@@ -97,7 +100,10 @@ func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) AttachStat
 		input = &AttachStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachStaticIpOutput{})
+	output := &AttachStaticIpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachStaticIpRequest{Request: req, Input: input}
 }
 
@@ -143,7 +149,10 @@ func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPo
 		input = &CloseInstancePublicPortsInput{}
 	}
 
-	req := c.newRequest(op, input, &CloseInstancePublicPortsOutput{})
+	output := &CloseInstancePublicPortsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CloseInstancePublicPortsRequest{Request: req, Input: input}
 }
 
@@ -189,7 +198,10 @@ func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) CreateDomainRe
 		input = &CreateDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDomainOutput{})
+	output := &CreateDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDomainRequest{Request: req, Input: input}
 }
 
@@ -236,7 +248,10 @@ func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) Crea
 		input = &CreateDomainEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDomainEntryOutput{})
+	output := &CreateDomainEntryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDomainEntryRequest{Request: req, Input: input}
 }
 
@@ -283,7 +298,10 @@ func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotI
 		input = &CreateInstanceSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceSnapshotOutput{})
+	output := &CreateInstanceSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInstanceSnapshotRequest{Request: req, Input: input}
 }
 
@@ -329,7 +347,10 @@ func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) CreateIn
 		input = &CreateInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstancesOutput{})
+	output := &CreateInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInstancesRequest{Request: req, Input: input}
 }
 
@@ -376,7 +397,10 @@ func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFro
 		input = &CreateInstancesFromSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstancesFromSnapshotOutput{})
+	output := &CreateInstancesFromSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInstancesFromSnapshotRequest{Request: req, Input: input}
 }
 
@@ -422,7 +446,10 @@ func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPai
 		input = &CreateKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeyPairOutput{})
+	output := &CreateKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateKeyPairRequest{Request: req, Input: input}
 }
 
@@ -468,7 +495,10 @@ func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainRe
 		input = &DeleteDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDomainOutput{})
+	output := &DeleteDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDomainRequest{Request: req, Input: input}
 }
 
@@ -514,7 +544,10 @@ func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) Dele
 		input = &DeleteDomainEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDomainEntryOutput{})
+	output := &DeleteDomainEntryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDomainEntryRequest{Request: req, Input: input}
 }
 
@@ -560,7 +593,10 @@ func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInst
 		input = &DeleteInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstanceOutput{})
+	output := &DeleteInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteInstanceRequest{Request: req, Input: input}
 }
 
@@ -606,7 +642,10 @@ func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotI
 		input = &DeleteInstanceSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstanceSnapshotOutput{})
+	output := &DeleteInstanceSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteInstanceSnapshotRequest{Request: req, Input: input}
 }
 
@@ -652,7 +691,10 @@ func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPai
 		input = &DeleteKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteKeyPairOutput{})
+	output := &DeleteKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteKeyPairRequest{Request: req, Input: input}
 }
 
@@ -698,7 +740,10 @@ func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) DetachStat
 		input = &DetachStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachStaticIpOutput{})
+	output := &DetachStaticIpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachStaticIpRequest{Request: req, Input: input}
 }
 
@@ -744,7 +789,10 @@ func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairI
 		input = &DownloadDefaultKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &DownloadDefaultKeyPairOutput{})
+	output := &DownloadDefaultKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DownloadDefaultKeyPairRequest{Request: req, Input: input}
 }
 
@@ -790,7 +838,10 @@ func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveN
 		input = &GetActiveNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetActiveNamesOutput{})
+	output := &GetActiveNamesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetActiveNamesRequest{Request: req, Input: input}
 }
 
@@ -839,7 +890,10 @@ func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprint
 		input = &GetBlueprintsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBlueprintsOutput{})
+	output := &GetBlueprintsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBlueprintsRequest{Request: req, Input: input}
 }
 
@@ -886,7 +940,10 @@ func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest 
 		input = &GetBundlesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBundlesOutput{})
+	output := &GetBundlesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBundlesRequest{Request: req, Input: input}
 }
 
@@ -932,7 +989,10 @@ func (c *Lightsail) GetDomainRequest(input *GetDomainInput) GetDomainRequest {
 		input = &GetDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDomainOutput{})
+	output := &GetDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDomainRequest{Request: req, Input: input}
 }
 
@@ -978,7 +1038,10 @@ func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest 
 		input = &GetDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDomainsOutput{})
+	output := &GetDomainsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDomainsRequest{Request: req, Input: input}
 }
 
@@ -1025,7 +1088,10 @@ func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) GetInstanceReque
 		input = &GetInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceOutput{})
+	output := &GetInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceRequest{Request: req, Input: input}
 }
 
@@ -1072,7 +1138,10 @@ func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDeta
 		input = &GetInstanceAccessDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceAccessDetailsOutput{})
+	output := &GetInstanceAccessDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceAccessDetailsRequest{Request: req, Input: input}
 }
 
@@ -1119,7 +1188,10 @@ func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInp
 		input = &GetInstanceMetricDataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceMetricDataOutput{})
+	output := &GetInstanceMetricDataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceMetricDataRequest{Request: req, Input: input}
 }
 
@@ -1165,7 +1237,10 @@ func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInp
 		input = &GetInstancePortStatesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstancePortStatesOutput{})
+	output := &GetInstancePortStatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstancePortStatesRequest{Request: req, Input: input}
 }
 
@@ -1211,7 +1286,10 @@ func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) 
 		input = &GetInstanceSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceSnapshotOutput{})
+	output := &GetInstanceSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceSnapshotRequest{Request: req, Input: input}
 }
 
@@ -1257,7 +1335,10 @@ func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput
 		input = &GetInstanceSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceSnapshotsOutput{})
+	output := &GetInstanceSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceSnapshotsRequest{Request: req, Input: input}
 }
 
@@ -1303,7 +1384,10 @@ func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) GetIns
 		input = &GetInstanceStateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceStateOutput{})
+	output := &GetInstanceStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceStateRequest{Request: req, Input: input}
 }
 
@@ -1350,7 +1434,10 @@ func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) GetInstancesRe
 		input = &GetInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstancesOutput{})
+	output := &GetInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstancesRequest{Request: req, Input: input}
 }
 
@@ -1396,7 +1483,10 @@ func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest 
 		input = &GetKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyPairOutput{})
+	output := &GetKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetKeyPairRequest{Request: req, Input: input}
 }
 
@@ -1442,7 +1532,10 @@ func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) GetKeyPairsReque
 		input = &GetKeyPairsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyPairsOutput{})
+	output := &GetKeyPairsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetKeyPairsRequest{Request: req, Input: input}
 }
 
@@ -1490,7 +1583,10 @@ func (c *Lightsail) GetOperationRequest(input *GetOperationInput) GetOperationRe
 		input = &GetOperationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationOutput{})
+	output := &GetOperationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOperationRequest{Request: req, Input: input}
 }
 
@@ -1540,7 +1636,10 @@ func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) GetOperation
 		input = &GetOperationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationsOutput{})
+	output := &GetOperationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOperationsRequest{Request: req, Input: input}
 }
 
@@ -1586,7 +1685,10 @@ func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResou
 		input = &GetOperationsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationsForResourceOutput{})
+	output := &GetOperationsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOperationsForResourceRequest{Request: req, Input: input}
 }
 
@@ -1633,7 +1735,10 @@ func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) GetRegionsRequest 
 		input = &GetRegionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRegionsOutput{})
+	output := &GetRegionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRegionsRequest{Request: req, Input: input}
 }
 
@@ -1679,7 +1784,10 @@ func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpReque
 		input = &GetStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStaticIpOutput{})
+	output := &GetStaticIpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStaticIpRequest{Request: req, Input: input}
 }
 
@@ -1725,7 +1833,10 @@ func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) GetStaticIpsRe
 		input = &GetStaticIpsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStaticIpsOutput{})
+	output := &GetStaticIpsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStaticIpsRequest{Request: req, Input: input}
 }
 
@@ -1771,7 +1882,10 @@ func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPai
 		input = &ImportKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+	output := &ImportKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportKeyPairRequest{Request: req, Input: input}
 }
 
@@ -1817,7 +1931,10 @@ func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredReque
 		input = &IsVpcPeeredInput{}
 	}
 
-	req := c.newRequest(op, input, &IsVpcPeeredOutput{})
+	output := &IsVpcPeeredOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return IsVpcPeeredRequest{Request: req, Input: input}
 }
 
@@ -1863,7 +1980,10 @@ func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPort
 		input = &OpenInstancePublicPortsInput{}
 	}
 
-	req := c.newRequest(op, input, &OpenInstancePublicPortsOutput{})
+	output := &OpenInstancePublicPortsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return OpenInstancePublicPortsRequest{Request: req, Input: input}
 }
 
@@ -1909,7 +2029,10 @@ func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) PeerVpcRequest {
 		input = &PeerVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &PeerVpcOutput{})
+	output := &PeerVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PeerVpcRequest{Request: req, Input: input}
 }
 
@@ -1956,7 +2079,10 @@ func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsI
 		input = &PutInstancePublicPortsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutInstancePublicPortsOutput{})
+	output := &PutInstancePublicPortsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutInstancePublicPortsRequest{Request: req, Input: input}
 }
 
@@ -2005,7 +2131,10 @@ func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) RebootInst
 		input = &RebootInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootInstanceOutput{})
+	output := &RebootInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootInstanceRequest{Request: req, Input: input}
 }
 
@@ -2051,7 +2180,10 @@ func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) ReleaseS
 		input = &ReleaseStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &ReleaseStaticIpOutput{})
+	output := &ReleaseStaticIpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReleaseStaticIpRequest{Request: req, Input: input}
 }
 
@@ -2098,7 +2230,10 @@ func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) StartInstanc
 		input = &StartInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartInstanceOutput{})
+	output := &StartInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartInstanceRequest{Request: req, Input: input}
 }
 
@@ -2144,7 +2279,10 @@ func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) StopInstanceRe
 		input = &StopInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopInstanceOutput{})
+	output := &StopInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopInstanceRequest{Request: req, Input: input}
 }
 
@@ -2190,7 +2328,10 @@ func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
 		input = &UnpeerVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &UnpeerVpcOutput{})
+	output := &UnpeerVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnpeerVpcRequest{Request: req, Input: input}
 }
 
@@ -2236,7 +2377,10 @@ func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) Upda
 		input = &UpdateDomainEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainEntryOutput{})
+	output := &UpdateDomainEntryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDomainEntryRequest{Request: req, Input: input}
 }
 
@@ -2284,6 +2428,8 @@ func (s *AllocateStaticIpInput) SetStaticIpName(v string) *AllocateStaticIpInput
 type AllocateStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the static IP address
 	// you allocated.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -2297,6 +2443,11 @@ func (s AllocateStaticIpOutput) String() string {
 // GoString returns the string representation
 func (s AllocateStaticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AllocateStaticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -2364,6 +2515,8 @@ func (s *AttachStaticIpInput) SetStaticIpName(v string) *AttachStaticIpInput {
 type AttachStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about your API operations.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -2376,6 +2529,11 @@ func (s AttachStaticIpOutput) String() string {
 // GoString returns the string representation
 func (s AttachStaticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachStaticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -2703,6 +2861,8 @@ func (s *CloseInstancePublicPortsInput) SetPortInfo(v *PortInfo) *CloseInstanceP
 type CloseInstancePublicPortsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs that contains information about the operation.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -2715,6 +2875,11 @@ func (s CloseInstancePublicPortsOutput) String() string {
 // GoString returns the string representation
 func (s CloseInstancePublicPortsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CloseInstancePublicPortsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -2784,6 +2949,8 @@ func (s *CreateDomainEntryInput) SetDomainName(v string) *CreateDomainEntryInput
 type CreateDomainEntryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the operation.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -2796,6 +2963,11 @@ func (s CreateDomainEntryOutput) String() string {
 // GoString returns the string representation
 func (s CreateDomainEntryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDomainEntryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -2853,6 +3025,8 @@ func (s *CreateDomainInput) SetDomainName(v string) *CreateDomainInput {
 type CreateDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the domain resource
 	// you created.
 	Operation *Operation `locationName:"operation" type:"structure"`
@@ -2866,6 +3040,11 @@ func (s CreateDomainOutput) String() string {
 // GoString returns the string representation
 func (s CreateDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -2933,6 +3112,8 @@ func (s *CreateInstanceSnapshotInput) SetInstanceSnapshotName(v string) *CreateI
 type CreateInstanceSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// create instances snapshot request.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -2946,6 +3127,11 @@ func (s CreateInstanceSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateInstanceSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstanceSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -3074,6 +3260,8 @@ func (s *CreateInstancesFromSnapshotInput) SetUserData(v string) *CreateInstance
 type CreateInstancesFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// create instances from snapshot request.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -3087,6 +3275,11 @@ func (s CreateInstancesFromSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateInstancesFromSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstancesFromSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -3228,6 +3421,8 @@ func (s *CreateInstancesInput) SetUserData(v string) *CreateInstancesInput {
 type CreateInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// create instances request.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -3241,6 +3436,11 @@ func (s CreateInstancesOutput) String() string {
 // GoString returns the string representation
 func (s CreateInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -3293,6 +3493,8 @@ func (s *CreateKeyPairInput) SetKeyPairName(v string) *CreateKeyPairInput {
 type CreateKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the new key pair
 	// you just created.
 	KeyPair *KeyPair `locationName:"keyPair" type:"structure"`
@@ -3316,6 +3518,11 @@ func (s CreateKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s CreateKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyPair sets the KeyPair field's value.
@@ -3401,6 +3608,8 @@ func (s *DeleteDomainEntryInput) SetDomainName(v string) *DeleteDomainEntryInput
 type DeleteDomainEntryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// delete domain entry request.
 	Operation *Operation `locationName:"operation" type:"structure"`
@@ -3414,6 +3623,11 @@ func (s DeleteDomainEntryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDomainEntryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDomainEntryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -3466,6 +3680,8 @@ func (s *DeleteDomainInput) SetDomainName(v string) *DeleteDomainInput {
 type DeleteDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// delete domain request.
 	Operation *Operation `locationName:"operation" type:"structure"`
@@ -3479,6 +3695,11 @@ func (s DeleteDomainOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -3531,6 +3752,8 @@ func (s *DeleteInstanceInput) SetInstanceName(v string) *DeleteInstanceInput {
 type DeleteInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// delete instance request.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -3544,6 +3767,11 @@ func (s DeleteInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -3596,6 +3824,8 @@ func (s *DeleteInstanceSnapshotInput) SetInstanceSnapshotName(v string) *DeleteI
 type DeleteInstanceSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// delete instance snapshot request.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -3609,6 +3839,11 @@ func (s DeleteInstanceSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteInstanceSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInstanceSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -3661,6 +3896,8 @@ func (s *DeleteKeyPairInput) SetKeyPairName(v string) *DeleteKeyPairInput {
 type DeleteKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// delete key pair request.
 	Operation *Operation `locationName:"operation" type:"structure"`
@@ -3674,6 +3911,11 @@ func (s DeleteKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s DeleteKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -3726,6 +3968,8 @@ func (s *DetachStaticIpInput) SetStaticIpName(v string) *DetachStaticIpInput {
 type DetachStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// detach static IP request.
 	Operations []Operation `locationName:"operations" type:"list"`
@@ -3739,6 +3983,11 @@ func (s DetachStaticIpOutput) String() string {
 // GoString returns the string representation
 func (s DetachStaticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachStaticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -4053,6 +4302,8 @@ func (s DownloadDefaultKeyPairInput) GoString() string {
 type DownloadDefaultKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A base64-encoded RSA private key.
 	PrivateKeyBase64 *string `locationName:"privateKeyBase64" type:"string"`
 
@@ -4068,6 +4319,11 @@ func (s DownloadDefaultKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s DownloadDefaultKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DownloadDefaultKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPrivateKeyBase64 sets the PrivateKeyBase64 field's value.
@@ -4110,6 +4366,8 @@ func (s *GetActiveNamesInput) SetPageToken(v string) *GetActiveNamesInput {
 type GetActiveNamesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of active names returned by the get active names request.
 	ActiveNames []string `locationName:"activeNames" type:"list"`
 
@@ -4126,6 +4384,11 @@ func (s GetActiveNamesOutput) String() string {
 // GoString returns the string representation
 func (s GetActiveNamesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetActiveNamesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActiveNames sets the ActiveNames field's value.
@@ -4178,6 +4441,8 @@ func (s *GetBlueprintsInput) SetPageToken(v string) *GetBlueprintsInput {
 type GetBlueprintsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs that contains information about the available
 	// blueprints.
 	Blueprints []Blueprint `locationName:"blueprints" type:"list"`
@@ -4195,6 +4460,11 @@ func (s GetBlueprintsOutput) String() string {
 // GoString returns the string representation
 func (s GetBlueprintsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBlueprintsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBlueprints sets the Blueprints field's value.
@@ -4248,6 +4518,8 @@ func (s *GetBundlesInput) SetPageToken(v string) *GetBundlesInput {
 type GetBundlesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs that contains information about the available
 	// bundles.
 	Bundles []Bundle `locationName:"bundles" type:"list"`
@@ -4265,6 +4537,11 @@ func (s GetBundlesOutput) String() string {
 // GoString returns the string representation
 func (s GetBundlesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBundlesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBundles sets the Bundles field's value.
@@ -4323,6 +4600,8 @@ func (s *GetDomainInput) SetDomainName(v string) *GetDomainInput {
 type GetDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about your get domain
 	// request.
 	Domain *Domain `locationName:"domain" type:"structure"`
@@ -4336,6 +4615,11 @@ func (s GetDomainOutput) String() string {
 // GoString returns the string representation
 func (s GetDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomain sets the Domain field's value.
@@ -4373,6 +4657,8 @@ func (s *GetDomainsInput) SetPageToken(v string) *GetDomainsInput {
 type GetDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about each of the domain
 	// entries in the user's account.
 	Domains []Domain `locationName:"domains" type:"list"`
@@ -4390,6 +4676,11 @@ func (s GetDomainsOutput) String() string {
 // GoString returns the string representation
 func (s GetDomainsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDomainsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomains sets the Domains field's value.
@@ -4457,6 +4748,8 @@ func (s *GetInstanceAccessDetailsInput) SetProtocol(v InstanceAccessProtocol) *G
 type GetInstanceAccessDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about a get instance access
 	// request.
 	AccessDetails *InstanceAccessDetails `locationName:"accessDetails" type:"structure"`
@@ -4470,6 +4763,11 @@ func (s GetInstanceAccessDetailsOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceAccessDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceAccessDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccessDetails sets the AccessDetails field's value.
@@ -4653,6 +4951,8 @@ func (s *GetInstanceMetricDataInput) SetUnit(v MetricUnit) *GetInstanceMetricDat
 type GetInstanceMetricDataOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// get instance metric data request.
 	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
@@ -4671,6 +4971,11 @@ func (s GetInstanceMetricDataOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceMetricDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetMetricData sets the MetricData field's value.
 func (s *GetInstanceMetricDataOutput) SetMetricData(v []MetricDatapoint) *GetInstanceMetricDataOutput {
 	s.MetricData = v
@@ -4687,6 +4992,8 @@ func (s *GetInstanceMetricDataOutput) SetMetricName(v InstanceMetricName) *GetIn
 type GetInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the specified instance.
 	Instance *Instance `locationName:"instance" type:"structure"`
 }
@@ -4699,6 +5006,11 @@ func (s GetInstanceOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstance sets the Instance field's value.
@@ -4751,6 +5063,8 @@ func (s *GetInstancePortStatesInput) SetInstanceName(v string) *GetInstancePortS
 type GetInstancePortStatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the port states resulting from your request.
 	PortStates []InstancePortState `locationName:"portStates" type:"list"`
 }
@@ -4763,6 +5077,11 @@ func (s GetInstancePortStatesOutput) String() string {
 // GoString returns the string representation
 func (s GetInstancePortStatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstancePortStatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPortStates sets the PortStates field's value.
@@ -4815,6 +5134,8 @@ func (s *GetInstanceSnapshotInput) SetInstanceSnapshotName(v string) *GetInstanc
 type GetInstanceSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// get instance snapshot request.
 	InstanceSnapshot *InstanceSnapshot `locationName:"instanceSnapshot" type:"structure"`
@@ -4828,6 +5149,11 @@ func (s GetInstanceSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceSnapshot sets the InstanceSnapshot field's value.
@@ -4865,6 +5191,8 @@ func (s *GetInstanceSnapshotsInput) SetPageToken(v string) *GetInstanceSnapshots
 type GetInstanceSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// get instance snapshots request.
 	InstanceSnapshots []InstanceSnapshot `locationName:"instanceSnapshots" type:"list"`
@@ -4882,6 +5210,11 @@ func (s GetInstanceSnapshotsOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceSnapshotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceSnapshots sets the InstanceSnapshots field's value.
@@ -4940,6 +5273,8 @@ func (s *GetInstanceStateInput) SetInstanceName(v string) *GetInstanceStateInput
 type GetInstanceStateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The state of the instance.
 	State *InstanceState `locationName:"state" type:"structure"`
 }
@@ -4952,6 +5287,11 @@ func (s GetInstanceStateOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetState sets the State field's value.
@@ -4989,6 +5329,8 @@ func (s *GetInstancesInput) SetPageToken(v string) *GetInstancesInput {
 type GetInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about your instances.
 	Instances []Instance `locationName:"instances" type:"list"`
 
@@ -5005,6 +5347,11 @@ func (s GetInstancesOutput) String() string {
 // GoString returns the string representation
 func (s GetInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -5063,6 +5410,8 @@ func (s *GetKeyPairInput) SetKeyPairName(v string) *GetKeyPairInput {
 type GetKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the key pair.
 	KeyPair *KeyPair `locationName:"keyPair" type:"structure"`
 }
@@ -5075,6 +5424,11 @@ func (s GetKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s GetKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyPair sets the KeyPair field's value.
@@ -5112,6 +5466,8 @@ func (s *GetKeyPairsInput) SetPageToken(v string) *GetKeyPairsInput {
 type GetKeyPairsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the key pairs.
 	KeyPairs []KeyPair `locationName:"keyPairs" type:"list"`
 
@@ -5128,6 +5484,11 @@ func (s GetKeyPairsOutput) String() string {
 // GoString returns the string representation
 func (s GetKeyPairsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetKeyPairsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyPairs sets the KeyPairs field's value.
@@ -5186,6 +5547,8 @@ func (s *GetOperationInput) SetOperationId(v string) *GetOperationInput {
 type GetOperationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the results of your
 	// get operation request.
 	Operation *Operation `locationName:"operation" type:"structure"`
@@ -5199,6 +5562,11 @@ func (s GetOperationOutput) String() string {
 // GoString returns the string representation
 func (s GetOperationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOperationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -5261,6 +5629,8 @@ func (s *GetOperationsForResourceInput) SetResourceName(v string) *GetOperations
 type GetOperationsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// (Deprecated) Returns the number of pages of results that remain.
 	//
 	// In releases prior to June 12, 2017, this parameter returned null by the API.
@@ -5284,6 +5654,11 @@ func (s GetOperationsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s GetOperationsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOperationsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageCount sets the NextPageCount field's value.
@@ -5333,6 +5708,8 @@ func (s *GetOperationsInput) SetPageToken(v string) *GetOperationsInput {
 type GetOperationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token used for advancing to the next page of results from your get operations
 	// request.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
@@ -5350,6 +5727,11 @@ func (s GetOperationsOutput) String() string {
 // GoString returns the string representation
 func (s GetOperationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOperationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -5394,6 +5776,8 @@ func (s *GetRegionsInput) SetIncludeAvailabilityZones(v bool) *GetRegionsInput {
 type GetRegionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about your get regions
 	// request.
 	Regions []Region `locationName:"regions" type:"list"`
@@ -5407,6 +5791,11 @@ func (s GetRegionsOutput) String() string {
 // GoString returns the string representation
 func (s GetRegionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRegionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRegions sets the Regions field's value.
@@ -5459,6 +5848,8 @@ func (s *GetStaticIpInput) SetStaticIpName(v string) *GetStaticIpInput {
 type GetStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the requested static
 	// IP.
 	StaticIp *StaticIp `locationName:"staticIp" type:"structure"`
@@ -5472,6 +5863,11 @@ func (s GetStaticIpOutput) String() string {
 // GoString returns the string representation
 func (s GetStaticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStaticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStaticIp sets the StaticIp field's value.
@@ -5509,6 +5905,8 @@ func (s *GetStaticIpsInput) SetPageToken(v string) *GetStaticIpsInput {
 type GetStaticIpsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token used for advancing to the next page of results from your get static
 	// IPs request.
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
@@ -5526,6 +5924,11 @@ func (s GetStaticIpsOutput) String() string {
 // GoString returns the string representation
 func (s GetStaticIpsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStaticIpsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -5599,6 +6002,8 @@ func (s *ImportKeyPairInput) SetPublicKeyBase64(v string) *ImportKeyPairInput {
 type ImportKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -5611,6 +6016,11 @@ func (s ImportKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s ImportKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -6326,6 +6736,8 @@ func (s IsVpcPeeredInput) GoString() string {
 type IsVpcPeeredOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the Lightsail VPC is peered; otherwise, false.
 	IsPeered *bool `locationName:"isPeered" type:"boolean"`
 }
@@ -6338,6 +6750,11 @@ func (s IsVpcPeeredOutput) String() string {
 // GoString returns the string representation
 func (s IsVpcPeeredOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s IsVpcPeeredOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsPeered sets the IsPeered field's value.
@@ -6591,6 +7008,8 @@ func (s *OpenInstancePublicPortsInput) SetPortInfo(v *PortInfo) *OpenInstancePub
 type OpenInstancePublicPortsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -6603,6 +7022,11 @@ func (s OpenInstancePublicPortsOutput) String() string {
 // GoString returns the string representation
 func (s OpenInstancePublicPortsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s OpenInstancePublicPortsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -6754,6 +7178,8 @@ func (s PeerVpcInput) GoString() string {
 type PeerVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -6766,6 +7192,11 @@ func (s PeerVpcOutput) String() string {
 // GoString returns the string representation
 func (s PeerVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PeerVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -6877,6 +7308,8 @@ func (s *PutInstancePublicPortsInput) SetPortInfos(v []PortInfo) *PutInstancePub
 type PutInstancePublicPortsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Describes metadata about the operation you just executed.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -6889,6 +7322,11 @@ func (s PutInstancePublicPortsOutput) String() string {
 // GoString returns the string representation
 func (s PutInstancePublicPortsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutInstancePublicPortsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -6941,6 +7379,8 @@ func (s *RebootInstanceInput) SetInstanceName(v string) *RebootInstanceInput {
 type RebootInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -6953,6 +7393,11 @@ func (s RebootInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RebootInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -7067,6 +7512,8 @@ func (s *ReleaseStaticIpInput) SetStaticIpName(v string) *ReleaseStaticIpInput {
 type ReleaseStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -7079,6 +7526,11 @@ func (s ReleaseStaticIpOutput) String() string {
 // GoString returns the string representation
 func (s ReleaseStaticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReleaseStaticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -7165,6 +7617,8 @@ func (s *StartInstanceInput) SetInstanceName(v string) *StartInstanceInput {
 type StartInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -7177,6 +7631,11 @@ func (s StartInstanceOutput) String() string {
 // GoString returns the string representation
 func (s StartInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -7328,6 +7787,8 @@ func (s *StopInstanceInput) SetInstanceName(v string) *StopInstanceInput {
 type StopInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -7340,6 +7801,11 @@ func (s StopInstanceOutput) String() string {
 // GoString returns the string representation
 func (s StopInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.
@@ -7367,6 +7833,8 @@ func (s UnpeerVpcInput) GoString() string {
 type UnpeerVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operation *Operation `locationName:"operation" type:"structure"`
 }
@@ -7379,6 +7847,11 @@ func (s UnpeerVpcOutput) String() string {
 // GoString returns the string representation
 func (s UnpeerVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnpeerVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperation sets the Operation field's value.
@@ -7446,6 +7919,8 @@ func (s *UpdateDomainEntryInput) SetDomainName(v string) *UpdateDomainEntryInput
 type UpdateDomainEntryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of key-value pairs containing information about the request operation.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
@@ -7458,6 +7933,11 @@ func (s UpdateDomainEntryOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDomainEntryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDomainEntryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperations sets the Operations field's value.

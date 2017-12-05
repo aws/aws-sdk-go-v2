@@ -59,7 +59,10 @@ func (c *ELB) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 		input = &AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	output := &AddTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsRequest{Request: req, Input: input}
 }
 
@@ -110,7 +113,10 @@ func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroup
 		input = &ApplySecurityGroupsToLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &ApplySecurityGroupsToLoadBalancerOutput{})
+	output := &ApplySecurityGroupsToLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ApplySecurityGroupsToLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -162,7 +168,10 @@ func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubn
 		input = &AttachLoadBalancerToSubnetsInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancerToSubnetsOutput{})
+	output := &AttachLoadBalancerToSubnetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachLoadBalancerToSubnetsRequest{Request: req, Input: input}
 }
 
@@ -213,7 +222,10 @@ func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) Conf
 		input = &ConfigureHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfigureHealthCheckOutput{})
+	output := &ConfigureHealthCheckOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfigureHealthCheckRequest{Request: req, Input: input}
 }
 
@@ -273,7 +285,10 @@ func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStick
 		input = &CreateAppCookieStickinessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAppCookieStickinessPolicyOutput{})
+	output := &CreateAppCookieStickinessPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAppCookieStickinessPolicyRequest{Request: req, Input: input}
 }
 
@@ -335,7 +350,10 @@ func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickin
 		input = &CreateLBCookieStickinessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLBCookieStickinessPolicyOutput{})
+	output := &CreateLBCookieStickinessPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLBCookieStickinessPolicyRequest{Request: req, Input: input}
 }
 
@@ -393,7 +411,10 @@ func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) CreateLo
 		input = &CreateLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerOutput{})
+	output := &CreateLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -445,7 +466,10 @@ func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListen
 		input = &CreateLoadBalancerListenersInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerListenersOutput{})
+	output := &CreateLoadBalancerListenersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLoadBalancerListenersRequest{Request: req, Input: input}
 }
 
@@ -495,7 +519,10 @@ func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInp
 		input = &CreateLoadBalancerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerPolicyOutput{})
+	output := &CreateLoadBalancerPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLoadBalancerPolicyRequest{Request: req, Input: input}
 }
 
@@ -550,7 +577,10 @@ func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) DeleteLo
 		input = &DeleteLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerOutput{})
+	output := &DeleteLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -596,7 +626,10 @@ func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListen
 		input = &DeleteLoadBalancerListenersInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerListenersOutput{})
+	output := &DeleteLoadBalancerListenersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLoadBalancerListenersRequest{Request: req, Input: input}
 }
 
@@ -643,7 +676,10 @@ func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInp
 		input = &DeleteLoadBalancerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerPolicyOutput{})
+	output := &DeleteLoadBalancerPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLoadBalancerPolicyRequest{Request: req, Input: input}
 }
 
@@ -697,7 +733,10 @@ func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstan
 		input = &DeregisterInstancesFromLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterInstancesFromLoadBalancerOutput{})
+	output := &DeregisterInstancesFromLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterInstancesFromLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -747,7 +786,10 @@ func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) De
 		input = &DescribeAccountLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	output := &DescribeAccountLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountLimitsRequest{Request: req, Input: input}
 }
 
@@ -798,7 +840,10 @@ func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) 
 		input = &DescribeInstanceHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceHealthOutput{})
+	output := &DescribeInstanceHealthOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstanceHealthRequest{Request: req, Input: input}
 }
 
@@ -844,7 +889,10 @@ func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerA
 		input = &DescribeLoadBalancerAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerAttributesOutput{})
+	output := &DescribeLoadBalancerAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input}
 }
 
@@ -897,7 +945,10 @@ func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPol
 		input = &DescribeLoadBalancerPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerPoliciesOutput{})
+	output := &DescribeLoadBalancerPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBalancerPoliciesRequest{Request: req, Input: input}
 }
 
@@ -954,7 +1005,10 @@ func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancer
 		input = &DescribeLoadBalancerPolicyTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerPolicyTypesOutput{})
+	output := &DescribeLoadBalancerPolicyTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBalancerPolicyTypesRequest{Request: req, Input: input}
 }
 
@@ -1007,7 +1061,10 @@ func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) De
 		input = &DescribeLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+	output := &DescribeLoadBalancersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBalancersRequest{Request: req, Input: input}
 }
 
@@ -1103,7 +1160,10 @@ func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -1154,7 +1214,10 @@ func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFrom
 		input = &DetachLoadBalancerFromSubnetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachLoadBalancerFromSubnetsOutput{})
+	output := &DetachLoadBalancerFromSubnetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachLoadBalancerFromSubnetsRequest{Request: req, Input: input}
 }
 
@@ -1210,7 +1273,10 @@ func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvail
 		input = &DisableAvailabilityZonesForLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableAvailabilityZonesForLoadBalancerOutput{})
+	output := &DisableAvailabilityZonesForLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -1263,7 +1329,10 @@ func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailab
 		input = &EnableAvailabilityZonesForLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAvailabilityZonesForLoadBalancerOutput{})
+	output := &EnableAvailabilityZonesForLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -1324,7 +1393,10 @@ func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttri
 		input = &ModifyLoadBalancerAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyLoadBalancerAttributesOutput{})
+	output := &ModifyLoadBalancerAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input}
 }
 
@@ -1392,7 +1464,10 @@ func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesW
 		input = &RegisterInstancesWithLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterInstancesWithLoadBalancerOutput{})
+	output := &RegisterInstancesWithLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterInstancesWithLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -1438,7 +1513,10 @@ func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 		input = &RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	output := &RemoveTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsRequest{Request: req, Input: input}
 }
 
@@ -1490,7 +1568,10 @@ func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalance
 		input = &SetLoadBalancerListenerSSLCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBalancerListenerSSLCertificateOutput{})
+	output := &SetLoadBalancerListenerSSLCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetLoadBalancerListenerSSLCertificateRequest{Request: req, Input: input}
 }
 
@@ -1551,7 +1632,10 @@ func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalan
 		input = &SetLoadBalancerPoliciesForBackendServerInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBalancerPoliciesForBackendServerOutput{})
+	output := &SetLoadBalancerPoliciesForBackendServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetLoadBalancerPoliciesForBackendServerRequest{Request: req, Input: input}
 }
 
@@ -1606,7 +1690,10 @@ func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPol
 		input = &SetLoadBalancerPoliciesOfListenerInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBalancerPoliciesOfListenerOutput{})
+	output := &SetLoadBalancerPoliciesOfListenerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetLoadBalancerPoliciesOfListenerRequest{Request: req, Input: input}
 }
 
@@ -1753,6 +1840,8 @@ func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1763,6 +1852,11 @@ func (s AddTagsOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This data type is reserved.
@@ -1896,6 +1990,8 @@ func (s *ApplySecurityGroupsToLoadBalancerInput) SetSecurityGroups(v []string) *
 type ApplySecurityGroupsToLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the security groups associated with the load balancer.
 	SecurityGroups []string `type:"list"`
 }
@@ -1908,6 +2004,11 @@ func (s ApplySecurityGroupsToLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s ApplySecurityGroupsToLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ApplySecurityGroupsToLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
@@ -1978,6 +2079,8 @@ func (s *AttachLoadBalancerToSubnetsInput) SetSubnets(v []string) *AttachLoadBal
 type AttachLoadBalancerToSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the subnets attached to the load balancer.
 	Subnets []string `type:"list"`
 }
@@ -1990,6 +2093,11 @@ func (s AttachLoadBalancerToSubnetsOutput) String() string {
 // GoString returns the string representation
 func (s AttachLoadBalancerToSubnetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachLoadBalancerToSubnetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubnets sets the Subnets field's value.
@@ -2098,6 +2206,8 @@ func (s *ConfigureHealthCheckInput) SetLoadBalancerName(v string) *ConfigureHeal
 type ConfigureHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The updated health check.
 	HealthCheck *HealthCheck `type:"structure"`
 }
@@ -2110,6 +2220,11 @@ func (s ConfigureHealthCheckOutput) String() string {
 // GoString returns the string representation
 func (s ConfigureHealthCheckOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfigureHealthCheckOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthCheck sets the HealthCheck field's value.
@@ -2291,6 +2406,8 @@ func (s *CreateAppCookieStickinessPolicyInput) SetPolicyName(v string) *CreateAp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicyOutput
 type CreateAppCookieStickinessPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2301,6 +2418,11 @@ func (s CreateAppCookieStickinessPolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreateAppCookieStickinessPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAppCookieStickinessPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreateLBCookieStickinessPolicy.
@@ -2377,6 +2499,8 @@ func (s *CreateLBCookieStickinessPolicyInput) SetPolicyName(v string) *CreateLBC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicyOutput
 type CreateLBCookieStickinessPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2387,6 +2511,11 @@ func (s CreateLBCookieStickinessPolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreateLBCookieStickinessPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLBCookieStickinessPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreateLoadBalancer.
@@ -2600,6 +2729,8 @@ func (s *CreateLoadBalancerListenersInput) SetLoadBalancerName(v string) *Create
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListenerOutput
 type CreateLoadBalancerListenersOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2612,10 +2743,17 @@ func (s CreateLoadBalancerListenersOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLoadBalancerListenersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Contains the output for CreateLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAccessPointOutput
 type CreateLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The DNS name of the load balancer.
 	DNSName *string `type:"string"`
@@ -2629,6 +2767,11 @@ func (s CreateLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s CreateLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDNSName sets the DNSName field's value.
@@ -2722,6 +2865,8 @@ func (s *CreateLoadBalancerPolicyInput) SetPolicyTypeName(v string) *CreateLoadB
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicyOutput
 type CreateLoadBalancerPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2732,6 +2877,11 @@ func (s CreateLoadBalancerPolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreateLoadBalancerPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLoadBalancerPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about the CrossZoneLoadBalancing attribute.
@@ -2876,6 +3026,8 @@ func (s *DeleteLoadBalancerListenersInput) SetLoadBalancerPorts(v []int64) *Dele
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListenerOutput
 type DeleteLoadBalancerListenersOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2888,10 +3040,17 @@ func (s DeleteLoadBalancerListenersOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLoadBalancerListenersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Contains the output of DeleteLoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteAccessPointOutput
 type DeleteLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2902,6 +3061,11 @@ func (s DeleteLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteLoadBalancerPolicy.
@@ -2964,6 +3128,8 @@ func (s *DeleteLoadBalancerPolicyInput) SetPolicyName(v string) *DeleteLoadBalan
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicyOutput
 type DeleteLoadBalancerPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2974,6 +3140,11 @@ func (s DeleteLoadBalancerPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLoadBalancerPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLoadBalancerPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeregisterInstancesFromLoadBalancer.
@@ -3037,6 +3208,8 @@ func (s *DeregisterInstancesFromLoadBalancerInput) SetLoadBalancerName(v string)
 type DeregisterInstancesFromLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The remaining instances registered with the load balancer.
 	Instances []Instance `type:"list"`
 }
@@ -3049,6 +3222,11 @@ func (s DeregisterInstancesFromLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterInstancesFromLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterInstancesFromLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -3108,6 +3286,8 @@ func (s *DescribeAccountLimitsInput) SetPageSize(v int64) *DescribeAccountLimits
 type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the limits.
 	Limits []Limit `type:"list"`
 
@@ -3124,6 +3304,11 @@ func (s DescribeAccountLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLimits sets the Limits field's value.
@@ -3193,6 +3378,8 @@ func (s *DescribeInstanceHealthInput) SetLoadBalancerName(v string) *DescribeIns
 type DescribeInstanceHealthOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the health of the instances.
 	InstanceStates []InstanceState `type:"list"`
 }
@@ -3205,6 +3392,11 @@ func (s DescribeInstanceHealthOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstanceHealthOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstanceHealthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceStates sets the InstanceStates field's value.
@@ -3259,6 +3451,8 @@ func (s *DescribeLoadBalancerAttributesInput) SetLoadBalancerName(v string) *Des
 type DescribeLoadBalancerAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the load balancer attributes.
 	LoadBalancerAttributes *LoadBalancerAttributes `type:"structure"`
 }
@@ -3271,6 +3465,11 @@ func (s DescribeLoadBalancerAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBalancerAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBalancerAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoadBalancerAttributes sets the LoadBalancerAttributes field's value.
@@ -3318,6 +3517,8 @@ func (s *DescribeLoadBalancerPoliciesInput) SetPolicyNames(v []string) *Describe
 type DescribeLoadBalancerPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the policies.
 	PolicyDescriptions []PolicyDescription `type:"list"`
 }
@@ -3330,6 +3531,11 @@ func (s DescribeLoadBalancerPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBalancerPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBalancerPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyDescriptions sets the PolicyDescriptions field's value.
@@ -3369,6 +3575,8 @@ func (s *DescribeLoadBalancerPolicyTypesInput) SetPolicyTypeNames(v []string) *D
 type DescribeLoadBalancerPolicyTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the policy types.
 	PolicyTypeDescriptions []PolicyTypeDescription `type:"list"`
 }
@@ -3381,6 +3589,11 @@ func (s DescribeLoadBalancerPolicyTypesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBalancerPolicyTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBalancerPolicyTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyTypeDescriptions sets the PolicyTypeDescriptions field's value.
@@ -3452,6 +3665,8 @@ func (s *DescribeLoadBalancersInput) SetPageSize(v int64) *DescribeLoadBalancers
 type DescribeLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the load balancers.
 	LoadBalancerDescriptions []LoadBalancerDescription `type:"list"`
 
@@ -3468,6 +3683,11 @@ func (s DescribeLoadBalancersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBalancersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBalancersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoadBalancerDescriptions sets the LoadBalancerDescriptions field's value.
@@ -3531,6 +3751,8 @@ func (s *DescribeTagsInput) SetLoadBalancerNames(v []string) *DescribeTagsInput 
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the tags.
 	TagDescriptions []TagDescription `type:"list"`
 }
@@ -3543,6 +3765,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagDescriptions sets the TagDescriptions field's value.
@@ -3612,6 +3839,8 @@ func (s *DetachLoadBalancerFromSubnetsInput) SetSubnets(v []string) *DetachLoadB
 type DetachLoadBalancerFromSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the remaining subnets for the load balancer.
 	Subnets []string `type:"list"`
 }
@@ -3624,6 +3853,11 @@ func (s DetachLoadBalancerFromSubnetsOutput) String() string {
 // GoString returns the string representation
 func (s DetachLoadBalancerFromSubnetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachLoadBalancerFromSubnetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubnets sets the Subnets field's value.
@@ -3693,6 +3927,8 @@ func (s *DisableAvailabilityZonesForLoadBalancerInput) SetLoadBalancerName(v str
 type DisableAvailabilityZonesForLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The remaining Availability Zones for the load balancer.
 	AvailabilityZones []string `type:"list"`
 }
@@ -3705,6 +3941,11 @@ func (s DisableAvailabilityZonesForLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s DisableAvailabilityZonesForLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableAvailabilityZonesForLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
@@ -3774,6 +4015,8 @@ func (s *EnableAvailabilityZonesForLoadBalancerInput) SetLoadBalancerName(v stri
 type EnableAvailabilityZonesForLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The updated list of Availability Zones for the load balancer.
 	AvailabilityZones []string `type:"list"`
 }
@@ -3786,6 +4029,11 @@ func (s EnableAvailabilityZonesForLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s EnableAvailabilityZonesForLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableAvailabilityZonesForLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
@@ -4606,6 +4854,8 @@ func (s *ModifyLoadBalancerAttributesInput) SetLoadBalancerName(v string) *Modif
 type ModifyLoadBalancerAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the load balancer attributes.
 	LoadBalancerAttributes *LoadBalancerAttributes `type:"structure"`
 
@@ -4621,6 +4871,11 @@ func (s ModifyLoadBalancerAttributesOutput) String() string {
 // GoString returns the string representation
 func (s ModifyLoadBalancerAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyLoadBalancerAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoadBalancerAttributes sets the LoadBalancerAttributes field's value.
@@ -4965,6 +5220,8 @@ func (s *RegisterInstancesWithLoadBalancerInput) SetLoadBalancerName(v string) *
 type RegisterInstancesWithLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The updated list of instances for the load balancer.
 	Instances []Instance `type:"list"`
 }
@@ -4977,6 +5234,11 @@ func (s RegisterInstancesWithLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s RegisterInstancesWithLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterInstancesWithLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -5056,6 +5318,8 @@ func (s *RemoveTagsInput) SetTags(v []TagKeyOnly) *RemoveTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTagsOutput
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5066,6 +5330,11 @@ func (s RemoveTagsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for SetLoadBalancerListenerSSLCertificate.
@@ -5143,6 +5412,8 @@ func (s *SetLoadBalancerListenerSSLCertificateInput) SetSSLCertificateId(v strin
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificateOutput
 type SetLoadBalancerListenerSSLCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5153,6 +5424,11 @@ func (s SetLoadBalancerListenerSSLCertificateOutput) String() string {
 // GoString returns the string representation
 func (s SetLoadBalancerListenerSSLCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetLoadBalancerListenerSSLCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
@@ -5231,6 +5507,8 @@ func (s *SetLoadBalancerPoliciesForBackendServerInput) SetPolicyNames(v []string
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServerOutput
 type SetLoadBalancerPoliciesForBackendServerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5241,6 +5519,11 @@ func (s SetLoadBalancerPoliciesForBackendServerOutput) String() string {
 // GoString returns the string representation
 func (s SetLoadBalancerPoliciesForBackendServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetLoadBalancerPoliciesForBackendServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for SetLoadBalancePoliciesOfListener.
@@ -5320,6 +5603,8 @@ func (s *SetLoadBalancerPoliciesOfListenerInput) SetPolicyNames(v []string) *Set
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListenerOutput
 type SetLoadBalancerPoliciesOfListenerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5330,6 +5615,11 @@ func (s SetLoadBalancerPoliciesOfListenerOutput) String() string {
 // GoString returns the string representation
 func (s SetLoadBalancerPoliciesOfListenerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetLoadBalancerPoliciesOfListenerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about a source security group.

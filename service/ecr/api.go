@@ -56,7 +56,10 @@ func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabil
 		input = &BatchCheckLayerAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchCheckLayerAvailabilityOutput{})
+	output := &BatchCheckLayerAvailabilityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchCheckLayerAvailabilityRequest{Request: req, Input: input}
 }
 
@@ -110,7 +113,10 @@ func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDeleteI
 		input = &BatchDeleteImageInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteImageOutput{})
+	output := &BatchDeleteImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchDeleteImageRequest{Request: req, Input: input}
 }
 
@@ -157,7 +163,10 @@ func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageReque
 		input = &BatchGetImageInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetImageOutput{})
+	output := &BatchGetImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetImageRequest{Request: req, Input: input}
 }
 
@@ -209,7 +218,10 @@ func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) Comple
 		input = &CompleteLayerUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteLayerUploadOutput{})
+	output := &CompleteLayerUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CompleteLayerUploadRequest{Request: req, Input: input}
 }
 
@@ -255,7 +267,10 @@ func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) CreateReposi
 		input = &CreateRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRepositoryOutput{})
+	output := &CreateRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRepositoryRequest{Request: req, Input: input}
 }
 
@@ -302,7 +317,10 @@ func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteReposi
 		input = &DeleteRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRepositoryOutput{})
+	output := &DeleteRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRepositoryRequest{Request: req, Input: input}
 }
 
@@ -348,7 +366,10 @@ func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) 
 		input = &DeleteRepositoryPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRepositoryPolicyOutput{})
+	output := &DeleteRepositoryPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRepositoryPolicyRequest{Request: req, Input: input}
 }
 
@@ -406,7 +427,10 @@ func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 		input = &DescribeImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImagesOutput{})
+	output := &DescribeImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImagesRequest{Request: req, Input: input}
 }
 
@@ -508,7 +532,10 @@ func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) Desc
 		input = &DescribeRepositoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRepositoriesOutput{})
+	output := &DescribeRepositoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRepositoriesRequest{Request: req, Input: input}
 }
 
@@ -611,7 +638,10 @@ func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) Ge
 		input = &GetAuthorizationTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAuthorizationTokenOutput{})
+	output := &GetAuthorizationTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAuthorizationTokenRequest{Request: req, Input: input}
 }
 
@@ -662,7 +692,10 @@ func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) 
 		input = &GetDownloadUrlForLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDownloadUrlForLayerOutput{})
+	output := &GetDownloadUrlForLayerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDownloadUrlForLayerRequest{Request: req, Input: input}
 }
 
@@ -708,7 +741,10 @@ func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) GetRep
 		input = &GetRepositoryPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRepositoryPolicyOutput{})
+	output := &GetRepositoryPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRepositoryPolicyRequest{Request: req, Input: input}
 }
 
@@ -758,7 +794,10 @@ func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) Initia
 		input = &InitiateLayerUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateLayerUploadOutput{})
+	output := &InitiateLayerUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitiateLayerUploadRequest{Request: req, Input: input}
 }
 
@@ -816,7 +855,10 @@ func (c *ECR) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 		input = &ListImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListImagesOutput{})
+	output := &ListImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListImagesRequest{Request: req, Input: input}
 }
 
@@ -916,7 +958,10 @@ func (c *ECR) PutImageRequest(input *PutImageInput) PutImageRequest {
 		input = &PutImageInput{}
 	}
 
-	req := c.newRequest(op, input, &PutImageOutput{})
+	output := &PutImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutImageRequest{Request: req, Input: input}
 }
 
@@ -962,7 +1007,10 @@ func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) SetRep
 		input = &SetRepositoryPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetRepositoryPolicyOutput{})
+	output := &SetRepositoryPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetRepositoryPolicyRequest{Request: req, Input: input}
 }
 
@@ -1012,7 +1060,10 @@ func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayerPar
 		input = &UploadLayerPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadLayerPartOutput{})
+	output := &UploadLayerPartOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadLayerPartRequest{Request: req, Input: input}
 }
 
@@ -1139,6 +1190,8 @@ func (s *BatchCheckLayerAvailabilityInput) SetRepositoryName(v string) *BatchChe
 type BatchCheckLayerAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []LayerFailure `locationName:"failures" type:"list"`
 
@@ -1155,6 +1208,11 @@ func (s BatchCheckLayerAvailabilityOutput) String() string {
 // GoString returns the string representation
 func (s BatchCheckLayerAvailabilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchCheckLayerAvailabilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -1247,6 +1305,8 @@ func (s *BatchDeleteImageInput) SetRepositoryName(v string) *BatchDeleteImageInp
 type BatchDeleteImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []ImageFailure `locationName:"failures" type:"list"`
 
@@ -1262,6 +1322,11 @@ func (s BatchDeleteImageOutput) String() string {
 // GoString returns the string representation
 func (s BatchDeleteImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeleteImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -1367,6 +1432,8 @@ func (s *BatchGetImageInput) SetRepositoryName(v string) *BatchGetImageInput {
 type BatchGetImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Any failures associated with the call.
 	Failures []ImageFailure `locationName:"failures" type:"list"`
 
@@ -1382,6 +1449,11 @@ func (s BatchGetImageOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailures sets the Failures field's value.
@@ -1487,6 +1559,8 @@ func (s *CompleteLayerUploadInput) SetUploadId(v string) *CompleteLayerUploadInp
 type CompleteLayerUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The sha256 digest of the image layer.
 	LayerDigest *string `locationName:"layerDigest" type:"string"`
 
@@ -1508,6 +1582,11 @@ func (s CompleteLayerUploadOutput) String() string {
 // GoString returns the string representation
 func (s CompleteLayerUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CompleteLayerUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLayerDigest sets the LayerDigest field's value.
@@ -1583,6 +1662,8 @@ func (s *CreateRepositoryInput) SetRepositoryName(v string) *CreateRepositoryInp
 type CreateRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The repository that was created.
 	Repository *Repository `locationName:"repository" type:"structure"`
 }
@@ -1595,6 +1676,11 @@ func (s CreateRepositoryOutput) String() string {
 // GoString returns the string representation
 func (s CreateRepositoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRepository sets the Repository field's value.
@@ -1669,6 +1755,8 @@ func (s *DeleteRepositoryInput) SetRepositoryName(v string) *DeleteRepositoryInp
 type DeleteRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The repository that was deleted.
 	Repository *Repository `locationName:"repository" type:"structure"`
 }
@@ -1681,6 +1769,11 @@ func (s DeleteRepositoryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRepositoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRepository sets the Repository field's value.
@@ -1748,6 +1841,8 @@ func (s *DeleteRepositoryPolicyInput) SetRepositoryName(v string) *DeleteReposit
 type DeleteRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The JSON repository policy that was deleted from the repository.
 	PolicyText *string `locationName:"policyText" type:"string"`
 
@@ -1766,6 +1861,11 @@ func (s DeleteRepositoryPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRepositoryPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRepositoryPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyText sets the PolicyText field's value.
@@ -1922,6 +2022,8 @@ func (s *DescribeImagesInput) SetRepositoryName(v string) *DescribeImagesInput {
 type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ImageDetail objects that contain data about the image.
 	ImageDetails []ImageDetail `locationName:"imageDetails" type:"list"`
 
@@ -1940,6 +2042,11 @@ func (s DescribeImagesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageDetails sets the ImageDetails field's value.
@@ -2041,6 +2148,8 @@ func (s *DescribeRepositoriesInput) SetRepositoryNames(v []string) *DescribeRepo
 type DescribeRepositoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The nextToken value to include in a future DescribeRepositories request.
 	// When the results of a DescribeRepositories request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null
@@ -2059,6 +2168,11 @@ func (s DescribeRepositoriesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRepositoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRepositoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2116,6 +2230,8 @@ func (s *GetAuthorizationTokenInput) SetRegistryIds(v []string) *GetAuthorizatio
 type GetAuthorizationTokenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of authorization token data objects that correspond to the registryIds
 	// values in the request.
 	AuthorizationData []AuthorizationData `locationName:"authorizationData" type:"list"`
@@ -2129,6 +2245,11 @@ func (s GetAuthorizationTokenOutput) String() string {
 // GoString returns the string representation
 func (s GetAuthorizationTokenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAuthorizationTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthorizationData sets the AuthorizationData field's value.
@@ -2209,6 +2330,8 @@ func (s *GetDownloadUrlForLayerInput) SetRepositoryName(v string) *GetDownloadUr
 type GetDownloadUrlForLayerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pre-signed Amazon S3 download URL for the requested layer.
 	DownloadUrl *string `locationName:"downloadUrl" type:"string"`
 
@@ -2224,6 +2347,11 @@ func (s GetDownloadUrlForLayerOutput) String() string {
 // GoString returns the string representation
 func (s GetDownloadUrlForLayerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDownloadUrlForLayerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDownloadUrl sets the DownloadUrl field's value.
@@ -2295,6 +2423,8 @@ func (s *GetRepositoryPolicyInput) SetRepositoryName(v string) *GetRepositoryPol
 type GetRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The JSON repository policy text associated with the repository.
 	PolicyText *string `locationName:"policyText" type:"string"`
 
@@ -2313,6 +2443,11 @@ func (s GetRepositoryPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetRepositoryPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRepositoryPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyText sets the PolicyText field's value.
@@ -2595,6 +2730,8 @@ func (s *InitiateLayerUploadInput) SetRepositoryName(v string) *InitiateLayerUpl
 type InitiateLayerUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The size, in bytes, that Amazon ECR expects future layer part uploads to
 	// be.
 	PartSize *int64 `locationName:"partSize" type:"long"`
@@ -2612,6 +2749,11 @@ func (s InitiateLayerUploadOutput) String() string {
 // GoString returns the string representation
 func (s InitiateLayerUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitiateLayerUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPartSize sets the PartSize field's value.
@@ -2848,6 +2990,8 @@ func (s *ListImagesInput) SetRepositoryName(v string) *ListImagesInput {
 type ListImagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of image IDs for the requested repository.
 	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
 
@@ -2866,6 +3010,11 @@ func (s ListImagesOutput) String() string {
 // GoString returns the string representation
 func (s ListImagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListImagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageIds sets the ImageIds field's value.
@@ -2963,6 +3112,8 @@ func (s *PutImageInput) SetRepositoryName(v string) *PutImageInput {
 type PutImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details of the image uploaded.
 	Image *Image `locationName:"image" type:"structure"`
 }
@@ -2975,6 +3126,11 @@ func (s PutImageOutput) String() string {
 // GoString returns the string representation
 func (s PutImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImage sets the Image field's value.
@@ -3132,6 +3288,8 @@ func (s *SetRepositoryPolicyInput) SetRepositoryName(v string) *SetRepositoryPol
 type SetRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The JSON repository policy text applied to the repository.
 	PolicyText *string `locationName:"policyText" type:"string"`
 
@@ -3150,6 +3308,11 @@ func (s SetRepositoryPolicyOutput) String() string {
 // GoString returns the string representation
 func (s SetRepositoryPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetRepositoryPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyText sets the PolicyText field's value.
@@ -3290,6 +3453,8 @@ func (s *UploadLayerPartInput) SetUploadId(v string) *UploadLayerPartInput {
 type UploadLayerPartOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The integer value of the last byte received in the request.
 	LastByteReceived *int64 `locationName:"lastByteReceived" type:"long"`
 
@@ -3311,6 +3476,11 @@ func (s UploadLayerPartOutput) String() string {
 // GoString returns the string representation
 func (s UploadLayerPartOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadLayerPartOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLastByteReceived sets the LastByteReceived field's value.

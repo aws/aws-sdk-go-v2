@@ -51,7 +51,10 @@ func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) A
 		input = &AssociateTeamMemberInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateTeamMemberOutput{})
+	output := &AssociateTeamMemberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateTeamMemberRequest{Request: req, Input: input}
 }
 
@@ -97,7 +100,10 @@ func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) CreateProject
 		input = &CreateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProjectOutput{})
+	output := &CreateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProjectRequest{Request: req, Input: input}
 }
 
@@ -147,7 +153,10 @@ func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) Creat
 		input = &CreateUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+	output := &CreateUserProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserProfileRequest{Request: req, Input: input}
 }
 
@@ -195,7 +204,10 @@ func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) DeleteProject
 		input = &DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	output := &DeleteProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProjectRequest{Request: req, Input: input}
 }
 
@@ -244,7 +256,10 @@ func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) Delet
 		input = &DeleteUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserProfileOutput{})
+	output := &DeleteUserProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserProfileRequest{Request: req, Input: input}
 }
 
@@ -290,7 +305,10 @@ func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) DescribeP
 		input = &DescribeProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProjectOutput{})
+	output := &DescribeProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProjectRequest{Request: req, Input: input}
 }
 
@@ -336,7 +354,10 @@ func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) D
 		input = &DescribeUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserProfileOutput{})
+	output := &DescribeUserProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUserProfileRequest{Request: req, Input: input}
 }
 
@@ -385,7 +406,10 @@ func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberIn
 		input = &DisassociateTeamMemberInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateTeamMemberOutput{})
+	output := &DisassociateTeamMemberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateTeamMemberRequest{Request: req, Input: input}
 }
 
@@ -431,7 +455,10 @@ func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) ListProjectsReq
 		input = &ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	output := &ListProjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProjectsRequest{Request: req, Input: input}
 }
 
@@ -477,7 +504,10 @@ func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) ListResources
 		input = &ListResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesOutput{})
+	output := &ListResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourcesRequest{Request: req, Input: input}
 }
 
@@ -523,7 +553,10 @@ func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) Lis
 		input = &ListTagsForProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForProjectOutput{})
+	output := &ListTagsForProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForProjectRequest{Request: req, Input: input}
 }
 
@@ -569,7 +602,10 @@ func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamM
 		input = &ListTeamMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTeamMembersOutput{})
+	output := &ListTeamMembersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTeamMembersRequest{Request: req, Input: input}
 }
 
@@ -615,7 +651,10 @@ func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) ListUse
 		input = &ListUserProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserProfilesOutput{})
+	output := &ListUserProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUserProfilesRequest{Request: req, Input: input}
 }
 
@@ -661,7 +700,10 @@ func (c *CodeStar) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
 		input = &TagProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &TagProjectOutput{})
+	output := &TagProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagProjectRequest{Request: req, Input: input}
 }
 
@@ -707,7 +749,10 @@ func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) UntagProjectReq
 		input = &UntagProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagProjectOutput{})
+	output := &UntagProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagProjectRequest{Request: req, Input: input}
 }
 
@@ -753,7 +798,10 @@ func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) UpdateProject
 		input = &UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	output := &UpdateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProjectRequest{Request: req, Input: input}
 }
 
@@ -801,7 +849,10 @@ func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) UpdateT
 		input = &UpdateTeamMemberInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTeamMemberOutput{})
+	output := &UpdateTeamMemberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTeamMemberRequest{Request: req, Input: input}
 }
 
@@ -849,7 +900,10 @@ func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) Updat
 		input = &UpdateUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
+	output := &UpdateUserProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserProfileRequest{Request: req, Input: input}
 }
 
@@ -959,6 +1013,8 @@ func (s *AssociateTeamMemberInput) SetUserArn(v string) *AssociateTeamMemberInpu
 type AssociateTeamMemberOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user- or system-generated token from the initial request that can be
 	// used to repeat the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
@@ -972,6 +1028,11 @@ func (s AssociateTeamMemberOutput) String() string {
 // GoString returns the string representation
 func (s AssociateTeamMemberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateTeamMemberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientRequestToken sets the ClientRequestToken field's value.
@@ -1066,6 +1127,8 @@ func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Reserved for future use.
 	//
 	// Arn is a required field
@@ -1091,6 +1154,11 @@ func (s CreateProjectOutput) String() string {
 // GoString returns the string representation
 func (s CreateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -1213,6 +1281,8 @@ func (s *CreateUserProfileInput) SetUserArn(v string) *CreateUserProfileInput {
 type CreateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date the user profile was created, in timestamp format.
 	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp" timestampFormat:"unix"`
 
@@ -1245,6 +1315,11 @@ func (s CreateUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreatedTimestamp sets the CreatedTimestamp field's value.
@@ -1355,6 +1430,8 @@ func (s *DeleteProjectInput) SetId(v string) *DeleteProjectInput {
 type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the deleted project.
 	ProjectArn *string `locationName:"projectArn" type:"string"`
 
@@ -1371,6 +1448,11 @@ func (s DeleteProjectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProjectArn sets the ProjectArn field's value.
@@ -1432,6 +1514,8 @@ func (s *DeleteUserProfileInput) SetUserArn(v string) *DeleteUserProfileInput {
 type DeleteUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.
 	//
 	// UserArn is a required field
@@ -1446,6 +1530,11 @@ func (s DeleteUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserArn sets the UserArn field's value.
@@ -1501,6 +1590,8 @@ func (s *DescribeProjectInput) SetId(v string) *DescribeProjectInput {
 type DescribeProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) for the project.
 	Arn *string `locationName:"arn" type:"string"`
 
@@ -1536,6 +1627,11 @@ func (s DescribeProjectOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -1633,6 +1729,8 @@ func (s *DescribeUserProfileInput) SetUserArn(v string) *DescribeUserProfileInpu
 type DescribeUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date and time when the user profile was created in AWS CodeStar, in timestamp
 	// format.
 	//
@@ -1678,6 +1776,11 @@ func (s DescribeUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreatedTimestamp sets the CreatedTimestamp field's value.
@@ -1781,6 +1884,8 @@ func (s *DisassociateTeamMemberInput) SetUserArn(v string) *DisassociateTeamMemb
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMemberResult
 type DisassociateTeamMemberOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1791,6 +1896,11 @@ func (s DisassociateTeamMemberOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateTeamMemberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateTeamMemberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjectsRequest
@@ -1847,6 +1957,8 @@ func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The continuation token to use when requesting the next set of results, if
 	// there are more results to be returned.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
@@ -1865,6 +1977,11 @@ func (s ListProjectsOutput) String() string {
 // GoString returns the string representation
 func (s ListProjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1951,6 +2068,8 @@ func (s *ListResourcesInput) SetProjectId(v string) *ListResourcesInput {
 type ListResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The continuation token to use when requesting the next set of results, if
 	// there are more results to be returned.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
@@ -1967,6 +2086,11 @@ func (s ListResourcesOutput) String() string {
 // GoString returns the string representation
 func (s ListResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2052,6 +2176,8 @@ func (s *ListTagsForProjectInput) SetNextToken(v string) *ListTagsForProjectInpu
 type ListTagsForProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Reserved for future use.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
@@ -2067,6 +2193,11 @@ func (s ListTagsForProjectOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2153,6 +2284,8 @@ func (s *ListTeamMembersInput) SetProjectId(v string) *ListTeamMembersInput {
 type ListTeamMembersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The continuation token to use when requesting the next set of results, if
 	// there are more results to be returned.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
@@ -2171,6 +2304,11 @@ func (s ListTeamMembersOutput) String() string {
 // GoString returns the string representation
 func (s ListTeamMembersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTeamMembersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2239,6 +2377,8 @@ func (s *ListUserProfilesInput) SetNextToken(v string) *ListUserProfilesInput {
 type ListUserProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The continuation token to use when requesting the next set of results, if
 	// there are more results to be returned.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
@@ -2257,6 +2397,11 @@ func (s ListUserProfilesOutput) String() string {
 // GoString returns the string representation
 func (s ListUserProfilesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUserProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2394,6 +2539,8 @@ func (s *TagProjectInput) SetTags(v map[string]string) *TagProjectInput {
 type TagProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The tags for the project.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
@@ -2406,6 +2553,11 @@ func (s TagProjectOutput) String() string {
 // GoString returns the string representation
 func (s TagProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -2525,6 +2677,8 @@ func (s *UntagProjectInput) SetTags(v []string) *UntagProjectInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProjectResult
 type UntagProjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2535,6 +2689,11 @@ func (s UntagProjectOutput) String() string {
 // GoString returns the string representation
 func (s UntagProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProjectRequest
@@ -2604,6 +2763,8 @@ func (s *UpdateProjectInput) SetName(v string) *UpdateProjectInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProjectResult
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2614,6 +2775,11 @@ func (s UpdateProjectOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMemberRequest
@@ -2705,6 +2871,8 @@ func (s *UpdateTeamMemberInput) SetUserArn(v string) *UpdateTeamMemberInput {
 type UpdateTeamMemberOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The project role granted to the user.
 	ProjectRole *string `locationName:"projectRole" type:"string"`
 
@@ -2725,6 +2893,11 @@ func (s UpdateTeamMemberOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTeamMemberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTeamMemberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProjectRole sets the ProjectRole field's value.
@@ -2829,6 +3002,8 @@ func (s *UpdateUserProfileInput) SetUserArn(v string) *UpdateUserProfileInput {
 type UpdateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date the user profile was created, in timestamp format.
 	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp" timestampFormat:"unix"`
 
@@ -2861,6 +3036,11 @@ func (s UpdateUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreatedTimestamp sets the CreatedTimestamp field's value.

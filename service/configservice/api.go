@@ -60,9 +60,12 @@ func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) De
 		input = &DeleteConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigRuleOutput{})
+	output := &DeleteConfigRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConfigRuleRequest{Request: req, Input: input}
 }
 
@@ -117,9 +120,12 @@ func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigur
 		input = &DeleteConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationRecorderOutput{})
+	output := &DeleteConfigurationRecorderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConfigurationRecorderRequest{Request: req, Input: input}
 }
 
@@ -168,9 +174,12 @@ func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChanne
 		input = &DeleteDeliveryChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeliveryChannelOutput{})
+	output := &DeleteDeliveryChannelOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDeliveryChannelRequest{Request: req, Input: input}
 }
 
@@ -219,7 +228,10 @@ func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationRe
 		input = &DeleteEvaluationResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEvaluationResultsOutput{})
+	output := &DeleteEvaluationResultsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEvaluationResultsRequest{Request: req, Input: input}
 }
 
@@ -274,7 +286,10 @@ func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapsho
 		input = &DeliverConfigSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeliverConfigSnapshotOutput{})
+	output := &DeliverConfigSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeliverConfigSnapshotRequest{Request: req, Input: input}
 }
 
@@ -342,7 +357,10 @@ func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeCom
 		input = &DescribeComplianceByConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComplianceByConfigRuleOutput{})
+	output := &DescribeComplianceByConfigRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeComplianceByConfigRuleRequest{Request: req, Input: input}
 }
 
@@ -412,7 +430,10 @@ func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeCompl
 		input = &DescribeComplianceByResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComplianceByResourceOutput{})
+	output := &DescribeComplianceByResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeComplianceByResourceRequest{Request: req, Input: input}
 }
 
@@ -461,7 +482,10 @@ func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *Describ
 		input = &DescribeConfigRuleEvaluationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigRuleEvaluationStatusOutput{})
+	output := &DescribeConfigRuleEvaluationStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigRuleEvaluationStatusRequest{Request: req, Input: input}
 }
 
@@ -507,7 +531,10 @@ func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInp
 		input = &DescribeConfigRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigRulesOutput{})
+	output := &DescribeConfigRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigRulesRequest{Request: req, Input: input}
 }
 
@@ -558,7 +585,10 @@ func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *Descri
 		input = &DescribeConfigurationRecorderStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationRecorderStatusOutput{})
+	output := &DescribeConfigurationRecorderStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigurationRecorderStatusRequest{Request: req, Input: input}
 }
 
@@ -609,7 +639,10 @@ func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeCon
 		input = &DescribeConfigurationRecordersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationRecordersOutput{})
+	output := &DescribeConfigurationRecordersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigurationRecordersRequest{Request: req, Input: input}
 }
 
@@ -659,7 +692,10 @@ func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeli
 		input = &DescribeDeliveryChannelStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeliveryChannelStatusOutput{})
+	output := &DescribeDeliveryChannelStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDeliveryChannelStatusRequest{Request: req, Input: input}
 }
 
@@ -709,7 +745,10 @@ func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryC
 		input = &DescribeDeliveryChannelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeliveryChannelsOutput{})
+	output := &DescribeDeliveryChannelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDeliveryChannelsRequest{Request: req, Input: input}
 }
 
@@ -757,7 +796,10 @@ func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetCompli
 		input = &GetComplianceDetailsByConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceDetailsByConfigRuleOutput{})
+	output := &GetComplianceDetailsByConfigRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetComplianceDetailsByConfigRuleRequest{Request: req, Input: input}
 }
 
@@ -805,7 +847,10 @@ func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplian
 		input = &GetComplianceDetailsByResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceDetailsByResourceOutput{})
+	output := &GetComplianceDetailsByResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetComplianceDetailsByResourceRequest{Request: req, Input: input}
 }
 
@@ -852,7 +897,10 @@ func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetCompli
 		input = &GetComplianceSummaryByConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceSummaryByConfigRuleOutput{})
+	output := &GetComplianceSummaryByConfigRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetComplianceSummaryByConfigRuleRequest{Request: req, Input: input}
 }
 
@@ -900,7 +948,10 @@ func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComp
 		input = &GetComplianceSummaryByResourceTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceSummaryByResourceTypeOutput{})
+	output := &GetComplianceSummaryByResourceTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetComplianceSummaryByResourceTypeRequest{Request: req, Input: input}
 }
 
@@ -979,7 +1030,10 @@ func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredR
 		input = &GetDiscoveredResourceCountsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDiscoveredResourceCountsOutput{})
+	output := &GetDiscoveredResourceCountsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDiscoveredResourceCountsRequest{Request: req, Input: input}
 }
 
@@ -1042,7 +1096,10 @@ func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfig
 		input = &GetResourceConfigHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceConfigHistoryOutput{})
+	output := &GetResourceConfigHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetResourceConfigHistoryRequest{Request: req, Input: input}
 }
 
@@ -1151,7 +1208,10 @@ func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredReso
 		input = &ListDiscoveredResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDiscoveredResourcesOutput{})
+	output := &ListDiscoveredResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDiscoveredResourcesRequest{Request: req, Input: input}
 }
 
@@ -1231,9 +1291,12 @@ func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfi
 		input = &PutConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigRuleOutput{})
+	output := &PutConfigRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutConfigRuleRequest{Request: req, Input: input}
 }
 
@@ -1289,9 +1352,12 @@ func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationR
 		input = &PutConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationRecorderOutput{})
+	output := &PutConfigurationRecorderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutConfigurationRecorderRequest{Request: req, Input: input}
 }
 
@@ -1350,9 +1416,12 @@ func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput
 		input = &PutDeliveryChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDeliveryChannelOutput{})
+	output := &PutDeliveryChannelOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutDeliveryChannelRequest{Request: req, Input: input}
 }
 
@@ -1400,7 +1469,10 @@ func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) PutEva
 		input = &PutEvaluationsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEvaluationsOutput{})
+	output := &PutEvaluationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutEvaluationsRequest{Request: req, Input: input}
 }
 
@@ -1475,7 +1547,10 @@ func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRule
 		input = &StartConfigRulesEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &StartConfigRulesEvaluationOutput{})
+	output := &StartConfigRulesEvaluationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartConfigRulesEvaluationRequest{Request: req, Input: input}
 }
 
@@ -1525,9 +1600,12 @@ func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurat
 		input = &StartConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &StartConfigurationRecorderOutput{})
+	output := &StartConfigurationRecorderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartConfigurationRecorderRequest{Request: req, Input: input}
 }
 
@@ -1574,9 +1652,12 @@ func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfiguratio
 		input = &StopConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &StopConfigurationRecorderOutput{})
+	output := &StopConfigurationRecorderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopConfigurationRecorderRequest{Request: req, Input: input}
 }
 
@@ -2711,6 +2792,8 @@ func (s *DeleteConfigRuleInput) SetConfigRuleName(v string) *DeleteConfigRuleInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRuleOutput
 type DeleteConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2721,6 +2804,11 @@ func (s DeleteConfigRuleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConfigRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConfigRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request object for the DeleteConfigurationRecorder action.
@@ -2772,6 +2860,8 @@ func (s *DeleteConfigurationRecorderInput) SetConfigurationRecorderName(v string
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorderOutput
 type DeleteConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2782,6 +2872,11 @@ func (s DeleteConfigurationRecorderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConfigurationRecorderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConfigurationRecorderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeleteDeliveryChannel action. The action accepts the following
@@ -2832,6 +2927,8 @@ func (s *DeleteDeliveryChannelInput) SetDeliveryChannelName(v string) *DeleteDel
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannelOutput
 type DeleteDeliveryChannelOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2842,6 +2939,11 @@ func (s DeleteDeliveryChannelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDeliveryChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeliveryChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResultsRequest
@@ -2892,6 +2994,8 @@ func (s *DeleteEvaluationResultsInput) SetConfigRuleName(v string) *DeleteEvalua
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResultsResponse
 type DeleteEvaluationResultsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2902,6 +3006,11 @@ func (s DeleteEvaluationResultsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEvaluationResultsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEvaluationResultsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeliverConfigSnapshot action.
@@ -2953,6 +3062,8 @@ func (s *DeliverConfigSnapshotInput) SetDeliveryChannelName(v string) *DeliverCo
 type DeliverConfigSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the snapshot that is being created.
 	ConfigSnapshotId *string `locationName:"configSnapshotId" type:"string"`
 }
@@ -2965,6 +3076,11 @@ func (s DeliverConfigSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeliverConfigSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeliverConfigSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigSnapshotId sets the ConfigSnapshotId field's value.
@@ -3171,6 +3287,8 @@ func (s *DescribeComplianceByConfigRuleInput) SetNextToken(v string) *DescribeCo
 type DescribeComplianceByConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether each of the specified AWS Config rules is compliant.
 	ComplianceByConfigRules []ComplianceByConfigRule `type:"list"`
 
@@ -3187,6 +3305,11 @@ func (s DescribeComplianceByConfigRuleOutput) String() string {
 // GoString returns the string representation
 func (s DescribeComplianceByConfigRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeComplianceByConfigRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComplianceByConfigRules sets the ComplianceByConfigRules field's value.
@@ -3290,6 +3413,8 @@ func (s *DescribeComplianceByResourceInput) SetResourceType(v string) *DescribeC
 type DescribeComplianceByResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the specified AWS resource complies with all of the AWS
 	// Config rules that evaluate it.
 	ComplianceByResources []ComplianceByResource `type:"list"`
@@ -3307,6 +3432,11 @@ func (s DescribeComplianceByResourceOutput) String() string {
 // GoString returns the string representation
 func (s DescribeComplianceByResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeComplianceByResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComplianceByResources sets the ComplianceByResources field's value.
@@ -3377,6 +3507,8 @@ func (s *DescribeConfigRuleEvaluationStatusInput) SetNextToken(v string) *Descri
 type DescribeConfigRuleEvaluationStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Status information about your AWS managed Config rules.
 	ConfigRulesEvaluationStatus []ConfigRuleEvaluationStatus `type:"list"`
 
@@ -3393,6 +3525,11 @@ func (s DescribeConfigRuleEvaluationStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigRuleEvaluationStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigRuleEvaluationStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigRulesEvaluationStatus sets the ConfigRulesEvaluationStatus field's value.
@@ -3446,6 +3583,8 @@ func (s *DescribeConfigRulesInput) SetNextToken(v string) *DescribeConfigRulesIn
 type DescribeConfigRulesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The details about your AWS Config rules.
 	ConfigRules []ConfigRule `type:"list"`
 
@@ -3462,6 +3601,11 @@ func (s DescribeConfigRulesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigRulesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigRules sets the ConfigRules field's value.
@@ -3508,6 +3652,8 @@ func (s *DescribeConfigurationRecorderStatusInput) SetConfigurationRecorderNames
 type DescribeConfigurationRecorderStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains status of the specified recorders.
 	ConfigurationRecordersStatus []ConfigurationRecorderStatus `type:"list"`
 }
@@ -3520,6 +3666,11 @@ func (s DescribeConfigurationRecorderStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationRecorderStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigurationRecorderStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationRecordersStatus sets the ConfigurationRecordersStatus field's value.
@@ -3558,6 +3709,8 @@ func (s *DescribeConfigurationRecordersInput) SetConfigurationRecorderNames(v []
 type DescribeConfigurationRecordersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains the descriptions of the specified configuration recorders.
 	ConfigurationRecorders []ConfigurationRecorder `type:"list"`
 }
@@ -3570,6 +3723,11 @@ func (s DescribeConfigurationRecordersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationRecordersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigurationRecordersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationRecorders sets the ConfigurationRecorders field's value.
@@ -3608,6 +3766,8 @@ func (s *DescribeDeliveryChannelStatusInput) SetDeliveryChannelNames(v []string)
 type DescribeDeliveryChannelStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains the status of a specified delivery channel.
 	DeliveryChannelsStatus []DeliveryChannelStatus `type:"list"`
 }
@@ -3620,6 +3780,11 @@ func (s DescribeDeliveryChannelStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDeliveryChannelStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDeliveryChannelStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeliveryChannelsStatus sets the DeliveryChannelsStatus field's value.
@@ -3658,6 +3823,8 @@ func (s *DescribeDeliveryChannelsInput) SetDeliveryChannelNames(v []string) *Des
 type DescribeDeliveryChannelsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains the descriptions of the specified delivery channel.
 	DeliveryChannels []DeliveryChannel `type:"list"`
 }
@@ -3670,6 +3837,11 @@ func (s DescribeDeliveryChannelsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDeliveryChannelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDeliveryChannelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeliveryChannels sets the DeliveryChannels field's value.
@@ -4036,6 +4208,8 @@ func (s *GetComplianceDetailsByConfigRuleInput) SetNextToken(v string) *GetCompl
 type GetComplianceDetailsByConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the AWS resource complies with the specified AWS Config
 	// rule.
 	EvaluationResults []EvaluationResult `type:"list"`
@@ -4053,6 +4227,11 @@ func (s GetComplianceDetailsByConfigRuleOutput) String() string {
 // GoString returns the string representation
 func (s GetComplianceDetailsByConfigRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetComplianceDetailsByConfigRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluationResults sets the EvaluationResults field's value.
@@ -4153,6 +4332,8 @@ func (s *GetComplianceDetailsByResourceInput) SetResourceType(v string) *GetComp
 type GetComplianceDetailsByResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the specified AWS resource complies each AWS Config rule.
 	EvaluationResults []EvaluationResult `type:"list"`
 
@@ -4169,6 +4350,11 @@ func (s GetComplianceDetailsByResourceOutput) String() string {
 // GoString returns the string representation
 func (s GetComplianceDetailsByResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetComplianceDetailsByResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluationResults sets the EvaluationResults field's value.
@@ -4202,6 +4388,8 @@ func (s GetComplianceSummaryByConfigRuleInput) GoString() string {
 type GetComplianceSummaryByConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of AWS Config rules that are compliant and the number that are
 	// noncompliant, up to a maximum of 25 for each.
 	ComplianceSummary *ComplianceSummary `type:"structure"`
@@ -4215,6 +4403,11 @@ func (s GetComplianceSummaryByConfigRuleOutput) String() string {
 // GoString returns the string representation
 func (s GetComplianceSummaryByConfigRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetComplianceSummaryByConfigRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComplianceSummary sets the ComplianceSummary field's value.
@@ -4256,6 +4449,8 @@ func (s *GetComplianceSummaryByResourceTypeInput) SetResourceTypes(v []string) *
 type GetComplianceSummaryByResourceTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of resources that are compliant and the number that are noncompliant.
 	// If one or more resource types were provided with the request, the numbers
 	// are returned for each resource type. The maximum number returned is 100.
@@ -4270,6 +4465,11 @@ func (s GetComplianceSummaryByResourceTypeOutput) String() string {
 // GoString returns the string representation
 func (s GetComplianceSummaryByResourceTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetComplianceSummaryByResourceTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComplianceSummariesByResourceType sets the ComplianceSummariesByResourceType field's value.
@@ -4336,6 +4536,8 @@ func (s *GetDiscoveredResourceCountsInput) SetResourceTypes(v []string) *GetDisc
 type GetDiscoveredResourceCountsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -4369,6 +4571,11 @@ func (s GetDiscoveredResourceCountsOutput) String() string {
 // GoString returns the string representation
 func (s GetDiscoveredResourceCountsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDiscoveredResourceCountsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4501,6 +4708,8 @@ func (s *GetResourceConfigHistoryInput) SetResourceType(v ResourceType) *GetReso
 type GetResourceConfigHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains the configuration history of one or more resources.
 	ConfigurationItems []ConfigurationItem `locationName:"configurationItems" type:"list"`
 
@@ -4517,6 +4726,11 @@ func (s GetResourceConfigHistoryOutput) String() string {
 // GoString returns the string representation
 func (s GetResourceConfigHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourceConfigHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationItems sets the ConfigurationItems field's value.
@@ -4627,6 +4841,8 @@ func (s *ListDiscoveredResourcesInput) SetResourceType(v ResourceType) *ListDisc
 type ListDiscoveredResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -4644,6 +4860,11 @@ func (s ListDiscoveredResourcesOutput) String() string {
 // GoString returns the string representation
 func (s ListDiscoveredResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDiscoveredResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4706,6 +4927,8 @@ func (s *PutConfigRuleInput) SetConfigRule(v *ConfigRule) *PutConfigRuleInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleOutput
 type PutConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4716,6 +4939,11 @@ func (s PutConfigRuleOutput) String() string {
 // GoString returns the string representation
 func (s PutConfigRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutConfigRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the PutConfigurationRecorder action.
@@ -4768,6 +4996,8 @@ func (s *PutConfigurationRecorderInput) SetConfigurationRecorder(v *Configuratio
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorderOutput
 type PutConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4778,6 +5008,11 @@ func (s PutConfigurationRecorderOutput) String() string {
 // GoString returns the string representation
 func (s PutConfigurationRecorderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutConfigurationRecorderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the PutDeliveryChannel action.
@@ -4830,6 +5065,8 @@ func (s *PutDeliveryChannelInput) SetDeliveryChannel(v *DeliveryChannel) *PutDel
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannelOutput
 type PutDeliveryChannelOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4840,6 +5077,11 @@ func (s PutDeliveryChannelOutput) String() string {
 // GoString returns the string representation
 func (s PutDeliveryChannelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutDeliveryChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluationsRequest
@@ -4920,6 +5162,8 @@ func (s *PutEvaluationsInput) SetTestMode(v bool) *PutEvaluationsInput {
 type PutEvaluationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Requests that failed because of a client or server error.
 	FailedEvaluations []Evaluation `type:"list"`
 }
@@ -4932,6 +5176,11 @@ func (s PutEvaluationsOutput) String() string {
 // GoString returns the string representation
 func (s PutEvaluationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutEvaluationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedEvaluations sets the FailedEvaluations field's value.
@@ -5451,6 +5700,8 @@ func (s *StartConfigRulesEvaluationInput) SetConfigRuleNames(v []string) *StartC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationResponse
 type StartConfigRulesEvaluationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5461,6 +5712,11 @@ func (s StartConfigRulesEvaluationOutput) String() string {
 // GoString returns the string representation
 func (s StartConfigRulesEvaluationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartConfigRulesEvaluationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the StartConfigurationRecorder action.
@@ -5511,6 +5767,8 @@ func (s *StartConfigurationRecorderInput) SetConfigurationRecorderName(v string)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorderOutput
 type StartConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5521,6 +5779,11 @@ func (s StartConfigurationRecorderOutput) String() string {
 // GoString returns the string representation
 func (s StartConfigurationRecorderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartConfigurationRecorderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the StopConfigurationRecorder action.
@@ -5571,6 +5834,8 @@ func (s *StopConfigurationRecorderInput) SetConfigurationRecorderName(v string) 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorderOutput
 type StopConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5581,6 +5846,11 @@ func (s StopConfigurationRecorderOutput) String() string {
 // GoString returns the string representation
 func (s StopConfigurationRecorderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopConfigurationRecorderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type ChronologicalOrder string

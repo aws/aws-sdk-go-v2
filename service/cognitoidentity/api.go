@@ -68,7 +68,10 @@ func (c *CognitoIdentity) CreateIdentityPoolRequest(input *CreateIdentityPoolInp
 		input = &CreateIdentityPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIdentityPoolOutput{})
+	output := &UpdateIdentityPoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateIdentityPoolRequest{Request: req, Input: input}
 }
 
@@ -117,7 +120,10 @@ func (c *CognitoIdentity) DeleteIdentitiesRequest(input *DeleteIdentitiesInput) 
 		input = &DeleteIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentitiesOutput{})
+	output := &DeleteIdentitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIdentitiesRequest{Request: req, Input: input}
 }
 
@@ -166,9 +172,12 @@ func (c *CognitoIdentity) DeleteIdentityPoolRequest(input *DeleteIdentityPoolInp
 		input = &DeleteIdentityPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityPoolOutput{})
+	output := &DeleteIdentityPoolOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIdentityPoolRequest{Request: req, Input: input}
 }
 
@@ -217,7 +226,10 @@ func (c *CognitoIdentity) DescribeIdentityRequest(input *DescribeIdentityInput) 
 		input = &DescribeIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityOutput{})
+	output := &DescribeIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdentityRequest{Request: req, Input: input}
 }
 
@@ -266,7 +278,10 @@ func (c *CognitoIdentity) DescribeIdentityPoolRequest(input *DescribeIdentityPoo
 		input = &DescribeIdentityPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIdentityPoolOutput{})
+	output := &UpdateIdentityPoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdentityPoolRequest{Request: req, Input: input}
 }
 
@@ -317,7 +332,10 @@ func (c *CognitoIdentity) GetCredentialsForIdentityRequest(input *GetCredentials
 		input = &GetCredentialsForIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCredentialsForIdentityOutput{})
+	output := &GetCredentialsForIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCredentialsForIdentityRequest{Request: req, Input: input}
 }
 
@@ -366,7 +384,10 @@ func (c *CognitoIdentity) GetIdRequest(input *GetIdInput) GetIdRequest {
 		input = &GetIdInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdOutput{})
+	output := &GetIdOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdRequest{Request: req, Input: input}
 }
 
@@ -414,7 +435,10 @@ func (c *CognitoIdentity) GetIdentityPoolRolesRequest(input *GetIdentityPoolRole
 		input = &GetIdentityPoolRolesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityPoolRolesOutput{})
+	output := &GetIdentityPoolRolesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityPoolRolesRequest{Request: req, Input: input}
 }
 
@@ -466,7 +490,10 @@ func (c *CognitoIdentity) GetOpenIdTokenRequest(input *GetOpenIdTokenInput) GetO
 		input = &GetOpenIdTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpenIdTokenOutput{})
+	output := &GetOpenIdTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOpenIdTokenRequest{Request: req, Input: input}
 }
 
@@ -527,7 +554,10 @@ func (c *CognitoIdentity) GetOpenIdTokenForDeveloperIdentityRequest(input *GetOp
 		input = &GetOpenIdTokenForDeveloperIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpenIdTokenForDeveloperIdentityOutput{})
+	output := &GetOpenIdTokenForDeveloperIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOpenIdTokenForDeveloperIdentityRequest{Request: req, Input: input}
 }
 
@@ -575,7 +605,10 @@ func (c *CognitoIdentity) ListIdentitiesRequest(input *ListIdentitiesInput) List
 		input = &ListIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentitiesOutput{})
+	output := &ListIdentitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIdentitiesRequest{Request: req, Input: input}
 }
 
@@ -623,7 +656,10 @@ func (c *CognitoIdentity) ListIdentityPoolsRequest(input *ListIdentityPoolsInput
 		input = &ListIdentityPoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityPoolsOutput{})
+	output := &ListIdentityPoolsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIdentityPoolsRequest{Request: req, Input: input}
 }
 
@@ -678,7 +714,10 @@ func (c *CognitoIdentity) LookupDeveloperIdentityRequest(input *LookupDeveloperI
 		input = &LookupDeveloperIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &LookupDeveloperIdentityOutput{})
+	output := &LookupDeveloperIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return LookupDeveloperIdentityRequest{Request: req, Input: input}
 }
 
@@ -732,7 +771,10 @@ func (c *CognitoIdentity) MergeDeveloperIdentitiesRequest(input *MergeDeveloperI
 		input = &MergeDeveloperIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &MergeDeveloperIdentitiesOutput{})
+	output := &MergeDeveloperIdentitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return MergeDeveloperIdentitiesRequest{Request: req, Input: input}
 }
 
@@ -781,9 +823,12 @@ func (c *CognitoIdentity) SetIdentityPoolRolesRequest(input *SetIdentityPoolRole
 		input = &SetIdentityPoolRolesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityPoolRolesOutput{})
+	output := &SetIdentityPoolRolesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityPoolRolesRequest{Request: req, Input: input}
 }
 
@@ -834,9 +879,12 @@ func (c *CognitoIdentity) UnlinkDeveloperIdentityRequest(input *UnlinkDeveloperI
 		input = &UnlinkDeveloperIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &UnlinkDeveloperIdentityOutput{})
+	output := &UnlinkDeveloperIdentityOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnlinkDeveloperIdentityRequest{Request: req, Input: input}
 }
 
@@ -886,9 +934,12 @@ func (c *CognitoIdentity) UnlinkIdentityRequest(input *UnlinkIdentityInput) Unli
 		input = &UnlinkIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &UnlinkIdentityOutput{})
+	output := &UnlinkIdentityOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnlinkIdentityRequest{Request: req, Input: input}
 }
 
@@ -936,7 +987,10 @@ func (c *CognitoIdentity) UpdateIdentityPoolRequest(input *UpdateIdentityPoolOut
 		input = &UpdateIdentityPoolOutput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIdentityPoolOutput{})
+	output := &UpdateIdentityPoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateIdentityPoolRequest{Request: req, Input: input}
 }
 
@@ -1162,6 +1216,8 @@ func (s *DeleteIdentitiesInput) SetIdentityIdsToDelete(v []string) *DeleteIdenti
 type DeleteIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
 	// and IdentityId.
 	UnprocessedIdentityIds []UnprocessedIdentityId `type:"list"`
@@ -1175,6 +1231,11 @@ func (s DeleteIdentitiesOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIdentitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIdentitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUnprocessedIdentityIds sets the UnprocessedIdentityIds field's value.
@@ -1230,6 +1291,8 @@ func (s *DeleteIdentityPoolInput) SetIdentityPoolId(v string) *DeleteIdentityPoo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentityPoolOutput
 type DeleteIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1240,6 +1303,11 @@ func (s DeleteIdentityPoolOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIdentityPoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIdentityPoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input to the DescribeIdentity action.
@@ -1291,6 +1359,8 @@ func (s *DescribeIdentityInput) SetIdentityId(v string) *DescribeIdentityInput {
 type DescribeIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Date on which the identity was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -1312,6 +1382,11 @@ func (s DescribeIdentityOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -1455,6 +1530,8 @@ func (s *GetCredentialsForIdentityInput) SetLogins(v map[string]string) *GetCred
 type GetCredentialsForIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Credentials for the provided identity ID.
 	Credentials *Credentials `type:"structure"`
 
@@ -1470,6 +1547,11 @@ func (s GetCredentialsForIdentityOutput) String() string {
 // GoString returns the string representation
 func (s GetCredentialsForIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCredentialsForIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCredentials sets the Credentials field's value.
@@ -1567,6 +1649,8 @@ func (s *GetIdInput) SetLogins(v map[string]string) *GetIdInput {
 type GetIdOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string `min:"1" type:"string"`
 }
@@ -1579,6 +1663,11 @@ func (s GetIdOutput) String() string {
 // GoString returns the string representation
 func (s GetIdOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityId sets the IdentityId field's value.
@@ -1636,6 +1725,8 @@ func (s *GetIdentityPoolRolesInput) SetIdentityPoolId(v string) *GetIdentityPool
 type GetIdentityPoolRolesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identity pool ID in the format REGION:GUID.
 	IdentityPoolId *string `min:"1" type:"string"`
 
@@ -1657,6 +1748,11 @@ func (s GetIdentityPoolRolesOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityPoolRolesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityPoolRolesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityPoolId sets the IdentityPoolId field's value.
@@ -1780,6 +1876,8 @@ func (s *GetOpenIdTokenForDeveloperIdentityInput) SetTokenDuration(v int64) *Get
 type GetOpenIdTokenForDeveloperIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string `min:"1" type:"string"`
 
@@ -1795,6 +1893,11 @@ func (s GetOpenIdTokenForDeveloperIdentityOutput) String() string {
 // GoString returns the string representation
 func (s GetOpenIdTokenForDeveloperIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOpenIdTokenForDeveloperIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityId sets the IdentityId field's value.
@@ -1871,6 +1974,8 @@ func (s *GetOpenIdTokenInput) SetLogins(v map[string]string) *GetOpenIdTokenInpu
 type GetOpenIdTokenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier in the format REGION:GUID. Note that the IdentityId returned
 	// may not match the one passed on input.
 	IdentityId *string `min:"1" type:"string"`
@@ -1887,6 +1992,11 @@ func (s GetOpenIdTokenOutput) String() string {
 // GoString returns the string representation
 func (s GetOpenIdTokenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOpenIdTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityId sets the IdentityId field's value.
@@ -2025,6 +2135,8 @@ func (s *ListIdentitiesInput) SetNextToken(v string) *ListIdentitiesInput {
 type ListIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An object containing a set of identities and associated mappings.
 	Identities []DescribeIdentityOutput `type:"list"`
 
@@ -2043,6 +2155,11 @@ func (s ListIdentitiesOutput) String() string {
 // GoString returns the string representation
 func (s ListIdentitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIdentitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentities sets the Identities field's value.
@@ -2124,6 +2241,8 @@ func (s *ListIdentityPoolsInput) SetNextToken(v string) *ListIdentityPoolsInput 
 type ListIdentityPoolsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identity pools returned by the ListIdentityPools action.
 	IdentityPools []IdentityPoolShortDescription `type:"list"`
 
@@ -2139,6 +2258,11 @@ func (s ListIdentityPoolsOutput) String() string {
 // GoString returns the string representation
 func (s ListIdentityPoolsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIdentityPoolsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityPools sets the IdentityPools field's value.
@@ -2257,6 +2381,8 @@ func (s *LookupDeveloperIdentityInput) SetNextToken(v string) *LookupDeveloperId
 type LookupDeveloperIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// This is the list of developer user identifiers associated with an identity
 	// ID. Cognito supports the association of multiple developer user identifiers
 	// with an identity ID.
@@ -2282,6 +2408,11 @@ func (s LookupDeveloperIdentityOutput) String() string {
 // GoString returns the string representation
 func (s LookupDeveloperIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s LookupDeveloperIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeveloperUserIdentifierList sets the DeveloperUserIdentifierList field's value.
@@ -2506,6 +2637,8 @@ func (s *MergeDeveloperIdentitiesInput) SetSourceUserIdentifier(v string) *Merge
 type MergeDeveloperIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string `min:"1" type:"string"`
 }
@@ -2518,6 +2651,11 @@ func (s MergeDeveloperIdentitiesOutput) String() string {
 // GoString returns the string representation
 func (s MergeDeveloperIdentitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s MergeDeveloperIdentitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityId sets the IdentityId field's value.
@@ -2796,6 +2934,8 @@ func (s *SetIdentityPoolRolesInput) SetRoles(v map[string]string) *SetIdentityPo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/SetIdentityPoolRolesOutput
 type SetIdentityPoolRolesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2806,6 +2946,11 @@ func (s SetIdentityPoolRolesOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityPoolRolesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityPoolRolesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input to the UnlinkDeveloperIdentity action.
@@ -2909,6 +3054,8 @@ func (s *UnlinkDeveloperIdentityInput) SetIdentityPoolId(v string) *UnlinkDevelo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentityOutput
 type UnlinkDeveloperIdentityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2919,6 +3066,11 @@ func (s UnlinkDeveloperIdentityOutput) String() string {
 // GoString returns the string representation
 func (s UnlinkDeveloperIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnlinkDeveloperIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input to the UnlinkIdentity action.
@@ -2998,6 +3150,8 @@ func (s *UnlinkIdentityInput) SetLoginsToRemove(v []string) *UnlinkIdentityInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkIdentityOutput
 type UnlinkIdentityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3008,6 +3162,11 @@ func (s UnlinkIdentityOutput) String() string {
 // GoString returns the string representation
 func (s UnlinkIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnlinkIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
@@ -3049,6 +3208,8 @@ func (s *UnprocessedIdentityId) SetIdentityId(v string) *UnprocessedIdentityId {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UpdateIdentityPoolInput
 type UpdateIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// TRUE if the identity pool supports unauthenticated logins.
 	//
@@ -3128,6 +3289,11 @@ func (s *UpdateIdentityPoolOutput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateIdentityPoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAllowUnauthenticatedIdentities sets the AllowUnauthenticatedIdentities field's value.

@@ -53,9 +53,12 @@ func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) PutEventsReque
 		input = &PutEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventsOutput{})
+	output := &PutEventsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutEventsRequest{Request: req, Input: input}
 }
 
@@ -243,6 +246,8 @@ func (s *PutEventsInput) SetEvents(v []Event) *PutEventsInput {
 
 type PutEventsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -253,6 +258,11 @@ func (s PutEventsOutput) String() string {
 // GoString returns the string representation
 func (s PutEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes the session. Session information is required on ALL events.

@@ -71,7 +71,10 @@ func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToR
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	output := &AddTagsToResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -118,7 +121,10 @@ func (c *SSM) CancelCommandRequest(input *CancelCommandInput) CancelCommandReque
 		input = &CancelCommandInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelCommandOutput{})
+	output := &CancelCommandOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelCommandRequest{Request: req, Input: input}
 }
 
@@ -168,7 +174,10 @@ func (c *SSM) CreateActivationRequest(input *CreateActivationInput) CreateActiva
 		input = &CreateActivationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateActivationOutput{})
+	output := &CreateActivationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateActivationRequest{Request: req, Input: input}
 }
 
@@ -222,7 +231,10 @@ func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) CreateAsso
 		input = &CreateAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssociationOutput{})
+	output := &CreateAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAssociationRequest{Request: req, Input: input}
 }
 
@@ -276,7 +288,10 @@ func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) 
 		input = &CreateAssociationBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssociationBatchOutput{})
+	output := &CreateAssociationBatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAssociationBatchRequest{Request: req, Input: input}
 }
 
@@ -325,7 +340,10 @@ func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) CreateDocumentRe
 		input = &CreateDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDocumentOutput{})
+	output := &CreateDocumentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDocumentRequest{Request: req, Input: input}
 }
 
@@ -371,7 +389,10 @@ func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput
 		input = &CreateMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMaintenanceWindowOutput{})
+	output := &CreateMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -417,7 +438,10 @@ func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) Create
 		input = &CreatePatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePatchBaselineOutput{})
+	output := &CreatePatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -474,7 +498,10 @@ func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) 
 		input = &CreateResourceDataSyncInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateResourceDataSyncOutput{})
+	output := &CreateResourceDataSyncOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateResourceDataSyncRequest{Request: req, Input: input}
 }
 
@@ -523,7 +550,10 @@ func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) DeleteActiva
 		input = &DeleteActivationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteActivationOutput{})
+	output := &DeleteActivationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteActivationRequest{Request: req, Input: input}
 }
 
@@ -574,7 +604,10 @@ func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteAsso
 		input = &DeleteAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssociationOutput{})
+	output := &DeleteAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAssociationRequest{Request: req, Input: input}
 }
 
@@ -624,7 +657,10 @@ func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumentRe
 		input = &DeleteDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentOutput{})
+	output := &DeleteDocumentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDocumentRequest{Request: req, Input: input}
 }
 
@@ -670,7 +706,10 @@ func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput
 		input = &DeleteMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMaintenanceWindowOutput{})
+	output := &DeleteMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -716,7 +755,10 @@ func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) DeleteParamete
 		input = &DeleteParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteParameterOutput{})
+	output := &DeleteParameterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteParameterRequest{Request: req, Input: input}
 }
 
@@ -763,7 +805,10 @@ func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) DeleteParame
 		input = &DeleteParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteParametersOutput{})
+	output := &DeleteParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteParametersRequest{Request: req, Input: input}
 }
 
@@ -809,7 +854,10 @@ func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) Delete
 		input = &DeletePatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePatchBaselineOutput{})
+	output := &DeletePatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -858,7 +906,10 @@ func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) 
 		input = &DeleteResourceDataSyncInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceDataSyncOutput{})
+	output := &DeleteResourceDataSyncOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteResourceDataSyncRequest{Request: req, Input: input}
 }
 
@@ -906,7 +957,10 @@ func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceI
 		input = &DeregisterManagedInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterManagedInstanceOutput{})
+	output := &DeregisterManagedInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterManagedInstanceRequest{Request: req, Input: input}
 }
 
@@ -952,7 +1006,10 @@ func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatch
 		input = &DeregisterPatchBaselineForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterPatchBaselineForPatchGroupOutput{})
+	output := &DeregisterPatchBaselineForPatchGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterPatchBaselineForPatchGroupRequest{Request: req, Input: input}
 }
 
@@ -998,7 +1055,10 @@ func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTarg
 		input = &DeregisterTargetFromMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterTargetFromMaintenanceWindowOutput{})
+	output := &DeregisterTargetFromMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterTargetFromMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -1044,7 +1104,10 @@ func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFr
 		input = &DeregisterTaskFromMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterTaskFromMaintenanceWindowOutput{})
+	output := &DeregisterTaskFromMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterTaskFromMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -1098,7 +1161,10 @@ func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) Descri
 		input = &DescribeActivationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivationsOutput{})
+	output := &DescribeActivationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeActivationsRequest{Request: req, Input: input}
 }
 
@@ -1195,7 +1261,10 @@ func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) Descri
 		input = &DescribeAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssociationOutput{})
+	output := &DescribeAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAssociationRequest{Request: req, Input: input}
 }
 
@@ -1241,7 +1310,10 @@ func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecu
 		input = &DescribeAutomationExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutomationExecutionsOutput{})
+	output := &DescribeAutomationExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAutomationExecutionsRequest{Request: req, Input: input}
 }
 
@@ -1287,7 +1359,10 @@ func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInp
 		input = &DescribeAvailablePatchesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAvailablePatchesOutput{})
+	output := &DescribeAvailablePatchesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAvailablePatchesRequest{Request: req, Input: input}
 }
 
@@ -1333,7 +1408,10 @@ func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeDocu
 		input = &DescribeDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDocumentOutput{})
+	output := &DescribeDocumentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDocumentRequest{Request: req, Input: input}
 }
 
@@ -1381,7 +1459,10 @@ func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissio
 		input = &DescribeDocumentPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDocumentPermissionOutput{})
+	output := &DescribeDocumentPermissionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDocumentPermissionRequest{Request: req, Input: input}
 }
 
@@ -1427,7 +1508,10 @@ func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffect
 		input = &DescribeEffectiveInstanceAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEffectiveInstanceAssociationsOutput{})
+	output := &DescribeEffectiveInstanceAssociationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEffectiveInstanceAssociationsRequest{Request: req, Input: input}
 }
 
@@ -1475,7 +1559,10 @@ func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEff
 		input = &DescribeEffectivePatchesForPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEffectivePatchesForPatchBaselineOutput{})
+	output := &DescribeEffectivePatchesForPatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEffectivePatchesForPatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -1521,7 +1608,10 @@ func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceA
 		input = &DescribeInstanceAssociationsStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceAssociationsStatusOutput{})
+	output := &DescribeInstanceAssociationsStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstanceAssociationsStatusRequest{Request: req, Input: input}
 }
 
@@ -1578,7 +1668,10 @@ func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformat
 		input = &DescribeInstanceInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceInformationOutput{})
+	output := &DescribeInstanceInformationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstanceInformationRequest{Request: req, Input: input}
 }
 
@@ -1674,7 +1767,10 @@ func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchSta
 		input = &DescribeInstancePatchStatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancePatchStatesOutput{})
+	output := &DescribeInstancePatchStatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancePatchStatesRequest{Request: req, Input: input}
 }
 
@@ -1721,7 +1817,10 @@ func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeIns
 		input = &DescribeInstancePatchStatesForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancePatchStatesForPatchGroupOutput{})
+	output := &DescribeInstancePatchStatesForPatchGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancePatchStatesForPatchGroupRequest{Request: req, Input: input}
 }
 
@@ -1768,7 +1867,10 @@ func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput
 		input = &DescribeInstancePatchesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancePatchesOutput{})
+	output := &DescribeInstancePatchesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancePatchesRequest{Request: req, Input: input}
 }
 
@@ -1815,7 +1917,10 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *De
 		input = &DescribeMaintenanceWindowExecutionTaskInvocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionTaskInvocationsOutput{})
+	output := &DescribeMaintenanceWindowExecutionTaskInvocationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceWindowExecutionTaskInvocationsRequest{Request: req, Input: input}
 }
 
@@ -1861,7 +1966,10 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMain
 		input = &DescribeMaintenanceWindowExecutionTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionTasksOutput{})
+	output := &DescribeMaintenanceWindowExecutionTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceWindowExecutionTasksRequest{Request: req, Input: input}
 }
 
@@ -1909,7 +2017,10 @@ func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintena
 		input = &DescribeMaintenanceWindowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionsOutput{})
+	output := &DescribeMaintenanceWindowExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceWindowExecutionsRequest{Request: req, Input: input}
 }
 
@@ -1955,7 +2066,10 @@ func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenance
 		input = &DescribeMaintenanceWindowTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowTargetsOutput{})
+	output := &DescribeMaintenanceWindowTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceWindowTargetsRequest{Request: req, Input: input}
 }
 
@@ -2001,7 +2115,10 @@ func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWi
 		input = &DescribeMaintenanceWindowTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowTasksOutput{})
+	output := &DescribeMaintenanceWindowTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceWindowTasksRequest{Request: req, Input: input}
 }
 
@@ -2047,7 +2164,10 @@ func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindow
 		input = &DescribeMaintenanceWindowsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowsOutput{})
+	output := &DescribeMaintenanceWindowsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMaintenanceWindowsRequest{Request: req, Input: input}
 }
 
@@ -2107,7 +2227,10 @@ func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) Describe
 		input = &DescribeParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeParametersOutput{})
+	output := &DescribeParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeParametersRequest{Request: req, Input: input}
 }
 
@@ -2203,7 +2326,10 @@ func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) 
 		input = &DescribePatchBaselinesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePatchBaselinesOutput{})
+	output := &DescribePatchBaselinesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePatchBaselinesRequest{Request: req, Input: input}
 }
 
@@ -2249,7 +2375,10 @@ func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput
 		input = &DescribePatchGroupStateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePatchGroupStateOutput{})
+	output := &DescribePatchGroupStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePatchGroupStateRequest{Request: req, Input: input}
 }
 
@@ -2295,7 +2424,10 @@ func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) Descri
 		input = &DescribePatchGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePatchGroupsOutput{})
+	output := &DescribePatchGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePatchGroupsRequest{Request: req, Input: input}
 }
 
@@ -2341,7 +2473,10 @@ func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) 
 		input = &GetAutomationExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAutomationExecutionOutput{})
+	output := &GetAutomationExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAutomationExecutionRequest{Request: req, Input: input}
 }
 
@@ -2388,7 +2523,10 @@ func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) GetC
 		input = &GetCommandInvocationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCommandInvocationOutput{})
+	output := &GetCommandInvocationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCommandInvocationRequest{Request: req, Input: input}
 }
 
@@ -2436,7 +2574,10 @@ func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput
 		input = &GetDefaultPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDefaultPatchBaselineOutput{})
+	output := &GetDefaultPatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDefaultPatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -2483,7 +2624,10 @@ func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployableP
 		input = &GetDeployablePatchSnapshotForInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeployablePatchSnapshotForInstanceOutput{})
+	output := &GetDeployablePatchSnapshotForInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeployablePatchSnapshotForInstanceRequest{Request: req, Input: input}
 }
 
@@ -2529,7 +2673,10 @@ func (c *SSM) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest {
 		input = &GetDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentOutput{})
+	output := &GetDocumentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentRequest{Request: req, Input: input}
 }
 
@@ -2575,7 +2722,10 @@ func (c *SSM) GetInventoryRequest(input *GetInventoryInput) GetInventoryRequest 
 		input = &GetInventoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInventoryOutput{})
+	output := &GetInventoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInventoryRequest{Request: req, Input: input}
 }
 
@@ -2622,7 +2772,10 @@ func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetInven
 		input = &GetInventorySchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInventorySchemaOutput{})
+	output := &GetInventorySchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInventorySchemaRequest{Request: req, Input: input}
 }
 
@@ -2668,7 +2821,10 @@ func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) GetM
 		input = &GetMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMaintenanceWindowOutput{})
+	output := &GetMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -2715,7 +2871,10 @@ func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowEx
 		input = &GetMaintenanceWindowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionOutput{})
+	output := &GetMaintenanceWindowExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMaintenanceWindowExecutionRequest{Request: req, Input: input}
 }
 
@@ -2762,7 +2921,10 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWind
 		input = &GetMaintenanceWindowExecutionTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionTaskOutput{})
+	output := &GetMaintenanceWindowExecutionTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMaintenanceWindowExecutionTaskRequest{Request: req, Input: input}
 }
 
@@ -2809,7 +2971,10 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaint
 		input = &GetMaintenanceWindowExecutionTaskInvocationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionTaskInvocationOutput{})
+	output := &GetMaintenanceWindowExecutionTaskInvocationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMaintenanceWindowExecutionTaskInvocationRequest{Request: req, Input: input}
 }
 
@@ -2855,7 +3020,10 @@ func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInp
 		input = &GetMaintenanceWindowTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMaintenanceWindowTaskOutput{})
+	output := &GetMaintenanceWindowTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMaintenanceWindowTaskRequest{Request: req, Input: input}
 }
 
@@ -2901,7 +3069,10 @@ func (c *SSM) GetParameterRequest(input *GetParameterInput) GetParameterRequest 
 		input = &GetParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParameterOutput{})
+	output := &GetParameterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetParameterRequest{Request: req, Input: input}
 }
 
@@ -2953,7 +3124,10 @@ func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetPar
 		input = &GetParameterHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParameterHistoryOutput{})
+	output := &GetParameterHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetParameterHistoryRequest{Request: req, Input: input}
 }
 
@@ -3049,7 +3223,10 @@ func (c *SSM) GetParametersRequest(input *GetParametersInput) GetParametersReque
 		input = &GetParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParametersOutput{})
+	output := &GetParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetParametersRequest{Request: req, Input: input}
 }
 
@@ -3110,7 +3287,10 @@ func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) GetPar
 		input = &GetParametersByPathInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParametersByPathOutput{})
+	output := &GetParametersByPathOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetParametersByPathRequest{Request: req, Input: input}
 }
 
@@ -3206,7 +3386,10 @@ func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) GetPatchBase
 		input = &GetPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPatchBaselineOutput{})
+	output := &GetPatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -3253,7 +3436,10 @@ func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPat
 		input = &GetPatchBaselineForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPatchBaselineForPatchGroupOutput{})
+	output := &GetPatchBaselineForPatchGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPatchBaselineForPatchGroupRequest{Request: req, Input: input}
 }
 
@@ -3299,7 +3485,10 @@ func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput
 		input = &ListAssociationVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociationVersionsOutput{})
+	output := &ListAssociationVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssociationVersionsRequest{Request: req, Input: input}
 }
 
@@ -3351,7 +3540,10 @@ func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) ListAssociat
 		input = &ListAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociationsOutput{})
+	output := &ListAssociationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssociationsRequest{Request: req, Input: input}
 }
 
@@ -3457,7 +3649,10 @@ func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) 
 		input = &ListCommandInvocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCommandInvocationsOutput{})
+	output := &ListCommandInvocationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCommandInvocationsRequest{Request: req, Input: input}
 }
 
@@ -3559,7 +3754,10 @@ func (c *SSM) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest 
 		input = &ListCommandsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCommandsOutput{})
+	output := &ListCommandsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCommandsRequest{Request: req, Input: input}
 }
 
@@ -3658,7 +3856,10 @@ func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) ListCo
 		input = &ListComplianceItemsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListComplianceItemsOutput{})
+	output := &ListComplianceItemsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListComplianceItemsRequest{Request: req, Input: input}
 }
 
@@ -3706,7 +3907,10 @@ func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput
 		input = &ListComplianceSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListComplianceSummariesOutput{})
+	output := &ListComplianceSummariesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListComplianceSummariesRequest{Request: req, Input: input}
 }
 
@@ -3752,7 +3956,10 @@ func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) List
 		input = &ListDocumentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDocumentVersionsOutput{})
+	output := &ListDocumentVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDocumentVersionsRequest{Request: req, Input: input}
 }
 
@@ -3804,7 +4011,10 @@ func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsReque
 		input = &ListDocumentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDocumentsOutput{})
+	output := &ListDocumentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDocumentsRequest{Request: req, Input: input}
 }
 
@@ -3900,7 +4110,10 @@ func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) List
 		input = &ListInventoryEntriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInventoryEntriesOutput{})
+	output := &ListInventoryEntriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInventoryEntriesRequest{Request: req, Input: input}
 }
 
@@ -3948,7 +4161,10 @@ func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplian
 		input = &ListResourceComplianceSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceComplianceSummariesOutput{})
+	output := &ListResourceComplianceSummariesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourceComplianceSummariesRequest{Request: req, Input: input}
 }
 
@@ -4003,7 +4219,10 @@ func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) List
 		input = &ListResourceDataSyncInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceDataSyncOutput{})
+	output := &ListResourceDataSyncOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourceDataSyncRequest{Request: req, Input: input}
 }
 
@@ -4049,7 +4268,10 @@ func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTa
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -4098,7 +4320,10 @@ func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInp
 		input = &ModifyDocumentPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDocumentPermissionOutput{})
+	output := &ModifyDocumentPermissionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDocumentPermissionRequest{Request: req, Input: input}
 }
 
@@ -4148,7 +4373,10 @@ func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) PutCompl
 		input = &PutComplianceItemsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutComplianceItemsOutput{})
+	output := &PutComplianceItemsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutComplianceItemsRequest{Request: req, Input: input}
 }
 
@@ -4196,7 +4424,10 @@ func (c *SSM) PutInventoryRequest(input *PutInventoryInput) PutInventoryRequest 
 		input = &PutInventoryInput{}
 	}
 
-	req := c.newRequest(op, input, &PutInventoryOutput{})
+	output := &PutInventoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutInventoryRequest{Request: req, Input: input}
 }
 
@@ -4242,7 +4473,10 @@ func (c *SSM) PutParameterRequest(input *PutParameterInput) PutParameterRequest 
 		input = &PutParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &PutParameterOutput{})
+	output := &PutParameterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutParameterRequest{Request: req, Input: input}
 }
 
@@ -4288,7 +4522,10 @@ func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBas
 		input = &RegisterDefaultPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterDefaultPatchBaselineOutput{})
+	output := &RegisterDefaultPatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterDefaultPatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -4334,7 +4571,10 @@ func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBase
 		input = &RegisterPatchBaselineForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterPatchBaselineForPatchGroupOutput{})
+	output := &RegisterPatchBaselineForPatchGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterPatchBaselineForPatchGroupRequest{Request: req, Input: input}
 }
 
@@ -4380,7 +4620,10 @@ func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWi
 		input = &RegisterTargetWithMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterTargetWithMaintenanceWindowOutput{})
+	output := &RegisterTargetWithMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterTargetWithMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -4426,7 +4669,10 @@ func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMa
 		input = &RegisterTaskWithMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterTaskWithMaintenanceWindowOutput{})
+	output := &RegisterTaskWithMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterTaskWithMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -4472,7 +4718,10 @@ func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) 
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -4519,7 +4768,10 @@ func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) Send
 		input = &SendAutomationSignalInput{}
 	}
 
-	req := c.newRequest(op, input, &SendAutomationSignalOutput{})
+	output := &SendAutomationSignalOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendAutomationSignalRequest{Request: req, Input: input}
 }
 
@@ -4565,7 +4817,10 @@ func (c *SSM) SendCommandRequest(input *SendCommandInput) SendCommandRequest {
 		input = &SendCommandInput{}
 	}
 
-	req := c.newRequest(op, input, &SendCommandOutput{})
+	output := &SendCommandOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendCommandRequest{Request: req, Input: input}
 }
 
@@ -4611,7 +4866,10 @@ func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInp
 		input = &StartAutomationExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAutomationExecutionOutput{})
+	output := &StartAutomationExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartAutomationExecutionRequest{Request: req, Input: input}
 }
 
@@ -4657,7 +4915,10 @@ func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput
 		input = &StopAutomationExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopAutomationExecutionOutput{})
+	output := &StopAutomationExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopAutomationExecutionRequest{Request: req, Input: input}
 }
 
@@ -4704,7 +4965,10 @@ func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateAsso
 		input = &UpdateAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssociationOutput{})
+	output := &UpdateAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAssociationRequest{Request: req, Input: input}
 }
 
@@ -4751,7 +5015,10 @@ func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput
 		input = &UpdateAssociationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssociationStatusOutput{})
+	output := &UpdateAssociationStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAssociationStatusRequest{Request: req, Input: input}
 }
 
@@ -4797,7 +5064,10 @@ func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumentRe
 		input = &UpdateDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentOutput{})
+	output := &UpdateDocumentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDocumentRequest{Request: req, Input: input}
 }
 
@@ -4843,7 +5113,10 @@ func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVe
 		input = &UpdateDocumentDefaultVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentDefaultVersionOutput{})
+	output := &UpdateDocumentDefaultVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDocumentDefaultVersionRequest{Request: req, Input: input}
 }
 
@@ -4889,7 +5162,10 @@ func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput
 		input = &UpdateMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMaintenanceWindowOutput{})
+	output := &UpdateMaintenanceWindowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMaintenanceWindowRequest{Request: req, Input: input}
 }
 
@@ -4951,7 +5227,10 @@ func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindo
 		input = &UpdateMaintenanceWindowTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMaintenanceWindowTargetOutput{})
+	output := &UpdateMaintenanceWindowTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMaintenanceWindowTargetRequest{Request: req, Input: input}
 }
 
@@ -5016,7 +5295,10 @@ func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowT
 		input = &UpdateMaintenanceWindowTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMaintenanceWindowTaskOutput{})
+	output := &UpdateMaintenanceWindowTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMaintenanceWindowTaskRequest{Request: req, Input: input}
 }
 
@@ -5063,7 +5345,10 @@ func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleI
 		input = &UpdateManagedInstanceRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateManagedInstanceRoleOutput{})
+	output := &UpdateManagedInstanceRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateManagedInstanceRoleRequest{Request: req, Input: input}
 }
 
@@ -5110,7 +5395,10 @@ func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) Update
 		input = &UpdatePatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePatchBaselineOutput{})
+	output := &UpdatePatchBaselineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePatchBaselineRequest{Request: req, Input: input}
 }
 
@@ -5296,6 +5584,8 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResourceResult
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5306,6 +5596,11 @@ func (s AddTagsToResourceOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an association of a Systems Manager document and an instance.
@@ -6199,6 +6494,8 @@ func (s *CancelCommandInput) SetInstanceIds(v []string) *CancelCommandInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommandResult
 type CancelCommandOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6209,6 +6506,11 @@ func (s CancelCommandOutput) String() string {
 // GoString returns the string representation
 func (s CancelCommandOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelCommandOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a command request.
@@ -7394,6 +7696,8 @@ func (s *CreateActivationInput) SetRegistrationLimit(v int64) *CreateActivationI
 type CreateActivationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The code the system generates when it processes the activation. The activation
 	// code functions like a password to validate the activation ID.
 	ActivationCode *string `min:"20" type:"string"`
@@ -7411,6 +7715,11 @@ func (s CreateActivationOutput) String() string {
 // GoString returns the string representation
 func (s CreateActivationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateActivationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivationCode sets the ActivationCode field's value.
@@ -7479,6 +7788,8 @@ func (s *CreateAssociationBatchInput) SetEntries(v []CreateAssociationBatchReque
 type CreateAssociationBatchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the associations that failed.
 	Failed []FailedCreateAssociation `locationNameList:"FailedCreateAssociationEntry" type:"list"`
 
@@ -7494,6 +7805,11 @@ func (s CreateAssociationBatchOutput) String() string {
 // GoString returns the string representation
 func (s CreateAssociationBatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAssociationBatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailed sets the Failed field's value.
@@ -7750,6 +8066,8 @@ func (s *CreateAssociationInput) SetTargets(v []Target) *CreateAssociationInput 
 type CreateAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the association.
 	AssociationDescription *AssociationDescription `type:"structure"`
 }
@@ -7762,6 +8080,11 @@ func (s CreateAssociationOutput) String() string {
 // GoString returns the string representation
 func (s CreateAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationDescription sets the AssociationDescription field's value.
@@ -7842,6 +8165,8 @@ func (s *CreateDocumentInput) SetName(v string) *CreateDocumentInput {
 type CreateDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Systems Manager document.
 	DocumentDescription *DocumentDescription `type:"structure"`
 }
@@ -7854,6 +8179,11 @@ func (s CreateDocumentOutput) String() string {
 // GoString returns the string representation
 func (s CreateDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocumentDescription sets the DocumentDescription field's value.
@@ -8007,6 +8337,8 @@ func (s *CreateMaintenanceWindowInput) SetSchedule(v string) *CreateMaintenanceW
 type CreateMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the created Maintenance Window.
 	WindowId *string `min:"20" type:"string"`
 }
@@ -8019,6 +8351,11 @@ func (s CreateMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s CreateMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWindowId sets the WindowId field's value.
@@ -8167,6 +8504,8 @@ func (s *CreatePatchBaselineInput) SetRejectedPatches(v []string) *CreatePatchBa
 type CreatePatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the created patch baseline.
 	BaselineId *string `min:"20" type:"string"`
 }
@@ -8179,6 +8518,11 @@ func (s CreatePatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s CreatePatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -8253,6 +8597,8 @@ func (s *CreateResourceDataSyncInput) SetSyncName(v string) *CreateResourceDataS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSyncResult
 type CreateResourceDataSyncOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8263,6 +8609,11 @@ func (s CreateResourceDataSyncOutput) String() string {
 // GoString returns the string representation
 func (s CreateResourceDataSyncOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateResourceDataSyncOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivationRequest
@@ -8308,6 +8659,8 @@ func (s *DeleteActivationInput) SetActivationId(v string) *DeleteActivationInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivationResult
 type DeleteActivationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8318,6 +8671,11 @@ func (s DeleteActivationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteActivationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteActivationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociationRequest
@@ -8365,6 +8723,8 @@ func (s *DeleteAssociationInput) SetName(v string) *DeleteAssociationInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociationResult
 type DeleteAssociationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8375,6 +8735,11 @@ func (s DeleteAssociationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentRequest
@@ -8420,6 +8785,8 @@ func (s *DeleteDocumentInput) SetName(v string) *DeleteDocumentInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentResult
 type DeleteDocumentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8430,6 +8797,11 @@ func (s DeleteDocumentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowRequest
@@ -8479,6 +8851,8 @@ func (s *DeleteMaintenanceWindowInput) SetWindowId(v string) *DeleteMaintenanceW
 type DeleteMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the deleted Maintenance Window.
 	WindowId *string `min:"20" type:"string"`
 }
@@ -8491,6 +8865,11 @@ func (s DeleteMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWindowId sets the WindowId field's value.
@@ -8545,6 +8924,8 @@ func (s *DeleteParameterInput) SetName(v string) *DeleteParameterInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameterResult
 type DeleteParameterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8555,6 +8936,11 @@ func (s DeleteParameterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteParameterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteParameterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParametersRequest
@@ -8604,6 +8990,8 @@ func (s *DeleteParametersInput) SetNames(v []string) *DeleteParametersInput {
 type DeleteParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of the deleted parameters.
 	DeletedParameters []string `min:"1" type:"list"`
 
@@ -8620,6 +9008,11 @@ func (s DeleteParametersOutput) String() string {
 // GoString returns the string representation
 func (s DeleteParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletedParameters sets the DeletedParameters field's value.
@@ -8681,6 +9074,8 @@ func (s *DeletePatchBaselineInput) SetBaselineId(v string) *DeletePatchBaselineI
 type DeletePatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the deleted patch baseline.
 	BaselineId *string `min:"20" type:"string"`
 }
@@ -8693,6 +9088,11 @@ func (s DeletePatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s DeletePatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -8747,6 +9147,8 @@ func (s *DeleteResourceDataSyncInput) SetSyncName(v string) *DeleteResourceDataS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSyncResult
 type DeleteResourceDataSyncOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8757,6 +9159,11 @@ func (s DeleteResourceDataSyncOutput) String() string {
 // GoString returns the string representation
 func (s DeleteResourceDataSyncOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteResourceDataSyncOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstanceRequest
@@ -8803,6 +9210,8 @@ func (s *DeregisterManagedInstanceInput) SetInstanceId(v string) *DeregisterMana
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstanceResult
 type DeregisterManagedInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8813,6 +9222,11 @@ func (s DeregisterManagedInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterManagedInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterManagedInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroupRequest
@@ -8880,6 +9294,8 @@ func (s *DeregisterPatchBaselineForPatchGroupInput) SetPatchGroup(v string) *Der
 type DeregisterPatchBaselineForPatchGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the patch baseline the patch group was deregistered from.
 	BaselineId *string `min:"20" type:"string"`
 
@@ -8895,6 +9311,11 @@ func (s DeregisterPatchBaselineForPatchGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterPatchBaselineForPatchGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterPatchBaselineForPatchGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -8985,6 +9406,8 @@ func (s *DeregisterTargetFromMaintenanceWindowInput) SetWindowTargetId(v string)
 type DeregisterTargetFromMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the Maintenance Window the target was removed from.
 	WindowId *string `min:"20" type:"string"`
 
@@ -9000,6 +9423,11 @@ func (s DeregisterTargetFromMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterTargetFromMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterTargetFromMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWindowId sets the WindowId field's value.
@@ -9079,6 +9507,8 @@ func (s *DeregisterTaskFromMaintenanceWindowInput) SetWindowTaskId(v string) *De
 type DeregisterTaskFromMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the Maintenance Window the task was removed from.
 	WindowId *string `min:"20" type:"string"`
 
@@ -9094,6 +9524,11 @@ func (s DeregisterTaskFromMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterTaskFromMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterTaskFromMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWindowId sets the WindowId field's value.
@@ -9203,6 +9638,8 @@ func (s *DescribeActivationsInput) SetNextToken(v string) *DescribeActivationsIn
 type DescribeActivationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of activations for your AWS account.
 	ActivationList []Activation `type:"list"`
 
@@ -9219,6 +9656,11 @@ func (s DescribeActivationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeActivationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeActivationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActivationList sets the ActivationList field's value.
@@ -9291,6 +9733,8 @@ func (s *DescribeAssociationInput) SetName(v string) *DescribeAssociationInput {
 type DescribeAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the association.
 	AssociationDescription *AssociationDescription `type:"structure"`
 }
@@ -9303,6 +9747,11 @@ func (s DescribeAssociationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationDescription sets the AssociationDescription field's value.
@@ -9383,6 +9832,8 @@ func (s *DescribeAutomationExecutionsInput) SetNextToken(v string) *DescribeAuto
 type DescribeAutomationExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of details about each automation execution which has occurred which
 	// matches the filter specification, if any.
 	AutomationExecutionMetadataList []AutomationExecutionMetadata `type:"list"`
@@ -9400,6 +9851,11 @@ func (s DescribeAutomationExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAutomationExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAutomationExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutomationExecutionMetadataList sets the AutomationExecutionMetadataList field's value.
@@ -9481,6 +9937,8 @@ func (s *DescribeAvailablePatchesInput) SetNextToken(v string) *DescribeAvailabl
 type DescribeAvailablePatchesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -9497,6 +9955,11 @@ func (s DescribeAvailablePatchesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAvailablePatchesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAvailablePatchesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -9565,6 +10028,8 @@ func (s *DescribeDocumentInput) SetName(v string) *DescribeDocumentInput {
 type DescribeDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Systems Manager document.
 	Document *DocumentDescription `type:"structure"`
 }
@@ -9577,6 +10042,11 @@ func (s DescribeDocumentOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocument sets the Document field's value.
@@ -9643,6 +10113,8 @@ func (s *DescribeDocumentPermissionInput) SetPermissionType(v DocumentPermission
 type DescribeDocumentPermissionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The account IDs that have permission to use this document. The ID can be
 	// either an AWS account or All.
 	AccountIds []string `locationNameList:"AccountId" type:"list"`
@@ -9656,6 +10128,11 @@ func (s DescribeDocumentPermissionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDocumentPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDocumentPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountIds sets the AccountIds field's value.
@@ -9732,6 +10209,8 @@ func (s *DescribeEffectiveInstanceAssociationsInput) SetNextToken(v string) *Des
 type DescribeEffectiveInstanceAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The associations for the requested instance.
 	Associations []InstanceAssociation `type:"list"`
 
@@ -9748,6 +10227,11 @@ func (s DescribeEffectiveInstanceAssociationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEffectiveInstanceAssociationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEffectiveInstanceAssociationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociations sets the Associations field's value.
@@ -9831,6 +10315,8 @@ func (s *DescribeEffectivePatchesForPatchBaselineInput) SetNextToken(v string) *
 type DescribeEffectivePatchesForPatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of patches and patch status.
 	EffectivePatches []EffectivePatch `type:"list"`
 
@@ -9847,6 +10333,11 @@ func (s DescribeEffectivePatchesForPatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEffectivePatchesForPatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEffectivePatchesForPatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEffectivePatches sets the EffectivePatches field's value.
@@ -9929,6 +10420,8 @@ func (s *DescribeInstanceAssociationsStatusInput) SetNextToken(v string) *Descri
 type DescribeInstanceAssociationsStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Status information about the association.
 	InstanceAssociationStatusInfos []InstanceAssociationStatusInfo `type:"list"`
 
@@ -9945,6 +10438,11 @@ func (s DescribeInstanceAssociationsStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstanceAssociationsStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstanceAssociationsStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceAssociationStatusInfos sets the InstanceAssociationStatusInfos field's value.
@@ -10044,6 +10542,8 @@ func (s *DescribeInstanceInformationInput) SetNextToken(v string) *DescribeInsta
 type DescribeInstanceInformationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The instance information list.
 	InstanceInformationList []InstanceInformation `locationNameList:"InstanceInformation" type:"list"`
 
@@ -10060,6 +10560,11 @@ func (s DescribeInstanceInformationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstanceInformationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstanceInformationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceInformationList sets the InstanceInformationList field's value.
@@ -10166,6 +10671,8 @@ func (s *DescribeInstancePatchStatesForPatchGroupInput) SetPatchGroup(v string) 
 type DescribeInstancePatchStatesForPatchGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The high-level patch state for the requested instances.
 	InstancePatchStates []InstancePatchState `min:"1" type:"list"`
 
@@ -10182,6 +10689,11 @@ func (s DescribeInstancePatchStatesForPatchGroupOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancePatchStatesForPatchGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancePatchStatesForPatchGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstancePatchStates sets the InstancePatchStates field's value.
@@ -10262,6 +10774,8 @@ func (s *DescribeInstancePatchStatesInput) SetNextToken(v string) *DescribeInsta
 type DescribeInstancePatchStatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The high-level patch state for the requested instances.
 	InstancePatchStates []InstancePatchState `type:"list"`
 
@@ -10278,6 +10792,11 @@ func (s DescribeInstancePatchStatesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancePatchStatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancePatchStatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstancePatchStates sets the InstancePatchStates field's value.
@@ -10378,6 +10897,8 @@ func (s *DescribeInstancePatchesInput) SetNextToken(v string) *DescribeInstanceP
 type DescribeInstancePatchesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -10409,6 +10930,11 @@ func (s DescribeInstancePatchesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancePatchesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancePatchesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10531,6 +11057,8 @@ func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) SetWindowExecut
 type DescribeMaintenanceWindowExecutionTaskInvocationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -10547,6 +11075,11 @@ func (s DescribeMaintenanceWindowExecutionTaskInvocationsOutput) String() string
 // GoString returns the string representation
 func (s DescribeMaintenanceWindowExecutionTaskInvocationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowExecutionTaskInvocationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10651,6 +11184,8 @@ func (s *DescribeMaintenanceWindowExecutionTasksInput) SetWindowExecutionId(v st
 type DescribeMaintenanceWindowExecutionTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -10667,6 +11202,11 @@ func (s DescribeMaintenanceWindowExecutionTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMaintenanceWindowExecutionTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowExecutionTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10775,6 +11315,8 @@ func (s *DescribeMaintenanceWindowExecutionsInput) SetWindowId(v string) *Descri
 type DescribeMaintenanceWindowExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -10791,6 +11333,11 @@ func (s DescribeMaintenanceWindowExecutionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMaintenanceWindowExecutionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10893,6 +11440,8 @@ func (s *DescribeMaintenanceWindowTargetsInput) SetWindowId(v string) *DescribeM
 type DescribeMaintenanceWindowTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -10909,6 +11458,11 @@ func (s DescribeMaintenanceWindowTargetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMaintenanceWindowTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11011,6 +11565,8 @@ func (s *DescribeMaintenanceWindowTasksInput) SetWindowId(v string) *DescribeMai
 type DescribeMaintenanceWindowTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -11027,6 +11583,11 @@ func (s DescribeMaintenanceWindowTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMaintenanceWindowTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11111,6 +11672,8 @@ func (s *DescribeMaintenanceWindowsInput) SetNextToken(v string) *DescribeMainte
 type DescribeMaintenanceWindowsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -11127,6 +11690,11 @@ func (s DescribeMaintenanceWindowsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMaintenanceWindowsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11226,6 +11794,8 @@ func (s *DescribeParametersInput) SetParameterFilters(v []ParameterStringFilter)
 type DescribeParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -11242,6 +11812,11 @@ func (s DescribeParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11327,6 +11902,8 @@ func (s *DescribePatchBaselinesInput) SetNextToken(v string) *DescribePatchBasel
 type DescribePatchBaselinesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of PatchBaselineIdentity elements.
 	BaselineIdentities []PatchBaselineIdentity `type:"list"`
 
@@ -11343,6 +11920,11 @@ func (s DescribePatchBaselinesOutput) String() string {
 // GoString returns the string representation
 func (s DescribePatchBaselinesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePatchBaselinesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineIdentities sets the BaselineIdentities field's value.
@@ -11404,6 +11986,8 @@ func (s *DescribePatchGroupStateInput) SetPatchGroup(v string) *DescribePatchGro
 type DescribePatchGroupStateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of instances in the patch group.
 	Instances *int64 `type:"integer"`
 
@@ -11433,6 +12017,11 @@ func (s DescribePatchGroupStateOutput) String() string {
 // GoString returns the string representation
 func (s DescribePatchGroupStateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePatchGroupStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -11538,6 +12127,8 @@ func (s *DescribePatchGroupsInput) SetNextToken(v string) *DescribePatchGroupsIn
 type DescribePatchGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Each entry in the array contains:
 	//
 	// PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
@@ -11558,6 +12149,11 @@ func (s DescribePatchGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribePatchGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePatchGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMappings sets the Mappings field's value.
@@ -12264,6 +12860,8 @@ func (s *GetAutomationExecutionInput) SetAutomationExecutionId(v string) *GetAut
 type GetAutomationExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed information about the current state of an automation execution.
 	AutomationExecution *AutomationExecution `type:"structure"`
 }
@@ -12276,6 +12874,11 @@ func (s GetAutomationExecutionOutput) String() string {
 // GoString returns the string representation
 func (s GetAutomationExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAutomationExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutomationExecution sets the AutomationExecution field's value.
@@ -12361,6 +12964,8 @@ func (s *GetCommandInvocationInput) SetPluginName(v string) *GetCommandInvocatio
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationResult
 type GetCommandInvocationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The parent command ID of the invocation plugin.
 	CommandId *string `min:"36" type:"string"`
@@ -12487,6 +13092,11 @@ func (s GetCommandInvocationOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCommandInvocationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetCommandId sets the CommandId field's value.
 func (s *GetCommandInvocationOutput) SetCommandId(v string) *GetCommandInvocationOutput {
 	s.CommandId = &v
@@ -12605,6 +13215,8 @@ func (s *GetDefaultPatchBaselineInput) SetOperatingSystem(v OperatingSystem) *Ge
 type GetDefaultPatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the default patch baseline.
 	BaselineId *string `min:"20" type:"string"`
 
@@ -12620,6 +13232,11 @@ func (s GetDefaultPatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s GetDefaultPatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDefaultPatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -12697,6 +13314,8 @@ func (s *GetDeployablePatchSnapshotForInstanceInput) SetSnapshotId(v string) *Ge
 type GetDeployablePatchSnapshotForInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the instance.
 	InstanceId *string `type:"string"`
 
@@ -12719,6 +13338,11 @@ func (s GetDeployablePatchSnapshotForInstanceOutput) String() string {
 // GoString returns the string representation
 func (s GetDeployablePatchSnapshotForInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeployablePatchSnapshotForInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceId sets the InstanceId field's value.
@@ -12798,6 +13422,8 @@ func (s *GetDocumentInput) SetName(v string) *GetDocumentInput {
 type GetDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The contents of the Systems Manager document.
 	Content *string `min:"1" type:"string"`
 
@@ -12819,6 +13445,11 @@ func (s GetDocumentOutput) String() string {
 // GoString returns the string representation
 func (s GetDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContent sets the Content field's value.
@@ -12936,6 +13567,8 @@ func (s *GetInventoryInput) SetResultAttributes(v []ResultAttribute) *GetInvento
 type GetInventoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of inventory entities such as a collection of instance inventory.
 	Entities []InventoryResultEntity `locationNameList:"Entity" type:"list"`
 
@@ -12952,6 +13585,11 @@ func (s GetInventoryOutput) String() string {
 // GoString returns the string representation
 func (s GetInventoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInventoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEntities sets the Entities field's value.
@@ -13037,6 +13675,8 @@ func (s *GetInventorySchemaInput) SetTypeName(v string) *GetInventorySchemaInput
 type GetInventorySchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -13053,6 +13693,11 @@ func (s GetInventorySchemaOutput) String() string {
 // GoString returns the string representation
 func (s GetInventorySchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInventorySchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -13114,6 +13759,8 @@ func (s *GetMaintenanceWindowExecutionInput) SetWindowExecutionId(v string) *Get
 type GetMaintenanceWindowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The time the Maintenance Window finished executing.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -13141,6 +13788,11 @@ func (s GetMaintenanceWindowExecutionOutput) String() string {
 // GoString returns the string representation
 func (s GetMaintenanceWindowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMaintenanceWindowExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndTime sets the EndTime field's value.
@@ -13325,6 +13977,8 @@ func (s *GetMaintenanceWindowExecutionTaskInvocationInput) SetWindowExecutionId(
 type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The time that the task finished executing on the target.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -13373,6 +14027,11 @@ func (s GetMaintenanceWindowExecutionTaskInvocationOutput) String() string {
 // GoString returns the string representation
 func (s GetMaintenanceWindowExecutionTaskInvocationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMaintenanceWindowExecutionTaskInvocationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndTime sets the EndTime field's value.
@@ -13451,6 +14110,8 @@ func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetWindowTargetId(v 
 type GetMaintenanceWindowExecutionTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The time the task execution completed.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -13506,6 +14167,11 @@ func (s GetMaintenanceWindowExecutionTaskOutput) String() string {
 // GoString returns the string representation
 func (s GetMaintenanceWindowExecutionTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMaintenanceWindowExecutionTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndTime sets the EndTime field's value.
@@ -13633,6 +14299,8 @@ func (s *GetMaintenanceWindowInput) SetWindowId(v string) *GetMaintenanceWindowI
 type GetMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Whether targets must be registered with the Maintenance Window before tasks
 	// can be defined for those targets.
 	AllowUnassociatedTargets *bool `type:"boolean"`
@@ -13674,6 +14342,11 @@ func (s GetMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s GetMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAllowUnassociatedTargets sets the AllowUnassociatedTargets field's value.
@@ -13801,6 +14474,8 @@ func (s *GetMaintenanceWindowTaskInput) SetWindowTaskId(v string) *GetMaintenanc
 type GetMaintenanceWindowTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The retrieved task description.
 	Description *string `min:"1" type:"string"`
 
@@ -13856,6 +14531,11 @@ func (s GetMaintenanceWindowTaskOutput) String() string {
 // GoString returns the string representation
 func (s GetMaintenanceWindowTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMaintenanceWindowTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -14023,6 +14703,8 @@ func (s *GetParameterHistoryInput) SetWithDecryption(v bool) *GetParameterHistor
 type GetParameterHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
@@ -14039,6 +14721,11 @@ func (s GetParameterHistoryOutput) String() string {
 // GoString returns the string representation
 func (s GetParameterHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetParameterHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -14110,6 +14797,8 @@ func (s *GetParameterInput) SetWithDecryption(v bool) *GetParameterInput {
 type GetParameterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about a parameter.
 	Parameter *Parameter `type:"structure"`
 }
@@ -14122,6 +14811,11 @@ func (s GetParameterOutput) String() string {
 // GoString returns the string representation
 func (s GetParameterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetParameterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetParameter sets the Parameter field's value.
@@ -14238,6 +14932,8 @@ func (s *GetParametersByPathInput) SetWithDecryption(v bool) *GetParametersByPat
 type GetParametersByPathOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
 	NextToken *string `type:"string"`
@@ -14254,6 +14950,11 @@ func (s GetParametersByPathOutput) String() string {
 // GoString returns the string representation
 func (s GetParametersByPathOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetParametersByPathOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -14326,6 +15027,8 @@ func (s *GetParametersInput) SetWithDecryption(v bool) *GetParametersInput {
 type GetParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of parameters that are not formatted correctly or do not run when
 	// executed.
 	InvalidParameters []string `min:"1" type:"list"`
@@ -14342,6 +15045,11 @@ func (s GetParametersOutput) String() string {
 // GoString returns the string representation
 func (s GetParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInvalidParameters sets the InvalidParameters field's value.
@@ -14413,6 +15121,8 @@ func (s *GetPatchBaselineForPatchGroupInput) SetPatchGroup(v string) *GetPatchBa
 type GetPatchBaselineForPatchGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the patch baseline that should be used for the patch group.
 	BaselineId *string `min:"20" type:"string"`
 
@@ -14431,6 +15141,11 @@ func (s GetPatchBaselineForPatchGroupOutput) String() string {
 // GoString returns the string representation
 func (s GetPatchBaselineForPatchGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPatchBaselineForPatchGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -14498,6 +15213,8 @@ func (s *GetPatchBaselineInput) SetBaselineId(v string) *GetPatchBaselineInput {
 type GetPatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A set of rules used to include patches in the baseline.
 	ApprovalRules *PatchRuleGroup `type:"structure"`
 
@@ -14544,6 +15261,11 @@ func (s GetPatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s GetPatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApprovalRules sets the ApprovalRules field's value.
@@ -15888,6 +16610,8 @@ func (s *ListAssociationVersionsInput) SetNextToken(v string) *ListAssociationVe
 type ListAssociationVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about all versions of the association for the specified association
 	// ID.
 	AssociationVersions []AssociationVersionInfo `min:"1" type:"list"`
@@ -15905,6 +16629,11 @@ func (s ListAssociationVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListAssociationVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssociationVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationVersions sets the AssociationVersions field's value.
@@ -15991,6 +16720,8 @@ func (s *ListAssociationsInput) SetNextToken(v string) *ListAssociationsInput {
 type ListAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The associations.
 	Associations []Association `locationNameList:"Association" type:"list"`
 
@@ -16007,6 +16738,11 @@ func (s ListAssociationsOutput) String() string {
 // GoString returns the string representation
 func (s ListAssociationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssociationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociations sets the Associations field's value.
@@ -16125,6 +16861,8 @@ func (s *ListCommandInvocationsInput) SetNextToken(v string) *ListCommandInvocat
 type ListCommandInvocationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// (Optional) A list of all invocations.
 	CommandInvocations []CommandInvocation `type:"list"`
 
@@ -16141,6 +16879,11 @@ func (s ListCommandInvocationsOutput) String() string {
 // GoString returns the string representation
 func (s ListCommandInvocationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCommandInvocationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommandInvocations sets the CommandInvocations field's value.
@@ -16249,6 +16992,8 @@ func (s *ListCommandsInput) SetNextToken(v string) *ListCommandsInput {
 type ListCommandsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// (Optional) The list of commands requested by the user.
 	Commands []Command `type:"list"`
 
@@ -16265,6 +17010,11 @@ func (s ListCommandsOutput) String() string {
 // GoString returns the string representation
 func (s ListCommandsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCommandsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommands sets the Commands field's value.
@@ -16374,6 +17124,8 @@ func (s *ListComplianceItemsInput) SetResourceTypes(v []string) *ListComplianceI
 type ListComplianceItemsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of compliance information for the specified resource ID.
 	ComplianceItems []ComplianceItem `locationNameList:"Item" type:"list"`
 
@@ -16390,6 +17142,11 @@ func (s ListComplianceItemsOutput) String() string {
 // GoString returns the string representation
 func (s ListComplianceItemsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListComplianceItemsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComplianceItems sets the ComplianceItems field's value.
@@ -16473,6 +17230,8 @@ func (s *ListComplianceSummariesInput) SetNextToken(v string) *ListComplianceSum
 type ListComplianceSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of compliant and non-compliant summary counts based on compliance
 	// types. For example, this call returns State Manager associations, patches,
 	// or custom compliance types according to the filter criteria that you specified.
@@ -16491,6 +17250,11 @@ func (s ListComplianceSummariesOutput) String() string {
 // GoString returns the string representation
 func (s ListComplianceSummariesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListComplianceSummariesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComplianceSummaryItems sets the ComplianceSummaryItems field's value.
@@ -16573,6 +17337,8 @@ func (s *ListDocumentVersionsInput) SetNextToken(v string) *ListDocumentVersions
 type ListDocumentVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The document versions.
 	DocumentVersions []DocumentVersionInfo `min:"1" type:"list"`
 
@@ -16589,6 +17355,11 @@ func (s ListDocumentVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListDocumentVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDocumentVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocumentVersions sets the DocumentVersions field's value.
@@ -16691,6 +17462,8 @@ func (s *ListDocumentsInput) SetNextToken(v string) *ListDocumentsInput {
 type ListDocumentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of the Systems Manager documents.
 	DocumentIdentifiers []DocumentIdentifier `locationNameList:"DocumentIdentifier" type:"list"`
 
@@ -16707,6 +17480,11 @@ func (s ListDocumentsOutput) String() string {
 // GoString returns the string representation
 func (s ListDocumentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDocumentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocumentIdentifiers sets the DocumentIdentifiers field's value.
@@ -16826,6 +17604,8 @@ func (s *ListInventoryEntriesInput) SetTypeName(v string) *ListInventoryEntriesI
 type ListInventoryEntriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The time that inventory information was collected for the instance(s).
 	CaptureTime *string `type:"string"`
 
@@ -16854,6 +17634,11 @@ func (s ListInventoryEntriesOutput) String() string {
 // GoString returns the string representation
 func (s ListInventoryEntriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInventoryEntriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCaptureTime sets the CaptureTime field's value.
@@ -16960,6 +17745,8 @@ func (s *ListResourceComplianceSummariesInput) SetNextToken(v string) *ListResou
 type ListResourceComplianceSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
 	NextToken *string `type:"string"`
@@ -16978,6 +17765,11 @@ func (s ListResourceComplianceSummariesOutput) String() string {
 // GoString returns the string representation
 func (s ListResourceComplianceSummariesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceComplianceSummariesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -17044,6 +17836,8 @@ func (s *ListResourceDataSyncInput) SetNextToken(v string) *ListResourceDataSync
 type ListResourceDataSyncOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
 	NextToken *string `type:"string"`
@@ -17060,6 +17854,11 @@ func (s ListResourceDataSyncOutput) String() string {
 // GoString returns the string representation
 func (s ListResourceDataSyncOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceDataSyncOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -17132,6 +17931,8 @@ func (s *ListTagsForResourceInput) SetResourceType(v ResourceTypeForTagging) *Li
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of tags.
 	TagList []Tag `type:"list"`
 }
@@ -17144,6 +17945,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -18315,6 +19121,8 @@ func (s *ModifyDocumentPermissionInput) SetPermissionType(v DocumentPermissionTy
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermissionResponse
 type ModifyDocumentPermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -18325,6 +19133,11 @@ func (s ModifyDocumentPermissionOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDocumentPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDocumentPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A summary of resources that are not compliant. The summary is organized according
@@ -19535,6 +20348,8 @@ func (s *PutComplianceItemsInput) SetResourceType(v string) *PutComplianceItemsI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItemsResult
 type PutComplianceItemsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19545,6 +20360,11 @@ func (s PutComplianceItemsOutput) String() string {
 // GoString returns the string representation
 func (s PutComplianceItemsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutComplianceItemsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventoryRequest
@@ -19615,6 +20435,8 @@ func (s *PutInventoryInput) SetItems(v []InventoryItem) *PutInventoryInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventoryResult
 type PutInventoryOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19625,6 +20447,11 @@ func (s PutInventoryOutput) String() string {
 // GoString returns the string representation
 func (s PutInventoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutInventoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest
@@ -19751,6 +20578,8 @@ func (s *PutParameterInput) SetValue(v string) *PutParameterInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterResult
 type PutParameterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19761,6 +20590,11 @@ func (s PutParameterOutput) String() string {
 // GoString returns the string representation
 func (s PutParameterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutParameterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaselineRequest
@@ -19810,6 +20644,8 @@ func (s *RegisterDefaultPatchBaselineInput) SetBaselineId(v string) *RegisterDef
 type RegisterDefaultPatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the default patch baseline.
 	BaselineId *string `min:"20" type:"string"`
 }
@@ -19822,6 +20658,11 @@ func (s RegisterDefaultPatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s RegisterDefaultPatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterDefaultPatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -19895,6 +20736,8 @@ func (s *RegisterPatchBaselineForPatchGroupInput) SetPatchGroup(v string) *Regis
 type RegisterPatchBaselineForPatchGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the patch baseline the patch group was registered with.
 	BaselineId *string `min:"20" type:"string"`
 
@@ -19910,6 +20753,11 @@ func (s RegisterPatchBaselineForPatchGroupOutput) String() string {
 // GoString returns the string representation
 func (s RegisterPatchBaselineForPatchGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterPatchBaselineForPatchGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBaselineId sets the BaselineId field's value.
@@ -20057,6 +20905,8 @@ func (s *RegisterTargetWithMaintenanceWindowInput) SetWindowId(v string) *Regist
 type RegisterTargetWithMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the target definition in this Maintenance Window.
 	WindowTargetId *string `min:"36" type:"string"`
 }
@@ -20069,6 +20919,11 @@ func (s RegisterTargetWithMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s RegisterTargetWithMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterTargetWithMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWindowTargetId sets the WindowTargetId field's value.
@@ -20316,6 +21171,8 @@ func (s *RegisterTaskWithMaintenanceWindowInput) SetWindowId(v string) *Register
 type RegisterTaskWithMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The id of the task in the Maintenance Window.
 	WindowTaskId *string `min:"36" type:"string"`
 }
@@ -20328,6 +21185,11 @@ func (s RegisterTaskWithMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s RegisterTaskWithMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterTaskWithMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWindowTaskId sets the WindowTaskId field's value.
@@ -20408,6 +21270,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResourceResult
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -20418,6 +21282,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Compliance summary information for a specific resource.
@@ -20889,6 +21758,8 @@ func (s *SendAutomationSignalInput) SetSignalType(v SignalType) *SendAutomationS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignalResult
 type SendAutomationSignalOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -20899,6 +21770,11 @@ func (s SendAutomationSignalOutput) String() string {
 // GoString returns the string representation
 func (s SendAutomationSignalOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendAutomationSignalOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandRequest
@@ -21117,6 +21993,8 @@ func (s *SendCommandInput) SetTimeoutSeconds(v int64) *SendCommandInput {
 type SendCommandOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The request as it was received by Systems Manager. Also provides the command
 	// ID which can be used future references to this request.
 	Command *Command `type:"structure"`
@@ -21130,6 +22008,11 @@ func (s SendCommandOutput) String() string {
 // GoString returns the string representation
 func (s SendCommandOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendCommandOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommand sets the Command field's value.
@@ -21300,6 +22183,8 @@ func (s *StartAutomationExecutionInput) SetParameters(v map[string][]string) *St
 type StartAutomationExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID of a newly scheduled automation execution.
 	AutomationExecutionId *string `min:"36" type:"string"`
 }
@@ -21312,6 +22197,11 @@ func (s StartAutomationExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StartAutomationExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartAutomationExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutomationExecutionId sets the AutomationExecutionId field's value.
@@ -21485,6 +22375,8 @@ func (s *StopAutomationExecutionInput) SetAutomationExecutionId(v string) *StopA
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecutionResult
 type StopAutomationExecutionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21495,6 +22387,11 @@ func (s StopAutomationExecutionOutput) String() string {
 // GoString returns the string representation
 func (s StopAutomationExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopAutomationExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Metadata that you assign to your AWS resources. Tags enable you to categorize
@@ -21752,6 +22649,8 @@ func (s *UpdateAssociationInput) SetTargets(v []Target) *UpdateAssociationInput 
 type UpdateAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The description of the association that was updated.
 	AssociationDescription *AssociationDescription `type:"structure"`
 }
@@ -21764,6 +22663,11 @@ func (s UpdateAssociationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationDescription sets the AssociationDescription field's value.
@@ -21851,6 +22755,8 @@ func (s *UpdateAssociationStatusInput) SetName(v string) *UpdateAssociationStatu
 type UpdateAssociationStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the association.
 	AssociationDescription *AssociationDescription `type:"structure"`
 }
@@ -21863,6 +22769,11 @@ func (s UpdateAssociationStatusOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAssociationStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAssociationStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationDescription sets the AssociationDescription field's value.
@@ -21930,6 +22841,8 @@ func (s *UpdateDocumentDefaultVersionInput) SetName(v string) *UpdateDocumentDef
 type UpdateDocumentDefaultVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The description of a custom document that you want to set as the default
 	// version.
 	Description *DocumentDefaultVersionDescription `type:"structure"`
@@ -21943,6 +22856,11 @@ func (s UpdateDocumentDefaultVersionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDocumentDefaultVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDocumentDefaultVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -22022,6 +22940,8 @@ func (s *UpdateDocumentInput) SetName(v string) *UpdateDocumentInput {
 type UpdateDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the document that was updated.
 	DocumentDescription *DocumentDescription `type:"structure"`
 }
@@ -22034,6 +22954,11 @@ func (s UpdateDocumentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocumentDescription sets the DocumentDescription field's value.
@@ -22177,6 +23102,8 @@ func (s *UpdateMaintenanceWindowInput) SetWindowId(v string) *UpdateMaintenanceW
 type UpdateMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Whether targets must be registered with the Maintenance Window before tasks
 	// can be defined for those targets.
 	AllowUnassociatedTargets *bool `type:"boolean"`
@@ -22212,6 +23139,11 @@ func (s UpdateMaintenanceWindowOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMaintenanceWindowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMaintenanceWindowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAllowUnassociatedTargets sets the AllowUnassociatedTargets field's value.
@@ -22391,6 +23323,8 @@ func (s *UpdateMaintenanceWindowTargetInput) SetWindowTargetId(v string) *Update
 type UpdateMaintenanceWindowTargetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The updated description.
 	Description *string `min:"1" type:"string"`
 
@@ -22418,6 +23352,11 @@ func (s UpdateMaintenanceWindowTargetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMaintenanceWindowTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMaintenanceWindowTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -22674,6 +23613,8 @@ func (s *UpdateMaintenanceWindowTaskInput) SetWindowTaskId(v string) *UpdateMain
 type UpdateMaintenanceWindowTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The updated task description.
 	Description *string `min:"1" type:"string"`
 
@@ -22722,6 +23663,11 @@ func (s UpdateMaintenanceWindowTaskOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMaintenanceWindowTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMaintenanceWindowTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -22860,6 +23806,8 @@ func (s *UpdateManagedInstanceRoleInput) SetInstanceId(v string) *UpdateManagedI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleResult
 type UpdateManagedInstanceRoleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22870,6 +23818,11 @@ func (s UpdateManagedInstanceRoleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateManagedInstanceRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateManagedInstanceRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaselineRequest
@@ -22998,6 +23951,8 @@ func (s *UpdatePatchBaselineInput) SetRejectedPatches(v []string) *UpdatePatchBa
 type UpdatePatchBaselineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A set of rules used to include patches in the baseline.
 	ApprovalRules *PatchRuleGroup `type:"structure"`
 
@@ -23041,6 +23996,11 @@ func (s UpdatePatchBaselineOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePatchBaselineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePatchBaselineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApprovalRules sets the ApprovalRules field's value.

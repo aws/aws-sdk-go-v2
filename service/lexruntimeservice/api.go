@@ -106,7 +106,10 @@ func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) PostCont
 		input = &PostContentInput{}
 	}
 
-	req := c.newRequest(op, input, &PostContentOutput{})
+	output := &PostContentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Handlers.Sign.Remove(v4.SignRequestHandler)
 	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
 	req.Handlers.Sign.PushFrontNamed(handler)
@@ -203,7 +206,10 @@ func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) PostTextReques
 		input = &PostTextInput{}
 	}
 
-	req := c.newRequest(op, input, &PostTextOutput{})
+	output := &PostTextOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PostTextRequest{Request: req, Input: input}
 }
 
@@ -531,6 +537,8 @@ func (s *PostContentInput) SetUserId(v string) *PostContentInput {
 type PostContentOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
 
+	responseMetadata aws.Response
+
 	// The prompt (or statement) to convey to the user. This is based on the bot
 	// configuration and context. For example, if Amazon Lex did not understand
 	// the user intent, it sends the clarificationPrompt configured for the bot.
@@ -640,6 +648,11 @@ func (s PostContentOutput) String() string {
 // GoString returns the string representation
 func (s PostContentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PostContentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAudioStream sets the AudioStream field's value.
@@ -838,6 +851,8 @@ func (s *PostTextInput) SetUserId(v string) *PostTextInput {
 type PostTextOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifies the current state of the user interaction. Amazon Lex returns
 	// one of the following values as dialogState. The client can optionally use
 	// this information to customize the user interface.
@@ -932,6 +947,11 @@ func (s PostTextOutput) String() string {
 // GoString returns the string representation
 func (s PostTextOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PostTextOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDialogState sets the DialogState field's value.

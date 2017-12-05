@@ -60,7 +60,10 @@ func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDat
 		input = &GenerateDataSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateDataSetOutput{})
+	output := &GenerateDataSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GenerateDataSetRequest{Request: req, Input: input}
 }
 
@@ -116,7 +119,10 @@ func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *Star
 		input = &StartSupportDataExportInput{}
 	}
 
-	req := c.newRequest(op, input, &StartSupportDataExportOutput{})
+	output := &StartSupportDataExportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartSupportDataExportRequest{Request: req, Input: input}
 }
 
@@ -359,6 +365,8 @@ func (s *GenerateDataSetInput) SetSnsTopicArn(v string) *GenerateDataSetInput {
 type GenerateDataSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier representing a specific request to the GenerateDataSet
 	// operation. This identifier can be used to correlate a request with notifications
 	// from the SNS topic.
@@ -373,6 +381,11 @@ func (s GenerateDataSetOutput) String() string {
 // GoString returns the string representation
 func (s GenerateDataSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateDataSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSetRequestId sets the DataSetRequestId field's value.
@@ -536,6 +549,8 @@ func (s *StartSupportDataExportInput) SetSnsTopicArn(v string) *StartSupportData
 type StartSupportDataExportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier representing a specific request to the StartSupportDataExport
 	// operation. This identifier can be used to correlate a request with notifications
 	// from the SNS topic.
@@ -550,6 +565,11 @@ func (s StartSupportDataExportOutput) String() string {
 // GoString returns the string representation
 func (s StartSupportDataExportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartSupportDataExportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSetRequestId sets the DataSetRequestId field's value.

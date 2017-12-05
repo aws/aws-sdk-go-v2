@@ -54,7 +54,10 @@ func (c *CognitoIdentityProvider) AddCustomAttributesRequest(input *AddCustomAtt
 		input = &AddCustomAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &AddCustomAttributesOutput{})
+	output := &AddCustomAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddCustomAttributesRequest{Request: req, Input: input}
 }
 
@@ -102,9 +105,12 @@ func (c *CognitoIdentityProvider) AdminAddUserToGroupRequest(input *AdminAddUser
 		input = &AdminAddUserToGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminAddUserToGroupOutput{})
+	output := &AdminAddUserToGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminAddUserToGroupRequest{Request: req, Input: input}
 }
 
@@ -153,7 +159,10 @@ func (c *CognitoIdentityProvider) AdminConfirmSignUpRequest(input *AdminConfirmS
 		input = &AdminConfirmSignUpInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminConfirmSignUpOutput{})
+	output := &AdminConfirmSignUpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminConfirmSignUpRequest{Request: req, Input: input}
 }
 
@@ -205,7 +214,10 @@ func (c *CognitoIdentityProvider) AdminCreateUserRequest(input *AdminCreateUserI
 		input = &AdminCreateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminCreateUserOutput{})
+	output := &AdminCreateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminCreateUserRequest{Request: req, Input: input}
 }
 
@@ -253,9 +265,12 @@ func (c *CognitoIdentityProvider) AdminDeleteUserRequest(input *AdminDeleteUserI
 		input = &AdminDeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDeleteUserOutput{})
+	output := &AdminDeleteUserOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminDeleteUserRequest{Request: req, Input: input}
 }
 
@@ -304,7 +319,10 @@ func (c *CognitoIdentityProvider) AdminDeleteUserAttributesRequest(input *AdminD
 		input = &AdminDeleteUserAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDeleteUserAttributesOutput{})
+	output := &AdminDeleteUserAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminDeleteUserAttributesRequest{Request: req, Input: input}
 }
 
@@ -379,7 +397,10 @@ func (c *CognitoIdentityProvider) AdminDisableProviderForUserRequest(input *Admi
 		input = &AdminDisableProviderForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDisableProviderForUserOutput{})
+	output := &AdminDisableProviderForUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminDisableProviderForUserRequest{Request: req, Input: input}
 }
 
@@ -427,7 +448,10 @@ func (c *CognitoIdentityProvider) AdminDisableUserRequest(input *AdminDisableUse
 		input = &AdminDisableUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDisableUserOutput{})
+	output := &AdminDisableUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminDisableUserRequest{Request: req, Input: input}
 }
 
@@ -475,7 +499,10 @@ func (c *CognitoIdentityProvider) AdminEnableUserRequest(input *AdminEnableUserI
 		input = &AdminEnableUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminEnableUserOutput{})
+	output := &AdminEnableUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminEnableUserRequest{Request: req, Input: input}
 }
 
@@ -523,9 +550,12 @@ func (c *CognitoIdentityProvider) AdminForgetDeviceRequest(input *AdminForgetDev
 		input = &AdminForgetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminForgetDeviceOutput{})
+	output := &AdminForgetDeviceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminForgetDeviceRequest{Request: req, Input: input}
 }
 
@@ -573,7 +603,10 @@ func (c *CognitoIdentityProvider) AdminGetDeviceRequest(input *AdminGetDeviceInp
 		input = &AdminGetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminGetDeviceOutput{})
+	output := &AdminGetDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminGetDeviceRequest{Request: req, Input: input}
 }
 
@@ -622,7 +655,10 @@ func (c *CognitoIdentityProvider) AdminGetUserRequest(input *AdminGetUserInput) 
 		input = &AdminGetUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminGetUserOutput{})
+	output := &AdminGetUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminGetUserRequest{Request: req, Input: input}
 }
 
@@ -670,7 +706,10 @@ func (c *CognitoIdentityProvider) AdminInitiateAuthRequest(input *AdminInitiateA
 		input = &AdminInitiateAuthInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminInitiateAuthOutput{})
+	output := &AdminInitiateAuthOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminInitiateAuthRequest{Request: req, Input: input}
 }
 
@@ -734,7 +773,10 @@ func (c *CognitoIdentityProvider) AdminLinkProviderForUserRequest(input *AdminLi
 		input = &AdminLinkProviderForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminLinkProviderForUserOutput{})
+	output := &AdminLinkProviderForUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminLinkProviderForUserRequest{Request: req, Input: input}
 }
 
@@ -782,7 +824,10 @@ func (c *CognitoIdentityProvider) AdminListDevicesRequest(input *AdminListDevice
 		input = &AdminListDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminListDevicesOutput{})
+	output := &AdminListDevicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminListDevicesRequest{Request: req, Input: input}
 }
 
@@ -830,7 +875,10 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminList
 		input = &AdminListGroupsForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminListGroupsForUserOutput{})
+	output := &AdminListGroupsForUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminListGroupsForUserRequest{Request: req, Input: input}
 }
 
@@ -878,9 +926,12 @@ func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupRequest(input *AdminRe
 		input = &AdminRemoveUserFromGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminRemoveUserFromGroupOutput{})
+	output := &AdminRemoveUserFromGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminRemoveUserFromGroupRequest{Request: req, Input: input}
 }
 
@@ -939,7 +990,10 @@ func (c *CognitoIdentityProvider) AdminResetUserPasswordRequest(input *AdminRese
 		input = &AdminResetUserPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminResetUserPasswordOutput{})
+	output := &AdminResetUserPasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminResetUserPasswordRequest{Request: req, Input: input}
 }
 
@@ -987,7 +1041,10 @@ func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeRequest(input *Admi
 		input = &AdminRespondToAuthChallengeInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminRespondToAuthChallengeOutput{})
+	output := &AdminRespondToAuthChallengeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminRespondToAuthChallengeRequest{Request: req, Input: input}
 }
 
@@ -1035,7 +1092,10 @@ func (c *CognitoIdentityProvider) AdminSetUserSettingsRequest(input *AdminSetUse
 		input = &AdminSetUserSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminSetUserSettingsOutput{})
+	output := &AdminSetUserSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminSetUserSettingsRequest{Request: req, Input: input}
 }
 
@@ -1083,7 +1143,10 @@ func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusRequest(input *AdminUpd
 		input = &AdminUpdateDeviceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminUpdateDeviceStatusOutput{})
+	output := &AdminUpdateDeviceStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminUpdateDeviceStatusRequest{Request: req, Input: input}
 }
 
@@ -1138,7 +1201,10 @@ func (c *CognitoIdentityProvider) AdminUpdateUserAttributesRequest(input *AdminU
 		input = &AdminUpdateUserAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminUpdateUserAttributesOutput{})
+	output := &AdminUpdateUserAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminUpdateUserAttributesRequest{Request: req, Input: input}
 }
 
@@ -1186,7 +1252,10 @@ func (c *CognitoIdentityProvider) AdminUserGlobalSignOutRequest(input *AdminUser
 		input = &AdminUserGlobalSignOutInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminUserGlobalSignOutOutput{})
+	output := &AdminUserGlobalSignOutOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AdminUserGlobalSignOutRequest{Request: req, Input: input}
 }
 
@@ -1232,7 +1301,10 @@ func (c *CognitoIdentityProvider) ChangePasswordRequest(input *ChangePasswordInp
 		input = &ChangePasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangePasswordOutput{})
+	output := &ChangePasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ChangePasswordRequest{Request: req, Input: input}
 }
@@ -1280,7 +1352,10 @@ func (c *CognitoIdentityProvider) ConfirmDeviceRequest(input *ConfirmDeviceInput
 		input = &ConfirmDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmDeviceOutput{})
+	output := &ConfirmDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfirmDeviceRequest{Request: req, Input: input}
 }
 
@@ -1326,7 +1401,10 @@ func (c *CognitoIdentityProvider) ConfirmForgotPasswordRequest(input *ConfirmFor
 		input = &ConfirmForgotPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmForgotPasswordOutput{})
+	output := &ConfirmForgotPasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ConfirmForgotPasswordRequest{Request: req, Input: input}
 }
@@ -1374,7 +1452,10 @@ func (c *CognitoIdentityProvider) ConfirmSignUpRequest(input *ConfirmSignUpInput
 		input = &ConfirmSignUpInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmSignUpOutput{})
+	output := &ConfirmSignUpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ConfirmSignUpRequest{Request: req, Input: input}
 }
@@ -1423,7 +1504,10 @@ func (c *CognitoIdentityProvider) CreateGroupRequest(input *CreateGroupInput) Cr
 		input = &CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	output := &CreateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGroupRequest{Request: req, Input: input}
 }
 
@@ -1469,7 +1553,10 @@ func (c *CognitoIdentityProvider) CreateIdentityProviderRequest(input *CreateIde
 		input = &CreateIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIdentityProviderOutput{})
+	output := &CreateIdentityProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateIdentityProviderRequest{Request: req, Input: input}
 }
 
@@ -1515,7 +1602,10 @@ func (c *CognitoIdentityProvider) CreateResourceServerRequest(input *CreateResou
 		input = &CreateResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateResourceServerOutput{})
+	output := &CreateResourceServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateResourceServerRequest{Request: req, Input: input}
 }
 
@@ -1561,7 +1651,10 @@ func (c *CognitoIdentityProvider) CreateUserImportJobRequest(input *CreateUserIm
 		input = &CreateUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserImportJobOutput{})
+	output := &CreateUserImportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserImportJobRequest{Request: req, Input: input}
 }
 
@@ -1608,7 +1701,10 @@ func (c *CognitoIdentityProvider) CreateUserPoolRequest(input *CreateUserPoolInp
 		input = &CreateUserPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserPoolOutput{})
+	output := &CreateUserPoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserPoolRequest{Request: req, Input: input}
 }
 
@@ -1654,7 +1750,10 @@ func (c *CognitoIdentityProvider) CreateUserPoolClientRequest(input *CreateUserP
 		input = &CreateUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserPoolClientOutput{})
+	output := &CreateUserPoolClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserPoolClientRequest{Request: req, Input: input}
 }
 
@@ -1700,7 +1799,10 @@ func (c *CognitoIdentityProvider) CreateUserPoolDomainRequest(input *CreateUserP
 		input = &CreateUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserPoolDomainOutput{})
+	output := &CreateUserPoolDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserPoolDomainRequest{Request: req, Input: input}
 }
 
@@ -1748,9 +1850,12 @@ func (c *CognitoIdentityProvider) DeleteGroupRequest(input *DeleteGroupInput) De
 		input = &DeleteGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGroupOutput{})
+	output := &DeleteGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGroupRequest{Request: req, Input: input}
 }
 
@@ -1796,9 +1901,12 @@ func (c *CognitoIdentityProvider) DeleteIdentityProviderRequest(input *DeleteIde
 		input = &DeleteIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityProviderOutput{})
+	output := &DeleteIdentityProviderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIdentityProviderRequest{Request: req, Input: input}
 }
 
@@ -1844,9 +1952,12 @@ func (c *CognitoIdentityProvider) DeleteResourceServerRequest(input *DeleteResou
 		input = &DeleteResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceServerOutput{})
+	output := &DeleteResourceServerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteResourceServerRequest{Request: req, Input: input}
 }
 
@@ -1892,9 +2003,12 @@ func (c *CognitoIdentityProvider) DeleteUserRequest(input *DeleteUserInput) Dele
 		input = &DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	output := &DeleteUserOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return DeleteUserRequest{Request: req, Input: input}
 }
@@ -1941,7 +2055,10 @@ func (c *CognitoIdentityProvider) DeleteUserAttributesRequest(input *DeleteUserA
 		input = &DeleteUserAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserAttributesOutput{})
+	output := &DeleteUserAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return DeleteUserAttributesRequest{Request: req, Input: input}
 }
@@ -1988,9 +2105,12 @@ func (c *CognitoIdentityProvider) DeleteUserPoolRequest(input *DeleteUserPoolInp
 		input = &DeleteUserPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPoolOutput{})
+	output := &DeleteUserPoolOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserPoolRequest{Request: req, Input: input}
 }
 
@@ -2036,9 +2156,12 @@ func (c *CognitoIdentityProvider) DeleteUserPoolClientRequest(input *DeleteUserP
 		input = &DeleteUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPoolClientOutput{})
+	output := &DeleteUserPoolClientOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserPoolClientRequest{Request: req, Input: input}
 }
 
@@ -2084,7 +2207,10 @@ func (c *CognitoIdentityProvider) DeleteUserPoolDomainRequest(input *DeleteUserP
 		input = &DeleteUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPoolDomainOutput{})
+	output := &DeleteUserPoolDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserPoolDomainRequest{Request: req, Input: input}
 }
 
@@ -2130,7 +2256,10 @@ func (c *CognitoIdentityProvider) DescribeIdentityProviderRequest(input *Describ
 		input = &DescribeIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityProviderOutput{})
+	output := &DescribeIdentityProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdentityProviderRequest{Request: req, Input: input}
 }
 
@@ -2176,7 +2305,10 @@ func (c *CognitoIdentityProvider) DescribeResourceServerRequest(input *DescribeR
 		input = &DescribeResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourceServerOutput{})
+	output := &DescribeResourceServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeResourceServerRequest{Request: req, Input: input}
 }
 
@@ -2222,7 +2354,10 @@ func (c *CognitoIdentityProvider) DescribeUserImportJobRequest(input *DescribeUs
 		input = &DescribeUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserImportJobOutput{})
+	output := &DescribeUserImportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUserImportJobRequest{Request: req, Input: input}
 }
 
@@ -2269,7 +2404,10 @@ func (c *CognitoIdentityProvider) DescribeUserPoolRequest(input *DescribeUserPoo
 		input = &DescribeUserPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserPoolOutput{})
+	output := &DescribeUserPoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUserPoolRequest{Request: req, Input: input}
 }
 
@@ -2316,7 +2454,10 @@ func (c *CognitoIdentityProvider) DescribeUserPoolClientRequest(input *DescribeU
 		input = &DescribeUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserPoolClientOutput{})
+	output := &DescribeUserPoolClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUserPoolClientRequest{Request: req, Input: input}
 }
 
@@ -2362,7 +2503,10 @@ func (c *CognitoIdentityProvider) DescribeUserPoolDomainRequest(input *DescribeU
 		input = &DescribeUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserPoolDomainOutput{})
+	output := &DescribeUserPoolDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUserPoolDomainRequest{Request: req, Input: input}
 }
 
@@ -2408,9 +2552,12 @@ func (c *CognitoIdentityProvider) ForgetDeviceRequest(input *ForgetDeviceInput) 
 		input = &ForgetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &ForgetDeviceOutput{})
+	output := &ForgetDeviceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ForgetDeviceRequest{Request: req, Input: input}
 }
 
@@ -2463,7 +2610,10 @@ func (c *CognitoIdentityProvider) ForgotPasswordRequest(input *ForgotPasswordInp
 		input = &ForgotPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ForgotPasswordOutput{})
+	output := &ForgotPasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ForgotPasswordRequest{Request: req, Input: input}
 }
@@ -2511,7 +2661,10 @@ func (c *CognitoIdentityProvider) GetCSVHeaderRequest(input *GetCSVHeaderInput) 
 		input = &GetCSVHeaderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCSVHeaderOutput{})
+	output := &GetCSVHeaderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCSVHeaderRequest{Request: req, Input: input}
 }
 
@@ -2557,7 +2710,10 @@ func (c *CognitoIdentityProvider) GetDeviceRequest(input *GetDeviceInput) GetDev
 		input = &GetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceOutput{})
+	output := &GetDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeviceRequest{Request: req, Input: input}
 }
 
@@ -2605,7 +2761,10 @@ func (c *CognitoIdentityProvider) GetGroupRequest(input *GetGroupInput) GetGroup
 		input = &GetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupOutput{})
+	output := &GetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupRequest{Request: req, Input: input}
 }
 
@@ -2651,7 +2810,10 @@ func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierRequest(input *
 		input = &GetIdentityProviderByIdentifierInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityProviderByIdentifierOutput{})
+	output := &GetIdentityProviderByIdentifierOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityProviderByIdentifierRequest{Request: req, Input: input}
 }
 
@@ -2700,7 +2862,10 @@ func (c *CognitoIdentityProvider) GetUICustomizationRequest(input *GetUICustomiz
 		input = &GetUICustomizationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUICustomizationOutput{})
+	output := &GetUICustomizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUICustomizationRequest{Request: req, Input: input}
 }
 
@@ -2746,7 +2911,10 @@ func (c *CognitoIdentityProvider) GetUserRequest(input *GetUserInput) GetUserReq
 		input = &GetUserInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserOutput{})
+	output := &GetUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return GetUserRequest{Request: req, Input: input}
 }
@@ -2793,7 +2961,10 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input 
 		input = &GetUserAttributeVerificationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserAttributeVerificationCodeOutput{})
+	output := &GetUserAttributeVerificationCodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return GetUserAttributeVerificationCodeRequest{Request: req, Input: input}
 }
@@ -2840,7 +3011,10 @@ func (c *CognitoIdentityProvider) GlobalSignOutRequest(input *GlobalSignOutInput
 		input = &GlobalSignOutInput{}
 	}
 
-	req := c.newRequest(op, input, &GlobalSignOutOutput{})
+	output := &GlobalSignOutOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GlobalSignOutRequest{Request: req, Input: input}
 }
 
@@ -2886,7 +3060,10 @@ func (c *CognitoIdentityProvider) InitiateAuthRequest(input *InitiateAuthInput) 
 		input = &InitiateAuthInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateAuthOutput{})
+	output := &InitiateAuthOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitiateAuthRequest{Request: req, Input: input}
 }
 
@@ -2932,7 +3109,10 @@ func (c *CognitoIdentityProvider) ListDevicesRequest(input *ListDevicesInput) Li
 		input = &ListDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevicesOutput{})
+	output := &ListDevicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDevicesRequest{Request: req, Input: input}
 }
 
@@ -2980,7 +3160,10 @@ func (c *CognitoIdentityProvider) ListGroupsRequest(input *ListGroupsInput) List
 		input = &ListGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsOutput{})
+	output := &ListGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupsRequest{Request: req, Input: input}
 }
 
@@ -3026,7 +3209,10 @@ func (c *CognitoIdentityProvider) ListIdentityProvidersRequest(input *ListIdenti
 		input = &ListIdentityProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityProvidersOutput{})
+	output := &ListIdentityProvidersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIdentityProvidersRequest{Request: req, Input: input}
 }
 
@@ -3072,7 +3258,10 @@ func (c *CognitoIdentityProvider) ListResourceServersRequest(input *ListResource
 		input = &ListResourceServersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceServersOutput{})
+	output := &ListResourceServersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourceServersRequest{Request: req, Input: input}
 }
 
@@ -3118,7 +3307,10 @@ func (c *CognitoIdentityProvider) ListUserImportJobsRequest(input *ListUserImpor
 		input = &ListUserImportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserImportJobsOutput{})
+	output := &ListUserImportJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUserImportJobsRequest{Request: req, Input: input}
 }
 
@@ -3164,7 +3356,10 @@ func (c *CognitoIdentityProvider) ListUserPoolClientsRequest(input *ListUserPool
 		input = &ListUserPoolClientsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserPoolClientsOutput{})
+	output := &ListUserPoolClientsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUserPoolClientsRequest{Request: req, Input: input}
 }
 
@@ -3210,7 +3405,10 @@ func (c *CognitoIdentityProvider) ListUserPoolsRequest(input *ListUserPoolsInput
 		input = &ListUserPoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserPoolsOutput{})
+	output := &ListUserPoolsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUserPoolsRequest{Request: req, Input: input}
 }
 
@@ -3256,7 +3454,10 @@ func (c *CognitoIdentityProvider) ListUsersRequest(input *ListUsersInput) ListUs
 		input = &ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	output := &ListUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUsersRequest{Request: req, Input: input}
 }
 
@@ -3304,7 +3505,10 @@ func (c *CognitoIdentityProvider) ListUsersInGroupRequest(input *ListUsersInGrou
 		input = &ListUsersInGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersInGroupOutput{})
+	output := &ListUsersInGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUsersInGroupRequest{Request: req, Input: input}
 }
 
@@ -3351,7 +3555,10 @@ func (c *CognitoIdentityProvider) ResendConfirmationCodeRequest(input *ResendCon
 		input = &ResendConfirmationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResendConfirmationCodeOutput{})
+	output := &ResendConfirmationCodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ResendConfirmationCodeRequest{Request: req, Input: input}
 }
@@ -3398,7 +3605,10 @@ func (c *CognitoIdentityProvider) RespondToAuthChallengeRequest(input *RespondTo
 		input = &RespondToAuthChallengeInput{}
 	}
 
-	req := c.newRequest(op, input, &RespondToAuthChallengeOutput{})
+	output := &RespondToAuthChallengeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RespondToAuthChallengeRequest{Request: req, Input: input}
 }
 
@@ -3455,7 +3665,10 @@ func (c *CognitoIdentityProvider) SetUICustomizationRequest(input *SetUICustomiz
 		input = &SetUICustomizationInput{}
 	}
 
-	req := c.newRequest(op, input, &SetUICustomizationOutput{})
+	output := &SetUICustomizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetUICustomizationRequest{Request: req, Input: input}
 }
 
@@ -3503,7 +3716,10 @@ func (c *CognitoIdentityProvider) SetUserSettingsRequest(input *SetUserSettingsI
 		input = &SetUserSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetUserSettingsOutput{})
+	output := &SetUserSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return SetUserSettingsRequest{Request: req, Input: input}
 }
@@ -3551,7 +3767,10 @@ func (c *CognitoIdentityProvider) SignUpRequest(input *SignUpInput) SignUpReques
 		input = &SignUpInput{}
 	}
 
-	req := c.newRequest(op, input, &SignUpOutput{})
+	output := &SignUpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return SignUpRequest{Request: req, Input: input}
 }
@@ -3598,7 +3817,10 @@ func (c *CognitoIdentityProvider) StartUserImportJobRequest(input *StartUserImpo
 		input = &StartUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StartUserImportJobOutput{})
+	output := &StartUserImportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartUserImportJobRequest{Request: req, Input: input}
 }
 
@@ -3644,7 +3866,10 @@ func (c *CognitoIdentityProvider) StopUserImportJobRequest(input *StopUserImport
 		input = &StopUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopUserImportJobOutput{})
+	output := &StopUserImportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopUserImportJobRequest{Request: req, Input: input}
 }
 
@@ -3690,7 +3915,10 @@ func (c *CognitoIdentityProvider) UpdateDeviceStatusRequest(input *UpdateDeviceS
 		input = &UpdateDeviceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeviceStatusOutput{})
+	output := &UpdateDeviceStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDeviceStatusRequest{Request: req, Input: input}
 }
 
@@ -3738,7 +3966,10 @@ func (c *CognitoIdentityProvider) UpdateGroupRequest(input *UpdateGroupInput) Up
 		input = &UpdateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	output := &UpdateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGroupRequest{Request: req, Input: input}
 }
 
@@ -3784,7 +4015,10 @@ func (c *CognitoIdentityProvider) UpdateIdentityProviderRequest(input *UpdateIde
 		input = &UpdateIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIdentityProviderOutput{})
+	output := &UpdateIdentityProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateIdentityProviderRequest{Request: req, Input: input}
 }
 
@@ -3830,7 +4064,10 @@ func (c *CognitoIdentityProvider) UpdateResourceServerRequest(input *UpdateResou
 		input = &UpdateResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceServerOutput{})
+	output := &UpdateResourceServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateResourceServerRequest{Request: req, Input: input}
 }
 
@@ -3876,7 +4113,10 @@ func (c *CognitoIdentityProvider) UpdateUserAttributesRequest(input *UpdateUserA
 		input = &UpdateUserAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserAttributesOutput{})
+	output := &UpdateUserAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return UpdateUserAttributesRequest{Request: req, Input: input}
 }
@@ -3923,7 +4163,10 @@ func (c *CognitoIdentityProvider) UpdateUserPoolRequest(input *UpdateUserPoolInp
 		input = &UpdateUserPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserPoolOutput{})
+	output := &UpdateUserPoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserPoolRequest{Request: req, Input: input}
 }
 
@@ -3970,7 +4213,10 @@ func (c *CognitoIdentityProvider) UpdateUserPoolClientRequest(input *UpdateUserP
 		input = &UpdateUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserPoolClientOutput{})
+	output := &UpdateUserPoolClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserPoolClientRequest{Request: req, Input: input}
 }
 
@@ -4016,7 +4262,10 @@ func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAt
 		input = &VerifyUserAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyUserAttributeOutput{})
+	output := &VerifyUserAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	req.Config.Credentials = aws.AnonymousCredentials
 	return VerifyUserAttributeRequest{Request: req, Input: input}
 }
@@ -4094,6 +4343,8 @@ func (s *AddCustomAttributesInput) SetUserPoolId(v string) *AddCustomAttributesI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddCustomAttributesResponse
 type AddCustomAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4104,6 +4355,11 @@ func (s AddCustomAttributesOutput) String() string {
 // GoString returns the string representation
 func (s AddCustomAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddCustomAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroupRequest
@@ -4188,6 +4444,8 @@ func (s *AdminAddUserToGroupInput) SetUsername(v string) *AdminAddUserToGroupInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroupOutput
 type AdminAddUserToGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4198,6 +4456,11 @@ func (s AdminAddUserToGroupOutput) String() string {
 // GoString returns the string representation
 func (s AdminAddUserToGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminAddUserToGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to confirm user registration.
@@ -4266,6 +4529,8 @@ func (s *AdminConfirmSignUpInput) SetUsername(v string) *AdminConfirmSignUpInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpResponse
 type AdminConfirmSignUpOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4276,6 +4541,11 @@ func (s AdminConfirmSignUpOutput) String() string {
 // GoString returns the string representation
 func (s AdminConfirmSignUpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminConfirmSignUpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The type of configuration for creating a new user profile.
@@ -4545,6 +4815,8 @@ func (s *AdminCreateUserInput) SetValidationData(v []AttributeType) *AdminCreate
 type AdminCreateUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created user.
 	User *UserType `type:"structure"`
 }
@@ -4557,6 +4829,11 @@ func (s AdminCreateUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminCreateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminCreateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.
@@ -4650,6 +4927,8 @@ func (s *AdminDeleteUserAttributesInput) SetUsername(v string) *AdminDeleteUserA
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserAttributesResponse
 type AdminDeleteUserAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4660,6 +4939,11 @@ func (s AdminDeleteUserAttributesOutput) String() string {
 // GoString returns the string representation
 func (s AdminDeleteUserAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminDeleteUserAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to delete a user as an administrator.
@@ -4727,6 +5011,8 @@ func (s *AdminDeleteUserInput) SetUsername(v string) *AdminDeleteUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserOutput
 type AdminDeleteUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4737,6 +5023,11 @@ func (s AdminDeleteUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminDeleteUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminDeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUserRequest
@@ -4802,6 +5093,8 @@ func (s *AdminDisableProviderForUserInput) SetUserPoolId(v string) *AdminDisable
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUserResponse
 type AdminDisableProviderForUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4812,6 +5105,11 @@ func (s AdminDisableProviderForUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminDisableProviderForUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminDisableProviderForUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to disable any user as an administrator.
@@ -4881,6 +5179,8 @@ func (s *AdminDisableUserInput) SetUsername(v string) *AdminDisableUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUserResponse
 type AdminDisableUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4891,6 +5191,11 @@ func (s AdminDisableUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminDisableUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminDisableUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request that enables the user as an administrator.
@@ -4960,6 +5265,8 @@ func (s *AdminEnableUserInput) SetUsername(v string) *AdminEnableUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserResponse
 type AdminEnableUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4970,6 +5277,11 @@ func (s AdminEnableUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminEnableUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminEnableUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Sends the forgot device request, as an administrator.
@@ -5055,6 +5367,8 @@ func (s *AdminForgetDeviceInput) SetUsername(v string) *AdminForgetDeviceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminForgetDeviceOutput
 type AdminForgetDeviceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5065,6 +5379,11 @@ func (s AdminForgetDeviceOutput) String() string {
 // GoString returns the string representation
 func (s AdminForgetDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminForgetDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to get the device, as an administrator.
@@ -5152,6 +5471,8 @@ func (s *AdminGetDeviceInput) SetUsername(v string) *AdminGetDeviceInput {
 type AdminGetDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The device.
 	//
 	// Device is a required field
@@ -5166,6 +5487,11 @@ func (s AdminGetDeviceOutput) String() string {
 // GoString returns the string representation
 func (s AdminGetDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminGetDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevice sets the Device field's value.
@@ -5243,6 +5569,8 @@ func (s *AdminGetUserInput) SetUsername(v string) *AdminGetUserInput {
 type AdminGetUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates that the status is enabled.
 	Enabled *bool `type:"boolean"`
 
@@ -5285,6 +5613,11 @@ func (s AdminGetUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminGetUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminGetUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEnabled sets the Enabled field's value.
@@ -5465,6 +5798,8 @@ func (s *AdminInitiateAuthInput) SetUserPoolId(v string) *AdminInitiateAuthInput
 type AdminInitiateAuthOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The result of the authentication response. This is only returned if the caller
 	// does not need to pass another challenge. If the caller does need to pass
 	// another challenge before it gets tokens, ChallengeName, ChallengeParameters,
@@ -5529,6 +5864,11 @@ func (s AdminInitiateAuthOutput) String() string {
 // GoString returns the string representation
 func (s AdminInitiateAuthOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminInitiateAuthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthenticationResult sets the AuthenticationResult field's value.
@@ -5661,6 +6001,8 @@ func (s *AdminLinkProviderForUserInput) SetUserPoolId(v string) *AdminLinkProvid
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserResponse
 type AdminLinkProviderForUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5671,6 +6013,11 @@ func (s AdminLinkProviderForUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminLinkProviderForUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminLinkProviderForUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to list devices, as an administrator.
@@ -5761,6 +6108,8 @@ func (s *AdminListDevicesInput) SetUsername(v string) *AdminListDevicesInput {
 type AdminListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The devices in the list of devices response.
 	Devices []DeviceType `type:"list"`
 
@@ -5776,6 +6125,11 @@ func (s AdminListDevicesOutput) String() string {
 // GoString returns the string representation
 func (s AdminListDevicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminListDevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevices sets the Devices field's value.
@@ -5877,6 +6231,8 @@ func (s *AdminListGroupsForUserInput) SetUsername(v string) *AdminListGroupsForU
 type AdminListGroupsForUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The groups that the user belongs to.
 	Groups []GroupType `type:"list"`
 
@@ -5893,6 +6249,11 @@ func (s AdminListGroupsForUserOutput) String() string {
 // GoString returns the string representation
 func (s AdminListGroupsForUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminListGroupsForUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroups sets the Groups field's value.
@@ -5989,6 +6350,8 @@ func (s *AdminRemoveUserFromGroupInput) SetUsername(v string) *AdminRemoveUserFr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupOutput
 type AdminRemoveUserFromGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5999,6 +6362,11 @@ func (s AdminRemoveUserFromGroupOutput) String() string {
 // GoString returns the string representation
 func (s AdminRemoveUserFromGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminRemoveUserFromGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to reset a user's password as an administrator.
@@ -6067,6 +6435,8 @@ func (s *AdminResetUserPasswordInput) SetUsername(v string) *AdminResetUserPassw
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPasswordResponse
 type AdminResetUserPasswordOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6077,6 +6447,11 @@ func (s AdminResetUserPasswordOutput) String() string {
 // GoString returns the string representation
 func (s AdminResetUserPasswordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminResetUserPasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request to respond to the authentication challenge, as an administrator.
@@ -6205,6 +6580,8 @@ func (s *AdminRespondToAuthChallengeInput) SetUserPoolId(v string) *AdminRespond
 type AdminRespondToAuthChallengeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The result returned by the server in response to the authentication request.
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
@@ -6231,6 +6608,11 @@ func (s AdminRespondToAuthChallengeOutput) String() string {
 // GoString returns the string representation
 func (s AdminRespondToAuthChallengeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminRespondToAuthChallengeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthenticationResult sets the AuthenticationResult field's value.
@@ -6346,6 +6728,8 @@ func (s *AdminSetUserSettingsInput) SetUsername(v string) *AdminSetUserSettingsI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettingsResponse
 type AdminSetUserSettingsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6356,6 +6740,11 @@ func (s AdminSetUserSettingsOutput) String() string {
 // GoString returns the string representation
 func (s AdminSetUserSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminSetUserSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request to update the device status, as an administrator.
@@ -6451,6 +6840,8 @@ func (s *AdminUpdateDeviceStatusInput) SetUsername(v string) *AdminUpdateDeviceS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateDeviceStatusResponse
 type AdminUpdateDeviceStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6461,6 +6852,11 @@ func (s AdminUpdateDeviceStatusOutput) String() string {
 // GoString returns the string representation
 func (s AdminUpdateDeviceStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminUpdateDeviceStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to update the user's attributes as an administrator.
@@ -6555,6 +6951,8 @@ func (s *AdminUpdateUserAttributesInput) SetUsername(v string) *AdminUpdateUserA
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesResponse
 type AdminUpdateUserAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6565,6 +6963,11 @@ func (s AdminUpdateUserAttributesOutput) String() string {
 // GoString returns the string representation
 func (s AdminUpdateUserAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminUpdateUserAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request to sign out of all devices, as an administrator.
@@ -6633,6 +7036,8 @@ func (s *AdminUserGlobalSignOutInput) SetUsername(v string) *AdminUserGlobalSign
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutResponse
 type AdminUserGlobalSignOutOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6643,6 +7048,11 @@ func (s AdminUserGlobalSignOutOutput) String() string {
 // GoString returns the string representation
 func (s AdminUserGlobalSignOutOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminUserGlobalSignOutOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies whether the attribute is standard or custom.
@@ -6849,6 +7259,8 @@ func (s *ChangePasswordInput) SetProposedPassword(v string) *ChangePasswordInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordResponse
 type ChangePasswordOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6859,6 +7271,11 @@ func (s ChangePasswordOutput) String() string {
 // GoString returns the string representation
 func (s ChangePasswordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ChangePasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The type of code delivery details being returned from the server.
@@ -6989,6 +7406,8 @@ func (s *ConfirmDeviceInput) SetDeviceSecretVerifierConfig(v *DeviceSecretVerifi
 type ConfirmDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the user confirmation is necessary to confirm the device
 	// response.
 	UserConfirmationNecessary *bool `type:"boolean"`
@@ -7002,6 +7421,11 @@ func (s ConfirmDeviceOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserConfirmationNecessary sets the UserConfirmationNecessary field's value.
@@ -7128,6 +7552,8 @@ func (s *ConfirmForgotPasswordInput) SetUsername(v string) *ConfirmForgotPasswor
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPasswordResponse
 type ConfirmForgotPasswordOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7138,6 +7564,11 @@ func (s ConfirmForgotPasswordOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmForgotPasswordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmForgotPasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to confirm registration of a user.
@@ -7251,6 +7682,8 @@ func (s *ConfirmSignUpInput) SetUsername(v string) *ConfirmSignUpInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpResponse
 type ConfirmSignUpOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7261,6 +7694,11 @@ func (s ConfirmSignUpOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmSignUpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmSignUpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroupRequest
@@ -7372,6 +7810,8 @@ func (s *CreateGroupInput) SetUserPoolId(v string) *CreateGroupInput {
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The group object for the group.
 	Group *GroupType `type:"structure"`
 }
@@ -7384,6 +7824,11 @@ func (s CreateGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroup sets the Group field's value.
@@ -7505,6 +7950,8 @@ func (s *CreateIdentityProviderInput) SetUserPoolId(v string) *CreateIdentityPro
 type CreateIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created identity provider object.
 	//
 	// IdentityProvider is a required field
@@ -7519,6 +7966,11 @@ func (s CreateIdentityProviderOutput) String() string {
 // GoString returns the string representation
 func (s CreateIdentityProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateIdentityProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityProvider sets the IdentityProvider field's value.
@@ -7627,6 +8079,8 @@ func (s *CreateResourceServerInput) SetUserPoolId(v string) *CreateResourceServe
 type CreateResourceServerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created resource server.
 	//
 	// ResourceServer is a required field
@@ -7641,6 +8095,11 @@ func (s CreateResourceServerOutput) String() string {
 // GoString returns the string representation
 func (s CreateResourceServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateResourceServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceServer sets the ResourceServer field's value.
@@ -7735,6 +8194,8 @@ func (s *CreateUserImportJobInput) SetUserPoolId(v string) *CreateUserImportJobI
 type CreateUserImportJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The job object that represents the user import job.
 	UserImportJob *UserImportJobType `type:"structure"`
 }
@@ -7747,6 +8208,11 @@ func (s CreateUserImportJobOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserImportJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserImportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserImportJob sets the UserImportJob field's value.
@@ -7943,6 +8409,8 @@ func (s *CreateUserPoolClientInput) SetWriteAttributes(v []string) *CreateUserPo
 type CreateUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user pool client that was just created.
 	UserPoolClient *UserPoolClientType `type:"structure"`
 }
@@ -7955,6 +8423,11 @@ func (s CreateUserPoolClientOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserPoolClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserPoolClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserPoolClient sets the UserPoolClient field's value.
@@ -8027,6 +8500,8 @@ func (s *CreateUserPoolDomainInput) SetUserPoolId(v string) *CreateUserPoolDomai
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainResponse
 type CreateUserPoolDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8037,6 +8512,11 @@ func (s CreateUserPoolDomainOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserPoolDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserPoolDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to create a user pool.
@@ -8299,6 +8779,8 @@ func (s *CreateUserPoolInput) SetVerificationMessageTemplate(v *VerificationMess
 type CreateUserPoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A container for the user pool details.
 	UserPool *UserPoolType `type:"structure"`
 }
@@ -8311,6 +8793,11 @@ func (s CreateUserPoolOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserPoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserPoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserPool sets the UserPool field's value.
@@ -8383,6 +8870,8 @@ func (s *DeleteGroupInput) SetUserPoolId(v string) *DeleteGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8393,6 +8882,11 @@ func (s DeleteGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteIdentityProviderRequest
@@ -8459,6 +8953,8 @@ func (s *DeleteIdentityProviderInput) SetUserPoolId(v string) *DeleteIdentityPro
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteIdentityProviderOutput
 type DeleteIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8469,6 +8965,11 @@ func (s DeleteIdentityProviderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIdentityProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIdentityProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServerRequest
@@ -8535,6 +9036,8 @@ func (s *DeleteResourceServerInput) SetUserPoolId(v string) *DeleteResourceServe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServerOutput
 type DeleteResourceServerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8545,6 +9048,11 @@ func (s DeleteResourceServerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteResourceServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteResourceServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to delete user attributes.
@@ -8610,6 +9118,8 @@ func (s *DeleteUserAttributesInput) SetUserAttributeNames(v []string) *DeleteUse
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributesResponse
 type DeleteUserAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8620,6 +9130,11 @@ func (s DeleteUserAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to delete a user.
@@ -8666,6 +9181,8 @@ func (s *DeleteUserInput) SetAccessToken(v string) *DeleteUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserOutput
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8676,6 +9193,11 @@ func (s DeleteUserOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to delete a user pool client.
@@ -8743,6 +9265,8 @@ func (s *DeleteUserPoolClientInput) SetUserPoolId(v string) *DeleteUserPoolClien
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientOutput
 type DeleteUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8753,6 +9277,11 @@ func (s DeleteUserPoolClientOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserPoolClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserPoolClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolDomainRequest
@@ -8819,6 +9348,8 @@ func (s *DeleteUserPoolDomainInput) SetUserPoolId(v string) *DeleteUserPoolDomai
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolDomainResponse
 type DeleteUserPoolDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8829,6 +9360,11 @@ func (s DeleteUserPoolDomainOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserPoolDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserPoolDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to delete a user pool.
@@ -8878,6 +9414,8 @@ func (s *DeleteUserPoolInput) SetUserPoolId(v string) *DeleteUserPoolInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolOutput
 type DeleteUserPoolOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8888,6 +9426,11 @@ func (s DeleteUserPoolOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserPoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserPoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeIdentityProviderRequest
@@ -8955,6 +9498,8 @@ func (s *DescribeIdentityProviderInput) SetUserPoolId(v string) *DescribeIdentit
 type DescribeIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identity provider that was deleted.
 	//
 	// IdentityProvider is a required field
@@ -8969,6 +9514,11 @@ func (s DescribeIdentityProviderOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIdentityProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIdentityProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityProvider sets the IdentityProvider field's value.
@@ -9042,6 +9592,8 @@ func (s *DescribeResourceServerInput) SetUserPoolId(v string) *DescribeResourceS
 type DescribeResourceServerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resource server.
 	//
 	// ResourceServer is a required field
@@ -9056,6 +9608,11 @@ func (s DescribeResourceServerOutput) String() string {
 // GoString returns the string representation
 func (s DescribeResourceServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeResourceServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceServer sets the ResourceServer field's value.
@@ -9132,6 +9689,8 @@ func (s *DescribeUserImportJobInput) SetUserPoolId(v string) *DescribeUserImport
 type DescribeUserImportJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The job object that represents the user import job.
 	UserImportJob *UserImportJobType `type:"structure"`
 }
@@ -9144,6 +9703,11 @@ func (s DescribeUserImportJobOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUserImportJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserImportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserImportJob sets the UserImportJob field's value.
@@ -9220,6 +9784,8 @@ func (s *DescribeUserPoolClientInput) SetUserPoolId(v string) *DescribeUserPoolC
 type DescribeUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user pool client from a server response to describe the user pool client.
 	UserPoolClient *UserPoolClientType `type:"structure"`
 }
@@ -9232,6 +9798,11 @@ func (s DescribeUserPoolClientOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUserPoolClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserPoolClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserPoolClient sets the UserPoolClient field's value.
@@ -9287,6 +9858,8 @@ func (s *DescribeUserPoolDomainInput) SetDomain(v string) *DescribeUserPoolDomai
 type DescribeUserPoolDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A domain description object containing information about the domain.
 	DomainDescription *DomainDescriptionType `type:"structure"`
 }
@@ -9299,6 +9872,11 @@ func (s DescribeUserPoolDomainOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUserPoolDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserPoolDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainDescription sets the DomainDescription field's value.
@@ -9356,6 +9934,8 @@ func (s *DescribeUserPoolInput) SetUserPoolId(v string) *DescribeUserPoolInput {
 type DescribeUserPoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The container of metadata returned by the server to describe the pool.
 	UserPool *UserPoolType `type:"structure"`
 }
@@ -9368,6 +9948,11 @@ func (s DescribeUserPoolOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUserPoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserPoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserPool sets the UserPool field's value.
@@ -9688,6 +10273,8 @@ func (s *ForgetDeviceInput) SetDeviceKey(v string) *ForgetDeviceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgetDeviceOutput
 type ForgetDeviceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9698,6 +10285,11 @@ func (s ForgetDeviceOutput) String() string {
 // GoString returns the string representation
 func (s ForgetDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ForgetDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to reset a user's password.
@@ -9782,6 +10374,8 @@ func (s *ForgotPasswordInput) SetUsername(v string) *ForgotPasswordInput {
 type ForgotPasswordOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The code delivery details returned by the server in response to the request
 	// to reset a password.
 	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
@@ -9795,6 +10389,11 @@ func (s ForgotPasswordOutput) String() string {
 // GoString returns the string representation
 func (s ForgotPasswordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ForgotPasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
@@ -9854,6 +10453,8 @@ func (s *GetCSVHeaderInput) SetUserPoolId(v string) *GetCSVHeaderInput {
 type GetCSVHeaderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The header information for the .csv file for the user import job.
 	CSVHeader []string `type:"list"`
 
@@ -9869,6 +10470,11 @@ func (s GetCSVHeaderOutput) String() string {
 // GoString returns the string representation
 func (s GetCSVHeaderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCSVHeaderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCSVHeader sets the CSVHeader field's value.
@@ -9941,6 +10547,8 @@ func (s *GetDeviceInput) SetDeviceKey(v string) *GetDeviceInput {
 type GetDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The device.
 	//
 	// Device is a required field
@@ -9955,6 +10563,11 @@ func (s GetDeviceOutput) String() string {
 // GoString returns the string representation
 func (s GetDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevice sets the Device field's value.
@@ -10028,6 +10641,8 @@ func (s *GetGroupInput) SetUserPoolId(v string) *GetGroupInput {
 type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The group object for the group.
 	Group *GroupType `type:"structure"`
 }
@@ -10040,6 +10655,11 @@ func (s GetGroupOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroup sets the Group field's value.
@@ -10113,6 +10733,8 @@ func (s *GetIdentityProviderByIdentifierInput) SetUserPoolId(v string) *GetIdent
 type GetIdentityProviderByIdentifierOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identity provider object.
 	//
 	// IdentityProvider is a required field
@@ -10127,6 +10749,11 @@ func (s GetIdentityProviderByIdentifierOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityProviderByIdentifierOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityProviderByIdentifierOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityProvider sets the IdentityProvider field's value.
@@ -10194,6 +10821,8 @@ func (s *GetUICustomizationInput) SetUserPoolId(v string) *GetUICustomizationInp
 type GetUICustomizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The UI customization information.
 	//
 	// UICustomization is a required field
@@ -10208,6 +10837,11 @@ func (s GetUICustomizationOutput) String() string {
 // GoString returns the string representation
 func (s GetUICustomizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUICustomizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUICustomization sets the UICustomization field's value.
@@ -10283,6 +10917,8 @@ func (s *GetUserAttributeVerificationCodeInput) SetAttributeName(v string) *GetU
 type GetUserAttributeVerificationCodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The code delivery details returned by the server in response to the request
 	// to get the user attribute verification code.
 	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
@@ -10296,6 +10932,11 @@ func (s GetUserAttributeVerificationCodeOutput) String() string {
 // GoString returns the string representation
 func (s GetUserAttributeVerificationCodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserAttributeVerificationCodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
@@ -10352,6 +10993,8 @@ func (s *GetUserInput) SetAccessToken(v string) *GetUserInput {
 type GetUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the options for MFA (e.g., email or phone number).
 	MFAOptions []MFAOptionType `type:"list"`
 
@@ -10377,6 +11020,11 @@ func (s GetUserOutput) String() string {
 // GoString returns the string representation
 func (s GetUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMFAOptions sets the MFAOptions field's value.
@@ -10442,6 +11090,8 @@ func (s *GlobalSignOutInput) SetAccessToken(v string) *GlobalSignOutInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOutResponse
 type GlobalSignOutOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10452,6 +11102,11 @@ func (s GlobalSignOutOutput) String() string {
 // GoString returns the string representation
 func (s GlobalSignOutOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GlobalSignOutOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The group type.
@@ -10748,6 +11403,8 @@ func (s *InitiateAuthInput) SetClientMetadata(v map[string]string) *InitiateAuth
 type InitiateAuthOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The result of the authentication response. This is only returned if the caller
 	// does not need to pass another challenge. If the caller does need to pass
 	// another challenge before it gets tokens, ChallengeName, ChallengeParameters,
@@ -10807,6 +11464,11 @@ func (s InitiateAuthOutput) String() string {
 // GoString returns the string representation
 func (s InitiateAuthOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitiateAuthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthenticationResult sets the AuthenticationResult field's value.
@@ -11022,6 +11684,8 @@ func (s *ListDevicesInput) SetPaginationToken(v string) *ListDevicesInput {
 type ListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The devices returned in the list devices response.
 	Devices []DeviceType `type:"list"`
 
@@ -11037,6 +11701,11 @@ func (s ListDevicesOutput) String() string {
 // GoString returns the string representation
 func (s ListDevicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevices sets the Devices field's value.
@@ -11120,6 +11789,8 @@ func (s *ListGroupsInput) SetUserPoolId(v string) *ListGroupsInput {
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The group objects for the groups.
 	Groups []GroupType `type:"list"`
 
@@ -11136,6 +11807,11 @@ func (s ListGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroups sets the Groups field's value.
@@ -11221,6 +11897,8 @@ func (s *ListIdentityProvidersInput) SetUserPoolId(v string) *ListIdentityProvid
 type ListIdentityProvidersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A pagination token.
 	NextToken *string `min:"1" type:"string"`
 
@@ -11238,6 +11916,11 @@ func (s ListIdentityProvidersOutput) String() string {
 // GoString returns the string representation
 func (s ListIdentityProvidersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIdentityProvidersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11323,6 +12006,8 @@ func (s *ListResourceServersInput) SetUserPoolId(v string) *ListResourceServersI
 type ListResourceServersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A pagination token.
 	NextToken *string `min:"1" type:"string"`
 
@@ -11340,6 +12025,11 @@ func (s ListResourceServersOutput) String() string {
 // GoString returns the string representation
 func (s ListResourceServersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceServersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11435,6 +12125,8 @@ func (s *ListUserImportJobsInput) SetUserPoolId(v string) *ListUserImportJobsInp
 type ListUserImportJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that can be used to return the next set of user import jobs
 	// in the list.
 	PaginationToken *string `min:"1" type:"string"`
@@ -11451,6 +12143,11 @@ func (s ListUserImportJobsOutput) String() string {
 // GoString returns the string representation
 func (s ListUserImportJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUserImportJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPaginationToken sets the PaginationToken field's value.
@@ -11540,6 +12237,8 @@ func (s *ListUserPoolClientsInput) SetUserPoolId(v string) *ListUserPoolClientsI
 type ListUserPoolClientsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `min:"1" type:"string"`
@@ -11556,6 +12255,11 @@ func (s ListUserPoolClientsOutput) String() string {
 // GoString returns the string representation
 func (s ListUserPoolClientsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUserPoolClientsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11633,6 +12337,8 @@ func (s *ListUserPoolsInput) SetNextToken(v string) *ListUserPoolsInput {
 type ListUserPoolsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `min:"1" type:"string"`
@@ -11649,6 +12355,11 @@ func (s ListUserPoolsOutput) String() string {
 // GoString returns the string representation
 func (s ListUserPoolsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUserPoolsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11750,6 +12461,8 @@ func (s *ListUsersInGroupInput) SetUserPoolId(v string) *ListUsersInGroupInput {
 type ListUsersInGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `min:"1" type:"string"`
@@ -11766,6 +12479,11 @@ func (s ListUsersInGroupOutput) String() string {
 // GoString returns the string representation
 func (s ListUsersInGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUsersInGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11910,6 +12628,8 @@ func (s *ListUsersInput) SetUserPoolId(v string) *ListUsersInput {
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	PaginationToken *string `min:"1" type:"string"`
@@ -11926,6 +12646,11 @@ func (s ListUsersOutput) String() string {
 // GoString returns the string representation
 func (s ListUsersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPaginationToken sets the PaginationToken field's value.
@@ -12386,6 +13111,8 @@ func (s *ResendConfirmationCodeInput) SetUsername(v string) *ResendConfirmationC
 type ResendConfirmationCodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The code delivery details returned by the server in response to the request
 	// to resend the confirmation code.
 	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
@@ -12399,6 +13126,11 @@ func (s ResendConfirmationCodeOutput) String() string {
 // GoString returns the string representation
 func (s ResendConfirmationCodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResendConfirmationCodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
@@ -12622,6 +13354,8 @@ func (s *RespondToAuthChallengeInput) SetSession(v string) *RespondToAuthChallen
 type RespondToAuthChallengeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The result returned by the server in response to the request to respond to
 	// the authentication challenge.
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
@@ -12649,6 +13383,11 @@ func (s RespondToAuthChallengeOutput) String() string {
 // GoString returns the string representation
 func (s RespondToAuthChallengeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RespondToAuthChallengeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthenticationResult sets the AuthenticationResult field's value.
@@ -12848,6 +13587,8 @@ func (s *SetUICustomizationInput) SetUserPoolId(v string) *SetUICustomizationInp
 type SetUICustomizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The UI customization information.
 	//
 	// UICustomization is a required field
@@ -12862,6 +13603,11 @@ func (s SetUICustomizationOutput) String() string {
 // GoString returns the string representation
 func (s SetUICustomizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetUICustomizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUICustomization sets the UICustomization field's value.
@@ -12937,6 +13683,8 @@ func (s *SetUserSettingsInput) SetMFAOptions(v []MFAOptionType) *SetUserSettings
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettingsResponse
 type SetUserSettingsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12947,6 +13695,11 @@ func (s SetUserSettingsOutput) String() string {
 // GoString returns the string representation
 func (s SetUserSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetUserSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to register a user.
@@ -13082,6 +13835,8 @@ func (s *SignUpInput) SetValidationData(v []AttributeType) *SignUpInput {
 type SignUpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The code delivery details returned by the server response to the user registration
 	// request.
 	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
@@ -13105,6 +13860,11 @@ func (s SignUpOutput) String() string {
 // GoString returns the string representation
 func (s SignUpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SignUpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
@@ -13247,6 +14007,8 @@ func (s *StartUserImportJobInput) SetUserPoolId(v string) *StartUserImportJobInp
 type StartUserImportJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The job object that represents the user import job.
 	UserImportJob *UserImportJobType `type:"structure"`
 }
@@ -13259,6 +14021,11 @@ func (s StartUserImportJobOutput) String() string {
 // GoString returns the string representation
 func (s StartUserImportJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartUserImportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserImportJob sets the UserImportJob field's value.
@@ -13335,6 +14102,8 @@ func (s *StopUserImportJobInput) SetUserPoolId(v string) *StopUserImportJobInput
 type StopUserImportJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The job object that represents the user import job.
 	UserImportJob *UserImportJobType `type:"structure"`
 }
@@ -13347,6 +14116,11 @@ func (s StopUserImportJobOutput) String() string {
 // GoString returns the string representation
 func (s StopUserImportJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopUserImportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserImportJob sets the UserImportJob field's value.
@@ -13541,6 +14315,8 @@ func (s *UpdateDeviceStatusInput) SetDeviceRememberedStatus(v DeviceRememberedSt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatusResponse
 type UpdateDeviceStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13551,6 +14327,11 @@ func (s UpdateDeviceStatusOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDeviceStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDeviceStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroupRequest
@@ -13650,6 +14431,8 @@ func (s *UpdateGroupInput) SetUserPoolId(v string) *UpdateGroupInput {
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The group object for the group.
 	Group *GroupType `type:"structure"`
 }
@@ -13662,6 +14445,11 @@ func (s UpdateGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroup sets the Group field's value.
@@ -13762,6 +14550,8 @@ func (s *UpdateIdentityProviderInput) SetUserPoolId(v string) *UpdateIdentityPro
 type UpdateIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identity provider object.
 	//
 	// IdentityProvider is a required field
@@ -13776,6 +14566,11 @@ func (s UpdateIdentityProviderOutput) String() string {
 // GoString returns the string representation
 func (s UpdateIdentityProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateIdentityProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityProvider sets the IdentityProvider field's value.
@@ -13883,6 +14678,8 @@ func (s *UpdateResourceServerInput) SetUserPoolId(v string) *UpdateResourceServe
 type UpdateResourceServerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resource server.
 	//
 	// ResourceServer is a required field
@@ -13897,6 +14694,11 @@ func (s UpdateResourceServerOutput) String() string {
 // GoString returns the string representation
 func (s UpdateResourceServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateResourceServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceServer sets the ResourceServer field's value.
@@ -13976,6 +14778,8 @@ func (s *UpdateUserAttributesInput) SetUserAttributes(v []AttributeType) *Update
 type UpdateUserAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The code delivery details list from the server for the request to update
 	// user attributes.
 	CodeDeliveryDetailsList []CodeDeliveryDetailsType `type:"list"`
@@ -13989,6 +14793,11 @@ func (s UpdateUserAttributesOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCodeDeliveryDetailsList sets the CodeDeliveryDetailsList field's value.
@@ -14189,6 +14998,8 @@ func (s *UpdateUserPoolClientInput) SetWriteAttributes(v []string) *UpdateUserPo
 type UpdateUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user pool client value from the response from the server when an update
 	// user pool client request is made.
 	UserPoolClient *UserPoolClientType `type:"structure"`
@@ -14202,6 +15013,11 @@ func (s UpdateUserPoolClientOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserPoolClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserPoolClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserPoolClient sets the UserPoolClient field's value.
@@ -14438,6 +15254,8 @@ func (s *UpdateUserPoolInput) SetVerificationMessageTemplate(v *VerificationMess
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolResponse
 type UpdateUserPoolOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14448,6 +15266,11 @@ func (s UpdateUserPoolOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserPoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserPoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The user import job type.
@@ -15456,6 +16279,8 @@ func (s *VerifyUserAttributeInput) SetCode(v string) *VerifyUserAttributeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttributeResponse
 type VerifyUserAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -15466,6 +16291,11 @@ func (s VerifyUserAttributeOutput) String() string {
 // GoString returns the string representation
 func (s VerifyUserAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifyUserAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type AliasAttributeType string

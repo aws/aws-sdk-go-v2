@@ -55,7 +55,10 @@ func (c *EC2) AcceptReservedInstancesExchangeQuoteRequest(input *AcceptReservedI
 		input = &AcceptReservedInstancesExchangeQuoteInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptReservedInstancesExchangeQuoteOutput{})
+	output := &AcceptReservedInstancesExchangeQuoteOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptReservedInstancesExchangeQuoteRequest{Request: req, Input: input}
 }
 
@@ -104,7 +107,10 @@ func (c *EC2) AcceptVpcPeeringConnectionRequest(input *AcceptVpcPeeringConnectio
 		input = &AcceptVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptVpcPeeringConnectionOutput{})
+	output := &AcceptVpcPeeringConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
@@ -162,7 +168,10 @@ func (c *EC2) AllocateAddressRequest(input *AllocateAddressInput) AllocateAddres
 		input = &AllocateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &AllocateAddressOutput{})
+	output := &AllocateAddressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocateAddressRequest{Request: req, Input: input}
 }
 
@@ -210,7 +219,10 @@ func (c *EC2) AllocateHostsRequest(input *AllocateHostsInput) AllocateHostsReque
 		input = &AllocateHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &AllocateHostsOutput{})
+	output := &AllocateHostsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AllocateHostsRequest{Request: req, Input: input}
 }
 
@@ -263,7 +275,10 @@ func (c *EC2) AssignIpv6AddressesRequest(input *AssignIpv6AddressesInput) Assign
 		input = &AssignIpv6AddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignIpv6AddressesOutput{})
+	output := &AssignIpv6AddressesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssignIpv6AddressesRequest{Request: req, Input: input}
 }
 
@@ -319,9 +334,12 @@ func (c *EC2) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddressesInp
 		input = &AssignPrivateIpAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignPrivateIpAddressesOutput{})
+	output := &AssignPrivateIpAddressesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssignPrivateIpAddressesRequest{Request: req, Input: input}
 }
 
@@ -390,7 +408,10 @@ func (c *EC2) AssociateAddressRequest(input *AssociateAddressInput) AssociateAdd
 		input = &AssociateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateAddressOutput{})
+	output := &AssociateAddressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateAddressRequest{Request: req, Input: input}
 }
 
@@ -447,9 +468,12 @@ func (c *EC2) AssociateDhcpOptionsRequest(input *AssociateDhcpOptionsInput) Asso
 		input = &AssociateDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDhcpOptionsOutput{})
+	output := &AssociateDhcpOptionsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateDhcpOptionsRequest{Request: req, Input: input}
 }
 
@@ -496,7 +520,10 @@ func (c *EC2) AssociateIamInstanceProfileRequest(input *AssociateIamInstanceProf
 		input = &AssociateIamInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateIamInstanceProfileOutput{})
+	output := &AssociateIamInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateIamInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -549,7 +576,10 @@ func (c *EC2) AssociateRouteTableRequest(input *AssociateRouteTableInput) Associ
 		input = &AssociateRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateRouteTableOutput{})
+	output := &AssociateRouteTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateRouteTableRequest{Request: req, Input: input}
 }
 
@@ -597,7 +627,10 @@ func (c *EC2) AssociateSubnetCidrBlockRequest(input *AssociateSubnetCidrBlockInp
 		input = &AssociateSubnetCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateSubnetCidrBlockOutput{})
+	output := &AssociateSubnetCidrBlockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateSubnetCidrBlockRequest{Request: req, Input: input}
 }
 
@@ -649,7 +682,10 @@ func (c *EC2) AssociateVpcCidrBlockRequest(input *AssociateVpcCidrBlockInput) As
 		input = &AssociateVpcCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateVpcCidrBlockOutput{})
+	output := &AssociateVpcCidrBlockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateVpcCidrBlockRequest{Request: req, Input: input}
 }
 
@@ -706,7 +742,10 @@ func (c *EC2) AttachClassicLinkVpcRequest(input *AttachClassicLinkVpcInput) Atta
 		input = &AttachClassicLinkVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachClassicLinkVpcOutput{})
+	output := &AttachClassicLinkVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachClassicLinkVpcRequest{Request: req, Input: input}
 }
 
@@ -754,9 +793,12 @@ func (c *EC2) AttachInternetGatewayRequest(input *AttachInternetGatewayInput) At
 		input = &AttachInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachInternetGatewayOutput{})
+	output := &AttachInternetGatewayOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachInternetGatewayRequest{Request: req, Input: input}
 }
 
@@ -802,7 +844,10 @@ func (c *EC2) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInput) 
 		input = &AttachNetworkInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachNetworkInterfaceOutput{})
+	output := &AttachNetworkInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachNetworkInterfaceRequest{Request: req, Input: input}
 }
 
@@ -877,7 +922,10 @@ func (c *EC2) AttachVolumeRequest(input *AttachVolumeInput) AttachVolumeRequest 
 		input = &AttachVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachVolumeOutput{})
+	output := &DetachVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachVolumeRequest{Request: req, Input: input}
 }
 
@@ -927,7 +975,10 @@ func (c *EC2) AttachVpnGatewayRequest(input *AttachVpnGatewayInput) AttachVpnGat
 		input = &AttachVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachVpnGatewayOutput{})
+	output := &AttachVpnGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachVpnGatewayRequest{Request: req, Input: input}
 }
 
@@ -990,9 +1041,12 @@ func (c *EC2) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGroupE
 		input = &AuthorizeSecurityGroupEgressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeSecurityGroupEgressOutput{})
+	output := &AuthorizeSecurityGroupEgressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AuthorizeSecurityGroupEgressRequest{Request: req, Input: input}
 }
 
@@ -1056,9 +1110,12 @@ func (c *EC2) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGroup
 		input = &AuthorizeSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeSecurityGroupIngressOutput{})
+	output := &AuthorizeSecurityGroupIngressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AuthorizeSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
@@ -1112,7 +1169,10 @@ func (c *EC2) BundleInstanceRequest(input *BundleInstanceInput) BundleInstanceRe
 		input = &BundleInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &BundleInstanceOutput{})
+	output := &BundleInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BundleInstanceRequest{Request: req, Input: input}
 }
 
@@ -1158,7 +1218,10 @@ func (c *EC2) CancelBundleTaskRequest(input *CancelBundleTaskInput) CancelBundle
 		input = &CancelBundleTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelBundleTaskOutput{})
+	output := &CancelBundleTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelBundleTaskRequest{Request: req, Input: input}
 }
 
@@ -1211,9 +1274,12 @@ func (c *EC2) CancelConversionTaskRequest(input *CancelConversionTaskInput) Canc
 		input = &CancelConversionTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelConversionTaskOutput{})
+	output := &CancelConversionTaskOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelConversionTaskRequest{Request: req, Input: input}
 }
 
@@ -1262,9 +1328,12 @@ func (c *EC2) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExport
 		input = &CancelExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelExportTaskOutput{})
+	output := &CancelExportTaskOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelExportTaskRequest{Request: req, Input: input}
 }
 
@@ -1310,7 +1379,10 @@ func (c *EC2) CancelImportTaskRequest(input *CancelImportTaskInput) CancelImport
 		input = &CancelImportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelImportTaskOutput{})
+	output := &CancelImportTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelImportTaskRequest{Request: req, Input: input}
 }
 
@@ -1360,7 +1432,10 @@ func (c *EC2) CancelReservedInstancesListingRequest(input *CancelReservedInstanc
 		input = &CancelReservedInstancesListingInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelReservedInstancesListingOutput{})
+	output := &CancelReservedInstancesListingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelReservedInstancesListingRequest{Request: req, Input: input}
 }
 
@@ -1413,7 +1488,10 @@ func (c *EC2) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsInput
 		input = &CancelSpotFleetRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSpotFleetRequestsOutput{})
+	output := &CancelSpotFleetRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelSpotFleetRequestsRequest{Request: req, Input: input}
 }
 
@@ -1467,7 +1545,10 @@ func (c *EC2) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequest
 		input = &CancelSpotInstanceRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSpotInstanceRequestsOutput{})
+	output := &CancelSpotInstanceRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelSpotInstanceRequestsRequest{Request: req, Input: input}
 }
 
@@ -1515,7 +1596,10 @@ func (c *EC2) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInput) 
 		input = &ConfirmProductInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmProductInstanceOutput{})
+	output := &ConfirmProductInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConfirmProductInstanceRequest{Request: req, Input: input}
 }
 
@@ -1561,7 +1645,10 @@ func (c *EC2) CopyFpgaImageRequest(input *CopyFpgaImageInput) CopyFpgaImageReque
 		input = &CopyFpgaImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyFpgaImageOutput{})
+	output := &CopyFpgaImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyFpgaImageRequest{Request: req, Input: input}
 }
 
@@ -1613,7 +1700,10 @@ func (c *EC2) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
 		input = &CopyImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyImageOutput{})
+	output := &CopyImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyImageRequest{Request: req, Input: input}
 }
 
@@ -1678,7 +1768,10 @@ func (c *EC2) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotRequest 
 		input = &CopySnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopySnapshotOutput{})
+	output := &CopySnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopySnapshotRequest{Request: req, Input: input}
 }
 
@@ -1748,7 +1841,10 @@ func (c *EC2) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput) Cr
 		input = &CreateCustomerGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCustomerGatewayOutput{})
+	output := &CreateCustomerGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCustomerGatewayRequest{Request: req, Input: input}
 }
 
@@ -1806,7 +1902,10 @@ func (c *EC2) CreateDefaultVpcRequest(input *CreateDefaultVpcInput) CreateDefaul
 		input = &CreateDefaultVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDefaultVpcOutput{})
+	output := &CreateDefaultVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDefaultVpcRequest{Request: req, Input: input}
 }
 
@@ -1891,7 +1990,10 @@ func (c *EC2) CreateDhcpOptionsRequest(input *CreateDhcpOptionsInput) CreateDhcp
 		input = &CreateDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDhcpOptionsOutput{})
+	output := &CreateDhcpOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDhcpOptionsRequest{Request: req, Input: input}
 }
 
@@ -1940,7 +2042,10 @@ func (c *EC2) CreateEgressOnlyInternetGatewayRequest(input *CreateEgressOnlyInte
 		input = &CreateEgressOnlyInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEgressOnlyInternetGatewayOutput{})
+	output := &CreateEgressOnlyInternetGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEgressOnlyInternetGatewayRequest{Request: req, Input: input}
 }
 
@@ -1995,7 +2100,10 @@ func (c *EC2) CreateFlowLogsRequest(input *CreateFlowLogsInput) CreateFlowLogsRe
 		input = &CreateFlowLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFlowLogsOutput{})
+	output := &CreateFlowLogsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFlowLogsRequest{Request: req, Input: input}
 }
 
@@ -2048,7 +2156,10 @@ func (c *EC2) CreateFpgaImageRequest(input *CreateFpgaImageInput) CreateFpgaImag
 		input = &CreateFpgaImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFpgaImageOutput{})
+	output := &CreateFpgaImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFpgaImageRequest{Request: req, Input: input}
 }
 
@@ -2103,7 +2214,10 @@ func (c *EC2) CreateImageRequest(input *CreateImageInput) CreateImageRequest {
 		input = &CreateImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImageOutput{})
+	output := &CreateImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateImageRequest{Request: req, Input: input}
 }
 
@@ -2154,7 +2268,10 @@ func (c *EC2) CreateInstanceExportTaskRequest(input *CreateInstanceExportTaskInp
 		input = &CreateInstanceExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceExportTaskOutput{})
+	output := &CreateInstanceExportTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInstanceExportTaskRequest{Request: req, Input: input}
 }
 
@@ -2204,7 +2321,10 @@ func (c *EC2) CreateInternetGatewayRequest(input *CreateInternetGatewayInput) Cr
 		input = &CreateInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInternetGatewayOutput{})
+	output := &CreateInternetGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInternetGatewayRequest{Request: req, Input: input}
 }
 
@@ -2261,7 +2381,10 @@ func (c *EC2) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairReque
 		input = &CreateKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeyPairOutput{})
+	output := &CreateKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateKeyPairRequest{Request: req, Input: input}
 }
 
@@ -2312,7 +2435,10 @@ func (c *EC2) CreateNatGatewayRequest(input *CreateNatGatewayInput) CreateNatGat
 		input = &CreateNatGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNatGatewayOutput{})
+	output := &CreateNatGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNatGatewayRequest{Request: req, Input: input}
 }
 
@@ -2362,7 +2488,10 @@ func (c *EC2) CreateNetworkAclRequest(input *CreateNetworkAclInput) CreateNetwor
 		input = &CreateNetworkAclInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNetworkAclOutput{})
+	output := &CreateNetworkAclOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNetworkAclRequest{Request: req, Input: input}
 }
 
@@ -2424,9 +2553,12 @@ func (c *EC2) CreateNetworkAclEntryRequest(input *CreateNetworkAclEntryInput) Cr
 		input = &CreateNetworkAclEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNetworkAclEntryOutput{})
+	output := &CreateNetworkAclEntryOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNetworkAclEntryRequest{Request: req, Input: input}
 }
 
@@ -2476,7 +2608,10 @@ func (c *EC2) CreateNetworkInterfaceRequest(input *CreateNetworkInterfaceInput) 
 		input = &CreateNetworkInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNetworkInterfaceOutput{})
+	output := &CreateNetworkInterfaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNetworkInterfaceRequest{Request: req, Input: input}
 }
 
@@ -2526,7 +2661,10 @@ func (c *EC2) CreateNetworkInterfacePermissionRequest(input *CreateNetworkInterf
 		input = &CreateNetworkInterfacePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNetworkInterfacePermissionOutput{})
+	output := &CreateNetworkInterfacePermissionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNetworkInterfacePermissionRequest{Request: req, Input: input}
 }
 
@@ -2577,9 +2715,12 @@ func (c *EC2) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) Crea
 		input = &CreatePlacementGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlacementGroupOutput{})
+	output := &CreatePlacementGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePlacementGroupRequest{Request: req, Input: input}
 }
 
@@ -2648,7 +2789,10 @@ func (c *EC2) CreateReservedInstancesListingRequest(input *CreateReservedInstanc
 		input = &CreateReservedInstancesListingInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReservedInstancesListingOutput{})
+	output := &CreateReservedInstancesListingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReservedInstancesListingRequest{Request: req, Input: input}
 }
 
@@ -2713,7 +2857,10 @@ func (c *EC2) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest {
 		input = &CreateRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRouteOutput{})
+	output := &CreateRouteOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRouteRequest{Request: req, Input: input}
 }
 
@@ -2763,7 +2910,10 @@ func (c *EC2) CreateRouteTableRequest(input *CreateRouteTableInput) CreateRouteT
 		input = &CreateRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRouteTableOutput{})
+	output := &CreateRouteTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRouteTableRequest{Request: req, Input: input}
 }
 
@@ -2835,7 +2985,10 @@ func (c *EC2) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) Create
 		input = &CreateSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSecurityGroupOutput{})
+	output := &CreateSecurityGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSecurityGroupRequest{Request: req, Input: input}
 }
 
@@ -2908,7 +3061,10 @@ func (c *EC2) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRe
 		input = &CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	output := &CreateSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSnapshotRequest{Request: req, Input: input}
 }
 
@@ -2957,7 +3113,10 @@ func (c *EC2) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeedSub
 		input = &CreateSpotDatafeedSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSpotDatafeedSubscriptionOutput{})
+	output := &CreateSpotDatafeedSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSpotDatafeedSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -3029,7 +3188,10 @@ func (c *EC2) CreateSubnetRequest(input *CreateSubnetInput) CreateSubnetRequest 
 		input = &CreateSubnetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubnetOutput{})
+	output := &CreateSubnetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSubnetRequest{Request: req, Input: input}
 }
 
@@ -3083,9 +3245,12 @@ func (c *EC2) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 		input = &CreateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagsOutput{})
+	output := &CreateTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTagsRequest{Request: req, Input: input}
 }
 
@@ -3149,7 +3314,10 @@ func (c *EC2) CreateVolumeRequest(input *CreateVolumeInput) CreateVolumeRequest 
 		input = &CreateVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVolumeOutput{})
+	output := &CreateVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVolumeRequest{Request: req, Input: input}
 }
 
@@ -3213,7 +3381,10 @@ func (c *EC2) CreateVpcRequest(input *CreateVpcInput) CreateVpcRequest {
 		input = &CreateVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcOutput{})
+	output := &CreateVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpcRequest{Request: req, Input: input}
 }
 
@@ -3265,7 +3436,10 @@ func (c *EC2) CreateVpcEndpointRequest(input *CreateVpcEndpointInput) CreateVpcE
 		input = &CreateVpcEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcEndpointOutput{})
+	output := &CreateVpcEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpcEndpointRequest{Request: req, Input: input}
 }
 
@@ -3321,7 +3495,10 @@ func (c *EC2) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectio
 		input = &CreateVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcPeeringConnectionOutput{})
+	output := &CreateVpcPeeringConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
@@ -3385,7 +3562,10 @@ func (c *EC2) CreateVpnConnectionRequest(input *CreateVpnConnectionInput) Create
 		input = &CreateVpnConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpnConnectionOutput{})
+	output := &CreateVpnConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpnConnectionRequest{Request: req, Input: input}
 }
 
@@ -3438,9 +3618,12 @@ func (c *EC2) CreateVpnConnectionRouteRequest(input *CreateVpnConnectionRouteInp
 		input = &CreateVpnConnectionRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpnConnectionRouteOutput{})
+	output := &CreateVpnConnectionRouteOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpnConnectionRouteRequest{Request: req, Input: input}
 }
 
@@ -3492,7 +3675,10 @@ func (c *EC2) CreateVpnGatewayRequest(input *CreateVpnGatewayInput) CreateVpnGat
 		input = &CreateVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpnGatewayOutput{})
+	output := &CreateVpnGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpnGatewayRequest{Request: req, Input: input}
 }
 
@@ -3539,9 +3725,12 @@ func (c *EC2) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput) De
 		input = &DeleteCustomerGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomerGatewayOutput{})
+	output := &DeleteCustomerGatewayOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCustomerGatewayRequest{Request: req, Input: input}
 }
 
@@ -3590,9 +3779,12 @@ func (c *EC2) DeleteDhcpOptionsRequest(input *DeleteDhcpOptionsInput) DeleteDhcp
 		input = &DeleteDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDhcpOptionsOutput{})
+	output := &DeleteDhcpOptionsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDhcpOptionsRequest{Request: req, Input: input}
 }
 
@@ -3638,7 +3830,10 @@ func (c *EC2) DeleteEgressOnlyInternetGatewayRequest(input *DeleteEgressOnlyInte
 		input = &DeleteEgressOnlyInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEgressOnlyInternetGatewayOutput{})
+	output := &DeleteEgressOnlyInternetGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEgressOnlyInternetGatewayRequest{Request: req, Input: input}
 }
 
@@ -3684,7 +3879,10 @@ func (c *EC2) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) DeleteFlowLogsRe
 		input = &DeleteFlowLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFlowLogsOutput{})
+	output := &DeleteFlowLogsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFlowLogsRequest{Request: req, Input: input}
 }
 
@@ -3730,7 +3928,10 @@ func (c *EC2) DeleteFpgaImageRequest(input *DeleteFpgaImageInput) DeleteFpgaImag
 		input = &DeleteFpgaImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFpgaImageOutput{})
+	output := &DeleteFpgaImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFpgaImageRequest{Request: req, Input: input}
 }
 
@@ -3777,9 +3978,12 @@ func (c *EC2) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput) De
 		input = &DeleteInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInternetGatewayOutput{})
+	output := &DeleteInternetGatewayOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteInternetGatewayRequest{Request: req, Input: input}
 }
 
@@ -3825,9 +4029,12 @@ func (c *EC2) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairReque
 		input = &DeleteKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteKeyPairOutput{})
+	output := &DeleteKeyPairOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteKeyPairRequest{Request: req, Input: input}
 }
 
@@ -3875,7 +4082,10 @@ func (c *EC2) DeleteNatGatewayRequest(input *DeleteNatGatewayInput) DeleteNatGat
 		input = &DeleteNatGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNatGatewayOutput{})
+	output := &DeleteNatGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNatGatewayRequest{Request: req, Input: input}
 }
 
@@ -3922,9 +4132,12 @@ func (c *EC2) DeleteNetworkAclRequest(input *DeleteNetworkAclInput) DeleteNetwor
 		input = &DeleteNetworkAclInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkAclOutput{})
+	output := &DeleteNetworkAclOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNetworkAclRequest{Request: req, Input: input}
 }
 
@@ -3971,9 +4184,12 @@ func (c *EC2) DeleteNetworkAclEntryRequest(input *DeleteNetworkAclEntryInput) De
 		input = &DeleteNetworkAclEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkAclEntryOutput{})
+	output := &DeleteNetworkAclEntryOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNetworkAclEntryRequest{Request: req, Input: input}
 }
 
@@ -4020,9 +4236,12 @@ func (c *EC2) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInput) 
 		input = &DeleteNetworkInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkInterfaceOutput{})
+	output := &DeleteNetworkInterfaceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNetworkInterfaceRequest{Request: req, Input: input}
 }
 
@@ -4071,7 +4290,10 @@ func (c *EC2) DeleteNetworkInterfacePermissionRequest(input *DeleteNetworkInterf
 		input = &DeleteNetworkInterfacePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkInterfacePermissionOutput{})
+	output := &DeleteNetworkInterfacePermissionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNetworkInterfacePermissionRequest{Request: req, Input: input}
 }
 
@@ -4120,9 +4342,12 @@ func (c *EC2) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) Dele
 		input = &DeletePlacementGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlacementGroupOutput{})
+	output := &DeletePlacementGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePlacementGroupRequest{Request: req, Input: input}
 }
 
@@ -4168,9 +4393,12 @@ func (c *EC2) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest {
 		input = &DeleteRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRouteOutput{})
+	output := &DeleteRouteOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRouteRequest{Request: req, Input: input}
 }
 
@@ -4218,9 +4446,12 @@ func (c *EC2) DeleteRouteTableRequest(input *DeleteRouteTableInput) DeleteRouteT
 		input = &DeleteRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRouteTableOutput{})
+	output := &DeleteRouteTableOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRouteTableRequest{Request: req, Input: input}
 }
 
@@ -4270,9 +4501,12 @@ func (c *EC2) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) Delete
 		input = &DeleteSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSecurityGroupOutput{})
+	output := &DeleteSecurityGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSecurityGroupRequest{Request: req, Input: input}
 }
 
@@ -4332,9 +4566,12 @@ func (c *EC2) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSnapshotRe
 		input = &DeleteSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotOutput{})
+	output := &DeleteSnapshotOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSnapshotRequest{Request: req, Input: input}
 }
 
@@ -4380,9 +4617,12 @@ func (c *EC2) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeedSub
 		input = &DeleteSpotDatafeedSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSpotDatafeedSubscriptionOutput{})
+	output := &DeleteSpotDatafeedSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSpotDatafeedSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -4429,9 +4669,12 @@ func (c *EC2) DeleteSubnetRequest(input *DeleteSubnetInput) DeleteSubnetRequest 
 		input = &DeleteSubnetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubnetOutput{})
+	output := &DeleteSubnetOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSubnetRequest{Request: req, Input: input}
 }
 
@@ -4481,9 +4724,12 @@ func (c *EC2) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 		input = &DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsRequest{Request: req, Input: input}
 }
 
@@ -4535,9 +4781,12 @@ func (c *EC2) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeRequest 
 		input = &DeleteVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVolumeOutput{})
+	output := &DeleteVolumeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVolumeRequest{Request: req, Input: input}
 }
 
@@ -4587,9 +4836,12 @@ func (c *EC2) DeleteVpcRequest(input *DeleteVpcInput) DeleteVpcRequest {
 		input = &DeleteVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcOutput{})
+	output := &DeleteVpcOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpcRequest{Request: req, Input: input}
 }
 
@@ -4636,7 +4888,10 @@ func (c *EC2) DeleteVpcEndpointsRequest(input *DeleteVpcEndpointsInput) DeleteVp
 		input = &DeleteVpcEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcEndpointsOutput{})
+	output := &DeleteVpcEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpcEndpointsRequest{Request: req, Input: input}
 }
 
@@ -4685,7 +4940,10 @@ func (c *EC2) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectio
 		input = &DeleteVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcPeeringConnectionOutput{})
+	output := &DeleteVpcPeeringConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
@@ -4740,9 +4998,12 @@ func (c *EC2) DeleteVpnConnectionRequest(input *DeleteVpnConnectionInput) Delete
 		input = &DeleteVpnConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpnConnectionOutput{})
+	output := &DeleteVpnConnectionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpnConnectionRequest{Request: req, Input: input}
 }
 
@@ -4791,9 +5052,12 @@ func (c *EC2) DeleteVpnConnectionRouteRequest(input *DeleteVpnConnectionRouteInp
 		input = &DeleteVpnConnectionRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpnConnectionRouteOutput{})
+	output := &DeleteVpnConnectionRouteOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpnConnectionRouteRequest{Request: req, Input: input}
 }
 
@@ -4843,9 +5107,12 @@ func (c *EC2) DeleteVpnGatewayRequest(input *DeleteVpnGatewayInput) DeleteVpnGat
 		input = &DeleteVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpnGatewayOutput{})
+	output := &DeleteVpnGatewayOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpnGatewayRequest{Request: req, Input: input}
 }
 
@@ -4899,9 +5166,12 @@ func (c *EC2) DeregisterImageRequest(input *DeregisterImageInput) DeregisterImag
 		input = &DeregisterImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterImageOutput{})
+	output := &DeregisterImageOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterImageRequest{Request: req, Input: input}
 }
 
@@ -4965,7 +5235,10 @@ func (c *EC2) DescribeAccountAttributesRequest(input *DescribeAccountAttributesI
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	output := &DescribeAccountAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
@@ -5015,7 +5288,10 @@ func (c *EC2) DescribeAddressesRequest(input *DescribeAddressesInput) DescribeAd
 		input = &DescribeAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAddressesOutput{})
+	output := &DescribeAddressesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAddressesRequest{Request: req, Input: input}
 }
 
@@ -5067,7 +5343,10 @@ func (c *EC2) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZonesI
 		input = &DescribeAvailabilityZonesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAvailabilityZonesOutput{})
+	output := &DescribeAvailabilityZonesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAvailabilityZonesRequest{Request: req, Input: input}
 }
 
@@ -5118,7 +5397,10 @@ func (c *EC2) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) Descri
 		input = &DescribeBundleTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBundleTasksOutput{})
+	output := &DescribeBundleTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBundleTasksRequest{Request: req, Input: input}
 }
 
@@ -5167,7 +5449,10 @@ func (c *EC2) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkInst
 		input = &DescribeClassicLinkInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClassicLinkInstancesOutput{})
+	output := &DescribeClassicLinkInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeClassicLinkInstancesRequest{Request: req, Input: input}
 }
 
@@ -5217,7 +5502,10 @@ func (c *EC2) DescribeConversionTasksRequest(input *DescribeConversionTasksInput
 		input = &DescribeConversionTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConversionTasksOutput{})
+	output := &DescribeConversionTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConversionTasksRequest{Request: req, Input: input}
 }
 
@@ -5267,7 +5555,10 @@ func (c *EC2) DescribeCustomerGatewaysRequest(input *DescribeCustomerGatewaysInp
 		input = &DescribeCustomerGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCustomerGatewaysOutput{})
+	output := &DescribeCustomerGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCustomerGatewaysRequest{Request: req, Input: input}
 }
 
@@ -5316,7 +5607,10 @@ func (c *EC2) DescribeDhcpOptionsRequest(input *DescribeDhcpOptionsInput) Descri
 		input = &DescribeDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDhcpOptionsOutput{})
+	output := &DescribeDhcpOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDhcpOptionsRequest{Request: req, Input: input}
 }
 
@@ -5362,7 +5656,10 @@ func (c *EC2) DescribeEgressOnlyInternetGatewaysRequest(input *DescribeEgressOnl
 		input = &DescribeEgressOnlyInternetGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEgressOnlyInternetGatewaysOutput{})
+	output := &DescribeEgressOnlyInternetGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEgressOnlyInternetGatewaysRequest{Request: req, Input: input}
 }
 
@@ -5409,7 +5706,10 @@ func (c *EC2) DescribeElasticGpusRequest(input *DescribeElasticGpusInput) Descri
 		input = &DescribeElasticGpusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticGpusOutput{})
+	output := &DescribeElasticGpusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticGpusRequest{Request: req, Input: input}
 }
 
@@ -5455,7 +5755,10 @@ func (c *EC2) DescribeExportTasksRequest(input *DescribeExportTasksInput) Descri
 		input = &DescribeExportTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	output := &DescribeExportTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeExportTasksRequest{Request: req, Input: input}
 }
 
@@ -5503,7 +5806,10 @@ func (c *EC2) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) DescribeFlow
 		input = &DescribeFlowLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFlowLogsOutput{})
+	output := &DescribeFlowLogsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFlowLogsRequest{Request: req, Input: input}
 }
 
@@ -5549,7 +5855,10 @@ func (c *EC2) DescribeFpgaImageAttributeRequest(input *DescribeFpgaImageAttribut
 		input = &DescribeFpgaImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFpgaImageAttributeOutput{})
+	output := &DescribeFpgaImageAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFpgaImageAttributeRequest{Request: req, Input: input}
 }
 
@@ -5597,7 +5906,10 @@ func (c *EC2) DescribeFpgaImagesRequest(input *DescribeFpgaImagesInput) Describe
 		input = &DescribeFpgaImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFpgaImagesOutput{})
+	output := &DescribeFpgaImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFpgaImagesRequest{Request: req, Input: input}
 }
 
@@ -5651,7 +5963,10 @@ func (c *EC2) DescribeHostReservationOfferingsRequest(input *DescribeHostReserva
 		input = &DescribeHostReservationOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostReservationOfferingsOutput{})
+	output := &DescribeHostReservationOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHostReservationOfferingsRequest{Request: req, Input: input}
 }
 
@@ -5698,7 +6013,10 @@ func (c *EC2) DescribeHostReservationsRequest(input *DescribeHostReservationsInp
 		input = &DescribeHostReservationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostReservationsOutput{})
+	output := &DescribeHostReservationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHostReservationsRequest{Request: req, Input: input}
 }
 
@@ -5748,7 +6066,10 @@ func (c *EC2) DescribeHostsRequest(input *DescribeHostsInput) DescribeHostsReque
 		input = &DescribeHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostsOutput{})
+	output := &DescribeHostsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHostsRequest{Request: req, Input: input}
 }
 
@@ -5794,7 +6115,10 @@ func (c *EC2) DescribeIamInstanceProfileAssociationsRequest(input *DescribeIamIn
 		input = &DescribeIamInstanceProfileAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIamInstanceProfileAssociationsOutput{})
+	output := &DescribeIamInstanceProfileAssociationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIamInstanceProfileAssociationsRequest{Request: req, Input: input}
 }
 
@@ -5853,7 +6177,10 @@ func (c *EC2) DescribeIdFormatRequest(input *DescribeIdFormatInput) DescribeIdFo
 		input = &DescribeIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdFormatOutput{})
+	output := &DescribeIdFormatOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdFormatRequest{Request: req, Input: input}
 }
 
@@ -5910,7 +6237,10 @@ func (c *EC2) DescribeIdentityIdFormatRequest(input *DescribeIdentityIdFormatInp
 		input = &DescribeIdentityIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityIdFormatOutput{})
+	output := &DescribeIdentityIdFormatOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdentityIdFormatRequest{Request: req, Input: input}
 }
 
@@ -5957,7 +6287,10 @@ func (c *EC2) DescribeImageAttributeRequest(input *DescribeImageAttributeInput) 
 		input = &DescribeImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImageAttributeOutput{})
+	output := &DescribeImageAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImageAttributeRequest{Request: req, Input: input}
 }
 
@@ -6009,7 +6342,10 @@ func (c *EC2) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 		input = &DescribeImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImagesOutput{})
+	output := &DescribeImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImagesRequest{Request: req, Input: input}
 }
 
@@ -6056,7 +6392,10 @@ func (c *EC2) DescribeImportImageTasksRequest(input *DescribeImportImageTasksInp
 		input = &DescribeImportImageTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImportImageTasksOutput{})
+	output := &DescribeImportImageTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImportImageTasksRequest{Request: req, Input: input}
 }
 
@@ -6102,7 +6441,10 @@ func (c *EC2) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapshotTa
 		input = &DescribeImportSnapshotTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImportSnapshotTasksOutput{})
+	output := &DescribeImportSnapshotTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImportSnapshotTasksRequest{Request: req, Input: input}
 }
 
@@ -6152,7 +6494,10 @@ func (c *EC2) DescribeInstanceAttributeRequest(input *DescribeInstanceAttributeI
 		input = &DescribeInstanceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceAttributeOutput{})
+	output := &DescribeInstanceAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstanceAttributeRequest{Request: req, Input: input}
 }
 
@@ -6225,7 +6570,10 @@ func (c *EC2) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInput) 
 		input = &DescribeInstanceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceStatusOutput{})
+	output := &DescribeInstanceStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstanceStatusRequest{Request: req, Input: input}
 }
 
@@ -6342,7 +6690,10 @@ func (c *EC2) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeIn
 		input = &DescribeInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	output := &DescribeInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancesRequest{Request: req, Input: input}
 }
 
@@ -6438,7 +6789,10 @@ func (c *EC2) DescribeInternetGatewaysRequest(input *DescribeInternetGatewaysInp
 		input = &DescribeInternetGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInternetGatewaysOutput{})
+	output := &DescribeInternetGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInternetGatewaysRequest{Request: req, Input: input}
 }
 
@@ -6487,7 +6841,10 @@ func (c *EC2) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) DescribeKeyP
 		input = &DescribeKeyPairsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeKeyPairsOutput{})
+	output := &DescribeKeyPairsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeKeyPairsRequest{Request: req, Input: input}
 }
 
@@ -6535,7 +6892,10 @@ func (c *EC2) DescribeMovingAddressesRequest(input *DescribeMovingAddressesInput
 		input = &DescribeMovingAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMovingAddressesOutput{})
+	output := &DescribeMovingAddressesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMovingAddressesRequest{Request: req, Input: input}
 }
 
@@ -6587,7 +6947,10 @@ func (c *EC2) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) Descri
 		input = &DescribeNatGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNatGatewaysOutput{})
+	output := &DescribeNatGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNatGatewaysRequest{Request: req, Input: input}
 }
 
@@ -6686,7 +7049,10 @@ func (c *EC2) DescribeNetworkAclsRequest(input *DescribeNetworkAclsInput) Descri
 		input = &DescribeNetworkAclsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNetworkAclsOutput{})
+	output := &DescribeNetworkAclsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNetworkAclsRequest{Request: req, Input: input}
 }
 
@@ -6733,7 +7099,10 @@ func (c *EC2) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetworkInt
 		input = &DescribeNetworkInterfaceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNetworkInterfaceAttributeOutput{})
+	output := &DescribeNetworkInterfaceAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNetworkInterfaceAttributeRequest{Request: req, Input: input}
 }
 
@@ -6779,7 +7148,10 @@ func (c *EC2) DescribeNetworkInterfacePermissionsRequest(input *DescribeNetworkI
 		input = &DescribeNetworkInterfacePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNetworkInterfacePermissionsOutput{})
+	output := &DescribeNetworkInterfacePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNetworkInterfacePermissionsRequest{Request: req, Input: input}
 }
 
@@ -6825,7 +7197,10 @@ func (c *EC2) DescribeNetworkInterfacesRequest(input *DescribeNetworkInterfacesI
 		input = &DescribeNetworkInterfacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNetworkInterfacesOutput{})
+	output := &DescribeNetworkInterfacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNetworkInterfacesRequest{Request: req, Input: input}
 }
 
@@ -6873,7 +7248,10 @@ func (c *EC2) DescribePlacementGroupsRequest(input *DescribePlacementGroupsInput
 		input = &DescribePlacementGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePlacementGroupsOutput{})
+	output := &DescribePlacementGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePlacementGroupsRequest{Request: req, Input: input}
 }
 
@@ -6923,7 +7301,10 @@ func (c *EC2) DescribePrefixListsRequest(input *DescribePrefixListsInput) Descri
 		input = &DescribePrefixListsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePrefixListsOutput{})
+	output := &DescribePrefixListsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePrefixListsRequest{Request: req, Input: input}
 }
 
@@ -6972,7 +7353,10 @@ func (c *EC2) DescribeRegionsRequest(input *DescribeRegionsInput) DescribeRegion
 		input = &DescribeRegionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRegionsOutput{})
+	output := &DescribeRegionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRegionsRequest{Request: req, Input: input}
 }
 
@@ -7021,7 +7405,10 @@ func (c *EC2) DescribeReservedInstancesRequest(input *DescribeReservedInstancesI
 		input = &DescribeReservedInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesOutput{})
+	output := &DescribeReservedInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedInstancesRequest{Request: req, Input: input}
 }
 
@@ -7088,7 +7475,10 @@ func (c *EC2) DescribeReservedInstancesListingsRequest(input *DescribeReservedIn
 		input = &DescribeReservedInstancesListingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesListingsOutput{})
+	output := &DescribeReservedInstancesListingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedInstancesListingsRequest{Request: req, Input: input}
 }
 
@@ -7146,7 +7536,10 @@ func (c *EC2) DescribeReservedInstancesModificationsRequest(input *DescribeReser
 		input = &DescribeReservedInstancesModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesModificationsOutput{})
+	output := &DescribeReservedInstancesModificationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedInstancesModificationsRequest{Request: req, Input: input}
 }
 
@@ -7259,7 +7652,10 @@ func (c *EC2) DescribeReservedInstancesOfferingsRequest(input *DescribeReservedI
 		input = &DescribeReservedInstancesOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesOfferingsOutput{})
+	output := &DescribeReservedInstancesOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedInstancesOfferingsRequest{Request: req, Input: input}
 }
 
@@ -7363,7 +7759,10 @@ func (c *EC2) DescribeRouteTablesRequest(input *DescribeRouteTablesInput) Descri
 		input = &DescribeRouteTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRouteTablesOutput{})
+	output := &DescribeRouteTablesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRouteTablesRequest{Request: req, Input: input}
 }
 
@@ -7417,7 +7816,10 @@ func (c *EC2) DescribeScheduledInstanceAvailabilityRequest(input *DescribeSchedu
 		input = &DescribeScheduledInstanceAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScheduledInstanceAvailabilityOutput{})
+	output := &DescribeScheduledInstanceAvailabilityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScheduledInstanceAvailabilityRequest{Request: req, Input: input}
 }
 
@@ -7463,7 +7865,10 @@ func (c *EC2) DescribeScheduledInstancesRequest(input *DescribeScheduledInstance
 		input = &DescribeScheduledInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScheduledInstancesOutput{})
+	output := &DescribeScheduledInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScheduledInstancesRequest{Request: req, Input: input}
 }
 
@@ -7510,7 +7915,10 @@ func (c *EC2) DescribeSecurityGroupReferencesRequest(input *DescribeSecurityGrou
 		input = &DescribeSecurityGroupReferencesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSecurityGroupReferencesOutput{})
+	output := &DescribeSecurityGroupReferencesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSecurityGroupReferencesRequest{Request: req, Input: input}
 }
 
@@ -7563,7 +7971,10 @@ func (c *EC2) DescribeSecurityGroupsRequest(input *DescribeSecurityGroupsInput) 
 		input = &DescribeSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSecurityGroupsOutput{})
+	output := &DescribeSecurityGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSecurityGroupsRequest{Request: req, Input: input}
 }
 
@@ -7613,7 +8024,10 @@ func (c *EC2) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttributeI
 		input = &DescribeSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotAttributeOutput{})
+	output := &DescribeSnapshotAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSnapshotAttributeRequest{Request: req, Input: input}
 }
 
@@ -7710,7 +8124,10 @@ func (c *EC2) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSn
 		input = &DescribeSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	output := &DescribeSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSnapshotsRequest{Request: req, Input: input}
 }
 
@@ -7808,7 +8225,10 @@ func (c *EC2) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotDatafee
 		input = &DescribeSpotDatafeedSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotDatafeedSubscriptionOutput{})
+	output := &DescribeSpotDatafeedSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSpotDatafeedSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -7854,7 +8274,10 @@ func (c *EC2) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInstance
 		input = &DescribeSpotFleetInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotFleetInstancesOutput{})
+	output := &DescribeSpotFleetInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSpotFleetInstancesRequest{Request: req, Input: input}
 }
 
@@ -7905,7 +8328,10 @@ func (c *EC2) DescribeSpotFleetRequestHistoryRequest(input *DescribeSpotFleetReq
 		input = &DescribeSpotFleetRequestHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotFleetRequestHistoryOutput{})
+	output := &DescribeSpotFleetRequestHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSpotFleetRequestHistoryRequest{Request: req, Input: input}
 }
 
@@ -7960,7 +8386,10 @@ func (c *EC2) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetRequestsI
 		input = &DescribeSpotFleetRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotFleetRequestsOutput{})
+	output := &DescribeSpotFleetRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSpotFleetRequestsRequest{Request: req, Input: input}
 }
 
@@ -8070,7 +8499,10 @@ func (c *EC2) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstanceReq
 		input = &DescribeSpotInstanceRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotInstanceRequestsOutput{})
+	output := &DescribeSpotInstanceRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSpotInstanceRequestsRequest{Request: req, Input: input}
 }
 
@@ -8129,7 +8561,10 @@ func (c *EC2) DescribeSpotPriceHistoryRequest(input *DescribeSpotPriceHistoryInp
 		input = &DescribeSpotPriceHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotPriceHistoryOutput{})
+	output := &DescribeSpotPriceHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSpotPriceHistoryRequest{Request: req, Input: input}
 }
 
@@ -8228,7 +8663,10 @@ func (c *EC2) DescribeStaleSecurityGroupsRequest(input *DescribeStaleSecurityGro
 		input = &DescribeStaleSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStaleSecurityGroupsOutput{})
+	output := &DescribeStaleSecurityGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStaleSecurityGroupsRequest{Request: req, Input: input}
 }
 
@@ -8277,7 +8715,10 @@ func (c *EC2) DescribeSubnetsRequest(input *DescribeSubnetsInput) DescribeSubnet
 		input = &DescribeSubnetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubnetsOutput{})
+	output := &DescribeSubnetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSubnetsRequest{Request: req, Input: input}
 }
 
@@ -8332,7 +8773,10 @@ func (c *EC2) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -8432,7 +8876,10 @@ func (c *EC2) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeInput
 		input = &DescribeVolumeAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumeAttributeOutput{})
+	output := &DescribeVolumeAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVolumeAttributeRequest{Request: req, Input: input}
 }
 
@@ -8518,7 +8965,10 @@ func (c *EC2) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) Desc
 		input = &DescribeVolumeStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumeStatusOutput{})
+	output := &DescribeVolumeStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVolumeStatusRequest{Request: req, Input: input}
 }
 
@@ -8630,7 +9080,10 @@ func (c *EC2) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVolume
 		input = &DescribeVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumesOutput{})
+	output := &DescribeVolumesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVolumesRequest{Request: req, Input: input}
 }
 
@@ -8738,7 +9191,10 @@ func (c *EC2) DescribeVolumesModificationsRequest(input *DescribeVolumesModifica
 		input = &DescribeVolumesModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumesModificationsOutput{})
+	output := &DescribeVolumesModificationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVolumesModificationsRequest{Request: req, Input: input}
 }
 
@@ -8785,7 +9241,10 @@ func (c *EC2) DescribeVpcAttributeRequest(input *DescribeVpcAttributeInput) Desc
 		input = &DescribeVpcAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcAttributeOutput{})
+	output := &DescribeVpcAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcAttributeRequest{Request: req, Input: input}
 }
 
@@ -8831,7 +9290,10 @@ func (c *EC2) DescribeVpcClassicLinkRequest(input *DescribeVpcClassicLinkInput) 
 		input = &DescribeVpcClassicLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcClassicLinkOutput{})
+	output := &DescribeVpcClassicLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcClassicLinkRequest{Request: req, Input: input}
 }
 
@@ -8883,7 +9345,10 @@ func (c *EC2) DescribeVpcClassicLinkDnsSupportRequest(input *DescribeVpcClassicL
 		input = &DescribeVpcClassicLinkDnsSupportInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcClassicLinkDnsSupportOutput{})
+	output := &DescribeVpcClassicLinkDnsSupportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcClassicLinkDnsSupportRequest{Request: req, Input: input}
 }
 
@@ -8930,7 +9395,10 @@ func (c *EC2) DescribeVpcEndpointServicesRequest(input *DescribeVpcEndpointServi
 		input = &DescribeVpcEndpointServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcEndpointServicesOutput{})
+	output := &DescribeVpcEndpointServicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcEndpointServicesRequest{Request: req, Input: input}
 }
 
@@ -8976,7 +9444,10 @@ func (c *EC2) DescribeVpcEndpointsRequest(input *DescribeVpcEndpointsInput) Desc
 		input = &DescribeVpcEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcEndpointsOutput{})
+	output := &DescribeVpcEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcEndpointsRequest{Request: req, Input: input}
 }
 
@@ -9022,7 +9493,10 @@ func (c *EC2) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConn
 		input = &DescribeVpcPeeringConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcPeeringConnectionsOutput{})
+	output := &DescribeVpcPeeringConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input}
 }
 
@@ -9068,7 +9542,10 @@ func (c *EC2) DescribeVpcsRequest(input *DescribeVpcsInput) DescribeVpcsRequest 
 		input = &DescribeVpcsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcsOutput{})
+	output := &DescribeVpcsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcsRequest{Request: req, Input: input}
 }
 
@@ -9118,7 +9595,10 @@ func (c *EC2) DescribeVpnConnectionsRequest(input *DescribeVpnConnectionsInput) 
 		input = &DescribeVpnConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpnConnectionsOutput{})
+	output := &DescribeVpnConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpnConnectionsRequest{Request: req, Input: input}
 }
 
@@ -9168,7 +9648,10 @@ func (c *EC2) DescribeVpnGatewaysRequest(input *DescribeVpnGatewaysInput) Descri
 		input = &DescribeVpnGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpnGatewaysOutput{})
+	output := &DescribeVpnGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpnGatewaysRequest{Request: req, Input: input}
 }
 
@@ -9216,7 +9699,10 @@ func (c *EC2) DetachClassicLinkVpcRequest(input *DetachClassicLinkVpcInput) Deta
 		input = &DetachClassicLinkVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachClassicLinkVpcOutput{})
+	output := &DetachClassicLinkVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachClassicLinkVpcRequest{Request: req, Input: input}
 }
 
@@ -9264,9 +9750,12 @@ func (c *EC2) DetachInternetGatewayRequest(input *DetachInternetGatewayInput) De
 		input = &DetachInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachInternetGatewayOutput{})
+	output := &DetachInternetGatewayOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachInternetGatewayRequest{Request: req, Input: input}
 }
 
@@ -9312,9 +9801,12 @@ func (c *EC2) DetachNetworkInterfaceRequest(input *DetachNetworkInterfaceInput) 
 		input = &DetachNetworkInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachNetworkInterfaceOutput{})
+	output := &DetachNetworkInterfaceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachNetworkInterfaceRequest{Request: req, Input: input}
 }
 
@@ -9373,7 +9865,10 @@ func (c *EC2) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeRequest 
 		input = &DetachVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachVolumeOutput{})
+	output := &DetachVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachVolumeRequest{Request: req, Input: input}
 }
 
@@ -9426,9 +9921,12 @@ func (c *EC2) DetachVpnGatewayRequest(input *DetachVpnGatewayInput) DetachVpnGat
 		input = &DetachVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachVpnGatewayOutput{})
+	output := &DetachVpnGatewayOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachVpnGatewayRequest{Request: req, Input: input}
 }
 
@@ -9475,9 +9973,12 @@ func (c *EC2) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropagatio
 		input = &DisableVgwRoutePropagationInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableVgwRoutePropagationOutput{})
+	output := &DisableVgwRoutePropagationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableVgwRoutePropagationRequest{Request: req, Input: input}
 }
 
@@ -9524,7 +10025,10 @@ func (c *EC2) DisableVpcClassicLinkRequest(input *DisableVpcClassicLinkInput) Di
 		input = &DisableVpcClassicLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableVpcClassicLinkOutput{})
+	output := &DisableVpcClassicLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableVpcClassicLinkRequest{Request: req, Input: input}
 }
 
@@ -9574,7 +10078,10 @@ func (c *EC2) DisableVpcClassicLinkDnsSupportRequest(input *DisableVpcClassicLin
 		input = &DisableVpcClassicLinkDnsSupportInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableVpcClassicLinkDnsSupportOutput{})
+	output := &DisableVpcClassicLinkDnsSupportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableVpcClassicLinkDnsSupportRequest{Request: req, Input: input}
 }
 
@@ -9628,9 +10135,12 @@ func (c *EC2) DisassociateAddressRequest(input *DisassociateAddressInput) Disass
 		input = &DisassociateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateAddressOutput{})
+	output := &DisassociateAddressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateAddressRequest{Request: req, Input: input}
 }
 
@@ -9678,7 +10188,10 @@ func (c *EC2) DisassociateIamInstanceProfileRequest(input *DisassociateIamInstan
 		input = &DisassociateIamInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateIamInstanceProfileOutput{})
+	output := &DisassociateIamInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateIamInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -9729,9 +10242,12 @@ func (c *EC2) DisassociateRouteTableRequest(input *DisassociateRouteTableInput) 
 		input = &DisassociateRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateRouteTableOutput{})
+	output := &DisassociateRouteTableOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateRouteTableRequest{Request: req, Input: input}
 }
 
@@ -9779,7 +10295,10 @@ func (c *EC2) DisassociateSubnetCidrBlockRequest(input *DisassociateSubnetCidrBl
 		input = &DisassociateSubnetCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateSubnetCidrBlockOutput{})
+	output := &DisassociateSubnetCidrBlockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateSubnetCidrBlockRequest{Request: req, Input: input}
 }
 
@@ -9831,7 +10350,10 @@ func (c *EC2) DisassociateVpcCidrBlockRequest(input *DisassociateVpcCidrBlockInp
 		input = &DisassociateVpcCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateVpcCidrBlockOutput{})
+	output := &DisassociateVpcCidrBlockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateVpcCidrBlockRequest{Request: req, Input: input}
 }
 
@@ -9878,9 +10400,12 @@ func (c *EC2) EnableVgwRoutePropagationRequest(input *EnableVgwRoutePropagationI
 		input = &EnableVgwRoutePropagationInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVgwRoutePropagationOutput{})
+	output := &EnableVgwRoutePropagationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableVgwRoutePropagationRequest{Request: req, Input: input}
 }
 
@@ -9927,9 +10452,12 @@ func (c *EC2) EnableVolumeIORequest(input *EnableVolumeIOInput) EnableVolumeIORe
 		input = &EnableVolumeIOInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVolumeIOOutput{})
+	output := &EnableVolumeIOOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableVolumeIORequest{Request: req, Input: input}
 }
 
@@ -9981,7 +10509,10 @@ func (c *EC2) EnableVpcClassicLinkRequest(input *EnableVpcClassicLinkInput) Enab
 		input = &EnableVpcClassicLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVpcClassicLinkOutput{})
+	output := &EnableVpcClassicLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableVpcClassicLinkRequest{Request: req, Input: input}
 }
 
@@ -10033,7 +10564,10 @@ func (c *EC2) EnableVpcClassicLinkDnsSupportRequest(input *EnableVpcClassicLinkD
 		input = &EnableVpcClassicLinkDnsSupportInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVpcClassicLinkDnsSupportOutput{})
+	output := &EnableVpcClassicLinkDnsSupportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableVpcClassicLinkDnsSupportRequest{Request: req, Input: input}
 }
 
@@ -10096,7 +10630,10 @@ func (c *EC2) GetConsoleOutputRequest(input *GetConsoleOutputInput) GetConsoleOu
 		input = &GetConsoleOutputInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConsoleOutputOutput{})
+	output := &GetConsoleOutputOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConsoleOutputRequest{Request: req, Input: input}
 }
 
@@ -10144,7 +10681,10 @@ func (c *EC2) GetConsoleScreenshotRequest(input *GetConsoleScreenshotInput) GetC
 		input = &GetConsoleScreenshotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConsoleScreenshotOutput{})
+	output := &GetConsoleScreenshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConsoleScreenshotRequest{Request: req, Input: input}
 }
 
@@ -10195,7 +10735,10 @@ func (c *EC2) GetHostReservationPurchasePreviewRequest(input *GetHostReservation
 		input = &GetHostReservationPurchasePreviewInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostReservationPurchasePreviewOutput{})
+	output := &GetHostReservationPurchasePreviewOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHostReservationPurchasePreviewRequest{Request: req, Input: input}
 }
 
@@ -10258,7 +10801,10 @@ func (c *EC2) GetPasswordDataRequest(input *GetPasswordDataInput) GetPasswordDat
 		input = &GetPasswordDataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPasswordDataOutput{})
+	output := &GetPasswordDataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPasswordDataRequest{Request: req, Input: input}
 }
 
@@ -10306,7 +10852,10 @@ func (c *EC2) GetReservedInstancesExchangeQuoteRequest(input *GetReservedInstanc
 		input = &GetReservedInstancesExchangeQuoteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReservedInstancesExchangeQuoteOutput{})
+	output := &GetReservedInstancesExchangeQuoteOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetReservedInstancesExchangeQuoteRequest{Request: req, Input: input}
 }
 
@@ -10355,7 +10904,10 @@ func (c *EC2) ImportImageRequest(input *ImportImageInput) ImportImageRequest {
 		input = &ImportImageInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportImageOutput{})
+	output := &ImportImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportImageRequest{Request: req, Input: input}
 }
 
@@ -10407,7 +10959,10 @@ func (c *EC2) ImportInstanceRequest(input *ImportInstanceInput) ImportInstanceRe
 		input = &ImportInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportInstanceOutput{})
+	output := &ImportInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportInstanceRequest{Request: req, Input: input}
 }
 
@@ -10460,7 +11015,10 @@ func (c *EC2) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairReque
 		input = &ImportKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+	output := &ImportKeyPairOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportKeyPairRequest{Request: req, Input: input}
 }
 
@@ -10506,7 +11064,10 @@ func (c *EC2) ImportSnapshotRequest(input *ImportSnapshotInput) ImportSnapshotRe
 		input = &ImportSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportSnapshotOutput{})
+	output := &ImportSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportSnapshotRequest{Request: req, Input: input}
 }
 
@@ -10556,7 +11117,10 @@ func (c *EC2) ImportVolumeRequest(input *ImportVolumeInput) ImportVolumeRequest 
 		input = &ImportVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportVolumeOutput{})
+	output := &ImportVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportVolumeRequest{Request: req, Input: input}
 }
 
@@ -10602,7 +11166,10 @@ func (c *EC2) ModifyFpgaImageAttributeRequest(input *ModifyFpgaImageAttributeInp
 		input = &ModifyFpgaImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyFpgaImageAttributeOutput{})
+	output := &ModifyFpgaImageAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyFpgaImageAttributeRequest{Request: req, Input: input}
 }
 
@@ -10654,7 +11221,10 @@ func (c *EC2) ModifyHostsRequest(input *ModifyHostsInput) ModifyHostsRequest {
 		input = &ModifyHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyHostsOutput{})
+	output := &ModifyHostsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyHostsRequest{Request: req, Input: input}
 }
 
@@ -10714,9 +11284,12 @@ func (c *EC2) ModifyIdFormatRequest(input *ModifyIdFormatInput) ModifyIdFormatRe
 		input = &ModifyIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyIdFormatOutput{})
+	output := &ModifyIdFormatOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyIdFormatRequest{Request: req, Input: input}
 }
 
@@ -10776,9 +11349,12 @@ func (c *EC2) ModifyIdentityIdFormatRequest(input *ModifyIdentityIdFormatInput) 
 		input = &ModifyIdentityIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyIdentityIdFormatOutput{})
+	output := &ModifyIdentityIdFormatOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyIdentityIdFormatRequest{Request: req, Input: input}
 }
 
@@ -10833,9 +11409,12 @@ func (c *EC2) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) Modi
 		input = &ModifyImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyImageAttributeOutput{})
+	output := &ModifyImageAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyImageAttributeRequest{Request: req, Input: input}
 }
 
@@ -10886,9 +11465,12 @@ func (c *EC2) ModifyInstanceAttributeRequest(input *ModifyInstanceAttributeInput
 		input = &ModifyInstanceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceAttributeOutput{})
+	output := &ModifyInstanceAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyInstanceAttributeRequest{Request: req, Input: input}
 }
 
@@ -10952,7 +11534,10 @@ func (c *EC2) ModifyInstancePlacementRequest(input *ModifyInstancePlacementInput
 		input = &ModifyInstancePlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstancePlacementOutput{})
+	output := &ModifyInstancePlacementOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyInstancePlacementRequest{Request: req, Input: input}
 }
 
@@ -10999,9 +11584,12 @@ func (c *EC2) ModifyNetworkInterfaceAttributeRequest(input *ModifyNetworkInterfa
 		input = &ModifyNetworkInterfaceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyNetworkInterfaceAttributeOutput{})
+	output := &ModifyNetworkInterfaceAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyNetworkInterfaceAttributeRequest{Request: req, Input: input}
 }
 
@@ -11053,7 +11641,10 @@ func (c *EC2) ModifyReservedInstancesRequest(input *ModifyReservedInstancesInput
 		input = &ModifyReservedInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReservedInstancesOutput{})
+	output := &ModifyReservedInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyReservedInstancesRequest{Request: req, Input: input}
 }
 
@@ -11111,9 +11702,12 @@ func (c *EC2) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeInput
 		input = &ModifySnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifySnapshotAttributeOutput{})
+	output := &ModifySnapshotAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifySnapshotAttributeRequest{Request: req, Input: input}
 }
 
@@ -11178,7 +11772,10 @@ func (c *EC2) ModifySpotFleetRequestRequest(input *ModifySpotFleetRequestInput) 
 		input = &ModifySpotFleetRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifySpotFleetRequestOutput{})
+	output := &ModifySpotFleetRequestOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifySpotFleetRequestRequest{Request: req, Input: input}
 }
 
@@ -11224,9 +11821,12 @@ func (c *EC2) ModifySubnetAttributeRequest(input *ModifySubnetAttributeInput) Mo
 		input = &ModifySubnetAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifySubnetAttributeOutput{})
+	output := &ModifySubnetAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifySubnetAttributeRequest{Request: req, Input: input}
 }
 
@@ -11304,7 +11904,10 @@ func (c *EC2) ModifyVolumeRequest(input *ModifyVolumeInput) ModifyVolumeRequest 
 		input = &ModifyVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVolumeOutput{})
+	output := &ModifyVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyVolumeRequest{Request: req, Input: input}
 }
 
@@ -11359,9 +11962,12 @@ func (c *EC2) ModifyVolumeAttributeRequest(input *ModifyVolumeAttributeInput) Mo
 		input = &ModifyVolumeAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVolumeAttributeOutput{})
+	output := &ModifyVolumeAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyVolumeAttributeRequest{Request: req, Input: input}
 }
 
@@ -11407,9 +12013,12 @@ func (c *EC2) ModifyVpcAttributeRequest(input *ModifyVpcAttributeInput) ModifyVp
 		input = &ModifyVpcAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcAttributeOutput{})
+	output := &ModifyVpcAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyVpcAttributeRequest{Request: req, Input: input}
 }
 
@@ -11457,7 +12066,10 @@ func (c *EC2) ModifyVpcEndpointRequest(input *ModifyVpcEndpointInput) ModifyVpcE
 		input = &ModifyVpcEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcEndpointOutput{})
+	output := &ModifyVpcEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyVpcEndpointRequest{Request: req, Input: input}
 }
 
@@ -11522,7 +12134,10 @@ func (c *EC2) ModifyVpcPeeringConnectionOptionsRequest(input *ModifyVpcPeeringCo
 		input = &ModifyVpcPeeringConnectionOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcPeeringConnectionOptionsOutput{})
+	output := &ModifyVpcPeeringConnectionOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyVpcPeeringConnectionOptionsRequest{Request: req, Input: input}
 }
 
@@ -11573,7 +12188,10 @@ func (c *EC2) MonitorInstancesRequest(input *MonitorInstancesInput) MonitorInsta
 		input = &MonitorInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &MonitorInstancesOutput{})
+	output := &MonitorInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return MonitorInstancesRequest{Request: req, Input: input}
 }
 
@@ -11625,7 +12243,10 @@ func (c *EC2) MoveAddressToVpcRequest(input *MoveAddressToVpcInput) MoveAddressT
 		input = &MoveAddressToVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &MoveAddressToVpcOutput{})
+	output := &MoveAddressToVpcOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return MoveAddressToVpcRequest{Request: req, Input: input}
 }
 
@@ -11674,7 +12295,10 @@ func (c *EC2) PurchaseHostReservationRequest(input *PurchaseHostReservationInput
 		input = &PurchaseHostReservationInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseHostReservationOutput{})
+	output := &PurchaseHostReservationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseHostReservationRequest{Request: req, Input: input}
 }
 
@@ -11729,7 +12353,10 @@ func (c *EC2) PurchaseReservedInstancesOfferingRequest(input *PurchaseReservedIn
 		input = &PurchaseReservedInstancesOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedInstancesOfferingOutput{})
+	output := &PurchaseReservedInstancesOfferingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseReservedInstancesOfferingRequest{Request: req, Input: input}
 }
 
@@ -11784,7 +12411,10 @@ func (c *EC2) PurchaseScheduledInstancesRequest(input *PurchaseScheduledInstance
 		input = &PurchaseScheduledInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseScheduledInstancesOutput{})
+	output := &PurchaseScheduledInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseScheduledInstancesRequest{Request: req, Input: input}
 }
 
@@ -11840,9 +12470,12 @@ func (c *EC2) RebootInstancesRequest(input *RebootInstancesInput) RebootInstance
 		input = &RebootInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootInstancesOutput{})
+	output := &RebootInstancesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootInstancesRequest{Request: req, Input: input}
 }
 
@@ -11916,7 +12549,10 @@ func (c *EC2) RegisterImageRequest(input *RegisterImageInput) RegisterImageReque
 		input = &RegisterImageInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterImageOutput{})
+	output := &RegisterImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterImageRequest{Request: req, Input: input}
 }
 
@@ -11966,7 +12602,10 @@ func (c *EC2) RejectVpcPeeringConnectionRequest(input *RejectVpcPeeringConnectio
 		input = &RejectVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectVpcPeeringConnectionOutput{})
+	output := &RejectVpcPeeringConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RejectVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
@@ -12029,9 +12668,12 @@ func (c *EC2) ReleaseAddressRequest(input *ReleaseAddressInput) ReleaseAddressRe
 		input = &ReleaseAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &ReleaseAddressOutput{})
+	output := &ReleaseAddressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReleaseAddressRequest{Request: req, Input: input}
 }
 
@@ -12088,7 +12730,10 @@ func (c *EC2) ReleaseHostsRequest(input *ReleaseHostsInput) ReleaseHostsRequest 
 		input = &ReleaseHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &ReleaseHostsOutput{})
+	output := &ReleaseHostsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReleaseHostsRequest{Request: req, Input: input}
 }
 
@@ -12139,7 +12784,10 @@ func (c *EC2) ReplaceIamInstanceProfileAssociationRequest(input *ReplaceIamInsta
 		input = &ReplaceIamInstanceProfileAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceIamInstanceProfileAssociationOutput{})
+	output := &ReplaceIamInstanceProfileAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReplaceIamInstanceProfileAssociationRequest{Request: req, Input: input}
 }
 
@@ -12188,7 +12836,10 @@ func (c *EC2) ReplaceNetworkAclAssociationRequest(input *ReplaceNetworkAclAssoci
 		input = &ReplaceNetworkAclAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceNetworkAclAssociationOutput{})
+	output := &ReplaceNetworkAclAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReplaceNetworkAclAssociationRequest{Request: req, Input: input}
 }
 
@@ -12236,9 +12887,12 @@ func (c *EC2) ReplaceNetworkAclEntryRequest(input *ReplaceNetworkAclEntryInput) 
 		input = &ReplaceNetworkAclEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceNetworkAclEntryOutput{})
+	output := &ReplaceNetworkAclEntryOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReplaceNetworkAclEntryRequest{Request: req, Input: input}
 }
 
@@ -12290,9 +12944,12 @@ func (c *EC2) ReplaceRouteRequest(input *ReplaceRouteInput) ReplaceRouteRequest 
 		input = &ReplaceRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceRouteOutput{})
+	output := &ReplaceRouteOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReplaceRouteRequest{Request: req, Input: input}
 }
 
@@ -12346,7 +13003,10 @@ func (c *EC2) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAssoci
 		input = &ReplaceRouteTableAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceRouteTableAssociationOutput{})
+	output := &ReplaceRouteTableAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReplaceRouteTableAssociationRequest{Request: req, Input: input}
 }
 
@@ -12398,9 +13058,12 @@ func (c *EC2) ReportInstanceStatusRequest(input *ReportInstanceStatusInput) Repo
 		input = &ReportInstanceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &ReportInstanceStatusOutput{})
+	output := &ReportInstanceStatusOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReportInstanceStatusRequest{Request: req, Input: input}
 }
 
@@ -12462,7 +13125,10 @@ func (c *EC2) RequestSpotFleetRequest(input *RequestSpotFleetInput) RequestSpotF
 		input = &RequestSpotFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestSpotFleetOutput{})
+	output := &RequestSpotFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RequestSpotFleetRequest{Request: req, Input: input}
 }
 
@@ -12513,7 +13179,10 @@ func (c *EC2) RequestSpotInstancesRequest(input *RequestSpotInstancesInput) Requ
 		input = &RequestSpotInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestSpotInstancesOutput{})
+	output := &RequestSpotInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RequestSpotInstancesRequest{Request: req, Input: input}
 }
 
@@ -12560,7 +13229,10 @@ func (c *EC2) ResetFpgaImageAttributeRequest(input *ResetFpgaImageAttributeInput
 		input = &ResetFpgaImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetFpgaImageAttributeOutput{})
+	output := &ResetFpgaImageAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetFpgaImageAttributeRequest{Request: req, Input: input}
 }
 
@@ -12608,9 +13280,12 @@ func (c *EC2) ResetImageAttributeRequest(input *ResetImageAttributeInput) ResetI
 		input = &ResetImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetImageAttributeOutput{})
+	output := &ResetImageAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetImageAttributeRequest{Request: req, Input: input}
 }
 
@@ -12664,9 +13339,12 @@ func (c *EC2) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInput) 
 		input = &ResetInstanceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetInstanceAttributeOutput{})
+	output := &ResetInstanceAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetInstanceAttributeRequest{Request: req, Input: input}
 }
 
@@ -12713,9 +13391,12 @@ func (c *EC2) ResetNetworkInterfaceAttributeRequest(input *ResetNetworkInterface
 		input = &ResetNetworkInterfaceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetNetworkInterfaceAttributeOutput{})
+	output := &ResetNetworkInterfaceAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetNetworkInterfaceAttributeRequest{Request: req, Input: input}
 }
 
@@ -12765,9 +13446,12 @@ func (c *EC2) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInput) 
 		input = &ResetSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetSnapshotAttributeOutput{})
+	output := &ResetSnapshotAttributeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetSnapshotAttributeRequest{Request: req, Input: input}
 }
 
@@ -12816,7 +13500,10 @@ func (c *EC2) RestoreAddressToClassicRequest(input *RestoreAddressToClassicInput
 		input = &RestoreAddressToClassicInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreAddressToClassicOutput{})
+	output := &RestoreAddressToClassicOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreAddressToClassicRequest{Request: req, Input: input}
 }
 
@@ -12874,9 +13561,12 @@ func (c *EC2) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgressI
 		input = &RevokeSecurityGroupEgressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeSecurityGroupEgressOutput{})
+	output := &RevokeSecurityGroupEgressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RevokeSecurityGroupEgressRequest{Request: req, Input: input}
 }
 
@@ -12937,9 +13627,12 @@ func (c *EC2) RevokeSecurityGroupIngressRequest(input *RevokeSecurityGroupIngres
 		input = &RevokeSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeSecurityGroupIngressOutput{})
+	output := &RevokeSecurityGroupIngressOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RevokeSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
@@ -13033,7 +13726,10 @@ func (c *EC2) RunInstancesRequest(input *RunInstancesInput) RunInstancesRequest 
 		input = &RunInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RunInstancesOutput{})
+	output := &RunInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RunInstancesRequest{Request: req, Input: input}
 }
 
@@ -13089,7 +13785,10 @@ func (c *EC2) RunScheduledInstancesRequest(input *RunScheduledInstancesInput) Ru
 		input = &RunScheduledInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RunScheduledInstancesOutput{})
+	output := &RunScheduledInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RunScheduledInstancesRequest{Request: req, Input: input}
 }
 
@@ -13157,7 +13856,10 @@ func (c *EC2) StartInstancesRequest(input *StartInstancesInput) StartInstancesRe
 		input = &StartInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &StartInstancesOutput{})
+	output := &StartInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartInstancesRequest{Request: req, Input: input}
 }
 
@@ -13235,7 +13937,10 @@ func (c *EC2) StopInstancesRequest(input *StopInstancesInput) StopInstancesReque
 		input = &StopInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &StopInstancesOutput{})
+	output := &StopInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopInstancesRequest{Request: req, Input: input}
 }
 
@@ -13305,7 +14010,10 @@ func (c *EC2) TerminateInstancesRequest(input *TerminateInstancesInput) Terminat
 		input = &TerminateInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateInstancesOutput{})
+	output := &TerminateInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateInstancesRequest{Request: req, Input: input}
 }
 
@@ -13351,7 +14059,10 @@ func (c *EC2) UnassignIpv6AddressesRequest(input *UnassignIpv6AddressesInput) Un
 		input = &UnassignIpv6AddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignIpv6AddressesOutput{})
+	output := &UnassignIpv6AddressesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnassignIpv6AddressesRequest{Request: req, Input: input}
 }
 
@@ -13397,9 +14108,12 @@ func (c *EC2) UnassignPrivateIpAddressesRequest(input *UnassignPrivateIpAddresse
 		input = &UnassignPrivateIpAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignPrivateIpAddressesOutput{})
+	output := &UnassignPrivateIpAddressesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnassignPrivateIpAddressesRequest{Request: req, Input: input}
 }
 
@@ -13447,7 +14161,10 @@ func (c *EC2) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) Unmonito
 		input = &UnmonitorInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &UnmonitorInstancesOutput{})
+	output := &UnmonitorInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnmonitorInstancesRequest{Request: req, Input: input}
 }
 
@@ -13499,7 +14216,10 @@ func (c *EC2) UpdateSecurityGroupRuleDescriptionsEgressRequest(input *UpdateSecu
 		input = &UpdateSecurityGroupRuleDescriptionsEgressInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSecurityGroupRuleDescriptionsEgressOutput{})
+	output := &UpdateSecurityGroupRuleDescriptionsEgressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSecurityGroupRuleDescriptionsEgressRequest{Request: req, Input: input}
 }
 
@@ -13551,7 +14271,10 @@ func (c *EC2) UpdateSecurityGroupRuleDescriptionsIngressRequest(input *UpdateSec
 		input = &UpdateSecurityGroupRuleDescriptionsIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSecurityGroupRuleDescriptionsIngressOutput{})
+	output := &UpdateSecurityGroupRuleDescriptionsIngressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSecurityGroupRuleDescriptionsIngressRequest{Request: req, Input: input}
 }
 
@@ -13631,6 +14354,8 @@ func (s *AcceptReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []
 type AcceptReservedInstancesExchangeQuoteOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the successful exchange.
 	ExchangeId *string `locationName:"exchangeId" type:"string"`
 }
@@ -13643,6 +14368,11 @@ func (s AcceptReservedInstancesExchangeQuoteOutput) String() string {
 // GoString returns the string representation
 func (s AcceptReservedInstancesExchangeQuoteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptReservedInstancesExchangeQuoteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExchangeId sets the ExchangeId field's value.
@@ -13693,6 +14423,8 @@ func (s *AcceptVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *A
 type AcceptVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPC peering connection.
 	VpcPeeringConnection *VpcPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
 }
@@ -13705,6 +14437,11 @@ func (s AcceptVpcPeeringConnectionOutput) String() string {
 // GoString returns the string representation
 func (s AcceptVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcPeeringConnection sets the VpcPeeringConnection field's value.
@@ -13969,6 +14706,8 @@ func (s *AllocateAddressInput) SetDryRun(v bool) *AllocateAddressInput {
 type AllocateAddressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// [EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic
 	// IP address for use with instances in a VPC.
 	AllocationId *string `locationName:"allocationId" type:"string"`
@@ -13989,6 +14728,11 @@ func (s AllocateAddressOutput) String() string {
 // GoString returns the string representation
 func (s AllocateAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AllocateAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAllocationId sets the AllocationId field's value.
@@ -14112,6 +14856,8 @@ func (s *AllocateHostsInput) SetQuantity(v int64) *AllocateHostsInput {
 type AllocateHostsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the allocated Dedicated Host. This is used when you want to launch
 	// an instance onto a specific host.
 	HostIds []string `locationName:"hostIdSet" locationNameList:"item" type:"list"`
@@ -14125,6 +14871,11 @@ func (s AllocateHostsOutput) String() string {
 // GoString returns the string representation
 func (s AllocateHostsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AllocateHostsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostIds sets the HostIds field's value.
@@ -14198,6 +14949,8 @@ func (s *AssignIpv6AddressesInput) SetNetworkInterfaceId(v string) *AssignIpv6Ad
 type AssignIpv6AddressesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IPv6 addresses assigned to the network interface.
 	AssignedIpv6Addresses []string `locationName:"assignedIpv6Addresses" locationNameList:"item" type:"list"`
 
@@ -14213,6 +14966,11 @@ func (s AssignIpv6AddressesOutput) String() string {
 // GoString returns the string representation
 func (s AssignIpv6AddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssignIpv6AddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssignedIpv6Addresses sets the AssignedIpv6Addresses field's value.
@@ -14305,6 +15063,8 @@ func (s *AssignPrivateIpAddressesInput) SetSecondaryPrivateIpAddressCount(v int6
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesOutput
 type AssignPrivateIpAddressesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14315,6 +15075,11 @@ func (s AssignPrivateIpAddressesOutput) String() string {
 // GoString returns the string representation
 func (s AssignPrivateIpAddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssignPrivateIpAddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for AssociateAddress.
@@ -14415,6 +15180,8 @@ func (s *AssociateAddressInput) SetPublicIp(v string) *AssociateAddressInput {
 type AssociateAddressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// [EC2-VPC] The ID that represents the association of the Elastic IP address
 	// with an instance.
 	AssociationId *string `locationName:"associationId" type:"string"`
@@ -14428,6 +15195,11 @@ func (s AssociateAddressOutput) String() string {
 // GoString returns the string representation
 func (s AssociateAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationId sets the AssociationId field's value.
@@ -14508,6 +15280,8 @@ func (s *AssociateDhcpOptionsInput) SetVpcId(v string) *AssociateDhcpOptionsInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateDhcpOptionsOutput
 type AssociateDhcpOptionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14518,6 +15292,11 @@ func (s AssociateDhcpOptionsOutput) String() string {
 // GoString returns the string representation
 func (s AssociateDhcpOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateDhcpOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIamInstanceProfileRequest
@@ -14579,6 +15358,8 @@ func (s *AssociateIamInstanceProfileInput) SetInstanceId(v string) *AssociateIam
 type AssociateIamInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IAM instance profile association.
 	IamInstanceProfileAssociation *IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociation" type:"structure"`
 }
@@ -14591,6 +15372,11 @@ func (s AssociateIamInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s AssociateIamInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateIamInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIamInstanceProfileAssociation sets the IamInstanceProfileAssociation field's value.
@@ -14672,6 +15458,8 @@ func (s *AssociateRouteTableInput) SetSubnetId(v string) *AssociateRouteTableInp
 type AssociateRouteTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The route table association ID (needed to disassociate the route table).
 	AssociationId *string `locationName:"associationId" type:"string"`
 }
@@ -14684,6 +15472,11 @@ func (s AssociateRouteTableOutput) String() string {
 // GoString returns the string representation
 func (s AssociateRouteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateRouteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociationId sets the AssociationId field's value.
@@ -14751,6 +15544,8 @@ func (s *AssociateSubnetCidrBlockInput) SetSubnetId(v string) *AssociateSubnetCi
 type AssociateSubnetCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociation" type:"structure"`
 
@@ -14766,6 +15561,11 @@ func (s AssociateSubnetCidrBlockOutput) String() string {
 // GoString returns the string representation
 func (s AssociateSubnetCidrBlockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateSubnetCidrBlockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIpv6CidrBlockAssociation sets the Ipv6CidrBlockAssociation field's value.
@@ -14844,6 +15644,8 @@ func (s *AssociateVpcCidrBlockInput) SetVpcId(v string) *AssociateVpcCidrBlockIn
 type AssociateVpcCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IPv4 CIDR block association.
 	CidrBlockAssociation *VpcCidrBlockAssociation `locationName:"cidrBlockAssociation" type:"structure"`
 
@@ -14862,6 +15664,11 @@ func (s AssociateVpcCidrBlockOutput) String() string {
 // GoString returns the string representation
 func (s AssociateVpcCidrBlockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateVpcCidrBlockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCidrBlockAssociation sets the CidrBlockAssociation field's value.
@@ -14971,6 +15778,8 @@ func (s *AttachClassicLinkVpcInput) SetVpcId(v string) *AttachClassicLinkVpcInpu
 type AttachClassicLinkVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -14983,6 +15792,11 @@ func (s AttachClassicLinkVpcOutput) String() string {
 // GoString returns the string representation
 func (s AttachClassicLinkVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachClassicLinkVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -15062,6 +15876,8 @@ func (s *AttachInternetGatewayInput) SetVpcId(v string) *AttachInternetGatewayIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachInternetGatewayOutput
 type AttachInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -15072,6 +15888,11 @@ func (s AttachInternetGatewayOutput) String() string {
 // GoString returns the string representation
 func (s AttachInternetGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for AttachNetworkInterface.
@@ -15162,6 +15983,8 @@ func (s *AttachNetworkInterfaceInput) SetNetworkInterfaceId(v string) *AttachNet
 type AttachNetworkInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the network interface attachment.
 	AttachmentId *string `locationName:"attachmentId" type:"string"`
 }
@@ -15174,6 +15997,11 @@ func (s AttachNetworkInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s AttachNetworkInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachNetworkInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachmentId sets the AttachmentId field's value.
@@ -15339,6 +16167,8 @@ func (s *AttachVpnGatewayInput) SetVpnGatewayId(v string) *AttachVpnGatewayInput
 type AttachVpnGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the attachment.
 	VpcAttachment *VpcAttachment `locationName:"attachment" type:"structure"`
 }
@@ -15351,6 +16181,11 @@ func (s AttachVpnGatewayOutput) String() string {
 // GoString returns the string representation
 func (s AttachVpnGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachVpnGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcAttachment sets the VpcAttachment field's value.
@@ -15532,6 +16367,8 @@ func (s *AuthorizeSecurityGroupEgressInput) SetToPort(v int64) *AuthorizeSecurit
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressOutput
 type AuthorizeSecurityGroupEgressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -15542,6 +16379,11 @@ func (s AuthorizeSecurityGroupEgressOutput) String() string {
 // GoString returns the string representation
 func (s AuthorizeSecurityGroupEgressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AuthorizeSecurityGroupEgressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for AuthorizeSecurityGroupIngress.
@@ -15681,6 +16523,8 @@ func (s *AuthorizeSecurityGroupIngressInput) SetToPort(v int64) *AuthorizeSecuri
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngressOutput
 type AuthorizeSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -15691,6 +16535,11 @@ func (s AuthorizeSecurityGroupIngressOutput) String() string {
 // GoString returns the string representation
 func (s AuthorizeSecurityGroupIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AuthorizeSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an Availability Zone.
@@ -15972,6 +16821,8 @@ func (s *BundleInstanceInput) SetStorage(v *Storage) *BundleInstanceInput {
 type BundleInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the bundle task.
 	BundleTask *BundleTask `locationName:"bundleInstanceTask" type:"structure"`
 }
@@ -15984,6 +16835,11 @@ func (s BundleInstanceOutput) String() string {
 // GoString returns the string representation
 func (s BundleInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BundleInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBundleTask sets the BundleTask field's value.
@@ -16172,6 +17028,8 @@ func (s *CancelBundleTaskInput) SetDryRun(v bool) *CancelBundleTaskInput {
 type CancelBundleTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the bundle task.
 	BundleTask *BundleTask `locationName:"bundleInstanceTask" type:"structure"`
 }
@@ -16184,6 +17042,11 @@ func (s CancelBundleTaskOutput) String() string {
 // GoString returns the string representation
 func (s CancelBundleTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelBundleTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBundleTask sets the BundleTask field's value.
@@ -16257,6 +17120,8 @@ func (s *CancelConversionTaskInput) SetReasonMessage(v string) *CancelConversion
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionTaskOutput
 type CancelConversionTaskOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -16267,6 +17132,11 @@ func (s CancelConversionTaskOutput) String() string {
 // GoString returns the string representation
 func (s CancelConversionTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelConversionTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CancelExportTask.
@@ -16313,6 +17183,8 @@ func (s *CancelExportTaskInput) SetExportTaskId(v string) *CancelExportTaskInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTaskOutput
 type CancelExportTaskOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -16323,6 +17195,11 @@ func (s CancelExportTaskOutput) String() string {
 // GoString returns the string representation
 func (s CancelExportTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelExportTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CancelImportTask.
@@ -16376,6 +17253,8 @@ func (s *CancelImportTaskInput) SetImportTaskId(v string) *CancelImportTaskInput
 type CancelImportTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the task being canceled.
 	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
@@ -16394,6 +17273,11 @@ func (s CancelImportTaskOutput) String() string {
 // GoString returns the string representation
 func (s CancelImportTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelImportTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportTaskId sets the ImportTaskId field's value.
@@ -16460,6 +17344,8 @@ func (s *CancelReservedInstancesListingInput) SetReservedInstancesListingId(v st
 type CancelReservedInstancesListingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Reserved Instance listing.
 	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
 }
@@ -16472,6 +17358,11 @@ func (s CancelReservedInstancesListingOutput) String() string {
 // GoString returns the string representation
 func (s CancelReservedInstancesListingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelReservedInstancesListingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedInstancesListings sets the ReservedInstancesListings field's value.
@@ -16630,6 +17521,8 @@ func (s *CancelSpotFleetRequestsInput) SetTerminateInstances(v bool) *CancelSpot
 type CancelSpotFleetRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Spot fleet requests that are successfully canceled.
 	SuccessfulFleetRequests []CancelSpotFleetRequestsSuccessItem `locationName:"successfulFleetRequestSet" locationNameList:"item" type:"list"`
 
@@ -16645,6 +17538,11 @@ func (s CancelSpotFleetRequestsOutput) String() string {
 // GoString returns the string representation
 func (s CancelSpotFleetRequestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelSpotFleetRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSuccessfulFleetRequests sets the SuccessfulFleetRequests field's value.
@@ -16766,6 +17664,8 @@ func (s *CancelSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []string) 
 type CancelSpotInstanceRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more Spot instance requests.
 	CancelledSpotInstanceRequests []CancelledSpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
 }
@@ -16778,6 +17678,11 @@ func (s CancelSpotInstanceRequestsOutput) String() string {
 // GoString returns the string representation
 func (s CancelSpotInstanceRequestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelSpotInstanceRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCancelledSpotInstanceRequests sets the CancelledSpotInstanceRequests field's value.
@@ -17056,6 +17961,8 @@ func (s *ConfirmProductInstanceInput) SetProductCode(v string) *ConfirmProductIn
 type ConfirmProductInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The AWS account ID of the instance owner. This is only present if the product
 	// code is attached to the instance.
 	OwnerId *string `locationName:"ownerId" type:"string"`
@@ -17073,6 +17980,11 @@ func (s ConfirmProductInstanceOutput) String() string {
 // GoString returns the string representation
 func (s ConfirmProductInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConfirmProductInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOwnerId sets the OwnerId field's value.
@@ -17272,6 +18184,8 @@ func (s *CopyFpgaImageInput) SetSourceRegion(v string) *CopyFpgaImageInput {
 type CopyFpgaImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the new AFI.
 	FpgaImageId *string `locationName:"fpgaImageId" type:"string"`
 }
@@ -17284,6 +18198,11 @@ func (s CopyFpgaImageOutput) String() string {
 // GoString returns the string representation
 func (s CopyFpgaImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyFpgaImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFpgaImageId sets the FpgaImageId field's value.
@@ -17429,6 +18348,8 @@ func (s *CopyImageInput) SetSourceRegion(v string) *CopyImageInput {
 type CopyImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the new AMI.
 	ImageId *string `locationName:"imageId" type:"string"`
 }
@@ -17441,6 +18362,11 @@ func (s CopyImageOutput) String() string {
 // GoString returns the string representation
 func (s CopyImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageId sets the ImageId field's value.
@@ -17598,6 +18524,8 @@ func (s *CopySnapshotInput) SetSourceSnapshotId(v string) *CopySnapshotInput {
 type CopySnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the new snapshot.
 	SnapshotId *string `locationName:"snapshotId" type:"string"`
 }
@@ -17610,6 +18538,11 @@ func (s CopySnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CopySnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopySnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshotId sets the SnapshotId field's value.
@@ -17708,6 +18641,8 @@ func (s *CreateCustomerGatewayInput) SetType(v GatewayType) *CreateCustomerGatew
 type CreateCustomerGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the customer gateway.
 	CustomerGateway *CustomerGateway `locationName:"customerGateway" type:"structure"`
 }
@@ -17720,6 +18655,11 @@ func (s CreateCustomerGatewayOutput) String() string {
 // GoString returns the string representation
 func (s CreateCustomerGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCustomerGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCustomerGateway sets the CustomerGateway field's value.
@@ -17761,6 +18701,8 @@ func (s *CreateDefaultVpcInput) SetDryRun(v bool) *CreateDefaultVpcInput {
 type CreateDefaultVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPC.
 	Vpc *Vpc `locationName:"vpc" type:"structure"`
 }
@@ -17773,6 +18715,11 @@ func (s CreateDefaultVpcOutput) String() string {
 // GoString returns the string representation
 func (s CreateDefaultVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDefaultVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpc sets the Vpc field's value.
@@ -17839,6 +18786,8 @@ func (s *CreateDhcpOptionsInput) SetDryRun(v bool) *CreateDhcpOptionsInput {
 type CreateDhcpOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A set of DHCP options.
 	DhcpOptions *DhcpOptions `locationName:"dhcpOptions" type:"structure"`
 }
@@ -17851,6 +18800,11 @@ func (s CreateDhcpOptionsOutput) String() string {
 // GoString returns the string representation
 func (s CreateDhcpOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDhcpOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDhcpOptions sets the DhcpOptions field's value.
@@ -17925,6 +18879,8 @@ func (s *CreateEgressOnlyInternetGatewayInput) SetVpcId(v string) *CreateEgressO
 type CreateEgressOnlyInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string `locationName:"clientToken" type:"string"`
@@ -17941,6 +18897,11 @@ func (s CreateEgressOnlyInternetGatewayOutput) String() string {
 // GoString returns the string representation
 func (s CreateEgressOnlyInternetGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateEgressOnlyInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientToken sets the ClientToken field's value.
@@ -18072,6 +19033,8 @@ func (s *CreateFlowLogsInput) SetTrafficType(v TrafficType) *CreateFlowLogsInput
 type CreateFlowLogsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string `locationName:"clientToken" type:"string"`
@@ -18091,6 +19054,11 @@ func (s CreateFlowLogsOutput) String() string {
 // GoString returns the string representation
 func (s CreateFlowLogsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFlowLogsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientToken sets the ClientToken field's value.
@@ -18205,6 +19173,8 @@ func (s *CreateFpgaImageInput) SetName(v string) *CreateFpgaImageInput {
 type CreateFpgaImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The global FPGA image identifier (AGFI ID).
 	FpgaImageGlobalId *string `locationName:"fpgaImageGlobalId" type:"string"`
 
@@ -18220,6 +19190,11 @@ func (s CreateFpgaImageOutput) String() string {
 // GoString returns the string representation
 func (s CreateFpgaImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFpgaImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFpgaImageGlobalId sets the FpgaImageGlobalId field's value.
@@ -18341,6 +19316,8 @@ func (s *CreateImageInput) SetNoReboot(v bool) *CreateImageInput {
 type CreateImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the new AMI.
 	ImageId *string `locationName:"imageId" type:"string"`
 }
@@ -18353,6 +19330,11 @@ func (s CreateImageOutput) String() string {
 // GoString returns the string representation
 func (s CreateImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageId sets the ImageId field's value.
@@ -18435,6 +19417,8 @@ func (s *CreateInstanceExportTaskInput) SetTargetEnvironment(v ExportEnvironment
 type CreateInstanceExportTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the instance export task.
 	ExportTask *ExportTask `locationName:"exportTask" type:"structure"`
 }
@@ -18447,6 +19431,11 @@ func (s CreateInstanceExportTaskOutput) String() string {
 // GoString returns the string representation
 func (s CreateInstanceExportTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstanceExportTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportTask sets the ExportTask field's value.
@@ -18488,6 +19477,8 @@ func (s *CreateInternetGatewayInput) SetDryRun(v bool) *CreateInternetGatewayInp
 type CreateInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Internet gateway.
 	InternetGateway *InternetGateway `locationName:"internetGateway" type:"structure"`
 }
@@ -18500,6 +19491,11 @@ func (s CreateInternetGatewayOutput) String() string {
 // GoString returns the string representation
 func (s CreateInternetGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInternetGateway sets the InternetGateway field's value.
@@ -18568,6 +19564,8 @@ func (s *CreateKeyPairInput) SetKeyName(v string) *CreateKeyPairInput {
 type CreateKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The SHA-1 digest of the DER encoded private key.
 	KeyFingerprint *string `locationName:"keyFingerprint" type:"string"`
 
@@ -18586,6 +19584,11 @@ func (s CreateKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s CreateKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyFingerprint sets the KeyFingerprint field's value.
@@ -18681,6 +19684,8 @@ func (s *CreateNatGatewayInput) SetSubnetId(v string) *CreateNatGatewayInput {
 type CreateNatGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique, case-sensitive identifier to ensure the idempotency of the request.
 	// Only returned if a client token was provided in the request.
 	ClientToken *string `locationName:"clientToken" type:"string"`
@@ -18697,6 +19702,11 @@ func (s CreateNatGatewayOutput) String() string {
 // GoString returns the string representation
 func (s CreateNatGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNatGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientToken sets the ClientToken field's value.
@@ -18874,6 +19884,8 @@ func (s *CreateNetworkAclEntryInput) SetRuleNumber(v int64) *CreateNetworkAclEnt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntryOutput
 type CreateNetworkAclEntryOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -18884,6 +19896,11 @@ func (s CreateNetworkAclEntryOutput) String() string {
 // GoString returns the string representation
 func (s CreateNetworkAclEntryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNetworkAclEntryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreateNetworkAcl.
@@ -18944,6 +19961,8 @@ func (s *CreateNetworkAclInput) SetVpcId(v string) *CreateNetworkAclInput {
 type CreateNetworkAclOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the network ACL.
 	NetworkAcl *NetworkAcl `locationName:"networkAcl" type:"structure"`
 }
@@ -18956,6 +19975,11 @@ func (s CreateNetworkAclOutput) String() string {
 // GoString returns the string representation
 func (s CreateNetworkAclOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNetworkAclOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkAcl sets the NetworkAcl field's value.
@@ -19109,6 +20133,8 @@ func (s *CreateNetworkInterfaceInput) SetSubnetId(v string) *CreateNetworkInterf
 type CreateNetworkInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the network interface.
 	NetworkInterface *NetworkInterface `locationName:"networkInterface" type:"structure"`
 }
@@ -19121,6 +20147,11 @@ func (s CreateNetworkInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s CreateNetworkInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNetworkInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkInterface sets the NetworkInterface field's value.
@@ -19219,6 +20250,8 @@ func (s *CreateNetworkInterfacePermissionInput) SetPermission(v InterfacePermiss
 type CreateNetworkInterfacePermissionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the permission for the network interface.
 	InterfacePermission *NetworkInterfacePermission `locationName:"interfacePermission" type:"structure"`
 }
@@ -19231,6 +20264,11 @@ func (s CreateNetworkInterfacePermissionOutput) String() string {
 // GoString returns the string representation
 func (s CreateNetworkInterfacePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNetworkInterfacePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInterfacePermission sets the InterfacePermission field's value.
@@ -19311,6 +20349,8 @@ func (s *CreatePlacementGroupInput) SetStrategy(v PlacementStrategy) *CreatePlac
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupOutput
 type CreatePlacementGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19321,6 +20361,11 @@ func (s CreatePlacementGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreatePlacementGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePlacementGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreateReservedInstancesListing.
@@ -19420,6 +20465,8 @@ func (s *CreateReservedInstancesListingInput) SetReservedInstancesId(v string) *
 type CreateReservedInstancesListingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Standard Reserved Instance listing.
 	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
 }
@@ -19432,6 +20479,11 @@ func (s CreateReservedInstancesListingOutput) String() string {
 // GoString returns the string representation
 func (s CreateReservedInstancesListingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReservedInstancesListingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedInstancesListings sets the ReservedInstancesListings field's value.
@@ -19574,6 +20626,8 @@ func (s *CreateRouteInput) SetVpcPeeringConnectionId(v string) *CreateRouteInput
 type CreateRouteOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -19586,6 +20640,11 @@ func (s CreateRouteOutput) String() string {
 // GoString returns the string representation
 func (s CreateRouteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRouteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -19652,6 +20711,8 @@ func (s *CreateRouteTableInput) SetVpcId(v string) *CreateRouteTableInput {
 type CreateRouteTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the route table.
 	RouteTable *RouteTable `locationName:"routeTable" type:"structure"`
 }
@@ -19664,6 +20725,11 @@ func (s CreateRouteTableOutput) String() string {
 // GoString returns the string representation
 func (s CreateRouteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRouteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRouteTable sets the RouteTable field's value.
@@ -19766,6 +20832,8 @@ func (s *CreateSecurityGroupInput) SetVpcId(v string) *CreateSecurityGroupInput 
 type CreateSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the security group.
 	GroupId *string `locationName:"groupId" type:"string"`
 }
@@ -19778,6 +20846,11 @@ func (s CreateSecurityGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateSecurityGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSecurityGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroupId sets the GroupId field's value.
@@ -19853,6 +20926,8 @@ func (s *CreateSnapshotInput) SetVolumeId(v string) *CreateSnapshotInput {
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The data encryption key identifier for the snapshot. This value is a unique
 	// identifier that corresponds to the data encryption key that was used to encrypt
 	// the original volume or snapshot copy. Because data encryption keys are inherited
@@ -19920,6 +20995,11 @@ func (s CreateSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataEncryptionKeyId sets the DataEncryptionKeyId field's value.
@@ -20073,6 +21153,8 @@ func (s *CreateSpotDatafeedSubscriptionInput) SetPrefix(v string) *CreateSpotDat
 type CreateSpotDatafeedSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Spot instance data feed subscription.
 	SpotDatafeedSubscription *SpotDatafeedSubscription `locationName:"spotDatafeedSubscription" type:"structure"`
 }
@@ -20085,6 +21167,11 @@ func (s CreateSpotDatafeedSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s CreateSpotDatafeedSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSpotDatafeedSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSpotDatafeedSubscription sets the SpotDatafeedSubscription field's value.
@@ -20188,6 +21275,8 @@ func (s *CreateSubnetInput) SetVpcId(v string) *CreateSubnetInput {
 type CreateSubnetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the subnet.
 	Subnet *Subnet `locationName:"subnet" type:"structure"`
 }
@@ -20200,6 +21289,11 @@ func (s CreateSubnetOutput) String() string {
 // GoString returns the string representation
 func (s CreateSubnetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSubnetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubnet sets the Subnet field's value.
@@ -20281,6 +21375,8 @@ func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTagsOutput
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -20291,6 +21387,11 @@ func (s CreateTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreateVolume.
@@ -20442,6 +21543,8 @@ func (s *CreateVolumeInput) SetVolumeType(v VolumeType) *CreateVolumeInput {
 type CreateVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the volume attachments.
 	Attachments []DetachVolumeOutput `locationName:"attachmentSet" locationNameList:"item" type:"list"`
 
@@ -20502,6 +21605,11 @@ func (s CreateVolumeOutput) String() string {
 // GoString returns the string representation
 func (s CreateVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachments sets the Attachments field's value.
@@ -20753,6 +21861,8 @@ func (s *CreateVpcEndpointInput) SetVpcId(v string) *CreateVpcEndpointInput {
 type CreateVpcEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string `locationName:"clientToken" type:"string"`
@@ -20769,6 +21879,11 @@ func (s CreateVpcEndpointOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpcEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpcEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientToken sets the ClientToken field's value.
@@ -20870,6 +21985,8 @@ func (s *CreateVpcInput) SetInstanceTenancy(v Tenancy) *CreateVpcInput {
 type CreateVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPC.
 	Vpc *Vpc `locationName:"vpc" type:"structure"`
 }
@@ -20882,6 +21999,11 @@ func (s CreateVpcOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpc sets the Vpc field's value.
@@ -20952,6 +22074,8 @@ func (s *CreateVpcPeeringConnectionInput) SetVpcId(v string) *CreateVpcPeeringCo
 type CreateVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPC peering connection.
 	VpcPeeringConnection *VpcPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
 }
@@ -20964,6 +22088,11 @@ func (s CreateVpcPeeringConnectionOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcPeeringConnection sets the VpcPeeringConnection field's value.
@@ -21069,6 +22198,8 @@ func (s *CreateVpnConnectionInput) SetVpnGatewayId(v string) *CreateVpnConnectio
 type CreateVpnConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPN connection.
 	VpnConnection *VpnConnection `locationName:"vpnConnection" type:"structure"`
 }
@@ -21081,6 +22212,11 @@ func (s CreateVpnConnectionOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpnConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpnConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpnConnection sets the VpnConnection field's value.
@@ -21148,6 +22284,8 @@ func (s *CreateVpnConnectionRouteInput) SetVpnConnectionId(v string) *CreateVpnC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRouteOutput
 type CreateVpnConnectionRouteOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21158,6 +22296,11 @@ func (s CreateVpnConnectionRouteOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpnConnectionRouteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpnConnectionRouteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreateVpnGateway.
@@ -21239,6 +22382,8 @@ func (s *CreateVpnGatewayInput) SetType(v GatewayType) *CreateVpnGatewayInput {
 type CreateVpnGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the virtual private gateway.
 	VpnGateway *VpnGateway `locationName:"vpnGateway" type:"structure"`
 }
@@ -21251,6 +22396,11 @@ func (s CreateVpnGatewayOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpnGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpnGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpnGateway sets the VpnGateway field's value.
@@ -21387,6 +22537,8 @@ func (s *DeleteCustomerGatewayInput) SetDryRun(v bool) *DeleteCustomerGatewayInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGatewayOutput
 type DeleteCustomerGatewayOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21397,6 +22549,11 @@ func (s DeleteCustomerGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCustomerGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCustomerGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteDhcpOptions.
@@ -21455,6 +22612,8 @@ func (s *DeleteDhcpOptionsInput) SetDryRun(v bool) *DeleteDhcpOptionsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteDhcpOptionsOutput
 type DeleteDhcpOptionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21465,6 +22624,11 @@ func (s DeleteDhcpOptionsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDhcpOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDhcpOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGatewayRequest
@@ -21523,6 +22687,8 @@ func (s *DeleteEgressOnlyInternetGatewayInput) SetEgressOnlyInternetGatewayId(v 
 type DeleteEgressOnlyInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	ReturnCode *bool `locationName:"returnCode" type:"boolean"`
 }
@@ -21535,6 +22701,11 @@ func (s DeleteEgressOnlyInternetGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEgressOnlyInternetGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEgressOnlyInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturnCode sets the ReturnCode field's value.
@@ -21589,6 +22760,8 @@ func (s *DeleteFlowLogsInput) SetFlowLogIds(v []string) *DeleteFlowLogsInput {
 type DeleteFlowLogsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the flow logs that could not be deleted successfully.
 	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
@@ -21601,6 +22774,11 @@ func (s DeleteFlowLogsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFlowLogsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFlowLogsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
@@ -21665,6 +22843,8 @@ func (s *DeleteFpgaImageInput) SetFpgaImageId(v string) *DeleteFpgaImageInput {
 type DeleteFpgaImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -21677,6 +22857,11 @@ func (s DeleteFpgaImageOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFpgaImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFpgaImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -21741,6 +22926,8 @@ func (s *DeleteInternetGatewayInput) SetInternetGatewayId(v string) *DeleteInter
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGatewayOutput
 type DeleteInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21751,6 +22938,11 @@ func (s DeleteInternetGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DeleteInternetGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteKeyPair.
@@ -21809,6 +23001,8 @@ func (s *DeleteKeyPairInput) SetKeyName(v string) *DeleteKeyPairInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPairOutput
 type DeleteKeyPairOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21819,6 +23013,11 @@ func (s DeleteKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s DeleteKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteNatGateway.
@@ -21867,6 +23066,8 @@ func (s *DeleteNatGatewayInput) SetNatGatewayId(v string) *DeleteNatGatewayInput
 type DeleteNatGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the NAT gateway.
 	NatGatewayId *string `locationName:"natGatewayId" type:"string"`
 }
@@ -21879,6 +23080,11 @@ func (s DeleteNatGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNatGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNatGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNatGatewayId sets the NatGatewayId field's value.
@@ -21973,6 +23179,8 @@ func (s *DeleteNetworkAclEntryInput) SetRuleNumber(v int64) *DeleteNetworkAclEnt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclEntryOutput
 type DeleteNetworkAclEntryOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21983,6 +23191,11 @@ func (s DeleteNetworkAclEntryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNetworkAclEntryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNetworkAclEntryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteNetworkAcl.
@@ -22041,6 +23254,8 @@ func (s *DeleteNetworkAclInput) SetNetworkAclId(v string) *DeleteNetworkAclInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclOutput
 type DeleteNetworkAclOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22051,6 +23266,11 @@ func (s DeleteNetworkAclOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNetworkAclOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNetworkAclOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteNetworkInterface.
@@ -22109,6 +23329,8 @@ func (s *DeleteNetworkInterfaceInput) SetNetworkInterfaceId(v string) *DeleteNet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfaceOutput
 type DeleteNetworkInterfaceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22119,6 +23341,11 @@ func (s DeleteNetworkInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNetworkInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNetworkInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteNetworkInterfacePermission.
@@ -22189,6 +23416,8 @@ func (s *DeleteNetworkInterfacePermissionInput) SetNetworkInterfacePermissionId(
 type DeleteNetworkInterfacePermissionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds, otherwise returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -22201,6 +23430,11 @@ func (s DeleteNetworkInterfacePermissionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNetworkInterfacePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNetworkInterfacePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -22265,6 +23499,8 @@ func (s *DeletePlacementGroupInput) SetGroupName(v string) *DeletePlacementGroup
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePlacementGroupOutput
 type DeletePlacementGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22275,6 +23511,11 @@ func (s DeletePlacementGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeletePlacementGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePlacementGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteRoute.
@@ -22353,6 +23594,8 @@ func (s *DeleteRouteInput) SetRouteTableId(v string) *DeleteRouteInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteOutput
 type DeleteRouteOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22363,6 +23606,11 @@ func (s DeleteRouteOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRouteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRouteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteRouteTable.
@@ -22421,6 +23669,8 @@ func (s *DeleteRouteTableInput) SetRouteTableId(v string) *DeleteRouteTableInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteTableOutput
 type DeleteRouteTableOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22431,6 +23681,11 @@ func (s DeleteRouteTableOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRouteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRouteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteSecurityGroup.
@@ -22483,6 +23738,8 @@ func (s *DeleteSecurityGroupInput) SetGroupName(v string) *DeleteSecurityGroupIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroupOutput
 type DeleteSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22493,6 +23750,11 @@ func (s DeleteSecurityGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSecurityGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSecurityGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteSnapshot.
@@ -22551,6 +23813,8 @@ func (s *DeleteSnapshotInput) SetSnapshotId(v string) *DeleteSnapshotInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshotOutput
 type DeleteSnapshotOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22561,6 +23825,11 @@ func (s DeleteSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteSpotDatafeedSubscription.
@@ -22594,6 +23863,8 @@ func (s *DeleteSpotDatafeedSubscriptionInput) SetDryRun(v bool) *DeleteSpotDataf
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSpotDatafeedSubscriptionOutput
 type DeleteSpotDatafeedSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22604,6 +23875,11 @@ func (s DeleteSpotDatafeedSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSpotDatafeedSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSpotDatafeedSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteSubnet.
@@ -22662,6 +23938,8 @@ func (s *DeleteSubnetInput) SetSubnetId(v string) *DeleteSubnetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSubnetOutput
 type DeleteSubnetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22672,6 +23950,11 @@ func (s DeleteSubnetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSubnetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSubnetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteTags.
@@ -22744,6 +24027,8 @@ func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22754,6 +24039,11 @@ func (s DeleteTagsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteVolume.
@@ -22812,6 +24102,8 @@ func (s *DeleteVolumeInput) SetVolumeId(v string) *DeleteVolumeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVolumeOutput
 type DeleteVolumeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22822,6 +24114,11 @@ func (s DeleteVolumeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteVpcEndpoints.
@@ -22882,6 +24179,8 @@ func (s *DeleteVpcEndpointsInput) SetVpcEndpointIds(v []string) *DeleteVpcEndpoi
 type DeleteVpcEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the endpoints that were not successfully deleted.
 	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
 }
@@ -22894,6 +24193,11 @@ func (s DeleteVpcEndpointsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpcEndpointsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpcEndpointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUnsuccessful sets the Unsuccessful field's value.
@@ -22958,6 +24262,8 @@ func (s *DeleteVpcInput) SetVpcId(v string) *DeleteVpcInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcOutput
 type DeleteVpcOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22968,6 +24274,11 @@ func (s DeleteVpcOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteVpcPeeringConnection.
@@ -23028,6 +24339,8 @@ func (s *DeleteVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *D
 type DeleteVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -23040,6 +24353,11 @@ func (s DeleteVpcPeeringConnectionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -23104,6 +24422,8 @@ func (s *DeleteVpnConnectionInput) SetVpnConnectionId(v string) *DeleteVpnConnec
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionOutput
 type DeleteVpnConnectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -23114,6 +24434,11 @@ func (s DeleteVpnConnectionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpnConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpnConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteVpnConnectionRoute.
@@ -23175,6 +24500,8 @@ func (s *DeleteVpnConnectionRouteInput) SetVpnConnectionId(v string) *DeleteVpnC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRouteOutput
 type DeleteVpnConnectionRouteOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -23185,6 +24512,11 @@ func (s DeleteVpnConnectionRouteOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpnConnectionRouteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpnConnectionRouteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeleteVpnGateway.
@@ -23243,6 +24575,8 @@ func (s *DeleteVpnGatewayInput) SetVpnGatewayId(v string) *DeleteVpnGatewayInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnGatewayOutput
 type DeleteVpnGatewayOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -23253,6 +24587,11 @@ func (s DeleteVpnGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpnGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpnGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeregisterImage.
@@ -23311,6 +24650,8 @@ func (s *DeregisterImageInput) SetImageId(v string) *DeregisterImageInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImageOutput
 type DeregisterImageOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -23321,6 +24662,11 @@ func (s DeregisterImageOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DescribeAccountAttributes.
@@ -23365,6 +24711,8 @@ func (s *DescribeAccountAttributesInput) SetDryRun(v bool) *DescribeAccountAttri
 type DescribeAccountAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more account attributes.
 	AccountAttributes []AccountAttribute `locationName:"accountAttributeSet" locationNameList:"item" type:"list"`
 }
@@ -23377,6 +24725,11 @@ func (s DescribeAccountAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountAttributes sets the AccountAttributes field's value.
@@ -23469,6 +24822,8 @@ func (s *DescribeAddressesInput) SetPublicIps(v []string) *DescribeAddressesInpu
 type DescribeAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more Elastic IP addresses.
 	Addresses []Address `locationName:"addressesSet" locationNameList:"item" type:"list"`
 }
@@ -23481,6 +24836,11 @@ func (s DescribeAddressesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAddresses sets the Addresses field's value.
@@ -23550,6 +24910,8 @@ func (s *DescribeAvailabilityZonesInput) SetZoneNames(v []string) *DescribeAvail
 type DescribeAvailabilityZonesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more Availability Zones.
 	AvailabilityZones []AvailabilityZone `locationName:"availabilityZoneInfo" locationNameList:"item" type:"list"`
 }
@@ -23562,6 +24924,11 @@ func (s DescribeAvailabilityZonesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAvailabilityZonesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAvailabilityZonesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailabilityZones sets the AvailabilityZones field's value.
@@ -23645,6 +25012,8 @@ func (s *DescribeBundleTasksInput) SetFilters(v []Filter) *DescribeBundleTasksIn
 type DescribeBundleTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more bundle tasks.
 	BundleTasks []BundleTask `locationName:"bundleInstanceTasksSet" locationNameList:"item" type:"list"`
 }
@@ -23657,6 +25026,11 @@ func (s DescribeBundleTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBundleTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBundleTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBundleTasks sets the BundleTasks field's value.
@@ -23761,6 +25135,8 @@ func (s *DescribeClassicLinkInstancesInput) SetNextToken(v string) *DescribeClas
 type DescribeClassicLinkInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more linked EC2-Classic instances.
 	Instances []ClassicLinkInstance `locationName:"instancesSet" locationNameList:"item" type:"list"`
 
@@ -23777,6 +25153,11 @@ func (s DescribeClassicLinkInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeClassicLinkInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClassicLinkInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -23833,6 +25214,8 @@ func (s *DescribeConversionTasksInput) SetDryRun(v bool) *DescribeConversionTask
 type DescribeConversionTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the conversion tasks.
 	ConversionTasks []ConversionTask `locationName:"conversionTasks" locationNameList:"item" type:"list"`
 }
@@ -23845,6 +25228,11 @@ func (s DescribeConversionTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConversionTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConversionTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConversionTasks sets the ConversionTasks field's value.
@@ -23936,6 +25324,8 @@ func (s *DescribeCustomerGatewaysInput) SetFilters(v []Filter) *DescribeCustomer
 type DescribeCustomerGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more customer gateways.
 	CustomerGateways []CustomerGateway `locationName:"customerGatewaySet" locationNameList:"item" type:"list"`
 }
@@ -23948,6 +25338,11 @@ func (s DescribeCustomerGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCustomerGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCustomerGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCustomerGateways sets the CustomerGateways field's value.
@@ -24031,6 +25426,8 @@ func (s *DescribeDhcpOptionsInput) SetFilters(v []Filter) *DescribeDhcpOptionsIn
 type DescribeDhcpOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more DHCP options sets.
 	DhcpOptions []DhcpOptions `locationName:"dhcpOptionsSet" locationNameList:"item" type:"list"`
 }
@@ -24043,6 +25440,11 @@ func (s DescribeDhcpOptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDhcpOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDhcpOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDhcpOptions sets the DhcpOptions field's value.
@@ -24112,6 +25514,8 @@ func (s *DescribeEgressOnlyInternetGatewaysInput) SetNextToken(v string) *Descri
 type DescribeEgressOnlyInternetGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the egress-only Internet gateways.
 	EgressOnlyInternetGateways []EgressOnlyInternetGateway `locationName:"egressOnlyInternetGatewaySet" locationNameList:"item" type:"list"`
 
@@ -24127,6 +25531,11 @@ func (s DescribeEgressOnlyInternetGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEgressOnlyInternetGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEgressOnlyInternetGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEgressOnlyInternetGateways sets the EgressOnlyInternetGateways field's value.
@@ -24220,6 +25629,8 @@ func (s *DescribeElasticGpusInput) SetNextToken(v string) *DescribeElasticGpusIn
 type DescribeElasticGpusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Elastic GPUs.
 	ElasticGpuSet []ElasticGpus `locationName:"elasticGpuSet" locationNameList:"item" type:"list"`
 
@@ -24241,6 +25652,11 @@ func (s DescribeElasticGpusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticGpusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticGpusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetElasticGpuSet sets the ElasticGpuSet field's value.
@@ -24291,6 +25707,8 @@ func (s *DescribeExportTasksInput) SetExportTaskIds(v []string) *DescribeExportT
 type DescribeExportTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the export tasks.
 	ExportTasks []ExportTask `locationName:"exportTaskSet" locationNameList:"item" type:"list"`
 }
@@ -24303,6 +25721,11 @@ func (s DescribeExportTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeExportTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeExportTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportTasks sets the ExportTasks field's value.
@@ -24382,6 +25805,8 @@ func (s *DescribeFlowLogsInput) SetNextToken(v string) *DescribeFlowLogsInput {
 type DescribeFlowLogsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the flow logs.
 	FlowLogs []FlowLog `locationName:"flowLogSet" locationNameList:"item" type:"list"`
 
@@ -24398,6 +25823,11 @@ func (s DescribeFlowLogsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFlowLogsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFlowLogsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFlowLogs sets the FlowLogs field's value.
@@ -24482,6 +25912,8 @@ func (s *DescribeFpgaImageAttributeInput) SetFpgaImageId(v string) *DescribeFpga
 type DescribeFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the attribute.
 	FpgaImageAttribute *FpgaImageAttribute `locationName:"fpgaImageAttribute" type:"structure"`
 }
@@ -24494,6 +25926,11 @@ func (s DescribeFpgaImageAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFpgaImageAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFpgaImageAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFpgaImageAttribute sets the FpgaImageAttribute field's value.
@@ -24630,6 +26067,8 @@ func (s *DescribeFpgaImagesInput) SetOwners(v []string) *DescribeFpgaImagesInput
 type DescribeFpgaImagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more FPGA images.
 	FpgaImages []FpgaImage `locationName:"fpgaImageSet" locationNameList:"item" type:"list"`
 
@@ -24646,6 +26085,11 @@ func (s DescribeFpgaImagesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFpgaImagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFpgaImagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFpgaImages sets the FpgaImages field's value.
@@ -24748,6 +26192,8 @@ func (s *DescribeHostReservationOfferingsInput) SetOfferingId(v string) *Describ
 type DescribeHostReservationOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -24764,6 +26210,11 @@ func (s DescribeHostReservationOfferingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHostReservationOfferingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHostReservationOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -24843,6 +26294,8 @@ func (s *DescribeHostReservationsInput) SetNextToken(v string) *DescribeHostRese
 type DescribeHostReservationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details about the reservation's configuration.
 	HostReservationSet []HostReservation `locationName:"hostReservationSet" locationNameList:"item" type:"list"`
 
@@ -24859,6 +26312,11 @@ func (s DescribeHostReservationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHostReservationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHostReservationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostReservationSet sets the HostReservationSet field's value.
@@ -24950,6 +26408,8 @@ func (s *DescribeHostsInput) SetNextToken(v string) *DescribeHostsInput {
 type DescribeHostsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Dedicated Hosts.
 	Hosts []Host `locationName:"hostSet" locationNameList:"item" type:"list"`
 
@@ -24966,6 +26426,11 @@ func (s DescribeHostsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHostsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHostsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHosts sets the Hosts field's value.
@@ -25057,6 +26522,8 @@ func (s *DescribeIamInstanceProfileAssociationsInput) SetNextToken(v string) *De
 type DescribeIamInstanceProfileAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more IAM instance profile associations.
 	IamInstanceProfileAssociations []IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociationSet" locationNameList:"item" type:"list"`
 
@@ -25073,6 +26540,11 @@ func (s DescribeIamInstanceProfileAssociationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIamInstanceProfileAssociationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIamInstanceProfileAssociationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIamInstanceProfileAssociations sets the IamInstanceProfileAssociations field's value.
@@ -25117,6 +26589,8 @@ func (s *DescribeIdFormatInput) SetResource(v string) *DescribeIdFormatInput {
 type DescribeIdFormatOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the ID format for the resource.
 	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
 }
@@ -25129,6 +26603,11 @@ func (s DescribeIdFormatOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIdFormatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIdFormatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatuses sets the Statuses field's value.
@@ -25193,6 +26672,8 @@ func (s *DescribeIdentityIdFormatInput) SetResource(v string) *DescribeIdentityI
 type DescribeIdentityIdFormatOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the ID format for the resources.
 	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
 }
@@ -25205,6 +26686,11 @@ func (s DescribeIdentityIdFormatOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIdentityIdFormatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIdentityIdFormatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatuses sets the Statuses field's value.
@@ -25289,6 +26775,8 @@ func (s *DescribeImageAttributeInput) SetImageId(v string) *DescribeImageAttribu
 type DescribeImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
@@ -25323,6 +26811,11 @@ func (s DescribeImageAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImageAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImageAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
@@ -25527,6 +27020,8 @@ func (s *DescribeImagesInput) SetOwners(v []string) *DescribeImagesInput {
 type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more images.
 	Images []Image `locationName:"imagesSet" locationNameList:"item" type:"list"`
 }
@@ -25539,6 +27034,11 @@ func (s DescribeImagesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImages sets the Images field's value.
@@ -25618,6 +27118,8 @@ func (s *DescribeImportImageTasksInput) SetNextToken(v string) *DescribeImportIm
 type DescribeImportImageTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of zero or more import image tasks that are currently active or were
 	// completed or canceled in the previous 7 days.
 	ImportImageTasks []ImportImageTask `locationName:"importImageTaskSet" locationNameList:"item" type:"list"`
@@ -25635,6 +27137,11 @@ func (s DescribeImportImageTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImportImageTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImportImageTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportImageTasks sets the ImportImageTasks field's value.
@@ -25719,6 +27226,8 @@ func (s *DescribeImportSnapshotTasksInput) SetNextToken(v string) *DescribeImpor
 type DescribeImportSnapshotTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of zero or more import snapshot tasks that are currently active or
 	// were completed or canceled in the previous 7 days.
 	ImportSnapshotTasks []ImportSnapshotTask `locationName:"importSnapshotTaskSet" locationNameList:"item" type:"list"`
@@ -25736,6 +27245,11 @@ func (s DescribeImportSnapshotTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImportSnapshotTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImportSnapshotTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportSnapshotTasks sets the ImportSnapshotTasks field's value.
@@ -25824,6 +27338,8 @@ func (s *DescribeInstanceAttributeInput) SetInstanceId(v string) *DescribeInstan
 type DescribeInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The block device mapping of the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
@@ -25883,6 +27399,11 @@ func (s DescribeInstanceAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstanceAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstanceAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
@@ -26097,6 +27618,8 @@ func (s *DescribeInstanceStatusInput) SetNextToken(v string) *DescribeInstanceSt
 type DescribeInstanceStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more instance status descriptions.
 	InstanceStatuses []InstanceStatus `locationName:"instanceStatusSet" locationNameList:"item" type:"list"`
 
@@ -26113,6 +27636,11 @@ func (s DescribeInstanceStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstanceStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstanceStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceStatuses sets the InstanceStatuses field's value.
@@ -26439,6 +27967,8 @@ func (s *DescribeInstancesInput) SetNextToken(v string) *DescribeInstancesInput 
 type DescribeInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -26455,6 +27985,11 @@ func (s DescribeInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -26545,6 +28080,8 @@ func (s *DescribeInternetGatewaysInput) SetInternetGatewayIds(v []string) *Descr
 type DescribeInternetGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more Internet gateways.
 	InternetGateways []InternetGateway `locationName:"internetGatewaySet" locationNameList:"item" type:"list"`
 }
@@ -26557,6 +28094,11 @@ func (s DescribeInternetGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInternetGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInternetGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInternetGateways sets the InternetGateways field's value.
@@ -26622,6 +28164,8 @@ func (s *DescribeKeyPairsInput) SetKeyNames(v []string) *DescribeKeyPairsInput {
 type DescribeKeyPairsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more key pairs.
 	KeyPairs []KeyPairInfo `locationName:"keySet" locationNameList:"item" type:"list"`
 }
@@ -26634,6 +28178,11 @@ func (s DescribeKeyPairsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeKeyPairsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeKeyPairsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyPairs sets the KeyPairs field's value.
@@ -26719,6 +28268,8 @@ func (s *DescribeMovingAddressesInput) SetPublicIps(v []string) *DescribeMovingA
 type DescribeMovingAddressesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status for each Elastic IP address.
 	MovingAddressStatuses []MovingAddressStatus `locationName:"movingAddressStatusSet" locationNameList:"item" type:"list"`
 
@@ -26735,6 +28286,11 @@ func (s DescribeMovingAddressesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMovingAddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMovingAddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMovingAddressStatuses sets the MovingAddressStatuses field's value.
@@ -26836,6 +28392,8 @@ func (s *DescribeNatGatewaysInput) SetNextToken(v string) *DescribeNatGatewaysIn
 type DescribeNatGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the NAT gateways.
 	NatGateways []NatGateway `locationName:"natGatewaySet" locationNameList:"item" type:"list"`
 
@@ -26852,6 +28410,11 @@ func (s DescribeNatGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNatGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNatGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNatGateways sets the NatGateways field's value.
@@ -26973,6 +28536,8 @@ func (s *DescribeNetworkAclsInput) SetNetworkAclIds(v []string) *DescribeNetwork
 type DescribeNetworkAclsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more network ACLs.
 	NetworkAcls []NetworkAcl `locationName:"networkAclSet" locationNameList:"item" type:"list"`
 }
@@ -26985,6 +28550,11 @@ func (s DescribeNetworkAclsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNetworkAclsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNetworkAclsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkAcls sets the NetworkAcls field's value.
@@ -27060,6 +28630,8 @@ func (s *DescribeNetworkInterfaceAttributeInput) SetNetworkInterfaceId(v string)
 type DescribeNetworkInterfaceAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attachment (if any) of the network interface.
 	Attachment *NetworkInterfaceAttachment `locationName:"attachment" type:"structure"`
 
@@ -27084,6 +28656,11 @@ func (s DescribeNetworkInterfaceAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNetworkInterfaceAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNetworkInterfaceAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachment sets the Attachment field's value.
@@ -27188,6 +28765,8 @@ func (s *DescribeNetworkInterfacePermissionsInput) SetNextToken(v string) *Descr
 type DescribeNetworkInterfacePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The network interface permissions.
 	NetworkInterfacePermissions []NetworkInterfacePermission `locationName:"networkInterfacePermissions" locationNameList:"item" type:"list"`
 
@@ -27203,6 +28782,11 @@ func (s DescribeNetworkInterfacePermissionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNetworkInterfacePermissionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNetworkInterfacePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkInterfacePermissions sets the NetworkInterfacePermissions field's value.
@@ -27380,6 +28964,8 @@ func (s *DescribeNetworkInterfacesInput) SetNetworkInterfaceIds(v []string) *Des
 type DescribeNetworkInterfacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more network interfaces.
 	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
 }
@@ -27392,6 +28978,11 @@ func (s DescribeNetworkInterfacesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNetworkInterfacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNetworkInterfacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkInterfaces sets the NetworkInterfaces field's value.
@@ -27460,6 +29051,8 @@ func (s *DescribePlacementGroupsInput) SetGroupNames(v []string) *DescribePlacem
 type DescribePlacementGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more placement groups.
 	PlacementGroups []PlacementGroup `locationName:"placementGroupSet" locationNameList:"item" type:"list"`
 }
@@ -27472,6 +29065,11 @@ func (s DescribePlacementGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribePlacementGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePlacementGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlacementGroups sets the PlacementGroups field's value.
@@ -27559,6 +29157,8 @@ func (s *DescribePrefixListsInput) SetPrefixListIds(v []string) *DescribePrefixL
 type DescribePrefixListsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -27575,6 +29175,11 @@ func (s DescribePrefixListsOutput) String() string {
 // GoString returns the string representation
 func (s DescribePrefixListsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePrefixListsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -27644,6 +29249,8 @@ func (s *DescribeRegionsInput) SetRegionNames(v []string) *DescribeRegionsInput 
 type DescribeRegionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more regions.
 	Regions []Region `locationName:"regionInfo" locationNameList:"item" type:"list"`
 }
@@ -27656,6 +29263,11 @@ func (s DescribeRegionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRegionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRegionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRegions sets the Regions field's value.
@@ -27841,6 +29453,8 @@ func (s *DescribeReservedInstancesListingsInput) SetReservedInstancesListingId(v
 type DescribeReservedInstancesListingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Reserved Instance listing.
 	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
 }
@@ -27853,6 +29467,11 @@ func (s DescribeReservedInstancesListingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedInstancesListingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedInstancesListingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedInstancesListings sets the ReservedInstancesListings field's value.
@@ -27942,6 +29561,8 @@ func (s *DescribeReservedInstancesModificationsInput) SetReservedInstancesModifi
 type DescribeReservedInstancesModificationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -27958,6 +29579,11 @@ func (s DescribeReservedInstancesModificationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedInstancesModificationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedInstancesModificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -28187,6 +29813,8 @@ func (s *DescribeReservedInstancesOfferingsInput) SetReservedInstancesOfferingId
 type DescribeReservedInstancesOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -28203,6 +29831,11 @@ func (s DescribeReservedInstancesOfferingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedInstancesOfferingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedInstancesOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -28222,6 +29855,8 @@ func (s *DescribeReservedInstancesOfferingsOutput) SetReservedInstancesOfferings
 type DescribeReservedInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Reserved Instances.
 	ReservedInstances []ReservedInstances `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
 }
@@ -28234,6 +29869,11 @@ func (s DescribeReservedInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedInstances sets the ReservedInstances field's value.
@@ -28360,6 +30000,8 @@ func (s *DescribeRouteTablesInput) SetRouteTableIds(v []string) *DescribeRouteTa
 type DescribeRouteTablesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more route tables.
 	RouteTables []RouteTable `locationName:"routeTableSet" locationNameList:"item" type:"list"`
 }
@@ -28372,6 +30014,11 @@ func (s DescribeRouteTablesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRouteTablesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRouteTablesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRouteTables sets the RouteTables field's value.
@@ -28517,6 +30164,8 @@ func (s *DescribeScheduledInstanceAvailabilityInput) SetRecurrence(v *ScheduledI
 type DescribeScheduledInstanceAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to retrieve the next set of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -28533,6 +30182,11 @@ func (s DescribeScheduledInstanceAvailabilityOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScheduledInstanceAvailabilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScheduledInstanceAvailabilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -28635,6 +30289,8 @@ func (s *DescribeScheduledInstancesInput) SetSlotStartTimeRange(v *SlotStartTime
 type DescribeScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to retrieve the next set of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -28651,6 +30307,11 @@ func (s DescribeScheduledInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScheduledInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScheduledInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -28721,6 +30382,8 @@ func (s *DescribeSecurityGroupReferencesInput) SetGroupId(v []string) *DescribeS
 type DescribeSecurityGroupReferencesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPCs with the referencing security groups.
 	SecurityGroupReferenceSet []SecurityGroupReference `locationName:"securityGroupReferenceSet" locationNameList:"item" type:"list"`
 }
@@ -28733,6 +30396,11 @@ func (s DescribeSecurityGroupReferencesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSecurityGroupReferencesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSecurityGroupReferencesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSecurityGroupReferenceSet sets the SecurityGroupReferenceSet field's value.
@@ -28852,6 +30520,8 @@ func (s *DescribeSecurityGroupsInput) SetGroupNames(v []string) *DescribeSecurit
 type DescribeSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more security groups.
 	SecurityGroups []SecurityGroup `locationName:"securityGroupInfo" locationNameList:"item" type:"list"`
 }
@@ -28864,6 +30534,11 @@ func (s DescribeSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSecurityGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSecurityGroups sets the SecurityGroups field's value.
@@ -28944,6 +30619,8 @@ func (s *DescribeSnapshotAttributeInput) SetSnapshotId(v string) *DescribeSnapsh
 type DescribeSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of permissions for creating volumes from the snapshot.
 	CreateVolumePermissions []CreateVolumePermission `locationName:"createVolumePermission" locationNameList:"item" type:"list"`
 
@@ -28962,6 +30639,11 @@ func (s DescribeSnapshotAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSnapshotAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreateVolumePermissions sets the CreateVolumePermissions field's value.
@@ -29121,6 +30803,8 @@ func (s *DescribeSnapshotsInput) SetSnapshotIds(v []string) *DescribeSnapshotsIn
 type DescribeSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The NextToken value to include in a future DescribeSnapshots request. When
 	// the results of a DescribeSnapshots request exceed MaxResults, this value
 	// can be used to retrieve the next page of results. This value is null when
@@ -29139,6 +30823,11 @@ func (s DescribeSnapshotsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSnapshotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -29186,6 +30875,8 @@ func (s *DescribeSpotDatafeedSubscriptionInput) SetDryRun(v bool) *DescribeSpotD
 type DescribeSpotDatafeedSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Spot instance data feed subscription.
 	SpotDatafeedSubscription *SpotDatafeedSubscription `locationName:"spotDatafeedSubscription" type:"structure"`
 }
@@ -29198,6 +30889,11 @@ func (s DescribeSpotDatafeedSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotDatafeedSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSpotDatafeedSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSpotDatafeedSubscription sets the SpotDatafeedSubscription field's value.
@@ -29284,6 +30980,8 @@ func (s *DescribeSpotFleetInstancesInput) SetSpotFleetRequestId(v string) *Descr
 type DescribeSpotFleetInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The running instances. Note that this list is refreshed periodically and
 	// might be out of date.
 	//
@@ -29308,6 +31006,11 @@ func (s DescribeSpotFleetInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotFleetInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSpotFleetInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActiveInstances sets the ActiveInstances field's value.
@@ -29430,6 +31133,8 @@ func (s *DescribeSpotFleetRequestHistoryInput) SetStartTime(v time.Time) *Descri
 type DescribeSpotFleetRequestHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the events in the history of the Spot fleet request.
 	//
 	// HistoryRecords is a required field
@@ -29466,6 +31171,11 @@ func (s DescribeSpotFleetRequestHistoryOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotFleetRequestHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSpotFleetRequestHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHistoryRecords sets the HistoryRecords field's value.
@@ -29560,6 +31270,8 @@ func (s *DescribeSpotFleetRequestsInput) SetSpotFleetRequestIds(v []string) *Des
 type DescribeSpotFleetRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to retrieve the next set of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -29578,6 +31290,11 @@ func (s DescribeSpotFleetRequestsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotFleetRequestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSpotFleetRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -29752,6 +31469,8 @@ func (s *DescribeSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []string
 type DescribeSpotInstanceRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more Spot instance requests.
 	SpotInstanceRequests []SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
 }
@@ -29764,6 +31483,11 @@ func (s DescribeSpotInstanceRequestsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotInstanceRequestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSpotInstanceRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSpotInstanceRequests sets the SpotInstanceRequests field's value.
@@ -29898,6 +31622,8 @@ func (s *DescribeSpotPriceHistoryInput) SetStartTime(v time.Time) *DescribeSpotP
 type DescribeSpotPriceHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to retrieve the next set of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -29914,6 +31640,11 @@ func (s DescribeSpotPriceHistoryOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotPriceHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSpotPriceHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -30011,6 +31742,8 @@ func (s *DescribeStaleSecurityGroupsInput) SetVpcId(v string) *DescribeStaleSecu
 type DescribeStaleSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -30027,6 +31760,11 @@ func (s DescribeStaleSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStaleSecurityGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStaleSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -30138,6 +31876,8 @@ func (s *DescribeSubnetsInput) SetSubnetIds(v []string) *DescribeSubnetsInput {
 type DescribeSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more subnets.
 	Subnets []Subnet `locationName:"subnetSet" locationNameList:"item" type:"list"`
 }
@@ -30150,6 +31890,11 @@ func (s DescribeSubnetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSubnetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSubnetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubnets sets the Subnets field's value.
@@ -30231,6 +31976,8 @@ func (s *DescribeTagsInput) SetNextToken(v string) *DescribeTagsInput {
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return..
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -30247,6 +31994,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -30328,6 +32080,8 @@ func (s *DescribeVolumeAttributeInput) SetVolumeId(v string) *DescribeVolumeAttr
 type DescribeVolumeAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The state of autoEnableIO attribute.
 	AutoEnableIO *AttributeBooleanValue `locationName:"autoEnableIO" type:"structure"`
 
@@ -30346,6 +32100,11 @@ func (s DescribeVolumeAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVolumeAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVolumeAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutoEnableIO sets the AutoEnableIO field's value.
@@ -30477,6 +32236,8 @@ func (s *DescribeVolumeStatusInput) SetVolumeIds(v []string) *DescribeVolumeStat
 type DescribeVolumeStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -30493,6 +32254,11 @@ func (s DescribeVolumeStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVolumeStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVolumeStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -30701,6 +32467,8 @@ func (s *DescribeVolumesModificationsInput) SetVolumeIds(v []string) *DescribeVo
 type DescribeVolumesModificationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token for pagination, null if there are no more results
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -30716,6 +32484,11 @@ func (s DescribeVolumesModificationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVolumesModificationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVolumesModificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -30735,6 +32508,8 @@ func (s *DescribeVolumesModificationsOutput) SetVolumesModifications(v []VolumeM
 type DescribeVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The NextToken value to include in a future DescribeVolumes request. When
 	// the results of a DescribeVolumes request exceed MaxResults, this value can
 	// be used to retrieve the next page of results. This value is null when there
@@ -30753,6 +32528,11 @@ func (s DescribeVolumesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVolumesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVolumesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -30839,6 +32619,8 @@ func (s *DescribeVpcAttributeInput) SetVpcId(v string) *DescribeVpcAttributeInpu
 type DescribeVpcAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the instances launched in the VPC get DNS hostnames. If
 	// this attribute is true, instances in the VPC get DNS hostnames; otherwise,
 	// they do not.
@@ -30861,6 +32643,11 @@ func (s DescribeVpcAttributeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEnableDnsHostnames sets the EnableDnsHostnames field's value.
@@ -30948,6 +32735,8 @@ func (s *DescribeVpcClassicLinkDnsSupportInput) SetVpcIds(v []string) *DescribeV
 type DescribeVpcClassicLinkDnsSupportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
@@ -30963,6 +32752,11 @@ func (s DescribeVpcClassicLinkDnsSupportOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcClassicLinkDnsSupportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcClassicLinkDnsSupportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -31047,6 +32841,8 @@ func (s *DescribeVpcClassicLinkInput) SetVpcIds(v []string) *DescribeVpcClassicL
 type DescribeVpcClassicLinkOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ClassicLink status of one or more VPCs.
 	Vpcs []VpcClassicLink `locationName:"vpcSet" locationNameList:"item" type:"list"`
 }
@@ -31059,6 +32855,11 @@ func (s DescribeVpcClassicLinkOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcClassicLinkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcClassicLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcs sets the Vpcs field's value.
@@ -31123,6 +32924,8 @@ func (s *DescribeVpcEndpointServicesInput) SetNextToken(v string) *DescribeVpcEn
 type DescribeVpcEndpointServicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -31139,6 +32942,11 @@ func (s DescribeVpcEndpointServicesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcEndpointServicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcEndpointServicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -31236,6 +33044,8 @@ func (s *DescribeVpcEndpointsInput) SetVpcEndpointIds(v []string) *DescribeVpcEn
 type DescribeVpcEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -31252,6 +33062,11 @@ func (s DescribeVpcEndpointsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcEndpointsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcEndpointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -31360,6 +33175,8 @@ func (s *DescribeVpcPeeringConnectionsInput) SetVpcPeeringConnectionIds(v []stri
 type DescribeVpcPeeringConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPC peering connections.
 	VpcPeeringConnections []VpcPeeringConnection `locationName:"vpcPeeringConnectionSet" locationNameList:"item" type:"list"`
 }
@@ -31372,6 +33189,11 @@ func (s DescribeVpcPeeringConnectionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcPeeringConnectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcPeeringConnections sets the VpcPeeringConnections field's value.
@@ -31480,6 +33302,8 @@ func (s *DescribeVpcsInput) SetVpcIds(v []string) *DescribeVpcsInput {
 type DescribeVpcsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more VPCs.
 	Vpcs []Vpc `locationName:"vpcSet" locationNameList:"item" type:"list"`
 }
@@ -31492,6 +33316,11 @@ func (s DescribeVpcsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcs sets the Vpcs field's value.
@@ -31596,6 +33425,8 @@ func (s *DescribeVpnConnectionsInput) SetVpnConnectionIds(v []string) *DescribeV
 type DescribeVpnConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more VPN connections.
 	VpnConnections []VpnConnection `locationName:"vpnConnectionSet" locationNameList:"item" type:"list"`
 }
@@ -31608,6 +33439,11 @@ func (s DescribeVpnConnectionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpnConnectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpnConnectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpnConnections sets the VpnConnections field's value.
@@ -31704,6 +33540,8 @@ func (s *DescribeVpnGatewaysInput) SetVpnGatewayIds(v []string) *DescribeVpnGate
 type DescribeVpnGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more virtual private gateways.
 	VpnGateways []VpnGateway `locationName:"vpnGatewaySet" locationNameList:"item" type:"list"`
 }
@@ -31716,6 +33554,11 @@ func (s DescribeVpnGatewaysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpnGatewaysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpnGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpnGateways sets the VpnGateways field's value.
@@ -31797,6 +33640,8 @@ func (s *DetachClassicLinkVpcInput) SetVpcId(v string) *DetachClassicLinkVpcInpu
 type DetachClassicLinkVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -31809,6 +33654,11 @@ func (s DetachClassicLinkVpcOutput) String() string {
 // GoString returns the string representation
 func (s DetachClassicLinkVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachClassicLinkVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -31888,6 +33738,8 @@ func (s *DetachInternetGatewayInput) SetVpcId(v string) *DetachInternetGatewayIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachInternetGatewayOutput
 type DetachInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -31898,6 +33750,11 @@ func (s DetachInternetGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DetachInternetGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DetachNetworkInterface.
@@ -31965,6 +33822,8 @@ func (s *DetachNetworkInterfaceInput) SetForce(v bool) *DetachNetworkInterfaceIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachNetworkInterfaceOutput
 type DetachNetworkInterfaceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -31975,6 +33834,11 @@ func (s DetachNetworkInterfaceOutput) String() string {
 // GoString returns the string representation
 func (s DetachNetworkInterfaceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachNetworkInterfaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DetachVolume.
@@ -32068,6 +33932,8 @@ func (s *DetachVolumeInput) SetVolumeId(v string) *DetachVolumeInput {
 type DetachVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The time stamp when the attachment initiated.
 	AttachTime *time.Time `locationName:"attachTime" type:"timestamp" timestampFormat:"iso8601"`
 
@@ -32095,6 +33961,11 @@ func (s DetachVolumeOutput) String() string {
 // GoString returns the string representation
 func (s DetachVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachTime sets the AttachTime field's value.
@@ -32204,6 +34075,8 @@ func (s *DetachVpnGatewayInput) SetVpnGatewayId(v string) *DetachVpnGatewayInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVpnGatewayOutput
 type DetachVpnGatewayOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -32214,6 +34087,11 @@ func (s DetachVpnGatewayOutput) String() string {
 // GoString returns the string representation
 func (s DetachVpnGatewayOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachVpnGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a DHCP configuration option.
@@ -32352,6 +34230,8 @@ func (s *DisableVgwRoutePropagationInput) SetRouteTableId(v string) *DisableVgwR
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationOutput
 type DisableVgwRoutePropagationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -32362,6 +34242,11 @@ func (s DisableVgwRoutePropagationOutput) String() string {
 // GoString returns the string representation
 func (s DisableVgwRoutePropagationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableVgwRoutePropagationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DisableVpcClassicLinkDnsSupport.
@@ -32394,6 +34279,8 @@ func (s *DisableVpcClassicLinkDnsSupportInput) SetVpcId(v string) *DisableVpcCla
 type DisableVpcClassicLinkDnsSupportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -32406,6 +34293,11 @@ func (s DisableVpcClassicLinkDnsSupportOutput) String() string {
 // GoString returns the string representation
 func (s DisableVpcClassicLinkDnsSupportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableVpcClassicLinkDnsSupportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -32472,6 +34364,8 @@ func (s *DisableVpcClassicLinkInput) SetVpcId(v string) *DisableVpcClassicLinkIn
 type DisableVpcClassicLinkOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -32484,6 +34378,11 @@ func (s DisableVpcClassicLinkOutput) String() string {
 // GoString returns the string representation
 func (s DisableVpcClassicLinkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableVpcClassicLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -32541,6 +34440,8 @@ func (s *DisassociateAddressInput) SetPublicIp(v string) *DisassociateAddressInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateAddressOutput
 type DisassociateAddressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -32551,6 +34452,11 @@ func (s DisassociateAddressOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIamInstanceProfileRequest
@@ -32597,6 +34503,8 @@ func (s *DisassociateIamInstanceProfileInput) SetAssociationId(v string) *Disass
 type DisassociateIamInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IAM instance profile association.
 	IamInstanceProfileAssociation *IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociation" type:"structure"`
 }
@@ -32609,6 +34517,11 @@ func (s DisassociateIamInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateIamInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateIamInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIamInstanceProfileAssociation sets the IamInstanceProfileAssociation field's value.
@@ -32674,6 +34587,8 @@ func (s *DisassociateRouteTableInput) SetDryRun(v bool) *DisassociateRouteTableI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTableOutput
 type DisassociateRouteTableOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -32684,6 +34599,11 @@ func (s DisassociateRouteTableOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateRouteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateRouteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlockRequest
@@ -32730,6 +34650,8 @@ func (s *DisassociateSubnetCidrBlockInput) SetAssociationId(v string) *Disassoci
 type DisassociateSubnetCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociation" type:"structure"`
 
@@ -32745,6 +34667,11 @@ func (s DisassociateSubnetCidrBlockOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateSubnetCidrBlockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateSubnetCidrBlockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIpv6CidrBlockAssociation sets the Ipv6CidrBlockAssociation field's value.
@@ -32803,6 +34730,8 @@ func (s *DisassociateVpcCidrBlockInput) SetAssociationId(v string) *Disassociate
 type DisassociateVpcCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IPv4 CIDR block association.
 	CidrBlockAssociation *VpcCidrBlockAssociation `locationName:"cidrBlockAssociation" type:"structure"`
 
@@ -32821,6 +34750,11 @@ func (s DisassociateVpcCidrBlockOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateVpcCidrBlockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateVpcCidrBlockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCidrBlockAssociation sets the CidrBlockAssociation field's value.
@@ -33544,6 +35478,8 @@ func (s *EnableVgwRoutePropagationInput) SetRouteTableId(v string) *EnableVgwRou
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationOutput
 type EnableVgwRoutePropagationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -33554,6 +35490,11 @@ func (s EnableVgwRoutePropagationOutput) String() string {
 // GoString returns the string representation
 func (s EnableVgwRoutePropagationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableVgwRoutePropagationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for EnableVolumeIO.
@@ -33612,6 +35553,8 @@ func (s *EnableVolumeIOInput) SetVolumeId(v string) *EnableVolumeIOInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVolumeIOOutput
 type EnableVolumeIOOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -33622,6 +35565,11 @@ func (s EnableVolumeIOOutput) String() string {
 // GoString returns the string representation
 func (s EnableVolumeIOOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableVolumeIOOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for EnableVpcClassicLinkDnsSupport.
@@ -33654,6 +35602,8 @@ func (s *EnableVpcClassicLinkDnsSupportInput) SetVpcId(v string) *EnableVpcClass
 type EnableVpcClassicLinkDnsSupportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -33666,6 +35616,11 @@ func (s EnableVpcClassicLinkDnsSupportOutput) String() string {
 // GoString returns the string representation
 func (s EnableVpcClassicLinkDnsSupportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableVpcClassicLinkDnsSupportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -33732,6 +35687,8 @@ func (s *EnableVpcClassicLinkInput) SetVpcId(v string) *EnableVpcClassicLinkInpu
 type EnableVpcClassicLinkOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -33744,6 +35701,11 @@ func (s EnableVpcClassicLinkOutput) String() string {
 // GoString returns the string representation
 func (s EnableVpcClassicLinkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableVpcClassicLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -34468,6 +36430,8 @@ func (s *GetConsoleOutputInput) SetInstanceId(v string) *GetConsoleOutputInput {
 type GetConsoleOutputOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
@@ -34487,6 +36451,11 @@ func (s GetConsoleOutputOutput) String() string {
 // GoString returns the string representation
 func (s GetConsoleOutputOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConsoleOutputOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceId sets the InstanceId field's value.
@@ -34575,6 +36544,8 @@ func (s *GetConsoleScreenshotInput) SetWakeUp(v bool) *GetConsoleScreenshotInput
 type GetConsoleScreenshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The data that comprises the image.
 	ImageData *string `locationName:"imageData" type:"string"`
 
@@ -34590,6 +36561,11 @@ func (s GetConsoleScreenshotOutput) String() string {
 // GoString returns the string representation
 func (s GetConsoleScreenshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConsoleScreenshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageData sets the ImageData field's value.
@@ -34664,6 +36640,8 @@ func (s *GetHostReservationPurchasePreviewInput) SetOfferingId(v string) *GetHos
 type GetHostReservationPurchasePreviewOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts
 	// are specified. At this time, the only supported currency is USD.
 	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
@@ -34687,6 +36665,11 @@ func (s GetHostReservationPurchasePreviewOutput) String() string {
 // GoString returns the string representation
 func (s GetHostReservationPurchasePreviewOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHostReservationPurchasePreviewOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
@@ -34771,6 +36754,8 @@ func (s *GetPasswordDataInput) SetInstanceId(v string) *GetPasswordDataInput {
 type GetPasswordDataOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the Windows instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
@@ -34790,6 +36775,11 @@ func (s GetPasswordDataOutput) String() string {
 // GoString returns the string representation
 func (s GetPasswordDataOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPasswordDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceId sets the InstanceId field's value.
@@ -34885,6 +36875,8 @@ func (s *GetReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []Tar
 type GetReservedInstancesExchangeQuoteOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The currency of the transaction.
 	CurrencyCode *string `locationName:"currencyCode" type:"string"`
 
@@ -34921,6 +36913,11 @@ func (s GetReservedInstancesExchangeQuoteOutput) String() string {
 // GoString returns the string representation
 func (s GetReservedInstancesExchangeQuoteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetReservedInstancesExchangeQuoteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
@@ -36118,6 +38115,8 @@ func (s *ImportImageInput) SetRoleName(v string) *ImportImageInput {
 type ImportImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The architecture of the virtual machine.
 	Architecture *string `locationName:"architecture" type:"string"`
 
@@ -36160,6 +38159,11 @@ func (s ImportImageOutput) String() string {
 // GoString returns the string representation
 func (s ImportImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArchitecture sets the Architecture field's value.
@@ -36558,6 +38562,8 @@ func (s *ImportInstanceLaunchSpecification) SetUserData(v *UserData) *ImportInst
 type ImportInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the conversion task.
 	ConversionTask *ConversionTask `locationName:"conversionTask" type:"structure"`
 }
@@ -36570,6 +38576,11 @@ func (s ImportInstanceOutput) String() string {
 // GoString returns the string representation
 func (s ImportInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConversionTask sets the ConversionTask field's value.
@@ -36797,6 +38808,8 @@ func (s *ImportKeyPairInput) SetPublicKeyMaterial(v []byte) *ImportKeyPairInput 
 type ImportKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The MD5 public key fingerprint as specified in section 4 of RFC 4716.
 	KeyFingerprint *string `locationName:"keyFingerprint" type:"string"`
 
@@ -36812,6 +38825,11 @@ func (s ImportKeyPairOutput) String() string {
 // GoString returns the string representation
 func (s ImportKeyPairOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportKeyPairOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyFingerprint sets the KeyFingerprint field's value.
@@ -36904,6 +38922,8 @@ func (s *ImportSnapshotInput) SetRoleName(v string) *ImportSnapshotInput {
 type ImportSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the import snapshot task.
 	Description *string `locationName:"description" type:"string"`
 
@@ -36922,6 +38942,11 @@ func (s ImportSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s ImportSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -37092,6 +39117,8 @@ func (s *ImportVolumeInput) SetVolume(v *VolumeDetail) *ImportVolumeInput {
 type ImportVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the conversion task.
 	ConversionTask *ConversionTask `locationName:"conversionTask" type:"structure"`
 }
@@ -37104,6 +39131,11 @@ func (s ImportVolumeOutput) String() string {
 // GoString returns the string representation
 func (s ImportVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConversionTask sets the ConversionTask field's value.
@@ -39381,6 +41413,8 @@ func (s *ModifyFpgaImageAttributeInput) SetUserIds(v []string) *ModifyFpgaImageA
 type ModifyFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the attribute.
 	FpgaImageAttribute *FpgaImageAttribute `locationName:"fpgaImageAttribute" type:"structure"`
 }
@@ -39393,6 +41427,11 @@ func (s ModifyFpgaImageAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyFpgaImageAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyFpgaImageAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFpgaImageAttribute sets the FpgaImageAttribute field's value.
@@ -39461,6 +41500,8 @@ func (s *ModifyHostsInput) SetHostIds(v []string) *ModifyHostsInput {
 type ModifyHostsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the Dedicated Hosts that were successfully modified.
 	Successful []string `locationName:"successful" locationNameList:"item" type:"list"`
 
@@ -39477,6 +41518,11 @@ func (s ModifyHostsOutput) String() string {
 // GoString returns the string representation
 func (s ModifyHostsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyHostsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSuccessful sets the Successful field's value.
@@ -39550,6 +41596,8 @@ func (s *ModifyIdFormatInput) SetUseLongIds(v bool) *ModifyIdFormatInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdFormatOutput
 type ModifyIdFormatOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -39560,6 +41608,11 @@ func (s ModifyIdFormatOutput) String() string {
 // GoString returns the string representation
 func (s ModifyIdFormatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyIdFormatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters of ModifyIdentityIdFormat.
@@ -39638,6 +41691,8 @@ func (s *ModifyIdentityIdFormatInput) SetUseLongIds(v bool) *ModifyIdentityIdFor
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormatOutput
 type ModifyIdentityIdFormatOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -39648,6 +41703,11 @@ func (s ModifyIdentityIdFormatOutput) String() string {
 // GoString returns the string representation
 func (s ModifyIdentityIdFormatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyIdentityIdFormatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifyImageAttribute.
@@ -39784,6 +41844,8 @@ func (s *ModifyImageAttributeInput) SetValue(v string) *ModifyImageAttributeInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttributeOutput
 type ModifyImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -39794,6 +41856,11 @@ func (s ModifyImageAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyImageAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyImageAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifyInstanceAttribute.
@@ -40017,6 +42084,8 @@ func (s *ModifyInstanceAttributeInput) SetValue(v string) *ModifyInstanceAttribu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttributeOutput
 type ModifyInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -40027,6 +42096,11 @@ func (s ModifyInstanceAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyInstanceAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyInstanceAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifyInstancePlacement.
@@ -40102,6 +42176,8 @@ func (s *ModifyInstancePlacementInput) SetTenancy(v HostTenancy) *ModifyInstance
 type ModifyInstancePlacementOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -40114,6 +42190,11 @@ func (s ModifyInstancePlacementOutput) String() string {
 // GoString returns the string representation
 func (s ModifyInstancePlacementOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyInstancePlacementOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -40222,6 +42303,8 @@ func (s *ModifyNetworkInterfaceAttributeInput) SetSourceDestCheck(v *AttributeBo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeOutput
 type ModifyNetworkInterfaceAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -40232,6 +42315,11 @@ func (s ModifyNetworkInterfaceAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyNetworkInterfaceAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyNetworkInterfaceAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifyReservedInstances.
@@ -40305,6 +42393,8 @@ func (s *ModifyReservedInstancesInput) SetTargetConfigurations(v []ReservedInsta
 type ModifyReservedInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID for the modification.
 	ReservedInstancesModificationId *string `locationName:"reservedInstancesModificationId" type:"string"`
 }
@@ -40317,6 +42407,11 @@ func (s ModifyReservedInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ModifyReservedInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyReservedInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedInstancesModificationId sets the ReservedInstancesModificationId field's value.
@@ -40428,6 +42523,8 @@ func (s *ModifySnapshotAttributeInput) SetUserIds(v []string) *ModifySnapshotAtt
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttributeOutput
 type ModifySnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -40438,6 +42535,11 @@ func (s ModifySnapshotAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifySnapshotAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifySnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifySpotFleetRequest.
@@ -40506,6 +42608,8 @@ func (s *ModifySpotFleetRequestInput) SetTargetCapacity(v int64) *ModifySpotFlee
 type ModifySpotFleetRequestOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -40518,6 +42622,11 @@ func (s ModifySpotFleetRequestOutput) String() string {
 // GoString returns the string representation
 func (s ModifySpotFleetRequestOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifySpotFleetRequestOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -40598,6 +42707,8 @@ func (s *ModifySubnetAttributeInput) SetSubnetId(v string) *ModifySubnetAttribut
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeOutput
 type ModifySubnetAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -40608,6 +42719,11 @@ func (s ModifySubnetAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifySubnetAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifySubnetAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifyVolumeAttribute.
@@ -40675,6 +42791,8 @@ func (s *ModifyVolumeAttributeInput) SetVolumeId(v string) *ModifyVolumeAttribut
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeAttributeOutput
 type ModifyVolumeAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -40685,6 +42803,11 @@ func (s ModifyVolumeAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyVolumeAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyVolumeAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeRequest
@@ -40784,6 +42907,8 @@ func (s *ModifyVolumeInput) SetVolumeType(v VolumeType) *ModifyVolumeInput {
 type ModifyVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A VolumeModification object.
 	VolumeModification *VolumeModification `locationName:"volumeModification" type:"structure"`
 }
@@ -40796,6 +42921,11 @@ func (s ModifyVolumeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVolumeModification sets the VolumeModification field's value.
@@ -40878,6 +43008,8 @@ func (s *ModifyVpcAttributeInput) SetVpcId(v string) *ModifyVpcAttributeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttributeOutput
 type ModifyVpcAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -40888,6 +43020,11 @@ func (s ModifyVpcAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyVpcAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyVpcAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ModifyVpcEndpoint.
@@ -40986,6 +43123,8 @@ func (s *ModifyVpcEndpointInput) SetVpcEndpointId(v string) *ModifyVpcEndpointIn
 type ModifyVpcEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -40998,6 +43137,11 @@ func (s ModifyVpcEndpointOutput) String() string {
 // GoString returns the string representation
 func (s ModifyVpcEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyVpcEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -41080,6 +43224,8 @@ func (s *ModifyVpcPeeringConnectionOptionsInput) SetVpcPeeringConnectionId(v str
 type ModifyVpcPeeringConnectionOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the VPC peering connection options for the accepter VPC.
 	AccepterPeeringConnectionOptions *PeeringConnectionOptions `locationName:"accepterPeeringConnectionOptions" type:"structure"`
 
@@ -41095,6 +43241,11 @@ func (s ModifyVpcPeeringConnectionOptionsOutput) String() string {
 // GoString returns the string representation
 func (s ModifyVpcPeeringConnectionOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyVpcPeeringConnectionOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccepterPeeringConnectionOptions sets the AccepterPeeringConnectionOptions field's value.
@@ -41167,6 +43318,8 @@ func (s *MonitorInstancesInput) SetInstanceIds(v []string) *MonitorInstancesInpu
 type MonitorInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The monitoring information.
 	InstanceMonitorings []InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
@@ -41179,6 +43332,11 @@ func (s MonitorInstancesOutput) String() string {
 // GoString returns the string representation
 func (s MonitorInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s MonitorInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceMonitorings sets the InstanceMonitorings field's value.
@@ -41271,6 +43429,8 @@ func (s *MoveAddressToVpcInput) SetPublicIp(v string) *MoveAddressToVpcInput {
 type MoveAddressToVpcOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The allocation ID for the Elastic IP address.
 	AllocationId *string `locationName:"allocationId" type:"string"`
 
@@ -41286,6 +43446,11 @@ func (s MoveAddressToVpcOutput) String() string {
 // GoString returns the string representation
 func (s MoveAddressToVpcOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s MoveAddressToVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAllocationId sets the AllocationId field's value.
@@ -43220,6 +45385,8 @@ func (s *PurchaseHostReservationInput) SetOfferingId(v string) *PurchaseHostRese
 type PurchaseHostReservationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
 	// request. For more information, see How to Ensure Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// in the Amazon Elastic Compute Cloud User Guide
@@ -43248,6 +45415,11 @@ func (s PurchaseHostReservationOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseHostReservationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseHostReservationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientToken sets the ClientToken field's value.
@@ -43420,6 +45592,8 @@ func (s *PurchaseReservedInstancesOfferingInput) SetReservedInstancesOfferingId(
 type PurchaseReservedInstancesOfferingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the purchased Reserved Instances.
 	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 }
@@ -43432,6 +45606,11 @@ func (s PurchaseReservedInstancesOfferingOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseReservedInstancesOfferingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseReservedInstancesOfferingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedInstancesId sets the ReservedInstancesId field's value.
@@ -43518,6 +45697,8 @@ func (s *PurchaseScheduledInstancesInput) SetPurchaseRequests(v []PurchaseReques
 type PurchaseScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Scheduled Instances.
 	ScheduledInstanceSet []ScheduledInstance `locationName:"scheduledInstanceSet" locationNameList:"item" type:"list"`
 }
@@ -43530,6 +45711,11 @@ func (s PurchaseScheduledInstancesOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseScheduledInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseScheduledInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetScheduledInstanceSet sets the ScheduledInstanceSet field's value.
@@ -43594,6 +45780,8 @@ func (s *RebootInstancesInput) SetInstanceIds(v []string) *RebootInstancesInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RebootInstancesOutput
 type RebootInstancesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -43604,6 +45792,11 @@ func (s RebootInstancesOutput) String() string {
 // GoString returns the string representation
 func (s RebootInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a recurring charge.
@@ -43853,6 +46046,8 @@ func (s *RegisterImageInput) SetVirtualizationType(v string) *RegisterImageInput
 type RegisterImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the newly registered AMI.
 	ImageId *string `locationName:"imageId" type:"string"`
 }
@@ -43865,6 +46060,11 @@ func (s RegisterImageOutput) String() string {
 // GoString returns the string representation
 func (s RegisterImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageId sets the ImageId field's value.
@@ -43931,6 +46131,8 @@ func (s *RejectVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *R
 type RejectVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -43943,6 +46145,11 @@ func (s RejectVpcPeeringConnectionOutput) String() string {
 // GoString returns the string representation
 func (s RejectVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RejectVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -44000,6 +46207,8 @@ func (s *ReleaseAddressInput) SetPublicIp(v string) *ReleaseAddressInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseAddressOutput
 type ReleaseAddressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -44010,6 +46219,11 @@ func (s ReleaseAddressOutput) String() string {
 // GoString returns the string representation
 func (s ReleaseAddressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReleaseAddressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ReleaseHosts.
@@ -44058,6 +46272,8 @@ func (s *ReleaseHostsInput) SetHostIds(v []string) *ReleaseHostsInput {
 type ReleaseHostsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the Dedicated Hosts that were successfully released.
 	Successful []string `locationName:"successful" locationNameList:"item" type:"list"`
 
@@ -44074,6 +46290,11 @@ func (s ReleaseHostsOutput) String() string {
 // GoString returns the string representation
 func (s ReleaseHostsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReleaseHostsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSuccessful sets the Successful field's value.
@@ -44147,6 +46368,8 @@ func (s *ReplaceIamInstanceProfileAssociationInput) SetIamInstanceProfile(v *Iam
 type ReplaceIamInstanceProfileAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IAM instance profile association.
 	IamInstanceProfileAssociation *IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociation" type:"structure"`
 }
@@ -44159,6 +46382,11 @@ func (s ReplaceIamInstanceProfileAssociationOutput) String() string {
 // GoString returns the string representation
 func (s ReplaceIamInstanceProfileAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReplaceIamInstanceProfileAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIamInstanceProfileAssociation sets the IamInstanceProfileAssociation field's value.
@@ -44241,6 +46469,8 @@ func (s *ReplaceNetworkAclAssociationInput) SetNetworkAclId(v string) *ReplaceNe
 type ReplaceNetworkAclAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the new association.
 	NewAssociationId *string `locationName:"newAssociationId" type:"string"`
 }
@@ -44253,6 +46483,11 @@ func (s ReplaceNetworkAclAssociationOutput) String() string {
 // GoString returns the string representation
 func (s ReplaceNetworkAclAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReplaceNetworkAclAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNewAssociationId sets the NewAssociationId field's value.
@@ -44422,6 +46657,8 @@ func (s *ReplaceNetworkAclEntryInput) SetRuleNumber(v int64) *ReplaceNetworkAclE
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclEntryOutput
 type ReplaceNetworkAclEntryOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -44432,6 +46669,11 @@ func (s ReplaceNetworkAclEntryOutput) String() string {
 // GoString returns the string representation
 func (s ReplaceNetworkAclEntryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReplaceNetworkAclEntryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ReplaceRoute.
@@ -44564,6 +46806,8 @@ func (s *ReplaceRouteInput) SetVpcPeeringConnectionId(v string) *ReplaceRouteInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteOutput
 type ReplaceRouteOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -44574,6 +46818,11 @@ func (s ReplaceRouteOutput) String() string {
 // GoString returns the string representation
 func (s ReplaceRouteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReplaceRouteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ReplaceRouteTableAssociation.
@@ -44649,6 +46898,8 @@ func (s *ReplaceRouteTableAssociationInput) SetRouteTableId(v string) *ReplaceRo
 type ReplaceRouteTableAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the new association.
 	NewAssociationId *string `locationName:"newAssociationId" type:"string"`
 }
@@ -44661,6 +46912,11 @@ func (s ReplaceRouteTableAssociationOutput) String() string {
 // GoString returns the string representation
 func (s ReplaceRouteTableAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReplaceRouteTableAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNewAssociationId sets the NewAssociationId field's value.
@@ -44802,6 +47058,8 @@ func (s *ReportInstanceStatusInput) SetStatus(v ReportStatusType) *ReportInstanc
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReportInstanceStatusOutput
 type ReportInstanceStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -44812,6 +47070,11 @@ func (s ReportInstanceStatusOutput) String() string {
 // GoString returns the string representation
 func (s ReportInstanceStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReportInstanceStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for RequestSpotFleet.
@@ -44877,6 +47140,8 @@ func (s *RequestSpotFleetInput) SetSpotFleetRequestConfig(v *SpotFleetRequestCon
 type RequestSpotFleetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the Spot fleet request.
 	//
 	// SpotFleetRequestId is a required field
@@ -44891,6 +47156,11 @@ func (s RequestSpotFleetOutput) String() string {
 // GoString returns the string representation
 func (s RequestSpotFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RequestSpotFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
@@ -45101,6 +47371,8 @@ func (s *RequestSpotInstancesInput) SetValidUntil(v time.Time) *RequestSpotInsta
 type RequestSpotInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more Spot instance requests.
 	SpotInstanceRequests []SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
 }
@@ -45113,6 +47385,11 @@ func (s RequestSpotInstancesOutput) String() string {
 // GoString returns the string representation
 func (s RequestSpotInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RequestSpotInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSpotInstanceRequests sets the SpotInstanceRequests field's value.
@@ -46167,6 +48444,8 @@ func (s *ResetFpgaImageAttributeInput) SetFpgaImageId(v string) *ResetFpgaImageA
 type ResetFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -46179,6 +48458,11 @@ func (s ResetFpgaImageAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ResetFpgaImageAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetFpgaImageAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -46258,6 +48542,8 @@ func (s *ResetImageAttributeInput) SetImageId(v string) *ResetImageAttributeInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetImageAttributeOutput
 type ResetImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -46268,6 +48554,11 @@ func (s ResetImageAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ResetImageAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetImageAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ResetInstanceAttribute.
@@ -46343,6 +48634,8 @@ func (s *ResetInstanceAttributeInput) SetInstanceId(v string) *ResetInstanceAttr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttributeOutput
 type ResetInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -46353,6 +48646,11 @@ func (s ResetInstanceAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ResetInstanceAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetInstanceAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ResetNetworkInterfaceAttribute.
@@ -46420,6 +48718,8 @@ func (s *ResetNetworkInterfaceAttributeInput) SetSourceDestCheck(v string) *Rese
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetNetworkInterfaceAttributeOutput
 type ResetNetworkInterfaceAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -46430,6 +48730,11 @@ func (s ResetNetworkInterfaceAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ResetNetworkInterfaceAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetNetworkInterfaceAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ResetSnapshotAttribute.
@@ -46503,6 +48808,8 @@ func (s *ResetSnapshotAttributeInput) SetSnapshotId(v string) *ResetSnapshotAttr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetSnapshotAttributeOutput
 type ResetSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -46513,6 +48820,11 @@ func (s ResetSnapshotAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ResetSnapshotAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetSnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for RestoreAddressToClassic.
@@ -46573,6 +48885,8 @@ func (s *RestoreAddressToClassicInput) SetPublicIp(v string) *RestoreAddressToCl
 type RestoreAddressToClassicOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Elastic IP address.
 	PublicIp *string `locationName:"publicIp" type:"string"`
 
@@ -46588,6 +48902,11 @@ func (s RestoreAddressToClassicOutput) String() string {
 // GoString returns the string representation
 func (s RestoreAddressToClassicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreAddressToClassicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPublicIp sets the PublicIp field's value.
@@ -46725,6 +49044,8 @@ func (s *RevokeSecurityGroupEgressInput) SetToPort(v int64) *RevokeSecurityGroup
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressOutput
 type RevokeSecurityGroupEgressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -46735,6 +49056,11 @@ func (s RevokeSecurityGroupEgressOutput) String() string {
 // GoString returns the string representation
 func (s RevokeSecurityGroupEgressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RevokeSecurityGroupEgressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for RevokeSecurityGroupIngress.
@@ -46867,6 +49193,8 @@ func (s *RevokeSecurityGroupIngressInput) SetToPort(v int64) *RevokeSecurityGrou
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressOutput
 type RevokeSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -46877,6 +49205,11 @@ func (s RevokeSecurityGroupIngressOutput) String() string {
 // GoString returns the string representation
 func (s RevokeSecurityGroupIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RevokeSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a route in a route table.
@@ -47569,6 +49902,8 @@ func (s *RunInstancesMonitoringEnabled) SetEnabled(v bool) *RunInstancesMonitori
 type RunInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// [EC2-Classic only] One or more security groups.
 	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
@@ -47594,6 +49929,11 @@ func (s RunInstancesOutput) String() string {
 // GoString returns the string representation
 func (s RunInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RunInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroups sets the Groups field's value.
@@ -47726,6 +50066,8 @@ func (s *RunScheduledInstancesInput) SetScheduledInstanceId(v string) *RunSchedu
 type RunScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The IDs of the newly launched instances.
 	InstanceIdSet []string `locationName:"instanceIdSet" locationNameList:"item" type:"list"`
 }
@@ -47738,6 +50080,11 @@ func (s RunScheduledInstancesOutput) String() string {
 // GoString returns the string representation
 func (s RunScheduledInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RunScheduledInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceIdSet sets the InstanceIdSet field's value.
@@ -50544,6 +52891,8 @@ func (s *StartInstancesInput) SetInstanceIds(v []string) *StartInstancesInput {
 type StartInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more started instances.
 	StartingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
@@ -50556,6 +52905,11 @@ func (s StartInstancesOutput) String() string {
 // GoString returns the string representation
 func (s StartInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStartingInstances sets the StartingInstances field's value.
@@ -50699,6 +53053,8 @@ func (s *StopInstancesInput) SetInstanceIds(v []string) *StopInstancesInput {
 type StopInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more stopped instances.
 	StoppingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
@@ -50711,6 +53067,11 @@ func (s StopInstancesOutput) String() string {
 // GoString returns the string representation
 func (s StopInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStoppingInstances sets the StoppingInstances field's value.
@@ -51284,6 +53645,8 @@ func (s *TerminateInstancesInput) SetInstanceIds(v []string) *TerminateInstances
 type TerminateInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about one or more terminated instances.
 	TerminatingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
@@ -51296,6 +53659,11 @@ func (s TerminateInstancesOutput) String() string {
 // GoString returns the string representation
 func (s TerminateInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTerminatingInstances sets the TerminatingInstances field's value.
@@ -51363,6 +53731,8 @@ func (s *UnassignIpv6AddressesInput) SetNetworkInterfaceId(v string) *UnassignIp
 type UnassignIpv6AddressesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the network interface.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
@@ -51378,6 +53748,11 @@ func (s UnassignIpv6AddressesOutput) String() string {
 // GoString returns the string representation
 func (s UnassignIpv6AddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnassignIpv6AddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
@@ -51452,6 +53827,8 @@ func (s *UnassignPrivateIpAddressesInput) SetPrivateIpAddresses(v []string) *Una
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddressesOutput
 type UnassignPrivateIpAddressesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -51462,6 +53839,11 @@ func (s UnassignPrivateIpAddressesOutput) String() string {
 // GoString returns the string representation
 func (s UnassignPrivateIpAddressesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnassignPrivateIpAddressesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for UnmonitorInstances.
@@ -51522,6 +53904,8 @@ func (s *UnmonitorInstancesInput) SetInstanceIds(v []string) *UnmonitorInstances
 type UnmonitorInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The monitoring information.
 	InstanceMonitorings []InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
 }
@@ -51534,6 +53918,11 @@ func (s UnmonitorInstancesOutput) String() string {
 // GoString returns the string representation
 func (s UnmonitorInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnmonitorInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceMonitorings sets the InstanceMonitorings field's value.
@@ -51696,6 +54085,8 @@ func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetIpPermissions(v []Ip
 type UpdateSecurityGroupRuleDescriptionsEgressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -51708,6 +54099,11 @@ func (s UpdateSecurityGroupRuleDescriptionsEgressOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSecurityGroupRuleDescriptionsEgressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSecurityGroupRuleDescriptionsEgressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.
@@ -51795,6 +54191,8 @@ func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetIpPermissions(v []I
 type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
@@ -51807,6 +54205,11 @@ func (s UpdateSecurityGroupRuleDescriptionsIngressOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSecurityGroupRuleDescriptionsIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSecurityGroupRuleDescriptionsIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReturn sets the Return field's value.

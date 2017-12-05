@@ -51,7 +51,10 @@ func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 		input = &CreateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProjectOutput{})
+	output := &CreateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProjectRequest{Request: req, Input: input}
 }
 
@@ -97,7 +100,10 @@ func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 		input = &DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	output := &DeleteProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProjectRequest{Request: req, Input: input}
 }
 
@@ -143,7 +149,10 @@ func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) DescribeBundl
 		input = &DescribeBundleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBundleOutput{})
+	output := &DescribeBundleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBundleRequest{Request: req, Input: input}
 }
 
@@ -189,7 +198,10 @@ func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) DescribePro
 		input = &DescribeProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProjectOutput{})
+	output := &DescribeProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProjectRequest{Request: req, Input: input}
 }
 
@@ -236,7 +248,10 @@ func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) ExportBundleReque
 		input = &ExportBundleInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportBundleOutput{})
+	output := &ExportBundleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExportBundleRequest{Request: req, Input: input}
 }
 
@@ -284,7 +299,10 @@ func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) ExportProjectRe
 		input = &ExportProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportProjectOutput{})
+	output := &ExportProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExportProjectRequest{Request: req, Input: input}
 }
 
@@ -336,7 +354,10 @@ func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 		input = &ListBundlesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBundlesOutput{})
+	output := &ListBundlesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBundlesRequest{Request: req, Input: input}
 }
 
@@ -438,7 +459,10 @@ func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 		input = &ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	output := &ListProjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProjectsRequest{Request: req, Input: input}
 }
 
@@ -534,7 +558,10 @@ func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 		input = &UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	output := &UpdateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProjectRequest{Request: req, Input: input}
 }
 
@@ -668,6 +695,8 @@ func (s *CreateProjectInput) SetSnapshotId(v string) *CreateProjectInput {
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed information about the created AWS Mobile Hub project.
 	Details *ProjectDetails `locationName:"details" type:"structure"`
 }
@@ -680,6 +709,11 @@ func (s CreateProjectOutput) String() string {
 // GoString returns the string representation
 func (s CreateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDetails sets the Details field's value.
@@ -734,6 +768,8 @@ func (s *DeleteProjectInput) SetProjectId(v string) *DeleteProjectInput {
 type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Resources which were deleted.
 	DeletedResources []Resource `locationName:"deletedResources" type:"list"`
 
@@ -750,6 +786,11 @@ func (s DeleteProjectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletedResources sets the DeletedResources field's value.
@@ -810,6 +851,8 @@ func (s *DescribeBundleInput) SetBundleId(v string) *DescribeBundleInput {
 type DescribeBundleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The details of the bundle.
 	Details *BundleDetails `locationName:"details" type:"structure"`
 }
@@ -822,6 +865,11 @@ func (s DescribeBundleOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBundleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBundleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDetails sets the Details field's value.
@@ -887,6 +935,8 @@ func (s *DescribeProjectInput) SetSyncFromResources(v bool) *DescribeProjectInpu
 type DescribeProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed information about an AWS Mobile Hub project.
 	Details *ProjectDetails `locationName:"details" type:"structure"`
 }
@@ -899,6 +949,11 @@ func (s DescribeProjectOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDetails sets the Details field's value.
@@ -974,6 +1029,8 @@ func (s *ExportBundleInput) SetProjectId(v string) *ExportBundleInput {
 type ExportBundleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// URL which contains the custom-generated SDK and tool packages used to integrate
 	// the client mobile app or web app with the AWS resources created by the AWS
 	// Mobile Hub project.
@@ -988,6 +1045,11 @@ func (s ExportBundleOutput) String() string {
 // GoString returns the string representation
 func (s ExportBundleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExportBundleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDownloadUrl sets the DownloadUrl field's value.
@@ -1042,6 +1104,8 @@ func (s *ExportProjectInput) SetProjectId(v string) *ExportProjectInput {
 type ExportProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// URL which can be used to download the exported project configuation file(s).
 	DownloadUrl *string `locationName:"downloadUrl" type:"string"`
 
@@ -1066,6 +1130,11 @@ func (s ExportProjectOutput) String() string {
 // GoString returns the string representation
 func (s ExportProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExportProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDownloadUrl sets the DownloadUrl field's value.
@@ -1127,6 +1196,8 @@ func (s *ListBundlesInput) SetNextToken(v string) *ListBundlesInput {
 type ListBundlesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of bundles.
 	BundleList []BundleDetails `locationName:"bundleList" type:"list"`
 
@@ -1143,6 +1214,11 @@ func (s ListBundlesOutput) String() string {
 // GoString returns the string representation
 func (s ListBundlesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBundlesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBundleList sets the BundleList field's value.
@@ -1198,6 +1274,8 @@ func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Pagination token. Set to null to start listing records from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in
 	// another request to list more entries.
@@ -1215,6 +1293,11 @@ func (s ListProjectsOutput) String() string {
 // GoString returns the string representation
 func (s ListProjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1470,6 +1553,8 @@ func (s *UpdateProjectInput) SetProjectId(v string) *UpdateProjectInput {
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed information about the updated AWS Mobile Hub project.
 	Details *ProjectDetails `locationName:"details" type:"structure"`
 }
@@ -1482,6 +1567,11 @@ func (s UpdateProjectOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDetails sets the Details field's value.

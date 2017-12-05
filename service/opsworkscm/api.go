@@ -63,7 +63,10 @@ func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) AssociateNo
 		input = &AssociateNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateNodeOutput{})
+	output := &AssociateNodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateNodeRequest{Request: req, Input: input}
 }
 
@@ -122,7 +125,10 @@ func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) CreateBackupR
 		input = &CreateBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBackupOutput{})
+	output := &CreateBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBackupRequest{Request: req, Input: input}
 }
 
@@ -188,7 +194,10 @@ func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) CreateServerR
 		input = &CreateServerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServerOutput{})
+	output := &CreateServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateServerRequest{Request: req, Input: input}
 }
 
@@ -239,7 +248,10 @@ func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupR
 		input = &DeleteBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBackupOutput{})
+	output := &DeleteBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBackupRequest{Request: req, Input: input}
 }
 
@@ -295,7 +307,10 @@ func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) DeleteServerR
 		input = &DeleteServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServerOutput{})
+	output := &DeleteServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteServerRequest{Request: req, Input: input}
 }
 
@@ -344,7 +359,10 @@ func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttr
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	output := &DescribeAccountAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
@@ -396,7 +414,10 @@ func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) Describ
 		input = &DescribeBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+	output := &DescribeBackupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBackupsRequest{Request: req, Input: input}
 }
 
@@ -448,7 +469,10 @@ func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) DescribeE
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -498,7 +522,10 @@ func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAss
 		input = &DescribeNodeAssociationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNodeAssociationStatusOutput{})
+	output := &DescribeNodeAssociationStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNodeAssociationStatusRequest{Request: req, Input: input}
 }
 
@@ -551,7 +578,10 @@ func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) Describ
 		input = &DescribeServersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServersOutput{})
+	output := &DescribeServersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeServersRequest{Request: req, Input: input}
 }
 
@@ -605,7 +635,10 @@ func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) Disas
 		input = &DisassociateNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateNodeOutput{})
+	output := &DisassociateNodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateNodeRequest{Request: req, Input: input}
 }
 
@@ -661,7 +694,10 @@ func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) RestoreServ
 		input = &RestoreServerInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreServerOutput{})
+	output := &RestoreServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreServerRequest{Request: req, Input: input}
 }
 
@@ -715,7 +751,10 @@ func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) Start
 		input = &StartMaintenanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartMaintenanceOutput{})
+	output := &StartMaintenanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartMaintenanceRequest{Request: req, Input: input}
 }
 
@@ -763,7 +802,10 @@ func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) UpdateServerR
 		input = &UpdateServerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServerOutput{})
+	output := &UpdateServerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateServerRequest{Request: req, Input: input}
 }
 
@@ -819,7 +861,10 @@ func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngi
 		input = &UpdateServerEngineAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServerEngineAttributesOutput{})
+	output := &UpdateServerEngineAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateServerEngineAttributesRequest{Request: req, Input: input}
 }
 
@@ -959,6 +1004,8 @@ func (s *AssociateNodeInput) SetServerName(v string) *AssociateNodeInput {
 type AssociateNodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus
 	// API call to get the status of the association request.
 	NodeAssociationStatusToken *string `type:"string"`
@@ -972,6 +1019,11 @@ func (s AssociateNodeOutput) String() string {
 // GoString returns the string representation
 func (s AssociateNodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateNodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNodeAssociationStatusToken sets the NodeAssociationStatusToken field's value.
@@ -1277,6 +1329,8 @@ func (s *CreateBackupInput) SetServerName(v string) *CreateBackupInput {
 type CreateBackupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Backup created by request.
 	Backup *Backup `type:"structure"`
 }
@@ -1289,6 +1343,11 @@ func (s CreateBackupOutput) String() string {
 // GoString returns the string representation
 func (s CreateBackupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBackup sets the Backup field's value.
@@ -1586,6 +1645,8 @@ func (s *CreateServerInput) SetSubnetIds(v []string) *CreateServerInput {
 type CreateServerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The server that is created by the request.
 	Server *Server `type:"structure"`
 }
@@ -1598,6 +1659,11 @@ func (s CreateServerOutput) String() string {
 // GoString returns the string representation
 func (s CreateServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServer sets the Server field's value.
@@ -1650,6 +1716,8 @@ func (s *DeleteBackupInput) SetBackupId(v string) *DeleteBackupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackupResponse
 type DeleteBackupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1660,6 +1728,11 @@ func (s DeleteBackupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBackupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServerRequest
@@ -1708,6 +1781,8 @@ func (s *DeleteServerInput) SetServerName(v string) *DeleteServerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServerResponse
 type DeleteServerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1718,6 +1793,11 @@ func (s DeleteServerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributesRequest
@@ -1739,6 +1819,8 @@ func (s DescribeAccountAttributesInput) GoString() string {
 type DescribeAccountAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attributes that are currently set for the account.
 	Attributes []AccountAttribute `type:"list"`
 }
@@ -1751,6 +1833,11 @@ func (s DescribeAccountAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -1841,6 +1928,8 @@ func (s *DescribeBackupsInput) SetServerName(v string) *DescribeBackupsInput {
 type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the response to a DescribeBackups request.
 	Backups []Backup `type:"list"`
 
@@ -1863,6 +1952,11 @@ func (s DescribeBackupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBackupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBackupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBackups sets the Backups field's value.
@@ -1956,6 +2050,8 @@ func (s *DescribeEventsInput) SetServerName(v string) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// NextToken is a string that is returned in some command responses. It indicates
 	// that not all entries have been returned, and that you must run at least one
 	// more request to get remaining items. To get remaining results, call DescribeEvents
@@ -1978,6 +2074,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2054,6 +2155,8 @@ func (s *DescribeNodeAssociationStatusInput) SetServerName(v string) *DescribeNo
 type DescribeNodeAssociationStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Attributes specific to the node association.
 	EngineAttributes []EngineAttribute `type:"list"`
 
@@ -2077,6 +2180,11 @@ func (s DescribeNodeAssociationStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNodeAssociationStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNodeAssociationStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEngineAttributes sets the EngineAttributes field's value.
@@ -2164,6 +2272,8 @@ func (s *DescribeServersInput) SetServerName(v string) *DescribeServersInput {
 type DescribeServersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// NextToken is a string that is returned in some command responses. It indicates
 	// that not all entries have been returned, and that you must run at least one
 	// more request to get remaining items. To get remaining results, call DescribeServers
@@ -2186,6 +2296,11 @@ func (s DescribeServersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeServersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeServersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2276,6 +2391,8 @@ func (s *DisassociateNodeInput) SetServerName(v string) *DisassociateNodeInput {
 type DisassociateNodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus
 	// API call to get the status of the disassociation request.
 	NodeAssociationStatusToken *string `type:"string"`
@@ -2289,6 +2406,11 @@ func (s DisassociateNodeOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateNodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateNodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNodeAssociationStatusToken sets the NodeAssociationStatusToken field's value.
@@ -2414,6 +2536,8 @@ func (s *RestoreServerInput) SetServerName(v string) *RestoreServerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerResponse
 type RestoreServerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2424,6 +2548,11 @@ func (s RestoreServerOutput) String() string {
 // GoString returns the string representation
 func (s RestoreServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a configuration management server.
@@ -2783,6 +2912,8 @@ func (s *StartMaintenanceInput) SetServerName(v string) *StartMaintenanceInput {
 type StartMaintenanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the response to a StartMaintenance request.
 	Server *Server `type:"structure"`
 }
@@ -2795,6 +2926,11 @@ func (s StartMaintenanceOutput) String() string {
 // GoString returns the string representation
 func (s StartMaintenanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartMaintenanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServer sets the Server field's value.
@@ -2877,6 +3013,8 @@ func (s *UpdateServerEngineAttributesInput) SetServerName(v string) *UpdateServe
 type UpdateServerEngineAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the response to an UpdateServerEngineAttributes request.
 	Server *Server `type:"structure"`
 }
@@ -2889,6 +3027,11 @@ func (s UpdateServerEngineAttributesOutput) String() string {
 // GoString returns the string representation
 func (s UpdateServerEngineAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateServerEngineAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServer sets the Server field's value.
@@ -2987,6 +3130,8 @@ func (s *UpdateServerInput) SetServerName(v string) *UpdateServerInput {
 type UpdateServerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the response to a UpdateServer request.
 	Server *Server `type:"structure"`
 }
@@ -2999,6 +3144,11 @@ func (s UpdateServerOutput) String() string {
 // GoString returns the string representation
 func (s UpdateServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServer sets the Server field's value.

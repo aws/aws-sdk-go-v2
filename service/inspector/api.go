@@ -55,7 +55,10 @@ func (c *Inspector) AddAttributesToFindingsRequest(input *AddAttributesToFinding
 		input = &AddAttributesToFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddAttributesToFindingsOutput{})
+	output := &AddAttributesToFindingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddAttributesToFindingsRequest{Request: req, Input: input}
 }
 
@@ -104,7 +107,10 @@ func (c *Inspector) CreateAssessmentTargetRequest(input *CreateAssessmentTargetI
 		input = &CreateAssessmentTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssessmentTargetOutput{})
+	output := &CreateAssessmentTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAssessmentTargetRequest{Request: req, Input: input}
 }
 
@@ -151,7 +157,10 @@ func (c *Inspector) CreateAssessmentTemplateRequest(input *CreateAssessmentTempl
 		input = &CreateAssessmentTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssessmentTemplateOutput{})
+	output := &CreateAssessmentTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAssessmentTemplateRequest{Request: req, Input: input}
 }
 
@@ -200,7 +209,10 @@ func (c *Inspector) CreateResourceGroupRequest(input *CreateResourceGroupInput) 
 		input = &CreateResourceGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateResourceGroupOutput{})
+	output := &CreateResourceGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateResourceGroupRequest{Request: req, Input: input}
 }
 
@@ -247,9 +259,12 @@ func (c *Inspector) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) 
 		input = &DeleteAssessmentRunInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssessmentRunOutput{})
+	output := &DeleteAssessmentRunOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAssessmentRunRequest{Request: req, Input: input}
 }
 
@@ -296,9 +311,12 @@ func (c *Inspector) DeleteAssessmentTargetRequest(input *DeleteAssessmentTargetI
 		input = &DeleteAssessmentTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssessmentTargetOutput{})
+	output := &DeleteAssessmentTargetOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAssessmentTargetRequest{Request: req, Input: input}
 }
 
@@ -345,9 +363,12 @@ func (c *Inspector) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTempl
 		input = &DeleteAssessmentTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssessmentTemplateOutput{})
+	output := &DeleteAssessmentTemplateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAssessmentTemplateRequest{Request: req, Input: input}
 }
 
@@ -394,7 +415,10 @@ func (c *Inspector) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsI
 		input = &DescribeAssessmentRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssessmentRunsOutput{})
+	output := &DescribeAssessmentRunsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAssessmentRunsRequest{Request: req, Input: input}
 }
 
@@ -441,7 +465,10 @@ func (c *Inspector) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTa
 		input = &DescribeAssessmentTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssessmentTargetsOutput{})
+	output := &DescribeAssessmentTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAssessmentTargetsRequest{Request: req, Input: input}
 }
 
@@ -488,7 +515,10 @@ func (c *Inspector) DescribeAssessmentTemplatesRequest(input *DescribeAssessment
 		input = &DescribeAssessmentTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssessmentTemplatesOutput{})
+	output := &DescribeAssessmentTemplatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAssessmentTemplatesRequest{Request: req, Input: input}
 }
 
@@ -534,7 +564,10 @@ func (c *Inspector) DescribeCrossAccountAccessRoleRequest(input *DescribeCrossAc
 		input = &DescribeCrossAccountAccessRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCrossAccountAccessRoleOutput{})
+	output := &DescribeCrossAccountAccessRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCrossAccountAccessRoleRequest{Request: req, Input: input}
 }
 
@@ -580,7 +613,10 @@ func (c *Inspector) DescribeFindingsRequest(input *DescribeFindingsInput) Descri
 		input = &DescribeFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFindingsOutput{})
+	output := &DescribeFindingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFindingsRequest{Request: req, Input: input}
 }
 
@@ -627,7 +663,10 @@ func (c *Inspector) DescribeResourceGroupsRequest(input *DescribeResourceGroupsI
 		input = &DescribeResourceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourceGroupsOutput{})
+	output := &DescribeResourceGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeResourceGroupsRequest{Request: req, Input: input}
 }
 
@@ -674,7 +713,10 @@ func (c *Inspector) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInp
 		input = &DescribeRulesPackagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRulesPackagesOutput{})
+	output := &DescribeRulesPackagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRulesPackagesRequest{Request: req, Input: input}
 }
 
@@ -721,7 +763,10 @@ func (c *Inspector) GetAssessmentReportRequest(input *GetAssessmentReportInput) 
 		input = &GetAssessmentReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAssessmentReportOutput{})
+	output := &GetAssessmentReportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAssessmentReportRequest{Request: req, Input: input}
 }
 
@@ -768,7 +813,10 @@ func (c *Inspector) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput
 		input = &GetTelemetryMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTelemetryMetadataOutput{})
+	output := &GetTelemetryMetadataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTelemetryMetadataRequest{Request: req, Input: input}
 }
 
@@ -821,7 +869,10 @@ func (c *Inspector) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgent
 		input = &ListAssessmentRunAgentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssessmentRunAgentsOutput{})
+	output := &ListAssessmentRunAgentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssessmentRunAgentsRequest{Request: req, Input: input}
 }
 
@@ -924,7 +975,10 @@ func (c *Inspector) ListAssessmentRunsRequest(input *ListAssessmentRunsInput) Li
 		input = &ListAssessmentRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssessmentRunsOutput{})
+	output := &ListAssessmentRunsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssessmentRunsRequest{Request: req, Input: input}
 }
 
@@ -1028,7 +1082,10 @@ func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInp
 		input = &ListAssessmentTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssessmentTargetsOutput{})
+	output := &ListAssessmentTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssessmentTargetsRequest{Request: req, Input: input}
 }
 
@@ -1131,7 +1188,10 @@ func (c *Inspector) ListAssessmentTemplatesRequest(input *ListAssessmentTemplate
 		input = &ListAssessmentTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssessmentTemplatesOutput{})
+	output := &ListAssessmentTemplatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssessmentTemplatesRequest{Request: req, Input: input}
 }
 
@@ -1235,7 +1295,10 @@ func (c *Inspector) ListEventSubscriptionsRequest(input *ListEventSubscriptionsI
 		input = &ListEventSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEventSubscriptionsOutput{})
+	output := &ListEventSubscriptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListEventSubscriptionsRequest{Request: req, Input: input}
 }
 
@@ -1338,7 +1401,10 @@ func (c *Inspector) ListFindingsRequest(input *ListFindingsInput) ListFindingsRe
 		input = &ListFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFindingsOutput{})
+	output := &ListFindingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFindingsRequest{Request: req, Input: input}
 }
 
@@ -1440,7 +1506,10 @@ func (c *Inspector) ListRulesPackagesRequest(input *ListRulesPackagesInput) List
 		input = &ListRulesPackagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRulesPackagesOutput{})
+	output := &ListRulesPackagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRulesPackagesRequest{Request: req, Input: input}
 }
 
@@ -1536,7 +1605,10 @@ func (c *Inspector) ListTagsForResourceRequest(input *ListTagsForResourceInput) 
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -1589,7 +1661,10 @@ func (c *Inspector) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgent
 		input = &PreviewAgentsInput{}
 	}
 
-	req := c.newRequest(op, input, &PreviewAgentsOutput{})
+	output := &PreviewAgentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PreviewAgentsRequest{Request: req, Input: input}
 }
 
@@ -1686,9 +1761,12 @@ func (c *Inspector) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAc
 		input = &RegisterCrossAccountAccessRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterCrossAccountAccessRoleOutput{})
+	output := &RegisterCrossAccountAccessRoleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterCrossAccountAccessRoleRequest{Request: req, Input: input}
 }
 
@@ -1736,7 +1814,10 @@ func (c *Inspector) RemoveAttributesFromFindingsRequest(input *RemoveAttributesF
 		input = &RemoveAttributesFromFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAttributesFromFindingsOutput{})
+	output := &RemoveAttributesFromFindingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveAttributesFromFindingsRequest{Request: req, Input: input}
 }
 
@@ -1783,9 +1864,12 @@ func (c *Inspector) SetTagsForResourceRequest(input *SetTagsForResourceInput) Se
 		input = &SetTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTagsForResourceOutput{})
+	output := &SetTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -1833,7 +1917,10 @@ func (c *Inspector) StartAssessmentRunRequest(input *StartAssessmentRunInput) St
 		input = &StartAssessmentRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAssessmentRunOutput{})
+	output := &StartAssessmentRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartAssessmentRunRequest{Request: req, Input: input}
 }
 
@@ -1879,9 +1966,12 @@ func (c *Inspector) StopAssessmentRunRequest(input *StopAssessmentRunInput) Stop
 		input = &StopAssessmentRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StopAssessmentRunOutput{})
+	output := &StopAssessmentRunOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopAssessmentRunRequest{Request: req, Input: input}
 }
 
@@ -1928,9 +2018,12 @@ func (c *Inspector) SubscribeToEventRequest(input *SubscribeToEventInput) Subscr
 		input = &SubscribeToEventInput{}
 	}
 
-	req := c.newRequest(op, input, &SubscribeToEventOutput{})
+	output := &SubscribeToEventOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SubscribeToEventRequest{Request: req, Input: input}
 }
 
@@ -1977,9 +2070,12 @@ func (c *Inspector) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput
 		input = &UnsubscribeFromEventInput{}
 	}
 
-	req := c.newRequest(op, input, &UnsubscribeFromEventOutput{})
+	output := &UnsubscribeFromEventOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnsubscribeFromEventRequest{Request: req, Input: input}
 }
 
@@ -2026,9 +2122,12 @@ func (c *Inspector) UpdateAssessmentTargetRequest(input *UpdateAssessmentTargetI
 		input = &UpdateAssessmentTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssessmentTargetOutput{})
+	output := &UpdateAssessmentTargetOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAssessmentTargetRequest{Request: req, Input: input}
 }
 
@@ -2101,6 +2200,8 @@ func (s *AddAttributesToFindingsInput) SetFindingArns(v []string) *AddAttributes
 type AddAttributesToFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Attribute details that cannot be described. An error code is provided for
 	// each failed item.
 	//
@@ -2116,6 +2217,11 @@ func (s AddAttributesToFindingsOutput) String() string {
 // GoString returns the string representation
 func (s AddAttributesToFindingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddAttributesToFindingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedItems sets the FailedItems field's value.
@@ -3237,6 +3343,8 @@ func (s *CreateAssessmentTargetInput) SetResourceGroupArn(v string) *CreateAsses
 type CreateAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN that specifies the assessment target that is created.
 	//
 	// AssessmentTargetArn is a required field
@@ -3251,6 +3359,11 @@ func (s CreateAssessmentTargetOutput) String() string {
 // GoString returns the string representation
 func (s CreateAssessmentTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAssessmentTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentTargetArn sets the AssessmentTargetArn field's value.
@@ -3382,6 +3495,8 @@ func (s *CreateAssessmentTemplateInput) SetUserAttributesForFindings(v []Attribu
 type CreateAssessmentTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN that specifies the assessment template that is created.
 	//
 	// AssessmentTemplateArn is a required field
@@ -3396,6 +3511,11 @@ func (s CreateAssessmentTemplateOutput) String() string {
 // GoString returns the string representation
 func (s CreateAssessmentTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAssessmentTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentTemplateArn sets the AssessmentTemplateArn field's value.
@@ -3460,6 +3580,8 @@ func (s *CreateResourceGroupInput) SetResourceGroupTags(v []ResourceGroupTag) *C
 type CreateResourceGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN that specifies the resource group that is created.
 	//
 	// ResourceGroupArn is a required field
@@ -3474,6 +3596,11 @@ func (s CreateResourceGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateResourceGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateResourceGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceGroupArn sets the ResourceGroupArn field's value.
@@ -3528,6 +3655,8 @@ func (s *DeleteAssessmentRunInput) SetAssessmentRunArn(v string) *DeleteAssessme
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRunOutput
 type DeleteAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3538,6 +3667,11 @@ func (s DeleteAssessmentRunOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAssessmentRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAssessmentRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTargetRequest
@@ -3586,6 +3720,8 @@ func (s *DeleteAssessmentTargetInput) SetAssessmentTargetArn(v string) *DeleteAs
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTargetOutput
 type DeleteAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3596,6 +3732,11 @@ func (s DeleteAssessmentTargetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAssessmentTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAssessmentTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplateRequest
@@ -3644,6 +3785,8 @@ func (s *DeleteAssessmentTemplateInput) SetAssessmentTemplateArn(v string) *Dele
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplateOutput
 type DeleteAssessmentTemplateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3654,6 +3797,11 @@ func (s DeleteAssessmentTemplateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAssessmentTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAssessmentTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRunsRequest
@@ -3703,6 +3851,8 @@ func (s *DescribeAssessmentRunsInput) SetAssessmentRunArns(v []string) *Describe
 type DescribeAssessmentRunsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the assessment run.
 	//
 	// AssessmentRuns is a required field
@@ -3723,6 +3873,11 @@ func (s DescribeAssessmentRunsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAssessmentRunsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAssessmentRunsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentRuns sets the AssessmentRuns field's value.
@@ -3784,6 +3939,8 @@ func (s *DescribeAssessmentTargetsInput) SetAssessmentTargetArns(v []string) *De
 type DescribeAssessmentTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the assessment targets.
 	//
 	// AssessmentTargets is a required field
@@ -3804,6 +3961,11 @@ func (s DescribeAssessmentTargetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAssessmentTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAssessmentTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentTargets sets the AssessmentTargets field's value.
@@ -3863,6 +4025,8 @@ func (s *DescribeAssessmentTemplatesInput) SetAssessmentTemplateArns(v []string)
 type DescribeAssessmentTemplatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the assessment templates.
 	//
 	// AssessmentTemplates is a required field
@@ -3883,6 +4047,11 @@ func (s DescribeAssessmentTemplatesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAssessmentTemplatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAssessmentTemplatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentTemplates sets the AssessmentTemplates field's value.
@@ -3916,6 +4085,8 @@ func (s DescribeCrossAccountAccessRoleInput) GoString() string {
 type DescribeCrossAccountAccessRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date when the cross-account access role was registered.
 	//
 	// RegisteredAt is a required field
@@ -3942,6 +4113,11 @@ func (s DescribeCrossAccountAccessRoleOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCrossAccountAccessRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCrossAccountAccessRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRegisteredAt sets the RegisteredAt field's value.
@@ -4019,6 +4195,8 @@ func (s *DescribeFindingsInput) SetLocale(v Locale) *DescribeFindingsInput {
 type DescribeFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Finding details that cannot be described. An error code is provided for each
 	// failed item.
 	//
@@ -4039,6 +4217,11 @@ func (s DescribeFindingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFindingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFindingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedItems sets the FailedItems field's value.
@@ -4100,6 +4283,8 @@ func (s *DescribeResourceGroupsInput) SetResourceGroupArns(v []string) *Describe
 type DescribeResourceGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Resource group details that cannot be described. An error code is provided
 	// for each failed item.
 	//
@@ -4120,6 +4305,11 @@ func (s DescribeResourceGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeResourceGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeResourceGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedItems sets the FailedItems field's value.
@@ -4190,6 +4380,8 @@ func (s *DescribeRulesPackagesInput) SetRulesPackageArns(v []string) *DescribeRu
 type DescribeRulesPackagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Rules package details that cannot be described. An error code is provided
 	// for each failed item.
 	//
@@ -4210,6 +4402,11 @@ func (s DescribeRulesPackagesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRulesPackagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRulesPackagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedItems sets the FailedItems field's value.
@@ -4747,6 +4944,8 @@ func (s *GetAssessmentReportInput) SetReportType(v ReportType) *GetAssessmentRep
 type GetAssessmentReportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies the status of the request to generate an assessment report.
 	//
 	// Status is a required field
@@ -4765,6 +4964,11 @@ func (s GetAssessmentReportOutput) String() string {
 // GoString returns the string representation
 func (s GetAssessmentReportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAssessmentReportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -4827,6 +5031,8 @@ func (s *GetTelemetryMetadataInput) SetAssessmentRunArn(v string) *GetTelemetryM
 type GetTelemetryMetadataOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Telemetry details.
 	//
 	// TelemetryMetadata is a required field
@@ -4841,6 +5047,11 @@ func (s GetTelemetryMetadataOutput) String() string {
 // GoString returns the string representation
 func (s GetTelemetryMetadataOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTelemetryMetadataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTelemetryMetadata sets the TelemetryMetadata field's value.
@@ -4940,6 +5151,8 @@ func (s *ListAssessmentRunAgentsInput) SetNextToken(v string) *ListAssessmentRun
 type ListAssessmentRunAgentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ARNs that specifies the agents returned by the action.
 	//
 	// AssessmentRunAgents is a required field
@@ -4960,6 +5173,11 @@ func (s ListAssessmentRunAgentsOutput) String() string {
 // GoString returns the string representation
 func (s ListAssessmentRunAgentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssessmentRunAgentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentRunAgents sets the AssessmentRunAgents field's value.
@@ -5057,6 +5275,8 @@ func (s *ListAssessmentRunsInput) SetNextToken(v string) *ListAssessmentRunsInpu
 type ListAssessmentRunsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ARNs that specifies the assessment runs that are returned by the
 	// action.
 	//
@@ -5078,6 +5298,11 @@ func (s ListAssessmentRunsOutput) String() string {
 // GoString returns the string representation
 func (s ListAssessmentRunsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssessmentRunsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentRunArns sets the AssessmentRunArns field's value.
@@ -5165,6 +5390,8 @@ func (s *ListAssessmentTargetsInput) SetNextToken(v string) *ListAssessmentTarge
 type ListAssessmentTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ARNs that specifies the assessment targets that are returned by
 	// the action.
 	//
@@ -5186,6 +5413,11 @@ func (s ListAssessmentTargetsOutput) String() string {
 // GoString returns the string representation
 func (s ListAssessmentTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssessmentTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
@@ -5283,6 +5515,8 @@ func (s *ListAssessmentTemplatesInput) SetNextToken(v string) *ListAssessmentTem
 type ListAssessmentTemplatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ARNs that specifies the assessment templates returned by the action.
 	//
 	// AssessmentTemplateArns is a required field
@@ -5303,6 +5537,11 @@ func (s ListAssessmentTemplatesOutput) String() string {
 // GoString returns the string representation
 func (s ListAssessmentTemplatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssessmentTemplatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
@@ -5384,6 +5623,8 @@ func (s *ListEventSubscriptionsInput) SetResourceArn(v string) *ListEventSubscri
 type ListEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to
@@ -5404,6 +5645,11 @@ func (s ListEventSubscriptionsOutput) String() string {
 // GoString returns the string representation
 func (s ListEventSubscriptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListEventSubscriptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5501,6 +5747,8 @@ func (s *ListFindingsInput) SetNextToken(v string) *ListFindingsInput {
 type ListFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ARNs that specifies the findings returned by the action.
 	//
 	// FindingArns is a required field
@@ -5521,6 +5769,11 @@ func (s ListFindingsOutput) String() string {
 // GoString returns the string representation
 func (s ListFindingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFindingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFindingArns sets the FindingArns field's value.
@@ -5589,6 +5842,8 @@ func (s *ListRulesPackagesInput) SetNextToken(v string) *ListRulesPackagesInput 
 type ListRulesPackagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to
@@ -5609,6 +5864,11 @@ func (s ListRulesPackagesOutput) String() string {
 // GoString returns the string representation
 func (s ListRulesPackagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRulesPackagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5670,6 +5930,8 @@ func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResource
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A collection of key and value pairs.
 	//
 	// Tags is a required field
@@ -5684,6 +5946,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -5764,6 +6031,8 @@ func (s *PreviewAgentsInput) SetPreviewAgentsArn(v string) *PreviewAgentsInput {
 type PreviewAgentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting list of agents.
 	//
 	// AgentPreviews is a required field
@@ -5784,6 +6053,11 @@ func (s PreviewAgentsOutput) String() string {
 // GoString returns the string representation
 func (s PreviewAgentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PreviewAgentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentPreviews sets the AgentPreviews field's value.
@@ -5845,6 +6119,8 @@ func (s *RegisterCrossAccountAccessRoleInput) SetRoleArn(v string) *RegisterCros
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleOutput
 type RegisterCrossAccountAccessRoleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5855,6 +6131,11 @@ func (s RegisterCrossAccountAccessRoleOutput) String() string {
 // GoString returns the string representation
 func (s RegisterCrossAccountAccessRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterCrossAccountAccessRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindingsRequest
@@ -5919,6 +6200,8 @@ func (s *RemoveAttributesFromFindingsInput) SetFindingArns(v []string) *RemoveAt
 type RemoveAttributesFromFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Attributes details that cannot be described. An error code is provided for
 	// each failed item.
 	//
@@ -5934,6 +6217,11 @@ func (s RemoveAttributesFromFindingsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveAttributesFromFindingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveAttributesFromFindingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedItems sets the FailedItems field's value.
@@ -6229,6 +6517,8 @@ func (s *SetTagsForResourceInput) SetTags(v []Tag) *SetTagsForResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResourceOutput
 type SetTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6239,6 +6529,11 @@ func (s SetTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s SetTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRunRequest
@@ -6302,6 +6597,8 @@ func (s *StartAssessmentRunInput) SetAssessmentTemplateArn(v string) *StartAsses
 type StartAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the assessment run that has been started.
 	//
 	// AssessmentRunArn is a required field
@@ -6316,6 +6613,11 @@ func (s StartAssessmentRunOutput) String() string {
 // GoString returns the string representation
 func (s StartAssessmentRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartAssessmentRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssessmentRunArn sets the AssessmentRunArn field's value.
@@ -6383,6 +6685,8 @@ func (s *StopAssessmentRunInput) SetStopAction(v StopAction) *StopAssessmentRunI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRunOutput
 type StopAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6393,6 +6697,11 @@ func (s StopAssessmentRunOutput) String() string {
 // GoString returns the string representation
 func (s StopAssessmentRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopAssessmentRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEventRequest
@@ -6474,6 +6783,8 @@ func (s *SubscribeToEventInput) SetTopicArn(v string) *SubscribeToEventInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEventOutput
 type SubscribeToEventOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6484,6 +6795,11 @@ func (s SubscribeToEventOutput) String() string {
 // GoString returns the string representation
 func (s SubscribeToEventOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SubscribeToEventOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This data type is used as a response element in the ListEventSubscriptions
@@ -6758,6 +7074,8 @@ func (s *UnsubscribeFromEventInput) SetTopicArn(v string) *UnsubscribeFromEventI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEventOutput
 type UnsubscribeFromEventOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6768,6 +7086,11 @@ func (s UnsubscribeFromEventOutput) String() string {
 // GoString returns the string representation
 func (s UnsubscribeFromEventOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnsubscribeFromEventOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTargetRequest
@@ -6853,6 +7176,8 @@ func (s *UpdateAssessmentTargetInput) SetResourceGroupArn(v string) *UpdateAsses
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTargetOutput
 type UpdateAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6863,6 +7188,11 @@ func (s UpdateAssessmentTargetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAssessmentTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAssessmentTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type AccessDeniedErrorCode string

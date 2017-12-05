@@ -52,7 +52,10 @@ func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) CreateClust
 		input = &CreateClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterOutput{})
+	output := &CreateClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateClusterRequest{Request: req, Input: input}
 }
 
@@ -99,7 +102,10 @@ func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 		input = &CreateHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHsmOutput{})
+	output := &CreateHsmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHsmRequest{Request: req, Input: input}
 }
 
@@ -147,7 +153,10 @@ func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) DeleteClust
 		input = &DeleteClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	output := &DeleteClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteClusterRequest{Request: req, Input: input}
 }
 
@@ -196,7 +205,10 @@ func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 		input = &DeleteHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHsmOutput{})
+	output := &DeleteHsmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteHsmRequest{Request: req, Input: input}
 }
 
@@ -255,7 +267,10 @@ func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) Describ
 		input = &DescribeBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+	output := &DescribeBackupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBackupsRequest{Request: req, Input: input}
 }
 
@@ -364,7 +379,10 @@ func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) Descr
 		input = &DescribeClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	output := &DescribeClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeClustersRequest{Request: req, Input: input}
 }
 
@@ -463,7 +481,10 @@ func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) Ini
 		input = &InitializeClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &InitializeClusterOutput{})
+	output := &InitializeClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitializeClusterRequest{Request: req, Input: input}
 }
 
@@ -521,7 +542,10 @@ func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 		input = &ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsRequest{Request: req, Input: input}
 }
 
@@ -617,7 +641,10 @@ func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) TagResourceRequ
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -663,7 +690,10 @@ func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) UntagResour
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -999,6 +1029,8 @@ func (s *CreateClusterInput) SetSubnetIds(v []string) *CreateClusterInput {
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the cluster that was created.
 	Cluster *Cluster `type:"structure"`
 }
@@ -1011,6 +1043,11 @@ func (s CreateClusterOutput) String() string {
 // GoString returns the string representation
 func (s CreateClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -1091,6 +1128,8 @@ func (s *CreateHsmInput) SetIpAddress(v string) *CreateHsmInput {
 type CreateHsmOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the HSM that was created.
 	Hsm *Hsm `type:"structure"`
 }
@@ -1103,6 +1142,11 @@ func (s CreateHsmOutput) String() string {
 // GoString returns the string representation
 func (s CreateHsmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHsmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHsm sets the Hsm field's value.
@@ -1156,6 +1200,8 @@ func (s *DeleteClusterInput) SetClusterId(v string) *DeleteClusterInput {
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the cluster that was deleted.
 	Cluster *Cluster `type:"structure"`
 }
@@ -1168,6 +1214,11 @@ func (s DeleteClusterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -1249,6 +1300,8 @@ func (s *DeleteHsmInput) SetHsmId(v string) *DeleteHsmInput {
 type DeleteHsmOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier (ID) of the HSM that was deleted.
 	HsmId *string `type:"string"`
 }
@@ -1261,6 +1314,11 @@ func (s DeleteHsmOutput) String() string {
 // GoString returns the string representation
 func (s DeleteHsmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteHsmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHsmId sets the HsmId field's value.
@@ -1338,6 +1396,8 @@ func (s *DescribeBackupsInput) SetNextToken(v string) *DescribeBackupsInput {
 type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of backups.
 	Backups []Backup `type:"list"`
 
@@ -1355,6 +1415,11 @@ func (s DescribeBackupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBackupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBackupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBackups sets the Backups field's value.
@@ -1439,6 +1504,8 @@ func (s *DescribeClustersInput) SetNextToken(v string) *DescribeClustersInput {
 type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of clusters.
 	Clusters []Cluster `type:"list"`
 
@@ -1456,6 +1523,11 @@ func (s DescribeClustersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusters sets the Clusters field's value.
@@ -1641,6 +1713,8 @@ func (s *InitializeClusterInput) SetTrustAnchor(v string) *InitializeClusterInpu
 type InitializeClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The cluster's state.
 	State ClusterState `type:"string" enum:"true"`
 
@@ -1656,6 +1730,11 @@ func (s InitializeClusterOutput) String() string {
 // GoString returns the string representation
 func (s InitializeClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitializeClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetState sets the State field's value.
@@ -1738,6 +1817,8 @@ func (s *ListTagsInput) SetResourceId(v string) *ListTagsInput {
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An opaque string that indicates that the response contains only a subset
 	// of tags. Use this value in a subsequent ListTags request to get more tags.
 	NextToken *string `type:"string"`
@@ -1756,6 +1837,11 @@ func (s ListTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1898,6 +1984,8 @@ func (s *TagResourceInput) SetTagList(v []Tag) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1908,6 +1996,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/UntagResourceRequest
@@ -1973,6 +2066,8 @@ func (s *UntagResourceInput) SetTagKeyList(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1983,6 +2078,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type BackupPolicy string

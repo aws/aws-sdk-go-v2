@@ -3,6 +3,8 @@
 package wafregional
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
@@ -50,7 +52,10 @@ func (c *WAFRegional) AssociateWebACLRequest(input *AssociateWebACLInput) Associ
 		input = &AssociateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateWebACLOutput{})
+	output := &AssociateWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateWebACLRequest{Request: req, Input: input}
 }
 
@@ -59,17 +64,17 @@ const opCreateByteMatchSet = "CreateByteMatchSet"
 // CreateByteMatchSetRequest is a API request type for the CreateByteMatchSet API operation.
 type CreateByteMatchSetRequest struct {
 	*aws.Request
-	Input *waf.CreateByteMatchSetInput
+	Input *CreateByteMatchSetInput
 }
 
 // Send marshals and sends the CreateByteMatchSet API request.
-func (r CreateByteMatchSetRequest) Send() (*waf.CreateByteMatchSetOutput, error) {
+func (r CreateByteMatchSetRequest) Send() (*CreateByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateByteMatchSetOutput), nil
+	return r.Request.Data.(*CreateByteMatchSetOutput), nil
 }
 
 // CreateByteMatchSetRequest returns a request value for making API operation for
@@ -106,7 +111,7 @@ func (r CreateByteMatchSetRequest) Send() (*waf.CreateByteMatchSetOutput, error)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateByteMatchSet
-func (c *WAFRegional) CreateByteMatchSetRequest(input *waf.CreateByteMatchSetInput) CreateByteMatchSetRequest {
+func (c *WAFRegional) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) CreateByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateByteMatchSet,
 		HTTPMethod: "POST",
@@ -114,10 +119,13 @@ func (c *WAFRegional) CreateByteMatchSetRequest(input *waf.CreateByteMatchSetInp
 	}
 
 	if input == nil {
-		input = &waf.CreateByteMatchSetInput{}
+		input = &CreateByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateByteMatchSetOutput{})
+	output := &CreateByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -126,17 +134,17 @@ const opCreateIPSet = "CreateIPSet"
 // CreateIPSetRequest is a API request type for the CreateIPSet API operation.
 type CreateIPSetRequest struct {
 	*aws.Request
-	Input *waf.CreateIPSetInput
+	Input *CreateIPSetInput
 }
 
 // Send marshals and sends the CreateIPSet API request.
-func (r CreateIPSetRequest) Send() (*waf.CreateIPSetOutput, error) {
+func (r CreateIPSetRequest) Send() (*CreateIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateIPSetOutput), nil
+	return r.Request.Data.(*CreateIPSetOutput), nil
 }
 
 // CreateIPSetRequest returns a request value for making API operation for
@@ -173,7 +181,7 @@ func (r CreateIPSetRequest) Send() (*waf.CreateIPSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSet
-func (c *WAFRegional) CreateIPSetRequest(input *waf.CreateIPSetInput) CreateIPSetRequest {
+func (c *WAFRegional) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateIPSet,
 		HTTPMethod: "POST",
@@ -181,10 +189,13 @@ func (c *WAFRegional) CreateIPSetRequest(input *waf.CreateIPSetInput) CreateIPSe
 	}
 
 	if input == nil {
-		input = &waf.CreateIPSetInput{}
+		input = &CreateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateIPSetOutput{})
+	output := &CreateIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateIPSetRequest{Request: req, Input: input}
 }
 
@@ -193,17 +204,17 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 // CreateRateBasedRuleRequest is a API request type for the CreateRateBasedRule API operation.
 type CreateRateBasedRuleRequest struct {
 	*aws.Request
-	Input *waf.CreateRateBasedRuleInput
+	Input *CreateRateBasedRuleInput
 }
 
 // Send marshals and sends the CreateRateBasedRule API request.
-func (r CreateRateBasedRuleRequest) Send() (*waf.CreateRateBasedRuleOutput, error) {
+func (r CreateRateBasedRuleRequest) Send() (*CreateRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateRateBasedRuleOutput), nil
+	return r.Request.Data.(*CreateRateBasedRuleOutput), nil
 }
 
 // CreateRateBasedRuleRequest returns a request value for making API operation for
@@ -279,7 +290,7 @@ func (r CreateRateBasedRuleRequest) Send() (*waf.CreateRateBasedRuleOutput, erro
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRateBasedRule
-func (c *WAFRegional) CreateRateBasedRuleRequest(input *waf.CreateRateBasedRuleInput) CreateRateBasedRuleRequest {
+func (c *WAFRegional) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) CreateRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateRateBasedRule,
 		HTTPMethod: "POST",
@@ -287,10 +298,13 @@ func (c *WAFRegional) CreateRateBasedRuleRequest(input *waf.CreateRateBasedRuleI
 	}
 
 	if input == nil {
-		input = &waf.CreateRateBasedRuleInput{}
+		input = &CreateRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateRateBasedRuleOutput{})
+	output := &CreateRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -299,17 +313,17 @@ const opCreateRule = "CreateRule"
 // CreateRuleRequest is a API request type for the CreateRule API operation.
 type CreateRuleRequest struct {
 	*aws.Request
-	Input *waf.CreateRuleInput
+	Input *CreateRuleInput
 }
 
 // Send marshals and sends the CreateRule API request.
-func (r CreateRuleRequest) Send() (*waf.CreateRuleOutput, error) {
+func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateRuleOutput), nil
+	return r.Request.Data.(*CreateRuleOutput), nil
 }
 
 // CreateRuleRequest returns a request value for making API operation for
@@ -360,7 +374,7 @@ func (r CreateRuleRequest) Send() (*waf.CreateRuleOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRule
-func (c *WAFRegional) CreateRuleRequest(input *waf.CreateRuleInput) CreateRuleRequest {
+func (c *WAFRegional) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateRule,
 		HTTPMethod: "POST",
@@ -368,10 +382,13 @@ func (c *WAFRegional) CreateRuleRequest(input *waf.CreateRuleInput) CreateRuleRe
 	}
 
 	if input == nil {
-		input = &waf.CreateRuleInput{}
+		input = &CreateRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateRuleOutput{})
+	output := &CreateRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRuleRequest{Request: req, Input: input}
 }
 
@@ -380,17 +397,17 @@ const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 // CreateSizeConstraintSetRequest is a API request type for the CreateSizeConstraintSet API operation.
 type CreateSizeConstraintSetRequest struct {
 	*aws.Request
-	Input *waf.CreateSizeConstraintSetInput
+	Input *CreateSizeConstraintSetInput
 }
 
 // Send marshals and sends the CreateSizeConstraintSet API request.
-func (r CreateSizeConstraintSetRequest) Send() (*waf.CreateSizeConstraintSetOutput, error) {
+func (r CreateSizeConstraintSetRequest) Send() (*CreateSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateSizeConstraintSetOutput), nil
+	return r.Request.Data.(*CreateSizeConstraintSetOutput), nil
 }
 
 // CreateSizeConstraintSetRequest returns a request value for making API operation for
@@ -428,7 +445,7 @@ func (r CreateSizeConstraintSetRequest) Send() (*waf.CreateSizeConstraintSetOutp
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSet
-func (c *WAFRegional) CreateSizeConstraintSetRequest(input *waf.CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest {
+func (c *WAFRegional) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateSizeConstraintSet,
 		HTTPMethod: "POST",
@@ -436,10 +453,13 @@ func (c *WAFRegional) CreateSizeConstraintSetRequest(input *waf.CreateSizeConstr
 	}
 
 	if input == nil {
-		input = &waf.CreateSizeConstraintSetInput{}
+		input = &CreateSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateSizeConstraintSetOutput{})
+	output := &CreateSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -448,17 +468,17 @@ const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
 // CreateSqlInjectionMatchSetRequest is a API request type for the CreateSqlInjectionMatchSet API operation.
 type CreateSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *waf.CreateSqlInjectionMatchSetInput
+	Input *CreateSqlInjectionMatchSetInput
 }
 
 // Send marshals and sends the CreateSqlInjectionMatchSet API request.
-func (r CreateSqlInjectionMatchSetRequest) Send() (*waf.CreateSqlInjectionMatchSetOutput, error) {
+func (r CreateSqlInjectionMatchSetRequest) Send() (*CreateSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateSqlInjectionMatchSetOutput), nil
+	return r.Request.Data.(*CreateSqlInjectionMatchSetOutput), nil
 }
 
 // CreateSqlInjectionMatchSetRequest returns a request value for making API operation for
@@ -492,7 +512,7 @@ func (r CreateSqlInjectionMatchSetRequest) Send() (*waf.CreateSqlInjectionMatchS
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSet
-func (c *WAFRegional) CreateSqlInjectionMatchSetRequest(input *waf.CreateSqlInjectionMatchSetInput) CreateSqlInjectionMatchSetRequest {
+func (c *WAFRegional) CreateSqlInjectionMatchSetRequest(input *CreateSqlInjectionMatchSetInput) CreateSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -500,10 +520,13 @@ func (c *WAFRegional) CreateSqlInjectionMatchSetRequest(input *waf.CreateSqlInje
 	}
 
 	if input == nil {
-		input = &waf.CreateSqlInjectionMatchSetInput{}
+		input = &CreateSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateSqlInjectionMatchSetOutput{})
+	output := &CreateSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -512,17 +535,17 @@ const opCreateWebACL = "CreateWebACL"
 // CreateWebACLRequest is a API request type for the CreateWebACL API operation.
 type CreateWebACLRequest struct {
 	*aws.Request
-	Input *waf.CreateWebACLInput
+	Input *CreateWebACLInput
 }
 
 // Send marshals and sends the CreateWebACL API request.
-func (r CreateWebACLRequest) Send() (*waf.CreateWebACLOutput, error) {
+func (r CreateWebACLRequest) Send() (*CreateWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateWebACLOutput), nil
+	return r.Request.Data.(*CreateWebACLOutput), nil
 }
 
 // CreateWebACLRequest returns a request value for making API operation for
@@ -568,7 +591,7 @@ func (r CreateWebACLRequest) Send() (*waf.CreateWebACLOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACL
-func (c *WAFRegional) CreateWebACLRequest(input *waf.CreateWebACLInput) CreateWebACLRequest {
+func (c *WAFRegional) CreateWebACLRequest(input *CreateWebACLInput) CreateWebACLRequest {
 	op := &aws.Operation{
 		Name:       opCreateWebACL,
 		HTTPMethod: "POST",
@@ -576,10 +599,13 @@ func (c *WAFRegional) CreateWebACLRequest(input *waf.CreateWebACLInput) CreateWe
 	}
 
 	if input == nil {
-		input = &waf.CreateWebACLInput{}
+		input = &CreateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateWebACLOutput{})
+	output := &CreateWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateWebACLRequest{Request: req, Input: input}
 }
 
@@ -588,17 +614,17 @@ const opCreateXssMatchSet = "CreateXssMatchSet"
 // CreateXssMatchSetRequest is a API request type for the CreateXssMatchSet API operation.
 type CreateXssMatchSetRequest struct {
 	*aws.Request
-	Input *waf.CreateXssMatchSetInput
+	Input *CreateXssMatchSetInput
 }
 
 // Send marshals and sends the CreateXssMatchSet API request.
-func (r CreateXssMatchSetRequest) Send() (*waf.CreateXssMatchSetOutput, error) {
+func (r CreateXssMatchSetRequest) Send() (*CreateXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.CreateXssMatchSetOutput), nil
+	return r.Request.Data.(*CreateXssMatchSetOutput), nil
 }
 
 // CreateXssMatchSetRequest returns a request value for making API operation for
@@ -633,7 +659,7 @@ func (r CreateXssMatchSetRequest) Send() (*waf.CreateXssMatchSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateXssMatchSet
-func (c *WAFRegional) CreateXssMatchSetRequest(input *waf.CreateXssMatchSetInput) CreateXssMatchSetRequest {
+func (c *WAFRegional) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) CreateXssMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateXssMatchSet,
 		HTTPMethod: "POST",
@@ -641,10 +667,13 @@ func (c *WAFRegional) CreateXssMatchSetRequest(input *waf.CreateXssMatchSetInput
 	}
 
 	if input == nil {
-		input = &waf.CreateXssMatchSetInput{}
+		input = &CreateXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.CreateXssMatchSetOutput{})
+	output := &CreateXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -653,17 +682,17 @@ const opDeleteByteMatchSet = "DeleteByteMatchSet"
 // DeleteByteMatchSetRequest is a API request type for the DeleteByteMatchSet API operation.
 type DeleteByteMatchSetRequest struct {
 	*aws.Request
-	Input *waf.DeleteByteMatchSetInput
+	Input *DeleteByteMatchSetInput
 }
 
 // Send marshals and sends the DeleteByteMatchSet API request.
-func (r DeleteByteMatchSetRequest) Send() (*waf.DeleteByteMatchSetOutput, error) {
+func (r DeleteByteMatchSetRequest) Send() (*DeleteByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteByteMatchSetOutput), nil
+	return r.Request.Data.(*DeleteByteMatchSetOutput), nil
 }
 
 // DeleteByteMatchSetRequest returns a request value for making API operation for
@@ -693,7 +722,7 @@ func (r DeleteByteMatchSetRequest) Send() (*waf.DeleteByteMatchSetOutput, error)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSet
-func (c *WAFRegional) DeleteByteMatchSetRequest(input *waf.DeleteByteMatchSetInput) DeleteByteMatchSetRequest {
+func (c *WAFRegional) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) DeleteByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteByteMatchSet,
 		HTTPMethod: "POST",
@@ -701,10 +730,13 @@ func (c *WAFRegional) DeleteByteMatchSetRequest(input *waf.DeleteByteMatchSetInp
 	}
 
 	if input == nil {
-		input = &waf.DeleteByteMatchSetInput{}
+		input = &DeleteByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteByteMatchSetOutput{})
+	output := &DeleteByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -713,17 +745,17 @@ const opDeleteIPSet = "DeleteIPSet"
 // DeleteIPSetRequest is a API request type for the DeleteIPSet API operation.
 type DeleteIPSetRequest struct {
 	*aws.Request
-	Input *waf.DeleteIPSetInput
+	Input *DeleteIPSetInput
 }
 
 // Send marshals and sends the DeleteIPSet API request.
-func (r DeleteIPSetRequest) Send() (*waf.DeleteIPSetOutput, error) {
+func (r DeleteIPSetRequest) Send() (*DeleteIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteIPSetOutput), nil
+	return r.Request.Data.(*DeleteIPSetOutput), nil
 }
 
 // DeleteIPSetRequest returns a request value for making API operation for
@@ -752,7 +784,7 @@ func (r DeleteIPSetRequest) Send() (*waf.DeleteIPSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteIPSet
-func (c *WAFRegional) DeleteIPSetRequest(input *waf.DeleteIPSetInput) DeleteIPSetRequest {
+func (c *WAFRegional) DeleteIPSetRequest(input *DeleteIPSetInput) DeleteIPSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIPSet,
 		HTTPMethod: "POST",
@@ -760,10 +792,13 @@ func (c *WAFRegional) DeleteIPSetRequest(input *waf.DeleteIPSetInput) DeleteIPSe
 	}
 
 	if input == nil {
-		input = &waf.DeleteIPSetInput{}
+		input = &DeleteIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteIPSetOutput{})
+	output := &DeleteIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIPSetRequest{Request: req, Input: input}
 }
 
@@ -772,17 +807,17 @@ const opDeleteRateBasedRule = "DeleteRateBasedRule"
 // DeleteRateBasedRuleRequest is a API request type for the DeleteRateBasedRule API operation.
 type DeleteRateBasedRuleRequest struct {
 	*aws.Request
-	Input *waf.DeleteRateBasedRuleInput
+	Input *DeleteRateBasedRuleInput
 }
 
 // Send marshals and sends the DeleteRateBasedRule API request.
-func (r DeleteRateBasedRuleRequest) Send() (*waf.DeleteRateBasedRuleOutput, error) {
+func (r DeleteRateBasedRuleRequest) Send() (*DeleteRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteRateBasedRuleOutput), nil
+	return r.Request.Data.(*DeleteRateBasedRuleOutput), nil
 }
 
 // DeleteRateBasedRuleRequest returns a request value for making API operation for
@@ -813,7 +848,7 @@ func (r DeleteRateBasedRuleRequest) Send() (*waf.DeleteRateBasedRuleOutput, erro
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRateBasedRule
-func (c *WAFRegional) DeleteRateBasedRuleRequest(input *waf.DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest {
+func (c *WAFRegional) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRateBasedRule,
 		HTTPMethod: "POST",
@@ -821,10 +856,13 @@ func (c *WAFRegional) DeleteRateBasedRuleRequest(input *waf.DeleteRateBasedRuleI
 	}
 
 	if input == nil {
-		input = &waf.DeleteRateBasedRuleInput{}
+		input = &DeleteRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteRateBasedRuleOutput{})
+	output := &DeleteRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -833,17 +871,17 @@ const opDeleteRule = "DeleteRule"
 // DeleteRuleRequest is a API request type for the DeleteRule API operation.
 type DeleteRuleRequest struct {
 	*aws.Request
-	Input *waf.DeleteRuleInput
+	Input *DeleteRuleInput
 }
 
 // Send marshals and sends the DeleteRule API request.
-func (r DeleteRuleRequest) Send() (*waf.DeleteRuleOutput, error) {
+func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteRuleOutput), nil
+	return r.Request.Data.(*DeleteRuleOutput), nil
 }
 
 // DeleteRuleRequest returns a request value for making API operation for
@@ -872,7 +910,7 @@ func (r DeleteRuleRequest) Send() (*waf.DeleteRuleOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRule
-func (c *WAFRegional) DeleteRuleRequest(input *waf.DeleteRuleInput) DeleteRuleRequest {
+func (c *WAFRegional) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
@@ -880,10 +918,13 @@ func (c *WAFRegional) DeleteRuleRequest(input *waf.DeleteRuleInput) DeleteRuleRe
 	}
 
 	if input == nil {
-		input = &waf.DeleteRuleInput{}
+		input = &DeleteRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteRuleOutput{})
+	output := &DeleteRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRuleRequest{Request: req, Input: input}
 }
 
@@ -892,17 +933,17 @@ const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 // DeleteSizeConstraintSetRequest is a API request type for the DeleteSizeConstraintSet API operation.
 type DeleteSizeConstraintSetRequest struct {
 	*aws.Request
-	Input *waf.DeleteSizeConstraintSetInput
+	Input *DeleteSizeConstraintSetInput
 }
 
 // Send marshals and sends the DeleteSizeConstraintSet API request.
-func (r DeleteSizeConstraintSetRequest) Send() (*waf.DeleteSizeConstraintSetOutput, error) {
+func (r DeleteSizeConstraintSetRequest) Send() (*DeleteSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteSizeConstraintSetOutput), nil
+	return r.Request.Data.(*DeleteSizeConstraintSetOutput), nil
 }
 
 // DeleteSizeConstraintSetRequest returns a request value for making API operation for
@@ -932,7 +973,7 @@ func (r DeleteSizeConstraintSetRequest) Send() (*waf.DeleteSizeConstraintSetOutp
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSet
-func (c *WAFRegional) DeleteSizeConstraintSetRequest(input *waf.DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest {
+func (c *WAFRegional) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSizeConstraintSet,
 		HTTPMethod: "POST",
@@ -940,10 +981,13 @@ func (c *WAFRegional) DeleteSizeConstraintSetRequest(input *waf.DeleteSizeConstr
 	}
 
 	if input == nil {
-		input = &waf.DeleteSizeConstraintSetInput{}
+		input = &DeleteSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteSizeConstraintSetOutput{})
+	output := &DeleteSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -952,17 +996,17 @@ const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 // DeleteSqlInjectionMatchSetRequest is a API request type for the DeleteSqlInjectionMatchSet API operation.
 type DeleteSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *waf.DeleteSqlInjectionMatchSetInput
+	Input *DeleteSqlInjectionMatchSetInput
 }
 
 // Send marshals and sends the DeleteSqlInjectionMatchSet API request.
-func (r DeleteSqlInjectionMatchSetRequest) Send() (*waf.DeleteSqlInjectionMatchSetOutput, error) {
+func (r DeleteSqlInjectionMatchSetRequest) Send() (*DeleteSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteSqlInjectionMatchSetOutput), nil
+	return r.Request.Data.(*DeleteSqlInjectionMatchSetOutput), nil
 }
 
 // DeleteSqlInjectionMatchSetRequest returns a request value for making API operation for
@@ -993,7 +1037,7 @@ func (r DeleteSqlInjectionMatchSetRequest) Send() (*waf.DeleteSqlInjectionMatchS
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSqlInjectionMatchSet
-func (c *WAFRegional) DeleteSqlInjectionMatchSetRequest(input *waf.DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest {
+func (c *WAFRegional) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -1001,10 +1045,13 @@ func (c *WAFRegional) DeleteSqlInjectionMatchSetRequest(input *waf.DeleteSqlInje
 	}
 
 	if input == nil {
-		input = &waf.DeleteSqlInjectionMatchSetInput{}
+		input = &DeleteSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteSqlInjectionMatchSetOutput{})
+	output := &DeleteSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1013,17 +1060,17 @@ const opDeleteWebACL = "DeleteWebACL"
 // DeleteWebACLRequest is a API request type for the DeleteWebACL API operation.
 type DeleteWebACLRequest struct {
 	*aws.Request
-	Input *waf.DeleteWebACLInput
+	Input *DeleteWebACLInput
 }
 
 // Send marshals and sends the DeleteWebACL API request.
-func (r DeleteWebACLRequest) Send() (*waf.DeleteWebACLOutput, error) {
+func (r DeleteWebACLRequest) Send() (*DeleteWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteWebACLOutput), nil
+	return r.Request.Data.(*DeleteWebACLOutput), nil
 }
 
 // DeleteWebACLRequest returns a request value for making API operation for
@@ -1049,7 +1096,7 @@ func (r DeleteWebACLRequest) Send() (*waf.DeleteWebACLOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteWebACL
-func (c *WAFRegional) DeleteWebACLRequest(input *waf.DeleteWebACLInput) DeleteWebACLRequest {
+func (c *WAFRegional) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWebACL,
 		HTTPMethod: "POST",
@@ -1057,10 +1104,13 @@ func (c *WAFRegional) DeleteWebACLRequest(input *waf.DeleteWebACLInput) DeleteWe
 	}
 
 	if input == nil {
-		input = &waf.DeleteWebACLInput{}
+		input = &DeleteWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteWebACLOutput{})
+	output := &DeleteWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteWebACLRequest{Request: req, Input: input}
 }
 
@@ -1069,17 +1119,17 @@ const opDeleteXssMatchSet = "DeleteXssMatchSet"
 // DeleteXssMatchSetRequest is a API request type for the DeleteXssMatchSet API operation.
 type DeleteXssMatchSetRequest struct {
 	*aws.Request
-	Input *waf.DeleteXssMatchSetInput
+	Input *DeleteXssMatchSetInput
 }
 
 // Send marshals and sends the DeleteXssMatchSet API request.
-func (r DeleteXssMatchSetRequest) Send() (*waf.DeleteXssMatchSetOutput, error) {
+func (r DeleteXssMatchSetRequest) Send() (*DeleteXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.DeleteXssMatchSetOutput), nil
+	return r.Request.Data.(*DeleteXssMatchSetOutput), nil
 }
 
 // DeleteXssMatchSetRequest returns a request value for making API operation for
@@ -1109,7 +1159,7 @@ func (r DeleteXssMatchSetRequest) Send() (*waf.DeleteXssMatchSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteXssMatchSet
-func (c *WAFRegional) DeleteXssMatchSetRequest(input *waf.DeleteXssMatchSetInput) DeleteXssMatchSetRequest {
+func (c *WAFRegional) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) DeleteXssMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteXssMatchSet,
 		HTTPMethod: "POST",
@@ -1117,10 +1167,13 @@ func (c *WAFRegional) DeleteXssMatchSetRequest(input *waf.DeleteXssMatchSetInput
 	}
 
 	if input == nil {
-		input = &waf.DeleteXssMatchSetInput{}
+		input = &DeleteXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.DeleteXssMatchSetOutput{})
+	output := &DeleteXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1166,7 +1219,10 @@ func (c *WAFRegional) DisassociateWebACLRequest(input *DisassociateWebACLInput) 
 		input = &DisassociateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateWebACLOutput{})
+	output := &DisassociateWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateWebACLRequest{Request: req, Input: input}
 }
 
@@ -1175,17 +1231,17 @@ const opGetByteMatchSet = "GetByteMatchSet"
 // GetByteMatchSetRequest is a API request type for the GetByteMatchSet API operation.
 type GetByteMatchSetRequest struct {
 	*aws.Request
-	Input *waf.GetByteMatchSetInput
+	Input *GetByteMatchSetInput
 }
 
 // Send marshals and sends the GetByteMatchSet API request.
-func (r GetByteMatchSetRequest) Send() (*waf.GetByteMatchSetOutput, error) {
+func (r GetByteMatchSetRequest) Send() (*GetByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetByteMatchSetOutput), nil
+	return r.Request.Data.(*GetByteMatchSetOutput), nil
 }
 
 // GetByteMatchSetRequest returns a request value for making API operation for
@@ -1201,7 +1257,7 @@ func (r GetByteMatchSetRequest) Send() (*waf.GetByteMatchSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetByteMatchSet
-func (c *WAFRegional) GetByteMatchSetRequest(input *waf.GetByteMatchSetInput) GetByteMatchSetRequest {
+func (c *WAFRegional) GetByteMatchSetRequest(input *GetByteMatchSetInput) GetByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opGetByteMatchSet,
 		HTTPMethod: "POST",
@@ -1209,10 +1265,13 @@ func (c *WAFRegional) GetByteMatchSetRequest(input *waf.GetByteMatchSetInput) Ge
 	}
 
 	if input == nil {
-		input = &waf.GetByteMatchSetInput{}
+		input = &GetByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetByteMatchSetOutput{})
+	output := &GetByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1221,17 +1280,17 @@ const opGetChangeToken = "GetChangeToken"
 // GetChangeTokenRequest is a API request type for the GetChangeToken API operation.
 type GetChangeTokenRequest struct {
 	*aws.Request
-	Input *waf.GetChangeTokenInput
+	Input *GetChangeTokenInput
 }
 
 // Send marshals and sends the GetChangeToken API request.
-func (r GetChangeTokenRequest) Send() (*waf.GetChangeTokenOutput, error) {
+func (r GetChangeTokenRequest) Send() (*GetChangeTokenOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetChangeTokenOutput), nil
+	return r.Request.Data.(*GetChangeTokenOutput), nil
 }
 
 // GetChangeTokenRequest returns a request value for making API operation for
@@ -1261,7 +1320,7 @@ func (r GetChangeTokenRequest) Send() (*waf.GetChangeTokenOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeToken
-func (c *WAFRegional) GetChangeTokenRequest(input *waf.GetChangeTokenInput) GetChangeTokenRequest {
+func (c *WAFRegional) GetChangeTokenRequest(input *GetChangeTokenInput) GetChangeTokenRequest {
 	op := &aws.Operation{
 		Name:       opGetChangeToken,
 		HTTPMethod: "POST",
@@ -1269,10 +1328,13 @@ func (c *WAFRegional) GetChangeTokenRequest(input *waf.GetChangeTokenInput) GetC
 	}
 
 	if input == nil {
-		input = &waf.GetChangeTokenInput{}
+		input = &GetChangeTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetChangeTokenOutput{})
+	output := &GetChangeTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetChangeTokenRequest{Request: req, Input: input}
 }
 
@@ -1281,17 +1343,17 @@ const opGetChangeTokenStatus = "GetChangeTokenStatus"
 // GetChangeTokenStatusRequest is a API request type for the GetChangeTokenStatus API operation.
 type GetChangeTokenStatusRequest struct {
 	*aws.Request
-	Input *waf.GetChangeTokenStatusInput
+	Input *GetChangeTokenStatusInput
 }
 
 // Send marshals and sends the GetChangeTokenStatus API request.
-func (r GetChangeTokenStatusRequest) Send() (*waf.GetChangeTokenStatusOutput, error) {
+func (r GetChangeTokenStatusRequest) Send() (*GetChangeTokenStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetChangeTokenStatusOutput), nil
+	return r.Request.Data.(*GetChangeTokenStatusOutput), nil
 }
 
 // GetChangeTokenStatusRequest returns a request value for making API operation for
@@ -1317,7 +1379,7 @@ func (r GetChangeTokenStatusRequest) Send() (*waf.GetChangeTokenStatusOutput, er
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatus
-func (c *WAFRegional) GetChangeTokenStatusRequest(input *waf.GetChangeTokenStatusInput) GetChangeTokenStatusRequest {
+func (c *WAFRegional) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) GetChangeTokenStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetChangeTokenStatus,
 		HTTPMethod: "POST",
@@ -1325,10 +1387,13 @@ func (c *WAFRegional) GetChangeTokenStatusRequest(input *waf.GetChangeTokenStatu
 	}
 
 	if input == nil {
-		input = &waf.GetChangeTokenStatusInput{}
+		input = &GetChangeTokenStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetChangeTokenStatusOutput{})
+	output := &GetChangeTokenStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetChangeTokenStatusRequest{Request: req, Input: input}
 }
 
@@ -1337,17 +1402,17 @@ const opGetIPSet = "GetIPSet"
 // GetIPSetRequest is a API request type for the GetIPSet API operation.
 type GetIPSetRequest struct {
 	*aws.Request
-	Input *waf.GetIPSetInput
+	Input *GetIPSetInput
 }
 
 // Send marshals and sends the GetIPSet API request.
-func (r GetIPSetRequest) Send() (*waf.GetIPSetOutput, error) {
+func (r GetIPSetRequest) Send() (*GetIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetIPSetOutput), nil
+	return r.Request.Data.(*GetIPSetOutput), nil
 }
 
 // GetIPSetRequest returns a request value for making API operation for
@@ -1363,7 +1428,7 @@ func (r GetIPSetRequest) Send() (*waf.GetIPSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetIPSet
-func (c *WAFRegional) GetIPSetRequest(input *waf.GetIPSetInput) GetIPSetRequest {
+func (c *WAFRegional) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 	op := &aws.Operation{
 		Name:       opGetIPSet,
 		HTTPMethod: "POST",
@@ -1371,10 +1436,13 @@ func (c *WAFRegional) GetIPSetRequest(input *waf.GetIPSetInput) GetIPSetRequest 
 	}
 
 	if input == nil {
-		input = &waf.GetIPSetInput{}
+		input = &GetIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetIPSetOutput{})
+	output := &GetIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIPSetRequest{Request: req, Input: input}
 }
 
@@ -1383,17 +1451,17 @@ const opGetRateBasedRule = "GetRateBasedRule"
 // GetRateBasedRuleRequest is a API request type for the GetRateBasedRule API operation.
 type GetRateBasedRuleRequest struct {
 	*aws.Request
-	Input *waf.GetRateBasedRuleInput
+	Input *GetRateBasedRuleInput
 }
 
 // Send marshals and sends the GetRateBasedRule API request.
-func (r GetRateBasedRuleRequest) Send() (*waf.GetRateBasedRuleOutput, error) {
+func (r GetRateBasedRuleRequest) Send() (*GetRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetRateBasedRuleOutput), nil
+	return r.Request.Data.(*GetRateBasedRuleOutput), nil
 }
 
 // GetRateBasedRuleRequest returns a request value for making API operation for
@@ -1410,7 +1478,7 @@ func (r GetRateBasedRuleRequest) Send() (*waf.GetRateBasedRuleOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRule
-func (c *WAFRegional) GetRateBasedRuleRequest(input *waf.GetRateBasedRuleInput) GetRateBasedRuleRequest {
+func (c *WAFRegional) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) GetRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetRateBasedRule,
 		HTTPMethod: "POST",
@@ -1418,10 +1486,13 @@ func (c *WAFRegional) GetRateBasedRuleRequest(input *waf.GetRateBasedRuleInput) 
 	}
 
 	if input == nil {
-		input = &waf.GetRateBasedRuleInput{}
+		input = &GetRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetRateBasedRuleOutput{})
+	output := &GetRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -1430,17 +1501,17 @@ const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 // GetRateBasedRuleManagedKeysRequest is a API request type for the GetRateBasedRuleManagedKeys API operation.
 type GetRateBasedRuleManagedKeysRequest struct {
 	*aws.Request
-	Input *waf.GetRateBasedRuleManagedKeysInput
+	Input *GetRateBasedRuleManagedKeysInput
 }
 
 // Send marshals and sends the GetRateBasedRuleManagedKeys API request.
-func (r GetRateBasedRuleManagedKeysRequest) Send() (*waf.GetRateBasedRuleManagedKeysOutput, error) {
+func (r GetRateBasedRuleManagedKeysRequest) Send() (*GetRateBasedRuleManagedKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetRateBasedRuleManagedKeysOutput), nil
+	return r.Request.Data.(*GetRateBasedRuleManagedKeysOutput), nil
 }
 
 // GetRateBasedRuleManagedKeysRequest returns a request value for making API operation for
@@ -1459,7 +1530,7 @@ func (r GetRateBasedRuleManagedKeysRequest) Send() (*waf.GetRateBasedRuleManaged
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleManagedKeys
-func (c *WAFRegional) GetRateBasedRuleManagedKeysRequest(input *waf.GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest {
+func (c *WAFRegional) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest {
 	op := &aws.Operation{
 		Name:       opGetRateBasedRuleManagedKeys,
 		HTTPMethod: "POST",
@@ -1467,10 +1538,13 @@ func (c *WAFRegional) GetRateBasedRuleManagedKeysRequest(input *waf.GetRateBased
 	}
 
 	if input == nil {
-		input = &waf.GetRateBasedRuleManagedKeysInput{}
+		input = &GetRateBasedRuleManagedKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetRateBasedRuleManagedKeysOutput{})
+	output := &GetRateBasedRuleManagedKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRateBasedRuleManagedKeysRequest{Request: req, Input: input}
 }
 
@@ -1479,17 +1553,17 @@ const opGetRule = "GetRule"
 // GetRuleRequest is a API request type for the GetRule API operation.
 type GetRuleRequest struct {
 	*aws.Request
-	Input *waf.GetRuleInput
+	Input *GetRuleInput
 }
 
 // Send marshals and sends the GetRule API request.
-func (r GetRuleRequest) Send() (*waf.GetRuleOutput, error) {
+func (r GetRuleRequest) Send() (*GetRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetRuleOutput), nil
+	return r.Request.Data.(*GetRuleOutput), nil
 }
 
 // GetRuleRequest returns a request value for making API operation for
@@ -1506,7 +1580,7 @@ func (r GetRuleRequest) Send() (*waf.GetRuleOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRule
-func (c *WAFRegional) GetRuleRequest(input *waf.GetRuleInput) GetRuleRequest {
+func (c *WAFRegional) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetRule,
 		HTTPMethod: "POST",
@@ -1514,10 +1588,13 @@ func (c *WAFRegional) GetRuleRequest(input *waf.GetRuleInput) GetRuleRequest {
 	}
 
 	if input == nil {
-		input = &waf.GetRuleInput{}
+		input = &GetRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetRuleOutput{})
+	output := &GetRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRuleRequest{Request: req, Input: input}
 }
 
@@ -1526,17 +1603,17 @@ const opGetSampledRequests = "GetSampledRequests"
 // GetSampledRequestsRequest is a API request type for the GetSampledRequests API operation.
 type GetSampledRequestsRequest struct {
 	*aws.Request
-	Input *waf.GetSampledRequestsInput
+	Input *GetSampledRequestsInput
 }
 
 // Send marshals and sends the GetSampledRequests API request.
-func (r GetSampledRequestsRequest) Send() (*waf.GetSampledRequestsOutput, error) {
+func (r GetSampledRequestsRequest) Send() (*GetSampledRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetSampledRequestsOutput), nil
+	return r.Request.Data.(*GetSampledRequestsOutput), nil
 }
 
 // GetSampledRequestsRequest returns a request value for making API operation for
@@ -1562,7 +1639,7 @@ func (r GetSampledRequestsRequest) Send() (*waf.GetSampledRequestsOutput, error)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSampledRequests
-func (c *WAFRegional) GetSampledRequestsRequest(input *waf.GetSampledRequestsInput) GetSampledRequestsRequest {
+func (c *WAFRegional) GetSampledRequestsRequest(input *GetSampledRequestsInput) GetSampledRequestsRequest {
 	op := &aws.Operation{
 		Name:       opGetSampledRequests,
 		HTTPMethod: "POST",
@@ -1570,10 +1647,13 @@ func (c *WAFRegional) GetSampledRequestsRequest(input *waf.GetSampledRequestsInp
 	}
 
 	if input == nil {
-		input = &waf.GetSampledRequestsInput{}
+		input = &GetSampledRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetSampledRequestsOutput{})
+	output := &GetSampledRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSampledRequestsRequest{Request: req, Input: input}
 }
 
@@ -1582,17 +1662,17 @@ const opGetSizeConstraintSet = "GetSizeConstraintSet"
 // GetSizeConstraintSetRequest is a API request type for the GetSizeConstraintSet API operation.
 type GetSizeConstraintSetRequest struct {
 	*aws.Request
-	Input *waf.GetSizeConstraintSetInput
+	Input *GetSizeConstraintSetInput
 }
 
 // Send marshals and sends the GetSizeConstraintSet API request.
-func (r GetSizeConstraintSetRequest) Send() (*waf.GetSizeConstraintSetOutput, error) {
+func (r GetSizeConstraintSetRequest) Send() (*GetSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetSizeConstraintSetOutput), nil
+	return r.Request.Data.(*GetSizeConstraintSetOutput), nil
 }
 
 // GetSizeConstraintSetRequest returns a request value for making API operation for
@@ -1608,7 +1688,7 @@ func (r GetSizeConstraintSetRequest) Send() (*waf.GetSizeConstraintSetOutput, er
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSizeConstraintSet
-func (c *WAFRegional) GetSizeConstraintSetRequest(input *waf.GetSizeConstraintSetInput) GetSizeConstraintSetRequest {
+func (c *WAFRegional) GetSizeConstraintSetRequest(input *GetSizeConstraintSetInput) GetSizeConstraintSetRequest {
 	op := &aws.Operation{
 		Name:       opGetSizeConstraintSet,
 		HTTPMethod: "POST",
@@ -1616,10 +1696,13 @@ func (c *WAFRegional) GetSizeConstraintSetRequest(input *waf.GetSizeConstraintSe
 	}
 
 	if input == nil {
-		input = &waf.GetSizeConstraintSetInput{}
+		input = &GetSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetSizeConstraintSetOutput{})
+	output := &GetSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -1628,17 +1711,17 @@ const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 // GetSqlInjectionMatchSetRequest is a API request type for the GetSqlInjectionMatchSet API operation.
 type GetSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *waf.GetSqlInjectionMatchSetInput
+	Input *GetSqlInjectionMatchSetInput
 }
 
 // Send marshals and sends the GetSqlInjectionMatchSet API request.
-func (r GetSqlInjectionMatchSetRequest) Send() (*waf.GetSqlInjectionMatchSetOutput, error) {
+func (r GetSqlInjectionMatchSetRequest) Send() (*GetSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetSqlInjectionMatchSetOutput), nil
+	return r.Request.Data.(*GetSqlInjectionMatchSetOutput), nil
 }
 
 // GetSqlInjectionMatchSetRequest returns a request value for making API operation for
@@ -1654,7 +1737,7 @@ func (r GetSqlInjectionMatchSetRequest) Send() (*waf.GetSqlInjectionMatchSetOutp
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSqlInjectionMatchSet
-func (c *WAFRegional) GetSqlInjectionMatchSetRequest(input *waf.GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest {
+func (c *WAFRegional) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opGetSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -1662,10 +1745,13 @@ func (c *WAFRegional) GetSqlInjectionMatchSetRequest(input *waf.GetSqlInjectionM
 	}
 
 	if input == nil {
-		input = &waf.GetSqlInjectionMatchSetInput{}
+		input = &GetSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetSqlInjectionMatchSetOutput{})
+	output := &GetSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1674,17 +1760,17 @@ const opGetWebACL = "GetWebACL"
 // GetWebACLRequest is a API request type for the GetWebACL API operation.
 type GetWebACLRequest struct {
 	*aws.Request
-	Input *waf.GetWebACLInput
+	Input *GetWebACLInput
 }
 
 // Send marshals and sends the GetWebACL API request.
-func (r GetWebACLRequest) Send() (*waf.GetWebACLOutput, error) {
+func (r GetWebACLRequest) Send() (*GetWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetWebACLOutput), nil
+	return r.Request.Data.(*GetWebACLOutput), nil
 }
 
 // GetWebACLRequest returns a request value for making API operation for
@@ -1700,7 +1786,7 @@ func (r GetWebACLRequest) Send() (*waf.GetWebACLOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACL
-func (c *WAFRegional) GetWebACLRequest(input *waf.GetWebACLInput) GetWebACLRequest {
+func (c *WAFRegional) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
 	op := &aws.Operation{
 		Name:       opGetWebACL,
 		HTTPMethod: "POST",
@@ -1708,10 +1794,13 @@ func (c *WAFRegional) GetWebACLRequest(input *waf.GetWebACLInput) GetWebACLReque
 	}
 
 	if input == nil {
-		input = &waf.GetWebACLInput{}
+		input = &GetWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetWebACLOutput{})
+	output := &GetWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetWebACLRequest{Request: req, Input: input}
 }
 
@@ -1757,7 +1846,10 @@ func (c *WAFRegional) GetWebACLForResourceRequest(input *GetWebACLForResourceInp
 		input = &GetWebACLForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWebACLForResourceOutput{})
+	output := &GetWebACLForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetWebACLForResourceRequest{Request: req, Input: input}
 }
 
@@ -1766,17 +1858,17 @@ const opGetXssMatchSet = "GetXssMatchSet"
 // GetXssMatchSetRequest is a API request type for the GetXssMatchSet API operation.
 type GetXssMatchSetRequest struct {
 	*aws.Request
-	Input *waf.GetXssMatchSetInput
+	Input *GetXssMatchSetInput
 }
 
 // Send marshals and sends the GetXssMatchSet API request.
-func (r GetXssMatchSetRequest) Send() (*waf.GetXssMatchSetOutput, error) {
+func (r GetXssMatchSetRequest) Send() (*GetXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.GetXssMatchSetOutput), nil
+	return r.Request.Data.(*GetXssMatchSetOutput), nil
 }
 
 // GetXssMatchSetRequest returns a request value for making API operation for
@@ -1792,7 +1884,7 @@ func (r GetXssMatchSetRequest) Send() (*waf.GetXssMatchSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetXssMatchSet
-func (c *WAFRegional) GetXssMatchSetRequest(input *waf.GetXssMatchSetInput) GetXssMatchSetRequest {
+func (c *WAFRegional) GetXssMatchSetRequest(input *GetXssMatchSetInput) GetXssMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opGetXssMatchSet,
 		HTTPMethod: "POST",
@@ -1800,10 +1892,13 @@ func (c *WAFRegional) GetXssMatchSetRequest(input *waf.GetXssMatchSetInput) GetX
 	}
 
 	if input == nil {
-		input = &waf.GetXssMatchSetInput{}
+		input = &GetXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.GetXssMatchSetOutput{})
+	output := &GetXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1812,17 +1907,17 @@ const opListByteMatchSets = "ListByteMatchSets"
 // ListByteMatchSetsRequest is a API request type for the ListByteMatchSets API operation.
 type ListByteMatchSetsRequest struct {
 	*aws.Request
-	Input *waf.ListByteMatchSetsInput
+	Input *ListByteMatchSetsInput
 }
 
 // Send marshals and sends the ListByteMatchSets API request.
-func (r ListByteMatchSetsRequest) Send() (*waf.ListByteMatchSetsOutput, error) {
+func (r ListByteMatchSetsRequest) Send() (*ListByteMatchSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListByteMatchSetsOutput), nil
+	return r.Request.Data.(*ListByteMatchSetsOutput), nil
 }
 
 // ListByteMatchSetsRequest returns a request value for making API operation for
@@ -1838,7 +1933,7 @@ func (r ListByteMatchSetsRequest) Send() (*waf.ListByteMatchSetsOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSets
-func (c *WAFRegional) ListByteMatchSetsRequest(input *waf.ListByteMatchSetsInput) ListByteMatchSetsRequest {
+func (c *WAFRegional) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) ListByteMatchSetsRequest {
 	op := &aws.Operation{
 		Name:       opListByteMatchSets,
 		HTTPMethod: "POST",
@@ -1846,10 +1941,13 @@ func (c *WAFRegional) ListByteMatchSetsRequest(input *waf.ListByteMatchSetsInput
 	}
 
 	if input == nil {
-		input = &waf.ListByteMatchSetsInput{}
+		input = &ListByteMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListByteMatchSetsOutput{})
+	output := &ListByteMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListByteMatchSetsRequest{Request: req, Input: input}
 }
 
@@ -1858,17 +1956,17 @@ const opListIPSets = "ListIPSets"
 // ListIPSetsRequest is a API request type for the ListIPSets API operation.
 type ListIPSetsRequest struct {
 	*aws.Request
-	Input *waf.ListIPSetsInput
+	Input *ListIPSetsInput
 }
 
 // Send marshals and sends the ListIPSets API request.
-func (r ListIPSetsRequest) Send() (*waf.ListIPSetsOutput, error) {
+func (r ListIPSetsRequest) Send() (*ListIPSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListIPSetsOutput), nil
+	return r.Request.Data.(*ListIPSetsOutput), nil
 }
 
 // ListIPSetsRequest returns a request value for making API operation for
@@ -1884,7 +1982,7 @@ func (r ListIPSetsRequest) Send() (*waf.ListIPSetsOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSets
-func (c *WAFRegional) ListIPSetsRequest(input *waf.ListIPSetsInput) ListIPSetsRequest {
+func (c *WAFRegional) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 	op := &aws.Operation{
 		Name:       opListIPSets,
 		HTTPMethod: "POST",
@@ -1892,10 +1990,13 @@ func (c *WAFRegional) ListIPSetsRequest(input *waf.ListIPSetsInput) ListIPSetsRe
 	}
 
 	if input == nil {
-		input = &waf.ListIPSetsInput{}
+		input = &ListIPSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListIPSetsOutput{})
+	output := &ListIPSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIPSetsRequest{Request: req, Input: input}
 }
 
@@ -1904,17 +2005,17 @@ const opListRateBasedRules = "ListRateBasedRules"
 // ListRateBasedRulesRequest is a API request type for the ListRateBasedRules API operation.
 type ListRateBasedRulesRequest struct {
 	*aws.Request
-	Input *waf.ListRateBasedRulesInput
+	Input *ListRateBasedRulesInput
 }
 
 // Send marshals and sends the ListRateBasedRules API request.
-func (r ListRateBasedRulesRequest) Send() (*waf.ListRateBasedRulesOutput, error) {
+func (r ListRateBasedRulesRequest) Send() (*ListRateBasedRulesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListRateBasedRulesOutput), nil
+	return r.Request.Data.(*ListRateBasedRulesOutput), nil
 }
 
 // ListRateBasedRulesRequest returns a request value for making API operation for
@@ -1930,7 +2031,7 @@ func (r ListRateBasedRulesRequest) Send() (*waf.ListRateBasedRulesOutput, error)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRateBasedRules
-func (c *WAFRegional) ListRateBasedRulesRequest(input *waf.ListRateBasedRulesInput) ListRateBasedRulesRequest {
+func (c *WAFRegional) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) ListRateBasedRulesRequest {
 	op := &aws.Operation{
 		Name:       opListRateBasedRules,
 		HTTPMethod: "POST",
@@ -1938,10 +2039,13 @@ func (c *WAFRegional) ListRateBasedRulesRequest(input *waf.ListRateBasedRulesInp
 	}
 
 	if input == nil {
-		input = &waf.ListRateBasedRulesInput{}
+		input = &ListRateBasedRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListRateBasedRulesOutput{})
+	output := &ListRateBasedRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRateBasedRulesRequest{Request: req, Input: input}
 }
 
@@ -1987,7 +2091,10 @@ func (c *WAFRegional) ListResourcesForWebACLRequest(input *ListResourcesForWebAC
 		input = &ListResourcesForWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesForWebACLOutput{})
+	output := &ListResourcesForWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourcesForWebACLRequest{Request: req, Input: input}
 }
 
@@ -1996,17 +2103,17 @@ const opListRules = "ListRules"
 // ListRulesRequest is a API request type for the ListRules API operation.
 type ListRulesRequest struct {
 	*aws.Request
-	Input *waf.ListRulesInput
+	Input *ListRulesInput
 }
 
 // Send marshals and sends the ListRules API request.
-func (r ListRulesRequest) Send() (*waf.ListRulesOutput, error) {
+func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListRulesOutput), nil
+	return r.Request.Data.(*ListRulesOutput), nil
 }
 
 // ListRulesRequest returns a request value for making API operation for
@@ -2022,7 +2129,7 @@ func (r ListRulesRequest) Send() (*waf.ListRulesOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRules
-func (c *WAFRegional) ListRulesRequest(input *waf.ListRulesInput) ListRulesRequest {
+func (c *WAFRegional) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
@@ -2030,10 +2137,13 @@ func (c *WAFRegional) ListRulesRequest(input *waf.ListRulesInput) ListRulesReque
 	}
 
 	if input == nil {
-		input = &waf.ListRulesInput{}
+		input = &ListRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListRulesOutput{})
+	output := &ListRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRulesRequest{Request: req, Input: input}
 }
 
@@ -2042,17 +2152,17 @@ const opListSizeConstraintSets = "ListSizeConstraintSets"
 // ListSizeConstraintSetsRequest is a API request type for the ListSizeConstraintSets API operation.
 type ListSizeConstraintSetsRequest struct {
 	*aws.Request
-	Input *waf.ListSizeConstraintSetsInput
+	Input *ListSizeConstraintSetsInput
 }
 
 // Send marshals and sends the ListSizeConstraintSets API request.
-func (r ListSizeConstraintSetsRequest) Send() (*waf.ListSizeConstraintSetsOutput, error) {
+func (r ListSizeConstraintSetsRequest) Send() (*ListSizeConstraintSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListSizeConstraintSetsOutput), nil
+	return r.Request.Data.(*ListSizeConstraintSetsOutput), nil
 }
 
 // ListSizeConstraintSetsRequest returns a request value for making API operation for
@@ -2068,7 +2178,7 @@ func (r ListSizeConstraintSetsRequest) Send() (*waf.ListSizeConstraintSetsOutput
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSizeConstraintSets
-func (c *WAFRegional) ListSizeConstraintSetsRequest(input *waf.ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest {
+func (c *WAFRegional) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest {
 	op := &aws.Operation{
 		Name:       opListSizeConstraintSets,
 		HTTPMethod: "POST",
@@ -2076,10 +2186,13 @@ func (c *WAFRegional) ListSizeConstraintSetsRequest(input *waf.ListSizeConstrain
 	}
 
 	if input == nil {
-		input = &waf.ListSizeConstraintSetsInput{}
+		input = &ListSizeConstraintSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListSizeConstraintSetsOutput{})
+	output := &ListSizeConstraintSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSizeConstraintSetsRequest{Request: req, Input: input}
 }
 
@@ -2088,17 +2201,17 @@ const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 // ListSqlInjectionMatchSetsRequest is a API request type for the ListSqlInjectionMatchSets API operation.
 type ListSqlInjectionMatchSetsRequest struct {
 	*aws.Request
-	Input *waf.ListSqlInjectionMatchSetsInput
+	Input *ListSqlInjectionMatchSetsInput
 }
 
 // Send marshals and sends the ListSqlInjectionMatchSets API request.
-func (r ListSqlInjectionMatchSetsRequest) Send() (*waf.ListSqlInjectionMatchSetsOutput, error) {
+func (r ListSqlInjectionMatchSetsRequest) Send() (*ListSqlInjectionMatchSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListSqlInjectionMatchSetsOutput), nil
+	return r.Request.Data.(*ListSqlInjectionMatchSetsOutput), nil
 }
 
 // ListSqlInjectionMatchSetsRequest returns a request value for making API operation for
@@ -2114,7 +2227,7 @@ func (r ListSqlInjectionMatchSetsRequest) Send() (*waf.ListSqlInjectionMatchSets
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSets
-func (c *WAFRegional) ListSqlInjectionMatchSetsRequest(input *waf.ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest {
+func (c *WAFRegional) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest {
 	op := &aws.Operation{
 		Name:       opListSqlInjectionMatchSets,
 		HTTPMethod: "POST",
@@ -2122,10 +2235,13 @@ func (c *WAFRegional) ListSqlInjectionMatchSetsRequest(input *waf.ListSqlInjecti
 	}
 
 	if input == nil {
-		input = &waf.ListSqlInjectionMatchSetsInput{}
+		input = &ListSqlInjectionMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListSqlInjectionMatchSetsOutput{})
+	output := &ListSqlInjectionMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSqlInjectionMatchSetsRequest{Request: req, Input: input}
 }
 
@@ -2134,17 +2250,17 @@ const opListWebACLs = "ListWebACLs"
 // ListWebACLsRequest is a API request type for the ListWebACLs API operation.
 type ListWebACLsRequest struct {
 	*aws.Request
-	Input *waf.ListWebACLsInput
+	Input *ListWebACLsInput
 }
 
 // Send marshals and sends the ListWebACLs API request.
-func (r ListWebACLsRequest) Send() (*waf.ListWebACLsOutput, error) {
+func (r ListWebACLsRequest) Send() (*ListWebACLsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListWebACLsOutput), nil
+	return r.Request.Data.(*ListWebACLsOutput), nil
 }
 
 // ListWebACLsRequest returns a request value for making API operation for
@@ -2160,7 +2276,7 @@ func (r ListWebACLsRequest) Send() (*waf.ListWebACLsOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListWebACLs
-func (c *WAFRegional) ListWebACLsRequest(input *waf.ListWebACLsInput) ListWebACLsRequest {
+func (c *WAFRegional) ListWebACLsRequest(input *ListWebACLsInput) ListWebACLsRequest {
 	op := &aws.Operation{
 		Name:       opListWebACLs,
 		HTTPMethod: "POST",
@@ -2168,10 +2284,13 @@ func (c *WAFRegional) ListWebACLsRequest(input *waf.ListWebACLsInput) ListWebACL
 	}
 
 	if input == nil {
-		input = &waf.ListWebACLsInput{}
+		input = &ListWebACLsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListWebACLsOutput{})
+	output := &ListWebACLsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListWebACLsRequest{Request: req, Input: input}
 }
 
@@ -2180,17 +2299,17 @@ const opListXssMatchSets = "ListXssMatchSets"
 // ListXssMatchSetsRequest is a API request type for the ListXssMatchSets API operation.
 type ListXssMatchSetsRequest struct {
 	*aws.Request
-	Input *waf.ListXssMatchSetsInput
+	Input *ListXssMatchSetsInput
 }
 
 // Send marshals and sends the ListXssMatchSets API request.
-func (r ListXssMatchSetsRequest) Send() (*waf.ListXssMatchSetsOutput, error) {
+func (r ListXssMatchSetsRequest) Send() (*ListXssMatchSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.ListXssMatchSetsOutput), nil
+	return r.Request.Data.(*ListXssMatchSetsOutput), nil
 }
 
 // ListXssMatchSetsRequest returns a request value for making API operation for
@@ -2206,7 +2325,7 @@ func (r ListXssMatchSetsRequest) Send() (*waf.ListXssMatchSetsOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSets
-func (c *WAFRegional) ListXssMatchSetsRequest(input *waf.ListXssMatchSetsInput) ListXssMatchSetsRequest {
+func (c *WAFRegional) ListXssMatchSetsRequest(input *ListXssMatchSetsInput) ListXssMatchSetsRequest {
 	op := &aws.Operation{
 		Name:       opListXssMatchSets,
 		HTTPMethod: "POST",
@@ -2214,10 +2333,13 @@ func (c *WAFRegional) ListXssMatchSetsRequest(input *waf.ListXssMatchSetsInput) 
 	}
 
 	if input == nil {
-		input = &waf.ListXssMatchSetsInput{}
+		input = &ListXssMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.ListXssMatchSetsOutput{})
+	output := &ListXssMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListXssMatchSetsRequest{Request: req, Input: input}
 }
 
@@ -2226,17 +2348,17 @@ const opUpdateByteMatchSet = "UpdateByteMatchSet"
 // UpdateByteMatchSetRequest is a API request type for the UpdateByteMatchSet API operation.
 type UpdateByteMatchSetRequest struct {
 	*aws.Request
-	Input *waf.UpdateByteMatchSetInput
+	Input *UpdateByteMatchSetInput
 }
 
 // Send marshals and sends the UpdateByteMatchSet API request.
-func (r UpdateByteMatchSetRequest) Send() (*waf.UpdateByteMatchSetOutput, error) {
+func (r UpdateByteMatchSetRequest) Send() (*UpdateByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateByteMatchSetOutput), nil
+	return r.Request.Data.(*UpdateByteMatchSetOutput), nil
 }
 
 // UpdateByteMatchSetRequest returns a request value for making API operation for
@@ -2288,7 +2410,7 @@ func (r UpdateByteMatchSetRequest) Send() (*waf.UpdateByteMatchSetOutput, error)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateByteMatchSet
-func (c *WAFRegional) UpdateByteMatchSetRequest(input *waf.UpdateByteMatchSetInput) UpdateByteMatchSetRequest {
+func (c *WAFRegional) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) UpdateByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateByteMatchSet,
 		HTTPMethod: "POST",
@@ -2296,10 +2418,13 @@ func (c *WAFRegional) UpdateByteMatchSetRequest(input *waf.UpdateByteMatchSetInp
 	}
 
 	if input == nil {
-		input = &waf.UpdateByteMatchSetInput{}
+		input = &UpdateByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateByteMatchSetOutput{})
+	output := &UpdateByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -2308,17 +2433,17 @@ const opUpdateIPSet = "UpdateIPSet"
 // UpdateIPSetRequest is a API request type for the UpdateIPSet API operation.
 type UpdateIPSetRequest struct {
 	*aws.Request
-	Input *waf.UpdateIPSetInput
+	Input *UpdateIPSetInput
 }
 
 // Send marshals and sends the UpdateIPSet API request.
-func (r UpdateIPSetRequest) Send() (*waf.UpdateIPSetOutput, error) {
+func (r UpdateIPSetRequest) Send() (*UpdateIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateIPSetOutput), nil
+	return r.Request.Data.(*UpdateIPSetOutput), nil
 }
 
 // UpdateIPSetRequest returns a request value for making API operation for
@@ -2382,7 +2507,7 @@ func (r UpdateIPSetRequest) Send() (*waf.UpdateIPSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSet
-func (c *WAFRegional) UpdateIPSetRequest(input *waf.UpdateIPSetInput) UpdateIPSetRequest {
+func (c *WAFRegional) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateIPSet,
 		HTTPMethod: "POST",
@@ -2390,10 +2515,13 @@ func (c *WAFRegional) UpdateIPSetRequest(input *waf.UpdateIPSetInput) UpdateIPSe
 	}
 
 	if input == nil {
-		input = &waf.UpdateIPSetInput{}
+		input = &UpdateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateIPSetOutput{})
+	output := &UpdateIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateIPSetRequest{Request: req, Input: input}
 }
 
@@ -2402,17 +2530,17 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 // UpdateRateBasedRuleRequest is a API request type for the UpdateRateBasedRule API operation.
 type UpdateRateBasedRuleRequest struct {
 	*aws.Request
-	Input *waf.UpdateRateBasedRuleInput
+	Input *UpdateRateBasedRuleInput
 }
 
 // Send marshals and sends the UpdateRateBasedRule API request.
-func (r UpdateRateBasedRuleRequest) Send() (*waf.UpdateRateBasedRuleOutput, error) {
+func (r UpdateRateBasedRuleRequest) Send() (*UpdateRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateRateBasedRuleOutput), nil
+	return r.Request.Data.(*UpdateRateBasedRuleOutput), nil
 }
 
 // UpdateRateBasedRuleRequest returns a request value for making API operation for
@@ -2465,7 +2593,7 @@ func (r UpdateRateBasedRuleRequest) Send() (*waf.UpdateRateBasedRuleOutput, erro
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRateBasedRule
-func (c *WAFRegional) UpdateRateBasedRuleRequest(input *waf.UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest {
+func (c *WAFRegional) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRateBasedRule,
 		HTTPMethod: "POST",
@@ -2473,10 +2601,13 @@ func (c *WAFRegional) UpdateRateBasedRuleRequest(input *waf.UpdateRateBasedRuleI
 	}
 
 	if input == nil {
-		input = &waf.UpdateRateBasedRuleInput{}
+		input = &UpdateRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateRateBasedRuleOutput{})
+	output := &UpdateRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -2485,17 +2616,17 @@ const opUpdateRule = "UpdateRule"
 // UpdateRuleRequest is a API request type for the UpdateRule API operation.
 type UpdateRuleRequest struct {
 	*aws.Request
-	Input *waf.UpdateRuleInput
+	Input *UpdateRuleInput
 }
 
 // Send marshals and sends the UpdateRule API request.
-func (r UpdateRuleRequest) Send() (*waf.UpdateRuleOutput, error) {
+func (r UpdateRuleRequest) Send() (*UpdateRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateRuleOutput), nil
+	return r.Request.Data.(*UpdateRuleOutput), nil
 }
 
 // UpdateRuleRequest returns a request value for making API operation for
@@ -2543,7 +2674,7 @@ func (r UpdateRuleRequest) Send() (*waf.UpdateRuleOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRule
-func (c *WAFRegional) UpdateRuleRequest(input *waf.UpdateRuleInput) UpdateRuleRequest {
+func (c *WAFRegional) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRule,
 		HTTPMethod: "POST",
@@ -2551,10 +2682,13 @@ func (c *WAFRegional) UpdateRuleRequest(input *waf.UpdateRuleInput) UpdateRuleRe
 	}
 
 	if input == nil {
-		input = &waf.UpdateRuleInput{}
+		input = &UpdateRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateRuleOutput{})
+	output := &UpdateRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRuleRequest{Request: req, Input: input}
 }
 
@@ -2563,17 +2697,17 @@ const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
 // UpdateSizeConstraintSetRequest is a API request type for the UpdateSizeConstraintSet API operation.
 type UpdateSizeConstraintSetRequest struct {
 	*aws.Request
-	Input *waf.UpdateSizeConstraintSetInput
+	Input *UpdateSizeConstraintSetInput
 }
 
 // Send marshals and sends the UpdateSizeConstraintSet API request.
-func (r UpdateSizeConstraintSetRequest) Send() (*waf.UpdateSizeConstraintSetOutput, error) {
+func (r UpdateSizeConstraintSetRequest) Send() (*UpdateSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateSizeConstraintSetOutput), nil
+	return r.Request.Data.(*UpdateSizeConstraintSetOutput), nil
 }
 
 // UpdateSizeConstraintSetRequest returns a request value for making API operation for
@@ -2627,7 +2761,7 @@ func (r UpdateSizeConstraintSetRequest) Send() (*waf.UpdateSizeConstraintSetOutp
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSizeConstraintSet
-func (c *WAFRegional) UpdateSizeConstraintSetRequest(input *waf.UpdateSizeConstraintSetInput) UpdateSizeConstraintSetRequest {
+func (c *WAFRegional) UpdateSizeConstraintSetRequest(input *UpdateSizeConstraintSetInput) UpdateSizeConstraintSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSizeConstraintSet,
 		HTTPMethod: "POST",
@@ -2635,10 +2769,13 @@ func (c *WAFRegional) UpdateSizeConstraintSetRequest(input *waf.UpdateSizeConstr
 	}
 
 	if input == nil {
-		input = &waf.UpdateSizeConstraintSetInput{}
+		input = &UpdateSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateSizeConstraintSetOutput{})
+	output := &UpdateSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -2647,17 +2784,17 @@ const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 // UpdateSqlInjectionMatchSetRequest is a API request type for the UpdateSqlInjectionMatchSet API operation.
 type UpdateSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *waf.UpdateSqlInjectionMatchSetInput
+	Input *UpdateSqlInjectionMatchSetInput
 }
 
 // Send marshals and sends the UpdateSqlInjectionMatchSet API request.
-func (r UpdateSqlInjectionMatchSetRequest) Send() (*waf.UpdateSqlInjectionMatchSetOutput, error) {
+func (r UpdateSqlInjectionMatchSetRequest) Send() (*UpdateSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateSqlInjectionMatchSetOutput), nil
+	return r.Request.Data.(*UpdateSqlInjectionMatchSetOutput), nil
 }
 
 // UpdateSqlInjectionMatchSetRequest returns a request value for making API operation for
@@ -2704,7 +2841,7 @@ func (r UpdateSqlInjectionMatchSetRequest) Send() (*waf.UpdateSqlInjectionMatchS
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSqlInjectionMatchSet
-func (c *WAFRegional) UpdateSqlInjectionMatchSetRequest(input *waf.UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest {
+func (c *WAFRegional) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -2712,10 +2849,13 @@ func (c *WAFRegional) UpdateSqlInjectionMatchSetRequest(input *waf.UpdateSqlInje
 	}
 
 	if input == nil {
-		input = &waf.UpdateSqlInjectionMatchSetInput{}
+		input = &UpdateSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateSqlInjectionMatchSetOutput{})
+	output := &UpdateSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -2724,17 +2864,17 @@ const opUpdateWebACL = "UpdateWebACL"
 // UpdateWebACLRequest is a API request type for the UpdateWebACL API operation.
 type UpdateWebACLRequest struct {
 	*aws.Request
-	Input *waf.UpdateWebACLInput
+	Input *UpdateWebACLInput
 }
 
 // Send marshals and sends the UpdateWebACL API request.
-func (r UpdateWebACLRequest) Send() (*waf.UpdateWebACLOutput, error) {
+func (r UpdateWebACLRequest) Send() (*UpdateWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateWebACLOutput), nil
+	return r.Request.Data.(*UpdateWebACLOutput), nil
 }
 
 // UpdateWebACLRequest returns a request value for making API operation for
@@ -2797,7 +2937,7 @@ func (r UpdateWebACLRequest) Send() (*waf.UpdateWebACLOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACL
-func (c *WAFRegional) UpdateWebACLRequest(input *waf.UpdateWebACLInput) UpdateWebACLRequest {
+func (c *WAFRegional) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLRequest {
 	op := &aws.Operation{
 		Name:       opUpdateWebACL,
 		HTTPMethod: "POST",
@@ -2805,10 +2945,13 @@ func (c *WAFRegional) UpdateWebACLRequest(input *waf.UpdateWebACLInput) UpdateWe
 	}
 
 	if input == nil {
-		input = &waf.UpdateWebACLInput{}
+		input = &UpdateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateWebACLOutput{})
+	output := &UpdateWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateWebACLRequest{Request: req, Input: input}
 }
 
@@ -2817,17 +2960,17 @@ const opUpdateXssMatchSet = "UpdateXssMatchSet"
 // UpdateXssMatchSetRequest is a API request type for the UpdateXssMatchSet API operation.
 type UpdateXssMatchSetRequest struct {
 	*aws.Request
-	Input *waf.UpdateXssMatchSetInput
+	Input *UpdateXssMatchSetInput
 }
 
 // Send marshals and sends the UpdateXssMatchSet API request.
-func (r UpdateXssMatchSetRequest) Send() (*waf.UpdateXssMatchSetOutput, error) {
+func (r UpdateXssMatchSetRequest) Send() (*UpdateXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*waf.UpdateXssMatchSetOutput), nil
+	return r.Request.Data.(*UpdateXssMatchSetOutput), nil
 }
 
 // UpdateXssMatchSetRequest returns a request value for making API operation for
@@ -2874,7 +3017,7 @@ func (r UpdateXssMatchSetRequest) Send() (*waf.UpdateXssMatchSetOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateXssMatchSet
-func (c *WAFRegional) UpdateXssMatchSetRequest(input *waf.UpdateXssMatchSetInput) UpdateXssMatchSetRequest {
+func (c *WAFRegional) UpdateXssMatchSetRequest(input *UpdateXssMatchSetInput) UpdateXssMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateXssMatchSet,
 		HTTPMethod: "POST",
@@ -2882,10 +3025,13 @@ func (c *WAFRegional) UpdateXssMatchSetRequest(input *waf.UpdateXssMatchSetInput
 	}
 
 	if input == nil {
-		input = &waf.UpdateXssMatchSetInput{}
+		input = &UpdateXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &waf.UpdateXssMatchSetOutput{})
+	output := &UpdateXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -2953,6 +3099,8 @@ func (s *AssociateWebACLInput) SetWebACLId(v string) *AssociateWebACLInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACLResponse
 type AssociateWebACLOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2963,6 +3111,1727 @@ func (s AssociateWebACLOutput) String() string {
 // GoString returns the string representation
 func (s AssociateWebACLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateByteMatchSetRequest
+type CreateByteMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the ByteMatchSet. You can't change Name
+	// after you create a ByteMatchSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateByteMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateByteMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateByteMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateByteMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateByteMatchSetInput) SetChangeToken(v string) *CreateByteMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateByteMatchSetInput) SetName(v string) *CreateByteMatchSetInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateByteMatchSetResponse
+type CreateByteMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A ByteMatchSet that contains no ByteMatchTuple objects.
+	ByteMatchSet *waf.ByteMatchSet `type:"structure"`
+
+	// The ChangeToken that you used to submit the CreateByteMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateByteMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateByteMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetByteMatchSet sets the ByteMatchSet field's value.
+func (s *CreateByteMatchSetOutput) SetByteMatchSet(v *waf.ByteMatchSet) *CreateByteMatchSetOutput {
+	s.ByteMatchSet = v
+	return s
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateByteMatchSetOutput) SetChangeToken(v string) *CreateByteMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSetRequest
+type CreateIPSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the IPSet. You can't change Name after
+	// you create the IPSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateIPSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateIPSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateIPSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateIPSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateIPSetInput) SetChangeToken(v string) *CreateIPSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateIPSetInput) SetName(v string) *CreateIPSetInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSetResponse
+type CreateIPSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateIPSet request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// The IPSet returned in the CreateIPSet response.
+	IPSet *waf.IPSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateIPSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateIPSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateIPSetOutput) SetChangeToken(v string) *CreateIPSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetIPSet sets the IPSet field's value.
+func (s *CreateIPSetOutput) SetIPSet(v *waf.IPSet) *CreateIPSetOutput {
+	s.IPSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRateBasedRuleRequest
+type CreateRateBasedRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ChangeToken that you used to submit the CreateRateBasedRule request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description for the metrics for this RateBasedRule. The
+	// name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
+	// contain whitespace. You can't change the name of the metric after you create
+	// the RateBasedRule.
+	//
+	// MetricName is a required field
+	MetricName *string `type:"string" required:"true"`
+
+	// A friendly name or description of the RateBasedRule. You can't change the
+	// name of a RateBasedRule after you create it.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The field that AWS WAF uses to determine if requests are likely arriving
+	// from a single source and thus subject to rate monitoring. The only valid
+	// value for RateKey is IP. IP indicates that requests that arrive from the
+	// same IP address are subject to the RateLimit that is specified in the RateBasedRule.
+	//
+	// RateKey is a required field
+	RateKey RateKey `type:"string" required:"true" enum:"true"`
+
+	// The maximum number of requests, which have an identical value in the field
+	// that is specified by RateKey, allowed in a five-minute period. If the number
+	// of requests exceeds the RateLimit and the other predicates specified in the
+	// rule are also met, AWS WAF triggers the action that is specified for this
+	// rule.
+	//
+	// RateLimit is a required field
+	RateLimit *int64 `min:"2000" type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateRateBasedRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRateBasedRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRateBasedRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRateBasedRuleInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.MetricName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if len(s.RateKey) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RateKey"))
+	}
+
+	if s.RateLimit == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
+	}
+	if s.RateLimit != nil && *s.RateLimit < 2000 {
+		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRateBasedRuleInput) SetChangeToken(v string) *CreateRateBasedRuleInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetMetricName sets the MetricName field's value.
+func (s *CreateRateBasedRuleInput) SetMetricName(v string) *CreateRateBasedRuleInput {
+	s.MetricName = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateRateBasedRuleInput) SetName(v string) *CreateRateBasedRuleInput {
+	s.Name = &v
+	return s
+}
+
+// SetRateKey sets the RateKey field's value.
+func (s *CreateRateBasedRuleInput) SetRateKey(v RateKey) *CreateRateBasedRuleInput {
+	s.RateKey = v
+	return s
+}
+
+// SetRateLimit sets the RateLimit field's value.
+func (s *CreateRateBasedRuleInput) SetRateLimit(v int64) *CreateRateBasedRuleInput {
+	s.RateLimit = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRateBasedRuleResponse
+type CreateRateBasedRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateRateBasedRule request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// The RateBasedRule that is returned in the CreateRateBasedRule response.
+	Rule *waf.RateBasedRule `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateRateBasedRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRateBasedRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRateBasedRuleOutput) SetChangeToken(v string) *CreateRateBasedRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRule sets the Rule field's value.
+func (s *CreateRateBasedRuleOutput) SetRule(v *waf.RateBasedRule) *CreateRateBasedRuleOutput {
+	s.Rule = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleRequest
+type CreateRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description for the metrics for this Rule. The name can
+	// contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain
+	// whitespace. You can't change the name of the metric after you create the
+	// Rule.
+	//
+	// MetricName is a required field
+	MetricName *string `type:"string" required:"true"`
+
+	// A friendly name or description of the Rule. You can't change the name of
+	// a Rule after you create it.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.MetricName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRuleInput) SetChangeToken(v string) *CreateRuleInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetMetricName sets the MetricName field's value.
+func (s *CreateRuleInput) SetMetricName(v string) *CreateRuleInput {
+	s.MetricName = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateRuleInput) SetName(v string) *CreateRuleInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleResponse
+type CreateRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateRule request. You can also
+	// use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// The Rule returned in the CreateRule response.
+	Rule *waf.Rule `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRuleOutput) SetChangeToken(v string) *CreateRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRule sets the Rule field's value.
+func (s *CreateRuleOutput) SetRule(v *waf.Rule) *CreateRuleOutput {
+	s.Rule = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSetRequest
+type CreateSizeConstraintSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the SizeConstraintSet. You can't change
+	// Name after you create a SizeConstraintSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateSizeConstraintSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSizeConstraintSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateSizeConstraintSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSizeConstraintSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateSizeConstraintSetInput) SetChangeToken(v string) *CreateSizeConstraintSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateSizeConstraintSetInput) SetName(v string) *CreateSizeConstraintSetInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSetResponse
+type CreateSizeConstraintSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateSizeConstraintSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// A SizeConstraintSet that contains no SizeConstraint objects.
+	SizeConstraintSet *waf.SizeConstraintSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateSizeConstraintSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSizeConstraintSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateSizeConstraintSetOutput) SetChangeToken(v string) *CreateSizeConstraintSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetSizeConstraintSet sets the SizeConstraintSet field's value.
+func (s *CreateSizeConstraintSetOutput) SetSizeConstraintSet(v *waf.SizeConstraintSet) *CreateSizeConstraintSetOutput {
+	s.SizeConstraintSet = v
+	return s
+}
+
+// A request to create a SqlInjectionMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSetRequest
+type CreateSqlInjectionMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description for the SqlInjectionMatchSet that you're creating.
+	// You can't change Name after you create the SqlInjectionMatchSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateSqlInjectionMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSqlInjectionMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateSqlInjectionMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSqlInjectionMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateSqlInjectionMatchSetInput) SetChangeToken(v string) *CreateSqlInjectionMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateSqlInjectionMatchSetInput) SetName(v string) *CreateSqlInjectionMatchSetInput {
+	s.Name = &v
+	return s
+}
+
+// The response to a CreateSqlInjectionMatchSet request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSetResponse
+type CreateSqlInjectionMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateSqlInjectionMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// A SqlInjectionMatchSet.
+	SqlInjectionMatchSet *waf.SqlInjectionMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateSqlInjectionMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSqlInjectionMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateSqlInjectionMatchSetOutput) SetChangeToken(v string) *CreateSqlInjectionMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetSqlInjectionMatchSet sets the SqlInjectionMatchSet field's value.
+func (s *CreateSqlInjectionMatchSetOutput) SetSqlInjectionMatchSet(v *waf.SqlInjectionMatchSet) *CreateSqlInjectionMatchSetOutput {
+	s.SqlInjectionMatchSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACLRequest
+type CreateWebACLInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The action that you want AWS WAF to take when a request doesn't match the
+	// criteria specified in any of the Rule objects that are associated with the
+	// WebACL.
+	//
+	// DefaultAction is a required field
+	DefaultAction *waf.WafAction `type:"structure" required:"true"`
+
+	// A friendly name or description for the metrics for this WebACL. The name
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
+	// contain whitespace. You can't change MetricName after you create the WebACL.
+	//
+	// MetricName is a required field
+	MetricName *string `type:"string" required:"true"`
+
+	// A friendly name or description of the WebACL. You can't change Name after
+	// you create the WebACL.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateWebACLInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateWebACLInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateWebACLInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateWebACLInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.DefaultAction == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DefaultAction"))
+	}
+
+	if s.MetricName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.DefaultAction != nil {
+		if err := s.DefaultAction.Validate(); err != nil {
+			invalidParams.AddNested("DefaultAction", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateWebACLInput) SetChangeToken(v string) *CreateWebACLInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetDefaultAction sets the DefaultAction field's value.
+func (s *CreateWebACLInput) SetDefaultAction(v *waf.WafAction) *CreateWebACLInput {
+	s.DefaultAction = v
+	return s
+}
+
+// SetMetricName sets the MetricName field's value.
+func (s *CreateWebACLInput) SetMetricName(v string) *CreateWebACLInput {
+	s.MetricName = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateWebACLInput) SetName(v string) *CreateWebACLInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACLResponse
+type CreateWebACLOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateWebACL request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// The WebACL returned in the CreateWebACL response.
+	WebACL *waf.WebACL `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateWebACLOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateWebACLOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateWebACLOutput) SetChangeToken(v string) *CreateWebACLOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetWebACL sets the WebACL field's value.
+func (s *CreateWebACLOutput) SetWebACL(v *waf.WebACL) *CreateWebACLOutput {
+	s.WebACL = v
+	return s
+}
+
+// A request to create an XssMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateXssMatchSetRequest
+type CreateXssMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description for the XssMatchSet that you're creating.
+	// You can't change Name after you create the XssMatchSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateXssMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateXssMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateXssMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateXssMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateXssMatchSetInput) SetChangeToken(v string) *CreateXssMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateXssMatchSetInput) SetName(v string) *CreateXssMatchSetInput {
+	s.Name = &v
+	return s
+}
+
+// The response to a CreateXssMatchSet request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateXssMatchSetResponse
+type CreateXssMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateXssMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// An XssMatchSet.
+	XssMatchSet *waf.XssMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateXssMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateXssMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateXssMatchSetOutput) SetChangeToken(v string) *CreateXssMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetXssMatchSet sets the XssMatchSet field's value.
+func (s *CreateXssMatchSetOutput) SetXssMatchSet(v *waf.XssMatchSet) *CreateXssMatchSetOutput {
+	s.XssMatchSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSetRequest
+type DeleteByteMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ByteMatchSetId of the ByteMatchSet that you want to delete. ByteMatchSetId
+	// is returned by CreateByteMatchSet and by ListByteMatchSets.
+	//
+	// ByteMatchSetId is a required field
+	ByteMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteByteMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteByteMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteByteMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteByteMatchSetInput"}
+
+	if s.ByteMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
+	}
+	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
+	}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetByteMatchSetId sets the ByteMatchSetId field's value.
+func (s *DeleteByteMatchSetInput) SetByteMatchSetId(v string) *DeleteByteMatchSetInput {
+	s.ByteMatchSetId = &v
+	return s
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteByteMatchSetInput) SetChangeToken(v string) *DeleteByteMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSetResponse
+type DeleteByteMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteByteMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteByteMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteByteMatchSetOutput) SetChangeToken(v string) *DeleteByteMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteIPSetRequest
+type DeleteIPSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The IPSetId of the IPSet that you want to delete. IPSetId is returned by
+	// CreateIPSet and by ListIPSets.
+	//
+	// IPSetId is a required field
+	IPSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteIPSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteIPSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteIPSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIPSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.IPSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
+	}
+	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteIPSetInput) SetChangeToken(v string) *DeleteIPSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetIPSetId sets the IPSetId field's value.
+func (s *DeleteIPSetInput) SetIPSetId(v string) *DeleteIPSetInput {
+	s.IPSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteIPSetResponse
+type DeleteIPSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteIPSet request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteIPSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteIPSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteIPSetOutput) SetChangeToken(v string) *DeleteIPSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRateBasedRuleRequest
+type DeleteRateBasedRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RuleId of the RateBasedRule that you want to delete. RuleId is returned
+	// by CreateRateBasedRule and by ListRateBasedRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRateBasedRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRateBasedRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRateBasedRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRateBasedRuleInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRateBasedRuleInput) SetChangeToken(v string) *DeleteRateBasedRuleInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *DeleteRateBasedRuleInput) SetRuleId(v string) *DeleteRateBasedRuleInput {
+	s.RuleId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRateBasedRuleResponse
+type DeleteRateBasedRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteRateBasedRule request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteRateBasedRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRateBasedRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRateBasedRuleOutput) SetChangeToken(v string) *DeleteRateBasedRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRuleRequest
+type DeleteRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RuleId of the Rule that you want to delete. RuleId is returned by CreateRule
+	// and by ListRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRuleInput) SetChangeToken(v string) *DeleteRuleInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *DeleteRuleInput) SetRuleId(v string) *DeleteRuleInput {
+	s.RuleId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRuleResponse
+type DeleteRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteRule request. You can also
+	// use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRuleOutput) SetChangeToken(v string) *DeleteRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSetRequest
+type DeleteSizeConstraintSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The SizeConstraintSetId of the SizeConstraintSet that you want to delete.
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by ListSizeConstraintSets.
+	//
+	// SizeConstraintSetId is a required field
+	SizeConstraintSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteSizeConstraintSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSizeConstraintSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteSizeConstraintSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSizeConstraintSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.SizeConstraintSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
+	}
+	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteSizeConstraintSetInput) SetChangeToken(v string) *DeleteSizeConstraintSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
+func (s *DeleteSizeConstraintSetInput) SetSizeConstraintSetId(v string) *DeleteSizeConstraintSetInput {
+	s.SizeConstraintSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSetResponse
+type DeleteSizeConstraintSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteSizeConstraintSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSizeConstraintSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteSizeConstraintSetOutput) SetChangeToken(v string) *DeleteSizeConstraintSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// A request to delete a SqlInjectionMatchSet from AWS WAF.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSqlInjectionMatchSetRequest
+type DeleteSqlInjectionMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to delete.
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
+	//
+	// SqlInjectionMatchSetId is a required field
+	SqlInjectionMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteSqlInjectionMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSqlInjectionMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteSqlInjectionMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSqlInjectionMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.SqlInjectionMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
+	}
+	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteSqlInjectionMatchSetInput) SetChangeToken(v string) *DeleteSqlInjectionMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
+func (s *DeleteSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *DeleteSqlInjectionMatchSetInput {
+	s.SqlInjectionMatchSetId = &v
+	return s
+}
+
+// The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSqlInjectionMatchSetResponse
+type DeleteSqlInjectionMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteSqlInjectionMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteSqlInjectionMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSqlInjectionMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteSqlInjectionMatchSetOutput) SetChangeToken(v string) *DeleteSqlInjectionMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteWebACLRequest
+type DeleteWebACLInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The WebACLId of the WebACL that you want to delete. WebACLId is returned
+	// by CreateWebACL and by ListWebACLs.
+	//
+	// WebACLId is a required field
+	WebACLId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteWebACLInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteWebACLInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteWebACLInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebACLInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.WebACLId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
+	}
+	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteWebACLInput) SetChangeToken(v string) *DeleteWebACLInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetWebACLId sets the WebACLId field's value.
+func (s *DeleteWebACLInput) SetWebACLId(v string) *DeleteWebACLInput {
+	s.WebACLId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteWebACLResponse
+type DeleteWebACLOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteWebACL request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteWebACLOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteWebACLOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteWebACLOutput) SetChangeToken(v string) *DeleteWebACLOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// A request to delete an XssMatchSet from AWS WAF.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteXssMatchSetRequest
+type DeleteXssMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The XssMatchSetId of the XssMatchSet that you want to delete. XssMatchSetId
+	// is returned by CreateXssMatchSet and by ListXssMatchSets.
+	//
+	// XssMatchSetId is a required field
+	XssMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteXssMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteXssMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteXssMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteXssMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.XssMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
+	}
+	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteXssMatchSetInput) SetChangeToken(v string) *DeleteXssMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetXssMatchSetId sets the XssMatchSetId field's value.
+func (s *DeleteXssMatchSetInput) SetXssMatchSetId(v string) *DeleteXssMatchSetInput {
+	s.XssMatchSetId = &v
+	return s
+}
+
+// The response to a request to delete an XssMatchSet from AWS WAF.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteXssMatchSetResponse
+type DeleteXssMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteXssMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteXssMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteXssMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteXssMatchSetOutput) SetChangeToken(v string) *DeleteXssMatchSetOutput {
+	s.ChangeToken = &v
+	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLRequest
@@ -3012,6 +4881,8 @@ func (s *DisassociateWebACLInput) SetResourceArn(v string) *DisassociateWebACLIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLResponse
 type DisassociateWebACLOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3022,6 +4893,889 @@ func (s DisassociateWebACLOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateWebACLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetByteMatchSetRequest
+type GetByteMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ByteMatchSetId of the ByteMatchSet that you want to get. ByteMatchSetId
+	// is returned by CreateByteMatchSet and by ListByteMatchSets.
+	//
+	// ByteMatchSetId is a required field
+	ByteMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetByteMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetByteMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetByteMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetByteMatchSetInput"}
+
+	if s.ByteMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
+	}
+	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetByteMatchSetId sets the ByteMatchSetId field's value.
+func (s *GetByteMatchSetInput) SetByteMatchSetId(v string) *GetByteMatchSetInput {
+	s.ByteMatchSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetByteMatchSetResponse
+type GetByteMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the ByteMatchSet that you specified in the GetByteMatchSet
+	// request. For more information, see the following topics:
+	//
+	//    * ByteMatchSet: Contains ByteMatchSetId, ByteMatchTuples, and Name
+	//
+	//    * ByteMatchTuples: Contains an array of ByteMatchTuple objects. Each ByteMatchTuple
+	//    object contains FieldToMatch, PositionalConstraint, TargetString, and
+	//    TextTransformation
+	//
+	//    * FieldToMatch: Contains Data and Type
+	ByteMatchSet *waf.ByteMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetByteMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetByteMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetByteMatchSet sets the ByteMatchSet field's value.
+func (s *GetByteMatchSetOutput) SetByteMatchSet(v *waf.ByteMatchSet) *GetByteMatchSetOutput {
+	s.ByteMatchSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenRequest
+type GetChangeTokenInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetChangeTokenInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetChangeTokenInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenResponse
+type GetChangeTokenOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used in the request. Use this value in a GetChangeTokenStatus
+	// request to get the current status of the request.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetChangeTokenOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetChangeTokenOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetChangeTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *GetChangeTokenOutput) SetChangeToken(v string) *GetChangeTokenOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatusRequest
+type GetChangeTokenStatusInput struct {
+	_ struct{} `type:"structure"`
+
+	// The change token for which you want to get the status. This change token
+	// was previously returned in the GetChangeToken response.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetChangeTokenStatusInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetChangeTokenStatusInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetChangeTokenStatusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetChangeTokenStatusInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *GetChangeTokenStatusInput) SetChangeToken(v string) *GetChangeTokenStatusInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatusResponse
+type GetChangeTokenStatusOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The status of the change token.
+	ChangeTokenStatus ChangeTokenStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetChangeTokenStatusOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetChangeTokenStatusOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetChangeTokenStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeTokenStatus sets the ChangeTokenStatus field's value.
+func (s *GetChangeTokenStatusOutput) SetChangeTokenStatus(v ChangeTokenStatus) *GetChangeTokenStatusOutput {
+	s.ChangeTokenStatus = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetIPSetRequest
+type GetIPSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The IPSetId of the IPSet that you want to get. IPSetId is returned by CreateIPSet
+	// and by ListIPSets.
+	//
+	// IPSetId is a required field
+	IPSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetIPSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetIPSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetIPSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetIPSetInput"}
+
+	if s.IPSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
+	}
+	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIPSetId sets the IPSetId field's value.
+func (s *GetIPSetInput) SetIPSetId(v string) *GetIPSetInput {
+	s.IPSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetIPSetResponse
+type GetIPSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the IPSet that you specified in the GetIPSet request. For
+	// more information, see the following topics:
+	//
+	//    * IPSet: Contains IPSetDescriptors, IPSetId, and Name
+	//
+	//    * IPSetDescriptors: Contains an array of IPSetDescriptor objects. Each
+	//    IPSetDescriptor object contains Type and Value
+	IPSet *waf.IPSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetIPSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetIPSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetIPSet sets the IPSet field's value.
+func (s *GetIPSetOutput) SetIPSet(v *waf.IPSet) *GetIPSetOutput {
+	s.IPSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleRequest
+type GetRateBasedRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The RuleId of the RateBasedRule that you want to get. RuleId is returned
+	// by CreateRateBasedRule and by ListRateBasedRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRateBasedRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRateBasedRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRateBasedRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleInput"}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *GetRateBasedRuleInput) SetRuleId(v string) *GetRateBasedRuleInput {
+	s.RuleId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleManagedKeysRequest
+type GetRateBasedRuleManagedKeysInput struct {
+	_ struct{} `type:"structure"`
+
+	// A null value and not currently used. Do not include this in your request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// The RuleId of the RateBasedRule for which you want to get a list of ManagedKeys.
+	// RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRateBasedRuleManagedKeysInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRateBasedRuleManagedKeysInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRateBasedRuleManagedKeysInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleManagedKeysInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *GetRateBasedRuleManagedKeysInput) SetNextMarker(v string) *GetRateBasedRuleManagedKeysInput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *GetRateBasedRuleManagedKeysInput) SetRuleId(v string) *GetRateBasedRuleManagedKeysInput {
+	s.RuleId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleManagedKeysResponse
+type GetRateBasedRuleManagedKeysOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of IP addresses that currently are blocked by the specified RateBasedRule.
+	ManagedKeys []string `type:"list"`
+
+	// A null value and not currently used.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRateBasedRuleManagedKeysOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRateBasedRuleManagedKeysOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRateBasedRuleManagedKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetManagedKeys sets the ManagedKeys field's value.
+func (s *GetRateBasedRuleManagedKeysOutput) SetManagedKeys(v []string) *GetRateBasedRuleManagedKeysOutput {
+	s.ManagedKeys = v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *GetRateBasedRuleManagedKeysOutput) SetNextMarker(v string) *GetRateBasedRuleManagedKeysOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleResponse
+type GetRateBasedRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the RateBasedRule that you specified in the GetRateBasedRule
+	// request.
+	Rule *waf.RateBasedRule `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRateBasedRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRateBasedRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRule sets the Rule field's value.
+func (s *GetRateBasedRuleOutput) SetRule(v *waf.RateBasedRule) *GetRateBasedRuleOutput {
+	s.Rule = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRuleRequest
+type GetRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The RuleId of the Rule that you want to get. RuleId is returned by CreateRule
+	// and by ListRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRuleInput"}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *GetRuleInput) SetRuleId(v string) *GetRuleInput {
+	s.RuleId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRuleResponse
+type GetRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the Rule that you specified in the GetRule request. For
+	// more information, see the following topics:
+	//
+	//    * Rule: Contains MetricName, Name, an array of Predicate objects, and
+	//    RuleId
+	//
+	//    * Predicate: Each Predicate object contains DataId, Negated, and Type
+	Rule *waf.Rule `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRule sets the Rule field's value.
+func (s *GetRuleOutput) SetRule(v *waf.Rule) *GetRuleOutput {
+	s.Rule = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSampledRequestsRequest
+type GetSampledRequestsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The number of requests that you want AWS WAF to return from among the first
+	// 5,000 requests that your AWS resource received during the time range. If
+	// your resource received fewer requests than the value of MaxItems, GetSampledRequests
+	// returns information about all of them.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `min:"1" type:"long" required:"true"`
+
+	// RuleId is one of two values:
+	//
+	//    * The RuleId of the Rule for which you want GetSampledRequests to return
+	//    a sample of requests.
+	//
+	//    * Default_Action, which causes GetSampledRequests to return a sample of
+	//    the requests that didn't match any of the rules in the specified WebACL.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+
+	// The start date and time and the end date and time of the range for which
+	// you want GetSampledRequests to return a sample of requests. Specify the date
+	// and time in the following format: "2016-09-27T14:50Z". You can specify any
+	// time range in the previous three hours.
+	//
+	// TimeWindow is a required field
+	TimeWindow *waf.TimeWindow `type:"structure" required:"true"`
+
+	// The WebACLId of the WebACL for which you want GetSampledRequests to return
+	// a sample of requests.
+	//
+	// WebAclId is a required field
+	WebAclId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSampledRequestsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSampledRequestsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSampledRequestsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSampledRequestsInput"}
+
+	if s.MaxItems == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxItems"))
+	}
+	if s.MaxItems != nil && *s.MaxItems < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
+	}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if s.TimeWindow == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimeWindow"))
+	}
+
+	if s.WebAclId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WebAclId"))
+	}
+	if s.WebAclId != nil && len(*s.WebAclId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WebAclId", 1))
+	}
+	if s.TimeWindow != nil {
+		if err := s.TimeWindow.Validate(); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxItems sets the MaxItems field's value.
+func (s *GetSampledRequestsInput) SetMaxItems(v int64) *GetSampledRequestsInput {
+	s.MaxItems = &v
+	return s
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *GetSampledRequestsInput) SetRuleId(v string) *GetSampledRequestsInput {
+	s.RuleId = &v
+	return s
+}
+
+// SetTimeWindow sets the TimeWindow field's value.
+func (s *GetSampledRequestsInput) SetTimeWindow(v *waf.TimeWindow) *GetSampledRequestsInput {
+	s.TimeWindow = v
+	return s
+}
+
+// SetWebAclId sets the WebAclId field's value.
+func (s *GetSampledRequestsInput) SetWebAclId(v string) *GetSampledRequestsInput {
+	s.WebAclId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSampledRequestsResponse
+type GetSampledRequestsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The total number of requests from which GetSampledRequests got a sample of
+	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
+	// every request that your AWS resource received during the specified time range.
+	PopulationSize *int64 `type:"long"`
+
+	// A complex type that contains detailed information about each of the requests
+	// in the sample.
+	SampledRequests []waf.SampledHTTPRequest `type:"list"`
+
+	// Usually, TimeWindow is the time range that you specified in the GetSampledRequests
+	// request. However, if your AWS resource received more than 5,000 requests
+	// during the time range that you specified in the request, GetSampledRequests
+	// returns the time range for the first 5,000 requests.
+	TimeWindow *waf.TimeWindow `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetSampledRequestsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSampledRequestsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSampledRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetPopulationSize sets the PopulationSize field's value.
+func (s *GetSampledRequestsOutput) SetPopulationSize(v int64) *GetSampledRequestsOutput {
+	s.PopulationSize = &v
+	return s
+}
+
+// SetSampledRequests sets the SampledRequests field's value.
+func (s *GetSampledRequestsOutput) SetSampledRequests(v []waf.SampledHTTPRequest) *GetSampledRequestsOutput {
+	s.SampledRequests = v
+	return s
+}
+
+// SetTimeWindow sets the TimeWindow field's value.
+func (s *GetSampledRequestsOutput) SetTimeWindow(v *waf.TimeWindow) *GetSampledRequestsOutput {
+	s.TimeWindow = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSizeConstraintSetRequest
+type GetSizeConstraintSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The SizeConstraintSetId of the SizeConstraintSet that you want to get. SizeConstraintSetId
+	// is returned by CreateSizeConstraintSet and by ListSizeConstraintSets.
+	//
+	// SizeConstraintSetId is a required field
+	SizeConstraintSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSizeConstraintSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSizeConstraintSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSizeConstraintSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSizeConstraintSetInput"}
+
+	if s.SizeConstraintSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
+	}
+	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
+func (s *GetSizeConstraintSetInput) SetSizeConstraintSetId(v string) *GetSizeConstraintSetInput {
+	s.SizeConstraintSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSizeConstraintSetResponse
+type GetSizeConstraintSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the SizeConstraintSet that you specified in the GetSizeConstraintSet
+	// request. For more information, see the following topics:
+	//
+	//    * SizeConstraintSet: Contains SizeConstraintSetId, SizeConstraints, and
+	//    Name
+	//
+	//    * SizeConstraints: Contains an array of SizeConstraint objects. Each SizeConstraint
+	//    object contains FieldToMatch, TextTransformation, ComparisonOperator,
+	//    and Size
+	//
+	//    * FieldToMatch: Contains Data and Type
+	SizeConstraintSet *waf.SizeConstraintSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetSizeConstraintSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSizeConstraintSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetSizeConstraintSet sets the SizeConstraintSet field's value.
+func (s *GetSizeConstraintSetOutput) SetSizeConstraintSet(v *waf.SizeConstraintSet) *GetSizeConstraintSetOutput {
+	s.SizeConstraintSet = v
+	return s
+}
+
+// A request to get a SqlInjectionMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSqlInjectionMatchSetRequest
+type GetSqlInjectionMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get.
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
+	//
+	// SqlInjectionMatchSetId is a required field
+	SqlInjectionMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSqlInjectionMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSqlInjectionMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSqlInjectionMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSqlInjectionMatchSetInput"}
+
+	if s.SqlInjectionMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
+	}
+	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
+func (s *GetSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *GetSqlInjectionMatchSetInput {
+	s.SqlInjectionMatchSetId = &v
+	return s
+}
+
+// The response to a GetSqlInjectionMatchSet request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSqlInjectionMatchSetResponse
+type GetSqlInjectionMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the SqlInjectionMatchSet that you specified in the GetSqlInjectionMatchSet
+	// request. For more information, see the following topics:
+	//
+	//    * SqlInjectionMatchSet: Contains Name, SqlInjectionMatchSetId, and an
+	//    array of SqlInjectionMatchTuple objects
+	//
+	//    * SqlInjectionMatchTuple: Each SqlInjectionMatchTuple object contains
+	//    FieldToMatch and TextTransformation
+	//
+	//    * FieldToMatch: Contains Data and Type
+	SqlInjectionMatchSet *waf.SqlInjectionMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetSqlInjectionMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSqlInjectionMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetSqlInjectionMatchSet sets the SqlInjectionMatchSet field's value.
+func (s *GetSqlInjectionMatchSetOutput) SetSqlInjectionMatchSet(v *waf.SqlInjectionMatchSet) *GetSqlInjectionMatchSetOutput {
+	s.SqlInjectionMatchSet = v
+	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceRequest
@@ -3071,6 +5825,8 @@ func (s *GetWebACLForResourceInput) SetResourceArn(v string) *GetWebACLForResour
 type GetWebACLForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the web ACL that you specified in the GetWebACLForResource
 	// request. If there is no associated resource, a null WebACLSummary is returned.
 	WebACLSummary *waf.WebACLSummary `type:"structure"`
@@ -3086,9 +5842,473 @@ func (s GetWebACLForResourceOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetWebACLForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetWebACLSummary sets the WebACLSummary field's value.
 func (s *GetWebACLForResourceOutput) SetWebACLSummary(v *waf.WebACLSummary) *GetWebACLForResourceOutput {
 	s.WebACLSummary = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLRequest
+type GetWebACLInput struct {
+	_ struct{} `type:"structure"`
+
+	// The WebACLId of the WebACL that you want to get. WebACLId is returned by
+	// CreateWebACL and by ListWebACLs.
+	//
+	// WebACLId is a required field
+	WebACLId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetWebACLInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetWebACLInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetWebACLInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetWebACLInput"}
+
+	if s.WebACLId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
+	}
+	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetWebACLId sets the WebACLId field's value.
+func (s *GetWebACLInput) SetWebACLId(v string) *GetWebACLInput {
+	s.WebACLId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLResponse
+type GetWebACLOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the WebACL that you specified in the GetWebACL request.
+	// For more information, see the following topics:
+	//
+	//    * WebACL: Contains DefaultAction, MetricName, Name, an array of Rule objects,
+	//    and WebACLId
+	//
+	//    * DefaultAction (Data type is WafAction): Contains Type
+	//
+	//    * Rules: Contains an array of ActivatedRule objects, which contain Action,
+	//    Priority, and RuleId
+	//
+	//    * Action: Contains Type
+	WebACL *waf.WebACL `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetWebACLOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetWebACLOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetWebACL sets the WebACL field's value.
+func (s *GetWebACLOutput) SetWebACL(v *waf.WebACL) *GetWebACLOutput {
+	s.WebACL = v
+	return s
+}
+
+// A request to get an XssMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetXssMatchSetRequest
+type GetXssMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The XssMatchSetId of the XssMatchSet that you want to get. XssMatchSetId
+	// is returned by CreateXssMatchSet and by ListXssMatchSets.
+	//
+	// XssMatchSetId is a required field
+	XssMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetXssMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetXssMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetXssMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetXssMatchSetInput"}
+
+	if s.XssMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
+	}
+	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetXssMatchSetId sets the XssMatchSetId field's value.
+func (s *GetXssMatchSetInput) SetXssMatchSetId(v string) *GetXssMatchSetInput {
+	s.XssMatchSetId = &v
+	return s
+}
+
+// The response to a GetXssMatchSet request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetXssMatchSetResponse
+type GetXssMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the XssMatchSet that you specified in the GetXssMatchSet
+	// request. For more information, see the following topics:
+	//
+	//    * XssMatchSet: Contains Name, XssMatchSetId, and an array of XssMatchTuple
+	//    objects
+	//
+	//    * XssMatchTuple: Each XssMatchTuple object contains FieldToMatch and TextTransformation
+	//
+	//    * FieldToMatch: Contains Data and Type
+	XssMatchSet *waf.XssMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetXssMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetXssMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetXssMatchSet sets the XssMatchSet field's value.
+func (s *GetXssMatchSetOutput) SetXssMatchSet(v *waf.XssMatchSet) *GetXssMatchSetOutput {
+	s.XssMatchSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSetsRequest
+type ListByteMatchSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of ByteMatchSet objects that you want AWS WAF to return
+	// for this request. If you have more ByteMatchSets objects than the number
+	// you specify for Limit, the response includes a NextMarker value that you
+	// can use to get another batch of ByteMatchSet objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more ByteMatchSets than the
+	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
+	// you to list another group of ByteMatchSets. For the second and subsequent
+	// ListByteMatchSets requests, specify the value of NextMarker from the previous
+	// response to get information about another batch of ByteMatchSets.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListByteMatchSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListByteMatchSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListByteMatchSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListByteMatchSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListByteMatchSetsInput) SetLimit(v int64) *ListByteMatchSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListByteMatchSetsInput) SetNextMarker(v string) *ListByteMatchSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSetsResponse
+type ListByteMatchSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of ByteMatchSetSummary objects.
+	ByteMatchSets []waf.ByteMatchSetSummary `type:"list"`
+
+	// If you have more ByteMatchSet objects than the number that you specified
+	// for Limit in the request, the response includes a NextMarker value. To list
+	// more ByteMatchSet objects, submit another ListByteMatchSets request, and
+	// specify the NextMarker value from the response in the NextMarker value in
+	// the next request.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListByteMatchSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListByteMatchSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListByteMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetByteMatchSets sets the ByteMatchSets field's value.
+func (s *ListByteMatchSetsOutput) SetByteMatchSets(v []waf.ByteMatchSetSummary) *ListByteMatchSetsOutput {
+	s.ByteMatchSets = v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListByteMatchSetsOutput) SetNextMarker(v string) *ListByteMatchSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSetsRequest
+type ListIPSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of IPSet objects that you want AWS WAF to return for
+	// this request. If you have more IPSet objects than the number you specify
+	// for Limit, the response includes a NextMarker value that you can use to get
+	// another batch of IPSet objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more IPSets than the value
+	// of Limit, AWS WAF returns a NextMarker value in the response that allows
+	// you to list another group of IPSets. For the second and subsequent ListIPSets
+	// requests, specify the value of NextMarker from the previous response to get
+	// information about another batch of ByteMatchSets.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListIPSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListIPSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListIPSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListIPSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListIPSetsInput) SetLimit(v int64) *ListIPSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListIPSetsInput) SetNextMarker(v string) *ListIPSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSetsResponse
+type ListIPSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of IPSetSummary objects.
+	IPSets []waf.IPSetSummary `type:"list"`
+
+	// If you have more IPSet objects than the number that you specified for Limit
+	// in the request, the response includes a NextMarker value. To list more IPSet
+	// objects, submit another ListIPSets request, and specify the NextMarker value
+	// from the response in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListIPSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListIPSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIPSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetIPSets sets the IPSets field's value.
+func (s *ListIPSetsOutput) SetIPSets(v []waf.IPSetSummary) *ListIPSetsOutput {
+	s.IPSets = v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListIPSetsOutput) SetNextMarker(v string) *ListIPSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRateBasedRulesRequest
+type ListRateBasedRulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of Rules that you want AWS WAF to return for this request.
+	// If you have more Rules than the number that you specify for Limit, the response
+	// includes a NextMarker value that you can use to get another batch of Rules.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more Rules than the value of
+	// Limit, AWS WAF returns a NextMarker value in the response that allows you
+	// to list another group of Rules. For the second and subsequent ListRateBasedRules
+	// requests, specify the value of NextMarker from the previous response to get
+	// information about another batch of Rules.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListRateBasedRulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRateBasedRulesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListRateBasedRulesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListRateBasedRulesInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListRateBasedRulesInput) SetLimit(v int64) *ListRateBasedRulesInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRateBasedRulesInput) SetNextMarker(v string) *ListRateBasedRulesInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRateBasedRulesResponse
+type ListRateBasedRulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more Rules than the number that you specified for Limit in the
+	// request, the response includes a NextMarker value. To list more Rules, submit
+	// another ListRateBasedRules request, and specify the NextMarker value from
+	// the response in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of RuleSummary objects.
+	Rules []waf.RuleSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListRateBasedRulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRateBasedRulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRateBasedRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRateBasedRulesOutput) SetNextMarker(v string) *ListRateBasedRulesOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRules sets the Rules field's value.
+func (s *ListRateBasedRulesOutput) SetRules(v []waf.RuleSummary) *ListRateBasedRulesOutput {
+	s.Rules = v
 	return s
 }
 
@@ -3140,6 +6360,8 @@ func (s *ListResourcesForWebACLInput) SetWebACLId(v string) *ListResourcesForWeb
 type ListResourcesForWebACLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of ARNs (Amazon Resource Names) of the resources associated with
 	// the specified web ACL. An array with zero elements is returned if there are
 	// no resources associated with the web ACL.
@@ -3156,9 +6378,1528 @@ func (s ListResourcesForWebACLOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourcesForWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetResourceArns sets the ResourceArns field's value.
 func (s *ListResourcesForWebACLOutput) SetResourceArns(v []string) *ListResourcesForWebACLOutput {
 	s.ResourceArns = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRulesRequest
+type ListRulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of Rules that you want AWS WAF to return for this request.
+	// If you have more Rules than the number that you specify for Limit, the response
+	// includes a NextMarker value that you can use to get another batch of Rules.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more Rules than the value of
+	// Limit, AWS WAF returns a NextMarker value in the response that allows you
+	// to list another group of Rules. For the second and subsequent ListRules requests,
+	// specify the value of NextMarker from the previous response to get information
+	// about another batch of Rules.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListRulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRulesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListRulesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListRulesInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListRulesInput) SetLimit(v int64) *ListRulesInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRulesInput) SetNextMarker(v string) *ListRulesInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRulesResponse
+type ListRulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more Rules than the number that you specified for Limit in the
+	// request, the response includes a NextMarker value. To list more Rules, submit
+	// another ListRules request, and specify the NextMarker value from the response
+	// in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of RuleSummary objects.
+	Rules []waf.RuleSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListRulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRulesOutput) SetNextMarker(v string) *ListRulesOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRules sets the Rules field's value.
+func (s *ListRulesOutput) SetRules(v []waf.RuleSummary) *ListRulesOutput {
+	s.Rules = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSizeConstraintSetsRequest
+type ListSizeConstraintSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of SizeConstraintSet objects that you want AWS WAF to
+	// return for this request. If you have more SizeConstraintSets objects than
+	// the number you specify for Limit, the response includes a NextMarker value
+	// that you can use to get another batch of SizeConstraintSet objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more SizeConstraintSets than
+	// the value of Limit, AWS WAF returns a NextMarker value in the response that
+	// allows you to list another group of SizeConstraintSets. For the second and
+	// subsequent ListSizeConstraintSets requests, specify the value of NextMarker
+	// from the previous response to get information about another batch of SizeConstraintSets.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSizeConstraintSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSizeConstraintSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSizeConstraintSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSizeConstraintSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListSizeConstraintSetsInput) SetLimit(v int64) *ListSizeConstraintSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListSizeConstraintSetsInput) SetNextMarker(v string) *ListSizeConstraintSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSizeConstraintSetsResponse
+type ListSizeConstraintSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more SizeConstraintSet objects than the number that you specified
+	// for Limit in the request, the response includes a NextMarker value. To list
+	// more SizeConstraintSet objects, submit another ListSizeConstraintSets request,
+	// and specify the NextMarker value from the response in the NextMarker value
+	// in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of SizeConstraintSetSummary objects.
+	SizeConstraintSets []waf.SizeConstraintSetSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSizeConstraintSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSizeConstraintSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSizeConstraintSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListSizeConstraintSetsOutput) SetNextMarker(v string) *ListSizeConstraintSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetSizeConstraintSets sets the SizeConstraintSets field's value.
+func (s *ListSizeConstraintSetsOutput) SetSizeConstraintSets(v []waf.SizeConstraintSetSummary) *ListSizeConstraintSetsOutput {
+	s.SizeConstraintSets = v
+	return s
+}
+
+// A request to list the SqlInjectionMatchSet objects created by the current
+// AWS account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSetsRequest
+type ListSqlInjectionMatchSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of SqlInjectionMatchSet objects that you want AWS WAF
+	// to return for this request. If you have more SqlInjectionMatchSet objects
+	// than the number you specify for Limit, the response includes a NextMarker
+	// value that you can use to get another batch of Rules.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more SqlInjectionMatchSet objects
+	// than the value of Limit, AWS WAF returns a NextMarker value in the response
+	// that allows you to list another group of SqlInjectionMatchSets. For the second
+	// and subsequent ListSqlInjectionMatchSets requests, specify the value of NextMarker
+	// from the previous response to get information about another batch of SqlInjectionMatchSets.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSqlInjectionMatchSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSqlInjectionMatchSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSqlInjectionMatchSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSqlInjectionMatchSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListSqlInjectionMatchSetsInput) SetLimit(v int64) *ListSqlInjectionMatchSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListSqlInjectionMatchSetsInput) SetNextMarker(v string) *ListSqlInjectionMatchSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// The response to a ListSqlInjectionMatchSets request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSetsResponse
+type ListSqlInjectionMatchSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more SqlInjectionMatchSet objects than the number that you specified
+	// for Limit in the request, the response includes a NextMarker value. To list
+	// more SqlInjectionMatchSet objects, submit another ListSqlInjectionMatchSets
+	// request, and specify the NextMarker value from the response in the NextMarker
+	// value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of SqlInjectionMatchSetSummary objects.
+	SqlInjectionMatchSets []waf.SqlInjectionMatchSetSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSqlInjectionMatchSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSqlInjectionMatchSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSqlInjectionMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListSqlInjectionMatchSetsOutput) SetNextMarker(v string) *ListSqlInjectionMatchSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetSqlInjectionMatchSets sets the SqlInjectionMatchSets field's value.
+func (s *ListSqlInjectionMatchSetsOutput) SetSqlInjectionMatchSets(v []waf.SqlInjectionMatchSetSummary) *ListSqlInjectionMatchSetsOutput {
+	s.SqlInjectionMatchSets = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListWebACLsRequest
+type ListWebACLsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of WebACL objects that you want AWS WAF to return for
+	// this request. If you have more WebACL objects than the number that you specify
+	// for Limit, the response includes a NextMarker value that you can use to get
+	// another batch of WebACL objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more WebACL objects than the
+	// number that you specify for Limit, AWS WAF returns a NextMarker value in
+	// the response that allows you to list another group of WebACL objects. For
+	// the second and subsequent ListWebACLs requests, specify the value of NextMarker
+	// from the previous response to get information about another batch of WebACL
+	// objects.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListWebACLsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWebACLsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListWebACLsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListWebACLsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListWebACLsInput) SetLimit(v int64) *ListWebACLsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListWebACLsInput) SetNextMarker(v string) *ListWebACLsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListWebACLsResponse
+type ListWebACLsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more WebACL objects than the number that you specified for Limit
+	// in the request, the response includes a NextMarker value. To list more WebACL
+	// objects, submit another ListWebACLs request, and specify the NextMarker value
+	// from the response in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of WebACLSummary objects.
+	WebACLs []waf.WebACLSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListWebACLsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWebACLsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWebACLsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListWebACLsOutput) SetNextMarker(v string) *ListWebACLsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetWebACLs sets the WebACLs field's value.
+func (s *ListWebACLsOutput) SetWebACLs(v []waf.WebACLSummary) *ListWebACLsOutput {
+	s.WebACLs = v
+	return s
+}
+
+// A request to list the XssMatchSet objects created by the current AWS account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSetsRequest
+type ListXssMatchSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of XssMatchSet objects that you want AWS WAF to return
+	// for this request. If you have more XssMatchSet objects than the number you
+	// specify for Limit, the response includes a NextMarker value that you can
+	// use to get another batch of Rules.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more XssMatchSet objects than
+	// the value of Limit, AWS WAF returns a NextMarker value in the response that
+	// allows you to list another group of XssMatchSets. For the second and subsequent
+	// ListXssMatchSets requests, specify the value of NextMarker from the previous
+	// response to get information about another batch of XssMatchSets.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListXssMatchSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListXssMatchSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListXssMatchSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListXssMatchSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListXssMatchSetsInput) SetLimit(v int64) *ListXssMatchSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListXssMatchSetsInput) SetNextMarker(v string) *ListXssMatchSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// The response to a ListXssMatchSets request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSetsResponse
+type ListXssMatchSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more XssMatchSet objects than the number that you specified for
+	// Limit in the request, the response includes a NextMarker value. To list more
+	// XssMatchSet objects, submit another ListXssMatchSets request, and specify
+	// the NextMarker value from the response in the NextMarker value in the next
+	// request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of XssMatchSetSummary objects.
+	XssMatchSets []waf.XssMatchSetSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListXssMatchSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListXssMatchSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListXssMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListXssMatchSetsOutput) SetNextMarker(v string) *ListXssMatchSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetXssMatchSets sets the XssMatchSets field's value.
+func (s *ListXssMatchSetsOutput) SetXssMatchSets(v []waf.XssMatchSetSummary) *ListXssMatchSetsOutput {
+	s.XssMatchSets = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateByteMatchSetRequest
+type UpdateByteMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ByteMatchSetId of the ByteMatchSet that you want to update. ByteMatchSetId
+	// is returned by CreateByteMatchSet and by ListByteMatchSets.
+	//
+	// ByteMatchSetId is a required field
+	ByteMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// An array of ByteMatchSetUpdate objects that you want to insert into or delete
+	// from a ByteMatchSet. For more information, see the applicable data types:
+	//
+	//    * ByteMatchSetUpdate: Contains Action and ByteMatchTuple
+	//
+	//    * ByteMatchTuple: Contains FieldToMatch, PositionalConstraint, TargetString,
+	//    and TextTransformation
+	//
+	//    * FieldToMatch: Contains Data and Type
+	//
+	// Updates is a required field
+	Updates []waf.ByteMatchSetUpdate `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateByteMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateByteMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateByteMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateByteMatchSetInput"}
+
+	if s.ByteMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
+	}
+	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
+	}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetByteMatchSetId sets the ByteMatchSetId field's value.
+func (s *UpdateByteMatchSetInput) SetByteMatchSetId(v string) *UpdateByteMatchSetInput {
+	s.ByteMatchSetId = &v
+	return s
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateByteMatchSetInput) SetChangeToken(v string) *UpdateByteMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateByteMatchSetInput) SetUpdates(v []waf.ByteMatchSetUpdate) *UpdateByteMatchSetInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateByteMatchSetResponse
+type UpdateByteMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateByteMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateByteMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateByteMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateByteMatchSetOutput) SetChangeToken(v string) *UpdateByteMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSetRequest
+type UpdateIPSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The IPSetId of the IPSet that you want to update. IPSetId is returned by
+	// CreateIPSet and by ListIPSets.
+	//
+	// IPSetId is a required field
+	IPSetId *string `min:"1" type:"string" required:"true"`
+
+	// An array of IPSetUpdate objects that you want to insert into or delete from
+	// an IPSet. For more information, see the applicable data types:
+	//
+	//    * IPSetUpdate: Contains Action and IPSetDescriptor
+	//
+	//    * IPSetDescriptor: Contains Type and Value
+	//
+	// Updates is a required field
+	Updates []waf.IPSetUpdate `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateIPSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateIPSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateIPSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateIPSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.IPSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
+	}
+	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateIPSetInput) SetChangeToken(v string) *UpdateIPSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetIPSetId sets the IPSetId field's value.
+func (s *UpdateIPSetInput) SetIPSetId(v string) *UpdateIPSetInput {
+	s.IPSetId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateIPSetInput) SetUpdates(v []waf.IPSetUpdate) *UpdateIPSetInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSetResponse
+type UpdateIPSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateIPSet request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateIPSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateIPSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateIPSetOutput) SetChangeToken(v string) *UpdateIPSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRateBasedRuleRequest
+type UpdateRateBasedRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The maximum number of requests, which have an identical value in the field
+	// specified by the RateKey, allowed in a five-minute period. If the number
+	// of requests exceeds the RateLimit and the other predicates specified in the
+	// rule are also met, AWS WAF triggers the action that is specified for this
+	// rule.
+	//
+	// RateLimit is a required field
+	RateLimit *int64 `min:"2000" type:"long" required:"true"`
+
+	// The RuleId of the RateBasedRule that you want to update. RuleId is returned
+	// by CreateRateBasedRule and by ListRateBasedRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+
+	// An array of RuleUpdate objects that you want to insert into or delete from
+	// a RateBasedRule.
+	//
+	// Updates is a required field
+	Updates []waf.RuleUpdate `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRateBasedRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRateBasedRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRateBasedRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRateBasedRuleInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RateLimit == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
+	}
+	if s.RateLimit != nil && *s.RateLimit < 2000 {
+		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
+	}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRateBasedRuleInput) SetChangeToken(v string) *UpdateRateBasedRuleInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRateLimit sets the RateLimit field's value.
+func (s *UpdateRateBasedRuleInput) SetRateLimit(v int64) *UpdateRateBasedRuleInput {
+	s.RateLimit = &v
+	return s
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *UpdateRateBasedRuleInput) SetRuleId(v string) *UpdateRateBasedRuleInput {
+	s.RuleId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateRateBasedRuleInput) SetUpdates(v []waf.RuleUpdate) *UpdateRateBasedRuleInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRateBasedRuleResponse
+type UpdateRateBasedRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateRateBasedRule request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateRateBasedRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRateBasedRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRateBasedRuleOutput) SetChangeToken(v string) *UpdateRateBasedRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRuleRequest
+type UpdateRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RuleId of the Rule that you want to update. RuleId is returned by CreateRule
+	// and by ListRules.
+	//
+	// RuleId is a required field
+	RuleId *string `min:"1" type:"string" required:"true"`
+
+	// An array of RuleUpdate objects that you want to insert into or delete from
+	// a Rule. For more information, see the applicable data types:
+	//
+	//    * RuleUpdate: Contains Action and Predicate
+	//
+	//    * Predicate: Contains DataId, Negated, and Type
+	//
+	//    * FieldToMatch: Contains Data and Type
+	//
+	// Updates is a required field
+	Updates []waf.RuleUpdate `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuleInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RuleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
+	}
+	if s.RuleId != nil && len(*s.RuleId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRuleInput) SetChangeToken(v string) *UpdateRuleInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRuleId sets the RuleId field's value.
+func (s *UpdateRuleInput) SetRuleId(v string) *UpdateRuleInput {
+	s.RuleId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateRuleInput) SetUpdates(v []waf.RuleUpdate) *UpdateRuleInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRuleResponse
+type UpdateRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateRule request. You can also
+	// use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRuleOutput) SetChangeToken(v string) *UpdateRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSizeConstraintSetRequest
+type UpdateSizeConstraintSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The SizeConstraintSetId of the SizeConstraintSet that you want to update.
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by ListSizeConstraintSets.
+	//
+	// SizeConstraintSetId is a required field
+	SizeConstraintSetId *string `min:"1" type:"string" required:"true"`
+
+	// An array of SizeConstraintSetUpdate objects that you want to insert into
+	// or delete from a SizeConstraintSet. For more information, see the applicable
+	// data types:
+	//
+	//    * SizeConstraintSetUpdate: Contains Action and SizeConstraint
+	//
+	//    * SizeConstraint: Contains FieldToMatch, TextTransformation, ComparisonOperator,
+	//    and Size
+	//
+	//    * FieldToMatch: Contains Data and Type
+	//
+	// Updates is a required field
+	Updates []waf.SizeConstraintSetUpdate `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateSizeConstraintSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSizeConstraintSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateSizeConstraintSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSizeConstraintSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.SizeConstraintSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
+	}
+	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateSizeConstraintSetInput) SetChangeToken(v string) *UpdateSizeConstraintSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
+func (s *UpdateSizeConstraintSetInput) SetSizeConstraintSetId(v string) *UpdateSizeConstraintSetInput {
+	s.SizeConstraintSetId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateSizeConstraintSetInput) SetUpdates(v []waf.SizeConstraintSetUpdate) *UpdateSizeConstraintSetInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSizeConstraintSetResponse
+type UpdateSizeConstraintSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateSizeConstraintSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateSizeConstraintSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSizeConstraintSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateSizeConstraintSetOutput) SetChangeToken(v string) *UpdateSizeConstraintSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// A request to update a SqlInjectionMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSqlInjectionMatchSetRequest
+type UpdateSqlInjectionMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to update.
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
+	//
+	// SqlInjectionMatchSetId is a required field
+	SqlInjectionMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// An array of SqlInjectionMatchSetUpdate objects that you want to insert into
+	// or delete from a SqlInjectionMatchSet. For more information, see the applicable
+	// data types:
+	//
+	//    * SqlInjectionMatchSetUpdate: Contains Action and SqlInjectionMatchTuple
+	//
+	//    * SqlInjectionMatchTuple: Contains FieldToMatch and TextTransformation
+	//
+	//    * FieldToMatch: Contains Data and Type
+	//
+	// Updates is a required field
+	Updates []waf.SqlInjectionMatchSetUpdate `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateSqlInjectionMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSqlInjectionMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSqlInjectionMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.SqlInjectionMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
+	}
+	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateSqlInjectionMatchSetInput) SetChangeToken(v string) *UpdateSqlInjectionMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
+func (s *UpdateSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *UpdateSqlInjectionMatchSetInput {
+	s.SqlInjectionMatchSetId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateSqlInjectionMatchSetInput) SetUpdates(v []waf.SqlInjectionMatchSetUpdate) *UpdateSqlInjectionMatchSetInput {
+	s.Updates = v
+	return s
+}
+
+// The response to an UpdateSqlInjectionMatchSets request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSqlInjectionMatchSetResponse
+type UpdateSqlInjectionMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateSqlInjectionMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateSqlInjectionMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSqlInjectionMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateSqlInjectionMatchSetOutput) SetChangeToken(v string) *UpdateSqlInjectionMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACLRequest
+type UpdateWebACLInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A default action for the web ACL, either ALLOW or BLOCK. AWS WAF performs
+	// the default action if a request doesn't match the criteria in any of the
+	// rules in a web ACL.
+	DefaultAction *waf.WafAction `type:"structure"`
+
+	// An array of updates to make to the WebACL.
+	//
+	// An array of WebACLUpdate objects that you want to insert into or delete from
+	// a WebACL. For more information, see the applicable data types:
+	//
+	//    * WebACLUpdate: Contains Action and ActivatedRule
+	//
+	//    * ActivatedRule: Contains Action, Priority, RuleId, and Type
+	//
+	//    * WafAction: Contains Type
+	Updates []waf.WebACLUpdate `type:"list"`
+
+	// The WebACLId of the WebACL that you want to update. WebACLId is returned
+	// by CreateWebACL and by ListWebACLs.
+	//
+	// WebACLId is a required field
+	WebACLId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateWebACLInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateWebACLInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateWebACLInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateWebACLInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.WebACLId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
+	}
+	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
+	}
+	if s.DefaultAction != nil {
+		if err := s.DefaultAction.Validate(); err != nil {
+			invalidParams.AddNested("DefaultAction", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateWebACLInput) SetChangeToken(v string) *UpdateWebACLInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetDefaultAction sets the DefaultAction field's value.
+func (s *UpdateWebACLInput) SetDefaultAction(v *waf.WafAction) *UpdateWebACLInput {
+	s.DefaultAction = v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateWebACLInput) SetUpdates(v []waf.WebACLUpdate) *UpdateWebACLInput {
+	s.Updates = v
+	return s
+}
+
+// SetWebACLId sets the WebACLId field's value.
+func (s *UpdateWebACLInput) SetWebACLId(v string) *UpdateWebACLInput {
+	s.WebACLId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACLResponse
+type UpdateWebACLOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateWebACL request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateWebACLOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateWebACLOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateWebACLOutput) SetChangeToken(v string) *UpdateWebACLOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// A request to update an XssMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateXssMatchSetRequest
+type UpdateXssMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// An array of XssMatchSetUpdate objects that you want to insert into or delete
+	// from a XssMatchSet. For more information, see the applicable data types:
+	//
+	//    * XssMatchSetUpdate: Contains Action and XssMatchTuple
+	//
+	//    * XssMatchTuple: Contains FieldToMatch and TextTransformation
+	//
+	//    * FieldToMatch: Contains Data and Type
+	//
+	// Updates is a required field
+	Updates []waf.XssMatchSetUpdate `type:"list" required:"true"`
+
+	// The XssMatchSetId of the XssMatchSet that you want to update. XssMatchSetId
+	// is returned by CreateXssMatchSet and by ListXssMatchSets.
+	//
+	// XssMatchSetId is a required field
+	XssMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateXssMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateXssMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateXssMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateXssMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+
+	if s.XssMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
+	}
+	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateXssMatchSetInput) SetChangeToken(v string) *UpdateXssMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateXssMatchSetInput) SetUpdates(v []waf.XssMatchSetUpdate) *UpdateXssMatchSetInput {
+	s.Updates = v
+	return s
+}
+
+// SetXssMatchSetId sets the XssMatchSetId field's value.
+func (s *UpdateXssMatchSetInput) SetXssMatchSetId(v string) *UpdateXssMatchSetInput {
+	s.XssMatchSetId = &v
+	return s
+}
+
+// The response to an UpdateXssMatchSets request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateXssMatchSetResponse
+type UpdateXssMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateXssMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateXssMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateXssMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateXssMatchSetOutput) SetChangeToken(v string) *UpdateXssMatchSetOutput {
+	s.ChangeToken = &v
 	return s
 }
 
