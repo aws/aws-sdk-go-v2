@@ -22,7 +22,7 @@
 // See aws.Config documentation for more information on configuring SDK clients.
 // https://docs.aws.amazon.com/sdk-for-go/api/aws/#Config
 //
-// See the AWS Cost and Usage Report Service client CostandUsageReportService for more
+// See the AWS Cost and Usage Report Service client CostAndUsageReportService for more
 // information on creating client for this service.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/costandusagereportservice/#New
 package costandusagereportservice
