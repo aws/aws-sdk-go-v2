@@ -8,21 +8,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// CostandUsageReportService provides the API operation methods for making requests to
+// CostAndUsageReportService provides the API operation methods for making requests to
 // AWS Cost and Usage Report Service. See this package's package overview docs
 // for details on the service.
 //
-// CostandUsageReportService methods are safe to use concurrently. It is not safe to
+// CostAndUsageReportService methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
-type CostandUsageReportService struct {
+type CostAndUsageReportService struct {
 	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*CostandUsageReportService)
+var initClient func(*CostAndUsageReportService)
 
 // Used for custom request initialization logic
-var initRequest func(*CostandUsageReportService, *aws.Request)
+var initRequest func(*CostAndUsageReportService, *aws.Request)
 
 // Service information constants
 const (
@@ -30,22 +30,22 @@ const (
 	EndpointsID = ServiceName // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the CostandUsageReportService client with a config.
+// New creates a new instance of the CostAndUsageReportService client with a config.
 // If additional configuration is needed for the client instance use the
 // optional aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a CostandUsageReportService client from just a config.
+//     // Create a CostAndUsageReportService client from just a config.
 //     svc := costandusagereportservice.New(myConfig)
 //
-//     // Create a CostandUsageReportService client with additional configuration
+//     // Create a CostAndUsageReportService client with additional configuration
 //     svc := costandusagereportservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(config aws.Config) *CostandUsageReportService {
+func New(config aws.Config) *CostAndUsageReportService {
 	var signingName string
 	signingName = "cur"
 	signingRegion := config.Region
 
-	svc := &CostandUsageReportService{
+	svc := &CostAndUsageReportService{
 		Client: aws.NewClient(
 			config,
 			aws.Metadata{
@@ -74,9 +74,9 @@ func New(config aws.Config) *CostandUsageReportService {
 	return svc
 }
 
-// newRequest creates a new request for a CostandUsageReportService operation and runs any
+// newRequest creates a new request for a CostAndUsageReportService operation and runs any
 // custom request initialization.
-func (c *CostandUsageReportService) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+func (c *CostAndUsageReportService) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

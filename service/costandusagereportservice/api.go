@@ -38,7 +38,7 @@ func (r DeleteReportDefinitionRequest) Send() (*DeleteReportDefinitionOutput, er
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinition
-func (c *CostandUsageReportService) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) DeleteReportDefinitionRequest {
+func (c *CostAndUsageReportService) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) DeleteReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReportDefinition,
 		HTTPMethod: "POST",
@@ -84,7 +84,7 @@ func (r DescribeReportDefinitionsRequest) Send() (*DescribeReportDefinitionsOutp
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions
-func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest {
+func (c *CostAndUsageReportService) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReportDefinitions,
 		HTTPMethod: "POST",
@@ -122,7 +122,7 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 //            return pageNum <= 3
 //        })
 //
-func (c *CostandUsageReportService) DescribeReportDefinitionsPages(input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool) error {
+func (c *CostAndUsageReportService) DescribeReportDefinitionsPages(input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool) error {
 	return c.DescribeReportDefinitionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
 
@@ -133,7 +133,7 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsPages(input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CostandUsageReportService) DescribeReportDefinitionsPagesWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool, opts ...aws.Option) error {
+func (c *CostAndUsageReportService) DescribeReportDefinitionsPagesWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool, opts ...aws.Option) error {
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReportDefinitionsInput
@@ -186,7 +186,7 @@ func (r PutReportDefinitionRequest) Send() (*PutReportDefinitionOutput, error) {
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition
-func (c *CostandUsageReportService) PutReportDefinitionRequest(input *PutReportDefinitionInput) PutReportDefinitionRequest {
+func (c *CostAndUsageReportService) PutReportDefinitionRequest(input *PutReportDefinitionInput) PutReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opPutReportDefinition,
 		HTTPMethod: "POST",
