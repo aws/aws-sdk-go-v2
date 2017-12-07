@@ -56,9 +56,12 @@ func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRoleT
 		input = &AddRoleToDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &AddRoleToDBClusterOutput{})
+	output := &AddRoleToDBClusterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddRoleToDBClusterRequest{Request: req, Input: input}
 }
 
@@ -104,7 +107,10 @@ func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifie
 		input = &AddSourceIdentifierToSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddSourceIdentifierToSubscriptionOutput{})
+	output := &AddSourceIdentifierToSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddSourceIdentifierToSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -155,9 +161,12 @@ func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToR
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	output := &AddTagsToResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -204,7 +213,10 @@ func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanc
 		input = &ApplyPendingMaintenanceActionInput{}
 	}
 
-	req := c.newRequest(op, input, &ApplyPendingMaintenanceActionOutput{})
+	output := &ApplyPendingMaintenanceActionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ApplyPendingMaintenanceActionRequest{Request: req, Input: input}
 }
 
@@ -262,7 +274,10 @@ func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityG
 		input = &AuthorizeDBSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeDBSecurityGroupIngressOutput{})
+	output := &AuthorizeDBSecurityGroupIngressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
@@ -308,7 +323,10 @@ func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGr
 		input = &CopyDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyDBClusterParameterGroupOutput{})
+	output := &CopyDBClusterParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -416,7 +434,10 @@ func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) Co
 		input = &CopyDBClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyDBClusterSnapshotOutput{})
+	output := &CopyDBClusterSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyDBClusterSnapshotRequest{Request: req, Input: input}
 }
 
@@ -462,7 +483,10 @@ func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) Copy
 		input = &CopyDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyDBParameterGroupOutput{})
+	output := &CopyDBParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyDBParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -518,7 +542,10 @@ func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) CopyDBSnapshotRe
 		input = &CopyDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyDBSnapshotOutput{})
+	output := &CopyDBSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyDBSnapshotRequest{Request: req, Input: input}
 }
 
@@ -564,7 +591,10 @@ func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) CopyOptionGrou
 		input = &CopyOptionGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyOptionGroupOutput{})
+	output := &CopyOptionGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyOptionGroupRequest{Request: req, Input: input}
 }
 
@@ -618,7 +648,10 @@ func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) CreateDBCluste
 		input = &CreateDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBClusterOutput{})
+	output := &CreateDBClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBClusterRequest{Request: req, Input: input}
 }
 
@@ -691,7 +724,10 @@ func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParamet
 		input = &CreateDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBClusterParameterGroupOutput{})
+	output := &CreateDBClusterParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -739,7 +775,10 @@ func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput
 		input = &CreateDBClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBClusterSnapshotOutput{})
+	output := &CreateDBClusterSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBClusterSnapshotRequest{Request: req, Input: input}
 }
 
@@ -785,7 +824,10 @@ func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBInst
 		input = &CreateDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBInstanceOutput{})
+	output := &CreateDBInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBInstanceRequest{Request: req, Input: input}
 }
 
@@ -846,7 +888,10 @@ func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadRepl
 		input = &CreateDBInstanceReadReplicaInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBInstanceReadReplicaOutput{})
+	output := &CreateDBInstanceReadReplicaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBInstanceReadReplicaRequest{Request: req, Input: input}
 }
 
@@ -912,7 +957,10 @@ func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) 
 		input = &CreateDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBParameterGroupOutput{})
+	output := &CreateDBParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -959,7 +1007,10 @@ func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) Cr
 		input = &CreateDBSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBSecurityGroupOutput{})
+	output := &CreateDBSecurityGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBSecurityGroupRequest{Request: req, Input: input}
 }
 
@@ -1005,7 +1056,10 @@ func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) CreateDBSnap
 		input = &CreateDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBSnapshotOutput{})
+	output := &CreateDBSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBSnapshotRequest{Request: req, Input: input}
 }
 
@@ -1052,7 +1106,10 @@ func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) Create
 		input = &CreateDBSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBSubnetGroupOutput{})
+	output := &CreateDBSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDBSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -1115,7 +1172,10 @@ func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput
 		input = &CreateEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEventSubscriptionOutput{})
+	output := &CreateEventSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEventSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -1161,7 +1221,10 @@ func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateOpti
 		input = &CreateOptionGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOptionGroupOutput{})
+	output := &CreateOptionGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateOptionGroupRequest{Request: req, Input: input}
 }
 
@@ -1212,7 +1275,10 @@ func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBCluste
 		input = &DeleteDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterOutput{})
+	output := &DeleteDBClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBClusterRequest{Request: req, Input: input}
 }
 
@@ -1262,9 +1328,12 @@ func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParamet
 		input = &DeleteDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterParameterGroupOutput{})
+	output := &DeleteDBClusterParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -1316,7 +1385,10 @@ func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput
 		input = &DeleteDBClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterSnapshotOutput{})
+	output := &DeleteDBClusterSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBClusterSnapshotRequest{Request: req, Input: input}
 }
 
@@ -1386,7 +1458,10 @@ func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBInst
 		input = &DeleteDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBInstanceOutput{})
+	output := &DeleteDBInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBInstanceRequest{Request: req, Input: input}
 }
 
@@ -1433,9 +1508,12 @@ func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) 
 		input = &DeleteDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBParameterGroupOutput{})
+	output := &DeleteDBParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -1483,9 +1561,12 @@ func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) De
 		input = &DeleteDBSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBSecurityGroupOutput{})
+	output := &DeleteDBSecurityGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBSecurityGroupRequest{Request: req, Input: input}
 }
 
@@ -1534,7 +1615,10 @@ func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBSnap
 		input = &DeleteDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBSnapshotOutput{})
+	output := &DeleteDBSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBSnapshotRequest{Request: req, Input: input}
 }
 
@@ -1582,9 +1666,12 @@ func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) Delete
 		input = &DeleteDBSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBSubnetGroupOutput{})
+	output := &DeleteDBSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDBSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -1630,7 +1717,10 @@ func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput
 		input = &DeleteEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
+	output := &DeleteEventSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEventSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -1676,9 +1766,12 @@ func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteOpti
 		input = &DeleteOptionGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOptionGroupOutput{})
+	output := &DeleteOptionGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteOptionGroupRequest{Request: req, Input: input}
 }
 
@@ -1729,7 +1822,10 @@ func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesI
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	output := &DescribeAccountAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
@@ -1775,7 +1871,10 @@ func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) Desc
 		input = &DescribeCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificatesOutput{})
+	output := &DescribeCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCertificatesRequest{Request: req, Input: input}
 }
 
@@ -1826,7 +1925,10 @@ func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterPa
 		input = &DescribeDBClusterParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClusterParameterGroupsOutput{})
+	output := &DescribeDBClusterParameterGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBClusterParameterGroupsRequest{Request: req, Input: input}
 }
 
@@ -1876,7 +1978,10 @@ func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParamet
 		input = &DescribeDBClusterParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClusterParametersOutput{})
+	output := &DescribeDBClusterParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBClusterParametersRequest{Request: req, Input: input}
 }
 
@@ -1933,7 +2038,10 @@ func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBCluste
 		input = &DescribeDBClusterSnapshotAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClusterSnapshotAttributesOutput{})
+	output := &DescribeDBClusterSnapshotAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBClusterSnapshotAttributesRequest{Request: req, Input: input}
 }
 
@@ -1983,7 +2091,10 @@ func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshot
 		input = &DescribeDBClusterSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClusterSnapshotsOutput{})
+	output := &DescribeDBClusterSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBClusterSnapshotsRequest{Request: req, Input: input}
 }
 
@@ -2033,7 +2144,10 @@ func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) Describe
 		input = &DescribeDBClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClustersOutput{})
+	output := &DescribeDBClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBClustersRequest{Request: req, Input: input}
 }
 
@@ -2085,7 +2199,10 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 		input = &DescribeDBEngineVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBEngineVersionsOutput{})
+	output := &DescribeDBEngineVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBEngineVersionsRequest{Request: req, Input: input}
 }
 
@@ -2187,7 +2304,10 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Descri
 		input = &DescribeDBInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBInstancesOutput{})
+	output := &DescribeDBInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBInstancesRequest{Request: req, Input: input}
 }
 
@@ -2289,7 +2409,10 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) Describe
 		input = &DescribeDBLogFilesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBLogFilesOutput{})
+	output := &DescribeDBLogFilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBLogFilesRequest{Request: req, Input: input}
 }
 
@@ -2393,7 +2516,10 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 		input = &DescribeDBParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBParameterGroupsOutput{})
+	output := &DescribeDBParameterGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBParameterGroupsRequest{Request: req, Input: input}
 }
 
@@ -2495,7 +2621,10 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) Desc
 		input = &DescribeDBParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBParametersOutput{})
+	output := &DescribeDBParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBParametersRequest{Request: req, Input: input}
 }
 
@@ -2599,7 +2728,10 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 		input = &DescribeDBSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSecurityGroupsOutput{})
+	output := &DescribeDBSecurityGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBSecurityGroupsRequest{Request: req, Input: input}
 }
 
@@ -2706,7 +2838,10 @@ func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttri
 		input = &DescribeDBSnapshotAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSnapshotAttributesOutput{})
+	output := &DescribeDBSnapshotAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBSnapshotAttributesRequest{Request: req, Input: input}
 }
 
@@ -2758,7 +2893,10 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) Descri
 		input = &DescribeDBSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSnapshotsOutput{})
+	output := &DescribeDBSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBSnapshotsRequest{Request: req, Input: input}
 }
 
@@ -2863,7 +3001,10 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 		input = &DescribeDBSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSubnetGroupsOutput{})
+	output := &DescribeDBSubnetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDBSubnetGroupsRequest{Request: req, Input: input}
 }
 
@@ -2963,7 +3104,10 @@ func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngin
 		input = &DescribeEngineDefaultClusterParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEngineDefaultClusterParametersOutput{})
+	output := &DescribeEngineDefaultClusterParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEngineDefaultClusterParametersRequest{Request: req, Input: input}
 }
 
@@ -3016,7 +3160,10 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 		input = &DescribeEngineDefaultParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEngineDefaultParametersOutput{})
+	output := &DescribeEngineDefaultParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEngineDefaultParametersRequest{Request: req, Input: input}
 }
 
@@ -3115,7 +3262,10 @@ func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput
 		input = &DescribeEventCategoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	output := &DescribeEventCategoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventCategoriesRequest{Request: req, Input: input}
 }
 
@@ -3171,7 +3321,10 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 		input = &DescribeEventSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+	output := &DescribeEventSubscriptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
 }
 
@@ -3277,7 +3430,10 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -3379,7 +3535,10 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 		input = &DescribeOptionGroupOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOptionGroupOptionsOutput{})
+	output := &DescribeOptionGroupOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeOptionGroupOptionsRequest{Request: req, Input: input}
 }
 
@@ -3481,7 +3640,10 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) Desc
 		input = &DescribeOptionGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOptionGroupsOutput{})
+	output := &DescribeOptionGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeOptionGroupsRequest{Request: req, Input: input}
 }
 
@@ -3583,7 +3745,10 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 		input = &DescribeOrderableDBInstanceOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrderableDBInstanceOptionsOutput{})
+	output := &DescribeOrderableDBInstanceOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeOrderableDBInstanceOptionsRequest{Request: req, Input: input}
 }
 
@@ -3680,7 +3845,10 @@ func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMai
 		input = &DescribePendingMaintenanceActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePendingMaintenanceActionsOutput{})
+	output := &DescribePendingMaintenanceActionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePendingMaintenanceActionsRequest{Request: req, Input: input}
 }
 
@@ -3733,7 +3901,10 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 		input = &DescribeReservedDBInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedDBInstancesOutput{})
+	output := &DescribeReservedDBInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedDBInstancesRequest{Request: req, Input: input}
 }
 
@@ -3835,7 +4006,10 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 		input = &DescribeReservedDBInstancesOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedDBInstancesOfferingsOutput{})
+	output := &DescribeReservedDBInstancesOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedDBInstancesOfferingsRequest{Request: req, Input: input}
 }
 
@@ -3933,7 +4107,10 @@ func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) De
 		input = &DescribeSourceRegionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSourceRegionsOutput{})
+	output := &DescribeSourceRegionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSourceRegionsRequest{Request: req, Input: input}
 }
 
@@ -3985,7 +4162,10 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 		input = &DownloadDBLogFilePortionInput{}
 	}
 
-	req := c.newRequest(op, input, &DownloadDBLogFilePortionOutput{})
+	output := &DownloadDBLogFilePortionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DownloadDBLogFilePortionRequest{Request: req, Input: input}
 }
 
@@ -4094,7 +4274,10 @@ func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) FailoverDB
 		input = &FailoverDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &FailoverDBClusterOutput{})
+	output := &FailoverDBClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return FailoverDBClusterRequest{Request: req, Input: input}
 }
 
@@ -4143,7 +4326,10 @@ func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTa
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -4193,7 +4379,10 @@ func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) ModifyDBCluste
 		input = &ModifyDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBClusterOutput{})
+	output := &ModifyDBClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBClusterRequest{Request: req, Input: input}
 }
 
@@ -4259,7 +4448,10 @@ func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParamet
 		input = &ModifyDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDBClusterParameterGroupOutput{})
+	output := &ResetDBClusterParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -4321,7 +4513,10 @@ func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnap
 		input = &ModifyDBClusterSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBClusterSnapshotAttributeOutput{})
+	output := &ModifyDBClusterSnapshotAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBClusterSnapshotAttributeRequest{Request: req, Input: input}
 }
 
@@ -4369,7 +4564,10 @@ func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) ModifyDBInst
 		input = &ModifyDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBInstanceOutput{})
+	output := &ModifyDBInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBInstanceRequest{Request: req, Input: input}
 }
 
@@ -4432,7 +4630,10 @@ func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) 
 		input = &ModifyDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDBParameterGroupOutput{})
+	output := &ResetDBParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -4481,7 +4682,10 @@ func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBSnap
 		input = &ModifyDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBSnapshotOutput{})
+	output := &ModifyDBSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBSnapshotRequest{Request: req, Input: input}
 }
 
@@ -4543,7 +4747,10 @@ func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeI
 		input = &ModifyDBSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBSnapshotAttributeOutput{})
+	output := &ModifyDBSnapshotAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBSnapshotAttributeRequest{Request: req, Input: input}
 }
 
@@ -4590,7 +4797,10 @@ func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) Modify
 		input = &ModifyDBSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBSubnetGroupOutput{})
+	output := &ModifyDBSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyDBSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -4644,7 +4854,10 @@ func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput
 		input = &ModifyEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+	output := &ModifyEventSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyEventSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -4690,7 +4903,10 @@ func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) ModifyOpti
 		input = &ModifyOptionGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyOptionGroupOutput{})
+	output := &ModifyOptionGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyOptionGroupRequest{Request: req, Input: input}
 }
 
@@ -4741,7 +4957,10 @@ func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) PromoteR
 		input = &PromoteReadReplicaInput{}
 	}
 
-	req := c.newRequest(op, input, &PromoteReadReplicaOutput{})
+	output := &PromoteReadReplicaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PromoteReadReplicaRequest{Request: req, Input: input}
 }
 
@@ -4787,7 +5006,10 @@ func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClus
 		input = &PromoteReadReplicaDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &PromoteReadReplicaDBClusterOutput{})
+	output := &PromoteReadReplicaDBClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PromoteReadReplicaDBClusterRequest{Request: req, Input: input}
 }
 
@@ -4833,7 +5055,10 @@ func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReserved
 		input = &PurchaseReservedDBInstancesOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedDBInstancesOfferingOutput{})
+	output := &PurchaseReservedDBInstancesOfferingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseReservedDBInstancesOfferingRequest{Request: req, Input: input}
 }
 
@@ -4895,7 +5120,10 @@ func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBInst
 		input = &RebootDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootDBInstanceOutput{})
+	output := &RebootDBInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootDBInstanceRequest{Request: req, Input: input}
 }
 
@@ -4943,9 +5171,12 @@ func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput
 		input = &RemoveRoleFromDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveRoleFromDBClusterOutput{})
+	output := &RemoveRoleFromDBClusterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveRoleFromDBClusterRequest{Request: req, Input: input}
 }
 
@@ -4991,7 +5222,10 @@ func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceI
 		input = &RemoveSourceIdentifierFromSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveSourceIdentifierFromSubscriptionOutput{})
+	output := &RemoveSourceIdentifierFromSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveSourceIdentifierFromSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -5040,9 +5274,12 @@ func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) 
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -5100,7 +5337,10 @@ func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameter
 		input = &ResetDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDBClusterParameterGroupOutput{})
+	output := &ResetDBClusterParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -5152,7 +5392,10 @@ func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) Re
 		input = &ResetDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDBParameterGroupOutput{})
+	output := &ResetDBParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetDBParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -5201,7 +5444,10 @@ func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) 
 		input = &RestoreDBClusterFromS3Input{}
 	}
 
-	req := c.newRequest(op, input, &RestoreDBClusterFromS3Output{})
+	output := &RestoreDBClusterFromS3Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreDBClusterFromS3Request{Request: req, Input: input}
 }
 
@@ -5258,7 +5504,10 @@ func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSna
 		input = &RestoreDBClusterFromSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreDBClusterFromSnapshotOutput{})
+	output := &RestoreDBClusterFromSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreDBClusterFromSnapshotRequest{Request: req, Input: input}
 }
 
@@ -5318,7 +5567,10 @@ func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPoin
 		input = &RestoreDBClusterToPointInTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreDBClusterToPointInTimeOutput{})
+	output := &RestoreDBClusterToPointInTimeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreDBClusterToPointInTimeRequest{Request: req, Input: input}
 }
 
@@ -5382,7 +5634,10 @@ func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFro
 		input = &RestoreDBInstanceFromDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreDBInstanceFromDBSnapshotOutput{})
+	output := &RestoreDBInstanceFromDBSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreDBInstanceFromDBSnapshotRequest{Request: req, Input: input}
 }
 
@@ -5439,7 +5694,10 @@ func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPo
 		input = &RestoreDBInstanceToPointInTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreDBInstanceToPointInTimeOutput{})
+	output := &RestoreDBInstanceToPointInTimeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreDBInstanceToPointInTimeRequest{Request: req, Input: input}
 }
 
@@ -5488,7 +5746,10 @@ func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIn
 		input = &RevokeDBSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeDBSecurityGroupIngressOutput{})
+	output := &RevokeDBSecurityGroupIngressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RevokeDBSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
@@ -5536,7 +5797,10 @@ func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInstanc
 		input = &StartDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDBInstanceOutput{})
+	output := &StartDBInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartDBInstanceRequest{Request: req, Input: input}
 }
 
@@ -5586,7 +5850,10 @@ func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanceRe
 		input = &StopDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDBInstanceOutput{})
+	output := &StopDBInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopDBInstanceRequest{Request: req, Input: input}
 }
 
@@ -5693,6 +5960,8 @@ func (s *AddRoleToDBClusterInput) SetRoleArn(v string) *AddRoleToDBClusterInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBClusterOutput
 type AddRoleToDBClusterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5703,6 +5972,11 @@ func (s AddRoleToDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s AddRoleToDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddRoleToDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscriptionMessage
@@ -5781,6 +6055,8 @@ func (s *AddSourceIdentifierToSubscriptionInput) SetSubscriptionName(v string) *
 type AddSourceIdentifierToSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions
 	// action.
 	EventSubscription *EventSubscription `type:"structure"`
@@ -5794,6 +6070,11 @@ func (s AddSourceIdentifierToSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s AddSourceIdentifierToSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddSourceIdentifierToSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -5862,6 +6143,8 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResourceOutput
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5872,6 +6155,11 @@ func (s AddTagsToResourceOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceActionMessage
@@ -5962,6 +6250,8 @@ func (s *ApplyPendingMaintenanceActionInput) SetResourceIdentifier(v string) *Ap
 type ApplyPendingMaintenanceActionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Describes the pending maintenance actions for a resource.
 	ResourcePendingMaintenanceActions *ResourcePendingMaintenanceActions `type:"structure"`
 }
@@ -5974,6 +6264,11 @@ func (s ApplyPendingMaintenanceActionOutput) String() string {
 // GoString returns the string representation
 func (s ApplyPendingMaintenanceActionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ApplyPendingMaintenanceActionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourcePendingMaintenanceActions sets the ResourcePendingMaintenanceActions field's value.
@@ -6070,6 +6365,8 @@ func (s *AuthorizeDBSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v stri
 type AuthorizeDBSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * DescribeDBSecurityGroups
@@ -6093,6 +6390,11 @@ func (s AuthorizeDBSecurityGroupIngressOutput) String() string {
 // GoString returns the string representation
 func (s AuthorizeDBSecurityGroupIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AuthorizeDBSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSecurityGroup sets the DBSecurityGroup field's value.
@@ -6342,6 +6644,8 @@ func (s *CopyDBClusterParameterGroupInput) SetTargetDBClusterParameterGroupIdent
 type CopyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the CreateDBClusterParameterGroup
 	// or CopyDBClusterParameterGroup action.
 	//
@@ -6359,6 +6663,11 @@ func (s CopyDBClusterParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s CopyDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterParameterGroup sets the DBClusterParameterGroup field's value.
@@ -6565,6 +6874,8 @@ func (s *CopyDBClusterSnapshotInput) SetTargetDBClusterSnapshotIdentifier(v stri
 type CopyDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBClusterSnapshot
@@ -6584,6 +6895,11 @@ func (s CopyDBClusterSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CopyDBClusterSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyDBClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterSnapshot sets the DBClusterSnapshot field's value.
@@ -6696,6 +7012,8 @@ func (s *CopyDBParameterGroupInput) SetTargetDBParameterGroupIdentifier(v string
 type CopyDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the CreateDBParameterGroup
 	// action.
 	//
@@ -6712,6 +7030,11 @@ func (s CopyDBParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s CopyDBParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBParameterGroup sets the DBParameterGroup field's value.
@@ -6940,6 +7263,8 @@ func (s *CopyDBSnapshotInput) SetTargetDBSnapshotIdentifier(v string) *CopyDBSna
 type CopyDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBSnapshot
@@ -6958,6 +7283,11 @@ func (s CopyDBSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CopyDBSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyDBSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshot sets the DBSnapshot field's value.
@@ -7073,6 +7403,8 @@ func (s *CopyOptionGroupInput) SetTargetOptionGroupIdentifier(v string) *CopyOpt
 type CopyOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	OptionGroup *OptionGroup `type:"structure"`
 }
 
@@ -7084,6 +7416,11 @@ func (s CopyOptionGroupOutput) String() string {
 // GoString returns the string representation
 func (s CopyOptionGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyOptionGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOptionGroup sets the OptionGroup field's value.
@@ -7491,6 +7828,8 @@ func (s *CreateDBClusterInput) SetVpcSecurityGroupIds(v []string) *CreateDBClust
 type CreateDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -7517,6 +7856,11 @@ func (s CreateDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -7621,6 +7965,8 @@ func (s *CreateDBClusterParameterGroupInput) SetTags(v []Tag) *CreateDBClusterPa
 type CreateDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the CreateDBClusterParameterGroup
 	// or CopyDBClusterParameterGroup action.
 	//
@@ -7638,6 +7984,11 @@ func (s CreateDBClusterParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterParameterGroup sets the DBClusterParameterGroup field's value.
@@ -7736,6 +8087,8 @@ func (s *CreateDBClusterSnapshotInput) SetTags(v []Tag) *CreateDBClusterSnapshot
 type CreateDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBClusterSnapshot
@@ -7755,6 +8108,11 @@ func (s CreateDBClusterSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBClusterSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterSnapshot sets the DBClusterSnapshot field's value.
@@ -8813,6 +9171,8 @@ func (s *CreateDBInstanceInput) SetVpcSecurityGroupIds(v []string) *CreateDBInst
 type CreateDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -8837,6 +9197,11 @@ func (s CreateDBInstanceOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -9256,6 +9621,8 @@ func (s *CreateDBInstanceReadReplicaInput) SetTags(v []Tag) *CreateDBInstanceRea
 type CreateDBInstanceReadReplicaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -9280,6 +9647,11 @@ func (s CreateDBInstanceReadReplicaOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBInstanceReadReplicaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBInstanceReadReplicaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -9384,6 +9756,8 @@ func (s *CreateDBParameterGroupInput) SetTags(v []Tag) *CreateDBParameterGroupIn
 type CreateDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the CreateDBParameterGroup
 	// action.
 	//
@@ -9400,6 +9774,11 @@ func (s CreateDBParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBParameterGroup sets the DBParameterGroup field's value.
@@ -9488,6 +9867,8 @@ func (s *CreateDBSecurityGroupInput) SetTags(v []Tag) *CreateDBSecurityGroupInpu
 type CreateDBSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * DescribeDBSecurityGroups
@@ -9511,6 +9892,11 @@ func (s CreateDBSecurityGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBSecurityGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBSecurityGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSecurityGroup sets the DBSecurityGroup field's value.
@@ -9607,6 +9993,8 @@ func (s *CreateDBSnapshotInput) SetTags(v []Tag) *CreateDBSnapshotInput {
 type CreateDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBSnapshot
@@ -9625,6 +10013,11 @@ func (s CreateDBSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshot sets the DBSnapshot field's value.
@@ -9721,6 +10114,8 @@ func (s *CreateDBSubnetGroupInput) SetTags(v []Tag) *CreateDBSubnetGroupInput {
 type CreateDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBSubnetGroup
@@ -9744,6 +10139,11 @@ func (s CreateDBSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateDBSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDBSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSubnetGroup sets the DBSubnetGroup field's value.
@@ -9890,6 +10290,8 @@ func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscription
 type CreateEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions
 	// action.
 	EventSubscription *EventSubscription `type:"structure"`
@@ -9903,6 +10305,11 @@ func (s CreateEventSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s CreateEventSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -10021,6 +10428,8 @@ func (s *CreateOptionGroupInput) SetTags(v []Tag) *CreateOptionGroupInput {
 type CreateOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	OptionGroup *OptionGroup `type:"structure"`
 }
 
@@ -10032,6 +10441,11 @@ func (s CreateOptionGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateOptionGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateOptionGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOptionGroup sets the OptionGroup field's value.
@@ -12383,6 +12797,8 @@ func (s *DeleteDBClusterInput) SetSkipFinalSnapshot(v bool) *DeleteDBClusterInpu
 type DeleteDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -12409,6 +12825,11 @@ func (s DeleteDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -12468,6 +12889,8 @@ func (s *DeleteDBClusterParameterGroupInput) SetDBClusterParameterGroupName(v st
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroupOutput
 type DeleteDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12478,6 +12901,11 @@ func (s DeleteDBClusterParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshotMessage
@@ -12527,6 +12955,8 @@ func (s *DeleteDBClusterSnapshotInput) SetDBClusterSnapshotIdentifier(v string) 
 type DeleteDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBClusterSnapshot
@@ -12546,6 +12976,11 @@ func (s DeleteDBClusterSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBClusterSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterSnapshot sets the DBClusterSnapshot field's value.
@@ -12652,6 +13087,8 @@ func (s *DeleteDBInstanceInput) SetSkipFinalSnapshot(v bool) *DeleteDBInstanceIn
 type DeleteDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -12676,6 +13113,11 @@ func (s DeleteDBInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -12735,6 +13177,8 @@ func (s *DeleteDBParameterGroupInput) SetDBParameterGroupName(v string) *DeleteD
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroupOutput
 type DeleteDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12745,6 +13189,11 @@ func (s DeleteDBParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroupMessage
@@ -12802,6 +13251,8 @@ func (s *DeleteDBSecurityGroupInput) SetDBSecurityGroupName(v string) *DeleteDBS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroupOutput
 type DeleteDBSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12812,6 +13263,11 @@ func (s DeleteDBSecurityGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBSecurityGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBSecurityGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshotMessage
@@ -12861,6 +13317,8 @@ func (s *DeleteDBSnapshotInput) SetDBSnapshotIdentifier(v string) *DeleteDBSnaps
 type DeleteDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBSnapshot
@@ -12879,6 +13337,11 @@ func (s DeleteDBSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshot sets the DBSnapshot field's value.
@@ -12939,6 +13402,8 @@ func (s *DeleteDBSubnetGroupInput) SetDBSubnetGroupName(v string) *DeleteDBSubne
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroupOutput
 type DeleteDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12949,6 +13414,11 @@ func (s DeleteDBSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDBSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDBSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscriptionMessage
@@ -12995,6 +13465,8 @@ func (s *DeleteEventSubscriptionInput) SetSubscriptionName(v string) *DeleteEven
 type DeleteEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions
 	// action.
 	EventSubscription *EventSubscription `type:"structure"`
@@ -13008,6 +13480,11 @@ func (s DeleteEventSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEventSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -13061,6 +13538,8 @@ func (s *DeleteOptionGroupInput) SetOptionGroupName(v string) *DeleteOptionGroup
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroupOutput
 type DeleteOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13071,6 +13550,11 @@ func (s DeleteOptionGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteOptionGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteOptionGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributesMessage
@@ -13093,6 +13577,8 @@ func (s DescribeAccountAttributesInput) GoString() string {
 type DescribeAccountAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of AccountQuota objects. Within this list, each quota has a name,
 	// a count of usage toward the quota maximum, and a maximum value for the quota.
 	AccountQuotas []AccountQuota `locationNameList:"AccountQuota" type:"list"`
@@ -13106,6 +13592,11 @@ func (s DescribeAccountAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountQuotas sets the AccountQuotas field's value.
@@ -13205,6 +13696,8 @@ func (s *DescribeCertificatesInput) SetMaxRecords(v int64) *DescribeCertificates
 type DescribeCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of Certificate objects for the AWS account.
 	Certificates []Certificate `locationNameList:"Certificate" type:"list"`
 
@@ -13222,6 +13715,11 @@ func (s DescribeCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificates sets the Certificates field's value.
@@ -13324,6 +13822,8 @@ func (s *DescribeDBClusterParameterGroupsInput) SetMaxRecords(v int64) *Describe
 type DescribeDBClusterParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DB cluster parameter groups.
 	DBClusterParameterGroups []DBClusterParameterGroup `locationNameList:"DBClusterParameterGroup" type:"list"`
 
@@ -13341,6 +13841,11 @@ func (s DescribeDBClusterParameterGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBClusterParameterGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBClusterParameterGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterParameterGroups sets the DBClusterParameterGroups field's value.
@@ -13462,6 +13967,8 @@ func (s *DescribeDBClusterParametersInput) SetSource(v string) *DescribeDBCluste
 type DescribeDBClusterParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
@@ -13479,6 +13986,11 @@ func (s DescribeDBClusterParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBClusterParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBClusterParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -13537,6 +14049,8 @@ func (s *DescribeDBClusterSnapshotAttributesInput) SetDBClusterSnapshotIdentifie
 type DescribeDBClusterSnapshotAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes
 	// API action.
 	//
@@ -13554,6 +14068,11 @@ func (s DescribeDBClusterSnapshotAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBClusterSnapshotAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBClusterSnapshotAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterSnapshotAttributesResult sets the DBClusterSnapshotAttributesResult field's value.
@@ -13736,6 +14255,8 @@ func (s *DescribeDBClusterSnapshotsInput) SetSnapshotType(v string) *DescribeDBC
 type DescribeDBClusterSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides a list of DB cluster snapshots for the user.
 	DBClusterSnapshots []DBClusterSnapshot `locationNameList:"DBClusterSnapshot" type:"list"`
 
@@ -13753,6 +14274,11 @@ func (s DescribeDBClusterSnapshotsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBClusterSnapshotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBClusterSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterSnapshots sets the DBClusterSnapshots field's value.
@@ -13865,6 +14391,8 @@ func (s *DescribeDBClustersInput) SetMaxRecords(v int64) *DescribeDBClustersInpu
 type DescribeDBClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains a list of DB clusters for the user.
 	DBClusters []DBCluster `locationNameList:"DBCluster" type:"list"`
 
@@ -13880,6 +14408,11 @@ func (s DescribeDBClustersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusters sets the DBClusters field's value.
@@ -14036,6 +14569,8 @@ func (s *DescribeDBEngineVersionsInput) SetMaxRecords(v int64) *DescribeDBEngine
 type DescribeDBEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DBEngineVersion elements.
 	DBEngineVersions []DBEngineVersion `locationNameList:"DBEngineVersion" type:"list"`
 
@@ -14053,6 +14588,11 @@ func (s DescribeDBEngineVersionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBEngineVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBEngineVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBEngineVersions sets the DBEngineVersions field's value.
@@ -14169,6 +14709,8 @@ func (s *DescribeDBInstancesInput) SetMaxRecords(v int64) *DescribeDBInstancesIn
 type DescribeDBInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DBInstance instances.
 	DBInstances []DBInstance `locationNameList:"DBInstance" type:"list"`
 
@@ -14186,6 +14728,11 @@ func (s DescribeDBInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstances sets the DBInstances field's value.
@@ -14364,6 +14911,8 @@ func (s *DescribeDBLogFilesInput) SetMaxRecords(v int64) *DescribeDBLogFilesInpu
 type DescribeDBLogFilesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The DB log files returned.
 	DescribeDBLogFiles []DescribeDBLogFilesDetails `locationNameList:"DescribeDBLogFilesDetails" type:"list"`
 
@@ -14379,6 +14928,11 @@ func (s DescribeDBLogFilesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBLogFilesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBLogFilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescribeDBLogFiles sets the DescribeDBLogFiles field's value.
@@ -14483,6 +15037,8 @@ func (s *DescribeDBParameterGroupsInput) SetMaxRecords(v int64) *DescribeDBParam
 type DescribeDBParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DBParameterGroup instances.
 	DBParameterGroups []DBParameterGroup `locationNameList:"DBParameterGroup" type:"list"`
 
@@ -14500,6 +15056,11 @@ func (s DescribeDBParameterGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBParameterGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBParameterGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBParameterGroups sets the DBParameterGroups field's value.
@@ -14623,6 +15184,8 @@ func (s *DescribeDBParametersInput) SetSource(v string) *DescribeDBParametersInp
 type DescribeDBParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -14640,6 +15203,11 @@ func (s DescribeDBParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -14736,6 +15304,8 @@ func (s *DescribeDBSecurityGroupsInput) SetMaxRecords(v int64) *DescribeDBSecuri
 type DescribeDBSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DBSecurityGroup instances.
 	DBSecurityGroups []DBSecurityGroup `locationNameList:"DBSecurityGroup" type:"list"`
 
@@ -14753,6 +15323,11 @@ func (s DescribeDBSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBSecurityGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSecurityGroups sets the DBSecurityGroups field's value.
@@ -14811,6 +15386,8 @@ func (s *DescribeDBSnapshotAttributesInput) SetDBSnapshotIdentifier(v string) *D
 type DescribeDBSnapshotAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
 	// API action.
 	//
@@ -14828,6 +15405,11 @@ func (s DescribeDBSnapshotAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBSnapshotAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBSnapshotAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshotAttributesResult sets the DBSnapshotAttributesResult field's value.
@@ -15009,6 +15591,8 @@ func (s *DescribeDBSnapshotsInput) SetSnapshotType(v string) *DescribeDBSnapshot
 type DescribeDBSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DBSnapshot instances.
 	DBSnapshots []DBSnapshot `locationNameList:"DBSnapshot" type:"list"`
 
@@ -15026,6 +15610,11 @@ func (s DescribeDBSnapshotsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBSnapshotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshots sets the DBSnapshots field's value.
@@ -15122,6 +15711,8 @@ func (s *DescribeDBSubnetGroupsInput) SetMaxRecords(v int64) *DescribeDBSubnetGr
 type DescribeDBSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DBSubnetGroup instances.
 	DBSubnetGroups []DBSubnetGroup `locationNameList:"DBSubnetGroup" type:"list"`
 
@@ -15139,6 +15730,11 @@ func (s DescribeDBSubnetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDBSubnetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSubnetGroups sets the DBSubnetGroups field's value.
@@ -15240,6 +15836,8 @@ func (s *DescribeEngineDefaultClusterParametersInput) SetMaxRecords(v int64) *De
 type DescribeEngineDefaultClusterParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the DescribeEngineDefaultParameters
 	// action.
 	EngineDefaults *EngineDefaults `type:"structure"`
@@ -15253,6 +15851,11 @@ func (s DescribeEngineDefaultClusterParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEngineDefaultClusterParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEngineDefaultClusterParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEngineDefaults sets the EngineDefaults field's value.
@@ -15347,6 +15950,8 @@ func (s *DescribeEngineDefaultParametersInput) SetMaxRecords(v int64) *DescribeE
 type DescribeEngineDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the DescribeEngineDefaultParameters
 	// action.
 	EngineDefaults *EngineDefaults `type:"structure"`
@@ -15360,6 +15965,11 @@ func (s DescribeEngineDefaultParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEngineDefaultParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEngineDefaultParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEngineDefaults sets the EngineDefaults field's value.
@@ -15425,6 +16035,8 @@ func (s *DescribeEventCategoriesInput) SetSourceType(v string) *DescribeEventCat
 type DescribeEventCategoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of EventCategoriesMap data types.
 	EventCategoriesMapList []EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
 }
@@ -15437,6 +16049,11 @@ func (s DescribeEventCategoriesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventCategoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventCategoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventCategoriesMapList sets the EventCategoriesMapList field's value.
@@ -15526,6 +16143,8 @@ func (s *DescribeEventSubscriptionsInput) SetSubscriptionName(v string) *Describ
 type DescribeEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of EventSubscriptions data types.
 	EventSubscriptionsList []EventSubscription `locationNameList:"EventSubscription" type:"list"`
 
@@ -15543,6 +16162,11 @@ func (s DescribeEventSubscriptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventSubscriptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventSubscriptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscriptionsList sets the EventSubscriptionsList field's value.
@@ -15713,6 +16337,8 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Event instances.
 	Events []Event `locationNameList:"Event" type:"list"`
 
@@ -15730,6 +16356,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -15841,6 +16472,8 @@ func (s *DescribeOptionGroupOptionsInput) SetMaxRecords(v int64) *DescribeOption
 type DescribeOptionGroupOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -15858,6 +16491,11 @@ func (s DescribeOptionGroupOptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeOptionGroupOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeOptionGroupOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -15975,6 +16613,8 @@ func (s *DescribeOptionGroupsInput) SetOptionGroupName(v string) *DescribeOption
 type DescribeOptionGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -15992,6 +16632,11 @@ func (s DescribeOptionGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeOptionGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeOptionGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -16134,6 +16779,8 @@ func (s *DescribeOrderableDBInstanceOptionsInput) SetVpc(v bool) *DescribeOrdera
 type DescribeOrderableDBInstanceOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous OrderableDBInstanceOptions
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
@@ -16152,6 +16799,11 @@ func (s DescribeOrderableDBInstanceOptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeOrderableDBInstanceOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeOrderableDBInstanceOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -16258,6 +16910,8 @@ func (s *DescribePendingMaintenanceActionsInput) SetResourceIdentifier(v string)
 type DescribePendingMaintenanceActionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous DescribePendingMaintenanceActions
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to a number of records specified by MaxRecords.
@@ -16275,6 +16929,11 @@ func (s DescribePendingMaintenanceActionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribePendingMaintenanceActionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePendingMaintenanceActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -16569,6 +17228,8 @@ func (s *DescribeReservedDBInstancesOfferingsInput) SetReservedDBInstancesOfferi
 type DescribeReservedDBInstancesOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -16586,6 +17247,11 @@ func (s DescribeReservedDBInstancesOfferingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedDBInstancesOfferingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedDBInstancesOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -16606,6 +17272,8 @@ func (s *DescribeReservedDBInstancesOfferingsOutput) SetReservedDBInstancesOffer
 type DescribeReservedDBInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -16623,6 +17291,11 @@ func (s DescribeReservedDBInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedDBInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedDBInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -16723,6 +17396,8 @@ func (s *DescribeSourceRegionsInput) SetRegionName(v string) *DescribeSourceRegi
 type DescribeSourceRegionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.
@@ -16741,6 +17416,11 @@ func (s DescribeSourceRegionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSourceRegionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSourceRegionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -16919,6 +17599,8 @@ func (s *DownloadDBLogFilePortionInput) SetNumberOfLines(v int64) *DownloadDBLog
 type DownloadDBLogFilePortionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Boolean value that if true, indicates there is more data to be downloaded.
 	AdditionalDataPending *bool `type:"boolean"`
 
@@ -16938,6 +17620,11 @@ func (s DownloadDBLogFilePortionOutput) String() string {
 // GoString returns the string representation
 func (s DownloadDBLogFilePortionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DownloadDBLogFilePortionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAdditionalDataPending sets the AdditionalDataPending field's value.
@@ -17384,6 +18071,8 @@ func (s *FailoverDBClusterInput) SetTargetDBInstanceIdentifier(v string) *Failov
 type FailoverDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -17410,6 +18099,11 @@ func (s FailoverDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s FailoverDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s FailoverDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -17572,6 +18266,8 @@ func (s *ListTagsForResourceInput) SetResourceName(v string) *ListTagsForResourc
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of tags returned by the ListTagsForResource operation.
 	TagList []Tag `locationNameList:"Tag" type:"list"`
 }
@@ -17584,6 +18280,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -17824,6 +18525,8 @@ func (s *ModifyDBClusterInput) SetVpcSecurityGroupIds(v []string) *ModifyDBClust
 type ModifyDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -17850,6 +18553,11 @@ func (s ModifyDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -18008,6 +18716,8 @@ func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToRemove(v []string) *M
 type ModifyDBClusterSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes
 	// API action.
 	//
@@ -18025,6 +18735,11 @@ func (s ModifyDBClusterSnapshotAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDBClusterSnapshotAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDBClusterSnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterSnapshotAttributesResult sets the DBClusterSnapshotAttributesResult field's value.
@@ -18797,6 +19512,8 @@ func (s *ModifyDBInstanceInput) SetVpcSecurityGroupIds(v []string) *ModifyDBInst
 type ModifyDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -18821,6 +19538,11 @@ func (s ModifyDBInstanceOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDBInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDBInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -18996,6 +19718,8 @@ func (s *ModifyDBSnapshotAttributeInput) SetValuesToRemove(v []string) *ModifyDB
 type ModifyDBSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
 	// API action.
 	//
@@ -19013,6 +19737,11 @@ func (s ModifyDBSnapshotAttributeOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDBSnapshotAttributeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDBSnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshotAttributesResult sets the DBSnapshotAttributesResult field's value.
@@ -19103,6 +19832,8 @@ func (s *ModifyDBSnapshotInput) SetOptionGroupName(v string) *ModifyDBSnapshotIn
 type ModifyDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBSnapshot
@@ -19121,6 +19852,11 @@ func (s ModifyDBSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDBSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDBSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSnapshot sets the DBSnapshot field's value.
@@ -19202,6 +19938,8 @@ func (s *ModifyDBSubnetGroupInput) SetSubnetIds(v []string) *ModifyDBSubnetGroup
 type ModifyDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBSubnetGroup
@@ -19225,6 +19963,11 @@ func (s ModifyDBSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s ModifyDBSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyDBSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSubnetGroup sets the DBSubnetGroup field's value.
@@ -19324,6 +20067,8 @@ func (s *ModifyEventSubscriptionInput) SetSubscriptionName(v string) *ModifyEven
 type ModifyEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions
 	// action.
 	EventSubscription *EventSubscription `type:"structure"`
@@ -19337,6 +20082,11 @@ func (s ModifyEventSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s ModifyEventSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -19429,6 +20179,8 @@ func (s *ModifyOptionGroupInput) SetOptionsToRemove(v []string) *ModifyOptionGro
 type ModifyOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	OptionGroup *OptionGroup `type:"structure"`
 }
 
@@ -19440,6 +20192,11 @@ func (s ModifyOptionGroupOutput) String() string {
 // GoString returns the string representation
 func (s ModifyOptionGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyOptionGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOptionGroup sets the OptionGroup field's value.
@@ -20672,6 +21429,8 @@ func (s *PromoteReadReplicaDBClusterInput) SetDBClusterIdentifier(v string) *Pro
 type PromoteReadReplicaDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -20698,6 +21457,11 @@ func (s PromoteReadReplicaDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s PromoteReadReplicaDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PromoteReadReplicaDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -20804,6 +21568,8 @@ func (s *PromoteReadReplicaInput) SetPreferredBackupWindow(v string) *PromoteRea
 type PromoteReadReplicaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -20828,6 +21594,11 @@ func (s PromoteReadReplicaOutput) String() string {
 // GoString returns the string representation
 func (s PromoteReadReplicaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PromoteReadReplicaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -20913,6 +21684,8 @@ func (s *PurchaseReservedDBInstancesOfferingInput) SetTags(v []Tag) *PurchaseRes
 type PurchaseReservedDBInstancesOfferingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// This data type is used as a response element in the DescribeReservedDBInstances
 	// and PurchaseReservedDBInstancesOffering actions.
 	ReservedDBInstance *ReservedDBInstance `type:"structure"`
@@ -20926,6 +21699,11 @@ func (s PurchaseReservedDBInstancesOfferingOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseReservedDBInstancesOfferingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseReservedDBInstancesOfferingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedDBInstance sets the ReservedDBInstance field's value.
@@ -20998,6 +21776,8 @@ func (s *RebootDBInstanceInput) SetForceFailover(v bool) *RebootDBInstanceInput 
 type RebootDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -21022,6 +21802,11 @@ func (s RebootDBInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RebootDBInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootDBInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -21124,6 +21909,8 @@ func (s *RemoveRoleFromDBClusterInput) SetRoleArn(v string) *RemoveRoleFromDBClu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBClusterOutput
 type RemoveRoleFromDBClusterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21134,6 +21921,11 @@ func (s RemoveRoleFromDBClusterOutput) String() string {
 // GoString returns the string representation
 func (s RemoveRoleFromDBClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveRoleFromDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscriptionMessage
@@ -21197,6 +21989,8 @@ func (s *RemoveSourceIdentifierFromSubscriptionInput) SetSubscriptionName(v stri
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions
 	// action.
 	EventSubscription *EventSubscription `type:"structure"`
@@ -21210,6 +22004,11 @@ func (s RemoveSourceIdentifierFromSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s RemoveSourceIdentifierFromSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveSourceIdentifierFromSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSubscription sets the EventSubscription field's value.
@@ -21278,6 +22077,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResourceOutput
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21288,6 +22089,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This data type is used as a response element in the DescribeReservedDBInstances
@@ -21615,6 +22421,8 @@ func (s *ResetDBClusterParameterGroupInput) SetResetAllParameters(v bool) *Reset
 type ResetDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the DB cluster parameter group.
 	//
 	// Constraints:
@@ -21637,6 +22445,11 @@ func (s ResetDBClusterParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s ResetDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBClusterParameterGroupName sets the DBClusterParameterGroupName field's value.
@@ -21743,6 +22556,8 @@ func (s *ResetDBParameterGroupInput) SetResetAllParameters(v bool) *ResetDBParam
 type ResetDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides the name of the DB parameter group.
 	DBParameterGroupName *string `type:"string"`
 }
@@ -21755,6 +22570,11 @@ func (s ResetDBParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s ResetDBParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBParameterGroupName sets the DBParameterGroupName field's value.
@@ -22212,6 +23032,8 @@ func (s *RestoreDBClusterFromS3Input) SetVpcSecurityGroupIds(v []string) *Restor
 type RestoreDBClusterFromS3Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -22238,6 +23060,11 @@ func (s RestoreDBClusterFromS3Output) String() string {
 // GoString returns the string representation
 func (s RestoreDBClusterFromS3Output) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreDBClusterFromS3Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -22466,6 +23293,8 @@ func (s *RestoreDBClusterFromSnapshotInput) SetVpcSecurityGroupIds(v []string) *
 type RestoreDBClusterFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -22492,6 +23321,11 @@ func (s RestoreDBClusterFromSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s RestoreDBClusterFromSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreDBClusterFromSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -22734,6 +23568,8 @@ func (s *RestoreDBClusterToPointInTimeInput) SetVpcSecurityGroupIds(v []string) 
 type RestoreDBClusterToPointInTimeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBCluster
@@ -22760,6 +23596,11 @@ func (s RestoreDBClusterToPointInTimeOutput) String() string {
 // GoString returns the string representation
 func (s RestoreDBClusterToPointInTimeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreDBClusterToPointInTimeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBCluster sets the DBCluster field's value.
@@ -23119,6 +23960,8 @@ func (s *RestoreDBInstanceFromDBSnapshotInput) SetTdeCredentialPassword(v string
 type RestoreDBInstanceFromDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -23143,6 +23986,11 @@ func (s RestoreDBInstanceFromDBSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s RestoreDBInstanceFromDBSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreDBInstanceFromDBSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -23528,6 +24376,8 @@ func (s *RestoreDBInstanceToPointInTimeInput) SetUseLatestRestorableTime(v bool)
 type RestoreDBInstanceToPointInTimeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -23552,6 +24402,11 @@ func (s RestoreDBInstanceToPointInTimeOutput) String() string {
 // GoString returns the string representation
 func (s RestoreDBInstanceToPointInTimeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreDBInstanceToPointInTimeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -23650,6 +24505,8 @@ func (s *RevokeDBSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v string)
 type RevokeDBSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * DescribeDBSecurityGroups
@@ -23673,6 +24530,11 @@ func (s RevokeDBSecurityGroupIngressOutput) String() string {
 // GoString returns the string representation
 func (s RevokeDBSecurityGroupIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RevokeDBSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBSecurityGroup sets the DBSecurityGroup field's value.
@@ -23769,6 +24631,8 @@ func (s *StartDBInstanceInput) SetDBInstanceIdentifier(v string) *StartDBInstanc
 type StartDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -23793,6 +24657,11 @@ func (s StartDBInstanceOutput) String() string {
 // GoString returns the string representation
 func (s StartDBInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartDBInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.
@@ -23855,6 +24724,8 @@ func (s *StopDBInstanceInput) SetDBSnapshotIdentifier(v string) *StopDBInstanceI
 type StopDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the result of a successful invocation of the following actions:
 	//
 	//    * CreateDBInstance
@@ -23879,6 +24750,11 @@ func (s StopDBInstanceOutput) String() string {
 // GoString returns the string representation
 func (s StopDBInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopDBInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDBInstance sets the DBInstance field's value.

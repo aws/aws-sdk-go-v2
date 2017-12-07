@@ -53,7 +53,10 @@ func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTracesR
 		input = &BatchGetTracesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetTracesOutput{})
+	output := &BatchGetTracesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetTracesRequest{Request: req, Input: input}
 }
 
@@ -103,7 +106,10 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceGra
 		input = &GetServiceGraphInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServiceGraphOutput{})
+	output := &GetServiceGraphOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetServiceGraphRequest{Request: req, Input: input}
 }
 
@@ -149,7 +155,10 @@ func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRequ
 		input = &GetTraceGraphInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTraceGraphOutput{})
+	output := &GetTraceGraphOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTraceGraphRequest{Request: req, Input: input}
 }
 
@@ -211,7 +220,10 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) GetTraceS
 		input = &GetTraceSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTraceSummariesOutput{})
+	output := &GetTraceSummariesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTraceSummariesRequest{Request: req, Input: input}
 }
 
@@ -257,7 +269,10 @@ func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) PutTe
 		input = &PutTelemetryRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutTelemetryRecordsOutput{})
+	output := &PutTelemetryRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutTelemetryRecordsRequest{Request: req, Input: input}
 }
 
@@ -348,7 +363,10 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceSeg
 		input = &PutTraceSegmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutTraceSegmentsOutput{})
+	output := &PutTraceSegmentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutTraceSegmentsRequest{Request: req, Input: input}
 }
 
@@ -555,6 +573,8 @@ func (s *BatchGetTracesInput) SetTraceIds(v []string) *BatchGetTracesInput {
 type BatchGetTracesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Pagination token. Not used.
 	NextToken *string `type:"string"`
 
@@ -573,6 +593,11 @@ func (s BatchGetTracesOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetTracesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetTracesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -871,6 +896,8 @@ func (s *GetServiceGraphInput) SetStartTime(v time.Time) *GetServiceGraphInput {
 type GetServiceGraphOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The end of the time frame for which the graph was generated.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -893,6 +920,11 @@ func (s GetServiceGraphOutput) String() string {
 // GoString returns the string representation
 func (s GetServiceGraphOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetServiceGraphOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndTime sets the EndTime field's value.
@@ -972,6 +1004,8 @@ func (s *GetTraceGraphInput) SetTraceIds(v []string) *GetTraceGraphInput {
 type GetTraceGraphOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Pagination token. Not used.
 	NextToken *string `type:"string"`
 
@@ -987,6 +1021,11 @@ func (s GetTraceGraphOutput) String() string {
 // GoString returns the string representation
 func (s GetTraceGraphOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTraceGraphOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1089,6 +1128,8 @@ func (s *GetTraceSummariesInput) SetStartTime(v time.Time) *GetTraceSummariesInp
 type GetTraceSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The start time of this page of results.
 	ApproximateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -1112,6 +1153,11 @@ func (s GetTraceSummariesOutput) String() string {
 // GoString returns the string representation
 func (s GetTraceSummariesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTraceSummariesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApproximateTime sets the ApproximateTime field's value.
@@ -1299,6 +1345,8 @@ func (s *PutTelemetryRecordsInput) SetTelemetryRecords(v []TelemetryRecord) *Put
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecordsResult
 type PutTelemetryRecordsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1309,6 +1357,11 @@ func (s PutTelemetryRecordsOutput) String() string {
 // GoString returns the string representation
 func (s PutTelemetryRecordsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutTelemetryRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsRequest
@@ -1355,6 +1408,8 @@ func (s *PutTraceSegmentsInput) SetTraceSegmentDocuments(v []string) *PutTraceSe
 type PutTraceSegmentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Segments that failed processing.
 	UnprocessedTraceSegments []UnprocessedTraceSegment `type:"list"`
 }
@@ -1367,6 +1422,11 @@ func (s PutTraceSegmentsOutput) String() string {
 // GoString returns the string representation
 func (s PutTraceSegmentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutTraceSegmentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUnprocessedTraceSegments sets the UnprocessedTraceSegments field's value.

@@ -58,9 +58,12 @@ func (c *IAM) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToOpen
 		input = &AddClientIDToOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &AddClientIDToOpenIDConnectProviderOutput{})
+	output := &AddClientIDToOpenIDConnectProviderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddClientIDToOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
@@ -114,9 +117,12 @@ func (c *IAM) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfileInp
 		input = &AddRoleToInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &AddRoleToInstanceProfileOutput{})
+	output := &AddRoleToInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddRoleToInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -162,9 +168,12 @@ func (c *IAM) AddUserToGroupRequest(input *AddUserToGroupInput) AddUserToGroupRe
 		input = &AddUserToGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AddUserToGroupOutput{})
+	output := &AddUserToGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddUserToGroupRequest{Request: req, Input: input}
 }
 
@@ -217,9 +226,12 @@ func (c *IAM) AttachGroupPolicyRequest(input *AttachGroupPolicyInput) AttachGrou
 		input = &AttachGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachGroupPolicyOutput{})
+	output := &AttachGroupPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachGroupPolicyRequest{Request: req, Input: input}
 }
 
@@ -276,9 +288,12 @@ func (c *IAM) AttachRolePolicyRequest(input *AttachRolePolicyInput) AttachRolePo
 		input = &AttachRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachRolePolicyOutput{})
+	output := &AttachRolePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachRolePolicyRequest{Request: req, Input: input}
 }
 
@@ -331,9 +346,12 @@ func (c *IAM) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUserPo
 		input = &AttachUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachUserPolicyOutput{})
+	output := &AttachUserPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachUserPolicyRequest{Request: req, Input: input}
 }
 
@@ -384,9 +402,12 @@ func (c *IAM) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswordRe
 		input = &ChangePasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangePasswordOutput{})
+	output := &ChangePasswordOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ChangePasswordRequest{Request: req, Input: input}
 }
 
@@ -448,7 +469,10 @@ func (c *IAM) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAccessKe
 		input = &CreateAccessKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAccessKeyOutput{})
+	output := &CreateAccessKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAccessKeyRequest{Request: req, Input: input}
 }
 
@@ -496,9 +520,12 @@ func (c *IAM) CreateAccountAliasRequest(input *CreateAccountAliasInput) CreateAc
 		input = &CreateAccountAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAccountAliasOutput{})
+	output := &CreateAccountAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAccountAliasRequest{Request: req, Input: input}
 }
 
@@ -548,7 +575,10 @@ func (c *IAM) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
 		input = &CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	output := &CreateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGroupRequest{Request: req, Input: input}
 }
 
@@ -599,7 +629,10 @@ func (c *IAM) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) Cr
 		input = &CreateInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceProfileOutput{})
+	output := &CreateInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -648,7 +681,10 @@ func (c *IAM) CreateLoginProfileRequest(input *CreateLoginProfileInput) CreateLo
 		input = &CreateLoginProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoginProfileOutput{})
+	output := &CreateLoginProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLoginProfileRequest{Request: req, Input: input}
 }
 
@@ -710,7 +746,10 @@ func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProvi
 		input = &CreateOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOpenIDConnectProviderOutput{})
+	output := &CreateOpenIDConnectProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
@@ -765,7 +804,10 @@ func (c *IAM) CreatePolicyRequest(input *CreatePolicyInput) CreatePolicyRequest 
 		input = &CreatePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePolicyOutput{})
+	output := &CreatePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePolicyRequest{Request: req, Input: input}
 }
 
@@ -822,7 +864,10 @@ func (c *IAM) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) Create
 		input = &CreatePolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePolicyVersionOutput{})
+	output := &CreatePolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -872,7 +917,10 @@ func (c *IAM) CreateRoleRequest(input *CreateRoleInput) CreateRoleRequest {
 		input = &CreateRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRoleOutput{})
+	output := &CreateRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRoleRequest{Request: req, Input: input}
 }
 
@@ -939,7 +987,10 @@ func (c *IAM) CreateSAMLProviderRequest(input *CreateSAMLProviderInput) CreateSA
 		input = &CreateSAMLProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSAMLProviderOutput{})
+	output := &CreateSAMLProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSAMLProviderRequest{Request: req, Input: input}
 }
 
@@ -998,7 +1049,10 @@ func (c *IAM) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleInput
 		input = &CreateServiceLinkedRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServiceLinkedRoleOutput{})
+	output := &CreateServiceLinkedRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateServiceLinkedRoleRequest{Request: req, Input: input}
 }
 
@@ -1057,7 +1111,10 @@ func (c *IAM) CreateServiceSpecificCredentialRequest(input *CreateServiceSpecifi
 		input = &CreateServiceSpecificCredentialInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServiceSpecificCredentialOutput{})
+	output := &CreateServiceSpecificCredentialOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
@@ -1107,7 +1164,10 @@ func (c *IAM) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 		input = &CreateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserOutput{})
+	output := &CreateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserRequest{Request: req, Input: input}
 }
 
@@ -1166,7 +1226,10 @@ func (c *IAM) CreateVirtualMFADeviceRequest(input *CreateVirtualMFADeviceInput) 
 		input = &CreateVirtualMFADeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVirtualMFADeviceOutput{})
+	output := &CreateVirtualMFADeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVirtualMFADeviceRequest{Request: req, Input: input}
 }
 
@@ -1217,9 +1280,12 @@ func (c *IAM) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) Deacti
 		input = &DeactivateMFADeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivateMFADeviceOutput{})
+	output := &DeactivateMFADeviceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeactivateMFADeviceRequest{Request: req, Input: input}
 }
 
@@ -1270,9 +1336,12 @@ func (c *IAM) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAccessKe
 		input = &DeleteAccessKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccessKeyOutput{})
+	output := &DeleteAccessKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAccessKeyRequest{Request: req, Input: input}
 }
 
@@ -1320,9 +1389,12 @@ func (c *IAM) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) DeleteAc
 		input = &DeleteAccountAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccountAliasOutput{})
+	output := &DeleteAccountAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAccountAliasRequest{Request: req, Input: input}
 }
 
@@ -1368,9 +1440,12 @@ func (c *IAM) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPasswordPol
 		input = &DeleteAccountPasswordPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccountPasswordPolicyOutput{})
+	output := &DeleteAccountPasswordPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAccountPasswordPolicyRequest{Request: req, Input: input}
 }
 
@@ -1417,9 +1492,12 @@ func (c *IAM) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequest {
 		input = &DeleteGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGroupOutput{})
+	output := &DeleteGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGroupRequest{Request: req, Input: input}
 }
 
@@ -1471,9 +1549,12 @@ func (c *IAM) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteGrou
 		input = &DeleteGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGroupPolicyOutput{})
+	output := &DeleteGroupPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGroupPolicyRequest{Request: req, Input: input}
 }
 
@@ -1528,9 +1609,12 @@ func (c *IAM) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) De
 		input = &DeleteInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstanceProfileOutput{})
+	output := &DeleteInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -1582,9 +1666,12 @@ func (c *IAM) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) DeleteLo
 		input = &DeleteLoginProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoginProfileOutput{})
+	output := &DeleteLoginProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLoginProfileRequest{Request: req, Input: input}
 }
 
@@ -1637,9 +1724,12 @@ func (c *IAM) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectProvi
 		input = &DeleteOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOpenIDConnectProviderOutput{})
+	output := &DeleteOpenIDConnectProviderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
@@ -1707,9 +1797,12 @@ func (c *IAM) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest 
 		input = &DeletePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyOutput{})
+	output := &DeletePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePolicyRequest{Request: req, Input: input}
 }
 
@@ -1763,9 +1856,12 @@ func (c *IAM) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Delete
 		input = &DeletePolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyVersionOutput{})
+	output := &DeletePolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -1816,9 +1912,12 @@ func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
 		input = &DeleteRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRoleOutput{})
+	output := &DeleteRoleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRoleRequest{Request: req, Input: input}
 }
 
@@ -1870,9 +1969,12 @@ func (c *IAM) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRolePo
 		input = &DeleteRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRolePolicyOutput{})
+	output := &DeleteRolePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRolePolicyRequest{Request: req, Input: input}
 }
 
@@ -1925,9 +2027,12 @@ func (c *IAM) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) DeleteSA
 		input = &DeleteSAMLProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSAMLProviderOutput{})
+	output := &DeleteSAMLProviderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSAMLProviderRequest{Request: req, Input: input}
 }
 
@@ -1979,9 +2084,12 @@ func (c *IAM) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) DeleteSS
 		input = &DeleteSSHPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSSHPublicKeyOutput{})
+	output := &DeleteSSHPublicKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSSHPublicKeyRequest{Request: req, Input: input}
 }
 
@@ -2042,9 +2150,12 @@ func (c *IAM) DeleteServerCertificateRequest(input *DeleteServerCertificateInput
 		input = &DeleteServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServerCertificateOutput{})
+	output := &DeleteServerCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteServerCertificateRequest{Request: req, Input: input}
 }
 
@@ -2109,7 +2220,10 @@ func (c *IAM) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput
 		input = &DeleteServiceLinkedRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceLinkedRoleOutput{})
+	output := &DeleteServiceLinkedRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteServiceLinkedRoleRequest{Request: req, Input: input}
 }
 
@@ -2155,9 +2269,12 @@ func (c *IAM) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpecifi
 		input = &DeleteServiceSpecificCredentialInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceSpecificCredentialOutput{})
+	output := &DeleteServiceSpecificCredentialOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
@@ -2208,9 +2325,12 @@ func (c *IAM) DeleteSigningCertificateRequest(input *DeleteSigningCertificateInp
 		input = &DeleteSigningCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSigningCertificateOutput{})
+	output := &DeleteSigningCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSigningCertificateRequest{Request: req, Input: input}
 }
 
@@ -2257,9 +2377,12 @@ func (c *IAM) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 		input = &DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	output := &DeleteUserOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserRequest{Request: req, Input: input}
 }
 
@@ -2311,9 +2434,12 @@ func (c *IAM) DeleteUserPolicyRequest(input *DeleteUserPolicyInput) DeleteUserPo
 		input = &DeleteUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPolicyOutput{})
+	output := &DeleteUserPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserPolicyRequest{Request: req, Input: input}
 }
 
@@ -2362,9 +2488,12 @@ func (c *IAM) DeleteVirtualMFADeviceRequest(input *DeleteVirtualMFADeviceInput) 
 		input = &DeleteVirtualMFADeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVirtualMFADeviceOutput{})
+	output := &DeleteVirtualMFADeviceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVirtualMFADeviceRequest{Request: req, Input: input}
 }
 
@@ -2415,9 +2544,12 @@ func (c *IAM) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachGrou
 		input = &DetachGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachGroupPolicyOutput{})
+	output := &DetachGroupPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachGroupPolicyRequest{Request: req, Input: input}
 }
 
@@ -2468,9 +2600,12 @@ func (c *IAM) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRolePo
 		input = &DetachRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachRolePolicyOutput{})
+	output := &DetachRolePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachRolePolicyRequest{Request: req, Input: input}
 }
 
@@ -2521,9 +2656,12 @@ func (c *IAM) DetachUserPolicyRequest(input *DetachUserPolicyInput) DetachUserPo
 		input = &DetachUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachUserPolicyOutput{})
+	output := &DetachUserPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachUserPolicyRequest{Request: req, Input: input}
 }
 
@@ -2571,9 +2709,12 @@ func (c *IAM) EnableMFADeviceRequest(input *EnableMFADeviceInput) EnableMFADevic
 		input = &EnableMFADeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableMFADeviceOutput{})
+	output := &EnableMFADeviceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableMFADeviceRequest{Request: req, Input: input}
 }
 
@@ -2621,7 +2762,10 @@ func (c *IAM) GenerateCredentialReportRequest(input *GenerateCredentialReportInp
 		input = &GenerateCredentialReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateCredentialReportOutput{})
+	output := &GenerateCredentialReportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GenerateCredentialReportRequest{Request: req, Input: input}
 }
 
@@ -2670,7 +2814,10 @@ func (c *IAM) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) GetA
 		input = &GetAccessKeyLastUsedInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccessKeyLastUsedOutput{})
+	output := &GetAccessKeyLastUsedOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccessKeyLastUsedRequest{Request: req, Input: input}
 }
 
@@ -2728,7 +2875,10 @@ func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizati
 		input = &GetAccountAuthorizationDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountAuthorizationDetailsOutput{})
+	output := &GetAccountAuthorizationDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountAuthorizationDetailsRequest{Request: req, Input: input}
 }
 
@@ -2825,7 +2975,10 @@ func (c *IAM) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicyInp
 		input = &GetAccountPasswordPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountPasswordPolicyOutput{})
+	output := &GetAccountPasswordPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountPasswordPolicyRequest{Request: req, Input: input}
 }
 
@@ -2875,7 +3028,10 @@ func (c *IAM) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAccount
 		input = &GetAccountSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSummaryOutput{})
+	output := &GetAccountSummaryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountSummaryRequest{Request: req, Input: input}
 }
 
@@ -2930,7 +3086,10 @@ func (c *IAM) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCusto
 		input = &GetContextKeysForCustomPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContextKeysForPrincipalPolicyOutput{})
+	output := &GetContextKeysForPrincipalPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetContextKeysForCustomPolicyRequest{Request: req, Input: input}
 }
 
@@ -2992,7 +3151,10 @@ func (c *IAM) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysForPr
 		input = &GetContextKeysForPrincipalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContextKeysForPrincipalPolicyOutput{})
+	output := &GetContextKeysForPrincipalPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetContextKeysForPrincipalPolicyRequest{Request: req, Input: input}
 }
 
@@ -3040,7 +3202,10 @@ func (c *IAM) GetCredentialReportRequest(input *GetCredentialReportInput) GetCre
 		input = &GetCredentialReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCredentialReportOutput{})
+	output := &GetCredentialReportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCredentialReportRequest{Request: req, Input: input}
 }
 
@@ -3093,7 +3258,10 @@ func (c *IAM) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 		input = &GetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupOutput{})
+	output := &GetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupRequest{Request: req, Input: input}
 }
 
@@ -3205,7 +3373,10 @@ func (c *IAM) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolicyRe
 		input = &GetGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupPolicyOutput{})
+	output := &GetGroupPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupPolicyRequest{Request: req, Input: input}
 }
 
@@ -3254,7 +3425,10 @@ func (c *IAM) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetInsta
 		input = &GetInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceProfileOutput{})
+	output := &GetInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -3302,7 +3476,10 @@ func (c *IAM) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginProfil
 		input = &GetLoginProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoginProfileOutput{})
+	output := &GetLoginProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetLoginProfileRequest{Request: req, Input: input}
 }
 
@@ -3349,7 +3526,10 @@ func (c *IAM) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProviderInp
 		input = &GetOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpenIDConnectProviderOutput{})
+	output := &GetOpenIDConnectProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
@@ -3408,7 +3588,10 @@ func (c *IAM) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 		input = &GetPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyOutput{})
+	output := &GetPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPolicyRequest{Request: req, Input: input}
 }
 
@@ -3475,7 +3658,10 @@ func (c *IAM) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicyVer
 		input = &GetPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyVersionOutput{})
+	output := &GetPolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -3529,7 +3715,10 @@ func (c *IAM) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
 		input = &GetRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRoleOutput{})
+	output := &GetRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRoleRequest{Request: req, Input: input}
 }
 
@@ -3594,7 +3783,10 @@ func (c *IAM) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyReque
 		input = &GetRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRolePolicyOutput{})
+	output := &GetRolePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRolePolicyRequest{Request: req, Input: input}
 }
 
@@ -3643,7 +3835,10 @@ func (c *IAM) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProvide
 		input = &GetSAMLProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSAMLProviderOutput{})
+	output := &GetSAMLProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSAMLProviderRequest{Request: req, Input: input}
 }
 
@@ -3695,7 +3890,10 @@ func (c *IAM) GetSSHPublicKeyRequest(input *GetSSHPublicKeyInput) GetSSHPublicKe
 		input = &GetSSHPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSSHPublicKeyOutput{})
+	output := &GetSSHPublicKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSSHPublicKeyRequest{Request: req, Input: input}
 }
 
@@ -3746,7 +3944,10 @@ func (c *IAM) GetServerCertificateRequest(input *GetServerCertificateInput) GetS
 		input = &GetServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServerCertificateOutput{})
+	output := &GetServerCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetServerCertificateRequest{Request: req, Input: input}
 }
 
@@ -3796,7 +3997,10 @@ func (c *IAM) GetServiceLinkedRoleDeletionStatusRequest(input *GetServiceLinkedR
 		input = &GetServiceLinkedRoleDeletionStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServiceLinkedRoleDeletionStatusOutput{})
+	output := &GetServiceLinkedRoleDeletionStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetServiceLinkedRoleDeletionStatusRequest{Request: req, Input: input}
 }
 
@@ -3846,7 +4050,10 @@ func (c *IAM) GetUserRequest(input *GetUserInput) GetUserRequest {
 		input = &GetUserInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserOutput{})
+	output := &GetUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUserRequest{Request: req, Input: input}
 }
 
@@ -3908,7 +4115,10 @@ func (c *IAM) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyReque
 		input = &GetUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserPolicyOutput{})
+	output := &GetUserPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUserPolicyRequest{Request: req, Input: input}
 }
 
@@ -3972,7 +4182,10 @@ func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKeysRe
 		input = &ListAccessKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccessKeysOutput{})
+	output := &ListAccessKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAccessKeysRequest{Request: req, Input: input}
 }
 
@@ -4077,7 +4290,10 @@ func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) ListAcco
 		input = &ListAccountAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccountAliasesOutput{})
+	output := &ListAccountAliasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAccountAliasesRequest{Request: req, Input: input}
 }
 
@@ -4190,7 +4406,10 @@ func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesI
 		input = &ListAttachedGroupPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttachedGroupPoliciesOutput{})
+	output := &ListAttachedGroupPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAttachedGroupPoliciesRequest{Request: req, Input: input}
 }
 
@@ -4303,7 +4522,10 @@ func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInp
 		input = &ListAttachedRolePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttachedRolePoliciesOutput{})
+	output := &ListAttachedRolePoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAttachedRolePoliciesRequest{Request: req, Input: input}
 }
 
@@ -4416,7 +4638,10 @@ func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInp
 		input = &ListAttachedUserPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttachedUserPoliciesOutput{})
+	output := &ListAttachedUserPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAttachedUserPoliciesRequest{Request: req, Input: input}
 }
 
@@ -4526,7 +4751,10 @@ func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) Li
 		input = &ListEntitiesForPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEntitiesForPolicyOutput{})
+	output := &ListEntitiesForPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListEntitiesForPolicyRequest{Request: req, Input: input}
 }
 
@@ -4639,7 +4867,10 @@ func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) ListGroupP
 		input = &ListGroupPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupPoliciesOutput{})
+	output := &ListGroupPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupPoliciesRequest{Request: req, Input: input}
 }
 
@@ -4743,7 +4974,10 @@ func (c *IAM) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 		input = &ListGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsOutput{})
+	output := &ListGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupsRequest{Request: req, Input: input}
 }
 
@@ -4847,7 +5081,10 @@ func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) ListGroups
 		input = &ListGroupsForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsForUserOutput{})
+	output := &ListGroupsForUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupsForUserRequest{Request: req, Input: input}
 }
 
@@ -4953,7 +5190,10 @@ func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) List
 		input = &ListInstanceProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceProfilesOutput{})
+	output := &ListInstanceProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInstanceProfilesRequest{Request: req, Input: input}
 }
 
@@ -5059,7 +5299,10 @@ func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForR
 		input = &ListInstanceProfilesForRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceProfilesForRoleOutput{})
+	output := &ListInstanceProfilesForRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInstanceProfilesForRoleRequest{Request: req, Input: input}
 }
 
@@ -5166,7 +5409,10 @@ func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) ListMFADevicesRe
 		input = &ListMFADevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMFADevicesOutput{})
+	output := &ListMFADevicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListMFADevicesRequest{Request: req, Input: input}
 }
 
@@ -5263,7 +5509,10 @@ func (c *IAM) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvider
 		input = &ListOpenIDConnectProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOpenIDConnectProvidersOutput{})
+	output := &ListOpenIDConnectProvidersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOpenIDConnectProvidersRequest{Request: req, Input: input}
 }
 
@@ -5327,7 +5576,10 @@ func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 		input = &ListPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPoliciesOutput{})
+	output := &ListPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPoliciesRequest{Request: req, Input: input}
 }
 
@@ -5434,7 +5686,10 @@ func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPoli
 		input = &ListPolicyVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPolicyVersionsOutput{})
+	output := &ListPolicyVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPolicyVersionsRequest{Request: req, Input: input}
 }
 
@@ -5546,7 +5801,10 @@ func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) ListRolePoli
 		input = &ListRolePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRolePoliciesOutput{})
+	output := &ListRolePoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRolePoliciesRequest{Request: req, Input: input}
 }
 
@@ -5652,7 +5910,10 @@ func (c *IAM) ListRolesRequest(input *ListRolesInput) ListRolesRequest {
 		input = &ListRolesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRolesOutput{})
+	output := &ListRolesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRolesRequest{Request: req, Input: input}
 }
 
@@ -5750,7 +6011,10 @@ func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAMLPr
 		input = &ListSAMLProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSAMLProvidersOutput{})
+	output := &ListSAMLProvidersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSAMLProvidersRequest{Request: req, Input: input}
 }
 
@@ -5812,7 +6076,10 @@ func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSHPub
 		input = &ListSSHPublicKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSSHPublicKeysOutput{})
+	output := &ListSSHPublicKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSSHPublicKeysRequest{Request: req, Input: input}
 }
 
@@ -5922,7 +6189,10 @@ func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) 
 		input = &ListServerCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServerCertificatesOutput{})
+	output := &ListServerCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListServerCertificatesRequest{Request: req, Input: input}
 }
 
@@ -6024,7 +6294,10 @@ func (c *IAM) ListServiceSpecificCredentialsRequest(input *ListServiceSpecificCr
 		input = &ListServiceSpecificCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServiceSpecificCredentialsOutput{})
+	output := &ListServiceSpecificCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListServiceSpecificCredentialsRequest{Request: req, Input: input}
 }
 
@@ -6086,7 +6359,10 @@ func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput
 		input = &ListSigningCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSigningCertificatesOutput{})
+	output := &ListSigningCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSigningCertificatesRequest{Request: req, Input: input}
 }
 
@@ -6197,7 +6473,10 @@ func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) ListUserPoli
 		input = &ListUserPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserPoliciesOutput{})
+	output := &ListUserPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUserPoliciesRequest{Request: req, Input: input}
 }
 
@@ -6303,7 +6582,10 @@ func (c *IAM) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 		input = &ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	output := &ListUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUsersRequest{Request: req, Input: input}
 }
 
@@ -6410,7 +6692,10 @@ func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) Li
 		input = &ListVirtualMFADevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVirtualMFADevicesOutput{})
+	output := &ListVirtualMFADevicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVirtualMFADevicesRequest{Request: req, Input: input}
 }
 
@@ -6522,9 +6807,12 @@ func (c *IAM) PutGroupPolicyRequest(input *PutGroupPolicyInput) PutGroupPolicyRe
 		input = &PutGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutGroupPolicyOutput{})
+	output := &PutGroupPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutGroupPolicyRequest{Request: req, Input: input}
 }
 
@@ -6592,9 +6880,12 @@ func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) PutRolePolicyReque
 		input = &PutRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRolePolicyOutput{})
+	output := &PutRolePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRolePolicyRequest{Request: req, Input: input}
 }
 
@@ -6656,9 +6947,12 @@ func (c *IAM) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyReque
 		input = &PutUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutUserPolicyOutput{})
+	output := &PutUserPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutUserPolicyRequest{Request: req, Input: input}
 }
 
@@ -6709,9 +7003,12 @@ func (c *IAM) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveClient
 		input = &RemoveClientIDFromOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveClientIDFromOpenIDConnectProviderOutput{})
+	output := &RemoveClientIDFromOpenIDConnectProviderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveClientIDFromOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
@@ -6766,9 +7063,12 @@ func (c *IAM) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInstance
 		input = &RemoveRoleFromInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveRoleFromInstanceProfileOutput{})
+	output := &RemoveRoleFromInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveRoleFromInstanceProfileRequest{Request: req, Input: input}
 }
 
@@ -6814,9 +7114,12 @@ func (c *IAM) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) Remove
 		input = &RemoveUserFromGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveUserFromGroupOutput{})
+	output := &RemoveUserFromGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveUserFromGroupRequest{Request: req, Input: input}
 }
 
@@ -6865,7 +7168,10 @@ func (c *IAM) ResetServiceSpecificCredentialRequest(input *ResetServiceSpecificC
 		input = &ResetServiceSpecificCredentialInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetServiceSpecificCredentialOutput{})
+	output := &ResetServiceSpecificCredentialOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
@@ -6916,9 +7222,12 @@ func (c *IAM) ResyncMFADeviceRequest(input *ResyncMFADeviceInput) ResyncMFADevic
 		input = &ResyncMFADeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &ResyncMFADeviceOutput{})
+	output := &ResyncMFADeviceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResyncMFADeviceRequest{Request: req, Input: input}
 }
 
@@ -6973,9 +7282,12 @@ func (c *IAM) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput
 		input = &SetDefaultPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDefaultPolicyVersionOutput{})
+	output := &SetDefaultPolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetDefaultPolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -7043,7 +7355,10 @@ func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) Simu
 		input = &SimulateCustomPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SimulatePrincipalPolicyOutput{})
+	output := &SimulatePrincipalPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SimulateCustomPolicyRequest{Request: req, Input: input}
 }
 
@@ -7171,7 +7486,10 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 		input = &SimulatePrincipalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SimulatePrincipalPolicyOutput{})
+	output := &SimulatePrincipalPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SimulatePrincipalPolicyRequest{Request: req, Input: input}
 }
 
@@ -7277,9 +7595,12 @@ func (c *IAM) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAccessKe
 		input = &UpdateAccessKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccessKeyOutput{})
+	output := &UpdateAccessKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAccessKeyRequest{Request: req, Input: input}
 }
 
@@ -7334,9 +7655,12 @@ func (c *IAM) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPasswordPol
 		input = &UpdateAccountPasswordPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountPasswordPolicyOutput{})
+	output := &UpdateAccountPasswordPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAccountPasswordPolicyRequest{Request: req, Input: input}
 }
 
@@ -7385,9 +7709,12 @@ func (c *IAM) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInput) 
 		input = &UpdateAssumeRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssumeRolePolicyOutput{})
+	output := &UpdateAssumeRolePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAssumeRolePolicyRequest{Request: req, Input: input}
 }
 
@@ -7443,9 +7770,12 @@ func (c *IAM) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
 		input = &UpdateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	output := &UpdateGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGroupRequest{Request: req, Input: input}
 }
 
@@ -7495,9 +7825,12 @@ func (c *IAM) UpdateLoginProfileRequest(input *UpdateLoginProfileInput) UpdateLo
 		input = &UpdateLoginProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLoginProfileOutput{})
+	output := &UpdateLoginProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateLoginProfileRequest{Request: req, Input: input}
 }
 
@@ -7557,9 +7890,12 @@ func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDCo
 		input = &UpdateOpenIDConnectProviderThumbprintInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateOpenIDConnectProviderThumbprintOutput{})
+	output := &UpdateOpenIDConnectProviderThumbprintOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input}
 }
 
@@ -7605,7 +7941,10 @@ func (c *IAM) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput) Up
 		input = &UpdateRoleDescriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRoleDescriptionOutput{})
+	output := &UpdateRoleDescriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRoleDescriptionRequest{Request: req, Input: input}
 }
 
@@ -7653,7 +7992,10 @@ func (c *IAM) UpdateSAMLProviderRequest(input *UpdateSAMLProviderInput) UpdateSA
 		input = &UpdateSAMLProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSAMLProviderOutput{})
+	output := &UpdateSAMLProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSAMLProviderRequest{Request: req, Input: input}
 }
 
@@ -7708,9 +8050,12 @@ func (c *IAM) UpdateSSHPublicKeyRequest(input *UpdateSSHPublicKeyInput) UpdateSS
 		input = &UpdateSSHPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSSHPublicKeyOutput{})
+	output := &UpdateSSHPublicKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSSHPublicKeyRequest{Request: req, Input: input}
 }
 
@@ -7774,9 +8119,12 @@ func (c *IAM) UpdateServerCertificateRequest(input *UpdateServerCertificateInput
 		input = &UpdateServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServerCertificateOutput{})
+	output := &UpdateServerCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateServerCertificateRequest{Request: req, Input: input}
 }
 
@@ -7825,9 +8173,12 @@ func (c *IAM) UpdateServiceSpecificCredentialRequest(input *UpdateServiceSpecifi
 		input = &UpdateServiceSpecificCredentialInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceSpecificCredentialOutput{})
+	output := &UpdateServiceSpecificCredentialOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
@@ -7880,9 +8231,12 @@ func (c *IAM) UpdateSigningCertificateRequest(input *UpdateSigningCertificateInp
 		input = &UpdateSigningCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSigningCertificateOutput{})
+	output := &UpdateSigningCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSigningCertificateRequest{Request: req, Input: input}
 }
 
@@ -7939,9 +8293,12 @@ func (c *IAM) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 		input = &UpdateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserOutput{})
+	output := &UpdateUserOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserRequest{Request: req, Input: input}
 }
 
@@ -7993,7 +8350,10 @@ func (c *IAM) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) UploadSS
 		input = &UploadSSHPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadSSHPublicKeyOutput{})
+	output := &UploadSSHPublicKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadSSHPublicKeyRequest{Request: req, Input: input}
 }
 
@@ -8064,7 +8424,10 @@ func (c *IAM) UploadServerCertificateRequest(input *UploadServerCertificateInput
 		input = &UploadServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadServerCertificateOutput{})
+	output := &UploadServerCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadServerCertificateRequest{Request: req, Input: input}
 }
 
@@ -8126,7 +8489,10 @@ func (c *IAM) UploadSigningCertificateRequest(input *UploadSigningCertificateInp
 		input = &UploadSigningCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadSigningCertificateOutput{})
+	output := &UploadSigningCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadSigningCertificateRequest{Request: req, Input: input}
 }
 
@@ -8409,6 +8775,8 @@ func (s *AddClientIDToOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProviderOutput
 type AddClientIDToOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8419,6 +8787,11 @@ func (s AddClientIDToOpenIDConnectProviderOutput) String() string {
 // GoString returns the string representation
 func (s AddClientIDToOpenIDConnectProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddClientIDToOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfileRequest
@@ -8493,6 +8866,8 @@ func (s *AddRoleToInstanceProfileInput) SetRoleName(v string) *AddRoleToInstance
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfileOutput
 type AddRoleToInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8503,6 +8878,11 @@ func (s AddRoleToInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s AddRoleToInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddRoleToInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroupRequest
@@ -8577,6 +8957,8 @@ func (s *AddUserToGroupInput) SetUserName(v string) *AddUserToGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroupOutput
 type AddUserToGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8587,6 +8969,11 @@ func (s AddUserToGroupOutput) String() string {
 // GoString returns the string representation
 func (s AddUserToGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddUserToGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyRequest
@@ -8661,6 +9048,8 @@ func (s *AttachGroupPolicyInput) SetPolicyArn(v string) *AttachGroupPolicyInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyOutput
 type AttachGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8671,6 +9060,11 @@ func (s AttachGroupPolicyOutput) String() string {
 // GoString returns the string representation
 func (s AttachGroupPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachGroupPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyRequest
@@ -8745,6 +9139,8 @@ func (s *AttachRolePolicyInput) SetRoleName(v string) *AttachRolePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyOutput
 type AttachRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8755,6 +9151,11 @@ func (s AttachRolePolicyOutput) String() string {
 // GoString returns the string representation
 func (s AttachRolePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyRequest
@@ -8829,6 +9230,8 @@ func (s *AttachUserPolicyInput) SetUserName(v string) *AttachUserPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyOutput
 type AttachUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8839,6 +9242,11 @@ func (s AttachUserPolicyOutput) String() string {
 // GoString returns the string representation
 func (s AttachUserPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachUserPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about an attached policy.
@@ -8962,6 +9370,8 @@ func (s *ChangePasswordInput) SetOldPassword(v string) *ChangePasswordInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordOutput
 type ChangePasswordOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8972,6 +9382,11 @@ func (s ChangePasswordOutput) String() string {
 // GoString returns the string representation
 func (s ChangePasswordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ChangePasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about a condition context key. It includes the name
@@ -9086,6 +9501,8 @@ func (s *CreateAccessKeyInput) SetUserName(v string) *CreateAccessKeyInput {
 type CreateAccessKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure with details about the access key.
 	//
 	// AccessKey is a required field
@@ -9100,6 +9517,11 @@ func (s CreateAccessKeyOutput) String() string {
 // GoString returns the string representation
 func (s CreateAccessKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAccessKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccessKey sets the AccessKey field's value.
@@ -9159,6 +9581,8 @@ func (s *CreateAccountAliasInput) SetAccountAlias(v string) *CreateAccountAliasI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAliasOutput
 type CreateAccountAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9169,6 +9593,11 @@ func (s CreateAccountAliasOutput) String() string {
 // GoString returns the string representation
 func (s CreateAccountAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAccountAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupRequest
@@ -9248,6 +9677,8 @@ func (s *CreateGroupInput) SetPath(v string) *CreateGroupInput {
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the new group.
 	//
 	// Group is a required field
@@ -9262,6 +9693,11 @@ func (s CreateGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroup sets the Group field's value.
@@ -9345,6 +9781,8 @@ func (s *CreateInstanceProfileInput) SetPath(v string) *CreateInstanceProfileInp
 type CreateInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the new instance profile.
 	//
 	// InstanceProfile is a required field
@@ -9359,6 +9797,11 @@ func (s CreateInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s CreateInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceProfile sets the InstanceProfile field's value.
@@ -9456,6 +9899,8 @@ func (s *CreateLoginProfileInput) SetUserName(v string) *CreateLoginProfileInput
 type CreateLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing the user name and password create date.
 	//
 	// LoginProfile is a required field
@@ -9470,6 +9915,11 @@ func (s CreateLoginProfileOutput) String() string {
 // GoString returns the string representation
 func (s CreateLoginProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLoginProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoginProfile sets the LoginProfile field's value.
@@ -9586,6 +10036,8 @@ func (s *CreateOpenIDConnectProviderInput) SetUrl(v string) *CreateOpenIDConnect
 type CreateOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the new IAM OpenID Connect provider that
 	// is created. For more information, see OpenIDConnectProviderListEntry.
 	OpenIDConnectProviderArn *string `min:"20" type:"string"`
@@ -9599,6 +10051,11 @@ func (s CreateOpenIDConnectProviderOutput) String() string {
 // GoString returns the string representation
 func (s CreateOpenIDConnectProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
@@ -9721,6 +10178,8 @@ func (s *CreatePolicyInput) SetPolicyName(v string) *CreatePolicyInput {
 type CreatePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the new policy.
 	Policy *Policy `type:"structure"`
 }
@@ -9733,6 +10192,11 @@ func (s CreatePolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreatePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -9837,6 +10301,8 @@ func (s *CreatePolicyVersionInput) SetSetAsDefault(v bool) *CreatePolicyVersionI
 type CreatePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the new policy version.
 	PolicyVersion *PolicyVersion `type:"structure"`
 }
@@ -9849,6 +10315,11 @@ func (s CreatePolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreatePolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyVersion sets the PolicyVersion field's value.
@@ -9970,6 +10441,8 @@ func (s *CreateRoleInput) SetRoleName(v string) *CreateRoleInput {
 type CreateRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the new role.
 	//
 	// Role is a required field
@@ -9984,6 +10457,11 @@ func (s CreateRoleOutput) String() string {
 // GoString returns the string representation
 func (s CreateRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRole sets the Role field's value.
@@ -10069,6 +10547,8 @@ func (s *CreateSAMLProviderInput) SetSAMLMetadataDocument(v string) *CreateSAMLP
 type CreateSAMLProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the new SAML provider resource in IAM.
 	SAMLProviderArn *string `min:"20" type:"string"`
 }
@@ -10081,6 +10561,11 @@ func (s CreateSAMLProviderOutput) String() string {
 // GoString returns the string representation
 func (s CreateSAMLProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSAMLProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSAMLProviderArn sets the SAMLProviderArn field's value.
@@ -10162,6 +10647,8 @@ func (s *CreateServiceLinkedRoleInput) SetDescription(v string) *CreateServiceLi
 type CreateServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A Role object that contains details about the newly created role.
 	Role *Role `type:"structure"`
 }
@@ -10174,6 +10661,11 @@ func (s CreateServiceLinkedRoleOutput) String() string {
 // GoString returns the string representation
 func (s CreateServiceLinkedRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRole sets the Role field's value.
@@ -10252,6 +10744,8 @@ func (s *CreateServiceSpecificCredentialInput) SetUserName(v string) *CreateServ
 type CreateServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains information about the newly created service-specific
 	// credential.
 	//
@@ -10269,6 +10763,11 @@ func (s CreateServiceSpecificCredentialOutput) String() string {
 // GoString returns the string representation
 func (s CreateServiceSpecificCredentialOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServiceSpecificCredential sets the ServiceSpecificCredential field's value.
@@ -10354,6 +10853,8 @@ func (s *CreateUserInput) SetUserName(v string) *CreateUserInput {
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure with details about the new IAM user.
 	User *User `type:"structure"`
 }
@@ -10366,6 +10867,11 @@ func (s CreateUserOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.
@@ -10450,6 +10956,8 @@ func (s *CreateVirtualMFADeviceInput) SetVirtualMFADeviceName(v string) *CreateV
 type CreateVirtualMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the new virtual MFA device.
 	//
 	// VirtualMFADevice is a required field
@@ -10464,6 +10972,11 @@ func (s CreateVirtualMFADeviceOutput) String() string {
 // GoString returns the string representation
 func (s CreateVirtualMFADeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVirtualMFADeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVirtualMFADevice sets the VirtualMFADevice field's value.
@@ -10545,6 +11058,8 @@ func (s *DeactivateMFADeviceInput) SetUserName(v string) *DeactivateMFADeviceInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADeviceOutput
 type DeactivateMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10555,6 +11070,11 @@ func (s DeactivateMFADeviceOutput) String() string {
 // GoString returns the string representation
 func (s DeactivateMFADeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeactivateMFADeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKeyRequest
@@ -10624,6 +11144,8 @@ func (s *DeleteAccessKeyInput) SetUserName(v string) *DeleteAccessKeyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKeyOutput
 type DeleteAccessKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10634,6 +11156,11 @@ func (s DeleteAccessKeyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAccessKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAccessKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasRequest
@@ -10687,6 +11214,8 @@ func (s *DeleteAccountAliasInput) SetAccountAlias(v string) *DeleteAccountAliasI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasOutput
 type DeleteAccountAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10697,6 +11226,11 @@ func (s DeleteAccountAliasOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAccountAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAccountAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicyInput
@@ -10717,6 +11251,8 @@ func (s DeleteAccountPasswordPolicyInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicyOutput
 type DeleteAccountPasswordPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10727,6 +11263,11 @@ func (s DeleteAccountPasswordPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAccountPasswordPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAccountPasswordPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupRequest
@@ -10779,6 +11320,8 @@ func (s *DeleteGroupInput) SetGroupName(v string) *DeleteGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10789,6 +11332,11 @@ func (s DeleteGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicyRequest
@@ -10864,6 +11412,8 @@ func (s *DeleteGroupPolicyInput) SetPolicyName(v string) *DeleteGroupPolicyInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicyOutput
 type DeleteGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10874,6 +11424,11 @@ func (s DeleteGroupPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGroupPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGroupPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfileRequest
@@ -10926,6 +11481,8 @@ func (s *DeleteInstanceProfileInput) SetInstanceProfileName(v string) *DeleteIns
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfileOutput
 type DeleteInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10936,6 +11493,11 @@ func (s DeleteInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s DeleteInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileRequest
@@ -10988,6 +11550,8 @@ func (s *DeleteLoginProfileInput) SetUserName(v string) *DeleteLoginProfileInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileOutput
 type DeleteLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10998,6 +11562,11 @@ func (s DeleteLoginProfileOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLoginProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLoginProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderRequest
@@ -11048,6 +11617,8 @@ func (s *DeleteOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderOutput
 type DeleteOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11058,6 +11629,11 @@ func (s DeleteOpenIDConnectProviderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteOpenIDConnectProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyRequest
@@ -11110,6 +11686,8 @@ func (s *DeletePolicyInput) SetPolicyArn(v string) *DeletePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyOutput
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11120,6 +11698,11 @@ func (s DeletePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeletePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionRequest
@@ -11197,6 +11780,8 @@ func (s *DeletePolicyVersionInput) SetVersionId(v string) *DeletePolicyVersionIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionOutput
 type DeletePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11207,6 +11792,11 @@ func (s DeletePolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeletePolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleRequest
@@ -11259,6 +11849,8 @@ func (s *DeleteRoleInput) SetRoleName(v string) *DeleteRoleInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleOutput
 type DeleteRoleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11269,6 +11861,11 @@ func (s DeleteRoleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyRequest
@@ -11344,6 +11941,8 @@ func (s *DeleteRolePolicyInput) SetRoleName(v string) *DeleteRolePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyOutput
 type DeleteRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11354,6 +11953,11 @@ func (s DeleteRolePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRolePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProviderRequest
@@ -11402,6 +12006,8 @@ func (s *DeleteSAMLProviderInput) SetSAMLProviderArn(v string) *DeleteSAMLProvid
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProviderOutput
 type DeleteSAMLProviderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11412,6 +12018,11 @@ func (s DeleteSAMLProviderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSAMLProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSAMLProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKeyRequest
@@ -11486,6 +12097,8 @@ func (s *DeleteSSHPublicKeyInput) SetUserName(v string) *DeleteSSHPublicKeyInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKeyOutput
 type DeleteSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11496,6 +12109,11 @@ func (s DeleteSSHPublicKeyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSSHPublicKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificateRequest
@@ -11548,6 +12166,8 @@ func (s *DeleteServerCertificateInput) SetServerCertificateName(v string) *Delet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificateOutput
 type DeleteServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11558,6 +12178,11 @@ func (s DeleteServerCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteServerCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServerCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRoleRequest
@@ -11607,6 +12232,8 @@ func (s *DeleteServiceLinkedRoleInput) SetRoleName(v string) *DeleteServiceLinke
 type DeleteServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The deletion task identifier that you can use to check the status of the
 	// deletion. This identifier is returned in the format task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>.
 	//
@@ -11622,6 +12249,11 @@ func (s DeleteServiceLinkedRoleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteServiceLinkedRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletionTaskId sets the DeletionTaskId field's value.
@@ -11699,6 +12331,8 @@ func (s *DeleteServiceSpecificCredentialInput) SetUserName(v string) *DeleteServ
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredentialOutput
 type DeleteServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11709,6 +12343,11 @@ func (s DeleteServiceSpecificCredentialOutput) String() string {
 // GoString returns the string representation
 func (s DeleteServiceSpecificCredentialOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificateRequest
@@ -11777,6 +12416,8 @@ func (s *DeleteSigningCertificateInput) SetUserName(v string) *DeleteSigningCert
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificateOutput
 type DeleteSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11787,6 +12428,11 @@ func (s DeleteSigningCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSigningCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSigningCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserRequest
@@ -11839,6 +12485,8 @@ func (s *DeleteUserInput) SetUserName(v string) *DeleteUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserOutput
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11849,6 +12497,11 @@ func (s DeleteUserOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyRequest
@@ -11924,6 +12577,8 @@ func (s *DeleteUserPolicyInput) SetUserName(v string) *DeleteUserPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyOutput
 type DeleteUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11934,6 +12589,11 @@ func (s DeleteUserPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADeviceRequest
@@ -11987,6 +12647,8 @@ func (s *DeleteVirtualMFADeviceInput) SetSerialNumber(v string) *DeleteVirtualMF
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADeviceOutput
 type DeleteVirtualMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11997,6 +12659,11 @@ func (s DeleteVirtualMFADeviceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVirtualMFADeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVirtualMFADeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The reason that the service-linked role deletion failed.
@@ -12113,6 +12780,8 @@ func (s *DetachGroupPolicyInput) SetPolicyArn(v string) *DetachGroupPolicyInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyOutput
 type DetachGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12123,6 +12792,11 @@ func (s DetachGroupPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DetachGroupPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachGroupPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyRequest
@@ -12197,6 +12871,8 @@ func (s *DetachRolePolicyInput) SetRoleName(v string) *DetachRolePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyOutput
 type DetachRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12207,6 +12883,11 @@ func (s DetachRolePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DetachRolePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyRequest
@@ -12281,6 +12962,8 @@ func (s *DetachUserPolicyInput) SetUserName(v string) *DetachUserPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyOutput
 type DetachUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12291,6 +12974,11 @@ func (s DetachUserPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DetachUserPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachUserPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceRequest
@@ -12420,6 +13108,8 @@ func (s *EnableMFADeviceInput) SetUserName(v string) *EnableMFADeviceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceOutput
 type EnableMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12430,6 +13120,11 @@ func (s EnableMFADeviceOutput) String() string {
 // GoString returns the string representation
 func (s EnableMFADeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableMFADeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the results of a simulation.
@@ -12565,6 +13260,8 @@ func (s GenerateCredentialReportInput) GoString() string {
 type GenerateCredentialReportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the credential report.
 	Description *string `type:"string"`
 
@@ -12580,6 +13277,11 @@ func (s GenerateCredentialReportOutput) String() string {
 // GoString returns the string representation
 func (s GenerateCredentialReportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateCredentialReportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDescription sets the Description field's value.
@@ -12648,6 +13350,8 @@ func (s *GetAccessKeyLastUsedInput) SetAccessKeyId(v string) *GetAccessKeyLastUs
 type GetAccessKeyLastUsedOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains information about the last time the access key was used.
 	AccessKeyLastUsed *AccessKeyLastUsed `type:"structure"`
 
@@ -12663,6 +13367,11 @@ func (s GetAccessKeyLastUsedOutput) String() string {
 // GoString returns the string representation
 func (s GetAccessKeyLastUsedOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccessKeyLastUsedOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccessKeyLastUsed sets the AccessKeyLastUsed field's value.
@@ -12757,6 +13466,8 @@ func (s *GetAccountAuthorizationDetailsInput) SetMaxItems(v int64) *GetAccountAu
 type GetAccountAuthorizationDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list containing information about IAM groups.
 	GroupDetailList []GroupDetail `type:"list"`
 
@@ -12790,6 +13501,11 @@ func (s GetAccountAuthorizationDetailsOutput) String() string {
 // GoString returns the string representation
 func (s GetAccountAuthorizationDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccountAuthorizationDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroupDetailList sets the GroupDetailList field's value.
@@ -12848,6 +13564,8 @@ func (s GetAccountPasswordPolicyInput) GoString() string {
 type GetAccountPasswordPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the account's password policy.
 	//
 	// PasswordPolicy is a required field
@@ -12862,6 +13580,11 @@ func (s GetAccountPasswordPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetAccountPasswordPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccountPasswordPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPasswordPolicy sets the PasswordPolicy field's value.
@@ -12890,6 +13613,8 @@ func (s GetAccountSummaryInput) GoString() string {
 type GetAccountSummaryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A set of key value pairs containing information about IAM entity usage and
 	// IAM quotas.
 	SummaryMap map[string]int64 `type:"map"`
@@ -12903,6 +13628,11 @@ func (s GetAccountSummaryOutput) String() string {
 // GoString returns the string representation
 func (s GetAccountSummaryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccountSummaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSummaryMap sets the SummaryMap field's value.
@@ -13036,6 +13766,8 @@ func (s *GetContextKeysForPrincipalPolicyInput) SetPolicySourceArn(v string) *Ge
 type GetContextKeysForPrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of context keys that are referenced in the input policies.
 	ContextKeyNames []string `type:"list"`
 }
@@ -13048,6 +13780,11 @@ func (s GetContextKeysForPrincipalPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetContextKeysForPrincipalPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetContextKeysForPrincipalPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContextKeyNames sets the ContextKeyNames field's value.
@@ -13076,6 +13813,8 @@ func (s GetCredentialReportInput) GoString() string {
 type GetCredentialReportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains the credential report. The report is Base64-encoded.
 	//
 	// Content is automatically base64 encoded/decoded by the SDK.
@@ -13097,6 +13836,11 @@ func (s GetCredentialReportOutput) String() string {
 // GoString returns the string representation
 func (s GetCredentialReportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCredentialReportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContent sets the Content field's value.
@@ -13204,6 +13948,8 @@ func (s *GetGroupInput) SetMaxItems(v int64) *GetGroupInput {
 type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the group.
 	//
 	// Group is a required field
@@ -13235,6 +13981,11 @@ func (s GetGroupOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroup sets the Group field's value.
@@ -13335,6 +14086,8 @@ func (s *GetGroupPolicyInput) SetPolicyName(v string) *GetGroupPolicyInput {
 type GetGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The group the policy is associated with.
 	//
 	// GroupName is a required field
@@ -13359,6 +14112,11 @@ func (s GetGroupPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroupName sets the GroupName field's value.
@@ -13431,6 +14189,8 @@ func (s *GetInstanceProfileInput) SetInstanceProfileName(v string) *GetInstanceP
 type GetInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the instance profile.
 	//
 	// InstanceProfile is a required field
@@ -13445,6 +14205,11 @@ func (s GetInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceProfile sets the InstanceProfile field's value.
@@ -13505,6 +14270,8 @@ func (s *GetLoginProfileInput) SetUserName(v string) *GetLoginProfileInput {
 type GetLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing the user name and password create date for the user.
 	//
 	// LoginProfile is a required field
@@ -13519,6 +14286,11 @@ func (s GetLoginProfileOutput) String() string {
 // GoString returns the string representation
 func (s GetLoginProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLoginProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoginProfile sets the LoginProfile field's value.
@@ -13581,6 +14353,8 @@ func (s *GetOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string) *G
 type GetOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of client IDs (also known as audiences) that are associated with the
 	// specified IAM OIDC provider resource object. For more information, see CreateOpenIDConnectProvider.
 	ClientIDList []string `type:"list"`
@@ -13606,6 +14380,11 @@ func (s GetOpenIDConnectProviderOutput) String() string {
 // GoString returns the string representation
 func (s GetOpenIDConnectProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientIDList sets the ClientIDList field's value.
@@ -13685,6 +14464,8 @@ func (s *GetPolicyInput) SetPolicyArn(v string) *GetPolicyInput {
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the policy.
 	Policy *Policy `type:"structure"`
 }
@@ -13697,6 +14478,11 @@ func (s GetPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -13778,6 +14564,8 @@ func (s *GetPolicyVersionInput) SetVersionId(v string) *GetPolicyVersionInput {
 type GetPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the policy version.
 	PolicyVersion *PolicyVersion `type:"structure"`
 }
@@ -13790,6 +14578,11 @@ func (s GetPolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetPolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyVersion sets the PolicyVersion field's value.
@@ -13850,6 +14643,8 @@ func (s *GetRoleInput) SetRoleName(v string) *GetRoleInput {
 type GetRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the IAM role.
 	//
 	// Role is a required field
@@ -13864,6 +14659,11 @@ func (s GetRoleOutput) String() string {
 // GoString returns the string representation
 func (s GetRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRole sets the Role field's value.
@@ -13946,6 +14746,8 @@ func (s *GetRolePolicyInput) SetRoleName(v string) *GetRolePolicyInput {
 type GetRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The policy document.
 	//
 	// PolicyDocument is a required field
@@ -13970,6 +14772,11 @@ func (s GetRolePolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetRolePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyDocument sets the PolicyDocument field's value.
@@ -14043,6 +14850,8 @@ func (s *GetSAMLProviderInput) SetSAMLProviderArn(v string) *GetSAMLProviderInpu
 type GetSAMLProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date and time when the SAML provider was created.
 	CreateDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
@@ -14061,6 +14870,11 @@ func (s GetSAMLProviderOutput) String() string {
 // GoString returns the string representation
 func (s GetSAMLProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSAMLProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreateDate sets the CreateDate field's value.
@@ -14171,6 +14985,8 @@ func (s *GetSSHPublicKeyInput) SetUserName(v string) *GetSSHPublicKeyInput {
 type GetSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the SSH public key.
 	SSHPublicKey *SSHPublicKey `type:"structure"`
 }
@@ -14183,6 +14999,11 @@ func (s GetSSHPublicKeyOutput) String() string {
 // GoString returns the string representation
 func (s GetSSHPublicKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSSHPublicKey sets the SSHPublicKey field's value.
@@ -14243,6 +15064,8 @@ func (s *GetServerCertificateInput) SetServerCertificateName(v string) *GetServe
 type GetServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the server certificate.
 	//
 	// ServerCertificate is a required field
@@ -14257,6 +15080,11 @@ func (s GetServerCertificateOutput) String() string {
 // GoString returns the string representation
 func (s GetServerCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetServerCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServerCertificate sets the ServerCertificate field's value.
@@ -14313,6 +15141,8 @@ func (s *GetServiceLinkedRoleDeletionStatusInput) SetDeletionTaskId(v string) *G
 type GetServiceLinkedRoleDeletionStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An object that contains details about the reason the deletion failed.
 	Reason *DeletionTaskFailureReasonType `type:"structure"`
 
@@ -14330,6 +15160,11 @@ func (s GetServiceLinkedRoleDeletionStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetServiceLinkedRoleDeletionStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetServiceLinkedRoleDeletionStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReason sets the Reason field's value.
@@ -14391,6 +15226,8 @@ func (s *GetUserInput) SetUserName(v string) *GetUserInput {
 type GetUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure containing details about the IAM user.
 	//
 	// User is a required field
@@ -14405,6 +15242,11 @@ func (s GetUserOutput) String() string {
 // GoString returns the string representation
 func (s GetUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.
@@ -14487,6 +15329,8 @@ func (s *GetUserPolicyInput) SetUserName(v string) *GetUserPolicyInput {
 type GetUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The policy document.
 	//
 	// PolicyDocument is a required field
@@ -14511,6 +15355,11 @@ func (s GetUserPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetUserPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyDocument sets the PolicyDocument field's value.
@@ -14888,6 +15737,8 @@ func (s *ListAccessKeysInput) SetUserName(v string) *ListAccessKeysInput {
 type ListAccessKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of objects containing metadata about the access keys.
 	//
 	// AccessKeyMetadata is a required field
@@ -14914,6 +15765,11 @@ func (s ListAccessKeysOutput) String() string {
 // GoString returns the string representation
 func (s ListAccessKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAccessKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccessKeyMetadata sets the AccessKeyMetadata field's value.
@@ -14999,6 +15855,8 @@ func (s *ListAccountAliasesInput) SetMaxItems(v int64) *ListAccountAliasesInput 
 type ListAccountAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of aliases associated with the account. AWS supports only one alias
 	// per account.
 	//
@@ -15026,6 +15884,11 @@ func (s ListAccountAliasesOutput) String() string {
 // GoString returns the string representation
 func (s ListAccountAliasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAccountAliasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountAliases sets the AccountAliases field's value.
@@ -15150,6 +16013,8 @@ func (s *ListAttachedGroupPoliciesInput) SetPathPrefix(v string) *ListAttachedGr
 type ListAttachedGroupPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the attached policies.
 	AttachedPolicies []AttachedPolicy `type:"list"`
 
@@ -15174,6 +16039,11 @@ func (s ListAttachedGroupPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListAttachedGroupPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAttachedGroupPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachedPolicies sets the AttachedPolicies field's value.
@@ -15297,6 +16167,8 @@ func (s *ListAttachedRolePoliciesInput) SetRoleName(v string) *ListAttachedRoleP
 type ListAttachedRolePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the attached policies.
 	AttachedPolicies []AttachedPolicy `type:"list"`
 
@@ -15321,6 +16193,11 @@ func (s ListAttachedRolePoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListAttachedRolePoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAttachedRolePoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachedPolicies sets the AttachedPolicies field's value.
@@ -15444,6 +16321,8 @@ func (s *ListAttachedUserPoliciesInput) SetUserName(v string) *ListAttachedUserP
 type ListAttachedUserPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the attached policies.
 	AttachedPolicies []AttachedPolicy `type:"list"`
 
@@ -15468,6 +16347,11 @@ func (s ListAttachedUserPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListAttachedUserPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAttachedUserPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachedPolicies sets the AttachedPolicies field's value.
@@ -15608,6 +16492,8 @@ func (s *ListEntitiesForPolicyInput) SetPolicyArn(v string) *ListEntitiesForPoli
 type ListEntitiesForPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -15638,6 +16524,11 @@ func (s ListEntitiesForPolicyOutput) String() string {
 // GoString returns the string representation
 func (s ListEntitiesForPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListEntitiesForPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -15757,6 +16648,8 @@ func (s *ListGroupPoliciesInput) SetMaxItems(v int64) *ListGroupPoliciesInput {
 type ListGroupPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -15787,6 +16680,11 @@ func (s ListGroupPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -15894,6 +16792,8 @@ func (s *ListGroupsForUserInput) SetUserName(v string) *ListGroupsForUserInput {
 type ListGroupsForUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of groups.
 	//
 	// Groups is a required field
@@ -15920,6 +16820,11 @@ func (s ListGroupsForUserOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupsForUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupsForUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroups sets the Groups field's value.
@@ -16025,6 +16930,8 @@ func (s *ListGroupsInput) SetPathPrefix(v string) *ListGroupsInput {
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of groups.
 	//
 	// Groups is a required field
@@ -16051,6 +16958,11 @@ func (s ListGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroups sets the Groups field's value.
@@ -16158,6 +17070,8 @@ func (s *ListInstanceProfilesForRoleInput) SetRoleName(v string) *ListInstancePr
 type ListInstanceProfilesForRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of instance profiles.
 	//
 	// InstanceProfiles is a required field
@@ -16184,6 +17098,11 @@ func (s ListInstanceProfilesForRoleOutput) String() string {
 // GoString returns the string representation
 func (s ListInstanceProfilesForRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInstanceProfilesForRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceProfiles sets the InstanceProfiles field's value.
@@ -16290,6 +17209,8 @@ func (s *ListInstanceProfilesInput) SetPathPrefix(v string) *ListInstanceProfile
 type ListInstanceProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of instance profiles.
 	//
 	// InstanceProfiles is a required field
@@ -16316,6 +17237,11 @@ func (s ListInstanceProfilesOutput) String() string {
 // GoString returns the string representation
 func (s ListInstanceProfilesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInstanceProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceProfiles sets the InstanceProfiles field's value.
@@ -16417,6 +17343,8 @@ func (s *ListMFADevicesInput) SetUserName(v string) *ListMFADevicesInput {
 type ListMFADevicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -16443,6 +17371,11 @@ func (s ListMFADevicesOutput) String() string {
 // GoString returns the string representation
 func (s ListMFADevicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMFADevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -16483,6 +17416,8 @@ func (s ListOpenIDConnectProvidersInput) GoString() string {
 type ListOpenIDConnectProvidersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of IAM OIDC provider resource objects defined in the AWS account.
 	OpenIDConnectProviderList []OpenIDConnectProviderListEntry `type:"list"`
 }
@@ -16495,6 +17430,11 @@ func (s ListOpenIDConnectProvidersOutput) String() string {
 // GoString returns the string representation
 func (s ListOpenIDConnectProvidersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOpenIDConnectProvidersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOpenIDConnectProviderList sets the OpenIDConnectProviderList field's value.
@@ -16611,6 +17551,8 @@ func (s *ListPoliciesInput) SetScope(v PolicyScopeType) *ListPoliciesInput {
 type ListPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -16635,6 +17577,11 @@ func (s ListPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -16742,6 +17689,8 @@ func (s *ListPolicyVersionsInput) SetPolicyArn(v string) *ListPolicyVersionsInpu
 type ListPolicyVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -16770,6 +17719,11 @@ func (s ListPolicyVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListPolicyVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPolicyVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -16877,6 +17831,8 @@ func (s *ListRolePoliciesInput) SetRoleName(v string) *ListRolePoliciesInput {
 type ListRolePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -16903,6 +17859,11 @@ func (s ListRolePoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListRolePoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRolePoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -17008,6 +17969,8 @@ func (s *ListRolesInput) SetPathPrefix(v string) *ListRolesInput {
 type ListRolesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -17034,6 +17997,11 @@ func (s ListRolesOutput) String() string {
 // GoString returns the string representation
 func (s ListRolesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRolesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -17074,6 +18042,8 @@ func (s ListSAMLProvidersInput) GoString() string {
 type ListSAMLProvidersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of SAML provider resource objects defined in IAM for this AWS account.
 	SAMLProviderList []SAMLProviderListEntry `type:"list"`
 }
@@ -17086,6 +18056,11 @@ func (s ListSAMLProvidersOutput) String() string {
 // GoString returns the string representation
 func (s ListSAMLProvidersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSAMLProvidersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSAMLProviderList sets the SAMLProviderList field's value.
@@ -17177,6 +18152,8 @@ func (s *ListSSHPublicKeysInput) SetUserName(v string) *ListSSHPublicKeysInput {
 type ListSSHPublicKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -17201,6 +18178,11 @@ func (s ListSSHPublicKeysOutput) String() string {
 // GoString returns the string representation
 func (s ListSSHPublicKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSSHPublicKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -17307,6 +18289,8 @@ func (s *ListServerCertificatesInput) SetPathPrefix(v string) *ListServerCertifi
 type ListServerCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -17333,6 +18317,11 @@ func (s ListServerCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s ListServerCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListServerCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -17410,6 +18399,8 @@ func (s *ListServiceSpecificCredentialsInput) SetUserName(v string) *ListService
 type ListServiceSpecificCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of structures that each contain details about a service-specific credential.
 	ServiceSpecificCredentials []ServiceSpecificCredentialMetadata `type:"list"`
 }
@@ -17422,6 +18413,11 @@ func (s ListServiceSpecificCredentialsOutput) String() string {
 // GoString returns the string representation
 func (s ListServiceSpecificCredentialsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListServiceSpecificCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServiceSpecificCredentials sets the ServiceSpecificCredentials field's value.
@@ -17511,6 +18507,8 @@ func (s *ListSigningCertificatesInput) SetUserName(v string) *ListSigningCertifi
 type ListSigningCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the user's signing certificate information.
 	//
 	// Certificates is a required field
@@ -17537,6 +18535,11 @@ func (s ListSigningCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s ListSigningCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSigningCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificates sets the Certificates field's value.
@@ -17644,6 +18647,8 @@ func (s *ListUserPoliciesInput) SetUserName(v string) *ListUserPoliciesInput {
 type ListUserPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -17670,6 +18675,11 @@ func (s ListUserPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListUserPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUserPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -17776,6 +18786,8 @@ func (s *ListUsersInput) SetPathPrefix(v string) *ListUsersInput {
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -17802,6 +18814,11 @@ func (s ListUsersOutput) String() string {
 // GoString returns the string representation
 func (s ListUsersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -17898,6 +18915,8 @@ func (s *ListVirtualMFADevicesInput) SetMaxItems(v int64) *ListVirtualMFADevices
 type ListVirtualMFADevicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer
@@ -17925,6 +18944,11 @@ func (s ListVirtualMFADevicesOutput) String() string {
 // GoString returns the string representation
 func (s ListVirtualMFADevicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVirtualMFADevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -18865,6 +19889,8 @@ func (s *PutGroupPolicyInput) SetPolicyName(v string) *PutGroupPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicyOutput
 type PutGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -18875,6 +19901,11 @@ func (s PutGroupPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutGroupPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutGroupPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyRequest
@@ -18974,6 +20005,8 @@ func (s *PutRolePolicyInput) SetRoleName(v string) *PutRolePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyOutput
 type PutRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -18984,6 +20017,11 @@ func (s PutRolePolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutRolePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicyRequest
@@ -19083,6 +20121,8 @@ func (s *PutUserPolicyInput) SetUserName(v string) *PutUserPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicyOutput
 type PutUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19093,6 +20133,11 @@ func (s PutUserPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutUserPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutUserPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProviderRequest
@@ -19166,6 +20211,8 @@ func (s *RemoveClientIDFromOpenIDConnectProviderInput) SetOpenIDConnectProviderA
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProviderOutput
 type RemoveClientIDFromOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19176,6 +20223,11 @@ func (s RemoveClientIDFromOpenIDConnectProviderOutput) String() string {
 // GoString returns the string representation
 func (s RemoveClientIDFromOpenIDConnectProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveClientIDFromOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfileRequest
@@ -19250,6 +20302,8 @@ func (s *RemoveRoleFromInstanceProfileInput) SetRoleName(v string) *RemoveRoleFr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfileOutput
 type RemoveRoleFromInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19260,6 +20314,11 @@ func (s RemoveRoleFromInstanceProfileOutput) String() string {
 // GoString returns the string representation
 func (s RemoveRoleFromInstanceProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveRoleFromInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroupRequest
@@ -19334,6 +20393,8 @@ func (s *RemoveUserFromGroupInput) SetUserName(v string) *RemoveUserFromGroupInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroupOutput
 type RemoveUserFromGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19344,6 +20405,11 @@ func (s RemoveUserFromGroupOutput) String() string {
 // GoString returns the string representation
 func (s RemoveUserFromGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveUserFromGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredentialRequest
@@ -19415,6 +20481,8 @@ func (s *ResetServiceSpecificCredentialInput) SetUserName(v string) *ResetServic
 type ResetServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure with details about the updated service-specific credential, including
 	// the new password.
 	//
@@ -19431,6 +20499,11 @@ func (s ResetServiceSpecificCredentialOutput) String() string {
 // GoString returns the string representation
 func (s ResetServiceSpecificCredentialOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServiceSpecificCredential sets the ServiceSpecificCredential field's value.
@@ -19635,6 +20708,8 @@ func (s *ResyncMFADeviceInput) SetUserName(v string) *ResyncMFADeviceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADeviceOutput
 type ResyncMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -19645,6 +20720,11 @@ func (s ResyncMFADeviceOutput) String() string {
 // GoString returns the string representation
 func (s ResyncMFADeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResyncMFADeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about an IAM role. This structure is returned as a response
@@ -20476,6 +21556,8 @@ func (s *SetDefaultPolicyVersionInput) SetVersionId(v string) *SetDefaultPolicyV
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionOutput
 type SetDefaultPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -20486,6 +21568,11 @@ func (s SetDefaultPolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s SetDefaultPolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetDefaultPolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about an X.509 signing certificate.
@@ -21102,6 +22189,8 @@ func (s *SimulatePrincipalPolicyInput) SetResourcePolicy(v string) *SimulatePrin
 type SimulatePrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The results of the simulation.
 	EvaluationResults []EvaluationResult `type:"list"`
 
@@ -21126,6 +22215,11 @@ func (s SimulatePrincipalPolicyOutput) String() string {
 // GoString returns the string representation
 func (s SimulatePrincipalPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SimulatePrincipalPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluationResults sets the EvaluationResults field's value.
@@ -21284,6 +22378,8 @@ func (s *UpdateAccessKeyInput) SetUserName(v string) *UpdateAccessKeyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyOutput
 type UpdateAccessKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21294,6 +22390,11 @@ func (s UpdateAccessKeyOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAccessKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAccessKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyRequest
@@ -21444,6 +22545,8 @@ func (s *UpdateAccountPasswordPolicyInput) SetRequireUppercaseCharacters(v bool)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyOutput
 type UpdateAccountPasswordPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21454,6 +22557,11 @@ func (s UpdateAccountPasswordPolicyOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAccountPasswordPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAccountPasswordPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicyRequest
@@ -21531,6 +22639,8 @@ func (s *UpdateAssumeRolePolicyInput) SetRoleName(v string) *UpdateAssumeRolePol
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicyOutput
 type UpdateAssumeRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21541,6 +22651,11 @@ func (s UpdateAssumeRolePolicyOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAssumeRolePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAssumeRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupRequest
@@ -21628,6 +22743,8 @@ func (s *UpdateGroupInput) SetNewPath(v string) *UpdateGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupOutput
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21638,6 +22755,11 @@ func (s UpdateGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileRequest
@@ -21721,6 +22843,8 @@ func (s *UpdateLoginProfileInput) SetUserName(v string) *UpdateLoginProfileInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileOutput
 type UpdateLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21731,6 +22855,11 @@ func (s UpdateLoginProfileOutput) String() string {
 // GoString returns the string representation
 func (s UpdateLoginProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateLoginProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprintRequest
@@ -21801,6 +22930,8 @@ func (s *UpdateOpenIDConnectProviderThumbprintInput) SetThumbprintList(v []strin
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprintOutput
 type UpdateOpenIDConnectProviderThumbprintOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -21811,6 +22942,11 @@ func (s UpdateOpenIDConnectProviderThumbprintOutput) String() string {
 // GoString returns the string representation
 func (s UpdateOpenIDConnectProviderThumbprintOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateOpenIDConnectProviderThumbprintOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescriptionRequest
@@ -21875,6 +23011,8 @@ func (s *UpdateRoleDescriptionInput) SetRoleName(v string) *UpdateRoleDescriptio
 type UpdateRoleDescriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the modified role.
 	Role *Role `type:"structure"`
 }
@@ -21887,6 +23025,11 @@ func (s UpdateRoleDescriptionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRoleDescriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRoleDescriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRole sets the Role field's value.
@@ -21969,6 +23112,8 @@ func (s *UpdateSAMLProviderInput) SetSAMLProviderArn(v string) *UpdateSAMLProvid
 type UpdateSAMLProviderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the SAML provider that was updated.
 	SAMLProviderArn *string `min:"20" type:"string"`
 }
@@ -21981,6 +23126,11 @@ func (s UpdateSAMLProviderOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSAMLProviderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSAMLProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSAMLProviderArn sets the SAMLProviderArn field's value.
@@ -22077,6 +23227,8 @@ func (s *UpdateSSHPublicKeyInput) SetUserName(v string) *UpdateSSHPublicKeyInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyOutput
 type UpdateSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22087,6 +23239,11 @@ func (s UpdateSSHPublicKeyOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSSHPublicKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificateRequest
@@ -22176,6 +23333,8 @@ func (s *UpdateServerCertificateInput) SetServerCertificateName(v string) *Updat
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificateOutput
 type UpdateServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22186,6 +23345,11 @@ func (s UpdateServerCertificateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateServerCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateServerCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredentialRequest
@@ -22270,6 +23434,8 @@ func (s *UpdateServiceSpecificCredentialInput) SetUserName(v string) *UpdateServ
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredentialOutput
 type UpdateServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22280,6 +23446,11 @@ func (s UpdateServiceSpecificCredentialOutput) String() string {
 // GoString returns the string representation
 func (s UpdateServiceSpecificCredentialOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateRequest
@@ -22364,6 +23535,8 @@ func (s *UpdateSigningCertificateInput) SetUserName(v string) *UpdateSigningCert
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateOutput
 type UpdateSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22374,6 +23547,11 @@ func (s UpdateSigningCertificateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSigningCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSigningCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserRequest
@@ -22463,6 +23641,8 @@ func (s *UpdateUserInput) SetUserName(v string) *UpdateUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserOutput
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -22473,6 +23653,11 @@ func (s UpdateUserOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKeyRequest
@@ -22553,6 +23738,8 @@ func (s *UploadSSHPublicKeyInput) SetUserName(v string) *UploadSSHPublicKeyInput
 type UploadSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains information about the SSH public key.
 	SSHPublicKey *SSHPublicKey `type:"structure"`
 }
@@ -22565,6 +23752,11 @@ func (s UploadSSHPublicKeyOutput) String() string {
 // GoString returns the string representation
 func (s UploadSSHPublicKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSSHPublicKey sets the SSHPublicKey field's value.
@@ -22722,6 +23914,8 @@ func (s *UploadServerCertificateInput) SetServerCertificateName(v string) *Uploa
 type UploadServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The meta information of the uploaded server certificate without its certificate
 	// body, certificate chain, and private key.
 	ServerCertificateMetadata *ServerCertificateMetadata `type:"structure"`
@@ -22735,6 +23929,11 @@ func (s UploadServerCertificateOutput) String() string {
 // GoString returns the string representation
 func (s UploadServerCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadServerCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServerCertificateMetadata sets the ServerCertificateMetadata field's value.
@@ -22814,6 +24013,8 @@ func (s *UploadSigningCertificateInput) SetUserName(v string) *UploadSigningCert
 type UploadSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the certificate.
 	//
 	// Certificate is a required field
@@ -22828,6 +24029,11 @@ func (s UploadSigningCertificateOutput) String() string {
 // GoString returns the string representation
 func (s UploadSigningCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadSigningCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificate sets the Certificate field's value.

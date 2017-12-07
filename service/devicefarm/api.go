@@ -51,7 +51,10 @@ func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) Creat
 		input = &CreateDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDevicePoolOutput{})
+	output := &CreateDevicePoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDevicePoolRequest{Request: req, Input: input}
 }
 
@@ -97,7 +100,10 @@ func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInpu
 		input = &CreateNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNetworkProfileOutput{})
+	output := &CreateNetworkProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNetworkProfileRequest{Request: req, Input: input}
 }
 
@@ -143,7 +149,10 @@ func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) CreateProje
 		input = &CreateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProjectOutput{})
+	output := &CreateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProjectRequest{Request: req, Input: input}
 }
 
@@ -189,7 +198,10 @@ func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessS
 		input = &CreateRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRemoteAccessSessionOutput{})
+	output := &CreateRemoteAccessSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
@@ -235,7 +247,10 @@ func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) CreateUploadR
 		input = &CreateUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUploadOutput{})
+	output := &CreateUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUploadRequest{Request: req, Input: input}
 }
 
@@ -282,7 +297,10 @@ func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) Delet
 		input = &DeleteDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDevicePoolOutput{})
+	output := &DeleteDevicePoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDevicePoolRequest{Request: req, Input: input}
 }
 
@@ -328,7 +346,10 @@ func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInpu
 		input = &DeleteNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkProfileOutput{})
+	output := &DeleteNetworkProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNetworkProfileRequest{Request: req, Input: input}
 }
 
@@ -376,7 +397,10 @@ func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) DeleteProje
 		input = &DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	output := &DeleteProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProjectRequest{Request: req, Input: input}
 }
 
@@ -422,7 +446,10 @@ func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessS
 		input = &DeleteRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRemoteAccessSessionOutput{})
+	output := &DeleteRemoteAccessSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
@@ -470,7 +497,10 @@ func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
 		input = &DeleteRunInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRunOutput{})
+	output := &DeleteRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRunRequest{Request: req, Input: input}
 }
 
@@ -516,7 +546,10 @@ func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) DeleteUploadR
 		input = &DeleteUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUploadOutput{})
+	output := &DeleteUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUploadRequest{Request: req, Input: input}
 }
 
@@ -563,7 +596,10 @@ func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) G
 		input = &GetAccountSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	output := &GetAccountSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountSettingsRequest{Request: req, Input: input}
 }
 
@@ -609,7 +645,10 @@ func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 		input = &GetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceOutput{})
+	output := &GetDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeviceRequest{Request: req, Input: input}
 }
 
@@ -655,7 +694,10 @@ func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePo
 		input = &GetDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevicePoolOutput{})
+	output := &GetDevicePoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDevicePoolRequest{Request: req, Input: input}
 }
 
@@ -701,7 +743,10 @@ func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompa
 		input = &GetDevicePoolCompatibilityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevicePoolCompatibilityOutput{})
+	output := &GetDevicePoolCompatibilityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDevicePoolCompatibilityRequest{Request: req, Input: input}
 }
 
@@ -747,7 +792,10 @@ func (c *DeviceFarm) GetJobRequest(input *GetJobInput) GetJobRequest {
 		input = &GetJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobOutput{})
+	output := &GetJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobRequest{Request: req, Input: input}
 }
 
@@ -793,7 +841,10 @@ func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) Get
 		input = &GetNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNetworkProfileOutput{})
+	output := &GetNetworkProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetNetworkProfileRequest{Request: req, Input: input}
 }
 
@@ -850,7 +901,10 @@ func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) Get
 		input = &GetOfferingStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOfferingStatusOutput{})
+	output := &GetOfferingStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOfferingStatusRequest{Request: req, Input: input}
 }
 
@@ -946,7 +1000,10 @@ func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) GetProjectRequest
 		input = &GetProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &GetProjectOutput{})
+	output := &GetProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetProjectRequest{Request: req, Input: input}
 }
 
@@ -992,7 +1049,10 @@ func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSession
 		input = &GetRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRemoteAccessSessionOutput{})
+	output := &GetRemoteAccessSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
@@ -1038,7 +1098,10 @@ func (c *DeviceFarm) GetRunRequest(input *GetRunInput) GetRunRequest {
 		input = &GetRunInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRunOutput{})
+	output := &GetRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRunRequest{Request: req, Input: input}
 }
 
@@ -1084,7 +1147,10 @@ func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
 		input = &GetSuiteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSuiteOutput{})
+	output := &GetSuiteOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSuiteRequest{Request: req, Input: input}
 }
 
@@ -1130,7 +1196,10 @@ func (c *DeviceFarm) GetTestRequest(input *GetTestInput) GetTestRequest {
 		input = &GetTestInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTestOutput{})
+	output := &GetTestOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTestRequest{Request: req, Input: input}
 }
 
@@ -1176,7 +1245,10 @@ func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
 		input = &GetUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUploadOutput{})
+	output := &GetUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUploadRequest{Request: req, Input: input}
 }
 
@@ -1224,7 +1296,10 @@ func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteA
 		input = &InstallToRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &InstallToRemoteAccessSessionOutput{})
+	output := &InstallToRemoteAccessSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InstallToRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
@@ -1276,7 +1351,10 @@ func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) ListArtifac
 		input = &ListArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListArtifactsOutput{})
+	output := &ListArtifactsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListArtifactsRequest{Request: req, Input: input}
 }
 
@@ -1378,7 +1456,10 @@ func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDev
 		input = &ListDevicePoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevicePoolsOutput{})
+	output := &ListDevicePoolsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDevicePoolsRequest{Request: req, Input: input}
 }
 
@@ -1480,7 +1561,10 @@ func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequ
 		input = &ListDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevicesOutput{})
+	output := &ListDevicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDevicesRequest{Request: req, Input: input}
 }
 
@@ -1582,7 +1666,10 @@ func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 		input = &ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	output := &ListJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListJobsRequest{Request: req, Input: input}
 }
 
@@ -1678,7 +1765,10 @@ func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput)
 		input = &ListNetworkProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNetworkProfilesOutput{})
+	output := &ListNetworkProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListNetworkProfilesRequest{Request: req, Input: input}
 }
 
@@ -1728,7 +1818,10 @@ func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotions
 		input = &ListOfferingPromotionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingPromotionsOutput{})
+	output := &ListOfferingPromotionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOfferingPromotionsRequest{Request: req, Input: input}
 }
 
@@ -1785,7 +1878,10 @@ func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransact
 		input = &ListOfferingTransactionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingTransactionsOutput{})
+	output := &ListOfferingTransactionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOfferingTransactionsRequest{Request: req, Input: input}
 }
 
@@ -1892,7 +1988,10 @@ func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) ListOfferin
 		input = &ListOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingsOutput{})
+	output := &ListOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOfferingsRequest{Request: req, Input: input}
 }
 
@@ -1994,7 +2093,10 @@ func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) ListProjectsR
 		input = &ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	output := &ListProjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProjectsRequest{Request: req, Input: input}
 }
 
@@ -2090,7 +2192,10 @@ func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSess
 		input = &ListRemoteAccessSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRemoteAccessSessionsOutput{})
+	output := &ListRemoteAccessSessionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRemoteAccessSessionsRequest{Request: req, Input: input}
 }
 
@@ -2142,7 +2247,10 @@ func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 		input = &ListRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRunsOutput{})
+	output := &ListRunsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRunsRequest{Request: req, Input: input}
 }
 
@@ -2244,7 +2352,10 @@ func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) ListSamplesRequ
 		input = &ListSamplesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSamplesOutput{})
+	output := &ListSamplesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSamplesRequest{Request: req, Input: input}
 }
 
@@ -2346,7 +2457,10 @@ func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest
 		input = &ListSuitesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSuitesOutput{})
+	output := &ListSuitesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSuitesRequest{Request: req, Input: input}
 }
 
@@ -2448,7 +2562,10 @@ func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) ListTestsRequest {
 		input = &ListTestsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTestsOutput{})
+	output := &ListTestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTestsRequest{Request: req, Input: input}
 }
 
@@ -2550,7 +2667,10 @@ func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) L
 		input = &ListUniqueProblemsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUniqueProblemsOutput{})
+	output := &ListUniqueProblemsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUniqueProblemsRequest{Request: req, Input: input}
 }
 
@@ -2652,7 +2772,10 @@ func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) ListUploadsRequ
 		input = &ListUploadsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUploadsOutput{})
+	output := &ListUploadsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListUploadsRequest{Request: req, Input: input}
 }
 
@@ -2753,7 +2876,10 @@ func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) Purch
 		input = &PurchaseOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseOfferingOutput{})
+	output := &PurchaseOfferingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseOfferingRequest{Request: req, Input: input}
 }
 
@@ -2803,7 +2929,10 @@ func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferi
 		input = &RenewOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &RenewOfferingOutput{})
+	output := &RenewOfferingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RenewOfferingRequest{Request: req, Input: input}
 }
 
@@ -2849,7 +2978,10 @@ func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequ
 		input = &ScheduleRunInput{}
 	}
 
-	req := c.newRequest(op, input, &ScheduleRunOutput{})
+	output := &ScheduleRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ScheduleRunRequest{Request: req, Input: input}
 }
 
@@ -2895,7 +3027,10 @@ func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessi
 		input = &StopRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopRemoteAccessSessionOutput{})
+	output := &StopRemoteAccessSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
@@ -2946,7 +3081,10 @@ func (c *DeviceFarm) StopRunRequest(input *StopRunInput) StopRunRequest {
 		input = &StopRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StopRunOutput{})
+	output := &StopRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopRunRequest{Request: req, Input: input}
 }
 
@@ -2994,7 +3132,10 @@ func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) Updat
 		input = &UpdateDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDevicePoolOutput{})
+	output := &UpdateDevicePoolOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDevicePoolRequest{Request: req, Input: input}
 }
 
@@ -3040,7 +3181,10 @@ func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInpu
 		input = &UpdateNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNetworkProfileOutput{})
+	output := &UpdateNetworkProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateNetworkProfileRequest{Request: req, Input: input}
 }
 
@@ -3086,7 +3230,10 @@ func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) UpdateProje
 		input = &UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	output := &UpdateProjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProjectRequest{Request: req, Input: input}
 }
 
@@ -3497,6 +3644,8 @@ func (s *CreateDevicePoolInput) SetRules(v []Rule) *CreateDevicePoolInput {
 type CreateDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created device pool.
 	DevicePool *DevicePool `locationName:"devicePool" type:"structure"`
 }
@@ -3509,6 +3658,11 @@ func (s CreateDevicePoolOutput) String() string {
 // GoString returns the string representation
 func (s CreateDevicePoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevicePool sets the DevicePool field's value.
@@ -3674,6 +3828,8 @@ func (s *CreateNetworkProfileInput) SetUplinkLossPercent(v int64) *CreateNetwork
 type CreateNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The network profile that is returned by the create network profile request.
 	NetworkProfile *NetworkProfile `locationName:"networkProfile" type:"structure"`
 }
@@ -3686,6 +3842,11 @@ func (s CreateNetworkProfileOutput) String() string {
 // GoString returns the string representation
 func (s CreateNetworkProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNetworkProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkProfile sets the NetworkProfile field's value.
@@ -3751,6 +3912,8 @@ func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created project.
 	Project *Project `locationName:"project" type:"structure"`
 }
@@ -3763,6 +3926,11 @@ func (s CreateProjectOutput) String() string {
 // GoString returns the string representation
 func (s CreateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProject sets the Project field's value.
@@ -3917,6 +4085,8 @@ func (s *CreateRemoteAccessSessionInput) SetSshPublicKey(v string) *CreateRemote
 type CreateRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A container that describes the remote access session when the request to
 	// create a remote access session is sent.
 	RemoteAccessSession *RemoteAccessSession `locationName:"remoteAccessSession" type:"structure"`
@@ -3930,6 +4100,11 @@ func (s CreateRemoteAccessSessionOutput) String() string {
 // GoString returns the string representation
 func (s CreateRemoteAccessSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRemoteAccessSession sets the RemoteAccessSession field's value.
@@ -4068,6 +4243,8 @@ func (s *CreateUploadInput) SetType(v UploadType) *CreateUploadInput {
 type CreateUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created upload.
 	Upload *Upload `locationName:"upload" type:"structure"`
 }
@@ -4080,6 +4257,11 @@ func (s CreateUploadOutput) String() string {
 // GoString returns the string representation
 func (s CreateUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUpload sets the Upload field's value.
@@ -4188,6 +4370,8 @@ func (s *DeleteDevicePoolInput) SetArn(v string) *DeleteDevicePoolInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePoolResult
 type DeleteDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4198,6 +4382,11 @@ func (s DeleteDevicePoolOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDevicePoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfileRequest
@@ -4246,6 +4435,8 @@ func (s *DeleteNetworkProfileInput) SetArn(v string) *DeleteNetworkProfileInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfileResult
 type DeleteNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4256,6 +4447,11 @@ func (s DeleteNetworkProfileOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNetworkProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNetworkProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to the delete project operation.
@@ -4307,6 +4503,8 @@ func (s *DeleteProjectInput) SetArn(v string) *DeleteProjectInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProjectResult
 type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4317,6 +4515,11 @@ func (s DeleteProjectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to delete the specified remote access session.
@@ -4369,6 +4572,8 @@ func (s *DeleteRemoteAccessSessionInput) SetArn(v string) *DeleteRemoteAccessSes
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSessionResult
 type DeleteRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4379,6 +4584,11 @@ func (s DeleteRemoteAccessSessionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRemoteAccessSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to the delete run operation.
@@ -4429,6 +4639,8 @@ func (s *DeleteRunInput) SetArn(v string) *DeleteRunInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRunResult
 type DeleteRunOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4439,6 +4651,11 @@ func (s DeleteRunOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a request to the delete upload operation.
@@ -4490,6 +4707,8 @@ func (s *DeleteUploadInput) SetArn(v string) *DeleteUploadInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUploadResult
 type DeleteUploadOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4500,6 +4719,11 @@ func (s DeleteUploadOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a device type that an app is tested against.
@@ -4919,6 +5143,8 @@ func (s GetAccountSettingsInput) GoString() string {
 type GetAccountSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The account settings.
 	AccountSettings *AccountSettings `locationName:"accountSettings" type:"structure"`
 }
@@ -4931,6 +5157,11 @@ func (s GetAccountSettingsOutput) String() string {
 // GoString returns the string representation
 func (s GetAccountSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccountSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountSettings sets the AccountSettings field's value.
@@ -4988,6 +5219,8 @@ func (s *GetDeviceInput) SetArn(v string) *GetDeviceInput {
 type GetDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An object containing information about the requested device.
 	Device *Device `locationName:"device" type:"structure"`
 }
@@ -5000,6 +5233,11 @@ func (s GetDeviceOutput) String() string {
 // GoString returns the string representation
 func (s GetDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevice sets the Device field's value.
@@ -5124,6 +5362,8 @@ func (s *GetDevicePoolCompatibilityInput) SetTestType(v TestType) *GetDevicePool
 type GetDevicePoolCompatibilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about compatible devices.
 	CompatibleDevices []DevicePoolCompatibilityResult `locationName:"compatibleDevices" type:"list"`
 
@@ -5139,6 +5379,11 @@ func (s GetDevicePoolCompatibilityOutput) String() string {
 // GoString returns the string representation
 func (s GetDevicePoolCompatibilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDevicePoolCompatibilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCompatibleDevices sets the CompatibleDevices field's value.
@@ -5202,6 +5447,8 @@ func (s *GetDevicePoolInput) SetArn(v string) *GetDevicePoolInput {
 type GetDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An object containing information about the requested device pool.
 	DevicePool *DevicePool `locationName:"devicePool" type:"structure"`
 }
@@ -5214,6 +5461,11 @@ func (s GetDevicePoolOutput) String() string {
 // GoString returns the string representation
 func (s GetDevicePoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevicePool sets the DevicePool field's value.
@@ -5271,6 +5523,8 @@ func (s *GetJobInput) SetArn(v string) *GetJobInput {
 type GetJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An object containing information about the requested job.
 	Job *Job `locationName:"job" type:"structure"`
 }
@@ -5283,6 +5537,11 @@ func (s GetJobOutput) String() string {
 // GoString returns the string representation
 func (s GetJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJob sets the Job field's value.
@@ -5339,6 +5598,8 @@ func (s *GetNetworkProfileInput) SetArn(v string) *GetNetworkProfileInput {
 type GetNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The network profile.
 	NetworkProfile *NetworkProfile `locationName:"networkProfile" type:"structure"`
 }
@@ -5351,6 +5612,11 @@ func (s GetNetworkProfileOutput) String() string {
 // GoString returns the string representation
 func (s GetNetworkProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetNetworkProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkProfile sets the NetworkProfile field's value.
@@ -5404,6 +5670,8 @@ func (s *GetOfferingStatusInput) SetNextToken(v string) *GetOfferingStatusInput 
 type GetOfferingStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// When specified, gets the offering status for the current period.
 	Current map[string]OfferingStatus `locationName:"current" type:"map"`
 
@@ -5423,6 +5691,11 @@ func (s GetOfferingStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetOfferingStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOfferingStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCurrent sets the Current field's value.
@@ -5492,6 +5765,8 @@ func (s *GetProjectInput) SetArn(v string) *GetProjectInput {
 type GetProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The project you wish to get information about.
 	Project *Project `locationName:"project" type:"structure"`
 }
@@ -5504,6 +5779,11 @@ func (s GetProjectOutput) String() string {
 // GoString returns the string representation
 func (s GetProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProject sets the Project field's value.
@@ -5564,6 +5844,8 @@ func (s *GetRemoteAccessSessionInput) SetArn(v string) *GetRemoteAccessSessionIn
 type GetRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A container that lists detailed information about the remote access session.
 	RemoteAccessSession *RemoteAccessSession `locationName:"remoteAccessSession" type:"structure"`
 }
@@ -5576,6 +5858,11 @@ func (s GetRemoteAccessSessionOutput) String() string {
 // GoString returns the string representation
 func (s GetRemoteAccessSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRemoteAccessSession sets the RemoteAccessSession field's value.
@@ -5633,6 +5920,8 @@ func (s *GetRunInput) SetArn(v string) *GetRunInput {
 type GetRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The run you wish to get results from.
 	Run *Run `locationName:"run" type:"structure"`
 }
@@ -5645,6 +5934,11 @@ func (s GetRunOutput) String() string {
 // GoString returns the string representation
 func (s GetRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRun sets the Run field's value.
@@ -5702,6 +5996,8 @@ func (s *GetSuiteInput) SetArn(v string) *GetSuiteInput {
 type GetSuiteOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A collection of one or more tests.
 	Suite *Suite `locationName:"suite" type:"structure"`
 }
@@ -5714,6 +6010,11 @@ func (s GetSuiteOutput) String() string {
 // GoString returns the string representation
 func (s GetSuiteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSuiteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSuite sets the Suite field's value.
@@ -5771,6 +6072,8 @@ func (s *GetTestInput) SetArn(v string) *GetTestInput {
 type GetTestOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A test condition that is evaluated.
 	Test *Test `locationName:"test" type:"structure"`
 }
@@ -5783,6 +6086,11 @@ func (s GetTestOutput) String() string {
 // GoString returns the string representation
 func (s GetTestOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTestOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTest sets the Test field's value.
@@ -5840,6 +6148,8 @@ func (s *GetUploadInput) SetArn(v string) *GetUploadInput {
 type GetUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An app or a set of one or more tests to upload or that have been uploaded.
 	Upload *Upload `locationName:"upload" type:"structure"`
 }
@@ -5852,6 +6162,11 @@ func (s GetUploadOutput) String() string {
 // GoString returns the string representation
 func (s GetUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUpload sets the Upload field's value.
@@ -5979,6 +6294,8 @@ func (s *InstallToRemoteAccessSessionInput) SetRemoteAccessSessionArn(v string) 
 type InstallToRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An app to upload or that has been uploaded.
 	AppUpload *Upload `locationName:"appUpload" type:"structure"`
 }
@@ -5991,6 +6308,11 @@ func (s InstallToRemoteAccessSessionOutput) String() string {
 // GoString returns the string representation
 func (s InstallToRemoteAccessSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InstallToRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAppUpload sets the AppUpload field's value.
@@ -6275,6 +6597,8 @@ func (s *ListArtifactsInput) SetType(v ArtifactCategory) *ListArtifactsInput {
 type ListArtifactsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the artifacts.
 	Artifacts []Artifact `locationName:"artifacts" type:"list"`
 
@@ -6292,6 +6616,11 @@ func (s ListArtifactsOutput) String() string {
 // GoString returns the string representation
 func (s ListArtifactsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListArtifactsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArtifacts sets the Artifacts field's value.
@@ -6384,6 +6713,8 @@ func (s *ListDevicePoolsInput) SetType(v DevicePoolType) *ListDevicePoolsInput {
 type ListDevicePoolsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the device pools.
 	DevicePools []DevicePool `locationName:"devicePools" type:"list"`
 
@@ -6401,6 +6732,11 @@ func (s ListDevicePoolsOutput) String() string {
 // GoString returns the string representation
 func (s ListDevicePoolsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDevicePoolsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevicePools sets the DevicePools field's value.
@@ -6471,6 +6807,8 @@ func (s *ListDevicesInput) SetNextToken(v string) *ListDevicesInput {
 type ListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the devices.
 	Devices []Device `locationName:"devices" type:"list"`
 
@@ -6488,6 +6826,11 @@ func (s ListDevicesOutput) String() string {
 // GoString returns the string representation
 func (s ListDevicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevices sets the Devices field's value.
@@ -6564,6 +6907,8 @@ func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the jobs.
 	Jobs []Job `locationName:"jobs" type:"list"`
 
@@ -6581,6 +6926,11 @@ func (s ListJobsOutput) String() string {
 // GoString returns the string representation
 func (s ListJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -6666,6 +7016,8 @@ func (s *ListNetworkProfilesInput) SetType(v NetworkProfileType) *ListNetworkPro
 type ListNetworkProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the available network profiles.
 	NetworkProfiles []NetworkProfile `locationName:"networkProfiles" type:"list"`
 
@@ -6682,6 +7034,11 @@ func (s ListNetworkProfilesOutput) String() string {
 // GoString returns the string representation
 func (s ListNetworkProfilesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListNetworkProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkProfiles sets the NetworkProfiles field's value.
@@ -6738,6 +7095,8 @@ func (s *ListOfferingPromotionsInput) SetNextToken(v string) *ListOfferingPromot
 type ListOfferingPromotionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier to be used in the next call to this operation, to return the
 	// next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
@@ -6754,6 +7113,11 @@ func (s ListOfferingPromotionsOutput) String() string {
 // GoString returns the string representation
 func (s ListOfferingPromotionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOfferingPromotionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6812,6 +7176,8 @@ func (s *ListOfferingTransactionsInput) SetNextToken(v string) *ListOfferingTran
 type ListOfferingTransactionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
@@ -6829,6 +7195,11 @@ func (s ListOfferingTransactionsOutput) String() string {
 // GoString returns the string representation
 func (s ListOfferingTransactionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOfferingTransactionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6887,6 +7258,8 @@ func (s *ListOfferingsInput) SetNextToken(v string) *ListOfferingsInput {
 type ListOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
@@ -6903,6 +7276,11 @@ func (s ListOfferingsOutput) String() string {
 // GoString returns the string representation
 func (s ListOfferingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6975,6 +7353,8 @@ func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -6992,6 +7372,11 @@ func (s ListProjectsOutput) String() string {
 // GoString returns the string representation
 func (s ListProjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7070,6 +7455,8 @@ func (s *ListRemoteAccessSessionsInput) SetNextToken(v string) *ListRemoteAccess
 type ListRemoteAccessSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
@@ -7087,6 +7474,11 @@ func (s ListRemoteAccessSessionsOutput) String() string {
 // GoString returns the string representation
 func (s ListRemoteAccessSessionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRemoteAccessSessionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7164,6 +7556,8 @@ func (s *ListRunsInput) SetNextToken(v string) *ListRunsInput {
 type ListRunsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -7181,6 +7575,11 @@ func (s ListRunsOutput) String() string {
 // GoString returns the string representation
 func (s ListRunsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRunsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7258,6 +7657,8 @@ func (s *ListSamplesInput) SetNextToken(v string) *ListSamplesInput {
 type ListSamplesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -7275,6 +7676,11 @@ func (s ListSamplesOutput) String() string {
 // GoString returns the string representation
 func (s ListSamplesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSamplesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7351,6 +7757,8 @@ func (s *ListSuitesInput) SetNextToken(v string) *ListSuitesInput {
 type ListSuitesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -7368,6 +7776,11 @@ func (s ListSuitesOutput) String() string {
 // GoString returns the string representation
 func (s ListSuitesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSuitesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7444,6 +7857,8 @@ func (s *ListTestsInput) SetNextToken(v string) *ListTestsInput {
 type ListTestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -7461,6 +7876,11 @@ func (s ListTestsOutput) String() string {
 // GoString returns the string representation
 func (s ListTestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7537,6 +7957,8 @@ func (s *ListUniqueProblemsInput) SetNextToken(v string) *ListUniqueProblemsInpu
 type ListUniqueProblemsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -7570,6 +7992,11 @@ func (s ListUniqueProblemsOutput) String() string {
 // GoString returns the string representation
 func (s ListUniqueProblemsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUniqueProblemsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7647,6 +8074,8 @@ func (s *ListUploadsInput) SetNextToken(v string) *ListUploadsInput {
 type ListUploadsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the number of items that are returned is significantly large, this is
 	// an identifier that is also returned, which can be used in a subsequent call
 	// to this operation to return the next set of items in the list.
@@ -7664,6 +8093,11 @@ func (s ListUploadsOutput) String() string {
 // GoString returns the string representation
 func (s ListUploadsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUploadsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -8354,6 +8788,8 @@ func (s *PurchaseOfferingInput) SetQuantity(v int64) *PurchaseOfferingInput {
 type PurchaseOfferingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the offering transaction for the purchase result.
 	OfferingTransaction *OfferingTransaction `locationName:"offeringTransaction" type:"structure"`
 }
@@ -8366,6 +8802,11 @@ func (s PurchaseOfferingOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseOfferingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseOfferingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOfferingTransaction sets the OfferingTransaction field's value.
@@ -8712,6 +9153,8 @@ func (s *RenewOfferingInput) SetQuantity(v int64) *RenewOfferingInput {
 type RenewOfferingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the status of the offering transaction for the renewal.
 	OfferingTransaction *OfferingTransaction `locationName:"offeringTransaction" type:"structure"`
 }
@@ -8724,6 +9167,11 @@ func (s RenewOfferingOutput) String() string {
 // GoString returns the string representation
 func (s RenewOfferingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RenewOfferingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOfferingTransaction sets the OfferingTransaction field's value.
@@ -9432,6 +9880,8 @@ func (s *ScheduleRunInput) SetTest(v *ScheduleRunTest) *ScheduleRunInput {
 type ScheduleRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the scheduled run.
 	Run *Run `locationName:"run" type:"structure"`
 }
@@ -9444,6 +9894,11 @@ func (s ScheduleRunOutput) String() string {
 // GoString returns the string representation
 func (s ScheduleRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ScheduleRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRun sets the Run field's value.
@@ -9676,6 +10131,8 @@ func (s *StopRemoteAccessSessionInput) SetArn(v string) *StopRemoteAccessSession
 type StopRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A container representing the metadata from the service about the remote access
 	// session you are stopping.
 	RemoteAccessSession *RemoteAccessSession `locationName:"remoteAccessSession" type:"structure"`
@@ -9689,6 +10146,11 @@ func (s StopRemoteAccessSessionOutput) String() string {
 // GoString returns the string representation
 func (s StopRemoteAccessSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRemoteAccessSession sets the RemoteAccessSession field's value.
@@ -9747,6 +10209,8 @@ func (s *StopRunInput) SetArn(v string) *StopRunInput {
 type StopRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The run that was stopped.
 	Run *Run `locationName:"run" type:"structure"`
 }
@@ -9759,6 +10223,11 @@ func (s StopRunOutput) String() string {
 // GoString returns the string representation
 func (s StopRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRun sets the Run field's value.
@@ -10280,6 +10749,8 @@ func (s *UpdateDevicePoolInput) SetRules(v []Rule) *UpdateDevicePoolInput {
 type UpdateDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The device pool you just updated.
 	DevicePool *DevicePool `locationName:"devicePool" type:"structure"`
 }
@@ -10292,6 +10763,11 @@ func (s UpdateDevicePoolOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDevicePoolOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevicePool sets the DevicePool field's value.
@@ -10452,6 +10928,8 @@ func (s *UpdateNetworkProfileInput) SetUplinkLossPercent(v int64) *UpdateNetwork
 type UpdateNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the available network profiles.
 	NetworkProfile *NetworkProfile `locationName:"networkProfile" type:"structure"`
 }
@@ -10464,6 +10942,11 @@ func (s UpdateNetworkProfileOutput) String() string {
 // GoString returns the string representation
 func (s UpdateNetworkProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateNetworkProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNetworkProfile sets the NetworkProfile field's value.
@@ -10540,6 +11023,8 @@ func (s *UpdateProjectInput) SetName(v string) *UpdateProjectInput {
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The project you wish to update.
 	Project *Project `locationName:"project" type:"structure"`
 }
@@ -10552,6 +11037,11 @@ func (s UpdateProjectOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProject sets the Project field's value.

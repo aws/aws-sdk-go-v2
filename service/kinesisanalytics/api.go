@@ -54,7 +54,10 @@ func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *A
 		input = &AddApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddApplicationCloudWatchLoggingOptionOutput{})
+	output := &AddApplicationCloudWatchLoggingOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input}
 }
 
@@ -112,7 +115,10 @@ func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInput
 		input = &AddApplicationInputInput{}
 	}
 
-	req := c.newRequest(op, input, &AddApplicationInputOutput{})
+	output := &AddApplicationInputOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddApplicationInputRequest{Request: req, Input: input}
 }
 
@@ -160,7 +166,10 @@ func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(inp
 		input = &AddApplicationInputProcessingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &AddApplicationInputProcessingConfigurationOutput{})
+	output := &AddApplicationInputProcessingConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddApplicationInputProcessingConfigurationRequest{Request: req, Input: input}
 }
 
@@ -228,7 +237,10 @@ func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutp
 		input = &AddApplicationOutputInput{}
 	}
 
-	req := c.newRequest(op, input, &AddApplicationOutputOutput{})
+	output := &AddApplicationOutputOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddApplicationOutputRequest{Request: req, Input: input}
 }
 
@@ -288,7 +300,10 @@ func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddAp
 		input = &AddApplicationReferenceDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddApplicationReferenceDataSourceOutput{})
+	output := &AddApplicationReferenceDataSourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddApplicationReferenceDataSourceRequest{Request: req, Input: input}
 }
 
@@ -359,7 +374,10 @@ func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInpu
 		input = &CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	output := &CreateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateApplicationRequest{Request: req, Input: input}
 }
 
@@ -410,7 +428,10 @@ func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInpu
 		input = &DeleteApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationOutput{})
+	output := &DeleteApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationRequest{Request: req, Input: input}
 }
 
@@ -458,7 +479,10 @@ func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input
 		input = &DeleteApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationCloudWatchLoggingOptionOutput{})
+	output := &DeleteApplicationCloudWatchLoggingOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input}
 }
 
@@ -504,7 +528,10 @@ func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(
 		input = &DeleteApplicationInputProcessingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationInputProcessingConfigurationOutput{})
+	output := &DeleteApplicationInputProcessingConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationInputProcessingConfigurationRequest{Request: req, Input: input}
 }
 
@@ -555,7 +582,10 @@ func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicati
 		input = &DeleteApplicationOutputInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationOutputOutput{})
+	output := &DeleteApplicationOutputOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationOutputRequest{Request: req, Input: input}
 }
 
@@ -609,7 +639,10 @@ func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *De
 		input = &DeleteApplicationReferenceDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationReferenceDataSourceOutput{})
+	output := &DeleteApplicationReferenceDataSourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationReferenceDataSourceRequest{Request: req, Input: input}
 }
 
@@ -662,7 +695,10 @@ func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplication
 		input = &DescribeApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationOutput{})
+	output := &DescribeApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeApplicationRequest{Request: req, Input: input}
 }
 
@@ -721,7 +757,10 @@ func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchema
 		input = &DiscoverInputSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &DiscoverInputSchemaOutput{})
+	output := &DiscoverInputSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DiscoverInputSchemaRequest{Request: req, Input: input}
 }
 
@@ -777,7 +816,10 @@ func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput)
 		input = &ListApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	output := &ListApplicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListApplicationsRequest{Request: req, Input: input}
 }
 
@@ -837,7 +879,10 @@ func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput)
 		input = &StartApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StartApplicationOutput{})
+	output := &StartApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartApplicationRequest{Request: req, Input: input}
 }
 
@@ -890,7 +935,10 @@ func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) S
 		input = &StopApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StopApplicationOutput{})
+	output := &StopApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopApplicationRequest{Request: req, Input: input}
 }
 
@@ -943,7 +991,10 @@ func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInpu
 		input = &UpdateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	output := &UpdateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
@@ -1033,6 +1084,8 @@ func (s *AddApplicationCloudWatchLoggingOptionInput) SetCurrentApplicationVersio
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOptionResponse
 type AddApplicationCloudWatchLoggingOptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1043,6 +1096,11 @@ func (s AddApplicationCloudWatchLoggingOptionOutput) String() string {
 // GoString returns the string representation
 func (s AddApplicationCloudWatchLoggingOptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddApplicationCloudWatchLoggingOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputRequest
@@ -1131,6 +1189,8 @@ func (s *AddApplicationInputInput) SetInput(v *Input) *AddApplicationInputInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputResponse
 type AddApplicationInputOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1141,6 +1201,11 @@ func (s AddApplicationInputOutput) String() string {
 // GoString returns the string representation
 func (s AddApplicationInputOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddApplicationInputOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationRequest
@@ -1250,6 +1315,8 @@ func (s *AddApplicationInputProcessingConfigurationInput) SetInputProcessingConf
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationResponse
 type AddApplicationInputProcessingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1260,6 +1327,11 @@ func (s AddApplicationInputProcessingConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s AddApplicationInputProcessingConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddApplicationInputProcessingConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutputRequest
@@ -1352,6 +1424,8 @@ func (s *AddApplicationOutputInput) SetOutput(v *Output) *AddApplicationOutputIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutputResponse
 type AddApplicationOutputOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1362,6 +1436,11 @@ func (s AddApplicationOutputOutput) String() string {
 // GoString returns the string representation
 func (s AddApplicationOutputOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddApplicationOutputOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSourceRequest
@@ -1456,6 +1535,8 @@ func (s *AddApplicationReferenceDataSourceInput) SetReferenceDataSource(v *Refer
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSourceResponse
 type AddApplicationReferenceDataSourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1466,6 +1547,11 @@ func (s AddApplicationReferenceDataSourceOutput) String() string {
 // GoString returns the string representation
 func (s AddApplicationReferenceDataSourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddApplicationReferenceDataSourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Provides a description of the application, including the application Amazon
@@ -2170,6 +2256,8 @@ func (s *CreateApplicationInput) SetOutputs(v []Output) *CreateApplicationInput 
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// In response to your CreateApplication request, Amazon Kinesis Analytics returns
 	// a response with a summary of the application it created, including the application
 	// Amazon Resource Name (ARN), name, and status.
@@ -2186,6 +2274,11 @@ func (s CreateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s CreateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationSummary sets the ApplicationSummary field's value.
@@ -2277,6 +2370,8 @@ func (s *DeleteApplicationCloudWatchLoggingOptionInput) SetCurrentApplicationVer
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOptionResponse
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2287,6 +2382,11 @@ func (s DeleteApplicationCloudWatchLoggingOptionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationCloudWatchLoggingOptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationCloudWatchLoggingOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationRequest
@@ -2431,6 +2531,8 @@ func (s *DeleteApplicationInputProcessingConfigurationInput) SetInputId(v string
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfigurationResponse
 type DeleteApplicationInputProcessingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2443,9 +2545,16 @@ func (s DeleteApplicationInputProcessingConfigurationOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationInputProcessingConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationResponse
 type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2456,6 +2565,11 @@ func (s DeleteApplicationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutputRequest
@@ -2547,6 +2661,8 @@ func (s *DeleteApplicationOutputInput) SetOutputId(v string) *DeleteApplicationO
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutputResponse
 type DeleteApplicationOutputOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2557,6 +2673,11 @@ func (s DeleteApplicationOutputOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationOutputOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationOutputOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSourceRequest
@@ -2646,6 +2767,8 @@ func (s *DeleteApplicationReferenceDataSourceInput) SetReferenceId(v string) *De
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSourceResponse
 type DeleteApplicationReferenceDataSourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2656,6 +2779,11 @@ func (s DeleteApplicationReferenceDataSourceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationReferenceDataSourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationReferenceDataSourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplicationRequest
@@ -2705,6 +2833,8 @@ func (s *DescribeApplicationInput) SetApplicationName(v string) *DescribeApplica
 type DescribeApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides a description of the application, such as the application Amazon
 	// Resource Name (ARN), status, latest version, and input and output configuration
 	// details.
@@ -2721,6 +2851,11 @@ func (s DescribeApplicationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationDetail sets the ApplicationDetail field's value.
@@ -2847,6 +2982,8 @@ func (s *DiscoverInputSchemaInput) SetS3Configuration(v *S3Configuration) *Disco
 type DiscoverInputSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Schema inferred from the streaming source. It identifies the format of the
 	// data in the streaming source and how each data element maps to corresponding
 	// columns in the in-application stream that you can create.
@@ -2872,6 +3009,11 @@ func (s DiscoverInputSchemaOutput) String() string {
 // GoString returns the string representation
 func (s DiscoverInputSchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DiscoverInputSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInputSchema sets the InputSchema field's value.
@@ -4532,6 +4674,8 @@ func (s *ListApplicationsInput) SetLimit(v int64) *ListApplicationsInput {
 type ListApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of ApplicationSummary objects.
 	//
 	// ApplicationSummaries is a required field
@@ -4551,6 +4695,11 @@ func (s ListApplicationsOutput) String() string {
 // GoString returns the string representation
 func (s ListApplicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationSummaries sets the ApplicationSummaries field's value.
@@ -5686,6 +5835,8 @@ func (s *StartApplicationInput) SetInputConfigurations(v []InputConfiguration) *
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplicationResponse
 type StartApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5696,6 +5847,11 @@ func (s StartApplicationOutput) String() string {
 // GoString returns the string representation
 func (s StartApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplicationRequest
@@ -5744,6 +5900,8 @@ func (s *StopApplicationInput) SetApplicationName(v string) *StopApplicationInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplicationResponse
 type StopApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5754,6 +5912,11 @@ func (s StopApplicationOutput) String() string {
 // GoString returns the string representation
 func (s StopApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplicationRequest
@@ -5841,6 +6004,8 @@ func (s *UpdateApplicationInput) SetCurrentApplicationVersionId(v int64) *Update
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplicationResponse
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5851,6 +6016,11 @@ func (s UpdateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type ApplicationStatus string

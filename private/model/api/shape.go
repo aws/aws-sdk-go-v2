@@ -88,6 +88,9 @@ type Shape struct {
 	// Error information that is set if the shape is an error shape.
 	IsError   bool
 	ErrorInfo ErrorInfo `json:"error"`
+
+	UsedAsInput  bool
+	UsedAsOutput bool
 }
 
 // ErrorCodeName will return the error shape's name formated for
@@ -194,7 +197,7 @@ func (s *Shape) GoStructValueType(name string, ref *ShapeRef) string {
 func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	if (ref.Streaming || ref.Shape.Streaming) && s.Payload == name {
 		rtype := "io.ReadSeeker"
-		if strings.HasSuffix(s.ShapeName, "Output") {
+		if s.UsedAsOutput {
 			rtype = "io.ReadCloser"
 		}
 
@@ -558,7 +561,12 @@ var structShapeTmpl = template.Must(template.New("StructShape").Funcs(template.F
 {{ end -}}
 {{ $context := . -}}
 type {{ .ShapeName }} struct {
+	{{ $isOutputShape := .UsedAsOutput -}}
 	_ struct{} {{ .GoTags true false }}
+
+	{{ if $isOutputShape }}
+	responseMetadata aws.Response
+	{{ end }}
 
 	{{ range $_, $name := $context.MemberNames -}}
 		{{ $elem := index $context.MemberRefs $name -}}
@@ -592,6 +600,12 @@ type {{ .ShapeName }} struct {
 	{{ if .Validations -}}
 		{{ .Validations.GoCode . }}
 	{{ end }}
+{{ end }}
+{{ if $isOutputShape }}
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s {{ .ShapeName }}) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
 {{ end }}
 
 {{ if not .API.NoGenStructFieldAccessors }}

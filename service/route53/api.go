@@ -61,7 +61,10 @@ func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHoste
 		input = &AssociateVPCWithHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateVPCWithHostedZoneOutput{})
+	output := &AssociateVPCWithHostedZoneOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateVPCWithHostedZoneRequest{Request: req, Input: input}
 }
 
@@ -185,7 +188,10 @@ func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSet
 		input = &ChangeResourceRecordSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeResourceRecordSetsOutput{})
+	output := &ChangeResourceRecordSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ChangeResourceRecordSetsRequest{Request: req, Input: input}
 }
 
@@ -235,7 +241,10 @@ func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput
 		input = &ChangeTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeTagsForResourceOutput{})
+	output := &ChangeTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ChangeTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -312,7 +321,10 @@ func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) Create
 		input = &CreateHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHealthCheckOutput{})
+	output := &CreateHealthCheckOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHealthCheckRequest{Request: req, Input: input}
 }
 
@@ -392,7 +404,10 @@ func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHo
 		input = &CreateHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHostedZoneOutput{})
+	output := &CreateHostedZoneOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHostedZoneRequest{Request: req, Input: input}
 }
 
@@ -534,7 +549,10 @@ func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfi
 		input = &CreateQueryLoggingConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateQueryLoggingConfigOutput{})
+	output := &CreateQueryLoggingConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateQueryLoggingConfigRequest{Request: req, Input: input}
 }
 
@@ -587,7 +605,10 @@ func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelega
 		input = &CreateReusableDelegationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReusableDelegationSetOutput{})
+	output := &CreateReusableDelegationSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReusableDelegationSetRequest{Request: req, Input: input}
 }
 
@@ -635,7 +656,10 @@ func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) Cr
 		input = &CreateTrafficPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficPolicyOutput{})
+	output := &CreateTrafficPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTrafficPolicyRequest{Request: req, Input: input}
 }
 
@@ -686,7 +710,10 @@ func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyI
 		input = &CreateTrafficPolicyInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficPolicyInstanceOutput{})
+	output := &CreateTrafficPolicyInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
@@ -739,7 +766,10 @@ func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVe
 		input = &CreateTrafficPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficPolicyVersionOutput{})
+	output := &CreateTrafficPolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTrafficPolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -794,7 +824,10 @@ func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssoc
 		input = &CreateVPCAssociationAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVPCAssociationAuthorizationOutput{})
+	output := &CreateVPCAssociationAuthorizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVPCAssociationAuthorizationRequest{Request: req, Input: input}
 }
 
@@ -848,7 +881,10 @@ func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) Delete
 		input = &DeleteHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHealthCheckOutput{})
+	output := &DeleteHealthCheckOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteHealthCheckRequest{Request: req, Input: input}
 }
 
@@ -923,7 +959,10 @@ func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHo
 		input = &DeleteHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHostedZoneOutput{})
+	output := &DeleteHostedZoneOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteHostedZoneRequest{Request: req, Input: input}
 }
 
@@ -973,7 +1012,10 @@ func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfi
 		input = &DeleteQueryLoggingConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQueryLoggingConfigOutput{})
+	output := &DeleteQueryLoggingConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteQueryLoggingConfigRequest{Request: req, Input: input}
 }
 
@@ -1026,7 +1068,10 @@ func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelega
 		input = &DeleteReusableDelegationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReusableDelegationSetOutput{})
+	output := &DeleteReusableDelegationSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReusableDelegationSetRequest{Request: req, Input: input}
 }
 
@@ -1072,7 +1117,10 @@ func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) De
 		input = &DeleteTrafficPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrafficPolicyOutput{})
+	output := &DeleteTrafficPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTrafficPolicyRequest{Request: req, Input: input}
 }
 
@@ -1122,7 +1170,10 @@ func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyI
 		input = &DeleteTrafficPolicyInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrafficPolicyInstanceOutput{})
+	output := &DeleteTrafficPolicyInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
@@ -1177,7 +1228,10 @@ func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssoc
 		input = &DeleteVPCAssociationAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVPCAssociationAuthorizationOutput{})
+	output := &DeleteVPCAssociationAuthorizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVPCAssociationAuthorizationRequest{Request: req, Input: input}
 }
 
@@ -1229,7 +1283,10 @@ func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFro
 		input = &DisassociateVPCFromHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateVPCFromHostedZoneOutput{})
+	output := &DisassociateVPCFromHostedZoneOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateVPCFromHostedZoneRequest{Request: req, Input: input}
 }
 
@@ -1283,7 +1340,10 @@ func (c *Route53) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
 		input = &GetChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetChangeOutput{})
+	output := &GetChangeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetChangeRequest{Request: req, Input: input}
 }
 
@@ -1332,7 +1392,10 @@ func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetC
 		input = &GetCheckerIpRangesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCheckerIpRangesOutput{})
+	output := &GetCheckerIpRangesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCheckerIpRangesRequest{Request: req, Input: input}
 }
 
@@ -1395,7 +1458,10 @@ func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocati
 		input = &GetGeoLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGeoLocationOutput{})
+	output := &GetGeoLocationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGeoLocationRequest{Request: req, Input: input}
 }
 
@@ -1441,7 +1507,10 @@ func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) GetHealthChe
 		input = &GetHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHealthCheckOutput{})
+	output := &GetHealthCheckOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHealthCheckRequest{Request: req, Input: input}
 }
 
@@ -1488,7 +1557,10 @@ func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) Ge
 		input = &GetHealthCheckCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHealthCheckCountOutput{})
+	output := &GetHealthCheckCountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHealthCheckCountRequest{Request: req, Input: input}
 }
 
@@ -1534,7 +1606,10 @@ func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLa
 		input = &GetHealthCheckLastFailureReasonInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHealthCheckLastFailureReasonOutput{})
+	output := &GetHealthCheckLastFailureReasonOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHealthCheckLastFailureReasonRequest{Request: req, Input: input}
 }
 
@@ -1580,7 +1655,10 @@ func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) 
 		input = &GetHealthCheckStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHealthCheckStatusOutput{})
+	output := &GetHealthCheckStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHealthCheckStatusRequest{Request: req, Input: input}
 }
 
@@ -1627,7 +1705,10 @@ func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) GetHostedZoneR
 		input = &GetHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostedZoneOutput{})
+	output := &GetHostedZoneOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHostedZoneRequest{Request: req, Input: input}
 }
 
@@ -1674,7 +1755,10 @@ func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetH
 		input = &GetHostedZoneCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostedZoneCountOutput{})
+	output := &GetHostedZoneCountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHostedZoneCountRequest{Request: req, Input: input}
 }
 
@@ -1723,7 +1807,10 @@ func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput
 		input = &GetQueryLoggingConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryLoggingConfigOutput{})
+	output := &GetQueryLoggingConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQueryLoggingConfigRequest{Request: req, Input: input}
 }
 
@@ -1770,7 +1857,10 @@ func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSe
 		input = &GetReusableDelegationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReusableDelegationSetOutput{})
+	output := &GetReusableDelegationSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetReusableDelegationSetRequest{Request: req, Input: input}
 }
 
@@ -1816,7 +1906,10 @@ func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTraff
 		input = &GetTrafficPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTrafficPolicyOutput{})
+	output := &GetTrafficPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTrafficPolicyRequest{Request: req, Input: input}
 }
 
@@ -1870,7 +1963,10 @@ func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanc
 		input = &GetTrafficPolicyInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTrafficPolicyInstanceOutput{})
+	output := &GetTrafficPolicyInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
@@ -1917,7 +2013,10 @@ func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyIn
 		input = &GetTrafficPolicyInstanceCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTrafficPolicyInstanceCountOutput{})
+	output := &GetTrafficPolicyInstanceCountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTrafficPolicyInstanceCountRequest{Request: req, Input: input}
 }
 
@@ -1968,7 +2067,10 @@ func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) ListGeoL
 		input = &ListGeoLocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGeoLocationsOutput{})
+	output := &ListGeoLocationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGeoLocationsRequest{Request: req, Input: input}
 }
 
@@ -2021,7 +2123,10 @@ func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) ListHeal
 		input = &ListHealthChecksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHealthChecksOutput{})
+	output := &ListHealthChecksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHealthChecksRequest{Request: req, Input: input}
 }
 
@@ -2129,7 +2234,10 @@ func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) ListHosted
 		input = &ListHostedZonesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHostedZonesOutput{})
+	output := &ListHostedZonesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHostedZonesRequest{Request: req, Input: input}
 }
 
@@ -2274,7 +2382,10 @@ func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput
 		input = &ListHostedZonesByNameInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHostedZonesByNameOutput{})
+	output := &ListHostedZonesByNameOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHostedZonesByNameRequest{Request: req, Input: input}
 }
 
@@ -2327,7 +2438,10 @@ func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsI
 		input = &ListQueryLoggingConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueryLoggingConfigsOutput{})
+	output := &ListQueryLoggingConfigsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListQueryLoggingConfigsRequest{Request: req, Input: input}
 }
 
@@ -2417,7 +2531,10 @@ func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInp
 		input = &ListResourceRecordSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceRecordSetsOutput{})
+	output := &ListResourceRecordSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourceRecordSetsRequest{Request: req, Input: input}
 }
 
@@ -2514,7 +2631,10 @@ func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegatio
 		input = &ListReusableDelegationSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReusableDelegationSetsOutput{})
+	output := &ListReusableDelegationSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListReusableDelegationSetsRequest{Request: req, Input: input}
 }
 
@@ -2564,7 +2684,10 @@ func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) Li
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -2614,7 +2737,10 @@ func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) 
 		input = &ListTagsForResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourcesOutput{})
+	output := &ListTagsForResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourcesRequest{Request: req, Input: input}
 }
 
@@ -2662,7 +2788,10 @@ func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) Li
 		input = &ListTrafficPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTrafficPoliciesOutput{})
+	output := &ListTrafficPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTrafficPoliciesRequest{Request: req, Input: input}
 }
 
@@ -2718,7 +2847,10 @@ func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInst
 		input = &ListTrafficPolicyInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTrafficPolicyInstancesOutput{})
+	output := &ListTrafficPolicyInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTrafficPolicyInstancesRequest{Request: req, Input: input}
 }
 
@@ -2774,7 +2906,10 @@ func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTraff
 		input = &ListTrafficPolicyInstancesByHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTrafficPolicyInstancesByHostedZoneOutput{})
+	output := &ListTrafficPolicyInstancesByHostedZoneOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTrafficPolicyInstancesByHostedZoneRequest{Request: req, Input: input}
 }
 
@@ -2830,7 +2965,10 @@ func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPo
 		input = &ListTrafficPolicyInstancesByPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTrafficPolicyInstancesByPolicyOutput{})
+	output := &ListTrafficPolicyInstancesByPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTrafficPolicyInstancesByPolicyRequest{Request: req, Input: input}
 }
 
@@ -2878,7 +3016,10 @@ func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersi
 		input = &ListTrafficPolicyVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTrafficPolicyVersionsOutput{})
+	output := &ListTrafficPolicyVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTrafficPolicyVersionsRequest{Request: req, Input: input}
 }
 
@@ -2929,7 +3070,10 @@ func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociat
 		input = &ListVPCAssociationAuthorizationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVPCAssociationAuthorizationsOutput{})
+	output := &ListVPCAssociationAuthorizationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVPCAssociationAuthorizationsRequest{Request: req, Input: input}
 }
 
@@ -2977,7 +3121,10 @@ func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) TestDNSAnswerR
 		input = &TestDNSAnswerInput{}
 	}
 
-	req := c.newRequest(op, input, &TestDNSAnswerOutput{})
+	output := &TestDNSAnswerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestDNSAnswerRequest{Request: req, Input: input}
 }
 
@@ -3027,7 +3174,10 @@ func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) Update
 		input = &UpdateHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateHealthCheckOutput{})
+	output := &UpdateHealthCheckOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateHealthCheckRequest{Request: req, Input: input}
 }
 
@@ -3073,7 +3223,10 @@ func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentI
 		input = &UpdateHostedZoneCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateHostedZoneCommentOutput{})
+	output := &UpdateHostedZoneCommentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateHostedZoneCommentRequest{Request: req, Input: input}
 }
 
@@ -3119,7 +3272,10 @@ func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCo
 		input = &UpdateTrafficPolicyCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTrafficPolicyCommentOutput{})
+	output := &UpdateTrafficPolicyCommentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTrafficPolicyCommentRequest{Request: req, Input: input}
 }
 
@@ -3183,7 +3339,10 @@ func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyI
 		input = &UpdateTrafficPolicyInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTrafficPolicyInstanceOutput{})
+	output := &UpdateTrafficPolicyInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
@@ -3581,6 +3740,8 @@ func (s *AssociateVPCWithHostedZoneInput) SetVPC(v *VPC) *AssociateVPCWithHosted
 type AssociateVPCWithHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that describes the changes made to your hosted zone.
 	//
 	// ChangeInfo is a required field
@@ -3595,6 +3756,11 @@ func (s AssociateVPCWithHostedZoneOutput) String() string {
 // GoString returns the string representation
 func (s AssociateVPCWithHostedZoneOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateVPCWithHostedZoneOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeInfo sets the ChangeInfo field's value.
@@ -3907,6 +4073,8 @@ func (s *ChangeResourceRecordSetsInput) SetHostedZoneId(v string) *ChangeResourc
 type ChangeResourceRecordSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about changes made to your hosted
 	// zone.
 	//
@@ -3925,6 +4093,11 @@ func (s ChangeResourceRecordSetsOutput) String() string {
 // GoString returns the string representation
 func (s ChangeResourceRecordSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ChangeResourceRecordSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeInfo sets the ChangeInfo field's value.
@@ -4026,6 +4199,8 @@ func (s *ChangeTagsForResourceInput) SetResourceType(v TagResourceType) *ChangeT
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResourceResponse
 type ChangeTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4036,6 +4211,11 @@ func (s ChangeTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ChangeTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ChangeTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A complex type that contains information about the CloudWatch alarm that
@@ -4239,6 +4419,8 @@ func (s *CreateHealthCheckInput) SetHealthCheckConfig(v *HealthCheckConfig) *Cre
 type CreateHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains identifying information about the health check.
 	//
 	// HealthCheck is a required field
@@ -4258,6 +4440,11 @@ func (s CreateHealthCheckOutput) String() string {
 // GoString returns the string representation
 func (s CreateHealthCheckOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHealthCheckOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthCheck sets the HealthCheck field's value.
@@ -4397,6 +4584,8 @@ func (s *CreateHostedZoneInput) SetVPC(v *VPC) *CreateHostedZoneInput {
 type CreateHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about the CreateHostedZone request.
 	//
 	// ChangeInfo is a required field
@@ -4430,6 +4619,11 @@ func (s CreateHostedZoneOutput) String() string {
 // GoString returns the string representation
 func (s CreateHostedZoneOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHostedZoneOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeInfo sets the ChangeInfo field's value.
@@ -4530,6 +4724,8 @@ func (s *CreateQueryLoggingConfigInput) SetHostedZoneId(v string) *CreateQueryLo
 type CreateQueryLoggingConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique URL representing the new query logging configuration.
 	//
 	// Location is a required field
@@ -4551,6 +4747,11 @@ func (s CreateQueryLoggingConfigOutput) String() string {
 // GoString returns the string representation
 func (s CreateQueryLoggingConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateQueryLoggingConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocation sets the Location field's value.
@@ -4626,6 +4827,8 @@ func (s *CreateReusableDelegationSetInput) SetHostedZoneId(v string) *CreateReus
 type CreateReusableDelegationSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains name server information.
 	//
 	// DelegationSet is a required field
@@ -4645,6 +4848,11 @@ func (s CreateReusableDelegationSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateReusableDelegationSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReusableDelegationSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDelegationSet sets the DelegationSet field's value.
@@ -4846,6 +5054,8 @@ func (s *CreateTrafficPolicyInstanceInput) SetTrafficPolicyVersion(v int64) *Cre
 type CreateTrafficPolicyInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique URL that represents a new traffic policy instance.
 	//
 	// Location is a required field
@@ -4867,6 +5077,11 @@ func (s CreateTrafficPolicyInstanceOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetLocation sets the Location field's value.
 func (s *CreateTrafficPolicyInstanceOutput) SetLocation(v string) *CreateTrafficPolicyInstanceOutput {
 	s.Location = &v
@@ -4884,6 +5099,8 @@ func (s *CreateTrafficPolicyInstanceOutput) SetTrafficPolicyInstance(v *TrafficP
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyResponse
 type CreateTrafficPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// A unique URL that represents a new traffic policy.
 	//
@@ -4904,6 +5121,11 @@ func (s CreateTrafficPolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreateTrafficPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTrafficPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocation sets the Location field's value.
@@ -4996,6 +5218,8 @@ func (s *CreateTrafficPolicyVersionInput) SetId(v string) *CreateTrafficPolicyVe
 type CreateTrafficPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique URL that represents a new traffic policy version.
 	//
 	// Location is a required field
@@ -5016,6 +5240,11 @@ func (s CreateTrafficPolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateTrafficPolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTrafficPolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLocation sets the Location field's value.
@@ -5101,6 +5330,8 @@ func (s *CreateVPCAssociationAuthorizationInput) SetVPC(v *VPC) *CreateVPCAssoci
 type CreateVPCAssociationAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the hosted zone that you authorized associating a VPC with.
 	//
 	// HostedZoneId is a required field
@@ -5120,6 +5351,11 @@ func (s CreateVPCAssociationAuthorizationOutput) String() string {
 // GoString returns the string representation
 func (s CreateVPCAssociationAuthorizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVPCAssociationAuthorizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZoneId sets the HostedZoneId field's value.
@@ -5227,6 +5463,8 @@ func (s *DeleteHealthCheckInput) SetHealthCheckId(v string) *DeleteHealthCheckIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckResponse
 type DeleteHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5237,6 +5475,11 @@ func (s DeleteHealthCheckOutput) String() string {
 // GoString returns the string representation
 func (s DeleteHealthCheckOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteHealthCheckOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete a hosted zone.
@@ -5285,6 +5528,8 @@ func (s *DeleteHostedZoneInput) SetId(v string) *DeleteHostedZoneInput {
 type DeleteHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains the ID, the status, and the date and time of
 	// a request to delete a hosted zone.
 	//
@@ -5300,6 +5545,11 @@ func (s DeleteHostedZoneOutput) String() string {
 // GoString returns the string representation
 func (s DeleteHostedZoneOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteHostedZoneOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeInfo sets the ChangeInfo field's value.
@@ -5354,6 +5604,8 @@ func (s *DeleteQueryLoggingConfigInput) SetId(v string) *DeleteQueryLoggingConfi
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfigResponse
 type DeleteQueryLoggingConfigOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5364,6 +5616,11 @@ func (s DeleteQueryLoggingConfigOutput) String() string {
 // GoString returns the string representation
 func (s DeleteQueryLoggingConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteQueryLoggingConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete a reusable delegation set.
@@ -5411,6 +5668,8 @@ func (s *DeleteReusableDelegationSetInput) SetId(v string) *DeleteReusableDelega
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSetResponse
 type DeleteReusableDelegationSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5421,6 +5680,11 @@ func (s DeleteReusableDelegationSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReusableDelegationSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReusableDelegationSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to delete a specified traffic policy version.
@@ -5537,6 +5801,8 @@ func (s *DeleteTrafficPolicyInstanceInput) SetId(v string) *DeleteTrafficPolicyI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstanceResponse
 type DeleteTrafficPolicyInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5549,10 +5815,17 @@ func (s DeleteTrafficPolicyInstanceOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // An empty element.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyResponse
 type DeleteTrafficPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5563,6 +5836,11 @@ func (s DeleteTrafficPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTrafficPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTrafficPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A complex type that contains information about the request to remove authorization
@@ -5636,6 +5914,8 @@ func (s *DeleteVPCAssociationAuthorizationInput) SetVPC(v *VPC) *DeleteVPCAssoci
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationResponse
 type DeleteVPCAssociationAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5646,6 +5926,11 @@ func (s DeleteVPCAssociationAuthorizationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVPCAssociationAuthorizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVPCAssociationAuthorizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // For the metric that the CloudWatch alarm is associated with, a complex type
@@ -5767,6 +6052,8 @@ func (s *DisassociateVPCFromHostedZoneInput) SetVPC(v *VPC) *DisassociateVPCFrom
 type DisassociateVPCFromHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that describes the changes made to the specified private hosted
 	// zone.
 	//
@@ -5782,6 +6069,11 @@ func (s DisassociateVPCFromHostedZoneOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateVPCFromHostedZoneOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateVPCFromHostedZoneOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeInfo sets the ChangeInfo field's value.
@@ -5979,6 +6271,8 @@ func (s *GetChangeInput) SetId(v string) *GetChangeInput {
 type GetChangeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about the specified change batch.
 	//
 	// ChangeInfo is a required field
@@ -5993,6 +6287,11 @@ func (s GetChangeOutput) String() string {
 // GoString returns the string representation
 func (s GetChangeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetChangeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeInfo sets the ChangeInfo field's value.
@@ -6020,6 +6319,8 @@ func (s GetCheckerIpRangesInput) GoString() string {
 type GetCheckerIpRangesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// CheckerIpRanges is a required field
 	CheckerIpRanges []string `type:"list" required:"true"`
 }
@@ -6032,6 +6333,11 @@ func (s GetCheckerIpRangesOutput) String() string {
 // GoString returns the string representation
 func (s GetCheckerIpRangesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCheckerIpRangesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCheckerIpRanges sets the CheckerIpRanges field's value.
@@ -6127,6 +6433,8 @@ func (s *GetGeoLocationInput) SetSubdivisionCode(v string) *GetGeoLocationInput 
 type GetGeoLocationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains the codes and full continent, country, and subdivision
 	// names for the specified geolocation code.
 	//
@@ -6142,6 +6450,11 @@ func (s GetGeoLocationOutput) String() string {
 // GoString returns the string representation
 func (s GetGeoLocationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGeoLocationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGeoLocationDetails sets the GeoLocationDetails field's value.
@@ -6172,6 +6485,8 @@ func (s GetHealthCheckCountInput) GoString() string {
 type GetHealthCheckCountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of health checks associated with the current AWS account.
 	//
 	// HealthCheckCount is a required field
@@ -6186,6 +6501,11 @@ func (s GetHealthCheckCountOutput) String() string {
 // GoString returns the string representation
 func (s GetHealthCheckCountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHealthCheckCountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthCheckCount sets the HealthCheckCount field's value.
@@ -6287,6 +6607,8 @@ func (s *GetHealthCheckLastFailureReasonInput) SetHealthCheckId(v string) *GetHe
 type GetHealthCheckLastFailureReasonOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains one Observation element for each Amazon Route 53 health
 	// checker that is reporting a last failure reason.
 	//
@@ -6304,6 +6626,11 @@ func (s GetHealthCheckLastFailureReasonOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHealthCheckLastFailureReasonOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetHealthCheckObservations sets the HealthCheckObservations field's value.
 func (s *GetHealthCheckLastFailureReasonOutput) SetHealthCheckObservations(v []HealthCheckObservation) *GetHealthCheckLastFailureReasonOutput {
 	s.HealthCheckObservations = v
@@ -6314,6 +6641,8 @@ func (s *GetHealthCheckLastFailureReasonOutput) SetHealthCheckObservations(v []H
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckResponse
 type GetHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// A complex type that contains information about one health check that is associated
 	// with the current AWS account.
@@ -6330,6 +6659,11 @@ func (s GetHealthCheckOutput) String() string {
 // GoString returns the string representation
 func (s GetHealthCheckOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHealthCheckOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthCheck sets the HealthCheck field's value.
@@ -6390,6 +6724,8 @@ func (s *GetHealthCheckStatusInput) SetHealthCheckId(v string) *GetHealthCheckSt
 type GetHealthCheckStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list that contains one HealthCheckObservation element for each Amazon Route
 	// 53 health checker that is reporting a status about the health check endpoint.
 	//
@@ -6405,6 +6741,11 @@ func (s GetHealthCheckStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetHealthCheckStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHealthCheckStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthCheckObservations sets the HealthCheckObservations field's value.
@@ -6435,6 +6776,8 @@ func (s GetHostedZoneCountInput) GoString() string {
 type GetHostedZoneCountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The total number of public and private hosted zones that are associated with
 	// the current AWS account.
 	//
@@ -6450,6 +6793,11 @@ func (s GetHostedZoneCountOutput) String() string {
 // GoString returns the string representation
 func (s GetHostedZoneCountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHostedZoneCountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZoneCount sets the HostedZoneCount field's value.
@@ -6504,6 +6852,8 @@ func (s *GetHostedZoneInput) SetId(v string) *GetHostedZoneInput {
 type GetHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that lists the Amazon Route 53 name servers for the specified
 	// hosted zone.
 	DelegationSet *DelegationSet `type:"structure"`
@@ -6527,6 +6877,11 @@ func (s GetHostedZoneOutput) String() string {
 // GoString returns the string representation
 func (s GetHostedZoneOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHostedZoneOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDelegationSet sets the DelegationSet field's value.
@@ -6595,6 +6950,8 @@ func (s *GetQueryLoggingConfigInput) SetId(v string) *GetQueryLoggingConfigInput
 type GetQueryLoggingConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about the query logging configuration
 	// that you specified in a GetQueryLoggingConfig request.
 	//
@@ -6610,6 +6967,11 @@ func (s GetQueryLoggingConfigOutput) String() string {
 // GoString returns the string representation
 func (s GetQueryLoggingConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQueryLoggingConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueryLoggingConfig sets the QueryLoggingConfig field's value.
@@ -6666,6 +7028,8 @@ func (s *GetReusableDelegationSetInput) SetId(v string) *GetReusableDelegationSe
 type GetReusableDelegationSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about the reusable delegation set.
 	//
 	// DelegationSet is a required field
@@ -6680,6 +7044,11 @@ func (s GetReusableDelegationSetOutput) String() string {
 // GoString returns the string representation
 func (s GetReusableDelegationSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetReusableDelegationSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDelegationSet sets the DelegationSet field's value.
@@ -6774,6 +7143,8 @@ func (s GetTrafficPolicyInstanceCountInput) GoString() string {
 type GetTrafficPolicyInstanceCountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of traffic policy instances that are associated with the current
 	// AWS account.
 	//
@@ -6789,6 +7160,11 @@ func (s GetTrafficPolicyInstanceCountOutput) String() string {
 // GoString returns the string representation
 func (s GetTrafficPolicyInstanceCountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTrafficPolicyInstanceCountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrafficPolicyInstanceCount sets the TrafficPolicyInstanceCount field's value.
@@ -6847,6 +7223,8 @@ func (s *GetTrafficPolicyInstanceInput) SetId(v string) *GetTrafficPolicyInstanc
 type GetTrafficPolicyInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains settings for the traffic policy instance.
 	//
 	// TrafficPolicyInstance is a required field
@@ -6863,6 +7241,11 @@ func (s GetTrafficPolicyInstanceOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetTrafficPolicyInstance sets the TrafficPolicyInstance field's value.
 func (s *GetTrafficPolicyInstanceOutput) SetTrafficPolicyInstance(v *TrafficPolicyInstance) *GetTrafficPolicyInstanceOutput {
 	s.TrafficPolicyInstance = v
@@ -6873,6 +7256,8 @@ func (s *GetTrafficPolicyInstanceOutput) SetTrafficPolicyInstance(v *TrafficPoli
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyResponse
 type GetTrafficPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// A complex type that contains settings for the specified traffic policy.
 	//
@@ -6888,6 +7273,11 @@ func (s GetTrafficPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetTrafficPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTrafficPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrafficPolicy sets the TrafficPolicy field's value.
@@ -7642,6 +8032,8 @@ func (s *ListGeoLocationsInput) SetStartSubdivisionCode(v string) *ListGeoLocati
 type ListGeoLocationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains one GeoLocationDetails element for each location
 	// that Amazon Route 53 supports for geolocation.
 	//
@@ -7686,6 +8078,11 @@ func (s ListGeoLocationsOutput) String() string {
 // GoString returns the string representation
 func (s ListGeoLocationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGeoLocationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGeoLocationDetailsList sets the GeoLocationDetailsList field's value.
@@ -7775,6 +8172,8 @@ func (s *ListHealthChecksInput) SetMaxItems(v string) *ListHealthChecksInput {
 type ListHealthChecksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains one HealthCheck element for each health check
 	// that is associated with the current AWS account.
 	//
@@ -7815,6 +8214,11 @@ func (s ListHealthChecksOutput) String() string {
 // GoString returns the string representation
 func (s ListHealthChecksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHealthChecksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthChecks sets the HealthChecks field's value.
@@ -7913,6 +8317,8 @@ func (s *ListHostedZonesByNameInput) SetMaxItems(v string) *ListHostedZonesByNam
 type ListHostedZonesByNameOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// For the second and subsequent calls to ListHostedZonesByName, DNSName is
 	// the value that you specified for the dnsname parameter in the request that
 	// produced the current response.
@@ -7967,6 +8373,11 @@ func (s ListHostedZonesByNameOutput) String() string {
 // GoString returns the string representation
 func (s ListHostedZonesByNameOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHostedZonesByNameOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDNSName sets the DNSName field's value.
@@ -8073,6 +8484,8 @@ func (s *ListHostedZonesInput) SetMaxItems(v string) *ListHostedZonesInput {
 type ListHostedZonesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains general information about the hosted zone.
 	//
 	// HostedZones is a required field
@@ -8115,6 +8528,11 @@ func (s ListHostedZonesOutput) String() string {
 // GoString returns the string representation
 func (s ListHostedZonesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHostedZonesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZones sets the HostedZones field's value.
@@ -8209,6 +8627,8 @@ func (s *ListQueryLoggingConfigsInput) SetNextToken(v string) *ListQueryLoggingC
 type ListQueryLoggingConfigsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a response includes the last of the query logging configurations that
 	// are associated with the current AWS account, NextToken doesn't appear in
 	// the response.
@@ -8234,6 +8654,11 @@ func (s ListQueryLoggingConfigsOutput) String() string {
 // GoString returns the string representation
 func (s ListQueryLoggingConfigsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListQueryLoggingConfigsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -8366,6 +8791,8 @@ func (s *ListResourceRecordSetsInput) SetStartRecordType(v RRType) *ListResource
 type ListResourceRecordSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether more resource record sets remain to be listed.
 	// If your results were truncated, you can make a follow-up pagination request
 	// by using the NextRecordName element.
@@ -8407,6 +8834,11 @@ func (s ListResourceRecordSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListResourceRecordSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceRecordSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -8497,6 +8929,8 @@ func (s *ListReusableDelegationSetsInput) SetMaxItems(v string) *ListReusableDel
 type ListReusableDelegationSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains one DelegationSet element for each reusable
 	// delegation set that was created by the current AWS account.
 	//
@@ -8536,6 +8970,11 @@ func (s ListReusableDelegationSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListReusableDelegationSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListReusableDelegationSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDelegationSets sets the DelegationSets field's value.
@@ -8634,6 +9073,8 @@ func (s *ListTagsForResourceInput) SetResourceType(v TagResourceType) *ListTagsF
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A ResourceTagSet containing tags associated with the specified resource.
 	//
 	// ResourceTagSet is a required field
@@ -8648,6 +9089,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceTagSet sets the ResourceTagSet field's value.
@@ -8725,6 +9171,8 @@ func (s *ListTagsForResourcesInput) SetResourceType(v TagResourceType) *ListTags
 type ListTagsForResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ResourceTagSets containing tags associated with the specified resources.
 	//
 	// ResourceTagSets is a required field
@@ -8739,6 +9187,11 @@ func (s ListTagsForResourcesOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceTagSets sets the ResourceTagSets field's value.
@@ -8811,6 +9264,8 @@ func (s *ListTrafficPoliciesInput) SetTrafficPolicyIdMarker(v string) *ListTraff
 type ListTrafficPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more traffic policies to be listed.
 	// If the response was truncated, you can get the next group of traffic policies
 	// by submitting another ListTrafficPolicies request and specifying the value
@@ -8846,6 +9301,11 @@ func (s ListTrafficPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListTrafficPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTrafficPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -8968,6 +9428,8 @@ func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetTrafficPolicyInstanceTy
 type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more traffic policy instances to
 	// be listed. If the response was truncated, you can get the next group of traffic
 	// policy instances by submitting another ListTrafficPolicyInstancesByHostedZone
@@ -9007,6 +9469,11 @@ func (s ListTrafficPolicyInstancesByHostedZoneOutput) String() string {
 // GoString returns the string representation
 func (s ListTrafficPolicyInstancesByHostedZoneOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTrafficPolicyInstancesByHostedZoneOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -9177,6 +9644,8 @@ func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyVersion(v int6
 type ListTrafficPolicyInstancesByPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If IsTruncated is true, HostedZoneIdMarker is the ID of the hosted zone of
 	// the first traffic policy instance in the next group of traffic policy instances.
 	HostedZoneIdMarker *string `type:"string"`
@@ -9222,6 +9691,11 @@ func (s ListTrafficPolicyInstancesByPolicyOutput) String() string {
 // GoString returns the string representation
 func (s ListTrafficPolicyInstancesByPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTrafficPolicyInstancesByPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZoneIdMarker sets the HostedZoneIdMarker field's value.
@@ -9347,6 +9821,8 @@ func (s *ListTrafficPolicyInstancesInput) SetTrafficPolicyInstanceTypeMarker(v R
 type ListTrafficPolicyInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If IsTruncated is true, HostedZoneIdMarker is the ID of the hosted zone of
 	// the first traffic policy instance that Amazon Route 53 will return if you
 	// submit another ListTrafficPolicyInstances request.
@@ -9393,6 +9869,11 @@ func (s ListTrafficPolicyInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ListTrafficPolicyInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTrafficPolicyInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZoneIdMarker sets the HostedZoneIdMarker field's value.
@@ -9512,6 +9993,8 @@ func (s *ListTrafficPolicyVersionsInput) SetTrafficPolicyVersionMarker(v string)
 type ListTrafficPolicyVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A flag that indicates whether there are more traffic policies to be listed.
 	// If the response was truncated, you can get the next group of traffic policies
 	// by submitting another ListTrafficPolicyVersions request and specifying the
@@ -9551,6 +10034,11 @@ func (s ListTrafficPolicyVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListTrafficPolicyVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTrafficPolicyVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsTruncated sets the IsTruncated field's value.
@@ -9649,6 +10137,8 @@ func (s *ListVPCAssociationAuthorizationsInput) SetNextToken(v string) *ListVPCA
 type ListVPCAssociationAuthorizationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the hosted zone that you can associate the listed VPCs with.
 	//
 	// HostedZoneId is a required field
@@ -9676,6 +10166,11 @@ func (s ListVPCAssociationAuthorizationsOutput) String() string {
 // GoString returns the string representation
 func (s ListVPCAssociationAuthorizationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVPCAssociationAuthorizationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZoneId sets the HostedZoneId field's value.
@@ -10581,6 +11076,8 @@ func (s *TestDNSAnswerInput) SetResolverIP(v string) *TestDNSAnswerInput {
 type TestDNSAnswerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Route 53 name server used to respond to the request.
 	//
 	// Nameserver is a required field
@@ -10626,6 +11123,11 @@ func (s TestDNSAnswerOutput) String() string {
 // GoString returns the string representation
 func (s TestDNSAnswerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestDNSAnswerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNameserver sets the Nameserver field's value.
@@ -11352,6 +11854,8 @@ func (s *UpdateHealthCheckInput) SetSearchString(v string) *UpdateHealthCheckInp
 type UpdateHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about one health check that is associated
 	// with the current AWS account.
 	//
@@ -11367,6 +11871,11 @@ func (s UpdateHealthCheckOutput) String() string {
 // GoString returns the string representation
 func (s UpdateHealthCheckOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateHealthCheckOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHealthCheck sets the HealthCheck field's value.
@@ -11432,6 +11941,8 @@ func (s *UpdateHostedZoneCommentInput) SetId(v string) *UpdateHostedZoneCommentI
 type UpdateHostedZoneCommentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains general information about the hosted zone.
 	//
 	// HostedZone is a required field
@@ -11446,6 +11957,11 @@ func (s UpdateHostedZoneCommentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateHostedZoneCommentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateHostedZoneCommentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostedZone sets the HostedZone field's value.
@@ -11539,6 +12055,8 @@ func (s *UpdateTrafficPolicyCommentInput) SetVersion(v int64) *UpdateTrafficPoli
 type UpdateTrafficPolicyCommentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains settings for the specified traffic policy.
 	//
 	// TrafficPolicy is a required field
@@ -11553,6 +12071,11 @@ func (s UpdateTrafficPolicyCommentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTrafficPolicyCommentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTrafficPolicyCommentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrafficPolicy sets the TrafficPolicy field's value.
@@ -11666,6 +12189,8 @@ func (s *UpdateTrafficPolicyInstanceInput) SetTrafficPolicyVersion(v int64) *Upd
 type UpdateTrafficPolicyInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains settings for the updated traffic policy instance.
 	//
 	// TrafficPolicyInstance is a required field
@@ -11680,6 +12205,11 @@ func (s UpdateTrafficPolicyInstanceOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTrafficPolicyInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrafficPolicyInstance sets the TrafficPolicyInstance field's value.

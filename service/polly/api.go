@@ -56,7 +56,10 @@ func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconReq
 		input = &DeleteLexiconInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLexiconOutput{})
+	output := &DeleteLexiconOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLexiconRequest{Request: req, Input: input}
 }
 
@@ -118,7 +121,10 @@ func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) DescribeVoices
 		input = &DescribeVoicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVoicesOutput{})
+	output := &DescribeVoicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVoicesRequest{Request: req, Input: input}
 }
 
@@ -165,7 +171,10 @@ func (c *Polly) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 		input = &GetLexiconInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLexiconOutput{})
+	output := &GetLexiconOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetLexiconRequest{Request: req, Input: input}
 }
 
@@ -212,7 +221,10 @@ func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsReques
 		input = &ListLexiconsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLexiconsOutput{})
+	output := &ListLexiconsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListLexiconsRequest{Request: req, Input: input}
 }
 
@@ -263,7 +275,10 @@ func (c *Polly) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 		input = &PutLexiconInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLexiconOutput{})
+	output := &PutLexiconOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutLexiconRequest{Request: req, Input: input}
 }
 
@@ -313,7 +328,10 @@ func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) Synthesize
 		input = &SynthesizeSpeechInput{}
 	}
 
-	req := c.newRequest(op, input, &SynthesizeSpeechOutput{})
+	output := &SynthesizeSpeechOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SynthesizeSpeechRequest{Request: req, Input: input}
 }
 
@@ -360,6 +378,8 @@ func (s *DeleteLexiconInput) SetName(v string) *DeleteLexiconInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconOutput
 type DeleteLexiconOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -370,6 +390,11 @@ func (s DeleteLexiconOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLexiconOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLexiconOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoicesInput
@@ -412,6 +437,8 @@ func (s *DescribeVoicesInput) SetNextToken(v string) *DescribeVoicesInput {
 type DescribeVoicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token to use in the next request to continue the listing of
 	// voices. NextToken is returned only if the response is truncated.
 	NextToken *string `type:"string"`
@@ -428,6 +455,11 @@ func (s DescribeVoicesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVoicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVoicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -486,6 +518,8 @@ func (s *GetLexiconInput) SetName(v string) *GetLexiconInput {
 type GetLexiconOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Lexicon object that provides name and the string content of the lexicon.
 	Lexicon *Lexicon `type:"structure"`
 
@@ -503,6 +537,11 @@ func (s GetLexiconOutput) String() string {
 // GoString returns the string representation
 func (s GetLexiconOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLexiconOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLexicon sets the Lexicon field's value.
@@ -689,6 +728,8 @@ func (s *ListLexiconsInput) SetNextToken(v string) *ListLexiconsInput {
 type ListLexiconsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of lexicon names and attributes.
 	Lexicons []LexiconDescription `type:"list"`
 
@@ -705,6 +746,11 @@ func (s ListLexiconsOutput) String() string {
 // GoString returns the string representation
 func (s ListLexiconsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLexiconsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLexicons sets the Lexicons field's value.
@@ -779,6 +825,8 @@ func (s *PutLexiconInput) SetName(v string) *PutLexiconInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput
 type PutLexiconOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -789,6 +837,11 @@ func (s PutLexiconOutput) String() string {
 // GoString returns the string representation
 func (s PutLexiconOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutLexiconOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechInput
@@ -912,6 +965,8 @@ func (s *SynthesizeSpeechInput) SetVoiceId(v VoiceId) *SynthesizeSpeechInput {
 type SynthesizeSpeechOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
 
+	responseMetadata aws.Response
+
 	// Stream containing the synthesized speech.
 	AudioStream io.ReadCloser `type:"blob"`
 
@@ -944,6 +999,11 @@ func (s SynthesizeSpeechOutput) String() string {
 // GoString returns the string representation
 func (s SynthesizeSpeechOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SynthesizeSpeechOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAudioStream sets the AudioStream field's value.

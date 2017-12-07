@@ -70,9 +70,12 @@ func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) AddT
 		input = &AddTagsToCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToCertificateOutput{})
+	output := &AddTagsToCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToCertificateRequest{Request: req, Input: input}
 }
 
@@ -126,9 +129,12 @@ func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCert
 		input = &DeleteCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCertificateOutput{})
+	output := &DeleteCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCertificateRequest{Request: req, Input: input}
 }
 
@@ -174,7 +180,10 @@ func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) Descri
 		input = &DescribeCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificateOutput{})
+	output := &DescribeCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCertificateRequest{Request: req, Input: input}
 }
 
@@ -228,7 +237,10 @@ func (c *ACM) GetCertificateRequest(input *GetCertificateInput) GetCertificateRe
 		input = &GetCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCertificateOutput{})
+	output := &GetCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCertificateRequest{Request: req, Input: input}
 }
 
@@ -299,7 +311,10 @@ func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) ImportCert
 		input = &ImportCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportCertificateOutput{})
+	output := &ImportCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportCertificateRequest{Request: req, Input: input}
 }
 
@@ -353,7 +368,10 @@ func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) ListCertific
 		input = &ListCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCertificatesOutput{})
+	output := &ListCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCertificatesRequest{Request: req, Input: input}
 }
 
@@ -452,7 +470,10 @@ func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) 
 		input = &ListTagsForCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForCertificateOutput{})
+	output := &ListTagsForCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForCertificateRequest{Request: req, Input: input}
 }
 
@@ -505,9 +526,12 @@ func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateI
 		input = &RemoveTagsFromCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromCertificateOutput{})
+	output := &RemoveTagsFromCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromCertificateRequest{Request: req, Input: input}
 }
 
@@ -559,7 +583,10 @@ func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) RequestC
 		input = &RequestCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestCertificateOutput{})
+	output := &RequestCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RequestCertificateRequest{Request: req, Input: input}
 }
 
@@ -615,9 +642,12 @@ func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) Re
 		input = &ResendValidationEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &ResendValidationEmailOutput{})
+	output := &ResendValidationEmailOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResendValidationEmailRequest{Request: req, Input: input}
 }
 
@@ -698,6 +728,8 @@ func (s *AddTagsToCertificateInput) SetTags(v []Tag) *AddTagsToCertificateInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateOutput
 type AddTagsToCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -708,6 +740,11 @@ func (s AddTagsToCertificateOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains metadata about an ACM certificate. This structure is returned in
@@ -1036,6 +1073,8 @@ func (s *DeleteCertificateInput) SetCertificateArn(v string) *DeleteCertificateI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateOutput
 type DeleteCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1046,6 +1085,11 @@ func (s DeleteCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateRequest
@@ -1101,6 +1145,8 @@ func (s *DescribeCertificateInput) SetCertificateArn(v string) *DescribeCertific
 type DescribeCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Metadata about an ACM certificate.
 	Certificate *CertificateDetail `type:"structure"`
 }
@@ -1113,6 +1159,11 @@ func (s DescribeCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificate sets the Certificate field's value.
@@ -1306,6 +1357,8 @@ func (s *GetCertificateInput) SetCertificateArn(v string) *GetCertificateInput {
 type GetCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// String that contains the ACM Certificate represented by the ARN specified
 	// at input.
 	Certificate *string `min:"1" type:"string"`
@@ -1323,6 +1376,11 @@ func (s GetCertificateOutput) String() string {
 // GoString returns the string representation
 func (s GetCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificate sets the Certificate field's value.
@@ -1448,6 +1506,8 @@ func (s *ImportCertificateInput) SetPrivateKey(v []byte) *ImportCertificateInput
 type ImportCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the imported certificate.
 	CertificateArn *string `min:"20" type:"string"`
@@ -1461,6 +1521,11 @@ func (s ImportCertificateOutput) String() string {
 // GoString returns the string representation
 func (s ImportCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -1536,6 +1601,8 @@ func (s *ListCertificatesInput) SetNextToken(v string) *ListCertificatesInput {
 type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ACM Certificates.
 	CertificateSummaryList []CertificateSummary `type:"list"`
 
@@ -1552,6 +1619,11 @@ func (s ListCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s ListCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateSummaryList sets the CertificateSummaryList field's value.
@@ -1619,6 +1691,8 @@ func (s *ListTagsForCertificateInput) SetCertificateArn(v string) *ListTagsForCe
 type ListTagsForCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The key-value pairs that define the applied tags.
 	Tags []Tag `min:"1" type:"list"`
 }
@@ -1631,6 +1705,11 @@ func (s ListTagsForCertificateOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -1716,6 +1795,8 @@ func (s *RemoveTagsFromCertificateInput) SetTags(v []Tag) *RemoveTagsFromCertifi
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificateOutput
 type RemoveTagsFromCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1726,6 +1807,11 @@ func (s RemoveTagsFromCertificateOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
@@ -1892,6 +1978,8 @@ func (s *RequestCertificateInput) SetSubjectAlternativeNames(v []string) *Reques
 type RequestCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// String that contains the ARN of the issued certificate. This must be of the
 	// form:
 	//
@@ -1907,6 +1995,11 @@ func (s RequestCertificateOutput) String() string {
 // GoString returns the string representation
 func (s RequestCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RequestCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -2020,6 +2113,8 @@ func (s *ResendValidationEmailInput) SetValidationDomain(v string) *ResendValida
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailOutput
 type ResendValidationEmailOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2030,6 +2125,11 @@ func (s ResendValidationEmailOutput) String() string {
 // GoString returns the string representation
 func (s ResendValidationEmailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResendValidationEmailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A key-value pair that identifies or specifies metadata about an ACM resource.

@@ -60,7 +60,10 @@ func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInpu
 		input = &BatchGetRepositoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetRepositoriesOutput{})
+	output := &BatchGetRepositoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetRepositoriesRequest{Request: req, Input: input}
 }
 
@@ -109,9 +112,12 @@ func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) CreateBranchR
 		input = &CreateBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBranchOutput{})
+	output := &CreateBranchOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBranchRequest{Request: req, Input: input}
 }
 
@@ -157,7 +163,10 @@ func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) Creat
 		input = &CreateRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRepositoryOutput{})
+	output := &CreateRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRepositoryRequest{Request: req, Input: input}
 }
 
@@ -208,7 +217,10 @@ func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) Delet
 		input = &DeleteRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRepositoryOutput{})
+	output := &DeleteRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRepositoryRequest{Request: req, Input: input}
 }
 
@@ -254,7 +266,10 @@ func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) GetBlobRequest {
 		input = &GetBlobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBlobOutput{})
+	output := &GetBlobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBlobRequest{Request: req, Input: input}
 }
 
@@ -301,7 +316,10 @@ func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
 		input = &GetBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBranchOutput{})
+	output := &GetBranchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBranchRequest{Request: req, Input: input}
 }
 
@@ -348,7 +366,10 @@ func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) GetCommitRequest {
 		input = &GetCommitInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCommitOutput{})
+	output := &GetCommitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCommitRequest{Request: req, Input: input}
 }
 
@@ -402,7 +423,10 @@ func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) GetDiffer
 		input = &GetDifferencesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDifferencesOutput{})
+	output := &GetDifferencesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDifferencesRequest{Request: req, Input: input}
 }
 
@@ -504,7 +528,10 @@ func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) GetReposito
 		input = &GetRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRepositoryOutput{})
+	output := &GetRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRepositoryRequest{Request: req, Input: input}
 }
 
@@ -550,7 +577,10 @@ func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersIn
 		input = &GetRepositoryTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRepositoryTriggersOutput{})
+	output := &GetRepositoryTriggersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRepositoryTriggersRequest{Request: req, Input: input}
 }
 
@@ -602,7 +632,10 @@ func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) ListBranchesR
 		input = &ListBranchesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBranchesOutput{})
+	output := &ListBranchesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBranchesRequest{Request: req, Input: input}
 }
 
@@ -704,7 +737,10 @@ func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) ListR
 		input = &ListRepositoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRepositoriesOutput{})
+	output := &ListRepositoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRepositoriesRequest{Request: req, Input: input}
 }
 
@@ -801,7 +837,10 @@ func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersIn
 		input = &PutRepositoryTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRepositoryTriggersOutput{})
+	output := &PutRepositoryTriggersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRepositoryTriggersRequest{Request: req, Input: input}
 }
 
@@ -850,7 +889,10 @@ func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggers
 		input = &TestRepositoryTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &TestRepositoryTriggersOutput{})
+	output := &TestRepositoryTriggersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestRepositoryTriggersRequest{Request: req, Input: input}
 }
 
@@ -900,9 +942,12 @@ func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput)
 		input = &UpdateDefaultBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDefaultBranchOutput{})
+	output := &UpdateDefaultBranchOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDefaultBranchRequest{Request: req, Input: input}
 }
 
@@ -954,9 +999,12 @@ func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryD
 		input = &UpdateRepositoryDescriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRepositoryDescriptionOutput{})
+	output := &UpdateRepositoryDescriptionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRepositoryDescriptionRequest{Request: req, Input: input}
 }
 
@@ -1007,9 +1055,12 @@ func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInpu
 		input = &UpdateRepositoryNameInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRepositoryNameOutput{})
+	output := &UpdateRepositoryNameOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRepositoryNameRequest{Request: req, Input: input}
 }
 
@@ -1059,6 +1110,8 @@ func (s *BatchGetRepositoriesInput) SetRepositoryNames(v []string) *BatchGetRepo
 type BatchGetRepositoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of repositories returned by the batch get repositories operation.
 	Repositories []RepositoryMetadata `locationName:"repositories" type:"list"`
 
@@ -1074,6 +1127,11 @@ func (s BatchGetRepositoriesOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetRepositoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetRepositoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRepositories sets the Repositories field's value.
@@ -1332,6 +1390,8 @@ func (s *CreateBranchInput) SetRepositoryName(v string) *CreateBranchInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranchOutput
 type CreateBranchOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1342,6 +1402,11 @@ func (s CreateBranchOutput) String() string {
 // GoString returns the string representation
 func (s CreateBranchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBranchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a create repository operation.
@@ -1414,6 +1479,8 @@ func (s *CreateRepositoryInput) SetRepositoryName(v string) *CreateRepositoryInp
 type CreateRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the newly created repository.
 	RepositoryMetadata *RepositoryMetadata `locationName:"repositoryMetadata" type:"structure"`
 }
@@ -1426,6 +1493,11 @@ func (s CreateRepositoryOutput) String() string {
 // GoString returns the string representation
 func (s CreateRepositoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRepositoryMetadata sets the RepositoryMetadata field's value.
@@ -1483,6 +1555,8 @@ func (s *DeleteRepositoryInput) SetRepositoryName(v string) *DeleteRepositoryInp
 type DeleteRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the repository that was deleted.
 	RepositoryId *string `locationName:"repositoryId" type:"string"`
 }
@@ -1495,6 +1569,11 @@ func (s DeleteRepositoryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRepositoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRepositoryId sets the RepositoryId field's value.
@@ -1613,6 +1692,8 @@ func (s *GetBlobInput) SetRepositoryName(v string) *GetBlobInput {
 type GetBlobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The content of the blob, usually a file.
 	//
 	// Content is automatically base64 encoded/decoded by the SDK.
@@ -1629,6 +1710,11 @@ func (s GetBlobOutput) String() string {
 // GoString returns the string representation
 func (s GetBlobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBlobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetContent sets the Content field's value.
@@ -1693,6 +1779,8 @@ func (s *GetBranchInput) SetRepositoryName(v string) *GetBranchInput {
 type GetBranchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the branch.
 	Branch *BranchInfo `locationName:"branch" type:"structure"`
 }
@@ -1705,6 +1793,11 @@ func (s GetBranchOutput) String() string {
 // GoString returns the string representation
 func (s GetBranchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBranchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBranch sets the Branch field's value.
@@ -1777,6 +1870,8 @@ func (s *GetCommitInput) SetRepositoryName(v string) *GetCommitInput {
 type GetCommitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A commit data type object that contains information about the specified commit.
 	//
 	// Commit is a required field
@@ -1791,6 +1886,11 @@ func (s GetCommitOutput) String() string {
 // GoString returns the string representation
 func (s GetCommitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCommitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommit sets the Commit field's value.
@@ -1917,6 +2017,8 @@ func (s *GetDifferencesInput) SetRepositoryName(v string) *GetDifferencesInput {
 type GetDifferencesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A differences data type object that contains information about the differences,
 	// including whether the difference is added, modified, or deleted (A, D, M).
 	Differences []Difference `locationName:"differences" type:"list"`
@@ -1934,6 +2036,11 @@ func (s GetDifferencesOutput) String() string {
 // GoString returns the string representation
 func (s GetDifferencesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDifferencesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDifferences sets the Differences field's value.
@@ -1997,6 +2104,8 @@ func (s *GetRepositoryInput) SetRepositoryName(v string) *GetRepositoryInput {
 type GetRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the repository.
 	RepositoryMetadata *RepositoryMetadata `locationName:"repositoryMetadata" type:"structure"`
 }
@@ -2009,6 +2118,11 @@ func (s GetRepositoryOutput) String() string {
 // GoString returns the string representation
 func (s GetRepositoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRepositoryMetadata sets the RepositoryMetadata field's value.
@@ -2066,6 +2180,8 @@ func (s *GetRepositoryTriggersInput) SetRepositoryName(v string) *GetRepositoryT
 type GetRepositoryTriggersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The system-generated unique ID for the trigger.
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
@@ -2081,6 +2197,11 @@ func (s GetRepositoryTriggersOutput) String() string {
 // GoString returns the string representation
 func (s GetRepositoryTriggersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRepositoryTriggersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationId sets the ConfigurationId field's value.
@@ -2153,6 +2274,8 @@ func (s *ListBranchesInput) SetRepositoryName(v string) *ListBranchesInput {
 type ListBranchesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of branch names.
 	Branches []string `locationName:"branches" type:"list"`
 
@@ -2168,6 +2291,11 @@ func (s ListBranchesOutput) String() string {
 // GoString returns the string representation
 func (s ListBranchesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBranchesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBranches sets the Branches field's value.
@@ -2233,6 +2361,8 @@ func (s *ListRepositoriesInput) SetSortBy(v SortByEnum) *ListRepositoriesInput {
 type ListRepositoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An enumeration token that allows the operation to batch the results of the
 	// operation. Batch sizes are 1,000 for list repository operations. When the
 	// client sends the token back to AWS CodeCommit, another page of 1,000 records
@@ -2251,6 +2381,11 @@ func (s ListRepositoriesOutput) String() string {
 // GoString returns the string representation
 func (s ListRepositoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRepositoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2336,6 +2471,8 @@ func (s *PutRepositoryTriggersInput) SetTriggers(v []RepositoryTrigger) *PutRepo
 type PutRepositoryTriggersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The system-generated unique ID for the create or update operation.
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 }
@@ -2348,6 +2485,11 @@ func (s PutRepositoryTriggersOutput) String() string {
 // GoString returns the string representation
 func (s PutRepositoryTriggersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRepositoryTriggersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationId sets the ConfigurationId field's value.
@@ -2697,6 +2839,8 @@ func (s *TestRepositoryTriggersInput) SetTriggers(v []RepositoryTrigger) *TestRe
 type TestRepositoryTriggersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of triggers that were not able to be tested. This list provides
 	// the names of the triggers that could not be tested, separated by commas.
 	FailedExecutions []RepositoryTriggerExecutionFailure `locationName:"failedExecutions" type:"list"`
@@ -2714,6 +2858,11 @@ func (s TestRepositoryTriggersOutput) String() string {
 // GoString returns the string representation
 func (s TestRepositoryTriggersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestRepositoryTriggersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedExecutions sets the FailedExecutions field's value.
@@ -2793,6 +2942,8 @@ func (s *UpdateDefaultBranchInput) SetRepositoryName(v string) *UpdateDefaultBra
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranchOutput
 type UpdateDefaultBranchOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2803,6 +2954,11 @@ func (s UpdateDefaultBranchOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDefaultBranchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDefaultBranchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of an update repository description operation.
@@ -2862,6 +3018,8 @@ func (s *UpdateRepositoryDescriptionInput) SetRepositoryName(v string) *UpdateRe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescriptionOutput
 type UpdateRepositoryDescriptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2872,6 +3030,11 @@ func (s UpdateRepositoryDescriptionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRepositoryDescriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRepositoryDescriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of an update repository description operation.
@@ -2939,6 +3102,8 @@ func (s *UpdateRepositoryNameInput) SetOldName(v string) *UpdateRepositoryNameIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryNameOutput
 type UpdateRepositoryNameOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2949,6 +3114,11 @@ func (s UpdateRepositoryNameOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRepositoryNameOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRepositoryNameOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about the user who made a specified commit.

@@ -56,9 +56,12 @@ func (c *IoT) AcceptCertificateTransferRequest(input *AcceptCertificateTransferI
 		input = &AcceptCertificateTransferInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptCertificateTransferOutput{})
+	output := &AcceptCertificateTransferOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptCertificateTransferRequest{Request: req, Input: input}
 }
 
@@ -103,9 +106,12 @@ func (c *IoT) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput) At
 		input = &AttachPrincipalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachPrincipalPolicyOutput{})
+	output := &AttachPrincipalPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachPrincipalPolicyRequest{Request: req, Input: input}
 }
 
@@ -149,7 +155,10 @@ func (c *IoT) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) Atta
 		input = &AttachThingPrincipalInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachThingPrincipalOutput{})
+	output := &AttachThingPrincipalOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachThingPrincipalRequest{Request: req, Input: input}
 }
 
@@ -202,9 +211,12 @@ func (c *IoT) CancelCertificateTransferRequest(input *CancelCertificateTransferI
 		input = &CancelCertificateTransferInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelCertificateTransferOutput{})
+	output := &CancelCertificateTransferOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelCertificateTransferRequest{Request: req, Input: input}
 }
 
@@ -289,7 +301,10 @@ func (c *IoT) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsrInp
 		input = &CreateCertificateFromCsrInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCertificateFromCsrOutput{})
+	output := &CreateCertificateFromCsrOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCertificateFromCsrRequest{Request: req, Input: input}
 }
 
@@ -337,7 +352,10 @@ func (c *IoT) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificateInp
 		input = &CreateKeysAndCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeysAndCertificateOutput{})
+	output := &CreateKeysAndCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateKeysAndCertificateRequest{Request: req, Input: input}
 }
 
@@ -385,7 +403,10 @@ func (c *IoT) CreatePolicyRequest(input *CreatePolicyInput) CreatePolicyRequest 
 		input = &CreatePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePolicyOutput{})
+	output := &CreatePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePolicyRequest{Request: req, Input: input}
 }
 
@@ -436,7 +457,10 @@ func (c *IoT) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) Create
 		input = &CreatePolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePolicyVersionOutput{})
+	output := &CreatePolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -480,7 +504,10 @@ func (c *IoT) CreateThingRequest(input *CreateThingInput) CreateThingRequest {
 		input = &CreateThingInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateThingOutput{})
+	output := &CreateThingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateThingRequest{Request: req, Input: input}
 }
 
@@ -524,7 +551,10 @@ func (c *IoT) CreateThingTypeRequest(input *CreateThingTypeInput) CreateThingTyp
 		input = &CreateThingTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateThingTypeOutput{})
+	output := &CreateThingTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateThingTypeRequest{Request: req, Input: input}
 }
 
@@ -570,9 +600,12 @@ func (c *IoT) CreateTopicRuleRequest(input *CreateTopicRuleInput) CreateTopicRul
 		input = &CreateTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTopicRuleOutput{})
+	output := &CreateTopicRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTopicRuleRequest{Request: req, Input: input}
 }
 
@@ -616,7 +649,10 @@ func (c *IoT) DeleteCACertificateRequest(input *DeleteCACertificateInput) Delete
 		input = &DeleteCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCACertificateOutput{})
+	output := &DeleteCACertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCACertificateRequest{Request: req, Input: input}
 }
 
@@ -665,9 +701,12 @@ func (c *IoT) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCert
 		input = &DeleteCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCertificateOutput{})
+	output := &DeleteCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCertificateRequest{Request: req, Input: input}
 }
 
@@ -721,9 +760,12 @@ func (c *IoT) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest 
 		input = &DeletePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyOutput{})
+	output := &DeletePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePolicyRequest{Request: req, Input: input}
 }
 
@@ -770,9 +812,12 @@ func (c *IoT) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Delete
 		input = &DeletePolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyVersionOutput{})
+	output := &DeletePolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -816,7 +861,10 @@ func (c *IoT) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInput) 
 		input = &DeleteRegistrationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRegistrationCodeOutput{})
+	output := &DeleteRegistrationCodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRegistrationCodeRequest{Request: req, Input: input}
 }
 
@@ -860,7 +908,10 @@ func (c *IoT) DeleteThingRequest(input *DeleteThingInput) DeleteThingRequest {
 		input = &DeleteThingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteThingOutput{})
+	output := &DeleteThingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteThingRequest{Request: req, Input: input}
 }
 
@@ -908,7 +959,10 @@ func (c *IoT) DeleteThingTypeRequest(input *DeleteThingTypeInput) DeleteThingTyp
 		input = &DeleteThingTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteThingTypeOutput{})
+	output := &DeleteThingTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteThingTypeRequest{Request: req, Input: input}
 }
 
@@ -952,9 +1006,12 @@ func (c *IoT) DeleteTopicRuleRequest(input *DeleteTopicRuleInput) DeleteTopicRul
 		input = &DeleteTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTopicRuleOutput{})
+	output := &DeleteTopicRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTopicRuleRequest{Request: req, Input: input}
 }
 
@@ -999,7 +1056,10 @@ func (c *IoT) DeprecateThingTypeRequest(input *DeprecateThingTypeInput) Deprecat
 		input = &DeprecateThingTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateThingTypeOutput{})
+	output := &DeprecateThingTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeprecateThingTypeRequest{Request: req, Input: input}
 }
 
@@ -1043,7 +1103,10 @@ func (c *IoT) DescribeCACertificateRequest(input *DescribeCACertificateInput) De
 		input = &DescribeCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCACertificateOutput{})
+	output := &DescribeCACertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCACertificateRequest{Request: req, Input: input}
 }
 
@@ -1087,7 +1150,10 @@ func (c *IoT) DescribeCertificateRequest(input *DescribeCertificateInput) Descri
 		input = &DescribeCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificateOutput{})
+	output := &DescribeCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCertificateRequest{Request: req, Input: input}
 }
 
@@ -1131,7 +1197,10 @@ func (c *IoT) DescribeEndpointRequest(input *DescribeEndpointInput) DescribeEndp
 		input = &DescribeEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointOutput{})
+	output := &DescribeEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEndpointRequest{Request: req, Input: input}
 }
 
@@ -1175,7 +1244,10 @@ func (c *IoT) DescribeThingRequest(input *DescribeThingInput) DescribeThingReque
 		input = &DescribeThingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeThingOutput{})
+	output := &DescribeThingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeThingRequest{Request: req, Input: input}
 }
 
@@ -1219,7 +1291,10 @@ func (c *IoT) DescribeThingTypeRequest(input *DescribeThingTypeInput) DescribeTh
 		input = &DescribeThingTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeThingTypeOutput{})
+	output := &DescribeThingTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeThingTypeRequest{Request: req, Input: input}
 }
 
@@ -1263,9 +1338,12 @@ func (c *IoT) DetachPrincipalPolicyRequest(input *DetachPrincipalPolicyInput) De
 		input = &DetachPrincipalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachPrincipalPolicyOutput{})
+	output := &DetachPrincipalPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachPrincipalPolicyRequest{Request: req, Input: input}
 }
 
@@ -1309,7 +1387,10 @@ func (c *IoT) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) Deta
 		input = &DetachThingPrincipalInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachThingPrincipalOutput{})
+	output := &DetachThingPrincipalOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachThingPrincipalRequest{Request: req, Input: input}
 }
 
@@ -1353,9 +1434,12 @@ func (c *IoT) DisableTopicRuleRequest(input *DisableTopicRuleInput) DisableTopic
 		input = &DisableTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableTopicRuleOutput{})
+	output := &DisableTopicRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableTopicRuleRequest{Request: req, Input: input}
 }
 
@@ -1399,9 +1483,12 @@ func (c *IoT) EnableTopicRuleRequest(input *EnableTopicRuleInput) EnableTopicRul
 		input = &EnableTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableTopicRuleOutput{})
+	output := &EnableTopicRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableTopicRuleRequest{Request: req, Input: input}
 }
 
@@ -1445,7 +1532,10 @@ func (c *IoT) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) GetLogging
 		input = &GetLoggingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoggingOptionsOutput{})
+	output := &GetLoggingOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetLoggingOptionsRequest{Request: req, Input: input}
 }
 
@@ -1490,7 +1580,10 @@ func (c *IoT) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 		input = &GetPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyOutput{})
+	output := &GetPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPolicyRequest{Request: req, Input: input}
 }
 
@@ -1534,7 +1627,10 @@ func (c *IoT) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicyVer
 		input = &GetPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyVersionOutput{})
+	output := &GetPolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -1578,7 +1674,10 @@ func (c *IoT) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) GetReg
 		input = &GetRegistrationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRegistrationCodeOutput{})
+	output := &GetRegistrationCodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRegistrationCodeRequest{Request: req, Input: input}
 }
 
@@ -1622,7 +1721,10 @@ func (c *IoT) GetTopicRuleRequest(input *GetTopicRuleInput) GetTopicRuleRequest 
 		input = &GetTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTopicRuleOutput{})
+	output := &GetTopicRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTopicRuleRequest{Request: req, Input: input}
 }
 
@@ -1669,7 +1771,10 @@ func (c *IoT) ListCACertificatesRequest(input *ListCACertificatesInput) ListCACe
 		input = &ListCACertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCACertificatesOutput{})
+	output := &ListCACertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCACertificatesRequest{Request: req, Input: input}
 }
 
@@ -1716,7 +1821,10 @@ func (c *IoT) ListCertificatesRequest(input *ListCertificatesInput) ListCertific
 		input = &ListCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCertificatesOutput{})
+	output := &ListCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCertificatesRequest{Request: req, Input: input}
 }
 
@@ -1760,7 +1868,10 @@ func (c *IoT) ListCertificatesByCARequest(input *ListCertificatesByCAInput) List
 		input = &ListCertificatesByCAInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCertificatesByCAOutput{})
+	output := &ListCertificatesByCAOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCertificatesByCARequest{Request: req, Input: input}
 }
 
@@ -1804,7 +1915,10 @@ func (c *IoT) ListOutgoingCertificatesRequest(input *ListOutgoingCertificatesInp
 		input = &ListOutgoingCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOutgoingCertificatesOutput{})
+	output := &ListOutgoingCertificatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOutgoingCertificatesRequest{Request: req, Input: input}
 }
 
@@ -1848,7 +1962,10 @@ func (c *IoT) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 		input = &ListPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPoliciesOutput{})
+	output := &ListPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPoliciesRequest{Request: req, Input: input}
 }
 
@@ -1892,7 +2009,10 @@ func (c *IoT) ListPolicyPrincipalsRequest(input *ListPolicyPrincipalsInput) List
 		input = &ListPolicyPrincipalsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPolicyPrincipalsOutput{})
+	output := &ListPolicyPrincipalsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPolicyPrincipalsRequest{Request: req, Input: input}
 }
 
@@ -1936,7 +2056,10 @@ func (c *IoT) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPoli
 		input = &ListPolicyVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPolicyVersionsOutput{})
+	output := &ListPolicyVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPolicyVersionsRequest{Request: req, Input: input}
 }
 
@@ -1981,7 +2104,10 @@ func (c *IoT) ListPrincipalPoliciesRequest(input *ListPrincipalPoliciesInput) Li
 		input = &ListPrincipalPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPrincipalPoliciesOutput{})
+	output := &ListPrincipalPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPrincipalPoliciesRequest{Request: req, Input: input}
 }
 
@@ -2025,7 +2151,10 @@ func (c *IoT) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) ListPr
 		input = &ListPrincipalThingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPrincipalThingsOutput{})
+	output := &ListPrincipalThingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPrincipalThingsRequest{Request: req, Input: input}
 }
 
@@ -2069,7 +2198,10 @@ func (c *IoT) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) ListTh
 		input = &ListThingPrincipalsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingPrincipalsOutput{})
+	output := &ListThingPrincipalsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListThingPrincipalsRequest{Request: req, Input: input}
 }
 
@@ -2113,7 +2245,10 @@ func (c *IoT) ListThingTypesRequest(input *ListThingTypesInput) ListThingTypesRe
 		input = &ListThingTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingTypesOutput{})
+	output := &ListThingTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListThingTypesRequest{Request: req, Input: input}
 }
 
@@ -2160,7 +2295,10 @@ func (c *IoT) ListThingsRequest(input *ListThingsInput) ListThingsRequest {
 		input = &ListThingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingsOutput{})
+	output := &ListThingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListThingsRequest{Request: req, Input: input}
 }
 
@@ -2204,7 +2342,10 @@ func (c *IoT) ListTopicRulesRequest(input *ListTopicRulesInput) ListTopicRulesRe
 		input = &ListTopicRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTopicRulesOutput{})
+	output := &ListTopicRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTopicRulesRequest{Request: req, Input: input}
 }
 
@@ -2254,7 +2395,10 @@ func (c *IoT) RegisterCACertificateRequest(input *RegisterCACertificateInput) Re
 		input = &RegisterCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterCACertificateOutput{})
+	output := &RegisterCACertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterCACertificateRequest{Request: req, Input: input}
 }
 
@@ -2300,7 +2444,10 @@ func (c *IoT) RegisterCertificateRequest(input *RegisterCertificateInput) Regist
 		input = &RegisterCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterCertificateOutput{})
+	output := &RegisterCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterCertificateRequest{Request: req, Input: input}
 }
 
@@ -2352,9 +2499,12 @@ func (c *IoT) RejectCertificateTransferRequest(input *RejectCertificateTransferI
 		input = &RejectCertificateTransferInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectCertificateTransferOutput{})
+	output := &RejectCertificateTransferOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RejectCertificateTransferRequest{Request: req, Input: input}
 }
 
@@ -2400,9 +2550,12 @@ func (c *IoT) ReplaceTopicRuleRequest(input *ReplaceTopicRuleInput) ReplaceTopic
 		input = &ReplaceTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceTopicRuleOutput{})
+	output := &ReplaceTopicRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReplaceTopicRuleRequest{Request: req, Input: input}
 }
 
@@ -2449,9 +2602,12 @@ func (c *IoT) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput
 		input = &SetDefaultPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDefaultPolicyVersionOutput{})
+	output := &SetDefaultPolicyVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetDefaultPolicyVersionRequest{Request: req, Input: input}
 }
 
@@ -2495,9 +2651,12 @@ func (c *IoT) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) SetLogging
 		input = &SetLoggingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoggingOptionsOutput{})
+	output := &SetLoggingOptionsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetLoggingOptionsRequest{Request: req, Input: input}
 }
 
@@ -2552,7 +2711,10 @@ func (c *IoT) TransferCertificateRequest(input *TransferCertificateInput) Transf
 		input = &TransferCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &TransferCertificateOutput{})
+	output := &TransferCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TransferCertificateRequest{Request: req, Input: input}
 }
 
@@ -2596,9 +2758,12 @@ func (c *IoT) UpdateCACertificateRequest(input *UpdateCACertificateInput) Update
 		input = &UpdateCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCACertificateOutput{})
+	output := &UpdateCACertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCACertificateRequest{Request: req, Input: input}
 }
 
@@ -2648,9 +2813,12 @@ func (c *IoT) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateCert
 		input = &UpdateCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCertificateOutput{})
+	output := &UpdateCertificateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCertificateRequest{Request: req, Input: input}
 }
 
@@ -2694,7 +2862,10 @@ func (c *IoT) UpdateThingRequest(input *UpdateThingInput) UpdateThingRequest {
 		input = &UpdateThingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateThingOutput{})
+	output := &UpdateThingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateThingRequest{Request: req, Input: input}
 }
 
@@ -2752,6 +2923,8 @@ func (s *AcceptCertificateTransferInput) SetSetAsActive(v bool) *AcceptCertifica
 
 type AcceptCertificateTransferOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2762,6 +2935,11 @@ func (s AcceptCertificateTransferOutput) String() string {
 // GoString returns the string representation
 func (s AcceptCertificateTransferOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptCertificateTransferOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes the actions associated with a rule.
@@ -3034,6 +3212,8 @@ func (s *AttachPrincipalPolicyInput) SetPrincipal(v string) *AttachPrincipalPoli
 
 type AttachPrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3044,6 +3224,11 @@ func (s AttachPrincipalPolicyOutput) String() string {
 // GoString returns the string representation
 func (s AttachPrincipalPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachPrincipalPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the AttachThingPrincipal operation.
@@ -3107,6 +3292,8 @@ func (s *AttachThingPrincipalInput) SetThingName(v string) *AttachThingPrincipal
 // The output from the AttachThingPrincipal operation.
 type AttachThingPrincipalOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3117,6 +3304,11 @@ func (s AttachThingPrincipalOutput) String() string {
 // GoString returns the string representation
 func (s AttachThingPrincipalOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachThingPrincipalOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The attribute payload.
@@ -3337,6 +3529,8 @@ func (s *CancelCertificateTransferInput) SetCertificateId(v string) *CancelCerti
 
 type CancelCertificateTransferOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3347,6 +3541,11 @@ func (s CancelCertificateTransferOutput) String() string {
 // GoString returns the string representation
 func (s CancelCertificateTransferOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelCertificateTransferOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about a certificate.
@@ -3758,6 +3957,8 @@ func (s *CreateCertificateFromCsrInput) SetSetAsActive(v bool) *CreateCertificat
 type CreateCertificateFromCsrOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the certificate. You can use the ARN as
 	// a principal for policy operations.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
@@ -3778,6 +3979,11 @@ func (s CreateCertificateFromCsrOutput) String() string {
 // GoString returns the string representation
 func (s CreateCertificateFromCsrOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCertificateFromCsrOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -3826,6 +4032,8 @@ func (s *CreateKeysAndCertificateInput) SetSetAsActive(v bool) *CreateKeysAndCer
 type CreateKeysAndCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the certificate.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
 
@@ -3848,6 +4056,11 @@ func (s CreateKeysAndCertificateOutput) String() string {
 // GoString returns the string representation
 func (s CreateKeysAndCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateKeysAndCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -3937,6 +4150,8 @@ func (s *CreatePolicyInput) SetPolicyName(v string) *CreatePolicyInput {
 type CreatePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The policy ARN.
 	PolicyArn *string `locationName:"policyArn" type:"string"`
 
@@ -3958,6 +4173,11 @@ func (s CreatePolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreatePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyArn sets the PolicyArn field's value.
@@ -4058,6 +4278,8 @@ func (s *CreatePolicyVersionInput) SetSetAsDefault(v bool) *CreatePolicyVersionI
 type CreatePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
 
@@ -4079,6 +4301,11 @@ func (s CreatePolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreatePolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsDefaultVersion sets the IsDefaultVersion field's value.
@@ -4176,6 +4403,8 @@ func (s *CreateThingInput) SetThingTypeName(v string) *CreateThingInput {
 type CreateThingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the new thing.
 	ThingArn *string `locationName:"thingArn" type:"string"`
 
@@ -4191,6 +4420,11 @@ func (s CreateThingOutput) String() string {
 // GoString returns the string representation
 func (s CreateThingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateThingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetThingArn sets the ThingArn field's value.
@@ -4263,6 +4497,8 @@ func (s *CreateThingTypeInput) SetThingTypeProperties(v *ThingTypeProperties) *C
 type CreateThingTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the thing type.
 	ThingTypeArn *string `locationName:"thingTypeArn" type:"string"`
 
@@ -4278,6 +4514,11 @@ func (s CreateThingTypeOutput) String() string {
 // GoString returns the string representation
 func (s CreateThingTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateThingTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetThingTypeArn sets the ThingTypeArn field's value.
@@ -4357,6 +4598,8 @@ func (s *CreateTopicRuleInput) SetTopicRulePayload(v *TopicRulePayload) *CreateT
 
 type CreateTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4367,6 +4610,11 @@ func (s CreateTopicRuleOutput) String() string {
 // GoString returns the string representation
 func (s CreateTopicRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTopicRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input for the DeleteCACertificate operation.
@@ -4415,6 +4663,8 @@ func (s *DeleteCACertificateInput) SetCertificateId(v string) *DeleteCACertifica
 // The output for the DeleteCACertificate operation.
 type DeleteCACertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4425,6 +4675,11 @@ func (s DeleteCACertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCACertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCACertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeleteCertificate operation.
@@ -4472,6 +4727,8 @@ func (s *DeleteCertificateInput) SetCertificateId(v string) *DeleteCertificateIn
 
 type DeleteCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4482,6 +4739,11 @@ func (s DeleteCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeletePolicy operation.
@@ -4529,6 +4791,8 @@ func (s *DeletePolicyInput) SetPolicyName(v string) *DeletePolicyInput {
 
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4539,6 +4803,11 @@ func (s DeletePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeletePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeletePolicyVersion operation.
@@ -4601,6 +4870,8 @@ func (s *DeletePolicyVersionInput) SetPolicyVersionId(v string) *DeletePolicyVer
 
 type DeletePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4611,6 +4882,11 @@ func (s DeletePolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeletePolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeleteRegistrationCode operation.
@@ -4631,6 +4907,8 @@ func (s DeleteRegistrationCodeInput) GoString() string {
 // The output for the DeleteRegistrationCode operation.
 type DeleteRegistrationCodeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4641,6 +4919,11 @@ func (s DeleteRegistrationCodeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRegistrationCodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRegistrationCodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeleteThing operation.
@@ -4700,6 +4983,8 @@ func (s *DeleteThingInput) SetThingName(v string) *DeleteThingInput {
 // The output of the DeleteThing operation.
 type DeleteThingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4710,6 +4995,11 @@ func (s DeleteThingOutput) String() string {
 // GoString returns the string representation
 func (s DeleteThingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteThingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeleteThingType operation.
@@ -4758,6 +5048,8 @@ func (s *DeleteThingTypeInput) SetThingTypeName(v string) *DeleteThingTypeInput 
 // The output for the DeleteThingType operation.
 type DeleteThingTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4768,6 +5060,11 @@ func (s DeleteThingTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteThingTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteThingTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeleteTopicRule operation.
@@ -4815,6 +5112,8 @@ func (s *DeleteTopicRuleInput) SetRuleName(v string) *DeleteTopicRuleInput {
 
 type DeleteTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4825,6 +5124,11 @@ func (s DeleteTopicRuleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTopicRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTopicRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DeprecateThingType operation.
@@ -4883,6 +5187,8 @@ func (s *DeprecateThingTypeInput) SetUndoDeprecate(v bool) *DeprecateThingTypeIn
 // The output for the DeprecateThingType operation.
 type DeprecateThingTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4893,6 +5199,11 @@ func (s DeprecateThingTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeprecateThingTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeprecateThingTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DescribeCACertificate operation.
@@ -4942,6 +5253,8 @@ func (s *DescribeCACertificateInput) SetCertificateId(v string) *DescribeCACerti
 type DescribeCACertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CA certificate description.
 	CertificateDescription *CACertificateDescription `locationName:"certificateDescription" type:"structure"`
 }
@@ -4954,6 +5267,11 @@ func (s DescribeCACertificateOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCACertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCACertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateDescription sets the CertificateDescription field's value.
@@ -5009,6 +5327,8 @@ func (s *DescribeCertificateInput) SetCertificateId(v string) *DescribeCertifica
 type DescribeCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The description of the certificate.
 	CertificateDescription *CertificateDescription `locationName:"certificateDescription" type:"structure"`
 }
@@ -5021,6 +5341,11 @@ func (s DescribeCertificateOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateDescription sets the CertificateDescription field's value.
@@ -5048,6 +5373,8 @@ func (s DescribeEndpointInput) GoString() string {
 type DescribeEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The endpoint. The format of the endpoint is as follows: identifier.iot.region.amazonaws.com.
 	EndpointAddress *string `locationName:"endpointAddress" type:"string"`
 }
@@ -5060,6 +5387,11 @@ func (s DescribeEndpointOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEndpointAddress sets the EndpointAddress field's value.
@@ -5115,6 +5447,8 @@ func (s *DescribeThingInput) SetThingName(v string) *DescribeThingInput {
 type DescribeThingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The thing attributes.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
 
@@ -5143,6 +5477,11 @@ func (s DescribeThingOutput) String() string {
 // GoString returns the string representation
 func (s DescribeThingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeThingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -5222,6 +5561,8 @@ func (s *DescribeThingTypeInput) SetThingTypeName(v string) *DescribeThingTypeIn
 type DescribeThingTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ThingTypeMetadata contains additional information about the thing type
 	// including: creation date and time, a value indicating whether the thing type
 	// is deprecated, and a date and time when it was deprecated.
@@ -5243,6 +5584,11 @@ func (s DescribeThingTypeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeThingTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeThingTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetThingTypeMetadata sets the ThingTypeMetadata field's value.
@@ -5326,6 +5672,8 @@ func (s *DetachPrincipalPolicyInput) SetPrincipal(v string) *DetachPrincipalPoli
 
 type DetachPrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5336,6 +5684,11 @@ func (s DetachPrincipalPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DetachPrincipalPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachPrincipalPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DetachThingPrincipal operation.
@@ -5401,6 +5754,8 @@ func (s *DetachThingPrincipalInput) SetThingName(v string) *DetachThingPrincipal
 // The output from the DetachThingPrincipal operation.
 type DetachThingPrincipalOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5411,6 +5766,11 @@ func (s DetachThingPrincipalOutput) String() string {
 // GoString returns the string representation
 func (s DetachThingPrincipalOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachThingPrincipalOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DisableTopicRuleRequest operation.
@@ -5458,6 +5818,8 @@ func (s *DisableTopicRuleInput) SetRuleName(v string) *DisableTopicRuleInput {
 
 type DisableTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5468,6 +5830,11 @@ func (s DisableTopicRuleOutput) String() string {
 // GoString returns the string representation
 func (s DisableTopicRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableTopicRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an action to write to a DynamoDB table.
@@ -5830,6 +6197,8 @@ func (s *EnableTopicRuleInput) SetRuleName(v string) *EnableTopicRuleInput {
 
 type EnableTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5840,6 +6209,11 @@ func (s EnableTopicRuleOutput) String() string {
 // GoString returns the string representation
 func (s EnableTopicRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableTopicRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an action that writes data to an Amazon Kinesis Firehose stream.
@@ -5927,6 +6301,8 @@ func (s GetLoggingOptionsInput) GoString() string {
 type GetLoggingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The logging level.
 	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
 
@@ -5942,6 +6318,11 @@ func (s GetLoggingOptionsOutput) String() string {
 // GoString returns the string representation
 func (s GetLoggingOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLoggingOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLogLevel sets the LogLevel field's value.
@@ -6003,6 +6384,8 @@ func (s *GetPolicyInput) SetPolicyName(v string) *GetPolicyInput {
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The default policy version ID.
 	DefaultVersionId *string `locationName:"defaultVersionId" type:"string"`
 
@@ -6024,6 +6407,11 @@ func (s GetPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefaultVersionId sets the DefaultVersionId field's value.
@@ -6112,6 +6500,8 @@ func (s *GetPolicyVersionInput) SetPolicyVersionId(v string) *GetPolicyVersionIn
 type GetPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
 
@@ -6136,6 +6526,11 @@ func (s GetPolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetPolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIsDefaultVersion sets the IsDefaultVersion field's value.
@@ -6187,6 +6582,8 @@ func (s GetRegistrationCodeInput) GoString() string {
 type GetRegistrationCodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CA certificate registration code.
 	RegistrationCode *string `locationName:"registrationCode" min:"64" type:"string"`
 }
@@ -6199,6 +6596,11 @@ func (s GetRegistrationCodeOutput) String() string {
 // GoString returns the string representation
 func (s GetRegistrationCodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRegistrationCodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRegistrationCode sets the RegistrationCode field's value.
@@ -6254,6 +6656,8 @@ func (s *GetTopicRuleInput) SetRuleName(v string) *GetTopicRuleInput {
 type GetTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The rule.
 	Rule *TopicRule `locationName:"rule" type:"structure"`
 
@@ -6269,6 +6673,11 @@ func (s GetTopicRuleOutput) String() string {
 // GoString returns the string representation
 func (s GetTopicRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTopicRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRule sets the Rule field's value.
@@ -6479,6 +6888,8 @@ func (s *ListCACertificatesInput) SetPageSize(v int64) *ListCACertificatesInput 
 type ListCACertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CA certificates registered in your AWS account.
 	Certificates []CACertificate `locationName:"certificates" type:"list"`
 
@@ -6494,6 +6905,11 @@ func (s ListCACertificatesOutput) String() string {
 // GoString returns the string representation
 func (s ListCACertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCACertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificates sets the Certificates field's value.
@@ -6587,6 +7003,8 @@ func (s *ListCertificatesByCAInput) SetPageSize(v int64) *ListCertificatesByCAIn
 type ListCertificatesByCAOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The device certificates signed by the specified CA certificate.
 	Certificates []Certificate `locationName:"certificates" type:"list"`
 
@@ -6603,6 +7021,11 @@ func (s ListCertificatesByCAOutput) String() string {
 // GoString returns the string representation
 func (s ListCertificatesByCAOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCertificatesByCAOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificates sets the Certificates field's value.
@@ -6677,6 +7100,8 @@ func (s *ListCertificatesInput) SetPageSize(v int64) *ListCertificatesInput {
 type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The descriptions of the certificates.
 	Certificates []Certificate `locationName:"certificates" type:"list"`
 
@@ -6693,6 +7118,11 @@ func (s ListCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s ListCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificates sets the Certificates field's value.
@@ -6767,6 +7197,8 @@ func (s *ListOutgoingCertificatesInput) SetPageSize(v int64) *ListOutgoingCertif
 type ListOutgoingCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker for the next set of results.
 	NextMarker *string `locationName:"nextMarker" type:"string"`
 
@@ -6782,6 +7214,11 @@ func (s ListOutgoingCertificatesOutput) String() string {
 // GoString returns the string representation
 func (s ListOutgoingCertificatesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOutgoingCertificatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6856,6 +7293,8 @@ func (s *ListPoliciesInput) SetPageSize(v int64) *ListPoliciesInput {
 type ListPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string `locationName:"nextMarker" type:"string"`
@@ -6872,6 +7311,11 @@ func (s ListPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6964,6 +7408,8 @@ func (s *ListPolicyPrincipalsInput) SetPolicyName(v string) *ListPolicyPrincipal
 type ListPolicyPrincipalsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string `locationName:"nextMarker" type:"string"`
@@ -6980,6 +7426,11 @@ func (s ListPolicyPrincipalsOutput) String() string {
 // GoString returns the string representation
 func (s ListPolicyPrincipalsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPolicyPrincipalsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -7041,6 +7492,8 @@ func (s *ListPolicyVersionsInput) SetPolicyName(v string) *ListPolicyVersionsInp
 type ListPolicyVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The policy versions.
 	PolicyVersions []PolicyVersion `locationName:"policyVersions" type:"list"`
 }
@@ -7053,6 +7506,11 @@ func (s ListPolicyVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListPolicyVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPolicyVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicyVersions sets the PolicyVersions field's value.
@@ -7136,6 +7594,8 @@ func (s *ListPrincipalPoliciesInput) SetPrincipal(v string) *ListPrincipalPolici
 type ListPrincipalPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string `locationName:"nextMarker" type:"string"`
@@ -7152,6 +7612,11 @@ func (s ListPrincipalPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListPrincipalPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPrincipalPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -7232,6 +7697,8 @@ func (s *ListPrincipalThingsInput) SetPrincipal(v string) *ListPrincipalThingsIn
 type ListPrincipalThingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -7248,6 +7715,11 @@ func (s ListPrincipalThingsOutput) String() string {
 // GoString returns the string representation
 func (s ListPrincipalThingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPrincipalThingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7309,6 +7781,8 @@ func (s *ListThingPrincipalsInput) SetThingName(v string) *ListThingPrincipalsIn
 type ListThingPrincipalsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The principals associated with the thing.
 	Principals []string `locationName:"principals" type:"list"`
 }
@@ -7321,6 +7795,11 @@ func (s ListThingPrincipalsOutput) String() string {
 // GoString returns the string representation
 func (s ListThingPrincipalsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListThingPrincipalsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPrincipals sets the Principals field's value.
@@ -7392,6 +7871,8 @@ func (s *ListThingTypesInput) SetThingTypeName(v string) *ListThingTypesInput {
 type ListThingTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -7408,6 +7889,11 @@ func (s ListThingTypesOutput) String() string {
 // GoString returns the string representation
 func (s ListThingTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListThingTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7503,6 +7989,8 @@ func (s *ListThingsInput) SetThingTypeName(v string) *ListThingsInput {
 type ListThingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -7519,6 +8007,11 @@ func (s ListThingsOutput) String() string {
 // GoString returns the string representation
 func (s ListThingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListThingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7601,6 +8094,8 @@ func (s *ListTopicRulesInput) SetTopic(v string) *ListTopicRulesInput {
 type ListTopicRulesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A token used to retrieve the next value.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -7616,6 +8111,11 @@ func (s ListTopicRulesOutput) String() string {
 // GoString returns the string representation
 func (s ListTopicRulesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTopicRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7947,6 +8447,8 @@ func (s *RegisterCACertificateInput) SetVerificationCertificate(v string) *Regis
 type RegisterCACertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CA certificate ARN.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
 
@@ -7962,6 +8464,11 @@ func (s RegisterCACertificateOutput) String() string {
 // GoString returns the string representation
 func (s RegisterCACertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterCACertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -8053,6 +8560,8 @@ func (s *RegisterCertificateInput) SetStatus(v CertificateStatus) *RegisterCerti
 type RegisterCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The certificate ARN.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
 
@@ -8068,6 +8577,11 @@ func (s RegisterCertificateOutput) String() string {
 // GoString returns the string representation
 func (s RegisterCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateArn sets the CertificateArn field's value.
@@ -8136,6 +8650,8 @@ func (s *RejectCertificateTransferInput) SetRejectReason(v string) *RejectCertif
 
 type RejectCertificateTransferOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8146,6 +8662,11 @@ func (s RejectCertificateTransferOutput) String() string {
 // GoString returns the string representation
 func (s RejectCertificateTransferOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RejectCertificateTransferOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the ReplaceTopicRule operation.
@@ -8213,6 +8734,8 @@ func (s *ReplaceTopicRuleInput) SetTopicRulePayload(v *TopicRulePayload) *Replac
 
 type ReplaceTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8223,6 +8746,11 @@ func (s ReplaceTopicRuleOutput) String() string {
 // GoString returns the string representation
 func (s ReplaceTopicRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReplaceTopicRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an action to republish to another topic.
@@ -8481,6 +9009,8 @@ func (s *SetDefaultPolicyVersionInput) SetPolicyVersionId(v string) *SetDefaultP
 
 type SetDefaultPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8491,6 +9021,11 @@ func (s SetDefaultPolicyVersionOutput) String() string {
 // GoString returns the string representation
 func (s SetDefaultPolicyVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetDefaultPolicyVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the SetLoggingOptions operation.
@@ -8540,6 +9075,8 @@ func (s *SetLoggingOptionsInput) SetLoggingOptionsPayload(v *LoggingOptionsPaylo
 
 type SetLoggingOptionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8550,6 +9087,11 @@ func (s SetLoggingOptionsOutput) String() string {
 // GoString returns the string representation
 func (s SetLoggingOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetLoggingOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an action to publish to an Amazon SNS topic.
@@ -9161,6 +9703,8 @@ func (s *TransferCertificateInput) SetTransferMessage(v string) *TransferCertifi
 type TransferCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the certificate.
 	TransferredCertificateArn *string `locationName:"transferredCertificateArn" type:"string"`
 }
@@ -9173,6 +9717,11 @@ func (s TransferCertificateOutput) String() string {
 // GoString returns the string representation
 func (s TransferCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TransferCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTransferredCertificateArn sets the TransferredCertificateArn field's value.
@@ -9308,6 +9857,8 @@ func (s *UpdateCACertificateInput) SetNewStatus(v CACertificateStatus) *UpdateCA
 
 type UpdateCACertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9318,6 +9869,11 @@ func (s UpdateCACertificateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCACertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCACertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the UpdateCertificate operation.
@@ -9386,6 +9942,8 @@ func (s *UpdateCertificateInput) SetNewStatus(v CertificateStatus) *UpdateCertif
 
 type UpdateCertificateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9396,6 +9954,11 @@ func (s UpdateCertificateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCertificateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the UpdateThing operation.
@@ -9490,6 +10053,8 @@ func (s *UpdateThingInput) SetThingTypeName(v string) *UpdateThingInput {
 // The output from the UpdateThing operation.
 type UpdateThingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9500,6 +10065,11 @@ func (s UpdateThingOutput) String() string {
 // GoString returns the string representation
 func (s UpdateThingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateThingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type AutoRegistrationStatus string

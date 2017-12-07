@@ -85,7 +85,10 @@ func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchReques
 		input = &AcceptMatchInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptMatchOutput{})
+	output := &AcceptMatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptMatchRequest{Request: req, Input: input}
 }
 
@@ -163,7 +166,10 @@ func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) CreateAliasReques
 		input = &CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAliasOutput{})
+	output := &CreateAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAliasRequest{Request: req, Input: input}
 }
 
@@ -238,7 +244,10 @@ func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) CreateBuildReques
 		input = &CreateBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBuildOutput{})
+	output := &CreateBuildOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBuildRequest{Request: req, Input: input}
 }
 
@@ -377,7 +386,10 @@ func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) CreateFleetReques
 		input = &CreateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFleetOutput{})
+	output := &CreateFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFleetRequest{Request: req, Input: input}
 }
 
@@ -474,7 +486,10 @@ func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) Creat
 		input = &CreateGameSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGameSessionOutput{})
+	output := &CreateGameSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGameSessionRequest{Request: req, Input: input}
 }
 
@@ -559,7 +574,10 @@ func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueIn
 		input = &CreateGameSessionQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGameSessionQueueOutput{})
+	output := &CreateGameSessionQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGameSessionQueueRequest{Request: req, Input: input}
 }
 
@@ -648,7 +666,10 @@ func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakin
 		input = &CreateMatchmakingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMatchmakingConfigurationOutput{})
+	output := &CreateMatchmakingConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMatchmakingConfigurationRequest{Request: req, Input: input}
 }
 
@@ -730,7 +751,10 @@ func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleS
 		input = &CreateMatchmakingRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMatchmakingRuleSetOutput{})
+	output := &CreateMatchmakingRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMatchmakingRuleSetRequest{Request: req, Input: input}
 }
 
@@ -801,7 +825,10 @@ func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) C
 		input = &CreatePlayerSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlayerSessionOutput{})
+	output := &CreatePlayerSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePlayerSessionRequest{Request: req, Input: input}
 }
 
@@ -873,7 +900,10 @@ func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput)
 		input = &CreatePlayerSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlayerSessionsOutput{})
+	output := &CreatePlayerSessionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePlayerSessionsRequest{Request: req, Input: input}
 }
 
@@ -960,7 +990,10 @@ func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringA
 		input = &CreateVpcPeeringAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcPeeringAuthorizationOutput{})
+	output := &CreateVpcPeeringAuthorizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpcPeeringAuthorizationRequest{Request: req, Input: input}
 }
 
@@ -1042,7 +1075,10 @@ func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConn
 		input = &CreateVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcPeeringConnectionOutput{})
+	output := &CreateVpcPeeringConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
@@ -1104,9 +1140,12 @@ func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasReques
 		input = &DeleteAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAliasOutput{})
+	output := &DeleteAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAliasRequest{Request: req, Input: input}
 }
 
@@ -1169,9 +1208,12 @@ func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) DeleteBuildReques
 		input = &DeleteBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBuildOutput{})
+	output := &DeleteBuildOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBuildRequest{Request: req, Input: input}
 }
 
@@ -1265,9 +1307,12 @@ func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetReques
 		input = &DeleteFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFleetOutput{})
+	output := &DeleteFleetOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFleetRequest{Request: req, Input: input}
 }
 
@@ -1325,7 +1370,10 @@ func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueIn
 		input = &DeleteGameSessionQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGameSessionQueueOutput{})
+	output := &DeleteGameSessionQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGameSessionQueueRequest{Request: req, Input: input}
 }
 
@@ -1389,7 +1437,10 @@ func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakin
 		input = &DeleteMatchmakingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMatchmakingConfigurationOutput{})
+	output := &DeleteMatchmakingConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMatchmakingConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1481,9 +1532,12 @@ func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) D
 		input = &DeleteScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
+	output := &DeleteScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -1545,7 +1599,10 @@ func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringA
 		input = &DeleteVpcPeeringAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcPeeringAuthorizationOutput{})
+	output := &DeleteVpcPeeringAuthorizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpcPeeringAuthorizationRequest{Request: req, Input: input}
 }
 
@@ -1613,7 +1670,10 @@ func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConn
 		input = &DeleteVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcPeeringConnectionOutput{})
+	output := &DeleteVpcPeeringConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
@@ -1677,7 +1737,10 @@ func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) DescribeAlias
 		input = &DescribeAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAliasOutput{})
+	output := &DescribeAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAliasRequest{Request: req, Input: input}
 }
 
@@ -1736,7 +1799,10 @@ func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuild
 		input = &DescribeBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBuildOutput{})
+	output := &DescribeBuildOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBuildRequest{Request: req, Input: input}
 }
 
@@ -1834,7 +1900,10 @@ func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLi
 		input = &DescribeEC2InstanceLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEC2InstanceLimitsOutput{})
+	output := &DescribeEC2InstanceLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEC2InstanceLimitsRequest{Request: req, Input: input}
 }
 
@@ -1934,7 +2003,10 @@ func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributes
 		input = &DescribeFleetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetAttributesOutput{})
+	output := &DescribeFleetAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFleetAttributesRequest{Request: req, Input: input}
 }
 
@@ -2035,7 +2107,10 @@ func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInpu
 		input = &DescribeFleetCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetCapacityOutput{})
+	output := &DescribeFleetCapacityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFleetCapacityRequest{Request: req, Input: input}
 }
 
@@ -2128,7 +2203,10 @@ func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) D
 		input = &DescribeFleetEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetEventsOutput{})
+	output := &DescribeFleetEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFleetEventsRequest{Request: req, Input: input}
 }
 
@@ -2223,7 +2301,10 @@ func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSett
 		input = &DescribeFleetPortSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetPortSettingsOutput{})
+	output := &DescribeFleetPortSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFleetPortSettingsRequest{Request: req, Input: input}
 }
 
@@ -2322,7 +2403,10 @@ func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizati
 		input = &DescribeFleetUtilizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetUtilizationOutput{})
+	output := &DescribeFleetUtilizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFleetUtilizationRequest{Request: req, Input: input}
 }
 
@@ -2400,7 +2484,10 @@ func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionD
 		input = &DescribeGameSessionDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionDetailsOutput{})
+	output := &DescribeGameSessionDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeGameSessionDetailsRequest{Request: req, Input: input}
 }
 
@@ -2470,7 +2557,10 @@ func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessio
 		input = &DescribeGameSessionPlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionPlacementOutput{})
+	output := &DescribeGameSessionPlacementOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeGameSessionPlacementRequest{Request: req, Input: input}
 }
 
@@ -2530,7 +2620,10 @@ func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQu
 		input = &DescribeGameSessionQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionQueuesOutput{})
+	output := &DescribeGameSessionQueuesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeGameSessionQueuesRequest{Request: req, Input: input}
 }
 
@@ -2609,7 +2702,10 @@ func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput)
 		input = &DescribeGameSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionsOutput{})
+	output := &DescribeGameSessionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeGameSessionsRequest{Request: req, Input: input}
 }
 
@@ -2662,7 +2758,10 @@ func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) Descr
 		input = &DescribeInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	output := &DescribeInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancesRequest{Request: req, Input: input}
 }
 
@@ -2730,7 +2829,10 @@ func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) D
 		input = &DescribeMatchmakingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMatchmakingOutput{})
+	output := &DescribeMatchmakingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMatchmakingRequest{Request: req, Input: input}
 }
 
@@ -2799,7 +2901,10 @@ func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatch
 		input = &DescribeMatchmakingConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMatchmakingConfigurationsOutput{})
+	output := &DescribeMatchmakingConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMatchmakingConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -2865,7 +2970,10 @@ func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmaking
 		input = &DescribeMatchmakingRuleSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMatchmakingRuleSetsOutput{})
+	output := &DescribeMatchmakingRuleSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMatchmakingRuleSetsRequest{Request: req, Input: input}
 }
 
@@ -2939,7 +3047,10 @@ func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsIn
 		input = &DescribePlayerSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePlayerSessionsOutput{})
+	output := &DescribePlayerSessionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePlayerSessionsRequest{Request: req, Input: input}
 }
 
@@ -3031,7 +3142,10 @@ func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeCon
 		input = &DescribeRuntimeConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRuntimeConfigurationOutput{})
+	output := &DescribeRuntimeConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRuntimeConfigurationRequest{Request: req, Input: input}
 }
 
@@ -3126,7 +3240,10 @@ func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPolicies
 		input = &DescribeScalingPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingPoliciesOutput{})
+	output := &DescribeScalingPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScalingPoliciesRequest{Request: req, Input: input}
 }
 
@@ -3188,7 +3305,10 @@ func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPee
 		input = &DescribeVpcPeeringAuthorizationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcPeeringAuthorizationsOutput{})
+	output := &DescribeVpcPeeringAuthorizationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcPeeringAuthorizationsRequest{Request: req, Input: input}
 }
 
@@ -3255,7 +3375,10 @@ func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeerin
 		input = &DescribeVpcPeeringConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcPeeringConnectionsOutput{})
+	output := &DescribeVpcPeeringConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input}
 }
 
@@ -3330,7 +3453,10 @@ func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput)
 		input = &GetGameSessionLogUrlInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGameSessionLogUrlOutput{})
+	output := &GetGameSessionLogUrlOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGameSessionLogUrlRequest{Request: req, Input: input}
 }
 
@@ -3391,7 +3517,10 @@ func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetIn
 		input = &GetInstanceAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceAccessOutput{})
+	output := &GetInstanceAccessOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInstanceAccessRequest{Request: req, Input: input}
 }
 
@@ -3455,7 +3584,10 @@ func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) ListAliasesReques
 		input = &ListAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAliasesOutput{})
+	output := &ListAliasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAliasesRequest{Request: req, Input: input}
 }
 
@@ -3518,7 +3650,10 @@ func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 		input = &ListBuildsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBuildsOutput{})
+	output := &ListBuildsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBuildsRequest{Request: req, Input: input}
 }
 
@@ -3612,7 +3747,10 @@ func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 		input = &ListFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFleetsOutput{})
+	output := &ListFleetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFleetsRequest{Request: req, Input: input}
 }
 
@@ -3723,7 +3861,10 @@ func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScal
 		input = &PutScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+	output := &PutScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -3771,7 +3912,10 @@ func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentia
 		input = &RequestUploadCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestUploadCredentialsOutput{})
+	output := &RequestUploadCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RequestUploadCredentialsRequest{Request: req, Input: input}
 }
 
@@ -3831,7 +3975,10 @@ func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasReq
 		input = &ResolveAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &ResolveAliasOutput{})
+	output := &ResolveAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResolveAliasRequest{Request: req, Input: input}
 }
 
@@ -3941,7 +4088,10 @@ func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) Sea
 		input = &SearchGameSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchGameSessionsOutput{})
+	output := &SearchGameSessionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SearchGameSessionsRequest{Request: req, Input: input}
 }
 
@@ -4049,7 +4199,10 @@ func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlace
 		input = &StartGameSessionPlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &StartGameSessionPlacementOutput{})
+	output := &StartGameSessionPlacementOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartGameSessionPlacementRequest{Request: req, Input: input}
 }
 
@@ -4165,7 +4318,10 @@ func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) StartMa
 		input = &StartMatchmakingInput{}
 	}
 
-	req := c.newRequest(op, input, &StartMatchmakingOutput{})
+	output := &StartMatchmakingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartMatchmakingRequest{Request: req, Input: input}
 }
 
@@ -4235,7 +4391,10 @@ func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlaceme
 		input = &StopGameSessionPlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &StopGameSessionPlacementOutput{})
+	output := &StopGameSessionPlacementOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopGameSessionPlacementRequest{Request: req, Input: input}
 }
 
@@ -4293,7 +4452,10 @@ func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatch
 		input = &StopMatchmakingInput{}
 	}
 
-	req := c.newRequest(op, input, &StopMatchmakingOutput{})
+	output := &StopMatchmakingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopMatchmakingRequest{Request: req, Input: input}
 }
 
@@ -4356,7 +4518,10 @@ func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasReques
 		input = &UpdateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	output := &UpdateAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAliasRequest{Request: req, Input: input}
 }
 
@@ -4417,7 +4582,10 @@ func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildReques
 		input = &UpdateBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBuildOutput{})
+	output := &UpdateBuildOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateBuildRequest{Request: req, Input: input}
 }
 
@@ -4509,7 +4677,10 @@ func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInpu
 		input = &UpdateFleetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetAttributesOutput{})
+	output := &UpdateFleetAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFleetAttributesRequest{Request: req, Input: input}
 }
 
@@ -4613,7 +4784,10 @@ func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) U
 		input = &UpdateFleetCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetCapacityOutput{})
+	output := &UpdateFleetCapacityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFleetCapacityRequest{Request: req, Input: input}
 }
 
@@ -4708,7 +4882,10 @@ func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettings
 		input = &UpdateFleetPortSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetPortSettingsOutput{})
+	output := &UpdateFleetPortSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFleetPortSettingsRequest{Request: req, Input: input}
 }
 
@@ -4782,7 +4959,10 @@ func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) Updat
 		input = &UpdateGameSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGameSessionOutput{})
+	output := &UpdateGameSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGameSessionRequest{Request: req, Input: input}
 }
 
@@ -4841,7 +5021,10 @@ func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueIn
 		input = &UpdateGameSessionQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGameSessionQueueOutput{})
+	output := &UpdateGameSessionQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGameSessionQueueRequest{Request: req, Input: input}
 }
 
@@ -4904,7 +5087,10 @@ func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakin
 		input = &UpdateMatchmakingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMatchmakingConfigurationOutput{})
+	output := &UpdateMatchmakingConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMatchmakingConfigurationRequest{Request: req, Input: input}
 }
 
@@ -5009,7 +5195,10 @@ func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigu
 		input = &UpdateRuntimeConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRuntimeConfigurationOutput{})
+	output := &UpdateRuntimeConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRuntimeConfigurationRequest{Request: req, Input: input}
 }
 
@@ -5073,7 +5262,10 @@ func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingR
 		input = &ValidateMatchmakingRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &ValidateMatchmakingRuleSetOutput{})
+	output := &ValidateMatchmakingRuleSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ValidateMatchmakingRuleSetRequest{Request: req, Input: input}
 }
 
@@ -5155,6 +5347,8 @@ func (s *AcceptMatchInput) SetTicketId(v string) *AcceptMatchInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatchOutput
 type AcceptMatchOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5165,6 +5359,11 @@ func (s AcceptMatchOutput) String() string {
 // GoString returns the string representation
 func (s AcceptMatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptMatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Properties describing a fleet alias.
@@ -5566,6 +5765,8 @@ func (s *CreateAliasInput) SetRoutingStrategy(v *RoutingStrategy) *CreateAliasIn
 type CreateAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created alias record.
 	Alias *Alias `type:"structure"`
 }
@@ -5578,6 +5779,11 @@ func (s CreateAliasOutput) String() string {
 // GoString returns the string representation
 func (s CreateAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlias sets the Alias field's value.
@@ -5674,6 +5880,8 @@ func (s *CreateBuildInput) SetVersion(v string) *CreateBuildInput {
 type CreateBuildOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The newly created build record, including a unique build ID and status.
 	Build *Build `type:"structure"`
 
@@ -5692,6 +5900,11 @@ func (s CreateBuildOutput) String() string {
 // GoString returns the string representation
 func (s CreateBuildOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBuildOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuild sets the Build field's value.
@@ -5964,6 +6177,8 @@ func (s *CreateFleetInput) SetServerLaunchPath(v string) *CreateFleetInput {
 type CreateFleetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Properties for the newly created fleet.
 	FleetAttributes *FleetAttributes `type:"structure"`
 }
@@ -5976,6 +6191,11 @@ func (s CreateFleetOutput) String() string {
 // GoString returns the string representation
 func (s CreateFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetAttributes sets the FleetAttributes field's value.
@@ -6148,6 +6368,8 @@ func (s *CreateGameSessionInput) SetName(v string) *CreateGameSessionInput {
 type CreateGameSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created game session record.
 	GameSession *GameSession `type:"structure"`
 }
@@ -6160,6 +6382,11 @@ func (s CreateGameSessionOutput) String() string {
 // GoString returns the string representation
 func (s CreateGameSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGameSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSession sets the GameSession field's value.
@@ -6265,6 +6492,8 @@ func (s *CreateGameSessionQueueInput) SetTimeoutInSeconds(v int64) *CreateGameSe
 type CreateGameSessionQueueOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created game session queue.
 	GameSessionQueue *GameSessionQueue `type:"structure"`
 }
@@ -6277,6 +6506,11 @@ func (s CreateGameSessionQueueOutput) String() string {
 // GoString returns the string representation
 func (s CreateGameSessionQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGameSessionQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionQueue sets the GameSessionQueue field's value.
@@ -6503,6 +6737,8 @@ func (s *CreateMatchmakingConfigurationInput) SetRuleSetName(v string) *CreateMa
 type CreateMatchmakingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created matchmaking configuration.
 	Configuration *MatchmakingConfiguration `type:"structure"`
 }
@@ -6515,6 +6751,11 @@ func (s CreateMatchmakingConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s CreateMatchmakingConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMatchmakingConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfiguration sets the Configuration field's value.
@@ -6592,6 +6833,8 @@ func (s *CreateMatchmakingRuleSetInput) SetRuleSetBody(v string) *CreateMatchmak
 type CreateMatchmakingRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created matchmaking rule set.
 	//
 	// RuleSet is a required field
@@ -6606,6 +6849,11 @@ func (s CreateMatchmakingRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateMatchmakingRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMatchmakingRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRuleSet sets the RuleSet field's value.
@@ -6694,6 +6942,8 @@ func (s *CreatePlayerSessionInput) SetPlayerId(v string) *CreatePlayerSessionInp
 type CreatePlayerSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created player session record.
 	PlayerSession *PlayerSession `type:"structure"`
 }
@@ -6706,6 +6956,11 @@ func (s CreatePlayerSessionOutput) String() string {
 // GoString returns the string representation
 func (s CreatePlayerSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePlayerSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlayerSession sets the PlayerSession field's value.
@@ -6793,6 +7048,8 @@ func (s *CreatePlayerSessionsInput) SetPlayerIds(v []string) *CreatePlayerSessio
 type CreatePlayerSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of player session objects created for the added players.
 	PlayerSessions []PlayerSession `type:"list"`
 }
@@ -6805,6 +7062,11 @@ func (s CreatePlayerSessionsOutput) String() string {
 // GoString returns the string representation
 func (s CreatePlayerSessionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePlayerSessionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlayerSessions sets the PlayerSessions field's value.
@@ -6885,6 +7147,8 @@ func (s *CreateVpcPeeringAuthorizationInput) SetPeerVpcId(v string) *CreateVpcPe
 type CreateVpcPeeringAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details on the requested VPC peering authorization, including expiration.
 	VpcPeeringAuthorization *VpcPeeringAuthorization `type:"structure"`
 }
@@ -6897,6 +7161,11 @@ func (s CreateVpcPeeringAuthorizationOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpcPeeringAuthorizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpcPeeringAuthorizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcPeeringAuthorization sets the VpcPeeringAuthorization field's value.
@@ -6991,6 +7260,8 @@ func (s *CreateVpcPeeringConnectionInput) SetPeerVpcId(v string) *CreateVpcPeeri
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionOutput
 type CreateVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7001,6 +7272,11 @@ func (s CreateVpcPeeringConnectionOutput) String() string {
 // GoString returns the string representation
 func (s CreateVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7047,6 +7323,8 @@ func (s *DeleteAliasInput) SetAliasId(v string) *DeleteAliasInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAliasOutput
 type DeleteAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7057,6 +7335,11 @@ func (s DeleteAliasOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7103,6 +7386,8 @@ func (s *DeleteBuildInput) SetBuildId(v string) *DeleteBuildInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuildOutput
 type DeleteBuildOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7113,6 +7398,11 @@ func (s DeleteBuildOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBuildOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBuildOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7159,6 +7449,8 @@ func (s *DeleteFleetInput) SetFleetId(v string) *DeleteFleetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleetOutput
 type DeleteFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7169,6 +7461,11 @@ func (s DeleteFleetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7219,6 +7516,8 @@ func (s *DeleteGameSessionQueueInput) SetName(v string) *DeleteGameSessionQueueI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueueOutput
 type DeleteGameSessionQueueOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7229,6 +7528,11 @@ func (s DeleteGameSessionQueueOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGameSessionQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGameSessionQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7278,6 +7582,8 @@ func (s *DeleteMatchmakingConfigurationInput) SetName(v string) *DeleteMatchmaki
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfigurationOutput
 type DeleteMatchmakingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7288,6 +7594,11 @@ func (s DeleteMatchmakingConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMatchmakingConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMatchmakingConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7353,6 +7664,8 @@ func (s *DeleteScalingPolicyInput) SetName(v string) *DeleteScalingPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicyOutput
 type DeleteScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7363,6 +7676,11 @@ func (s DeleteScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7435,6 +7753,8 @@ func (s *DeleteVpcPeeringAuthorizationInput) SetPeerVpcId(v string) *DeleteVpcPe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorizationOutput
 type DeleteVpcPeeringAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7445,6 +7765,11 @@ func (s DeleteVpcPeeringAuthorizationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpcPeeringAuthorizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpcPeeringAuthorizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7511,6 +7836,8 @@ func (s *DeleteVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *D
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnectionOutput
 type DeleteVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7521,6 +7848,11 @@ func (s DeleteVpcPeeringConnectionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -7569,6 +7901,8 @@ func (s *DescribeAliasInput) SetAliasId(v string) *DescribeAliasInput {
 type DescribeAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains the requested alias.
 	Alias *Alias `type:"structure"`
 }
@@ -7581,6 +7915,11 @@ func (s DescribeAliasOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlias sets the Alias field's value.
@@ -7635,6 +7974,8 @@ func (s *DescribeBuildInput) SetBuildId(v string) *DescribeBuildInput {
 type DescribeBuildOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Set of properties describing the requested build.
 	Build *Build `type:"structure"`
 }
@@ -7647,6 +7988,11 @@ func (s DescribeBuildOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBuildOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBuildOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuild sets the Build field's value.
@@ -7690,6 +8036,8 @@ func (s *DescribeEC2InstanceLimitsInput) SetEC2InstanceType(v EC2InstanceType) *
 type DescribeEC2InstanceLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains the maximum number of instances for the specified instance
 	// type.
 	EC2InstanceLimits []EC2InstanceLimit `type:"list"`
@@ -7703,6 +8051,11 @@ func (s DescribeEC2InstanceLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEC2InstanceLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEC2InstanceLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEC2InstanceLimits sets the EC2InstanceLimits field's value.
@@ -7784,6 +8137,8 @@ func (s *DescribeFleetAttributesInput) SetNextToken(v string) *DescribeFleetAttr
 type DescribeFleetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing attribute metadata for each requested fleet
 	// ID.
 	FleetAttributes []FleetAttributes `type:"list"`
@@ -7802,6 +8157,11 @@ func (s DescribeFleetAttributesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFleetAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetAttributes sets the FleetAttributes field's value.
@@ -7889,6 +8249,8 @@ func (s *DescribeFleetCapacityInput) SetNextToken(v string) *DescribeFleetCapaci
 type DescribeFleetCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing capacity information for each requested
 	// fleet ID. Leave this parameter empty to retrieve capacity information for
 	// all fleets.
@@ -7908,6 +8270,11 @@ func (s DescribeFleetCapacityOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFleetCapacityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetCapacityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetCapacity sets the FleetCapacity field's value.
@@ -8018,6 +8385,8 @@ func (s *DescribeFleetEventsInput) SetStartTime(v time.Time) *DescribeFleetEvent
 type DescribeFleetEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing event log entries for the specified fleet.
 	Events []Event `type:"list"`
 
@@ -8035,6 +8404,11 @@ func (s DescribeFleetEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFleetEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -8095,6 +8469,8 @@ func (s *DescribeFleetPortSettingsInput) SetFleetId(v string) *DescribeFleetPort
 type DescribeFleetPortSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains port settings for the requested fleet ID.
 	InboundPermissions []IpPermission `type:"list"`
 }
@@ -8107,6 +8483,11 @@ func (s DescribeFleetPortSettingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFleetPortSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetPortSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInboundPermissions sets the InboundPermissions field's value.
@@ -8188,6 +8569,8 @@ func (s *DescribeFleetUtilizationInput) SetNextToken(v string) *DescribeFleetUti
 type DescribeFleetUtilizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing utilization information for each requested
 	// fleet ID.
 	FleetUtilization []FleetUtilization `type:"list"`
@@ -8206,6 +8589,11 @@ func (s DescribeFleetUtilizationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFleetUtilizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetUtilizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetUtilization sets the FleetUtilization field's value.
@@ -8324,6 +8712,8 @@ func (s *DescribeGameSessionDetailsInput) SetStatusFilter(v string) *DescribeGam
 type DescribeGameSessionDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing game session properties and the protection
 	// policy currently in force for each session matching the request.
 	GameSessionDetails []GameSessionDetail `type:"list"`
@@ -8342,6 +8732,11 @@ func (s DescribeGameSessionDetailsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeGameSessionDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeGameSessionDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionDetails sets the GameSessionDetails field's value.
@@ -8405,6 +8800,8 @@ func (s *DescribeGameSessionPlacementInput) SetPlacementId(v string) *DescribeGa
 type DescribeGameSessionPlacementOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the requested game session placement.
 	GameSessionPlacement *GameSessionPlacement `type:"structure"`
 }
@@ -8417,6 +8814,11 @@ func (s DescribeGameSessionPlacementOutput) String() string {
 // GoString returns the string representation
 func (s DescribeGameSessionPlacementOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeGameSessionPlacementOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionPlacement sets the GameSessionPlacement field's value.
@@ -8493,6 +8895,8 @@ func (s *DescribeGameSessionQueuesInput) SetNextToken(v string) *DescribeGameSes
 type DescribeGameSessionQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects that describes the requested game session queues.
 	GameSessionQueues []GameSessionQueue `type:"list"`
 
@@ -8510,6 +8914,11 @@ func (s DescribeGameSessionQueuesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeGameSessionQueuesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeGameSessionQueuesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionQueues sets the GameSessionQueues field's value.
@@ -8628,6 +9037,8 @@ func (s *DescribeGameSessionsInput) SetStatusFilter(v string) *DescribeGameSessi
 type DescribeGameSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing game session properties for each session
 	// matching the request.
 	GameSessions []GameSession `type:"list"`
@@ -8646,6 +9057,11 @@ func (s DescribeGameSessionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeGameSessionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeGameSessionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessions sets the GameSessions field's value.
@@ -8743,6 +9159,8 @@ func (s *DescribeInstancesInput) SetNextToken(v string) *DescribeInstancesInput 
 type DescribeInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing properties for each instance returned.
 	Instances []Instance `type:"list"`
 
@@ -8760,6 +9178,11 @@ func (s DescribeInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -8855,6 +9278,8 @@ func (s *DescribeMatchmakingConfigurationsInput) SetRuleSetName(v string) *Descr
 type DescribeMatchmakingConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of requested matchmaking configuration objects.
 	Configurations []MatchmakingConfiguration `type:"list"`
 
@@ -8872,6 +9297,11 @@ func (s DescribeMatchmakingConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMatchmakingConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMatchmakingConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurations sets the Configurations field's value.
@@ -8933,6 +9363,8 @@ func (s *DescribeMatchmakingInput) SetTicketIds(v []string) *DescribeMatchmaking
 type DescribeMatchmakingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of existing matchmaking ticket objects matching the request.
 	TicketList []MatchmakingTicket `type:"list"`
 }
@@ -8945,6 +9377,11 @@ func (s DescribeMatchmakingOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMatchmakingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMatchmakingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTicketList sets the TicketList field's value.
@@ -9024,6 +9461,8 @@ func (s *DescribeMatchmakingRuleSetsInput) SetNextToken(v string) *DescribeMatch
 type DescribeMatchmakingRuleSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
@@ -9043,6 +9482,11 @@ func (s DescribeMatchmakingRuleSetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMatchmakingRuleSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMatchmakingRuleSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -9175,6 +9619,8 @@ func (s *DescribePlayerSessionsInput) SetPlayerSessionStatusFilter(v string) *De
 type DescribePlayerSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
@@ -9193,6 +9639,11 @@ func (s DescribePlayerSessionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribePlayerSessionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePlayerSessionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -9253,6 +9704,8 @@ func (s *DescribeRuntimeConfigurationInput) SetFleetId(v string) *DescribeRuntim
 type DescribeRuntimeConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Instructions describing how server processes should be launched and maintained
 	// on each instance in the fleet.
 	RuntimeConfiguration *RuntimeConfiguration `type:"structure"`
@@ -9266,6 +9719,11 @@ func (s DescribeRuntimeConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRuntimeConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRuntimeConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRuntimeConfiguration sets the RuntimeConfiguration field's value.
@@ -9372,6 +9830,8 @@ func (s *DescribeScalingPoliciesInput) SetStatusFilter(v ScalingStatusType) *Des
 type DescribeScalingPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Token that indicates where to resume retrieving results on the next call
 	// to this action. If no token is returned, these results represent the end
 	// of the list.
@@ -9389,6 +9849,11 @@ func (s DescribeScalingPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScalingPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScalingPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -9422,6 +9887,8 @@ func (s DescribeVpcPeeringAuthorizationsInput) GoString() string {
 type DescribeVpcPeeringAuthorizationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects that describe all valid VPC peering operations for
 	// the current AWS account.
 	VpcPeeringAuthorizations []VpcPeeringAuthorization `type:"list"`
@@ -9435,6 +9902,11 @@ func (s DescribeVpcPeeringAuthorizationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcPeeringAuthorizationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcPeeringAuthorizationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcPeeringAuthorizations sets the VpcPeeringAuthorizations field's value.
@@ -9473,6 +9945,8 @@ func (s *DescribeVpcPeeringConnectionsInput) SetFleetId(v string) *DescribeVpcPe
 type DescribeVpcPeeringConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of VPC peering connection records that match the request.
 	VpcPeeringConnections []VpcPeeringConnection `type:"list"`
 }
@@ -9485,6 +9959,11 @@ func (s DescribeVpcPeeringConnectionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVpcPeeringConnectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVpcPeeringConnections sets the VpcPeeringConnections field's value.
@@ -11094,6 +11573,8 @@ func (s *GetGameSessionLogUrlInput) SetGameSessionId(v string) *GetGameSessionLo
 type GetGameSessionLogUrlOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Location of the requested game session logs, available for download.
 	PreSignedUrl *string `min:"1" type:"string"`
 }
@@ -11106,6 +11587,11 @@ func (s GetGameSessionLogUrlOutput) String() string {
 // GoString returns the string representation
 func (s GetGameSessionLogUrlOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGameSessionLogUrlOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPreSignedUrl sets the PreSignedUrl field's value.
@@ -11179,6 +11665,8 @@ func (s *GetInstanceAccessInput) SetInstanceId(v string) *GetInstanceAccessInput
 type GetInstanceAccessOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains connection information for a fleet instance, including
 	// IP address and access credentials.
 	InstanceAccess *InstanceAccess `type:"structure"`
@@ -11192,6 +11680,11 @@ func (s GetInstanceAccessOutput) String() string {
 // GoString returns the string representation
 func (s GetInstanceAccessOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceAccessOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceAccess sets the InstanceAccess field's value.
@@ -11582,6 +12075,8 @@ func (s *ListAliasesInput) SetRoutingStrategyType(v RoutingStrategyType) *ListAl
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of alias records that match the list request.
 	Aliases []Alias `type:"list"`
 
@@ -11599,6 +12094,11 @@ func (s ListAliasesOutput) String() string {
 // GoString returns the string representation
 func (s ListAliasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAliases sets the Aliases field's value.
@@ -11694,6 +12194,8 @@ func (s *ListBuildsInput) SetStatus(v BuildStatus) *ListBuildsInput {
 type ListBuildsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of build records that match the request.
 	Builds []Build `type:"list"`
 
@@ -11711,6 +12213,11 @@ func (s ListBuildsOutput) String() string {
 // GoString returns the string representation
 func (s ListBuildsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBuildsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuilds sets the Builds field's value.
@@ -11794,6 +12301,8 @@ func (s *ListFleetsInput) SetNextToken(v string) *ListFleetsInput {
 type ListFleetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Set of fleet IDs matching the list request. You can retrieve additional information
 	// about all returned fleets by passing this result set to a call to DescribeFleetAttributes,
 	// DescribeFleetCapacity, or DescribeFleetUtilization.
@@ -11813,6 +12322,11 @@ func (s ListFleetsOutput) String() string {
 // GoString returns the string representation
 func (s ListFleetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFleetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetIds sets the FleetIds field's value.
@@ -12848,6 +13362,8 @@ func (s *PutScalingPolicyInput) SetThreshold(v float64) *PutScalingPolicyInput {
 type PutScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
 	Name *string `min:"1" type:"string"`
@@ -12861,6 +13377,11 @@ func (s PutScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -12915,6 +13436,8 @@ func (s *RequestUploadCredentialsInput) SetBuildId(v string) *RequestUploadCrede
 type RequestUploadCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Amazon S3 path and key, identifying where the game build files are stored.
 	StorageLocation *S3Location `type:"structure"`
 
@@ -12932,6 +13455,11 @@ func (s RequestUploadCredentialsOutput) String() string {
 // GoString returns the string representation
 func (s RequestUploadCredentialsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RequestUploadCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStorageLocation sets the StorageLocation field's value.
@@ -12992,6 +13520,8 @@ func (s *ResolveAliasInput) SetAliasId(v string) *ResolveAliasInput {
 type ResolveAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Fleet identifier that is associated with the requested alias.
 	FleetId *string `type:"string"`
 }
@@ -13004,6 +13534,11 @@ func (s ResolveAliasOutput) String() string {
 // GoString returns the string representation
 func (s ResolveAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResolveAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetId sets the FleetId field's value.
@@ -13703,6 +14238,8 @@ func (s *SearchGameSessionsInput) SetSortExpression(v string) *SearchGameSession
 type SearchGameSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Collection of objects containing game session properties for each session
 	// matching the request.
 	GameSessions []GameSession `type:"list"`
@@ -13721,6 +14258,11 @@ func (s SearchGameSessionsOutput) String() string {
 // GoString returns the string representation
 func (s SearchGameSessionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchGameSessionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessions sets the GameSessions field's value.
@@ -13986,6 +14528,8 @@ func (s *StartGameSessionPlacementInput) SetPlayerLatencies(v []PlayerLatency) *
 type StartGameSessionPlacementOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly created game session placement. This object
 	// includes all the information provided in the request, as well as start/end
 	// time stamps and placement status.
@@ -14000,6 +14544,11 @@ func (s StartGameSessionPlacementOutput) String() string {
 // GoString returns the string representation
 func (s StartGameSessionPlacementOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartGameSessionPlacementOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionPlacement sets the GameSessionPlacement field's value.
@@ -14096,6 +14645,8 @@ func (s *StartMatchmakingInput) SetTicketId(v string) *StartMatchmakingInput {
 type StartMatchmakingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Ticket representing the matchmaking request. This object include the information
 	// included in the request, ticket status, and match results as generated during
 	// the matchmaking process.
@@ -14110,6 +14661,11 @@ func (s StartMatchmakingOutput) String() string {
 // GoString returns the string representation
 func (s StartMatchmakingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartMatchmakingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMatchmakingTicket sets the MatchmakingTicket field's value.
@@ -14167,6 +14723,8 @@ func (s *StopGameSessionPlacementInput) SetPlacementId(v string) *StopGameSessio
 type StopGameSessionPlacementOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the canceled game session placement, with CANCELLED
 	// status and an end time stamp.
 	GameSessionPlacement *GameSessionPlacement `type:"structure"`
@@ -14180,6 +14738,11 @@ func (s StopGameSessionPlacementOutput) String() string {
 // GoString returns the string representation
 func (s StopGameSessionPlacementOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopGameSessionPlacementOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionPlacement sets the GameSessionPlacement field's value.
@@ -14235,6 +14798,8 @@ func (s *StopMatchmakingInput) SetTicketId(v string) *StopMatchmakingInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmakingOutput
 type StopMatchmakingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14245,6 +14810,11 @@ func (s StopMatchmakingOutput) String() string {
 // GoString returns the string representation
 func (s StopMatchmakingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopMatchmakingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -14327,6 +14897,8 @@ func (s *UpdateAliasInput) SetRoutingStrategy(v *RoutingStrategy) *UpdateAliasIn
 type UpdateAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains the updated alias configuration.
 	Alias *Alias `type:"structure"`
 }
@@ -14339,6 +14911,11 @@ func (s UpdateAliasOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlias sets the Alias field's value.
@@ -14419,6 +14996,8 @@ func (s *UpdateBuildInput) SetVersion(v string) *UpdateBuildInput {
 type UpdateBuildOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains the updated build record.
 	Build *Build `type:"structure"`
 }
@@ -14431,6 +15010,11 @@ func (s UpdateBuildOutput) String() string {
 // GoString returns the string representation
 func (s UpdateBuildOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBuildOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuild sets the Build field's value.
@@ -14550,6 +15134,8 @@ func (s *UpdateFleetAttributesInput) SetResourceCreationLimitPolicy(v *ResourceC
 type UpdateFleetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique identifier for a fleet that was updated.
 	FleetId *string `type:"string"`
 }
@@ -14562,6 +15148,11 @@ func (s UpdateFleetAttributesOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFleetAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFleetAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetId sets the FleetId field's value.
@@ -14645,6 +15236,8 @@ func (s *UpdateFleetCapacityInput) SetMinSize(v int64) *UpdateFleetCapacityInput
 type UpdateFleetCapacityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique identifier for a fleet that was updated.
 	FleetId *string `type:"string"`
 }
@@ -14657,6 +15250,11 @@ func (s UpdateFleetCapacityOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFleetCapacityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFleetCapacityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetId sets the FleetId field's value.
@@ -14743,6 +15341,8 @@ func (s *UpdateFleetPortSettingsInput) SetInboundPermissionRevocations(v []IpPer
 type UpdateFleetPortSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique identifier for a fleet that was updated.
 	FleetId *string `type:"string"`
 }
@@ -14755,6 +15355,11 @@ func (s UpdateFleetPortSettingsOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFleetPortSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFleetPortSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleetId sets the FleetId field's value.
@@ -14859,6 +15464,8 @@ func (s *UpdateGameSessionInput) SetProtectionPolicy(v ProtectionPolicy) *Update
 type UpdateGameSessionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that contains the updated game session metadata.
 	GameSession *GameSession `type:"structure"`
 }
@@ -14871,6 +15478,11 @@ func (s UpdateGameSessionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGameSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGameSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSession sets the GameSession field's value.
@@ -14976,6 +15588,8 @@ func (s *UpdateGameSessionQueueInput) SetTimeoutInSeconds(v int64) *UpdateGameSe
 type UpdateGameSessionQueueOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the newly updated game session queue.
 	GameSessionQueue *GameSessionQueue `type:"structure"`
 }
@@ -14988,6 +15602,11 @@ func (s UpdateGameSessionQueueOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGameSessionQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGameSessionQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGameSessionQueue sets the GameSessionQueue field's value.
@@ -15191,6 +15810,8 @@ func (s *UpdateMatchmakingConfigurationInput) SetRuleSetName(v string) *UpdateMa
 type UpdateMatchmakingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Object that describes the updated matchmaking configuration.
 	Configuration *MatchmakingConfiguration `type:"structure"`
 }
@@ -15203,6 +15824,11 @@ func (s UpdateMatchmakingConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMatchmakingConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMatchmakingConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfiguration sets the Configuration field's value.
@@ -15282,6 +15908,8 @@ func (s *UpdateRuntimeConfigurationInput) SetRuntimeConfiguration(v *RuntimeConf
 type UpdateRuntimeConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The run-time configuration currently in force. If the update was successful,
 	// this object matches the one in the request.
 	RuntimeConfiguration *RuntimeConfiguration `type:"structure"`
@@ -15295,6 +15923,11 @@ func (s UpdateRuntimeConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRuntimeConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRuntimeConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRuntimeConfiguration sets the RuntimeConfiguration field's value.
@@ -15352,6 +15985,8 @@ func (s *ValidateMatchmakingRuleSetInput) SetRuleSetBody(v string) *ValidateMatc
 type ValidateMatchmakingRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Response indicating whether or not the rule set is valid.
 	Valid *bool `type:"boolean"`
 }
@@ -15364,6 +15999,11 @@ func (s ValidateMatchmakingRuleSetOutput) String() string {
 // GoString returns the string representation
 func (s ValidateMatchmakingRuleSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ValidateMatchmakingRuleSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetValid sets the Valid field's value.

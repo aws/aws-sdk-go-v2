@@ -58,7 +58,10 @@ func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) Ad
 		input = &AddAttachmentsToSetInput{}
 	}
 
-	req := c.newRequest(op, input, &AddAttachmentsToSetOutput{})
+	output := &AddAttachmentsToSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddAttachmentsToSetRequest{Request: req, Input: input}
 }
 
@@ -111,7 +114,10 @@ func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInp
 		input = &AddCommunicationToCaseInput{}
 	}
 
-	req := c.newRequest(op, input, &AddCommunicationToCaseOutput{})
+	output := &AddCommunicationToCaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddCommunicationToCaseRequest{Request: req, Input: input}
 }
 
@@ -200,7 +206,10 @@ func (c *Support) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
 		input = &CreateCaseInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCaseOutput{})
+	output := &CreateCaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCaseRequest{Request: req, Input: input}
 }
 
@@ -249,7 +258,10 @@ func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) Desc
 		input = &DescribeAttachmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAttachmentOutput{})
+	output := &DescribeAttachmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAttachmentRequest{Request: req, Input: input}
 }
 
@@ -315,7 +327,10 @@ func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesR
 		input = &DescribeCasesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCasesOutput{})
+	output := &DescribeCasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCasesRequest{Request: req, Input: input}
 }
 
@@ -426,7 +441,10 @@ func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInp
 		input = &DescribeCommunicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCommunicationsOutput{})
+	output := &DescribeCommunicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCommunicationsRequest{Request: req, Input: input}
 }
 
@@ -532,7 +550,10 @@ func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) Describe
 		input = &DescribeServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServicesOutput{})
+	output := &DescribeServicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeServicesRequest{Request: req, Input: input}
 }
 
@@ -580,7 +601,10 @@ func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInp
 		input = &DescribeSeverityLevelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSeverityLevelsOutput{})
+	output := &DescribeSeverityLevelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSeverityLevelsRequest{Request: req, Input: input}
 }
 
@@ -631,7 +655,10 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descr
 		input = &DescribeTrustedAdvisorCheckRefreshStatusesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckRefreshStatusesOutput{})
+	output := &DescribeTrustedAdvisorCheckRefreshStatusesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTrustedAdvisorCheckRefreshStatusesRequest{Request: req, Input: input}
 }
 
@@ -696,7 +723,10 @@ func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTruste
 		input = &DescribeTrustedAdvisorCheckResultInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckResultOutput{})
+	output := &DescribeTrustedAdvisorCheckResultOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTrustedAdvisorCheckResultRequest{Request: req, Input: input}
 }
 
@@ -745,7 +775,10 @@ func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTru
 		input = &DescribeTrustedAdvisorCheckSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckSummariesOutput{})
+	output := &DescribeTrustedAdvisorCheckSummariesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTrustedAdvisorCheckSummariesRequest{Request: req, Input: input}
 }
 
@@ -794,7 +827,10 @@ func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvi
 		input = &DescribeTrustedAdvisorChecksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorChecksOutput{})
+	output := &DescribeTrustedAdvisorChecksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTrustedAdvisorChecksRequest{Request: req, Input: input}
 }
 
@@ -856,7 +892,10 @@ func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisor
 		input = &RefreshTrustedAdvisorCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &RefreshTrustedAdvisorCheckOutput{})
+	output := &RefreshTrustedAdvisorCheckOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RefreshTrustedAdvisorCheckRequest{Request: req, Input: input}
 }
 
@@ -903,7 +942,10 @@ func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest
 		input = &ResolveCaseInput{}
 	}
 
-	req := c.newRequest(op, input, &ResolveCaseOutput{})
+	output := &ResolveCaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResolveCaseRequest{Request: req, Input: input}
 }
 
@@ -966,6 +1008,8 @@ func (s *AddAttachmentsToSetInput) SetAttachments(v []Attachment) *AddAttachment
 type AddAttachmentsToSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the attachment set. If an attachmentSetId was not specified, a
 	// new attachment set is created, and the ID of the set is returned in the response.
 	// If an attachmentSetId was specified, the attachments are added to the specified
@@ -984,6 +1028,11 @@ func (s AddAttachmentsToSetOutput) String() string {
 // GoString returns the string representation
 func (s AddAttachmentsToSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddAttachmentsToSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachmentSetId sets the AttachmentSetId field's value.
@@ -1077,6 +1126,8 @@ func (s *AddCommunicationToCaseInput) SetCommunicationBody(v string) *AddCommuni
 type AddCommunicationToCaseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// True if AddCommunicationToCase succeeds. Otherwise, returns an error.
 	Result *bool `locationName:"result" type:"boolean"`
 }
@@ -1089,6 +1140,11 @@ func (s AddCommunicationToCaseOutput) String() string {
 // GoString returns the string representation
 func (s AddCommunicationToCaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddCommunicationToCaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResult sets the Result field's value.
@@ -1570,6 +1626,8 @@ func (s *CreateCaseInput) SetSubject(v string) *CreateCaseInput {
 type CreateCaseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The AWS Support case ID requested or returned in the call. The case ID is
 	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
 	CaseId *string `locationName:"caseId" type:"string"`
@@ -1583,6 +1641,11 @@ func (s CreateCaseOutput) String() string {
 // GoString returns the string representation
 func (s CreateCaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCaseId sets the CaseId field's value.
@@ -1638,6 +1701,8 @@ func (s *DescribeAttachmentInput) SetAttachmentId(v string) *DescribeAttachmentI
 type DescribeAttachmentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attachment content and file name.
 	Attachment *Attachment `locationName:"attachment" type:"structure"`
 }
@@ -1650,6 +1715,11 @@ func (s DescribeAttachmentOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAttachmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAttachmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachment sets the Attachment field's value.
@@ -1780,6 +1850,8 @@ func (s *DescribeCasesInput) SetNextToken(v string) *DescribeCasesInput {
 type DescribeCasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The details for the cases that match the request.
 	Cases []CaseDetails `locationName:"cases" type:"list"`
 
@@ -1795,6 +1867,11 @@ func (s DescribeCasesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCases sets the Cases field's value.
@@ -1896,6 +1973,8 @@ func (s *DescribeCommunicationsInput) SetNextToken(v string) *DescribeCommunicat
 type DescribeCommunicationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The communications for the case.
 	Communications []Communication `locationName:"communications" type:"list"`
 
@@ -1911,6 +1990,11 @@ func (s DescribeCommunicationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCommunicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCommunicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommunications sets the Communications field's value.
@@ -1965,6 +2049,8 @@ func (s *DescribeServicesInput) SetServiceCodeList(v []string) *DescribeServices
 type DescribeServicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A JSON-formatted list of AWS services.
 	Services []Service `locationName:"services" type:"list"`
 }
@@ -1977,6 +2063,11 @@ func (s DescribeServicesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeServicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeServicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServices sets the Services field's value.
@@ -2016,6 +2107,8 @@ func (s *DescribeSeverityLevelsInput) SetLanguage(v string) *DescribeSeverityLev
 type DescribeSeverityLevelsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The available severity levels for the support case. Available severity levels
 	// are defined by your service level agreement with AWS.
 	SeverityLevels []SeverityLevel `locationName:"severityLevels" type:"list"`
@@ -2029,6 +2122,11 @@ func (s DescribeSeverityLevelsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSeverityLevelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSeverityLevelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSeverityLevels sets the SeverityLevels field's value.
@@ -2085,6 +2183,8 @@ func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) SetCheckIds(v []string
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The refresh status of the specified Trusted Advisor checks.
 	//
 	// Statuses is a required field
@@ -2099,6 +2199,11 @@ func (s DescribeTrustedAdvisorCheckRefreshStatusesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTrustedAdvisorCheckRefreshStatusesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTrustedAdvisorCheckRefreshStatusesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatuses sets the Statuses field's value.
@@ -2164,6 +2269,8 @@ func (s *DescribeTrustedAdvisorCheckResultInput) SetLanguage(v string) *Describe
 type DescribeTrustedAdvisorCheckResultOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The detailed results of the Trusted Advisor check.
 	Result *TrustedAdvisorCheckResult `locationName:"result" type:"structure"`
 }
@@ -2176,6 +2283,11 @@ func (s DescribeTrustedAdvisorCheckResultOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTrustedAdvisorCheckResultOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTrustedAdvisorCheckResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResult sets the Result field's value.
@@ -2230,6 +2342,8 @@ func (s *DescribeTrustedAdvisorCheckSummariesInput) SetCheckIds(v []string) *Des
 type DescribeTrustedAdvisorCheckSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The summary information for the requested Trusted Advisor checks.
 	//
 	// Summaries is a required field
@@ -2244,6 +2358,11 @@ func (s DescribeTrustedAdvisorCheckSummariesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTrustedAdvisorCheckSummariesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTrustedAdvisorCheckSummariesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSummaries sets the Summaries field's value.
@@ -2300,6 +2419,8 @@ func (s *DescribeTrustedAdvisorChecksInput) SetLanguage(v string) *DescribeTrust
 type DescribeTrustedAdvisorChecksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about all available Trusted Advisor checks.
 	//
 	// Checks is a required field
@@ -2314,6 +2435,11 @@ func (s DescribeTrustedAdvisorChecksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTrustedAdvisorChecksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTrustedAdvisorChecksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecks sets the Checks field's value.
@@ -2403,6 +2529,8 @@ func (s *RefreshTrustedAdvisorCheckInput) SetCheckId(v string) *RefreshTrustedAd
 type RefreshTrustedAdvisorCheckOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current refresh status for a check, including the amount of time until
 	// the check is eligible for refresh.
 	//
@@ -2418,6 +2546,11 @@ func (s RefreshTrustedAdvisorCheckOutput) String() string {
 // GoString returns the string representation
 func (s RefreshTrustedAdvisorCheckOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RefreshTrustedAdvisorCheckOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -2456,6 +2589,8 @@ func (s *ResolveCaseInput) SetCaseId(v string) *ResolveCaseInput {
 type ResolveCaseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the case after the ResolveCase request was processed.
 	FinalCaseStatus *string `locationName:"finalCaseStatus" type:"string"`
 
@@ -2471,6 +2606,11 @@ func (s ResolveCaseOutput) String() string {
 // GoString returns the string representation
 func (s ResolveCaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResolveCaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFinalCaseStatus sets the FinalCaseStatus field's value.

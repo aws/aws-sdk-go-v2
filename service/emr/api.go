@@ -57,7 +57,10 @@ func (c *EMR) AddInstanceFleetRequest(input *AddInstanceFleetInput) AddInstanceF
 		input = &AddInstanceFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &AddInstanceFleetOutput{})
+	output := &AddInstanceFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddInstanceFleetRequest{Request: req, Input: input}
 }
 
@@ -103,7 +106,10 @@ func (c *EMR) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) AddInstanc
 		input = &AddInstanceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddInstanceGroupsOutput{})
+	output := &AddInstanceGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddInstanceGroupsRequest{Request: req, Input: input}
 }
 
@@ -171,7 +177,10 @@ func (c *EMR) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) AddJobFlowStep
 		input = &AddJobFlowStepsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddJobFlowStepsOutput{})
+	output := &AddJobFlowStepsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddJobFlowStepsRequest{Request: req, Input: input}
 }
 
@@ -220,7 +229,10 @@ func (c *EMR) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 		input = &AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	output := &AddTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsRequest{Request: req, Input: input}
 }
 
@@ -270,7 +282,10 @@ func (c *EMR) CancelStepsRequest(input *CancelStepsInput) CancelStepsRequest {
 		input = &CancelStepsInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelStepsOutput{})
+	output := &CancelStepsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelStepsRequest{Request: req, Input: input}
 }
 
@@ -317,7 +332,10 @@ func (c *EMR) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurat
 		input = &CreateSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSecurityConfigurationOutput{})
+	output := &CreateSecurityConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSecurityConfigurationRequest{Request: req, Input: input}
 }
 
@@ -363,7 +381,10 @@ func (c *EMR) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurat
 		input = &DeleteSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSecurityConfigurationOutput{})
+	output := &DeleteSecurityConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSecurityConfigurationRequest{Request: req, Input: input}
 }
 
@@ -410,7 +431,10 @@ func (c *EMR) DescribeClusterRequest(input *DescribeClusterInput) DescribeCluste
 		input = &DescribeClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterOutput{})
+	output := &DescribeClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeClusterRequest{Request: req, Input: input}
 }
 
@@ -478,7 +502,10 @@ func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) DescribeJobF
 		input = &DescribeJobFlowsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobFlowsOutput{})
+	output := &DescribeJobFlowsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeJobFlowsRequest{Request: req, Input: input}
 }
 
@@ -525,7 +552,10 @@ func (c *EMR) DescribeSecurityConfigurationRequest(input *DescribeSecurityConfig
 		input = &DescribeSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSecurityConfigurationOutput{})
+	output := &DescribeSecurityConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSecurityConfigurationRequest{Request: req, Input: input}
 }
 
@@ -571,7 +601,10 @@ func (c *EMR) DescribeStepRequest(input *DescribeStepInput) DescribeStepRequest 
 		input = &DescribeStepInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStepOutput{})
+	output := &DescribeStepOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStepRequest{Request: req, Input: input}
 }
 
@@ -623,7 +656,10 @@ func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) List
 		input = &ListBootstrapActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBootstrapActionsOutput{})
+	output := &ListBootstrapActionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListBootstrapActionsRequest{Request: req, Input: input}
 }
 
@@ -729,7 +765,10 @@ func (c *EMR) ListClustersRequest(input *ListClustersInput) ListClustersRequest 
 		input = &ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	output := &ListClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListClustersRequest{Request: req, Input: input}
 }
 
@@ -834,7 +873,10 @@ func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) ListInst
 		input = &ListInstanceFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceFleetsOutput{})
+	output := &ListInstanceFleetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInstanceFleetsRequest{Request: req, Input: input}
 }
 
@@ -936,7 +978,10 @@ func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) ListInst
 		input = &ListInstanceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceGroupsOutput{})
+	output := &ListInstanceGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInstanceGroupsRequest{Request: req, Input: input}
 }
 
@@ -1041,7 +1086,10 @@ func (c *EMR) ListInstancesRequest(input *ListInstancesInput) ListInstancesReque
 		input = &ListInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstancesOutput{})
+	output := &ListInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInstancesRequest{Request: req, Input: input}
 }
 
@@ -1140,7 +1188,10 @@ func (c *EMR) ListSecurityConfigurationsRequest(input *ListSecurityConfiguration
 		input = &ListSecurityConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSecurityConfigurationsOutput{})
+	output := &ListSecurityConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSecurityConfigurationsRequest{Request: req, Input: input}
 }
 
@@ -1193,7 +1244,10 @@ func (c *EMR) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
 		input = &ListStepsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStepsOutput{})
+	output := &ListStepsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStepsRequest{Request: req, Input: input}
 }
 
@@ -1294,9 +1348,12 @@ func (c *EMR) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) Modify
 		input = &ModifyInstanceFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceFleetOutput{})
+	output := &ModifyInstanceFleetOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyInstanceFleetRequest{Request: req, Input: input}
 }
 
@@ -1345,9 +1402,12 @@ func (c *EMR) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) Modi
 		input = &ModifyInstanceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceGroupsOutput{})
+	output := &ModifyInstanceGroupsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyInstanceGroupsRequest{Request: req, Input: input}
 }
 
@@ -1396,7 +1456,10 @@ func (c *EMR) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) PutA
 		input = &PutAutoScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAutoScalingPolicyOutput{})
+	output := &PutAutoScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutAutoScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -1443,7 +1506,10 @@ func (c *EMR) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyInput
 		input = &RemoveAutoScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAutoScalingPolicyOutput{})
+	output := &RemoveAutoScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveAutoScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -1494,7 +1560,10 @@ func (c *EMR) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 		input = &RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	output := &RemoveTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsRequest{Request: req, Input: input}
 }
 
@@ -1566,7 +1635,10 @@ func (c *EMR) RunJobFlowRequest(input *RunJobFlowInput) RunJobFlowRequest {
 		input = &RunJobFlowInput{}
 	}
 
-	req := c.newRequest(op, input, &RunJobFlowOutput{})
+	output := &RunJobFlowOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RunJobFlowRequest{Request: req, Input: input}
 }
 
@@ -1628,9 +1700,12 @@ func (c *EMR) SetTerminationProtectionRequest(input *SetTerminationProtectionInp
 		input = &SetTerminationProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTerminationProtectionOutput{})
+	output := &SetTerminationProtectionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetTerminationProtectionRequest{Request: req, Input: input}
 }
 
@@ -1681,9 +1756,12 @@ func (c *EMR) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) SetV
 		input = &SetVisibleToAllUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &SetVisibleToAllUsersOutput{})
+	output := &SetVisibleToAllUsersOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetVisibleToAllUsersRequest{Request: req, Input: input}
 }
 
@@ -1738,9 +1816,12 @@ func (c *EMR) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) TerminateJ
 		input = &TerminateJobFlowsInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateJobFlowsOutput{})
+	output := &TerminateJobFlowsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateJobFlowsRequest{Request: req, Input: input}
 }
 
@@ -1808,6 +1889,8 @@ func (s *AddInstanceFleetInput) SetInstanceFleet(v *InstanceFleetConfig) *AddIns
 type AddInstanceFleetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier of the cluster.
 	ClusterId *string `type:"string"`
 
@@ -1823,6 +1906,11 @@ func (s AddInstanceFleetOutput) String() string {
 // GoString returns the string representation
 func (s AddInstanceFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddInstanceFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusterId sets the ClusterId field's value.
@@ -1905,6 +1993,8 @@ func (s *AddInstanceGroupsInput) SetJobFlowId(v string) *AddInstanceGroupsInput 
 type AddInstanceGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Instance group IDs of the newly created instance groups.
 	InstanceGroupIds []string `type:"list"`
 
@@ -1920,6 +2010,11 @@ func (s AddInstanceGroupsOutput) String() string {
 // GoString returns the string representation
 func (s AddInstanceGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddInstanceGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceGroupIds sets the InstanceGroupIds field's value.
@@ -2003,6 +2098,8 @@ func (s *AddJobFlowStepsInput) SetSteps(v []StepConfig) *AddJobFlowStepsInput {
 type AddJobFlowStepsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifiers of the list of steps added to the job flow.
 	StepIds []string `type:"list"`
 }
@@ -2015,6 +2112,11 @@ func (s AddJobFlowStepsOutput) String() string {
 // GoString returns the string representation
 func (s AddJobFlowStepsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddJobFlowStepsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStepIds sets the StepIds field's value.
@@ -2087,6 +2189,8 @@ func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2097,6 +2201,11 @@ func (s AddTagsOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // An application is any Amazon or third-party software that you can add to
@@ -2533,6 +2642,8 @@ func (s *CancelStepsInput) SetStepIds(v []string) *CancelStepsInput {
 type CancelStepsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of CancelStepsInfo, which shows the status of specified cancel requests
 	// for each StepID specified.
 	CancelStepsInfoList []CancelStepsInfo `type:"list"`
@@ -2546,6 +2657,11 @@ func (s CancelStepsOutput) String() string {
 // GoString returns the string representation
 func (s CancelStepsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelStepsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCancelStepsInfoList sets the CancelStepsInfoList field's value.
@@ -3293,6 +3409,8 @@ func (s *CreateSecurityConfigurationInput) SetSecurityConfiguration(v string) *C
 type CreateSecurityConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date and time the security configuration was created.
 	//
 	// CreationDateTime is a required field
@@ -3312,6 +3430,11 @@ func (s CreateSecurityConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s CreateSecurityConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSecurityConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDateTime sets the CreationDateTime field's value.
@@ -3369,6 +3492,8 @@ func (s *DeleteSecurityConfigurationInput) SetName(v string) *DeleteSecurityConf
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfigurationOutput
 type DeleteSecurityConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3379,6 +3504,11 @@ func (s DeleteSecurityConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSecurityConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSecurityConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This input determines which cluster to describe.
@@ -3427,6 +3557,8 @@ func (s *DescribeClusterInput) SetClusterId(v string) *DescribeClusterInput {
 type DescribeClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// This output contains the details for the requested cluster.
 	Cluster *Cluster `type:"structure"`
 }
@@ -3439,6 +3571,11 @@ func (s DescribeClusterOutput) String() string {
 // GoString returns the string representation
 func (s DescribeClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -3504,6 +3641,8 @@ func (s *DescribeJobFlowsInput) SetJobFlowStates(v []JobFlowExecutionState) *Des
 type DescribeJobFlowsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of job flows matching the parameters supplied.
 	JobFlows []JobFlowDetail `type:"list"`
 }
@@ -3516,6 +3655,11 @@ func (s DescribeJobFlowsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeJobFlowsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeJobFlowsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobFlows sets the JobFlows field's value.
@@ -3568,6 +3712,8 @@ func (s *DescribeSecurityConfigurationInput) SetName(v string) *DescribeSecurity
 type DescribeSecurityConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date and time the security configuration was created
 	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -3586,6 +3732,11 @@ func (s DescribeSecurityConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSecurityConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSecurityConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreationDateTime sets the CreationDateTime field's value.
@@ -3667,6 +3818,8 @@ func (s *DescribeStepInput) SetStepId(v string) *DescribeStepInput {
 type DescribeStepOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The step details for the requested step identifier.
 	Step *Step `type:"structure"`
 }
@@ -3679,6 +3832,11 @@ func (s DescribeStepOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStepOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStepOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStep sets the Step field's value.
@@ -6577,6 +6735,8 @@ func (s *ListBootstrapActionsInput) SetMarker(v string) *ListBootstrapActionsInp
 type ListBootstrapActionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The bootstrap actions associated with the cluster.
 	BootstrapActions []Command `type:"list"`
 
@@ -6592,6 +6752,11 @@ func (s ListBootstrapActionsOutput) String() string {
 // GoString returns the string representation
 func (s ListBootstrapActionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBootstrapActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBootstrapActions sets the BootstrapActions field's value.
@@ -6665,6 +6830,8 @@ func (s *ListClustersInput) SetMarker(v string) *ListClustersInput {
 type ListClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of clusters for the account based on the given filters.
 	Clusters []ClusterSummary `type:"list"`
 
@@ -6680,6 +6847,11 @@ func (s ListClustersOutput) String() string {
 // GoString returns the string representation
 func (s ListClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusters sets the Clusters field's value.
@@ -6747,6 +6919,8 @@ func (s *ListInstanceFleetsInput) SetMarker(v string) *ListInstanceFleetsInput {
 type ListInstanceFleetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of instance fleets for the cluster and given filters.
 	InstanceFleets []InstanceFleet `type:"list"`
 
@@ -6762,6 +6936,11 @@ func (s ListInstanceFleetsOutput) String() string {
 // GoString returns the string representation
 func (s ListInstanceFleetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInstanceFleetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceFleets sets the InstanceFleets field's value.
@@ -6831,6 +7010,8 @@ func (s *ListInstanceGroupsInput) SetMarker(v string) *ListInstanceGroupsInput {
 type ListInstanceGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of instance groups for the cluster and given filters.
 	InstanceGroups []InstanceGroup `type:"list"`
 
@@ -6846,6 +7027,11 @@ func (s ListInstanceGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ListInstanceGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInstanceGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceGroups sets the InstanceGroups field's value.
@@ -6961,6 +7147,8 @@ func (s *ListInstancesInput) SetMarker(v string) *ListInstancesInput {
 type ListInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of instances for the cluster and given filters.
 	Instances []Instance `type:"list"`
 
@@ -6976,6 +7164,11 @@ func (s ListInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ListInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -7018,6 +7211,8 @@ func (s *ListSecurityConfigurationsInput) SetMarker(v string) *ListSecurityConfi
 type ListSecurityConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A pagination token that indicates the next set of results to retrieve. Include
 	// the marker in the next ListSecurityConfiguration call to retrieve the next
 	// page of results, if required.
@@ -7035,6 +7230,11 @@ func (s ListSecurityConfigurationsOutput) String() string {
 // GoString returns the string representation
 func (s ListSecurityConfigurationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSecurityConfigurationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -7123,6 +7323,8 @@ func (s *ListStepsInput) SetStepStates(v []StepState) *ListStepsInput {
 type ListStepsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string `type:"string"`
 
@@ -7138,6 +7340,11 @@ func (s ListStepsOutput) String() string {
 // GoString returns the string representation
 func (s ListStepsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStepsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -7253,6 +7460,8 @@ func (s *ModifyInstanceFleetInput) SetInstanceFleet(v *InstanceFleetModifyConfig
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleetOutput
 type ModifyInstanceFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7263,6 +7472,11 @@ func (s ModifyInstanceFleetOutput) String() string {
 // GoString returns the string representation
 func (s ModifyInstanceFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyInstanceFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Change the size of some instance groups.
@@ -7319,6 +7533,8 @@ func (s *ModifyInstanceGroupsInput) SetInstanceGroups(v []InstanceGroupModifyCon
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroupsOutput
 type ModifyInstanceGroupsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7329,6 +7545,11 @@ func (s ModifyInstanceGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ModifyInstanceGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyInstanceGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).
@@ -7454,6 +7675,8 @@ func (s *PutAutoScalingPolicyInput) SetInstanceGroupId(v string) *PutAutoScaling
 type PutAutoScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The automatic scaling policy definition.
 	AutoScalingPolicy *AutoScalingPolicyDescription `type:"structure"`
 
@@ -7473,6 +7696,11 @@ func (s PutAutoScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutAutoScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutAutoScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAutoScalingPolicy sets the AutoScalingPolicy field's value.
@@ -7552,6 +7780,8 @@ func (s *RemoveAutoScalingPolicyInput) SetInstanceGroupId(v string) *RemoveAutoS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyOutput
 type RemoveAutoScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7562,6 +7792,11 @@ func (s RemoveAutoScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s RemoveAutoScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveAutoScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This input identifies a cluster and a list of tags to remove.
@@ -7625,6 +7860,8 @@ func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsOutput
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7635,6 +7872,11 @@ func (s RemoveTagsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Input to the RunJobFlow operation.
@@ -7988,6 +8230,8 @@ func (s *RunJobFlowInput) SetVisibleToAllUsers(v bool) *RunJobFlowInput {
 type RunJobFlowOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An unique identifier for the job flow.
 	JobFlowId *string `type:"string"`
 }
@@ -8000,6 +8244,11 @@ func (s RunJobFlowOutput) String() string {
 // GoString returns the string representation
 func (s RunJobFlowOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RunJobFlowOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobFlowId sets the JobFlowId field's value.
@@ -8418,6 +8667,8 @@ func (s *SetTerminationProtectionInput) SetTerminationProtected(v bool) *SetTerm
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtectionOutput
 type SetTerminationProtectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8428,6 +8679,11 @@ func (s SetTerminationProtectionOutput) String() string {
 // GoString returns the string representation
 func (s SetTerminationProtectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetTerminationProtectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input to the SetVisibleToAllUsers action.
@@ -8493,6 +8749,8 @@ func (s *SetVisibleToAllUsersInput) SetVisibleToAllUsers(v bool) *SetVisibleToAl
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersOutput
 type SetVisibleToAllUsersOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8503,6 +8761,11 @@ func (s SetVisibleToAllUsersOutput) String() string {
 // GoString returns the string representation
 func (s SetVisibleToAllUsersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetVisibleToAllUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Policy for customizing shrink operations. Allows configuration of decommissioning
@@ -9251,6 +9514,8 @@ func (s *TerminateJobFlowsInput) SetJobFlowIds(v []string) *TerminateJobFlowsInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlowsOutput
 type TerminateJobFlowsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9261,6 +9526,11 @@ func (s TerminateJobFlowsOutput) String() string {
 // GoString returns the string representation
 func (s TerminateJobFlowsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateJobFlowsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // EBS volume specifications such as volume type, IOPS, and size (GiB) that

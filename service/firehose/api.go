@@ -103,7 +103,10 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 		input = &CreateDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeliveryStreamOutput{})
+	output := &CreateDeliveryStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeliveryStreamRequest{Request: req, Input: input}
 }
 
@@ -160,7 +163,10 @@ func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput)
 		input = &DeleteDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeliveryStreamOutput{})
+	output := &DeleteDeliveryStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDeliveryStreamRequest{Request: req, Input: input}
 }
 
@@ -209,7 +215,10 @@ func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamIn
 		input = &DescribeDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeliveryStreamOutput{})
+	output := &DescribeDeliveryStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDeliveryStreamRequest{Request: req, Input: input}
 }
 
@@ -253,7 +262,10 @@ func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) GetKine
 		input = &GetKinesisStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKinesisStreamOutput{})
+	output := &GetKinesisStreamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetKinesisStreamRequest{Request: req, Input: input}
 }
 
@@ -307,7 +319,10 @@ func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) L
 		input = &ListDeliveryStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeliveryStreamsOutput{})
+	output := &ListDeliveryStreamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeliveryStreamsRequest{Request: req, Input: input}
 }
 
@@ -385,7 +400,10 @@ func (c *Firehose) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 		input = &PutRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordOutput{})
+	output := &PutRecordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRecordRequest{Request: req, Input: input}
 }
 
@@ -488,7 +506,10 @@ func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBa
 		input = &PutRecordBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordBatchOutput{})
+	output := &PutRecordBatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRecordBatchRequest{Request: req, Input: input}
 }
 
@@ -563,7 +584,10 @@ func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) Updat
 		input = &UpdateDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDestinationOutput{})
+	output := &UpdateDestinationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDestinationRequest{Request: req, Input: input}
 }
 
@@ -885,6 +909,8 @@ func (s *CreateDeliveryStreamInput) SetS3DestinationConfiguration(v *S3Destinati
 type CreateDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the delivery stream.
 	DeliveryStreamARN *string `min:"1" type:"string"`
 }
@@ -897,6 +923,11 @@ func (s CreateDeliveryStreamOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeliveryStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeliveryStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeliveryStreamARN sets the DeliveryStreamARN field's value.
@@ -951,6 +982,8 @@ func (s *DeleteDeliveryStreamInput) SetDeliveryStreamName(v string) *DeleteDeliv
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamOutput
 type DeleteDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -961,6 +994,11 @@ func (s DeleteDeliveryStreamOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDeliveryStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeliveryStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about a delivery stream.
@@ -1165,6 +1203,8 @@ func (s *DescribeDeliveryStreamInput) SetLimit(v int64) *DescribeDeliveryStreamI
 type DescribeDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the delivery stream.
 	//
 	// DeliveryStreamDescription is a required field
@@ -1179,6 +1219,11 @@ func (s DescribeDeliveryStreamOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDeliveryStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDeliveryStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeliveryStreamDescription sets the DeliveryStreamDescription field's value.
@@ -2324,6 +2369,8 @@ func (s *GetKinesisStreamInput) SetDeliveryStreamARN(v string) *GetKinesisStream
 type GetKinesisStreamOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CredentialsForReadingKinesisStream *SessionCredentials `type:"structure"`
 
 	KinesisStreamARN *string `min:"1" type:"string"`
@@ -2337,6 +2384,11 @@ func (s GetKinesisStreamOutput) String() string {
 // GoString returns the string representation
 func (s GetKinesisStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetKinesisStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCredentialsForReadingKinesisStream sets the CredentialsForReadingKinesisStream field's value.
@@ -2574,6 +2626,8 @@ func (s *ListDeliveryStreamsInput) SetLimit(v int64) *ListDeliveryStreamsInput {
 type ListDeliveryStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of the delivery streams.
 	//
 	// DeliveryStreamNames is a required field
@@ -2593,6 +2647,11 @@ func (s ListDeliveryStreamsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeliveryStreamsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeliveryStreamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeliveryStreamNames sets the DeliveryStreamNames field's value.
@@ -2844,6 +2903,8 @@ func (s *PutRecordBatchInput) SetRecords(v []Record) *PutRecordBatchInput {
 type PutRecordBatchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of records that might have failed processing.
 	//
 	// FailedPutCount is a required field
@@ -2864,6 +2925,11 @@ func (s PutRecordBatchOutput) String() string {
 // GoString returns the string representation
 func (s PutRecordBatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRecordBatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedPutCount sets the FailedPutCount field's value.
@@ -2991,6 +3057,8 @@ func (s *PutRecordInput) SetRecord(v *Record) *PutRecordInput {
 type PutRecordOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the record.
 	//
 	// RecordId is a required field
@@ -3005,6 +3073,11 @@ func (s PutRecordOutput) String() string {
 // GoString returns the string representation
 func (s PutRecordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRecordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRecordId sets the RecordId field's value.
@@ -4122,6 +4195,8 @@ func (s *UpdateDestinationInput) SetS3DestinationUpdate(v *S3DestinationUpdate) 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationOutput
 type UpdateDestinationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4132,6 +4207,11 @@ func (s UpdateDestinationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDestinationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type CompressionFormat string

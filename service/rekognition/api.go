@@ -80,7 +80,10 @@ func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) CompareFaces
 		input = &CompareFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &CompareFacesOutput{})
+	output := &CompareFacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CompareFacesRequest{Request: req, Input: input}
 }
 
@@ -137,7 +140,10 @@ func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) Crea
 		input = &CreateCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCollectionOutput{})
+	output := &CreateCollectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCollectionRequest{Request: req, Input: input}
 }
 
@@ -185,7 +191,10 @@ func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) Dele
 		input = &DeleteCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCollectionOutput{})
+	output := &DeleteCollectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCollectionRequest{Request: req, Input: input}
 }
 
@@ -233,7 +242,10 @@ func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) DeleteFacesReq
 		input = &DeleteFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFacesOutput{})
+	output := &DeleteFacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFacesRequest{Request: req, Input: input}
 }
 
@@ -294,7 +306,10 @@ func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) DetectFacesReq
 		input = &DetectFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectFacesOutput{})
+	output := &DetectFacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetectFacesRequest{Request: req, Input: input}
 }
 
@@ -383,7 +398,10 @@ func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) DetectLabels
 		input = &DetectLabelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectLabelsOutput{})
+	output := &DetectLabelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetectLabelsRequest{Request: req, Input: input}
 }
 
@@ -434,7 +452,10 @@ func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabel
 		input = &DetectModerationLabelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectModerationLabelsOutput{})
+	output := &DetectModerationLabelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetectModerationLabelsRequest{Request: req, Input: input}
 }
 
@@ -484,7 +505,10 @@ func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetC
 		input = &GetCelebrityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCelebrityInfoOutput{})
+	output := &GetCelebrityInfoOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCelebrityInfoRequest{Request: req, Input: input}
 }
 
@@ -556,7 +580,10 @@ func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) IndexFacesReques
 		input = &IndexFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &IndexFacesOutput{})
+	output := &IndexFacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return IndexFacesRequest{Request: req, Input: input}
 }
 
@@ -613,7 +640,10 @@ func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) ListCo
 		input = &ListCollectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCollectionsOutput{})
+	output := &ListCollectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCollectionsRequest{Request: req, Input: input}
 }
 
@@ -718,7 +748,10 @@ func (c *Rekognition) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 		input = &ListFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFacesOutput{})
+	output := &ListFacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFacesRequest{Request: req, Input: input}
 }
 
@@ -837,7 +870,10 @@ func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInp
 		input = &RecognizeCelebritiesInput{}
 	}
 
-	req := c.newRequest(op, input, &RecognizeCelebritiesOutput{})
+	output := &RecognizeCelebritiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RecognizeCelebritiesRequest{Request: req, Input: input}
 }
 
@@ -898,7 +934,10 @@ func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) SearchFacesReq
 		input = &SearchFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchFacesOutput{})
+	output := &SearchFacesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SearchFacesRequest{Request: req, Input: input}
 }
 
@@ -964,7 +1003,10 @@ func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) 
 		input = &SearchFacesByImageInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchFacesByImageOutput{})
+	output := &SearchFacesByImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SearchFacesByImageRequest{Request: req, Input: input}
 }
 
@@ -1287,6 +1329,8 @@ func (s *CompareFacesMatch) SetSimilarity(v float64) *CompareFacesMatch {
 type CompareFacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of faces in the target image that match the source image face. Each
 	// CompareFacesMatch object provides the bounding box, the confidence level
 	// that the bounding box contains a face, and the similarity score for the face
@@ -1336,6 +1380,11 @@ func (s CompareFacesOutput) String() string {
 // GoString returns the string representation
 func (s CompareFacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CompareFacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFaceMatches sets the FaceMatches field's value.
@@ -1510,6 +1559,8 @@ func (s *CreateCollectionInput) SetCollectionId(v string) *CreateCollectionInput
 type CreateCollectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Amazon Resource Name (ARN) of the collection. You can use this to manage
 	// permissions on your resources.
 	CollectionArn *string `type:"string"`
@@ -1526,6 +1577,11 @@ func (s CreateCollectionOutput) String() string {
 // GoString returns the string representation
 func (s CreateCollectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCollectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCollectionArn sets the CollectionArn field's value.
@@ -1585,6 +1641,8 @@ func (s *DeleteCollectionInput) SetCollectionId(v string) *DeleteCollectionInput
 type DeleteCollectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// HTTP status code that indicates the result of the operation.
 	StatusCode *int64 `type:"integer"`
 }
@@ -1597,6 +1655,11 @@ func (s DeleteCollectionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCollectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCollectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatusCode sets the StatusCode field's value.
@@ -1668,6 +1731,8 @@ func (s *DeleteFacesInput) SetFaceIds(v []string) *DeleteFacesInput {
 type DeleteFacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of strings (face IDs) of the faces that were deleted.
 	DeletedFaces []string `min:"1" type:"list"`
 }
@@ -1680,6 +1745,11 @@ func (s DeleteFacesOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletedFaces sets the DeletedFaces field's value.
@@ -1753,6 +1823,8 @@ func (s *DetectFacesInput) SetImage(v *Image) *DetectFacesInput {
 type DetectFacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details of each face found in the image.
 	FaceDetails []FaceDetail `type:"list"`
 
@@ -1778,6 +1850,11 @@ func (s DetectFacesOutput) String() string {
 // GoString returns the string representation
 func (s DetectFacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetectFacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFaceDetails sets the FaceDetails field's value.
@@ -1862,6 +1939,8 @@ func (s *DetectLabelsInput) SetMinConfidence(v float64) *DetectLabelsInput {
 type DetectLabelsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of labels for the real-world objects detected.
 	Labels []Label `type:"list"`
 
@@ -1884,6 +1963,11 @@ func (s DetectLabelsOutput) String() string {
 // GoString returns the string representation
 func (s DetectLabelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetectLabelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLabels sets the Labels field's value.
@@ -1959,6 +2043,8 @@ func (s *DetectModerationLabelsInput) SetMinConfidence(v float64) *DetectModerat
 type DetectModerationLabelsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of labels for explicit or suggestive adult content found in the
 	// image. The list includes the top-level label and each child label detected
 	// in the image. This is useful for filtering specific categories of content.
@@ -1973,6 +2059,11 @@ func (s DetectModerationLabelsOutput) String() string {
 // GoString returns the string representation
 func (s DetectModerationLabelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetectModerationLabelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetModerationLabels sets the ModerationLabels field's value.
@@ -2451,6 +2542,8 @@ func (s *GetCelebrityInfoInput) SetId(v string) *GetCelebrityInfoInput {
 type GetCelebrityInfoOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the celebrity.
 	Name *string `type:"string"`
 
@@ -2466,6 +2559,11 @@ func (s GetCelebrityInfoOutput) String() string {
 // GoString returns the string representation
 func (s GetCelebrityInfoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCelebrityInfoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -2685,6 +2783,8 @@ func (s *IndexFacesInput) SetImage(v *Image) *IndexFacesInput {
 type IndexFacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of faces detected and added to the collection. For more information,
 	// see howitworks-index-faces.
 	FaceRecords []FaceRecord `type:"list"`
@@ -2710,6 +2810,11 @@ func (s IndexFacesOutput) String() string {
 // GoString returns the string representation
 func (s IndexFacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s IndexFacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFaceRecords sets the FaceRecords field's value.
@@ -2839,6 +2944,8 @@ func (s *ListCollectionsInput) SetNextToken(v string) *ListCollectionsInput {
 type ListCollectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of collection IDs.
 	CollectionIds []string `type:"list"`
 
@@ -2855,6 +2962,11 @@ func (s ListCollectionsOutput) String() string {
 // GoString returns the string representation
 func (s ListCollectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCollectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCollectionIds sets the CollectionIds field's value.
@@ -2934,6 +3046,8 @@ func (s *ListFacesInput) SetNextToken(v string) *ListFacesInput {
 type ListFacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Face objects.
 	Faces []Face `type:"list"`
 
@@ -2950,6 +3064,11 @@ func (s ListFacesOutput) String() string {
 // GoString returns the string representation
 func (s ListFacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFaces sets the Faces field's value.
@@ -3171,6 +3290,8 @@ func (s *RecognizeCelebritiesInput) SetImage(v *Image) *RecognizeCelebritiesInpu
 type RecognizeCelebritiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details about each celebrity found in the image. Amazon Rekognition can detect
 	// a maximum of 15 celebrities in an image.
 	CelebrityFaces []Celebrity `type:"list"`
@@ -3201,6 +3322,11 @@ func (s RecognizeCelebritiesOutput) String() string {
 // GoString returns the string representation
 func (s RecognizeCelebritiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RecognizeCelebritiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCelebrityFaces sets the CelebrityFaces field's value.
@@ -3377,6 +3503,8 @@ func (s *SearchFacesByImageInput) SetMaxFaces(v int64) *SearchFacesByImageInput 
 type SearchFacesByImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of faces that match the input face, along with the confidence in
 	// the match.
 	FaceMatches []FaceMatch `type:"list"`
@@ -3397,6 +3525,11 @@ func (s SearchFacesByImageOutput) String() string {
 // GoString returns the string representation
 func (s SearchFacesByImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchFacesByImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFaceMatches sets the FaceMatches field's value.
@@ -3501,6 +3634,8 @@ func (s *SearchFacesInput) SetMaxFaces(v int64) *SearchFacesInput {
 type SearchFacesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of faces that matched the input face, along with the confidence
 	// in the match.
 	FaceMatches []FaceMatch `type:"list"`
@@ -3517,6 +3652,11 @@ func (s SearchFacesOutput) String() string {
 // GoString returns the string representation
 func (s SearchFacesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchFacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFaceMatches sets the FaceMatches field's value.

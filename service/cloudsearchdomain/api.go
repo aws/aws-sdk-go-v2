@@ -69,7 +69,10 @@ func (c *CloudSearchDomain) SearchRequest(input *SearchInput) SearchRequest {
 		input = &SearchInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchOutput{})
+	output := &SearchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SearchRequest{Request: req, Input: input}
 }
 
@@ -129,7 +132,10 @@ func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) SuggestRequest {
 		input = &SuggestInput{}
 	}
 
-	req := c.newRequest(op, input, &SuggestOutput{})
+	output := &SuggestOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SuggestRequest{Request: req, Input: input}
 }
 
@@ -194,7 +200,10 @@ func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) 
 		input = &UploadDocumentsInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadDocumentsOutput{})
+	output := &UploadDocumentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UploadDocumentsRequest{Request: req, Input: input}
 }
 
@@ -909,6 +918,8 @@ func (s *SearchInput) SetStats(v string) *SearchInput {
 type SearchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested facet information.
 	Facets map[string]BucketInfo `locationName:"facets" type:"map"`
 
@@ -930,6 +941,11 @@ func (s SearchOutput) String() string {
 // GoString returns the string representation
 func (s SearchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFacets sets the Facets field's value.
@@ -1100,6 +1116,8 @@ func (s *SuggestModel) SetSuggestions(v []SuggestionMatch) *SuggestModel {
 type SuggestOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of a SuggestRequest. Contains the resource ID (rid) and how long
 	// it took to process the request (timems).
 	Status *SuggestStatus `locationName:"status" type:"structure"`
@@ -1116,6 +1134,11 @@ func (s SuggestOutput) String() string {
 // GoString returns the string representation
 func (s SuggestOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SuggestOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -1268,6 +1291,8 @@ func (s *UploadDocumentsInput) SetDocuments(v io.ReadSeeker) *UploadDocumentsInp
 type UploadDocumentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The number of documents that were added to the search domain.
 	Adds *int64 `locationName:"adds" type:"long"`
 
@@ -1289,6 +1314,11 @@ func (s UploadDocumentsOutput) String() string {
 // GoString returns the string representation
 func (s UploadDocumentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UploadDocumentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAdds sets the Adds field's value.

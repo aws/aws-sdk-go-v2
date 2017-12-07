@@ -52,7 +52,10 @@ func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 		input = &AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	output := &AddTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsRequest{Request: req, Input: input}
 }
 
@@ -109,7 +112,10 @@ func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredict
 		input = &CreateBatchPredictionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBatchPredictionOutput{})
+	output := &CreateBatchPredictionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBatchPredictionRequest{Request: req, Input: input}
 }
 
@@ -166,7 +172,10 @@ func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSource
 		input = &CreateDataSourceFromRDSInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDataSourceFromRDSOutput{})
+	output := &CreateDataSourceFromRDSOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDataSourceFromRDSRequest{Request: req, Input: input}
 }
 
@@ -242,7 +251,10 @@ func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataS
 		input = &CreateDataSourceFromRedshiftInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDataSourceFromRedshiftOutput{})
+	output := &CreateDataSourceFromRedshiftOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDataSourceFromRedshiftRequest{Request: req, Input: input}
 }
 
@@ -313,7 +325,10 @@ func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceF
 		input = &CreateDataSourceFromS3Input{}
 	}
 
-	req := c.newRequest(op, input, &CreateDataSourceFromS3Output{})
+	output := &CreateDataSourceFromS3Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDataSourceFromS3Request{Request: req, Input: input}
 }
 
@@ -372,7 +387,10 @@ func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) 
 		input = &CreateEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEvaluationOutput{})
+	output := &CreateEvaluationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEvaluationRequest{Request: req, Input: input}
 }
 
@@ -432,7 +450,10 @@ func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) Create
 		input = &CreateMLModelInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMLModelOutput{})
+	output := &CreateMLModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMLModelRequest{Request: req, Input: input}
 }
 
@@ -478,7 +499,10 @@ func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEnd
 		input = &CreateRealtimeEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRealtimeEndpointOutput{})
+	output := &CreateRealtimeEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRealtimeEndpointRequest{Request: req, Input: input}
 }
 
@@ -527,7 +551,10 @@ func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredict
 		input = &DeleteBatchPredictionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBatchPredictionOutput{})
+	output := &DeleteBatchPredictionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBatchPredictionRequest{Request: req, Input: input}
 }
 
@@ -576,7 +603,10 @@ func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) 
 		input = &DeleteDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDataSourceOutput{})
+	output := &DeleteDataSourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDataSourceRequest{Request: req, Input: input}
 }
 
@@ -625,7 +655,10 @@ func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) 
 		input = &DeleteEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEvaluationOutput{})
+	output := &DeleteEvaluationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEvaluationRequest{Request: req, Input: input}
 }
 
@@ -674,7 +707,10 @@ func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) Delete
 		input = &DeleteMLModelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMLModelOutput{})
+	output := &DeleteMLModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMLModelRequest{Request: req, Input: input}
 }
 
@@ -718,7 +754,10 @@ func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEnd
 		input = &DeleteRealtimeEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRealtimeEndpointOutput{})
+	output := &DeleteRealtimeEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRealtimeEndpointRequest{Request: req, Input: input}
 }
 
@@ -765,7 +804,10 @@ func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRe
 		input = &DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsRequest{Request: req, Input: input}
 }
 
@@ -816,7 +858,10 @@ func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPr
 		input = &DescribeBatchPredictionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBatchPredictionsOutput{})
+	output := &DescribeBatchPredictionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBatchPredictionsRequest{Request: req, Input: input}
 }
 
@@ -916,7 +961,10 @@ func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesI
 		input = &DescribeDataSourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDataSourcesOutput{})
+	output := &DescribeDataSourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDataSourcesRequest{Request: req, Input: input}
 }
 
@@ -1017,7 +1065,10 @@ func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsI
 		input = &DescribeEvaluationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEvaluationsOutput{})
+	output := &DescribeEvaluationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEvaluationsRequest{Request: req, Input: input}
 }
 
@@ -1117,7 +1168,10 @@ func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) 
 		input = &DescribeMLModelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMLModelsOutput{})
+	output := &DescribeMLModelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMLModelsRequest{Request: req, Input: input}
 }
 
@@ -1211,7 +1265,10 @@ func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) Describe
 		input = &DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	output := &DescribeTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagsRequest{Request: req, Input: input}
 }
 
@@ -1256,7 +1313,10 @@ func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInp
 		input = &GetBatchPredictionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBatchPredictionOutput{})
+	output := &GetBatchPredictionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBatchPredictionRequest{Request: req, Input: input}
 }
 
@@ -1305,7 +1365,10 @@ func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) GetDat
 		input = &GetDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataSourceOutput{})
+	output := &GetDataSourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDataSourceRequest{Request: req, Input: input}
 }
 
@@ -1350,7 +1413,10 @@ func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) GetEva
 		input = &GetEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEvaluationOutput{})
+	output := &GetEvaluationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEvaluationRequest{Request: req, Input: input}
 }
 
@@ -1397,7 +1463,10 @@ func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) GetMLModelRe
 		input = &GetMLModelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMLModelOutput{})
+	output := &GetMLModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMLModelRequest{Request: req, Input: input}
 }
 
@@ -1444,7 +1513,10 @@ func (c *MachineLearning) PredictRequest(input *PredictInput) PredictRequest {
 		input = &PredictInput{}
 	}
 
-	req := c.newRequest(op, input, &PredictOutput{})
+	output := &PredictOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PredictRequest{Request: req, Input: input}
 }
 
@@ -1491,7 +1563,10 @@ func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredict
 		input = &UpdateBatchPredictionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBatchPredictionOutput{})
+	output := &UpdateBatchPredictionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateBatchPredictionRequest{Request: req, Input: input}
 }
 
@@ -1538,7 +1613,10 @@ func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) 
 		input = &UpdateDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDataSourceOutput{})
+	output := &UpdateDataSourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDataSourceRequest{Request: req, Input: input}
 }
 
@@ -1585,7 +1663,10 @@ func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) 
 		input = &UpdateEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEvaluationOutput{})
+	output := &UpdateEvaluationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateEvaluationRequest{Request: req, Input: input}
 }
 
@@ -1632,7 +1713,10 @@ func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) Update
 		input = &UpdateMLModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMLModelOutput{})
+	output := &UpdateMLModelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMLModelRequest{Request: req, Input: input}
 }
 
@@ -1719,6 +1803,8 @@ func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the ML object that was tagged.
 	ResourceId *string `min:"1" type:"string"`
 
@@ -1734,6 +1820,11 @@ func (s AddTagsOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceId sets the ResourceId field's value.
@@ -2047,6 +2138,8 @@ func (s *CreateBatchPredictionInput) SetOutputUri(v string) *CreateBatchPredicti
 type CreateBatchPredictionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the BatchPrediction. This value
 	// is identical to the value of the BatchPredictionId in the request.
 	BatchPredictionId *string `min:"1" type:"string"`
@@ -2060,6 +2153,11 @@ func (s CreateBatchPredictionOutput) String() string {
 // GoString returns the string representation
 func (s CreateBatchPredictionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBatchPredictionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBatchPredictionId sets the BatchPredictionId field's value.
@@ -2184,6 +2282,8 @@ func (s *CreateDataSourceFromRDSInput) SetRoleARN(v string) *CreateDataSourceFro
 type CreateDataSourceFromRDSOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the datasource. This value should
 	// be identical to the value of the DataSourceID in the request.
 	DataSourceId *string `min:"1" type:"string"`
@@ -2197,6 +2297,11 @@ func (s CreateDataSourceFromRDSOutput) String() string {
 // GoString returns the string representation
 func (s CreateDataSourceFromRDSOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDataSourceFromRDSOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSourceId sets the DataSourceId field's value.
@@ -2346,6 +2451,8 @@ func (s *CreateDataSourceFromRedshiftInput) SetRoleARN(v string) *CreateDataSour
 type CreateDataSourceFromRedshiftOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the datasource. This value should
 	// be identical to the value of the DataSourceID in the request.
 	DataSourceId *string `min:"1" type:"string"`
@@ -2359,6 +2466,11 @@ func (s CreateDataSourceFromRedshiftOutput) String() string {
 // GoString returns the string representation
 func (s CreateDataSourceFromRedshiftOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDataSourceFromRedshiftOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSourceId sets the DataSourceId field's value.
@@ -2470,6 +2582,8 @@ func (s *CreateDataSourceFromS3Input) SetDataSpec(v *S3DataSpec) *CreateDataSour
 type CreateDataSourceFromS3Output struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the DataSource. This value should
 	// be identical to the value of the DataSourceID in the request.
 	DataSourceId *string `min:"1" type:"string"`
@@ -2483,6 +2597,11 @@ func (s CreateDataSourceFromS3Output) String() string {
 // GoString returns the string representation
 func (s CreateDataSourceFromS3Output) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDataSourceFromS3Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSourceId sets the DataSourceId field's value.
@@ -2590,6 +2709,8 @@ func (s *CreateEvaluationInput) SetMLModelId(v string) *CreateEvaluationInput {
 type CreateEvaluationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user-supplied ID that uniquely identifies the Evaluation. This value
 	// should be identical to the value of the EvaluationId in the request.
 	EvaluationId *string `min:"1" type:"string"`
@@ -2603,6 +2724,11 @@ func (s CreateEvaluationOutput) String() string {
 // GoString returns the string representation
 func (s CreateEvaluationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateEvaluationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluationId sets the EvaluationId field's value.
@@ -2778,6 +2904,8 @@ func (s *CreateMLModelInput) SetTrainingDataSourceId(v string) *CreateMLModelInp
 type CreateMLModelOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the MLModel. This value should
 	// be identical to the value of the MLModelId in the request.
 	MLModelId *string `min:"1" type:"string"`
@@ -2791,6 +2919,11 @@ func (s CreateMLModelOutput) String() string {
 // GoString returns the string representation
 func (s CreateMLModelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMLModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMLModelId sets the MLModelId field's value.
@@ -2850,6 +2983,8 @@ func (s *CreateRealtimeEndpointInput) SetMLModelId(v string) *CreateRealtimeEndp
 type CreateRealtimeEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the MLModel. This value should
 	// be identical to the value of the MLModelId in the request.
 	MLModelId *string `min:"1" type:"string"`
@@ -2866,6 +3001,11 @@ func (s CreateRealtimeEndpointOutput) String() string {
 // GoString returns the string representation
 func (s CreateRealtimeEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRealtimeEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMLModelId sets the MLModelId field's value.
@@ -3127,6 +3267,8 @@ func (s *DeleteBatchPredictionInput) SetBatchPredictionId(v string) *DeleteBatch
 type DeleteBatchPredictionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the BatchPrediction. This value
 	// should be identical to the value of the BatchPredictionID in the request.
 	BatchPredictionId *string `min:"1" type:"string"`
@@ -3140,6 +3282,11 @@ func (s DeleteBatchPredictionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBatchPredictionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBatchPredictionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBatchPredictionId sets the BatchPredictionId field's value.
@@ -3194,6 +3341,8 @@ func (s *DeleteDataSourceInput) SetDataSourceId(v string) *DeleteDataSourceInput
 type DeleteDataSourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the DataSource. This value should
 	// be identical to the value of the DataSourceID in the request.
 	DataSourceId *string `min:"1" type:"string"`
@@ -3207,6 +3356,11 @@ func (s DeleteDataSourceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDataSourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDataSourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSourceId sets the DataSourceId field's value.
@@ -3265,6 +3419,8 @@ func (s *DeleteEvaluationInput) SetEvaluationId(v string) *DeleteEvaluationInput
 type DeleteEvaluationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the Evaluation. This value should
 	// be identical to the value of the EvaluationId in the request.
 	EvaluationId *string `min:"1" type:"string"`
@@ -3278,6 +3434,11 @@ func (s DeleteEvaluationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEvaluationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEvaluationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluationId sets the EvaluationId field's value.
@@ -3335,6 +3496,8 @@ func (s *DeleteMLModelInput) SetMLModelId(v string) *DeleteMLModelInput {
 type DeleteMLModelOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the MLModel. This value should
 	// be identical to the value of the MLModelID in the request.
 	MLModelId *string `min:"1" type:"string"`
@@ -3348,6 +3511,11 @@ func (s DeleteMLModelOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMLModelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMLModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMLModelId sets the MLModelId field's value.
@@ -3404,6 +3572,8 @@ func (s *DeleteRealtimeEndpointInput) SetMLModelId(v string) *DeleteRealtimeEndp
 type DeleteRealtimeEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-supplied ID that uniquely identifies the MLModel. This value should
 	// be identical to the value of the MLModelId in the request.
 	MLModelId *string `min:"1" type:"string"`
@@ -3420,6 +3590,11 @@ func (s DeleteRealtimeEndpointOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRealtimeEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRealtimeEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMLModelId sets the MLModelId field's value.
@@ -3509,6 +3684,8 @@ func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the ML object from which tags were deleted.
 	ResourceId *string `min:"1" type:"string"`
 
@@ -3524,6 +3701,11 @@ func (s DeleteTagsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceId sets the ResourceId field's value.
@@ -3708,6 +3890,8 @@ func (s *DescribeBatchPredictionsInput) SetSortOrder(v SortOrder) *DescribeBatch
 type DescribeBatchPredictionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the next page in the paginated results that indicates at least
 	// one more page follows.
 	NextToken *string `type:"string"`
@@ -3724,6 +3908,11 @@ func (s DescribeBatchPredictionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBatchPredictionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBatchPredictionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3899,6 +4088,8 @@ func (s *DescribeDataSourcesInput) SetSortOrder(v SortOrder) *DescribeDataSource
 type DescribeDataSourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An ID of the next page in the paginated results that indicates at least one
 	// more page follows.
 	NextToken *string `type:"string"`
@@ -3915,6 +4106,11 @@ func (s DescribeDataSourcesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDataSourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDataSourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4095,6 +4291,8 @@ func (s *DescribeEvaluationsInput) SetSortOrder(v SortOrder) *DescribeEvaluation
 type DescribeEvaluationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the next page in the paginated results that indicates at least
 	// one more page follows.
 	NextToken *string `type:"string"`
@@ -4111,6 +4309,11 @@ func (s DescribeEvaluationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEvaluationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEvaluationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4295,6 +4498,8 @@ func (s *DescribeMLModelsInput) SetSortOrder(v SortOrder) *DescribeMLModelsInput
 type DescribeMLModelsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the next page in the paginated results that indicates at least
 	// one more page follows.
 	NextToken *string `type:"string"`
@@ -4311,6 +4516,11 @@ func (s DescribeMLModelsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMLModelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMLModelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4385,6 +4595,8 @@ func (s *DescribeTagsInput) SetResourceType(v TaggableResourceType) *DescribeTag
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the tagged ML object.
 	ResourceId *string `min:"1" type:"string"`
 
@@ -4403,6 +4615,11 @@ func (s DescribeTagsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourceId sets the ResourceId field's value.
@@ -4642,6 +4859,8 @@ func (s *GetBatchPredictionInput) SetBatchPredictionId(v string) *GetBatchPredic
 type GetBatchPredictionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the DataSource that was used to create the BatchPrediction.
 	BatchPredictionDataSourceId *string `min:"1" type:"string"`
 
@@ -4728,6 +4947,11 @@ func (s GetBatchPredictionOutput) String() string {
 // GoString returns the string representation
 func (s GetBatchPredictionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBatchPredictionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBatchPredictionDataSourceId sets the BatchPredictionDataSourceId field's value.
@@ -4891,6 +5115,8 @@ func (s *GetDataSourceInput) SetVerbose(v bool) *GetDataSourceInput {
 type GetDataSourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The parameter is true if statistics need to be generated from the observation
 	// data.
 	ComputeStatistics *bool `type:"boolean"`
@@ -4986,6 +5212,11 @@ func (s GetDataSourceOutput) String() string {
 // GoString returns the string representation
 func (s GetDataSourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDataSourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputeStatistics sets the ComputeStatistics field's value.
@@ -5155,6 +5386,8 @@ func (s *GetEvaluationInput) SetEvaluationId(v string) *GetEvaluationInput {
 type GetEvaluationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the Evaluation, normalized and scaled on computation resources.
 	// ComputeTime is only available if the Evaluation is in the COMPLETED state.
@@ -5243,6 +5476,11 @@ func (s GetEvaluationOutput) String() string {
 // GoString returns the string representation
 func (s GetEvaluationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEvaluationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputeTime sets the ComputeTime field's value.
@@ -5395,6 +5633,8 @@ func (s *GetMLModelInput) SetVerbose(v bool) *GetMLModelInput {
 type GetMLModelOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the MLModel, normalized and scaled on computation resources. ComputeTime
 	// is only available if the MLModel is in the COMPLETED state.
@@ -5541,6 +5781,11 @@ func (s GetMLModelOutput) String() string {
 // GoString returns the string representation
 func (s GetMLModelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMLModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputeTime sets the ComputeTime field's value.
@@ -6028,6 +6273,8 @@ func (s *PredictInput) SetRecord(v map[string]string) *PredictInput {
 type PredictOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The output from a Predict operation:
 	//
 	//    * Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE
@@ -6051,6 +6298,11 @@ func (s PredictOutput) String() string {
 // GoString returns the string representation
 func (s PredictOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PredictOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPrediction sets the Prediction field's value.
@@ -7410,6 +7662,8 @@ func (s *UpdateBatchPredictionInput) SetBatchPredictionName(v string) *UpdateBat
 type UpdateBatchPredictionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID assigned to the BatchPrediction during creation. This value should
 	// be identical to the value of the BatchPredictionId in the request.
 	BatchPredictionId *string `min:"1" type:"string"`
@@ -7423,6 +7677,11 @@ func (s UpdateBatchPredictionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateBatchPredictionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBatchPredictionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBatchPredictionId sets the BatchPredictionId field's value.
@@ -7495,6 +7754,8 @@ func (s *UpdateDataSourceInput) SetDataSourceName(v string) *UpdateDataSourceInp
 type UpdateDataSourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID assigned to the DataSource during creation. This value should be identical
 	// to the value of the DataSourceID in the request.
 	DataSourceId *string `min:"1" type:"string"`
@@ -7508,6 +7769,11 @@ func (s UpdateDataSourceOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDataSourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDataSourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataSourceId sets the DataSourceId field's value.
@@ -7580,6 +7846,8 @@ func (s *UpdateEvaluationInput) SetEvaluationName(v string) *UpdateEvaluationInp
 type UpdateEvaluationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID assigned to the Evaluation during creation. This value should be identical
 	// to the value of the Evaluation in the request.
 	EvaluationId *string `min:"1" type:"string"`
@@ -7593,6 +7861,11 @@ func (s UpdateEvaluationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateEvaluationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateEvaluationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluationId sets the EvaluationId field's value.
@@ -7672,6 +7945,8 @@ func (s *UpdateMLModelInput) SetScoreThreshold(v float64) *UpdateMLModelInput {
 type UpdateMLModelOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID assigned to the MLModel during creation. This value should be identical
 	// to the value of the MLModelID in the request.
 	MLModelId *string `min:"1" type:"string"`
@@ -7685,6 +7960,11 @@ func (s UpdateMLModelOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMLModelOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMLModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMLModelId sets the MLModelId field's value.

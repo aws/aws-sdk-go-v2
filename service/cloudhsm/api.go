@@ -53,7 +53,10 @@ func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTa
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	output := &AddTagsToResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -100,7 +103,10 @@ func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
 		input = &CreateHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHapgOutput{})
+	output := &CreateHapgOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHapgRequest{Request: req, Input: input}
 }
 
@@ -156,7 +162,10 @@ func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 		input = &CreateHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHsmOutput{})
+	output := &CreateHsmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateHsmRequest{Request: req, Input: input}
 }
 
@@ -202,7 +211,10 @@ func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) CreateL
 		input = &CreateLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLunaClientOutput{})
+	output := &CreateLunaClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLunaClientRequest{Request: req, Input: input}
 }
 
@@ -248,7 +260,10 @@ func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
 		input = &DeleteHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHapgOutput{})
+	output := &DeleteHapgOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteHapgRequest{Request: req, Input: input}
 }
 
@@ -295,7 +310,10 @@ func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 		input = &DeleteHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHsmOutput{})
+	output := &DeleteHsmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteHsmRequest{Request: req, Input: input}
 }
 
@@ -341,7 +359,10 @@ func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteL
 		input = &DeleteLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLunaClientOutput{})
+	output := &DeleteLunaClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLunaClientRequest{Request: req, Input: input}
 }
 
@@ -387,7 +408,10 @@ func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgReq
 		input = &DescribeHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHapgOutput{})
+	output := &DescribeHapgOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHapgRequest{Request: req, Input: input}
 }
 
@@ -434,7 +458,10 @@ func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) DescribeHsmReques
 		input = &DescribeHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHsmOutput{})
+	output := &DescribeHsmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHsmRequest{Request: req, Input: input}
 }
 
@@ -480,7 +507,10 @@ func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) Des
 		input = &DescribeLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLunaClientOutput{})
+	output := &DescribeLunaClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLunaClientRequest{Request: req, Input: input}
 }
 
@@ -527,7 +557,10 @@ func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 		input = &GetConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConfigOutput{})
+	output := &GetConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConfigRequest{Request: req, Input: input}
 }
 
@@ -573,7 +606,10 @@ func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) Lis
 		input = &ListAvailableZonesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAvailableZonesOutput{})
+	output := &ListAvailableZonesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAvailableZonesRequest{Request: req, Input: input}
 }
 
@@ -624,7 +660,10 @@ func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
 		input = &ListHapgsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHapgsOutput{})
+	output := &ListHapgsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHapgsRequest{Request: req, Input: input}
 }
 
@@ -676,7 +715,10 @@ func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
 		input = &ListHsmsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHsmsOutput{})
+	output := &ListHsmsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHsmsRequest{Request: req, Input: input}
 }
 
@@ -727,7 +769,10 @@ func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaC
 		input = &ListLunaClientsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLunaClientsOutput{})
+	output := &ListLunaClientsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListLunaClientsRequest{Request: req, Input: input}
 }
 
@@ -773,7 +818,10 @@ func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) L
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -819,7 +867,10 @@ func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
 		input = &ModifyHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyHapgOutput{})
+	output := &ModifyHapgOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyHapgRequest{Request: req, Input: input}
 }
 
@@ -871,7 +922,10 @@ func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) ModifyHsmRequest {
 		input = &ModifyHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyHsmOutput{})
+	output := &ModifyHsmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyHsmRequest{Request: req, Input: input}
 }
 
@@ -920,7 +974,10 @@ func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyL
 		input = &ModifyLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyLunaClientOutput{})
+	output := &ModifyLunaClientOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyLunaClientRequest{Request: req, Input: input}
 }
 
@@ -969,7 +1026,10 @@ func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceIn
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -1039,6 +1099,8 @@ func (s *AddTagsToResourceInput) SetTagList(v []Tag) *AddTagsToResourceInput {
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the operation.
 	//
 	// Status is a required field
@@ -1053,6 +1115,11 @@ func (s AddTagsToResourceOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -1107,6 +1174,8 @@ func (s *CreateHapgInput) SetLabel(v string) *CreateHapgInput {
 type CreateHapgOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the high-availability partition group.
 	HapgArn *string `type:"string"`
 }
@@ -1119,6 +1188,11 @@ func (s CreateHapgOutput) String() string {
 // GoString returns the string representation
 func (s CreateHapgOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHapgOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHapgArn sets the HapgArn field's value.
@@ -1263,6 +1337,8 @@ func (s *CreateHsmInput) SetSyslogIp(v string) *CreateHsmInput {
 type CreateHsmOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the HSM.
 	HsmArn *string `type:"string"`
 }
@@ -1275,6 +1351,11 @@ func (s CreateHsmOutput) String() string {
 // GoString returns the string representation
 func (s CreateHsmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHsmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHsmArn sets the HsmArn field's value.
@@ -1342,6 +1423,8 @@ func (s *CreateLunaClientInput) SetLabel(v string) *CreateLunaClientInput {
 type CreateLunaClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the client.
 	ClientArn *string `type:"string"`
 }
@@ -1354,6 +1437,11 @@ func (s CreateLunaClientOutput) String() string {
 // GoString returns the string representation
 func (s CreateLunaClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLunaClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientArn sets the ClientArn field's value.
@@ -1408,6 +1496,8 @@ func (s *DeleteHapgInput) SetHapgArn(v string) *DeleteHapgInput {
 type DeleteHapgOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the action.
 	//
 	// Status is a required field
@@ -1422,6 +1512,11 @@ func (s DeleteHapgOutput) String() string {
 // GoString returns the string representation
 func (s DeleteHapgOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteHapgOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -1476,6 +1571,8 @@ func (s *DeleteHsmInput) SetHsmArn(v string) *DeleteHsmInput {
 type DeleteHsmOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the operation.
 	//
 	// Status is a required field
@@ -1490,6 +1587,11 @@ func (s DeleteHsmOutput) String() string {
 // GoString returns the string representation
 func (s DeleteHsmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteHsmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -1542,6 +1644,8 @@ func (s *DeleteLunaClientInput) SetClientArn(v string) *DeleteLunaClientInput {
 type DeleteLunaClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the action.
 	//
 	// Status is a required field
@@ -1556,6 +1660,11 @@ func (s DeleteLunaClientOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLunaClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLunaClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -1610,6 +1719,8 @@ func (s *DescribeHapgInput) SetHapgArn(v string) *DescribeHapgInput {
 type DescribeHapgOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the high-availability partition group.
 	HapgArn *string `type:"string"`
 
@@ -1647,6 +1758,11 @@ func (s DescribeHapgOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHapgOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHapgOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHapgArn sets the HapgArn field's value.
@@ -1744,6 +1860,8 @@ func (s *DescribeHsmInput) SetHsmSerialNumber(v string) *DescribeHsmInput {
 type DescribeHsmOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Availability Zone that the HSM is in.
 	AvailabilityZone *string `type:"string"`
 
@@ -1820,6 +1938,11 @@ func (s DescribeHsmOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHsmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHsmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailabilityZone sets the AvailabilityZone field's value.
@@ -1985,6 +2108,8 @@ func (s *DescribeLunaClientInput) SetClientArn(v string) *DescribeLunaClientInpu
 type DescribeLunaClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The certificate installed on the HSMs used by this client.
 	Certificate *string `min:"600" type:"string"`
 
@@ -2009,6 +2134,11 @@ func (s DescribeLunaClientOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLunaClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLunaClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificate sets the Certificate field's value.
@@ -2115,6 +2245,8 @@ func (s *GetConfigInput) SetHapgList(v []string) *GetConfigInput {
 type GetConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The certificate file containing the server.pem files of the HSMs.
 	ConfigCred *string `type:"string"`
 
@@ -2133,6 +2265,11 @@ func (s GetConfigOutput) String() string {
 // GoString returns the string representation
 func (s GetConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigCred sets the ConfigCred field's value.
@@ -2173,6 +2310,8 @@ func (s ListAvailableZonesInput) GoString() string {
 type ListAvailableZonesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of Availability Zones that have available AWS CloudHSM capacity.
 	AZList []string `type:"list"`
 }
@@ -2185,6 +2324,11 @@ func (s ListAvailableZonesOutput) String() string {
 // GoString returns the string representation
 func (s ListAvailableZonesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAvailableZonesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAZList sets the AZList field's value.
@@ -2222,6 +2366,8 @@ func (s *ListHapgsInput) SetNextToken(v string) *ListHapgsInput {
 type ListHapgsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of high-availability partition groups.
 	//
 	// HapgList is a required field
@@ -2240,6 +2386,11 @@ func (s ListHapgsOutput) String() string {
 // GoString returns the string representation
 func (s ListHapgsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHapgsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHapgList sets the HapgList field's value.
@@ -2284,6 +2435,8 @@ func (s *ListHsmsInput) SetNextToken(v string) *ListHsmsInput {
 type ListHsmsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of ARNs that identify the HSMs.
 	HsmList []string `type:"list"`
 
@@ -2300,6 +2453,11 @@ func (s ListHsmsOutput) String() string {
 // GoString returns the string representation
 func (s ListHsmsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHsmsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHsmList sets the HsmList field's value.
@@ -2343,6 +2501,8 @@ func (s *ListLunaClientsInput) SetNextToken(v string) *ListLunaClientsInput {
 type ListLunaClientsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of clients.
 	//
 	// ClientList is a required field
@@ -2361,6 +2521,11 @@ func (s ListLunaClientsOutput) String() string {
 // GoString returns the string representation
 func (s ListLunaClientsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLunaClientsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientList sets the ClientList field's value.
@@ -2419,6 +2584,8 @@ func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResource
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// One or more tags.
 	//
 	// TagList is a required field
@@ -2433,6 +2600,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -2504,6 +2676,8 @@ func (s *ModifyHapgInput) SetPartitionSerialList(v []string) *ModifyHapgInput {
 type ModifyHapgOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the high-availability partition group.
 	HapgArn *string `type:"string"`
 }
@@ -2516,6 +2690,11 @@ func (s ModifyHapgOutput) String() string {
 // GoString returns the string representation
 func (s ModifyHapgOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyHapgOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHapgArn sets the HapgArn field's value.
@@ -2621,6 +2800,8 @@ func (s *ModifyHsmInput) SetSyslogIp(v string) *ModifyHsmInput {
 type ModifyHsmOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the HSM.
 	HsmArn *string `type:"string"`
 }
@@ -2633,6 +2814,11 @@ func (s ModifyHsmOutput) String() string {
 // GoString returns the string representation
 func (s ModifyHsmOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyHsmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHsmArn sets the HsmArn field's value.
@@ -2703,6 +2889,8 @@ func (s *ModifyLunaClientInput) SetClientArn(v string) *ModifyLunaClientInput {
 type ModifyLunaClientOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the client.
 	ClientArn *string `type:"string"`
 }
@@ -2715,6 +2903,11 @@ func (s ModifyLunaClientOutput) String() string {
 // GoString returns the string representation
 func (s ModifyLunaClientOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyLunaClientOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClientArn sets the ClientArn field's value.
@@ -2785,6 +2978,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeyList(v []string) *RemoveTagsFromR
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the operation.
 	//
 	// Status is a required field
@@ -2799,6 +2994,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.

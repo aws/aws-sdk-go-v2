@@ -51,7 +51,10 @@ func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInpu
 		input = &AssociateRoleToGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateRoleToGroupOutput{})
+	output := &AssociateRoleToGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateRoleToGroupRequest{Request: req, Input: input}
 }
 
@@ -100,7 +103,10 @@ func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServic
 		input = &AssociateServiceRoleToAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateServiceRoleToAccountOutput{})
+	output := &AssociateServiceRoleToAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateServiceRoleToAccountRequest{Request: req, Input: input}
 }
 
@@ -148,7 +154,10 @@ func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInpu
 		input = &CreateCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCoreDefinitionOutput{})
+	output := &CreateCoreDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCoreDefinitionRequest{Request: req, Input: input}
 }
 
@@ -195,7 +204,10 @@ func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinit
 		input = &CreateCoreDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCoreDefinitionVersionOutput{})
+	output := &CreateCoreDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCoreDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -241,7 +253,10 @@ func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) Creat
 		input = &CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	output := &CreateDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
@@ -289,7 +304,10 @@ func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinition
 		input = &CreateDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeviceDefinitionOutput{})
+	output := &CreateDeviceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeviceDefinitionRequest{Request: req, Input: input}
 }
 
@@ -335,7 +353,10 @@ func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDef
 		input = &CreateDeviceDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeviceDefinitionVersionOutput{})
+	output := &CreateDeviceDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeviceDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -384,7 +405,10 @@ func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefini
 		input = &CreateFunctionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFunctionDefinitionOutput{})
+	output := &CreateFunctionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFunctionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -430,7 +454,10 @@ func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctio
 		input = &CreateFunctionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFunctionDefinitionVersionOutput{})
+	output := &CreateFunctionDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFunctionDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -477,7 +504,10 @@ func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequ
 		input = &CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	output := &CreateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGroupRequest{Request: req, Input: input}
 }
 
@@ -524,7 +554,10 @@ func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCe
 		input = &CreateGroupCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupCertificateAuthorityOutput{})
+	output := &CreateGroupCertificateAuthorityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGroupCertificateAuthorityRequest{Request: req, Input: input}
 }
 
@@ -570,7 +603,10 @@ func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) C
 		input = &CreateGroupVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupVersionOutput{})
+	output := &CreateGroupVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGroupVersionRequest{Request: req, Input: input}
 }
 
@@ -618,7 +654,10 @@ func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinition
 		input = &CreateLoggerDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoggerDefinitionOutput{})
+	output := &CreateLoggerDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLoggerDefinitionRequest{Request: req, Input: input}
 }
 
@@ -664,7 +703,10 @@ func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDef
 		input = &CreateLoggerDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoggerDefinitionVersionOutput{})
+	output := &CreateLoggerDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLoggerDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -712,7 +754,10 @@ func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscripti
 		input = &CreateSubscriptionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubscriptionDefinitionOutput{})
+	output := &CreateSubscriptionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -758,7 +803,10 @@ func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSub
 		input = &CreateSubscriptionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubscriptionDefinitionVersionOutput{})
+	output := &CreateSubscriptionDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSubscriptionDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -805,7 +853,10 @@ func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInpu
 		input = &DeleteCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCoreDefinitionOutput{})
+	output := &DeleteCoreDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCoreDefinitionRequest{Request: req, Input: input}
 }
 
@@ -852,7 +903,10 @@ func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinition
 		input = &DeleteDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeviceDefinitionOutput{})
+	output := &DeleteDeviceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDeviceDefinitionRequest{Request: req, Input: input}
 }
 
@@ -899,7 +953,10 @@ func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefini
 		input = &DeleteFunctionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFunctionDefinitionOutput{})
+	output := &DeleteFunctionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFunctionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -945,7 +1002,10 @@ func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequ
 		input = &DeleteGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGroupOutput{})
+	output := &DeleteGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteGroupRequest{Request: req, Input: input}
 }
 
@@ -992,7 +1052,10 @@ func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinition
 		input = &DeleteLoggerDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoggerDefinitionOutput{})
+	output := &DeleteLoggerDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLoggerDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1039,7 +1102,10 @@ func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscripti
 		input = &DeleteSubscriptionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriptionDefinitionOutput{})
+	output := &DeleteSubscriptionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1085,7 +1151,10 @@ func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFro
 		input = &DisassociateRoleFromGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateRoleFromGroupOutput{})
+	output := &DisassociateRoleFromGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateRoleFromGroupRequest{Request: req, Input: input}
 }
 
@@ -1132,7 +1201,10 @@ func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *Disassocia
 		input = &DisassociateServiceRoleFromAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateServiceRoleFromAccountOutput{})
+	output := &DisassociateServiceRoleFromAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateServiceRoleFromAccountRequest{Request: req, Input: input}
 }
 
@@ -1178,7 +1250,10 @@ func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) Get
 		input = &GetAssociatedRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAssociatedRoleOutput{})
+	output := &GetAssociatedRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAssociatedRoleRequest{Request: req, Input: input}
 }
 
@@ -1224,7 +1299,10 @@ func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput)
 		input = &GetConnectivityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectivityInfoOutput{})
+	output := &GetConnectivityInfoOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConnectivityInfoRequest{Request: req, Input: input}
 }
 
@@ -1270,7 +1348,10 @@ func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) Get
 		input = &GetCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCoreDefinitionOutput{})
+	output := &GetCoreDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCoreDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1316,7 +1397,10 @@ func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVer
 		input = &GetCoreDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCoreDefinitionVersionOutput{})
+	output := &GetCoreDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCoreDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -1362,7 +1446,10 @@ func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput)
 		input = &GetDeploymentStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentStatusOutput{})
+	output := &GetDeploymentStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeploymentStatusRequest{Request: req, Input: input}
 }
 
@@ -1408,7 +1495,10 @@ func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput)
 		input = &GetDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceDefinitionOutput{})
+	output := &GetDeviceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeviceDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1454,7 +1544,10 @@ func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitio
 		input = &GetDeviceDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceDefinitionVersionOutput{})
+	output := &GetDeviceDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDeviceDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -1501,7 +1594,10 @@ func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionIn
 		input = &GetFunctionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFunctionDefinitionOutput{})
+	output := &GetFunctionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFunctionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1548,7 +1644,10 @@ func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefin
 		input = &GetFunctionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFunctionDefinitionVersionOutput{})
+	output := &GetFunctionDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFunctionDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -1594,7 +1693,10 @@ func (c *Greengrass) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 		input = &GetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupOutput{})
+	output := &GetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupRequest{Request: req, Input: input}
 }
 
@@ -1640,7 +1742,10 @@ func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertific
 		input = &GetGroupCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupCertificateAuthorityOutput{})
+	output := &GetGroupCertificateAuthorityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupCertificateAuthorityRequest{Request: req, Input: input}
 }
 
@@ -1686,7 +1791,10 @@ func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCert
 		input = &GetGroupCertificateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupCertificateConfigurationOutput{})
+	output := &GetGroupCertificateConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupCertificateConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1732,7 +1840,10 @@ func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) GetGrou
 		input = &GetGroupVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupVersionOutput{})
+	output := &GetGroupVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetGroupVersionRequest{Request: req, Input: input}
 }
 
@@ -1778,7 +1889,10 @@ func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput)
 		input = &GetLoggerDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoggerDefinitionOutput{})
+	output := &GetLoggerDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetLoggerDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1824,7 +1938,10 @@ func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitio
 		input = &GetLoggerDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoggerDefinitionVersionOutput{})
+	output := &GetLoggerDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetLoggerDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -1870,7 +1987,10 @@ func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAcc
 		input = &GetServiceRoleForAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServiceRoleForAccountOutput{})
+	output := &GetServiceRoleForAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetServiceRoleForAccountRequest{Request: req, Input: input}
 }
 
@@ -1916,7 +2036,10 @@ func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefi
 		input = &GetSubscriptionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSubscriptionDefinitionOutput{})
+	output := &GetSubscriptionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1962,7 +2085,10 @@ func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscript
 		input = &GetSubscriptionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSubscriptionDefinitionVersionOutput{})
+	output := &GetSubscriptionDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSubscriptionDefinitionVersionRequest{Request: req, Input: input}
 }
 
@@ -2008,7 +2134,10 @@ func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinition
 		input = &ListCoreDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCoreDefinitionVersionsOutput{})
+	output := &ListCoreDefinitionVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCoreDefinitionVersionsRequest{Request: req, Input: input}
 }
 
@@ -2054,7 +2183,10 @@ func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput)
 		input = &ListCoreDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCoreDefinitionsOutput{})
+	output := &ListCoreDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCoreDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -2100,7 +2232,10 @@ func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 		input = &ListDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentsOutput{})
+	output := &ListDeploymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeploymentsRequest{Request: req, Input: input}
 }
 
@@ -2146,7 +2281,10 @@ func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefini
 		input = &ListDeviceDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeviceDefinitionVersionsOutput{})
+	output := &ListDeviceDefinitionVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeviceDefinitionVersionsRequest{Request: req, Input: input}
 }
 
@@ -2192,7 +2330,10 @@ func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsIn
 		input = &ListDeviceDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeviceDefinitionsOutput{})
+	output := &ListDeviceDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeviceDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -2238,7 +2379,10 @@ func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDe
 		input = &ListFunctionDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFunctionDefinitionVersionsOutput{})
+	output := &ListFunctionDefinitionVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFunctionDefinitionVersionsRequest{Request: req, Input: input}
 }
 
@@ -2284,7 +2428,10 @@ func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitio
 		input = &ListFunctionDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFunctionDefinitionsOutput{})
+	output := &ListFunctionDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFunctionDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -2330,7 +2477,10 @@ func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCert
 		input = &ListGroupCertificateAuthoritiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupCertificateAuthoritiesOutput{})
+	output := &ListGroupCertificateAuthoritiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupCertificateAuthoritiesRequest{Request: req, Input: input}
 }
 
@@ -2376,7 +2526,10 @@ func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) Lis
 		input = &ListGroupVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupVersionsOutput{})
+	output := &ListGroupVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupVersionsRequest{Request: req, Input: input}
 }
 
@@ -2422,7 +2575,10 @@ func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest
 		input = &ListGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsOutput{})
+	output := &ListGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGroupsRequest{Request: req, Input: input}
 }
 
@@ -2468,7 +2624,10 @@ func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefini
 		input = &ListLoggerDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLoggerDefinitionVersionsOutput{})
+	output := &ListLoggerDefinitionVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListLoggerDefinitionVersionsRequest{Request: req, Input: input}
 }
 
@@ -2514,7 +2673,10 @@ func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsIn
 		input = &ListLoggerDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLoggerDefinitionsOutput{})
+	output := &ListLoggerDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListLoggerDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -2560,7 +2722,10 @@ func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscr
 		input = &ListSubscriptionDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionDefinitionVersionsOutput{})
+	output := &ListSubscriptionDefinitionVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSubscriptionDefinitionVersionsRequest{Request: req, Input: input}
 }
 
@@ -2606,7 +2771,10 @@ func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionD
 		input = &ListSubscriptionDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionDefinitionsOutput{})
+	output := &ListSubscriptionDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSubscriptionDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -2652,7 +2820,10 @@ func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) Reset
 		input = &ResetDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDeploymentsOutput{})
+	output := &ResetDeploymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetDeploymentsRequest{Request: req, Input: input}
 }
 
@@ -2700,7 +2871,10 @@ func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfo
 		input = &UpdateConnectivityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConnectivityInfoOutput{})
+	output := &UpdateConnectivityInfoOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConnectivityInfoRequest{Request: req, Input: input}
 }
 
@@ -2746,7 +2920,10 @@ func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInpu
 		input = &UpdateCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCoreDefinitionOutput{})
+	output := &UpdateCoreDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCoreDefinitionRequest{Request: req, Input: input}
 }
 
@@ -2792,7 +2969,10 @@ func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinition
 		input = &UpdateDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeviceDefinitionOutput{})
+	output := &UpdateDeviceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDeviceDefinitionRequest{Request: req, Input: input}
 }
 
@@ -2838,7 +3018,10 @@ func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefini
 		input = &UpdateFunctionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionDefinitionOutput{})
+	output := &UpdateFunctionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFunctionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -2884,7 +3067,10 @@ func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequ
 		input = &UpdateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	output := &UpdateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGroupRequest{Request: req, Input: input}
 }
 
@@ -2930,7 +3116,10 @@ func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGro
 		input = &UpdateGroupCertificateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupCertificateConfigurationOutput{})
+	output := &UpdateGroupCertificateConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateGroupCertificateConfigurationRequest{Request: req, Input: input}
 }
 
@@ -2976,7 +3165,10 @@ func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinition
 		input = &UpdateLoggerDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLoggerDefinitionOutput{})
+	output := &UpdateLoggerDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateLoggerDefinitionRequest{Request: req, Input: input}
 }
 
@@ -3022,7 +3214,10 @@ func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscripti
 		input = &UpdateSubscriptionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubscriptionDefinitionOutput{})
+	output := &UpdateSubscriptionDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
@@ -3077,6 +3272,8 @@ func (s *AssociateRoleToGroupInput) SetRoleArn(v string) *AssociateRoleToGroupIn
 type AssociateRoleToGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time the role arn was associated to your group.
 	AssociatedAt *string `type:"string"`
 }
@@ -3089,6 +3286,11 @@ func (s AssociateRoleToGroupOutput) String() string {
 // GoString returns the string representation
 func (s AssociateRoleToGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateRoleToGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociatedAt sets the AssociatedAt field's value.
@@ -3125,6 +3327,8 @@ func (s *AssociateServiceRoleToAccountInput) SetRoleArn(v string) *AssociateServ
 type AssociateServiceRoleToAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time when the service role was associated to the account.
 	AssociatedAt *string `type:"string"`
 }
@@ -3137,6 +3341,11 @@ func (s AssociateServiceRoleToAccountOutput) String() string {
 // GoString returns the string representation
 func (s AssociateServiceRoleToAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateServiceRoleToAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociatedAt sets the AssociatedAt field's value.
@@ -3319,6 +3528,8 @@ func (s *CreateCoreDefinitionInput) SetName(v string) *CreateCoreDefinitionInput
 type CreateCoreDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -3342,6 +3553,11 @@ func (s CreateCoreDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s CreateCoreDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -3444,6 +3660,8 @@ func (s *CreateCoreDefinitionVersionInput) SetCores(v []Core) *CreateCoreDefinit
 type CreateCoreDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -3461,6 +3679,11 @@ func (s CreateCoreDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateCoreDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCoreDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -3566,6 +3789,8 @@ func (s *CreateDeploymentInput) SetGroupVersionId(v string) *CreateDeploymentInp
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The arn of the deployment.
 	DeploymentArn *string `type:"string"`
 
@@ -3581,6 +3806,11 @@ func (s CreateDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentArn sets the DeploymentArn field's value.
@@ -3639,6 +3869,8 @@ func (s *CreateDeviceDefinitionInput) SetName(v string) *CreateDeviceDefinitionI
 type CreateDeviceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -3662,6 +3894,11 @@ func (s CreateDeviceDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeviceDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -3764,6 +4001,8 @@ func (s *CreateDeviceDefinitionVersionInput) SetDevices(v []Device) *CreateDevic
 type CreateDeviceDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -3781,6 +4020,11 @@ func (s CreateDeviceDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeviceDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeviceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -3851,6 +4095,8 @@ func (s *CreateFunctionDefinitionInput) SetName(v string) *CreateFunctionDefinit
 type CreateFunctionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -3874,6 +4120,11 @@ func (s CreateFunctionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s CreateFunctionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -3976,6 +4227,8 @@ func (s *CreateFunctionDefinitionVersionInput) SetFunctions(v []Function) *Creat
 type CreateFunctionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -3993,6 +4246,11 @@ func (s CreateFunctionDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateFunctionDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFunctionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4069,6 +4327,8 @@ func (s *CreateGroupCertificateAuthorityInput) SetGroupId(v string) *CreateGroup
 type CreateGroupCertificateAuthorityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the group certificate authority.
 	GroupCertificateAuthorityArn *string `type:"string"`
 }
@@ -4081,6 +4341,11 @@ func (s CreateGroupCertificateAuthorityOutput) String() string {
 // GoString returns the string representation
 func (s CreateGroupCertificateAuthorityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGroupCertificateAuthorityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
@@ -4133,6 +4398,8 @@ func (s *CreateGroupInput) SetName(v string) *CreateGroupInput {
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -4156,6 +4423,11 @@ func (s CreateGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4290,6 +4562,8 @@ func (s *CreateGroupVersionInput) SetSubscriptionDefinitionVersionArn(v string) 
 type CreateGroupVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -4307,6 +4581,11 @@ func (s CreateGroupVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateGroupVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGroupVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4377,6 +4656,8 @@ func (s *CreateLoggerDefinitionInput) SetName(v string) *CreateLoggerDefinitionI
 type CreateLoggerDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -4400,6 +4681,11 @@ func (s CreateLoggerDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s CreateLoggerDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4502,6 +4788,8 @@ func (s *CreateLoggerDefinitionVersionInput) SetLoggers(v []Logger) *CreateLogge
 type CreateLoggerDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -4519,6 +4807,11 @@ func (s CreateLoggerDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateLoggerDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLoggerDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4589,6 +4882,8 @@ func (s *CreateSubscriptionDefinitionInput) SetName(v string) *CreateSubscriptio
 type CreateSubscriptionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -4612,6 +4907,11 @@ func (s CreateSubscriptionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s CreateSubscriptionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4714,6 +5014,8 @@ func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptions(v []Subscrip
 type CreateSubscriptionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -4731,6 +5033,11 @@ func (s CreateSubscriptionDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateSubscriptionDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSubscriptionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -4877,6 +5184,8 @@ func (s *DeleteCoreDefinitionInput) SetCoreDefinitionId(v string) *DeleteCoreDef
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionResponse
 type DeleteCoreDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4887,6 +5196,11 @@ func (s DeleteCoreDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCoreDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinitionRequest
@@ -4930,6 +5244,8 @@ func (s *DeleteDeviceDefinitionInput) SetDeviceDefinitionId(v string) *DeleteDev
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinitionResponse
 type DeleteDeviceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4940,6 +5256,11 @@ func (s DeleteDeviceDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDeviceDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinitionRequest
@@ -4983,6 +5304,8 @@ func (s *DeleteFunctionDefinitionInput) SetFunctionDefinitionId(v string) *Delet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinitionResponse
 type DeleteFunctionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4993,6 +5316,11 @@ func (s DeleteFunctionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFunctionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroupRequest
@@ -5036,6 +5364,8 @@ func (s *DeleteGroupInput) SetGroupId(v string) *DeleteGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroupResponse
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5046,6 +5376,11 @@ func (s DeleteGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinitionRequest
@@ -5089,6 +5424,8 @@ func (s *DeleteLoggerDefinitionInput) SetLoggerDefinitionId(v string) *DeleteLog
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinitionResponse
 type DeleteLoggerDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5099,6 +5436,11 @@ func (s DeleteLoggerDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLoggerDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinitionRequest
@@ -5142,6 +5484,8 @@ func (s *DeleteSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinitionResponse
 type DeleteSubscriptionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5152,6 +5496,11 @@ func (s DeleteSubscriptionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSubscriptionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information on the deployment
@@ -5335,6 +5684,8 @@ func (s *DisassociateRoleFromGroupInput) SetGroupId(v string) *DisassociateRoleF
 type DisassociateRoleFromGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time when the role was disassociated from the group.
 	DisassociatedAt *string `type:"string"`
 }
@@ -5347,6 +5698,11 @@ func (s DisassociateRoleFromGroupOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateRoleFromGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateRoleFromGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDisassociatedAt sets the DisassociatedAt field's value.
@@ -5374,6 +5730,8 @@ func (s DisassociateServiceRoleFromAccountInput) GoString() string {
 type DisassociateServiceRoleFromAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time when the service role was disassociated from the account.
 	DisassociatedAt *string `type:"string"`
 }
@@ -5386,6 +5744,11 @@ func (s DisassociateServiceRoleFromAccountOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateServiceRoleFromAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateServiceRoleFromAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDisassociatedAt sets the DisassociatedAt field's value.
@@ -5634,6 +5997,8 @@ func (s *GetAssociatedRoleInput) SetGroupId(v string) *GetAssociatedRoleInput {
 type GetAssociatedRoleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time when the role was associated for the group.
 	AssociatedAt *string `type:"string"`
 
@@ -5649,6 +6014,11 @@ func (s GetAssociatedRoleOutput) String() string {
 // GoString returns the string representation
 func (s GetAssociatedRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAssociatedRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociatedAt sets the AssociatedAt field's value.
@@ -5706,6 +6076,8 @@ func (s *GetConnectivityInfoInput) SetThingName(v string) *GetConnectivityInfoIn
 type GetConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Connectivity info list
 	ConnectivityInfo []ConnectivityInfo `type:"list"`
 
@@ -5720,6 +6092,11 @@ func (s GetConnectivityInfoOutput) String() string {
 // GoString returns the string representation
 func (s GetConnectivityInfoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConnectivityInfoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnectivityInfo sets the ConnectivityInfo field's value.
@@ -5776,6 +6153,8 @@ func (s *GetCoreDefinitionInput) SetCoreDefinitionId(v string) *GetCoreDefinitio
 type GetCoreDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -5799,6 +6178,11 @@ func (s GetCoreDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s GetCoreDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -5898,6 +6282,8 @@ func (s *GetCoreDefinitionVersionInput) SetCoreDefinitionVersionId(v string) *Ge
 type GetCoreDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the core definition version.
 	Arn *string `type:"string"`
 
@@ -5922,6 +6308,11 @@ func (s GetCoreDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetCoreDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCoreDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6010,6 +6401,8 @@ func (s *GetDeploymentStatusInput) SetGroupId(v string) *GetDeploymentStatusInpu
 type GetDeploymentStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Status of the deployment.
 	DeploymentStatus *string `type:"string"`
 
@@ -6034,6 +6427,11 @@ func (s GetDeploymentStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetDeploymentStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentStatus sets the DeploymentStatus field's value.
@@ -6108,6 +6506,8 @@ func (s *GetDeviceDefinitionInput) SetDeviceDefinitionId(v string) *GetDeviceDef
 type GetDeviceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -6131,6 +6531,11 @@ func (s GetDeviceDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s GetDeviceDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6230,6 +6635,8 @@ func (s *GetDeviceDefinitionVersionInput) SetDeviceDefinitionVersionId(v string)
 type GetDeviceDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the device definition version.
 	Arn *string `type:"string"`
 
@@ -6254,6 +6661,11 @@ func (s GetDeviceDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetDeviceDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeviceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6328,6 +6740,8 @@ func (s *GetFunctionDefinitionInput) SetFunctionDefinitionId(v string) *GetFunct
 type GetFunctionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -6351,6 +6765,11 @@ func (s GetFunctionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s GetFunctionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6451,6 +6870,8 @@ func (s *GetFunctionDefinitionVersionInput) SetFunctionDefinitionVersionId(v str
 type GetFunctionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the function definition version.
 	Arn *string `type:"string"`
 
@@ -6475,6 +6896,11 @@ func (s GetFunctionDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetFunctionDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFunctionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6563,6 +6989,8 @@ func (s *GetGroupCertificateAuthorityInput) SetGroupId(v string) *GetGroupCertif
 type GetGroupCertificateAuthorityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the certificate authority for the group.
 	GroupCertificateAuthorityArn *string `type:"string"`
 
@@ -6581,6 +7009,11 @@ func (s GetGroupCertificateAuthorityOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupCertificateAuthorityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupCertificateAuthorityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
@@ -6643,6 +7076,8 @@ func (s *GetGroupCertificateConfigurationInput) SetGroupId(v string) *GetGroupCe
 type GetGroupCertificateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CertificateAuthorityExpiryInMilliseconds *string `type:"string"`
 
 	CertificateExpiryInMilliseconds *string `type:"string"`
@@ -6658,6 +7093,11 @@ func (s GetGroupCertificateConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupCertificateConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupCertificateConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateAuthorityExpiryInMilliseconds sets the CertificateAuthorityExpiryInMilliseconds field's value.
@@ -6720,6 +7160,8 @@ func (s *GetGroupInput) SetGroupId(v string) *GetGroupInput {
 type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -6743,6 +7185,11 @@ func (s GetGroupOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6843,6 +7290,8 @@ func (s *GetGroupVersionInput) SetGroupVersionId(v string) *GetGroupVersionInput
 type GetGroupVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the group version.
 	Arn *string `type:"string"`
 
@@ -6867,6 +7316,11 @@ func (s GetGroupVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetGroupVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -6941,6 +7395,8 @@ func (s *GetLoggerDefinitionInput) SetLoggerDefinitionId(v string) *GetLoggerDef
 type GetLoggerDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -6964,6 +7420,11 @@ func (s GetLoggerDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s GetLoggerDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -7064,6 +7525,8 @@ func (s *GetLoggerDefinitionVersionInput) SetLoggerDefinitionVersionId(v string)
 type GetLoggerDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the logger definition version.
 	Arn *string `type:"string"`
 
@@ -7088,6 +7551,11 @@ func (s GetLoggerDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetLoggerDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLoggerDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -7139,6 +7607,8 @@ func (s GetServiceRoleForAccountInput) GoString() string {
 type GetServiceRoleForAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Time when the service role was associated to the account.
 	AssociatedAt *string `type:"string"`
 
@@ -7154,6 +7624,11 @@ func (s GetServiceRoleForAccountOutput) String() string {
 // GoString returns the string representation
 func (s GetServiceRoleForAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetServiceRoleForAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAssociatedAt sets the AssociatedAt field's value.
@@ -7210,6 +7685,8 @@ func (s *GetSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *
 type GetSubscriptionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Arn *string `type:"string"`
 
 	CreationTimestamp *string `type:"string"`
@@ -7233,6 +7710,11 @@ func (s GetSubscriptionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s GetSubscriptionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -7333,6 +7815,8 @@ func (s *GetSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionVersion
 type GetSubscriptionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Arn of the subscription definition version.
 	Arn *string `type:"string"`
 
@@ -7357,6 +7841,11 @@ func (s GetSubscriptionDefinitionVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetSubscriptionDefinitionVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSubscriptionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -7621,6 +8110,8 @@ func (s *ListCoreDefinitionVersionsInput) SetNextToken(v string) *ListCoreDefini
 type ListCoreDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	NextToken *string `type:"string"`
 
 	Versions []VersionInformation `type:"list"`
@@ -7634,6 +8125,11 @@ func (s ListCoreDefinitionVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListCoreDefinitionVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCoreDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7683,6 +8179,8 @@ func (s *ListCoreDefinitionsInput) SetNextToken(v string) *ListCoreDefinitionsIn
 type ListCoreDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
@@ -7696,6 +8194,11 @@ func (s ListCoreDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s ListCoreDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCoreDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefinitions sets the Definitions field's value.
@@ -7768,6 +8271,8 @@ func (s *ListDeploymentsInput) SetNextToken(v string) *ListDeploymentsInput {
 type ListDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of deployments for the requested groups
 	Deployments []Deployment `type:"list"`
 
@@ -7784,6 +8289,11 @@ func (s ListDeploymentsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeploymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeployments sets the Deployments field's value.
@@ -7856,6 +8366,8 @@ func (s *ListDeviceDefinitionVersionsInput) SetNextToken(v string) *ListDeviceDe
 type ListDeviceDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	NextToken *string `type:"string"`
 
 	Versions []VersionInformation `type:"list"`
@@ -7869,6 +8381,11 @@ func (s ListDeviceDefinitionVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeviceDefinitionVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeviceDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7918,6 +8435,8 @@ func (s *ListDeviceDefinitionsInput) SetNextToken(v string) *ListDeviceDefinitio
 type ListDeviceDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
@@ -7931,6 +8450,11 @@ func (s ListDeviceDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s ListDeviceDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeviceDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefinitions sets the Definitions field's value.
@@ -8003,6 +8527,8 @@ func (s *ListFunctionDefinitionVersionsInput) SetNextToken(v string) *ListFuncti
 type ListFunctionDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	NextToken *string `type:"string"`
 
 	Versions []VersionInformation `type:"list"`
@@ -8016,6 +8542,11 @@ func (s ListFunctionDefinitionVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListFunctionDefinitionVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFunctionDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -8065,6 +8596,8 @@ func (s *ListFunctionDefinitionsInput) SetNextToken(v string) *ListFunctionDefin
 type ListFunctionDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
@@ -8078,6 +8611,11 @@ func (s ListFunctionDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s ListFunctionDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFunctionDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefinitions sets the Definitions field's value.
@@ -8134,6 +8672,8 @@ func (s *ListGroupCertificateAuthoritiesInput) SetGroupId(v string) *ListGroupCe
 type ListGroupCertificateAuthoritiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of certificate authorities associated with the group.
 	GroupCertificateAuthorities []GroupCertificateAuthorityProperties `type:"list"`
 }
@@ -8146,6 +8686,11 @@ func (s ListGroupCertificateAuthoritiesOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupCertificateAuthoritiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupCertificateAuthoritiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroupCertificateAuthorities sets the GroupCertificateAuthorities field's value.
@@ -8212,6 +8757,8 @@ func (s *ListGroupVersionsInput) SetNextToken(v string) *ListGroupVersionsInput 
 type ListGroupVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	NextToken *string `type:"string"`
 
 	Versions []VersionInformation `type:"list"`
@@ -8225,6 +8772,11 @@ func (s ListGroupVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -8274,6 +8826,8 @@ func (s *ListGroupsInput) SetNextToken(v string) *ListGroupsInput {
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Groups
 	Groups []GroupInformation `type:"list"`
 
@@ -8290,6 +8844,11 @@ func (s ListGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ListGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGroups sets the Groups field's value.
@@ -8362,6 +8921,8 @@ func (s *ListLoggerDefinitionVersionsInput) SetNextToken(v string) *ListLoggerDe
 type ListLoggerDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	NextToken *string `type:"string"`
 
 	Versions []VersionInformation `type:"list"`
@@ -8375,6 +8936,11 @@ func (s ListLoggerDefinitionVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListLoggerDefinitionVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLoggerDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -8424,6 +8990,8 @@ func (s *ListLoggerDefinitionsInput) SetNextToken(v string) *ListLoggerDefinitio
 type ListLoggerDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
@@ -8437,6 +9005,11 @@ func (s ListLoggerDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s ListLoggerDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLoggerDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefinitions sets the Definitions field's value.
@@ -8509,6 +9082,8 @@ func (s *ListSubscriptionDefinitionVersionsInput) SetSubscriptionDefinitionId(v 
 type ListSubscriptionDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	NextToken *string `type:"string"`
 
 	Versions []VersionInformation `type:"list"`
@@ -8522,6 +9097,11 @@ func (s ListSubscriptionDefinitionVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListSubscriptionDefinitionVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSubscriptionDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -8571,6 +9151,8 @@ func (s *ListSubscriptionDefinitionsInput) SetNextToken(v string) *ListSubscript
 type ListSubscriptionDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Definitions []DefinitionInformation `type:"list"`
 
 	NextToken *string `type:"string"`
@@ -8584,6 +9166,11 @@ func (s ListSubscriptionDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s ListSubscriptionDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSubscriptionDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDefinitions sets the Definitions field's value.
@@ -8745,6 +9332,8 @@ func (s *ResetDeploymentsInput) SetGroupId(v string) *ResetDeploymentsInput {
 type ResetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The arn of the reset deployment.
 	DeploymentArn *string `type:"string"`
 
@@ -8760,6 +9349,11 @@ func (s ResetDeploymentsOutput) String() string {
 // GoString returns the string representation
 func (s ResetDeploymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetDeploymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentArn sets the DeploymentArn field's value.
@@ -8903,6 +9497,8 @@ func (s *UpdateConnectivityInfoInput) SetThingName(v string) *UpdateConnectivity
 type UpdateConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Message *string `locationName:"message" type:"string"`
 
 	// New Version
@@ -8917,6 +9513,11 @@ func (s UpdateConnectivityInfoOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConnectivityInfoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConnectivityInfoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessage sets the Message field's value.
@@ -8980,6 +9581,8 @@ func (s *UpdateCoreDefinitionInput) SetName(v string) *UpdateCoreDefinitionInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionResponse
 type UpdateCoreDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8990,6 +9593,11 @@ func (s UpdateCoreDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCoreDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinitionRequest
@@ -9041,6 +9649,8 @@ func (s *UpdateDeviceDefinitionInput) SetName(v string) *UpdateDeviceDefinitionI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinitionResponse
 type UpdateDeviceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9051,6 +9661,11 @@ func (s UpdateDeviceDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDeviceDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinitionRequest
@@ -9102,6 +9717,8 @@ func (s *UpdateFunctionDefinitionInput) SetName(v string) *UpdateFunctionDefinit
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinitionResponse
 type UpdateFunctionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9112,6 +9729,11 @@ func (s UpdateFunctionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFunctionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfigurationRequest
@@ -9165,6 +9787,8 @@ func (s *UpdateGroupCertificateConfigurationInput) SetGroupId(v string) *UpdateG
 type UpdateGroupCertificateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	CertificateAuthorityExpiryInMilliseconds *string `type:"string"`
 
 	CertificateExpiryInMilliseconds *string `type:"string"`
@@ -9180,6 +9804,11 @@ func (s UpdateGroupCertificateConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGroupCertificateConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGroupCertificateConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCertificateAuthorityExpiryInMilliseconds sets the CertificateAuthorityExpiryInMilliseconds field's value.
@@ -9249,6 +9878,8 @@ func (s *UpdateGroupInput) SetName(v string) *UpdateGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupResponse
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9259,6 +9890,11 @@ func (s UpdateGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinitionRequest
@@ -9310,6 +9946,8 @@ func (s *UpdateLoggerDefinitionInput) SetName(v string) *UpdateLoggerDefinitionI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinitionResponse
 type UpdateLoggerDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9320,6 +9958,11 @@ func (s UpdateLoggerDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateLoggerDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinitionRequest
@@ -9371,6 +10014,8 @@ func (s *UpdateSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinitionResponse
 type UpdateSubscriptionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9381,6 +10026,11 @@ func (s UpdateSubscriptionDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSubscriptionDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information on the version

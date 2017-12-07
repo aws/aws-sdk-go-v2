@@ -52,7 +52,10 @@ func (c *DAX) CreateClusterRequest(input *CreateClusterInput) CreateClusterReque
 		input = &CreateClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterOutput{})
+	output := &CreateClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateClusterRequest{Request: req, Input: input}
 }
 
@@ -99,7 +102,10 @@ func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) Crea
 		input = &CreateParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateParameterGroupOutput{})
+	output := &CreateParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -145,7 +151,10 @@ func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateSubn
 		input = &CreateSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubnetGroupOutput{})
+	output := &CreateSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -194,7 +203,10 @@ func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorI
 		input = &DecreaseReplicationFactorInput{}
 	}
 
-	req := c.newRequest(op, input, &DecreaseReplicationFactorOutput{})
+	output := &DecreaseReplicationFactorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DecreaseReplicationFactorRequest{Request: req, Input: input}
 }
 
@@ -243,7 +255,10 @@ func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterReque
 		input = &DeleteClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	output := &DeleteClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteClusterRequest{Request: req, Input: input}
 }
 
@@ -290,7 +305,10 @@ func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) Dele
 		input = &DeleteParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteParameterGroupOutput{})
+	output := &DeleteParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -338,7 +356,10 @@ func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteSubn
 		input = &DeleteSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubnetGroupOutput{})
+	output := &DeleteSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -400,7 +421,10 @@ func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) DescribeClus
 		input = &DescribeClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	output := &DescribeClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeClustersRequest{Request: req, Input: input}
 }
 
@@ -446,7 +470,10 @@ func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersI
 		input = &DescribeDefaultParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDefaultParametersOutput{})
+	output := &DescribeDefaultParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDefaultParametersRequest{Request: req, Input: input}
 }
 
@@ -497,7 +524,10 @@ func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -544,7 +574,10 @@ func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput
 		input = &DescribeParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeParameterGroupsOutput{})
+	output := &DescribeParameterGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeParameterGroupsRequest{Request: req, Input: input}
 }
 
@@ -590,7 +623,10 @@ func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) Describe
 		input = &DescribeParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeParametersOutput{})
+	output := &DescribeParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeParametersRequest{Request: req, Input: input}
 }
 
@@ -637,7 +673,10 @@ func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) Desc
 		input = &DescribeSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubnetGroupsOutput{})
+	output := &DescribeSubnetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSubnetGroupsRequest{Request: req, Input: input}
 }
 
@@ -683,7 +722,10 @@ func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorI
 		input = &IncreaseReplicationFactorInput{}
 	}
 
-	req := c.newRequest(op, input, &IncreaseReplicationFactorOutput{})
+	output := &IncreaseReplicationFactorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return IncreaseReplicationFactorRequest{Request: req, Input: input}
 }
 
@@ -730,7 +772,10 @@ func (c *DAX) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 		input = &ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsRequest{Request: req, Input: input}
 }
 
@@ -777,7 +822,10 @@ func (c *DAX) RebootNodeRequest(input *RebootNodeInput) RebootNodeRequest {
 		input = &RebootNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootNodeOutput{})
+	output := &RebootNodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootNodeRequest{Request: req, Input: input}
 }
 
@@ -824,7 +872,10 @@ func (c *DAX) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -871,7 +922,10 @@ func (c *DAX) UntagResourceRequest(input *UntagResourceInput) UntagResourceReque
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -919,7 +973,10 @@ func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) UpdateClusterReque
 		input = &UpdateClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClusterOutput{})
+	output := &UpdateClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateClusterRequest{Request: req, Input: input}
 }
 
@@ -966,7 +1023,10 @@ func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) Upda
 		input = &UpdateParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateParameterGroupOutput{})
+	output := &UpdateParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -1012,7 +1072,10 @@ func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateSubn
 		input = &UpdateSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubnetGroupOutput{})
+	output := &UpdateSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -1398,6 +1461,8 @@ func (s *CreateClusterInput) SetTags(v []Tag) *CreateClusterInput {
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the DAX cluster that you have created.
 	Cluster *Cluster `type:"structure"`
 }
@@ -1410,6 +1475,11 @@ func (s CreateClusterOutput) String() string {
 // GoString returns the string representation
 func (s CreateClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -1472,6 +1542,8 @@ func (s *CreateParameterGroupInput) SetParameterGroupName(v string) *CreateParam
 type CreateParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of a CreateParameterGroup action.
 	ParameterGroup *ParameterGroup `type:"structure"`
 }
@@ -1484,6 +1556,11 @@ func (s CreateParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetParameterGroup sets the ParameterGroup field's value.
@@ -1560,6 +1637,8 @@ func (s *CreateSubnetGroupInput) SetSubnetIds(v []string) *CreateSubnetGroupInpu
 type CreateSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of a CreateSubnetGroup operation.
 	SubnetGroup *SubnetGroup `type:"structure"`
 }
@@ -1572,6 +1651,11 @@ func (s CreateSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubnetGroup sets the SubnetGroup field's value.
@@ -1657,6 +1741,8 @@ func (s *DecreaseReplicationFactorInput) SetNodeIdsToRemove(v []string) *Decreas
 type DecreaseReplicationFactorOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the DAX cluster, after you have decreased its replication
 	// factor.
 	Cluster *Cluster `type:"structure"`
@@ -1670,6 +1756,11 @@ func (s DecreaseReplicationFactorOutput) String() string {
 // GoString returns the string representation
 func (s DecreaseReplicationFactorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DecreaseReplicationFactorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -1722,6 +1813,8 @@ func (s *DeleteClusterInput) SetClusterName(v string) *DeleteClusterInput {
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the DAX cluster that is being deleted.
 	Cluster *Cluster `type:"structure"`
 }
@@ -1734,6 +1827,11 @@ func (s DeleteClusterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -1786,6 +1884,8 @@ func (s *DeleteParameterGroupInput) SetParameterGroupName(v string) *DeleteParam
 type DeleteParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-specified message for this action (i.e., a reason for deleting the
 	// parameter group).
 	DeletionMessage *string `type:"string"`
@@ -1799,6 +1899,11 @@ func (s DeleteParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletionMessage sets the DeletionMessage field's value.
@@ -1851,6 +1956,8 @@ func (s *DeleteSubnetGroupInput) SetSubnetGroupName(v string) *DeleteSubnetGroup
 type DeleteSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A user-specified message for this action (i.e., a reason for deleting the
 	// subnet group).
 	DeletionMessage *string `type:"string"`
@@ -1864,6 +1971,11 @@ func (s DeleteSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletionMessage sets the DeletionMessage field's value.
@@ -1924,6 +2036,8 @@ func (s *DescribeClustersInput) SetNextToken(v string) *DescribeClustersInput {
 type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The descriptions of your DAX clusters, in response to a DescribeClusters
 	// request.
 	Clusters []Cluster `type:"list"`
@@ -1940,6 +2054,11 @@ func (s DescribeClustersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClusters sets the Clusters field's value.
@@ -1997,6 +2116,8 @@ func (s *DescribeDefaultParametersInput) SetNextToken(v string) *DescribeDefault
 type DescribeDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string `type:"string"`
 
@@ -2012,6 +2133,11 @@ func (s DescribeDefaultParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDefaultParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDefaultParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2118,6 +2244,8 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of events. Each element in the array represents one event.
 	Events []Event `type:"list"`
 
@@ -2133,6 +2261,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -2199,6 +2332,8 @@ func (s *DescribeParameterGroupsInput) SetParameterGroupNames(v []string) *Descr
 type DescribeParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string `type:"string"`
 
@@ -2215,6 +2350,11 @@ func (s DescribeParameterGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeParameterGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeParameterGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2307,6 +2447,8 @@ func (s *DescribeParametersInput) SetSource(v string) *DescribeParametersInput {
 type DescribeParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string `type:"string"`
 
@@ -2323,6 +2465,11 @@ func (s DescribeParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2389,6 +2536,8 @@ func (s *DescribeSubnetGroupsInput) SetSubnetGroupNames(v []string) *DescribeSub
 type DescribeSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string `type:"string"`
 
@@ -2405,6 +2554,11 @@ func (s DescribeSubnetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSubnetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2581,6 +2735,8 @@ func (s *IncreaseReplicationFactorInput) SetNewReplicationFactor(v int64) *Incre
 type IncreaseReplicationFactorOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the DAX cluster. with its new replication factor.
 	Cluster *Cluster `type:"structure"`
 }
@@ -2593,6 +2749,11 @@ func (s IncreaseReplicationFactorOutput) String() string {
 // GoString returns the string representation
 func (s IncreaseReplicationFactorOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s IncreaseReplicationFactorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -2656,6 +2817,8 @@ func (s *ListTagsInput) SetResourceName(v string) *ListTagsInput {
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If this value is present, there are additional results to be displayed. To
 	// retrieve them, call ListTags again, with NextToken set to this value.
 	NextToken *string `type:"string"`
@@ -2672,6 +2835,11 @@ func (s ListTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3110,6 +3278,8 @@ func (s *RebootNodeInput) SetNodeId(v string) *RebootNodeInput {
 type RebootNodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the DAX cluster after a node has been rebooted.
 	Cluster *Cluster `type:"structure"`
 }
@@ -3122,6 +3292,11 @@ func (s RebootNodeOutput) String() string {
 // GoString returns the string representation
 func (s RebootNodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootNodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -3358,6 +3533,8 @@ func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of tags that are associated with the DAX resource.
 	Tags []Tag `type:"list"`
 }
@@ -3370,6 +3547,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -3438,6 +3620,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The tag keys that have been removed from the cluster.
 	Tags []Tag `type:"list"`
 }
@@ -3450,6 +3634,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -3560,6 +3749,8 @@ func (s *UpdateClusterInput) SetSecurityGroupIds(v []string) *UpdateClusterInput
 type UpdateClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the DAX cluster, after it has been modified.
 	Cluster *Cluster `type:"structure"`
 }
@@ -3572,6 +3763,11 @@ func (s UpdateClusterOutput) String() string {
 // GoString returns the string representation
 func (s UpdateClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCluster sets the Cluster field's value.
@@ -3640,6 +3836,8 @@ func (s *UpdateParameterGroupInput) SetParameterNameValues(v []ParameterNameValu
 type UpdateParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The parameter group that has been modified.
 	ParameterGroup *ParameterGroup `type:"structure"`
 }
@@ -3652,6 +3850,11 @@ func (s UpdateParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetParameterGroup sets the ParameterGroup field's value.
@@ -3722,6 +3925,8 @@ func (s *UpdateSubnetGroupInput) SetSubnetIds(v []string) *UpdateSubnetGroupInpu
 type UpdateSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The subnet group that has been modified.
 	SubnetGroup *SubnetGroup `type:"structure"`
 }
@@ -3734,6 +3939,11 @@ func (s UpdateSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubnetGroup sets the SubnetGroup field's value.

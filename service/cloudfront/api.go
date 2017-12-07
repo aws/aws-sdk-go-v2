@@ -59,7 +59,10 @@ func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCl
 		input = &CreateCloudFrontOriginAccessIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCloudFrontOriginAccessIdentityOutput{})
+	output := &CreateCloudFrontOriginAccessIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
@@ -106,7 +109,10 @@ func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) C
 		input = &CreateDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDistributionOutput{})
+	output := &CreateDistributionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDistributionRequest{Request: req, Input: input}
 }
 
@@ -152,7 +158,10 @@ func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistribution
 		input = &CreateDistributionWithTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDistributionWithTagsOutput{})
+	output := &CreateDistributionWithTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDistributionWithTagsRequest{Request: req, Input: input}
 }
 
@@ -198,7 +207,10 @@ func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) C
 		input = &CreateInvalidationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInvalidationOutput{})
+	output := &CreateInvalidationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInvalidationRequest{Request: req, Input: input}
 }
 
@@ -271,7 +283,10 @@ func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDi
 		input = &CreateStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStreamingDistributionOutput{})
+	output := &CreateStreamingDistributionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStreamingDistributionRequest{Request: req, Input: input}
 }
 
@@ -317,7 +332,10 @@ func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStr
 		input = &CreateStreamingDistributionWithTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStreamingDistributionWithTagsOutput{})
+	output := &CreateStreamingDistributionWithTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStreamingDistributionWithTagsRequest{Request: req, Input: input}
 }
 
@@ -363,9 +381,12 @@ func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCl
 		input = &DeleteCloudFrontOriginAccessIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCloudFrontOriginAccessIdentityOutput{})
+	output := &DeleteCloudFrontOriginAccessIdentityOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
@@ -411,9 +432,12 @@ func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) D
 		input = &DeleteDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDistributionOutput{})
+	output := &DeleteDistributionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDistributionRequest{Request: req, Input: input}
 }
 
@@ -494,9 +518,12 @@ func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDi
 		input = &DeleteStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStreamingDistributionOutput{})
+	output := &DeleteStreamingDistributionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStreamingDistributionRequest{Request: req, Input: input}
 }
 
@@ -542,7 +569,10 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFro
 		input = &GetCloudFrontOriginAccessIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCloudFrontOriginAccessIdentityOutput{})
+	output := &GetCloudFrontOriginAccessIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
@@ -588,7 +618,10 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCl
 		input = &GetCloudFrontOriginAccessIdentityConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCloudFrontOriginAccessIdentityConfigOutput{})
+	output := &GetCloudFrontOriginAccessIdentityConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCloudFrontOriginAccessIdentityConfigRequest{Request: req, Input: input}
 }
 
@@ -634,7 +667,10 @@ func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) GetDist
 		input = &GetDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDistributionOutput{})
+	output := &GetDistributionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDistributionRequest{Request: req, Input: input}
 }
 
@@ -680,7 +716,10 @@ func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigIn
 		input = &GetDistributionConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDistributionConfigOutput{})
+	output := &GetDistributionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDistributionConfigRequest{Request: req, Input: input}
 }
 
@@ -726,7 +765,10 @@ func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) GetInva
 		input = &GetInvalidationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInvalidationOutput{})
+	output := &GetInvalidationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetInvalidationRequest{Request: req, Input: input}
 }
 
@@ -773,7 +815,10 @@ func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistribu
 		input = &GetStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStreamingDistributionOutput{})
+	output := &GetStreamingDistributionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStreamingDistributionRequest{Request: req, Input: input}
 }
 
@@ -819,7 +864,10 @@ func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDi
 		input = &GetStreamingDistributionConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStreamingDistributionConfigOutput{})
+	output := &GetStreamingDistributionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStreamingDistributionConfigRequest{Request: req, Input: input}
 }
 
@@ -871,7 +919,10 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListClou
 		input = &ListCloudFrontOriginAccessIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCloudFrontOriginAccessIdentitiesOutput{})
+	output := &ListCloudFrontOriginAccessIdentitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCloudFrontOriginAccessIdentitiesRequest{Request: req, Input: input}
 }
 
@@ -973,7 +1024,10 @@ func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) Lis
 		input = &ListDistributionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDistributionsOutput{})
+	output := &ListDistributionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDistributionsRequest{Request: req, Input: input}
 }
 
@@ -1069,7 +1123,10 @@ func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributions
 		input = &ListDistributionsByWebACLIdInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDistributionsByWebACLIdOutput{})
+	output := &ListDistributionsByWebACLIdOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDistributionsByWebACLIdRequest{Request: req, Input: input}
 }
 
@@ -1121,7 +1178,10 @@ func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) Lis
 		input = &ListInvalidationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInvalidationsOutput{})
+	output := &ListInvalidationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListInvalidationsRequest{Request: req, Input: input}
 }
 
@@ -1223,7 +1283,10 @@ func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistr
 		input = &ListStreamingDistributionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamingDistributionsOutput{})
+	output := &ListStreamingDistributionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStreamingDistributionsRequest{Request: req, Input: input}
 }
 
@@ -1319,7 +1382,10 @@ func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput)
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -1365,9 +1431,12 @@ func (c *CloudFront) TagResourceRequest(input *TagResourceInput) TagResourceRequ
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -1413,9 +1482,12 @@ func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) UntagResour
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -1461,7 +1533,10 @@ func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCl
 		input = &UpdateCloudFrontOriginAccessIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCloudFrontOriginAccessIdentityOutput{})
+	output := &UpdateCloudFrontOriginAccessIdentityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
@@ -1556,7 +1631,10 @@ func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) U
 		input = &UpdateDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDistributionOutput{})
+	output := &UpdateDistributionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDistributionRequest{Request: req, Input: input}
 }
 
@@ -1602,7 +1680,10 @@ func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDi
 		input = &UpdateStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStreamingDistributionOutput{})
+	output := &UpdateStreamingDistributionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateStreamingDistributionRequest{Request: req, Input: input}
 }
 
@@ -2443,6 +2524,8 @@ func (s *CreateCloudFrontOriginAccessIdentityInput) SetCloudFrontOriginAccessIde
 type CreateCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 
+	responseMetadata aws.Response
+
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *OriginAccessIdentity `type:"structure"`
 
@@ -2462,6 +2545,11 @@ func (s CreateCloudFrontOriginAccessIdentityOutput) String() string {
 // GoString returns the string representation
 func (s CreateCloudFrontOriginAccessIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudFrontOriginAccessIdentity sets the CloudFrontOriginAccessIdentity field's value.
@@ -2533,6 +2621,8 @@ func (s *CreateDistributionInput) SetDistributionConfig(v *DistributionConfig) *
 type CreateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
+	responseMetadata aws.Response
+
 	// The distribution's information.
 	Distribution *Distribution `type:"structure"`
 
@@ -2552,6 +2642,11 @@ func (s CreateDistributionOutput) String() string {
 // GoString returns the string representation
 func (s CreateDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistribution sets the Distribution field's value.
@@ -2623,6 +2718,8 @@ func (s *CreateDistributionWithTagsInput) SetDistributionConfigWithTags(v *Distr
 type CreateDistributionWithTagsOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
+	responseMetadata aws.Response
+
 	// The distribution's information.
 	Distribution *Distribution `type:"structure"`
 
@@ -2642,6 +2739,11 @@ func (s CreateDistributionWithTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateDistributionWithTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDistributionWithTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistribution sets the Distribution field's value.
@@ -2728,6 +2830,8 @@ func (s *CreateInvalidationInput) SetInvalidationBatch(v *InvalidationBatch) *Cr
 type CreateInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 
+	responseMetadata aws.Response
+
 	// The invalidation's information.
 	Invalidation *Invalidation `type:"structure"`
 
@@ -2744,6 +2848,11 @@ func (s CreateInvalidationOutput) String() string {
 // GoString returns the string representation
 func (s CreateInvalidationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInvalidationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInvalidation sets the Invalidation field's value.
@@ -2809,6 +2918,8 @@ func (s *CreateStreamingDistributionInput) SetStreamingDistributionConfig(v *Str
 type CreateStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
+	responseMetadata aws.Response
+
 	// The current version of the streaming distribution created.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
@@ -2828,6 +2939,11 @@ func (s CreateStreamingDistributionOutput) String() string {
 // GoString returns the string representation
 func (s CreateStreamingDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.
@@ -2899,6 +3015,8 @@ func (s *CreateStreamingDistributionWithTagsInput) SetStreamingDistributionConfi
 type CreateStreamingDistributionWithTagsOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
+	responseMetadata aws.Response
+
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
 	// The fully qualified URI of the new streaming distribution resource just created.
@@ -2917,6 +3035,11 @@ func (s CreateStreamingDistributionWithTagsOutput) String() string {
 // GoString returns the string representation
 func (s CreateStreamingDistributionWithTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStreamingDistributionWithTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.
@@ -3616,6 +3739,8 @@ func (s *DeleteCloudFrontOriginAccessIdentityInput) SetIfMatch(v string) *Delete
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentityOutput
 type DeleteCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3626,6 +3751,11 @@ func (s DeleteCloudFrontOriginAccessIdentityOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCloudFrontOriginAccessIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This action deletes a web distribution. To delete a web distribution using
@@ -3716,6 +3846,8 @@ func (s *DeleteDistributionInput) SetIfMatch(v string) *DeleteDistributionInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistributionOutput
 type DeleteDistributionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3726,6 +3858,11 @@ func (s DeleteDistributionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request to delete a streaming distribution.
@@ -3782,6 +3919,8 @@ func (s *DeleteStreamingDistributionInput) SetIfMatch(v string) *DeleteStreaming
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistributionOutput
 type DeleteStreamingDistributionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3792,6 +3931,11 @@ func (s DeleteStreamingDistributionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStreamingDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The distribution's information.
@@ -4919,6 +5063,8 @@ func (s *GetCloudFrontOriginAccessIdentityConfigInput) SetId(v string) *GetCloud
 type GetCloudFrontOriginAccessIdentityConfigOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
 
+	responseMetadata aws.Response
+
 	// The origin access identity's configuration information.
 	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `type:"structure"`
 
@@ -4934,6 +5080,11 @@ func (s GetCloudFrontOriginAccessIdentityConfigOutput) String() string {
 // GoString returns the string representation
 func (s GetCloudFrontOriginAccessIdentityConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCloudFrontOriginAccessIdentityConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudFrontOriginAccessIdentityConfig sets the CloudFrontOriginAccessIdentityConfig field's value.
@@ -4994,6 +5145,8 @@ func (s *GetCloudFrontOriginAccessIdentityInput) SetId(v string) *GetCloudFrontO
 type GetCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 
+	responseMetadata aws.Response
+
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *OriginAccessIdentity `type:"structure"`
 
@@ -5010,6 +5163,11 @@ func (s GetCloudFrontOriginAccessIdentityOutput) String() string {
 // GoString returns the string representation
 func (s GetCloudFrontOriginAccessIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudFrontOriginAccessIdentity sets the CloudFrontOriginAccessIdentity field's value.
@@ -5070,6 +5228,8 @@ func (s *GetDistributionConfigInput) SetId(v string) *GetDistributionConfigInput
 type GetDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
+	responseMetadata aws.Response
+
 	// The distribution's configuration information.
 	DistributionConfig *DistributionConfig `type:"structure"`
 
@@ -5085,6 +5245,11 @@ func (s GetDistributionConfigOutput) String() string {
 // GoString returns the string representation
 func (s GetDistributionConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDistributionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistributionConfig sets the DistributionConfig field's value.
@@ -5145,6 +5310,8 @@ func (s *GetDistributionInput) SetId(v string) *GetDistributionInput {
 type GetDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
+	responseMetadata aws.Response
+
 	// The distribution's information.
 	Distribution *Distribution `type:"structure"`
 
@@ -5160,6 +5327,11 @@ func (s GetDistributionOutput) String() string {
 // GoString returns the string representation
 func (s GetDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistribution sets the Distribution field's value.
@@ -5235,6 +5407,8 @@ func (s *GetInvalidationInput) SetId(v string) *GetInvalidationInput {
 type GetInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 
+	responseMetadata aws.Response
+
 	// The invalidation's information. For more information, see Invalidation Complex
 	// Type (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html).
 	Invalidation *Invalidation `type:"structure"`
@@ -5248,6 +5422,11 @@ func (s GetInvalidationOutput) String() string {
 // GoString returns the string representation
 func (s GetInvalidationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInvalidationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInvalidation sets the Invalidation field's value.
@@ -5302,6 +5481,8 @@ func (s *GetStreamingDistributionConfigInput) SetId(v string) *GetStreamingDistr
 type GetStreamingDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
+	responseMetadata aws.Response
+
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
@@ -5317,6 +5498,11 @@ func (s GetStreamingDistributionConfigOutput) String() string {
 // GoString returns the string representation
 func (s GetStreamingDistributionConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStreamingDistributionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.
@@ -5377,6 +5563,8 @@ func (s *GetStreamingDistributionInput) SetId(v string) *GetStreamingDistributio
 type GetStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
+	responseMetadata aws.Response
+
 	// The current version of the streaming distribution's information. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
@@ -5393,6 +5581,11 @@ func (s GetStreamingDistributionOutput) String() string {
 // GoString returns the string representation
 func (s GetStreamingDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.
@@ -5954,6 +6147,8 @@ func (s *ListCloudFrontOriginAccessIdentitiesInput) SetMaxItems(v int64) *ListCl
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityList"`
 
+	responseMetadata aws.Response
+
 	// The CloudFrontOriginAccessIdentityList type.
 	CloudFrontOriginAccessIdentityList *OriginAccessIdentityList `type:"structure"`
 }
@@ -5966,6 +6161,11 @@ func (s ListCloudFrontOriginAccessIdentitiesOutput) String() string {
 // GoString returns the string representation
 func (s ListCloudFrontOriginAccessIdentitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCloudFrontOriginAccessIdentitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudFrontOriginAccessIdentityList sets the CloudFrontOriginAccessIdentityList field's value.
@@ -6047,6 +6247,8 @@ func (s *ListDistributionsByWebACLIdInput) SetWebACLId(v string) *ListDistributi
 type ListDistributionsByWebACLIdOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 
+	responseMetadata aws.Response
+
 	// The DistributionList type.
 	DistributionList *DistributionList `type:"structure"`
 }
@@ -6059,6 +6261,11 @@ func (s ListDistributionsByWebACLIdOutput) String() string {
 // GoString returns the string representation
 func (s ListDistributionsByWebACLIdOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDistributionsByWebACLIdOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistributionList sets the DistributionList field's value.
@@ -6110,6 +6317,8 @@ func (s *ListDistributionsInput) SetMaxItems(v int64) *ListDistributionsInput {
 type ListDistributionsOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 
+	responseMetadata aws.Response
+
 	// The DistributionList type.
 	DistributionList *DistributionList `type:"structure"`
 }
@@ -6122,6 +6331,11 @@ func (s ListDistributionsOutput) String() string {
 // GoString returns the string representation
 func (s ListDistributionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDistributionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistributionList sets the DistributionList field's value.
@@ -6201,6 +6415,8 @@ func (s *ListInvalidationsInput) SetMaxItems(v int64) *ListInvalidationsInput {
 type ListInvalidationsOutput struct {
 	_ struct{} `type:"structure" payload:"InvalidationList"`
 
+	responseMetadata aws.Response
+
 	// Information about invalidation batches.
 	InvalidationList *InvalidationList `type:"structure"`
 }
@@ -6213,6 +6429,11 @@ func (s ListInvalidationsOutput) String() string {
 // GoString returns the string representation
 func (s ListInvalidationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInvalidationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInvalidationList sets the InvalidationList field's value.
@@ -6260,6 +6481,8 @@ func (s *ListStreamingDistributionsInput) SetMaxItems(v int64) *ListStreamingDis
 type ListStreamingDistributionsOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionList"`
 
+	responseMetadata aws.Response
+
 	// The StreamingDistributionList type.
 	StreamingDistributionList *StreamingDistributionList `type:"structure"`
 }
@@ -6272,6 +6495,11 @@ func (s ListStreamingDistributionsOutput) String() string {
 // GoString returns the string representation
 func (s ListStreamingDistributionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStreamingDistributionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStreamingDistributionList sets the StreamingDistributionList field's value.
@@ -6326,6 +6554,8 @@ func (s *ListTagsForResourceInput) SetResource(v string) *ListTagsForResourceInp
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure" payload:"Tags"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains zero or more Tag elements.
 	//
 	// Tags is a required field
@@ -6340,6 +6570,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -8185,6 +8420,8 @@ func (s *TagResourceInput) SetTags(v *Tags) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8195,6 +8432,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A complex type that contains zero or more Tag elements.
@@ -8382,6 +8624,8 @@ func (s *UntagResourceInput) SetTagKeys(v *TagKeys) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8392,6 +8636,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The request to update an origin access identity.
@@ -8470,6 +8719,8 @@ func (s *UpdateCloudFrontOriginAccessIdentityInput) SetIfMatch(v string) *Update
 type UpdateCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 
+	responseMetadata aws.Response
+
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *OriginAccessIdentity `type:"structure"`
 
@@ -8485,6 +8736,11 @@ func (s UpdateCloudFrontOriginAccessIdentityOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCloudFrontOriginAccessIdentityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCloudFrontOriginAccessIdentity sets the CloudFrontOriginAccessIdentity field's value.
@@ -8575,6 +8831,8 @@ func (s *UpdateDistributionInput) SetIfMatch(v string) *UpdateDistributionInput 
 type UpdateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
+	responseMetadata aws.Response
+
 	// The distribution's information.
 	Distribution *Distribution `type:"structure"`
 
@@ -8590,6 +8848,11 @@ func (s UpdateDistributionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDistribution sets the Distribution field's value.
@@ -8680,6 +8943,8 @@ func (s *UpdateStreamingDistributionInput) SetStreamingDistributionConfig(v *Str
 type UpdateStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
+	responseMetadata aws.Response
+
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
@@ -8695,6 +8960,11 @@ func (s UpdateStreamingDistributionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateStreamingDistributionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetETag sets the ETag field's value.

@@ -52,7 +52,10 @@ func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShare
 		input = &AcceptPortfolioShareInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptPortfolioShareOutput{})
+	output := &AcceptPortfolioShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptPortfolioShareRequest{Request: req, Input: input}
 }
 
@@ -98,7 +101,10 @@ func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *Associate
 		input = &AssociatePrincipalWithPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociatePrincipalWithPortfolioOutput{})
+	output := &AssociatePrincipalWithPortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociatePrincipalWithPortfolioRequest{Request: req, Input: input}
 }
 
@@ -144,7 +150,10 @@ func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociatePr
 		input = &AssociateProductWithPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateProductWithPortfolioOutput{})
+	output := &AssociateProductWithPortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateProductWithPortfolioRequest{Request: req, Input: input}
 }
 
@@ -190,7 +199,10 @@ func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateT
 		input = &AssociateTagOptionWithResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateTagOptionWithResourceOutput{})
+	output := &AssociateTagOptionWithResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateTagOptionWithResourceRequest{Request: req, Input: input}
 }
 
@@ -243,7 +255,10 @@ func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) CopyProduct
 		input = &CopyProductInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyProductOutput{})
+	output := &CopyProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopyProductRequest{Request: req, Input: input}
 }
 
@@ -289,7 +304,10 @@ func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) C
 		input = &CreateConstraintInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConstraintOutput{})
+	output := &CreateConstraintOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConstraintRequest{Request: req, Input: input}
 }
 
@@ -335,7 +353,10 @@ func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) Cre
 		input = &CreatePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePortfolioOutput{})
+	output := &CreatePortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePortfolioRequest{Request: req, Input: input}
 }
 
@@ -381,7 +402,10 @@ func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShare
 		input = &CreatePortfolioShareInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePortfolioShareOutput{})
+	output := &CreatePortfolioShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePortfolioShareRequest{Request: req, Input: input}
 }
 
@@ -427,7 +451,10 @@ func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) CreateP
 		input = &CreateProductInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProductOutput{})
+	output := &CreateProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProductRequest{Request: req, Input: input}
 }
 
@@ -474,7 +501,10 @@ func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisio
 		input = &CreateProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProvisioningArtifactOutput{})
+	output := &CreateProvisioningArtifactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProvisioningArtifactRequest{Request: req, Input: input}
 }
 
@@ -520,7 +550,10 @@ func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) Cre
 		input = &CreateTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagOptionOutput{})
+	output := &CreateTagOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTagOptionRequest{Request: req, Input: input}
 }
 
@@ -566,7 +599,10 @@ func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) D
 		input = &DeleteConstraintInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConstraintOutput{})
+	output := &DeleteConstraintOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConstraintRequest{Request: req, Input: input}
 }
 
@@ -614,7 +650,10 @@ func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) Del
 		input = &DeletePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePortfolioOutput{})
+	output := &DeletePortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePortfolioRequest{Request: req, Input: input}
 }
 
@@ -660,7 +699,10 @@ func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShare
 		input = &DeletePortfolioShareInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePortfolioShareOutput{})
+	output := &DeletePortfolioShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePortfolioShareRequest{Request: req, Input: input}
 }
 
@@ -707,7 +749,10 @@ func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) DeleteP
 		input = &DeleteProductInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProductOutput{})
+	output := &DeleteProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProductRequest{Request: req, Input: input}
 }
 
@@ -756,7 +801,10 @@ func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisio
 		input = &DeleteProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProvisioningArtifactOutput{})
+	output := &DeleteProvisioningArtifactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProvisioningArtifactRequest{Request: req, Input: input}
 }
 
@@ -802,7 +850,10 @@ func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInpu
 		input = &DescribeConstraintInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConstraintOutput{})
+	output := &DescribeConstraintOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConstraintRequest{Request: req, Input: input}
 }
 
@@ -848,7 +899,10 @@ func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyPro
 		input = &DescribeCopyProductStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCopyProductStatusOutput{})
+	output := &DescribeCopyProductStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCopyProductStatusRequest{Request: req, Input: input}
 }
 
@@ -895,7 +949,10 @@ func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput)
 		input = &DescribePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePortfolioOutput{})
+	output := &DescribePortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePortfolioRequest{Request: req, Input: input}
 }
 
@@ -944,7 +1001,10 @@ func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) Des
 		input = &DescribeProductInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProductOutput{})
+	output := &DescribeProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProductRequest{Request: req, Input: input}
 }
 
@@ -990,7 +1050,10 @@ func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsA
 		input = &DescribeProductAsAdminInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProductAsAdminOutput{})
+	output := &DescribeProductAsAdminOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProductAsAdminRequest{Request: req, Input: input}
 }
 
@@ -1039,7 +1102,10 @@ func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewIn
 		input = &DescribeProductViewInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProductViewOutput{})
+	output := &DescribeProductViewOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProductViewRequest{Request: req, Input: input}
 }
 
@@ -1085,7 +1151,10 @@ func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvis
 		input = &DescribeProvisionedProductInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProvisionedProductOutput{})
+	output := &DescribeProvisionedProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProvisionedProductRequest{Request: req, Input: input}
 }
 
@@ -1131,7 +1200,10 @@ func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProv
 		input = &DescribeProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProvisioningArtifactOutput{})
+	output := &DescribeProvisioningArtifactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProvisioningArtifactRequest{Request: req, Input: input}
 }
 
@@ -1189,7 +1261,10 @@ func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribePr
 		input = &DescribeProvisioningParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProvisioningParametersOutput{})
+	output := &DescribeProvisioningParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProvisioningParametersRequest{Request: req, Input: input}
 }
 
@@ -1237,7 +1312,10 @@ func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) Descr
 		input = &DescribeRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRecordOutput{})
+	output := &DescribeRecordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRecordRequest{Request: req, Input: input}
 }
 
@@ -1283,7 +1361,10 @@ func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput)
 		input = &DescribeTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagOptionOutput{})
+	output := &DescribeTagOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTagOptionRequest{Request: req, Input: input}
 }
 
@@ -1329,7 +1410,10 @@ func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *Disass
 		input = &DisassociatePrincipalFromPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociatePrincipalFromPortfolioOutput{})
+	output := &DisassociatePrincipalFromPortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociatePrincipalFromPortfolioRequest{Request: req, Input: input}
 }
 
@@ -1375,7 +1459,10 @@ func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *Disassoc
 		input = &DisassociateProductFromPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateProductFromPortfolioOutput{})
+	output := &DisassociateProductFromPortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateProductFromPortfolioRequest{Request: req, Input: input}
 }
 
@@ -1421,7 +1508,10 @@ func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *Disasso
 		input = &DisassociateTagOptionFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateTagOptionFromResourceOutput{})
+	output := &DisassociateTagOptionFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateTagOptionFromResourceRequest{Request: req, Input: input}
 }
 
@@ -1473,7 +1563,10 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedP
 		input = &ListAcceptedPortfolioSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAcceptedPortfolioSharesOutput{})
+	output := &ListAcceptedPortfolioSharesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAcceptedPortfolioSharesRequest{Request: req, Input: input}
 }
 
@@ -1576,7 +1669,10 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstrain
 		input = &ListConstraintsForPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConstraintsForPortfolioOutput{})
+	output := &ListConstraintsForPortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListConstraintsForPortfolioRequest{Request: req, Input: input}
 }
 
@@ -1680,7 +1776,10 @@ func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) Lis
 		input = &ListLaunchPathsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLaunchPathsOutput{})
+	output := &ListLaunchPathsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListLaunchPathsRequest{Request: req, Input: input}
 }
 
@@ -1777,7 +1876,10 @@ func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessIn
 		input = &ListPortfolioAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPortfolioAccessOutput{})
+	output := &ListPortfolioAccessOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPortfolioAccessRequest{Request: req, Input: input}
 }
 
@@ -1829,7 +1931,10 @@ func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) ListP
 		input = &ListPortfoliosInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPortfoliosOutput{})
+	output := &ListPortfoliosOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPortfoliosRequest{Request: req, Input: input}
 }
 
@@ -1931,7 +2036,10 @@ func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosFo
 		input = &ListPortfoliosForProductInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPortfoliosForProductOutput{})
+	output := &ListPortfoliosForProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPortfoliosForProductRequest{Request: req, Input: input}
 }
 
@@ -2033,7 +2141,10 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipals
 		input = &ListPrincipalsForPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPrincipalsForPortfolioOutput{})
+	output := &ListPrincipalsForPortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPrincipalsForPortfolioRequest{Request: req, Input: input}
 }
 
@@ -2129,7 +2240,10 @@ func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisionin
 		input = &ListProvisioningArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProvisioningArtifactsOutput{})
+	output := &ListProvisioningArtifactsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProvisioningArtifactsRequest{Request: req, Input: input}
 }
 
@@ -2176,7 +2290,10 @@ func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput)
 		input = &ListRecordHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRecordHistoryOutput{})
+	output := &ListRecordHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRecordHistoryRequest{Request: req, Input: input}
 }
 
@@ -2228,7 +2345,10 @@ func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesFo
 		input = &ListResourcesForTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesForTagOptionOutput{})
+	output := &ListResourcesForTagOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourcesForTagOptionRequest{Request: req, Input: input}
 }
 
@@ -2330,7 +2450,10 @@ func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) ListT
 		input = &ListTagOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagOptionsOutput{})
+	output := &ListTagOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagOptionsRequest{Request: req, Input: input}
 }
 
@@ -2437,7 +2560,10 @@ func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) P
 		input = &ProvisionProductInput{}
 	}
 
-	req := c.newRequest(op, input, &ProvisionProductOutput{})
+	output := &ProvisionProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ProvisionProductRequest{Request: req, Input: input}
 }
 
@@ -2483,7 +2609,10 @@ func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShare
 		input = &RejectPortfolioShareInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectPortfolioShareOutput{})
+	output := &RejectPortfolioShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RejectPortfolioShareRequest{Request: req, Input: input}
 }
 
@@ -2530,7 +2659,10 @@ func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedPr
 		input = &ScanProvisionedProductsInput{}
 	}
 
-	req := c.newRequest(op, input, &ScanProvisionedProductsOutput{})
+	output := &ScanProvisionedProductsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ScanProvisionedProductsRequest{Request: req, Input: input}
 }
 
@@ -2586,7 +2718,10 @@ func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) Searc
 		input = &SearchProductsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchProductsOutput{})
+	output := &SearchProductsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SearchProductsRequest{Request: req, Input: input}
 }
 
@@ -2691,7 +2826,10 @@ func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdm
 		input = &SearchProductsAsAdminInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchProductsAsAdminOutput{})
+	output := &SearchProductsAsAdminOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SearchProductsAsAdminRequest{Request: req, Input: input}
 }
 
@@ -2794,7 +2932,10 @@ func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProv
 		input = &TerminateProvisionedProductInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateProvisionedProductOutput{})
+	output := &TerminateProvisionedProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateProvisionedProductRequest{Request: req, Input: input}
 }
 
@@ -2840,7 +2981,10 @@ func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) U
 		input = &UpdateConstraintInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConstraintOutput{})
+	output := &UpdateConstraintOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConstraintRequest{Request: req, Input: input}
 }
 
@@ -2887,7 +3031,10 @@ func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) Upd
 		input = &UpdatePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePortfolioOutput{})
+	output := &UpdatePortfolioOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePortfolioRequest{Request: req, Input: input}
 }
 
@@ -2933,7 +3080,10 @@ func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) UpdateP
 		input = &UpdateProductInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProductOutput{})
+	output := &UpdateProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProductRequest{Request: req, Input: input}
 }
 
@@ -2985,7 +3135,10 @@ func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisione
 		input = &UpdateProvisionedProductInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProvisionedProductOutput{})
+	output := &UpdateProvisionedProductOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProvisionedProductRequest{Request: req, Input: input}
 }
 
@@ -3033,7 +3186,10 @@ func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisio
 		input = &UpdateProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProvisioningArtifactOutput{})
+	output := &UpdateProvisioningArtifactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateProvisioningArtifactRequest{Request: req, Input: input}
 }
 
@@ -3079,7 +3235,10 @@ func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) Upd
 		input = &UpdateTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTagOptionOutput{})
+	output := &UpdateTagOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTagOptionRequest{Request: req, Input: input}
 }
 
@@ -3144,6 +3303,8 @@ func (s *AcceptPortfolioShareInput) SetPortfolioId(v string) *AcceptPortfolioSha
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareOutput
 type AcceptPortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3154,6 +3315,11 @@ func (s AcceptPortfolioShareOutput) String() string {
 // GoString returns the string representation
 func (s AcceptPortfolioShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptPortfolioShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The access level to limit results.
@@ -3290,6 +3456,8 @@ func (s *AssociatePrincipalWithPortfolioInput) SetPrincipalType(v PrincipalType)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioOutput
 type AssociatePrincipalWithPortfolioOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3300,6 +3468,11 @@ func (s AssociatePrincipalWithPortfolioOutput) String() string {
 // GoString returns the string representation
 func (s AssociatePrincipalWithPortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociatePrincipalWithPortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolioInput
@@ -3393,6 +3566,8 @@ func (s *AssociateProductWithPortfolioInput) SetSourcePortfolioId(v string) *Ass
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolioOutput
 type AssociateProductWithPortfolioOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3403,6 +3578,11 @@ func (s AssociateProductWithPortfolioOutput) String() string {
 // GoString returns the string representation
 func (s AssociateProductWithPortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateProductWithPortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResourceInput
@@ -3466,6 +3646,8 @@ func (s *AssociateTagOptionWithResourceInput) SetTagOptionId(v string) *Associat
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResourceOutput
 type AssociateTagOptionWithResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3476,6 +3658,11 @@ func (s AssociateTagOptionWithResourceOutput) String() string {
 // GoString returns the string representation
 func (s AssociateTagOptionWithResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateTagOptionWithResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Detailed constraint information.
@@ -3687,6 +3874,8 @@ func (s *CopyProductInput) SetTargetProductName(v string) *CopyProductInput {
 type CopyProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique token to pass to DescribeCopyProductStatus to track the progress
 	// of the operation.
 	CopyProductToken *string `min:"1" type:"string"`
@@ -3700,6 +3889,11 @@ func (s CopyProductOutput) String() string {
 // GoString returns the string representation
 func (s CopyProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCopyProductToken sets the CopyProductToken field's value.
@@ -3858,6 +4052,8 @@ func (s *CreateConstraintInput) SetType(v string) *CreateConstraintInput {
 type CreateConstraintOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed constraint information.
 	ConstraintDetail *ConstraintDetail `type:"structure"`
 
@@ -3876,6 +4072,11 @@ func (s CreateConstraintOutput) String() string {
 // GoString returns the string representation
 func (s CreateConstraintOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConstraintOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConstraintDetail sets the ConstraintDetail field's value.
@@ -4021,6 +4222,8 @@ func (s *CreatePortfolioInput) SetTags(v []Tag) *CreatePortfolioInput {
 type CreatePortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed portfolio information.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
@@ -4036,6 +4239,11 @@ func (s CreatePortfolioOutput) String() string {
 // GoString returns the string representation
 func (s CreatePortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPortfolioDetail sets the PortfolioDetail field's value.
@@ -4126,6 +4334,8 @@ func (s *CreatePortfolioShareInput) SetPortfolioId(v string) *CreatePortfolioSha
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareOutput
 type CreatePortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4136,6 +4346,11 @@ func (s CreatePortfolioShareOutput) String() string {
 // GoString returns the string representation
 func (s CreatePortfolioShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePortfolioShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProductInput
@@ -4327,6 +4542,8 @@ func (s *CreateProductInput) SetTags(v []Tag) *CreateProductInput {
 type CreateProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed product view information.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
@@ -4345,6 +4562,11 @@ func (s CreateProductOutput) String() string {
 // GoString returns the string representation
 func (s CreateProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProductViewDetail sets the ProductViewDetail field's value.
@@ -4467,6 +4689,8 @@ func (s *CreateProvisioningArtifactInput) SetProductId(v string) *CreateProvisio
 type CreateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Additional information about the creation request for the provisioning artifact.
 	Info map[string]string `min:"1" type:"map"`
 
@@ -4485,6 +4709,11 @@ func (s CreateProvisioningArtifactOutput) String() string {
 // GoString returns the string representation
 func (s CreateProvisioningArtifactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInfo sets the Info field's value.
@@ -4570,6 +4799,8 @@ func (s *CreateTagOptionInput) SetValue(v string) *CreateTagOptionInput {
 type CreateTagOptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed TagOption information.
 	TagOptionDetail *TagOptionDetail `type:"structure"`
 }
@@ -4582,6 +4813,11 @@ func (s CreateTagOptionOutput) String() string {
 // GoString returns the string representation
 func (s CreateTagOptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTagOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagOptionDetail sets the TagOptionDetail field's value.
@@ -4651,6 +4887,8 @@ func (s *DeleteConstraintInput) SetId(v string) *DeleteConstraintInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraintOutput
 type DeleteConstraintOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4661,6 +4899,11 @@ func (s DeleteConstraintOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConstraintOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConstraintOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioInput
@@ -4724,6 +4967,8 @@ func (s *DeletePortfolioInput) SetId(v string) *DeletePortfolioInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioOutput
 type DeletePortfolioOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4734,6 +4979,11 @@ func (s DeletePortfolioOutput) String() string {
 // GoString returns the string representation
 func (s DeletePortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareInput
@@ -4812,6 +5062,8 @@ func (s *DeletePortfolioShareInput) SetPortfolioId(v string) *DeletePortfolioSha
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareOutput
 type DeletePortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4822,6 +5074,11 @@ func (s DeletePortfolioShareOutput) String() string {
 // GoString returns the string representation
 func (s DeletePortfolioShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePortfolioShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductInput
@@ -4885,6 +5142,8 @@ func (s *DeleteProductInput) SetId(v string) *DeleteProductInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductOutput
 type DeleteProductOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4895,6 +5154,11 @@ func (s DeleteProductOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactInput
@@ -4977,6 +5241,8 @@ func (s *DeleteProvisioningArtifactInput) SetProvisioningArtifactId(v string) *D
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactOutput
 type DeleteProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4987,6 +5253,11 @@ func (s DeleteProvisioningArtifactOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProvisioningArtifactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraintInput
@@ -5051,6 +5322,8 @@ func (s *DescribeConstraintInput) SetId(v string) *DescribeConstraintInput {
 type DescribeConstraintOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed constraint information.
 	ConstraintDetail *ConstraintDetail `type:"structure"`
 
@@ -5069,6 +5342,11 @@ func (s DescribeConstraintOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConstraintOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConstraintOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConstraintDetail sets the ConstraintDetail field's value.
@@ -5151,6 +5429,8 @@ func (s *DescribeCopyProductStatusInput) SetCopyProductToken(v string) *Describe
 type DescribeCopyProductStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the copy product operation.
 	CopyProductStatus CopyProductStatus `type:"string" enum:"true"`
 
@@ -5169,6 +5449,11 @@ func (s DescribeCopyProductStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCopyProductStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCopyProductStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCopyProductStatus sets the CopyProductStatus field's value.
@@ -5251,6 +5536,8 @@ func (s *DescribePortfolioInput) SetId(v string) *DescribePortfolioInput {
 type DescribePortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed portfolio information.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
@@ -5269,6 +5556,11 @@ func (s DescribePortfolioOutput) String() string {
 // GoString returns the string representation
 func (s DescribePortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPortfolioDetail sets the PortfolioDetail field's value.
@@ -5351,6 +5643,8 @@ func (s *DescribeProductAsAdminInput) SetId(v string) *DescribeProductAsAdminInp
 type DescribeProductAsAdminOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed product view information.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
@@ -5372,6 +5666,11 @@ func (s DescribeProductAsAdminOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProductAsAdminOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProductAsAdminOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProductViewDetail sets the ProductViewDetail field's value.
@@ -5460,6 +5759,8 @@ func (s *DescribeProductInput) SetId(v string) *DescribeProductInput {
 type DescribeProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The summary metadata about the specified product.
 	ProductViewSummary *ProductViewSummary `type:"structure"`
 
@@ -5476,6 +5777,11 @@ func (s DescribeProductOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProductViewSummary sets the ProductViewSummary field's value.
@@ -5552,6 +5858,8 @@ func (s *DescribeProductViewInput) SetId(v string) *DescribeProductViewInput {
 type DescribeProductViewOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The summary metadata about the specified product.
 	ProductViewSummary *ProductViewSummary `type:"structure"`
 
@@ -5568,6 +5876,11 @@ func (s DescribeProductViewOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProductViewOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProductViewOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProductViewSummary sets the ProductViewSummary field's value.
@@ -5644,6 +5957,8 @@ func (s *DescribeProvisionedProductInput) SetId(v string) *DescribeProvisionedPr
 type DescribeProvisionedProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed provisioned product information.
 	ProvisionedProductDetail *ProvisionedProductDetail `type:"structure"`
 }
@@ -5656,6 +5971,11 @@ func (s DescribeProvisionedProductOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProvisionedProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProvisionedProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProvisionedProductDetail sets the ProvisionedProductDetail field's value.
@@ -5754,6 +6074,8 @@ func (s *DescribeProvisioningArtifactInput) SetVerbose(v bool) *DescribeProvisio
 type DescribeProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Additional information about the provisioning artifact.
 	Info map[string]string `min:"1" type:"map"`
 
@@ -5772,6 +6094,11 @@ func (s DescribeProvisioningArtifactOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProvisioningArtifactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInfo sets the Info field's value.
@@ -5887,6 +6214,8 @@ func (s *DescribeProvisioningParametersInput) SetProvisioningArtifactId(v string
 type DescribeProvisioningParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of constraint summaries that apply to provisioning this product.
 	ConstraintSummaries []ConstraintSummary `type:"list"`
 
@@ -5910,6 +6239,11 @@ func (s DescribeProvisioningParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProvisioningParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProvisioningParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConstraintSummaries sets the ConstraintSummaries field's value.
@@ -6021,6 +6355,8 @@ func (s *DescribeRecordInput) SetPageToken(v string) *DescribeRecordInput {
 type DescribeRecordOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -6042,6 +6378,11 @@ func (s DescribeRecordOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRecordOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRecordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -6109,6 +6450,8 @@ func (s *DescribeTagOptionInput) SetId(v string) *DescribeTagOptionInput {
 type DescribeTagOptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed TagOption information.
 	TagOptionDetail *TagOptionDetail `type:"structure"`
 }
@@ -6121,6 +6464,11 @@ func (s DescribeTagOptionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTagOptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTagOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagOptionDetail sets the TagOptionDetail field's value.
@@ -6208,6 +6556,8 @@ func (s *DisassociatePrincipalFromPortfolioInput) SetPrincipalARN(v string) *Dis
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioOutput
 type DisassociatePrincipalFromPortfolioOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6218,6 +6568,11 @@ func (s DisassociatePrincipalFromPortfolioOutput) String() string {
 // GoString returns the string representation
 func (s DisassociatePrincipalFromPortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociatePrincipalFromPortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolioInput
@@ -6299,6 +6654,8 @@ func (s *DisassociateProductFromPortfolioInput) SetProductId(v string) *Disassoc
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolioOutput
 type DisassociateProductFromPortfolioOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6309,6 +6666,11 @@ func (s DisassociateProductFromPortfolioOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateProductFromPortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateProductFromPortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceInput
@@ -6372,6 +6734,8 @@ func (s *DisassociateTagOptionFromResourceInput) SetTagOptionId(v string) *Disas
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceOutput
 type DisassociateTagOptionFromResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6382,6 +6746,11 @@ func (s DisassociateTagOptionFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateTagOptionFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateTagOptionFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Summary information about a path for a user to have access to a specified
@@ -6492,6 +6861,8 @@ func (s *ListAcceptedPortfolioSharesInput) SetPageToken(v string) *ListAcceptedP
 type ListAcceptedPortfolioSharesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -6508,6 +6879,11 @@ func (s ListAcceptedPortfolioSharesOutput) String() string {
 // GoString returns the string representation
 func (s ListAcceptedPortfolioSharesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAcceptedPortfolioSharesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -6617,6 +6993,8 @@ func (s *ListConstraintsForPortfolioInput) SetProductId(v string) *ListConstrain
 type ListConstraintsForPortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of detailed constraint information objects.
 	ConstraintDetails []ConstraintDetail `type:"list"`
 
@@ -6633,6 +7011,11 @@ func (s ListConstraintsForPortfolioOutput) String() string {
 // GoString returns the string representation
 func (s ListConstraintsForPortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListConstraintsForPortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConstraintDetails sets the ConstraintDetails field's value.
@@ -6731,6 +7114,8 @@ func (s *ListLaunchPathsInput) SetProductId(v string) *ListLaunchPathsInput {
 type ListLaunchPathsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of launch path information summaries for the specified PageToken.
 	LaunchPathSummaries []LaunchPathSummary `type:"list"`
 
@@ -6747,6 +7132,11 @@ func (s ListLaunchPathsOutput) String() string {
 // GoString returns the string representation
 func (s ListLaunchPathsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLaunchPathsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLaunchPathSummaries sets the LaunchPathSummaries field's value.
@@ -6823,6 +7213,8 @@ func (s *ListPortfolioAccessInput) SetPortfolioId(v string) *ListPortfolioAccess
 type ListPortfolioAccessOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of account IDs associated with access to the portfolio.
 	AccountIds []string `type:"list"`
 
@@ -6839,6 +7231,11 @@ func (s ListPortfolioAccessOutput) String() string {
 // GoString returns the string representation
 func (s ListPortfolioAccessOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPortfolioAccessOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountIds sets the AccountIds field's value.
@@ -6936,6 +7333,8 @@ func (s *ListPortfoliosForProductInput) SetProductId(v string) *ListPortfoliosFo
 type ListPortfoliosForProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -6952,6 +7351,11 @@ func (s ListPortfoliosForProductOutput) String() string {
 // GoString returns the string representation
 func (s ListPortfoliosForProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPortfoliosForProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -7021,6 +7425,8 @@ func (s *ListPortfoliosInput) SetPageToken(v string) *ListPortfoliosInput {
 type ListPortfoliosOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -7037,6 +7443,11 @@ func (s ListPortfoliosOutput) String() string {
 // GoString returns the string representation
 func (s ListPortfoliosOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPortfoliosOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -7134,6 +7545,8 @@ func (s *ListPrincipalsForPortfolioInput) SetPortfolioId(v string) *ListPrincipa
 type ListPrincipalsForPortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -7150,6 +7563,11 @@ func (s ListPrincipalsForPortfolioOutput) String() string {
 // GoString returns the string representation
 func (s ListPrincipalsForPortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPrincipalsForPortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -7226,6 +7644,8 @@ func (s *ListProvisioningArtifactsInput) SetProductId(v string) *ListProvisionin
 type ListProvisioningArtifactsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -7242,6 +7662,11 @@ func (s ListProvisioningArtifactsOutput) String() string {
 // GoString returns the string representation
 func (s ListProvisioningArtifactsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProvisioningArtifactsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -7330,6 +7755,8 @@ func (s *ListRecordHistoryInput) SetSearchFilter(v *ListRecordHistorySearchFilte
 type ListRecordHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -7346,6 +7773,11 @@ func (s ListRecordHistoryOutput) String() string {
 // GoString returns the string representation
 func (s ListRecordHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRecordHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -7471,6 +7903,8 @@ func (s *ListResourcesForTagOptionInput) SetTagOptionId(v string) *ListResources
 type ListResourcesForTagOptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token of the first page retrieved. If null, this retrieves the first
 	// page of size PageSize.
 	PageToken *string `type:"string"`
@@ -7487,6 +7921,11 @@ func (s ListResourcesForTagOptionOutput) String() string {
 // GoString returns the string representation
 func (s ListResourcesForTagOptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourcesForTagOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPageToken sets the PageToken field's value.
@@ -7625,6 +8064,8 @@ func (s *ListTagOptionsInput) SetPageToken(v string) *ListTagOptionsInput {
 type ListTagOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token of the first page retrieved. If null, this retrieves the first
 	// page of size PageSize.
 	PageToken *string `type:"string"`
@@ -7641,6 +8082,11 @@ func (s ListTagOptionsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPageToken sets the PageToken field's value.
@@ -8176,6 +8622,8 @@ func (s *ProvisionProductInput) SetTags(v []Tag) *ProvisionProductInput {
 type ProvisionProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The detailed result of the ProvisionProduct request, containing the inputs
 	// made to that request, the current state of the request, a pointer to the
 	// ProvisionedProduct object of the request, and a list of any errors that the
@@ -8191,6 +8639,11 @@ func (s ProvisionProductOutput) String() string {
 // GoString returns the string representation
 func (s ProvisionProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ProvisionProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRecordDetail sets the RecordDetail field's value.
@@ -9015,6 +9468,8 @@ func (s *RejectPortfolioShareInput) SetPortfolioId(v string) *RejectPortfolioSha
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareOutput
 type RejectPortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9025,6 +9480,11 @@ func (s RejectPortfolioShareOutput) String() string {
 // GoString returns the string representation
 func (s RejectPortfolioShareOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RejectPortfolioShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Detailed resource information.
@@ -9153,6 +9613,8 @@ func (s *ScanProvisionedProductsInput) SetPageToken(v string) *ScanProvisionedPr
 type ScanProvisionedProductsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -9169,6 +9631,11 @@ func (s ScanProvisionedProductsOutput) String() string {
 // GoString returns the string representation
 func (s ScanProvisionedProductsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ScanProvisionedProductsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -9298,6 +9765,8 @@ func (s *SearchProductsAsAdminInput) SetSortOrder(v SortOrder) *SearchProductsAs
 type SearchProductsAsAdminOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -9314,6 +9783,11 @@ func (s SearchProductsAsAdminOutput) String() string {
 // GoString returns the string representation
 func (s SearchProductsAsAdminOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchProductsAsAdminOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -9412,6 +9886,8 @@ func (s *SearchProductsInput) SetSortOrder(v SortOrder) *SearchProductsInput {
 type SearchProductsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The page token to use to retrieve the next page of results for this operation.
 	// If there are no more pages, this value is null.
 	NextPageToken *string `type:"string"`
@@ -9431,6 +9907,11 @@ func (s SearchProductsOutput) String() string {
 // GoString returns the string representation
 func (s SearchProductsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchProductsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -9701,6 +10182,8 @@ func (s *TerminateProvisionedProductInput) SetTerminateToken(v string) *Terminat
 type TerminateProvisionedProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The detailed result of the TerminateProvisionedProduct request, containing
 	// the inputs made to that request, the current state of the request, a pointer
 	// to the ProvisionedProduct object that the request is modifying, and a list
@@ -9716,6 +10199,11 @@ func (s TerminateProvisionedProductOutput) String() string {
 // GoString returns the string representation
 func (s TerminateProvisionedProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateProvisionedProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRecordDetail sets the RecordDetail field's value.
@@ -9795,6 +10283,8 @@ func (s *UpdateConstraintInput) SetId(v string) *UpdateConstraintInput {
 type UpdateConstraintOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed constraint information.
 	ConstraintDetail *ConstraintDetail `type:"structure"`
 
@@ -9813,6 +10303,11 @@ func (s UpdateConstraintOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConstraintOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConstraintOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConstraintDetail sets the ConstraintDetail field's value.
@@ -9953,6 +10448,8 @@ func (s *UpdatePortfolioInput) SetRemoveTags(v []string) *UpdatePortfolioInput {
 type UpdatePortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed portfolio information.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
@@ -9968,6 +10465,11 @@ func (s UpdatePortfolioOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePortfolioOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePortfolioOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPortfolioDetail sets the PortfolioDetail field's value.
@@ -10132,6 +10634,8 @@ func (s *UpdateProductInput) SetSupportUrl(v string) *UpdateProductInput {
 type UpdateProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed product view information.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
@@ -10147,6 +10651,11 @@ func (s UpdateProductOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProductViewDetail sets the ProductViewDetail field's value.
@@ -10305,6 +10814,8 @@ func (s *UpdateProvisionedProductInput) SetUpdateToken(v string) *UpdateProvisio
 type UpdateProvisionedProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The detailed result of the UpdateProvisionedProduct request, containing the
 	// inputs made to that request, the current state of the request, a pointer
 	// to the ProvisionedProduct object that the request is modifying, and a list
@@ -10320,6 +10831,11 @@ func (s UpdateProvisionedProductOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProvisionedProductOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProvisionedProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRecordDetail sets the RecordDetail field's value.
@@ -10427,6 +10943,8 @@ func (s *UpdateProvisioningArtifactInput) SetProvisioningArtifactId(v string) *U
 type UpdateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Additional information about the provisioning artifact update request.
 	Info map[string]string `min:"1" type:"map"`
 
@@ -10445,6 +10963,11 @@ func (s UpdateProvisioningArtifactOutput) String() string {
 // GoString returns the string representation
 func (s UpdateProvisioningArtifactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInfo sets the Info field's value.
@@ -10593,6 +11116,8 @@ func (s *UpdateTagOptionInput) SetValue(v string) *UpdateTagOptionInput {
 type UpdateTagOptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting detailed TagOption information.
 	TagOptionDetail *TagOptionDetail `type:"structure"`
 }
@@ -10605,6 +11130,11 @@ func (s UpdateTagOptionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTagOptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTagOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagOptionDetail sets the TagOptionDetail field's value.

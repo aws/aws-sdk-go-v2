@@ -64,7 +64,10 @@ func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersio
 		input = &CreateBotVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBotVersionOutput{})
+	output := &CreateBotVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBotVersionRequest{Request: req, Input: input}
 }
 
@@ -122,7 +125,10 @@ func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntent
 		input = &CreateIntentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIntentVersionOutput{})
+	output := &CreateIntentVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateIntentVersionRequest{Request: req, Input: input}
 }
 
@@ -179,7 +185,10 @@ func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlot
 		input = &CreateSlotTypeVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSlotTypeVersionOutput{})
+	output := &CreateSlotTypeVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSlotTypeVersionRequest{Request: req, Input: input}
 }
 
@@ -234,9 +243,12 @@ func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) Delete
 		input = &DeleteBotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotOutput{})
+	output := &DeleteBotOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBotRequest{Request: req, Input: input}
 }
 
@@ -290,9 +302,12 @@ func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInp
 		input = &DeleteBotAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotAliasOutput{})
+	output := &DeleteBotAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBotAliasRequest{Request: req, Input: input}
 }
 
@@ -341,9 +356,12 @@ func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *Dele
 		input = &DeleteBotChannelAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotChannelAssociationOutput{})
+	output := &DeleteBotChannelAssociationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBotChannelAssociationRequest{Request: req, Input: input}
 }
 
@@ -392,9 +410,12 @@ func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersio
 		input = &DeleteBotVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotVersionOutput{})
+	output := &DeleteBotVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBotVersionRequest{Request: req, Input: input}
 }
 
@@ -453,9 +474,12 @@ func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) 
 		input = &DeleteIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntentOutput{})
+	output := &DeleteIntentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIntentRequest{Request: req, Input: input}
 }
 
@@ -504,9 +528,12 @@ func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntent
 		input = &DeleteIntentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntentVersionOutput{})
+	output := &DeleteIntentVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIntentVersionRequest{Request: req, Input: input}
 }
 
@@ -567,9 +594,12 @@ func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInp
 		input = &DeleteSlotTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSlotTypeOutput{})
+	output := &DeleteSlotTypeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSlotTypeRequest{Request: req, Input: input}
 }
 
@@ -618,9 +648,12 @@ func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlot
 		input = &DeleteSlotTypeVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSlotTypeVersionOutput{})
+	output := &DeleteSlotTypeVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSlotTypeVersionRequest{Request: req, Input: input}
 }
 
@@ -676,9 +709,12 @@ func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterance
 		input = &DeleteUtterancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUtterancesOutput{})
+	output := &DeleteUtterancesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUtterancesRequest{Request: req, Input: input}
 }
 
@@ -727,7 +763,10 @@ func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) GetBotReques
 		input = &GetBotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotOutput{})
+	output := &GetBotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotRequest{Request: req, Input: input}
 }
 
@@ -776,7 +815,10 @@ func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) Ge
 		input = &GetBotAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotAliasOutput{})
+	output := &GetBotAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotAliasRequest{Request: req, Input: input}
 }
 
@@ -830,7 +872,10 @@ func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput
 		input = &GetBotAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotAliasesOutput{})
+	output := &GetBotAliasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotAliasesRequest{Request: req, Input: input}
 }
 
@@ -930,7 +975,10 @@ func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotC
 		input = &GetBotChannelAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotChannelAssociationOutput{})
+	output := &GetBotChannelAssociationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotChannelAssociationRequest{Request: req, Input: input}
 }
 
@@ -985,7 +1033,10 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBot
 		input = &GetBotChannelAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotChannelAssociationsOutput{})
+	output := &GetBotChannelAssociationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotChannelAssociationsRequest{Request: req, Input: input}
 }
 
@@ -1097,7 +1148,10 @@ func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInp
 		input = &GetBotVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotVersionsOutput{})
+	output := &GetBotVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotVersionsRequest{Request: req, Input: input}
 }
 
@@ -1208,7 +1262,10 @@ func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) GetBotsReq
 		input = &GetBotsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotsOutput{})
+	output := &GetBotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBotsRequest{Request: req, Input: input}
 }
 
@@ -1306,7 +1363,10 @@ func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinInten
 		input = &GetBuiltinIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBuiltinIntentOutput{})
+	output := &GetBuiltinIntentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBuiltinIntentRequest{Request: req, Input: input}
 }
 
@@ -1360,7 +1420,10 @@ func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinInte
 		input = &GetBuiltinIntentsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBuiltinIntentsOutput{})
+	output := &GetBuiltinIntentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBuiltinIntentsRequest{Request: req, Input: input}
 }
 
@@ -1467,7 +1530,10 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSl
 		input = &GetBuiltinSlotTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBuiltinSlotTypesOutput{})
+	output := &GetBuiltinSlotTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBuiltinSlotTypesRequest{Request: req, Input: input}
 }
 
@@ -1563,7 +1629,10 @@ func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) GetExp
 		input = &GetExportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExportOutput{})
+	output := &GetExportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetExportRequest{Request: req, Input: input}
 }
 
@@ -1612,7 +1681,10 @@ func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) GetInt
 		input = &GetIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIntentOutput{})
+	output := &GetIntentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIntentRequest{Request: req, Input: input}
 }
 
@@ -1674,7 +1746,10 @@ func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersi
 		input = &GetIntentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIntentVersionsOutput{})
+	output := &GetIntentVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIntentVersionsRequest{Request: req, Input: input}
 }
 
@@ -1784,7 +1859,10 @@ func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) GetI
 		input = &GetIntentsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIntentsOutput{})
+	output := &GetIntentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIntentsRequest{Request: req, Input: input}
 }
 
@@ -1883,7 +1961,10 @@ func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) Ge
 		input = &GetSlotTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSlotTypeOutput{})
+	output := &GetSlotTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSlotTypeRequest{Request: req, Input: input}
 }
 
@@ -1945,7 +2026,10 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeV
 		input = &GetSlotTypeVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSlotTypeVersionsOutput{})
+	output := &GetSlotTypeVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSlotTypeVersionsRequest{Request: req, Input: input}
 }
 
@@ -2055,7 +2139,10 @@ func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) 
 		input = &GetSlotTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSlotTypesOutput{})
+	output := &GetSlotTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSlotTypesRequest{Request: req, Input: input}
 }
 
@@ -2174,7 +2261,10 @@ func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesV
 		input = &GetUtterancesViewInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUtterancesViewOutput{})
+	output := &GetUtterancesViewOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUtterancesViewRequest{Request: req, Input: input}
 }
 
@@ -2232,7 +2322,10 @@ func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) PutBotReques
 		input = &PutBotInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBotOutput{})
+	output := &PutBotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBotRequest{Request: req, Input: input}
 }
 
@@ -2282,7 +2375,10 @@ func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) Pu
 		input = &PutBotAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBotAliasOutput{})
+	output := &PutBotAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutBotAliasRequest{Request: req, Input: input}
 }
 
@@ -2371,7 +2467,10 @@ func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) PutInt
 		input = &PutIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &PutIntentOutput{})
+	output := &PutIntentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutIntentRequest{Request: req, Input: input}
 }
 
@@ -2428,7 +2527,10 @@ func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) Pu
 		input = &PutSlotTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSlotTypeOutput{})
+	output := &PutSlotTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutSlotTypeRequest{Request: req, Input: input}
 }
 
@@ -2891,6 +2993,8 @@ func (s *CreateBotVersionInput) SetName(v string) *CreateBotVersionInput {
 type CreateBotVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The message that Amazon Lex uses to abort a conversation. For more information,
 	// see PutBot.
 	AbortStatement *Statement `locationName:"abortStatement" type:"structure"`
@@ -2975,6 +3079,11 @@ func (s CreateBotVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateBotVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBotVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbortStatement sets the AbortStatement field's value.
@@ -3128,6 +3237,8 @@ func (s *CreateIntentVersionInput) SetName(v string) *CreateIntentVersionInput {
 type CreateIntentVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Checksum of the intent version created.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -3187,6 +3298,11 @@ func (s CreateIntentVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateIntentVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateIntentVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.
@@ -3340,6 +3456,8 @@ func (s *CreateSlotTypeVersionInput) SetName(v string) *CreateSlotTypeVersionInp
 type CreateSlotTypeVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -3376,6 +3494,11 @@ func (s CreateSlotTypeVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreateSlotTypeVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSlotTypeVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.
@@ -3490,6 +3613,8 @@ func (s *DeleteBotAliasInput) SetName(v string) *DeleteBotAliasInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotAliasOutput
 type DeleteBotAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3500,6 +3625,11 @@ func (s DeleteBotAliasOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBotAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBotAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociationRequest
@@ -3585,6 +3715,8 @@ func (s *DeleteBotChannelAssociationInput) SetName(v string) *DeleteBotChannelAs
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociationOutput
 type DeleteBotChannelAssociationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3595,6 +3727,11 @@ func (s DeleteBotChannelAssociationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBotChannelAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBotChannelAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotRequest
@@ -3643,6 +3780,8 @@ func (s *DeleteBotInput) SetName(v string) *DeleteBotInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotOutput
 type DeleteBotOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3653,6 +3792,11 @@ func (s DeleteBotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersionRequest
@@ -3720,6 +3864,8 @@ func (s *DeleteBotVersionInput) SetVersion(v string) *DeleteBotVersionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersionOutput
 type DeleteBotVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3730,6 +3876,11 @@ func (s DeleteBotVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBotVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBotVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentRequest
@@ -3778,6 +3929,8 @@ func (s *DeleteIntentInput) SetName(v string) *DeleteIntentInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentOutput
 type DeleteIntentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3788,6 +3941,11 @@ func (s DeleteIntentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIntentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIntentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersionRequest
@@ -3855,6 +4013,8 @@ func (s *DeleteIntentVersionInput) SetVersion(v string) *DeleteIntentVersionInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersionOutput
 type DeleteIntentVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3865,6 +4025,11 @@ func (s DeleteIntentVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIntentVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIntentVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeRequest
@@ -3913,6 +4078,8 @@ func (s *DeleteSlotTypeInput) SetName(v string) *DeleteSlotTypeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeOutput
 type DeleteSlotTypeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3923,6 +4090,11 @@ func (s DeleteSlotTypeOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSlotTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSlotTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersionRequest
@@ -3990,6 +4162,8 @@ func (s *DeleteSlotTypeVersionInput) SetVersion(v string) *DeleteSlotTypeVersion
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersionOutput
 type DeleteSlotTypeVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4000,6 +4174,11 @@ func (s DeleteSlotTypeVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSlotTypeVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSlotTypeVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterancesRequest
@@ -4069,6 +4248,8 @@ func (s *DeleteUtterancesInput) SetUserId(v string) *DeleteUtterancesInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterancesOutput
 type DeleteUtterancesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4079,6 +4260,11 @@ func (s DeleteUtterancesOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUtterancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUtterancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Each slot type can have a set of values. Each enumeration value represents
@@ -4351,6 +4537,8 @@ func (s *GetBotAliasInput) SetName(v string) *GetBotAliasInput {
 type GetBotAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the bot that the alias points to.
 	BotName *string `locationName:"botName" min:"2" type:"string"`
 
@@ -4382,6 +4570,11 @@ func (s GetBotAliasOutput) String() string {
 // GoString returns the string representation
 func (s GetBotAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBotName sets the BotName field's value.
@@ -4512,6 +4705,8 @@ func (s *GetBotAliasesInput) SetNextToken(v string) *GetBotAliasesInput {
 type GetBotAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of BotAliasMetadata objects, each describing a bot alias.
 	BotAliases []BotAliasMetadata `type:"list"`
 
@@ -4530,6 +4725,11 @@ func (s GetBotAliasesOutput) String() string {
 // GoString returns the string representation
 func (s GetBotAliasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotAliasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBotAliases sets the BotAliases field's value.
@@ -4629,6 +4829,8 @@ func (s *GetBotChannelAssociationInput) SetName(v string) *GetBotChannelAssociat
 type GetBotChannelAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An alias pointing to the specific version of the Amazon Lex bot to which
 	// this association is being made.
 	BotAlias *string `locationName:"botAlias" min:"1" type:"string"`
@@ -4661,6 +4863,11 @@ func (s GetBotChannelAssociationOutput) String() string {
 // GoString returns the string representation
 func (s GetBotChannelAssociationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotChannelAssociationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBotAlias sets the BotAlias field's value.
@@ -4811,6 +5018,8 @@ func (s *GetBotChannelAssociationsInput) SetNextToken(v string) *GetBotChannelAs
 type GetBotChannelAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of objects, one for each association, that provides information
 	// about the Amazon Lex bot and its association with the channel.
 	BotChannelAssociations []BotChannelAssociation `locationName:"botChannelAssociations" type:"list"`
@@ -4830,6 +5039,11 @@ func (s GetBotChannelAssociationsOutput) String() string {
 // GoString returns the string representation
 func (s GetBotChannelAssociationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotChannelAssociationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBotChannelAssociations sets the BotChannelAssociations field's value.
@@ -4905,6 +5119,8 @@ func (s *GetBotInput) SetVersionOrAlias(v string) *GetBotInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotResponse
 type GetBotOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The message that Amazon Lex returns when the user elects to end the conversation
 	// without completing it. For more information, see PutBot.
@@ -4991,6 +5207,11 @@ func (s GetBotOutput) String() string {
 // GoString returns the string representation
 func (s GetBotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbortStatement sets the AbortStatement field's value.
@@ -5155,6 +5376,8 @@ func (s *GetBotVersionsInput) SetNextToken(v string) *GetBotVersionsInput {
 type GetBotVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of BotMetadata objects, one for each numbered version of the bot
 	// plus one for the $LATEST version.
 	Bots []BotMetadata `locationName:"bots" type:"list"`
@@ -5174,6 +5397,11 @@ func (s GetBotVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetBotVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBots sets the Bots field's value.
@@ -5256,6 +5484,8 @@ func (s *GetBotsInput) SetNextToken(v string) *GetBotsInput {
 type GetBotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of botMetadata objects, with one entry for each bot.
 	Bots []BotMetadata `locationName:"bots" type:"list"`
 
@@ -5272,6 +5502,11 @@ func (s GetBotsOutput) String() string {
 // GoString returns the string representation
 func (s GetBotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBots sets the Bots field's value.
@@ -5332,6 +5567,8 @@ func (s *GetBuiltinIntentInput) SetSignature(v string) *GetBuiltinIntentInput {
 type GetBuiltinIntentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for a built-in intent.
 	Signature *string `locationName:"signature" type:"string"`
 
@@ -5351,6 +5588,11 @@ func (s GetBuiltinIntentOutput) String() string {
 // GoString returns the string representation
 func (s GetBuiltinIntentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBuiltinIntentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSignature sets the Signature field's value.
@@ -5445,6 +5687,8 @@ func (s *GetBuiltinIntentsInput) SetSignatureContains(v string) *GetBuiltinInten
 type GetBuiltinIntentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of builtinIntentMetadata objects, one for each intent in the response.
 	Intents []BuiltinIntentMetadata `locationName:"intents" type:"list"`
 
@@ -5463,6 +5707,11 @@ func (s GetBuiltinIntentsOutput) String() string {
 // GoString returns the string representation
 func (s GetBuiltinIntentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBuiltinIntentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIntents sets the Intents field's value.
@@ -5551,6 +5800,8 @@ func (s *GetBuiltinSlotTypesInput) SetSignatureContains(v string) *GetBuiltinSlo
 type GetBuiltinSlotTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the response is truncated, the response includes a pagination token that
 	// you can use in your next request to fetch the next page of slot types.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -5568,6 +5819,11 @@ func (s GetBuiltinSlotTypesOutput) String() string {
 // GoString returns the string representation
 func (s GetBuiltinSlotTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBuiltinSlotTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5675,6 +5931,8 @@ func (s *GetExportInput) SetVersion(v string) *GetExportInput {
 type GetExportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the export.
 	//
 	//    * IN_PROGRESS - The export is in progress.
@@ -5715,6 +5973,11 @@ func (s GetExportOutput) String() string {
 // GoString returns the string representation
 func (s GetExportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetExportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportStatus sets the ExportStatus field's value.
@@ -5824,6 +6087,8 @@ func (s *GetIntentInput) SetVersion(v string) *GetIntentInput {
 type GetIntentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Checksum of the intent.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -5884,6 +6149,11 @@ func (s GetIntentOutput) String() string {
 // GoString returns the string representation
 func (s GetIntentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIntentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.
@@ -6048,6 +6318,8 @@ func (s *GetIntentVersionsInput) SetNextToken(v string) *GetIntentVersionsInput 
 type GetIntentVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of IntentMetadata objects, one for each numbered version of the
 	// intent plus one for the $LATEST version.
 	Intents []IntentMetadata `locationName:"intents" type:"list"`
@@ -6067,6 +6339,11 @@ func (s GetIntentVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetIntentVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIntentVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIntents sets the Intents field's value.
@@ -6148,6 +6425,8 @@ func (s *GetIntentsInput) SetNextToken(v string) *GetIntentsInput {
 type GetIntentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Intent objects. For more information, see PutBot.
 	Intents []IntentMetadata `locationName:"intents" type:"list"`
 
@@ -6164,6 +6443,11 @@ func (s GetIntentsOutput) String() string {
 // GoString returns the string representation
 func (s GetIntentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIntentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIntents sets the Intents field's value.
@@ -6243,6 +6527,8 @@ func (s *GetSlotTypeInput) SetVersion(v string) *GetSlotTypeInput {
 type GetSlotTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -6279,6 +6565,11 @@ func (s GetSlotTypeOutput) String() string {
 // GoString returns the string representation
 func (s GetSlotTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSlotTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.
@@ -6401,6 +6692,8 @@ func (s *GetSlotTypeVersionsInput) SetNextToken(v string) *GetSlotTypeVersionsIn
 type GetSlotTypeVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A pagination token for fetching the next page of slot type versions. If the
 	// response to this call is truncated, Amazon Lex returns a pagination token
 	// in the response. To fetch the next page of versions, specify the pagination
@@ -6420,6 +6713,11 @@ func (s GetSlotTypeVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetSlotTypeVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSlotTypeVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6502,6 +6800,8 @@ func (s *GetSlotTypesInput) SetNextToken(v string) *GetSlotTypesInput {
 type GetSlotTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the response is truncated, it includes a pagination token that you can
 	// specify in your next request to fetch the next page of slot types.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -6519,6 +6819,11 @@ func (s GetSlotTypesOutput) String() string {
 // GoString returns the string representation
 func (s GetSlotTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSlotTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6614,6 +6919,8 @@ func (s *GetUtterancesViewInput) SetStatusType(v StatusType) *GetUtterancesViewI
 type GetUtterancesViewOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the bot for which utterance information was returned.
 	BotName *string `locationName:"botName" min:"2" type:"string"`
 
@@ -6631,6 +6938,11 @@ func (s GetUtterancesViewOutput) String() string {
 // GoString returns the string representation
 func (s GetUtterancesViewOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUtterancesViewOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBotName sets the BotName field's value.
@@ -7024,6 +7336,8 @@ func (s *PutBotAliasInput) SetName(v string) *PutBotAliasInput {
 type PutBotAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the bot that the alias points to.
 	BotName *string `locationName:"botName" min:"2" type:"string"`
 
@@ -7055,6 +7369,11 @@ func (s PutBotAliasOutput) String() string {
 // GoString returns the string representation
 func (s PutBotAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBotAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBotName sets the BotName field's value.
@@ -7346,6 +7665,8 @@ func (s *PutBotInput) SetVoiceId(v string) *PutBotInput {
 type PutBotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The message that Amazon Lex uses to abort a conversation. For more information,
 	// see PutBot.
 	AbortStatement *Statement `locationName:"abortStatement" type:"structure"`
@@ -7435,6 +7756,11 @@ func (s PutBotOutput) String() string {
 // GoString returns the string representation
 func (s PutBotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbortStatement sets the AbortStatement field's value.
@@ -7787,6 +8113,8 @@ func (s *PutIntentInput) SetSlots(v []Slot) *PutIntentInput {
 type PutIntentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Checksum of the $LATESTversion of the intent created or updated.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -7849,6 +8177,11 @@ func (s PutIntentOutput) String() string {
 // GoString returns the string representation
 func (s PutIntentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutIntentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.
@@ -8069,6 +8402,8 @@ func (s *PutSlotTypeInput) SetValueSelectionStrategy(v SlotValueSelectionStrateg
 type PutSlotTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -8106,6 +8441,11 @@ func (s PutSlotTypeOutput) String() string {
 // GoString returns the string representation
 func (s PutSlotTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutSlotTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChecksum sets the Checksum field's value.

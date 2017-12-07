@@ -54,7 +54,10 @@ func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) A
 		input = &AddFacetToObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &AddFacetToObjectOutput{})
+	output := &AddFacetToObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddFacetToObjectRequest{Request: req, Input: input}
 }
 
@@ -101,7 +104,10 @@ func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) ApplySchema
 		input = &ApplySchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &ApplySchemaOutput{})
+	output := &ApplySchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ApplySchemaRequest{Request: req, Input: input}
 }
 
@@ -152,7 +158,10 @@ func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) AttachObj
 		input = &AttachObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachObjectOutput{})
+	output := &AttachObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachObjectRequest{Request: req, Input: input}
 }
 
@@ -199,7 +208,10 @@ func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) AttachPol
 		input = &AttachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachPolicyOutput{})
+	output := &AttachPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachPolicyRequest{Request: req, Input: input}
 }
 
@@ -245,7 +257,10 @@ func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) AttachT
 		input = &AttachToIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachToIndexOutput{})
+	output := &AttachToIndexOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachToIndexRequest{Request: req, Input: input}
 }
 
@@ -292,7 +307,10 @@ func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) Att
 		input = &AttachTypedLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachTypedLinkOutput{})
+	output := &AttachTypedLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachTypedLinkRequest{Request: req, Input: input}
 }
 
@@ -338,7 +356,10 @@ func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) BatchReadReques
 		input = &BatchReadInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchReadOutput{})
+	output := &BatchReadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchReadRequest{Request: req, Input: input}
 }
 
@@ -385,7 +406,10 @@ func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) BatchWriteReq
 		input = &BatchWriteInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchWriteOutput{})
+	output := &BatchWriteOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchWriteRequest{Request: req, Input: input}
 }
 
@@ -432,7 +456,10 @@ func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) Cre
 		input = &CreateDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectoryOutput{})
+	output := &CreateDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDirectoryRequest{Request: req, Input: input}
 }
 
@@ -479,7 +506,10 @@ func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) CreateFacet
 		input = &CreateFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFacetOutput{})
+	output := &CreateFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFacetRequest{Request: req, Input: input}
 }
 
@@ -526,7 +556,10 @@ func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) CreateIndex
 		input = &CreateIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIndexOutput{})
+	output := &CreateIndexOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateIndexRequest{Request: req, Input: input}
 }
 
@@ -575,7 +608,10 @@ func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) CreateObj
 		input = &CreateObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateObjectOutput{})
+	output := &CreateObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateObjectRequest{Request: req, Input: input}
 }
 
@@ -633,7 +669,10 @@ func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) CreateSch
 		input = &CreateSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSchemaOutput{})
+	output := &CreateSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSchemaRequest{Request: req, Input: input}
 }
 
@@ -679,7 +718,10 @@ func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacet
 		input = &CreateTypedLinkFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTypedLinkFacetOutput{})
+	output := &CreateTypedLinkFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTypedLinkFacetRequest{Request: req, Input: input}
 }
 
@@ -726,7 +768,10 @@ func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) Del
 		input = &DeleteDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectoryOutput{})
+	output := &DeleteDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDirectoryRequest{Request: req, Input: input}
 }
 
@@ -773,7 +818,10 @@ func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) DeleteFacet
 		input = &DeleteFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFacetOutput{})
+	output := &DeleteFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFacetRequest{Request: req, Input: input}
 }
 
@@ -820,7 +868,10 @@ func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) DeleteObj
 		input = &DeleteObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteObjectOutput{})
+	output := &DeleteObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteObjectRequest{Request: req, Input: input}
 }
 
@@ -867,7 +918,10 @@ func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSch
 		input = &DeleteSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSchemaOutput{})
+	output := &DeleteSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSchemaRequest{Request: req, Input: input}
 }
 
@@ -913,7 +967,10 @@ func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacet
 		input = &DeleteTypedLinkFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTypedLinkFacetOutput{})
+	output := &DeleteTypedLinkFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTypedLinkFacetRequest{Request: req, Input: input}
 }
 
@@ -959,7 +1016,10 @@ func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) Det
 		input = &DetachFromIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachFromIndexOutput{})
+	output := &DetachFromIndexOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachFromIndexRequest{Request: req, Input: input}
 }
 
@@ -1006,7 +1066,10 @@ func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) DetachObj
 		input = &DetachObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachObjectOutput{})
+	output := &DetachObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachObjectRequest{Request: req, Input: input}
 }
 
@@ -1052,7 +1115,10 @@ func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) DetachPol
 		input = &DetachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachPolicyOutput{})
+	output := &DetachPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachPolicyRequest{Request: req, Input: input}
 }
 
@@ -1099,9 +1165,12 @@ func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) Det
 		input = &DetachTypedLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachTypedLinkOutput{})
+	output := &DetachTypedLinkOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachTypedLinkRequest{Request: req, Input: input}
 }
 
@@ -1149,7 +1218,10 @@ func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) D
 		input = &DisableDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableDirectoryOutput{})
+	output := &DisableDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableDirectoryRequest{Request: req, Input: input}
 }
 
@@ -1196,7 +1268,10 @@ func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) Ena
 		input = &EnableDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableDirectoryOutput{})
+	output := &EnableDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableDirectoryRequest{Request: req, Input: input}
 }
 
@@ -1242,7 +1317,10 @@ func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) GetDirect
 		input = &GetDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDirectoryOutput{})
+	output := &GetDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDirectoryRequest{Request: req, Input: input}
 }
 
@@ -1290,7 +1368,10 @@ func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 		input = &GetFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFacetOutput{})
+	output := &GetFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFacetRequest{Request: req, Input: input}
 }
 
@@ -1336,7 +1417,10 @@ func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformation
 		input = &GetObjectInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectInformationOutput{})
+	output := &GetObjectInformationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetObjectInformationRequest{Request: req, Input: input}
 }
 
@@ -1383,7 +1467,10 @@ func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) Get
 		input = &GetSchemaAsJsonInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSchemaAsJsonOutput{})
+	output := &GetSchemaAsJsonOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSchemaAsJsonRequest{Request: req, Input: input}
 }
 
@@ -1430,7 +1517,10 @@ func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLink
 		input = &GetTypedLinkFacetInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTypedLinkFacetInformationOutput{})
+	output := &GetTypedLinkFacetInformationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTypedLinkFacetInformationRequest{Request: req, Input: input}
 }
 
@@ -1482,7 +1572,10 @@ func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaAr
 		input = &ListAppliedSchemaArnsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAppliedSchemaArnsOutput{})
+	output := &ListAppliedSchemaArnsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAppliedSchemaArnsRequest{Request: req, Input: input}
 }
 
@@ -1584,7 +1677,10 @@ func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesIn
 		input = &ListAttachedIndicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttachedIndicesOutput{})
+	output := &ListAttachedIndicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAttachedIndicesRequest{Request: req, Input: input}
 }
 
@@ -1686,7 +1782,10 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopment
 		input = &ListDevelopmentSchemaArnsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevelopmentSchemaArnsOutput{})
+	output := &ListDevelopmentSchemaArnsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDevelopmentSchemaArnsRequest{Request: req, Input: input}
 }
 
@@ -1788,7 +1887,10 @@ func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) Lis
 		input = &ListDirectoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDirectoriesOutput{})
+	output := &ListDirectoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDirectoriesRequest{Request: req, Input: input}
 }
 
@@ -1890,7 +1992,10 @@ func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesIn
 		input = &ListFacetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFacetAttributesOutput{})
+	output := &ListFacetAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFacetAttributesRequest{Request: req, Input: input}
 }
 
@@ -1992,7 +2097,10 @@ func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) ListF
 		input = &ListFacetNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFacetNamesOutput{})
+	output := &ListFacetNamesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFacetNamesRequest{Request: req, Input: input}
 }
 
@@ -2090,7 +2198,10 @@ func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedL
 		input = &ListIncomingTypedLinksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIncomingTypedLinksOutput{})
+	output := &ListIncomingTypedLinksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIncomingTypedLinksRequest{Request: req, Input: input}
 }
 
@@ -2142,7 +2253,10 @@ func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) ListIndexReques
 		input = &ListIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIndexOutput{})
+	output := &ListIndexOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIndexRequest{Request: req, Input: input}
 }
 
@@ -2244,7 +2358,10 @@ func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributes
 		input = &ListObjectAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectAttributesOutput{})
+	output := &ListObjectAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectAttributesRequest{Request: req, Input: input}
 }
 
@@ -2347,7 +2464,10 @@ func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInpu
 		input = &ListObjectChildrenInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectChildrenOutput{})
+	output := &ListObjectChildrenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectChildrenRequest{Request: req, Input: input}
 }
 
@@ -2459,7 +2579,10 @@ func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPat
 		input = &ListObjectParentPathsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectParentPathsOutput{})
+	output := &ListObjectParentPathsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectParentPathsRequest{Request: req, Input: input}
 }
 
@@ -2562,7 +2685,10 @@ func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput)
 		input = &ListObjectParentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectParentsOutput{})
+	output := &ListObjectParentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectParentsRequest{Request: req, Input: input}
 }
 
@@ -2664,7 +2790,10 @@ func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInpu
 		input = &ListObjectPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectPoliciesOutput{})
+	output := &ListObjectPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListObjectPoliciesRequest{Request: req, Input: input}
 }
 
@@ -2762,7 +2891,10 @@ func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedL
 		input = &ListOutgoingTypedLinksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOutgoingTypedLinksOutput{})
+	output := &ListOutgoingTypedLinksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOutgoingTypedLinksRequest{Request: req, Input: input}
 }
 
@@ -2814,7 +2946,10 @@ func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmen
 		input = &ListPolicyAttachmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPolicyAttachmentsOutput{})
+	output := &ListPolicyAttachmentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPolicyAttachmentsRequest{Request: req, Input: input}
 }
 
@@ -2916,7 +3051,10 @@ func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSche
 		input = &ListPublishedSchemaArnsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPublishedSchemaArnsOutput{})
+	output := &ListPublishedSchemaArnsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPublishedSchemaArnsRequest{Request: req, Input: input}
 }
 
@@ -3020,7 +3158,10 @@ func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceIn
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -3123,7 +3264,10 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLin
 		input = &ListTypedLinkFacetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTypedLinkFacetAttributesOutput{})
+	output := &ListTypedLinkFacetAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTypedLinkFacetAttributesRequest{Request: req, Input: input}
 }
 
@@ -3226,7 +3370,10 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFace
 		input = &ListTypedLinkFacetNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTypedLinkFacetNamesOutput{})
+	output := &ListTypedLinkFacetNamesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTypedLinkFacetNamesRequest{Request: req, Input: input}
 }
 
@@ -3334,7 +3481,10 @@ func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) LookupPol
 		input = &LookupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &LookupPolicyOutput{})
+	output := &LookupPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return LookupPolicyRequest{Request: req, Input: input}
 }
 
@@ -3433,7 +3583,10 @@ func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) Publish
 		input = &PublishSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &PublishSchemaOutput{})
+	output := &PublishSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PublishSchemaRequest{Request: req, Input: input}
 }
 
@@ -3481,7 +3634,10 @@ func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput)
 		input = &PutSchemaFromJsonInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSchemaFromJsonOutput{})
+	output := &PutSchemaFromJsonOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutSchemaFromJsonRequest{Request: req, Input: input}
 }
 
@@ -3527,7 +3683,10 @@ func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObje
 		input = &RemoveFacetFromObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveFacetFromObjectOutput{})
+	output := &RemoveFacetFromObjectOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveFacetFromObjectRequest{Request: req, Input: input}
 }
 
@@ -3573,7 +3732,10 @@ func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) TagResource
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -3619,7 +3781,10 @@ func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) UntagRe
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -3671,7 +3836,10 @@ func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) UpdateFacet
 		input = &UpdateFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFacetOutput{})
+	output := &UpdateFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFacetRequest{Request: req, Input: input}
 }
 
@@ -3717,7 +3885,10 @@ func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttrib
 		input = &UpdateObjectAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateObjectAttributesOutput{})
+	output := &UpdateObjectAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateObjectAttributesRequest{Request: req, Input: input}
 }
 
@@ -3764,7 +3935,10 @@ func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSch
 		input = &UpdateSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSchemaOutput{})
+	output := &UpdateSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSchemaRequest{Request: req, Input: input}
 }
 
@@ -3810,7 +3984,10 @@ func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacet
 		input = &UpdateTypedLinkFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTypedLinkFacetOutput{})
+	output := &UpdateTypedLinkFacetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTypedLinkFacetRequest{Request: req, Input: input}
 }
 
@@ -3909,6 +4086,8 @@ func (s *AddFacetToObjectInput) SetSchemaFacet(v *SchemaFacet) *AddFacetToObject
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectResponse
 type AddFacetToObjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3919,6 +4098,11 @@ func (s AddFacetToObjectOutput) String() string {
 // GoString returns the string representation
 func (s AddFacetToObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddFacetToObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchemaRequest
@@ -3982,6 +4166,8 @@ func (s *ApplySchemaInput) SetPublishedSchemaArn(v string) *ApplySchemaInput {
 type ApplySchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The applied schema ARN that is associated with the copied schema in the Directory.
 	// You can use this ARN to describe the schema information applied on this directory.
 	// For more information, see arns.
@@ -4000,6 +4186,11 @@ func (s ApplySchemaOutput) String() string {
 // GoString returns the string representation
 func (s ApplySchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ApplySchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAppliedSchemaArn sets the AppliedSchemaArn field's value.
@@ -4107,6 +4298,8 @@ func (s *AttachObjectInput) SetParentReference(v *ObjectReference) *AttachObject
 type AttachObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attached ObjectIdentifier, which is the child ObjectIdentifier.
 	AttachedObjectIdentifier *string `type:"string"`
 }
@@ -4119,6 +4312,11 @@ func (s AttachObjectOutput) String() string {
 // GoString returns the string representation
 func (s AttachObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachedObjectIdentifier sets the AttachedObjectIdentifier field's value.
@@ -4195,6 +4393,8 @@ func (s *AttachPolicyInput) SetPolicyReference(v *ObjectReference) *AttachPolicy
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicyResponse
 type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4205,6 +4405,11 @@ func (s AttachPolicyOutput) String() string {
 // GoString returns the string representation
 func (s AttachPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndexRequest
@@ -4282,6 +4487,8 @@ func (s *AttachToIndexInput) SetTargetReference(v *ObjectReference) *AttachToInd
 type AttachToIndexOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ObjectIdentifier of the object that was attached to the index.
 	AttachedObjectIdentifier *string `type:"string"`
 }
@@ -4294,6 +4501,11 @@ func (s AttachToIndexOutput) String() string {
 // GoString returns the string representation
 func (s AttachToIndexOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachToIndexOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachedObjectIdentifier sets the AttachedObjectIdentifier field's value.
@@ -4419,6 +4631,8 @@ func (s *AttachTypedLinkInput) SetTypedLinkFacet(v *TypedLinkSchemaAndFacetName)
 type AttachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns a typed link specifier as output.
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure"`
 }
@@ -4431,6 +4645,11 @@ func (s AttachTypedLinkOutput) String() string {
 // GoString returns the string representation
 func (s AttachTypedLinkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachTypedLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTypedLinkSpecifier sets the TypedLinkSpecifier field's value.
@@ -7249,6 +7468,8 @@ func (s *BatchReadOperationResponse) SetSuccessfulResponse(v *BatchReadSuccessfu
 type BatchReadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of all the responses for each batch read.
 	Responses []BatchReadOperationResponse `type:"list"`
 }
@@ -7261,6 +7482,11 @@ func (s BatchReadOutput) String() string {
 // GoString returns the string representation
 func (s BatchReadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchReadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResponses sets the Responses field's value.
@@ -8001,6 +8227,8 @@ func (s *BatchWriteOperationResponse) SetUpdateObjectAttributes(v *BatchUpdateOb
 type BatchWriteOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of all the responses for each batch write.
 	Responses []BatchWriteOperationResponse `type:"list"`
 }
@@ -8013,6 +8241,11 @@ func (s BatchWriteOutput) String() string {
 // GoString returns the string representation
 func (s BatchWriteOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchWriteOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResponses sets the Responses field's value.
@@ -8084,6 +8317,8 @@ func (s *CreateDirectoryInput) SetSchemaArn(v string) *CreateDirectoryInput {
 type CreateDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the published schema in the Directory. Once a published schema
 	// is copied into the directory, it has its own ARN, which is referred to applied
 	// schema ARN. For more information, see arns.
@@ -8116,6 +8351,11 @@ func (s CreateDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s CreateDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAppliedSchemaArn sets the AppliedSchemaArn field's value.
@@ -8244,6 +8484,8 @@ func (s *CreateFacetInput) SetSchemaArn(v string) *CreateFacetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacetResponse
 type CreateFacetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8254,6 +8496,11 @@ func (s CreateFacetOutput) String() string {
 // GoString returns the string representation
 func (s CreateFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndexRequest
@@ -8360,6 +8607,8 @@ func (s *CreateIndexInput) SetParentReference(v *ObjectReference) *CreateIndexIn
 type CreateIndexOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ObjectIdentifier of the index created by this operation.
 	ObjectIdentifier *string `type:"string"`
 }
@@ -8372,6 +8621,11 @@ func (s CreateIndexOutput) String() string {
 // GoString returns the string representation
 func (s CreateIndexOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateIndexOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetObjectIdentifier sets the ObjectIdentifier field's value.
@@ -8486,6 +8740,8 @@ func (s *CreateObjectInput) SetSchemaFacets(v []SchemaFacet) *CreateObjectInput 
 type CreateObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier that is associated with the object.
 	ObjectIdentifier *string `type:"string"`
 }
@@ -8498,6 +8754,11 @@ func (s CreateObjectOutput) String() string {
 // GoString returns the string representation
 func (s CreateObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetObjectIdentifier sets the ObjectIdentifier field's value.
@@ -8554,6 +8815,8 @@ func (s *CreateSchemaInput) SetName(v string) *CreateSchemaInput {
 type CreateSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns.
 	SchemaArn *string `type:"string"`
@@ -8567,6 +8830,11 @@ func (s CreateSchemaOutput) String() string {
 // GoString returns the string representation
 func (s CreateSchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSchemaArn sets the SchemaArn field's value.
@@ -8639,6 +8907,8 @@ func (s *CreateTypedLinkFacetInput) SetSchemaArn(v string) *CreateTypedLinkFacet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetResponse
 type CreateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8649,6 +8919,11 @@ func (s CreateTypedLinkFacetOutput) String() string {
 // GoString returns the string representation
 func (s CreateTypedLinkFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTypedLinkFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectoryRequest
@@ -8695,6 +8970,8 @@ func (s *DeleteDirectoryInput) SetDirectoryArn(v string) *DeleteDirectoryInput {
 type DeleteDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the deleted directory.
 	//
 	// DirectoryArn is a required field
@@ -8709,6 +8986,11 @@ func (s DeleteDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryArn sets the DirectoryArn field's value.
@@ -8779,6 +9061,8 @@ func (s *DeleteFacetInput) SetSchemaArn(v string) *DeleteFacetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacetResponse
 type DeleteFacetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8789,6 +9073,11 @@ func (s DeleteFacetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObjectRequest
@@ -8850,6 +9139,8 @@ func (s *DeleteObjectInput) SetObjectReference(v *ObjectReference) *DeleteObject
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObjectResponse
 type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8860,6 +9151,11 @@ func (s DeleteObjectOutput) String() string {
 // GoString returns the string representation
 func (s DeleteObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchemaRequest
@@ -8907,6 +9203,8 @@ func (s *DeleteSchemaInput) SetSchemaArn(v string) *DeleteSchemaInput {
 type DeleteSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The input ARN that is returned as part of the response. For more information,
 	// see arns.
 	SchemaArn *string `type:"string"`
@@ -8920,6 +9218,11 @@ func (s DeleteSchemaOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSchemaArn sets the SchemaArn field's value.
@@ -8987,6 +9290,8 @@ func (s *DeleteTypedLinkFacetInput) SetSchemaArn(v string) *DeleteTypedLinkFacet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetResponse
 type DeleteTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8997,6 +9302,11 @@ func (s DeleteTypedLinkFacetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTypedLinkFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTypedLinkFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndexRequest
@@ -9074,6 +9384,8 @@ func (s *DetachFromIndexInput) SetTargetReference(v *ObjectReference) *DetachFro
 type DetachFromIndexOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ObjectIdentifier of the object that was detached from the index.
 	DetachedObjectIdentifier *string `type:"string"`
 }
@@ -9086,6 +9398,11 @@ func (s DetachFromIndexOutput) String() string {
 // GoString returns the string representation
 func (s DetachFromIndexOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachFromIndexOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDetachedObjectIdentifier sets the DetachedObjectIdentifier field's value.
@@ -9173,6 +9490,8 @@ func (s *DetachObjectInput) SetParentReference(v *ObjectReference) *DetachObject
 type DetachObjectOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ObjectIdentifier that was detached from the object.
 	DetachedObjectIdentifier *string `type:"string"`
 }
@@ -9185,6 +9504,11 @@ func (s DetachObjectOutput) String() string {
 // GoString returns the string representation
 func (s DetachObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDetachedObjectIdentifier sets the DetachedObjectIdentifier field's value.
@@ -9267,6 +9591,8 @@ func (s *DetachPolicyInput) SetPolicyReference(v *ObjectReference) *DetachPolicy
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicyResponse
 type DetachPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9277,6 +9603,11 @@ func (s DetachPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DetachPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLinkRequest
@@ -9343,6 +9674,8 @@ func (s *DetachTypedLinkInput) SetTypedLinkSpecifier(v *TypedLinkSpecifier) *Det
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLinkOutput
 type DetachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9353,6 +9686,11 @@ func (s DetachTypedLinkOutput) String() string {
 // GoString returns the string representation
 func (s DetachTypedLinkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachTypedLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Directory structure that includes the directory name and directory ARN.
@@ -9452,6 +9790,8 @@ func (s *DisableDirectoryInput) SetDirectoryArn(v string) *DisableDirectoryInput
 type DisableDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the directory that has been disabled.
 	//
 	// DirectoryArn is a required field
@@ -9466,6 +9806,11 @@ func (s DisableDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s DisableDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryArn sets the DirectoryArn field's value.
@@ -9518,6 +9863,8 @@ func (s *EnableDirectoryInput) SetDirectoryArn(v string) *EnableDirectoryInput {
 type EnableDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the enabled directory.
 	//
 	// DirectoryArn is a required field
@@ -9532,6 +9879,11 @@ func (s EnableDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s EnableDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryArn sets the DirectoryArn field's value.
@@ -9888,6 +10240,8 @@ func (s *GetDirectoryInput) SetDirectoryArn(v string) *GetDirectoryInput {
 type GetDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Metadata about the directory.
 	//
 	// Directory is a required field
@@ -9902,6 +10256,11 @@ func (s GetDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s GetDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectory sets the Directory field's value.
@@ -9973,6 +10332,8 @@ func (s *GetFacetInput) SetSchemaArn(v string) *GetFacetInput {
 type GetFacetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Facet structure that is associated with the facet.
 	Facet *Facet `type:"structure"`
 }
@@ -9985,6 +10346,11 @@ func (s GetFacetOutput) String() string {
 // GoString returns the string representation
 func (s GetFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFacet sets the Facet field's value.
@@ -10061,6 +10427,8 @@ func (s *GetObjectInformationInput) SetObjectReference(v *ObjectReference) *GetO
 type GetObjectInformationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ObjectIdentifier of the specified object.
 	ObjectIdentifier *string `type:"string"`
 
@@ -10076,6 +10444,11 @@ func (s GetObjectInformationOutput) String() string {
 // GoString returns the string representation
 func (s GetObjectInformationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetObjectInformationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetObjectIdentifier sets the ObjectIdentifier field's value.
@@ -10134,6 +10507,8 @@ func (s *GetSchemaAsJsonInput) SetSchemaArn(v string) *GetSchemaAsJsonInput {
 type GetSchemaAsJsonOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The JSON representation of the schema document.
 	Document *string `type:"string"`
 
@@ -10149,6 +10524,11 @@ func (s GetSchemaAsJsonOutput) String() string {
 // GoString returns the string representation
 func (s GetSchemaAsJsonOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSchemaAsJsonOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocument sets the Document field's value.
@@ -10223,6 +10603,8 @@ func (s *GetTypedLinkFacetInformationInput) SetSchemaArn(v string) *GetTypedLink
 type GetTypedLinkFacetInformationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The order of identity attributes for the facet, from most significant to
 	// least significant. The ability to filter typed links considers the order
 	// that the attributes are defined on the typed link facet. When providing ranges
@@ -10242,6 +10624,11 @@ func (s GetTypedLinkFacetInformationOutput) String() string {
 // GoString returns the string representation
 func (s GetTypedLinkFacetInformationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTypedLinkFacetInformationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
@@ -10349,6 +10736,8 @@ func (s *ListAppliedSchemaArnsInput) SetNextToken(v string) *ListAppliedSchemaAr
 type ListAppliedSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -10364,6 +10753,11 @@ func (s ListAppliedSchemaArnsOutput) String() string {
 // GoString returns the string representation
 func (s ListAppliedSchemaArnsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAppliedSchemaArnsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10467,6 +10861,8 @@ func (s *ListAttachedIndicesInput) SetTargetReference(v *ObjectReference) *ListA
 type ListAttachedIndicesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The indices attached to the specified object.
 	IndexAttachments []IndexAttachment `type:"list"`
 
@@ -10482,6 +10878,11 @@ func (s ListAttachedIndicesOutput) String() string {
 // GoString returns the string representation
 func (s ListAttachedIndicesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAttachedIndicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIndexAttachments sets the IndexAttachments field's value.
@@ -10546,6 +10947,8 @@ func (s *ListDevelopmentSchemaArnsInput) SetNextToken(v string) *ListDevelopment
 type ListDevelopmentSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -10561,6 +10964,11 @@ func (s ListDevelopmentSchemaArnsOutput) String() string {
 // GoString returns the string representation
 func (s ListDevelopmentSchemaArnsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDevelopmentSchemaArnsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10635,6 +11043,8 @@ func (s *ListDirectoriesInput) SetState(v DirectoryState) *ListDirectoriesInput 
 type ListDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Lists all directories that are associated with your account in pagination
 	// fashion.
 	//
@@ -10653,6 +11063,11 @@ func (s ListDirectoriesOutput) String() string {
 // GoString returns the string representation
 func (s ListDirectoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDirectoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectories sets the Directories field's value.
@@ -10750,6 +11165,8 @@ func (s *ListFacetAttributesInput) SetSchemaArn(v string) *ListFacetAttributesIn
 type ListFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attributes attached to the facet.
 	Attributes []FacetAttribute `type:"list"`
 
@@ -10765,6 +11182,11 @@ func (s ListFacetAttributesOutput) String() string {
 // GoString returns the string representation
 func (s ListFacetAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFacetAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -10844,6 +11266,8 @@ func (s *ListFacetNamesInput) SetSchemaArn(v string) *ListFacetNamesInput {
 type ListFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of facets that exist within the schema.
 	FacetNames []string `type:"list"`
 
@@ -10859,6 +11283,11 @@ func (s ListFacetNamesOutput) String() string {
 // GoString returns the string representation
 func (s ListFacetNamesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFacetNamesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFacetNames sets the FacetNames field's value.
@@ -10997,6 +11426,8 @@ func (s *ListIncomingTypedLinksInput) SetObjectReference(v *ObjectReference) *Li
 type ListIncomingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns one or more typed link specifiers as output.
 	LinkSpecifiers []TypedLinkSpecifier `type:"list"`
 
@@ -11012,6 +11443,11 @@ func (s ListIncomingTypedLinksOutput) String() string {
 // GoString returns the string representation
 func (s ListIncomingTypedLinksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIncomingTypedLinksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLinkSpecifiers sets the LinkSpecifiers field's value.
@@ -11131,6 +11567,8 @@ func (s *ListIndexInput) SetRangesOnIndexedValues(v []ObjectAttributeRange) *Lis
 type ListIndexOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The objects and indexed values attached to the index.
 	IndexAttachments []IndexAttachment `type:"list"`
 
@@ -11146,6 +11584,11 @@ func (s ListIndexOutput) String() string {
 // GoString returns the string representation
 func (s ListIndexOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIndexOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIndexAttachments sets the IndexAttachments field's value.
@@ -11267,6 +11710,8 @@ func (s *ListObjectAttributesInput) SetObjectReference(v *ObjectReference) *List
 type ListObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Attributes map that is associated with the object. AttributeArn is the key,
 	// and attribute value is the value.
 	Attributes []AttributeKeyAndValue `type:"list"`
@@ -11283,6 +11728,11 @@ func (s ListObjectAttributesOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -11390,6 +11840,8 @@ func (s *ListObjectChildrenInput) SetObjectReference(v *ObjectReference) *ListOb
 type ListObjectChildrenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
 	// as the value.
 	Children map[string]string `type:"map"`
@@ -11406,6 +11858,11 @@ func (s ListObjectChildrenOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectChildrenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectChildrenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChildren sets the Children field's value.
@@ -11501,6 +11958,8 @@ func (s *ListObjectParentPathsInput) SetObjectReference(v *ObjectReference) *Lis
 type ListObjectParentPathsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -11516,6 +11975,11 @@ func (s ListObjectParentPathsOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectParentPathsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectParentPathsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11623,6 +12087,8 @@ func (s *ListObjectParentsInput) SetObjectReference(v *ObjectReference) *ListObj
 type ListObjectParentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -11639,6 +12105,11 @@ func (s ListObjectParentsOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectParentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectParentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11745,6 +12216,8 @@ func (s *ListObjectPoliciesInput) SetObjectReference(v *ObjectReference) *ListOb
 type ListObjectPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of policy ObjectIdentifiers, that are attached to the object.
 	AttachedPolicyIds []string `type:"list"`
 
@@ -11760,6 +12233,11 @@ func (s ListObjectPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListObjectPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListObjectPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttachedPolicyIds sets the AttachedPolicyIds field's value.
@@ -11898,6 +12376,8 @@ func (s *ListOutgoingTypedLinksInput) SetObjectReference(v *ObjectReference) *Li
 type ListOutgoingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -11913,6 +12393,11 @@ func (s ListOutgoingTypedLinksOutput) String() string {
 // GoString returns the string representation
 func (s ListOutgoingTypedLinksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOutgoingTypedLinksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -12019,6 +12504,8 @@ func (s *ListPolicyAttachmentsInput) SetPolicyReference(v *ObjectReference) *Lis
 type ListPolicyAttachmentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -12034,6 +12521,11 @@ func (s ListPolicyAttachmentsOutput) String() string {
 // GoString returns the string representation
 func (s ListPolicyAttachmentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPolicyAttachmentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -12098,6 +12590,8 @@ func (s *ListPublishedSchemaArnsInput) SetNextToken(v string) *ListPublishedSche
 type ListPublishedSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -12113,6 +12607,11 @@ func (s ListPublishedSchemaArnsOutput) String() string {
 // GoString returns the string representation
 func (s ListPublishedSchemaArnsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPublishedSchemaArnsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -12195,6 +12694,8 @@ func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResource
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
 	NextToken *string `type:"string"`
@@ -12211,6 +12712,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -12306,6 +12812,8 @@ func (s *ListTypedLinkFacetAttributesInput) SetSchemaArn(v string) *ListTypedLin
 type ListTypedLinkFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An ordered set of attributes associate with the typed link.
 	Attributes []TypedLinkAttributeDefinition `type:"list"`
 
@@ -12321,6 +12829,11 @@ func (s ListTypedLinkFacetAttributesOutput) String() string {
 // GoString returns the string representation
 func (s ListTypedLinkFacetAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTypedLinkFacetAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -12401,6 +12914,8 @@ func (s *ListTypedLinkFacetNamesInput) SetSchemaArn(v string) *ListTypedLinkFace
 type ListTypedLinkFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of typed link facets that exist within the schema.
 	FacetNames []string `type:"list"`
 
@@ -12416,6 +12931,11 @@ func (s ListTypedLinkFacetNamesOutput) String() string {
 // GoString returns the string representation
 func (s ListTypedLinkFacetNamesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTypedLinkFacetNamesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFacetNames sets the FacetNames field's value.
@@ -12512,6 +13032,8 @@ func (s *LookupPolicyInput) SetObjectReference(v *ObjectReference) *LookupPolicy
 type LookupPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token.
 	NextToken *string `type:"string"`
 
@@ -12528,6 +13050,11 @@ func (s LookupPolicyOutput) String() string {
 // GoString returns the string representation
 func (s LookupPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s LookupPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -12909,6 +13436,8 @@ func (s *PublishSchemaInput) SetVersion(v string) *PublishSchemaInput {
 type PublishSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN that is associated with the published schema. For more information,
 	// see arns.
 	PublishedSchemaArn *string `type:"string"`
@@ -12922,6 +13451,11 @@ func (s PublishSchemaOutput) String() string {
 // GoString returns the string representation
 func (s PublishSchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PublishSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
@@ -12989,6 +13523,8 @@ func (s *PutSchemaFromJsonInput) SetSchemaArn(v string) *PutSchemaFromJsonInput 
 type PutSchemaFromJsonOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN of the schema to update.
 	Arn *string `type:"string"`
 }
@@ -13001,6 +13537,11 @@ func (s PutSchemaFromJsonOutput) String() string {
 // GoString returns the string representation
 func (s PutSchemaFromJsonOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutSchemaFromJsonOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -13087,6 +13628,8 @@ func (s *RemoveFacetFromObjectInput) SetSchemaFacet(v *SchemaFacet) *RemoveFacet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObjectResponse
 type RemoveFacetFromObjectOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13097,6 +13640,11 @@ func (s RemoveFacetFromObjectOutput) String() string {
 // GoString returns the string representation
 func (s RemoveFacetFromObjectOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveFacetFromObjectOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains an Amazon Resource Name (ARN) and parameters that are associated
@@ -13274,6 +13822,8 @@ func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13284,6 +13834,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the data for a typed attribute. You can set one, and only one,
@@ -13945,6 +14500,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13955,6 +14512,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacetRequest
@@ -14047,6 +14609,8 @@ func (s *UpdateFacetInput) SetSchemaArn(v string) *UpdateFacetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacetResponse
 type UpdateFacetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14057,6 +14621,11 @@ func (s UpdateFacetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesRequest
@@ -14141,6 +14710,8 @@ func (s *UpdateObjectAttributesInput) SetObjectReference(v *ObjectReference) *Up
 type UpdateObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ObjectIdentifier of the updated object.
 	ObjectIdentifier *string `type:"string"`
 }
@@ -14153,6 +14724,11 @@ func (s UpdateObjectAttributesOutput) String() string {
 // GoString returns the string representation
 func (s UpdateObjectAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateObjectAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetObjectIdentifier sets the ObjectIdentifier field's value.
@@ -14224,6 +14800,8 @@ func (s *UpdateSchemaInput) SetSchemaArn(v string) *UpdateSchemaInput {
 type UpdateSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ARN that is associated with the updated schema. For more information,
 	// see arns.
 	SchemaArn *string `type:"string"`
@@ -14237,6 +14815,11 @@ func (s UpdateSchemaOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSchemaOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSchemaArn sets the SchemaArn field's value.
@@ -14348,6 +14931,8 @@ func (s *UpdateTypedLinkFacetInput) SetSchemaArn(v string) *UpdateTypedLinkFacet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetResponse
 type UpdateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14358,6 +14943,11 @@ func (s UpdateTypedLinkFacetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTypedLinkFacetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTypedLinkFacetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type BatchReadExceptionType string

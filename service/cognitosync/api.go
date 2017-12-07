@@ -60,7 +60,10 @@ func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) BulkPublishReq
 		input = &BulkPublishInput{}
 	}
 
-	req := c.newRequest(op, input, &BulkPublishOutput{})
+	output := &BulkPublishOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BulkPublishRequest{Request: req, Input: input}
 }
 
@@ -112,7 +115,10 @@ func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteData
 		input = &DeleteDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatasetOutput{})
+	output := &DeleteDatasetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDatasetRequest{Request: req, Input: input}
 }
 
@@ -164,7 +170,10 @@ func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) Descri
 		input = &DescribeDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDatasetOutput{})
+	output := &DescribeDatasetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDatasetRequest{Request: req, Input: input}
 }
 
@@ -214,7 +223,10 @@ func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPo
 		input = &DescribeIdentityPoolUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityPoolUsageOutput{})
+	output := &DescribeIdentityPoolUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdentityPoolUsageRequest{Request: req, Input: input}
 }
 
@@ -264,7 +276,10 @@ func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageI
 		input = &DescribeIdentityUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityUsageOutput{})
+	output := &DescribeIdentityUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeIdentityUsageRequest{Request: req, Input: input}
 }
 
@@ -313,7 +328,10 @@ func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsI
 		input = &GetBulkPublishDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBulkPublishDetailsOutput{})
+	output := &GetBulkPublishDetailsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetBulkPublishDetailsRequest{Request: req, Input: input}
 }
 
@@ -363,7 +381,10 @@ func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetC
 		input = &GetCognitoEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCognitoEventsOutput{})
+	output := &GetCognitoEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCognitoEventsRequest{Request: req, Input: input}
 }
 
@@ -412,7 +433,10 @@ func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPool
 		input = &GetIdentityPoolConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityPoolConfigurationOutput{})
+	output := &GetIdentityPoolConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIdentityPoolConfigurationRequest{Request: req, Input: input}
 }
 
@@ -464,7 +488,10 @@ func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) ListDatasets
 		input = &ListDatasetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetsOutput{})
+	output := &ListDatasetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDatasetsRequest{Request: req, Input: input}
 }
 
@@ -514,7 +541,10 @@ func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageI
 		input = &ListIdentityPoolUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityPoolUsageOutput{})
+	output := &ListIdentityPoolUsageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIdentityPoolUsageRequest{Request: req, Input: input}
 }
 
@@ -567,7 +597,10 @@ func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) ListRecordsReq
 		input = &ListRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRecordsOutput{})
+	output := &ListRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRecordsRequest{Request: req, Input: input}
 }
 
@@ -616,7 +649,10 @@ func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) Register
 		input = &RegisterDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterDeviceOutput{})
+	output := &RegisterDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterDeviceRequest{Request: req, Input: input}
 }
 
@@ -668,9 +704,12 @@ func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) SetC
 		input = &SetCognitoEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetCognitoEventsOutput{})
+	output := &SetCognitoEventsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetCognitoEventsRequest{Request: req, Input: input}
 }
 
@@ -719,7 +758,10 @@ func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPool
 		input = &SetIdentityPoolConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityPoolConfigurationOutput{})
+	output := &SetIdentityPoolConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetIdentityPoolConfigurationRequest{Request: req, Input: input}
 }
 
@@ -769,7 +811,10 @@ func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) 
 		input = &SubscribeToDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &SubscribeToDatasetOutput{})
+	output := &SubscribeToDatasetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SubscribeToDatasetRequest{Request: req, Input: input}
 }
 
@@ -819,7 +864,10 @@ func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatase
 		input = &UnsubscribeFromDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &UnsubscribeFromDatasetOutput{})
+	output := &UnsubscribeFromDatasetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnsubscribeFromDatasetRequest{Request: req, Input: input}
 }
 
@@ -880,7 +928,10 @@ func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateReco
 		input = &UpdateRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRecordsOutput{})
+	output := &UpdateRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRecordsRequest{Request: req, Input: input}
 }
 
@@ -934,6 +985,8 @@ func (s *BulkPublishInput) SetIdentityPoolId(v string) *BulkPublishInput {
 type BulkPublishOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
 	IdentityPoolId *string `min:"1" type:"string"`
@@ -947,6 +1000,11 @@ func (s BulkPublishOutput) String() string {
 // GoString returns the string representation
 func (s BulkPublishOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BulkPublishOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityPoolId sets the IdentityPoolId field's value.
@@ -1194,6 +1252,8 @@ func (s *DeleteDatasetInput) SetIdentityPoolId(v string) *DeleteDatasetInput {
 type DeleteDatasetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A collection of data for an identity pool. An identity pool can have multiple
 	// datasets. A dataset is per identity and can be general or associated with
 	// a particular entity in an application (like a saved game). Datasets are automatically
@@ -1210,6 +1270,11 @@ func (s DeleteDatasetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDatasetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDatasetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataset sets the Dataset field's value.
@@ -1307,6 +1372,8 @@ func (s *DescribeDatasetInput) SetIdentityPoolId(v string) *DescribeDatasetInput
 type DescribeDatasetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Meta data for a collection of data for an identity. An identity can have
 	// multiple datasets. A dataset can be general or associated with a particular
 	// entity in an application (like a saved game). Datasets are automatically
@@ -1323,6 +1390,11 @@ func (s DescribeDatasetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDatasetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDatasetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDataset sets the Dataset field's value.
@@ -1381,6 +1453,8 @@ func (s *DescribeIdentityPoolUsageInput) SetIdentityPoolId(v string) *DescribeId
 type DescribeIdentityPoolUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the usage of the identity pool.
 	IdentityPoolUsage *IdentityPoolUsage `type:"structure"`
 }
@@ -1393,6 +1467,11 @@ func (s DescribeIdentityPoolUsageOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIdentityPoolUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIdentityPoolUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityPoolUsage sets the IdentityPoolUsage field's value.
@@ -1470,6 +1549,8 @@ func (s *DescribeIdentityUsageInput) SetIdentityPoolId(v string) *DescribeIdenti
 type DescribeIdentityUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Usage information for the identity.
 	IdentityUsage *IdentityUsage `type:"structure"`
 }
@@ -1482,6 +1563,11 @@ func (s DescribeIdentityUsageOutput) String() string {
 // GoString returns the string representation
 func (s DescribeIdentityUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIdentityUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIdentityUsage sets the IdentityUsage field's value.
@@ -1540,6 +1626,8 @@ func (s *GetBulkPublishDetailsInput) SetIdentityPoolId(v string) *GetBulkPublish
 type GetBulkPublishDetailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation
 	// completed.
 	BulkPublishCompleteTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1576,6 +1664,11 @@ func (s GetBulkPublishDetailsOutput) String() string {
 // GoString returns the string representation
 func (s GetBulkPublishDetailsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBulkPublishDetailsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBulkPublishCompleteTime sets the BulkPublishCompleteTime field's value.
@@ -1657,6 +1750,8 @@ func (s *GetCognitoEventsInput) SetIdentityPoolId(v string) *GetCognitoEventsInp
 type GetCognitoEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Cognito Events returned from the GetCognitoEvents request
 	Events map[string]string `type:"map"`
 }
@@ -1669,6 +1764,11 @@ func (s GetCognitoEventsOutput) String() string {
 // GoString returns the string representation
 func (s GetCognitoEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCognitoEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -1728,6 +1828,8 @@ func (s *GetIdentityPoolConfigurationInput) SetIdentityPoolId(v string) *GetIden
 type GetIdentityPoolConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Options to apply to this identity pool for Amazon Cognito streams.
 	CognitoStreams *CognitoStreams `type:"structure"`
 
@@ -1747,6 +1849,11 @@ func (s GetIdentityPoolConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s GetIdentityPoolConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIdentityPoolConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCognitoStreams sets the CognitoStreams field's value.
@@ -1970,6 +2077,8 @@ func (s *ListDatasetsInput) SetNextToken(v string) *ListDatasetsInput {
 type ListDatasetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Number of datasets returned.
 	Count *int64 `type:"integer"`
 
@@ -1988,6 +2097,11 @@ func (s ListDatasetsOutput) String() string {
 // GoString returns the string representation
 func (s ListDatasetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDatasetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCount sets the Count field's value.
@@ -2047,6 +2161,8 @@ func (s *ListIdentityPoolUsageInput) SetNextToken(v string) *ListIdentityPoolUsa
 type ListIdentityPoolUsageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Total number of identities for the identity pool.
 	Count *int64 `type:"integer"`
 
@@ -2068,6 +2184,11 @@ func (s ListIdentityPoolUsageOutput) String() string {
 // GoString returns the string representation
 func (s ListIdentityPoolUsageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIdentityPoolUsageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCount sets the Count field's value.
@@ -2218,6 +2339,8 @@ func (s *ListRecordsInput) SetSyncSessionToken(v string) *ListRecordsInput {
 type ListRecordsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Total number of records.
 	Count *int64 `type:"integer"`
 
@@ -2254,6 +2377,11 @@ func (s ListRecordsOutput) String() string {
 // GoString returns the string representation
 func (s ListRecordsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCount sets the Count field's value.
@@ -2616,6 +2744,8 @@ func (s *RegisterDeviceInput) SetToken(v string) *RegisterDeviceInput {
 type RegisterDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID generated for this device by Cognito.
 	DeviceId *string `min:"1" type:"string"`
 }
@@ -2628,6 +2758,11 @@ func (s RegisterDeviceOutput) String() string {
 // GoString returns the string representation
 func (s RegisterDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeviceId sets the DeviceId field's value.
@@ -2698,6 +2833,8 @@ func (s *SetCognitoEventsInput) SetIdentityPoolId(v string) *SetCognitoEventsInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEventsOutput
 type SetCognitoEventsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2708,6 +2845,11 @@ func (s SetCognitoEventsOutput) String() string {
 // GoString returns the string representation
 func (s SetCognitoEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetCognitoEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the SetIdentityPoolConfiguration operation.
@@ -2788,6 +2930,8 @@ func (s *SetIdentityPoolConfigurationInput) SetPushSync(v *PushSync) *SetIdentit
 type SetIdentityPoolConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Options to apply to this identity pool for Amazon Cognito streams.
 	CognitoStreams *CognitoStreams `type:"structure"`
 
@@ -2807,6 +2951,11 @@ func (s SetIdentityPoolConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s SetIdentityPoolConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetIdentityPoolConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCognitoStreams sets the CognitoStreams field's value.
@@ -2930,6 +3079,8 @@ func (s *SubscribeToDatasetInput) SetIdentityPoolId(v string) *SubscribeToDatase
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDatasetResponse
 type SubscribeToDatasetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2940,6 +3091,11 @@ func (s SubscribeToDatasetOutput) String() string {
 // GoString returns the string representation
 func (s SubscribeToDatasetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SubscribeToDatasetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to UnsubscribeFromDataset.
@@ -3045,6 +3201,8 @@ func (s *UnsubscribeFromDatasetInput) SetIdentityPoolId(v string) *UnsubscribeFr
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDatasetResponse
 type UnsubscribeFromDatasetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3055,6 +3213,11 @@ func (s UnsubscribeFromDatasetOutput) String() string {
 // GoString returns the string representation
 func (s UnsubscribeFromDatasetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnsubscribeFromDatasetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to post updates to records or add and delete records for a dataset
@@ -3200,6 +3363,8 @@ func (s *UpdateRecordsInput) SetSyncSessionToken(v string) *UpdateRecordsInput {
 type UpdateRecordsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of records that have been updated.
 	Records []Record `type:"list"`
 }
@@ -3212,6 +3377,11 @@ func (s UpdateRecordsOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRecordsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRecords sets the Records field's value.

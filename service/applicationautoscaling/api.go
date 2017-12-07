@@ -58,7 +58,10 @@ func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScaling
 		input = &DeleteScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
+	output := &DeleteScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -109,7 +112,10 @@ func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *Deregist
 		input = &DeregisterScalableTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterScalableTargetOutput{})
+	output := &DeregisterScalableTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterScalableTargetRequest{Request: req, Input: input}
 }
 
@@ -168,7 +174,10 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeS
 		input = &DescribeScalableTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalableTargetsOutput{})
+	output := &DescribeScalableTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScalableTargetsRequest{Request: req, Input: input}
 }
 
@@ -278,7 +287,10 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *Describ
 		input = &DescribeScalingActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingActivitiesOutput{})
+	output := &DescribeScalingActivitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScalingActivitiesRequest{Request: req, Input: input}
 }
 
@@ -387,7 +399,10 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeS
 		input = &DescribeScalingPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingPoliciesOutput{})
+	output := &DescribeScalingPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeScalingPoliciesRequest{Request: req, Input: input}
 }
 
@@ -495,7 +510,10 @@ func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicy
 		input = &PutScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+	output := &PutScalingPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutScalingPolicyRequest{Request: req, Input: input}
 }
 
@@ -549,7 +567,10 @@ func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterSc
 		input = &RegisterScalableTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterScalableTargetOutput{})
+	output := &RegisterScalableTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterScalableTargetRequest{Request: req, Input: input}
 }
 
@@ -823,6 +844,8 @@ func (s *DeleteScalingPolicyInput) SetServiceNamespace(v ServiceNamespace) *Dele
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyResponse
 type DeleteScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -833,6 +856,11 @@ func (s DeleteScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest
@@ -954,6 +982,8 @@ func (s *DeregisterScalableTargetInput) SetServiceNamespace(v ServiceNamespace) 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetResponse
 type DeregisterScalableTargetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -964,6 +994,11 @@ func (s DeregisterScalableTargetOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterScalableTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterScalableTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargetsRequest
@@ -1098,6 +1133,8 @@ func (s *DescribeScalableTargetsInput) SetServiceNamespace(v ServiceNamespace) *
 type DescribeScalableTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to get the next set of results. This value is null if
 	// there are no more results to return.
 	NextToken *string `type:"string"`
@@ -1114,6 +1151,11 @@ func (s DescribeScalableTargetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScalableTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScalableTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1263,6 +1305,8 @@ func (s *DescribeScalingActivitiesInput) SetServiceNamespace(v ServiceNamespace)
 type DescribeScalingActivitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to get the next set of results. This value is null if
 	// there are no more results to return.
 	NextToken *string `type:"string"`
@@ -1279,6 +1323,11 @@ func (s DescribeScalingActivitiesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScalingActivitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScalingActivitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1437,6 +1486,8 @@ func (s *DescribeScalingPoliciesInput) SetServiceNamespace(v ServiceNamespace) *
 type DescribeScalingPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token required to get the next set of results. This value is null if
 	// there are no more results to return.
 	NextToken *string `type:"string"`
@@ -1453,6 +1504,11 @@ func (s DescribeScalingPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeScalingPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeScalingPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1760,6 +1816,8 @@ func (s *PutScalingPolicyInput) SetTargetTrackingScalingPolicyConfiguration(v *T
 type PutScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The CloudWatch alarms created for the target tracking policy.
 	Alarms []Alarm `type:"list"`
 
@@ -1777,6 +1835,11 @@ func (s PutScalingPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutScalingPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutScalingPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlarms sets the Alarms field's value.
@@ -1946,6 +2009,8 @@ func (s *RegisterScalableTargetInput) SetServiceNamespace(v ServiceNamespace) *R
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetResponse
 type RegisterScalableTargetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1956,6 +2021,11 @@ func (s RegisterScalableTargetOutput) String() string {
 // GoString returns the string representation
 func (s RegisterScalableTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterScalableTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a scalable target.

@@ -54,9 +54,12 @@ func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) AddTagsReques
 		input = &AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	output := &AddTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsRequest{Request: req, Input: input}
 }
 
@@ -102,7 +105,10 @@ func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateEla
 		input = &CreateElasticsearchDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateElasticsearchDomainOutput{})
+	output := &CreateElasticsearchDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateElasticsearchDomainRequest{Request: req, Input: input}
 }
 
@@ -147,7 +153,10 @@ func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteEla
 		input = &DeleteElasticsearchDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteElasticsearchDomainOutput{})
+	output := &DeleteElasticsearchDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteElasticsearchDomainRequest{Request: req, Input: input}
 }
 
@@ -192,7 +201,10 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *Describ
 		input = &DescribeElasticsearchDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticsearchDomainOutput{})
+	output := &DescribeElasticsearchDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticsearchDomainRequest{Request: req, Input: input}
 }
 
@@ -238,7 +250,10 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *D
 		input = &DescribeElasticsearchDomainConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticsearchDomainConfigOutput{})
+	output := &DescribeElasticsearchDomainConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticsearchDomainConfigRequest{Request: req, Input: input}
 }
 
@@ -283,7 +298,10 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *Descri
 		input = &DescribeElasticsearchDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticsearchDomainsOutput{})
+	output := &DescribeElasticsearchDomainsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticsearchDomainsRequest{Request: req, Input: input}
 }
 
@@ -329,7 +347,10 @@ func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(in
 		input = &DescribeElasticsearchInstanceTypeLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticsearchInstanceTypeLimitsOutput{})
+	output := &DescribeElasticsearchInstanceTypeLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticsearchInstanceTypeLimitsRequest{Request: req, Input: input}
 }
 
@@ -374,7 +395,10 @@ func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInpu
 		input = &ListDomainNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainNamesOutput{})
+	output := &ListDomainNamesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDomainNamesRequest{Request: req, Input: input}
 }
 
@@ -424,7 +448,10 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *List
 		input = &ListElasticsearchInstanceTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListElasticsearchInstanceTypesOutput{})
+	output := &ListElasticsearchInstanceTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListElasticsearchInstanceTypesRequest{Request: req, Input: input}
 }
 
@@ -524,7 +551,10 @@ func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElast
 		input = &ListElasticsearchVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListElasticsearchVersionsOutput{})
+	output := &ListElasticsearchVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListElasticsearchVersionsRequest{Request: req, Input: input}
 }
 
@@ -618,7 +648,10 @@ func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) ListTagsReq
 		input = &ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsRequest{Request: req, Input: input}
 }
 
@@ -662,9 +695,12 @@ func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) RemoveT
 		input = &RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	output := &RemoveTagsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsRequest{Request: req, Input: input}
 }
 
@@ -709,7 +745,10 @@ func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *Upd
 		input = &UpdateElasticsearchDomainConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateElasticsearchDomainConfigOutput{})
+	output := &UpdateElasticsearchDomainConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateElasticsearchDomainConfigRequest{Request: req, Input: input}
 }
 
@@ -820,6 +859,8 @@ func (s *AddTagsInput) SetTagList(v []Tag) *AddTagsInput {
 
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -830,6 +871,11 @@ func (s AddTagsOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // List of limits that are specific to a given InstanceType and for each of
@@ -1031,6 +1077,8 @@ func (s *CreateElasticsearchDomainInput) SetSnapshotOptions(v *SnapshotOptions) 
 type CreateElasticsearchDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the newly created Elasticsearch domain.
 	DomainStatus *ElasticsearchDomainStatus `type:"structure"`
 }
@@ -1043,6 +1091,11 @@ func (s CreateElasticsearchDomainOutput) String() string {
 // GoString returns the string representation
 func (s CreateElasticsearchDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainStatus sets the DomainStatus field's value.
@@ -1101,6 +1154,8 @@ func (s *DeleteElasticsearchDomainInput) SetDomainName(v string) *DeleteElastics
 type DeleteElasticsearchDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the Elasticsearch domain being deleted.
 	DomainStatus *ElasticsearchDomainStatus `type:"structure"`
 }
@@ -1113,6 +1168,11 @@ func (s DeleteElasticsearchDomainOutput) String() string {
 // GoString returns the string representation
 func (s DeleteElasticsearchDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainStatus sets the DomainStatus field's value.
@@ -1170,6 +1230,8 @@ func (s *DescribeElasticsearchDomainConfigInput) SetDomainName(v string) *Descri
 type DescribeElasticsearchDomainConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The configuration information of the domain requested in the DescribeElasticsearchDomainConfig
 	// request.
 	//
@@ -1185,6 +1247,11 @@ func (s DescribeElasticsearchDomainConfigOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticsearchDomainConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticsearchDomainConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainConfig sets the DomainConfig field's value.
@@ -1241,6 +1308,8 @@ func (s *DescribeElasticsearchDomainInput) SetDomainName(v string) *DescribeElas
 type DescribeElasticsearchDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The current status of the Elasticsearch domain.
 	//
 	// DomainStatus is a required field
@@ -1255,6 +1324,11 @@ func (s DescribeElasticsearchDomainOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticsearchDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainStatus sets the DomainStatus field's value.
@@ -1309,6 +1383,8 @@ func (s *DescribeElasticsearchDomainsInput) SetDomainNames(v []string) *Describe
 type DescribeElasticsearchDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the domains requested in the DescribeElasticsearchDomains request.
 	//
 	// DomainStatusList is a required field
@@ -1323,6 +1399,11 @@ func (s DescribeElasticsearchDomainsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticsearchDomainsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticsearchDomainsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainStatusList sets the DomainStatusList field's value.
@@ -1405,6 +1486,8 @@ func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetInstanceType(v ESParti
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Map of Role of the Instance and Limits that are applicable. Role performed
 	// by given Instance in Elasticsearch can be one of the following: Data: If
 	// the given InstanceType is used as Data node
@@ -1420,6 +1503,11 @@ func (s DescribeElasticsearchInstanceTypeLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticsearchInstanceTypeLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticsearchInstanceTypeLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLimitsByRole sets the LimitsByRole field's value.
@@ -2039,6 +2127,8 @@ func (s ListDomainNamesInput) GoString() string {
 type ListDomainNamesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of Elasticsearch domain names.
 	DomainNames []DomainInfo `type:"list"`
 }
@@ -2051,6 +2141,11 @@ func (s ListDomainNamesOutput) String() string {
 // GoString returns the string representation
 func (s ListDomainNamesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDomainNamesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainNames sets the DomainNames field's value.
@@ -2138,6 +2233,8 @@ func (s *ListElasticsearchInstanceTypesInput) SetNextToken(v string) *ListElasti
 type ListElasticsearchInstanceTypesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of instance types supported by Amazon Elasticsearch service for given
 	// ElasticsearchVersion
 	ElasticsearchInstanceTypes []ESPartitionInstanceType `type:"list"`
@@ -2156,6 +2253,11 @@ func (s ListElasticsearchInstanceTypesOutput) String() string {
 // GoString returns the string representation
 func (s ListElasticsearchInstanceTypesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListElasticsearchInstanceTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetElasticsearchInstanceTypes sets the ElasticsearchInstanceTypes field's value.
@@ -2216,6 +2318,8 @@ func (s *ListElasticsearchVersionsInput) SetNextToken(v string) *ListElasticsear
 type ListElasticsearchVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of supported elastic search versions.
 	ElasticsearchVersions []string `type:"list"`
 
@@ -2233,6 +2337,11 @@ func (s ListElasticsearchVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListElasticsearchVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListElasticsearchVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetElasticsearchVersions sets the ElasticsearchVersions field's value.
@@ -2295,6 +2404,8 @@ func (s *ListTagsInput) SetARN(v string) *ListTagsInput {
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of Tag for the requested Elasticsearch domain.
 	TagList []Tag `type:"list"`
 }
@@ -2307,6 +2418,11 @@ func (s ListTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -2442,6 +2558,8 @@ func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
 
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2452,6 +2570,11 @@ func (s RemoveTagsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies the time, in UTC format, when the service takes a daily automated
@@ -2769,6 +2892,8 @@ func (s *UpdateElasticsearchDomainConfigInput) SetSnapshotOptions(v *SnapshotOpt
 type UpdateElasticsearchDomainConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the updated Elasticsearch domain.
 	//
 	// DomainConfig is a required field
@@ -2783,6 +2908,11 @@ func (s UpdateElasticsearchDomainConfigOutput) String() string {
 // GoString returns the string representation
 func (s UpdateElasticsearchDomainConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateElasticsearchDomainConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainConfig sets the DomainConfig field's value.

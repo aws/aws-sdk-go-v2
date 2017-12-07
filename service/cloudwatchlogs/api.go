@@ -66,9 +66,12 @@ func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) Ass
 		input = &AssociateKmsKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateKmsKeyOutput{})
+	output := &AssociateKmsKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateKmsKeyRequest{Request: req, Input: input}
 }
 
@@ -116,9 +119,12 @@ func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) C
 		input = &CancelExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelExportTaskOutput{})
+	output := &CancelExportTaskOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelExportTaskRequest{Request: req, Input: input}
 }
 
@@ -175,7 +181,10 @@ func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) C
 		input = &CreateExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateExportTaskOutput{})
+	output := &CreateExportTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateExportTaskRequest{Request: req, Input: input}
 }
 
@@ -242,9 +251,12 @@ func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) Creat
 		input = &CreateLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLogGroupOutput{})
+	output := &CreateLogGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLogGroupRequest{Request: req, Input: input}
 }
 
@@ -301,9 +313,12 @@ func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) Cre
 		input = &CreateLogStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLogStreamOutput{})
+	output := &CreateLogStreamOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLogStreamRequest{Request: req, Input: input}
 }
 
@@ -351,9 +366,12 @@ func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput)
 		input = &DeleteDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDestinationOutput{})
+	output := &DeleteDestinationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDestinationRequest{Request: req, Input: input}
 }
 
@@ -400,9 +418,12 @@ func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) Delet
 		input = &DeleteLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLogGroupOutput{})
+	output := &DeleteLogGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLogGroupRequest{Request: req, Input: input}
 }
 
@@ -449,9 +470,12 @@ func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) Del
 		input = &DeleteLogStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLogStreamOutput{})
+	output := &DeleteLogStreamOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLogStreamRequest{Request: req, Input: input}
 }
 
@@ -497,9 +521,12 @@ func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInpu
 		input = &DeleteMetricFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMetricFilterOutput{})
+	output := &DeleteMetricFilterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMetricFilterRequest{Request: req, Input: input}
 }
 
@@ -546,9 +573,12 @@ func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicy
 		input = &DeleteResourcePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourcePolicyOutput{})
+	output := &DeleteResourcePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteResourcePolicyRequest{Request: req, Input: input}
 }
 
@@ -597,9 +627,12 @@ func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPoli
 		input = &DeleteRetentionPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRetentionPolicyOutput{})
+	output := &DeleteRetentionPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRetentionPolicyRequest{Request: req, Input: input}
 }
 
@@ -645,9 +678,12 @@ func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscripti
 		input = &DeleteSubscriptionFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriptionFilterOutput{})
+	output := &DeleteSubscriptionFilterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSubscriptionFilterRequest{Request: req, Input: input}
 }
 
@@ -700,7 +736,10 @@ func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinations
 		input = &DescribeDestinationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDestinationsOutput{})
+	output := &DescribeDestinationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDestinationsRequest{Request: req, Input: input}
 }
 
@@ -797,7 +836,10 @@ func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksIn
 		input = &DescribeExportTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	output := &DescribeExportTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeExportTasksRequest{Request: req, Input: input}
 }
 
@@ -850,7 +892,10 @@ func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput)
 		input = &DescribeLogGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLogGroupsOutput{})
+	output := &DescribeLogGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLogGroupsRequest{Request: req, Input: input}
 }
 
@@ -957,7 +1002,10 @@ func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInpu
 		input = &DescribeLogStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLogStreamsOutput{})
+	output := &DescribeLogStreamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLogStreamsRequest{Request: req, Input: input}
 }
 
@@ -1061,7 +1109,10 @@ func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFilte
 		input = &DescribeMetricFiltersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMetricFiltersOutput{})
+	output := &DescribeMetricFiltersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMetricFiltersRequest{Request: req, Input: input}
 }
 
@@ -1157,7 +1208,10 @@ func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResource
 		input = &DescribeResourcePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourcePoliciesOutput{})
+	output := &DescribeResourcePoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeResourcePoliciesRequest{Request: req, Input: input}
 }
 
@@ -1211,7 +1265,10 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubsc
 		input = &DescribeSubscriptionFiltersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubscriptionFiltersOutput{})
+	output := &DescribeSubscriptionFiltersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSubscriptionFiltersRequest{Request: req, Input: input}
 }
 
@@ -1315,9 +1372,12 @@ func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInpu
 		input = &DisassociateKmsKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateKmsKeyOutput{})
+	output := &DisassociateKmsKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateKmsKeyRequest{Request: req, Input: input}
 }
 
@@ -1377,7 +1437,10 @@ func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) Fil
 		input = &FilterLogEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &FilterLogEventsOutput{})
+	output := &FilterLogEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return FilterLogEventsRequest{Request: req, Input: input}
 }
 
@@ -1484,7 +1547,10 @@ func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) GetLogEve
 		input = &GetLogEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLogEventsOutput{})
+	output := &GetLogEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetLogEventsRequest{Request: req, Input: input}
 }
 
@@ -1580,7 +1646,10 @@ func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) L
 		input = &ListTagsLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsLogGroupOutput{})
+	output := &ListTagsLogGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsLogGroupRequest{Request: req, Input: input}
 }
 
@@ -1636,7 +1705,10 @@ func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) PutDe
 		input = &PutDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDestinationOutput{})
+	output := &PutDestinationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutDestinationRequest{Request: req, Input: input}
 }
 
@@ -1685,9 +1757,12 @@ func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicy
 		input = &PutDestinationPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDestinationPolicyOutput{})
+	output := &PutDestinationPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutDestinationPolicyRequest{Request: req, Input: input}
 }
 
@@ -1760,7 +1835,10 @@ func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) PutLogEve
 		input = &PutLogEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLogEventsOutput{})
+	output := &PutLogEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutLogEventsRequest{Request: req, Input: input}
 }
 
@@ -1811,9 +1889,12 @@ func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) Put
 		input = &PutMetricFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &PutMetricFilterOutput{})
+	output := &PutMetricFilterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutMetricFilterRequest{Request: req, Input: input}
 }
 
@@ -1861,7 +1942,10 @@ func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput)
 		input = &PutResourcePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutResourcePolicyOutput{})
+	output := &PutResourcePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutResourcePolicyRequest{Request: req, Input: input}
 }
 
@@ -1909,9 +1993,12 @@ func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInpu
 		input = &PutRetentionPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRetentionPolicyOutput{})
+	output := &PutRetentionPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRetentionPolicyRequest{Request: req, Input: input}
 }
 
@@ -1977,9 +2064,12 @@ func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilt
 		input = &PutSubscriptionFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSubscriptionFilterOutput{})
+	output := &PutSubscriptionFilterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutSubscriptionFilterRequest{Request: req, Input: input}
 }
 
@@ -2032,9 +2122,12 @@ func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroup
 		input = &TagLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &TagLogGroupOutput{})
+	output := &TagLogGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagLogGroupRequest{Request: req, Input: input}
 }
 
@@ -2082,7 +2175,10 @@ func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) T
 		input = &TestMetricFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &TestMetricFilterOutput{})
+	output := &TestMetricFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestMetricFilterRequest{Request: req, Input: input}
 }
 
@@ -2131,9 +2227,12 @@ func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) UntagLo
 		input = &UntagLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagLogGroupOutput{})
+	output := &UntagLogGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagLogGroupRequest{Request: req, Input: input}
 }
 
@@ -2200,6 +2299,8 @@ func (s *AssociateKmsKeyInput) SetLogGroupName(v string) *AssociateKmsKeyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyOutput
 type AssociateKmsKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2210,6 +2311,11 @@ func (s AssociateKmsKeyOutput) String() string {
 // GoString returns the string representation
 func (s AssociateKmsKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateKmsKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTaskRequest
@@ -2258,6 +2364,8 @@ func (s *CancelExportTaskInput) SetTaskId(v string) *CancelExportTaskInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTaskOutput
 type CancelExportTaskOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2268,6 +2376,11 @@ func (s CancelExportTaskOutput) String() string {
 // GoString returns the string representation
 func (s CancelExportTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelExportTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTaskRequest
@@ -2405,6 +2518,8 @@ func (s *CreateExportTaskInput) SetTo(v int64) *CreateExportTaskInput {
 type CreateExportTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the export task.
 	TaskId *string `locationName:"taskId" min:"1" type:"string"`
 }
@@ -2417,6 +2532,11 @@ func (s CreateExportTaskOutput) String() string {
 // GoString returns the string representation
 func (s CreateExportTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateExportTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTaskId sets the TaskId field's value.
@@ -2494,6 +2614,8 @@ func (s *CreateLogGroupInput) SetTags(v map[string]string) *CreateLogGroupInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroupOutput
 type CreateLogGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2504,6 +2626,11 @@ func (s CreateLogGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateLogGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLogGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStreamRequest
@@ -2570,6 +2697,8 @@ func (s *CreateLogStreamInput) SetLogStreamName(v string) *CreateLogStreamInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStreamOutput
 type CreateLogStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2580,6 +2709,11 @@ func (s CreateLogStreamOutput) String() string {
 // GoString returns the string representation
 func (s CreateLogStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLogStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestinationRequest
@@ -2628,6 +2762,8 @@ func (s *DeleteDestinationInput) SetDestinationName(v string) *DeleteDestination
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestinationOutput
 type DeleteDestinationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2638,6 +2774,11 @@ func (s DeleteDestinationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDestinationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroupRequest
@@ -2686,6 +2827,8 @@ func (s *DeleteLogGroupInput) SetLogGroupName(v string) *DeleteLogGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroupOutput
 type DeleteLogGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2696,6 +2839,11 @@ func (s DeleteLogGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLogGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLogGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStreamRequest
@@ -2762,6 +2910,8 @@ func (s *DeleteLogStreamInput) SetLogStreamName(v string) *DeleteLogStreamInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStreamOutput
 type DeleteLogStreamOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2772,6 +2922,11 @@ func (s DeleteLogStreamOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLogStreamOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLogStreamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilterRequest
@@ -2838,6 +2993,8 @@ func (s *DeleteMetricFilterInput) SetLogGroupName(v string) *DeleteMetricFilterI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilterOutput
 type DeleteMetricFilterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2848,6 +3005,11 @@ func (s DeleteMetricFilterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMetricFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMetricFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyRequest
@@ -2877,6 +3039,8 @@ func (s *DeleteResourcePolicyInput) SetPolicyName(v string) *DeleteResourcePolic
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyOutput
 type DeleteResourcePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2887,6 +3051,11 @@ func (s DeleteResourcePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteResourcePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteResourcePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicyRequest
@@ -2935,6 +3104,8 @@ func (s *DeleteRetentionPolicyInput) SetLogGroupName(v string) *DeleteRetentionP
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicyOutput
 type DeleteRetentionPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2945,6 +3116,11 @@ func (s DeleteRetentionPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRetentionPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRetentionPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilterRequest
@@ -3011,6 +3187,8 @@ func (s *DeleteSubscriptionFilterInput) SetLogGroupName(v string) *DeleteSubscri
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilterOutput
 type DeleteSubscriptionFilterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3021,6 +3199,11 @@ func (s DeleteSubscriptionFilterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSubscriptionFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSubscriptionFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinationsRequest
@@ -3090,6 +3273,8 @@ func (s *DescribeDestinationsInput) SetNextToken(v string) *DescribeDestinations
 type DescribeDestinationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The destinations.
 	Destinations []Destination `locationName:"destinations" type:"list"`
 
@@ -3106,6 +3291,11 @@ func (s DescribeDestinationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDestinationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDestinationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDestinations sets the Destinations field's value.
@@ -3198,6 +3388,8 @@ func (s *DescribeExportTasksInput) SetTaskId(v string) *DescribeExportTasksInput
 type DescribeExportTasksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The export tasks.
 	ExportTasks []ExportTask `locationName:"exportTasks" type:"list"`
 
@@ -3214,6 +3406,11 @@ func (s DescribeExportTasksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeExportTasksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeExportTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExportTasks sets the ExportTasks field's value.
@@ -3295,6 +3492,8 @@ func (s *DescribeLogGroupsInput) SetNextToken(v string) *DescribeLogGroupsInput 
 type DescribeLogGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The log groups.
 	LogGroups []LogGroup `locationName:"logGroups" type:"list"`
 
@@ -3311,6 +3510,11 @@ func (s DescribeLogGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLogGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLogGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLogGroups sets the LogGroups field's value.
@@ -3443,6 +3647,8 @@ func (s *DescribeLogStreamsInput) SetOrderBy(v OrderBy) *DescribeLogStreamsInput
 type DescribeLogStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The log streams.
 	LogStreams []LogStream `locationName:"logStreams" type:"list"`
 
@@ -3459,6 +3665,11 @@ func (s DescribeLogStreamsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLogStreamsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLogStreamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLogStreams sets the LogStreams field's value.
@@ -3571,6 +3782,8 @@ func (s *DescribeMetricFiltersInput) SetNextToken(v string) *DescribeMetricFilte
 type DescribeMetricFiltersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The metric filters.
 	MetricFilters []MetricFilter `locationName:"metricFilters" type:"list"`
 
@@ -3587,6 +3800,11 @@ func (s DescribeMetricFiltersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMetricFiltersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMetricFiltersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetricFilters sets the MetricFilters field's value.
@@ -3656,6 +3874,8 @@ func (s *DescribeResourcePoliciesInput) SetNextToken(v string) *DescribeResource
 type DescribeResourcePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
@@ -3672,6 +3892,11 @@ func (s DescribeResourcePoliciesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeResourcePoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeResourcePoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3771,6 +3996,8 @@ func (s *DescribeSubscriptionFiltersInput) SetNextToken(v string) *DescribeSubsc
 type DescribeSubscriptionFiltersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The token for the next set of items to return. The token expires after 24
 	// hours.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
@@ -3787,6 +4014,11 @@ func (s DescribeSubscriptionFiltersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSubscriptionFiltersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSubscriptionFiltersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3920,6 +4152,8 @@ func (s *DisassociateKmsKeyInput) SetLogGroupName(v string) *DisassociateKmsKeyI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKeyOutput
 type DisassociateKmsKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3930,6 +4164,11 @@ func (s DisassociateKmsKeyOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateKmsKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateKmsKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents an export task.
@@ -4229,6 +4468,8 @@ func (s *FilterLogEventsInput) SetStartTime(v int64) *FilterLogEventsInput {
 type FilterLogEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The matched events.
 	Events []FilteredLogEvent `locationName:"events" type:"list"`
 
@@ -4249,6 +4490,11 @@ func (s FilterLogEventsOutput) String() string {
 // GoString returns the string representation
 func (s FilterLogEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s FilterLogEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -4457,6 +4703,8 @@ func (s *GetLogEventsInput) SetStartTime(v int64) *GetLogEventsInput {
 type GetLogEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The events.
 	Events []OutputLogEvent `locationName:"events" type:"list"`
 
@@ -4477,6 +4725,11 @@ func (s GetLogEventsOutput) String() string {
 // GoString returns the string representation
 func (s GetLogEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLogEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -4605,6 +4858,8 @@ func (s *ListTagsLogGroupInput) SetLogGroupName(v string) *ListTagsLogGroupInput
 type ListTagsLogGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The tags for the log group.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
@@ -4617,6 +4872,11 @@ func (s ListTagsLogGroupOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsLogGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsLogGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -5125,6 +5385,8 @@ func (s *PutDestinationInput) SetTargetArn(v string) *PutDestinationInput {
 type PutDestinationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The destination.
 	Destination *Destination `locationName:"destination" type:"structure"`
 }
@@ -5137,6 +5399,11 @@ func (s PutDestinationOutput) String() string {
 // GoString returns the string representation
 func (s PutDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutDestinationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDestination sets the Destination field's value.
@@ -5210,6 +5477,8 @@ func (s *PutDestinationPolicyInput) SetDestinationName(v string) *PutDestination
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicyOutput
 type PutDestinationPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5220,6 +5489,11 @@ func (s PutDestinationPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutDestinationPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutDestinationPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest
@@ -5328,6 +5602,8 @@ func (s *PutLogEventsInput) SetSequenceToken(v string) *PutLogEventsInput {
 type PutLogEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The next sequence token.
 	NextSequenceToken *string `locationName:"nextSequenceToken" min:"1" type:"string"`
 
@@ -5343,6 +5619,11 @@ func (s PutLogEventsOutput) String() string {
 // GoString returns the string representation
 func (s PutLogEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutLogEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextSequenceToken sets the NextSequenceToken field's value.
@@ -5461,6 +5742,8 @@ func (s *PutMetricFilterInput) SetMetricTransformations(v []MetricTransformation
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilterOutput
 type PutMetricFilterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5471,6 +5754,11 @@ func (s PutMetricFilterOutput) String() string {
 // GoString returns the string representation
 func (s PutMetricFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutMetricFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest
@@ -5532,6 +5820,8 @@ func (s *PutResourcePolicyInput) SetPolicyName(v string) *PutResourcePolicyInput
 type PutResourcePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The new policy.
 	ResourcePolicy *ResourcePolicy `locationName:"resourcePolicy" type:"structure"`
 }
@@ -5544,6 +5834,11 @@ func (s PutResourcePolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutResourcePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutResourcePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResourcePolicy sets the ResourcePolicy field's value.
@@ -5615,6 +5910,8 @@ func (s *PutRetentionPolicyInput) SetRetentionInDays(v int64) *PutRetentionPolic
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicyOutput
 type PutRetentionPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5625,6 +5922,11 @@ func (s PutRetentionPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutRetentionPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRetentionPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterRequest
@@ -5767,6 +6069,8 @@ func (s *PutSubscriptionFilterInput) SetRoleArn(v string) *PutSubscriptionFilter
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterOutput
 type PutSubscriptionFilterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5777,6 +6081,11 @@ func (s PutSubscriptionFilterOutput) String() string {
 // GoString returns the string representation
 func (s PutSubscriptionFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutSubscriptionFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the rejected events.
@@ -6048,6 +6357,8 @@ func (s *TagLogGroupInput) SetTags(v map[string]string) *TagLogGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroupOutput
 type TagLogGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6058,6 +6369,11 @@ func (s TagLogGroupOutput) String() string {
 // GoString returns the string representation
 func (s TagLogGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagLogGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilterRequest
@@ -6125,6 +6441,8 @@ func (s *TestMetricFilterInput) SetLogEventMessages(v []string) *TestMetricFilte
 type TestMetricFilterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The matched events.
 	Matches []MetricFilterMatchRecord `locationName:"matches" type:"list"`
 }
@@ -6137,6 +6455,11 @@ func (s TestMetricFilterOutput) String() string {
 // GoString returns the string representation
 func (s TestMetricFilterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestMetricFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMatches sets the Matches field's value.
@@ -6209,6 +6532,8 @@ func (s *UntagLogGroupInput) SetTags(v []string) *UntagLogGroupInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroupOutput
 type UntagLogGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6219,6 +6544,11 @@ func (s UntagLogGroupOutput) String() string {
 // GoString returns the string representation
 func (s UntagLogGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagLogGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The method used to distribute log data to the destination, which can be either

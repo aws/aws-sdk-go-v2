@@ -65,9 +65,12 @@ func (c *OpsWorks) AssignInstanceRequest(input *AssignInstanceInput) AssignInsta
 		input = &AssignInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignInstanceOutput{})
+	output := &AssignInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssignInstanceRequest{Request: req, Input: input}
 }
 
@@ -122,9 +125,12 @@ func (c *OpsWorks) AssignVolumeRequest(input *AssignVolumeInput) AssignVolumeReq
 		input = &AssignVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignVolumeOutput{})
+	output := &AssignVolumeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssignVolumeRequest{Request: req, Input: input}
 }
 
@@ -177,9 +183,12 @@ func (c *OpsWorks) AssociateElasticIpRequest(input *AssociateElasticIpInput) Ass
 		input = &AssociateElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateElasticIpOutput{})
+	output := &AssociateElasticIpOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateElasticIpRequest{Request: req, Input: input}
 }
 
@@ -237,9 +246,12 @@ func (c *OpsWorks) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBala
 		input = &AttachElasticLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachElasticLoadBalancerOutput{})
+	output := &AttachElasticLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachElasticLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -291,7 +303,10 @@ func (c *OpsWorks) CloneStackRequest(input *CloneStackInput) CloneStackRequest {
 		input = &CloneStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CloneStackOutput{})
+	output := &CloneStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CloneStackRequest{Request: req, Input: input}
 }
 
@@ -343,7 +358,10 @@ func (c *OpsWorks) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 		input = &CreateAppInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAppOutput{})
+	output := &CreateAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAppRequest{Request: req, Input: input}
 }
 
@@ -396,7 +414,10 @@ func (c *OpsWorks) CreateDeploymentRequest(input *CreateDeploymentInput) CreateD
 		input = &CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	output := &CreateDeploymentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
@@ -448,7 +469,10 @@ func (c *OpsWorks) CreateInstanceRequest(input *CreateInstanceInput) CreateInsta
 		input = &CreateInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceOutput{})
+	output := &CreateInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateInstanceRequest{Request: req, Input: input}
 }
 
@@ -506,7 +530,10 @@ func (c *OpsWorks) CreateLayerRequest(input *CreateLayerInput) CreateLayerReques
 		input = &CreateLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLayerOutput{})
+	output := &CreateLayerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLayerRequest{Request: req, Input: input}
 }
 
@@ -556,7 +583,10 @@ func (c *OpsWorks) CreateStackRequest(input *CreateStackInput) CreateStackReques
 		input = &CreateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStackOutput{})
+	output := &CreateStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStackRequest{Request: req, Input: input}
 }
 
@@ -606,7 +636,10 @@ func (c *OpsWorks) CreateUserProfileRequest(input *CreateUserProfileInput) Creat
 		input = &CreateUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+	output := &CreateUserProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserProfileRequest{Request: req, Input: input}
 }
 
@@ -657,9 +690,12 @@ func (c *OpsWorks) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 		input = &DeleteAppInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAppOutput{})
+	output := &DeleteAppOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAppRequest{Request: req, Input: input}
 }
 
@@ -713,9 +749,12 @@ func (c *OpsWorks) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInsta
 		input = &DeleteInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstanceOutput{})
+	output := &DeleteInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteInstanceRequest{Request: req, Input: input}
 }
 
@@ -768,9 +807,12 @@ func (c *OpsWorks) DeleteLayerRequest(input *DeleteLayerInput) DeleteLayerReques
 		input = &DeleteLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLayerOutput{})
+	output := &DeleteLayerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLayerRequest{Request: req, Input: input}
 }
 
@@ -823,9 +865,12 @@ func (c *OpsWorks) DeleteStackRequest(input *DeleteStackInput) DeleteStackReques
 		input = &DeleteStackInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackOutput{})
+	output := &DeleteStackOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStackRequest{Request: req, Input: input}
 }
 
@@ -875,9 +920,12 @@ func (c *OpsWorks) DeleteUserProfileRequest(input *DeleteUserProfileInput) Delet
 		input = &DeleteUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserProfileOutput{})
+	output := &DeleteUserProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserProfileRequest{Request: req, Input: input}
 }
 
@@ -929,9 +977,12 @@ func (c *OpsWorks) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput)
 		input = &DeregisterEcsClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterEcsClusterOutput{})
+	output := &DeregisterEcsClusterOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterEcsClusterRequest{Request: req, Input: input}
 }
 
@@ -983,9 +1034,12 @@ func (c *OpsWorks) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) D
 		input = &DeregisterElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterElasticIpOutput{})
+	output := &DeregisterElasticIpOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterElasticIpRequest{Request: req, Input: input}
 }
 
@@ -1038,9 +1092,12 @@ func (c *OpsWorks) DeregisterInstanceRequest(input *DeregisterInstanceInput) Der
 		input = &DeregisterInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterInstanceOutput{})
+	output := &DeregisterInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterInstanceRequest{Request: req, Input: input}
 }
 
@@ -1091,9 +1148,12 @@ func (c *OpsWorks) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstance
 		input = &DeregisterRdsDbInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterRdsDbInstanceOutput{})
+	output := &DeregisterRdsDbInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterRdsDbInstanceRequest{Request: req, Input: input}
 }
 
@@ -1145,9 +1205,12 @@ func (c *OpsWorks) DeregisterVolumeRequest(input *DeregisterVolumeInput) Deregis
 		input = &DeregisterVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterVolumeOutput{})
+	output := &DeregisterVolumeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterVolumeRequest{Request: req, Input: input}
 }
 
@@ -1195,7 +1258,10 @@ func (c *OpsWorks) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInpu
 		input = &DescribeAgentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAgentVersionsOutput{})
+	output := &DescribeAgentVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAgentVersionsRequest{Request: req, Input: input}
 }
 
@@ -1248,7 +1314,10 @@ func (c *OpsWorks) DescribeAppsRequest(input *DescribeAppsInput) DescribeAppsReq
 		input = &DescribeAppsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAppsOutput{})
+	output := &DescribeAppsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAppsRequest{Request: req, Input: input}
 }
 
@@ -1301,7 +1370,10 @@ func (c *OpsWorks) DescribeCommandsRequest(input *DescribeCommandsInput) Describ
 		input = &DescribeCommandsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCommandsOutput{})
+	output := &DescribeCommandsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCommandsRequest{Request: req, Input: input}
 }
 
@@ -1354,7 +1426,10 @@ func (c *OpsWorks) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) D
 		input = &DescribeDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeploymentsOutput{})
+	output := &DescribeDeploymentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDeploymentsRequest{Request: req, Input: input}
 }
 
@@ -1416,7 +1491,10 @@ func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) D
 		input = &DescribeEcsClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEcsClustersOutput{})
+	output := &DescribeEcsClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEcsClustersRequest{Request: req, Input: input}
 }
 
@@ -1519,7 +1597,10 @@ func (c *OpsWorks) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) Des
 		input = &DescribeElasticIpsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticIpsOutput{})
+	output := &DescribeElasticIpsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticIpsRequest{Request: req, Input: input}
 }
 
@@ -1572,7 +1653,10 @@ func (c *OpsWorks) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoa
 		input = &DescribeElasticLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticLoadBalancersOutput{})
+	output := &DescribeElasticLoadBalancersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeElasticLoadBalancersRequest{Request: req, Input: input}
 }
 
@@ -1625,7 +1709,10 @@ func (c *OpsWorks) DescribeInstancesRequest(input *DescribeInstancesInput) Descr
 		input = &DescribeInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	output := &DescribeInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancesRequest{Request: req, Input: input}
 }
 
@@ -1678,7 +1765,10 @@ func (c *OpsWorks) DescribeLayersRequest(input *DescribeLayersInput) DescribeLay
 		input = &DescribeLayersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLayersOutput{})
+	output := &DescribeLayersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLayersRequest{Request: req, Input: input}
 }
 
@@ -1731,7 +1821,10 @@ func (c *OpsWorks) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedA
 		input = &DescribeLoadBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBasedAutoScalingOutput{})
+	output := &DescribeLoadBasedAutoScalingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLoadBasedAutoScalingRequest{Request: req, Input: input}
 }
 
@@ -1781,7 +1874,10 @@ func (c *OpsWorks) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInpu
 		input = &DescribeMyUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMyUserProfileOutput{})
+	output := &DescribeMyUserProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeMyUserProfileRequest{Request: req, Input: input}
 }
 
@@ -1832,7 +1928,10 @@ func (c *OpsWorks) DescribePermissionsRequest(input *DescribePermissionsInput) D
 		input = &DescribePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePermissionsOutput{})
+	output := &DescribePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePermissionsRequest{Request: req, Input: input}
 }
 
@@ -1885,7 +1984,10 @@ func (c *OpsWorks) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) Des
 		input = &DescribeRaidArraysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRaidArraysOutput{})
+	output := &DescribeRaidArraysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRaidArraysRequest{Request: req, Input: input}
 }
 
@@ -1938,7 +2040,10 @@ func (c *OpsWorks) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesIn
 		input = &DescribeRdsDbInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRdsDbInstancesOutput{})
+	output := &DescribeRdsDbInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRdsDbInstancesRequest{Request: req, Input: input}
 }
 
@@ -1991,7 +2096,10 @@ func (c *OpsWorks) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInpu
 		input = &DescribeServiceErrorsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServiceErrorsOutput{})
+	output := &DescribeServiceErrorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeServiceErrorsRequest{Request: req, Input: input}
 }
 
@@ -2042,7 +2150,10 @@ func (c *OpsWorks) DescribeStackProvisioningParametersRequest(input *DescribeSta
 		input = &DescribeStackProvisioningParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackProvisioningParametersOutput{})
+	output := &DescribeStackProvisioningParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackProvisioningParametersRequest{Request: req, Input: input}
 }
 
@@ -2094,7 +2205,10 @@ func (c *OpsWorks) DescribeStackSummaryRequest(input *DescribeStackSummaryInput)
 		input = &DescribeStackSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackSummaryOutput{})
+	output := &DescribeStackSummaryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackSummaryRequest{Request: req, Input: input}
 }
 
@@ -2145,7 +2259,10 @@ func (c *OpsWorks) DescribeStacksRequest(input *DescribeStacksInput) DescribeSta
 		input = &DescribeStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	output := &DescribeStacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStacksRequest{Request: req, Input: input}
 }
 
@@ -2198,7 +2315,10 @@ func (c *OpsWorks) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedA
 		input = &DescribeTimeBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTimeBasedAutoScalingOutput{})
+	output := &DescribeTimeBasedAutoScalingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTimeBasedAutoScalingRequest{Request: req, Input: input}
 }
 
@@ -2248,7 +2368,10 @@ func (c *OpsWorks) DescribeUserProfilesRequest(input *DescribeUserProfilesInput)
 		input = &DescribeUserProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserProfilesOutput{})
+	output := &DescribeUserProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUserProfilesRequest{Request: req, Input: input}
 }
 
@@ -2301,7 +2424,10 @@ func (c *OpsWorks) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeV
 		input = &DescribeVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumesOutput{})
+	output := &DescribeVolumesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeVolumesRequest{Request: req, Input: input}
 }
 
@@ -2352,9 +2478,12 @@ func (c *OpsWorks) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBala
 		input = &DetachElasticLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachElasticLoadBalancerOutput{})
+	output := &DetachElasticLoadBalancerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachElasticLoadBalancerRequest{Request: req, Input: input}
 }
 
@@ -2407,9 +2536,12 @@ func (c *OpsWorks) DisassociateElasticIpRequest(input *DisassociateElasticIpInpu
 		input = &DisassociateElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateElasticIpOutput{})
+	output := &DisassociateElasticIpOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateElasticIpRequest{Request: req, Input: input}
 }
 
@@ -2461,7 +2593,10 @@ func (c *OpsWorks) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInpu
 		input = &GetHostnameSuggestionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostnameSuggestionOutput{})
+	output := &GetHostnameSuggestionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetHostnameSuggestionRequest{Request: req, Input: input}
 }
 
@@ -2509,7 +2644,10 @@ func (c *OpsWorks) GrantAccessRequest(input *GrantAccessInput) GrantAccessReques
 		input = &GrantAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &GrantAccessOutput{})
+	output := &GrantAccessOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GrantAccessRequest{Request: req, Input: input}
 }
 
@@ -2555,7 +2693,10 @@ func (c *OpsWorks) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 		input = &ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsRequest{Request: req, Input: input}
 }
 
@@ -2607,9 +2748,12 @@ func (c *OpsWorks) RebootInstanceRequest(input *RebootInstanceInput) RebootInsta
 		input = &RebootInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootInstanceOutput{})
+	output := &RebootInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootInstanceRequest{Request: req, Input: input}
 }
 
@@ -2662,7 +2806,10 @@ func (c *OpsWorks) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) Reg
 		input = &RegisterEcsClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterEcsClusterOutput{})
+	output := &RegisterEcsClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterEcsClusterRequest{Request: req, Input: input}
 }
 
@@ -2716,7 +2863,10 @@ func (c *OpsWorks) RegisterElasticIpRequest(input *RegisterElasticIpInput) Regis
 		input = &RegisterElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterElasticIpOutput{})
+	output := &RegisterElasticIpOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterElasticIpRequest{Request: req, Input: input}
 }
 
@@ -2781,7 +2931,10 @@ func (c *OpsWorks) RegisterInstanceRequest(input *RegisterInstanceInput) Registe
 		input = &RegisterInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterInstanceOutput{})
+	output := &RegisterInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterInstanceRequest{Request: req, Input: input}
 }
 
@@ -2832,9 +2985,12 @@ func (c *OpsWorks) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInpu
 		input = &RegisterRdsDbInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterRdsDbInstanceOutput{})
+	output := &RegisterRdsDbInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterRdsDbInstanceRequest{Request: req, Input: input}
 }
 
@@ -2888,7 +3044,10 @@ func (c *OpsWorks) RegisterVolumeRequest(input *RegisterVolumeInput) RegisterVol
 		input = &RegisterVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterVolumeOutput{})
+	output := &RegisterVolumeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterVolumeRequest{Request: req, Input: input}
 }
 
@@ -2946,9 +3105,12 @@ func (c *OpsWorks) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScaling
 		input = &SetLoadBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBasedAutoScalingOutput{})
+	output := &SetLoadBasedAutoScalingOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetLoadBasedAutoScalingRequest{Request: req, Input: input}
 }
 
@@ -3000,9 +3162,12 @@ func (c *OpsWorks) SetPermissionRequest(input *SetPermissionInput) SetPermission
 		input = &SetPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetPermissionOutput{})
+	output := &SetPermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetPermissionRequest{Request: req, Input: input}
 }
 
@@ -3055,9 +3220,12 @@ func (c *OpsWorks) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScaling
 		input = &SetTimeBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTimeBasedAutoScalingOutput{})
+	output := &SetTimeBasedAutoScalingOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetTimeBasedAutoScalingRequest{Request: req, Input: input}
 }
 
@@ -3109,9 +3277,12 @@ func (c *OpsWorks) StartInstanceRequest(input *StartInstanceInput) StartInstance
 		input = &StartInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartInstanceOutput{})
+	output := &StartInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartInstanceRequest{Request: req, Input: input}
 }
 
@@ -3162,9 +3333,12 @@ func (c *OpsWorks) StartStackRequest(input *StartStackInput) StartStackRequest {
 		input = &StartStackInput{}
 	}
 
-	req := c.newRequest(op, input, &StartStackOutput{})
+	output := &StartStackOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartStackRequest{Request: req, Input: input}
 }
 
@@ -3218,9 +3392,12 @@ func (c *OpsWorks) StopInstanceRequest(input *StopInstanceInput) StopInstanceReq
 		input = &StopInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopInstanceOutput{})
+	output := &StopInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopInstanceRequest{Request: req, Input: input}
 }
 
@@ -3271,9 +3448,12 @@ func (c *OpsWorks) StopStackRequest(input *StopStackInput) StopStackRequest {
 		input = &StopStackInput{}
 	}
 
-	req := c.newRequest(op, input, &StopStackOutput{})
+	output := &StopStackOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopStackRequest{Request: req, Input: input}
 }
 
@@ -3321,9 +3501,12 @@ func (c *OpsWorks) TagResourceRequest(input *TagResourceInput) TagResourceReques
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -3377,9 +3560,12 @@ func (c *OpsWorks) UnassignInstanceRequest(input *UnassignInstanceInput) Unassig
 		input = &UnassignInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignInstanceOutput{})
+	output := &UnassignInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnassignInstanceRequest{Request: req, Input: input}
 }
 
@@ -3431,9 +3617,12 @@ func (c *OpsWorks) UnassignVolumeRequest(input *UnassignVolumeInput) UnassignVol
 		input = &UnassignVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignVolumeOutput{})
+	output := &UnassignVolumeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UnassignVolumeRequest{Request: req, Input: input}
 }
 
@@ -3479,9 +3668,12 @@ func (c *OpsWorks) UntagResourceRequest(input *UntagResourceInput) UntagResource
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -3532,9 +3724,12 @@ func (c *OpsWorks) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
 		input = &UpdateAppInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAppOutput{})
+	output := &UpdateAppOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAppRequest{Request: req, Input: input}
 }
 
@@ -3586,9 +3781,12 @@ func (c *OpsWorks) UpdateElasticIpRequest(input *UpdateElasticIpInput) UpdateEla
 		input = &UpdateElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateElasticIpOutput{})
+	output := &UpdateElasticIpOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateElasticIpRequest{Request: req, Input: input}
 }
 
@@ -3639,9 +3837,12 @@ func (c *OpsWorks) UpdateInstanceRequest(input *UpdateInstanceInput) UpdateInsta
 		input = &UpdateInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateInstanceOutput{})
+	output := &UpdateInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateInstanceRequest{Request: req, Input: input}
 }
 
@@ -3692,9 +3893,12 @@ func (c *OpsWorks) UpdateLayerRequest(input *UpdateLayerInput) UpdateLayerReques
 		input = &UpdateLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLayerOutput{})
+	output := &UpdateLayerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateLayerRequest{Request: req, Input: input}
 }
 
@@ -3744,9 +3948,12 @@ func (c *OpsWorks) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) U
 		input = &UpdateMyUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMyUserProfileOutput{})
+	output := &UpdateMyUserProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateMyUserProfileRequest{Request: req, Input: input}
 }
 
@@ -3797,9 +4004,12 @@ func (c *OpsWorks) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) U
 		input = &UpdateRdsDbInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRdsDbInstanceOutput{})
+	output := &UpdateRdsDbInstanceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRdsDbInstanceRequest{Request: req, Input: input}
 }
 
@@ -3850,9 +4060,12 @@ func (c *OpsWorks) UpdateStackRequest(input *UpdateStackInput) UpdateStackReques
 		input = &UpdateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStackOutput{})
+	output := &UpdateStackOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateStackRequest{Request: req, Input: input}
 }
 
@@ -3902,9 +4115,12 @@ func (c *OpsWorks) UpdateUserProfileRequest(input *UpdateUserProfileInput) Updat
 		input = &UpdateUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
+	output := &UpdateUserProfileOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserProfileRequest{Request: req, Input: input}
 }
 
@@ -3956,9 +4172,12 @@ func (c *OpsWorks) UpdateVolumeRequest(input *UpdateVolumeInput) UpdateVolumeReq
 		input = &UpdateVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVolumeOutput{})
+	output := &UpdateVolumeOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateVolumeRequest{Request: req, Input: input}
 }
 
@@ -4208,6 +4427,8 @@ func (s *AssignInstanceInput) SetLayerIds(v []string) *AssignInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstanceOutput
 type AssignInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4218,6 +4439,11 @@ func (s AssignInstanceOutput) String() string {
 // GoString returns the string representation
 func (s AssignInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssignInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolumeRequest
@@ -4272,6 +4498,8 @@ func (s *AssignVolumeInput) SetVolumeId(v string) *AssignVolumeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolumeOutput
 type AssignVolumeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4282,6 +4510,11 @@ func (s AssignVolumeOutput) String() string {
 // GoString returns the string representation
 func (s AssignVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssignVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIpRequest
@@ -4336,6 +4569,8 @@ func (s *AssociateElasticIpInput) SetInstanceId(v string) *AssociateElasticIpInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIpOutput
 type AssociateElasticIpOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4346,6 +4581,11 @@ func (s AssociateElasticIpOutput) String() string {
 // GoString returns the string representation
 func (s AssociateElasticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateElasticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancerRequest
@@ -4407,6 +4647,8 @@ func (s *AttachElasticLoadBalancerInput) SetLayerId(v string) *AttachElasticLoad
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancerOutput
 type AttachElasticLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4417,6 +4659,11 @@ func (s AttachElasticLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s AttachElasticLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachElasticLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a load-based auto scaling upscaling or downscaling threshold configuration,
@@ -5024,6 +5271,8 @@ func (s *CloneStackInput) SetVpcId(v string) *CloneStackInput {
 type CloneStackOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The cloned stack ID.
 	StackId *string `type:"string"`
 }
@@ -5036,6 +5285,11 @@ func (s CloneStackOutput) String() string {
 // GoString returns the string representation
 func (s CloneStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CloneStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackId sets the StackId field's value.
@@ -5546,6 +5800,8 @@ func (s *CreateAppInput) SetType(v AppType) *CreateAppInput {
 type CreateAppOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The app ID.
 	AppId *string `type:"string"`
 }
@@ -5558,6 +5814,11 @@ func (s CreateAppOutput) String() string {
 // GoString returns the string representation
 func (s CreateAppOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAppId sets the AppId field's value.
@@ -5685,6 +5946,8 @@ func (s *CreateDeploymentInput) SetStackId(v string) *CreateDeploymentInput {
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The deployment ID, which can be used with other requests to identify the
 	// deployment.
 	DeploymentId *string `type:"string"`
@@ -5698,6 +5961,11 @@ func (s CreateDeploymentOutput) String() string {
 // GoString returns the string representation
 func (s CreateDeploymentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeploymentId sets the DeploymentId field's value.
@@ -5992,6 +6260,8 @@ func (s *CreateInstanceInput) SetVirtualizationType(v string) *CreateInstanceInp
 type CreateInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The instance ID.
 	InstanceId *string `type:"string"`
 }
@@ -6004,6 +6274,11 @@ func (s CreateInstanceOutput) String() string {
 // GoString returns the string representation
 func (s CreateInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceId sets the InstanceId field's value.
@@ -6263,6 +6538,8 @@ func (s *CreateLayerInput) SetVolumeConfigurations(v []VolumeConfiguration) *Cre
 type CreateLayerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The layer ID.
 	LayerId *string `type:"string"`
 }
@@ -6275,6 +6552,11 @@ func (s CreateLayerOutput) String() string {
 // GoString returns the string representation
 func (s CreateLayerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLayerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLayerId sets the LayerId field's value.
@@ -6660,6 +6942,8 @@ func (s *CreateStackInput) SetVpcId(v string) *CreateStackInput {
 type CreateStackOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The stack ID, which is an opaque string that you use to identify the stack
 	// when performing actions such as DescribeStacks.
 	StackId *string `type:"string"`
@@ -6673,6 +6957,11 @@ func (s CreateStackOutput) String() string {
 // GoString returns the string representation
 func (s CreateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackId sets the StackId field's value.
@@ -6758,6 +7047,8 @@ func (s *CreateUserProfileInput) SetSshUsername(v string) *CreateUserProfileInpu
 type CreateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user's IAM ARN.
 	IamUserArn *string `type:"string"`
 }
@@ -6770,6 +7061,11 @@ func (s CreateUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIamUserArn sets the IamUserArn field's value.
@@ -6865,6 +7161,8 @@ func (s *DeleteAppInput) SetAppId(v string) *DeleteAppInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteAppOutput
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6875,6 +7173,11 @@ func (s DeleteAppOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAppOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstanceRequest
@@ -6938,6 +7241,8 @@ func (s *DeleteInstanceInput) SetInstanceId(v string) *DeleteInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstanceOutput
 type DeleteInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6948,6 +7253,11 @@ func (s DeleteInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeleteInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayerRequest
@@ -6993,6 +7303,8 @@ func (s *DeleteLayerInput) SetLayerId(v string) *DeleteLayerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayerOutput
 type DeleteLayerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7003,6 +7315,11 @@ func (s DeleteLayerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLayerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLayerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStackRequest
@@ -7048,6 +7365,8 @@ func (s *DeleteStackInput) SetStackId(v string) *DeleteStackInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStackOutput
 type DeleteStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7058,6 +7377,11 @@ func (s DeleteStackOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfileRequest
@@ -7103,6 +7427,8 @@ func (s *DeleteUserProfileInput) SetIamUserArn(v string) *DeleteUserProfileInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfileOutput
 type DeleteUserProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7113,6 +7439,11 @@ func (s DeleteUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a deployment of a stack or app.
@@ -7398,6 +7729,8 @@ func (s *DeregisterEcsClusterInput) SetEcsClusterArn(v string) *DeregisterEcsClu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsClusterOutput
 type DeregisterEcsClusterOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7408,6 +7741,11 @@ func (s DeregisterEcsClusterOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterEcsClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterEcsClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIpRequest
@@ -7453,6 +7791,8 @@ func (s *DeregisterElasticIpInput) SetElasticIp(v string) *DeregisterElasticIpIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIpOutput
 type DeregisterElasticIpOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7463,6 +7803,11 @@ func (s DeregisterElasticIpOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterElasticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterElasticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstanceRequest
@@ -7508,6 +7853,8 @@ func (s *DeregisterInstanceInput) SetInstanceId(v string) *DeregisterInstanceInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstanceOutput
 type DeregisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7518,6 +7865,11 @@ func (s DeregisterInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstanceRequest
@@ -7563,6 +7915,8 @@ func (s *DeregisterRdsDbInstanceInput) SetRdsDbInstanceArn(v string) *Deregister
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstanceOutput
 type DeregisterRdsDbInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7573,6 +7927,11 @@ func (s DeregisterRdsDbInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterRdsDbInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterRdsDbInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolumeRequest
@@ -7620,6 +7979,8 @@ func (s *DeregisterVolumeInput) SetVolumeId(v string) *DeregisterVolumeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolumeOutput
 type DeregisterVolumeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7630,6 +7991,11 @@ func (s DeregisterVolumeOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersionsRequest
@@ -7670,6 +8036,8 @@ func (s *DescribeAgentVersionsInput) SetStackId(v string) *DescribeAgentVersions
 type DescribeAgentVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The agent versions for the specified stack or configuration manager. Note
 	// that this value is the complete version number, not the abbreviated number
 	// used by the console.
@@ -7684,6 +8052,11 @@ func (s DescribeAgentVersionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAgentVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAgentVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentVersions sets the AgentVersions field's value.
@@ -7733,6 +8106,8 @@ func (s *DescribeAppsInput) SetStackId(v string) *DescribeAppsInput {
 type DescribeAppsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of App objects that describe the specified apps.
 	Apps []App `type:"list"`
 }
@@ -7745,6 +8120,11 @@ func (s DescribeAppsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAppsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAppsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApps sets the Apps field's value.
@@ -7804,6 +8184,8 @@ func (s *DescribeCommandsInput) SetInstanceId(v string) *DescribeCommandsInput {
 type DescribeCommandsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Command objects that describe each of the specified commands.
 	Commands []Command `type:"list"`
 }
@@ -7816,6 +8198,11 @@ func (s DescribeCommandsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCommandsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCommandsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCommands sets the Commands field's value.
@@ -7875,6 +8262,8 @@ func (s *DescribeDeploymentsInput) SetStackId(v string) *DescribeDeploymentsInpu
 type DescribeDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Deployment objects that describe the deployments.
 	Deployments []Deployment `type:"list"`
 }
@@ -7887,6 +8276,11 @@ func (s DescribeDeploymentsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDeploymentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDeploymentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeployments sets the Deployments field's value.
@@ -7960,6 +8354,8 @@ func (s *DescribeEcsClustersInput) SetStackId(v string) *DescribeEcsClustersInpu
 type DescribeEcsClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of EcsCluster objects containing the cluster descriptions.
 	EcsClusters []EcsCluster `type:"list"`
 
@@ -7978,6 +8374,11 @@ func (s DescribeEcsClustersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEcsClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEcsClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEcsClusters sets the EcsClusters field's value.
@@ -8043,6 +8444,8 @@ func (s *DescribeElasticIpsInput) SetStackId(v string) *DescribeElasticIpsInput 
 type DescribeElasticIpsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An ElasticIps object that describes the specified Elastic IP addresses.
 	ElasticIps []ElasticIp `type:"list"`
 }
@@ -8055,6 +8458,11 @@ func (s DescribeElasticIpsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticIpsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticIpsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetElasticIps sets the ElasticIps field's value.
@@ -8102,6 +8510,8 @@ func (s *DescribeElasticLoadBalancersInput) SetStackId(v string) *DescribeElasti
 type DescribeElasticLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ElasticLoadBalancer objects that describe the specified Elastic
 	// Load Balancing instances.
 	ElasticLoadBalancers []ElasticLoadBalancer `type:"list"`
@@ -8115,6 +8525,11 @@ func (s DescribeElasticLoadBalancersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticLoadBalancersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeElasticLoadBalancersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetElasticLoadBalancers sets the ElasticLoadBalancers field's value.
@@ -8174,6 +8589,8 @@ func (s *DescribeInstancesInput) SetStackId(v string) *DescribeInstancesInput {
 type DescribeInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Instance objects that describe the instances.
 	Instances []Instance `type:"list"`
 }
@@ -8186,6 +8603,11 @@ func (s DescribeInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstances sets the Instances field's value.
@@ -8234,6 +8656,8 @@ func (s *DescribeLayersInput) SetStackId(v string) *DescribeLayersInput {
 type DescribeLayersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Layer objects that describe the layers.
 	Layers []Layer `type:"list"`
 }
@@ -8246,6 +8670,11 @@ func (s DescribeLayersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLayersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLayersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLayers sets the Layers field's value.
@@ -8299,6 +8728,8 @@ func (s *DescribeLoadBasedAutoScalingInput) SetLayerIds(v []string) *DescribeLoa
 type DescribeLoadBasedAutoScalingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of LoadBasedAutoScalingConfiguration objects that describe each
 	// layer's configuration.
 	LoadBasedAutoScalingConfigurations []LoadBasedAutoScalingConfiguration `type:"list"`
@@ -8312,6 +8743,11 @@ func (s DescribeLoadBasedAutoScalingOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLoadBasedAutoScalingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLoadBasedAutoScalingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLoadBasedAutoScalingConfigurations sets the LoadBasedAutoScalingConfigurations field's value.
@@ -8340,6 +8776,8 @@ func (s DescribeMyUserProfileInput) GoString() string {
 type DescribeMyUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A UserProfile object that describes the user's SSH information.
 	UserProfile *SelfUserProfile `type:"structure"`
 }
@@ -8352,6 +8790,11 @@ func (s DescribeMyUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s DescribeMyUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMyUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserProfile sets the UserProfile field's value.
@@ -8399,6 +8842,8 @@ func (s *DescribePermissionsInput) SetStackId(v string) *DescribePermissionsInpu
 type DescribePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Permission objects that describe the stack permissions.
 	//
 	//    * If the request object contains only a stack ID, the array contains a
@@ -8421,6 +8866,11 @@ func (s DescribePermissionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribePermissionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPermissions sets the Permissions field's value.
@@ -8479,6 +8929,8 @@ func (s *DescribeRaidArraysInput) SetStackId(v string) *DescribeRaidArraysInput 
 type DescribeRaidArraysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A RaidArrays object that describes the specified RAID arrays.
 	RaidArrays []RaidArray `type:"list"`
 }
@@ -8491,6 +8943,11 @@ func (s DescribeRaidArraysOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRaidArraysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRaidArraysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRaidArrays sets the RaidArrays field's value.
@@ -8554,6 +9011,8 @@ func (s *DescribeRdsDbInstancesInput) SetStackId(v string) *DescribeRdsDbInstanc
 type DescribeRdsDbInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An a array of RdsDbInstance objects that describe the instances.
 	RdsDbInstances []RdsDbInstance `type:"list"`
 }
@@ -8566,6 +9025,11 @@ func (s DescribeRdsDbInstancesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRdsDbInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRdsDbInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRdsDbInstances sets the RdsDbInstances field's value.
@@ -8625,6 +9089,8 @@ func (s *DescribeServiceErrorsInput) SetStackId(v string) *DescribeServiceErrors
 type DescribeServiceErrorsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of ServiceError objects that describe the specified service errors.
 	ServiceErrors []ServiceError `type:"list"`
 }
@@ -8637,6 +9103,11 @@ func (s DescribeServiceErrorsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeServiceErrorsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeServiceErrorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetServiceErrors sets the ServiceErrors field's value.
@@ -8690,6 +9161,8 @@ func (s *DescribeStackProvisioningParametersInput) SetStackId(v string) *Describ
 type DescribeStackProvisioningParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The AWS OpsWorks Stacks agent installer's URL.
 	AgentInstallerUrl *string `type:"string"`
 
@@ -8705,6 +9178,11 @@ func (s DescribeStackProvisioningParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackProvisioningParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackProvisioningParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAgentInstallerUrl sets the AgentInstallerUrl field's value.
@@ -8764,6 +9242,8 @@ func (s *DescribeStackSummaryInput) SetStackId(v string) *DescribeStackSummaryIn
 type DescribeStackSummaryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A StackSummary object that contains the results.
 	StackSummary *StackSummary `type:"structure"`
 }
@@ -8776,6 +9256,11 @@ func (s DescribeStackSummaryOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackSummaryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackSummaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackSummary sets the StackSummary field's value.
@@ -8814,6 +9299,8 @@ func (s *DescribeStacksInput) SetStackIds(v []string) *DescribeStacksInput {
 type DescribeStacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Stack objects that describe the stacks.
 	Stacks []Stack `type:"list"`
 }
@@ -8826,6 +9313,11 @@ func (s DescribeStacksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStacks sets the Stacks field's value.
@@ -8879,6 +9371,8 @@ func (s *DescribeTimeBasedAutoScalingInput) SetInstanceIds(v []string) *Describe
 type DescribeTimeBasedAutoScalingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of TimeBasedAutoScalingConfiguration objects that describe the configuration
 	// for the specified instances.
 	TimeBasedAutoScalingConfigurations []TimeBasedAutoScalingConfiguration `type:"list"`
@@ -8892,6 +9386,11 @@ func (s DescribeTimeBasedAutoScalingOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTimeBasedAutoScalingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTimeBasedAutoScalingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTimeBasedAutoScalingConfigurations sets the TimeBasedAutoScalingConfigurations field's value.
@@ -8929,6 +9428,8 @@ func (s *DescribeUserProfilesInput) SetIamUserArns(v []string) *DescribeUserProf
 type DescribeUserProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A Users object that describes the specified users.
 	UserProfiles []UserProfile `type:"list"`
 }
@@ -8941,6 +9442,11 @@ func (s DescribeUserProfilesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUserProfilesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserProfiles sets the UserProfiles field's value.
@@ -9009,6 +9515,8 @@ func (s *DescribeVolumesInput) SetVolumeIds(v []string) *DescribeVolumesInput {
 type DescribeVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of volume IDs.
 	Volumes []Volume `type:"list"`
 }
@@ -9021,6 +9529,11 @@ func (s DescribeVolumesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeVolumesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVolumesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVolumes sets the Volumes field's value.
@@ -9088,6 +9601,8 @@ func (s *DetachElasticLoadBalancerInput) SetLayerId(v string) *DetachElasticLoad
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancerOutput
 type DetachElasticLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9098,6 +9613,11 @@ func (s DetachElasticLoadBalancerOutput) String() string {
 // GoString returns the string representation
 func (s DetachElasticLoadBalancerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachElasticLoadBalancerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIpRequest
@@ -9143,6 +9663,8 @@ func (s *DisassociateElasticIpInput) SetElasticIp(v string) *DisassociateElastic
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIpOutput
 type DisassociateElasticIpOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9153,6 +9675,11 @@ func (s DisassociateElasticIpOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateElasticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateElasticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an Amazon EBS volume. This data type maps directly to the Amazon
@@ -9549,6 +10076,8 @@ func (s *GetHostnameSuggestionInput) SetLayerId(v string) *GetHostnameSuggestion
 type GetHostnameSuggestionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The generated host name.
 	Hostname *string `type:"string"`
 
@@ -9564,6 +10093,11 @@ func (s GetHostnameSuggestionOutput) String() string {
 // GoString returns the string representation
 func (s GetHostnameSuggestionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetHostnameSuggestionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHostname sets the Hostname field's value.
@@ -9638,6 +10172,8 @@ func (s *GrantAccessInput) SetValidForInMinutes(v int64) *GrantAccessInput {
 type GrantAccessOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A TemporaryCredential object that contains the data needed to log in to the
 	// instance by RDP clients, such as the Microsoft Remote Desktop Connection.
 	TemporaryCredential *TemporaryCredential `type:"structure"`
@@ -9651,6 +10187,11 @@ func (s GrantAccessOutput) String() string {
 // GoString returns the string representation
 func (s GrantAccessOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GrantAccessOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTemporaryCredential sets the TemporaryCredential field's value.
@@ -10649,6 +11190,8 @@ func (s *ListTagsInput) SetResourceArn(v string) *ListTagsInput {
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If a paginated request does not return all of the remaining results, this
 	// parameter is set to a token that you can assign to the request object's NextToken
 	// parameter to get the next set of results. If the previous paginated request
@@ -10668,6 +11211,11 @@ func (s ListTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -11088,6 +11636,8 @@ func (s *RebootInstanceInput) SetInstanceId(v string) *RebootInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstanceOutput
 type RebootInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11098,6 +11648,11 @@ func (s RebootInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RebootInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
@@ -11232,6 +11787,8 @@ func (s *RegisterEcsClusterInput) SetStackId(v string) *RegisterEcsClusterInput 
 type RegisterEcsClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The cluster's ARN.
 	EcsClusterArn *string `type:"string"`
 }
@@ -11244,6 +11801,11 @@ func (s RegisterEcsClusterOutput) String() string {
 // GoString returns the string representation
 func (s RegisterEcsClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterEcsClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEcsClusterArn sets the EcsClusterArn field's value.
@@ -11312,6 +11874,8 @@ func (s *RegisterElasticIpInput) SetStackId(v string) *RegisterElasticIpInput {
 type RegisterElasticIpOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Elastic IP address.
 	ElasticIp *string `type:"string"`
 }
@@ -11324,6 +11888,11 @@ func (s RegisterElasticIpOutput) String() string {
 // GoString returns the string representation
 func (s RegisterElasticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterElasticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetElasticIp sets the ElasticIp field's value.
@@ -11432,6 +12001,8 @@ func (s *RegisterInstanceInput) SetStackId(v string) *RegisterInstanceInput {
 type RegisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The registered instance's AWS OpsWorks Stacks ID.
 	InstanceId *string `type:"string"`
 }
@@ -11444,6 +12015,11 @@ func (s RegisterInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RegisterInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceId sets the InstanceId field's value.
@@ -11540,6 +12116,8 @@ func (s *RegisterRdsDbInstanceInput) SetStackId(v string) *RegisterRdsDbInstance
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstanceOutput
 type RegisterRdsDbInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11550,6 +12128,11 @@ func (s RegisterRdsDbInstanceOutput) String() string {
 // GoString returns the string representation
 func (s RegisterRdsDbInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterRdsDbInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolumeRequest
@@ -11606,6 +12189,8 @@ func (s *RegisterVolumeInput) SetStackId(v string) *RegisterVolumeInput {
 type RegisterVolumeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The volume ID.
 	VolumeId *string `type:"string"`
 }
@@ -11618,6 +12203,11 @@ func (s RegisterVolumeOutput) String() string {
 // GoString returns the string representation
 func (s RegisterVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetVolumeId sets the VolumeId field's value.
@@ -11875,6 +12465,8 @@ func (s *SetLoadBasedAutoScalingInput) SetUpScaling(v *AutoScalingThresholds) *S
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScalingOutput
 type SetLoadBasedAutoScalingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11885,6 +12477,11 @@ func (s SetLoadBasedAutoScalingOutput) String() string {
 // GoString returns the string representation
 func (s SetLoadBasedAutoScalingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetLoadBasedAutoScalingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermissionRequest
@@ -11986,6 +12583,8 @@ func (s *SetPermissionInput) SetStackId(v string) *SetPermissionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermissionOutput
 type SetPermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -11996,6 +12595,11 @@ func (s SetPermissionOutput) String() string {
 // GoString returns the string representation
 func (s SetPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScalingRequest
@@ -12050,6 +12654,8 @@ func (s *SetTimeBasedAutoScalingInput) SetInstanceId(v string) *SetTimeBasedAuto
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScalingOutput
 type SetTimeBasedAutoScalingOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12060,6 +12666,11 @@ func (s SetTimeBasedAutoScalingOutput) String() string {
 // GoString returns the string representation
 func (s SetTimeBasedAutoScalingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetTimeBasedAutoScalingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Shutdown event configuration.
@@ -12642,6 +13253,8 @@ func (s *StartInstanceInput) SetInstanceId(v string) *StartInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstanceOutput
 type StartInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12652,6 +13265,11 @@ func (s StartInstanceOutput) String() string {
 // GoString returns the string representation
 func (s StartInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStackRequest
@@ -12697,6 +13315,8 @@ func (s *StartStackInput) SetStackId(v string) *StartStackInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStackOutput
 type StartStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12707,6 +13327,11 @@ func (s StartStackOutput) String() string {
 // GoString returns the string representation
 func (s StartStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceRequest
@@ -12752,6 +13377,8 @@ func (s *StopInstanceInput) SetInstanceId(v string) *StopInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceOutput
 type StopInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12762,6 +13389,11 @@ func (s StopInstanceOutput) String() string {
 // GoString returns the string representation
 func (s StopInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStackRequest
@@ -12807,6 +13439,8 @@ func (s *StopStackInput) SetStackId(v string) *StopStackInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStackOutput
 type StopStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12817,6 +13451,11 @@ func (s StopStackOutput) String() string {
 // GoString returns the string representation
 func (s StopStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResourceRequest
@@ -12893,6 +13532,8 @@ func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12903,6 +13544,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the data needed by RDP clients such as the Microsoft Remote Desktop
@@ -13038,6 +13684,8 @@ func (s *UnassignInstanceInput) SetInstanceId(v string) *UnassignInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstanceOutput
 type UnassignInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13048,6 +13696,11 @@ func (s UnassignInstanceOutput) String() string {
 // GoString returns the string representation
 func (s UnassignInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnassignInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolumeRequest
@@ -13093,6 +13746,8 @@ func (s *UnassignVolumeInput) SetVolumeId(v string) *UnassignVolumeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolumeOutput
 type UnassignVolumeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13103,6 +13758,11 @@ func (s UnassignVolumeOutput) String() string {
 // GoString returns the string representation
 func (s UnassignVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UnassignVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResourceRequest
@@ -13163,6 +13823,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13173,6 +13835,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateAppRequest
@@ -13334,6 +14001,8 @@ func (s *UpdateAppInput) SetType(v AppType) *UpdateAppInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateAppOutput
 type UpdateAppOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13344,6 +14013,11 @@ func (s UpdateAppOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAppOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIpRequest
@@ -13398,6 +14072,8 @@ func (s *UpdateElasticIpInput) SetName(v string) *UpdateElasticIpInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIpOutput
 type UpdateElasticIpOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13408,6 +14084,11 @@ func (s UpdateElasticIpOutput) String() string {
 // GoString returns the string representation
 func (s UpdateElasticIpOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateElasticIpOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstanceRequest
@@ -13613,6 +14294,8 @@ func (s *UpdateInstanceInput) SetSshKeyName(v string) *UpdateInstanceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstanceOutput
 type UpdateInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13623,6 +14306,11 @@ func (s UpdateInstanceOutput) String() string {
 // GoString returns the string representation
 func (s UpdateInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayerRequest
@@ -13840,6 +14528,8 @@ func (s *UpdateLayerInput) SetVolumeConfigurations(v []VolumeConfiguration) *Upd
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayerOutput
 type UpdateLayerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13850,6 +14540,11 @@ func (s UpdateLayerOutput) String() string {
 // GoString returns the string representation
 func (s UpdateLayerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateLayerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfileRequest
@@ -13879,6 +14574,8 @@ func (s *UpdateMyUserProfileInput) SetSshPublicKey(v string) *UpdateMyUserProfil
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfileOutput
 type UpdateMyUserProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13889,6 +14586,11 @@ func (s UpdateMyUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s UpdateMyUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMyUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstanceRequest
@@ -13952,6 +14654,8 @@ func (s *UpdateRdsDbInstanceInput) SetRdsDbInstanceArn(v string) *UpdateRdsDbIns
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstanceOutput
 type UpdateRdsDbInstanceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13962,6 +14666,11 @@ func (s UpdateRdsDbInstanceOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRdsDbInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRdsDbInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStackRequest
@@ -14280,6 +14989,8 @@ func (s *UpdateStackInput) SetUseOpsworksSecurityGroups(v bool) *UpdateStackInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStackOutput
 type UpdateStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14290,6 +15001,11 @@ func (s UpdateStackOutput) String() string {
 // GoString returns the string representation
 func (s UpdateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfileRequest
@@ -14367,6 +15083,8 @@ func (s *UpdateUserProfileInput) SetSshUsername(v string) *UpdateUserProfileInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfileOutput
 type UpdateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14377,6 +15095,11 @@ func (s UpdateUserProfileOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserProfileOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolumeRequest
@@ -14440,6 +15163,8 @@ func (s *UpdateVolumeInput) SetVolumeId(v string) *UpdateVolumeInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolumeOutput
 type UpdateVolumeOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14450,6 +15175,11 @@ func (s UpdateVolumeOutput) String() string {
 // GoString returns the string representation
 func (s UpdateVolumeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVolumeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a user's SSH information.

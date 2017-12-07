@@ -52,7 +52,10 @@ func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitle
 		input = &GetEntitlementsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEntitlementsOutput{})
+	output := &GetEntitlementsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEntitlementsRequest{Request: req, Input: input}
 }
 
@@ -269,6 +272,8 @@ func (s *GetEntitlementsInput) SetProductCode(v string) *GetEntitlementsInput {
 type GetEntitlementsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The set of entitlements found through the GetEntitlements operation. If the
 	// result contains an empty set of entitlements, NextToken might still be present
 	// and should be used.
@@ -288,6 +293,11 @@ func (s GetEntitlementsOutput) String() string {
 // GoString returns the string representation
 func (s GetEntitlementsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEntitlementsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEntitlements sets the Entitlements field's value.

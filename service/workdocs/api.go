@@ -56,9 +56,12 @@ func (c *WorkDocs) AbortDocumentVersionUploadRequest(input *AbortDocumentVersion
 		input = &AbortDocumentVersionUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortDocumentVersionUploadOutput{})
+	output := &AbortDocumentVersionUploadOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AbortDocumentVersionUploadRequest{Request: req, Input: input}
 }
 
@@ -104,7 +107,10 @@ func (c *WorkDocs) ActivateUserRequest(input *ActivateUserInput) ActivateUserReq
 		input = &ActivateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &ActivateUserOutput{})
+	output := &ActivateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ActivateUserRequest{Request: req, Input: input}
 }
 
@@ -151,7 +157,10 @@ func (c *WorkDocs) AddResourcePermissionsRequest(input *AddResourcePermissionsIn
 		input = &AddResourcePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddResourcePermissionsOutput{})
+	output := &AddResourcePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddResourcePermissionsRequest{Request: req, Input: input}
 }
 
@@ -197,7 +206,10 @@ func (c *WorkDocs) CreateCommentRequest(input *CreateCommentInput) CreateComment
 		input = &CreateCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCommentOutput{})
+	output := &CreateCommentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCommentRequest{Request: req, Input: input}
 }
 
@@ -244,7 +256,10 @@ func (c *WorkDocs) CreateCustomMetadataRequest(input *CreateCustomMetadataInput)
 		input = &CreateCustomMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCustomMetadataOutput{})
+	output := &CreateCustomMetadataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCustomMetadataRequest{Request: req, Input: input}
 }
 
@@ -290,7 +305,10 @@ func (c *WorkDocs) CreateFolderRequest(input *CreateFolderInput) CreateFolderReq
 		input = &CreateFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFolderOutput{})
+	output := &CreateFolderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFolderRequest{Request: req, Input: input}
 }
 
@@ -336,7 +354,10 @@ func (c *WorkDocs) CreateLabelsRequest(input *CreateLabelsInput) CreateLabelsReq
 		input = &CreateLabelsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLabelsOutput{})
+	output := &CreateLabelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateLabelsRequest{Request: req, Input: input}
 }
 
@@ -386,7 +407,10 @@ func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificati
 		input = &CreateNotificationSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNotificationSubscriptionOutput{})
+	output := &CreateNotificationSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNotificationSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -433,7 +457,10 @@ func (c *WorkDocs) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 		input = &CreateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserOutput{})
+	output := &CreateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserRequest{Request: req, Input: input}
 }
 
@@ -480,9 +507,12 @@ func (c *WorkDocs) DeactivateUserRequest(input *DeactivateUserInput) DeactivateU
 		input = &DeactivateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivateUserOutput{})
+	output := &DeactivateUserOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeactivateUserRequest{Request: req, Input: input}
 }
 
@@ -528,9 +558,12 @@ func (c *WorkDocs) DeleteCommentRequest(input *DeleteCommentInput) DeleteComment
 		input = &DeleteCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCommentOutput{})
+	output := &DeleteCommentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCommentRequest{Request: req, Input: input}
 }
 
@@ -576,7 +609,10 @@ func (c *WorkDocs) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput)
 		input = &DeleteCustomMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomMetadataOutput{})
+	output := &DeleteCustomMetadataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCustomMetadataRequest{Request: req, Input: input}
 }
 
@@ -622,9 +658,12 @@ func (c *WorkDocs) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocum
 		input = &DeleteDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentOutput{})
+	output := &DeleteDocumentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDocumentRequest{Request: req, Input: input}
 }
 
@@ -670,9 +709,12 @@ func (c *WorkDocs) DeleteFolderRequest(input *DeleteFolderInput) DeleteFolderReq
 		input = &DeleteFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFolderOutput{})
+	output := &DeleteFolderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFolderRequest{Request: req, Input: input}
 }
 
@@ -718,9 +760,12 @@ func (c *WorkDocs) DeleteFolderContentsRequest(input *DeleteFolderContentsInput)
 		input = &DeleteFolderContentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFolderContentsOutput{})
+	output := &DeleteFolderContentsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFolderContentsRequest{Request: req, Input: input}
 }
 
@@ -766,7 +811,10 @@ func (c *WorkDocs) DeleteLabelsRequest(input *DeleteLabelsInput) DeleteLabelsReq
 		input = &DeleteLabelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLabelsOutput{})
+	output := &DeleteLabelsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteLabelsRequest{Request: req, Input: input}
 }
 
@@ -812,9 +860,12 @@ func (c *WorkDocs) DeleteNotificationSubscriptionRequest(input *DeleteNotificati
 		input = &DeleteNotificationSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotificationSubscriptionOutput{})
+	output := &DeleteNotificationSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNotificationSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -860,9 +911,12 @@ func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 		input = &DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	output := &DeleteUserOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserRequest{Request: req, Input: input}
 }
 
@@ -908,7 +962,10 @@ func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) Des
 		input = &DescribeActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivitiesOutput{})
+	output := &DescribeActivitiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeActivitiesRequest{Request: req, Input: input}
 }
 
@@ -954,7 +1011,10 @@ func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) Describ
 		input = &DescribeCommentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCommentsOutput{})
+	output := &DescribeCommentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCommentsRequest{Request: req, Input: input}
 }
 
@@ -1008,7 +1068,10 @@ func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersio
 		input = &DescribeDocumentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDocumentVersionsOutput{})
+	output := &DescribeDocumentVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDocumentVersionsRequest{Request: req, Input: input}
 }
 
@@ -1116,7 +1179,10 @@ func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsIn
 		input = &DescribeFolderContentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFolderContentsOutput{})
+	output := &DescribeFolderContentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFolderContentsRequest{Request: req, Input: input}
 }
 
@@ -1212,7 +1278,10 @@ func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotif
 		input = &DescribeNotificationSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNotificationSubscriptionsOutput{})
+	output := &DescribeNotificationSubscriptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNotificationSubscriptionsRequest{Request: req, Input: input}
 }
 
@@ -1258,7 +1327,10 @@ func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePer
 		input = &DescribeResourcePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourcePermissionsOutput{})
+	output := &DescribeResourcePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeResourcePermissionsRequest{Request: req, Input: input}
 }
 
@@ -1307,7 +1379,10 @@ func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) D
 		input = &DescribeRootFoldersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRootFoldersOutput{})
+	output := &DescribeRootFoldersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRootFoldersRequest{Request: req, Input: input}
 }
 
@@ -1364,7 +1439,10 @@ func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsers
 		input = &DescribeUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUsersOutput{})
+	output := &DescribeUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeUsersRequest{Request: req, Input: input}
 }
 
@@ -1461,7 +1539,10 @@ func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) GetCurrentU
 		input = &GetCurrentUserInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCurrentUserOutput{})
+	output := &GetCurrentUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCurrentUserRequest{Request: req, Input: input}
 }
 
@@ -1507,7 +1588,10 @@ func (c *WorkDocs) GetDocumentRequest(input *GetDocumentInput) GetDocumentReques
 		input = &GetDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentOutput{})
+	output := &GetDocumentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentRequest{Request: req, Input: input}
 }
 
@@ -1559,7 +1643,10 @@ func (c *WorkDocs) GetDocumentPathRequest(input *GetDocumentPathInput) GetDocume
 		input = &GetDocumentPathInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentPathOutput{})
+	output := &GetDocumentPathOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentPathRequest{Request: req, Input: input}
 }
 
@@ -1605,7 +1692,10 @@ func (c *WorkDocs) GetDocumentVersionRequest(input *GetDocumentVersionInput) Get
 		input = &GetDocumentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentVersionOutput{})
+	output := &GetDocumentVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDocumentVersionRequest{Request: req, Input: input}
 }
 
@@ -1651,7 +1741,10 @@ func (c *WorkDocs) GetFolderRequest(input *GetFolderInput) GetFolderRequest {
 		input = &GetFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFolderOutput{})
+	output := &GetFolderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFolderRequest{Request: req, Input: input}
 }
 
@@ -1703,7 +1796,10 @@ func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPath
 		input = &GetFolderPathInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFolderPathOutput{})
+	output := &GetFolderPathOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFolderPathRequest{Request: req, Input: input}
 }
 
@@ -1756,7 +1852,10 @@ func (c *WorkDocs) InitiateDocumentVersionUploadRequest(input *InitiateDocumentV
 		input = &InitiateDocumentVersionUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateDocumentVersionUploadOutput{})
+	output := &InitiateDocumentVersionUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InitiateDocumentVersionUploadRequest{Request: req, Input: input}
 }
 
@@ -1802,9 +1901,12 @@ func (c *WorkDocs) RemoveAllResourcePermissionsRequest(input *RemoveAllResourceP
 		input = &RemoveAllResourcePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAllResourcePermissionsOutput{})
+	output := &RemoveAllResourcePermissionsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveAllResourcePermissionsRequest{Request: req, Input: input}
 }
 
@@ -1850,9 +1952,12 @@ func (c *WorkDocs) RemoveResourcePermissionRequest(input *RemoveResourcePermissi
 		input = &RemoveResourcePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveResourcePermissionOutput{})
+	output := &RemoveResourcePermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveResourcePermissionRequest{Request: req, Input: input}
 }
 
@@ -1899,9 +2004,12 @@ func (c *WorkDocs) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocum
 		input = &UpdateDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentOutput{})
+	output := &UpdateDocumentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDocumentRequest{Request: req, Input: input}
 }
 
@@ -1951,9 +2059,12 @@ func (c *WorkDocs) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInpu
 		input = &UpdateDocumentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentVersionOutput{})
+	output := &UpdateDocumentVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDocumentVersionRequest{Request: req, Input: input}
 }
 
@@ -2000,9 +2111,12 @@ func (c *WorkDocs) UpdateFolderRequest(input *UpdateFolderInput) UpdateFolderReq
 		input = &UpdateFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFolderOutput{})
+	output := &UpdateFolderOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFolderRequest{Request: req, Input: input}
 }
 
@@ -2049,7 +2163,10 @@ func (c *WorkDocs) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 		input = &UpdateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserOutput{})
+	output := &UpdateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserRequest{Request: req, Input: input}
 }
 
@@ -2130,6 +2247,8 @@ func (s *AbortDocumentVersionUploadInput) SetVersionId(v string) *AbortDocumentV
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUploadOutput
 type AbortDocumentVersionUploadOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2140,6 +2259,11 @@ func (s AbortDocumentVersionUploadOutput) String() string {
 // GoString returns the string representation
 func (s AbortDocumentVersionUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AbortDocumentVersionUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserRequest
@@ -2202,6 +2326,8 @@ func (s *ActivateUserInput) SetUserId(v string) *ActivateUserInput {
 type ActivateUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user information.
 	User *User `type:"structure"`
 }
@@ -2214,6 +2340,11 @@ func (s ActivateUserOutput) String() string {
 // GoString returns the string representation
 func (s ActivateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ActivateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.
@@ -2396,6 +2527,8 @@ func (s *AddResourcePermissionsInput) SetResourceId(v string) *AddResourcePermis
 type AddResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The share results.
 	ShareResults []ShareResult `type:"list"`
 }
@@ -2408,6 +2541,11 @@ func (s AddResourcePermissionsOutput) String() string {
 // GoString returns the string representation
 func (s AddResourcePermissionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddResourcePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetShareResults sets the ShareResults field's value.
@@ -2718,6 +2856,8 @@ func (s *CreateCommentInput) SetVisibility(v CommentVisibilityType) *CreateComme
 type CreateCommentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The comment that has been created.
 	Comment *Comment `type:"structure"`
 }
@@ -2730,6 +2870,11 @@ func (s CreateCommentOutput) String() string {
 // GoString returns the string representation
 func (s CreateCommentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCommentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComment sets the Comment field's value.
@@ -2828,6 +2973,8 @@ func (s *CreateCustomMetadataInput) SetVersionId(v string) *CreateCustomMetadata
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadataResponse
 type CreateCustomMetadataOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2838,6 +2985,11 @@ func (s CreateCustomMetadataOutput) String() string {
 // GoString returns the string representation
 func (s CreateCustomMetadataOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCustomMetadataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolderRequest
@@ -2912,6 +3064,8 @@ func (s *CreateFolderInput) SetParentFolderId(v string) *CreateFolderInput {
 type CreateFolderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The metadata of the folder.
 	Metadata *FolderMetadata `type:"structure"`
 }
@@ -2924,6 +3078,11 @@ func (s CreateFolderOutput) String() string {
 // GoString returns the string representation
 func (s CreateFolderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFolderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetadata sets the Metadata field's value.
@@ -3006,6 +3165,8 @@ func (s *CreateLabelsInput) SetResourceId(v string) *CreateLabelsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsResponse
 type CreateLabelsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3016,6 +3177,11 @@ func (s CreateLabelsOutput) String() string {
 // GoString returns the string representation
 func (s CreateLabelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLabelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscriptionRequest
@@ -3113,6 +3279,8 @@ func (s *CreateNotificationSubscriptionInput) SetSubscriptionType(v Subscription
 type CreateNotificationSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The subscription.
 	Subscription *Subscription `type:"structure"`
 }
@@ -3125,6 +3293,11 @@ func (s CreateNotificationSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s CreateNotificationSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNotificationSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubscription sets the Subscription field's value.
@@ -3292,6 +3465,8 @@ func (s *CreateUserInput) SetUsername(v string) *CreateUserInput {
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user information.
 	User *User `type:"structure"`
 }
@@ -3304,6 +3479,11 @@ func (s CreateUserOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.
@@ -3371,6 +3551,8 @@ func (s *DeactivateUserInput) SetUserId(v string) *DeactivateUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserOutput
 type DeactivateUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3381,6 +3563,11 @@ func (s DeactivateUserOutput) String() string {
 // GoString returns the string representation
 func (s DeactivateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeactivateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCommentRequest
@@ -3478,6 +3665,8 @@ func (s *DeleteCommentInput) SetVersionId(v string) *DeleteCommentInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCommentOutput
 type DeleteCommentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3488,6 +3677,11 @@ func (s DeleteCommentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCommentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCommentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadataRequest
@@ -3581,6 +3775,8 @@ func (s *DeleteCustomMetadataInput) SetVersionId(v string) *DeleteCustomMetadata
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadataResponse
 type DeleteCustomMetadataOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3591,6 +3787,11 @@ func (s DeleteCustomMetadataOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCustomMetadataOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCustomMetadataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentRequest
@@ -3652,6 +3853,8 @@ func (s *DeleteDocumentInput) SetDocumentId(v string) *DeleteDocumentInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentOutput
 type DeleteDocumentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3662,6 +3865,11 @@ func (s DeleteDocumentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContentsRequest
@@ -3723,6 +3931,8 @@ func (s *DeleteFolderContentsInput) SetFolderId(v string) *DeleteFolderContentsI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContentsOutput
 type DeleteFolderContentsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3733,6 +3943,11 @@ func (s DeleteFolderContentsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFolderContentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFolderContentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderRequest
@@ -3794,6 +4009,8 @@ func (s *DeleteFolderInput) SetFolderId(v string) *DeleteFolderInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderOutput
 type DeleteFolderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3804,6 +4021,11 @@ func (s DeleteFolderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFolderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFolderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsRequest
@@ -3883,6 +4105,8 @@ func (s *DeleteLabelsInput) SetResourceId(v string) *DeleteLabelsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsResponse
 type DeleteLabelsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3893,6 +4117,11 @@ func (s DeleteLabelsOutput) String() string {
 // GoString returns the string representation
 func (s DeleteLabelsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLabelsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscriptionRequest
@@ -3959,6 +4188,8 @@ func (s *DeleteNotificationSubscriptionInput) SetSubscriptionId(v string) *Delet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscriptionOutput
 type DeleteNotificationSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3969,6 +4200,11 @@ func (s DeleteNotificationSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNotificationSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNotificationSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUserRequest
@@ -4030,6 +4266,8 @@ func (s *DeleteUserInput) SetUserId(v string) *DeleteUserInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUserOutput
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4040,6 +4278,11 @@ func (s DeleteUserOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesRequest
@@ -4156,6 +4399,8 @@ func (s *DescribeActivitiesInput) SetUserId(v string) *DescribeActivitiesInput {
 type DescribeActivitiesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker for the next set of results.
 	Marker *string `min:"1" type:"string"`
 
@@ -4171,6 +4416,11 @@ func (s DescribeActivitiesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeActivitiesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeActivitiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -4288,6 +4538,8 @@ func (s *DescribeCommentsInput) SetVersionId(v string) *DescribeCommentsInput {
 type DescribeCommentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of comments for the specified document version.
 	Comments []Comment `type:"list"`
 
@@ -4304,6 +4556,11 @@ func (s DescribeCommentsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCommentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCommentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComments sets the Comments field's value.
@@ -4429,6 +4686,8 @@ func (s *DescribeDocumentVersionsInput) SetMarker(v string) *DescribeDocumentVer
 type DescribeDocumentVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The document versions.
 	DocumentVersions []DocumentVersionMetadata `type:"list"`
 
@@ -4445,6 +4704,11 @@ func (s DescribeDocumentVersionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDocumentVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDocumentVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocumentVersions sets the DocumentVersions field's value.
@@ -4583,6 +4847,8 @@ func (s *DescribeFolderContentsInput) SetType(v FolderContentType) *DescribeFold
 type DescribeFolderContentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The documents in the specified folder.
 	Documents []DocumentMetadata `type:"list"`
 
@@ -4602,6 +4868,11 @@ func (s DescribeFolderContentsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFolderContentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFolderContentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDocuments sets the Documents field's value.
@@ -4694,6 +4965,8 @@ func (s *DescribeNotificationSubscriptionsInput) SetOrganizationId(v string) *De
 type DescribeNotificationSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string `min:"1" type:"string"`
@@ -4710,6 +4983,11 @@ func (s DescribeNotificationSubscriptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNotificationSubscriptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNotificationSubscriptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -4809,6 +5087,8 @@ func (s *DescribeResourcePermissionsInput) SetResourceId(v string) *DescribeReso
 type DescribeResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string `min:"1" type:"string"`
@@ -4825,6 +5105,11 @@ func (s DescribeResourcePermissionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeResourcePermissionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeResourcePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -4912,6 +5197,8 @@ func (s *DescribeRootFoldersInput) SetMarker(v string) *DescribeRootFoldersInput
 type DescribeRootFoldersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user's special folders.
 	Folders []FolderMetadata `type:"list"`
 
@@ -4927,6 +5214,11 @@ func (s DescribeRootFoldersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRootFoldersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRootFoldersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFolders sets the Folders field's value.
@@ -5084,6 +5376,8 @@ func (s *DescribeUsersInput) SetUserIds(v string) *DescribeUsersInput {
 type DescribeUsersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string `min:"1" type:"string"`
@@ -5103,6 +5397,11 @@ func (s DescribeUsersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeUsersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -5506,6 +5805,8 @@ func (s *GetCurrentUserInput) SetAuthenticationToken(v string) *GetCurrentUserIn
 type GetCurrentUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Metadata of the user.
 	User *User `type:"structure"`
 }
@@ -5518,6 +5819,11 @@ func (s GetCurrentUserOutput) String() string {
 // GoString returns the string representation
 func (s GetCurrentUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCurrentUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.
@@ -5595,6 +5901,8 @@ func (s *GetDocumentInput) SetIncludeCustomMetadata(v bool) *GetDocumentInput {
 type GetDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The custom metadata on the document.
 	CustomMetadata map[string]string `min:"1" type:"map"`
 
@@ -5610,6 +5918,11 @@ func (s GetDocumentOutput) String() string {
 // GoString returns the string representation
 func (s GetDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
@@ -5721,6 +6034,8 @@ func (s *GetDocumentPathInput) SetMarker(v string) *GetDocumentPathInput {
 type GetDocumentPathOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The path information.
 	Path *ResourcePath `type:"structure"`
 }
@@ -5733,6 +6048,11 @@ func (s GetDocumentPathOutput) String() string {
 // GoString returns the string representation
 func (s GetDocumentPathOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDocumentPathOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPath sets the Path field's value.
@@ -5841,6 +6161,8 @@ func (s *GetDocumentVersionInput) SetVersionId(v string) *GetDocumentVersionInpu
 type GetDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The custom metadata on the document version.
 	CustomMetadata map[string]string `min:"1" type:"map"`
 
@@ -5856,6 +6178,11 @@ func (s GetDocumentVersionOutput) String() string {
 // GoString returns the string representation
 func (s GetDocumentVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDocumentVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
@@ -5939,6 +6266,8 @@ func (s *GetFolderInput) SetIncludeCustomMetadata(v bool) *GetFolderInput {
 type GetFolderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The custom metadata on the folder.
 	CustomMetadata map[string]string `min:"1" type:"map"`
 
@@ -5954,6 +6283,11 @@ func (s GetFolderOutput) String() string {
 // GoString returns the string representation
 func (s GetFolderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFolderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCustomMetadata sets the CustomMetadata field's value.
@@ -6065,6 +6399,8 @@ func (s *GetFolderPathInput) SetMarker(v string) *GetFolderPathInput {
 type GetFolderPathOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The path information.
 	Path *ResourcePath `type:"structure"`
 }
@@ -6077,6 +6413,11 @@ func (s GetFolderPathOutput) String() string {
 // GoString returns the string representation
 func (s GetFolderPathOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFolderPathOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPath sets the Path field's value.
@@ -6242,6 +6583,8 @@ func (s *InitiateDocumentVersionUploadInput) SetParentFolderId(v string) *Initia
 type InitiateDocumentVersionUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The document metadata.
 	Metadata *DocumentMetadata `type:"structure"`
 
@@ -6257,6 +6600,11 @@ func (s InitiateDocumentVersionUploadOutput) String() string {
 // GoString returns the string representation
 func (s InitiateDocumentVersionUploadOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InitiateDocumentVersionUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMetadata sets the Metadata field's value.
@@ -6441,6 +6789,8 @@ func (s *RemoveAllResourcePermissionsInput) SetResourceId(v string) *RemoveAllRe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissionsOutput
 type RemoveAllResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6451,6 +6801,11 @@ func (s RemoveAllResourcePermissionsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveAllResourcePermissionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveAllResourcePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermissionRequest
@@ -6539,6 +6894,8 @@ func (s *RemoveResourcePermissionInput) SetResourceId(v string) *RemoveResourceP
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermissionOutput
 type RemoveResourcePermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6549,6 +6906,11 @@ func (s RemoveResourcePermissionOutput) String() string {
 // GoString returns the string representation
 func (s RemoveResourcePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveResourcePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes the metadata of a resource.
@@ -6993,6 +7355,8 @@ func (s *UpdateDocumentInput) SetResourceState(v ResourceStateType) *UpdateDocum
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentOutput
 type UpdateDocumentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7003,6 +7367,11 @@ func (s UpdateDocumentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDocumentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDocumentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersionRequest
@@ -7091,6 +7460,8 @@ func (s *UpdateDocumentVersionInput) SetVersionStatus(v DocumentVersionStatus) *
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersionOutput
 type UpdateDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7101,6 +7472,11 @@ func (s UpdateDocumentVersionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDocumentVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDocumentVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolderRequest
@@ -7196,6 +7572,8 @@ func (s *UpdateFolderInput) SetResourceState(v ResourceStateType) *UpdateFolderI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolderOutput
 type UpdateFolderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7206,6 +7584,11 @@ func (s UpdateFolderOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFolderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFolderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUserRequest
@@ -7331,6 +7714,8 @@ func (s *UpdateUserInput) SetUserId(v string) *UpdateUserInput {
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The user information.
 	User *User `type:"structure"`
 }
@@ -7343,6 +7728,11 @@ func (s UpdateUserOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUser sets the User field's value.

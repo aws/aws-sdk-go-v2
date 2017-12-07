@@ -73,7 +73,10 @@ func (c *Organizations) AcceptHandshakeRequest(input *AcceptHandshakeInput) Acce
 		input = &AcceptHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptHandshakeOutput{})
+	output := &AcceptHandshakeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AcceptHandshakeRequest{Request: req, Input: input}
 }
 
@@ -157,9 +160,12 @@ func (c *Organizations) AttachPolicyRequest(input *AttachPolicyInput) AttachPoli
 		input = &AttachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachPolicyOutput{})
+	output := &AttachPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AttachPolicyRequest{Request: req, Input: input}
 }
 
@@ -213,7 +219,10 @@ func (c *Organizations) CancelHandshakeRequest(input *CancelHandshakeInput) Canc
 		input = &CancelHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelHandshakeOutput{})
+	output := &CancelHandshakeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelHandshakeRequest{Request: req, Input: input}
 }
 
@@ -296,7 +305,10 @@ func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) CreateAc
 		input = &CreateAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAccountOutput{})
+	output := &CreateAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAccountRequest{Request: req, Input: input}
 }
 
@@ -355,7 +367,10 @@ func (c *Organizations) CreateOrganizationRequest(input *CreateOrganizationInput
 		input = &CreateOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOrganizationOutput{})
+	output := &CreateOrganizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateOrganizationRequest{Request: req, Input: input}
 }
 
@@ -410,7 +425,10 @@ func (c *Organizations) CreateOrganizationalUnitRequest(input *CreateOrganizatio
 		input = &CreateOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOrganizationalUnitOutput{})
+	output := &CreateOrganizationalUnitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateOrganizationalUnitRequest{Request: req, Input: input}
 }
 
@@ -462,7 +480,10 @@ func (c *Organizations) CreatePolicyRequest(input *CreatePolicyInput) CreatePoli
 		input = &CreatePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePolicyOutput{})
+	output := &CreatePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePolicyRequest{Request: req, Input: input}
 }
 
@@ -517,7 +538,10 @@ func (c *Organizations) DeclineHandshakeRequest(input *DeclineHandshakeInput) De
 		input = &DeclineHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeclineHandshakeOutput{})
+	output := &DeclineHandshakeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeclineHandshakeRequest{Request: req, Input: input}
 }
 
@@ -565,9 +589,12 @@ func (c *Organizations) DeleteOrganizationRequest(input *DeleteOrganizationInput
 		input = &DeleteOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOrganizationOutput{})
+	output := &DeleteOrganizationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteOrganizationRequest{Request: req, Input: input}
 }
 
@@ -616,9 +643,12 @@ func (c *Organizations) DeleteOrganizationalUnitRequest(input *DeleteOrganizatio
 		input = &DeleteOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOrganizationalUnitOutput{})
+	output := &DeleteOrganizationalUnitOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteOrganizationalUnitRequest{Request: req, Input: input}
 }
 
@@ -667,9 +697,12 @@ func (c *Organizations) DeletePolicyRequest(input *DeletePolicyInput) DeletePoli
 		input = &DeletePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyOutput{})
+	output := &DeletePolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePolicyRequest{Request: req, Input: input}
 }
 
@@ -717,7 +750,10 @@ func (c *Organizations) DescribeAccountRequest(input *DescribeAccountInput) Desc
 		input = &DescribeAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountOutput{})
+	output := &DescribeAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountRequest{Request: req, Input: input}
 }
 
@@ -765,7 +801,10 @@ func (c *Organizations) DescribeCreateAccountStatusRequest(input *DescribeCreate
 		input = &DescribeCreateAccountStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCreateAccountStatusOutput{})
+	output := &DescribeCreateAccountStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCreateAccountStatusRequest{Request: req, Input: input}
 }
 
@@ -819,7 +858,10 @@ func (c *Organizations) DescribeHandshakeRequest(input *DescribeHandshakeInput) 
 		input = &DescribeHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHandshakeOutput{})
+	output := &DescribeHandshakeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeHandshakeRequest{Request: req, Input: input}
 }
 
@@ -868,7 +910,10 @@ func (c *Organizations) DescribeOrganizationRequest(input *DescribeOrganizationI
 		input = &DescribeOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationOutput{})
+	output := &DescribeOrganizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeOrganizationRequest{Request: req, Input: input}
 }
 
@@ -916,7 +961,10 @@ func (c *Organizations) DescribeOrganizationalUnitRequest(input *DescribeOrganiz
 		input = &DescribeOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationalUnitOutput{})
+	output := &DescribeOrganizationalUnitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeOrganizationalUnitRequest{Request: req, Input: input}
 }
 
@@ -964,7 +1012,10 @@ func (c *Organizations) DescribePolicyRequest(input *DescribePolicyInput) Descri
 		input = &DescribePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePolicyOutput{})
+	output := &DescribePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePolicyRequest{Request: req, Input: input}
 }
 
@@ -1024,9 +1075,12 @@ func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) DetachPoli
 		input = &DetachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachPolicyOutput{})
+	output := &DetachPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DetachPolicyRequest{Request: req, Input: input}
 }
 
@@ -1078,7 +1132,10 @@ func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) 
 		input = &DisablePolicyTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DisablePolicyTypeOutput{})
+	output := &DisablePolicyTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisablePolicyTypeRequest{Request: req, Input: input}
 }
 
@@ -1150,7 +1207,10 @@ func (c *Organizations) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) 
 		input = &EnableAllFeaturesInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAllFeaturesOutput{})
+	output := &EnableAllFeaturesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableAllFeaturesRequest{Request: req, Input: input}
 }
 
@@ -1200,7 +1260,10 @@ func (c *Organizations) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) En
 		input = &EnablePolicyTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &EnablePolicyTypeOutput{})
+	output := &EnablePolicyTypeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnablePolicyTypeRequest{Request: req, Input: input}
 }
 
@@ -1262,7 +1325,10 @@ func (c *Organizations) InviteAccountToOrganizationRequest(input *InviteAccountT
 		input = &InviteAccountToOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &InviteAccountToOrganizationOutput{})
+	output := &InviteAccountToOrganizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InviteAccountToOrganizationRequest{Request: req, Input: input}
 }
 
@@ -1336,9 +1402,12 @@ func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) 
 		input = &LeaveOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &LeaveOrganizationOutput{})
+	output := &LeaveOrganizationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return LeaveOrganizationRequest{Request: req, Input: input}
 }
 
@@ -1393,7 +1462,10 @@ func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) ListAccoun
 		input = &ListAccountsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccountsOutput{})
+	output := &ListAccountsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAccountsRequest{Request: req, Input: input}
 }
 
@@ -1500,7 +1572,10 @@ func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParen
 		input = &ListAccountsForParentInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccountsForParentOutput{})
+	output := &ListAccountsForParentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAccountsForParentRequest{Request: req, Input: input}
 }
 
@@ -1604,7 +1679,10 @@ func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) ListChildr
 		input = &ListChildrenInput{}
 	}
 
-	req := c.newRequest(op, input, &ListChildrenOutput{})
+	output := &ListChildrenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListChildrenRequest{Request: req, Input: input}
 }
 
@@ -1709,7 +1787,10 @@ func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountS
 		input = &ListCreateAccountStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCreateAccountStatusOutput{})
+	output := &ListCreateAccountStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListCreateAccountStatusRequest{Request: req, Input: input}
 }
 
@@ -1818,7 +1899,10 @@ func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesFor
 		input = &ListHandshakesForAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHandshakesForAccountOutput{})
+	output := &ListHandshakesForAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHandshakesForAccountRequest{Request: req, Input: input}
 }
 
@@ -1929,7 +2013,10 @@ func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshak
 		input = &ListHandshakesForOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHandshakesForOrganizationOutput{})
+	output := &ListHandshakesForOrganizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListHandshakesForOrganizationRequest{Request: req, Input: input}
 }
 
@@ -2033,7 +2120,10 @@ func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrgan
 		input = &ListOrganizationalUnitsForParentInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOrganizationalUnitsForParentOutput{})
+	output := &ListOrganizationalUnitsForParentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOrganizationalUnitsForParentRequest{Request: req, Input: input}
 }
 
@@ -2141,7 +2231,10 @@ func (c *Organizations) ListParentsRequest(input *ListParentsInput) ListParentsR
 		input = &ListParentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListParentsOutput{})
+	output := &ListParentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListParentsRequest{Request: req, Input: input}
 }
 
@@ -2245,7 +2338,10 @@ func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) ListPolici
 		input = &ListPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPoliciesOutput{})
+	output := &ListPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPoliciesRequest{Request: req, Input: input}
 }
 
@@ -2351,7 +2447,10 @@ func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTarge
 		input = &ListPoliciesForTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPoliciesForTargetOutput{})
+	output := &ListPoliciesForTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPoliciesForTargetRequest{Request: req, Input: input}
 }
 
@@ -2455,7 +2554,10 @@ func (c *Organizations) ListRootsRequest(input *ListRootsInput) ListRootsRequest
 		input = &ListRootsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRootsOutput{})
+	output := &ListRootsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRootsRequest{Request: req, Input: input}
 }
 
@@ -2559,7 +2661,10 @@ func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyI
 		input = &ListTargetsForPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTargetsForPolicyOutput{})
+	output := &ListTargetsForPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTargetsForPolicyRequest{Request: req, Input: input}
 }
 
@@ -2658,9 +2763,12 @@ func (c *Organizations) MoveAccountRequest(input *MoveAccountInput) MoveAccountR
 		input = &MoveAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &MoveAccountOutput{})
+	output := &MoveAccountOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return MoveAccountRequest{Request: req, Input: input}
 }
 
@@ -2735,9 +2843,12 @@ func (c *Organizations) RemoveAccountFromOrganizationRequest(input *RemoveAccoun
 		input = &RemoveAccountFromOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAccountFromOrganizationOutput{})
+	output := &RemoveAccountFromOrganizationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveAccountFromOrganizationRequest{Request: req, Input: input}
 }
 
@@ -2787,7 +2898,10 @@ func (c *Organizations) UpdateOrganizationalUnitRequest(input *UpdateOrganizatio
 		input = &UpdateOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateOrganizationalUnitOutput{})
+	output := &UpdateOrganizationalUnitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateOrganizationalUnitRequest{Request: req, Input: input}
 }
 
@@ -2837,7 +2951,10 @@ func (c *Organizations) UpdatePolicyRequest(input *UpdatePolicyInput) UpdatePoli
 		input = &UpdatePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePolicyOutput{})
+	output := &UpdatePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePolicyRequest{Request: req, Input: input}
 }
 
@@ -2888,6 +3005,8 @@ func (s *AcceptHandshakeInput) SetHandshakeId(v string) *AcceptHandshakeInput {
 type AcceptHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the accepted handshake.
 	Handshake *Handshake `type:"structure"`
 }
@@ -2900,6 +3019,11 @@ func (s AcceptHandshakeOutput) String() string {
 // GoString returns the string representation
 func (s AcceptHandshakeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptHandshakeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshake sets the Handshake field's value.
@@ -3078,6 +3202,8 @@ func (s *AttachPolicyInput) SetTargetId(v string) *AttachPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyOutput
 type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3088,6 +3214,11 @@ func (s AttachPolicyOutput) String() string {
 // GoString returns the string representation
 func (s AttachPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AttachPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeRequest
@@ -3138,6 +3269,8 @@ func (s *CancelHandshakeInput) SetHandshakeId(v string) *CancelHandshakeInput {
 type CancelHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the handshake that you canceled.
 	Handshake *Handshake `type:"structure"`
 }
@@ -3150,6 +3283,11 @@ func (s CancelHandshakeOutput) String() string {
 // GoString returns the string representation
 func (s CancelHandshakeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelHandshakeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshake sets the Handshake field's value.
@@ -3317,6 +3455,8 @@ func (s *CreateAccountInput) SetRoleName(v string) *CreateAccountInput {
 type CreateAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the request to create an account.
 	// This response structure might not be fully populated when you first receive
 	// it because account creation is an asynchronous process. You can pass the
@@ -3333,6 +3473,11 @@ func (s CreateAccountOutput) String() string {
 // GoString returns the string representation
 func (s CreateAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreateAccountStatus sets the CreateAccountStatus field's value.
@@ -3485,6 +3630,8 @@ func (s *CreateOrganizationInput) SetFeatureSet(v OrganizationFeatureSet) *Creat
 type CreateOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the newly created organization.
 	Organization *Organization `type:"structure"`
 }
@@ -3497,6 +3644,11 @@ func (s CreateOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s CreateOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOrganization sets the Organization field's value.
@@ -3579,6 +3731,8 @@ func (s *CreateOrganizationalUnitInput) SetParentId(v string) *CreateOrganizatio
 type CreateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the newly created OU.
 	OrganizationalUnit *OrganizationalUnit `type:"structure"`
 }
@@ -3591,6 +3745,11 @@ func (s CreateOrganizationalUnitOutput) String() string {
 // GoString returns the string representation
 func (s CreateOrganizationalUnitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOrganizationalUnit sets the OrganizationalUnit field's value.
@@ -3706,6 +3865,8 @@ func (s *CreatePolicyInput) SetType(v PolicyType) *CreatePolicyInput {
 type CreatePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the newly created policy.
 	Policy *Policy `type:"structure"`
 }
@@ -3718,6 +3879,11 @@ func (s CreatePolicyOutput) String() string {
 // GoString returns the string representation
 func (s CreatePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -3774,6 +3940,8 @@ func (s *DeclineHandshakeInput) SetHandshakeId(v string) *DeclineHandshakeInput 
 type DeclineHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the declined handshake. The state
 	// is updated to show the value DECLINED.
 	Handshake *Handshake `type:"structure"`
@@ -3787,6 +3955,11 @@ func (s DeclineHandshakeOutput) String() string {
 // GoString returns the string representation
 func (s DeclineHandshakeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeclineHandshakeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshake sets the Handshake field's value.
@@ -3813,6 +3986,8 @@ func (s DeleteOrganizationInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationOutput
 type DeleteOrganizationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3823,6 +3998,11 @@ func (s DeleteOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitRequest
@@ -3874,6 +4054,8 @@ func (s *DeleteOrganizationalUnitInput) SetOrganizationalUnitId(v string) *Delet
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitOutput
 type DeleteOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3884,6 +4066,11 @@ func (s DeleteOrganizationalUnitOutput) String() string {
 // GoString returns the string representation
 func (s DeleteOrganizationalUnitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyRequest
@@ -3933,6 +4120,8 @@ func (s *DeletePolicyInput) SetPolicyId(v string) *DeletePolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyOutput
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3943,6 +4132,11 @@ func (s DeletePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DeletePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountRequest
@@ -3993,6 +4187,8 @@ func (s *DescribeAccountInput) SetAccountId(v string) *DescribeAccountInput {
 type DescribeAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains information about the requested account.
 	Account *Account `type:"structure"`
 }
@@ -4005,6 +4201,11 @@ func (s DescribeAccountOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccount sets the Account field's value.
@@ -4063,6 +4264,8 @@ func (s *DescribeCreateAccountStatusInput) SetCreateAccountRequestId(v string) *
 type DescribeCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains the current status of an account creation request.
 	CreateAccountStatus *CreateAccountStatus `type:"structure"`
 }
@@ -4075,6 +4278,11 @@ func (s DescribeCreateAccountStatusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCreateAccountStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCreateAccountStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreateAccountStatus sets the CreateAccountStatus field's value.
@@ -4132,6 +4340,8 @@ func (s *DescribeHandshakeInput) SetHandshakeId(v string) *DescribeHandshakeInpu
 type DescribeHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains information about the specified handshake.
 	Handshake *Handshake `type:"structure"`
 }
@@ -4144,6 +4354,11 @@ func (s DescribeHandshakeOutput) String() string {
 // GoString returns the string representation
 func (s DescribeHandshakeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeHandshakeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshake sets the Handshake field's value.
@@ -4171,6 +4386,8 @@ func (s DescribeOrganizationInput) GoString() string {
 type DescribeOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains information about the organization.
 	Organization *Organization `type:"structure"`
 }
@@ -4183,6 +4400,11 @@ func (s DescribeOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOrganization sets the Organization field's value.
@@ -4241,6 +4463,8 @@ func (s *DescribeOrganizationalUnitInput) SetOrganizationalUnitId(v string) *Des
 type DescribeOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the specified OU.
 	OrganizationalUnit *OrganizationalUnit `type:"structure"`
 }
@@ -4253,6 +4477,11 @@ func (s DescribeOrganizationalUnitOutput) String() string {
 // GoString returns the string representation
 func (s DescribeOrganizationalUnitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOrganizationalUnit sets the OrganizationalUnit field's value.
@@ -4309,6 +4538,8 @@ func (s *DescribePolicyInput) SetPolicyId(v string) *DescribePolicyInput {
 type DescribePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the specified policy.
 	Policy *Policy `type:"structure"`
 }
@@ -4321,6 +4552,11 @@ func (s DescribePolicyOutput) String() string {
 // GoString returns the string representation
 func (s DescribePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -4406,6 +4642,8 @@ func (s *DetachPolicyInput) SetTargetId(v string) *DetachPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyOutput
 type DetachPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4416,6 +4654,11 @@ func (s DetachPolicyOutput) String() string {
 // GoString returns the string representation
 func (s DetachPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetachPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest
@@ -4480,6 +4723,8 @@ func (s *DisablePolicyTypeInput) SetRootId(v string) *DisablePolicyTypeInput {
 type DisablePolicyTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that shows the root with the updated list of enabled policy types.
 	Root *Root `type:"structure"`
 }
@@ -4492,6 +4737,11 @@ func (s DisablePolicyTypeOutput) String() string {
 // GoString returns the string representation
 func (s DisablePolicyTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisablePolicyTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRoot sets the Root field's value.
@@ -4519,6 +4769,8 @@ func (s EnableAllFeaturesInput) GoString() string {
 type EnableAllFeaturesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the handshake created to support
 	// this request to enable all features in the organization.
 	Handshake *Handshake `type:"structure"`
@@ -4532,6 +4784,11 @@ func (s EnableAllFeaturesOutput) String() string {
 // GoString returns the string representation
 func (s EnableAllFeaturesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableAllFeaturesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshake sets the Handshake field's value.
@@ -4602,6 +4859,8 @@ func (s *EnablePolicyTypeInput) SetRootId(v string) *EnablePolicyTypeInput {
 type EnablePolicyTypeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that shows the root with the updated list of enabled policy types.
 	Root *Root `type:"structure"`
 }
@@ -4614,6 +4873,11 @@ func (s EnablePolicyTypeOutput) String() string {
 // GoString returns the string representation
 func (s EnablePolicyTypeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnablePolicyTypeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRoot sets the Root field's value.
@@ -4988,6 +5252,8 @@ func (s *InviteAccountToOrganizationInput) SetTarget(v *HandshakeParty) *InviteA
 type InviteAccountToOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the handshake that is created to
 	// support this invitation request.
 	Handshake *Handshake `type:"structure"`
@@ -5001,6 +5267,11 @@ func (s InviteAccountToOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s InviteAccountToOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InviteAccountToOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshake sets the Handshake field's value.
@@ -5027,6 +5298,8 @@ func (s LeaveOrganizationInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganizationOutput
 type LeaveOrganizationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5037,6 +5310,11 @@ func (s LeaveOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s LeaveOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s LeaveOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest
@@ -5116,6 +5394,8 @@ func (s *ListAccountsForParentInput) SetParentId(v string) *ListAccountsForParen
 type ListAccountsForParentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the accounts in the specified root or OU.
 	Accounts []Account `type:"list"`
 
@@ -5135,6 +5415,11 @@ func (s ListAccountsForParentOutput) String() string {
 // GoString returns the string representation
 func (s ListAccountsForParentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAccountsForParentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccounts sets the Accounts field's value.
@@ -5210,6 +5495,8 @@ func (s *ListAccountsInput) SetNextToken(v string) *ListAccountsInput {
 type ListAccountsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of objects in the organization.
 	Accounts []Account `type:"list"`
 
@@ -5229,6 +5516,11 @@ func (s ListAccountsOutput) String() string {
 // GoString returns the string representation
 func (s ListAccountsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAccountsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccounts sets the Accounts field's value.
@@ -5345,6 +5637,8 @@ func (s *ListChildrenInput) SetParentId(v string) *ListChildrenInput {
 type ListChildrenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of children of the specified parent container.
 	Children []Child `type:"list"`
 
@@ -5364,6 +5658,11 @@ func (s ListChildrenOutput) String() string {
 // GoString returns the string representation
 func (s ListChildrenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListChildrenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChildren sets the Children field's value.
@@ -5449,6 +5748,8 @@ func (s *ListCreateAccountStatusInput) SetStates(v []CreateAccountState) *ListCr
 type ListCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of objects with details about the requests. Certain elements, such
 	// as the accountId number, are present in the output only after the account
 	// has been successfully created.
@@ -5470,6 +5771,11 @@ func (s ListCreateAccountStatusOutput) String() string {
 // GoString returns the string representation
 func (s ListCreateAccountStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCreateAccountStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCreateAccountStatuses sets the CreateAccountStatuses field's value.
@@ -5559,6 +5865,8 @@ func (s *ListHandshakesForAccountInput) SetNextToken(v string) *ListHandshakesFo
 type ListHandshakesForAccountOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Handshake objects with details about each of the handshakes that
 	// is associated with the specified account.
 	Handshakes []Handshake `type:"list"`
@@ -5579,6 +5887,11 @@ func (s ListHandshakesForAccountOutput) String() string {
 // GoString returns the string representation
 func (s ListHandshakesForAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHandshakesForAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshakes sets the Handshakes field's value.
@@ -5668,6 +5981,8 @@ func (s *ListHandshakesForOrganizationInput) SetNextToken(v string) *ListHandsha
 type ListHandshakesForOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Handshake objects with details about each of the handshakes that
 	// are associated with an organization.
 	Handshakes []Handshake `type:"list"`
@@ -5688,6 +6003,11 @@ func (s ListHandshakesForOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s ListHandshakesForOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListHandshakesForOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHandshakes sets the Handshakes field's value.
@@ -5790,6 +6110,8 @@ func (s *ListOrganizationalUnitsForParentInput) SetParentId(v string) *ListOrgan
 type ListOrganizationalUnitsForParentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
 	// parameter in a subsequent call to the operation to get the next part of the
@@ -5809,6 +6131,11 @@ func (s ListOrganizationalUnitsForParentOutput) String() string {
 // GoString returns the string representation
 func (s ListOrganizationalUnitsForParentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOrganizationalUnitsForParentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5910,6 +6237,8 @@ func (s *ListParentsInput) SetNextToken(v string) *ListParentsInput {
 type ListParentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
 	// parameter in a subsequent call to the operation to get the next part of the
@@ -5929,6 +6258,11 @@ func (s ListParentsOutput) String() string {
 // GoString returns the string representation
 func (s ListParentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListParentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6047,6 +6381,8 @@ func (s *ListPoliciesForTargetInput) SetTargetId(v string) *ListPoliciesForTarge
 type ListPoliciesForTargetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
 	// parameter in a subsequent call to the operation to get the next part of the
@@ -6066,6 +6402,11 @@ func (s ListPoliciesForTargetOutput) String() string {
 // GoString returns the string representation
 func (s ListPoliciesForTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPoliciesForTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6155,6 +6496,8 @@ func (s *ListPoliciesInput) SetNextToken(v string) *ListPoliciesInput {
 type ListPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
 	// parameter in a subsequent call to the operation to get the next part of the
@@ -6176,6 +6519,11 @@ func (s ListPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6251,6 +6599,8 @@ func (s *ListRootsInput) SetNextToken(v string) *ListRootsInput {
 type ListRootsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
 	// parameter in a subsequent call to the operation to get the next part of the
@@ -6270,6 +6620,11 @@ func (s ListRootsOutput) String() string {
 // GoString returns the string representation
 func (s ListRootsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRootsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6363,6 +6718,8 @@ func (s *ListTargetsForPolicyInput) SetPolicyId(v string) *ListTargetsForPolicyI
 type ListTargetsForPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If present, this value indicates that there is more output available than
 	// is included in the current response. Use this value in the NextToken request
 	// parameter in a subsequent call to the operation to get the next part of the
@@ -6383,6 +6740,11 @@ func (s ListTargetsForPolicyOutput) String() string {
 // GoString returns the string representation
 func (s ListTargetsForPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTargetsForPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6497,6 +6859,8 @@ func (s *MoveAccountInput) SetSourceParentId(v string) *MoveAccountInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountOutput
 type MoveAccountOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6507,6 +6871,11 @@ func (s MoveAccountOutput) String() string {
 // GoString returns the string representation
 func (s MoveAccountOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s MoveAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains details about an organization. An organization is a collection of
@@ -6996,6 +7365,8 @@ func (s *RemoveAccountFromOrganizationInput) SetAccountId(v string) *RemoveAccou
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationOutput
 type RemoveAccountFromOrganizationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7006,6 +7377,11 @@ func (s RemoveAccountFromOrganizationOutput) String() string {
 // GoString returns the string representation
 func (s RemoveAccountFromOrganizationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveAccountFromOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains details about a root. A root is a top-level parent node in the hierarchy
@@ -7142,6 +7518,8 @@ func (s *UpdateOrganizationalUnitInput) SetOrganizationalUnitId(v string) *Updat
 type UpdateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains the details about the specified OU, including its
 	// new name.
 	OrganizationalUnit *OrganizationalUnit `type:"structure"`
@@ -7155,6 +7533,11 @@ func (s UpdateOrganizationalUnitOutput) String() string {
 // GoString returns the string representation
 func (s UpdateOrganizationalUnitOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOrganizationalUnit sets the OrganizationalUnit field's value.
@@ -7250,6 +7633,8 @@ func (s *UpdatePolicyInput) SetPolicyId(v string) *UpdatePolicyInput {
 type UpdatePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A structure that contains details about the updated policy, showing the requested
 	// changes.
 	Policy *Policy `type:"structure"`
@@ -7263,6 +7648,11 @@ func (s UpdatePolicyOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.

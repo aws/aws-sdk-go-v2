@@ -72,9 +72,12 @@ func (c *SQS) AddPermissionRequest(input *AddPermissionInput) AddPermissionReque
 		input = &AddPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddPermissionOutput{})
+	output := &AddPermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddPermissionRequest{Request: req, Input: input}
 }
 
@@ -155,9 +158,12 @@ func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput
 		input = &ChangeMessageVisibilityInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeMessageVisibilityOutput{})
+	output := &ChangeMessageVisibilityOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ChangeMessageVisibilityRequest{Request: req, Input: input}
 }
 
@@ -218,7 +224,10 @@ func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibility
 		input = &ChangeMessageVisibilityBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeMessageVisibilityBatchOutput{})
+	output := &ChangeMessageVisibilityBatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ChangeMessageVisibilityBatchRequest{Request: req, Input: input}
 }
 
@@ -303,7 +312,10 @@ func (c *SQS) CreateQueueRequest(input *CreateQueueInput) CreateQueueRequest {
 		input = &CreateQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateQueueOutput{})
+	output := &CreateQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateQueueRequest{Request: req, Input: input}
 }
 
@@ -368,9 +380,12 @@ func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageReque
 		input = &DeleteMessageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMessageOutput{})
+	output := &DeleteMessageOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMessageRequest{Request: req, Input: input}
 }
 
@@ -430,7 +445,10 @@ func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) DeleteMe
 		input = &DeleteMessageBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMessageBatchOutput{})
+	output := &DeleteMessageBatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteMessageBatchRequest{Request: req, Input: input}
 }
 
@@ -488,9 +506,12 @@ func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest {
 		input = &DeleteQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQueueOutput{})
+	output := &DeleteQueueOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteQueueRequest{Request: req, Input: input}
 }
 
@@ -547,7 +568,10 @@ func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) GetQueue
 		input = &GetQueueAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueueAttributesOutput{})
+	output := &GetQueueAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQueueAttributesRequest{Request: req, Input: input}
 }
 
@@ -600,7 +624,10 @@ func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest {
 		input = &GetQueueUrlInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueueUrlOutput{})
+	output := &GetQueueUrlOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetQueueUrlRequest{Request: req, Input: input}
 }
 
@@ -651,7 +678,10 @@ func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueue
 		input = &ListDeadLetterSourceQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeadLetterSourceQueuesOutput{})
+	output := &ListDeadLetterSourceQueuesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDeadLetterSourceQueuesRequest{Request: req, Input: input}
 }
 
@@ -699,7 +729,10 @@ func (c *SQS) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 		input = &ListQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueuesOutput{})
+	output := &ListQueuesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListQueuesRequest{Request: req, Input: input}
 }
 
@@ -754,9 +787,12 @@ func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
 		input = &PurgeQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &PurgeQueueOutput{})
+	output := &PurgeQueueOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurgeQueueRequest{Request: req, Input: input}
 }
 
@@ -848,7 +884,10 @@ func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) ReceiveMessageRe
 		input = &ReceiveMessageInput{}
 	}
 
-	req := c.newRequest(op, input, &ReceiveMessageOutput{})
+	output := &ReceiveMessageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReceiveMessageRequest{Request: req, Input: input}
 }
 
@@ -895,9 +934,12 @@ func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) RemovePermis
 		input = &RemovePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemovePermissionOutput{})
+	output := &RemovePermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemovePermissionRequest{Request: req, Input: input}
 }
 
@@ -951,7 +993,10 @@ func (c *SQS) SendMessageRequest(input *SendMessageInput) SendMessageRequest {
 		input = &SendMessageInput{}
 	}
 
-	req := c.newRequest(op, input, &SendMessageOutput{})
+	output := &SendMessageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendMessageRequest{Request: req, Input: input}
 }
 
@@ -1027,7 +1072,10 @@ func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessageB
 		input = &SendMessageBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &SendMessageBatchOutput{})
+	output := &SendMessageBatchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SendMessageBatchRequest{Request: req, Input: input}
 }
 
@@ -1080,9 +1128,12 @@ func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) SetQueue
 		input = &SetQueueAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetQueueAttributesOutput{})
+	output := &SetQueueAttributesOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetQueueAttributesRequest{Request: req, Input: input}
 }
 
@@ -1204,6 +1255,8 @@ func (s *AddPermissionInput) SetQueueUrl(v string) *AddPermissionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermissionOutput
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1214,6 +1267,11 @@ func (s AddPermissionOutput) String() string {
 // GoString returns the string representation
 func (s AddPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // This is used in the responses of batch API to give a detailed description
@@ -1347,6 +1405,8 @@ func (s *ChangeMessageVisibilityBatchInput) SetQueueUrl(v string) *ChangeMessage
 type ChangeMessageVisibilityBatchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of BatchResultErrorEntry items.
 	//
 	// Failed is a required field
@@ -1366,6 +1426,11 @@ func (s ChangeMessageVisibilityBatchOutput) String() string {
 // GoString returns the string representation
 func (s ChangeMessageVisibilityBatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ChangeMessageVisibilityBatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailed sets the Failed field's value.
@@ -1562,6 +1627,8 @@ func (s *ChangeMessageVisibilityInput) SetVisibilityTimeout(v int64) *ChangeMess
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityOutput
 type ChangeMessageVisibilityOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1572,6 +1639,11 @@ func (s ChangeMessageVisibilityOutput) String() string {
 // GoString returns the string representation
 func (s ChangeMessageVisibilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ChangeMessageVisibilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueueRequest
@@ -1754,6 +1826,8 @@ func (s *CreateQueueInput) SetQueueName(v string) *CreateQueueInput {
 type CreateQueueOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The URL of the created Amazon SQS queue.
 	QueueUrl *string `type:"string"`
 }
@@ -1766,6 +1840,11 @@ func (s CreateQueueOutput) String() string {
 // GoString returns the string representation
 func (s CreateQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueueUrl sets the QueueUrl field's value.
@@ -1845,6 +1924,8 @@ func (s *DeleteMessageBatchInput) SetQueueUrl(v string) *DeleteMessageBatchInput
 type DeleteMessageBatchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of BatchResultErrorEntry items.
 	//
 	// Failed is a required field
@@ -1864,6 +1945,11 @@ func (s DeleteMessageBatchOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMessageBatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMessageBatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailed sets the Failed field's value.
@@ -2024,6 +2110,8 @@ func (s *DeleteMessageInput) SetReceiptHandle(v string) *DeleteMessageInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageOutput
 type DeleteMessageOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2034,6 +2122,11 @@ func (s DeleteMessageOutput) String() string {
 // GoString returns the string representation
 func (s DeleteMessageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMessageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueRequest
@@ -2081,6 +2174,8 @@ func (s *DeleteQueueInput) SetQueueUrl(v string) *DeleteQueueInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueOutput
 type DeleteQueueOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2091,6 +2186,11 @@ func (s DeleteQueueOutput) String() string {
 // GoString returns the string representation
 func (s DeleteQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesRequest
@@ -2236,6 +2336,8 @@ func (s *GetQueueAttributesInput) SetQueueUrl(v string) *GetQueueAttributesInput
 type GetQueueAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of attributes to their respective values.
 	Attributes map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 }
@@ -2248,6 +2350,11 @@ func (s GetQueueAttributesOutput) String() string {
 // GoString returns the string representation
 func (s GetQueueAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQueueAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -2314,6 +2421,8 @@ func (s *GetQueueUrlInput) SetQueueOwnerAWSAccountId(v string) *GetQueueUrlInput
 type GetQueueUrlOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The URL of the queue.
 	QueueUrl *string `type:"string"`
 }
@@ -2326,6 +2435,11 @@ func (s GetQueueUrlOutput) String() string {
 // GoString returns the string representation
 func (s GetQueueUrlOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQueueUrlOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueueUrl sets the QueueUrl field's value.
@@ -2381,6 +2495,8 @@ func (s *ListDeadLetterSourceQueuesInput) SetQueueUrl(v string) *ListDeadLetterS
 type ListDeadLetterSourceQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of source queue URLs that have the RedrivePolicy queue attribute configured
 	// with a dead-letter queue.
 	//
@@ -2396,6 +2512,11 @@ func (s ListDeadLetterSourceQueuesOutput) String() string {
 // GoString returns the string representation
 func (s ListDeadLetterSourceQueuesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeadLetterSourceQueuesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueueUrls sets the QueueUrls field's value.
@@ -2436,6 +2557,8 @@ func (s *ListQueuesInput) SetQueueNamePrefix(v string) *ListQueuesInput {
 type ListQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of queue URLs, up to 1,000 entries.
 	QueueUrls []string `locationNameList:"QueueUrl" type:"list" flattened:"true"`
 }
@@ -2448,6 +2571,11 @@ func (s ListQueuesOutput) String() string {
 // GoString returns the string representation
 func (s ListQueuesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListQueuesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetQueueUrls sets the QueueUrls field's value.
@@ -2683,6 +2811,8 @@ func (s *PurgeQueueInput) SetQueueUrl(v string) *PurgeQueueInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueOutput
 type PurgeQueueOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2693,6 +2823,11 @@ func (s PurgeQueueOutput) String() string {
 // GoString returns the string representation
 func (s PurgeQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurgeQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageRequest
@@ -2933,6 +3068,8 @@ func (s *ReceiveMessageInput) SetWaitTimeSeconds(v int64) *ReceiveMessageInput {
 type ReceiveMessageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of messages.
 	Messages []Message `locationNameList:"Message" type:"list" flattened:"true"`
 }
@@ -2945,6 +3082,11 @@ func (s ReceiveMessageOutput) String() string {
 // GoString returns the string representation
 func (s ReceiveMessageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReceiveMessageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessages sets the Messages field's value.
@@ -3014,6 +3156,8 @@ func (s *RemovePermissionInput) SetQueueUrl(v string) *RemovePermissionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3024,6 +3168,11 @@ func (s RemovePermissionOutput) String() string {
 // GoString returns the string representation
 func (s RemovePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequest
@@ -3097,6 +3246,8 @@ func (s *SendMessageBatchInput) SetQueueUrl(v string) *SendMessageBatchInput {
 type SendMessageBatchOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of BatchResultErrorEntry items with error details about each message
 	// that can't be enqueued.
 	//
@@ -3117,6 +3268,11 @@ func (s SendMessageBatchOutput) String() string {
 // GoString returns the string representation
 func (s SendMessageBatchOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendMessageBatchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailed sets the Failed field's value.
@@ -3579,6 +3735,8 @@ func (s *SendMessageInput) SetQueueUrl(v string) *SendMessageInput {
 type SendMessageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An MD5 digest of the non-URL-encoded message attribute string. You can use
 	// this attribute to verify that Amazon SQS received the message correctly.
 	// Amazon SQS URL-decodes the message before creating the MD5 digest. For information
@@ -3613,6 +3771,11 @@ func (s SendMessageOutput) String() string {
 // GoString returns the string representation
 func (s SendMessageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SendMessageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMD5OfMessageAttributes sets the MD5OfMessageAttributes field's value.
@@ -3809,6 +3972,8 @@ func (s *SetQueueAttributesInput) SetQueueUrl(v string) *SetQueueAttributesInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributesOutput
 type SetQueueAttributesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3819,6 +3984,11 @@ func (s SetQueueAttributesOutput) String() string {
 // GoString returns the string representation
 func (s SetQueueAttributesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetQueueAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type MessageSystemAttributeName string

@@ -9,7 +9,6 @@
 package wafregionaliface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/waf"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional"
 )
 
@@ -65,99 +64,99 @@ import (
 type WAFRegionalAPI interface {
 	AssociateWebACLRequest(*wafregional.AssociateWebACLInput) wafregional.AssociateWebACLRequest
 
-	CreateByteMatchSetRequest(*waf.CreateByteMatchSetInput) wafregional.CreateByteMatchSetRequest
+	CreateByteMatchSetRequest(*wafregional.CreateByteMatchSetInput) wafregional.CreateByteMatchSetRequest
 
-	CreateIPSetRequest(*waf.CreateIPSetInput) wafregional.CreateIPSetRequest
+	CreateIPSetRequest(*wafregional.CreateIPSetInput) wafregional.CreateIPSetRequest
 
-	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) wafregional.CreateRateBasedRuleRequest
+	CreateRateBasedRuleRequest(*wafregional.CreateRateBasedRuleInput) wafregional.CreateRateBasedRuleRequest
 
-	CreateRuleRequest(*waf.CreateRuleInput) wafregional.CreateRuleRequest
+	CreateRuleRequest(*wafregional.CreateRuleInput) wafregional.CreateRuleRequest
 
-	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) wafregional.CreateSizeConstraintSetRequest
+	CreateSizeConstraintSetRequest(*wafregional.CreateSizeConstraintSetInput) wafregional.CreateSizeConstraintSetRequest
 
-	CreateSqlInjectionMatchSetRequest(*waf.CreateSqlInjectionMatchSetInput) wafregional.CreateSqlInjectionMatchSetRequest
+	CreateSqlInjectionMatchSetRequest(*wafregional.CreateSqlInjectionMatchSetInput) wafregional.CreateSqlInjectionMatchSetRequest
 
-	CreateWebACLRequest(*waf.CreateWebACLInput) wafregional.CreateWebACLRequest
+	CreateWebACLRequest(*wafregional.CreateWebACLInput) wafregional.CreateWebACLRequest
 
-	CreateXssMatchSetRequest(*waf.CreateXssMatchSetInput) wafregional.CreateXssMatchSetRequest
+	CreateXssMatchSetRequest(*wafregional.CreateXssMatchSetInput) wafregional.CreateXssMatchSetRequest
 
-	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) wafregional.DeleteByteMatchSetRequest
+	DeleteByteMatchSetRequest(*wafregional.DeleteByteMatchSetInput) wafregional.DeleteByteMatchSetRequest
 
-	DeleteIPSetRequest(*waf.DeleteIPSetInput) wafregional.DeleteIPSetRequest
+	DeleteIPSetRequest(*wafregional.DeleteIPSetInput) wafregional.DeleteIPSetRequest
 
-	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) wafregional.DeleteRateBasedRuleRequest
+	DeleteRateBasedRuleRequest(*wafregional.DeleteRateBasedRuleInput) wafregional.DeleteRateBasedRuleRequest
 
-	DeleteRuleRequest(*waf.DeleteRuleInput) wafregional.DeleteRuleRequest
+	DeleteRuleRequest(*wafregional.DeleteRuleInput) wafregional.DeleteRuleRequest
 
-	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) wafregional.DeleteSizeConstraintSetRequest
+	DeleteSizeConstraintSetRequest(*wafregional.DeleteSizeConstraintSetInput) wafregional.DeleteSizeConstraintSetRequest
 
-	DeleteSqlInjectionMatchSetRequest(*waf.DeleteSqlInjectionMatchSetInput) wafregional.DeleteSqlInjectionMatchSetRequest
+	DeleteSqlInjectionMatchSetRequest(*wafregional.DeleteSqlInjectionMatchSetInput) wafregional.DeleteSqlInjectionMatchSetRequest
 
-	DeleteWebACLRequest(*waf.DeleteWebACLInput) wafregional.DeleteWebACLRequest
+	DeleteWebACLRequest(*wafregional.DeleteWebACLInput) wafregional.DeleteWebACLRequest
 
-	DeleteXssMatchSetRequest(*waf.DeleteXssMatchSetInput) wafregional.DeleteXssMatchSetRequest
+	DeleteXssMatchSetRequest(*wafregional.DeleteXssMatchSetInput) wafregional.DeleteXssMatchSetRequest
 
 	DisassociateWebACLRequest(*wafregional.DisassociateWebACLInput) wafregional.DisassociateWebACLRequest
 
-	GetByteMatchSetRequest(*waf.GetByteMatchSetInput) wafregional.GetByteMatchSetRequest
+	GetByteMatchSetRequest(*wafregional.GetByteMatchSetInput) wafregional.GetByteMatchSetRequest
 
-	GetChangeTokenRequest(*waf.GetChangeTokenInput) wafregional.GetChangeTokenRequest
+	GetChangeTokenRequest(*wafregional.GetChangeTokenInput) wafregional.GetChangeTokenRequest
 
-	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) wafregional.GetChangeTokenStatusRequest
+	GetChangeTokenStatusRequest(*wafregional.GetChangeTokenStatusInput) wafregional.GetChangeTokenStatusRequest
 
-	GetIPSetRequest(*waf.GetIPSetInput) wafregional.GetIPSetRequest
+	GetIPSetRequest(*wafregional.GetIPSetInput) wafregional.GetIPSetRequest
 
-	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) wafregional.GetRateBasedRuleRequest
+	GetRateBasedRuleRequest(*wafregional.GetRateBasedRuleInput) wafregional.GetRateBasedRuleRequest
 
-	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) wafregional.GetRateBasedRuleManagedKeysRequest
+	GetRateBasedRuleManagedKeysRequest(*wafregional.GetRateBasedRuleManagedKeysInput) wafregional.GetRateBasedRuleManagedKeysRequest
 
-	GetRuleRequest(*waf.GetRuleInput) wafregional.GetRuleRequest
+	GetRuleRequest(*wafregional.GetRuleInput) wafregional.GetRuleRequest
 
-	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) wafregional.GetSampledRequestsRequest
+	GetSampledRequestsRequest(*wafregional.GetSampledRequestsInput) wafregional.GetSampledRequestsRequest
 
-	GetSizeConstraintSetRequest(*waf.GetSizeConstraintSetInput) wafregional.GetSizeConstraintSetRequest
+	GetSizeConstraintSetRequest(*wafregional.GetSizeConstraintSetInput) wafregional.GetSizeConstraintSetRequest
 
-	GetSqlInjectionMatchSetRequest(*waf.GetSqlInjectionMatchSetInput) wafregional.GetSqlInjectionMatchSetRequest
+	GetSqlInjectionMatchSetRequest(*wafregional.GetSqlInjectionMatchSetInput) wafregional.GetSqlInjectionMatchSetRequest
 
-	GetWebACLRequest(*waf.GetWebACLInput) wafregional.GetWebACLRequest
+	GetWebACLRequest(*wafregional.GetWebACLInput) wafregional.GetWebACLRequest
 
 	GetWebACLForResourceRequest(*wafregional.GetWebACLForResourceInput) wafregional.GetWebACLForResourceRequest
 
-	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) wafregional.GetXssMatchSetRequest
+	GetXssMatchSetRequest(*wafregional.GetXssMatchSetInput) wafregional.GetXssMatchSetRequest
 
-	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) wafregional.ListByteMatchSetsRequest
+	ListByteMatchSetsRequest(*wafregional.ListByteMatchSetsInput) wafregional.ListByteMatchSetsRequest
 
-	ListIPSetsRequest(*waf.ListIPSetsInput) wafregional.ListIPSetsRequest
+	ListIPSetsRequest(*wafregional.ListIPSetsInput) wafregional.ListIPSetsRequest
 
-	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) wafregional.ListRateBasedRulesRequest
+	ListRateBasedRulesRequest(*wafregional.ListRateBasedRulesInput) wafregional.ListRateBasedRulesRequest
 
 	ListResourcesForWebACLRequest(*wafregional.ListResourcesForWebACLInput) wafregional.ListResourcesForWebACLRequest
 
-	ListRulesRequest(*waf.ListRulesInput) wafregional.ListRulesRequest
+	ListRulesRequest(*wafregional.ListRulesInput) wafregional.ListRulesRequest
 
-	ListSizeConstraintSetsRequest(*waf.ListSizeConstraintSetsInput) wafregional.ListSizeConstraintSetsRequest
+	ListSizeConstraintSetsRequest(*wafregional.ListSizeConstraintSetsInput) wafregional.ListSizeConstraintSetsRequest
 
-	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) wafregional.ListSqlInjectionMatchSetsRequest
+	ListSqlInjectionMatchSetsRequest(*wafregional.ListSqlInjectionMatchSetsInput) wafregional.ListSqlInjectionMatchSetsRequest
 
-	ListWebACLsRequest(*waf.ListWebACLsInput) wafregional.ListWebACLsRequest
+	ListWebACLsRequest(*wafregional.ListWebACLsInput) wafregional.ListWebACLsRequest
 
-	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) wafregional.ListXssMatchSetsRequest
+	ListXssMatchSetsRequest(*wafregional.ListXssMatchSetsInput) wafregional.ListXssMatchSetsRequest
 
-	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) wafregional.UpdateByteMatchSetRequest
+	UpdateByteMatchSetRequest(*wafregional.UpdateByteMatchSetInput) wafregional.UpdateByteMatchSetRequest
 
-	UpdateIPSetRequest(*waf.UpdateIPSetInput) wafregional.UpdateIPSetRequest
+	UpdateIPSetRequest(*wafregional.UpdateIPSetInput) wafregional.UpdateIPSetRequest
 
-	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) wafregional.UpdateRateBasedRuleRequest
+	UpdateRateBasedRuleRequest(*wafregional.UpdateRateBasedRuleInput) wafregional.UpdateRateBasedRuleRequest
 
-	UpdateRuleRequest(*waf.UpdateRuleInput) wafregional.UpdateRuleRequest
+	UpdateRuleRequest(*wafregional.UpdateRuleInput) wafregional.UpdateRuleRequest
 
-	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) wafregional.UpdateSizeConstraintSetRequest
+	UpdateSizeConstraintSetRequest(*wafregional.UpdateSizeConstraintSetInput) wafregional.UpdateSizeConstraintSetRequest
 
-	UpdateSqlInjectionMatchSetRequest(*waf.UpdateSqlInjectionMatchSetInput) wafregional.UpdateSqlInjectionMatchSetRequest
+	UpdateSqlInjectionMatchSetRequest(*wafregional.UpdateSqlInjectionMatchSetInput) wafregional.UpdateSqlInjectionMatchSetRequest
 
-	UpdateWebACLRequest(*waf.UpdateWebACLInput) wafregional.UpdateWebACLRequest
+	UpdateWebACLRequest(*wafregional.UpdateWebACLInput) wafregional.UpdateWebACLRequest
 
-	UpdateXssMatchSetRequest(*waf.UpdateXssMatchSetInput) wafregional.UpdateXssMatchSetRequest
+	UpdateXssMatchSetRequest(*wafregional.UpdateXssMatchSetInput) wafregional.UpdateXssMatchSetRequest
 }
 
 var _ WAFRegionalAPI = (*wafregional.WAFRegional)(nil)

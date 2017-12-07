@@ -131,11 +131,13 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 		input = &{{ .InputRef.GoTypeElem }}{}
 	}
 
-	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeElem }}{})
+	output := &{{ .OutputRef.GoTypeElem }}{}
+	req := c.newRequest(op, input, output)
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	{{ end -}}
+	output.responseMetadata = aws.Response{Request:req}
 
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
 

@@ -54,7 +54,10 @@ func (c *Route53Domains) CheckDomainAvailabilityRequest(input *CheckDomainAvaila
 		input = &CheckDomainAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &CheckDomainAvailabilityOutput{})
+	output := &CheckDomainAvailabilityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CheckDomainAvailabilityRequest{Request: req, Input: input}
 }
 
@@ -100,7 +103,10 @@ func (c *Route53Domains) CheckDomainTransferabilityRequest(input *CheckDomainTra
 		input = &CheckDomainTransferabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &CheckDomainTransferabilityOutput{})
+	output := &CheckDomainTransferabilityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CheckDomainTransferabilityRequest{Request: req, Input: input}
 }
 
@@ -149,7 +155,10 @@ func (c *Route53Domains) DeleteTagsForDomainRequest(input *DeleteTagsForDomainIn
 		input = &DeleteTagsForDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsForDomainOutput{})
+	output := &DeleteTagsForDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTagsForDomainRequest{Request: req, Input: input}
 }
 
@@ -196,7 +205,10 @@ func (c *Route53Domains) DisableDomainAutoRenewRequest(input *DisableDomainAutoR
 		input = &DisableDomainAutoRenewInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableDomainAutoRenewOutput{})
+	output := &DisableDomainAutoRenewOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableDomainAutoRenewRequest{Request: req, Input: input}
 }
 
@@ -248,7 +260,10 @@ func (c *Route53Domains) DisableDomainTransferLockRequest(input *DisableDomainTr
 		input = &DisableDomainTransferLockInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableDomainTransferLockOutput{})
+	output := &DisableDomainTransferLockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableDomainTransferLockRequest{Request: req, Input: input}
 }
 
@@ -303,7 +318,10 @@ func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRen
 		input = &EnableDomainAutoRenewInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableDomainAutoRenewOutput{})
+	output := &EnableDomainAutoRenewOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableDomainAutoRenewRequest{Request: req, Input: input}
 }
 
@@ -353,7 +371,10 @@ func (c *Route53Domains) EnableDomainTransferLockRequest(input *EnableDomainTran
 		input = &EnableDomainTransferLockInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableDomainTransferLockOutput{})
+	output := &EnableDomainTransferLockOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableDomainTransferLockRequest{Request: req, Input: input}
 }
 
@@ -404,7 +425,10 @@ func (c *Route53Domains) GetContactReachabilityStatusRequest(input *GetContactRe
 		input = &GetContactReachabilityStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContactReachabilityStatusOutput{})
+	output := &GetContactReachabilityStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetContactReachabilityStatusRequest{Request: req, Input: input}
 }
 
@@ -452,7 +476,10 @@ func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) Get
 		input = &GetDomainDetailInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDomainDetailOutput{})
+	output := &GetDomainDetailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDomainDetailRequest{Request: req, Input: input}
 }
 
@@ -500,7 +527,10 @@ func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestions
 		input = &GetDomainSuggestionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDomainSuggestionsOutput{})
+	output := &GetDomainSuggestionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDomainSuggestionsRequest{Request: req, Input: input}
 }
 
@@ -546,7 +576,10 @@ func (c *Route53Domains) GetOperationDetailRequest(input *GetOperationDetailInpu
 		input = &GetOperationDetailInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationDetailOutput{})
+	output := &GetOperationDetailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetOperationDetailRequest{Request: req, Input: input}
 }
 
@@ -599,7 +632,10 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) ListDomains
 		input = &ListDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainsOutput{})
+	output := &ListDomainsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListDomainsRequest{Request: req, Input: input}
 }
 
@@ -701,7 +737,10 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) ListO
 		input = &ListOperationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOperationsOutput{})
+	output := &ListOperationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListOperationsRequest{Request: req, Input: input}
 }
 
@@ -801,7 +840,10 @@ func (c *Route53Domains) ListTagsForDomainRequest(input *ListTagsForDomainInput)
 		input = &ListTagsForDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForDomainOutput{})
+	output := &ListTagsForDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForDomainRequest{Request: req, Input: input}
 }
 
@@ -871,7 +913,10 @@ func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) Regis
 		input = &RegisterDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterDomainOutput{})
+	output := &RegisterDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterDomainRequest{Request: req, Input: input}
 }
 
@@ -924,7 +969,10 @@ func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) RenewDomain
 		input = &RenewDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &RenewDomainOutput{})
+	output := &RenewDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RenewDomainRequest{Request: req, Input: input}
 }
 
@@ -972,7 +1020,10 @@ func (c *Route53Domains) ResendContactReachabilityEmailRequest(input *ResendCont
 		input = &ResendContactReachabilityEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &ResendContactReachabilityEmailOutput{})
+	output := &ResendContactReachabilityEmailOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResendContactReachabilityEmailRequest{Request: req, Input: input}
 }
 
@@ -1019,7 +1070,10 @@ func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuth
 		input = &RetrieveDomainAuthCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveDomainAuthCodeOutput{})
+	output := &RetrieveDomainAuthCodeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RetrieveDomainAuthCodeRequest{Request: req, Input: input}
 }
 
@@ -1089,7 +1143,10 @@ func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) Trans
 		input = &TransferDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &TransferDomainOutput{})
+	output := &TransferDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TransferDomainRequest{Request: req, Input: input}
 }
 
@@ -1142,7 +1199,10 @@ func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactIn
 		input = &UpdateDomainContactInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainContactOutput{})
+	output := &UpdateDomainContactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDomainContactRequest{Request: req, Input: input}
 }
 
@@ -1198,7 +1258,10 @@ func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainCo
 		input = &UpdateDomainContactPrivacyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainContactPrivacyOutput{})
+	output := &UpdateDomainContactPrivacyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDomainContactPrivacyRequest{Request: req, Input: input}
 }
 
@@ -1251,7 +1314,10 @@ func (c *Route53Domains) UpdateDomainNameserversRequest(input *UpdateDomainNames
 		input = &UpdateDomainNameserversInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainNameserversOutput{})
+	output := &UpdateDomainNameserversOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDomainNameserversRequest{Request: req, Input: input}
 }
 
@@ -1300,7 +1366,10 @@ func (c *Route53Domains) UpdateTagsForDomainRequest(input *UpdateTagsForDomainIn
 		input = &UpdateTagsForDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTagsForDomainOutput{})
+	output := &UpdateTagsForDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTagsForDomainRequest{Request: req, Input: input}
 }
 
@@ -1347,7 +1416,10 @@ func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) ViewBilling
 		input = &ViewBillingInput{}
 	}
 
-	req := c.newRequest(op, input, &ViewBillingOutput{})
+	output := &ViewBillingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ViewBillingRequest{Request: req, Input: input}
 }
 
@@ -1477,6 +1549,8 @@ func (s *CheckDomainAvailabilityInput) SetIdnLangCode(v string) *CheckDomainAvai
 type CheckDomainAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Whether the domain name is available for registering.
 	//
 	// You can register only domains designated as AVAILABLE.
@@ -1518,6 +1592,11 @@ func (s CheckDomainAvailabilityOutput) String() string {
 // GoString returns the string representation
 func (s CheckDomainAvailabilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CheckDomainAvailabilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailability sets the Availability field's value.
@@ -1587,6 +1666,8 @@ func (s *CheckDomainTransferabilityInput) SetDomainName(v string) *CheckDomainTr
 type CheckDomainTransferabilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A complex type that contains information about whether the specified domain
 	// can be transferred to Amazon Route 53.
 	//
@@ -1602,6 +1683,11 @@ func (s CheckDomainTransferabilityOutput) String() string {
 // GoString returns the string representation
 func (s CheckDomainTransferabilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CheckDomainTransferabilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTransferability sets the Transferability field's value.
@@ -1838,6 +1924,8 @@ func (s *DeleteTagsForDomainInput) SetTagsToDelete(v []string) *DeleteTagsForDom
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomainResponse
 type DeleteTagsForDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1848,6 +1936,11 @@ func (s DeleteTagsForDomainOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTagsForDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsForDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenewRequest
@@ -1893,6 +1986,8 @@ func (s *DisableDomainAutoRenewInput) SetDomainName(v string) *DisableDomainAuto
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenewResponse
 type DisableDomainAutoRenewOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1903,6 +1998,11 @@ func (s DisableDomainAutoRenewOutput) String() string {
 // GoString returns the string representation
 func (s DisableDomainAutoRenewOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableDomainAutoRenewOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The DisableDomainTransferLock request includes the following element.
@@ -1951,6 +2051,8 @@ func (s *DisableDomainTransferLockInput) SetDomainName(v string) *DisableDomainT
 type DisableDomainTransferLockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -1966,6 +2068,11 @@ func (s DisableDomainTransferLockOutput) String() string {
 // GoString returns the string representation
 func (s DisableDomainTransferLockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableDomainTransferLockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -2167,6 +2274,8 @@ func (s *EnableDomainAutoRenewInput) SetDomainName(v string) *EnableDomainAutoRe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenewResponse
 type EnableDomainAutoRenewOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2177,6 +2286,11 @@ func (s EnableDomainAutoRenewOutput) String() string {
 // GoString returns the string representation
 func (s EnableDomainAutoRenewOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableDomainAutoRenewOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A request to set the transfer lock for the specified domain.
@@ -2225,6 +2339,8 @@ func (s *EnableDomainTransferLockInput) SetDomainName(v string) *EnableDomainTra
 type EnableDomainTransferLockOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -2240,6 +2356,11 @@ func (s EnableDomainTransferLockOutput) String() string {
 // GoString returns the string representation
 func (s EnableDomainTransferLockOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableDomainTransferLockOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -2333,6 +2454,8 @@ func (s *GetContactReachabilityStatusInput) SetDomainName(v string) *GetContactR
 type GetContactReachabilityStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The domain name for which you requested the reachability status.
 	DomainName *string `locationName:"domainName" type:"string"`
 
@@ -2354,6 +2477,11 @@ func (s GetContactReachabilityStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetContactReachabilityStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetContactReachabilityStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainName sets the DomainName field's value.
@@ -2413,6 +2541,8 @@ func (s *GetDomainDetailInput) SetDomainName(v string) *GetDomainDetailInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailResponse
 type GetDomainDetailOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// Email address to contact to report incorrect contact information for a domain,
 	// to report that the domain is being used to send spam, to report that someone
@@ -2526,6 +2656,11 @@ func (s GetDomainDetailOutput) String() string {
 // GoString returns the string representation
 func (s GetDomainDetailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDomainDetailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbuseContactEmail sets the AbuseContactEmail field's value.
@@ -2736,6 +2871,8 @@ func (s *GetDomainSuggestionsInput) SetSuggestionCount(v int64) *GetDomainSugges
 type GetDomainSuggestionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of possible domain names. If you specified true for OnlyAvailable
 	// in the request, the list contains only domains that are available for registration.
 	SuggestionsList []DomainSuggestion `type:"list"`
@@ -2749,6 +2886,11 @@ func (s GetDomainSuggestionsOutput) String() string {
 // GoString returns the string representation
 func (s GetDomainSuggestionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDomainSuggestionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSuggestionsList sets the SuggestionsList field's value.
@@ -2804,6 +2946,8 @@ func (s *GetOperationDetailInput) SetOperationId(v string) *GetOperationDetailIn
 type GetOperationDetailOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of a domain.
 	DomainName *string `type:"string"`
 
@@ -2831,6 +2975,11 @@ func (s GetOperationDetailOutput) String() string {
 // GoString returns the string representation
 func (s GetOperationDetailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetOperationDetailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainName sets the DomainName field's value.
@@ -2917,6 +3066,8 @@ func (s *ListDomainsInput) SetMaxItems(v int64) *ListDomainsInput {
 type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A summary of domains.
 	//
 	// Domains is a required field
@@ -2936,6 +3087,11 @@ func (s ListDomainsOutput) String() string {
 // GoString returns the string representation
 func (s ListDomainsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDomainsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomains sets the Domains field's value.
@@ -2996,6 +3152,8 @@ func (s *ListOperationsInput) SetMaxItems(v int64) *ListOperationsInput {
 type ListOperationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If there are more operations than you specified for MaxItems in the request,
 	// submit another request and include the value of NextPageMarker in the value
 	// of Marker.
@@ -3015,6 +3173,11 @@ func (s ListOperationsOutput) String() string {
 // GoString returns the string representation
 func (s ListOperationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListOperationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageMarker sets the NextPageMarker field's value.
@@ -3075,6 +3238,8 @@ func (s *ListTagsForDomainInput) SetDomainName(v string) *ListTagsForDomainInput
 type ListTagsForDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the tags that are associated with the specified domain.
 	//
 	// TagList is a required field
@@ -3089,6 +3254,11 @@ func (s ListTagsForDomainOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -3411,6 +3581,8 @@ func (s *RegisterDomainInput) SetTechContact(v *ContactDetail) *RegisterDomainIn
 type RegisterDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -3426,6 +3598,11 @@ func (s RegisterDomainOutput) String() string {
 // GoString returns the string representation
 func (s RegisterDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -3513,6 +3690,8 @@ func (s *RenewDomainInput) SetDurationInYears(v int64) *RenewDomainInput {
 type RenewDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier for tracking the progress of the request. To use this ID to
 	// query the operation status, use GetOperationDetail.
 	//
@@ -3528,6 +3707,11 @@ func (s RenewDomainOutput) String() string {
 // GoString returns the string representation
 func (s RenewDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RenewDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -3565,6 +3749,8 @@ func (s *ResendContactReachabilityEmailInput) SetDomainName(v string) *ResendCon
 type ResendContactReachabilityEmailOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The domain name for which you requested a confirmation email.
 	DomainName *string `locationName:"domainName" type:"string"`
 
@@ -3586,6 +3772,11 @@ func (s ResendContactReachabilityEmailOutput) String() string {
 // GoString returns the string representation
 func (s ResendContactReachabilityEmailOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResendContactReachabilityEmailOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainName sets the DomainName field's value.
@@ -3653,6 +3844,8 @@ func (s *RetrieveDomainAuthCodeInput) SetDomainName(v string) *RetrieveDomainAut
 type RetrieveDomainAuthCodeOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The authorization code for the domain.
 	//
 	// AuthCode is a required field
@@ -3667,6 +3860,11 @@ func (s RetrieveDomainAuthCodeOutput) String() string {
 // GoString returns the string representation
 func (s RetrieveDomainAuthCodeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RetrieveDomainAuthCodeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAuthCode sets the AuthCode field's value.
@@ -3938,6 +4136,8 @@ func (s *TransferDomainInput) SetTechContact(v *ContactDetail) *TransferDomainIn
 type TransferDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -3953,6 +4153,11 @@ func (s TransferDomainOutput) String() string {
 // GoString returns the string representation
 func (s TransferDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TransferDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -4049,6 +4254,8 @@ func (s *UpdateDomainContactInput) SetTechContact(v *ContactDetail) *UpdateDomai
 type UpdateDomainContactOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -4064,6 +4271,11 @@ func (s UpdateDomainContactOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDomainContactOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDomainContactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -4154,6 +4366,8 @@ func (s *UpdateDomainContactPrivacyInput) SetTechPrivacy(v bool) *UpdateDomainCo
 type UpdateDomainContactPrivacyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -4169,6 +4383,11 @@ func (s UpdateDomainContactPrivacyOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDomainContactPrivacyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDomainContactPrivacyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -4260,6 +4479,8 @@ func (s *UpdateDomainNameserversInput) SetNameservers(v []Nameserver) *UpdateDom
 type UpdateDomainNameserversOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
 	//
@@ -4275,6 +4496,11 @@ func (s UpdateDomainNameserversOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDomainNameserversOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDomainNameserversOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -4337,6 +4563,8 @@ func (s *UpdateTagsForDomainInput) SetTagsToUpdate(v []Tag) *UpdateTagsForDomain
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomainResponse
 type UpdateTagsForDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4347,6 +4575,11 @@ func (s UpdateTagsForDomainOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTagsForDomainOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTagsForDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The ViewBilling request includes the following elements.
@@ -4418,6 +4651,8 @@ func (s *ViewBillingInput) SetStart(v time.Time) *ViewBillingInput {
 type ViewBillingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A summary of billing records.
 	BillingRecords []BillingRecord `type:"list"`
 
@@ -4435,6 +4670,11 @@ func (s ViewBillingOutput) String() string {
 // GoString returns the string representation
 func (s ViewBillingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ViewBillingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBillingRecords sets the BillingRecords field's value.

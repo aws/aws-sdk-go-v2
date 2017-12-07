@@ -53,7 +53,10 @@ func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) CancelJobReq
 		input = &CancelJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobOutput{})
+	output := &CancelJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelJobRequest{Request: req, Input: input}
 }
 
@@ -103,7 +106,10 @@ func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) CreateJobReq
 		input = &CreateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobResponse{})
+	output := &CreateJobResponse{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateJobRequest{Request: req, Input: input}
 }
 
@@ -147,7 +153,10 @@ func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) Cr
 		input = &CreatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	output := &CreatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePipelineRequest{Request: req, Input: input}
 }
 
@@ -205,7 +214,10 @@ func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) Create
 		input = &CreatePresetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePresetOutput{})
+	output := &CreatePresetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePresetRequest{Request: req, Input: input}
 }
 
@@ -253,7 +265,10 @@ func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) De
 		input = &DeletePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	output := &DeletePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePipelineRequest{Request: req, Input: input}
 }
 
@@ -299,7 +314,10 @@ func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) Delete
 		input = &DeletePresetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePresetOutput{})
+	output := &DeletePresetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePresetRequest{Request: req, Input: input}
 }
 
@@ -353,7 +371,10 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 		input = &ListJobsByPipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsByPipelineOutput{})
+	output := &ListJobsByPipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListJobsByPipelineRequest{Request: req, Input: input}
 }
 
@@ -455,7 +476,10 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 		input = &ListJobsByStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsByStatusOutput{})
+	output := &ListJobsByStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListJobsByStatusRequest{Request: req, Input: input}
 }
 
@@ -556,7 +580,10 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) List
 		input = &ListPipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	output := &ListPipelinesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPipelinesRequest{Request: req, Input: input}
 }
 
@@ -657,7 +684,10 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) ListPres
 		input = &ListPresetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPresetsOutput{})
+	output := &ListPresetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPresetsRequest{Request: req, Input: input}
 }
 
@@ -751,7 +781,10 @@ func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
 		input = &ReadJobInput{}
 	}
 
-	req := c.newRequest(op, input, &ReadJobOutput{})
+	output := &ReadJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReadJobRequest{Request: req, Input: input}
 }
 
@@ -795,7 +828,10 @@ func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) ReadPi
 		input = &ReadPipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &ReadPipelineOutput{})
+	output := &ReadPipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReadPipelineRequest{Request: req, Input: input}
 }
 
@@ -839,7 +875,10 @@ func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) ReadPreset
 		input = &ReadPresetInput{}
 	}
 
-	req := c.newRequest(op, input, &ReadPresetOutput{})
+	output := &ReadPresetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReadPresetRequest{Request: req, Input: input}
 }
 
@@ -892,7 +931,10 @@ func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) TestRoleReques
 		input = &TestRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &TestRoleOutput{})
+	output := &TestRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestRoleRequest{Request: req, Input: input}
 }
 
@@ -941,7 +983,10 @@ func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) Up
 		input = &UpdatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	output := &UpdatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePipelineRequest{Request: req, Input: input}
 }
 
@@ -989,7 +1034,10 @@ func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipe
 		input = &UpdatePipelineNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineNotificationsOutput{})
+	output := &UpdatePipelineNotificationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePipelineNotificationsRequest{Request: req, Input: input}
 }
 
@@ -1040,7 +1088,10 @@ func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineSta
 		input = &UpdatePipelineStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineStatusOutput{})
+	output := &UpdatePipelineStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePipelineStatusRequest{Request: req, Input: input}
 }
 
@@ -1536,6 +1587,8 @@ func (s *CancelJobInput) SetId(v string) *CancelJobInput {
 // the value of Success is true.
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1546,6 +1599,11 @@ func (s CancelJobOutput) String() string {
 // GoString returns the string representation
 func (s CancelJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The file format of the output captions. If you leave this value blank, Elastic
@@ -2370,6 +2428,8 @@ func (s *CreateJobPlaylist) SetPlayReadyDrm(v *PlayReadyDrm) *CreateJobPlaylist 
 type CreateJobResponse struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the job that
 	// is created.
 	Job *Job `type:"structure"`
@@ -2383,6 +2443,11 @@ func (s CreateJobResponse) String() string {
 // GoString returns the string representation
 func (s CreateJobResponse) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateJobResponse) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJob sets the Job field's value.
@@ -2706,6 +2771,8 @@ func (s *CreatePipelineInput) SetThumbnailConfig(v *PipelineOutputConfig) *Creat
 type CreatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the pipeline
 	// that is created.
 	Pipeline *Pipeline `type:"structure"`
@@ -2727,6 +2794,11 @@ func (s CreatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s CreatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipeline sets the Pipeline field's value.
@@ -2847,6 +2919,8 @@ func (s *CreatePresetInput) SetVideo(v *VideoParameters) *CreatePresetInput {
 type CreatePresetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the preset
 	// that is created.
 	Preset *Preset `type:"structure"`
@@ -2866,6 +2940,11 @@ func (s CreatePresetOutput) String() string {
 // GoString returns the string representation
 func (s CreatePresetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePresetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPreset sets the Preset field's value.
@@ -2923,6 +3002,8 @@ func (s *DeletePipelineInput) SetId(v string) *DeletePipelineInput {
 // The DeletePipelineResponse structure.
 type DeletePipelineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2933,6 +3014,11 @@ func (s DeletePipelineOutput) String() string {
 // GoString returns the string representation
 func (s DeletePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The DeletePresetRequest structure.
@@ -2978,6 +3064,8 @@ func (s *DeletePresetInput) SetId(v string) *DeletePresetInput {
 // The DeletePresetResponse structure.
 type DeletePresetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2988,6 +3076,11 @@ func (s DeletePresetOutput) String() string {
 // GoString returns the string representation
 func (s DeletePresetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePresetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The detected properties of the input file. Elastic Transcoder identifies
@@ -4240,6 +4333,8 @@ func (s *ListJobsByPipelineInput) SetPipelineId(v string) *ListJobsByPipelineInp
 type ListJobsByPipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Job objects that are in the specified pipeline.
 	Jobs []Job `type:"list"`
 
@@ -4257,6 +4352,11 @@ func (s ListJobsByPipelineOutput) String() string {
 // GoString returns the string representation
 func (s ListJobsByPipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsByPipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -4337,6 +4437,8 @@ func (s *ListJobsByStatusInput) SetStatus(v string) *ListJobsByStatusInput {
 type ListJobsByStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of Job objects that have the specified status.
 	Jobs []Job `type:"list"`
 
@@ -4354,6 +4456,11 @@ func (s ListJobsByStatusOutput) String() string {
 // GoString returns the string representation
 func (s ListJobsByStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsByStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -4408,6 +4515,8 @@ func (s *ListPipelinesInput) SetPageToken(v string) *ListPipelinesInput {
 type ListPipelinesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A value that you use to access the second and subsequent pages of results,
 	// if any. When the pipelines fit on one page or when you've reached the last
 	// page of results, the value of NextPageToken is null.
@@ -4425,6 +4534,11 @@ func (s ListPipelinesOutput) String() string {
 // GoString returns the string representation
 func (s ListPipelinesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPipelinesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -4479,6 +4593,8 @@ func (s *ListPresetsInput) SetPageToken(v string) *ListPresetsInput {
 type ListPresetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A value that you use to access the second and subsequent pages of results,
 	// if any. When the presets fit on one page or when you've reached the last
 	// page of results, the value of NextPageToken is null.
@@ -4496,6 +4612,11 @@ func (s ListPresetsOutput) String() string {
 // GoString returns the string representation
 func (s ListPresetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPresetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextPageToken sets the NextPageToken field's value.
@@ -5616,6 +5737,8 @@ func (s *ReadJobInput) SetId(v string) *ReadJobInput {
 type ReadJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the job.
 	Job *Job `type:"structure"`
 }
@@ -5628,6 +5751,11 @@ func (s ReadJobOutput) String() string {
 // GoString returns the string representation
 func (s ReadJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReadJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJob sets the Job field's value.
@@ -5680,6 +5808,8 @@ func (s *ReadPipelineInput) SetId(v string) *ReadPipelineInput {
 type ReadPipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the pipeline.
 	Pipeline *Pipeline `type:"structure"`
 
@@ -5700,6 +5830,11 @@ func (s ReadPipelineOutput) String() string {
 // GoString returns the string representation
 func (s ReadPipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReadPipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipeline sets the Pipeline field's value.
@@ -5758,6 +5893,8 @@ func (s *ReadPresetInput) SetId(v string) *ReadPresetInput {
 type ReadPresetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the preset.
 	Preset *Preset `type:"structure"`
 }
@@ -5770,6 +5907,11 @@ func (s ReadPresetOutput) String() string {
 // GoString returns the string representation
 func (s ReadPresetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReadPresetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPreset sets the Preset field's value.
@@ -5871,6 +6013,8 @@ func (s *TestRoleInput) SetTopics(v []string) *TestRoleInput {
 type TestRoleOutput struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the Success element contains false, this value is an array of one or more
 	// error messages that were generated during the test process.
 	Messages []string `type:"list"`
@@ -5888,6 +6032,11 @@ func (s TestRoleOutput) String() string {
 // GoString returns the string representation
 func (s TestRoleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessages sets the Messages field's value.
@@ -6480,6 +6629,8 @@ func (s *UpdatePipelineNotificationsInput) SetNotifications(v *Notifications) *U
 type UpdatePipelineNotificationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the pipeline
 	// associated with this notification.
 	Pipeline *Pipeline `type:"structure"`
@@ -6495,6 +6646,11 @@ func (s UpdatePipelineNotificationsOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePipelineNotificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetPipeline sets the Pipeline field's value.
 func (s *UpdatePipelineNotificationsOutput) SetPipeline(v *Pipeline) *UpdatePipelineNotificationsOutput {
 	s.Pipeline = v
@@ -6505,6 +6661,8 @@ func (s *UpdatePipelineNotificationsOutput) SetPipeline(v *Pipeline) *UpdatePipe
 // specified in the request.
 type UpdatePipelineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The pipeline updated by this UpdatePipelineResponse call.
 	Pipeline *Pipeline `type:"structure"`
@@ -6526,6 +6684,11 @@ func (s UpdatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipeline sets the Pipeline field's value.
@@ -6604,6 +6767,8 @@ func (s *UpdatePipelineStatusInput) SetStatus(v string) *UpdatePipelineStatusInp
 type UpdatePipelineStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A section of the response body that provides information about the pipeline.
 	Pipeline *Pipeline `type:"structure"`
 }
@@ -6616,6 +6781,11 @@ func (s UpdatePipelineStatusOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePipelineStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePipelineStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipeline sets the Pipeline field's value.

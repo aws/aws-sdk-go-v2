@@ -55,7 +55,10 @@ func (c *Batch) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 		input = &CancelJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobOutput{})
+	output := &CancelJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelJobRequest{Request: req, Input: input}
 }
 
@@ -122,7 +125,10 @@ func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentI
 		input = &CreateComputeEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateComputeEnvironmentOutput{})
+	output := &CreateComputeEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateComputeEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -176,7 +182,10 @@ func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueue
 		input = &CreateJobQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobQueueOutput{})
+	output := &CreateJobQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateJobQueueRequest{Request: req, Input: input}
 }
 
@@ -226,7 +235,10 @@ func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentI
 		input = &DeleteComputeEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteComputeEnvironmentOutput{})
+	output := &DeleteComputeEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteComputeEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -277,7 +289,10 @@ func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueue
 		input = &DeleteJobQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteJobQueueOutput{})
+	output := &DeleteJobQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteJobQueueRequest{Request: req, Input: input}
 }
 
@@ -323,7 +338,10 @@ func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInp
 		input = &DeregisterJobDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterJobDefinitionOutput{})
+	output := &DeregisterJobDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterJobDefinitionRequest{Request: req, Input: input}
 }
 
@@ -373,7 +391,10 @@ func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnviron
 		input = &DescribeComputeEnvironmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComputeEnvironmentsOutput{})
+	output := &DescribeComputeEnvironmentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeComputeEnvironmentsRequest{Request: req, Input: input}
 }
 
@@ -420,7 +441,10 @@ func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput
 		input = &DescribeJobDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobDefinitionsOutput{})
+	output := &DescribeJobDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeJobDefinitionsRequest{Request: req, Input: input}
 }
 
@@ -466,7 +490,10 @@ func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) Describe
 		input = &DescribeJobQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobQueuesOutput{})
+	output := &DescribeJobQueuesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeJobQueuesRequest{Request: req, Input: input}
 }
 
@@ -512,7 +539,10 @@ func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) DescribeJobsReques
 		input = &DescribeJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobsOutput{})
+	output := &DescribeJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeJobsRequest{Request: req, Input: input}
 }
 
@@ -560,7 +590,10 @@ func (c *Batch) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 		input = &ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	output := &ListJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListJobsRequest{Request: req, Input: input}
 }
 
@@ -606,7 +639,10 @@ func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) 
 		input = &RegisterJobDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterJobDefinitionOutput{})
+	output := &RegisterJobDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterJobDefinitionRequest{Request: req, Input: input}
 }
 
@@ -653,7 +689,10 @@ func (c *Batch) SubmitJobRequest(input *SubmitJobInput) SubmitJobRequest {
 		input = &SubmitJobInput{}
 	}
 
-	req := c.newRequest(op, input, &SubmitJobOutput{})
+	output := &SubmitJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SubmitJobRequest{Request: req, Input: input}
 }
 
@@ -701,7 +740,10 @@ func (c *Batch) TerminateJobRequest(input *TerminateJobInput) TerminateJobReques
 		input = &TerminateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateJobOutput{})
+	output := &TerminateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateJobRequest{Request: req, Input: input}
 }
 
@@ -747,7 +789,10 @@ func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentI
 		input = &UpdateComputeEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateComputeEnvironmentOutput{})
+	output := &UpdateComputeEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateComputeEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -793,7 +838,10 @@ func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueue
 		input = &UpdateJobQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobQueueOutput{})
+	output := &UpdateJobQueueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateJobQueueRequest{Request: req, Input: input}
 }
 
@@ -978,6 +1026,8 @@ func (s *CancelJobInput) SetReason(v string) *CancelJobInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobResponse
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -988,6 +1038,11 @@ func (s CancelJobOutput) String() string {
 // GoString returns the string representation
 func (s CancelJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // An object representing an AWS Batch compute environment.
@@ -1959,6 +2014,8 @@ func (s *CreateComputeEnvironmentInput) SetType(v CEType) *CreateComputeEnvironm
 type CreateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string `locationName:"computeEnvironmentArn" type:"string"`
 
@@ -1974,6 +2031,11 @@ func (s CreateComputeEnvironmentOutput) String() string {
 // GoString returns the string representation
 func (s CreateComputeEnvironmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputeEnvironmentArn sets the ComputeEnvironmentArn field's value.
@@ -2087,6 +2149,8 @@ func (s *CreateJobQueueInput) SetState(v JQState) *CreateJobQueueInput {
 type CreateJobQueueOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the job queue.
 	//
 	// JobQueueArn is a required field
@@ -2106,6 +2170,11 @@ func (s CreateJobQueueOutput) String() string {
 // GoString returns the string representation
 func (s CreateJobQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateJobQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobQueueArn sets the JobQueueArn field's value.
@@ -2163,6 +2232,8 @@ func (s *DeleteComputeEnvironmentInput) SetComputeEnvironment(v string) *DeleteC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentResponse
 type DeleteComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2173,6 +2244,11 @@ func (s DeleteComputeEnvironmentOutput) String() string {
 // GoString returns the string representation
 func (s DeleteComputeEnvironmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueRequest
@@ -2218,6 +2294,8 @@ func (s *DeleteJobQueueInput) SetJobQueue(v string) *DeleteJobQueueInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueResponse
 type DeleteJobQueueOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2228,6 +2306,11 @@ func (s DeleteJobQueueOutput) String() string {
 // GoString returns the string representation
 func (s DeleteJobQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteJobQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionRequest
@@ -2274,6 +2357,8 @@ func (s *DeregisterJobDefinitionInput) SetJobDefinition(v string) *DeregisterJob
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionResponse
 type DeregisterJobDefinitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2284,6 +2369,11 @@ func (s DeregisterJobDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterJobDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterJobDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsRequest
@@ -2347,6 +2437,8 @@ func (s *DescribeComputeEnvironmentsInput) SetNextToken(v string) *DescribeCompu
 type DescribeComputeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of compute environments.
 	ComputeEnvironments []ComputeEnvironmentDetail `locationName:"computeEnvironments" type:"list"`
 
@@ -2365,6 +2457,11 @@ func (s DescribeComputeEnvironmentsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeComputeEnvironmentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeComputeEnvironmentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputeEnvironments sets the ComputeEnvironments field's value.
@@ -2457,6 +2554,8 @@ func (s *DescribeJobDefinitionsInput) SetStatus(v string) *DescribeJobDefinition
 type DescribeJobDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of job definitions.
 	JobDefinitions []JobDefinition `locationName:"jobDefinitions" type:"list"`
 
@@ -2475,6 +2574,11 @@ func (s DescribeJobDefinitionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeJobDefinitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeJobDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobDefinitions sets the JobDefinitions field's value.
@@ -2549,6 +2653,8 @@ func (s *DescribeJobQueuesInput) SetNextToken(v string) *DescribeJobQueuesInput 
 type DescribeJobQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of job queues.
 	JobQueues []JobQueueDetail `locationName:"jobQueues" type:"list"`
 
@@ -2567,6 +2673,11 @@ func (s DescribeJobQueuesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeJobQueuesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeJobQueuesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobQueues sets the JobQueues field's value.
@@ -2625,6 +2736,8 @@ func (s *DescribeJobsInput) SetJobs(v []string) *DescribeJobsInput {
 type DescribeJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of jobs.
 	Jobs []JobDetail `locationName:"jobs" type:"list"`
 }
@@ -2637,6 +2750,11 @@ func (s DescribeJobsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -3217,6 +3335,8 @@ func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of job summaries that match the request.
 	//
 	// JobSummaryList is a required field
@@ -3237,6 +3357,11 @@ func (s ListJobsOutput) String() string {
 // GoString returns the string representation
 func (s ListJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobSummaryList sets the JobSummaryList field's value.
@@ -3392,6 +3517,8 @@ func (s *RegisterJobDefinitionInput) SetType(v JobDefinitionType) *RegisterJobDe
 type RegisterJobDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the job definition.
 	//
 	// JobDefinitionArn is a required field
@@ -3416,6 +3543,11 @@ func (s RegisterJobDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s RegisterJobDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterJobDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobDefinitionArn sets the JobDefinitionArn field's value.
@@ -3589,6 +3721,8 @@ func (s *SubmitJobInput) SetRetryStrategy(v *RetryStrategy) *SubmitJobInput {
 type SubmitJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for the job.
 	//
 	// JobId is a required field
@@ -3608,6 +3742,11 @@ func (s SubmitJobOutput) String() string {
 // GoString returns the string representation
 func (s SubmitJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SubmitJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobId sets the JobId field's value.
@@ -3682,6 +3821,8 @@ func (s *TerminateJobInput) SetReason(v string) *TerminateJobInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobResponse
 type TerminateJobOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3692,6 +3833,11 @@ func (s TerminateJobOutput) String() string {
 // GoString returns the string representation
 func (s TerminateJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The ulimit settings to pass to the container.
@@ -3851,6 +3997,8 @@ func (s *UpdateComputeEnvironmentInput) SetState(v CEState) *UpdateComputeEnviro
 type UpdateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string `locationName:"computeEnvironmentArn" type:"string"`
 
@@ -3866,6 +4014,11 @@ func (s UpdateComputeEnvironmentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateComputeEnvironmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputeEnvironmentArn sets the ComputeEnvironmentArn field's value.
@@ -3964,6 +4117,8 @@ func (s *UpdateJobQueueInput) SetState(v JQState) *UpdateJobQueueInput {
 type UpdateJobQueueOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the job queue.
 	JobQueueArn *string `locationName:"jobQueueArn" type:"string"`
 
@@ -3979,6 +4134,11 @@ func (s UpdateJobQueueOutput) String() string {
 // GoString returns the string representation
 func (s UpdateJobQueueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateJobQueueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobQueueArn sets the JobQueueArn field's value.

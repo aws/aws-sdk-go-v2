@@ -60,9 +60,12 @@ func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleR
 		input = &DeleteRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRuleOutput{})
+	output := &DeleteRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRuleRequest{Request: req, Input: input}
 }
 
@@ -110,7 +113,10 @@ func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput)
 		input = &DescribeEventBusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventBusOutput{})
+	output := &DescribeEventBusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventBusRequest{Request: req, Input: input}
 }
 
@@ -156,7 +162,10 @@ func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) Describ
 		input = &DescribeRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRuleOutput{})
+	output := &DescribeRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeRuleRequest{Request: req, Input: input}
 }
 
@@ -206,9 +215,12 @@ func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) DisableRu
 		input = &DisableRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableRuleOutput{})
+	output := &DisableRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableRuleRequest{Request: req, Input: input}
 }
 
@@ -258,9 +270,12 @@ func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) EnableRuleR
 		input = &EnableRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableRuleOutput{})
+	output := &EnableRuleOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableRuleRequest{Request: req, Input: input}
 }
 
@@ -307,7 +322,10 @@ func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTa
 		input = &ListRuleNamesByTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRuleNamesByTargetOutput{})
+	output := &ListRuleNamesByTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRuleNamesByTargetRequest{Request: req, Input: input}
 }
 
@@ -354,7 +372,10 @@ func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) ListRulesRequ
 		input = &ListRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRulesOutput{})
+	output := &ListRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRulesRequest{Request: req, Input: input}
 }
 
@@ -400,7 +421,10 @@ func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInpu
 		input = &ListTargetsByRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTargetsByRuleOutput{})
+	output := &ListTargetsByRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTargetsByRuleRequest{Request: req, Input: input}
 }
 
@@ -447,7 +471,10 @@ func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) PutEventsRequ
 		input = &PutEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventsOutput{})
+	output := &PutEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutEventsRequest{Request: req, Input: input}
 }
 
@@ -504,9 +531,12 @@ func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) PutPe
 		input = &PutPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutPermissionOutput{})
+	output := &PutPermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutPermissionRequest{Request: req, Input: input}
 }
 
@@ -568,7 +598,10 @@ func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
 		input = &PutRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRuleOutput{})
+	output := &PutRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutRuleRequest{Request: req, Input: input}
 }
 
@@ -701,7 +734,10 @@ func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) PutTargetsR
 		input = &PutTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutTargetsOutput{})
+	output := &PutTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutTargetsRequest{Request: req, Input: input}
 }
 
@@ -750,9 +786,12 @@ func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput)
 		input = &RemovePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemovePermissionOutput{})
+	output := &RemovePermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemovePermissionRequest{Request: req, Input: input}
 }
 
@@ -808,7 +847,10 @@ func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) Remov
 		input = &RemoveTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTargetsOutput{})
+	output := &RemoveTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTargetsRequest{Request: req, Input: input}
 }
 
@@ -859,7 +901,10 @@ func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput)
 		input = &TestEventPatternInput{}
 	}
 
-	req := c.newRequest(op, input, &TestEventPatternOutput{})
+	output := &TestEventPatternOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestEventPatternRequest{Request: req, Input: input}
 }
 
@@ -909,6 +954,8 @@ func (s *DeleteRuleInput) SetName(v string) *DeleteRuleInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleOutput
 type DeleteRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -919,6 +966,11 @@ func (s DeleteRuleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusRequest
@@ -940,6 +992,8 @@ func (s DescribeEventBusInput) GoString() string {
 type DescribeEventBusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the account permitted to write events to
 	// the current account.
 	Arn *string `type:"string"`
@@ -959,6 +1013,11 @@ func (s DescribeEventBusOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventBusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventBusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -1026,6 +1085,8 @@ func (s *DescribeRuleInput) SetName(v string) *DescribeRuleInput {
 type DescribeRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the rule.
 	Arn *string `min:"1" type:"string"`
 
@@ -1057,6 +1118,11 @@ func (s DescribeRuleOutput) String() string {
 // GoString returns the string representation
 func (s DescribeRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetArn sets the Arn field's value.
@@ -1147,6 +1213,8 @@ func (s *DisableRuleInput) SetName(v string) *DisableRuleInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleOutput
 type DisableRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1157,6 +1225,11 @@ func (s DisableRuleOutput) String() string {
 // GoString returns the string representation
 func (s DisableRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The custom parameters to be used when the target is an Amazon ECS cluster.
@@ -1263,6 +1336,8 @@ func (s *EnableRuleInput) SetName(v string) *EnableRuleInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleOutput
 type EnableRuleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1273,6 +1348,11 @@ func (s EnableRuleOutput) String() string {
 // GoString returns the string representation
 func (s EnableRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters needed for you to provide custom input to a target
@@ -1449,6 +1529,8 @@ func (s *ListRuleNamesByTargetInput) SetTargetArn(v string) *ListRuleNamesByTarg
 type ListRuleNamesByTargetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there are additional results to retrieve. If there are
 	// no more results, the value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -1465,6 +1547,11 @@ func (s ListRuleNamesByTargetOutput) String() string {
 // GoString returns the string representation
 func (s ListRuleNamesByTargetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRuleNamesByTargetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1544,6 +1631,8 @@ func (s *ListRulesInput) SetNextToken(v string) *ListRulesInput {
 type ListRulesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there are additional results to retrieve. If there are
 	// no more results, the value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -1560,6 +1649,11 @@ func (s ListRulesOutput) String() string {
 // GoString returns the string representation
 func (s ListRulesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1645,6 +1739,8 @@ func (s *ListTargetsByRuleInput) SetRule(v string) *ListTargetsByRuleInput {
 type ListTargetsByRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there are additional results to retrieve. If there are
 	// no more results, the value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -1661,6 +1757,11 @@ func (s ListTargetsByRuleOutput) String() string {
 // GoString returns the string representation
 func (s ListTargetsByRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTargetsByRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1724,6 +1825,8 @@ func (s *PutEventsInput) SetEntries(v []PutEventsRequestEntry) *PutEventsInput {
 type PutEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The successfully and unsuccessfully ingested events results. If the ingestion
 	// was successful, the entry has the event ID in it. Otherwise, you can use
 	// the error code and error message to identify the problem with the entry.
@@ -1741,6 +1844,11 @@ func (s PutEventsOutput) String() string {
 // GoString returns the string representation
 func (s PutEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEntries sets the Entries field's value.
@@ -1955,6 +2063,8 @@ func (s *PutPermissionInput) SetStatementId(v string) *PutPermissionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionOutput
 type PutPermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1965,6 +2075,11 @@ func (s PutPermissionOutput) String() string {
 // GoString returns the string representation
 func (s PutPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleRequest
@@ -2063,6 +2178,8 @@ func (s *PutRuleInput) SetState(v RuleState) *PutRuleInput {
 type PutRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the rule.
 	RuleArn *string `min:"1" type:"string"`
 }
@@ -2075,6 +2192,11 @@ func (s PutRuleOutput) String() string {
 // GoString returns the string representation
 func (s PutRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRuleArn sets the RuleArn field's value.
@@ -2155,6 +2277,8 @@ func (s *PutTargetsInput) SetTargets(v []Target) *PutTargetsInput {
 type PutTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The failed target entries.
 	FailedEntries []PutTargetsResultEntry `type:"list"`
 
@@ -2170,6 +2294,11 @@ func (s PutTargetsOutput) String() string {
 // GoString returns the string representation
 func (s PutTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedEntries sets the FailedEntries field's value.
@@ -2276,6 +2405,8 @@ func (s *RemovePermissionInput) SetStatementId(v string) *RemovePermissionInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2286,6 +2417,11 @@ func (s RemovePermissionOutput) String() string {
 // GoString returns the string representation
 func (s RemovePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsRequest
@@ -2353,6 +2489,8 @@ func (s *RemoveTargetsInput) SetRule(v string) *RemoveTargetsInput {
 type RemoveTargetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The failed target entries.
 	FailedEntries []RemoveTargetsResultEntry `type:"list"`
 
@@ -2368,6 +2506,11 @@ func (s RemoveTargetsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTargetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedEntries sets the FailedEntries field's value.
@@ -2851,6 +2994,8 @@ func (s *TestEventPatternInput) SetEventPattern(v string) *TestEventPatternInput
 type TestEventPatternOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the event matches the event pattern.
 	Result *bool `type:"boolean"`
 }
@@ -2863,6 +3008,11 @@ func (s TestEventPatternOutput) String() string {
 // GoString returns the string representation
 func (s TestEventPatternOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestEventPatternOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetResult sets the Result field's value.

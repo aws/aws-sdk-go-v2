@@ -61,7 +61,10 @@ func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) Act
 		input = &ActivatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &ActivatePipelineOutput{})
+	output := &ActivatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ActivatePipelineRequest{Request: req, Input: input}
 }
 
@@ -107,7 +110,10 @@ func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 		input = &AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	output := &AddTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsRequest{Request: req, Input: input}
 }
 
@@ -154,7 +160,10 @@ func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) CreateP
 		input = &CreatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	output := &CreatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePipelineRequest{Request: req, Input: input}
 }
 
@@ -205,7 +214,10 @@ func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput)
 		input = &DeactivatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivatePipelineOutput{})
+	output := &DeactivatePipelineOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeactivatePipelineRequest{Request: req, Input: input}
 }
 
@@ -258,9 +270,12 @@ func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) DeleteP
 		input = &DeletePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	output := &DeletePipelineOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePipelineRequest{Request: req, Input: input}
 }
 
@@ -314,7 +329,10 @@ func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) Descr
 		input = &DescribeObjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeObjectsOutput{})
+	output := &DescribeObjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeObjectsRequest{Request: req, Input: input}
 }
 
@@ -418,7 +436,10 @@ func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) D
 		input = &DescribePipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePipelinesOutput{})
+	output := &DescribePipelinesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePipelinesRequest{Request: req, Input: input}
 }
 
@@ -466,7 +487,10 @@ func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput)
 		input = &EvaluateExpressionInput{}
 	}
 
-	req := c.newRequest(op, input, &EvaluateExpressionOutput{})
+	output := &EvaluateExpressionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EvaluateExpressionRequest{Request: req, Input: input}
 }
 
@@ -513,7 +537,10 @@ func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinition
 		input = &GetPipelineDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineDefinitionOutput{})
+	output := &GetPipelineDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPipelineDefinitionRequest{Request: req, Input: input}
 }
 
@@ -566,7 +593,10 @@ func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 		input = &ListPipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	output := &ListPipelinesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPipelinesRequest{Request: req, Input: input}
 }
 
@@ -675,7 +705,10 @@ func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) PollForTaskRe
 		input = &PollForTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForTaskOutput{})
+	output := &PollForTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PollForTaskRequest{Request: req, Input: input}
 }
 
@@ -734,7 +767,10 @@ func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinition
 		input = &PutPipelineDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutPipelineDefinitionOutput{})
+	output := &PutPipelineDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutPipelineDefinitionRequest{Request: req, Input: input}
 }
 
@@ -787,7 +823,10 @@ func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) QueryObject
 		input = &QueryObjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &QueryObjectsOutput{})
+	output := &QueryObjectsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return QueryObjectsRequest{Request: req, Input: input}
 }
 
@@ -883,7 +922,10 @@ func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsReque
 		input = &RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	output := &RemoveTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsRequest{Request: req, Input: input}
 }
 
@@ -940,7 +982,10 @@ func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput)
 		input = &ReportTaskProgressInput{}
 	}
 
-	req := c.newRequest(op, input, &ReportTaskProgressOutput{})
+	output := &ReportTaskProgressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReportTaskProgressRequest{Request: req, Input: input}
 }
 
@@ -990,7 +1035,10 @@ func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerH
 		input = &ReportTaskRunnerHeartbeatInput{}
 	}
 
-	req := c.newRequest(op, input, &ReportTaskRunnerHeartbeatOutput{})
+	output := &ReportTaskRunnerHeartbeatOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReportTaskRunnerHeartbeatRequest{Request: req, Input: input}
 }
 
@@ -1040,9 +1088,12 @@ func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) SetStatusRequest 
 		input = &SetStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &SetStatusOutput{})
+	output := &SetStatusOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetStatusRequest{Request: req, Input: input}
 }
 
@@ -1092,7 +1143,10 @@ func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskSt
 		input = &SetTaskStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTaskStatusOutput{})
+	output := &SetTaskStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetTaskStatusRequest{Request: req, Input: input}
 }
 
@@ -1139,7 +1193,10 @@ func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipeline
 		input = &ValidatePipelineDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &ValidatePipelineDefinitionOutput{})
+	output := &ValidatePipelineDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ValidatePipelineDefinitionRequest{Request: req, Input: input}
 }
 
@@ -1217,6 +1274,8 @@ func (s *ActivatePipelineInput) SetStartTimestamp(v time.Time) *ActivatePipeline
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipelineOutput
 type ActivatePipelineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1227,6 +1286,11 @@ func (s ActivatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s ActivatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ActivatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for AddTags.
@@ -1299,6 +1363,8 @@ func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1309,6 +1375,11 @@ func (s AddTagsOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for CreatePipeline.
@@ -1418,6 +1489,8 @@ func (s *CreatePipelineInput) SetUniqueId(v string) *CreatePipelineInput {
 type CreatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID that AWS Data Pipeline assigns the newly created pipeline. For example,
 	// df-06372391ZG65EXAMPLE.
 	//
@@ -1433,6 +1506,11 @@ func (s CreatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s CreatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipelineId sets the PipelineId field's value.
@@ -1500,6 +1578,8 @@ func (s *DeactivatePipelineInput) SetPipelineId(v string) *DeactivatePipelineInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipelineOutput
 type DeactivatePipelineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1510,6 +1590,11 @@ func (s DeactivatePipelineOutput) String() string {
 // GoString returns the string representation
 func (s DeactivatePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeactivatePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DeletePipeline.
@@ -1559,6 +1644,8 @@ func (s *DeletePipelineInput) SetPipelineId(v string) *DeletePipelineInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipelineOutput
 type DeletePipelineOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1569,6 +1656,11 @@ func (s DeletePipelineOutput) String() string {
 // GoString returns the string representation
 func (s DeletePipelineOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePipelineOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for DescribeObjects.
@@ -1658,6 +1750,8 @@ func (s *DescribeObjectsInput) SetPipelineId(v string) *DescribeObjectsInput {
 type DescribeObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there are more results to return.
 	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
 
@@ -1680,6 +1774,11 @@ func (s DescribeObjectsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeObjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeObjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHasMoreResults sets the HasMoreResults field's value.
@@ -1747,6 +1846,8 @@ func (s *DescribePipelinesInput) SetPipelineIds(v []string) *DescribePipelinesIn
 type DescribePipelinesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of descriptions for the specified pipelines.
 	//
 	// PipelineDescriptionList is a required field
@@ -1761,6 +1862,11 @@ func (s DescribePipelinesOutput) String() string {
 // GoString returns the string representation
 func (s DescribePipelinesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePipelinesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPipelineDescriptionList sets the PipelineDescriptionList field's value.
@@ -1851,6 +1957,8 @@ func (s *EvaluateExpressionInput) SetPipelineId(v string) *EvaluateExpressionInp
 type EvaluateExpressionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The evaluated expression.
 	//
 	// EvaluatedExpression is a required field
@@ -1865,6 +1973,11 @@ func (s EvaluateExpressionOutput) String() string {
 // GoString returns the string representation
 func (s EvaluateExpressionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EvaluateExpressionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvaluatedExpression sets the EvaluatedExpression field's value.
@@ -2000,6 +2113,8 @@ func (s *GetPipelineDefinitionInput) SetVersion(v string) *GetPipelineDefinition
 type GetPipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The parameter objects used in the pipeline definition.
 	ParameterObjects []ParameterObject `locationName:"parameterObjects" type:"list"`
 
@@ -2018,6 +2133,11 @@ func (s GetPipelineDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s GetPipelineDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPipelineDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetParameterObjects sets the ParameterObjects field's value.
@@ -2113,6 +2233,8 @@ func (s *ListPipelinesInput) SetMarker(v string) *ListPipelinesInput {
 type ListPipelinesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there are more results that can be obtained by a subsequent
 	// call.
 	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
@@ -2137,6 +2259,11 @@ func (s ListPipelinesOutput) String() string {
 // GoString returns the string representation
 func (s ListPipelinesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPipelinesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHasMoreResults sets the HasMoreResults field's value.
@@ -2673,6 +2800,8 @@ func (s *PollForTaskInput) SetWorkerGroup(v string) *PollForTaskInput {
 type PollForTaskOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The information needed to complete the task that is being assigned to the
 	// task runner. One of the fields returned in this object is taskId, which contains
 	// an identifier for the task being assigned. The calling task runner uses taskId
@@ -2688,6 +2817,11 @@ func (s PollForTaskOutput) String() string {
 // GoString returns the string representation
 func (s PollForTaskOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PollForTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTaskObject sets the TaskObject field's value.
@@ -2800,6 +2934,8 @@ func (s *PutPipelineDefinitionInput) SetPipelineObjects(v []PipelineObject) *Put
 type PutPipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there were validation errors, and the pipeline definition
 	// is stored but cannot be activated until you correct the pipeline and call
 	// PutPipelineDefinition to commit the corrected pipeline.
@@ -2822,6 +2958,11 @@ func (s PutPipelineDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s PutPipelineDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutPipelineDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrored sets the Errored field's value.
@@ -2967,6 +3108,8 @@ func (s *QueryObjectsInput) SetSphere(v string) *QueryObjectsInput {
 type QueryObjectsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there are more results that can be obtained by a subsequent
 	// call.
 	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
@@ -2988,6 +3131,11 @@ func (s QueryObjectsOutput) String() string {
 // GoString returns the string representation
 func (s QueryObjectsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s QueryObjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetHasMoreResults sets the HasMoreResults field's value.
@@ -3071,6 +3219,8 @@ func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTagsOutput
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3081,6 +3231,11 @@ func (s RemoveTagsOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for ReportTaskProgress.
@@ -3150,6 +3305,8 @@ func (s *ReportTaskProgressInput) SetTaskId(v string) *ReportTaskProgressInput {
 type ReportTaskProgressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If true, the calling task runner should cancel processing of the task. The
 	// task runner does not need to call SetTaskStatus for canceled tasks.
 	//
@@ -3165,6 +3322,11 @@ func (s ReportTaskProgressOutput) String() string {
 // GoString returns the string representation
 func (s ReportTaskProgressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReportTaskProgressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCanceled sets the Canceled field's value.
@@ -3251,6 +3413,8 @@ func (s *ReportTaskRunnerHeartbeatInput) SetWorkerGroup(v string) *ReportTaskRun
 type ReportTaskRunnerHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether the calling task runner should terminate.
 	//
 	// Terminate is a required field
@@ -3265,6 +3429,11 @@ func (s ReportTaskRunnerHeartbeatOutput) String() string {
 // GoString returns the string representation
 func (s ReportTaskRunnerHeartbeatOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReportTaskRunnerHeartbeatOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTerminate sets the Terminate field's value.
@@ -3391,6 +3560,8 @@ func (s *SetStatusInput) SetStatus(v string) *SetStatusInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatusOutput
 type SetStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3401,6 +3572,11 @@ func (s SetStatusOutput) String() string {
 // GoString returns the string representation
 func (s SetStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for SetTaskStatus.
@@ -3503,6 +3679,8 @@ func (s *SetTaskStatusInput) SetTaskStatus(v TaskStatus) *SetTaskStatusInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatusOutput
 type SetTaskStatusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3513,6 +3691,11 @@ func (s SetTaskStatusOutput) String() string {
 // GoString returns the string representation
 func (s SetTaskStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetTaskStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Tags are key/value pairs defined by a user and associated with a pipeline
@@ -3740,6 +3923,8 @@ func (s *ValidatePipelineDefinitionInput) SetPipelineObjects(v []PipelineObject)
 type ValidatePipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether there were validation errors.
 	//
 	// Errored is a required field
@@ -3760,6 +3945,11 @@ func (s ValidatePipelineDefinitionOutput) String() string {
 // GoString returns the string representation
 func (s ValidatePipelineDefinitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ValidatePipelineDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrored sets the Errored field's value.

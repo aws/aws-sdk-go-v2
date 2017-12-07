@@ -55,9 +55,12 @@ func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironment
 		input = &AbortEnvironmentUpdateInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortEnvironmentUpdateOutput{})
+	output := &AbortEnvironmentUpdateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AbortEnvironmentUpdateRequest{Request: req, Input: input}
 }
 
@@ -105,7 +108,10 @@ func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvi
 		input = &ApplyEnvironmentManagedActionInput{}
 	}
 
-	req := c.newRequest(op, input, &ApplyEnvironmentManagedActionOutput{})
+	output := &ApplyEnvironmentManagedActionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ApplyEnvironmentManagedActionRequest{Request: req, Input: input}
 }
 
@@ -151,7 +157,10 @@ func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabili
 		input = &CheckDNSAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &CheckDNSAvailabilityOutput{})
+	output := &CheckDNSAvailabilityOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CheckDNSAvailabilityRequest{Request: req, Input: input}
 }
 
@@ -203,7 +212,10 @@ func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironments
 		input = &ComposeEnvironmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentsOutput{})
+	output := &DescribeEnvironmentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ComposeEnvironmentsRequest{Request: req, Input: input}
 }
 
@@ -250,7 +262,10 @@ func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInpu
 		input = &CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	output := &UpdateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateApplicationRequest{Request: req, Input: input}
 }
 
@@ -312,7 +327,10 @@ func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicat
 		input = &CreateApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationVersionOutput{})
+	output := &UpdateApplicationVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateApplicationVersionRequest{Request: req, Input: input}
 }
 
@@ -368,7 +386,10 @@ func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfi
 		input = &CreateConfigurationTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationTemplateOutput{})
+	output := &UpdateConfigurationTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConfigurationTemplateRequest{Request: req, Input: input}
 }
 
@@ -415,7 +436,10 @@ func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInpu
 		input = &CreateEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	output := &UpdateEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -461,7 +485,10 @@ func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVer
 		input = &CreatePlatformVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlatformVersionOutput{})
+	output := &CreatePlatformVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePlatformVersionRequest{Request: req, Input: input}
 }
 
@@ -509,7 +536,10 @@ func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLoca
 		input = &CreateStorageLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStorageLocationOutput{})
+	output := &CreateStorageLocationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStorageLocationRequest{Request: req, Input: input}
 }
 
@@ -559,9 +589,12 @@ func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInpu
 		input = &DeleteApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationOutput{})
+	output := &DeleteApplicationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationRequest{Request: req, Input: input}
 }
 
@@ -610,9 +643,12 @@ func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicat
 		input = &DeleteApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationVersionOutput{})
+	output := &DeleteApplicationVersionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteApplicationVersionRequest{Request: req, Input: input}
 }
 
@@ -662,9 +698,12 @@ func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfi
 		input = &DeleteConfigurationTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationTemplateOutput{})
+	output := &DeleteConfigurationTemplateOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConfigurationTemplateRequest{Request: req, Input: input}
 }
 
@@ -717,9 +756,12 @@ func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEn
 		input = &DeleteEnvironmentConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEnvironmentConfigurationOutput{})
+	output := &DeleteEnvironmentConfigurationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEnvironmentConfigurationRequest{Request: req, Input: input}
 }
 
@@ -765,7 +807,10 @@ func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVer
 		input = &DeletePlatformVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlatformVersionOutput{})
+	output := &DeletePlatformVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePlatformVersionRequest{Request: req, Input: input}
 }
 
@@ -811,7 +856,10 @@ func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApp
 		input = &DescribeApplicationVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationVersionsOutput{})
+	output := &DescribeApplicationVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeApplicationVersionsRequest{Request: req, Input: input}
 }
 
@@ -857,7 +905,10 @@ func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicatio
 		input = &DescribeApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationsOutput{})
+	output := &DescribeApplicationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeApplicationsRequest{Request: req, Input: input}
 }
 
@@ -907,7 +958,10 @@ func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeCo
 		input = &DescribeConfigurationOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationOptionsOutput{})
+	output := &DescribeConfigurationOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigurationOptionsRequest{Request: req, Input: input}
 }
 
@@ -965,7 +1019,10 @@ func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeC
 		input = &DescribeConfigurationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationSettingsOutput{})
+	output := &DescribeConfigurationSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConfigurationSettingsRequest{Request: req, Input: input}
 }
 
@@ -1013,7 +1070,10 @@ func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvir
 		input = &DescribeEnvironmentHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentHealthOutput{})
+	output := &DescribeEnvironmentHealthOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEnvironmentHealthRequest{Request: req, Input: input}
 }
 
@@ -1059,7 +1119,10 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input 
 		input = &DescribeEnvironmentManagedActionHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionHistoryOutput{})
+	output := &DescribeEnvironmentManagedActionHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEnvironmentManagedActionHistoryRequest{Request: req, Input: input}
 }
 
@@ -1105,7 +1168,10 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *Descr
 		input = &DescribeEnvironmentManagedActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionsOutput{})
+	output := &DescribeEnvironmentManagedActionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEnvironmentManagedActionsRequest{Request: req, Input: input}
 }
 
@@ -1151,7 +1217,10 @@ func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEn
 		input = &DescribeEnvironmentResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentResourcesOutput{})
+	output := &DescribeEnvironmentResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEnvironmentResourcesRequest{Request: req, Input: input}
 }
 
@@ -1197,7 +1266,10 @@ func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmen
 		input = &DescribeEnvironmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentsOutput{})
+	output := &DescribeEnvironmentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEnvironmentsRequest{Request: req, Input: input}
 }
 
@@ -1251,7 +1323,10 @@ func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) Des
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -1348,7 +1423,10 @@ func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstanc
 		input = &DescribeInstancesHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesHealthOutput{})
+	output := &DescribeInstancesHealthOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeInstancesHealthRequest{Request: req, Input: input}
 }
 
@@ -1394,7 +1472,10 @@ func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatfor
 		input = &DescribePlatformVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePlatformVersionOutput{})
+	output := &DescribePlatformVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribePlatformVersionRequest{Request: req, Input: input}
 }
 
@@ -1441,7 +1522,10 @@ func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailab
 		input = &ListAvailableSolutionStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAvailableSolutionStacksOutput{})
+	output := &ListAvailableSolutionStacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAvailableSolutionStacksRequest{Request: req, Input: input}
 }
 
@@ -1487,7 +1571,10 @@ func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersio
 		input = &ListPlatformVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPlatformVersionsOutput{})
+	output := &ListPlatformVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListPlatformVersionsRequest{Request: req, Input: input}
 }
 
@@ -1534,9 +1621,12 @@ func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentIn
 		input = &RebuildEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &RebuildEnvironmentOutput{})
+	output := &RebuildEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebuildEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -1596,9 +1686,12 @@ func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironme
 		input = &RequestEnvironmentInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestEnvironmentInfoOutput{})
+	output := &RequestEnvironmentInfoOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RequestEnvironmentInfoRequest{Request: req, Input: input}
 }
 
@@ -1645,9 +1738,12 @@ func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput)
 		input = &RestartAppServerInput{}
 	}
 
-	req := c.newRequest(op, input, &RestartAppServerOutput{})
+	output := &RestartAppServerOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestartAppServerRequest{Request: req, Input: input}
 }
 
@@ -1697,7 +1793,10 @@ func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnviron
 		input = &RetrieveEnvironmentInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveEnvironmentInfoOutput{})
+	output := &RetrieveEnvironmentInfoOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RetrieveEnvironmentInfoRequest{Request: req, Input: input}
 }
 
@@ -1743,9 +1842,12 @@ func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCN
 		input = &SwapEnvironmentCNAMEsInput{}
 	}
 
-	req := c.newRequest(op, input, &SwapEnvironmentCNAMEsOutput{})
+	output := &SwapEnvironmentCNAMEsOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SwapEnvironmentCNAMEsRequest{Request: req, Input: input}
 }
 
@@ -1791,7 +1893,10 @@ func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironme
 		input = &TerminateEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	output := &UpdateEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TerminateEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -1840,7 +1945,10 @@ func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInpu
 		input = &UpdateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	output := &UpdateApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
@@ -1886,7 +1994,10 @@ func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *Upda
 		input = &UpdateApplicationResourceLifecycleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationResourceLifecycleOutput{})
+	output := &UpdateApplicationResourceLifecycleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationResourceLifecycleRequest{Request: req, Input: input}
 }
 
@@ -1935,7 +2046,10 @@ func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicat
 		input = &UpdateApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationVersionOutput{})
+	output := &UpdateApplicationVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateApplicationVersionRequest{Request: req, Input: input}
 }
 
@@ -1989,7 +2103,10 @@ func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfi
 		input = &UpdateConfigurationTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationTemplateOutput{})
+	output := &UpdateConfigurationTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConfigurationTemplateRequest{Request: req, Input: input}
 }
 
@@ -2045,7 +2162,10 @@ func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInpu
 		input = &UpdateEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	output := &UpdateEnvironmentOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateEnvironmentRequest{Request: req, Input: input}
 }
 
@@ -2095,7 +2215,10 @@ func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateC
 		input = &ValidateConfigurationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ValidateConfigurationSettingsOutput{})
+	output := &ValidateConfigurationSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ValidateConfigurationSettingsRequest{Request: req, Input: input}
 }
 
@@ -2150,6 +2273,8 @@ func (s *AbortEnvironmentUpdateInput) SetEnvironmentName(v string) *AbortEnviron
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdateOutput
 type AbortEnvironmentUpdateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2160,6 +2285,11 @@ func (s AbortEnvironmentUpdateOutput) String() string {
 // GoString returns the string representation
 func (s AbortEnvironmentUpdateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AbortEnvironmentUpdateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes the properties of an application.
@@ -2576,6 +2706,8 @@ func (s *ApplyEnvironmentManagedActionInput) SetEnvironmentName(v string) *Apply
 type ApplyEnvironmentManagedActionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A description of the managed action.
 	ActionDescription *string `type:"string"`
 
@@ -2597,6 +2729,11 @@ func (s ApplyEnvironmentManagedActionOutput) String() string {
 // GoString returns the string representation
 func (s ApplyEnvironmentManagedActionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ApplyEnvironmentManagedActionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetActionDescription sets the ActionDescription field's value.
@@ -2904,6 +3041,8 @@ func (s *CheckDNSAvailabilityInput) SetCNAMEPrefix(v string) *CheckDNSAvailabili
 type CheckDNSAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates if the specified CNAME is available:
 	//
 	//    * true : The CNAME is available.
@@ -2924,6 +3063,11 @@ func (s CheckDNSAvailabilityOutput) String() string {
 // GoString returns the string representation
 func (s CheckDNSAvailabilityOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CheckDNSAvailabilityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailable sets the Available field's value.
@@ -3921,6 +4065,8 @@ func (s *CreatePlatformVersionInput) SetPlatformVersion(v string) *CreatePlatfor
 type CreatePlatformVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The builder used to create the custom platform.
 	Builder *Builder `type:"structure"`
 
@@ -3936,6 +4082,11 @@ func (s CreatePlatformVersionOutput) String() string {
 // GoString returns the string representation
 func (s CreatePlatformVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePlatformVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBuilder sets the Builder field's value.
@@ -3970,6 +4121,8 @@ func (s CreateStorageLocationInput) GoString() string {
 type CreateStorageLocationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the Amazon S3 bucket created.
 	S3Bucket *string `type:"string"`
 }
@@ -3982,6 +4135,11 @@ func (s CreateStorageLocationOutput) String() string {
 // GoString returns the string representation
 func (s CreateStorageLocationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStorageLocationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetS3Bucket sets the S3Bucket field's value.
@@ -4081,6 +4239,8 @@ func (s *DeleteApplicationInput) SetTerminateEnvByForce(v bool) *DeleteApplicati
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationOutput
 type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4091,6 +4251,11 @@ func (s DeleteApplicationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete an application version.
@@ -4169,6 +4334,8 @@ func (s *DeleteApplicationVersionInput) SetVersionLabel(v string) *DeleteApplica
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersionOutput
 type DeleteApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4179,6 +4346,11 @@ func (s DeleteApplicationVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteApplicationVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete a configuration template.
@@ -4246,6 +4418,8 @@ func (s *DeleteConfigurationTemplateInput) SetTemplateName(v string) *DeleteConf
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplateOutput
 type DeleteConfigurationTemplateOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4256,6 +4430,11 @@ func (s DeleteConfigurationTemplateOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConfigurationTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConfigurationTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to delete a draft environment configuration.
@@ -4323,6 +4502,8 @@ func (s *DeleteEnvironmentConfigurationInput) SetEnvironmentName(v string) *Dele
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfigurationOutput
 type DeleteEnvironmentConfigurationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4333,6 +4514,11 @@ func (s DeleteEnvironmentConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteEnvironmentConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEnvironmentConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersionRequest
@@ -4363,6 +4549,8 @@ func (s *DeletePlatformVersionInput) SetPlatformArn(v string) *DeletePlatformVer
 type DeletePlatformVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed information about the version of the custom platform.
 	PlatformSummary *PlatformSummary `type:"structure"`
 }
@@ -4375,6 +4563,11 @@ func (s DeletePlatformVersionOutput) String() string {
 // GoString returns the string representation
 func (s DeletePlatformVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePlatformVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlatformSummary sets the PlatformSummary field's value.
@@ -4525,6 +4718,8 @@ func (s *DescribeApplicationVersionsInput) SetVersionLabels(v []string) *Describ
 type DescribeApplicationVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of ApplicationVersionDescription objects sorted in order of creation.
 	ApplicationVersions []ApplicationVersionDescription `type:"list"`
 
@@ -4541,6 +4736,11 @@ func (s DescribeApplicationVersionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeApplicationVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeApplicationVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationVersions sets the ApplicationVersions field's value.
@@ -4586,6 +4786,8 @@ func (s *DescribeApplicationsInput) SetApplicationNames(v []string) *DescribeApp
 type DescribeApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// This parameter contains a list of ApplicationDescription.
 	Applications []ApplicationDescription `type:"list"`
 }
@@ -4598,6 +4800,11 @@ func (s DescribeApplicationsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeApplicationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeApplicationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplications sets the Applications field's value.
@@ -4710,6 +4917,8 @@ func (s *DescribeConfigurationOptionsInput) SetTemplateName(v string) *DescribeC
 type DescribeConfigurationOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ConfigurationOptionDescription.
 	Options []ConfigurationOptionDescription `type:"list"`
 
@@ -4728,6 +4937,11 @@ func (s DescribeConfigurationOptionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationOptionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigurationOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOptions sets the Options field's value.
@@ -4832,6 +5046,8 @@ func (s *DescribeConfigurationSettingsInput) SetTemplateName(v string) *Describe
 type DescribeConfigurationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ConfigurationSettingsDescription.
 	ConfigurationSettings []UpdateConfigurationTemplateOutput `type:"list"`
 }
@@ -4844,6 +5060,11 @@ func (s DescribeConfigurationSettingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConfigurationSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConfigurationSettings sets the ConfigurationSettings field's value.
@@ -4918,6 +5139,8 @@ func (s *DescribeEnvironmentHealthInput) SetEnvironmentName(v string) *DescribeE
 type DescribeEnvironmentHealthOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Application request metrics for the environment.
 	ApplicationMetrics *ApplicationMetrics `type:"structure"`
 
@@ -4955,6 +5178,11 @@ func (s DescribeEnvironmentHealthOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEnvironmentHealthOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEnvironmentHealthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationMetrics sets the ApplicationMetrics field's value.
@@ -5075,6 +5303,8 @@ func (s *DescribeEnvironmentManagedActionHistoryInput) SetNextToken(v string) *D
 type DescribeEnvironmentManagedActionHistoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of completed and failed managed actions.
 	ManagedActionHistoryItems []ManagedActionHistoryItem `min:"1" type:"list"`
 
@@ -5091,6 +5321,11 @@ func (s DescribeEnvironmentManagedActionHistoryOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEnvironmentManagedActionHistoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEnvironmentManagedActionHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetManagedActionHistoryItems sets the ManagedActionHistoryItems field's value.
@@ -5153,6 +5388,8 @@ func (s *DescribeEnvironmentManagedActionsInput) SetStatus(v ActionStatus) *Desc
 type DescribeEnvironmentManagedActionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of upcoming and in-progress managed actions.
 	ManagedActions []ManagedAction `min:"1" type:"list"`
 }
@@ -5165,6 +5402,11 @@ func (s DescribeEnvironmentManagedActionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEnvironmentManagedActionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEnvironmentManagedActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetManagedActions sets the ManagedActions field's value.
@@ -5233,6 +5475,8 @@ func (s *DescribeEnvironmentResourcesInput) SetEnvironmentName(v string) *Descri
 type DescribeEnvironmentResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of EnvironmentResourceDescription.
 	EnvironmentResources *EnvironmentResourceDescription `type:"structure"`
 }
@@ -5245,6 +5489,11 @@ func (s DescribeEnvironmentResourcesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEnvironmentResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEnvironmentResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEnvironmentResources sets the EnvironmentResources field's value.
@@ -5383,6 +5632,8 @@ func (s *DescribeEnvironmentsInput) SetVersionLabel(v string) *DescribeEnvironme
 type DescribeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns an EnvironmentDescription list.
 	Environments []UpdateEnvironmentOutput `type:"list"`
 
@@ -5399,6 +5650,11 @@ func (s DescribeEnvironmentsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEnvironmentsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEnvironmentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEnvironments sets the Environments field's value.
@@ -5577,6 +5833,8 @@ func (s *DescribeEventsInput) SetVersionLabel(v string) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of EventDescription.
 	Events []EventDescription `type:"list"`
 
@@ -5593,6 +5851,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -5682,6 +5945,8 @@ func (s *DescribeInstancesHealthInput) SetNextToken(v string) *DescribeInstances
 type DescribeInstancesHealthOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed health information about each instance.
 	InstanceHealthList []SingleInstanceHealth `type:"list"`
 
@@ -5700,6 +5965,11 @@ func (s DescribeInstancesHealthOutput) String() string {
 // GoString returns the string representation
 func (s DescribeInstancesHealthOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeInstancesHealthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetInstanceHealthList sets the InstanceHealthList field's value.
@@ -5748,6 +6018,8 @@ func (s *DescribePlatformVersionInput) SetPlatformArn(v string) *DescribePlatfor
 type DescribePlatformVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Detailed information about the version of the platform.
 	PlatformDescription *PlatformDescription `type:"structure"`
 }
@@ -5760,6 +6032,11 @@ func (s DescribePlatformVersionOutput) String() string {
 // GoString returns the string representation
 func (s DescribePlatformVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribePlatformVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlatformDescription sets the PlatformDescription field's value.
@@ -6365,6 +6642,8 @@ func (s ListAvailableSolutionStacksInput) GoString() string {
 type ListAvailableSolutionStacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of available solution stacks and their SolutionStackDescription.
 	SolutionStackDetails []SolutionStackDescription `type:"list"`
 
@@ -6380,6 +6659,11 @@ func (s ListAvailableSolutionStacksOutput) String() string {
 // GoString returns the string representation
 func (s ListAvailableSolutionStacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAvailableSolutionStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSolutionStackDetails sets the SolutionStackDetails field's value.
@@ -6455,6 +6739,8 @@ func (s *ListPlatformVersionsInput) SetNextToken(v string) *ListPlatformVersions
 type ListPlatformVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The starting index into the remaining list of platforms. if this value is
 	// not null, you can use it in a subsequent ListPlatformVersion call.
 	NextToken *string `type:"string"`
@@ -6471,6 +6757,11 @@ func (s ListPlatformVersionsOutput) String() string {
 // GoString returns the string representation
 func (s ListPlatformVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPlatformVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7431,6 +7722,8 @@ func (s *RebuildEnvironmentInput) SetEnvironmentName(v string) *RebuildEnvironme
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironmentOutput
 type RebuildEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7441,6 +7734,11 @@ func (s RebuildEnvironmentOutput) String() string {
 // GoString returns the string representation
 func (s RebuildEnvironmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebuildEnvironmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to retrieve logs from an environment and store them in your Elastic
@@ -7522,6 +7820,8 @@ func (s *RequestEnvironmentInfoInput) SetInfoType(v EnvironmentInfoType) *Reques
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfoOutput
 type RequestEnvironmentInfoOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7532,6 +7832,11 @@ func (s RequestEnvironmentInfoOutput) String() string {
 // GoString returns the string representation
 func (s RequestEnvironmentInfoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RequestEnvironmentInfoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServerMessage
@@ -7591,6 +7896,8 @@ func (s *RestartAppServerInput) SetEnvironmentName(v string) *RestartAppServerIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServerOutput
 type RestartAppServerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7601,6 +7908,11 @@ func (s RestartAppServerOutput) String() string {
 // GoString returns the string representation
 func (s RestartAppServerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestartAppServerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request to download logs retrieved with RequestEnvironmentInfo.
@@ -7681,6 +7993,8 @@ func (s *RetrieveEnvironmentInfoInput) SetInfoType(v EnvironmentInfoType) *Retri
 type RetrieveEnvironmentInfoOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The EnvironmentInfoDescription of the environment.
 	EnvironmentInfo []EnvironmentInfoDescription `type:"list"`
 }
@@ -7693,6 +8007,11 @@ func (s RetrieveEnvironmentInfoOutput) String() string {
 // GoString returns the string representation
 func (s RetrieveEnvironmentInfoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RetrieveEnvironmentInfoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEnvironmentInfo sets the EnvironmentInfo field's value.
@@ -8162,6 +8481,8 @@ func (s *SwapEnvironmentCNAMEsInput) SetSourceEnvironmentName(v string) *SwapEnv
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEsOutput
 type SwapEnvironmentCNAMEsOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -8172,6 +8493,11 @@ func (s SwapEnvironmentCNAMEsOutput) String() string {
 // GoString returns the string representation
 func (s SwapEnvironmentCNAMEsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SwapEnvironmentCNAMEsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // CPU utilization and load average metrics for an Amazon EC2 instance.
@@ -8432,6 +8758,8 @@ func (s *UpdateApplicationInput) SetDescription(v string) *UpdateApplicationInpu
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ApplicationDescription of the application.
 	Application *ApplicationDescription `type:"structure"`
 }
@@ -8444,6 +8772,11 @@ func (s UpdateApplicationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplication sets the Application field's value.
@@ -8519,6 +8852,8 @@ func (s *UpdateApplicationResourceLifecycleInput) SetResourceLifecycleConfig(v *
 type UpdateApplicationResourceLifecycleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the application.
 	ApplicationName *string `min:"1" type:"string"`
 
@@ -8534,6 +8869,11 @@ func (s UpdateApplicationResourceLifecycleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationResourceLifecycleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationResourceLifecycleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationName sets the ApplicationName field's value.
@@ -8629,6 +8969,8 @@ func (s *UpdateApplicationVersionInput) SetVersionLabel(v string) *UpdateApplica
 type UpdateApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ApplicationVersionDescription of the application version.
 	ApplicationVersion *ApplicationVersionDescription `type:"structure"`
 }
@@ -8641,6 +8983,11 @@ func (s UpdateApplicationVersionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateApplicationVersionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApplicationVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationVersion sets the ApplicationVersion field's value.
@@ -8767,6 +9114,8 @@ func (s *UpdateConfigurationTemplateInput) SetTemplateName(v string) *UpdateConf
 type UpdateConfigurationTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the application associated with this configuration set.
 	ApplicationName *string `min:"1" type:"string"`
 
@@ -8819,6 +9168,11 @@ func (s UpdateConfigurationTemplateOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConfigurationTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConfigurationTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetApplicationName sets the ApplicationName field's value.
@@ -9077,6 +9431,8 @@ func (s *UpdateEnvironmentInput) SetVersionLabel(v string) *UpdateEnvironmentInp
 type UpdateEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Indicates if there is an in-progress environment configuration update or
 	// application version deployment that you can cancel.
 	//
@@ -9181,6 +9537,11 @@ func (s UpdateEnvironmentOutput) String() string {
 // GoString returns the string representation
 func (s UpdateEnvironmentOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateEnvironmentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAbortableOperationInProgress sets the AbortableOperationInProgress field's value.
@@ -9403,6 +9764,8 @@ func (s *ValidateConfigurationSettingsInput) SetTemplateName(v string) *Validate
 type ValidateConfigurationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of ValidationMessage.
 	Messages []ValidationMessage `type:"list"`
 }
@@ -9415,6 +9778,11 @@ func (s ValidateConfigurationSettingsOutput) String() string {
 // GoString returns the string representation
 func (s ValidateConfigurationSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ValidateConfigurationSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMessages sets the Messages field's value.

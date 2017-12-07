@@ -57,9 +57,12 @@ func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput)
 		input = &CancelUpdateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelUpdateStackOutput{})
+	output := &CancelUpdateStackOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelUpdateStackRequest{Request: req, Input: input}
 }
 
@@ -117,7 +120,10 @@ func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRoll
 		input = &ContinueUpdateRollbackInput{}
 	}
 
-	req := c.newRequest(op, input, &ContinueUpdateRollbackOutput{})
+	output := &ContinueUpdateRollbackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ContinueUpdateRollbackRequest{Request: req, Input: input}
 }
 
@@ -183,7 +189,10 @@ func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) Cre
 		input = &CreateChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateChangeSetOutput{})
+	output := &CreateChangeSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateChangeSetRequest{Request: req, Input: input}
 }
 
@@ -231,7 +240,10 @@ func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) CreateStack
 		input = &CreateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStackOutput{})
+	output := &CreateStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStackRequest{Request: req, Input: input}
 }
 
@@ -280,7 +292,10 @@ func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstances
 		input = &CreateStackInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStackInstancesOutput{})
+	output := &CreateStackInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStackInstancesRequest{Request: req, Input: input}
 }
 
@@ -326,7 +341,10 @@ func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) Creat
 		input = &CreateStackSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStackSetOutput{})
+	output := &CreateStackSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStackSetRequest{Request: req, Input: input}
 }
 
@@ -376,7 +394,10 @@ func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) Del
 		input = &DeleteChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteChangeSetOutput{})
+	output := &DeleteChangeSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteChangeSetRequest{Request: req, Input: input}
 }
 
@@ -424,9 +445,12 @@ func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) DeleteStack
 		input = &DeleteStackInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackOutput{})
+	output := &DeleteStackOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStackRequest{Request: req, Input: input}
 }
 
@@ -472,7 +496,10 @@ func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstances
 		input = &DeleteStackInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackInstancesOutput{})
+	output := &DeleteStackInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStackInstancesRequest{Request: req, Input: input}
 }
 
@@ -520,7 +547,10 @@ func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) Delet
 		input = &DeleteStackSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackSetOutput{})
+	output := &DeleteStackSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStackSetRequest{Request: req, Input: input}
 }
 
@@ -567,7 +597,10 @@ func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimi
 		input = &DescribeAccountLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	output := &DescribeAccountLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAccountLimitsRequest{Request: req, Input: input}
 }
 
@@ -616,7 +649,10 @@ func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput)
 		input = &DescribeChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeChangeSetOutput{})
+	output := &DescribeChangeSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeChangeSetRequest{Request: req, Input: input}
 }
 
@@ -673,7 +709,10 @@ func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsIn
 		input = &DescribeStackEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackEventsOutput{})
+	output := &DescribeStackEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackEventsRequest{Request: req, Input: input}
 }
 
@@ -773,7 +812,10 @@ func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstan
 		input = &DescribeStackInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackInstanceOutput{})
+	output := &DescribeStackInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackInstanceRequest{Request: req, Input: input}
 }
 
@@ -822,7 +864,10 @@ func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResour
 		input = &DescribeStackResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackResourceOutput{})
+	output := &DescribeStackResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackResourceRequest{Request: req, Input: input}
 }
 
@@ -885,7 +930,10 @@ func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResou
 		input = &DescribeStackResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackResourcesOutput{})
+	output := &DescribeStackResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackResourcesRequest{Request: req, Input: input}
 }
 
@@ -931,7 +979,10 @@ func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) D
 		input = &DescribeStackSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackSetOutput{})
+	output := &DescribeStackSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackSetRequest{Request: req, Input: input}
 }
 
@@ -977,7 +1028,10 @@ func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSe
 		input = &DescribeStackSetOperationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackSetOperationOutput{})
+	output := &DescribeStackSetOperationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStackSetOperationRequest{Request: req, Input: input}
 }
 
@@ -1032,7 +1086,10 @@ func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) Descr
 		input = &DescribeStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	output := &DescribeStacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStacksRequest{Request: req, Input: input}
 }
 
@@ -1130,7 +1187,10 @@ func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCost
 		input = &EstimateTemplateCostInput{}
 	}
 
-	req := c.newRequest(op, input, &EstimateTemplateCostOutput{})
+	output := &EstimateTemplateCostOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EstimateTemplateCostRequest{Request: req, Input: input}
 }
 
@@ -1187,7 +1247,10 @@ func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) E
 		input = &ExecuteChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &ExecuteChangeSetOutput{})
+	output := &ExecuteChangeSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExecuteChangeSetRequest{Request: req, Input: input}
 }
 
@@ -1234,7 +1297,10 @@ func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) GetSt
 		input = &GetStackPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStackPolicyOutput{})
+	output := &GetStackPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetStackPolicyRequest{Request: req, Input: input}
 }
 
@@ -1286,7 +1352,10 @@ func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) GetTemplate
 		input = &GetTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTemplateOutput{})
+	output := &GetTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTemplateRequest{Request: req, Input: input}
 }
 
@@ -1343,7 +1412,10 @@ func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInpu
 		input = &GetTemplateSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTemplateSummaryOutput{})
+	output := &GetTemplateSummaryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTemplateSummaryRequest{Request: req, Input: input}
 }
 
@@ -1391,7 +1463,10 @@ func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) ListC
 		input = &ListChangeSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListChangeSetsOutput{})
+	output := &ListChangeSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListChangeSetsRequest{Request: req, Input: input}
 }
 
@@ -1449,7 +1524,10 @@ func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) ListExports
 		input = &ListExportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListExportsOutput{})
+	output := &ListExportsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListExportsRequest{Request: req, Input: input}
 }
 
@@ -1557,7 +1635,10 @@ func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) ListImports
 		input = &ListImportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListImportsOutput{})
+	output := &ListImportsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListImportsRequest{Request: req, Input: input}
 }
 
@@ -1655,7 +1736,10 @@ func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInpu
 		input = &ListStackInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackInstancesOutput{})
+	output := &ListStackInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStackInstancesRequest{Request: req, Input: input}
 }
 
@@ -1710,7 +1794,10 @@ func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInpu
 		input = &ListStackResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackResourcesOutput{})
+	output := &ListStackResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStackResourcesRequest{Request: req, Input: input}
 }
 
@@ -1806,7 +1893,10 @@ func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSet
 		input = &ListStackSetOperationResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackSetOperationResultsOutput{})
+	output := &ListStackSetOperationResultsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStackSetOperationResultsRequest{Request: req, Input: input}
 }
 
@@ -1852,7 +1942,10 @@ func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperat
 		input = &ListStackSetOperationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackSetOperationsOutput{})
+	output := &ListStackSetOperationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStackSetOperationsRequest{Request: req, Input: input}
 }
 
@@ -1899,7 +1992,10 @@ func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) ListSta
 		input = &ListStackSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackSetsOutput{})
+	output := &ListStackSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStackSetsRequest{Request: req, Input: input}
 }
 
@@ -1955,7 +2051,10 @@ func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) ListStacksReq
 		input = &ListStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStacksOutput{})
+	output := &ListStacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListStacksRequest{Request: req, Input: input}
 }
 
@@ -2051,9 +2150,12 @@ func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) SetSt
 		input = &SetStackPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetStackPolicyOutput{})
+	output := &SetStackPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SetStackPolicyRequest{Request: req, Input: input}
 }
 
@@ -2104,9 +2206,12 @@ func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) Signa
 		input = &SignalResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &SignalResourceOutput{})
+	output := &SignalResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return SignalResourceRequest{Request: req, Input: input}
 }
 
@@ -2152,7 +2257,10 @@ func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperati
 		input = &StopStackSetOperationInput{}
 	}
 
-	req := c.newRequest(op, input, &StopStackSetOperationOutput{})
+	output := &StopStackSetOperationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopStackSetOperationRequest{Request: req, Input: input}
 }
 
@@ -2206,7 +2314,10 @@ func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) UpdateStack
 		input = &UpdateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStackOutput{})
+	output := &UpdateStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateStackRequest{Request: req, Input: input}
 }
 
@@ -2257,7 +2368,10 @@ func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) Updat
 		input = &UpdateStackSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStackSetOutput{})
+	output := &UpdateStackSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateStackSetRequest{Request: req, Input: input}
 }
 
@@ -2311,7 +2425,10 @@ func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTermina
 		input = &UpdateTerminationProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTerminationProtectionOutput{})
+	output := &UpdateTerminationProtectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTerminationProtectionRequest{Request: req, Input: input}
 }
 
@@ -2360,7 +2477,10 @@ func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) V
 		input = &ValidateTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &ValidateTemplateOutput{})
+	output := &ValidateTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ValidateTemplateRequest{Request: req, Input: input}
 }
 
@@ -2530,6 +2650,8 @@ func (s *CancelUpdateStackInput) SetStackName(v string) *CancelUpdateStackInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStackOutput
 type CancelUpdateStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2540,6 +2662,11 @@ func (s CancelUpdateStackOutput) String() string {
 // GoString returns the string representation
 func (s CancelUpdateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelUpdateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Change structure describes the changes AWS CloudFormation will perform
@@ -2815,6 +2942,8 @@ func (s *ContinueUpdateRollbackInput) SetStackName(v string) *ContinueUpdateRoll
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackOutput
 type ContinueUpdateRollbackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2825,6 +2954,11 @@ func (s ContinueUpdateRollbackOutput) String() string {
 // GoString returns the string representation
 func (s ContinueUpdateRollbackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ContinueUpdateRollbackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the CreateChangeSet action.
@@ -3119,6 +3253,8 @@ func (s *CreateChangeSetInput) SetUsePreviousTemplate(v bool) *CreateChangeSetIn
 type CreateChangeSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Amazon Resource Name (ARN) of the change set.
 	Id *string `min:"1" type:"string"`
 
@@ -3134,6 +3270,11 @@ func (s CreateChangeSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateChangeSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateChangeSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetId sets the Id field's value.
@@ -3587,6 +3728,8 @@ func (s *CreateStackInstancesInput) SetStackSetName(v string) *CreateStackInstan
 type CreateStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for this stack set operation.
 	OperationId *string `min:"1" type:"string"`
 }
@@ -3601,6 +3744,11 @@ func (s CreateStackInstancesOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStackInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetOperationId sets the OperationId field's value.
 func (s *CreateStackInstancesOutput) SetOperationId(v string) *CreateStackInstancesOutput {
 	s.OperationId = &v
@@ -3611,6 +3759,8 @@ func (s *CreateStackInstancesOutput) SetOperationId(v string) *CreateStackInstan
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackOutput
 type CreateStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// Unique identifier of the stack.
 	StackId *string `type:"string"`
@@ -3624,6 +3774,11 @@ func (s CreateStackOutput) String() string {
 // GoString returns the string representation
 func (s CreateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackId sets the StackId field's value.
@@ -3822,6 +3977,8 @@ func (s *CreateStackSetInput) SetTemplateURL(v string) *CreateStackSetInput {
 type CreateStackSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID of the stack set that you're creating.
 	StackSetId *string `type:"string"`
 }
@@ -3834,6 +3991,11 @@ func (s CreateStackSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateStackSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStackSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackSetId sets the StackSetId field's value.
@@ -3904,6 +4066,8 @@ func (s *DeleteChangeSetInput) SetStackName(v string) *DeleteChangeSetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSetOutput
 type DeleteChangeSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3914,6 +4078,11 @@ func (s DeleteChangeSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteChangeSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteChangeSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for DeleteStack action.
@@ -4145,6 +4314,8 @@ func (s *DeleteStackInstancesInput) SetStackSetName(v string) *DeleteStackInstan
 type DeleteStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for this stack set operation.
 	OperationId *string `min:"1" type:"string"`
 }
@@ -4159,6 +4330,11 @@ func (s DeleteStackInstancesOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStackInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetOperationId sets the OperationId field's value.
 func (s *DeleteStackInstancesOutput) SetOperationId(v string) *DeleteStackInstancesOutput {
 	s.OperationId = &v
@@ -4168,6 +4344,8 @@ func (s *DeleteStackInstancesOutput) SetOperationId(v string) *DeleteStackInstan
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackOutput
 type DeleteStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4178,6 +4356,11 @@ func (s DeleteStackOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetInput
@@ -4224,6 +4407,8 @@ func (s *DeleteStackSetInput) SetStackSetName(v string) *DeleteStackSetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput
 type DeleteStackSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4234,6 +4419,11 @@ func (s DeleteStackSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStackSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStackSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the DescribeAccountLimits action.
@@ -4279,6 +4469,8 @@ func (s *DescribeAccountLimitsInput) SetNextToken(v string) *DescribeAccountLimi
 type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An account limit structure that contain a list of AWS CloudFormation account
 	// limits and their values.
 	AccountLimits []AccountLimit `type:"list"`
@@ -4296,6 +4488,11 @@ func (s DescribeAccountLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountLimits sets the AccountLimits field's value.
@@ -4386,6 +4583,8 @@ func (s *DescribeChangeSetInput) SetStackName(v string) *DescribeChangeSetInput 
 type DescribeChangeSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you execute the change set, the list of capabilities that were explicitly
 	// acknowledged when the change set was created.
 	Capabilities []Capability `type:"list"`
@@ -4458,6 +4657,11 @@ func (s DescribeChangeSetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeChangeSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeChangeSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCapabilities sets the Capabilities field's value.
@@ -4616,6 +4820,8 @@ func (s *DescribeStackEventsInput) SetStackName(v string) *DescribeStackEventsIn
 type DescribeStackEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output exceeds 1 MB in size, a string that identifies the next page
 	// of events. If no additional page exists, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -4632,6 +4838,11 @@ func (s DescribeStackEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4721,6 +4932,8 @@ func (s *DescribeStackInstanceInput) SetStackSetName(v string) *DescribeStackIns
 type DescribeStackInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The stack instance that matches the specified request parameters.
 	StackInstance *StackInstance `type:"structure"`
 }
@@ -4733,6 +4946,11 @@ func (s DescribeStackInstanceOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackInstance sets the StackInstance field's value.
@@ -4812,6 +5030,8 @@ func (s *DescribeStackResourceInput) SetStackName(v string) *DescribeStackResour
 type DescribeStackResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A StackResourceDetail structure containing the description of the specified
 	// resource in the specified stack.
 	StackResourceDetail *StackResourceDetail `type:"structure"`
@@ -4825,6 +5045,11 @@ func (s DescribeStackResourceOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackResourceDetail sets the StackResourceDetail field's value.
@@ -4905,6 +5130,8 @@ func (s *DescribeStackResourcesInput) SetStackName(v string) *DescribeStackResou
 type DescribeStackResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of StackResource structures.
 	StackResources []StackResource `type:"list"`
 }
@@ -4917,6 +5144,11 @@ func (s DescribeStackResourcesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackResources sets the StackResources field's value.
@@ -5027,6 +5259,8 @@ func (s *DescribeStackSetOperationInput) SetStackSetName(v string) *DescribeStac
 type DescribeStackSetOperationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The specified stack set operation.
 	StackSetOperation *StackSetOperation `type:"structure"`
 }
@@ -5041,6 +5275,11 @@ func (s DescribeStackSetOperationOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackSetOperationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetStackSetOperation sets the StackSetOperation field's value.
 func (s *DescribeStackSetOperationOutput) SetStackSetOperation(v *StackSetOperation) *DescribeStackSetOperationOutput {
 	s.StackSetOperation = v
@@ -5050,6 +5289,8 @@ func (s *DescribeStackSetOperationOutput) SetStackSetOperation(v *StackSetOperat
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOutput
 type DescribeStackSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 
 	// The specified stack set.
 	StackSet *StackSet `type:"structure"`
@@ -5063,6 +5304,11 @@ func (s DescribeStackSetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStackSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackSet sets the StackSet field's value.
@@ -5131,6 +5377,8 @@ func (s *DescribeStacksInput) SetStackName(v string) *DescribeStacksInput {
 type DescribeStacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output exceeds 1 MB in size, a string that identifies the next page
 	// of stacks. If no additional page exists, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -5147,6 +5395,11 @@ func (s DescribeStacksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5237,6 +5490,8 @@ func (s *EstimateTemplateCostInput) SetTemplateURL(v string) *EstimateTemplateCo
 type EstimateTemplateCostOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An AWS Simple Monthly Calculator URL with a query string that describes the
 	// resources required to run the template.
 	Url *string `type:"string"`
@@ -5250,6 +5505,11 @@ func (s EstimateTemplateCostOutput) String() string {
 // GoString returns the string representation
 func (s EstimateTemplateCostOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EstimateTemplateCostOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUrl sets the Url field's value.
@@ -5336,6 +5596,8 @@ func (s *ExecuteChangeSetInput) SetStackName(v string) *ExecuteChangeSetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetOutput
 type ExecuteChangeSetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5346,6 +5608,11 @@ func (s ExecuteChangeSetOutput) String() string {
 // GoString returns the string representation
 func (s ExecuteChangeSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExecuteChangeSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Export structure describes the exported output values for a stack.
@@ -5441,6 +5708,8 @@ func (s *GetStackPolicyInput) SetStackName(v string) *GetStackPolicyInput {
 type GetStackPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Structure containing the stack policy body. (For more information, go to
 	//  Prevent Updates to Stack Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
 	// in the AWS CloudFormation User Guide.)
@@ -5455,6 +5724,11 @@ func (s GetStackPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetStackPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStackPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackPolicyBody sets the StackPolicyBody field's value.
@@ -5540,6 +5814,8 @@ func (s *GetTemplateInput) SetTemplateStage(v TemplateStage) *GetTemplateInput {
 type GetTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The stage of the template that you can retrieve. For stacks, the Original
 	// and Processed templates are always available. For change sets, the Original
 	// template is always available. After AWS CloudFormation finishes creating
@@ -5563,6 +5839,11 @@ func (s GetTemplateOutput) String() string {
 // GoString returns the string representation
 func (s GetTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStagesAvailable sets the StagesAvailable field's value.
@@ -5677,6 +5958,8 @@ func (s *GetTemplateSummaryInput) SetTemplateURL(v string) *GetTemplateSummaryIn
 type GetTemplateSummaryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value
 	// for this parameter when you use the CreateStack or UpdateStack actions with
@@ -5721,6 +6004,11 @@ func (s GetTemplateSummaryOutput) String() string {
 // GoString returns the string representation
 func (s GetTemplateSummaryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTemplateSummaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCapabilities sets the Capabilities field's value.
@@ -5834,6 +6122,8 @@ func (s *ListChangeSetsInput) SetStackName(v string) *ListChangeSetsInput {
 type ListChangeSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output exceeds 1 MB, a string that identifies the next page of change
 	// sets. If there is no additional page, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -5851,6 +6141,11 @@ func (s ListChangeSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListChangeSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListChangeSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5907,6 +6202,8 @@ func (s *ListExportsInput) SetNextToken(v string) *ListExportsInput {
 type ListExportsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The output for the ListExports action.
 	Exports []Export `type:"list"`
 
@@ -5923,6 +6220,11 @@ func (s ListExportsOutput) String() string {
 // GoString returns the string representation
 func (s ListExportsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListExportsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExports sets the Exports field's value.
@@ -5995,6 +6297,8 @@ func (s *ListImportsInput) SetNextToken(v string) *ListImportsInput {
 type ListImportsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of stack names that are importing the specified exported output value.
 	Imports []string `type:"list"`
 
@@ -6011,6 +6315,11 @@ func (s ListImportsOutput) String() string {
 // GoString returns the string representation
 func (s ListImportsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListImportsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImports sets the Imports field's value.
@@ -6119,6 +6428,8 @@ func (s *ListStackInstancesInput) SetStackSetName(v string) *ListStackInstancesI
 type ListStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the request doesn't return all of the remaining results, NextToken is
 	// set to a token. To retrieve the next set of results, call ListStackInstances
 	// again and assign that token to the request object's NextToken parameter.
@@ -6138,6 +6449,11 @@ func (s ListStackInstancesOutput) String() string {
 // GoString returns the string representation
 func (s ListStackInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStackInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6219,6 +6535,8 @@ func (s *ListStackResourcesInput) SetStackName(v string) *ListStackResourcesInpu
 type ListStackResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output exceeds 1 MB, a string that identifies the next page of stack
 	// resources. If no additional page exists, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -6235,6 +6553,11 @@ func (s ListStackResourcesOutput) String() string {
 // GoString returns the string representation
 func (s ListStackResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStackResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6343,6 +6666,8 @@ func (s *ListStackSetOperationResultsInput) SetStackSetName(v string) *ListStack
 type ListStackSetOperationResultsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the request doesn't return all results, NextToken is set to a token. To
 	// retrieve the next set of results, call ListOperationResults again and assign
 	// that token to the request object's NextToken parameter. If there are no remaining
@@ -6363,6 +6688,11 @@ func (s ListStackSetOperationResultsOutput) String() string {
 // GoString returns the string representation
 func (s ListStackSetOperationResultsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStackSetOperationResultsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6453,6 +6783,8 @@ func (s *ListStackSetOperationsInput) SetStackSetName(v string) *ListStackSetOpe
 type ListStackSetOperationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the request doesn't return all results, NextToken is set to a token. To
 	// retrieve the next set of results, call ListOperationResults again and assign
 	// that token to the request object's NextToken parameter. If there are no remaining
@@ -6472,6 +6804,11 @@ func (s ListStackSetOperationsOutput) String() string {
 // GoString returns the string representation
 func (s ListStackSetOperationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStackSetOperationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6555,6 +6892,8 @@ func (s *ListStackSetsInput) SetStatus(v StackSetStatus) *ListStackSetsInput {
 type ListStackSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the request doesn't return all of the remaining results, NextToken is
 	// set to a token. To retrieve the next set of results, call ListStackInstances
 	// again and assign that token to the request object's NextToken parameter.
@@ -6574,6 +6913,11 @@ func (s ListStackSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListStackSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStackSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -6642,6 +6986,8 @@ func (s *ListStacksInput) SetStackStatusFilter(v []StackStatus) *ListStacksInput
 type ListStacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If the output exceeds 1 MB in size, a string that identifies the next page
 	// of stacks. If no additional page exists, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -6659,6 +7005,11 @@ func (s ListStacksOutput) String() string {
 // GoString returns the string representation
 func (s ListStacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -7357,6 +7708,8 @@ func (s *SetStackPolicyInput) SetStackPolicyURL(v string) *SetStackPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicyOutput
 type SetStackPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7367,6 +7720,11 @@ func (s SetStackPolicyOutput) String() string {
 // GoString returns the string representation
 func (s SetStackPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetStackPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The input for the SignalResource action.
@@ -7469,6 +7827,8 @@ func (s *SignalResourceInput) SetUniqueId(v string) *SignalResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResourceOutput
 type SignalResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7479,6 +7839,11 @@ func (s SignalResourceOutput) String() string {
 // GoString returns the string representation
 func (s SignalResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SignalResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Stack data type.
@@ -9086,6 +9451,8 @@ func (s *StopStackSetOperationInput) SetStackSetName(v string) *StopStackSetOper
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationOutput
 type StopStackSetOperationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -9096,6 +9463,11 @@ func (s StopStackSetOperationOutput) String() string {
 // GoString returns the string representation
 func (s StopStackSetOperationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopStackSetOperationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Tag type enables you to specify a key-value pair that can be used to
@@ -9541,6 +9913,8 @@ func (s *UpdateStackInput) SetUsePreviousTemplate(v bool) *UpdateStackInput {
 type UpdateStackOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Unique identifier of the stack.
 	StackId *string `type:"string"`
 }
@@ -9553,6 +9927,11 @@ func (s UpdateStackOutput) String() string {
 // GoString returns the string representation
 func (s UpdateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackId sets the StackId field's value.
@@ -9795,6 +10174,8 @@ func (s *UpdateStackSetInput) SetUsePreviousTemplate(v bool) *UpdateStackSetInpu
 type UpdateStackSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID for this stack set operation.
 	OperationId *string `min:"1" type:"string"`
 }
@@ -9807,6 +10188,11 @@ func (s UpdateStackSetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateStackSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateStackSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -9878,6 +10264,8 @@ func (s *UpdateTerminationProtectionInput) SetStackName(v string) *UpdateTermina
 type UpdateTerminationProtectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique ID of the stack.
 	StackId *string `type:"string"`
 }
@@ -9890,6 +10278,11 @@ func (s UpdateTerminationProtectionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTerminationProtectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTerminationProtectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStackId sets the StackId field's value.
@@ -9965,6 +10358,8 @@ func (s *ValidateTemplateInput) SetTemplateURL(v string) *ValidateTemplateInput 
 type ValidateTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value
 	// for this parameter when you use the CreateStack or UpdateStack actions with
@@ -9997,6 +10392,11 @@ func (s ValidateTemplateOutput) String() string {
 // GoString returns the string representation
 func (s ValidateTemplateOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ValidateTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCapabilities sets the Capabilities field's value.

@@ -73,7 +73,10 @@ func (c *WAF) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) CreateBy
 		input = &CreateByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateByteMatchSetOutput{})
+	output := &CreateByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -140,7 +143,10 @@ func (c *WAF) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest {
 		input = &CreateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIPSetOutput{})
+	output := &CreateIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateIPSetRequest{Request: req, Input: input}
 }
 
@@ -246,7 +252,10 @@ func (c *WAF) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) Create
 		input = &CreateRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRateBasedRuleOutput{})
+	output := &CreateRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -327,7 +336,10 @@ func (c *WAF) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 		input = &CreateRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRuleOutput{})
+	output := &CreateRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateRuleRequest{Request: req, Input: input}
 }
 
@@ -395,7 +407,10 @@ func (c *WAF) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetInput
 		input = &CreateSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSizeConstraintSetOutput{})
+	output := &CreateSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -459,7 +474,10 @@ func (c *WAF) CreateSqlInjectionMatchSetRequest(input *CreateSqlInjectionMatchSe
 		input = &CreateSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSqlInjectionMatchSetOutput{})
+	output := &CreateSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -535,7 +553,10 @@ func (c *WAF) CreateWebACLRequest(input *CreateWebACLInput) CreateWebACLRequest 
 		input = &CreateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWebACLOutput{})
+	output := &CreateWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateWebACLRequest{Request: req, Input: input}
 }
 
@@ -600,7 +621,10 @@ func (c *WAF) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) CreateXssM
 		input = &CreateXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateXssMatchSetOutput{})
+	output := &CreateXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -660,7 +684,10 @@ func (c *WAF) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) DeleteBy
 		input = &DeleteByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteByteMatchSetOutput{})
+	output := &DeleteByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -719,7 +746,10 @@ func (c *WAF) DeleteIPSetRequest(input *DeleteIPSetInput) DeleteIPSetRequest {
 		input = &DeleteIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIPSetOutput{})
+	output := &DeleteIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteIPSetRequest{Request: req, Input: input}
 }
 
@@ -780,7 +810,10 @@ func (c *WAF) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) Delete
 		input = &DeleteRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRateBasedRuleOutput{})
+	output := &DeleteRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -839,7 +872,10 @@ func (c *WAF) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 		input = &DeleteRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRuleOutput{})
+	output := &DeleteRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteRuleRequest{Request: req, Input: input}
 }
 
@@ -899,7 +935,10 @@ func (c *WAF) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetInput
 		input = &DeleteSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSizeConstraintSetOutput{})
+	output := &DeleteSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -960,7 +999,10 @@ func (c *WAF) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatchSe
 		input = &DeleteSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSqlInjectionMatchSetOutput{})
+	output := &DeleteSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1016,7 +1058,10 @@ func (c *WAF) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLRequest 
 		input = &DeleteWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWebACLOutput{})
+	output := &DeleteWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteWebACLRequest{Request: req, Input: input}
 }
 
@@ -1076,7 +1121,10 @@ func (c *WAF) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) DeleteXssM
 		input = &DeleteXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteXssMatchSetOutput{})
+	output := &DeleteXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1122,7 +1170,10 @@ func (c *WAF) GetByteMatchSetRequest(input *GetByteMatchSetInput) GetByteMatchSe
 		input = &GetByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetByteMatchSetOutput{})
+	output := &GetByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1182,7 +1233,10 @@ func (c *WAF) GetChangeTokenRequest(input *GetChangeTokenInput) GetChangeTokenRe
 		input = &GetChangeTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &GetChangeTokenOutput{})
+	output := &GetChangeTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetChangeTokenRequest{Request: req, Input: input}
 }
 
@@ -1238,7 +1292,10 @@ func (c *WAF) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) GetC
 		input = &GetChangeTokenStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetChangeTokenStatusOutput{})
+	output := &GetChangeTokenStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetChangeTokenStatusRequest{Request: req, Input: input}
 }
 
@@ -1284,7 +1341,10 @@ func (c *WAF) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 		input = &GetIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIPSetOutput{})
+	output := &GetIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetIPSetRequest{Request: req, Input: input}
 }
 
@@ -1331,7 +1391,10 @@ func (c *WAF) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) GetRateBased
 		input = &GetRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRateBasedRuleOutput{})
+	output := &GetRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -1380,7 +1443,10 @@ func (c *WAF) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManagedK
 		input = &GetRateBasedRuleManagedKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRateBasedRuleManagedKeysOutput{})
+	output := &GetRateBasedRuleManagedKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRateBasedRuleManagedKeysRequest{Request: req, Input: input}
 }
 
@@ -1427,7 +1493,10 @@ func (c *WAF) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
 		input = &GetRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRuleOutput{})
+	output := &GetRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetRuleRequest{Request: req, Input: input}
 }
 
@@ -1483,7 +1552,10 @@ func (c *WAF) GetSampledRequestsRequest(input *GetSampledRequestsInput) GetSampl
 		input = &GetSampledRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSampledRequestsOutput{})
+	output := &GetSampledRequestsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSampledRequestsRequest{Request: req, Input: input}
 }
 
@@ -1529,7 +1601,10 @@ func (c *WAF) GetSizeConstraintSetRequest(input *GetSizeConstraintSetInput) GetS
 		input = &GetSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSizeConstraintSetOutput{})
+	output := &GetSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -1575,7 +1650,10 @@ func (c *WAF) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetInput
 		input = &GetSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSqlInjectionMatchSetOutput{})
+	output := &GetSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1621,7 +1699,10 @@ func (c *WAF) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
 		input = &GetWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWebACLOutput{})
+	output := &GetWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetWebACLRequest{Request: req, Input: input}
 }
 
@@ -1667,7 +1748,10 @@ func (c *WAF) GetXssMatchSetRequest(input *GetXssMatchSetInput) GetXssMatchSetRe
 		input = &GetXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetXssMatchSetOutput{})
+	output := &GetXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -1713,7 +1797,10 @@ func (c *WAF) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) ListByteMa
 		input = &ListByteMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListByteMatchSetsOutput{})
+	output := &ListByteMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListByteMatchSetsRequest{Request: req, Input: input}
 }
 
@@ -1759,7 +1846,10 @@ func (c *WAF) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 		input = &ListIPSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIPSetsOutput{})
+	output := &ListIPSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIPSetsRequest{Request: req, Input: input}
 }
 
@@ -1805,7 +1895,10 @@ func (c *WAF) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) ListRate
 		input = &ListRateBasedRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRateBasedRulesOutput{})
+	output := &ListRateBasedRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRateBasedRulesRequest{Request: req, Input: input}
 }
 
@@ -1851,7 +1944,10 @@ func (c *WAF) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 		input = &ListRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRulesOutput{})
+	output := &ListRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRulesRequest{Request: req, Input: input}
 }
 
@@ -1897,7 +1993,10 @@ func (c *WAF) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInput) 
 		input = &ListSizeConstraintSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSizeConstraintSetsOutput{})
+	output := &ListSizeConstraintSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSizeConstraintSetsRequest{Request: req, Input: input}
 }
 
@@ -1943,7 +2042,10 @@ func (c *WAF) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSetsI
 		input = &ListSqlInjectionMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSqlInjectionMatchSetsOutput{})
+	output := &ListSqlInjectionMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSqlInjectionMatchSetsRequest{Request: req, Input: input}
 }
 
@@ -1989,7 +2091,10 @@ func (c *WAF) ListWebACLsRequest(input *ListWebACLsInput) ListWebACLsRequest {
 		input = &ListWebACLsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWebACLsOutput{})
+	output := &ListWebACLsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListWebACLsRequest{Request: req, Input: input}
 }
 
@@ -2035,7 +2140,10 @@ func (c *WAF) ListXssMatchSetsRequest(input *ListXssMatchSetsInput) ListXssMatch
 		input = &ListXssMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListXssMatchSetsOutput{})
+	output := &ListXssMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListXssMatchSetsRequest{Request: req, Input: input}
 }
 
@@ -2117,7 +2225,10 @@ func (c *WAF) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) UpdateBy
 		input = &UpdateByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateByteMatchSetOutput{})
+	output := &UpdateByteMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateByteMatchSetRequest{Request: req, Input: input}
 }
 
@@ -2211,7 +2322,10 @@ func (c *WAF) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest {
 		input = &UpdateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIPSetOutput{})
+	output := &UpdateIPSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateIPSetRequest{Request: req, Input: input}
 }
 
@@ -2294,7 +2408,10 @@ func (c *WAF) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) Update
 		input = &UpdateRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRateBasedRuleOutput{})
+	output := &UpdateRateBasedRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRateBasedRuleRequest{Request: req, Input: input}
 }
 
@@ -2372,7 +2489,10 @@ func (c *WAF) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
 		input = &UpdateRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRuleOutput{})
+	output := &UpdateRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRuleRequest{Request: req, Input: input}
 }
 
@@ -2456,7 +2576,10 @@ func (c *WAF) UpdateSizeConstraintSetRequest(input *UpdateSizeConstraintSetInput
 		input = &UpdateSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSizeConstraintSetOutput{})
+	output := &UpdateSizeConstraintSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSizeConstraintSetRequest{Request: req, Input: input}
 }
 
@@ -2533,7 +2656,10 @@ func (c *WAF) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatchSe
 		input = &UpdateSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSqlInjectionMatchSetOutput{})
+	output := &UpdateSqlInjectionMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSqlInjectionMatchSetRequest{Request: req, Input: input}
 }
 
@@ -2626,7 +2752,10 @@ func (c *WAF) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLRequest 
 		input = &UpdateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateWebACLOutput{})
+	output := &UpdateWebACLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateWebACLRequest{Request: req, Input: input}
 }
 
@@ -2703,7 +2832,10 @@ func (c *WAF) UpdateXssMatchSetRequest(input *UpdateXssMatchSetInput) UpdateXssM
 		input = &UpdateXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateXssMatchSetOutput{})
+	output := &UpdateXssMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateXssMatchSetRequest{Request: req, Input: input}
 }
 
@@ -3310,6 +3442,8 @@ func (s *CreateByteMatchSetInput) SetName(v string) *CreateByteMatchSetInput {
 type CreateByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A ByteMatchSet that contains no ByteMatchTuple objects.
 	ByteMatchSet *ByteMatchSet `type:"structure"`
 
@@ -3327,6 +3461,11 @@ func (s CreateByteMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateByteMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetByteMatchSet sets the ByteMatchSet field's value.
@@ -3407,6 +3546,8 @@ func (s *CreateIPSetInput) SetName(v string) *CreateIPSetInput {
 type CreateIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateIPSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -3424,6 +3565,11 @@ func (s CreateIPSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateIPSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -3563,6 +3709,8 @@ func (s *CreateRateBasedRuleInput) SetRateLimit(v int64) *CreateRateBasedRuleInp
 type CreateRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateRateBasedRule request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -3580,6 +3728,11 @@ func (s CreateRateBasedRuleOutput) String() string {
 // GoString returns the string representation
 func (s CreateRateBasedRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -3678,6 +3831,8 @@ func (s *CreateRuleInput) SetName(v string) *CreateRuleInput {
 type CreateRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateRule request. You can also
 	// use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -3695,6 +3850,11 @@ func (s CreateRuleOutput) String() string {
 // GoString returns the string representation
 func (s CreateRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -3775,6 +3935,8 @@ func (s *CreateSizeConstraintSetInput) SetName(v string) *CreateSizeConstraintSe
 type CreateSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateSizeConstraintSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -3792,6 +3954,11 @@ func (s CreateSizeConstraintSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateSizeConstraintSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -3874,6 +4041,8 @@ func (s *CreateSqlInjectionMatchSetInput) SetName(v string) *CreateSqlInjectionM
 type CreateSqlInjectionMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateSqlInjectionMatchSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -3891,6 +4060,11 @@ func (s CreateSqlInjectionMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateSqlInjectionMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4010,6 +4184,8 @@ func (s *CreateWebACLInput) SetName(v string) *CreateWebACLInput {
 type CreateWebACLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateWebACL request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4027,6 +4203,11 @@ func (s CreateWebACLOutput) String() string {
 // GoString returns the string representation
 func (s CreateWebACLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4109,6 +4290,8 @@ func (s *CreateXssMatchSetInput) SetName(v string) *CreateXssMatchSetInput {
 type CreateXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the CreateXssMatchSet request. You
 	// can also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4126,6 +4309,11 @@ func (s CreateXssMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s CreateXssMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4206,6 +4394,8 @@ func (s *DeleteByteMatchSetInput) SetChangeToken(v string) *DeleteByteMatchSetIn
 type DeleteByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You
 	// can also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4220,6 +4410,11 @@ func (s DeleteByteMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteByteMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4294,6 +4489,8 @@ func (s *DeleteIPSetInput) SetIPSetId(v string) *DeleteIPSetInput {
 type DeleteIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteIPSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4308,6 +4505,11 @@ func (s DeleteIPSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteIPSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4382,6 +4584,8 @@ func (s *DeleteRateBasedRuleInput) SetRuleId(v string) *DeleteRateBasedRuleInput
 type DeleteRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteRateBasedRule request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -4396,6 +4600,11 @@ func (s DeleteRateBasedRuleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRateBasedRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4470,6 +4679,8 @@ func (s *DeleteRuleInput) SetRuleId(v string) *DeleteRuleInput {
 type DeleteRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteRule request. You can also
 	// use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4484,6 +4695,11 @@ func (s DeleteRuleOutput) String() string {
 // GoString returns the string representation
 func (s DeleteRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4558,6 +4774,8 @@ func (s *DeleteSizeConstraintSetInput) SetSizeConstraintSetId(v string) *DeleteS
 type DeleteSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -4572,6 +4790,11 @@ func (s DeleteSizeConstraintSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSizeConstraintSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4648,6 +4871,8 @@ func (s *DeleteSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *D
 type DeleteSqlInjectionMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteSqlInjectionMatchSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -4662,6 +4887,11 @@ func (s DeleteSqlInjectionMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSqlInjectionMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4736,6 +4966,8 @@ func (s *DeleteWebACLInput) SetWebACLId(v string) *DeleteWebACLInput {
 type DeleteWebACLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteWebACL request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4750,6 +4982,11 @@ func (s DeleteWebACLOutput) String() string {
 // GoString returns the string representation
 func (s DeleteWebACLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4826,6 +5063,8 @@ func (s *DeleteXssMatchSetInput) SetXssMatchSetId(v string) *DeleteXssMatchSetIn
 type DeleteXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the DeleteXssMatchSet request. You
 	// can also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -4840,6 +5079,11 @@ func (s DeleteXssMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteXssMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -4972,6 +5216,8 @@ func (s *GetByteMatchSetInput) SetByteMatchSetId(v string) *GetByteMatchSetInput
 type GetByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the ByteMatchSet that you specified in the GetByteMatchSet
 	// request. For more information, see the following topics:
 	//
@@ -4993,6 +5239,11 @@ func (s GetByteMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s GetByteMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetByteMatchSet sets the ByteMatchSet field's value.
@@ -5020,6 +5271,8 @@ func (s GetChangeTokenInput) GoString() string {
 type GetChangeTokenOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used in the request. Use this value in a GetChangeTokenStatus
 	// request to get the current status of the request.
 	ChangeToken *string `min:"1" type:"string"`
@@ -5033,6 +5286,11 @@ func (s GetChangeTokenOutput) String() string {
 // GoString returns the string representation
 func (s GetChangeTokenOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetChangeTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -5089,6 +5347,8 @@ func (s *GetChangeTokenStatusInput) SetChangeToken(v string) *GetChangeTokenStat
 type GetChangeTokenStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the change token.
 	ChangeTokenStatus ChangeTokenStatus `type:"string" enum:"true"`
 }
@@ -5101,6 +5361,11 @@ func (s GetChangeTokenStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetChangeTokenStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetChangeTokenStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeTokenStatus sets the ChangeTokenStatus field's value.
@@ -5157,6 +5422,8 @@ func (s *GetIPSetInput) SetIPSetId(v string) *GetIPSetInput {
 type GetIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the IPSet that you specified in the GetIPSet request. For
 	// more information, see the following topics:
 	//
@@ -5175,6 +5442,11 @@ func (s GetIPSetOutput) String() string {
 // GoString returns the string representation
 func (s GetIPSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIPSet sets the IPSet field's value.
@@ -5287,6 +5559,8 @@ func (s *GetRateBasedRuleManagedKeysInput) SetRuleId(v string) *GetRateBasedRule
 type GetRateBasedRuleManagedKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of IP addresses that currently are blocked by the specified RateBasedRule.
 	ManagedKeys []string `type:"list"`
 
@@ -5302,6 +5576,11 @@ func (s GetRateBasedRuleManagedKeysOutput) String() string {
 // GoString returns the string representation
 func (s GetRateBasedRuleManagedKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRateBasedRuleManagedKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetManagedKeys sets the ManagedKeys field's value.
@@ -5320,6 +5599,8 @@ func (s *GetRateBasedRuleManagedKeysOutput) SetNextMarker(v string) *GetRateBase
 type GetRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the RateBasedRule that you specified in the GetRateBasedRule
 	// request.
 	Rule *RateBasedRule `type:"structure"`
@@ -5333,6 +5614,11 @@ func (s GetRateBasedRuleOutput) String() string {
 // GoString returns the string representation
 func (s GetRateBasedRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRule sets the Rule field's value.
@@ -5389,6 +5675,8 @@ func (s *GetRuleInput) SetRuleId(v string) *GetRuleInput {
 type GetRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the Rule that you specified in the GetRule request. For
 	// more information, see the following topics:
 	//
@@ -5407,6 +5695,11 @@ func (s GetRuleOutput) String() string {
 // GoString returns the string representation
 func (s GetRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetRule sets the Rule field's value.
@@ -5531,6 +5824,8 @@ func (s *GetSampledRequestsInput) SetWebAclId(v string) *GetSampledRequestsInput
 type GetSampledRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The total number of requests from which GetSampledRequests got a sample of
 	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
 	// every request that your AWS resource received during the specified time range.
@@ -5555,6 +5850,11 @@ func (s GetSampledRequestsOutput) String() string {
 // GoString returns the string representation
 func (s GetSampledRequestsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSampledRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPopulationSize sets the PopulationSize field's value.
@@ -5623,6 +5923,8 @@ func (s *GetSizeConstraintSetInput) SetSizeConstraintSetId(v string) *GetSizeCon
 type GetSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the SizeConstraintSet that you specified in the GetSizeConstraintSet
 	// request. For more information, see the following topics:
 	//
@@ -5645,6 +5947,11 @@ func (s GetSizeConstraintSetOutput) String() string {
 // GoString returns the string representation
 func (s GetSizeConstraintSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSizeConstraintSet sets the SizeConstraintSet field's value.
@@ -5703,6 +6010,8 @@ func (s *GetSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *GetS
 type GetSqlInjectionMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the SqlInjectionMatchSet that you specified in the GetSqlInjectionMatchSet
 	// request. For more information, see the following topics:
 	//
@@ -5724,6 +6033,11 @@ func (s GetSqlInjectionMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s GetSqlInjectionMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSqlInjectionMatchSet sets the SqlInjectionMatchSet field's value.
@@ -5780,6 +6094,8 @@ func (s *GetWebACLInput) SetWebACLId(v string) *GetWebACLInput {
 type GetWebACLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the WebACL that you specified in the GetWebACL request.
 	// For more information, see the following topics:
 	//
@@ -5803,6 +6119,11 @@ func (s GetWebACLOutput) String() string {
 // GoString returns the string representation
 func (s GetWebACLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetWebACL sets the WebACL field's value.
@@ -5861,6 +6182,8 @@ func (s *GetXssMatchSetInput) SetXssMatchSetId(v string) *GetXssMatchSetInput {
 type GetXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the XssMatchSet that you specified in the GetXssMatchSet
 	// request. For more information, see the following topics:
 	//
@@ -5881,6 +6204,11 @@ func (s GetXssMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s GetXssMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetXssMatchSet sets the XssMatchSet field's value.
@@ -6308,6 +6636,8 @@ func (s *ListByteMatchSetsInput) SetNextMarker(v string) *ListByteMatchSetsInput
 type ListByteMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of ByteMatchSetSummary objects.
 	ByteMatchSets []ByteMatchSetSummary `type:"list"`
 
@@ -6327,6 +6657,11 @@ func (s ListByteMatchSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListByteMatchSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListByteMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetByteMatchSets sets the ByteMatchSets field's value.
@@ -6398,6 +6733,8 @@ func (s *ListIPSetsInput) SetNextMarker(v string) *ListIPSetsInput {
 type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of IPSetSummary objects.
 	IPSets []IPSetSummary `type:"list"`
 
@@ -6416,6 +6753,11 @@ func (s ListIPSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListIPSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIPSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIPSets sets the IPSets field's value.
@@ -6486,6 +6828,8 @@ func (s *ListRateBasedRulesInput) SetNextMarker(v string) *ListRateBasedRulesInp
 type ListRateBasedRulesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you have more Rules than the number that you specified for Limit in the
 	// request, the response includes a NextMarker value. To list more Rules, submit
 	// another ListRateBasedRules request, and specify the NextMarker value from
@@ -6504,6 +6848,11 @@ func (s ListRateBasedRulesOutput) String() string {
 // GoString returns the string representation
 func (s ListRateBasedRulesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRateBasedRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6574,6 +6923,8 @@ func (s *ListRulesInput) SetNextMarker(v string) *ListRulesInput {
 type ListRulesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you have more Rules than the number that you specified for Limit in the
 	// request, the response includes a NextMarker value. To list more Rules, submit
 	// another ListRules request, and specify the NextMarker value from the response
@@ -6592,6 +6943,11 @@ func (s ListRulesOutput) String() string {
 // GoString returns the string representation
 func (s ListRulesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6663,6 +7019,8 @@ func (s *ListSizeConstraintSetsInput) SetNextMarker(v string) *ListSizeConstrain
 type ListSizeConstraintSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you have more SizeConstraintSet objects than the number that you specified
 	// for Limit in the request, the response includes a NextMarker value. To list
 	// more SizeConstraintSet objects, submit another ListSizeConstraintSets request,
@@ -6682,6 +7040,11 @@ func (s ListSizeConstraintSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListSizeConstraintSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSizeConstraintSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6756,6 +7119,8 @@ func (s *ListSqlInjectionMatchSetsInput) SetNextMarker(v string) *ListSqlInjecti
 type ListSqlInjectionMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you have more SqlInjectionMatchSet objects than the number that you specified
 	// for Limit in the request, the response includes a NextMarker value. To list
 	// more SqlInjectionMatchSet objects, submit another ListSqlInjectionMatchSets
@@ -6775,6 +7140,11 @@ func (s ListSqlInjectionMatchSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListSqlInjectionMatchSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSqlInjectionMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6847,6 +7217,8 @@ func (s *ListWebACLsInput) SetNextMarker(v string) *ListWebACLsInput {
 type ListWebACLsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you have more WebACL objects than the number that you specified for Limit
 	// in the request, the response includes a NextMarker value. To list more WebACL
 	// objects, submit another ListWebACLs request, and specify the NextMarker value
@@ -6865,6 +7237,11 @@ func (s ListWebACLsOutput) String() string {
 // GoString returns the string representation
 func (s ListWebACLsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWebACLsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -6938,6 +7315,8 @@ func (s *ListXssMatchSetsInput) SetNextMarker(v string) *ListXssMatchSetsInput {
 type ListXssMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you have more XssMatchSet objects than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more
 	// XssMatchSet objects, submit another ListXssMatchSets request, and specify
@@ -6957,6 +7336,11 @@ func (s ListXssMatchSetsOutput) String() string {
 // GoString returns the string representation
 func (s ListXssMatchSetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListXssMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -8233,6 +8617,8 @@ func (s *UpdateByteMatchSetInput) SetUpdates(v []ByteMatchSetUpdate) *UpdateByte
 type UpdateByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateByteMatchSet request. You
 	// can also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -8247,6 +8633,11 @@ func (s UpdateByteMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateByteMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateByteMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -8348,6 +8739,8 @@ func (s *UpdateIPSetInput) SetUpdates(v []IPSetUpdate) *UpdateIPSetInput {
 type UpdateIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateIPSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -8362,6 +8755,11 @@ func (s UpdateIPSetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateIPSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateIPSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -8481,6 +8879,8 @@ func (s *UpdateRateBasedRuleInput) SetUpdates(v []RuleUpdate) *UpdateRateBasedRu
 type UpdateRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateRateBasedRule request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -8495,6 +8895,11 @@ func (s UpdateRateBasedRuleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRateBasedRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -8598,6 +9003,8 @@ func (s *UpdateRuleInput) SetUpdates(v []RuleUpdate) *UpdateRuleInput {
 type UpdateRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateRule request. You can also
 	// use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -8612,6 +9019,11 @@ func (s UpdateRuleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRuleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -8717,6 +9129,8 @@ func (s *UpdateSizeConstraintSetInput) SetUpdates(v []SizeConstraintSetUpdate) *
 type UpdateSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateSizeConstraintSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -8731,6 +9145,11 @@ func (s UpdateSizeConstraintSetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSizeConstraintSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -8837,6 +9256,8 @@ func (s *UpdateSqlInjectionMatchSetInput) SetUpdates(v []SqlInjectionMatchSetUpd
 type UpdateSqlInjectionMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateSqlInjectionMatchSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus.
@@ -8851,6 +9272,11 @@ func (s UpdateSqlInjectionMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSqlInjectionMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -8966,6 +9392,8 @@ func (s *UpdateWebACLInput) SetWebACLId(v string) *UpdateWebACLInput {
 type UpdateWebACLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateWebACL request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -8980,6 +9408,11 @@ func (s UpdateWebACLOutput) String() string {
 // GoString returns the string representation
 func (s UpdateWebACLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateWebACLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.
@@ -9085,6 +9518,8 @@ func (s *UpdateXssMatchSetInput) SetXssMatchSetId(v string) *UpdateXssMatchSetIn
 type UpdateXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ChangeToken that you used to submit the UpdateXssMatchSet request. You
 	// can also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus.
@@ -9099,6 +9534,11 @@ func (s UpdateXssMatchSetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateXssMatchSetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateXssMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetChangeToken sets the ChangeToken field's value.

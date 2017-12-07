@@ -60,7 +60,10 @@ func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) CancelKeyD
 		input = &CancelKeyDeletionInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelKeyDeletionOutput{})
+	output := &CancelKeyDeletionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelKeyDeletionRequest{Request: req, Input: input}
 }
 
@@ -117,9 +120,12 @@ func (c *KMS) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
 		input = &CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAliasOutput{})
+	output := &CreateAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAliasRequest{Request: req, Input: input}
 }
 
@@ -169,7 +175,10 @@ func (c *KMS) CreateGrantRequest(input *CreateGrantInput) CreateGrantRequest {
 		input = &CreateGrantInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGrantOutput{})
+	output := &CreateGrantOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateGrantRequest{Request: req, Input: input}
 }
 
@@ -225,7 +234,10 @@ func (c *KMS) CreateKeyRequest(input *CreateKeyInput) CreateKeyRequest {
 		input = &CreateKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeyOutput{})
+	output := &CreateKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateKeyRequest{Request: req, Input: input}
 }
 
@@ -287,7 +299,10 @@ func (c *KMS) DecryptRequest(input *DecryptInput) DecryptRequest {
 		input = &DecryptInput{}
 	}
 
-	req := c.newRequest(op, input, &DecryptOutput{})
+	output := &DecryptOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DecryptRequest{Request: req, Input: input}
 }
 
@@ -333,9 +348,12 @@ func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest {
 		input = &DeleteAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAliasOutput{})
+	output := &DeleteAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAliasRequest{Request: req, Input: input}
 }
 
@@ -390,9 +408,12 @@ func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialI
 		input = &DeleteImportedKeyMaterialInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImportedKeyMaterialOutput{})
+	output := &DeleteImportedKeyMaterialOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteImportedKeyMaterialRequest{Request: req, Input: input}
 }
 
@@ -438,7 +459,10 @@ func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) DescribeKeyRequest {
 		input = &DescribeKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeKeyOutput{})
+	output := &DescribeKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeKeyRequest{Request: req, Input: input}
 }
 
@@ -488,9 +512,12 @@ func (c *KMS) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
 		input = &DisableKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableKeyOutput{})
+	output := &DisableKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableKeyRequest{Request: req, Input: input}
 }
 
@@ -536,9 +563,12 @@ func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) DisableK
 		input = &DisableKeyRotationInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableKeyRotationOutput{})
+	output := &DisableKeyRotationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableKeyRotationRequest{Request: req, Input: input}
 }
 
@@ -584,9 +614,12 @@ func (c *KMS) EnableKeyRequest(input *EnableKeyInput) EnableKeyRequest {
 		input = &EnableKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableKeyOutput{})
+	output := &EnableKeyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableKeyRequest{Request: req, Input: input}
 }
 
@@ -632,9 +665,12 @@ func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableKeyR
 		input = &EnableKeyRotationInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableKeyRotationOutput{})
+	output := &EnableKeyRotationOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableKeyRotationRequest{Request: req, Input: input}
 }
 
@@ -699,7 +735,10 @@ func (c *KMS) EncryptRequest(input *EncryptInput) EncryptRequest {
 		input = &EncryptInput{}
 	}
 
-	req := c.newRequest(op, input, &EncryptOutput{})
+	output := &EncryptOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EncryptRequest{Request: req, Input: input}
 }
 
@@ -788,7 +827,10 @@ func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) GenerateDataKe
 		input = &GenerateDataKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateDataKeyOutput{})
+	output := &GenerateDataKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GenerateDataKeyRequest{Request: req, Input: input}
 }
 
@@ -848,7 +890,10 @@ func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWitho
 		input = &GenerateDataKeyWithoutPlaintextInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateDataKeyWithoutPlaintextOutput{})
+	output := &GenerateDataKeyWithoutPlaintextOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GenerateDataKeyWithoutPlaintextRequest{Request: req, Input: input}
 }
 
@@ -898,7 +943,10 @@ func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) GenerateRandomRe
 		input = &GenerateRandomInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateRandomOutput{})
+	output := &GenerateRandomOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GenerateRandomRequest{Request: req, Input: input}
 }
 
@@ -944,7 +992,10 @@ func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyRequest 
 		input = &GetKeyPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyPolicyOutput{})
+	output := &GetKeyPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetKeyPolicyRequest{Request: req, Input: input}
 }
 
@@ -991,7 +1042,10 @@ func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) GetK
 		input = &GetKeyRotationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyRotationStatusOutput{})
+	output := &GetKeyRotationStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetKeyRotationStatusRequest{Request: req, Input: input}
 }
 
@@ -1052,7 +1106,10 @@ func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) 
 		input = &GetParametersForImportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParametersForImportOutput{})
+	output := &GetParametersForImportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetParametersForImportRequest{Request: req, Input: input}
 }
 
@@ -1118,7 +1175,10 @@ func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) ImportKeyM
 		input = &ImportKeyMaterialInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportKeyMaterialOutput{})
+	output := &ImportKeyMaterialOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportKeyMaterialRequest{Request: req, Input: input}
 }
 
@@ -1170,7 +1230,10 @@ func (c *KMS) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 		input = &ListAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAliasesOutput{})
+	output := &ListAliasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAliasesRequest{Request: req, Input: input}
 }
 
@@ -1272,7 +1335,10 @@ func (c *KMS) ListGrantsRequest(input *ListGrantsInput) ListGrantsRequest {
 		input = &ListGrantsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRetirableGrantsOutput{})
+	output := &ListRetirableGrantsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListGrantsRequest{Request: req, Input: input}
 }
 
@@ -1374,7 +1440,10 @@ func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPolicie
 		input = &ListKeyPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListKeyPoliciesOutput{})
+	output := &ListKeyPoliciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListKeyPoliciesRequest{Request: req, Input: input}
 }
 
@@ -1476,7 +1545,10 @@ func (c *KMS) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 		input = &ListKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListKeysOutput{})
+	output := &ListKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListKeysRequest{Request: req, Input: input}
 }
 
@@ -1572,7 +1644,10 @@ func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) ListResource
 		input = &ListResourceTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceTagsOutput{})
+	output := &ListResourceTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListResourceTagsRequest{Request: req, Input: input}
 }
 
@@ -1622,7 +1697,10 @@ func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) ListRe
 		input = &ListRetirableGrantsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRetirableGrantsOutput{})
+	output := &ListRetirableGrantsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListRetirableGrantsRequest{Request: req, Input: input}
 }
 
@@ -1671,9 +1749,12 @@ func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyRequest 
 		input = &PutKeyPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutKeyPolicyOutput{})
+	output := &PutKeyPolicyOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutKeyPolicyRequest{Request: req, Input: input}
 }
 
@@ -1730,7 +1811,10 @@ func (c *KMS) ReEncryptRequest(input *ReEncryptInput) ReEncryptRequest {
 		input = &ReEncryptInput{}
 	}
 
-	req := c.newRequest(op, input, &ReEncryptOutput{})
+	output := &ReEncryptOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ReEncryptRequest{Request: req, Input: input}
 }
 
@@ -1791,9 +1875,12 @@ func (c *KMS) RetireGrantRequest(input *RetireGrantInput) RetireGrantRequest {
 		input = &RetireGrantInput{}
 	}
 
-	req := c.newRequest(op, input, &RetireGrantOutput{})
+	output := &RetireGrantOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RetireGrantRequest{Request: req, Input: input}
 }
 
@@ -1840,9 +1927,12 @@ func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) RevokeGrantRequest {
 		input = &RevokeGrantInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeGrantOutput{})
+	output := &RevokeGrantOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RevokeGrantRequest{Request: req, Input: input}
 }
 
@@ -1903,7 +1993,10 @@ func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) Schedu
 		input = &ScheduleKeyDeletionInput{}
 	}
 
-	req := c.newRequest(op, input, &ScheduleKeyDeletionOutput{})
+	output := &ScheduleKeyDeletionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ScheduleKeyDeletionRequest{Request: req, Input: input}
 }
 
@@ -1959,9 +2052,12 @@ func (c *KMS) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -2012,9 +2108,12 @@ func (c *KMS) UntagResourceRequest(input *UntagResourceInput) UntagResourceReque
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -2072,9 +2171,12 @@ func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
 		input = &UpdateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	output := &UpdateAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAliasRequest{Request: req, Input: input}
 }
 
@@ -2120,9 +2222,12 @@ func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) Upda
 		input = &UpdateKeyDescriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateKeyDescriptionOutput{})
+	output := &UpdateKeyDescriptionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateKeyDescriptionRequest{Request: req, Input: input}
 }
 
@@ -2227,6 +2332,8 @@ func (s *CancelKeyDeletionInput) SetKeyId(v string) *CancelKeyDeletionInput {
 type CancelKeyDeletionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier of the master key for which deletion is canceled.
 	KeyId *string `min:"1" type:"string"`
 }
@@ -2239,6 +2346,11 @@ func (s CancelKeyDeletionOutput) String() string {
 // GoString returns the string representation
 func (s CancelKeyDeletionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelKeyDeletionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyId sets the KeyId field's value.
@@ -2319,6 +2431,8 @@ func (s *CreateAliasInput) SetTargetKeyId(v string) *CreateAliasInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasOutput
 type CreateAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2329,6 +2443,11 @@ func (s CreateAliasOutput) String() string {
 // GoString returns the string representation
 func (s CreateAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantRequest
@@ -2488,6 +2607,8 @@ func (s *CreateGrantInput) SetRetiringPrincipal(v string) *CreateGrantInput {
 type CreateGrantOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier for the grant.
 	//
 	// You can use the GrantId in a subsequent RetireGrant or RevokeGrant operation.
@@ -2508,6 +2629,11 @@ func (s CreateGrantOutput) String() string {
 // GoString returns the string representation
 func (s CreateGrantOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGrantOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGrantId sets the GrantId field's value.
@@ -2668,6 +2794,8 @@ func (s *CreateKeyInput) SetTags(v []Tag) *CreateKeyInput {
 type CreateKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Metadata associated with the CMK.
 	KeyMetadata *KeyMetadata `type:"structure"`
 }
@@ -2680,6 +2808,11 @@ func (s CreateKeyOutput) String() string {
 // GoString returns the string representation
 func (s CreateKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyMetadata sets the KeyMetadata field's value.
@@ -2760,6 +2893,8 @@ func (s *DecryptInput) SetGrantTokens(v []string) *DecryptInput {
 type DecryptOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// ARN of the key used to perform the decryption. This value is returned if
 	// no errors are encountered during the operation.
 	KeyId *string `min:"1" type:"string"`
@@ -2779,6 +2914,11 @@ func (s DecryptOutput) String() string {
 // GoString returns the string representation
 func (s DecryptOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DecryptOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyId sets the KeyId field's value.
@@ -2840,6 +2980,8 @@ func (s *DeleteAliasInput) SetAliasName(v string) *DeleteAliasInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAliasOutput
 type DeleteAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2850,6 +2992,11 @@ func (s DeleteAliasOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterialRequest
@@ -2906,6 +3053,8 @@ func (s *DeleteImportedKeyMaterialInput) SetKeyId(v string) *DeleteImportedKeyMa
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterialOutput
 type DeleteImportedKeyMaterialOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2916,6 +3065,11 @@ func (s DeleteImportedKeyMaterialOutput) String() string {
 // GoString returns the string representation
 func (s DeleteImportedKeyMaterialOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteImportedKeyMaterialOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKeyRequest
@@ -2987,6 +3141,8 @@ func (s *DescribeKeyInput) SetKeyId(v string) *DescribeKeyInput {
 type DescribeKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Metadata associated with the key.
 	KeyMetadata *KeyMetadata `type:"structure"`
 }
@@ -2999,6 +3155,11 @@ func (s DescribeKeyOutput) String() string {
 // GoString returns the string representation
 func (s DescribeKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyMetadata sets the KeyMetadata field's value.
@@ -3059,6 +3220,8 @@ func (s *DisableKeyInput) SetKeyId(v string) *DisableKeyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyOutput
 type DisableKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3069,6 +3232,11 @@ func (s DisableKeyOutput) String() string {
 // GoString returns the string representation
 func (s DisableKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationRequest
@@ -3122,6 +3290,8 @@ func (s *DisableKeyRotationInput) SetKeyId(v string) *DisableKeyRotationInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationOutput
 type DisableKeyRotationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3132,6 +3302,11 @@ func (s DisableKeyRotationOutput) String() string {
 // GoString returns the string representation
 func (s DisableKeyRotationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableKeyRotationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRequest
@@ -3185,6 +3360,8 @@ func (s *EnableKeyInput) SetKeyId(v string) *EnableKeyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyOutput
 type EnableKeyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3195,6 +3372,11 @@ func (s EnableKeyOutput) String() string {
 // GoString returns the string representation
 func (s EnableKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest
@@ -3248,6 +3430,8 @@ func (s *EnableKeyRotationInput) SetKeyId(v string) *EnableKeyRotationInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationOutput
 type EnableKeyRotationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3258,6 +3442,11 @@ func (s EnableKeyRotationOutput) String() string {
 // GoString returns the string representation
 func (s EnableKeyRotationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableKeyRotationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest
@@ -3361,6 +3550,8 @@ func (s *EncryptInput) SetPlaintext(v []byte) *EncryptInput {
 type EncryptOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The encrypted plaintext. If you are using the CLI, the value is Base64 encoded.
 	// Otherwise, it is not encoded.
 	//
@@ -3379,6 +3570,11 @@ func (s EncryptOutput) String() string {
 // GoString returns the string representation
 func (s EncryptOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EncryptOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCiphertextBlob sets the CiphertextBlob field's value.
@@ -3502,6 +3698,8 @@ func (s *GenerateDataKeyInput) SetNumberOfBytes(v int64) *GenerateDataKeyInput {
 type GenerateDataKeyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The encrypted data encryption key.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
@@ -3526,6 +3724,11 @@ func (s GenerateDataKeyOutput) String() string {
 // GoString returns the string representation
 func (s GenerateDataKeyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateDataKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCiphertextBlob sets the CiphertextBlob field's value.
@@ -3655,6 +3858,8 @@ func (s *GenerateDataKeyWithoutPlaintextInput) SetNumberOfBytes(v int64) *Genera
 type GenerateDataKeyWithoutPlaintextOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The encrypted data encryption key.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
@@ -3673,6 +3878,11 @@ func (s GenerateDataKeyWithoutPlaintextOutput) String() string {
 // GoString returns the string representation
 func (s GenerateDataKeyWithoutPlaintextOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateDataKeyWithoutPlaintextOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCiphertextBlob sets the CiphertextBlob field's value.
@@ -3728,6 +3938,8 @@ func (s *GenerateRandomInput) SetNumberOfBytes(v int64) *GenerateRandomInput {
 type GenerateRandomOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The random byte string.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
@@ -3742,6 +3954,11 @@ func (s GenerateRandomOutput) String() string {
 // GoString returns the string representation
 func (s GenerateRandomOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateRandomOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPlaintext sets the Plaintext field's value.
@@ -3821,6 +4038,8 @@ func (s *GetKeyPolicyInput) SetPolicyName(v string) *GetKeyPolicyInput {
 type GetKeyPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A policy document in JSON format.
 	Policy *string `min:"1" type:"string"`
 }
@@ -3833,6 +4052,11 @@ func (s GetKeyPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetKeyPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetKeyPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -3893,6 +4117,8 @@ func (s *GetKeyRotationStatusInput) SetKeyId(v string) *GetKeyRotationStatusInpu
 type GetKeyRotationStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A Boolean value that specifies whether key rotation is enabled.
 	KeyRotationEnabled *bool `type:"boolean"`
 }
@@ -3905,6 +4131,11 @@ func (s GetKeyRotationStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetKeyRotationStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetKeyRotationStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeyRotationEnabled sets the KeyRotationEnabled field's value.
@@ -4000,6 +4231,8 @@ func (s *GetParametersForImportInput) SetWrappingKeySpec(v WrappingKeySpec) *Get
 type GetParametersForImportOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The import token to send in a subsequent ImportKeyMaterial request.
 	//
 	// ImportToken is automatically base64 encoded/decoded by the SDK.
@@ -4029,6 +4262,11 @@ func (s GetParametersForImportOutput) String() string {
 // GoString returns the string representation
 func (s GetParametersForImportOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetParametersForImportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportToken sets the ImportToken field's value.
@@ -4329,6 +4567,8 @@ func (s *ImportKeyMaterialInput) SetValidTo(v time.Time) *ImportKeyMaterialInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialResponse
 type ImportKeyMaterialOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4339,6 +4579,11 @@ func (s ImportKeyMaterialOutput) String() string {
 // GoString returns the string representation
 func (s ImportKeyMaterialOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportKeyMaterialOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about each entry in the key list.
@@ -4592,6 +4837,8 @@ func (s *ListAliasesInput) SetMarker(v string) *ListAliasesInput {
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of key aliases in the user's account.
 	Aliases []AliasListEntry `type:"list"`
 
@@ -4614,6 +4861,11 @@ func (s ListAliasesOutput) String() string {
 // GoString returns the string representation
 func (s ListAliasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAliases sets the Aliases field's value.
@@ -4798,6 +5050,8 @@ func (s *ListKeyPoliciesInput) SetMarker(v string) *ListKeyPoliciesInput {
 type ListKeyPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// When Truncated is true, this element is present and contains the value to
 	// use for the Marker parameter in a subsequent request.
 	NextMarker *string `min:"1" type:"string"`
@@ -4821,6 +5075,11 @@ func (s ListKeyPoliciesOutput) String() string {
 // GoString returns the string representation
 func (s ListKeyPoliciesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListKeyPoliciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -4901,6 +5160,8 @@ func (s *ListKeysInput) SetMarker(v string) *ListKeysInput {
 type ListKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of keys.
 	Keys []KeyListEntry `type:"list"`
 
@@ -4923,6 +5184,11 @@ func (s ListKeysOutput) String() string {
 // GoString returns the string representation
 func (s ListKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetKeys sets the Keys field's value.
@@ -5029,6 +5295,8 @@ func (s *ListResourceTagsInput) SetMarker(v string) *ListResourceTagsInput {
 type ListResourceTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// When Truncated is true, this element is present and contains the value to
 	// use for the Marker parameter in a subsequent request.
 	//
@@ -5053,6 +5321,11 @@ func (s ListResourceTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListResourceTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -5158,6 +5431,8 @@ func (s *ListRetirableGrantsInput) SetRetiringPrincipal(v string) *ListRetirable
 type ListRetirableGrantsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of grants.
 	Grants []GrantListEntry `type:"list"`
 
@@ -5180,6 +5455,11 @@ func (s ListRetirableGrantsOutput) String() string {
 // GoString returns the string representation
 func (s ListRetirableGrantsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRetirableGrantsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetGrants sets the Grants field's value.
@@ -5329,6 +5609,8 @@ func (s *PutKeyPolicyInput) SetPolicyName(v string) *PutKeyPolicyInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyOutput
 type PutKeyPolicyOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5339,6 +5621,11 @@ func (s PutKeyPolicyOutput) String() string {
 // GoString returns the string representation
 func (s PutKeyPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutKeyPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptRequest
@@ -5449,6 +5736,8 @@ func (s *ReEncryptInput) SetSourceEncryptionContext(v map[string]string) *ReEncr
 type ReEncryptOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The reencrypted data.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
@@ -5469,6 +5758,11 @@ func (s ReEncryptOutput) String() string {
 // GoString returns the string representation
 func (s ReEncryptOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ReEncryptOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCiphertextBlob sets the CiphertextBlob field's value.
@@ -5558,6 +5852,8 @@ func (s *RetireGrantInput) SetKeyId(v string) *RetireGrantInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrantOutput
 type RetireGrantOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5568,6 +5864,11 @@ func (s RetireGrantOutput) String() string {
 // GoString returns the string representation
 func (s RetireGrantOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RetireGrantOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantRequest
@@ -5640,6 +5941,8 @@ func (s *RevokeGrantInput) SetKeyId(v string) *RevokeGrantInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantOutput
 type RevokeGrantOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5650,6 +5953,11 @@ func (s RevokeGrantOutput) String() string {
 // GoString returns the string representation
 func (s RevokeGrantOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RevokeGrantOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletionRequest
@@ -5725,6 +6033,8 @@ func (s *ScheduleKeyDeletionInput) SetPendingWindowInDays(v int64) *ScheduleKeyD
 type ScheduleKeyDeletionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The date and time after which AWS KMS deletes the customer master key (CMK).
 	DeletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -5741,6 +6051,11 @@ func (s ScheduleKeyDeletionOutput) String() string {
 // GoString returns the string representation
 func (s ScheduleKeyDeletionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ScheduleKeyDeletionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDeletionDate sets the DeletionDate field's value.
@@ -5888,6 +6203,8 @@ func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5898,6 +6215,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResourceRequest
@@ -5966,6 +6288,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5976,6 +6300,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasRequest
@@ -6053,6 +6382,8 @@ func (s *UpdateAliasInput) SetTargetKeyId(v string) *UpdateAliasInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasOutput
 type UpdateAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6063,6 +6394,11 @@ func (s UpdateAliasOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescriptionRequest
@@ -6131,6 +6467,8 @@ func (s *UpdateKeyDescriptionInput) SetKeyId(v string) *UpdateKeyDescriptionInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescriptionOutput
 type UpdateKeyDescriptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6141,6 +6479,11 @@ func (s UpdateKeyDescriptionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateKeyDescriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateKeyDescriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type AlgorithmSpec string

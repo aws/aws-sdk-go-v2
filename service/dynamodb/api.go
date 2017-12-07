@@ -108,7 +108,10 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemReq
 		input = &BatchGetItemInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetItemOutput{})
+	output := &BatchGetItemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetItemRequest{Request: req, Input: input}
 }
 
@@ -272,7 +275,10 @@ func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) BatchWriteI
 		input = &BatchWriteItemInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchWriteItemOutput{})
+	output := &BatchWriteItemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchWriteItemRequest{Request: req, Input: input}
 }
 
@@ -332,7 +338,10 @@ func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) CreateTableReques
 		input = &CreateTableInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTableOutput{})
+	output := &CreateTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTableRequest{Request: req, Input: input}
 }
 
@@ -391,7 +400,10 @@ func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) DeleteItemRequest {
 		input = &DeleteItemInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteItemOutput{})
+	output := &DeleteItemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteItemRequest{Request: req, Input: input}
 }
 
@@ -454,7 +466,10 @@ func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) DeleteTableReques
 		input = &DeleteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTableOutput{})
+	output := &DeleteTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTableRequest{Request: req, Input: input}
 }
 
@@ -556,7 +571,10 @@ func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLim
 		input = &DescribeLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+	output := &DescribeLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeLimitsRequest{Request: req, Input: input}
 }
 
@@ -610,7 +628,10 @@ func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) DescribeTable
 		input = &DescribeTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTableOutput{})
+	output := &DescribeTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTableRequest{Request: req, Input: input}
 }
 
@@ -656,7 +677,10 @@ func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) Des
 		input = &DescribeTimeToLiveInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTimeToLiveOutput{})
+	output := &DescribeTimeToLiveOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTimeToLiveRequest{Request: req, Input: input}
 }
 
@@ -709,7 +733,10 @@ func (c *DynamoDB) GetItemRequest(input *GetItemInput) GetItemRequest {
 		input = &GetItemInput{}
 	}
 
-	req := c.newRequest(op, input, &GetItemOutput{})
+	output := &GetItemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetItemRequest{Request: req, Input: input}
 }
 
@@ -763,7 +790,10 @@ func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 		input = &ListTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTablesOutput{})
+	output := &ListTablesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTablesRequest{Request: req, Input: input}
 }
 
@@ -863,7 +893,10 @@ func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) Lis
 		input = &ListTagsOfResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOfResourceOutput{})
+	output := &ListTagsOfResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsOfResourceRequest{Request: req, Input: input}
 }
 
@@ -952,7 +985,10 @@ func (c *DynamoDB) PutItemRequest(input *PutItemInput) PutItemRequest {
 		input = &PutItemInput{}
 	}
 
-	req := c.newRequest(op, input, &PutItemOutput{})
+	output := &PutItemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PutItemRequest{Request: req, Input: input}
 }
 
@@ -1051,7 +1087,10 @@ func (c *DynamoDB) QueryRequest(input *QueryInput) QueryRequest {
 		input = &QueryInput{}
 	}
 
-	req := c.newRequest(op, input, &QueryOutput{})
+	output := &QueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return QueryRequest{Request: req, Input: input}
 }
 
@@ -1180,7 +1219,10 @@ func (c *DynamoDB) ScanRequest(input *ScanInput) ScanRequest {
 		input = &ScanInput{}
 	}
 
-	req := c.newRequest(op, input, &ScanOutput{})
+	output := &ScanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ScanRequest{Request: req, Input: input}
 }
 
@@ -1282,9 +1324,12 @@ func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) TagResourceReques
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -1334,9 +1379,12 @@ func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) UntagResource
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -1389,7 +1437,10 @@ func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) UpdateItemRequest {
 		input = &UpdateItemInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateItemOutput{})
+	output := &UpdateItemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateItemRequest{Request: req, Input: input}
 }
 
@@ -1452,7 +1503,10 @@ func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) UpdateTableReques
 		input = &UpdateTableInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTableOutput{})
+	output := &UpdateTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTableRequest{Request: req, Input: input}
 }
 
@@ -1525,7 +1579,10 @@ func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateT
 		input = &UpdateTimeToLiveInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTimeToLiveOutput{})
+	output := &UpdateTimeToLiveOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTimeToLiveRequest{Request: req, Input: input}
 }
 
@@ -1990,6 +2047,8 @@ func (s *BatchGetItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) 
 type BatchGetItemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The read capacity units consumed by the entire BatchGetItem operation.
 	//
 	// Each element consists of:
@@ -2035,6 +2094,11 @@ func (s BatchGetItemOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetItemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetItemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
@@ -2164,6 +2228,8 @@ func (s *BatchWriteItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollect
 type BatchWriteItemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The capacity units consumed by the entire BatchWriteItem operation.
 	//
 	// Each element consists of:
@@ -2234,6 +2300,11 @@ func (s BatchWriteItemOutput) String() string {
 // GoString returns the string representation
 func (s BatchWriteItemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchWriteItemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
@@ -2847,6 +2918,8 @@ func (s *CreateTableInput) SetTableName(v string) *CreateTableInput {
 type CreateTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the properties of the table.
 	TableDescription *TableDescription `type:"structure"`
 }
@@ -2859,6 +2932,11 @@ func (s CreateTableOutput) String() string {
 // GoString returns the string representation
 func (s CreateTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTableDescription sets the TableDescription field's value.
@@ -3152,6 +3230,8 @@ func (s *DeleteItemInput) SetTableName(v string) *DeleteItemInput {
 type DeleteItemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of attribute names to AttributeValue objects, representing the item
 	// as it appeared before the DeleteItem operation. This map appears in the response
 	// only if ReturnValues was specified as ALL_OLD in the request.
@@ -3195,6 +3275,11 @@ func (s DeleteItemOutput) String() string {
 // GoString returns the string representation
 func (s DeleteItemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteItemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -3293,6 +3378,8 @@ func (s *DeleteTableInput) SetTableName(v string) *DeleteTableInput {
 type DeleteTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the properties of a table.
 	TableDescription *TableDescription `type:"structure"`
 }
@@ -3305,6 +3392,11 @@ func (s DeleteTableOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTableDescription sets the TableDescription field's value.
@@ -3334,6 +3426,8 @@ func (s DescribeLimitsInput) GoString() string {
 type DescribeLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The maximum total read capacity units that your account allows you to provision
 	// across all of your tables in this region.
 	AccountMaxReadCapacityUnits *int64 `min:"1" type:"long"`
@@ -3361,6 +3455,11 @@ func (s DescribeLimitsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountMaxReadCapacityUnits sets the AccountMaxReadCapacityUnits field's value.
@@ -3436,6 +3535,8 @@ func (s *DescribeTableInput) SetTableName(v string) *DescribeTableInput {
 type DescribeTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The properties of the table.
 	Table *TableDescription `type:"structure"`
 }
@@ -3448,6 +3549,11 @@ func (s DescribeTableOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTable sets the Table field's value.
@@ -3503,6 +3609,8 @@ func (s *DescribeTimeToLiveInput) SetTableName(v string) *DescribeTimeToLiveInpu
 type DescribeTimeToLiveOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The description of the Time to Live (TTL) status on the specified table.
 	TimeToLiveDescription *TimeToLiveDescription `type:"structure"`
 }
@@ -3515,6 +3623,11 @@ func (s DescribeTimeToLiveOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTimeToLiveOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTimeToLiveOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTimeToLiveDescription sets the TimeToLiveDescription field's value.
@@ -3854,6 +3967,8 @@ func (s *GetItemInput) SetTableName(v string) *GetItemInput {
 type GetItemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The capacity units consumed by the GetItem operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the
 	// table and any indexes involved in the operation. ConsumedCapacity is only
@@ -3874,6 +3989,11 @@ func (s GetItemOutput) String() string {
 // GoString returns the string representation
 func (s GetItemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetItemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
@@ -4564,6 +4684,8 @@ func (s *ListTablesInput) SetLimit(v int64) *ListTablesInput {
 type ListTablesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the last table in the current page of results. Use this value
 	// as the ExclusiveStartTableName in a new request to obtain the next page of
 	// results, until all the table names are returned.
@@ -4589,6 +4711,11 @@ func (s ListTablesOutput) String() string {
 // GoString returns the string representation
 func (s ListTablesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTablesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetLastEvaluatedTableName sets the LastEvaluatedTableName field's value.
@@ -4662,6 +4789,8 @@ func (s *ListTagsOfResourceInput) SetResourceArn(v string) *ListTagsOfResourceIn
 type ListTagsOfResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If this value is returned, there are additional results to be displayed.
 	// To retrieve them, call ListTagsOfResource again, with NextToken set to this
 	// value.
@@ -4679,6 +4808,11 @@ func (s ListTagsOfResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOfResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOfResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5344,6 +5478,8 @@ func (s *PutItemInput) SetTableName(v string) *PutItemInput {
 type PutItemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attribute values as they appeared before the PutItem operation, but only
 	// if ReturnValues is specified as ALL_OLD in the request. Each element consists
 	// of an attribute name and an attribute value.
@@ -5387,6 +5523,11 @@ func (s PutItemOutput) String() string {
 // GoString returns the string representation
 func (s PutItemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutItemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -5891,6 +6032,8 @@ func (s *QueryInput) SetTableName(v string) *QueryInput {
 type QueryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The capacity units consumed by the Query operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the
 	// table and any indexes involved in the operation. ConsumedCapacity is only
@@ -5943,6 +6086,11 @@ func (s QueryOutput) String() string {
 // GoString returns the string representation
 func (s QueryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s QueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
@@ -6369,6 +6517,8 @@ func (s *ScanInput) SetTotalSegments(v int64) *ScanInput {
 type ScanOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The capacity units consumed by the Scan operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the
 	// table and any indexes involved in the operation. ConsumedCapacity is only
@@ -6420,6 +6570,11 @@ func (s ScanOutput) String() string {
 // GoString returns the string representation
 func (s ScanOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ScanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConsumedCapacity sets the ConsumedCapacity field's value.
@@ -6933,6 +7088,8 @@ func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6943,6 +7100,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The description of the Time to Live (TTL) status on the specified table.
@@ -7104,6 +7266,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7114,6 +7278,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the new provisioned throughput settings to be applied to a global
@@ -7531,6 +7700,8 @@ func (s *UpdateItemInput) SetUpdateExpression(v string) *UpdateItemInput {
 type UpdateItemOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of attribute values as they appear before or after the UpdateItem operation,
 	// as determined by the ReturnValues parameter.
 	//
@@ -7576,6 +7747,11 @@ func (s UpdateItemOutput) String() string {
 // GoString returns the string representation
 func (s UpdateItemOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateItemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttributes sets the Attributes field's value.
@@ -7717,6 +7893,8 @@ func (s *UpdateTableInput) SetTableName(v string) *UpdateTableInput {
 type UpdateTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the properties of the table.
 	TableDescription *TableDescription `type:"structure"`
 }
@@ -7729,6 +7907,11 @@ func (s UpdateTableOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTableDescription sets the TableDescription field's value.
@@ -7806,6 +7989,8 @@ func (s *UpdateTimeToLiveInput) SetTimeToLiveSpecification(v *TimeToLiveSpecific
 type UpdateTimeToLiveOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of an UpdateTimeToLive operation.
 	TimeToLiveSpecification *TimeToLiveSpecification `type:"structure"`
 }
@@ -7818,6 +8003,11 @@ func (s UpdateTimeToLiveOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTimeToLiveOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTimeToLiveOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTimeToLiveSpecification sets the TimeToLiveSpecification field's value.

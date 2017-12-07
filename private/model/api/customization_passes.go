@@ -140,6 +140,10 @@ func mergeServicesCustomizations(a *API) {
 
 	for n := range a.Shapes {
 		if _, ok := serviceAPI.Shapes[n]; ok {
+			// Input and output shapes must remain unique.
+			if s := a.Shapes[n]; s.UsedAsInput || s.UsedAsOutput {
+				continue
+			}
 			a.Shapes[n].resolvePkg = "github.com/aws/aws-sdk-go-v2/service/" + info.dstName
 		}
 	}

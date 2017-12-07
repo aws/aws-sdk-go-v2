@@ -63,7 +63,10 @@ func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) Ad
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -114,7 +117,10 @@ func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *Authorize
 		input = &AuthorizeCacheSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeCacheSecurityGroupIngressOutput{})
+	output := &AuthorizeCacheSecurityGroupIngressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AuthorizeCacheSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
@@ -224,7 +230,10 @@ func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshot
 		input = &CopySnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopySnapshotOutput{})
+	output := &CopySnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CopySnapshotRequest{Request: req, Input: input}
 }
 
@@ -275,7 +284,10 @@ func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) 
 		input = &CreateCacheClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheClusterOutput{})
+	output := &CreateCacheClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCacheClusterRequest{Request: req, Input: input}
 }
 
@@ -334,7 +346,10 @@ func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParamet
 		input = &CreateCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheParameterGroupOutput{})
+	output := &CreateCacheParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCacheParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -386,7 +401,10 @@ func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurity
 		input = &CreateCacheSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheSecurityGroupOutput{})
+	output := &CreateCacheSecurityGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCacheSecurityGroupRequest{Request: req, Input: input}
 }
 
@@ -435,7 +453,10 @@ func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGrou
 		input = &CreateCacheSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheSubnetGroupOutput{})
+	output := &CreateCacheSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCacheSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -504,7 +525,10 @@ func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGrou
 		input = &CreateReplicationGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReplicationGroupOutput{})
+	output := &CreateReplicationGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateReplicationGroupRequest{Request: req, Input: input}
 }
 
@@ -553,7 +577,10 @@ func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSn
 		input = &CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	output := &CreateSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSnapshotRequest{Request: req, Input: input}
 }
 
@@ -612,7 +639,10 @@ func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) 
 		input = &DeleteCacheClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheClusterOutput{})
+	output := &DeleteCacheClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCacheClusterRequest{Request: req, Input: input}
 }
 
@@ -659,9 +689,12 @@ func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParamet
 		input = &DeleteCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheParameterGroupOutput{})
+	output := &DeleteCacheParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCacheParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -710,9 +743,12 @@ func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurity
 		input = &DeleteCacheSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheSecurityGroupOutput{})
+	output := &DeleteCacheSecurityGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCacheSecurityGroupRequest{Request: req, Input: input}
 }
 
@@ -761,9 +797,12 @@ func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGrou
 		input = &DeleteCacheSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheSubnetGroupOutput{})
+	output := &DeleteCacheSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCacheSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -819,7 +858,10 @@ func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGrou
 		input = &DeleteReplicationGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationGroupOutput{})
+	output := &DeleteReplicationGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteReplicationGroupRequest{Request: req, Input: input}
 }
 
@@ -869,7 +911,10 @@ func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSn
 		input = &DeleteSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotOutput{})
+	output := &DeleteSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSnapshotRequest{Request: req, Input: input}
 }
 
@@ -942,7 +987,10 @@ func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersI
 		input = &DescribeCacheClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheClustersOutput{})
+	output := &DescribeCacheClustersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheClustersRequest{Request: req, Input: input}
 }
 
@@ -1044,7 +1092,10 @@ func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEng
 		input = &DescribeCacheEngineVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheEngineVersionsOutput{})
+	output := &DescribeCacheEngineVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheEngineVersionsRequest{Request: req, Input: input}
 }
 
@@ -1148,7 +1199,10 @@ func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCachePa
 		input = &DescribeCacheParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheParameterGroupsOutput{})
+	output := &DescribeCacheParameterGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheParameterGroupsRequest{Request: req, Input: input}
 }
 
@@ -1250,7 +1304,10 @@ func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParamet
 		input = &DescribeCacheParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheParametersOutput{})
+	output := &DescribeCacheParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheParametersRequest{Request: req, Input: input}
 }
 
@@ -1353,7 +1410,10 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSec
 		input = &DescribeCacheSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheSecurityGroupsOutput{})
+	output := &DescribeCacheSecurityGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheSecurityGroupsRequest{Request: req, Input: input}
 }
 
@@ -1456,7 +1516,10 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubne
 		input = &DescribeCacheSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheSubnetGroupsOutput{})
+	output := &DescribeCacheSubnetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeCacheSubnetGroupsRequest{Request: req, Input: input}
 }
 
@@ -1559,7 +1622,10 @@ func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngi
 		input = &DescribeEngineDefaultParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEngineDefaultParametersOutput{})
+	output := &DescribeEngineDefaultParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEngineDefaultParametersRequest{Request: req, Input: input}
 }
 
@@ -1667,7 +1733,10 @@ func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) Describe
 		input = &DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	output := &DescribeEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventsRequest{Request: req, Input: input}
 }
 
@@ -1773,7 +1842,10 @@ func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicatio
 		input = &DescribeReplicationGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationGroupsOutput{})
+	output := &DescribeReplicationGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReplicationGroupsRequest{Request: req, Input: input}
 }
 
@@ -1876,7 +1948,10 @@ func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedC
 		input = &DescribeReservedCacheNodesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedCacheNodesOutput{})
+	output := &DescribeReservedCacheNodesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedCacheNodesRequest{Request: req, Input: input}
 }
 
@@ -1978,7 +2053,10 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *Describe
 		input = &DescribeReservedCacheNodesOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedCacheNodesOfferingsOutput{})
+	output := &DescribeReservedCacheNodesOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeReservedCacheNodesOfferingsRequest{Request: req, Input: input}
 }
 
@@ -2085,7 +2163,10 @@ func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) De
 		input = &DescribeSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	output := &DescribeSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSnapshotsRequest{Request: req, Input: input}
 }
 
@@ -2186,7 +2267,10 @@ func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowed
 		input = &ListAllowedNodeTypeModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAllowedNodeTypeModificationsOutput{})
+	output := &ListAllowedNodeTypeModificationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAllowedNodeTypeModificationsRequest{Request: req, Input: input}
 }
 
@@ -2239,7 +2323,10 @@ func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -2287,7 +2374,10 @@ func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) 
 		input = &ModifyCacheClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyCacheClusterOutput{})
+	output := &ModifyCacheClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyCacheClusterRequest{Request: req, Input: input}
 }
 
@@ -2335,7 +2425,10 @@ func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParamet
 		input = &ModifyCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetCacheParameterGroupOutput{})
+	output := &ResetCacheParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyCacheParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -2381,7 +2474,10 @@ func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGrou
 		input = &ModifyCacheSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyCacheSubnetGroupOutput{})
+	output := &ModifyCacheSubnetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyCacheSubnetGroupRequest{Request: req, Input: input}
 }
 
@@ -2433,7 +2529,10 @@ func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGrou
 		input = &ModifyReplicationGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReplicationGroupOutput{})
+	output := &ModifyReplicationGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ModifyReplicationGroupRequest{Request: req, Input: input}
 }
 
@@ -2479,7 +2578,10 @@ func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseR
 		input = &PurchaseReservedCacheNodesOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedCacheNodesOfferingOutput{})
+	output := &PurchaseReservedCacheNodesOfferingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PurchaseReservedCacheNodesOfferingRequest{Request: req, Input: input}
 }
 
@@ -2534,7 +2636,10 @@ func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) 
 		input = &RebootCacheClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootCacheClusterOutput{})
+	output := &RebootCacheClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RebootCacheClusterRequest{Request: req, Input: input}
 }
 
@@ -2580,7 +2685,10 @@ func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourc
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -2629,7 +2737,10 @@ func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameter
 		input = &ResetCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetCacheParameterGroupOutput{})
+	output := &ResetCacheParameterGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetCacheParameterGroupRequest{Request: req, Input: input}
 }
 
@@ -2676,7 +2787,10 @@ func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheS
 		input = &RevokeCacheSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeCacheSecurityGroupIngressOutput{})
+	output := &RevokeCacheSecurityGroupIngressOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RevokeCacheSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
@@ -2765,7 +2879,10 @@ func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) TestFailover
 		input = &TestFailoverInput{}
 	}
 
-	req := c.newRequest(op, input, &TestFailoverOutput{})
+	output := &TestFailoverOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TestFailoverRequest{Request: req, Input: input}
 }
 
@@ -2909,6 +3026,8 @@ func (s *AuthorizeCacheSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v s
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of one of the following operations:
 	//
 	//    * AuthorizeCacheSecurityGroupIngress
@@ -2927,6 +3046,11 @@ func (s AuthorizeCacheSecurityGroupIngressOutput) String() string {
 // GoString returns the string representation
 func (s AuthorizeCacheSecurityGroupIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AuthorizeCacheSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSecurityGroup sets the CacheSecurityGroup field's value.
@@ -3902,6 +4026,8 @@ func (s *CopySnapshotInput) SetTargetSnapshotName(v string) *CopySnapshotInput {
 type CopySnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents a copy of an entire Redis cache cluster as of the time when the
 	// snapshot was taken.
 	Snapshot *Snapshot `type:"structure"`
@@ -3915,6 +4041,11 @@ func (s CopySnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CopySnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopySnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshot sets the Snapshot field's value.
@@ -4350,6 +4481,8 @@ func (s *CreateCacheClusterInput) SetTags(v []Tag) *CreateCacheClusterInput {
 type CreateCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific cache cluster.
 	CacheCluster *CacheCluster `type:"structure"`
 }
@@ -4362,6 +4495,11 @@ func (s CreateCacheClusterOutput) String() string {
 // GoString returns the string representation
 func (s CreateCacheClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCacheClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheCluster sets the CacheCluster field's value.
@@ -4448,6 +4586,8 @@ func (s *CreateCacheParameterGroupInput) SetDescription(v string) *CreateCachePa
 type CreateCacheParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of a CreateCacheParameterGroup operation.
 	CacheParameterGroup *CacheParameterGroup `type:"structure"`
 }
@@ -4460,6 +4600,11 @@ func (s CreateCacheParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateCacheParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCacheParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheParameterGroup sets the CacheParameterGroup field's value.
@@ -4534,6 +4679,8 @@ func (s *CreateCacheSecurityGroupInput) SetDescription(v string) *CreateCacheSec
 type CreateCacheSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of one of the following operations:
 	//
 	//    * AuthorizeCacheSecurityGroupIngress
@@ -4552,6 +4699,11 @@ func (s CreateCacheSecurityGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateCacheSecurityGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCacheSecurityGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSecurityGroup sets the CacheSecurityGroup field's value.
@@ -4639,6 +4791,8 @@ func (s *CreateCacheSubnetGroupInput) SetSubnetIds(v []string) *CreateCacheSubne
 type CreateCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of one of the following operations:
 	//
 	//    * CreateCacheSubnetGroup
@@ -4655,6 +4809,11 @@ func (s CreateCacheSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateCacheSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCacheSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSubnetGroup sets the CacheSubnetGroup field's value.
@@ -5136,6 +5295,8 @@ func (s *CreateReplicationGroupInput) SetTags(v []Tag) *CreateReplicationGroupIn
 type CreateReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *ReplicationGroup `type:"structure"`
 }
@@ -5148,6 +5309,11 @@ func (s CreateReplicationGroupOutput) String() string {
 // GoString returns the string representation
 func (s CreateReplicationGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateReplicationGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationGroup sets the ReplicationGroup field's value.
@@ -5221,6 +5387,8 @@ func (s *CreateSnapshotInput) SetSnapshotName(v string) *CreateSnapshotInput {
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents a copy of an entire Redis cache cluster as of the time when the
 	// snapshot was taken.
 	Snapshot *Snapshot `type:"structure"`
@@ -5234,6 +5402,11 @@ func (s CreateSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshot sets the Snapshot field's value.
@@ -5299,6 +5472,8 @@ func (s *DeleteCacheClusterInput) SetFinalSnapshotIdentifier(v string) *DeleteCa
 type DeleteCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific cache cluster.
 	CacheCluster *CacheCluster `type:"structure"`
 }
@@ -5311,6 +5486,11 @@ func (s DeleteCacheClusterOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCacheClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCacheClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheCluster sets the CacheCluster field's value.
@@ -5366,6 +5546,8 @@ func (s *DeleteCacheParameterGroupInput) SetCacheParameterGroupName(v string) *D
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroupOutput
 type DeleteCacheParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5376,6 +5558,11 @@ func (s DeleteCacheParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCacheParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCacheParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DeleteCacheSecurityGroup operation.
@@ -5424,6 +5611,8 @@ func (s *DeleteCacheSecurityGroupInput) SetCacheSecurityGroupName(v string) *Del
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroupOutput
 type DeleteCacheSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5434,6 +5623,11 @@ func (s DeleteCacheSecurityGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCacheSecurityGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCacheSecurityGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DeleteCacheSubnetGroup operation.
@@ -5482,6 +5676,8 @@ func (s *DeleteCacheSubnetGroupInput) SetCacheSubnetGroupName(v string) *DeleteC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroupOutput
 type DeleteCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5492,6 +5688,11 @@ func (s DeleteCacheSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCacheSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCacheSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DeleteReplicationGroup operation.
@@ -5562,6 +5763,8 @@ func (s *DeleteReplicationGroupInput) SetRetainPrimaryCluster(v bool) *DeleteRep
 type DeleteReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *ReplicationGroup `type:"structure"`
 }
@@ -5574,6 +5777,11 @@ func (s DeleteReplicationGroupOutput) String() string {
 // GoString returns the string representation
 func (s DeleteReplicationGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteReplicationGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationGroup sets the ReplicationGroup field's value.
@@ -5627,6 +5835,8 @@ func (s *DeleteSnapshotInput) SetSnapshotName(v string) *DeleteSnapshotInput {
 type DeleteSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents a copy of an entire Redis cache cluster as of the time when the
 	// snapshot was taken.
 	Snapshot *Snapshot `type:"structure"`
@@ -5640,6 +5850,11 @@ func (s DeleteSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshot sets the Snapshot field's value.
@@ -5727,6 +5942,8 @@ func (s *DescribeCacheClustersInput) SetShowCacheNodeInfo(v bool) *DescribeCache
 type DescribeCacheClustersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of cache clusters. Each item in the list contains detailed information
 	// about one cache cluster.
 	CacheClusters []CacheCluster `locationNameList:"CacheCluster" type:"list"`
@@ -5743,6 +5960,11 @@ func (s DescribeCacheClustersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheClustersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheClusters sets the CacheClusters field's value.
@@ -5853,6 +6075,8 @@ func (s *DescribeCacheEngineVersionsInput) SetMaxRecords(v int64) *DescribeCache
 type DescribeCacheEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of cache engine version details. Each element in the list contains
 	// detailed information about one cache engine version.
 	CacheEngineVersions []CacheEngineVersion `locationNameList:"CacheEngineVersion" type:"list"`
@@ -5869,6 +6093,11 @@ func (s DescribeCacheEngineVersionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheEngineVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheEngineVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheEngineVersions sets the CacheEngineVersions field's value.
@@ -5939,6 +6168,8 @@ func (s *DescribeCacheParameterGroupsInput) SetMaxRecords(v int64) *DescribeCach
 type DescribeCacheParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of cache parameter groups. Each element in the list contains detailed
 	// information about one cache parameter group.
 	CacheParameterGroups []CacheParameterGroup `locationNameList:"CacheParameterGroup" type:"list"`
@@ -5955,6 +6186,11 @@ func (s DescribeCacheParameterGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheParameterGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheParameterGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheParameterGroups sets the CacheParameterGroups field's value.
@@ -6052,6 +6288,8 @@ func (s *DescribeCacheParametersInput) SetSource(v string) *DescribeCacheParamet
 type DescribeCacheParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of parameters specific to a particular cache node type. Each element
 	// in the list contains detailed information about one parameter.
 	CacheNodeTypeSpecificParameters []CacheNodeTypeSpecificParameter `locationNameList:"CacheNodeTypeSpecificParameter" type:"list"`
@@ -6071,6 +6309,11 @@ func (s DescribeCacheParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheNodeTypeSpecificParameters sets the CacheNodeTypeSpecificParameters field's value.
@@ -6147,6 +6390,8 @@ func (s *DescribeCacheSecurityGroupsInput) SetMaxRecords(v int64) *DescribeCache
 type DescribeCacheSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of cache security groups. Each element in the list contains detailed
 	// information about one group.
 	CacheSecurityGroups []CacheSecurityGroup `locationNameList:"CacheSecurityGroup" type:"list"`
@@ -6163,6 +6408,11 @@ func (s DescribeCacheSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheSecurityGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSecurityGroups sets the CacheSecurityGroups field's value.
@@ -6233,6 +6483,8 @@ func (s *DescribeCacheSubnetGroupsInput) SetMaxRecords(v int64) *DescribeCacheSu
 type DescribeCacheSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of cache subnet groups. Each element in the list contains detailed
 	// information about one group.
 	CacheSubnetGroups []CacheSubnetGroup `locationNameList:"CacheSubnetGroup" type:"list"`
@@ -6249,6 +6501,11 @@ func (s DescribeCacheSubnetGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeCacheSubnetGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCacheSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSubnetGroups sets the CacheSubnetGroups field's value.
@@ -6336,6 +6593,8 @@ func (s *DescribeEngineDefaultParametersInput) SetMaxRecords(v int64) *DescribeE
 type DescribeEngineDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of a DescribeEngineDefaultParameters operation.
 	EngineDefaults *EngineDefaults `type:"structure"`
 }
@@ -6348,6 +6607,11 @@ func (s DescribeEngineDefaultParametersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEngineDefaultParametersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEngineDefaultParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEngineDefaults sets the EngineDefaults field's value.
@@ -6456,6 +6720,8 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of events. Each element in the list contains detailed information
 	// about one event.
 	Events []Event `locationNameList:"Event" type:"list"`
@@ -6472,6 +6738,11 @@ func (s DescribeEventsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEvents sets the Events field's value.
@@ -6546,6 +6817,8 @@ func (s *DescribeReplicationGroupsInput) SetReplicationGroupId(v string) *Descri
 type DescribeReplicationGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
 
@@ -6562,6 +6835,11 @@ func (s DescribeReplicationGroupsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReplicationGroupsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReplicationGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -6859,6 +7137,8 @@ func (s *DescribeReservedCacheNodesOfferingsInput) SetReservedCacheNodesOffering
 type DescribeReservedCacheNodesOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
 
@@ -6875,6 +7155,11 @@ func (s DescribeReservedCacheNodesOfferingsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedCacheNodesOfferingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedCacheNodesOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -6894,6 +7179,8 @@ func (s *DescribeReservedCacheNodesOfferingsOutput) SetReservedCacheNodesOfferin
 type DescribeReservedCacheNodesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string `type:"string"`
 
@@ -6910,6 +7197,11 @@ func (s DescribeReservedCacheNodesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeReservedCacheNodesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedCacheNodesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -7023,6 +7315,8 @@ func (s *DescribeSnapshotsInput) SetSnapshotSource(v string) *DescribeSnapshotsI
 type DescribeSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -7041,6 +7335,11 @@ func (s DescribeSnapshotsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSnapshotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMarker sets the Marker field's value.
@@ -7296,6 +7595,8 @@ func (s *ListAllowedNodeTypeModificationsInput) SetReplicationGroupId(v string) 
 type ListAllowedNodeTypeModificationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string list, each element of which specifies a cache node type which you
 	// can use to scale your cache cluster or replication group.
 	//
@@ -7313,6 +7614,11 @@ func (s ListAllowedNodeTypeModificationsOutput) String() string {
 // GoString returns the string representation
 func (s ListAllowedNodeTypeModificationsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAllowedNodeTypeModificationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetScaleUpModifications sets the ScaleUpModifications field's value.
@@ -7741,6 +8047,8 @@ func (s *ModifyCacheClusterInput) SetSnapshotWindow(v string) *ModifyCacheCluste
 type ModifyCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific cache cluster.
 	CacheCluster *CacheCluster `type:"structure"`
 }
@@ -7753,6 +8061,11 @@ func (s ModifyCacheClusterOutput) String() string {
 // GoString returns the string representation
 func (s ModifyCacheClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyCacheClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheCluster sets the CacheCluster field's value.
@@ -7887,6 +8200,8 @@ func (s *ModifyCacheSubnetGroupInput) SetSubnetIds(v []string) *ModifyCacheSubne
 type ModifyCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of one of the following operations:
 	//
 	//    * CreateCacheSubnetGroup
@@ -7903,6 +8218,11 @@ func (s ModifyCacheSubnetGroupOutput) String() string {
 // GoString returns the string representation
 func (s ModifyCacheSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyCacheSubnetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSubnetGroup sets the CacheSubnetGroup field's value.
@@ -8194,6 +8514,8 @@ func (s *ModifyReplicationGroupInput) SetSnapshottingClusterId(v string) *Modify
 type ModifyReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *ReplicationGroup `type:"structure"`
 }
@@ -8206,6 +8528,11 @@ func (s ModifyReplicationGroupOutput) String() string {
 // GoString returns the string representation
 func (s ModifyReplicationGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyReplicationGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationGroup sets the ReplicationGroup field's value.
@@ -8788,6 +9115,8 @@ func (s *PurchaseReservedCacheNodesOfferingInput) SetReservedCacheNodesOfferingI
 type PurchaseReservedCacheNodesOfferingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of a PurchaseReservedCacheNodesOffering operation.
 	ReservedCacheNode *ReservedCacheNode `type:"structure"`
 }
@@ -8800,6 +9129,11 @@ func (s PurchaseReservedCacheNodesOfferingOutput) String() string {
 // GoString returns the string representation
 func (s PurchaseReservedCacheNodesOfferingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseReservedCacheNodesOfferingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReservedCacheNode sets the ReservedCacheNode field's value.
@@ -8870,6 +9204,8 @@ func (s *RebootCacheClusterInput) SetCacheNodeIdsToReboot(v []string) *RebootCac
 type RebootCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific cache cluster.
 	CacheCluster *CacheCluster `type:"structure"`
 }
@@ -8882,6 +9218,11 @@ func (s RebootCacheClusterOutput) String() string {
 // GoString returns the string representation
 func (s RebootCacheClusterOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootCacheClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheCluster sets the CacheCluster field's value.
@@ -8992,6 +9333,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of cost allocation tags as key-value pairs.
 	TagList []Tag `locationNameList:"Tag" type:"list"`
 }
@@ -9004,6 +9347,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTagList sets the TagList field's value.
@@ -9581,6 +9929,8 @@ func (s *ResetCacheParameterGroupInput) SetResetAllParameters(v bool) *ResetCach
 type ResetCacheParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the cache parameter group.
 	CacheParameterGroupName *string `type:"string"`
 }
@@ -9593,6 +9943,11 @@ func (s ResetCacheParameterGroupOutput) String() string {
 // GoString returns the string representation
 func (s ResetCacheParameterGroupOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetCacheParameterGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheParameterGroupName sets the CacheParameterGroupName field's value.
@@ -9678,6 +10033,8 @@ func (s *RevokeCacheSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v stri
 type RevokeCacheSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Represents the output of one of the following operations:
 	//
 	//    * AuthorizeCacheSecurityGroupIngress
@@ -9696,6 +10053,11 @@ func (s RevokeCacheSecurityGroupIngressOutput) String() string {
 // GoString returns the string representation
 func (s RevokeCacheSecurityGroupIngressOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RevokeCacheSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCacheSecurityGroup sets the CacheSecurityGroup field's value.
@@ -10195,6 +10557,8 @@ func (s *TestFailoverInput) SetReplicationGroupId(v string) *TestFailoverInput {
 type TestFailoverOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *ReplicationGroup `type:"structure"`
 }
@@ -10207,6 +10571,11 @@ func (s TestFailoverOutput) String() string {
 // GoString returns the string representation
 func (s TestFailoverOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TestFailoverOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetReplicationGroup sets the ReplicationGroup field's value.

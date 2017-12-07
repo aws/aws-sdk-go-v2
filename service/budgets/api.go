@@ -50,7 +50,10 @@ func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetRequ
 		input = &CreateBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBudgetOutput{})
+	output := &CreateBudgetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateBudgetRequest{Request: req, Input: input}
 }
 
@@ -94,7 +97,10 @@ func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) Crea
 		input = &CreateNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNotificationOutput{})
+	output := &CreateNotificationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateNotificationRequest{Request: req, Input: input}
 }
 
@@ -138,7 +144,10 @@ func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) CreateSu
 		input = &CreateSubscriberInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubscriberOutput{})
+	output := &CreateSubscriberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSubscriberRequest{Request: req, Input: input}
 }
 
@@ -182,7 +191,10 @@ func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetRequ
 		input = &DeleteBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBudgetOutput{})
+	output := &DeleteBudgetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteBudgetRequest{Request: req, Input: input}
 }
 
@@ -226,7 +238,10 @@ func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) Dele
 		input = &DeleteNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotificationOutput{})
+	output := &DeleteNotificationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteNotificationRequest{Request: req, Input: input}
 }
 
@@ -270,7 +285,10 @@ func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSu
 		input = &DeleteSubscriberInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriberOutput{})
+	output := &DeleteSubscriberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSubscriberRequest{Request: req, Input: input}
 }
 
@@ -314,7 +332,10 @@ func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudg
 		input = &DescribeBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBudgetOutput{})
+	output := &DescribeBudgetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBudgetRequest{Request: req, Input: input}
 }
 
@@ -358,7 +379,10 @@ func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) DescribeBu
 		input = &DescribeBudgetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBudgetsOutput{})
+	output := &DescribeBudgetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeBudgetsRequest{Request: req, Input: input}
 }
 
@@ -402,7 +426,10 @@ func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificat
 		input = &DescribeNotificationsForBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNotificationsForBudgetOutput{})
+	output := &DescribeNotificationsForBudgetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeNotificationsForBudgetRequest{Request: req, Input: input}
 }
 
@@ -446,7 +473,10 @@ func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubsc
 		input = &DescribeSubscribersForNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubscribersForNotificationOutput{})
+	output := &DescribeSubscribersForNotificationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSubscribersForNotificationRequest{Request: req, Input: input}
 }
 
@@ -490,7 +520,10 @@ func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetRequ
 		input = &UpdateBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBudgetOutput{})
+	output := &UpdateBudgetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateBudgetRequest{Request: req, Input: input}
 }
 
@@ -534,7 +567,10 @@ func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) Upda
 		input = &UpdateNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNotificationOutput{})
+	output := &UpdateNotificationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateNotificationRequest{Request: req, Input: input}
 }
 
@@ -578,7 +614,10 @@ func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSu
 		input = &UpdateSubscriberInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubscriberOutput{})
+	output := &UpdateSubscriberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateSubscriberRequest{Request: req, Input: input}
 }
 
@@ -947,6 +986,8 @@ func (s *CreateBudgetInput) SetNotificationsWithSubscribers(v []NotificationWith
 // Response of CreateBudget
 type CreateBudgetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -957,6 +998,11 @@ func (s CreateBudgetOutput) String() string {
 // GoString returns the string representation
 func (s CreateBudgetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBudgetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of CreateNotification
@@ -1066,6 +1112,8 @@ func (s *CreateNotificationInput) SetSubscribers(v []Subscriber) *CreateNotifica
 // Response of CreateNotification
 type CreateNotificationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1076,6 +1124,11 @@ func (s CreateNotificationOutput) String() string {
 // GoString returns the string representation
 func (s CreateNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of CreateSubscriber
@@ -1181,6 +1234,8 @@ func (s *CreateSubscriberInput) SetSubscriber(v *Subscriber) *CreateSubscriberIn
 // Response of CreateSubscriber
 type CreateSubscriberOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1191,6 +1246,11 @@ func (s CreateSubscriberOutput) String() string {
 // GoString returns the string representation
 func (s CreateSubscriberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSubscriberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of DeleteBudget
@@ -1254,6 +1314,8 @@ func (s *DeleteBudgetInput) SetBudgetName(v string) *DeleteBudgetInput {
 // Response of DeleteBudget
 type DeleteBudgetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1264,6 +1326,11 @@ func (s DeleteBudgetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteBudgetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBudgetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of DeleteNotification
@@ -1348,6 +1415,8 @@ func (s *DeleteNotificationInput) SetNotification(v *Notification) *DeleteNotifi
 // Response of DeleteNotification
 type DeleteNotificationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1358,6 +1427,11 @@ func (s DeleteNotificationOutput) String() string {
 // GoString returns the string representation
 func (s DeleteNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of DeleteSubscriber
@@ -1463,6 +1537,8 @@ func (s *DeleteSubscriberInput) SetSubscriber(v *Subscriber) *DeleteSubscriberIn
 // Response of DeleteSubscriber
 type DeleteSubscriberOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1473,6 +1549,11 @@ func (s DeleteSubscriberOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSubscriberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSubscriberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of DescribeBudget
@@ -1537,6 +1618,8 @@ func (s *DescribeBudgetInput) SetBudgetName(v string) *DescribeBudgetInput {
 type DescribeBudgetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// AWS Budget model
 	Budget *Budget `type:"structure"`
 }
@@ -1549,6 +1632,11 @@ func (s DescribeBudgetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBudgetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBudgetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBudget sets the Budget field's value.
@@ -1626,6 +1714,8 @@ func (s *DescribeBudgetsInput) SetNextToken(v string) *DescribeBudgetsInput {
 type DescribeBudgetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of budgets
 	Budgets []Budget `type:"list"`
 
@@ -1641,6 +1731,11 @@ func (s DescribeBudgetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeBudgetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBudgetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBudgets sets the Budgets field's value.
@@ -1739,6 +1834,8 @@ func (s *DescribeNotificationsForBudgetInput) SetNextToken(v string) *DescribeNo
 type DescribeNotificationsForBudgetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A generic String.
 	NextToken *string `type:"string"`
 
@@ -1754,6 +1851,11 @@ func (s DescribeNotificationsForBudgetOutput) String() string {
 // GoString returns the string representation
 func (s DescribeNotificationsForBudgetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNotificationsForBudgetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -1873,6 +1975,8 @@ func (s *DescribeSubscribersForNotificationInput) SetNotification(v *Notificatio
 type DescribeSubscribersForNotificationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A generic String.
 	NextToken *string `type:"string"`
 
@@ -1888,6 +1992,11 @@ func (s DescribeSubscribersForNotificationOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSubscribersForNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSubscribersForNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -2291,6 +2400,8 @@ func (s *UpdateBudgetInput) SetNewBudget(v *Budget) *UpdateBudgetInput {
 // Response of UpdateBudget
 type UpdateBudgetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2301,6 +2412,11 @@ func (s UpdateBudgetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateBudgetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBudgetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of UpdateNotification
@@ -2406,6 +2522,8 @@ func (s *UpdateNotificationInput) SetOldNotification(v *Notification) *UpdateNot
 // Response of UpdateNotification
 type UpdateNotificationOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2416,6 +2534,11 @@ func (s UpdateNotificationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateNotificationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Request of UpdateSubscriber
@@ -2542,6 +2665,8 @@ func (s *UpdateSubscriberInput) SetOldSubscriber(v *Subscriber) *UpdateSubscribe
 // Response of UpdateSubscriber
 type UpdateSubscriberOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2552,6 +2677,11 @@ func (s UpdateSubscriberOutput) String() string {
 // GoString returns the string representation
 func (s UpdateSubscriberOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSubscriberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.

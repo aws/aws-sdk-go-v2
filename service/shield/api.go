@@ -53,7 +53,10 @@ func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) CreatePro
 		input = &CreateProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProtectionOutput{})
+	output := &CreateProtectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateProtectionRequest{Request: req, Input: input}
 }
 
@@ -99,7 +102,10 @@ func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) Creat
 		input = &CreateSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubscriptionOutput{})
+	output := &CreateSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -145,7 +151,10 @@ func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) DeletePro
 		input = &DeleteProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProtectionOutput{})
+	output := &DeleteProtectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteProtectionRequest{Request: req, Input: input}
 }
 
@@ -191,7 +200,10 @@ func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) Delet
 		input = &DeleteSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriptionOutput{})
+	output := &DeleteSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -237,7 +249,10 @@ func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttac
 		input = &DescribeAttackInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAttackOutput{})
+	output := &DescribeAttackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeAttackRequest{Request: req, Input: input}
 }
 
@@ -283,7 +298,10 @@ func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) Descr
 		input = &DescribeProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProtectionOutput{})
+	output := &DescribeProtectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeProtectionRequest{Request: req, Input: input}
 }
 
@@ -329,7 +347,10 @@ func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) D
 		input = &DescribeSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubscriptionOutput{})
+	output := &DescribeSubscriptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSubscriptionRequest{Request: req, Input: input}
 }
 
@@ -376,7 +397,10 @@ func (c *Shield) ListAttacksRequest(input *ListAttacksInput) ListAttacksRequest 
 		input = &ListAttacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttacksOutput{})
+	output := &ListAttacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAttacksRequest{Request: req, Input: input}
 }
 
@@ -422,7 +446,10 @@ func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) ListProtect
 		input = &ListProtectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProtectionsOutput{})
+	output := &ListProtectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListProtectionsRequest{Request: req, Input: input}
 }
 
@@ -659,6 +686,8 @@ func (s *CreateProtectionInput) SetResourceArn(v string) *CreateProtectionInput 
 type CreateProtectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique identifier (ID) for the Protection object that is created.
 	ProtectionId *string `min:"1" type:"string"`
 }
@@ -671,6 +700,11 @@ func (s CreateProtectionOutput) String() string {
 // GoString returns the string representation
 func (s CreateProtectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProtectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProtectionId sets the ProtectionId field's value.
@@ -697,6 +731,8 @@ func (s CreateSubscriptionInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscriptionResponse
 type CreateSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -707,6 +743,11 @@ func (s CreateSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s CreateSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionRequest
@@ -755,6 +796,8 @@ func (s *DeleteProtectionInput) SetProtectionId(v string) *DeleteProtectionInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionResponse
 type DeleteProtectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -765,6 +808,11 @@ func (s DeleteProtectionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteProtectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProtectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscriptionRequest
@@ -785,6 +833,8 @@ func (s DeleteSubscriptionInput) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscriptionResponse
 type DeleteSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -795,6 +845,11 @@ func (s DeleteSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackRequest
@@ -844,6 +899,8 @@ func (s *DescribeAttackInput) SetAttackId(v string) *DescribeAttackInput {
 type DescribeAttackOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attack that is described.
 	Attack *AttackDetail `type:"structure"`
 }
@@ -856,6 +913,11 @@ func (s DescribeAttackOutput) String() string {
 // GoString returns the string representation
 func (s DescribeAttackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAttackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttack sets the Attack field's value.
@@ -911,6 +973,8 @@ func (s *DescribeProtectionInput) SetProtectionId(v string) *DescribeProtectionI
 type DescribeProtectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Protection object that is described.
 	Protection *Protection `type:"structure"`
 }
@@ -923,6 +987,11 @@ func (s DescribeProtectionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeProtectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProtectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetProtection sets the Protection field's value.
@@ -950,6 +1019,8 @@ func (s DescribeSubscriptionInput) GoString() string {
 type DescribeSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The AWS Shield Advanced subscription details for an account.
 	Subscription *Subscription `type:"structure"`
 }
@@ -962,6 +1033,11 @@ func (s DescribeSubscriptionOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSubscriptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSubscription sets the Subscription field's value.
@@ -1050,6 +1126,8 @@ func (s *ListAttacksInput) SetStartTime(v *TimeRange) *ListAttacksInput {
 type ListAttacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The attack information for the specified time range.
 	AttackSummaries []AttackSummary `type:"list"`
 
@@ -1068,6 +1146,11 @@ func (s ListAttacksOutput) String() string {
 // GoString returns the string representation
 func (s ListAttacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAttacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAttackSummaries sets the AttackSummaries field's value.
@@ -1134,6 +1217,8 @@ func (s *ListProtectionsInput) SetNextToken(v string) *ListProtectionsInput {
 type ListProtectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If you specify a value for MaxResults and you have more Protections than
 	// the value of MaxResults, AWS Shield Advanced returns a NextToken value in
 	// the response that allows you to list another group of Protections. For the
@@ -1153,6 +1238,11 @@ func (s ListProtectionsOutput) String() string {
 // GoString returns the string representation
 func (s ListProtectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProtectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.

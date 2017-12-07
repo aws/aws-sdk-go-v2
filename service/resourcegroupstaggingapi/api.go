@@ -62,7 +62,10 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput)
 		input = &GetResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourcesOutput{})
+	output := &GetResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetResourcesRequest{Request: req, Input: input}
 }
 
@@ -164,7 +167,10 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) Get
 		input = &GetTagKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagKeysOutput{})
+	output := &GetTagKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTagKeysRequest{Request: req, Input: input}
 }
 
@@ -267,7 +273,10 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput)
 		input = &GetTagValuesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagValuesOutput{})
+	output := &GetTagValuesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTagValuesRequest{Request: req, Input: input}
 }
 
@@ -379,7 +388,10 @@ func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput)
 		input = &TagResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourcesOutput{})
+	output := &TagResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourcesRequest{Request: req, Input: input}
 }
 
@@ -436,7 +448,10 @@ func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesIn
 		input = &UntagResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourcesOutput{})
+	output := &UntagResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourcesRequest{Request: req, Input: input}
 }
 
@@ -609,6 +624,8 @@ func (s *GetResourcesInput) SetTagsPerPage(v int64) *GetResourcesInput {
 type GetResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.
@@ -626,6 +643,11 @@ func (s GetResourcesOutput) String() string {
 // GoString returns the string representation
 func (s GetResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPaginationToken sets the PaginationToken field's value.
@@ -670,6 +692,8 @@ func (s *GetTagKeysInput) SetPaginationToken(v string) *GetTagKeysInput {
 type GetTagKeysOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.
@@ -687,6 +711,11 @@ func (s GetTagKeysOutput) String() string {
 // GoString returns the string representation
 func (s GetTagKeysOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTagKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPaginationToken sets the PaginationToken field's value.
@@ -760,6 +789,8 @@ func (s *GetTagValuesInput) SetPaginationToken(v string) *GetTagValuesInput {
 type GetTagValuesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.
@@ -777,6 +808,11 @@ func (s GetTagValuesOutput) String() string {
 // GoString returns the string representation
 func (s GetTagValuesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTagValuesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPaginationToken sets the PaginationToken field's value.
@@ -989,6 +1025,8 @@ func (s *TagResourcesInput) SetTags(v map[string]string) *TagResourcesInput {
 type TagResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details of resources that could not be tagged. An error code, status code,
 	// and error message are returned for each failed item.
 	FailedResourcesMap map[string]FailureInfo `type:"map"`
@@ -1002,6 +1040,11 @@ func (s TagResourcesOutput) String() string {
 // GoString returns the string representation
 func (s TagResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedResourcesMap sets the FailedResourcesMap field's value.
@@ -1079,6 +1122,8 @@ func (s *UntagResourcesInput) SetTagKeys(v []string) *UntagResourcesInput {
 type UntagResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Details of resources that could not be untagged. An error code, status code,
 	// and error message are returned for each failed item.
 	FailedResourcesMap map[string]FailureInfo `type:"map"`
@@ -1092,6 +1137,11 @@ func (s UntagResourcesOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourcesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFailedResourcesMap sets the FailedResourcesMap field's value.

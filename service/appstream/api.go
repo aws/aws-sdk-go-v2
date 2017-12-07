@@ -52,7 +52,10 @@ func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) AssociateF
 		input = &AssociateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateFleetOutput{})
+	output := &AssociateFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AssociateFleetRequest{Request: req, Input: input}
 }
 
@@ -98,7 +101,10 @@ func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInp
 		input = &CreateDirectoryConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectoryConfigOutput{})
+	output := &CreateDirectoryConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDirectoryConfigRequest{Request: req, Input: input}
 }
 
@@ -144,7 +150,10 @@ func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) CreateFleetReque
 		input = &CreateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFleetOutput{})
+	output := &CreateFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFleetRequest{Request: req, Input: input}
 }
 
@@ -188,7 +197,10 @@ func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) Cr
 		input = &CreateImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImageBuilderOutput{})
+	output := &CreateImageBuilderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateImageBuilderRequest{Request: req, Input: input}
 }
 
@@ -232,7 +244,10 @@ func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuil
 		input = &CreateImageBuilderStreamingURLInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImageBuilderStreamingURLOutput{})
+	output := &CreateImageBuilderStreamingURLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateImageBuilderStreamingURLRequest{Request: req, Input: input}
 }
 
@@ -278,7 +293,10 @@ func (c *AppStream) CreateStackRequest(input *CreateStackInput) CreateStackReque
 		input = &CreateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStackOutput{})
+	output := &CreateStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStackRequest{Request: req, Input: input}
 }
 
@@ -327,7 +345,10 @@ func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) Cr
 		input = &CreateStreamingURLInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStreamingURLOutput{})
+	output := &CreateStreamingURLOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateStreamingURLRequest{Request: req, Input: input}
 }
 
@@ -373,7 +394,10 @@ func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInp
 		input = &DeleteDirectoryConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectoryConfigOutput{})
+	output := &DeleteDirectoryConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDirectoryConfigRequest{Request: req, Input: input}
 }
 
@@ -419,7 +443,10 @@ func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetReque
 		input = &DeleteFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFleetOutput{})
+	output := &DeleteFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFleetRequest{Request: req, Input: input}
 }
 
@@ -463,7 +490,10 @@ func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) DeleteImageReque
 		input = &DeleteImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImageOutput{})
+	output := &DeleteImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteImageRequest{Request: req, Input: input}
 }
 
@@ -507,7 +537,10 @@ func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) De
 		input = &DeleteImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImageBuilderOutput{})
+	output := &DeleteImageBuilderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteImageBuilderRequest{Request: req, Input: input}
 }
 
@@ -554,7 +587,10 @@ func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) DeleteStackReque
 		input = &DeleteStackInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackOutput{})
+	output := &DeleteStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteStackRequest{Request: req, Input: input}
 }
 
@@ -600,7 +636,10 @@ func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConf
 		input = &DescribeDirectoryConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDirectoryConfigsOutput{})
+	output := &DescribeDirectoryConfigsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDirectoryConfigsRequest{Request: req, Input: input}
 }
 
@@ -646,7 +685,10 @@ func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFl
 		input = &DescribeFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetsOutput{})
+	output := &DescribeFleetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeFleetsRequest{Request: req, Input: input}
 }
 
@@ -690,7 +732,10 @@ func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInp
 		input = &DescribeImageBuildersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImageBuildersOutput{})
+	output := &DescribeImageBuildersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImageBuildersRequest{Request: req, Input: input}
 }
 
@@ -736,7 +781,10 @@ func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) DescribeIm
 		input = &DescribeImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImagesOutput{})
+	output := &DescribeImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeImagesRequest{Request: req, Input: input}
 }
 
@@ -785,7 +833,10 @@ func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) Descri
 		input = &DescribeSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSessionsOutput{})
+	output := &DescribeSessionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSessionsRequest{Request: req, Input: input}
 }
 
@@ -831,7 +882,10 @@ func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) DescribeSt
 		input = &DescribeStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	output := &DescribeStacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeStacksRequest{Request: req, Input: input}
 }
 
@@ -877,7 +931,10 @@ func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) Disa
 		input = &DisassociateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateFleetOutput{})
+	output := &DisassociateFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisassociateFleetRequest{Request: req, Input: input}
 }
 
@@ -923,7 +980,10 @@ func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessio
 		input = &ExpireSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &ExpireSessionOutput{})
+	output := &ExpireSessionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ExpireSessionRequest{Request: req, Input: input}
 }
 
@@ -969,7 +1029,10 @@ func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput
 		input = &ListAssociatedFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociatedFleetsOutput{})
+	output := &ListAssociatedFleetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssociatedFleetsRequest{Request: req, Input: input}
 }
 
@@ -1015,7 +1078,10 @@ func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput
 		input = &ListAssociatedStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociatedStacksOutput{})
+	output := &ListAssociatedStacksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAssociatedStacksRequest{Request: req, Input: input}
 }
 
@@ -1061,7 +1127,10 @@ func (c *AppStream) StartFleetRequest(input *StartFleetInput) StartFleetRequest 
 		input = &StartFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &StartFleetOutput{})
+	output := &StartFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartFleetRequest{Request: req, Input: input}
 }
 
@@ -1105,7 +1174,10 @@ func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) Star
 		input = &StartImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &StartImageBuilderOutput{})
+	output := &StartImageBuilderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartImageBuilderRequest{Request: req, Input: input}
 }
 
@@ -1151,7 +1223,10 @@ func (c *AppStream) StopFleetRequest(input *StopFleetInput) StopFleetRequest {
 		input = &StopFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &StopFleetOutput{})
+	output := &StopFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopFleetRequest{Request: req, Input: input}
 }
 
@@ -1195,7 +1270,10 @@ func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) StopIm
 		input = &StopImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &StopImageBuilderOutput{})
+	output := &StopImageBuilderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopImageBuilderRequest{Request: req, Input: input}
 }
 
@@ -1241,7 +1319,10 @@ func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInp
 		input = &UpdateDirectoryConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDirectoryConfigOutput{})
+	output := &UpdateDirectoryConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDirectoryConfigRequest{Request: req, Input: input}
 }
 
@@ -1292,7 +1373,10 @@ func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) UpdateFleetReque
 		input = &UpdateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetOutput{})
+	output := &UpdateFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFleetRequest{Request: req, Input: input}
 }
 
@@ -1338,7 +1422,10 @@ func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) UpdateStackReque
 		input = &UpdateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStackOutput{})
+	output := &UpdateStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateStackRequest{Request: req, Input: input}
 }
 
@@ -1485,6 +1572,8 @@ func (s *AssociateFleetInput) SetStackName(v string) *AssociateFleetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetResult
 type AssociateFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -1495,6 +1584,11 @@ func (s AssociateFleetOutput) String() string {
 // GoString returns the string representation
 func (s AssociateFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes the capacity for a fleet.
@@ -1672,6 +1766,8 @@ func (s *CreateDirectoryConfigInput) SetServiceAccountCredentials(v *ServiceAcco
 type CreateDirectoryConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the directory configuration.
 	DirectoryConfig *DirectoryConfig `type:"structure"`
 }
@@ -1684,6 +1780,11 @@ func (s CreateDirectoryConfigOutput) String() string {
 // GoString returns the string representation
 func (s CreateDirectoryConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDirectoryConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryConfig sets the DirectoryConfig field's value.
@@ -1908,6 +2009,8 @@ func (s *CreateFleetInput) SetVpcConfig(v *VpcConfig) *CreateFleetInput {
 type CreateFleetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the fleet.
 	Fleet *Fleet `type:"structure"`
 }
@@ -1920,6 +2023,11 @@ func (s CreateFleetOutput) String() string {
 // GoString returns the string representation
 func (s CreateFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleet sets the Fleet field's value.
@@ -2044,6 +2152,8 @@ func (s *CreateImageBuilderInput) SetVpcConfig(v *VpcConfig) *CreateImageBuilder
 type CreateImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -2055,6 +2165,11 @@ func (s CreateImageBuilderOutput) String() string {
 // GoString returns the string representation
 func (s CreateImageBuilderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateImageBuilderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageBuilder sets the ImageBuilder field's value.
@@ -2116,6 +2231,8 @@ func (s *CreateImageBuilderStreamingURLInput) SetValidity(v int64) *CreateImageB
 type CreateImageBuilderStreamingURLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	Expires *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	StreamingURL *string `min:"1" type:"string"`
@@ -2129,6 +2246,11 @@ func (s CreateImageBuilderStreamingURLOutput) String() string {
 // GoString returns the string representation
 func (s CreateImageBuilderStreamingURLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateImageBuilderStreamingURLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExpires sets the Expires field's value.
@@ -2224,6 +2346,8 @@ func (s *CreateStackInput) SetStorageConnectors(v []StorageConnector) *CreateSta
 type CreateStackOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the stack.
 	Stack *Stack `type:"structure"`
 }
@@ -2236,6 +2360,11 @@ func (s CreateStackOutput) String() string {
 // GoString returns the string representation
 func (s CreateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStack sets the Stack field's value.
@@ -2361,6 +2490,8 @@ func (s *CreateStreamingURLInput) SetValidity(v int64) *CreateStreamingURLInput 
 type CreateStreamingURLOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
 	Expires *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -2376,6 +2507,11 @@ func (s CreateStreamingURLOutput) String() string {
 // GoString returns the string representation
 func (s CreateStreamingURLOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateStreamingURLOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetExpires sets the Expires field's value.
@@ -2433,6 +2569,8 @@ func (s *DeleteDirectoryConfigInput) SetDirectoryName(v string) *DeleteDirectory
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigResult
 type DeleteDirectoryConfigOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2443,6 +2581,11 @@ func (s DeleteDirectoryConfigOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDirectoryConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDirectoryConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleetRequest
@@ -2491,6 +2634,8 @@ func (s *DeleteFleetInput) SetName(v string) *DeleteFleetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleetResult
 type DeleteFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2501,6 +2646,11 @@ func (s DeleteFleetOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilderRequest
@@ -2545,6 +2695,8 @@ func (s *DeleteImageBuilderInput) SetName(v string) *DeleteImageBuilderInput {
 type DeleteImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -2556,6 +2708,11 @@ func (s DeleteImageBuilderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteImageBuilderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteImageBuilderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageBuilder sets the ImageBuilder field's value.
@@ -2606,6 +2763,8 @@ func (s *DeleteImageInput) SetName(v string) *DeleteImageInput {
 type DeleteImageOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Describes an image.
 	Image *Image `type:"structure"`
 }
@@ -2618,6 +2777,11 @@ func (s DeleteImageOutput) String() string {
 // GoString returns the string representation
 func (s DeleteImageOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImage sets the Image field's value.
@@ -2672,6 +2836,8 @@ func (s *DeleteStackInput) SetName(v string) *DeleteStackInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackResult
 type DeleteStackOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2682,6 +2848,11 @@ func (s DeleteStackOutput) String() string {
 // GoString returns the string representation
 func (s DeleteStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsRequest
@@ -2744,6 +2915,8 @@ func (s *DescribeDirectoryConfigsInput) SetNextToken(v string) *DescribeDirector
 type DescribeDirectoryConfigsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the directory configurations.
 	DirectoryConfigs []DirectoryConfig `type:"list"`
 
@@ -2760,6 +2933,11 @@ func (s DescribeDirectoryConfigsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDirectoryConfigsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDirectoryConfigsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryConfigs sets the DirectoryConfigs field's value.
@@ -2825,6 +3003,8 @@ func (s *DescribeFleetsInput) SetNextToken(v string) *DescribeFleetsInput {
 type DescribeFleetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the fleets.
 	Fleets []Fleet `type:"list"`
 
@@ -2841,6 +3021,11 @@ func (s DescribeFleetsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeFleetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleets sets the Fleets field's value.
@@ -2911,6 +3096,8 @@ func (s *DescribeImageBuildersInput) SetNextToken(v string) *DescribeImageBuilde
 type DescribeImageBuildersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ImageBuilders []ImageBuilder `type:"list"`
 
 	NextToken *string `min:"1" type:"string"`
@@ -2924,6 +3111,11 @@ func (s DescribeImageBuildersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImageBuildersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImageBuildersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageBuilders sets the ImageBuilders field's value.
@@ -2966,6 +3158,8 @@ func (s *DescribeImagesInput) SetNames(v []string) *DescribeImagesInput {
 type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the images.
 	Images []Image `type:"list"`
 }
@@ -2978,6 +3172,11 @@ func (s DescribeImagesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeImagesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImages sets the Images field's value.
@@ -3097,6 +3296,8 @@ func (s *DescribeSessionsInput) SetUserId(v string) *DescribeSessionsInput {
 type DescribeSessionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -3113,6 +3314,11 @@ func (s DescribeSessionsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSessionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSessionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3178,6 +3384,8 @@ func (s *DescribeStacksInput) SetNextToken(v string) *DescribeStacksInput {
 type DescribeStacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string `min:"1" type:"string"`
@@ -3194,6 +3402,11 @@ func (s DescribeStacksOutput) String() string {
 // GoString returns the string representation
 func (s DescribeStacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -3327,6 +3540,8 @@ func (s *DisassociateFleetInput) SetStackName(v string) *DisassociateFleetInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetResult
 type DisassociateFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3337,6 +3552,11 @@ func (s DisassociateFleetOutput) String() string {
 // GoString returns the string representation
 func (s DisassociateFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the information needed for streaming instances to join a domain.
@@ -3419,6 +3639,8 @@ func (s *ExpireSessionInput) SetSessionId(v string) *ExpireSessionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionResult
 type ExpireSessionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3429,6 +3651,11 @@ func (s ExpireSessionOutput) String() string {
 // GoString returns the string representation
 func (s ExpireSessionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExpireSessionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the parameters for a fleet.
@@ -4032,6 +4259,8 @@ func (s *ListAssociatedFleetsInput) SetStackName(v string) *ListAssociatedFleets
 type ListAssociatedFleetsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of the fleets.
 	Names []string `type:"list"`
 
@@ -4048,6 +4277,11 @@ func (s ListAssociatedFleetsOutput) String() string {
 // GoString returns the string representation
 func (s ListAssociatedFleetsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssociatedFleetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNames sets the Names field's value.
@@ -4122,6 +4356,8 @@ func (s *ListAssociatedStacksInput) SetNextToken(v string) *ListAssociatedStacks
 type ListAssociatedStacksOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The names of the stacks.
 	Names []string `type:"list"`
 
@@ -4138,6 +4374,11 @@ func (s ListAssociatedStacksOutput) String() string {
 // GoString returns the string representation
 func (s ListAssociatedStacksOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAssociatedStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNames sets the Names field's value.
@@ -4498,6 +4739,8 @@ func (s *StartFleetInput) SetName(v string) *StartFleetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleetResult
 type StartFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4508,6 +4751,11 @@ func (s StartFleetOutput) String() string {
 // GoString returns the string representation
 func (s StartFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderRequest
@@ -4555,6 +4803,8 @@ func (s *StartImageBuilderInput) SetName(v string) *StartImageBuilderInput {
 type StartImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -4566,6 +4816,11 @@ func (s StartImageBuilderOutput) String() string {
 // GoString returns the string representation
 func (s StartImageBuilderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartImageBuilderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageBuilder sets the ImageBuilder field's value.
@@ -4620,6 +4875,8 @@ func (s *StopFleetInput) SetName(v string) *StopFleetInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetResult
 type StopFleetOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4630,6 +4887,11 @@ func (s StopFleetOutput) String() string {
 // GoString returns the string representation
 func (s StopFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilderRequest
@@ -4677,6 +4939,8 @@ func (s *StopImageBuilderInput) SetName(v string) *StopImageBuilderInput {
 type StopImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -4688,6 +4952,11 @@ func (s StopImageBuilderOutput) String() string {
 // GoString returns the string representation
 func (s StopImageBuilderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopImageBuilderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImageBuilder sets the ImageBuilder field's value.
@@ -4816,6 +5085,8 @@ func (s *UpdateDirectoryConfigInput) SetServiceAccountCredentials(v *ServiceAcco
 type UpdateDirectoryConfigOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the directory configuration.
 	DirectoryConfig *DirectoryConfig `type:"structure"`
 }
@@ -4828,6 +5099,11 @@ func (s UpdateDirectoryConfigOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDirectoryConfigOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDirectoryConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryConfig sets the DirectoryConfig field's value.
@@ -5047,6 +5323,8 @@ func (s *UpdateFleetInput) SetVpcConfig(v *VpcConfig) *UpdateFleetInput {
 type UpdateFleetOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the fleet.
 	Fleet *Fleet `type:"structure"`
 }
@@ -5059,6 +5337,11 @@ func (s UpdateFleetOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFleetOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFleet sets the Fleet field's value.
@@ -5157,6 +5440,8 @@ func (s *UpdateStackInput) SetStorageConnectors(v []StorageConnector) *UpdateSta
 type UpdateStackOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Information about the stack.
 	Stack *Stack `type:"structure"`
 }
@@ -5169,6 +5454,11 @@ func (s UpdateStackOutput) String() string {
 // GoString returns the string representation
 func (s UpdateStackOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStack sets the Stack field's value.

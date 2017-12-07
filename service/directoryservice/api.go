@@ -61,7 +61,10 @@ func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) AddIpRout
 		input = &AddIpRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &AddIpRoutesOutput{})
+	output := &AddIpRoutesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddIpRoutesRequest{Request: req, Input: input}
 }
 
@@ -109,7 +112,10 @@ func (c *DirectoryService) AddTagsToResourceRequest(input *AddTagsToResourceInpu
 		input = &AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	output := &AddTagsToResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
@@ -158,7 +164,10 @@ func (c *DirectoryService) CancelSchemaExtensionRequest(input *CancelSchemaExten
 		input = &CancelSchemaExtensionInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSchemaExtensionOutput{})
+	output := &CancelSchemaExtensionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CancelSchemaExtensionRequest{Request: req, Input: input}
 }
 
@@ -209,7 +218,10 @@ func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput)
 		input = &ConnectDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &ConnectDirectoryOutput{})
+	output := &ConnectDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ConnectDirectoryRequest{Request: req, Input: input}
 }
 
@@ -260,7 +272,10 @@ func (c *DirectoryService) CreateAliasRequest(input *CreateAliasInput) CreateAli
 		input = &CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAliasOutput{})
+	output := &CreateAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAliasRequest{Request: req, Input: input}
 }
 
@@ -307,7 +322,10 @@ func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) Cre
 		input = &CreateComputerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateComputerOutput{})
+	output := &CreateComputerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateComputerRequest{Request: req, Input: input}
 }
 
@@ -355,7 +373,10 @@ func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateCondit
 		input = &CreateConditionalForwarderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConditionalForwarderOutput{})
+	output := &CreateConditionalForwarderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConditionalForwarderRequest{Request: req, Input: input}
 }
 
@@ -406,7 +427,10 @@ func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) C
 		input = &CreateDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectoryOutput{})
+	output := &CreateDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDirectoryRequest{Request: req, Input: input}
 }
 
@@ -457,7 +481,10 @@ func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInpu
 		input = &CreateMicrosoftADInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMicrosoftADOutput{})
+	output := &CreateMicrosoftADOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateMicrosoftADRequest{Request: req, Input: input}
 }
 
@@ -505,7 +532,10 @@ func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) Cre
 		input = &CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	output := &CreateSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateSnapshotRequest{Request: req, Input: input}
 }
 
@@ -558,7 +588,10 @@ func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) CreateTru
 		input = &CreateTrustInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrustOutput{})
+	output := &CreateTrustOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTrustRequest{Request: req, Input: input}
 }
 
@@ -604,7 +637,10 @@ func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteCondit
 		input = &DeleteConditionalForwarderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConditionalForwarderOutput{})
+	output := &DeleteConditionalForwarderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConditionalForwarderRequest{Request: req, Input: input}
 }
 
@@ -655,7 +691,10 @@ func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) D
 		input = &DeleteDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectoryOutput{})
+	output := &DeleteDirectoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDirectoryRequest{Request: req, Input: input}
 }
 
@@ -701,7 +740,10 @@ func (c *DirectoryService) DeleteSnapshotRequest(input *DeleteSnapshotInput) Del
 		input = &DeleteSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotOutput{})
+	output := &DeleteSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteSnapshotRequest{Request: req, Input: input}
 }
 
@@ -748,7 +790,10 @@ func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) DeleteTru
 		input = &DeleteTrustInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrustOutput{})
+	output := &DeleteTrustOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTrustRequest{Request: req, Input: input}
 }
 
@@ -794,7 +839,10 @@ func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTop
 		input = &DeregisterEventTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterEventTopicOutput{})
+	output := &DeregisterEventTopicOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeregisterEventTopicRequest{Request: req, Input: input}
 }
 
@@ -843,7 +891,10 @@ func (c *DirectoryService) DescribeConditionalForwardersRequest(input *DescribeC
 		input = &DescribeConditionalForwardersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConditionalForwardersOutput{})
+	output := &DescribeConditionalForwardersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeConditionalForwardersRequest{Request: req, Input: input}
 }
 
@@ -900,7 +951,10 @@ func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectories
 		input = &DescribeDirectoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDirectoriesOutput{})
+	output := &DescribeDirectoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDirectoriesRequest{Request: req, Input: input}
 }
 
@@ -952,7 +1006,10 @@ func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomai
 		input = &DescribeDomainControllersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDomainControllersOutput{})
+	output := &DescribeDomainControllersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeDomainControllersRequest{Request: req, Input: input}
 }
 
@@ -1052,7 +1109,10 @@ func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopics
 		input = &DescribeEventTopicsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventTopicsOutput{})
+	output := &DescribeEventTopicsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeEventTopicsRequest{Request: req, Input: input}
 }
 
@@ -1105,7 +1165,10 @@ func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInpu
 		input = &DescribeSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	output := &DescribeSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeSnapshotsRequest{Request: req, Input: input}
 }
 
@@ -1154,7 +1217,10 @@ func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) Des
 		input = &DescribeTrustsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustsOutput{})
+	output := &DescribeTrustsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DescribeTrustsRequest{Request: req, Input: input}
 }
 
@@ -1201,7 +1267,10 @@ func (c *DirectoryService) DisableRadiusRequest(input *DisableRadiusInput) Disab
 		input = &DisableRadiusInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableRadiusOutput{})
+	output := &DisableRadiusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableRadiusRequest{Request: req, Input: input}
 }
 
@@ -1247,7 +1316,10 @@ func (c *DirectoryService) DisableSsoRequest(input *DisableSsoInput) DisableSsoR
 		input = &DisableSsoInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableSsoOutput{})
+	output := &DisableSsoOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DisableSsoRequest{Request: req, Input: input}
 }
 
@@ -1294,7 +1366,10 @@ func (c *DirectoryService) EnableRadiusRequest(input *EnableRadiusInput) EnableR
 		input = &EnableRadiusInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableRadiusOutput{})
+	output := &EnableRadiusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableRadiusRequest{Request: req, Input: input}
 }
 
@@ -1340,7 +1415,10 @@ func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) EnableSsoRequ
 		input = &EnableSsoInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableSsoOutput{})
+	output := &EnableSsoOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return EnableSsoRequest{Request: req, Input: input}
 }
 
@@ -1386,7 +1464,10 @@ func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsIn
 		input = &GetDirectoryLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDirectoryLimitsOutput{})
+	output := &GetDirectoryLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDirectoryLimitsRequest{Request: req, Input: input}
 }
 
@@ -1432,7 +1513,10 @@ func (c *DirectoryService) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInpu
 		input = &GetSnapshotLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSnapshotLimitsOutput{})
+	output := &GetSnapshotLimitsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetSnapshotLimitsRequest{Request: req, Input: input}
 }
 
@@ -1478,7 +1562,10 @@ func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) ListIpR
 		input = &ListIpRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIpRoutesOutput{})
+	output := &ListIpRoutesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListIpRoutesRequest{Request: req, Input: input}
 }
 
@@ -1524,7 +1611,10 @@ func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensio
 		input = &ListSchemaExtensionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSchemaExtensionsOutput{})
+	output := &ListSchemaExtensionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListSchemaExtensionsRequest{Request: req, Input: input}
 }
 
@@ -1570,7 +1660,10 @@ func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResource
 		input = &ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
@@ -1621,7 +1714,10 @@ func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicIn
 		input = &RegisterEventTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterEventTopicOutput{})
+	output := &RegisterEventTopicOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RegisterEventTopicRequest{Request: req, Input: input}
 }
 
@@ -1667,7 +1763,10 @@ func (c *DirectoryService) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) Rem
 		input = &RemoveIpRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveIpRoutesOutput{})
+	output := &RemoveIpRoutesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveIpRoutesRequest{Request: req, Input: input}
 }
 
@@ -1713,7 +1812,10 @@ func (c *DirectoryService) RemoveTagsFromResourceRequest(input *RemoveTagsFromRe
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	output := &RemoveTagsFromResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
@@ -1767,7 +1869,10 @@ func (c *DirectoryService) RestoreFromSnapshotRequest(input *RestoreFromSnapshot
 		input = &RestoreFromSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreFromSnapshotOutput{})
+	output := &RestoreFromSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RestoreFromSnapshotRequest{Request: req, Input: input}
 }
 
@@ -1813,7 +1918,10 @@ func (c *DirectoryService) StartSchemaExtensionRequest(input *StartSchemaExtensi
 		input = &StartSchemaExtensionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartSchemaExtensionOutput{})
+	output := &StartSchemaExtensionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartSchemaExtensionRequest{Request: req, Input: input}
 }
 
@@ -1859,7 +1967,10 @@ func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateCondit
 		input = &UpdateConditionalForwarderInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConditionalForwarderOutput{})
+	output := &UpdateConditionalForwarderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConditionalForwarderRequest{Request: req, Input: input}
 }
 
@@ -1910,7 +2021,10 @@ func (c *DirectoryService) UpdateNumberOfDomainControllersRequest(input *UpdateN
 		input = &UpdateNumberOfDomainControllersInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNumberOfDomainControllersOutput{})
+	output := &UpdateNumberOfDomainControllersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateNumberOfDomainControllersRequest{Request: req, Input: input}
 }
 
@@ -1957,7 +2071,10 @@ func (c *DirectoryService) UpdateRadiusRequest(input *UpdateRadiusInput) UpdateR
 		input = &UpdateRadiusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRadiusOutput{})
+	output := &UpdateRadiusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateRadiusRequest{Request: req, Input: input}
 }
 
@@ -2007,7 +2124,10 @@ func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) VerifyTru
 		input = &VerifyTrustInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyTrustOutput{})
+	output := &VerifyTrustOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return VerifyTrustRequest{Request: req, Input: input}
 }
 
@@ -2121,6 +2241,8 @@ func (s *AddIpRoutesInput) SetUpdateSecurityGroupForDirectoryControllers(v bool)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutesResult
 type AddIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2131,6 +2253,11 @@ func (s AddIpRoutesOutput) String() string {
 // GoString returns the string representation
 func (s AddIpRoutesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddIpRoutesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResourceRequest
@@ -2198,6 +2325,8 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResourceResult
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2208,6 +2337,11 @@ func (s AddTagsToResourceOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a named directory attribute.
@@ -2315,6 +2449,8 @@ func (s *CancelSchemaExtensionInput) SetSchemaExtensionId(v string) *CancelSchem
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtensionResult
 type CancelSchemaExtensionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2325,6 +2461,11 @@ func (s CancelSchemaExtensionOutput) String() string {
 // GoString returns the string representation
 func (s CancelSchemaExtensionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelSchemaExtensionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about a computer account in a directory.
@@ -2538,6 +2679,8 @@ func (s *ConnectDirectoryInput) SetSize(v DirectorySize) *ConnectDirectoryInput 
 type ConnectDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the new directory.
 	DirectoryId *string `type:"string"`
 }
@@ -2550,6 +2693,11 @@ func (s ConnectDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s ConnectDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ConnectDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryId sets the DirectoryId field's value.
@@ -2625,6 +2773,8 @@ func (s *CreateAliasInput) SetDirectoryId(v string) *CreateAliasInput {
 type CreateAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The alias for the directory.
 	Alias *string `min:"1" type:"string"`
 
@@ -2640,6 +2790,11 @@ func (s CreateAliasOutput) String() string {
 // GoString returns the string representation
 func (s CreateAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAlias sets the Alias field's value.
@@ -2767,6 +2922,8 @@ func (s *CreateComputerInput) SetPassword(v string) *CreateComputerInput {
 type CreateComputerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A Computer object that represents the computer account.
 	Computer *Computer `type:"structure"`
 }
@@ -2779,6 +2936,11 @@ func (s CreateComputerOutput) String() string {
 // GoString returns the string representation
 func (s CreateComputerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateComputerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetComputer sets the Computer field's value.
@@ -2866,6 +3028,8 @@ func (s *CreateConditionalForwarderInput) SetRemoteDomainName(v string) *CreateC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarderResult
 type CreateConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2876,6 +3040,11 @@ func (s CreateConditionalForwarderOutput) String() string {
 // GoString returns the string representation
 func (s CreateConditionalForwarderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConditionalForwarderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the inputs for the CreateDirectory operation.
@@ -2988,6 +3157,8 @@ func (s *CreateDirectoryInput) SetVpcSettings(v *DirectoryVpcSettings) *CreateDi
 type CreateDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the directory that was created.
 	DirectoryId *string `type:"string"`
 }
@@ -3000,6 +3171,11 @@ func (s CreateDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s CreateDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryId sets the DirectoryId field's value.
@@ -3112,6 +3288,8 @@ func (s *CreateMicrosoftADInput) SetVpcSettings(v *DirectoryVpcSettings) *Create
 type CreateMicrosoftADOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the directory that was created.
 	DirectoryId *string `type:"string"`
 }
@@ -3124,6 +3302,11 @@ func (s CreateMicrosoftADOutput) String() string {
 // GoString returns the string representation
 func (s CreateMicrosoftADOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateMicrosoftADOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryId sets the DirectoryId field's value.
@@ -3187,6 +3370,8 @@ func (s *CreateSnapshotInput) SetName(v string) *CreateSnapshotInput {
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the snapshot that was created.
 	SnapshotId *string `type:"string"`
 }
@@ -3199,6 +3384,11 @@ func (s CreateSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s CreateSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshotId sets the SnapshotId field's value.
@@ -3328,6 +3518,8 @@ func (s *CreateTrustInput) SetTrustType(v TrustType) *CreateTrustInput {
 type CreateTrustOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A unique identifier for the trust relationship that was created.
 	TrustId *string `type:"string"`
 }
@@ -3340,6 +3532,11 @@ func (s CreateTrustOutput) String() string {
 // GoString returns the string representation
 func (s CreateTrustOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTrustOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrustId sets the TrustId field's value.
@@ -3409,6 +3606,8 @@ func (s *DeleteConditionalForwarderInput) SetRemoteDomainName(v string) *DeleteC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarderResult
 type DeleteConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3419,6 +3618,11 @@ func (s DeleteConditionalForwarderOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConditionalForwarderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConditionalForwarderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the inputs for the DeleteDirectory operation.
@@ -3467,6 +3671,8 @@ func (s *DeleteDirectoryInput) SetDirectoryId(v string) *DeleteDirectoryInput {
 type DeleteDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The directory identifier.
 	DirectoryId *string `type:"string"`
 }
@@ -3479,6 +3685,11 @@ func (s DeleteDirectoryOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDirectoryOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDirectoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryId sets the DirectoryId field's value.
@@ -3533,6 +3744,8 @@ func (s *DeleteSnapshotInput) SetSnapshotId(v string) *DeleteSnapshotInput {
 type DeleteSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the directory snapshot that was deleted.
 	SnapshotId *string `type:"string"`
 }
@@ -3545,6 +3758,11 @@ func (s DeleteSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s DeleteSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshotId sets the SnapshotId field's value.
@@ -3609,6 +3827,8 @@ func (s *DeleteTrustInput) SetTrustId(v string) *DeleteTrustInput {
 type DeleteTrustOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Trust ID of the trust relationship that was deleted.
 	TrustId *string `type:"string"`
 }
@@ -3621,6 +3841,11 @@ func (s DeleteTrustOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTrustOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTrustOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrustId sets the TrustId field's value.
@@ -3693,6 +3918,8 @@ func (s *DeregisterEventTopicInput) SetTopicName(v string) *DeregisterEventTopic
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicResult
 type DeregisterEventTopicOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -3703,6 +3930,11 @@ func (s DeregisterEventTopicOutput) String() string {
 // GoString returns the string representation
 func (s DeregisterEventTopicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterEventTopicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes a conditional forwarder.
@@ -3762,6 +3994,8 @@ func (s *DescribeConditionalForwardersInput) SetRemoteDomainNames(v []string) *D
 type DescribeConditionalForwardersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of conditional forwarders that have been created.
 	ConditionalForwarders []ConditionalForwarder `type:"list"`
 }
@@ -3774,6 +4008,11 @@ func (s DescribeConditionalForwardersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeConditionalForwardersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeConditionalForwardersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConditionalForwarders sets the ConditionalForwarders field's value.
@@ -3836,6 +4075,8 @@ func (s *DescribeDirectoriesInput) SetNextToken(v string) *DescribeDirectoriesIn
 type DescribeDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of DirectoryDescription objects that were retrieved.
 	//
 	// It is possible that this list contains less than the number of items specified
@@ -3858,6 +4099,11 @@ func (s DescribeDirectoriesOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDirectoriesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDirectoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryDescriptions sets the DirectoryDescriptions field's value.
@@ -3945,6 +4191,8 @@ func (s *DescribeDomainControllersInput) SetNextToken(v string) *DescribeDomainC
 type DescribeDomainControllersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// List of the DomainController objects that were retrieved.
 	DomainControllers []DomainController `type:"list"`
 
@@ -3962,6 +4210,11 @@ func (s DescribeDomainControllersOutput) String() string {
 // GoString returns the string representation
 func (s DescribeDomainControllersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDomainControllersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDomainControllers sets the DomainControllers field's value.
@@ -4019,6 +4272,8 @@ func (s *DescribeEventTopicsInput) SetTopicNames(v []string) *DescribeEventTopic
 type DescribeEventTopicsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of SNS topic names that receive status messages from the specified
 	// Directory ID.
 	EventTopics []EventTopic `type:"list"`
@@ -4032,6 +4287,11 @@ func (s DescribeEventTopicsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeEventTopicsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEventTopicsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventTopics sets the EventTopics field's value.
@@ -4100,6 +4360,8 @@ func (s *DescribeSnapshotsInput) SetSnapshotIds(v []string) *DescribeSnapshotsIn
 type DescribeSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If not null, more results are available. Pass this value in the NextToken
 	// member of a subsequent call to DescribeSnapshots.
 	NextToken *string `type:"string"`
@@ -4121,6 +4383,11 @@ func (s DescribeSnapshotsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeSnapshotsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4200,6 +4467,8 @@ func (s *DescribeTrustsInput) SetTrustIds(v []string) *DescribeTrustsInput {
 type DescribeTrustsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeTrusts to retrieve the next set
 	// of items.
@@ -4222,6 +4491,11 @@ func (s DescribeTrustsOutput) String() string {
 // GoString returns the string representation
 func (s DescribeTrustsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeTrustsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -4860,6 +5134,8 @@ func (s *DisableRadiusInput) SetDirectoryId(v string) *DisableRadiusInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadiusResult
 type DisableRadiusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4870,6 +5146,11 @@ func (s DisableRadiusOutput) String() string {
 // GoString returns the string representation
 func (s DisableRadiusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableRadiusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the inputs for the DisableSso operation.
@@ -4951,6 +5232,8 @@ func (s *DisableSsoInput) SetUserName(v string) *DisableSsoInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSsoResult
 type DisableSsoOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4961,6 +5244,11 @@ func (s DisableSsoOutput) String() string {
 // GoString returns the string representation
 func (s DisableSsoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableSsoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains information about the domain controllers for a specified directory.
@@ -5134,6 +5422,8 @@ func (s *EnableRadiusInput) SetRadiusSettings(v *RadiusSettings) *EnableRadiusIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadiusResult
 type EnableRadiusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5144,6 +5434,11 @@ func (s EnableRadiusOutput) String() string {
 // GoString returns the string representation
 func (s EnableRadiusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableRadiusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the inputs for the EnableSso operation.
@@ -5225,6 +5520,8 @@ func (s *EnableSsoInput) SetUserName(v string) *EnableSsoInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoResult
 type EnableSsoOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5235,6 +5532,11 @@ func (s EnableSsoOutput) String() string {
 // GoString returns the string representation
 func (s EnableSsoOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableSsoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about SNS topic and AWS Directory Service directory associations.
@@ -5320,6 +5622,8 @@ func (s GetDirectoryLimitsInput) GoString() string {
 type GetDirectoryLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A DirectoryLimits object that contains the directory limits for the current
 	// region.
 	DirectoryLimits *DirectoryLimits `type:"structure"`
@@ -5333,6 +5637,11 @@ func (s GetDirectoryLimitsOutput) String() string {
 // GoString returns the string representation
 func (s GetDirectoryLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDirectoryLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDirectoryLimits sets the DirectoryLimits field's value.
@@ -5387,6 +5696,8 @@ func (s *GetSnapshotLimitsInput) SetDirectoryId(v string) *GetSnapshotLimitsInpu
 type GetSnapshotLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A SnapshotLimits object that contains the manual snapshot limits for the
 	// specified directory.
 	SnapshotLimits *SnapshotLimits `type:"structure"`
@@ -5400,6 +5711,11 @@ func (s GetSnapshotLimitsOutput) String() string {
 // GoString returns the string representation
 func (s GetSnapshotLimitsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSnapshotLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSnapshotLimits sets the SnapshotLimits field's value.
@@ -5579,6 +5895,8 @@ func (s *ListIpRoutesInput) SetNextToken(v string) *ListIpRoutesInput {
 type ListIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of IpRoutes.
 	IpRoutesInfo []IpRouteInfo `type:"list"`
 
@@ -5596,6 +5914,11 @@ func (s ListIpRoutesOutput) String() string {
 // GoString returns the string representation
 func (s ListIpRoutesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListIpRoutesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetIpRoutesInfo sets the IpRoutesInfo field's value.
@@ -5674,6 +5997,8 @@ func (s *ListSchemaExtensionsInput) SetNextToken(v string) *ListSchemaExtensions
 type ListSchemaExtensionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to ListSchemaExtensions to retrieve the next
 	// set of items.
@@ -5691,6 +6016,11 @@ func (s ListSchemaExtensionsOutput) String() string {
 // GoString returns the string representation
 func (s ListSchemaExtensionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSchemaExtensionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5767,6 +6097,8 @@ func (s *ListTagsForResourceInput) SetResourceId(v string) *ListTagsForResourceI
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Reserved for future use.
 	NextToken *string `type:"string"`
 
@@ -5782,6 +6114,11 @@ func (s ListTagsForResourceOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -5975,6 +6312,8 @@ func (s *RegisterEventTopicInput) SetTopicName(v string) *RegisterEventTopicInpu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopicResult
 type RegisterEventTopicOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5985,6 +6324,11 @@ func (s RegisterEventTopicOutput) String() string {
 // GoString returns the string representation
 func (s RegisterEventTopicOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterEventTopicOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutesRequest
@@ -6045,6 +6389,8 @@ func (s *RemoveIpRoutesInput) SetDirectoryId(v string) *RemoveIpRoutesInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutesResult
 type RemoveIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6055,6 +6401,11 @@ func (s RemoveIpRoutesOutput) String() string {
 // GoString returns the string representation
 func (s RemoveIpRoutesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveIpRoutesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResourceRequest
@@ -6115,6 +6466,8 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResourceResult
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6125,6 +6478,11 @@ func (s RemoveTagsFromResourceOutput) String() string {
 // GoString returns the string representation
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // An object representing the inputs for the RestoreFromSnapshot operation.
@@ -6172,6 +6530,8 @@ func (s *RestoreFromSnapshotInput) SetSnapshotId(v string) *RestoreFromSnapshotI
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshotResult
 type RestoreFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6182,6 +6542,11 @@ func (s RestoreFromSnapshotOutput) String() string {
 // GoString returns the string representation
 func (s RestoreFromSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreFromSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about a schema extension.
@@ -6473,6 +6838,8 @@ func (s *StartSchemaExtensionInput) SetLdifContent(v string) *StartSchemaExtensi
 type StartSchemaExtensionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The identifier of the schema extension that will be applied.
 	SchemaExtensionId *string `type:"string"`
 }
@@ -6485,6 +6852,11 @@ func (s StartSchemaExtensionOutput) String() string {
 // GoString returns the string representation
 func (s StartSchemaExtensionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartSchemaExtensionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetSchemaExtensionId sets the SchemaExtensionId field's value.
@@ -6742,6 +7114,8 @@ func (s *UpdateConditionalForwarderInput) SetRemoteDomainName(v string) *UpdateC
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderResult
 type UpdateConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6752,6 +7126,11 @@ func (s UpdateConditionalForwarderOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConditionalForwarderOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConditionalForwarderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllersRequest
@@ -6816,6 +7195,8 @@ func (s *UpdateNumberOfDomainControllersInput) SetDirectoryId(v string) *UpdateN
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllersResult
 type UpdateNumberOfDomainControllersOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6826,6 +7207,11 @@ func (s UpdateNumberOfDomainControllersOutput) String() string {
 // GoString returns the string representation
 func (s UpdateNumberOfDomainControllersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateNumberOfDomainControllersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Contains the inputs for the UpdateRadius operation.
@@ -6893,6 +7279,8 @@ func (s *UpdateRadiusInput) SetRadiusSettings(v *RadiusSettings) *UpdateRadiusIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadiusResult
 type UpdateRadiusOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6903,6 +7291,11 @@ func (s UpdateRadiusOutput) String() string {
 // GoString returns the string representation
 func (s UpdateRadiusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRadiusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Initiates the verification of an existing trust relationship between a Microsoft
@@ -6952,6 +7345,8 @@ func (s *VerifyTrustInput) SetTrustId(v string) *VerifyTrustInput {
 type VerifyTrustOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique Trust ID of the trust relationship that was verified.
 	TrustId *string `type:"string"`
 }
@@ -6964,6 +7359,11 @@ func (s VerifyTrustOutput) String() string {
 // GoString returns the string representation
 func (s VerifyTrustOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifyTrustOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrustId sets the TrustId field's value.

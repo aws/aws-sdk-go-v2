@@ -68,7 +68,10 @@ func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) AddPermissionRe
 		input = &AddPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddPermissionOutput{})
+	output := &AddPermissionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return AddPermissionRequest{Request: req, Input: input}
 }
 
@@ -118,7 +121,10 @@ func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 		input = &CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	output := &UpdateAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateAliasRequest{Request: req, Input: input}
 }
 
@@ -188,7 +194,10 @@ func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMapping
 		input = &CreateEventSourceMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	output := &UpdateEventSourceMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateEventSourceMappingRequest{Request: req, Input: input}
 }
 
@@ -243,7 +252,10 @@ func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctio
 		input = &CreateFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	output := &UpdateFunctionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateFunctionRequest{Request: req, Input: input}
 }
 
@@ -292,9 +304,12 @@ func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest 
 		input = &DeleteAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAliasOutput{})
+	output := &DeleteAliasOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteAliasRequest{Request: req, Input: input}
 }
 
@@ -344,7 +359,10 @@ func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMapping
 		input = &DeleteEventSourceMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	output := &UpdateEventSourceMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteEventSourceMappingRequest{Request: req, Input: input}
 }
 
@@ -402,9 +420,12 @@ func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 		input = &DeleteFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFunctionOutput{})
+	output := &DeleteFunctionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteFunctionRequest{Request: req, Input: input}
 }
 
@@ -456,7 +477,10 @@ func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 		input = &GetAccountSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	output := &GetAccountSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAccountSettingsRequest{Request: req, Input: input}
 }
 
@@ -506,7 +530,10 @@ func (c *Lambda) GetAliasRequest(input *GetAliasInput) GetAliasRequest {
 		input = &GetAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	output := &UpdateAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetAliasRequest{Request: req, Input: input}
 }
 
@@ -555,7 +582,10 @@ func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput)
 		input = &GetEventSourceMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	output := &UpdateEventSourceMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetEventSourceMappingRequest{Request: req, Input: input}
 }
 
@@ -613,7 +643,10 @@ func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest 
 		input = &GetFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFunctionOutput{})
+	output := &GetFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFunctionRequest{Request: req, Input: input}
 }
 
@@ -671,7 +704,10 @@ func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfiguration
 		input = &GetFunctionConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	output := &UpdateFunctionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetFunctionConfigurationRequest{Request: req, Input: input}
 }
 
@@ -724,7 +760,10 @@ func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 		input = &GetPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyOutput{})
+	output := &GetPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPolicyRequest{Request: req, Input: input}
 }
 
@@ -781,7 +820,10 @@ func (c *Lambda) InvokeRequest(input *InvokeInput) InvokeRequest {
 		input = &InvokeInput{}
 	}
 
-	req := c.newRequest(op, input, &InvokeOutput{})
+	output := &InvokeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InvokeRequest{Request: req, Input: input}
 }
 
@@ -836,7 +878,10 @@ func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest 
 		input = &InvokeAsyncInput{}
 	}
 
-	req := c.newRequest(op, input, &InvokeAsyncOutput{})
+	output := &InvokeAsyncOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return InvokeAsyncRequest{Request: req, Input: input}
 }
 
@@ -887,7 +932,10 @@ func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 		input = &ListAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAliasesOutput{})
+	output := &ListAliasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListAliasesRequest{Request: req, Input: input}
 }
 
@@ -951,7 +999,10 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 		input = &ListEventSourceMappingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEventSourceMappingsOutput{})
+	output := &ListEventSourceMappingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListEventSourceMappingsRequest{Request: req, Input: input}
 }
 
@@ -1061,7 +1112,10 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 		input = &ListFunctionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFunctionsOutput{})
+	output := &ListFunctionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListFunctionsRequest{Request: req, Input: input}
 }
 
@@ -1158,7 +1212,10 @@ func (c *Lambda) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 		input = &ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListTagsRequest{Request: req, Input: input}
 }
 
@@ -1205,7 +1262,10 @@ func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInpu
 		input = &ListVersionsByFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVersionsByFunctionOutput{})
+	output := &ListVersionsByFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ListVersionsByFunctionRequest{Request: req, Input: input}
 }
 
@@ -1255,7 +1315,10 @@ func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) PublishVersio
 		input = &PublishVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	output := &UpdateFunctionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return PublishVersionRequest{Request: req, Input: input}
 }
 
@@ -1313,9 +1376,12 @@ func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) RemovePer
 		input = &RemovePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemovePermissionOutput{})
+	output := &RemovePermissionOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return RemovePermissionRequest{Request: req, Input: input}
 }
 
@@ -1363,9 +1429,12 @@ func (c *Lambda) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 		input = &TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return TagResourceRequest{Request: req, Input: input}
 }
 
@@ -1412,9 +1481,12 @@ func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 		input = &UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UntagResourceRequest{Request: req, Input: input}
 }
 
@@ -1464,7 +1536,10 @@ func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 		input = &UpdateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	output := &UpdateAliasOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateAliasRequest{Request: req, Input: input}
 }
 
@@ -1526,7 +1601,10 @@ func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMapping
 		input = &UpdateEventSourceMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	output := &UpdateEventSourceMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateEventSourceMappingRequest{Request: req, Input: input}
 }
 
@@ -1580,7 +1658,10 @@ func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) Updat
 		input = &UpdateFunctionCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	output := &UpdateFunctionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFunctionCodeRequest{Request: req, Input: input}
 }
 
@@ -1636,7 +1717,10 @@ func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigu
 		input = &UpdateFunctionConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	output := &UpdateFunctionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateFunctionConfigurationRequest{Request: req, Input: input}
 }
 
@@ -1914,6 +1998,8 @@ func (s *AddPermissionInput) SetStatementId(v string) *AddPermissionInput {
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The permission statement you specified in the request. The response returns
 	// the same as a string using a backslash ("\") as an escape character in the
 	// JSON.
@@ -1928,6 +2014,11 @@ func (s AddPermissionOutput) String() string {
 // GoString returns the string representation
 func (s AddPermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddPermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatement sets the Statement field's value.
@@ -2490,6 +2581,8 @@ func (s *DeleteAliasInput) SetName(v string) *DeleteAliasInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasOutput
 type DeleteAliasOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2500,6 +2593,11 @@ func (s DeleteAliasOutput) String() string {
 // GoString returns the string representation
 func (s DeleteAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMappingRequest
@@ -2621,6 +2719,8 @@ func (s *DeleteFunctionInput) SetQualifier(v string) *DeleteFunctionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionOutput
 type DeleteFunctionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -2631,6 +2731,11 @@ func (s DeleteFunctionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The parent object that contains your environment's configuration settings.
@@ -2864,6 +2969,8 @@ func (s GetAccountSettingsInput) GoString() string {
 type GetAccountSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Provides limits of code size and concurrency associated with the current
 	// account and region.
 	AccountLimit *AccountLimit `type:"structure"`
@@ -2881,6 +2988,11 @@ func (s GetAccountSettingsOutput) String() string {
 // GoString returns the string representation
 func (s GetAccountSettingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAccountSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAccountLimit sets the AccountLimit field's value.
@@ -3141,6 +3253,8 @@ func (s *GetFunctionInput) SetQualifier(v string) *GetFunctionInput {
 type GetFunctionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The object for the Lambda function location.
 	Code *FunctionCodeLocation `type:"structure"`
 
@@ -3159,6 +3273,11 @@ func (s GetFunctionOutput) String() string {
 // GoString returns the string representation
 func (s GetFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCode sets the Code field's value.
@@ -3250,6 +3369,8 @@ func (s *GetPolicyInput) SetQualifier(v string) *GetPolicyInput {
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resource policy associated with the specified function. The response
 	// returns the same as a string using a backslash ("\") as an escape character
 	// in the JSON.
@@ -3264,6 +3385,11 @@ func (s GetPolicyOutput) String() string {
 // GoString returns the string representation
 func (s GetPolicyOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPolicy sets the Policy field's value.
@@ -3337,6 +3463,8 @@ func (s *InvokeAsyncInput) SetInvokeArgs(v io.ReadSeeker) *InvokeAsyncInput {
 type InvokeAsyncOutput struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 
+	responseMetadata aws.Response
+
 	// It will be 202 upon success.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
@@ -3349,6 +3477,11 @@ func (s InvokeAsyncOutput) String() string {
 // GoString returns the string representation
 func (s InvokeAsyncOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InvokeAsyncOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetStatus sets the Status field's value.
@@ -3481,6 +3614,8 @@ func (s *InvokeInput) SetQualifier(v string) *InvokeInput {
 type InvokeOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
+	responseMetadata aws.Response
+
 	// Indicates whether an error occurred while executing the Lambda function.
 	// If an error occurred this field will have one of two values; Handled or Unhandled.
 	// Handled errors are errors that are reported by the function while the Unhandled
@@ -3517,6 +3652,11 @@ func (s InvokeOutput) String() string {
 // GoString returns the string representation
 func (s InvokeOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InvokeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFunctionError sets the FunctionError field's value.
@@ -3629,6 +3769,8 @@ func (s *ListAliasesInput) SetMaxItems(v int64) *ListAliasesInput {
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of aliases.
 	Aliases []UpdateAliasOutput `type:"list"`
 
@@ -3644,6 +3786,11 @@ func (s ListAliasesOutput) String() string {
 // GoString returns the string representation
 func (s ListAliasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAliases sets the Aliases field's value.
@@ -3743,6 +3890,8 @@ func (s *ListEventSourceMappingsInput) SetMaxItems(v int64) *ListEventSourceMapp
 type ListEventSourceMappingsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// An array of EventSourceMappingConfiguration objects.
 	EventSourceMappings []UpdateEventSourceMappingOutput `type:"list"`
 
@@ -3758,6 +3907,11 @@ func (s ListEventSourceMappingsOutput) String() string {
 // GoString returns the string representation
 func (s ListEventSourceMappingsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListEventSourceMappingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetEventSourceMappings sets the EventSourceMappings field's value.
@@ -3858,6 +4012,8 @@ func (s *ListFunctionsInput) SetMaxItems(v int64) *ListFunctionsInput {
 type ListFunctionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Lambda functions.
 	Functions []UpdateFunctionConfigurationOutput `type:"list"`
 
@@ -3873,6 +4029,11 @@ func (s ListFunctionsOutput) String() string {
 // GoString returns the string representation
 func (s ListFunctionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFunctionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetFunctions sets the Functions field's value.
@@ -3931,6 +4092,8 @@ func (s *ListTagsInput) SetResource(v string) *ListTagsInput {
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The list of tags assigned to the function.
 	Tags map[string]string `type:"map"`
 }
@@ -3943,6 +4106,11 @@ func (s ListTagsOutput) String() string {
 // GoString returns the string representation
 func (s ListTagsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTags sets the Tags field's value.
@@ -4026,6 +4194,8 @@ func (s *ListVersionsByFunctionInput) SetMaxItems(v int64) *ListVersionsByFuncti
 type ListVersionsByFunctionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A string, present if there are more function versions.
 	NextMarker *string `type:"string"`
 
@@ -4041,6 +4211,11 @@ func (s ListVersionsByFunctionOutput) String() string {
 // GoString returns the string representation
 func (s ListVersionsByFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVersionsByFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextMarker sets the NextMarker field's value.
@@ -4210,6 +4385,8 @@ func (s *RemovePermissionInput) SetStatementId(v string) *RemovePermissionInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4220,6 +4397,11 @@ func (s RemovePermissionOutput) String() string {
 // GoString returns the string representation
 func (s RemovePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceRequest
@@ -4280,6 +4462,8 @@ func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4290,6 +4474,11 @@ func (s TagResourceOutput) String() string {
 // GoString returns the string representation
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The parent object that contains your function's tracing settings.
@@ -4404,6 +4593,8 @@ func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -4414,6 +4605,11 @@ func (s UntagResourceOutput) String() string {
 // GoString returns the string representation
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest
@@ -4506,6 +4702,8 @@ func (s *UpdateAliasInput) SetName(v string) *UpdateAliasInput {
 type UpdateAliasOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Lambda function ARN that is qualified using the alias name as the suffix.
 	// For example, if you create an alias called BETA that points to a helloworld
 	// function version, the ARN is arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA.
@@ -4529,6 +4727,11 @@ func (s UpdateAliasOutput) String() string {
 // GoString returns the string representation
 func (s UpdateAliasOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAliasOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAliasArn sets the AliasArn field's value.
@@ -4649,6 +4852,8 @@ func (s *UpdateEventSourceMappingInput) SetUUID(v string) *UpdateEventSourceMapp
 type UpdateEventSourceMappingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The largest number of records that AWS Lambda will retrieve from your event
 	// source at the time of invoking your function. Your function receives an event
 	// with all the retrieved records.
@@ -4687,6 +4892,11 @@ func (s UpdateEventSourceMappingOutput) String() string {
 // GoString returns the string representation
 func (s UpdateEventSourceMappingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateEventSourceMappingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetBatchSize sets the BatchSize field's value.
@@ -5053,6 +5263,8 @@ func (s *UpdateFunctionConfigurationInput) SetVpcConfig(v *VpcConfig) *UpdateFun
 type UpdateFunctionConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// It is the SHA256 hash of your function deployment package.
 	CodeSha256 *string `type:"string"`
 
@@ -5128,6 +5340,11 @@ func (s UpdateFunctionConfigurationOutput) String() string {
 // GoString returns the string representation
 func (s UpdateFunctionConfigurationOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFunctionConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCodeSha256 sets the CodeSha256 field's value.

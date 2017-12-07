@@ -52,7 +52,10 @@ func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) Bat
 		input = &BatchCreatePartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchCreatePartitionOutput{})
+	output := &BatchCreatePartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchCreatePartitionRequest{Request: req, Input: input}
 }
 
@@ -98,7 +101,10 @@ func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) B
 		input = &BatchDeleteConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteConnectionOutput{})
+	output := &BatchDeleteConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchDeleteConnectionRequest{Request: req, Input: input}
 }
 
@@ -144,7 +150,10 @@ func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) Bat
 		input = &BatchDeletePartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeletePartitionOutput{})
+	output := &BatchDeletePartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchDeletePartitionRequest{Request: req, Input: input}
 }
 
@@ -190,7 +199,10 @@ func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDelete
 		input = &BatchDeleteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteTableOutput{})
+	output := &BatchDeleteTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchDeleteTableRequest{Request: req, Input: input}
 }
 
@@ -236,7 +248,10 @@ func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGetP
 		input = &BatchGetPartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetPartitionOutput{})
+	output := &BatchGetPartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return BatchGetPartitionRequest{Request: req, Input: input}
 }
 
@@ -282,7 +297,10 @@ func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) CreateClass
 		input = &CreateClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClassifierOutput{})
+	output := &CreateClassifierOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateClassifierRequest{Request: req, Input: input}
 }
 
@@ -328,7 +346,10 @@ func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) CreateConne
 		input = &CreateConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConnectionOutput{})
+	output := &CreateConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateConnectionRequest{Request: req, Input: input}
 }
 
@@ -376,7 +397,10 @@ func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) CreateCrawlerRequ
 		input = &CreateCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCrawlerOutput{})
+	output := &CreateCrawlerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateCrawlerRequest{Request: req, Input: input}
 }
 
@@ -422,7 +446,10 @@ func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabaseR
 		input = &CreateDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDatabaseOutput{})
+	output := &CreateDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDatabaseRequest{Request: req, Input: input}
 }
 
@@ -468,7 +495,10 @@ func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) CreateDev
 		input = &CreateDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDevEndpointOutput{})
+	output := &CreateDevEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateDevEndpointRequest{Request: req, Input: input}
 }
 
@@ -514,7 +544,10 @@ func (c *Glue) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 		input = &CreateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobOutput{})
+	output := &CreateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateJobRequest{Request: req, Input: input}
 }
 
@@ -560,7 +593,10 @@ func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) CreatePartiti
 		input = &CreatePartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePartitionOutput{})
+	output := &CreatePartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreatePartitionRequest{Request: req, Input: input}
 }
 
@@ -606,7 +642,10 @@ func (c *Glue) CreateScriptRequest(input *CreateScriptInput) CreateScriptRequest
 		input = &CreateScriptInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateScriptOutput{})
+	output := &CreateScriptOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateScriptRequest{Request: req, Input: input}
 }
 
@@ -652,7 +691,10 @@ func (c *Glue) CreateTableRequest(input *CreateTableInput) CreateTableRequest {
 		input = &CreateTableInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTableOutput{})
+	output := &CreateTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTableRequest{Request: req, Input: input}
 }
 
@@ -698,7 +740,10 @@ func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRequ
 		input = &CreateTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTriggerOutput{})
+	output := &CreateTriggerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateTriggerRequest{Request: req, Input: input}
 }
 
@@ -744,7 +789,10 @@ func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunction
 		input = &CreateUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserDefinedFunctionOutput{})
+	output := &CreateUserDefinedFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return CreateUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
@@ -790,7 +838,10 @@ func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteClass
 		input = &DeleteClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClassifierOutput{})
+	output := &DeleteClassifierOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteClassifierRequest{Request: req, Input: input}
 }
 
@@ -836,7 +887,10 @@ func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteConne
 		input = &DeleteConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConnectionOutput{})
+	output := &DeleteConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteConnectionRequest{Request: req, Input: input}
 }
 
@@ -883,7 +937,10 @@ func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRequ
 		input = &DeleteCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCrawlerOutput{})
+	output := &DeleteCrawlerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteCrawlerRequest{Request: req, Input: input}
 }
 
@@ -929,7 +986,10 @@ func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabaseR
 		input = &DeleteDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatabaseOutput{})
+	output := &DeleteDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDatabaseRequest{Request: req, Input: input}
 }
 
@@ -975,7 +1035,10 @@ func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) DeleteDev
 		input = &DeleteDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDevEndpointOutput{})
+	output := &DeleteDevEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteDevEndpointRequest{Request: req, Input: input}
 }
 
@@ -1021,7 +1084,10 @@ func (c *Glue) DeleteJobRequest(input *DeleteJobInput) DeleteJobRequest {
 		input = &DeleteJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteJobOutput{})
+	output := &DeleteJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteJobRequest{Request: req, Input: input}
 }
 
@@ -1067,7 +1133,10 @@ func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) DeletePartiti
 		input = &DeletePartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePartitionOutput{})
+	output := &DeletePartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeletePartitionRequest{Request: req, Input: input}
 }
 
@@ -1113,7 +1182,10 @@ func (c *Glue) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest {
 		input = &DeleteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTableOutput{})
+	output := &DeleteTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTableRequest{Request: req, Input: input}
 }
 
@@ -1159,7 +1231,10 @@ func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRequ
 		input = &DeleteTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTriggerOutput{})
+	output := &DeleteTriggerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteTriggerRequest{Request: req, Input: input}
 }
 
@@ -1205,7 +1280,10 @@ func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunction
 		input = &DeleteUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserDefinedFunctionOutput{})
+	output := &DeleteUserDefinedFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return DeleteUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
@@ -1251,7 +1329,10 @@ func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput)
 		input = &GetCatalogImportStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCatalogImportStatusOutput{})
+	output := &GetCatalogImportStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCatalogImportStatusRequest{Request: req, Input: input}
 }
 
@@ -1297,7 +1378,10 @@ func (c *Glue) GetClassifierRequest(input *GetClassifierInput) GetClassifierRequ
 		input = &GetClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClassifierOutput{})
+	output := &GetClassifierOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetClassifierRequest{Request: req, Input: input}
 }
 
@@ -1349,7 +1433,10 @@ func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersR
 		input = &GetClassifiersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClassifiersOutput{})
+	output := &GetClassifiersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetClassifiersRequest{Request: req, Input: input}
 }
 
@@ -1445,7 +1532,10 @@ func (c *Glue) GetConnectionRequest(input *GetConnectionInput) GetConnectionRequ
 		input = &GetConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectionOutput{})
+	output := &GetConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConnectionRequest{Request: req, Input: input}
 }
 
@@ -1497,7 +1587,10 @@ func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsR
 		input = &GetConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectionsOutput{})
+	output := &GetConnectionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetConnectionsRequest{Request: req, Input: input}
 }
 
@@ -1593,7 +1686,10 @@ func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
 		input = &GetCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCrawlerOutput{})
+	output := &GetCrawlerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCrawlerRequest{Request: req, Input: input}
 }
 
@@ -1645,7 +1741,10 @@ func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawle
 		input = &GetCrawlerMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCrawlerMetricsOutput{})
+	output := &GetCrawlerMetricsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCrawlerMetricsRequest{Request: req, Input: input}
 }
 
@@ -1747,7 +1846,10 @@ func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
 		input = &GetCrawlersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCrawlersOutput{})
+	output := &GetCrawlersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetCrawlersRequest{Request: req, Input: input}
 }
 
@@ -1843,7 +1945,10 @@ func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) GetDatabaseRequest {
 		input = &GetDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDatabaseOutput{})
+	output := &GetDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDatabaseRequest{Request: req, Input: input}
 }
 
@@ -1895,7 +2000,10 @@ func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest
 		input = &GetDatabasesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDatabasesOutput{})
+	output := &GetDatabasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDatabasesRequest{Request: req, Input: input}
 }
 
@@ -1991,7 +2099,10 @@ func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDataflow
 		input = &GetDataflowGraphInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataflowGraphOutput{})
+	output := &GetDataflowGraphOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDataflowGraphRequest{Request: req, Input: input}
 }
 
@@ -2037,7 +2148,10 @@ func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) GetDevEndpointR
 		input = &GetDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevEndpointOutput{})
+	output := &GetDevEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDevEndpointRequest{Request: req, Input: input}
 }
 
@@ -2089,7 +2203,10 @@ func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpoin
 		input = &GetDevEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevEndpointsOutput{})
+	output := &GetDevEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetDevEndpointsRequest{Request: req, Input: input}
 }
 
@@ -2185,7 +2302,10 @@ func (c *Glue) GetJobRequest(input *GetJobInput) GetJobRequest {
 		input = &GetJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobOutput{})
+	output := &GetJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobRequest{Request: req, Input: input}
 }
 
@@ -2231,7 +2351,10 @@ func (c *Glue) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
 		input = &GetJobRunInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobRunOutput{})
+	output := &GetJobRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobRunRequest{Request: req, Input: input}
 }
 
@@ -2283,7 +2406,10 @@ func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 		input = &GetJobRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobRunsOutput{})
+	output := &GetJobRunsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobRunsRequest{Request: req, Input: input}
 }
 
@@ -2385,7 +2511,10 @@ func (c *Glue) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 		input = &GetJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobsOutput{})
+	output := &GetJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetJobsRequest{Request: req, Input: input}
 }
 
@@ -2481,7 +2610,10 @@ func (c *Glue) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
 		input = &GetMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMappingOutput{})
+	output := &GetMappingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetMappingRequest{Request: req, Input: input}
 }
 
@@ -2527,7 +2659,10 @@ func (c *Glue) GetPartitionRequest(input *GetPartitionInput) GetPartitionRequest
 		input = &GetPartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPartitionOutput{})
+	output := &GetPartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPartitionRequest{Request: req, Input: input}
 }
 
@@ -2579,7 +2714,10 @@ func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRequ
 		input = &GetPartitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPartitionsOutput{})
+	output := &GetPartitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPartitionsRequest{Request: req, Input: input}
 }
 
@@ -2675,7 +2813,10 @@ func (c *Glue) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
 		input = &GetPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPlanOutput{})
+	output := &GetPlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetPlanRequest{Request: req, Input: input}
 }
 
@@ -2721,7 +2862,10 @@ func (c *Glue) GetTableRequest(input *GetTableInput) GetTableRequest {
 		input = &GetTableInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTableOutput{})
+	output := &GetTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTableRequest{Request: req, Input: input}
 }
 
@@ -2774,7 +2918,10 @@ func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVer
 		input = &GetTableVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTableVersionsOutput{})
+	output := &GetTableVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTableVersionsRequest{Request: req, Input: input}
 }
 
@@ -2876,7 +3023,10 @@ func (c *Glue) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 		input = &GetTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTablesOutput{})
+	output := &GetTablesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTablesRequest{Request: req, Input: input}
 }
 
@@ -2972,7 +3122,10 @@ func (c *Glue) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
 		input = &GetTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTriggerOutput{})
+	output := &GetTriggerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTriggerRequest{Request: req, Input: input}
 }
 
@@ -3024,7 +3177,10 @@ func (c *Glue) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
 		input = &GetTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTriggersOutput{})
+	output := &GetTriggersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetTriggersRequest{Request: req, Input: input}
 }
 
@@ -3120,7 +3276,10 @@ func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput)
 		input = &GetUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserDefinedFunctionOutput{})
+	output := &GetUserDefinedFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
@@ -3172,7 +3331,10 @@ func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInpu
 		input = &GetUserDefinedFunctionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserDefinedFunctionsOutput{})
+	output := &GetUserDefinedFunctionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return GetUserDefinedFunctionsRequest{Request: req, Input: input}
 }
 
@@ -3268,7 +3430,10 @@ func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) Impor
 		input = &ImportCatalogToGlueInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportCatalogToGlueOutput{})
+	output := &ImportCatalogToGlueOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ImportCatalogToGlueRequest{Request: req, Input: input}
 }
 
@@ -3314,7 +3479,10 @@ func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobBoo
 		input = &ResetJobBookmarkInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetJobBookmarkOutput{})
+	output := &ResetJobBookmarkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return ResetJobBookmarkRequest{Request: req, Input: input}
 }
 
@@ -3361,7 +3529,10 @@ func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) StartCrawlerRequest
 		input = &StartCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &StartCrawlerOutput{})
+	output := &StartCrawlerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartCrawlerRequest{Request: req, Input: input}
 }
 
@@ -3408,7 +3579,10 @@ func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) Sta
 		input = &StartCrawlerScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &StartCrawlerScheduleOutput{})
+	output := &StartCrawlerScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartCrawlerScheduleRequest{Request: req, Input: input}
 }
 
@@ -3454,7 +3628,10 @@ func (c *Glue) StartJobRunRequest(input *StartJobRunInput) StartJobRunRequest {
 		input = &StartJobRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartJobRunOutput{})
+	output := &StartJobRunOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartJobRunRequest{Request: req, Input: input}
 }
 
@@ -3500,7 +3677,10 @@ func (c *Glue) StartTriggerRequest(input *StartTriggerInput) StartTriggerRequest
 		input = &StartTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &StartTriggerOutput{})
+	output := &StartTriggerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StartTriggerRequest{Request: req, Input: input}
 }
 
@@ -3546,7 +3726,10 @@ func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) StopCrawlerRequest {
 		input = &StopCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &StopCrawlerOutput{})
+	output := &StopCrawlerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopCrawlerRequest{Request: req, Input: input}
 }
 
@@ -3593,7 +3776,10 @@ func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) StopC
 		input = &StopCrawlerScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &StopCrawlerScheduleOutput{})
+	output := &StopCrawlerScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopCrawlerScheduleRequest{Request: req, Input: input}
 }
 
@@ -3639,7 +3825,10 @@ func (c *Glue) StopTriggerRequest(input *StopTriggerInput) StopTriggerRequest {
 		input = &StopTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTriggerOutput{})
+	output := &StopTriggerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return StopTriggerRequest{Request: req, Input: input}
 }
 
@@ -3685,7 +3874,10 @@ func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateClass
 		input = &UpdateClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClassifierOutput{})
+	output := &UpdateClassifierOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateClassifierRequest{Request: req, Input: input}
 }
 
@@ -3731,7 +3923,10 @@ func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateConne
 		input = &UpdateConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConnectionOutput{})
+	output := &UpdateConnectionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateConnectionRequest{Request: req, Input: input}
 }
 
@@ -3778,7 +3973,10 @@ func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRequ
 		input = &UpdateCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCrawlerOutput{})
+	output := &UpdateCrawlerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCrawlerRequest{Request: req, Input: input}
 }
 
@@ -3824,7 +4022,10 @@ func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) U
 		input = &UpdateCrawlerScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCrawlerScheduleOutput{})
+	output := &UpdateCrawlerScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateCrawlerScheduleRequest{Request: req, Input: input}
 }
 
@@ -3870,7 +4071,10 @@ func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabaseR
 		input = &UpdateDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDatabaseOutput{})
+	output := &UpdateDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDatabaseRequest{Request: req, Input: input}
 }
 
@@ -3916,7 +4120,10 @@ func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateDev
 		input = &UpdateDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDevEndpointOutput{})
+	output := &UpdateDevEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateDevEndpointRequest{Request: req, Input: input}
 }
 
@@ -3962,7 +4169,10 @@ func (c *Glue) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 		input = &UpdateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobOutput{})
+	output := &UpdateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateJobRequest{Request: req, Input: input}
 }
 
@@ -4008,7 +4218,10 @@ func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) UpdatePartiti
 		input = &UpdatePartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePartitionOutput{})
+	output := &UpdatePartitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdatePartitionRequest{Request: req, Input: input}
 }
 
@@ -4054,7 +4267,10 @@ func (c *Glue) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest {
 		input = &UpdateTableInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTableOutput{})
+	output := &UpdateTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTableRequest{Request: req, Input: input}
 }
 
@@ -4100,7 +4316,10 @@ func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) UpdateTriggerRequ
 		input = &UpdateTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTriggerOutput{})
+	output := &UpdateTriggerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateTriggerRequest{Request: req, Input: input}
 }
 
@@ -4146,7 +4365,10 @@ func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunction
 		input = &UpdateUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserDefinedFunctionOutput{})
+	output := &UpdateUserDefinedFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
 	return UpdateUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
@@ -4294,6 +4516,8 @@ func (s *BatchCreatePartitionInput) SetTableName(v string) *BatchCreatePartition
 type BatchCreatePartitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Errors encountered when trying to create the requested partitions.
 	Errors []PartitionError `type:"list"`
 }
@@ -4306,6 +4530,11 @@ func (s BatchCreatePartitionOutput) String() string {
 // GoString returns the string representation
 func (s BatchCreatePartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchCreatePartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrors sets the Errors field's value.
@@ -4371,6 +4600,8 @@ func (s *BatchDeleteConnectionInput) SetConnectionNameList(v []string) *BatchDel
 type BatchDeleteConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A map of the names of connections that were not successfully deleted to error
 	// details.
 	Errors map[string]ErrorDetail `type:"map"`
@@ -4387,6 +4618,11 @@ func (s BatchDeleteConnectionOutput) String() string {
 // GoString returns the string representation
 func (s BatchDeleteConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeleteConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrors sets the Errors field's value.
@@ -4501,6 +4737,8 @@ func (s *BatchDeletePartitionInput) SetTableName(v string) *BatchDeletePartition
 type BatchDeletePartitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Errors encountered when trying to delete the requested partitions.
 	Errors []PartitionError `type:"list"`
 }
@@ -4513,6 +4751,11 @@ func (s BatchDeletePartitionOutput) String() string {
 // GoString returns the string representation
 func (s BatchDeletePartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeletePartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrors sets the Errors field's value.
@@ -4596,6 +4839,8 @@ func (s *BatchDeleteTableInput) SetTablesToDelete(v []string) *BatchDeleteTableI
 type BatchDeleteTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of errors encountered in attempting to delete the specified tables.
 	Errors []TableError `type:"list"`
 }
@@ -4608,6 +4853,11 @@ func (s BatchDeleteTableOutput) String() string {
 // GoString returns the string representation
 func (s BatchDeleteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeleteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetErrors sets the Errors field's value.
@@ -4716,6 +4966,8 @@ func (s *BatchGetPartitionInput) SetTableName(v string) *BatchGetPartitionInput 
 type BatchGetPartitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the requested partitions.
 	Partitions []Partition `type:"list"`
 
@@ -4732,6 +4984,11 @@ func (s BatchGetPartitionOutput) String() string {
 // GoString returns the string representation
 func (s BatchGetPartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetPartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPartitions sets the Partitions field's value.
@@ -5753,6 +6010,8 @@ func (s *CreateClassifierInput) SetGrokClassifier(v *CreateGrokClassifierRequest
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifierResponse
 type CreateClassifierOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5763,6 +6022,11 @@ func (s CreateClassifierOutput) String() string {
 // GoString returns the string representation
 func (s CreateClassifierOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateClassifierOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnectionRequest
@@ -5826,6 +6090,8 @@ func (s *CreateConnectionInput) SetConnectionInput(v *ConnectionInput) *CreateCo
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnectionResponse
 type CreateConnectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5836,6 +6102,11 @@ func (s CreateConnectionOutput) String() string {
 // GoString returns the string representation
 func (s CreateConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest
@@ -5978,6 +6249,8 @@ func (s *CreateCrawlerInput) SetTargets(v *CrawlerTargets) *CreateCrawlerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerResponse
 type CreateCrawlerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -5988,6 +6261,11 @@ func (s CreateCrawlerOutput) String() string {
 // GoString returns the string representation
 func (s CreateCrawlerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCrawlerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabaseRequest
@@ -6051,6 +6329,8 @@ func (s *CreateDatabaseInput) SetDatabaseInput(v *DatabaseInput) *CreateDatabase
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabaseResponse
 type CreateDatabaseOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6061,6 +6341,11 @@ func (s CreateDatabaseOutput) String() string {
 // GoString returns the string representation
 func (s CreateDatabaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointRequest
@@ -6190,6 +6475,8 @@ func (s *CreateDevEndpointInput) SetSubnetId(v string) *CreateDevEndpointInput {
 type CreateDevEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The AWS availability zone where this DevEndpoint is located.
 	AvailabilityZone *string `type:"string"`
 
@@ -6240,6 +6527,11 @@ func (s CreateDevEndpointOutput) String() string {
 // GoString returns the string representation
 func (s CreateDevEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDevEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetAvailabilityZone sets the AvailabilityZone field's value.
@@ -6548,6 +6840,8 @@ func (s *CreateJobInput) SetRole(v string) *CreateJobInput {
 type CreateJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The unique name of the new job that has been created.
 	Name *string `min:"1" type:"string"`
 }
@@ -6560,6 +6854,11 @@ func (s CreateJobOutput) String() string {
 // GoString returns the string representation
 func (s CreateJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -6665,6 +6964,8 @@ func (s *CreatePartitionInput) SetTableName(v string) *CreatePartitionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartitionResponse
 type CreatePartitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6675,6 +6976,11 @@ func (s CreatePartitionOutput) String() string {
 // GoString returns the string representation
 func (s CreatePartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScriptRequest
@@ -6738,6 +7044,8 @@ func (s *CreateScriptInput) SetDagNodes(v []CodeGenNode) *CreateScriptInput {
 type CreateScriptOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Python script generated from the DAG.
 	PythonScript *string `type:"string"`
 }
@@ -6750,6 +7058,11 @@ func (s CreateScriptOutput) String() string {
 // GoString returns the string representation
 func (s CreateScriptOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateScriptOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPythonScript sets the PythonScript field's value.
@@ -6837,6 +7150,8 @@ func (s *CreateTableInput) SetTableInput(v *TableInput) *CreateTableInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableResponse
 type CreateTableOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -6847,6 +7162,11 @@ func (s CreateTableOutput) String() string {
 // GoString returns the string representation
 func (s CreateTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest
@@ -6964,6 +7284,8 @@ func (s *CreateTriggerInput) SetType(v TriggerType) *CreateTriggerInput {
 type CreateTriggerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name assigned to the new trigger.
 	Name *string `min:"1" type:"string"`
 }
@@ -6976,6 +7298,11 @@ func (s CreateTriggerOutput) String() string {
 // GoString returns the string representation
 func (s CreateTriggerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTriggerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -7063,6 +7390,8 @@ func (s *CreateUserDefinedFunctionInput) SetFunctionInput(v *UserDefinedFunction
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUserDefinedFunctionResponse
 type CreateUserDefinedFunctionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7073,6 +7402,11 @@ func (s CreateUserDefinedFunctionOutput) String() string {
 // GoString returns the string representation
 func (s CreateUserDefinedFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserDefinedFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Database object represents a logical grouping of tables that may reside
@@ -7259,6 +7593,8 @@ func (s *DeleteClassifierInput) SetName(v string) *DeleteClassifierInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteClassifierResponse
 type DeleteClassifierOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7269,6 +7605,11 @@ func (s DeleteClassifierOutput) String() string {
 // GoString returns the string representation
 func (s DeleteClassifierOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteClassifierOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnectionRequest
@@ -7330,6 +7671,8 @@ func (s *DeleteConnectionInput) SetConnectionName(v string) *DeleteConnectionInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnectionResponse
 type DeleteConnectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7340,6 +7683,11 @@ func (s DeleteConnectionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawlerRequest
@@ -7388,6 +7736,8 @@ func (s *DeleteCrawlerInput) SetName(v string) *DeleteCrawlerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawlerResponse
 type DeleteCrawlerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7398,6 +7748,11 @@ func (s DeleteCrawlerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteCrawlerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCrawlerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabaseRequest
@@ -7459,6 +7814,8 @@ func (s *DeleteDatabaseInput) SetName(v string) *DeleteDatabaseInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabaseResponse
 type DeleteDatabaseOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7469,6 +7826,11 @@ func (s DeleteDatabaseOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDatabaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpointRequest
@@ -7514,6 +7876,8 @@ func (s *DeleteDevEndpointInput) SetEndpointName(v string) *DeleteDevEndpointInp
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpointResponse
 type DeleteDevEndpointOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7524,6 +7888,11 @@ func (s DeleteDevEndpointOutput) String() string {
 // GoString returns the string representation
 func (s DeleteDevEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDevEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteJobRequest
@@ -7573,6 +7942,8 @@ func (s *DeleteJobInput) SetJobName(v string) *DeleteJobInput {
 type DeleteJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the job that was deleted.
 	JobName *string `min:"1" type:"string"`
 }
@@ -7585,6 +7956,11 @@ func (s DeleteJobOutput) String() string {
 // GoString returns the string representation
 func (s DeleteJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobName sets the JobName field's value.
@@ -7685,6 +8061,8 @@ func (s *DeletePartitionInput) SetTableName(v string) *DeletePartitionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartitionResponse
 type DeletePartitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7695,6 +8073,11 @@ func (s DeletePartitionOutput) String() string {
 // GoString returns the string representation
 func (s DeletePartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableRequest
@@ -7774,6 +8157,8 @@ func (s *DeleteTableInput) SetName(v string) *DeleteTableInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableResponse
 type DeleteTableOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7784,6 +8169,11 @@ func (s DeleteTableOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTriggerRequest
@@ -7833,6 +8223,8 @@ func (s *DeleteTriggerInput) SetName(v string) *DeleteTriggerInput {
 type DeleteTriggerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the trigger that was deleted.
 	Name *string `min:"1" type:"string"`
 }
@@ -7845,6 +8237,11 @@ func (s DeleteTriggerOutput) String() string {
 // GoString returns the string representation
 func (s DeleteTriggerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTriggerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -7930,6 +8327,8 @@ func (s *DeleteUserDefinedFunctionInput) SetFunctionName(v string) *DeleteUserDe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUserDefinedFunctionResponse
 type DeleteUserDefinedFunctionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -7940,6 +8339,11 @@ func (s DeleteUserDefinedFunctionOutput) String() string {
 // GoString returns the string representation
 func (s DeleteUserDefinedFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserDefinedFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // A development endpoint where a developer can remotely debug ETL scripts.
@@ -8250,6 +8654,8 @@ func (s *GetCatalogImportStatusInput) SetCatalogId(v string) *GetCatalogImportSt
 type GetCatalogImportStatusOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The status of the specified catalog migration.
 	ImportStatus *CatalogImportStatus `type:"structure"`
 }
@@ -8262,6 +8668,11 @@ func (s GetCatalogImportStatusOutput) String() string {
 // GoString returns the string representation
 func (s GetCatalogImportStatusOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCatalogImportStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetImportStatus sets the ImportStatus field's value.
@@ -8317,6 +8728,8 @@ func (s *GetClassifierInput) SetName(v string) *GetClassifierInput {
 type GetClassifierOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested Classifier.
 	Classifier *Classifier `type:"structure"`
 }
@@ -8329,6 +8742,11 @@ func (s GetClassifierOutput) String() string {
 // GoString returns the string representation
 func (s GetClassifierOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetClassifierOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClassifier sets the Classifier field's value.
@@ -8387,6 +8805,8 @@ func (s *GetClassifiersInput) SetNextToken(v string) *GetClassifiersInput {
 type GetClassifiersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested list of Classifier objects.
 	Classifiers []Classifier `type:"list"`
 
@@ -8402,6 +8822,11 @@ func (s GetClassifiersOutput) String() string {
 // GoString returns the string representation
 func (s GetClassifiersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetClassifiersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetClassifiers sets the Classifiers field's value.
@@ -8476,6 +8901,8 @@ func (s *GetConnectionInput) SetName(v string) *GetConnectionInput {
 type GetConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested connection definition.
 	Connection *Connection `type:"structure"`
 }
@@ -8488,6 +8915,11 @@ func (s GetConnectionOutput) String() string {
 // GoString returns the string representation
 func (s GetConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnection sets the Connection field's value.
@@ -8603,6 +9035,8 @@ func (s *GetConnectionsInput) SetNextToken(v string) *GetConnectionsInput {
 type GetConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of requested connection definitions.
 	ConnectionList []Connection `type:"list"`
 
@@ -8619,6 +9053,11 @@ func (s GetConnectionsOutput) String() string {
 // GoString returns the string representation
 func (s GetConnectionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConnectionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetConnectionList sets the ConnectionList field's value.
@@ -8735,6 +9174,8 @@ func (s *GetCrawlerMetricsInput) SetNextToken(v string) *GetCrawlerMetricsInput 
 type GetCrawlerMetricsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of metrics for the specified crawler.
 	CrawlerMetricsList []CrawlerMetrics `type:"list"`
 
@@ -8753,6 +9194,11 @@ func (s GetCrawlerMetricsOutput) GoString() string {
 	return s.String()
 }
 
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCrawlerMetricsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // SetCrawlerMetricsList sets the CrawlerMetricsList field's value.
 func (s *GetCrawlerMetricsOutput) SetCrawlerMetricsList(v []CrawlerMetrics) *GetCrawlerMetricsOutput {
 	s.CrawlerMetricsList = v
@@ -8769,6 +9215,8 @@ func (s *GetCrawlerMetricsOutput) SetNextToken(v string) *GetCrawlerMetricsOutpu
 type GetCrawlerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The metadata for the specified Crawler.
 	Crawler *Crawler `type:"structure"`
 }
@@ -8781,6 +9229,11 @@ func (s GetCrawlerOutput) String() string {
 // GoString returns the string representation
 func (s GetCrawlerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCrawlerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCrawler sets the Crawler field's value.
@@ -8839,6 +9292,8 @@ func (s *GetCrawlersInput) SetNextToken(v string) *GetCrawlersInput {
 type GetCrawlersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Crawler metadata.
 	Crawlers []Crawler `type:"list"`
 
@@ -8855,6 +9310,11 @@ func (s GetCrawlersOutput) String() string {
 // GoString returns the string representation
 func (s GetCrawlersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCrawlersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetCrawlers sets the Crawlers field's value.
@@ -8929,6 +9389,8 @@ func (s *GetDatabaseInput) SetName(v string) *GetDatabaseInput {
 type GetDatabaseOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The definition of the specified database in the catalog.
 	Database *Database `type:"structure"`
 }
@@ -8941,6 +9403,11 @@ func (s GetDatabaseOutput) String() string {
 // GoString returns the string representation
 func (s GetDatabaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDatabase sets the Database field's value.
@@ -9012,6 +9479,8 @@ func (s *GetDatabasesInput) SetNextToken(v string) *GetDatabasesInput {
 type GetDatabasesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of Database objects from the specified catalog.
 	//
 	// DatabaseList is a required field
@@ -9030,6 +9499,11 @@ func (s GetDatabasesOutput) String() string {
 // GoString returns the string representation
 func (s GetDatabasesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDatabasesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDatabaseList sets the DatabaseList field's value.
@@ -9072,6 +9546,8 @@ func (s *GetDataflowGraphInput) SetPythonScript(v string) *GetDataflowGraphInput
 type GetDataflowGraphOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of the edges in the resulting DAG.
 	DagEdges []CodeGenEdge `type:"list"`
 
@@ -9087,6 +9563,11 @@ func (s GetDataflowGraphOutput) String() string {
 // GoString returns the string representation
 func (s GetDataflowGraphOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDataflowGraphOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDagEdges sets the DagEdges field's value.
@@ -9145,6 +9626,8 @@ func (s *GetDevEndpointInput) SetEndpointName(v string) *GetDevEndpointInput {
 type GetDevEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A DevEndpoint definition.
 	DevEndpoint *DevEndpoint `type:"structure"`
 }
@@ -9157,6 +9640,11 @@ func (s GetDevEndpointOutput) String() string {
 // GoString returns the string representation
 func (s GetDevEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDevEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevEndpoint sets the DevEndpoint field's value.
@@ -9215,6 +9703,8 @@ func (s *GetDevEndpointsInput) SetNextToken(v string) *GetDevEndpointsInput {
 type GetDevEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of DevEndpoint definitions.
 	DevEndpoints []DevEndpoint `type:"list"`
 
@@ -9230,6 +9720,11 @@ func (s GetDevEndpointsOutput) String() string {
 // GoString returns the string representation
 func (s GetDevEndpointsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDevEndpointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetDevEndpoints sets the DevEndpoints field's value.
@@ -9291,6 +9786,8 @@ func (s *GetJobInput) SetJobName(v string) *GetJobInput {
 type GetJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested job definition.
 	Job *Job `type:"structure"`
 }
@@ -9303,6 +9800,11 @@ func (s GetJobOutput) String() string {
 // GoString returns the string representation
 func (s GetJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJob sets the Job field's value.
@@ -9385,6 +9887,8 @@ func (s *GetJobRunInput) SetRunId(v string) *GetJobRunInput {
 type GetJobRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested job-run metadata.
 	JobRun *JobRun `type:"structure"`
 }
@@ -9397,6 +9901,11 @@ func (s GetJobRunOutput) String() string {
 // GoString returns the string representation
 func (s GetJobRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobRun sets the JobRun field's value.
@@ -9473,6 +9982,8 @@ func (s *GetJobRunsInput) SetNextToken(v string) *GetJobRunsInput {
 type GetJobRunsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of job-run metatdata objects.
 	JobRuns []JobRun `type:"list"`
 
@@ -9488,6 +9999,11 @@ func (s GetJobRunsOutput) String() string {
 // GoString returns the string representation
 func (s GetJobRunsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobRunsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobRuns sets the JobRuns field's value.
@@ -9552,6 +10068,8 @@ func (s *GetJobsInput) SetNextToken(v string) *GetJobsInput {
 type GetJobsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of jobs.
 	Jobs []Job `type:"list"`
 
@@ -9567,6 +10085,11 @@ func (s GetJobsOutput) String() string {
 // GoString returns the string representation
 func (s GetJobsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobs sets the Jobs field's value.
@@ -9660,6 +10183,8 @@ func (s *GetMappingInput) SetSource(v *CatalogEntry) *GetMappingInput {
 type GetMappingOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A list of mappings to the specified targets.
 	//
 	// Mapping is a required field
@@ -9674,6 +10199,11 @@ func (s GetMappingOutput) String() string {
 // GoString returns the string representation
 func (s GetMappingOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMappingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetMapping sets the Mapping field's value.
@@ -9775,6 +10305,8 @@ func (s *GetPartitionInput) SetTableName(v string) *GetPartitionInput {
 type GetPartitionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested information, in the form of a Partition object.
 	Partition *Partition `type:"structure"`
 }
@@ -9787,6 +10319,11 @@ func (s GetPartitionOutput) String() string {
 // GoString returns the string representation
 func (s GetPartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPartition sets the Partition field's value.
@@ -9917,6 +10454,8 @@ func (s *GetPartitionsInput) SetTableName(v string) *GetPartitionsInput {
 type GetPartitionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A continuation token, if the returned list of partitions does not does not
 	// include the last one.
 	NextToken *string `type:"string"`
@@ -9933,6 +10472,11 @@ func (s GetPartitionsOutput) String() string {
 // GoString returns the string representation
 func (s GetPartitionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPartitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10041,6 +10585,8 @@ func (s *GetPlanInput) SetSource(v *CatalogEntry) *GetPlanInput {
 type GetPlanOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A python script to perform the mapping.
 	PythonScript *string `type:"string"`
 }
@@ -10053,6 +10599,11 @@ func (s GetPlanOutput) String() string {
 // GoString returns the string representation
 func (s GetPlanOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetPythonScript sets the PythonScript field's value.
@@ -10139,6 +10690,8 @@ func (s *GetTableInput) SetName(v string) *GetTableInput {
 type GetTableOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The Table object that defines the specified table.
 	Table *Table `type:"structure"`
 }
@@ -10151,6 +10704,11 @@ func (s GetTableOutput) String() string {
 // GoString returns the string representation
 func (s GetTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTable sets the Table field's value.
@@ -10258,6 +10816,8 @@ func (s *GetTableVersionsInput) SetTableName(v string) *GetTableVersionsInput {
 type GetTableVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A continuation token, if the list of available versions does not include
 	// the last one.
 	NextToken *string `type:"string"`
@@ -10274,6 +10834,11 @@ func (s GetTableVersionsOutput) String() string {
 // GoString returns the string representation
 func (s GetTableVersionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTableVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10379,6 +10944,8 @@ func (s *GetTablesInput) SetNextToken(v string) *GetTablesInput {
 type GetTablesOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A continuation token, present if the current list segment is not the last.
 	NextToken *string `type:"string"`
 
@@ -10394,6 +10961,11 @@ func (s GetTablesOutput) String() string {
 // GoString returns the string representation
 func (s GetTablesOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTablesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10455,6 +11027,8 @@ func (s *GetTriggerInput) SetName(v string) *GetTriggerInput {
 type GetTriggerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested trigger definition.
 	Trigger *Trigger `type:"structure"`
 }
@@ -10467,6 +11041,11 @@ func (s GetTriggerOutput) String() string {
 // GoString returns the string representation
 func (s GetTriggerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTriggerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrigger sets the Trigger field's value.
@@ -10537,6 +11116,8 @@ func (s *GetTriggersInput) SetNextToken(v string) *GetTriggersInput {
 type GetTriggersOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A continuation token, if not all the requested triggers have yet been returned.
 	NextToken *string `type:"string"`
 
@@ -10552,6 +11133,11 @@ func (s GetTriggersOutput) String() string {
 // GoString returns the string representation
 func (s GetTriggersOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTriggersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10644,6 +11230,8 @@ func (s *GetUserDefinedFunctionInput) SetFunctionName(v string) *GetUserDefinedF
 type GetUserDefinedFunctionOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The requested function definition.
 	UserDefinedFunction *UserDefinedFunction `type:"structure"`
 }
@@ -10656,6 +11244,11 @@ func (s GetUserDefinedFunctionOutput) String() string {
 // GoString returns the string representation
 func (s GetUserDefinedFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserDefinedFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetUserDefinedFunction sets the UserDefinedFunction field's value.
@@ -10764,6 +11357,8 @@ func (s *GetUserDefinedFunctionsInput) SetPattern(v string) *GetUserDefinedFunct
 type GetUserDefinedFunctionsOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// A continuation token, if the list of functions returned does not include
 	// the last requested function.
 	NextToken *string `type:"string"`
@@ -10780,6 +11375,11 @@ func (s GetUserDefinedFunctionsOutput) String() string {
 // GoString returns the string representation
 func (s GetUserDefinedFunctionsOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserDefinedFunctionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetNextToken sets the NextToken field's value.
@@ -10921,6 +11521,8 @@ func (s *ImportCatalogToGlueInput) SetCatalogId(v string) *ImportCatalogToGlueIn
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlueResponse
 type ImportCatalogToGlueOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -10931,6 +11533,11 @@ func (s ImportCatalogToGlueOutput) String() string {
 // GoString returns the string representation
 func (s ImportCatalogToGlueOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportCatalogToGlueOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies a JDBC target for a crawl.
@@ -12109,6 +12716,8 @@ func (s *ResetJobBookmarkInput) SetJobName(v string) *ResetJobBookmarkInput {
 type ResetJobBookmarkOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The reset bookmark entry.
 	JobBookmarkEntry *JobBookmarkEntry `type:"structure"`
 }
@@ -12121,6 +12730,11 @@ func (s ResetJobBookmarkOutput) String() string {
 // GoString returns the string representation
 func (s ResetJobBookmarkOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResetJobBookmarkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobBookmarkEntry sets the JobBookmarkEntry field's value.
@@ -12493,6 +13107,8 @@ func (s *StartCrawlerInput) SetName(v string) *StartCrawlerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerResponse
 type StartCrawlerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12503,6 +13119,11 @@ func (s StartCrawlerOutput) String() string {
 // GoString returns the string representation
 func (s StartCrawlerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartCrawlerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerScheduleRequest
@@ -12551,6 +13172,8 @@ func (s *StartCrawlerScheduleInput) SetCrawlerName(v string) *StartCrawlerSchedu
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerScheduleResponse
 type StartCrawlerScheduleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12561,6 +13184,11 @@ func (s StartCrawlerScheduleOutput) String() string {
 // GoString returns the string representation
 func (s StartCrawlerScheduleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartCrawlerScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest
@@ -12640,6 +13268,8 @@ func (s *StartJobRunInput) SetJobRunId(v string) *StartJobRunInput {
 type StartJobRunOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The ID assigned to this job run.
 	JobRunId *string `min:"1" type:"string"`
 }
@@ -12652,6 +13282,11 @@ func (s StartJobRunOutput) String() string {
 // GoString returns the string representation
 func (s StartJobRunOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartJobRunOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobRunId sets the JobRunId field's value.
@@ -12707,6 +13342,8 @@ func (s *StartTriggerInput) SetName(v string) *StartTriggerInput {
 type StartTriggerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the trigger that was started.
 	Name *string `min:"1" type:"string"`
 }
@@ -12719,6 +13356,11 @@ func (s StartTriggerOutput) String() string {
 // GoString returns the string representation
 func (s StartTriggerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartTriggerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -12773,6 +13415,8 @@ func (s *StopCrawlerInput) SetName(v string) *StopCrawlerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerResponse
 type StopCrawlerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12783,6 +13427,11 @@ func (s StopCrawlerOutput) String() string {
 // GoString returns the string representation
 func (s StopCrawlerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopCrawlerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerScheduleRequest
@@ -12831,6 +13480,8 @@ func (s *StopCrawlerScheduleInput) SetCrawlerName(v string) *StopCrawlerSchedule
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerScheduleResponse
 type StopCrawlerScheduleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -12841,6 +13492,11 @@ func (s StopCrawlerScheduleOutput) String() string {
 // GoString returns the string representation
 func (s StopCrawlerScheduleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopCrawlerScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopTriggerRequest
@@ -12890,6 +13546,8 @@ func (s *StopTriggerInput) SetName(v string) *StopTriggerInput {
 type StopTriggerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The name of the trigger that was stopped.
 	Name *string `min:"1" type:"string"`
 }
@@ -12902,6 +13560,11 @@ func (s StopTriggerOutput) String() string {
 // GoString returns the string representation
 func (s StopTriggerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopTriggerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetName sets the Name field's value.
@@ -13676,6 +14339,8 @@ func (s *UpdateClassifierInput) SetGrokClassifier(v *UpdateGrokClassifierRequest
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifierResponse
 type UpdateClassifierOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13686,6 +14351,11 @@ func (s UpdateClassifierOutput) String() string {
 // GoString returns the string representation
 func (s UpdateClassifierOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateClassifierOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateConnectionRequest
@@ -13767,6 +14437,8 @@ func (s *UpdateConnectionInput) SetName(v string) *UpdateConnectionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateConnectionResponse
 type UpdateConnectionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13777,6 +14449,11 @@ func (s UpdateConnectionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateConnectionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConnectionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest
@@ -13901,6 +14578,8 @@ func (s *UpdateCrawlerInput) SetTargets(v *CrawlerTargets) *UpdateCrawlerInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerResponse
 type UpdateCrawlerOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13911,6 +14590,11 @@ func (s UpdateCrawlerOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCrawlerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCrawlerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerScheduleRequest
@@ -13968,6 +14652,8 @@ func (s *UpdateCrawlerScheduleInput) SetSchedule(v string) *UpdateCrawlerSchedul
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerScheduleResponse
 type UpdateCrawlerScheduleOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -13978,6 +14664,11 @@ func (s UpdateCrawlerScheduleOutput) String() string {
 // GoString returns the string representation
 func (s UpdateCrawlerScheduleOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCrawlerScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabaseRequest
@@ -14060,6 +14751,8 @@ func (s *UpdateDatabaseInput) SetName(v string) *UpdateDatabaseInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabaseResponse
 type UpdateDatabaseOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14070,6 +14763,11 @@ func (s UpdateDatabaseOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDatabaseOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointRequest
@@ -14133,6 +14831,8 @@ func (s *UpdateDevEndpointInput) SetPublicKey(v string) *UpdateDevEndpointInput 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointResponse
 type UpdateDevEndpointOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14143,6 +14843,11 @@ func (s UpdateDevEndpointOutput) String() string {
 // GoString returns the string representation
 func (s UpdateDevEndpointOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDevEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Specifies a Grok classifier to update when passed to UpdateClassifier.
@@ -14282,6 +14987,8 @@ func (s *UpdateJobInput) SetJobUpdate(v *JobUpdate) *UpdateJobInput {
 type UpdateJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// Returns the name of the updated job.
 	JobName *string `min:"1" type:"string"`
 }
@@ -14294,6 +15001,11 @@ func (s UpdateJobOutput) String() string {
 // GoString returns the string representation
 func (s UpdateJobOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetJobName sets the JobName field's value.
@@ -14414,6 +15126,8 @@ func (s *UpdatePartitionInput) SetTableName(v string) *UpdatePartitionInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartitionResponse
 type UpdatePartitionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14424,6 +15138,11 @@ func (s UpdatePartitionOutput) String() string {
 // GoString returns the string representation
 func (s UpdatePartitionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest
@@ -14505,6 +15224,8 @@ func (s *UpdateTableInput) SetTableInput(v *TableInput) *UpdateTableInput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableResponse
 type UpdateTableOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14515,6 +15236,11 @@ func (s UpdateTableOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTableOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTriggerRequest
@@ -14584,6 +15310,8 @@ func (s *UpdateTriggerInput) SetTriggerUpdate(v *TriggerUpdate) *UpdateTriggerIn
 type UpdateTriggerOutput struct {
 	_ struct{} `type:"structure"`
 
+	responseMetadata aws.Response
+
 	// The resulting trigger definition.
 	Trigger *Trigger `type:"structure"`
 }
@@ -14596,6 +15324,11 @@ func (s UpdateTriggerOutput) String() string {
 // GoString returns the string representation
 func (s UpdateTriggerOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateTriggerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // SetTrigger sets the Trigger field's value.
@@ -14701,6 +15434,8 @@ func (s *UpdateUserDefinedFunctionInput) SetFunctionName(v string) *UpdateUserDe
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUserDefinedFunctionResponse
 type UpdateUserDefinedFunctionOutput struct {
 	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
 }
 
 // String returns the string representation
@@ -14711,6 +15446,11 @@ func (s UpdateUserDefinedFunctionOutput) String() string {
 // GoString returns the string representation
 func (s UpdateUserDefinedFunctionOutput) GoString() string {
 	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserDefinedFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the equivalent of a Hive user-defined function (UDF) definition.
