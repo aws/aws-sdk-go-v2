@@ -3,7 +3,6 @@ package external
 import (
 	"fmt"
 	"net/http"
-	"net/url"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -101,7 +100,7 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	if err := validateLocalEndpointURL(v); err != nil {
+	if err := validateLocalURL(v); err != nil {
 		return err
 	}
 
@@ -112,19 +111,6 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 	provider.ExpiryWindow = 5 * time.Minute
 
 	cfg.Credentials = provider
-
-	return nil
-}
-
-func validateLocalEndpointURL(v string) error {
-	u, err := url.Parse(v)
-	if err != nil {
-		return err
-	}
-
-	if host := u.Hostname(); !(host == "localhost" || host == "127.0.0.1") {
-		return fmt.Errorf("invalid endpoint credentials URL, %q, only localhost and 127.0.0.1 are valid", host)
-	}
 
 	return nil
 }
