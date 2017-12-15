@@ -13,117 +13,142 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 )
 
-// LambdaAPI provides an interface to enable mocking the
-// lambda.Lambda service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Lambda.
-//    func myFunc(svc lambdaiface.LambdaAPI) bool {
-//        // Make svc.AddPermission request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := lambda.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLambdaClient struct {
-//        lambdaiface.LambdaAPI
-//    }
-//    func (m *mockLambdaClient) AddPermission(input *lambda.AddPermissionInput) (*lambda.AddPermissionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockLambdaClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type LambdaAPI interface {
+// AddPermissionRequester provides the interface for the AddPermissionRequest API operation.
+type AddPermissionRequester interface {
 	AddPermissionRequest(*lambda.AddPermissionInput) lambda.AddPermissionRequest
-
-	CreateAliasRequest(*lambda.CreateAliasInput) lambda.CreateAliasRequest
-
-	CreateEventSourceMappingRequest(*lambda.CreateEventSourceMappingInput) lambda.CreateEventSourceMappingRequest
-
-	CreateFunctionRequest(*lambda.CreateFunctionInput) lambda.CreateFunctionRequest
-
-	DeleteAliasRequest(*lambda.DeleteAliasInput) lambda.DeleteAliasRequest
-
-	DeleteEventSourceMappingRequest(*lambda.DeleteEventSourceMappingInput) lambda.DeleteEventSourceMappingRequest
-
-	DeleteFunctionRequest(*lambda.DeleteFunctionInput) lambda.DeleteFunctionRequest
-
-	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
-
-	GetAliasRequest(*lambda.GetAliasInput) lambda.GetAliasRequest
-
-	GetEventSourceMappingRequest(*lambda.GetEventSourceMappingInput) lambda.GetEventSourceMappingRequest
-
-	GetFunctionRequest(*lambda.GetFunctionInput) lambda.GetFunctionRequest
-
-	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
-
-	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest
-
-	InvokeRequest(*lambda.InvokeInput) lambda.InvokeRequest
-
-	InvokeAsyncRequest(*lambda.InvokeAsyncInput) lambda.InvokeAsyncRequest
-
-	ListAliasesRequest(*lambda.ListAliasesInput) lambda.ListAliasesRequest
-
-	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
-
-	ListEventSourceMappingsPages(*lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool) error
-	ListEventSourceMappingsPagesWithContext(aws.Context, *lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool, ...aws.Option) error
-
-	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
-
-	ListFunctionsPages(*lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool) error
-	ListFunctionsPagesWithContext(aws.Context, *lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool, ...aws.Option) error
-
-	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
-
-	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) lambda.ListVersionsByFunctionRequest
-
-	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
-
-	RemovePermissionRequest(*lambda.RemovePermissionInput) lambda.RemovePermissionRequest
-
-	TagResourceRequest(*lambda.TagResourceInput) lambda.TagResourceRequest
-
-	UntagResourceRequest(*lambda.UntagResourceInput) lambda.UntagResourceRequest
-
-	UpdateAliasRequest(*lambda.UpdateAliasInput) lambda.UpdateAliasRequest
-
-	UpdateEventSourceMappingRequest(*lambda.UpdateEventSourceMappingInput) lambda.UpdateEventSourceMappingRequest
-
-	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) lambda.UpdateFunctionCodeRequest
-
-	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
 }
 
-var _ LambdaAPI = (*lambda.Lambda)(nil)
+// CreateAliasRequester provides the interface for the CreateAliasRequest API operation.
+type CreateAliasRequester interface {
+	CreateAliasRequest(*lambda.CreateAliasInput) lambda.CreateAliasRequest
+}
+
+// CreateEventSourceMappingRequester provides the interface for the CreateEventSourceMappingRequest API operation.
+type CreateEventSourceMappingRequester interface {
+	CreateEventSourceMappingRequest(*lambda.CreateEventSourceMappingInput) lambda.CreateEventSourceMappingRequest
+}
+
+// CreateFunctionRequester provides the interface for the CreateFunctionRequest API operation.
+type CreateFunctionRequester interface {
+	CreateFunctionRequest(*lambda.CreateFunctionInput) lambda.CreateFunctionRequest
+}
+
+// DeleteAliasRequester provides the interface for the DeleteAliasRequest API operation.
+type DeleteAliasRequester interface {
+	DeleteAliasRequest(*lambda.DeleteAliasInput) lambda.DeleteAliasRequest
+}
+
+// DeleteEventSourceMappingRequester provides the interface for the DeleteEventSourceMappingRequest API operation.
+type DeleteEventSourceMappingRequester interface {
+	DeleteEventSourceMappingRequest(*lambda.DeleteEventSourceMappingInput) lambda.DeleteEventSourceMappingRequest
+}
+
+// DeleteFunctionRequester provides the interface for the DeleteFunctionRequest API operation.
+type DeleteFunctionRequester interface {
+	DeleteFunctionRequest(*lambda.DeleteFunctionInput) lambda.DeleteFunctionRequest
+}
+
+// GetAccountSettingsRequester provides the interface for the GetAccountSettingsRequest API operation.
+type GetAccountSettingsRequester interface {
+	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
+}
+
+// GetAliasRequester provides the interface for the GetAliasRequest API operation.
+type GetAliasRequester interface {
+	GetAliasRequest(*lambda.GetAliasInput) lambda.GetAliasRequest
+}
+
+// GetEventSourceMappingRequester provides the interface for the GetEventSourceMappingRequest API operation.
+type GetEventSourceMappingRequester interface {
+	GetEventSourceMappingRequest(*lambda.GetEventSourceMappingInput) lambda.GetEventSourceMappingRequest
+}
+
+// GetFunctionRequester provides the interface for the GetFunctionRequest API operation.
+type GetFunctionRequester interface {
+	GetFunctionRequest(*lambda.GetFunctionInput) lambda.GetFunctionRequest
+}
+
+// GetFunctionConfigurationRequester provides the interface for the GetFunctionConfigurationRequest API operation.
+type GetFunctionConfigurationRequester interface {
+	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
+}
+
+// GetPolicyRequester provides the interface for the GetPolicyRequest API operation.
+type GetPolicyRequester interface {
+	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest
+}
+
+// InvokeRequester provides the interface for the InvokeRequest API operation.
+type InvokeRequester interface {
+	InvokeRequest(*lambda.InvokeInput) lambda.InvokeRequest
+}
+
+// InvokeAsyncRequester provides the interface for the InvokeAsyncRequest API operation.
+type InvokeAsyncRequester interface {
+	InvokeAsyncRequest(*lambda.InvokeAsyncInput) lambda.InvokeAsyncRequest
+}
+
+// ListAliasesRequester provides the interface for the ListAliasesRequest API operation.
+type ListAliasesRequester interface {
+	ListAliasesRequest(*lambda.ListAliasesInput) lambda.ListAliasesRequest
+}
+
+// ListEventSourceMappingsRequester provides the interface for the ListEventSourceMappingsRequest API operation.
+type ListEventSourceMappingsRequester interface {
+	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
+}
+
+// ListFunctionsRequester provides the interface for the ListFunctionsRequest API operation.
+type ListFunctionsRequester interface {
+	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
+}
+
+// ListTagsRequester provides the interface for the ListTagsRequest API operation.
+type ListTagsRequester interface {
+	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
+}
+
+// ListVersionsByFunctionRequester provides the interface for the ListVersionsByFunctionRequest API operation.
+type ListVersionsByFunctionRequester interface {
+	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) lambda.ListVersionsByFunctionRequest
+}
+
+// PublishVersionRequester provides the interface for the PublishVersionRequest API operation.
+type PublishVersionRequester interface {
+	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
+}
+
+// RemovePermissionRequester provides the interface for the RemovePermissionRequest API operation.
+type RemovePermissionRequester interface {
+	RemovePermissionRequest(*lambda.RemovePermissionInput) lambda.RemovePermissionRequest
+}
+
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
+	TagResourceRequest(*lambda.TagResourceInput) lambda.TagResourceRequest
+}
+
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
+	UntagResourceRequest(*lambda.UntagResourceInput) lambda.UntagResourceRequest
+}
+
+// UpdateAliasRequester provides the interface for the UpdateAliasRequest API operation.
+type UpdateAliasRequester interface {
+	UpdateAliasRequest(*lambda.UpdateAliasInput) lambda.UpdateAliasRequest
+}
+
+// UpdateEventSourceMappingRequester provides the interface for the UpdateEventSourceMappingRequest API operation.
+type UpdateEventSourceMappingRequester interface {
+	UpdateEventSourceMappingRequest(*lambda.UpdateEventSourceMappingInput) lambda.UpdateEventSourceMappingRequest
+}
+
+// UpdateFunctionCodeRequester provides the interface for the UpdateFunctionCodeRequest API operation.
+type UpdateFunctionCodeRequester interface {
+	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) lambda.UpdateFunctionCodeRequest
+}
+
+// UpdateFunctionConfigurationRequester provides the interface for the UpdateFunctionConfigurationRequest API operation.
+type UpdateFunctionConfigurationRequester interface {
+	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
+}

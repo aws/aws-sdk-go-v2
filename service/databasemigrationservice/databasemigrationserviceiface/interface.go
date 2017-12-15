@@ -13,171 +13,202 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
 )
 
-// DatabaseMigrationServiceAPI provides an interface to enable mocking the
-// databasemigrationservice.DatabaseMigrationService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Database Migration Service.
-//    func myFunc(svc databasemigrationserviceiface.DatabaseMigrationServiceAPI) bool {
-//        // Make svc.AddTagsToResource request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := databasemigrationservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDatabaseMigrationServiceClient struct {
-//        databasemigrationserviceiface.DatabaseMigrationServiceAPI
-//    }
-//    func (m *mockDatabaseMigrationServiceClient) AddTagsToResource(input *databasemigrationservice.AddTagsToResourceInput) (*databasemigrationservice.AddTagsToResourceOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDatabaseMigrationServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DatabaseMigrationServiceAPI interface {
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
 	AddTagsToResourceRequest(*databasemigrationservice.AddTagsToResourceInput) databasemigrationservice.AddTagsToResourceRequest
-
-	CreateEndpointRequest(*databasemigrationservice.CreateEndpointInput) databasemigrationservice.CreateEndpointRequest
-
-	CreateEventSubscriptionRequest(*databasemigrationservice.CreateEventSubscriptionInput) databasemigrationservice.CreateEventSubscriptionRequest
-
-	CreateReplicationInstanceRequest(*databasemigrationservice.CreateReplicationInstanceInput) databasemigrationservice.CreateReplicationInstanceRequest
-
-	CreateReplicationSubnetGroupRequest(*databasemigrationservice.CreateReplicationSubnetGroupInput) databasemigrationservice.CreateReplicationSubnetGroupRequest
-
-	CreateReplicationTaskRequest(*databasemigrationservice.CreateReplicationTaskInput) databasemigrationservice.CreateReplicationTaskRequest
-
-	DeleteCertificateRequest(*databasemigrationservice.DeleteCertificateInput) databasemigrationservice.DeleteCertificateRequest
-
-	DeleteEndpointRequest(*databasemigrationservice.DeleteEndpointInput) databasemigrationservice.DeleteEndpointRequest
-
-	DeleteEventSubscriptionRequest(*databasemigrationservice.DeleteEventSubscriptionInput) databasemigrationservice.DeleteEventSubscriptionRequest
-
-	DeleteReplicationInstanceRequest(*databasemigrationservice.DeleteReplicationInstanceInput) databasemigrationservice.DeleteReplicationInstanceRequest
-
-	DeleteReplicationSubnetGroupRequest(*databasemigrationservice.DeleteReplicationSubnetGroupInput) databasemigrationservice.DeleteReplicationSubnetGroupRequest
-
-	DeleteReplicationTaskRequest(*databasemigrationservice.DeleteReplicationTaskInput) databasemigrationservice.DeleteReplicationTaskRequest
-
-	DescribeAccountAttributesRequest(*databasemigrationservice.DescribeAccountAttributesInput) databasemigrationservice.DescribeAccountAttributesRequest
-
-	DescribeCertificatesRequest(*databasemigrationservice.DescribeCertificatesInput) databasemigrationservice.DescribeCertificatesRequest
-
-	DescribeCertificatesPages(*databasemigrationservice.DescribeCertificatesInput, func(*databasemigrationservice.DescribeCertificatesOutput, bool) bool) error
-	DescribeCertificatesPagesWithContext(aws.Context, *databasemigrationservice.DescribeCertificatesInput, func(*databasemigrationservice.DescribeCertificatesOutput, bool) bool, ...aws.Option) error
-
-	DescribeConnectionsRequest(*databasemigrationservice.DescribeConnectionsInput) databasemigrationservice.DescribeConnectionsRequest
-
-	DescribeConnectionsPages(*databasemigrationservice.DescribeConnectionsInput, func(*databasemigrationservice.DescribeConnectionsOutput, bool) bool) error
-	DescribeConnectionsPagesWithContext(aws.Context, *databasemigrationservice.DescribeConnectionsInput, func(*databasemigrationservice.DescribeConnectionsOutput, bool) bool, ...aws.Option) error
-
-	DescribeEndpointTypesRequest(*databasemigrationservice.DescribeEndpointTypesInput) databasemigrationservice.DescribeEndpointTypesRequest
-
-	DescribeEndpointTypesPages(*databasemigrationservice.DescribeEndpointTypesInput, func(*databasemigrationservice.DescribeEndpointTypesOutput, bool) bool) error
-	DescribeEndpointTypesPagesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointTypesInput, func(*databasemigrationservice.DescribeEndpointTypesOutput, bool) bool, ...aws.Option) error
-
-	DescribeEndpointsRequest(*databasemigrationservice.DescribeEndpointsInput) databasemigrationservice.DescribeEndpointsRequest
-
-	DescribeEndpointsPages(*databasemigrationservice.DescribeEndpointsInput, func(*databasemigrationservice.DescribeEndpointsOutput, bool) bool) error
-	DescribeEndpointsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointsInput, func(*databasemigrationservice.DescribeEndpointsOutput, bool) bool, ...aws.Option) error
-
-	DescribeEventCategoriesRequest(*databasemigrationservice.DescribeEventCategoriesInput) databasemigrationservice.DescribeEventCategoriesRequest
-
-	DescribeEventSubscriptionsRequest(*databasemigrationservice.DescribeEventSubscriptionsInput) databasemigrationservice.DescribeEventSubscriptionsRequest
-
-	DescribeEventSubscriptionsPages(*databasemigrationservice.DescribeEventSubscriptionsInput, func(*databasemigrationservice.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEventSubscriptionsInput, func(*databasemigrationservice.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
-	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) databasemigrationservice.DescribeEventsRequest
-
-	DescribeEventsPages(*databasemigrationservice.DescribeEventsInput, func(*databasemigrationservice.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEventsInput, func(*databasemigrationservice.DescribeEventsOutput, bool) bool, ...aws.Option) error
-
-	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) databasemigrationservice.DescribeOrderableReplicationInstancesRequest
-
-	DescribeOrderableReplicationInstancesPages(*databasemigrationservice.DescribeOrderableReplicationInstancesInput, func(*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, bool) bool) error
-	DescribeOrderableReplicationInstancesPagesWithContext(aws.Context, *databasemigrationservice.DescribeOrderableReplicationInstancesInput, func(*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, bool) bool, ...aws.Option) error
-
-	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) databasemigrationservice.DescribeRefreshSchemasStatusRequest
-
-	DescribeReplicationInstancesRequest(*databasemigrationservice.DescribeReplicationInstancesInput) databasemigrationservice.DescribeReplicationInstancesRequest
-
-	DescribeReplicationInstancesPages(*databasemigrationservice.DescribeReplicationInstancesInput, func(*databasemigrationservice.DescribeReplicationInstancesOutput, bool) bool) error
-	DescribeReplicationInstancesPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationInstancesInput, func(*databasemigrationservice.DescribeReplicationInstancesOutput, bool) bool, ...aws.Option) error
-
-	DescribeReplicationSubnetGroupsRequest(*databasemigrationservice.DescribeReplicationSubnetGroupsInput) databasemigrationservice.DescribeReplicationSubnetGroupsRequest
-
-	DescribeReplicationSubnetGroupsPages(*databasemigrationservice.DescribeReplicationSubnetGroupsInput, func(*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, bool) bool) error
-	DescribeReplicationSubnetGroupsPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationSubnetGroupsInput, func(*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, bool) bool, ...aws.Option) error
-
-	DescribeReplicationTasksRequest(*databasemigrationservice.DescribeReplicationTasksInput) databasemigrationservice.DescribeReplicationTasksRequest
-
-	DescribeReplicationTasksPages(*databasemigrationservice.DescribeReplicationTasksInput, func(*databasemigrationservice.DescribeReplicationTasksOutput, bool) bool) error
-	DescribeReplicationTasksPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationTasksInput, func(*databasemigrationservice.DescribeReplicationTasksOutput, bool) bool, ...aws.Option) error
-
-	DescribeSchemasRequest(*databasemigrationservice.DescribeSchemasInput) databasemigrationservice.DescribeSchemasRequest
-
-	DescribeSchemasPages(*databasemigrationservice.DescribeSchemasInput, func(*databasemigrationservice.DescribeSchemasOutput, bool) bool) error
-	DescribeSchemasPagesWithContext(aws.Context, *databasemigrationservice.DescribeSchemasInput, func(*databasemigrationservice.DescribeSchemasOutput, bool) bool, ...aws.Option) error
-
-	DescribeTableStatisticsRequest(*databasemigrationservice.DescribeTableStatisticsInput) databasemigrationservice.DescribeTableStatisticsRequest
-
-	DescribeTableStatisticsPages(*databasemigrationservice.DescribeTableStatisticsInput, func(*databasemigrationservice.DescribeTableStatisticsOutput, bool) bool) error
-	DescribeTableStatisticsPagesWithContext(aws.Context, *databasemigrationservice.DescribeTableStatisticsInput, func(*databasemigrationservice.DescribeTableStatisticsOutput, bool) bool, ...aws.Option) error
-
-	ImportCertificateRequest(*databasemigrationservice.ImportCertificateInput) databasemigrationservice.ImportCertificateRequest
-
-	ListTagsForResourceRequest(*databasemigrationservice.ListTagsForResourceInput) databasemigrationservice.ListTagsForResourceRequest
-
-	ModifyEndpointRequest(*databasemigrationservice.ModifyEndpointInput) databasemigrationservice.ModifyEndpointRequest
-
-	ModifyEventSubscriptionRequest(*databasemigrationservice.ModifyEventSubscriptionInput) databasemigrationservice.ModifyEventSubscriptionRequest
-
-	ModifyReplicationInstanceRequest(*databasemigrationservice.ModifyReplicationInstanceInput) databasemigrationservice.ModifyReplicationInstanceRequest
-
-	ModifyReplicationSubnetGroupRequest(*databasemigrationservice.ModifyReplicationSubnetGroupInput) databasemigrationservice.ModifyReplicationSubnetGroupRequest
-
-	ModifyReplicationTaskRequest(*databasemigrationservice.ModifyReplicationTaskInput) databasemigrationservice.ModifyReplicationTaskRequest
-
-	RefreshSchemasRequest(*databasemigrationservice.RefreshSchemasInput) databasemigrationservice.RefreshSchemasRequest
-
-	ReloadTablesRequest(*databasemigrationservice.ReloadTablesInput) databasemigrationservice.ReloadTablesRequest
-
-	RemoveTagsFromResourceRequest(*databasemigrationservice.RemoveTagsFromResourceInput) databasemigrationservice.RemoveTagsFromResourceRequest
-
-	StartReplicationTaskRequest(*databasemigrationservice.StartReplicationTaskInput) databasemigrationservice.StartReplicationTaskRequest
-
-	StopReplicationTaskRequest(*databasemigrationservice.StopReplicationTaskInput) databasemigrationservice.StopReplicationTaskRequest
-
-	TestConnectionRequest(*databasemigrationservice.TestConnectionInput) databasemigrationservice.TestConnectionRequest
 }
 
-var _ DatabaseMigrationServiceAPI = (*databasemigrationservice.DatabaseMigrationService)(nil)
+// CreateEndpointRequester provides the interface for the CreateEndpointRequest API operation.
+type CreateEndpointRequester interface {
+	CreateEndpointRequest(*databasemigrationservice.CreateEndpointInput) databasemigrationservice.CreateEndpointRequest
+}
+
+// CreateEventSubscriptionRequester provides the interface for the CreateEventSubscriptionRequest API operation.
+type CreateEventSubscriptionRequester interface {
+	CreateEventSubscriptionRequest(*databasemigrationservice.CreateEventSubscriptionInput) databasemigrationservice.CreateEventSubscriptionRequest
+}
+
+// CreateReplicationInstanceRequester provides the interface for the CreateReplicationInstanceRequest API operation.
+type CreateReplicationInstanceRequester interface {
+	CreateReplicationInstanceRequest(*databasemigrationservice.CreateReplicationInstanceInput) databasemigrationservice.CreateReplicationInstanceRequest
+}
+
+// CreateReplicationSubnetGroupRequester provides the interface for the CreateReplicationSubnetGroupRequest API operation.
+type CreateReplicationSubnetGroupRequester interface {
+	CreateReplicationSubnetGroupRequest(*databasemigrationservice.CreateReplicationSubnetGroupInput) databasemigrationservice.CreateReplicationSubnetGroupRequest
+}
+
+// CreateReplicationTaskRequester provides the interface for the CreateReplicationTaskRequest API operation.
+type CreateReplicationTaskRequester interface {
+	CreateReplicationTaskRequest(*databasemigrationservice.CreateReplicationTaskInput) databasemigrationservice.CreateReplicationTaskRequest
+}
+
+// DeleteCertificateRequester provides the interface for the DeleteCertificateRequest API operation.
+type DeleteCertificateRequester interface {
+	DeleteCertificateRequest(*databasemigrationservice.DeleteCertificateInput) databasemigrationservice.DeleteCertificateRequest
+}
+
+// DeleteEndpointRequester provides the interface for the DeleteEndpointRequest API operation.
+type DeleteEndpointRequester interface {
+	DeleteEndpointRequest(*databasemigrationservice.DeleteEndpointInput) databasemigrationservice.DeleteEndpointRequest
+}
+
+// DeleteEventSubscriptionRequester provides the interface for the DeleteEventSubscriptionRequest API operation.
+type DeleteEventSubscriptionRequester interface {
+	DeleteEventSubscriptionRequest(*databasemigrationservice.DeleteEventSubscriptionInput) databasemigrationservice.DeleteEventSubscriptionRequest
+}
+
+// DeleteReplicationInstanceRequester provides the interface for the DeleteReplicationInstanceRequest API operation.
+type DeleteReplicationInstanceRequester interface {
+	DeleteReplicationInstanceRequest(*databasemigrationservice.DeleteReplicationInstanceInput) databasemigrationservice.DeleteReplicationInstanceRequest
+}
+
+// DeleteReplicationSubnetGroupRequester provides the interface for the DeleteReplicationSubnetGroupRequest API operation.
+type DeleteReplicationSubnetGroupRequester interface {
+	DeleteReplicationSubnetGroupRequest(*databasemigrationservice.DeleteReplicationSubnetGroupInput) databasemigrationservice.DeleteReplicationSubnetGroupRequest
+}
+
+// DeleteReplicationTaskRequester provides the interface for the DeleteReplicationTaskRequest API operation.
+type DeleteReplicationTaskRequester interface {
+	DeleteReplicationTaskRequest(*databasemigrationservice.DeleteReplicationTaskInput) databasemigrationservice.DeleteReplicationTaskRequest
+}
+
+// DescribeAccountAttributesRequester provides the interface for the DescribeAccountAttributesRequest API operation.
+type DescribeAccountAttributesRequester interface {
+	DescribeAccountAttributesRequest(*databasemigrationservice.DescribeAccountAttributesInput) databasemigrationservice.DescribeAccountAttributesRequest
+}
+
+// DescribeCertificatesRequester provides the interface for the DescribeCertificatesRequest API operation.
+type DescribeCertificatesRequester interface {
+	DescribeCertificatesRequest(*databasemigrationservice.DescribeCertificatesInput) databasemigrationservice.DescribeCertificatesRequest
+}
+
+// DescribeConnectionsRequester provides the interface for the DescribeConnectionsRequest API operation.
+type DescribeConnectionsRequester interface {
+	DescribeConnectionsRequest(*databasemigrationservice.DescribeConnectionsInput) databasemigrationservice.DescribeConnectionsRequest
+}
+
+// DescribeEndpointTypesRequester provides the interface for the DescribeEndpointTypesRequest API operation.
+type DescribeEndpointTypesRequester interface {
+	DescribeEndpointTypesRequest(*databasemigrationservice.DescribeEndpointTypesInput) databasemigrationservice.DescribeEndpointTypesRequest
+}
+
+// DescribeEndpointsRequester provides the interface for the DescribeEndpointsRequest API operation.
+type DescribeEndpointsRequester interface {
+	DescribeEndpointsRequest(*databasemigrationservice.DescribeEndpointsInput) databasemigrationservice.DescribeEndpointsRequest
+}
+
+// DescribeEventCategoriesRequester provides the interface for the DescribeEventCategoriesRequest API operation.
+type DescribeEventCategoriesRequester interface {
+	DescribeEventCategoriesRequest(*databasemigrationservice.DescribeEventCategoriesInput) databasemigrationservice.DescribeEventCategoriesRequest
+}
+
+// DescribeEventSubscriptionsRequester provides the interface for the DescribeEventSubscriptionsRequest API operation.
+type DescribeEventSubscriptionsRequester interface {
+	DescribeEventSubscriptionsRequest(*databasemigrationservice.DescribeEventSubscriptionsInput) databasemigrationservice.DescribeEventSubscriptionsRequest
+}
+
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
+	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) databasemigrationservice.DescribeEventsRequest
+}
+
+// DescribeOrderableReplicationInstancesRequester provides the interface for the DescribeOrderableReplicationInstancesRequest API operation.
+type DescribeOrderableReplicationInstancesRequester interface {
+	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) databasemigrationservice.DescribeOrderableReplicationInstancesRequest
+}
+
+// DescribeRefreshSchemasStatusRequester provides the interface for the DescribeRefreshSchemasStatusRequest API operation.
+type DescribeRefreshSchemasStatusRequester interface {
+	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) databasemigrationservice.DescribeRefreshSchemasStatusRequest
+}
+
+// DescribeReplicationInstancesRequester provides the interface for the DescribeReplicationInstancesRequest API operation.
+type DescribeReplicationInstancesRequester interface {
+	DescribeReplicationInstancesRequest(*databasemigrationservice.DescribeReplicationInstancesInput) databasemigrationservice.DescribeReplicationInstancesRequest
+}
+
+// DescribeReplicationSubnetGroupsRequester provides the interface for the DescribeReplicationSubnetGroupsRequest API operation.
+type DescribeReplicationSubnetGroupsRequester interface {
+	DescribeReplicationSubnetGroupsRequest(*databasemigrationservice.DescribeReplicationSubnetGroupsInput) databasemigrationservice.DescribeReplicationSubnetGroupsRequest
+}
+
+// DescribeReplicationTasksRequester provides the interface for the DescribeReplicationTasksRequest API operation.
+type DescribeReplicationTasksRequester interface {
+	DescribeReplicationTasksRequest(*databasemigrationservice.DescribeReplicationTasksInput) databasemigrationservice.DescribeReplicationTasksRequest
+}
+
+// DescribeSchemasRequester provides the interface for the DescribeSchemasRequest API operation.
+type DescribeSchemasRequester interface {
+	DescribeSchemasRequest(*databasemigrationservice.DescribeSchemasInput) databasemigrationservice.DescribeSchemasRequest
+}
+
+// DescribeTableStatisticsRequester provides the interface for the DescribeTableStatisticsRequest API operation.
+type DescribeTableStatisticsRequester interface {
+	DescribeTableStatisticsRequest(*databasemigrationservice.DescribeTableStatisticsInput) databasemigrationservice.DescribeTableStatisticsRequest
+}
+
+// ImportCertificateRequester provides the interface for the ImportCertificateRequest API operation.
+type ImportCertificateRequester interface {
+	ImportCertificateRequest(*databasemigrationservice.ImportCertificateInput) databasemigrationservice.ImportCertificateRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*databasemigrationservice.ListTagsForResourceInput) databasemigrationservice.ListTagsForResourceRequest
+}
+
+// ModifyEndpointRequester provides the interface for the ModifyEndpointRequest API operation.
+type ModifyEndpointRequester interface {
+	ModifyEndpointRequest(*databasemigrationservice.ModifyEndpointInput) databasemigrationservice.ModifyEndpointRequest
+}
+
+// ModifyEventSubscriptionRequester provides the interface for the ModifyEventSubscriptionRequest API operation.
+type ModifyEventSubscriptionRequester interface {
+	ModifyEventSubscriptionRequest(*databasemigrationservice.ModifyEventSubscriptionInput) databasemigrationservice.ModifyEventSubscriptionRequest
+}
+
+// ModifyReplicationInstanceRequester provides the interface for the ModifyReplicationInstanceRequest API operation.
+type ModifyReplicationInstanceRequester interface {
+	ModifyReplicationInstanceRequest(*databasemigrationservice.ModifyReplicationInstanceInput) databasemigrationservice.ModifyReplicationInstanceRequest
+}
+
+// ModifyReplicationSubnetGroupRequester provides the interface for the ModifyReplicationSubnetGroupRequest API operation.
+type ModifyReplicationSubnetGroupRequester interface {
+	ModifyReplicationSubnetGroupRequest(*databasemigrationservice.ModifyReplicationSubnetGroupInput) databasemigrationservice.ModifyReplicationSubnetGroupRequest
+}
+
+// ModifyReplicationTaskRequester provides the interface for the ModifyReplicationTaskRequest API operation.
+type ModifyReplicationTaskRequester interface {
+	ModifyReplicationTaskRequest(*databasemigrationservice.ModifyReplicationTaskInput) databasemigrationservice.ModifyReplicationTaskRequest
+}
+
+// RefreshSchemasRequester provides the interface for the RefreshSchemasRequest API operation.
+type RefreshSchemasRequester interface {
+	RefreshSchemasRequest(*databasemigrationservice.RefreshSchemasInput) databasemigrationservice.RefreshSchemasRequest
+}
+
+// ReloadTablesRequester provides the interface for the ReloadTablesRequest API operation.
+type ReloadTablesRequester interface {
+	ReloadTablesRequest(*databasemigrationservice.ReloadTablesInput) databasemigrationservice.ReloadTablesRequest
+}
+
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
+	RemoveTagsFromResourceRequest(*databasemigrationservice.RemoveTagsFromResourceInput) databasemigrationservice.RemoveTagsFromResourceRequest
+}
+
+// StartReplicationTaskRequester provides the interface for the StartReplicationTaskRequest API operation.
+type StartReplicationTaskRequester interface {
+	StartReplicationTaskRequest(*databasemigrationservice.StartReplicationTaskInput) databasemigrationservice.StartReplicationTaskRequest
+}
+
+// StopReplicationTaskRequester provides the interface for the StopReplicationTaskRequest API operation.
+type StopReplicationTaskRequester interface {
+	StopReplicationTaskRequest(*databasemigrationservice.StopReplicationTaskInput) databasemigrationservice.StopReplicationTaskRequest
+}
+
+// TestConnectionRequester provides the interface for the TestConnectionRequest API operation.
+type TestConnectionRequester interface {
+	TestConnectionRequest(*databasemigrationservice.TestConnectionInput) databasemigrationservice.TestConnectionRequest
+}

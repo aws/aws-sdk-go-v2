@@ -12,89 +12,87 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics"
 )
 
-// KinesisAnalyticsAPI provides an interface to enable mocking the
-// kinesisanalytics.KinesisAnalytics service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Kinesis Analytics.
-//    func myFunc(svc kinesisanalyticsiface.KinesisAnalyticsAPI) bool {
-//        // Make svc.AddApplicationCloudWatchLoggingOption request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := kinesisanalytics.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKinesisAnalyticsClient struct {
-//        kinesisanalyticsiface.KinesisAnalyticsAPI
-//    }
-//    func (m *mockKinesisAnalyticsClient) AddApplicationCloudWatchLoggingOption(input *kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockKinesisAnalyticsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type KinesisAnalyticsAPI interface {
+// AddApplicationCloudWatchLoggingOptionRequester provides the interface for the AddApplicationCloudWatchLoggingOptionRequest API operation.
+type AddApplicationCloudWatchLoggingOptionRequester interface {
 	AddApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) kinesisanalytics.AddApplicationCloudWatchLoggingOptionRequest
-
-	AddApplicationInputRequest(*kinesisanalytics.AddApplicationInputInput) kinesisanalytics.AddApplicationInputRequest
-
-	AddApplicationInputProcessingConfigurationRequest(*kinesisanalytics.AddApplicationInputProcessingConfigurationInput) kinesisanalytics.AddApplicationInputProcessingConfigurationRequest
-
-	AddApplicationOutputRequest(*kinesisanalytics.AddApplicationOutputInput) kinesisanalytics.AddApplicationOutputRequest
-
-	AddApplicationReferenceDataSourceRequest(*kinesisanalytics.AddApplicationReferenceDataSourceInput) kinesisanalytics.AddApplicationReferenceDataSourceRequest
-
-	CreateApplicationRequest(*kinesisanalytics.CreateApplicationInput) kinesisanalytics.CreateApplicationRequest
-
-	DeleteApplicationRequest(*kinesisanalytics.DeleteApplicationInput) kinesisanalytics.DeleteApplicationRequest
-
-	DeleteApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput) kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionRequest
-
-	DeleteApplicationInputProcessingConfigurationRequest(*kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput) kinesisanalytics.DeleteApplicationInputProcessingConfigurationRequest
-
-	DeleteApplicationOutputRequest(*kinesisanalytics.DeleteApplicationOutputInput) kinesisanalytics.DeleteApplicationOutputRequest
-
-	DeleteApplicationReferenceDataSourceRequest(*kinesisanalytics.DeleteApplicationReferenceDataSourceInput) kinesisanalytics.DeleteApplicationReferenceDataSourceRequest
-
-	DescribeApplicationRequest(*kinesisanalytics.DescribeApplicationInput) kinesisanalytics.DescribeApplicationRequest
-
-	DiscoverInputSchemaRequest(*kinesisanalytics.DiscoverInputSchemaInput) kinesisanalytics.DiscoverInputSchemaRequest
-
-	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) kinesisanalytics.ListApplicationsRequest
-
-	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) kinesisanalytics.StartApplicationRequest
-
-	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) kinesisanalytics.StopApplicationRequest
-
-	UpdateApplicationRequest(*kinesisanalytics.UpdateApplicationInput) kinesisanalytics.UpdateApplicationRequest
 }
 
-var _ KinesisAnalyticsAPI = (*kinesisanalytics.KinesisAnalytics)(nil)
+// AddApplicationInputRequester provides the interface for the AddApplicationInputRequest API operation.
+type AddApplicationInputRequester interface {
+	AddApplicationInputRequest(*kinesisanalytics.AddApplicationInputInput) kinesisanalytics.AddApplicationInputRequest
+}
+
+// AddApplicationInputProcessingConfigurationRequester provides the interface for the AddApplicationInputProcessingConfigurationRequest API operation.
+type AddApplicationInputProcessingConfigurationRequester interface {
+	AddApplicationInputProcessingConfigurationRequest(*kinesisanalytics.AddApplicationInputProcessingConfigurationInput) kinesisanalytics.AddApplicationInputProcessingConfigurationRequest
+}
+
+// AddApplicationOutputRequester provides the interface for the AddApplicationOutputRequest API operation.
+type AddApplicationOutputRequester interface {
+	AddApplicationOutputRequest(*kinesisanalytics.AddApplicationOutputInput) kinesisanalytics.AddApplicationOutputRequest
+}
+
+// AddApplicationReferenceDataSourceRequester provides the interface for the AddApplicationReferenceDataSourceRequest API operation.
+type AddApplicationReferenceDataSourceRequester interface {
+	AddApplicationReferenceDataSourceRequest(*kinesisanalytics.AddApplicationReferenceDataSourceInput) kinesisanalytics.AddApplicationReferenceDataSourceRequest
+}
+
+// CreateApplicationRequester provides the interface for the CreateApplicationRequest API operation.
+type CreateApplicationRequester interface {
+	CreateApplicationRequest(*kinesisanalytics.CreateApplicationInput) kinesisanalytics.CreateApplicationRequest
+}
+
+// DeleteApplicationRequester provides the interface for the DeleteApplicationRequest API operation.
+type DeleteApplicationRequester interface {
+	DeleteApplicationRequest(*kinesisanalytics.DeleteApplicationInput) kinesisanalytics.DeleteApplicationRequest
+}
+
+// DeleteApplicationCloudWatchLoggingOptionRequester provides the interface for the DeleteApplicationCloudWatchLoggingOptionRequest API operation.
+type DeleteApplicationCloudWatchLoggingOptionRequester interface {
+	DeleteApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput) kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionRequest
+}
+
+// DeleteApplicationInputProcessingConfigurationRequester provides the interface for the DeleteApplicationInputProcessingConfigurationRequest API operation.
+type DeleteApplicationInputProcessingConfigurationRequester interface {
+	DeleteApplicationInputProcessingConfigurationRequest(*kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput) kinesisanalytics.DeleteApplicationInputProcessingConfigurationRequest
+}
+
+// DeleteApplicationOutputRequester provides the interface for the DeleteApplicationOutputRequest API operation.
+type DeleteApplicationOutputRequester interface {
+	DeleteApplicationOutputRequest(*kinesisanalytics.DeleteApplicationOutputInput) kinesisanalytics.DeleteApplicationOutputRequest
+}
+
+// DeleteApplicationReferenceDataSourceRequester provides the interface for the DeleteApplicationReferenceDataSourceRequest API operation.
+type DeleteApplicationReferenceDataSourceRequester interface {
+	DeleteApplicationReferenceDataSourceRequest(*kinesisanalytics.DeleteApplicationReferenceDataSourceInput) kinesisanalytics.DeleteApplicationReferenceDataSourceRequest
+}
+
+// DescribeApplicationRequester provides the interface for the DescribeApplicationRequest API operation.
+type DescribeApplicationRequester interface {
+	DescribeApplicationRequest(*kinesisanalytics.DescribeApplicationInput) kinesisanalytics.DescribeApplicationRequest
+}
+
+// DiscoverInputSchemaRequester provides the interface for the DiscoverInputSchemaRequest API operation.
+type DiscoverInputSchemaRequester interface {
+	DiscoverInputSchemaRequest(*kinesisanalytics.DiscoverInputSchemaInput) kinesisanalytics.DiscoverInputSchemaRequest
+}
+
+// ListApplicationsRequester provides the interface for the ListApplicationsRequest API operation.
+type ListApplicationsRequester interface {
+	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) kinesisanalytics.ListApplicationsRequest
+}
+
+// StartApplicationRequester provides the interface for the StartApplicationRequest API operation.
+type StartApplicationRequester interface {
+	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) kinesisanalytics.StartApplicationRequest
+}
+
+// StopApplicationRequester provides the interface for the StopApplicationRequest API operation.
+type StopApplicationRequester interface {
+	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) kinesisanalytics.StopApplicationRequest
+}
+
+// UpdateApplicationRequester provides the interface for the UpdateApplicationRequest API operation.
+type UpdateApplicationRequester interface {
+	UpdateApplicationRequest(*kinesisanalytics.UpdateApplicationInput) kinesisanalytics.UpdateApplicationRequest
+}

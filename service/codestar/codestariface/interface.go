@@ -12,91 +12,92 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codestar"
 )
 
-// CodeStarAPI provides an interface to enable mocking the
-// codestar.CodeStar service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CodeStar.
-//    func myFunc(svc codestariface.CodeStarAPI) bool {
-//        // Make svc.AssociateTeamMember request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := codestar.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodeStarClient struct {
-//        codestariface.CodeStarAPI
-//    }
-//    func (m *mockCodeStarClient) AssociateTeamMember(input *codestar.AssociateTeamMemberInput) (*codestar.AssociateTeamMemberOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCodeStarClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CodeStarAPI interface {
+// AssociateTeamMemberRequester provides the interface for the AssociateTeamMemberRequest API operation.
+type AssociateTeamMemberRequester interface {
 	AssociateTeamMemberRequest(*codestar.AssociateTeamMemberInput) codestar.AssociateTeamMemberRequest
-
-	CreateProjectRequest(*codestar.CreateProjectInput) codestar.CreateProjectRequest
-
-	CreateUserProfileRequest(*codestar.CreateUserProfileInput) codestar.CreateUserProfileRequest
-
-	DeleteProjectRequest(*codestar.DeleteProjectInput) codestar.DeleteProjectRequest
-
-	DeleteUserProfileRequest(*codestar.DeleteUserProfileInput) codestar.DeleteUserProfileRequest
-
-	DescribeProjectRequest(*codestar.DescribeProjectInput) codestar.DescribeProjectRequest
-
-	DescribeUserProfileRequest(*codestar.DescribeUserProfileInput) codestar.DescribeUserProfileRequest
-
-	DisassociateTeamMemberRequest(*codestar.DisassociateTeamMemberInput) codestar.DisassociateTeamMemberRequest
-
-	ListProjectsRequest(*codestar.ListProjectsInput) codestar.ListProjectsRequest
-
-	ListResourcesRequest(*codestar.ListResourcesInput) codestar.ListResourcesRequest
-
-	ListTagsForProjectRequest(*codestar.ListTagsForProjectInput) codestar.ListTagsForProjectRequest
-
-	ListTeamMembersRequest(*codestar.ListTeamMembersInput) codestar.ListTeamMembersRequest
-
-	ListUserProfilesRequest(*codestar.ListUserProfilesInput) codestar.ListUserProfilesRequest
-
-	TagProjectRequest(*codestar.TagProjectInput) codestar.TagProjectRequest
-
-	UntagProjectRequest(*codestar.UntagProjectInput) codestar.UntagProjectRequest
-
-	UpdateProjectRequest(*codestar.UpdateProjectInput) codestar.UpdateProjectRequest
-
-	UpdateTeamMemberRequest(*codestar.UpdateTeamMemberInput) codestar.UpdateTeamMemberRequest
-
-	UpdateUserProfileRequest(*codestar.UpdateUserProfileInput) codestar.UpdateUserProfileRequest
 }
 
-var _ CodeStarAPI = (*codestar.CodeStar)(nil)
+// CreateProjectRequester provides the interface for the CreateProjectRequest API operation.
+type CreateProjectRequester interface {
+	CreateProjectRequest(*codestar.CreateProjectInput) codestar.CreateProjectRequest
+}
+
+// CreateUserProfileRequester provides the interface for the CreateUserProfileRequest API operation.
+type CreateUserProfileRequester interface {
+	CreateUserProfileRequest(*codestar.CreateUserProfileInput) codestar.CreateUserProfileRequest
+}
+
+// DeleteProjectRequester provides the interface for the DeleteProjectRequest API operation.
+type DeleteProjectRequester interface {
+	DeleteProjectRequest(*codestar.DeleteProjectInput) codestar.DeleteProjectRequest
+}
+
+// DeleteUserProfileRequester provides the interface for the DeleteUserProfileRequest API operation.
+type DeleteUserProfileRequester interface {
+	DeleteUserProfileRequest(*codestar.DeleteUserProfileInput) codestar.DeleteUserProfileRequest
+}
+
+// DescribeProjectRequester provides the interface for the DescribeProjectRequest API operation.
+type DescribeProjectRequester interface {
+	DescribeProjectRequest(*codestar.DescribeProjectInput) codestar.DescribeProjectRequest
+}
+
+// DescribeUserProfileRequester provides the interface for the DescribeUserProfileRequest API operation.
+type DescribeUserProfileRequester interface {
+	DescribeUserProfileRequest(*codestar.DescribeUserProfileInput) codestar.DescribeUserProfileRequest
+}
+
+// DisassociateTeamMemberRequester provides the interface for the DisassociateTeamMemberRequest API operation.
+type DisassociateTeamMemberRequester interface {
+	DisassociateTeamMemberRequest(*codestar.DisassociateTeamMemberInput) codestar.DisassociateTeamMemberRequest
+}
+
+// ListProjectsRequester provides the interface for the ListProjectsRequest API operation.
+type ListProjectsRequester interface {
+	ListProjectsRequest(*codestar.ListProjectsInput) codestar.ListProjectsRequest
+}
+
+// ListResourcesRequester provides the interface for the ListResourcesRequest API operation.
+type ListResourcesRequester interface {
+	ListResourcesRequest(*codestar.ListResourcesInput) codestar.ListResourcesRequest
+}
+
+// ListTagsForProjectRequester provides the interface for the ListTagsForProjectRequest API operation.
+type ListTagsForProjectRequester interface {
+	ListTagsForProjectRequest(*codestar.ListTagsForProjectInput) codestar.ListTagsForProjectRequest
+}
+
+// ListTeamMembersRequester provides the interface for the ListTeamMembersRequest API operation.
+type ListTeamMembersRequester interface {
+	ListTeamMembersRequest(*codestar.ListTeamMembersInput) codestar.ListTeamMembersRequest
+}
+
+// ListUserProfilesRequester provides the interface for the ListUserProfilesRequest API operation.
+type ListUserProfilesRequester interface {
+	ListUserProfilesRequest(*codestar.ListUserProfilesInput) codestar.ListUserProfilesRequest
+}
+
+// TagProjectRequester provides the interface for the TagProjectRequest API operation.
+type TagProjectRequester interface {
+	TagProjectRequest(*codestar.TagProjectInput) codestar.TagProjectRequest
+}
+
+// UntagProjectRequester provides the interface for the UntagProjectRequest API operation.
+type UntagProjectRequester interface {
+	UntagProjectRequest(*codestar.UntagProjectInput) codestar.UntagProjectRequest
+}
+
+// UpdateProjectRequester provides the interface for the UpdateProjectRequest API operation.
+type UpdateProjectRequester interface {
+	UpdateProjectRequest(*codestar.UpdateProjectInput) codestar.UpdateProjectRequest
+}
+
+// UpdateTeamMemberRequester provides the interface for the UpdateTeamMemberRequest API operation.
+type UpdateTeamMemberRequester interface {
+	UpdateTeamMemberRequest(*codestar.UpdateTeamMemberInput) codestar.UpdateTeamMemberRequest
+}
+
+// UpdateUserProfileRequester provides the interface for the UpdateUserProfileRequest API operation.
+type UpdateUserProfileRequester interface {
+	UpdateUserProfileRequest(*codestar.UpdateUserProfileInput) codestar.UpdateUserProfileRequest
+}

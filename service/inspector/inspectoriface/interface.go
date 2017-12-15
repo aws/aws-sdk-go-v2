@@ -13,145 +13,167 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
 )
 
-// InspectorAPI provides an interface to enable mocking the
-// inspector.Inspector service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Inspector.
-//    func myFunc(svc inspectoriface.InspectorAPI) bool {
-//        // Make svc.AddAttributesToFindings request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := inspector.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockInspectorClient struct {
-//        inspectoriface.InspectorAPI
-//    }
-//    func (m *mockInspectorClient) AddAttributesToFindings(input *inspector.AddAttributesToFindingsInput) (*inspector.AddAttributesToFindingsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockInspectorClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type InspectorAPI interface {
+// AddAttributesToFindingsRequester provides the interface for the AddAttributesToFindingsRequest API operation.
+type AddAttributesToFindingsRequester interface {
 	AddAttributesToFindingsRequest(*inspector.AddAttributesToFindingsInput) inspector.AddAttributesToFindingsRequest
-
-	CreateAssessmentTargetRequest(*inspector.CreateAssessmentTargetInput) inspector.CreateAssessmentTargetRequest
-
-	CreateAssessmentTemplateRequest(*inspector.CreateAssessmentTemplateInput) inspector.CreateAssessmentTemplateRequest
-
-	CreateResourceGroupRequest(*inspector.CreateResourceGroupInput) inspector.CreateResourceGroupRequest
-
-	DeleteAssessmentRunRequest(*inspector.DeleteAssessmentRunInput) inspector.DeleteAssessmentRunRequest
-
-	DeleteAssessmentTargetRequest(*inspector.DeleteAssessmentTargetInput) inspector.DeleteAssessmentTargetRequest
-
-	DeleteAssessmentTemplateRequest(*inspector.DeleteAssessmentTemplateInput) inspector.DeleteAssessmentTemplateRequest
-
-	DescribeAssessmentRunsRequest(*inspector.DescribeAssessmentRunsInput) inspector.DescribeAssessmentRunsRequest
-
-	DescribeAssessmentTargetsRequest(*inspector.DescribeAssessmentTargetsInput) inspector.DescribeAssessmentTargetsRequest
-
-	DescribeAssessmentTemplatesRequest(*inspector.DescribeAssessmentTemplatesInput) inspector.DescribeAssessmentTemplatesRequest
-
-	DescribeCrossAccountAccessRoleRequest(*inspector.DescribeCrossAccountAccessRoleInput) inspector.DescribeCrossAccountAccessRoleRequest
-
-	DescribeFindingsRequest(*inspector.DescribeFindingsInput) inspector.DescribeFindingsRequest
-
-	DescribeResourceGroupsRequest(*inspector.DescribeResourceGroupsInput) inspector.DescribeResourceGroupsRequest
-
-	DescribeRulesPackagesRequest(*inspector.DescribeRulesPackagesInput) inspector.DescribeRulesPackagesRequest
-
-	GetAssessmentReportRequest(*inspector.GetAssessmentReportInput) inspector.GetAssessmentReportRequest
-
-	GetTelemetryMetadataRequest(*inspector.GetTelemetryMetadataInput) inspector.GetTelemetryMetadataRequest
-
-	ListAssessmentRunAgentsRequest(*inspector.ListAssessmentRunAgentsInput) inspector.ListAssessmentRunAgentsRequest
-
-	ListAssessmentRunAgentsPages(*inspector.ListAssessmentRunAgentsInput, func(*inspector.ListAssessmentRunAgentsOutput, bool) bool) error
-	ListAssessmentRunAgentsPagesWithContext(aws.Context, *inspector.ListAssessmentRunAgentsInput, func(*inspector.ListAssessmentRunAgentsOutput, bool) bool, ...aws.Option) error
-
-	ListAssessmentRunsRequest(*inspector.ListAssessmentRunsInput) inspector.ListAssessmentRunsRequest
-
-	ListAssessmentRunsPages(*inspector.ListAssessmentRunsInput, func(*inspector.ListAssessmentRunsOutput, bool) bool) error
-	ListAssessmentRunsPagesWithContext(aws.Context, *inspector.ListAssessmentRunsInput, func(*inspector.ListAssessmentRunsOutput, bool) bool, ...aws.Option) error
-
-	ListAssessmentTargetsRequest(*inspector.ListAssessmentTargetsInput) inspector.ListAssessmentTargetsRequest
-
-	ListAssessmentTargetsPages(*inspector.ListAssessmentTargetsInput, func(*inspector.ListAssessmentTargetsOutput, bool) bool) error
-	ListAssessmentTargetsPagesWithContext(aws.Context, *inspector.ListAssessmentTargetsInput, func(*inspector.ListAssessmentTargetsOutput, bool) bool, ...aws.Option) error
-
-	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
-
-	ListAssessmentTemplatesPages(*inspector.ListAssessmentTemplatesInput, func(*inspector.ListAssessmentTemplatesOutput, bool) bool) error
-	ListAssessmentTemplatesPagesWithContext(aws.Context, *inspector.ListAssessmentTemplatesInput, func(*inspector.ListAssessmentTemplatesOutput, bool) bool, ...aws.Option) error
-
-	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
-
-	ListEventSubscriptionsPages(*inspector.ListEventSubscriptionsInput, func(*inspector.ListEventSubscriptionsOutput, bool) bool) error
-	ListEventSubscriptionsPagesWithContext(aws.Context, *inspector.ListEventSubscriptionsInput, func(*inspector.ListEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
-	ListFindingsRequest(*inspector.ListFindingsInput) inspector.ListFindingsRequest
-
-	ListFindingsPages(*inspector.ListFindingsInput, func(*inspector.ListFindingsOutput, bool) bool) error
-	ListFindingsPagesWithContext(aws.Context, *inspector.ListFindingsInput, func(*inspector.ListFindingsOutput, bool) bool, ...aws.Option) error
-
-	ListRulesPackagesRequest(*inspector.ListRulesPackagesInput) inspector.ListRulesPackagesRequest
-
-	ListRulesPackagesPages(*inspector.ListRulesPackagesInput, func(*inspector.ListRulesPackagesOutput, bool) bool) error
-	ListRulesPackagesPagesWithContext(aws.Context, *inspector.ListRulesPackagesInput, func(*inspector.ListRulesPackagesOutput, bool) bool, ...aws.Option) error
-
-	ListTagsForResourceRequest(*inspector.ListTagsForResourceInput) inspector.ListTagsForResourceRequest
-
-	PreviewAgentsRequest(*inspector.PreviewAgentsInput) inspector.PreviewAgentsRequest
-
-	PreviewAgentsPages(*inspector.PreviewAgentsInput, func(*inspector.PreviewAgentsOutput, bool) bool) error
-	PreviewAgentsPagesWithContext(aws.Context, *inspector.PreviewAgentsInput, func(*inspector.PreviewAgentsOutput, bool) bool, ...aws.Option) error
-
-	RegisterCrossAccountAccessRoleRequest(*inspector.RegisterCrossAccountAccessRoleInput) inspector.RegisterCrossAccountAccessRoleRequest
-
-	RemoveAttributesFromFindingsRequest(*inspector.RemoveAttributesFromFindingsInput) inspector.RemoveAttributesFromFindingsRequest
-
-	SetTagsForResourceRequest(*inspector.SetTagsForResourceInput) inspector.SetTagsForResourceRequest
-
-	StartAssessmentRunRequest(*inspector.StartAssessmentRunInput) inspector.StartAssessmentRunRequest
-
-	StopAssessmentRunRequest(*inspector.StopAssessmentRunInput) inspector.StopAssessmentRunRequest
-
-	SubscribeToEventRequest(*inspector.SubscribeToEventInput) inspector.SubscribeToEventRequest
-
-	UnsubscribeFromEventRequest(*inspector.UnsubscribeFromEventInput) inspector.UnsubscribeFromEventRequest
-
-	UpdateAssessmentTargetRequest(*inspector.UpdateAssessmentTargetInput) inspector.UpdateAssessmentTargetRequest
 }
 
-var _ InspectorAPI = (*inspector.Inspector)(nil)
+// CreateAssessmentTargetRequester provides the interface for the CreateAssessmentTargetRequest API operation.
+type CreateAssessmentTargetRequester interface {
+	CreateAssessmentTargetRequest(*inspector.CreateAssessmentTargetInput) inspector.CreateAssessmentTargetRequest
+}
+
+// CreateAssessmentTemplateRequester provides the interface for the CreateAssessmentTemplateRequest API operation.
+type CreateAssessmentTemplateRequester interface {
+	CreateAssessmentTemplateRequest(*inspector.CreateAssessmentTemplateInput) inspector.CreateAssessmentTemplateRequest
+}
+
+// CreateResourceGroupRequester provides the interface for the CreateResourceGroupRequest API operation.
+type CreateResourceGroupRequester interface {
+	CreateResourceGroupRequest(*inspector.CreateResourceGroupInput) inspector.CreateResourceGroupRequest
+}
+
+// DeleteAssessmentRunRequester provides the interface for the DeleteAssessmentRunRequest API operation.
+type DeleteAssessmentRunRequester interface {
+	DeleteAssessmentRunRequest(*inspector.DeleteAssessmentRunInput) inspector.DeleteAssessmentRunRequest
+}
+
+// DeleteAssessmentTargetRequester provides the interface for the DeleteAssessmentTargetRequest API operation.
+type DeleteAssessmentTargetRequester interface {
+	DeleteAssessmentTargetRequest(*inspector.DeleteAssessmentTargetInput) inspector.DeleteAssessmentTargetRequest
+}
+
+// DeleteAssessmentTemplateRequester provides the interface for the DeleteAssessmentTemplateRequest API operation.
+type DeleteAssessmentTemplateRequester interface {
+	DeleteAssessmentTemplateRequest(*inspector.DeleteAssessmentTemplateInput) inspector.DeleteAssessmentTemplateRequest
+}
+
+// DescribeAssessmentRunsRequester provides the interface for the DescribeAssessmentRunsRequest API operation.
+type DescribeAssessmentRunsRequester interface {
+	DescribeAssessmentRunsRequest(*inspector.DescribeAssessmentRunsInput) inspector.DescribeAssessmentRunsRequest
+}
+
+// DescribeAssessmentTargetsRequester provides the interface for the DescribeAssessmentTargetsRequest API operation.
+type DescribeAssessmentTargetsRequester interface {
+	DescribeAssessmentTargetsRequest(*inspector.DescribeAssessmentTargetsInput) inspector.DescribeAssessmentTargetsRequest
+}
+
+// DescribeAssessmentTemplatesRequester provides the interface for the DescribeAssessmentTemplatesRequest API operation.
+type DescribeAssessmentTemplatesRequester interface {
+	DescribeAssessmentTemplatesRequest(*inspector.DescribeAssessmentTemplatesInput) inspector.DescribeAssessmentTemplatesRequest
+}
+
+// DescribeCrossAccountAccessRoleRequester provides the interface for the DescribeCrossAccountAccessRoleRequest API operation.
+type DescribeCrossAccountAccessRoleRequester interface {
+	DescribeCrossAccountAccessRoleRequest(*inspector.DescribeCrossAccountAccessRoleInput) inspector.DescribeCrossAccountAccessRoleRequest
+}
+
+// DescribeFindingsRequester provides the interface for the DescribeFindingsRequest API operation.
+type DescribeFindingsRequester interface {
+	DescribeFindingsRequest(*inspector.DescribeFindingsInput) inspector.DescribeFindingsRequest
+}
+
+// DescribeResourceGroupsRequester provides the interface for the DescribeResourceGroupsRequest API operation.
+type DescribeResourceGroupsRequester interface {
+	DescribeResourceGroupsRequest(*inspector.DescribeResourceGroupsInput) inspector.DescribeResourceGroupsRequest
+}
+
+// DescribeRulesPackagesRequester provides the interface for the DescribeRulesPackagesRequest API operation.
+type DescribeRulesPackagesRequester interface {
+	DescribeRulesPackagesRequest(*inspector.DescribeRulesPackagesInput) inspector.DescribeRulesPackagesRequest
+}
+
+// GetAssessmentReportRequester provides the interface for the GetAssessmentReportRequest API operation.
+type GetAssessmentReportRequester interface {
+	GetAssessmentReportRequest(*inspector.GetAssessmentReportInput) inspector.GetAssessmentReportRequest
+}
+
+// GetTelemetryMetadataRequester provides the interface for the GetTelemetryMetadataRequest API operation.
+type GetTelemetryMetadataRequester interface {
+	GetTelemetryMetadataRequest(*inspector.GetTelemetryMetadataInput) inspector.GetTelemetryMetadataRequest
+}
+
+// ListAssessmentRunAgentsRequester provides the interface for the ListAssessmentRunAgentsRequest API operation.
+type ListAssessmentRunAgentsRequester interface {
+	ListAssessmentRunAgentsRequest(*inspector.ListAssessmentRunAgentsInput) inspector.ListAssessmentRunAgentsRequest
+}
+
+// ListAssessmentRunsRequester provides the interface for the ListAssessmentRunsRequest API operation.
+type ListAssessmentRunsRequester interface {
+	ListAssessmentRunsRequest(*inspector.ListAssessmentRunsInput) inspector.ListAssessmentRunsRequest
+}
+
+// ListAssessmentTargetsRequester provides the interface for the ListAssessmentTargetsRequest API operation.
+type ListAssessmentTargetsRequester interface {
+	ListAssessmentTargetsRequest(*inspector.ListAssessmentTargetsInput) inspector.ListAssessmentTargetsRequest
+}
+
+// ListAssessmentTemplatesRequester provides the interface for the ListAssessmentTemplatesRequest API operation.
+type ListAssessmentTemplatesRequester interface {
+	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
+}
+
+// ListEventSubscriptionsRequester provides the interface for the ListEventSubscriptionsRequest API operation.
+type ListEventSubscriptionsRequester interface {
+	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
+}
+
+// ListFindingsRequester provides the interface for the ListFindingsRequest API operation.
+type ListFindingsRequester interface {
+	ListFindingsRequest(*inspector.ListFindingsInput) inspector.ListFindingsRequest
+}
+
+// ListRulesPackagesRequester provides the interface for the ListRulesPackagesRequest API operation.
+type ListRulesPackagesRequester interface {
+	ListRulesPackagesRequest(*inspector.ListRulesPackagesInput) inspector.ListRulesPackagesRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*inspector.ListTagsForResourceInput) inspector.ListTagsForResourceRequest
+}
+
+// PreviewAgentsRequester provides the interface for the PreviewAgentsRequest API operation.
+type PreviewAgentsRequester interface {
+	PreviewAgentsRequest(*inspector.PreviewAgentsInput) inspector.PreviewAgentsRequest
+}
+
+// RegisterCrossAccountAccessRoleRequester provides the interface for the RegisterCrossAccountAccessRoleRequest API operation.
+type RegisterCrossAccountAccessRoleRequester interface {
+	RegisterCrossAccountAccessRoleRequest(*inspector.RegisterCrossAccountAccessRoleInput) inspector.RegisterCrossAccountAccessRoleRequest
+}
+
+// RemoveAttributesFromFindingsRequester provides the interface for the RemoveAttributesFromFindingsRequest API operation.
+type RemoveAttributesFromFindingsRequester interface {
+	RemoveAttributesFromFindingsRequest(*inspector.RemoveAttributesFromFindingsInput) inspector.RemoveAttributesFromFindingsRequest
+}
+
+// SetTagsForResourceRequester provides the interface for the SetTagsForResourceRequest API operation.
+type SetTagsForResourceRequester interface {
+	SetTagsForResourceRequest(*inspector.SetTagsForResourceInput) inspector.SetTagsForResourceRequest
+}
+
+// StartAssessmentRunRequester provides the interface for the StartAssessmentRunRequest API operation.
+type StartAssessmentRunRequester interface {
+	StartAssessmentRunRequest(*inspector.StartAssessmentRunInput) inspector.StartAssessmentRunRequest
+}
+
+// StopAssessmentRunRequester provides the interface for the StopAssessmentRunRequest API operation.
+type StopAssessmentRunRequester interface {
+	StopAssessmentRunRequest(*inspector.StopAssessmentRunInput) inspector.StopAssessmentRunRequest
+}
+
+// SubscribeToEventRequester provides the interface for the SubscribeToEventRequest API operation.
+type SubscribeToEventRequester interface {
+	SubscribeToEventRequest(*inspector.SubscribeToEventInput) inspector.SubscribeToEventRequest
+}
+
+// UnsubscribeFromEventRequester provides the interface for the UnsubscribeFromEventRequest API operation.
+type UnsubscribeFromEventRequester interface {
+	UnsubscribeFromEventRequest(*inspector.UnsubscribeFromEventInput) inspector.UnsubscribeFromEventRequest
+}
+
+// UpdateAssessmentTargetRequester provides the interface for the UpdateAssessmentTargetRequest API operation.
+type UpdateAssessmentTargetRequester interface {
+	UpdateAssessmentTargetRequest(*inspector.UpdateAssessmentTargetInput) inspector.UpdateAssessmentTargetRequest
+}

@@ -12,103 +12,122 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch"
 )
 
-// CloudSearchAPI provides an interface to enable mocking the
-// cloudsearch.CloudSearch service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudSearch.
-//    func myFunc(svc cloudsearchiface.CloudSearchAPI) bool {
-//        // Make svc.BuildSuggesters request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudsearch.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudSearchClient struct {
-//        cloudsearchiface.CloudSearchAPI
-//    }
-//    func (m *mockCloudSearchClient) BuildSuggesters(input *cloudsearch.BuildSuggestersInput) (*cloudsearch.BuildSuggestersOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudSearchClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudSearchAPI interface {
+// BuildSuggestersRequester provides the interface for the BuildSuggestersRequest API operation.
+type BuildSuggestersRequester interface {
 	BuildSuggestersRequest(*cloudsearch.BuildSuggestersInput) cloudsearch.BuildSuggestersRequest
-
-	CreateDomainRequest(*cloudsearch.CreateDomainInput) cloudsearch.CreateDomainRequest
-
-	DefineAnalysisSchemeRequest(*cloudsearch.DefineAnalysisSchemeInput) cloudsearch.DefineAnalysisSchemeRequest
-
-	DefineExpressionRequest(*cloudsearch.DefineExpressionInput) cloudsearch.DefineExpressionRequest
-
-	DefineIndexFieldRequest(*cloudsearch.DefineIndexFieldInput) cloudsearch.DefineIndexFieldRequest
-
-	DefineSuggesterRequest(*cloudsearch.DefineSuggesterInput) cloudsearch.DefineSuggesterRequest
-
-	DeleteAnalysisSchemeRequest(*cloudsearch.DeleteAnalysisSchemeInput) cloudsearch.DeleteAnalysisSchemeRequest
-
-	DeleteDomainRequest(*cloudsearch.DeleteDomainInput) cloudsearch.DeleteDomainRequest
-
-	DeleteExpressionRequest(*cloudsearch.DeleteExpressionInput) cloudsearch.DeleteExpressionRequest
-
-	DeleteIndexFieldRequest(*cloudsearch.DeleteIndexFieldInput) cloudsearch.DeleteIndexFieldRequest
-
-	DeleteSuggesterRequest(*cloudsearch.DeleteSuggesterInput) cloudsearch.DeleteSuggesterRequest
-
-	DescribeAnalysisSchemesRequest(*cloudsearch.DescribeAnalysisSchemesInput) cloudsearch.DescribeAnalysisSchemesRequest
-
-	DescribeAvailabilityOptionsRequest(*cloudsearch.DescribeAvailabilityOptionsInput) cloudsearch.DescribeAvailabilityOptionsRequest
-
-	DescribeDomainsRequest(*cloudsearch.DescribeDomainsInput) cloudsearch.DescribeDomainsRequest
-
-	DescribeExpressionsRequest(*cloudsearch.DescribeExpressionsInput) cloudsearch.DescribeExpressionsRequest
-
-	DescribeIndexFieldsRequest(*cloudsearch.DescribeIndexFieldsInput) cloudsearch.DescribeIndexFieldsRequest
-
-	DescribeScalingParametersRequest(*cloudsearch.DescribeScalingParametersInput) cloudsearch.DescribeScalingParametersRequest
-
-	DescribeServiceAccessPoliciesRequest(*cloudsearch.DescribeServiceAccessPoliciesInput) cloudsearch.DescribeServiceAccessPoliciesRequest
-
-	DescribeSuggestersRequest(*cloudsearch.DescribeSuggestersInput) cloudsearch.DescribeSuggestersRequest
-
-	IndexDocumentsRequest(*cloudsearch.IndexDocumentsInput) cloudsearch.IndexDocumentsRequest
-
-	ListDomainNamesRequest(*cloudsearch.ListDomainNamesInput) cloudsearch.ListDomainNamesRequest
-
-	UpdateAvailabilityOptionsRequest(*cloudsearch.UpdateAvailabilityOptionsInput) cloudsearch.UpdateAvailabilityOptionsRequest
-
-	UpdateScalingParametersRequest(*cloudsearch.UpdateScalingParametersInput) cloudsearch.UpdateScalingParametersRequest
-
-	UpdateServiceAccessPoliciesRequest(*cloudsearch.UpdateServiceAccessPoliciesInput) cloudsearch.UpdateServiceAccessPoliciesRequest
 }
 
-var _ CloudSearchAPI = (*cloudsearch.CloudSearch)(nil)
+// CreateDomainRequester provides the interface for the CreateDomainRequest API operation.
+type CreateDomainRequester interface {
+	CreateDomainRequest(*cloudsearch.CreateDomainInput) cloudsearch.CreateDomainRequest
+}
+
+// DefineAnalysisSchemeRequester provides the interface for the DefineAnalysisSchemeRequest API operation.
+type DefineAnalysisSchemeRequester interface {
+	DefineAnalysisSchemeRequest(*cloudsearch.DefineAnalysisSchemeInput) cloudsearch.DefineAnalysisSchemeRequest
+}
+
+// DefineExpressionRequester provides the interface for the DefineExpressionRequest API operation.
+type DefineExpressionRequester interface {
+	DefineExpressionRequest(*cloudsearch.DefineExpressionInput) cloudsearch.DefineExpressionRequest
+}
+
+// DefineIndexFieldRequester provides the interface for the DefineIndexFieldRequest API operation.
+type DefineIndexFieldRequester interface {
+	DefineIndexFieldRequest(*cloudsearch.DefineIndexFieldInput) cloudsearch.DefineIndexFieldRequest
+}
+
+// DefineSuggesterRequester provides the interface for the DefineSuggesterRequest API operation.
+type DefineSuggesterRequester interface {
+	DefineSuggesterRequest(*cloudsearch.DefineSuggesterInput) cloudsearch.DefineSuggesterRequest
+}
+
+// DeleteAnalysisSchemeRequester provides the interface for the DeleteAnalysisSchemeRequest API operation.
+type DeleteAnalysisSchemeRequester interface {
+	DeleteAnalysisSchemeRequest(*cloudsearch.DeleteAnalysisSchemeInput) cloudsearch.DeleteAnalysisSchemeRequest
+}
+
+// DeleteDomainRequester provides the interface for the DeleteDomainRequest API operation.
+type DeleteDomainRequester interface {
+	DeleteDomainRequest(*cloudsearch.DeleteDomainInput) cloudsearch.DeleteDomainRequest
+}
+
+// DeleteExpressionRequester provides the interface for the DeleteExpressionRequest API operation.
+type DeleteExpressionRequester interface {
+	DeleteExpressionRequest(*cloudsearch.DeleteExpressionInput) cloudsearch.DeleteExpressionRequest
+}
+
+// DeleteIndexFieldRequester provides the interface for the DeleteIndexFieldRequest API operation.
+type DeleteIndexFieldRequester interface {
+	DeleteIndexFieldRequest(*cloudsearch.DeleteIndexFieldInput) cloudsearch.DeleteIndexFieldRequest
+}
+
+// DeleteSuggesterRequester provides the interface for the DeleteSuggesterRequest API operation.
+type DeleteSuggesterRequester interface {
+	DeleteSuggesterRequest(*cloudsearch.DeleteSuggesterInput) cloudsearch.DeleteSuggesterRequest
+}
+
+// DescribeAnalysisSchemesRequester provides the interface for the DescribeAnalysisSchemesRequest API operation.
+type DescribeAnalysisSchemesRequester interface {
+	DescribeAnalysisSchemesRequest(*cloudsearch.DescribeAnalysisSchemesInput) cloudsearch.DescribeAnalysisSchemesRequest
+}
+
+// DescribeAvailabilityOptionsRequester provides the interface for the DescribeAvailabilityOptionsRequest API operation.
+type DescribeAvailabilityOptionsRequester interface {
+	DescribeAvailabilityOptionsRequest(*cloudsearch.DescribeAvailabilityOptionsInput) cloudsearch.DescribeAvailabilityOptionsRequest
+}
+
+// DescribeDomainsRequester provides the interface for the DescribeDomainsRequest API operation.
+type DescribeDomainsRequester interface {
+	DescribeDomainsRequest(*cloudsearch.DescribeDomainsInput) cloudsearch.DescribeDomainsRequest
+}
+
+// DescribeExpressionsRequester provides the interface for the DescribeExpressionsRequest API operation.
+type DescribeExpressionsRequester interface {
+	DescribeExpressionsRequest(*cloudsearch.DescribeExpressionsInput) cloudsearch.DescribeExpressionsRequest
+}
+
+// DescribeIndexFieldsRequester provides the interface for the DescribeIndexFieldsRequest API operation.
+type DescribeIndexFieldsRequester interface {
+	DescribeIndexFieldsRequest(*cloudsearch.DescribeIndexFieldsInput) cloudsearch.DescribeIndexFieldsRequest
+}
+
+// DescribeScalingParametersRequester provides the interface for the DescribeScalingParametersRequest API operation.
+type DescribeScalingParametersRequester interface {
+	DescribeScalingParametersRequest(*cloudsearch.DescribeScalingParametersInput) cloudsearch.DescribeScalingParametersRequest
+}
+
+// DescribeServiceAccessPoliciesRequester provides the interface for the DescribeServiceAccessPoliciesRequest API operation.
+type DescribeServiceAccessPoliciesRequester interface {
+	DescribeServiceAccessPoliciesRequest(*cloudsearch.DescribeServiceAccessPoliciesInput) cloudsearch.DescribeServiceAccessPoliciesRequest
+}
+
+// DescribeSuggestersRequester provides the interface for the DescribeSuggestersRequest API operation.
+type DescribeSuggestersRequester interface {
+	DescribeSuggestersRequest(*cloudsearch.DescribeSuggestersInput) cloudsearch.DescribeSuggestersRequest
+}
+
+// IndexDocumentsRequester provides the interface for the IndexDocumentsRequest API operation.
+type IndexDocumentsRequester interface {
+	IndexDocumentsRequest(*cloudsearch.IndexDocumentsInput) cloudsearch.IndexDocumentsRequest
+}
+
+// ListDomainNamesRequester provides the interface for the ListDomainNamesRequest API operation.
+type ListDomainNamesRequester interface {
+	ListDomainNamesRequest(*cloudsearch.ListDomainNamesInput) cloudsearch.ListDomainNamesRequest
+}
+
+// UpdateAvailabilityOptionsRequester provides the interface for the UpdateAvailabilityOptionsRequest API operation.
+type UpdateAvailabilityOptionsRequester interface {
+	UpdateAvailabilityOptionsRequest(*cloudsearch.UpdateAvailabilityOptionsInput) cloudsearch.UpdateAvailabilityOptionsRequest
+}
+
+// UpdateScalingParametersRequester provides the interface for the UpdateScalingParametersRequest API operation.
+type UpdateScalingParametersRequester interface {
+	UpdateScalingParametersRequest(*cloudsearch.UpdateScalingParametersInput) cloudsearch.UpdateScalingParametersRequest
+}
+
+// UpdateServiceAccessPoliciesRequester provides the interface for the UpdateServiceAccessPoliciesRequest API operation.
+type UpdateServiceAccessPoliciesRequester interface {
+	UpdateServiceAccessPoliciesRequest(*cloudsearch.UpdateServiceAccessPoliciesInput) cloudsearch.UpdateServiceAccessPoliciesRequest
+}

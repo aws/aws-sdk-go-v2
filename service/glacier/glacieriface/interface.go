@@ -13,139 +13,179 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
 )
 
-// GlacierAPI provides an interface to enable mocking the
-// glacier.Glacier service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Glacier.
-//    func myFunc(svc glacieriface.GlacierAPI) bool {
-//        // Make svc.AbortMultipartUpload request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := glacier.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGlacierClient struct {
-//        glacieriface.GlacierAPI
-//    }
-//    func (m *mockGlacierClient) AbortMultipartUpload(input *glacier.AbortMultipartUploadInput) (*glacier.AbortMultipartUploadOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockGlacierClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type GlacierAPI interface {
+// AbortMultipartUploadRequester provides the interface for the AbortMultipartUploadRequest API operation.
+type AbortMultipartUploadRequester interface {
 	AbortMultipartUploadRequest(*glacier.AbortMultipartUploadInput) glacier.AbortMultipartUploadRequest
+}
 
+// AbortVaultLockRequester provides the interface for the AbortVaultLockRequest API operation.
+type AbortVaultLockRequester interface {
 	AbortVaultLockRequest(*glacier.AbortVaultLockInput) glacier.AbortVaultLockRequest
+}
 
+// AddTagsToVaultRequester provides the interface for the AddTagsToVaultRequest API operation.
+type AddTagsToVaultRequester interface {
 	AddTagsToVaultRequest(*glacier.AddTagsToVaultInput) glacier.AddTagsToVaultRequest
+}
 
+// CompleteMultipartUploadRequester provides the interface for the CompleteMultipartUploadRequest API operation.
+type CompleteMultipartUploadRequester interface {
 	CompleteMultipartUploadRequest(*glacier.CompleteMultipartUploadInput) glacier.CompleteMultipartUploadRequest
+}
 
+// CompleteVaultLockRequester provides the interface for the CompleteVaultLockRequest API operation.
+type CompleteVaultLockRequester interface {
 	CompleteVaultLockRequest(*glacier.CompleteVaultLockInput) glacier.CompleteVaultLockRequest
+}
 
+// CreateVaultRequester provides the interface for the CreateVaultRequest API operation.
+type CreateVaultRequester interface {
 	CreateVaultRequest(*glacier.CreateVaultInput) glacier.CreateVaultRequest
+}
 
+// DeleteArchiveRequester provides the interface for the DeleteArchiveRequest API operation.
+type DeleteArchiveRequester interface {
 	DeleteArchiveRequest(*glacier.DeleteArchiveInput) glacier.DeleteArchiveRequest
+}
 
+// DeleteVaultRequester provides the interface for the DeleteVaultRequest API operation.
+type DeleteVaultRequester interface {
 	DeleteVaultRequest(*glacier.DeleteVaultInput) glacier.DeleteVaultRequest
+}
 
+// DeleteVaultAccessPolicyRequester provides the interface for the DeleteVaultAccessPolicyRequest API operation.
+type DeleteVaultAccessPolicyRequester interface {
 	DeleteVaultAccessPolicyRequest(*glacier.DeleteVaultAccessPolicyInput) glacier.DeleteVaultAccessPolicyRequest
+}
 
+// DeleteVaultNotificationsRequester provides the interface for the DeleteVaultNotificationsRequest API operation.
+type DeleteVaultNotificationsRequester interface {
 	DeleteVaultNotificationsRequest(*glacier.DeleteVaultNotificationsInput) glacier.DeleteVaultNotificationsRequest
+}
 
+// DescribeJobRequester provides the interface for the DescribeJobRequest API operation.
+type DescribeJobRequester interface {
 	DescribeJobRequest(*glacier.DescribeJobInput) glacier.DescribeJobRequest
+}
 
+// DescribeVaultRequester provides the interface for the DescribeVaultRequest API operation.
+type DescribeVaultRequester interface {
 	DescribeVaultRequest(*glacier.DescribeVaultInput) glacier.DescribeVaultRequest
+}
 
+// GetDataRetrievalPolicyRequester provides the interface for the GetDataRetrievalPolicyRequest API operation.
+type GetDataRetrievalPolicyRequester interface {
 	GetDataRetrievalPolicyRequest(*glacier.GetDataRetrievalPolicyInput) glacier.GetDataRetrievalPolicyRequest
+}
 
+// GetJobOutputRequester provides the interface for the GetJobOutputRequest API operation.
+type GetJobOutputRequester interface {
 	GetJobOutputRequest(*glacier.GetJobOutputInput) glacier.GetJobOutputRequest
+}
 
+// GetVaultAccessPolicyRequester provides the interface for the GetVaultAccessPolicyRequest API operation.
+type GetVaultAccessPolicyRequester interface {
 	GetVaultAccessPolicyRequest(*glacier.GetVaultAccessPolicyInput) glacier.GetVaultAccessPolicyRequest
+}
 
+// GetVaultLockRequester provides the interface for the GetVaultLockRequest API operation.
+type GetVaultLockRequester interface {
 	GetVaultLockRequest(*glacier.GetVaultLockInput) glacier.GetVaultLockRequest
+}
 
+// GetVaultNotificationsRequester provides the interface for the GetVaultNotificationsRequest API operation.
+type GetVaultNotificationsRequester interface {
 	GetVaultNotificationsRequest(*glacier.GetVaultNotificationsInput) glacier.GetVaultNotificationsRequest
+}
 
+// InitiateJobRequester provides the interface for the InitiateJobRequest API operation.
+type InitiateJobRequester interface {
 	InitiateJobRequest(*glacier.InitiateJobInput) glacier.InitiateJobRequest
+}
 
+// InitiateMultipartUploadRequester provides the interface for the InitiateMultipartUploadRequest API operation.
+type InitiateMultipartUploadRequester interface {
 	InitiateMultipartUploadRequest(*glacier.InitiateMultipartUploadInput) glacier.InitiateMultipartUploadRequest
+}
 
+// InitiateVaultLockRequester provides the interface for the InitiateVaultLockRequest API operation.
+type InitiateVaultLockRequester interface {
 	InitiateVaultLockRequest(*glacier.InitiateVaultLockInput) glacier.InitiateVaultLockRequest
+}
 
+// ListJobsRequester provides the interface for the ListJobsRequest API operation.
+type ListJobsRequester interface {
 	ListJobsRequest(*glacier.ListJobsInput) glacier.ListJobsRequest
+}
 
-	ListJobsPages(*glacier.ListJobsInput, func(*glacier.ListJobsOutput, bool) bool) error
-	ListJobsPagesWithContext(aws.Context, *glacier.ListJobsInput, func(*glacier.ListJobsOutput, bool) bool, ...aws.Option) error
-
+// ListMultipartUploadsRequester provides the interface for the ListMultipartUploadsRequest API operation.
+type ListMultipartUploadsRequester interface {
 	ListMultipartUploadsRequest(*glacier.ListMultipartUploadsInput) glacier.ListMultipartUploadsRequest
+}
 
-	ListMultipartUploadsPages(*glacier.ListMultipartUploadsInput, func(*glacier.ListMultipartUploadsOutput, bool) bool) error
-	ListMultipartUploadsPagesWithContext(aws.Context, *glacier.ListMultipartUploadsInput, func(*glacier.ListMultipartUploadsOutput, bool) bool, ...aws.Option) error
-
+// ListPartsRequester provides the interface for the ListPartsRequest API operation.
+type ListPartsRequester interface {
 	ListPartsRequest(*glacier.ListPartsInput) glacier.ListPartsRequest
+}
 
-	ListPartsPages(*glacier.ListPartsInput, func(*glacier.ListPartsOutput, bool) bool) error
-	ListPartsPagesWithContext(aws.Context, *glacier.ListPartsInput, func(*glacier.ListPartsOutput, bool) bool, ...aws.Option) error
-
+// ListProvisionedCapacityRequester provides the interface for the ListProvisionedCapacityRequest API operation.
+type ListProvisionedCapacityRequester interface {
 	ListProvisionedCapacityRequest(*glacier.ListProvisionedCapacityInput) glacier.ListProvisionedCapacityRequest
+}
 
+// ListTagsForVaultRequester provides the interface for the ListTagsForVaultRequest API operation.
+type ListTagsForVaultRequester interface {
 	ListTagsForVaultRequest(*glacier.ListTagsForVaultInput) glacier.ListTagsForVaultRequest
+}
 
+// ListVaultsRequester provides the interface for the ListVaultsRequest API operation.
+type ListVaultsRequester interface {
 	ListVaultsRequest(*glacier.ListVaultsInput) glacier.ListVaultsRequest
+}
 
-	ListVaultsPages(*glacier.ListVaultsInput, func(*glacier.ListVaultsOutput, bool) bool) error
-	ListVaultsPagesWithContext(aws.Context, *glacier.ListVaultsInput, func(*glacier.ListVaultsOutput, bool) bool, ...aws.Option) error
-
+// PurchaseProvisionedCapacityRequester provides the interface for the PurchaseProvisionedCapacityRequest API operation.
+type PurchaseProvisionedCapacityRequester interface {
 	PurchaseProvisionedCapacityRequest(*glacier.PurchaseProvisionedCapacityInput) glacier.PurchaseProvisionedCapacityRequest
+}
 
+// RemoveTagsFromVaultRequester provides the interface for the RemoveTagsFromVaultRequest API operation.
+type RemoveTagsFromVaultRequester interface {
 	RemoveTagsFromVaultRequest(*glacier.RemoveTagsFromVaultInput) glacier.RemoveTagsFromVaultRequest
+}
 
+// SetDataRetrievalPolicyRequester provides the interface for the SetDataRetrievalPolicyRequest API operation.
+type SetDataRetrievalPolicyRequester interface {
 	SetDataRetrievalPolicyRequest(*glacier.SetDataRetrievalPolicyInput) glacier.SetDataRetrievalPolicyRequest
+}
 
+// SetVaultAccessPolicyRequester provides the interface for the SetVaultAccessPolicyRequest API operation.
+type SetVaultAccessPolicyRequester interface {
 	SetVaultAccessPolicyRequest(*glacier.SetVaultAccessPolicyInput) glacier.SetVaultAccessPolicyRequest
+}
 
+// SetVaultNotificationsRequester provides the interface for the SetVaultNotificationsRequest API operation.
+type SetVaultNotificationsRequester interface {
 	SetVaultNotificationsRequest(*glacier.SetVaultNotificationsInput) glacier.SetVaultNotificationsRequest
+}
 
+// UploadArchiveRequester provides the interface for the UploadArchiveRequest API operation.
+type UploadArchiveRequester interface {
 	UploadArchiveRequest(*glacier.UploadArchiveInput) glacier.UploadArchiveRequest
+}
 
+// UploadMultipartPartRequester provides the interface for the UploadMultipartPartRequest API operation.
+type UploadMultipartPartRequester interface {
 	UploadMultipartPartRequest(*glacier.UploadMultipartPartInput) glacier.UploadMultipartPartRequest
+}
 
+// VaultExistsWaiter provides the interface for the WaitUntilVaultExists waiter.
+type VaultExistsWaiter interface {
 	WaitUntilVaultExists(*glacier.DescribeVaultInput) error
 	WaitUntilVaultExistsWithContext(aws.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
+}
 
+// VaultNotExistsWaiter provides the interface for the WaitUntilVaultNotExists waiter.
+type VaultNotExistsWaiter interface {
 	WaitUntilVaultNotExists(*glacier.DescribeVaultInput) error
 	WaitUntilVaultNotExistsWithContext(aws.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
 }
-
-var _ GlacierAPI = (*glacier.Glacier)(nil)

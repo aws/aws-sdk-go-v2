@@ -13,81 +13,52 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
 )
 
-// SimpleDBAPI provides an interface to enable mocking the
-// simpledb.SimpleDB service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon SimpleDB.
-//    func myFunc(svc simpledbiface.SimpleDBAPI) bool {
-//        // Make svc.BatchDeleteAttributes request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := simpledb.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSimpleDBClient struct {
-//        simpledbiface.SimpleDBAPI
-//    }
-//    func (m *mockSimpleDBClient) BatchDeleteAttributes(input *simpledb.BatchDeleteAttributesInput) (*simpledb.BatchDeleteAttributesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSimpleDBClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SimpleDBAPI interface {
+// BatchDeleteAttributesRequester provides the interface for the BatchDeleteAttributesRequest API operation.
+type BatchDeleteAttributesRequester interface {
 	BatchDeleteAttributesRequest(*simpledb.BatchDeleteAttributesInput) simpledb.BatchDeleteAttributesRequest
-
-	BatchPutAttributesRequest(*simpledb.BatchPutAttributesInput) simpledb.BatchPutAttributesRequest
-
-	CreateDomainRequest(*simpledb.CreateDomainInput) simpledb.CreateDomainRequest
-
-	DeleteAttributesRequest(*simpledb.DeleteAttributesInput) simpledb.DeleteAttributesRequest
-
-	DeleteDomainRequest(*simpledb.DeleteDomainInput) simpledb.DeleteDomainRequest
-
-	DomainMetadataRequest(*simpledb.DomainMetadataInput) simpledb.DomainMetadataRequest
-
-	GetAttributesRequest(*simpledb.GetAttributesInput) simpledb.GetAttributesRequest
-
-	ListDomainsRequest(*simpledb.ListDomainsInput) simpledb.ListDomainsRequest
-
-	ListDomainsPages(*simpledb.ListDomainsInput, func(*simpledb.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *simpledb.ListDomainsInput, func(*simpledb.ListDomainsOutput, bool) bool, ...aws.Option) error
-
-	PutAttributesRequest(*simpledb.PutAttributesInput) simpledb.PutAttributesRequest
-
-	SelectRequest(*simpledb.SelectInput) simpledb.SelectRequest
-
-	SelectPages(*simpledb.SelectInput, func(*simpledb.SelectOutput, bool) bool) error
-	SelectPagesWithContext(aws.Context, *simpledb.SelectInput, func(*simpledb.SelectOutput, bool) bool, ...aws.Option) error
 }
 
-var _ SimpleDBAPI = (*simpledb.SimpleDB)(nil)
+// BatchPutAttributesRequester provides the interface for the BatchPutAttributesRequest API operation.
+type BatchPutAttributesRequester interface {
+	BatchPutAttributesRequest(*simpledb.BatchPutAttributesInput) simpledb.BatchPutAttributesRequest
+}
+
+// CreateDomainRequester provides the interface for the CreateDomainRequest API operation.
+type CreateDomainRequester interface {
+	CreateDomainRequest(*simpledb.CreateDomainInput) simpledb.CreateDomainRequest
+}
+
+// DeleteAttributesRequester provides the interface for the DeleteAttributesRequest API operation.
+type DeleteAttributesRequester interface {
+	DeleteAttributesRequest(*simpledb.DeleteAttributesInput) simpledb.DeleteAttributesRequest
+}
+
+// DeleteDomainRequester provides the interface for the DeleteDomainRequest API operation.
+type DeleteDomainRequester interface {
+	DeleteDomainRequest(*simpledb.DeleteDomainInput) simpledb.DeleteDomainRequest
+}
+
+// DomainMetadataRequester provides the interface for the DomainMetadataRequest API operation.
+type DomainMetadataRequester interface {
+	DomainMetadataRequest(*simpledb.DomainMetadataInput) simpledb.DomainMetadataRequest
+}
+
+// GetAttributesRequester provides the interface for the GetAttributesRequest API operation.
+type GetAttributesRequester interface {
+	GetAttributesRequest(*simpledb.GetAttributesInput) simpledb.GetAttributesRequest
+}
+
+// ListDomainsRequester provides the interface for the ListDomainsRequest API operation.
+type ListDomainsRequester interface {
+	ListDomainsRequest(*simpledb.ListDomainsInput) simpledb.ListDomainsRequest
+}
+
+// PutAttributesRequester provides the interface for the PutAttributesRequest API operation.
+type PutAttributesRequester interface {
+	PutAttributesRequest(*simpledb.PutAttributesInput) simpledb.PutAttributesRequest
+}
+
+// SelectRequester provides the interface for the SelectRequest API operation.
+type SelectRequester interface {
+	SelectRequest(*simpledb.SelectInput) simpledb.SelectRequest
+}

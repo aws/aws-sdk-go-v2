@@ -13,89 +13,72 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 )
 
-// RekognitionAPI provides an interface to enable mocking the
-// rekognition.Rekognition service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Rekognition.
-//    func myFunc(svc rekognitioniface.RekognitionAPI) bool {
-//        // Make svc.CompareFaces request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := rekognition.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRekognitionClient struct {
-//        rekognitioniface.RekognitionAPI
-//    }
-//    func (m *mockRekognitionClient) CompareFaces(input *rekognition.CompareFacesInput) (*rekognition.CompareFacesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockRekognitionClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type RekognitionAPI interface {
+// CompareFacesRequester provides the interface for the CompareFacesRequest API operation.
+type CompareFacesRequester interface {
 	CompareFacesRequest(*rekognition.CompareFacesInput) rekognition.CompareFacesRequest
-
-	CreateCollectionRequest(*rekognition.CreateCollectionInput) rekognition.CreateCollectionRequest
-
-	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) rekognition.DeleteCollectionRequest
-
-	DeleteFacesRequest(*rekognition.DeleteFacesInput) rekognition.DeleteFacesRequest
-
-	DetectFacesRequest(*rekognition.DetectFacesInput) rekognition.DetectFacesRequest
-
-	DetectLabelsRequest(*rekognition.DetectLabelsInput) rekognition.DetectLabelsRequest
-
-	DetectModerationLabelsRequest(*rekognition.DetectModerationLabelsInput) rekognition.DetectModerationLabelsRequest
-
-	GetCelebrityInfoRequest(*rekognition.GetCelebrityInfoInput) rekognition.GetCelebrityInfoRequest
-
-	IndexFacesRequest(*rekognition.IndexFacesInput) rekognition.IndexFacesRequest
-
-	ListCollectionsRequest(*rekognition.ListCollectionsInput) rekognition.ListCollectionsRequest
-
-	ListCollectionsPages(*rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool) error
-	ListCollectionsPagesWithContext(aws.Context, *rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool, ...aws.Option) error
-
-	ListFacesRequest(*rekognition.ListFacesInput) rekognition.ListFacesRequest
-
-	ListFacesPages(*rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool) error
-	ListFacesPagesWithContext(aws.Context, *rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool, ...aws.Option) error
-
-	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) rekognition.RecognizeCelebritiesRequest
-
-	SearchFacesRequest(*rekognition.SearchFacesInput) rekognition.SearchFacesRequest
-
-	SearchFacesByImageRequest(*rekognition.SearchFacesByImageInput) rekognition.SearchFacesByImageRequest
 }
 
-var _ RekognitionAPI = (*rekognition.Rekognition)(nil)
+// CreateCollectionRequester provides the interface for the CreateCollectionRequest API operation.
+type CreateCollectionRequester interface {
+	CreateCollectionRequest(*rekognition.CreateCollectionInput) rekognition.CreateCollectionRequest
+}
+
+// DeleteCollectionRequester provides the interface for the DeleteCollectionRequest API operation.
+type DeleteCollectionRequester interface {
+	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) rekognition.DeleteCollectionRequest
+}
+
+// DeleteFacesRequester provides the interface for the DeleteFacesRequest API operation.
+type DeleteFacesRequester interface {
+	DeleteFacesRequest(*rekognition.DeleteFacesInput) rekognition.DeleteFacesRequest
+}
+
+// DetectFacesRequester provides the interface for the DetectFacesRequest API operation.
+type DetectFacesRequester interface {
+	DetectFacesRequest(*rekognition.DetectFacesInput) rekognition.DetectFacesRequest
+}
+
+// DetectLabelsRequester provides the interface for the DetectLabelsRequest API operation.
+type DetectLabelsRequester interface {
+	DetectLabelsRequest(*rekognition.DetectLabelsInput) rekognition.DetectLabelsRequest
+}
+
+// DetectModerationLabelsRequester provides the interface for the DetectModerationLabelsRequest API operation.
+type DetectModerationLabelsRequester interface {
+	DetectModerationLabelsRequest(*rekognition.DetectModerationLabelsInput) rekognition.DetectModerationLabelsRequest
+}
+
+// GetCelebrityInfoRequester provides the interface for the GetCelebrityInfoRequest API operation.
+type GetCelebrityInfoRequester interface {
+	GetCelebrityInfoRequest(*rekognition.GetCelebrityInfoInput) rekognition.GetCelebrityInfoRequest
+}
+
+// IndexFacesRequester provides the interface for the IndexFacesRequest API operation.
+type IndexFacesRequester interface {
+	IndexFacesRequest(*rekognition.IndexFacesInput) rekognition.IndexFacesRequest
+}
+
+// ListCollectionsRequester provides the interface for the ListCollectionsRequest API operation.
+type ListCollectionsRequester interface {
+	ListCollectionsRequest(*rekognition.ListCollectionsInput) rekognition.ListCollectionsRequest
+}
+
+// ListFacesRequester provides the interface for the ListFacesRequest API operation.
+type ListFacesRequester interface {
+	ListFacesRequest(*rekognition.ListFacesInput) rekognition.ListFacesRequest
+}
+
+// RecognizeCelebritiesRequester provides the interface for the RecognizeCelebritiesRequest API operation.
+type RecognizeCelebritiesRequester interface {
+	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) rekognition.RecognizeCelebritiesRequest
+}
+
+// SearchFacesRequester provides the interface for the SearchFacesRequest API operation.
+type SearchFacesRequester interface {
+	SearchFacesRequest(*rekognition.SearchFacesInput) rekognition.SearchFacesRequest
+}
+
+// SearchFacesByImageRequester provides the interface for the SearchFacesByImageRequest API operation.
+type SearchFacesByImageRequester interface {
+	SearchFacesByImageRequest(*rekognition.SearchFacesByImageInput) rekognition.SearchFacesByImageRequest
+}

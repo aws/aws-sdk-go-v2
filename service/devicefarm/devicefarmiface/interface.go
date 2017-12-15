@@ -13,195 +13,247 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
 )
 
-// DeviceFarmAPI provides an interface to enable mocking the
-// devicefarm.DeviceFarm service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Device Farm.
-//    func myFunc(svc devicefarmiface.DeviceFarmAPI) bool {
-//        // Make svc.CreateDevicePool request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := devicefarm.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDeviceFarmClient struct {
-//        devicefarmiface.DeviceFarmAPI
-//    }
-//    func (m *mockDeviceFarmClient) CreateDevicePool(input *devicefarm.CreateDevicePoolInput) (*devicefarm.CreateDevicePoolOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDeviceFarmClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DeviceFarmAPI interface {
+// CreateDevicePoolRequester provides the interface for the CreateDevicePoolRequest API operation.
+type CreateDevicePoolRequester interface {
 	CreateDevicePoolRequest(*devicefarm.CreateDevicePoolInput) devicefarm.CreateDevicePoolRequest
-
-	CreateNetworkProfileRequest(*devicefarm.CreateNetworkProfileInput) devicefarm.CreateNetworkProfileRequest
-
-	CreateProjectRequest(*devicefarm.CreateProjectInput) devicefarm.CreateProjectRequest
-
-	CreateRemoteAccessSessionRequest(*devicefarm.CreateRemoteAccessSessionInput) devicefarm.CreateRemoteAccessSessionRequest
-
-	CreateUploadRequest(*devicefarm.CreateUploadInput) devicefarm.CreateUploadRequest
-
-	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) devicefarm.DeleteDevicePoolRequest
-
-	DeleteNetworkProfileRequest(*devicefarm.DeleteNetworkProfileInput) devicefarm.DeleteNetworkProfileRequest
-
-	DeleteProjectRequest(*devicefarm.DeleteProjectInput) devicefarm.DeleteProjectRequest
-
-	DeleteRemoteAccessSessionRequest(*devicefarm.DeleteRemoteAccessSessionInput) devicefarm.DeleteRemoteAccessSessionRequest
-
-	DeleteRunRequest(*devicefarm.DeleteRunInput) devicefarm.DeleteRunRequest
-
-	DeleteUploadRequest(*devicefarm.DeleteUploadInput) devicefarm.DeleteUploadRequest
-
-	GetAccountSettingsRequest(*devicefarm.GetAccountSettingsInput) devicefarm.GetAccountSettingsRequest
-
-	GetDeviceRequest(*devicefarm.GetDeviceInput) devicefarm.GetDeviceRequest
-
-	GetDevicePoolRequest(*devicefarm.GetDevicePoolInput) devicefarm.GetDevicePoolRequest
-
-	GetDevicePoolCompatibilityRequest(*devicefarm.GetDevicePoolCompatibilityInput) devicefarm.GetDevicePoolCompatibilityRequest
-
-	GetJobRequest(*devicefarm.GetJobInput) devicefarm.GetJobRequest
-
-	GetNetworkProfileRequest(*devicefarm.GetNetworkProfileInput) devicefarm.GetNetworkProfileRequest
-
-	GetOfferingStatusRequest(*devicefarm.GetOfferingStatusInput) devicefarm.GetOfferingStatusRequest
-
-	GetOfferingStatusPages(*devicefarm.GetOfferingStatusInput, func(*devicefarm.GetOfferingStatusOutput, bool) bool) error
-	GetOfferingStatusPagesWithContext(aws.Context, *devicefarm.GetOfferingStatusInput, func(*devicefarm.GetOfferingStatusOutput, bool) bool, ...aws.Option) error
-
-	GetProjectRequest(*devicefarm.GetProjectInput) devicefarm.GetProjectRequest
-
-	GetRemoteAccessSessionRequest(*devicefarm.GetRemoteAccessSessionInput) devicefarm.GetRemoteAccessSessionRequest
-
-	GetRunRequest(*devicefarm.GetRunInput) devicefarm.GetRunRequest
-
-	GetSuiteRequest(*devicefarm.GetSuiteInput) devicefarm.GetSuiteRequest
-
-	GetTestRequest(*devicefarm.GetTestInput) devicefarm.GetTestRequest
-
-	GetUploadRequest(*devicefarm.GetUploadInput) devicefarm.GetUploadRequest
-
-	InstallToRemoteAccessSessionRequest(*devicefarm.InstallToRemoteAccessSessionInput) devicefarm.InstallToRemoteAccessSessionRequest
-
-	ListArtifactsRequest(*devicefarm.ListArtifactsInput) devicefarm.ListArtifactsRequest
-
-	ListArtifactsPages(*devicefarm.ListArtifactsInput, func(*devicefarm.ListArtifactsOutput, bool) bool) error
-	ListArtifactsPagesWithContext(aws.Context, *devicefarm.ListArtifactsInput, func(*devicefarm.ListArtifactsOutput, bool) bool, ...aws.Option) error
-
-	ListDevicePoolsRequest(*devicefarm.ListDevicePoolsInput) devicefarm.ListDevicePoolsRequest
-
-	ListDevicePoolsPages(*devicefarm.ListDevicePoolsInput, func(*devicefarm.ListDevicePoolsOutput, bool) bool) error
-	ListDevicePoolsPagesWithContext(aws.Context, *devicefarm.ListDevicePoolsInput, func(*devicefarm.ListDevicePoolsOutput, bool) bool, ...aws.Option) error
-
-	ListDevicesRequest(*devicefarm.ListDevicesInput) devicefarm.ListDevicesRequest
-
-	ListDevicesPages(*devicefarm.ListDevicesInput, func(*devicefarm.ListDevicesOutput, bool) bool) error
-	ListDevicesPagesWithContext(aws.Context, *devicefarm.ListDevicesInput, func(*devicefarm.ListDevicesOutput, bool) bool, ...aws.Option) error
-
-	ListJobsRequest(*devicefarm.ListJobsInput) devicefarm.ListJobsRequest
-
-	ListJobsPages(*devicefarm.ListJobsInput, func(*devicefarm.ListJobsOutput, bool) bool) error
-	ListJobsPagesWithContext(aws.Context, *devicefarm.ListJobsInput, func(*devicefarm.ListJobsOutput, bool) bool, ...aws.Option) error
-
-	ListNetworkProfilesRequest(*devicefarm.ListNetworkProfilesInput) devicefarm.ListNetworkProfilesRequest
-
-	ListOfferingPromotionsRequest(*devicefarm.ListOfferingPromotionsInput) devicefarm.ListOfferingPromotionsRequest
-
-	ListOfferingTransactionsRequest(*devicefarm.ListOfferingTransactionsInput) devicefarm.ListOfferingTransactionsRequest
-
-	ListOfferingTransactionsPages(*devicefarm.ListOfferingTransactionsInput, func(*devicefarm.ListOfferingTransactionsOutput, bool) bool) error
-	ListOfferingTransactionsPagesWithContext(aws.Context, *devicefarm.ListOfferingTransactionsInput, func(*devicefarm.ListOfferingTransactionsOutput, bool) bool, ...aws.Option) error
-
-	ListOfferingsRequest(*devicefarm.ListOfferingsInput) devicefarm.ListOfferingsRequest
-
-	ListOfferingsPages(*devicefarm.ListOfferingsInput, func(*devicefarm.ListOfferingsOutput, bool) bool) error
-	ListOfferingsPagesWithContext(aws.Context, *devicefarm.ListOfferingsInput, func(*devicefarm.ListOfferingsOutput, bool) bool, ...aws.Option) error
-
-	ListProjectsRequest(*devicefarm.ListProjectsInput) devicefarm.ListProjectsRequest
-
-	ListProjectsPages(*devicefarm.ListProjectsInput, func(*devicefarm.ListProjectsOutput, bool) bool) error
-	ListProjectsPagesWithContext(aws.Context, *devicefarm.ListProjectsInput, func(*devicefarm.ListProjectsOutput, bool) bool, ...aws.Option) error
-
-	ListRemoteAccessSessionsRequest(*devicefarm.ListRemoteAccessSessionsInput) devicefarm.ListRemoteAccessSessionsRequest
-
-	ListRunsRequest(*devicefarm.ListRunsInput) devicefarm.ListRunsRequest
-
-	ListRunsPages(*devicefarm.ListRunsInput, func(*devicefarm.ListRunsOutput, bool) bool) error
-	ListRunsPagesWithContext(aws.Context, *devicefarm.ListRunsInput, func(*devicefarm.ListRunsOutput, bool) bool, ...aws.Option) error
-
-	ListSamplesRequest(*devicefarm.ListSamplesInput) devicefarm.ListSamplesRequest
-
-	ListSamplesPages(*devicefarm.ListSamplesInput, func(*devicefarm.ListSamplesOutput, bool) bool) error
-	ListSamplesPagesWithContext(aws.Context, *devicefarm.ListSamplesInput, func(*devicefarm.ListSamplesOutput, bool) bool, ...aws.Option) error
-
-	ListSuitesRequest(*devicefarm.ListSuitesInput) devicefarm.ListSuitesRequest
-
-	ListSuitesPages(*devicefarm.ListSuitesInput, func(*devicefarm.ListSuitesOutput, bool) bool) error
-	ListSuitesPagesWithContext(aws.Context, *devicefarm.ListSuitesInput, func(*devicefarm.ListSuitesOutput, bool) bool, ...aws.Option) error
-
-	ListTestsRequest(*devicefarm.ListTestsInput) devicefarm.ListTestsRequest
-
-	ListTestsPages(*devicefarm.ListTestsInput, func(*devicefarm.ListTestsOutput, bool) bool) error
-	ListTestsPagesWithContext(aws.Context, *devicefarm.ListTestsInput, func(*devicefarm.ListTestsOutput, bool) bool, ...aws.Option) error
-
-	ListUniqueProblemsRequest(*devicefarm.ListUniqueProblemsInput) devicefarm.ListUniqueProblemsRequest
-
-	ListUniqueProblemsPages(*devicefarm.ListUniqueProblemsInput, func(*devicefarm.ListUniqueProblemsOutput, bool) bool) error
-	ListUniqueProblemsPagesWithContext(aws.Context, *devicefarm.ListUniqueProblemsInput, func(*devicefarm.ListUniqueProblemsOutput, bool) bool, ...aws.Option) error
-
-	ListUploadsRequest(*devicefarm.ListUploadsInput) devicefarm.ListUploadsRequest
-
-	ListUploadsPages(*devicefarm.ListUploadsInput, func(*devicefarm.ListUploadsOutput, bool) bool) error
-	ListUploadsPagesWithContext(aws.Context, *devicefarm.ListUploadsInput, func(*devicefarm.ListUploadsOutput, bool) bool, ...aws.Option) error
-
-	PurchaseOfferingRequest(*devicefarm.PurchaseOfferingInput) devicefarm.PurchaseOfferingRequest
-
-	RenewOfferingRequest(*devicefarm.RenewOfferingInput) devicefarm.RenewOfferingRequest
-
-	ScheduleRunRequest(*devicefarm.ScheduleRunInput) devicefarm.ScheduleRunRequest
-
-	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) devicefarm.StopRemoteAccessSessionRequest
-
-	StopRunRequest(*devicefarm.StopRunInput) devicefarm.StopRunRequest
-
-	UpdateDevicePoolRequest(*devicefarm.UpdateDevicePoolInput) devicefarm.UpdateDevicePoolRequest
-
-	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
-
-	UpdateProjectRequest(*devicefarm.UpdateProjectInput) devicefarm.UpdateProjectRequest
 }
 
-var _ DeviceFarmAPI = (*devicefarm.DeviceFarm)(nil)
+// CreateNetworkProfileRequester provides the interface for the CreateNetworkProfileRequest API operation.
+type CreateNetworkProfileRequester interface {
+	CreateNetworkProfileRequest(*devicefarm.CreateNetworkProfileInput) devicefarm.CreateNetworkProfileRequest
+}
+
+// CreateProjectRequester provides the interface for the CreateProjectRequest API operation.
+type CreateProjectRequester interface {
+	CreateProjectRequest(*devicefarm.CreateProjectInput) devicefarm.CreateProjectRequest
+}
+
+// CreateRemoteAccessSessionRequester provides the interface for the CreateRemoteAccessSessionRequest API operation.
+type CreateRemoteAccessSessionRequester interface {
+	CreateRemoteAccessSessionRequest(*devicefarm.CreateRemoteAccessSessionInput) devicefarm.CreateRemoteAccessSessionRequest
+}
+
+// CreateUploadRequester provides the interface for the CreateUploadRequest API operation.
+type CreateUploadRequester interface {
+	CreateUploadRequest(*devicefarm.CreateUploadInput) devicefarm.CreateUploadRequest
+}
+
+// DeleteDevicePoolRequester provides the interface for the DeleteDevicePoolRequest API operation.
+type DeleteDevicePoolRequester interface {
+	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) devicefarm.DeleteDevicePoolRequest
+}
+
+// DeleteNetworkProfileRequester provides the interface for the DeleteNetworkProfileRequest API operation.
+type DeleteNetworkProfileRequester interface {
+	DeleteNetworkProfileRequest(*devicefarm.DeleteNetworkProfileInput) devicefarm.DeleteNetworkProfileRequest
+}
+
+// DeleteProjectRequester provides the interface for the DeleteProjectRequest API operation.
+type DeleteProjectRequester interface {
+	DeleteProjectRequest(*devicefarm.DeleteProjectInput) devicefarm.DeleteProjectRequest
+}
+
+// DeleteRemoteAccessSessionRequester provides the interface for the DeleteRemoteAccessSessionRequest API operation.
+type DeleteRemoteAccessSessionRequester interface {
+	DeleteRemoteAccessSessionRequest(*devicefarm.DeleteRemoteAccessSessionInput) devicefarm.DeleteRemoteAccessSessionRequest
+}
+
+// DeleteRunRequester provides the interface for the DeleteRunRequest API operation.
+type DeleteRunRequester interface {
+	DeleteRunRequest(*devicefarm.DeleteRunInput) devicefarm.DeleteRunRequest
+}
+
+// DeleteUploadRequester provides the interface for the DeleteUploadRequest API operation.
+type DeleteUploadRequester interface {
+	DeleteUploadRequest(*devicefarm.DeleteUploadInput) devicefarm.DeleteUploadRequest
+}
+
+// GetAccountSettingsRequester provides the interface for the GetAccountSettingsRequest API operation.
+type GetAccountSettingsRequester interface {
+	GetAccountSettingsRequest(*devicefarm.GetAccountSettingsInput) devicefarm.GetAccountSettingsRequest
+}
+
+// GetDeviceRequester provides the interface for the GetDeviceRequest API operation.
+type GetDeviceRequester interface {
+	GetDeviceRequest(*devicefarm.GetDeviceInput) devicefarm.GetDeviceRequest
+}
+
+// GetDevicePoolRequester provides the interface for the GetDevicePoolRequest API operation.
+type GetDevicePoolRequester interface {
+	GetDevicePoolRequest(*devicefarm.GetDevicePoolInput) devicefarm.GetDevicePoolRequest
+}
+
+// GetDevicePoolCompatibilityRequester provides the interface for the GetDevicePoolCompatibilityRequest API operation.
+type GetDevicePoolCompatibilityRequester interface {
+	GetDevicePoolCompatibilityRequest(*devicefarm.GetDevicePoolCompatibilityInput) devicefarm.GetDevicePoolCompatibilityRequest
+}
+
+// GetJobRequester provides the interface for the GetJobRequest API operation.
+type GetJobRequester interface {
+	GetJobRequest(*devicefarm.GetJobInput) devicefarm.GetJobRequest
+}
+
+// GetNetworkProfileRequester provides the interface for the GetNetworkProfileRequest API operation.
+type GetNetworkProfileRequester interface {
+	GetNetworkProfileRequest(*devicefarm.GetNetworkProfileInput) devicefarm.GetNetworkProfileRequest
+}
+
+// GetOfferingStatusRequester provides the interface for the GetOfferingStatusRequest API operation.
+type GetOfferingStatusRequester interface {
+	GetOfferingStatusRequest(*devicefarm.GetOfferingStatusInput) devicefarm.GetOfferingStatusRequest
+}
+
+// GetProjectRequester provides the interface for the GetProjectRequest API operation.
+type GetProjectRequester interface {
+	GetProjectRequest(*devicefarm.GetProjectInput) devicefarm.GetProjectRequest
+}
+
+// GetRemoteAccessSessionRequester provides the interface for the GetRemoteAccessSessionRequest API operation.
+type GetRemoteAccessSessionRequester interface {
+	GetRemoteAccessSessionRequest(*devicefarm.GetRemoteAccessSessionInput) devicefarm.GetRemoteAccessSessionRequest
+}
+
+// GetRunRequester provides the interface for the GetRunRequest API operation.
+type GetRunRequester interface {
+	GetRunRequest(*devicefarm.GetRunInput) devicefarm.GetRunRequest
+}
+
+// GetSuiteRequester provides the interface for the GetSuiteRequest API operation.
+type GetSuiteRequester interface {
+	GetSuiteRequest(*devicefarm.GetSuiteInput) devicefarm.GetSuiteRequest
+}
+
+// GetTestRequester provides the interface for the GetTestRequest API operation.
+type GetTestRequester interface {
+	GetTestRequest(*devicefarm.GetTestInput) devicefarm.GetTestRequest
+}
+
+// GetUploadRequester provides the interface for the GetUploadRequest API operation.
+type GetUploadRequester interface {
+	GetUploadRequest(*devicefarm.GetUploadInput) devicefarm.GetUploadRequest
+}
+
+// InstallToRemoteAccessSessionRequester provides the interface for the InstallToRemoteAccessSessionRequest API operation.
+type InstallToRemoteAccessSessionRequester interface {
+	InstallToRemoteAccessSessionRequest(*devicefarm.InstallToRemoteAccessSessionInput) devicefarm.InstallToRemoteAccessSessionRequest
+}
+
+// ListArtifactsRequester provides the interface for the ListArtifactsRequest API operation.
+type ListArtifactsRequester interface {
+	ListArtifactsRequest(*devicefarm.ListArtifactsInput) devicefarm.ListArtifactsRequest
+}
+
+// ListDevicePoolsRequester provides the interface for the ListDevicePoolsRequest API operation.
+type ListDevicePoolsRequester interface {
+	ListDevicePoolsRequest(*devicefarm.ListDevicePoolsInput) devicefarm.ListDevicePoolsRequest
+}
+
+// ListDevicesRequester provides the interface for the ListDevicesRequest API operation.
+type ListDevicesRequester interface {
+	ListDevicesRequest(*devicefarm.ListDevicesInput) devicefarm.ListDevicesRequest
+}
+
+// ListJobsRequester provides the interface for the ListJobsRequest API operation.
+type ListJobsRequester interface {
+	ListJobsRequest(*devicefarm.ListJobsInput) devicefarm.ListJobsRequest
+}
+
+// ListNetworkProfilesRequester provides the interface for the ListNetworkProfilesRequest API operation.
+type ListNetworkProfilesRequester interface {
+	ListNetworkProfilesRequest(*devicefarm.ListNetworkProfilesInput) devicefarm.ListNetworkProfilesRequest
+}
+
+// ListOfferingPromotionsRequester provides the interface for the ListOfferingPromotionsRequest API operation.
+type ListOfferingPromotionsRequester interface {
+	ListOfferingPromotionsRequest(*devicefarm.ListOfferingPromotionsInput) devicefarm.ListOfferingPromotionsRequest
+}
+
+// ListOfferingTransactionsRequester provides the interface for the ListOfferingTransactionsRequest API operation.
+type ListOfferingTransactionsRequester interface {
+	ListOfferingTransactionsRequest(*devicefarm.ListOfferingTransactionsInput) devicefarm.ListOfferingTransactionsRequest
+}
+
+// ListOfferingsRequester provides the interface for the ListOfferingsRequest API operation.
+type ListOfferingsRequester interface {
+	ListOfferingsRequest(*devicefarm.ListOfferingsInput) devicefarm.ListOfferingsRequest
+}
+
+// ListProjectsRequester provides the interface for the ListProjectsRequest API operation.
+type ListProjectsRequester interface {
+	ListProjectsRequest(*devicefarm.ListProjectsInput) devicefarm.ListProjectsRequest
+}
+
+// ListRemoteAccessSessionsRequester provides the interface for the ListRemoteAccessSessionsRequest API operation.
+type ListRemoteAccessSessionsRequester interface {
+	ListRemoteAccessSessionsRequest(*devicefarm.ListRemoteAccessSessionsInput) devicefarm.ListRemoteAccessSessionsRequest
+}
+
+// ListRunsRequester provides the interface for the ListRunsRequest API operation.
+type ListRunsRequester interface {
+	ListRunsRequest(*devicefarm.ListRunsInput) devicefarm.ListRunsRequest
+}
+
+// ListSamplesRequester provides the interface for the ListSamplesRequest API operation.
+type ListSamplesRequester interface {
+	ListSamplesRequest(*devicefarm.ListSamplesInput) devicefarm.ListSamplesRequest
+}
+
+// ListSuitesRequester provides the interface for the ListSuitesRequest API operation.
+type ListSuitesRequester interface {
+	ListSuitesRequest(*devicefarm.ListSuitesInput) devicefarm.ListSuitesRequest
+}
+
+// ListTestsRequester provides the interface for the ListTestsRequest API operation.
+type ListTestsRequester interface {
+	ListTestsRequest(*devicefarm.ListTestsInput) devicefarm.ListTestsRequest
+}
+
+// ListUniqueProblemsRequester provides the interface for the ListUniqueProblemsRequest API operation.
+type ListUniqueProblemsRequester interface {
+	ListUniqueProblemsRequest(*devicefarm.ListUniqueProblemsInput) devicefarm.ListUniqueProblemsRequest
+}
+
+// ListUploadsRequester provides the interface for the ListUploadsRequest API operation.
+type ListUploadsRequester interface {
+	ListUploadsRequest(*devicefarm.ListUploadsInput) devicefarm.ListUploadsRequest
+}
+
+// PurchaseOfferingRequester provides the interface for the PurchaseOfferingRequest API operation.
+type PurchaseOfferingRequester interface {
+	PurchaseOfferingRequest(*devicefarm.PurchaseOfferingInput) devicefarm.PurchaseOfferingRequest
+}
+
+// RenewOfferingRequester provides the interface for the RenewOfferingRequest API operation.
+type RenewOfferingRequester interface {
+	RenewOfferingRequest(*devicefarm.RenewOfferingInput) devicefarm.RenewOfferingRequest
+}
+
+// ScheduleRunRequester provides the interface for the ScheduleRunRequest API operation.
+type ScheduleRunRequester interface {
+	ScheduleRunRequest(*devicefarm.ScheduleRunInput) devicefarm.ScheduleRunRequest
+}
+
+// StopRemoteAccessSessionRequester provides the interface for the StopRemoteAccessSessionRequest API operation.
+type StopRemoteAccessSessionRequester interface {
+	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) devicefarm.StopRemoteAccessSessionRequest
+}
+
+// StopRunRequester provides the interface for the StopRunRequest API operation.
+type StopRunRequester interface {
+	StopRunRequest(*devicefarm.StopRunInput) devicefarm.StopRunRequest
+}
+
+// UpdateDevicePoolRequester provides the interface for the UpdateDevicePoolRequest API operation.
+type UpdateDevicePoolRequester interface {
+	UpdateDevicePoolRequest(*devicefarm.UpdateDevicePoolInput) devicefarm.UpdateDevicePoolRequest
+}
+
+// UpdateNetworkProfileRequester provides the interface for the UpdateNetworkProfileRequest API operation.
+type UpdateNetworkProfileRequester interface {
+	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
+}
+
+// UpdateProjectRequester provides the interface for the UpdateProjectRequest API operation.
+type UpdateProjectRequester interface {
+	UpdateProjectRequest(*devicefarm.UpdateProjectInput) devicefarm.UpdateProjectRequest
+}

@@ -12,87 +12,82 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/batch"
 )
 
-// BatchAPI provides an interface to enable mocking the
-// batch.Batch service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Batch.
-//    func myFunc(svc batchiface.BatchAPI) bool {
-//        // Make svc.CancelJob request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := batch.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockBatchClient struct {
-//        batchiface.BatchAPI
-//    }
-//    func (m *mockBatchClient) CancelJob(input *batch.CancelJobInput) (*batch.CancelJobOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockBatchClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type BatchAPI interface {
+// CancelJobRequester provides the interface for the CancelJobRequest API operation.
+type CancelJobRequester interface {
 	CancelJobRequest(*batch.CancelJobInput) batch.CancelJobRequest
-
-	CreateComputeEnvironmentRequest(*batch.CreateComputeEnvironmentInput) batch.CreateComputeEnvironmentRequest
-
-	CreateJobQueueRequest(*batch.CreateJobQueueInput) batch.CreateJobQueueRequest
-
-	DeleteComputeEnvironmentRequest(*batch.DeleteComputeEnvironmentInput) batch.DeleteComputeEnvironmentRequest
-
-	DeleteJobQueueRequest(*batch.DeleteJobQueueInput) batch.DeleteJobQueueRequest
-
-	DeregisterJobDefinitionRequest(*batch.DeregisterJobDefinitionInput) batch.DeregisterJobDefinitionRequest
-
-	DescribeComputeEnvironmentsRequest(*batch.DescribeComputeEnvironmentsInput) batch.DescribeComputeEnvironmentsRequest
-
-	DescribeJobDefinitionsRequest(*batch.DescribeJobDefinitionsInput) batch.DescribeJobDefinitionsRequest
-
-	DescribeJobQueuesRequest(*batch.DescribeJobQueuesInput) batch.DescribeJobQueuesRequest
-
-	DescribeJobsRequest(*batch.DescribeJobsInput) batch.DescribeJobsRequest
-
-	ListJobsRequest(*batch.ListJobsInput) batch.ListJobsRequest
-
-	RegisterJobDefinitionRequest(*batch.RegisterJobDefinitionInput) batch.RegisterJobDefinitionRequest
-
-	SubmitJobRequest(*batch.SubmitJobInput) batch.SubmitJobRequest
-
-	TerminateJobRequest(*batch.TerminateJobInput) batch.TerminateJobRequest
-
-	UpdateComputeEnvironmentRequest(*batch.UpdateComputeEnvironmentInput) batch.UpdateComputeEnvironmentRequest
-
-	UpdateJobQueueRequest(*batch.UpdateJobQueueInput) batch.UpdateJobQueueRequest
 }
 
-var _ BatchAPI = (*batch.Batch)(nil)
+// CreateComputeEnvironmentRequester provides the interface for the CreateComputeEnvironmentRequest API operation.
+type CreateComputeEnvironmentRequester interface {
+	CreateComputeEnvironmentRequest(*batch.CreateComputeEnvironmentInput) batch.CreateComputeEnvironmentRequest
+}
+
+// CreateJobQueueRequester provides the interface for the CreateJobQueueRequest API operation.
+type CreateJobQueueRequester interface {
+	CreateJobQueueRequest(*batch.CreateJobQueueInput) batch.CreateJobQueueRequest
+}
+
+// DeleteComputeEnvironmentRequester provides the interface for the DeleteComputeEnvironmentRequest API operation.
+type DeleteComputeEnvironmentRequester interface {
+	DeleteComputeEnvironmentRequest(*batch.DeleteComputeEnvironmentInput) batch.DeleteComputeEnvironmentRequest
+}
+
+// DeleteJobQueueRequester provides the interface for the DeleteJobQueueRequest API operation.
+type DeleteJobQueueRequester interface {
+	DeleteJobQueueRequest(*batch.DeleteJobQueueInput) batch.DeleteJobQueueRequest
+}
+
+// DeregisterJobDefinitionRequester provides the interface for the DeregisterJobDefinitionRequest API operation.
+type DeregisterJobDefinitionRequester interface {
+	DeregisterJobDefinitionRequest(*batch.DeregisterJobDefinitionInput) batch.DeregisterJobDefinitionRequest
+}
+
+// DescribeComputeEnvironmentsRequester provides the interface for the DescribeComputeEnvironmentsRequest API operation.
+type DescribeComputeEnvironmentsRequester interface {
+	DescribeComputeEnvironmentsRequest(*batch.DescribeComputeEnvironmentsInput) batch.DescribeComputeEnvironmentsRequest
+}
+
+// DescribeJobDefinitionsRequester provides the interface for the DescribeJobDefinitionsRequest API operation.
+type DescribeJobDefinitionsRequester interface {
+	DescribeJobDefinitionsRequest(*batch.DescribeJobDefinitionsInput) batch.DescribeJobDefinitionsRequest
+}
+
+// DescribeJobQueuesRequester provides the interface for the DescribeJobQueuesRequest API operation.
+type DescribeJobQueuesRequester interface {
+	DescribeJobQueuesRequest(*batch.DescribeJobQueuesInput) batch.DescribeJobQueuesRequest
+}
+
+// DescribeJobsRequester provides the interface for the DescribeJobsRequest API operation.
+type DescribeJobsRequester interface {
+	DescribeJobsRequest(*batch.DescribeJobsInput) batch.DescribeJobsRequest
+}
+
+// ListJobsRequester provides the interface for the ListJobsRequest API operation.
+type ListJobsRequester interface {
+	ListJobsRequest(*batch.ListJobsInput) batch.ListJobsRequest
+}
+
+// RegisterJobDefinitionRequester provides the interface for the RegisterJobDefinitionRequest API operation.
+type RegisterJobDefinitionRequester interface {
+	RegisterJobDefinitionRequest(*batch.RegisterJobDefinitionInput) batch.RegisterJobDefinitionRequest
+}
+
+// SubmitJobRequester provides the interface for the SubmitJobRequest API operation.
+type SubmitJobRequester interface {
+	SubmitJobRequest(*batch.SubmitJobInput) batch.SubmitJobRequest
+}
+
+// TerminateJobRequester provides the interface for the TerminateJobRequest API operation.
+type TerminateJobRequester interface {
+	TerminateJobRequest(*batch.TerminateJobInput) batch.TerminateJobRequest
+}
+
+// UpdateComputeEnvironmentRequester provides the interface for the UpdateComputeEnvironmentRequest API operation.
+type UpdateComputeEnvironmentRequester interface {
+	UpdateComputeEnvironmentRequest(*batch.UpdateComputeEnvironmentInput) batch.UpdateComputeEnvironmentRequest
+}
+
+// UpdateJobQueueRequester provides the interface for the UpdateJobQueueRequest API operation.
+type UpdateJobQueueRequester interface {
+	UpdateJobQueueRequest(*batch.UpdateJobQueueInput) batch.UpdateJobQueueRequest
+}

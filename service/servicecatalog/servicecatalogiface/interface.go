@@ -13,191 +13,267 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 )
 
-// ServiceCatalogAPI provides an interface to enable mocking the
-// servicecatalog.ServiceCatalog service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Service Catalog.
-//    func myFunc(svc servicecatalogiface.ServiceCatalogAPI) bool {
-//        // Make svc.AcceptPortfolioShare request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := servicecatalog.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockServiceCatalogClient struct {
-//        servicecatalogiface.ServiceCatalogAPI
-//    }
-//    func (m *mockServiceCatalogClient) AcceptPortfolioShare(input *servicecatalog.AcceptPortfolioShareInput) (*servicecatalog.AcceptPortfolioShareOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockServiceCatalogClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ServiceCatalogAPI interface {
+// AcceptPortfolioShareRequester provides the interface for the AcceptPortfolioShareRequest API operation.
+type AcceptPortfolioShareRequester interface {
 	AcceptPortfolioShareRequest(*servicecatalog.AcceptPortfolioShareInput) servicecatalog.AcceptPortfolioShareRequest
-
-	AssociatePrincipalWithPortfolioRequest(*servicecatalog.AssociatePrincipalWithPortfolioInput) servicecatalog.AssociatePrincipalWithPortfolioRequest
-
-	AssociateProductWithPortfolioRequest(*servicecatalog.AssociateProductWithPortfolioInput) servicecatalog.AssociateProductWithPortfolioRequest
-
-	AssociateTagOptionWithResourceRequest(*servicecatalog.AssociateTagOptionWithResourceInput) servicecatalog.AssociateTagOptionWithResourceRequest
-
-	CopyProductRequest(*servicecatalog.CopyProductInput) servicecatalog.CopyProductRequest
-
-	CreateConstraintRequest(*servicecatalog.CreateConstraintInput) servicecatalog.CreateConstraintRequest
-
-	CreatePortfolioRequest(*servicecatalog.CreatePortfolioInput) servicecatalog.CreatePortfolioRequest
-
-	CreatePortfolioShareRequest(*servicecatalog.CreatePortfolioShareInput) servicecatalog.CreatePortfolioShareRequest
-
-	CreateProductRequest(*servicecatalog.CreateProductInput) servicecatalog.CreateProductRequest
-
-	CreateProvisioningArtifactRequest(*servicecatalog.CreateProvisioningArtifactInput) servicecatalog.CreateProvisioningArtifactRequest
-
-	CreateTagOptionRequest(*servicecatalog.CreateTagOptionInput) servicecatalog.CreateTagOptionRequest
-
-	DeleteConstraintRequest(*servicecatalog.DeleteConstraintInput) servicecatalog.DeleteConstraintRequest
-
-	DeletePortfolioRequest(*servicecatalog.DeletePortfolioInput) servicecatalog.DeletePortfolioRequest
-
-	DeletePortfolioShareRequest(*servicecatalog.DeletePortfolioShareInput) servicecatalog.DeletePortfolioShareRequest
-
-	DeleteProductRequest(*servicecatalog.DeleteProductInput) servicecatalog.DeleteProductRequest
-
-	DeleteProvisioningArtifactRequest(*servicecatalog.DeleteProvisioningArtifactInput) servicecatalog.DeleteProvisioningArtifactRequest
-
-	DescribeConstraintRequest(*servicecatalog.DescribeConstraintInput) servicecatalog.DescribeConstraintRequest
-
-	DescribeCopyProductStatusRequest(*servicecatalog.DescribeCopyProductStatusInput) servicecatalog.DescribeCopyProductStatusRequest
-
-	DescribePortfolioRequest(*servicecatalog.DescribePortfolioInput) servicecatalog.DescribePortfolioRequest
-
-	DescribeProductRequest(*servicecatalog.DescribeProductInput) servicecatalog.DescribeProductRequest
-
-	DescribeProductAsAdminRequest(*servicecatalog.DescribeProductAsAdminInput) servicecatalog.DescribeProductAsAdminRequest
-
-	DescribeProductViewRequest(*servicecatalog.DescribeProductViewInput) servicecatalog.DescribeProductViewRequest
-
-	DescribeProvisionedProductRequest(*servicecatalog.DescribeProvisionedProductInput) servicecatalog.DescribeProvisionedProductRequest
-
-	DescribeProvisioningArtifactRequest(*servicecatalog.DescribeProvisioningArtifactInput) servicecatalog.DescribeProvisioningArtifactRequest
-
-	DescribeProvisioningParametersRequest(*servicecatalog.DescribeProvisioningParametersInput) servicecatalog.DescribeProvisioningParametersRequest
-
-	DescribeRecordRequest(*servicecatalog.DescribeRecordInput) servicecatalog.DescribeRecordRequest
-
-	DescribeTagOptionRequest(*servicecatalog.DescribeTagOptionInput) servicecatalog.DescribeTagOptionRequest
-
-	DisassociatePrincipalFromPortfolioRequest(*servicecatalog.DisassociatePrincipalFromPortfolioInput) servicecatalog.DisassociatePrincipalFromPortfolioRequest
-
-	DisassociateProductFromPortfolioRequest(*servicecatalog.DisassociateProductFromPortfolioInput) servicecatalog.DisassociateProductFromPortfolioRequest
-
-	DisassociateTagOptionFromResourceRequest(*servicecatalog.DisassociateTagOptionFromResourceInput) servicecatalog.DisassociateTagOptionFromResourceRequest
-
-	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) servicecatalog.ListAcceptedPortfolioSharesRequest
-
-	ListAcceptedPortfolioSharesPages(*servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool) error
-	ListAcceptedPortfolioSharesPagesWithContext(aws.Context, *servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool, ...aws.Option) error
-
-	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) servicecatalog.ListConstraintsForPortfolioRequest
-
-	ListConstraintsForPortfolioPages(*servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool) error
-	ListConstraintsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool, ...aws.Option) error
-
-	ListLaunchPathsRequest(*servicecatalog.ListLaunchPathsInput) servicecatalog.ListLaunchPathsRequest
-
-	ListLaunchPathsPages(*servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool) error
-	ListLaunchPathsPagesWithContext(aws.Context, *servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool, ...aws.Option) error
-
-	ListPortfolioAccessRequest(*servicecatalog.ListPortfolioAccessInput) servicecatalog.ListPortfolioAccessRequest
-
-	ListPortfoliosRequest(*servicecatalog.ListPortfoliosInput) servicecatalog.ListPortfoliosRequest
-
-	ListPortfoliosPages(*servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool) error
-	ListPortfoliosPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool, ...aws.Option) error
-
-	ListPortfoliosForProductRequest(*servicecatalog.ListPortfoliosForProductInput) servicecatalog.ListPortfoliosForProductRequest
-
-	ListPortfoliosForProductPages(*servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool) error
-	ListPortfoliosForProductPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool, ...aws.Option) error
-
-	ListPrincipalsForPortfolioRequest(*servicecatalog.ListPrincipalsForPortfolioInput) servicecatalog.ListPrincipalsForPortfolioRequest
-
-	ListPrincipalsForPortfolioPages(*servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool) error
-	ListPrincipalsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool, ...aws.Option) error
-
-	ListProvisioningArtifactsRequest(*servicecatalog.ListProvisioningArtifactsInput) servicecatalog.ListProvisioningArtifactsRequest
-
-	ListRecordHistoryRequest(*servicecatalog.ListRecordHistoryInput) servicecatalog.ListRecordHistoryRequest
-
-	ListResourcesForTagOptionRequest(*servicecatalog.ListResourcesForTagOptionInput) servicecatalog.ListResourcesForTagOptionRequest
-
-	ListResourcesForTagOptionPages(*servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool) error
-	ListResourcesForTagOptionPagesWithContext(aws.Context, *servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool, ...aws.Option) error
-
-	ListTagOptionsRequest(*servicecatalog.ListTagOptionsInput) servicecatalog.ListTagOptionsRequest
-
-	ListTagOptionsPages(*servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool) error
-	ListTagOptionsPagesWithContext(aws.Context, *servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool, ...aws.Option) error
-
-	ProvisionProductRequest(*servicecatalog.ProvisionProductInput) servicecatalog.ProvisionProductRequest
-
-	RejectPortfolioShareRequest(*servicecatalog.RejectPortfolioShareInput) servicecatalog.RejectPortfolioShareRequest
-
-	ScanProvisionedProductsRequest(*servicecatalog.ScanProvisionedProductsInput) servicecatalog.ScanProvisionedProductsRequest
-
-	SearchProductsRequest(*servicecatalog.SearchProductsInput) servicecatalog.SearchProductsRequest
-
-	SearchProductsPages(*servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool) error
-	SearchProductsPagesWithContext(aws.Context, *servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool, ...aws.Option) error
-
-	SearchProductsAsAdminRequest(*servicecatalog.SearchProductsAsAdminInput) servicecatalog.SearchProductsAsAdminRequest
-
-	SearchProductsAsAdminPages(*servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool) error
-	SearchProductsAsAdminPagesWithContext(aws.Context, *servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool, ...aws.Option) error
-
-	TerminateProvisionedProductRequest(*servicecatalog.TerminateProvisionedProductInput) servicecatalog.TerminateProvisionedProductRequest
-
-	UpdateConstraintRequest(*servicecatalog.UpdateConstraintInput) servicecatalog.UpdateConstraintRequest
-
-	UpdatePortfolioRequest(*servicecatalog.UpdatePortfolioInput) servicecatalog.UpdatePortfolioRequest
-
-	UpdateProductRequest(*servicecatalog.UpdateProductInput) servicecatalog.UpdateProductRequest
-
-	UpdateProvisionedProductRequest(*servicecatalog.UpdateProvisionedProductInput) servicecatalog.UpdateProvisionedProductRequest
-
-	UpdateProvisioningArtifactRequest(*servicecatalog.UpdateProvisioningArtifactInput) servicecatalog.UpdateProvisioningArtifactRequest
-
-	UpdateTagOptionRequest(*servicecatalog.UpdateTagOptionInput) servicecatalog.UpdateTagOptionRequest
 }
 
-var _ ServiceCatalogAPI = (*servicecatalog.ServiceCatalog)(nil)
+// AssociatePrincipalWithPortfolioRequester provides the interface for the AssociatePrincipalWithPortfolioRequest API operation.
+type AssociatePrincipalWithPortfolioRequester interface {
+	AssociatePrincipalWithPortfolioRequest(*servicecatalog.AssociatePrincipalWithPortfolioInput) servicecatalog.AssociatePrincipalWithPortfolioRequest
+}
+
+// AssociateProductWithPortfolioRequester provides the interface for the AssociateProductWithPortfolioRequest API operation.
+type AssociateProductWithPortfolioRequester interface {
+	AssociateProductWithPortfolioRequest(*servicecatalog.AssociateProductWithPortfolioInput) servicecatalog.AssociateProductWithPortfolioRequest
+}
+
+// AssociateTagOptionWithResourceRequester provides the interface for the AssociateTagOptionWithResourceRequest API operation.
+type AssociateTagOptionWithResourceRequester interface {
+	AssociateTagOptionWithResourceRequest(*servicecatalog.AssociateTagOptionWithResourceInput) servicecatalog.AssociateTagOptionWithResourceRequest
+}
+
+// CopyProductRequester provides the interface for the CopyProductRequest API operation.
+type CopyProductRequester interface {
+	CopyProductRequest(*servicecatalog.CopyProductInput) servicecatalog.CopyProductRequest
+}
+
+// CreateConstraintRequester provides the interface for the CreateConstraintRequest API operation.
+type CreateConstraintRequester interface {
+	CreateConstraintRequest(*servicecatalog.CreateConstraintInput) servicecatalog.CreateConstraintRequest
+}
+
+// CreatePortfolioRequester provides the interface for the CreatePortfolioRequest API operation.
+type CreatePortfolioRequester interface {
+	CreatePortfolioRequest(*servicecatalog.CreatePortfolioInput) servicecatalog.CreatePortfolioRequest
+}
+
+// CreatePortfolioShareRequester provides the interface for the CreatePortfolioShareRequest API operation.
+type CreatePortfolioShareRequester interface {
+	CreatePortfolioShareRequest(*servicecatalog.CreatePortfolioShareInput) servicecatalog.CreatePortfolioShareRequest
+}
+
+// CreateProductRequester provides the interface for the CreateProductRequest API operation.
+type CreateProductRequester interface {
+	CreateProductRequest(*servicecatalog.CreateProductInput) servicecatalog.CreateProductRequest
+}
+
+// CreateProvisioningArtifactRequester provides the interface for the CreateProvisioningArtifactRequest API operation.
+type CreateProvisioningArtifactRequester interface {
+	CreateProvisioningArtifactRequest(*servicecatalog.CreateProvisioningArtifactInput) servicecatalog.CreateProvisioningArtifactRequest
+}
+
+// CreateTagOptionRequester provides the interface for the CreateTagOptionRequest API operation.
+type CreateTagOptionRequester interface {
+	CreateTagOptionRequest(*servicecatalog.CreateTagOptionInput) servicecatalog.CreateTagOptionRequest
+}
+
+// DeleteConstraintRequester provides the interface for the DeleteConstraintRequest API operation.
+type DeleteConstraintRequester interface {
+	DeleteConstraintRequest(*servicecatalog.DeleteConstraintInput) servicecatalog.DeleteConstraintRequest
+}
+
+// DeletePortfolioRequester provides the interface for the DeletePortfolioRequest API operation.
+type DeletePortfolioRequester interface {
+	DeletePortfolioRequest(*servicecatalog.DeletePortfolioInput) servicecatalog.DeletePortfolioRequest
+}
+
+// DeletePortfolioShareRequester provides the interface for the DeletePortfolioShareRequest API operation.
+type DeletePortfolioShareRequester interface {
+	DeletePortfolioShareRequest(*servicecatalog.DeletePortfolioShareInput) servicecatalog.DeletePortfolioShareRequest
+}
+
+// DeleteProductRequester provides the interface for the DeleteProductRequest API operation.
+type DeleteProductRequester interface {
+	DeleteProductRequest(*servicecatalog.DeleteProductInput) servicecatalog.DeleteProductRequest
+}
+
+// DeleteProvisioningArtifactRequester provides the interface for the DeleteProvisioningArtifactRequest API operation.
+type DeleteProvisioningArtifactRequester interface {
+	DeleteProvisioningArtifactRequest(*servicecatalog.DeleteProvisioningArtifactInput) servicecatalog.DeleteProvisioningArtifactRequest
+}
+
+// DescribeConstraintRequester provides the interface for the DescribeConstraintRequest API operation.
+type DescribeConstraintRequester interface {
+	DescribeConstraintRequest(*servicecatalog.DescribeConstraintInput) servicecatalog.DescribeConstraintRequest
+}
+
+// DescribeCopyProductStatusRequester provides the interface for the DescribeCopyProductStatusRequest API operation.
+type DescribeCopyProductStatusRequester interface {
+	DescribeCopyProductStatusRequest(*servicecatalog.DescribeCopyProductStatusInput) servicecatalog.DescribeCopyProductStatusRequest
+}
+
+// DescribePortfolioRequester provides the interface for the DescribePortfolioRequest API operation.
+type DescribePortfolioRequester interface {
+	DescribePortfolioRequest(*servicecatalog.DescribePortfolioInput) servicecatalog.DescribePortfolioRequest
+}
+
+// DescribeProductRequester provides the interface for the DescribeProductRequest API operation.
+type DescribeProductRequester interface {
+	DescribeProductRequest(*servicecatalog.DescribeProductInput) servicecatalog.DescribeProductRequest
+}
+
+// DescribeProductAsAdminRequester provides the interface for the DescribeProductAsAdminRequest API operation.
+type DescribeProductAsAdminRequester interface {
+	DescribeProductAsAdminRequest(*servicecatalog.DescribeProductAsAdminInput) servicecatalog.DescribeProductAsAdminRequest
+}
+
+// DescribeProductViewRequester provides the interface for the DescribeProductViewRequest API operation.
+type DescribeProductViewRequester interface {
+	DescribeProductViewRequest(*servicecatalog.DescribeProductViewInput) servicecatalog.DescribeProductViewRequest
+}
+
+// DescribeProvisionedProductRequester provides the interface for the DescribeProvisionedProductRequest API operation.
+type DescribeProvisionedProductRequester interface {
+	DescribeProvisionedProductRequest(*servicecatalog.DescribeProvisionedProductInput) servicecatalog.DescribeProvisionedProductRequest
+}
+
+// DescribeProvisioningArtifactRequester provides the interface for the DescribeProvisioningArtifactRequest API operation.
+type DescribeProvisioningArtifactRequester interface {
+	DescribeProvisioningArtifactRequest(*servicecatalog.DescribeProvisioningArtifactInput) servicecatalog.DescribeProvisioningArtifactRequest
+}
+
+// DescribeProvisioningParametersRequester provides the interface for the DescribeProvisioningParametersRequest API operation.
+type DescribeProvisioningParametersRequester interface {
+	DescribeProvisioningParametersRequest(*servicecatalog.DescribeProvisioningParametersInput) servicecatalog.DescribeProvisioningParametersRequest
+}
+
+// DescribeRecordRequester provides the interface for the DescribeRecordRequest API operation.
+type DescribeRecordRequester interface {
+	DescribeRecordRequest(*servicecatalog.DescribeRecordInput) servicecatalog.DescribeRecordRequest
+}
+
+// DescribeTagOptionRequester provides the interface for the DescribeTagOptionRequest API operation.
+type DescribeTagOptionRequester interface {
+	DescribeTagOptionRequest(*servicecatalog.DescribeTagOptionInput) servicecatalog.DescribeTagOptionRequest
+}
+
+// DisassociatePrincipalFromPortfolioRequester provides the interface for the DisassociatePrincipalFromPortfolioRequest API operation.
+type DisassociatePrincipalFromPortfolioRequester interface {
+	DisassociatePrincipalFromPortfolioRequest(*servicecatalog.DisassociatePrincipalFromPortfolioInput) servicecatalog.DisassociatePrincipalFromPortfolioRequest
+}
+
+// DisassociateProductFromPortfolioRequester provides the interface for the DisassociateProductFromPortfolioRequest API operation.
+type DisassociateProductFromPortfolioRequester interface {
+	DisassociateProductFromPortfolioRequest(*servicecatalog.DisassociateProductFromPortfolioInput) servicecatalog.DisassociateProductFromPortfolioRequest
+}
+
+// DisassociateTagOptionFromResourceRequester provides the interface for the DisassociateTagOptionFromResourceRequest API operation.
+type DisassociateTagOptionFromResourceRequester interface {
+	DisassociateTagOptionFromResourceRequest(*servicecatalog.DisassociateTagOptionFromResourceInput) servicecatalog.DisassociateTagOptionFromResourceRequest
+}
+
+// ListAcceptedPortfolioSharesRequester provides the interface for the ListAcceptedPortfolioSharesRequest API operation.
+type ListAcceptedPortfolioSharesRequester interface {
+	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) servicecatalog.ListAcceptedPortfolioSharesRequest
+}
+
+// ListConstraintsForPortfolioRequester provides the interface for the ListConstraintsForPortfolioRequest API operation.
+type ListConstraintsForPortfolioRequester interface {
+	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) servicecatalog.ListConstraintsForPortfolioRequest
+}
+
+// ListLaunchPathsRequester provides the interface for the ListLaunchPathsRequest API operation.
+type ListLaunchPathsRequester interface {
+	ListLaunchPathsRequest(*servicecatalog.ListLaunchPathsInput) servicecatalog.ListLaunchPathsRequest
+}
+
+// ListPortfolioAccessRequester provides the interface for the ListPortfolioAccessRequest API operation.
+type ListPortfolioAccessRequester interface {
+	ListPortfolioAccessRequest(*servicecatalog.ListPortfolioAccessInput) servicecatalog.ListPortfolioAccessRequest
+}
+
+// ListPortfoliosRequester provides the interface for the ListPortfoliosRequest API operation.
+type ListPortfoliosRequester interface {
+	ListPortfoliosRequest(*servicecatalog.ListPortfoliosInput) servicecatalog.ListPortfoliosRequest
+}
+
+// ListPortfoliosForProductRequester provides the interface for the ListPortfoliosForProductRequest API operation.
+type ListPortfoliosForProductRequester interface {
+	ListPortfoliosForProductRequest(*servicecatalog.ListPortfoliosForProductInput) servicecatalog.ListPortfoliosForProductRequest
+}
+
+// ListPrincipalsForPortfolioRequester provides the interface for the ListPrincipalsForPortfolioRequest API operation.
+type ListPrincipalsForPortfolioRequester interface {
+	ListPrincipalsForPortfolioRequest(*servicecatalog.ListPrincipalsForPortfolioInput) servicecatalog.ListPrincipalsForPortfolioRequest
+}
+
+// ListProvisioningArtifactsRequester provides the interface for the ListProvisioningArtifactsRequest API operation.
+type ListProvisioningArtifactsRequester interface {
+	ListProvisioningArtifactsRequest(*servicecatalog.ListProvisioningArtifactsInput) servicecatalog.ListProvisioningArtifactsRequest
+}
+
+// ListRecordHistoryRequester provides the interface for the ListRecordHistoryRequest API operation.
+type ListRecordHistoryRequester interface {
+	ListRecordHistoryRequest(*servicecatalog.ListRecordHistoryInput) servicecatalog.ListRecordHistoryRequest
+}
+
+// ListResourcesForTagOptionRequester provides the interface for the ListResourcesForTagOptionRequest API operation.
+type ListResourcesForTagOptionRequester interface {
+	ListResourcesForTagOptionRequest(*servicecatalog.ListResourcesForTagOptionInput) servicecatalog.ListResourcesForTagOptionRequest
+}
+
+// ListTagOptionsRequester provides the interface for the ListTagOptionsRequest API operation.
+type ListTagOptionsRequester interface {
+	ListTagOptionsRequest(*servicecatalog.ListTagOptionsInput) servicecatalog.ListTagOptionsRequest
+}
+
+// ProvisionProductRequester provides the interface for the ProvisionProductRequest API operation.
+type ProvisionProductRequester interface {
+	ProvisionProductRequest(*servicecatalog.ProvisionProductInput) servicecatalog.ProvisionProductRequest
+}
+
+// RejectPortfolioShareRequester provides the interface for the RejectPortfolioShareRequest API operation.
+type RejectPortfolioShareRequester interface {
+	RejectPortfolioShareRequest(*servicecatalog.RejectPortfolioShareInput) servicecatalog.RejectPortfolioShareRequest
+}
+
+// ScanProvisionedProductsRequester provides the interface for the ScanProvisionedProductsRequest API operation.
+type ScanProvisionedProductsRequester interface {
+	ScanProvisionedProductsRequest(*servicecatalog.ScanProvisionedProductsInput) servicecatalog.ScanProvisionedProductsRequest
+}
+
+// SearchProductsRequester provides the interface for the SearchProductsRequest API operation.
+type SearchProductsRequester interface {
+	SearchProductsRequest(*servicecatalog.SearchProductsInput) servicecatalog.SearchProductsRequest
+}
+
+// SearchProductsAsAdminRequester provides the interface for the SearchProductsAsAdminRequest API operation.
+type SearchProductsAsAdminRequester interface {
+	SearchProductsAsAdminRequest(*servicecatalog.SearchProductsAsAdminInput) servicecatalog.SearchProductsAsAdminRequest
+}
+
+// TerminateProvisionedProductRequester provides the interface for the TerminateProvisionedProductRequest API operation.
+type TerminateProvisionedProductRequester interface {
+	TerminateProvisionedProductRequest(*servicecatalog.TerminateProvisionedProductInput) servicecatalog.TerminateProvisionedProductRequest
+}
+
+// UpdateConstraintRequester provides the interface for the UpdateConstraintRequest API operation.
+type UpdateConstraintRequester interface {
+	UpdateConstraintRequest(*servicecatalog.UpdateConstraintInput) servicecatalog.UpdateConstraintRequest
+}
+
+// UpdatePortfolioRequester provides the interface for the UpdatePortfolioRequest API operation.
+type UpdatePortfolioRequester interface {
+	UpdatePortfolioRequest(*servicecatalog.UpdatePortfolioInput) servicecatalog.UpdatePortfolioRequest
+}
+
+// UpdateProductRequester provides the interface for the UpdateProductRequest API operation.
+type UpdateProductRequester interface {
+	UpdateProductRequest(*servicecatalog.UpdateProductInput) servicecatalog.UpdateProductRequest
+}
+
+// UpdateProvisionedProductRequester provides the interface for the UpdateProvisionedProductRequest API operation.
+type UpdateProvisionedProductRequester interface {
+	UpdateProvisionedProductRequest(*servicecatalog.UpdateProvisionedProductInput) servicecatalog.UpdateProvisionedProductRequest
+}
+
+// UpdateProvisioningArtifactRequester provides the interface for the UpdateProvisioningArtifactRequest API operation.
+type UpdateProvisioningArtifactRequester interface {
+	UpdateProvisioningArtifactRequest(*servicecatalog.UpdateProvisioningArtifactInput) servicecatalog.UpdateProvisioningArtifactRequest
+}
+
+// UpdateTagOptionRequester provides the interface for the UpdateTagOptionRequest API operation.
+type UpdateTagOptionRequester interface {
+	UpdateTagOptionRequest(*servicecatalog.UpdateTagOptionInput) servicecatalog.UpdateTagOptionRequest
+}

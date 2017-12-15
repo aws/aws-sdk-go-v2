@@ -12,85 +12,77 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
 )
 
-// OpsWorksCMAPI provides an interface to enable mocking the
-// opsworkscm.OpsWorksCM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS OpsWorks for Chef Automate.
-//    func myFunc(svc opsworkscmiface.OpsWorksCMAPI) bool {
-//        // Make svc.AssociateNode request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := opsworkscm.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockOpsWorksCMClient struct {
-//        opsworkscmiface.OpsWorksCMAPI
-//    }
-//    func (m *mockOpsWorksCMClient) AssociateNode(input *opsworkscm.AssociateNodeInput) (*opsworkscm.AssociateNodeOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockOpsWorksCMClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type OpsWorksCMAPI interface {
+// AssociateNodeRequester provides the interface for the AssociateNodeRequest API operation.
+type AssociateNodeRequester interface {
 	AssociateNodeRequest(*opsworkscm.AssociateNodeInput) opsworkscm.AssociateNodeRequest
-
-	CreateBackupRequest(*opsworkscm.CreateBackupInput) opsworkscm.CreateBackupRequest
-
-	CreateServerRequest(*opsworkscm.CreateServerInput) opsworkscm.CreateServerRequest
-
-	DeleteBackupRequest(*opsworkscm.DeleteBackupInput) opsworkscm.DeleteBackupRequest
-
-	DeleteServerRequest(*opsworkscm.DeleteServerInput) opsworkscm.DeleteServerRequest
-
-	DescribeAccountAttributesRequest(*opsworkscm.DescribeAccountAttributesInput) opsworkscm.DescribeAccountAttributesRequest
-
-	DescribeBackupsRequest(*opsworkscm.DescribeBackupsInput) opsworkscm.DescribeBackupsRequest
-
-	DescribeEventsRequest(*opsworkscm.DescribeEventsInput) opsworkscm.DescribeEventsRequest
-
-	DescribeNodeAssociationStatusRequest(*opsworkscm.DescribeNodeAssociationStatusInput) opsworkscm.DescribeNodeAssociationStatusRequest
-
-	DescribeServersRequest(*opsworkscm.DescribeServersInput) opsworkscm.DescribeServersRequest
-
-	DisassociateNodeRequest(*opsworkscm.DisassociateNodeInput) opsworkscm.DisassociateNodeRequest
-
-	RestoreServerRequest(*opsworkscm.RestoreServerInput) opsworkscm.RestoreServerRequest
-
-	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) opsworkscm.StartMaintenanceRequest
-
-	UpdateServerRequest(*opsworkscm.UpdateServerInput) opsworkscm.UpdateServerRequest
-
-	UpdateServerEngineAttributesRequest(*opsworkscm.UpdateServerEngineAttributesInput) opsworkscm.UpdateServerEngineAttributesRequest
 }
 
-var _ OpsWorksCMAPI = (*opsworkscm.OpsWorksCM)(nil)
+// CreateBackupRequester provides the interface for the CreateBackupRequest API operation.
+type CreateBackupRequester interface {
+	CreateBackupRequest(*opsworkscm.CreateBackupInput) opsworkscm.CreateBackupRequest
+}
+
+// CreateServerRequester provides the interface for the CreateServerRequest API operation.
+type CreateServerRequester interface {
+	CreateServerRequest(*opsworkscm.CreateServerInput) opsworkscm.CreateServerRequest
+}
+
+// DeleteBackupRequester provides the interface for the DeleteBackupRequest API operation.
+type DeleteBackupRequester interface {
+	DeleteBackupRequest(*opsworkscm.DeleteBackupInput) opsworkscm.DeleteBackupRequest
+}
+
+// DeleteServerRequester provides the interface for the DeleteServerRequest API operation.
+type DeleteServerRequester interface {
+	DeleteServerRequest(*opsworkscm.DeleteServerInput) opsworkscm.DeleteServerRequest
+}
+
+// DescribeAccountAttributesRequester provides the interface for the DescribeAccountAttributesRequest API operation.
+type DescribeAccountAttributesRequester interface {
+	DescribeAccountAttributesRequest(*opsworkscm.DescribeAccountAttributesInput) opsworkscm.DescribeAccountAttributesRequest
+}
+
+// DescribeBackupsRequester provides the interface for the DescribeBackupsRequest API operation.
+type DescribeBackupsRequester interface {
+	DescribeBackupsRequest(*opsworkscm.DescribeBackupsInput) opsworkscm.DescribeBackupsRequest
+}
+
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
+	DescribeEventsRequest(*opsworkscm.DescribeEventsInput) opsworkscm.DescribeEventsRequest
+}
+
+// DescribeNodeAssociationStatusRequester provides the interface for the DescribeNodeAssociationStatusRequest API operation.
+type DescribeNodeAssociationStatusRequester interface {
+	DescribeNodeAssociationStatusRequest(*opsworkscm.DescribeNodeAssociationStatusInput) opsworkscm.DescribeNodeAssociationStatusRequest
+}
+
+// DescribeServersRequester provides the interface for the DescribeServersRequest API operation.
+type DescribeServersRequester interface {
+	DescribeServersRequest(*opsworkscm.DescribeServersInput) opsworkscm.DescribeServersRequest
+}
+
+// DisassociateNodeRequester provides the interface for the DisassociateNodeRequest API operation.
+type DisassociateNodeRequester interface {
+	DisassociateNodeRequest(*opsworkscm.DisassociateNodeInput) opsworkscm.DisassociateNodeRequest
+}
+
+// RestoreServerRequester provides the interface for the RestoreServerRequest API operation.
+type RestoreServerRequester interface {
+	RestoreServerRequest(*opsworkscm.RestoreServerInput) opsworkscm.RestoreServerRequest
+}
+
+// StartMaintenanceRequester provides the interface for the StartMaintenanceRequest API operation.
+type StartMaintenanceRequester interface {
+	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) opsworkscm.StartMaintenanceRequest
+}
+
+// UpdateServerRequester provides the interface for the UpdateServerRequest API operation.
+type UpdateServerRequester interface {
+	UpdateServerRequest(*opsworkscm.UpdateServerInput) opsworkscm.UpdateServerRequest
+}
+
+// UpdateServerEngineAttributesRequester provides the interface for the UpdateServerEngineAttributesRequest API operation.
+type UpdateServerEngineAttributesRequester interface {
+	UpdateServerEngineAttributesRequest(*opsworkscm.UpdateServerEngineAttributesInput) opsworkscm.UpdateServerEngineAttributesRequest
+}

@@ -12,151 +12,242 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
 )
 
-// LightsailAPI provides an interface to enable mocking the
-// lightsail.Lightsail service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Lightsail.
-//    func myFunc(svc lightsailiface.LightsailAPI) bool {
-//        // Make svc.AllocateStaticIp request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := lightsail.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLightsailClient struct {
-//        lightsailiface.LightsailAPI
-//    }
-//    func (m *mockLightsailClient) AllocateStaticIp(input *lightsail.AllocateStaticIpInput) (*lightsail.AllocateStaticIpOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockLightsailClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type LightsailAPI interface {
+// AllocateStaticIpRequester provides the interface for the AllocateStaticIpRequest API operation.
+type AllocateStaticIpRequester interface {
 	AllocateStaticIpRequest(*lightsail.AllocateStaticIpInput) lightsail.AllocateStaticIpRequest
-
-	AttachStaticIpRequest(*lightsail.AttachStaticIpInput) lightsail.AttachStaticIpRequest
-
-	CloseInstancePublicPortsRequest(*lightsail.CloseInstancePublicPortsInput) lightsail.CloseInstancePublicPortsRequest
-
-	CreateDomainRequest(*lightsail.CreateDomainInput) lightsail.CreateDomainRequest
-
-	CreateDomainEntryRequest(*lightsail.CreateDomainEntryInput) lightsail.CreateDomainEntryRequest
-
-	CreateInstanceSnapshotRequest(*lightsail.CreateInstanceSnapshotInput) lightsail.CreateInstanceSnapshotRequest
-
-	CreateInstancesRequest(*lightsail.CreateInstancesInput) lightsail.CreateInstancesRequest
-
-	CreateInstancesFromSnapshotRequest(*lightsail.CreateInstancesFromSnapshotInput) lightsail.CreateInstancesFromSnapshotRequest
-
-	CreateKeyPairRequest(*lightsail.CreateKeyPairInput) lightsail.CreateKeyPairRequest
-
-	DeleteDomainRequest(*lightsail.DeleteDomainInput) lightsail.DeleteDomainRequest
-
-	DeleteDomainEntryRequest(*lightsail.DeleteDomainEntryInput) lightsail.DeleteDomainEntryRequest
-
-	DeleteInstanceRequest(*lightsail.DeleteInstanceInput) lightsail.DeleteInstanceRequest
-
-	DeleteInstanceSnapshotRequest(*lightsail.DeleteInstanceSnapshotInput) lightsail.DeleteInstanceSnapshotRequest
-
-	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
-
-	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) lightsail.DetachStaticIpRequest
-
-	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
-
-	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) lightsail.GetActiveNamesRequest
-
-	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
-
-	GetBundlesRequest(*lightsail.GetBundlesInput) lightsail.GetBundlesRequest
-
-	GetDomainRequest(*lightsail.GetDomainInput) lightsail.GetDomainRequest
-
-	GetDomainsRequest(*lightsail.GetDomainsInput) lightsail.GetDomainsRequest
-
-	GetInstanceRequest(*lightsail.GetInstanceInput) lightsail.GetInstanceRequest
-
-	GetInstanceAccessDetailsRequest(*lightsail.GetInstanceAccessDetailsInput) lightsail.GetInstanceAccessDetailsRequest
-
-	GetInstanceMetricDataRequest(*lightsail.GetInstanceMetricDataInput) lightsail.GetInstanceMetricDataRequest
-
-	GetInstancePortStatesRequest(*lightsail.GetInstancePortStatesInput) lightsail.GetInstancePortStatesRequest
-
-	GetInstanceSnapshotRequest(*lightsail.GetInstanceSnapshotInput) lightsail.GetInstanceSnapshotRequest
-
-	GetInstanceSnapshotsRequest(*lightsail.GetInstanceSnapshotsInput) lightsail.GetInstanceSnapshotsRequest
-
-	GetInstanceStateRequest(*lightsail.GetInstanceStateInput) lightsail.GetInstanceStateRequest
-
-	GetInstancesRequest(*lightsail.GetInstancesInput) lightsail.GetInstancesRequest
-
-	GetKeyPairRequest(*lightsail.GetKeyPairInput) lightsail.GetKeyPairRequest
-
-	GetKeyPairsRequest(*lightsail.GetKeyPairsInput) lightsail.GetKeyPairsRequest
-
-	GetOperationRequest(*lightsail.GetOperationInput) lightsail.GetOperationRequest
-
-	GetOperationsRequest(*lightsail.GetOperationsInput) lightsail.GetOperationsRequest
-
-	GetOperationsForResourceRequest(*lightsail.GetOperationsForResourceInput) lightsail.GetOperationsForResourceRequest
-
-	GetRegionsRequest(*lightsail.GetRegionsInput) lightsail.GetRegionsRequest
-
-	GetStaticIpRequest(*lightsail.GetStaticIpInput) lightsail.GetStaticIpRequest
-
-	GetStaticIpsRequest(*lightsail.GetStaticIpsInput) lightsail.GetStaticIpsRequest
-
-	ImportKeyPairRequest(*lightsail.ImportKeyPairInput) lightsail.ImportKeyPairRequest
-
-	IsVpcPeeredRequest(*lightsail.IsVpcPeeredInput) lightsail.IsVpcPeeredRequest
-
-	OpenInstancePublicPortsRequest(*lightsail.OpenInstancePublicPortsInput) lightsail.OpenInstancePublicPortsRequest
-
-	PeerVpcRequest(*lightsail.PeerVpcInput) lightsail.PeerVpcRequest
-
-	PutInstancePublicPortsRequest(*lightsail.PutInstancePublicPortsInput) lightsail.PutInstancePublicPortsRequest
-
-	RebootInstanceRequest(*lightsail.RebootInstanceInput) lightsail.RebootInstanceRequest
-
-	ReleaseStaticIpRequest(*lightsail.ReleaseStaticIpInput) lightsail.ReleaseStaticIpRequest
-
-	StartInstanceRequest(*lightsail.StartInstanceInput) lightsail.StartInstanceRequest
-
-	StopInstanceRequest(*lightsail.StopInstanceInput) lightsail.StopInstanceRequest
-
-	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) lightsail.UnpeerVpcRequest
-
-	UpdateDomainEntryRequest(*lightsail.UpdateDomainEntryInput) lightsail.UpdateDomainEntryRequest
 }
 
-var _ LightsailAPI = (*lightsail.Lightsail)(nil)
+// AttachStaticIpRequester provides the interface for the AttachStaticIpRequest API operation.
+type AttachStaticIpRequester interface {
+	AttachStaticIpRequest(*lightsail.AttachStaticIpInput) lightsail.AttachStaticIpRequest
+}
+
+// CloseInstancePublicPortsRequester provides the interface for the CloseInstancePublicPortsRequest API operation.
+type CloseInstancePublicPortsRequester interface {
+	CloseInstancePublicPortsRequest(*lightsail.CloseInstancePublicPortsInput) lightsail.CloseInstancePublicPortsRequest
+}
+
+// CreateDomainRequester provides the interface for the CreateDomainRequest API operation.
+type CreateDomainRequester interface {
+	CreateDomainRequest(*lightsail.CreateDomainInput) lightsail.CreateDomainRequest
+}
+
+// CreateDomainEntryRequester provides the interface for the CreateDomainEntryRequest API operation.
+type CreateDomainEntryRequester interface {
+	CreateDomainEntryRequest(*lightsail.CreateDomainEntryInput) lightsail.CreateDomainEntryRequest
+}
+
+// CreateInstanceSnapshotRequester provides the interface for the CreateInstanceSnapshotRequest API operation.
+type CreateInstanceSnapshotRequester interface {
+	CreateInstanceSnapshotRequest(*lightsail.CreateInstanceSnapshotInput) lightsail.CreateInstanceSnapshotRequest
+}
+
+// CreateInstancesRequester provides the interface for the CreateInstancesRequest API operation.
+type CreateInstancesRequester interface {
+	CreateInstancesRequest(*lightsail.CreateInstancesInput) lightsail.CreateInstancesRequest
+}
+
+// CreateInstancesFromSnapshotRequester provides the interface for the CreateInstancesFromSnapshotRequest API operation.
+type CreateInstancesFromSnapshotRequester interface {
+	CreateInstancesFromSnapshotRequest(*lightsail.CreateInstancesFromSnapshotInput) lightsail.CreateInstancesFromSnapshotRequest
+}
+
+// CreateKeyPairRequester provides the interface for the CreateKeyPairRequest API operation.
+type CreateKeyPairRequester interface {
+	CreateKeyPairRequest(*lightsail.CreateKeyPairInput) lightsail.CreateKeyPairRequest
+}
+
+// DeleteDomainRequester provides the interface for the DeleteDomainRequest API operation.
+type DeleteDomainRequester interface {
+	DeleteDomainRequest(*lightsail.DeleteDomainInput) lightsail.DeleteDomainRequest
+}
+
+// DeleteDomainEntryRequester provides the interface for the DeleteDomainEntryRequest API operation.
+type DeleteDomainEntryRequester interface {
+	DeleteDomainEntryRequest(*lightsail.DeleteDomainEntryInput) lightsail.DeleteDomainEntryRequest
+}
+
+// DeleteInstanceRequester provides the interface for the DeleteInstanceRequest API operation.
+type DeleteInstanceRequester interface {
+	DeleteInstanceRequest(*lightsail.DeleteInstanceInput) lightsail.DeleteInstanceRequest
+}
+
+// DeleteInstanceSnapshotRequester provides the interface for the DeleteInstanceSnapshotRequest API operation.
+type DeleteInstanceSnapshotRequester interface {
+	DeleteInstanceSnapshotRequest(*lightsail.DeleteInstanceSnapshotInput) lightsail.DeleteInstanceSnapshotRequest
+}
+
+// DeleteKeyPairRequester provides the interface for the DeleteKeyPairRequest API operation.
+type DeleteKeyPairRequester interface {
+	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
+}
+
+// DetachStaticIpRequester provides the interface for the DetachStaticIpRequest API operation.
+type DetachStaticIpRequester interface {
+	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) lightsail.DetachStaticIpRequest
+}
+
+// DownloadDefaultKeyPairRequester provides the interface for the DownloadDefaultKeyPairRequest API operation.
+type DownloadDefaultKeyPairRequester interface {
+	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
+}
+
+// GetActiveNamesRequester provides the interface for the GetActiveNamesRequest API operation.
+type GetActiveNamesRequester interface {
+	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) lightsail.GetActiveNamesRequest
+}
+
+// GetBlueprintsRequester provides the interface for the GetBlueprintsRequest API operation.
+type GetBlueprintsRequester interface {
+	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
+}
+
+// GetBundlesRequester provides the interface for the GetBundlesRequest API operation.
+type GetBundlesRequester interface {
+	GetBundlesRequest(*lightsail.GetBundlesInput) lightsail.GetBundlesRequest
+}
+
+// GetDomainRequester provides the interface for the GetDomainRequest API operation.
+type GetDomainRequester interface {
+	GetDomainRequest(*lightsail.GetDomainInput) lightsail.GetDomainRequest
+}
+
+// GetDomainsRequester provides the interface for the GetDomainsRequest API operation.
+type GetDomainsRequester interface {
+	GetDomainsRequest(*lightsail.GetDomainsInput) lightsail.GetDomainsRequest
+}
+
+// GetInstanceRequester provides the interface for the GetInstanceRequest API operation.
+type GetInstanceRequester interface {
+	GetInstanceRequest(*lightsail.GetInstanceInput) lightsail.GetInstanceRequest
+}
+
+// GetInstanceAccessDetailsRequester provides the interface for the GetInstanceAccessDetailsRequest API operation.
+type GetInstanceAccessDetailsRequester interface {
+	GetInstanceAccessDetailsRequest(*lightsail.GetInstanceAccessDetailsInput) lightsail.GetInstanceAccessDetailsRequest
+}
+
+// GetInstanceMetricDataRequester provides the interface for the GetInstanceMetricDataRequest API operation.
+type GetInstanceMetricDataRequester interface {
+	GetInstanceMetricDataRequest(*lightsail.GetInstanceMetricDataInput) lightsail.GetInstanceMetricDataRequest
+}
+
+// GetInstancePortStatesRequester provides the interface for the GetInstancePortStatesRequest API operation.
+type GetInstancePortStatesRequester interface {
+	GetInstancePortStatesRequest(*lightsail.GetInstancePortStatesInput) lightsail.GetInstancePortStatesRequest
+}
+
+// GetInstanceSnapshotRequester provides the interface for the GetInstanceSnapshotRequest API operation.
+type GetInstanceSnapshotRequester interface {
+	GetInstanceSnapshotRequest(*lightsail.GetInstanceSnapshotInput) lightsail.GetInstanceSnapshotRequest
+}
+
+// GetInstanceSnapshotsRequester provides the interface for the GetInstanceSnapshotsRequest API operation.
+type GetInstanceSnapshotsRequester interface {
+	GetInstanceSnapshotsRequest(*lightsail.GetInstanceSnapshotsInput) lightsail.GetInstanceSnapshotsRequest
+}
+
+// GetInstanceStateRequester provides the interface for the GetInstanceStateRequest API operation.
+type GetInstanceStateRequester interface {
+	GetInstanceStateRequest(*lightsail.GetInstanceStateInput) lightsail.GetInstanceStateRequest
+}
+
+// GetInstancesRequester provides the interface for the GetInstancesRequest API operation.
+type GetInstancesRequester interface {
+	GetInstancesRequest(*lightsail.GetInstancesInput) lightsail.GetInstancesRequest
+}
+
+// GetKeyPairRequester provides the interface for the GetKeyPairRequest API operation.
+type GetKeyPairRequester interface {
+	GetKeyPairRequest(*lightsail.GetKeyPairInput) lightsail.GetKeyPairRequest
+}
+
+// GetKeyPairsRequester provides the interface for the GetKeyPairsRequest API operation.
+type GetKeyPairsRequester interface {
+	GetKeyPairsRequest(*lightsail.GetKeyPairsInput) lightsail.GetKeyPairsRequest
+}
+
+// GetOperationRequester provides the interface for the GetOperationRequest API operation.
+type GetOperationRequester interface {
+	GetOperationRequest(*lightsail.GetOperationInput) lightsail.GetOperationRequest
+}
+
+// GetOperationsRequester provides the interface for the GetOperationsRequest API operation.
+type GetOperationsRequester interface {
+	GetOperationsRequest(*lightsail.GetOperationsInput) lightsail.GetOperationsRequest
+}
+
+// GetOperationsForResourceRequester provides the interface for the GetOperationsForResourceRequest API operation.
+type GetOperationsForResourceRequester interface {
+	GetOperationsForResourceRequest(*lightsail.GetOperationsForResourceInput) lightsail.GetOperationsForResourceRequest
+}
+
+// GetRegionsRequester provides the interface for the GetRegionsRequest API operation.
+type GetRegionsRequester interface {
+	GetRegionsRequest(*lightsail.GetRegionsInput) lightsail.GetRegionsRequest
+}
+
+// GetStaticIpRequester provides the interface for the GetStaticIpRequest API operation.
+type GetStaticIpRequester interface {
+	GetStaticIpRequest(*lightsail.GetStaticIpInput) lightsail.GetStaticIpRequest
+}
+
+// GetStaticIpsRequester provides the interface for the GetStaticIpsRequest API operation.
+type GetStaticIpsRequester interface {
+	GetStaticIpsRequest(*lightsail.GetStaticIpsInput) lightsail.GetStaticIpsRequest
+}
+
+// ImportKeyPairRequester provides the interface for the ImportKeyPairRequest API operation.
+type ImportKeyPairRequester interface {
+	ImportKeyPairRequest(*lightsail.ImportKeyPairInput) lightsail.ImportKeyPairRequest
+}
+
+// IsVpcPeeredRequester provides the interface for the IsVpcPeeredRequest API operation.
+type IsVpcPeeredRequester interface {
+	IsVpcPeeredRequest(*lightsail.IsVpcPeeredInput) lightsail.IsVpcPeeredRequest
+}
+
+// OpenInstancePublicPortsRequester provides the interface for the OpenInstancePublicPortsRequest API operation.
+type OpenInstancePublicPortsRequester interface {
+	OpenInstancePublicPortsRequest(*lightsail.OpenInstancePublicPortsInput) lightsail.OpenInstancePublicPortsRequest
+}
+
+// PeerVpcRequester provides the interface for the PeerVpcRequest API operation.
+type PeerVpcRequester interface {
+	PeerVpcRequest(*lightsail.PeerVpcInput) lightsail.PeerVpcRequest
+}
+
+// PutInstancePublicPortsRequester provides the interface for the PutInstancePublicPortsRequest API operation.
+type PutInstancePublicPortsRequester interface {
+	PutInstancePublicPortsRequest(*lightsail.PutInstancePublicPortsInput) lightsail.PutInstancePublicPortsRequest
+}
+
+// RebootInstanceRequester provides the interface for the RebootInstanceRequest API operation.
+type RebootInstanceRequester interface {
+	RebootInstanceRequest(*lightsail.RebootInstanceInput) lightsail.RebootInstanceRequest
+}
+
+// ReleaseStaticIpRequester provides the interface for the ReleaseStaticIpRequest API operation.
+type ReleaseStaticIpRequester interface {
+	ReleaseStaticIpRequest(*lightsail.ReleaseStaticIpInput) lightsail.ReleaseStaticIpRequest
+}
+
+// StartInstanceRequester provides the interface for the StartInstanceRequest API operation.
+type StartInstanceRequester interface {
+	StartInstanceRequest(*lightsail.StartInstanceInput) lightsail.StartInstanceRequest
+}
+
+// StopInstanceRequester provides the interface for the StopInstanceRequest API operation.
+type StopInstanceRequester interface {
+	StopInstanceRequest(*lightsail.StopInstanceInput) lightsail.StopInstanceRequest
+}
+
+// UnpeerVpcRequester provides the interface for the UnpeerVpcRequest API operation.
+type UnpeerVpcRequester interface {
+	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) lightsail.UnpeerVpcRequest
+}
+
+// UpdateDomainEntryRequester provides the interface for the UpdateDomainEntryRequest API operation.
+type UpdateDomainEntryRequester interface {
+	UpdateDomainEntryRequest(*lightsail.UpdateDomainEntryInput) lightsail.UpdateDomainEntryRequest
+}

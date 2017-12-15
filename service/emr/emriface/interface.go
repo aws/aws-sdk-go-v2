@@ -13,136 +13,155 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/emr"
 )
 
-// EMRAPI provides an interface to enable mocking the
-// emr.EMR service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Elastic MapReduce.
-//    func myFunc(svc emriface.EMRAPI) bool {
-//        // Make svc.AddInstanceFleet request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := emr.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockEMRClient struct {
-//        emriface.EMRAPI
-//    }
-//    func (m *mockEMRClient) AddInstanceFleet(input *emr.AddInstanceFleetInput) (*emr.AddInstanceFleetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockEMRClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type EMRAPI interface {
+// AddInstanceFleetRequester provides the interface for the AddInstanceFleetRequest API operation.
+type AddInstanceFleetRequester interface {
 	AddInstanceFleetRequest(*emr.AddInstanceFleetInput) emr.AddInstanceFleetRequest
+}
 
+// AddInstanceGroupsRequester provides the interface for the AddInstanceGroupsRequest API operation.
+type AddInstanceGroupsRequester interface {
 	AddInstanceGroupsRequest(*emr.AddInstanceGroupsInput) emr.AddInstanceGroupsRequest
+}
 
+// AddJobFlowStepsRequester provides the interface for the AddJobFlowStepsRequest API operation.
+type AddJobFlowStepsRequester interface {
 	AddJobFlowStepsRequest(*emr.AddJobFlowStepsInput) emr.AddJobFlowStepsRequest
+}
 
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
 	AddTagsRequest(*emr.AddTagsInput) emr.AddTagsRequest
+}
 
+// CancelStepsRequester provides the interface for the CancelStepsRequest API operation.
+type CancelStepsRequester interface {
 	CancelStepsRequest(*emr.CancelStepsInput) emr.CancelStepsRequest
+}
 
+// CreateSecurityConfigurationRequester provides the interface for the CreateSecurityConfigurationRequest API operation.
+type CreateSecurityConfigurationRequester interface {
 	CreateSecurityConfigurationRequest(*emr.CreateSecurityConfigurationInput) emr.CreateSecurityConfigurationRequest
+}
 
+// DeleteSecurityConfigurationRequester provides the interface for the DeleteSecurityConfigurationRequest API operation.
+type DeleteSecurityConfigurationRequester interface {
 	DeleteSecurityConfigurationRequest(*emr.DeleteSecurityConfigurationInput) emr.DeleteSecurityConfigurationRequest
+}
 
+// DescribeClusterRequester provides the interface for the DescribeClusterRequest API operation.
+type DescribeClusterRequester interface {
 	DescribeClusterRequest(*emr.DescribeClusterInput) emr.DescribeClusterRequest
+}
 
+// DescribeJobFlowsRequester provides the interface for the DescribeJobFlowsRequest API operation.
+type DescribeJobFlowsRequester interface {
 	DescribeJobFlowsRequest(*emr.DescribeJobFlowsInput) emr.DescribeJobFlowsRequest
+}
 
+// DescribeSecurityConfigurationRequester provides the interface for the DescribeSecurityConfigurationRequest API operation.
+type DescribeSecurityConfigurationRequester interface {
 	DescribeSecurityConfigurationRequest(*emr.DescribeSecurityConfigurationInput) emr.DescribeSecurityConfigurationRequest
+}
 
+// DescribeStepRequester provides the interface for the DescribeStepRequest API operation.
+type DescribeStepRequester interface {
 	DescribeStepRequest(*emr.DescribeStepInput) emr.DescribeStepRequest
+}
 
+// ListBootstrapActionsRequester provides the interface for the ListBootstrapActionsRequest API operation.
+type ListBootstrapActionsRequester interface {
 	ListBootstrapActionsRequest(*emr.ListBootstrapActionsInput) emr.ListBootstrapActionsRequest
+}
 
-	ListBootstrapActionsPages(*emr.ListBootstrapActionsInput, func(*emr.ListBootstrapActionsOutput, bool) bool) error
-	ListBootstrapActionsPagesWithContext(aws.Context, *emr.ListBootstrapActionsInput, func(*emr.ListBootstrapActionsOutput, bool) bool, ...aws.Option) error
-
+// ListClustersRequester provides the interface for the ListClustersRequest API operation.
+type ListClustersRequester interface {
 	ListClustersRequest(*emr.ListClustersInput) emr.ListClustersRequest
+}
 
-	ListClustersPages(*emr.ListClustersInput, func(*emr.ListClustersOutput, bool) bool) error
-	ListClustersPagesWithContext(aws.Context, *emr.ListClustersInput, func(*emr.ListClustersOutput, bool) bool, ...aws.Option) error
-
+// ListInstanceFleetsRequester provides the interface for the ListInstanceFleetsRequest API operation.
+type ListInstanceFleetsRequester interface {
 	ListInstanceFleetsRequest(*emr.ListInstanceFleetsInput) emr.ListInstanceFleetsRequest
+}
 
-	ListInstanceFleetsPages(*emr.ListInstanceFleetsInput, func(*emr.ListInstanceFleetsOutput, bool) bool) error
-	ListInstanceFleetsPagesWithContext(aws.Context, *emr.ListInstanceFleetsInput, func(*emr.ListInstanceFleetsOutput, bool) bool, ...aws.Option) error
-
+// ListInstanceGroupsRequester provides the interface for the ListInstanceGroupsRequest API operation.
+type ListInstanceGroupsRequester interface {
 	ListInstanceGroupsRequest(*emr.ListInstanceGroupsInput) emr.ListInstanceGroupsRequest
+}
 
-	ListInstanceGroupsPages(*emr.ListInstanceGroupsInput, func(*emr.ListInstanceGroupsOutput, bool) bool) error
-	ListInstanceGroupsPagesWithContext(aws.Context, *emr.ListInstanceGroupsInput, func(*emr.ListInstanceGroupsOutput, bool) bool, ...aws.Option) error
-
+// ListInstancesRequester provides the interface for the ListInstancesRequest API operation.
+type ListInstancesRequester interface {
 	ListInstancesRequest(*emr.ListInstancesInput) emr.ListInstancesRequest
+}
 
-	ListInstancesPages(*emr.ListInstancesInput, func(*emr.ListInstancesOutput, bool) bool) error
-	ListInstancesPagesWithContext(aws.Context, *emr.ListInstancesInput, func(*emr.ListInstancesOutput, bool) bool, ...aws.Option) error
-
+// ListSecurityConfigurationsRequester provides the interface for the ListSecurityConfigurationsRequest API operation.
+type ListSecurityConfigurationsRequester interface {
 	ListSecurityConfigurationsRequest(*emr.ListSecurityConfigurationsInput) emr.ListSecurityConfigurationsRequest
+}
 
+// ListStepsRequester provides the interface for the ListStepsRequest API operation.
+type ListStepsRequester interface {
 	ListStepsRequest(*emr.ListStepsInput) emr.ListStepsRequest
+}
 
-	ListStepsPages(*emr.ListStepsInput, func(*emr.ListStepsOutput, bool) bool) error
-	ListStepsPagesWithContext(aws.Context, *emr.ListStepsInput, func(*emr.ListStepsOutput, bool) bool, ...aws.Option) error
-
+// ModifyInstanceFleetRequester provides the interface for the ModifyInstanceFleetRequest API operation.
+type ModifyInstanceFleetRequester interface {
 	ModifyInstanceFleetRequest(*emr.ModifyInstanceFleetInput) emr.ModifyInstanceFleetRequest
+}
 
+// ModifyInstanceGroupsRequester provides the interface for the ModifyInstanceGroupsRequest API operation.
+type ModifyInstanceGroupsRequester interface {
 	ModifyInstanceGroupsRequest(*emr.ModifyInstanceGroupsInput) emr.ModifyInstanceGroupsRequest
+}
 
+// PutAutoScalingPolicyRequester provides the interface for the PutAutoScalingPolicyRequest API operation.
+type PutAutoScalingPolicyRequester interface {
 	PutAutoScalingPolicyRequest(*emr.PutAutoScalingPolicyInput) emr.PutAutoScalingPolicyRequest
+}
 
+// RemoveAutoScalingPolicyRequester provides the interface for the RemoveAutoScalingPolicyRequest API operation.
+type RemoveAutoScalingPolicyRequester interface {
 	RemoveAutoScalingPolicyRequest(*emr.RemoveAutoScalingPolicyInput) emr.RemoveAutoScalingPolicyRequest
+}
 
+// RemoveTagsRequester provides the interface for the RemoveTagsRequest API operation.
+type RemoveTagsRequester interface {
 	RemoveTagsRequest(*emr.RemoveTagsInput) emr.RemoveTagsRequest
+}
 
+// RunJobFlowRequester provides the interface for the RunJobFlowRequest API operation.
+type RunJobFlowRequester interface {
 	RunJobFlowRequest(*emr.RunJobFlowInput) emr.RunJobFlowRequest
+}
 
+// SetTerminationProtectionRequester provides the interface for the SetTerminationProtectionRequest API operation.
+type SetTerminationProtectionRequester interface {
 	SetTerminationProtectionRequest(*emr.SetTerminationProtectionInput) emr.SetTerminationProtectionRequest
+}
 
+// SetVisibleToAllUsersRequester provides the interface for the SetVisibleToAllUsersRequest API operation.
+type SetVisibleToAllUsersRequester interface {
 	SetVisibleToAllUsersRequest(*emr.SetVisibleToAllUsersInput) emr.SetVisibleToAllUsersRequest
+}
 
+// TerminateJobFlowsRequester provides the interface for the TerminateJobFlowsRequest API operation.
+type TerminateJobFlowsRequester interface {
 	TerminateJobFlowsRequest(*emr.TerminateJobFlowsInput) emr.TerminateJobFlowsRequest
+}
 
+// ClusterRunningWaiter provides the interface for the WaitUntilClusterRunning waiter.
+type ClusterRunningWaiter interface {
 	WaitUntilClusterRunning(*emr.DescribeClusterInput) error
 	WaitUntilClusterRunningWithContext(aws.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
+}
 
+// ClusterTerminatedWaiter provides the interface for the WaitUntilClusterTerminated waiter.
+type ClusterTerminatedWaiter interface {
 	WaitUntilClusterTerminated(*emr.DescribeClusterInput) error
 	WaitUntilClusterTerminatedWithContext(aws.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
+}
 
+// StepCompleteWaiter provides the interface for the WaitUntilStepComplete waiter.
+type StepCompleteWaiter interface {
 	WaitUntilStepComplete(*emr.DescribeStepInput) error
 	WaitUntilStepCompleteWithContext(aws.Context, *emr.DescribeStepInput, ...aws.WaiterOption) error
 }
-
-var _ EMRAPI = (*emr.EMR)(nil)

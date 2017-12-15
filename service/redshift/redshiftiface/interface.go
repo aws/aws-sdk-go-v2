@@ -13,238 +13,341 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/redshift"
 )
 
-// RedshiftAPI provides an interface to enable mocking the
-// redshift.Redshift service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Redshift.
-//    func myFunc(svc redshiftiface.RedshiftAPI) bool {
-//        // Make svc.AuthorizeClusterSecurityGroupIngress request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := redshift.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRedshiftClient struct {
-//        redshiftiface.RedshiftAPI
-//    }
-//    func (m *mockRedshiftClient) AuthorizeClusterSecurityGroupIngress(input *redshift.AuthorizeClusterSecurityGroupIngressInput) (*redshift.AuthorizeClusterSecurityGroupIngressOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockRedshiftClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type RedshiftAPI interface {
+// AuthorizeClusterSecurityGroupIngressRequester provides the interface for the AuthorizeClusterSecurityGroupIngressRequest API operation.
+type AuthorizeClusterSecurityGroupIngressRequester interface {
 	AuthorizeClusterSecurityGroupIngressRequest(*redshift.AuthorizeClusterSecurityGroupIngressInput) redshift.AuthorizeClusterSecurityGroupIngressRequest
+}
 
+// AuthorizeSnapshotAccessRequester provides the interface for the AuthorizeSnapshotAccessRequest API operation.
+type AuthorizeSnapshotAccessRequester interface {
 	AuthorizeSnapshotAccessRequest(*redshift.AuthorizeSnapshotAccessInput) redshift.AuthorizeSnapshotAccessRequest
+}
 
+// CopyClusterSnapshotRequester provides the interface for the CopyClusterSnapshotRequest API operation.
+type CopyClusterSnapshotRequester interface {
 	CopyClusterSnapshotRequest(*redshift.CopyClusterSnapshotInput) redshift.CopyClusterSnapshotRequest
+}
 
+// CreateClusterRequester provides the interface for the CreateClusterRequest API operation.
+type CreateClusterRequester interface {
 	CreateClusterRequest(*redshift.CreateClusterInput) redshift.CreateClusterRequest
+}
 
+// CreateClusterParameterGroupRequester provides the interface for the CreateClusterParameterGroupRequest API operation.
+type CreateClusterParameterGroupRequester interface {
 	CreateClusterParameterGroupRequest(*redshift.CreateClusterParameterGroupInput) redshift.CreateClusterParameterGroupRequest
+}
 
+// CreateClusterSecurityGroupRequester provides the interface for the CreateClusterSecurityGroupRequest API operation.
+type CreateClusterSecurityGroupRequester interface {
 	CreateClusterSecurityGroupRequest(*redshift.CreateClusterSecurityGroupInput) redshift.CreateClusterSecurityGroupRequest
+}
 
+// CreateClusterSnapshotRequester provides the interface for the CreateClusterSnapshotRequest API operation.
+type CreateClusterSnapshotRequester interface {
 	CreateClusterSnapshotRequest(*redshift.CreateClusterSnapshotInput) redshift.CreateClusterSnapshotRequest
+}
 
+// CreateClusterSubnetGroupRequester provides the interface for the CreateClusterSubnetGroupRequest API operation.
+type CreateClusterSubnetGroupRequester interface {
 	CreateClusterSubnetGroupRequest(*redshift.CreateClusterSubnetGroupInput) redshift.CreateClusterSubnetGroupRequest
+}
 
+// CreateEventSubscriptionRequester provides the interface for the CreateEventSubscriptionRequest API operation.
+type CreateEventSubscriptionRequester interface {
 	CreateEventSubscriptionRequest(*redshift.CreateEventSubscriptionInput) redshift.CreateEventSubscriptionRequest
+}
 
+// CreateHsmClientCertificateRequester provides the interface for the CreateHsmClientCertificateRequest API operation.
+type CreateHsmClientCertificateRequester interface {
 	CreateHsmClientCertificateRequest(*redshift.CreateHsmClientCertificateInput) redshift.CreateHsmClientCertificateRequest
+}
 
+// CreateHsmConfigurationRequester provides the interface for the CreateHsmConfigurationRequest API operation.
+type CreateHsmConfigurationRequester interface {
 	CreateHsmConfigurationRequest(*redshift.CreateHsmConfigurationInput) redshift.CreateHsmConfigurationRequest
+}
 
+// CreateSnapshotCopyGrantRequester provides the interface for the CreateSnapshotCopyGrantRequest API operation.
+type CreateSnapshotCopyGrantRequester interface {
 	CreateSnapshotCopyGrantRequest(*redshift.CreateSnapshotCopyGrantInput) redshift.CreateSnapshotCopyGrantRequest
+}
 
+// CreateTagsRequester provides the interface for the CreateTagsRequest API operation.
+type CreateTagsRequester interface {
 	CreateTagsRequest(*redshift.CreateTagsInput) redshift.CreateTagsRequest
+}
 
+// DeleteClusterRequester provides the interface for the DeleteClusterRequest API operation.
+type DeleteClusterRequester interface {
 	DeleteClusterRequest(*redshift.DeleteClusterInput) redshift.DeleteClusterRequest
+}
 
+// DeleteClusterParameterGroupRequester provides the interface for the DeleteClusterParameterGroupRequest API operation.
+type DeleteClusterParameterGroupRequester interface {
 	DeleteClusterParameterGroupRequest(*redshift.DeleteClusterParameterGroupInput) redshift.DeleteClusterParameterGroupRequest
+}
 
+// DeleteClusterSecurityGroupRequester provides the interface for the DeleteClusterSecurityGroupRequest API operation.
+type DeleteClusterSecurityGroupRequester interface {
 	DeleteClusterSecurityGroupRequest(*redshift.DeleteClusterSecurityGroupInput) redshift.DeleteClusterSecurityGroupRequest
+}
 
+// DeleteClusterSnapshotRequester provides the interface for the DeleteClusterSnapshotRequest API operation.
+type DeleteClusterSnapshotRequester interface {
 	DeleteClusterSnapshotRequest(*redshift.DeleteClusterSnapshotInput) redshift.DeleteClusterSnapshotRequest
+}
 
+// DeleteClusterSubnetGroupRequester provides the interface for the DeleteClusterSubnetGroupRequest API operation.
+type DeleteClusterSubnetGroupRequester interface {
 	DeleteClusterSubnetGroupRequest(*redshift.DeleteClusterSubnetGroupInput) redshift.DeleteClusterSubnetGroupRequest
+}
 
+// DeleteEventSubscriptionRequester provides the interface for the DeleteEventSubscriptionRequest API operation.
+type DeleteEventSubscriptionRequester interface {
 	DeleteEventSubscriptionRequest(*redshift.DeleteEventSubscriptionInput) redshift.DeleteEventSubscriptionRequest
+}
 
+// DeleteHsmClientCertificateRequester provides the interface for the DeleteHsmClientCertificateRequest API operation.
+type DeleteHsmClientCertificateRequester interface {
 	DeleteHsmClientCertificateRequest(*redshift.DeleteHsmClientCertificateInput) redshift.DeleteHsmClientCertificateRequest
+}
 
+// DeleteHsmConfigurationRequester provides the interface for the DeleteHsmConfigurationRequest API operation.
+type DeleteHsmConfigurationRequester interface {
 	DeleteHsmConfigurationRequest(*redshift.DeleteHsmConfigurationInput) redshift.DeleteHsmConfigurationRequest
+}
 
+// DeleteSnapshotCopyGrantRequester provides the interface for the DeleteSnapshotCopyGrantRequest API operation.
+type DeleteSnapshotCopyGrantRequester interface {
 	DeleteSnapshotCopyGrantRequest(*redshift.DeleteSnapshotCopyGrantInput) redshift.DeleteSnapshotCopyGrantRequest
+}
 
+// DeleteTagsRequester provides the interface for the DeleteTagsRequest API operation.
+type DeleteTagsRequester interface {
 	DeleteTagsRequest(*redshift.DeleteTagsInput) redshift.DeleteTagsRequest
+}
 
+// DescribeClusterParameterGroupsRequester provides the interface for the DescribeClusterParameterGroupsRequest API operation.
+type DescribeClusterParameterGroupsRequester interface {
 	DescribeClusterParameterGroupsRequest(*redshift.DescribeClusterParameterGroupsInput) redshift.DescribeClusterParameterGroupsRequest
+}
 
-	DescribeClusterParameterGroupsPages(*redshift.DescribeClusterParameterGroupsInput, func(*redshift.DescribeClusterParameterGroupsOutput, bool) bool) error
-	DescribeClusterParameterGroupsPagesWithContext(aws.Context, *redshift.DescribeClusterParameterGroupsInput, func(*redshift.DescribeClusterParameterGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeClusterParametersRequester provides the interface for the DescribeClusterParametersRequest API operation.
+type DescribeClusterParametersRequester interface {
 	DescribeClusterParametersRequest(*redshift.DescribeClusterParametersInput) redshift.DescribeClusterParametersRequest
+}
 
-	DescribeClusterParametersPages(*redshift.DescribeClusterParametersInput, func(*redshift.DescribeClusterParametersOutput, bool) bool) error
-	DescribeClusterParametersPagesWithContext(aws.Context, *redshift.DescribeClusterParametersInput, func(*redshift.DescribeClusterParametersOutput, bool) bool, ...aws.Option) error
-
+// DescribeClusterSecurityGroupsRequester provides the interface for the DescribeClusterSecurityGroupsRequest API operation.
+type DescribeClusterSecurityGroupsRequester interface {
 	DescribeClusterSecurityGroupsRequest(*redshift.DescribeClusterSecurityGroupsInput) redshift.DescribeClusterSecurityGroupsRequest
+}
 
-	DescribeClusterSecurityGroupsPages(*redshift.DescribeClusterSecurityGroupsInput, func(*redshift.DescribeClusterSecurityGroupsOutput, bool) bool) error
-	DescribeClusterSecurityGroupsPagesWithContext(aws.Context, *redshift.DescribeClusterSecurityGroupsInput, func(*redshift.DescribeClusterSecurityGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeClusterSnapshotsRequester provides the interface for the DescribeClusterSnapshotsRequest API operation.
+type DescribeClusterSnapshotsRequester interface {
 	DescribeClusterSnapshotsRequest(*redshift.DescribeClusterSnapshotsInput) redshift.DescribeClusterSnapshotsRequest
+}
 
-	DescribeClusterSnapshotsPages(*redshift.DescribeClusterSnapshotsInput, func(*redshift.DescribeClusterSnapshotsOutput, bool) bool) error
-	DescribeClusterSnapshotsPagesWithContext(aws.Context, *redshift.DescribeClusterSnapshotsInput, func(*redshift.DescribeClusterSnapshotsOutput, bool) bool, ...aws.Option) error
-
+// DescribeClusterSubnetGroupsRequester provides the interface for the DescribeClusterSubnetGroupsRequest API operation.
+type DescribeClusterSubnetGroupsRequester interface {
 	DescribeClusterSubnetGroupsRequest(*redshift.DescribeClusterSubnetGroupsInput) redshift.DescribeClusterSubnetGroupsRequest
+}
 
-	DescribeClusterSubnetGroupsPages(*redshift.DescribeClusterSubnetGroupsInput, func(*redshift.DescribeClusterSubnetGroupsOutput, bool) bool) error
-	DescribeClusterSubnetGroupsPagesWithContext(aws.Context, *redshift.DescribeClusterSubnetGroupsInput, func(*redshift.DescribeClusterSubnetGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeClusterVersionsRequester provides the interface for the DescribeClusterVersionsRequest API operation.
+type DescribeClusterVersionsRequester interface {
 	DescribeClusterVersionsRequest(*redshift.DescribeClusterVersionsInput) redshift.DescribeClusterVersionsRequest
+}
 
-	DescribeClusterVersionsPages(*redshift.DescribeClusterVersionsInput, func(*redshift.DescribeClusterVersionsOutput, bool) bool) error
-	DescribeClusterVersionsPagesWithContext(aws.Context, *redshift.DescribeClusterVersionsInput, func(*redshift.DescribeClusterVersionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeClustersRequester provides the interface for the DescribeClustersRequest API operation.
+type DescribeClustersRequester interface {
 	DescribeClustersRequest(*redshift.DescribeClustersInput) redshift.DescribeClustersRequest
+}
 
-	DescribeClustersPages(*redshift.DescribeClustersInput, func(*redshift.DescribeClustersOutput, bool) bool) error
-	DescribeClustersPagesWithContext(aws.Context, *redshift.DescribeClustersInput, func(*redshift.DescribeClustersOutput, bool) bool, ...aws.Option) error
-
+// DescribeDefaultClusterParametersRequester provides the interface for the DescribeDefaultClusterParametersRequest API operation.
+type DescribeDefaultClusterParametersRequester interface {
 	DescribeDefaultClusterParametersRequest(*redshift.DescribeDefaultClusterParametersInput) redshift.DescribeDefaultClusterParametersRequest
+}
 
-	DescribeDefaultClusterParametersPages(*redshift.DescribeDefaultClusterParametersInput, func(*redshift.DescribeDefaultClusterParametersOutput, bool) bool) error
-	DescribeDefaultClusterParametersPagesWithContext(aws.Context, *redshift.DescribeDefaultClusterParametersInput, func(*redshift.DescribeDefaultClusterParametersOutput, bool) bool, ...aws.Option) error
-
+// DescribeEventCategoriesRequester provides the interface for the DescribeEventCategoriesRequest API operation.
+type DescribeEventCategoriesRequester interface {
 	DescribeEventCategoriesRequest(*redshift.DescribeEventCategoriesInput) redshift.DescribeEventCategoriesRequest
+}
 
+// DescribeEventSubscriptionsRequester provides the interface for the DescribeEventSubscriptionsRequest API operation.
+type DescribeEventSubscriptionsRequester interface {
 	DescribeEventSubscriptionsRequest(*redshift.DescribeEventSubscriptionsInput) redshift.DescribeEventSubscriptionsRequest
+}
 
-	DescribeEventSubscriptionsPages(*redshift.DescribeEventSubscriptionsInput, func(*redshift.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *redshift.DescribeEventSubscriptionsInput, func(*redshift.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
 	DescribeEventsRequest(*redshift.DescribeEventsInput) redshift.DescribeEventsRequest
+}
 
-	DescribeEventsPages(*redshift.DescribeEventsInput, func(*redshift.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *redshift.DescribeEventsInput, func(*redshift.DescribeEventsOutput, bool) bool, ...aws.Option) error
-
+// DescribeHsmClientCertificatesRequester provides the interface for the DescribeHsmClientCertificatesRequest API operation.
+type DescribeHsmClientCertificatesRequester interface {
 	DescribeHsmClientCertificatesRequest(*redshift.DescribeHsmClientCertificatesInput) redshift.DescribeHsmClientCertificatesRequest
+}
 
-	DescribeHsmClientCertificatesPages(*redshift.DescribeHsmClientCertificatesInput, func(*redshift.DescribeHsmClientCertificatesOutput, bool) bool) error
-	DescribeHsmClientCertificatesPagesWithContext(aws.Context, *redshift.DescribeHsmClientCertificatesInput, func(*redshift.DescribeHsmClientCertificatesOutput, bool) bool, ...aws.Option) error
-
+// DescribeHsmConfigurationsRequester provides the interface for the DescribeHsmConfigurationsRequest API operation.
+type DescribeHsmConfigurationsRequester interface {
 	DescribeHsmConfigurationsRequest(*redshift.DescribeHsmConfigurationsInput) redshift.DescribeHsmConfigurationsRequest
+}
 
-	DescribeHsmConfigurationsPages(*redshift.DescribeHsmConfigurationsInput, func(*redshift.DescribeHsmConfigurationsOutput, bool) bool) error
-	DescribeHsmConfigurationsPagesWithContext(aws.Context, *redshift.DescribeHsmConfigurationsInput, func(*redshift.DescribeHsmConfigurationsOutput, bool) bool, ...aws.Option) error
-
+// DescribeLoggingStatusRequester provides the interface for the DescribeLoggingStatusRequest API operation.
+type DescribeLoggingStatusRequester interface {
 	DescribeLoggingStatusRequest(*redshift.DescribeLoggingStatusInput) redshift.DescribeLoggingStatusRequest
+}
 
+// DescribeOrderableClusterOptionsRequester provides the interface for the DescribeOrderableClusterOptionsRequest API operation.
+type DescribeOrderableClusterOptionsRequester interface {
 	DescribeOrderableClusterOptionsRequest(*redshift.DescribeOrderableClusterOptionsInput) redshift.DescribeOrderableClusterOptionsRequest
+}
 
-	DescribeOrderableClusterOptionsPages(*redshift.DescribeOrderableClusterOptionsInput, func(*redshift.DescribeOrderableClusterOptionsOutput, bool) bool) error
-	DescribeOrderableClusterOptionsPagesWithContext(aws.Context, *redshift.DescribeOrderableClusterOptionsInput, func(*redshift.DescribeOrderableClusterOptionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeReservedNodeOfferingsRequester provides the interface for the DescribeReservedNodeOfferingsRequest API operation.
+type DescribeReservedNodeOfferingsRequester interface {
 	DescribeReservedNodeOfferingsRequest(*redshift.DescribeReservedNodeOfferingsInput) redshift.DescribeReservedNodeOfferingsRequest
+}
 
-	DescribeReservedNodeOfferingsPages(*redshift.DescribeReservedNodeOfferingsInput, func(*redshift.DescribeReservedNodeOfferingsOutput, bool) bool) error
-	DescribeReservedNodeOfferingsPagesWithContext(aws.Context, *redshift.DescribeReservedNodeOfferingsInput, func(*redshift.DescribeReservedNodeOfferingsOutput, bool) bool, ...aws.Option) error
-
+// DescribeReservedNodesRequester provides the interface for the DescribeReservedNodesRequest API operation.
+type DescribeReservedNodesRequester interface {
 	DescribeReservedNodesRequest(*redshift.DescribeReservedNodesInput) redshift.DescribeReservedNodesRequest
+}
 
-	DescribeReservedNodesPages(*redshift.DescribeReservedNodesInput, func(*redshift.DescribeReservedNodesOutput, bool) bool) error
-	DescribeReservedNodesPagesWithContext(aws.Context, *redshift.DescribeReservedNodesInput, func(*redshift.DescribeReservedNodesOutput, bool) bool, ...aws.Option) error
-
+// DescribeResizeRequester provides the interface for the DescribeResizeRequest API operation.
+type DescribeResizeRequester interface {
 	DescribeResizeRequest(*redshift.DescribeResizeInput) redshift.DescribeResizeRequest
+}
 
+// DescribeSnapshotCopyGrantsRequester provides the interface for the DescribeSnapshotCopyGrantsRequest API operation.
+type DescribeSnapshotCopyGrantsRequester interface {
 	DescribeSnapshotCopyGrantsRequest(*redshift.DescribeSnapshotCopyGrantsInput) redshift.DescribeSnapshotCopyGrantsRequest
+}
 
+// DescribeTableRestoreStatusRequester provides the interface for the DescribeTableRestoreStatusRequest API operation.
+type DescribeTableRestoreStatusRequester interface {
 	DescribeTableRestoreStatusRequest(*redshift.DescribeTableRestoreStatusInput) redshift.DescribeTableRestoreStatusRequest
+}
 
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
 	DescribeTagsRequest(*redshift.DescribeTagsInput) redshift.DescribeTagsRequest
+}
 
+// DisableLoggingRequester provides the interface for the DisableLoggingRequest API operation.
+type DisableLoggingRequester interface {
 	DisableLoggingRequest(*redshift.DisableLoggingInput) redshift.DisableLoggingRequest
+}
 
+// DisableSnapshotCopyRequester provides the interface for the DisableSnapshotCopyRequest API operation.
+type DisableSnapshotCopyRequester interface {
 	DisableSnapshotCopyRequest(*redshift.DisableSnapshotCopyInput) redshift.DisableSnapshotCopyRequest
+}
 
+// EnableLoggingRequester provides the interface for the EnableLoggingRequest API operation.
+type EnableLoggingRequester interface {
 	EnableLoggingRequest(*redshift.EnableLoggingInput) redshift.EnableLoggingRequest
+}
 
+// EnableSnapshotCopyRequester provides the interface for the EnableSnapshotCopyRequest API operation.
+type EnableSnapshotCopyRequester interface {
 	EnableSnapshotCopyRequest(*redshift.EnableSnapshotCopyInput) redshift.EnableSnapshotCopyRequest
+}
 
+// GetClusterCredentialsRequester provides the interface for the GetClusterCredentialsRequest API operation.
+type GetClusterCredentialsRequester interface {
 	GetClusterCredentialsRequest(*redshift.GetClusterCredentialsInput) redshift.GetClusterCredentialsRequest
+}
 
+// ModifyClusterRequester provides the interface for the ModifyClusterRequest API operation.
+type ModifyClusterRequester interface {
 	ModifyClusterRequest(*redshift.ModifyClusterInput) redshift.ModifyClusterRequest
+}
 
+// ModifyClusterIamRolesRequester provides the interface for the ModifyClusterIamRolesRequest API operation.
+type ModifyClusterIamRolesRequester interface {
 	ModifyClusterIamRolesRequest(*redshift.ModifyClusterIamRolesInput) redshift.ModifyClusterIamRolesRequest
+}
 
+// ModifyClusterParameterGroupRequester provides the interface for the ModifyClusterParameterGroupRequest API operation.
+type ModifyClusterParameterGroupRequester interface {
 	ModifyClusterParameterGroupRequest(*redshift.ModifyClusterParameterGroupInput) redshift.ModifyClusterParameterGroupRequest
+}
 
+// ModifyClusterSubnetGroupRequester provides the interface for the ModifyClusterSubnetGroupRequest API operation.
+type ModifyClusterSubnetGroupRequester interface {
 	ModifyClusterSubnetGroupRequest(*redshift.ModifyClusterSubnetGroupInput) redshift.ModifyClusterSubnetGroupRequest
+}
 
+// ModifyEventSubscriptionRequester provides the interface for the ModifyEventSubscriptionRequest API operation.
+type ModifyEventSubscriptionRequester interface {
 	ModifyEventSubscriptionRequest(*redshift.ModifyEventSubscriptionInput) redshift.ModifyEventSubscriptionRequest
+}
 
+// ModifySnapshotCopyRetentionPeriodRequester provides the interface for the ModifySnapshotCopyRetentionPeriodRequest API operation.
+type ModifySnapshotCopyRetentionPeriodRequester interface {
 	ModifySnapshotCopyRetentionPeriodRequest(*redshift.ModifySnapshotCopyRetentionPeriodInput) redshift.ModifySnapshotCopyRetentionPeriodRequest
+}
 
+// PurchaseReservedNodeOfferingRequester provides the interface for the PurchaseReservedNodeOfferingRequest API operation.
+type PurchaseReservedNodeOfferingRequester interface {
 	PurchaseReservedNodeOfferingRequest(*redshift.PurchaseReservedNodeOfferingInput) redshift.PurchaseReservedNodeOfferingRequest
+}
 
+// RebootClusterRequester provides the interface for the RebootClusterRequest API operation.
+type RebootClusterRequester interface {
 	RebootClusterRequest(*redshift.RebootClusterInput) redshift.RebootClusterRequest
+}
 
+// ResetClusterParameterGroupRequester provides the interface for the ResetClusterParameterGroupRequest API operation.
+type ResetClusterParameterGroupRequester interface {
 	ResetClusterParameterGroupRequest(*redshift.ResetClusterParameterGroupInput) redshift.ResetClusterParameterGroupRequest
+}
 
+// RestoreFromClusterSnapshotRequester provides the interface for the RestoreFromClusterSnapshotRequest API operation.
+type RestoreFromClusterSnapshotRequester interface {
 	RestoreFromClusterSnapshotRequest(*redshift.RestoreFromClusterSnapshotInput) redshift.RestoreFromClusterSnapshotRequest
+}
 
+// RestoreTableFromClusterSnapshotRequester provides the interface for the RestoreTableFromClusterSnapshotRequest API operation.
+type RestoreTableFromClusterSnapshotRequester interface {
 	RestoreTableFromClusterSnapshotRequest(*redshift.RestoreTableFromClusterSnapshotInput) redshift.RestoreTableFromClusterSnapshotRequest
+}
 
+// RevokeClusterSecurityGroupIngressRequester provides the interface for the RevokeClusterSecurityGroupIngressRequest API operation.
+type RevokeClusterSecurityGroupIngressRequester interface {
 	RevokeClusterSecurityGroupIngressRequest(*redshift.RevokeClusterSecurityGroupIngressInput) redshift.RevokeClusterSecurityGroupIngressRequest
+}
 
+// RevokeSnapshotAccessRequester provides the interface for the RevokeSnapshotAccessRequest API operation.
+type RevokeSnapshotAccessRequester interface {
 	RevokeSnapshotAccessRequest(*redshift.RevokeSnapshotAccessInput) redshift.RevokeSnapshotAccessRequest
+}
 
+// RotateEncryptionKeyRequester provides the interface for the RotateEncryptionKeyRequest API operation.
+type RotateEncryptionKeyRequester interface {
 	RotateEncryptionKeyRequest(*redshift.RotateEncryptionKeyInput) redshift.RotateEncryptionKeyRequest
+}
 
+// ClusterAvailableWaiter provides the interface for the WaitUntilClusterAvailable waiter.
+type ClusterAvailableWaiter interface {
 	WaitUntilClusterAvailable(*redshift.DescribeClustersInput) error
 	WaitUntilClusterAvailableWithContext(aws.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+}
 
+// ClusterDeletedWaiter provides the interface for the WaitUntilClusterDeleted waiter.
+type ClusterDeletedWaiter interface {
 	WaitUntilClusterDeleted(*redshift.DescribeClustersInput) error
 	WaitUntilClusterDeletedWithContext(aws.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+}
 
+// ClusterRestoredWaiter provides the interface for the WaitUntilClusterRestored waiter.
+type ClusterRestoredWaiter interface {
 	WaitUntilClusterRestored(*redshift.DescribeClustersInput) error
 	WaitUntilClusterRestoredWithContext(aws.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+}
 
+// SnapshotAvailableWaiter provides the interface for the WaitUntilSnapshotAvailable waiter.
+type SnapshotAvailableWaiter interface {
 	WaitUntilSnapshotAvailable(*redshift.DescribeClusterSnapshotsInput) error
 	WaitUntilSnapshotAvailableWithContext(aws.Context, *redshift.DescribeClusterSnapshotsInput, ...aws.WaiterOption) error
 }
-
-var _ RedshiftAPI = (*redshift.Redshift)(nil)

@@ -13,138 +13,202 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
 )
 
-// DirectoryServiceAPI provides an interface to enable mocking the
-// directoryservice.DirectoryService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Directory Service.
-//    func myFunc(svc directoryserviceiface.DirectoryServiceAPI) bool {
-//        // Make svc.AddIpRoutes request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := directoryservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDirectoryServiceClient struct {
-//        directoryserviceiface.DirectoryServiceAPI
-//    }
-//    func (m *mockDirectoryServiceClient) AddIpRoutes(input *directoryservice.AddIpRoutesInput) (*directoryservice.AddIpRoutesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDirectoryServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DirectoryServiceAPI interface {
+// AddIpRoutesRequester provides the interface for the AddIpRoutesRequest API operation.
+type AddIpRoutesRequester interface {
 	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) directoryservice.AddIpRoutesRequest
-
-	AddTagsToResourceRequest(*directoryservice.AddTagsToResourceInput) directoryservice.AddTagsToResourceRequest
-
-	CancelSchemaExtensionRequest(*directoryservice.CancelSchemaExtensionInput) directoryservice.CancelSchemaExtensionRequest
-
-	ConnectDirectoryRequest(*directoryservice.ConnectDirectoryInput) directoryservice.ConnectDirectoryRequest
-
-	CreateAliasRequest(*directoryservice.CreateAliasInput) directoryservice.CreateAliasRequest
-
-	CreateComputerRequest(*directoryservice.CreateComputerInput) directoryservice.CreateComputerRequest
-
-	CreateConditionalForwarderRequest(*directoryservice.CreateConditionalForwarderInput) directoryservice.CreateConditionalForwarderRequest
-
-	CreateDirectoryRequest(*directoryservice.CreateDirectoryInput) directoryservice.CreateDirectoryRequest
-
-	CreateMicrosoftADRequest(*directoryservice.CreateMicrosoftADInput) directoryservice.CreateMicrosoftADRequest
-
-	CreateSnapshotRequest(*directoryservice.CreateSnapshotInput) directoryservice.CreateSnapshotRequest
-
-	CreateTrustRequest(*directoryservice.CreateTrustInput) directoryservice.CreateTrustRequest
-
-	DeleteConditionalForwarderRequest(*directoryservice.DeleteConditionalForwarderInput) directoryservice.DeleteConditionalForwarderRequest
-
-	DeleteDirectoryRequest(*directoryservice.DeleteDirectoryInput) directoryservice.DeleteDirectoryRequest
-
-	DeleteSnapshotRequest(*directoryservice.DeleteSnapshotInput) directoryservice.DeleteSnapshotRequest
-
-	DeleteTrustRequest(*directoryservice.DeleteTrustInput) directoryservice.DeleteTrustRequest
-
-	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) directoryservice.DeregisterEventTopicRequest
-
-	DescribeConditionalForwardersRequest(*directoryservice.DescribeConditionalForwardersInput) directoryservice.DescribeConditionalForwardersRequest
-
-	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) directoryservice.DescribeDirectoriesRequest
-
-	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
-
-	DescribeDomainControllersPages(*directoryservice.DescribeDomainControllersInput, func(*directoryservice.DescribeDomainControllersOutput, bool) bool) error
-	DescribeDomainControllersPagesWithContext(aws.Context, *directoryservice.DescribeDomainControllersInput, func(*directoryservice.DescribeDomainControllersOutput, bool) bool, ...aws.Option) error
-
-	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
-
-	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
-
-	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) directoryservice.DescribeTrustsRequest
-
-	DisableRadiusRequest(*directoryservice.DisableRadiusInput) directoryservice.DisableRadiusRequest
-
-	DisableSsoRequest(*directoryservice.DisableSsoInput) directoryservice.DisableSsoRequest
-
-	EnableRadiusRequest(*directoryservice.EnableRadiusInput) directoryservice.EnableRadiusRequest
-
-	EnableSsoRequest(*directoryservice.EnableSsoInput) directoryservice.EnableSsoRequest
-
-	GetDirectoryLimitsRequest(*directoryservice.GetDirectoryLimitsInput) directoryservice.GetDirectoryLimitsRequest
-
-	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) directoryservice.GetSnapshotLimitsRequest
-
-	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
-
-	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
-
-	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
-
-	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
-
-	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) directoryservice.RemoveIpRoutesRequest
-
-	RemoveTagsFromResourceRequest(*directoryservice.RemoveTagsFromResourceInput) directoryservice.RemoveTagsFromResourceRequest
-
-	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
-
-	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest
-
-	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) directoryservice.UpdateConditionalForwarderRequest
-
-	UpdateNumberOfDomainControllersRequest(*directoryservice.UpdateNumberOfDomainControllersInput) directoryservice.UpdateNumberOfDomainControllersRequest
-
-	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) directoryservice.UpdateRadiusRequest
-
-	VerifyTrustRequest(*directoryservice.VerifyTrustInput) directoryservice.VerifyTrustRequest
 }
 
-var _ DirectoryServiceAPI = (*directoryservice.DirectoryService)(nil)
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
+	AddTagsToResourceRequest(*directoryservice.AddTagsToResourceInput) directoryservice.AddTagsToResourceRequest
+}
+
+// CancelSchemaExtensionRequester provides the interface for the CancelSchemaExtensionRequest API operation.
+type CancelSchemaExtensionRequester interface {
+	CancelSchemaExtensionRequest(*directoryservice.CancelSchemaExtensionInput) directoryservice.CancelSchemaExtensionRequest
+}
+
+// ConnectDirectoryRequester provides the interface for the ConnectDirectoryRequest API operation.
+type ConnectDirectoryRequester interface {
+	ConnectDirectoryRequest(*directoryservice.ConnectDirectoryInput) directoryservice.ConnectDirectoryRequest
+}
+
+// CreateAliasRequester provides the interface for the CreateAliasRequest API operation.
+type CreateAliasRequester interface {
+	CreateAliasRequest(*directoryservice.CreateAliasInput) directoryservice.CreateAliasRequest
+}
+
+// CreateComputerRequester provides the interface for the CreateComputerRequest API operation.
+type CreateComputerRequester interface {
+	CreateComputerRequest(*directoryservice.CreateComputerInput) directoryservice.CreateComputerRequest
+}
+
+// CreateConditionalForwarderRequester provides the interface for the CreateConditionalForwarderRequest API operation.
+type CreateConditionalForwarderRequester interface {
+	CreateConditionalForwarderRequest(*directoryservice.CreateConditionalForwarderInput) directoryservice.CreateConditionalForwarderRequest
+}
+
+// CreateDirectoryRequester provides the interface for the CreateDirectoryRequest API operation.
+type CreateDirectoryRequester interface {
+	CreateDirectoryRequest(*directoryservice.CreateDirectoryInput) directoryservice.CreateDirectoryRequest
+}
+
+// CreateMicrosoftADRequester provides the interface for the CreateMicrosoftADRequest API operation.
+type CreateMicrosoftADRequester interface {
+	CreateMicrosoftADRequest(*directoryservice.CreateMicrosoftADInput) directoryservice.CreateMicrosoftADRequest
+}
+
+// CreateSnapshotRequester provides the interface for the CreateSnapshotRequest API operation.
+type CreateSnapshotRequester interface {
+	CreateSnapshotRequest(*directoryservice.CreateSnapshotInput) directoryservice.CreateSnapshotRequest
+}
+
+// CreateTrustRequester provides the interface for the CreateTrustRequest API operation.
+type CreateTrustRequester interface {
+	CreateTrustRequest(*directoryservice.CreateTrustInput) directoryservice.CreateTrustRequest
+}
+
+// DeleteConditionalForwarderRequester provides the interface for the DeleteConditionalForwarderRequest API operation.
+type DeleteConditionalForwarderRequester interface {
+	DeleteConditionalForwarderRequest(*directoryservice.DeleteConditionalForwarderInput) directoryservice.DeleteConditionalForwarderRequest
+}
+
+// DeleteDirectoryRequester provides the interface for the DeleteDirectoryRequest API operation.
+type DeleteDirectoryRequester interface {
+	DeleteDirectoryRequest(*directoryservice.DeleteDirectoryInput) directoryservice.DeleteDirectoryRequest
+}
+
+// DeleteSnapshotRequester provides the interface for the DeleteSnapshotRequest API operation.
+type DeleteSnapshotRequester interface {
+	DeleteSnapshotRequest(*directoryservice.DeleteSnapshotInput) directoryservice.DeleteSnapshotRequest
+}
+
+// DeleteTrustRequester provides the interface for the DeleteTrustRequest API operation.
+type DeleteTrustRequester interface {
+	DeleteTrustRequest(*directoryservice.DeleteTrustInput) directoryservice.DeleteTrustRequest
+}
+
+// DeregisterEventTopicRequester provides the interface for the DeregisterEventTopicRequest API operation.
+type DeregisterEventTopicRequester interface {
+	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) directoryservice.DeregisterEventTopicRequest
+}
+
+// DescribeConditionalForwardersRequester provides the interface for the DescribeConditionalForwardersRequest API operation.
+type DescribeConditionalForwardersRequester interface {
+	DescribeConditionalForwardersRequest(*directoryservice.DescribeConditionalForwardersInput) directoryservice.DescribeConditionalForwardersRequest
+}
+
+// DescribeDirectoriesRequester provides the interface for the DescribeDirectoriesRequest API operation.
+type DescribeDirectoriesRequester interface {
+	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) directoryservice.DescribeDirectoriesRequest
+}
+
+// DescribeDomainControllersRequester provides the interface for the DescribeDomainControllersRequest API operation.
+type DescribeDomainControllersRequester interface {
+	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
+}
+
+// DescribeEventTopicsRequester provides the interface for the DescribeEventTopicsRequest API operation.
+type DescribeEventTopicsRequester interface {
+	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
+}
+
+// DescribeSnapshotsRequester provides the interface for the DescribeSnapshotsRequest API operation.
+type DescribeSnapshotsRequester interface {
+	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
+}
+
+// DescribeTrustsRequester provides the interface for the DescribeTrustsRequest API operation.
+type DescribeTrustsRequester interface {
+	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) directoryservice.DescribeTrustsRequest
+}
+
+// DisableRadiusRequester provides the interface for the DisableRadiusRequest API operation.
+type DisableRadiusRequester interface {
+	DisableRadiusRequest(*directoryservice.DisableRadiusInput) directoryservice.DisableRadiusRequest
+}
+
+// DisableSsoRequester provides the interface for the DisableSsoRequest API operation.
+type DisableSsoRequester interface {
+	DisableSsoRequest(*directoryservice.DisableSsoInput) directoryservice.DisableSsoRequest
+}
+
+// EnableRadiusRequester provides the interface for the EnableRadiusRequest API operation.
+type EnableRadiusRequester interface {
+	EnableRadiusRequest(*directoryservice.EnableRadiusInput) directoryservice.EnableRadiusRequest
+}
+
+// EnableSsoRequester provides the interface for the EnableSsoRequest API operation.
+type EnableSsoRequester interface {
+	EnableSsoRequest(*directoryservice.EnableSsoInput) directoryservice.EnableSsoRequest
+}
+
+// GetDirectoryLimitsRequester provides the interface for the GetDirectoryLimitsRequest API operation.
+type GetDirectoryLimitsRequester interface {
+	GetDirectoryLimitsRequest(*directoryservice.GetDirectoryLimitsInput) directoryservice.GetDirectoryLimitsRequest
+}
+
+// GetSnapshotLimitsRequester provides the interface for the GetSnapshotLimitsRequest API operation.
+type GetSnapshotLimitsRequester interface {
+	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) directoryservice.GetSnapshotLimitsRequest
+}
+
+// ListIpRoutesRequester provides the interface for the ListIpRoutesRequest API operation.
+type ListIpRoutesRequester interface {
+	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
+}
+
+// ListSchemaExtensionsRequester provides the interface for the ListSchemaExtensionsRequest API operation.
+type ListSchemaExtensionsRequester interface {
+	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
+}
+
+// RegisterEventTopicRequester provides the interface for the RegisterEventTopicRequest API operation.
+type RegisterEventTopicRequester interface {
+	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
+}
+
+// RemoveIpRoutesRequester provides the interface for the RemoveIpRoutesRequest API operation.
+type RemoveIpRoutesRequester interface {
+	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) directoryservice.RemoveIpRoutesRequest
+}
+
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
+	RemoveTagsFromResourceRequest(*directoryservice.RemoveTagsFromResourceInput) directoryservice.RemoveTagsFromResourceRequest
+}
+
+// RestoreFromSnapshotRequester provides the interface for the RestoreFromSnapshotRequest API operation.
+type RestoreFromSnapshotRequester interface {
+	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
+}
+
+// StartSchemaExtensionRequester provides the interface for the StartSchemaExtensionRequest API operation.
+type StartSchemaExtensionRequester interface {
+	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest
+}
+
+// UpdateConditionalForwarderRequester provides the interface for the UpdateConditionalForwarderRequest API operation.
+type UpdateConditionalForwarderRequester interface {
+	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) directoryservice.UpdateConditionalForwarderRequest
+}
+
+// UpdateNumberOfDomainControllersRequester provides the interface for the UpdateNumberOfDomainControllersRequest API operation.
+type UpdateNumberOfDomainControllersRequester interface {
+	UpdateNumberOfDomainControllersRequest(*directoryservice.UpdateNumberOfDomainControllersInput) directoryservice.UpdateNumberOfDomainControllersRequest
+}
+
+// UpdateRadiusRequester provides the interface for the UpdateRadiusRequest API operation.
+type UpdateRadiusRequester interface {
+	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) directoryservice.UpdateRadiusRequest
+}
+
+// VerifyTrustRequester provides the interface for the VerifyTrustRequest API operation.
+type VerifyTrustRequester interface {
+	VerifyTrustRequest(*directoryservice.VerifyTrustInput) directoryservice.VerifyTrustRequest
+}

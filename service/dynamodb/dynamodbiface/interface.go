@@ -13,111 +13,109 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
-// DynamoDBAPI provides an interface to enable mocking the
-// dynamodb.DynamoDB service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon DynamoDB.
-//    func myFunc(svc dynamodbiface.DynamoDBAPI) bool {
-//        // Make svc.BatchGetItem request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := dynamodb.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDynamoDBClient struct {
-//        dynamodbiface.DynamoDBAPI
-//    }
-//    func (m *mockDynamoDBClient) BatchGetItem(input *dynamodb.BatchGetItemInput) (*dynamodb.BatchGetItemOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDynamoDBClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DynamoDBAPI interface {
+// BatchGetItemRequester provides the interface for the BatchGetItemRequest API operation.
+type BatchGetItemRequester interface {
 	BatchGetItemRequest(*dynamodb.BatchGetItemInput) dynamodb.BatchGetItemRequest
+}
 
-	BatchGetItemPages(*dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool) error
-	BatchGetItemPagesWithContext(aws.Context, *dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool, ...aws.Option) error
-
+// BatchWriteItemRequester provides the interface for the BatchWriteItemRequest API operation.
+type BatchWriteItemRequester interface {
 	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) dynamodb.BatchWriteItemRequest
+}
 
+// CreateTableRequester provides the interface for the CreateTableRequest API operation.
+type CreateTableRequester interface {
 	CreateTableRequest(*dynamodb.CreateTableInput) dynamodb.CreateTableRequest
+}
 
+// DeleteItemRequester provides the interface for the DeleteItemRequest API operation.
+type DeleteItemRequester interface {
 	DeleteItemRequest(*dynamodb.DeleteItemInput) dynamodb.DeleteItemRequest
+}
 
+// DeleteTableRequester provides the interface for the DeleteTableRequest API operation.
+type DeleteTableRequester interface {
 	DeleteTableRequest(*dynamodb.DeleteTableInput) dynamodb.DeleteTableRequest
+}
 
+// DescribeLimitsRequester provides the interface for the DescribeLimitsRequest API operation.
+type DescribeLimitsRequester interface {
 	DescribeLimitsRequest(*dynamodb.DescribeLimitsInput) dynamodb.DescribeLimitsRequest
+}
 
+// DescribeTableRequester provides the interface for the DescribeTableRequest API operation.
+type DescribeTableRequester interface {
 	DescribeTableRequest(*dynamodb.DescribeTableInput) dynamodb.DescribeTableRequest
+}
 
+// DescribeTimeToLiveRequester provides the interface for the DescribeTimeToLiveRequest API operation.
+type DescribeTimeToLiveRequester interface {
 	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) dynamodb.DescribeTimeToLiveRequest
+}
 
+// GetItemRequester provides the interface for the GetItemRequest API operation.
+type GetItemRequester interface {
 	GetItemRequest(*dynamodb.GetItemInput) dynamodb.GetItemRequest
+}
 
+// ListTablesRequester provides the interface for the ListTablesRequest API operation.
+type ListTablesRequester interface {
 	ListTablesRequest(*dynamodb.ListTablesInput) dynamodb.ListTablesRequest
+}
 
-	ListTablesPages(*dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool) error
-	ListTablesPagesWithContext(aws.Context, *dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool, ...aws.Option) error
-
+// ListTagsOfResourceRequester provides the interface for the ListTagsOfResourceRequest API operation.
+type ListTagsOfResourceRequester interface {
 	ListTagsOfResourceRequest(*dynamodb.ListTagsOfResourceInput) dynamodb.ListTagsOfResourceRequest
+}
 
+// PutItemRequester provides the interface for the PutItemRequest API operation.
+type PutItemRequester interface {
 	PutItemRequest(*dynamodb.PutItemInput) dynamodb.PutItemRequest
+}
 
+// QueryRequester provides the interface for the QueryRequest API operation.
+type QueryRequester interface {
 	QueryRequest(*dynamodb.QueryInput) dynamodb.QueryRequest
+}
 
-	QueryPages(*dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool) error
-	QueryPagesWithContext(aws.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...aws.Option) error
-
+// ScanRequester provides the interface for the ScanRequest API operation.
+type ScanRequester interface {
 	ScanRequest(*dynamodb.ScanInput) dynamodb.ScanRequest
+}
 
-	ScanPages(*dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool) error
-	ScanPagesWithContext(aws.Context, *dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool, ...aws.Option) error
-
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
 	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
+}
 
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
 	UntagResourceRequest(*dynamodb.UntagResourceInput) dynamodb.UntagResourceRequest
+}
 
+// UpdateItemRequester provides the interface for the UpdateItemRequest API operation.
+type UpdateItemRequester interface {
 	UpdateItemRequest(*dynamodb.UpdateItemInput) dynamodb.UpdateItemRequest
+}
 
+// UpdateTableRequester provides the interface for the UpdateTableRequest API operation.
+type UpdateTableRequester interface {
 	UpdateTableRequest(*dynamodb.UpdateTableInput) dynamodb.UpdateTableRequest
+}
 
+// UpdateTimeToLiveRequester provides the interface for the UpdateTimeToLiveRequest API operation.
+type UpdateTimeToLiveRequester interface {
 	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) dynamodb.UpdateTimeToLiveRequest
+}
 
+// TableExistsWaiter provides the interface for the WaitUntilTableExists waiter.
+type TableExistsWaiter interface {
 	WaitUntilTableExists(*dynamodb.DescribeTableInput) error
 	WaitUntilTableExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
+}
 
+// TableNotExistsWaiter provides the interface for the WaitUntilTableNotExists waiter.
+type TableNotExistsWaiter interface {
 	WaitUntilTableNotExists(*dynamodb.DescribeTableInput) error
 	WaitUntilTableNotExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
 }
-
-var _ DynamoDBAPI = (*dynamodb.DynamoDB)(nil)

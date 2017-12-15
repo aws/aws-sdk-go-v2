@@ -13,79 +13,47 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mobile"
 )
 
-// MobileAPI provides an interface to enable mocking the
-// mobile.Mobile service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Mobile.
-//    func myFunc(svc mobileiface.MobileAPI) bool {
-//        // Make svc.CreateProject request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := mobile.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMobileClient struct {
-//        mobileiface.MobileAPI
-//    }
-//    func (m *mockMobileClient) CreateProject(input *mobile.CreateProjectInput) (*mobile.CreateProjectOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockMobileClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type MobileAPI interface {
+// CreateProjectRequester provides the interface for the CreateProjectRequest API operation.
+type CreateProjectRequester interface {
 	CreateProjectRequest(*mobile.CreateProjectInput) mobile.CreateProjectRequest
-
-	DeleteProjectRequest(*mobile.DeleteProjectInput) mobile.DeleteProjectRequest
-
-	DescribeBundleRequest(*mobile.DescribeBundleInput) mobile.DescribeBundleRequest
-
-	DescribeProjectRequest(*mobile.DescribeProjectInput) mobile.DescribeProjectRequest
-
-	ExportBundleRequest(*mobile.ExportBundleInput) mobile.ExportBundleRequest
-
-	ExportProjectRequest(*mobile.ExportProjectInput) mobile.ExportProjectRequest
-
-	ListBundlesRequest(*mobile.ListBundlesInput) mobile.ListBundlesRequest
-
-	ListBundlesPages(*mobile.ListBundlesInput, func(*mobile.ListBundlesOutput, bool) bool) error
-	ListBundlesPagesWithContext(aws.Context, *mobile.ListBundlesInput, func(*mobile.ListBundlesOutput, bool) bool, ...aws.Option) error
-
-	ListProjectsRequest(*mobile.ListProjectsInput) mobile.ListProjectsRequest
-
-	ListProjectsPages(*mobile.ListProjectsInput, func(*mobile.ListProjectsOutput, bool) bool) error
-	ListProjectsPagesWithContext(aws.Context, *mobile.ListProjectsInput, func(*mobile.ListProjectsOutput, bool) bool, ...aws.Option) error
-
-	UpdateProjectRequest(*mobile.UpdateProjectInput) mobile.UpdateProjectRequest
 }
 
-var _ MobileAPI = (*mobile.Mobile)(nil)
+// DeleteProjectRequester provides the interface for the DeleteProjectRequest API operation.
+type DeleteProjectRequester interface {
+	DeleteProjectRequest(*mobile.DeleteProjectInput) mobile.DeleteProjectRequest
+}
+
+// DescribeBundleRequester provides the interface for the DescribeBundleRequest API operation.
+type DescribeBundleRequester interface {
+	DescribeBundleRequest(*mobile.DescribeBundleInput) mobile.DescribeBundleRequest
+}
+
+// DescribeProjectRequester provides the interface for the DescribeProjectRequest API operation.
+type DescribeProjectRequester interface {
+	DescribeProjectRequest(*mobile.DescribeProjectInput) mobile.DescribeProjectRequest
+}
+
+// ExportBundleRequester provides the interface for the ExportBundleRequest API operation.
+type ExportBundleRequester interface {
+	ExportBundleRequest(*mobile.ExportBundleInput) mobile.ExportBundleRequest
+}
+
+// ExportProjectRequester provides the interface for the ExportProjectRequest API operation.
+type ExportProjectRequester interface {
+	ExportProjectRequest(*mobile.ExportProjectInput) mobile.ExportProjectRequest
+}
+
+// ListBundlesRequester provides the interface for the ListBundlesRequest API operation.
+type ListBundlesRequester interface {
+	ListBundlesRequest(*mobile.ListBundlesInput) mobile.ListBundlesRequest
+}
+
+// ListProjectsRequester provides the interface for the ListProjectsRequest API operation.
+type ListProjectsRequester interface {
+	ListProjectsRequest(*mobile.ListProjectsInput) mobile.ListProjectsRequest
+}
+
+// UpdateProjectRequester provides the interface for the UpdateProjectRequest API operation.
+type UpdateProjectRequester interface {
+	UpdateProjectRequest(*mobile.UpdateProjectInput) mobile.UpdateProjectRequest
+}

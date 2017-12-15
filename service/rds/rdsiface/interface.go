@@ -13,290 +13,459 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rds"
 )
 
-// RDSAPI provides an interface to enable mocking the
-// rds.RDS service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Relational Database Service.
-//    func myFunc(svc rdsiface.RDSAPI) bool {
-//        // Make svc.AddRoleToDBCluster request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := rds.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRDSClient struct {
-//        rdsiface.RDSAPI
-//    }
-//    func (m *mockRDSClient) AddRoleToDBCluster(input *rds.AddRoleToDBClusterInput) (*rds.AddRoleToDBClusterOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockRDSClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type RDSAPI interface {
+// AddRoleToDBClusterRequester provides the interface for the AddRoleToDBClusterRequest API operation.
+type AddRoleToDBClusterRequester interface {
 	AddRoleToDBClusterRequest(*rds.AddRoleToDBClusterInput) rds.AddRoleToDBClusterRequest
+}
 
+// AddSourceIdentifierToSubscriptionRequester provides the interface for the AddSourceIdentifierToSubscriptionRequest API operation.
+type AddSourceIdentifierToSubscriptionRequester interface {
 	AddSourceIdentifierToSubscriptionRequest(*rds.AddSourceIdentifierToSubscriptionInput) rds.AddSourceIdentifierToSubscriptionRequest
+}
 
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
 	AddTagsToResourceRequest(*rds.AddTagsToResourceInput) rds.AddTagsToResourceRequest
+}
 
+// ApplyPendingMaintenanceActionRequester provides the interface for the ApplyPendingMaintenanceActionRequest API operation.
+type ApplyPendingMaintenanceActionRequester interface {
 	ApplyPendingMaintenanceActionRequest(*rds.ApplyPendingMaintenanceActionInput) rds.ApplyPendingMaintenanceActionRequest
+}
 
+// AuthorizeDBSecurityGroupIngressRequester provides the interface for the AuthorizeDBSecurityGroupIngressRequest API operation.
+type AuthorizeDBSecurityGroupIngressRequester interface {
 	AuthorizeDBSecurityGroupIngressRequest(*rds.AuthorizeDBSecurityGroupIngressInput) rds.AuthorizeDBSecurityGroupIngressRequest
+}
 
+// CopyDBClusterParameterGroupRequester provides the interface for the CopyDBClusterParameterGroupRequest API operation.
+type CopyDBClusterParameterGroupRequester interface {
 	CopyDBClusterParameterGroupRequest(*rds.CopyDBClusterParameterGroupInput) rds.CopyDBClusterParameterGroupRequest
+}
 
+// CopyDBClusterSnapshotRequester provides the interface for the CopyDBClusterSnapshotRequest API operation.
+type CopyDBClusterSnapshotRequester interface {
 	CopyDBClusterSnapshotRequest(*rds.CopyDBClusterSnapshotInput) rds.CopyDBClusterSnapshotRequest
+}
 
+// CopyDBParameterGroupRequester provides the interface for the CopyDBParameterGroupRequest API operation.
+type CopyDBParameterGroupRequester interface {
 	CopyDBParameterGroupRequest(*rds.CopyDBParameterGroupInput) rds.CopyDBParameterGroupRequest
+}
 
+// CopyDBSnapshotRequester provides the interface for the CopyDBSnapshotRequest API operation.
+type CopyDBSnapshotRequester interface {
 	CopyDBSnapshotRequest(*rds.CopyDBSnapshotInput) rds.CopyDBSnapshotRequest
+}
 
+// CopyOptionGroupRequester provides the interface for the CopyOptionGroupRequest API operation.
+type CopyOptionGroupRequester interface {
 	CopyOptionGroupRequest(*rds.CopyOptionGroupInput) rds.CopyOptionGroupRequest
+}
 
+// CreateDBClusterRequester provides the interface for the CreateDBClusterRequest API operation.
+type CreateDBClusterRequester interface {
 	CreateDBClusterRequest(*rds.CreateDBClusterInput) rds.CreateDBClusterRequest
+}
 
+// CreateDBClusterParameterGroupRequester provides the interface for the CreateDBClusterParameterGroupRequest API operation.
+type CreateDBClusterParameterGroupRequester interface {
 	CreateDBClusterParameterGroupRequest(*rds.CreateDBClusterParameterGroupInput) rds.CreateDBClusterParameterGroupRequest
+}
 
+// CreateDBClusterSnapshotRequester provides the interface for the CreateDBClusterSnapshotRequest API operation.
+type CreateDBClusterSnapshotRequester interface {
 	CreateDBClusterSnapshotRequest(*rds.CreateDBClusterSnapshotInput) rds.CreateDBClusterSnapshotRequest
+}
 
+// CreateDBInstanceRequester provides the interface for the CreateDBInstanceRequest API operation.
+type CreateDBInstanceRequester interface {
 	CreateDBInstanceRequest(*rds.CreateDBInstanceInput) rds.CreateDBInstanceRequest
+}
 
+// CreateDBInstanceReadReplicaRequester provides the interface for the CreateDBInstanceReadReplicaRequest API operation.
+type CreateDBInstanceReadReplicaRequester interface {
 	CreateDBInstanceReadReplicaRequest(*rds.CreateDBInstanceReadReplicaInput) rds.CreateDBInstanceReadReplicaRequest
+}
 
+// CreateDBParameterGroupRequester provides the interface for the CreateDBParameterGroupRequest API operation.
+type CreateDBParameterGroupRequester interface {
 	CreateDBParameterGroupRequest(*rds.CreateDBParameterGroupInput) rds.CreateDBParameterGroupRequest
+}
 
+// CreateDBSecurityGroupRequester provides the interface for the CreateDBSecurityGroupRequest API operation.
+type CreateDBSecurityGroupRequester interface {
 	CreateDBSecurityGroupRequest(*rds.CreateDBSecurityGroupInput) rds.CreateDBSecurityGroupRequest
+}
 
+// CreateDBSnapshotRequester provides the interface for the CreateDBSnapshotRequest API operation.
+type CreateDBSnapshotRequester interface {
 	CreateDBSnapshotRequest(*rds.CreateDBSnapshotInput) rds.CreateDBSnapshotRequest
+}
 
+// CreateDBSubnetGroupRequester provides the interface for the CreateDBSubnetGroupRequest API operation.
+type CreateDBSubnetGroupRequester interface {
 	CreateDBSubnetGroupRequest(*rds.CreateDBSubnetGroupInput) rds.CreateDBSubnetGroupRequest
+}
 
+// CreateEventSubscriptionRequester provides the interface for the CreateEventSubscriptionRequest API operation.
+type CreateEventSubscriptionRequester interface {
 	CreateEventSubscriptionRequest(*rds.CreateEventSubscriptionInput) rds.CreateEventSubscriptionRequest
+}
 
+// CreateOptionGroupRequester provides the interface for the CreateOptionGroupRequest API operation.
+type CreateOptionGroupRequester interface {
 	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) rds.CreateOptionGroupRequest
+}
 
+// DeleteDBClusterRequester provides the interface for the DeleteDBClusterRequest API operation.
+type DeleteDBClusterRequester interface {
 	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) rds.DeleteDBClusterRequest
+}
 
+// DeleteDBClusterParameterGroupRequester provides the interface for the DeleteDBClusterParameterGroupRequest API operation.
+type DeleteDBClusterParameterGroupRequester interface {
 	DeleteDBClusterParameterGroupRequest(*rds.DeleteDBClusterParameterGroupInput) rds.DeleteDBClusterParameterGroupRequest
+}
 
+// DeleteDBClusterSnapshotRequester provides the interface for the DeleteDBClusterSnapshotRequest API operation.
+type DeleteDBClusterSnapshotRequester interface {
 	DeleteDBClusterSnapshotRequest(*rds.DeleteDBClusterSnapshotInput) rds.DeleteDBClusterSnapshotRequest
+}
 
+// DeleteDBInstanceRequester provides the interface for the DeleteDBInstanceRequest API operation.
+type DeleteDBInstanceRequester interface {
 	DeleteDBInstanceRequest(*rds.DeleteDBInstanceInput) rds.DeleteDBInstanceRequest
+}
 
+// DeleteDBParameterGroupRequester provides the interface for the DeleteDBParameterGroupRequest API operation.
+type DeleteDBParameterGroupRequester interface {
 	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) rds.DeleteDBParameterGroupRequest
+}
 
+// DeleteDBSecurityGroupRequester provides the interface for the DeleteDBSecurityGroupRequest API operation.
+type DeleteDBSecurityGroupRequester interface {
 	DeleteDBSecurityGroupRequest(*rds.DeleteDBSecurityGroupInput) rds.DeleteDBSecurityGroupRequest
+}
 
+// DeleteDBSnapshotRequester provides the interface for the DeleteDBSnapshotRequest API operation.
+type DeleteDBSnapshotRequester interface {
 	DeleteDBSnapshotRequest(*rds.DeleteDBSnapshotInput) rds.DeleteDBSnapshotRequest
+}
 
+// DeleteDBSubnetGroupRequester provides the interface for the DeleteDBSubnetGroupRequest API operation.
+type DeleteDBSubnetGroupRequester interface {
 	DeleteDBSubnetGroupRequest(*rds.DeleteDBSubnetGroupInput) rds.DeleteDBSubnetGroupRequest
+}
 
+// DeleteEventSubscriptionRequester provides the interface for the DeleteEventSubscriptionRequest API operation.
+type DeleteEventSubscriptionRequester interface {
 	DeleteEventSubscriptionRequest(*rds.DeleteEventSubscriptionInput) rds.DeleteEventSubscriptionRequest
+}
 
+// DeleteOptionGroupRequester provides the interface for the DeleteOptionGroupRequest API operation.
+type DeleteOptionGroupRequester interface {
 	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
+}
 
+// DescribeAccountAttributesRequester provides the interface for the DescribeAccountAttributesRequest API operation.
+type DescribeAccountAttributesRequester interface {
 	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
+}
 
+// DescribeCertificatesRequester provides the interface for the DescribeCertificatesRequest API operation.
+type DescribeCertificatesRequester interface {
 	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) rds.DescribeCertificatesRequest
+}
 
+// DescribeDBClusterParameterGroupsRequester provides the interface for the DescribeDBClusterParameterGroupsRequest API operation.
+type DescribeDBClusterParameterGroupsRequester interface {
 	DescribeDBClusterParameterGroupsRequest(*rds.DescribeDBClusterParameterGroupsInput) rds.DescribeDBClusterParameterGroupsRequest
+}
 
+// DescribeDBClusterParametersRequester provides the interface for the DescribeDBClusterParametersRequest API operation.
+type DescribeDBClusterParametersRequester interface {
 	DescribeDBClusterParametersRequest(*rds.DescribeDBClusterParametersInput) rds.DescribeDBClusterParametersRequest
+}
 
+// DescribeDBClusterSnapshotAttributesRequester provides the interface for the DescribeDBClusterSnapshotAttributesRequest API operation.
+type DescribeDBClusterSnapshotAttributesRequester interface {
 	DescribeDBClusterSnapshotAttributesRequest(*rds.DescribeDBClusterSnapshotAttributesInput) rds.DescribeDBClusterSnapshotAttributesRequest
+}
 
+// DescribeDBClusterSnapshotsRequester provides the interface for the DescribeDBClusterSnapshotsRequest API operation.
+type DescribeDBClusterSnapshotsRequester interface {
 	DescribeDBClusterSnapshotsRequest(*rds.DescribeDBClusterSnapshotsInput) rds.DescribeDBClusterSnapshotsRequest
+}
 
+// DescribeDBClustersRequester provides the interface for the DescribeDBClustersRequest API operation.
+type DescribeDBClustersRequester interface {
 	DescribeDBClustersRequest(*rds.DescribeDBClustersInput) rds.DescribeDBClustersRequest
+}
 
+// DescribeDBEngineVersionsRequester provides the interface for the DescribeDBEngineVersionsRequest API operation.
+type DescribeDBEngineVersionsRequester interface {
 	DescribeDBEngineVersionsRequest(*rds.DescribeDBEngineVersionsInput) rds.DescribeDBEngineVersionsRequest
+}
 
-	DescribeDBEngineVersionsPages(*rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool) error
-	DescribeDBEngineVersionsPagesWithContext(aws.Context, *rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBInstancesRequester provides the interface for the DescribeDBInstancesRequest API operation.
+type DescribeDBInstancesRequester interface {
 	DescribeDBInstancesRequest(*rds.DescribeDBInstancesInput) rds.DescribeDBInstancesRequest
+}
 
-	DescribeDBInstancesPages(*rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool) error
-	DescribeDBInstancesPagesWithContext(aws.Context, *rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBLogFilesRequester provides the interface for the DescribeDBLogFilesRequest API operation.
+type DescribeDBLogFilesRequester interface {
 	DescribeDBLogFilesRequest(*rds.DescribeDBLogFilesInput) rds.DescribeDBLogFilesRequest
+}
 
-	DescribeDBLogFilesPages(*rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool) error
-	DescribeDBLogFilesPagesWithContext(aws.Context, *rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBParameterGroupsRequester provides the interface for the DescribeDBParameterGroupsRequest API operation.
+type DescribeDBParameterGroupsRequester interface {
 	DescribeDBParameterGroupsRequest(*rds.DescribeDBParameterGroupsInput) rds.DescribeDBParameterGroupsRequest
+}
 
-	DescribeDBParameterGroupsPages(*rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool) error
-	DescribeDBParameterGroupsPagesWithContext(aws.Context, *rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBParametersRequester provides the interface for the DescribeDBParametersRequest API operation.
+type DescribeDBParametersRequester interface {
 	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) rds.DescribeDBParametersRequest
+}
 
-	DescribeDBParametersPages(*rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool) error
-	DescribeDBParametersPagesWithContext(aws.Context, *rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBSecurityGroupsRequester provides the interface for the DescribeDBSecurityGroupsRequest API operation.
+type DescribeDBSecurityGroupsRequester interface {
 	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) rds.DescribeDBSecurityGroupsRequest
+}
 
-	DescribeDBSecurityGroupsPages(*rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool) error
-	DescribeDBSecurityGroupsPagesWithContext(aws.Context, *rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBSnapshotAttributesRequester provides the interface for the DescribeDBSnapshotAttributesRequest API operation.
+type DescribeDBSnapshotAttributesRequester interface {
 	DescribeDBSnapshotAttributesRequest(*rds.DescribeDBSnapshotAttributesInput) rds.DescribeDBSnapshotAttributesRequest
+}
 
+// DescribeDBSnapshotsRequester provides the interface for the DescribeDBSnapshotsRequest API operation.
+type DescribeDBSnapshotsRequester interface {
 	DescribeDBSnapshotsRequest(*rds.DescribeDBSnapshotsInput) rds.DescribeDBSnapshotsRequest
+}
 
-	DescribeDBSnapshotsPages(*rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool) error
-	DescribeDBSnapshotsPagesWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool, ...aws.Option) error
-
+// DescribeDBSubnetGroupsRequester provides the interface for the DescribeDBSubnetGroupsRequest API operation.
+type DescribeDBSubnetGroupsRequester interface {
 	DescribeDBSubnetGroupsRequest(*rds.DescribeDBSubnetGroupsInput) rds.DescribeDBSubnetGroupsRequest
+}
 
-	DescribeDBSubnetGroupsPages(*rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool) error
-	DescribeDBSubnetGroupsPagesWithContext(aws.Context, *rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeEngineDefaultClusterParametersRequester provides the interface for the DescribeEngineDefaultClusterParametersRequest API operation.
+type DescribeEngineDefaultClusterParametersRequester interface {
 	DescribeEngineDefaultClusterParametersRequest(*rds.DescribeEngineDefaultClusterParametersInput) rds.DescribeEngineDefaultClusterParametersRequest
+}
 
+// DescribeEngineDefaultParametersRequester provides the interface for the DescribeEngineDefaultParametersRequest API operation.
+type DescribeEngineDefaultParametersRequester interface {
 	DescribeEngineDefaultParametersRequest(*rds.DescribeEngineDefaultParametersInput) rds.DescribeEngineDefaultParametersRequest
+}
 
-	DescribeEngineDefaultParametersPages(*rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool) error
-	DescribeEngineDefaultParametersPagesWithContext(aws.Context, *rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, ...aws.Option) error
-
+// DescribeEventCategoriesRequester provides the interface for the DescribeEventCategoriesRequest API operation.
+type DescribeEventCategoriesRequester interface {
 	DescribeEventCategoriesRequest(*rds.DescribeEventCategoriesInput) rds.DescribeEventCategoriesRequest
+}
 
+// DescribeEventSubscriptionsRequester provides the interface for the DescribeEventSubscriptionsRequest API operation.
+type DescribeEventSubscriptionsRequester interface {
 	DescribeEventSubscriptionsRequest(*rds.DescribeEventSubscriptionsInput) rds.DescribeEventSubscriptionsRequest
+}
 
-	DescribeEventSubscriptionsPages(*rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
 	DescribeEventsRequest(*rds.DescribeEventsInput) rds.DescribeEventsRequest
+}
 
-	DescribeEventsPages(*rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool, ...aws.Option) error
-
+// DescribeOptionGroupOptionsRequester provides the interface for the DescribeOptionGroupOptionsRequest API operation.
+type DescribeOptionGroupOptionsRequester interface {
 	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
+}
 
-	DescribeOptionGroupOptionsPages(*rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool) error
-	DescribeOptionGroupOptionsPagesWithContext(aws.Context, *rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeOptionGroupsRequester provides the interface for the DescribeOptionGroupsRequest API operation.
+type DescribeOptionGroupsRequester interface {
 	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) rds.DescribeOptionGroupsRequest
+}
 
-	DescribeOptionGroupsPages(*rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool) error
-	DescribeOptionGroupsPagesWithContext(aws.Context, *rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeOrderableDBInstanceOptionsRequester provides the interface for the DescribeOrderableDBInstanceOptionsRequest API operation.
+type DescribeOrderableDBInstanceOptionsRequester interface {
 	DescribeOrderableDBInstanceOptionsRequest(*rds.DescribeOrderableDBInstanceOptionsInput) rds.DescribeOrderableDBInstanceOptionsRequest
+}
 
-	DescribeOrderableDBInstanceOptionsPages(*rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool) error
-	DescribeOrderableDBInstanceOptionsPagesWithContext(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, ...aws.Option) error
-
+// DescribePendingMaintenanceActionsRequester provides the interface for the DescribePendingMaintenanceActionsRequest API operation.
+type DescribePendingMaintenanceActionsRequester interface {
 	DescribePendingMaintenanceActionsRequest(*rds.DescribePendingMaintenanceActionsInput) rds.DescribePendingMaintenanceActionsRequest
+}
 
+// DescribeReservedDBInstancesRequester provides the interface for the DescribeReservedDBInstancesRequest API operation.
+type DescribeReservedDBInstancesRequester interface {
 	DescribeReservedDBInstancesRequest(*rds.DescribeReservedDBInstancesInput) rds.DescribeReservedDBInstancesRequest
+}
 
-	DescribeReservedDBInstancesPages(*rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool) error
-	DescribeReservedDBInstancesPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool, ...aws.Option) error
-
+// DescribeReservedDBInstancesOfferingsRequester provides the interface for the DescribeReservedDBInstancesOfferingsRequest API operation.
+type DescribeReservedDBInstancesOfferingsRequester interface {
 	DescribeReservedDBInstancesOfferingsRequest(*rds.DescribeReservedDBInstancesOfferingsInput) rds.DescribeReservedDBInstancesOfferingsRequest
+}
 
-	DescribeReservedDBInstancesOfferingsPages(*rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool) error
-	DescribeReservedDBInstancesOfferingsPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, ...aws.Option) error
-
+// DescribeSourceRegionsRequester provides the interface for the DescribeSourceRegionsRequest API operation.
+type DescribeSourceRegionsRequester interface {
 	DescribeSourceRegionsRequest(*rds.DescribeSourceRegionsInput) rds.DescribeSourceRegionsRequest
+}
 
+// DownloadDBLogFilePortionRequester provides the interface for the DownloadDBLogFilePortionRequest API operation.
+type DownloadDBLogFilePortionRequester interface {
 	DownloadDBLogFilePortionRequest(*rds.DownloadDBLogFilePortionInput) rds.DownloadDBLogFilePortionRequest
+}
 
-	DownloadDBLogFilePortionPages(*rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool) error
-	DownloadDBLogFilePortionPagesWithContext(aws.Context, *rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool, ...aws.Option) error
-
+// FailoverDBClusterRequester provides the interface for the FailoverDBClusterRequest API operation.
+type FailoverDBClusterRequester interface {
 	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) rds.FailoverDBClusterRequest
+}
 
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
 	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) rds.ListTagsForResourceRequest
+}
 
+// ModifyDBClusterRequester provides the interface for the ModifyDBClusterRequest API operation.
+type ModifyDBClusterRequester interface {
 	ModifyDBClusterRequest(*rds.ModifyDBClusterInput) rds.ModifyDBClusterRequest
+}
 
+// ModifyDBClusterParameterGroupRequester provides the interface for the ModifyDBClusterParameterGroupRequest API operation.
+type ModifyDBClusterParameterGroupRequester interface {
 	ModifyDBClusterParameterGroupRequest(*rds.ModifyDBClusterParameterGroupInput) rds.ModifyDBClusterParameterGroupRequest
+}
 
+// ModifyDBClusterSnapshotAttributeRequester provides the interface for the ModifyDBClusterSnapshotAttributeRequest API operation.
+type ModifyDBClusterSnapshotAttributeRequester interface {
 	ModifyDBClusterSnapshotAttributeRequest(*rds.ModifyDBClusterSnapshotAttributeInput) rds.ModifyDBClusterSnapshotAttributeRequest
+}
 
+// ModifyDBInstanceRequester provides the interface for the ModifyDBInstanceRequest API operation.
+type ModifyDBInstanceRequester interface {
 	ModifyDBInstanceRequest(*rds.ModifyDBInstanceInput) rds.ModifyDBInstanceRequest
+}
 
+// ModifyDBParameterGroupRequester provides the interface for the ModifyDBParameterGroupRequest API operation.
+type ModifyDBParameterGroupRequester interface {
 	ModifyDBParameterGroupRequest(*rds.ModifyDBParameterGroupInput) rds.ModifyDBParameterGroupRequest
+}
 
+// ModifyDBSnapshotRequester provides the interface for the ModifyDBSnapshotRequest API operation.
+type ModifyDBSnapshotRequester interface {
 	ModifyDBSnapshotRequest(*rds.ModifyDBSnapshotInput) rds.ModifyDBSnapshotRequest
+}
 
+// ModifyDBSnapshotAttributeRequester provides the interface for the ModifyDBSnapshotAttributeRequest API operation.
+type ModifyDBSnapshotAttributeRequester interface {
 	ModifyDBSnapshotAttributeRequest(*rds.ModifyDBSnapshotAttributeInput) rds.ModifyDBSnapshotAttributeRequest
+}
 
+// ModifyDBSubnetGroupRequester provides the interface for the ModifyDBSubnetGroupRequest API operation.
+type ModifyDBSubnetGroupRequester interface {
 	ModifyDBSubnetGroupRequest(*rds.ModifyDBSubnetGroupInput) rds.ModifyDBSubnetGroupRequest
+}
 
+// ModifyEventSubscriptionRequester provides the interface for the ModifyEventSubscriptionRequest API operation.
+type ModifyEventSubscriptionRequester interface {
 	ModifyEventSubscriptionRequest(*rds.ModifyEventSubscriptionInput) rds.ModifyEventSubscriptionRequest
+}
 
+// ModifyOptionGroupRequester provides the interface for the ModifyOptionGroupRequest API operation.
+type ModifyOptionGroupRequester interface {
 	ModifyOptionGroupRequest(*rds.ModifyOptionGroupInput) rds.ModifyOptionGroupRequest
+}
 
+// PromoteReadReplicaRequester provides the interface for the PromoteReadReplicaRequest API operation.
+type PromoteReadReplicaRequester interface {
 	PromoteReadReplicaRequest(*rds.PromoteReadReplicaInput) rds.PromoteReadReplicaRequest
+}
 
+// PromoteReadReplicaDBClusterRequester provides the interface for the PromoteReadReplicaDBClusterRequest API operation.
+type PromoteReadReplicaDBClusterRequester interface {
 	PromoteReadReplicaDBClusterRequest(*rds.PromoteReadReplicaDBClusterInput) rds.PromoteReadReplicaDBClusterRequest
+}
 
+// PurchaseReservedDBInstancesOfferingRequester provides the interface for the PurchaseReservedDBInstancesOfferingRequest API operation.
+type PurchaseReservedDBInstancesOfferingRequester interface {
 	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) rds.PurchaseReservedDBInstancesOfferingRequest
+}
 
+// RebootDBInstanceRequester provides the interface for the RebootDBInstanceRequest API operation.
+type RebootDBInstanceRequester interface {
 	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) rds.RebootDBInstanceRequest
+}
 
+// RemoveRoleFromDBClusterRequester provides the interface for the RemoveRoleFromDBClusterRequest API operation.
+type RemoveRoleFromDBClusterRequester interface {
 	RemoveRoleFromDBClusterRequest(*rds.RemoveRoleFromDBClusterInput) rds.RemoveRoleFromDBClusterRequest
+}
 
+// RemoveSourceIdentifierFromSubscriptionRequester provides the interface for the RemoveSourceIdentifierFromSubscriptionRequest API operation.
+type RemoveSourceIdentifierFromSubscriptionRequester interface {
 	RemoveSourceIdentifierFromSubscriptionRequest(*rds.RemoveSourceIdentifierFromSubscriptionInput) rds.RemoveSourceIdentifierFromSubscriptionRequest
+}
 
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
 	RemoveTagsFromResourceRequest(*rds.RemoveTagsFromResourceInput) rds.RemoveTagsFromResourceRequest
+}
 
+// ResetDBClusterParameterGroupRequester provides the interface for the ResetDBClusterParameterGroupRequest API operation.
+type ResetDBClusterParameterGroupRequester interface {
 	ResetDBClusterParameterGroupRequest(*rds.ResetDBClusterParameterGroupInput) rds.ResetDBClusterParameterGroupRequest
+}
 
+// ResetDBParameterGroupRequester provides the interface for the ResetDBParameterGroupRequest API operation.
+type ResetDBParameterGroupRequester interface {
 	ResetDBParameterGroupRequest(*rds.ResetDBParameterGroupInput) rds.ResetDBParameterGroupRequest
+}
 
+// RestoreDBClusterFromS3Requester provides the interface for the RestoreDBClusterFromS3Request API operation.
+type RestoreDBClusterFromS3Requester interface {
 	RestoreDBClusterFromS3Request(*rds.RestoreDBClusterFromS3Input) rds.RestoreDBClusterFromS3Request
+}
 
+// RestoreDBClusterFromSnapshotRequester provides the interface for the RestoreDBClusterFromSnapshotRequest API operation.
+type RestoreDBClusterFromSnapshotRequester interface {
 	RestoreDBClusterFromSnapshotRequest(*rds.RestoreDBClusterFromSnapshotInput) rds.RestoreDBClusterFromSnapshotRequest
+}
 
+// RestoreDBClusterToPointInTimeRequester provides the interface for the RestoreDBClusterToPointInTimeRequest API operation.
+type RestoreDBClusterToPointInTimeRequester interface {
 	RestoreDBClusterToPointInTimeRequest(*rds.RestoreDBClusterToPointInTimeInput) rds.RestoreDBClusterToPointInTimeRequest
+}
 
+// RestoreDBInstanceFromDBSnapshotRequester provides the interface for the RestoreDBInstanceFromDBSnapshotRequest API operation.
+type RestoreDBInstanceFromDBSnapshotRequester interface {
 	RestoreDBInstanceFromDBSnapshotRequest(*rds.RestoreDBInstanceFromDBSnapshotInput) rds.RestoreDBInstanceFromDBSnapshotRequest
+}
 
+// RestoreDBInstanceToPointInTimeRequester provides the interface for the RestoreDBInstanceToPointInTimeRequest API operation.
+type RestoreDBInstanceToPointInTimeRequester interface {
 	RestoreDBInstanceToPointInTimeRequest(*rds.RestoreDBInstanceToPointInTimeInput) rds.RestoreDBInstanceToPointInTimeRequest
+}
 
+// RevokeDBSecurityGroupIngressRequester provides the interface for the RevokeDBSecurityGroupIngressRequest API operation.
+type RevokeDBSecurityGroupIngressRequester interface {
 	RevokeDBSecurityGroupIngressRequest(*rds.RevokeDBSecurityGroupIngressInput) rds.RevokeDBSecurityGroupIngressRequest
+}
 
+// StartDBInstanceRequester provides the interface for the StartDBInstanceRequest API operation.
+type StartDBInstanceRequester interface {
 	StartDBInstanceRequest(*rds.StartDBInstanceInput) rds.StartDBInstanceRequest
+}
 
+// StopDBInstanceRequester provides the interface for the StopDBInstanceRequest API operation.
+type StopDBInstanceRequester interface {
 	StopDBInstanceRequest(*rds.StopDBInstanceInput) rds.StopDBInstanceRequest
+}
 
+// DBInstanceAvailableWaiter provides the interface for the WaitUntilDBInstanceAvailable waiter.
+type DBInstanceAvailableWaiter interface {
 	WaitUntilDBInstanceAvailable(*rds.DescribeDBInstancesInput) error
 	WaitUntilDBInstanceAvailableWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+}
 
+// DBInstanceDeletedWaiter provides the interface for the WaitUntilDBInstanceDeleted waiter.
+type DBInstanceDeletedWaiter interface {
 	WaitUntilDBInstanceDeleted(*rds.DescribeDBInstancesInput) error
 	WaitUntilDBInstanceDeletedWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
-
-var _ RDSAPI = (*rds.RDS)(nil)

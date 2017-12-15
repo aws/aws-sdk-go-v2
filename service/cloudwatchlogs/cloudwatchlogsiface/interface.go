@@ -13,142 +13,167 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 )
 
-// CloudWatchLogsAPI provides an interface to enable mocking the
-// cloudwatchlogs.CloudWatchLogs service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudWatch Logs.
-//    func myFunc(svc cloudwatchlogsiface.CloudWatchLogsAPI) bool {
-//        // Make svc.AssociateKmsKey request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudwatchlogs.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudWatchLogsClient struct {
-//        cloudwatchlogsiface.CloudWatchLogsAPI
-//    }
-//    func (m *mockCloudWatchLogsClient) AssociateKmsKey(input *cloudwatchlogs.AssociateKmsKeyInput) (*cloudwatchlogs.AssociateKmsKeyOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudWatchLogsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudWatchLogsAPI interface {
+// AssociateKmsKeyRequester provides the interface for the AssociateKmsKeyRequest API operation.
+type AssociateKmsKeyRequester interface {
 	AssociateKmsKeyRequest(*cloudwatchlogs.AssociateKmsKeyInput) cloudwatchlogs.AssociateKmsKeyRequest
-
-	CancelExportTaskRequest(*cloudwatchlogs.CancelExportTaskInput) cloudwatchlogs.CancelExportTaskRequest
-
-	CreateExportTaskRequest(*cloudwatchlogs.CreateExportTaskInput) cloudwatchlogs.CreateExportTaskRequest
-
-	CreateLogGroupRequest(*cloudwatchlogs.CreateLogGroupInput) cloudwatchlogs.CreateLogGroupRequest
-
-	CreateLogStreamRequest(*cloudwatchlogs.CreateLogStreamInput) cloudwatchlogs.CreateLogStreamRequest
-
-	DeleteDestinationRequest(*cloudwatchlogs.DeleteDestinationInput) cloudwatchlogs.DeleteDestinationRequest
-
-	DeleteLogGroupRequest(*cloudwatchlogs.DeleteLogGroupInput) cloudwatchlogs.DeleteLogGroupRequest
-
-	DeleteLogStreamRequest(*cloudwatchlogs.DeleteLogStreamInput) cloudwatchlogs.DeleteLogStreamRequest
-
-	DeleteMetricFilterRequest(*cloudwatchlogs.DeleteMetricFilterInput) cloudwatchlogs.DeleteMetricFilterRequest
-
-	DeleteResourcePolicyRequest(*cloudwatchlogs.DeleteResourcePolicyInput) cloudwatchlogs.DeleteResourcePolicyRequest
-
-	DeleteRetentionPolicyRequest(*cloudwatchlogs.DeleteRetentionPolicyInput) cloudwatchlogs.DeleteRetentionPolicyRequest
-
-	DeleteSubscriptionFilterRequest(*cloudwatchlogs.DeleteSubscriptionFilterInput) cloudwatchlogs.DeleteSubscriptionFilterRequest
-
-	DescribeDestinationsRequest(*cloudwatchlogs.DescribeDestinationsInput) cloudwatchlogs.DescribeDestinationsRequest
-
-	DescribeDestinationsPages(*cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool) error
-	DescribeDestinationsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool, ...aws.Option) error
-
-	DescribeExportTasksRequest(*cloudwatchlogs.DescribeExportTasksInput) cloudwatchlogs.DescribeExportTasksRequest
-
-	DescribeLogGroupsRequest(*cloudwatchlogs.DescribeLogGroupsInput) cloudwatchlogs.DescribeLogGroupsRequest
-
-	DescribeLogGroupsPages(*cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool) error
-	DescribeLogGroupsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool, ...aws.Option) error
-
-	DescribeLogStreamsRequest(*cloudwatchlogs.DescribeLogStreamsInput) cloudwatchlogs.DescribeLogStreamsRequest
-
-	DescribeLogStreamsPages(*cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool) error
-	DescribeLogStreamsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool, ...aws.Option) error
-
-	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
-
-	DescribeMetricFiltersPages(*cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool) error
-	DescribeMetricFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool, ...aws.Option) error
-
-	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
-
-	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) cloudwatchlogs.DescribeSubscriptionFiltersRequest
-
-	DescribeSubscriptionFiltersPages(*cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool) error
-	DescribeSubscriptionFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool, ...aws.Option) error
-
-	DisassociateKmsKeyRequest(*cloudwatchlogs.DisassociateKmsKeyInput) cloudwatchlogs.DisassociateKmsKeyRequest
-
-	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) cloudwatchlogs.FilterLogEventsRequest
-
-	FilterLogEventsPages(*cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool) error
-	FilterLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool, ...aws.Option) error
-
-	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) cloudwatchlogs.GetLogEventsRequest
-
-	GetLogEventsPages(*cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool) error
-	GetLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool, ...aws.Option) error
-
-	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) cloudwatchlogs.ListTagsLogGroupRequest
-
-	PutDestinationRequest(*cloudwatchlogs.PutDestinationInput) cloudwatchlogs.PutDestinationRequest
-
-	PutDestinationPolicyRequest(*cloudwatchlogs.PutDestinationPolicyInput) cloudwatchlogs.PutDestinationPolicyRequest
-
-	PutLogEventsRequest(*cloudwatchlogs.PutLogEventsInput) cloudwatchlogs.PutLogEventsRequest
-
-	PutMetricFilterRequest(*cloudwatchlogs.PutMetricFilterInput) cloudwatchlogs.PutMetricFilterRequest
-
-	PutResourcePolicyRequest(*cloudwatchlogs.PutResourcePolicyInput) cloudwatchlogs.PutResourcePolicyRequest
-
-	PutRetentionPolicyRequest(*cloudwatchlogs.PutRetentionPolicyInput) cloudwatchlogs.PutRetentionPolicyRequest
-
-	PutSubscriptionFilterRequest(*cloudwatchlogs.PutSubscriptionFilterInput) cloudwatchlogs.PutSubscriptionFilterRequest
-
-	TagLogGroupRequest(*cloudwatchlogs.TagLogGroupInput) cloudwatchlogs.TagLogGroupRequest
-
-	TestMetricFilterRequest(*cloudwatchlogs.TestMetricFilterInput) cloudwatchlogs.TestMetricFilterRequest
-
-	UntagLogGroupRequest(*cloudwatchlogs.UntagLogGroupInput) cloudwatchlogs.UntagLogGroupRequest
 }
 
-var _ CloudWatchLogsAPI = (*cloudwatchlogs.CloudWatchLogs)(nil)
+// CancelExportTaskRequester provides the interface for the CancelExportTaskRequest API operation.
+type CancelExportTaskRequester interface {
+	CancelExportTaskRequest(*cloudwatchlogs.CancelExportTaskInput) cloudwatchlogs.CancelExportTaskRequest
+}
+
+// CreateExportTaskRequester provides the interface for the CreateExportTaskRequest API operation.
+type CreateExportTaskRequester interface {
+	CreateExportTaskRequest(*cloudwatchlogs.CreateExportTaskInput) cloudwatchlogs.CreateExportTaskRequest
+}
+
+// CreateLogGroupRequester provides the interface for the CreateLogGroupRequest API operation.
+type CreateLogGroupRequester interface {
+	CreateLogGroupRequest(*cloudwatchlogs.CreateLogGroupInput) cloudwatchlogs.CreateLogGroupRequest
+}
+
+// CreateLogStreamRequester provides the interface for the CreateLogStreamRequest API operation.
+type CreateLogStreamRequester interface {
+	CreateLogStreamRequest(*cloudwatchlogs.CreateLogStreamInput) cloudwatchlogs.CreateLogStreamRequest
+}
+
+// DeleteDestinationRequester provides the interface for the DeleteDestinationRequest API operation.
+type DeleteDestinationRequester interface {
+	DeleteDestinationRequest(*cloudwatchlogs.DeleteDestinationInput) cloudwatchlogs.DeleteDestinationRequest
+}
+
+// DeleteLogGroupRequester provides the interface for the DeleteLogGroupRequest API operation.
+type DeleteLogGroupRequester interface {
+	DeleteLogGroupRequest(*cloudwatchlogs.DeleteLogGroupInput) cloudwatchlogs.DeleteLogGroupRequest
+}
+
+// DeleteLogStreamRequester provides the interface for the DeleteLogStreamRequest API operation.
+type DeleteLogStreamRequester interface {
+	DeleteLogStreamRequest(*cloudwatchlogs.DeleteLogStreamInput) cloudwatchlogs.DeleteLogStreamRequest
+}
+
+// DeleteMetricFilterRequester provides the interface for the DeleteMetricFilterRequest API operation.
+type DeleteMetricFilterRequester interface {
+	DeleteMetricFilterRequest(*cloudwatchlogs.DeleteMetricFilterInput) cloudwatchlogs.DeleteMetricFilterRequest
+}
+
+// DeleteResourcePolicyRequester provides the interface for the DeleteResourcePolicyRequest API operation.
+type DeleteResourcePolicyRequester interface {
+	DeleteResourcePolicyRequest(*cloudwatchlogs.DeleteResourcePolicyInput) cloudwatchlogs.DeleteResourcePolicyRequest
+}
+
+// DeleteRetentionPolicyRequester provides the interface for the DeleteRetentionPolicyRequest API operation.
+type DeleteRetentionPolicyRequester interface {
+	DeleteRetentionPolicyRequest(*cloudwatchlogs.DeleteRetentionPolicyInput) cloudwatchlogs.DeleteRetentionPolicyRequest
+}
+
+// DeleteSubscriptionFilterRequester provides the interface for the DeleteSubscriptionFilterRequest API operation.
+type DeleteSubscriptionFilterRequester interface {
+	DeleteSubscriptionFilterRequest(*cloudwatchlogs.DeleteSubscriptionFilterInput) cloudwatchlogs.DeleteSubscriptionFilterRequest
+}
+
+// DescribeDestinationsRequester provides the interface for the DescribeDestinationsRequest API operation.
+type DescribeDestinationsRequester interface {
+	DescribeDestinationsRequest(*cloudwatchlogs.DescribeDestinationsInput) cloudwatchlogs.DescribeDestinationsRequest
+}
+
+// DescribeExportTasksRequester provides the interface for the DescribeExportTasksRequest API operation.
+type DescribeExportTasksRequester interface {
+	DescribeExportTasksRequest(*cloudwatchlogs.DescribeExportTasksInput) cloudwatchlogs.DescribeExportTasksRequest
+}
+
+// DescribeLogGroupsRequester provides the interface for the DescribeLogGroupsRequest API operation.
+type DescribeLogGroupsRequester interface {
+	DescribeLogGroupsRequest(*cloudwatchlogs.DescribeLogGroupsInput) cloudwatchlogs.DescribeLogGroupsRequest
+}
+
+// DescribeLogStreamsRequester provides the interface for the DescribeLogStreamsRequest API operation.
+type DescribeLogStreamsRequester interface {
+	DescribeLogStreamsRequest(*cloudwatchlogs.DescribeLogStreamsInput) cloudwatchlogs.DescribeLogStreamsRequest
+}
+
+// DescribeMetricFiltersRequester provides the interface for the DescribeMetricFiltersRequest API operation.
+type DescribeMetricFiltersRequester interface {
+	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
+}
+
+// DescribeResourcePoliciesRequester provides the interface for the DescribeResourcePoliciesRequest API operation.
+type DescribeResourcePoliciesRequester interface {
+	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
+}
+
+// DescribeSubscriptionFiltersRequester provides the interface for the DescribeSubscriptionFiltersRequest API operation.
+type DescribeSubscriptionFiltersRequester interface {
+	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) cloudwatchlogs.DescribeSubscriptionFiltersRequest
+}
+
+// DisassociateKmsKeyRequester provides the interface for the DisassociateKmsKeyRequest API operation.
+type DisassociateKmsKeyRequester interface {
+	DisassociateKmsKeyRequest(*cloudwatchlogs.DisassociateKmsKeyInput) cloudwatchlogs.DisassociateKmsKeyRequest
+}
+
+// FilterLogEventsRequester provides the interface for the FilterLogEventsRequest API operation.
+type FilterLogEventsRequester interface {
+	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) cloudwatchlogs.FilterLogEventsRequest
+}
+
+// GetLogEventsRequester provides the interface for the GetLogEventsRequest API operation.
+type GetLogEventsRequester interface {
+	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) cloudwatchlogs.GetLogEventsRequest
+}
+
+// ListTagsLogGroupRequester provides the interface for the ListTagsLogGroupRequest API operation.
+type ListTagsLogGroupRequester interface {
+	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) cloudwatchlogs.ListTagsLogGroupRequest
+}
+
+// PutDestinationRequester provides the interface for the PutDestinationRequest API operation.
+type PutDestinationRequester interface {
+	PutDestinationRequest(*cloudwatchlogs.PutDestinationInput) cloudwatchlogs.PutDestinationRequest
+}
+
+// PutDestinationPolicyRequester provides the interface for the PutDestinationPolicyRequest API operation.
+type PutDestinationPolicyRequester interface {
+	PutDestinationPolicyRequest(*cloudwatchlogs.PutDestinationPolicyInput) cloudwatchlogs.PutDestinationPolicyRequest
+}
+
+// PutLogEventsRequester provides the interface for the PutLogEventsRequest API operation.
+type PutLogEventsRequester interface {
+	PutLogEventsRequest(*cloudwatchlogs.PutLogEventsInput) cloudwatchlogs.PutLogEventsRequest
+}
+
+// PutMetricFilterRequester provides the interface for the PutMetricFilterRequest API operation.
+type PutMetricFilterRequester interface {
+	PutMetricFilterRequest(*cloudwatchlogs.PutMetricFilterInput) cloudwatchlogs.PutMetricFilterRequest
+}
+
+// PutResourcePolicyRequester provides the interface for the PutResourcePolicyRequest API operation.
+type PutResourcePolicyRequester interface {
+	PutResourcePolicyRequest(*cloudwatchlogs.PutResourcePolicyInput) cloudwatchlogs.PutResourcePolicyRequest
+}
+
+// PutRetentionPolicyRequester provides the interface for the PutRetentionPolicyRequest API operation.
+type PutRetentionPolicyRequester interface {
+	PutRetentionPolicyRequest(*cloudwatchlogs.PutRetentionPolicyInput) cloudwatchlogs.PutRetentionPolicyRequest
+}
+
+// PutSubscriptionFilterRequester provides the interface for the PutSubscriptionFilterRequest API operation.
+type PutSubscriptionFilterRequester interface {
+	PutSubscriptionFilterRequest(*cloudwatchlogs.PutSubscriptionFilterInput) cloudwatchlogs.PutSubscriptionFilterRequest
+}
+
+// TagLogGroupRequester provides the interface for the TagLogGroupRequest API operation.
+type TagLogGroupRequester interface {
+	TagLogGroupRequest(*cloudwatchlogs.TagLogGroupInput) cloudwatchlogs.TagLogGroupRequest
+}
+
+// TestMetricFilterRequester provides the interface for the TestMetricFilterRequest API operation.
+type TestMetricFilterRequester interface {
+	TestMetricFilterRequest(*cloudwatchlogs.TestMetricFilterInput) cloudwatchlogs.TestMetricFilterRequest
+}
+
+// UntagLogGroupRequester provides the interface for the UntagLogGroupRequest API operation.
+type UntagLogGroupRequester interface {
+	UntagLogGroupRequest(*cloudwatchlogs.UntagLogGroupInput) cloudwatchlogs.UntagLogGroupRequest
+}

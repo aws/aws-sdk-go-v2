@@ -13,140 +13,207 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
 )
 
-// ElasticBeanstalkAPI provides an interface to enable mocking the
-// elasticbeanstalk.ElasticBeanstalk service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Elastic Beanstalk.
-//    func myFunc(svc elasticbeanstalkiface.ElasticBeanstalkAPI) bool {
-//        // Make svc.AbortEnvironmentUpdate request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := elasticbeanstalk.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockElasticBeanstalkClient struct {
-//        elasticbeanstalkiface.ElasticBeanstalkAPI
-//    }
-//    func (m *mockElasticBeanstalkClient) AbortEnvironmentUpdate(input *elasticbeanstalk.AbortEnvironmentUpdateInput) (*elasticbeanstalk.AbortEnvironmentUpdateOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockElasticBeanstalkClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ElasticBeanstalkAPI interface {
+// AbortEnvironmentUpdateRequester provides the interface for the AbortEnvironmentUpdateRequest API operation.
+type AbortEnvironmentUpdateRequester interface {
 	AbortEnvironmentUpdateRequest(*elasticbeanstalk.AbortEnvironmentUpdateInput) elasticbeanstalk.AbortEnvironmentUpdateRequest
-
-	ApplyEnvironmentManagedActionRequest(*elasticbeanstalk.ApplyEnvironmentManagedActionInput) elasticbeanstalk.ApplyEnvironmentManagedActionRequest
-
-	CheckDNSAvailabilityRequest(*elasticbeanstalk.CheckDNSAvailabilityInput) elasticbeanstalk.CheckDNSAvailabilityRequest
-
-	ComposeEnvironmentsRequest(*elasticbeanstalk.ComposeEnvironmentsInput) elasticbeanstalk.ComposeEnvironmentsRequest
-
-	CreateApplicationRequest(*elasticbeanstalk.CreateApplicationInput) elasticbeanstalk.CreateApplicationRequest
-
-	CreateApplicationVersionRequest(*elasticbeanstalk.CreateApplicationVersionInput) elasticbeanstalk.CreateApplicationVersionRequest
-
-	CreateConfigurationTemplateRequest(*elasticbeanstalk.CreateConfigurationTemplateInput) elasticbeanstalk.CreateConfigurationTemplateRequest
-
-	CreateEnvironmentRequest(*elasticbeanstalk.CreateEnvironmentInput) elasticbeanstalk.CreateEnvironmentRequest
-
-	CreatePlatformVersionRequest(*elasticbeanstalk.CreatePlatformVersionInput) elasticbeanstalk.CreatePlatformVersionRequest
-
-	CreateStorageLocationRequest(*elasticbeanstalk.CreateStorageLocationInput) elasticbeanstalk.CreateStorageLocationRequest
-
-	DeleteApplicationRequest(*elasticbeanstalk.DeleteApplicationInput) elasticbeanstalk.DeleteApplicationRequest
-
-	DeleteApplicationVersionRequest(*elasticbeanstalk.DeleteApplicationVersionInput) elasticbeanstalk.DeleteApplicationVersionRequest
-
-	DeleteConfigurationTemplateRequest(*elasticbeanstalk.DeleteConfigurationTemplateInput) elasticbeanstalk.DeleteConfigurationTemplateRequest
-
-	DeleteEnvironmentConfigurationRequest(*elasticbeanstalk.DeleteEnvironmentConfigurationInput) elasticbeanstalk.DeleteEnvironmentConfigurationRequest
-
-	DeletePlatformVersionRequest(*elasticbeanstalk.DeletePlatformVersionInput) elasticbeanstalk.DeletePlatformVersionRequest
-
-	DescribeApplicationVersionsRequest(*elasticbeanstalk.DescribeApplicationVersionsInput) elasticbeanstalk.DescribeApplicationVersionsRequest
-
-	DescribeApplicationsRequest(*elasticbeanstalk.DescribeApplicationsInput) elasticbeanstalk.DescribeApplicationsRequest
-
-	DescribeConfigurationOptionsRequest(*elasticbeanstalk.DescribeConfigurationOptionsInput) elasticbeanstalk.DescribeConfigurationOptionsRequest
-
-	DescribeConfigurationSettingsRequest(*elasticbeanstalk.DescribeConfigurationSettingsInput) elasticbeanstalk.DescribeConfigurationSettingsRequest
-
-	DescribeEnvironmentHealthRequest(*elasticbeanstalk.DescribeEnvironmentHealthInput) elasticbeanstalk.DescribeEnvironmentHealthRequest
-
-	DescribeEnvironmentManagedActionHistoryRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryInput) elasticbeanstalk.DescribeEnvironmentManagedActionHistoryRequest
-
-	DescribeEnvironmentManagedActionsRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionsInput) elasticbeanstalk.DescribeEnvironmentManagedActionsRequest
-
-	DescribeEnvironmentResourcesRequest(*elasticbeanstalk.DescribeEnvironmentResourcesInput) elasticbeanstalk.DescribeEnvironmentResourcesRequest
-
-	DescribeEnvironmentsRequest(*elasticbeanstalk.DescribeEnvironmentsInput) elasticbeanstalk.DescribeEnvironmentsRequest
-
-	DescribeEventsRequest(*elasticbeanstalk.DescribeEventsInput) elasticbeanstalk.DescribeEventsRequest
-
-	DescribeEventsPages(*elasticbeanstalk.DescribeEventsInput, func(*elasticbeanstalk.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *elasticbeanstalk.DescribeEventsInput, func(*elasticbeanstalk.DescribeEventsOutput, bool) bool, ...aws.Option) error
-
-	DescribeInstancesHealthRequest(*elasticbeanstalk.DescribeInstancesHealthInput) elasticbeanstalk.DescribeInstancesHealthRequest
-
-	DescribePlatformVersionRequest(*elasticbeanstalk.DescribePlatformVersionInput) elasticbeanstalk.DescribePlatformVersionRequest
-
-	ListAvailableSolutionStacksRequest(*elasticbeanstalk.ListAvailableSolutionStacksInput) elasticbeanstalk.ListAvailableSolutionStacksRequest
-
-	ListPlatformVersionsRequest(*elasticbeanstalk.ListPlatformVersionsInput) elasticbeanstalk.ListPlatformVersionsRequest
-
-	RebuildEnvironmentRequest(*elasticbeanstalk.RebuildEnvironmentInput) elasticbeanstalk.RebuildEnvironmentRequest
-
-	RequestEnvironmentInfoRequest(*elasticbeanstalk.RequestEnvironmentInfoInput) elasticbeanstalk.RequestEnvironmentInfoRequest
-
-	RestartAppServerRequest(*elasticbeanstalk.RestartAppServerInput) elasticbeanstalk.RestartAppServerRequest
-
-	RetrieveEnvironmentInfoRequest(*elasticbeanstalk.RetrieveEnvironmentInfoInput) elasticbeanstalk.RetrieveEnvironmentInfoRequest
-
-	SwapEnvironmentCNAMEsRequest(*elasticbeanstalk.SwapEnvironmentCNAMEsInput) elasticbeanstalk.SwapEnvironmentCNAMEsRequest
-
-	TerminateEnvironmentRequest(*elasticbeanstalk.TerminateEnvironmentInput) elasticbeanstalk.TerminateEnvironmentRequest
-
-	UpdateApplicationRequest(*elasticbeanstalk.UpdateApplicationInput) elasticbeanstalk.UpdateApplicationRequest
-
-	UpdateApplicationResourceLifecycleRequest(*elasticbeanstalk.UpdateApplicationResourceLifecycleInput) elasticbeanstalk.UpdateApplicationResourceLifecycleRequest
-
-	UpdateApplicationVersionRequest(*elasticbeanstalk.UpdateApplicationVersionInput) elasticbeanstalk.UpdateApplicationVersionRequest
-
-	UpdateConfigurationTemplateRequest(*elasticbeanstalk.UpdateConfigurationTemplateInput) elasticbeanstalk.UpdateConfigurationTemplateRequest
-
-	UpdateEnvironmentRequest(*elasticbeanstalk.UpdateEnvironmentInput) elasticbeanstalk.UpdateEnvironmentRequest
-
-	ValidateConfigurationSettingsRequest(*elasticbeanstalk.ValidateConfigurationSettingsInput) elasticbeanstalk.ValidateConfigurationSettingsRequest
 }
 
-var _ ElasticBeanstalkAPI = (*elasticbeanstalk.ElasticBeanstalk)(nil)
+// ApplyEnvironmentManagedActionRequester provides the interface for the ApplyEnvironmentManagedActionRequest API operation.
+type ApplyEnvironmentManagedActionRequester interface {
+	ApplyEnvironmentManagedActionRequest(*elasticbeanstalk.ApplyEnvironmentManagedActionInput) elasticbeanstalk.ApplyEnvironmentManagedActionRequest
+}
+
+// CheckDNSAvailabilityRequester provides the interface for the CheckDNSAvailabilityRequest API operation.
+type CheckDNSAvailabilityRequester interface {
+	CheckDNSAvailabilityRequest(*elasticbeanstalk.CheckDNSAvailabilityInput) elasticbeanstalk.CheckDNSAvailabilityRequest
+}
+
+// ComposeEnvironmentsRequester provides the interface for the ComposeEnvironmentsRequest API operation.
+type ComposeEnvironmentsRequester interface {
+	ComposeEnvironmentsRequest(*elasticbeanstalk.ComposeEnvironmentsInput) elasticbeanstalk.ComposeEnvironmentsRequest
+}
+
+// CreateApplicationRequester provides the interface for the CreateApplicationRequest API operation.
+type CreateApplicationRequester interface {
+	CreateApplicationRequest(*elasticbeanstalk.CreateApplicationInput) elasticbeanstalk.CreateApplicationRequest
+}
+
+// CreateApplicationVersionRequester provides the interface for the CreateApplicationVersionRequest API operation.
+type CreateApplicationVersionRequester interface {
+	CreateApplicationVersionRequest(*elasticbeanstalk.CreateApplicationVersionInput) elasticbeanstalk.CreateApplicationVersionRequest
+}
+
+// CreateConfigurationTemplateRequester provides the interface for the CreateConfigurationTemplateRequest API operation.
+type CreateConfigurationTemplateRequester interface {
+	CreateConfigurationTemplateRequest(*elasticbeanstalk.CreateConfigurationTemplateInput) elasticbeanstalk.CreateConfigurationTemplateRequest
+}
+
+// CreateEnvironmentRequester provides the interface for the CreateEnvironmentRequest API operation.
+type CreateEnvironmentRequester interface {
+	CreateEnvironmentRequest(*elasticbeanstalk.CreateEnvironmentInput) elasticbeanstalk.CreateEnvironmentRequest
+}
+
+// CreatePlatformVersionRequester provides the interface for the CreatePlatformVersionRequest API operation.
+type CreatePlatformVersionRequester interface {
+	CreatePlatformVersionRequest(*elasticbeanstalk.CreatePlatformVersionInput) elasticbeanstalk.CreatePlatformVersionRequest
+}
+
+// CreateStorageLocationRequester provides the interface for the CreateStorageLocationRequest API operation.
+type CreateStorageLocationRequester interface {
+	CreateStorageLocationRequest(*elasticbeanstalk.CreateStorageLocationInput) elasticbeanstalk.CreateStorageLocationRequest
+}
+
+// DeleteApplicationRequester provides the interface for the DeleteApplicationRequest API operation.
+type DeleteApplicationRequester interface {
+	DeleteApplicationRequest(*elasticbeanstalk.DeleteApplicationInput) elasticbeanstalk.DeleteApplicationRequest
+}
+
+// DeleteApplicationVersionRequester provides the interface for the DeleteApplicationVersionRequest API operation.
+type DeleteApplicationVersionRequester interface {
+	DeleteApplicationVersionRequest(*elasticbeanstalk.DeleteApplicationVersionInput) elasticbeanstalk.DeleteApplicationVersionRequest
+}
+
+// DeleteConfigurationTemplateRequester provides the interface for the DeleteConfigurationTemplateRequest API operation.
+type DeleteConfigurationTemplateRequester interface {
+	DeleteConfigurationTemplateRequest(*elasticbeanstalk.DeleteConfigurationTemplateInput) elasticbeanstalk.DeleteConfigurationTemplateRequest
+}
+
+// DeleteEnvironmentConfigurationRequester provides the interface for the DeleteEnvironmentConfigurationRequest API operation.
+type DeleteEnvironmentConfigurationRequester interface {
+	DeleteEnvironmentConfigurationRequest(*elasticbeanstalk.DeleteEnvironmentConfigurationInput) elasticbeanstalk.DeleteEnvironmentConfigurationRequest
+}
+
+// DeletePlatformVersionRequester provides the interface for the DeletePlatformVersionRequest API operation.
+type DeletePlatformVersionRequester interface {
+	DeletePlatformVersionRequest(*elasticbeanstalk.DeletePlatformVersionInput) elasticbeanstalk.DeletePlatformVersionRequest
+}
+
+// DescribeApplicationVersionsRequester provides the interface for the DescribeApplicationVersionsRequest API operation.
+type DescribeApplicationVersionsRequester interface {
+	DescribeApplicationVersionsRequest(*elasticbeanstalk.DescribeApplicationVersionsInput) elasticbeanstalk.DescribeApplicationVersionsRequest
+}
+
+// DescribeApplicationsRequester provides the interface for the DescribeApplicationsRequest API operation.
+type DescribeApplicationsRequester interface {
+	DescribeApplicationsRequest(*elasticbeanstalk.DescribeApplicationsInput) elasticbeanstalk.DescribeApplicationsRequest
+}
+
+// DescribeConfigurationOptionsRequester provides the interface for the DescribeConfigurationOptionsRequest API operation.
+type DescribeConfigurationOptionsRequester interface {
+	DescribeConfigurationOptionsRequest(*elasticbeanstalk.DescribeConfigurationOptionsInput) elasticbeanstalk.DescribeConfigurationOptionsRequest
+}
+
+// DescribeConfigurationSettingsRequester provides the interface for the DescribeConfigurationSettingsRequest API operation.
+type DescribeConfigurationSettingsRequester interface {
+	DescribeConfigurationSettingsRequest(*elasticbeanstalk.DescribeConfigurationSettingsInput) elasticbeanstalk.DescribeConfigurationSettingsRequest
+}
+
+// DescribeEnvironmentHealthRequester provides the interface for the DescribeEnvironmentHealthRequest API operation.
+type DescribeEnvironmentHealthRequester interface {
+	DescribeEnvironmentHealthRequest(*elasticbeanstalk.DescribeEnvironmentHealthInput) elasticbeanstalk.DescribeEnvironmentHealthRequest
+}
+
+// DescribeEnvironmentManagedActionHistoryRequester provides the interface for the DescribeEnvironmentManagedActionHistoryRequest API operation.
+type DescribeEnvironmentManagedActionHistoryRequester interface {
+	DescribeEnvironmentManagedActionHistoryRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryInput) elasticbeanstalk.DescribeEnvironmentManagedActionHistoryRequest
+}
+
+// DescribeEnvironmentManagedActionsRequester provides the interface for the DescribeEnvironmentManagedActionsRequest API operation.
+type DescribeEnvironmentManagedActionsRequester interface {
+	DescribeEnvironmentManagedActionsRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionsInput) elasticbeanstalk.DescribeEnvironmentManagedActionsRequest
+}
+
+// DescribeEnvironmentResourcesRequester provides the interface for the DescribeEnvironmentResourcesRequest API operation.
+type DescribeEnvironmentResourcesRequester interface {
+	DescribeEnvironmentResourcesRequest(*elasticbeanstalk.DescribeEnvironmentResourcesInput) elasticbeanstalk.DescribeEnvironmentResourcesRequest
+}
+
+// DescribeEnvironmentsRequester provides the interface for the DescribeEnvironmentsRequest API operation.
+type DescribeEnvironmentsRequester interface {
+	DescribeEnvironmentsRequest(*elasticbeanstalk.DescribeEnvironmentsInput) elasticbeanstalk.DescribeEnvironmentsRequest
+}
+
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
+	DescribeEventsRequest(*elasticbeanstalk.DescribeEventsInput) elasticbeanstalk.DescribeEventsRequest
+}
+
+// DescribeInstancesHealthRequester provides the interface for the DescribeInstancesHealthRequest API operation.
+type DescribeInstancesHealthRequester interface {
+	DescribeInstancesHealthRequest(*elasticbeanstalk.DescribeInstancesHealthInput) elasticbeanstalk.DescribeInstancesHealthRequest
+}
+
+// DescribePlatformVersionRequester provides the interface for the DescribePlatformVersionRequest API operation.
+type DescribePlatformVersionRequester interface {
+	DescribePlatformVersionRequest(*elasticbeanstalk.DescribePlatformVersionInput) elasticbeanstalk.DescribePlatformVersionRequest
+}
+
+// ListAvailableSolutionStacksRequester provides the interface for the ListAvailableSolutionStacksRequest API operation.
+type ListAvailableSolutionStacksRequester interface {
+	ListAvailableSolutionStacksRequest(*elasticbeanstalk.ListAvailableSolutionStacksInput) elasticbeanstalk.ListAvailableSolutionStacksRequest
+}
+
+// ListPlatformVersionsRequester provides the interface for the ListPlatformVersionsRequest API operation.
+type ListPlatformVersionsRequester interface {
+	ListPlatformVersionsRequest(*elasticbeanstalk.ListPlatformVersionsInput) elasticbeanstalk.ListPlatformVersionsRequest
+}
+
+// RebuildEnvironmentRequester provides the interface for the RebuildEnvironmentRequest API operation.
+type RebuildEnvironmentRequester interface {
+	RebuildEnvironmentRequest(*elasticbeanstalk.RebuildEnvironmentInput) elasticbeanstalk.RebuildEnvironmentRequest
+}
+
+// RequestEnvironmentInfoRequester provides the interface for the RequestEnvironmentInfoRequest API operation.
+type RequestEnvironmentInfoRequester interface {
+	RequestEnvironmentInfoRequest(*elasticbeanstalk.RequestEnvironmentInfoInput) elasticbeanstalk.RequestEnvironmentInfoRequest
+}
+
+// RestartAppServerRequester provides the interface for the RestartAppServerRequest API operation.
+type RestartAppServerRequester interface {
+	RestartAppServerRequest(*elasticbeanstalk.RestartAppServerInput) elasticbeanstalk.RestartAppServerRequest
+}
+
+// RetrieveEnvironmentInfoRequester provides the interface for the RetrieveEnvironmentInfoRequest API operation.
+type RetrieveEnvironmentInfoRequester interface {
+	RetrieveEnvironmentInfoRequest(*elasticbeanstalk.RetrieveEnvironmentInfoInput) elasticbeanstalk.RetrieveEnvironmentInfoRequest
+}
+
+// SwapEnvironmentCNAMEsRequester provides the interface for the SwapEnvironmentCNAMEsRequest API operation.
+type SwapEnvironmentCNAMEsRequester interface {
+	SwapEnvironmentCNAMEsRequest(*elasticbeanstalk.SwapEnvironmentCNAMEsInput) elasticbeanstalk.SwapEnvironmentCNAMEsRequest
+}
+
+// TerminateEnvironmentRequester provides the interface for the TerminateEnvironmentRequest API operation.
+type TerminateEnvironmentRequester interface {
+	TerminateEnvironmentRequest(*elasticbeanstalk.TerminateEnvironmentInput) elasticbeanstalk.TerminateEnvironmentRequest
+}
+
+// UpdateApplicationRequester provides the interface for the UpdateApplicationRequest API operation.
+type UpdateApplicationRequester interface {
+	UpdateApplicationRequest(*elasticbeanstalk.UpdateApplicationInput) elasticbeanstalk.UpdateApplicationRequest
+}
+
+// UpdateApplicationResourceLifecycleRequester provides the interface for the UpdateApplicationResourceLifecycleRequest API operation.
+type UpdateApplicationResourceLifecycleRequester interface {
+	UpdateApplicationResourceLifecycleRequest(*elasticbeanstalk.UpdateApplicationResourceLifecycleInput) elasticbeanstalk.UpdateApplicationResourceLifecycleRequest
+}
+
+// UpdateApplicationVersionRequester provides the interface for the UpdateApplicationVersionRequest API operation.
+type UpdateApplicationVersionRequester interface {
+	UpdateApplicationVersionRequest(*elasticbeanstalk.UpdateApplicationVersionInput) elasticbeanstalk.UpdateApplicationVersionRequest
+}
+
+// UpdateConfigurationTemplateRequester provides the interface for the UpdateConfigurationTemplateRequest API operation.
+type UpdateConfigurationTemplateRequester interface {
+	UpdateConfigurationTemplateRequest(*elasticbeanstalk.UpdateConfigurationTemplateInput) elasticbeanstalk.UpdateConfigurationTemplateRequest
+}
+
+// UpdateEnvironmentRequester provides the interface for the UpdateEnvironmentRequest API operation.
+type UpdateEnvironmentRequester interface {
+	UpdateEnvironmentRequest(*elasticbeanstalk.UpdateEnvironmentInput) elasticbeanstalk.UpdateEnvironmentRequest
+}
+
+// ValidateConfigurationSettingsRequester provides the interface for the ValidateConfigurationSettingsRequest API operation.
+type ValidateConfigurationSettingsRequester interface {
+	ValidateConfigurationSettingsRequest(*elasticbeanstalk.ValidateConfigurationSettingsInput) elasticbeanstalk.ValidateConfigurationSettingsRequest
+}

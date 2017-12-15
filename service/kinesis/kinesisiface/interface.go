@@ -13,109 +13,119 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
-// KinesisAPI provides an interface to enable mocking the
-// kinesis.Kinesis service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Kinesis.
-//    func myFunc(svc kinesisiface.KinesisAPI) bool {
-//        // Make svc.AddTagsToStream request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := kinesis.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKinesisClient struct {
-//        kinesisiface.KinesisAPI
-//    }
-//    func (m *mockKinesisClient) AddTagsToStream(input *kinesis.AddTagsToStreamInput) (*kinesis.AddTagsToStreamOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockKinesisClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type KinesisAPI interface {
+// AddTagsToStreamRequester provides the interface for the AddTagsToStreamRequest API operation.
+type AddTagsToStreamRequester interface {
 	AddTagsToStreamRequest(*kinesis.AddTagsToStreamInput) kinesis.AddTagsToStreamRequest
+}
 
+// CreateStreamRequester provides the interface for the CreateStreamRequest API operation.
+type CreateStreamRequester interface {
 	CreateStreamRequest(*kinesis.CreateStreamInput) kinesis.CreateStreamRequest
+}
 
+// DecreaseStreamRetentionPeriodRequester provides the interface for the DecreaseStreamRetentionPeriodRequest API operation.
+type DecreaseStreamRetentionPeriodRequester interface {
 	DecreaseStreamRetentionPeriodRequest(*kinesis.DecreaseStreamRetentionPeriodInput) kinesis.DecreaseStreamRetentionPeriodRequest
+}
 
+// DeleteStreamRequester provides the interface for the DeleteStreamRequest API operation.
+type DeleteStreamRequester interface {
 	DeleteStreamRequest(*kinesis.DeleteStreamInput) kinesis.DeleteStreamRequest
+}
 
+// DescribeLimitsRequester provides the interface for the DescribeLimitsRequest API operation.
+type DescribeLimitsRequester interface {
 	DescribeLimitsRequest(*kinesis.DescribeLimitsInput) kinesis.DescribeLimitsRequest
+}
 
+// DescribeStreamRequester provides the interface for the DescribeStreamRequest API operation.
+type DescribeStreamRequester interface {
 	DescribeStreamRequest(*kinesis.DescribeStreamInput) kinesis.DescribeStreamRequest
+}
 
-	DescribeStreamPages(*kinesis.DescribeStreamInput, func(*kinesis.DescribeStreamOutput, bool) bool) error
-	DescribeStreamPagesWithContext(aws.Context, *kinesis.DescribeStreamInput, func(*kinesis.DescribeStreamOutput, bool) bool, ...aws.Option) error
-
+// DisableEnhancedMonitoringRequester provides the interface for the DisableEnhancedMonitoringRequest API operation.
+type DisableEnhancedMonitoringRequester interface {
 	DisableEnhancedMonitoringRequest(*kinesis.DisableEnhancedMonitoringInput) kinesis.DisableEnhancedMonitoringRequest
+}
 
+// EnableEnhancedMonitoringRequester provides the interface for the EnableEnhancedMonitoringRequest API operation.
+type EnableEnhancedMonitoringRequester interface {
 	EnableEnhancedMonitoringRequest(*kinesis.EnableEnhancedMonitoringInput) kinesis.EnableEnhancedMonitoringRequest
+}
 
+// GetRecordsRequester provides the interface for the GetRecordsRequest API operation.
+type GetRecordsRequester interface {
 	GetRecordsRequest(*kinesis.GetRecordsInput) kinesis.GetRecordsRequest
+}
 
+// GetShardIteratorRequester provides the interface for the GetShardIteratorRequest API operation.
+type GetShardIteratorRequester interface {
 	GetShardIteratorRequest(*kinesis.GetShardIteratorInput) kinesis.GetShardIteratorRequest
+}
 
+// IncreaseStreamRetentionPeriodRequester provides the interface for the IncreaseStreamRetentionPeriodRequest API operation.
+type IncreaseStreamRetentionPeriodRequester interface {
 	IncreaseStreamRetentionPeriodRequest(*kinesis.IncreaseStreamRetentionPeriodInput) kinesis.IncreaseStreamRetentionPeriodRequest
+}
 
+// ListStreamsRequester provides the interface for the ListStreamsRequest API operation.
+type ListStreamsRequester interface {
 	ListStreamsRequest(*kinesis.ListStreamsInput) kinesis.ListStreamsRequest
+}
 
-	ListStreamsPages(*kinesis.ListStreamsInput, func(*kinesis.ListStreamsOutput, bool) bool) error
-	ListStreamsPagesWithContext(aws.Context, *kinesis.ListStreamsInput, func(*kinesis.ListStreamsOutput, bool) bool, ...aws.Option) error
-
+// ListTagsForStreamRequester provides the interface for the ListTagsForStreamRequest API operation.
+type ListTagsForStreamRequester interface {
 	ListTagsForStreamRequest(*kinesis.ListTagsForStreamInput) kinesis.ListTagsForStreamRequest
+}
 
+// MergeShardsRequester provides the interface for the MergeShardsRequest API operation.
+type MergeShardsRequester interface {
 	MergeShardsRequest(*kinesis.MergeShardsInput) kinesis.MergeShardsRequest
+}
 
+// PutRecordRequester provides the interface for the PutRecordRequest API operation.
+type PutRecordRequester interface {
 	PutRecordRequest(*kinesis.PutRecordInput) kinesis.PutRecordRequest
+}
 
+// PutRecordsRequester provides the interface for the PutRecordsRequest API operation.
+type PutRecordsRequester interface {
 	PutRecordsRequest(*kinesis.PutRecordsInput) kinesis.PutRecordsRequest
+}
 
+// RemoveTagsFromStreamRequester provides the interface for the RemoveTagsFromStreamRequest API operation.
+type RemoveTagsFromStreamRequester interface {
 	RemoveTagsFromStreamRequest(*kinesis.RemoveTagsFromStreamInput) kinesis.RemoveTagsFromStreamRequest
+}
 
+// SplitShardRequester provides the interface for the SplitShardRequest API operation.
+type SplitShardRequester interface {
 	SplitShardRequest(*kinesis.SplitShardInput) kinesis.SplitShardRequest
+}
 
+// StartStreamEncryptionRequester provides the interface for the StartStreamEncryptionRequest API operation.
+type StartStreamEncryptionRequester interface {
 	StartStreamEncryptionRequest(*kinesis.StartStreamEncryptionInput) kinesis.StartStreamEncryptionRequest
+}
 
+// StopStreamEncryptionRequester provides the interface for the StopStreamEncryptionRequest API operation.
+type StopStreamEncryptionRequester interface {
 	StopStreamEncryptionRequest(*kinesis.StopStreamEncryptionInput) kinesis.StopStreamEncryptionRequest
+}
 
+// UpdateShardCountRequester provides the interface for the UpdateShardCountRequest API operation.
+type UpdateShardCountRequester interface {
 	UpdateShardCountRequest(*kinesis.UpdateShardCountInput) kinesis.UpdateShardCountRequest
+}
 
+// StreamExistsWaiter provides the interface for the WaitUntilStreamExists waiter.
+type StreamExistsWaiter interface {
 	WaitUntilStreamExists(*kinesis.DescribeStreamInput) error
 	WaitUntilStreamExistsWithContext(aws.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
+}
 
+// StreamNotExistsWaiter provides the interface for the WaitUntilStreamNotExists waiter.
+type StreamNotExistsWaiter interface {
 	WaitUntilStreamNotExists(*kinesis.DescribeStreamInput) error
 	WaitUntilStreamNotExistsWithContext(aws.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
 }
-
-var _ KinesisAPI = (*kinesis.Kinesis)(nil)

@@ -12,63 +12,22 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 )
 
-// IoTDataPlaneAPI provides an interface to enable mocking the
-// iotdataplane.IoTDataPlane service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS IoT Data Plane.
-//    func myFunc(svc iotdataplaneiface.IoTDataPlaneAPI) bool {
-//        // Make svc.DeleteThingShadow request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := iotdataplane.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoTDataPlaneClient struct {
-//        iotdataplaneiface.IoTDataPlaneAPI
-//    }
-//    func (m *mockIoTDataPlaneClient) DeleteThingShadow(input *iotdataplane.DeleteThingShadowInput) (*iotdataplane.DeleteThingShadowOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockIoTDataPlaneClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type IoTDataPlaneAPI interface {
+// DeleteThingShadowRequester provides the interface for the DeleteThingShadowRequest API operation.
+type DeleteThingShadowRequester interface {
 	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) iotdataplane.DeleteThingShadowRequest
-
-	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) iotdataplane.GetThingShadowRequest
-
-	PublishRequest(*iotdataplane.PublishInput) iotdataplane.PublishRequest
-
-	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest
 }
 
-var _ IoTDataPlaneAPI = (*iotdataplane.IoTDataPlane)(nil)
+// GetThingShadowRequester provides the interface for the GetThingShadowRequest API operation.
+type GetThingShadowRequester interface {
+	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) iotdataplane.GetThingShadowRequest
+}
+
+// PublishRequester provides the interface for the PublishRequest API operation.
+type PublishRequester interface {
+	PublishRequest(*iotdataplane.PublishInput) iotdataplane.PublishRequest
+}
+
+// UpdateThingShadowRequester provides the interface for the UpdateThingShadowRequest API operation.
+type UpdateThingShadowRequester interface {
+	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest
+}

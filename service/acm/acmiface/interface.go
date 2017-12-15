@@ -13,78 +13,52 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/acm"
 )
 
-// ACMAPI provides an interface to enable mocking the
-// acm.ACM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Certificate Manager.
-//    func myFunc(svc acmiface.ACMAPI) bool {
-//        // Make svc.AddTagsToCertificate request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := acm.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockACMClient struct {
-//        acmiface.ACMAPI
-//    }
-//    func (m *mockACMClient) AddTagsToCertificate(input *acm.AddTagsToCertificateInput) (*acm.AddTagsToCertificateOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockACMClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ACMAPI interface {
+// AddTagsToCertificateRequester provides the interface for the AddTagsToCertificateRequest API operation.
+type AddTagsToCertificateRequester interface {
 	AddTagsToCertificateRequest(*acm.AddTagsToCertificateInput) acm.AddTagsToCertificateRequest
-
-	DeleteCertificateRequest(*acm.DeleteCertificateInput) acm.DeleteCertificateRequest
-
-	DescribeCertificateRequest(*acm.DescribeCertificateInput) acm.DescribeCertificateRequest
-
-	GetCertificateRequest(*acm.GetCertificateInput) acm.GetCertificateRequest
-
-	ImportCertificateRequest(*acm.ImportCertificateInput) acm.ImportCertificateRequest
-
-	ListCertificatesRequest(*acm.ListCertificatesInput) acm.ListCertificatesRequest
-
-	ListCertificatesPages(*acm.ListCertificatesInput, func(*acm.ListCertificatesOutput, bool) bool) error
-	ListCertificatesPagesWithContext(aws.Context, *acm.ListCertificatesInput, func(*acm.ListCertificatesOutput, bool) bool, ...aws.Option) error
-
-	ListTagsForCertificateRequest(*acm.ListTagsForCertificateInput) acm.ListTagsForCertificateRequest
-
-	RemoveTagsFromCertificateRequest(*acm.RemoveTagsFromCertificateInput) acm.RemoveTagsFromCertificateRequest
-
-	RequestCertificateRequest(*acm.RequestCertificateInput) acm.RequestCertificateRequest
-
-	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) acm.ResendValidationEmailRequest
 }
 
-var _ ACMAPI = (*acm.ACM)(nil)
+// DeleteCertificateRequester provides the interface for the DeleteCertificateRequest API operation.
+type DeleteCertificateRequester interface {
+	DeleteCertificateRequest(*acm.DeleteCertificateInput) acm.DeleteCertificateRequest
+}
+
+// DescribeCertificateRequester provides the interface for the DescribeCertificateRequest API operation.
+type DescribeCertificateRequester interface {
+	DescribeCertificateRequest(*acm.DescribeCertificateInput) acm.DescribeCertificateRequest
+}
+
+// GetCertificateRequester provides the interface for the GetCertificateRequest API operation.
+type GetCertificateRequester interface {
+	GetCertificateRequest(*acm.GetCertificateInput) acm.GetCertificateRequest
+}
+
+// ImportCertificateRequester provides the interface for the ImportCertificateRequest API operation.
+type ImportCertificateRequester interface {
+	ImportCertificateRequest(*acm.ImportCertificateInput) acm.ImportCertificateRequest
+}
+
+// ListCertificatesRequester provides the interface for the ListCertificatesRequest API operation.
+type ListCertificatesRequester interface {
+	ListCertificatesRequest(*acm.ListCertificatesInput) acm.ListCertificatesRequest
+}
+
+// ListTagsForCertificateRequester provides the interface for the ListTagsForCertificateRequest API operation.
+type ListTagsForCertificateRequester interface {
+	ListTagsForCertificateRequest(*acm.ListTagsForCertificateInput) acm.ListTagsForCertificateRequest
+}
+
+// RemoveTagsFromCertificateRequester provides the interface for the RemoveTagsFromCertificateRequest API operation.
+type RemoveTagsFromCertificateRequester interface {
+	RemoveTagsFromCertificateRequest(*acm.RemoveTagsFromCertificateInput) acm.RemoveTagsFromCertificateRequest
+}
+
+// RequestCertificateRequester provides the interface for the RequestCertificateRequest API operation.
+type RequestCertificateRequester interface {
+	RequestCertificateRequest(*acm.RequestCertificateInput) acm.RequestCertificateRequest
+}
+
+// ResendValidationEmailRequester provides the interface for the ResendValidationEmailRequest API operation.
+type ResendValidationEmailRequester interface {
+	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) acm.ResendValidationEmailRequest
+}

@@ -13,130 +13,152 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sns"
 )
 
-// SNSAPI provides an interface to enable mocking the
-// sns.SNS service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Notification Service.
-//    func myFunc(svc snsiface.SNSAPI) bool {
-//        // Make svc.AddPermission request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := sns.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSNSClient struct {
-//        snsiface.SNSAPI
-//    }
-//    func (m *mockSNSClient) AddPermission(input *sns.AddPermissionInput) (*sns.AddPermissionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSNSClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SNSAPI interface {
+// AddPermissionRequester provides the interface for the AddPermissionRequest API operation.
+type AddPermissionRequester interface {
 	AddPermissionRequest(*sns.AddPermissionInput) sns.AddPermissionRequest
-
-	CheckIfPhoneNumberIsOptedOutRequest(*sns.CheckIfPhoneNumberIsOptedOutInput) sns.CheckIfPhoneNumberIsOptedOutRequest
-
-	ConfirmSubscriptionRequest(*sns.ConfirmSubscriptionInput) sns.ConfirmSubscriptionRequest
-
-	CreatePlatformApplicationRequest(*sns.CreatePlatformApplicationInput) sns.CreatePlatformApplicationRequest
-
-	CreatePlatformEndpointRequest(*sns.CreatePlatformEndpointInput) sns.CreatePlatformEndpointRequest
-
-	CreateTopicRequest(*sns.CreateTopicInput) sns.CreateTopicRequest
-
-	DeleteEndpointRequest(*sns.DeleteEndpointInput) sns.DeleteEndpointRequest
-
-	DeletePlatformApplicationRequest(*sns.DeletePlatformApplicationInput) sns.DeletePlatformApplicationRequest
-
-	DeleteTopicRequest(*sns.DeleteTopicInput) sns.DeleteTopicRequest
-
-	GetEndpointAttributesRequest(*sns.GetEndpointAttributesInput) sns.GetEndpointAttributesRequest
-
-	GetPlatformApplicationAttributesRequest(*sns.GetPlatformApplicationAttributesInput) sns.GetPlatformApplicationAttributesRequest
-
-	GetSMSAttributesRequest(*sns.GetSMSAttributesInput) sns.GetSMSAttributesRequest
-
-	GetSubscriptionAttributesRequest(*sns.GetSubscriptionAttributesInput) sns.GetSubscriptionAttributesRequest
-
-	GetTopicAttributesRequest(*sns.GetTopicAttributesInput) sns.GetTopicAttributesRequest
-
-	ListEndpointsByPlatformApplicationRequest(*sns.ListEndpointsByPlatformApplicationInput) sns.ListEndpointsByPlatformApplicationRequest
-
-	ListEndpointsByPlatformApplicationPages(*sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool) error
-	ListEndpointsByPlatformApplicationPagesWithContext(aws.Context, *sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool, ...aws.Option) error
-
-	ListPhoneNumbersOptedOutRequest(*sns.ListPhoneNumbersOptedOutInput) sns.ListPhoneNumbersOptedOutRequest
-
-	ListPlatformApplicationsRequest(*sns.ListPlatformApplicationsInput) sns.ListPlatformApplicationsRequest
-
-	ListPlatformApplicationsPages(*sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool) error
-	ListPlatformApplicationsPagesWithContext(aws.Context, *sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool, ...aws.Option) error
-
-	ListSubscriptionsRequest(*sns.ListSubscriptionsInput) sns.ListSubscriptionsRequest
-
-	ListSubscriptionsPages(*sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool) error
-	ListSubscriptionsPagesWithContext(aws.Context, *sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool, ...aws.Option) error
-
-	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) sns.ListSubscriptionsByTopicRequest
-
-	ListSubscriptionsByTopicPages(*sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool) error
-	ListSubscriptionsByTopicPagesWithContext(aws.Context, *sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool, ...aws.Option) error
-
-	ListTopicsRequest(*sns.ListTopicsInput) sns.ListTopicsRequest
-
-	ListTopicsPages(*sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool) error
-	ListTopicsPagesWithContext(aws.Context, *sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool, ...aws.Option) error
-
-	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) sns.OptInPhoneNumberRequest
-
-	PublishRequest(*sns.PublishInput) sns.PublishRequest
-
-	RemovePermissionRequest(*sns.RemovePermissionInput) sns.RemovePermissionRequest
-
-	SetEndpointAttributesRequest(*sns.SetEndpointAttributesInput) sns.SetEndpointAttributesRequest
-
-	SetPlatformApplicationAttributesRequest(*sns.SetPlatformApplicationAttributesInput) sns.SetPlatformApplicationAttributesRequest
-
-	SetSMSAttributesRequest(*sns.SetSMSAttributesInput) sns.SetSMSAttributesRequest
-
-	SetSubscriptionAttributesRequest(*sns.SetSubscriptionAttributesInput) sns.SetSubscriptionAttributesRequest
-
-	SetTopicAttributesRequest(*sns.SetTopicAttributesInput) sns.SetTopicAttributesRequest
-
-	SubscribeRequest(*sns.SubscribeInput) sns.SubscribeRequest
-
-	UnsubscribeRequest(*sns.UnsubscribeInput) sns.UnsubscribeRequest
 }
 
-var _ SNSAPI = (*sns.SNS)(nil)
+// CheckIfPhoneNumberIsOptedOutRequester provides the interface for the CheckIfPhoneNumberIsOptedOutRequest API operation.
+type CheckIfPhoneNumberIsOptedOutRequester interface {
+	CheckIfPhoneNumberIsOptedOutRequest(*sns.CheckIfPhoneNumberIsOptedOutInput) sns.CheckIfPhoneNumberIsOptedOutRequest
+}
+
+// ConfirmSubscriptionRequester provides the interface for the ConfirmSubscriptionRequest API operation.
+type ConfirmSubscriptionRequester interface {
+	ConfirmSubscriptionRequest(*sns.ConfirmSubscriptionInput) sns.ConfirmSubscriptionRequest
+}
+
+// CreatePlatformApplicationRequester provides the interface for the CreatePlatformApplicationRequest API operation.
+type CreatePlatformApplicationRequester interface {
+	CreatePlatformApplicationRequest(*sns.CreatePlatformApplicationInput) sns.CreatePlatformApplicationRequest
+}
+
+// CreatePlatformEndpointRequester provides the interface for the CreatePlatformEndpointRequest API operation.
+type CreatePlatformEndpointRequester interface {
+	CreatePlatformEndpointRequest(*sns.CreatePlatformEndpointInput) sns.CreatePlatformEndpointRequest
+}
+
+// CreateTopicRequester provides the interface for the CreateTopicRequest API operation.
+type CreateTopicRequester interface {
+	CreateTopicRequest(*sns.CreateTopicInput) sns.CreateTopicRequest
+}
+
+// DeleteEndpointRequester provides the interface for the DeleteEndpointRequest API operation.
+type DeleteEndpointRequester interface {
+	DeleteEndpointRequest(*sns.DeleteEndpointInput) sns.DeleteEndpointRequest
+}
+
+// DeletePlatformApplicationRequester provides the interface for the DeletePlatformApplicationRequest API operation.
+type DeletePlatformApplicationRequester interface {
+	DeletePlatformApplicationRequest(*sns.DeletePlatformApplicationInput) sns.DeletePlatformApplicationRequest
+}
+
+// DeleteTopicRequester provides the interface for the DeleteTopicRequest API operation.
+type DeleteTopicRequester interface {
+	DeleteTopicRequest(*sns.DeleteTopicInput) sns.DeleteTopicRequest
+}
+
+// GetEndpointAttributesRequester provides the interface for the GetEndpointAttributesRequest API operation.
+type GetEndpointAttributesRequester interface {
+	GetEndpointAttributesRequest(*sns.GetEndpointAttributesInput) sns.GetEndpointAttributesRequest
+}
+
+// GetPlatformApplicationAttributesRequester provides the interface for the GetPlatformApplicationAttributesRequest API operation.
+type GetPlatformApplicationAttributesRequester interface {
+	GetPlatformApplicationAttributesRequest(*sns.GetPlatformApplicationAttributesInput) sns.GetPlatformApplicationAttributesRequest
+}
+
+// GetSMSAttributesRequester provides the interface for the GetSMSAttributesRequest API operation.
+type GetSMSAttributesRequester interface {
+	GetSMSAttributesRequest(*sns.GetSMSAttributesInput) sns.GetSMSAttributesRequest
+}
+
+// GetSubscriptionAttributesRequester provides the interface for the GetSubscriptionAttributesRequest API operation.
+type GetSubscriptionAttributesRequester interface {
+	GetSubscriptionAttributesRequest(*sns.GetSubscriptionAttributesInput) sns.GetSubscriptionAttributesRequest
+}
+
+// GetTopicAttributesRequester provides the interface for the GetTopicAttributesRequest API operation.
+type GetTopicAttributesRequester interface {
+	GetTopicAttributesRequest(*sns.GetTopicAttributesInput) sns.GetTopicAttributesRequest
+}
+
+// ListEndpointsByPlatformApplicationRequester provides the interface for the ListEndpointsByPlatformApplicationRequest API operation.
+type ListEndpointsByPlatformApplicationRequester interface {
+	ListEndpointsByPlatformApplicationRequest(*sns.ListEndpointsByPlatformApplicationInput) sns.ListEndpointsByPlatformApplicationRequest
+}
+
+// ListPhoneNumbersOptedOutRequester provides the interface for the ListPhoneNumbersOptedOutRequest API operation.
+type ListPhoneNumbersOptedOutRequester interface {
+	ListPhoneNumbersOptedOutRequest(*sns.ListPhoneNumbersOptedOutInput) sns.ListPhoneNumbersOptedOutRequest
+}
+
+// ListPlatformApplicationsRequester provides the interface for the ListPlatformApplicationsRequest API operation.
+type ListPlatformApplicationsRequester interface {
+	ListPlatformApplicationsRequest(*sns.ListPlatformApplicationsInput) sns.ListPlatformApplicationsRequest
+}
+
+// ListSubscriptionsRequester provides the interface for the ListSubscriptionsRequest API operation.
+type ListSubscriptionsRequester interface {
+	ListSubscriptionsRequest(*sns.ListSubscriptionsInput) sns.ListSubscriptionsRequest
+}
+
+// ListSubscriptionsByTopicRequester provides the interface for the ListSubscriptionsByTopicRequest API operation.
+type ListSubscriptionsByTopicRequester interface {
+	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) sns.ListSubscriptionsByTopicRequest
+}
+
+// ListTopicsRequester provides the interface for the ListTopicsRequest API operation.
+type ListTopicsRequester interface {
+	ListTopicsRequest(*sns.ListTopicsInput) sns.ListTopicsRequest
+}
+
+// OptInPhoneNumberRequester provides the interface for the OptInPhoneNumberRequest API operation.
+type OptInPhoneNumberRequester interface {
+	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) sns.OptInPhoneNumberRequest
+}
+
+// PublishRequester provides the interface for the PublishRequest API operation.
+type PublishRequester interface {
+	PublishRequest(*sns.PublishInput) sns.PublishRequest
+}
+
+// RemovePermissionRequester provides the interface for the RemovePermissionRequest API operation.
+type RemovePermissionRequester interface {
+	RemovePermissionRequest(*sns.RemovePermissionInput) sns.RemovePermissionRequest
+}
+
+// SetEndpointAttributesRequester provides the interface for the SetEndpointAttributesRequest API operation.
+type SetEndpointAttributesRequester interface {
+	SetEndpointAttributesRequest(*sns.SetEndpointAttributesInput) sns.SetEndpointAttributesRequest
+}
+
+// SetPlatformApplicationAttributesRequester provides the interface for the SetPlatformApplicationAttributesRequest API operation.
+type SetPlatformApplicationAttributesRequester interface {
+	SetPlatformApplicationAttributesRequest(*sns.SetPlatformApplicationAttributesInput) sns.SetPlatformApplicationAttributesRequest
+}
+
+// SetSMSAttributesRequester provides the interface for the SetSMSAttributesRequest API operation.
+type SetSMSAttributesRequester interface {
+	SetSMSAttributesRequest(*sns.SetSMSAttributesInput) sns.SetSMSAttributesRequest
+}
+
+// SetSubscriptionAttributesRequester provides the interface for the SetSubscriptionAttributesRequest API operation.
+type SetSubscriptionAttributesRequester interface {
+	SetSubscriptionAttributesRequest(*sns.SetSubscriptionAttributesInput) sns.SetSubscriptionAttributesRequest
+}
+
+// SetTopicAttributesRequester provides the interface for the SetTopicAttributesRequest API operation.
+type SetTopicAttributesRequester interface {
+	SetTopicAttributesRequest(*sns.SetTopicAttributesInput) sns.SetTopicAttributesRequest
+}
+
+// SubscribeRequester provides the interface for the SubscribeRequest API operation.
+type SubscribeRequester interface {
+	SubscribeRequest(*sns.SubscribeInput) sns.SubscribeRequest
+}
+
+// UnsubscribeRequester provides the interface for the UnsubscribeRequest API operation.
+type UnsubscribeRequester interface {
+	UnsubscribeRequest(*sns.UnsubscribeInput) sns.UnsubscribeRequest
+}

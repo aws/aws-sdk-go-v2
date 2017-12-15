@@ -12,81 +12,67 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
 )
 
-// BudgetsAPI provides an interface to enable mocking the
-// budgets.Budgets service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Budgets.
-//    func myFunc(svc budgetsiface.BudgetsAPI) bool {
-//        // Make svc.CreateBudget request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := budgets.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockBudgetsClient struct {
-//        budgetsiface.BudgetsAPI
-//    }
-//    func (m *mockBudgetsClient) CreateBudget(input *budgets.CreateBudgetInput) (*budgets.CreateBudgetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockBudgetsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type BudgetsAPI interface {
+// CreateBudgetRequester provides the interface for the CreateBudgetRequest API operation.
+type CreateBudgetRequester interface {
 	CreateBudgetRequest(*budgets.CreateBudgetInput) budgets.CreateBudgetRequest
-
-	CreateNotificationRequest(*budgets.CreateNotificationInput) budgets.CreateNotificationRequest
-
-	CreateSubscriberRequest(*budgets.CreateSubscriberInput) budgets.CreateSubscriberRequest
-
-	DeleteBudgetRequest(*budgets.DeleteBudgetInput) budgets.DeleteBudgetRequest
-
-	DeleteNotificationRequest(*budgets.DeleteNotificationInput) budgets.DeleteNotificationRequest
-
-	DeleteSubscriberRequest(*budgets.DeleteSubscriberInput) budgets.DeleteSubscriberRequest
-
-	DescribeBudgetRequest(*budgets.DescribeBudgetInput) budgets.DescribeBudgetRequest
-
-	DescribeBudgetsRequest(*budgets.DescribeBudgetsInput) budgets.DescribeBudgetsRequest
-
-	DescribeNotificationsForBudgetRequest(*budgets.DescribeNotificationsForBudgetInput) budgets.DescribeNotificationsForBudgetRequest
-
-	DescribeSubscribersForNotificationRequest(*budgets.DescribeSubscribersForNotificationInput) budgets.DescribeSubscribersForNotificationRequest
-
-	UpdateBudgetRequest(*budgets.UpdateBudgetInput) budgets.UpdateBudgetRequest
-
-	UpdateNotificationRequest(*budgets.UpdateNotificationInput) budgets.UpdateNotificationRequest
-
-	UpdateSubscriberRequest(*budgets.UpdateSubscriberInput) budgets.UpdateSubscriberRequest
 }
 
-var _ BudgetsAPI = (*budgets.Budgets)(nil)
+// CreateNotificationRequester provides the interface for the CreateNotificationRequest API operation.
+type CreateNotificationRequester interface {
+	CreateNotificationRequest(*budgets.CreateNotificationInput) budgets.CreateNotificationRequest
+}
+
+// CreateSubscriberRequester provides the interface for the CreateSubscriberRequest API operation.
+type CreateSubscriberRequester interface {
+	CreateSubscriberRequest(*budgets.CreateSubscriberInput) budgets.CreateSubscriberRequest
+}
+
+// DeleteBudgetRequester provides the interface for the DeleteBudgetRequest API operation.
+type DeleteBudgetRequester interface {
+	DeleteBudgetRequest(*budgets.DeleteBudgetInput) budgets.DeleteBudgetRequest
+}
+
+// DeleteNotificationRequester provides the interface for the DeleteNotificationRequest API operation.
+type DeleteNotificationRequester interface {
+	DeleteNotificationRequest(*budgets.DeleteNotificationInput) budgets.DeleteNotificationRequest
+}
+
+// DeleteSubscriberRequester provides the interface for the DeleteSubscriberRequest API operation.
+type DeleteSubscriberRequester interface {
+	DeleteSubscriberRequest(*budgets.DeleteSubscriberInput) budgets.DeleteSubscriberRequest
+}
+
+// DescribeBudgetRequester provides the interface for the DescribeBudgetRequest API operation.
+type DescribeBudgetRequester interface {
+	DescribeBudgetRequest(*budgets.DescribeBudgetInput) budgets.DescribeBudgetRequest
+}
+
+// DescribeBudgetsRequester provides the interface for the DescribeBudgetsRequest API operation.
+type DescribeBudgetsRequester interface {
+	DescribeBudgetsRequest(*budgets.DescribeBudgetsInput) budgets.DescribeBudgetsRequest
+}
+
+// DescribeNotificationsForBudgetRequester provides the interface for the DescribeNotificationsForBudgetRequest API operation.
+type DescribeNotificationsForBudgetRequester interface {
+	DescribeNotificationsForBudgetRequest(*budgets.DescribeNotificationsForBudgetInput) budgets.DescribeNotificationsForBudgetRequest
+}
+
+// DescribeSubscribersForNotificationRequester provides the interface for the DescribeSubscribersForNotificationRequest API operation.
+type DescribeSubscribersForNotificationRequester interface {
+	DescribeSubscribersForNotificationRequest(*budgets.DescribeSubscribersForNotificationInput) budgets.DescribeSubscribersForNotificationRequest
+}
+
+// UpdateBudgetRequester provides the interface for the UpdateBudgetRequest API operation.
+type UpdateBudgetRequester interface {
+	UpdateBudgetRequest(*budgets.UpdateBudgetInput) budgets.UpdateBudgetRequest
+}
+
+// UpdateNotificationRequester provides the interface for the UpdateNotificationRequest API operation.
+type UpdateNotificationRequester interface {
+	UpdateNotificationRequest(*budgets.UpdateNotificationInput) budgets.UpdateNotificationRequest
+}
+
+// UpdateSubscriberRequester provides the interface for the UpdateSubscriberRequest API operation.
+type UpdateSubscriberRequester interface {
+	UpdateSubscriberRequest(*budgets.UpdateSubscriberInput) budgets.UpdateSubscriberRequest
+}

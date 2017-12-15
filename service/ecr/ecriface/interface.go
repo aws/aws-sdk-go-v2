@@ -13,98 +13,87 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
 )
 
-// ECRAPI provides an interface to enable mocking the
-// ecr.ECR service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon EC2 Container Registry.
-//    func myFunc(svc ecriface.ECRAPI) bool {
-//        // Make svc.BatchCheckLayerAvailability request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := ecr.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockECRClient struct {
-//        ecriface.ECRAPI
-//    }
-//    func (m *mockECRClient) BatchCheckLayerAvailability(input *ecr.BatchCheckLayerAvailabilityInput) (*ecr.BatchCheckLayerAvailabilityOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockECRClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ECRAPI interface {
+// BatchCheckLayerAvailabilityRequester provides the interface for the BatchCheckLayerAvailabilityRequest API operation.
+type BatchCheckLayerAvailabilityRequester interface {
 	BatchCheckLayerAvailabilityRequest(*ecr.BatchCheckLayerAvailabilityInput) ecr.BatchCheckLayerAvailabilityRequest
-
-	BatchDeleteImageRequest(*ecr.BatchDeleteImageInput) ecr.BatchDeleteImageRequest
-
-	BatchGetImageRequest(*ecr.BatchGetImageInput) ecr.BatchGetImageRequest
-
-	CompleteLayerUploadRequest(*ecr.CompleteLayerUploadInput) ecr.CompleteLayerUploadRequest
-
-	CreateRepositoryRequest(*ecr.CreateRepositoryInput) ecr.CreateRepositoryRequest
-
-	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
-
-	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
-
-	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
-
-	DescribeImagesPages(*ecr.DescribeImagesInput, func(*ecr.DescribeImagesOutput, bool) bool) error
-	DescribeImagesPagesWithContext(aws.Context, *ecr.DescribeImagesInput, func(*ecr.DescribeImagesOutput, bool) bool, ...aws.Option) error
-
-	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
-
-	DescribeRepositoriesPages(*ecr.DescribeRepositoriesInput, func(*ecr.DescribeRepositoriesOutput, bool) bool) error
-	DescribeRepositoriesPagesWithContext(aws.Context, *ecr.DescribeRepositoriesInput, func(*ecr.DescribeRepositoriesOutput, bool) bool, ...aws.Option) error
-
-	GetAuthorizationTokenRequest(*ecr.GetAuthorizationTokenInput) ecr.GetAuthorizationTokenRequest
-
-	GetDownloadUrlForLayerRequest(*ecr.GetDownloadUrlForLayerInput) ecr.GetDownloadUrlForLayerRequest
-
-	GetRepositoryPolicyRequest(*ecr.GetRepositoryPolicyInput) ecr.GetRepositoryPolicyRequest
-
-	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
-
-	ListImagesRequest(*ecr.ListImagesInput) ecr.ListImagesRequest
-
-	ListImagesPages(*ecr.ListImagesInput, func(*ecr.ListImagesOutput, bool) bool) error
-	ListImagesPagesWithContext(aws.Context, *ecr.ListImagesInput, func(*ecr.ListImagesOutput, bool) bool, ...aws.Option) error
-
-	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
-
-	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
-
-	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
 }
 
-var _ ECRAPI = (*ecr.ECR)(nil)
+// BatchDeleteImageRequester provides the interface for the BatchDeleteImageRequest API operation.
+type BatchDeleteImageRequester interface {
+	BatchDeleteImageRequest(*ecr.BatchDeleteImageInput) ecr.BatchDeleteImageRequest
+}
+
+// BatchGetImageRequester provides the interface for the BatchGetImageRequest API operation.
+type BatchGetImageRequester interface {
+	BatchGetImageRequest(*ecr.BatchGetImageInput) ecr.BatchGetImageRequest
+}
+
+// CompleteLayerUploadRequester provides the interface for the CompleteLayerUploadRequest API operation.
+type CompleteLayerUploadRequester interface {
+	CompleteLayerUploadRequest(*ecr.CompleteLayerUploadInput) ecr.CompleteLayerUploadRequest
+}
+
+// CreateRepositoryRequester provides the interface for the CreateRepositoryRequest API operation.
+type CreateRepositoryRequester interface {
+	CreateRepositoryRequest(*ecr.CreateRepositoryInput) ecr.CreateRepositoryRequest
+}
+
+// DeleteRepositoryRequester provides the interface for the DeleteRepositoryRequest API operation.
+type DeleteRepositoryRequester interface {
+	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
+}
+
+// DeleteRepositoryPolicyRequester provides the interface for the DeleteRepositoryPolicyRequest API operation.
+type DeleteRepositoryPolicyRequester interface {
+	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
+}
+
+// DescribeImagesRequester provides the interface for the DescribeImagesRequest API operation.
+type DescribeImagesRequester interface {
+	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
+}
+
+// DescribeRepositoriesRequester provides the interface for the DescribeRepositoriesRequest API operation.
+type DescribeRepositoriesRequester interface {
+	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
+}
+
+// GetAuthorizationTokenRequester provides the interface for the GetAuthorizationTokenRequest API operation.
+type GetAuthorizationTokenRequester interface {
+	GetAuthorizationTokenRequest(*ecr.GetAuthorizationTokenInput) ecr.GetAuthorizationTokenRequest
+}
+
+// GetDownloadUrlForLayerRequester provides the interface for the GetDownloadUrlForLayerRequest API operation.
+type GetDownloadUrlForLayerRequester interface {
+	GetDownloadUrlForLayerRequest(*ecr.GetDownloadUrlForLayerInput) ecr.GetDownloadUrlForLayerRequest
+}
+
+// GetRepositoryPolicyRequester provides the interface for the GetRepositoryPolicyRequest API operation.
+type GetRepositoryPolicyRequester interface {
+	GetRepositoryPolicyRequest(*ecr.GetRepositoryPolicyInput) ecr.GetRepositoryPolicyRequest
+}
+
+// InitiateLayerUploadRequester provides the interface for the InitiateLayerUploadRequest API operation.
+type InitiateLayerUploadRequester interface {
+	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
+}
+
+// ListImagesRequester provides the interface for the ListImagesRequest API operation.
+type ListImagesRequester interface {
+	ListImagesRequest(*ecr.ListImagesInput) ecr.ListImagesRequest
+}
+
+// PutImageRequester provides the interface for the PutImageRequest API operation.
+type PutImageRequester interface {
+	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
+}
+
+// SetRepositoryPolicyRequester provides the interface for the SetRepositoryPolicyRequest API operation.
+type SetRepositoryPolicyRequester interface {
+	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
+}
+
+// UploadLayerPartRequester provides the interface for the UploadLayerPartRequest API operation.
+type UploadLayerPartRequester interface {
+	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
+}

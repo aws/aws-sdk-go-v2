@@ -12,109 +12,137 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
 )
 
-// CodePipelineAPI provides an interface to enable mocking the
-// codepipeline.CodePipeline service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CodePipeline.
-//    func myFunc(svc codepipelineiface.CodePipelineAPI) bool {
-//        // Make svc.AcknowledgeJob request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := codepipeline.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodePipelineClient struct {
-//        codepipelineiface.CodePipelineAPI
-//    }
-//    func (m *mockCodePipelineClient) AcknowledgeJob(input *codepipeline.AcknowledgeJobInput) (*codepipeline.AcknowledgeJobOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCodePipelineClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CodePipelineAPI interface {
+// AcknowledgeJobRequester provides the interface for the AcknowledgeJobRequest API operation.
+type AcknowledgeJobRequester interface {
 	AcknowledgeJobRequest(*codepipeline.AcknowledgeJobInput) codepipeline.AcknowledgeJobRequest
-
-	AcknowledgeThirdPartyJobRequest(*codepipeline.AcknowledgeThirdPartyJobInput) codepipeline.AcknowledgeThirdPartyJobRequest
-
-	CreateCustomActionTypeRequest(*codepipeline.CreateCustomActionTypeInput) codepipeline.CreateCustomActionTypeRequest
-
-	CreatePipelineRequest(*codepipeline.CreatePipelineInput) codepipeline.CreatePipelineRequest
-
-	DeleteCustomActionTypeRequest(*codepipeline.DeleteCustomActionTypeInput) codepipeline.DeleteCustomActionTypeRequest
-
-	DeletePipelineRequest(*codepipeline.DeletePipelineInput) codepipeline.DeletePipelineRequest
-
-	DisableStageTransitionRequest(*codepipeline.DisableStageTransitionInput) codepipeline.DisableStageTransitionRequest
-
-	EnableStageTransitionRequest(*codepipeline.EnableStageTransitionInput) codepipeline.EnableStageTransitionRequest
-
-	GetJobDetailsRequest(*codepipeline.GetJobDetailsInput) codepipeline.GetJobDetailsRequest
-
-	GetPipelineRequest(*codepipeline.GetPipelineInput) codepipeline.GetPipelineRequest
-
-	GetPipelineExecutionRequest(*codepipeline.GetPipelineExecutionInput) codepipeline.GetPipelineExecutionRequest
-
-	GetPipelineStateRequest(*codepipeline.GetPipelineStateInput) codepipeline.GetPipelineStateRequest
-
-	GetThirdPartyJobDetailsRequest(*codepipeline.GetThirdPartyJobDetailsInput) codepipeline.GetThirdPartyJobDetailsRequest
-
-	ListActionTypesRequest(*codepipeline.ListActionTypesInput) codepipeline.ListActionTypesRequest
-
-	ListPipelineExecutionsRequest(*codepipeline.ListPipelineExecutionsInput) codepipeline.ListPipelineExecutionsRequest
-
-	ListPipelinesRequest(*codepipeline.ListPipelinesInput) codepipeline.ListPipelinesRequest
-
-	PollForJobsRequest(*codepipeline.PollForJobsInput) codepipeline.PollForJobsRequest
-
-	PollForThirdPartyJobsRequest(*codepipeline.PollForThirdPartyJobsInput) codepipeline.PollForThirdPartyJobsRequest
-
-	PutActionRevisionRequest(*codepipeline.PutActionRevisionInput) codepipeline.PutActionRevisionRequest
-
-	PutApprovalResultRequest(*codepipeline.PutApprovalResultInput) codepipeline.PutApprovalResultRequest
-
-	PutJobFailureResultRequest(*codepipeline.PutJobFailureResultInput) codepipeline.PutJobFailureResultRequest
-
-	PutJobSuccessResultRequest(*codepipeline.PutJobSuccessResultInput) codepipeline.PutJobSuccessResultRequest
-
-	PutThirdPartyJobFailureResultRequest(*codepipeline.PutThirdPartyJobFailureResultInput) codepipeline.PutThirdPartyJobFailureResultRequest
-
-	PutThirdPartyJobSuccessResultRequest(*codepipeline.PutThirdPartyJobSuccessResultInput) codepipeline.PutThirdPartyJobSuccessResultRequest
-
-	RetryStageExecutionRequest(*codepipeline.RetryStageExecutionInput) codepipeline.RetryStageExecutionRequest
-
-	StartPipelineExecutionRequest(*codepipeline.StartPipelineExecutionInput) codepipeline.StartPipelineExecutionRequest
-
-	UpdatePipelineRequest(*codepipeline.UpdatePipelineInput) codepipeline.UpdatePipelineRequest
 }
 
-var _ CodePipelineAPI = (*codepipeline.CodePipeline)(nil)
+// AcknowledgeThirdPartyJobRequester provides the interface for the AcknowledgeThirdPartyJobRequest API operation.
+type AcknowledgeThirdPartyJobRequester interface {
+	AcknowledgeThirdPartyJobRequest(*codepipeline.AcknowledgeThirdPartyJobInput) codepipeline.AcknowledgeThirdPartyJobRequest
+}
+
+// CreateCustomActionTypeRequester provides the interface for the CreateCustomActionTypeRequest API operation.
+type CreateCustomActionTypeRequester interface {
+	CreateCustomActionTypeRequest(*codepipeline.CreateCustomActionTypeInput) codepipeline.CreateCustomActionTypeRequest
+}
+
+// CreatePipelineRequester provides the interface for the CreatePipelineRequest API operation.
+type CreatePipelineRequester interface {
+	CreatePipelineRequest(*codepipeline.CreatePipelineInput) codepipeline.CreatePipelineRequest
+}
+
+// DeleteCustomActionTypeRequester provides the interface for the DeleteCustomActionTypeRequest API operation.
+type DeleteCustomActionTypeRequester interface {
+	DeleteCustomActionTypeRequest(*codepipeline.DeleteCustomActionTypeInput) codepipeline.DeleteCustomActionTypeRequest
+}
+
+// DeletePipelineRequester provides the interface for the DeletePipelineRequest API operation.
+type DeletePipelineRequester interface {
+	DeletePipelineRequest(*codepipeline.DeletePipelineInput) codepipeline.DeletePipelineRequest
+}
+
+// DisableStageTransitionRequester provides the interface for the DisableStageTransitionRequest API operation.
+type DisableStageTransitionRequester interface {
+	DisableStageTransitionRequest(*codepipeline.DisableStageTransitionInput) codepipeline.DisableStageTransitionRequest
+}
+
+// EnableStageTransitionRequester provides the interface for the EnableStageTransitionRequest API operation.
+type EnableStageTransitionRequester interface {
+	EnableStageTransitionRequest(*codepipeline.EnableStageTransitionInput) codepipeline.EnableStageTransitionRequest
+}
+
+// GetJobDetailsRequester provides the interface for the GetJobDetailsRequest API operation.
+type GetJobDetailsRequester interface {
+	GetJobDetailsRequest(*codepipeline.GetJobDetailsInput) codepipeline.GetJobDetailsRequest
+}
+
+// GetPipelineRequester provides the interface for the GetPipelineRequest API operation.
+type GetPipelineRequester interface {
+	GetPipelineRequest(*codepipeline.GetPipelineInput) codepipeline.GetPipelineRequest
+}
+
+// GetPipelineExecutionRequester provides the interface for the GetPipelineExecutionRequest API operation.
+type GetPipelineExecutionRequester interface {
+	GetPipelineExecutionRequest(*codepipeline.GetPipelineExecutionInput) codepipeline.GetPipelineExecutionRequest
+}
+
+// GetPipelineStateRequester provides the interface for the GetPipelineStateRequest API operation.
+type GetPipelineStateRequester interface {
+	GetPipelineStateRequest(*codepipeline.GetPipelineStateInput) codepipeline.GetPipelineStateRequest
+}
+
+// GetThirdPartyJobDetailsRequester provides the interface for the GetThirdPartyJobDetailsRequest API operation.
+type GetThirdPartyJobDetailsRequester interface {
+	GetThirdPartyJobDetailsRequest(*codepipeline.GetThirdPartyJobDetailsInput) codepipeline.GetThirdPartyJobDetailsRequest
+}
+
+// ListActionTypesRequester provides the interface for the ListActionTypesRequest API operation.
+type ListActionTypesRequester interface {
+	ListActionTypesRequest(*codepipeline.ListActionTypesInput) codepipeline.ListActionTypesRequest
+}
+
+// ListPipelineExecutionsRequester provides the interface for the ListPipelineExecutionsRequest API operation.
+type ListPipelineExecutionsRequester interface {
+	ListPipelineExecutionsRequest(*codepipeline.ListPipelineExecutionsInput) codepipeline.ListPipelineExecutionsRequest
+}
+
+// ListPipelinesRequester provides the interface for the ListPipelinesRequest API operation.
+type ListPipelinesRequester interface {
+	ListPipelinesRequest(*codepipeline.ListPipelinesInput) codepipeline.ListPipelinesRequest
+}
+
+// PollForJobsRequester provides the interface for the PollForJobsRequest API operation.
+type PollForJobsRequester interface {
+	PollForJobsRequest(*codepipeline.PollForJobsInput) codepipeline.PollForJobsRequest
+}
+
+// PollForThirdPartyJobsRequester provides the interface for the PollForThirdPartyJobsRequest API operation.
+type PollForThirdPartyJobsRequester interface {
+	PollForThirdPartyJobsRequest(*codepipeline.PollForThirdPartyJobsInput) codepipeline.PollForThirdPartyJobsRequest
+}
+
+// PutActionRevisionRequester provides the interface for the PutActionRevisionRequest API operation.
+type PutActionRevisionRequester interface {
+	PutActionRevisionRequest(*codepipeline.PutActionRevisionInput) codepipeline.PutActionRevisionRequest
+}
+
+// PutApprovalResultRequester provides the interface for the PutApprovalResultRequest API operation.
+type PutApprovalResultRequester interface {
+	PutApprovalResultRequest(*codepipeline.PutApprovalResultInput) codepipeline.PutApprovalResultRequest
+}
+
+// PutJobFailureResultRequester provides the interface for the PutJobFailureResultRequest API operation.
+type PutJobFailureResultRequester interface {
+	PutJobFailureResultRequest(*codepipeline.PutJobFailureResultInput) codepipeline.PutJobFailureResultRequest
+}
+
+// PutJobSuccessResultRequester provides the interface for the PutJobSuccessResultRequest API operation.
+type PutJobSuccessResultRequester interface {
+	PutJobSuccessResultRequest(*codepipeline.PutJobSuccessResultInput) codepipeline.PutJobSuccessResultRequest
+}
+
+// PutThirdPartyJobFailureResultRequester provides the interface for the PutThirdPartyJobFailureResultRequest API operation.
+type PutThirdPartyJobFailureResultRequester interface {
+	PutThirdPartyJobFailureResultRequest(*codepipeline.PutThirdPartyJobFailureResultInput) codepipeline.PutThirdPartyJobFailureResultRequest
+}
+
+// PutThirdPartyJobSuccessResultRequester provides the interface for the PutThirdPartyJobSuccessResultRequest API operation.
+type PutThirdPartyJobSuccessResultRequester interface {
+	PutThirdPartyJobSuccessResultRequest(*codepipeline.PutThirdPartyJobSuccessResultInput) codepipeline.PutThirdPartyJobSuccessResultRequest
+}
+
+// RetryStageExecutionRequester provides the interface for the RetryStageExecutionRequest API operation.
+type RetryStageExecutionRequester interface {
+	RetryStageExecutionRequest(*codepipeline.RetryStageExecutionInput) codepipeline.RetryStageExecutionRequest
+}
+
+// StartPipelineExecutionRequester provides the interface for the StartPipelineExecutionRequest API operation.
+type StartPipelineExecutionRequester interface {
+	StartPipelineExecutionRequest(*codepipeline.StartPipelineExecutionInput) codepipeline.StartPipelineExecutionRequest
+}
+
+// UpdatePipelineRequester provides the interface for the UpdatePipelineRequest API operation.
+type UpdatePipelineRequester interface {
+	UpdatePipelineRequest(*codepipeline.UpdatePipelineInput) codepipeline.UpdatePipelineRequest
+}

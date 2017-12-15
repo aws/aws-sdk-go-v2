@@ -13,97 +13,83 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 )
 
-// CloudWatchAPI provides an interface to enable mocking the
-// cloudwatch.CloudWatch service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudWatch.
-//    func myFunc(svc cloudwatchiface.CloudWatchAPI) bool {
-//        // Make svc.DeleteAlarms request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudwatch.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudWatchClient struct {
-//        cloudwatchiface.CloudWatchAPI
-//    }
-//    func (m *mockCloudWatchClient) DeleteAlarms(input *cloudwatch.DeleteAlarmsInput) (*cloudwatch.DeleteAlarmsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudWatchClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudWatchAPI interface {
+// DeleteAlarmsRequester provides the interface for the DeleteAlarmsRequest API operation.
+type DeleteAlarmsRequester interface {
 	DeleteAlarmsRequest(*cloudwatch.DeleteAlarmsInput) cloudwatch.DeleteAlarmsRequest
+}
 
+// DeleteDashboardsRequester provides the interface for the DeleteDashboardsRequest API operation.
+type DeleteDashboardsRequester interface {
 	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
+}
 
+// DescribeAlarmHistoryRequester provides the interface for the DescribeAlarmHistoryRequest API operation.
+type DescribeAlarmHistoryRequester interface {
 	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
+}
 
-	DescribeAlarmHistoryPages(*cloudwatch.DescribeAlarmHistoryInput, func(*cloudwatch.DescribeAlarmHistoryOutput, bool) bool) error
-	DescribeAlarmHistoryPagesWithContext(aws.Context, *cloudwatch.DescribeAlarmHistoryInput, func(*cloudwatch.DescribeAlarmHistoryOutput, bool) bool, ...aws.Option) error
-
+// DescribeAlarmsRequester provides the interface for the DescribeAlarmsRequest API operation.
+type DescribeAlarmsRequester interface {
 	DescribeAlarmsRequest(*cloudwatch.DescribeAlarmsInput) cloudwatch.DescribeAlarmsRequest
+}
 
-	DescribeAlarmsPages(*cloudwatch.DescribeAlarmsInput, func(*cloudwatch.DescribeAlarmsOutput, bool) bool) error
-	DescribeAlarmsPagesWithContext(aws.Context, *cloudwatch.DescribeAlarmsInput, func(*cloudwatch.DescribeAlarmsOutput, bool) bool, ...aws.Option) error
-
+// DescribeAlarmsForMetricRequester provides the interface for the DescribeAlarmsForMetricRequest API operation.
+type DescribeAlarmsForMetricRequester interface {
 	DescribeAlarmsForMetricRequest(*cloudwatch.DescribeAlarmsForMetricInput) cloudwatch.DescribeAlarmsForMetricRequest
+}
 
+// DisableAlarmActionsRequester provides the interface for the DisableAlarmActionsRequest API operation.
+type DisableAlarmActionsRequester interface {
 	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
+}
 
+// EnableAlarmActionsRequester provides the interface for the EnableAlarmActionsRequest API operation.
+type EnableAlarmActionsRequester interface {
 	EnableAlarmActionsRequest(*cloudwatch.EnableAlarmActionsInput) cloudwatch.EnableAlarmActionsRequest
+}
 
+// GetDashboardRequester provides the interface for the GetDashboardRequest API operation.
+type GetDashboardRequester interface {
 	GetDashboardRequest(*cloudwatch.GetDashboardInput) cloudwatch.GetDashboardRequest
+}
 
+// GetMetricStatisticsRequester provides the interface for the GetMetricStatisticsRequest API operation.
+type GetMetricStatisticsRequester interface {
 	GetMetricStatisticsRequest(*cloudwatch.GetMetricStatisticsInput) cloudwatch.GetMetricStatisticsRequest
+}
 
+// ListDashboardsRequester provides the interface for the ListDashboardsRequest API operation.
+type ListDashboardsRequester interface {
 	ListDashboardsRequest(*cloudwatch.ListDashboardsInput) cloudwatch.ListDashboardsRequest
+}
 
+// ListMetricsRequester provides the interface for the ListMetricsRequest API operation.
+type ListMetricsRequester interface {
 	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
+}
 
-	ListMetricsPages(*cloudwatch.ListMetricsInput, func(*cloudwatch.ListMetricsOutput, bool) bool) error
-	ListMetricsPagesWithContext(aws.Context, *cloudwatch.ListMetricsInput, func(*cloudwatch.ListMetricsOutput, bool) bool, ...aws.Option) error
-
+// PutDashboardRequester provides the interface for the PutDashboardRequest API operation.
+type PutDashboardRequester interface {
 	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
+}
 
+// PutMetricAlarmRequester provides the interface for the PutMetricAlarmRequest API operation.
+type PutMetricAlarmRequester interface {
 	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
+}
 
+// PutMetricDataRequester provides the interface for the PutMetricDataRequest API operation.
+type PutMetricDataRequester interface {
 	PutMetricDataRequest(*cloudwatch.PutMetricDataInput) cloudwatch.PutMetricDataRequest
+}
 
+// SetAlarmStateRequester provides the interface for the SetAlarmStateRequest API operation.
+type SetAlarmStateRequester interface {
 	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
+}
 
+// AlarmExistsWaiter provides the interface for the WaitUntilAlarmExists waiter.
+type AlarmExistsWaiter interface {
 	WaitUntilAlarmExists(*cloudwatch.DescribeAlarmsInput) error
 	WaitUntilAlarmExistsWithContext(aws.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
 }
-
-var _ CloudWatchAPI = (*cloudwatch.CloudWatch)(nil)

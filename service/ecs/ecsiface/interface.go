@@ -13,147 +13,181 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 )
 
-// ECSAPI provides an interface to enable mocking the
-// ecs.ECS service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon EC2 Container Service.
-//    func myFunc(svc ecsiface.ECSAPI) bool {
-//        // Make svc.CreateCluster request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := ecs.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockECSClient struct {
-//        ecsiface.ECSAPI
-//    }
-//    func (m *mockECSClient) CreateCluster(input *ecs.CreateClusterInput) (*ecs.CreateClusterOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockECSClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ECSAPI interface {
+// CreateClusterRequester provides the interface for the CreateClusterRequest API operation.
+type CreateClusterRequester interface {
 	CreateClusterRequest(*ecs.CreateClusterInput) ecs.CreateClusterRequest
+}
 
+// CreateServiceRequester provides the interface for the CreateServiceRequest API operation.
+type CreateServiceRequester interface {
 	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
+}
 
+// DeleteAttributesRequester provides the interface for the DeleteAttributesRequest API operation.
+type DeleteAttributesRequester interface {
 	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
+}
 
+// DeleteClusterRequester provides the interface for the DeleteClusterRequest API operation.
+type DeleteClusterRequester interface {
 	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
+}
 
+// DeleteServiceRequester provides the interface for the DeleteServiceRequest API operation.
+type DeleteServiceRequester interface {
 	DeleteServiceRequest(*ecs.DeleteServiceInput) ecs.DeleteServiceRequest
+}
 
+// DeregisterContainerInstanceRequester provides the interface for the DeregisterContainerInstanceRequest API operation.
+type DeregisterContainerInstanceRequester interface {
 	DeregisterContainerInstanceRequest(*ecs.DeregisterContainerInstanceInput) ecs.DeregisterContainerInstanceRequest
+}
 
+// DeregisterTaskDefinitionRequester provides the interface for the DeregisterTaskDefinitionRequest API operation.
+type DeregisterTaskDefinitionRequester interface {
 	DeregisterTaskDefinitionRequest(*ecs.DeregisterTaskDefinitionInput) ecs.DeregisterTaskDefinitionRequest
+}
 
+// DescribeClustersRequester provides the interface for the DescribeClustersRequest API operation.
+type DescribeClustersRequester interface {
 	DescribeClustersRequest(*ecs.DescribeClustersInput) ecs.DescribeClustersRequest
+}
 
+// DescribeContainerInstancesRequester provides the interface for the DescribeContainerInstancesRequest API operation.
+type DescribeContainerInstancesRequester interface {
 	DescribeContainerInstancesRequest(*ecs.DescribeContainerInstancesInput) ecs.DescribeContainerInstancesRequest
+}
 
+// DescribeServicesRequester provides the interface for the DescribeServicesRequest API operation.
+type DescribeServicesRequester interface {
 	DescribeServicesRequest(*ecs.DescribeServicesInput) ecs.DescribeServicesRequest
+}
 
+// DescribeTaskDefinitionRequester provides the interface for the DescribeTaskDefinitionRequest API operation.
+type DescribeTaskDefinitionRequester interface {
 	DescribeTaskDefinitionRequest(*ecs.DescribeTaskDefinitionInput) ecs.DescribeTaskDefinitionRequest
+}
 
+// DescribeTasksRequester provides the interface for the DescribeTasksRequest API operation.
+type DescribeTasksRequester interface {
 	DescribeTasksRequest(*ecs.DescribeTasksInput) ecs.DescribeTasksRequest
+}
 
+// DiscoverPollEndpointRequester provides the interface for the DiscoverPollEndpointRequest API operation.
+type DiscoverPollEndpointRequester interface {
 	DiscoverPollEndpointRequest(*ecs.DiscoverPollEndpointInput) ecs.DiscoverPollEndpointRequest
+}
 
+// ListAttributesRequester provides the interface for the ListAttributesRequest API operation.
+type ListAttributesRequester interface {
 	ListAttributesRequest(*ecs.ListAttributesInput) ecs.ListAttributesRequest
+}
 
+// ListClustersRequester provides the interface for the ListClustersRequest API operation.
+type ListClustersRequester interface {
 	ListClustersRequest(*ecs.ListClustersInput) ecs.ListClustersRequest
+}
 
-	ListClustersPages(*ecs.ListClustersInput, func(*ecs.ListClustersOutput, bool) bool) error
-	ListClustersPagesWithContext(aws.Context, *ecs.ListClustersInput, func(*ecs.ListClustersOutput, bool) bool, ...aws.Option) error
-
+// ListContainerInstancesRequester provides the interface for the ListContainerInstancesRequest API operation.
+type ListContainerInstancesRequester interface {
 	ListContainerInstancesRequest(*ecs.ListContainerInstancesInput) ecs.ListContainerInstancesRequest
+}
 
-	ListContainerInstancesPages(*ecs.ListContainerInstancesInput, func(*ecs.ListContainerInstancesOutput, bool) bool) error
-	ListContainerInstancesPagesWithContext(aws.Context, *ecs.ListContainerInstancesInput, func(*ecs.ListContainerInstancesOutput, bool) bool, ...aws.Option) error
-
+// ListServicesRequester provides the interface for the ListServicesRequest API operation.
+type ListServicesRequester interface {
 	ListServicesRequest(*ecs.ListServicesInput) ecs.ListServicesRequest
+}
 
-	ListServicesPages(*ecs.ListServicesInput, func(*ecs.ListServicesOutput, bool) bool) error
-	ListServicesPagesWithContext(aws.Context, *ecs.ListServicesInput, func(*ecs.ListServicesOutput, bool) bool, ...aws.Option) error
-
+// ListTaskDefinitionFamiliesRequester provides the interface for the ListTaskDefinitionFamiliesRequest API operation.
+type ListTaskDefinitionFamiliesRequester interface {
 	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
+}
 
-	ListTaskDefinitionFamiliesPages(*ecs.ListTaskDefinitionFamiliesInput, func(*ecs.ListTaskDefinitionFamiliesOutput, bool) bool) error
-	ListTaskDefinitionFamiliesPagesWithContext(aws.Context, *ecs.ListTaskDefinitionFamiliesInput, func(*ecs.ListTaskDefinitionFamiliesOutput, bool) bool, ...aws.Option) error
-
+// ListTaskDefinitionsRequester provides the interface for the ListTaskDefinitionsRequest API operation.
+type ListTaskDefinitionsRequester interface {
 	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
+}
 
-	ListTaskDefinitionsPages(*ecs.ListTaskDefinitionsInput, func(*ecs.ListTaskDefinitionsOutput, bool) bool) error
-	ListTaskDefinitionsPagesWithContext(aws.Context, *ecs.ListTaskDefinitionsInput, func(*ecs.ListTaskDefinitionsOutput, bool) bool, ...aws.Option) error
-
+// ListTasksRequester provides the interface for the ListTasksRequest API operation.
+type ListTasksRequester interface {
 	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
+}
 
-	ListTasksPages(*ecs.ListTasksInput, func(*ecs.ListTasksOutput, bool) bool) error
-	ListTasksPagesWithContext(aws.Context, *ecs.ListTasksInput, func(*ecs.ListTasksOutput, bool) bool, ...aws.Option) error
-
+// PutAttributesRequester provides the interface for the PutAttributesRequest API operation.
+type PutAttributesRequester interface {
 	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
+}
 
+// RegisterContainerInstanceRequester provides the interface for the RegisterContainerInstanceRequest API operation.
+type RegisterContainerInstanceRequester interface {
 	RegisterContainerInstanceRequest(*ecs.RegisterContainerInstanceInput) ecs.RegisterContainerInstanceRequest
+}
 
+// RegisterTaskDefinitionRequester provides the interface for the RegisterTaskDefinitionRequest API operation.
+type RegisterTaskDefinitionRequester interface {
 	RegisterTaskDefinitionRequest(*ecs.RegisterTaskDefinitionInput) ecs.RegisterTaskDefinitionRequest
+}
 
+// RunTaskRequester provides the interface for the RunTaskRequest API operation.
+type RunTaskRequester interface {
 	RunTaskRequest(*ecs.RunTaskInput) ecs.RunTaskRequest
+}
 
+// StartTaskRequester provides the interface for the StartTaskRequest API operation.
+type StartTaskRequester interface {
 	StartTaskRequest(*ecs.StartTaskInput) ecs.StartTaskRequest
+}
 
+// StopTaskRequester provides the interface for the StopTaskRequest API operation.
+type StopTaskRequester interface {
 	StopTaskRequest(*ecs.StopTaskInput) ecs.StopTaskRequest
+}
 
+// SubmitContainerStateChangeRequester provides the interface for the SubmitContainerStateChangeRequest API operation.
+type SubmitContainerStateChangeRequester interface {
 	SubmitContainerStateChangeRequest(*ecs.SubmitContainerStateChangeInput) ecs.SubmitContainerStateChangeRequest
+}
 
+// SubmitTaskStateChangeRequester provides the interface for the SubmitTaskStateChangeRequest API operation.
+type SubmitTaskStateChangeRequester interface {
 	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest
+}
 
+// UpdateContainerAgentRequester provides the interface for the UpdateContainerAgentRequest API operation.
+type UpdateContainerAgentRequester interface {
 	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
+}
 
+// UpdateContainerInstancesStateRequester provides the interface for the UpdateContainerInstancesStateRequest API operation.
+type UpdateContainerInstancesStateRequester interface {
 	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest
+}
 
+// UpdateServiceRequester provides the interface for the UpdateServiceRequest API operation.
+type UpdateServiceRequester interface {
 	UpdateServiceRequest(*ecs.UpdateServiceInput) ecs.UpdateServiceRequest
+}
 
+// ServicesInactiveWaiter provides the interface for the WaitUntilServicesInactive waiter.
+type ServicesInactiveWaiter interface {
 	WaitUntilServicesInactive(*ecs.DescribeServicesInput) error
 	WaitUntilServicesInactiveWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+}
 
+// ServicesStableWaiter provides the interface for the WaitUntilServicesStable waiter.
+type ServicesStableWaiter interface {
 	WaitUntilServicesStable(*ecs.DescribeServicesInput) error
 	WaitUntilServicesStableWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+}
 
+// TasksRunningWaiter provides the interface for the WaitUntilTasksRunning waiter.
+type TasksRunningWaiter interface {
 	WaitUntilTasksRunning(*ecs.DescribeTasksInput) error
 	WaitUntilTasksRunningWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+}
 
+// TasksStoppedWaiter provides the interface for the WaitUntilTasksStopped waiter.
+type TasksStoppedWaiter interface {
 	WaitUntilTasksStopped(*ecs.DescribeTasksInput) error
 	WaitUntilTasksStoppedWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
 }
-
-var _ ECSAPI = (*ecs.ECS)(nil)

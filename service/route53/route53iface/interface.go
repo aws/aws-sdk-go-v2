@@ -13,173 +13,273 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53"
 )
 
-// Route53API provides an interface to enable mocking the
-// route53.Route53 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Route 53.
-//    func myFunc(svc route53iface.Route53API) bool {
-//        // Make svc.AssociateVPCWithHostedZone request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := route53.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRoute53Client struct {
-//        route53iface.Route53API
-//    }
-//    func (m *mockRoute53Client) AssociateVPCWithHostedZone(input *route53.AssociateVPCWithHostedZoneInput) (*route53.AssociateVPCWithHostedZoneOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockRoute53Client{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type Route53API interface {
+// AssociateVPCWithHostedZoneRequester provides the interface for the AssociateVPCWithHostedZoneRequest API operation.
+type AssociateVPCWithHostedZoneRequester interface {
 	AssociateVPCWithHostedZoneRequest(*route53.AssociateVPCWithHostedZoneInput) route53.AssociateVPCWithHostedZoneRequest
+}
 
+// ChangeResourceRecordSetsRequester provides the interface for the ChangeResourceRecordSetsRequest API operation.
+type ChangeResourceRecordSetsRequester interface {
 	ChangeResourceRecordSetsRequest(*route53.ChangeResourceRecordSetsInput) route53.ChangeResourceRecordSetsRequest
+}
 
+// ChangeTagsForResourceRequester provides the interface for the ChangeTagsForResourceRequest API operation.
+type ChangeTagsForResourceRequester interface {
 	ChangeTagsForResourceRequest(*route53.ChangeTagsForResourceInput) route53.ChangeTagsForResourceRequest
+}
 
+// CreateHealthCheckRequester provides the interface for the CreateHealthCheckRequest API operation.
+type CreateHealthCheckRequester interface {
 	CreateHealthCheckRequest(*route53.CreateHealthCheckInput) route53.CreateHealthCheckRequest
+}
 
+// CreateHostedZoneRequester provides the interface for the CreateHostedZoneRequest API operation.
+type CreateHostedZoneRequester interface {
 	CreateHostedZoneRequest(*route53.CreateHostedZoneInput) route53.CreateHostedZoneRequest
+}
 
+// CreateQueryLoggingConfigRequester provides the interface for the CreateQueryLoggingConfigRequest API operation.
+type CreateQueryLoggingConfigRequester interface {
 	CreateQueryLoggingConfigRequest(*route53.CreateQueryLoggingConfigInput) route53.CreateQueryLoggingConfigRequest
+}
 
+// CreateReusableDelegationSetRequester provides the interface for the CreateReusableDelegationSetRequest API operation.
+type CreateReusableDelegationSetRequester interface {
 	CreateReusableDelegationSetRequest(*route53.CreateReusableDelegationSetInput) route53.CreateReusableDelegationSetRequest
+}
 
+// CreateTrafficPolicyRequester provides the interface for the CreateTrafficPolicyRequest API operation.
+type CreateTrafficPolicyRequester interface {
 	CreateTrafficPolicyRequest(*route53.CreateTrafficPolicyInput) route53.CreateTrafficPolicyRequest
+}
 
+// CreateTrafficPolicyInstanceRequester provides the interface for the CreateTrafficPolicyInstanceRequest API operation.
+type CreateTrafficPolicyInstanceRequester interface {
 	CreateTrafficPolicyInstanceRequest(*route53.CreateTrafficPolicyInstanceInput) route53.CreateTrafficPolicyInstanceRequest
+}
 
+// CreateTrafficPolicyVersionRequester provides the interface for the CreateTrafficPolicyVersionRequest API operation.
+type CreateTrafficPolicyVersionRequester interface {
 	CreateTrafficPolicyVersionRequest(*route53.CreateTrafficPolicyVersionInput) route53.CreateTrafficPolicyVersionRequest
+}
 
+// CreateVPCAssociationAuthorizationRequester provides the interface for the CreateVPCAssociationAuthorizationRequest API operation.
+type CreateVPCAssociationAuthorizationRequester interface {
 	CreateVPCAssociationAuthorizationRequest(*route53.CreateVPCAssociationAuthorizationInput) route53.CreateVPCAssociationAuthorizationRequest
+}
 
+// DeleteHealthCheckRequester provides the interface for the DeleteHealthCheckRequest API operation.
+type DeleteHealthCheckRequester interface {
 	DeleteHealthCheckRequest(*route53.DeleteHealthCheckInput) route53.DeleteHealthCheckRequest
+}
 
+// DeleteHostedZoneRequester provides the interface for the DeleteHostedZoneRequest API operation.
+type DeleteHostedZoneRequester interface {
 	DeleteHostedZoneRequest(*route53.DeleteHostedZoneInput) route53.DeleteHostedZoneRequest
+}
 
+// DeleteQueryLoggingConfigRequester provides the interface for the DeleteQueryLoggingConfigRequest API operation.
+type DeleteQueryLoggingConfigRequester interface {
 	DeleteQueryLoggingConfigRequest(*route53.DeleteQueryLoggingConfigInput) route53.DeleteQueryLoggingConfigRequest
+}
 
+// DeleteReusableDelegationSetRequester provides the interface for the DeleteReusableDelegationSetRequest API operation.
+type DeleteReusableDelegationSetRequester interface {
 	DeleteReusableDelegationSetRequest(*route53.DeleteReusableDelegationSetInput) route53.DeleteReusableDelegationSetRequest
+}
 
+// DeleteTrafficPolicyRequester provides the interface for the DeleteTrafficPolicyRequest API operation.
+type DeleteTrafficPolicyRequester interface {
 	DeleteTrafficPolicyRequest(*route53.DeleteTrafficPolicyInput) route53.DeleteTrafficPolicyRequest
+}
 
+// DeleteTrafficPolicyInstanceRequester provides the interface for the DeleteTrafficPolicyInstanceRequest API operation.
+type DeleteTrafficPolicyInstanceRequester interface {
 	DeleteTrafficPolicyInstanceRequest(*route53.DeleteTrafficPolicyInstanceInput) route53.DeleteTrafficPolicyInstanceRequest
+}
 
+// DeleteVPCAssociationAuthorizationRequester provides the interface for the DeleteVPCAssociationAuthorizationRequest API operation.
+type DeleteVPCAssociationAuthorizationRequester interface {
 	DeleteVPCAssociationAuthorizationRequest(*route53.DeleteVPCAssociationAuthorizationInput) route53.DeleteVPCAssociationAuthorizationRequest
+}
 
+// DisassociateVPCFromHostedZoneRequester provides the interface for the DisassociateVPCFromHostedZoneRequest API operation.
+type DisassociateVPCFromHostedZoneRequester interface {
 	DisassociateVPCFromHostedZoneRequest(*route53.DisassociateVPCFromHostedZoneInput) route53.DisassociateVPCFromHostedZoneRequest
+}
 
+// GetChangeRequester provides the interface for the GetChangeRequest API operation.
+type GetChangeRequester interface {
 	GetChangeRequest(*route53.GetChangeInput) route53.GetChangeRequest
+}
 
+// GetCheckerIpRangesRequester provides the interface for the GetCheckerIpRangesRequest API operation.
+type GetCheckerIpRangesRequester interface {
 	GetCheckerIpRangesRequest(*route53.GetCheckerIpRangesInput) route53.GetCheckerIpRangesRequest
+}
 
+// GetGeoLocationRequester provides the interface for the GetGeoLocationRequest API operation.
+type GetGeoLocationRequester interface {
 	GetGeoLocationRequest(*route53.GetGeoLocationInput) route53.GetGeoLocationRequest
+}
 
+// GetHealthCheckRequester provides the interface for the GetHealthCheckRequest API operation.
+type GetHealthCheckRequester interface {
 	GetHealthCheckRequest(*route53.GetHealthCheckInput) route53.GetHealthCheckRequest
+}
 
+// GetHealthCheckCountRequester provides the interface for the GetHealthCheckCountRequest API operation.
+type GetHealthCheckCountRequester interface {
 	GetHealthCheckCountRequest(*route53.GetHealthCheckCountInput) route53.GetHealthCheckCountRequest
+}
 
+// GetHealthCheckLastFailureReasonRequester provides the interface for the GetHealthCheckLastFailureReasonRequest API operation.
+type GetHealthCheckLastFailureReasonRequester interface {
 	GetHealthCheckLastFailureReasonRequest(*route53.GetHealthCheckLastFailureReasonInput) route53.GetHealthCheckLastFailureReasonRequest
+}
 
+// GetHealthCheckStatusRequester provides the interface for the GetHealthCheckStatusRequest API operation.
+type GetHealthCheckStatusRequester interface {
 	GetHealthCheckStatusRequest(*route53.GetHealthCheckStatusInput) route53.GetHealthCheckStatusRequest
+}
 
+// GetHostedZoneRequester provides the interface for the GetHostedZoneRequest API operation.
+type GetHostedZoneRequester interface {
 	GetHostedZoneRequest(*route53.GetHostedZoneInput) route53.GetHostedZoneRequest
+}
 
+// GetHostedZoneCountRequester provides the interface for the GetHostedZoneCountRequest API operation.
+type GetHostedZoneCountRequester interface {
 	GetHostedZoneCountRequest(*route53.GetHostedZoneCountInput) route53.GetHostedZoneCountRequest
+}
 
+// GetQueryLoggingConfigRequester provides the interface for the GetQueryLoggingConfigRequest API operation.
+type GetQueryLoggingConfigRequester interface {
 	GetQueryLoggingConfigRequest(*route53.GetQueryLoggingConfigInput) route53.GetQueryLoggingConfigRequest
+}
 
+// GetReusableDelegationSetRequester provides the interface for the GetReusableDelegationSetRequest API operation.
+type GetReusableDelegationSetRequester interface {
 	GetReusableDelegationSetRequest(*route53.GetReusableDelegationSetInput) route53.GetReusableDelegationSetRequest
+}
 
+// GetTrafficPolicyRequester provides the interface for the GetTrafficPolicyRequest API operation.
+type GetTrafficPolicyRequester interface {
 	GetTrafficPolicyRequest(*route53.GetTrafficPolicyInput) route53.GetTrafficPolicyRequest
+}
 
+// GetTrafficPolicyInstanceRequester provides the interface for the GetTrafficPolicyInstanceRequest API operation.
+type GetTrafficPolicyInstanceRequester interface {
 	GetTrafficPolicyInstanceRequest(*route53.GetTrafficPolicyInstanceInput) route53.GetTrafficPolicyInstanceRequest
+}
 
+// GetTrafficPolicyInstanceCountRequester provides the interface for the GetTrafficPolicyInstanceCountRequest API operation.
+type GetTrafficPolicyInstanceCountRequester interface {
 	GetTrafficPolicyInstanceCountRequest(*route53.GetTrafficPolicyInstanceCountInput) route53.GetTrafficPolicyInstanceCountRequest
+}
 
+// ListGeoLocationsRequester provides the interface for the ListGeoLocationsRequest API operation.
+type ListGeoLocationsRequester interface {
 	ListGeoLocationsRequest(*route53.ListGeoLocationsInput) route53.ListGeoLocationsRequest
+}
 
+// ListHealthChecksRequester provides the interface for the ListHealthChecksRequest API operation.
+type ListHealthChecksRequester interface {
 	ListHealthChecksRequest(*route53.ListHealthChecksInput) route53.ListHealthChecksRequest
+}
 
-	ListHealthChecksPages(*route53.ListHealthChecksInput, func(*route53.ListHealthChecksOutput, bool) bool) error
-	ListHealthChecksPagesWithContext(aws.Context, *route53.ListHealthChecksInput, func(*route53.ListHealthChecksOutput, bool) bool, ...aws.Option) error
-
+// ListHostedZonesRequester provides the interface for the ListHostedZonesRequest API operation.
+type ListHostedZonesRequester interface {
 	ListHostedZonesRequest(*route53.ListHostedZonesInput) route53.ListHostedZonesRequest
+}
 
-	ListHostedZonesPages(*route53.ListHostedZonesInput, func(*route53.ListHostedZonesOutput, bool) bool) error
-	ListHostedZonesPagesWithContext(aws.Context, *route53.ListHostedZonesInput, func(*route53.ListHostedZonesOutput, bool) bool, ...aws.Option) error
-
+// ListHostedZonesByNameRequester provides the interface for the ListHostedZonesByNameRequest API operation.
+type ListHostedZonesByNameRequester interface {
 	ListHostedZonesByNameRequest(*route53.ListHostedZonesByNameInput) route53.ListHostedZonesByNameRequest
+}
 
+// ListQueryLoggingConfigsRequester provides the interface for the ListQueryLoggingConfigsRequest API operation.
+type ListQueryLoggingConfigsRequester interface {
 	ListQueryLoggingConfigsRequest(*route53.ListQueryLoggingConfigsInput) route53.ListQueryLoggingConfigsRequest
+}
 
+// ListResourceRecordSetsRequester provides the interface for the ListResourceRecordSetsRequest API operation.
+type ListResourceRecordSetsRequester interface {
 	ListResourceRecordSetsRequest(*route53.ListResourceRecordSetsInput) route53.ListResourceRecordSetsRequest
+}
 
-	ListResourceRecordSetsPages(*route53.ListResourceRecordSetsInput, func(*route53.ListResourceRecordSetsOutput, bool) bool) error
-	ListResourceRecordSetsPagesWithContext(aws.Context, *route53.ListResourceRecordSetsInput, func(*route53.ListResourceRecordSetsOutput, bool) bool, ...aws.Option) error
-
+// ListReusableDelegationSetsRequester provides the interface for the ListReusableDelegationSetsRequest API operation.
+type ListReusableDelegationSetsRequester interface {
 	ListReusableDelegationSetsRequest(*route53.ListReusableDelegationSetsInput) route53.ListReusableDelegationSetsRequest
+}
 
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
 	ListTagsForResourceRequest(*route53.ListTagsForResourceInput) route53.ListTagsForResourceRequest
+}
 
+// ListTagsForResourcesRequester provides the interface for the ListTagsForResourcesRequest API operation.
+type ListTagsForResourcesRequester interface {
 	ListTagsForResourcesRequest(*route53.ListTagsForResourcesInput) route53.ListTagsForResourcesRequest
+}
 
+// ListTrafficPoliciesRequester provides the interface for the ListTrafficPoliciesRequest API operation.
+type ListTrafficPoliciesRequester interface {
 	ListTrafficPoliciesRequest(*route53.ListTrafficPoliciesInput) route53.ListTrafficPoliciesRequest
+}
 
+// ListTrafficPolicyInstancesRequester provides the interface for the ListTrafficPolicyInstancesRequest API operation.
+type ListTrafficPolicyInstancesRequester interface {
 	ListTrafficPolicyInstancesRequest(*route53.ListTrafficPolicyInstancesInput) route53.ListTrafficPolicyInstancesRequest
+}
 
+// ListTrafficPolicyInstancesByHostedZoneRequester provides the interface for the ListTrafficPolicyInstancesByHostedZoneRequest API operation.
+type ListTrafficPolicyInstancesByHostedZoneRequester interface {
 	ListTrafficPolicyInstancesByHostedZoneRequest(*route53.ListTrafficPolicyInstancesByHostedZoneInput) route53.ListTrafficPolicyInstancesByHostedZoneRequest
+}
 
+// ListTrafficPolicyInstancesByPolicyRequester provides the interface for the ListTrafficPolicyInstancesByPolicyRequest API operation.
+type ListTrafficPolicyInstancesByPolicyRequester interface {
 	ListTrafficPolicyInstancesByPolicyRequest(*route53.ListTrafficPolicyInstancesByPolicyInput) route53.ListTrafficPolicyInstancesByPolicyRequest
+}
 
+// ListTrafficPolicyVersionsRequester provides the interface for the ListTrafficPolicyVersionsRequest API operation.
+type ListTrafficPolicyVersionsRequester interface {
 	ListTrafficPolicyVersionsRequest(*route53.ListTrafficPolicyVersionsInput) route53.ListTrafficPolicyVersionsRequest
+}
 
+// ListVPCAssociationAuthorizationsRequester provides the interface for the ListVPCAssociationAuthorizationsRequest API operation.
+type ListVPCAssociationAuthorizationsRequester interface {
 	ListVPCAssociationAuthorizationsRequest(*route53.ListVPCAssociationAuthorizationsInput) route53.ListVPCAssociationAuthorizationsRequest
+}
 
+// TestDNSAnswerRequester provides the interface for the TestDNSAnswerRequest API operation.
+type TestDNSAnswerRequester interface {
 	TestDNSAnswerRequest(*route53.TestDNSAnswerInput) route53.TestDNSAnswerRequest
+}
 
+// UpdateHealthCheckRequester provides the interface for the UpdateHealthCheckRequest API operation.
+type UpdateHealthCheckRequester interface {
 	UpdateHealthCheckRequest(*route53.UpdateHealthCheckInput) route53.UpdateHealthCheckRequest
+}
 
+// UpdateHostedZoneCommentRequester provides the interface for the UpdateHostedZoneCommentRequest API operation.
+type UpdateHostedZoneCommentRequester interface {
 	UpdateHostedZoneCommentRequest(*route53.UpdateHostedZoneCommentInput) route53.UpdateHostedZoneCommentRequest
+}
 
+// UpdateTrafficPolicyCommentRequester provides the interface for the UpdateTrafficPolicyCommentRequest API operation.
+type UpdateTrafficPolicyCommentRequester interface {
 	UpdateTrafficPolicyCommentRequest(*route53.UpdateTrafficPolicyCommentInput) route53.UpdateTrafficPolicyCommentRequest
+}
 
+// UpdateTrafficPolicyInstanceRequester provides the interface for the UpdateTrafficPolicyInstanceRequest API operation.
+type UpdateTrafficPolicyInstanceRequester interface {
 	UpdateTrafficPolicyInstanceRequest(*route53.UpdateTrafficPolicyInstanceInput) route53.UpdateTrafficPolicyInstanceRequest
+}
 
+// ResourceRecordSetsChangedWaiter provides the interface for the WaitUntilResourceRecordSetsChanged waiter.
+type ResourceRecordSetsChangedWaiter interface {
 	WaitUntilResourceRecordSetsChanged(*route53.GetChangeInput) error
 	WaitUntilResourceRecordSetsChangedWithContext(aws.Context, *route53.GetChangeInput, ...aws.WaiterOption) error
 }
-
-var _ Route53API = (*route53.Route53)(nil)

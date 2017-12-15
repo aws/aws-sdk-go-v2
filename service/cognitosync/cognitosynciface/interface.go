@@ -12,89 +12,87 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
 )
 
-// CognitoSyncAPI provides an interface to enable mocking the
-// cognitosync.CognitoSync service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Cognito Sync.
-//    func myFunc(svc cognitosynciface.CognitoSyncAPI) bool {
-//        // Make svc.BulkPublish request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cognitosync.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCognitoSyncClient struct {
-//        cognitosynciface.CognitoSyncAPI
-//    }
-//    func (m *mockCognitoSyncClient) BulkPublish(input *cognitosync.BulkPublishInput) (*cognitosync.BulkPublishOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCognitoSyncClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CognitoSyncAPI interface {
+// BulkPublishRequester provides the interface for the BulkPublishRequest API operation.
+type BulkPublishRequester interface {
 	BulkPublishRequest(*cognitosync.BulkPublishInput) cognitosync.BulkPublishRequest
-
-	DeleteDatasetRequest(*cognitosync.DeleteDatasetInput) cognitosync.DeleteDatasetRequest
-
-	DescribeDatasetRequest(*cognitosync.DescribeDatasetInput) cognitosync.DescribeDatasetRequest
-
-	DescribeIdentityPoolUsageRequest(*cognitosync.DescribeIdentityPoolUsageInput) cognitosync.DescribeIdentityPoolUsageRequest
-
-	DescribeIdentityUsageRequest(*cognitosync.DescribeIdentityUsageInput) cognitosync.DescribeIdentityUsageRequest
-
-	GetBulkPublishDetailsRequest(*cognitosync.GetBulkPublishDetailsInput) cognitosync.GetBulkPublishDetailsRequest
-
-	GetCognitoEventsRequest(*cognitosync.GetCognitoEventsInput) cognitosync.GetCognitoEventsRequest
-
-	GetIdentityPoolConfigurationRequest(*cognitosync.GetIdentityPoolConfigurationInput) cognitosync.GetIdentityPoolConfigurationRequest
-
-	ListDatasetsRequest(*cognitosync.ListDatasetsInput) cognitosync.ListDatasetsRequest
-
-	ListIdentityPoolUsageRequest(*cognitosync.ListIdentityPoolUsageInput) cognitosync.ListIdentityPoolUsageRequest
-
-	ListRecordsRequest(*cognitosync.ListRecordsInput) cognitosync.ListRecordsRequest
-
-	RegisterDeviceRequest(*cognitosync.RegisterDeviceInput) cognitosync.RegisterDeviceRequest
-
-	SetCognitoEventsRequest(*cognitosync.SetCognitoEventsInput) cognitosync.SetCognitoEventsRequest
-
-	SetIdentityPoolConfigurationRequest(*cognitosync.SetIdentityPoolConfigurationInput) cognitosync.SetIdentityPoolConfigurationRequest
-
-	SubscribeToDatasetRequest(*cognitosync.SubscribeToDatasetInput) cognitosync.SubscribeToDatasetRequest
-
-	UnsubscribeFromDatasetRequest(*cognitosync.UnsubscribeFromDatasetInput) cognitosync.UnsubscribeFromDatasetRequest
-
-	UpdateRecordsRequest(*cognitosync.UpdateRecordsInput) cognitosync.UpdateRecordsRequest
 }
 
-var _ CognitoSyncAPI = (*cognitosync.CognitoSync)(nil)
+// DeleteDatasetRequester provides the interface for the DeleteDatasetRequest API operation.
+type DeleteDatasetRequester interface {
+	DeleteDatasetRequest(*cognitosync.DeleteDatasetInput) cognitosync.DeleteDatasetRequest
+}
+
+// DescribeDatasetRequester provides the interface for the DescribeDatasetRequest API operation.
+type DescribeDatasetRequester interface {
+	DescribeDatasetRequest(*cognitosync.DescribeDatasetInput) cognitosync.DescribeDatasetRequest
+}
+
+// DescribeIdentityPoolUsageRequester provides the interface for the DescribeIdentityPoolUsageRequest API operation.
+type DescribeIdentityPoolUsageRequester interface {
+	DescribeIdentityPoolUsageRequest(*cognitosync.DescribeIdentityPoolUsageInput) cognitosync.DescribeIdentityPoolUsageRequest
+}
+
+// DescribeIdentityUsageRequester provides the interface for the DescribeIdentityUsageRequest API operation.
+type DescribeIdentityUsageRequester interface {
+	DescribeIdentityUsageRequest(*cognitosync.DescribeIdentityUsageInput) cognitosync.DescribeIdentityUsageRequest
+}
+
+// GetBulkPublishDetailsRequester provides the interface for the GetBulkPublishDetailsRequest API operation.
+type GetBulkPublishDetailsRequester interface {
+	GetBulkPublishDetailsRequest(*cognitosync.GetBulkPublishDetailsInput) cognitosync.GetBulkPublishDetailsRequest
+}
+
+// GetCognitoEventsRequester provides the interface for the GetCognitoEventsRequest API operation.
+type GetCognitoEventsRequester interface {
+	GetCognitoEventsRequest(*cognitosync.GetCognitoEventsInput) cognitosync.GetCognitoEventsRequest
+}
+
+// GetIdentityPoolConfigurationRequester provides the interface for the GetIdentityPoolConfigurationRequest API operation.
+type GetIdentityPoolConfigurationRequester interface {
+	GetIdentityPoolConfigurationRequest(*cognitosync.GetIdentityPoolConfigurationInput) cognitosync.GetIdentityPoolConfigurationRequest
+}
+
+// ListDatasetsRequester provides the interface for the ListDatasetsRequest API operation.
+type ListDatasetsRequester interface {
+	ListDatasetsRequest(*cognitosync.ListDatasetsInput) cognitosync.ListDatasetsRequest
+}
+
+// ListIdentityPoolUsageRequester provides the interface for the ListIdentityPoolUsageRequest API operation.
+type ListIdentityPoolUsageRequester interface {
+	ListIdentityPoolUsageRequest(*cognitosync.ListIdentityPoolUsageInput) cognitosync.ListIdentityPoolUsageRequest
+}
+
+// ListRecordsRequester provides the interface for the ListRecordsRequest API operation.
+type ListRecordsRequester interface {
+	ListRecordsRequest(*cognitosync.ListRecordsInput) cognitosync.ListRecordsRequest
+}
+
+// RegisterDeviceRequester provides the interface for the RegisterDeviceRequest API operation.
+type RegisterDeviceRequester interface {
+	RegisterDeviceRequest(*cognitosync.RegisterDeviceInput) cognitosync.RegisterDeviceRequest
+}
+
+// SetCognitoEventsRequester provides the interface for the SetCognitoEventsRequest API operation.
+type SetCognitoEventsRequester interface {
+	SetCognitoEventsRequest(*cognitosync.SetCognitoEventsInput) cognitosync.SetCognitoEventsRequest
+}
+
+// SetIdentityPoolConfigurationRequester provides the interface for the SetIdentityPoolConfigurationRequest API operation.
+type SetIdentityPoolConfigurationRequester interface {
+	SetIdentityPoolConfigurationRequest(*cognitosync.SetIdentityPoolConfigurationInput) cognitosync.SetIdentityPoolConfigurationRequest
+}
+
+// SubscribeToDatasetRequester provides the interface for the SubscribeToDatasetRequest API operation.
+type SubscribeToDatasetRequester interface {
+	SubscribeToDatasetRequest(*cognitosync.SubscribeToDatasetInput) cognitosync.SubscribeToDatasetRequest
+}
+
+// UnsubscribeFromDatasetRequester provides the interface for the UnsubscribeFromDatasetRequest API operation.
+type UnsubscribeFromDatasetRequester interface {
+	UnsubscribeFromDatasetRequest(*cognitosync.UnsubscribeFromDatasetInput) cognitosync.UnsubscribeFromDatasetRequest
+}
+
+// UpdateRecordsRequester provides the interface for the UpdateRecordsRequest API operation.
+type UpdateRecordsRequester interface {
+	UpdateRecordsRequest(*cognitosync.UpdateRecordsInput) cognitosync.UpdateRecordsRequest
+}

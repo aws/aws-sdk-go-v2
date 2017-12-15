@@ -12,91 +12,92 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
 )
 
-// CognitoIdentityAPI provides an interface to enable mocking the
-// cognitoidentity.CognitoIdentity service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Cognito Identity.
-//    func myFunc(svc cognitoidentityiface.CognitoIdentityAPI) bool {
-//        // Make svc.CreateIdentityPool request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cognitoidentity.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCognitoIdentityClient struct {
-//        cognitoidentityiface.CognitoIdentityAPI
-//    }
-//    func (m *mockCognitoIdentityClient) CreateIdentityPool(input *cognitoidentity.CreateIdentityPoolInput) (*cognitoidentity.UpdateIdentityPoolOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCognitoIdentityClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CognitoIdentityAPI interface {
+// CreateIdentityPoolRequester provides the interface for the CreateIdentityPoolRequest API operation.
+type CreateIdentityPoolRequester interface {
 	CreateIdentityPoolRequest(*cognitoidentity.CreateIdentityPoolInput) cognitoidentity.CreateIdentityPoolRequest
-
-	DeleteIdentitiesRequest(*cognitoidentity.DeleteIdentitiesInput) cognitoidentity.DeleteIdentitiesRequest
-
-	DeleteIdentityPoolRequest(*cognitoidentity.DeleteIdentityPoolInput) cognitoidentity.DeleteIdentityPoolRequest
-
-	DescribeIdentityRequest(*cognitoidentity.DescribeIdentityInput) cognitoidentity.DescribeIdentityRequest
-
-	DescribeIdentityPoolRequest(*cognitoidentity.DescribeIdentityPoolInput) cognitoidentity.DescribeIdentityPoolRequest
-
-	GetCredentialsForIdentityRequest(*cognitoidentity.GetCredentialsForIdentityInput) cognitoidentity.GetCredentialsForIdentityRequest
-
-	GetIdRequest(*cognitoidentity.GetIdInput) cognitoidentity.GetIdRequest
-
-	GetIdentityPoolRolesRequest(*cognitoidentity.GetIdentityPoolRolesInput) cognitoidentity.GetIdentityPoolRolesRequest
-
-	GetOpenIdTokenRequest(*cognitoidentity.GetOpenIdTokenInput) cognitoidentity.GetOpenIdTokenRequest
-
-	GetOpenIdTokenForDeveloperIdentityRequest(*cognitoidentity.GetOpenIdTokenForDeveloperIdentityInput) cognitoidentity.GetOpenIdTokenForDeveloperIdentityRequest
-
-	ListIdentitiesRequest(*cognitoidentity.ListIdentitiesInput) cognitoidentity.ListIdentitiesRequest
-
-	ListIdentityPoolsRequest(*cognitoidentity.ListIdentityPoolsInput) cognitoidentity.ListIdentityPoolsRequest
-
-	LookupDeveloperIdentityRequest(*cognitoidentity.LookupDeveloperIdentityInput) cognitoidentity.LookupDeveloperIdentityRequest
-
-	MergeDeveloperIdentitiesRequest(*cognitoidentity.MergeDeveloperIdentitiesInput) cognitoidentity.MergeDeveloperIdentitiesRequest
-
-	SetIdentityPoolRolesRequest(*cognitoidentity.SetIdentityPoolRolesInput) cognitoidentity.SetIdentityPoolRolesRequest
-
-	UnlinkDeveloperIdentityRequest(*cognitoidentity.UnlinkDeveloperIdentityInput) cognitoidentity.UnlinkDeveloperIdentityRequest
-
-	UnlinkIdentityRequest(*cognitoidentity.UnlinkIdentityInput) cognitoidentity.UnlinkIdentityRequest
-
-	UpdateIdentityPoolRequest(*cognitoidentity.UpdateIdentityPoolOutput) cognitoidentity.UpdateIdentityPoolRequest
 }
 
-var _ CognitoIdentityAPI = (*cognitoidentity.CognitoIdentity)(nil)
+// DeleteIdentitiesRequester provides the interface for the DeleteIdentitiesRequest API operation.
+type DeleteIdentitiesRequester interface {
+	DeleteIdentitiesRequest(*cognitoidentity.DeleteIdentitiesInput) cognitoidentity.DeleteIdentitiesRequest
+}
+
+// DeleteIdentityPoolRequester provides the interface for the DeleteIdentityPoolRequest API operation.
+type DeleteIdentityPoolRequester interface {
+	DeleteIdentityPoolRequest(*cognitoidentity.DeleteIdentityPoolInput) cognitoidentity.DeleteIdentityPoolRequest
+}
+
+// DescribeIdentityRequester provides the interface for the DescribeIdentityRequest API operation.
+type DescribeIdentityRequester interface {
+	DescribeIdentityRequest(*cognitoidentity.DescribeIdentityInput) cognitoidentity.DescribeIdentityRequest
+}
+
+// DescribeIdentityPoolRequester provides the interface for the DescribeIdentityPoolRequest API operation.
+type DescribeIdentityPoolRequester interface {
+	DescribeIdentityPoolRequest(*cognitoidentity.DescribeIdentityPoolInput) cognitoidentity.DescribeIdentityPoolRequest
+}
+
+// GetCredentialsForIdentityRequester provides the interface for the GetCredentialsForIdentityRequest API operation.
+type GetCredentialsForIdentityRequester interface {
+	GetCredentialsForIdentityRequest(*cognitoidentity.GetCredentialsForIdentityInput) cognitoidentity.GetCredentialsForIdentityRequest
+}
+
+// GetIdRequester provides the interface for the GetIdRequest API operation.
+type GetIdRequester interface {
+	GetIdRequest(*cognitoidentity.GetIdInput) cognitoidentity.GetIdRequest
+}
+
+// GetIdentityPoolRolesRequester provides the interface for the GetIdentityPoolRolesRequest API operation.
+type GetIdentityPoolRolesRequester interface {
+	GetIdentityPoolRolesRequest(*cognitoidentity.GetIdentityPoolRolesInput) cognitoidentity.GetIdentityPoolRolesRequest
+}
+
+// GetOpenIdTokenRequester provides the interface for the GetOpenIdTokenRequest API operation.
+type GetOpenIdTokenRequester interface {
+	GetOpenIdTokenRequest(*cognitoidentity.GetOpenIdTokenInput) cognitoidentity.GetOpenIdTokenRequest
+}
+
+// GetOpenIdTokenForDeveloperIdentityRequester provides the interface for the GetOpenIdTokenForDeveloperIdentityRequest API operation.
+type GetOpenIdTokenForDeveloperIdentityRequester interface {
+	GetOpenIdTokenForDeveloperIdentityRequest(*cognitoidentity.GetOpenIdTokenForDeveloperIdentityInput) cognitoidentity.GetOpenIdTokenForDeveloperIdentityRequest
+}
+
+// ListIdentitiesRequester provides the interface for the ListIdentitiesRequest API operation.
+type ListIdentitiesRequester interface {
+	ListIdentitiesRequest(*cognitoidentity.ListIdentitiesInput) cognitoidentity.ListIdentitiesRequest
+}
+
+// ListIdentityPoolsRequester provides the interface for the ListIdentityPoolsRequest API operation.
+type ListIdentityPoolsRequester interface {
+	ListIdentityPoolsRequest(*cognitoidentity.ListIdentityPoolsInput) cognitoidentity.ListIdentityPoolsRequest
+}
+
+// LookupDeveloperIdentityRequester provides the interface for the LookupDeveloperIdentityRequest API operation.
+type LookupDeveloperIdentityRequester interface {
+	LookupDeveloperIdentityRequest(*cognitoidentity.LookupDeveloperIdentityInput) cognitoidentity.LookupDeveloperIdentityRequest
+}
+
+// MergeDeveloperIdentitiesRequester provides the interface for the MergeDeveloperIdentitiesRequest API operation.
+type MergeDeveloperIdentitiesRequester interface {
+	MergeDeveloperIdentitiesRequest(*cognitoidentity.MergeDeveloperIdentitiesInput) cognitoidentity.MergeDeveloperIdentitiesRequest
+}
+
+// SetIdentityPoolRolesRequester provides the interface for the SetIdentityPoolRolesRequest API operation.
+type SetIdentityPoolRolesRequester interface {
+	SetIdentityPoolRolesRequest(*cognitoidentity.SetIdentityPoolRolesInput) cognitoidentity.SetIdentityPoolRolesRequest
+}
+
+// UnlinkDeveloperIdentityRequester provides the interface for the UnlinkDeveloperIdentityRequest API operation.
+type UnlinkDeveloperIdentityRequester interface {
+	UnlinkDeveloperIdentityRequest(*cognitoidentity.UnlinkDeveloperIdentityInput) cognitoidentity.UnlinkDeveloperIdentityRequest
+}
+
+// UnlinkIdentityRequester provides the interface for the UnlinkIdentityRequest API operation.
+type UnlinkIdentityRequester interface {
+	UnlinkIdentityRequest(*cognitoidentity.UnlinkIdentityInput) cognitoidentity.UnlinkIdentityRequest
+}
+
+// UpdateIdentityPoolRequester provides the interface for the UpdateIdentityPoolRequest API operation.
+type UpdateIdentityPoolRequester interface {
+	UpdateIdentityPoolRequest(*cognitoidentity.UpdateIdentityPoolOutput) cognitoidentity.UpdateIdentityPoolRequest
+}

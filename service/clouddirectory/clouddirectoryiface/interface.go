@@ -13,227 +13,297 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory"
 )
 
-// CloudDirectoryAPI provides an interface to enable mocking the
-// clouddirectory.CloudDirectory service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudDirectory.
-//    func myFunc(svc clouddirectoryiface.CloudDirectoryAPI) bool {
-//        // Make svc.AddFacetToObject request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := clouddirectory.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudDirectoryClient struct {
-//        clouddirectoryiface.CloudDirectoryAPI
-//    }
-//    func (m *mockCloudDirectoryClient) AddFacetToObject(input *clouddirectory.AddFacetToObjectInput) (*clouddirectory.AddFacetToObjectOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudDirectoryClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudDirectoryAPI interface {
+// AddFacetToObjectRequester provides the interface for the AddFacetToObjectRequest API operation.
+type AddFacetToObjectRequester interface {
 	AddFacetToObjectRequest(*clouddirectory.AddFacetToObjectInput) clouddirectory.AddFacetToObjectRequest
-
-	ApplySchemaRequest(*clouddirectory.ApplySchemaInput) clouddirectory.ApplySchemaRequest
-
-	AttachObjectRequest(*clouddirectory.AttachObjectInput) clouddirectory.AttachObjectRequest
-
-	AttachPolicyRequest(*clouddirectory.AttachPolicyInput) clouddirectory.AttachPolicyRequest
-
-	AttachToIndexRequest(*clouddirectory.AttachToIndexInput) clouddirectory.AttachToIndexRequest
-
-	AttachTypedLinkRequest(*clouddirectory.AttachTypedLinkInput) clouddirectory.AttachTypedLinkRequest
-
-	BatchReadRequest(*clouddirectory.BatchReadInput) clouddirectory.BatchReadRequest
-
-	BatchWriteRequest(*clouddirectory.BatchWriteInput) clouddirectory.BatchWriteRequest
-
-	CreateDirectoryRequest(*clouddirectory.CreateDirectoryInput) clouddirectory.CreateDirectoryRequest
-
-	CreateFacetRequest(*clouddirectory.CreateFacetInput) clouddirectory.CreateFacetRequest
-
-	CreateIndexRequest(*clouddirectory.CreateIndexInput) clouddirectory.CreateIndexRequest
-
-	CreateObjectRequest(*clouddirectory.CreateObjectInput) clouddirectory.CreateObjectRequest
-
-	CreateSchemaRequest(*clouddirectory.CreateSchemaInput) clouddirectory.CreateSchemaRequest
-
-	CreateTypedLinkFacetRequest(*clouddirectory.CreateTypedLinkFacetInput) clouddirectory.CreateTypedLinkFacetRequest
-
-	DeleteDirectoryRequest(*clouddirectory.DeleteDirectoryInput) clouddirectory.DeleteDirectoryRequest
-
-	DeleteFacetRequest(*clouddirectory.DeleteFacetInput) clouddirectory.DeleteFacetRequest
-
-	DeleteObjectRequest(*clouddirectory.DeleteObjectInput) clouddirectory.DeleteObjectRequest
-
-	DeleteSchemaRequest(*clouddirectory.DeleteSchemaInput) clouddirectory.DeleteSchemaRequest
-
-	DeleteTypedLinkFacetRequest(*clouddirectory.DeleteTypedLinkFacetInput) clouddirectory.DeleteTypedLinkFacetRequest
-
-	DetachFromIndexRequest(*clouddirectory.DetachFromIndexInput) clouddirectory.DetachFromIndexRequest
-
-	DetachObjectRequest(*clouddirectory.DetachObjectInput) clouddirectory.DetachObjectRequest
-
-	DetachPolicyRequest(*clouddirectory.DetachPolicyInput) clouddirectory.DetachPolicyRequest
-
-	DetachTypedLinkRequest(*clouddirectory.DetachTypedLinkInput) clouddirectory.DetachTypedLinkRequest
-
-	DisableDirectoryRequest(*clouddirectory.DisableDirectoryInput) clouddirectory.DisableDirectoryRequest
-
-	EnableDirectoryRequest(*clouddirectory.EnableDirectoryInput) clouddirectory.EnableDirectoryRequest
-
-	GetDirectoryRequest(*clouddirectory.GetDirectoryInput) clouddirectory.GetDirectoryRequest
-
-	GetFacetRequest(*clouddirectory.GetFacetInput) clouddirectory.GetFacetRequest
-
-	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) clouddirectory.GetObjectInformationRequest
-
-	GetSchemaAsJsonRequest(*clouddirectory.GetSchemaAsJsonInput) clouddirectory.GetSchemaAsJsonRequest
-
-	GetTypedLinkFacetInformationRequest(*clouddirectory.GetTypedLinkFacetInformationInput) clouddirectory.GetTypedLinkFacetInformationRequest
-
-	ListAppliedSchemaArnsRequest(*clouddirectory.ListAppliedSchemaArnsInput) clouddirectory.ListAppliedSchemaArnsRequest
-
-	ListAppliedSchemaArnsPages(*clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool) error
-	ListAppliedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool, ...aws.Option) error
-
-	ListAttachedIndicesRequest(*clouddirectory.ListAttachedIndicesInput) clouddirectory.ListAttachedIndicesRequest
-
-	ListAttachedIndicesPages(*clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool) error
-	ListAttachedIndicesPagesWithContext(aws.Context, *clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool, ...aws.Option) error
-
-	ListDevelopmentSchemaArnsRequest(*clouddirectory.ListDevelopmentSchemaArnsInput) clouddirectory.ListDevelopmentSchemaArnsRequest
-
-	ListDevelopmentSchemaArnsPages(*clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool) error
-	ListDevelopmentSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool, ...aws.Option) error
-
-	ListDirectoriesRequest(*clouddirectory.ListDirectoriesInput) clouddirectory.ListDirectoriesRequest
-
-	ListDirectoriesPages(*clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool) error
-	ListDirectoriesPagesWithContext(aws.Context, *clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool, ...aws.Option) error
-
-	ListFacetAttributesRequest(*clouddirectory.ListFacetAttributesInput) clouddirectory.ListFacetAttributesRequest
-
-	ListFacetAttributesPages(*clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool) error
-	ListFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool, ...aws.Option) error
-
-	ListFacetNamesRequest(*clouddirectory.ListFacetNamesInput) clouddirectory.ListFacetNamesRequest
-
-	ListFacetNamesPages(*clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool) error
-	ListFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool, ...aws.Option) error
-
-	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) clouddirectory.ListIncomingTypedLinksRequest
-
-	ListIndexRequest(*clouddirectory.ListIndexInput) clouddirectory.ListIndexRequest
-
-	ListIndexPages(*clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool) error
-	ListIndexPagesWithContext(aws.Context, *clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool, ...aws.Option) error
-
-	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) clouddirectory.ListObjectAttributesRequest
-
-	ListObjectAttributesPages(*clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool) error
-	ListObjectAttributesPagesWithContext(aws.Context, *clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool, ...aws.Option) error
-
-	ListObjectChildrenRequest(*clouddirectory.ListObjectChildrenInput) clouddirectory.ListObjectChildrenRequest
-
-	ListObjectChildrenPages(*clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool) error
-	ListObjectChildrenPagesWithContext(aws.Context, *clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool, ...aws.Option) error
-
-	ListObjectParentPathsRequest(*clouddirectory.ListObjectParentPathsInput) clouddirectory.ListObjectParentPathsRequest
-
-	ListObjectParentPathsPages(*clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool) error
-	ListObjectParentPathsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool, ...aws.Option) error
-
-	ListObjectParentsRequest(*clouddirectory.ListObjectParentsInput) clouddirectory.ListObjectParentsRequest
-
-	ListObjectParentsPages(*clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool) error
-	ListObjectParentsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool, ...aws.Option) error
-
-	ListObjectPoliciesRequest(*clouddirectory.ListObjectPoliciesInput) clouddirectory.ListObjectPoliciesRequest
-
-	ListObjectPoliciesPages(*clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool) error
-	ListObjectPoliciesPagesWithContext(aws.Context, *clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool, ...aws.Option) error
-
-	ListOutgoingTypedLinksRequest(*clouddirectory.ListOutgoingTypedLinksInput) clouddirectory.ListOutgoingTypedLinksRequest
-
-	ListPolicyAttachmentsRequest(*clouddirectory.ListPolicyAttachmentsInput) clouddirectory.ListPolicyAttachmentsRequest
-
-	ListPolicyAttachmentsPages(*clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool) error
-	ListPolicyAttachmentsPagesWithContext(aws.Context, *clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool, ...aws.Option) error
-
-	ListPublishedSchemaArnsRequest(*clouddirectory.ListPublishedSchemaArnsInput) clouddirectory.ListPublishedSchemaArnsRequest
-
-	ListPublishedSchemaArnsPages(*clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool) error
-	ListPublishedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool, ...aws.Option) error
-
-	ListTagsForResourceRequest(*clouddirectory.ListTagsForResourceInput) clouddirectory.ListTagsForResourceRequest
-
-	ListTagsForResourcePages(*clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool) error
-	ListTagsForResourcePagesWithContext(aws.Context, *clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool, ...aws.Option) error
-
-	ListTypedLinkFacetAttributesRequest(*clouddirectory.ListTypedLinkFacetAttributesInput) clouddirectory.ListTypedLinkFacetAttributesRequest
-
-	ListTypedLinkFacetAttributesPages(*clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool) error
-	ListTypedLinkFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool, ...aws.Option) error
-
-	ListTypedLinkFacetNamesRequest(*clouddirectory.ListTypedLinkFacetNamesInput) clouddirectory.ListTypedLinkFacetNamesRequest
-
-	ListTypedLinkFacetNamesPages(*clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool) error
-	ListTypedLinkFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool, ...aws.Option) error
-
-	LookupPolicyRequest(*clouddirectory.LookupPolicyInput) clouddirectory.LookupPolicyRequest
-
-	LookupPolicyPages(*clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool) error
-	LookupPolicyPagesWithContext(aws.Context, *clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool, ...aws.Option) error
-
-	PublishSchemaRequest(*clouddirectory.PublishSchemaInput) clouddirectory.PublishSchemaRequest
-
-	PutSchemaFromJsonRequest(*clouddirectory.PutSchemaFromJsonInput) clouddirectory.PutSchemaFromJsonRequest
-
-	RemoveFacetFromObjectRequest(*clouddirectory.RemoveFacetFromObjectInput) clouddirectory.RemoveFacetFromObjectRequest
-
-	TagResourceRequest(*clouddirectory.TagResourceInput) clouddirectory.TagResourceRequest
-
-	UntagResourceRequest(*clouddirectory.UntagResourceInput) clouddirectory.UntagResourceRequest
-
-	UpdateFacetRequest(*clouddirectory.UpdateFacetInput) clouddirectory.UpdateFacetRequest
-
-	UpdateObjectAttributesRequest(*clouddirectory.UpdateObjectAttributesInput) clouddirectory.UpdateObjectAttributesRequest
-
-	UpdateSchemaRequest(*clouddirectory.UpdateSchemaInput) clouddirectory.UpdateSchemaRequest
-
-	UpdateTypedLinkFacetRequest(*clouddirectory.UpdateTypedLinkFacetInput) clouddirectory.UpdateTypedLinkFacetRequest
 }
 
-var _ CloudDirectoryAPI = (*clouddirectory.CloudDirectory)(nil)
+// ApplySchemaRequester provides the interface for the ApplySchemaRequest API operation.
+type ApplySchemaRequester interface {
+	ApplySchemaRequest(*clouddirectory.ApplySchemaInput) clouddirectory.ApplySchemaRequest
+}
+
+// AttachObjectRequester provides the interface for the AttachObjectRequest API operation.
+type AttachObjectRequester interface {
+	AttachObjectRequest(*clouddirectory.AttachObjectInput) clouddirectory.AttachObjectRequest
+}
+
+// AttachPolicyRequester provides the interface for the AttachPolicyRequest API operation.
+type AttachPolicyRequester interface {
+	AttachPolicyRequest(*clouddirectory.AttachPolicyInput) clouddirectory.AttachPolicyRequest
+}
+
+// AttachToIndexRequester provides the interface for the AttachToIndexRequest API operation.
+type AttachToIndexRequester interface {
+	AttachToIndexRequest(*clouddirectory.AttachToIndexInput) clouddirectory.AttachToIndexRequest
+}
+
+// AttachTypedLinkRequester provides the interface for the AttachTypedLinkRequest API operation.
+type AttachTypedLinkRequester interface {
+	AttachTypedLinkRequest(*clouddirectory.AttachTypedLinkInput) clouddirectory.AttachTypedLinkRequest
+}
+
+// BatchReadRequester provides the interface for the BatchReadRequest API operation.
+type BatchReadRequester interface {
+	BatchReadRequest(*clouddirectory.BatchReadInput) clouddirectory.BatchReadRequest
+}
+
+// BatchWriteRequester provides the interface for the BatchWriteRequest API operation.
+type BatchWriteRequester interface {
+	BatchWriteRequest(*clouddirectory.BatchWriteInput) clouddirectory.BatchWriteRequest
+}
+
+// CreateDirectoryRequester provides the interface for the CreateDirectoryRequest API operation.
+type CreateDirectoryRequester interface {
+	CreateDirectoryRequest(*clouddirectory.CreateDirectoryInput) clouddirectory.CreateDirectoryRequest
+}
+
+// CreateFacetRequester provides the interface for the CreateFacetRequest API operation.
+type CreateFacetRequester interface {
+	CreateFacetRequest(*clouddirectory.CreateFacetInput) clouddirectory.CreateFacetRequest
+}
+
+// CreateIndexRequester provides the interface for the CreateIndexRequest API operation.
+type CreateIndexRequester interface {
+	CreateIndexRequest(*clouddirectory.CreateIndexInput) clouddirectory.CreateIndexRequest
+}
+
+// CreateObjectRequester provides the interface for the CreateObjectRequest API operation.
+type CreateObjectRequester interface {
+	CreateObjectRequest(*clouddirectory.CreateObjectInput) clouddirectory.CreateObjectRequest
+}
+
+// CreateSchemaRequester provides the interface for the CreateSchemaRequest API operation.
+type CreateSchemaRequester interface {
+	CreateSchemaRequest(*clouddirectory.CreateSchemaInput) clouddirectory.CreateSchemaRequest
+}
+
+// CreateTypedLinkFacetRequester provides the interface for the CreateTypedLinkFacetRequest API operation.
+type CreateTypedLinkFacetRequester interface {
+	CreateTypedLinkFacetRequest(*clouddirectory.CreateTypedLinkFacetInput) clouddirectory.CreateTypedLinkFacetRequest
+}
+
+// DeleteDirectoryRequester provides the interface for the DeleteDirectoryRequest API operation.
+type DeleteDirectoryRequester interface {
+	DeleteDirectoryRequest(*clouddirectory.DeleteDirectoryInput) clouddirectory.DeleteDirectoryRequest
+}
+
+// DeleteFacetRequester provides the interface for the DeleteFacetRequest API operation.
+type DeleteFacetRequester interface {
+	DeleteFacetRequest(*clouddirectory.DeleteFacetInput) clouddirectory.DeleteFacetRequest
+}
+
+// DeleteObjectRequester provides the interface for the DeleteObjectRequest API operation.
+type DeleteObjectRequester interface {
+	DeleteObjectRequest(*clouddirectory.DeleteObjectInput) clouddirectory.DeleteObjectRequest
+}
+
+// DeleteSchemaRequester provides the interface for the DeleteSchemaRequest API operation.
+type DeleteSchemaRequester interface {
+	DeleteSchemaRequest(*clouddirectory.DeleteSchemaInput) clouddirectory.DeleteSchemaRequest
+}
+
+// DeleteTypedLinkFacetRequester provides the interface for the DeleteTypedLinkFacetRequest API operation.
+type DeleteTypedLinkFacetRequester interface {
+	DeleteTypedLinkFacetRequest(*clouddirectory.DeleteTypedLinkFacetInput) clouddirectory.DeleteTypedLinkFacetRequest
+}
+
+// DetachFromIndexRequester provides the interface for the DetachFromIndexRequest API operation.
+type DetachFromIndexRequester interface {
+	DetachFromIndexRequest(*clouddirectory.DetachFromIndexInput) clouddirectory.DetachFromIndexRequest
+}
+
+// DetachObjectRequester provides the interface for the DetachObjectRequest API operation.
+type DetachObjectRequester interface {
+	DetachObjectRequest(*clouddirectory.DetachObjectInput) clouddirectory.DetachObjectRequest
+}
+
+// DetachPolicyRequester provides the interface for the DetachPolicyRequest API operation.
+type DetachPolicyRequester interface {
+	DetachPolicyRequest(*clouddirectory.DetachPolicyInput) clouddirectory.DetachPolicyRequest
+}
+
+// DetachTypedLinkRequester provides the interface for the DetachTypedLinkRequest API operation.
+type DetachTypedLinkRequester interface {
+	DetachTypedLinkRequest(*clouddirectory.DetachTypedLinkInput) clouddirectory.DetachTypedLinkRequest
+}
+
+// DisableDirectoryRequester provides the interface for the DisableDirectoryRequest API operation.
+type DisableDirectoryRequester interface {
+	DisableDirectoryRequest(*clouddirectory.DisableDirectoryInput) clouddirectory.DisableDirectoryRequest
+}
+
+// EnableDirectoryRequester provides the interface for the EnableDirectoryRequest API operation.
+type EnableDirectoryRequester interface {
+	EnableDirectoryRequest(*clouddirectory.EnableDirectoryInput) clouddirectory.EnableDirectoryRequest
+}
+
+// GetDirectoryRequester provides the interface for the GetDirectoryRequest API operation.
+type GetDirectoryRequester interface {
+	GetDirectoryRequest(*clouddirectory.GetDirectoryInput) clouddirectory.GetDirectoryRequest
+}
+
+// GetFacetRequester provides the interface for the GetFacetRequest API operation.
+type GetFacetRequester interface {
+	GetFacetRequest(*clouddirectory.GetFacetInput) clouddirectory.GetFacetRequest
+}
+
+// GetObjectInformationRequester provides the interface for the GetObjectInformationRequest API operation.
+type GetObjectInformationRequester interface {
+	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) clouddirectory.GetObjectInformationRequest
+}
+
+// GetSchemaAsJsonRequester provides the interface for the GetSchemaAsJsonRequest API operation.
+type GetSchemaAsJsonRequester interface {
+	GetSchemaAsJsonRequest(*clouddirectory.GetSchemaAsJsonInput) clouddirectory.GetSchemaAsJsonRequest
+}
+
+// GetTypedLinkFacetInformationRequester provides the interface for the GetTypedLinkFacetInformationRequest API operation.
+type GetTypedLinkFacetInformationRequester interface {
+	GetTypedLinkFacetInformationRequest(*clouddirectory.GetTypedLinkFacetInformationInput) clouddirectory.GetTypedLinkFacetInformationRequest
+}
+
+// ListAppliedSchemaArnsRequester provides the interface for the ListAppliedSchemaArnsRequest API operation.
+type ListAppliedSchemaArnsRequester interface {
+	ListAppliedSchemaArnsRequest(*clouddirectory.ListAppliedSchemaArnsInput) clouddirectory.ListAppliedSchemaArnsRequest
+}
+
+// ListAttachedIndicesRequester provides the interface for the ListAttachedIndicesRequest API operation.
+type ListAttachedIndicesRequester interface {
+	ListAttachedIndicesRequest(*clouddirectory.ListAttachedIndicesInput) clouddirectory.ListAttachedIndicesRequest
+}
+
+// ListDevelopmentSchemaArnsRequester provides the interface for the ListDevelopmentSchemaArnsRequest API operation.
+type ListDevelopmentSchemaArnsRequester interface {
+	ListDevelopmentSchemaArnsRequest(*clouddirectory.ListDevelopmentSchemaArnsInput) clouddirectory.ListDevelopmentSchemaArnsRequest
+}
+
+// ListDirectoriesRequester provides the interface for the ListDirectoriesRequest API operation.
+type ListDirectoriesRequester interface {
+	ListDirectoriesRequest(*clouddirectory.ListDirectoriesInput) clouddirectory.ListDirectoriesRequest
+}
+
+// ListFacetAttributesRequester provides the interface for the ListFacetAttributesRequest API operation.
+type ListFacetAttributesRequester interface {
+	ListFacetAttributesRequest(*clouddirectory.ListFacetAttributesInput) clouddirectory.ListFacetAttributesRequest
+}
+
+// ListFacetNamesRequester provides the interface for the ListFacetNamesRequest API operation.
+type ListFacetNamesRequester interface {
+	ListFacetNamesRequest(*clouddirectory.ListFacetNamesInput) clouddirectory.ListFacetNamesRequest
+}
+
+// ListIncomingTypedLinksRequester provides the interface for the ListIncomingTypedLinksRequest API operation.
+type ListIncomingTypedLinksRequester interface {
+	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) clouddirectory.ListIncomingTypedLinksRequest
+}
+
+// ListIndexRequester provides the interface for the ListIndexRequest API operation.
+type ListIndexRequester interface {
+	ListIndexRequest(*clouddirectory.ListIndexInput) clouddirectory.ListIndexRequest
+}
+
+// ListObjectAttributesRequester provides the interface for the ListObjectAttributesRequest API operation.
+type ListObjectAttributesRequester interface {
+	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) clouddirectory.ListObjectAttributesRequest
+}
+
+// ListObjectChildrenRequester provides the interface for the ListObjectChildrenRequest API operation.
+type ListObjectChildrenRequester interface {
+	ListObjectChildrenRequest(*clouddirectory.ListObjectChildrenInput) clouddirectory.ListObjectChildrenRequest
+}
+
+// ListObjectParentPathsRequester provides the interface for the ListObjectParentPathsRequest API operation.
+type ListObjectParentPathsRequester interface {
+	ListObjectParentPathsRequest(*clouddirectory.ListObjectParentPathsInput) clouddirectory.ListObjectParentPathsRequest
+}
+
+// ListObjectParentsRequester provides the interface for the ListObjectParentsRequest API operation.
+type ListObjectParentsRequester interface {
+	ListObjectParentsRequest(*clouddirectory.ListObjectParentsInput) clouddirectory.ListObjectParentsRequest
+}
+
+// ListObjectPoliciesRequester provides the interface for the ListObjectPoliciesRequest API operation.
+type ListObjectPoliciesRequester interface {
+	ListObjectPoliciesRequest(*clouddirectory.ListObjectPoliciesInput) clouddirectory.ListObjectPoliciesRequest
+}
+
+// ListOutgoingTypedLinksRequester provides the interface for the ListOutgoingTypedLinksRequest API operation.
+type ListOutgoingTypedLinksRequester interface {
+	ListOutgoingTypedLinksRequest(*clouddirectory.ListOutgoingTypedLinksInput) clouddirectory.ListOutgoingTypedLinksRequest
+}
+
+// ListPolicyAttachmentsRequester provides the interface for the ListPolicyAttachmentsRequest API operation.
+type ListPolicyAttachmentsRequester interface {
+	ListPolicyAttachmentsRequest(*clouddirectory.ListPolicyAttachmentsInput) clouddirectory.ListPolicyAttachmentsRequest
+}
+
+// ListPublishedSchemaArnsRequester provides the interface for the ListPublishedSchemaArnsRequest API operation.
+type ListPublishedSchemaArnsRequester interface {
+	ListPublishedSchemaArnsRequest(*clouddirectory.ListPublishedSchemaArnsInput) clouddirectory.ListPublishedSchemaArnsRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*clouddirectory.ListTagsForResourceInput) clouddirectory.ListTagsForResourceRequest
+}
+
+// ListTypedLinkFacetAttributesRequester provides the interface for the ListTypedLinkFacetAttributesRequest API operation.
+type ListTypedLinkFacetAttributesRequester interface {
+	ListTypedLinkFacetAttributesRequest(*clouddirectory.ListTypedLinkFacetAttributesInput) clouddirectory.ListTypedLinkFacetAttributesRequest
+}
+
+// ListTypedLinkFacetNamesRequester provides the interface for the ListTypedLinkFacetNamesRequest API operation.
+type ListTypedLinkFacetNamesRequester interface {
+	ListTypedLinkFacetNamesRequest(*clouddirectory.ListTypedLinkFacetNamesInput) clouddirectory.ListTypedLinkFacetNamesRequest
+}
+
+// LookupPolicyRequester provides the interface for the LookupPolicyRequest API operation.
+type LookupPolicyRequester interface {
+	LookupPolicyRequest(*clouddirectory.LookupPolicyInput) clouddirectory.LookupPolicyRequest
+}
+
+// PublishSchemaRequester provides the interface for the PublishSchemaRequest API operation.
+type PublishSchemaRequester interface {
+	PublishSchemaRequest(*clouddirectory.PublishSchemaInput) clouddirectory.PublishSchemaRequest
+}
+
+// PutSchemaFromJsonRequester provides the interface for the PutSchemaFromJsonRequest API operation.
+type PutSchemaFromJsonRequester interface {
+	PutSchemaFromJsonRequest(*clouddirectory.PutSchemaFromJsonInput) clouddirectory.PutSchemaFromJsonRequest
+}
+
+// RemoveFacetFromObjectRequester provides the interface for the RemoveFacetFromObjectRequest API operation.
+type RemoveFacetFromObjectRequester interface {
+	RemoveFacetFromObjectRequest(*clouddirectory.RemoveFacetFromObjectInput) clouddirectory.RemoveFacetFromObjectRequest
+}
+
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
+	TagResourceRequest(*clouddirectory.TagResourceInput) clouddirectory.TagResourceRequest
+}
+
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
+	UntagResourceRequest(*clouddirectory.UntagResourceInput) clouddirectory.UntagResourceRequest
+}
+
+// UpdateFacetRequester provides the interface for the UpdateFacetRequest API operation.
+type UpdateFacetRequester interface {
+	UpdateFacetRequest(*clouddirectory.UpdateFacetInput) clouddirectory.UpdateFacetRequest
+}
+
+// UpdateObjectAttributesRequester provides the interface for the UpdateObjectAttributesRequest API operation.
+type UpdateObjectAttributesRequester interface {
+	UpdateObjectAttributesRequest(*clouddirectory.UpdateObjectAttributesInput) clouddirectory.UpdateObjectAttributesRequest
+}
+
+// UpdateSchemaRequester provides the interface for the UpdateSchemaRequest API operation.
+type UpdateSchemaRequester interface {
+	UpdateSchemaRequest(*clouddirectory.UpdateSchemaInput) clouddirectory.UpdateSchemaRequest
+}
+
+// UpdateTypedLinkFacetRequester provides the interface for the UpdateTypedLinkFacetRequest API operation.
+type UpdateTypedLinkFacetRequester interface {
+	UpdateTypedLinkFacetRequest(*clouddirectory.UpdateTypedLinkFacetInput) clouddirectory.UpdateTypedLinkFacetRequest
+}

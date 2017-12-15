@@ -12,59 +12,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 )
 
-// MarketplaceCommerceAnalyticsAPI provides an interface to enable mocking the
-// marketplacecommerceanalytics.MarketplaceCommerceAnalytics service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Marketplace Commerce Analytics.
-//    func myFunc(svc marketplacecommerceanalyticsiface.MarketplaceCommerceAnalyticsAPI) bool {
-//        // Make svc.GenerateDataSet request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := marketplacecommerceanalytics.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMarketplaceCommerceAnalyticsClient struct {
-//        marketplacecommerceanalyticsiface.MarketplaceCommerceAnalyticsAPI
-//    }
-//    func (m *mockMarketplaceCommerceAnalyticsClient) GenerateDataSet(input *marketplacecommerceanalytics.GenerateDataSetInput) (*marketplacecommerceanalytics.GenerateDataSetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockMarketplaceCommerceAnalyticsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type MarketplaceCommerceAnalyticsAPI interface {
+// GenerateDataSetRequester provides the interface for the GenerateDataSetRequest API operation.
+type GenerateDataSetRequester interface {
 	GenerateDataSetRequest(*marketplacecommerceanalytics.GenerateDataSetInput) marketplacecommerceanalytics.GenerateDataSetRequest
-
-	StartSupportDataExportRequest(*marketplacecommerceanalytics.StartSupportDataExportInput) marketplacecommerceanalytics.StartSupportDataExportRequest
 }
 
-var _ MarketplaceCommerceAnalyticsAPI = (*marketplacecommerceanalytics.MarketplaceCommerceAnalytics)(nil)
+// StartSupportDataExportRequester provides the interface for the StartSupportDataExportRequest API operation.
+type StartSupportDataExportRequester interface {
+	StartSupportDataExportRequest(*marketplacecommerceanalytics.StartSupportDataExportInput) marketplacecommerceanalytics.StartSupportDataExportRequest
+}

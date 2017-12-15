@@ -12,73 +12,47 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/shield"
 )
 
-// ShieldAPI provides an interface to enable mocking the
-// shield.Shield service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Shield.
-//    func myFunc(svc shieldiface.ShieldAPI) bool {
-//        // Make svc.CreateProtection request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := shield.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockShieldClient struct {
-//        shieldiface.ShieldAPI
-//    }
-//    func (m *mockShieldClient) CreateProtection(input *shield.CreateProtectionInput) (*shield.CreateProtectionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockShieldClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ShieldAPI interface {
+// CreateProtectionRequester provides the interface for the CreateProtectionRequest API operation.
+type CreateProtectionRequester interface {
 	CreateProtectionRequest(*shield.CreateProtectionInput) shield.CreateProtectionRequest
-
-	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) shield.CreateSubscriptionRequest
-
-	DeleteProtectionRequest(*shield.DeleteProtectionInput) shield.DeleteProtectionRequest
-
-	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) shield.DeleteSubscriptionRequest
-
-	DescribeAttackRequest(*shield.DescribeAttackInput) shield.DescribeAttackRequest
-
-	DescribeProtectionRequest(*shield.DescribeProtectionInput) shield.DescribeProtectionRequest
-
-	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
-
-	ListAttacksRequest(*shield.ListAttacksInput) shield.ListAttacksRequest
-
-	ListProtectionsRequest(*shield.ListProtectionsInput) shield.ListProtectionsRequest
 }
 
-var _ ShieldAPI = (*shield.Shield)(nil)
+// CreateSubscriptionRequester provides the interface for the CreateSubscriptionRequest API operation.
+type CreateSubscriptionRequester interface {
+	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) shield.CreateSubscriptionRequest
+}
+
+// DeleteProtectionRequester provides the interface for the DeleteProtectionRequest API operation.
+type DeleteProtectionRequester interface {
+	DeleteProtectionRequest(*shield.DeleteProtectionInput) shield.DeleteProtectionRequest
+}
+
+// DeleteSubscriptionRequester provides the interface for the DeleteSubscriptionRequest API operation.
+type DeleteSubscriptionRequester interface {
+	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) shield.DeleteSubscriptionRequest
+}
+
+// DescribeAttackRequester provides the interface for the DescribeAttackRequest API operation.
+type DescribeAttackRequester interface {
+	DescribeAttackRequest(*shield.DescribeAttackInput) shield.DescribeAttackRequest
+}
+
+// DescribeProtectionRequester provides the interface for the DescribeProtectionRequest API operation.
+type DescribeProtectionRequester interface {
+	DescribeProtectionRequest(*shield.DescribeProtectionInput) shield.DescribeProtectionRequest
+}
+
+// DescribeSubscriptionRequester provides the interface for the DescribeSubscriptionRequest API operation.
+type DescribeSubscriptionRequester interface {
+	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
+}
+
+// ListAttacksRequester provides the interface for the ListAttacksRequest API operation.
+type ListAttacksRequester interface {
+	ListAttacksRequest(*shield.ListAttacksInput) shield.ListAttacksRequest
+}
+
+// ListProtectionsRequester provides the interface for the ListProtectionsRequest API operation.
+type ListProtectionsRequester interface {
+	ListProtectionsRequest(*shield.ListProtectionsInput) shield.ListProtectionsRequest
+}

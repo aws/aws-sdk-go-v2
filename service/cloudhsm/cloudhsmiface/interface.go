@@ -12,95 +12,102 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm"
 )
 
-// CloudHSMAPI provides an interface to enable mocking the
-// cloudhsm.CloudHSM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudHSM.
-//    func myFunc(svc cloudhsmiface.CloudHSMAPI) bool {
-//        // Make svc.AddTagsToResource request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudhsm.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudHSMClient struct {
-//        cloudhsmiface.CloudHSMAPI
-//    }
-//    func (m *mockCloudHSMClient) AddTagsToResource(input *cloudhsm.AddTagsToResourceInput) (*cloudhsm.AddTagsToResourceOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudHSMClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudHSMAPI interface {
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
 	AddTagsToResourceRequest(*cloudhsm.AddTagsToResourceInput) cloudhsm.AddTagsToResourceRequest
-
-	CreateHapgRequest(*cloudhsm.CreateHapgInput) cloudhsm.CreateHapgRequest
-
-	CreateHsmRequest(*cloudhsm.CreateHsmInput) cloudhsm.CreateHsmRequest
-
-	CreateLunaClientRequest(*cloudhsm.CreateLunaClientInput) cloudhsm.CreateLunaClientRequest
-
-	DeleteHapgRequest(*cloudhsm.DeleteHapgInput) cloudhsm.DeleteHapgRequest
-
-	DeleteHsmRequest(*cloudhsm.DeleteHsmInput) cloudhsm.DeleteHsmRequest
-
-	DeleteLunaClientRequest(*cloudhsm.DeleteLunaClientInput) cloudhsm.DeleteLunaClientRequest
-
-	DescribeHapgRequest(*cloudhsm.DescribeHapgInput) cloudhsm.DescribeHapgRequest
-
-	DescribeHsmRequest(*cloudhsm.DescribeHsmInput) cloudhsm.DescribeHsmRequest
-
-	DescribeLunaClientRequest(*cloudhsm.DescribeLunaClientInput) cloudhsm.DescribeLunaClientRequest
-
-	GetConfigRequest(*cloudhsm.GetConfigInput) cloudhsm.GetConfigRequest
-
-	ListAvailableZonesRequest(*cloudhsm.ListAvailableZonesInput) cloudhsm.ListAvailableZonesRequest
-
-	ListHapgsRequest(*cloudhsm.ListHapgsInput) cloudhsm.ListHapgsRequest
-
-	ListHsmsRequest(*cloudhsm.ListHsmsInput) cloudhsm.ListHsmsRequest
-
-	ListLunaClientsRequest(*cloudhsm.ListLunaClientsInput) cloudhsm.ListLunaClientsRequest
-
-	ListTagsForResourceRequest(*cloudhsm.ListTagsForResourceInput) cloudhsm.ListTagsForResourceRequest
-
-	ModifyHapgRequest(*cloudhsm.ModifyHapgInput) cloudhsm.ModifyHapgRequest
-
-	ModifyHsmRequest(*cloudhsm.ModifyHsmInput) cloudhsm.ModifyHsmRequest
-
-	ModifyLunaClientRequest(*cloudhsm.ModifyLunaClientInput) cloudhsm.ModifyLunaClientRequest
-
-	RemoveTagsFromResourceRequest(*cloudhsm.RemoveTagsFromResourceInput) cloudhsm.RemoveTagsFromResourceRequest
 }
 
-var _ CloudHSMAPI = (*cloudhsm.CloudHSM)(nil)
+// CreateHapgRequester provides the interface for the CreateHapgRequest API operation.
+type CreateHapgRequester interface {
+	CreateHapgRequest(*cloudhsm.CreateHapgInput) cloudhsm.CreateHapgRequest
+}
+
+// CreateHsmRequester provides the interface for the CreateHsmRequest API operation.
+type CreateHsmRequester interface {
+	CreateHsmRequest(*cloudhsm.CreateHsmInput) cloudhsm.CreateHsmRequest
+}
+
+// CreateLunaClientRequester provides the interface for the CreateLunaClientRequest API operation.
+type CreateLunaClientRequester interface {
+	CreateLunaClientRequest(*cloudhsm.CreateLunaClientInput) cloudhsm.CreateLunaClientRequest
+}
+
+// DeleteHapgRequester provides the interface for the DeleteHapgRequest API operation.
+type DeleteHapgRequester interface {
+	DeleteHapgRequest(*cloudhsm.DeleteHapgInput) cloudhsm.DeleteHapgRequest
+}
+
+// DeleteHsmRequester provides the interface for the DeleteHsmRequest API operation.
+type DeleteHsmRequester interface {
+	DeleteHsmRequest(*cloudhsm.DeleteHsmInput) cloudhsm.DeleteHsmRequest
+}
+
+// DeleteLunaClientRequester provides the interface for the DeleteLunaClientRequest API operation.
+type DeleteLunaClientRequester interface {
+	DeleteLunaClientRequest(*cloudhsm.DeleteLunaClientInput) cloudhsm.DeleteLunaClientRequest
+}
+
+// DescribeHapgRequester provides the interface for the DescribeHapgRequest API operation.
+type DescribeHapgRequester interface {
+	DescribeHapgRequest(*cloudhsm.DescribeHapgInput) cloudhsm.DescribeHapgRequest
+}
+
+// DescribeHsmRequester provides the interface for the DescribeHsmRequest API operation.
+type DescribeHsmRequester interface {
+	DescribeHsmRequest(*cloudhsm.DescribeHsmInput) cloudhsm.DescribeHsmRequest
+}
+
+// DescribeLunaClientRequester provides the interface for the DescribeLunaClientRequest API operation.
+type DescribeLunaClientRequester interface {
+	DescribeLunaClientRequest(*cloudhsm.DescribeLunaClientInput) cloudhsm.DescribeLunaClientRequest
+}
+
+// GetConfigRequester provides the interface for the GetConfigRequest API operation.
+type GetConfigRequester interface {
+	GetConfigRequest(*cloudhsm.GetConfigInput) cloudhsm.GetConfigRequest
+}
+
+// ListAvailableZonesRequester provides the interface for the ListAvailableZonesRequest API operation.
+type ListAvailableZonesRequester interface {
+	ListAvailableZonesRequest(*cloudhsm.ListAvailableZonesInput) cloudhsm.ListAvailableZonesRequest
+}
+
+// ListHapgsRequester provides the interface for the ListHapgsRequest API operation.
+type ListHapgsRequester interface {
+	ListHapgsRequest(*cloudhsm.ListHapgsInput) cloudhsm.ListHapgsRequest
+}
+
+// ListHsmsRequester provides the interface for the ListHsmsRequest API operation.
+type ListHsmsRequester interface {
+	ListHsmsRequest(*cloudhsm.ListHsmsInput) cloudhsm.ListHsmsRequest
+}
+
+// ListLunaClientsRequester provides the interface for the ListLunaClientsRequest API operation.
+type ListLunaClientsRequester interface {
+	ListLunaClientsRequest(*cloudhsm.ListLunaClientsInput) cloudhsm.ListLunaClientsRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*cloudhsm.ListTagsForResourceInput) cloudhsm.ListTagsForResourceRequest
+}
+
+// ModifyHapgRequester provides the interface for the ModifyHapgRequest API operation.
+type ModifyHapgRequester interface {
+	ModifyHapgRequest(*cloudhsm.ModifyHapgInput) cloudhsm.ModifyHapgRequest
+}
+
+// ModifyHsmRequester provides the interface for the ModifyHsmRequest API operation.
+type ModifyHsmRequester interface {
+	ModifyHsmRequest(*cloudhsm.ModifyHsmInput) cloudhsm.ModifyHsmRequest
+}
+
+// ModifyLunaClientRequester provides the interface for the ModifyLunaClientRequest API operation.
+type ModifyLunaClientRequester interface {
+	ModifyLunaClientRequest(*cloudhsm.ModifyLunaClientInput) cloudhsm.ModifyLunaClientRequest
+}
+
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
+	RemoveTagsFromResourceRequest(*cloudhsm.RemoveTagsFromResourceInput) cloudhsm.RemoveTagsFromResourceRequest
+}

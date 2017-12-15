@@ -13,181 +13,221 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 )
 
-// ElastiCacheAPI provides an interface to enable mocking the
-// elasticache.ElastiCache service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon ElastiCache.
-//    func myFunc(svc elasticacheiface.ElastiCacheAPI) bool {
-//        // Make svc.AddTagsToResource request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := elasticache.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockElastiCacheClient struct {
-//        elasticacheiface.ElastiCacheAPI
-//    }
-//    func (m *mockElastiCacheClient) AddTagsToResource(input *elasticache.AddTagsToResourceInput) (*elasticache.RemoveTagsFromResourceOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockElastiCacheClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ElastiCacheAPI interface {
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
 	AddTagsToResourceRequest(*elasticache.AddTagsToResourceInput) elasticache.AddTagsToResourceRequest
+}
 
+// AuthorizeCacheSecurityGroupIngressRequester provides the interface for the AuthorizeCacheSecurityGroupIngressRequest API operation.
+type AuthorizeCacheSecurityGroupIngressRequester interface {
 	AuthorizeCacheSecurityGroupIngressRequest(*elasticache.AuthorizeCacheSecurityGroupIngressInput) elasticache.AuthorizeCacheSecurityGroupIngressRequest
+}
 
+// CopySnapshotRequester provides the interface for the CopySnapshotRequest API operation.
+type CopySnapshotRequester interface {
 	CopySnapshotRequest(*elasticache.CopySnapshotInput) elasticache.CopySnapshotRequest
+}
 
+// CreateCacheClusterRequester provides the interface for the CreateCacheClusterRequest API operation.
+type CreateCacheClusterRequester interface {
 	CreateCacheClusterRequest(*elasticache.CreateCacheClusterInput) elasticache.CreateCacheClusterRequest
+}
 
+// CreateCacheParameterGroupRequester provides the interface for the CreateCacheParameterGroupRequest API operation.
+type CreateCacheParameterGroupRequester interface {
 	CreateCacheParameterGroupRequest(*elasticache.CreateCacheParameterGroupInput) elasticache.CreateCacheParameterGroupRequest
+}
 
+// CreateCacheSecurityGroupRequester provides the interface for the CreateCacheSecurityGroupRequest API operation.
+type CreateCacheSecurityGroupRequester interface {
 	CreateCacheSecurityGroupRequest(*elasticache.CreateCacheSecurityGroupInput) elasticache.CreateCacheSecurityGroupRequest
+}
 
+// CreateCacheSubnetGroupRequester provides the interface for the CreateCacheSubnetGroupRequest API operation.
+type CreateCacheSubnetGroupRequester interface {
 	CreateCacheSubnetGroupRequest(*elasticache.CreateCacheSubnetGroupInput) elasticache.CreateCacheSubnetGroupRequest
+}
 
+// CreateReplicationGroupRequester provides the interface for the CreateReplicationGroupRequest API operation.
+type CreateReplicationGroupRequester interface {
 	CreateReplicationGroupRequest(*elasticache.CreateReplicationGroupInput) elasticache.CreateReplicationGroupRequest
+}
 
+// CreateSnapshotRequester provides the interface for the CreateSnapshotRequest API operation.
+type CreateSnapshotRequester interface {
 	CreateSnapshotRequest(*elasticache.CreateSnapshotInput) elasticache.CreateSnapshotRequest
+}
 
+// DeleteCacheClusterRequester provides the interface for the DeleteCacheClusterRequest API operation.
+type DeleteCacheClusterRequester interface {
 	DeleteCacheClusterRequest(*elasticache.DeleteCacheClusterInput) elasticache.DeleteCacheClusterRequest
+}
 
+// DeleteCacheParameterGroupRequester provides the interface for the DeleteCacheParameterGroupRequest API operation.
+type DeleteCacheParameterGroupRequester interface {
 	DeleteCacheParameterGroupRequest(*elasticache.DeleteCacheParameterGroupInput) elasticache.DeleteCacheParameterGroupRequest
+}
 
+// DeleteCacheSecurityGroupRequester provides the interface for the DeleteCacheSecurityGroupRequest API operation.
+type DeleteCacheSecurityGroupRequester interface {
 	DeleteCacheSecurityGroupRequest(*elasticache.DeleteCacheSecurityGroupInput) elasticache.DeleteCacheSecurityGroupRequest
+}
 
+// DeleteCacheSubnetGroupRequester provides the interface for the DeleteCacheSubnetGroupRequest API operation.
+type DeleteCacheSubnetGroupRequester interface {
 	DeleteCacheSubnetGroupRequest(*elasticache.DeleteCacheSubnetGroupInput) elasticache.DeleteCacheSubnetGroupRequest
+}
 
+// DeleteReplicationGroupRequester provides the interface for the DeleteReplicationGroupRequest API operation.
+type DeleteReplicationGroupRequester interface {
 	DeleteReplicationGroupRequest(*elasticache.DeleteReplicationGroupInput) elasticache.DeleteReplicationGroupRequest
+}
 
+// DeleteSnapshotRequester provides the interface for the DeleteSnapshotRequest API operation.
+type DeleteSnapshotRequester interface {
 	DeleteSnapshotRequest(*elasticache.DeleteSnapshotInput) elasticache.DeleteSnapshotRequest
+}
 
+// DescribeCacheClustersRequester provides the interface for the DescribeCacheClustersRequest API operation.
+type DescribeCacheClustersRequester interface {
 	DescribeCacheClustersRequest(*elasticache.DescribeCacheClustersInput) elasticache.DescribeCacheClustersRequest
+}
 
-	DescribeCacheClustersPages(*elasticache.DescribeCacheClustersInput, func(*elasticache.DescribeCacheClustersOutput, bool) bool) error
-	DescribeCacheClustersPagesWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, func(*elasticache.DescribeCacheClustersOutput, bool) bool, ...aws.Option) error
-
+// DescribeCacheEngineVersionsRequester provides the interface for the DescribeCacheEngineVersionsRequest API operation.
+type DescribeCacheEngineVersionsRequester interface {
 	DescribeCacheEngineVersionsRequest(*elasticache.DescribeCacheEngineVersionsInput) elasticache.DescribeCacheEngineVersionsRequest
+}
 
-	DescribeCacheEngineVersionsPages(*elasticache.DescribeCacheEngineVersionsInput, func(*elasticache.DescribeCacheEngineVersionsOutput, bool) bool) error
-	DescribeCacheEngineVersionsPagesWithContext(aws.Context, *elasticache.DescribeCacheEngineVersionsInput, func(*elasticache.DescribeCacheEngineVersionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeCacheParameterGroupsRequester provides the interface for the DescribeCacheParameterGroupsRequest API operation.
+type DescribeCacheParameterGroupsRequester interface {
 	DescribeCacheParameterGroupsRequest(*elasticache.DescribeCacheParameterGroupsInput) elasticache.DescribeCacheParameterGroupsRequest
+}
 
-	DescribeCacheParameterGroupsPages(*elasticache.DescribeCacheParameterGroupsInput, func(*elasticache.DescribeCacheParameterGroupsOutput, bool) bool) error
-	DescribeCacheParameterGroupsPagesWithContext(aws.Context, *elasticache.DescribeCacheParameterGroupsInput, func(*elasticache.DescribeCacheParameterGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeCacheParametersRequester provides the interface for the DescribeCacheParametersRequest API operation.
+type DescribeCacheParametersRequester interface {
 	DescribeCacheParametersRequest(*elasticache.DescribeCacheParametersInput) elasticache.DescribeCacheParametersRequest
+}
 
-	DescribeCacheParametersPages(*elasticache.DescribeCacheParametersInput, func(*elasticache.DescribeCacheParametersOutput, bool) bool) error
-	DescribeCacheParametersPagesWithContext(aws.Context, *elasticache.DescribeCacheParametersInput, func(*elasticache.DescribeCacheParametersOutput, bool) bool, ...aws.Option) error
-
+// DescribeCacheSecurityGroupsRequester provides the interface for the DescribeCacheSecurityGroupsRequest API operation.
+type DescribeCacheSecurityGroupsRequester interface {
 	DescribeCacheSecurityGroupsRequest(*elasticache.DescribeCacheSecurityGroupsInput) elasticache.DescribeCacheSecurityGroupsRequest
+}
 
-	DescribeCacheSecurityGroupsPages(*elasticache.DescribeCacheSecurityGroupsInput, func(*elasticache.DescribeCacheSecurityGroupsOutput, bool) bool) error
-	DescribeCacheSecurityGroupsPagesWithContext(aws.Context, *elasticache.DescribeCacheSecurityGroupsInput, func(*elasticache.DescribeCacheSecurityGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeCacheSubnetGroupsRequester provides the interface for the DescribeCacheSubnetGroupsRequest API operation.
+type DescribeCacheSubnetGroupsRequester interface {
 	DescribeCacheSubnetGroupsRequest(*elasticache.DescribeCacheSubnetGroupsInput) elasticache.DescribeCacheSubnetGroupsRequest
+}
 
-	DescribeCacheSubnetGroupsPages(*elasticache.DescribeCacheSubnetGroupsInput, func(*elasticache.DescribeCacheSubnetGroupsOutput, bool) bool) error
-	DescribeCacheSubnetGroupsPagesWithContext(aws.Context, *elasticache.DescribeCacheSubnetGroupsInput, func(*elasticache.DescribeCacheSubnetGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeEngineDefaultParametersRequester provides the interface for the DescribeEngineDefaultParametersRequest API operation.
+type DescribeEngineDefaultParametersRequester interface {
 	DescribeEngineDefaultParametersRequest(*elasticache.DescribeEngineDefaultParametersInput) elasticache.DescribeEngineDefaultParametersRequest
+}
 
-	DescribeEngineDefaultParametersPages(*elasticache.DescribeEngineDefaultParametersInput, func(*elasticache.DescribeEngineDefaultParametersOutput, bool) bool) error
-	DescribeEngineDefaultParametersPagesWithContext(aws.Context, *elasticache.DescribeEngineDefaultParametersInput, func(*elasticache.DescribeEngineDefaultParametersOutput, bool) bool, ...aws.Option) error
-
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
 	DescribeEventsRequest(*elasticache.DescribeEventsInput) elasticache.DescribeEventsRequest
+}
 
-	DescribeEventsPages(*elasticache.DescribeEventsInput, func(*elasticache.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *elasticache.DescribeEventsInput, func(*elasticache.DescribeEventsOutput, bool) bool, ...aws.Option) error
-
+// DescribeReplicationGroupsRequester provides the interface for the DescribeReplicationGroupsRequest API operation.
+type DescribeReplicationGroupsRequester interface {
 	DescribeReplicationGroupsRequest(*elasticache.DescribeReplicationGroupsInput) elasticache.DescribeReplicationGroupsRequest
+}
 
-	DescribeReplicationGroupsPages(*elasticache.DescribeReplicationGroupsInput, func(*elasticache.DescribeReplicationGroupsOutput, bool) bool) error
-	DescribeReplicationGroupsPagesWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, func(*elasticache.DescribeReplicationGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeReservedCacheNodesRequester provides the interface for the DescribeReservedCacheNodesRequest API operation.
+type DescribeReservedCacheNodesRequester interface {
 	DescribeReservedCacheNodesRequest(*elasticache.DescribeReservedCacheNodesInput) elasticache.DescribeReservedCacheNodesRequest
+}
 
-	DescribeReservedCacheNodesPages(*elasticache.DescribeReservedCacheNodesInput, func(*elasticache.DescribeReservedCacheNodesOutput, bool) bool) error
-	DescribeReservedCacheNodesPagesWithContext(aws.Context, *elasticache.DescribeReservedCacheNodesInput, func(*elasticache.DescribeReservedCacheNodesOutput, bool) bool, ...aws.Option) error
-
+// DescribeReservedCacheNodesOfferingsRequester provides the interface for the DescribeReservedCacheNodesOfferingsRequest API operation.
+type DescribeReservedCacheNodesOfferingsRequester interface {
 	DescribeReservedCacheNodesOfferingsRequest(*elasticache.DescribeReservedCacheNodesOfferingsInput) elasticache.DescribeReservedCacheNodesOfferingsRequest
+}
 
-	DescribeReservedCacheNodesOfferingsPages(*elasticache.DescribeReservedCacheNodesOfferingsInput, func(*elasticache.DescribeReservedCacheNodesOfferingsOutput, bool) bool) error
-	DescribeReservedCacheNodesOfferingsPagesWithContext(aws.Context, *elasticache.DescribeReservedCacheNodesOfferingsInput, func(*elasticache.DescribeReservedCacheNodesOfferingsOutput, bool) bool, ...aws.Option) error
-
+// DescribeSnapshotsRequester provides the interface for the DescribeSnapshotsRequest API operation.
+type DescribeSnapshotsRequester interface {
 	DescribeSnapshotsRequest(*elasticache.DescribeSnapshotsInput) elasticache.DescribeSnapshotsRequest
+}
 
-	DescribeSnapshotsPages(*elasticache.DescribeSnapshotsInput, func(*elasticache.DescribeSnapshotsOutput, bool) bool) error
-	DescribeSnapshotsPagesWithContext(aws.Context, *elasticache.DescribeSnapshotsInput, func(*elasticache.DescribeSnapshotsOutput, bool) bool, ...aws.Option) error
-
+// ListAllowedNodeTypeModificationsRequester provides the interface for the ListAllowedNodeTypeModificationsRequest API operation.
+type ListAllowedNodeTypeModificationsRequester interface {
 	ListAllowedNodeTypeModificationsRequest(*elasticache.ListAllowedNodeTypeModificationsInput) elasticache.ListAllowedNodeTypeModificationsRequest
+}
 
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
 	ListTagsForResourceRequest(*elasticache.ListTagsForResourceInput) elasticache.ListTagsForResourceRequest
+}
 
+// ModifyCacheClusterRequester provides the interface for the ModifyCacheClusterRequest API operation.
+type ModifyCacheClusterRequester interface {
 	ModifyCacheClusterRequest(*elasticache.ModifyCacheClusterInput) elasticache.ModifyCacheClusterRequest
+}
 
+// ModifyCacheParameterGroupRequester provides the interface for the ModifyCacheParameterGroupRequest API operation.
+type ModifyCacheParameterGroupRequester interface {
 	ModifyCacheParameterGroupRequest(*elasticache.ModifyCacheParameterGroupInput) elasticache.ModifyCacheParameterGroupRequest
+}
 
+// ModifyCacheSubnetGroupRequester provides the interface for the ModifyCacheSubnetGroupRequest API operation.
+type ModifyCacheSubnetGroupRequester interface {
 	ModifyCacheSubnetGroupRequest(*elasticache.ModifyCacheSubnetGroupInput) elasticache.ModifyCacheSubnetGroupRequest
+}
 
+// ModifyReplicationGroupRequester provides the interface for the ModifyReplicationGroupRequest API operation.
+type ModifyReplicationGroupRequester interface {
 	ModifyReplicationGroupRequest(*elasticache.ModifyReplicationGroupInput) elasticache.ModifyReplicationGroupRequest
+}
 
+// PurchaseReservedCacheNodesOfferingRequester provides the interface for the PurchaseReservedCacheNodesOfferingRequest API operation.
+type PurchaseReservedCacheNodesOfferingRequester interface {
 	PurchaseReservedCacheNodesOfferingRequest(*elasticache.PurchaseReservedCacheNodesOfferingInput) elasticache.PurchaseReservedCacheNodesOfferingRequest
+}
 
+// RebootCacheClusterRequester provides the interface for the RebootCacheClusterRequest API operation.
+type RebootCacheClusterRequester interface {
 	RebootCacheClusterRequest(*elasticache.RebootCacheClusterInput) elasticache.RebootCacheClusterRequest
+}
 
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
 	RemoveTagsFromResourceRequest(*elasticache.RemoveTagsFromResourceInput) elasticache.RemoveTagsFromResourceRequest
+}
 
+// ResetCacheParameterGroupRequester provides the interface for the ResetCacheParameterGroupRequest API operation.
+type ResetCacheParameterGroupRequester interface {
 	ResetCacheParameterGroupRequest(*elasticache.ResetCacheParameterGroupInput) elasticache.ResetCacheParameterGroupRequest
+}
 
+// RevokeCacheSecurityGroupIngressRequester provides the interface for the RevokeCacheSecurityGroupIngressRequest API operation.
+type RevokeCacheSecurityGroupIngressRequester interface {
 	RevokeCacheSecurityGroupIngressRequest(*elasticache.RevokeCacheSecurityGroupIngressInput) elasticache.RevokeCacheSecurityGroupIngressRequest
+}
 
+// TestFailoverRequester provides the interface for the TestFailoverRequest API operation.
+type TestFailoverRequester interface {
 	TestFailoverRequest(*elasticache.TestFailoverInput) elasticache.TestFailoverRequest
+}
 
+// CacheClusterAvailableWaiter provides the interface for the WaitUntilCacheClusterAvailable waiter.
+type CacheClusterAvailableWaiter interface {
 	WaitUntilCacheClusterAvailable(*elasticache.DescribeCacheClustersInput) error
 	WaitUntilCacheClusterAvailableWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, ...aws.WaiterOption) error
+}
 
+// CacheClusterDeletedWaiter provides the interface for the WaitUntilCacheClusterDeleted waiter.
+type CacheClusterDeletedWaiter interface {
 	WaitUntilCacheClusterDeleted(*elasticache.DescribeCacheClustersInput) error
 	WaitUntilCacheClusterDeletedWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, ...aws.WaiterOption) error
+}
 
+// ReplicationGroupAvailableWaiter provides the interface for the WaitUntilReplicationGroupAvailable waiter.
+type ReplicationGroupAvailableWaiter interface {
 	WaitUntilReplicationGroupAvailable(*elasticache.DescribeReplicationGroupsInput) error
 	WaitUntilReplicationGroupAvailableWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, ...aws.WaiterOption) error
+}
 
+// ReplicationGroupDeletedWaiter provides the interface for the WaitUntilReplicationGroupDeleted waiter.
+type ReplicationGroupDeletedWaiter interface {
 	WaitUntilReplicationGroupDeleted(*elasticache.DescribeReplicationGroupsInput) error
 	WaitUntilReplicationGroupDeletedWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, ...aws.WaiterOption) error
 }
-
-var _ ElastiCacheAPI = (*elasticache.ElastiCache)(nil)

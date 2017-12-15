@@ -13,663 +13,1393 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
 
-// EC2API provides an interface to enable mocking the
-// ec2.EC2 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Elastic Compute Cloud.
-//    func myFunc(svc ec2iface.EC2API) bool {
-//        // Make svc.AcceptReservedInstancesExchangeQuote request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := ec2.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockEC2Client struct {
-//        ec2iface.EC2API
-//    }
-//    func (m *mockEC2Client) AcceptReservedInstancesExchangeQuote(input *ec2.AcceptReservedInstancesExchangeQuoteInput) (*ec2.AcceptReservedInstancesExchangeQuoteOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockEC2Client{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type EC2API interface {
+// AcceptReservedInstancesExchangeQuoteRequester provides the interface for the AcceptReservedInstancesExchangeQuoteRequest API operation.
+type AcceptReservedInstancesExchangeQuoteRequester interface {
 	AcceptReservedInstancesExchangeQuoteRequest(*ec2.AcceptReservedInstancesExchangeQuoteInput) ec2.AcceptReservedInstancesExchangeQuoteRequest
+}
 
+// AcceptVpcPeeringConnectionRequester provides the interface for the AcceptVpcPeeringConnectionRequest API operation.
+type AcceptVpcPeeringConnectionRequester interface {
 	AcceptVpcPeeringConnectionRequest(*ec2.AcceptVpcPeeringConnectionInput) ec2.AcceptVpcPeeringConnectionRequest
+}
 
+// AllocateAddressRequester provides the interface for the AllocateAddressRequest API operation.
+type AllocateAddressRequester interface {
 	AllocateAddressRequest(*ec2.AllocateAddressInput) ec2.AllocateAddressRequest
+}
 
+// AllocateHostsRequester provides the interface for the AllocateHostsRequest API operation.
+type AllocateHostsRequester interface {
 	AllocateHostsRequest(*ec2.AllocateHostsInput) ec2.AllocateHostsRequest
+}
 
+// AssignIpv6AddressesRequester provides the interface for the AssignIpv6AddressesRequest API operation.
+type AssignIpv6AddressesRequester interface {
 	AssignIpv6AddressesRequest(*ec2.AssignIpv6AddressesInput) ec2.AssignIpv6AddressesRequest
+}
 
+// AssignPrivateIpAddressesRequester provides the interface for the AssignPrivateIpAddressesRequest API operation.
+type AssignPrivateIpAddressesRequester interface {
 	AssignPrivateIpAddressesRequest(*ec2.AssignPrivateIpAddressesInput) ec2.AssignPrivateIpAddressesRequest
+}
 
+// AssociateAddressRequester provides the interface for the AssociateAddressRequest API operation.
+type AssociateAddressRequester interface {
 	AssociateAddressRequest(*ec2.AssociateAddressInput) ec2.AssociateAddressRequest
+}
 
+// AssociateDhcpOptionsRequester provides the interface for the AssociateDhcpOptionsRequest API operation.
+type AssociateDhcpOptionsRequester interface {
 	AssociateDhcpOptionsRequest(*ec2.AssociateDhcpOptionsInput) ec2.AssociateDhcpOptionsRequest
+}
 
+// AssociateIamInstanceProfileRequester provides the interface for the AssociateIamInstanceProfileRequest API operation.
+type AssociateIamInstanceProfileRequester interface {
 	AssociateIamInstanceProfileRequest(*ec2.AssociateIamInstanceProfileInput) ec2.AssociateIamInstanceProfileRequest
+}
 
+// AssociateRouteTableRequester provides the interface for the AssociateRouteTableRequest API operation.
+type AssociateRouteTableRequester interface {
 	AssociateRouteTableRequest(*ec2.AssociateRouteTableInput) ec2.AssociateRouteTableRequest
+}
 
+// AssociateSubnetCidrBlockRequester provides the interface for the AssociateSubnetCidrBlockRequest API operation.
+type AssociateSubnetCidrBlockRequester interface {
 	AssociateSubnetCidrBlockRequest(*ec2.AssociateSubnetCidrBlockInput) ec2.AssociateSubnetCidrBlockRequest
+}
 
+// AssociateVpcCidrBlockRequester provides the interface for the AssociateVpcCidrBlockRequest API operation.
+type AssociateVpcCidrBlockRequester interface {
 	AssociateVpcCidrBlockRequest(*ec2.AssociateVpcCidrBlockInput) ec2.AssociateVpcCidrBlockRequest
+}
 
+// AttachClassicLinkVpcRequester provides the interface for the AttachClassicLinkVpcRequest API operation.
+type AttachClassicLinkVpcRequester interface {
 	AttachClassicLinkVpcRequest(*ec2.AttachClassicLinkVpcInput) ec2.AttachClassicLinkVpcRequest
+}
 
+// AttachInternetGatewayRequester provides the interface for the AttachInternetGatewayRequest API operation.
+type AttachInternetGatewayRequester interface {
 	AttachInternetGatewayRequest(*ec2.AttachInternetGatewayInput) ec2.AttachInternetGatewayRequest
+}
 
+// AttachNetworkInterfaceRequester provides the interface for the AttachNetworkInterfaceRequest API operation.
+type AttachNetworkInterfaceRequester interface {
 	AttachNetworkInterfaceRequest(*ec2.AttachNetworkInterfaceInput) ec2.AttachNetworkInterfaceRequest
+}
 
+// AttachVolumeRequester provides the interface for the AttachVolumeRequest API operation.
+type AttachVolumeRequester interface {
 	AttachVolumeRequest(*ec2.AttachVolumeInput) ec2.AttachVolumeRequest
+}
 
+// AttachVpnGatewayRequester provides the interface for the AttachVpnGatewayRequest API operation.
+type AttachVpnGatewayRequester interface {
 	AttachVpnGatewayRequest(*ec2.AttachVpnGatewayInput) ec2.AttachVpnGatewayRequest
+}
 
+// AuthorizeSecurityGroupEgressRequester provides the interface for the AuthorizeSecurityGroupEgressRequest API operation.
+type AuthorizeSecurityGroupEgressRequester interface {
 	AuthorizeSecurityGroupEgressRequest(*ec2.AuthorizeSecurityGroupEgressInput) ec2.AuthorizeSecurityGroupEgressRequest
+}
 
+// AuthorizeSecurityGroupIngressRequester provides the interface for the AuthorizeSecurityGroupIngressRequest API operation.
+type AuthorizeSecurityGroupIngressRequester interface {
 	AuthorizeSecurityGroupIngressRequest(*ec2.AuthorizeSecurityGroupIngressInput) ec2.AuthorizeSecurityGroupIngressRequest
+}
 
+// BundleInstanceRequester provides the interface for the BundleInstanceRequest API operation.
+type BundleInstanceRequester interface {
 	BundleInstanceRequest(*ec2.BundleInstanceInput) ec2.BundleInstanceRequest
+}
 
+// CancelBundleTaskRequester provides the interface for the CancelBundleTaskRequest API operation.
+type CancelBundleTaskRequester interface {
 	CancelBundleTaskRequest(*ec2.CancelBundleTaskInput) ec2.CancelBundleTaskRequest
+}
 
+// CancelConversionTaskRequester provides the interface for the CancelConversionTaskRequest API operation.
+type CancelConversionTaskRequester interface {
 	CancelConversionTaskRequest(*ec2.CancelConversionTaskInput) ec2.CancelConversionTaskRequest
+}
 
+// CancelExportTaskRequester provides the interface for the CancelExportTaskRequest API operation.
+type CancelExportTaskRequester interface {
 	CancelExportTaskRequest(*ec2.CancelExportTaskInput) ec2.CancelExportTaskRequest
+}
 
+// CancelImportTaskRequester provides the interface for the CancelImportTaskRequest API operation.
+type CancelImportTaskRequester interface {
 	CancelImportTaskRequest(*ec2.CancelImportTaskInput) ec2.CancelImportTaskRequest
+}
 
+// CancelReservedInstancesListingRequester provides the interface for the CancelReservedInstancesListingRequest API operation.
+type CancelReservedInstancesListingRequester interface {
 	CancelReservedInstancesListingRequest(*ec2.CancelReservedInstancesListingInput) ec2.CancelReservedInstancesListingRequest
+}
 
+// CancelSpotFleetRequestsRequester provides the interface for the CancelSpotFleetRequestsRequest API operation.
+type CancelSpotFleetRequestsRequester interface {
 	CancelSpotFleetRequestsRequest(*ec2.CancelSpotFleetRequestsInput) ec2.CancelSpotFleetRequestsRequest
+}
 
+// CancelSpotInstanceRequestsRequester provides the interface for the CancelSpotInstanceRequestsRequest API operation.
+type CancelSpotInstanceRequestsRequester interface {
 	CancelSpotInstanceRequestsRequest(*ec2.CancelSpotInstanceRequestsInput) ec2.CancelSpotInstanceRequestsRequest
+}
 
+// ConfirmProductInstanceRequester provides the interface for the ConfirmProductInstanceRequest API operation.
+type ConfirmProductInstanceRequester interface {
 	ConfirmProductInstanceRequest(*ec2.ConfirmProductInstanceInput) ec2.ConfirmProductInstanceRequest
+}
 
+// CopyFpgaImageRequester provides the interface for the CopyFpgaImageRequest API operation.
+type CopyFpgaImageRequester interface {
 	CopyFpgaImageRequest(*ec2.CopyFpgaImageInput) ec2.CopyFpgaImageRequest
+}
 
+// CopyImageRequester provides the interface for the CopyImageRequest API operation.
+type CopyImageRequester interface {
 	CopyImageRequest(*ec2.CopyImageInput) ec2.CopyImageRequest
+}
 
+// CopySnapshotRequester provides the interface for the CopySnapshotRequest API operation.
+type CopySnapshotRequester interface {
 	CopySnapshotRequest(*ec2.CopySnapshotInput) ec2.CopySnapshotRequest
+}
 
+// CreateCustomerGatewayRequester provides the interface for the CreateCustomerGatewayRequest API operation.
+type CreateCustomerGatewayRequester interface {
 	CreateCustomerGatewayRequest(*ec2.CreateCustomerGatewayInput) ec2.CreateCustomerGatewayRequest
+}
 
+// CreateDefaultVpcRequester provides the interface for the CreateDefaultVpcRequest API operation.
+type CreateDefaultVpcRequester interface {
 	CreateDefaultVpcRequest(*ec2.CreateDefaultVpcInput) ec2.CreateDefaultVpcRequest
+}
 
+// CreateDhcpOptionsRequester provides the interface for the CreateDhcpOptionsRequest API operation.
+type CreateDhcpOptionsRequester interface {
 	CreateDhcpOptionsRequest(*ec2.CreateDhcpOptionsInput) ec2.CreateDhcpOptionsRequest
+}
 
+// CreateEgressOnlyInternetGatewayRequester provides the interface for the CreateEgressOnlyInternetGatewayRequest API operation.
+type CreateEgressOnlyInternetGatewayRequester interface {
 	CreateEgressOnlyInternetGatewayRequest(*ec2.CreateEgressOnlyInternetGatewayInput) ec2.CreateEgressOnlyInternetGatewayRequest
+}
 
+// CreateFlowLogsRequester provides the interface for the CreateFlowLogsRequest API operation.
+type CreateFlowLogsRequester interface {
 	CreateFlowLogsRequest(*ec2.CreateFlowLogsInput) ec2.CreateFlowLogsRequest
+}
 
+// CreateFpgaImageRequester provides the interface for the CreateFpgaImageRequest API operation.
+type CreateFpgaImageRequester interface {
 	CreateFpgaImageRequest(*ec2.CreateFpgaImageInput) ec2.CreateFpgaImageRequest
+}
 
+// CreateImageRequester provides the interface for the CreateImageRequest API operation.
+type CreateImageRequester interface {
 	CreateImageRequest(*ec2.CreateImageInput) ec2.CreateImageRequest
+}
 
+// CreateInstanceExportTaskRequester provides the interface for the CreateInstanceExportTaskRequest API operation.
+type CreateInstanceExportTaskRequester interface {
 	CreateInstanceExportTaskRequest(*ec2.CreateInstanceExportTaskInput) ec2.CreateInstanceExportTaskRequest
+}
 
+// CreateInternetGatewayRequester provides the interface for the CreateInternetGatewayRequest API operation.
+type CreateInternetGatewayRequester interface {
 	CreateInternetGatewayRequest(*ec2.CreateInternetGatewayInput) ec2.CreateInternetGatewayRequest
+}
 
+// CreateKeyPairRequester provides the interface for the CreateKeyPairRequest API operation.
+type CreateKeyPairRequester interface {
 	CreateKeyPairRequest(*ec2.CreateKeyPairInput) ec2.CreateKeyPairRequest
+}
 
+// CreateNatGatewayRequester provides the interface for the CreateNatGatewayRequest API operation.
+type CreateNatGatewayRequester interface {
 	CreateNatGatewayRequest(*ec2.CreateNatGatewayInput) ec2.CreateNatGatewayRequest
+}
 
+// CreateNetworkAclRequester provides the interface for the CreateNetworkAclRequest API operation.
+type CreateNetworkAclRequester interface {
 	CreateNetworkAclRequest(*ec2.CreateNetworkAclInput) ec2.CreateNetworkAclRequest
+}
 
+// CreateNetworkAclEntryRequester provides the interface for the CreateNetworkAclEntryRequest API operation.
+type CreateNetworkAclEntryRequester interface {
 	CreateNetworkAclEntryRequest(*ec2.CreateNetworkAclEntryInput) ec2.CreateNetworkAclEntryRequest
+}
 
+// CreateNetworkInterfaceRequester provides the interface for the CreateNetworkInterfaceRequest API operation.
+type CreateNetworkInterfaceRequester interface {
 	CreateNetworkInterfaceRequest(*ec2.CreateNetworkInterfaceInput) ec2.CreateNetworkInterfaceRequest
+}
 
+// CreateNetworkInterfacePermissionRequester provides the interface for the CreateNetworkInterfacePermissionRequest API operation.
+type CreateNetworkInterfacePermissionRequester interface {
 	CreateNetworkInterfacePermissionRequest(*ec2.CreateNetworkInterfacePermissionInput) ec2.CreateNetworkInterfacePermissionRequest
+}
 
+// CreatePlacementGroupRequester provides the interface for the CreatePlacementGroupRequest API operation.
+type CreatePlacementGroupRequester interface {
 	CreatePlacementGroupRequest(*ec2.CreatePlacementGroupInput) ec2.CreatePlacementGroupRequest
+}
 
+// CreateReservedInstancesListingRequester provides the interface for the CreateReservedInstancesListingRequest API operation.
+type CreateReservedInstancesListingRequester interface {
 	CreateReservedInstancesListingRequest(*ec2.CreateReservedInstancesListingInput) ec2.CreateReservedInstancesListingRequest
+}
 
+// CreateRouteRequester provides the interface for the CreateRouteRequest API operation.
+type CreateRouteRequester interface {
 	CreateRouteRequest(*ec2.CreateRouteInput) ec2.CreateRouteRequest
+}
 
+// CreateRouteTableRequester provides the interface for the CreateRouteTableRequest API operation.
+type CreateRouteTableRequester interface {
 	CreateRouteTableRequest(*ec2.CreateRouteTableInput) ec2.CreateRouteTableRequest
+}
 
+// CreateSecurityGroupRequester provides the interface for the CreateSecurityGroupRequest API operation.
+type CreateSecurityGroupRequester interface {
 	CreateSecurityGroupRequest(*ec2.CreateSecurityGroupInput) ec2.CreateSecurityGroupRequest
+}
 
+// CreateSnapshotRequester provides the interface for the CreateSnapshotRequest API operation.
+type CreateSnapshotRequester interface {
 	CreateSnapshotRequest(*ec2.CreateSnapshotInput) ec2.CreateSnapshotRequest
+}
 
+// CreateSpotDatafeedSubscriptionRequester provides the interface for the CreateSpotDatafeedSubscriptionRequest API operation.
+type CreateSpotDatafeedSubscriptionRequester interface {
 	CreateSpotDatafeedSubscriptionRequest(*ec2.CreateSpotDatafeedSubscriptionInput) ec2.CreateSpotDatafeedSubscriptionRequest
+}
 
+// CreateSubnetRequester provides the interface for the CreateSubnetRequest API operation.
+type CreateSubnetRequester interface {
 	CreateSubnetRequest(*ec2.CreateSubnetInput) ec2.CreateSubnetRequest
+}
 
+// CreateTagsRequester provides the interface for the CreateTagsRequest API operation.
+type CreateTagsRequester interface {
 	CreateTagsRequest(*ec2.CreateTagsInput) ec2.CreateTagsRequest
+}
 
+// CreateVolumeRequester provides the interface for the CreateVolumeRequest API operation.
+type CreateVolumeRequester interface {
 	CreateVolumeRequest(*ec2.CreateVolumeInput) ec2.CreateVolumeRequest
+}
 
+// CreateVpcRequester provides the interface for the CreateVpcRequest API operation.
+type CreateVpcRequester interface {
 	CreateVpcRequest(*ec2.CreateVpcInput) ec2.CreateVpcRequest
+}
 
+// CreateVpcEndpointRequester provides the interface for the CreateVpcEndpointRequest API operation.
+type CreateVpcEndpointRequester interface {
 	CreateVpcEndpointRequest(*ec2.CreateVpcEndpointInput) ec2.CreateVpcEndpointRequest
+}
 
+// CreateVpcPeeringConnectionRequester provides the interface for the CreateVpcPeeringConnectionRequest API operation.
+type CreateVpcPeeringConnectionRequester interface {
 	CreateVpcPeeringConnectionRequest(*ec2.CreateVpcPeeringConnectionInput) ec2.CreateVpcPeeringConnectionRequest
+}
 
+// CreateVpnConnectionRequester provides the interface for the CreateVpnConnectionRequest API operation.
+type CreateVpnConnectionRequester interface {
 	CreateVpnConnectionRequest(*ec2.CreateVpnConnectionInput) ec2.CreateVpnConnectionRequest
+}
 
+// CreateVpnConnectionRouteRequester provides the interface for the CreateVpnConnectionRouteRequest API operation.
+type CreateVpnConnectionRouteRequester interface {
 	CreateVpnConnectionRouteRequest(*ec2.CreateVpnConnectionRouteInput) ec2.CreateVpnConnectionRouteRequest
+}
 
+// CreateVpnGatewayRequester provides the interface for the CreateVpnGatewayRequest API operation.
+type CreateVpnGatewayRequester interface {
 	CreateVpnGatewayRequest(*ec2.CreateVpnGatewayInput) ec2.CreateVpnGatewayRequest
+}
 
+// DeleteCustomerGatewayRequester provides the interface for the DeleteCustomerGatewayRequest API operation.
+type DeleteCustomerGatewayRequester interface {
 	DeleteCustomerGatewayRequest(*ec2.DeleteCustomerGatewayInput) ec2.DeleteCustomerGatewayRequest
+}
 
+// DeleteDhcpOptionsRequester provides the interface for the DeleteDhcpOptionsRequest API operation.
+type DeleteDhcpOptionsRequester interface {
 	DeleteDhcpOptionsRequest(*ec2.DeleteDhcpOptionsInput) ec2.DeleteDhcpOptionsRequest
+}
 
+// DeleteEgressOnlyInternetGatewayRequester provides the interface for the DeleteEgressOnlyInternetGatewayRequest API operation.
+type DeleteEgressOnlyInternetGatewayRequester interface {
 	DeleteEgressOnlyInternetGatewayRequest(*ec2.DeleteEgressOnlyInternetGatewayInput) ec2.DeleteEgressOnlyInternetGatewayRequest
+}
 
+// DeleteFlowLogsRequester provides the interface for the DeleteFlowLogsRequest API operation.
+type DeleteFlowLogsRequester interface {
 	DeleteFlowLogsRequest(*ec2.DeleteFlowLogsInput) ec2.DeleteFlowLogsRequest
+}
 
+// DeleteFpgaImageRequester provides the interface for the DeleteFpgaImageRequest API operation.
+type DeleteFpgaImageRequester interface {
 	DeleteFpgaImageRequest(*ec2.DeleteFpgaImageInput) ec2.DeleteFpgaImageRequest
+}
 
+// DeleteInternetGatewayRequester provides the interface for the DeleteInternetGatewayRequest API operation.
+type DeleteInternetGatewayRequester interface {
 	DeleteInternetGatewayRequest(*ec2.DeleteInternetGatewayInput) ec2.DeleteInternetGatewayRequest
+}
 
+// DeleteKeyPairRequester provides the interface for the DeleteKeyPairRequest API operation.
+type DeleteKeyPairRequester interface {
 	DeleteKeyPairRequest(*ec2.DeleteKeyPairInput) ec2.DeleteKeyPairRequest
+}
 
+// DeleteNatGatewayRequester provides the interface for the DeleteNatGatewayRequest API operation.
+type DeleteNatGatewayRequester interface {
 	DeleteNatGatewayRequest(*ec2.DeleteNatGatewayInput) ec2.DeleteNatGatewayRequest
+}
 
+// DeleteNetworkAclRequester provides the interface for the DeleteNetworkAclRequest API operation.
+type DeleteNetworkAclRequester interface {
 	DeleteNetworkAclRequest(*ec2.DeleteNetworkAclInput) ec2.DeleteNetworkAclRequest
+}
 
+// DeleteNetworkAclEntryRequester provides the interface for the DeleteNetworkAclEntryRequest API operation.
+type DeleteNetworkAclEntryRequester interface {
 	DeleteNetworkAclEntryRequest(*ec2.DeleteNetworkAclEntryInput) ec2.DeleteNetworkAclEntryRequest
+}
 
+// DeleteNetworkInterfaceRequester provides the interface for the DeleteNetworkInterfaceRequest API operation.
+type DeleteNetworkInterfaceRequester interface {
 	DeleteNetworkInterfaceRequest(*ec2.DeleteNetworkInterfaceInput) ec2.DeleteNetworkInterfaceRequest
+}
 
+// DeleteNetworkInterfacePermissionRequester provides the interface for the DeleteNetworkInterfacePermissionRequest API operation.
+type DeleteNetworkInterfacePermissionRequester interface {
 	DeleteNetworkInterfacePermissionRequest(*ec2.DeleteNetworkInterfacePermissionInput) ec2.DeleteNetworkInterfacePermissionRequest
+}
 
+// DeletePlacementGroupRequester provides the interface for the DeletePlacementGroupRequest API operation.
+type DeletePlacementGroupRequester interface {
 	DeletePlacementGroupRequest(*ec2.DeletePlacementGroupInput) ec2.DeletePlacementGroupRequest
+}
 
+// DeleteRouteRequester provides the interface for the DeleteRouteRequest API operation.
+type DeleteRouteRequester interface {
 	DeleteRouteRequest(*ec2.DeleteRouteInput) ec2.DeleteRouteRequest
+}
 
+// DeleteRouteTableRequester provides the interface for the DeleteRouteTableRequest API operation.
+type DeleteRouteTableRequester interface {
 	DeleteRouteTableRequest(*ec2.DeleteRouteTableInput) ec2.DeleteRouteTableRequest
+}
 
+// DeleteSecurityGroupRequester provides the interface for the DeleteSecurityGroupRequest API operation.
+type DeleteSecurityGroupRequester interface {
 	DeleteSecurityGroupRequest(*ec2.DeleteSecurityGroupInput) ec2.DeleteSecurityGroupRequest
+}
 
+// DeleteSnapshotRequester provides the interface for the DeleteSnapshotRequest API operation.
+type DeleteSnapshotRequester interface {
 	DeleteSnapshotRequest(*ec2.DeleteSnapshotInput) ec2.DeleteSnapshotRequest
+}
 
+// DeleteSpotDatafeedSubscriptionRequester provides the interface for the DeleteSpotDatafeedSubscriptionRequest API operation.
+type DeleteSpotDatafeedSubscriptionRequester interface {
 	DeleteSpotDatafeedSubscriptionRequest(*ec2.DeleteSpotDatafeedSubscriptionInput) ec2.DeleteSpotDatafeedSubscriptionRequest
+}
 
+// DeleteSubnetRequester provides the interface for the DeleteSubnetRequest API operation.
+type DeleteSubnetRequester interface {
 	DeleteSubnetRequest(*ec2.DeleteSubnetInput) ec2.DeleteSubnetRequest
+}
 
+// DeleteTagsRequester provides the interface for the DeleteTagsRequest API operation.
+type DeleteTagsRequester interface {
 	DeleteTagsRequest(*ec2.DeleteTagsInput) ec2.DeleteTagsRequest
+}
 
+// DeleteVolumeRequester provides the interface for the DeleteVolumeRequest API operation.
+type DeleteVolumeRequester interface {
 	DeleteVolumeRequest(*ec2.DeleteVolumeInput) ec2.DeleteVolumeRequest
+}
 
+// DeleteVpcRequester provides the interface for the DeleteVpcRequest API operation.
+type DeleteVpcRequester interface {
 	DeleteVpcRequest(*ec2.DeleteVpcInput) ec2.DeleteVpcRequest
+}
 
+// DeleteVpcEndpointsRequester provides the interface for the DeleteVpcEndpointsRequest API operation.
+type DeleteVpcEndpointsRequester interface {
 	DeleteVpcEndpointsRequest(*ec2.DeleteVpcEndpointsInput) ec2.DeleteVpcEndpointsRequest
+}
 
+// DeleteVpcPeeringConnectionRequester provides the interface for the DeleteVpcPeeringConnectionRequest API operation.
+type DeleteVpcPeeringConnectionRequester interface {
 	DeleteVpcPeeringConnectionRequest(*ec2.DeleteVpcPeeringConnectionInput) ec2.DeleteVpcPeeringConnectionRequest
+}
 
+// DeleteVpnConnectionRequester provides the interface for the DeleteVpnConnectionRequest API operation.
+type DeleteVpnConnectionRequester interface {
 	DeleteVpnConnectionRequest(*ec2.DeleteVpnConnectionInput) ec2.DeleteVpnConnectionRequest
+}
 
+// DeleteVpnConnectionRouteRequester provides the interface for the DeleteVpnConnectionRouteRequest API operation.
+type DeleteVpnConnectionRouteRequester interface {
 	DeleteVpnConnectionRouteRequest(*ec2.DeleteVpnConnectionRouteInput) ec2.DeleteVpnConnectionRouteRequest
+}
 
+// DeleteVpnGatewayRequester provides the interface for the DeleteVpnGatewayRequest API operation.
+type DeleteVpnGatewayRequester interface {
 	DeleteVpnGatewayRequest(*ec2.DeleteVpnGatewayInput) ec2.DeleteVpnGatewayRequest
+}
 
+// DeregisterImageRequester provides the interface for the DeregisterImageRequest API operation.
+type DeregisterImageRequester interface {
 	DeregisterImageRequest(*ec2.DeregisterImageInput) ec2.DeregisterImageRequest
+}
 
+// DescribeAccountAttributesRequester provides the interface for the DescribeAccountAttributesRequest API operation.
+type DescribeAccountAttributesRequester interface {
 	DescribeAccountAttributesRequest(*ec2.DescribeAccountAttributesInput) ec2.DescribeAccountAttributesRequest
+}
 
+// DescribeAddressesRequester provides the interface for the DescribeAddressesRequest API operation.
+type DescribeAddressesRequester interface {
 	DescribeAddressesRequest(*ec2.DescribeAddressesInput) ec2.DescribeAddressesRequest
+}
 
+// DescribeAvailabilityZonesRequester provides the interface for the DescribeAvailabilityZonesRequest API operation.
+type DescribeAvailabilityZonesRequester interface {
 	DescribeAvailabilityZonesRequest(*ec2.DescribeAvailabilityZonesInput) ec2.DescribeAvailabilityZonesRequest
+}
 
+// DescribeBundleTasksRequester provides the interface for the DescribeBundleTasksRequest API operation.
+type DescribeBundleTasksRequester interface {
 	DescribeBundleTasksRequest(*ec2.DescribeBundleTasksInput) ec2.DescribeBundleTasksRequest
+}
 
+// DescribeClassicLinkInstancesRequester provides the interface for the DescribeClassicLinkInstancesRequest API operation.
+type DescribeClassicLinkInstancesRequester interface {
 	DescribeClassicLinkInstancesRequest(*ec2.DescribeClassicLinkInstancesInput) ec2.DescribeClassicLinkInstancesRequest
+}
 
+// DescribeConversionTasksRequester provides the interface for the DescribeConversionTasksRequest API operation.
+type DescribeConversionTasksRequester interface {
 	DescribeConversionTasksRequest(*ec2.DescribeConversionTasksInput) ec2.DescribeConversionTasksRequest
+}
 
+// DescribeCustomerGatewaysRequester provides the interface for the DescribeCustomerGatewaysRequest API operation.
+type DescribeCustomerGatewaysRequester interface {
 	DescribeCustomerGatewaysRequest(*ec2.DescribeCustomerGatewaysInput) ec2.DescribeCustomerGatewaysRequest
+}
 
+// DescribeDhcpOptionsRequester provides the interface for the DescribeDhcpOptionsRequest API operation.
+type DescribeDhcpOptionsRequester interface {
 	DescribeDhcpOptionsRequest(*ec2.DescribeDhcpOptionsInput) ec2.DescribeDhcpOptionsRequest
+}
 
+// DescribeEgressOnlyInternetGatewaysRequester provides the interface for the DescribeEgressOnlyInternetGatewaysRequest API operation.
+type DescribeEgressOnlyInternetGatewaysRequester interface {
 	DescribeEgressOnlyInternetGatewaysRequest(*ec2.DescribeEgressOnlyInternetGatewaysInput) ec2.DescribeEgressOnlyInternetGatewaysRequest
+}
 
+// DescribeElasticGpusRequester provides the interface for the DescribeElasticGpusRequest API operation.
+type DescribeElasticGpusRequester interface {
 	DescribeElasticGpusRequest(*ec2.DescribeElasticGpusInput) ec2.DescribeElasticGpusRequest
+}
 
+// DescribeExportTasksRequester provides the interface for the DescribeExportTasksRequest API operation.
+type DescribeExportTasksRequester interface {
 	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
+}
 
+// DescribeFlowLogsRequester provides the interface for the DescribeFlowLogsRequest API operation.
+type DescribeFlowLogsRequester interface {
 	DescribeFlowLogsRequest(*ec2.DescribeFlowLogsInput) ec2.DescribeFlowLogsRequest
+}
 
+// DescribeFpgaImageAttributeRequester provides the interface for the DescribeFpgaImageAttributeRequest API operation.
+type DescribeFpgaImageAttributeRequester interface {
 	DescribeFpgaImageAttributeRequest(*ec2.DescribeFpgaImageAttributeInput) ec2.DescribeFpgaImageAttributeRequest
+}
 
+// DescribeFpgaImagesRequester provides the interface for the DescribeFpgaImagesRequest API operation.
+type DescribeFpgaImagesRequester interface {
 	DescribeFpgaImagesRequest(*ec2.DescribeFpgaImagesInput) ec2.DescribeFpgaImagesRequest
+}
 
+// DescribeHostReservationOfferingsRequester provides the interface for the DescribeHostReservationOfferingsRequest API operation.
+type DescribeHostReservationOfferingsRequester interface {
 	DescribeHostReservationOfferingsRequest(*ec2.DescribeHostReservationOfferingsInput) ec2.DescribeHostReservationOfferingsRequest
+}
 
+// DescribeHostReservationsRequester provides the interface for the DescribeHostReservationsRequest API operation.
+type DescribeHostReservationsRequester interface {
 	DescribeHostReservationsRequest(*ec2.DescribeHostReservationsInput) ec2.DescribeHostReservationsRequest
+}
 
+// DescribeHostsRequester provides the interface for the DescribeHostsRequest API operation.
+type DescribeHostsRequester interface {
 	DescribeHostsRequest(*ec2.DescribeHostsInput) ec2.DescribeHostsRequest
+}
 
+// DescribeIamInstanceProfileAssociationsRequester provides the interface for the DescribeIamInstanceProfileAssociationsRequest API operation.
+type DescribeIamInstanceProfileAssociationsRequester interface {
 	DescribeIamInstanceProfileAssociationsRequest(*ec2.DescribeIamInstanceProfileAssociationsInput) ec2.DescribeIamInstanceProfileAssociationsRequest
+}
 
+// DescribeIdFormatRequester provides the interface for the DescribeIdFormatRequest API operation.
+type DescribeIdFormatRequester interface {
 	DescribeIdFormatRequest(*ec2.DescribeIdFormatInput) ec2.DescribeIdFormatRequest
+}
 
+// DescribeIdentityIdFormatRequester provides the interface for the DescribeIdentityIdFormatRequest API operation.
+type DescribeIdentityIdFormatRequester interface {
 	DescribeIdentityIdFormatRequest(*ec2.DescribeIdentityIdFormatInput) ec2.DescribeIdentityIdFormatRequest
+}
 
+// DescribeImageAttributeRequester provides the interface for the DescribeImageAttributeRequest API operation.
+type DescribeImageAttributeRequester interface {
 	DescribeImageAttributeRequest(*ec2.DescribeImageAttributeInput) ec2.DescribeImageAttributeRequest
+}
 
+// DescribeImagesRequester provides the interface for the DescribeImagesRequest API operation.
+type DescribeImagesRequester interface {
 	DescribeImagesRequest(*ec2.DescribeImagesInput) ec2.DescribeImagesRequest
+}
 
+// DescribeImportImageTasksRequester provides the interface for the DescribeImportImageTasksRequest API operation.
+type DescribeImportImageTasksRequester interface {
 	DescribeImportImageTasksRequest(*ec2.DescribeImportImageTasksInput) ec2.DescribeImportImageTasksRequest
+}
 
+// DescribeImportSnapshotTasksRequester provides the interface for the DescribeImportSnapshotTasksRequest API operation.
+type DescribeImportSnapshotTasksRequester interface {
 	DescribeImportSnapshotTasksRequest(*ec2.DescribeImportSnapshotTasksInput) ec2.DescribeImportSnapshotTasksRequest
+}
 
+// DescribeInstanceAttributeRequester provides the interface for the DescribeInstanceAttributeRequest API operation.
+type DescribeInstanceAttributeRequester interface {
 	DescribeInstanceAttributeRequest(*ec2.DescribeInstanceAttributeInput) ec2.DescribeInstanceAttributeRequest
+}
 
+// DescribeInstanceStatusRequester provides the interface for the DescribeInstanceStatusRequest API operation.
+type DescribeInstanceStatusRequester interface {
 	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
+}
 
-	DescribeInstanceStatusPages(*ec2.DescribeInstanceStatusInput, func(*ec2.DescribeInstanceStatusOutput, bool) bool) error
-	DescribeInstanceStatusPagesWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, func(*ec2.DescribeInstanceStatusOutput, bool) bool, ...aws.Option) error
-
+// DescribeInstancesRequester provides the interface for the DescribeInstancesRequest API operation.
+type DescribeInstancesRequester interface {
 	DescribeInstancesRequest(*ec2.DescribeInstancesInput) ec2.DescribeInstancesRequest
+}
 
-	DescribeInstancesPages(*ec2.DescribeInstancesInput, func(*ec2.DescribeInstancesOutput, bool) bool) error
-	DescribeInstancesPagesWithContext(aws.Context, *ec2.DescribeInstancesInput, func(*ec2.DescribeInstancesOutput, bool) bool, ...aws.Option) error
-
+// DescribeInternetGatewaysRequester provides the interface for the DescribeInternetGatewaysRequest API operation.
+type DescribeInternetGatewaysRequester interface {
 	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
+}
 
+// DescribeKeyPairsRequester provides the interface for the DescribeKeyPairsRequest API operation.
+type DescribeKeyPairsRequester interface {
 	DescribeKeyPairsRequest(*ec2.DescribeKeyPairsInput) ec2.DescribeKeyPairsRequest
+}
 
+// DescribeMovingAddressesRequester provides the interface for the DescribeMovingAddressesRequest API operation.
+type DescribeMovingAddressesRequester interface {
 	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
+}
 
+// DescribeNatGatewaysRequester provides the interface for the DescribeNatGatewaysRequest API operation.
+type DescribeNatGatewaysRequester interface {
 	DescribeNatGatewaysRequest(*ec2.DescribeNatGatewaysInput) ec2.DescribeNatGatewaysRequest
+}
 
-	DescribeNatGatewaysPages(*ec2.DescribeNatGatewaysInput, func(*ec2.DescribeNatGatewaysOutput, bool) bool) error
-	DescribeNatGatewaysPagesWithContext(aws.Context, *ec2.DescribeNatGatewaysInput, func(*ec2.DescribeNatGatewaysOutput, bool) bool, ...aws.Option) error
-
+// DescribeNetworkAclsRequester provides the interface for the DescribeNetworkAclsRequest API operation.
+type DescribeNetworkAclsRequester interface {
 	DescribeNetworkAclsRequest(*ec2.DescribeNetworkAclsInput) ec2.DescribeNetworkAclsRequest
+}
 
+// DescribeNetworkInterfaceAttributeRequester provides the interface for the DescribeNetworkInterfaceAttributeRequest API operation.
+type DescribeNetworkInterfaceAttributeRequester interface {
 	DescribeNetworkInterfaceAttributeRequest(*ec2.DescribeNetworkInterfaceAttributeInput) ec2.DescribeNetworkInterfaceAttributeRequest
+}
 
+// DescribeNetworkInterfacePermissionsRequester provides the interface for the DescribeNetworkInterfacePermissionsRequest API operation.
+type DescribeNetworkInterfacePermissionsRequester interface {
 	DescribeNetworkInterfacePermissionsRequest(*ec2.DescribeNetworkInterfacePermissionsInput) ec2.DescribeNetworkInterfacePermissionsRequest
+}
 
+// DescribeNetworkInterfacesRequester provides the interface for the DescribeNetworkInterfacesRequest API operation.
+type DescribeNetworkInterfacesRequester interface {
 	DescribeNetworkInterfacesRequest(*ec2.DescribeNetworkInterfacesInput) ec2.DescribeNetworkInterfacesRequest
+}
 
+// DescribePlacementGroupsRequester provides the interface for the DescribePlacementGroupsRequest API operation.
+type DescribePlacementGroupsRequester interface {
 	DescribePlacementGroupsRequest(*ec2.DescribePlacementGroupsInput) ec2.DescribePlacementGroupsRequest
+}
 
+// DescribePrefixListsRequester provides the interface for the DescribePrefixListsRequest API operation.
+type DescribePrefixListsRequester interface {
 	DescribePrefixListsRequest(*ec2.DescribePrefixListsInput) ec2.DescribePrefixListsRequest
+}
 
+// DescribeRegionsRequester provides the interface for the DescribeRegionsRequest API operation.
+type DescribeRegionsRequester interface {
 	DescribeRegionsRequest(*ec2.DescribeRegionsInput) ec2.DescribeRegionsRequest
+}
 
+// DescribeReservedInstancesRequester provides the interface for the DescribeReservedInstancesRequest API operation.
+type DescribeReservedInstancesRequester interface {
 	DescribeReservedInstancesRequest(*ec2.DescribeReservedInstancesInput) ec2.DescribeReservedInstancesRequest
+}
 
+// DescribeReservedInstancesListingsRequester provides the interface for the DescribeReservedInstancesListingsRequest API operation.
+type DescribeReservedInstancesListingsRequester interface {
 	DescribeReservedInstancesListingsRequest(*ec2.DescribeReservedInstancesListingsInput) ec2.DescribeReservedInstancesListingsRequest
+}
 
+// DescribeReservedInstancesModificationsRequester provides the interface for the DescribeReservedInstancesModificationsRequest API operation.
+type DescribeReservedInstancesModificationsRequester interface {
 	DescribeReservedInstancesModificationsRequest(*ec2.DescribeReservedInstancesModificationsInput) ec2.DescribeReservedInstancesModificationsRequest
+}
 
-	DescribeReservedInstancesModificationsPages(*ec2.DescribeReservedInstancesModificationsInput, func(*ec2.DescribeReservedInstancesModificationsOutput, bool) bool) error
-	DescribeReservedInstancesModificationsPagesWithContext(aws.Context, *ec2.DescribeReservedInstancesModificationsInput, func(*ec2.DescribeReservedInstancesModificationsOutput, bool) bool, ...aws.Option) error
-
+// DescribeReservedInstancesOfferingsRequester provides the interface for the DescribeReservedInstancesOfferingsRequest API operation.
+type DescribeReservedInstancesOfferingsRequester interface {
 	DescribeReservedInstancesOfferingsRequest(*ec2.DescribeReservedInstancesOfferingsInput) ec2.DescribeReservedInstancesOfferingsRequest
+}
 
-	DescribeReservedInstancesOfferingsPages(*ec2.DescribeReservedInstancesOfferingsInput, func(*ec2.DescribeReservedInstancesOfferingsOutput, bool) bool) error
-	DescribeReservedInstancesOfferingsPagesWithContext(aws.Context, *ec2.DescribeReservedInstancesOfferingsInput, func(*ec2.DescribeReservedInstancesOfferingsOutput, bool) bool, ...aws.Option) error
-
+// DescribeRouteTablesRequester provides the interface for the DescribeRouteTablesRequest API operation.
+type DescribeRouteTablesRequester interface {
 	DescribeRouteTablesRequest(*ec2.DescribeRouteTablesInput) ec2.DescribeRouteTablesRequest
+}
 
+// DescribeScheduledInstanceAvailabilityRequester provides the interface for the DescribeScheduledInstanceAvailabilityRequest API operation.
+type DescribeScheduledInstanceAvailabilityRequester interface {
 	DescribeScheduledInstanceAvailabilityRequest(*ec2.DescribeScheduledInstanceAvailabilityInput) ec2.DescribeScheduledInstanceAvailabilityRequest
+}
 
+// DescribeScheduledInstancesRequester provides the interface for the DescribeScheduledInstancesRequest API operation.
+type DescribeScheduledInstancesRequester interface {
 	DescribeScheduledInstancesRequest(*ec2.DescribeScheduledInstancesInput) ec2.DescribeScheduledInstancesRequest
+}
 
+// DescribeSecurityGroupReferencesRequester provides the interface for the DescribeSecurityGroupReferencesRequest API operation.
+type DescribeSecurityGroupReferencesRequester interface {
 	DescribeSecurityGroupReferencesRequest(*ec2.DescribeSecurityGroupReferencesInput) ec2.DescribeSecurityGroupReferencesRequest
+}
 
+// DescribeSecurityGroupsRequester provides the interface for the DescribeSecurityGroupsRequest API operation.
+type DescribeSecurityGroupsRequester interface {
 	DescribeSecurityGroupsRequest(*ec2.DescribeSecurityGroupsInput) ec2.DescribeSecurityGroupsRequest
+}
 
+// DescribeSnapshotAttributeRequester provides the interface for the DescribeSnapshotAttributeRequest API operation.
+type DescribeSnapshotAttributeRequester interface {
 	DescribeSnapshotAttributeRequest(*ec2.DescribeSnapshotAttributeInput) ec2.DescribeSnapshotAttributeRequest
+}
 
+// DescribeSnapshotsRequester provides the interface for the DescribeSnapshotsRequest API operation.
+type DescribeSnapshotsRequester interface {
 	DescribeSnapshotsRequest(*ec2.DescribeSnapshotsInput) ec2.DescribeSnapshotsRequest
+}
 
-	DescribeSnapshotsPages(*ec2.DescribeSnapshotsInput, func(*ec2.DescribeSnapshotsOutput, bool) bool) error
-	DescribeSnapshotsPagesWithContext(aws.Context, *ec2.DescribeSnapshotsInput, func(*ec2.DescribeSnapshotsOutput, bool) bool, ...aws.Option) error
-
+// DescribeSpotDatafeedSubscriptionRequester provides the interface for the DescribeSpotDatafeedSubscriptionRequest API operation.
+type DescribeSpotDatafeedSubscriptionRequester interface {
 	DescribeSpotDatafeedSubscriptionRequest(*ec2.DescribeSpotDatafeedSubscriptionInput) ec2.DescribeSpotDatafeedSubscriptionRequest
+}
 
+// DescribeSpotFleetInstancesRequester provides the interface for the DescribeSpotFleetInstancesRequest API operation.
+type DescribeSpotFleetInstancesRequester interface {
 	DescribeSpotFleetInstancesRequest(*ec2.DescribeSpotFleetInstancesInput) ec2.DescribeSpotFleetInstancesRequest
+}
 
+// DescribeSpotFleetRequestHistoryRequester provides the interface for the DescribeSpotFleetRequestHistoryRequest API operation.
+type DescribeSpotFleetRequestHistoryRequester interface {
 	DescribeSpotFleetRequestHistoryRequest(*ec2.DescribeSpotFleetRequestHistoryInput) ec2.DescribeSpotFleetRequestHistoryRequest
+}
 
+// DescribeSpotFleetRequestsRequester provides the interface for the DescribeSpotFleetRequestsRequest API operation.
+type DescribeSpotFleetRequestsRequester interface {
 	DescribeSpotFleetRequestsRequest(*ec2.DescribeSpotFleetRequestsInput) ec2.DescribeSpotFleetRequestsRequest
+}
 
-	DescribeSpotFleetRequestsPages(*ec2.DescribeSpotFleetRequestsInput, func(*ec2.DescribeSpotFleetRequestsOutput, bool) bool) error
-	DescribeSpotFleetRequestsPagesWithContext(aws.Context, *ec2.DescribeSpotFleetRequestsInput, func(*ec2.DescribeSpotFleetRequestsOutput, bool) bool, ...aws.Option) error
-
+// DescribeSpotInstanceRequestsRequester provides the interface for the DescribeSpotInstanceRequestsRequest API operation.
+type DescribeSpotInstanceRequestsRequester interface {
 	DescribeSpotInstanceRequestsRequest(*ec2.DescribeSpotInstanceRequestsInput) ec2.DescribeSpotInstanceRequestsRequest
+}
 
+// DescribeSpotPriceHistoryRequester provides the interface for the DescribeSpotPriceHistoryRequest API operation.
+type DescribeSpotPriceHistoryRequester interface {
 	DescribeSpotPriceHistoryRequest(*ec2.DescribeSpotPriceHistoryInput) ec2.DescribeSpotPriceHistoryRequest
+}
 
-	DescribeSpotPriceHistoryPages(*ec2.DescribeSpotPriceHistoryInput, func(*ec2.DescribeSpotPriceHistoryOutput, bool) bool) error
-	DescribeSpotPriceHistoryPagesWithContext(aws.Context, *ec2.DescribeSpotPriceHistoryInput, func(*ec2.DescribeSpotPriceHistoryOutput, bool) bool, ...aws.Option) error
-
+// DescribeStaleSecurityGroupsRequester provides the interface for the DescribeStaleSecurityGroupsRequest API operation.
+type DescribeStaleSecurityGroupsRequester interface {
 	DescribeStaleSecurityGroupsRequest(*ec2.DescribeStaleSecurityGroupsInput) ec2.DescribeStaleSecurityGroupsRequest
+}
 
+// DescribeSubnetsRequester provides the interface for the DescribeSubnetsRequest API operation.
+type DescribeSubnetsRequester interface {
 	DescribeSubnetsRequest(*ec2.DescribeSubnetsInput) ec2.DescribeSubnetsRequest
+}
 
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
 	DescribeTagsRequest(*ec2.DescribeTagsInput) ec2.DescribeTagsRequest
+}
 
-	DescribeTagsPages(*ec2.DescribeTagsInput, func(*ec2.DescribeTagsOutput, bool) bool) error
-	DescribeTagsPagesWithContext(aws.Context, *ec2.DescribeTagsInput, func(*ec2.DescribeTagsOutput, bool) bool, ...aws.Option) error
-
+// DescribeVolumeAttributeRequester provides the interface for the DescribeVolumeAttributeRequest API operation.
+type DescribeVolumeAttributeRequester interface {
 	DescribeVolumeAttributeRequest(*ec2.DescribeVolumeAttributeInput) ec2.DescribeVolumeAttributeRequest
+}
 
+// DescribeVolumeStatusRequester provides the interface for the DescribeVolumeStatusRequest API operation.
+type DescribeVolumeStatusRequester interface {
 	DescribeVolumeStatusRequest(*ec2.DescribeVolumeStatusInput) ec2.DescribeVolumeStatusRequest
+}
 
-	DescribeVolumeStatusPages(*ec2.DescribeVolumeStatusInput, func(*ec2.DescribeVolumeStatusOutput, bool) bool) error
-	DescribeVolumeStatusPagesWithContext(aws.Context, *ec2.DescribeVolumeStatusInput, func(*ec2.DescribeVolumeStatusOutput, bool) bool, ...aws.Option) error
-
+// DescribeVolumesRequester provides the interface for the DescribeVolumesRequest API operation.
+type DescribeVolumesRequester interface {
 	DescribeVolumesRequest(*ec2.DescribeVolumesInput) ec2.DescribeVolumesRequest
+}
 
-	DescribeVolumesPages(*ec2.DescribeVolumesInput, func(*ec2.DescribeVolumesOutput, bool) bool) error
-	DescribeVolumesPagesWithContext(aws.Context, *ec2.DescribeVolumesInput, func(*ec2.DescribeVolumesOutput, bool) bool, ...aws.Option) error
-
+// DescribeVolumesModificationsRequester provides the interface for the DescribeVolumesModificationsRequest API operation.
+type DescribeVolumesModificationsRequester interface {
 	DescribeVolumesModificationsRequest(*ec2.DescribeVolumesModificationsInput) ec2.DescribeVolumesModificationsRequest
+}
 
+// DescribeVpcAttributeRequester provides the interface for the DescribeVpcAttributeRequest API operation.
+type DescribeVpcAttributeRequester interface {
 	DescribeVpcAttributeRequest(*ec2.DescribeVpcAttributeInput) ec2.DescribeVpcAttributeRequest
+}
 
+// DescribeVpcClassicLinkRequester provides the interface for the DescribeVpcClassicLinkRequest API operation.
+type DescribeVpcClassicLinkRequester interface {
 	DescribeVpcClassicLinkRequest(*ec2.DescribeVpcClassicLinkInput) ec2.DescribeVpcClassicLinkRequest
+}
 
+// DescribeVpcClassicLinkDnsSupportRequester provides the interface for the DescribeVpcClassicLinkDnsSupportRequest API operation.
+type DescribeVpcClassicLinkDnsSupportRequester interface {
 	DescribeVpcClassicLinkDnsSupportRequest(*ec2.DescribeVpcClassicLinkDnsSupportInput) ec2.DescribeVpcClassicLinkDnsSupportRequest
+}
 
+// DescribeVpcEndpointServicesRequester provides the interface for the DescribeVpcEndpointServicesRequest API operation.
+type DescribeVpcEndpointServicesRequester interface {
 	DescribeVpcEndpointServicesRequest(*ec2.DescribeVpcEndpointServicesInput) ec2.DescribeVpcEndpointServicesRequest
+}
 
+// DescribeVpcEndpointsRequester provides the interface for the DescribeVpcEndpointsRequest API operation.
+type DescribeVpcEndpointsRequester interface {
 	DescribeVpcEndpointsRequest(*ec2.DescribeVpcEndpointsInput) ec2.DescribeVpcEndpointsRequest
+}
 
+// DescribeVpcPeeringConnectionsRequester provides the interface for the DescribeVpcPeeringConnectionsRequest API operation.
+type DescribeVpcPeeringConnectionsRequester interface {
 	DescribeVpcPeeringConnectionsRequest(*ec2.DescribeVpcPeeringConnectionsInput) ec2.DescribeVpcPeeringConnectionsRequest
+}
 
+// DescribeVpcsRequester provides the interface for the DescribeVpcsRequest API operation.
+type DescribeVpcsRequester interface {
 	DescribeVpcsRequest(*ec2.DescribeVpcsInput) ec2.DescribeVpcsRequest
+}
 
+// DescribeVpnConnectionsRequester provides the interface for the DescribeVpnConnectionsRequest API operation.
+type DescribeVpnConnectionsRequester interface {
 	DescribeVpnConnectionsRequest(*ec2.DescribeVpnConnectionsInput) ec2.DescribeVpnConnectionsRequest
+}
 
+// DescribeVpnGatewaysRequester provides the interface for the DescribeVpnGatewaysRequest API operation.
+type DescribeVpnGatewaysRequester interface {
 	DescribeVpnGatewaysRequest(*ec2.DescribeVpnGatewaysInput) ec2.DescribeVpnGatewaysRequest
+}
 
+// DetachClassicLinkVpcRequester provides the interface for the DetachClassicLinkVpcRequest API operation.
+type DetachClassicLinkVpcRequester interface {
 	DetachClassicLinkVpcRequest(*ec2.DetachClassicLinkVpcInput) ec2.DetachClassicLinkVpcRequest
+}
 
+// DetachInternetGatewayRequester provides the interface for the DetachInternetGatewayRequest API operation.
+type DetachInternetGatewayRequester interface {
 	DetachInternetGatewayRequest(*ec2.DetachInternetGatewayInput) ec2.DetachInternetGatewayRequest
+}
 
+// DetachNetworkInterfaceRequester provides the interface for the DetachNetworkInterfaceRequest API operation.
+type DetachNetworkInterfaceRequester interface {
 	DetachNetworkInterfaceRequest(*ec2.DetachNetworkInterfaceInput) ec2.DetachNetworkInterfaceRequest
+}
 
+// DetachVolumeRequester provides the interface for the DetachVolumeRequest API operation.
+type DetachVolumeRequester interface {
 	DetachVolumeRequest(*ec2.DetachVolumeInput) ec2.DetachVolumeRequest
+}
 
+// DetachVpnGatewayRequester provides the interface for the DetachVpnGatewayRequest API operation.
+type DetachVpnGatewayRequester interface {
 	DetachVpnGatewayRequest(*ec2.DetachVpnGatewayInput) ec2.DetachVpnGatewayRequest
+}
 
+// DisableVgwRoutePropagationRequester provides the interface for the DisableVgwRoutePropagationRequest API operation.
+type DisableVgwRoutePropagationRequester interface {
 	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
+}
 
+// DisableVpcClassicLinkRequester provides the interface for the DisableVpcClassicLinkRequest API operation.
+type DisableVpcClassicLinkRequester interface {
 	DisableVpcClassicLinkRequest(*ec2.DisableVpcClassicLinkInput) ec2.DisableVpcClassicLinkRequest
+}
 
+// DisableVpcClassicLinkDnsSupportRequester provides the interface for the DisableVpcClassicLinkDnsSupportRequest API operation.
+type DisableVpcClassicLinkDnsSupportRequester interface {
 	DisableVpcClassicLinkDnsSupportRequest(*ec2.DisableVpcClassicLinkDnsSupportInput) ec2.DisableVpcClassicLinkDnsSupportRequest
+}
 
+// DisassociateAddressRequester provides the interface for the DisassociateAddressRequest API operation.
+type DisassociateAddressRequester interface {
 	DisassociateAddressRequest(*ec2.DisassociateAddressInput) ec2.DisassociateAddressRequest
+}
 
+// DisassociateIamInstanceProfileRequester provides the interface for the DisassociateIamInstanceProfileRequest API operation.
+type DisassociateIamInstanceProfileRequester interface {
 	DisassociateIamInstanceProfileRequest(*ec2.DisassociateIamInstanceProfileInput) ec2.DisassociateIamInstanceProfileRequest
+}
 
+// DisassociateRouteTableRequester provides the interface for the DisassociateRouteTableRequest API operation.
+type DisassociateRouteTableRequester interface {
 	DisassociateRouteTableRequest(*ec2.DisassociateRouteTableInput) ec2.DisassociateRouteTableRequest
+}
 
+// DisassociateSubnetCidrBlockRequester provides the interface for the DisassociateSubnetCidrBlockRequest API operation.
+type DisassociateSubnetCidrBlockRequester interface {
 	DisassociateSubnetCidrBlockRequest(*ec2.DisassociateSubnetCidrBlockInput) ec2.DisassociateSubnetCidrBlockRequest
+}
 
+// DisassociateVpcCidrBlockRequester provides the interface for the DisassociateVpcCidrBlockRequest API operation.
+type DisassociateVpcCidrBlockRequester interface {
 	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
+}
 
+// EnableVgwRoutePropagationRequester provides the interface for the EnableVgwRoutePropagationRequest API operation.
+type EnableVgwRoutePropagationRequester interface {
 	EnableVgwRoutePropagationRequest(*ec2.EnableVgwRoutePropagationInput) ec2.EnableVgwRoutePropagationRequest
+}
 
+// EnableVolumeIORequester provides the interface for the EnableVolumeIORequest API operation.
+type EnableVolumeIORequester interface {
 	EnableVolumeIORequest(*ec2.EnableVolumeIOInput) ec2.EnableVolumeIORequest
+}
 
+// EnableVpcClassicLinkRequester provides the interface for the EnableVpcClassicLinkRequest API operation.
+type EnableVpcClassicLinkRequester interface {
 	EnableVpcClassicLinkRequest(*ec2.EnableVpcClassicLinkInput) ec2.EnableVpcClassicLinkRequest
+}
 
+// EnableVpcClassicLinkDnsSupportRequester provides the interface for the EnableVpcClassicLinkDnsSupportRequest API operation.
+type EnableVpcClassicLinkDnsSupportRequester interface {
 	EnableVpcClassicLinkDnsSupportRequest(*ec2.EnableVpcClassicLinkDnsSupportInput) ec2.EnableVpcClassicLinkDnsSupportRequest
+}
 
+// GetConsoleOutputRequester provides the interface for the GetConsoleOutputRequest API operation.
+type GetConsoleOutputRequester interface {
 	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
+}
 
+// GetConsoleScreenshotRequester provides the interface for the GetConsoleScreenshotRequest API operation.
+type GetConsoleScreenshotRequester interface {
 	GetConsoleScreenshotRequest(*ec2.GetConsoleScreenshotInput) ec2.GetConsoleScreenshotRequest
+}
 
+// GetHostReservationPurchasePreviewRequester provides the interface for the GetHostReservationPurchasePreviewRequest API operation.
+type GetHostReservationPurchasePreviewRequester interface {
 	GetHostReservationPurchasePreviewRequest(*ec2.GetHostReservationPurchasePreviewInput) ec2.GetHostReservationPurchasePreviewRequest
+}
 
+// GetPasswordDataRequester provides the interface for the GetPasswordDataRequest API operation.
+type GetPasswordDataRequester interface {
 	GetPasswordDataRequest(*ec2.GetPasswordDataInput) ec2.GetPasswordDataRequest
+}
 
+// GetReservedInstancesExchangeQuoteRequester provides the interface for the GetReservedInstancesExchangeQuoteRequest API operation.
+type GetReservedInstancesExchangeQuoteRequester interface {
 	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
+}
 
+// ImportImageRequester provides the interface for the ImportImageRequest API operation.
+type ImportImageRequester interface {
 	ImportImageRequest(*ec2.ImportImageInput) ec2.ImportImageRequest
+}
 
+// ImportInstanceRequester provides the interface for the ImportInstanceRequest API operation.
+type ImportInstanceRequester interface {
 	ImportInstanceRequest(*ec2.ImportInstanceInput) ec2.ImportInstanceRequest
+}
 
+// ImportKeyPairRequester provides the interface for the ImportKeyPairRequest API operation.
+type ImportKeyPairRequester interface {
 	ImportKeyPairRequest(*ec2.ImportKeyPairInput) ec2.ImportKeyPairRequest
+}
 
+// ImportSnapshotRequester provides the interface for the ImportSnapshotRequest API operation.
+type ImportSnapshotRequester interface {
 	ImportSnapshotRequest(*ec2.ImportSnapshotInput) ec2.ImportSnapshotRequest
+}
 
+// ImportVolumeRequester provides the interface for the ImportVolumeRequest API operation.
+type ImportVolumeRequester interface {
 	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
+}
 
+// ModifyFpgaImageAttributeRequester provides the interface for the ModifyFpgaImageAttributeRequest API operation.
+type ModifyFpgaImageAttributeRequester interface {
 	ModifyFpgaImageAttributeRequest(*ec2.ModifyFpgaImageAttributeInput) ec2.ModifyFpgaImageAttributeRequest
+}
 
+// ModifyHostsRequester provides the interface for the ModifyHostsRequest API operation.
+type ModifyHostsRequester interface {
 	ModifyHostsRequest(*ec2.ModifyHostsInput) ec2.ModifyHostsRequest
+}
 
+// ModifyIdFormatRequester provides the interface for the ModifyIdFormatRequest API operation.
+type ModifyIdFormatRequester interface {
 	ModifyIdFormatRequest(*ec2.ModifyIdFormatInput) ec2.ModifyIdFormatRequest
+}
 
+// ModifyIdentityIdFormatRequester provides the interface for the ModifyIdentityIdFormatRequest API operation.
+type ModifyIdentityIdFormatRequester interface {
 	ModifyIdentityIdFormatRequest(*ec2.ModifyIdentityIdFormatInput) ec2.ModifyIdentityIdFormatRequest
+}
 
+// ModifyImageAttributeRequester provides the interface for the ModifyImageAttributeRequest API operation.
+type ModifyImageAttributeRequester interface {
 	ModifyImageAttributeRequest(*ec2.ModifyImageAttributeInput) ec2.ModifyImageAttributeRequest
+}
 
+// ModifyInstanceAttributeRequester provides the interface for the ModifyInstanceAttributeRequest API operation.
+type ModifyInstanceAttributeRequester interface {
 	ModifyInstanceAttributeRequest(*ec2.ModifyInstanceAttributeInput) ec2.ModifyInstanceAttributeRequest
+}
 
+// ModifyInstancePlacementRequester provides the interface for the ModifyInstancePlacementRequest API operation.
+type ModifyInstancePlacementRequester interface {
 	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
+}
 
+// ModifyNetworkInterfaceAttributeRequester provides the interface for the ModifyNetworkInterfaceAttributeRequest API operation.
+type ModifyNetworkInterfaceAttributeRequester interface {
 	ModifyNetworkInterfaceAttributeRequest(*ec2.ModifyNetworkInterfaceAttributeInput) ec2.ModifyNetworkInterfaceAttributeRequest
+}
 
+// ModifyReservedInstancesRequester provides the interface for the ModifyReservedInstancesRequest API operation.
+type ModifyReservedInstancesRequester interface {
 	ModifyReservedInstancesRequest(*ec2.ModifyReservedInstancesInput) ec2.ModifyReservedInstancesRequest
+}
 
+// ModifySnapshotAttributeRequester provides the interface for the ModifySnapshotAttributeRequest API operation.
+type ModifySnapshotAttributeRequester interface {
 	ModifySnapshotAttributeRequest(*ec2.ModifySnapshotAttributeInput) ec2.ModifySnapshotAttributeRequest
+}
 
+// ModifySpotFleetRequestRequester provides the interface for the ModifySpotFleetRequestRequest API operation.
+type ModifySpotFleetRequestRequester interface {
 	ModifySpotFleetRequestRequest(*ec2.ModifySpotFleetRequestInput) ec2.ModifySpotFleetRequestRequest
+}
 
+// ModifySubnetAttributeRequester provides the interface for the ModifySubnetAttributeRequest API operation.
+type ModifySubnetAttributeRequester interface {
 	ModifySubnetAttributeRequest(*ec2.ModifySubnetAttributeInput) ec2.ModifySubnetAttributeRequest
+}
 
+// ModifyVolumeRequester provides the interface for the ModifyVolumeRequest API operation.
+type ModifyVolumeRequester interface {
 	ModifyVolumeRequest(*ec2.ModifyVolumeInput) ec2.ModifyVolumeRequest
+}
 
+// ModifyVolumeAttributeRequester provides the interface for the ModifyVolumeAttributeRequest API operation.
+type ModifyVolumeAttributeRequester interface {
 	ModifyVolumeAttributeRequest(*ec2.ModifyVolumeAttributeInput) ec2.ModifyVolumeAttributeRequest
+}
 
+// ModifyVpcAttributeRequester provides the interface for the ModifyVpcAttributeRequest API operation.
+type ModifyVpcAttributeRequester interface {
 	ModifyVpcAttributeRequest(*ec2.ModifyVpcAttributeInput) ec2.ModifyVpcAttributeRequest
+}
 
+// ModifyVpcEndpointRequester provides the interface for the ModifyVpcEndpointRequest API operation.
+type ModifyVpcEndpointRequester interface {
 	ModifyVpcEndpointRequest(*ec2.ModifyVpcEndpointInput) ec2.ModifyVpcEndpointRequest
+}
 
+// ModifyVpcPeeringConnectionOptionsRequester provides the interface for the ModifyVpcPeeringConnectionOptionsRequest API operation.
+type ModifyVpcPeeringConnectionOptionsRequester interface {
 	ModifyVpcPeeringConnectionOptionsRequest(*ec2.ModifyVpcPeeringConnectionOptionsInput) ec2.ModifyVpcPeeringConnectionOptionsRequest
+}
 
+// MonitorInstancesRequester provides the interface for the MonitorInstancesRequest API operation.
+type MonitorInstancesRequester interface {
 	MonitorInstancesRequest(*ec2.MonitorInstancesInput) ec2.MonitorInstancesRequest
+}
 
+// MoveAddressToVpcRequester provides the interface for the MoveAddressToVpcRequest API operation.
+type MoveAddressToVpcRequester interface {
 	MoveAddressToVpcRequest(*ec2.MoveAddressToVpcInput) ec2.MoveAddressToVpcRequest
+}
 
+// PurchaseHostReservationRequester provides the interface for the PurchaseHostReservationRequest API operation.
+type PurchaseHostReservationRequester interface {
 	PurchaseHostReservationRequest(*ec2.PurchaseHostReservationInput) ec2.PurchaseHostReservationRequest
+}
 
+// PurchaseReservedInstancesOfferingRequester provides the interface for the PurchaseReservedInstancesOfferingRequest API operation.
+type PurchaseReservedInstancesOfferingRequester interface {
 	PurchaseReservedInstancesOfferingRequest(*ec2.PurchaseReservedInstancesOfferingInput) ec2.PurchaseReservedInstancesOfferingRequest
+}
 
+// PurchaseScheduledInstancesRequester provides the interface for the PurchaseScheduledInstancesRequest API operation.
+type PurchaseScheduledInstancesRequester interface {
 	PurchaseScheduledInstancesRequest(*ec2.PurchaseScheduledInstancesInput) ec2.PurchaseScheduledInstancesRequest
+}
 
+// RebootInstancesRequester provides the interface for the RebootInstancesRequest API operation.
+type RebootInstancesRequester interface {
 	RebootInstancesRequest(*ec2.RebootInstancesInput) ec2.RebootInstancesRequest
+}
 
+// RegisterImageRequester provides the interface for the RegisterImageRequest API operation.
+type RegisterImageRequester interface {
 	RegisterImageRequest(*ec2.RegisterImageInput) ec2.RegisterImageRequest
+}
 
+// RejectVpcPeeringConnectionRequester provides the interface for the RejectVpcPeeringConnectionRequest API operation.
+type RejectVpcPeeringConnectionRequester interface {
 	RejectVpcPeeringConnectionRequest(*ec2.RejectVpcPeeringConnectionInput) ec2.RejectVpcPeeringConnectionRequest
+}
 
+// ReleaseAddressRequester provides the interface for the ReleaseAddressRequest API operation.
+type ReleaseAddressRequester interface {
 	ReleaseAddressRequest(*ec2.ReleaseAddressInput) ec2.ReleaseAddressRequest
+}
 
+// ReleaseHostsRequester provides the interface for the ReleaseHostsRequest API operation.
+type ReleaseHostsRequester interface {
 	ReleaseHostsRequest(*ec2.ReleaseHostsInput) ec2.ReleaseHostsRequest
+}
 
+// ReplaceIamInstanceProfileAssociationRequester provides the interface for the ReplaceIamInstanceProfileAssociationRequest API operation.
+type ReplaceIamInstanceProfileAssociationRequester interface {
 	ReplaceIamInstanceProfileAssociationRequest(*ec2.ReplaceIamInstanceProfileAssociationInput) ec2.ReplaceIamInstanceProfileAssociationRequest
+}
 
+// ReplaceNetworkAclAssociationRequester provides the interface for the ReplaceNetworkAclAssociationRequest API operation.
+type ReplaceNetworkAclAssociationRequester interface {
 	ReplaceNetworkAclAssociationRequest(*ec2.ReplaceNetworkAclAssociationInput) ec2.ReplaceNetworkAclAssociationRequest
+}
 
+// ReplaceNetworkAclEntryRequester provides the interface for the ReplaceNetworkAclEntryRequest API operation.
+type ReplaceNetworkAclEntryRequester interface {
 	ReplaceNetworkAclEntryRequest(*ec2.ReplaceNetworkAclEntryInput) ec2.ReplaceNetworkAclEntryRequest
+}
 
+// ReplaceRouteRequester provides the interface for the ReplaceRouteRequest API operation.
+type ReplaceRouteRequester interface {
 	ReplaceRouteRequest(*ec2.ReplaceRouteInput) ec2.ReplaceRouteRequest
+}
 
+// ReplaceRouteTableAssociationRequester provides the interface for the ReplaceRouteTableAssociationRequest API operation.
+type ReplaceRouteTableAssociationRequester interface {
 	ReplaceRouteTableAssociationRequest(*ec2.ReplaceRouteTableAssociationInput) ec2.ReplaceRouteTableAssociationRequest
+}
 
+// ReportInstanceStatusRequester provides the interface for the ReportInstanceStatusRequest API operation.
+type ReportInstanceStatusRequester interface {
 	ReportInstanceStatusRequest(*ec2.ReportInstanceStatusInput) ec2.ReportInstanceStatusRequest
+}
 
+// RequestSpotFleetRequester provides the interface for the RequestSpotFleetRequest API operation.
+type RequestSpotFleetRequester interface {
 	RequestSpotFleetRequest(*ec2.RequestSpotFleetInput) ec2.RequestSpotFleetRequest
+}
 
+// RequestSpotInstancesRequester provides the interface for the RequestSpotInstancesRequest API operation.
+type RequestSpotInstancesRequester interface {
 	RequestSpotInstancesRequest(*ec2.RequestSpotInstancesInput) ec2.RequestSpotInstancesRequest
+}
 
+// ResetFpgaImageAttributeRequester provides the interface for the ResetFpgaImageAttributeRequest API operation.
+type ResetFpgaImageAttributeRequester interface {
 	ResetFpgaImageAttributeRequest(*ec2.ResetFpgaImageAttributeInput) ec2.ResetFpgaImageAttributeRequest
+}
 
+// ResetImageAttributeRequester provides the interface for the ResetImageAttributeRequest API operation.
+type ResetImageAttributeRequester interface {
 	ResetImageAttributeRequest(*ec2.ResetImageAttributeInput) ec2.ResetImageAttributeRequest
+}
 
+// ResetInstanceAttributeRequester provides the interface for the ResetInstanceAttributeRequest API operation.
+type ResetInstanceAttributeRequester interface {
 	ResetInstanceAttributeRequest(*ec2.ResetInstanceAttributeInput) ec2.ResetInstanceAttributeRequest
+}
 
+// ResetNetworkInterfaceAttributeRequester provides the interface for the ResetNetworkInterfaceAttributeRequest API operation.
+type ResetNetworkInterfaceAttributeRequester interface {
 	ResetNetworkInterfaceAttributeRequest(*ec2.ResetNetworkInterfaceAttributeInput) ec2.ResetNetworkInterfaceAttributeRequest
+}
 
+// ResetSnapshotAttributeRequester provides the interface for the ResetSnapshotAttributeRequest API operation.
+type ResetSnapshotAttributeRequester interface {
 	ResetSnapshotAttributeRequest(*ec2.ResetSnapshotAttributeInput) ec2.ResetSnapshotAttributeRequest
+}
 
+// RestoreAddressToClassicRequester provides the interface for the RestoreAddressToClassicRequest API operation.
+type RestoreAddressToClassicRequester interface {
 	RestoreAddressToClassicRequest(*ec2.RestoreAddressToClassicInput) ec2.RestoreAddressToClassicRequest
+}
 
+// RevokeSecurityGroupEgressRequester provides the interface for the RevokeSecurityGroupEgressRequest API operation.
+type RevokeSecurityGroupEgressRequester interface {
 	RevokeSecurityGroupEgressRequest(*ec2.RevokeSecurityGroupEgressInput) ec2.RevokeSecurityGroupEgressRequest
+}
 
+// RevokeSecurityGroupIngressRequester provides the interface for the RevokeSecurityGroupIngressRequest API operation.
+type RevokeSecurityGroupIngressRequester interface {
 	RevokeSecurityGroupIngressRequest(*ec2.RevokeSecurityGroupIngressInput) ec2.RevokeSecurityGroupIngressRequest
+}
 
+// RunInstancesRequester provides the interface for the RunInstancesRequest API operation.
+type RunInstancesRequester interface {
 	RunInstancesRequest(*ec2.RunInstancesInput) ec2.RunInstancesRequest
+}
 
+// RunScheduledInstancesRequester provides the interface for the RunScheduledInstancesRequest API operation.
+type RunScheduledInstancesRequester interface {
 	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
+}
 
+// StartInstancesRequester provides the interface for the StartInstancesRequest API operation.
+type StartInstancesRequester interface {
 	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
+}
 
+// StopInstancesRequester provides the interface for the StopInstancesRequest API operation.
+type StopInstancesRequester interface {
 	StopInstancesRequest(*ec2.StopInstancesInput) ec2.StopInstancesRequest
+}
 
+// TerminateInstancesRequester provides the interface for the TerminateInstancesRequest API operation.
+type TerminateInstancesRequester interface {
 	TerminateInstancesRequest(*ec2.TerminateInstancesInput) ec2.TerminateInstancesRequest
+}
 
+// UnassignIpv6AddressesRequester provides the interface for the UnassignIpv6AddressesRequest API operation.
+type UnassignIpv6AddressesRequester interface {
 	UnassignIpv6AddressesRequest(*ec2.UnassignIpv6AddressesInput) ec2.UnassignIpv6AddressesRequest
+}
 
+// UnassignPrivateIpAddressesRequester provides the interface for the UnassignPrivateIpAddressesRequest API operation.
+type UnassignPrivateIpAddressesRequester interface {
 	UnassignPrivateIpAddressesRequest(*ec2.UnassignPrivateIpAddressesInput) ec2.UnassignPrivateIpAddressesRequest
+}
 
+// UnmonitorInstancesRequester provides the interface for the UnmonitorInstancesRequest API operation.
+type UnmonitorInstancesRequester interface {
 	UnmonitorInstancesRequest(*ec2.UnmonitorInstancesInput) ec2.UnmonitorInstancesRequest
+}
 
+// UpdateSecurityGroupRuleDescriptionsEgressRequester provides the interface for the UpdateSecurityGroupRuleDescriptionsEgressRequest API operation.
+type UpdateSecurityGroupRuleDescriptionsEgressRequester interface {
 	UpdateSecurityGroupRuleDescriptionsEgressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsEgressInput) ec2.UpdateSecurityGroupRuleDescriptionsEgressRequest
+}
 
+// UpdateSecurityGroupRuleDescriptionsIngressRequester provides the interface for the UpdateSecurityGroupRuleDescriptionsIngressRequest API operation.
+type UpdateSecurityGroupRuleDescriptionsIngressRequester interface {
 	UpdateSecurityGroupRuleDescriptionsIngressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsIngressInput) ec2.UpdateSecurityGroupRuleDescriptionsIngressRequest
+}
 
+// BundleTaskCompleteWaiter provides the interface for the WaitUntilBundleTaskComplete waiter.
+type BundleTaskCompleteWaiter interface {
 	WaitUntilBundleTaskComplete(*ec2.DescribeBundleTasksInput) error
 	WaitUntilBundleTaskCompleteWithContext(aws.Context, *ec2.DescribeBundleTasksInput, ...aws.WaiterOption) error
+}
 
+// ConversionTaskCancelledWaiter provides the interface for the WaitUntilConversionTaskCancelled waiter.
+type ConversionTaskCancelledWaiter interface {
 	WaitUntilConversionTaskCancelled(*ec2.DescribeConversionTasksInput) error
 	WaitUntilConversionTaskCancelledWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+}
 
+// ConversionTaskCompletedWaiter provides the interface for the WaitUntilConversionTaskCompleted waiter.
+type ConversionTaskCompletedWaiter interface {
 	WaitUntilConversionTaskCompleted(*ec2.DescribeConversionTasksInput) error
 	WaitUntilConversionTaskCompletedWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+}
 
+// ConversionTaskDeletedWaiter provides the interface for the WaitUntilConversionTaskDeleted waiter.
+type ConversionTaskDeletedWaiter interface {
 	WaitUntilConversionTaskDeleted(*ec2.DescribeConversionTasksInput) error
 	WaitUntilConversionTaskDeletedWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+}
 
+// CustomerGatewayAvailableWaiter provides the interface for the WaitUntilCustomerGatewayAvailable waiter.
+type CustomerGatewayAvailableWaiter interface {
 	WaitUntilCustomerGatewayAvailable(*ec2.DescribeCustomerGatewaysInput) error
 	WaitUntilCustomerGatewayAvailableWithContext(aws.Context, *ec2.DescribeCustomerGatewaysInput, ...aws.WaiterOption) error
+}
 
+// ExportTaskCancelledWaiter provides the interface for the WaitUntilExportTaskCancelled waiter.
+type ExportTaskCancelledWaiter interface {
 	WaitUntilExportTaskCancelled(*ec2.DescribeExportTasksInput) error
 	WaitUntilExportTaskCancelledWithContext(aws.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
+}
 
+// ExportTaskCompletedWaiter provides the interface for the WaitUntilExportTaskCompleted waiter.
+type ExportTaskCompletedWaiter interface {
 	WaitUntilExportTaskCompleted(*ec2.DescribeExportTasksInput) error
 	WaitUntilExportTaskCompletedWithContext(aws.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
+}
 
+// ImageAvailableWaiter provides the interface for the WaitUntilImageAvailable waiter.
+type ImageAvailableWaiter interface {
 	WaitUntilImageAvailable(*ec2.DescribeImagesInput) error
 	WaitUntilImageAvailableWithContext(aws.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
+}
 
+// ImageExistsWaiter provides the interface for the WaitUntilImageExists waiter.
+type ImageExistsWaiter interface {
 	WaitUntilImageExists(*ec2.DescribeImagesInput) error
 	WaitUntilImageExistsWithContext(aws.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
+}
 
+// InstanceExistsWaiter provides the interface for the WaitUntilInstanceExists waiter.
+type InstanceExistsWaiter interface {
 	WaitUntilInstanceExists(*ec2.DescribeInstancesInput) error
 	WaitUntilInstanceExistsWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// InstanceRunningWaiter provides the interface for the WaitUntilInstanceRunning waiter.
+type InstanceRunningWaiter interface {
 	WaitUntilInstanceRunning(*ec2.DescribeInstancesInput) error
 	WaitUntilInstanceRunningWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// InstanceStatusOkWaiter provides the interface for the WaitUntilInstanceStatusOk waiter.
+type InstanceStatusOkWaiter interface {
 	WaitUntilInstanceStatusOk(*ec2.DescribeInstanceStatusInput) error
 	WaitUntilInstanceStatusOkWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
+}
 
+// InstanceStoppedWaiter provides the interface for the WaitUntilInstanceStopped waiter.
+type InstanceStoppedWaiter interface {
 	WaitUntilInstanceStopped(*ec2.DescribeInstancesInput) error
 	WaitUntilInstanceStoppedWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// InstanceTerminatedWaiter provides the interface for the WaitUntilInstanceTerminated waiter.
+type InstanceTerminatedWaiter interface {
 	WaitUntilInstanceTerminated(*ec2.DescribeInstancesInput) error
 	WaitUntilInstanceTerminatedWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// KeyPairExistsWaiter provides the interface for the WaitUntilKeyPairExists waiter.
+type KeyPairExistsWaiter interface {
 	WaitUntilKeyPairExists(*ec2.DescribeKeyPairsInput) error
 	WaitUntilKeyPairExistsWithContext(aws.Context, *ec2.DescribeKeyPairsInput, ...aws.WaiterOption) error
+}
 
+// NatGatewayAvailableWaiter provides the interface for the WaitUntilNatGatewayAvailable waiter.
+type NatGatewayAvailableWaiter interface {
 	WaitUntilNatGatewayAvailable(*ec2.DescribeNatGatewaysInput) error
 	WaitUntilNatGatewayAvailableWithContext(aws.Context, *ec2.DescribeNatGatewaysInput, ...aws.WaiterOption) error
+}
 
+// NetworkInterfaceAvailableWaiter provides the interface for the WaitUntilNetworkInterfaceAvailable waiter.
+type NetworkInterfaceAvailableWaiter interface {
 	WaitUntilNetworkInterfaceAvailable(*ec2.DescribeNetworkInterfacesInput) error
 	WaitUntilNetworkInterfaceAvailableWithContext(aws.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
+}
 
+// PasswordDataAvailableWaiter provides the interface for the WaitUntilPasswordDataAvailable waiter.
+type PasswordDataAvailableWaiter interface {
 	WaitUntilPasswordDataAvailable(*ec2.GetPasswordDataInput) error
 	WaitUntilPasswordDataAvailableWithContext(aws.Context, *ec2.GetPasswordDataInput, ...aws.WaiterOption) error
+}
 
+// SnapshotCompletedWaiter provides the interface for the WaitUntilSnapshotCompleted waiter.
+type SnapshotCompletedWaiter interface {
 	WaitUntilSnapshotCompleted(*ec2.DescribeSnapshotsInput) error
 	WaitUntilSnapshotCompletedWithContext(aws.Context, *ec2.DescribeSnapshotsInput, ...aws.WaiterOption) error
+}
 
+// SpotInstanceRequestFulfilledWaiter provides the interface for the WaitUntilSpotInstanceRequestFulfilled waiter.
+type SpotInstanceRequestFulfilledWaiter interface {
 	WaitUntilSpotInstanceRequestFulfilled(*ec2.DescribeSpotInstanceRequestsInput) error
 	WaitUntilSpotInstanceRequestFulfilledWithContext(aws.Context, *ec2.DescribeSpotInstanceRequestsInput, ...aws.WaiterOption) error
+}
 
+// SubnetAvailableWaiter provides the interface for the WaitUntilSubnetAvailable waiter.
+type SubnetAvailableWaiter interface {
 	WaitUntilSubnetAvailable(*ec2.DescribeSubnetsInput) error
 	WaitUntilSubnetAvailableWithContext(aws.Context, *ec2.DescribeSubnetsInput, ...aws.WaiterOption) error
+}
 
+// SystemStatusOkWaiter provides the interface for the WaitUntilSystemStatusOk waiter.
+type SystemStatusOkWaiter interface {
 	WaitUntilSystemStatusOk(*ec2.DescribeInstanceStatusInput) error
 	WaitUntilSystemStatusOkWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
+}
 
+// VolumeAvailableWaiter provides the interface for the WaitUntilVolumeAvailable waiter.
+type VolumeAvailableWaiter interface {
 	WaitUntilVolumeAvailable(*ec2.DescribeVolumesInput) error
 	WaitUntilVolumeAvailableWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+}
 
+// VolumeDeletedWaiter provides the interface for the WaitUntilVolumeDeleted waiter.
+type VolumeDeletedWaiter interface {
 	WaitUntilVolumeDeleted(*ec2.DescribeVolumesInput) error
 	WaitUntilVolumeDeletedWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+}
 
+// VolumeInUseWaiter provides the interface for the WaitUntilVolumeInUse waiter.
+type VolumeInUseWaiter interface {
 	WaitUntilVolumeInUse(*ec2.DescribeVolumesInput) error
 	WaitUntilVolumeInUseWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+}
 
+// VpcAvailableWaiter provides the interface for the WaitUntilVpcAvailable waiter.
+type VpcAvailableWaiter interface {
 	WaitUntilVpcAvailable(*ec2.DescribeVpcsInput) error
 	WaitUntilVpcAvailableWithContext(aws.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
+}
 
+// VpcExistsWaiter provides the interface for the WaitUntilVpcExists waiter.
+type VpcExistsWaiter interface {
 	WaitUntilVpcExists(*ec2.DescribeVpcsInput) error
 	WaitUntilVpcExistsWithContext(aws.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
+}
 
+// VpcPeeringConnectionDeletedWaiter provides the interface for the WaitUntilVpcPeeringConnectionDeleted waiter.
+type VpcPeeringConnectionDeletedWaiter interface {
 	WaitUntilVpcPeeringConnectionDeleted(*ec2.DescribeVpcPeeringConnectionsInput) error
 	WaitUntilVpcPeeringConnectionDeletedWithContext(aws.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+}
 
+// VpcPeeringConnectionExistsWaiter provides the interface for the WaitUntilVpcPeeringConnectionExists waiter.
+type VpcPeeringConnectionExistsWaiter interface {
 	WaitUntilVpcPeeringConnectionExists(*ec2.DescribeVpcPeeringConnectionsInput) error
 	WaitUntilVpcPeeringConnectionExistsWithContext(aws.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+}
 
+// VpnConnectionAvailableWaiter provides the interface for the WaitUntilVpnConnectionAvailable waiter.
+type VpnConnectionAvailableWaiter interface {
 	WaitUntilVpnConnectionAvailable(*ec2.DescribeVpnConnectionsInput) error
 	WaitUntilVpnConnectionAvailableWithContext(aws.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
+}
 
+// VpnConnectionDeletedWaiter provides the interface for the WaitUntilVpnConnectionDeleted waiter.
+type VpnConnectionDeletedWaiter interface {
 	WaitUntilVpnConnectionDeleted(*ec2.DescribeVpnConnectionsInput) error
 	WaitUntilVpnConnectionDeletedWithContext(aws.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
 }
-
-var _ EC2API = (*ec2.EC2)(nil)

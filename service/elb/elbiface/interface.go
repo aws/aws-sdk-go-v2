@@ -13,125 +13,165 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elb"
 )
 
-// ELBAPI provides an interface to enable mocking the
-// elb.ELB service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Elastic Load Balancing.
-//    func myFunc(svc elbiface.ELBAPI) bool {
-//        // Make svc.AddTags request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := elb.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockELBClient struct {
-//        elbiface.ELBAPI
-//    }
-//    func (m *mockELBClient) AddTags(input *elb.AddTagsInput) (*elb.AddTagsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockELBClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ELBAPI interface {
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
 	AddTagsRequest(*elb.AddTagsInput) elb.AddTagsRequest
+}
 
+// ApplySecurityGroupsToLoadBalancerRequester provides the interface for the ApplySecurityGroupsToLoadBalancerRequest API operation.
+type ApplySecurityGroupsToLoadBalancerRequester interface {
 	ApplySecurityGroupsToLoadBalancerRequest(*elb.ApplySecurityGroupsToLoadBalancerInput) elb.ApplySecurityGroupsToLoadBalancerRequest
+}
 
+// AttachLoadBalancerToSubnetsRequester provides the interface for the AttachLoadBalancerToSubnetsRequest API operation.
+type AttachLoadBalancerToSubnetsRequester interface {
 	AttachLoadBalancerToSubnetsRequest(*elb.AttachLoadBalancerToSubnetsInput) elb.AttachLoadBalancerToSubnetsRequest
+}
 
+// ConfigureHealthCheckRequester provides the interface for the ConfigureHealthCheckRequest API operation.
+type ConfigureHealthCheckRequester interface {
 	ConfigureHealthCheckRequest(*elb.ConfigureHealthCheckInput) elb.ConfigureHealthCheckRequest
+}
 
+// CreateAppCookieStickinessPolicyRequester provides the interface for the CreateAppCookieStickinessPolicyRequest API operation.
+type CreateAppCookieStickinessPolicyRequester interface {
 	CreateAppCookieStickinessPolicyRequest(*elb.CreateAppCookieStickinessPolicyInput) elb.CreateAppCookieStickinessPolicyRequest
+}
 
+// CreateLBCookieStickinessPolicyRequester provides the interface for the CreateLBCookieStickinessPolicyRequest API operation.
+type CreateLBCookieStickinessPolicyRequester interface {
 	CreateLBCookieStickinessPolicyRequest(*elb.CreateLBCookieStickinessPolicyInput) elb.CreateLBCookieStickinessPolicyRequest
+}
 
+// CreateLoadBalancerRequester provides the interface for the CreateLoadBalancerRequest API operation.
+type CreateLoadBalancerRequester interface {
 	CreateLoadBalancerRequest(*elb.CreateLoadBalancerInput) elb.CreateLoadBalancerRequest
+}
 
+// CreateLoadBalancerListenersRequester provides the interface for the CreateLoadBalancerListenersRequest API operation.
+type CreateLoadBalancerListenersRequester interface {
 	CreateLoadBalancerListenersRequest(*elb.CreateLoadBalancerListenersInput) elb.CreateLoadBalancerListenersRequest
+}
 
+// CreateLoadBalancerPolicyRequester provides the interface for the CreateLoadBalancerPolicyRequest API operation.
+type CreateLoadBalancerPolicyRequester interface {
 	CreateLoadBalancerPolicyRequest(*elb.CreateLoadBalancerPolicyInput) elb.CreateLoadBalancerPolicyRequest
+}
 
+// DeleteLoadBalancerRequester provides the interface for the DeleteLoadBalancerRequest API operation.
+type DeleteLoadBalancerRequester interface {
 	DeleteLoadBalancerRequest(*elb.DeleteLoadBalancerInput) elb.DeleteLoadBalancerRequest
+}
 
+// DeleteLoadBalancerListenersRequester provides the interface for the DeleteLoadBalancerListenersRequest API operation.
+type DeleteLoadBalancerListenersRequester interface {
 	DeleteLoadBalancerListenersRequest(*elb.DeleteLoadBalancerListenersInput) elb.DeleteLoadBalancerListenersRequest
+}
 
+// DeleteLoadBalancerPolicyRequester provides the interface for the DeleteLoadBalancerPolicyRequest API operation.
+type DeleteLoadBalancerPolicyRequester interface {
 	DeleteLoadBalancerPolicyRequest(*elb.DeleteLoadBalancerPolicyInput) elb.DeleteLoadBalancerPolicyRequest
+}
 
+// DeregisterInstancesFromLoadBalancerRequester provides the interface for the DeregisterInstancesFromLoadBalancerRequest API operation.
+type DeregisterInstancesFromLoadBalancerRequester interface {
 	DeregisterInstancesFromLoadBalancerRequest(*elb.DeregisterInstancesFromLoadBalancerInput) elb.DeregisterInstancesFromLoadBalancerRequest
+}
 
+// DescribeAccountLimitsRequester provides the interface for the DescribeAccountLimitsRequest API operation.
+type DescribeAccountLimitsRequester interface {
 	DescribeAccountLimitsRequest(*elb.DescribeAccountLimitsInput) elb.DescribeAccountLimitsRequest
+}
 
+// DescribeInstanceHealthRequester provides the interface for the DescribeInstanceHealthRequest API operation.
+type DescribeInstanceHealthRequester interface {
 	DescribeInstanceHealthRequest(*elb.DescribeInstanceHealthInput) elb.DescribeInstanceHealthRequest
+}
 
+// DescribeLoadBalancerAttributesRequester provides the interface for the DescribeLoadBalancerAttributesRequest API operation.
+type DescribeLoadBalancerAttributesRequester interface {
 	DescribeLoadBalancerAttributesRequest(*elb.DescribeLoadBalancerAttributesInput) elb.DescribeLoadBalancerAttributesRequest
+}
 
+// DescribeLoadBalancerPoliciesRequester provides the interface for the DescribeLoadBalancerPoliciesRequest API operation.
+type DescribeLoadBalancerPoliciesRequester interface {
 	DescribeLoadBalancerPoliciesRequest(*elb.DescribeLoadBalancerPoliciesInput) elb.DescribeLoadBalancerPoliciesRequest
+}
 
+// DescribeLoadBalancerPolicyTypesRequester provides the interface for the DescribeLoadBalancerPolicyTypesRequest API operation.
+type DescribeLoadBalancerPolicyTypesRequester interface {
 	DescribeLoadBalancerPolicyTypesRequest(*elb.DescribeLoadBalancerPolicyTypesInput) elb.DescribeLoadBalancerPolicyTypesRequest
+}
 
+// DescribeLoadBalancersRequester provides the interface for the DescribeLoadBalancersRequest API operation.
+type DescribeLoadBalancersRequester interface {
 	DescribeLoadBalancersRequest(*elb.DescribeLoadBalancersInput) elb.DescribeLoadBalancersRequest
+}
 
-	DescribeLoadBalancersPages(*elb.DescribeLoadBalancersInput, func(*elb.DescribeLoadBalancersOutput, bool) bool) error
-	DescribeLoadBalancersPagesWithContext(aws.Context, *elb.DescribeLoadBalancersInput, func(*elb.DescribeLoadBalancersOutput, bool) bool, ...aws.Option) error
-
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
 	DescribeTagsRequest(*elb.DescribeTagsInput) elb.DescribeTagsRequest
+}
 
+// DetachLoadBalancerFromSubnetsRequester provides the interface for the DetachLoadBalancerFromSubnetsRequest API operation.
+type DetachLoadBalancerFromSubnetsRequester interface {
 	DetachLoadBalancerFromSubnetsRequest(*elb.DetachLoadBalancerFromSubnetsInput) elb.DetachLoadBalancerFromSubnetsRequest
+}
 
+// DisableAvailabilityZonesForLoadBalancerRequester provides the interface for the DisableAvailabilityZonesForLoadBalancerRequest API operation.
+type DisableAvailabilityZonesForLoadBalancerRequester interface {
 	DisableAvailabilityZonesForLoadBalancerRequest(*elb.DisableAvailabilityZonesForLoadBalancerInput) elb.DisableAvailabilityZonesForLoadBalancerRequest
+}
 
+// EnableAvailabilityZonesForLoadBalancerRequester provides the interface for the EnableAvailabilityZonesForLoadBalancerRequest API operation.
+type EnableAvailabilityZonesForLoadBalancerRequester interface {
 	EnableAvailabilityZonesForLoadBalancerRequest(*elb.EnableAvailabilityZonesForLoadBalancerInput) elb.EnableAvailabilityZonesForLoadBalancerRequest
+}
 
+// ModifyLoadBalancerAttributesRequester provides the interface for the ModifyLoadBalancerAttributesRequest API operation.
+type ModifyLoadBalancerAttributesRequester interface {
 	ModifyLoadBalancerAttributesRequest(*elb.ModifyLoadBalancerAttributesInput) elb.ModifyLoadBalancerAttributesRequest
+}
 
+// RegisterInstancesWithLoadBalancerRequester provides the interface for the RegisterInstancesWithLoadBalancerRequest API operation.
+type RegisterInstancesWithLoadBalancerRequester interface {
 	RegisterInstancesWithLoadBalancerRequest(*elb.RegisterInstancesWithLoadBalancerInput) elb.RegisterInstancesWithLoadBalancerRequest
+}
 
+// RemoveTagsRequester provides the interface for the RemoveTagsRequest API operation.
+type RemoveTagsRequester interface {
 	RemoveTagsRequest(*elb.RemoveTagsInput) elb.RemoveTagsRequest
+}
 
+// SetLoadBalancerListenerSSLCertificateRequester provides the interface for the SetLoadBalancerListenerSSLCertificateRequest API operation.
+type SetLoadBalancerListenerSSLCertificateRequester interface {
 	SetLoadBalancerListenerSSLCertificateRequest(*elb.SetLoadBalancerListenerSSLCertificateInput) elb.SetLoadBalancerListenerSSLCertificateRequest
+}
 
+// SetLoadBalancerPoliciesForBackendServerRequester provides the interface for the SetLoadBalancerPoliciesForBackendServerRequest API operation.
+type SetLoadBalancerPoliciesForBackendServerRequester interface {
 	SetLoadBalancerPoliciesForBackendServerRequest(*elb.SetLoadBalancerPoliciesForBackendServerInput) elb.SetLoadBalancerPoliciesForBackendServerRequest
+}
 
+// SetLoadBalancerPoliciesOfListenerRequester provides the interface for the SetLoadBalancerPoliciesOfListenerRequest API operation.
+type SetLoadBalancerPoliciesOfListenerRequester interface {
 	SetLoadBalancerPoliciesOfListenerRequest(*elb.SetLoadBalancerPoliciesOfListenerInput) elb.SetLoadBalancerPoliciesOfListenerRequest
+}
 
+// AnyInstanceInServiceWaiter provides the interface for the WaitUntilAnyInstanceInService waiter.
+type AnyInstanceInServiceWaiter interface {
 	WaitUntilAnyInstanceInService(*elb.DescribeInstanceHealthInput) error
 	WaitUntilAnyInstanceInServiceWithContext(aws.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
+}
 
+// InstanceDeregisteredWaiter provides the interface for the WaitUntilInstanceDeregistered waiter.
+type InstanceDeregisteredWaiter interface {
 	WaitUntilInstanceDeregistered(*elb.DescribeInstanceHealthInput) error
 	WaitUntilInstanceDeregisteredWithContext(aws.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
+}
 
+// InstanceInServiceWaiter provides the interface for the WaitUntilInstanceInService waiter.
+type InstanceInServiceWaiter interface {
 	WaitUntilInstanceInService(*elb.DescribeInstanceHealthInput) error
 	WaitUntilInstanceInServiceWithContext(aws.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
 }
-
-var _ ELBAPI = (*elb.ELB)(nil)

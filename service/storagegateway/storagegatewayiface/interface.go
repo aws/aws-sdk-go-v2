@@ -13,197 +13,312 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
 )
 
-// StorageGatewayAPI provides an interface to enable mocking the
-// storagegateway.StorageGateway service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Storage Gateway.
-//    func myFunc(svc storagegatewayiface.StorageGatewayAPI) bool {
-//        // Make svc.ActivateGateway request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := storagegateway.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockStorageGatewayClient struct {
-//        storagegatewayiface.StorageGatewayAPI
-//    }
-//    func (m *mockStorageGatewayClient) ActivateGateway(input *storagegateway.ActivateGatewayInput) (*storagegateway.ActivateGatewayOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockStorageGatewayClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type StorageGatewayAPI interface {
+// ActivateGatewayRequester provides the interface for the ActivateGatewayRequest API operation.
+type ActivateGatewayRequester interface {
 	ActivateGatewayRequest(*storagegateway.ActivateGatewayInput) storagegateway.ActivateGatewayRequest
-
-	AddCacheRequest(*storagegateway.AddCacheInput) storagegateway.AddCacheRequest
-
-	AddTagsToResourceRequest(*storagegateway.AddTagsToResourceInput) storagegateway.AddTagsToResourceRequest
-
-	AddUploadBufferRequest(*storagegateway.AddUploadBufferInput) storagegateway.AddUploadBufferRequest
-
-	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) storagegateway.AddWorkingStorageRequest
-
-	CancelArchivalRequest(*storagegateway.CancelArchivalInput) storagegateway.CancelArchivalRequest
-
-	CancelRetrievalRequest(*storagegateway.CancelRetrievalInput) storagegateway.CancelRetrievalRequest
-
-	CreateCachediSCSIVolumeRequest(*storagegateway.CreateCachediSCSIVolumeInput) storagegateway.CreateCachediSCSIVolumeRequest
-
-	CreateNFSFileShareRequest(*storagegateway.CreateNFSFileShareInput) storagegateway.CreateNFSFileShareRequest
-
-	CreateSnapshotRequest(*storagegateway.CreateSnapshotInput) storagegateway.CreateSnapshotRequest
-
-	CreateSnapshotFromVolumeRecoveryPointRequest(*storagegateway.CreateSnapshotFromVolumeRecoveryPointInput) storagegateway.CreateSnapshotFromVolumeRecoveryPointRequest
-
-	CreateStorediSCSIVolumeRequest(*storagegateway.CreateStorediSCSIVolumeInput) storagegateway.CreateStorediSCSIVolumeRequest
-
-	CreateTapeWithBarcodeRequest(*storagegateway.CreateTapeWithBarcodeInput) storagegateway.CreateTapeWithBarcodeRequest
-
-	CreateTapesRequest(*storagegateway.CreateTapesInput) storagegateway.CreateTapesRequest
-
-	DeleteBandwidthRateLimitRequest(*storagegateway.DeleteBandwidthRateLimitInput) storagegateway.DeleteBandwidthRateLimitRequest
-
-	DeleteChapCredentialsRequest(*storagegateway.DeleteChapCredentialsInput) storagegateway.DeleteChapCredentialsRequest
-
-	DeleteFileShareRequest(*storagegateway.DeleteFileShareInput) storagegateway.DeleteFileShareRequest
-
-	DeleteGatewayRequest(*storagegateway.DeleteGatewayInput) storagegateway.DeleteGatewayRequest
-
-	DeleteSnapshotScheduleRequest(*storagegateway.DeleteSnapshotScheduleInput) storagegateway.DeleteSnapshotScheduleRequest
-
-	DeleteTapeRequest(*storagegateway.DeleteTapeInput) storagegateway.DeleteTapeRequest
-
-	DeleteTapeArchiveRequest(*storagegateway.DeleteTapeArchiveInput) storagegateway.DeleteTapeArchiveRequest
-
-	DeleteVolumeRequest(*storagegateway.DeleteVolumeInput) storagegateway.DeleteVolumeRequest
-
-	DescribeBandwidthRateLimitRequest(*storagegateway.DescribeBandwidthRateLimitInput) storagegateway.DescribeBandwidthRateLimitRequest
-
-	DescribeCacheRequest(*storagegateway.DescribeCacheInput) storagegateway.DescribeCacheRequest
-
-	DescribeCachediSCSIVolumesRequest(*storagegateway.DescribeCachediSCSIVolumesInput) storagegateway.DescribeCachediSCSIVolumesRequest
-
-	DescribeChapCredentialsRequest(*storagegateway.DescribeChapCredentialsInput) storagegateway.DescribeChapCredentialsRequest
-
-	DescribeGatewayInformationRequest(*storagegateway.DescribeGatewayInformationInput) storagegateway.DescribeGatewayInformationRequest
-
-	DescribeMaintenanceStartTimeRequest(*storagegateway.DescribeMaintenanceStartTimeInput) storagegateway.DescribeMaintenanceStartTimeRequest
-
-	DescribeNFSFileSharesRequest(*storagegateway.DescribeNFSFileSharesInput) storagegateway.DescribeNFSFileSharesRequest
-
-	DescribeSnapshotScheduleRequest(*storagegateway.DescribeSnapshotScheduleInput) storagegateway.DescribeSnapshotScheduleRequest
-
-	DescribeStorediSCSIVolumesRequest(*storagegateway.DescribeStorediSCSIVolumesInput) storagegateway.DescribeStorediSCSIVolumesRequest
-
-	DescribeTapeArchivesRequest(*storagegateway.DescribeTapeArchivesInput) storagegateway.DescribeTapeArchivesRequest
-
-	DescribeTapeArchivesPages(*storagegateway.DescribeTapeArchivesInput, func(*storagegateway.DescribeTapeArchivesOutput, bool) bool) error
-	DescribeTapeArchivesPagesWithContext(aws.Context, *storagegateway.DescribeTapeArchivesInput, func(*storagegateway.DescribeTapeArchivesOutput, bool) bool, ...aws.Option) error
-
-	DescribeTapeRecoveryPointsRequest(*storagegateway.DescribeTapeRecoveryPointsInput) storagegateway.DescribeTapeRecoveryPointsRequest
-
-	DescribeTapeRecoveryPointsPages(*storagegateway.DescribeTapeRecoveryPointsInput, func(*storagegateway.DescribeTapeRecoveryPointsOutput, bool) bool) error
-	DescribeTapeRecoveryPointsPagesWithContext(aws.Context, *storagegateway.DescribeTapeRecoveryPointsInput, func(*storagegateway.DescribeTapeRecoveryPointsOutput, bool) bool, ...aws.Option) error
-
-	DescribeTapesRequest(*storagegateway.DescribeTapesInput) storagegateway.DescribeTapesRequest
-
-	DescribeTapesPages(*storagegateway.DescribeTapesInput, func(*storagegateway.DescribeTapesOutput, bool) bool) error
-	DescribeTapesPagesWithContext(aws.Context, *storagegateway.DescribeTapesInput, func(*storagegateway.DescribeTapesOutput, bool) bool, ...aws.Option) error
-
-	DescribeUploadBufferRequest(*storagegateway.DescribeUploadBufferInput) storagegateway.DescribeUploadBufferRequest
-
-	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) storagegateway.DescribeVTLDevicesRequest
-
-	DescribeVTLDevicesPages(*storagegateway.DescribeVTLDevicesInput, func(*storagegateway.DescribeVTLDevicesOutput, bool) bool) error
-	DescribeVTLDevicesPagesWithContext(aws.Context, *storagegateway.DescribeVTLDevicesInput, func(*storagegateway.DescribeVTLDevicesOutput, bool) bool, ...aws.Option) error
-
-	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
-
-	DisableGatewayRequest(*storagegateway.DisableGatewayInput) storagegateway.DisableGatewayRequest
-
-	ListFileSharesRequest(*storagegateway.ListFileSharesInput) storagegateway.ListFileSharesRequest
-
-	ListGatewaysRequest(*storagegateway.ListGatewaysInput) storagegateway.ListGatewaysRequest
-
-	ListGatewaysPages(*storagegateway.ListGatewaysInput, func(*storagegateway.ListGatewaysOutput, bool) bool) error
-	ListGatewaysPagesWithContext(aws.Context, *storagegateway.ListGatewaysInput, func(*storagegateway.ListGatewaysOutput, bool) bool, ...aws.Option) error
-
-	ListLocalDisksRequest(*storagegateway.ListLocalDisksInput) storagegateway.ListLocalDisksRequest
-
-	ListTagsForResourceRequest(*storagegateway.ListTagsForResourceInput) storagegateway.ListTagsForResourceRequest
-
-	ListTapesRequest(*storagegateway.ListTapesInput) storagegateway.ListTapesRequest
-
-	ListVolumeInitiatorsRequest(*storagegateway.ListVolumeInitiatorsInput) storagegateway.ListVolumeInitiatorsRequest
-
-	ListVolumeRecoveryPointsRequest(*storagegateway.ListVolumeRecoveryPointsInput) storagegateway.ListVolumeRecoveryPointsRequest
-
-	ListVolumesRequest(*storagegateway.ListVolumesInput) storagegateway.ListVolumesRequest
-
-	ListVolumesPages(*storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool) error
-	ListVolumesPagesWithContext(aws.Context, *storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool, ...aws.Option) error
-
-	RefreshCacheRequest(*storagegateway.RefreshCacheInput) storagegateway.RefreshCacheRequest
-
-	RemoveTagsFromResourceRequest(*storagegateway.RemoveTagsFromResourceInput) storagegateway.RemoveTagsFromResourceRequest
-
-	ResetCacheRequest(*storagegateway.ResetCacheInput) storagegateway.ResetCacheRequest
-
-	RetrieveTapeArchiveRequest(*storagegateway.RetrieveTapeArchiveInput) storagegateway.RetrieveTapeArchiveRequest
-
-	RetrieveTapeRecoveryPointRequest(*storagegateway.RetrieveTapeRecoveryPointInput) storagegateway.RetrieveTapeRecoveryPointRequest
-
-	SetLocalConsolePasswordRequest(*storagegateway.SetLocalConsolePasswordInput) storagegateway.SetLocalConsolePasswordRequest
-
-	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) storagegateway.ShutdownGatewayRequest
-
-	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
-
-	UpdateBandwidthRateLimitRequest(*storagegateway.UpdateBandwidthRateLimitInput) storagegateway.UpdateBandwidthRateLimitRequest
-
-	UpdateChapCredentialsRequest(*storagegateway.UpdateChapCredentialsInput) storagegateway.UpdateChapCredentialsRequest
-
-	UpdateGatewayInformationRequest(*storagegateway.UpdateGatewayInformationInput) storagegateway.UpdateGatewayInformationRequest
-
-	UpdateGatewaySoftwareNowRequest(*storagegateway.UpdateGatewaySoftwareNowInput) storagegateway.UpdateGatewaySoftwareNowRequest
-
-	UpdateMaintenanceStartTimeRequest(*storagegateway.UpdateMaintenanceStartTimeInput) storagegateway.UpdateMaintenanceStartTimeRequest
-
-	UpdateNFSFileShareRequest(*storagegateway.UpdateNFSFileShareInput) storagegateway.UpdateNFSFileShareRequest
-
-	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) storagegateway.UpdateSnapshotScheduleRequest
-
-	UpdateVTLDeviceTypeRequest(*storagegateway.UpdateVTLDeviceTypeInput) storagegateway.UpdateVTLDeviceTypeRequest
 }
 
-var _ StorageGatewayAPI = (*storagegateway.StorageGateway)(nil)
+// AddCacheRequester provides the interface for the AddCacheRequest API operation.
+type AddCacheRequester interface {
+	AddCacheRequest(*storagegateway.AddCacheInput) storagegateway.AddCacheRequest
+}
+
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
+	AddTagsToResourceRequest(*storagegateway.AddTagsToResourceInput) storagegateway.AddTagsToResourceRequest
+}
+
+// AddUploadBufferRequester provides the interface for the AddUploadBufferRequest API operation.
+type AddUploadBufferRequester interface {
+	AddUploadBufferRequest(*storagegateway.AddUploadBufferInput) storagegateway.AddUploadBufferRequest
+}
+
+// AddWorkingStorageRequester provides the interface for the AddWorkingStorageRequest API operation.
+type AddWorkingStorageRequester interface {
+	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) storagegateway.AddWorkingStorageRequest
+}
+
+// CancelArchivalRequester provides the interface for the CancelArchivalRequest API operation.
+type CancelArchivalRequester interface {
+	CancelArchivalRequest(*storagegateway.CancelArchivalInput) storagegateway.CancelArchivalRequest
+}
+
+// CancelRetrievalRequester provides the interface for the CancelRetrievalRequest API operation.
+type CancelRetrievalRequester interface {
+	CancelRetrievalRequest(*storagegateway.CancelRetrievalInput) storagegateway.CancelRetrievalRequest
+}
+
+// CreateCachediSCSIVolumeRequester provides the interface for the CreateCachediSCSIVolumeRequest API operation.
+type CreateCachediSCSIVolumeRequester interface {
+	CreateCachediSCSIVolumeRequest(*storagegateway.CreateCachediSCSIVolumeInput) storagegateway.CreateCachediSCSIVolumeRequest
+}
+
+// CreateNFSFileShareRequester provides the interface for the CreateNFSFileShareRequest API operation.
+type CreateNFSFileShareRequester interface {
+	CreateNFSFileShareRequest(*storagegateway.CreateNFSFileShareInput) storagegateway.CreateNFSFileShareRequest
+}
+
+// CreateSnapshotRequester provides the interface for the CreateSnapshotRequest API operation.
+type CreateSnapshotRequester interface {
+	CreateSnapshotRequest(*storagegateway.CreateSnapshotInput) storagegateway.CreateSnapshotRequest
+}
+
+// CreateSnapshotFromVolumeRecoveryPointRequester provides the interface for the CreateSnapshotFromVolumeRecoveryPointRequest API operation.
+type CreateSnapshotFromVolumeRecoveryPointRequester interface {
+	CreateSnapshotFromVolumeRecoveryPointRequest(*storagegateway.CreateSnapshotFromVolumeRecoveryPointInput) storagegateway.CreateSnapshotFromVolumeRecoveryPointRequest
+}
+
+// CreateStorediSCSIVolumeRequester provides the interface for the CreateStorediSCSIVolumeRequest API operation.
+type CreateStorediSCSIVolumeRequester interface {
+	CreateStorediSCSIVolumeRequest(*storagegateway.CreateStorediSCSIVolumeInput) storagegateway.CreateStorediSCSIVolumeRequest
+}
+
+// CreateTapeWithBarcodeRequester provides the interface for the CreateTapeWithBarcodeRequest API operation.
+type CreateTapeWithBarcodeRequester interface {
+	CreateTapeWithBarcodeRequest(*storagegateway.CreateTapeWithBarcodeInput) storagegateway.CreateTapeWithBarcodeRequest
+}
+
+// CreateTapesRequester provides the interface for the CreateTapesRequest API operation.
+type CreateTapesRequester interface {
+	CreateTapesRequest(*storagegateway.CreateTapesInput) storagegateway.CreateTapesRequest
+}
+
+// DeleteBandwidthRateLimitRequester provides the interface for the DeleteBandwidthRateLimitRequest API operation.
+type DeleteBandwidthRateLimitRequester interface {
+	DeleteBandwidthRateLimitRequest(*storagegateway.DeleteBandwidthRateLimitInput) storagegateway.DeleteBandwidthRateLimitRequest
+}
+
+// DeleteChapCredentialsRequester provides the interface for the DeleteChapCredentialsRequest API operation.
+type DeleteChapCredentialsRequester interface {
+	DeleteChapCredentialsRequest(*storagegateway.DeleteChapCredentialsInput) storagegateway.DeleteChapCredentialsRequest
+}
+
+// DeleteFileShareRequester provides the interface for the DeleteFileShareRequest API operation.
+type DeleteFileShareRequester interface {
+	DeleteFileShareRequest(*storagegateway.DeleteFileShareInput) storagegateway.DeleteFileShareRequest
+}
+
+// DeleteGatewayRequester provides the interface for the DeleteGatewayRequest API operation.
+type DeleteGatewayRequester interface {
+	DeleteGatewayRequest(*storagegateway.DeleteGatewayInput) storagegateway.DeleteGatewayRequest
+}
+
+// DeleteSnapshotScheduleRequester provides the interface for the DeleteSnapshotScheduleRequest API operation.
+type DeleteSnapshotScheduleRequester interface {
+	DeleteSnapshotScheduleRequest(*storagegateway.DeleteSnapshotScheduleInput) storagegateway.DeleteSnapshotScheduleRequest
+}
+
+// DeleteTapeRequester provides the interface for the DeleteTapeRequest API operation.
+type DeleteTapeRequester interface {
+	DeleteTapeRequest(*storagegateway.DeleteTapeInput) storagegateway.DeleteTapeRequest
+}
+
+// DeleteTapeArchiveRequester provides the interface for the DeleteTapeArchiveRequest API operation.
+type DeleteTapeArchiveRequester interface {
+	DeleteTapeArchiveRequest(*storagegateway.DeleteTapeArchiveInput) storagegateway.DeleteTapeArchiveRequest
+}
+
+// DeleteVolumeRequester provides the interface for the DeleteVolumeRequest API operation.
+type DeleteVolumeRequester interface {
+	DeleteVolumeRequest(*storagegateway.DeleteVolumeInput) storagegateway.DeleteVolumeRequest
+}
+
+// DescribeBandwidthRateLimitRequester provides the interface for the DescribeBandwidthRateLimitRequest API operation.
+type DescribeBandwidthRateLimitRequester interface {
+	DescribeBandwidthRateLimitRequest(*storagegateway.DescribeBandwidthRateLimitInput) storagegateway.DescribeBandwidthRateLimitRequest
+}
+
+// DescribeCacheRequester provides the interface for the DescribeCacheRequest API operation.
+type DescribeCacheRequester interface {
+	DescribeCacheRequest(*storagegateway.DescribeCacheInput) storagegateway.DescribeCacheRequest
+}
+
+// DescribeCachediSCSIVolumesRequester provides the interface for the DescribeCachediSCSIVolumesRequest API operation.
+type DescribeCachediSCSIVolumesRequester interface {
+	DescribeCachediSCSIVolumesRequest(*storagegateway.DescribeCachediSCSIVolumesInput) storagegateway.DescribeCachediSCSIVolumesRequest
+}
+
+// DescribeChapCredentialsRequester provides the interface for the DescribeChapCredentialsRequest API operation.
+type DescribeChapCredentialsRequester interface {
+	DescribeChapCredentialsRequest(*storagegateway.DescribeChapCredentialsInput) storagegateway.DescribeChapCredentialsRequest
+}
+
+// DescribeGatewayInformationRequester provides the interface for the DescribeGatewayInformationRequest API operation.
+type DescribeGatewayInformationRequester interface {
+	DescribeGatewayInformationRequest(*storagegateway.DescribeGatewayInformationInput) storagegateway.DescribeGatewayInformationRequest
+}
+
+// DescribeMaintenanceStartTimeRequester provides the interface for the DescribeMaintenanceStartTimeRequest API operation.
+type DescribeMaintenanceStartTimeRequester interface {
+	DescribeMaintenanceStartTimeRequest(*storagegateway.DescribeMaintenanceStartTimeInput) storagegateway.DescribeMaintenanceStartTimeRequest
+}
+
+// DescribeNFSFileSharesRequester provides the interface for the DescribeNFSFileSharesRequest API operation.
+type DescribeNFSFileSharesRequester interface {
+	DescribeNFSFileSharesRequest(*storagegateway.DescribeNFSFileSharesInput) storagegateway.DescribeNFSFileSharesRequest
+}
+
+// DescribeSnapshotScheduleRequester provides the interface for the DescribeSnapshotScheduleRequest API operation.
+type DescribeSnapshotScheduleRequester interface {
+	DescribeSnapshotScheduleRequest(*storagegateway.DescribeSnapshotScheduleInput) storagegateway.DescribeSnapshotScheduleRequest
+}
+
+// DescribeStorediSCSIVolumesRequester provides the interface for the DescribeStorediSCSIVolumesRequest API operation.
+type DescribeStorediSCSIVolumesRequester interface {
+	DescribeStorediSCSIVolumesRequest(*storagegateway.DescribeStorediSCSIVolumesInput) storagegateway.DescribeStorediSCSIVolumesRequest
+}
+
+// DescribeTapeArchivesRequester provides the interface for the DescribeTapeArchivesRequest API operation.
+type DescribeTapeArchivesRequester interface {
+	DescribeTapeArchivesRequest(*storagegateway.DescribeTapeArchivesInput) storagegateway.DescribeTapeArchivesRequest
+}
+
+// DescribeTapeRecoveryPointsRequester provides the interface for the DescribeTapeRecoveryPointsRequest API operation.
+type DescribeTapeRecoveryPointsRequester interface {
+	DescribeTapeRecoveryPointsRequest(*storagegateway.DescribeTapeRecoveryPointsInput) storagegateway.DescribeTapeRecoveryPointsRequest
+}
+
+// DescribeTapesRequester provides the interface for the DescribeTapesRequest API operation.
+type DescribeTapesRequester interface {
+	DescribeTapesRequest(*storagegateway.DescribeTapesInput) storagegateway.DescribeTapesRequest
+}
+
+// DescribeUploadBufferRequester provides the interface for the DescribeUploadBufferRequest API operation.
+type DescribeUploadBufferRequester interface {
+	DescribeUploadBufferRequest(*storagegateway.DescribeUploadBufferInput) storagegateway.DescribeUploadBufferRequest
+}
+
+// DescribeVTLDevicesRequester provides the interface for the DescribeVTLDevicesRequest API operation.
+type DescribeVTLDevicesRequester interface {
+	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) storagegateway.DescribeVTLDevicesRequest
+}
+
+// DescribeWorkingStorageRequester provides the interface for the DescribeWorkingStorageRequest API operation.
+type DescribeWorkingStorageRequester interface {
+	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
+}
+
+// DisableGatewayRequester provides the interface for the DisableGatewayRequest API operation.
+type DisableGatewayRequester interface {
+	DisableGatewayRequest(*storagegateway.DisableGatewayInput) storagegateway.DisableGatewayRequest
+}
+
+// ListFileSharesRequester provides the interface for the ListFileSharesRequest API operation.
+type ListFileSharesRequester interface {
+	ListFileSharesRequest(*storagegateway.ListFileSharesInput) storagegateway.ListFileSharesRequest
+}
+
+// ListGatewaysRequester provides the interface for the ListGatewaysRequest API operation.
+type ListGatewaysRequester interface {
+	ListGatewaysRequest(*storagegateway.ListGatewaysInput) storagegateway.ListGatewaysRequest
+}
+
+// ListLocalDisksRequester provides the interface for the ListLocalDisksRequest API operation.
+type ListLocalDisksRequester interface {
+	ListLocalDisksRequest(*storagegateway.ListLocalDisksInput) storagegateway.ListLocalDisksRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*storagegateway.ListTagsForResourceInput) storagegateway.ListTagsForResourceRequest
+}
+
+// ListTapesRequester provides the interface for the ListTapesRequest API operation.
+type ListTapesRequester interface {
+	ListTapesRequest(*storagegateway.ListTapesInput) storagegateway.ListTapesRequest
+}
+
+// ListVolumeInitiatorsRequester provides the interface for the ListVolumeInitiatorsRequest API operation.
+type ListVolumeInitiatorsRequester interface {
+	ListVolumeInitiatorsRequest(*storagegateway.ListVolumeInitiatorsInput) storagegateway.ListVolumeInitiatorsRequest
+}
+
+// ListVolumeRecoveryPointsRequester provides the interface for the ListVolumeRecoveryPointsRequest API operation.
+type ListVolumeRecoveryPointsRequester interface {
+	ListVolumeRecoveryPointsRequest(*storagegateway.ListVolumeRecoveryPointsInput) storagegateway.ListVolumeRecoveryPointsRequest
+}
+
+// ListVolumesRequester provides the interface for the ListVolumesRequest API operation.
+type ListVolumesRequester interface {
+	ListVolumesRequest(*storagegateway.ListVolumesInput) storagegateway.ListVolumesRequest
+}
+
+// RefreshCacheRequester provides the interface for the RefreshCacheRequest API operation.
+type RefreshCacheRequester interface {
+	RefreshCacheRequest(*storagegateway.RefreshCacheInput) storagegateway.RefreshCacheRequest
+}
+
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
+	RemoveTagsFromResourceRequest(*storagegateway.RemoveTagsFromResourceInput) storagegateway.RemoveTagsFromResourceRequest
+}
+
+// ResetCacheRequester provides the interface for the ResetCacheRequest API operation.
+type ResetCacheRequester interface {
+	ResetCacheRequest(*storagegateway.ResetCacheInput) storagegateway.ResetCacheRequest
+}
+
+// RetrieveTapeArchiveRequester provides the interface for the RetrieveTapeArchiveRequest API operation.
+type RetrieveTapeArchiveRequester interface {
+	RetrieveTapeArchiveRequest(*storagegateway.RetrieveTapeArchiveInput) storagegateway.RetrieveTapeArchiveRequest
+}
+
+// RetrieveTapeRecoveryPointRequester provides the interface for the RetrieveTapeRecoveryPointRequest API operation.
+type RetrieveTapeRecoveryPointRequester interface {
+	RetrieveTapeRecoveryPointRequest(*storagegateway.RetrieveTapeRecoveryPointInput) storagegateway.RetrieveTapeRecoveryPointRequest
+}
+
+// SetLocalConsolePasswordRequester provides the interface for the SetLocalConsolePasswordRequest API operation.
+type SetLocalConsolePasswordRequester interface {
+	SetLocalConsolePasswordRequest(*storagegateway.SetLocalConsolePasswordInput) storagegateway.SetLocalConsolePasswordRequest
+}
+
+// ShutdownGatewayRequester provides the interface for the ShutdownGatewayRequest API operation.
+type ShutdownGatewayRequester interface {
+	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) storagegateway.ShutdownGatewayRequest
+}
+
+// StartGatewayRequester provides the interface for the StartGatewayRequest API operation.
+type StartGatewayRequester interface {
+	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
+}
+
+// UpdateBandwidthRateLimitRequester provides the interface for the UpdateBandwidthRateLimitRequest API operation.
+type UpdateBandwidthRateLimitRequester interface {
+	UpdateBandwidthRateLimitRequest(*storagegateway.UpdateBandwidthRateLimitInput) storagegateway.UpdateBandwidthRateLimitRequest
+}
+
+// UpdateChapCredentialsRequester provides the interface for the UpdateChapCredentialsRequest API operation.
+type UpdateChapCredentialsRequester interface {
+	UpdateChapCredentialsRequest(*storagegateway.UpdateChapCredentialsInput) storagegateway.UpdateChapCredentialsRequest
+}
+
+// UpdateGatewayInformationRequester provides the interface for the UpdateGatewayInformationRequest API operation.
+type UpdateGatewayInformationRequester interface {
+	UpdateGatewayInformationRequest(*storagegateway.UpdateGatewayInformationInput) storagegateway.UpdateGatewayInformationRequest
+}
+
+// UpdateGatewaySoftwareNowRequester provides the interface for the UpdateGatewaySoftwareNowRequest API operation.
+type UpdateGatewaySoftwareNowRequester interface {
+	UpdateGatewaySoftwareNowRequest(*storagegateway.UpdateGatewaySoftwareNowInput) storagegateway.UpdateGatewaySoftwareNowRequest
+}
+
+// UpdateMaintenanceStartTimeRequester provides the interface for the UpdateMaintenanceStartTimeRequest API operation.
+type UpdateMaintenanceStartTimeRequester interface {
+	UpdateMaintenanceStartTimeRequest(*storagegateway.UpdateMaintenanceStartTimeInput) storagegateway.UpdateMaintenanceStartTimeRequest
+}
+
+// UpdateNFSFileShareRequester provides the interface for the UpdateNFSFileShareRequest API operation.
+type UpdateNFSFileShareRequester interface {
+	UpdateNFSFileShareRequest(*storagegateway.UpdateNFSFileShareInput) storagegateway.UpdateNFSFileShareRequest
+}
+
+// UpdateSnapshotScheduleRequester provides the interface for the UpdateSnapshotScheduleRequest API operation.
+type UpdateSnapshotScheduleRequester interface {
+	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) storagegateway.UpdateSnapshotScheduleRequest
+}
+
+// UpdateVTLDeviceTypeRequester provides the interface for the UpdateVTLDeviceTypeRequest API operation.
+type UpdateVTLDeviceTypeRequester interface {
+	UpdateVTLDeviceTypeRequest(*storagegateway.UpdateVTLDeviceTypeInput) storagegateway.UpdateVTLDeviceTypeRequest
+}

@@ -13,95 +13,87 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
 )
 
-// SnowballAPI provides an interface to enable mocking the
-// snowball.Snowball service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Import/Export Snowball.
-//    func myFunc(svc snowballiface.SnowballAPI) bool {
-//        // Make svc.CancelCluster request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := snowball.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSnowballClient struct {
-//        snowballiface.SnowballAPI
-//    }
-//    func (m *mockSnowballClient) CancelCluster(input *snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSnowballClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SnowballAPI interface {
+// CancelClusterRequester provides the interface for the CancelClusterRequest API operation.
+type CancelClusterRequester interface {
 	CancelClusterRequest(*snowball.CancelClusterInput) snowball.CancelClusterRequest
-
-	CancelJobRequest(*snowball.CancelJobInput) snowball.CancelJobRequest
-
-	CreateAddressRequest(*snowball.CreateAddressInput) snowball.CreateAddressRequest
-
-	CreateClusterRequest(*snowball.CreateClusterInput) snowball.CreateClusterRequest
-
-	CreateJobRequest(*snowball.CreateJobInput) snowball.CreateJobRequest
-
-	DescribeAddressRequest(*snowball.DescribeAddressInput) snowball.DescribeAddressRequest
-
-	DescribeAddressesRequest(*snowball.DescribeAddressesInput) snowball.DescribeAddressesRequest
-
-	DescribeAddressesPages(*snowball.DescribeAddressesInput, func(*snowball.DescribeAddressesOutput, bool) bool) error
-	DescribeAddressesPagesWithContext(aws.Context, *snowball.DescribeAddressesInput, func(*snowball.DescribeAddressesOutput, bool) bool, ...aws.Option) error
-
-	DescribeClusterRequest(*snowball.DescribeClusterInput) snowball.DescribeClusterRequest
-
-	DescribeJobRequest(*snowball.DescribeJobInput) snowball.DescribeJobRequest
-
-	GetJobManifestRequest(*snowball.GetJobManifestInput) snowball.GetJobManifestRequest
-
-	GetJobUnlockCodeRequest(*snowball.GetJobUnlockCodeInput) snowball.GetJobUnlockCodeRequest
-
-	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
-
-	ListClusterJobsRequest(*snowball.ListClusterJobsInput) snowball.ListClusterJobsRequest
-
-	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
-
-	ListJobsRequest(*snowball.ListJobsInput) snowball.ListJobsRequest
-
-	ListJobsPages(*snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool) error
-	ListJobsPagesWithContext(aws.Context, *snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool, ...aws.Option) error
-
-	UpdateClusterRequest(*snowball.UpdateClusterInput) snowball.UpdateClusterRequest
-
-	UpdateJobRequest(*snowball.UpdateJobInput) snowball.UpdateJobRequest
 }
 
-var _ SnowballAPI = (*snowball.Snowball)(nil)
+// CancelJobRequester provides the interface for the CancelJobRequest API operation.
+type CancelJobRequester interface {
+	CancelJobRequest(*snowball.CancelJobInput) snowball.CancelJobRequest
+}
+
+// CreateAddressRequester provides the interface for the CreateAddressRequest API operation.
+type CreateAddressRequester interface {
+	CreateAddressRequest(*snowball.CreateAddressInput) snowball.CreateAddressRequest
+}
+
+// CreateClusterRequester provides the interface for the CreateClusterRequest API operation.
+type CreateClusterRequester interface {
+	CreateClusterRequest(*snowball.CreateClusterInput) snowball.CreateClusterRequest
+}
+
+// CreateJobRequester provides the interface for the CreateJobRequest API operation.
+type CreateJobRequester interface {
+	CreateJobRequest(*snowball.CreateJobInput) snowball.CreateJobRequest
+}
+
+// DescribeAddressRequester provides the interface for the DescribeAddressRequest API operation.
+type DescribeAddressRequester interface {
+	DescribeAddressRequest(*snowball.DescribeAddressInput) snowball.DescribeAddressRequest
+}
+
+// DescribeAddressesRequester provides the interface for the DescribeAddressesRequest API operation.
+type DescribeAddressesRequester interface {
+	DescribeAddressesRequest(*snowball.DescribeAddressesInput) snowball.DescribeAddressesRequest
+}
+
+// DescribeClusterRequester provides the interface for the DescribeClusterRequest API operation.
+type DescribeClusterRequester interface {
+	DescribeClusterRequest(*snowball.DescribeClusterInput) snowball.DescribeClusterRequest
+}
+
+// DescribeJobRequester provides the interface for the DescribeJobRequest API operation.
+type DescribeJobRequester interface {
+	DescribeJobRequest(*snowball.DescribeJobInput) snowball.DescribeJobRequest
+}
+
+// GetJobManifestRequester provides the interface for the GetJobManifestRequest API operation.
+type GetJobManifestRequester interface {
+	GetJobManifestRequest(*snowball.GetJobManifestInput) snowball.GetJobManifestRequest
+}
+
+// GetJobUnlockCodeRequester provides the interface for the GetJobUnlockCodeRequest API operation.
+type GetJobUnlockCodeRequester interface {
+	GetJobUnlockCodeRequest(*snowball.GetJobUnlockCodeInput) snowball.GetJobUnlockCodeRequest
+}
+
+// GetSnowballUsageRequester provides the interface for the GetSnowballUsageRequest API operation.
+type GetSnowballUsageRequester interface {
+	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
+}
+
+// ListClusterJobsRequester provides the interface for the ListClusterJobsRequest API operation.
+type ListClusterJobsRequester interface {
+	ListClusterJobsRequest(*snowball.ListClusterJobsInput) snowball.ListClusterJobsRequest
+}
+
+// ListClustersRequester provides the interface for the ListClustersRequest API operation.
+type ListClustersRequester interface {
+	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
+}
+
+// ListJobsRequester provides the interface for the ListJobsRequest API operation.
+type ListJobsRequester interface {
+	ListJobsRequest(*snowball.ListJobsInput) snowball.ListJobsRequest
+}
+
+// UpdateClusterRequester provides the interface for the UpdateClusterRequest API operation.
+type UpdateClusterRequester interface {
+	UpdateClusterRequest(*snowball.UpdateClusterInput) snowball.UpdateClusterRequest
+}
+
+// UpdateJobRequester provides the interface for the UpdateJobRequest API operation.
+type UpdateJobRequester interface {
+	UpdateJobRequest(*snowball.UpdateJobInput) snowball.UpdateJobRequest
+}

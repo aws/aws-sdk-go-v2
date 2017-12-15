@@ -12,93 +12,97 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
 )
 
-// ApplicationDiscoveryServiceAPI provides an interface to enable mocking the
-// applicationdiscoveryservice.ApplicationDiscoveryService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Application Discovery Service.
-//    func myFunc(svc applicationdiscoveryserviceiface.ApplicationDiscoveryServiceAPI) bool {
-//        // Make svc.AssociateConfigurationItemsToApplication request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := applicationdiscoveryservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockApplicationDiscoveryServiceClient struct {
-//        applicationdiscoveryserviceiface.ApplicationDiscoveryServiceAPI
-//    }
-//    func (m *mockApplicationDiscoveryServiceClient) AssociateConfigurationItemsToApplication(input *applicationdiscoveryservice.AssociateConfigurationItemsToApplicationInput) (*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockApplicationDiscoveryServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ApplicationDiscoveryServiceAPI interface {
+// AssociateConfigurationItemsToApplicationRequester provides the interface for the AssociateConfigurationItemsToApplicationRequest API operation.
+type AssociateConfigurationItemsToApplicationRequester interface {
 	AssociateConfigurationItemsToApplicationRequest(*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationInput) applicationdiscoveryservice.AssociateConfigurationItemsToApplicationRequest
-
-	CreateApplicationRequest(*applicationdiscoveryservice.CreateApplicationInput) applicationdiscoveryservice.CreateApplicationRequest
-
-	CreateTagsRequest(*applicationdiscoveryservice.CreateTagsInput) applicationdiscoveryservice.CreateTagsRequest
-
-	DeleteApplicationsRequest(*applicationdiscoveryservice.DeleteApplicationsInput) applicationdiscoveryservice.DeleteApplicationsRequest
-
-	DeleteTagsRequest(*applicationdiscoveryservice.DeleteTagsInput) applicationdiscoveryservice.DeleteTagsRequest
-
-	DescribeAgentsRequest(*applicationdiscoveryservice.DescribeAgentsInput) applicationdiscoveryservice.DescribeAgentsRequest
-
-	DescribeConfigurationsRequest(*applicationdiscoveryservice.DescribeConfigurationsInput) applicationdiscoveryservice.DescribeConfigurationsRequest
-
-	DescribeExportConfigurationsRequest(*applicationdiscoveryservice.DescribeExportConfigurationsInput) applicationdiscoveryservice.DescribeExportConfigurationsRequest
-
-	DescribeExportTasksRequest(*applicationdiscoveryservice.DescribeExportTasksInput) applicationdiscoveryservice.DescribeExportTasksRequest
-
-	DescribeTagsRequest(*applicationdiscoveryservice.DescribeTagsInput) applicationdiscoveryservice.DescribeTagsRequest
-
-	DisassociateConfigurationItemsFromApplicationRequest(*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationInput) applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationRequest
-
-	ExportConfigurationsRequest(*applicationdiscoveryservice.ExportConfigurationsInput) applicationdiscoveryservice.ExportConfigurationsRequest
-
-	GetDiscoverySummaryRequest(*applicationdiscoveryservice.GetDiscoverySummaryInput) applicationdiscoveryservice.GetDiscoverySummaryRequest
-
-	ListConfigurationsRequest(*applicationdiscoveryservice.ListConfigurationsInput) applicationdiscoveryservice.ListConfigurationsRequest
-
-	ListServerNeighborsRequest(*applicationdiscoveryservice.ListServerNeighborsInput) applicationdiscoveryservice.ListServerNeighborsRequest
-
-	StartDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StartDataCollectionByAgentIdsInput) applicationdiscoveryservice.StartDataCollectionByAgentIdsRequest
-
-	StartExportTaskRequest(*applicationdiscoveryservice.StartExportTaskInput) applicationdiscoveryservice.StartExportTaskRequest
-
-	StopDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StopDataCollectionByAgentIdsInput) applicationdiscoveryservice.StopDataCollectionByAgentIdsRequest
-
-	UpdateApplicationRequest(*applicationdiscoveryservice.UpdateApplicationInput) applicationdiscoveryservice.UpdateApplicationRequest
 }
 
-var _ ApplicationDiscoveryServiceAPI = (*applicationdiscoveryservice.ApplicationDiscoveryService)(nil)
+// CreateApplicationRequester provides the interface for the CreateApplicationRequest API operation.
+type CreateApplicationRequester interface {
+	CreateApplicationRequest(*applicationdiscoveryservice.CreateApplicationInput) applicationdiscoveryservice.CreateApplicationRequest
+}
+
+// CreateTagsRequester provides the interface for the CreateTagsRequest API operation.
+type CreateTagsRequester interface {
+	CreateTagsRequest(*applicationdiscoveryservice.CreateTagsInput) applicationdiscoveryservice.CreateTagsRequest
+}
+
+// DeleteApplicationsRequester provides the interface for the DeleteApplicationsRequest API operation.
+type DeleteApplicationsRequester interface {
+	DeleteApplicationsRequest(*applicationdiscoveryservice.DeleteApplicationsInput) applicationdiscoveryservice.DeleteApplicationsRequest
+}
+
+// DeleteTagsRequester provides the interface for the DeleteTagsRequest API operation.
+type DeleteTagsRequester interface {
+	DeleteTagsRequest(*applicationdiscoveryservice.DeleteTagsInput) applicationdiscoveryservice.DeleteTagsRequest
+}
+
+// DescribeAgentsRequester provides the interface for the DescribeAgentsRequest API operation.
+type DescribeAgentsRequester interface {
+	DescribeAgentsRequest(*applicationdiscoveryservice.DescribeAgentsInput) applicationdiscoveryservice.DescribeAgentsRequest
+}
+
+// DescribeConfigurationsRequester provides the interface for the DescribeConfigurationsRequest API operation.
+type DescribeConfigurationsRequester interface {
+	DescribeConfigurationsRequest(*applicationdiscoveryservice.DescribeConfigurationsInput) applicationdiscoveryservice.DescribeConfigurationsRequest
+}
+
+// DescribeExportConfigurationsRequester provides the interface for the DescribeExportConfigurationsRequest API operation.
+type DescribeExportConfigurationsRequester interface {
+	DescribeExportConfigurationsRequest(*applicationdiscoveryservice.DescribeExportConfigurationsInput) applicationdiscoveryservice.DescribeExportConfigurationsRequest
+}
+
+// DescribeExportTasksRequester provides the interface for the DescribeExportTasksRequest API operation.
+type DescribeExportTasksRequester interface {
+	DescribeExportTasksRequest(*applicationdiscoveryservice.DescribeExportTasksInput) applicationdiscoveryservice.DescribeExportTasksRequest
+}
+
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
+	DescribeTagsRequest(*applicationdiscoveryservice.DescribeTagsInput) applicationdiscoveryservice.DescribeTagsRequest
+}
+
+// DisassociateConfigurationItemsFromApplicationRequester provides the interface for the DisassociateConfigurationItemsFromApplicationRequest API operation.
+type DisassociateConfigurationItemsFromApplicationRequester interface {
+	DisassociateConfigurationItemsFromApplicationRequest(*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationInput) applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationRequest
+}
+
+// ExportConfigurationsRequester provides the interface for the ExportConfigurationsRequest API operation.
+type ExportConfigurationsRequester interface {
+	ExportConfigurationsRequest(*applicationdiscoveryservice.ExportConfigurationsInput) applicationdiscoveryservice.ExportConfigurationsRequest
+}
+
+// GetDiscoverySummaryRequester provides the interface for the GetDiscoverySummaryRequest API operation.
+type GetDiscoverySummaryRequester interface {
+	GetDiscoverySummaryRequest(*applicationdiscoveryservice.GetDiscoverySummaryInput) applicationdiscoveryservice.GetDiscoverySummaryRequest
+}
+
+// ListConfigurationsRequester provides the interface for the ListConfigurationsRequest API operation.
+type ListConfigurationsRequester interface {
+	ListConfigurationsRequest(*applicationdiscoveryservice.ListConfigurationsInput) applicationdiscoveryservice.ListConfigurationsRequest
+}
+
+// ListServerNeighborsRequester provides the interface for the ListServerNeighborsRequest API operation.
+type ListServerNeighborsRequester interface {
+	ListServerNeighborsRequest(*applicationdiscoveryservice.ListServerNeighborsInput) applicationdiscoveryservice.ListServerNeighborsRequest
+}
+
+// StartDataCollectionByAgentIdsRequester provides the interface for the StartDataCollectionByAgentIdsRequest API operation.
+type StartDataCollectionByAgentIdsRequester interface {
+	StartDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StartDataCollectionByAgentIdsInput) applicationdiscoveryservice.StartDataCollectionByAgentIdsRequest
+}
+
+// StartExportTaskRequester provides the interface for the StartExportTaskRequest API operation.
+type StartExportTaskRequester interface {
+	StartExportTaskRequest(*applicationdiscoveryservice.StartExportTaskInput) applicationdiscoveryservice.StartExportTaskRequest
+}
+
+// StopDataCollectionByAgentIdsRequester provides the interface for the StopDataCollectionByAgentIdsRequest API operation.
+type StopDataCollectionByAgentIdsRequester interface {
+	StopDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StopDataCollectionByAgentIdsInput) applicationdiscoveryservice.StopDataCollectionByAgentIdsRequest
+}
+
+// UpdateApplicationRequester provides the interface for the UpdateApplicationRequest API operation.
+type UpdateApplicationRequester interface {
+	UpdateApplicationRequest(*applicationdiscoveryservice.UpdateApplicationInput) applicationdiscoveryservice.UpdateApplicationRequest
+}

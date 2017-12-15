@@ -13,101 +13,87 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 )
 
-// SFNAPI provides an interface to enable mocking the
-// sfn.SFN service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Step Functions.
-//    func myFunc(svc sfniface.SFNAPI) bool {
-//        // Make svc.CreateActivity request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := sfn.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSFNClient struct {
-//        sfniface.SFNAPI
-//    }
-//    func (m *mockSFNClient) CreateActivity(input *sfn.CreateActivityInput) (*sfn.CreateActivityOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSFNClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SFNAPI interface {
+// CreateActivityRequester provides the interface for the CreateActivityRequest API operation.
+type CreateActivityRequester interface {
 	CreateActivityRequest(*sfn.CreateActivityInput) sfn.CreateActivityRequest
-
-	CreateStateMachineRequest(*sfn.CreateStateMachineInput) sfn.CreateStateMachineRequest
-
-	DeleteActivityRequest(*sfn.DeleteActivityInput) sfn.DeleteActivityRequest
-
-	DeleteStateMachineRequest(*sfn.DeleteStateMachineInput) sfn.DeleteStateMachineRequest
-
-	DescribeActivityRequest(*sfn.DescribeActivityInput) sfn.DescribeActivityRequest
-
-	DescribeExecutionRequest(*sfn.DescribeExecutionInput) sfn.DescribeExecutionRequest
-
-	DescribeStateMachineRequest(*sfn.DescribeStateMachineInput) sfn.DescribeStateMachineRequest
-
-	GetActivityTaskRequest(*sfn.GetActivityTaskInput) sfn.GetActivityTaskRequest
-
-	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
-
-	GetExecutionHistoryPages(*sfn.GetExecutionHistoryInput, func(*sfn.GetExecutionHistoryOutput, bool) bool) error
-	GetExecutionHistoryPagesWithContext(aws.Context, *sfn.GetExecutionHistoryInput, func(*sfn.GetExecutionHistoryOutput, bool) bool, ...aws.Option) error
-
-	ListActivitiesRequest(*sfn.ListActivitiesInput) sfn.ListActivitiesRequest
-
-	ListActivitiesPages(*sfn.ListActivitiesInput, func(*sfn.ListActivitiesOutput, bool) bool) error
-	ListActivitiesPagesWithContext(aws.Context, *sfn.ListActivitiesInput, func(*sfn.ListActivitiesOutput, bool) bool, ...aws.Option) error
-
-	ListExecutionsRequest(*sfn.ListExecutionsInput) sfn.ListExecutionsRequest
-
-	ListExecutionsPages(*sfn.ListExecutionsInput, func(*sfn.ListExecutionsOutput, bool) bool) error
-	ListExecutionsPagesWithContext(aws.Context, *sfn.ListExecutionsInput, func(*sfn.ListExecutionsOutput, bool) bool, ...aws.Option) error
-
-	ListStateMachinesRequest(*sfn.ListStateMachinesInput) sfn.ListStateMachinesRequest
-
-	ListStateMachinesPages(*sfn.ListStateMachinesInput, func(*sfn.ListStateMachinesOutput, bool) bool) error
-	ListStateMachinesPagesWithContext(aws.Context, *sfn.ListStateMachinesInput, func(*sfn.ListStateMachinesOutput, bool) bool, ...aws.Option) error
-
-	SendTaskFailureRequest(*sfn.SendTaskFailureInput) sfn.SendTaskFailureRequest
-
-	SendTaskHeartbeatRequest(*sfn.SendTaskHeartbeatInput) sfn.SendTaskHeartbeatRequest
-
-	SendTaskSuccessRequest(*sfn.SendTaskSuccessInput) sfn.SendTaskSuccessRequest
-
-	StartExecutionRequest(*sfn.StartExecutionInput) sfn.StartExecutionRequest
-
-	StopExecutionRequest(*sfn.StopExecutionInput) sfn.StopExecutionRequest
 }
 
-var _ SFNAPI = (*sfn.SFN)(nil)
+// CreateStateMachineRequester provides the interface for the CreateStateMachineRequest API operation.
+type CreateStateMachineRequester interface {
+	CreateStateMachineRequest(*sfn.CreateStateMachineInput) sfn.CreateStateMachineRequest
+}
+
+// DeleteActivityRequester provides the interface for the DeleteActivityRequest API operation.
+type DeleteActivityRequester interface {
+	DeleteActivityRequest(*sfn.DeleteActivityInput) sfn.DeleteActivityRequest
+}
+
+// DeleteStateMachineRequester provides the interface for the DeleteStateMachineRequest API operation.
+type DeleteStateMachineRequester interface {
+	DeleteStateMachineRequest(*sfn.DeleteStateMachineInput) sfn.DeleteStateMachineRequest
+}
+
+// DescribeActivityRequester provides the interface for the DescribeActivityRequest API operation.
+type DescribeActivityRequester interface {
+	DescribeActivityRequest(*sfn.DescribeActivityInput) sfn.DescribeActivityRequest
+}
+
+// DescribeExecutionRequester provides the interface for the DescribeExecutionRequest API operation.
+type DescribeExecutionRequester interface {
+	DescribeExecutionRequest(*sfn.DescribeExecutionInput) sfn.DescribeExecutionRequest
+}
+
+// DescribeStateMachineRequester provides the interface for the DescribeStateMachineRequest API operation.
+type DescribeStateMachineRequester interface {
+	DescribeStateMachineRequest(*sfn.DescribeStateMachineInput) sfn.DescribeStateMachineRequest
+}
+
+// GetActivityTaskRequester provides the interface for the GetActivityTaskRequest API operation.
+type GetActivityTaskRequester interface {
+	GetActivityTaskRequest(*sfn.GetActivityTaskInput) sfn.GetActivityTaskRequest
+}
+
+// GetExecutionHistoryRequester provides the interface for the GetExecutionHistoryRequest API operation.
+type GetExecutionHistoryRequester interface {
+	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
+}
+
+// ListActivitiesRequester provides the interface for the ListActivitiesRequest API operation.
+type ListActivitiesRequester interface {
+	ListActivitiesRequest(*sfn.ListActivitiesInput) sfn.ListActivitiesRequest
+}
+
+// ListExecutionsRequester provides the interface for the ListExecutionsRequest API operation.
+type ListExecutionsRequester interface {
+	ListExecutionsRequest(*sfn.ListExecutionsInput) sfn.ListExecutionsRequest
+}
+
+// ListStateMachinesRequester provides the interface for the ListStateMachinesRequest API operation.
+type ListStateMachinesRequester interface {
+	ListStateMachinesRequest(*sfn.ListStateMachinesInput) sfn.ListStateMachinesRequest
+}
+
+// SendTaskFailureRequester provides the interface for the SendTaskFailureRequest API operation.
+type SendTaskFailureRequester interface {
+	SendTaskFailureRequest(*sfn.SendTaskFailureInput) sfn.SendTaskFailureRequest
+}
+
+// SendTaskHeartbeatRequester provides the interface for the SendTaskHeartbeatRequest API operation.
+type SendTaskHeartbeatRequester interface {
+	SendTaskHeartbeatRequest(*sfn.SendTaskHeartbeatInput) sfn.SendTaskHeartbeatRequest
+}
+
+// SendTaskSuccessRequester provides the interface for the SendTaskSuccessRequest API operation.
+type SendTaskSuccessRequester interface {
+	SendTaskSuccessRequest(*sfn.SendTaskSuccessInput) sfn.SendTaskSuccessRequest
+}
+
+// StartExecutionRequester provides the interface for the StartExecutionRequest API operation.
+type StartExecutionRequester interface {
+	StartExecutionRequest(*sfn.StartExecutionInput) sfn.StartExecutionRequest
+}
+
+// StopExecutionRequester provides the interface for the StopExecutionRequest API operation.
+type StopExecutionRequester interface {
+	StopExecutionRequest(*sfn.StopExecutionInput) sfn.StopExecutionRequest
+}

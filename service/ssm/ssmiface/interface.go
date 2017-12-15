@@ -13,274 +13,482 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 )
 
-// SSMAPI provides an interface to enable mocking the
-// ssm.SSM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Systems Manager (SSM).
-//    func myFunc(svc ssmiface.SSMAPI) bool {
-//        // Make svc.AddTagsToResource request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := ssm.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSSMClient struct {
-//        ssmiface.SSMAPI
-//    }
-//    func (m *mockSSMClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSSMClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SSMAPI interface {
+// AddTagsToResourceRequester provides the interface for the AddTagsToResourceRequest API operation.
+type AddTagsToResourceRequester interface {
 	AddTagsToResourceRequest(*ssm.AddTagsToResourceInput) ssm.AddTagsToResourceRequest
-
-	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
-
-	CreateActivationRequest(*ssm.CreateActivationInput) ssm.CreateActivationRequest
-
-	CreateAssociationRequest(*ssm.CreateAssociationInput) ssm.CreateAssociationRequest
-
-	CreateAssociationBatchRequest(*ssm.CreateAssociationBatchInput) ssm.CreateAssociationBatchRequest
-
-	CreateDocumentRequest(*ssm.CreateDocumentInput) ssm.CreateDocumentRequest
-
-	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
-
-	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
-
-	CreateResourceDataSyncRequest(*ssm.CreateResourceDataSyncInput) ssm.CreateResourceDataSyncRequest
-
-	DeleteActivationRequest(*ssm.DeleteActivationInput) ssm.DeleteActivationRequest
-
-	DeleteAssociationRequest(*ssm.DeleteAssociationInput) ssm.DeleteAssociationRequest
-
-	DeleteDocumentRequest(*ssm.DeleteDocumentInput) ssm.DeleteDocumentRequest
-
-	DeleteMaintenanceWindowRequest(*ssm.DeleteMaintenanceWindowInput) ssm.DeleteMaintenanceWindowRequest
-
-	DeleteParameterRequest(*ssm.DeleteParameterInput) ssm.DeleteParameterRequest
-
-	DeleteParametersRequest(*ssm.DeleteParametersInput) ssm.DeleteParametersRequest
-
-	DeletePatchBaselineRequest(*ssm.DeletePatchBaselineInput) ssm.DeletePatchBaselineRequest
-
-	DeleteResourceDataSyncRequest(*ssm.DeleteResourceDataSyncInput) ssm.DeleteResourceDataSyncRequest
-
-	DeregisterManagedInstanceRequest(*ssm.DeregisterManagedInstanceInput) ssm.DeregisterManagedInstanceRequest
-
-	DeregisterPatchBaselineForPatchGroupRequest(*ssm.DeregisterPatchBaselineForPatchGroupInput) ssm.DeregisterPatchBaselineForPatchGroupRequest
-
-	DeregisterTargetFromMaintenanceWindowRequest(*ssm.DeregisterTargetFromMaintenanceWindowInput) ssm.DeregisterTargetFromMaintenanceWindowRequest
-
-	DeregisterTaskFromMaintenanceWindowRequest(*ssm.DeregisterTaskFromMaintenanceWindowInput) ssm.DeregisterTaskFromMaintenanceWindowRequest
-
-	DescribeActivationsRequest(*ssm.DescribeActivationsInput) ssm.DescribeActivationsRequest
-
-	DescribeActivationsPages(*ssm.DescribeActivationsInput, func(*ssm.DescribeActivationsOutput, bool) bool) error
-	DescribeActivationsPagesWithContext(aws.Context, *ssm.DescribeActivationsInput, func(*ssm.DescribeActivationsOutput, bool) bool, ...aws.Option) error
-
-	DescribeAssociationRequest(*ssm.DescribeAssociationInput) ssm.DescribeAssociationRequest
-
-	DescribeAutomationExecutionsRequest(*ssm.DescribeAutomationExecutionsInput) ssm.DescribeAutomationExecutionsRequest
-
-	DescribeAvailablePatchesRequest(*ssm.DescribeAvailablePatchesInput) ssm.DescribeAvailablePatchesRequest
-
-	DescribeDocumentRequest(*ssm.DescribeDocumentInput) ssm.DescribeDocumentRequest
-
-	DescribeDocumentPermissionRequest(*ssm.DescribeDocumentPermissionInput) ssm.DescribeDocumentPermissionRequest
-
-	DescribeEffectiveInstanceAssociationsRequest(*ssm.DescribeEffectiveInstanceAssociationsInput) ssm.DescribeEffectiveInstanceAssociationsRequest
-
-	DescribeEffectivePatchesForPatchBaselineRequest(*ssm.DescribeEffectivePatchesForPatchBaselineInput) ssm.DescribeEffectivePatchesForPatchBaselineRequest
-
-	DescribeInstanceAssociationsStatusRequest(*ssm.DescribeInstanceAssociationsStatusInput) ssm.DescribeInstanceAssociationsStatusRequest
-
-	DescribeInstanceInformationRequest(*ssm.DescribeInstanceInformationInput) ssm.DescribeInstanceInformationRequest
-
-	DescribeInstanceInformationPages(*ssm.DescribeInstanceInformationInput, func(*ssm.DescribeInstanceInformationOutput, bool) bool) error
-	DescribeInstanceInformationPagesWithContext(aws.Context, *ssm.DescribeInstanceInformationInput, func(*ssm.DescribeInstanceInformationOutput, bool) bool, ...aws.Option) error
-
-	DescribeInstancePatchStatesRequest(*ssm.DescribeInstancePatchStatesInput) ssm.DescribeInstancePatchStatesRequest
-
-	DescribeInstancePatchStatesForPatchGroupRequest(*ssm.DescribeInstancePatchStatesForPatchGroupInput) ssm.DescribeInstancePatchStatesForPatchGroupRequest
-
-	DescribeInstancePatchesRequest(*ssm.DescribeInstancePatchesInput) ssm.DescribeInstancePatchesRequest
-
-	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) ssm.DescribeMaintenanceWindowExecutionTaskInvocationsRequest
-
-	DescribeMaintenanceWindowExecutionTasksRequest(*ssm.DescribeMaintenanceWindowExecutionTasksInput) ssm.DescribeMaintenanceWindowExecutionTasksRequest
-
-	DescribeMaintenanceWindowExecutionsRequest(*ssm.DescribeMaintenanceWindowExecutionsInput) ssm.DescribeMaintenanceWindowExecutionsRequest
-
-	DescribeMaintenanceWindowTargetsRequest(*ssm.DescribeMaintenanceWindowTargetsInput) ssm.DescribeMaintenanceWindowTargetsRequest
-
-	DescribeMaintenanceWindowTasksRequest(*ssm.DescribeMaintenanceWindowTasksInput) ssm.DescribeMaintenanceWindowTasksRequest
-
-	DescribeMaintenanceWindowsRequest(*ssm.DescribeMaintenanceWindowsInput) ssm.DescribeMaintenanceWindowsRequest
-
-	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
-
-	DescribeParametersPages(*ssm.DescribeParametersInput, func(*ssm.DescribeParametersOutput, bool) bool) error
-	DescribeParametersPagesWithContext(aws.Context, *ssm.DescribeParametersInput, func(*ssm.DescribeParametersOutput, bool) bool, ...aws.Option) error
-
-	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
-
-	DescribePatchGroupStateRequest(*ssm.DescribePatchGroupStateInput) ssm.DescribePatchGroupStateRequest
-
-	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
-
-	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
-
-	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
-
-	GetDefaultPatchBaselineRequest(*ssm.GetDefaultPatchBaselineInput) ssm.GetDefaultPatchBaselineRequest
-
-	GetDeployablePatchSnapshotForInstanceRequest(*ssm.GetDeployablePatchSnapshotForInstanceInput) ssm.GetDeployablePatchSnapshotForInstanceRequest
-
-	GetDocumentRequest(*ssm.GetDocumentInput) ssm.GetDocumentRequest
-
-	GetInventoryRequest(*ssm.GetInventoryInput) ssm.GetInventoryRequest
-
-	GetInventorySchemaRequest(*ssm.GetInventorySchemaInput) ssm.GetInventorySchemaRequest
-
-	GetMaintenanceWindowRequest(*ssm.GetMaintenanceWindowInput) ssm.GetMaintenanceWindowRequest
-
-	GetMaintenanceWindowExecutionRequest(*ssm.GetMaintenanceWindowExecutionInput) ssm.GetMaintenanceWindowExecutionRequest
-
-	GetMaintenanceWindowExecutionTaskRequest(*ssm.GetMaintenanceWindowExecutionTaskInput) ssm.GetMaintenanceWindowExecutionTaskRequest
-
-	GetMaintenanceWindowExecutionTaskInvocationRequest(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) ssm.GetMaintenanceWindowExecutionTaskInvocationRequest
-
-	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
-
-	GetParameterRequest(*ssm.GetParameterInput) ssm.GetParameterRequest
-
-	GetParameterHistoryRequest(*ssm.GetParameterHistoryInput) ssm.GetParameterHistoryRequest
-
-	GetParameterHistoryPages(*ssm.GetParameterHistoryInput, func(*ssm.GetParameterHistoryOutput, bool) bool) error
-	GetParameterHistoryPagesWithContext(aws.Context, *ssm.GetParameterHistoryInput, func(*ssm.GetParameterHistoryOutput, bool) bool, ...aws.Option) error
-
-	GetParametersRequest(*ssm.GetParametersInput) ssm.GetParametersRequest
-
-	GetParametersByPathRequest(*ssm.GetParametersByPathInput) ssm.GetParametersByPathRequest
-
-	GetParametersByPathPages(*ssm.GetParametersByPathInput, func(*ssm.GetParametersByPathOutput, bool) bool) error
-	GetParametersByPathPagesWithContext(aws.Context, *ssm.GetParametersByPathInput, func(*ssm.GetParametersByPathOutput, bool) bool, ...aws.Option) error
-
-	GetPatchBaselineRequest(*ssm.GetPatchBaselineInput) ssm.GetPatchBaselineRequest
-
-	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
-
-	ListAssociationVersionsRequest(*ssm.ListAssociationVersionsInput) ssm.ListAssociationVersionsRequest
-
-	ListAssociationsRequest(*ssm.ListAssociationsInput) ssm.ListAssociationsRequest
-
-	ListAssociationsPages(*ssm.ListAssociationsInput, func(*ssm.ListAssociationsOutput, bool) bool) error
-	ListAssociationsPagesWithContext(aws.Context, *ssm.ListAssociationsInput, func(*ssm.ListAssociationsOutput, bool) bool, ...aws.Option) error
-
-	ListCommandInvocationsRequest(*ssm.ListCommandInvocationsInput) ssm.ListCommandInvocationsRequest
-
-	ListCommandInvocationsPages(*ssm.ListCommandInvocationsInput, func(*ssm.ListCommandInvocationsOutput, bool) bool) error
-	ListCommandInvocationsPagesWithContext(aws.Context, *ssm.ListCommandInvocationsInput, func(*ssm.ListCommandInvocationsOutput, bool) bool, ...aws.Option) error
-
-	ListCommandsRequest(*ssm.ListCommandsInput) ssm.ListCommandsRequest
-
-	ListCommandsPages(*ssm.ListCommandsInput, func(*ssm.ListCommandsOutput, bool) bool) error
-	ListCommandsPagesWithContext(aws.Context, *ssm.ListCommandsInput, func(*ssm.ListCommandsOutput, bool) bool, ...aws.Option) error
-
-	ListComplianceItemsRequest(*ssm.ListComplianceItemsInput) ssm.ListComplianceItemsRequest
-
-	ListComplianceSummariesRequest(*ssm.ListComplianceSummariesInput) ssm.ListComplianceSummariesRequest
-
-	ListDocumentVersionsRequest(*ssm.ListDocumentVersionsInput) ssm.ListDocumentVersionsRequest
-
-	ListDocumentsRequest(*ssm.ListDocumentsInput) ssm.ListDocumentsRequest
-
-	ListDocumentsPages(*ssm.ListDocumentsInput, func(*ssm.ListDocumentsOutput, bool) bool) error
-	ListDocumentsPagesWithContext(aws.Context, *ssm.ListDocumentsInput, func(*ssm.ListDocumentsOutput, bool) bool, ...aws.Option) error
-
-	ListInventoryEntriesRequest(*ssm.ListInventoryEntriesInput) ssm.ListInventoryEntriesRequest
-
-	ListResourceComplianceSummariesRequest(*ssm.ListResourceComplianceSummariesInput) ssm.ListResourceComplianceSummariesRequest
-
-	ListResourceDataSyncRequest(*ssm.ListResourceDataSyncInput) ssm.ListResourceDataSyncRequest
-
-	ListTagsForResourceRequest(*ssm.ListTagsForResourceInput) ssm.ListTagsForResourceRequest
-
-	ModifyDocumentPermissionRequest(*ssm.ModifyDocumentPermissionInput) ssm.ModifyDocumentPermissionRequest
-
-	PutComplianceItemsRequest(*ssm.PutComplianceItemsInput) ssm.PutComplianceItemsRequest
-
-	PutInventoryRequest(*ssm.PutInventoryInput) ssm.PutInventoryRequest
-
-	PutParameterRequest(*ssm.PutParameterInput) ssm.PutParameterRequest
-
-	RegisterDefaultPatchBaselineRequest(*ssm.RegisterDefaultPatchBaselineInput) ssm.RegisterDefaultPatchBaselineRequest
-
-	RegisterPatchBaselineForPatchGroupRequest(*ssm.RegisterPatchBaselineForPatchGroupInput) ssm.RegisterPatchBaselineForPatchGroupRequest
-
-	RegisterTargetWithMaintenanceWindowRequest(*ssm.RegisterTargetWithMaintenanceWindowInput) ssm.RegisterTargetWithMaintenanceWindowRequest
-
-	RegisterTaskWithMaintenanceWindowRequest(*ssm.RegisterTaskWithMaintenanceWindowInput) ssm.RegisterTaskWithMaintenanceWindowRequest
-
-	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
-
-	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
-
-	SendCommandRequest(*ssm.SendCommandInput) ssm.SendCommandRequest
-
-	StartAutomationExecutionRequest(*ssm.StartAutomationExecutionInput) ssm.StartAutomationExecutionRequest
-
-	StopAutomationExecutionRequest(*ssm.StopAutomationExecutionInput) ssm.StopAutomationExecutionRequest
-
-	UpdateAssociationRequest(*ssm.UpdateAssociationInput) ssm.UpdateAssociationRequest
-
-	UpdateAssociationStatusRequest(*ssm.UpdateAssociationStatusInput) ssm.UpdateAssociationStatusRequest
-
-	UpdateDocumentRequest(*ssm.UpdateDocumentInput) ssm.UpdateDocumentRequest
-
-	UpdateDocumentDefaultVersionRequest(*ssm.UpdateDocumentDefaultVersionInput) ssm.UpdateDocumentDefaultVersionRequest
-
-	UpdateMaintenanceWindowRequest(*ssm.UpdateMaintenanceWindowInput) ssm.UpdateMaintenanceWindowRequest
-
-	UpdateMaintenanceWindowTargetRequest(*ssm.UpdateMaintenanceWindowTargetInput) ssm.UpdateMaintenanceWindowTargetRequest
-
-	UpdateMaintenanceWindowTaskRequest(*ssm.UpdateMaintenanceWindowTaskInput) ssm.UpdateMaintenanceWindowTaskRequest
-
-	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
-
-	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
 }
 
-var _ SSMAPI = (*ssm.SSM)(nil)
+// CancelCommandRequester provides the interface for the CancelCommandRequest API operation.
+type CancelCommandRequester interface {
+	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
+}
+
+// CreateActivationRequester provides the interface for the CreateActivationRequest API operation.
+type CreateActivationRequester interface {
+	CreateActivationRequest(*ssm.CreateActivationInput) ssm.CreateActivationRequest
+}
+
+// CreateAssociationRequester provides the interface for the CreateAssociationRequest API operation.
+type CreateAssociationRequester interface {
+	CreateAssociationRequest(*ssm.CreateAssociationInput) ssm.CreateAssociationRequest
+}
+
+// CreateAssociationBatchRequester provides the interface for the CreateAssociationBatchRequest API operation.
+type CreateAssociationBatchRequester interface {
+	CreateAssociationBatchRequest(*ssm.CreateAssociationBatchInput) ssm.CreateAssociationBatchRequest
+}
+
+// CreateDocumentRequester provides the interface for the CreateDocumentRequest API operation.
+type CreateDocumentRequester interface {
+	CreateDocumentRequest(*ssm.CreateDocumentInput) ssm.CreateDocumentRequest
+}
+
+// CreateMaintenanceWindowRequester provides the interface for the CreateMaintenanceWindowRequest API operation.
+type CreateMaintenanceWindowRequester interface {
+	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
+}
+
+// CreatePatchBaselineRequester provides the interface for the CreatePatchBaselineRequest API operation.
+type CreatePatchBaselineRequester interface {
+	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
+}
+
+// CreateResourceDataSyncRequester provides the interface for the CreateResourceDataSyncRequest API operation.
+type CreateResourceDataSyncRequester interface {
+	CreateResourceDataSyncRequest(*ssm.CreateResourceDataSyncInput) ssm.CreateResourceDataSyncRequest
+}
+
+// DeleteActivationRequester provides the interface for the DeleteActivationRequest API operation.
+type DeleteActivationRequester interface {
+	DeleteActivationRequest(*ssm.DeleteActivationInput) ssm.DeleteActivationRequest
+}
+
+// DeleteAssociationRequester provides the interface for the DeleteAssociationRequest API operation.
+type DeleteAssociationRequester interface {
+	DeleteAssociationRequest(*ssm.DeleteAssociationInput) ssm.DeleteAssociationRequest
+}
+
+// DeleteDocumentRequester provides the interface for the DeleteDocumentRequest API operation.
+type DeleteDocumentRequester interface {
+	DeleteDocumentRequest(*ssm.DeleteDocumentInput) ssm.DeleteDocumentRequest
+}
+
+// DeleteMaintenanceWindowRequester provides the interface for the DeleteMaintenanceWindowRequest API operation.
+type DeleteMaintenanceWindowRequester interface {
+	DeleteMaintenanceWindowRequest(*ssm.DeleteMaintenanceWindowInput) ssm.DeleteMaintenanceWindowRequest
+}
+
+// DeleteParameterRequester provides the interface for the DeleteParameterRequest API operation.
+type DeleteParameterRequester interface {
+	DeleteParameterRequest(*ssm.DeleteParameterInput) ssm.DeleteParameterRequest
+}
+
+// DeleteParametersRequester provides the interface for the DeleteParametersRequest API operation.
+type DeleteParametersRequester interface {
+	DeleteParametersRequest(*ssm.DeleteParametersInput) ssm.DeleteParametersRequest
+}
+
+// DeletePatchBaselineRequester provides the interface for the DeletePatchBaselineRequest API operation.
+type DeletePatchBaselineRequester interface {
+	DeletePatchBaselineRequest(*ssm.DeletePatchBaselineInput) ssm.DeletePatchBaselineRequest
+}
+
+// DeleteResourceDataSyncRequester provides the interface for the DeleteResourceDataSyncRequest API operation.
+type DeleteResourceDataSyncRequester interface {
+	DeleteResourceDataSyncRequest(*ssm.DeleteResourceDataSyncInput) ssm.DeleteResourceDataSyncRequest
+}
+
+// DeregisterManagedInstanceRequester provides the interface for the DeregisterManagedInstanceRequest API operation.
+type DeregisterManagedInstanceRequester interface {
+	DeregisterManagedInstanceRequest(*ssm.DeregisterManagedInstanceInput) ssm.DeregisterManagedInstanceRequest
+}
+
+// DeregisterPatchBaselineForPatchGroupRequester provides the interface for the DeregisterPatchBaselineForPatchGroupRequest API operation.
+type DeregisterPatchBaselineForPatchGroupRequester interface {
+	DeregisterPatchBaselineForPatchGroupRequest(*ssm.DeregisterPatchBaselineForPatchGroupInput) ssm.DeregisterPatchBaselineForPatchGroupRequest
+}
+
+// DeregisterTargetFromMaintenanceWindowRequester provides the interface for the DeregisterTargetFromMaintenanceWindowRequest API operation.
+type DeregisterTargetFromMaintenanceWindowRequester interface {
+	DeregisterTargetFromMaintenanceWindowRequest(*ssm.DeregisterTargetFromMaintenanceWindowInput) ssm.DeregisterTargetFromMaintenanceWindowRequest
+}
+
+// DeregisterTaskFromMaintenanceWindowRequester provides the interface for the DeregisterTaskFromMaintenanceWindowRequest API operation.
+type DeregisterTaskFromMaintenanceWindowRequester interface {
+	DeregisterTaskFromMaintenanceWindowRequest(*ssm.DeregisterTaskFromMaintenanceWindowInput) ssm.DeregisterTaskFromMaintenanceWindowRequest
+}
+
+// DescribeActivationsRequester provides the interface for the DescribeActivationsRequest API operation.
+type DescribeActivationsRequester interface {
+	DescribeActivationsRequest(*ssm.DescribeActivationsInput) ssm.DescribeActivationsRequest
+}
+
+// DescribeAssociationRequester provides the interface for the DescribeAssociationRequest API operation.
+type DescribeAssociationRequester interface {
+	DescribeAssociationRequest(*ssm.DescribeAssociationInput) ssm.DescribeAssociationRequest
+}
+
+// DescribeAutomationExecutionsRequester provides the interface for the DescribeAutomationExecutionsRequest API operation.
+type DescribeAutomationExecutionsRequester interface {
+	DescribeAutomationExecutionsRequest(*ssm.DescribeAutomationExecutionsInput) ssm.DescribeAutomationExecutionsRequest
+}
+
+// DescribeAvailablePatchesRequester provides the interface for the DescribeAvailablePatchesRequest API operation.
+type DescribeAvailablePatchesRequester interface {
+	DescribeAvailablePatchesRequest(*ssm.DescribeAvailablePatchesInput) ssm.DescribeAvailablePatchesRequest
+}
+
+// DescribeDocumentRequester provides the interface for the DescribeDocumentRequest API operation.
+type DescribeDocumentRequester interface {
+	DescribeDocumentRequest(*ssm.DescribeDocumentInput) ssm.DescribeDocumentRequest
+}
+
+// DescribeDocumentPermissionRequester provides the interface for the DescribeDocumentPermissionRequest API operation.
+type DescribeDocumentPermissionRequester interface {
+	DescribeDocumentPermissionRequest(*ssm.DescribeDocumentPermissionInput) ssm.DescribeDocumentPermissionRequest
+}
+
+// DescribeEffectiveInstanceAssociationsRequester provides the interface for the DescribeEffectiveInstanceAssociationsRequest API operation.
+type DescribeEffectiveInstanceAssociationsRequester interface {
+	DescribeEffectiveInstanceAssociationsRequest(*ssm.DescribeEffectiveInstanceAssociationsInput) ssm.DescribeEffectiveInstanceAssociationsRequest
+}
+
+// DescribeEffectivePatchesForPatchBaselineRequester provides the interface for the DescribeEffectivePatchesForPatchBaselineRequest API operation.
+type DescribeEffectivePatchesForPatchBaselineRequester interface {
+	DescribeEffectivePatchesForPatchBaselineRequest(*ssm.DescribeEffectivePatchesForPatchBaselineInput) ssm.DescribeEffectivePatchesForPatchBaselineRequest
+}
+
+// DescribeInstanceAssociationsStatusRequester provides the interface for the DescribeInstanceAssociationsStatusRequest API operation.
+type DescribeInstanceAssociationsStatusRequester interface {
+	DescribeInstanceAssociationsStatusRequest(*ssm.DescribeInstanceAssociationsStatusInput) ssm.DescribeInstanceAssociationsStatusRequest
+}
+
+// DescribeInstanceInformationRequester provides the interface for the DescribeInstanceInformationRequest API operation.
+type DescribeInstanceInformationRequester interface {
+	DescribeInstanceInformationRequest(*ssm.DescribeInstanceInformationInput) ssm.DescribeInstanceInformationRequest
+}
+
+// DescribeInstancePatchStatesRequester provides the interface for the DescribeInstancePatchStatesRequest API operation.
+type DescribeInstancePatchStatesRequester interface {
+	DescribeInstancePatchStatesRequest(*ssm.DescribeInstancePatchStatesInput) ssm.DescribeInstancePatchStatesRequest
+}
+
+// DescribeInstancePatchStatesForPatchGroupRequester provides the interface for the DescribeInstancePatchStatesForPatchGroupRequest API operation.
+type DescribeInstancePatchStatesForPatchGroupRequester interface {
+	DescribeInstancePatchStatesForPatchGroupRequest(*ssm.DescribeInstancePatchStatesForPatchGroupInput) ssm.DescribeInstancePatchStatesForPatchGroupRequest
+}
+
+// DescribeInstancePatchesRequester provides the interface for the DescribeInstancePatchesRequest API operation.
+type DescribeInstancePatchesRequester interface {
+	DescribeInstancePatchesRequest(*ssm.DescribeInstancePatchesInput) ssm.DescribeInstancePatchesRequest
+}
+
+// DescribeMaintenanceWindowExecutionTaskInvocationsRequester provides the interface for the DescribeMaintenanceWindowExecutionTaskInvocationsRequest API operation.
+type DescribeMaintenanceWindowExecutionTaskInvocationsRequester interface {
+	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) ssm.DescribeMaintenanceWindowExecutionTaskInvocationsRequest
+}
+
+// DescribeMaintenanceWindowExecutionTasksRequester provides the interface for the DescribeMaintenanceWindowExecutionTasksRequest API operation.
+type DescribeMaintenanceWindowExecutionTasksRequester interface {
+	DescribeMaintenanceWindowExecutionTasksRequest(*ssm.DescribeMaintenanceWindowExecutionTasksInput) ssm.DescribeMaintenanceWindowExecutionTasksRequest
+}
+
+// DescribeMaintenanceWindowExecutionsRequester provides the interface for the DescribeMaintenanceWindowExecutionsRequest API operation.
+type DescribeMaintenanceWindowExecutionsRequester interface {
+	DescribeMaintenanceWindowExecutionsRequest(*ssm.DescribeMaintenanceWindowExecutionsInput) ssm.DescribeMaintenanceWindowExecutionsRequest
+}
+
+// DescribeMaintenanceWindowTargetsRequester provides the interface for the DescribeMaintenanceWindowTargetsRequest API operation.
+type DescribeMaintenanceWindowTargetsRequester interface {
+	DescribeMaintenanceWindowTargetsRequest(*ssm.DescribeMaintenanceWindowTargetsInput) ssm.DescribeMaintenanceWindowTargetsRequest
+}
+
+// DescribeMaintenanceWindowTasksRequester provides the interface for the DescribeMaintenanceWindowTasksRequest API operation.
+type DescribeMaintenanceWindowTasksRequester interface {
+	DescribeMaintenanceWindowTasksRequest(*ssm.DescribeMaintenanceWindowTasksInput) ssm.DescribeMaintenanceWindowTasksRequest
+}
+
+// DescribeMaintenanceWindowsRequester provides the interface for the DescribeMaintenanceWindowsRequest API operation.
+type DescribeMaintenanceWindowsRequester interface {
+	DescribeMaintenanceWindowsRequest(*ssm.DescribeMaintenanceWindowsInput) ssm.DescribeMaintenanceWindowsRequest
+}
+
+// DescribeParametersRequester provides the interface for the DescribeParametersRequest API operation.
+type DescribeParametersRequester interface {
+	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
+}
+
+// DescribePatchBaselinesRequester provides the interface for the DescribePatchBaselinesRequest API operation.
+type DescribePatchBaselinesRequester interface {
+	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
+}
+
+// DescribePatchGroupStateRequester provides the interface for the DescribePatchGroupStateRequest API operation.
+type DescribePatchGroupStateRequester interface {
+	DescribePatchGroupStateRequest(*ssm.DescribePatchGroupStateInput) ssm.DescribePatchGroupStateRequest
+}
+
+// DescribePatchGroupsRequester provides the interface for the DescribePatchGroupsRequest API operation.
+type DescribePatchGroupsRequester interface {
+	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
+}
+
+// GetAutomationExecutionRequester provides the interface for the GetAutomationExecutionRequest API operation.
+type GetAutomationExecutionRequester interface {
+	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
+}
+
+// GetCommandInvocationRequester provides the interface for the GetCommandInvocationRequest API operation.
+type GetCommandInvocationRequester interface {
+	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
+}
+
+// GetDefaultPatchBaselineRequester provides the interface for the GetDefaultPatchBaselineRequest API operation.
+type GetDefaultPatchBaselineRequester interface {
+	GetDefaultPatchBaselineRequest(*ssm.GetDefaultPatchBaselineInput) ssm.GetDefaultPatchBaselineRequest
+}
+
+// GetDeployablePatchSnapshotForInstanceRequester provides the interface for the GetDeployablePatchSnapshotForInstanceRequest API operation.
+type GetDeployablePatchSnapshotForInstanceRequester interface {
+	GetDeployablePatchSnapshotForInstanceRequest(*ssm.GetDeployablePatchSnapshotForInstanceInput) ssm.GetDeployablePatchSnapshotForInstanceRequest
+}
+
+// GetDocumentRequester provides the interface for the GetDocumentRequest API operation.
+type GetDocumentRequester interface {
+	GetDocumentRequest(*ssm.GetDocumentInput) ssm.GetDocumentRequest
+}
+
+// GetInventoryRequester provides the interface for the GetInventoryRequest API operation.
+type GetInventoryRequester interface {
+	GetInventoryRequest(*ssm.GetInventoryInput) ssm.GetInventoryRequest
+}
+
+// GetInventorySchemaRequester provides the interface for the GetInventorySchemaRequest API operation.
+type GetInventorySchemaRequester interface {
+	GetInventorySchemaRequest(*ssm.GetInventorySchemaInput) ssm.GetInventorySchemaRequest
+}
+
+// GetMaintenanceWindowRequester provides the interface for the GetMaintenanceWindowRequest API operation.
+type GetMaintenanceWindowRequester interface {
+	GetMaintenanceWindowRequest(*ssm.GetMaintenanceWindowInput) ssm.GetMaintenanceWindowRequest
+}
+
+// GetMaintenanceWindowExecutionRequester provides the interface for the GetMaintenanceWindowExecutionRequest API operation.
+type GetMaintenanceWindowExecutionRequester interface {
+	GetMaintenanceWindowExecutionRequest(*ssm.GetMaintenanceWindowExecutionInput) ssm.GetMaintenanceWindowExecutionRequest
+}
+
+// GetMaintenanceWindowExecutionTaskRequester provides the interface for the GetMaintenanceWindowExecutionTaskRequest API operation.
+type GetMaintenanceWindowExecutionTaskRequester interface {
+	GetMaintenanceWindowExecutionTaskRequest(*ssm.GetMaintenanceWindowExecutionTaskInput) ssm.GetMaintenanceWindowExecutionTaskRequest
+}
+
+// GetMaintenanceWindowExecutionTaskInvocationRequester provides the interface for the GetMaintenanceWindowExecutionTaskInvocationRequest API operation.
+type GetMaintenanceWindowExecutionTaskInvocationRequester interface {
+	GetMaintenanceWindowExecutionTaskInvocationRequest(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) ssm.GetMaintenanceWindowExecutionTaskInvocationRequest
+}
+
+// GetMaintenanceWindowTaskRequester provides the interface for the GetMaintenanceWindowTaskRequest API operation.
+type GetMaintenanceWindowTaskRequester interface {
+	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
+}
+
+// GetParameterRequester provides the interface for the GetParameterRequest API operation.
+type GetParameterRequester interface {
+	GetParameterRequest(*ssm.GetParameterInput) ssm.GetParameterRequest
+}
+
+// GetParameterHistoryRequester provides the interface for the GetParameterHistoryRequest API operation.
+type GetParameterHistoryRequester interface {
+	GetParameterHistoryRequest(*ssm.GetParameterHistoryInput) ssm.GetParameterHistoryRequest
+}
+
+// GetParametersRequester provides the interface for the GetParametersRequest API operation.
+type GetParametersRequester interface {
+	GetParametersRequest(*ssm.GetParametersInput) ssm.GetParametersRequest
+}
+
+// GetParametersByPathRequester provides the interface for the GetParametersByPathRequest API operation.
+type GetParametersByPathRequester interface {
+	GetParametersByPathRequest(*ssm.GetParametersByPathInput) ssm.GetParametersByPathRequest
+}
+
+// GetPatchBaselineRequester provides the interface for the GetPatchBaselineRequest API operation.
+type GetPatchBaselineRequester interface {
+	GetPatchBaselineRequest(*ssm.GetPatchBaselineInput) ssm.GetPatchBaselineRequest
+}
+
+// GetPatchBaselineForPatchGroupRequester provides the interface for the GetPatchBaselineForPatchGroupRequest API operation.
+type GetPatchBaselineForPatchGroupRequester interface {
+	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
+}
+
+// ListAssociationVersionsRequester provides the interface for the ListAssociationVersionsRequest API operation.
+type ListAssociationVersionsRequester interface {
+	ListAssociationVersionsRequest(*ssm.ListAssociationVersionsInput) ssm.ListAssociationVersionsRequest
+}
+
+// ListAssociationsRequester provides the interface for the ListAssociationsRequest API operation.
+type ListAssociationsRequester interface {
+	ListAssociationsRequest(*ssm.ListAssociationsInput) ssm.ListAssociationsRequest
+}
+
+// ListCommandInvocationsRequester provides the interface for the ListCommandInvocationsRequest API operation.
+type ListCommandInvocationsRequester interface {
+	ListCommandInvocationsRequest(*ssm.ListCommandInvocationsInput) ssm.ListCommandInvocationsRequest
+}
+
+// ListCommandsRequester provides the interface for the ListCommandsRequest API operation.
+type ListCommandsRequester interface {
+	ListCommandsRequest(*ssm.ListCommandsInput) ssm.ListCommandsRequest
+}
+
+// ListComplianceItemsRequester provides the interface for the ListComplianceItemsRequest API operation.
+type ListComplianceItemsRequester interface {
+	ListComplianceItemsRequest(*ssm.ListComplianceItemsInput) ssm.ListComplianceItemsRequest
+}
+
+// ListComplianceSummariesRequester provides the interface for the ListComplianceSummariesRequest API operation.
+type ListComplianceSummariesRequester interface {
+	ListComplianceSummariesRequest(*ssm.ListComplianceSummariesInput) ssm.ListComplianceSummariesRequest
+}
+
+// ListDocumentVersionsRequester provides the interface for the ListDocumentVersionsRequest API operation.
+type ListDocumentVersionsRequester interface {
+	ListDocumentVersionsRequest(*ssm.ListDocumentVersionsInput) ssm.ListDocumentVersionsRequest
+}
+
+// ListDocumentsRequester provides the interface for the ListDocumentsRequest API operation.
+type ListDocumentsRequester interface {
+	ListDocumentsRequest(*ssm.ListDocumentsInput) ssm.ListDocumentsRequest
+}
+
+// ListInventoryEntriesRequester provides the interface for the ListInventoryEntriesRequest API operation.
+type ListInventoryEntriesRequester interface {
+	ListInventoryEntriesRequest(*ssm.ListInventoryEntriesInput) ssm.ListInventoryEntriesRequest
+}
+
+// ListResourceComplianceSummariesRequester provides the interface for the ListResourceComplianceSummariesRequest API operation.
+type ListResourceComplianceSummariesRequester interface {
+	ListResourceComplianceSummariesRequest(*ssm.ListResourceComplianceSummariesInput) ssm.ListResourceComplianceSummariesRequest
+}
+
+// ListResourceDataSyncRequester provides the interface for the ListResourceDataSyncRequest API operation.
+type ListResourceDataSyncRequester interface {
+	ListResourceDataSyncRequest(*ssm.ListResourceDataSyncInput) ssm.ListResourceDataSyncRequest
+}
+
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
+	ListTagsForResourceRequest(*ssm.ListTagsForResourceInput) ssm.ListTagsForResourceRequest
+}
+
+// ModifyDocumentPermissionRequester provides the interface for the ModifyDocumentPermissionRequest API operation.
+type ModifyDocumentPermissionRequester interface {
+	ModifyDocumentPermissionRequest(*ssm.ModifyDocumentPermissionInput) ssm.ModifyDocumentPermissionRequest
+}
+
+// PutComplianceItemsRequester provides the interface for the PutComplianceItemsRequest API operation.
+type PutComplianceItemsRequester interface {
+	PutComplianceItemsRequest(*ssm.PutComplianceItemsInput) ssm.PutComplianceItemsRequest
+}
+
+// PutInventoryRequester provides the interface for the PutInventoryRequest API operation.
+type PutInventoryRequester interface {
+	PutInventoryRequest(*ssm.PutInventoryInput) ssm.PutInventoryRequest
+}
+
+// PutParameterRequester provides the interface for the PutParameterRequest API operation.
+type PutParameterRequester interface {
+	PutParameterRequest(*ssm.PutParameterInput) ssm.PutParameterRequest
+}
+
+// RegisterDefaultPatchBaselineRequester provides the interface for the RegisterDefaultPatchBaselineRequest API operation.
+type RegisterDefaultPatchBaselineRequester interface {
+	RegisterDefaultPatchBaselineRequest(*ssm.RegisterDefaultPatchBaselineInput) ssm.RegisterDefaultPatchBaselineRequest
+}
+
+// RegisterPatchBaselineForPatchGroupRequester provides the interface for the RegisterPatchBaselineForPatchGroupRequest API operation.
+type RegisterPatchBaselineForPatchGroupRequester interface {
+	RegisterPatchBaselineForPatchGroupRequest(*ssm.RegisterPatchBaselineForPatchGroupInput) ssm.RegisterPatchBaselineForPatchGroupRequest
+}
+
+// RegisterTargetWithMaintenanceWindowRequester provides the interface for the RegisterTargetWithMaintenanceWindowRequest API operation.
+type RegisterTargetWithMaintenanceWindowRequester interface {
+	RegisterTargetWithMaintenanceWindowRequest(*ssm.RegisterTargetWithMaintenanceWindowInput) ssm.RegisterTargetWithMaintenanceWindowRequest
+}
+
+// RegisterTaskWithMaintenanceWindowRequester provides the interface for the RegisterTaskWithMaintenanceWindowRequest API operation.
+type RegisterTaskWithMaintenanceWindowRequester interface {
+	RegisterTaskWithMaintenanceWindowRequest(*ssm.RegisterTaskWithMaintenanceWindowInput) ssm.RegisterTaskWithMaintenanceWindowRequest
+}
+
+// RemoveTagsFromResourceRequester provides the interface for the RemoveTagsFromResourceRequest API operation.
+type RemoveTagsFromResourceRequester interface {
+	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
+}
+
+// SendAutomationSignalRequester provides the interface for the SendAutomationSignalRequest API operation.
+type SendAutomationSignalRequester interface {
+	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
+}
+
+// SendCommandRequester provides the interface for the SendCommandRequest API operation.
+type SendCommandRequester interface {
+	SendCommandRequest(*ssm.SendCommandInput) ssm.SendCommandRequest
+}
+
+// StartAutomationExecutionRequester provides the interface for the StartAutomationExecutionRequest API operation.
+type StartAutomationExecutionRequester interface {
+	StartAutomationExecutionRequest(*ssm.StartAutomationExecutionInput) ssm.StartAutomationExecutionRequest
+}
+
+// StopAutomationExecutionRequester provides the interface for the StopAutomationExecutionRequest API operation.
+type StopAutomationExecutionRequester interface {
+	StopAutomationExecutionRequest(*ssm.StopAutomationExecutionInput) ssm.StopAutomationExecutionRequest
+}
+
+// UpdateAssociationRequester provides the interface for the UpdateAssociationRequest API operation.
+type UpdateAssociationRequester interface {
+	UpdateAssociationRequest(*ssm.UpdateAssociationInput) ssm.UpdateAssociationRequest
+}
+
+// UpdateAssociationStatusRequester provides the interface for the UpdateAssociationStatusRequest API operation.
+type UpdateAssociationStatusRequester interface {
+	UpdateAssociationStatusRequest(*ssm.UpdateAssociationStatusInput) ssm.UpdateAssociationStatusRequest
+}
+
+// UpdateDocumentRequester provides the interface for the UpdateDocumentRequest API operation.
+type UpdateDocumentRequester interface {
+	UpdateDocumentRequest(*ssm.UpdateDocumentInput) ssm.UpdateDocumentRequest
+}
+
+// UpdateDocumentDefaultVersionRequester provides the interface for the UpdateDocumentDefaultVersionRequest API operation.
+type UpdateDocumentDefaultVersionRequester interface {
+	UpdateDocumentDefaultVersionRequest(*ssm.UpdateDocumentDefaultVersionInput) ssm.UpdateDocumentDefaultVersionRequest
+}
+
+// UpdateMaintenanceWindowRequester provides the interface for the UpdateMaintenanceWindowRequest API operation.
+type UpdateMaintenanceWindowRequester interface {
+	UpdateMaintenanceWindowRequest(*ssm.UpdateMaintenanceWindowInput) ssm.UpdateMaintenanceWindowRequest
+}
+
+// UpdateMaintenanceWindowTargetRequester provides the interface for the UpdateMaintenanceWindowTargetRequest API operation.
+type UpdateMaintenanceWindowTargetRequester interface {
+	UpdateMaintenanceWindowTargetRequest(*ssm.UpdateMaintenanceWindowTargetInput) ssm.UpdateMaintenanceWindowTargetRequest
+}
+
+// UpdateMaintenanceWindowTaskRequester provides the interface for the UpdateMaintenanceWindowTaskRequest API operation.
+type UpdateMaintenanceWindowTaskRequester interface {
+	UpdateMaintenanceWindowTaskRequest(*ssm.UpdateMaintenanceWindowTaskInput) ssm.UpdateMaintenanceWindowTaskRequest
+}
+
+// UpdateManagedInstanceRoleRequester provides the interface for the UpdateManagedInstanceRoleRequest API operation.
+type UpdateManagedInstanceRoleRequester interface {
+	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
+}
+
+// UpdatePatchBaselineRequester provides the interface for the UpdatePatchBaselineRequest API operation.
+type UpdatePatchBaselineRequester interface {
+	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
+}

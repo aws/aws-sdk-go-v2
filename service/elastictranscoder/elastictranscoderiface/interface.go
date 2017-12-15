@@ -13,104 +13,93 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
 )
 
-// ElasticTranscoderAPI provides an interface to enable mocking the
-// elastictranscoder.ElasticTranscoder service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Elastic Transcoder.
-//    func myFunc(svc elastictranscoderiface.ElasticTranscoderAPI) bool {
-//        // Make svc.CancelJob request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := elastictranscoder.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockElasticTranscoderClient struct {
-//        elastictranscoderiface.ElasticTranscoderAPI
-//    }
-//    func (m *mockElasticTranscoderClient) CancelJob(input *elastictranscoder.CancelJobInput) (*elastictranscoder.CancelJobOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockElasticTranscoderClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ElasticTranscoderAPI interface {
+// CancelJobRequester provides the interface for the CancelJobRequest API operation.
+type CancelJobRequester interface {
 	CancelJobRequest(*elastictranscoder.CancelJobInput) elastictranscoder.CancelJobRequest
+}
 
+// CreateJobRequester provides the interface for the CreateJobRequest API operation.
+type CreateJobRequester interface {
 	CreateJobRequest(*elastictranscoder.CreateJobInput) elastictranscoder.CreateJobRequest
+}
 
+// CreatePipelineRequester provides the interface for the CreatePipelineRequest API operation.
+type CreatePipelineRequester interface {
 	CreatePipelineRequest(*elastictranscoder.CreatePipelineInput) elastictranscoder.CreatePipelineRequest
+}
 
+// CreatePresetRequester provides the interface for the CreatePresetRequest API operation.
+type CreatePresetRequester interface {
 	CreatePresetRequest(*elastictranscoder.CreatePresetInput) elastictranscoder.CreatePresetRequest
+}
 
+// DeletePipelineRequester provides the interface for the DeletePipelineRequest API operation.
+type DeletePipelineRequester interface {
 	DeletePipelineRequest(*elastictranscoder.DeletePipelineInput) elastictranscoder.DeletePipelineRequest
+}
 
+// DeletePresetRequester provides the interface for the DeletePresetRequest API operation.
+type DeletePresetRequester interface {
 	DeletePresetRequest(*elastictranscoder.DeletePresetInput) elastictranscoder.DeletePresetRequest
+}
 
+// ListJobsByPipelineRequester provides the interface for the ListJobsByPipelineRequest API operation.
+type ListJobsByPipelineRequester interface {
 	ListJobsByPipelineRequest(*elastictranscoder.ListJobsByPipelineInput) elastictranscoder.ListJobsByPipelineRequest
+}
 
-	ListJobsByPipelinePages(*elastictranscoder.ListJobsByPipelineInput, func(*elastictranscoder.ListJobsByPipelineOutput, bool) bool) error
-	ListJobsByPipelinePagesWithContext(aws.Context, *elastictranscoder.ListJobsByPipelineInput, func(*elastictranscoder.ListJobsByPipelineOutput, bool) bool, ...aws.Option) error
-
+// ListJobsByStatusRequester provides the interface for the ListJobsByStatusRequest API operation.
+type ListJobsByStatusRequester interface {
 	ListJobsByStatusRequest(*elastictranscoder.ListJobsByStatusInput) elastictranscoder.ListJobsByStatusRequest
+}
 
-	ListJobsByStatusPages(*elastictranscoder.ListJobsByStatusInput, func(*elastictranscoder.ListJobsByStatusOutput, bool) bool) error
-	ListJobsByStatusPagesWithContext(aws.Context, *elastictranscoder.ListJobsByStatusInput, func(*elastictranscoder.ListJobsByStatusOutput, bool) bool, ...aws.Option) error
-
+// ListPipelinesRequester provides the interface for the ListPipelinesRequest API operation.
+type ListPipelinesRequester interface {
 	ListPipelinesRequest(*elastictranscoder.ListPipelinesInput) elastictranscoder.ListPipelinesRequest
+}
 
-	ListPipelinesPages(*elastictranscoder.ListPipelinesInput, func(*elastictranscoder.ListPipelinesOutput, bool) bool) error
-	ListPipelinesPagesWithContext(aws.Context, *elastictranscoder.ListPipelinesInput, func(*elastictranscoder.ListPipelinesOutput, bool) bool, ...aws.Option) error
-
+// ListPresetsRequester provides the interface for the ListPresetsRequest API operation.
+type ListPresetsRequester interface {
 	ListPresetsRequest(*elastictranscoder.ListPresetsInput) elastictranscoder.ListPresetsRequest
+}
 
-	ListPresetsPages(*elastictranscoder.ListPresetsInput, func(*elastictranscoder.ListPresetsOutput, bool) bool) error
-	ListPresetsPagesWithContext(aws.Context, *elastictranscoder.ListPresetsInput, func(*elastictranscoder.ListPresetsOutput, bool) bool, ...aws.Option) error
-
+// ReadJobRequester provides the interface for the ReadJobRequest API operation.
+type ReadJobRequester interface {
 	ReadJobRequest(*elastictranscoder.ReadJobInput) elastictranscoder.ReadJobRequest
+}
 
+// ReadPipelineRequester provides the interface for the ReadPipelineRequest API operation.
+type ReadPipelineRequester interface {
 	ReadPipelineRequest(*elastictranscoder.ReadPipelineInput) elastictranscoder.ReadPipelineRequest
+}
 
+// ReadPresetRequester provides the interface for the ReadPresetRequest API operation.
+type ReadPresetRequester interface {
 	ReadPresetRequest(*elastictranscoder.ReadPresetInput) elastictranscoder.ReadPresetRequest
+}
 
+// TestRoleRequester provides the interface for the TestRoleRequest API operation.
+type TestRoleRequester interface {
 	TestRoleRequest(*elastictranscoder.TestRoleInput) elastictranscoder.TestRoleRequest
+}
 
+// UpdatePipelineRequester provides the interface for the UpdatePipelineRequest API operation.
+type UpdatePipelineRequester interface {
 	UpdatePipelineRequest(*elastictranscoder.UpdatePipelineInput) elastictranscoder.UpdatePipelineRequest
+}
 
+// UpdatePipelineNotificationsRequester provides the interface for the UpdatePipelineNotificationsRequest API operation.
+type UpdatePipelineNotificationsRequester interface {
 	UpdatePipelineNotificationsRequest(*elastictranscoder.UpdatePipelineNotificationsInput) elastictranscoder.UpdatePipelineNotificationsRequest
+}
 
+// UpdatePipelineStatusRequester provides the interface for the UpdatePipelineStatusRequest API operation.
+type UpdatePipelineStatusRequester interface {
 	UpdatePipelineStatusRequest(*elastictranscoder.UpdatePipelineStatusInput) elastictranscoder.UpdatePipelineStatusRequest
+}
 
+// JobCompleteWaiter provides the interface for the WaitUntilJobComplete waiter.
+type JobCompleteWaiter interface {
 	WaitUntilJobComplete(*elastictranscoder.ReadJobInput) error
 	WaitUntilJobCompleteWithContext(aws.Context, *elastictranscoder.ReadJobInput, ...aws.WaiterOption) error
 }
-
-var _ ElasticTranscoderAPI = (*elastictranscoder.ElasticTranscoder)(nil)

@@ -13,142 +13,197 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/workdocs"
 )
 
-// WorkDocsAPI provides an interface to enable mocking the
-// workdocs.WorkDocs service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon WorkDocs.
-//    func myFunc(svc workdocsiface.WorkDocsAPI) bool {
-//        // Make svc.AbortDocumentVersionUpload request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := workdocs.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockWorkDocsClient struct {
-//        workdocsiface.WorkDocsAPI
-//    }
-//    func (m *mockWorkDocsClient) AbortDocumentVersionUpload(input *workdocs.AbortDocumentVersionUploadInput) (*workdocs.AbortDocumentVersionUploadOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockWorkDocsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type WorkDocsAPI interface {
+// AbortDocumentVersionUploadRequester provides the interface for the AbortDocumentVersionUploadRequest API operation.
+type AbortDocumentVersionUploadRequester interface {
 	AbortDocumentVersionUploadRequest(*workdocs.AbortDocumentVersionUploadInput) workdocs.AbortDocumentVersionUploadRequest
-
-	ActivateUserRequest(*workdocs.ActivateUserInput) workdocs.ActivateUserRequest
-
-	AddResourcePermissionsRequest(*workdocs.AddResourcePermissionsInput) workdocs.AddResourcePermissionsRequest
-
-	CreateCommentRequest(*workdocs.CreateCommentInput) workdocs.CreateCommentRequest
-
-	CreateCustomMetadataRequest(*workdocs.CreateCustomMetadataInput) workdocs.CreateCustomMetadataRequest
-
-	CreateFolderRequest(*workdocs.CreateFolderInput) workdocs.CreateFolderRequest
-
-	CreateLabelsRequest(*workdocs.CreateLabelsInput) workdocs.CreateLabelsRequest
-
-	CreateNotificationSubscriptionRequest(*workdocs.CreateNotificationSubscriptionInput) workdocs.CreateNotificationSubscriptionRequest
-
-	CreateUserRequest(*workdocs.CreateUserInput) workdocs.CreateUserRequest
-
-	DeactivateUserRequest(*workdocs.DeactivateUserInput) workdocs.DeactivateUserRequest
-
-	DeleteCommentRequest(*workdocs.DeleteCommentInput) workdocs.DeleteCommentRequest
-
-	DeleteCustomMetadataRequest(*workdocs.DeleteCustomMetadataInput) workdocs.DeleteCustomMetadataRequest
-
-	DeleteDocumentRequest(*workdocs.DeleteDocumentInput) workdocs.DeleteDocumentRequest
-
-	DeleteFolderRequest(*workdocs.DeleteFolderInput) workdocs.DeleteFolderRequest
-
-	DeleteFolderContentsRequest(*workdocs.DeleteFolderContentsInput) workdocs.DeleteFolderContentsRequest
-
-	DeleteLabelsRequest(*workdocs.DeleteLabelsInput) workdocs.DeleteLabelsRequest
-
-	DeleteNotificationSubscriptionRequest(*workdocs.DeleteNotificationSubscriptionInput) workdocs.DeleteNotificationSubscriptionRequest
-
-	DeleteUserRequest(*workdocs.DeleteUserInput) workdocs.DeleteUserRequest
-
-	DescribeActivitiesRequest(*workdocs.DescribeActivitiesInput) workdocs.DescribeActivitiesRequest
-
-	DescribeCommentsRequest(*workdocs.DescribeCommentsInput) workdocs.DescribeCommentsRequest
-
-	DescribeDocumentVersionsRequest(*workdocs.DescribeDocumentVersionsInput) workdocs.DescribeDocumentVersionsRequest
-
-	DescribeDocumentVersionsPages(*workdocs.DescribeDocumentVersionsInput, func(*workdocs.DescribeDocumentVersionsOutput, bool) bool) error
-	DescribeDocumentVersionsPagesWithContext(aws.Context, *workdocs.DescribeDocumentVersionsInput, func(*workdocs.DescribeDocumentVersionsOutput, bool) bool, ...aws.Option) error
-
-	DescribeFolderContentsRequest(*workdocs.DescribeFolderContentsInput) workdocs.DescribeFolderContentsRequest
-
-	DescribeFolderContentsPages(*workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool) error
-	DescribeFolderContentsPagesWithContext(aws.Context, *workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool, ...aws.Option) error
-
-	DescribeNotificationSubscriptionsRequest(*workdocs.DescribeNotificationSubscriptionsInput) workdocs.DescribeNotificationSubscriptionsRequest
-
-	DescribeResourcePermissionsRequest(*workdocs.DescribeResourcePermissionsInput) workdocs.DescribeResourcePermissionsRequest
-
-	DescribeRootFoldersRequest(*workdocs.DescribeRootFoldersInput) workdocs.DescribeRootFoldersRequest
-
-	DescribeUsersRequest(*workdocs.DescribeUsersInput) workdocs.DescribeUsersRequest
-
-	DescribeUsersPages(*workdocs.DescribeUsersInput, func(*workdocs.DescribeUsersOutput, bool) bool) error
-	DescribeUsersPagesWithContext(aws.Context, *workdocs.DescribeUsersInput, func(*workdocs.DescribeUsersOutput, bool) bool, ...aws.Option) error
-
-	GetCurrentUserRequest(*workdocs.GetCurrentUserInput) workdocs.GetCurrentUserRequest
-
-	GetDocumentRequest(*workdocs.GetDocumentInput) workdocs.GetDocumentRequest
-
-	GetDocumentPathRequest(*workdocs.GetDocumentPathInput) workdocs.GetDocumentPathRequest
-
-	GetDocumentVersionRequest(*workdocs.GetDocumentVersionInput) workdocs.GetDocumentVersionRequest
-
-	GetFolderRequest(*workdocs.GetFolderInput) workdocs.GetFolderRequest
-
-	GetFolderPathRequest(*workdocs.GetFolderPathInput) workdocs.GetFolderPathRequest
-
-	InitiateDocumentVersionUploadRequest(*workdocs.InitiateDocumentVersionUploadInput) workdocs.InitiateDocumentVersionUploadRequest
-
-	RemoveAllResourcePermissionsRequest(*workdocs.RemoveAllResourcePermissionsInput) workdocs.RemoveAllResourcePermissionsRequest
-
-	RemoveResourcePermissionRequest(*workdocs.RemoveResourcePermissionInput) workdocs.RemoveResourcePermissionRequest
-
-	UpdateDocumentRequest(*workdocs.UpdateDocumentInput) workdocs.UpdateDocumentRequest
-
-	UpdateDocumentVersionRequest(*workdocs.UpdateDocumentVersionInput) workdocs.UpdateDocumentVersionRequest
-
-	UpdateFolderRequest(*workdocs.UpdateFolderInput) workdocs.UpdateFolderRequest
-
-	UpdateUserRequest(*workdocs.UpdateUserInput) workdocs.UpdateUserRequest
 }
 
-var _ WorkDocsAPI = (*workdocs.WorkDocs)(nil)
+// ActivateUserRequester provides the interface for the ActivateUserRequest API operation.
+type ActivateUserRequester interface {
+	ActivateUserRequest(*workdocs.ActivateUserInput) workdocs.ActivateUserRequest
+}
+
+// AddResourcePermissionsRequester provides the interface for the AddResourcePermissionsRequest API operation.
+type AddResourcePermissionsRequester interface {
+	AddResourcePermissionsRequest(*workdocs.AddResourcePermissionsInput) workdocs.AddResourcePermissionsRequest
+}
+
+// CreateCommentRequester provides the interface for the CreateCommentRequest API operation.
+type CreateCommentRequester interface {
+	CreateCommentRequest(*workdocs.CreateCommentInput) workdocs.CreateCommentRequest
+}
+
+// CreateCustomMetadataRequester provides the interface for the CreateCustomMetadataRequest API operation.
+type CreateCustomMetadataRequester interface {
+	CreateCustomMetadataRequest(*workdocs.CreateCustomMetadataInput) workdocs.CreateCustomMetadataRequest
+}
+
+// CreateFolderRequester provides the interface for the CreateFolderRequest API operation.
+type CreateFolderRequester interface {
+	CreateFolderRequest(*workdocs.CreateFolderInput) workdocs.CreateFolderRequest
+}
+
+// CreateLabelsRequester provides the interface for the CreateLabelsRequest API operation.
+type CreateLabelsRequester interface {
+	CreateLabelsRequest(*workdocs.CreateLabelsInput) workdocs.CreateLabelsRequest
+}
+
+// CreateNotificationSubscriptionRequester provides the interface for the CreateNotificationSubscriptionRequest API operation.
+type CreateNotificationSubscriptionRequester interface {
+	CreateNotificationSubscriptionRequest(*workdocs.CreateNotificationSubscriptionInput) workdocs.CreateNotificationSubscriptionRequest
+}
+
+// CreateUserRequester provides the interface for the CreateUserRequest API operation.
+type CreateUserRequester interface {
+	CreateUserRequest(*workdocs.CreateUserInput) workdocs.CreateUserRequest
+}
+
+// DeactivateUserRequester provides the interface for the DeactivateUserRequest API operation.
+type DeactivateUserRequester interface {
+	DeactivateUserRequest(*workdocs.DeactivateUserInput) workdocs.DeactivateUserRequest
+}
+
+// DeleteCommentRequester provides the interface for the DeleteCommentRequest API operation.
+type DeleteCommentRequester interface {
+	DeleteCommentRequest(*workdocs.DeleteCommentInput) workdocs.DeleteCommentRequest
+}
+
+// DeleteCustomMetadataRequester provides the interface for the DeleteCustomMetadataRequest API operation.
+type DeleteCustomMetadataRequester interface {
+	DeleteCustomMetadataRequest(*workdocs.DeleteCustomMetadataInput) workdocs.DeleteCustomMetadataRequest
+}
+
+// DeleteDocumentRequester provides the interface for the DeleteDocumentRequest API operation.
+type DeleteDocumentRequester interface {
+	DeleteDocumentRequest(*workdocs.DeleteDocumentInput) workdocs.DeleteDocumentRequest
+}
+
+// DeleteFolderRequester provides the interface for the DeleteFolderRequest API operation.
+type DeleteFolderRequester interface {
+	DeleteFolderRequest(*workdocs.DeleteFolderInput) workdocs.DeleteFolderRequest
+}
+
+// DeleteFolderContentsRequester provides the interface for the DeleteFolderContentsRequest API operation.
+type DeleteFolderContentsRequester interface {
+	DeleteFolderContentsRequest(*workdocs.DeleteFolderContentsInput) workdocs.DeleteFolderContentsRequest
+}
+
+// DeleteLabelsRequester provides the interface for the DeleteLabelsRequest API operation.
+type DeleteLabelsRequester interface {
+	DeleteLabelsRequest(*workdocs.DeleteLabelsInput) workdocs.DeleteLabelsRequest
+}
+
+// DeleteNotificationSubscriptionRequester provides the interface for the DeleteNotificationSubscriptionRequest API operation.
+type DeleteNotificationSubscriptionRequester interface {
+	DeleteNotificationSubscriptionRequest(*workdocs.DeleteNotificationSubscriptionInput) workdocs.DeleteNotificationSubscriptionRequest
+}
+
+// DeleteUserRequester provides the interface for the DeleteUserRequest API operation.
+type DeleteUserRequester interface {
+	DeleteUserRequest(*workdocs.DeleteUserInput) workdocs.DeleteUserRequest
+}
+
+// DescribeActivitiesRequester provides the interface for the DescribeActivitiesRequest API operation.
+type DescribeActivitiesRequester interface {
+	DescribeActivitiesRequest(*workdocs.DescribeActivitiesInput) workdocs.DescribeActivitiesRequest
+}
+
+// DescribeCommentsRequester provides the interface for the DescribeCommentsRequest API operation.
+type DescribeCommentsRequester interface {
+	DescribeCommentsRequest(*workdocs.DescribeCommentsInput) workdocs.DescribeCommentsRequest
+}
+
+// DescribeDocumentVersionsRequester provides the interface for the DescribeDocumentVersionsRequest API operation.
+type DescribeDocumentVersionsRequester interface {
+	DescribeDocumentVersionsRequest(*workdocs.DescribeDocumentVersionsInput) workdocs.DescribeDocumentVersionsRequest
+}
+
+// DescribeFolderContentsRequester provides the interface for the DescribeFolderContentsRequest API operation.
+type DescribeFolderContentsRequester interface {
+	DescribeFolderContentsRequest(*workdocs.DescribeFolderContentsInput) workdocs.DescribeFolderContentsRequest
+}
+
+// DescribeNotificationSubscriptionsRequester provides the interface for the DescribeNotificationSubscriptionsRequest API operation.
+type DescribeNotificationSubscriptionsRequester interface {
+	DescribeNotificationSubscriptionsRequest(*workdocs.DescribeNotificationSubscriptionsInput) workdocs.DescribeNotificationSubscriptionsRequest
+}
+
+// DescribeResourcePermissionsRequester provides the interface for the DescribeResourcePermissionsRequest API operation.
+type DescribeResourcePermissionsRequester interface {
+	DescribeResourcePermissionsRequest(*workdocs.DescribeResourcePermissionsInput) workdocs.DescribeResourcePermissionsRequest
+}
+
+// DescribeRootFoldersRequester provides the interface for the DescribeRootFoldersRequest API operation.
+type DescribeRootFoldersRequester interface {
+	DescribeRootFoldersRequest(*workdocs.DescribeRootFoldersInput) workdocs.DescribeRootFoldersRequest
+}
+
+// DescribeUsersRequester provides the interface for the DescribeUsersRequest API operation.
+type DescribeUsersRequester interface {
+	DescribeUsersRequest(*workdocs.DescribeUsersInput) workdocs.DescribeUsersRequest
+}
+
+// GetCurrentUserRequester provides the interface for the GetCurrentUserRequest API operation.
+type GetCurrentUserRequester interface {
+	GetCurrentUserRequest(*workdocs.GetCurrentUserInput) workdocs.GetCurrentUserRequest
+}
+
+// GetDocumentRequester provides the interface for the GetDocumentRequest API operation.
+type GetDocumentRequester interface {
+	GetDocumentRequest(*workdocs.GetDocumentInput) workdocs.GetDocumentRequest
+}
+
+// GetDocumentPathRequester provides the interface for the GetDocumentPathRequest API operation.
+type GetDocumentPathRequester interface {
+	GetDocumentPathRequest(*workdocs.GetDocumentPathInput) workdocs.GetDocumentPathRequest
+}
+
+// GetDocumentVersionRequester provides the interface for the GetDocumentVersionRequest API operation.
+type GetDocumentVersionRequester interface {
+	GetDocumentVersionRequest(*workdocs.GetDocumentVersionInput) workdocs.GetDocumentVersionRequest
+}
+
+// GetFolderRequester provides the interface for the GetFolderRequest API operation.
+type GetFolderRequester interface {
+	GetFolderRequest(*workdocs.GetFolderInput) workdocs.GetFolderRequest
+}
+
+// GetFolderPathRequester provides the interface for the GetFolderPathRequest API operation.
+type GetFolderPathRequester interface {
+	GetFolderPathRequest(*workdocs.GetFolderPathInput) workdocs.GetFolderPathRequest
+}
+
+// InitiateDocumentVersionUploadRequester provides the interface for the InitiateDocumentVersionUploadRequest API operation.
+type InitiateDocumentVersionUploadRequester interface {
+	InitiateDocumentVersionUploadRequest(*workdocs.InitiateDocumentVersionUploadInput) workdocs.InitiateDocumentVersionUploadRequest
+}
+
+// RemoveAllResourcePermissionsRequester provides the interface for the RemoveAllResourcePermissionsRequest API operation.
+type RemoveAllResourcePermissionsRequester interface {
+	RemoveAllResourcePermissionsRequest(*workdocs.RemoveAllResourcePermissionsInput) workdocs.RemoveAllResourcePermissionsRequest
+}
+
+// RemoveResourcePermissionRequester provides the interface for the RemoveResourcePermissionRequest API operation.
+type RemoveResourcePermissionRequester interface {
+	RemoveResourcePermissionRequest(*workdocs.RemoveResourcePermissionInput) workdocs.RemoveResourcePermissionRequest
+}
+
+// UpdateDocumentRequester provides the interface for the UpdateDocumentRequest API operation.
+type UpdateDocumentRequester interface {
+	UpdateDocumentRequest(*workdocs.UpdateDocumentInput) workdocs.UpdateDocumentRequest
+}
+
+// UpdateDocumentVersionRequester provides the interface for the UpdateDocumentVersionRequest API operation.
+type UpdateDocumentVersionRequester interface {
+	UpdateDocumentVersionRequest(*workdocs.UpdateDocumentVersionInput) workdocs.UpdateDocumentVersionRequest
+}
+
+// UpdateFolderRequester provides the interface for the UpdateFolderRequest API operation.
+type UpdateFolderRequester interface {
+	UpdateFolderRequest(*workdocs.UpdateFolderInput) workdocs.UpdateFolderRequest
+}
+
+// UpdateUserRequester provides the interface for the UpdateUserRequest API operation.
+type UpdateUserRequester interface {
+	UpdateUserRequest(*workdocs.UpdateUserInput) workdocs.UpdateUserRequest
+}

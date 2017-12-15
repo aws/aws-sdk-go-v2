@@ -12,85 +12,77 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents"
 )
 
-// CloudWatchEventsAPI provides an interface to enable mocking the
-// cloudwatchevents.CloudWatchEvents service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudWatch Events.
-//    func myFunc(svc cloudwatcheventsiface.CloudWatchEventsAPI) bool {
-//        // Make svc.DeleteRule request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudwatchevents.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudWatchEventsClient struct {
-//        cloudwatcheventsiface.CloudWatchEventsAPI
-//    }
-//    func (m *mockCloudWatchEventsClient) DeleteRule(input *cloudwatchevents.DeleteRuleInput) (*cloudwatchevents.DeleteRuleOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudWatchEventsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudWatchEventsAPI interface {
+// DeleteRuleRequester provides the interface for the DeleteRuleRequest API operation.
+type DeleteRuleRequester interface {
 	DeleteRuleRequest(*cloudwatchevents.DeleteRuleInput) cloudwatchevents.DeleteRuleRequest
-
-	DescribeEventBusRequest(*cloudwatchevents.DescribeEventBusInput) cloudwatchevents.DescribeEventBusRequest
-
-	DescribeRuleRequest(*cloudwatchevents.DescribeRuleInput) cloudwatchevents.DescribeRuleRequest
-
-	DisableRuleRequest(*cloudwatchevents.DisableRuleInput) cloudwatchevents.DisableRuleRequest
-
-	EnableRuleRequest(*cloudwatchevents.EnableRuleInput) cloudwatchevents.EnableRuleRequest
-
-	ListRuleNamesByTargetRequest(*cloudwatchevents.ListRuleNamesByTargetInput) cloudwatchevents.ListRuleNamesByTargetRequest
-
-	ListRulesRequest(*cloudwatchevents.ListRulesInput) cloudwatchevents.ListRulesRequest
-
-	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
-
-	PutEventsRequest(*cloudwatchevents.PutEventsInput) cloudwatchevents.PutEventsRequest
-
-	PutPermissionRequest(*cloudwatchevents.PutPermissionInput) cloudwatchevents.PutPermissionRequest
-
-	PutRuleRequest(*cloudwatchevents.PutRuleInput) cloudwatchevents.PutRuleRequest
-
-	PutTargetsRequest(*cloudwatchevents.PutTargetsInput) cloudwatchevents.PutTargetsRequest
-
-	RemovePermissionRequest(*cloudwatchevents.RemovePermissionInput) cloudwatchevents.RemovePermissionRequest
-
-	RemoveTargetsRequest(*cloudwatchevents.RemoveTargetsInput) cloudwatchevents.RemoveTargetsRequest
-
-	TestEventPatternRequest(*cloudwatchevents.TestEventPatternInput) cloudwatchevents.TestEventPatternRequest
 }
 
-var _ CloudWatchEventsAPI = (*cloudwatchevents.CloudWatchEvents)(nil)
+// DescribeEventBusRequester provides the interface for the DescribeEventBusRequest API operation.
+type DescribeEventBusRequester interface {
+	DescribeEventBusRequest(*cloudwatchevents.DescribeEventBusInput) cloudwatchevents.DescribeEventBusRequest
+}
+
+// DescribeRuleRequester provides the interface for the DescribeRuleRequest API operation.
+type DescribeRuleRequester interface {
+	DescribeRuleRequest(*cloudwatchevents.DescribeRuleInput) cloudwatchevents.DescribeRuleRequest
+}
+
+// DisableRuleRequester provides the interface for the DisableRuleRequest API operation.
+type DisableRuleRequester interface {
+	DisableRuleRequest(*cloudwatchevents.DisableRuleInput) cloudwatchevents.DisableRuleRequest
+}
+
+// EnableRuleRequester provides the interface for the EnableRuleRequest API operation.
+type EnableRuleRequester interface {
+	EnableRuleRequest(*cloudwatchevents.EnableRuleInput) cloudwatchevents.EnableRuleRequest
+}
+
+// ListRuleNamesByTargetRequester provides the interface for the ListRuleNamesByTargetRequest API operation.
+type ListRuleNamesByTargetRequester interface {
+	ListRuleNamesByTargetRequest(*cloudwatchevents.ListRuleNamesByTargetInput) cloudwatchevents.ListRuleNamesByTargetRequest
+}
+
+// ListRulesRequester provides the interface for the ListRulesRequest API operation.
+type ListRulesRequester interface {
+	ListRulesRequest(*cloudwatchevents.ListRulesInput) cloudwatchevents.ListRulesRequest
+}
+
+// ListTargetsByRuleRequester provides the interface for the ListTargetsByRuleRequest API operation.
+type ListTargetsByRuleRequester interface {
+	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
+}
+
+// PutEventsRequester provides the interface for the PutEventsRequest API operation.
+type PutEventsRequester interface {
+	PutEventsRequest(*cloudwatchevents.PutEventsInput) cloudwatchevents.PutEventsRequest
+}
+
+// PutPermissionRequester provides the interface for the PutPermissionRequest API operation.
+type PutPermissionRequester interface {
+	PutPermissionRequest(*cloudwatchevents.PutPermissionInput) cloudwatchevents.PutPermissionRequest
+}
+
+// PutRuleRequester provides the interface for the PutRuleRequest API operation.
+type PutRuleRequester interface {
+	PutRuleRequest(*cloudwatchevents.PutRuleInput) cloudwatchevents.PutRuleRequest
+}
+
+// PutTargetsRequester provides the interface for the PutTargetsRequest API operation.
+type PutTargetsRequester interface {
+	PutTargetsRequest(*cloudwatchevents.PutTargetsInput) cloudwatchevents.PutTargetsRequest
+}
+
+// RemovePermissionRequester provides the interface for the RemovePermissionRequest API operation.
+type RemovePermissionRequester interface {
+	RemovePermissionRequest(*cloudwatchevents.RemovePermissionInput) cloudwatchevents.RemovePermissionRequest
+}
+
+// RemoveTargetsRequester provides the interface for the RemoveTargetsRequest API operation.
+type RemoveTargetsRequester interface {
+	RemoveTargetsRequest(*cloudwatchevents.RemoveTargetsInput) cloudwatchevents.RemoveTargetsRequest
+}
+
+// TestEventPatternRequester provides the interface for the TestEventPatternRequest API operation.
+type TestEventPatternRequester interface {
+	TestEventPatternRequest(*cloudwatchevents.TestEventPatternInput) cloudwatchevents.TestEventPatternRequest
+}

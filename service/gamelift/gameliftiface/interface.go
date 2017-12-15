@@ -12,183 +12,322 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
 )
 
-// GameLiftAPI provides an interface to enable mocking the
-// gamelift.GameLift service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon GameLift.
-//    func myFunc(svc gameliftiface.GameLiftAPI) bool {
-//        // Make svc.AcceptMatch request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := gamelift.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGameLiftClient struct {
-//        gameliftiface.GameLiftAPI
-//    }
-//    func (m *mockGameLiftClient) AcceptMatch(input *gamelift.AcceptMatchInput) (*gamelift.AcceptMatchOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockGameLiftClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type GameLiftAPI interface {
+// AcceptMatchRequester provides the interface for the AcceptMatchRequest API operation.
+type AcceptMatchRequester interface {
 	AcceptMatchRequest(*gamelift.AcceptMatchInput) gamelift.AcceptMatchRequest
-
-	CreateAliasRequest(*gamelift.CreateAliasInput) gamelift.CreateAliasRequest
-
-	CreateBuildRequest(*gamelift.CreateBuildInput) gamelift.CreateBuildRequest
-
-	CreateFleetRequest(*gamelift.CreateFleetInput) gamelift.CreateFleetRequest
-
-	CreateGameSessionRequest(*gamelift.CreateGameSessionInput) gamelift.CreateGameSessionRequest
-
-	CreateGameSessionQueueRequest(*gamelift.CreateGameSessionQueueInput) gamelift.CreateGameSessionQueueRequest
-
-	CreateMatchmakingConfigurationRequest(*gamelift.CreateMatchmakingConfigurationInput) gamelift.CreateMatchmakingConfigurationRequest
-
-	CreateMatchmakingRuleSetRequest(*gamelift.CreateMatchmakingRuleSetInput) gamelift.CreateMatchmakingRuleSetRequest
-
-	CreatePlayerSessionRequest(*gamelift.CreatePlayerSessionInput) gamelift.CreatePlayerSessionRequest
-
-	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
-
-	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
-
-	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
-
-	DeleteAliasRequest(*gamelift.DeleteAliasInput) gamelift.DeleteAliasRequest
-
-	DeleteBuildRequest(*gamelift.DeleteBuildInput) gamelift.DeleteBuildRequest
-
-	DeleteFleetRequest(*gamelift.DeleteFleetInput) gamelift.DeleteFleetRequest
-
-	DeleteGameSessionQueueRequest(*gamelift.DeleteGameSessionQueueInput) gamelift.DeleteGameSessionQueueRequest
-
-	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
-
-	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
-
-	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
-
-	DeleteVpcPeeringConnectionRequest(*gamelift.DeleteVpcPeeringConnectionInput) gamelift.DeleteVpcPeeringConnectionRequest
-
-	DescribeAliasRequest(*gamelift.DescribeAliasInput) gamelift.DescribeAliasRequest
-
-	DescribeBuildRequest(*gamelift.DescribeBuildInput) gamelift.DescribeBuildRequest
-
-	DescribeEC2InstanceLimitsRequest(*gamelift.DescribeEC2InstanceLimitsInput) gamelift.DescribeEC2InstanceLimitsRequest
-
-	DescribeFleetAttributesRequest(*gamelift.DescribeFleetAttributesInput) gamelift.DescribeFleetAttributesRequest
-
-	DescribeFleetCapacityRequest(*gamelift.DescribeFleetCapacityInput) gamelift.DescribeFleetCapacityRequest
-
-	DescribeFleetEventsRequest(*gamelift.DescribeFleetEventsInput) gamelift.DescribeFleetEventsRequest
-
-	DescribeFleetPortSettingsRequest(*gamelift.DescribeFleetPortSettingsInput) gamelift.DescribeFleetPortSettingsRequest
-
-	DescribeFleetUtilizationRequest(*gamelift.DescribeFleetUtilizationInput) gamelift.DescribeFleetUtilizationRequest
-
-	DescribeGameSessionDetailsRequest(*gamelift.DescribeGameSessionDetailsInput) gamelift.DescribeGameSessionDetailsRequest
-
-	DescribeGameSessionPlacementRequest(*gamelift.DescribeGameSessionPlacementInput) gamelift.DescribeGameSessionPlacementRequest
-
-	DescribeGameSessionQueuesRequest(*gamelift.DescribeGameSessionQueuesInput) gamelift.DescribeGameSessionQueuesRequest
-
-	DescribeGameSessionsRequest(*gamelift.DescribeGameSessionsInput) gamelift.DescribeGameSessionsRequest
-
-	DescribeInstancesRequest(*gamelift.DescribeInstancesInput) gamelift.DescribeInstancesRequest
-
-	DescribeMatchmakingRequest(*gamelift.DescribeMatchmakingInput) gamelift.DescribeMatchmakingRequest
-
-	DescribeMatchmakingConfigurationsRequest(*gamelift.DescribeMatchmakingConfigurationsInput) gamelift.DescribeMatchmakingConfigurationsRequest
-
-	DescribeMatchmakingRuleSetsRequest(*gamelift.DescribeMatchmakingRuleSetsInput) gamelift.DescribeMatchmakingRuleSetsRequest
-
-	DescribePlayerSessionsRequest(*gamelift.DescribePlayerSessionsInput) gamelift.DescribePlayerSessionsRequest
-
-	DescribeRuntimeConfigurationRequest(*gamelift.DescribeRuntimeConfigurationInput) gamelift.DescribeRuntimeConfigurationRequest
-
-	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
-
-	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
-
-	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
-
-	GetGameSessionLogUrlRequest(*gamelift.GetGameSessionLogUrlInput) gamelift.GetGameSessionLogUrlRequest
-
-	GetInstanceAccessRequest(*gamelift.GetInstanceAccessInput) gamelift.GetInstanceAccessRequest
-
-	ListAliasesRequest(*gamelift.ListAliasesInput) gamelift.ListAliasesRequest
-
-	ListBuildsRequest(*gamelift.ListBuildsInput) gamelift.ListBuildsRequest
-
-	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
-
-	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
-
-	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
-
-	ResolveAliasRequest(*gamelift.ResolveAliasInput) gamelift.ResolveAliasRequest
-
-	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
-
-	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
-
-	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) gamelift.StartMatchmakingRequest
-
-	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
-
-	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) gamelift.StopMatchmakingRequest
-
-	UpdateAliasRequest(*gamelift.UpdateAliasInput) gamelift.UpdateAliasRequest
-
-	UpdateBuildRequest(*gamelift.UpdateBuildInput) gamelift.UpdateBuildRequest
-
-	UpdateFleetAttributesRequest(*gamelift.UpdateFleetAttributesInput) gamelift.UpdateFleetAttributesRequest
-
-	UpdateFleetCapacityRequest(*gamelift.UpdateFleetCapacityInput) gamelift.UpdateFleetCapacityRequest
-
-	UpdateFleetPortSettingsRequest(*gamelift.UpdateFleetPortSettingsInput) gamelift.UpdateFleetPortSettingsRequest
-
-	UpdateGameSessionRequest(*gamelift.UpdateGameSessionInput) gamelift.UpdateGameSessionRequest
-
-	UpdateGameSessionQueueRequest(*gamelift.UpdateGameSessionQueueInput) gamelift.UpdateGameSessionQueueRequest
-
-	UpdateMatchmakingConfigurationRequest(*gamelift.UpdateMatchmakingConfigurationInput) gamelift.UpdateMatchmakingConfigurationRequest
-
-	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
-
-	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
 }
 
-var _ GameLiftAPI = (*gamelift.GameLift)(nil)
+// CreateAliasRequester provides the interface for the CreateAliasRequest API operation.
+type CreateAliasRequester interface {
+	CreateAliasRequest(*gamelift.CreateAliasInput) gamelift.CreateAliasRequest
+}
+
+// CreateBuildRequester provides the interface for the CreateBuildRequest API operation.
+type CreateBuildRequester interface {
+	CreateBuildRequest(*gamelift.CreateBuildInput) gamelift.CreateBuildRequest
+}
+
+// CreateFleetRequester provides the interface for the CreateFleetRequest API operation.
+type CreateFleetRequester interface {
+	CreateFleetRequest(*gamelift.CreateFleetInput) gamelift.CreateFleetRequest
+}
+
+// CreateGameSessionRequester provides the interface for the CreateGameSessionRequest API operation.
+type CreateGameSessionRequester interface {
+	CreateGameSessionRequest(*gamelift.CreateGameSessionInput) gamelift.CreateGameSessionRequest
+}
+
+// CreateGameSessionQueueRequester provides the interface for the CreateGameSessionQueueRequest API operation.
+type CreateGameSessionQueueRequester interface {
+	CreateGameSessionQueueRequest(*gamelift.CreateGameSessionQueueInput) gamelift.CreateGameSessionQueueRequest
+}
+
+// CreateMatchmakingConfigurationRequester provides the interface for the CreateMatchmakingConfigurationRequest API operation.
+type CreateMatchmakingConfigurationRequester interface {
+	CreateMatchmakingConfigurationRequest(*gamelift.CreateMatchmakingConfigurationInput) gamelift.CreateMatchmakingConfigurationRequest
+}
+
+// CreateMatchmakingRuleSetRequester provides the interface for the CreateMatchmakingRuleSetRequest API operation.
+type CreateMatchmakingRuleSetRequester interface {
+	CreateMatchmakingRuleSetRequest(*gamelift.CreateMatchmakingRuleSetInput) gamelift.CreateMatchmakingRuleSetRequest
+}
+
+// CreatePlayerSessionRequester provides the interface for the CreatePlayerSessionRequest API operation.
+type CreatePlayerSessionRequester interface {
+	CreatePlayerSessionRequest(*gamelift.CreatePlayerSessionInput) gamelift.CreatePlayerSessionRequest
+}
+
+// CreatePlayerSessionsRequester provides the interface for the CreatePlayerSessionsRequest API operation.
+type CreatePlayerSessionsRequester interface {
+	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
+}
+
+// CreateVpcPeeringAuthorizationRequester provides the interface for the CreateVpcPeeringAuthorizationRequest API operation.
+type CreateVpcPeeringAuthorizationRequester interface {
+	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
+}
+
+// CreateVpcPeeringConnectionRequester provides the interface for the CreateVpcPeeringConnectionRequest API operation.
+type CreateVpcPeeringConnectionRequester interface {
+	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
+}
+
+// DeleteAliasRequester provides the interface for the DeleteAliasRequest API operation.
+type DeleteAliasRequester interface {
+	DeleteAliasRequest(*gamelift.DeleteAliasInput) gamelift.DeleteAliasRequest
+}
+
+// DeleteBuildRequester provides the interface for the DeleteBuildRequest API operation.
+type DeleteBuildRequester interface {
+	DeleteBuildRequest(*gamelift.DeleteBuildInput) gamelift.DeleteBuildRequest
+}
+
+// DeleteFleetRequester provides the interface for the DeleteFleetRequest API operation.
+type DeleteFleetRequester interface {
+	DeleteFleetRequest(*gamelift.DeleteFleetInput) gamelift.DeleteFleetRequest
+}
+
+// DeleteGameSessionQueueRequester provides the interface for the DeleteGameSessionQueueRequest API operation.
+type DeleteGameSessionQueueRequester interface {
+	DeleteGameSessionQueueRequest(*gamelift.DeleteGameSessionQueueInput) gamelift.DeleteGameSessionQueueRequest
+}
+
+// DeleteMatchmakingConfigurationRequester provides the interface for the DeleteMatchmakingConfigurationRequest API operation.
+type DeleteMatchmakingConfigurationRequester interface {
+	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
+}
+
+// DeleteScalingPolicyRequester provides the interface for the DeleteScalingPolicyRequest API operation.
+type DeleteScalingPolicyRequester interface {
+	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
+}
+
+// DeleteVpcPeeringAuthorizationRequester provides the interface for the DeleteVpcPeeringAuthorizationRequest API operation.
+type DeleteVpcPeeringAuthorizationRequester interface {
+	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
+}
+
+// DeleteVpcPeeringConnectionRequester provides the interface for the DeleteVpcPeeringConnectionRequest API operation.
+type DeleteVpcPeeringConnectionRequester interface {
+	DeleteVpcPeeringConnectionRequest(*gamelift.DeleteVpcPeeringConnectionInput) gamelift.DeleteVpcPeeringConnectionRequest
+}
+
+// DescribeAliasRequester provides the interface for the DescribeAliasRequest API operation.
+type DescribeAliasRequester interface {
+	DescribeAliasRequest(*gamelift.DescribeAliasInput) gamelift.DescribeAliasRequest
+}
+
+// DescribeBuildRequester provides the interface for the DescribeBuildRequest API operation.
+type DescribeBuildRequester interface {
+	DescribeBuildRequest(*gamelift.DescribeBuildInput) gamelift.DescribeBuildRequest
+}
+
+// DescribeEC2InstanceLimitsRequester provides the interface for the DescribeEC2InstanceLimitsRequest API operation.
+type DescribeEC2InstanceLimitsRequester interface {
+	DescribeEC2InstanceLimitsRequest(*gamelift.DescribeEC2InstanceLimitsInput) gamelift.DescribeEC2InstanceLimitsRequest
+}
+
+// DescribeFleetAttributesRequester provides the interface for the DescribeFleetAttributesRequest API operation.
+type DescribeFleetAttributesRequester interface {
+	DescribeFleetAttributesRequest(*gamelift.DescribeFleetAttributesInput) gamelift.DescribeFleetAttributesRequest
+}
+
+// DescribeFleetCapacityRequester provides the interface for the DescribeFleetCapacityRequest API operation.
+type DescribeFleetCapacityRequester interface {
+	DescribeFleetCapacityRequest(*gamelift.DescribeFleetCapacityInput) gamelift.DescribeFleetCapacityRequest
+}
+
+// DescribeFleetEventsRequester provides the interface for the DescribeFleetEventsRequest API operation.
+type DescribeFleetEventsRequester interface {
+	DescribeFleetEventsRequest(*gamelift.DescribeFleetEventsInput) gamelift.DescribeFleetEventsRequest
+}
+
+// DescribeFleetPortSettingsRequester provides the interface for the DescribeFleetPortSettingsRequest API operation.
+type DescribeFleetPortSettingsRequester interface {
+	DescribeFleetPortSettingsRequest(*gamelift.DescribeFleetPortSettingsInput) gamelift.DescribeFleetPortSettingsRequest
+}
+
+// DescribeFleetUtilizationRequester provides the interface for the DescribeFleetUtilizationRequest API operation.
+type DescribeFleetUtilizationRequester interface {
+	DescribeFleetUtilizationRequest(*gamelift.DescribeFleetUtilizationInput) gamelift.DescribeFleetUtilizationRequest
+}
+
+// DescribeGameSessionDetailsRequester provides the interface for the DescribeGameSessionDetailsRequest API operation.
+type DescribeGameSessionDetailsRequester interface {
+	DescribeGameSessionDetailsRequest(*gamelift.DescribeGameSessionDetailsInput) gamelift.DescribeGameSessionDetailsRequest
+}
+
+// DescribeGameSessionPlacementRequester provides the interface for the DescribeGameSessionPlacementRequest API operation.
+type DescribeGameSessionPlacementRequester interface {
+	DescribeGameSessionPlacementRequest(*gamelift.DescribeGameSessionPlacementInput) gamelift.DescribeGameSessionPlacementRequest
+}
+
+// DescribeGameSessionQueuesRequester provides the interface for the DescribeGameSessionQueuesRequest API operation.
+type DescribeGameSessionQueuesRequester interface {
+	DescribeGameSessionQueuesRequest(*gamelift.DescribeGameSessionQueuesInput) gamelift.DescribeGameSessionQueuesRequest
+}
+
+// DescribeGameSessionsRequester provides the interface for the DescribeGameSessionsRequest API operation.
+type DescribeGameSessionsRequester interface {
+	DescribeGameSessionsRequest(*gamelift.DescribeGameSessionsInput) gamelift.DescribeGameSessionsRequest
+}
+
+// DescribeInstancesRequester provides the interface for the DescribeInstancesRequest API operation.
+type DescribeInstancesRequester interface {
+	DescribeInstancesRequest(*gamelift.DescribeInstancesInput) gamelift.DescribeInstancesRequest
+}
+
+// DescribeMatchmakingRequester provides the interface for the DescribeMatchmakingRequest API operation.
+type DescribeMatchmakingRequester interface {
+	DescribeMatchmakingRequest(*gamelift.DescribeMatchmakingInput) gamelift.DescribeMatchmakingRequest
+}
+
+// DescribeMatchmakingConfigurationsRequester provides the interface for the DescribeMatchmakingConfigurationsRequest API operation.
+type DescribeMatchmakingConfigurationsRequester interface {
+	DescribeMatchmakingConfigurationsRequest(*gamelift.DescribeMatchmakingConfigurationsInput) gamelift.DescribeMatchmakingConfigurationsRequest
+}
+
+// DescribeMatchmakingRuleSetsRequester provides the interface for the DescribeMatchmakingRuleSetsRequest API operation.
+type DescribeMatchmakingRuleSetsRequester interface {
+	DescribeMatchmakingRuleSetsRequest(*gamelift.DescribeMatchmakingRuleSetsInput) gamelift.DescribeMatchmakingRuleSetsRequest
+}
+
+// DescribePlayerSessionsRequester provides the interface for the DescribePlayerSessionsRequest API operation.
+type DescribePlayerSessionsRequester interface {
+	DescribePlayerSessionsRequest(*gamelift.DescribePlayerSessionsInput) gamelift.DescribePlayerSessionsRequest
+}
+
+// DescribeRuntimeConfigurationRequester provides the interface for the DescribeRuntimeConfigurationRequest API operation.
+type DescribeRuntimeConfigurationRequester interface {
+	DescribeRuntimeConfigurationRequest(*gamelift.DescribeRuntimeConfigurationInput) gamelift.DescribeRuntimeConfigurationRequest
+}
+
+// DescribeScalingPoliciesRequester provides the interface for the DescribeScalingPoliciesRequest API operation.
+type DescribeScalingPoliciesRequester interface {
+	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
+}
+
+// DescribeVpcPeeringAuthorizationsRequester provides the interface for the DescribeVpcPeeringAuthorizationsRequest API operation.
+type DescribeVpcPeeringAuthorizationsRequester interface {
+	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
+}
+
+// DescribeVpcPeeringConnectionsRequester provides the interface for the DescribeVpcPeeringConnectionsRequest API operation.
+type DescribeVpcPeeringConnectionsRequester interface {
+	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
+}
+
+// GetGameSessionLogUrlRequester provides the interface for the GetGameSessionLogUrlRequest API operation.
+type GetGameSessionLogUrlRequester interface {
+	GetGameSessionLogUrlRequest(*gamelift.GetGameSessionLogUrlInput) gamelift.GetGameSessionLogUrlRequest
+}
+
+// GetInstanceAccessRequester provides the interface for the GetInstanceAccessRequest API operation.
+type GetInstanceAccessRequester interface {
+	GetInstanceAccessRequest(*gamelift.GetInstanceAccessInput) gamelift.GetInstanceAccessRequest
+}
+
+// ListAliasesRequester provides the interface for the ListAliasesRequest API operation.
+type ListAliasesRequester interface {
+	ListAliasesRequest(*gamelift.ListAliasesInput) gamelift.ListAliasesRequest
+}
+
+// ListBuildsRequester provides the interface for the ListBuildsRequest API operation.
+type ListBuildsRequester interface {
+	ListBuildsRequest(*gamelift.ListBuildsInput) gamelift.ListBuildsRequest
+}
+
+// ListFleetsRequester provides the interface for the ListFleetsRequest API operation.
+type ListFleetsRequester interface {
+	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
+}
+
+// PutScalingPolicyRequester provides the interface for the PutScalingPolicyRequest API operation.
+type PutScalingPolicyRequester interface {
+	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
+}
+
+// RequestUploadCredentialsRequester provides the interface for the RequestUploadCredentialsRequest API operation.
+type RequestUploadCredentialsRequester interface {
+	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
+}
+
+// ResolveAliasRequester provides the interface for the ResolveAliasRequest API operation.
+type ResolveAliasRequester interface {
+	ResolveAliasRequest(*gamelift.ResolveAliasInput) gamelift.ResolveAliasRequest
+}
+
+// SearchGameSessionsRequester provides the interface for the SearchGameSessionsRequest API operation.
+type SearchGameSessionsRequester interface {
+	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
+}
+
+// StartGameSessionPlacementRequester provides the interface for the StartGameSessionPlacementRequest API operation.
+type StartGameSessionPlacementRequester interface {
+	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
+}
+
+// StartMatchmakingRequester provides the interface for the StartMatchmakingRequest API operation.
+type StartMatchmakingRequester interface {
+	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) gamelift.StartMatchmakingRequest
+}
+
+// StopGameSessionPlacementRequester provides the interface for the StopGameSessionPlacementRequest API operation.
+type StopGameSessionPlacementRequester interface {
+	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
+}
+
+// StopMatchmakingRequester provides the interface for the StopMatchmakingRequest API operation.
+type StopMatchmakingRequester interface {
+	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) gamelift.StopMatchmakingRequest
+}
+
+// UpdateAliasRequester provides the interface for the UpdateAliasRequest API operation.
+type UpdateAliasRequester interface {
+	UpdateAliasRequest(*gamelift.UpdateAliasInput) gamelift.UpdateAliasRequest
+}
+
+// UpdateBuildRequester provides the interface for the UpdateBuildRequest API operation.
+type UpdateBuildRequester interface {
+	UpdateBuildRequest(*gamelift.UpdateBuildInput) gamelift.UpdateBuildRequest
+}
+
+// UpdateFleetAttributesRequester provides the interface for the UpdateFleetAttributesRequest API operation.
+type UpdateFleetAttributesRequester interface {
+	UpdateFleetAttributesRequest(*gamelift.UpdateFleetAttributesInput) gamelift.UpdateFleetAttributesRequest
+}
+
+// UpdateFleetCapacityRequester provides the interface for the UpdateFleetCapacityRequest API operation.
+type UpdateFleetCapacityRequester interface {
+	UpdateFleetCapacityRequest(*gamelift.UpdateFleetCapacityInput) gamelift.UpdateFleetCapacityRequest
+}
+
+// UpdateFleetPortSettingsRequester provides the interface for the UpdateFleetPortSettingsRequest API operation.
+type UpdateFleetPortSettingsRequester interface {
+	UpdateFleetPortSettingsRequest(*gamelift.UpdateFleetPortSettingsInput) gamelift.UpdateFleetPortSettingsRequest
+}
+
+// UpdateGameSessionRequester provides the interface for the UpdateGameSessionRequest API operation.
+type UpdateGameSessionRequester interface {
+	UpdateGameSessionRequest(*gamelift.UpdateGameSessionInput) gamelift.UpdateGameSessionRequest
+}
+
+// UpdateGameSessionQueueRequester provides the interface for the UpdateGameSessionQueueRequest API operation.
+type UpdateGameSessionQueueRequester interface {
+	UpdateGameSessionQueueRequest(*gamelift.UpdateGameSessionQueueInput) gamelift.UpdateGameSessionQueueRequest
+}
+
+// UpdateMatchmakingConfigurationRequester provides the interface for the UpdateMatchmakingConfigurationRequest API operation.
+type UpdateMatchmakingConfigurationRequester interface {
+	UpdateMatchmakingConfigurationRequest(*gamelift.UpdateMatchmakingConfigurationInput) gamelift.UpdateMatchmakingConfigurationRequest
+}
+
+// UpdateRuntimeConfigurationRequester provides the interface for the UpdateRuntimeConfigurationRequest API operation.
+type UpdateRuntimeConfigurationRequester interface {
+	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
+}
+
+// ValidateMatchmakingRuleSetRequester provides the interface for the ValidateMatchmakingRuleSetRequest API operation.
+type ValidateMatchmakingRuleSetRequester interface {
+	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
+}
