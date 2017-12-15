@@ -136,25 +136,6 @@ func TestResolveEndpointCredentials_ValidateEndpoint(t *testing.T) {
 	}
 }
 
-func TestValidateLocalEndpointURL(t *testing.T) {
-	cases := []struct {
-		URL   string
-		IsErr bool
-	}{
-		{"http://127.0.0.1", false},
-		{"http://localhost", false},
-		{"http://invalid.tld", true},
-		{"http://164.254.170.1", true},
-	}
-
-	for i, c := range cases {
-		err := validateLocalEndpointURL(c.URL)
-		if e, a := c.IsErr, err != nil; e != a {
-			t.Errorf("%d, expect %t err, got %t", i, e, a)
-		}
-	}
-}
-
 func TestResolveContainerEndpointPathCredentials(t *testing.T) {
 	const u = "/some/path"
 
